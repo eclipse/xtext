@@ -8,8 +8,7 @@
 package org.eclipse.xtext.xtext.generator.ui.projectWizard;
 
 import com.google.common.collect.Iterables;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
+import com.google.common.io.ByteStreams;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.BinaryFileAccess;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
-import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -50,6 +48,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * </pre>
  * 
  * @author Arne Deutsch - Initial contribution and API
+ * @since 2.14
  */
 @SuppressWarnings("all")
 public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
@@ -132,15 +131,12 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
       _builder.append("class=\"");
       TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
       _builder.append(_eclipsePluginExecutableExtensionFactory, "\t\t");
-      _builder.append(":");
-      String _projectWizardClassName = this.getProjectWizardClassName();
-      _builder.append(_projectWizardClassName, "\t\t");
-      _builder.append("\"");
+      _builder.append(":org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("id=\"");
-      String _projectWizardClassName_1 = this.getProjectWizardClassName();
-      _builder.append(_projectWizardClassName_1, "\t\t");
+      String _projectWizardClassName = this.getProjectWizardClassName();
+      _builder.append(_projectWizardClassName, "\t\t");
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -190,84 +186,8 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
       _builder.newLine();
       _entries.add(_builder.toString());
     }
-    this.generateProjectInfo();
-    this.generateWizardNewProjectCreationPage();
     this.generateProjectTemplateProvider();
-    this.generateNewProjectWizard();
     this.generateDefaultIcons();
-  }
-  
-  public void generateProjectInfo() {
-    final TypeReference projectInfoClass = TypeReference.typeRef(this.getProjectInfoClassName());
-    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(projectInfoClass);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("public class ");
-        String _simpleName = projectInfoClass.getSimpleName();
-        _builder.append(_simpleName);
-        _builder.append(" extends ");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.wizard.template.TemplateProjectInfo");
-        _builder.append(_typeRef);
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("public ");
-        String _simpleName_1 = projectInfoClass.getSimpleName();
-        _builder.append(_simpleName_1, "\t");
-        _builder.append("(AbstractProjectTemplate projectTemplate) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("super(projectTemplate);");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    file.setContent(_client);
-    file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
-  }
-  
-  public void generateWizardNewProjectCreationPage() {
-    final TypeReference mainPageClass = TypeReference.typeRef(this.getProjectWizardCreationPageClassName());
-    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(mainPageClass);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("public class ");
-        String _simpleName = mainPageClass.getSimpleName();
-        _builder.append(_simpleName);
-        _builder.append(" extends ");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.dialogs.WizardNewProjectCreationPage");
-        _builder.append(_typeRef);
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ");
-        String _simpleName_1 = mainPageClass.getSimpleName();
-        _builder.append(_simpleName_1, "\t");
-        _builder.append("(String pageName) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("super(pageName);");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    file.setContent(_client);
-    file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
   public void generateProjectTemplateProvider() {
@@ -279,12 +199,6 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        {
-          if (TemplateProjectWizardFragment.this.pluginProject) {
-            _builder.append("import java.util.Arrays");
-            _builder.newLine();
-          }
-        }
         _builder.append("import org.eclipse.core.runtime.Status");
         _builder.newLine();
         {
@@ -313,6 +227,20 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.newLine();
         _builder.append("import static org.eclipse.core.runtime.IStatus.*");
         _builder.newLine();
+        _builder.newLine();
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Create a list with all project templates to be shown in the template new project wizard.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* ");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Each template is able to generate one or more projects. Each project can be configured such that any number of files are included.");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("*/");
         _builder.newLine();
         _builder.append("class ");
         String _simpleName = initialContentsClass.getSimpleName();
@@ -343,17 +271,17 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.append("final class HelloWorldProject {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("var advanced = check(\"Advanced\", false, \"Check to enabled advanced configuration\")");
+        _builder.append("val advanced = check(\"Advanced\", false)");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("var name = combo(\"Name\", #[\"Xtext\", \"World\", \"Foo\", \"Bar\"], \"The name to say \'Hello\' to\")");
+        _builder.append("val advancedGroup = group(\"Properties\")");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("var path = text(\"Package\", \"");
-        String _get = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
-        _builder.append(_get, "\t");
-        _builder.append("\", \"The package path to place the files in\")");
-        _builder.newLineIfNotEmpty();
+        _builder.append("val name = combo(\"Name\", #[\"Xtext\", \"World\", \"Foo\", \"Bar\"], \"The name to say \'Hello\' to\", advancedGroup)");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("val path = text(\"Package\", \"mydsl\", \"The package path to place the files in\", advancedGroup)");
+        _builder.newLine();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("override protected updateVariables() {");
@@ -372,8 +300,8 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("path.value = \"");
-        String _get_1 = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
-        _builder.append(_get_1, "\t\t\t");
+        String _get = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
+        _builder.append(_get, "\t\t\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
@@ -409,60 +337,72 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("generator.generate(");
+            _builder.append("generator.generate(new PluginProjectFactory => [");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
-            _builder.append("new PluginProjectFactory().setProjectName(getProjectInfo().getProjectName()).setLocation(");
+            _builder.append("projectName = projectInfo.projectName");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append("getProjectInfo().getLocationPath()).addProjectNatures(JavaCore.NATURE_ID,");
+            _builder.append("\t\t");
+            _builder.append("location = projectInfo.locationPath");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append("\"org.eclipse.pde.PluginNature\", XtextProjectHelper.NATURE_ID).addBuilderIds(JavaCore.BUILDER_ID).");
+            _builder.append("\t\t");
+            _builder.append("projectNatures += #[JavaCore.NATURE_ID, \"org.eclipse.pde.PluginNature\", XtextProjectHelper.NATURE_ID]");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append("addFolders(Arrays.asList(\"src\")).addFile(");
-            _builder.append(quotes, "\t\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("builderIds += JavaCore.BUILDER_ID");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("folders += \"src\"");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("addFile(");
+            _builder.append(quotes, "\t\t\t");
             _builder.append("src/");
-            _builder.append(openVar, "\t\t\t\t");
+            _builder.append(openVar, "\t\t\t");
             _builder.append("path");
-            _builder.append(closeVar, "\t\t\t\t");
+            _builder.append(closeVar, "\t\t\t");
             _builder.append("/Model.");
-            String _get_2 = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
-            _builder.append(_get_2, "\t\t\t\t");
-            _builder.append(quotes, "\t\t\t\t");
+            String _get_1 = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
+            _builder.append(_get_1, "\t\t\t");
+            _builder.append(quotes, "\t\t\t");
             _builder.append(", ");
-            _builder.append(quotes, "\t\t\t\t");
+            _builder.append(quotes, "\t\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("\t\t\t\t");
+            _builder.append("\t\t\t");
             _builder.append("/*");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t ");
+            _builder.append("\t\t\t ");
             _builder.append("* This is an example model");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t ");
+            _builder.append("\t\t\t ");
             _builder.append("*/");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t");
+            _builder.append("\t\t\t");
             _builder.append("Hello ");
-            _builder.append(openVar, "\t\t\t\t\t");
+            _builder.append(openVar, "\t\t\t\t");
             _builder.append("name");
-            _builder.append(closeVar, "\t\t\t\t\t");
+            _builder.append(closeVar, "\t\t\t\t");
             _builder.append("!");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append(quotes, "\t\t\t\t");
-            _builder.append("))");
+            _builder.append("\t\t");
+            _builder.append(quotes, "\t\t\t");
+            _builder.append(")");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("])");
+            _builder.newLine();
             _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
@@ -472,98 +412,69 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("generator.generate(");
+            _builder.append("generator.generate(new ProjectFactory => [");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
-            _builder.append("new ProjectFactory().setProjectName(getProjectInfo().getProjectName()).setLocation(");
+            _builder.append("projectName = projectInfo.projectName");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append("getProjectInfo().getLocationPath()).addProjectNatures(XtextProjectHelper.NATURE_ID).");
+            _builder.append("\t\t");
+            _builder.append("location = projectInfo.locationPath");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("projectNatures += XtextProjectHelper.NATURE_ID");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
             _builder.append("addFile(");
-            _builder.append(quotes, "\t\t\t\t");
+            _builder.append(quotes, "\t\t\t");
             _builder.append("src/");
-            _builder.append(openVar, "\t\t\t\t");
+            _builder.append(openVar, "\t\t\t");
             _builder.append("path");
-            _builder.append(closeVar, "\t\t\t\t");
+            _builder.append(closeVar, "\t\t\t");
             _builder.append("/Model.");
-            String _get_3 = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
-            _builder.append(_get_3, "\t\t\t\t");
-            _builder.append(quotes, "\t\t\t\t");
+            String _get_2 = TemplateProjectWizardFragment.this.getLanguage().getFileExtensions().get(0);
+            _builder.append(_get_2, "\t\t\t");
+            _builder.append(quotes, "\t\t\t");
             _builder.append(", ");
-            _builder.append(quotes, "\t\t\t\t");
+            _builder.append(quotes, "\t\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("\t\t\t\t");
+            _builder.append("\t\t\t");
             _builder.append("/*");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t ");
+            _builder.append("\t\t\t ");
             _builder.append("* This is an example model");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t ");
+            _builder.append("\t\t\t ");
             _builder.append("*/");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("\t\t\t\t");
+            _builder.append("\t\t\t");
             _builder.append("Hello ");
-            _builder.append(openVar, "\t\t\t\t\t");
+            _builder.append(openVar, "\t\t\t\t");
             _builder.append("name");
-            _builder.append(closeVar, "\t\t\t\t\t");
+            _builder.append(closeVar, "\t\t\t\t");
             _builder.append("!");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("\t\t\t");
-            _builder.append(quotes, "\t\t\t\t");
-            _builder.append("))");
+            _builder.append("\t\t");
+            _builder.append(quotes, "\t\t\t");
+            _builder.append(")");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("])");
+            _builder.newLine();
             _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
           }
         }
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    file.setContent(_client);
-    file.writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
-  }
-  
-  public void generateNewProjectWizard() {
-    final TypeReference genClass = TypeReference.typeRef(this.getProjectWizardClassName());
-    final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("public class ");
-        String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName);
-        _builder.append(" extends ");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard");
-        _builder.append(_typeRef);
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected String getGrammarName() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("return \"");
-        String _name = TemplateProjectWizardFragment.this.getGrammar().getName();
-        _builder.append(_name, "\t\t");
-        _builder.append("\";");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
         _builder.append("}");
         _builder.newLine();
       }
@@ -586,17 +497,12 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
   
   private byte[] readBinaryFileFromPackage(final String fileName) {
     try {
-      InputStream _resourceAsStream = TemplateProjectWizardFragment.class.getResourceAsStream(fileName);
-      final BufferedInputStream bis = new BufferedInputStream(_resourceAsStream);
-      final ByteArrayOutputStream buf = new ByteArrayOutputStream();
-      int next = bis.read();
-      while ((next != (-1))) {
-        {
-          buf.write(((byte) next));
-          next = bis.read();
-        }
+      final InputStream stream = TemplateProjectWizardFragment.class.getResourceAsStream(fileName);
+      try {
+        return ByteStreams.toByteArray(stream);
+      } finally {
+        stream.close();
       }
-      return buf.toByteArray();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -609,44 +515,11 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     return (_plus + "ProjectTemplateProvider");
   }
   
-  protected String getProjectWizardInitialContentsClassName() {
-    String _projectWizardClassName = this.getProjectWizardClassName();
-    return (_projectWizardClassName + "InitialContents");
-  }
-  
   protected String getProjectWizardClassName() {
     String _projectWizardPackage = this.getProjectWizardPackage();
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "NewProjectWizard");
-  }
-  
-  protected String getProjectWizardCreationPageClassName() {
-    String _projectWizardPackage = this.getProjectWizardPackage();
-    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
-    String _plus = (_projectWizardPackage + _simpleName);
-    return (_plus + "WizardNewProjectCreationPage");
-  }
-  
-  protected String projectWizardTemplateSelectionPageClassName() {
-    String _projectWizardPackage = this.getProjectWizardPackage();
-    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
-    String _plus = (_projectWizardPackage + _simpleName);
-    return (_plus + "WizardNewProjectWizardTemplateSelectionPage");
-  }
-  
-  protected String getProjectCreatorClassName() {
-    String _projectWizardPackage = this.getProjectWizardPackage();
-    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
-    String _plus = (_projectWizardPackage + _simpleName);
-    return (_plus + "ProjectCreator");
-  }
-  
-  protected String getProjectInfoClassName() {
-    String _projectWizardPackage = this.getProjectWizardPackage();
-    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
-    String _plus = (_projectWizardPackage + _simpleName);
-    return (_plus + "ProjectInfo");
   }
   
   protected String getProjectWizardPackage() {

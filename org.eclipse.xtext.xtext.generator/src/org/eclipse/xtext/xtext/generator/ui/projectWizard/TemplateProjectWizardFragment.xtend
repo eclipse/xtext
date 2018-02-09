@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.ui.projectWizard
 
-import java.io.BufferedInputStream
-import java.io.ByteArrayOutputStream
+import com.google.common.io.ByteStreams
 import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
@@ -35,6 +34,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * </pre>
  * 
  * @author Arne Deutsch - Initial contribution and API
+ * @since 2.14
  */
 class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 
@@ -85,7 +85,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 					</category>
 					<wizard
 						category="«grammar.eclipsePluginBasePackage».category"
-						class="«grammar.eclipsePluginExecutableExtensionFactory»:«projectWizardClassName»"
+						class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
 						id="«projectWizardClassName»"
 						name="«grammar.simpleName» Project"
 						icon="icons/new_«grammar.simpleName»_proj.gif"
@@ -102,44 +102,8 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			'''
 		}
 
-		generateProjectInfo
-		generateWizardNewProjectCreationPage
 		generateProjectTemplateProvider
-		generateNewProjectWizard
 		generateDefaultIcons
-	}
-
-	def generateProjectInfo() {
-		val projectInfoClass = projectInfoClassName.typeRef
-
-		val file = fileAccessFactory.createGeneratedJavaFile(projectInfoClass)
-		file.content = '''
-			import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
-			
-			public class «projectInfoClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.template.TemplateProjectInfo".typeRef» {
-				public «projectInfoClass.simpleName»(AbstractProjectTemplate projectTemplate) {
-					super(projectTemplate);
-				}
-			}
-		'''
-		file.writeTo(projectConfig.eclipsePlugin.src)
-	}
-
-	def generateWizardNewProjectCreationPage() {
-		val mainPageClass = projectWizardCreationPageClassName.typeRef
-
-		val file = fileAccessFactory.createGeneratedJavaFile(mainPageClass)
-
-		file.content = '''
-			public class «mainPageClass.simpleName» extends «"org.eclipse.ui.dialogs.WizardNewProjectCreationPage".typeRef» {
-			
-				public «mainPageClass.simpleName»(String pageName) {
-					super(pageName);
-				}
-			
-			}
-		'''
-		file.writeTo(projectConfig.eclipsePlugin.src)
 	}
 
 	def generateProjectTemplateProvider() {
@@ -151,9 +115,6 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 		val file = fileAccessFactory.createXtendFile(initialContentsClass)
 
 		file.content = '''
-			«IF pluginProject»
-				import java.util.Arrays
-			«ENDIF»
 			import org.eclipse.core.runtime.Status
 			«IF pluginProject»
 				import org.eclipse.jdt.core.JavaCore
@@ -170,6 +131,11 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			
 			import static org.eclipse.core.runtime.IStatus.*
 			
+			/**
+			 * Create a list with all project templates to be shown in the template new project wizard.
+			 * 
+			 * Each template is able to generate one or more projects. Each project can be configured such that any number of files are included.
+			 */
 			class «initialContentsClass.simpleName» implements IProjectTemplateProvider {
 				override getProjectTemplates() {
 					#[new HelloWorldProject]
@@ -180,9 +146,10 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			<p>This is a parameterized hello world for «grammar.name». You can set a parameter to modify the content in the generated file
 			and a parameter to set the package the file is created in.</p>")
 			final class HelloWorldProject {
-				var advanced = check("Advanced", false, "Check to enabled advanced configuration")
-				var name = combo("Name", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to")
-				var path = text("Package", "«language.fileExtensions.get(0)»", "The package path to place the files in")
+				val advanced = check("Advanced", false)
+				val advancedGroup = group("Properties")
+				val name = combo("Name", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to", advancedGroup)
+				val path = text("Package", "mydsl", "The package path to place the files in", advancedGroup)
 			
 				override protected updateVariables() {
 					name.enabled = advanced.value
@@ -202,45 +169,35 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			
 				«IF pluginProject»
 					override generateProjects(IProjectGenerator generator) {
-						generator.generate(
-							new PluginProjectFactory().setProjectName(getProjectInfo().getProjectName()).setLocation(
-								getProjectInfo().getLocationPath()).addProjectNatures(JavaCore.NATURE_ID,
-								"org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID).addBuilderIds(JavaCore.BUILDER_ID).
-								addFolders(Arrays.asList("src")).addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
-									/*
-									 * This is an example model
-									 */
-									Hello «openVar»name«closeVar»!
-								«quotes»))
+						generator.generate(new PluginProjectFactory => [
+							projectName = projectInfo.projectName
+							location = projectInfo.locationPath
+							projectNatures += #[JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID]
+							builderIds += JavaCore.BUILDER_ID
+							folders += "src"
+							addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
+								/*
+								 * This is an example model
+								 */
+								Hello «openVar»name«closeVar»!
+							«quotes»)
+						])
 					}
 				«ELSE»
 					override generateProjects(IProjectGenerator generator) {
-						generator.generate(
-							new ProjectFactory().setProjectName(getProjectInfo().getProjectName()).setLocation(
-								getProjectInfo().getLocationPath()).addProjectNatures(XtextProjectHelper.NATURE_ID).
-								addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
-									/*
-									 * This is an example model
-									 */
-									Hello «openVar»name«closeVar»!
-								«quotes»))
+						generator.generate(new ProjectFactory => [
+							projectName = projectInfo.projectName
+							location = projectInfo.locationPath
+							projectNatures += XtextProjectHelper.NATURE_ID
+							addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
+								/*
+								 * This is an example model
+								 */
+								Hello «openVar»name«closeVar»!
+							«quotes»)
+						])
 					}
 				«ENDIF»
-			}
-		'''
-		file.writeTo(projectConfig.eclipsePlugin.src)
-	}
-
-	def generateNewProjectWizard() {
-		val genClass = getProjectWizardClassName.typeRef
-
-		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
-		file.content = '''
-			public class «genClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard".typeRef» {
-				@Override
-				protected String getGrammarName() {
-					return "«grammar.name»";
-				}
 			}
 		'''
 		file.writeTo(projectConfig.eclipsePlugin.src)
@@ -257,44 +214,20 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 	}
 
 	private def byte[] readBinaryFileFromPackage(String fileName) {
-		// TODO use "readAllBytes" as soon as we switch to Java 9
-		// return TemplateProjectWizardFragment.getResourceAsStream(fileName).readAllBytes();
-		val bis = new BufferedInputStream(TemplateProjectWizardFragment.getResourceAsStream(fileName));
-		val buf = new ByteArrayOutputStream();
-		var next = bis.read();
-		while (next != -1) {
-			buf.write(next as byte);
-			next = bis.read();
+		val stream = TemplateProjectWizardFragment.getResourceAsStream(fileName)
+		try {
+			return ByteStreams.toByteArray(stream);
+		} finally {
+			stream.close
 		}
-		return buf.toByteArray
 	}
 
 	protected def String getProjectTemplateProviderClassName() {
 		getProjectWizardPackage() + grammar.simpleName + "ProjectTemplateProvider"
 	}
 
-	protected def String getProjectWizardInitialContentsClassName() {
-		getProjectWizardClassName + "InitialContents"
-	}
-
 	protected def String getProjectWizardClassName() {
 		getProjectWizardPackage() + grammar.simpleName + "NewProjectWizard"
-	}
-
-	protected def String getProjectWizardCreationPageClassName() {
-		getProjectWizardPackage() + grammar.simpleName + "WizardNewProjectCreationPage"
-	}
-
-	protected def String projectWizardTemplateSelectionPageClassName() {
-		getProjectWizardPackage() + grammar.simpleName + "WizardNewProjectWizardTemplateSelectionPage"
-	}
-
-	protected def String getProjectCreatorClassName() {
-		getProjectWizardPackage() + grammar.simpleName + "ProjectCreator"
-	}
-
-	protected def String getProjectInfoClassName() {
-		getProjectWizardPackage() + grammar.simpleName + "ProjectInfo"
 	}
 
 	protected def String getProjectWizardPackage() {
