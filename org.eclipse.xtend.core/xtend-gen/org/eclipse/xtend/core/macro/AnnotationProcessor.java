@@ -52,7 +52,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class AnnotationProcessor {
   @Singleton
-  protected static class CancellationObserver {
+  public static class CancellationObserver {
     private final static Logger log = Logger.getLogger(AnnotationProcessor.CancellationObserver.class);
     
     @Accessors(AccessorType.PROTECTED_GETTER)
@@ -60,6 +60,10 @@ public class AnnotationProcessor {
     
     protected ExecutorService initPool() {
       return Executors.newCachedThreadPool();
+    }
+    
+    public void stop() {
+      this.pool.shutdown();
     }
     
     public Future<?> monitorUntil(final ActiveAnnotationContext ctx, final CancelIndicator cancelIndicator, final Function0<? extends Boolean> isFinished) {
