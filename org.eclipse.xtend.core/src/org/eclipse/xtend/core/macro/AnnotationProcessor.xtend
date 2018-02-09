@@ -138,7 +138,7 @@ class AnnotationProcessor {
 	}
 	
 	@Singleton
-	protected static class CancellationObserver {
+	public static class CancellationObserver {
 		private static final Logger log = Logger.getLogger(CancellationObserver)
 		
 		@Accessors(PROTECTED_GETTER)
@@ -146,6 +146,10 @@ class AnnotationProcessor {
 		
 		protected def ExecutorService initPool() {
 			return Executors.newCachedThreadPool();
+		}
+		
+		def stop() {
+			pool.shutdownNow()
 		}
 	
 		def monitorUntil(ActiveAnnotationContext ctx, CancelIndicator cancelIndicator, ()=>boolean isFinished) {

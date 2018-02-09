@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.xtend.core.XtendInjectorSingleton;
+import org.eclipse.xtend.core.macro.AnnotationProcessor.CancellationObserver;
 
 import com.google.common.base.Joiner;
 import com.google.inject.Injector;
@@ -68,6 +69,7 @@ public class Main {
 		if (!compiler.compile()) {
 			System.exit(1);
 		}
+		injector.getInstance(CancellationObserver.class).stop();
 	}
 
 	private static void printUsage() {
