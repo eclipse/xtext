@@ -236,7 +236,8 @@ public class UriExtensionsTest {
   
   @Test
   public void testFolderIsPrefix() {
-    File directory = new File("./test-data/test-project");
+    File directory = new File("./test-data2/test-project");
+    directory.mkdirs();
     Assert.assertTrue(directory.exists());
     Assert.assertTrue(directory.isDirectory());
     String _absolutePath = directory.getAbsolutePath();
