@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.uriHell.URIHandlerTestInjectorProvider;
@@ -67,20 +68,21 @@ public abstract class AbstractURIHandlerTest extends Assert {
   
   protected Resource referencedResource;
   
-  @After
-  public void tearDown() {
-    this.globalState.restoreGlobalState();
-  }
-  
   private GlobalRegistries.GlobalStateMemento globalState;
   
   @Before
   public void setUp() {
     this.globalState = GlobalRegistries.makeCopyOfGlobalState();
     EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
+    EPackage.Registry.INSTANCE.put(XMLNamespacePackage.eNS_URI, XMLNamespacePackage.eINSTANCE);
     this.resourceSet = this.getNewResourceSet();
     this.primaryResource = this.resourceSet.createResource(this.getResourceURI());
     this.referencedResource = this.resourceSet.createResource(this.getReferencedURI());
+  }
+  
+  @After
+  public void tearDown() {
+    this.globalState.restoreGlobalState();
   }
   
   public XtextResourceSet getNewResourceSet() {

@@ -33,6 +33,7 @@ import org.eclipse.xtext.testing.GlobalRegistries
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
 
 /**
  * Base test case for different places in the workspace where
@@ -62,22 +63,24 @@ abstract class AbstractURIHandlerTest extends Assert {
 	protected Resource primaryResource
 	protected Resource referencedResource
 	
-	@After
-	def void tearDown() {
-		globalState.restoreGlobalState
-	}
-	
 	private GlobalStateMemento globalState;
 
 	@Before
 	def void setUp() {
 		globalState = GlobalRegistries.makeCopyOfGlobalState
 		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE)
+		EPackage.Registry.INSTANCE.put(XMLNamespacePackage.eNS_URI, XMLNamespacePackage.eINSTANCE)
 		resourceSet = getNewResourceSet
 		primaryResource = resourceSet.createResource(getResourceURI)
 		referencedResource = resourceSet.createResource(getReferencedURI)
 	}
 	
+	
+	@After
+	def void tearDown() {
+		globalState.restoreGlobalState
+	}
+
 	def getNewResourceSet() {
 		val result = resourceSetProvider.get
 		result.setClasspathURIContext(classLoader)
