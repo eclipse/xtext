@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -72,6 +73,13 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 			if (receiverType != null) {
 				if (receiverType.isSubtypeOf(contextType)) {
 					return true;
+				}
+				EObject container = contextType.eContainer();
+				while (container instanceof JvmType) {
+					if (receiverType.isSubtypeOf((JvmType)container)) {
+						return true;
+					}
+					container = container.eContainer();
 				}
 			}
 			return false;
