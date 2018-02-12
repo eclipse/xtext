@@ -257,7 +257,8 @@ class UriExtensionsTest {
 
 	@Test
 	def void testFolderIsPrefix() {
-		var directory = new File("./test-data/test-project")
+		var directory = new File("./test-data2/test-project")
+		directory.mkdirs
 		assertTrue(directory.exists)
 		assertTrue(directory.directory)
 		var uri = createFileURI(directory.absolutePath + "/").toUriString.toUri
