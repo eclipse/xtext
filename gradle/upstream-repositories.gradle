@@ -26,7 +26,7 @@ repositories {
 		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
 		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url jenkinsPipelineRepo('xtext-core') }
-		maven { url jenkinsPipelineRepo('xtext-extras') }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_extras_issue229/lastSuccessfulBuild/artifact/build/maven-repository/' }
 		maven { url jenkinsPipelineRepo('xtext-eclipse') }
 	} else {
 		mavenLocal()
