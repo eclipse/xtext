@@ -15,7 +15,7 @@ def qualifiedVersion = baseVersion + '.v' + buildTime
 jar.manifest {
 	version qualifiedVersion
 	instruction 'Import-Package', 'org.apache.log4j.*;version="1.2.15"'
-	instruction 'Import-Package', 'com.google.common.*;version="[14.0,19)"'
+	instruction 'Import-Package', 'com.google.common.*;version="[14.0,22.0)"'
 	instruction 'Import-Package', 'org.eclipse.core.runtime.*;version=!;common=!'
 	instruction 'Import-Package', "org.eclipse.xtext.xbase.lib.*;version=\"${version}\""
 	instruction 'Import-Package', '!org.eclipse.xtext.web.example.*'
