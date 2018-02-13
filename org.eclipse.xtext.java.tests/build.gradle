@@ -3,6 +3,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase.testdata')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "junit:junit:$versions.junit"
+	compile "com.google.errorprone:error_prone_annotations:2.0.15"
 }
 
 configurations {
