@@ -40,6 +40,8 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest {
 	
+	private IXtextBuilderParticipant oldDelegate;
+
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -48,6 +50,7 @@ public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest
 		participant = injector.getInstance(BuilderParticipant.class);
 		preferenceStoreAccess = injector.getInstance(IPreferenceStoreAccess.class);
 		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
+		oldDelegate = delegatingParticipant.getDelegate();
 		delegatingParticipant.setDelegate(participant);
 	}
 
@@ -62,6 +65,9 @@ public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest
 
 	@Override
 	public void tearDown() throws Exception {
+		IXtextBuilderParticipant instance = getInjector().getInstance(IXtextBuilderParticipant.class);
+		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
+		delegatingParticipant.setDelegate(oldDelegate);
 		super.tearDown();
 		participant = null;
 	}
