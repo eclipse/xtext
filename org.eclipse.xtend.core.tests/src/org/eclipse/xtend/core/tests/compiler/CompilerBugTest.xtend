@@ -2311,7 +2311,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				val () => O operation = null
 			
 				def ListenableFuture<O> run() {
-					val result = MoreExecutors::sameThreadExecutor.submit(operation)
+					val result = MoreExecutors::newDirectExecutorService.submit(operation)
 					operation.apply
 					return result
 				}
@@ -2327,7 +2327,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private final Function0<? extends O> operation = null;
 			  
 			  public ListenableFuture<O> run() {
-			    final ListenableFuture<O> result = MoreExecutors.sameThreadExecutor().<O>submit(new Callable<O>() {
+			    final ListenableFuture<O> result = MoreExecutors.newDirectExecutorService().<O>submit(new Callable<O>() {
 			        public O call() {
 			          return Foo.this.operation.apply();
 			        }

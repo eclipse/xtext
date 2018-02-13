@@ -5233,7 +5233,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("def ListenableFuture<O> run() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("val result = MoreExecutors::sameThreadExecutor.submit(operation)");
+    _builder.append("val result = MoreExecutors::newDirectExecutorService.submit(operation)");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("operation.apply");
@@ -5269,7 +5269,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public ListenableFuture<O> run() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final ListenableFuture<O> result = MoreExecutors.sameThreadExecutor().<O>submit(new Callable<O>() {");
+    _builder_1.append("final ListenableFuture<O> result = MoreExecutors.newDirectExecutorService().<O>submit(new Callable<O>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public O call() {");
