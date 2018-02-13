@@ -38,12 +38,12 @@ public interface Import extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Module</em>' reference.
-   * @see #setModule(Module)
+   * @see #setModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module)
    * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getImport_Module()
    * @model
    * @generated
    */
-  Module getModule();
+  org.eclipse.xtext.example.arithmetics.arithmetics.Module getModule();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Import#getModule <em>Module</em>}' reference.
@@ -53,6 +53,6 @@ public interface Import extends EObject
    * @see #getModule()
    * @generated
    */
-  void setModule(Module value);
+  void setModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module value);
 
 } // Import
