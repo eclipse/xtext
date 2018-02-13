@@ -173,7 +173,7 @@
       id="jenkins.url"
       type="URI"
       name="jenkins.url"
-      value="http://services.typefox.io/open-source/jenkins">
+      value="https://ci.eclipse.org/xtext">
     <description>Base URL of Jenkins build server</description>
   </setupTask>
   <setupTask
