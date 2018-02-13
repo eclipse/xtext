@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.eclipse.xtext.xbase.ui.testing.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
@@ -45,6 +46,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 	
 	@BeforeClass
 	public static void createTestProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform(ContentAssistInBlockTest.class);
 		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
 		doInitFeatures(JavaCore.create(staticProject));
 	}
