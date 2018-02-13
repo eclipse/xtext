@@ -2,7 +2,7 @@
  * Configuration of Java compiler, Javadoc, additional archives, and additional dependency configurations.
  */
 
-sourceCompatibility = '1.6'
+sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'

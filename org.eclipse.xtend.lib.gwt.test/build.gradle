@@ -17,11 +17,13 @@ dependencies {
 }
 
 gwt {
+	minHeapSize = "512M";
+	maxHeapSize = "1024M";
 	gwtVersion = versions.gwt
 	modules 'org.eclipse.xtend.lib.test.Test'
 	compiler {
 		strict = true
-		enableClosureCompiler = true
+		// enableClosureCompiler = true
 		disableClassMetadata = true
 		disableCastChecking = true
 	}
