@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 
 /**
@@ -45,7 +44,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
  *
  * @generated
  */
-public class ModuleImpl extends MinimalEObjectImpl.Container implements Module
+public class ModuleImpl extends MinimalEObjectImpl.Container implements org.eclipse.xtext.example.arithmetics.arithmetics.Module
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -276,7 +275,7 @@ public class ModuleImpl extends MinimalEObjectImpl.Container implements Module
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');
