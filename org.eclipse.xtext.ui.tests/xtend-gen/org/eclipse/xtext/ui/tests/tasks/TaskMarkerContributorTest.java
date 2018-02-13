@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
@@ -65,20 +66,27 @@ public class TaskMarkerContributorTest extends AbstractXtextTests {
       final XtextResource resource = this.getResource(file);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this.markerContributor.updateMarkers(file, resource, _nullProgressMonitor);
-      final IMarker[] markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO);
-      Assert.assertEquals(2, ((List<IMarker>)Conversions.doWrapArray(markers)).size());
-      Assert.assertEquals("TODO foo", IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.MESSAGE));
-      Assert.assertEquals(Integer.valueOf(2), IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.LINE_NUMBER));
-      Assert.assertEquals(Integer.valueOf(6), IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.CHAR_START));
-      Assert.assertEquals(Integer.valueOf(14), IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.CHAR_END));
-      Assert.assertEquals(Integer.valueOf(IMarker.PRIORITY_NORMAL), IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.PRIORITY));
-      Assert.assertEquals("line 2", IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(markers))).getAttribute(IMarker.LOCATION));
-      Assert.assertEquals("FIXME bar", markers[1].getAttribute(IMarker.MESSAGE));
-      Assert.assertEquals(Integer.valueOf(3), markers[1].getAttribute(IMarker.LINE_NUMBER));
-      Assert.assertEquals(Integer.valueOf(18), markers[1].getAttribute(IMarker.CHAR_START));
-      Assert.assertEquals(Integer.valueOf(27), markers[1].getAttribute(IMarker.CHAR_END));
-      Assert.assertEquals(Integer.valueOf(IMarker.PRIORITY_HIGH), markers[1].getAttribute(IMarker.PRIORITY));
-      Assert.assertEquals("line 3", markers[1].getAttribute(IMarker.LOCATION));
+      final Function1<IMarker, String> _function = (IMarker it) -> {
+        try {
+          return it.getType();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      };
+      final List<IMarker> markers = IterableExtensions.<IMarker, String>sortBy(((Iterable<IMarker>)Conversions.doWrapArray(file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO))), _function);
+      Assert.assertEquals(2, markers.size());
+      Assert.assertEquals("TODO foo", IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.MESSAGE));
+      Assert.assertEquals(Integer.valueOf(2), IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.LINE_NUMBER));
+      Assert.assertEquals(Integer.valueOf(6), IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.CHAR_START));
+      Assert.assertEquals(Integer.valueOf(14), IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.CHAR_END));
+      Assert.assertEquals(Integer.valueOf(IMarker.PRIORITY_NORMAL), IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.PRIORITY));
+      Assert.assertEquals("line 2", IterableExtensions.<IMarker>head(markers).getAttribute(IMarker.LOCATION));
+      Assert.assertEquals("FIXME bar", markers.get(1).getAttribute(IMarker.MESSAGE));
+      Assert.assertEquals(Integer.valueOf(3), markers.get(1).getAttribute(IMarker.LINE_NUMBER));
+      Assert.assertEquals(Integer.valueOf(18), markers.get(1).getAttribute(IMarker.CHAR_START));
+      Assert.assertEquals(Integer.valueOf(27), markers.get(1).getAttribute(IMarker.CHAR_END));
+      Assert.assertEquals(Integer.valueOf(IMarker.PRIORITY_HIGH), markers.get(1).getAttribute(IMarker.PRIORITY));
+      Assert.assertEquals("line 3", markers.get(1).getAttribute(IMarker.LOCATION));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -23,6 +23,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import java.util.Arrays
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -50,8 +51,7 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 			'''))
 		val resource = file.resource
 		markerContributor.updateMarkers(file, resource, new NullProgressMonitor())
-		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO)
-
+		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO).sortBy[type]
 		assertEquals(2, markers.size)
 		assertEquals("TODO foo", markers.head.getAttribute(IMarker.MESSAGE))
 		assertEquals(2, markers.head.getAttribute(IMarker.LINE_NUMBER))
