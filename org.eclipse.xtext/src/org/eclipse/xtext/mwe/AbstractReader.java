@@ -86,9 +86,9 @@ public abstract class AbstractReader extends AbstractWorkflowComponent2 {
 	protected void checkConfigurationInternal(Issues issues) {
 		super.checkConfigurationInternal(issues);
 		if (injectors.isEmpty())
-			issues.addError(this,"No setup has been registered (example <register class='foo.bar.MyLanguageStandaloneSetup')");
+			issues.addError(this,"No setup has been registered (example: register=foo.bar.MyLanguageStandaloneSetup{})");
 		if (slotEntries.isEmpty()) {
-			issues.addError(this,"No slot entries configured (example <load slot='mySlot' type='Type'/>).");
+			issues.addError(this,"No slot entries configured (example: load={slot='mySlot' type='Type'}).");
 		}
 	}
 
