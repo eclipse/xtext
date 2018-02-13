@@ -273,7 +273,7 @@ class XtendFileGenerator {
 			
 			import java.math.BigDecimal;
 			
-			public class Amount {
+			class Amount {
 				
 				BigDecimal value
 			
@@ -289,19 +289,19 @@ class XtendFileGenerator {
 					return value.setScale(2, BigDecimal::ROUND_HALF_UP).toString();
 				}
 				
-				def public Amount operator_plus(Amount other) {
+				def Amount operator_plus(Amount other) {
 					return new Amount(this.value.add(other.value));
 				}
 				
-				def public Amount operator_minus(Amount other) {
+				def Amount operator_minus(Amount other) {
 					return new Amount(this.value.subtract(other.value));
 				}
 				
-				def public Amount operator_multiply(int factor) {
+				def Amount operator_multiply(int factor) {
 					return new Amount(this.value.multiply(new BigDecimal(factor)));
 				}
 				
-				def public Amount operator_divide(int divisor) {
+				def Amount operator_divide(int divisor) {
 					return new Amount(this.value.divide(new BigDecimal(divisor)));
 				}
 				
@@ -313,7 +313,7 @@ class XtendFileGenerator {
 		"xtend/tutorial/util/Circle.xtend" -> '''
 			package xtend.tutorial.util;
 			
-			public class Circle extends Shape {
+			class Circle extends Shape {
 				public int diameter;
 			
 				new(int diameter) {
@@ -331,23 +331,23 @@ class XtendFileGenerator {
 			
 			import static java.util.Collections.*;
 			
-			public class NetNode {
-				private String name;
-				private Iterable<NetNode> references = emptySet();
+			class NetNode {
+				String name;
+				Iterable<NetNode> references = emptySet();
 				
-				def public String getName() {
+				def String getName() {
 					return name;
 				}
 				
-				def public void setName(String name) {
+				def void setName(String name) {
 					this.name = name;
 				}
 				
-				def public Iterable<NetNode> getReferences() {
+				def Iterable<NetNode> getReferences() {
 					return references;
 				}
 				
-				def public void setReferences(Iterable<NetNode> references) {
+				def void setReferences(Iterable<NetNode> references) {
 					this.references = references;
 				}
 				
@@ -361,11 +361,11 @@ class XtendFileGenerator {
 			
 			import java.util.Set;
 			
-			public class Person {
+			class Person {
 				
-				private String forename;
-				private String name;
-				private Set<Person> friends;
+				String forename;
+				String name;
+				Set<Person> friends;
 				
 				new(String forename, String name) {
 					super();
@@ -376,27 +376,27 @@ class XtendFileGenerator {
 				new() {
 				}
 				
-				def public Set<Person> getFriends() {
+				def Set<Person> getFriends() {
 					return friends;
 				}
 				
-				def public void setFriends(Set<Person> friends) {
+				def void setFriends(Set<Person> friends) {
 					this.friends = friends;
 				}
 			
-				def public String getForename() {
+				def String getForename() {
 					return forename;
 				}
 				
-				def public void setForename(String forename) {
+				def void setForename(String forename) {
 					this.forename = forename;
 				}
 				
-				def public String getName() {
+				def String getName() {
 					return name;
 				}
 				
-				def public void setName(String name) {
+				def void setName(String name) {
 					this.name = name;
 				}
 				
@@ -408,7 +408,7 @@ class XtendFileGenerator {
 		"xtend/tutorial/util/Rectangle.xtend" -> '''
 			package xtend.tutorial.util;
 			
-			public class Rectangle extends Shape {
+			class Rectangle extends Shape {
 				
 				public int height;
 				public int width;
@@ -426,7 +426,7 @@ class XtendFileGenerator {
 		"xtend/tutorial/util/Shape.xtend" -> '''
 			package xtend.tutorial.util;
 			
-			public class Shape {
+			class Shape {
 			}
 		'''
 	}

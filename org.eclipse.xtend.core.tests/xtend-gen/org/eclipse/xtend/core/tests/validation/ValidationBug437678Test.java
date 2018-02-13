@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -453,7 +453,7 @@ public class ValidationBug437678Test extends AbstractXtendTestCase {
       _builder.append("class C {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("private static val privateField = 1");
+      _builder.append("static val privateField = 1");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("private static def privateMethod() { 2 }");

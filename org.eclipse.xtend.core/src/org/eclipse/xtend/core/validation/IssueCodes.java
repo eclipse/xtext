@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -104,5 +104,10 @@ public final class IssueCodes {
 	public static final String API_TYPE_INFERENCE = ISSUE_CODE_PREFIX +  "api_type_inference";
 	
 	public static final String IMPLICIT_RETURN = ISSUE_CODE_PREFIX +  "implicit_return";
+	
+	/**
+	 * @since 2.14
+	 */
+	public static final String REDUNDANT_MODIFIER = ISSUE_CODE_PREFIX +  "redundant_modifier";
 	
 }
