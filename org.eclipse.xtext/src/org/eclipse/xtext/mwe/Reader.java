@@ -49,11 +49,22 @@ import com.google.common.collect.Sets;
  * You might want to populate multiple workflow slots with model elements.
  * </p>
  * <p>
- * Below an example of a usage in the MWE XML syntax:
+ * Below are examples of a usage in the MWE2 DSL and MWE XML syntax:
  * </p>
  * <pre>
+ * component = org.eclipse.xtext.mwe.Reader {
+ *   useJavaClassPath = true
+ *   register = foo.bar.MyLanguageStandaloneSetup {}
+ *   load = {
+ *     slot = "types"
+ *     type = "Type"
+ *   }
+ *   validate = org.eclipse.xtext.mwe.Validator { stopOnError = false }
+ * }
+ * </pre>
+ * <pre>
  * &lt;component class="org.eclipse.xtext.mwe.Reader" useJavaClassPath="true"&gt;
- *   &lt;register class="foo.bar.MyLanguageSetandaloneSetup"/&gt;
+ *   &lt;register class="foo.bar.MyLanguageStandaloneSetup"/&gt;
  *   &lt;load slot="types" type="Type"/&gt;
  *   &lt;validate/&gt; 
  * &lt;/component&gt;
