@@ -461,4 +461,104 @@ public class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTes
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testExtrasIssue229_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Sample {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class ParamClass extends testdata.ClazzWithProtectedMember {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def doSomething(ParamClass c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("c.member = \"Hello\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import testdata.ClazzWithProtectedMember;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Sample {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static class ParamClass extends ClazzWithProtectedMember {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public String doSomething(final Sample.ParamClass c) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return c.member = \"Hello\";");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testExtrasIssue229_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Sample extends testdata.ClazzWithProtectedMember {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class ParamClass {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def doSomething(Sample c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("c.member = \"Hello\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import testdata.ClazzWithProtectedMember;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Sample extends ClazzWithProtectedMember {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static class ParamClass {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public String doSomething(final Sample c) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return c.member = \"Hello\";");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }
