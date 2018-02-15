@@ -32,6 +32,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
@@ -50,7 +51,7 @@ public class ReferenceUpdater implements IReferenceUpdater {
 	@Inject
 	private IQualifiedNameConverter nameConverter;
 
-	@Inject
+	@Inject@SerializerScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject
