@@ -8,6 +8,13 @@ node {
 	
 	stage('Checkout') {
 		checkout scm
+		if ("oxygen" == params.target_platform) {
+			currentBuild.displayName = "#${BUILD_NUMBER}(o)"
+		} else if ("photon" == params.target_platform) {
+			currentBuild.displayName = "#${BUILD_NUMBER}(p)"
+		} else {
+			currentBuild.displayName = "#${BUILD_NUMBER}(l)"
+		}
 	}
 	
 	stage('Gradle Build') {
