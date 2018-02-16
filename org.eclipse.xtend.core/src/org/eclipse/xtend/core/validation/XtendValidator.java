@@ -163,6 +163,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow
  * @author Sven Efftinge
  * @author Holger Schill
+ * @author Stephane Galland
  */
 @ComposedChecks(validators = { AnnotationValidation.class })
 public class XtendValidator extends XbaseWithAnnotationsValidator {
@@ -1701,7 +1702,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 	}
 
-	private EObject getOutermostType(XtendMember member) {
+	/** Replies the outer-most type of the given member.
+	 * @return the container of {@code XtendTypeDeclaration} type if it exists, or the direct container.
+	 */
+	protected final EObject getOutermostType(XtendMember member) {
 		XtendTypeDeclaration result = EcoreUtil2.getContainerOfType(member, XtendTypeDeclaration.class);
 		if (result == null) {
 			return member.eContainer();

@@ -227,4 +227,51 @@ class CompilerBugProtectedVisibilityTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def void testExtrasIssue229_01() {
+		'''
+		class Sample {
+			static class ParamClass extends testdata.ClazzWithProtectedMember {
+				def doSomething(ParamClass c) {
+					c.member = "Hello"
+				}
+			}
+		}
+		'''.assertCompilesTo('''
+		import testdata.ClazzWithProtectedMember;
+		
+		@SuppressWarnings("all")
+		public class Sample {
+		  public static class ParamClass extends ClazzWithProtectedMember {
+		    public String doSomething(final Sample.ParamClass c) {
+		      return c.member = "Hello";
+		    }
+		  }
+		}
+		''')
+	}	
+	
+	@Test def void testExtrasIssue229_02() {
+		'''
+		class Sample extends testdata.ClazzWithProtectedMember {
+			static class ParamClass {
+				def doSomething(Sample c) {
+					c.member = "Hello"
+				}
+			}
+		}
+		'''.assertCompilesTo('''
+		import testdata.ClazzWithProtectedMember;
+		
+		@SuppressWarnings("all")
+		public class Sample extends ClazzWithProtectedMember {
+		  public static class ParamClass {
+		    public String doSomething(final Sample c) {
+		      return c.member = "Hello";
+		    }
+		  }
+		}
+		''')
+		
+	}
 }
