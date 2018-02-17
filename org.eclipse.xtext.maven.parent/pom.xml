@@ -11,7 +11,7 @@
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<mavenVersion>3.2.5</mavenVersion>
-		<tycho-version>1.0.0</tycho-version>
+		<tycho-version>1.1.0</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
 
 		<maven-install-version>2.5.1</maven-install-version>
