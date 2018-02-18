@@ -354,27 +354,11 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 					+ "', but got '" + binding.toString() + "'.");
 		}
 	}
-	
-	
-	
-	private static Boolean canTolerateMissingType = null;
 
 	/**
 	 * @since 2.8
 	 */
 	protected void setMayTolerateMissingType(ITypeBinding typeBinding) {
-		// mayTolerateMissingType is only available since Juno. (introduced with https://github.com/eclipse/eclipse.jdt.core/commit/2d89f0516f5e5910bcd18015e8090ed0805dbb4e)
-		// check if it's there once.
-		if (canTolerateMissingType == null) {
-			canTolerateMissingType = Boolean.FALSE;
-			try {
-				LookupEnvironment.class.getDeclaredField("mayTolerateMissingType");
-				canTolerateMissingType = Boolean.TRUE;
-			} catch (NoSuchFieldException e) {}
-		}
-		// not supported. go out.
-		if (canTolerateMissingType == Boolean.FALSE)
-			return;
 		try {
 			Field field = typeBinding.getClass().getDeclaredField("binding");
 			field.setAccessible(true);
@@ -384,7 +368,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 				Field declaredField = binaryTypeBinding.getClass().getDeclaredField("environment");
 				declaredField.setAccessible(true);
 				LookupEnvironment env = (LookupEnvironment) declaredField.get(binaryTypeBinding);
-				env.getClass().getField("mayTolerateMissingType").set(env, true);
+				env.mayTolerateMissingType = true;
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
