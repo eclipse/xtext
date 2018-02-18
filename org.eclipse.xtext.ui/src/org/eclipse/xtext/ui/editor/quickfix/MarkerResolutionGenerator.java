@@ -163,7 +163,12 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
-				result = (XtextEditor) page.openEditor(input, getEditorId());
+				IEditorPart editor = page.openEditor(input, getEditorId());
+				if (editor instanceof XtextEditor) {
+					result = (XtextEditor) editor;
+				} else if (editor != null) {
+					result = (XtextEditor) editor.getAdapter(XtextEditor.class);
+				}
 			} catch (PartInitException e) {
 				return null;
 			}
@@ -176,8 +181,11 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		if(resource instanceof IFile) {
 			IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 			IEditorPart editor = activePage.findEditor(new FileEditorInput((IFile) resource));
-			if(editor instanceof XtextEditor)
+			if(editor instanceof XtextEditor) {
 				return (XtextEditor)editor;
+			} else if (editor != null) {
+				return (XtextEditor) editor.getAdapter(XtextEditor.class);
+			}
 		}
 		return null;
 
