@@ -265,7 +265,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 			validationJob.schedule();
 			Job.getJobManager().join(ValidationJob.XTEXT_VALIDATION_FAMILY, new NullProgressMonitor());
 		} catch (OperationCanceledException | InterruptedException e) {
-			e.printStackTrace();
+			fail(e.getMessage());
 		}
 	}
 
