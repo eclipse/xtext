@@ -19,7 +19,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -260,13 +259,19 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	}
 
 	private void validateInEditor(IXtextDocument document) {
-		try {
-			Job validationJob = ((XtextDocument)document).getValidationJob();
-			validationJob.schedule();
-			Job.getJobManager().join(ValidationJob.XTEXT_VALIDATION_FAMILY, new NullProgressMonitor());
-		} catch (OperationCanceledException | InterruptedException e) {
-			fail(e.getMessage());
-		}
+		Job validationJob = ((XtextDocument)document).getValidationJob();
+		validationJob.schedule();
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ValidationJob.XTEXT_VALIDATION_FAMILY, new NullProgressMonitor());
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
 	}
 
 	private XtextEditor editorForGrammar(String... bodyContent) throws PartInitException, CoreException {
