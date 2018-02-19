@@ -12,6 +12,7 @@ import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,7 +25,7 @@ public class AbstractSwtBotTest {
 
 	@BeforeClass
 	public static void initialize() throws Exception {
-		// TargetPlatformUtil.setTargetPlatform(AbstractSwtBotTest.class);
+		TargetPlatformUtil.setTargetPlatform(AbstractSwtBotTest.class);
 		IResourcesSetupUtil.cleanWorkspace();
 		UIThreadRunnable.syncExec(new VoidResult() {
 			@Override
