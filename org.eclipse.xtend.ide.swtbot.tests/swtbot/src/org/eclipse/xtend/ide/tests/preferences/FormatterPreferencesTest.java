@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for the foramtter preference page.
+ * Tests for the formatter preference page.
  * 
  * @author Arne Deutsch - Initial contribution and API
  */

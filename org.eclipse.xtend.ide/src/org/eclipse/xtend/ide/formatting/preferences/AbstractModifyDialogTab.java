@@ -49,7 +49,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 
 	@Override
 	protected Composite doCreatePreviewPane(Composite composite, int numColumns) {
-		createLabel(numColumns, composite, "Xtend formatterPreview");
+		createLabel(numColumns, composite, "Preview");
 		formatterPreview = previewFactory.createNewPreview(composite, previewText());
 		doUpdatePreview();
 		Control control = formatterPreview.getEditorViewer().getControl();
