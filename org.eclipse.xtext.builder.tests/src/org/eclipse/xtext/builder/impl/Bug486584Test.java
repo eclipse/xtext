@@ -14,6 +14,8 @@ import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -29,9 +31,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,12 +47,24 @@ public class Bug486584Test extends AbstractBuilderTest {
 	private static final String PROJECT_NAME = "foo";
 	private static final String XTEND_EXAMPLE_JAR = "XtendExample.jar";
 	private static final String SRC_FOLDER = "src";
+	private static int projectCounter = 0;
+	private List<IResourceChangeListener> resourceChangeListeners = new ArrayList<>();
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		getBuilderState().addListener(this);
+	}
+
+	@Override
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+		for (IResourceChangeListener l : resourceChangeListeners) {
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(l);
+		}
+		resourceChangeListeners.clear();
 	}
 
 	@Test
@@ -68,24 +82,6 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
-	}
-
-	private CountDownLatch createWaitForFullBuildLatch(IJavaProject project) {
-		final CountDownLatch latch = new CountDownLatch(1);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(new IResourceChangeListener() {
-			
-			@Override
-			public void resourceChanged(IResourceChangeEvent event) {
-				if (event.getBuildKind() == IncrementalProjectBuilder.FULL_BUILD) {
-					if (project.getProject() == event.getSource()) {
-						latch.countDown();
-					}
-					
-				}
-				
-			}
-		}, IResourceChangeEvent.POST_BUILD);
-		return latch;
 	}
 
 	@Test
@@ -120,7 +116,6 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	@Test
-	@Flaky
 	public void testFullBuildWhenClasspathChanged_2() throws CoreException, InterruptedException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
@@ -129,7 +124,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-		
+
 		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		libaryFile.touch(null);
 		libaryFile.refreshLocal(IResource.DEPTH_INFINITE, null);
@@ -142,7 +137,6 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	@Test
-	@Flaky
 	public void testFullBuildWhenClasspathChanged_3() throws CoreException, IOException, InterruptedException {
 		IJavaProject project = setupProject();
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
@@ -152,7 +146,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-		
+
 		final CountDownLatch latch = createWaitForFullBuildLatch(project);
 		File file = rawLocation.toFile();
 		Files.touch(file);
@@ -175,7 +169,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 	}
 
 	private IJavaProject setupProject() throws CoreException {
-		IJavaProject project = createJavaProject(PROJECT_NAME);
+		IJavaProject project = createJavaProject(PROJECT_NAME + projectCounter++);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		addBuilder(project.getProject(), XtextProjectHelper.BUILDER_ID);
 		IFolder folder = project.getProject().getFolder(SRC_FOLDER);
@@ -189,4 +183,25 @@ public class Bug486584Test extends AbstractBuilderTest {
 		file.create(new StringInputStream(content), true, monitor());
 		waitForBuild();
 	}
+
+	private CountDownLatch createWaitForFullBuildLatch(IJavaProject project) {
+		final CountDownLatch latch = new CountDownLatch(1);
+		addResourceChangeListener(new IResourceChangeListener() {
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				if (event.getBuildKind() == IncrementalProjectBuilder.FULL_BUILD) {
+					if (project.getProject() == event.getSource()) {
+						latch.countDown();
+					}
+				}
+			}
+		}, IResourceChangeEvent.POST_BUILD);
+		return latch;
+	}
+
+	private void addResourceChangeListener(IResourceChangeListener l, int eventMask) {
+		resourceChangeListeners.add(l);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(l, eventMask);
+	}
+
 }
