@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -145,13 +145,13 @@ public abstract class OptionsConfigurationBlock {
 							Messages.BuilderConfigurationBlock_BuildJob_TitleBuildProject_TaskName,
 							TextProcessor.process(project.getName(), ":.")), //$NON-NLS-2$ //$NON-NLS-1$ //$NON-NLS-1$
 							2);
-					project.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(monitor, 1));
+					project.build(IncrementalProjectBuilder.FULL_BUILD, SubMonitor.convert(monitor, 1));
 					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
-							new SubProgressMonitor(monitor, 1));
+							SubMonitor.convert(monitor, 1));
 				} else {
 					monitor.beginTask(Messages.BuilderConfigurationBlock_BuildJob_TitleBuildAll_TaskName, 2);
 					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD,
-							new SubProgressMonitor(monitor, 2));
+							SubMonitor.convert(monitor, 2));
 				}
 			} catch (CoreException e) {
 				return e.getStatus();

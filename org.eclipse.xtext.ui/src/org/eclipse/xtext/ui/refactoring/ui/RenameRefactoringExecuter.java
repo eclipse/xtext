@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobManager;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
@@ -142,8 +142,7 @@ public class RenameRefactoringExecuter {
 			try {
 				pm.beginTask("", 11);
 				pm.subTask("");
-				final RefactoringStatus status = refactoring.checkAllConditions(new SubProgressMonitor(pm, 4,
-						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
+				final RefactoringStatus status = refactoring.checkAllConditions(SubMonitor.convert(pm, 4));
 				if (status.getSeverity() >= RefactoringStatus.WARNING) {
 					final boolean[] canceled = { false };
 					shell.getDisplay().syncExec(new Runnable() {
@@ -156,10 +155,8 @@ public class RenameRefactoringExecuter {
 						throw new OperationCanceledException();
 					}
 				}
-				Change change = refactoring.createChange(new SubProgressMonitor(pm, 2,
-						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
-				change.initializeValidationData(new SubProgressMonitor(pm, 1,
-						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
+				Change change = refactoring.createChange(SubMonitor.convert(pm, 2));
+				change.initializeValidationData(SubMonitor.convert(pm, 1));
 				performChangeOperation = new PerformChangeOperation(change);
 				performChangeOperation.setUndoManager(RefactoringCore.getUndoManager(), refactoring.getName());
 				performChangeOperation.setSchedulingRule(ResourcesPlugin.getWorkspace().getRoot());
