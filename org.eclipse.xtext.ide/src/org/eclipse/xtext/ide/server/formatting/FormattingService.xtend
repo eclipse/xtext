@@ -23,6 +23,11 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import com.google.common.base.Strings
+import org.eclipse.lsp4j.FormattingOptions
+import java.util.Map
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Language Service Implementation for Formatting and Range-Formatting
@@ -49,7 +54,10 @@ class FormattingService {
 		if (length === 0 || resource.contents.isEmpty) {
 			return emptyList
 		}
-		return format(resource, document, offset, length)
+		if (OverrideChecker.hasFormatOverride(class)) {
+			return format(resource, document, offset, length)
+		}
+		return format(resource, document, offset, length, params.options)
 	}
 
 	def List<? extends TextEdit> format(
@@ -60,12 +68,32 @@ class FormattingService {
 	) {
 		val offset = document.getOffSet(params.range.start)
 		val length = document.getOffSet(params.range.end) - offset
-		return format(resource, document, offset, length)
+		if (OverrideChecker.hasFormatOverride(class)) {
+			return format(resource, document, offset, length)
+		}
+		return format(resource, document, offset, length, params.options)
+	}
+	
+	/**
+	 * @deprecated use {@link #format(XtextResource, document, offset, length, FormattingOptions} instead.
+	 */
+	@Deprecated
+	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length) {
+		format(resource, document, offset, length, null)
 	}
 
-	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length) {
+	/**
+	 * @since 2.14
+	 */
+	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length, FormattingOptions options) {
+		var indent = "\t"
+		if (options !== null) {
+			if (options.insertSpaces) {
+				indent = Strings.padEnd("", options.tabSize," ")
+			}
+		}
 		if (formatter2Provider !== null) {
-			val replacements = format2(resource, new TextRegion(offset, length), null)
+			val replacements = format2(resource, new TextRegion(offset, length), new MapBasedPreferenceValues(#{"indentation"->indent}))
 			return replacements.map [ r |
 				document.toTextEdit(r.replacementText, r.offset, r.length)
 			].<TextEdit>toList
@@ -100,5 +128,30 @@ class FormattingService {
 		val replacements = formatter2.format(request)
 		return replacements
 	}
+	
+	private static class OverrideChecker {
+		static val Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>()
+		def static boolean hasFormatOverride(Class<? extends FormattingService> formattingServiceClass) {
+			var Boolean result = CLASSES_WITH_OVERRIDES.get(formattingServiceClass)
+			if (result === null) {
+				try {
+					result = Boolean.FALSE
+					var Class<?> theClass = formattingServiceClass
+					while (!result && theClass !== FormattingService) {
+						try {
+							theClass.getDeclaredMethod("format", XtextResource, Document, Integer.TYPE, Integer.TYPE)
+							result = Boolean.TRUE
+						} catch (NoSuchMethodException noSuchMethodException) {
+						}
+						theClass = theClass.getSuperclass()
+					}
+				} catch (Exception exception) {
+					result = Boolean.TRUE
+				}
+				CLASSES_WITH_OVERRIDES.put(formattingServiceClass, result)
+			}
+			return result
+		}
+}
 
 }

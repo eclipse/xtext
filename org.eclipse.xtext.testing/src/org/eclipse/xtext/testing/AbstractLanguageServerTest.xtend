@@ -543,8 +543,18 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val actualM = actual.replace(System.lineSeparator, '\n')
 		Assert.assertEquals(expectedM.replace('\t', '    '), actualM.replace('\t', '    '))
 	}
+	
+	def void assertEqualsStricter(String expected, String actual) {
+		val expectedM = expected.replace(System.lineSeparator, '\n')
+		val actualM = actual.replace(System.lineSeparator, '\n')
+		Assert.assertEquals(expectedM, actualM)
+	}
 
 	protected def testFormatting((FormattingConfiguration)=>void configurator) {
+		testFormatting(null, configurator)
+	}
+	
+	protected def testFormatting((DocumentFormattingParams)=>void paramsConfigurator, (FormattingConfiguration)=>void configurator) {
 		val extension configuration = new FormattingConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
@@ -552,12 +562,19 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 		val changes = languageServer.formatting(new DocumentFormattingParams => [
 			textDocument = new TextDocumentIdentifier(fileInfo.uri)
+			if (paramsConfigurator !== null) {
+				paramsConfigurator.apply(it)
+			}
 		])
 		val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
-		assertEquals(configuration.expectedText, result.contents)
+		assertEqualsStricter(configuration.expectedText, result.contents)
+	}
+	
+	protected def testRangeFormatting((RangeFormattingConfiguration)=>void configurator) {
+		testRangeFormatting(null, configurator)
 	}
 
-	protected def testRangeFormatting((RangeFormattingConfiguration)=>void configurator) {
+	protected def testRangeFormatting((DocumentRangeFormattingParams)=>void paramsConfigurator, (RangeFormattingConfiguration)=>void configurator) {
 		val extension configuration = new RangeFormattingConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
@@ -567,9 +584,12 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val changes = languageServer.rangeFormatting(new DocumentRangeFormattingParams => [
 			textDocument = new TextDocumentIdentifier(fileInfo.uri)
 			range = configuration.range
+			if (paramsConfigurator !== null) {
+				paramsConfigurator.apply(it)
+			}
 		])
 		val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
-		assertEquals(configuration.expectedText, result.contents)
+		assertEqualsStricter(configuration.expectedText, result.contents)
 	}
 
 	override notify(String method, Object parameter) {

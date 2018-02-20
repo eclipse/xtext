@@ -1048,7 +1048,17 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     Assert.assertEquals(expectedM.replace("\t", "    "), actualM.replace("\t", "    "));
   }
   
+  public void assertEqualsStricter(final String expected, final String actual) {
+    final String expectedM = expected.replace(System.lineSeparator(), "\n");
+    final String actualM = actual.replace(System.lineSeparator(), "\n");
+    Assert.assertEquals(expectedM, actualM);
+  }
+  
   protected void testFormatting(final Procedure1<? super FormattingConfiguration> configurator) {
+    this.testFormatting(null, configurator);
+  }
+  
+  protected void testFormatting(final Procedure1<? super DocumentFormattingParams> paramsConfigurator, final Procedure1<? super FormattingConfiguration> configurator) {
     try {
       @Extension
       final FormattingConfiguration configuration = new FormattingConfiguration();
@@ -1060,18 +1070,25 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         String _uri = fileInfo.getUri();
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
         it.setTextDocument(_textDocumentIdentifier);
+        if ((paramsConfigurator != null)) {
+          paramsConfigurator.apply(it);
+        }
       };
       DocumentFormattingParams _doubleArrow = ObjectExtensions.<DocumentFormattingParams>operator_doubleArrow(_documentFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_doubleArrow);
       String _contents = fileInfo.getContents();
       final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
-      this.assertEquals(configuration.getExpectedText(), result.getContents());
+      this.assertEqualsStricter(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   protected void testRangeFormatting(final Procedure1<? super RangeFormattingConfiguration> configurator) {
+    this.testRangeFormatting(null, configurator);
+  }
+  
+  protected void testRangeFormatting(final Procedure1<? super DocumentRangeFormattingParams> paramsConfigurator, final Procedure1<? super RangeFormattingConfiguration> configurator) {
     try {
       @Extension
       final RangeFormattingConfiguration configuration = new RangeFormattingConfiguration();
@@ -1084,12 +1101,15 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
         it.setTextDocument(_textDocumentIdentifier);
         it.setRange(configuration.getRange());
+        if ((paramsConfigurator != null)) {
+          paramsConfigurator.apply(it);
+        }
       };
       DocumentRangeFormattingParams _doubleArrow = ObjectExtensions.<DocumentRangeFormattingParams>operator_doubleArrow(_documentRangeFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_doubleArrow);
       String _contents = fileInfo.getContents();
       final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
-      this.assertEquals(configuration.getExpectedText(), result.getContents());
+      this.assertEqualsStricter(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
