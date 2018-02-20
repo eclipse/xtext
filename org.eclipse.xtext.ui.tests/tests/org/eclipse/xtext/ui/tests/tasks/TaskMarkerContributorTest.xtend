@@ -23,7 +23,6 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import java.util.Arrays
 
 /**
  * @author Stefan Oehme - Initial contribution and API
