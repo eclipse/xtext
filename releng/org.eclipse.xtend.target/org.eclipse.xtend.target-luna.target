@@ -56,7 +56,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/bug363685/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
