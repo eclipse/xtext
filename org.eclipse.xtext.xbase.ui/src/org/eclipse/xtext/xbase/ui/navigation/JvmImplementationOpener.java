@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.ISourceRange;
@@ -152,7 +152,7 @@ public class JvmImplementationOpener {
 									.getDefaultSearchParticipant() };
 							SearchEngine engine = new SearchEngine();
 							engine.search(pattern, participants, SearchEngine.createHierarchyScope(type), requestor,
-									new SubProgressMonitor(monitor, 100));
+									SubMonitor.convert(monitor, 100));
 
 							if (monitor.isCanceled()) {
 								throw new InterruptedException();

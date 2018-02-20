@@ -19,7 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
@@ -96,7 +96,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 								"Performing changes - Xtend " + (i + 1) + " of " + files.size() + "");
 						try {
 							mon.subTask(change.getName());
-							change.perform(new SubProgressMonitor(mon, 1));
+							change.perform(SubMonitor.convert(mon, 1));
 						} catch (CoreException e) {
 							throw new InvocationTargetException(e);
 						}
