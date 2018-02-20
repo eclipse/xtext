@@ -7,12 +7,16 @@
  */
 package org.eclipse.xtext.ide.server.formatting;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.FormattingOptions;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.formatting2.FormatterRequest;
@@ -22,15 +26,18 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -41,6 +48,42 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class FormattingService {
+  private static class OverrideChecker {
+    private final static Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>();
+    
+    public static boolean hasFormatOverride(final Class<? extends FormattingService> formattingServiceClass) {
+      Boolean result = FormattingService.OverrideChecker.CLASSES_WITH_OVERRIDES.get(formattingServiceClass);
+      if ((result == null)) {
+        try {
+          result = Boolean.FALSE;
+          Class<?> theClass = formattingServiceClass;
+          while (((!(result).booleanValue()) && (theClass != FormattingService.class))) {
+            {
+              try {
+                theClass.getDeclaredMethod("format", XtextResource.class, Document.class, Integer.TYPE, Integer.TYPE);
+                result = Boolean.TRUE;
+              } catch (final Throwable _t) {
+                if (_t instanceof NoSuchMethodException) {
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              }
+              theClass = theClass.getSuperclass();
+            }
+          }
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            result = Boolean.TRUE;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        FormattingService.OverrideChecker.CLASSES_WITH_OVERRIDES.put(formattingServiceClass, result);
+      }
+      return (result).booleanValue();
+    }
+  }
+  
   @Inject(optional = true)
   private Provider<IFormatter2> formatter2Provider;
   
@@ -56,20 +99,48 @@ public class FormattingService {
     if (((length == 0) || resource.getContents().isEmpty())) {
       return CollectionLiterals.<TextEdit>emptyList();
     }
-    return this.format(resource, document, offset, length);
+    boolean _hasFormatOverride = FormattingService.OverrideChecker.hasFormatOverride(this.getClass());
+    if (_hasFormatOverride) {
+      return this.format(resource, document, offset, length);
+    }
+    return this.format(resource, document, offset, length, params.getOptions());
   }
   
   public List<? extends TextEdit> format(final Document document, final XtextResource resource, final DocumentRangeFormattingParams params, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getRange().getStart());
     int _offSet = document.getOffSet(params.getRange().getEnd());
     final int length = (_offSet - offset);
-    return this.format(resource, document, offset, length);
+    boolean _hasFormatOverride = FormattingService.OverrideChecker.hasFormatOverride(this.getClass());
+    if (_hasFormatOverride) {
+      return this.format(resource, document, offset, length);
+    }
+    return this.format(resource, document, offset, length, params.getOptions());
   }
   
+  /**
+   * @deprecated use {@link #format(XtextResource, document, offset, length, FormattingOptions} instead.
+   */
+  @Deprecated
   public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length) {
+    return this.format(resource, document, offset, length, null);
+  }
+  
+  /**
+   * @since 2.14
+   */
+  public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length, final FormattingOptions options) {
+    String indent = "\t";
+    if ((options != null)) {
+      boolean _isInsertSpaces = options.isInsertSpaces();
+      if (_isInsertSpaces) {
+        indent = Strings.padEnd("", options.getTabSize(), ' ');
+      }
+    }
     if ((this.formatter2Provider != null)) {
       TextRegion _textRegion = new TextRegion(offset, length);
-      final List<ITextReplacement> replacements = this.format2(resource, _textRegion, null);
+      Pair<String, String> _mappedTo = Pair.<String, String>of("indentation", indent);
+      MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
+      final List<ITextReplacement> replacements = this.format2(resource, _textRegion, _mapBasedPreferenceValues);
       final Function1<ITextReplacement, TextEdit> _function = (ITextReplacement r) -> {
         return this.toTextEdit(document, r.getReplacementText(), r.getOffset(), r.getLength());
       };
