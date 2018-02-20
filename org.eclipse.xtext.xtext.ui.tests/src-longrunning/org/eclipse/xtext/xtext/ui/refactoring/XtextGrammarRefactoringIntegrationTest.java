@@ -36,7 +36,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -48,7 +47,6 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -86,9 +84,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		TargetPlatformUtil.setTargetPlatform(XtextGrammarRefactoringIntegrationTest.class);
 	}
 	
-	@Rule
-	public Flaky.Rule flakyRule = new Flaky.Rule();
-
 	@Inject
 	private Provider<ResourceSet> resourceSetProvider;
 
@@ -158,7 +153,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	@Test
-	@Flaky
 	public void testRefactorXtextGrammarWithoutGeneratedClassifier() throws Exception {
 		waitForBuild();
 		final XtextEditor editor = openEditor(grammarFile);
@@ -170,7 +164,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	@Test
-	@Flaky
 	public void testRefactorXtextGrammarWithGeneratedClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		Resource ecoreResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
@@ -194,7 +187,6 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	@Test
-	@Flaky(trials=10)
 	public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
@@ -222,6 +214,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 				refPackage);
 		refToGreetingResource.unload();
 		ecoreModelResource.unload();
+		waitForBuild();
 		waitForDisplay();
 		XtextEditor editor = openEditor(grammarFile);
 		doRefactoring(editor);
