@@ -55,8 +55,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			    int result = 1;
 			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
 			    result = prime * result + (this._myFlag ? 1231 : 1237);
-			    result = prime * result + ((this._references== null) ? 0 : this._references.hashCode());
-			    return result;
+			    return prime * result + ((this._references== null) ? 0 : this._references.hashCode());
 			  }
 			  
 			  @Override
@@ -128,10 +127,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._name== null) ? 0 : this._name.hashCode());
 			  }
 			  
 			  @Override
@@ -186,10 +182,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._name== null) ? 0 : this._name.hashCode());
 			  }
 			  
 			  @Override
@@ -390,10 +383,7 @@ class OldDataCompilerTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._contents== null) ? 0 : this._contents.hashCode());
 			  }
 			  
 			  @Override

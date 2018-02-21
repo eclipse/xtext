@@ -54,8 +54,7 @@ class NewDataCompilerTest extends AbstractXtendCompilerTest {
 			    int result = 1;
 			    result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
 			    result = prime * result + (this.myFlag ? 1231 : 1237);
-			    result = prime * result + ((this.references== null) ? 0 : this.references.hashCode());
-			    return result;
+			    return prime * result + ((this.references== null) ? 0 : this.references.hashCode());
 			  }
 			  
 			  @Override
