@@ -17,9 +17,12 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
@@ -43,7 +46,7 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 	}
 	
 	private void waitForBuild() throws Exception {
-		Thread.sleep(10);
+		IResourcesSetupUtil.reallyWaitForAutoBuild();
 		IResourcesSetupUtil.waitForBuild();
 	}
 	
