@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -72,13 +70,13 @@ public class Bug486584Test extends AbstractBuilderTest {
 		IJavaProject project = setupProject();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-		final CountDownLatch latch = createWaitForFullBuildLatch(project);
+		BuildCheck check = createWaitForFullBuildLatch(project);
 		IFile libaryFile = copyAndGetXtendExampleJar(project);
 		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(libaryFile.getFullPath(), null, null);
 		addToClasspath(project, libraryEntry);
 		// wait for FORGET_BUILD_STATE_ONLY
-		latch.await(300, TimeUnit.MILLISECONDS);
-		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
+		reallyWaitForAutoBuild();
+		assertEquals("no fullbuild sheduled", 0, check.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
@@ -95,7 +93,7 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
-		final CountDownLatch latch = createWaitForFullBuildLatch(project);
+		BuildCheck check = createWaitForFullBuildLatch(project);
 		IClasspathEntry[] classpath = project.getRawClasspath();
 		for (int i = 0; i < classpath.length; ++i) {
 			IPath entryPath = classpath[i].getPath();
@@ -109,8 +107,8 @@ public class Bug486584Test extends AbstractBuilderTest {
 			}
 		}
 		// wait for FORGET_BUILD_STATE_ONLY
-		latch.await(300, TimeUnit.MILLISECONDS);
-		assertEquals("no fullbuild sheduled", 1l, latch.getCount());
+		reallyWaitForAutoBuild();
+		assertEquals("no fullbuild sheduled", 1, check.getCount());
 		waitForBuild();
 		assertTrue(getEvents().isEmpty());
 	}
@@ -125,12 +123,12 @@ public class Bug486584Test extends AbstractBuilderTest {
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
 
-		final CountDownLatch latch = createWaitForFullBuildLatch(project);
+		BuildCheck check = createWaitForFullBuildLatch(project);
 		libaryFile.touch(null);
 		libaryFile.refreshLocal(IResource.DEPTH_INFINITE, null);
 		// wait for FORGET_BUILD_STATE_ONLY
-		latch.await(300, TimeUnit.MILLISECONDS);
-		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
+		reallyWaitForAutoBuild();
+		assertEquals("no fullbuild sheduled", 0, check.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
@@ -147,15 +145,15 @@ public class Bug486584Test extends AbstractBuilderTest {
 		assertFalse(getEvents().isEmpty());
 		getEvents().clear();
 
-		final CountDownLatch latch = createWaitForFullBuildLatch(project);
+		BuildCheck check = createWaitForFullBuildLatch(project);
 		File file = rawLocation.toFile();
 		Files.touch(file);
 		project.setRawClasspath(project.getRawClasspath(), null);
 		project.getProject().getFile("src/dummy.txt").create(new StringInputStream(""), false, null);
 		project.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 		// wait for FORGET_BUILD_STATE_ONLY
-		latch.await(300, TimeUnit.MILLISECONDS);
-		assertEquals("no fullbuild sheduled", 0l, latch.getCount());
+		reallyWaitForAutoBuild();
+		assertEquals("no fullbuild sheduled", 0, check.getCount());
 		waitForBuild();
 		assertFalse(getEvents().isEmpty());
 
@@ -184,24 +182,38 @@ public class Bug486584Test extends AbstractBuilderTest {
 		waitForBuild();
 	}
 
-	private CountDownLatch createWaitForFullBuildLatch(IJavaProject project) {
-		final CountDownLatch latch = new CountDownLatch(1);
-		addResourceChangeListener(new IResourceChangeListener() {
-			@Override
-			public void resourceChanged(IResourceChangeEvent event) {
-				if (event.getBuildKind() == IncrementalProjectBuilder.FULL_BUILD) {
-					if (project.getProject() == event.getSource()) {
-						latch.countDown();
-					}
-				}
-			}
-		}, IResourceChangeEvent.POST_BUILD);
-		return latch;
+	private BuildCheck createWaitForFullBuildLatch(IJavaProject project) {
+		BuildCheck check = new BuildCheck(project);
+		addResourceChangeListener(check, IResourceChangeEvent.POST_BUILD);
+		return check;
 	}
 
 	private void addResourceChangeListener(IResourceChangeListener l, int eventMask) {
 		resourceChangeListeners.add(l);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(l, eventMask);
+	}
+
+	class BuildCheck implements IResourceChangeListener {
+		private final IJavaProject project;
+
+		private volatile int count = 1;
+
+		public BuildCheck(IJavaProject project) {
+			this.project = project;
+		}
+
+		@Override
+		public void resourceChanged(IResourceChangeEvent event) {
+			if (event.getBuildKind() == IncrementalProjectBuilder.FULL_BUILD) {
+				if (project.getProject() == event.getSource()) {
+					count--;
+				}
+			}
+		}
+
+		public int getCount() {
+			return count;
+		}
 	}
 
 }
