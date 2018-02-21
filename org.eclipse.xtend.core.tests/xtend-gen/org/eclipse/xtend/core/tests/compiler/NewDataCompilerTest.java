@@ -126,10 +126,7 @@ public class NewDataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("result = prime * result + (this.myFlag ? 1231 : 1237);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((this.references== null) ? 0 : this.references.hashCode());");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return result;");
+    _builder_1.append("return prime * result + ((this.references== null) ? 0 : this.references.hashCode());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

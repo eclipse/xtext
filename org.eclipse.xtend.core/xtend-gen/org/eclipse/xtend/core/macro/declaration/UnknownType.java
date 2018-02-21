@@ -46,8 +46,7 @@ public class UnknownType implements Type {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.compilationUnit== null) ? 0 : this.compilationUnit.hashCode());
-    result = prime * result + ((this.qualifiedName== null) ? 0 : this.qualifiedName.hashCode());
-    return result;
+    return prime * result + ((this.qualifiedName== null) ? 0 : this.qualifiedName.hashCode());
   }
   
   @Override

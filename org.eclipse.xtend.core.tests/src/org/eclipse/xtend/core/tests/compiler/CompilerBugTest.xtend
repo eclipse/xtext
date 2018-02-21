@@ -1781,10 +1781,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
 			  
 			  @Override
@@ -1852,10 +1849,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
 			  
 			  @Override
@@ -1923,10 +1917,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
 			  
 			  @Override
@@ -1994,10 +1985,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._weight== null) ? 0 : this._weight.hashCode());
 			  }
 			  
 			  @Override
@@ -2751,8 +2739,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    int result = 1;
-			    return result;
+			    return 1;
 			  }
 			  
 			  @Override
@@ -2803,10 +2790,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this._nonStaticField== null) ? 0 : this._nonStaticField.hashCode());
-			    return result;
+			    return 31 * 1 + ((this._nonStaticField== null) ? 0 : this._nonStaticField.hashCode());
 			  }
 			  
 			  @Override
@@ -2867,10 +2851,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
-			    int result = 1;
-			    result = prime * result + ((this.__string== null) ? 0 : this.__string.hashCode());
-			    return result;
+			    return 31 * 1 + ((this.__string== null) ? 0 : this.__string.hashCode());
 			  }
 			  
 			  @Override

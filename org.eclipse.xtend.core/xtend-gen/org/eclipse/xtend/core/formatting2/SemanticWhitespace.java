@@ -33,10 +33,7 @@ public class SemanticWhitespace extends Chunk {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + this.column;
-    return result;
+    return 31 * super.hashCode() + this.column;
   }
   
   @Override

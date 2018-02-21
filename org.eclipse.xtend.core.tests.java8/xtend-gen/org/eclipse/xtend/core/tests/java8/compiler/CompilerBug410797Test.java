@@ -675,10 +675,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("result = prime * result + this._offset;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((this._leafs== null) ? 0 : this._leafs.hashCode());");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return result;");
+    _builder_1.append("return prime * result + ((this._leafs== null) ? 0 : this._leafs.hashCode());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

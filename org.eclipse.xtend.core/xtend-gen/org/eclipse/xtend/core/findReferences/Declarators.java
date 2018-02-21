@@ -43,10 +43,7 @@ public class Declarators {
     @Override
     @Pure
     public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.declaratorNames== null) ? 0 : this.declaratorNames.hashCode());
-      return result;
+      return 31 * 1 + ((this.declaratorNames== null) ? 0 : this.declaratorNames.hashCode());
     }
     
     @Override

@@ -30,8 +30,7 @@ public class TemplateWhitespace extends Chunk {
   @Override
   @Pure
   public int hashCode() {
-    int result = super.hashCode();
-    return result;
+    return super.hashCode();
   }
   
   @Override

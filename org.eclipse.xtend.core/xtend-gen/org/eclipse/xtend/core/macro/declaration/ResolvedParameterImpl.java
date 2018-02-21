@@ -43,8 +43,7 @@ public class ResolvedParameterImpl implements ResolvedParameter {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.declaration== null) ? 0 : this.declaration.hashCode());
-    result = prime * result + ((this.resolvedType== null) ? 0 : this.resolvedType.hashCode());
-    return result;
+    return prime * result + ((this.resolvedType== null) ? 0 : this.resolvedType.hashCode());
   }
   
   @Override

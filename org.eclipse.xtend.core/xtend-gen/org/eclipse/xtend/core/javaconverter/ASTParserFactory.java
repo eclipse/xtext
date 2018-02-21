@@ -63,8 +63,7 @@ public class ASTParserFactory {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.targetLevel== null) ? 0 : this.targetLevel.hashCode());
-      result = prime * result + ((this.parser== null) ? 0 : this.parser.hashCode());
-      return result;
+      return prime * result + ((this.parser== null) ? 0 : this.parser.hashCode());
     }
     
     @Override
