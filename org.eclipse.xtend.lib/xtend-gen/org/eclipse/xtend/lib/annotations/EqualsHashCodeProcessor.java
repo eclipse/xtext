@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -40,6 +41,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
    */
   @Beta
   public static class Util {
+    private final static int PRIME_VALUE = 31;
+    
     @Extension
     private TransformationContext context;
     
@@ -378,6 +381,14 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
+      String _xifexpression = null;
+      if (includeSuper) {
+        _xifexpression = "super.hashCode()";
+      } else {
+        _xifexpression = "1";
+      }
+      final String defaultBase = _xifexpression;
+      final int fields = IterableExtensions.size(includedFields);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
         this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
         it.setReturnType(this.context.getPrimitiveInt());
@@ -387,32 +398,51 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             {
-              int _size = IterableExtensions.size(includedFields);
-              boolean _greaterThan = (_size > 0);
-              if (_greaterThan) {
-                _builder.append("final int prime = 31;");
-                _builder.newLine();
-              }
-            }
-            _builder.append("int result = ");
-            {
-              if (includeSuper) {
-                _builder.append("super.hashCode()");
-              } else {
-                _builder.append("1");
-              }
-            }
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            {
-              for(final FieldDeclaration field : includedFields) {
-                StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(field);
-                _builder.append(_contributeToHashCode);
+              if ((fields >= 2)) {
+                _builder.append("final int prime = ");
+                _builder.append(EqualsHashCodeProcessor.Util.PRIME_VALUE);
+                _builder.append(";");
                 _builder.newLineIfNotEmpty();
+                _builder.append("int result = ");
+                _builder.append(defaultBase);
+                _builder.append(";");
+                _builder.newLineIfNotEmpty();
+                {
+                  ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, fields, true);
+                  for(final Integer i : _doubleDotLessThan) {
+                    {
+                      if (((i).intValue() == (fields - 1))) {
+                        _builder.append("return");
+                      } else {
+                        _builder.append("result =");
+                      }
+                    }
+                    _builder.append(" prime * result + ");
+                    StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(((FieldDeclaration[])Conversions.unwrapArray(includedFields, FieldDeclaration.class))[(i).intValue()]);
+                    _builder.append(_contributeToHashCode);
+                    _builder.append(";");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              } else {
+                if ((fields == 1)) {
+                  _builder.append("return ");
+                  _builder.append(EqualsHashCodeProcessor.Util.PRIME_VALUE);
+                  _builder.append(" * ");
+                  _builder.append(defaultBase);
+                  _builder.append(" + ");
+                  StringConcatenationClient _contributeToHashCode_1 = Util.this.contributeToHashCode(IterableExtensions.head(includedFields));
+                  _builder.append(_contributeToHashCode_1);
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("return ");
+                  _builder.append(defaultBase);
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                }
               }
             }
-            _builder.append("return result;");
-            _builder.newLine();
           }
         };
         it.setBody(_client);
@@ -430,7 +460,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("result = prime * result + (int) (");
+            _builder.append("(int) (");
             _builder.append(Double.class);
             _builder.append(".doubleToLongBits(this.");
             String _simpleName = it.getSimpleName();
@@ -440,7 +470,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             _builder.append(".doubleToLongBits(this.");
             String _simpleName_1 = it.getSimpleName();
             _builder.append(_simpleName_1);
-            _builder.append(") >>> 32));");
+            _builder.append(") >>> 32))");
           }
         };
         _switchResult = _client;
@@ -452,12 +482,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("result = prime * result + ");
               _builder.append(Float.class);
               _builder.append(".floatToIntBits(this.");
               String _simpleName = it.getSimpleName();
               _builder.append(_simpleName);
-              _builder.append(");");
+              _builder.append(")");
             }
           };
           _switchResult = _client_1;
@@ -470,10 +499,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           StringConcatenationClient _client_2 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("result = prime * result + (this.");
+              _builder.append("(this.");
               String _simpleName = it.getSimpleName();
               _builder.append(_simpleName);
-              _builder.append(" ? 1231 : 1237);");
+              _builder.append(" ? 1231 : 1237)");
             }
           };
           _switchResult = _client_2;
@@ -506,10 +535,9 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           StringConcatenationClient _client_3 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("result = prime * result + this.");
+              _builder.append("this.");
               String _simpleName = it.getSimpleName();
               _builder.append(_simpleName);
-              _builder.append(";");
             }
           };
           _switchResult = _client_3;
@@ -522,13 +550,13 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           StringConcatenationClient _client_4 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("result = prime * result + (int) (this.");
+              _builder.append("(int) (this.");
               String _simpleName = it.getSimpleName();
               _builder.append(_simpleName);
               _builder.append(" ^ (this.");
               String _simpleName_1 = it.getSimpleName();
               _builder.append(_simpleName_1);
-              _builder.append(" >>> 32));");
+              _builder.append(" >>> 32))");
             }
           };
           _switchResult = _client_4;
@@ -538,13 +566,13 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         StringConcatenationClient _client_5 = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("result = prime * result + ((this.");
+            _builder.append("((this.");
             String _simpleName = it.getSimpleName();
             _builder.append(_simpleName);
             _builder.append("== null) ? 0 : ");
             StringConcatenationClient _deepHashCode = Util.this.deepHashCode(it);
             _builder.append(_deepHashCode);
-            _builder.append(");");
+            _builder.append(")");
           }
         };
         _switchResult = _client_5;

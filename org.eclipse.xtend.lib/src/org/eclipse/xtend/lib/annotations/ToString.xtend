@@ -55,7 +55,7 @@ annotation ToString {
 	 * Only list the values of the fields, not their names
 	 */
 	val hideFieldNames = false
-	
+
 	/**
 	 * By default, Iterables, Arrays and multiline Strings are pretty-printed.
 	 * Switching to their normal representation makes the toString method significantly faster.
@@ -76,7 +76,7 @@ class ToStringConfiguration {
 	val boolean singleLine
 	val boolean hideFieldNames
 	val boolean verbatimValues
-	
+
 	new() {
 		this(false, false, false, false)
 	}
@@ -106,7 +106,7 @@ class ToStringConfiguration {
 	def isHideFieldNames() {
 		hideFieldNames
 	}
-	
+
 	def isVerbatimValues() {
 		verbatimValues
 	}
@@ -137,10 +137,10 @@ class ToStringProcessor extends AbstractClassProcessor {
 	}
 
 	/**
-	* @since 2.7
-	* @noextend
-	* @noreference
-	*/
+	 * @since 2.7
+	 * @noextend
+	 * @noreference
+	 */
 	@Beta
 	static class Util {
 		extension TransformationContext context
@@ -155,7 +155,7 @@ class ToStringProcessor extends AbstractClassProcessor {
 
 		def getToStringConfig(ClassDeclaration it) {
 			val anno = findAnnotation(ToString.findTypeGlobally)
-			if (anno === null) null else new ToStringConfiguration(anno)
+			if(anno === null) null else new ToStringConfiguration(anno)
 		}
 
 		def void addReflectiveToString(MutableClassDeclaration cls, ToStringConfiguration config) {
@@ -165,14 +165,13 @@ class ToStringProcessor extends AbstractClassProcessor {
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					String result = new «ToStringBuilder»(this)
+					return new «ToStringBuilder»(this)
 						.addAllFields()
 						«IF config.skipNulls».skipNulls()«ENDIF»
 						«IF config.singleLine».singleLine()«ENDIF»
 						«IF config.hideFieldNames».hideFieldNames()«ENDIF»
 						«IF config.verbatimValues».verbatimValues()«ENDIF»
 						.toString();
-					return result;
 				'''
 			]
 		}
