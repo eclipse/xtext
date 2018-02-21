@@ -50,7 +50,7 @@ class DataProcessor extends AbstractClassProcessor {
 		extension val requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
 
 		dataFields.forEach [
-			if ((primarySourceElement as FieldDeclaration).modifiers.contains(Modifier.VAR)){
+			if ((primarySourceElement as FieldDeclaration).modifiers.contains(Modifier.VAR)) {
 				addError("Cannot use the 'var' keyword on a data field")
 			}
 			final = true
@@ -82,7 +82,7 @@ class DataProcessor extends AbstractClassProcessor {
 	 * @since 2.7
 	 * @noextend
 	 * @noreference
- 	 */
+	 */
 	@Beta
 	static class Util {
 

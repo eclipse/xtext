@@ -62,6 +62,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 	@Beta
 	static class Util {
 
+		private static final int PRIME_VALUE = 31
 		extension TransformationContext context
 
 		new(TransformationContext context) {
@@ -176,20 +177,26 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 		def void addHashCode(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
 			boolean includeSuper) {
+			val defaultBase = if(includeSuper) "super.hashCode()" else "1"
+			val fields = includedFields.size
+
 			cls.addMethod("hashCode") [
 				primarySourceElement = cls.primarySourceElement
 				returnType = primitiveInt
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					«IF includedFields.size > 0»
-						final int prime = 31;
+					«IF fields >= 2»
+						final int prime = «PRIME_VALUE»;
+						int result = «defaultBase»;
+						«FOR i : 0 ..< fields»
+							«IF i == fields - 1»return«ELSE»result =«ENDIF» prime * result + «includedFields.get(i).contributeToHashCode»;
+						«ENDFOR»
+					«ELSEIF fields == 1»
+						return «PRIME_VALUE» * «defaultBase» + «includedFields.head.contributeToHashCode»;
+					«ELSE»
+						return «defaultBase»;
 					«ENDIF»
-					int result = «IF includeSuper»super.hashCode()«ELSE»1«ENDIF»;
-					«FOR field : includedFields»
-						«field.contributeToHashCode»
-					«ENDFOR»
-					return result;
 				'''
 			]
 		}
@@ -197,20 +204,20 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		def StringConcatenationClient contributeToHashCode(FieldDeclaration it) {
 			switch (type.orObject.name) {
 				case Double.TYPE.name:
-					'''result = prime * result + (int) («Double».doubleToLongBits(this.«simpleName») ^ («Double».doubleToLongBits(this.«simpleName») >>> 32));'''
+					'''(int) («Double».doubleToLongBits(this.«simpleName») ^ («Double».doubleToLongBits(this.«simpleName») >>> 32))'''
 				case Float.TYPE.name:
-					'''result = prime * result + «Float».floatToIntBits(this.«simpleName»);'''
+					'''«Float».floatToIntBits(this.«simpleName»)'''
 				case Boolean.TYPE.name:
-					'''result = prime * result + (this.«simpleName» ? 1231 : 1237);'''
+					'''(this.«simpleName» ? 1231 : 1237)'''
 				case Integer.TYPE.name,
 				case Character.TYPE.name,
 				case Byte.TYPE.name,
 				case Short.TYPE.name:
-					'''result = prime * result + this.«simpleName»;'''
+					'''this.«simpleName»'''
 				case Long.TYPE.name:
-					'''result = prime * result + (int) (this.«simpleName» ^ (this.«simpleName» >>> 32));'''
+					'''(int) (this.«simpleName» ^ (this.«simpleName» >>> 32))'''
 				default:
-					'''result = prime * result + ((this.«simpleName»== null) ? 0 : «deepHashCode»);'''
+					'''((this.«simpleName»== null) ? 0 : «deepHashCode»)'''
 			}
 		}
 		

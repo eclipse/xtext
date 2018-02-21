@@ -74,7 +74,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("String result = new ");
+            _builder.append("return new ");
             _builder.append(ToStringBuilder.class);
             _builder.append("(this)");
             _builder.newLineIfNotEmpty();
@@ -115,8 +115,6 @@ public class ToStringProcessor extends AbstractClassProcessor {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append(".toString();");
-            _builder.newLine();
-            _builder.append("return result;");
             _builder.newLine();
           }
         };

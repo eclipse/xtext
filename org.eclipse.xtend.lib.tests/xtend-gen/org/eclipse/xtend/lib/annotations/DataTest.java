@@ -26,8 +26,7 @@ public class DataTest {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.arg== null) ? 0 : this.arg.hashCode());
-      result = prime * result + (this.foo ? 1231 : 1237);
-      return result;
+      return prime * result + (this.foo ? 1231 : 1237);
     }
     
     @Override
