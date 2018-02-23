@@ -6,6 +6,8 @@ Bundle-Version: 2.14.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.builder.standalone,
+ org.eclipse.xtext.testing,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
@@ -20,5 +22,8 @@ Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
  org.eclipse.xtext.builder.tests.validation
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0"
 Automatic-Module-Name: org.eclipse.xtext.builder.standalone.tests

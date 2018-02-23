@@ -40,9 +40,19 @@ Export-Package: org.eclipse.xtext.enumrules,
 Require-Bundle: org.antlr.runtime,
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
+ org.eclipse.equinox.common,
  org.eclipse.xtext,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.ecore,
+ org.eclipse.xtext.testing,
  org.eclipse.xtext.util,
- org.eclipse.xtext.xbase.lib
-Import-Package: org.apache.log4j
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
+Import-Package: org.apache.log4j,
+ org.junit;version="4.5.0",
+ org.junit.rules;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.extras.tests

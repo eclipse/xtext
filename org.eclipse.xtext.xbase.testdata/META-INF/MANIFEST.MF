@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xbase Test Data
+Bundle-Vendor: Eclipse Xtext
+Bundle-SymbolicName: org.eclipse.xtext.xbase.testdata;singleton:=true
+Bundle-Version: 2.14.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase;visibility:=reexport,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.objectweb.asm;bundle-version="[5.0.1,7.0.0)",
+ org.antlr.runtime
+Automatic-Module-Name: org.eclipse.xtext.xbase.ide
+Export-Package: closures,
+ constructorTypeParameters,
+ foo,
+ foo.bar,
+ instanceVsStatic,
+ interpreter,
+ nested,
+ org.eclipse.xtext.common.types.testSetups,
+ org.eclipse.xtext.common.types.util,
+ org.eclipse.xtext.xbase.tests.validation,
+ overrides,
+ testdata,
+ testdata.a,
+ testdata.b,
+ testdata.ordersensitivity
+Import-Package: org.junit;version="4.12.0"

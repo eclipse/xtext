@@ -16,7 +16,10 @@ Require-Bundle: org.eclipse.xtext.xbase,
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.xtext.builder,
  org.apache.log4j;bundle-version="1.2.15",
- org.eclipse.xtext.xbase.testlanguages
+ org.eclipse.xtext.xbase.testlanguages,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.xbase.testdata,
+ org.eclipse.xtext.xbase.ide
 Bundle-Vendor: Eclipse Xtext
 Export-Package: org.eclipse.xtext.xbase.tests,
  org.eclipse.xtext.xbase.tests.interpreter
