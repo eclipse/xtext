@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2017, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,6 +36,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.xbase.jvmmodel.JvmAnnotationReferenceBuilder
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
@@ -50,6 +51,8 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject OnTheFlyJavaCompiler2 javaCompiler
 	@Inject TypesFactory typesFactory;
 	@Inject JvmModelCompleter completer
+	
+	@Inject JvmAnnotationReferenceBuilder.Factory jvmAnnotationReferenceBuilderFactory
 	
 	@Test
 	def void bug390290InnerClassMemberImport() {
@@ -70,7 +73,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		expression.eResource.eSetDeliver(true)
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(expression.eResource, fsa)
-		val code = fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + clazz.identifier.replace('.','/')+".java").toString
+		val code = fsa.textFiles.get(IFileSystemAccess::DEFAULT_OUTPUT + clazz.identifier.replace('.','/')+".java").toString
 		assertFalse(code.contains("import"))
 		assertTrue(code, code.contains("java.lang.String foo"))
 		val compiledClass = javaCompiler.compileToClass(clazz.identifier, code)
@@ -233,15 +236,16 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Test
 	def void testBug380754(){
 		val expression = expression("null")
+		val jvmAnnotationReferenceBuilder = jvmAnnotationReferenceBuilderFactory.create(expression.eResource.resourceSet)
 		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
 				setBody(expression)
-				val annotation = expression.toAnnotation(typeof(TestAnnotations))
+				val annotation = jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotations))
 				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
 
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
 				annotation.explicitValues += annotationAnnotationValue
 				annotations += annotation
 			]
@@ -253,13 +257,14 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Test
 	def void testBug380754_2() {
 		val expression = expression("null")
+		val jvmAnnotationReferenceBuilder = jvmAnnotationReferenceBuilderFactory.create(expression.eResource.resourceSet)
 		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff",references.getTypeForName("java.lang.Object", expression)) [
 				setBody(expression)
 				val parameter = expression.toParameter("s", references.getTypeForName(typeof(String), expression))
 				parameters += parameter
-				parameter.annotations += expression.toAnnotation(typeof(TestAnnotation))
-				parameter.annotations += expression.toAnnotation(typeof(TestAnnotation2))
+				parameter.annotations += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
+				parameter.annotations += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation2))
 			]
 		]
 		compile(expression.eResource, clazz)
@@ -268,14 +273,15 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Test
 	def void testBug419430() {
 		val expression = expression("null")
+		val jvmAnnotationReferenceBuilder = jvmAnnotationReferenceBuilderFactory.create(expression.eResource.resourceSet)
 		val clazz = expression.toClass("my.test.Foo") [
 			members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
 				setBody(expression)
-				val annotation = expression.toAnnotation(typeof(TestAnnotations))
+				val annotation = jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotations))
 				val annotationAnnotationValue = typesFactory.createJvmAnnotationAnnotationValue
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
+				annotationAnnotationValue.values += jvmAnnotationReferenceBuilder.annotationRef(typeof(TestAnnotation))
 				annotation.explicitValues += annotationAnnotationValue
 				annotations += annotation
 			]
@@ -568,7 +574,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		res.eSetDeliver(true)
 		val fsa = new InMemoryFileSystemAccess()
 		generator.doGenerate(res, fsa)
-		fsa.files.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
+		fsa.textFiles.get(IFileSystemAccess::DEFAULT_OUTPUT + type.identifier.replace('.','/')+".java").toString
 	}
 	
 	def compileToClass(Resource res, JvmDeclaredType type, String code) {
