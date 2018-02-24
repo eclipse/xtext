@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2017, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -47,6 +47,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.JvmAnnotationReferenceBuilder;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -95,6 +96,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Inject
   private JvmModelCompleter completer;
   
+  @Inject
+  private JvmAnnotationReferenceBuilder.Factory jvmAnnotationReferenceBuilderFactory;
+  
   @Test
   public void bug390290InnerClassMemberImport() {
     try {
@@ -126,11 +130,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       expression.eResource().eSetDeliver(true);
       final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       this.generator.doGenerate(expression.eResource(), fsa);
-      Map<String, CharSequence> _files = fsa.getFiles();
+      Map<String, CharSequence> _textFiles = fsa.getTextFiles();
       String _replace = clazz.getIdentifier().replace(".", "/");
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
       String _plus_1 = (_plus + ".java");
-      final String code = _files.get(_plus_1).toString();
+      final String code = _textFiles.get(_plus_1).toString();
       Assert.assertFalse(code.contains("import"));
       Assert.assertTrue(code, code.contains("java.lang.String foo"));
       final Class<?> compiledClass = this.javaCompiler.compileToClass(clazz.getIdentifier(), code);
@@ -398,21 +402,22 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   public void testBug380754() {
     try {
       final XExpression expression = this.expression("null");
+      final JvmAnnotationReferenceBuilder jvmAnnotationReferenceBuilder = this.jvmAnnotationReferenceBuilderFactory.create(expression.eResource().getResourceSet());
       final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
           this.builder.setBody(it_1, expression);
-          final JvmAnnotationReference annotation = this.builder.toAnnotation(expression, TestAnnotations.class);
+          final JvmAnnotationReference annotation = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotations.class);
           final JvmAnnotationAnnotationValue annotationAnnotationValue = this.typesFactory.createJvmAnnotationAnnotationValue();
           EList<JvmAnnotationReference> _values = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values, _annotation);
+          JvmAnnotationReference _annotationRef = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values, _annotationRef);
           EList<JvmAnnotationReference> _values_1 = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation_1 = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values_1, _annotation_1);
+          JvmAnnotationReference _annotationRef_1 = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values_1, _annotationRef_1);
           EList<JvmAnnotationReference> _values_2 = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation_2 = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
+          JvmAnnotationReference _annotationRef_2 = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotationRef_2);
           EList<JvmAnnotationValue> _explicitValues = annotation.getExplicitValues();
           this.builder.<JvmAnnotationAnnotationValue>operator_add(_explicitValues, annotationAnnotationValue);
           EList<JvmAnnotationReference> _annotations = it_1.getAnnotations();
@@ -432,6 +437,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   public void testBug380754_2() {
     try {
       final XExpression expression = this.expression("null");
+      final JvmAnnotationReferenceBuilder jvmAnnotationReferenceBuilder = this.jvmAnnotationReferenceBuilderFactory.create(expression.eResource().getResourceSet());
       final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
@@ -440,11 +446,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
           EList<JvmFormalParameter> _parameters = it_1.getParameters();
           this.builder.<JvmFormalParameter>operator_add(_parameters, parameter);
           EList<JvmAnnotationReference> _annotations = parameter.getAnnotations();
-          JvmAnnotationReference _annotation = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_annotations, _annotation);
+          JvmAnnotationReference _annotationRef = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_annotations, _annotationRef);
           EList<JvmAnnotationReference> _annotations_1 = parameter.getAnnotations();
-          JvmAnnotationReference _annotation_1 = this.builder.toAnnotation(expression, TestAnnotation2.class);
-          this.builder.<JvmAnnotationReference>operator_add(_annotations_1, _annotation_1);
+          JvmAnnotationReference _annotationRef_1 = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation2.class);
+          this.builder.<JvmAnnotationReference>operator_add(_annotations_1, _annotationRef_1);
         };
         JvmOperation _method = this.builder.toMethod(expression, "doStuff", this.references.getTypeForName("java.lang.Object", expression), _function_1);
         this.builder.<JvmOperation>operator_add(_members, _method);
@@ -460,21 +466,22 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   public void testBug419430() {
     try {
       final XExpression expression = this.expression("null");
+      final JvmAnnotationReferenceBuilder jvmAnnotationReferenceBuilder = this.jvmAnnotationReferenceBuilderFactory.create(expression.eResource().getResourceSet());
       final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
           this.builder.setBody(it_1, expression);
-          final JvmAnnotationReference annotation = this.builder.toAnnotation(expression, TestAnnotations.class);
+          final JvmAnnotationReference annotation = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotations.class);
           final JvmAnnotationAnnotationValue annotationAnnotationValue = this.typesFactory.createJvmAnnotationAnnotationValue();
           EList<JvmAnnotationReference> _values = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values, _annotation);
+          JvmAnnotationReference _annotationRef = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values, _annotationRef);
           EList<JvmAnnotationReference> _values_1 = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation_1 = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values_1, _annotation_1);
+          JvmAnnotationReference _annotationRef_1 = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values_1, _annotationRef_1);
           EList<JvmAnnotationReference> _values_2 = annotationAnnotationValue.getValues();
-          JvmAnnotationReference _annotation_2 = this.builder.toAnnotation(expression, TestAnnotation.class);
-          this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
+          JvmAnnotationReference _annotationRef_2 = jvmAnnotationReferenceBuilder.annotationRef(TestAnnotation.class);
+          this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotationRef_2);
           EList<JvmAnnotationValue> _explicitValues = annotation.getExplicitValues();
           this.builder.<JvmAnnotationAnnotationValue>operator_add(_explicitValues, annotationAnnotationValue);
           EList<JvmAnnotationReference> _annotations = it_1.getAnnotations();
@@ -977,11 +984,11 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       res.eSetDeliver(true);
       final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       this.generator.doGenerate(res, fsa);
-      Map<String, CharSequence> _files = fsa.getFiles();
+      Map<String, CharSequence> _textFiles = fsa.getTextFiles();
       String _replace = type.getIdentifier().replace(".", "/");
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
       String _plus_1 = (_plus + ".java");
-      _xblockexpression = _files.get(_plus_1).toString();
+      _xblockexpression = _textFiles.get(_plus_1).toString();
     }
     return _xblockexpression;
   }

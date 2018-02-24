@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.descriptions.JvmDeclaredTypeSignatureHashProvider;
@@ -81,11 +82,11 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
     final JvmGenericType foo = this._jvmTypesBuilder.toClass(eObject, "Foo");
     EList<JvmTypeReference> _superTypes = bar.getSuperTypes();
-    JvmTypeReference _newTypeRef = this._jvmTypesBuilder.newTypeRef(foo);
-    this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _newTypeRef);
+    JvmParameterizedTypeReference _createTypeRef = this._typeReferences.createTypeRef(foo);
+    this._jvmTypesBuilder.<JvmParameterizedTypeReference>operator_add(_superTypes, _createTypeRef);
     EList<JvmTypeReference> _superTypes_1 = foo.getSuperTypes();
-    JvmTypeReference _newTypeRef_1 = this._jvmTypesBuilder.newTypeRef(bar);
-    this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes_1, _newTypeRef_1);
+    JvmParameterizedTypeReference _createTypeRef_1 = this._typeReferences.createTypeRef(bar);
+    this._jvmTypesBuilder.<JvmParameterizedTypeReference>operator_add(_superTypes_1, _createTypeRef_1);
     Assert.assertNotNull(this._jvmDeclaredTypeSignatureHashProvider.getHash(foo));
     Assert.assertFalse(Strings.equal(this._jvmDeclaredTypeSignatureHashProvider.getHash(foo), this._jvmDeclaredTypeSignatureHashProvider.getHash(bar)));
   }
