@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Java Tests
+Bundle-SymbolicName: org.eclipse.xtext.java.tests;singleton:=true
+Bundle-Version: 2.14.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.antlr.runtime,
+ org.eclipse.emf.common,
+ org.eclipse.emf.ecore,
+ org.eclipse.equinox.common,
+ org.eclipse.xtext,
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.ecore,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.util,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.java,
+ org.eclipse.xtext.xbase.testdata
+Import-Package: org.apache.log4j,
+ org.junit;version="4.5.0",
+ org.junit.rules;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"
+Bundle-Vendor: Eclipse Xtext
+Automatic-Module-Name: org.eclipse.xtext.extras.tests
