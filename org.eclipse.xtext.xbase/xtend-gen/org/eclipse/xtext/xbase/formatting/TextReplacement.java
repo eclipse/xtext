@@ -32,8 +32,7 @@ public class TextReplacement {
     int result = 1;
     result = prime * result + this.offset;
     result = prime * result + this.length;
-    result = prime * result + ((this.text== null) ? 0 : this.text.hashCode());
-    return result;
+    return prime * result + ((this.text== null) ? 0 : this.text.hashCode());
   }
   
   @Override

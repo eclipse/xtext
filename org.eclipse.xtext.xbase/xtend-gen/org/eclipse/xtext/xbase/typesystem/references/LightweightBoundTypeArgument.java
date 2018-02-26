@@ -56,8 +56,7 @@ public class LightweightBoundTypeArgument {
     result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
     result = prime * result + ((this.origin== null) ? 0 : this.origin.hashCode());
     result = prime * result + ((this.declaredVariance== null) ? 0 : this.declaredVariance.hashCode());
-    result = prime * result + ((this.actualVariance== null) ? 0 : this.actualVariance.hashCode());
-    return result;
+    return prime * result + ((this.actualVariance== null) ? 0 : this.actualVariance.hashCode());
   }
   
   @Override

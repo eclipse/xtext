@@ -48,8 +48,7 @@ public class Context {
     result = prime * result + ((this.expectedType== null) ? 0 : this.expectedType.hashCode());
     result = prime * result + ((this.classFinder== null) ? 0 : this.classFinder.hashCode());
     result = prime * result + ((this.visibleFeatures== null) ? 0 : this.visibleFeatures.hashCode());
-    result = prime * result + ((this.alreadyEvaluating== null) ? 0 : this.alreadyEvaluating.hashCode());
-    return result;
+    return prime * result + ((this.alreadyEvaluating== null) ? 0 : this.alreadyEvaluating.hashCode());
   }
   
   @Override

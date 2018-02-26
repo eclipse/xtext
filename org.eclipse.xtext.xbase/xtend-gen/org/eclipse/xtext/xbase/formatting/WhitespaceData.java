@@ -28,10 +28,7 @@ public class WhitespaceData extends FormattingData {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((this.space== null) ? 0 : this.space.hashCode());
-    return result;
+    return 31 * super.hashCode() + ((this.space== null) ? 0 : this.space.hashCode());
   }
   
   @Override
@@ -57,10 +54,9 @@ public class WhitespaceData extends FormattingData {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringBuilder(this)
+    return new ToStringBuilder(this)
     	.addAllFields()
     	.toString();
-    return result;
   }
   
   @Pure

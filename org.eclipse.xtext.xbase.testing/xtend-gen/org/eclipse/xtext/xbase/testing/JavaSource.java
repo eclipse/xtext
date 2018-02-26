@@ -33,8 +33,7 @@ public class JavaSource {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.fileName== null) ? 0 : this.fileName.hashCode());
-    result = prime * result + ((this.code== null) ? 0 : this.code.hashCode());
-    return result;
+    return prime * result + ((this.code== null) ? 0 : this.code.hashCode());
   }
   
   @Override

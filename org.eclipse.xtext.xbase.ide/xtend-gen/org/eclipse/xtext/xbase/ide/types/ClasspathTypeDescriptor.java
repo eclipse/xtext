@@ -184,8 +184,7 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
-    result = prime * result + this.accessFlags;
-    return result;
+    return prime * result + this.accessFlags;
   }
   
   @Override

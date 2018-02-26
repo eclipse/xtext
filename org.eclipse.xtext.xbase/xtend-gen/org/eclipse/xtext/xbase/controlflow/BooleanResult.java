@@ -40,8 +40,7 @@ public class BooleanResult implements IConstantEvaluationResult<Boolean> {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.value== null) ? 0 : this.value.hashCode());
-    result = prime * result + (this.compileTimeConstant ? 1231 : 1237);
-    return result;
+    return prime * result + (this.compileTimeConstant ? 1231 : 1237);
   }
   
   @Override

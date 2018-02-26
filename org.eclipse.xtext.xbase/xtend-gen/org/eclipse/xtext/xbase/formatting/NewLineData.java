@@ -28,10 +28,7 @@ public class NewLineData extends FormattingData {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((this.newLines== null) ? 0 : this.newLines.hashCode());
-    return result;
+    return 31 * super.hashCode() + ((this.newLines== null) ? 0 : this.newLines.hashCode());
   }
   
   @Override
@@ -57,10 +54,9 @@ public class NewLineData extends FormattingData {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringBuilder(this)
+    return new ToStringBuilder(this)
     	.addAllFields()
     	.toString();
-    return result;
   }
   
   @Pure

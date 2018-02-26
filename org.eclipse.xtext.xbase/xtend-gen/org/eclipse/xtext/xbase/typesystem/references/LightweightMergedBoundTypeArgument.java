@@ -38,8 +38,7 @@ public class LightweightMergedBoundTypeArgument {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.typeReference== null) ? 0 : this.typeReference.hashCode());
-    result = prime * result + ((this.variance== null) ? 0 : this.variance.hashCode());
-    return result;
+    return prime * result + ((this.variance== null) ? 0 : this.variance.hashCode());
   }
   
   @Override

@@ -61,8 +61,7 @@ public class TypeBucket {
     int result = 1;
     result = prime * result + this.id;
     result = prime * result + ((this.types== null) ? 0 : this.types.hashCode());
-    result = prime * result + ((this.resolvedFeaturesProvider== null) ? 0 : this.resolvedFeaturesProvider.hashCode());
-    return result;
+    return prime * result + ((this.resolvedFeaturesProvider== null) ? 0 : this.resolvedFeaturesProvider.hashCode());
   }
   
   @Override
