@@ -90,8 +90,7 @@ public class RuleWithParameterValues {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.original== null) ? 0 : this.original.hashCode());
-    result = prime * result + ((this.paramValues== null) ? 0 : this.paramValues.hashCode());
-    return result;
+    return prime * result + ((this.paramValues== null) ? 0 : this.paramValues.hashCode());
   }
   
   @Override

@@ -37,10 +37,7 @@ public class OutputConfigurationAdapter extends AdapterImpl {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.outputConfigurationsPerLanguage== null) ? 0 : this.outputConfigurationsPerLanguage.hashCode());
-    return result;
+    return 31 * 1 + ((this.outputConfigurationsPerLanguage== null) ? 0 : this.outputConfigurationsPerLanguage.hashCode());
   }
   
   @Override
@@ -64,10 +61,9 @@ public class OutputConfigurationAdapter extends AdapterImpl {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringBuilder(this)
+    return new ToStringBuilder(this)
     	.addAllFields()
     	.toString();
-    return result;
   }
   
   @Pure

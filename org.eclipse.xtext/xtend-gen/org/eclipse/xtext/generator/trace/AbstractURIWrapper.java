@@ -32,10 +32,7 @@ public abstract class AbstractURIWrapper {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.URI== null) ? 0 : this.URI.hashCode());
-    return result;
+    return 31 * 1 + ((this.URI== null) ? 0 : this.URI.hashCode());
   }
   
   @Override

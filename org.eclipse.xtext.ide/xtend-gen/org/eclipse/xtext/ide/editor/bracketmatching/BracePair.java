@@ -53,8 +53,7 @@ public class BracePair {
     int result = 1;
     result = prime * result + ((this.leftBrace== null) ? 0 : this.leftBrace.hashCode());
     result = prime * result + ((this.rightBrace== null) ? 0 : this.rightBrace.hashCode());
-    result = prime * result + (this.structural ? 1231 : 1237);
-    return result;
+    return prime * result + (this.structural ? 1231 : 1237);
   }
   
   @Override

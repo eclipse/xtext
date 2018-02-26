@@ -41,8 +41,7 @@ public class ResourceRelocationChange {
     int result = 1;
     result = prime * result + ((this.fromURI== null) ? 0 : this.fromURI.hashCode());
     result = prime * result + ((this.toURI== null) ? 0 : this.toURI.hashCode());
-    result = prime * result + (this.isFile ? 1231 : 1237);
-    return result;
+    return prime * result + (this.isFile ? 1231 : 1237);
   }
   
   @Override

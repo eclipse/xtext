@@ -93,8 +93,7 @@ public class IncrementalBuilder {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.indexState== null) ? 0 : this.indexState.hashCode());
-      result = prime * result + ((this.affectedResources== null) ? 0 : this.affectedResources.hashCode());
-      return result;
+      return prime * result + ((this.affectedResources== null) ? 0 : this.affectedResources.hashCode());
     }
     
     @Override

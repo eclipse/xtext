@@ -132,8 +132,7 @@ public class GuiceModuleAccess {
       result = prime * result + ((this.expression== null) ? 0 : this.expression.hashCode());
       result = prime * result + ((this.type== null) ? 0 : this.type.hashCode());
       result = prime * result + (this.provider ? 1231 : 1237);
-      result = prime * result + ((this.statements== null) ? 0 : this.statements.hashCode());
-      return result;
+      return prime * result + ((this.statements== null) ? 0 : this.statements.hashCode());
     }
     
     @Override

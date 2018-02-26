@@ -74,8 +74,7 @@ public class CliWizardIntegrationTest {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.relativePath== null) ? 0 : this.relativePath.hashCode());
-      result = prime * result + ((this.content== null) ? 0 : this.content.hashCode());
-      return result;
+      return prime * result + ((this.content== null) ? 0 : this.content.hashCode());
     }
     
     @Override

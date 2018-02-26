@@ -79,8 +79,7 @@ public class PortableURIs {
       int result = 1;
       result = prime * result + ((this.descriptionEClass== null) ? 0 : this.descriptionEClass.hashCode());
       result = prime * result + ((this.descriptionQualifiedName== null) ? 0 : this.descriptionQualifiedName.hashCode());
-      result = prime * result + ((this.descriptionRelativeFragment== null) ? 0 : this.descriptionRelativeFragment.hashCode());
-      return result;
+      return prime * result + ((this.descriptionRelativeFragment== null) ? 0 : this.descriptionRelativeFragment.hashCode());
     }
     
     @Override

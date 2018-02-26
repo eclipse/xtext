@@ -44,8 +44,7 @@ public class EPackageInfo {
     result = prime * result + ((this.ePackageImportURI== null) ? 0 : this.ePackageImportURI.hashCode());
     result = prime * result + ((this.genmodelURI== null) ? 0 : this.genmodelURI.hashCode());
     result = prime * result + ((this.ePackageJavaFQN== null) ? 0 : this.ePackageJavaFQN.hashCode());
-    result = prime * result + ((this.bundleID== null) ? 0 : this.bundleID.hashCode());
-    return result;
+    return prime * result + ((this.bundleID== null) ? 0 : this.bundleID.hashCode());
   }
   
   @Override

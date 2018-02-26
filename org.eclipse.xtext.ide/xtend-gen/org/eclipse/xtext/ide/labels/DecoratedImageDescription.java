@@ -32,8 +32,7 @@ public class DecoratedImageDescription implements IImageDescription {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.baseImage== null) ? 0 : this.baseImage.hashCode());
-    result = prime * result + ((this.decorators== null) ? 0 : this.decorators.hashCode());
-    return result;
+    return prime * result + ((this.decorators== null) ? 0 : this.decorators.hashCode());
   }
   
   @Override

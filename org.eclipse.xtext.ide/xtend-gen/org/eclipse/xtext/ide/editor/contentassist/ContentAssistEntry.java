@@ -292,7 +292,6 @@ public class ContentAssistEntry {
     result = prime * result + ((this.escapePosition== null) ? 0 : this.escapePosition.hashCode());
     result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
     result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());
-    result = prime * result + ((this.kind== null) ? 0 : this.kind.hashCode());
-    return result;
+    return prime * result + ((this.kind== null) ? 0 : this.kind.hashCode());
   }
 }

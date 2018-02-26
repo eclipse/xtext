@@ -52,8 +52,7 @@ public interface ILanguageServerAccess {
       result = prime * result + ((this.resource== null) ? 0 : this.resource.hashCode());
       result = prime * result + ((this.document== null) ? 0 : this.document.hashCode());
       result = prime * result + (this.isDocumentOpen ? 1231 : 1237);
-      result = prime * result + ((this.cancelChecker== null) ? 0 : this.cancelChecker.hashCode());
-      return result;
+      return prime * result + ((this.cancelChecker== null) ? 0 : this.cancelChecker.hashCode());
     }
     
     @Override

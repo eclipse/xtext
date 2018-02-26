@@ -25,10 +25,7 @@ public class SimpleImageDescription implements IImageDescription {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.imageID== null) ? 0 : this.imageID.hashCode());
-    return result;
+    return 31 * 1 + ((this.imageID== null) ? 0 : this.imageID.hashCode());
   }
   
   @Override

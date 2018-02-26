@@ -35,8 +35,7 @@ public class RenameChange {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.newName== null) ? 0 : this.newName.hashCode());
-    result = prime * result + ((this.targetURI== null) ? 0 : this.targetURI.hashCode());
-    return result;
+    return prime * result + ((this.targetURI== null) ? 0 : this.targetURI.hashCode());
   }
   
   @Override

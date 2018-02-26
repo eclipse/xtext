@@ -76,8 +76,7 @@ public class Indexer {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.resourceDeltas== null) ? 0 : this.resourceDeltas.hashCode());
-      result = prime * result + ((this.newIndex== null) ? 0 : this.newIndex.hashCode());
-      return result;
+      return prime * result + ((this.newIndex== null) ? 0 : this.newIndex.hashCode());
     }
     
     @Override
