@@ -528,11 +528,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 					throw e.getWrapped();
 				} finally {
 					try {
-						if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) { 
+						if(potentialUpdaterCount.decrementAndGet() == 0 && (hadUpdates || isCancelReaders)) {
+							boolean wasHadUpdates = hadUpdates;
 							hadUpdates = false;
 							if (getCancelIndicator().isCanceled() && isCancelable)
 								throw new OperationCanceledException();
-							notifyModelListeners(state);
+							if (wasHadUpdates)
+								notifyModelListeners(state);
 						}
 					} catch (RuntimeException e) {
 						if (operationCanceledManager.isOperationCanceledException(e)) {
