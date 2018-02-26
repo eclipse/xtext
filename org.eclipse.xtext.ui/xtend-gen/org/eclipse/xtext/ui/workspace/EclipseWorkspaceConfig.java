@@ -79,8 +79,7 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.workspaceRoot== null) ? 0 : this.workspaceRoot.hashCode());
-    result = prime * result + ((this.projectConfigProvider== null) ? 0 : this.projectConfigProvider.hashCode());
-    return result;
+    return prime * result + ((this.projectConfigProvider== null) ? 0 : this.projectConfigProvider.hashCode());
   }
   
   @Override
