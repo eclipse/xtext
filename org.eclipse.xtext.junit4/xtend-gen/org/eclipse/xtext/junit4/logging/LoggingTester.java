@@ -123,10 +123,7 @@ public class LoggingTester {
     @Override
     @Pure
     public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.logEntries== null) ? 0 : this.logEntries.hashCode());
-      return result;
+      return 31 * 1 + ((this.logEntries== null) ? 0 : this.logEntries.hashCode());
     }
     
     @Override
@@ -187,8 +184,7 @@ public class LoggingTester {
       result = prime * result + ((this.message== null) ? 0 : this.message.hashCode());
       result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
       result = prime * result + (int) (this.timeStamp ^ (this.timeStamp >>> 32));
-      result = prime * result + ((this.level== null) ? 0 : this.level.hashCode());
-      return result;
+      return prime * result + ((this.level== null) ? 0 : this.level.hashCode());
     }
     
     @Override
@@ -308,10 +304,7 @@ public class LoggingTester {
     @Override
     @Pure
     public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((this.source== null) ? 0 : this.source.hashCode());
-      return result;
+      return 31 * 1 + ((this.source== null) ? 0 : this.source.hashCode());
     }
     
     @Override
@@ -335,10 +328,9 @@ public class LoggingTester {
     @Override
     @Pure
     public String toString() {
-      String result = new ToStringBuilder(this)
+      return new ToStringBuilder(this)
       	.addAllFields()
       	.toString();
-      return result;
     }
     
     @Pure

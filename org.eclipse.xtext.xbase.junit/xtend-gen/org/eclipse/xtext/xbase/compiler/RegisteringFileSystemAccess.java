@@ -51,8 +51,7 @@ public class RegisteringFileSystemAccess extends InMemoryFileSystemAccess {
       int result = 1;
       result = prime * result + ((this.path== null) ? 0 : this.path.hashCode());
       result = prime * result + ((this.javaClassName== null) ? 0 : this.javaClassName.hashCode());
-      result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
-      return result;
+      return prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
     }
     
     @Override

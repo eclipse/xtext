@@ -79,8 +79,7 @@ public class EclipseProjectConfig implements IProjectConfig {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.project== null) ? 0 : this.project.hashCode());
-    result = prime * result + ((this.projectConfigProvider== null) ? 0 : this.projectConfigProvider.hashCode());
-    return result;
+    return prime * result + ((this.projectConfigProvider== null) ? 0 : this.projectConfigProvider.hashCode());
   }
   
   @Override

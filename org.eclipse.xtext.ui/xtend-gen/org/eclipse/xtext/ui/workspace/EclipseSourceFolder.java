@@ -48,8 +48,7 @@ public class EclipseSourceFolder implements ISourceFolder {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.project== null) ? 0 : this.project.hashCode());
-    result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());
-    return result;
+    return prime * result + ((this.name== null) ? 0 : this.name.hashCode());
   }
   
   @Override

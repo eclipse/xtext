@@ -64,8 +64,7 @@ public class JdtProjectConfig extends EclipseProjectConfig {
   @Override
   @Pure
   public int hashCode() {
-    int result = super.hashCode();
-    return result;
+    return super.hashCode();
   }
   
   @Override
@@ -85,9 +84,8 @@ public class JdtProjectConfig extends EclipseProjectConfig {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringBuilder(this)
+    return new ToStringBuilder(this)
     	.addAllFields()
     	.toString();
-    return result;
   }
 }
