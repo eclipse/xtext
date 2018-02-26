@@ -46,8 +46,7 @@ public abstract class FormattingData {
     result = prime * result + this.length;
     result = prime * result + this.increaseIndentationChange;
     result = prime * result + this.decreaseIndentationChange;
-    result = prime * result + ((this.trace== null) ? 0 : this.trace.hashCode());
-    return result;
+    return prime * result + ((this.trace== null) ? 0 : this.trace.hashCode());
   }
   
   @Override

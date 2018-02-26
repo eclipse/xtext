@@ -300,8 +300,7 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.rawValue== null) ? 0 : this.rawValue.hashCode());
-    result = prime * result + (this.compileTimeConstant ? 1231 : 1237);
-    return result;
+    return prime * result + (this.compileTimeConstant ? 1231 : 1237);
   }
   
   @Override

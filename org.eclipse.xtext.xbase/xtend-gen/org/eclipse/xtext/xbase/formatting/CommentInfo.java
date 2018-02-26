@@ -40,10 +40,7 @@ public class CommentInfo extends LeafInfo {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + (this.trailing ? 1231 : 1237);
-    return result;
+    return 31 * super.hashCode() + (this.trailing ? 1231 : 1237);
   }
   
   @Override

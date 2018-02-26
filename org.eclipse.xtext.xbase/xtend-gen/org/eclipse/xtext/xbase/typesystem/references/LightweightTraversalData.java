@@ -36,8 +36,7 @@ public class LightweightTraversalData {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.visited== null) ? 0 : this.visited.hashCode());
-    result = prime * result + ((this.typeParameterMapping== null) ? 0 : this.typeParameterMapping.hashCode());
-    return result;
+    return prime * result + ((this.typeParameterMapping== null) ? 0 : this.typeParameterMapping.hashCode());
   }
   
   @Override

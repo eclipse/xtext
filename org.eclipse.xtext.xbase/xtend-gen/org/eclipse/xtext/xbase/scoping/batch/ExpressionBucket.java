@@ -46,8 +46,7 @@ public class ExpressionBucket {
     int result = 1;
     result = prime * result + this.id;
     result = prime * result + ((this.extensionProviders== null) ? 0 : this.extensionProviders.hashCode());
-    result = prime * result + ((this.resolvedFeaturesProvider== null) ? 0 : this.resolvedFeaturesProvider.hashCode());
-    return result;
+    return prime * result + ((this.resolvedFeaturesProvider== null) ? 0 : this.resolvedFeaturesProvider.hashCode());
   }
   
   @Override

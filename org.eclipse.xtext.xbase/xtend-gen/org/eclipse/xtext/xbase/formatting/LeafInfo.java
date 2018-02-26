@@ -30,8 +30,7 @@ public abstract class LeafInfo {
     int result = 1;
     result = prime * result + ((this.container== null) ? 0 : this.container.hashCode());
     result = prime * result + ((this.node== null) ? 0 : this.node.hashCode());
-    result = prime * result + this.newLines;
-    return result;
+    return prime * result + this.newLines;
   }
   
   @Override

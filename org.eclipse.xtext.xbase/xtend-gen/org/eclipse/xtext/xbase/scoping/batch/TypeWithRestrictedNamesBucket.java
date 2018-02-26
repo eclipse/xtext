@@ -48,10 +48,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((this.typesToNames== null) ? 0 : this.typesToNames.hashCode());
-    return result;
+    return 31 * super.hashCode() + ((this.typesToNames== null) ? 0 : this.typesToNames.hashCode());
   }
   
   @Override
@@ -77,10 +74,9 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   @Override
   @Pure
   public String toString() {
-    String result = new ToStringBuilder(this)
+    return new ToStringBuilder(this)
     	.addAllFields()
     	.toString();
-    return result;
   }
   
   @Pure
