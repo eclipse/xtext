@@ -119,8 +119,7 @@ public class Document {
     final int prime = 31;
     int result = 1;
     result = prime * result + this.version;
-    result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
-    return result;
+    return prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
   }
   
   @Override

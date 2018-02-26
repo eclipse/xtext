@@ -74,8 +74,7 @@ public class GeneratorNodeProcessor {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
-      result = prime * result + ((this.traceRegion== null) ? 0 : this.traceRegion.hashCode());
-      return result;
+      return prime * result + ((this.traceRegion== null) ? 0 : this.traceRegion.hashCode());
     }
     
     @Override

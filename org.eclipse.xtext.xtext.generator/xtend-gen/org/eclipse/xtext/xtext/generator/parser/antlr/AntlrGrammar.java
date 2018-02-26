@@ -48,8 +48,7 @@ public class AntlrGrammar {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.packageName== null) ? 0 : this.packageName.hashCode());
-    result = prime * result + ((this.simpleName== null) ? 0 : this.simpleName.hashCode());
-    return result;
+    return prime * result + ((this.simpleName== null) ? 0 : this.simpleName.hashCode());
   }
   
   @Override

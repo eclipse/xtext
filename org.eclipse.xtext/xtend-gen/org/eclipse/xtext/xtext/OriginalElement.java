@@ -80,10 +80,7 @@ public class OriginalElement {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.original== null) ? 0 : this.original.hashCode());
-    return result;
+    return 31 * 1 + ((this.original== null) ? 0 : this.original.hashCode());
   }
   
   @Override

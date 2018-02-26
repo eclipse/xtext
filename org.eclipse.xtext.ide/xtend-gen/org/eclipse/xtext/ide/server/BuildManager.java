@@ -60,8 +60,7 @@ public class BuildManager {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((this.dirtyFiles== null) ? 0 : this.dirtyFiles.hashCode());
-      result = prime * result + ((this.deletedFiles== null) ? 0 : this.deletedFiles.hashCode());
-      return result;
+      return prime * result + ((this.deletedFiles== null) ? 0 : this.deletedFiles.hashCode());
     }
     
     @Override

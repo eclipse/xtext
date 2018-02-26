@@ -51,8 +51,7 @@ public class LineAndColumn {
     final int prime = 31;
     int result = 1;
     result = prime * result + this.line;
-    result = prime * result + this.column;
-    return result;
+    return prime * result + this.column;
   }
   
   @Override

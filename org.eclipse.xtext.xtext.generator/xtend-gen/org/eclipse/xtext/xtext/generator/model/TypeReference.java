@@ -401,7 +401,6 @@ public class TypeReference {
     int result = 1;
     result = prime * result + ((this.packageName== null) ? 0 : this.packageName.hashCode());
     result = prime * result + ((this.simpleNames== null) ? 0 : this.simpleNames.hashCode());
-    result = prime * result + ((this.typeArguments== null) ? 0 : this.typeArguments.hashCode());
-    return result;
+    return prime * result + ((this.typeArguments== null) ? 0 : this.typeArguments.hashCode());
   }
 }
