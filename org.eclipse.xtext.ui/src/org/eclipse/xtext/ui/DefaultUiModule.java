@@ -33,7 +33,6 @@ import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
-import org.eclipse.xtext.naming.DefaultCopyQualifiedNameService;
 import org.eclipse.xtext.naming.ICopyQualifiedNameService;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;

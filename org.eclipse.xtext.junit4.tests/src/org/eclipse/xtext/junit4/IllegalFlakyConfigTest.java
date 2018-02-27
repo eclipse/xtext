@@ -17,6 +17,7 @@ import org.junit.runners.model.Statement;
 /**
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public class IllegalFlakyConfigTest {
 
 	@Rule 
