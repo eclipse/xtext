@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.smoke;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +30,6 @@ import org.junit.ComparisonFailure;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -63,7 +63,7 @@ public class FormatterSmokeSuite {
 
 		public FormatterSmokeTester() throws NoSuchAlgorithmException {
 			messageDigest = MessageDigest.getInstance("MD5");
-			seen = Sets.newSetFromMap(new ConcurrentHashMap<BigInteger, Boolean>());
+			seen = Collections.newSetFromMap(new ConcurrentHashMap<BigInteger, Boolean>());
 		}
 
 		@Override
