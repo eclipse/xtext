@@ -13,16 +13,34 @@
 	<artifactId>org.eclipse.xtend.ide.swtbot.tests</artifactId>
 
 	<build>
-	    <plugins>
-	        <plugin>
-	            <groupId>org.eclipse.tycho</groupId>
-	            <artifactId>tycho-surefire-plugin</artifactId>
-	            <configuration>
-	              <useUIThread>false</useUIThread>
-					<argLine>${memory-settings} ${os-jvm-flags} -Dorg.eclipse.swtbot.keyboard.layout=EN_US -Dorg.eclipse.swtbot.playback.delay=60</argLine>
-	            </configuration>
-	        </plugin>
-	    </plugins>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>xtend-install-debug-info</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<outputDirectory>${basedir}/swtbot/xtend-gen</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<configuration>
+					<useUIThread>false</useUIThread>
+					<argLine>${memory-settings} ${os-jvm-flags}
+						-Dorg.eclipse.swtbot.keyboard.layout=EN_US
+						-Dorg.eclipse.swtbot.playback.delay=60</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
