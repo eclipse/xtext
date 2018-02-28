@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.formatting2.regionaccess.HiddenRegionPartAssociation;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 
@@ -19,6 +20,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 public class StringHidden extends StringRegion implements IHiddenRegionPart {
 	private final AbstractHiddenRegion hiddenRegion;
 	private final AbstractRule rule;
+	private HiddenRegionPartAssociation association = null;
 
 	protected StringHidden(AbstractHiddenRegion hidden, AbstractRule rule, int offset, int lenght) {
 		super((StringBasedRegionAccess) hidden.getTextRegionAccess(), offset, lenght);
@@ -52,6 +54,18 @@ public class StringHidden extends StringRegion implements IHiddenRegionPart {
 		if (i > 0)
 			return parts.get(i);
 		return null;
+	}
+
+	protected void setAssociation(HiddenRegionPartAssociation association) {
+		this.association = association;
+	}
+
+	@Override
+	public HiddenRegionPartAssociation getAssociation() {
+		if (association == null) {
+			hiddenRegion.initAssociations();
+		}
+		return association;
 	}
 
 }

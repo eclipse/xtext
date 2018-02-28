@@ -63,7 +63,7 @@ class RegionAccessBuilderTest {
 			     B Simple'foo' Root
 			 0 1  S "1"        Simple:'1'
 			 1    H " "        Whitespace:TerminalRule'WS'
-			        "/**/"     Comment:TerminalRule'ML_COMMENT'
+			        "/**/"     Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			   6    " "        Whitespace:TerminalRule'WS'
 			 7 3  S "foo"      Simple:name=ID
 			     E Simple'foo' Root
@@ -81,7 +81,7 @@ class RegionAccessBuilderTest {
 			     B Simple'foo' Root
 			 0 1  S "1"        Simple:'1'
 			 1    H "\n"       Whitespace:TerminalRule'WS'
-			        "/**/"     Comment:TerminalRule'ML_COMMENT'
+			        "/**/"     Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   6    "\n"       Whitespace:TerminalRule'WS'
 			 7 3  S "foo"      Simple:name=ID
 			     E Simple'foo' Root
@@ -676,6 +676,28 @@ class RegionAccessBuilderTest {
 			      E Mixed'foo' Root:mixed=Mixed path:RootAction/mixed
 			     E RootAction Root
 			14 0 H
+		'''
+	}
+	
+	@Test def void testComments1() {
+		'''
+			/*xxxx*/
+			8
+			/*aaaaa*/
+			c
+			// last
+		'''.toString.trim === '''
+			 0    H "/*xxxx*/" Comment:TerminalRule'ML_COMMENT' Association:NEXT
+			    9   "\n"       Whitespace:TerminalRule'WS'
+			      B ValueList'[c]' Root
+			 9  1  S "8"        Root:'8'
+			10     H "\n"       Whitespace:TerminalRule'WS'
+			         "/*aaa..." Comment:TerminalRule'ML_COMMENT' Association:NEXT
+			   11    "\n"       Whitespace:TerminalRule'WS'
+			21  1  S "c"        ValueList:name+=ID
+			      E ValueList'[c]' Root
+			22    H "\n"       Whitespace:TerminalRule'WS'
+			    8   "// last"  Comment:TerminalRule'SL_COMMENT' Association:CONTAINER
 		'''
 	}
 

@@ -27,10 +27,10 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -80,6 +80,16 @@ public class TextRegionAccessToString {
 		private Map<ITextSegment, String> diffs;
 		private String empty;
 
+		protected ISequentialRegion toSequential(ITextSegment seg) {
+			if (seg instanceof ISequentialRegion) {
+				return (ISequentialRegion) seg;
+			}
+			if (seg instanceof IHiddenRegionPart) {
+				return ((IHiddenRegionPart) seg).getHiddenRegion();
+			}
+			throw new IllegalStateException();
+		}
+
 		public DiffColumn(ITextRegionAccess access) {
 			if (access instanceof ITextRegionAccessDiff) {
 				this.diffs = Maps.newHashMap();
@@ -87,15 +97,15 @@ public class TextRegionAccessToString {
 				int width = 0;
 				int i = 1;
 				for (ITextSegmentDiff diff : this.access.getRegionDifferences()) {
-					ISequentialRegion current = (ISequentialRegion) diff.getModifiedFirstRegion();
-					ISequentialRegion last = (ISequentialRegion) diff.getModifiedLastRegion();
+					ISequentialRegion current = toSequential(diff.getModifiedFirstRegion());
+					ISequentialRegion last = toSequential(diff.getModifiedLastRegion());
 					String text = i + " ";
 					if (width < text.length()) {
 						width = text.length();
 					}
 					while (current != null) {
 						diffs.put(current, text);
-						if (current.equals(last)) {
+						if (current.getOffset() >= last.getOffset()) {
 							break;
 						}
 						current = current.getNextSequentialRegion();
@@ -115,12 +125,12 @@ public class TextRegionAccessToString {
 			}
 			int i = 1;
 			for (ITextSegmentDiff diff : this.access.getRegionDifferences()) {
-				ISequentialRegion current = (ISequentialRegion) diff.getOriginalFirstRegion();
-				ISequentialRegion last = (ISequentialRegion) diff.getOriginalLastRegion();
+				ISequentialRegion current = toSequential(diff.getOriginalFirstRegion());
+				ISequentialRegion last = toSequential(diff.getOriginalLastRegion());
 				List<ITextSegment> regions = Lists.newArrayList();
 				while (current != null) {
 					regions.add(current);
-					if (current == last) {
+					if (current.getOffset() >= last.getOffset()) {
 						break;
 					}
 					current = current.getNextSequentialRegion();
@@ -344,7 +354,8 @@ public class TextRegionAccessToString {
 	protected String toString(IComment comment) {
 		String text = quote(comment.getText());
 		String gammar = toString(comment.getGrammarElement());
-		return String.format("%s Comment:%s", text, gammar);
+		String association = comment.getAssociation() + "";
+		return String.format("%s Comment:%s Association:%s", text, gammar, association);
 	}
 
 	protected String toString(IEObjectRegion region) {

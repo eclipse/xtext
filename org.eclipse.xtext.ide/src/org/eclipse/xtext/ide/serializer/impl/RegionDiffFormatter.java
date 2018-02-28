@@ -96,24 +96,21 @@ public class RegionDiffFormatter {
 		ITextRegionRewriter rewriter = regions.getOriginalTextRegionAccess().getRewriter();
 		List<ITextReplacement> result = Lists.newArrayList();
 		for (ITextSegmentDiff r : regions.getRegionDifferences()) {
-			int originalStart = r.getOriginalFirstRegion().getOffset();
-			int originalLength = r.getOriginalLastRegion().getEndOffset() - originalStart;
-			int modifiedStart = r.getModifiedFirstRegion().getOffset();
-			int modifiedLength = r.getModifiedLastRegion().getEndOffset() - modifiedStart;
-			ITextSegment modifiedRegion = regions.regionForOffset(modifiedStart, modifiedLength);
+			ITextSegment original = r.getOriginalRegion();
+			ITextSegment modified = r.getModifiedRegion();
 			List<ITextReplacement> local = Lists.newArrayList();
 			for (ITextReplacement re : rep) {
-				if (modifiedRegion.contains(re)) {
+				if (modified.contains(re)) {
 					local.add(re);
 				}
 			}
-			String newText;
+			String text;
 			if (local.isEmpty()) {
-				newText = modifiedRegion.getText();
+				text = modified.getText();
 			} else {
-				newText = regions.getRewriter().renderToString(modifiedRegion, local);
+				text = regions.getRewriter().renderToString(modified, local);
 			}
-			ITextReplacement replacement = rewriter.createReplacement(originalStart, originalLength, newText);
+			ITextReplacement replacement = rewriter.createReplacement(original.getOffset(), original.getLength(), text);
 			result.add(replacement);
 		}
 		return result;

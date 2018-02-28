@@ -83,8 +83,8 @@ public class CodeActionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("            ");
       _builder_1.append("String aaa");
       _builder_1.newLine();
-      _builder_1.append("             ");
-      _builder_1.append("[[0, 10] .. [1, 1]]");
+      _builder_1.append("         ");
+      _builder_1.append("[[0, 10] .. [0, 10]]");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.newLine();

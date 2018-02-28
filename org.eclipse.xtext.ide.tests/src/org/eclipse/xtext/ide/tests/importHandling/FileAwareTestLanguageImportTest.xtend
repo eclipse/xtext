@@ -107,15 +107,15 @@ class FileAwareTestLanguageImportTest {
 			--------------------------------------------------------------------------------
 			8 4 "pkg1" -> "newpackage"
 			-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------
-			package pkg1<12:2|
+			package pkg1
 			
-			import newpackage.Foo
+			<14:0|import newpackage.Foo
 			
 			>element Bar {
 				ref Foo
 			}
 			--------------------------------------------------------------------------------
-			12 2 "\n\n" -> "\n\nimport newpacka..."
+			14 0 "" -> "import newpackage..."
 		'''
 	}
 	
@@ -153,13 +153,13 @@ class FileAwareTestLanguageImportTest {
 			--------------------------------------------------------------------------------
 			8 5 "other" -> "pkg1"
 			-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------
-			package pkg1<12:20|
+			package pkg1
 			
-			>element Bar {
+			<14:18|>element Bar {
 				ref Foo
 			}
 			--------------------------------------------------------------------------------
-			12 20 "\n\nimport other.Foo\n\n" -> "\n\n"
+			14 18 "import other.Foo\n\n" -> ""
 		'''
 	}
 	
@@ -194,14 +194,13 @@ class FileAwareTestLanguageImportTest {
 			--------------------------------------------------------------------------------
 			8 3 "foo" -> "foo2"
 			------ inmemory:/foo/bar/Y.fileawaretestlanguage (syntax: <offset|text>) -------
-			package <8:7|foo2.bar><15:2|
-			
-			import foo2.X
+			package <8:7|foo2.bar> 
+			<17:0|import foo2.X
 			
 			>element Y { ref <33:5|X> }
 			--------------------------------------------------------------------------------
 			 8 7 "foo.bar" -> "foo2.bar"
-			15 2 " \n" -> "\n\nimport foo2.X\n\n"
+			17 0 "" -> "import foo2.X\n\n"
 			33 5 "foo.X" -> "X"
 		'''
 	}

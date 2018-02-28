@@ -7,42 +7,48 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.formatting2.regionaccess.HiddenRegionPartAssociation;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPartMerger;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
+
+import com.google.common.base.Preconditions;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StringBasedTextRegionAccessDiffAppender {
-	private StringBasedTextRegionAccessDiff access;
-	private IHiddenRegionPartMerger hiddenRegionMerger;
-	private ISequentialRegion last;
 
-	public StringBasedTextRegionAccessDiffAppender(StringBasedTextRegionAccessDiff access) {
+	private ISequentialRegion last;
+	private ITextSegment diffLastCopy = null;
+	private ITextSegment diffLastOriginal = null;
+	private final StringBasedTextRegionAccessDiff result;
+	private ITextSegment diffFirstCopy = null;
+	private ITextSegment diffFirstOriginal = null;
+	private final Map<ITextSegment, String> textChanges;
+
+	public StringBasedTextRegionAccessDiffAppender(ITextRegionAccess base, Map<ITextSegment, String> textChanges) {
 		super();
-		this.access = access;
-		this.hiddenRegionMerger = access.getResource().getResourceServiceProvider().get(IHiddenRegionPartMerger.class);
+		this.result = new StringBasedTextRegionAccessDiff(base);
+		this.textChanges = textChanges;
+		IHiddenRegion region = base.regionForRootEObject().getPreviousHiddenRegion();
+		this.diffLastOriginal = region;
+		this.diffLastCopy = appendHiddenRegion(region.isUndefined());
 	}
 
 	protected StringHiddenRegion appendHiddenRegion(boolean undefined) {
-		if (this.last instanceof StringHiddenRegion) {
-			StringHiddenRegion result = (StringHiddenRegion) this.last;
-			result.setUndefined(result.isUndefined() || undefined);
-			return result;
-		}
 		StringSemanticRegion previous = (StringSemanticRegion) this.last;
-		StringHiddenRegion region = new StringHiddenRegion(access);
+		StringHiddenRegion region = new StringHiddenRegion(result);
 		if (previous != null) {
 			previous.setTrailingHiddenRegion(region);
 			region.setPrevious(previous);
@@ -52,70 +58,122 @@ public class StringBasedTextRegionAccessDiffAppender {
 		return region;
 	}
 
-	protected IHiddenRegion copyAndAppend(IHiddenRegion source) {
-		ISequentialRegion last2 = this.last;
-		StringHiddenRegion region = appendHiddenRegion(source.isUndefined());
-		List<IHiddenRegionPart> parts;
-		if (region == last2) {
-			parts = hiddenRegionMerger.merge(access.getOriginalTextRegionAccess(), region, source, false);
-		} else {
-			parts = source.getParts();
+	public void beginDiff() {
+		if (diffFirstOriginal == null && diffFirstCopy == null && diffNesting == 0) {
+			diffFirstOriginal = diffLastOriginal;
+			diffFirstCopy = diffLastCopy;
 		}
-		copyHiddenRegionParts(region, parts);
-		return region;
+		diffNesting++;
 	}
 
-	protected IHiddenRegion copyAndAppend(IHiddenRegion region1, IHiddenRegion region2) {
-		StringHiddenRegion region = appendHiddenRegion(region1.isUndefined() || region2.isUndefined());
-		ITextRegionAccess original = access.getOriginalTextRegionAccess();
-		List<IHiddenRegionPart> merged = hiddenRegionMerger.merge(original, region1, region2, false);
-		copyHiddenRegionParts(region, merged);
-		return region;
+	private int diffNesting = 0;
+
+	public void endDiff() {
+		diffNesting--;
 	}
 
-	public SequentialRegionDiff copyAndAppend(IHiddenRegion originalFirst, IHiddenRegion originalLast,
-			IHiddenRegion substituteFirst, IHiddenRegion substituteLast) {
-		if (substituteFirst == substituteLast) {
-			return copySurroundingHidden(originalFirst, originalLast, true);
+	protected void recordDiff(ITextSegment original, ITextSegment copy) {
+		if (diffNesting == 0) {
+			Preconditions.checkArgument(original.getTextRegionAccess() == result.getOriginalTextRegionAccess());
 		}
-		IHiddenRegion first = copyAndAppend(originalFirst, substituteFirst);
-		ISemanticRegion firstSem = substituteFirst.getNextSemanticRegion();
-		ISemanticRegion lastSem = substituteLast.getPreviousSemanticRegion();
-		copyAndAppend(firstSem, lastSem);
-		IHiddenRegion last = copyAndAppend(substituteLast, originalLast);
-		return new SequentialRegionDiff(originalFirst, originalLast, first, last);
+		if (diffFirstOriginal != null && diffFirstCopy != null && diffNesting == 0) {
+			result.append(new SequentialRegionDiff(diffFirstOriginal, original, diffFirstCopy, copy));
+			diffFirstCopy = null;
+			diffFirstOriginal = null;
+		}
+		diffLastOriginal = original;
+		diffLastCopy = copy;
 	}
 
-	public ISemanticRegion copyAndAppend(ISemanticRegion source, String text) {
-		if (this.last instanceof StringSemanticRegion) {
-			appendHiddenRegion(true);
+	public StringBasedTextRegionAccessDiff finish() {
+		if (this.last instanceof ISemanticRegion) {
+			appendHiddenRegion(false);
 		}
-		EObject semanticElement = source.getSemanticElement();
-		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
-		int offset = access.append(text);
-		EObject grammar = source.getGrammarElement();
-		StringHiddenRegion previous = (StringHiddenRegion) this.last;
-		StringSemanticRegion result = new StringSemanticRegion(access, region, grammar, offset, text.length());
-		region.addChild(result);
-		previous.setNext(result);
-		result.setLeadingHiddenRegion(previous);
-		this.last = result;
+		updateEObjectRegions();
+		if (diffFirstOriginal != null && diffFirstCopy != null && diffFirstCopy != null) {
+			IHiddenRegion orig = result.getOriginalTextRegionAccess().regionForRootEObject().getNextHiddenRegion();
+			result.append(new SequentialRegionDiff(diffFirstOriginal, orig, diffFirstCopy, this.last));
+			diffFirstCopy = null;
+			diffFirstOriginal = null;
+		}
 		return result;
 	}
 
-	protected ISequentialRegion copyAndAppend(ISequentialRegion first, ISequentialRegion last) {
-		ISequentialRegion current = first;
-		ISequentialRegion result = null;
+	protected IHiddenRegion copyAndAppend(IHiddenRegion source) {
+		StringHiddenRegion region = appendHiddenRegion(source.isUndefined());
+		for (IHiddenRegionPart part : source.getParts()) {
+			copyAndAppend(part);
+		}
+		return region;
+	}
+
+	public void copyAndAppend(IHiddenRegion region, HiddenRegionPartAssociation association) {
+		for (IHiddenRegionPart part : region.getParts()) {
+			if (part.getAssociation() == association) {
+				copyAndAppend(part);
+			}
+		}
+	}
+
+	public IHiddenRegionPart copyAndAppend(IHiddenRegionPart part) {
+		StringHiddenRegion region;
+		if (this.last instanceof StringHiddenRegion) {
+			region = (StringHiddenRegion) this.last;
+		} else {
+			region = appendHiddenRegion(true);
+		}
+		String text = part.getText();
+		int offset = result.append(text);
+		if (part instanceof IComment) {
+			IComment comment = ((IComment) part);
+			AbstractRule grammarElement = (AbstractRule) comment.getGrammarElement();
+			StringComment newComment = new StringComment(region, grammarElement, offset, text.length());
+			region.addPart(newComment);
+			recordDiff(part, newComment);
+			return newComment;
+		} else if (part instanceof IWhitespace) {
+			IWhitespace ws = (IWhitespace) part;
+			AbstractRule grammarElement = (AbstractRule) ws.getGrammarElement();
+			StringWhitespace newWs = new StringWhitespace(region, grammarElement, offset, text.length());
+			region.addPart(newWs);
+			recordDiff(part, newWs);
+			return newWs;
+		}
+		throw new IllegalStateException();
+	}
+
+	protected ISemanticRegion copyAndAppend(ISemanticRegion source) {
+		StringHiddenRegion hidden = (StringHiddenRegion) this.last;
+		EObject semanticElement = source.getSemanticElement();
+		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
+		String changedText = textChanges.get(source);
+		String newText = changedText != null ? changedText : source.getText();
+		int offset = result.append(newText);
+		EObject grammar = source.getGrammarElement();
+		StringSemanticRegion result = new StringSemanticRegion(this.result, region, grammar, offset, newText.length());
+		region.addChild(result);
+		hidden.setNext(result);
+		result.setLeadingHiddenRegion(hidden);
+		this.last = result;
+		recordDiff(source, result);
+		if (changedText != null && this.diffNesting == 0) {
+			this.result.append(new SequentialRegionDiff(source, source, result, result));
+		}
+		return result;
+	}
+
+	public void copyAndAppend(ISemanticRegion substituteFirst, ISemanticRegion substituteLast) {
+		if (!(this.last instanceof StringHiddenRegion)) {
+			appendHiddenRegion(true);
+		}
+		ISequentialRegion current = substituteFirst;
 		while (true) {
 			if (current instanceof IHiddenRegion) {
 				copyAndAppend((IHiddenRegion) current);
 			} else if (current instanceof ISemanticRegion) {
-				copyAndAppend((ISemanticRegion) current, current.getText());
+				copyAndAppend((ISemanticRegion) current);
 			}
-			if (result == null) {
-				result = this.last;
-			}
-			if (current == last) {
+			if (current == substituteLast) {
 				break;
 			}
 			current = current.getNextSequentialRegion();
@@ -123,61 +181,26 @@ public class StringBasedTextRegionAccessDiffAppender {
 				throw new IllegalStateException("last didn't match");
 			}
 		}
-		return result;
 	}
 
-	protected void copyHiddenRegionParts(StringHiddenRegion region, Iterable<IHiddenRegionPart> parts) {
-		for (IHiddenRegionPart part : parts) {
-			String text = part.getText();
-			int offset = access.append(text);
-			if (part instanceof IComment) {
-				IComment comment = ((IComment) part);
-				AbstractRule grammarElement = (AbstractRule) comment.getGrammarElement();
-				StringComment newComment = new StringComment(region, grammarElement, offset, text.length());
-				region.addPart(newComment);
-			} else if (part instanceof IWhitespace) {
-				IWhitespace ws = (IWhitespace) part;
-				AbstractRule grammarElement = (AbstractRule) ws.getGrammarElement();
-				StringWhitespace newWs = new StringWhitespace(region, grammarElement, offset, text.length());
-				region.addPart(newWs);
+	private boolean diffDelete = false;
+
+	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original) {
+		AbstractEObjectRegion eobjRegion = result.regionForEObject(eobj);
+		if (eobjRegion == null) {
+			if (original == null) {
+				original = result.getOriginalTextRegionAccess().regionForEObject(eobj);
+			}
+			if (original != null) {
+				eobjRegion = new StringEObjectRegion(result, original.getGrammarElement(), eobj);
+				result.add(eobjRegion);
+				AbstractEObjectRegion parent = getOrCreateEObjectRegion(eobj.eContainer(), null);
+				if (parent != null) {
+					parent.addChild(eobjRegion);
+				}
 			}
 		}
-	}
-
-	public SequentialRegionDiff copySurroundingHidden(IHiddenRegion originalFirst, IHiddenRegion originalLast,
-			boolean delete) {
-		boolean firstHidden = originalFirst instanceof IHiddenRegion;
-		boolean lastHidden = originalLast instanceof IHiddenRegion;
-		if (firstHidden && lastHidden) {
-			IHiddenRegion hiddenFirst = (IHiddenRegion) originalFirst;
-			IHiddenRegion hiddenLast = (IHiddenRegion) originalLast;
-			StringHiddenRegion merged = appendHiddenRegion(hiddenFirst.isUndefined() || hiddenLast.isUndefined());
-			ITextRegionAccess original = access.getOriginalTextRegionAccess();
-			List<IHiddenRegionPart> parts = hiddenRegionMerger.merge(original, hiddenFirst, hiddenLast, delete);
-			copyHiddenRegionParts(merged, parts);
-			return new SequentialRegionDiff(originalFirst, originalLast, merged, merged);
-		}
-		IHiddenRegion inserted = null;
-		if (originalFirst == null) {
-			if (!lastHidden) {
-				inserted = appendHiddenRegion(true);
-			}
-		} else if (originalLast == null) {
-			if (!firstHidden) {
-				inserted = appendHiddenRegion(true);
-			}
-		} else if (!firstHidden && !lastHidden) {
-			inserted = appendHiddenRegion(true);
-		}
-		return new SequentialRegionDiff(originalFirst, originalLast, inserted, inserted);
-	}
-
-	public IHiddenRegionPartMerger getHiddenRegionMerger() {
-		return hiddenRegionMerger;
-	}
-
-	public StringBasedTextRegionAccessDiff getRectionAccessDiff() {
-		return access;
+		return eobjRegion;
 	}
 
 	protected void updateEObjectRegions() {
@@ -206,7 +229,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 			EObject eobj = sem.getSemanticElement();
 			IHiddenRegion previousHiddenRegion = sem.getPreviousHiddenRegion();
 			while (eobj != null) {
-				AbstractEObjectRegion eobjRegion = access.regionForEObject(eobj);
+				AbstractEObjectRegion eobjRegion = result.regionForEObject(eobj);
 				if (eobjRegion.getPreviousHiddenRegion() != null) {
 					break;
 				}
@@ -220,24 +243,6 @@ public class StringBasedTextRegionAccessDiffAppender {
 				current = next;
 			}
 		}
-	}
-
-	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original) {
-		AbstractEObjectRegion eobjRegion = access.regionForEObject(eobj);
-		if (eobjRegion == null) {
-			if (original == null) {
-				original = access.getOriginalTextRegionAccess().regionForEObject(eobj);
-			}
-			if (original != null) {
-				eobjRegion = new StringEObjectRegion(access, original.getGrammarElement(), eobj);
-				access.add(eobjRegion);
-				AbstractEObjectRegion parent = getOrCreateEObjectRegion(eobj.eContainer(), null);
-				if (parent != null) {
-					parent.addChild(eobjRegion);
-				}
-			}
-		}
-		return eobjRegion;
 	}
 
 }

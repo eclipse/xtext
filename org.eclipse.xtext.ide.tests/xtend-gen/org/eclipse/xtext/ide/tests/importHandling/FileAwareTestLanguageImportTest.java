@@ -166,10 +166,10 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
-    _builder_2.append("package pkg1<12:2|");
+    _builder_2.append("package pkg1");
     _builder_2.newLine();
     _builder_2.newLine();
-    _builder_2.append("import newpackage.Foo");
+    _builder_2.append("<14:0|import newpackage.Foo");
     _builder_2.newLine();
     _builder_2.newLine();
     _builder_2.append(">element Bar {");
@@ -181,7 +181,7 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("--------------------------------------------------------------------------------");
     _builder_2.newLine();
-    _builder_2.append("12 2 \"\\n\\n\" -> \"\\n\\nimport newpacka...\"");
+    _builder_2.append("14 0 \"\" -> \"import newpackage...\"");
     _builder_2.newLine();
     this._importTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
   }
@@ -240,10 +240,10 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("-------- inmemory:/file2.fileawaretestlanguage (syntax: <offset|text>) ---------");
     _builder_2.newLine();
-    _builder_2.append("package pkg1<12:20|");
+    _builder_2.append("package pkg1");
     _builder_2.newLine();
     _builder_2.newLine();
-    _builder_2.append(">element Bar {");
+    _builder_2.append("<14:18|>element Bar {");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("ref Foo");
@@ -252,7 +252,7 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("--------------------------------------------------------------------------------");
     _builder_2.newLine();
-    _builder_2.append("12 20 \"\\n\\nimport other.Foo\\n\\n\" -> \"\\n\\n\"");
+    _builder_2.append("14 18 \"import other.Foo\\n\\n\" -> \"\"");
     _builder_2.newLine();
     this._importTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
   }
@@ -301,10 +301,9 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.newLine();
     _builder_2.append("------ inmemory:/foo/bar/Y.fileawaretestlanguage (syntax: <offset|text>) -------");
     _builder_2.newLine();
-    _builder_2.append("package <8:7|foo2.bar><15:2|");
+    _builder_2.append("package <8:7|foo2.bar> ");
     _builder_2.newLine();
-    _builder_2.newLine();
-    _builder_2.append("import foo2.X");
+    _builder_2.append("<17:0|import foo2.X");
     _builder_2.newLine();
     _builder_2.newLine();
     _builder_2.append(">element Y { ref <33:5|X> }");
@@ -314,7 +313,7 @@ public class FileAwareTestLanguageImportTest {
     _builder_2.append(" ");
     _builder_2.append("8 7 \"foo.bar\" -> \"foo2.bar\"");
     _builder_2.newLine();
-    _builder_2.append("15 2 \" \\n\" -> \"\\n\\nimport foo2.X\\n\\n\"");
+    _builder_2.append("17 0 \"\" -> \"import foo2.X\\n\\n\"");
     _builder_2.newLine();
     _builder_2.append("33 5 \"foo.X\" -> \"X\"");
     _builder_2.newLine();

@@ -120,9 +120,9 @@ class ChangeSerializerWithEmfTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#20<3:1| NewName ><4:9| ChangedName>
+			#20 <4:0|NewName ><4:9| ChangedName>
 			--------------------------------------------------------------------------------
-			3 1 " " -> " NewName "
+			4 0 "" -> "NewName "
 			4 9 "DslEClass" -> " ChangedName"
 			---------------------------- inmemory:/file2.ecore -----------------------------
 			<?xml version="1.0" encoding="UTF-8"?>

@@ -104,7 +104,7 @@ public class RegionAccessBuilderTest {
     _builder_1.append("1    H \" \"        Whitespace:TerminalRule\'WS\'");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\' Association:CONTAINER");
     _builder_1.newLine();
     _builder_1.append("   ");
     _builder_1.append("6    \" \"        Whitespace:TerminalRule\'WS\'");
@@ -144,7 +144,7 @@ public class RegionAccessBuilderTest {
     _builder_1.append("1    H \"\\n\"       Whitespace:TerminalRule\'WS\'");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\'");
+    _builder_1.append("\"/**/\"     Comment:TerminalRule\'ML_COMMENT\' Association:NEXT");
     _builder_1.newLine();
     _builder_1.append("   ");
     _builder_1.append("6    \"\\n\"       Whitespace:TerminalRule\'WS\'");
@@ -1471,6 +1471,54 @@ public class RegionAccessBuilderTest {
     _builder_1.append("E RootAction Root");
     _builder_1.newLine();
     _builder_1.append("14 0 H");
+    _builder_1.newLine();
+    this.operator_tripleEquals(_trim, _builder_1);
+  }
+  
+  @Test
+  public void testComments1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*xxxx*/");
+    _builder.newLine();
+    _builder.append("8");
+    _builder.newLine();
+    _builder.append("/*aaaaa*/");
+    _builder.newLine();
+    _builder.append("c");
+    _builder.newLine();
+    _builder.append("// last");
+    _builder.newLine();
+    String _trim = _builder.toString().trim();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0    H \"/*xxxx*/\" Comment:TerminalRule\'ML_COMMENT\' Association:NEXT");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("9   \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("B ValueList\'[c]\' Root");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("9  1  S \"8\"        Root:\'8\'");
+    _builder_1.newLine();
+    _builder_1.append("10     H \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("         ");
+    _builder_1.append("\"/*aaa...\" Comment:TerminalRule\'ML_COMMENT\' Association:NEXT");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("11    \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("21  1  S \"c\"        ValueList:name+=ID");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("E ValueList\'[c]\' Root");
+    _builder_1.newLine();
+    _builder_1.append("22    H \"\\n\"       Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("8   \"// last\"  Comment:TerminalRule\'SL_COMMENT\' Association:CONTAINER");
     _builder_1.newLine();
     this.operator_tripleEquals(_trim, _builder_1);
   }

@@ -26,6 +26,7 @@ class RegionAccessCommentsTest {
 	@Test def void testDeleteFirstRegion1() {
 		val access = '''
 			/*h*/
+			
 			/*8*/
 			8 //8
 			/*a*/
@@ -35,23 +36,23 @@ class RegionAccessCommentsTest {
 			val foo = access.regionForRootEObject.allRegionsFor.keyword("8")
 			remove(foo)
 		] === '''
-			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
-			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
-			   12   "\n"       Whitespace:TerminalRule'WS'
+			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
+			        "\n\n"     Whitespace:TerminalRule'WS'
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
+			   13   "\n"       Whitespace:TerminalRule'WS'
 			        B ValueList'[a]' Root
-			12  1    S "a"        ValueList:name+=ID
+			13  1    S "a"        ValueList:name+=ID
 			        E ValueList'[a]' Root
-			13  0   H
+			14  0   H
 			------------ diff 1 ------------
-			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
-			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*8*/"    Comment:TerminalRule'ML_COMMENT'
-			   12   "\n"       Whitespace:TerminalRule'WS'
-			12  1 S "8"        Root:'8'
-			13    H " "        Whitespace:TerminalRule'WS'
-			        "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
+			        "\n\n"     Whitespace:TerminalRule'WS'
+			        "/*8*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
+			   13   "\n"       Whitespace:TerminalRule'WS'
+			13  1 S "8"        Root:'8'
+			14    H " "        Whitespace:TerminalRule'WS'
+			        "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   11   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}
@@ -70,25 +71,25 @@ class RegionAccessCommentsTest {
 			val foo = access.regionForRootEObject.allRegionsFor.keyword("8")
 			remove(foo)
 		] === '''
-			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n\n"     Whitespace:TerminalRule'WS'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   13   "\n"       Whitespace:TerminalRule'WS'
 			        B ValueList'[a]' Root
 			13  1    S "a"        ValueList:name+=ID
 			        E ValueList'[a]' Root
 			14  0   H
 			------------ diff 1 ------------
-			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n\n"     Whitespace:TerminalRule'WS'
-			        "/*81*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*81*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*82*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*82*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   21   "\n"       Whitespace:TerminalRule'WS'
 			21  1 S "8"        Root:'8'
 			22    H " "        Whitespace:TerminalRule'WS'
-			        "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   11   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}
@@ -107,27 +108,27 @@ class RegionAccessCommentsTest {
 			val foo = access.regionForRootEObject.allRegionsFor.keyword("8")
 			remove(foo)
 		] === '''
-			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*81*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*81*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n\n"     Whitespace:TerminalRule'WS'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   20   "\n"       Whitespace:TerminalRule'WS'
 			        B ValueList'[a]' Root
 			20  1    S "a"        ValueList:name+=ID
 			        E ValueList'[a]' Root
 			21  0   H
 			------------ diff 1 ------------
-			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*81*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*81*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n\n"     Whitespace:TerminalRule'WS'
-			        "/*82*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*82*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   21   "\n"       Whitespace:TerminalRule'WS'
 			21  1 S "8"        Root:'8'
 			22    H " "        Whitespace:TerminalRule'WS'
-			        "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   11   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}
@@ -146,29 +147,29 @@ class RegionAccessCommentsTest {
 			val foo = access.regionForRootEObject.allRegionsFor.keyword("8")
 			remove(foo)
 		] === '''
-			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    1 H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*81*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*81*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*82*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*82*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n\n"     Whitespace:TerminalRule'WS'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   27   "\n"       Whitespace:TerminalRule'WS'
 			        B ValueList'[a]' Root
 			27  1    S "a"        ValueList:name+=ID
 			        E ValueList'[a]' Root
 			28  0   H
 			------------ diff 1 ------------
-			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT'
+			 0    H "/*h*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*81*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*81*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*82*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*82*/"   Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			   21   "\n\n"     Whitespace:TerminalRule'WS'
 			21  1 S "8"        Root:'8'
 			22    H " "        Whitespace:TerminalRule'WS'
-			        "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   11   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}
@@ -189,9 +190,9 @@ class RegionAccessCommentsTest {
 			        B ValueList'[a, b]' Root
 			 0  1    S "8"        Root:'8'
 			 1    1  H "\n"       Whitespace:TerminalRule'WS'
-			         "/*b1*/"   Comment:TerminalRule'ML_COMMENT'
+			         "/*b1*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			         "\n"       Whitespace:TerminalRule'WS'
-			         "/*b2*/"   Comment:TerminalRule'ML_COMMENT'
+			         "/*b2*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   15    "\n"       Whitespace:TerminalRule'WS'
 			16  1    S "b"        ValueList:name+=ID
 			        E ValueList'[a, b]' Root
@@ -200,12 +201,12 @@ class RegionAccessCommentsTest {
 			 1  1 H "\n"       Whitespace:TerminalRule'WS'
 			 2  1 S "a"        ValueList:name+=ID
 			 3    H " "        Whitespace:TerminalRule'WS'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:PREVIOUS
 			        " "        Whitespace:TerminalRule'WS'
-			        "//a\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*b1*/"   Comment:TerminalRule'ML_COMMENT'
+			        "//a\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*b1*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			        "\n"       Whitespace:TerminalRule'WS'
-			        "/*b2*/"   Comment:TerminalRule'ML_COMMENT'
+			        "/*b2*/"   Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   25   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}
@@ -229,31 +230,31 @@ class RegionAccessCommentsTest {
 			 0  0   H
 			        B ValueList'[a, b, c]' Root
 			 0  1    S "8"        Root:'8'
-			 1    1  H "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			         "/*b*/"    Comment:TerminalRule'ML_COMMENT'
+			 1    1  H "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			         "/*b*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10    "\n"       Whitespace:TerminalRule'WS'
 			11  1    S "b"        ValueList:name+=ID
-			12    2  H "//b\n"    Comment:TerminalRule'SL_COMMENT'
-			         "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			12    2  H "//b\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			         "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10    "\n"       Whitespace:TerminalRule'WS'
 			22  1 2  S "a"        ValueList:name+=ID
-			23    2  H "//a\n"    Comment:TerminalRule'SL_COMMENT'
-			         "/*c*/"    Comment:TerminalRule'ML_COMMENT'
+			23    2  H "//a\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			         "/*c*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10    "\n"       Whitespace:TerminalRule'WS'
 			33  1    S "c"        ValueList:name+=ID
 			        E ValueList'[a, b, c]' Root
 			34  0   H
 			------------ diff 1 ------------
-			 1    H "//8\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*a*/"    Comment:TerminalRule'ML_COMMENT'
+			 1    H "//8\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*a*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10   "\n"       Whitespace:TerminalRule'WS'
 			11  1 S "a"        ValueList:name+=ID
-			12    H "//a\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*b*/"    Comment:TerminalRule'ML_COMMENT'
+			12    H "//a\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*b*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10   "\n"       Whitespace:TerminalRule'WS'
 			------------ diff 2 ------------
-			23    H "//b\n"    Comment:TerminalRule'SL_COMMENT'
-			        "/*c*/"    Comment:TerminalRule'ML_COMMENT'
+			23    H "//b\n"    Comment:TerminalRule'SL_COMMENT' Association:PREVIOUS
+			        "/*c*/"    Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   10   "\n"       Whitespace:TerminalRule'WS'
 		'''
 	}

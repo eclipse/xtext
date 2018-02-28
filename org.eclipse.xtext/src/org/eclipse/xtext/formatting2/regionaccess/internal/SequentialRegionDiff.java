@@ -7,24 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SequentialRegionDiff implements Comparable<SequentialRegionDiff>, ITextSegmentDiff {
-	private final ISequentialRegion originalFirst;
-	private final ISequentialRegion originalLast;
-	private final ISequentialRegion substituteFirst;
-	private final ISequentialRegion substituteLast;
+	private final ITextSegment originalFirst;
+	private final ITextSegment originalLast;
+	private final ITextSegment substituteFirst;
+	private final ITextSegment substituteLast;
 
 	public SequentialRegionDiff(ISequentialRegion originalFirst, ISequentialRegion originalLast) {
 		this(originalFirst, originalLast, null, null);
 	}
 
-	public SequentialRegionDiff(ISequentialRegion originalFirst, ISequentialRegion originalLast,
-			ISequentialRegion substituteFirst, ISequentialRegion substituteLast) {
+	public SequentialRegionDiff(ITextSegment originalFirst, ITextSegment originalLast, ITextSegment substituteFirst,
+			ITextSegment substituteLast) {
 		super();
 		this.originalFirst = originalFirst;
 		this.originalLast = originalLast;
@@ -38,23 +41,50 @@ public class SequentialRegionDiff implements Comparable<SequentialRegionDiff>, I
 	}
 
 	@Override
-	public ISequentialRegion getModifiedFirstRegion() {
+	public ITextSegment getModifiedFirstRegion() {
 		return this.substituteFirst;
 	}
 
 	@Override
-	public ISequentialRegion getModifiedLastRegion() {
+	public ITextSegment getModifiedLastRegion() {
 		return this.substituteLast;
 	}
 
 	@Override
-	public ISequentialRegion getOriginalFirstRegion() {
+	public ITextSegment getModifiedRegion() {
+		if (isSingleSemanticRegion()) {
+			return substituteFirst;
+		}
+		return getRegion(substituteFirst, substituteLast);
+	}
+
+	@Override
+	public ITextSegment getOriginalFirstRegion() {
 		return this.originalFirst;
 	}
 
 	@Override
-	public ISequentialRegion getOriginalLastRegion() {
+	public ITextSegment getOriginalLastRegion() {
 		return this.originalLast;
+	}
+
+	@Override
+	public ITextSegment getOriginalRegion() {
+		if (isSingleSemanticRegion()) {
+			return originalFirst;
+		}
+		return getRegion(originalFirst, originalLast);
+	}
+
+	protected ITextSegment getRegion(ITextSegment first, ITextSegment last) {
+		int offset = first instanceof IHiddenRegion ? first.getOffset() : first.getEndOffset();
+		int endOffset = last instanceof IHiddenRegion ? last.getEndOffset() : last.getOffset();
+		return first.getTextRegionAccess().regionForOffset(offset, endOffset - offset);
+	}
+
+	protected boolean isSingleSemanticRegion() {
+		return originalFirst == originalLast && substituteFirst == substituteLast
+				&& originalFirst instanceof ISemanticRegion && substituteFirst instanceof ISemanticRegion;
 	}
 
 }

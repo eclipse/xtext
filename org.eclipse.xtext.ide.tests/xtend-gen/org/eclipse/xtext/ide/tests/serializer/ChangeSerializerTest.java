@@ -138,11 +138,11 @@ public class ChangeSerializerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_1.newLine();
-    _builder_1.append("#1 root { child1 { foo1;<24:1| bazz; >} }");
+    _builder_1.append("#1 root { child1 { foo1; <25:0|bazz; >} }");
     _builder_1.newLine();
     _builder_1.append("--------------------------------------------------------------------------------");
     _builder_1.newLine();
-    _builder_1.append("24 1 \" \" -> \" bazz; \"");
+    _builder_1.append("25 0 \"\" -> \"bazz; \"");
     _builder_1.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }
@@ -180,13 +180,19 @@ public class ChangeSerializerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_1.newLine();
-    _builder_1.append("#1 root {<9:9| bazz; /**/ >child1;");
+    _builder_1.append("#1 root {<9:0| bazz;>");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("/**/ ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("child1;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("--------------------------------------------------------------------------------");
     _builder_1.newLine();
-    _builder_1.append("9 9 \"\\n\t/**/ \\n\t\" -> \" bazz; /**/ \"");
+    _builder_1.append("9 0 \"\" -> \" bazz;\"");
     _builder_1.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }
@@ -222,11 +228,11 @@ public class ChangeSerializerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_1.newLine();
-    _builder_1.append("#1 root { child1 { foo1;<24:1| bazz1; bazz2; >} }");
+    _builder_1.append("#1 root { child1 { foo1; <25:0|bazz1; bazz2; >} }");
     _builder_1.newLine();
     _builder_1.append("--------------------------------------------------------------------------------");
     _builder_1.newLine();
-    _builder_1.append("24 1 \" \" -> \" bazz1; bazz2; \"");
+    _builder_1.append("25 0 \"\" -> \"bazz1; bazz2; \"");
     _builder_1.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }
@@ -249,11 +255,11 @@ public class ChangeSerializerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_1.newLine();
-    _builder_1.append("#1 root { child1 {<18:7|  >} }");
+    _builder_1.append("#1 root { child1 { <19:5|> } }");
     _builder_1.newLine();
     _builder_1.append("--------------------------------------------------------------------------------");
     _builder_1.newLine();
-    _builder_1.append("18 7 \" foo1; \" -> \"  \"");
+    _builder_1.append("19 5 \"foo1;\" -> \"\"");
     _builder_1.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }
@@ -277,11 +283,13 @@ public class ChangeSerializerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_1.newLine();
-    _builder_1.append("#1 root {<9:17|  >}");
+    _builder_1.append("#1 root { <10:7|> <18:7|> }");
     _builder_1.newLine();
     _builder_1.append("--------------------------------------------------------------------------------");
     _builder_1.newLine();
-    _builder_1.append("9 17 \" child1; child2; \" -> \"  \"");
+    _builder_1.append("10 7 \"child1;\" -> \"\"");
+    _builder_1.newLine();
+    _builder_1.append("18 7 \"child2;\" -> \"\"");
     _builder_1.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_1);
   }

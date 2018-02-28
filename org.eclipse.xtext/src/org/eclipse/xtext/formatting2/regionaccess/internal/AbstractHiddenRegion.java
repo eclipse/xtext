@@ -14,12 +14,14 @@ import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
+import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPartAssociator;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -108,7 +110,7 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	public ISemanticRegion getNextSemanticRegion() {
 		return next;
 	}
-	
+
 	@Override
 	public ISequentialRegion getNextSequentialRegion() {
 		return next;
@@ -127,7 +129,7 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 
 	@Override
 	public List<IHiddenRegionPart> getParts() {
-		return ImmutableList.<IHiddenRegionPart> copyOf(hiddens);
+		return ImmutableList.<IHiddenRegionPart>copyOf(hiddens);
 	}
 
 	@Override
@@ -139,7 +141,7 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return previous;
 	}
-	
+
 	@Override
 	public ISequentialRegion getPreviousSequentialRegion() {
 		return previous;
@@ -176,5 +178,19 @@ public abstract class AbstractHiddenRegion extends AbstractTextSegment implement
 	@Override
 	public ISemanticRegionFinder immediatelyPreceding() {
 		return new SemanticRegionMatcher(getPreviousSemanticRegion());
+	}
+
+	protected void initAssociations() {
+		IResourceServiceProvider provider = access.getResource().getResourceServiceProvider();
+		IHiddenRegionPartAssociator associator = provider.get(IHiddenRegionPartAssociator.class);
+		associator.associate(this, (part, status) -> {
+			if (part instanceof NodeHidden) {
+				((NodeHidden) part).setAssociation(status);
+			} else if (part instanceof StringHidden) {
+				((StringHidden) part).setAssociation(status);
+			} else {
+				throw new IllegalStateException();
+			}
+		});
 	}
 }

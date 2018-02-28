@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import static org.eclipse.xtext.formatting2.regionaccess.HiddenRegionPartAssociation.*;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISequentialRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
@@ -26,166 +29,155 @@ import org.eclipse.xtext.util.ITextRegion;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBuilder {
 
-	protected static class MultiInsertionRewriteAction extends RewriteAction {
+	private final static Logger LOG = Logger.getLogger(StringBasedTextRegionAccessDiffBuilder.class);
 
-		private final List<RewriteAction> delegates = Lists.newArrayList();
+	protected interface Insert {
+		public IHiddenRegion getInsertFirst();
 
-		public MultiInsertionRewriteAction(ISequentialRegion originalFirst, ISequentialRegion originalLast) {
-			super(originalFirst, originalLast);
+		public IHiddenRegion getInsertLast();
+	}
+
+	protected static class MoveSource extends Rewrite {
+		private MoveTarget target = null;
+
+		public MoveSource(IHiddenRegion first, IHiddenRegion last) {
+			super(first, last);
 		}
 
-		@Override
-		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			ISequentialRegion substituteFirst = null;
-			ISequentialRegion substituteLast = null;
-			for (int i = 0; i < delegates.size(); i++) {
-				SequentialRegionDiff rewrite = delegates.get(i).apply(appender);
-				if (i == 0) {
-					substituteFirst = rewrite.getModifiedFirstRegion();
-				}
-				if (i == delegates.size() - 1) {
-					substituteLast = rewrite.getModifiedLastRegion();
-				}
-			}
-			return new SequentialRegionDiff(originalFirst, originalLast, substituteFirst, substituteLast);
+		public MoveTarget getTarget() {
+			return target;
 		}
 
 	}
 
-	protected static class RemoveRewriteAction extends RewriteAction {
-		private boolean delete;
+	protected static class MoveTarget extends Rewrite implements Insert {
+		private final MoveSource source;
 
-		public RemoveRewriteAction(IHiddenRegion originalFirst, IHiddenRegion originalLast, boolean delete) {
-			super(originalFirst, originalLast);
-			this.delete = delete;
+		public MoveTarget(IHiddenRegion insertAt, MoveSource source) {
+			super(insertAt, insertAt);
+			this.source = source;
+			this.source.target = this;
 		}
 
 		@Override
-		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			return appender.copySurroundingHidden((IHiddenRegion) originalFirst, (IHiddenRegion) originalLast, delete);
+		public IHiddenRegion getInsertFirst() {
+			return this.source.originalFirst;
+		}
+
+		@Override
+		public IHiddenRegion getInsertLast() {
+			return this.source.originalLast;
 		}
 
 	}
 
-	protected static class ReplaceRewriteAction extends RewriteAction {
+	protected static class Remove extends Rewrite {
+
+		public Remove(IHiddenRegion originalFirst, IHiddenRegion originalLast) {
+			super(originalFirst, originalLast);
+		}
+
+	}
+
+	protected static class Replace1 extends Rewrite implements Insert {
 		private final IHiddenRegion modifiedFirst;
 		private final IHiddenRegion modifiedLast;
 
-		public ReplaceRewriteAction(IHiddenRegion originalFirst, IHiddenRegion originalLast,
-				IHiddenRegion modifiedFirst, IHiddenRegion modifiedLast) {
+		public Replace1(IHiddenRegion originalFirst, IHiddenRegion originalLast, IHiddenRegion modifiedFirst,
+				IHiddenRegion modifiedLast) {
 			super(originalFirst, originalLast);
 			this.modifiedFirst = modifiedFirst;
 			this.modifiedLast = modifiedLast;
 		}
 
 		@Override
-		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			SequentialRegionDiff result = appender.copyAndAppend((IHiddenRegion) originalFirst,
-					(IHiddenRegion) originalLast, modifiedFirst, modifiedLast);
-			return result;
+		public IHiddenRegion getInsertFirst() {
+			return this.modifiedFirst;
 		}
+
+		@Override
+		public IHiddenRegion getInsertLast() {
+			return this.modifiedLast;
+		}
+
 	}
 
-	public abstract static class RewriteAction implements Comparable<RewriteAction> {
-		protected ISequentialRegion originalFirst;
-		protected ISequentialRegion originalLast;
+	protected static class Preserve extends Rewrite implements Insert {
+		public Preserve(IHiddenRegion first, IHiddenRegion last) {
+			super(first, last);
+		}
 
-		public RewriteAction(ISequentialRegion originalFirst, ISequentialRegion originalLast) {
+		@Override
+		public IHiddenRegion getInsertFirst() {
+			return this.originalFirst;
+		}
+
+		@Override
+		public IHiddenRegion getInsertLast() {
+			return this.originalLast;
+		}
+
+		@Override
+		public boolean isDiff() {
+			return false;
+		}
+
+	}
+
+	public abstract static class Rewrite implements Comparable<Rewrite> {
+		protected IHiddenRegion originalFirst;
+		protected IHiddenRegion originalLast;
+
+		public Rewrite(IHiddenRegion originalFirst, IHiddenRegion originalLast) {
 			super();
 			this.originalFirst = originalFirst;
 			this.originalLast = originalLast;
 		}
 
-		public abstract SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender);
+		public boolean isDiff() {
+			return true;
+		}
 
 		@Override
-		public int compareTo(RewriteAction o) {
-			return originalFirst.compareTo(o.originalFirst);
+		public int compareTo(Rewrite o) {
+			return Integer.compare(originalFirst.getOffset(), o.originalFirst.getOffset());
 		}
 	}
 
-	protected static class SequenceRewriteAction extends RewriteAction {
+	protected static class Replace2 extends Rewrite implements Insert {
 		private final TextRegionAccessBuildingSequencer sequencer;
 
-		public SequenceRewriteAction(IHiddenRegion originalFirst, IHiddenRegion originalLast,
+		public Replace2(IHiddenRegion originalFirst, IHiddenRegion originalLast,
 				TextRegionAccessBuildingSequencer sequencer) {
 			super(originalFirst, originalLast);
 			this.sequencer = sequencer;
 		}
 
 		@Override
-		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			StringBasedRegionAccess textRegionAccess = sequencer.getRegionAccess();
-			IEObjectRegion substituteRoot = textRegionAccess.regionForRootEObject();
-			IHiddenRegion substituteFirst = substituteRoot.getPreviousHiddenRegion();
-			IHiddenRegion substituteLast = substituteRoot.getNextHiddenRegion();
-			SequentialRegionDiff result = appender.copyAndAppend((IHiddenRegion) originalFirst,
-					(IHiddenRegion) originalLast, substituteFirst, substituteLast);
-			return result;
-		}
-	}
-
-	protected static class TextRewriteAction extends RewriteAction {
-
-		private String text;
-
-		public TextRewriteAction(ISemanticRegion region, String text) {
-			super(region, region);
-			this.text = text;
+		public IHiddenRegion getInsertFirst() {
+			return sequencer.getRegionAccess().regionForRootEObject().getPreviousHiddenRegion();
 		}
 
 		@Override
-		public SequentialRegionDiff apply(StringBasedTextRegionAccessDiffAppender appender) {
-			ISemanticRegion region = appender.copyAndAppend((ISemanticRegion) originalFirst, text);
-			return new SequentialRegionDiff(originalFirst, originalLast, region, region);
+		public IHiddenRegion getInsertLast() {
+			return sequencer.getRegionAccess().regionForRootEObject().getNextHiddenRegion();
 		}
-
 	}
 
 	private final ITextRegionAccess original;
-	private List<RewriteAction> rewrites = Lists.newArrayList();
+	private List<Rewrite> rewrites = Lists.newArrayList();
+	private Map<ITextSegment, String> changes = Maps.newHashMap();
 
 	public StringBasedTextRegionAccessDiffBuilder(ITextRegionAccess base) {
 		super();
 		this.original = base;
-	}
-
-	protected void addInsert(RewriteAction action) {
-		int i = getActionAt(action.originalFirst, action.originalLast);
-		if (i >= 0) {
-			RewriteAction existing = rewrites.get(i);
-			MultiInsertionRewriteAction comp = null;
-			if (existing instanceof MultiInsertionRewriteAction) {
-				comp = (MultiInsertionRewriteAction) existing;
-			} else {
-				comp = new MultiInsertionRewriteAction(action.originalFirst, action.originalFirst);
-				comp.delegates.add(existing);
-				rewrites.set(i, comp);
-			}
-			comp.delegates.add(action);
-		} else {
-			rewrites.add(action);
-		}
-	}
-
-	protected void addRemoveAction(IHiddenRegion first, IHiddenRegion last, boolean del) {
-		for (RewriteAction rw : rewrites) {
-			if (rw.originalFirst == last) {
-				rw.originalFirst = first;
-				return;
-			}
-			if (rw.originalLast == first) {
-				rw.originalLast = last;
-				return;
-			}
-		}
-		rewrites.add(new RemoveRewriteAction(first, last, del));
 	}
 
 	protected void checkOriginal(ITextSegment segment) {
@@ -193,38 +185,72 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		Preconditions.checkArgument(original == segment.getTextRegionAccess());
 	}
 
+	protected List<Rewrite> createList() {
+		List<Rewrite> sorted = Lists.newArrayList(rewrites);
+		Collections.sort(sorted);
+		List<Rewrite> result = Lists.newArrayListWithExpectedSize(sorted.size() * 2);
+		IHiddenRegion last = original.regionForRootEObject().getPreviousHiddenRegion();
+		for (Rewrite rw : sorted) {
+			int lastOffset = last.getOffset();
+			int rwOffset = rw.originalFirst.getOffset();
+			if (rwOffset == lastOffset) {
+				result.add(rw);
+				last = rw.originalLast;
+			} else if (rwOffset > lastOffset) {
+				result.add(new Preserve(last, rw.originalFirst));
+				result.add(rw);
+				last = rw.originalLast;
+			} else {
+				LOG.error("Error, conflicting document modifications.");
+			}
+		}
+		IHiddenRegion end = original.regionForRootEObject().getNextHiddenRegion();
+		if (last.getOffset() < end.getOffset()) {
+			result.add(new Preserve(last, end));
+		}
+		return result;
+	}
+
 	@Override
 	public StringBasedTextRegionAccessDiff create() {
-		Collections.sort(rewrites);
+		StringBasedTextRegionAccessDiffAppender appender = createAppender();
 		IEObjectRegion root = original.regionForRootEObject();
-		ISequentialRegion last = root.getPreviousHiddenRegion();
-		StringBasedTextRegionAccessDiff result = new StringBasedTextRegionAccessDiff(original);
-		StringBasedTextRegionAccessDiffAppender appender = new StringBasedTextRegionAccessDiffAppender(result);
-		for (RewriteAction next : rewrites) {
-			if (!next.originalFirst.equals(last) && !next.originalFirst.equals(last.getPreviousSequentialRegion())) {
-				appender.copyAndAppend(last, next.originalFirst.getPreviousSequentialRegion());
+		appender.copyAndAppend(root.getPreviousHiddenRegion(), PREVIOUS);
+		appender.copyAndAppend(root.getPreviousHiddenRegion(), CONTAINER);
+		List<Rewrite> rws = createList();
+		IHiddenRegion last = null;
+		for (Rewrite rw : rws) {
+			boolean diff = rw.isDiff();
+			if (diff) {
+				appender.beginDiff();
 			}
-			SequentialRegionDiff rewrite = next.apply(appender);
-			result.append(rewrite);
-			last = next.originalLast.getNextSequentialRegion();
+			if (rw instanceof Insert) {
+				Insert ins = (Insert) rw;
+				IHiddenRegion f = ins.getInsertFirst();
+				IHiddenRegion l = ins.getInsertLast();
+				appender.copyAndAppend(f, NEXT);
+				if (f != l) {
+					appender.copyAndAppend(f.getNextSemanticRegion(), l.getPreviousSemanticRegion());
+				}
+				appender.copyAndAppend(l, PREVIOUS);
+			}
+			if (diff) {
+				appender.endDiff();
+			}
+			if (rw.originalLast != last) {
+				appender.copyAndAppend(rw.originalLast, CONTAINER);
+			}
+			last = rw.originalLast;
 		}
-		if (last != null) {
-			appender.copyAndAppend(last, root.getNextSequentialRegion());
-		}
-		appender.updateEObjectRegions();
+		appender.copyAndAppend(root.getNextHiddenRegion(), NEXT);
+		StringBasedTextRegionAccessDiff result = appender.finish();
 		AbstractEObjectRegion newRoot = result.regionForEObject(root.getSemanticElement());
 		result.setRootEObject(newRoot);
 		return result;
 	}
 
-	protected int getActionAt(ISequentialRegion first, ISequentialRegion last) {
-		for (int i = 0; i < rewrites.size(); i++) {
-			RewriteAction a = rewrites.get(i);
-			if (a.originalFirst == first && a.originalLast == last) {
-				return i;
-			}
-		}
-		return -1;
+	protected StringBasedTextRegionAccessDiffAppender createAppender() {
+		return new StringBasedTextRegionAccessDiffAppender(original, changes);
 	}
 
 	@Override
@@ -236,7 +262,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	public boolean isModified(ITextRegion region) {
 		int offset = region.getOffset();
 		int endOffset = offset + region.getLength();
-		for (RewriteAction action : rewrites) {
+		for (Rewrite action : rewrites) {
 			int rwOffset = action.originalFirst.getOffset();
 			int rwEndOffset = action.originalLast.getEndOffset();
 			if (rwOffset <= offset && offset < rwEndOffset) {
@@ -251,15 +277,20 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 
 	@Override
 	public void move(IHiddenRegion insertAt, IHiddenRegion substituteFirst, IHiddenRegion substituteLast) {
-		addRemoveAction(substituteFirst, substituteLast, false);
-		replace(insertAt, insertAt, substituteFirst, substituteLast);
+		checkOriginal(insertAt);
+		checkOriginal(substituteFirst);
+		checkOriginal(substituteLast);
+		MoveSource source = new MoveSource(substituteFirst, substituteLast);
+		MoveTarget target = new MoveTarget(insertAt, source);
+		rewrites.add(source);
+		rewrites.add(target);
 	}
 
 	@Override
 	public void remove(IHiddenRegion first, IHiddenRegion last) {
 		checkOriginal(first);
 		checkOriginal(last);
-		addRemoveAction(first, last, true);
+		rewrites.add(new Remove(first, last));
 	}
 
 	@Override
@@ -272,7 +303,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 			IHiddenRegion modifiedLast) {
 		checkOriginal(originalFirst);
 		checkOriginal(originalLast);
-		addInsert(new ReplaceRewriteAction(originalFirst, originalLast, modifiedFirst, modifiedLast));
+		rewrites.add(new Replace1(originalFirst, originalLast, modifiedFirst, modifiedLast));
 	}
 
 	@Override
@@ -289,15 +320,7 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 	public void replace(ISemanticRegion region, String newText) {
 		Preconditions.checkNotNull(newText);
 		checkOriginal(region);
-		int i = getActionAt(region, region);
-		if (i >= 0) {
-			RewriteAction existing = rewrites.get(i);
-			if (existing instanceof TextRewriteAction) {
-				((TextRewriteAction) existing).text = newText;
-				return;
-			}
-		}
-		rewrites.add(new TextRewriteAction(region, newText));
+		changes.put(region, newText);
 	}
 
 	@Override
@@ -306,10 +329,10 @@ public class StringBasedTextRegionAccessDiffBuilder implements ITextRegionDiffBu
 		checkOriginal(originalFirst);
 		checkOriginal(originalLast);
 		TextRegionAccessBuildingSequencer sequenceAcceptor = new TextRegionAccessBuildingSequencer();
-		addInsert(new SequenceRewriteAction(originalFirst, originalLast, sequenceAcceptor));
+		rewrites.add(new Replace2(originalFirst, originalLast, sequenceAcceptor));
 		return sequenceAcceptor.withRoot(ctx, root);
 	}
-	
+
 	@Override
 	public String toString() {
 		try {

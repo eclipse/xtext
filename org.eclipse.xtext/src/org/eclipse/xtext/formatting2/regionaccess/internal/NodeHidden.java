@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.formatting2.regionaccess.HiddenRegionPartAssociation;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.nodemodel.INode;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.nodemodel.INode;
 public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
 	private final NodeHiddenRegion hiddenRegion;
+	private HiddenRegionPartAssociation association = null;
 
 	protected NodeHidden(NodeHiddenRegion hidden, INode node) {
 		super((NodeModelBasedRegionAccess) hidden.getTextRegionAccess(), node);
@@ -54,6 +56,18 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 		if (i >= 0)
 			return parts.get(i);
 		return null;
+	}
+
+	protected void setAssociation(HiddenRegionPartAssociation association) {
+		this.association = association;
+	}
+
+	@Override
+	public HiddenRegionPartAssociation getAssociation() {
+		if(association == null) {
+			hiddenRegion.initAssociations();
+		}
+		return association;
 	}
 
 }

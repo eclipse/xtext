@@ -50,7 +50,7 @@ class CodeActionTest extends AbstractTestLangLanguageServerTest {
 				    changes :
 				        MyModel.testlang : 
 				            String aaa
-				             [[0, 10] .. [1, 1]]
+				         [[0, 10] .. [0, 10]]
 				        
 				         [[1, 11] .. [3, 0]]
 				    documentChanges : 

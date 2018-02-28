@@ -198,11 +198,11 @@ public class ChangeSerializerWithEmfTest {
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
     _builder_2.newLine();
-    _builder_2.append("#20<3:1| NewName ><4:9| ChangedName>");
+    _builder_2.append("#20 <4:0|NewName ><4:9| ChangedName>");
     _builder_2.newLine();
     _builder_2.append("--------------------------------------------------------------------------------");
     _builder_2.newLine();
-    _builder_2.append("3 1 \" \" -> \" NewName \"");
+    _builder_2.append("4 0 \"\" -> \"NewName \"");
     _builder_2.newLine();
     _builder_2.append("4 9 \"DslEClass\" -> \" ChangedName\"");
     _builder_2.newLine();

@@ -143,17 +143,17 @@ class RegionAccessDiffTest {
 			 0  0   H
 			        B PrefixedUnassigned Root
 			 0  1    S "4"        PrefixedUnassigned:'4'
-			 1    1  H "/*1*/"    Comment:TerminalRule'ML_COMMENT'
-			   10    "/*2*/"    Comment:TerminalRule'ML_COMMENT'
+			 1    1  H "/*1*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
+			   10    "/*2*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			         B Delegate'foo' PrefixedUnassigned:delegate=PrefixedDelegate path:PrefixedUnassigned/delegate
 			11  3     S "foo"      Delegate:name=ID
 			         E Delegate'foo' PrefixedUnassigned:delegate=PrefixedDelegate path:PrefixedUnassigned/delegate
 			        E PrefixedUnassigned Root
 			14  0   H
 			------------ diff 1 ------------
-			 1  5 H "/*1*/"    Comment:TerminalRule'ML_COMMENT'
+			 1  5 H "/*1*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			 6  6 S "prefix"   PrefixedDelegate:'prefix'
-			12  5 H "/*2*/"    Comment:TerminalRule'ML_COMMENT'
+			12  5 H "/*2*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 		'''
 	}
 
@@ -172,14 +172,14 @@ class RegionAccessDiffTest {
 			        B PrefixedUnassigned Root
 			 0  1    S "4"        PrefixedUnassigned:'4'
 			        E PrefixedUnassigned Root
-			 1    1 H "/*1*/"    Comment:TerminalRule'ML_COMMENT'
-			   10   "/*3*/"    Comment:TerminalRule'ML_COMMENT'
+			 1    1 H "/*1*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
+			   10   "/*3*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			------------ diff 1 ------------
-			 1  5  H "/*1*/"    Comment:TerminalRule'ML_COMMENT'
+			 1  5  H "/*1*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			 6  6  S "prefix"   PrefixedDelegate:'prefix'
-			12  5  H "/*2*/"    Comment:TerminalRule'ML_COMMENT'
+			12  5  H "/*2*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 			17  3  S "foo"      Delegate:name=ID
-			20  5  H "/*3*/"    Comment:TerminalRule'ML_COMMENT'
+			20  5  H "/*3*/"    Comment:TerminalRule'ML_COMMENT' Association:CONTAINER
 		'''
 	}
 	
@@ -195,21 +195,22 @@ class RegionAccessDiffTest {
 			replace(a.nextHiddenRegion, a.nextHiddenRegion, a.previousHiddenRegion, a.nextHiddenRegion)
 			replace(a, "new")
 		] === '''
-			0 0   H
-			      B ValueList'[a]' Root
-			0 1    S "8"        Root:'8'
-			1 1    H " "        Whitespace:TerminalRule'WS'
-			2 3 1  S "new"      ValueList:name+=ID
-			5 0 2  H
-			5 1 2  S "a"        ValueList:name+=ID
-			6 0 2  H
-			6 1 2  S "a"        ValueList:name+=ID
-			      E ValueList'[a]' Root
-			7 0 2 H
+			 0 0   H
+			       B ValueList'[a]' Root
+			 0 1    S "8"        Root:'8'
+			 1 1    H " "        Whitespace:TerminalRule'WS'
+			 2 3 2  S "new"      ValueList:name+=ID
+			 5 0 2  H
+			 5 3 2  S "new"      ValueList:name+=ID
+			 8 0 2  H
+			 8 3 2  S "new"      ValueList:name+=ID
+			       E ValueList'[a]' Root
+			11 0 2 H
 			------------ diff 1 ------------
-			2 1 S "a"        ValueList:name+=ID
+			 2 1 S "a"        ValueList:name+=ID
 			------------ diff 2 ------------
-			3 0  H
+			 2 1  S "a"        ValueList:name+=ID
+			 3 0  H
 		'''
 	}
 	
@@ -254,7 +255,7 @@ class RegionAccessDiffTest {
 			 0 1    S "8"        Root:'8'
 			 1 1 1  H "\n"       Whitespace:TerminalRule'WS'
 			 2 1 1  S "b"        ValueList:name+=ID
-			 3   1  H "/**/"     Comment:TerminalRule'ML_COMMENT'
+			 3   1  H "/**/"     Comment:TerminalRule'ML_COMMENT' Association:PREVIOUS
 			   5    "\n"       Whitespace:TerminalRule'WS'
 			 8 1    S "a"        ValueList:name+=ID
 			 9 1    H " "        Whitespace:TerminalRule'WS'
@@ -263,8 +264,40 @@ class RegionAccessDiffTest {
 			11 0   H
 			------------ diff 1 ------------
 			 1   H "\n"       Whitespace:TerminalRule'WS'
-			       "/**/"     Comment:TerminalRule'ML_COMMENT'
+			       "/**/"     Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			   6   "\n"       Whitespace:TerminalRule'WS'
+		'''
+	}
+	
+	@Test def void testMove() {
+		val access = '''
+			8 a b c
+		'''.toTextRegionAccess
+		access.modify [
+			val regions = access.regionForRootEObject.allRegionsFor.features(RegionaccesstestlanguagePackage.Literals.VALUE_LIST__NAME)
+			val a = regions.get(0)
+			val b = regions.get(1)
+			move(b.nextHiddenRegion, a.previousHiddenRegion, a.nextHiddenRegion)
+		] === '''
+			0 0   H
+			      B ValueList'[a, b, c]' Root
+			0 1    S "8"        Root:'8'
+			1   1  H " "        Whitespace:TerminalRule'WS'
+			  2    " "        Whitespace:TerminalRule'WS'
+			3 1    S "b"        ValueList:name+=ID
+			4 1 2  H " "        Whitespace:TerminalRule'WS'
+			5 1 2  S "a"        ValueList:name+=ID
+			6 0 2  H
+			6 1    S "c"        ValueList:name+=ID
+			      E ValueList'[a, b, c]' Root
+			7 0   H
+			------------ diff 1 ------------
+			1 1 H " "        Whitespace:TerminalRule'WS'
+			2 1 S "a"        ValueList:name+=ID
+			3 1 H " "        Whitespace:TerminalRule'WS'
+			------------ diff 2 ------------
+			5 1 H " "        Whitespace:TerminalRule'WS'
+			6 1 S "c"        ValueList:name+=ID
 		'''
 	}
 

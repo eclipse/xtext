@@ -28,7 +28,17 @@ public interface ITextSegmentDiff {
 
 	ITextSegment getModifiedLastRegion();
 
+	/**
+	 * @since 2.14
+	 */
+	ITextSegment getModifiedRegion();
+
 	ITextSegment getOriginalFirstRegion();
 
 	ITextSegment getOriginalLastRegion();
+
+	/**
+	 * @since 2.14
+	 */
+	ITextSegment getOriginalRegion();
 }

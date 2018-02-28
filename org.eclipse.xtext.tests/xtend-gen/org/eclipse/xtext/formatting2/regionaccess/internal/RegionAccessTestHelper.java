@@ -7,12 +7,20 @@
  */
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccessDiff;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionRewriter;
+import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegmentDiff;
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.StringBasedTextRegionAccessDiff;
 import org.eclipse.xtext.formatting2.regionaccess.internal.StringBasedTextRegionAccessDiffBuilder;
@@ -58,9 +66,29 @@ public class RegionAccessTestHelper {
   }
   
   public void operator_tripleEquals(final ITextRegionAccess access, final CharSequence expectation) {
+    if ((access instanceof ITextRegionAccessDiff)) {
+      this.assertDiffs(((ITextRegionAccessDiff)access));
+    }
     TextRegionAccessToString _cfg = this.cfg(new TextRegionAccessToString().withRegionAccess(access));
     final String tra1 = (_cfg + "\n");
     Assert.assertEquals(Strings.toPlatformLineSeparator(expectation), Strings.toPlatformLineSeparator(tra1));
+  }
+  
+  public void assertDiffs(final ITextRegionAccessDiff regions) {
+    final ITextRegionRewriter rewriter = regions.getOriginalTextRegionAccess().getRewriter();
+    final ArrayList<ITextReplacement> result = Lists.<ITextReplacement>newArrayList();
+    List<ITextSegmentDiff> _regionDifferences = regions.getRegionDifferences();
+    for (final ITextSegmentDiff r : _regionDifferences) {
+      {
+        final ITextSegment originalRegion = r.getOriginalRegion();
+        final ITextSegment modifiedRegion = r.getModifiedRegion();
+        final ITextReplacement replacement = originalRegion.replaceWith(modifiedRegion.getText());
+        result.add(replacement);
+      }
+    }
+    final String actual = rewriter.renderToString(result);
+    final String expected = regions.regionForDocument().getText();
+    Assert.assertEquals(expected, actual);
   }
   
   private TextRegionAccessToString cfg(final TextRegionAccessToString toStr) {

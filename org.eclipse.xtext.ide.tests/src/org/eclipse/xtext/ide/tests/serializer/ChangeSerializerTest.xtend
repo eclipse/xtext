@@ -94,9 +94,9 @@ class ChangeSerializerTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#1 root { child1 { foo1;<24:1| bazz; >} }
+			#1 root { child1 { foo1; <25:0|bazz; >} }
 			--------------------------------------------------------------------------------
-			24 1 " " -> " bazz; "
+			25 0 "" -> "bazz; "
 		'''
 	}
 	
@@ -119,10 +119,12 @@ class ChangeSerializerTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#1 root {<9:9| bazz; /**/ >child1;
+			#1 root {<9:0| bazz;>
+				/**/ 
+				child1;
 			}
 			--------------------------------------------------------------------------------
-			9 9 "\n	/**/ \n	" -> " bazz; /**/ "
+			9 0 "" -> " bazz;"
 		'''
 	}
 
@@ -141,9 +143,9 @@ class ChangeSerializerTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#1 root { child1 { foo1;<24:1| bazz1; bazz2; >} }
+			#1 root { child1 { foo1; <25:0|bazz1; bazz2; >} }
 			--------------------------------------------------------------------------------
-			24 1 " " -> " bazz1; bazz2; "
+			25 0 "" -> "bazz1; bazz2; "
 		'''
 	}
 
@@ -161,9 +163,9 @@ class ChangeSerializerTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#1 root { child1 {<18:7|  >} }
+			#1 root { child1 { <19:5|> } }
 			--------------------------------------------------------------------------------
-			18 7 " foo1; " -> "  "
+			19 5 "foo1;" -> ""
 		'''
 	}
 	
@@ -182,9 +184,10 @@ class ChangeSerializerTest {
 		]
 		serializer.endRecordChangesToTextDocuments === '''
 			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
-			#1 root {<9:17|  >}
+			#1 root { <10:7|> <18:7|> }
 			--------------------------------------------------------------------------------
-			9 17 " child1; child2; " -> "  "
+			10 7 "child1;" -> ""
+			18 7 "child2;" -> ""
 		'''
 	}
 

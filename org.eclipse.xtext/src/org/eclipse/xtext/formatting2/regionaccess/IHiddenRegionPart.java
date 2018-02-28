@@ -40,4 +40,14 @@ public interface IHiddenRegionPart extends ITextSegment {
 	 *         current {@link IHiddenRegionPart} is the first element inside its {@link IHiddenRegion}.
 	 */
 	IHiddenRegionPart getPreviousHiddenPart();
+
+	/**
+	 * @see IHiddenRegionPartAssociator for custom behaviour.
+	 * 
+	 * @since 2.14
+	 * 
+	 * @return A hint whether the whitespace or comment belongs to the previous or next semantic element or neither of
+	 *         them.
+	 */
+	HiddenRegionPartAssociation getAssociation();
 }
