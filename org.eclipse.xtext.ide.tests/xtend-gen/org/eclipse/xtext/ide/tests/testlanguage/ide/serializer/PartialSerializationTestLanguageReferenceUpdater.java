@@ -45,7 +45,7 @@ public class PartialSerializationTestLanguageReferenceUpdater extends ReferenceU
   public void update(final IReferenceUpdaterContext context) {
     super.update(context);
     final Node node = IterableExtensions.<Node>head(Iterables.<Node>filter(context.getResource().getContents(), Node.class));
-    if (((node == null) || node.getImports().isEmpty())) {
+    if ((node == null)) {
       return;
     }
     final HashSet<Import> toDelete = CollectionLiterals.<Import>newHashSet();
@@ -72,30 +72,28 @@ public class PartialSerializationTestLanguageReferenceUpdater extends ReferenceU
         }
       }
     }
-    if ((((!toDelete.isEmpty()) || (!toAdd.isEmpty())) || (!toChange.isEmpty()))) {
-      final Runnable _function_1 = () -> {
-        for (final Import toDel : toDelete) {
-          EcoreUtil.remove(toDel);
+    final Runnable _function_1 = () -> {
+      for (final Import toDel : toDelete) {
+        EcoreUtil.remove(toDel);
+      }
+      Set<Map.Entry<Import, QualifiedName>> _entrySet = toChange.entrySet();
+      for (final Map.Entry<Import, QualifiedName> toCh : _entrySet) {
+        {
+          final Import imp = toCh.getKey();
+          final QualifiedName name = toCh.getValue();
+          imp.setImportedNamespace(this.converter.toString(name));
         }
-        Set<Map.Entry<Import, QualifiedName>> _entrySet = toChange.entrySet();
-        for (final Map.Entry<Import, QualifiedName> toCh : _entrySet) {
-          {
-            final Import imp = toCh.getKey();
-            final QualifiedName name = toCh.getValue();
-            imp.setImportedNamespace(this.converter.toString(name));
-          }
-        }
-        for (final QualifiedName toA : toAdd) {
-          EList<Import> _imports = node.getImports();
-          Import _createImport = PartialSerializationTestLanguageFactory.eINSTANCE.createImport();
-          final Procedure1<Import> _function_2 = (Import it) -> {
-            it.setImportedNamespace(this.converter.toString(toA));
-          };
-          Import _doubleArrow = ObjectExtensions.<Import>operator_doubleArrow(_createImport, _function_2);
-          _imports.add(_doubleArrow);
-        }
-      };
-      context.modifyModel(_function_1);
-    }
+      }
+      for (final QualifiedName toA : toAdd) {
+        EList<Import> _imports = node.getImports();
+        Import _createImport = PartialSerializationTestLanguageFactory.eINSTANCE.createImport();
+        final Procedure1<Import> _function_2 = (Import it) -> {
+          it.setImportedNamespace(this.converter.toString(toA));
+        };
+        Import _doubleArrow = ObjectExtensions.<Import>operator_doubleArrow(_createImport, _function_2);
+        _imports.add(_doubleArrow);
+      }
+    };
+    context.modifyModel(_function_1);
   }
 }

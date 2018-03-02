@@ -73,7 +73,9 @@ public class RelatedXtextResourceUpdater extends RelatedResourceUpdater {
 			ResourceSet rs = res.getResourceSet();
 			ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, Collections.emptyList(), recording);
 			ResourceRecording recordedResource = tree.getRecordedResource(res);
-			serializer.serializeChanges(recordedResource, rewriter);
+			if (recordedResource != null) {
+				serializer.serializeChanges(recordedResource, rewriter);
+			}
 		}
 		for (IUpdatableReference upd : context.getUpdatableReferences()) {
 			referenceUpdater.updateReference(rewriter, upd);

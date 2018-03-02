@@ -27,7 +27,7 @@ class PartialSerializationTestLanguageReferenceUpdater extends ReferenceUpdater 
 	override update(IReferenceUpdaterContext context) {
 		super.update(context)
 		val node = context.resource.contents.filter(Node).head
-		if (node === null || node.imports.isEmpty) {
+		if (node === null) {
 			return
 		}
 		val toDelete = <Import>newHashSet
@@ -48,22 +48,20 @@ class PartialSerializationTestLanguageReferenceUpdater extends ReferenceUpdater 
 				}
 			}
 		}
-		if (!toDelete.isEmpty || !toAdd.isEmpty || !toChange.isEmpty) {
-			context.modifyModel [
-				for (toDel : toDelete) {
-					EcoreUtil.remove(toDel)
-				}
-				for (toCh : toChange.entrySet) {
-					val imp = toCh.key
-					val name = toCh.value
-					imp.importedNamespace = converter.toString(name)
-				}
-				for (toA : toAdd) {
-					node.imports += PartialSerializationTestLanguageFactory.eINSTANCE.createImport => [
-						importedNamespace = converter.toString(toA)
-					]
-				}
-			]
-		}
+		context.modifyModel [
+			for (toDel : toDelete) {
+				EcoreUtil.remove(toDel)
+			}
+			for (toCh : toChange.entrySet) {
+				val imp = toCh.key
+				val name = toCh.value
+				imp.importedNamespace = converter.toString(name)
+			}
+			for (toA : toAdd) {
+				node.imports += PartialSerializationTestLanguageFactory.eINSTANCE.createImport => [
+					importedNamespace = converter.toString(toA)
+				]
+			}
+		]
 	}
 }
