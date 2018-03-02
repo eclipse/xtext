@@ -30,7 +30,12 @@ class ReplaceFileContentChange extends ResourceChange {
 	val IFile file
 	val byte[] newContents
 	
-	@Accessors String name 
+	@Accessors String name
+	
+	new(String name, IFile file, byte[] newContents) {
+		this(file, newContents)
+		this.name = name
+	} 
 	
 	override protected getModifiedResource() {
 		file

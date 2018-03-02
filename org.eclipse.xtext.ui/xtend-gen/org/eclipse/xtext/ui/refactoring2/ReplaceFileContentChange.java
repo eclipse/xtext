@@ -41,6 +41,11 @@ public class ReplaceFileContentChange extends ResourceChange {
   @Accessors
   private String name;
   
+  public ReplaceFileContentChange(final String name, final IFile file, final byte[] newContents) {
+    this(file, newContents);
+    this.name = name;
+  }
+  
   @Override
   protected IResource getModifiedResource() {
     return this.file;

@@ -90,7 +90,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 			file.checkDerived
 			change.resource.save(outputStream, null)
 			val newContent = outputStream.toByteArray
-			val ltkChange = new ReplaceFileContentChange(file, newContent) 
+			val ltkChange = new ReplaceFileContentChange(change.oldURI.lastSegment, file, newContent) 
 			addChange(ltkChange)
 		]
 	}
