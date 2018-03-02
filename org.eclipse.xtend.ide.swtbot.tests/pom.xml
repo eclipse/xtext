@@ -35,9 +35,7 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<configuration>
 					<useUIThread>false</useUIThread>
-					<argLine>${memory-settings} ${os-jvm-flags}
-						-Dorg.eclipse.swtbot.keyboard.layout=EN_US
-						-Dorg.eclipse.swtbot.playback.delay=60</argLine>
+					<argLine>${memory-settings} ${os-jvm-flags} -Dorg.eclipse.swtbot.keyboard.layout=EN_US -Dorg.eclipse.swtbot.playback.delay=60</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
