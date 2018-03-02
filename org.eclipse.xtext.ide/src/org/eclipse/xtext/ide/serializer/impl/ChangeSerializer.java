@@ -139,7 +139,9 @@ public class ChangeSerializer implements IChangeSerializer {
 			updater.beginRecording(this, (XtextResource) resource);
 			return updater;
 		} else {
-			throw new UnsupportedOperationException();
+			RecordingEmfResourceUpdater updater = getService(resource, RecordingEmfResourceUpdater.class);
+			updater.beginRecording(this, resource);
+			return updater;
 		}
 	}
 

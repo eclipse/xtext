@@ -13,6 +13,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -50,7 +52,7 @@ public class ChangeSerializerWithEmfTest {
   private ChangeSerializerTestHelper _changeSerializerTestHelper;
   
   @Test
-  public void testRefToXML() {
+  public void testChangeRefToXML() {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#21 MyPackage.MyClass1");
@@ -96,7 +98,66 @@ public class ChangeSerializerWithEmfTest {
   }
   
   @Test
-  public void testRefFromXML() {
+  public void testChangeInXML() {
+    final InMemoryURIHandler fs = new InMemoryURIHandler();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("#21 MyPackage.MyClass1");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("inmemory:/file1.pstl", _builder.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    _builder_1.newLine();
+    _builder_1.append("<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"MyPackage\">");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("<eClassifiers xsi:type=\"ecore:EClass\" name=\"MyClass1\"/>");
+    _builder_1.newLine();
+    _builder_1.append("</ecore:EPackage>");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("inmemory:/file2.ecore", _builder_1.toString());
+    this._changeSerializerTestHelper.operator_add(fs, _mappedTo_1);
+    final ResourceSet rs = this._changeSerializerTestHelper.createResourceSet(fs);
+    final EPackage model = this._changeSerializerTestHelper.<EPackage>contents(rs, "inmemory:/file2.ecore", EPackage.class);
+    final ChangeSerializer serializer = this.serializerProvider.get();
+    final IChangeSerializer.IModification<EPackage> _function = (EPackage it) -> {
+      EClassifier _head = IterableExtensions.<EClassifier>head(model.getEClassifiers());
+      ((EClass) _head).setName("NewClass");
+    };
+    serializer.<EPackage>addModification(model, _function);
+    Collection<IEmfResourceChange> _endRecordChangesToTextDocuments = this._changeSerializerTestHelper.endRecordChangesToTextDocuments(serializer);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("---------------------------- inmemory:/file2.ecore -----------------------------");
+    _builder_2.newLine();
+    _builder_2.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    _builder_2.newLine();
+    _builder_2.append("<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+    _builder_2.newLine();
+    _builder_2.append("    ");
+    _builder_2.append("xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"MyPackage\">");
+    _builder_2.newLine();
+    _builder_2.append("  ");
+    _builder_2.append("<eClassifiers xsi:type=\"ecore:EClass\" name=\"NewClass\"/>");
+    _builder_2.newLine();
+    _builder_2.append("</ecore:EPackage>");
+    _builder_2.newLine();
+    _builder_2.append("--------------------------------------------------------------------------------");
+    _builder_2.newLine();
+    _builder_2.append("----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------");
+    _builder_2.newLine();
+    _builder_2.append("#21 <4:18|MyPackage.NewClass>");
+    _builder_2.newLine();
+    _builder_2.append("--------------------------------------------------------------------------------");
+    _builder_2.newLine();
+    _builder_2.append("4 18 \"MyPackage.MyClass1\" -> \"MyPackage.NewClass\"");
+    _builder_2.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_endRecordChangesToTextDocuments, _builder_2);
+  }
+  
+  @Test
+  public void testChangeInDSL() {
     final InMemoryURIHandler fs = new InMemoryURIHandler();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#20 DslEClass");

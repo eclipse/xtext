@@ -22,6 +22,7 @@ import org.eclipse.xtext.testlanguages.ecore.EcoreSupport
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.emf.ecore.EPackage
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -34,7 +35,7 @@ class ChangeSerializerWithEmfTest {
 	@Inject extension ChangeSerializerTestHelper
 
 	@Test
-	def void testRefToXML() {
+	def void testChangeRefToXML() {
 		val fs = new InMemoryURIHandler()
 		fs += "inmemory:/file1.pstl" -> '''#21 MyPackage.MyClass1'''
 		fs += "inmemory:/file2.ecore" -> '''
@@ -60,9 +61,44 @@ class ChangeSerializerWithEmfTest {
 			4 18 "MyPackage.MyClass1" -> "MyPackage.MyClass2"
 		'''
 	}
+	
+	@Test
+	def void testChangeInXML() {
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file1.pstl" -> '''#21 MyPackage.MyClass1'''
+		fs += "inmemory:/file2.ecore" -> '''
+			<?xml version="1.0" encoding="UTF-8"?>
+			<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MyPackage">
+			  <eClassifiers xsi:type="ecore:EClass" name="MyClass1"/>
+			</ecore:EPackage>
+		'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file2.ecore", EPackage)
+
+		val serializer = serializerProvider.get()
+		serializer.addModification(model) [
+			(model.EClassifiers.head as EClass).name = "NewClass"
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			---------------------------- inmemory:/file2.ecore -----------------------------
+			<?xml version="1.0" encoding="UTF-8"?>
+			<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MyPackage">
+			  <eClassifiers xsi:type="ecore:EClass" name="NewClass"/>
+			</ecore:EPackage>
+			--------------------------------------------------------------------------------
+			----------------- inmemory:/file1.pstl (syntax: <offset|text>) -----------------
+			#21 <4:18|MyPackage.NewClass>
+			--------------------------------------------------------------------------------
+			4 18 "MyPackage.MyClass1" -> "MyPackage.NewClass"
+		'''
+	}
+	
 
 	@Test
-	def void testRefFromXML() {
+	def void testChangeInDSL() {
 		val fs = new InMemoryURIHandler()
 		fs += "inmemory:/file1.pstl" -> '''#20 DslEClass'''
 		fs += "inmemory:/file2.ecore" -> '''
