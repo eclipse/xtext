@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStrea
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 
 /**
  * A datatype for dealing with qualified names.
@@ -452,8 +453,11 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	}
 
 	protected boolean startsWith(QualifiedName prefix, boolean ignoreCase) {
-		if (prefix.getSegmentCount() > getSegmentCount())
+		Preconditions.checkArgument(prefix != null, "prefix must not be null");
+		
+		if (prefix.getSegmentCount() > getSegmentCount()) {
 			return false;
+		}
 		if (ignoreCase) {
 			for (int i = 0; i < prefix.getSegmentCount(); ++i) {
 				if (!this.getSegment(i).equalsIgnoreCase(prefix.getSegment(i)))
