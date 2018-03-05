@@ -28,13 +28,13 @@ import com.google.common.base.Preconditions;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class StringBasedTextRegionAccessDiffAppender {
-
-	private ISequentialRegion last;
-	private ITextSegment diffLastCopy = null;
-	private ITextSegment diffLastOriginal = null;
-	private final StringBasedTextRegionAccessDiff result;
 	private ITextSegment diffFirstCopy = null;
 	private ITextSegment diffFirstOriginal = null;
+	private ITextSegment diffLastCopy = null;
+	private ITextSegment diffLastOriginal = null;
+	private int diffNesting = 0;
+	private ISequentialRegion last;
+	private final StringBasedTextRegionAccessDiff result;
 	private final Map<ITextSegment, String> textChanges;
 
 	public StringBasedTextRegionAccessDiffAppender(ITextRegionAccess base, Map<ITextSegment, String> textChanges) {
@@ -64,39 +64,6 @@ public class StringBasedTextRegionAccessDiffAppender {
 			diffFirstCopy = diffLastCopy;
 		}
 		diffNesting++;
-	}
-
-	private int diffNesting = 0;
-
-	public void endDiff() {
-		diffNesting--;
-	}
-
-	protected void recordDiff(ITextSegment original, ITextSegment copy) {
-		if (diffNesting == 0) {
-			Preconditions.checkArgument(original.getTextRegionAccess() == result.getOriginalTextRegionAccess());
-		}
-		if (diffFirstOriginal != null && diffFirstCopy != null && diffNesting == 0) {
-			result.append(new SequentialRegionDiff(diffFirstOriginal, original, diffFirstCopy, copy));
-			diffFirstCopy = null;
-			diffFirstOriginal = null;
-		}
-		diffLastOriginal = original;
-		diffLastCopy = copy;
-	}
-
-	public StringBasedTextRegionAccessDiff finish() {
-		if (this.last instanceof ISemanticRegion) {
-			appendHiddenRegion(false);
-		}
-		updateEObjectRegions();
-		if (diffFirstOriginal != null && diffFirstCopy != null && diffFirstCopy != null) {
-			IHiddenRegion orig = result.getOriginalTextRegionAccess().regionForRootEObject().getNextHiddenRegion();
-			result.append(new SequentialRegionDiff(diffFirstOriginal, orig, diffFirstCopy, this.last));
-			diffFirstCopy = null;
-			diffFirstOriginal = null;
-		}
-		return result;
 	}
 
 	protected IHiddenRegion copyAndAppend(IHiddenRegion source) {
@@ -183,7 +150,23 @@ public class StringBasedTextRegionAccessDiffAppender {
 		}
 	}
 
-	private boolean diffDelete = false;
+	public void endDiff() {
+		diffNesting--;
+	}
+
+	public StringBasedTextRegionAccessDiff finish() {
+		if (this.last instanceof ISemanticRegion) {
+			appendHiddenRegion(false);
+		}
+		updateEObjectRegions();
+		if (diffFirstOriginal != null && diffFirstCopy != null && diffFirstCopy != null) {
+			IHiddenRegion orig = result.getOriginalTextRegionAccess().regionForRootEObject().getNextHiddenRegion();
+			result.append(new SequentialRegionDiff(diffFirstOriginal, orig, diffFirstCopy, this.last));
+			diffFirstCopy = null;
+			diffFirstOriginal = null;
+		}
+		return result;
+	}
 
 	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original) {
 		AbstractEObjectRegion eobjRegion = result.regionForEObject(eobj);
@@ -201,6 +184,19 @@ public class StringBasedTextRegionAccessDiffAppender {
 			}
 		}
 		return eobjRegion;
+	}
+
+	protected void recordDiff(ITextSegment original, ITextSegment copy) {
+		if (diffNesting == 0) {
+			Preconditions.checkArgument(original.getTextRegionAccess() == result.getOriginalTextRegionAccess());
+		}
+		if (diffFirstOriginal != null && diffFirstCopy != null && diffNesting == 0) {
+			result.append(new SequentialRegionDiff(diffFirstOriginal, original, diffFirstCopy, copy));
+			diffFirstCopy = null;
+			diffFirstOriginal = null;
+		}
+		diffLastOriginal = original;
+		diffLastCopy = copy;
 	}
 
 	protected void updateEObjectRegions() {
