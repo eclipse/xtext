@@ -194,9 +194,13 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     this.assertContentsAndMarkers(resource, markers, _builder_1);
     this.applyQuickfixOnMultipleMarkers(markers);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("newElement { } c {\tgoodname { foo {} } } newElement { } a {\tgoodname { bar {} } } newElement { } b {\tgoodname { baz {} } }");
+    _builder_2.append("newElement { } c {\tgoodname { foo {} } }");
     _builder_2.newLine();
-    _builder_2.append("-----------------------------------------------------------------------------------------------------------------------------------");
+    _builder_2.append("newElement { } a {\tgoodname { bar {} } }");
+    _builder_2.newLine();
+    _builder_2.append("newElement { } b {\tgoodname { baz {} } }");
+    _builder_2.newLine();
+    _builder_2.append("-------------------------------------------");
     _builder_2.newLine();
     _builder_2.append("(no markers found)");
     _builder_2.newLine();

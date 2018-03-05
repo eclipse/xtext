@@ -115,8 +115,10 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 
 		applyQuickfixOnMultipleMarkers(markers)
 		assertContentsAndMarkers(resource, '''
-			newElement { } c {	goodname { foo {} } } newElement { } a {	goodname { bar {} } } newElement { } b {	goodname { baz {} } }
-			-----------------------------------------------------------------------------------------------------------------------------------
+			newElement { } c {	goodname { foo {} } }
+			newElement { } a {	goodname { bar {} } }
+			newElement { } b {	goodname { baz {} } }
+			-------------------------------------------
 			(no markers found)
 		''')
 	}

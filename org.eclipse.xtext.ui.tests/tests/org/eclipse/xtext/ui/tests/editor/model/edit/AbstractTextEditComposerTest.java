@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.tests.editor.model.edit;
 
 import java.io.InputStream;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
@@ -22,9 +21,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
@@ -86,7 +82,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		res.getContents().set(0, grammar);
 		TextEdit edit = composer.endRecording();
 
-		assertMatches(grammar, edit);
+		assertMatches("grammar bar.Bar generate bar 'bar://bar/43' Bar: 'bar';", edit);
 	}
 
 	@Test public void testObjectAddition() throws Exception {
@@ -101,7 +97,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		alternatives.getElements().add(keyword);
 		TextEdit edit = composer.endRecording();
 
-		assertMatches(alternatives, edit);
+		assertMatches("'foo' | 'bar' | 'baz' | \"qux\"", edit);
 	}
 
 	@Test public void testObjectRemoval() throws Exception {
@@ -114,7 +110,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		alternatives.getElements().remove(2);
 		TextEdit edit = composer.endRecording();
 
-		assertMatches(alternatives, edit);
+		assertMatches("'foo' | 'bar'", edit);
 	}
 
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=292349 */
@@ -130,7 +126,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		alternatives.getElements().remove(bazKeyword);
 		TextEdit edit = composer.endRecording();
 
-		assertMatches(alternatives, edit);
+		assertMatches("'foo' | 'bar'", edit);
 	}
 
 	@Test public void testObjectReplacement() throws Exception {
@@ -144,7 +140,7 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		rule.setAlternatives(keyword);
 		TextEdit edit = composer.endRecording();
 
-		assertMatches(rule, edit);
+		assertMatches("Foo: \"baz\";", edit);
 	}
 
 	@Test public void testMultiEdit() throws Exception {
@@ -161,15 +157,13 @@ public abstract class AbstractTextEditComposerTest extends AbstractXtextTests {
 		assertTrue(edit instanceof MultiTextEdit);
 		TextEdit[] children = ((MultiTextEdit) edit).getChildren();
 		assertEquals(2, children.length);
-		assertMatches(fooAlternatives, children[0]);
-		assertMatches(barRule, children[1]);
+		assertMatches("'bar' | 'baz'", children[0]);
+		assertMatches("Bar: 'foo' ;", children[1]);
 	}
 
-	private void assertMatches(EObject obj, TextEdit edit) {
+	private void assertMatches(String expected, TextEdit edit) {
 		assertTrue(edit instanceof ReplaceEdit);
-		INode node = NodeModelUtils.getNode(obj);
-		assertEquals(node.getTotalOffset(), ((ReplaceEdit) edit).getOffset());
-		assertEqualsIgnoringWhitespace(getSerializer().serialize(obj, SaveOptions.defaultOptions()), ((ReplaceEdit) edit).getText());
+		assertEqualsIgnoringWhitespace(expected, ((ReplaceEdit) edit).getText());
 	}
 
 	private void assertEqualsIgnoringWhitespace(String expected, String actual) {
