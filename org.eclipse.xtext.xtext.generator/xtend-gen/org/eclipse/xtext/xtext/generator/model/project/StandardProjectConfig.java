@@ -97,31 +97,36 @@ public class StandardProjectConfig extends XtextProjectConfig {
       if (_tripleEquals_4) {
         it.setSrcGen(this.computeSrcGen(it));
       }
+      String _iconsPath = it.getIconsPath();
+      boolean _tripleEquals_5 = (_iconsPath == null);
+      if (_tripleEquals_5) {
+        it.setIcons(this.computeIcons(it));
+      }
       if ((it instanceof BundleProjectConfig)) {
         if (this.createEclipseMetaData) {
           ManifestAccess _manifest = ((BundleProjectConfig)it).getManifest();
-          boolean _tripleEquals_5 = (_manifest == null);
-          if (_tripleEquals_5) {
+          boolean _tripleEquals_6 = (_manifest == null);
+          if (_tripleEquals_6) {
             ((BundleProjectConfig)it).setManifest(this.newManifestAccess());
           }
           PluginXmlAccess _pluginXml = ((BundleProjectConfig)it).getPluginXml();
-          boolean _tripleEquals_6 = (_pluginXml == null);
-          if (_tripleEquals_6) {
+          boolean _tripleEquals_7 = (_pluginXml == null);
+          if (_tripleEquals_7) {
             ((BundleProjectConfig)it).setPluginXml(this.newPluginXmlAccess());
           }
         }
       }
       if ((it instanceof RuntimeProjectConfig)) {
         String _ecoreModelPath = ((RuntimeProjectConfig)it).getEcoreModelPath();
-        boolean _tripleEquals_7 = (_ecoreModelPath == null);
-        if (_tripleEquals_7) {
+        boolean _tripleEquals_8 = (_ecoreModelPath == null);
+        if (_tripleEquals_8) {
           ((RuntimeProjectConfig)it).setEcoreModel(this.computeEcoreModel(((RuntimeProjectConfig)it)));
         }
       }
       if ((it instanceof WebProjectConfig)) {
         String _assetsPath = ((WebProjectConfig)it).getAssetsPath();
-        boolean _tripleEquals_8 = (_assetsPath == null);
-        if (_tripleEquals_8) {
+        boolean _tripleEquals_9 = (_assetsPath == null);
+        if (_tripleEquals_9) {
           ((WebProjectConfig)it).setAssets(this.computeAssets(((WebProjectConfig)it)));
         }
       }
@@ -279,6 +284,12 @@ public class StandardProjectConfig extends XtextProjectConfig {
       _xifexpression = "main";
     }
     return _xifexpression;
+  }
+  
+  protected String computeIcons(final SubProjectConfig project) {
+    String _rootPath = project.getRootPath();
+    String _plus = (_rootPath + "/");
+    return (_plus + "icons");
   }
   
   @Pure

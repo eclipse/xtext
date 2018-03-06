@@ -62,6 +62,12 @@ public class SubProjectConfig implements ISubProjectConfig {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private IXtextGeneratorFileSystemAccess srcGen;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String iconsPath;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private IXtextGeneratorFileSystemAccess icons;
+  
   public void setRoot(final String path) {
     this.rootPath = path;
   }
@@ -76,6 +82,10 @@ public class SubProjectConfig implements ISubProjectConfig {
   
   public void setSrcGen(final String path) {
     this.srcGenPath = path;
+  }
+  
+  public void setIcons(final String path) {
+    this.iconsPath = path;
   }
   
   public void checkConfiguration(final Issues issues) {
@@ -107,6 +117,12 @@ public class SubProjectConfig implements ISubProjectConfig {
     if (_not_3) {
       this.srcGen = this.owner.newFileSystemAccess(this.srcGenPath, true);
       this.srcGen.initialize(injector);
+    }
+    boolean _isNullOrEmpty_4 = StringExtensions.isNullOrEmpty(this.iconsPath);
+    boolean _not_4 = (!_isNullOrEmpty_4);
+    if (_not_4) {
+      this.icons = this.owner.newFileSystemAccess(this.iconsPath, true);
+      this.icons.initialize(injector);
     }
   }
   
@@ -180,5 +196,15 @@ public class SubProjectConfig implements ISubProjectConfig {
   @Pure
   public IXtextGeneratorFileSystemAccess getSrcGen() {
     return this.srcGen;
+  }
+  
+  @Pure
+  public String getIconsPath() {
+    return this.iconsPath;
+  }
+  
+  @Pure
+  public IXtextGeneratorFileSystemAccess getIcons() {
+    return this.icons;
   }
 }

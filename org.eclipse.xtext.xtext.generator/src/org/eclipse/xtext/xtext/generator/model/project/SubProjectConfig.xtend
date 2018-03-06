@@ -57,6 +57,12 @@ class SubProjectConfig implements ISubProjectConfig {
 	@Accessors(PUBLIC_GETTER)
 	IXtextGeneratorFileSystemAccess srcGen
 	
+	@Accessors(PUBLIC_GETTER)
+	String iconsPath
+	
+	@Accessors(PUBLIC_GETTER)
+	IXtextGeneratorFileSystemAccess icons
+	
 	def void setRoot(String path) {
 		rootPath = path
 	}
@@ -73,6 +79,10 @@ class SubProjectConfig implements ISubProjectConfig {
 		srcGenPath = path
 	}
 	
+	def void setIcons(String path) {
+		iconsPath = path
+	}
+
 	def void checkConfiguration(Issues issues) {
 	}
 	
@@ -93,6 +103,10 @@ class SubProjectConfig implements ISubProjectConfig {
 		if (!srcGenPath.isNullOrEmpty) {
 			srcGen = owner.newFileSystemAccess(srcGenPath, true)
 			srcGen.initialize(injector)
+		}
+		if (!iconsPath.isNullOrEmpty) {
+			icons = owner.newFileSystemAccess(iconsPath, true)
+			icons.initialize(injector)
 		}
 	}
 	

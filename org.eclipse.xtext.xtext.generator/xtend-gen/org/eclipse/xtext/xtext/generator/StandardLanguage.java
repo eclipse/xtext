@@ -40,6 +40,7 @@ import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2;
 import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2;
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.TemplateProjectWizardFragment;
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2;
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2;
@@ -126,6 +127,8 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
+  private TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment();
+  
   public StandardLanguage() {
     try {
       this.getClass().getClassLoader().loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
@@ -208,6 +211,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.ideaPlugin);
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
+      this.operator_add(fragments, this.newTemplateProjectWizardForEclipse);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -462,6 +466,15 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 newProjectWizardForEclipse) {
     this.newProjectWizardForEclipse = newProjectWizardForEclipse;
+  }
+  
+  @Pure
+  protected TemplateProjectWizardFragment getNewTemplateProjectWizardForEclipse() {
+    return this.newTemplateProjectWizardForEclipse;
+  }
+  
+  public void setNewTemplateProjectWizardForEclipse(final TemplateProjectWizardFragment newTemplateProjectWizardForEclipse) {
+    this.newTemplateProjectWizardForEclipse = newTemplateProjectWizardForEclipse;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);

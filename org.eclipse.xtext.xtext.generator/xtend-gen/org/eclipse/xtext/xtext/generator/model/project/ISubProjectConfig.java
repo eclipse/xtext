@@ -28,4 +28,6 @@ public interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
   public abstract IXtextGeneratorFileSystemAccess getSrc();
   
   public abstract IXtextGeneratorFileSystemAccess getSrcGen();
+  
+  public abstract IXtextGeneratorFileSystemAccess getIcons();
 }
