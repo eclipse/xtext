@@ -3,6 +3,7 @@
 <plugin>
    <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
    <extension-point id="resourceRelocationStrategy" name="Xtext ResoureRelocation Strategy" schema="schema/resourceRelocationStrategy.exsd"/>
+   <extension-point id="projectTemplate" name="Xtext Project Template" schema="schema/projectTemplate.exsd"/>
    <extension point="org.eclipse.ui.keywords">
       <keyword
             id="org.eclipse.xtext.ui.keyword.editor"

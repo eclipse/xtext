@@ -45,24 +45,45 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	private boolean withPluginXml = true;
 
 	public PluginProjectFactory addRequiredBundles(List<String> requiredBundles) {
+		this.getRequiredBundles().addAll(requiredBundles);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getRequiredBundles() {
 		if (this.requiredBundles == null)
 			this.requiredBundles = Lists.newArrayList();
-		this.requiredBundles.addAll(requiredBundles);
-		return this;
+		return requiredBundles;
 	}
 
 	public PluginProjectFactory addExportedPackages(List<String> exportedPackages) {
+		this.getExportedPackages().addAll(exportedPackages);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getExportedPackages() {
 		if (this.exportedPackages == null)
 			this.exportedPackages = Lists.newArrayList();
-		this.exportedPackages.addAll(exportedPackages);
-		return this;
+		return exportedPackages;
 	}
 
 	public PluginProjectFactory addImportedPackages(List<String> importedPackages) {
+		this.getImportedPackages().addAll(importedPackages);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getImportedPackages() {
 		if (this.importedPackages == null)
 			this.importedPackages = Lists.newArrayList();
-		this.importedPackages.addAll(importedPackages);
-		return this;
+		return importedPackages;
 	}
 
 	public PluginProjectFactory setActivatorClassName(String activatorClassName) {
@@ -224,10 +245,17 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	 * @since 2.8
 	 */
 	public PluginProjectFactory addDevelopmentTimeBundles(List<String> devTimeBundles) {
+		this.getDevelopmentTimeBundles().addAll(devTimeBundles);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getDevelopmentTimeBundles() {
 		if (this.developmentTimeBundles == null)
 			this.developmentTimeBundles = Lists.newArrayList();
-		this.developmentTimeBundles.addAll(devTimeBundles);
-		return this;
+		return developmentTimeBundles;
 	}
 
 	/**

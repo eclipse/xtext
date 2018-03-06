@@ -39,6 +39,7 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  * @author Sebastian Zarnekow
+ * @author Arne Deutsch - Added getters for better usability from Xtend
  */
 public class ProjectFactory {
 
@@ -66,18 +67,40 @@ public class ProjectFactory {
 
 	private List<IProjectFactoryContributor> earlyContributors;
 
+	public void setWorkbench(IWorkbench workbench) {
+		this.workbench = workbench;
+	}
+	
+	public void setWorkspace(IWorkspace workspace) {
+		this.workspace = workspace;
+	}
+	
 	public ProjectFactory addBuilderIds(String... builderIds) {
+		this.getBuilderIds().addAll(Arrays.asList(builderIds));
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getBuilderIds() {
 		if (this.builderIds == null)
 			this.builderIds = Lists.newArrayList();
-		this.builderIds.addAll(Arrays.asList(builderIds));
-		return this;
+		return builderIds;
 	}
 
 	public ProjectFactory addProjectNatures(String... projectNatures) {
+		getProjectNatures().addAll(Arrays.asList(projectNatures));
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getProjectNatures() {
 		if (this.projectNatures == null)
 			this.projectNatures = Lists.newArrayList();
-		this.projectNatures.addAll(Arrays.asList(projectNatures));
-		return this;
+		return projectNatures;
 	}
 
 	public ProjectFactory setProjectName(String projectName) {
@@ -91,24 +114,45 @@ public class ProjectFactory {
 	}
 
 	public ProjectFactory addFolders(List<String> folders) {
+		this.getFolders().addAll(folders);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<String> getFolders() {
 		if (this.folders == null)
 			this.folders = Lists.newArrayList();
-		this.folders.addAll(folders);
-		return this;
+		return folders;
 	}
 
 	public ProjectFactory addReferencedProjects(List<IProject> referencedProjects) {
+		this.getReferencedProjects().addAll(referencedProjects);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<IProject> getReferencedProjects() {
 		if (this.referencedProjects == null)
 			this.referencedProjects = Lists.newArrayList();
-		this.referencedProjects.addAll(referencedProjects);
-		return this;
+		return referencedProjects;
 	}
 
 	public ProjectFactory addWorkingSets(List<IWorkingSet> workingSets) {
+		this.getWorkingSets().addAll(workingSets);
+		return this;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public List<IWorkingSet> getWorkingSets() {
 		if (this.workingSets == null)
 			this.workingSets = Lists.newArrayList();
-		this.workingSets.addAll(workingSets);
-		return this;
+		return workingSets;
 	}
 
 	/**

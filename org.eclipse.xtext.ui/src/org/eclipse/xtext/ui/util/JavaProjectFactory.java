@@ -109,6 +109,13 @@ public class JavaProjectFactory extends ProjectFactory {
 		this.extraClasspathEntries.addAll(Arrays.asList(classpathEntries));
 		return this;
 	}
+
+	/**
+	 * @since 2.14
+	 */
+	public List<IClasspathEntry> getExtraClasspathEntries() {
+		return extraClasspathEntries;
+	}
 	
 	@Override
 	public JavaProjectFactory addBuilderIds(String... builderIds) {
