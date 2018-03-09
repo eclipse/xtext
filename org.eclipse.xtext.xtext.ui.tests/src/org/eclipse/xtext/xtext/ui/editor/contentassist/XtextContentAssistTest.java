@@ -748,6 +748,30 @@ public class XtextContentAssistTest extends AbstractXtextTests implements Resour
 	        		"importURI=");
     }
     
+    @Test public void testCompleteFeatureName_17() throws Exception {
+    	newBuilder()
+	        .appendNl("grammar org.foo.bar")
+	        .appendNl("fragment Foo *:")
+	        .append("name =\"Bar\";")
+	        .assertTextAtCursorPosition("=",
+	        		"=>",
+	        		"->",
+	        		"\"Value\"",
+	        		"Feature",
+	        		"(",
+	        		"{",
+	        		"<", // guarded alternative
+	        		"&",
+	        		"*",
+	        		"+",
+	        		"+=",
+	        		";",
+	        		"=",
+	        		"?",
+	        		"?=",
+	        		"|");
+    }
+    
     @Test public void testAliasCompletion_01() throws Exception {
     	newBuilder()
 	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
