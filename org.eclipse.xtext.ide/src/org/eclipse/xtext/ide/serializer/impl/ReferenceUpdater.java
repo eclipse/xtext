@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.serializer.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -18,6 +19,8 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceSnapshot;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdater;
@@ -30,6 +33,7 @@ import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
@@ -51,7 +55,8 @@ public class ReferenceUpdater implements IReferenceUpdater {
 	@Inject
 	private IQualifiedNameConverter nameConverter;
 
-	@Inject@SerializerScopeProviderBinding
+	@Inject
+	@SerializerScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject
@@ -138,6 +143,29 @@ public class ReferenceUpdater implements IReferenceUpdater {
 		return null;
 	}
 
+	protected ISemanticRegion getRegion(ITextRegionAccess access, IReferenceSnapshot ref) {
+		XtextResource resource = access.getResource();
+		URI objectUri = ref.getSourceEObjectUri();
+		if (!resource.getURI().equals(objectUri.trimFragment())) {
+			return null;
+		}
+		EObject object = resource.getEObject(objectUri.fragment());
+		if (object == null) {
+			return null;
+		}
+		ISemanticRegionsFinder finder = access.getExtensions().regionFor(object);
+		int index = ref.getIndexInList();
+		if (index < 0) {
+			return finder.feature(ref.getEReference());
+		} else {
+			List<ISemanticRegion> list = finder.features(ref.getEReference());
+			if (list != null && index < list.size()) {
+				return list.get(index);
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public boolean isAffected(Deltas deltas, RelatedResource resource) {
 		for (IReferenceSnapshot ref : resource.outgoingReferences) {
@@ -170,6 +198,15 @@ public class ReferenceUpdater implements IReferenceUpdater {
 
 	@Override
 	public void update(IReferenceUpdaterContext context) {
+		RelatedResource relatedResource = context.getRelatedResource();
+		if (relatedResource == null) {
+			updateAllReferences(context);
+		} else {
+			updateExternalReferences(context, relatedResource);
+		}
+	}
+
+	protected void updateAllReferences(IReferenceUpdaterContext context) {
 		IEObjectRegion root = context.getModifyableDocument().getOriginalTextRegionAccess().regionForRootEObject();
 		ISemanticRegion current = root.getPreviousHiddenRegion().getNextSemanticRegion();
 		while (current != null) {
@@ -181,6 +218,19 @@ public class ReferenceUpdater implements IReferenceUpdater {
 				}
 			}
 			current = current.getNextSemanticRegion();
+		}
+	}
+
+	protected void updateExternalReferences(IReferenceUpdaterContext context, RelatedResource relatedResource) {
+		ITextRegionAccess document = context.getModifyableDocument().getOriginalTextRegionAccess();
+		for (IReferenceSnapshot ref : relatedResource.outgoingReferences) {
+			ISemanticRegion region = getRegion(document, ref);
+			if (region != null) {
+				IUpdatableReference updatable = createUpdatableReference(region);
+				if (updatable != null && needsUpdating(context, updatable)) {
+					context.updateReference(updatable);
+				}
+			}
 		}
 	}
 

@@ -13,6 +13,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.ide.serializer.hooks.IReferenceUpdaterContext;
 import org.eclipse.xtext.ide.serializer.hooks.IUpdatableReference;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
+import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.collect.Lists;
@@ -26,11 +27,19 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 	private final ITextRegionDiffBuilder diffBuilder;
 	private final List<Runnable> handler = Lists.newArrayList();
 	private final List<IUpdatableReference> references = Lists.newArrayList();
+	private final RelatedResource relatedResource;
 
 	public ReferenceUpdaterContext(Deltas deltas, ITextRegionDiffBuilder diffBuilder) {
 		super();
 		this.deltas = deltas;
 		this.diffBuilder = diffBuilder;
+		this.relatedResource = null;
+	}
+
+	public ReferenceUpdaterContext(Deltas deltas, ITextRegionDiffBuilder diffBuilder, RelatedResource relatedResource) {
+		this.deltas = deltas;
+		this.diffBuilder = diffBuilder;
+		this.relatedResource = relatedResource;
 	}
 
 	@Override
@@ -45,6 +54,11 @@ public class ReferenceUpdaterContext implements IReferenceUpdaterContext {
 	@Override
 	public ITextRegionDiffBuilder getModifyableDocument() {
 		return this.diffBuilder;
+	}
+
+	@Override
+	public RelatedResource getRelatedResource() {
+		return relatedResource;
 	}
 
 	@Override

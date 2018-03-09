@@ -143,6 +143,10 @@ public class EObjectDescriptionDeltaProvider {
 			return deltas.get(obj);
 		}
 
+		public Collection<Delta> getDeltas() {
+			return deltas.values();
+		}
+
 		public Collection<IResourceSnapshot> getSnapshots() {
 			return snapshots;
 		}

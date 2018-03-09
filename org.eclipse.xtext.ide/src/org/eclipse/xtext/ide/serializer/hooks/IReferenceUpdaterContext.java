@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
 import org.eclipse.xtext.ide.serializer.impl.EObjectDescriptionDeltaProvider.Deltas;
+import org.eclipse.xtext.ide.serializer.impl.RelatedResourcesProvider.RelatedResource;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -20,6 +21,8 @@ import org.eclipse.xtext.resource.XtextResource;
  * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface IReferenceUpdaterContext {
+
+	RelatedResource getRelatedResource();
 
 	Deltas getEObjectDescriptionDeltas();
 

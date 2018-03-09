@@ -62,7 +62,7 @@ public class RelatedXtextResourceUpdater extends RelatedResourceUpdater {
 		}
 		ITextRegionAccess base = textRegionBuilderProvider.get().forNodeModel(res).create();
 		ITextRegionDiffBuilder rewriter = new StringBasedTextRegionAccessDiffBuilder(base);
-		ReferenceUpdaterContext context = new ReferenceUpdaterContext(deltas, rewriter);
+		ReferenceUpdaterContext context = new ReferenceUpdaterContext(deltas, rewriter, getResource());
 		referenceUpdater.update(context);
 		if (!context.getModifications().isEmpty()) {
 			ChangeRecorder rec = new ChangeRecorder(res);
