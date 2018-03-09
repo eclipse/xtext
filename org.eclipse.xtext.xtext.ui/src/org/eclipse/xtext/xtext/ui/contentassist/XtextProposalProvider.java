@@ -9,6 +9,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -794,14 +795,11 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		if (eClassifier instanceof EDataType && !((EDataType) eClassifier).isSerializable()) {
 			return false;
 		}
-		Iterable<EClassifier> allRuleNames = Iterables.transform(GrammarUtil.allParserRules(grammar),
-				new Function<ParserRule, EClassifier>() {
-					@Override
-					public EClassifier apply(ParserRule from) {
-						return from.getType().getClassifier();
-					}
-				});
-		return !Iterables.contains(allRuleNames, eClassifier);
+		return GrammarUtil.allParserRules(grammar)
+				.stream()
+				.filter(r -> r.getType() != null)
+				.map(r -> r.getType().getClassifier())
+				.allMatch(c -> !Objects.equals(c, eClassifier));
 	}
 
 	@Override
