@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -54,6 +54,9 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("final class Foo{}");
       this._validationTestHelper.assertNoErrors(this.clazz(_builder_7.toString()));
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("public class Foo{}");
+      this._validationTestHelper.assertWarning(this.clazz(_builder_8.toString()), XtendPackage.Literals.XTEND_CLASS, IssueCodes.REDUNDANT_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -339,6 +342,9 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_10 = new StringConcatenation();
       _builder_10.append("final def foo() {}");
       this._validationTestHelper.assertNoErrors(this.function(_builder_10.toString()));
+      StringConcatenation _builder_11 = new StringConcatenation();
+      _builder_11.append("public def foo() {}");
+      this._validationTestHelper.assertWarning(this.function(_builder_11.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.REDUNDANT_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -379,6 +385,12 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     StringConcatenation _builder_10 = new StringConcatenation();
     _builder_10.append("synchronized def foo() {}");
     this._validationTestHelper.assertError(this.memberInInterface(_builder_10.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_11 = new StringConcatenation();
+    _builder_11.append("override def foo() {}");
+    this._validationTestHelper.assertWarning(this.memberInInterface(_builder_11.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.REDUNDANT_MODIFIER);
+    StringConcatenation _builder_12 = new StringConcatenation();
+    _builder_12.append("def override foo() {}");
+    this._validationTestHelper.assertWarning(this.memberInInterface(_builder_12.toString()), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.REDUNDANT_MODIFIER);
   }
   
   @Test
@@ -458,6 +470,12 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_11 = new StringConcatenation();
       _builder_11.append("private transient volatile int foo");
       this._validationTestHelper.assertNoErrors(this.field(_builder_11.toString()));
+      StringConcatenation _builder_12 = new StringConcatenation();
+      _builder_12.append("private int foo");
+      this._validationTestHelper.assertWarning(this.field(_builder_12.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.REDUNDANT_MODIFIER);
+      StringConcatenation _builder_13 = new StringConcatenation();
+      _builder_13.append("private val foo=42");
+      this._validationTestHelper.assertWarning(this.field(_builder_13.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.REDUNDANT_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -717,6 +735,12 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("val final int i=42");
       this._validationTestHelper.assertNoErrors(this.field(_builder_3.toString()));
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("final val int i=42");
+      this._validationTestHelper.assertWarning(this.field(_builder_4.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.REDUNDANT_MODIFIER);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("val final int i=42");
+      this._validationTestHelper.assertWarning(this.field(_builder_5.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.REDUNDANT_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

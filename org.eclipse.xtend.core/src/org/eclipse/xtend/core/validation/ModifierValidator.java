@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
@@ -49,9 +52,12 @@ public class ModifierValidator {
 		Set<String> seenModifiers = newHashSet();
 		boolean visibilitySeen = false;
 		boolean abstractSeen = false;
+		boolean defSeen = false;
 		boolean staticSeen = false;
 		boolean finalSeen = false;
 		boolean varSeen = false;
+		int defKeywordIndex = -1;
+		int finalKeywordIndex = -1;
 
 		for(int i=0; i<member.getModifiers().size(); ++i) {
 			String modifier = member.getModifiers().get(i);
@@ -69,6 +75,12 @@ public class ModifierValidator {
 						error("The " + memberName +" can only set one of public / package / protected / private", 
 								member, i);
 					visibilitySeen = true;
+					if("private".equals(modifier) && member instanceof XtendField) {
+						redundantModifierWarning("private", memberName, member, i);
+					}
+					if("public".equals(modifier) && (member instanceof XtendClass || member instanceof XtendFunction)) {
+						redundantModifierWarning("public", memberName, member, i);
+					}
 				}
 			} 
 			if(equal(modifier, "abstract")) {
@@ -96,6 +108,16 @@ public class ModifierValidator {
 					error("The " + memberName + " can either be var or val / final, not both",
 							member, i);
 				}
+				if(equal(modifier, "final")) {
+					finalKeywordIndex = i;
+				}
+				if(finalSeen) {
+					/*
+					 * Independent of the order of the keywords (such as 'final val' or 'val final'), 
+					 * the 'final' keyword should be marked with the warning marker
+					 */
+					redundantModifierWarning("final", memberName, member, finalKeywordIndex);
+				}
 				finalSeen = true;
 			} else if(equal(modifier, "var")) {
 				if(finalSeen) {
@@ -103,8 +125,34 @@ public class ModifierValidator {
 							member, i);
 				}
 				varSeen = true;
+			} else if ((equal(modifier, "def") || equal(modifier, "override")) && member instanceof XtendFunction) {
+				if(equal(modifier, "def")) {
+					defKeywordIndex = i;					
+				}
+				if(defSeen) {
+					/*
+					 * Independent of the order of the keywords (such as 'override def' or 'def override'), 
+					 * the 'def' keyword should be marked with the warning marker
+					 */
+					redundantModifierWarning("def", memberName, member, defKeywordIndex);
+				}
+				defSeen = true;
 			}
 		}
+	}
+
+	/**
+	 * @since 2.14
+	 */
+	protected void redundantModifierWarning(String modifier, String memberName, EObject source, int index) {
+		warning("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER);
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected void warning(String message, EObject source, int index, String code) {
+		validator.acceptWarning(message, source, XTEND_MEMBER__MODIFIERS, index, code);
 	}
 	
 	protected void error(String message, EObject source, int index) {
