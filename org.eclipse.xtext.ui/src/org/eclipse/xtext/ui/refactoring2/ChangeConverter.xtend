@@ -79,8 +79,11 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	protected def void doConvert(IEmfResourceChange change) {
 		handleReplacements(change)
 		handleUriChange(change)
+		if(affectsPersistedFiles()) {
+			saveEditorsAfterApply()
+		}
 	}
-
+	
 	protected def dispatch void handleReplacements(IEmfResourceChange change) {
 		val outputStream = new ByteArrayOutputStream
 		tryWith(outputStream) [
@@ -165,5 +168,15 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 					.findFirst[ it.editorInput == editorInput ]
 			}
 		}.syncExec()
+	}
+	
+	protected def boolean affectsPersistedFiles() {
+		currentChange.children.exists[!(it instanceof EditorDocumentChange)]
+	}
+
+	protected def void saveEditorsAfterApply() {
+		for (change : currentChange.children.filter(EditorDocumentChange)) {
+			change.doSave = true
+		}
 	}
 }

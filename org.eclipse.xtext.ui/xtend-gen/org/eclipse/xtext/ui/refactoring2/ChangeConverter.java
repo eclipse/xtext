@@ -113,6 +113,10 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   protected void doConvert(final IEmfResourceChange change) {
     this.handleReplacements(change);
     this.handleUriChange(change);
+    boolean _affectsPersistedFiles = this.affectsPersistedFiles();
+    if (_affectsPersistedFiles) {
+      this.saveEditorsAfterApply();
+    }
   }
   
   protected void _handleReplacements(final IEmfResourceChange change) {
@@ -264,6 +268,20 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, IEditorPart>map(((List<IEditorReference>)Conversions.doWrapArray(ChangeConverter.this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
       }
     }.syncExec();
+  }
+  
+  protected boolean affectsPersistedFiles() {
+    final Function1<Change, Boolean> _function = (Change it) -> {
+      return Boolean.valueOf((!(it instanceof EditorDocumentChange)));
+    };
+    return IterableExtensions.<Change>exists(((Iterable<Change>)Conversions.doWrapArray(this.currentChange.getChildren())), _function);
+  }
+  
+  protected void saveEditorsAfterApply() {
+    Iterable<EditorDocumentChange> _filter = Iterables.<EditorDocumentChange>filter(((Iterable<?>)Conversions.doWrapArray(this.currentChange.getChildren())), EditorDocumentChange.class);
+    for (final EditorDocumentChange change : _filter) {
+      change.setDoSave(true);
+    }
   }
   
   protected void handleReplacements(final IEmfResourceChange change) {
