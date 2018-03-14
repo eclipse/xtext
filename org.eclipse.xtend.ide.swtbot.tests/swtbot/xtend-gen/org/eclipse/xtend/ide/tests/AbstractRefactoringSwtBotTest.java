@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -204,6 +205,6 @@ public abstract class AbstractRefactoringSwtBotTest {
   }
   
   protected void assertEquals(final CharSequence expected, final CharSequence value) {
-    Assert.assertEquals(expected.toString(), value.toString());
+    Assert.assertEquals(Strings.toUnixLineSeparator(expected.toString()), Strings.toUnixLineSeparator(value.toString()));
   }
 }

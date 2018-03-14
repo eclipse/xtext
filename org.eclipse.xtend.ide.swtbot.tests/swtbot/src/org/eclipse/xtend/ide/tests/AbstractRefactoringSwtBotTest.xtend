@@ -22,9 +22,10 @@ import org.eclipse.text.undo.DocumentUndoManagerRegistry
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtend.ide.internal.XtendActivator
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
+import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Assert
@@ -32,6 +33,7 @@ import org.junit.Before
 import org.junit.BeforeClass
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.util.Strings.toUnixLineSeparator
 
 import static extension org.eclipse.xtend.ide.tests.SwtBotProjectHelper.*
 
@@ -168,7 +170,8 @@ abstract class AbstractRefactoringSwtBotTest {
 	}
 	
 	protected def assertEquals(CharSequence expected, CharSequence value) {
-		Assert.assertEquals(expected.toString(), value.toString())
+		// unify line endings to have tests platform independent
+		Assert.assertEquals(toUnixLineSeparator(expected.toString()), toUnixLineSeparator(value.toString()))
 	}
 }
 

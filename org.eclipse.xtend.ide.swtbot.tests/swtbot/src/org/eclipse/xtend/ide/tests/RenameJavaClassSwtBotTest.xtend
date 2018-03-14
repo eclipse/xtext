@@ -52,20 +52,24 @@ class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
 
 	@Test 
 	def void renameJavaClass() {
-		val xtendEditor = bot.newXtendEditor('XtendClass', '''
+		val xtendEditor = bot.newXtendEditor('XtendClass', 'test', '''
+			package test
 			class XtendClass extends JavaClass {
 			}
 		''')
-		val javaEditor = bot.newJavaEditor('JavaClass', '''
+		val javaEditor = bot.newJavaEditor('JavaClass', 'test', '''
+			package test;
 			public class ?JavaClass? {}
 		''')
 		javaEditor.renameInJavaEditor('NewJavaClass', 'Rename Type')
 		assertEquals('''
+			package test
 			class XtendClass extends NewJavaClass {
 			}
 		''', xtendEditor.text)
 		assertFalse(xtendEditor.dirty)
 		assertEquals('''
+			package test;
 			public class NewJavaClass {}
 		''', javaEditor.text)
 		assertFalse(javaEditor.dirty)
@@ -74,20 +78,24 @@ class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
 	
 	@Test 
 	def void renameJavaClassXtendReference() {
-		val javaEditor = bot.newJavaEditor('JavaClass', '''
+		val javaEditor = bot.newJavaEditor('JavaClass', 'test', '''
+			package test;
 			public class JavaClass {}
 		''')
-		val xtendEditor = bot.newXtendEditor('XtendClass', '''
+		val xtendEditor = bot.newXtendEditor('XtendClass', 'test', '''
+			package test
 			class XtendClass extends ?JavaClass? {
 			}
 		''')
 		xtendEditor.renameInXtendEditor('NewJavaClass', 'Rename Type')
 		assertEquals('''
+			package test
 			class XtendClass extends NewJavaClass {
 			}
 		''', xtendEditor.text)
 		assertFalse(xtendEditor.dirty)
 		assertEquals('''
+			package test;
 			public class NewJavaClass {}
 		''', javaEditor.text)
 		assertFalse(javaEditor.dirty)
