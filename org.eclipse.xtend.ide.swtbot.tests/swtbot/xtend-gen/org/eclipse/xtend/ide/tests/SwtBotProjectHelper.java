@@ -93,6 +93,14 @@ public class SwtBotProjectHelper {
     return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
   }
   
+  public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final CharSequence content) {
+    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, packageName, (SwtBotProjectHelper.defaultProject + "/src"));
+    final Procedure1<SWTBotEclipseEditor> _function = (SWTBotEclipseEditor it_1) -> {
+      SwtBotProjectHelper.setContent(it_1, content);
+    };
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
+  }
+  
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
     SWTBotEclipseEditor _xblockexpression = null;
     {
@@ -112,6 +120,14 @@ public class SwtBotProjectHelper {
   
   public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
     SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
+    final Procedure1<SWTBotEclipseEditor> _function = (SWTBotEclipseEditor it_1) -> {
+      SwtBotProjectHelper.setContent(it_1, content);
+    };
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newXtendEditor, _function);
+  }
+  
+  public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final CharSequence content) {
+    SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, packageName, (SwtBotProjectHelper.defaultProject + "/src"));
     final Procedure1<SWTBotEclipseEditor> _function = (SWTBotEclipseEditor it_1) -> {
       SwtBotProjectHelper.setContent(it_1, content);
     };

@@ -61,6 +61,12 @@ class SwtBotProjectHelper {
 		]
 	}
 	
+	static def newJavaEditor(SWTWorkbenchBot it, String typeName, String packageName, CharSequence content) {
+		newJavaEditor(typeName, packageName, defaultProject + '/src') => [
+			it.content = content
+		]
+	}
+	
 	static def newJavaEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
 		fileNew('Class')
 		shell('New Java Class').activate
@@ -73,6 +79,12 @@ class SwtBotProjectHelper {
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, CharSequence content) {
 		newXtendEditor(typeName, '', defaultProject + '/src') => [
+			it.content = content
+		]
+	}
+	
+	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, CharSequence content) {
+		newXtendEditor(typeName, packageName, defaultProject + '/src') => [
 			it.content = content
 		]
 	}
