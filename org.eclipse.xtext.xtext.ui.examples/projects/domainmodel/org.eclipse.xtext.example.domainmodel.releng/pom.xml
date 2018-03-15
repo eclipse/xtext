@@ -30,6 +30,8 @@
 		<module>../org.eclipse.xtext.example.domainmodel.ui</module>
 		<module>../org.eclipse.xtext.example.domainmodel.tests</module>
 		<module>../org.eclipse.xtext.example.domainmodel.ui.tests</module>
+		<module>feature</module>
+		<module>repository</module>
 	</modules>
 	<build>
 		<plugins>
@@ -71,6 +73,33 @@
 					</environments>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
 		</plugins>
 		<pluginManagement>
 			<plugins>
