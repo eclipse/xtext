@@ -33,6 +33,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.DocumentRewriteSessionEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.swt.widgets.Display;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork.ReconcilingUnitOfWorkProvider;
+import org.eclipse.xtext.ui.util.DisplayRunnable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -698,9 +700,24 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	@Override
 	protected void fireDocumentChanged(DocumentEvent event) {
-		cancelReaders(resource);
-		tokenSource.updateStructure(event);
-		super.fireDocumentChanged(event);
+		new DisplayRunnable() {
+			@Override
+			protected void run() throws Exception {
+				cancelReaders(resource);
+				tokenSource.updateStructure(event);
+				XtextDocument.super.fireDocumentChanged(event);
+			}
+		}.syncExec();
+	}
+
+	@Override
+	protected void fireRewriteSessionChanged(DocumentRewriteSessionEvent event) {
+		new DisplayRunnable() {
+			@Override
+			protected void run() throws Exception {
+				XtextDocument.super.fireRewriteSessionChanged(event);
+			}
+		}.syncExec();
 	}
 
 	public IRegion getLastDamage() {

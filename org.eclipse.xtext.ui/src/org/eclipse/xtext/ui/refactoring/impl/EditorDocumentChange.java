@@ -18,7 +18,6 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextChange;
 import org.eclipse.text.edits.UndoEdit;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 /**
  * Copied and adapted {@link DocumentChange}.
@@ -93,16 +92,6 @@ public class EditorDocumentChange extends TextChange {
 
 	@Override
 	protected void releaseDocument(IDocument document, IProgressMonitor pm) throws CoreException {
-	}
-
-	@Override
-	public Change perform(final IProgressMonitor pm) throws CoreException {
-		return new DisplayRunnableWithResult<Change>() {
-			@Override
-			protected Change run() throws Exception {
-				return EditorDocumentChange.super.perform(pm);
-			}
-		}.syncExec();
 	}
 		
 	@Override

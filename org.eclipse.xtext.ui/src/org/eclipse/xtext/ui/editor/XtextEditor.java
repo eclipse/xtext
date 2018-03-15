@@ -105,6 +105,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.util.DisplayRunnable;
 
 import com.google.common.collect.ObjectArrays;
 import com.google.inject.Inject;
@@ -316,6 +317,26 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public void doSave(IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
 		callback.afterSave(this);
+	}
+	
+	@Override
+	protected void updateState(final IEditorInput input) {
+		new DisplayRunnable() {
+			@Override
+			protected void run() throws Exception {
+				XtextEditor.super.updateState(input);
+			}
+		}.syncExec();
+	}
+	
+	@Override
+	protected void validateState(IEditorInput input) {
+		new DisplayRunnable() {
+			@Override
+			protected void run() throws Exception {
+				XtextEditor.super.validateState(input);
+			}
+		}.syncExec();
 	}
 
 	@Override
