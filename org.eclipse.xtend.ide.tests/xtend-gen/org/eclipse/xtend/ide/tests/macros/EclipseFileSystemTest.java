@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,10 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtend.ide.tests.macros.JavaIoFileSystemTest;
@@ -136,6 +140,27 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       Assert.assertFalse(this.fs.exists(file));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIssue383() {
+    if ((this.fs instanceof AbstractFileSystemSupport)) {
+      final AbstractFileSystemSupport afs = ((AbstractFileSystemSupport) this.fs);
+      final IProject px = this.createProject("px");
+      this.createProject("py");
+      final ResourceSet rs = this.resourceSetProvider.get(px);
+      final Resource rx = rs.createResource(URI.createPlatformResourceURI("px/foo/xxxx", true));
+      final Resource rxb = rs.createResource(URI.createPlatformResourceURI("px/bar/yyyy", true));
+      final Resource ry = rs.createResource(URI.createPlatformResourceURI("py/bar/xxxx", true));
+      Path pathx = afs.getPath(rx);
+      Assert.assertEquals("/px/foo/xxxx", pathx.toString());
+      Path pathxb = afs.getPath(rxb);
+      Assert.assertEquals("/px/bar/yyyy", pathxb.toString());
+      Path pathy = afs.getPath(ry);
+      Assert.assertEquals("/py/bar/xxxx", pathy.toString());
+    } else {
+      Assert.fail("fs is no AbstractFileSystemSupport");
     }
   }
 }

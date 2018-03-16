@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
@@ -459,7 +466,30 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   protected Path getPath(final URI absoluteURI, final URI baseURI, final Path basePath) {
     Path _xblockexpression = null;
     {
-      final URI relativeURI = absoluteURI.deresolve(baseURI);
+      URI _xifexpression = null;
+      if ((baseURI.isPlatformResource() && absoluteURI.isPlatformResource())) {
+        URI _xifexpression_1 = null;
+        String _segment = baseURI.segment(1);
+        String _segment_1 = absoluteURI.segment(1);
+        boolean _notEquals = (!Objects.equal(_segment, _segment_1));
+        if (_notEquals) {
+          URI _xblockexpression_1 = null;
+          {
+            String _platformString = absoluteURI.toPlatformString(true);
+            final org.eclipse.core.runtime.Path p = new org.eclipse.core.runtime.Path(_platformString);
+            String _string = p.toString();
+            String _plus = (".." + _string);
+            _xblockexpression_1 = URI.createURI(_plus);
+          }
+          _xifexpression_1 = _xblockexpression_1;
+        } else {
+          _xifexpression_1 = absoluteURI.deresolve(baseURI);
+        }
+        _xifexpression = _xifexpression_1;
+      } else {
+        _xifexpression = absoluteURI.deresolve(baseURI);
+      }
+      final URI relativeURI = _xifexpression;
       if ((relativeURI.isEmpty() || Objects.equal(relativeURI, absoluteURI))) {
         return null;
       }
