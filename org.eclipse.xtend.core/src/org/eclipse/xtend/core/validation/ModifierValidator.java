@@ -31,12 +31,12 @@ public class ModifierValidator {
 	private static final Set<String> visibilityModifers = newHashSet("public", "protected", "package", "private");
 	
 	private final Set<String> allowedModifiers;
-	private final AbstractDeclarativeValidator validator;
+	private final XtendValidator validator;
 
 	private final String allowedModifiersAsString;
 
 	
-	public ModifierValidator(List<String> allowedModifiers, AbstractDeclarativeValidator validator) {
+	public ModifierValidator(List<String> allowedModifiers, XtendValidator validator) {
 		this.allowedModifiers = newHashSet(allowedModifiers);
 		this.validator = validator;
 		StringBuffer buffer = new StringBuffer(allowedModifiers.get(0));
@@ -141,18 +141,12 @@ public class ModifierValidator {
 		}
 	}
 
-	/**
-	 * @since 2.14
-	 */
 	protected void redundantModifierWarning(String modifier, String memberName, EObject source, int index) {
-		warning("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER);
+		issue("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER);
 	}
 	
-	/**
-	 * @since 2.14
-	 */
-	protected void warning(String message, EObject source, int index, String code) {
-		validator.acceptWarning(message, source, XTEND_MEMBER__MODIFIERS, index, code);
+	protected void issue(String message, EObject source, int index, String code) {
+		validator.addIssue(message, source, XTEND_MEMBER__MODIFIERS, index, code);
 	}
 	
 	protected void error(String message, EObject source, int index) {
