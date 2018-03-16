@@ -603,6 +603,7 @@
 			type="text">
 		</fileTypes>
 	</extension>
+
 	<!-- code mining -->
 	<extension point="org.eclipse.ui.workbench.texteditor.codeMiningProviders">
 		<codeMiningProvider
@@ -621,4 +622,51 @@
 			</enabledWhen>
 		</codeMiningProvider>
 	</extension>
+	
+	<!-- manual additions start here -->
+	<extension point="org.eclipse.xtext.ui.searchFilter">
+		<filter
+			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.search.DomainmodelSearchFilter">
+		</filter>
+	</extension>
+
+	<extension point="org.eclipse.ui.views">
+		<view
+				class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy.AssociationHierarchyViewPart"
+				id="org.eclipse.xtext.example.domainmodel.ui.editor.AssociationHierarchy"
+				icon="icons/editor.gif"
+				name="Association Hierarchy"
+				restorable="true">
+		</view>
+	</extension>
+	<extension point="org.eclipse.ui.commands">
+		<command
+				id="org.eclipse.xtext.example.domainmodel.ui.editor.OpenAssociationHierarchy"
+				categoryId="org.eclipse.ui.category.navigate"
+				name="Open Association Hierarchy"
+				description="Open association Hierarchy for the selected entity">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+				locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+					commandId="org.eclipse.xtext.example.domainmodel.ui.editor.OpenAssociationHierarchy"
+				 style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+				class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy.OpenAssociationHierarchyHandler"
+				commandId="org.eclipse.xtext.example.domainmodel.ui.editor.OpenAssociationHierarchy">
+			<activeWhen>
+				<reference definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened" />
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- manual additions end here -->
 </plugin>

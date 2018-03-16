@@ -54,7 +54,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Inject
 	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
 	
-	private List<IReconcilingStrategy> strategyList;
+	private List<IReconcilingStrategy> strategies = new ArrayList<IReconcilingStrategy>();
 	
 	private XtextResource resource;
 
@@ -68,7 +68,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			log.trace("reconcile region: " + region);
 		}
 		doReconcile(region);
-		strategyList.stream().forEach(s-> s.reconcile(region));
+		for (IReconcilingStrategy strategy: strategies) {
+			strategy.reconcile(region);
+		}
 	}
 
 	@Override
@@ -89,7 +91,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			throw new IllegalArgumentException("Document must be an " + XtextDocument.class.getSimpleName());
 		}
 		
-		strategyList.stream().forEach(s-> s.setDocument(document));
+		for (IReconcilingStrategy strategy: strategies) {
+			strategy.setDocument(document);
+		}
 	}
 
 	/**
@@ -97,7 +101,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 */
 	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
-		strategyList = new ArrayList<IReconcilingStrategy>();
+		strategies.clear();
 		addStrategy(spellingReconcileStrategyFactory.create(sourceViewer));
 	}
 
@@ -107,7 +111,11 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Override
 	public void setProgressMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
-		strategyList.stream().forEach(s-> ((IReconcilingStrategyExtension) s).setProgressMonitor(monitor));
+		for (IReconcilingStrategy strategy: strategies) {
+			if (strategy instanceof IReconcilingStrategyExtension) {
+				((IReconcilingStrategyExtension) strategy).setProgressMonitor(monitor);
+			}
+		}
 	}
 
 	/**
@@ -115,7 +123,11 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 */
 	@Override
 	public void initialReconcile() {
-		strategyList.stream().forEach(s-> ((IReconcilingStrategyExtension) s).initialReconcile());
+		for (IReconcilingStrategy strategy: strategies) {
+			if (strategy instanceof IReconcilingStrategyExtension) {
+				((IReconcilingStrategyExtension) strategy).initialReconcile();
+			}
+		}
 	}
 
 	/**
@@ -192,6 +204,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.14
 	 */
 	protected void addStrategy(IReconcilingStrategy strategy) {
-		strategyList.add(strategy);
+		strategies.add(strategy);
 	}
 }
