@@ -68,7 +68,7 @@ public class TaskMarkerContributorTest extends AbstractXtextTests {
       this.markerContributor.updateMarkers(file, resource, _nullProgressMonitor);
       final Function1<IMarker, String> _function = (IMarker it) -> {
         try {
-          return it.getType();
+          return it.getAttribute(IMarker.LINE_NUMBER).toString();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

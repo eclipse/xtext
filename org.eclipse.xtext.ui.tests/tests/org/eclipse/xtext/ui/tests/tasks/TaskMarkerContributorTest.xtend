@@ -50,7 +50,7 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 			'''))
 		val resource = file.resource
 		markerContributor.updateMarkers(file, resource, new NullProgressMonitor())
-		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO).sortBy[type]
+		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO).sortBy[getAttribute(IMarker.LINE_NUMBER).toString]
 		assertEquals(2, markers.size)
 		assertEquals("TODO foo", markers.head.getAttribute(IMarker.MESSAGE))
 		assertEquals(2, markers.head.getAttribute(IMarker.LINE_NUMBER))
