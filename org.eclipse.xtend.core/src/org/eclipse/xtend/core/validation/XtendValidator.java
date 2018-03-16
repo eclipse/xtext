@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -2154,4 +2154,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		super.checkDeprecated(decl);
 	}
 
+	// makes it possible to create issues with configurable severity from delegates e.g. ModifierValidator
+	@Override
+	protected void addIssue(String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData) {
+		super.addIssue(message, source, feature, index, issueCode, issueData);
+	}
+	
 }

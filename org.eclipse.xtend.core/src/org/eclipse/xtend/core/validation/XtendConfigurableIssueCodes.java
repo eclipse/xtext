@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,6 +36,7 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(create(IssueCodes.IMPLICIT_RETURN, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.ORPHAN_ELMENT, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.WRONG_FILE, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.REDUNDANT_MODIFIER, SeverityConverter.SEVERITY_WARNING));
 		// overwrite xbase default
 		iAcceptor.accept(create(org.eclipse.xtext.xbase.validation.IssueCodes.COPY_JAVA_PROBLEMS, SeverityConverter.SEVERITY_ERROR));
 	}
