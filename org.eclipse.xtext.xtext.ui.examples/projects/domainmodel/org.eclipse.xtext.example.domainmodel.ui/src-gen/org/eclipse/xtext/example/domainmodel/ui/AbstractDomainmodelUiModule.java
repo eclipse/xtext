@@ -9,6 +9,7 @@ import com.google.inject.name.Names;
 import org.eclipse.compare.IViewerCreator;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.jface.text.codemining.ICodeMiningProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.example.domainmodel.ide.codemining.DomainmodelCodeMiningStrategy;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.DomainmodelParser;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.PartialDomainmodelContentAssistParser;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal.InternalDomainmodelLexer;
@@ -50,6 +52,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.UIBindings;
+import org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy;
 import org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory;
@@ -80,6 +83,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
@@ -403,6 +407,16 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public void configureCompareViewerTitle(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(UIBindings.COMPARE_VIEWER_TITLE)).toInstance("Domainmodel Compare");
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+	public Class<? extends ICodeMiningProvider> bindICodeMiningProvider() {
+		return DomainmodelCodeMiningStrategy.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+	public Class<? extends XtextDocumentReconcileStrategy> bindXtextDocumentReconcileStrategy() {
+		return XtextCodeMiningReconcileStrategy.class;
 	}
 	
 }

@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.reconciler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -27,7 +30,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
-
 import com.google.inject.Inject;
 
 /**
@@ -42,17 +44,18 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  * @author Jan Koehnlein
+ * @author René Purrio
  */
 public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
 		ISourceViewerAware {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
-
+	
 	@Inject
 	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
 	
-	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
-
+	private List<IReconcilingStrategy> strategyList;
+	
 	private XtextResource resource;
 
 	private IProgressMonitor monitor;
@@ -65,9 +68,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			log.trace("reconcile region: " + region);
 		}
 		doReconcile(region);
-		if (spellingReconcileStrategy != null) {
-			spellingReconcileStrategy.reconcile(region);
-		}
+		strategyList.stream().forEach(s-> s.reconcile(region));
 	}
 
 	@Override
@@ -87,9 +88,8 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		if (!(document instanceof XtextDocument)) {
 			throw new IllegalArgumentException("Document must be an " + XtextDocument.class.getSimpleName());
 		}
-		if (spellingReconcileStrategy != null) {
-			spellingReconcileStrategy.setDocument(document);
-		}
+		
+		strategyList.stream().forEach(s-> s.setDocument(document));
 	}
 
 	/**
@@ -97,7 +97,8 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 */
 	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
-		spellingReconcileStrategy = spellingReconcileStrategyFactory.create(sourceViewer);
+		strategyList = new ArrayList<IReconcilingStrategy>();
+		addStrategy(spellingReconcileStrategyFactory.create(sourceViewer));
 	}
 
 	/**
@@ -106,9 +107,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Override
 	public void setProgressMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
-		if (spellingReconcileStrategy != null) {
-			spellingReconcileStrategy.setProgressMonitor(monitor);
-		}
+		strategyList.stream().forEach(s-> ((IReconcilingStrategyExtension) s).setProgressMonitor(monitor));
 	}
 
 	/**
@@ -116,9 +115,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 */
 	@Override
 	public void initialReconcile() {
-		if (spellingReconcileStrategy != null) {
-			spellingReconcileStrategy.initialReconcile();
-		}
+		strategyList.stream().forEach(s-> ((IReconcilingStrategyExtension) s).initialReconcile());
 	}
 
 	/**
@@ -191,4 +188,10 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		}
 	}
 	
+	/**
+	 * @since 2.14
+	 */
+	protected void addStrategy(IReconcilingStrategy strategy) {
+		strategyList.add(strategy);
+	}
 }
