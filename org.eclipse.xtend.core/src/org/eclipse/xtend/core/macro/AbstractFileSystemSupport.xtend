@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.macro
 
 import com.google.common.io.ByteStreams
@@ -292,7 +299,18 @@ abstract class AbstractFileSystemSupport implements MutableFileSystemSupport {
 	}
 
 	protected def getPath(URI absoluteURI, URI baseURI, Path basePath) {
-		val relativeURI = absoluteURI.deresolve(baseURI)
+		val URI relativeURI = 
+		if (baseURI.isPlatformResource && absoluteURI.isPlatformResource) {
+			if (baseURI.segment(1) != absoluteURI.segment(1)) {
+				val p = new org.eclipse.core.runtime.Path(absoluteURI.toPlatformString(true));
+				URI.createURI(".."+p.toString)
+			} else {	
+				absoluteURI.deresolve(baseURI)
+			}
+		} else {
+			absoluteURI.deresolve(baseURI)
+		}
+		 
 		if (relativeURI.empty || relativeURI == absoluteURI)
 			return null
 		

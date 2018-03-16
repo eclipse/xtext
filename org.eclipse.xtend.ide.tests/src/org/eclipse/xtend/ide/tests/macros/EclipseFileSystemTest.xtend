@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,8 @@ import com.google.inject.Provider
 import java.util.Set
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.core.macro.AbstractFileSystemSupport
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtend.lib.macro.file.Path
@@ -104,6 +106,27 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 			// expected
 		}
 		assertFalse(file.exists)
+	}
+	
+	@Test def void testIssue383() {
+		if (fs instanceof AbstractFileSystemSupport) {
+			val afs = fs as AbstractFileSystemSupport
+			val px = createProject("px")
+			createProject("py")
+			val rs = resourceSetProvider.get(px)
+			val rx = rs.createResource(URI.createPlatformResourceURI("px/foo/xxxx", true))
+			val rxb = rs.createResource(URI.createPlatformResourceURI("px/bar/yyyy", true))
+			val ry = rs.createResource(URI.createPlatformResourceURI("py/bar/xxxx", true))
+			var pathx = afs.getPath(rx)
+			assertEquals("/px/foo/xxxx", pathx.toString)
+			var pathxb = afs.getPath(rxb)
+			assertEquals("/px/bar/yyyy", pathxb.toString)
+			var pathy = afs.getPath(ry)
+			assertEquals("/py/bar/xxxx", pathy.toString)
+			
+		} else {
+			fail("fs is no AbstractFileSystemSupport")
+		}
 	}
 
 }
