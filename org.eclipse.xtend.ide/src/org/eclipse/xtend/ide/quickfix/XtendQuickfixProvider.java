@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -37,6 +37,7 @@ import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -62,6 +63,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
@@ -645,6 +647,28 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), node.getOffset(), 0);
 				appendable.append("return ");
 				appendable.commitChanges();
+			}
+		});
+	}
+	
+	@Fix(IssueCodes.REDUNDANT_MODIFIER)
+	public void removeRedundantModifier(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String[] issueData = issue.getData();
+		if(issueData==null || issueData.length==0) {
+			return;
+		}
+		
+		String modifier = issueData[0];
+		
+		// use the same label, description and image
+		// to be able to use the quickfixes (issue resolution) in batch mode
+		String label = "Remove the redundant modifier.";
+		String description = "The modifier is unnecessary and should be removed.";
+		String image = "fix_indent.gif";
+		acceptor.acceptMulti(issue, label, description, image, new IMultiModification<XtendMember>() {
+			@Override
+			public void apply(XtendMember element) {
+				element.getModifiers().remove(modifier);
 			}
 		});
 	}
