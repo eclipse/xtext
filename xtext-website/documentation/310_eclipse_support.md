@@ -662,6 +662,53 @@ newProjectWizardForEclipse = {
 
 In the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file will also be generated, where you can specify the initial contents that your language wizard will generate.
 
+## Code Mining
+
+Xtext provides code mining functionalities, these include "header annotations" and "inline annotations".
+
+![](images/code_mining.png)
+
+To enable code mining, the `CodeMiningFragment` has to be integrated in the `language` section of the MWE2 file as follows
+```mwe2
+fragment = ui.codemining.CodeMiningFragment {
+	generateStub = true
+	generateXtendStub = false //with false, it generates a Java stub
+}
+```
+With the `CodeMiningFragment` the MWE2 workflow generates the package `.ide.codemining` with the stub `<LanuageName>CodeMiningStrategy` in Java or Xtend. Furthermore the extension `org.eclipse.ui.workbench.texteditor.codeMiningProviders` will be generated in file `.ui.plugin.xml_gen`. This file has to be manually merged with `.ui.plugin.xml`.
+
+The following class `MyDslCodeMiningStrategy` shows an implementation of the generated stub. It contains code for little code mining functionalities.
+```java
+public class MyDslCodeMiningStrategy extends XtextCodeMiningProvider {
+	@Override
+	protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+
+		//TODO: implement me
+		//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
+		//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
+						
+		//example:
+		acceptor.accept(createNewLineHeaderCodeMining(1, document, "header annotation"));
+		if (indicator.isCanceled()) {
+			return;
+		}
+	}
+
+	@Override
+	protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException {
+
+		//TODO: implement me
+		//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
+		//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
+					
+		//example:
+		acceptor.accept(createNewLineContentCodeMining(5, " inline annotation "));
+		if (indicator.isCanceled()) {
+			return;
+		}
+	}
+}
+```
 ---
 
 **[Next Chapter: Web Editor Support](330_web_support.html)**
