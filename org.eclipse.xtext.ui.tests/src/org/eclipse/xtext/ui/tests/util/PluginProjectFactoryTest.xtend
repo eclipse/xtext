@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.util
 import org.junit.Test
 import static org.junit.Assert.*
 import org.eclipse.xtext.ui.util.PluginProjectFactory
+import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -37,7 +38,7 @@ class PluginProjectFactoryTest {
 		assertEquals('''
 		key = entry1,\
 		      entry2,\
-		      entry3'''.toString, content.toString)
+		      entry3'''.toString, toPlatform(content.toString))
 	}
 }
 

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.util;
 
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ui.testing.util.LineDelimiters;
 import org.eclipse.xtext.ui.tests.util.TestablePluginProjectFactory;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.junit.Assert;
@@ -46,6 +47,6 @@ public class PluginProjectFactoryTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("entry3");
-    Assert.assertEquals(_builder_1.toString(), content.toString());
+    Assert.assertEquals(_builder_1.toString(), LineDelimiters.toPlatform(content.toString()));
   }
 }

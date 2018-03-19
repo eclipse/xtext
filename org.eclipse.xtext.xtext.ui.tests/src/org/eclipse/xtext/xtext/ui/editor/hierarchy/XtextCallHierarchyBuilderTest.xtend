@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.hierarchy
 
+import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toUnix;
+
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder.CallHierarchyType
@@ -56,7 +58,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_01() {
 		testBuildHierarchy[
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -68,7 +70,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			index = models.head.value.indexOf('Element*')
 			expectedHierarchy = '''
@@ -86,7 +88,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildCalleeHierarchy_01() {
 		testBuildCalleeHierarchy[
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -98,7 +100,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			index = models.head.value.indexOf('Model')
 			expectedHierarchy = '''
@@ -120,7 +122,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_02() {
 		testBuildHierarchy[
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -137,7 +139,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			index = models.head.value.indexOf('AbstractElement*')
 			expectedHierarchy = '''
@@ -159,7 +161,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_03() {
 		testBuildHierarchy[
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -171,7 +173,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			index = models.head.value.lastIndexOf('Element')
 			expectedHierarchy = '''
@@ -191,21 +193,21 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_04() {
 		testBuildHierarchy[
-			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals hidden(ID)
 				
 				generate baseCallHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/BaseCallHierarchyBuilderTestLanguage"
 				
 				Model: name=ID;
-			''')
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			'''))
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
 				
 				@Override
 				Model: name=ID;
-			''')
+			'''))
 
 			resourceURI = models.head.key
 			index = models.head.value.indexOf('ID')
@@ -232,13 +234,13 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_05() {
 		testBuildHierarchy[
-			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate baseCallHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/BaseCallHierarchyBuilderTestLanguage"
 				
 				Model: name=ID;
-			''')
+			'''))
 
 			index = models.head.value.indexOf('BaseCallHierarchyBuilderTestLanguage')
 			expectedHierarchy = ''
@@ -248,7 +250,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_06() {
 		testBuildHierarchy[
-			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate baseCallHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/BaseCallHierarchyBuilderTestLanguage"
@@ -260,8 +262,8 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			'''))
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -274,7 +276,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			resourceURI = models.head.key
 			index = models.head.value.indexOf('Element')
@@ -297,7 +299,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_07() {
 		testBuildHierarchy[
-			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('baseCallHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate baseCallHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/BaseCallHierarchyBuilderTestLanguage"
@@ -309,8 +311,8 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			'''))
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.ui.tests.editor.hierarchy.BaseCallHierarchyBuilderTestLanguage
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -323,7 +325,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			resourceURI = models.last.key
 			index = models.last.value.indexOf('Element')
@@ -346,7 +348,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	@Test
 	def void testBuildHierarchy_08() {
 		testBuildHierarchy[
-			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> toUnix('''
 				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
 				
 				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
@@ -359,7 +361,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 				Element:
 					name=ID
 				;
-			''')
+			'''))
 
 			index = models.head.value.lastIndexOf('ID')
 			expectedHierarchy = '''

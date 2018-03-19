@@ -22,6 +22,7 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.tests.XtextInjectorProvider;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyBuilder;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNode;
+import org.eclipse.xtext.ui.testing.util.LineDelimiters;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -92,7 +93,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("Element*"));
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -146,7 +148,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("Model"));
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -223,7 +226,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("AbstractElement*"));
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -289,7 +293,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().lastIndexOf("Element"));
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -336,7 +341,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append("Model: name=ID;");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       Collection<Pair<String, String>> _models_1 = it.getModels();
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -350,7 +356,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.newLine();
       _builder_1.append("Model: name=ID;");
       _builder_1.newLine();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder_1.toString());
+      String _unix_1 = LineDelimiters.toUnix(_builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix_1);
       _models_1.add(_mappedTo_1);
       it.setResourceURI(IterableExtensions.<Pair<String, String>>head(it.getModels()).getKey());
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("ID"));
@@ -416,7 +423,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append("Model: name=ID;");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("BaseCallHierarchyBuilderTestLanguage"));
       it.setExpectedHierarchy("");
@@ -450,7 +458,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       Collection<Pair<String, String>> _models_1 = it.getModels();
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -477,7 +486,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.newLine();
       _builder_1.append(";");
       _builder_1.newLine();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder_1.toString());
+      String _unix_1 = LineDelimiters.toUnix(_builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix_1);
       _models_1.add(_mappedTo_1);
       it.setResourceURI(IterableExtensions.<Pair<String, String>>head(it.getModels()).getKey());
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().indexOf("Element"));
@@ -544,7 +554,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("baseCallHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       Collection<Pair<String, String>> _models_1 = it.getModels();
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -571,7 +582,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder_1.newLine();
       _builder_1.append(";");
       _builder_1.newLine();
-      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder_1.toString());
+      String _unix_1 = LineDelimiters.toUnix(_builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix_1);
       _models_1.add(_mappedTo_1);
       it.setResourceURI(IterableExtensions.<Pair<String, String>>last(it.getModels()).getKey());
       it.setIndex(IterableExtensions.<Pair<String, String>>last(it.getModels()).getValue().indexOf("Element"));
@@ -641,7 +653,8 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       _builder.newLine();
       _builder.append(";");
       _builder.newLine();
-      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _unix);
       _models.add(_mappedTo);
       it.setIndex(IterableExtensions.<Pair<String, String>>head(it.getModels()).getValue().lastIndexOf("ID"));
       StringConcatenation _builder_1 = new StringConcatenation();
