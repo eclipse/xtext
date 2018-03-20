@@ -30,12 +30,14 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
+import com.google.common.annotations.Beta;
+
 /**
- * @Beta
  * @since 2.14
- * @author RenÃ© Purrio - Initial contribution and API
+ * @author René Purrio - Initial contribution and API
  */
- public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider {
+@Beta
+public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider {
 	/*
 	 * This indicator checks if monitor is canceled or if
 	 * CancelableUnitOfWork-cancelIndicator is canceled.

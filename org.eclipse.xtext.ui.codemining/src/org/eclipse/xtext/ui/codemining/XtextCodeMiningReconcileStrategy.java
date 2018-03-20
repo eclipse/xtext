@@ -20,6 +20,8 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 
+import com.google.common.annotations.Beta;
+
 /**
  * This strategy updates code minings for the given <code>sourceViewer</code>.
  * Therefore the <code>sourceViewer</code> has to implement {@link org.eclipse.jface.text.source.ISourceViewerExtension5}.
@@ -28,10 +30,10 @@ import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
  * It calls {@link org.eclipse.jface.text.source.ISourceViewerExtension5#updateCodeMinings()} with reflection.
  * The reflection is necessary to handle different target platforms, which do not support <code>org.eclipse.jface.text</code> in version 3.13.  
  * 
- * @Beta
  * @since 2.14 
- * @author RenÃ© Purrio  - Initial contribution and API
+ * @author René Purrio  - Initial contribution and API
  */
+@Beta
 public class XtextCodeMiningReconcileStrategy extends XtextDocumentReconcileStrategy {
 	private static final Class<?> CLASS_SOURCE_VIEWER_EXTENSION_5;
 	private static final Method METHOD_UPDATE_CODMINING;
