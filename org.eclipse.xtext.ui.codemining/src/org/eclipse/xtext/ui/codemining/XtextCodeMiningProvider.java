@@ -9,8 +9,8 @@
 package org.eclipse.xtext.ui.codemining;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -60,37 +60,39 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public CompletableFuture<List<? extends ICodeMining>> provideCodeMinings(ITextViewer viewer,
 			IProgressMonitor monitor) {
 		CompletableFuture<List<? extends ICodeMining>> future = CompletableFuture.supplyAsync(() -> {
-			CancelableUnitOfWork<Object, XtextResource> uow = new CancelableUnitOfWork<Object, XtextResource>() {
+			CancelableUnitOfWork<List<ICodeMining>, XtextResource> uow = new CancelableUnitOfWork<List<ICodeMining>, XtextResource>() {
 				@Override
-				public Object exec(XtextResource resource, CancelIndicator uowCancelIndicator) throws Exception {
+				public List<ICodeMining> exec(XtextResource resource, CancelIndicator uowCancelIndicator) throws Exception {
 					List<ICodeMining> codeMiningList = new ArrayList<>();
 					IAcceptor<ICodeMining> acceptor = new IAcceptor<ICodeMining>() {
 						@Override
 						public void accept(ICodeMining codeMiningObject) {
+							if (uowCancelIndicator.isCanceled()) {
+								throw new CancellationException();
+							}
 							codeMiningList.add(codeMiningObject);
 						}
 					};
 					
 					CombinedCancelIndicator indicator = new CombinedCancelIndicator(monitor, uowCancelIndicator);
 					if (indicator.isCanceled()) {
-						return Collections.emptyList();
+						throw new CancellationException();
 					}
 					createLineHeaderCodeMinings(viewer.getDocument(), resource, indicator, acceptor);
 					if (indicator.isCanceled()) {
-						return Collections.emptyList();
+						throw new CancellationException();
 					}
 					createLineContentCodeMinings(viewer.getDocument(), resource, indicator, acceptor);
 					if (indicator.isCanceled()) {
-						return Collections.emptyList();
+						throw new CancellationException();
 					}
 					return codeMiningList;
 				}
 			};
-			return (List<ICodeMining>) XtextDocumentUtil.get(viewer).readOnly(uow);
+			return XtextDocumentUtil.get(viewer).readOnly(uow);
 		});
 		return future;
 	}

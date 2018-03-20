@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public class DomainmodelCodeMiningStrategy extends XtextCodeMiningProvider {
+public class DomainmodelCodeMiningProvider extends XtextCodeMiningProvider {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
 	@Inject
@@ -50,7 +50,7 @@ public class DomainmodelCodeMiningStrategy extends XtextCodeMiningProvider {
 			if (endIndex != -1) {
 				String attrName = line.substring(0, endIndex);
 				String attrType = line.substring(endIndex + 1, line.length());
-				String headerText = "attribut \'" + attrName + "\' with type \'" + attrType + "\'";
+				String headerText = "attribute \'" + attrName + "\' with type \'" + attrType + "\'";
 				acceptor.accept(createNewLineHeaderCodeMining(i, document, headerText));
 				if (indicator.isCanceled()) {
 					return;
@@ -73,7 +73,7 @@ public class DomainmodelCodeMiningStrategy extends XtextCodeMiningProvider {
 			}
 			//get returntype name from operation
 			JvmOperation inferredOp = (JvmOperation) jvmModelAssociations.getPrimaryJvmElement(o);
-			String returnTypeName = qnConverter.toQualifiedName(inferredOp.getReturnType().getIdentifier()).getLastSegment();
+			String returnTypeName = inferredOp.getReturnType().getSimpleName();
 			//find document offset for inline annotation
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(o);
 			for (Iterator<INode> it = node.getAsTreeIterable().iterator(); it.hasNext();) {

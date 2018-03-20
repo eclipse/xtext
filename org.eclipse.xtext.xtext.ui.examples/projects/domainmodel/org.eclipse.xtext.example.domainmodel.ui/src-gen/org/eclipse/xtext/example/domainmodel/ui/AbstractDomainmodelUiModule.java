@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.ui.refactoring.JdtRenameSupport;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
-import org.eclipse.xtext.example.domainmodel.ide.codemining.DomainmodelCodeMiningStrategy;
+import org.eclipse.xtext.example.domainmodel.ide.codemining.DomainmodelCodeMiningProvider;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.DomainmodelParser;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.PartialDomainmodelContentAssistParser;
 import org.eclipse.xtext.example.domainmodel.ide.contentassist.antlr.internal.InternalDomainmodelLexer;
@@ -411,7 +411,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
 	public Class<? extends ICodeMiningProvider> bindICodeMiningProvider() {
-		return DomainmodelCodeMiningStrategy.class;
+		return DomainmodelCodeMiningProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
