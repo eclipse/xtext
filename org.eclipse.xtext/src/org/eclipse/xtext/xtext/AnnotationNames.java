@@ -13,12 +13,17 @@ import com.google.common.collect.ImmutableList;
 
 /**
  * @author Christian Schneider - Initial contribution and API
+ * @author Holger Schill
  */
 public final class AnnotationNames {
 
 	public static final String OVERRIDE = "Override";
 	
-	public static final List<String> VALID_ANNOTATIONS_NAMES = ImmutableList.of(OVERRIDE);
+	public static final String EXPORTED = "Exported";
+	
+	public static final String FINAL = "Final";
+	
+	public static final List<String> VALID_ANNOTATIONS_NAMES = ImmutableList.of(OVERRIDE, EXPORTED, FINAL);
 	
 	private AnnotationNames() {
 	}

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
@@ -52,6 +54,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
@@ -72,6 +75,7 @@ import com.google.common.io.Files;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
+ * @author Holger Schill
  */
 public class XtextValidationTest extends AbstractValidationMessageAcceptingTestCase {
 
@@ -181,6 +185,40 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(issues.toString(), 1, issues.size());
 		assertEquals("This grammar has no super grammar and therefore cannot override any rules.", issues.get(0).getMessage());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	@Test public void testOverrideFinal() throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"@Final\n" + 
+				"RuleFinal:name=ID;\n" + 
+				"Rule: name=ID;","superGrammar.xtext", rs);
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.xtext.Supergrammar\n" +
+				"generate bar \"http://org.xtext.Bar\"\n" + 
+				"RuleFinal: name=ID;",  "foo.xtext", rs);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("This rule illegally overrides RuleFinal in org.xtext.Supergrammar which is final.", issues.get(0).getMessage());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	@Test public void testOverrideFinal_1() throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"@Final\n" + 
+				"RuleFinal:name=ID;\n" + 
+				"Rule: name=ID;","superGrammar.xtext", rs);
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.xtext.Supergrammar\n" +
+				"generate bar \"http://org.xtext.Bar\"\n" + 
+				"@Override Rule: name=ID;",  "foo.xtext", rs);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 0, issues.size());
 	}
 	
 	

@@ -98,6 +98,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Michael Clay
+ * @author Holger Schill
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
 
@@ -1252,11 +1253,10 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkOverridingRule(AbstractRule rule) {
 		final String name = rule.getName();
 		
-		final boolean isOverride =
-				rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.OVERRIDE.equals(e.getName()));
+
 		
 		final List<Grammar> superGrammars = GrammarUtil.getGrammar(rule).getUsedGrammars();
-		
+		boolean isOverride = isOverride(rule);
 		if (isOverride && superGrammars.isEmpty()) {
 			error("This grammar has no super grammar and therefore cannot override any rules.", rule,
 					XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
@@ -1264,14 +1264,17 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		
 		for (Grammar g : superGrammars) {
 			final AbstractRule r = GrammarUtil.findRuleForName(g, rule.getName());
-			
+
 			if (r != null) {
-				if (!isOverride) {
+				if(isFinal(r)) {
+					error("This rule illegally overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is final.", rule, 
+							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
+					break;
+				} else if (!isOverride) {
 					warning("This rule overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + 
 								" and thus should be annotated with @Override.", rule,
 							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_MISSING);
 					break;
-					
 				} else {
 					// type compatibility checking is currently done in 'Xtext2EcoreTransformer' being called during linking
 					//  so it's omitted here
@@ -1293,4 +1296,20 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			error("It is not possible to negate EOF", eof, null);
 		}
 	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected boolean isOverride(AbstractRule rule) {
+		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.OVERRIDE.equals(e.getName()));
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected boolean isFinal(AbstractRule rule) {
+		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.FINAL.equals(e.getName()));
+	}
+	
+
 }
