@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.codemining;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
+import com.google.inject.name.Names;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -28,10 +30,10 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
- * @Beta
  * @since 2.14
  * @author René Purrio - Initial contribution and API
  */
+@Beta
 @SuppressWarnings("all")
 public class CodeMiningFragment extends AbstractStubGeneratingFragment {
   @Inject
@@ -50,48 +52,71 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     ManifestAccess _manifest = this.getProjectConfig().getEclipsePlugin().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-      _requiredBundles.add("org.eclipse.xtext.ui.codemining");
-      Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-      _requiredBundles_1.add("org.eclipse.ui.workbench.texteditor");
       Set<String> _importedPackages = this.getProjectConfig().getEclipsePlugin().getManifest().getImportedPackages();
-      _importedPackages.add("org.eclipse.xtext.ui.codemining");
-    }
-    ManifestAccess _manifest_1 = this.getProjectConfig().getGenericIde().getManifest();
-    boolean _tripleNotEquals_1 = (_manifest_1 != null);
-    if (_tripleNotEquals_1) {
-      Set<String> _exportedPackages = this.getProjectConfig().getGenericIde().getManifest().getExportedPackages();
-      String _string = this.getCodeMiningStrategyClass().skipLast(1).toString();
-      _exportedPackages.add(_string);
-      Set<String> _requiredBundles_2 = this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles();
-      _requiredBundles_2.add("org.eclipse.jface.text");
-      Set<String> _requiredBundles_3 = this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles();
-      _requiredBundles_3.add("org.eclipse.xtext.ui.codemining");
-      Set<String> _requiredBundles_4 = this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles();
-      _requiredBundles_4.add("org.eclipse.core.runtime");
-      Set<String> _requiredBundles_5 = this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles();
-      _requiredBundles_5.add("org.eclipse.swt");
-      Set<String> _requiredBundles_6 = this.getProjectConfig().getGenericIde().getManifest().getRequiredBundles();
-      _requiredBundles_6.add("org.eclipse.xtext.ui");
-      Set<String> _importedPackages_1 = this.getProjectConfig().getGenericIde().getManifest().getImportedPackages();
-      _importedPackages_1.add("org.eclipse.xtext.ui.codemining");
+      _importedPackages.add("org.eclipse.xtext.ui.codemining;resolution:=optional");
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     final Procedure1<GuiceModuleAccess.BindingFactory> _function = (GuiceModuleAccess.BindingFactory it) -> {
-      it.addTypeToType(TypeReference.typeRef("org.eclipse.jface.text.codemining.ICodeMiningProvider"), TypeReference.typeRef(this.getCodeMiningStrategyClass().toString()));
-      it.addTypeToType(TypeReference.typeRef("org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy"), TypeReference.typeRef("org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy"));
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("try {");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("Class.forName(\"org.eclipse.jface.text.codemining.ICodeMiningProvider\");");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("binder.bind(");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.jface.text.codemining.ICodeMiningProvider");
+          _builder.append(_typeRef, "\t");
+          _builder.append(".class)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append(".to(");
+          TypeReference _typeRef_1 = TypeReference.typeRef(CodeMiningFragment.this.getCodeMiningProviderClass().toString());
+          _builder.append(_typeRef_1, "\t\t");
+          _builder.append(".class);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("binder.bind(");
+          TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory");
+          _builder.append(_typeRef_2, "\t");
+          _builder.append(".class).annotatedWith(");
+          TypeReference _typeRef_3 = TypeReference.typeRef(Names.class);
+          _builder.append(_typeRef_3, "\t");
+          _builder.append(".named(\"codeMinding\"))");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append(".to(");
+          TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy");
+          _builder.append(_typeRef_4, "\t\t");
+          _builder.append(".Factory.class);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("} catch(");
+          TypeReference _typeRef_5 = TypeReference.typeRef(ClassNotFoundException.class);
+          _builder.append(_typeRef_5);
+          _builder.append(" ignore) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("// no bindings if code mining is not available at runtime");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      it.addConfiguredBinding("CodeMinding", _client);
       it.contributeTo(this.getLanguage().getEclipsePluginGenModule());
     };
     ObjectExtensions.<GuiceModuleAccess.BindingFactory>operator_doubleArrow(_bindingFactory, _function);
     boolean _isGenerateXtendStub = this.isGenerateXtendStub();
     if (_isGenerateXtendStub) {
-      this.generateXtendCodeMiningStrategy();
+      this.generateXtendCodeMiningProvider();
     } else {
-      this.generateJavaCodeMiningStrategy();
+      this.generateJavaCodeMiningProvider();
     }
     PluginXmlAccess _pluginXml = this.getProjectConfig().getEclipsePlugin().getPluginXml();
-    boolean _tripleNotEquals_2 = (_pluginXml != null);
-    if (_tripleNotEquals_2) {
+    boolean _tripleNotEquals_1 = (_pluginXml != null);
+    if (_tripleNotEquals_1) {
       List<CharSequence> _entries = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- code mining -->");
@@ -161,16 +186,16 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     }
   }
   
-  protected QualifiedName getCodeMiningStrategyClass() {
-    String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(this.getGrammar());
-    String _plus = (_genericIdeBasePackage + ".codemining.");
+  protected QualifiedName getCodeMiningProviderClass() {
+    String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
+    String _plus = (_eclipsePluginBasePackage + ".codemining.");
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus_1 = (_plus + _simpleName);
-    return this._iQualifiedNameConverter.toQualifiedName((_plus_1 + "CodeMiningStrategy"));
+    return this._iQualifiedNameConverter.toQualifiedName((_plus_1 + "CodeMiningProvider"));
   }
   
-  protected void generateXtendCodeMiningStrategy() {
-    TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningStrategyClass().toString());
+  protected void generateXtendCodeMiningProvider() {
+    TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningProviderClass().toString());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -189,13 +214,13 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("import org.eclipse.xtext.util.IAcceptor");
         _builder.newLine();
         _builder.newLine();
-        _builder.append("public class ");
-        String _lastSegment = CodeMiningFragment.this.getCodeMiningStrategyClass().getLastSegment();
+        _builder.append("class ");
+        String _lastSegment = CodeMiningFragment.this.getCodeMiningProviderClass().getLastSegment();
         _builder.append(_lastSegment);
         _builder.append(" extends XtextCodeMiningProvider {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("def override protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{");
+        _builder.append("override void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.newLine();
@@ -206,9 +231,6 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//example:");
@@ -216,22 +238,13 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("\t\t");
         _builder.append("//acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"))");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//if (indicator.isCanceled()) {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//\treturn");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//}");
-        _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("def override protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {");
+        _builder.append("override void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.newLine();
@@ -242,24 +255,12 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//example:");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//acceptor.accept(createNewLineContentCodeMining(5, \" Inline annotation \"))");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//if (indicator.isCanceled()) {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//\treturn");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//}");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -268,11 +269,11 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    this.fileAccessFactory.createXtendFile(_typeRef, _client).writeTo(this.getProjectConfig().getGenericIde().getSrc());
+    this.fileAccessFactory.createXtendFile(_typeRef, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
   
-  protected void generateJavaCodeMiningStrategy() {
-    TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningStrategyClass().toString());
+  protected void generateJavaCodeMiningProvider() {
+    TypeReference _typeRef = TypeReference.typeRef(this.getCodeMiningProviderClass().toString());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -294,7 +295,7 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("@SuppressWarnings(\"restriction\")");
         _builder.newLine();
         _builder.append("public class ");
-        String _lastSegment = CodeMiningFragment.this.getCodeMiningStrategyClass().getLastSegment();
+        String _lastSegment = CodeMiningFragment.this.getCodeMiningProviderClass().getLastSegment();
         _builder.append(_lastSegment);
         _builder.append(" extends XtextCodeMiningProvider {");
         _builder.newLineIfNotEmpty();
@@ -313,24 +314,12 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//example:");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"));");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//if (indicator.isCanceled()) {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//\treturn;");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//}");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -352,24 +341,12 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.append("//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)");
-        _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//example:");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("//acceptor.accept(createNewLineContentCodeMining(5, \" Inline annotation \"));");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//if (indicator.isCanceled()) {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//\treturn;");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//}");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -378,6 +355,6 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
         _builder.newLine();
       }
     };
-    this.fileAccessFactory.createJavaFile(_typeRef, _client).writeTo(this.getProjectConfig().getGenericIde().getSrc());
+    this.fileAccessFactory.createJavaFile(_typeRef, _client).writeTo(this.getProjectConfig().getEclipsePlugin().getSrc());
   }
 }

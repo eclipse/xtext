@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.ui.codemining
 
+import com.google.common.annotations.Beta
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
@@ -17,13 +18,14 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import com.google.inject.name.Names
 
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
- * @Beta
  * @since 2.14
  * @author René Purrio - Initial contribution and API
  */
+@Beta
 class CodeMiningFragment extends AbstractStubGeneratingFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
@@ -31,29 +33,27 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 	
 	override generate() {
 		if (projectConfig.eclipsePlugin.manifest !== null) {
-			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui.codemining"
-			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.ui.workbench.texteditor"
-			projectConfig.eclipsePlugin.manifest.importedPackages += "org.eclipse.xtext.ui.codemining"
-		}
-		if (projectConfig.genericIde.manifest !== null) {
-			projectConfig.genericIde.manifest.exportedPackages += codeMiningStrategyClass.skipLast(1).toString
-			projectConfig.genericIde.manifest.requiredBundles += "org.eclipse.jface.text"
-			projectConfig.genericIde.manifest.requiredBundles += "org.eclipse.xtext.ui.codemining"
-			projectConfig.genericIde.manifest.requiredBundles += "org.eclipse.core.runtime"
-			projectConfig.genericIde.manifest.requiredBundles += "org.eclipse.swt"
-			projectConfig.genericIde.manifest.requiredBundles += "org.eclipse.xtext.ui"
-			projectConfig.genericIde.manifest.importedPackages += "org.eclipse.xtext.ui.codemining"
+			projectConfig.eclipsePlugin.manifest.importedPackages += "org.eclipse.xtext.ui.codemining;resolution:=optional"
 		}
 		new GuiceModuleAccess.BindingFactory => [
-			addTypeToType("org.eclipse.jface.text.codemining.ICodeMiningProvider".typeRef, codeMiningStrategyClass.toString.typeRef)
-			addTypeToType("org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy".typeRef, "org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef)
+			addConfiguredBinding("CodeMinding", '''
+				try {
+					Class.forName("org.eclipse.jface.text.codemining.ICodeMiningProvider");
+					binder.bind(«'org.eclipse.jface.text.codemining.ICodeMiningProvider'.typeRef».class)
+						.to(«codeMiningProviderClass.toString.typeRef».class);
+					binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMinding"))
+						.to(«"org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef».Factory.class);
+				} catch(«ClassNotFoundException.typeRef» ignore) {
+					// no bindings if code mining is not available at runtime
+				}
+			''')
 			contributeTo(language.eclipsePluginGenModule)
 		]
 
 		if (generateXtendStub) {
-			generateXtendCodeMiningStrategy
+			generateXtendCodeMiningProvider
 		} else {
-			generateJavaCodeMiningStrategy
+			generateJavaCodeMiningProvider
 		}
 			
 		if (projectConfig.eclipsePlugin.pluginXml !== null) {
@@ -80,12 +80,12 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 		}
 	}
 	
-	def protected QualifiedName getCodeMiningStrategyClass () {
-		(grammar.genericIdeBasePackage+".codemining."+grammar.simpleName+"CodeMiningStrategy").toQualifiedName
+	def protected QualifiedName getCodeMiningProviderClass () {
+		(grammar.eclipsePluginBasePackage+".codemining."+grammar.simpleName+"CodeMiningProvider").toQualifiedName
 	}
 	
-	def protected generateXtendCodeMiningStrategy() {
-		fileAccessFactory.createXtendFile(codeMiningStrategyClass.toString.typeRef, '''
+	def protected generateXtendCodeMiningProvider() {
+		fileAccessFactory.createXtendFile(codeMiningProviderClass.toString.typeRef, '''
 			import org.eclipse.jface.text.BadLocationException
 			import org.eclipse.jface.text.IDocument
 			import org.eclipse.jface.text.codemining.ICodeMining
@@ -94,38 +94,30 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 			import org.eclipse.xtext.util.CancelIndicator
 			import org.eclipse.xtext.util.IAcceptor
 			
-			public class «codeMiningStrategyClass.lastSegment» extends XtextCodeMiningProvider {
-				def override protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+			class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
+				override void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
 					
 					//TODO: implement me
 					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
-					//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
 					
 					//example:
 					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"))
-					//if (indicator.isCanceled()) {
-					//	return
-					//}
 				}
 				
-				def override protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
+				override void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
 					
 					//TODO: implement me
 					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
 					
 					//example:
 					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "))
-					//if (indicator.isCanceled()) {
-					//	return
-					//}
 				}
 			}
-		''').writeTo(projectConfig.genericIde.src)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 	
-	def protected generateJavaCodeMiningStrategy() {
-		fileAccessFactory.createJavaFile(codeMiningStrategyClass.toString.typeRef, '''
+	def protected generateJavaCodeMiningProvider() {
+		fileAccessFactory.createJavaFile(codeMiningProviderClass.toString.typeRef, '''
 			import org.eclipse.jface.text.BadLocationException;
 			import org.eclipse.jface.text.IDocument;
 			import org.eclipse.jface.text.codemining.ICodeMining;
@@ -135,19 +127,15 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 			import org.eclipse.xtext.util.IAcceptor;
 			
 			@SuppressWarnings("restriction")
-			public class «codeMiningStrategyClass.lastSegment» extends XtextCodeMiningProvider {
+			public class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
 				@Override
 				protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
 					
 					//TODO: implement me
 					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
-					//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
 					
 					//example:
 					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
-					//if (indicator.isCanceled()) {
-					//	return;
-					//}
 				}
 				
 				@Override
@@ -155,15 +143,11 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 					
 					//TODO: implement me
 					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
 					
 					//example:
 					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "));
-					//if (indicator.isCanceled()) {
-					//	return;
-					//}
 				}
 			}
-		''').writeTo(projectConfig.genericIde.src)
+		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 }
