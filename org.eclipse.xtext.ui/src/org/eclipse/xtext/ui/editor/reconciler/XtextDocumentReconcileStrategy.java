@@ -30,7 +30,12 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Binding;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.TypeLiteral;
 
 /**
  * Reconciling strategy that reconciles an {@link IXtextDocument}'s contents with the model in the underlying
@@ -46,15 +51,14 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  * @author René Purrio
  */
-public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
+public final class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
 		ISourceViewerAware {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
 	
-	@Inject
-	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
+	private List<IReconcileStrategyFactory> strategyFactories = new ArrayList<>();
 	
-	private List<IReconcilingStrategy> strategies = new ArrayList<IReconcilingStrategy>();
+	private List<IReconcilingStrategy> strategies = new ArrayList<>();
 	
 	private XtextResource resource;
 
@@ -62,6 +66,21 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 
 	private XtextEditor editor;
 
+	
+	@Inject
+	private void initializeStrategyFactories(Injector injector) {
+		List<Binding<IReconcileStrategyFactory>> bindingsByType = injector == null ? Lists
+				.<Binding<IReconcileStrategyFactory>> newArrayList() : injector.findBindingsByType(TypeLiteral
+				.get(IReconcileStrategyFactory.class));
+		for (Binding<IReconcileStrategyFactory> binding : bindingsByType) {
+			try {
+				strategyFactories.add(binding.getProvider().get());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+	
 	@Override
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
@@ -90,7 +109,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		if (!(document instanceof XtextDocument)) {
 			throw new IllegalArgumentException("Document must be an " + XtextDocument.class.getSimpleName());
 		}
-		
 		for (IReconcilingStrategy strategy: strategies) {
 			strategy.setDocument(document);
 		}
@@ -102,7 +120,11 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		strategies.clear();
-		addStrategy(spellingReconcileStrategyFactory.create(sourceViewer));
+		for(IReconcileStrategyFactory factory: strategyFactories) {
+			IReconcilingStrategy strategy = factory.createOrNull(sourceViewer);
+			if (strategy != null)
+				strategies.add(strategy);
+		}
 	}
 
 	/**
@@ -200,10 +222,4 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		}
 	}
 	
-	/**
-	 * @since 2.14
-	 */
-	protected void addStrategy(IReconcilingStrategy strategy) {
-		strategies.add(strategy);
-	}
 }

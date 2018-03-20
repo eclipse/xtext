@@ -76,7 +76,7 @@ public class DomainmodelCodeMiningProvider extends XtextCodeMiningProvider {
 				INode child = it.next();
 				if (rightParenthesisKeyword_4.equals(child.getGrammarElement())) {
 					//create line content code mining for inline annotation after grammarElement ')'
-					String annotationText = " : " + returnTypeName + " ";
+					String annotationText = " : " + returnTypeName;
 					acceptor.accept(createNewLineContentCodeMining(child.getTotalOffset() + 1, annotationText));
 					if(indicator.isCanceled()) {
 						return;

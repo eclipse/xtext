@@ -83,7 +83,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
-import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
+import org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
 import org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler;
@@ -212,6 +212,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
+	@Override
 	public IWorkspaceRoot bindIWorkspaceRootToInstance() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
@@ -224,16 +225,19 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	@Override
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		return ContentFormatterFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
+	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return DomainmodelLabelProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
+	@Override
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
 		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(DomainmodelDescriptionLabelProvider.class);
 	}
@@ -249,6 +253,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
+	@Override
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return DomainmodelQuickfixProvider.class;
 	}
@@ -336,11 +341,13 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends IJavaSearchParticipation> bindIJavaSearchParticipation() {
 		return IJavaSearchParticipation.No.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public void configureLanguageSpecificURIEditorOpener(Binder binder) {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(DerivedMemberAwareEditorOpener.class);
@@ -354,6 +361,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return ImportingTypesProposalProvider.class;
 	}
@@ -410,13 +418,16 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
-	public Class<? extends ICodeMiningProvider> bindICodeMiningProvider() {
-		return DomainmodelCodeMiningProvider.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
-	public Class<? extends XtextDocumentReconcileStrategy> bindXtextDocumentReconcileStrategy() {
-		return XtextCodeMiningReconcileStrategy.class;
+	public void configureCodeMinding(Binder binder) {
+		try {
+			Class.forName("org.eclipse.jface.text.codemining.ICodeMiningProvider");
+			binder.bind(ICodeMiningProvider.class)
+				.to(DomainmodelCodeMiningProvider.class);
+			binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("codeMinding"))
+				.to(XtextCodeMiningReconcileStrategy.Factory.class);
+		} catch(ClassNotFoundException ignore) {
+			// no bindings if code mining is not available at runtime
+		}
 	}
 	
 }
