@@ -75,7 +75,7 @@ public class XtextCodeMiningReconcileStrategy implements IReconcilingStrategy, I
 
 	@Override
 	public void setDocument(IDocument document) {
-		// Do nothing
+		sourceViewer.updateCodeMinings();
 	}
 
 	@Override
