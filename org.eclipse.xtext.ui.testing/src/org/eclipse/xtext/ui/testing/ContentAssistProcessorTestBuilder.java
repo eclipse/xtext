@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
+import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,7 +42,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.testing.util.LineDelimiters;
 import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
@@ -195,7 +196,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected ICompletionProposal findProposal(String proposalString, ICompletionProposal[] proposals) {
 		if (proposalString != null) {
-			String platformDelimitedProposal = LineDelimiters.toPlatform(proposalString);
+			String platformDelimitedProposal = toPlatform(proposalString);
 			for (ICompletionProposal candidate : proposals) {
 				if (platformDelimitedProposal.equals(getProposedText(candidate))) {
 					return candidate;
@@ -345,16 +346,16 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		Arrays.sort(expectations);
 		List<String> sortedExpectations = Lists.newArrayList();
 		for (String expectation : expectations) {
-			sortedExpectations.add(LineDelimiters.toPlatform(expectation));
+			sortedExpectations.add(toPlatform(expectation));
 		}
-		final String expectation = Strings.concat(Strings.newLine(), sortedExpectations);
-		final String actual = Strings.concat(Strings.newLine(), toString(computeCompletionProposals));
+		final String expectation = toPlatform(Strings.concat(Strings.newLine(), sortedExpectations));
+		final String actual = toPlatform(Strings.concat(Strings.newLine(), toString(computeCompletionProposals)));
 		
 		Assert.assertEquals(expectation, actual);
 		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			String proposedText = getProposedText(completionProposal);
+			String proposedText = toPlatform(getProposedText(completionProposal));
 			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
 					actual,
 					sortedExpectations.contains(proposedText));
