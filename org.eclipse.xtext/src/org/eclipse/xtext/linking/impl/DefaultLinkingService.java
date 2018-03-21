@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,7 +21,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 
 import com.google.inject.Inject;
@@ -67,13 +66,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 	
 	protected void unRegisterImportedNamesAdapter(IScopeProvider scopeProvider) {
-		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
-			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
-			provider.setWrapper(null);
-		} else if (scopeProvider instanceof IDelegatingScopeProvider) {
-			IDelegatingScopeProvider delegatingScopeProvider = (IDelegatingScopeProvider) scopeProvider;
-			unRegisterImportedNamesAdapter(delegatingScopeProvider.getDelegate());
-		}
+		IDelegatingScopeProvider.setWrapper(scopeProvider, null);
 	}
 
 	protected void registerImportedNamesAdapter(EObject context) {
@@ -81,14 +74,8 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 	
 	protected void registerImportedNamesAdapter(IScopeProvider scopeProvider, EObject context) {
-		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
-			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
-			ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
-			provider.setWrapper(adapter);
-		} else if (scopeProvider instanceof IDelegatingScopeProvider) {
-			IDelegatingScopeProvider delegatingScopeProvider = (IDelegatingScopeProvider) scopeProvider;
-			registerImportedNamesAdapter(delegatingScopeProvider.getDelegate(), context);
-		}
+		ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
+		IDelegatingScopeProvider.setWrapper(scopeProvider, adapter);
 	}
 
 	protected ImportedNamesAdapter getImportedNamesAdapter(EObject context) {
