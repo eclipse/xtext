@@ -10,7 +10,7 @@ toDir() {
 }
 
 name() {
-	echo $1 | sed 's/^.*\/\(xtext-[^/]*\)\/.*$/\1/'
+	git --git-dir "$(echo "$1"  | tr -d '\r' | tr -d '\n')/.git" config --get remote.origin.url | sed 's/^.*\/\(xtext-[^\./]*\).*$/\1/'
 }
 
 branchname=${1:-master}
