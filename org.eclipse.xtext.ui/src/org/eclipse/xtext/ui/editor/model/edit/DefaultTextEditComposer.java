@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.util.NonRecursiveEContentAdapter;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.base.Predicate;
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @author Knut Wannheden - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
+public class DefaultTextEditComposer extends NonRecursiveEContentAdapter implements ITextEditComposer {
 
 	@Inject
 	private ISerializer serializer;
