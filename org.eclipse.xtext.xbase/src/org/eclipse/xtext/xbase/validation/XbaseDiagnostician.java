@@ -42,9 +42,11 @@ public class XbaseDiagnostician extends CancelableDiagnostician {
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		checkCanceled(context);
 		if (eObject instanceof XClosure) {
-			return doValidateLambdaContents((XClosure) eObject, diagnostics, context);
+			return super.validate(eClass, eObject, diagnostics, context)
+					&& doValidateLambdaContents((XClosure) eObject, diagnostics, context);
 		}
 		return super.validate(eClass, eObject, diagnostics, context);
+
 	}
 
 	/**
