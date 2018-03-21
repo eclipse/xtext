@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,10 +7,14 @@
  */
 package org.eclipse.xtext.resource;
 
+import com.google.common.base.Objects;
+import java.io.File;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.NullResource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,5 +46,38 @@ public abstract class AbstractResourceSetTest {
     final Resource second = rs.getResource(uri, true);
     Assert.assertSame(demandLoaded, second);
     Assert.assertEquals(1, rs.getURIResourceMap().size());
+  }
+  
+  @Test
+  public void testResourceLocatorIsUsed() {
+    final ResourceSetImpl rs = this.createEmptyResourceSet();
+    final XtextResource resource = new XtextResource();
+    resource.setURI(URI.createFileURI(new File("foo").getAbsolutePath()));
+    new ResourceSetImpl.ResourceLocator(rs) {
+      @Override
+      public Resource getResource(final URI uri, final boolean loadOnDemand) {
+        URI _uRI = resource.getURI();
+        boolean _equals = Objects.equal(uri, _uRI);
+        if (_equals) {
+          return resource;
+        }
+        String _string = uri.toString();
+        throw new IllegalArgumentException(_string);
+      }
+    };
+    Assert.assertSame(resource, rs.getResource(resource.getURI(), true));
+    Assert.assertTrue(rs.getResources().isEmpty());
+    Assert.assertNull(resource.getResourceSet());
+    try {
+      rs.getResource(resource.getURI().appendSegment("doesNotExist"), true);
+      Assert.fail();
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
+        final IllegalArgumentException e = (IllegalArgumentException)_t;
+        Assert.assertTrue(e.getMessage().endsWith("doesNotExist"));
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
 }
