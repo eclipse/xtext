@@ -384,9 +384,9 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	public void completeAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		AbstractRule rule = EcoreUtil2.getContainerOfType(model, AbstractRule.class);
-		EClassifier type = rule.getType().getClassifier();
-		if (type instanceof EClass) {
-			Iterable<EStructuralFeature> features = ((EClass) type).getEAllStructuralFeatures();
+		TypeRef typeRef = rule.getType();
+		if (typeRef != null && typeRef.getClassifier() instanceof EClass) {
+			Iterable<EStructuralFeature> features = ((EClass) typeRef.getClassifier()).getEAllStructuralFeatures();
 			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(grammarAccess.getValidIDRule().getName(), context);
 			Iterable<String> processedFeatures = completeStructuralFeatures(context, factory, acceptor, features);
 			if(rule.getType().getMetamodel() instanceof GeneratedMetamodel) {
