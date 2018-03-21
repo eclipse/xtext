@@ -30,6 +30,7 @@
    <bundle id="org.eclipse.xtext.ui" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.source" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codemining" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtext.ui.codemining.source" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates.source" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.codetemplates.ide" version="2.14.0.qualifier"><category name="Xtext"/></bundle>
