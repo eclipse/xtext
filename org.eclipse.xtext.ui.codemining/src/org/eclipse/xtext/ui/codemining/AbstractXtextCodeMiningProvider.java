@@ -105,23 +105,13 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 			}
 		};
 		
-		if (cancelIndicator.isCanceled()) {
-			throw new CancellationException();
-		}
-		// first mine for header annotations, then inline annotations
-		createLineHeaderCodeMinings(document, resource, cancelIndicator, acceptor);
-		if (cancelIndicator.isCanceled()) {
-			throw new CancellationException();
-		}
-		createLineContentCodeMinings(document, resource, cancelIndicator, acceptor);
-		if (cancelIndicator.isCanceled()) {
-			throw new CancellationException();
-		}
+		createCodeMinings(document, resource, cancelIndicator, acceptor);
+
 		return codeMiningList;
 	}
 
 	/**
-	 * Compute minings for header annotations.
+	 * Clients have to implement this method to provide code minings.
 	 * 
 	 * @param document The document
 	 * @param resource The resource for that document
@@ -129,21 +119,9 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 	 * @param acceptor Accepts created minings
 	 * @throws BadLocationException when line number doesn't exists
 	 */
-	protected abstract void createLineHeaderCodeMinings(IDocument document, XtextResource resource,
+	protected abstract void createCodeMinings(IDocument document, XtextResource resource,
 			CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException;
 
-	/**
-	 * Compute minings for inline annotations.
-	 * 
-	 * @param document The document
-	 * @param resource The resource for that document
-	 * @param indicator Cancelation indicator
-	 * @param acceptor Accepts created minings
-	 * @throws BadLocationException when line number doesn't exists
-	 */
-	protected abstract void createLineContentCodeMinings(IDocument document, XtextResource resource,
-			CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException;
-	
 	/**
 	 * Creates a {@link LineContentCodeMining} object for an inline annotation.
 	 * @param beforeCharacter inline annotation will be created before this character number.

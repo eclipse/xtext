@@ -33,7 +33,13 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 	private DomainmodelGrammarAccess grammar;
 	
 	@Override
-	protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
+	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)
+			throws BadLocationException{
+		createLineHeaderCodeMinings(document,resource,indicator,acceptor);
+		createLineContentCodeMinings(document,resource,indicator,acceptor);
+	}
+
+	private void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
 			throws BadLocationException{
 		int lineCount = document.getNumberOfLines();
 		for (int i = 0; i < lineCount; i++) {
@@ -55,8 +61,7 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 		}
 	}
 	
-	@Override
-	protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
+	private void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
 			throws BadLocationException {
 		//get all operations to open document
 		List<Operation> allOperations = EcoreUtil2.eAllOfType(resource.getContents().get(0), Operation.class);

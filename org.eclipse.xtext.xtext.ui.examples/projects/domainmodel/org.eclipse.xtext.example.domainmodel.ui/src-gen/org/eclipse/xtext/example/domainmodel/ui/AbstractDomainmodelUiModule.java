@@ -212,7 +212,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	@Override
 	public IWorkspaceRoot bindIWorkspaceRootToInstance() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
@@ -225,19 +224,16 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
-	@Override
 	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
 		return ContentFormatterFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
-	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return DomainmodelLabelProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
-	@Override
 	public void configureResourceUIServiceLabelProvider(Binder binder) {
 		binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(DomainmodelDescriptionLabelProvider.class);
 	}
@@ -253,7 +249,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
-	@Override
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return DomainmodelQuickfixProvider.class;
 	}
@@ -341,13 +336,11 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	@Override
 	public Class<? extends IJavaSearchParticipation> bindIJavaSearchParticipation() {
 		return IJavaSearchParticipation.No.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	@Override
 	public void configureLanguageSpecificURIEditorOpener(Binder binder) {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(DerivedMemberAwareEditorOpener.class);
@@ -361,7 +354,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return ImportingTypesProposalProvider.class;
 	}
