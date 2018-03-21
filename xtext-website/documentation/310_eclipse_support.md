@@ -664,51 +664,42 @@ In the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents`
 
 ## Code Mining
 
-Xtext provides code mining functionalities, these include "header annotations" and "inline annotations".
+Code Mining shows inline annotations in the text editor that are not part of the text itself, but derived from its contents. It can be very helpful to leverage code minings for example to show inferred types, parameter names for literals and other kind of meta information. 
+
+Code minings come in two flavors: "header annotations" are printed in a separate line above the mined text, "inline annotations" are shown in-line. The following screenshot shows both flavors:
 
 ![](images/code_mining.png)
 
-To enable code mining, the `CodeMiningFragment` has to be integrated in the `language` section of the MWE2 file as follows
+To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment` has to be integrated in the `language` section of the MWE2 file as follows:
+
 ```mwe2
-fragment = ui.codemining.CodeMiningFragment {
-	generateStub = true
-	generateXtendStub = false //with false, it generates a Java stub
-}
+fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
 ```
-With the `CodeMiningFragment` the MWE2 workflow generates the package `.ide.codemining` with the stub `<LanuageName>CodeMiningStrategy` in Java or Xtend. Furthermore the extension `org.eclipse.ui.workbench.texteditor.codeMiningProviders` will be generated in file `.ui.plugin.xml_gen`. This file has to be manually merged with `.ui.plugin.xml`.
 
-The following class `MyDslCodeMiningStrategy` shows an implementation of the generated stub. It contains code for little code mining functionalities.
+With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+
+The following class `MyDslCodeMiningProvider` shows a simple example:
+
 ```java
-public class MyDslCodeMiningStrategy extends XtextCodeMiningProvider {
+public class MyDslCodeMiningProvider extends AbstractXtextCodeMiningProvider {
 	@Override
-	protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+		IAcceptor<ICodeMining> acceptor) throws BadLocationException {
 
-		//TODO: implement me
-		//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
-		//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
-						
-		//example:
 		acceptor.accept(createNewLineHeaderCodeMining(1, document, "header annotation"));
-		if (indicator.isCanceled()) {
-			return;
-		}
-	}
 
-	@Override
-	protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException {
-
-		//TODO: implement me
-		//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-		//use indicator.isCanceled() to check, if a new code mining was started (and then to cancel this code mining with return)
-					
-		//example:
 		acceptor.accept(createNewLineContentCodeMining(5, " inline annotation "));
-		if (indicator.isCanceled()) {
-			return;
-		}
 	}
+
 }
 ```
+
+Clients have to implement the `createCodeMinings()` method, compute text and position of meta information that should be presented in the text editor. Finally instances of `ICodeMining` are created with that information and passed to the `acceptor`.
+
+The base class `AbstractXtextCodeMiningProvider` provides some factory methods for creating `ICodeMining` instances for convenience. Use `createNewLineHeaderCodeMining()` and `createNewLineContentCodeMining()` for that purpose.
+
+For an implementation reference, have a look at the Domainmodel Example.
+
 ---
 
 **[Next Chapter: Web Editor Support](330_web_support.html)**
