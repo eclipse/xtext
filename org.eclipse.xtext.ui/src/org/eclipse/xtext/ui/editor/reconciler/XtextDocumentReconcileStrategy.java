@@ -51,7 +51,7 @@ import com.google.inject.TypeLiteral;
  * @author Jan Koehnlein
  * @author René Purrio
  */
-public final class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
+public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
 		ISourceViewerAware {
 
 	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
