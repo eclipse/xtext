@@ -10,6 +10,7 @@ package org.eclipse.xtext.validation;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -34,9 +35,9 @@ public class CancelableDiagnostician extends Diagnostician {
 	}
 	
 	@Override
-	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		checkCanceled(context);
-		return super.validate(eObject, diagnostics, context);
+		return super.validate(eClass, eObject, diagnostics, context);
 	}
 	
 	/**
@@ -62,12 +63,6 @@ public class CancelableDiagnostician extends Diagnostician {
 	 */
 	protected CancelIndicator getCancelIndicator(Map<Object, Object> context) {
 		return context != null ? (CancelIndicator) context.get(CANCEL_INDICATOR) : null;
-	}
-	
-	@Override
-	protected boolean doValidateContents(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		checkCanceled(context);
-		return super.doValidateContents(eObject, diagnostics, context);
 	}
 
 }
