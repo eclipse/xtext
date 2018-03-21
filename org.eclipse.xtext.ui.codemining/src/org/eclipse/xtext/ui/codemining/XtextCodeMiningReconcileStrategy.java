@@ -36,6 +36,7 @@ import com.google.common.annotations.Beta;
  * 
  * @since 2.14
  * @author René Purrio - Initial contribution and API
+ * @author Karsten Thoms - Initial contribution and API
  */
 @Beta
 public class XtextCodeMiningReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension {

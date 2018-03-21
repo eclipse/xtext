@@ -33,8 +33,12 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import com.google.common.annotations.Beta;
 
 /**
+ * Xtext integration for Code Mining support. Clients have to subclass and
+ * compute minings for a given Xtext resource.
+ * 
  * @since 2.14
  * @author René Purrio - Initial contribution and API
+ * @author Karsten Thoms - Initial contribution and API
  */
 @Beta
 public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider {
@@ -73,6 +77,7 @@ public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider
 						@Override
 						public void accept(ICodeMining codeMiningObject) {
 							if (uowCancelIndicator.isCanceled()) {
+								// do not accept mining and abort processing when operation was canceled
 								throw new CancellationException();
 							}
 							codeMiningList.add(codeMiningObject);
@@ -83,6 +88,7 @@ public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider
 					if (indicator.isCanceled()) {
 						throw new CancellationException();
 					}
+					// first mine for header annotations, then inline annotations
 					createLineHeaderCodeMinings(viewer.getDocument(), resource, indicator, acceptor);
 					if (indicator.isCanceled()) {
 						throw new CancellationException();
@@ -129,12 +135,12 @@ public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider
 	}
 
 	/**
-	 * It creates a {@link LineHeaderCodeMining} object for a header annotation.
+	 * Creates a {@link LineHeaderCodeMining} object for a header annotation.
 	 * @param beforeLineNumber the line number where codemining must be drawn. Use 0 if you wish to locate the code mining before the first line number (1).
 	 * @param document the document.
 	 * @param headerText text for header annotation.
 	 * @return a new {@link LineHeaderCodeMining} object.
-	 * @throws BadLocationException
+	 * @throws BadLocationException when line number doesn't exists
 	 */
 	protected LineHeaderCodeMining createNewLineHeaderCodeMining(int beforeLineNumber, IDocument document,
 			String headerText) throws BadLocationException {
@@ -142,16 +148,16 @@ public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider
 	}
 
 	/**
-	 * It creates a {@link LineHeaderCodeMining} object for a header annotation.
+	 * Creates a {@link LineHeaderCodeMining} object for a header annotation.
 	 * @param beforeLineNumber the line number where codemining must be drawn. Use 0 if you wish to locate the code mining before the first line number (1).
 	 * @param document the document.
 	 * @param headerText text for header annotation.
 	 * @param action the action to execute when mining is clicked and null otherwise.
 	 * @return a new {@link LineHeaderCodeMining} object.
-	 * @throws BadLocationException
+	 * @throws BadLocationException when line number doesn't exists
 	 */
 	protected LineHeaderCodeMining createNewLineHeaderCodeMining(int beforeLineNumber, IDocument document,
-		String headerText, Consumer<MouseEvent> action)  throws BadLocationException {
+		String headerText, Consumer<MouseEvent> action) throws BadLocationException {
 		return new LineHeaderCodeMining(beforeLineNumber, document, this, action) {
 			@Override
 			protected CompletableFuture<Void> doResolve(ITextViewer viewer, IProgressMonitor monitor) {
@@ -162,9 +168,27 @@ public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider
 		};
 	}
 
+	/**
+	 * Compute minings for header annotations.
+	 * 
+	 * @param document The document
+	 * @param resource The resource for that document
+	 * @param indicator Cancelation indicator
+	 * @param acceptor Accepts created minings
+	 * @throws BadLocationException when line number doesn't exists
+	 */
 	protected abstract void createLineHeaderCodeMinings(IDocument document, XtextResource resource,
 			CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException;
 
+	/**
+	 * Compute minings for inline annotations.
+	 * 
+	 * @param document The document
+	 * @param resource The resource for that document
+	 * @param indicator Cancelation indicator
+	 * @param acceptor Accepts created minings
+	 * @throws BadLocationException when line number doesn't exists
+	 */
 	protected abstract void createLineContentCodeMinings(IDocument document, XtextResource resource,
 			CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException;
 }

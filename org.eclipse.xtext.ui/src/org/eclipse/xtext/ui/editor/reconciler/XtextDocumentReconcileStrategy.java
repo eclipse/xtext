@@ -49,7 +49,8 @@ import com.google.inject.TypeLiteral;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  * @author Jan Koehnlein
- * @author René Purrio
+ * @author René Purrio - Code Mining support
+ * @author Karsten Thoms - Code Mining support
  */
 public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension,
 		ISourceViewerAware {
