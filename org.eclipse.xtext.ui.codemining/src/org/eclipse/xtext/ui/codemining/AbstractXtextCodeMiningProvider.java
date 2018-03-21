@@ -41,7 +41,7 @@ import com.google.common.annotations.Beta;
  * @author Karsten Thoms - Initial contribution and API
  */
 @Beta
-public abstract class XtextCodeMiningProvider extends AbstractCodeMiningProvider {
+public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMiningProvider {
 	/*
 	 * This indicator checks if monitor is canceled or if
 	 * CancelableUnitOfWork-cancelIndicator is canceled.

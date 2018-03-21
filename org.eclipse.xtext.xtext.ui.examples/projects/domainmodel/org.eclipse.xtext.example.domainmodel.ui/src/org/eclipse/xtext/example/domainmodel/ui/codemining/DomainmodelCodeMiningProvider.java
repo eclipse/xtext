@@ -19,14 +19,14 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider;
+import org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
 
-public class DomainmodelCodeMiningProvider extends XtextCodeMiningProvider {
+public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvider {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
 	@Inject
