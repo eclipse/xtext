@@ -21,7 +21,7 @@ public class DelegatingScopeProviderTest implements IScopeWrapper {
 
 	static class TestableDelegatingScopeProvider implements IDelegatingScopeProvider {
 
-		private IScopeProvider delegate;
+		private final IScopeProvider delegate;
 
 		private int invocationCount = 0;
 		
