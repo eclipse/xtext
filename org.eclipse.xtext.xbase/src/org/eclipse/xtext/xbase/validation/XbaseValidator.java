@@ -152,7 +152,7 @@ import com.google.inject.Provider;
  * validations that will be superseded by immediate error annotations during type resolution.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @author Stéphane Galland - Add the checkers on deprecated features.
+ * @author Stéphane Galland - multiple contributions.
  */
 @ComposedChecks(validators = { EarlyExitValidator.class })
 public class XbaseValidator extends AbstractXbaseValidator {
@@ -1355,6 +1355,21 @@ public class XbaseValidator extends AbstractXbaseValidator {
 			return true;
 		}
 		Collection<Setting> usages = XbaseUsageCrossReferencer.find(target, containerToFindUsage);
+		// field and local variables are used when they are not used as the left operand of an assignment operator.
+		if (target instanceof XVariableDeclaration || target instanceof JvmField) {
+			for (final Setting usage : usages) {
+				final EObject object = usage.getEObject();
+				if (object instanceof XAssignment) {
+					final XAssignment assignment = (XAssignment) object;
+					if (assignment.getFeature() != target) {
+						return true;
+					}
+				} else {
+					return true;
+				}
+			}
+			return false;
+		}
 		// for non-private members it is enough to check that there are usages
 		if (!(target instanceof JvmOperation) || ((JvmOperation)target).getVisibility()!=JvmVisibility.PRIVATE) {
 			return !usages.isEmpty();
