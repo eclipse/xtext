@@ -19,7 +19,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -177,7 +176,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		}
 	}
 
-	public static class CacheAdapter extends EContentAdapter {
+	public static class CacheAdapter extends NonRecursiveEContentAdapter {
 		
 		private static final Object NULL = new Object();
 		
