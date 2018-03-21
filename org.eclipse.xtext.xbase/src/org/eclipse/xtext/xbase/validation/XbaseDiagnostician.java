@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -36,14 +37,14 @@ public class XbaseDiagnostician extends CancelableDiagnostician {
 	public XbaseDiagnostician(EValidator.Registry registry) {
 		super(registry);
 	}
-
+	
 	@Override
-	protected boolean doValidateContents(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		checkCanceled(context);
 		if (eObject instanceof XClosure) {
 			return doValidateLambdaContents((XClosure) eObject, diagnostics, context);
 		}
-		return super.doValidateContents(eObject, diagnostics, context);
+		return super.validate(eClass, eObject, diagnostics, context);
 	}
 
 	/**
