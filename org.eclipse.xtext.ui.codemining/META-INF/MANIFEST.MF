@@ -6,10 +6,10 @@ Bundle-Version: 2.14.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.ui.codemining
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.jface.text;bundle-version="3.13.0",
- org.eclipse.swt,
- org.eclipse.xtext.ide,
- org.eclipse.xtext.ui,
- org.eclipse.xtext
 Export-Package: org.eclipse.xtext.ui.codemining;x-internal:=true
+Require-Bundle: com.google.guava,
+ org.eclipse.equinox.common,
+ org.eclipse.xtext,
+ org.eclipse.xtext.ui
+Import-Package: org.eclipse.jface.text,
+ org.eclipse.jface.text.codemining;resolution:=optional
