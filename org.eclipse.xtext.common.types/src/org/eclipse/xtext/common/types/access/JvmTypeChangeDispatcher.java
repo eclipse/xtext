@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.util.NonRecursiveEContentAdapter;
 
 import com.google.common.collect.Lists;
 
@@ -42,7 +42,7 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 	 * @noextend This class is not intended to be subclassed by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
-	protected class NotificationDispatcher extends EContentAdapter {
+	protected class NotificationDispatcher extends NonRecursiveEContentAdapter {
 		
 		private Notifier notifier;
 
