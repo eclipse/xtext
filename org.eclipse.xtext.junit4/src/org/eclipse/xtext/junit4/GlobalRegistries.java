@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import org.eclipse.xtext.validation.CompositeEValidator;
  * Utility for tests to avoid being based on and doing any side effects to the global registries from EMF.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Arne Deutsch - Support for annotation validators
  * @deprecated Use org.eclipse.xtext.testing.GlobalRegistries instead
  */
 @Deprecated
@@ -39,6 +41,7 @@ public class GlobalRegistries {
 		private HashMap<String, Object> protocolToServiceProviderMap;
 		private HashMap<String, Object> extensionToServiceProviderMap;
 		private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
+		private HashMap<String, Object> annotationValidatorMap;
 	
 		public void restoreGlobalState() {
 			clearGlobalRegistries();
@@ -52,6 +55,8 @@ public class GlobalRegistries {
 			IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToServiceProviderMap);
 			IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToServiceProviderMap);
 			IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToServiceProviderMap);
+			
+			getAnnotationValidatorMap().putAll(annotationValidatorMap);
 		}
 	}
 
@@ -73,6 +78,8 @@ public class GlobalRegistries {
 		memento.protocolToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap());
 		memento.extensionToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap());
 		memento.contentTypeIdentifierToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap());
+		
+		memento.annotationValidatorMap = new HashMap<>(getAnnotationValidatorMap());
 		return memento;
 	}
 	
@@ -86,6 +93,9 @@ public class GlobalRegistries {
 		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().clear();
 		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().clear();
 		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+		
+		getAnnotationValidatorMap().clear();
+		
 		initializeDefaults();
 	}
 	
@@ -101,6 +111,26 @@ public class GlobalRegistries {
 			EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		if (!EPackage.Registry.INSTANCE.containsKey(XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
+	}
+	
+	/**
+	 * EMF 2.14 introduced the concept of annotation validators. The registry for
+	 * all validators needs to be reset after each test but apparently it is not
+	 * available in older versions of EMF. Therefore we use reflection to obtain the
+	 * map.
+	 * 
+	 * @since 2.14
+	 * @return the map of annotation validators.
+	 */
+	private static Map<String, Object> getAnnotationValidatorMap() {
+		try {
+			Class<?> registry = Class.forName("org.eclipse.emf.ecore.EAnnotationValidator$Registry");
+			@SuppressWarnings("unchecked")
+			Map<String, Object> result = (Map<String, Object>) registry.getField("INSTANCE").get(null);
+			return result;
+		} catch (Exception ignore) {
+			return Collections.emptyMap();
+		}
 	}
 	
 }
