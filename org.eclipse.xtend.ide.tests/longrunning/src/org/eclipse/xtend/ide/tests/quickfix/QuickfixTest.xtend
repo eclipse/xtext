@@ -3765,4 +3765,262 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Add cast to Foo.")
 	}
 
+	@Test
+	def void redundantModifiers_01(){
+		// Xtend class having a 'public' modifier
+		create('Foo.xtend', '''
+			publ|ic class Foo {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix(
+			// TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			''' class Foo {}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_02(){
+		// Xtend class having a 'public' modifier
+		create('Foo.xtend', '''
+			package a
+			publ|ic class Foo {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			package a
+ллл			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 class Foo {}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_03(){
+		// Xtend class having a 'public' modifier
+		create('Foo.xtend', '''
+			package a
+			class A {}
+			publ|ic class B {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			package a
+			class A {}
+ллл			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 class B {}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_04(){
+		// Xtend field having a 'private' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				pri|vate int a = 10
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				int a = 10
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_05(){
+		// Xtend function having a 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				p|ublic def m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				def m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_06(){
+		// Xtend function having a 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				def p|ublic   m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				def m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_07(){
+		// Xtend field having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				f|inal val a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_08(){
+		// Xtend field having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_09(){
+		// Xtend field having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				package val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				package val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_10(){
+		// Xtend field having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				public static val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				public static val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_11(){
+		// Xtend function having both 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				override de|f m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_12(){
+		// Xtend function having both 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m() {}
+			}
+			class B extends A {
+				de|f override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m() {}
+			}
+			class B extends A {
+				override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_13(){
+		// Xtend function having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				pub|lic def override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				def override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_14(){
+		// Xtend function having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				public d|ef override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				public override m() {}
+			}
+		''')
+	}
 }

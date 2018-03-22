@@ -6853,4 +6853,353 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     this.builder.create("Foo.xtend", _builder).assertIssueCodes(IssueCodes.FEATURE_NOT_VISIBLE).assertResolutionLabels("Add cast to Foo.");
   }
+  
+  @Test
+  public void redundantModifiers_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("publ|ic class Foo {}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("class Foo {}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package a");
+    _builder.newLine();
+    _builder.append("publ|ic class Foo {}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package a");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("class Foo {}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package a");
+    _builder.newLine();
+    _builder.append("class A {}");
+    _builder.newLine();
+    _builder.append("publ|ic class B {}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package a");
+    _builder_1.newLine();
+    _builder_1.append("class A {}");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("class B {}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("pri|vate int a = 10");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("int a = 10");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p|ublic def m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def p|ublic   m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("f|inal val a = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val a = 1");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val f|inal a = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val a = 1");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("package val f|inal a = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("package val a = 1");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static val f|inal a = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public static val a = 1");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override de|f m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m(){}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("de|f override m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_13() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("pub|lic def override m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m(){}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def override m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public d|ef override m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m(){}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public override m() {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
 }

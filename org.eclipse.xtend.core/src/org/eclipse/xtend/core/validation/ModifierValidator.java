@@ -142,11 +142,11 @@ public class ModifierValidator {
 	}
 
 	protected void redundantModifierWarning(String modifier, String memberName, EObject source, int index) {
-		issue("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER);
+		issue("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER, modifier);
 	}
 	
-	protected void issue(String message, EObject source, int index, String code) {
-		validator.addIssue(message, source, XTEND_MEMBER__MODIFIERS, index, code);
+	protected void issue(String message, EObject source, int index, String code, String... issueData) {
+		validator.addIssue(message, source, XTEND_MEMBER__MODIFIERS, index, code, issueData);
 	}
 	
 	protected void error(String message, EObject source, int index) {
