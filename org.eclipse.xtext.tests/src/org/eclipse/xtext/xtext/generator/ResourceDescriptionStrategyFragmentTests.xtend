@@ -8,7 +8,8 @@
 package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtend2.lib.StringConcatenation
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.junit.Test
 
 /**
@@ -17,9 +18,24 @@ import org.junit.Test
  */
 class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragmentTests {
 
+	static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
+
+		override getExportedRulesFromGrammar() {
+			super.getExportedRulesFromGrammar()
+		}
+
+		override protected generateSuperResourceDescriptionStrategyContent(Iterable<AbstractRule> exportedRules) {
+			super.generateSuperResourceDescriptionStrategyContent(exportedRules)
+		}
+
+		override shouldGenerate(Iterable<AbstractRule> exportedRules) {
+			super.shouldGenerate(exportedRules)
+		}
+	}
+
 	@Test
 	def testGenerateNothing() {
-		val fragment = initializeFragmentWithGrammarFromString('''
+		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
 			Model: rules+=Rule;
@@ -32,14 +48,14 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 
 	@Test
 	def testGenerate() {
-		val fragment = initializeFragmentWithGrammarFromString('''
+		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
 			generate foo "http://org.xtext/foo"
 			Model: rules+=Rule;
 			@Exported
 			Rule: name=ID;
 		''')
-	
+
 		val exportedRules = fragment.getExportedRulesFromGrammar
 		assertFalse(exportedRules.empty)
 		assertTrue(fragment.shouldGenerate(exportedRules))
@@ -61,7 +77,5 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 			}
 		'''.toString, stringConcat.toString)
 	}
-	
-	
 
 }

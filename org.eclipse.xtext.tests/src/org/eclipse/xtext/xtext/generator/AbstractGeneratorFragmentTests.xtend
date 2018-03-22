@@ -13,7 +13,8 @@ import java.util.List
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtend2.lib.StringConcatenation
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
@@ -21,7 +22,6 @@ import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig
@@ -35,21 +35,6 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	override setUp() {
 		super.setUp();
 		with(XtextStandaloneSetup)
-	}
-	
-	static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
-
-		override getExportedRulesFromGrammar() {
-			super.getExportedRulesFromGrammar()
-		}
-
-		override protected generateSuperResourceDescriptionStrategyContent(Iterable<AbstractRule> exportedRules) {
-			super.generateSuperResourceDescriptionStrategyContent(exportedRules)
-		}
-
-		override shouldGenerate(Iterable<AbstractRule> exportedRules) {
-			super.shouldGenerate(exportedRules)
-		}
 	}
 
 	static class FragmentGeneratorModule extends DefaultGeneratorModule {
@@ -114,7 +99,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		}
 	}
 	
-	def initializeFragmentWithGrammarFromString(String grammarString){
+	def <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(Class<T> fragmentClass, String grammarString){
 		val resource = getResourceFromString(grammarString)
 		val grammar = resource.contents.head as Grammar
 		val generatorInjector = Guice.createInjector(
@@ -127,6 +112,12 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		emfGeneratorFragment.initialize(generatorInjector)
 		// Create GenModel out of generated EPackages
 		emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.generatedPackages, resource.resourceSet)
-		return generatorInjector.getInstance(TestableResourceDescriptionStrategyFragment);
+		return generatorInjector.getInstance(fragmentClass);
+	}
+	
+	def String concatenationClientToString(StringConcatenationClient client) {
+		val stringConcat = new StringConcatenation("\n")
+		stringConcat.append(client)
+		return stringConcat.toString
 	}
 }

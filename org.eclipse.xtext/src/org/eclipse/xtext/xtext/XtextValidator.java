@@ -1252,9 +1252,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkOverridingRule(AbstractRule rule) {
 		final String name = rule.getName();
-		
-
-		
 		final List<Grammar> superGrammars = GrammarUtil.getGrammar(rule).getUsedGrammars();
 		boolean isOverride = isOverride(rule);
 		if (isOverride && superGrammars.isEmpty()) {

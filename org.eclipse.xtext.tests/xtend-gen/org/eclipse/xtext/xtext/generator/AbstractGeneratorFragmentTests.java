@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -28,12 +28,12 @@ import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.StandardLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
@@ -45,23 +45,6 @@ import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
  */
 @SuppressWarnings("all")
 public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
-  public static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
-    @Override
-    public Iterable<AbstractRule> getExportedRulesFromGrammar() {
-      return super.getExportedRulesFromGrammar();
-    }
-    
-    @Override
-    protected StringConcatenationClient generateSuperResourceDescriptionStrategyContent(final Iterable<AbstractRule> exportedRules) {
-      return super.generateSuperResourceDescriptionStrategyContent(exportedRules);
-    }
-    
-    @Override
-    public boolean shouldGenerate(final Iterable<AbstractRule> exportedRules) {
-      return super.shouldGenerate(exportedRules);
-    }
-  }
-  
   public static class FragmentGeneratorModule extends DefaultGeneratorModule {
     private Grammar grammar;
     
@@ -139,7 +122,7 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     }
   }
   
-  public AbstractGeneratorFragmentTests.TestableResourceDescriptionStrategyFragment initializeFragmentWithGrammarFromString(final String grammarString) {
+  public <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(final Class<T> fragmentClass, final String grammarString) {
     try {
       final XtextResource resource = this.getResourceFromString(grammarString);
       EObject _head = IterableExtensions.<EObject>head(resource.getContents());
@@ -153,9 +136,15 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
       final AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2 emfGeneratorFragment = generatorInjector.<AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2>getInstance(AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2.class);
       emfGeneratorFragment.initialize(generatorInjector);
       emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.getGeneratedPackages(), resource.getResourceSet());
-      return generatorInjector.<AbstractGeneratorFragmentTests.TestableResourceDescriptionStrategyFragment>getInstance(AbstractGeneratorFragmentTests.TestableResourceDescriptionStrategyFragment.class);
+      return generatorInjector.<T>getInstance(fragmentClass);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public String concatenationClientToString(final StringConcatenationClient client) {
+    final StringConcatenation stringConcat = new StringConcatenation("\n");
+    stringConcat.append(client);
+    return stringConcat.toString();
   }
 }

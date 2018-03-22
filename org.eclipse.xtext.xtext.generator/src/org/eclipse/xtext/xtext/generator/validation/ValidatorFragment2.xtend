@@ -25,15 +25,20 @@ import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.xtext.AnnotationNames
+import org.eclipse.xtext.validation.Check
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class ValidatorFragment2 extends AbstractInheritingFragment {
-	
+
 	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
-	
+
 	val List<String> composedChecks = newArrayList
-	
+
 	/**
 	 * Adds a validator that is to be executed additionally.
 	 * 
@@ -43,24 +48,23 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	def void addComposedCheck(String composedCheckValidator) {
 		composedChecks += composedCheckValidator
 	}
-	
+
 	protected def TypeReference getGenValidatorSuperClass(Grammar grammar) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
-		if (inheritImplementation && superGrammar !== null) 
+		if (inheritImplementation && superGrammar !== null)
 			superGrammar.validatorClass
-		else 
+		else
 			defaultValidatorSuperClass
 	}
 
 	protected def TypeReference getDefaultValidatorSuperClass() {
 		new TypeReference(AbstractDeclarativeValidator)
 	}
-	
+
 	override generate() {
-		new GuiceModuleAccess.BindingFactory()
-			.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
-			.contributeTo(language.runtimeGenModule)
-		
+		new GuiceModuleAccess.BindingFactory().addTypeToTypeEagerSingleton(grammar.validatorClass,
+			grammar.validatorClass).contributeTo(language.runtimeGenModule)
+
 		if (isGenerateStub) {
 			if (generateXtendStub)
 				generateXtendValidatorStub()
@@ -68,14 +72,14 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				generateJavaValidatorStub()
 		}
 		generateGenValidator()
-		
+
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
-		
+
 		if (projectConfig.eclipsePlugin.pluginXml !== null)
 			contributeEclipsePluginExtensions()
 	}
-	
+
 	protected def generateXtendValidatorStub() {
 		fileAccessFactory.createXtendFile(grammar.validatorClass, '''
 			/**
@@ -99,7 +103,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			}
 		''').writeTo(projectConfig.runtime.src)
 	}
-	
+
 	protected def generateJavaValidatorStub() {
 		fileAccessFactory.createJavaFile(grammar.validatorClass, '''
 			/**
@@ -123,38 +127,48 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			}
 		''').writeTo(projectConfig.runtime.src)
 	}
-	
+
 	protected def generateGenValidator() {
 		// take the non-abstract class signature for the src-gen class in case of !generateStub
-		//  as validators of sub languages refer to 'superGrammar.validatorClass',
-		//  see 'getGenValidatorSuperClass(...)'
-		val genClass = if (isGenerateStub) grammar.abstractValidatorClass else grammar.validatorClass
+		// as validators of sub languages refer to 'superGrammar.validatorClass',
+		// see 'getGenValidatorSuperClass(...)'
+		val genClass = if(isGenerateStub) grammar.abstractValidatorClass else grammar.validatorClass
 
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(genClass)
-		
 		javaFile.content = '''
 			«IF !composedChecks.empty»
-			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
+				@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
 			«ENDIF»
 			public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.genValidatorSuperClass» {
 				
 				@Override
 				protected «List»<«EPackage»> getEPackages() {
 					«List»<«EPackage»> result = new «ArrayList»<«EPackage»>(«IF inheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
-					«FOR e: generatedPackagesToValidate»
+					«FOR e : generatedPackagesToValidate»
 						result.add(«e.generatedEPackageName».eINSTANCE);
 					«ENDFOR»
-					«FOR e: registryPackagesToValidate»
+					«FOR e : registryPackagesToValidate»
 						result.add(EPackage.Registry.INSTANCE.getEPackage("«e.nsURI»"));
-				 	«ENDFOR»
+					«ENDFOR»
 					return result;
 				}
-				
+				«generateValidationToDeprecateRules»
 			}
 		'''
 		javaFile.writeTo(projectConfig.runtime.srcGen)
 	}
-	
+
+	protected def StringConcatenationClient generateValidationToDeprecateRules() '''
+		«FOR deprecatedRule : deprecatedRulesFromGrammar»
+			«val elementType = new TypeReference(deprecatedRule.type.classifier as EClass, grammar.eResource.resourceSet)»
+			
+			@«Check»
+			public void checkDeprecated«elementType.simpleName»(«elementType» element) {
+				warning("This part of the language is marked as deprecated and might get removed in the future!", element, null);
+			}
+		«ENDFOR»
+	'''
+
 	protected def getGeneratedPackagesToValidate() {
 		grammar.metamodelDeclarations.filter(GeneratedMetamodel).map[EPackage]
 	}
@@ -164,11 +178,11 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		packages.removeAll(allMetamodelDeclarations(grammar).filter(GeneratedMetamodel).map[EPackage].toList)
 		return packages
 	}
-	
+
 	protected def String getGeneratedEPackageName(EPackage pack) {
 		'''«grammar.runtimeBasePackage».«pack.name».«pack.name.toFirstUpper»Package'''
 	}
-	
+
 	protected def contributeEclipsePluginExtensions() {
 		val simpleName = getSimpleName(grammar)
 		projectConfig.eclipsePlugin.pluginXml.entries += '''
@@ -196,5 +210,19 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			</extension>
 		'''
 	}
+
+	/**
+	 * @since 2.14
+	 */
+	protected def getDeprecatedRulesFromGrammar() {
+		return grammar.rules.filter[isDeprecated]
+	}
 	
+	/**
+	 * @since 2.14
+	 */
+	protected def boolean isDeprecated(AbstractRule rule) {
+		return rule.getAnnotations().stream().anyMatch(e|AnnotationNames.DEPRECATED.equals(e.getName()));
+	}
+
 }

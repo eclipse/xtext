@@ -23,7 +23,9 @@ public final class AnnotationNames {
 	
 	public static final String FINAL = "Final";
 	
-	public static final List<String> VALID_ANNOTATIONS_NAMES = ImmutableList.of(OVERRIDE, EXPORTED, FINAL);
+	public static final String DEPRECATED = "Deprecated";
+	
+	public static final List<String> VALID_ANNOTATIONS_NAMES = ImmutableList.of(OVERRIDE, EXPORTED, FINAL, DEPRECATED);
 	
 	private AnnotationNames() {
 	}

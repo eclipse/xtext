@@ -13,19 +13,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Annotation;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.AnnotationNames;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -83,7 +91,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   @Override
   public void generate() {
-    new GuiceModuleAccess.BindingFactory().addTypeToTypeEagerSingleton(this._validatorNaming.getValidatorClass(this.getGrammar()), this._validatorNaming.getValidatorClass(this.getGrammar())).contributeTo(this.getLanguage().getRuntimeGenModule());
+    new GuiceModuleAccess.BindingFactory().addTypeToTypeEagerSingleton(this._validatorNaming.getValidatorClass(this.getGrammar()), 
+      this._validatorNaming.getValidatorClass(this.getGrammar())).contributeTo(this.getLanguage().getRuntimeGenModule());
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
@@ -339,13 +348,49 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.append("}");
         _builder.newLine();
         _builder.append("\t");
-        _builder.newLine();
+        StringConcatenationClient _generateValidationToDeprecateRules = ValidatorFragment2.this.generateValidationToDeprecateRules();
+        _builder.append(_generateValidationToDeprecateRules, "\t");
+        _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
       }
     };
     javaFile.setContent(_client);
     javaFile.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
+  }
+  
+  protected StringConcatenationClient generateValidationToDeprecateRules() {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          Iterable<AbstractRule> _deprecatedRulesFromGrammar = ValidatorFragment2.this.getDeprecatedRulesFromGrammar();
+          for(final AbstractRule deprecatedRule : _deprecatedRulesFromGrammar) {
+            EClassifier _classifier = deprecatedRule.getType().getClassifier();
+            ResourceSet _resourceSet = ValidatorFragment2.this.getGrammar().eResource().getResourceSet();
+            final TypeReference elementType = new TypeReference(((EClass) _classifier), _resourceSet);
+            _builder.newLineIfNotEmpty();
+            _builder.newLine();
+            _builder.append("@");
+            _builder.append(Check.class);
+            _builder.newLineIfNotEmpty();
+            _builder.append("public void checkDeprecated");
+            String _simpleName = elementType.getSimpleName();
+            _builder.append(_simpleName);
+            _builder.append("(");
+            _builder.append(elementType);
+            _builder.append(" element) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("warning(\"This part of the language is marked as deprecated and might get removed in the future!\", element, null);");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    };
+    return _client;
   }
   
   protected Iterable<EPackage> getGeneratedPackagesToValidate() {
@@ -464,5 +509,25 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * @since 2.14
+   */
+  protected Iterable<AbstractRule> getDeprecatedRulesFromGrammar() {
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf(this.isDeprecated(it));
+    };
+    return IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function);
+  }
+  
+  /**
+   * @since 2.14
+   */
+  protected boolean isDeprecated(final AbstractRule rule) {
+    final Predicate<Annotation> _function = (Annotation e) -> {
+      return AnnotationNames.DEPRECATED.equals(e.getName());
+    };
+    return rule.getAnnotations().stream().anyMatch(_function);
   }
 }
