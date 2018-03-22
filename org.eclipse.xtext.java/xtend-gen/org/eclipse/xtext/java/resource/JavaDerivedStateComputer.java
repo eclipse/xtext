@@ -345,7 +345,7 @@ public class JavaDerivedStateComputer {
           case JAVA9:
             long _xtrycatchfinallyexpression_1 = (long) 0;
             try {
-              _xtrycatchfinallyexpression_1 = ClassFileConstants.class.getField("JDK1_9").getLong(null);
+              _xtrycatchfinallyexpression_1 = ClassFileConstants.class.getField("JDK9").getLong(null);
             } catch (final Throwable _t_1) {
               if (_t_1 instanceof NoSuchFieldException) {
                 _xtrycatchfinallyexpression_1 = ClassFileConstants.JDK1_7;
