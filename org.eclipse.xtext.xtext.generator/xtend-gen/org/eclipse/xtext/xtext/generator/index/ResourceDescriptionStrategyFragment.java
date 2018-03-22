@@ -50,12 +50,12 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
   @Inject
   private FileAccessFactory fileAccessFactory;
   
-  protected TypeReference getSuperResourceDescriptionStrategyClass() {
+  protected TypeReference getResourceDescriptionStrategyClass() {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
     String _plus = (_runtimeBasePackage + ".index.");
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "GeneratedResourceDescriptionStrategy");
+    String _plus_2 = (_plus_1 + "DefaultResourceDescriptionStrategy");
     return new TypeReference(_plus_2);
   }
   
@@ -77,7 +77,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
     if ((this.isGenerateStub() || this.isGenerateXtendStub())) {
       bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getStubResourceDescriptionStrategyClass());
     } else {
-      bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getSuperResourceDescriptionStrategyClass());
+      bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getResourceDescriptionStrategyClass());
     }
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
@@ -109,7 +109,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        String _simpleName = ResourceDescriptionStrategyFragment.this.getSuperResourceDescriptionStrategyClass().getSimpleName();
+        String _simpleName = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass().getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _defaultResourceDescriptionSuperClass = ResourceDescriptionStrategyFragment.this.getDefaultResourceDescriptionSuperClass();
@@ -179,7 +179,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
   }
   
   protected void generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
-    this.fileAccessFactory.createJavaFile(this.getSuperResourceDescriptionStrategyClass(), this.generateSuperResourceDescriptionStrategyContent(exportedRules)).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
+    this.fileAccessFactory.createJavaFile(this.getResourceDescriptionStrategyClass(), this.generateSuperResourceDescriptionStrategyContent(exportedRules)).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
     if ((this.isGenerateStub() && (!this.isGenerateXtendStub()))) {
       TypeReference _stubResourceDescriptionStrategyClass = this.getStubResourceDescriptionStrategyClass();
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -189,8 +189,8 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
           String _simpleName = ResourceDescriptionStrategyFragment.this.getStubResourceDescriptionStrategyClass().getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
-          TypeReference _superResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getSuperResourceDescriptionStrategyClass();
-          _builder.append(_superResourceDescriptionStrategyClass);
+          TypeReference _resourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass();
+          _builder.append(_resourceDescriptionStrategyClass);
           _builder.append("{");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -210,8 +210,8 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
             TypeReference _stubResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getStubResourceDescriptionStrategyClass();
             _builder.append(_stubResourceDescriptionStrategyClass);
             _builder.append(" extends ");
-            TypeReference _superResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getSuperResourceDescriptionStrategyClass();
-            _builder.append(_superResourceDescriptionStrategyClass);
+            TypeReference _resourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass();
+            _builder.append(_resourceDescriptionStrategyClass);
             _builder.append("{");
             _builder.newLineIfNotEmpty();
             _builder.newLine();

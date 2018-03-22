@@ -59,7 +59,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     final StringConcatenation stringConcat = new StringConcatenation("\n");
     stringConcat.append(result);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public class FooGeneratedResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {");
+    _builder_1.append("public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");

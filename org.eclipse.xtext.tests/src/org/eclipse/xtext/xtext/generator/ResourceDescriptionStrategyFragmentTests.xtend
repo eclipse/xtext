@@ -47,7 +47,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		val stringConcat = new StringConcatenation("\n")
 		stringConcat.append(result)
 		assertEquals('''
-			public class FooGeneratedResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
+			public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
 				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
 					if(eObject instanceof org.xtext.foo.Rule) {
 						return createEObjectDescriptionsForRule(eObject, acceptor);
