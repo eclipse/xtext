@@ -119,7 +119,7 @@ import org.eclipse.lsp4j.WorkspaceEdit
 		this.languagesRegistry.extensionToFactoryMap.keySet.toList.sort.map[ext|
 			val synthUri = URI.createURI("synth:///file."+ext)
 			return synthUri.resourceServiceProvider
-		]
+		].toSet
 	} 
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
