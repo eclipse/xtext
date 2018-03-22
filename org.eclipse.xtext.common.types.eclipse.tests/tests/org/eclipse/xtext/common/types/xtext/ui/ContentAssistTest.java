@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -101,19 +101,37 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 	}
 
 	@Test public void testCustomArrayList_01() throws Exception {
-		newBuilder().append("custom ArrayLis").assertText(
+		try {
+			newBuilder().append("custom ArrayLis").assertText(
 				"java.util.ArrayList",
 				"java.util.ArrayList.ArrayListSpliterator",
 				"java.util.Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap");
+		} catch (AssertionError e) {
+			newBuilder().append("custom ArrayLis").assertText(
+				"java.util.ArrayList",
+				"com.google.common.collect.MultimapBuilder.ArrayListSupplier", 
+				"java.util.ArrayList.ArrayListSpliterator",
+				"java.util.Arrays.ArrayList",
+				"com.google.common.collect.ArrayListMultimap");
+		}
 	}
 	
 	@Test public void testCustomArrayList_02() throws Exception {
-		newBuilder().append("import java.util.* custom ArrayLis").assertText(
+		try {
+			newBuilder().append("import java.util.* custom ArrayLis").assertText(
 				"ArrayList",
 				"ArrayList.ArrayListSpliterator",
 				"Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap");
+		} catch (AssertionError e) {
+			newBuilder().append("import java.util.* custom ArrayLis").assertText(
+				"ArrayList",
+				"ArrayList.ArrayListSpliterator",
+				"Arrays.ArrayList",
+				"com.google.common.collect.ArrayListMultimap",
+				"com.google.common.collect.MultimapBuilder.ArrayListSupplier");
+		}
 	}
 	
 	@Test public void testDefaultBlockingQueue_01() throws Exception {
