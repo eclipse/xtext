@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -876,8 +876,19 @@ ruleJvmFormalParameter:
 ruleFullJvmFormalParameter:
 	'extension'
 	?
-	ruleJvmTypeReference
+	ruleMultiCatchType
 	ruleInnerVarID
+;
+
+// Rule MultiCatchType
+ruleMultiCatchType:
+	ruleJvmTypeReference
+	(
+		(
+			'|'
+			ruleJvmTypeReference
+		)+
+	)?
 ;
 
 // Rule XStringLiteral
@@ -923,6 +934,22 @@ ruleXSwitchExpression:
 		ruleXExpression
 	)?
 	'}'
+;
+
+// Rule XCasePart
+ruleXCasePart:
+	ruleMultiCatchType
+	?
+	(
+		'case'
+		ruleXExpression
+	)?
+	(
+		':'
+		ruleXExpression
+		    |
+		','
+	)
 ;
 
 // Rule XExpressionOrSimpleConstructorCall
@@ -1742,22 +1769,6 @@ ruleXIfExpression:
 		)
 		ruleXExpression
 	)?
-;
-
-// Rule XCasePart
-ruleXCasePart:
-	ruleJvmTypeReference
-	?
-	(
-		'case'
-		ruleXExpression
-	)?
-	(
-		':'
-		ruleXExpression
-		    |
-		','
-	)
 ;
 
 // Rule XForLoopExpression
