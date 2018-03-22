@@ -649,8 +649,10 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		])
 		return result
 	}
-
-	private def void saveResource(Resource resource) {
+	/**
+	 * @since 2.14
+	 */
+	protected def void saveResource(Resource resource) {
 		val saveOptions = newHashMap
 		saveOptions.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.AbsoluteCrossBundleAware {
 			override deresolve(URI uri) {

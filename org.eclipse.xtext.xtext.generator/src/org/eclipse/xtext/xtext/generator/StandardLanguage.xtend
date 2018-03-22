@@ -39,6 +39,7 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 
 /**
  * This specialization of the {@link XtextGeneratorLanguage} adds all the standard generator fragments
@@ -58,6 +59,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
  * to enable stub generation for the formatter.</p>
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  * @noextend This class should not be extended by clients.
  */
 @Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
@@ -76,6 +78,8 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	ValidatorFragment2 validator = new ValidatorFragment2
 	
 	ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2
+	
+	ResourceDescriptionStrategyFragment resourceDescriptionStrategy = new ResourceDescriptionStrategyFragment
 	
 	QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2
 	
@@ -154,6 +158,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		fragments += parserGenerator
 		fragments += validator
 		fragments += scopeProvider
+		fragments += resourceDescriptionStrategy
 		fragments += qualifiedNamesProvider
 		fragments += builder
 		fragments += generator
