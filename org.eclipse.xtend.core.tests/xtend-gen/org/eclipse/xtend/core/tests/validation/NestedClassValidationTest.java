@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -244,6 +244,15 @@ public class NestedClassValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("D d = new D");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def somethingWithD() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("println(d)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
