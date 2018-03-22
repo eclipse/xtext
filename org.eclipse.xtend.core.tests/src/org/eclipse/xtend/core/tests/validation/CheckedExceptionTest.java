@@ -16,7 +16,9 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.After;
 import org.junit.Before;
@@ -131,6 +133,11 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testFeatureCall_09() throws Exception {
 		XtendFile file = file("class C { def void m() throws Error {} def void n() { m() } }");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test public void testFeatureCall_10() throws Exception {
+		XtendFile file = file("class C { def void m() throws java.io.IOException, java.net.URISyntaxException {} def void n() { try { m() } catch(java.io.IOException|java.net.URISyntaxException e) {} } }");
+		helper.assertNoErrors(file);
 	}
 	
 	@Test public void testGenericFeatureCall_01() throws Exception {
@@ -260,6 +267,29 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testGenericConstructorCall_03() throws Exception {
 		XtendFile file = file("class C<X extends java.io.IOException> { new() throws X {} def void m() { new C } }");
 		helper.assertError(file, XbasePackage.Literals.XCONSTRUCTOR_CALL, UNHANDLED_EXCEPTION, "Unhandled exception type IOException");
+	}
+	
+	@Test public void testRedundantMulticatch_01() throws Exception {
+		XtendFile file = file("class C { def void m() { try {} catch(RuntimeException | Exception e) {} } }");
+		helper.assertError(file, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MULTITYPE_PART, 
+				"The RuntimeException is already covered by the caught Exception");
+	}
+	
+	@Test public void testRedundantMulticatch_02() throws Exception {
+		XtendFile file = file("class C { def void m() { try {} catch(Exception | RuntimeException e) {} } }");
+		helper.assertError(file, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MULTITYPE_PART, 
+				"The RuntimeException is already covered by the caught Exception");
+	}
+	
+	@Test public void testRedundantMulticatch_03() throws Exception {
+		XtendFile file = file("class C { def void m() { try {} catch(IllegalArgumentException | IllegalArgumentException e) {} } }");
+		helper.assertError(file, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_MULTITYPE_PART, 
+				"The caught IllegalArgumentExceptionis redundant");
+	}
+	
+	@Test public void testRedundantMulticatch_04() throws Exception {
+		XtendFile file = file("class C { def void m() { try {} catch(IllegalArgumentException | IllegalStateException e) {} } }");
+		helper.assertNoErrors(file);
 	}
 	
 }

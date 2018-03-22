@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -35,12 +36,14 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -177,6 +180,49 @@ public class ParserTest extends AbstractXtendTestCase {
 		XCatchClause singleCatchClause = tryCatch.getCatchClauses().get(0);
 		XtendFormalParameter parameter = (XtendFormalParameter) singleCatchClause.getDeclaredParam();
 		assertTrue(parameter.isExtension());
+	}
+	
+	@Test
+	public void testMultiCatch_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void m() { try {} catch(NullPointerException | IllegalArgumentException e) {} } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) body.getExpressions().get(0);
+		XCatchClause singleCatchClause = tryCatch.getCatchClauses().get(0);
+		XtendFormalParameter parameter = (XtendFormalParameter) singleCatchClause.getDeclaredParam();
+		assertFalse(parameter.isExtension());
+		JvmSynonymTypeReference parameterType = (JvmSynonymTypeReference) parameter.getParameterType();
+		assertEquals(2, parameterType.getReferences().size());
+	}
+	
+	@Test
+	public void testMultiCatch_02() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void m() { try {} catch(extension NullPointerException | IllegalArgumentException | IllegalStateException e) {} } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) body.getExpressions().get(0);
+		XCatchClause singleCatchClause = tryCatch.getCatchClauses().get(0);
+		XtendFormalParameter parameter = (XtendFormalParameter) singleCatchClause.getDeclaredParam();
+		assertTrue(parameter.isExtension());
+		JvmSynonymTypeReference parameterType = (JvmSynonymTypeReference) parameter.getParameterType();
+		assertEquals(3, parameterType.getReferences().size());
+	}
+	
+	@Test
+	public void testMultiGuard_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void m(Object x) { switch(x) { NullPointerException | IllegalArgumentException : x } } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XSwitchExpression switchExpr = (XSwitchExpression) body.getExpressions().get(0);
+		XCasePart singleCase = switchExpr.getCases().get(0);
+		JvmSynonymTypeReference parameterType = (JvmSynonymTypeReference) singleCase.getTypeGuard();
+		assertEquals(2, parameterType.getReferences().size());
 	}
 	
 	@Test public void testCreateExtension_00() throws Exception {
