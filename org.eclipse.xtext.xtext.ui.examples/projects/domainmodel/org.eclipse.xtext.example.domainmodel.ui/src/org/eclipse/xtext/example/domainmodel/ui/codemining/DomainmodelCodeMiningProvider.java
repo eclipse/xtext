@@ -36,8 +36,8 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 	private DomainmodelGrammarAccess grammar;
 	
 	@Override
-	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)
-			throws BadLocationException{
+	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+			IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
 		// get all operations to open document
 		List<Operation> allOperations = EcoreUtil2.eAllOfType(resource.getContents().get(0), Operation.class);
 		// get keyword for ')'
@@ -49,6 +49,9 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 			}
 			// get return type name from operation
 			JvmOperation inferredOp = (JvmOperation) jvmModelAssociations.getPrimaryJvmElement(o);
+			if (inferredOp == null || inferredOp.getReturnType() == null) {
+				continue; // broken model
+			}
 			String returnTypeName = inferredOp.getReturnType().getSimpleName();
 			// find document offset for inline annotation
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(o);

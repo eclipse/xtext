@@ -56,8 +56,8 @@ public class XtextCodeMiningReconcileStrategy implements IReconcilingStrategy, I
 	private ISourceViewerExtension5 sourceViewer;
 
 	public XtextCodeMiningReconcileStrategy(ISourceViewerExtension5 sourceViewer) {
-			this.sourceViewer = sourceViewer;
-		}
+		this.sourceViewer = sourceViewer;
+	}
 
 	@Override
 	public void initialReconcile() {

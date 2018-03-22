@@ -120,7 +120,7 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 	 * @throws BadLocationException when line number doesn't exists
 	 */
 	protected abstract void createCodeMinings(IDocument document, XtextResource resource,
-			CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException;
+			CancelIndicator indicator, IAcceptor<? super ICodeMining> acceptor) throws BadLocationException;
 
 	/**
 	 * Creates a {@link LineContentCodeMining} object for an inline annotation.
