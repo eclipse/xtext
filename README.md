@@ -24,7 +24,7 @@ Please check the individual repositories for instructions for building and contr
 ## Quick Access
 - [All Open Pull Requests](https://github.com/search?utf8=✓&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 - [All Open Issues](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
-- [All Open Issues of Milestone Release_2.13](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.13+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
+- [All Open Issues of Milestone Release_2.14](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.14+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 
 ## Developer Resources
 
