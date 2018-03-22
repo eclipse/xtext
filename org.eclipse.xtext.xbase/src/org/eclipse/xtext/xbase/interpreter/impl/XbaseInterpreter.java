@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
@@ -472,18 +473,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			forkedContext.newValue(QualifiedName.create(simpleName), conditionResult);
 		}
 		for (XCasePart casePart : switchExpression.getCases()) {
-			Class<?> expectedType = null;
-			if (casePart.getTypeGuard() != null) {
-				String typeName = casePart.getTypeGuard().getType().getQualifiedName();
-				try {
-					expectedType = classFinder.forName(typeName);
-				} catch (ClassNotFoundException e) {
-					throw new EvaluationException(new NoClassDefFoundError(typeName));
-				}
-			}
-			if (expectedType != null && switchExpression.getSwitch() == null)
+			JvmTypeReference typeGuard = casePart.getTypeGuard();
+			if (typeGuard != null && switchExpression.getSwitch() == null)
 				throw new IllegalStateException("Switch without expression or implicit 'this' may not use type guards");
-			if (expectedType == null || expectedType.isInstance(conditionResult)) {
+			if (typeGuard == null || isInstanceoOf(conditionResult, typeGuard)) {
 				if (casePart.getCase() != null) {
 					Object casePartResult = internalEvaluate(casePart.getCase(), forkedContext, indicator);
 					if (Boolean.TRUE.equals(casePartResult) || eq(conditionResult, casePartResult)) {
@@ -606,6 +599,26 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		throw new EvaluationException((Throwable) thrown);
 	}
 
+	protected boolean isInstanceoOf(Object value, JvmTypeReference type) {
+		if (type instanceof JvmSynonymTypeReference) {
+			for(JvmTypeReference synonym: ((JvmSynonymTypeReference) type).getReferences()) {
+				if (isInstanceoOf(value, synonym)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		String exceptionTypeName = type.getType().getQualifiedName();
+		try {
+			Class<?> exceptionType = classFinder.forName(exceptionTypeName);
+			if (exceptionType.isInstance(value))
+				return true;
+		} catch (ClassNotFoundException e) {
+			throw new EvaluationException(new NoClassDefFoundError(exceptionTypeName));
+		}
+		return false;
+	}
+	
 	protected Object _doEvaluate(XTryCatchFinallyExpression tryCatchFinally,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object result = null;
@@ -615,13 +628,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Throwable cause = evaluationException.getCause();
 			for (XCatchClause catchClause : tryCatchFinally.getCatchClauses()) {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
-				String exceptionTypeName = exception.getParameterType().getType().getQualifiedName();
-				try {
-					Class<?> exceptionType = classFinder.forName(exceptionTypeName);
-					if (!exceptionType.isInstance(cause))
-						continue;
-				} catch (ClassNotFoundException e) {
-					throw new EvaluationException(new NoClassDefFoundError(exceptionTypeName));
+				JvmTypeReference catchParameterType = exception.getParameterType();
+				if (!isInstanceoOf(cause, catchParameterType)) {
+					continue;
 				}
 				IEvaluationContext forked = context.fork();
 				forked.newValue(QualifiedName.create(exception.getName()), cause);
@@ -809,15 +818,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Object instance = internalEvaluate(instanceOf.getExpression(), context, indicator);
 		if (instance == null)
 			return Boolean.FALSE;
-
-		Class<?> expectedType = null;
-		String className = instanceOf.getType().getType().getQualifiedName();
-		try {
-			expectedType = classFinder.forName(className);
-		} catch (ClassNotFoundException cnfe) {
-			throw new EvaluationException(new NoClassDefFoundError(className));
-		}
-		return expectedType.isInstance(instance);
+		return isInstanceoOf(instance, instanceOf.getType());
 	}
 
 	protected Object _doEvaluate(XVariableDeclaration variableDecl, IEvaluationContext context, CancelIndicator indicator) {
