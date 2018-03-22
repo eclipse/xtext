@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,5 +28,35 @@ public interface IDelegatingScopeProvider extends IScopeProvider {
 	 * @return the delegate. May not be <code>null</code>.
 	 */
 	IScopeProvider getDelegate();
+	
+	/**
+	 * Set the wrapper this delegating scope provider. This encapsulates the traversal of the
+	 * delegate and allows clients to set the wrapper on multiple delegates if necessary.
+	 * 
+	 * The wrapper may be <code>null</code>
+	 * 
+	 * @since 2.14
+	 */
+	default void setWrapper(IScopeWrapper wrapper) {
+		setWrapper(getDelegate(), wrapper);
+	}
+	
+	/**
+	 * Set the given wrapper on the given {@link IScopeProvider} if the scope provider is either a
+	 * delegating scope provider or an {@link AbstractGlobalScopeDelegatingScopeProvider}.
+	 * 
+	 * The wrapper may be <code>null</code>
+	 * 
+	 * @since 2.14
+	 */
+	static void setWrapper(IScopeProvider scopeProvider, IScopeWrapper wrapper) {
+		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
+			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
+			provider.setWrapper(wrapper);
+		} else if (scopeProvider instanceof IDelegatingScopeProvider) {
+			IDelegatingScopeProvider delegatingScopeProvider = (IDelegatingScopeProvider) scopeProvider;
+			delegatingScopeProvider.setWrapper(wrapper);
+		}
+	}
 	
 }

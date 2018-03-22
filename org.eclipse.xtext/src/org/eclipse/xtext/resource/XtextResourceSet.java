@@ -232,7 +232,7 @@ public class XtextResourceSet extends ResourceSetImpl {
     @Override
 	public Resource getResource(URI uri, boolean loadOnDemand) {
 		Map<URI, Resource> map = getURIResourceMap();
-		if (map == null)
+		if (map == null || resourceLocator != null)
 			return super.getResource(uri, loadOnDemand);
 		Resource resource = map.get(uri);
 		if (resource == null) {

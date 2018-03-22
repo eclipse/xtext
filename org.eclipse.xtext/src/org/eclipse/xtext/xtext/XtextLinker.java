@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -51,6 +50,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.NonRecursiveEContentAdapter;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
@@ -271,7 +271,7 @@ public class XtextLinker extends Linker {
 	@Inject
 	private PackageRemover packageRemover;
 
-	public static class PackageRemover extends EContentAdapter {
+	public static class PackageRemover extends NonRecursiveEContentAdapter {
 
 		@Inject
 		private IReferableElementsUnloader unloader;
