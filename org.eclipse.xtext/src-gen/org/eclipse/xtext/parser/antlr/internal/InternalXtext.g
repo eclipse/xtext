@@ -591,7 +591,7 @@ ruleParserRule returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)?
+		)*
 		(
 			(
 				(

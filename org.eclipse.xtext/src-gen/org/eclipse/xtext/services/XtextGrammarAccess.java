@@ -402,19 +402,19 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ParserRule:
-		//	annotations+=Annotation? (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
+		//	annotations+=Annotation* (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
 		//	RuleNameAndParams ('returns' type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID]
 		//	(',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
 		//	alternatives=Alternatives
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation? (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
+		//annotations+=Annotation* (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
 		//RuleNameAndParams ('returns' type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID]
 		//(',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':' alternatives=Alternatives ';'
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=Annotation?
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//Annotation
@@ -2544,7 +2544,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ParserRule:
-	//	annotations+=Annotation? (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
+	//	annotations+=Annotation* (^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) |
 	//	RuleNameAndParams ('returns' type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID]
 	//	(',' hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
 	//	alternatives=Alternatives

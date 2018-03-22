@@ -44,7 +44,7 @@ Annotation returns Annotation:
 ;
 
 ParserRule :
-	(annotations += Annotation)?
+	(annotations += Annotation)*
 	(
 	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?)
 	| RuleNameAndParams ('returns' type=TypeRef)?

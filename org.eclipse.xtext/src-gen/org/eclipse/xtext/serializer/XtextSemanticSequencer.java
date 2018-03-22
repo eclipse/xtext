@@ -1012,7 +1012,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
-	 *         annotations+=Annotation? 
+	 *         annotations+=Annotation* 
 	 *         fragment?='fragment'? 
 	 *         name=ValidID 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 

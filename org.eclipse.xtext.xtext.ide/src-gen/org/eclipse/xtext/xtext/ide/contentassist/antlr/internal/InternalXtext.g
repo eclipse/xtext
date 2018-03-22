@@ -3085,7 +3085,7 @@ rule__ParserRule__Group__0__Impl
 :
 (
 	{ before(grammarAccess.getParserRuleAccess().getAnnotationsAssignment_0()); }
-	(rule__ParserRule__AnnotationsAssignment_0)?
+	(rule__ParserRule__AnnotationsAssignment_0)*
 	{ after(grammarAccess.getParserRuleAccess().getAnnotationsAssignment_0()); }
 )
 ;
