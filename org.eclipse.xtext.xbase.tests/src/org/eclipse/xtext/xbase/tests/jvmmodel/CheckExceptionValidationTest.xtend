@@ -14,7 +14,7 @@ class CheckExceptionValidationTest extends AbstractJvmModelTest {
 	
 	@Inject ValidationTestHelper helper
 	
-	private MapBasedPreferenceValues preferences;
+	MapBasedPreferenceValues preferences;
 	
 	@Inject
 	def void setPreferences(SingletonPreferenceValuesProvider prefProvider) {
