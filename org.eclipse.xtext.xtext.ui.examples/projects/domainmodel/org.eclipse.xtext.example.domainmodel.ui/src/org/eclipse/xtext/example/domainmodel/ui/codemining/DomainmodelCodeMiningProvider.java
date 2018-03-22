@@ -26,6 +26,9 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
 
+/**
+ * Provide minings for inferred return types of operations. 
+ */
 public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvider {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
@@ -35,57 +38,26 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 	@Override
 	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)
 			throws BadLocationException{
-		createLineHeaderCodeMinings(document,resource,indicator,acceptor);
-		createLineContentCodeMinings(document,resource,indicator,acceptor);
-	}
-
-	private void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
-			throws BadLocationException{
-		int lineCount = document.getNumberOfLines();
-		for (int i = 0; i < lineCount; i++) {
-			String line = document.get(document.getLineOffset(i), document.getLineLength(i)).trim();
-			if(line.contains("op")) {
-				//it is an operation
-				continue;
-			}
-			int endIndex = line.indexOf(":");
-			if (endIndex != -1) {
-				String attrName = line.substring(0, endIndex);
-				String attrType = line.substring(endIndex + 1, line.length());
-				String headerText = "attribute \'" + attrName + "\' with type \'" + attrType + "\'";
-				acceptor.accept(createNewLineHeaderCodeMining(i, document, headerText));
-				if (indicator.isCanceled()) {
-					return;
-				}
-			}
-		}
-	}
-	
-	private void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) 
-			throws BadLocationException {
-		//get all operations to open document
+		// get all operations to open document
 		List<Operation> allOperations = EcoreUtil2.eAllOfType(resource.getContents().get(0), Operation.class);
-		//get keyword for ')'
+		// get keyword for ')'
 		Keyword rightParenthesisKeyword_4 = grammar.getOperationAccess().getRightParenthesisKeyword_4();
 		for (Operation o : allOperations) {
 			//inline annotations only for methods with no return type
 			if (o.getType() != null) {
 				continue;
 			}
-			//get returntype name from operation
+			// get return type name from operation
 			JvmOperation inferredOp = (JvmOperation) jvmModelAssociations.getPrimaryJvmElement(o);
 			String returnTypeName = inferredOp.getReturnType().getSimpleName();
-			//find document offset for inline annotation
+			// find document offset for inline annotation
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(o);
 			for (Iterator<INode> it = node.getAsTreeIterable().iterator(); it.hasNext();) {
 				INode child = it.next();
 				if (rightParenthesisKeyword_4.equals(child.getGrammarElement())) {
-					//create line content code mining for inline annotation after grammarElement ')'
+					// create line content code mining for inline annotation after grammarElement ')'
 					String annotationText = " : " + returnTypeName;
 					acceptor.accept(createNewLineContentCodeMining(child.getTotalOffset() + 1, annotationText));
-					if(indicator.isCanceled()) {
-						return;
-					}
 				}
 			}
 		}
