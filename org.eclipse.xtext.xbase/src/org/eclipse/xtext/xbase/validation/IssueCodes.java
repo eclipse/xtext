@@ -163,6 +163,11 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	
 	public static final String REFER_INVALID_TYPES = ISSUE_CODE_PREFIX + "refer_invalid_types";
 	
+	/**
+	 * A multitype `A | B` where A is a subtype of B or vice versa.
+	 */
+	public static final String INVALID_MULTITYPE_PART = ISSUE_CODE_PREFIX + "invalid_multitype_part";
+	
 	private IssueCodes() {
 	}
 
