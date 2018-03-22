@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2018 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,10 @@ import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
+import org.eclipse.xtext.ide.server.commands.IExecutableCommandService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageExecutableCommandService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService;
 
@@ -35,5 +37,9 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
   
   public Class<? extends ICodeActionService> bindICodeActionService() {
     return CodeActionService.class;
+  }
+  
+  public Class<? extends IExecutableCommandService> bindIExecutableCommandService() {
+    return TestLanguageExecutableCommandService.class;
   }
 }
