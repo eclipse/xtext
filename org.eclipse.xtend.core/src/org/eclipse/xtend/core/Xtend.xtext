@@ -287,9 +287,18 @@ XbaseConstructorCall returns xbase::XConstructorCall:
 JvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? (parameterType=JvmTypeReference)? name=InnerVarID;
 
+/*
+ * Since we only use FullJvmFormalParameter for catch variables, it is safe to
+ * use a MultiTypeReference here as the type.
+ */
 @Override
 FullJvmFormalParameter returns XtendFormalParameter:
-	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
+	extension?='extension'? parameterType=MultiTypeReference name=InnerVarID
+;
+
+MultiTypeReference returns types::JvmTypeReference:
+	JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?
+;
 
 @Override
 XStringLiteral returns xbase::XExpression:
@@ -304,6 +313,13 @@ XSwitchExpression returns xbase::XExpression:
 	(cases+=XCasePart)*
 	('default' ':' default=XExpression )?
 	'}'
+;
+
+@Override
+XCasePart returns xbase::XCasePart:
+	{xbase::XCasePart}
+	typeGuard=MultiTypeReference? ('case' case=XExpression)?
+		(':' then=XExpression | fallThrough?=',') 
 ;
 
 XExpressionOrSimpleConstructorCall returns xbase::XExpression:
