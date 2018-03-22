@@ -22,8 +22,10 @@ import com.google.inject.name.Names
 
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
- * @since 2.14
+ * 
  * @author René Purrio - Initial contribution and API
+ * @author Karsten Thoms - Review and improvements on initial implementation
+ * @since 2.14
  */
 @Beta
 class CodeMiningFragment extends AbstractStubGeneratingFragment {
@@ -90,27 +92,19 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 			import org.eclipse.jface.text.IDocument
 			import org.eclipse.jface.text.codemining.ICodeMining
 			import org.eclipse.xtext.resource.XtextResource
-			import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider
+			import org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider
 			import org.eclipse.xtext.util.CancelIndicator
 			import org.eclipse.xtext.util.IAcceptor
 			
-			class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
-				override void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+			class «codeMiningProviderClass.lastSegment» extends AbstractXtextCodeMiningProvider {
+				override void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+					IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
 					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
+					// TODO: implement me
+					// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
 					
-					//example:
-					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"))
-				}
-				
-				override void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
-					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					
-					//example:
-					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "))
+					// example:
+					// acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"))
 				}
 			}
 		''').writeTo(projectConfig.eclipsePlugin.src)
@@ -122,30 +116,21 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 			import org.eclipse.jface.text.IDocument;
 			import org.eclipse.jface.text.codemining.ICodeMining;
 			import org.eclipse.xtext.resource.XtextResource;
-			import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider;
+			import org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider;
 			import org.eclipse.xtext.util.CancelIndicator;
 			import org.eclipse.xtext.util.IAcceptor;
 			
 			@SuppressWarnings("restriction")
-			public class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
+			public class «codeMiningProviderClass.lastSegment» extends AbstractXtextCodeMiningProvider {
 				@Override
-				protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+				protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+					IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
 					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
+					// TODO: implement me
+					// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
 					
-					//example:
-					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
-				}
-				
-				@Override
-				protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
-					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					
-					//example:
-					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "));
+					// example:
+					// acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
 				}
 			}
 		''').writeTo(projectConfig.eclipsePlugin.src)
