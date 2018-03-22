@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.example.domainmodel.ide
 
-
 /**
  * Use this class to register ide components.
  */

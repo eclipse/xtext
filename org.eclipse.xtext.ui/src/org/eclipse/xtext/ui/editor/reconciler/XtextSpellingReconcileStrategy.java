@@ -33,11 +33,12 @@ import com.google.inject.Inject;
  */
 public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 
-	public static class Factory {
+	public static class Factory implements IReconcileStrategyFactory {
 		
 		@Inject
 		private ITokenTypeToPartitionTypeMapperExtension partitionMapperExtension;
 		
+		@Override
 		public XtextSpellingReconcileStrategy create(ISourceViewer sourceViewer) {
 			XtextSpellingReconcileStrategy result = new XtextSpellingReconcileStrategy(sourceViewer);
 			result.setPartitionMapperExtension(partitionMapperExtension);

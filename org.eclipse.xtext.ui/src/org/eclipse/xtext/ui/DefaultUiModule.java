@@ -87,7 +87,9 @@ import org.eclipse.xtext.ui.editor.outline.quickoutline.IQuickOutlineContributio
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
+import org.eclipse.xtext.ui.editor.reconciler.XtextSpellingReconcileStrategy;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.PresentationRepairer;
@@ -441,5 +443,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
 		return EclipseProjectConfigProvider.class;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public void configureSpellChecker(Binder binder) {
+		binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("spellChecker")) //$NON-NLS-1$
+		.to(XtextSpellingReconcileStrategy.Factory.class);
 	}
 }

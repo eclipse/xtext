@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.xbase.ui,
  org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.debug.ui
-Import-Package: org.apache.log4j
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.ui.codemining;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.ui.contentassist,
  org.eclipse.xtext.example.domainmodel.ui.autoedit,

@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui
 
+import com.google.inject.Binder
+import com.google.inject.name.Names
 import org.eclipse.ui.plugin.AbstractUIPlugin
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider
@@ -12,8 +14,6 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution
-import com.google.inject.Binder
-import com.google.inject.name.Names
 
 /** 
  * Use this class to register components to be used within the IDE.
