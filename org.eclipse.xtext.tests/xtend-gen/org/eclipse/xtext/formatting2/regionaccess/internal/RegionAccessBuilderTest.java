@@ -28,6 +28,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.tests.LineDelimiters;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -1488,7 +1489,7 @@ public class RegionAccessBuilderTest {
     _builder.newLine();
     _builder.append("// last");
     _builder.newLine();
-    String _trim = _builder.toString().trim();
+    String _trim = LineDelimiters.toUnix(_builder.toString()).trim();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("0    H \"/*xxxx*/\" Comment:TerminalRule\'ML_COMMENT\' Association:NEXT");

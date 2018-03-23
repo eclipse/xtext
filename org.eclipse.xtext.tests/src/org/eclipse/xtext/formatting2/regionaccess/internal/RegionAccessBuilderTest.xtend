@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal
 import com.google.inject.Inject
 
 import static extension org.eclipse.xtext.util.Strings.*
+import static extension org.eclipse.xtext.tests.LineDelimiters.toUnix
 import javax.inject.Provider
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString
@@ -686,7 +687,7 @@ class RegionAccessBuilderTest {
 			/*aaaaa*/
 			c
 			// last
-		'''.toString.trim === '''
+		'''.toString.toUnix.trim === '''
 			 0    H "/*xxxx*/" Comment:TerminalRule'ML_COMMENT' Association:NEXT
 			    9   "\n"       Whitespace:TerminalRule'WS'
 			      B ValueList'[c]' Root
