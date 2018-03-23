@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -135,6 +136,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				LightweightTypeReference featureType = resolvedTypes.getActualType(((XAbstractFeatureCall) expression).getFeature());
 				if (featureType != null && !featureType.isMultiType() && actualType.isAssignableFrom(featureType)) {
 					return false;
+				}
+				if (featureType != null && featureType.isMultiType()) {
+					JvmTypeReference compliantTypeReference = featureType.toJavaCompliantTypeReference();
+					if (actualType.isAssignableFrom(featureType.getOwner().toLightweightTypeReference(compliantTypeReference))) {
+						return false;
+					}
 				}
 			}
 			if (expression.eContainer() instanceof XCastedExpression) {

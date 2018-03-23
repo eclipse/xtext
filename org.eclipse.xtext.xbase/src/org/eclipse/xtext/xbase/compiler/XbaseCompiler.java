@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -518,16 +519,31 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 		final String declaredParamName = makeJavaIdentifier(catchClause.getDeclaredParam().getName());
 		final String name = appendable.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
-		appendable.append("if (").append(parentVariable).append(" instanceof ");
-		serialize(type, catchClause, appendable);
+		appendable.append("if (");
+		JvmTypeReference typeToUse = type;
+		if (type instanceof JvmSynonymTypeReference) {
+			List<JvmTypeReference> references = ((JvmSynonymTypeReference) type).getReferences();
+			Iterator<JvmTypeReference> iter = references.iterator();
+			while(iter.hasNext()) {
+				appendable.append(parentVariable).append(" instanceof ");
+				serialize(iter.next(), catchClause, appendable);
+				if (iter.hasNext()) {
+					appendable.append(" || ");
+				}
+			}
+			typeToUse = resolveSynonymType((JvmSynonymTypeReference) type, catchClause);
+		} else {
+			appendable.append(parentVariable).append(" instanceof ");
+			serialize(type, catchClause, appendable);			
+		}
 		appendable.append(") ").append("{");
 		appendable.increaseIndentation();
 		ITreeAppendable withDebugging = appendable.trace(catchClause, true);
 		if (!XbaseUsageCrossReferencer.find(catchClause.getDeclaredParam(), catchClause.getExpression()).isEmpty()) {
 			ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
-			appendCatchClauseParameter(catchClause, type, name, parameterAppendable.newLine());
+			appendCatchClauseParameter(catchClause, typeToUse, name, parameterAppendable.newLine());
 			withDebugging.append(" = (");
-			serialize(type, catchClause, withDebugging);
+			serialize(typeToUse, catchClause, withDebugging);
 			withDebugging.append(")").append(parentVariable).append(";");
 		}
 		final boolean canBeReferenced = parentIsReferenced && ! isPrimitiveVoid(catchClause.getExpression());
@@ -545,6 +561,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		serialize(parameterType, catchClause, appendable);
 		appendable.append(" ");
 		appendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(parameterName);
+	}
+	
+	protected JvmTypeReference resolveSynonymType(JvmSynonymTypeReference reference, EObject context) {
+		LightweightTypeReference lightweight = toLightweight(reference, context);
+		LightweightTypeReference superType = lightweight.getOwner().getServices().getTypeConformanceComputer().getCommonSuperType(lightweight.getMultiTypeComponents(), lightweight.getOwner());
+		return superType.toJavaCompliantTypeReference();
 	}
 
 	protected void _toJavaExpression(XTryCatchFinallyExpression expr, ITreeAppendable b) {
@@ -1386,12 +1408,25 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
 			caseAppendable.increaseIndentation();
 		}
-		if (casePart.getTypeGuard() != null) {
-			ITreeAppendable typeGuardAppendable = caseAppendable.trace(casePart.getTypeGuard(), true);
+		JvmTypeReference typeGuard = casePart.getTypeGuard();
+		if (typeGuard != null) {
+			ITreeAppendable typeGuardAppendable = caseAppendable.trace(typeGuard, true);
 			typeGuardAppendable.newLine().append("if (");
-			typeGuardAppendable.append(variableName);
-			typeGuardAppendable.append(" instanceof ");
-			typeGuardAppendable.trace(casePart.getTypeGuard()).append(casePart.getTypeGuard().getType());
+			if (typeGuard instanceof JvmSynonymTypeReference) {
+				Iterator<JvmTypeReference> iter = ((JvmSynonymTypeReference) typeGuard).getReferences().iterator();
+				while(iter.hasNext()) {
+					typeGuardAppendable.append(variableName);
+					typeGuardAppendable.append(" instanceof ");
+					typeGuardAppendable.trace(typeGuard).append(iter.next().getType());
+					if (iter.hasNext()) {
+						typeGuardAppendable.append(" || ");
+					}
+				}
+			} else {
+				typeGuardAppendable.append(variableName);
+				typeGuardAppendable.append(" instanceof ");
+				typeGuardAppendable.trace(typeGuard).append(typeGuard.getType());
+			}
 			typeGuardAppendable.append(") {");
 			typeGuardAppendable.increaseIndentation();
 			typeGuardAppendable.openPseudoScope();

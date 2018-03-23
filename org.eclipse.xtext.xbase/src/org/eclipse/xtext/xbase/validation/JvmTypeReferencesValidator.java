@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -31,6 +32,10 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -52,6 +57,9 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	
 	@Inject
 	private ProxyAwareUIStrings proxyAwareUIStrings;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 	
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -185,6 +193,38 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkTypeArgumentsNotPrimitive(JvmTypeConstraint typeRef) {
 		checkNotPrimitive(typeRef.getTypeReference());
+	}
+	
+	@Check
+	public void checkTypesAreDisjoint(JvmSynonymTypeReference typeRef) {
+		List<JvmTypeReference> references = typeRef.getReferences();
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, typeRef);
+		CompoundTypeReference lightweightTypeReference = (CompoundTypeReference) owner.toLightweightTypeReference(typeRef);
+		List<LightweightTypeReference> components = lightweightTypeReference.getMultiTypeComponents();
+		for(int left = 0; left < components.size(); left++) {
+			for(int right = 0; right < components.size(); right++) {
+				if (left != right) {
+					LightweightTypeReference leftRef = components.get(left);
+					LightweightTypeReference rightRef = components.get(right);
+					if (leftRef.isAssignableFrom(rightRef)) {
+						if (leftRef.getIdentifier().equals(rightRef.getIdentifier())) {
+							if (right > left) {
+								StringBuilder message = new StringBuilder("The caught ");
+								message.append(rightRef.getHumanReadableName());
+								message.append("is redundant");
+								error(message.toString(), references.get(right), null, IssueCodes.INVALID_MULTITYPE_PART);
+							}
+						} else {
+							StringBuilder message = new StringBuilder("The ");
+							message.append(rightRef.getHumanReadableName());
+							message.append(" is already covered by the caught ");
+							message.append(leftRef.getHumanReadableName());
+							error(message.toString(), references.get(right), null, IssueCodes.INVALID_MULTITYPE_PART);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	protected void checkNotPrimitive(JvmTypeReference jvmTypeReference) {

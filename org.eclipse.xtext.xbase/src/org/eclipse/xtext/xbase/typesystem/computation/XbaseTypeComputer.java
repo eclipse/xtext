@@ -299,6 +299,15 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		return ifExpression.getThen();
 	}
 	
+	protected LightweightTypeReference normalizedMultiType(ITypeReferenceOwner referenceOwner, JvmTypeReference ref) {
+		LightweightTypeReference result = referenceOwner.toLightweightTypeReference(ref);
+		if (result.isSynonym()) {
+			List<LightweightTypeReference> components = result.getMultiTypeComponents();
+			result = referenceOwner.getServices().getTypeConformanceComputer().getCommonSuperType(components, referenceOwner);
+		}
+		return result;
+	}
+	
 	@SuppressWarnings("null")
 	protected void _computeTypes(XSwitchExpression object, ITypeComputationState state) {
 		ITypeComputationState switchExpressionState = getSwitchExpressionState(object, state); 
@@ -343,7 +352,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			if (casePart.getTypeGuard() != null) {
 				JvmIdentifiableElement refinable = getRefinableCandidate(object, casePartState);
 				if (refinable != null) {
-					LightweightTypeReference lightweightReference = casePartState.getReferenceOwner().toLightweightTypeReference(casePart.getTypeGuard());
+					ITypeReferenceOwner referenceOwner = casePartState.getReferenceOwner();
+					LightweightTypeReference lightweightReference = normalizedMultiType(referenceOwner, casePart.getTypeGuard());
 					casePartState.reassignType(refinable, lightweightReference);
 					if (thenTypeReference == null) {
 						thenTypeReference = lightweightReference;
@@ -1048,8 +1058,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			JvmFormalParameter catchClauseParam = catchClause.getDeclaredParam();
 			JvmTypeReference parameterType = catchClauseParam.getParameterType();
 			LightweightTypeReference lightweightReference = parameterType != null 
-					? referenceOwner.toLightweightTypeReference(parameterType)
+					? normalizedMultiType(referenceOwner, parameterType)
 					: referenceOwner.newAnyTypeReference();
+			if (lightweightReference.isSynonym()) {
+				lightweightReference = getCommonSuperType(lightweightReference.getMultiTypeComponents(), referenceOwner);
+			}
 			ITypeComputationState catchClauseState = assignType(catchClauseParam, lightweightReference, state);
 			catchClauseState.withinScope(catchClause);
 			catchClauseState.computeTypes(catchClause.getExpression());

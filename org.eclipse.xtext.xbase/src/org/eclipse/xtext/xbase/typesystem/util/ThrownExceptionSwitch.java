@@ -92,7 +92,11 @@ public class ThrownExceptionSwitch extends XbaseSwitch<Boolean> {
 				if (caughtException.isType(Throwable.class)) {
 					wasThrowable = true;
 				}
-				caughtExceptions.add(caughtException);
+				if (caughtException.isSynonym()) {
+					caughtExceptions.addAll(caughtException.getMultiTypeComponents());	
+				} else {
+					caughtExceptions.add(caughtException);
+				}
 			}
 			delegate.collectThrownExceptions(clause.getExpression());
 		}

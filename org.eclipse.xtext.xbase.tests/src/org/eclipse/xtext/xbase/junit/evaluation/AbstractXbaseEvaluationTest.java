@@ -2499,6 +2499,20 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testSwitchExpression_55() throws Exception {
 		assertEvaluatesTo(null, "{ switch (Thread.State x : Thread.State.NEW) { default: { } } }");
 	}
+	
+	@Ignore("Multi refs are not supported in Xbase")
+	@Test public void testSwitchExpression_56() throws Exception {
+		assertEvaluatesTo(0, 
+				"{ switch x : 'lalala' as Object { String | Integer: 0 " +
+												"Long, default: 1 } }");
+	}
+	
+	@Ignore("Multi refs are not supported in Xbase")
+	@Test public void testSwitchExpression_57() throws Exception {
+		assertEvaluatesTo(0, 
+				"{ switch x : Integer.valueOf(2) as Object { String | Integer case x.toString == '2': 0 " +
+												"Integer, default: 1 } }");
+	}
 
 	@Test public void testSwitchExpressionOverEnum() throws Exception {
 		assertEvaluatesTo(1, 
@@ -2670,6 +2684,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try 'literal' as Object as Boolean" +
 				"  catch(ClassCastException e) throw new NullPointerException" +
+				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
+	}
+	
+	@Ignore("Multi catch is not supported in Xbase")
+	@Test public void testTryCatch_10() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"try 'literal' as Object as Boolean" +
+				"  catch(IllegalArgumentException | ClassCastException e) throw new NullPointerException" +
 				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
 	}
 	

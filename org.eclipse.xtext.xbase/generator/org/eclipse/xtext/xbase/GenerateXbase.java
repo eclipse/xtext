@@ -44,7 +44,7 @@ final class GenerateXbase {
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
 		final String fileHeader = "/*******************************************************************************\n" +
-			" * Copyright (c) 2010-${year} itemis AG (http://www.itemis.eu) and others.\n" +
+			" * Copyright (c) 2010, ${year} itemis AG (http://www.itemis.eu) and others.\n" +
 			" * All rights reserved. This program and the accompanying materials\n" +
 			" * are made available under the terms of the Eclipse Public License v1.0\n" +
 			" * which accompanies this distribution, and is available at\n" +
