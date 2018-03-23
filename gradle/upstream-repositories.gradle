@@ -24,7 +24,7 @@ repositories {
 	jcenter()
 	if (findProperty('useJenkinsSnapshots') == 'true') {
 		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
-		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/sz%252Fbug411549/lastSuccessfulBuild/artifact/build/maven-repository/' }
+		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-core/job/sz%252Fbug411549/lastSuccessfulBuild/artifact/build/maven-repository/' }
 		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/sz%252Fbug411549/lastSuccessfulBuild/artifact/build/maven-repository/' }
 		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/sz%252Fbug411549/lastSuccessfulBuild/artifact/build/maven-repository/' }
