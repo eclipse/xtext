@@ -9,21 +9,24 @@ package org.eclipse.xtext.xtext.generator.ui.codemining
 
 import com.google.common.annotations.Beta
 import com.google.inject.Inject
+import com.google.inject.name.Names
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import com.google.inject.name.Names
 
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
- * @since 2.14
+ * 
  * @author René Purrio - Initial contribution and API
+ * @author Karsten Thoms - Review and improvements on initial implementation
+ * @since 2.14
  */
 @Beta
 class CodeMiningFragment extends AbstractStubGeneratingFragment {
@@ -40,7 +43,7 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 				try {
 					Class.forName("org.eclipse.jface.text.codemining.ICodeMiningProvider");
 					binder.bind(«'org.eclipse.jface.text.codemining.ICodeMiningProvider'.typeRef».class)
-						.to(«codeMiningProviderClass.toString.typeRef».class);
+						.to(«codeMiningProviderClass».class);
 					binder.bind(«'org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory'.typeRef».class).annotatedWith(«Names.typeRef».named("codeMinding"))
 						.to(«"org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy".typeRef».Factory.class);
 				} catch(«ClassNotFoundException.typeRef» ignore) {
@@ -80,37 +83,49 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 		}
 	}
 	
-	def protected QualifiedName getCodeMiningProviderClass () {
-		(grammar.eclipsePluginBasePackage+".codemining."+grammar.simpleName+"CodeMiningProvider").toQualifiedName
+	def protected TypeReference getCodeMiningProviderClass () {
+		(grammar.eclipsePluginBasePackage+".codemining."+grammar.simpleName+"CodeMiningProvider").toQualifiedName.toString.typeRef
 	}
 	
+	def protected TypeReference getCodeMiningProviderSuperClass() {
+		"org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider".typeRef
+	}
+	
+	def protected TypeReference getBadLocationException () {
+		"org.eclipse.jface.text.BadLocationException".typeRef
+	}
+	
+	def protected TypeReference getCancelIndicator () {
+		"org.eclipse.xtext.util.CancelIndicator".typeRef
+	}
+	
+	def protected TypeReference getIAcceptor () {
+		"org.eclipse.xtext.util.IAcceptor".typeRef
+	}
+
+	def protected TypeReference getICodeMining () {
+		"org.eclipse.jface.text.codemining.ICodeMining".typeRef
+	}
+
+	def protected TypeReference getIDocument () {
+		"org.eclipse.jface.text.IDocument".typeRef
+	}
+
+	def protected TypeReference getXtextResource () {
+		"org.eclipse.xtext.resource.XtextResource".typeRef
+	}
+
 	def protected generateXtendCodeMiningProvider() {
 		fileAccessFactory.createXtendFile(codeMiningProviderClass.toString.typeRef, '''
-			import org.eclipse.jface.text.BadLocationException
-			import org.eclipse.jface.text.IDocument
-			import org.eclipse.jface.text.codemining.ICodeMining
-			import org.eclipse.xtext.resource.XtextResource
-			import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider
-			import org.eclipse.xtext.util.CancelIndicator
-			import org.eclipse.xtext.util.IAcceptor
-			
-			class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
-				override void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+			class «codeMiningProviderClass.simpleName» extends «codeMiningProviderSuperClass» {
+				override void createCodeMinings(«getIDocument» document, «getXtextResource» resource, «getCancelIndicator» indicator,
+					«getIAcceptor»<? super «getICodeMining»> acceptor) throws «getBadLocationException» {
 					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
+					// TODO: implement me
+					// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
 					
-					//example:
-					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"))
-				}
-				
-				override void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
-					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					
-					//example:
-					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "))
+					// example:
+					// acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"))
 				}
 			}
 		''').writeTo(projectConfig.eclipsePlugin.src)
@@ -118,34 +133,17 @@ class CodeMiningFragment extends AbstractStubGeneratingFragment {
 	
 	def protected generateJavaCodeMiningProvider() {
 		fileAccessFactory.createJavaFile(codeMiningProviderClass.toString.typeRef, '''
-			import org.eclipse.jface.text.BadLocationException;
-			import org.eclipse.jface.text.IDocument;
-			import org.eclipse.jface.text.codemining.ICodeMining;
-			import org.eclipse.xtext.resource.XtextResource;
-			import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider;
-			import org.eclipse.xtext.util.CancelIndicator;
-			import org.eclipse.xtext.util.IAcceptor;
-			
 			@SuppressWarnings("restriction")
-			public class «codeMiningProviderClass.lastSegment» extends XtextCodeMiningProvider {
+			public class «codeMiningProviderClass.simpleName» extends «codeMiningProviderSuperClass» {
 				@Override
-				protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{
+				protected void createCodeMinings(«getIDocument» document, «getXtextResource» resource, «getCancelIndicator» indicator,
+					«getIAcceptor»<? super «getICodeMining»> acceptor) throws «getBadLocationException» {
 					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
+					// TODO: implement me
+					// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list
 					
-					//example:
-					//acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
-				}
-				
-				@Override
-				protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {
-					
-					//TODO: implement me
-					//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list
-					
-					//example:
-					//acceptor.accept(createNewLineContentCodeMining(5, " Inline annotation "));
+					// example:
+					// acceptor.accept(createNewLineHeaderCodeMining(1, document, "Header annotation"));
 				}
 			}
 		''').writeTo(projectConfig.eclipsePlugin.src)
