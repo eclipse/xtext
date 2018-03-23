@@ -2184,18 +2184,26 @@ public class JavaASTFlattener extends ASTVisitor {
     int _nodeType = node.getException().getType().getNodeType();
     boolean _tripleEquals = (_nodeType == 84);
     if (_tripleEquals) {
-      List<ASTNode> _genericChildListProperty = this._aSTFlattenerUtils.genericChildListProperty(node.getException().getType(), "types");
-      if (_genericChildListProperty!=null) {
+      this.appendToBuffer(" catch (");
+      final List<ASTNode> types = this._aSTFlattenerUtils.genericChildListProperty(node.getException().getType(), "types");
+      if (types!=null) {
         final Procedure2<ASTNode, Integer> _function = (ASTNode child, Integer index) -> {
-          this.appendToBuffer(" catch (");
           child.accept(this);
-          this.appendSpaceToBuffer();
-          this.appendToBuffer(this._aSTFlattenerUtils.toSimpleName(node.getException().getName()));
-          this.appendToBuffer(") ");
-          node.getBody().accept(this);
+          int _size = types.size();
+          int _minus = (_size - 1);
+          boolean _lessThan = ((index).intValue() < _minus);
+          if (_lessThan) {
+            this.appendSpaceToBuffer();
+            this.appendToBuffer("|");
+            this.appendSpaceToBuffer();
+          }
         };
-        IterableExtensions.<ASTNode>forEach(_genericChildListProperty, _function);
+        IterableExtensions.<ASTNode>forEach(types, _function);
       }
+      this.appendSpaceToBuffer();
+      this.appendToBuffer(this._aSTFlattenerUtils.toSimpleName(node.getException().getName()));
+      this.appendToBuffer(") ");
+      node.getBody().accept(this);
     } else {
       this.appendToBuffer(" catch (");
       node.getException().accept(this);

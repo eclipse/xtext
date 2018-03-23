@@ -2897,6 +2897,65 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testTryCatchCase_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public void checkTryCatch() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} catch (IllegalArgumentException | IllegalStateException e) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw e;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("System.out.println();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final String javaBody = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Test {");
+    _builder_1.append(javaBody);
+    _builder_1.append("}");
+    final XtendClass clazz = this.toValidXtendClass(_builder_1);
+    Assert.assertNotNull(clazz);
+    String body = this.toXtendClassBodyDeclr(javaBody);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("def void checkTryCatch() {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("try {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("} catch (IllegalArgumentException | IllegalStateException e) {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("throw e");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("} finally {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("System.out.println() ");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    Assert.assertEquals(_builder_2.toString(), body);
+  }
+  
+  @Test
   public void testTryCatchCaseAsStatement() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try {");

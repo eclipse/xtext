@@ -1581,14 +1581,20 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(CatchClause node) {
 		if (node.exception.type.nodeType === 84) {
 			// Java7 multi catch
-			node.exception.type.genericChildListProperty("types")?.forEach [ child, index |
-				appendToBuffer(" catch (")
+			appendToBuffer(" catch (")
+			val types = node.exception.type.genericChildListProperty("types")
+			types?.forEach [ child, index |
 				child.accept(this)
-				appendSpaceToBuffer
-				appendToBuffer(node.exception.name.toSimpleName)
-				appendToBuffer(") ")
-				node.body.accept(this)
+				if (index < types.size - 1) {
+					appendSpaceToBuffer
+					appendToBuffer("|")
+					appendSpaceToBuffer
+				}
 			]
+			appendSpaceToBuffer
+			appendToBuffer(node.exception.name.toSimpleName)
+			appendToBuffer(") ")
+			node.body.accept(this)
 		} else {
 			appendToBuffer(" catch (")
 			node.getException().accept(this)
