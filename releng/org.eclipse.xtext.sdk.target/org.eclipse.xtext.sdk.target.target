@@ -89,6 +89,8 @@
 		<unit id="org.eclipse.xtext.purexbase.ui.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codemining" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codemining.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.codetemplates" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.codetemplates.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.codetemplates.ide" version="0.0.0"/>
