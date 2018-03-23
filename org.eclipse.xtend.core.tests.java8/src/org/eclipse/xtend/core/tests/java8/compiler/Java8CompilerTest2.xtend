@@ -35,6 +35,177 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	override testMultiCatch_02() {
+		assertCompilesTo('''
+			abstract class Foo {
+			   abstract def <E extends Exception> void throwsSomething() throws E;
+			   def void m() {
+			     try {
+			       <E1>throwsSomething;
+			       <E2>throwsSomething
+			     } catch(E1 | E2 e) {
+			       e.m
+			       e.message
+			     }
+			   }
+			   interface E {
+			   	  def void m()
+			   }
+			   static class E1 extends Exception implements E {
+			   	  override m() {}
+			   }
+			   static class E2 extends Exception implements E {
+			   	  override m() {}
+			   }
+			}
+		''','''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public abstract class Foo {
+			  public interface E {
+			    public abstract void m();
+			  }
+			  
+			  public static class E1 extends Exception implements Foo.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public static class E2 extends Exception implements Foo.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public abstract <E extends Exception> void throwsSomething() throws E;
+			  
+			  public void m() {
+			    try {
+			      try {
+			        this.<Foo.E1>throwsSomething();
+			        this.<Foo.E2>throwsSomething();
+			      } catch (final Throwable _t) {
+			        if (_t instanceof Foo.E1 || _t instanceof Foo.E2) {
+			          final Exception e = (Exception)_t;
+			          ((Foo.E)e).m();
+			          e.getMessage();
+			        } else {
+			          throw Exceptions.sneakyThrow(_t);
+			        }
+			      }
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test override void testSwitchWithMultiType_02() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object a) {
+					switch a {
+						E1 | E2 case a.message !== null: a.m
+					}
+				}
+				interface E {
+					def void m()
+				}
+				static class E1 extends Exception implements E {
+					override m() {}
+				}
+				static class E2 extends Exception implements E {
+					override m() {}
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface E {
+			    public abstract void m();
+			  }
+			  
+			  public static class E1 extends Exception implements C.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public static class E2 extends Exception implements C.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public void m(final Object a) {
+			    boolean _matched = false;
+			    if (a instanceof C.E1 || a instanceof C.E2) {
+			      String _message = ((Exception)a).getMessage();
+			      boolean _tripleNotEquals = (_message != null);
+			      if (_tripleNotEquals) {
+			        _matched=true;
+			        ((C.E)a).m();
+			      }
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test override void testSwitchWithMultiType_03() {
+		assertCompilesTo('''
+			public class C  {
+				def m(Object a) {
+					switch a {
+						E1 | E2 : { val b = a b.message b.m }
+					}
+				}
+				interface E {
+					def void m()
+				}
+				static class E1 extends Exception implements E {
+					override m() {}
+				}
+				static class E2 extends Exception implements E {
+					override m() {}
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface E {
+			    public abstract void m();
+			  }
+			  
+			  public static class E1 extends Exception implements C.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public static class E2 extends Exception implements C.E {
+			    @Override
+			    public void m() {
+			    }
+			  }
+			  
+			  public void m(final Object a) {
+			    boolean _matched = false;
+			    if (a instanceof C.E1 || a instanceof C.E2) {
+			      _matched=true;
+			      final Exception b = ((Exception)a);
+			      b.getMessage();
+			      ((C.E)b).m();
+			    }
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testJava8UnaryOperator() throws Exception {
 		'''
 			import java.util.List
