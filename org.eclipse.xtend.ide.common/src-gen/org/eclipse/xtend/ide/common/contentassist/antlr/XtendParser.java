@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -61,6 +61,7 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXbaseConstructorCallAccess().getAlternatives_4_1(), "rule__XbaseConstructorCall__Alternatives_4_1");
 			builder.put(grammarAccess.getXStringLiteralAccess().getAlternatives(), "rule__XStringLiteral__Alternatives");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getAlternatives_2(), "rule__XSwitchExpression__Alternatives_2");
+			builder.put(grammarAccess.getXCasePartAccess().getAlternatives_3(), "rule__XCasePart__Alternatives_3");
 			builder.put(grammarAccess.getXExpressionOrSimpleConstructorCallAccess().getAlternatives(), "rule__XExpressionOrSimpleConstructorCall__Alternatives");
 			builder.put(grammarAccess.getRichStringAccess().getAlternatives_1(), "rule__RichString__Alternatives_1");
 			builder.put(grammarAccess.getRichStringLiteralInbetweenAccess().getAlternatives_1(), "rule__RichStringLiteralInbetween__Alternatives_1");
@@ -90,7 +91,6 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXPrimaryExpressionAccess().getAlternatives(), "rule__XPrimaryExpression__Alternatives");
 			builder.put(grammarAccess.getXLiteralAccess().getAlternatives(), "rule__XLiteral__Alternatives");
 			builder.put(grammarAccess.getXCollectionLiteralAccess().getAlternatives(), "rule__XCollectionLiteral__Alternatives");
-			builder.put(grammarAccess.getXCasePartAccess().getAlternatives_3(), "rule__XCasePart__Alternatives_3");
 			builder.put(grammarAccess.getXExpressionOrVarDeclarationAccess().getAlternatives(), "rule__XExpressionOrVarDeclaration__Alternatives");
 			builder.put(grammarAccess.getXFeatureCallAccess().getAlternatives_3_1(), "rule__XFeatureCall__Alternatives_3_1");
 			builder.put(grammarAccess.getIdOrSuperAccess().getAlternatives(), "rule__IdOrSuper__Alternatives");
@@ -230,6 +230,9 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXbaseConstructorCallAccess().getGroup_4_1_1_1(), "rule__XbaseConstructorCall__Group_4_1_1_1__0");
 			builder.put(grammarAccess.getJvmFormalParameterAccess().getGroup(), "rule__JvmFormalParameter__Group__0");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getGroup(), "rule__FullJvmFormalParameter__Group__0");
+			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup(), "rule__MultiCatchType__Group__0");
+			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup_1(), "rule__MultiCatchType__Group_1__0");
+			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1(), "rule__MultiCatchType__Group_1_1__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup(), "rule__XSwitchExpression__Group__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0(), "rule__XSwitchExpression__Group_2_0__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0_0(), "rule__XSwitchExpression__Group_2_0_0__0");
@@ -238,6 +241,9 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_1_0(), "rule__XSwitchExpression__Group_2_1_0__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_1_0_0(), "rule__XSwitchExpression__Group_2_1_0_0__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_5(), "rule__XSwitchExpression__Group_5__0");
+			builder.put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
+			builder.put(grammarAccess.getXCasePartAccess().getGroup_2(), "rule__XCasePart__Group_2__0");
+			builder.put(grammarAccess.getXCasePartAccess().getGroup_3_0(), "rule__XCasePart__Group_3_0__0");
 			builder.put(grammarAccess.getSimpleStringLiteralAccess().getGroup(), "rule__SimpleStringLiteral__Group__0");
 			builder.put(grammarAccess.getRichStringAccess().getGroup(), "rule__RichString__Group__0");
 			builder.put(grammarAccess.getRichStringAccess().getGroup_1_1(), "rule__RichString__Group_1_1__0");
@@ -365,9 +371,6 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXParenthesizedExpressionAccess().getGroup(), "rule__XParenthesizedExpression__Group__0");
 			builder.put(grammarAccess.getXIfExpressionAccess().getGroup(), "rule__XIfExpression__Group__0");
 			builder.put(grammarAccess.getXIfExpressionAccess().getGroup_6(), "rule__XIfExpression__Group_6__0");
-			builder.put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
-			builder.put(grammarAccess.getXCasePartAccess().getGroup_2(), "rule__XCasePart__Group_2__0");
-			builder.put(grammarAccess.getXCasePartAccess().getGroup_3_0(), "rule__XCasePart__Group_3_0__0");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getGroup(), "rule__XForLoopExpression__Group__0");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getGroup_0(), "rule__XForLoopExpression__Group_0__0");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getGroup_0_0(), "rule__XForLoopExpression__Group_0_0__0");
@@ -607,12 +610,17 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getExtensionAssignment_0(), "rule__FullJvmFormalParameter__ExtensionAssignment_0");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeAssignment_1(), "rule__FullJvmFormalParameter__ParameterTypeAssignment_1");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getNameAssignment_2(), "rule__FullJvmFormalParameter__NameAssignment_2");
+			builder.put(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1(), "rule__MultiCatchType__ReferencesAssignment_1_1_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_0_0_0_1(), "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_0_1(), "rule__XSwitchExpression__SwitchAssignment_2_0_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_1_0_0_0(), "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_1_1(), "rule__XSwitchExpression__SwitchAssignment_2_1_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4(), "rule__XSwitchExpression__CasesAssignment_4");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_5_2(), "rule__XSwitchExpression__DefaultAssignment_5_2");
+			builder.put(grammarAccess.getXCasePartAccess().getTypeGuardAssignment_1(), "rule__XCasePart__TypeGuardAssignment_1");
+			builder.put(grammarAccess.getXCasePartAccess().getCaseAssignment_2_1(), "rule__XCasePart__CaseAssignment_2_1");
+			builder.put(grammarAccess.getXCasePartAccess().getThenAssignment_3_0_1(), "rule__XCasePart__ThenAssignment_3_0_1");
+			builder.put(grammarAccess.getXCasePartAccess().getFallThroughAssignment_3_1(), "rule__XCasePart__FallThroughAssignment_3_1");
 			builder.put(grammarAccess.getSimpleStringLiteralAccess().getValueAssignment_1(), "rule__SimpleStringLiteral__ValueAssignment_1");
 			builder.put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_0(), "rule__RichString__ExpressionsAssignment_1_0");
 			builder.put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_0(), "rule__RichString__ExpressionsAssignment_1_1_0");
@@ -704,10 +712,6 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXIfExpressionAccess().getIfAssignment_3(), "rule__XIfExpression__IfAssignment_3");
 			builder.put(grammarAccess.getXIfExpressionAccess().getThenAssignment_5(), "rule__XIfExpression__ThenAssignment_5");
 			builder.put(grammarAccess.getXIfExpressionAccess().getElseAssignment_6_1(), "rule__XIfExpression__ElseAssignment_6_1");
-			builder.put(grammarAccess.getXCasePartAccess().getTypeGuardAssignment_1(), "rule__XCasePart__TypeGuardAssignment_1");
-			builder.put(grammarAccess.getXCasePartAccess().getCaseAssignment_2_1(), "rule__XCasePart__CaseAssignment_2_1");
-			builder.put(grammarAccess.getXCasePartAccess().getThenAssignment_3_0_1(), "rule__XCasePart__ThenAssignment_3_0_1");
-			builder.put(grammarAccess.getXCasePartAccess().getFallThroughAssignment_3_1(), "rule__XCasePart__FallThroughAssignment_3_1");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamAssignment_0_0_3(), "rule__XForLoopExpression__DeclaredParamAssignment_0_0_3");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getForExpressionAssignment_1(), "rule__XForLoopExpression__ForExpressionAssignment_1");
 			builder.put(grammarAccess.getXForLoopExpressionAccess().getEachExpressionAssignment_3(), "rule__XForLoopExpression__EachExpressionAssignment_3");

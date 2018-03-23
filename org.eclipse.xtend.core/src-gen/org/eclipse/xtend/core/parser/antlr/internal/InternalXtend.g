@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -56,8 +56,10 @@ tokens {
 	KW_SEPARATOR = 'SEPARATOR' ;
 	KW_Import = 'import' ;
 	KW_FullStopFullStopFullStop = '...' ;
+	KW_VerticalLine = '|' ;
 	KW_Switch = 'switch' ;
 	KW_Default = 'default' ;
+	KW_Case = 'case' ;
 	KW_FOR = 'FOR' ;
 	KW_ENDFOR = 'ENDFOR' ;
 	KW_IF = 'IF' ;
@@ -98,10 +100,8 @@ tokens {
 	KW_HyphenMinusHyphenMinus = '--' ;
 	KW_ColonColon = '::' ;
 	KW_QuestionMarkFullStop = '?.' ;
-	KW_VerticalLine = '|' ;
 	KW_If = 'if' ;
 	KW_Else = 'else' ;
-	KW_Case = 'case' ;
 	KW_For = 'for' ;
 	KW_While = 'while' ;
 	KW_Do = 'do' ;
@@ -5505,9 +5505,9 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0());
 				}
-				lv_parameterType_1_0=ruleJvmTypeReference
+				lv_parameterType_1_0=ruleMultiCatchType
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFullJvmFormalParameterRule());
@@ -5516,7 +5516,7 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 						$current,
 						"parameterType",
 						lv_parameterType_1_0,
-						"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
+						"org.eclipse.xtend.core.Xtend.MultiCatchType");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -5540,6 +5540,67 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleMultiCatchType
+entryRuleMultiCatchType returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMultiCatchTypeRule()); }
+	iv_ruleMultiCatchType=ruleMultiCatchType
+	{ $current=$iv_ruleMultiCatchType.current; }
+	EOF;
+
+// Rule MultiCatchType
+ruleMultiCatchType returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0());
+		}
+		this_JvmTypeReference_0=ruleJvmTypeReference
+		{
+			$current = $this_JvmTypeReference_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		(
+			(
+				{
+					$current = forceCreateModelElementAndAdd(
+						grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0(),
+						$current);
+				}
+			)
+			(
+				otherlv_2='|'
+				{
+					newLeafNode(otherlv_2, grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
+						}
+						lv_references_3_0=ruleJvmTypeReference
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMultiCatchTypeRule());
+							}
+							add(
+								$current,
+								"references",
+								lv_references_3_0,
+								"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)+
+		)?
 	)
 ;
 
@@ -5750,7 +5811,7 @@ ruleXSwitchExpression returns [EObject current=null]
 						$current,
 						"cases",
 						lv_cases_11_0,
-						"org.eclipse.xtext.xbase.Xbase.XCasePart");
+						"org.eclipse.xtend.core.Xtend.XCasePart");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -5788,6 +5849,118 @@ ruleXSwitchExpression returns [EObject current=null]
 		{
 			newLeafNode(otherlv_15, grammarAccess.getXSwitchExpressionAccess().getRightCurlyBracketKeyword_6());
 		}
+	)
+;
+
+// Entry rule entryRuleXCasePart
+entryRuleXCasePart returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getXCasePartRule()); }
+	iv_ruleXCasePart=ruleXCasePart
+	{ $current=$iv_ruleXCasePart.current; }
+	EOF;
+
+// Rule XCasePart
+ruleXCasePart returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getXCasePartAccess().getXCasePartAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0());
+				}
+				lv_typeGuard_1_0=ruleMultiCatchType
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getXCasePartRule());
+					}
+					set(
+						$current,
+						"typeGuard",
+						lv_typeGuard_1_0,
+						"org.eclipse.xtend.core.Xtend.MultiCatchType");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			otherlv_2='case'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getXCasePartAccess().getCaseKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_2_1_0());
+					}
+					lv_case_3_0=ruleXExpression
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getXCasePartRule());
+						}
+						set(
+							$current,
+							"case",
+							lv_case_3_0,
+							"org.eclipse.xtext.xbase.Xbase.XExpression");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		(
+			(
+				otherlv_4=':'
+				{
+					newLeafNode(otherlv_4, grammarAccess.getXCasePartAccess().getColonKeyword_3_0_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_1_0());
+						}
+						lv_then_5_0=ruleXExpression
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getXCasePartRule());
+							}
+							set(
+								$current,
+								"then",
+								lv_then_5_0,
+								"org.eclipse.xtext.xbase.Xbase.XExpression");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)
+			    |
+			(
+				(
+					lv_fallThrough_6_0=','
+					{
+						newLeafNode(lv_fallThrough_6_0, grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getXCasePartRule());
+						}
+						setWithLastConsumed($current, "fallThrough", true, ",");
+					}
+				)
+			)
+		)
 	)
 ;
 
@@ -10101,118 +10274,6 @@ ruleXIfExpression returns [EObject current=null]
 				)
 			)
 		)?
-	)
-;
-
-// Entry rule entryRuleXCasePart
-entryRuleXCasePart returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getXCasePartRule()); }
-	iv_ruleXCasePart=ruleXCasePart
-	{ $current=$iv_ruleXCasePart.current; }
-	EOF;
-
-// Rule XCasePart
-ruleXCasePart returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getXCasePartAccess().getXCasePartAction_0(),
-					$current);
-			}
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_1_0());
-				}
-				lv_typeGuard_1_0=ruleJvmTypeReference
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getXCasePartRule());
-					}
-					set(
-						$current,
-						"typeGuard",
-						lv_typeGuard_1_0,
-						"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			otherlv_2='case'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getXCasePartAccess().getCaseKeyword_2_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_2_1_0());
-					}
-					lv_case_3_0=ruleXExpression
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getXCasePartRule());
-						}
-						set(
-							$current,
-							"case",
-							lv_case_3_0,
-							"org.eclipse.xtext.xbase.Xbase.XExpression");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			(
-				otherlv_4=':'
-				{
-					newLeafNode(otherlv_4, grammarAccess.getXCasePartAccess().getColonKeyword_3_0_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_1_0());
-						}
-						lv_then_5_0=ruleXExpression
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getXCasePartRule());
-							}
-							set(
-								$current,
-								"then",
-								lv_then_5_0,
-								"org.eclipse.xtext.xbase.Xbase.XExpression");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)
-			    |
-			(
-				(
-					lv_fallThrough_6_0=','
-					{
-						newLeafNode(lv_fallThrough_6_0, grammarAccess.getXCasePartAccess().getFallThroughCommaKeyword_3_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getXCasePartRule());
-						}
-						setWithLastConsumed($current, "fallThrough", true, ",");
-					}
-				)
-			)
-		)
 	)
 ;
 
