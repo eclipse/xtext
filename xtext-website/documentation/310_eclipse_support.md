@@ -662,6 +662,44 @@ newProjectWizardForEclipse = {
 
 In the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file will also be generated, where you can specify the initial contents that your language wizard will generate.
 
+## Code Mining
+
+Code Mining shows inline annotations in the text editor that are not part of the text itself, but derived from its contents. It can be very helpful to leverage code minings for example to show inferred types, parameter names for literals and other kind of meta information. 
+
+Code minings come in two flavors: "header annotations" are printed in a separate line above the mined text, "inline annotations" are shown in-line. The following screenshot shows both flavors:
+
+![](images/code_mining.png)
+
+To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment` has to be integrated in the `language` section of the MWE2 file as follows:
+
+```mwe2
+fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
+```
+
+With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+
+The following class `MyDslCodeMiningProvider` shows a simple example:
+
+```java
+public class MyDslCodeMiningProvider extends AbstractXtextCodeMiningProvider {
+	@Override
+	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+		IAcceptor<ICodeMining> acceptor) throws BadLocationException {
+
+		acceptor.accept(createNewLineHeaderCodeMining(1, document, "header annotation"));
+
+		acceptor.accept(createNewLineContentCodeMining(5, " inline annotation "));
+	}
+
+}
+```
+
+Clients have to implement the `createCodeMinings()` method, compute text and position of meta information that should be presented in the text editor. Finally instances of `ICodeMining` are created with that information and passed to the `acceptor`.
+
+The base class `AbstractXtextCodeMiningProvider` provides some factory methods for creating `ICodeMining` instances for convenience. Use `createNewLineHeaderCodeMining()` and `createNewLineContentCodeMining()` for that purpose.
+
+For an implementation reference, have a look at the Domainmodel Example.
+
 ---
 
 **[Next Chapter: Web Editor Support](330_web_support.html)**
