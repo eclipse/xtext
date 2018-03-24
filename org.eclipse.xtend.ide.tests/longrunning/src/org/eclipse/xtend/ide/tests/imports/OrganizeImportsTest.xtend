@@ -627,9 +627,9 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
-	 * @Ignore ("TODO Fix ConflictResolver")
 	 */
 	@Test def void testInnerClass_02 () {
 		'''
@@ -645,6 +645,9 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 				interface Innerfaze {
 				}
 			}
+			
+			interface Innerfaze {
+			}
 		'''.assertIsOrganizedTo('''
 			package p
 			
@@ -657,6 +660,9 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			
 				interface Innerfaze {
 				}
+			}
+			
+			interface Innerfaze {
 			}
 		''')
 	}
