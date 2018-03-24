@@ -50,9 +50,7 @@ class Java8ConverterTest extends JavaConverterTest {
 			try (var FileInputStream in=new FileInputStream("java7.txt")){
 				System.out.println(in.read()) 
 				throw new IllegalAccessException()
-			} catch (IOException e) {
-				e.printStackTrace() 
-			} catch (IllegalAccessException e) {
+			} catch (IOException | IllegalAccessException e) {
 				e.printStackTrace() 
 			}
 			

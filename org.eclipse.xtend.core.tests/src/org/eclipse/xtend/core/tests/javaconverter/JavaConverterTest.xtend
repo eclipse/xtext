@@ -1605,6 +1605,32 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	}
 
+	@Test def void testTryCatchCase_02() throws Exception {
+		val javaBody = '''
+		public void checkTryCatch() {
+			try {
+			
+			} catch (IllegalArgumentException | IllegalStateException e) {
+				throw e;
+			} finally {
+				System.out.println();
+			}
+		}'''
+		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
+		assertNotNull(clazz)
+		var body = toXtendClassBodyDeclr(javaBody)
+		assertEquals('''
+		def void checkTryCatch() {
+			try {
+			} catch (IllegalArgumentException | IllegalStateException e) {
+				throw e
+			} finally {
+				System.out.println() 
+			}
+		}'''.toString, body)
+
+	}
+
 	@Test def void testTryCatchCaseAsStatement() throws Exception {
 		val javaBody = '''
 		try {
