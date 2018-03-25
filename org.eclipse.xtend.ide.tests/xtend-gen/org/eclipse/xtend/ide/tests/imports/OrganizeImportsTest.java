@@ -1145,7 +1145,6 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   
   /**
    * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=460455
-   * @Ignore ("TODO Fix ConflictResolver")
    */
   @Test
   public void testInnerClass_02() {
@@ -1177,6 +1176,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("interface Innerfaze {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package p");
     _builder_1.newLine();
@@ -1202,6 +1206,11 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("interface Innerfaze {");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
