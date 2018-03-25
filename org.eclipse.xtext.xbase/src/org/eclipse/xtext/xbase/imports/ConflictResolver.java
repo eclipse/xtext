@@ -65,7 +65,7 @@ public class ConflictResolver {
 						? localTypes.iterator().next() 
 						: null; 
 				for (JvmDeclaredType type : types) {
-					if(type == singleLocalType || types.size()==1)
+					if(type == singleLocalType || locallyDefinedTypes.values().contains(type))
 						result.put(type.getSimpleName(), type);
 					else 
 						result.put(type.getQualifiedName('.'), type);
