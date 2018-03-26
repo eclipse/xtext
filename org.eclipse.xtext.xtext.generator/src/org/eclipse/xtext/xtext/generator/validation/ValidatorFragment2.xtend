@@ -228,7 +228,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	 * @since 2.14
 	 */
 	protected def boolean isDeprecated(AbstractRule rule) {
-		return rule.getAnnotations().stream().anyMatch(e|AnnotationNames.DEPRECATED.equals(e.getName()));
+		return rule.getAnnotations().exists[AnnotationNames.DEPRECATED.equals(name)];
 	}
 
 }

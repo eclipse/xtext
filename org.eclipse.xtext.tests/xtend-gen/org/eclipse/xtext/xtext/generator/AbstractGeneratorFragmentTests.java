@@ -12,15 +12,22 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -28,6 +35,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
@@ -105,6 +114,7 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     }
   }
   
+  @Log
   public static class FakeEMFGeneratorFragment2 extends EMFGeneratorFragment2 {
     @Override
     protected GenModel getSaveAndReconcileGenModel(final Grammar grammar, final List<EPackage> packs, final ResourceSet rs) {
@@ -114,6 +124,40 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     @Override
     protected void saveResource(final Resource resource) {
     }
+    
+    @Override
+    public Set<EPackage> getReferencedEPackages(final List<EPackage> packs) {
+      final HashSet<EPackage> result = CollectionLiterals.<EPackage>newHashSet();
+      for (final EPackage pkg : packs) {
+        {
+          final TreeIterator<EObject> iterator = pkg.eAllContents();
+          while (iterator.hasNext()) {
+            {
+              final EObject obj = iterator.next();
+              EList<EObject> _eCrossReferences = obj.eCrossReferences();
+              for (final EObject crossRef : _eCrossReferences) {
+                boolean _eIsProxy = crossRef.eIsProxy();
+                if (_eIsProxy) {
+                  URI _eProxyURI = ((InternalEObject) crossRef).eProxyURI();
+                  String _plus = ("Proxy \'" + _eProxyURI);
+                  String _plus_1 = (_plus + "\' could not be resolved");
+                  AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2.LOG.error(_plus_1);
+                } else {
+                  final EPackage p = EcoreUtil2.<EPackage>getContainerOfType(crossRef, EPackage.class);
+                  if ((p != null)) {
+                    result.add(p);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      result.removeAll(packs);
+      return result;
+    }
+    
+    private final static Logger LOG = Logger.getLogger(FakeEMFGeneratorFragment2.class);
   }
   
   @Override

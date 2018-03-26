@@ -130,7 +130,7 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 	}
 	
 	protected def boolean isExported(AbstractRule rule) {
-		return rule.getAnnotations().stream().anyMatch(e | AnnotationNames.EXPORTED.equals(e.getName()));
+		return rule.getAnnotations().exists[AnnotationNames.EXPORTED.equals(name)];
 	}
 	
 }

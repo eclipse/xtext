@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.index;
 import com.google.inject.Inject;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -258,10 +257,10 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
   }
   
   protected boolean isExported(final AbstractRule rule) {
-    final Predicate<Annotation> _function = (Annotation e) -> {
-      return AnnotationNames.EXPORTED.equals(e.getName());
+    final Function1<Annotation, Boolean> _function = (Annotation it) -> {
+      return Boolean.valueOf(AnnotationNames.EXPORTED.equals(it.getName()));
     };
-    return rule.getAnnotations().stream().anyMatch(_function);
+    return IterableExtensions.<Annotation>exists(rule.getAnnotations(), _function);
   }
   
   @Pure

@@ -11,12 +11,15 @@ import com.google.inject.Binder
 import com.google.inject.Guice
 import java.io.InputStream
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
@@ -24,6 +27,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
@@ -90,7 +94,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 			}
 		}
 	}
-
+	@Log
 	static class FakeEMFGeneratorFragment2 extends EMFGeneratorFragment2 {
 
 		// To access the method
@@ -101,6 +105,32 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		override protected saveResource(Resource resource) {
 			// Do not save
 		}
+		override  Set<EPackage> getReferencedEPackages(List<EPackage> packs) {
+		val result = newHashSet
+		for (pkg : packs) {
+			val iterator = pkg.eAllContents
+			while (iterator.hasNext) {
+				val obj = iterator.next
+				for (crossRef : obj.eCrossReferences) {
+					if (crossRef.eIsProxy)
+						LOG.error("Proxy '" + (crossRef as InternalEObject).eProxyURI + "' could not be resolved")
+					else {
+						val p = EcoreUtil2.getContainerOfType(crossRef, EPackage)
+						if (p !== null)
+							result.add(p)
+					}
+				}
+			}
+		}
+		result.removeAll(packs)
+		// The following GenModels are handled by the EMF generator as implemented in
+		// org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl.findGenPackage(EPackage)
+		//result.remove(EcorePackage.eINSTANCE)
+		//result.remove(XMLTypePackage.eINSTANCE)
+		//result.remove(XMLNamespacePackage.eINSTANCE)
+		return result
+	}
+		
 	}
 	
 	def <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(Class<T> fragmentClass, String grammarString){

@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -540,10 +539,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
    * @since 2.14
    */
   protected boolean isDeprecated(final AbstractRule rule) {
-    final Predicate<Annotation> _function = (Annotation e) -> {
-      return AnnotationNames.DEPRECATED.equals(e.getName());
+    final Function1<Annotation, Boolean> _function = (Annotation it) -> {
+      return Boolean.valueOf(AnnotationNames.DEPRECATED.equals(it.getName()));
     };
-    return rule.getAnnotations().stream().anyMatch(_function);
+    return IterableExtensions.<Annotation>exists(rule.getAnnotations(), _function);
   }
   
   @Pure
