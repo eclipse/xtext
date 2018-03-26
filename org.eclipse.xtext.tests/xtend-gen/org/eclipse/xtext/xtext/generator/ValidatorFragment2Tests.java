@@ -14,6 +14,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -34,6 +35,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     }
   }
   
+  @Ignore
   @Test
   public void testGenerateNothing() {
     StringConcatenation _builder = new StringConcatenation();
@@ -54,6 +56,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     Assert.assertTrue(_tripleEquals);
   }
   
+  @Ignore
   @Test
   public void testGenerate() {
     StringConcatenation _builder = new StringConcatenation();
@@ -88,6 +91,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(fragment.generateValidationToDeprecateRules()));
   }
   
+  @Ignore
   @Test
   public void testGenerate_NoValidation() {
     StringConcatenation _builder = new StringConcatenation();

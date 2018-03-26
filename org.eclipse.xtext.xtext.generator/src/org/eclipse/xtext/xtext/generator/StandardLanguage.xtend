@@ -79,6 +79,9 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 	
 	ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2
 	
+	/**
+	 * @since 2.14
+	 */
 	ResourceDescriptionStrategyFragment resourceDescriptionStrategy = new ResourceDescriptionStrategyFragment
 	
 	QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2

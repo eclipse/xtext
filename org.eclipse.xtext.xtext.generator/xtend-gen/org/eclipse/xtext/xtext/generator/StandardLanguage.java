@@ -89,6 +89,9 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2();
   
+  /**
+   * @since 2.14
+   */
   private ResourceDescriptionStrategyFragment resourceDescriptionStrategy = new ResourceDescriptionStrategyFragment();
   
   private QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2();
