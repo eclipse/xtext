@@ -9,7 +9,9 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Binder
 import com.google.inject.Guice
+import java.io.InputStream
 import java.util.List
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -18,6 +20,8 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer
@@ -120,5 +124,14 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		val stringConcat = new StringConcatenation(config.lineDelimiter)
 		stringConcat.append(client)
 		return stringConcat.toString
+	}
+	
+	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {
+		val rs = get(XtextResourceSet);
+		rs.setClasspathURIContext(getClass());
+		val resource = getResourceFactory().createResource(uri) as XtextResource
+		rs.getResources().add(resource);
+		resource.load(in, null);
+		return resource;
 	}
 }

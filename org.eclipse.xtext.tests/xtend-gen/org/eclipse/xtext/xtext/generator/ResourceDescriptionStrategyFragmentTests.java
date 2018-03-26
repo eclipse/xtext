@@ -15,7 +15,6 @@ import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests;
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -46,7 +45,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     }
   }
   
-  @Ignore
   @Test
   public void testGenerateNothing() {
     StringConcatenation _builder = new StringConcatenation();
@@ -64,7 +62,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     Assert.assertFalse(fragment.shouldGenerateArtefacts(exportedRules));
   }
   
-  @Ignore
   @Test
   public void testGenerateNothing_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -85,7 +82,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     Assert.assertFalse(fragment.shouldGenerateArtefacts(exportedRules));
   }
   
-  @Ignore
   @Test
   public void testGenerate() {
     StringConcatenation _builder = new StringConcatenation();
@@ -145,7 +141,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(result));
   }
   
-  @Ignore
   @Test
   public void testGenerate_NoStubs() {
     StringConcatenation _builder = new StringConcatenation();

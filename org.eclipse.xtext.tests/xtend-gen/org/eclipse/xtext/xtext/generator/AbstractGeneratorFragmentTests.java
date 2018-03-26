@@ -11,8 +11,10 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import java.io.InputStream;
 import java.util.List;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -149,5 +152,16 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     final StringConcatenation stringConcat = new StringConcatenation(_lineDelimiter);
     stringConcat.append(client);
     return stringConcat.toString();
+  }
+  
+  @Override
+  public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
+    final XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
+    rs.setClasspathURIContext(this.getClass());
+    Resource _createResource = this.getResourceFactory().createResource(uri);
+    final XtextResource resource = ((XtextResource) _createResource);
+    rs.getResources().add(resource);
+    resource.load(in, null);
+    return resource;
   }
 }
