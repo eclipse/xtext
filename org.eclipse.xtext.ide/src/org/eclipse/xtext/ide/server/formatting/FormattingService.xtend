@@ -28,6 +28,7 @@ import com.google.common.base.Strings
 import org.eclipse.lsp4j.FormattingOptions
 import java.util.Map
 import java.util.concurrent.ConcurrentHashMap
+import org.eclipse.xtext.formatting.IIndentationInformation
 
 /**
  * Language Service Implementation for Formatting and Range-Formatting
@@ -42,6 +43,8 @@ class FormattingService {
 	@Inject Provider<FormatterRequest> formatterRequestProvider
 
 	@Inject TextRegionAccessBuilder regionBuilder
+	
+	@Inject IIndentationInformation indentationInformation
 
 	def List<? extends TextEdit> format(
 		Document document,
@@ -86,14 +89,16 @@ class FormattingService {
 	 * @since 2.14
 	 */
 	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length, FormattingOptions options) {
-		var indent = "\t"
+		var indent = indentationInformation.indentString
 		if (options !== null) {
 			if (options.insertSpaces) {
 				indent = Strings.padEnd("", options.tabSize," ")
 			}
 		}
 		if (formatter2Provider !== null) {
-			val replacements = format2(resource, new TextRegion(offset, length), new MapBasedPreferenceValues(#{"indentation"->indent}))
+			val preferences = new MapBasedPreferenceValues()
+			preferences.put("indentation", indent)
+			val replacements = format2(resource, new TextRegion(offset, length), preferences)
 			return replacements.map [ r |
 				document.toTextEdit(r.replacementText, r.offset, r.length)
 			].<TextEdit>toList
@@ -102,7 +107,7 @@ class FormattingService {
 		}
 
 	}
-
+	
 	protected def TextEdit toTextEdit(Document document, String formattedText, int startOffset, int length) {
 		new TextEdit => [
 			newText = formattedText
