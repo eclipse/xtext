@@ -16,7 +16,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -30,8 +29,10 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
  * This fragment activates code mining functionalities and generates the appropriate stubs.
- * @since 2.14
+ * 
  * @author René Purrio - Initial contribution and API
+ * @author Karsten Thoms - Review and improvements on initial implementation
+ * @since 2.14
  */
 @Beta
 @SuppressWarnings("all")
@@ -73,28 +74,28 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append(".to(");
-          TypeReference _typeRef_1 = TypeReference.typeRef(CodeMiningFragment.this.getCodeMiningProviderClass().toString());
-          _builder.append(_typeRef_1, "\t\t");
+          TypeReference _codeMiningProviderClass = CodeMiningFragment.this.getCodeMiningProviderClass();
+          _builder.append(_codeMiningProviderClass, "\t\t");
           _builder.append(".class);");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("binder.bind(");
-          TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory");
-          _builder.append(_typeRef_2, "\t");
+          TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory");
+          _builder.append(_typeRef_1, "\t");
           _builder.append(".class).annotatedWith(");
-          TypeReference _typeRef_3 = TypeReference.typeRef(Names.class);
-          _builder.append(_typeRef_3, "\t");
+          TypeReference _typeRef_2 = TypeReference.typeRef(Names.class);
+          _builder.append(_typeRef_2, "\t");
           _builder.append(".named(\"codeMinding\"))");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append(".to(");
-          TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy");
-          _builder.append(_typeRef_4, "\t\t");
+          TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy");
+          _builder.append(_typeRef_3, "\t\t");
           _builder.append(".Factory.class);");
           _builder.newLineIfNotEmpty();
           _builder.append("} catch(");
-          TypeReference _typeRef_5 = TypeReference.typeRef(ClassNotFoundException.class);
-          _builder.append(_typeRef_5);
+          TypeReference _typeRef_4 = TypeReference.typeRef(ClassNotFoundException.class);
+          _builder.append(_typeRef_4);
           _builder.append(" ignore) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -186,12 +187,40 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     }
   }
   
-  protected QualifiedName getCodeMiningProviderClass() {
+  protected TypeReference getCodeMiningProviderClass() {
     String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
     String _plus = (_eclipsePluginBasePackage + ".codemining.");
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus_1 = (_plus + _simpleName);
-    return this._iQualifiedNameConverter.toQualifiedName((_plus_1 + "CodeMiningProvider"));
+    return TypeReference.typeRef(this._iQualifiedNameConverter.toQualifiedName((_plus_1 + "CodeMiningProvider")).toString());
+  }
+  
+  protected TypeReference getCodeMiningProviderSuperClass() {
+    return TypeReference.typeRef("org.eclipse.xtext.ui.codemining.AbstractXtextCodeMiningProvider");
+  }
+  
+  protected TypeReference getBadLocationException() {
+    return TypeReference.typeRef("org.eclipse.jface.text.BadLocationException");
+  }
+  
+  protected TypeReference getCancelIndicator() {
+    return TypeReference.typeRef("org.eclipse.xtext.util.CancelIndicator");
+  }
+  
+  protected TypeReference getIAcceptor() {
+    return TypeReference.typeRef("org.eclipse.xtext.util.IAcceptor");
+  }
+  
+  protected TypeReference getICodeMining() {
+    return TypeReference.typeRef("org.eclipse.jface.text.codemining.ICodeMining");
+  }
+  
+  protected TypeReference getIDocument() {
+    return TypeReference.typeRef("org.eclipse.jface.text.IDocument");
+  }
+  
+  protected TypeReference getXtextResource() {
+    return TypeReference.typeRef("org.eclipse.xtext.resource.XtextResource");
   }
   
   protected void generateXtendCodeMiningProvider() {
@@ -199,68 +228,52 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("import org.eclipse.jface.text.BadLocationException");
-        _builder.newLine();
-        _builder.append("import org.eclipse.jface.text.IDocument");
-        _builder.newLine();
-        _builder.append("import org.eclipse.jface.text.codemining.ICodeMining");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.resource.XtextResource");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.util.CancelIndicator");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.util.IAcceptor");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("class ");
-        String _lastSegment = CodeMiningFragment.this.getCodeMiningProviderClass().getLastSegment();
-        _builder.append(_lastSegment);
-        _builder.append(" extends XtextCodeMiningProvider {");
+        String _simpleName = CodeMiningFragment.this.getCodeMiningProviderClass().getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" extends ");
+        TypeReference _codeMiningProviderSuperClass = CodeMiningFragment.this.getCodeMiningProviderSuperClass();
+        _builder.append(_codeMiningProviderSuperClass);
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("override void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{");
+        _builder.append("override void createCodeMinings(");
+        TypeReference _iDocument = CodeMiningFragment.this.getIDocument();
+        _builder.append(_iDocument, "\t");
+        _builder.append(" document, ");
+        TypeReference _xtextResource = CodeMiningFragment.this.getXtextResource();
+        _builder.append(_xtextResource, "\t");
+        _builder.append(" resource, ");
+        TypeReference _cancelIndicator = CodeMiningFragment.this.getCancelIndicator();
+        _builder.append(_cancelIndicator, "\t");
+        _builder.append(" indicator,");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _iAcceptor = CodeMiningFragment.this.getIAcceptor();
+        _builder.append(_iAcceptor, "\t\t");
+        _builder.append("<? super ");
+        TypeReference _iCodeMining = CodeMiningFragment.this.getICodeMining();
+        _builder.append(_iCodeMining, "\t\t");
+        _builder.append("> acceptor) throws ");
+        TypeReference _badLocationException = CodeMiningFragment.this.getBadLocationException();
+        _builder.append(_badLocationException, "\t\t");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// TODO: implement me");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//TODO: implement me");
+        _builder.append("// example:");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//example:");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"))");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("override void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//TODO: implement me");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//example:");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//acceptor.accept(createNewLineContentCodeMining(5, \" Inline annotation \"))");
+        _builder.append("// acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"))");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -277,76 +290,57 @@ public class CodeMiningFragment extends AbstractStubGeneratingFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("import org.eclipse.jface.text.BadLocationException;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.jface.text.IDocument;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.jface.text.codemining.ICodeMining;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.resource.XtextResource;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.codemining.XtextCodeMiningProvider;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.util.CancelIndicator;");
-        _builder.newLine();
-        _builder.append("import org.eclipse.xtext.util.IAcceptor;");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("@SuppressWarnings(\"restriction\")");
         _builder.newLine();
         _builder.append("public class ");
-        String _lastSegment = CodeMiningFragment.this.getCodeMiningProviderClass().getLastSegment();
-        _builder.append(_lastSegment);
-        _builder.append(" extends XtextCodeMiningProvider {");
+        String _simpleName = CodeMiningFragment.this.getCodeMiningProviderClass().getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" extends ");
+        TypeReference _codeMiningProviderSuperClass = CodeMiningFragment.this.getCodeMiningProviderSuperClass();
+        _builder.append(_codeMiningProviderSuperClass);
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("@Override");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("protected void createLineHeaderCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor) throws BadLocationException{");
+        _builder.append("protected void createCodeMinings(");
+        TypeReference _iDocument = CodeMiningFragment.this.getIDocument();
+        _builder.append(_iDocument, "\t");
+        _builder.append(" document, ");
+        TypeReference _xtextResource = CodeMiningFragment.this.getXtextResource();
+        _builder.append(_xtextResource, "\t");
+        _builder.append(" resource, ");
+        TypeReference _cancelIndicator = CodeMiningFragment.this.getCancelIndicator();
+        _builder.append(_cancelIndicator, "\t");
+        _builder.append(" indicator,");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _iAcceptor = CodeMiningFragment.this.getIAcceptor();
+        _builder.append(_iAcceptor, "\t\t");
+        _builder.append("<? super ");
+        TypeReference _iCodeMining = CodeMiningFragment.this.getICodeMining();
+        _builder.append(_iCodeMining, "\t\t");
+        _builder.append("> acceptor) throws ");
+        TypeReference _badLocationException = CodeMiningFragment.this.getBadLocationException();
+        _builder.append(_badLocationException, "\t\t");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// TODO: implement me");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("// use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//TODO: implement me");
+        _builder.append("// example:");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("//use acceptor.accept(super.createNewLineHeaderCodeMining(...)) to add a new code mining to the final list");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//example:");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"));");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected void createLineContentCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator, IAcceptor<ICodeMining> acceptor)  throws BadLocationException {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//TODO: implement me");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//use acceptor.accept(super.createNewLineContentCodeMining(...)) to add a new code mining to the final list");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//example:");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//acceptor.accept(createNewLineContentCodeMining(5, \" Inline annotation \"));");
+        _builder.append("// acceptor.accept(createNewLineHeaderCodeMining(1, document, \"Header annotation\"));");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
