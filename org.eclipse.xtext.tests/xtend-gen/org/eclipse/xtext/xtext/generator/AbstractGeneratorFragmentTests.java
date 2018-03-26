@@ -70,9 +70,10 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     
     @Override
     public void configureXtextProjectConfig(final Binder binder) {
-      final StandardLanguage lang = new StandardLanguage();
-      lang.initialize(this.grammar);
-      binder.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toInstance(lang);
+      StandardLanguage _standardLanguage = new StandardLanguage();
+      AbstractGeneratorFragmentTests.lang = _standardLanguage;
+      AbstractGeneratorFragmentTests.lang.initialize(this.grammar);
+      binder.<IXtextGeneratorLanguage>bind(IXtextGeneratorLanguage.class).toInstance(AbstractGeneratorFragmentTests.lang);
     }
     
     public void configureIXtextProjectConfig(final Binder binder) {
@@ -125,6 +126,8 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
   
   private GlobalRegistries.GlobalStateMemento globalStateMemento;
   
+  private static StandardLanguage lang;
+  
   @Before
   @Override
   public void setUp() {
@@ -163,6 +166,7 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
       final AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2 emfGeneratorFragment = generatorInjector.<AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2>getInstance(AbstractGeneratorFragmentTests.FakeEMFGeneratorFragment2.class);
       emfGeneratorFragment.initialize(generatorInjector);
       emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.getGeneratedPackages(), resource.getResourceSet());
+      AbstractGeneratorFragmentTests.lang.setResourceSet(resource.getResourceSet());
       return generatorInjector.<T>getInstance(fragmentClass);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

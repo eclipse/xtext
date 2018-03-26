@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,17 +8,15 @@
 package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.emf.ecore.ENamedElement
+import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 import org.junit.Test
 
-import static extension org.junit.Assert.*
-import org.eclipse.emf.ecore.EcoreFactory
-
 /**
  * @author Lorenzo Bettini - Initial contribution and API
  */
-class Formatter2Fragment2Test {
+class Formatter2Fragment2Test extends AbstractGeneratorFragmentTests {
 	
 	var TestableFormatter2Fragment2 fragment = new TestableFormatter2Fragment2
 
@@ -28,6 +26,9 @@ class Formatter2Fragment2Test {
 			super.toVarName(element, reservedNames)
 		}
 		
+		override doGetXtendStubFile() {
+			super.doGetXtendStubFile
+		}
 	}
 
 	@Test def void testVarNameWithEClass() {
@@ -52,5 +53,91 @@ class Formatter2Fragment2Test {
 
 	@Test def void testVarNameConflictingWithXtendKeywordAndParam() {
 		"__abstract".assertEquals(fragment.toVarName(EcorePackage.eINSTANCE.EClass_Abstract, "_abstract"))
+	}
+	
+	@Test def void testFormatMethodGeneration01() {
+		fragment = TestableFormatter2Fragment2.initializeFragmentWithGrammarFromString('''
+		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+		generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+		Model:
+			greetings+=Greeting*;
+		Greeting:
+			'Hello' name=ID '!';
+		''')
+		
+		val actual = fragment.doGetXtendStubFile.concatenationClientToString
+		val expected = '''
+		package org.xtext.example.mydsl.formatting2
+		
+		import com.google.inject.Inject
+		import org.eclipse.xtext.formatting2.AbstractFormatter2
+		import org.eclipse.xtext.formatting2.IFormattableDocument
+		import org.xtext.example.mydsl.myDsl.Model
+		import org.xtext.example.mydsl.services.MyDslGrammarAccess
+		
+		class MyDslFormatter extends AbstractFormatter2 {
+			
+			@Inject extension MyDslGrammarAccess
+		
+			def dispatch void format(Model model, extension IFormattableDocument document) {
+				// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+				for (greeting : model.greetings) {
+					greeting.format
+				}
+			}
+			
+			// TODO: implement for 
+		}
+		'''
+		expected.assertEquals(actual)
+	}
+	
+	@Test def void testFormatMethodGeneration02() {
+		fragment = TestableFormatter2Fragment2.initializeFragmentWithGrammarFromString('''
+		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+		generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+		Model:
+			greetings+=Greeting*
+			description=Description;
+		Greeting:
+			'Hello' person=Person '!';
+		Person:
+			firstname=ID lastname=ID;
+		Description:
+			text=STRING;
+		''')
+		
+		val actual = fragment.doGetXtendStubFile.concatenationClientToString
+		val expected = '''
+		package org.xtext.example.mydsl.formatting2
+		
+		import com.google.inject.Inject
+		import org.eclipse.xtext.formatting2.AbstractFormatter2
+		import org.eclipse.xtext.formatting2.IFormattableDocument
+		import org.xtext.example.mydsl.myDsl.Greeting
+		import org.xtext.example.mydsl.myDsl.Model
+		import org.xtext.example.mydsl.services.MyDslGrammarAccess
+		
+		class MyDslFormatter extends AbstractFormatter2 {
+			
+			@Inject extension MyDslGrammarAccess
+		
+			def dispatch void format(Model model, extension IFormattableDocument document) {
+				// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+				for (greeting : model.greetings) {
+					greeting.format
+				}
+				model.description.format
+			}
+		
+			def dispatch void format(Greeting greeting, extension IFormattableDocument document) {
+				// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+				greeting.person.format
+			}
+			
+			// TODO: implement for 
+		}
+		'''
+		expected.assertEquals(actual)
 	}
 }

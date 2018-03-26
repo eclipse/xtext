@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -69,8 +69,13 @@ import org.eclipse.xtext.util.internal.Log
 	}
 
 	protected def doGenerateStubFile() {
+		val xtendFile = doGetXtendStubFile
+		xtendFile?.writeTo(projectConfig.runtime.src)
+	}
+
+	protected def doGetXtendStubFile() {
 		if(!isGenerateStub)
-			return;
+			return null
 			
 		if(isGenerateXtendStub) {
 			val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
@@ -94,10 +99,12 @@ import org.eclipse.xtext.util.internal.Log
 					// TODO: implement for «types.drop(2).map[name].join(", ")»
 				}
 			'''
-			xtendFile.writeTo(projectConfig.runtime.src) 
+			return xtendFile
 		} else {
 			LOG.error(this.class.name + " has been configured to generate a Java stub, but that's not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563")	
 		}
+		
+		null
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
@@ -105,11 +112,11 @@ import org.eclipse.xtext.util.internal.Log
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType» «ref.toVarName(clazz.toVarName, "document")» : «clazz.toVarName».«ref.getGetAccessor()»()) {
-						«ref.toVarName(clazz.toVarName, "document")».format;
+					for («ref.toVarName(clazz.toVarName, "document")» : «clazz.toVarName».«ref.getGetAccessor()») {
+						«ref.toVarName(clazz.toVarName, "document")».format
 					}
 				«ELSE»
-					«clazz.toVarName».«ref.getGetAccessor()».format;
+					«clazz.toVarName».«ref.getGetAccessor()».format
 				«ENDIF»
 			«ENDFOR»
 		}
@@ -172,7 +179,7 @@ import org.eclipse.xtext.util.internal.Log
 	}
 	
 	protected def String getGetAccessor(EStructuralFeature feature) {
-		GenModelUtil2.getGenFeature(feature, language.resourceSet).getAccessor
+		GenModelUtil2.getGenFeature(feature, language.resourceSet).name
 	}
 	
 }

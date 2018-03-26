@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -107,71 +107,83 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   }
   
   protected void doGenerateStubFile() {
-    boolean _isGenerateStub = this.isGenerateStub();
-    boolean _not = (!_isGenerateStub);
-    if (_not) {
-      return;
-    }
-    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
-    if (_isGenerateXtendStub) {
-      final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(this.getFormatter2Stub(this.getGrammar()));
-      xtendFile.setResourceSet(this.getLanguage().getResourceSet());
-      final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
-      this.getLocallyAssignedContainmentReferences(this.getLanguage().getGrammar(), type2ref);
-      final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
-      this.getInheritedContainmentReferences(this.getLanguage().getGrammar(), inheritedTypes, CollectionLiterals.<Grammar>newHashSet());
-      final Set<EClass> types = type2ref.keySet();
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("class ");
-          String _simpleName = Formatter2Fragment2.this.getFormatter2Stub(Formatter2Fragment2.this.getGrammar()).getSimpleName();
-          _builder.append(_simpleName);
-          _builder.append(" extends ");
-          TypeReference _stubSuperClass = Formatter2Fragment2.this.getStubSuperClass();
-          _builder.append(_stubSuperClass);
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@");
-          _builder.append(Inject.class, "\t");
-          _builder.append(" extension ");
-          TypeReference _grammarAccess = Formatter2Fragment2.this._grammarAccessExtensions.getGrammarAccess(Formatter2Fragment2.this.getGrammar());
-          _builder.append(_grammarAccess, "\t");
-          _builder.newLineIfNotEmpty();
-          {
-            Iterable<EClass> _take = IterableExtensions.<EClass>take(types, 2);
-            for(final EClass type : _take) {
-              _builder.newLine();
-              _builder.append("\t");
-              StringConcatenationClient _generateFormatMethod = Formatter2Fragment2.this.generateFormatMethod(type, type2ref.get(type), inheritedTypes.containsKey(type));
-              _builder.append(_generateFormatMethod, "\t");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("// TODO: implement for ");
-          final Function1<EClass, String> _function = (EClass it) -> {
-            return it.getName();
-          };
-          String _join = IterableExtensions.join(IterableExtensions.<EClass, String>map(IterableExtensions.<EClass>drop(types, 2), _function), ", ");
-          _builder.append(_join, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      };
-      xtendFile.setContent(_client);
+    final XtendFileAccess xtendFile = this.doGetXtendStubFile();
+    if (xtendFile!=null) {
       xtendFile.writeTo(this.getProjectConfig().getRuntime().getSrc());
-    } else {
-      String _name = this.getClass().getName();
-      String _plus = (_name + " has been configured to generate a Java stub, but that\'s not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563");
-      Formatter2Fragment2.LOG.error(_plus);
     }
+  }
+  
+  protected XtendFileAccess doGetXtendStubFile() {
+    Object _xblockexpression = null;
+    {
+      boolean _isGenerateStub = this.isGenerateStub();
+      boolean _not = (!_isGenerateStub);
+      if (_not) {
+        return null;
+      }
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
+        final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(this.getFormatter2Stub(this.getGrammar()));
+        xtendFile.setResourceSet(this.getLanguage().getResourceSet());
+        final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
+        this.getLocallyAssignedContainmentReferences(this.getLanguage().getGrammar(), type2ref);
+        final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
+        this.getInheritedContainmentReferences(this.getLanguage().getGrammar(), inheritedTypes, CollectionLiterals.<Grammar>newHashSet());
+        final Set<EClass> types = type2ref.keySet();
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("class ");
+            String _simpleName = Formatter2Fragment2.this.getFormatter2Stub(Formatter2Fragment2.this.getGrammar()).getSimpleName();
+            _builder.append(_simpleName);
+            _builder.append(" extends ");
+            TypeReference _stubSuperClass = Formatter2Fragment2.this.getStubSuperClass();
+            _builder.append(_stubSuperClass);
+            _builder.append(" {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@");
+            _builder.append(Inject.class, "\t");
+            _builder.append(" extension ");
+            TypeReference _grammarAccess = Formatter2Fragment2.this._grammarAccessExtensions.getGrammarAccess(Formatter2Fragment2.this.getGrammar());
+            _builder.append(_grammarAccess, "\t");
+            _builder.newLineIfNotEmpty();
+            {
+              Iterable<EClass> _take = IterableExtensions.<EClass>take(types, 2);
+              for(final EClass type : _take) {
+                _builder.newLine();
+                _builder.append("\t");
+                StringConcatenationClient _generateFormatMethod = Formatter2Fragment2.this.generateFormatMethod(type, type2ref.get(type), inheritedTypes.containsKey(type));
+                _builder.append(_generateFormatMethod, "\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("// TODO: implement for ");
+            final Function1<EClass, String> _function = (EClass it) -> {
+              return it.getName();
+            };
+            String _join = IterableExtensions.join(IterableExtensions.<EClass, String>map(IterableExtensions.<EClass>drop(types, 2), _function), ", ");
+            _builder.append(_join, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        };
+        xtendFile.setContent(_client);
+        return xtendFile;
+      } else {
+        String _name = this.getClass().getName();
+        String _plus = (_name + " has been configured to generate a Java stub, but that\'s not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563");
+        Formatter2Fragment2.LOG.error(_plus);
+      }
+      _xblockexpression = null;
+    }
+    return ((XtendFileAccess)_xblockexpression);
   }
   
   protected StringConcatenationClient generateFormatMethod(final EClass clazz, final Collection<EReference> containmentRefs, final boolean isOverriding) {
@@ -204,9 +216,6 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
               if (_isMany) {
                 _builder.append("\t");
                 _builder.append("for (");
-                EClass _eReferenceType = ref.getEReferenceType();
-                _builder.append(_eReferenceType, "\t");
-                _builder.append(" ");
                 String _varName_1 = Formatter2Fragment2.this.toVarName(ref, Formatter2Fragment2.this.toVarName(clazz), "document");
                 _builder.append(_varName_1, "\t");
                 _builder.append(" : ");
@@ -215,13 +224,13 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
                 _builder.append(".");
                 String _getAccessor = Formatter2Fragment2.this.getGetAccessor(ref);
                 _builder.append(_getAccessor, "\t");
-                _builder.append("()) {");
+                _builder.append(") {");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("\t");
                 String _varName_3 = Formatter2Fragment2.this.toVarName(ref, Formatter2Fragment2.this.toVarName(clazz), "document");
                 _builder.append(_varName_3, "\t\t");
-                _builder.append(".format;");
+                _builder.append(".format");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("}");
@@ -233,7 +242,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
                 _builder.append(".");
                 String _getAccessor_1 = Formatter2Fragment2.this.getGetAccessor(ref);
                 _builder.append(_getAccessor_1, "\t");
-                _builder.append(".format;");
+                _builder.append(".format");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -319,7 +328,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   }
   
   protected String getGetAccessor(final EStructuralFeature feature) {
-    return GenModelUtil2.getGenFeature(feature, this.getLanguage().getResourceSet()).getGetAccessor();
+    return GenModelUtil2.getGenFeature(feature, this.getLanguage().getResourceSet()).getName();
   }
   
   private final static Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
