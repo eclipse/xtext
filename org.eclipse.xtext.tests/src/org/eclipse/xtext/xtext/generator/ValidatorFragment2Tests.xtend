@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 import org.junit.Test
 
 /**
@@ -17,15 +19,19 @@ import org.junit.Test
 class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 
 	static class TestableValidatorFragment2 extends ValidatorFragment2 {
-		
+
 		override protected getDeprecatedRulesFromGrammar() {
 			super.getDeprecatedRulesFromGrammar()
 		}
-		
+
 		override protected generateValidationToDeprecateRules() {
 			super.generateValidationToDeprecateRules()
 		}
-		
+
+		override protected generateGenValidator() {
+			super.generateGenValidator()
+		}
+
 	}
 
 	@Test
@@ -38,8 +44,24 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 		''')
 		val deprecatedRules = fragment.deprecatedRulesFromGrammar
 		assertTrue(deprecatedRules.empty)
-		val generatedString = fragment.generateValidationToDeprecateRules.concatenationClientToString
-		assertTrue(generatedString.length === 0)
+		assertEquals('''
+			package org.xtext.validation;
+			
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.emf.ecore.EPackage;
+			import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+			
+			public abstract class AbstractFooValidator extends AbstractDeclarativeValidator {
+				
+				@Override
+				protected List<EPackage> getEPackages() {
+					List<EPackage> result = new ArrayList<EPackage>();
+					result.add(org.xtext.foo.FooPackage.eINSTANCE);
+					return result;
+				}
+			}
+		'''.toString, concatenationClientToString(fragment.generateGenValidator))
 	}
 
 	@Test
@@ -57,12 +79,30 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 		val deprecatedRulesFromGrammar = fragment.deprecatedRulesFromGrammar
 		assertEquals(1, deprecatedRulesFromGrammar.size)
 		assertEquals('''
-		
-		@interface org.eclipse.xtext.validation.Check
-		public void checkDeprecatedRule(org.xtext.foo.Rule element) {
-			warning("This part of the language is marked as deprecated and might get removed in the future!", element, null);
-		}
-		'''.toString, fragment.generateValidationToDeprecateRules.concatenationClientToString)
+			package org.xtext.validation;
+			
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.emf.ecore.EPackage;
+			import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+			import org.eclipse.xtext.validation.Check;
+			import org.xtext.foo.Rule;
+			
+			public abstract class AbstractFooValidator extends AbstractDeclarativeValidator {
+				
+				@Override
+				protected List<EPackage> getEPackages() {
+					List<EPackage> result = new ArrayList<EPackage>();
+					result.add(org.xtext.foo.FooPackage.eINSTANCE);
+					return result;
+				}
+				
+				@Check
+				public void checkDeprecatedRule(Rule element) {
+					warning("This part of the language is marked as deprecated and might get removed in the future!", element, null);
+				}
+			}
+		'''.toString,concatenationClientToString(fragment.generateGenValidator))
 	}
 
 	@Test
@@ -76,10 +116,27 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			@Deprecated
 			CustomRule returns Rule: name=ID;
 		''')
-		fragment.generateDeprecationValidation = false	
+		fragment.generateDeprecationValidation = false
 		val deprecatedRulesFromGrammar = fragment.deprecatedRulesFromGrammar
 		assertEquals(1, deprecatedRulesFromGrammar.size)
-		assertEquals(''''''.toString, fragment.generateValidationToDeprecateRules.concatenationClientToString)
+		assertEquals('''
+			package org.xtext.validation;
+			
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.emf.ecore.EPackage;
+			import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+			
+			public abstract class AbstractFooValidator extends AbstractDeclarativeValidator {
+				
+				@Override
+				protected List<EPackage> getEPackages() {
+					List<EPackage> result = new ArrayList<EPackage>();
+					result.add(org.xtext.foo.FooPackage.eINSTANCE);
+					return result;
+				}
+			}
+		'''.toString, concatenationClientToString(fragment.generateGenValidator))
 	}
 
 }

@@ -59,7 +59,7 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'ResourceDescriptionStrategy')
 	}
 	
-	protected def getDefaultResourceDescriptionSuperClass(){
+	protected def getResourceDescriptionSuperClass(){
 		return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy");
 	}
 	
@@ -82,7 +82,7 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 		val exportedRules = exportedRulesFromGrammar;
 		if(exportedRules.shouldGenerateArtefacts) {
 			contributeRuntimeGuiceBindings
-			generateResourceDescriptionStrategy(exportedRules)
+			generateResourceDescriptionStrategy(exportedRules).writeTo(projectConfig.runtime.srcGen)
 			generateResourceDescriptionStrategyStub(exportedRules)
 		}
 	}
@@ -100,12 +100,8 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 	}
 	
 	protected def generateResourceDescriptionStrategy(Iterable<AbstractRule> exportedRules){
-		fileAccessFactory.createJavaFile(abstractResourceDescriptionStrategyClass, generateResourceDescriptionStrategyContent(superTypeRef,exportedRules)).writeTo(projectConfig.runtime.srcGen)
-	}
-	
-	protected def StringConcatenationClient generateResourceDescriptionStrategyContent(TypeReference superTypeRef, Iterable<AbstractRule> exportedRules) 
-	'''
-		public class «superTypeRef.simpleName» extends «defaultResourceDescriptionSuperClass» {
+		fileAccessFactory.createJavaFile(abstractResourceDescriptionStrategyClass, '''
+		public class «superTypeRef.simpleName» extends «getResourceDescriptionSuperClass» {
 			public boolean createEObjectDescriptions(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
 				«FOR exportedRule : exportedRules»
 					if(eObject instanceof «new TypeReference(exportedRule.type.classifier as EClass, grammar.eResource.resourceSet)») {
@@ -121,7 +117,8 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 				}
 			«ENDFOR»
 		}
-	'''
+	''')
+	}
 		
 	protected def generateResourceDescriptionStrategyStub(Iterable<AbstractRule> exportedRules) {
 			if(isGenerateStub || isGenerateXtendStub){

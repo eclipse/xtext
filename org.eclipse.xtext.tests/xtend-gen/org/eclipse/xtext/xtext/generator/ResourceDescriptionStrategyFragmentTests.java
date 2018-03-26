@@ -9,10 +9,10 @@ package org.eclipse.xtext.xtext.generator;
 
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests;
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,6 +25,16 @@ import org.junit.Test;
 public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragmentTests {
   public static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
     @Override
+    protected TypeReference getAbstractResourceDescriptionStrategyClass() {
+      return super.getAbstractResourceDescriptionStrategyClass();
+    }
+    
+    @Override
+    protected TypeReference getDefaultResourceDescriptionStrategyClass() {
+      return super.getDefaultResourceDescriptionStrategyClass();
+    }
+    
+    @Override
     public List<AbstractRule> getExportedRulesFromGrammar() {
       return super.getExportedRulesFromGrammar();
     }
@@ -35,8 +45,8 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     }
     
     @Override
-    protected StringConcatenationClient generateResourceDescriptionStrategyContent(final TypeReference superTypeRef, final Iterable<AbstractRule> exportedRules) {
-      return super.generateResourceDescriptionStrategyContent(superTypeRef, exportedRules);
+    protected JavaFileAccess generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
+      return super.generateResourceDescriptionStrategy(exportedRules);
     }
     
     @Override
@@ -104,15 +114,28 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     Assert.assertFalse(exportedRules.isEmpty());
     Assert.assertEquals(1, exportedRules.size());
     Assert.assertTrue(fragment.shouldGenerateArtefacts(exportedRules));
-    final StringConcatenationClient result = fragment.generateResourceDescriptionStrategyContent(fragment.getSuperTypeRef(), exportedRules);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public class FooAbstractResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {");
+    _builder_1.append("package org.xtext.resource;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.EObject;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.resource.IEObjectDescription;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.util.IAcceptor;");
+    _builder_1.newLine();
+    _builder_1.append("import org.xtext.foo.Rule;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class FooAbstractResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");
+    _builder_1.append("public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("if(eObject instanceof org.xtext.foo.Rule) {");
+    _builder_1.append("if(eObject instanceof Rule) {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("return createEObjectDescriptionsForRule(eObject, acceptor);");
@@ -128,7 +151,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");
+    _builder_1.append("protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("return super.createEObjectDescriptions(eObject, acceptor);");
@@ -138,7 +161,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(result));
+    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(fragment.generateResourceDescriptionStrategy(exportedRules)));
   }
   
   @Test
@@ -165,15 +188,28 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     Assert.assertFalse(exportedRules.isEmpty());
     Assert.assertEquals(1, exportedRules.size());
     Assert.assertTrue(fragment.shouldGenerateArtefacts(exportedRules));
-    final StringConcatenationClient result = fragment.generateResourceDescriptionStrategyContent(fragment.getSuperTypeRef(), exportedRules);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {");
+    _builder_1.append("package org.xtext.resource;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.emf.ecore.EObject;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.resource.IEObjectDescription;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.util.IAcceptor;");
+    _builder_1.newLine();
+    _builder_1.append("import org.xtext.foo.Rule;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class FooDefaultResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");
+    _builder_1.append("public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("if(eObject instanceof org.xtext.foo.Rule) {");
+    _builder_1.append("if(eObject instanceof Rule) {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
     _builder_1.append("return createEObjectDescriptionsForRule(eObject, acceptor);");
@@ -189,7 +225,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");
+    _builder_1.append("protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("return super.createEObjectDescriptions(eObject, acceptor);");
@@ -199,6 +235,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(result));
+    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(fragment.generateResourceDescriptionStrategy(exportedRules)));
   }
 }

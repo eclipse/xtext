@@ -11,17 +11,12 @@ import com.google.inject.Binder
 import com.google.inject.Guice
 import java.io.InputStream
 import java.util.List
-import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.ecore.EcorePackage
-import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage
-import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
@@ -34,13 +29,13 @@ import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
 import org.junit.After
 import org.junit.Before
-import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -143,11 +138,8 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		return generatorInjector.getInstance(fragmentClass);
 	}
 	
-	def String concatenationClientToString(StringConcatenationClient client) {
-		val config = get(CodeConfig)
-		val stringConcat = new StringConcatenation(config.lineDelimiter)
-		stringConcat.append(client)
-		return stringConcat.toString
+	def String concatenationClientToString(JavaFileAccess access) {
+		return access.content.toString
 	}	
 	
 	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {

@@ -20,6 +20,14 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 
 	static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
 
+		override protected getAbstractResourceDescriptionStrategyClass() {
+			super.getAbstractResourceDescriptionStrategyClass()
+		}
+		
+		override protected getDefaultResourceDescriptionStrategyClass() {
+			super.getDefaultResourceDescriptionStrategyClass()
+		}
+
 		override getExportedRulesFromGrammar() {
 			super.getExportedRulesFromGrammar()
 		}
@@ -28,8 +36,8 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 			super.shouldGenerateArtefacts(exportedRules)
 		}
 		
-		override protected generateResourceDescriptionStrategyContent(TypeReference superTypeRef, Iterable<AbstractRule> exportedRules) {
-			super.generateResourceDescriptionStrategyContent(superTypeRef, exportedRules)
+		override protected generateResourceDescriptionStrategy(Iterable<AbstractRule> exportedRules) {
+			super.generateResourceDescriptionStrategy(exportedRules)
 		}
 		
 		override protected getSuperTypeRef() {
@@ -82,21 +90,28 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		assertFalse(exportedRules.empty)
 		assertEquals(1, exportedRules.size)
 		assertTrue(fragment.shouldGenerateArtefacts(exportedRules))
-		val result = fragment.generateResourceDescriptionStrategyContent(fragment.superTypeRef, exportedRules)
 		assertEquals('''
-			public class FooAbstractResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
-				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
-					if(eObject instanceof org.xtext.foo.Rule) {
+			package org.xtext.resource;
+			
+			import org.eclipse.emf.ecore.EObject;
+			import org.eclipse.xtext.resource.IEObjectDescription;
+			import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
+			import org.eclipse.xtext.util.IAcceptor;
+			import org.xtext.foo.Rule;
+			
+			public class FooAbstractResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
+				public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+					if(eObject instanceof Rule) {
 						return createEObjectDescriptionsForRule(eObject, acceptor);
 					}
 					return true;
 				}
 			
-				protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
+				protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 					return super.createEObjectDescriptions(eObject, acceptor);
 				}
 			}
-		'''.toString, result.concatenationClientToString)
+		'''.toString, concatenationClientToString(fragment.generateResourceDescriptionStrategy(exportedRules)))
 	}
 
 	@Test
@@ -116,21 +131,28 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		assertFalse(exportedRules.empty)
 		assertEquals(1, exportedRules.size)
 		assertTrue(fragment.shouldGenerateArtefacts(exportedRules))
-		val result = fragment.generateResourceDescriptionStrategyContent(fragment.superTypeRef, exportedRules)
 		assertEquals('''
-			public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
-				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
-					if(eObject instanceof org.xtext.foo.Rule) {
+			package org.xtext.resource;
+			
+			import org.eclipse.emf.ecore.EObject;
+			import org.eclipse.xtext.resource.IEObjectDescription;
+			import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
+			import org.eclipse.xtext.util.IAcceptor;
+			import org.xtext.foo.Rule;
+			
+			public class FooDefaultResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
+				public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+					if(eObject instanceof Rule) {
 						return createEObjectDescriptionsForRule(eObject, acceptor);
 					}
 					return true;
 				}
 			
-				protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
+				protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 					return super.createEObjectDescriptions(eObject, acceptor);
 				}
 			}
-		'''.toString, result.concatenationClientToString)
+		'''.toString, concatenationClientToString(fragment.generateResourceDescriptionStrategy(exportedRules)))
 	}
 
 }

@@ -78,7 +78,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			else
 				generateJavaValidatorStub()
 		}
-		generateGenValidator()
+		generateGenValidator().writeTo(projectConfig.runtime.srcGen)
 
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
@@ -162,7 +162,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				«generateValidationToDeprecateRules»
 			}
 		'''
-		javaFile.writeTo(projectConfig.runtime.srcGen)
+		javaFile
 	}
 
 	protected def StringConcatenationClient generateValidationToDeprecateRules() '''

@@ -33,6 +33,7 @@ import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
+import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
@@ -86,7 +87,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
     return new TypeReference(_plus_2);
   }
   
-  protected TypeReference getDefaultResourceDescriptionSuperClass() {
+  protected TypeReference getResourceDescriptionSuperClass() {
     return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy");
   }
   
@@ -118,7 +119,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
     boolean _shouldGenerateArtefacts = this.shouldGenerateArtefacts(exportedRules);
     if (_shouldGenerateArtefacts) {
       this.contributeRuntimeGuiceBindings();
-      this.generateResourceDescriptionStrategy(exportedRules);
+      this.generateResourceDescriptionStrategy(exportedRules).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
       this.generateResourceDescriptionStrategyStub(exportedRules);
     }
   }
@@ -137,20 +138,17 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
     return _xifexpression;
   }
   
-  protected void generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
-    this.fileAccessFactory.createJavaFile(this.getAbstractResourceDescriptionStrategyClass(), this.generateResourceDescriptionStrategyContent(this.getSuperTypeRef(), exportedRules)).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
-  }
-  
-  protected StringConcatenationClient generateResourceDescriptionStrategyContent(final TypeReference superTypeRef, final Iterable<AbstractRule> exportedRules) {
+  protected JavaFileAccess generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
+    TypeReference _abstractResourceDescriptionStrategyClass = this.getAbstractResourceDescriptionStrategyClass();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        String _simpleName = superTypeRef.getSimpleName();
+        String _simpleName = ResourceDescriptionStrategyFragment.this.getSuperTypeRef().getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
-        TypeReference _defaultResourceDescriptionSuperClass = ResourceDescriptionStrategyFragment.this.getDefaultResourceDescriptionSuperClass();
-        _builder.append(_defaultResourceDescriptionSuperClass);
+        TypeReference _resourceDescriptionSuperClass = ResourceDescriptionStrategyFragment.this.getResourceDescriptionSuperClass();
+        _builder.append(_resourceDescriptionSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -218,7 +216,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
         _builder.newLine();
       }
     };
-    return _client;
+    return this.fileAccessFactory.createJavaFile(_abstractResourceDescriptionStrategyClass, _client);
   }
   
   protected void generateResourceDescriptionStrategyStub(final Iterable<AbstractRule> exportedRules) {

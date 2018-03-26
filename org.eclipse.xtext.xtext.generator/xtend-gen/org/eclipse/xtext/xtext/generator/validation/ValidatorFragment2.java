@@ -112,7 +112,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         this.generateJavaValidatorStub();
       }
     }
-    this.generateGenValidator();
+    this.generateGenValidator().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
     ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
@@ -249,124 +249,128 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     this.fileAccessFactory.createJavaFile(_validatorClass, _client).writeTo(this.getProjectConfig().getRuntime().getSrc());
   }
   
-  protected void generateGenValidator() {
-    TypeReference _xifexpression = null;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      _xifexpression = this._validatorNaming.getAbstractValidatorClass(this.getGrammar());
-    } else {
-      _xifexpression = this._validatorNaming.getValidatorClass(this.getGrammar());
-    }
-    final TypeReference genClass = _xifexpression;
-    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        {
-          boolean _isEmpty = ValidatorFragment2.this.composedChecks.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (_not) {
-            _builder.append("@");
-            _builder.append(ComposedChecks.class);
-            _builder.append("(validators = {");
-            {
-              boolean _hasElements = false;
-              for(final String validator : ValidatorFragment2.this.composedChecks) {
-                if (!_hasElements) {
-                  _hasElements = true;
-                } else {
-                  _builder.appendImmediate(", ", "");
-                }
-                TypeReference _typeRef = TypeReference.typeRef(validator);
-                _builder.append(_typeRef);
-                _builder.append(".class");
-              }
-            }
-            _builder.append("})");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("public ");
-        {
-          boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
-          if (_isGenerateStub) {
-            _builder.append("abstract ");
-          }
-        }
-        _builder.append("class ");
-        String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName);
-        _builder.append(" extends ");
-        TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(ValidatorFragment2.this.getGrammar());
-        _builder.append(_genValidatorSuperClass);
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected ");
-        _builder.append(List.class, "\t");
-        _builder.append("<");
-        _builder.append(EPackage.class, "\t");
-        _builder.append("> getEPackages() {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append(List.class, "\t\t");
-        _builder.append("<");
-        _builder.append(EPackage.class, "\t\t");
-        _builder.append("> result = new ");
-        _builder.append(ArrayList.class, "\t\t");
-        _builder.append("<");
-        _builder.append(EPackage.class, "\t\t");
-        _builder.append(">(");
-        {
-          if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
-            _builder.append("super.getEPackages()");
-          }
-        }
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-        {
-          Iterable<EPackage> _generatedPackagesToValidate = ValidatorFragment2.this.getGeneratedPackagesToValidate();
-          for(final EPackage e : _generatedPackagesToValidate) {
-            _builder.append("\t\t");
-            _builder.append("result.add(");
-            String _generatedEPackageName = ValidatorFragment2.this.getGeneratedEPackageName(e);
-            _builder.append(_generatedEPackageName, "\t\t");
-            _builder.append(".eINSTANCE);");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        {
-          Collection<EPackage> _registryPackagesToValidate = ValidatorFragment2.this.getRegistryPackagesToValidate();
-          for(final EPackage e_1 : _registryPackagesToValidate) {
-            _builder.append("\t\t");
-            _builder.append("result.add(EPackage.Registry.INSTANCE.getEPackage(\"");
-            String _nsURI = e_1.getNsURI();
-            _builder.append(_nsURI, "\t\t");
-            _builder.append("\"));");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("\t\t");
-        _builder.append("return result;");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        StringConcatenationClient _generateValidationToDeprecateRules = ValidatorFragment2.this.generateValidationToDeprecateRules();
-        _builder.append(_generateValidationToDeprecateRules, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
+  protected GeneratedJavaFileAccess generateGenValidator() {
+    GeneratedJavaFileAccess _xblockexpression = null;
+    {
+      TypeReference _xifexpression = null;
+      boolean _isGenerateStub = this.isGenerateStub();
+      if (_isGenerateStub) {
+        _xifexpression = this._validatorNaming.getAbstractValidatorClass(this.getGrammar());
+      } else {
+        _xifexpression = this._validatorNaming.getValidatorClass(this.getGrammar());
       }
-    };
-    javaFile.setContent(_client);
-    javaFile.writeTo(this.getProjectConfig().getRuntime().getSrcGen());
+      final TypeReference genClass = _xifexpression;
+      final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          {
+            boolean _isEmpty = ValidatorFragment2.this.composedChecks.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              _builder.append("@");
+              _builder.append(ComposedChecks.class);
+              _builder.append("(validators = {");
+              {
+                boolean _hasElements = false;
+                for(final String validator : ValidatorFragment2.this.composedChecks) {
+                  if (!_hasElements) {
+                    _hasElements = true;
+                  } else {
+                    _builder.appendImmediate(", ", "");
+                  }
+                  TypeReference _typeRef = TypeReference.typeRef(validator);
+                  _builder.append(_typeRef);
+                  _builder.append(".class");
+                }
+              }
+              _builder.append("})");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("public ");
+          {
+            boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
+            if (_isGenerateStub) {
+              _builder.append("abstract ");
+            }
+          }
+          _builder.append("class ");
+          String _simpleName = genClass.getSimpleName();
+          _builder.append(_simpleName);
+          _builder.append(" extends ");
+          TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(ValidatorFragment2.this.getGrammar());
+          _builder.append(_genValidatorSuperClass);
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected ");
+          _builder.append(List.class, "\t");
+          _builder.append("<");
+          _builder.append(EPackage.class, "\t");
+          _builder.append("> getEPackages() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append(List.class, "\t\t");
+          _builder.append("<");
+          _builder.append(EPackage.class, "\t\t");
+          _builder.append("> result = new ");
+          _builder.append(ArrayList.class, "\t\t");
+          _builder.append("<");
+          _builder.append(EPackage.class, "\t\t");
+          _builder.append(">(");
+          {
+            if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
+              _builder.append("super.getEPackages()");
+            }
+          }
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          {
+            Iterable<EPackage> _generatedPackagesToValidate = ValidatorFragment2.this.getGeneratedPackagesToValidate();
+            for(final EPackage e : _generatedPackagesToValidate) {
+              _builder.append("\t\t");
+              _builder.append("result.add(");
+              String _generatedEPackageName = ValidatorFragment2.this.getGeneratedEPackageName(e);
+              _builder.append(_generatedEPackageName, "\t\t");
+              _builder.append(".eINSTANCE);");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            Collection<EPackage> _registryPackagesToValidate = ValidatorFragment2.this.getRegistryPackagesToValidate();
+            for(final EPackage e_1 : _registryPackagesToValidate) {
+              _builder.append("\t\t");
+              _builder.append("result.add(EPackage.Registry.INSTANCE.getEPackage(\"");
+              String _nsURI = e_1.getNsURI();
+              _builder.append(_nsURI, "\t\t");
+              _builder.append("\"));");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("return result;");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          StringConcatenationClient _generateValidationToDeprecateRules = ValidatorFragment2.this.generateValidationToDeprecateRules();
+          _builder.append(_generateValidationToDeprecateRules, "\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      javaFile.setContent(_client);
+      _xblockexpression = javaFile;
+    }
+    return _xblockexpression;
   }
   
   protected StringConcatenationClient generateValidationToDeprecateRules() {
