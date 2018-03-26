@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractRule;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.AnnotationNames;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
@@ -58,6 +60,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
+  
+  @Accessors
+  private boolean generateDeprecationValidation = true;
   
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
@@ -365,28 +370,32 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          List<AbstractRule> _deprecatedRulesFromGrammar = ValidatorFragment2.this.getDeprecatedRulesFromGrammar();
-          for(final AbstractRule deprecatedRule : _deprecatedRulesFromGrammar) {
-            EClassifier _classifier = deprecatedRule.getType().getClassifier();
-            ResourceSet _resourceSet = ValidatorFragment2.this.getGrammar().eResource().getResourceSet();
-            final TypeReference elementType = new TypeReference(((EClass) _classifier), _resourceSet);
-            _builder.newLineIfNotEmpty();
-            _builder.newLine();
-            _builder.append("@");
-            _builder.append(Check.class);
-            _builder.newLineIfNotEmpty();
-            _builder.append("public void checkDeprecated");
-            String _simpleName = elementType.getSimpleName();
-            _builder.append(_simpleName);
-            _builder.append("(");
-            _builder.append(elementType);
-            _builder.append(" element) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("warning(\"This part of the language is marked as deprecated and might get removed in the future!\", element, null);");
-            _builder.newLine();
-            _builder.append("}");
-            _builder.newLine();
+          if (ValidatorFragment2.this.generateDeprecationValidation) {
+            {
+              List<AbstractRule> _deprecatedRulesFromGrammar = ValidatorFragment2.this.getDeprecatedRulesFromGrammar();
+              for(final AbstractRule deprecatedRule : _deprecatedRulesFromGrammar) {
+                EClassifier _classifier = deprecatedRule.getType().getClassifier();
+                ResourceSet _resourceSet = ValidatorFragment2.this.getGrammar().eResource().getResourceSet();
+                final TypeReference elementType = new TypeReference(((EClass) _classifier), _resourceSet);
+                _builder.newLineIfNotEmpty();
+                _builder.newLine();
+                _builder.append("@");
+                _builder.append(Check.class);
+                _builder.newLineIfNotEmpty();
+                _builder.append("public void checkDeprecated");
+                String _simpleName = elementType.getSimpleName();
+                _builder.append(_simpleName);
+                _builder.append("(");
+                _builder.append(elementType);
+                _builder.append(" element) {");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("warning(\"This part of the language is marked as deprecated and might get removed in the future!\", element, null);");
+                _builder.newLine();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
           }
         }
       }
@@ -535,5 +544,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       return AnnotationNames.DEPRECATED.equals(e.getName());
     };
     return rule.getAnnotations().stream().anyMatch(_function);
+  }
+  
+  @Pure
+  public boolean isGenerateDeprecationValidation() {
+    return this.generateDeprecationValidation;
+  }
+  
+  public void setGenerateDeprecationValidation(final boolean generateDeprecationValidation) {
+    this.generateDeprecationValidation = generateDeprecationValidation;
   }
 }

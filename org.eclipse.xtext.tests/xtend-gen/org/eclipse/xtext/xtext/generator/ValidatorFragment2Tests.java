@@ -87,4 +87,29 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     _builder_1.newLine();
     Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(fragment.generateValidationToDeprecateRules()));
   }
+  
+  @Test
+  public void testGenerate_NoValidation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate foo \"http://org.xtext/foo\"");
+    _builder.newLine();
+    _builder.append("Model: rules+=Rule;");
+    _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("Rule: name=ID;");
+    _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
+    _builder.append("CustomRule returns Rule: name=ID;");
+    _builder.newLine();
+    final ValidatorFragment2Tests.TestableValidatorFragment2 fragment = this.<ValidatorFragment2Tests.TestableValidatorFragment2>initializeFragmentWithGrammarFromString(ValidatorFragment2Tests.TestableValidatorFragment2.class, _builder.toString());
+    fragment.setGenerateDeprecationValidation(false);
+    final List<AbstractRule> deprecatedRulesFromGrammar = fragment.getDeprecatedRulesFromGrammar();
+    Assert.assertEquals(1, deprecatedRulesFromGrammar.size());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(fragment.generateValidationToDeprecateRules()));
+  }
 }

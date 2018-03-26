@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.AnnotationNames;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -39,12 +39,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment {
+public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
   @Accessors
-  private boolean isGenerateStub = true;
-  
-  @Accessors
-  private boolean isGenerateXtendStub;
+  private boolean generate = true;
   
   @Inject
   @Extension
@@ -53,18 +50,27 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
   @Inject
   private FileAccessFactory fileAccessFactory;
   
-  protected TypeReference getResourceDescriptionStrategyClass() {
+  protected TypeReference getDefaultResourceDescriptionStrategyClass() {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
-    String _plus = (_runtimeBasePackage + ".index.");
+    String _plus = (_runtimeBasePackage + ".resource.");
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "DefaultResourceDescriptionStrategy");
     return new TypeReference(_plus_2);
   }
   
+  protected TypeReference getAbstractResourceDescriptionStrategyClass() {
+    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
+    String _plus = (_runtimeBasePackage + ".resource.");
+    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
+    String _plus_1 = (_plus + _simpleName);
+    String _plus_2 = (_plus_1 + "AbstractResourceDescriptionStrategy");
+    return new TypeReference(_plus_2);
+  }
+  
   protected TypeReference getStubResourceDescriptionStrategyClass() {
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
-    String _plus = (_runtimeBasePackage + ".index.");
+    String _plus = (_runtimeBasePackage + ".resource.");
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "ResourceDescriptionStrategy");
@@ -80,7 +86,7 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
     if ((this.isGenerateStub() || this.isGenerateXtendStub())) {
       bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getStubResourceDescriptionStrategyClass());
     } else {
-      bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getResourceDescriptionStrategyClass());
+      bindingFactory.addTypeToType(TypeReference.typeRef(IDefaultResourceDescriptionStrategy.class), this.getDefaultResourceDescriptionStrategyClass());
     }
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
@@ -100,24 +106,38 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
   @Override
   public void generate() {
     final List<AbstractRule> exportedRules = this.getExportedRulesFromGrammar();
-    boolean _shouldGenerate = this.shouldGenerate(exportedRules);
-    if (_shouldGenerate) {
+    boolean _shouldGenerateArtefacts = this.shouldGenerateArtefacts(exportedRules);
+    if (_shouldGenerateArtefacts) {
       this.contributeRuntimeGuiceBindings();
       this.generateResourceDescriptionStrategy(exportedRules);
+      this.generateResourceDescriptionStrategyStub(exportedRules);
     }
   }
   
-  protected boolean shouldGenerate(final Iterable<AbstractRule> exportedRules) {
-    boolean _isEmpty = IterableExtensions.isEmpty(exportedRules);
-    return (!_isEmpty);
+  protected boolean shouldGenerateArtefacts(final Iterable<AbstractRule> exportedRules) {
+    return (this.generate && (!IterableExtensions.isEmpty(exportedRules)));
   }
   
-  protected StringConcatenationClient generateSuperResourceDescriptionStrategyContent(final Iterable<AbstractRule> exportedRules) {
+  protected TypeReference getSuperTypeRef() {
+    TypeReference _xifexpression = null;
+    if ((this.isGenerateStub() || this.isGenerateXtendStub())) {
+      _xifexpression = this.getAbstractResourceDescriptionStrategyClass();
+    } else {
+      _xifexpression = this.getDefaultResourceDescriptionStrategyClass();
+    }
+    return _xifexpression;
+  }
+  
+  protected void generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
+    this.fileAccessFactory.createJavaFile(this.getAbstractResourceDescriptionStrategyClass(), this.generateResourceDescriptionStrategyContent(this.getSuperTypeRef(), exportedRules)).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
+  }
+  
+  protected StringConcatenationClient generateResourceDescriptionStrategyContent(final TypeReference superTypeRef, final Iterable<AbstractRule> exportedRules) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
-        String _simpleName = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass().getSimpleName();
+        String _simpleName = superTypeRef.getSimpleName();
         _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _defaultResourceDescriptionSuperClass = ResourceDescriptionStrategyFragment.this.getDefaultResourceDescriptionSuperClass();
@@ -192,9 +212,8 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
     return _client;
   }
   
-  protected void generateResourceDescriptionStrategy(final Iterable<AbstractRule> exportedRules) {
-    this.fileAccessFactory.createJavaFile(this.getResourceDescriptionStrategyClass(), this.generateSuperResourceDescriptionStrategyContent(exportedRules)).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
-    if ((this.isGenerateStub() && (!this.isGenerateXtendStub()))) {
+  protected void generateResourceDescriptionStrategyStub(final Iterable<AbstractRule> exportedRules) {
+    if ((this.isGenerateStub() || this.isGenerateXtendStub())) {
       TypeReference _stubResourceDescriptionStrategyClass = this.getStubResourceDescriptionStrategyClass();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -203,8 +222,8 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
           String _simpleName = ResourceDescriptionStrategyFragment.this.getStubResourceDescriptionStrategyClass().getSimpleName();
           _builder.append(_simpleName);
           _builder.append(" extends ");
-          TypeReference _resourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass();
-          _builder.append(_resourceDescriptionStrategyClass);
+          TypeReference _abstractResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getAbstractResourceDescriptionStrategyClass();
+          _builder.append(_abstractResourceDescriptionStrategyClass);
           _builder.append("{");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -224,8 +243,8 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
             TypeReference _stubResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getStubResourceDescriptionStrategyClass();
             _builder.append(_stubResourceDescriptionStrategyClass);
             _builder.append(" extends ");
-            TypeReference _resourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getResourceDescriptionStrategyClass();
-            _builder.append(_resourceDescriptionStrategyClass);
+            TypeReference _abstractResourceDescriptionStrategyClass = ResourceDescriptionStrategyFragment.this.getAbstractResourceDescriptionStrategyClass();
+            _builder.append(_abstractResourceDescriptionStrategyClass);
             _builder.append("{");
             _builder.newLineIfNotEmpty();
             _builder.newLine();
@@ -246,20 +265,11 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
   }
   
   @Pure
-  public boolean isGenerateStub() {
-    return this.isGenerateStub;
+  public boolean isGenerate() {
+    return this.generate;
   }
   
-  public void setIsGenerateStub(final boolean isGenerateStub) {
-    this.isGenerateStub = isGenerateStub;
-  }
-  
-  @Pure
-  public boolean isGenerateXtendStub() {
-    return this.isGenerateXtendStub;
-  }
-  
-  public void setIsGenerateXtendStub(final boolean isGenerateXtendStub) {
-    this.isGenerateXtendStub = isGenerateXtendStub;
+  public void setGenerate(final boolean generate) {
+    this.generate = generate;
   }
 }

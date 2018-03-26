@@ -219,6 +219,40 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals(issues.toString(), 0, issues.size());
 	}
 	
+	@Test public void testOverrideDeprecated() throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"@Deprecated\n" + 
+				"RuleDeprecated: name=ID;\n" + 
+				"Rule: name=ID;","superGrammar.xtext", rs);
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.xtext.Supergrammar\n" +
+				"generate bar \"http://org.xtext.Bar\"\n" + 
+				"@Override Rule: name=ID;",  "foo.xtext", rs);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 0, issues.size());
+	}
+	
+	@Test public void testOverrideDeprecated_1() throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"@Deprecated\n" + 
+				"RuleDeprecated: name=ID;\n" + 
+				"Rule: name=ID;","superGrammar.xtext", rs);
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.xtext.Supergrammar\n" +
+				"generate bar \"http://org.xtext.Bar\"\n" + 
+				"@Override RuleDeprecated: name=ID;",  "foo.xtext", rs);
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("This rule overrides RuleDeprecated in org.xtext.Supergrammar which is deprecated.", issues.get(0).getMessage());
+		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
+	}
+	
 	
 	@Test public void testMissingArgument() throws Exception {
 		XtextResource resource = getResourceFromString(

@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xtext.AnnotationNames
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -29,22 +29,24 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 /**
  * @author Holger Schill - Initial contribution and API
  */
-class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment {
-	@Accessors
-	boolean isGenerateStub = true;
+class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
 	
 	@Accessors
-	boolean isGenerateXtendStub;
+	boolean generate = true;
 	
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 	
-	protected def getResourceDescriptionStrategyClass(){
-		return new TypeReference(grammar.runtimeBasePackage + '.index.' + grammar.simpleName + 'DefaultResourceDescriptionStrategy')
+	protected def getDefaultResourceDescriptionStrategyClass(){
+		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'DefaultResourceDescriptionStrategy')
+	}
+	
+	protected def getAbstractResourceDescriptionStrategyClass(){
+		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'AbstractResourceDescriptionStrategy')
 	}
 	
 	protected def getStubResourceDescriptionStrategyClass(){
-		return new TypeReference(grammar.runtimeBasePackage + '.index.' + grammar.simpleName + 'ResourceDescriptionStrategy')
+		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'ResourceDescriptionStrategy')
 	}
 	
 	protected def getDefaultResourceDescriptionSuperClass(){
@@ -53,10 +55,10 @@ class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment
 	
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		if(generateStub || generateXtendStub){
+		if(isGenerateStub || isGenerateXtendStub){
 			bindingFactory.addTypeToType(IDefaultResourceDescriptionStrategy.typeRef(), getStubResourceDescriptionStrategyClass);
 		} else {
-			bindingFactory.addTypeToType(IDefaultResourceDescriptionStrategy.typeRef(), resourceDescriptionStrategyClass);
+			bindingFactory.addTypeToType(IDefaultResourceDescriptionStrategy.typeRef(), defaultResourceDescriptionStrategyClass);
 		}
 		bindingFactory.contributeTo(language.runtimeGenModule)
 	}
@@ -68,48 +70,59 @@ class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment
 	
 	override generate() {
 		val exportedRules = exportedRulesFromGrammar;
-		if(exportedRules.shouldGenerate) {
+		if(exportedRules.shouldGenerateArtefacts) {
 			contributeRuntimeGuiceBindings
 			generateResourceDescriptionStrategy(exportedRules)
+			generateResourceDescriptionStrategyStub(exportedRules)
 		}
 	}
 	
-	protected def shouldGenerate(Iterable<AbstractRule> exportedRules) {
-		return !exportedRules.empty
+	protected def shouldGenerateArtefacts(Iterable<AbstractRule> exportedRules) {
+		return generate && !exportedRules.empty
 	}
 	
-	protected def StringConcatenationClient generateSuperResourceDescriptionStrategyContent(Iterable<AbstractRule> exportedRules) {
-		'''
-			public class «resourceDescriptionStrategyClass.simpleName» extends «defaultResourceDescriptionSuperClass» {
-				public boolean createEObjectDescriptions(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
-					«FOR exportedRule : exportedRules»
-						if(eObject instanceof «new TypeReference(exportedRule.type.classifier as EClass, grammar.eResource.resourceSet)») {
-							return createEObjectDescriptionsFor«exportedRule.type.classifier.name»(eObject, acceptor);
-						}
-					«ENDFOR»
-					return true;
-				}
-			
+	protected def getSuperTypeRef(){
+		if(isGenerateStub || isGenerateXtendStub) {
+			abstractResourceDescriptionStrategyClass
+		} else {
+			defaultResourceDescriptionStrategyClass
+		}
+	}
+	
+	protected def generateResourceDescriptionStrategy(Iterable<AbstractRule> exportedRules){
+		fileAccessFactory.createJavaFile(abstractResourceDescriptionStrategyClass, generateResourceDescriptionStrategyContent(superTypeRef,exportedRules)).writeTo(projectConfig.runtime.srcGen)
+	}
+	
+	protected def StringConcatenationClient generateResourceDescriptionStrategyContent(TypeReference superTypeRef, Iterable<AbstractRule> exportedRules) 
+	'''
+		public class «superTypeRef.simpleName» extends «defaultResourceDescriptionSuperClass» {
+			public boolean createEObjectDescriptions(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
 				«FOR exportedRule : exportedRules»
-					protected boolean createEObjectDescriptionsFor«exportedRule.type.classifier.name»(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
-						return super.createEObjectDescriptions(eObject, acceptor);
+					if(eObject instanceof «new TypeReference(exportedRule.type.classifier as EClass, grammar.eResource.resourceSet)») {
+						return createEObjectDescriptionsFor«exportedRule.type.classifier.name»(eObject, acceptor);
 					}
 				«ENDFOR»
+				return true;
 			}
-		'''
-	}
 		
-	protected def generateResourceDescriptionStrategy(Iterable<AbstractRule> exportedRules) {
-			fileAccessFactory.createJavaFile(resourceDescriptionStrategyClass, generateSuperResourceDescriptionStrategyContent(exportedRules)).writeTo(projectConfig.runtime.srcGen)
-			if(generateStub && !generateXtendStub){
+			«FOR exportedRule : exportedRules»
+				protected boolean createEObjectDescriptionsFor«exportedRule.type.classifier.name»(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
+					return super.createEObjectDescriptions(eObject, acceptor);
+				}
+			«ENDFOR»
+		}
+	'''
+		
+	protected def generateResourceDescriptionStrategyStub(Iterable<AbstractRule> exportedRules) {
+			if(isGenerateStub || isGenerateXtendStub){
 				fileAccessFactory.createJavaFile(stubResourceDescriptionStrategyClass,'''
-					public class «stubResourceDescriptionStrategyClass.simpleName» extends «resourceDescriptionStrategyClass»{
+					public class «stubResourceDescriptionStrategyClass.simpleName» extends «abstractResourceDescriptionStrategyClass»{
 					
 					}
 				''').writeTo(projectConfig.runtime.src)
 			} else if(generateXtendStub) {
 				fileAccessFactory.createXtendFile(stubResourceDescriptionStrategyClass,'''
-					class «stubResourceDescriptionStrategyClass» extends «resourceDescriptionStrategyClass»{
+					class «stubResourceDescriptionStrategyClass» extends «abstractResourceDescriptionStrategyClass»{
 					
 					}
 				''').writeTo(projectConfig.runtime.src)

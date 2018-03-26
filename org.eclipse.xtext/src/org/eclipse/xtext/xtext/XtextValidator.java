@@ -1261,8 +1261,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		
 		for (Grammar g : superGrammars) {
 			final AbstractRule r = GrammarUtil.findRuleForName(g, rule.getName());
-
 			if (r != null) {
+				if(isDeprecated(r)) {
+					warning("This rule overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is deprecated.", rule, 
+							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
+				}
 				if(isFinal(r)) {
 					error("This rule illegally overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is final.", rule, 
 							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
@@ -1306,6 +1309,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	 */
 	protected boolean isFinal(AbstractRule rule) {
 		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.FINAL.equals(e.getName()));
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected boolean isDeprecated(AbstractRule rule) {
+		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.DEPRECATED.equals(e.getName()));
 	}
 	
 

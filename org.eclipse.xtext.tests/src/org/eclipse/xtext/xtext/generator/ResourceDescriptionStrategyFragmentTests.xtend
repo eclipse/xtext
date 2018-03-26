@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.junit.Test
+import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -24,13 +24,18 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 			super.getExportedRulesFromGrammar()
 		}
 
-		override protected generateSuperResourceDescriptionStrategyContent(Iterable<AbstractRule> exportedRules) {
-			super.generateSuperResourceDescriptionStrategyContent(exportedRules)
+		override protected shouldGenerateArtefacts(Iterable<AbstractRule> exportedRules) {
+			super.shouldGenerateArtefacts(exportedRules)
 		}
-
-		override shouldGenerate(Iterable<AbstractRule> exportedRules) {
-			super.shouldGenerate(exportedRules)
+		
+		override protected generateResourceDescriptionStrategyContent(TypeReference superTypeRef, Iterable<AbstractRule> exportedRules) {
+			super.generateResourceDescriptionStrategyContent(superTypeRef, exportedRules)
 		}
+		
+		override protected getSuperTypeRef() {
+			super.getSuperTypeRef()
+		}
+		
 	}
 
 	@Test
@@ -43,7 +48,22 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		''')
 		val exportedRules = fragment.getExportedRulesFromGrammar
 		assertTrue(exportedRules.empty)
-		assertFalse(fragment.shouldGenerate(exportedRules))
+		assertFalse(fragment.shouldGenerateArtefacts(exportedRules))
+	}
+	
+	@Test
+	def testGenerateNothing_1() {
+		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
+			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
+			generate foo "http://org.xtext/foo"
+			Model: rules+=Rule;
+			@Exported
+			Rule: name=ID;
+		''')
+		fragment.generate = false
+		val exportedRules = fragment.getExportedRulesFromGrammar
+		assertFalse(exportedRules.empty)
+		assertFalse(fragment.shouldGenerateArtefacts(exportedRules))
 	}
 
 	@Test
@@ -61,8 +81,42 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		val exportedRules = fragment.getExportedRulesFromGrammar
 		assertFalse(exportedRules.empty)
 		assertEquals(1, exportedRules.size)
-		assertTrue(fragment.shouldGenerate(exportedRules))
-		val result = fragment.generateSuperResourceDescriptionStrategyContent(exportedRules)
+		assertTrue(fragment.shouldGenerateArtefacts(exportedRules))
+		val result = fragment.generateResourceDescriptionStrategyContent(fragment.superTypeRef, exportedRules)
+		assertEquals('''
+			public class FooAbstractResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
+				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
+					if(eObject instanceof org.xtext.foo.Rule) {
+						return createEObjectDescriptionsForRule(eObject, acceptor);
+					}
+					return true;
+				}
+			
+				protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
+					return super.createEObjectDescriptions(eObject, acceptor);
+				}
+			}
+		'''.toString, result.concatenationClientToString)
+	}
+	
+	@Test
+	def testGenerate_NoStubs() {
+		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
+			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
+			generate foo "http://org.xtext/foo"
+			Model: rules+=Rule;
+			@Exported
+			Rule: name=ID;
+			@Exported
+			Foo returns Rule: name=ID;
+		''')
+		fragment.generateStub = false
+		fragment.generateXtendStub = false
+		val exportedRules = fragment.getExportedRulesFromGrammar
+		assertFalse(exportedRules.empty)
+		assertEquals(1, exportedRules.size)
+		assertTrue(fragment.shouldGenerateArtefacts(exportedRules))
+		val result = fragment.generateResourceDescriptionStrategyContent(fragment.superTypeRef, exportedRules)
 		assertEquals('''
 			public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
 				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {

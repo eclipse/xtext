@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.junit.Test
-import org.eclipse.xtext.AbstractRule
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -56,7 +54,6 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			CustomRule returns Rule: name=ID;
 		''')
 
-		
 		val deprecatedRulesFromGrammar = fragment.deprecatedRulesFromGrammar
 		assertEquals(1, deprecatedRulesFromGrammar.size)
 		assertEquals('''
@@ -66,6 +63,23 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			warning("This part of the language is marked as deprecated and might get removed in the future!", element, null);
 		}
 		'''.toString, fragment.generateValidationToDeprecateRules.concatenationClientToString)
+	}
+	
+	@Test
+	def testGenerate_NoValidation() {
+		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
+			grammar org.xtext.Foo with org.eclipse.xtext.common.Terminals
+			generate foo "http://org.xtext/foo"
+			Model: rules+=Rule;
+			@Deprecated
+			Rule: name=ID;
+			@Deprecated
+			CustomRule returns Rule: name=ID;
+		''')
+		fragment.generateDeprecationValidation = false	
+		val deprecatedRulesFromGrammar = fragment.deprecatedRulesFromGrammar
+		assertEquals(1, deprecatedRulesFromGrammar.size)
+		assertEquals(''''''.toString, fragment.generateValidationToDeprecateRules.concatenationClientToString)
 	}
 
 }
