@@ -4476,73 +4476,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         try {
             // InternalXtext.g:1473:1: ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) )
             int alt1=3;
-            switch ( input.LA(1) ) {
-            case 28:
-                {
-                int LA1_1 = input.LA(2);
-
-                if ( (LA1_1==RULE_ID) ) {
-                    switch ( input.LA(3) ) {
-                    case 43:
-                        {
-                        alt1=2;
-                        }
-                        break;
-                    case 47:
-                        {
-                        alt1=3;
-                        }
-                        break;
-                    case RULE_ID:
-                    case 16:
-                    case 17:
-                    case 28:
-                    case 49:
-                        {
-                        alt1=1;
-                        }
-                        break;
-                    default:
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 1, 5, input);
-
-                        throw nvae;
-                    }
-
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 1, 1, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_ID:
-            case 16:
-            case 17:
-            case 49:
-                {
-                alt1=1;
-                }
-                break;
-            case 43:
-                {
-                alt1=2;
-                }
-                break;
-            case 47:
-                {
-                alt1=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
-
-                throw nvae;
-            }
-
+            alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
                     // InternalXtext.g:1474:2: ( ruleParserRule )
@@ -5316,13 +5250,6 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             case 50:
                 {
                 switch ( input.LA(2) ) {
-                case RULE_ID:
-                case 16:
-                case 17:
-                    {
-                    alt11=5;
-                    }
-                    break;
                 case RULE_STRING:
                     {
                     alt11=4;
@@ -5331,6 +5258,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 case 22:
                     {
                     alt11=6;
+                    }
+                    break;
+                case RULE_ID:
+                case 16:
+                case 17:
+                    {
+                    alt11=5;
                     }
                     break;
                 default:
@@ -21510,40 +21444,47 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TerminalRule__Group__0__Impl"
-    // InternalXtext.g:6842:1: rule__TerminalRule__Group__0__Impl : ( ( rule__TerminalRule__AnnotationsAssignment_0 )? ) ;
+    // InternalXtext.g:6842:1: rule__TerminalRule__Group__0__Impl : ( ( rule__TerminalRule__AnnotationsAssignment_0 )* ) ;
     public final void rule__TerminalRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalXtext.g:6846:1: ( ( ( rule__TerminalRule__AnnotationsAssignment_0 )? ) )
-            // InternalXtext.g:6847:1: ( ( rule__TerminalRule__AnnotationsAssignment_0 )? )
+            // InternalXtext.g:6846:1: ( ( ( rule__TerminalRule__AnnotationsAssignment_0 )* ) )
+            // InternalXtext.g:6847:1: ( ( rule__TerminalRule__AnnotationsAssignment_0 )* )
             {
-            // InternalXtext.g:6847:1: ( ( rule__TerminalRule__AnnotationsAssignment_0 )? )
-            // InternalXtext.g:6848:2: ( rule__TerminalRule__AnnotationsAssignment_0 )?
+            // InternalXtext.g:6847:1: ( ( rule__TerminalRule__AnnotationsAssignment_0 )* )
+            // InternalXtext.g:6848:2: ( rule__TerminalRule__AnnotationsAssignment_0 )*
             {
              before(grammarAccess.getTerminalRuleAccess().getAnnotationsAssignment_0()); 
-            // InternalXtext.g:6849:2: ( rule__TerminalRule__AnnotationsAssignment_0 )?
-            int alt67=2;
-            int LA67_0 = input.LA(1);
+            // InternalXtext.g:6849:2: ( rule__TerminalRule__AnnotationsAssignment_0 )*
+            loop67:
+            do {
+                int alt67=2;
+                int LA67_0 = input.LA(1);
 
-            if ( (LA67_0==28) ) {
-                alt67=1;
-            }
-            switch (alt67) {
-                case 1 :
-                    // InternalXtext.g:6849:3: rule__TerminalRule__AnnotationsAssignment_0
-                    {
-                    pushFollow(FollowSets000.FOLLOW_2);
-                    rule__TerminalRule__AnnotationsAssignment_0();
-
-                    state._fsp--;
+                if ( (LA67_0==28) ) {
+                    alt67=1;
+                }
 
 
-                    }
-                    break;
+                switch (alt67) {
+            	case 1 :
+            	    // InternalXtext.g:6849:3: rule__TerminalRule__AnnotationsAssignment_0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_17);
+            	    rule__TerminalRule__AnnotationsAssignment_0();
 
-            }
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop67;
+                }
+            } while (true);
 
              after(grammarAccess.getTerminalRuleAccess().getAnnotationsAssignment_0()); 
 
@@ -30148,14 +30089,55 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
     // Delegated rules
 
 
+    protected DFA1 dfa1 = new DFA1(this);
     protected DFA8 dfa8 = new DFA8(this);
-    static final String dfa_1s = "\13\uffff";
-    static final String dfa_2s = "\3\uffff\3\6\1\uffff\3\6\1\uffff";
-    static final String dfa_3s = "\6\4\1\uffff\3\4\1\uffff";
-    static final String dfa_4s = "\1\62\2\26\3\62\1\uffff\3\62\1\uffff";
-    static final String dfa_5s = "\6\uffff\1\2\3\uffff\1\1";
-    static final String dfa_6s = "\13\uffff}>";
-    static final String[] dfa_7s = {
+    static final String dfa_1s = "\10\uffff";
+    static final String dfa_2s = "\2\4\3\uffff\3\4";
+    static final String dfa_3s = "\1\61\1\4\3\uffff\1\61\1\4\1\61";
+    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\3\uffff";
+    static final String dfa_5s = "\10\uffff}>";
+    static final String[] dfa_6s = {
+            "\1\2\13\uffff\2\2\12\uffff\1\1\16\uffff\1\3\3\uffff\1\4\1\uffff\1\2",
+            "\1\5",
+            "",
+            "",
+            "",
+            "\1\2\13\uffff\2\2\12\uffff\1\6\16\uffff\1\3\3\uffff\1\4\1\uffff\1\2",
+            "\1\7",
+            "\1\2\13\uffff\2\2\12\uffff\1\6\16\uffff\1\3\5\uffff\1\2"
+    };
+
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
+
+    class DFA1 extends DFA {
+
+        public DFA1(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 1;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
+        }
+        public String getDescription() {
+            return "1469:1: rule__AbstractRule__Alternatives : ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) );";
+        }
+    }
+    static final String dfa_7s = "\13\uffff";
+    static final String dfa_8s = "\3\uffff\3\6\1\uffff\3\6\1\uffff";
+    static final String dfa_9s = "\6\4\1\uffff\3\4\1\uffff";
+    static final String dfa_10s = "\1\62\2\26\3\62\1\uffff\3\62\1\uffff";
+    static final String dfa_11s = "\6\uffff\1\2\3\uffff\1\1";
+    static final String dfa_12s = "\13\uffff}>";
+    static final String[] dfa_13s = {
             "\1\3\1\6\12\uffff\1\5\1\4\4\uffff\1\6\25\uffff\1\2\5\uffff\1\1",
             "\1\7\1\6\12\uffff\1\11\1\10\4\uffff\1\6",
             "\1\7\1\6\12\uffff\1\11\1\10\4\uffff\1\6",
@@ -30169,26 +30151,26 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             ""
     };
 
-    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
-    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
-    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
-    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
-    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
-    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
-    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
+    static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
+    static final short[] dfa_8 = DFA.unpackEncodedString(dfa_8s);
+    static final char[] dfa_9 = DFA.unpackEncodedStringToUnsignedChars(dfa_9s);
+    static final char[] dfa_10 = DFA.unpackEncodedStringToUnsignedChars(dfa_10s);
+    static final short[] dfa_11 = DFA.unpackEncodedString(dfa_11s);
+    static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
+    static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
     class DFA8 extends DFA {
 
         public DFA8(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 8;
-            this.eot = dfa_1;
-            this.eof = dfa_2;
-            this.min = dfa_3;
-            this.max = dfa_4;
-            this.accept = dfa_5;
-            this.special = dfa_6;
-            this.transition = dfa_7;
+            this.eot = dfa_7;
+            this.eof = dfa_8;
+            this.min = dfa_9;
+            this.max = dfa_10;
+            this.accept = dfa_11;
+            this.special = dfa_12;
+            this.transition = dfa_13;
         }
         public String getDescription() {
             return "1601:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );";

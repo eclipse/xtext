@@ -6846,7 +6846,7 @@ rule__TerminalRule__Group__0__Impl
 :
 (
 	{ before(grammarAccess.getTerminalRuleAccess().getAnnotationsAssignment_0()); }
-	(rule__TerminalRule__AnnotationsAssignment_0)?
+	(rule__TerminalRule__AnnotationsAssignment_0)*
 	{ after(grammarAccess.getTerminalRuleAccess().getAnnotationsAssignment_0()); }
 )
 ;

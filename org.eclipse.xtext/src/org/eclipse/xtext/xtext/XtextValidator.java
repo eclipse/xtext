@@ -1218,6 +1218,16 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 	
 	@Check
+	public void checkTerminalRuleAnnotations(TerminalRule terminalRule){
+		if(hasAnnotation(terminalRule, AnnotationNames.EXPORTED)) {
+			error("TerminalRule cannot be exported!",terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
+		} 
+		if(hasAnnotation(terminalRule, AnnotationNames.DEPRECATED)) {
+			error("TerminalRule cannot be deprecated!",terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
+		}
+	}
+	
+	@Check
 	public void checkOppositeReferenceUsed(Assignment assignment) {
 		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(BIDIRECTIONAL_REFERENCE);
 		if (severity == null || severity == Severity.IGNORE) {
@@ -1253,7 +1263,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkOverridingRule(AbstractRule rule) {
 		final String name = rule.getName();
 		final List<Grammar> superGrammars = GrammarUtil.getGrammar(rule).getUsedGrammars();
-		boolean isOverride = isOverride(rule);
+		boolean isOverride = hasAnnotation(rule, AnnotationNames.OVERRIDE);
 		if (isOverride && superGrammars.isEmpty()) {
 			error("This grammar has no super grammar and therefore cannot override any rules.", rule,
 					XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
@@ -1262,11 +1272,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		for (Grammar g : superGrammars) {
 			final AbstractRule r = GrammarUtil.findRuleForName(g, rule.getName());
 			if (r != null) {
-				if(isDeprecated(r)) {
+				if(hasAnnotation(r, AnnotationNames.DEPRECATED)) {
 					warning("This rule overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is deprecated.", rule, 
 							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
 				}
-				if(isFinal(r)) {
+				if(hasAnnotation(r, AnnotationNames.FINAL)) {
 					error("This rule illegally overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is final.", rule, 
 							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
 					break;
@@ -1300,22 +1310,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	/**
 	 * @since 2.14
 	 */
-	protected boolean isOverride(AbstractRule rule) {
-		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.OVERRIDE.equals(e.getName()));
-	}
-	
-	/**
-	 * @since 2.14
-	 */
-	protected boolean isFinal(AbstractRule rule) {
-		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.FINAL.equals(e.getName()));
-	}
-	
-	/**
-	 * @since 2.14
-	 */
-	protected boolean isDeprecated(AbstractRule rule) {
-		return rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.DEPRECATED.equals(e.getName()));
+	protected boolean hasAnnotation(AbstractRule rule, String annotationName) {
+		return rule.getAnnotations().stream().anyMatch(e -> annotationName.equals(e.getName()));
 	}
 	
 

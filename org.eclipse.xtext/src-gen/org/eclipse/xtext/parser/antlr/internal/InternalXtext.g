@@ -2876,7 +2876,7 @@ ruleTerminalRule returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)?
+		)*
 		otherlv_1='terminal'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getTerminalRuleAccess().getTerminalKeyword_1());

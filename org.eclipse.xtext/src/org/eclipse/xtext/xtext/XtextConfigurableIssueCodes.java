@@ -19,6 +19,7 @@ import com.google.inject.Singleton;
  * Use {@link #getConfigurableIssueCodes()} to get all registered codes.
  * 
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Holger Schill
  */
 @Singleton
 public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
@@ -43,6 +44,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	
 	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
 	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
+	public static final String INVALID_ANNOTAION = ISSUE_CODE_PREFIX + "InvalidAnnotation";
 
 	@Override
 	protected void initialize(IAcceptor<PreferenceKey> acceptor) {

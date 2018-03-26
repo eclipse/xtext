@@ -1792,17 +1792,17 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TerminalRule:
-		//	annotations+=Annotation?
+		//	annotations+=Annotation*
 		//	'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
 		//	alternatives=TerminalAlternatives
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation? 'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
+		//annotations+=Annotation* 'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
 		//alternatives=TerminalAlternatives ';'
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=Annotation?
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//Annotation
@@ -2903,7 +2903,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TerminalRule:
-	//	annotations+=Annotation?
+	//	annotations+=Annotation*
 	//	'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
 	//	alternatives=TerminalAlternatives
 	//	';';

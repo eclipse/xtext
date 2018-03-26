@@ -782,73 +782,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             {
             // InternalXtext.g:312:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
             int alt9=3;
-            switch ( input.LA(1) ) {
-            case 21:
-                {
-                int LA9_1 = input.LA(2);
-
-                if ( (LA9_1==RULE_ID) ) {
-                    switch ( input.LA(3) ) {
-                    case RULE_ID:
-                    case 21:
-                    case 22:
-                    case 39:
-                    case 40:
-                        {
-                        alt9=1;
-                        }
-                        break;
-                    case 47:
-                        {
-                        alt9=2;
-                        }
-                        break;
-                    case 50:
-                        {
-                        alt9=3;
-                        }
-                        break;
-                    default:
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 9, 5, input);
-
-                        throw nvae;
-                    }
-
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 9, 1, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_ID:
-            case 22:
-            case 39:
-            case 40:
-                {
-                alt9=1;
-                }
-                break;
-            case 47:
-                {
-                alt9=2;
-                }
-                break;
-            case 50:
-                {
-                alt9=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 9, 0, input);
-
-                throw nvae;
-            }
-
+            alt9 = dfa9.predict(input);
             switch (alt9) {
                 case 1 :
                     // InternalXtext.g:313:3: this_ParserRule_0= ruleParserRule
@@ -7899,7 +7833,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTerminalRule"
-    // InternalXtext.g:2853:1: ruleTerminalRule returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' ) ;
+    // InternalXtext.g:2853:1: ruleTerminalRule returns [EObject current=null] : ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' ) ;
     public final EObject ruleTerminalRule() throws RecognitionException {
         EObject current = null;
 
@@ -7923,53 +7857,60 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalXtext.g:2859:2: ( ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' ) )
-            // InternalXtext.g:2860:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' )
+            // InternalXtext.g:2859:2: ( ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' ) )
+            // InternalXtext.g:2860:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' )
             {
-            // InternalXtext.g:2860:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' )
-            // InternalXtext.g:2861:3: ( (lv_annotations_0_0= ruleAnnotation ) )? otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';'
+            // InternalXtext.g:2860:2: ( ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';' )
+            // InternalXtext.g:2861:3: ( (lv_annotations_0_0= ruleAnnotation ) )* otherlv_1= 'terminal' ( ( ( (lv_fragment_2_0= 'fragment' ) ) ( (lv_name_3_0= ruleValidID ) ) ) | ( ( (lv_name_4_0= ruleValidID ) ) (otherlv_5= 'returns' ( (lv_type_6_0= ruleTypeRef ) ) )? ) ) otherlv_7= ':' ( (lv_alternatives_8_0= ruleTerminalAlternatives ) ) otherlv_9= ';'
             {
-            // InternalXtext.g:2861:3: ( (lv_annotations_0_0= ruleAnnotation ) )?
-            int alt62=2;
-            int LA62_0 = input.LA(1);
+            // InternalXtext.g:2861:3: ( (lv_annotations_0_0= ruleAnnotation ) )*
+            loop62:
+            do {
+                int alt62=2;
+                int LA62_0 = input.LA(1);
 
-            if ( (LA62_0==21) ) {
-                alt62=1;
-            }
-            switch (alt62) {
-                case 1 :
-                    // InternalXtext.g:2862:4: (lv_annotations_0_0= ruleAnnotation )
-                    {
-                    // InternalXtext.g:2862:4: (lv_annotations_0_0= ruleAnnotation )
-                    // InternalXtext.g:2863:5: lv_annotations_0_0= ruleAnnotation
-                    {
-
-                    					newCompositeNode(grammarAccess.getTerminalRuleAccess().getAnnotationsAnnotationParserRuleCall_0_0());
-                    				
-                    pushFollow(FollowSets000.FOLLOW_44);
-                    lv_annotations_0_0=ruleAnnotation();
-
-                    state._fsp--;
+                if ( (LA62_0==21) ) {
+                    alt62=1;
+                }
 
 
-                    					if (current==null) {
-                    						current = createModelElementForParent(grammarAccess.getTerminalRuleRule());
-                    					}
-                    					add(
-                    						current,
-                    						"annotations",
-                    						lv_annotations_0_0,
-                    						"org.eclipse.xtext.Xtext.Annotation");
-                    					afterParserOrEnumRuleCall();
-                    				
+                switch (alt62) {
+            	case 1 :
+            	    // InternalXtext.g:2862:4: (lv_annotations_0_0= ruleAnnotation )
+            	    {
+            	    // InternalXtext.g:2862:4: (lv_annotations_0_0= ruleAnnotation )
+            	    // InternalXtext.g:2863:5: lv_annotations_0_0= ruleAnnotation
+            	    {
 
-                    }
+            	    					newCompositeNode(grammarAccess.getTerminalRuleAccess().getAnnotationsAnnotationParserRuleCall_0_0());
+            	    				
+            	    pushFollow(FollowSets000.FOLLOW_44);
+            	    lv_annotations_0_0=ruleAnnotation();
+
+            	    state._fsp--;
 
 
-                    }
-                    break;
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getTerminalRuleRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"annotations",
+            	    						lv_annotations_0_0,
+            	    						"org.eclipse.xtext.Xtext.Annotation");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
-            }
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop62;
+                }
+            } while (true);
 
             otherlv_1=(Token)match(input,47,FollowSets000.FOLLOW_45); 
 
@@ -10371,14 +10312,55 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     // Delegated rules
 
 
+    protected DFA9 dfa9 = new DFA9(this);
     protected DFA34 dfa34 = new DFA34(this);
-    static final String dfa_1s = "\13\uffff";
-    static final String dfa_2s = "\3\uffff\3\6\1\uffff\3\6\1\uffff";
-    static final String dfa_3s = "\6\4\1\uffff\3\4\1\uffff";
-    static final String dfa_4s = "\1\53\2\50\3\54\1\uffff\3\54\1\uffff";
-    static final String dfa_5s = "\6\uffff\1\2\3\uffff\1\1";
-    static final String dfa_6s = "\13\uffff}>";
-    static final String[] dfa_7s = {
+    static final String dfa_1s = "\10\uffff";
+    static final String dfa_2s = "\2\5\3\uffff\3\5";
+    static final String dfa_3s = "\1\62\1\5\3\uffff\1\62\1\5\1\57";
+    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\3\uffff";
+    static final String dfa_5s = "\10\uffff}>";
+    static final String[] dfa_6s = {
+            "\1\2\17\uffff\1\1\1\2\20\uffff\2\2\6\uffff\1\3\2\uffff\1\4",
+            "\1\5",
+            "",
+            "",
+            "",
+            "\1\2\17\uffff\1\6\1\2\20\uffff\2\2\6\uffff\1\3\2\uffff\1\4",
+            "\1\7",
+            "\1\2\17\uffff\1\6\1\2\20\uffff\2\2\6\uffff\1\3"
+    };
+
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final char[] dfa_2 = DFA.unpackEncodedStringToUnsignedChars(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final short[] dfa_4 = DFA.unpackEncodedString(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[][] dfa_6 = unpackEncodedStringArray(dfa_6s);
+
+    class DFA9 extends DFA {
+
+        public DFA9(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 9;
+            this.eot = dfa_1;
+            this.eof = dfa_1;
+            this.min = dfa_2;
+            this.max = dfa_3;
+            this.accept = dfa_4;
+            this.special = dfa_5;
+            this.transition = dfa_6;
+        }
+        public String getDescription() {
+            return "312:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )";
+        }
+    }
+    static final String dfa_7s = "\13\uffff";
+    static final String dfa_8s = "\3\uffff\3\6\1\uffff\3\6\1\uffff";
+    static final String dfa_9s = "\6\4\1\uffff\3\4\1\uffff";
+    static final String dfa_10s = "\1\53\2\50\3\54\1\uffff\3\54\1\uffff";
+    static final String dfa_11s = "\6\uffff\1\2\3\uffff\1\1";
+    static final String dfa_12s = "\13\uffff}>";
+    static final String[] dfa_13s = {
             "\1\6\1\3\11\uffff\1\6\27\uffff\1\4\1\5\1\uffff\1\1\1\2",
             "\1\6\1\7\11\uffff\1\6\27\uffff\1\10\1\11",
             "\1\6\1\7\11\uffff\1\6\27\uffff\1\10\1\11",
@@ -10392,26 +10374,26 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
-    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
-    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
-    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
-    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
-    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
-    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
+    static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
+    static final short[] dfa_8 = DFA.unpackEncodedString(dfa_8s);
+    static final char[] dfa_9 = DFA.unpackEncodedStringToUnsignedChars(dfa_9s);
+    static final char[] dfa_10 = DFA.unpackEncodedStringToUnsignedChars(dfa_10s);
+    static final short[] dfa_11 = DFA.unpackEncodedString(dfa_11s);
+    static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
+    static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
     class DFA34 extends DFA {
 
         public DFA34(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 34;
-            this.eot = dfa_1;
-            this.eof = dfa_2;
-            this.min = dfa_3;
-            this.max = dfa_4;
-            this.accept = dfa_5;
-            this.special = dfa_6;
-            this.transition = dfa_7;
+            this.eot = dfa_7;
+            this.eof = dfa_8;
+            this.min = dfa_9;
+            this.max = dfa_10;
+            this.accept = dfa_11;
+            this.special = dfa_12;
+            this.transition = dfa_13;
         }
         public String getDescription() {
             return "1285:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )";
@@ -10464,7 +10446,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000400040000000L});
         public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000018000000030L});
         public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000400000000000L});
-        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000800000000000L});
+        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000800000200000L});
         public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000018000400020L});
         public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000003000000L});
         public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x00010B8000028030L});
