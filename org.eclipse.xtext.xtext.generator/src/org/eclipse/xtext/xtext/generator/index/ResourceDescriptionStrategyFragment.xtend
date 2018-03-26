@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.index
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
@@ -24,7 +25,6 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -62,7 +62,8 @@ class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment
 	}
 	
 	protected def getExportedRulesFromGrammar(){
-		grammar.rules.filter[isExported]
+		val alreadyCollected = newHashSet
+		grammar.rules.filter[isExported && alreadyCollected.add(it.type.classifier)].toList
 	}
 	
 	override generate() {
@@ -90,7 +91,7 @@ class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorFragment
 				}
 			
 				«FOR exportedRule : exportedRules»
-					protected boolean createEObjectDescriptionsFor«exportedRule.type.classifier.name»(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+					protected boolean createEObjectDescriptionsFor«exportedRule.type.classifier.name»(«EObject» eObject, «IAcceptor»<«IEObjectDescription»> acceptor) {
 						return super.createEObjectDescriptions(eObject, acceptor);
 					}
 				«ENDFOR»

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.StandardLanguage;
@@ -143,7 +144,9 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
   }
   
   public String concatenationClientToString(final StringConcatenationClient client) {
-    final StringConcatenation stringConcat = new StringConcatenation("\n");
+    final CodeConfig config = this.<CodeConfig>get(CodeConfig.class);
+    String _lineDelimiter = config.getLineDelimiter();
+    final StringConcatenation stringConcat = new StringConcatenation(_lineDelimiter);
     stringConcat.append(client);
     return stringConcat.toString();
   }

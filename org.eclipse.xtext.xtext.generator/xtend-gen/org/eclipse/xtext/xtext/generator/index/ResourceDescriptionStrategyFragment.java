@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xtext.generator.index;
 
 import com.google.inject.Inject;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -82,16 +85,21 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
   
-  protected Iterable<AbstractRule> getExportedRulesFromGrammar() {
-    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
-      return Boolean.valueOf(this.isExported(it));
-    };
-    return IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function);
+  protected List<AbstractRule> getExportedRulesFromGrammar() {
+    List<AbstractRule> _xblockexpression = null;
+    {
+      final HashSet<EClassifier> alreadyCollected = CollectionLiterals.<EClassifier>newHashSet();
+      final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+        return Boolean.valueOf((this.isExported(it) && alreadyCollected.add(it.getType().getClassifier())));
+      };
+      _xblockexpression = IterableExtensions.<AbstractRule>toList(IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function));
+    }
+    return _xblockexpression;
   }
   
   @Override
   public void generate() {
-    final Iterable<AbstractRule> exportedRules = this.getExportedRulesFromGrammar();
+    final List<AbstractRule> exportedRules = this.getExportedRulesFromGrammar();
     boolean _shouldGenerate = this.shouldGenerate(exportedRules);
     if (_shouldGenerate) {
       this.contributeRuntimeGuiceBindings();
@@ -160,7 +168,13 @@ public class ResourceDescriptionStrategyFragment extends AbstractXtextGeneratorF
             _builder.append("protected boolean createEObjectDescriptionsFor");
             String _name_1 = exportedRule_1.getType().getClassifier().getName();
             _builder.append(_name_1, "\t");
-            _builder.append("(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
+            _builder.append("(");
+            _builder.append(EObject.class, "\t");
+            _builder.append(" eObject, ");
+            _builder.append(IAcceptor.class, "\t");
+            _builder.append("<");
+            _builder.append(IEObjectDescription.class, "\t");
+            _builder.append("> acceptor) {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");

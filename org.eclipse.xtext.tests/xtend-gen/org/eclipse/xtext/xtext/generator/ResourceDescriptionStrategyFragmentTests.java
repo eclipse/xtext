@@ -7,10 +7,10 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragmentTests;
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
 import org.junit.Assert;
@@ -24,7 +24,7 @@ import org.junit.Test;
 public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragmentTests {
   public static class TestableResourceDescriptionStrategyFragment extends ResourceDescriptionStrategyFragment {
     @Override
-    public Iterable<AbstractRule> getExportedRulesFromGrammar() {
+    public List<AbstractRule> getExportedRulesFromGrammar() {
       return super.getExportedRulesFromGrammar();
     }
     
@@ -51,8 +51,8 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder.append("Rule: name=ID;");
     _builder.newLine();
     final ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment fragment = this.<ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment>initializeFragmentWithGrammarFromString(ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment.class, _builder.toString());
-    final Iterable<AbstractRule> exportedRules = fragment.getExportedRulesFromGrammar();
-    Assert.assertTrue(IterableExtensions.isEmpty(exportedRules));
+    final List<AbstractRule> exportedRules = fragment.getExportedRulesFromGrammar();
+    Assert.assertTrue(exportedRules.isEmpty());
     Assert.assertFalse(fragment.shouldGenerate(exportedRules));
   }
   
@@ -69,13 +69,16 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder.newLine();
     _builder.append("Rule: name=ID;");
     _builder.newLine();
+    _builder.append("@Exported");
+    _builder.newLine();
+    _builder.append("Foo returns Rule: name=ID;");
+    _builder.newLine();
     final ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment fragment = this.<ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment>initializeFragmentWithGrammarFromString(ResourceDescriptionStrategyFragmentTests.TestableResourceDescriptionStrategyFragment.class, _builder.toString());
-    final Iterable<AbstractRule> exportedRules = fragment.getExportedRulesFromGrammar();
-    Assert.assertFalse(IterableExtensions.isEmpty(exportedRules));
+    final List<AbstractRule> exportedRules = fragment.getExportedRulesFromGrammar();
+    Assert.assertFalse(exportedRules.isEmpty());
+    Assert.assertEquals(1, exportedRules.size());
     Assert.assertTrue(fragment.shouldGenerate(exportedRules));
     final StringConcatenationClient result = fragment.generateSuperResourceDescriptionStrategyContent(exportedRules);
-    final StringConcatenation stringConcat = new StringConcatenation("\n");
-    stringConcat.append(result);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {");
     _builder_1.newLine();
@@ -99,7 +102,7 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {");
+    _builder_1.append("protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("return super.createEObjectDescriptions(eObject, acceptor);");
@@ -109,6 +112,6 @@ public class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorF
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Assert.assertEquals(_builder_1.toString(), stringConcat.toString());
+    Assert.assertEquals(_builder_1.toString(), this.concatenationClientToString(result));
   }
 }

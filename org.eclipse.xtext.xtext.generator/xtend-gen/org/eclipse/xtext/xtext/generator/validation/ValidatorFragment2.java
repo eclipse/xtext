@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -364,7 +365,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          Iterable<AbstractRule> _deprecatedRulesFromGrammar = ValidatorFragment2.this.getDeprecatedRulesFromGrammar();
+          List<AbstractRule> _deprecatedRulesFromGrammar = ValidatorFragment2.this.getDeprecatedRulesFromGrammar();
           for(final AbstractRule deprecatedRule : _deprecatedRulesFromGrammar) {
             EClassifier _classifier = deprecatedRule.getType().getClassifier();
             ResourceSet _resourceSet = ValidatorFragment2.this.getGrammar().eResource().getResourceSet();
@@ -514,11 +515,16 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   /**
    * @since 2.14
    */
-  protected Iterable<AbstractRule> getDeprecatedRulesFromGrammar() {
-    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
-      return Boolean.valueOf(this.isDeprecated(it));
-    };
-    return IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function);
+  protected List<AbstractRule> getDeprecatedRulesFromGrammar() {
+    List<AbstractRule> _xblockexpression = null;
+    {
+      final HashSet<EClassifier> alreadyCollected = CollectionLiterals.<EClassifier>newHashSet();
+      final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+        return Boolean.valueOf((this.isDeprecated(it) && alreadyCollected.add(it.getType().getClassifier())));
+      };
+      _xblockexpression = IterableExtensions.<AbstractRule>toList(IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function));
+    }
+    return _xblockexpression;
   }
   
   /**

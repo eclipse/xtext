@@ -52,6 +52,8 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			Model: rules+=Rule;
 			@Deprecated
 			Rule: name=ID;
+			@Deprecated
+			CustomRule returns Rule: name=ID;
 		''')
 
 		

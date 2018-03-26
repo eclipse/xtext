@@ -215,7 +215,8 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	 * @since 2.14
 	 */
 	protected def getDeprecatedRulesFromGrammar() {
-		return grammar.rules.filter[isDeprecated]
+		val alreadyCollected = newHashSet
+		grammar.rules.filter[isDeprecated && alreadyCollected.add(it.type.classifier)].toList
 	}
 	
 	/**

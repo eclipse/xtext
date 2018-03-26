@@ -116,7 +116,8 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	}
 	
 	def String concatenationClientToString(StringConcatenationClient client) {
-		val stringConcat = new StringConcatenation("\n")
+		val config = get(CodeConfig)
+		val stringConcat = new StringConcatenation(config.lineDelimiter)
 		stringConcat.append(client)
 		return stringConcat.toString
 	}

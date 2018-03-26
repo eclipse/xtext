@@ -54,14 +54,15 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 			Model: rules+=Rule;
 			@Exported
 			Rule: name=ID;
+			@Exported
+			Foo returns Rule: name=ID;
 		''')
 
 		val exportedRules = fragment.getExportedRulesFromGrammar
 		assertFalse(exportedRules.empty)
+		assertEquals(1, exportedRules.size)
 		assertTrue(fragment.shouldGenerate(exportedRules))
 		val result = fragment.generateSuperResourceDescriptionStrategyContent(exportedRules)
-		val stringConcat = new StringConcatenation("\n")
-		stringConcat.append(result)
 		assertEquals('''
 			public class FooDefaultResourceDescriptionStrategy extends org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy {
 				public boolean createEObjectDescriptions(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
@@ -71,11 +72,11 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 					return true;
 				}
 			
-				protected boolean createEObjectDescriptionsForRule(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+				protected boolean createEObjectDescriptionsForRule(interface org.eclipse.emf.ecore.EObject eObject, interface org.eclipse.xtext.util.IAcceptor<interface org.eclipse.xtext.resource.IEObjectDescription> acceptor) {
 					return super.createEObjectDescriptions(eObject, acceptor);
 				}
 			}
-		'''.toString, stringConcat.toString)
+		'''.toString, result.concatenationClientToString)
 	}
 
 }
