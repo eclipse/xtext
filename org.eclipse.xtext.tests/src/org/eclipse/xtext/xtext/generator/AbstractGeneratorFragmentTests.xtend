@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.EcoreUtil2
@@ -27,6 +25,8 @@ import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.GlobalRegistries
+import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento
 import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.util.internal.Log
@@ -36,19 +36,27 @@ import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
+import org.junit.After
+import org.junit.Before
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
 abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	
+	GlobalStateMemento globalStateMemento;
+	
+	@Before
 	override setUp() {
+		globalStateMemento = globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
 		super.setUp();
 		with(XtextStandaloneSetup)
 	}
 	
-	override tearDown() throws Exception {
+	@After
+	override tearDown() {
 		super.tearDown()
+		globalStateMemento.restoreGlobalState();
 	}
 
 	static class FragmentGeneratorModule extends DefaultGeneratorModule {
@@ -140,7 +148,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		// The following GenModels are handled by the EMF generator as implemented in
 		// org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl.findGenPackage(EPackage)
 		result.remove(EcorePackage.eINSTANCE)
-		result.remove(XMLTypePackage.eINSTANCE)
+		//result.remove(XMLTypePackage.eINSTANCE)
 		//result.remove(XMLNamespacePackage.eINSTANCE)
 		return result
 	}
