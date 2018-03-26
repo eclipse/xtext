@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
-import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 import org.junit.Test
 
 /**

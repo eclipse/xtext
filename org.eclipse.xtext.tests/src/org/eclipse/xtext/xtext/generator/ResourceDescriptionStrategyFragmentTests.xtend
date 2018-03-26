@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.junit.Test
 
 /**

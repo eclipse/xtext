@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.XtextStandaloneSetup
