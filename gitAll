@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# the rev trick obfuscates the code but seems to be a good way to replace only the last match with sed
-cat <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/allerbmu-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/espilce-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/nevam-txetx/' | rev) <(cat locations.properties) | cut -d "=" -f2- | while read -r line
-do
-	directory=$(echo $line | tr -d '\r')
-	echo "Processing $directory"
-	pushd $directory &> /dev/null && git "$@"
-	popd &> /dev/null
-	echo
-done 
+if [[ $# -eq 0 ]]; then
+    echo "usage: "$0" <git-command>"
+    exit 1
+fi
 
+directories=$(./allDirectories)
+for directory in $directories
+do
+    echo "Processing $directory"
+    pushd $directory &> /dev/null && git "$@"
+    popd &> /dev/null
+    echo
+done

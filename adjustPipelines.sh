@@ -1,10 +1,5 @@
 #!/bin/bash
 
-allDirectories() {
-	# the rev trick obvuscates the code but seems to be a good way to replace only the last match with sed
-	cat <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/allerbmu-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/espilce-txetx/' | rev) <(cat locations.properties | head -n 1 | rev | sed 's/[^/]*-txetx/nevam-txetx/' | rev) <(cat locations.properties) | cut -d "=" -f2-
-}
-
 toDir() {
 	echo $1 | tr -d '\r'
 }
@@ -37,7 +32,7 @@ dropDir() {
 	popd > /dev/null
 }
 
-allDirectories | while read -r line
+./allDirectories | while read -r line
 do
 	directory=$(toDir $line)
 	upstream=$(echo $directory/gradle/upstream-repositories.gradle)
@@ -48,7 +43,7 @@ do
 		then
 			echo "Redirecting maven repositories in $upstream to $branchname"
 			dropDir
-			allDirectories | while read -r repo
+			./allDirectories | while read -r repo
 			do
 				repository=$(toDir $repo)
 				if [[ $directory != $repository ]]
@@ -74,7 +69,7 @@ do
 		then
 			echo "Redirecting target platforms in $targets to $branchname"
 			dropDir
-			allDirectories | while read -r repo
+			./allDirectories | while read -r repo
 			do
 				repository=$(toDir $repo)
 				if [[ $directory != $repository ]]
@@ -101,7 +96,7 @@ do
 			find $directory -name pom.xml -type f -path '*.maven.parent/*' -print | while read -r pom
 			do
 				echo "Redirecting parent pom.xml files in $pom to $branchname"
-				allDirectories | while read -r repo
+				./allDirectories | while read -r repo
 				do
 					repository=$(toDir $repo)
 					if [[ $directory != $repository ]]
