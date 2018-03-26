@@ -210,14 +210,6 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected final XtextResource getResourceFromStringAndExpect(String model, int errors) throws Exception {
 		return getResourceAndExpect(getAsStream(model), errors);
 	}
-	
-	protected final XtextResource getResourceFromString(String model, String uri, XtextResourceSet rs) throws Exception {
-		return getResource(getAsStream(model), URI.createURI(uri), rs);
-	}
-	
-	protected final XtextResource getResourceFromString(String model, URI uri, XtextResourceSet rs) throws Exception {
-		return getResource(getAsStream(model), uri, rs);
-	}
 
 	public final XtextResource getResource(InputStream in) throws Exception {
 		return getResource(in, URI.createURI("mytestmodel."+getCurrentFileExtension()));
@@ -253,12 +245,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	}
 
 	public final XtextResource getResource(InputStream in, URI uri) throws Exception {
-		XtextResourceSet rs = get(XtextResourceSet.class);
-		return getResourceAndExpect(in, uri, 0, rs);
-	}
-	
-	public final XtextResource getResource(InputStream in, URI uri, XtextResourceSet rs) throws Exception {
-		return getResourceAndExpect(in, uri, 0, rs);
+		return getResourceAndExpect(in, uri, 0);
 	}
 	
 	public final XtextResource getResource(String contents, String uri) throws Exception {
@@ -266,12 +253,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	}
 	
 	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors) throws Exception {
-		XtextResourceSet rs = get(XtextResourceSet.class);
-		return getResourceAndExpect(in, uri, expectedErrors, rs);
-	}
-	
-	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors, XtextResourceSet rs) throws Exception {
-		XtextResource resource = doGetResource(in, uri, rs);
+		XtextResource resource = doGetResource(in, uri);
 		checkNodeModel(resource);
 		if (expectedErrors != UNKNOWN_EXPECTATION) {
 			if (expectedErrors == EXPECT_ERRORS)
@@ -309,13 +291,9 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	protected Object getClasspathURIContext() {
 		return getClass();
 	}
-	
+
 	protected XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
-		return doGetResource(in, uri, rs);
-	}
-	
-	protected XtextResource doGetResource(InputStream in, URI uri, XtextResourceSet rs) throws Exception {
 		rs.setClasspathURIContext(getClasspathURIContext());
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
 		rs.getResources().add(resource);

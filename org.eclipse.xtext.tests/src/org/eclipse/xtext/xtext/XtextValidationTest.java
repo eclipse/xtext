@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import static com.google.common.collect.Maps.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -51,6 +53,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -2157,6 +2160,19 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		assertNull(lastMessage);
 		lastMessage = message;
+	}
+	
+	protected XtextResource getResourceFromString(String model, String uriString, XtextResourceSet rs) throws IOException {
+		rs.setClasspathURIContext(getClasspathURIContext());
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI(uriString));
+		rs.getResources().add(resource);
+		resource.load(getAsStream(model), null);
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		} else {
+			EcoreUtil.resolveAll(resource);
+		}
+		return resource;
 	}
 
 }

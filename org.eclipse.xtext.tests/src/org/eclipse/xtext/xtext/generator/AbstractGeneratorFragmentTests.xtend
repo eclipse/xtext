@@ -124,7 +124,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		val stringConcat = new StringConcatenation(config.lineDelimiter)
 		stringConcat.append(client)
 		return stringConcat.toString
-	}
+	}	
 	
 	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		val rs = get(XtextResourceSet);
