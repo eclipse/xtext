@@ -14,6 +14,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -125,7 +126,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		result.removeAll(packs)
 		// The following GenModels are handled by the EMF generator as implemented in
 		// org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl.findGenPackage(EPackage)
-		//result.remove(EcorePackage.eINSTANCE)
+		result.remove(EcorePackage.eINSTANCE)
 		//result.remove(XMLTypePackage.eINSTANCE)
 		//result.remove(XMLNamespacePackage.eINSTANCE)
 		return result
