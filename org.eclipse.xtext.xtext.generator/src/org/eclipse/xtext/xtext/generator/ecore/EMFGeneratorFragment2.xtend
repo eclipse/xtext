@@ -539,8 +539,10 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		new GenModelHelper().registerGenModel(genModel)
 		return genModel
 	}
-	
-	private def void reconcileMissingGenPackagesInUsedModels(List<GenPackage> usedGenPackages) {
+	/**
+	 * @since 2.14
+	 */
+	protected def void reconcileMissingGenPackagesInUsedModels(List<GenPackage> usedGenPackages) {
 		val processedModels = Sets.newHashSetWithExpectedSize(usedGenPackages.size)
 		for (usedGenPackage : usedGenPackages) {
 			val genModel = usedGenPackage.genModel

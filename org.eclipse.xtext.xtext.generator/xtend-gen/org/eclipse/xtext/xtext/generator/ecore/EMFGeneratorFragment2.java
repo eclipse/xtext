@@ -797,7 +797,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     return genModel;
   }
   
-  private void reconcileMissingGenPackagesInUsedModels(final List<GenPackage> usedGenPackages) {
+  /**
+   * @since 2.14
+   */
+  protected void reconcileMissingGenPackagesInUsedModels(final List<GenPackage> usedGenPackages) {
     final HashSet<GenModel> processedModels = Sets.<GenModel>newHashSetWithExpectedSize(usedGenPackages.size());
     for (final GenPackage usedGenPackage : usedGenPackages) {
       {
