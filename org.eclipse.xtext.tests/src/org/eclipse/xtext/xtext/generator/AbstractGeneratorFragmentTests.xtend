@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.EcoreUtil2
@@ -38,6 +40,7 @@ import org.eclipse.xtext.xtext.generator.model.project.RuntimeProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig
 import org.junit.After
 import org.junit.Before
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -50,6 +53,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	override setUp() {
 		globalStateMemento = globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
 		super.setUp();
+		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
 		with(XtextStandaloneSetup)
 	}
 	
@@ -112,46 +116,15 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	static class FakeEMFGeneratorFragment2 extends EMFGeneratorFragment2 {
 	
 		// To access the method
+		
 		override protected getSaveAndReconcileGenModel(Grammar grammar, List<EPackage> packs, ResourceSet rs) {
-			val genModel = getGenModel(rs, grammar)
-			genModel.initialize(packs)
-			for (genPackage : genModel.getGenPackages) {
-				genPackage.basePackage = grammar.basePackage
-				if (!language.fileExtensions.isEmpty && packs.contains(genPackage.getEcorePackage))
-					genPackage.fileExtensions = language.fileExtensions.join(',')
-			}
-			val referencedEPackages = getReferencedEPackages(packs)
-			val usedGenPackages = getGenPackagesForPackages(genModel, referencedEPackages)
-			reconcileMissingGenPackagesInUsedModels(usedGenPackages)
-			genModel.usedGenPackages.addAll(usedGenPackages)
-			return genModel
+			super.getSaveAndReconcileGenModel(grammar, packs, rs)
 		}
 		
-		override Set<EPackage> getReferencedEPackages(List<EPackage> packs) {
-		val result = newHashSet
-		for (pkg : packs) {
-			val iterator = pkg.eAllContents
-			while (iterator.hasNext) {
-				val obj = iterator.next
-				for (crossRef : obj.eCrossReferences) {
-					if (crossRef.eIsProxy)
-						LOG.error("Proxy '" + (crossRef as InternalEObject).eProxyURI + "' could not be resolved")
-					else {
-						val p = EcoreUtil2.getContainerOfType(crossRef, EPackage)
-						if (p !== null)
-							result.add(p)
-					}
-				}
-			}
+		override protected saveResource(Resource resource) {
+			// Don't save.
 		}
-		result.removeAll(packs)
-		// The following GenModels are handled by the EMF generator as implemented in
-		// org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl.findGenPackage(EPackage)
-		result.remove(EcorePackage.eINSTANCE)
-		//result.remove(XMLTypePackage.eINSTANCE)
-		//result.remove(XMLNamespacePackage.eINSTANCE)
-		return result
-	}
+		
 	}
 	
 	def <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(Class<T> fragmentClass, String grammarString){
