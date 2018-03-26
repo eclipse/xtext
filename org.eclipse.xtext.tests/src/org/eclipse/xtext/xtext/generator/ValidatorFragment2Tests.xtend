@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -27,7 +28,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 		}
 		
 	}
-
+	@Ignore
 	@Test
 	def testGenerateNothing() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
@@ -41,7 +42,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 		val generatedString = fragment.generateValidationToDeprecateRules.concatenationClientToString
 		assertTrue(generatedString.length === 0)
 	}
-
+	@Ignore
 	@Test
 	def testGenerate() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''
@@ -64,7 +65,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 		}
 		'''.toString, fragment.generateValidationToDeprecateRules.concatenationClientToString)
 	}
-	
+	@Ignore
 	@Test
 	def testGenerate_NoValidation() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableValidatorFragment2, '''

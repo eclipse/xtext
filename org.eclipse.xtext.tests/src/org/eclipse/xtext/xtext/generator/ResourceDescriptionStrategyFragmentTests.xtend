@@ -11,6 +11,7 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.junit.Test
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.junit.Ignore
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -37,7 +38,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		}
 		
 	}
-
+	@Ignore
 	@Test
 	def testGenerateNothing() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
@@ -50,7 +51,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		assertTrue(exportedRules.empty)
 		assertFalse(fragment.shouldGenerateArtefacts(exportedRules))
 	}
-	
+	@Ignore
 	@Test
 	def testGenerateNothing_1() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment,'''
@@ -65,7 +66,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 		assertFalse(exportedRules.empty)
 		assertFalse(fragment.shouldGenerateArtefacts(exportedRules))
 	}
-
+	@Ignore
 	@Test
 	def testGenerate() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
@@ -98,7 +99,7 @@ class ResourceDescriptionStrategyFragmentTests extends AbstractGeneratorFragment
 			}
 		'''.toString, result.concatenationClientToString)
 	}
-	
+	@Ignore
 	@Test
 	def testGenerate_NoStubs() {
 		val fragment = initializeFragmentWithGrammarFromString(TestableResourceDescriptionStrategyFragment, '''
