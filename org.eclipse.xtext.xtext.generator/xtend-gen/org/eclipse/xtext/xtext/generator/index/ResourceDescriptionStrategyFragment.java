@@ -21,6 +21,7 @@ import org.eclipse.xtext.Annotation;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -35,10 +36,19 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 /**
+ * By default the @link DefaultResourceDescriptionStrategy exposes all model element that have a name.
+ * That means a given ParserRule with a corresponding model type with a name gets stored to the index by default.
+ * Normally one would bind a custom impl of @link IDefaultResourceDescriptionStrategy to filter.
+ * By using this fragment and @Exported on a AbstractRule in the Xtext grammar the corresponding model element gets explicitly visible
+ * stored to the index and all others don't.
+ * 
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
+  /**
+   * if this flag is set to false nothing get's generated or bound
+   */
   @Accessors
   private boolean generate = true;
   

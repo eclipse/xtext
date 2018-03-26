@@ -47,6 +47,11 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
+/**
+ * By using this fragment validation gets enabled.
+ * By using @Deprecated in the grammar on a ParserRule a validation gets generated that raises an issue for that.
+ * In this way model evolution becomes possible.
+ */
 @SuppressWarnings("all")
 public class ValidatorFragment2 extends AbstractInheritingFragment {
   @Inject

@@ -25,12 +25,22 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 
 /**
+ * By default the @link DefaultResourceDescriptionStrategy exposes all model element that have a name.
+ * That means a given ParserRule with a corresponding model type with a name gets stored to the index by default.
+ * Normally one would bind a custom impl of @link IDefaultResourceDescriptionStrategy to filter.
+ * By using this fragment and @Exported on a AbstractRule in the Xtext grammar the corresponding model element gets explicitly visible
+ * stored to the index and all others don't.
+ * 
  * @author Holger Schill - Initial contribution and API
  */
 class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
 	
+	/**
+	 * if this flag is set to false nothing get's generated or bound
+	 */
 	@Accessors
 	boolean generate = true;
 	
