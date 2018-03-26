@@ -202,7 +202,7 @@ public class XtextContentAssistTest extends AbstractXtextTests implements Resour
     @Test public void testCompleteAfterGrammarName_02() throws Exception {
     	newBuilder()
         .append("grammar org.foo.bar ")
-        .assertText("with", "Name", "enum", "terminal", "fragment", "hidden", "generate", "import", "@", "@Override");
+        .assertText("with", "Name", "enum", "terminal", "fragment", "hidden", "generate", "import", "@", "@Override", "@Deprecated", "@Exported", "@Final");
     }
     
     @Test public void testCompleteAfterGenerateName_01() throws Exception {
