@@ -797,7 +797,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     return genModel;
   }
   
-  private void reconcileMissingGenPackagesInUsedModels(final List<GenPackage> usedGenPackages) {
+  /**
+   * @since 2.14
+   */
+  protected void reconcileMissingGenPackagesInUsedModels(final List<GenPackage> usedGenPackages) {
     final HashSet<GenModel> processedModels = Sets.<GenModel>newHashSetWithExpectedSize(usedGenPackages.size());
     for (final GenPackage usedGenPackage : usedGenPackages) {
       {
@@ -942,7 +945,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     return result;
   }
   
-  private void saveResource(final Resource resource) {
+  /**
+   * @since 2.14
+   */
+  protected void saveResource(final Resource resource) {
     try {
       final HashMap<String, Object> saveOptions = CollectionLiterals.<String, Object>newHashMap();
       saveOptions.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.AbsoluteCrossBundleAware() {

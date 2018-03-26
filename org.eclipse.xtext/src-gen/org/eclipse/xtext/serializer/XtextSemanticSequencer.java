@@ -1012,7 +1012,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
-	 *         annotations+=Annotation? 
+	 *         annotations+=Annotation* 
 	 *         fragment?='fragment'? 
 	 *         name=ValidID 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 
@@ -1170,7 +1170,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     TerminalRule returns TerminalRule
 	 *
 	 * Constraint:
-	 *     (annotations+=Annotation? ((fragment?='fragment' name=ValidID) | (name=ValidID type=TypeRef?)) alternatives=TerminalAlternatives)
+	 *     (annotations+=Annotation* ((fragment?='fragment' name=ValidID) | (name=ValidID type=TypeRef?)) alternatives=TerminalAlternatives)
 	 */
 	protected void sequence_TerminalRule(ISerializationContext context, TerminalRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

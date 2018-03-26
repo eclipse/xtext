@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment;
 import org.eclipse.xtext.xtext.generator.junit.Junit4Fragment2;
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2;
@@ -67,6 +68,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
  * to enable stub generation for the formatter.</p>
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  * @noextend This class should not be extended by clients.
  */
 @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
@@ -86,6 +88,11 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   private ValidatorFragment2 validator = new ValidatorFragment2();
   
   private ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2();
+  
+  /**
+   * @since 2.14
+   */
+  private ResourceDescriptionStrategyFragment resourceDescriptionStrategy = new ResourceDescriptionStrategyFragment();
   
   private QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2();
   
@@ -191,6 +198,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.parserGenerator);
       this.operator_add(fragments, this.validator);
       this.operator_add(fragments, this.scopeProvider);
+      this.operator_add(fragments, this.resourceDescriptionStrategy);
       this.operator_add(fragments, this.qualifiedNamesProvider);
       this.operator_add(fragments, this.builder);
       this.operator_add(fragments, this.generator);
@@ -286,6 +294,15 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setScopeProvider(final ImportNamespacesScopingFragment2 scopeProvider) {
     this.scopeProvider = scopeProvider;
+  }
+  
+  @Pure
+  protected ResourceDescriptionStrategyFragment getResourceDescriptionStrategy() {
+    return this.resourceDescriptionStrategy;
+  }
+  
+  public void setResourceDescriptionStrategy(final ResourceDescriptionStrategyFragment resourceDescriptionStrategy) {
+    this.resourceDescriptionStrategy = resourceDescriptionStrategy;
   }
   
   @Pure
