@@ -8,6 +8,7 @@ fi
 directories=$(./allDirectories)
 for directory in $directories
 do
+    directory=$(echo $directory | tr -d '\r')
     echo "Processing $directory"
     pushd $directory &> /dev/null && git "$@"
     popd &> /dev/null
