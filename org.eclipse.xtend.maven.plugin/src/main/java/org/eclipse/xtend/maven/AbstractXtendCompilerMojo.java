@@ -138,7 +138,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		Iterable<String> filtered = filter(sourcePaths, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
 			String dir = Iterables.toString(sourcePaths);
-			log.info("skip compiling sources because the configured directory '" + dir + "' does not exists.");
+			log.info("skip compiling sources because the configured directory '" + dir + "' does not exist.");
 			return;
 		}
 		String baseDir = project.getBasedir().getAbsolutePath();
