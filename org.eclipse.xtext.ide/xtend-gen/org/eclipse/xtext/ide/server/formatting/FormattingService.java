@@ -19,6 +19,7 @@ import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.FormattingOptions;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -37,7 +38,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -64,6 +64,7 @@ public class FormattingService {
                 result = Boolean.TRUE;
               } catch (final Throwable _t) {
                 if (_t instanceof NoSuchMethodException) {
+                  final NoSuchMethodException noSuchMethodException = (NoSuchMethodException)_t;
                 } else {
                   throw Exceptions.sneakyThrow(_t);
                 }
@@ -73,6 +74,7 @@ public class FormattingService {
           }
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
+            final Exception exception = (Exception)_t;
             result = Boolean.TRUE;
           } else {
             throw Exceptions.sneakyThrow(_t);
@@ -92,6 +94,9 @@ public class FormattingService {
   
   @Inject
   private TextRegionAccessBuilder regionBuilder;
+  
+  @Inject
+  private IIndentationInformation indentationInformation;
   
   public List<? extends TextEdit> format(final Document document, final XtextResource resource, final DocumentFormattingParams params, final CancelIndicator cancelIndicator) {
     final int offset = 0;
@@ -129,7 +134,7 @@ public class FormattingService {
    * @since 2.14
    */
   public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length, final FormattingOptions options) {
-    String indent = "\t";
+    String indent = this.indentationInformation.getIndentString();
     if ((options != null)) {
       boolean _isInsertSpaces = options.isInsertSpaces();
       if (_isInsertSpaces) {
@@ -137,10 +142,10 @@ public class FormattingService {
       }
     }
     if ((this.formatter2Provider != null)) {
+      final MapBasedPreferenceValues preferences = new MapBasedPreferenceValues();
+      preferences.put("indentation", indent);
       TextRegion _textRegion = new TextRegion(offset, length);
-      Pair<String, String> _mappedTo = Pair.<String, String>of("indentation", indent);
-      MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
-      final List<ITextReplacement> replacements = this.format2(resource, _textRegion, _mapBasedPreferenceValues);
+      final List<ITextReplacement> replacements = this.format2(resource, _textRegion, preferences);
       final Function1<ITextReplacement, TextEdit> _function = (ITextReplacement r) -> {
         return this.toTextEdit(document, r.getReplacementText(), r.getOffset(), r.getLength());
       };
