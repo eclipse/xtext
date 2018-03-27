@@ -195,7 +195,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       final URI synthUri = URI.createURI(("synth:///file." + ext));
       return this.languagesRegistry.getResourceServiceProvider(synthUri);
     };
-    return ListExtensions.<String, IResourceServiceProvider>map(IterableExtensions.<String>sort(IterableExtensions.<String>toList(this.languagesRegistry.getExtensionToFactoryMap().keySet())), _function);
+    return IterableExtensions.<IResourceServiceProvider>toSet(ListExtensions.<String, IResourceServiceProvider>map(IterableExtensions.<String>sort(IterableExtensions.<String>toList(this.languagesRegistry.getExtensionToFactoryMap().keySet())), _function));
   }
   
   @Override

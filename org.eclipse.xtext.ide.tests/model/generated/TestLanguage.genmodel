@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="TestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="TestLanguage" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
-      disposableProviderFactory="true" fileExtensions="testlang" ecorePackage="TestLanguage.ecore#/">
+      disposableProviderFactory="true" fileExtensions="testlang,testlangext" ecorePackage="TestLanguage.ecore#/">
     <genClasses ecoreClass="TestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Model/types"/>
     </genClasses>
