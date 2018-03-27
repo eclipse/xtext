@@ -17,51 +17,62 @@ import java.util.List;
  * @since 2.9
  */
 public enum JavaVersion {
-
+	
 	/**
 	 * Java 5 language enhancements: generics, simplified for-loop, autoboxing and unboxing, enums, varargs, static
 	 * import, annotations.
 	 */
-	JAVA5("Java 5", new String[] {"1.5"}, "J2SE-1.5", "-1.5"),
+	JAVA5("Java 5", new String[] {"1.5"}, "J2SE-1.5", "-1.5", Constants.JAVA5),
 
 	/**
 	 * Java 6 language enhancements: Override annotations for implemented methods.
 	 */
-	JAVA6("Java 6", new String[] {"1.6", "6"}, "JavaSE-1.6", "-1.6"),
+	JAVA6("Java 6", new String[] {"1.6", "6"}, "JavaSE-1.6", "-1.6", Constants.JAVA6),
 
 	/**
 	 * Java 7 language enhancements: extended numeric literals, switch over strings, type inference, try-with-resources,
 	 * catch multiple exceptions.
 	 */
-	JAVA7("Java 7", new String[] {"1.7", "7"}, "JavaSE-1.7", "-1.7"),
+	JAVA7("Java 7", new String[] {"1.7", "7"}, "JavaSE-1.7", "-1.7", Constants.JAVA7),
 
 	/**
 	 * Java 8 language enhancements: lambda expressions, better type inference, more flexible annotations.
 	 */
-	JAVA8("Java 8", new String[] {"1.8", "8"}, "JavaSE-1.8", "-1.8"),
+	JAVA8("Java 8", new String[] {"1.8", "8"}, "JavaSE-1.8", "-1.8", Constants.JAVA8),
 
 	/**
 	 * Java 9 language enhancements: mainly modules and a different version scheme (9 is favored over 1.9).
 	 */
-	JAVA9("Java 9", new String[] {"9", "1.9"}, "JavaSE-9", "-1.9")
+	JAVA9("Java 9", new String[] {"9", "1.9"}, "JavaSE-9", "-1.9", Constants.JAVA9)
 	;
 
+	private static final class Constants {
+		private static final int MAJOR_VERSION_1_5 = 49;
+		private static final int MINOR_VERSION_0 = 0;
+		private static final long JAVA5 = ((long)MAJOR_VERSION_1_5 << 16) + MINOR_VERSION_0;
+		private static final long JAVA6 = ((long)(MAJOR_VERSION_1_5 + 1) << 16) + MINOR_VERSION_0;
+		private static final long JAVA7 = ((long)(MAJOR_VERSION_1_5 + 2) << 16) + MINOR_VERSION_0;
+		private static final long JAVA8 = ((long)(MAJOR_VERSION_1_5 + 3) << 16) + MINOR_VERSION_0;
+		private static final long JAVA9 = ((long)(MAJOR_VERSION_1_5 + 4) << 16) + MINOR_VERSION_0;
+	}
+
 	//	 if you introduce a new JavaVersion don't forget to adapt
-	//	 - org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler.toClassFmt(JavaVersion)
-	//	 - org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.toClassFmt(JavaVersion)
-	//	 - org.eclipse.xtext.java.resource.JavaDerivedStateComputer.toJdtVersion(JavaVersion)
+	//	 - JavaVersionTest
+	//	 - JavaVersionExtendedTest
 	//	 - org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider.getTargetJavaVersion(XbaseGeneratorConfigurationState, Module)
 
 	private final String label;
 	private final String[] qualifiers;
 	private final String bree;
-	private String complianceLevelArg;
+	private final String complianceLevelArg;
+	private final long jdtClassFileConstant;
 
-	JavaVersion(String label, String[] qualifiers, String bree, String complianceLevelArg) {
+	JavaVersion(String label, String[] qualifiers, String bree, String complianceLevelArg, long jdtClassFileConstant) {
 		this.label = label;
 		this.qualifiers = qualifiers;
 		this.bree = bree;
 		this.complianceLevelArg = complianceLevelArg;
+		this.jdtClassFileConstant = jdtClassFileConstant;
 	}
 
 	public static JavaVersion fromQualifier(String qualifier) {
@@ -108,9 +119,16 @@ public enum JavaVersion {
 	public String getBree() {
 		return bree;
 	}
-	
+
 	public boolean isAtLeast(JavaVersion other) {
 		// This implementation relies on the correct order of declaration of the enum constants
 		return this.ordinal() >= other.ordinal();
+	}
+
+	/**
+	 * @since 2.14
+	 */
+	public long toJdtClassFileConstant() {
+		return jdtClassFileConstant;
 	}
 }
