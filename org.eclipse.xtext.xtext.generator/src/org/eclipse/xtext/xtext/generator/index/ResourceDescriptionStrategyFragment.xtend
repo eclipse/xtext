@@ -11,10 +11,10 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xtext.AnnotationNames
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
@@ -25,7 +25,6 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 
 /**
  * By default the @link DefaultResourceDescriptionStrategy exposes all model element that have a name.
