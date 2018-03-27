@@ -11,7 +11,6 @@ import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.parser.Parser
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
@@ -188,28 +187,7 @@ class JavaDerivedStateComputer {
     }
 
     protected def long toJdtVersion(JavaVersion version) {
-        switch (version) {
-            case JAVA5:
-                ClassFileConstants.JDK1_5
-            case JAVA6:
-                ClassFileConstants.JDK1_6
-            case JAVA7:
-                ClassFileConstants.JDK1_7
-            case JAVA8: {
-                try {
-                    ClassFileConstants.getField('JDK1_8').getLong(null)
-                } catch (NoSuchFieldException e) {
-                    ClassFileConstants.JDK1_7
-                }
-            }
-            case JAVA9: {
-                try {
-                    ClassFileConstants.getField('JDK9').getLong(null)
-                } catch (NoSuchFieldException e) {
-                    ClassFileConstants.JDK1_7
-                }
-            }
-        }
+        version.toJdtClassFileConstant
     }
 	
 	protected def ClassLoader getClassLoader(Resource it) {

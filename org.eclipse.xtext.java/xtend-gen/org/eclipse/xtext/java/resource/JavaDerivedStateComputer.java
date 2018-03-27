@@ -20,7 +20,6 @@ import org.eclipse.jdt.internal.compiler.ast.ImportReference;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeParameter;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.parser.Parser;
@@ -316,53 +315,7 @@ public class JavaDerivedStateComputer {
   }
   
   protected long toJdtVersion(final JavaVersion version) {
-    try {
-      long _switchResult = (long) 0;
-      if (version != null) {
-        switch (version) {
-          case JAVA5:
-            _switchResult = ClassFileConstants.JDK1_5;
-            break;
-          case JAVA6:
-            _switchResult = ClassFileConstants.JDK1_6;
-            break;
-          case JAVA7:
-            _switchResult = ClassFileConstants.JDK1_7;
-            break;
-          case JAVA8:
-            long _xtrycatchfinallyexpression = (long) 0;
-            try {
-              _xtrycatchfinallyexpression = ClassFileConstants.class.getField("JDK1_8").getLong(null);
-            } catch (final Throwable _t) {
-              if (_t instanceof NoSuchFieldException) {
-                _xtrycatchfinallyexpression = ClassFileConstants.JDK1_7;
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
-            }
-            _switchResult = _xtrycatchfinallyexpression;
-            break;
-          case JAVA9:
-            long _xtrycatchfinallyexpression_1 = (long) 0;
-            try {
-              _xtrycatchfinallyexpression_1 = ClassFileConstants.class.getField("JDK9").getLong(null);
-            } catch (final Throwable _t_1) {
-              if (_t_1 instanceof NoSuchFieldException) {
-                _xtrycatchfinallyexpression_1 = ClassFileConstants.JDK1_7;
-              } else {
-                throw Exceptions.sneakyThrow(_t_1);
-              }
-            }
-            _switchResult = _xtrycatchfinallyexpression_1;
-            break;
-          default:
-            break;
-        }
-      }
-      return _switchResult;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    return version.toJdtClassFileConstant();
   }
   
   protected ClassLoader getClassLoader(final Resource it) {
