@@ -29,7 +29,7 @@ public class EmptyBidiIterable<T> implements BidiIterable<T> {
 	
 	@Override
 	public BidiIterable<T> reverse() {
-		return null;
+		return instance();
 	}
 
 }
