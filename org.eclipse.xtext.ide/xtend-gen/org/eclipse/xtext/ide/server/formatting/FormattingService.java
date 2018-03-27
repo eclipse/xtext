@@ -64,7 +64,6 @@ public class FormattingService {
                 result = Boolean.TRUE;
               } catch (final Throwable _t) {
                 if (_t instanceof NoSuchMethodException) {
-                  final NoSuchMethodException noSuchMethodException = (NoSuchMethodException)_t;
                 } else {
                   throw Exceptions.sneakyThrow(_t);
                 }
@@ -74,7 +73,6 @@ public class FormattingService {
           }
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
-            final Exception exception = (Exception)_t;
             result = Boolean.TRUE;
           } else {
             throw Exceptions.sneakyThrow(_t);
