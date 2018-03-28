@@ -44,7 +44,7 @@ abstract class AbstractWebServerTest {
 		value.replace("\r\n","\n")
 	}
 
-	def public void assertEquals(CharSequence expected, CharSequence actual) {
+	def void assertEquals(CharSequence expected, CharSequence actual) {
 		Assert.assertEquals(expected.toString.normalizeLineSeparator, actual.toString.toString.normalizeLineSeparator)
 	}
 	

@@ -81,7 +81,7 @@ class XtextServiceDispatcher {
 		/**
 		 * The function for invoking the service.
 		 */
-		private ()=>IServiceResult service
+		()=>IServiceResult service
 		
 		/**
 		 * Whether the service has any side effects apart from initializing data in the session.
