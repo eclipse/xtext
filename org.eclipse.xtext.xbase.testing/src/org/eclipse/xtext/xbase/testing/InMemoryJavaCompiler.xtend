@@ -18,7 +18,6 @@ import org.eclipse.jdt.core.compiler.CategorizedProblem
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment
@@ -29,7 +28,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JavaVersion
-import org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler.Result
 
 /**
  * 
@@ -152,13 +150,7 @@ class InMemoryJavaCompiler {
 	}
 	
 	private def long toClassFmt(JavaVersion version) {
-		switch(version) {
-			case JAVA5: return ClassFileConstants.JDK1_5
-			case JAVA6: return ClassFileConstants.JDK1_6
-			case JAVA7: return ClassFileConstants.JDK1_7
-			case JAVA8: return ((ClassFileConstants.MAJOR_VERSION_1_7 + 1) << 16) + ClassFileConstants.MINOR_VERSION_0 // ClassFileConstants.JDK1_8
-			case JAVA9: return ((ClassFileConstants.MAJOR_VERSION_1_7 + 2) << 16) + ClassFileConstants.MINOR_VERSION_0 // ClassFileConstants.JDK1_9
-		}
+		return version.toJdtClassFileConstant
 	}
 	
 	/**
