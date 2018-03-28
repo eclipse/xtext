@@ -32,9 +32,9 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 	FileAccessFactory fileAccessFactory
 
 	@Accessors
-	private boolean generate = false;
+	boolean generate = false;
 	@Accessors
-	private boolean pluginProject = true;
+	boolean pluginProject = true;
 
 	override generate() {
 		if (!generate)

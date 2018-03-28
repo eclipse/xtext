@@ -11,7 +11,7 @@ class XtextLangGeneratorModule extends DefaultGeneratorModule {
 		return XtextLangGeneratorNaming
 	}
 	
-	public static class XtextLangGeneratorNaming extends XtextGeneratorNaming {
+	static class XtextLangGeneratorNaming extends XtextGeneratorNaming {
 		
 		override getGenericIdeBasePackage(Grammar grammar) {
 			if (isXtext(grammar)) {

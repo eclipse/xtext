@@ -178,7 +178,7 @@ class PortableURIs {
 	 * 
 	 * @see #getEObject(EObject,String)
 	 */
-	public def String getFragment(EObject fromContainer, EObject toChild) {
+	def String getFragment(EObject fromContainer, EObject toChild) {
 		if (fromContainer == toChild)
 			return null
 		var lastChild = toChild as InternalEObject
@@ -203,7 +203,7 @@ class PortableURIs {
 	 * 
 	 * @return the resolved EObject based. If the given fragment is <code>null</null>, the given EObject itself will be returned.
 	 */
-	public def EObject getEObject(EObject from, String toFragment) {
+	def EObject getEObject(EObject from, String toFragment) {
 		if (toFragment === null)
 			return from
 		val splitted = Splitter.on("/").split(toFragment)

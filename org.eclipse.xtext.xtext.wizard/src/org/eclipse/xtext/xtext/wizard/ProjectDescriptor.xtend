@@ -165,7 +165,7 @@ abstract class ProjectDescriptor {
 		new PomFile(this)
 	}
 
-	public def sourceFolder(Outlet outlet) {
+	def sourceFolder(Outlet outlet) {
 		config.sourceLayout.getPathFor(outlet);
 	}
 

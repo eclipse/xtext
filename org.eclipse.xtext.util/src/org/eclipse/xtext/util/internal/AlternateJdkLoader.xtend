@@ -14,7 +14,7 @@ import java.net.URLClassLoader
 import java.util.concurrent.ConcurrentMap
 
 class AlternateJdkLoader extends URLClassLoader {
-	private final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
+	final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
 
 	new(Iterable<File> files) {
 		super(files.map[toURI.toURL])

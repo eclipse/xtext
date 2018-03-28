@@ -12,8 +12,8 @@ package org.eclipse.xtext.generator.parser
  */
 class AntlrGrammarComparatorTestHelper {
 
-	private val AntlrGrammarComparator comparator = new AntlrGrammarComparator
-	private val TestErrorHandler errorHandler = new TestErrorHandler
+	val AntlrGrammarComparator comparator = new AntlrGrammarComparator
+	val TestErrorHandler errorHandler = new TestErrorHandler
 
 	def compare(CharSequence grammar, CharSequence grammarReference) {
 		comparator.compareGrammars(grammar, grammarReference, errorHandler);
@@ -49,8 +49,8 @@ class AntlrGrammarComparatorTestHelper {
 
 	static class ComparisonError extends AssertionError {
 		
-		private val int lineNoTestee 
-		private val int lineNoExpected
+		val int lineNoTestee
+		val int lineNoExpected
 		
 		new(String msg) {
 			super(msg)

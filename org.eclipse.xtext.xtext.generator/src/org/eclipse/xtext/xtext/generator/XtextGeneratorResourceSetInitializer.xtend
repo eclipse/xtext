@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EcorePackage
 @Log
 class XtextGeneratorResourceSetInitializer {
 	
-	public def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
+	def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
 		val delegate = new StandaloneSetup
 		delegate.resourceSet = resourceSet
 		resourceSet.packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE)

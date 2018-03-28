@@ -25,7 +25,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 @Beta
 class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
 	
-	public def boolean shouldUseProjectDescriptionBasedContainers(IResourceDescriptions resourceDescriptions) {
+	def boolean shouldUseProjectDescriptionBasedContainers(IResourceDescriptions resourceDescriptions) {
 		val chunkedResourceDescriptions = resourceDescriptions.chunkedResourceDescriptions
 		return chunkedResourceDescriptions !== null 
 			&& chunkedResourceDescriptions.resourceSet !== null

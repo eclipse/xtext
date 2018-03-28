@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
  */
 class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	
-	public static class Disabled extends CodetemplatesGeneratorFragment2 {
+	static class Disabled extends CodetemplatesGeneratorFragment2 {
 		
 		override void generate() {
 			// no nothing

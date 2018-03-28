@@ -176,7 +176,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	/**
 	 * Sets the target EMF runtime version to generate for to the specified value.
 	 */
-	public def void setEmfRuntimeVersion(String emfRuntimeVersion) {
+	def void setEmfRuntimeVersion(String emfRuntimeVersion) {
 		this.emfRuntimeVersion = GenRuntimeVersion.get(emfRuntimeVersion)
 		if (this.emfRuntimeVersion === null)
 			LOG.warn('Illegal EMF runtime version: ' + emfRuntimeVersion)
@@ -193,7 +193,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	 * </ul>
 	 * The default level is "JDK60".
 	 */
-	public def void setJdkLevel(String jdkLevel) {
+	def void setJdkLevel(String jdkLevel) {
 		this.jdkLevel = GenJDKLevel.getByName(jdkLevel)
 		if (this.jdkLevel === null)
 			LOG.warn('Illegal JDK level: ' + jdkLevel)
@@ -205,7 +205,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	 * If set generated {@link EPackage} and {@link EFactory} interfaces are bound to their <code>eINSTANCE</code> instance.
 	 * @since 2.11
 	 */
-	public def void setBindEPackageAndEFactory (boolean bindEPackageAndEFactory) {
+	def void setBindEPackageAndEFactory (boolean bindEPackageAndEFactory) {
 		this.bindEPackageAndEFactory = bindEPackageAndEFactory
 	}
 	
