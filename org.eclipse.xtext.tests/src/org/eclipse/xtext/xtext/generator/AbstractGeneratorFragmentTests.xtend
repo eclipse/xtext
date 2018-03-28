@@ -42,6 +42,7 @@ import org.junit.Before
 abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	
 	GlobalStateMemento globalStateMemento;
+	var static StandardLanguage lang
 	
 	@Before
 	override setUp() {
@@ -73,7 +74,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		}
 
 		override configureXtextProjectConfig(Binder binder) {
-			val lang = new StandardLanguage
+			lang = new StandardLanguage
 			lang.initialize(grammar)
 			binder.bind(IXtextGeneratorLanguage).toInstance(lang)
 		}
@@ -134,6 +135,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		emfGeneratorFragment.initialize(generatorInjector)
 		// Create GenModel out of generated EPackages
 		emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.generatedPackages, resource.resourceSet)
+		lang.resourceSet = resource.resourceSet
 		return generatorInjector.getInstance(fragmentClass);
 	}
 	
