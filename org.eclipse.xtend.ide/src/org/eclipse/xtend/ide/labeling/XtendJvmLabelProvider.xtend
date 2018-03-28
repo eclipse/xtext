@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.validation.UIStrings
  * 
  * @author Dennis Huebner
  */
-public class XtendJvmLabelProvider extends XbaseLabelProvider {
+class XtendJvmLabelProvider extends XbaseLabelProvider {
 
 	@Inject UIStrings uiStrings
 

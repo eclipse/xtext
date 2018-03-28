@@ -16,13 +16,13 @@ import org.junit.Test
 
 class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 	@Inject
-	private ParseHelper<XtendFile> parseHelper;
+	ParseHelper<XtendFile> parseHelper;
 	
 	@Inject
-	private WorkbenchTestHelper testHelper
+	WorkbenchTestHelper testHelper
 	
 	@Inject
-	private XbaseDeclarativeHoverSignatureProvider signatureProvider;
+	XbaseDeclarativeHoverSignatureProvider signatureProvider;
 	
 	@Test
 	def testGenerics_1(){

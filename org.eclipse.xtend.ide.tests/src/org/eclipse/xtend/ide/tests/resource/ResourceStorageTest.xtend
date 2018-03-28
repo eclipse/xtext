@@ -185,15 +185,15 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 
 	static class TestableStorageAwareTrace extends StorageAwareTrace {
 
-		override public setLocalStorage(IStorage derivedResource) {
+		override setLocalStorage(IStorage derivedResource) {
 			super.setLocalStorage(derivedResource)
 		}
 
-		override public resolvePath(IProject project, SourceRelativeURI path) {
+		override resolvePath(IProject project, SourceRelativeURI path) {
 			super.resolvePath(project, path)
 		}
 
-		override public resolvePath(SourceRelativeURI path) {
+		override resolvePath(SourceRelativeURI path) {
 			super.resolvePath(path)
 		}
 

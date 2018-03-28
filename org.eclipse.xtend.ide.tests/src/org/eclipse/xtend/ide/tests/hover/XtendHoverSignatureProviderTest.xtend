@@ -27,13 +27,13 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
-	private ParseHelper<XtendFile> parseHelper;
+	ParseHelper<XtendFile> parseHelper;
 	
 	@Inject
-	private WorkbenchTestHelper testHelper
+	WorkbenchTestHelper testHelper
 	
 	@Inject
-	private XtendHoverSignatureProvider signatureProvider
+	XtendHoverSignatureProvider signatureProvider
 	
 	@Test
 	def testSignatureForXtendClass(){

@@ -38,7 +38,7 @@ class ImportAwareActionTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	public def void testShouldAddImportsComment() {
+	def void testShouldAddImportsComment() {
 		assertTrue(wouldAddImport(
 			"|/*
 			 *
@@ -97,7 +97,7 @@ class ImportAwareActionTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	public def void testShouldAddImportsString() {
+	def void testShouldAddImportsString() {
 		assertFalse(wouldAddImport(
 			"class Simple {
 				String s2 = '|d'
@@ -121,7 +121,7 @@ class ImportAwareActionTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	public def void testShouldAddImportsRichString() {
+	def void testShouldAddImportsRichString() {
 		assertFalse(wouldAddImport(
 			"
 			class Simple {
@@ -175,7 +175,7 @@ class ImportAwareActionTest extends AbstractXtendUITestCase {
 			super(bundle, prefix, editor, operationCode)
 		}
 
-		override public shouldAddImports(IDocument document, int caretOffset) {
+		override shouldAddImports(IDocument document, int caretOffset) {
 			super.shouldAddImports(document, caretOffset)
 		}
 

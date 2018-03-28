@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.NullProgressMonitor
 class Bug493784Test extends AbstractXtendUITestCase {
 
 	@Inject
-	private WorkbenchTestHelper testHelper;
+	WorkbenchTestHelper testHelper;
 	
 	@Inject extension SyncUtil
 

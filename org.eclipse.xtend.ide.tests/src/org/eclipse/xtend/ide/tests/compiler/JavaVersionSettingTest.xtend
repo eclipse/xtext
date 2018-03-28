@@ -35,7 +35,7 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 class JavaVersionSettingTest extends Assert {
 	
 	@Inject 
-	private WorkbenchTestHelper workbenchTestHelper;
+	WorkbenchTestHelper workbenchTestHelper;
 	
 	@Before
 	def setUp() throws Exception {

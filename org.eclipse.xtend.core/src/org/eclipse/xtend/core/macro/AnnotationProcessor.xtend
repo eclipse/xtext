@@ -138,11 +138,11 @@ class AnnotationProcessor {
 	}
 	
 	@Singleton
-	public static class CancellationObserver {
-		private static final Logger log = Logger.getLogger(CancellationObserver)
+	static class CancellationObserver {
+		static final Logger log = Logger.getLogger(CancellationObserver)
 		
 		@Accessors(PROTECTED_GETTER)
-		private ExecutorService pool = initPool()
+		ExecutorService pool = initPool()
 		
 		protected def ExecutorService initPool() {
 			return Executors.newCachedThreadPool();

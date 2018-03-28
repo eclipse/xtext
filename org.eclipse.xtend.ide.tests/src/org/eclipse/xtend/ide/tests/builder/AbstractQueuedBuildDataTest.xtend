@@ -39,7 +39,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 	protected extension WorkbenchTestHelper testHelper
 	
 	@Inject
-	private IStorage2UriMapper mapper
+	IStorage2UriMapper mapper
 
 	@Inject
 	protected BuilderDeltaConverter converter;

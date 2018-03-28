@@ -26,9 +26,9 @@ import org.junit.Test
 /**
  * @author dhuebner - Initial contribution and API
  */
-public class JavaFileConverterTest extends AbstractXtendTestCase {
+class JavaFileConverterTest extends AbstractXtendTestCase {
 	@Inject
-	private Provider<JavaConverter> javaConverter;
+	Provider<JavaConverter> javaConverter;
 
 	String sourceProject
 	String targetProject

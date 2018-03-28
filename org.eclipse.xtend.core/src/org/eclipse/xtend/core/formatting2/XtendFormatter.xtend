@@ -41,7 +41,7 @@ import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 /**
  * @author Moritz Eysholdt - Initial implementation and API
  */
-public class XtendFormatter extends XbaseWithAnnotationsFormatter {
+class XtendFormatter extends XbaseWithAnnotationsFormatter {
 
 	@Inject extension XtendGrammarAccess
 	@Inject RichStringFormatter.Factory richStringFormatterFactory

@@ -28,7 +28,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities
 class Bug473833Test extends AbstractXtendUITestCase {
 	
 	@Inject 
-	private WorkbenchTestHelper workbenchTestHelper;
+	WorkbenchTestHelper workbenchTestHelper;
 	
 	@Before @After def void cleanUp() {
 		workbenchTestHelper.tearDown

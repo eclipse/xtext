@@ -60,7 +60,7 @@ class ActiveAnnotationContexts extends AdapterImpl {
 	
 	@Accessors val Map<JvmAnnotationType, ActiveAnnotationContext> contexts = newLinkedHashMap
 	protected CompilationUnitImpl compilationUnit
-	private boolean running
+	boolean running
 	
 	def void before(AnnotationCallback phase) {
 		compilationUnit.before(phase)

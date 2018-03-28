@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap
  */
 @Deprecated
 class BootClassLoader extends URLClassLoader {
-	private final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
+	final ConcurrentMap<String, Object> locks = Maps.newConcurrentMap;
 
 	new(URL[] urls) {
 		super(urls)

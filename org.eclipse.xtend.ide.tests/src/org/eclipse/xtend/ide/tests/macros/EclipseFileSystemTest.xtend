@@ -35,7 +35,7 @@ import static org.junit.Assert.*
 @InjectWith(XtendIDEInjectorProvider)
 class EclipseFileSystemTest extends JavaIoFileSystemTest {
 
-	private Set<String> knownProjects = newHashSet
+	Set<String> knownProjects = newHashSet
 	
 	@Inject IResourceSetProvider resourceSetProvider
 	

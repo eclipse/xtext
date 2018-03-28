@@ -25,7 +25,7 @@ class Declarators {
 	public static final TargetURIs.Key<DeclaratorsData> KEY = TargetURIs.Key.from("Xtend", DeclaratorsData)
 	
 	@Data
-	public static class DeclaratorsData {
+	static class DeclaratorsData {
 		Set<QualifiedName> declaratorNames
 	}
 	
