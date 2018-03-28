@@ -29,7 +29,7 @@ import org.eclipse.xtext.util.internal.Log
  */
 @Log class ExecutableCommandRegistry {
 	
-	private static val METHOD = 'workspace/executeCommand'
+	static val METHOD = 'workspace/executeCommand'
 	
 	Multimap<String, IExecutableCommandService> registeredCommands
 	

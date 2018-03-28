@@ -601,8 +601,8 @@ import org.eclipse.lsp4j.WorkspaceEdit
 	}
 	
 	
-	private Map<String, JsonRpcMethod> supportedMethods = null
-	private Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.create
+	Map<String, JsonRpcMethod> supportedMethods = null
+	Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.create
 	
 	override supportedMethods() {
 		if (this.supportedMethods !== null) {

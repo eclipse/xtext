@@ -26,7 +26,7 @@ class ValidatorNaming {
 	@Inject
 	extension XtextGeneratorNaming
 	
-	public def TypeReference getValidatorClass(Grammar grammar) {
+	def TypeReference getValidatorClass(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.validation.' + grammar.simpleName + 'Validator')
 	}
 	

@@ -39,7 +39,7 @@ import org.junit.Test
  * @see DocumentHighlight
  * @see IDocumentHighlightService
  */
-public class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
+class DocumentHighlightTest extends AbstractTestLangLanguageServerTest {
 
 	@Test
 	def void singleLineNoOccurrences_SelectionBeforeWriteSiteMethodName() {

@@ -57,7 +57,7 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	@Accessors BeforeWrite beforeWrite = [$2]
 	@Accessors BeforeRead beforeRead = [$1]
 	
-	public override void setPostProcessor(IFilePostProcessor filePostProcessor) {
+	override void setPostProcessor(IFilePostProcessor filePostProcessor) {
 		super.postProcessor = filePostProcessor
 	}
 

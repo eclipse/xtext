@@ -32,7 +32,7 @@ import org.junit.runner.RunWith
 @InjectWith(IndentationAwareTestLanguageInjectorProvider)
 class NodeModelTest {
 	
-	def static public void assertEquals(Object expected, Object actual) {
+	def static void assertEquals(Object expected, Object actual) {
 		Assert.assertEquals(expected.toString.replaceAll("\r\n","\n"), actual.toString.replaceAll("\r\n","\n"))
 	}
 

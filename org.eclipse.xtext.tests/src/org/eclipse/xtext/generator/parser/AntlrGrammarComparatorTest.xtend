@@ -16,7 +16,7 @@ import org.junit.Test
  */
 class AntlrGrammarComparatorTest {
 
-	private extension AntlrGrammarComparatorTestHelper = new AntlrGrammarComparatorTestHelper();
+	extension AntlrGrammarComparatorTestHelper = new AntlrGrammarComparatorTestHelper();
 
 	/**
 	 * The pattern of "\"" is not expected to occur in ANTLR grammar,

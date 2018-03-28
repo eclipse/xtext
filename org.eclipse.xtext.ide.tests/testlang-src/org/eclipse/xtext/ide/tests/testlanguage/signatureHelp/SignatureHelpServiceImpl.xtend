@@ -40,17 +40,17 @@ import org.eclipse.xtext.util.CancelIndicator
  */
 class SignatureHelpServiceImpl implements ISignatureHelpService {
 
-    private static val OPENING_CHAR = '(';
+    static val OPENING_CHAR = '(';
     
-    private static val CLOSING_CHAR = ')';
+    static val CLOSING_CHAR = ')';
     
-    private static val SEPARATOR_CHAR = ','; 
+    static val SEPARATOR_CHAR = ',';
 
     /**
      * Shared comparator singleton to compare {@link SignatureInformation signature information} instances
      * based on the number of parameters first, then the parameter labels lexicographically.
      */
-    private static val Comparator<SignatureInformation> SIGNATURE_INFO_ORDERING = [ left, right |
+    static val Comparator<SignatureInformation> SIGNATURE_INFO_ORDERING = [ left, right |
         var result = left.parameters.size - right.parameters.size;
         if (result === 0) {
             for (var i = 0, var size = left.parameters.size; i < size; i++) {

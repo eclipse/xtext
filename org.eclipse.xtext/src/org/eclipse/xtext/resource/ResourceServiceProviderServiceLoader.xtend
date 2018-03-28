@@ -22,9 +22,9 @@ import com.google.inject.Singleton
 @Singleton
 class ResourceServiceProviderServiceLoader implements Provider<IResourceServiceProvider.Registry> {
 
-    private ServiceLoader<ISetup> setupLoader = ServiceLoader.load(ISetup)
+    ServiceLoader<ISetup> setupLoader = ServiceLoader.load(ISetup)
 
-    private IResourceServiceProvider.Registry registry = loadRegistry
+    IResourceServiceProvider.Registry registry = loadRegistry
     
     private def IResourceServiceProvider.Registry loadRegistry() {
         val registry = new ResourceServiceProviderRegistryImpl()

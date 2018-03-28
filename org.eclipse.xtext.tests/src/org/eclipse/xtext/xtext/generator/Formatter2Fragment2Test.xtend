@@ -24,7 +24,7 @@ class Formatter2Fragment2Test {
 
 	static class TestableFormatter2Fragment2 extends Formatter2Fragment2 {
 		
-		override public toVarName(ENamedElement element, String... reservedNames) {
+		override toVarName(ENamedElement element, String... reservedNames) {
 			super.toVarName(element, reservedNames)
 		}
 		

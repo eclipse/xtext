@@ -106,7 +106,7 @@ class ProjectManager {
         ]
     }
 
-	public def XtextResourceSet createNewResourceSet(ResourceDescriptionsData newIndex) {
+	def XtextResourceSet createNewResourceSet(ResourceDescriptionsData newIndex) {
 		resourceSetProvider.get => [
             projectDescription.attachToEmfObject(it)
             ProjectConfigAdapter.install(it, projectConfig)

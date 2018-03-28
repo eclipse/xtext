@@ -25,10 +25,10 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  */
 class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
-	private static val XBASE_LABEL_PROVIDER = 
+	static val XBASE_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider"
 
-	private static val XBASE_DESCRIPTION_LABEL_PROVIDER = 
+	static val XBASE_DESCRIPTION_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider"
 
 	@Inject

@@ -224,7 +224,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		?: new Document(1, resource.parseResult.rootNode.text)
 	}
 
-	public def boolean isDocumentOpen(URI uri) {
+	def boolean isDocumentOpen(URI uri) {
 		return openDocuments.containsKey(uri)
 	}
 }
