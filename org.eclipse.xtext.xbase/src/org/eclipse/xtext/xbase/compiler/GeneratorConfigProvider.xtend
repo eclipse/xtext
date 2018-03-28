@@ -22,7 +22,7 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
  */
 class GeneratorConfigProvider implements IGeneratorConfigProvider {
 	
-	@EmfAdaptable public static class GeneratorConfigAdapter {
+	@EmfAdaptable static class GeneratorConfigAdapter {
 		@Accessors val Map<String, GeneratorConfig> language2GeneratorConfig = newHashMap()
 	}
 	

@@ -130,7 +130,7 @@ class EagerArgumentTypeComputer extends XbaseTypeComputer {
 class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
 
 	@Inject
-	private Provider<TimedReentrantTypeResolver> resolverProvider;
+	Provider<TimedReentrantTypeResolver> resolverProvider;
 
 	override createResolver() {
 		resolverProvider.get

@@ -63,7 +63,7 @@ abstract class AbstractURIHandlerTest extends Assert {
 	protected Resource primaryResource
 	protected Resource referencedResource
 	
-	private GlobalStateMemento globalState;
+	GlobalStateMemento globalState;
 
 	@Before
 	def void setUp() {

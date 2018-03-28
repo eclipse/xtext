@@ -24,13 +24,13 @@ class JvmModelAssociatorTest extends AbstractJvmModelTest {
 	@Inject DerivedStateAwareResource resource
 	
 	@Before
-	public def void createAssociator() {
+	def void createAssociator() {
 		assoc = new JvmModelAssociator
 		associatorInjector.injectMembers(assoc)
 	}
 	
 	@After
-	public def void discardAssociator() {
+	def void discardAssociator() {
 		assoc = null
 	}
 	

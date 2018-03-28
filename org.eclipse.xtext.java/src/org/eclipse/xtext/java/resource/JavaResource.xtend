@@ -72,10 +72,10 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	}
 	
 	@Accessors(PUBLIC_GETTER)
-	private boolean initialized = false
+	boolean initialized = false
 	
 	@Accessors(PUBLIC_GETTER)
-	private boolean initializing = false;
+	boolean initializing = false;
 	
 	override getContents() {
 		synchronized (getLock()) {

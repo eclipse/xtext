@@ -49,7 +49,7 @@ class Generator2AdapterSetup {
 		this.naming = naming
 	}
 	
-	public def getInjector() {
+	def getInjector() {
 		if (injector === null) {
 			injector = createInjector
 		}

@@ -19,10 +19,10 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 class JvmElementAtOffsetHelper {
 
 	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private IJvmModelAssociations associations;
+	IJvmModelAssociations associations;
 
 	def JvmIdentifiableElement getJvmIdentifiableElement(XtextResource resource, int offset) {
 		val selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource, offset)

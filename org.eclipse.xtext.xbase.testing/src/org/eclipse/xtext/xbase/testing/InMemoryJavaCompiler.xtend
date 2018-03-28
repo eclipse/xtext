@@ -207,7 +207,7 @@ class InMemoryJavaCompiler {
 	}
 	
 
-	@FinalFieldsConstructor public static class Result {
+	@FinalFieldsConstructor static class Result {
 		@Accessors val Set<CategorizedProblem> compilationProblems = newLinkedHashSet()
 		val classMap = new HashMap<String, byte[]>
 		val ClassLoader parentClassLoader

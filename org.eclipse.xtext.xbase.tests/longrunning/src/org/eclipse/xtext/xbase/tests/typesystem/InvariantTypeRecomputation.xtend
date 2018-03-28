@@ -41,7 +41,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class RecomputingBatchTypeResolver extends DefaultBatchTypeResolver {
 
 	@Inject
-	private Provider<RecomputingReentrantTypeResolver> resolverProvider;
+	Provider<RecomputingReentrantTypeResolver> resolverProvider;
 
 	override createResolver() {
 		resolverProvider.get

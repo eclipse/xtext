@@ -27,7 +27,7 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 	@Inject public TemporaryFolder temporaryFolder
 	@Inject extension CompilationTestHelper compilationTestHelper
 	@Inject GeneratorConfigProvider generatorConfigProvider
-	@Inject private FileExtensionProvider extensionProvider;
+	@Inject FileExtensionProvider extensionProvider;
 
 	@Test def void testSwitchJavaVersion6() {
 		compilationTestHelper.javaVersion = JavaVersion.JAVA6

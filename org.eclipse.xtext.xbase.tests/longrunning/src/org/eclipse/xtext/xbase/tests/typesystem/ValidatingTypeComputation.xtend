@@ -32,7 +32,7 @@ import org.eclipse.xtext.util.CancelIndicator
 class ValidatingBatchTypeResolver extends DefaultBatchTypeResolver {
 
 	@Inject
-	private Provider<ValidatingReentrantTypeResolver> resolverProvider;
+	Provider<ValidatingReentrantTypeResolver> resolverProvider;
 
 	override createResolver() {
 		resolverProvider.get

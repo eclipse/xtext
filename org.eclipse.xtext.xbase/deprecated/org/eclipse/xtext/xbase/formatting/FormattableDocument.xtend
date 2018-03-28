@@ -15,7 +15,7 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
  */
 @Deprecated
 class FormattableDocument {
-	private static val Logger log = Logger.getLogger(FormattableDocument)
+	static val Logger log = Logger.getLogger(FormattableDocument)
 	@Accessors val FormattingPreferenceValues cfg
 	@Accessors val String document
 	@Accessors val TreeMap<Integer, FormattingData> formattings

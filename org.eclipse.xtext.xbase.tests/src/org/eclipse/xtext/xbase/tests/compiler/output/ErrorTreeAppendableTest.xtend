@@ -16,13 +16,13 @@ import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 	
 	@Inject 
-	private ILocationInFileProvider locationProvider
+	ILocationInFileProvider locationProvider
 	
 	@Inject 
-	private IJvmModelAssociations jvmModelAssociations
+	IJvmModelAssociations jvmModelAssociations
 	
 	@Inject 
-	private ITraceURIConverter converter;
+	ITraceURIConverter converter;
 	
 	@Test
 	def testTraceChildIsSelf() {

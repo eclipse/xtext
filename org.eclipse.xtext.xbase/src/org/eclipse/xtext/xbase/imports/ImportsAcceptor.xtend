@@ -27,7 +27,7 @@ interface ImportsAcceptor {
 	def void acceptStaticExtensionImport(XAbstractFeatureCall staticExtImport)
 
 	@Accessors(AccessorType.PUBLIC_GETTER)
-	public static class DefaultImportsAcceptor implements ImportsAcceptor {
+	static class DefaultImportsAcceptor implements ImportsAcceptor {
 		Set<String> types = newHashSet()
 		Set<String> staticImport = newHashSet()
 		Set<String> extensions = newHashSet()
