@@ -3556,7 +3556,7 @@ ruleEnumRule returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)?
+		)*
 		otherlv_1='enum'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getEnumRuleAccess().getEnumKeyword_1());

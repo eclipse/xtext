@@ -265,7 +265,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		List<Diagnostic> issues = diag.getChildren();
 		assertEquals(issues.toString(), 1, issues.size());
-		assertEquals("TerminalRule cannot be deprecated!", issues.get(0).getMessage());
+		assertEquals("Rule cannot be deprecated!", issues.get(0).getMessage());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
@@ -278,7 +278,33 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		List<Diagnostic> issues = diag.getChildren();
 		assertEquals(issues.toString(), 1, issues.size());
-		assertEquals("TerminalRule cannot be exported!", issues.get(0).getMessage());
+		assertEquals("Rule cannot be exported!", issues.get(0).getMessage());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	@Test public void testEnumAnnotation() throws Exception {
+		Resource resource = getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"Rule: name=ID;\n"+
+				"@Deprecated\n"+
+				"enum MyEnum: FOO | BAR;");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("Rule cannot be deprecated!", issues.get(0).getMessage());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	@Test public void testEnumAnnotation_1() throws Exception {
+		Resource resource = getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
+				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
+				"Rule: name=ID;\n"+
+				"@Exported\n"+
+				"enum MyEnum: FOO | BAR;");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("Rule cannot be exported!", issues.get(0).getMessage());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	

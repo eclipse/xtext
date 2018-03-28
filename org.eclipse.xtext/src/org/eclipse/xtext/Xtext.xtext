@@ -257,7 +257,7 @@ CharacterRange returns AbstractElement:
 ;
 
 EnumRule:
-	(annotations += Annotation)?
+	(annotations += Annotation)*
 	'enum' name=ValidID ('returns' type=TypeRef)? ':'
 		alternatives=EnumLiterals
 	';'

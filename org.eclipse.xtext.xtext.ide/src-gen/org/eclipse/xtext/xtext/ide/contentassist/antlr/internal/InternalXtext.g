@@ -7940,7 +7940,7 @@ rule__EnumRule__Group__0__Impl
 :
 (
 	{ before(grammarAccess.getEnumRuleAccess().getAnnotationsAssignment_0()); }
-	(rule__EnumRule__AnnotationsAssignment_0)?
+	(rule__EnumRule__AnnotationsAssignment_0)*
 	{ after(grammarAccess.getEnumRuleAccess().getAnnotationsAssignment_0()); }
 )
 ;

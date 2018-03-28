@@ -1218,12 +1218,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 	
 	@Check
-	public void checkTerminalRuleAnnotations(TerminalRule terminalRule){
-		if(hasAnnotation(terminalRule, AnnotationNames.EXPORTED)) {
-			error("TerminalRule cannot be exported!",terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
-		} 
-		if(hasAnnotation(terminalRule, AnnotationNames.DEPRECATED)) {
-			error("TerminalRule cannot be deprecated!",terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
+	public void checkTerminalRuleAnnotations(AbstractRule rule){
+		if(rule instanceof TerminalRule || rule instanceof EnumRule) {
+			if(hasAnnotation(rule, AnnotationNames.EXPORTED)) {
+				error("Rule cannot be exported!",rule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
+			} 
+			if(hasAnnotation(rule, AnnotationNames.DEPRECATED)) {
+				error("Rule cannot be deprecated!",rule, XtextPackage.eINSTANCE.getAbstractRule_Name(), INVALID_ANNOTAION);
+			}
 		}
 	}
 	
