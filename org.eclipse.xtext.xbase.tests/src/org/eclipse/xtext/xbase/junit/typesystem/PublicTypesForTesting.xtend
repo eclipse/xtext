@@ -25,19 +25,19 @@ class PublicResolvedTypes extends RootResolvedTypes {
 		super(resolver, CancelIndicator.NullImpl)
 	}
 	
-	override public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
+	override UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
 		super.createUnboundTypeReference(expression, type)
 	}
 	
-	override public getUnboundTypeReference(Object handle) {
+	override getUnboundTypeReference(Object handle) {
 		super.getUnboundTypeReference(handle)
 	}
 	
-	override public getHints(Object handle) {
+	override getHints(Object handle) {
 		super.getHints(handle)
 	}
 	
-	override public basicGetExpressionTypes() {
+	override basicGetExpressionTypes() {
 		super.basicGetExpressionTypes()
 	}
 	
@@ -57,11 +57,11 @@ class PublicStackedResolvedTypes extends StackedResolvedTypes {
  */
 class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
-	override public setTypeComputer(ITypeComputer typeComputer) {
+	override setTypeComputer(ITypeComputer typeComputer) {
 		super.setTypeComputer(typeComputer)
 	}
 	
-	override public getBatchScopeProvider() {
+	override getBatchScopeProvider() {
 		super.getBatchScopeProvider()
 	}
 	

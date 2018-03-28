@@ -33,7 +33,7 @@ import java.io.IOException
  */
 @FinalFieldsConstructor class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
 	
-	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
+	final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
 	
 	override protected writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) throws IOException {
 		super.writeEntries(resource, zipOut)

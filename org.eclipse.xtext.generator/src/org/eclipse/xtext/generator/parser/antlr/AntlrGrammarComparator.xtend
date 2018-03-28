@@ -28,12 +28,12 @@ class AntlrGrammarComparator {
 		def void handleMismatch(String matched, String expected, ErrorContext context);
 	}
 	
-	public static final class ErrorContext {
+	static final class ErrorContext {
 		@Accessors
-		private AntlrGrammarComparator.MatchState testedGrammar = new MatchState()
+		AntlrGrammarComparator.MatchState testedGrammar = new MatchState()
 
 		@Accessors
-		private AntlrGrammarComparator.MatchState referenceGrammar = new MatchState()
+		AntlrGrammarComparator.MatchState referenceGrammar = new MatchState()
 		
 		def reset() {
 			testedGrammar = new MatchState()
@@ -41,61 +41,61 @@ class AntlrGrammarComparator {
 		}
 	}
 	
-	public static final class MatchState {
+	static final class MatchState {
 		@Accessors
-		private String absoluteFileName;
+		String absoluteFileName;
 		
 		@Accessors
-		private int lineNumber = 1
+		int lineNumber = 1
 		
 		// this value is used to check whether any character sequences have not been matched
-		private int position = 0	
+		int position = 0
 		
 		@Accessors
-		private String previousToken
+		String previousToken
 		
 		@Accessors
-		private String currentToken
+		String currentToken
 	}
 	
 	
-	private static val SINGLE_CHAR_TOKENS = #[
+	static val SINGLE_CHAR_TOKENS = #[
 		'\\(', '\\)', '\\[', '\\]', '\\{', '\\}', '\\|', '=', '\\?', '\\*', '\\+', ':', ';'
 	]
 	
 	// quoted tokens are those like in '\'' or '\'\'\'' occurring in the Xtend grammar,
 	//  and arbitrary charSequences enclosed in single quotes or double quotes
-	private static val QUOTED_TOKENS = #[
+	static val QUOTED_TOKENS = #[
 		"'(\\\\')+'", "('[^']*')", '("[^"]*")'
 	].join('|')
 	
 	// valid tokens are those mentioned in SINGLE_CHAR_TOKENS and those described in QUOTED_TOKENS,
 	// as well as character sequences containing no white space (\s), no single quotes ('),
 	//  no double quotes ("), and none of SINGLE_CHAR_TOKENS 
-	private static val TOKEN = '''«SINGLE_CHAR_TOKENS.join('|')»|«QUOTED_TOKENS»|[^\s'"«SINGLE_CHAR_TOKENS.join»]+''';
+	static val TOKEN = '''«SINGLE_CHAR_TOKENS.join('|')»|«QUOTED_TOKENS»|[^\s'"«SINGLE_CHAR_TOKENS.join»]+''';
 	
 	// platform neutral definition of newline tokens, they are distinguished for counting lines
-	private static val NEWLINE = "\\r?\\n|\\r"
+	static val NEWLINE = "\\r?\\n|\\r"
 	
 	// other white space to be ignored, is distinguished for testing for any unmatched character sequences
-	private static val WS = "( |\\t)+"
+	static val WS = "( |\\t)+"
 	
 	// single line comments starting with a '//' and being terminated by the end of the line
-	private static val SL_COMMENT = "//[^\\r\\n]*"
+	static val SL_COMMENT = "//[^\\r\\n]*"
 	
 	// multi line comments start with a '/*', may contain an arbitrary amount of
 	//  '*'s followed by anything else than a '/', and non-'*' characters including newlines and whitespace,
 	//  and end with a '*/' sequence
-	private static val ML_COMMENT = '''/\*(\*[^/]|[^\*])*\*/'''
+	static val ML_COMMENT = '''/\*(\*[^/]|[^\*])*\*/'''
 	
-	private val p_slComment = Pattern.compile(SL_COMMENT)
-	private val p_mlComment = Pattern.compile(ML_COMMENT)
-	private val p_token = Pattern.compile(TOKEN)
-	private val p_newline = Pattern.compile(NEWLINE)
-	private val p_ws = Pattern.compile(WS)
-	private val compoundPattern = Pattern.compile('''(«SL_COMMENT»)|(«ML_COMMENT»)|(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE)
+	val p_slComment = Pattern.compile(SL_COMMENT)
+	val p_mlComment = Pattern.compile(ML_COMMENT)
+	val p_token = Pattern.compile(TOKEN)
+	val p_newline = Pattern.compile(NEWLINE)
+	val p_ws = Pattern.compile(WS)
+	val compoundPattern = Pattern.compile('''(«SL_COMMENT»)|(«ML_COMMENT»)|(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE)
 	
-	private ErrorContext errorContext
+	ErrorContext errorContext
 
 	/**
 	 * Performs the actual comparison of given and expected grammar.
@@ -103,7 +103,7 @@ class AntlrGrammarComparator {
 	 * @return {@link Pair} containing the number of lines of the tested grammar (key)
 	 * 			and the referenced grammar (value) for logging purposes
 	 */
-	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
+	def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			String absoluteGrammarFileName, String absoluteGrammarFileNameReference, IErrorHandler errorHandler) {
 		errorContext = new ErrorContext()
 		
@@ -119,7 +119,7 @@ class AntlrGrammarComparator {
 	 * @return {@link Pair} containing the number of lines of the tested grammar (key)
 	 * 			and the referenced grammar (value) for logging purposes
 	 */
-	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
+	def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			IErrorHandler errorHandler) {
 		
 		if (errorContext === null) {			

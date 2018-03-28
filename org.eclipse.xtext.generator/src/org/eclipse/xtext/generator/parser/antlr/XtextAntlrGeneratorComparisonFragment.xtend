@@ -47,7 +47,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  @Log
 class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
-	private static val ENCODING = Charsets.ISO_8859_1.name
+	static val ENCODING = Charsets.ISO_8859_1.name
 	
 	@Inject
 	@Accessors(PROTECTED_GETTER)
@@ -74,16 +74,16 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 	boolean failOnError = true
 
 	@Accessors(PROTECTED_GETTER)
-	private List<String> advices = newArrayList()
+	List<String> advices = newArrayList()
 
 	@Accessors(PROTECTED_GETTER)
-	private List<String> extensionAdvices = newArrayList()
+	List<String> extensionAdvices = newArrayList()
 
-	public def void addRegisterAdvice(String advice) {
+	def void addRegisterAdvice(String advice) {
 		advices += advice;
 	}
 
-	public def void addRegisterExtensionAdvice(String advice) {
+	def void addRegisterExtensionAdvice(String advice) {
 		extensionAdvices += advice;
 	}
 
@@ -255,9 +255,9 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
 	protected static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
 		
-		private Naming oldNaming
-		private GrammarNaming prodNaming
-		private ContentAssistGrammarNaming caNaming
+		Naming oldNaming
+		GrammarNaming prodNaming
+		ContentAssistGrammarNaming caNaming
 		
 		new(Naming oldNaming, GrammarNaming prodNaming, ContentAssistGrammarNaming caNaming) {
 			super(oldNaming)
