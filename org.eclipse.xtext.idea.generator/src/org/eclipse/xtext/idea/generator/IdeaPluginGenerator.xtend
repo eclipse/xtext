@@ -42,32 +42,32 @@ import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 @Deprecated
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
-	private static String META_INF_PLUGIN = "META_INF_PLUGIN"
+	static String META_INF_PLUGIN = "META_INF_PLUGIN"
 	
-	private static String META_INF_PLUGIN_GEN = "META_INF_PLUGIN_GEN"
+	static String META_INF_PLUGIN_GEN = "META_INF_PLUGIN_GEN"
 	
-	private static String PLUGIN = "PLUGIN"
+	static String PLUGIN = "PLUGIN"
 	
-	private String encoding
+	String encoding
 	
-	private String fileExtension
+	String fileExtension
 	
-	private Set<String> libraries = newHashSet();
-	
-	@Accessors
-	private String ideaProjectName
+	Set<String> libraries = newHashSet();
 	
 	@Accessors
-	private String runtimeProjectName
+	String ideaProjectName
 	
 	@Accessors
-	private String ideaProjectPath
+	String runtimeProjectName
 	
 	@Accessors
-	private String runtimeProjectPath
+	String ideaProjectPath
 	
 	@Accessors
-	private boolean deployable = true
+	String runtimeProjectPath
+	
+	@Accessors
+	boolean deployable = true
 	
 	@Inject
 	extension GrammarAccess

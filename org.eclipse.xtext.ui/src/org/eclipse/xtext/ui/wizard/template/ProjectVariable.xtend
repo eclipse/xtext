@@ -26,12 +26,12 @@ import org.eclipse.swt.layout.GridLayout
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-public abstract class ProjectVariable {
+abstract class ProjectVariable {
 
-	@Accessors(PUBLIC_GETTER) private final String label
-	@Accessors(PUBLIC_GETTER) private final String description
-	@Accessors private var boolean enabled
-	@Accessors(PUBLIC_GETTER) private ContainerProjectVariable container
+	@Accessors(PUBLIC_GETTER) final String label
+	@Accessors(PUBLIC_GETTER) final String description
+	@Accessors var boolean enabled
+	@Accessors(PUBLIC_GETTER) ContainerProjectVariable container
 
 	package new(String label, String description, ContainerProjectVariable container) {
 		this.label = label
@@ -57,7 +57,7 @@ public abstract class ProjectVariable {
 
 }
 
-public abstract class ContainerProjectVariable extends ProjectVariable {
+abstract class ContainerProjectVariable extends ProjectVariable {
 
 	new(String label, String description, ContainerProjectVariable container) {
 		super(label, description, container)
@@ -67,7 +67,7 @@ public abstract class ContainerProjectVariable extends ProjectVariable {
 
 }
 
-public class BooleanProjectVariable extends ProjectVariable {
+class BooleanProjectVariable extends ProjectVariable {
 
 	@Accessors(PUBLIC_SETTER) boolean value
 	Button checkbox
@@ -107,7 +107,7 @@ public class BooleanProjectVariable extends ProjectVariable {
 
 }
 
-public class StringProjectVariable extends ProjectVariable {
+class StringProjectVariable extends ProjectVariable {
 
 	@Accessors String value
 	Text text
@@ -140,7 +140,7 @@ public class StringProjectVariable extends ProjectVariable {
 
 }
 
-public class StringSelectionProjectVariable extends ProjectVariable {
+class StringSelectionProjectVariable extends ProjectVariable {
 
 	@Accessors(PUBLIC_GETTER) String[] possibleValues
 	@Accessors String value
@@ -180,7 +180,7 @@ public class StringSelectionProjectVariable extends ProjectVariable {
 
 }
 
-public class GroupProjectVariable extends ContainerProjectVariable {
+class GroupProjectVariable extends ContainerProjectVariable {
 
 	Group group
 

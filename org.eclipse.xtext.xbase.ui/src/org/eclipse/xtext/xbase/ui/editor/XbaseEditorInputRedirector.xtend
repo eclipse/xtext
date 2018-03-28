@@ -25,13 +25,13 @@ import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider
 class XbaseEditorInputRedirector {
 
 	@Inject
-	private ITraceForStorageProvider traceInformation;
+	ITraceForStorageProvider traceInformation;
 
 	@Inject
-	private LanguageInfo languageInfo;
+	LanguageInfo languageInfo;
 
 	@Inject
-	private FileExtensionProvider fileExtensionProvider
+	FileExtensionProvider fileExtensionProvider
 	
 	def ITypeRoot getTypeRoot(IEditorInput it) {
 		val adapter = getAdapter(IJavaElement);

@@ -32,7 +32,7 @@ class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements IJavaP
 
 
 	@Inject
-	private IHyperlinkHelper hyperlinkHelper;
+	IHyperlinkHelper hyperlinkHelper;
 
 	static IProject staticProject;
 

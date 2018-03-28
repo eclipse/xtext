@@ -108,7 +108,7 @@ class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
 		(state.eContainer as Device).name + '.' + state.name
 	}
 
-	public static def getRuleMethodName(Rule rule) {
+	static def getRuleMethodName(Rule rule) {
 		'execute' + rule.description?.replaceAll('\\W', '_')
 	}
 }

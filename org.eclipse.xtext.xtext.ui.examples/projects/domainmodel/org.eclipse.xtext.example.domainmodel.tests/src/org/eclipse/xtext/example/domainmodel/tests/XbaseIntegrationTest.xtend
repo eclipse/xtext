@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest
  */
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
-public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
+class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	@Inject OnTheFlyJavaCompiler2 javaCompiler
 

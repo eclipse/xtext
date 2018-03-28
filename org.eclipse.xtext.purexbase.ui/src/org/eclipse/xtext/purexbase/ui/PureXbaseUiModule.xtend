@@ -26,7 +26,7 @@ class PureXbaseUiModule extends AbstractPureXbaseUiModule {
 	def Class<? extends IFoldingRegionProvider> bindFoldingRegionProvider() {
 		return NoFolding;
 	}
-	public static class NoFolding implements IFoldingRegionProvider {
+	static class NoFolding implements IFoldingRegionProvider {
 		override Collection<FoldedPosition> getFoldingRegions(
 				IXtextDocument xtextDocument) {
 			return Collections.emptySet();
