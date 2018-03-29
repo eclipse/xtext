@@ -799,7 +799,6 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			CompilationUnit root = (CompilationUnit) parser.createAST(null);
 			if (root == null)
 				return null;
-			@SuppressWarnings("unchecked")
 			List<AbstractTypeDeclaration> types = root.types();
 			if (types.size() != 1)
 				return null;

@@ -79,13 +79,11 @@ import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.AnnotationNames;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
-import org.eclipse.xtext.xtext.ui.contentassist.AbstractXtextProposalProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;

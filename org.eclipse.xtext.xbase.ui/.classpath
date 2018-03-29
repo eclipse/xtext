@@ -4,6 +4,13 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
 		<accessrules>
 			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/ui/actions/ActionMessages**"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/DefaultWorkingCopyOwner"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/JavaModelManager"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/search/BasicSearchEngine"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/search/IndexQueryRequestor"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/search/PatternSearchJob"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/search/indexing/IIndexConstants"/>
+			<accessrule kind="accessible" pattern="org/eclipse/jdt/internal/core/search/matching/TypeDeclarationPattern"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>

@@ -121,7 +121,6 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 		return XbaseHyperLinkHelper.class;
 	}
 
-	@SuppressWarnings("restriction")
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
 		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
