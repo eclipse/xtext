@@ -21,6 +21,7 @@ import org.eclipse.xtext.validation.SeverityConverter;
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Holger Schill
  */
 public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigurationBlock {
 
@@ -38,6 +39,7 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 		addComboBox(INVALID_TERMINALRULE_NAME, Messages.XtextValidatorConfigurationBlock_2, section, defaultIndent);
 		addComboBox(DISCOURAGED_RULE_NAME, Messages.XtextValidatorConfigurationBlock_15, section, defaultIndent);
 		addComboBox(DUPLICATE_ENUM_LITERAL, Messages.XtextValidatorConfigurationBlock_3, section, defaultIndent);
+		addComboBox(USAGE_OF_DEPRECATED_RULE, Messages.XtextValidatorConfigurationBlock_17, section, defaultIndent);
 	}
 
 	protected void fillEcoreModelSection(Composite section, int defaultIndent) {
