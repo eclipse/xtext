@@ -44,7 +44,7 @@ class PluginProjectFactoryTest {
 
 class TestablePluginProjectFactory extends PluginProjectFactory {
 
-	override public addToBuildProperties(StringBuilder content, Iterable<String> entries, String entryName) {
+	override addToBuildProperties(StringBuilder content, Iterable<String> entries, String entryName) {
 		super.addToBuildProperties(content, entries, entryName)
 	}
 

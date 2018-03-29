@@ -23,7 +23,7 @@ class ResourceRelocationStrategyRegistry {
 	
 	static val EXTENSION_POINT_ID = 'org.eclipse.xtext.ui.resourceRelocationStrategy'
 	
-	private List<IResourceRelocationStrategy> strategies
+	List<IResourceRelocationStrategy> strategies
 	
 	def List<? extends IResourceRelocationStrategy> getStrategies() {
 		return strategies ?: {

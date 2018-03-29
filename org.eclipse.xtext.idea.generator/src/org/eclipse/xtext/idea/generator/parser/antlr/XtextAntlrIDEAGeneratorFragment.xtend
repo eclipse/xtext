@@ -34,7 +34,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragmen
 	@Inject
 	extension XtextIDEAGeneratorExtensions
 	
-	public def void setEncoding(String encoding) {
+	def void setEncoding(String encoding) {
 		this.encoding = encoding
 	}
 

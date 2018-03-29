@@ -29,7 +29,7 @@ import org.eclipse.jdt.core.IJavaProject
  */
 class JavaBuilderState {
 
-	private val static LOG = Logger.getLogger(JavaBuilderState);
+	val static LOG = Logger.getLogger(JavaBuilderState);
 
 	val State state
 

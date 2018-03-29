@@ -33,7 +33,7 @@ import org.apache.log4j.Logger
 @FinalFieldsConstructor
 class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
 
-	private static final Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter)
+	static final Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter)
 	
 	extension ReflectExtensions reflect = new ReflectExtensions
 	

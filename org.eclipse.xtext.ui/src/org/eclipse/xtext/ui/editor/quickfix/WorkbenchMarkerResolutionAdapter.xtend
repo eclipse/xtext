@@ -47,7 +47,7 @@ class WorkbenchMarkerResolutionAdapter extends WorkbenchMarkerResolution {
 	@Inject MarkerResolutionGenerator resolutionsGenerator
 	@Inject IssueUtil issueUtil
 	@Inject Provider<BatchModification> batchModificationProvider
-	private final static Logger LOG = Logger.getLogger(WorkbenchMarkerResolutionAdapter);
+	final static Logger LOG = Logger.getLogger(WorkbenchMarkerResolutionAdapter);
 	@Accessors IssueResolution primaryResolution
 	@Accessors IMarker primaryMarker
 

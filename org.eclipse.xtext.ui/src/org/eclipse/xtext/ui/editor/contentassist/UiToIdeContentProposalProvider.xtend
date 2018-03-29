@@ -36,7 +36,7 @@ class UiToIdeContentProposalProvider extends AbstractCompletionProposalFactory i
 	@Inject Provider<Builder> builderProvider
 	@Inject
 	@ContentProposalLabelProvider
-	private ILabelProvider labelProvider;
+	ILabelProvider labelProvider;
     
 	override createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val entries = new ArrayList<Pair<ContentAssistEntry, Integer>>
