@@ -216,7 +216,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 			return work.apply(null, null)
 		}
 		var doc = getDocument(resource)
-		return work.apply(doc, projectMnr.getResource(resourceURI) as XtextResource)
+		return work.apply(doc, resource)
 	}
 
 	protected def Document getDocument(XtextResource resource) {

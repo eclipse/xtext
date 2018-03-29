@@ -251,7 +251,7 @@ public class UriExtensionsTest {
     File directory = this.createTempDir("some name with whitespaces").toFile();
     Assert.assertTrue(directory.exists());
     Assert.assertTrue(directory.isDirectory());
-    Assert.assertTrue(CharMatcher.WHITESPACE.matchesAnyOf(directory.getName()));
+    Assert.assertTrue(CharMatcher.whitespace().matchesAnyOf(directory.getName()));
     String _absolutePath = directory.getAbsolutePath();
     String _plus = (_absolutePath + "/");
     URI uri = this._uriExtensions.toUri(this._uriExtensions.toUriString(URI.createFileURI(_plus)));

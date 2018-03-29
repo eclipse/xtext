@@ -45,8 +45,6 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
   
   private CompositeGeneratorNode currentParent = this;
   
-  private boolean isEmptyLine = true;
-  
   @Override
   public void append(final Object object, final String indentation) {
     int _length = indentation.length();
@@ -93,11 +91,6 @@ public class TemplateNode extends CompositeGeneratorNode implements StringConcat
         while (iter.hasNext()) {
           {
             final String segment = iter.next();
-            boolean _isEmpty = segment.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              this.isEmptyLine = false;
-            }
             this.nodeFactory.append(this.currentParent, segment);
             boolean _hasNext = iter.hasNext();
             if (_hasNext) {

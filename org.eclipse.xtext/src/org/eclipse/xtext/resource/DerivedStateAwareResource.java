@@ -113,6 +113,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	/*@Override only for emf 2.11. We build with 2.10.2 add Override for 2.9*/
 	@SuppressWarnings("all")
 	protected List<EObject> getUnloadingContents() {
@@ -247,7 +248,8 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 							newFullyInitialized = false;
 							operationCanceledManager.propagateAsErrorIfCancelException(e);
 						}
-						throw Throwables.propagate(e);
+						// Needed for Guava 14-19
+						Throwables.propagate(e);
 					}
 				}
 			} catch (RuntimeException e) {
@@ -278,7 +280,8 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 			if (operationCanceledManager.isOperationCanceledException(e)) {
 				throw new IllegalStateException("IDerivedStateComputer#discardDerivedState should not check whether the current operation is canceled.", e);
 			}
-			throw Throwables.propagate(e);
+			// Needed for Guava 14-19
+			Throwables.propagate(e);
 		}
 	}
 	

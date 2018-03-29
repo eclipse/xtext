@@ -280,8 +280,7 @@ public class WorkspaceManager {
       return work.apply(null, null);
     }
     Document doc = this.getDocument(resource);
-    Resource _resource_1 = projectMnr.getResource(resourceURI);
-    return work.apply(doc, ((XtextResource) _resource_1));
+    return work.apply(doc, resource);
   }
   
   protected Document getDocument(final XtextResource resource) {
