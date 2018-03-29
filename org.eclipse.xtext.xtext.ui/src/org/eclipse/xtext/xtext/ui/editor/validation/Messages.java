@@ -11,6 +11,7 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
+ * @author Holger Schill
  */
 public final class Messages extends NLS {
 	
@@ -33,6 +34,7 @@ public final class Messages extends NLS {
 	public static String XtextValidatorConfigurationBlock_14;
 	public static String XtextValidatorConfigurationBlock_15;
 	public static String XtextValidatorConfigurationBlock_16;
+	public static String XtextValidatorConfigurationBlock_17;
 	
 	static {
 		// initialize resource bundle
