@@ -76,7 +76,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	
 	@Inject IResourceScopeCache cache
 	
-	public def Object evaluate(XExpression expression, JvmTypeReference expectedType) {
+	def Object evaluate(XExpression expression, JvmTypeReference expectedType) {
 		val classLoader = classLoaderProvider.getClassLoader(expression)
 		val visibleFeatures = findVisibleFeatures(expression)
 		val result = evaluate(expression, 

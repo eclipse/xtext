@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.internal.AlternateJdkLoader
 class ProcessorInstanceForJvmTypeProvider {
 	static val logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider)
 	
-	@Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
+	@Accessors static class ProcessorClassloaderAdapter extends AdapterImpl {
 		var ClassLoader classLoader
 		
 		new(ClassLoader classLoader) {
@@ -74,7 +74,7 @@ class ProcessorInstanceForJvmTypeProvider {
 		}
 	}
 	
-	def public getClassLoader(EObject ctx) {
+	def getClassLoader(EObject ctx) {
 		val resourceSet = ctx.eResource.resourceSet
 		val adapter = resourceSet.eAdapters.filter(ProcessorClassloaderAdapter).head
 		if (adapter !== null) {

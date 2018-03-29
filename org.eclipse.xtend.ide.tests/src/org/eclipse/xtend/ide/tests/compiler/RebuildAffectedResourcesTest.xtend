@@ -24,9 +24,9 @@ import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 
 	@Inject 
-	private WorkbenchTestHelper workbenchTestHelper;
+	WorkbenchTestHelper workbenchTestHelper;
 	
-	private Set<IResource> cleanUp = newHashSet();
+	Set<IResource> cleanUp = newHashSet();
 	
 	def <T extends IResource> T registerForCleanUp(T t) {
 		cleanUp.add(t)

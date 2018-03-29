@@ -17,13 +17,13 @@ import org.eclipse.xtend.core.xtend.XtendField
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
 	@Inject
-	private WorkbenchTestHelper testHelper
+	WorkbenchTestHelper testHelper
 	
 	@Inject
-	private XtendHoverSerializer serializer
+	XtendHoverSerializer serializer
 	
-	private static String FILEEXTENSION = ".xtend"
-	private static String FILEPATH = "testpackage/Foo" + FILEEXTENSION
+	static String FILEEXTENSION = ".xtend"
+	static String FILEPATH = "testpackage/Foo" + FILEEXTENSION
 	
 
 	@Before

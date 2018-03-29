@@ -50,7 +50,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
  */
 @FinalFieldsConstructor class RichStringFormatter {
 
-	public static class Factory {
+	static class Factory {
 		@Inject RichStringProcessor richStringProcessor
 
 		def RichStringFormatter create(ITextRegionAccess regionAccess) {
@@ -212,18 +212,18 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
  * @author Moritz Eysholdt - Initial implementation and API
  */
 class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
-	private val RichString string
-	private val String document
-	private val ITextRegionAccess nodeModelAccess
+	val RichString string
+	val String document
+	val ITextRegionAccess nodeModelAccess
 	@Accessors val LineModel model = new LineModel
 	int offset = - 1
 	int contentStartOffset = - 1
 	int contentStartColumn = - 1
-	private Stack<Chunk> indentationStack = new Stack
-	private boolean content = false
-	private boolean indentNextLine = false
-	private boolean _outdentThisLine = false
-	private int lastLiteralEndOffset
+	Stack<Chunk> indentationStack = new Stack
+	boolean content = false
+	boolean indentNextLine = false
+	boolean _outdentThisLine = false
+	int lastLiteralEndOffset
 
 	new(ITextRegionAccess nodeModelAccess, RichString string) {
 		this.nodeModelAccess = nodeModelAccess

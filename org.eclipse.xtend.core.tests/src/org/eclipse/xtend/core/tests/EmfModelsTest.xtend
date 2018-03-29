@@ -32,7 +32,7 @@ import org.junit.Test
  * @author dhuebner - Initial contribution and API
  */
 class EmfModelsTest {
-	private static final extension Logger LOGGER = Logger.getLogger(EmfModelsTest);
+	static final extension Logger LOGGER = Logger.getLogger(EmfModelsTest);
 
 	@Test
 	def void checkXbase() {

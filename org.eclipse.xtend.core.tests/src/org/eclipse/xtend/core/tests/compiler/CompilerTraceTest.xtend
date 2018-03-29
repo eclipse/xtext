@@ -765,7 +765,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	private Pattern p = Pattern::compile("([^#]*)#([^#]*)#([^#]*)", Pattern::DOTALL);
+	Pattern p = Pattern::compile("([^#]*)#([^#]*)#([^#]*)", Pattern::DOTALL);
 	
 	def tracesTo(CharSequence xtend, CharSequence java) {
 		val xtendWithSpaces = " " + xtend + " "

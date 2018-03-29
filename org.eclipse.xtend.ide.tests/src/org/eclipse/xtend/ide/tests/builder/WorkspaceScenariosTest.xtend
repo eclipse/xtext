@@ -51,7 +51,7 @@ class WorkspaceScenariosTest {
 	
 	@Inject
 	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
-	private Provider<IResourceDescriptions> persistedResourceDescriptions;
+	Provider<IResourceDescriptions> persistedResourceDescriptions;
 	
 	@Test def void testJarWithEverything() {
 		val project = createProjectWithJarDependency[ false ]

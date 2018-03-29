@@ -22,19 +22,19 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
 	@Inject
-	private ParseHelper<XtendFile> parseHelper
+	ParseHelper<XtendFile> parseHelper
 	
 	@Inject
-	private WorkbenchTestHelper testHelper
+	WorkbenchTestHelper testHelper
 	
 	@Inject
-	private IEObjectHoverDocumentationProvider documentationProvider
+	IEObjectHoverDocumentationProvider documentationProvider
 	
 	@Inject
-	private TestingXbaseHoverProvider hoverProvider
+	TestingXbaseHoverProvider hoverProvider
 	
 	@Inject
-	private IXtendJvmAssociations jvmModelAssociations
+	IXtendJvmAssociations jvmModelAssociations
 	
 	/**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429

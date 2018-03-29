@@ -34,7 +34,7 @@ import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase {
 
 	@Inject
-	private WorkbenchTestHelper workbenchTestHelper;
+	WorkbenchTestHelper workbenchTestHelper;
 
 	@Rule public StopwatchRule rule = new StopwatchRule(true)
 

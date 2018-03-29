@@ -16,7 +16,7 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 
 	@Inject 
-	private WorkbenchTestHelper workbenchTestHelper;
+	WorkbenchTestHelper workbenchTestHelper;
 	
 	@Before @After def void cleanUp() {
 		workbenchTestHelper.tearDown

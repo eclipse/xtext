@@ -42,7 +42,7 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotationTests {
 
 	@Inject
-	private extension IEObjectHoverDocumentationProvider documentationProvider
+	extension IEObjectHoverDocumentationProvider documentationProvider
 	
 	@Inject IResourceValidator validator
 

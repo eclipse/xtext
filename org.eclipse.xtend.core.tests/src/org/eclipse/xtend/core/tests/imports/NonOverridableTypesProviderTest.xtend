@@ -16,10 +16,10 @@ import org.junit.Test
 class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
 	
 	@Inject
-	private NonOverridableTypesProvider typesFromHierarchy
+	NonOverridableTypesProvider typesFromHierarchy
 
 	@Inject
-	private IXtendJvmAssociations associations
+	IXtendJvmAssociations associations
 			
 	@Test def testInheritOuter() {
 		val xtendClass = clazz('''

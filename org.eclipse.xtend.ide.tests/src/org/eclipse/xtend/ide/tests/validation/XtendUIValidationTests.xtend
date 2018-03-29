@@ -27,13 +27,13 @@ import org.eclipse.xtext.util.OnChangeEvictingCache
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
-	private WorkbenchTestHelper testHelper;
+	WorkbenchTestHelper testHelper;
 	@Inject
-	private ValidationTestHelper helper;
+	ValidationTestHelper helper;
 	@Inject
-	private IPreferenceStoreAccess prefStoreAccess;
+	IPreferenceStoreAccess prefStoreAccess;
 	@Inject
-	private OnChangeEvictingCache cache
+	OnChangeEvictingCache cache
 	
 	override tearDown() throws Exception {
 		testHelper.tearDown

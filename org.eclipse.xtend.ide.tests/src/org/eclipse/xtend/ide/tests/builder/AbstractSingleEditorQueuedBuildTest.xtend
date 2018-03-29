@@ -119,7 +119,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "Bar", "Bar2")
 	}
 
-	@Test def public void addSecondaryTopLevelType() {
+	@Test def void addSecondaryTopLevelType() {
 		createFile('/mypackage/Bar.java',
 			'''
 				package mypackage;
@@ -135,7 +135,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "mypackage.Foo")
 	}
 
-	@Test def public void removeSecondaryTopLevelType() {
+	@Test def void removeSecondaryTopLevelType() {
 		createFile('/mypackage/Bar.java',
 			'''
 				package mypackage;
@@ -168,7 +168,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "mypackage.Bar2", "mypackage.Bar3")
 	}
 
-	@Test def public void addSecondaryTopLevelTypeWithinDefaultPackage() {
+	@Test def void addSecondaryTopLevelTypeWithinDefaultPackage() {
 		createFile('Bar.java',
 			'''
 				public class Bar {
@@ -182,7 +182,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "Foo")
 	}
 
-	@Test def public void removeSecondaryTopLevelTypeWithinDefaultPackage() {
+	@Test def void removeSecondaryTopLevelTypeWithinDefaultPackage() {
 		createFile('Bar.java',
 			'''
 				public class Bar {
@@ -211,7 +211,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "Bar2", "Bar3")
 	}
 
-	@Test def public void addNestedTypes() {
+	@Test def void addNestedTypes() {
 		createFile('/mypackage/Bar.java',
 			'''
 				public class Bar {
@@ -235,7 +235,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "mypackage.Bar", "mypackage.Bar$Foo", "mypackage.Bar$Foo2", "mypackage.Bar$Foo$Foo3")
 	}
 
-	@Test def public void removeNestedTypes() {
+	@Test def void removeNestedTypes() {
 		createFile('/mypackage/Bar.java',
 			'''
 				package mypackage;
@@ -284,7 +284,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			"mypackage.Bar$NewFoo2", "mypackage.Bar$NewFoo$NewFoo3", "mypackage.Bar$Foo$Foo3")
 	}
 
-	@Test def public void addNestedTypesWithinDefaultPackage() {
+	@Test def void addNestedTypesWithinDefaultPackage() {
 		createFile('Bar.java',
 			'''
 				public class Bar {
@@ -309,7 +309,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "Bar", "Bar$Foo", "Bar$Foo2", "Bar$Foo$Foo3")
 	}
 
-	@Test def public void addNestedTypesWithinDefaultPackage2() {
+	@Test def void addNestedTypesWithinDefaultPackage2() {
 		createFile('Bar.java',
 			'''
 				public class Bar {
@@ -328,7 +328,7 @@ abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueuedBuildDa
 			], "Bar$Foo", "Bar$Foo$Foo3")
 	}
 
-	@Test def public void removeNestedTypesWithinDefaultPackage() {
+	@Test def void removeNestedTypesWithinDefaultPackage() {
 		createFile('Bar.java',
 			'''
 				public class Bar {

@@ -172,7 +172,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 		this.resolvedTypes = resolvedTypes
 	}
 	
-	override public getTypeParameterMapping() {
+	override getTypeParameterMapping() {
 		super.getTypeParameterMapping()
 	}
 	
