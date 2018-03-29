@@ -192,7 +192,7 @@ public class ConstantConditionsInterpreter {
                 Object _rawValue_1 = result.getRawValue();
                 return new EvaluationResult(_rawValue_1, false);
               } else {
-                ArrayList<Object> _switchResult_1 = null;
+                List<Object> _switchResult_1 = null;
                 Object _rawValue_2 = receiver.getRawValue();
                 final Object v = _rawValue_2;
                 boolean _matched_1 = false;
@@ -213,7 +213,10 @@ public class ConstantConditionsInterpreter {
                     _switchResult_1 = new ArrayList<Object>(((Collection<?>)v));
                   }
                 }
-                final ArrayList<Object> list = _switchResult_1;
+                if (!_matched_1) {
+                  _switchResult_1 = CollectionLiterals.<Object>emptyList();
+                }
+                final List<Object> list = _switchResult_1;
                 list.add(feature);
                 return new EvaluationResult(list, false);
               }

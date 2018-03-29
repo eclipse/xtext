@@ -209,17 +209,18 @@ class FormattableDocument {
 	def int lineLengthBefore(int offset) {
 		var currentIndentation = 0
 		var NewLineData lastWrap = null
-		var lastIndentation = 0
 		
 		// find last NewLineData before offset
-		for(f:formattings.values) 
+		for(f:formattings.values) {
 			if(f.offset < offset) {
 				currentIndentation = currentIndentation + f.indentationChange
 				if(f instanceof NewLineData) {
 					lastWrap = f
-					lastIndentation = currentIndentation
 				}
 			}
+		}
+		
+		if(lastWrap === null) return offset;
 			
 		// check if there is a \n between the NewLineData and offset 
 		var lastOffset = lastWrap.offset + lastWrap.length

@@ -202,15 +202,16 @@ class UnresolvableFeatureException extends ConstantExpressionEvaluationException
 	
 }
 
+@Data
 class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
 	
 	JvmField field
-	ConstantExpressionEvaluationException cause
+	ConstantExpressionEvaluationException exceptionCause
 	
 	new(XExpression expression, JvmField field, ConstantExpressionEvaluationException cause) {
-		super('Error during call to '+field.simpleName+' : ' +cause.message, expression)
+		super('''Error during call to «field.simpleName» : «cause.message»''', expression)
 		this.field = field
-		this.cause = cause
+		this.exceptionCause = cause
 	}
 	
 }

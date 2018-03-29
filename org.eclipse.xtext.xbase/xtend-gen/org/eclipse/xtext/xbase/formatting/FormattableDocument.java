@@ -438,7 +438,6 @@ public class FormattableDocument {
     {
       int currentIndentation = 0;
       NewLineData lastWrap = null;
-      int lastIndentation = 0;
       Collection<FormattingData> _values = this.formattings.values();
       for (final FormattingData f : _values) {
         int _offset = f.getOffset();
@@ -449,9 +448,11 @@ public class FormattableDocument {
           currentIndentation = _plus;
           if ((f instanceof NewLineData)) {
             lastWrap = ((NewLineData)f);
-            lastIndentation = currentIndentation;
           }
         }
+      }
+      if ((lastWrap == null)) {
+        return offset;
       }
       int _offset_1 = lastWrap.getOffset();
       int _length = lastWrap.getLength();

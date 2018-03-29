@@ -275,7 +275,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 		Reader reader = new InputStreamReader(new FileInputStream(new File(buildPropertiesPath)), Charset.forName(rootOutlet.getFileEncoding()));
 		try {
 			String existingContent = CharStreams.toString(reader);
-			// for encodign details, see Properties.load
+			// for encoding details, see Properties.load
 			buildProperties.load(new StringInputStream(existingContent, "ISO-8859-1"));
 			String binIncludes = buildProperties.getProperty("bin.includes");
 			boolean changed = false;
