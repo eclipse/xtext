@@ -145,6 +145,7 @@ import com.google.common.primitives.Ints;
 	 *            contain <code>null</code> values.
 	 * @return a new {@link ArrayList} containing those elements
 	 */
+	@SafeVarargs
 	@Pure
 	public static <T> ArrayList<T> newArrayList(T... initial) {
 		if (initial.length > 0)
@@ -172,6 +173,7 @@ import com.google.common.primitives.Ints;
 	 *            contain <code>null</code> values.
 	 * @return a new {@link LinkedList} containing those elements
 	 */
+	@SafeVarargs
 	@Pure
 	public static <T> LinkedList<T> newLinkedList(T... initial) {
 		if (initial.length > 0)
@@ -199,6 +201,7 @@ import com.google.common.primitives.Ints;
 	 *            contain <code>null</code> values.
 	 * @return a new {@link HashSet} containing those elements
 	 */
+	@SafeVarargs
 	@Pure
 	public static <T> HashSet<T> newHashSet(T... initial) {
 		if (initial.length > 0)
@@ -226,6 +229,7 @@ import com.google.common.primitives.Ints;
 	 *            contain <code>null</code> values.
 	 * @return a new {@link LinkedHashSet} containing those elements
 	 */
+	@SafeVarargs
 	@Pure
 	public static <T> LinkedHashSet<T> newLinkedHashSet(T... initial) {
 		if (initial.length > 0)
@@ -259,6 +263,7 @@ import com.google.common.primitives.Ints;
 	 *            of the items should be used.
 	 * @return a new {@link TreeSet} containing those elements
 	 */
+	@SafeVarargs
 	@Pure
 	public static <T> TreeSet<T> newTreeSet(Comparator<? super T> comparator, T... initial) {
 		TreeSet<T> result = new TreeSet<T>(comparator);
@@ -290,6 +295,7 @@ import com.google.common.primitives.Ints;
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@SafeVarargs
 	@Pure
 	public static <K, V> HashMap<K, V> newHashMap(Pair<? extends K, ? extends V>... initial) {
 		if (initial.length > 0) {
@@ -323,6 +329,7 @@ import com.google.common.primitives.Ints;
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@SafeVarargs
 	@Pure
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<? extends K, ? extends V>... initial) {
 		if (initial.length > 0) {
@@ -371,6 +378,7 @@ import com.google.common.primitives.Ints;
 	 * @throws IllegalArgumentException
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
+	@SafeVarargs
 	@Pure
 	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<? extends K, ? extends V>... initial) {
 		TreeMap<K, V> result = new TreeMap<K, V>(comparator);
@@ -378,6 +386,7 @@ import com.google.common.primitives.Ints;
 		return result;
 	}
 
+	@SafeVarargs
 	private static <K, V> void putAll(Map<K, V> result, Pair<? extends K, ? extends V>... entries) {
 		for (Pair<? extends K, ? extends V> entry : entries) {
 			if (result.containsKey(entry.getKey()))
