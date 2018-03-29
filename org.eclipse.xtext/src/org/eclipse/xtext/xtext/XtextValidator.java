@@ -1261,6 +1261,15 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 //		}
 //	}
 	
+	
+	@Check
+	public void checkCallToDeprecatedParserRule(RuleCall ruleCall) {
+		AbstractRule calledRule = ruleCall.getRule();
+		if(hasAnnotation(calledRule, AnnotationNames.DEPRECATED)) {
+			addIssue("The called rule is marked as deprecated.", ruleCall, XtextPackage.eINSTANCE.getRuleCall_Rule(), XtextConfigurableIssueCodes.USAGE_OF_DEPRECATED_RULE);
+		}
+	}
+	
 	@Check
 	public void checkOverridingRule(AbstractRule rule) {
 		final String name = rule.getName();
@@ -1276,7 +1285,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			if (r != null) {
 				if(hasAnnotation(r, AnnotationNames.DEPRECATED)) {
 					warning("This rule overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is deprecated.", rule, 
-							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
+							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.USAGE_OF_DEPRECATED_RULE);
 				}
 				if(hasAnnotation(r, AnnotationNames.FINAL)) {
 					error("This rule illegally overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + " which is final.", rule, 

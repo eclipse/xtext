@@ -256,6 +256,20 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
 	}
 	
+	@Test public void testCallDeprecatedRule() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate bar \"http://org.xtext.Bar\"\n" + 
+				"Model : rules+=RuleDeprecated*;\n" +
+				"@Deprecated\n" +
+				"RuleDeprecated: name=ID;");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("The called rule is marked as deprecated.", issues.get(0).getMessage());
+		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
+	}
+	
 	@Test public void testTerminalAnnotation() throws Exception {
 		Resource resource = getResourceFromString("grammar org.xtext.Supergrammar with org.eclipse.xtext.common.Terminals\n" + 
 				"generate supergrammar \"http://org.xtext.supergrammar\"\n" + 
