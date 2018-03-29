@@ -1757,5 +1757,4 @@ class AssignabilityWithCustomSynonymsTest extends AbstractAssignabilityTest {
 	
 }
 
-interface StrangeIterable<T> extends Iterable {}
 interface StringIntMap extends Map<String, Integer> {}

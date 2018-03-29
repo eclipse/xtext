@@ -15,9 +15,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.xtext.validation.IssueCodes;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
-import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
  * @author Dennis Huebner - Initial contribution and API

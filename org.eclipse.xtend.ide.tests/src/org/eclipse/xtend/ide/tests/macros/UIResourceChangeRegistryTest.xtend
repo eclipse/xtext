@@ -213,8 +213,7 @@ class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
 			workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE)
 		}
 		
-		override resourceChanged(IResourceChangeEvent event) {
-//			println(event.delta.toReadableString)
+		override synchronized resourceChanged(IResourceChangeEvent event) {
 			super.resourceChanged(event)
 			waitForEvent = false
 		}

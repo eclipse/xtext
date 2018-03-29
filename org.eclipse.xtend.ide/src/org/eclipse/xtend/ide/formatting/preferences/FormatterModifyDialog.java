@@ -93,6 +93,7 @@ public class FormatterModifyDialog extends ModifyDialog {
 	}
 
 	// @Override intentionally removed to ensure backward compatibility
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void addPages(final Map values) {
 		if (isOldAPIVersion()) {

@@ -893,7 +893,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (t instanceof VirtualMachineError)
 			throw t;
 		if (this.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
-			Throwables.propagateIfPossible(t)
+			Throwables.throwIfUnchecked(t);
 			throw new RuntimeException(getMessageWithoutStackTrace(t), t)
 		}
 		val msg = getMessageWithStackTrace(t)

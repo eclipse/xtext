@@ -161,7 +161,7 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 	def init(IWorkspace workspace) {
 		this.workspace = workspace
 		load
-		workspace.addSaveParticipant(uiPlugin, new ISaveParticipant() {
+		workspace.addSaveParticipant(uiPlugin.bundle.symbolicName, new ISaveParticipant() {
 			override saving(ISaveContext context) throws CoreException {
 				save
 			}

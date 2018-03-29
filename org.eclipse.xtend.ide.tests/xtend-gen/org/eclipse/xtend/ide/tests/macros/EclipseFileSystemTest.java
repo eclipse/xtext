@@ -146,7 +146,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   @Test
   public void testIssue383() {
     if ((this.fs instanceof AbstractFileSystemSupport)) {
-      final AbstractFileSystemSupport afs = ((AbstractFileSystemSupport) this.fs);
+      final AbstractFileSystemSupport afs = ((AbstractFileSystemSupport)this.fs);
       final IProject px = this.createProject("px");
       this.createProject("py");
       final ResourceSet rs = this.resourceSetProvider.get(px);

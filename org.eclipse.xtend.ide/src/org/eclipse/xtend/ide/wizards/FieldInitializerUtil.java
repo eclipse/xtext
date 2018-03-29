@@ -28,7 +28,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
  */
 public class FieldInitializerUtil {
 
-	@SuppressWarnings("cast")
 	public IJavaElement getSelectedResource(IStructuredSelection selection) {
 		IJavaElement elem = null;
 		if(selection != null && !selection.isEmpty()){
@@ -66,7 +65,6 @@ public class FieldInitializerUtil {
 		return elem;
 	}
 
-	@SuppressWarnings("cast")
 	private IJavaElement getPackage(IAdaptable adaptable) {
 		IJavaElement elem = null;
 		IResource resource = (IResource) adaptable.getAdapter(IResource.class);

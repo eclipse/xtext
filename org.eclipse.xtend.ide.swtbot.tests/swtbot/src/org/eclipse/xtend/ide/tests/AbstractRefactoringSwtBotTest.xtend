@@ -22,7 +22,6 @@ import org.eclipse.text.undo.DocumentUndoManagerRegistry
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtend.ide.internal.XtendActivator
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil

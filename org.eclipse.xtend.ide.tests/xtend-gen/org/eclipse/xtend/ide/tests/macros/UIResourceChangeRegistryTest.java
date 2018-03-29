@@ -72,7 +72,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
     }
     
     @Override
-    public void resourceChanged(final IResourceChangeEvent event) {
+    public synchronized void resourceChanged(final IResourceChangeEvent event) {
       super.resourceChanged(event);
       this.waitForEvent = false;
     }
