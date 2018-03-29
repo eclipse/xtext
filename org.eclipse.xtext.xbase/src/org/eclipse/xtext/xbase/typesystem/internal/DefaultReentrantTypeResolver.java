@@ -142,8 +142,8 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 			if (operationCanceledManager.isOperationCanceledException(e)) {
 				operationCanceledManager.propagateAsErrorIfCancelException(e);
 			}
-			Throwables.throwIfUnchecked(e);
-			throw new RuntimeException(e);
+			// Needed for Guava 14-19
+			Throwables.propagate(e);
 		} finally {
 			resolving = false;
 			task.stop();
