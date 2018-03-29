@@ -24718,40 +24718,47 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumRule__Group__0__Impl"
-    // InternalXtext.g:7936:1: rule__EnumRule__Group__0__Impl : ( ( rule__EnumRule__AnnotationsAssignment_0 )? ) ;
+    // InternalXtext.g:7936:1: rule__EnumRule__Group__0__Impl : ( ( rule__EnumRule__AnnotationsAssignment_0 )* ) ;
     public final void rule__EnumRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalXtext.g:7940:1: ( ( ( rule__EnumRule__AnnotationsAssignment_0 )? ) )
-            // InternalXtext.g:7941:1: ( ( rule__EnumRule__AnnotationsAssignment_0 )? )
+            // InternalXtext.g:7940:1: ( ( ( rule__EnumRule__AnnotationsAssignment_0 )* ) )
+            // InternalXtext.g:7941:1: ( ( rule__EnumRule__AnnotationsAssignment_0 )* )
             {
-            // InternalXtext.g:7941:1: ( ( rule__EnumRule__AnnotationsAssignment_0 )? )
-            // InternalXtext.g:7942:2: ( rule__EnumRule__AnnotationsAssignment_0 )?
+            // InternalXtext.g:7941:1: ( ( rule__EnumRule__AnnotationsAssignment_0 )* )
+            // InternalXtext.g:7942:2: ( rule__EnumRule__AnnotationsAssignment_0 )*
             {
              before(grammarAccess.getEnumRuleAccess().getAnnotationsAssignment_0()); 
-            // InternalXtext.g:7943:2: ( rule__EnumRule__AnnotationsAssignment_0 )?
-            int alt75=2;
-            int LA75_0 = input.LA(1);
+            // InternalXtext.g:7943:2: ( rule__EnumRule__AnnotationsAssignment_0 )*
+            loop75:
+            do {
+                int alt75=2;
+                int LA75_0 = input.LA(1);
 
-            if ( (LA75_0==28) ) {
-                alt75=1;
-            }
-            switch (alt75) {
-                case 1 :
-                    // InternalXtext.g:7943:3: rule__EnumRule__AnnotationsAssignment_0
-                    {
-                    pushFollow(FollowSets000.FOLLOW_2);
-                    rule__EnumRule__AnnotationsAssignment_0();
-
-                    state._fsp--;
+                if ( (LA75_0==28) ) {
+                    alt75=1;
+                }
 
 
-                    }
-                    break;
+                switch (alt75) {
+            	case 1 :
+            	    // InternalXtext.g:7943:3: rule__EnumRule__AnnotationsAssignment_0
+            	    {
+            	    pushFollow(FollowSets000.FOLLOW_17);
+            	    rule__EnumRule__AnnotationsAssignment_0();
 
-            }
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop75;
+                }
+            } while (true);
 
              after(grammarAccess.getEnumRuleAccess().getAnnotationsAssignment_0()); 
 
@@ -30091,20 +30098,18 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
     protected DFA1 dfa1 = new DFA1(this);
     protected DFA8 dfa8 = new DFA8(this);
-    static final String dfa_1s = "\10\uffff";
-    static final String dfa_2s = "\2\4\3\uffff\3\4";
-    static final String dfa_3s = "\1\61\1\4\3\uffff\1\61\1\4\1\61";
-    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\3\uffff";
-    static final String dfa_5s = "\10\uffff}>";
+    static final String dfa_1s = "\6\uffff";
+    static final String dfa_2s = "\2\4\3\uffff\1\4";
+    static final String dfa_3s = "\1\61\1\4\3\uffff\1\61";
+    static final String dfa_4s = "\2\uffff\1\1\1\2\1\3\1\uffff";
+    static final String dfa_5s = "\6\uffff}>";
     static final String[] dfa_6s = {
             "\1\2\13\uffff\2\2\12\uffff\1\1\16\uffff\1\3\3\uffff\1\4\1\uffff\1\2",
             "\1\5",
             "",
             "",
             "",
-            "\1\2\13\uffff\2\2\12\uffff\1\6\16\uffff\1\3\3\uffff\1\4\1\uffff\1\2",
-            "\1\7",
-            "\1\2\13\uffff\2\2\12\uffff\1\6\16\uffff\1\3\5\uffff\1\2"
+            "\1\2\13\uffff\2\2\12\uffff\1\1\16\uffff\1\3\3\uffff\1\4\1\uffff\1\2"
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);

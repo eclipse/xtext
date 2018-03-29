@@ -45,6 +45,8 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
 	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
 	public static final String INVALID_ANNOTAION = ISSUE_CODE_PREFIX + "InvalidAnnotation";
+	public static final String USAGE_OF_DEPRECATED_RULE = ISSUE_CODE_PREFIX + "UsageOfDeprecatedRule";
+	
 
 	@Override
 	protected void initialize(IAcceptor<PreferenceKey> acceptor) {
@@ -64,6 +66,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(DUPLICATE_ENUM_LITERAL, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(BIDIRECTIONAL_REFERENCE, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(DISCOURAGED_RULE_NAME, SeverityConverter.SEVERITY_WARNING));
+		acceptor.accept(create(USAGE_OF_DEPRECATED_RULE, SeverityConverter.SEVERITY_WARNING));
 	}
 	
 }

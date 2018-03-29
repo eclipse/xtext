@@ -20,6 +20,8 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ComposedChecks
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider
+import org.eclipse.xtext.validation.SeverityConverter
 import org.eclipse.xtext.xtext.AnnotationNames
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -30,6 +32,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.preferences.PreferenceKey
+
 /**
  * By using this fragment validation gets enabled.
  * By using @Deprecated in the grammar on a ParserRule a validation gets generated that raises an issue for that.
@@ -55,6 +60,34 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	def void addComposedCheck(String composedCheckValidator) {
 		composedChecks += composedCheckValidator
 	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def getConfigurableIssueCodesProviderClass(){
+		return new TypeReference(grammar.runtimeBasePackage + '.validation.' + grammar.simpleName + 'ConfigurableIssueCodesProvider')
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def getValidatorConfigurationBlockClass(){
+		return new TypeReference(grammar.runtimeBasePackage + '.validation.' + grammar.simpleName + 'ValidatorConfigurationBlock')
+	}
+	
+		/**
+	 * @since 2.14
+	 */
+	protected def getAbstractValidatorConfigurationBlockClass(){
+		return new TypeReference("org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock")
+	}
+
+	/**
+	 * @since 2.14
+	 */
+	protected def getSuperConfigurableIssueCodesProviderClass(){
+		return new TypeReference(ConfigurableIssueCodesProvider)
+	}
 
 	protected def TypeReference getGenValidatorSuperClass(Grammar grammar) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
@@ -67,11 +100,29 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	protected def TypeReference getDefaultValidatorSuperClass() {
 		new TypeReference(AbstractDeclarativeValidator)
 	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def contributeRuntimeGuiceBindings() {
+		val bindingFactory = new GuiceModuleAccess.BindingFactory
+		bindingFactory.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
+		bindingFactory.addTypeToType(superConfigurableIssueCodesProviderClass,configurableIssueCodesProviderClass)
+		bindingFactory.contributeTo(language.runtimeGenModule)
+	}
+	/**
+	 * @since 2.14
+	 */
+	protected def contributePluginGuiceBindings() {
+		val bindingFactory = new GuiceModuleAccess.BindingFactory
+		bindingFactory.addTypeToType(abstractValidatorConfigurationBlockClass,validatorConfigurationBlockClass)
+		bindingFactory.contributeTo(language.eclipsePluginGenModule)
+	}
 
 	override generate() {
-		new GuiceModuleAccess.BindingFactory().addTypeToTypeEagerSingleton(grammar.validatorClass,
-			grammar.validatorClass).contributeTo(language.runtimeGenModule)
-
+		contributeRuntimeGuiceBindings
+		contributePluginGuiceBindings
+		
 		if (isGenerateStub) {
 			if (generateXtendStub)
 				generateXtendValidatorStub()
@@ -79,6 +130,8 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				generateJavaValidatorStub()
 		}
 		generateGenValidator().writeTo(projectConfig.runtime.srcGen)
+		generateIssueProvider().writeTo(projectConfig.runtime.srcGen)
+		generateValidationConfigurationBlock().writeTo(projectConfig.eclipsePlugin.srcGen)
 
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
@@ -164,6 +217,84 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		'''
 		javaFile
 	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def generateIssueProvider(){
+		val javaFile = fileAccessFactory.createGeneratedJavaFile(configurableIssueCodesProviderClass)
+		javaFile.content = '''
+			@SuppressWarnings("restriction")
+			public class «configurableIssueCodesProviderClass» extends «superConfigurableIssueCodesProviderClass» {
+				protected static final String ISSUE_CODE_PREFIX = "org.xtext.example.mydsl.";
+			
+				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
+			
+				@Override
+				protected void initialize(«IAcceptor»<«PreferenceKey»> acceptor) {
+					acceptor.accept(create(DEPRECATED_MODEL_PART, «SeverityConverter».SEVERITY_WARNING));
+				}
+			}
+		'''
+		javaFile
+	}
+	
+	protected def generateValidationConfigurationBlock() {
+		val javaFile = fileAccessFactory.createGeneratedJavaFile(validatorConfigurationBlockClass)
+		javaFile.content = '''
+			@SuppressWarnings("restriction")
+			public class «validatorConfigurationBlockClass» extends «abstractValidatorConfigurationBlockClass» {
+			
+				@Override
+				protected void fillSettingsPage(«typeRef("org.eclipse.swt.widgets.Composite")» composite, int nColumns, int defaultIndent) {
+					addComboBox(«getConfigurableIssueCodesProviderClass».DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
+				}
+			
+				@Override
+				protected «typeRef('org.eclipse.core.runtime.jobs.Job')» getBuildJob(«typeRef('org.eclipse.core.resources.IProject')» project) {
+					«typeRef('org.eclipse.core.runtime.jobs.Job')» buildJob = new «typeRef('org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock')».BuildJob("Validation Settings Changed", project);
+					buildJob.setRule(«typeRef('org.eclipse.core.resources.ResourcesPlugin')».getWorkspace().getRuleFactory().buildRule());
+					buildJob.setUser(true);
+					return buildJob;
+				}
+			
+				@Override
+				protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {
+					return new String[] { "Validation Settings Changed",
+							"Validation settings have changed. A full rebuild is required for changes to take effect. Do the full build now?" };
+				}
+			
+				@Override
+				protected void validateSettings(String changedKey, String oldValue, String newValue) {
+				}
+			
+				protected «typeRef('org.eclipse.swt.widgets.Combo')» addComboBox(String prefKey, String label, Composite parent, int indent) {
+					String[] values = new String[] { «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_ERROR, «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_WARNING,
+							«typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_INFO, «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_IGNORE };
+					String[] valueLabels = new String[] { "Error", "Warning", "Info", "Ignore" };
+					«typeRef('org.eclipse.swt.widgets.Combo')» comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
+					return comboBox;
+				}
+			
+				@Override
+				public void dispose() {
+					storeSectionExpansionStates(getDialogSettings());
+					super.dispose();
+				}
+			
+				@Override
+				protected «typeRef('org.eclipse.jface.dialogs.IDialogSettings')» getDialogSettings() {
+					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» dialogSettings = super.getDialogSettings();
+					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» section = dialogSettings.getSection("MyDsl");
+					if (section == null) {
+						return dialogSettings.addNewSection("MyDsl");
+					}
+					return section;
+				}
+			}
+		'''
+		javaFile
+	}
 
 	protected def StringConcatenationClient generateValidationToDeprecateRules() '''
 		«IF generateDeprecationValidation»
@@ -172,7 +303,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				
 				@«Check»
 				public void checkDeprecated«elementType.simpleName»(«elementType» element) {
-					warning("This part of the language is marked as deprecated and might get removed in the future!", element, null);
+					addIssue("This part of the language is marked as deprecated and might get removed in the future!", element, «configurableIssueCodesProviderClass».DEPRECATED_MODEL_PART);
 				}
 			«ENDFOR»
 		«ENDIF»
@@ -216,6 +347,15 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 					point="org.eclipse.core.resources.markers">
 				<super type="org.eclipse.xtext.ui.check.expensive"/>
 				<persistent value="true"/>
+			</extension>
+			<extension point="org.eclipse.ui.preferencePages">
+				<page
+					category="«grammar.name»"
+					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+					id="«grammar.name».validator.preferencePage"
+					name="Errors/Warnings">
+					<keywordReference id="«grammar.eclipsePluginBasePackage».keyword_«simpleName»"/>
+				</page>
 			</extension>
 		'''
 	}

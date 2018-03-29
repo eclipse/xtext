@@ -2181,16 +2181,16 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//EnumRule:
-		//	annotations+=Annotation?
+		//	annotations+=Annotation*
 		//	'enum' name=ValidID ('returns' type=TypeRef)? ':'
 		//	alternatives=EnumLiterals
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//annotations+=Annotation? 'enum' name=ValidID ('returns' type=TypeRef)? ':' alternatives=EnumLiterals ';'
+		//annotations+=Annotation* 'enum' name=ValidID ('returns' type=TypeRef)? ':' alternatives=EnumLiterals ';'
 		public Group getGroup() { return cGroup; }
 		
-		//annotations+=Annotation?
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_0() { return cAnnotationsAssignment_0; }
 		
 		//Annotation
@@ -3026,7 +3026,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EnumRule:
-	//	annotations+=Annotation?
+	//	annotations+=Annotation*
 	//	'enum' name=ValidID ('returns' type=TypeRef)? ':'
 	//	alternatives=EnumLiterals
 	//	';';
