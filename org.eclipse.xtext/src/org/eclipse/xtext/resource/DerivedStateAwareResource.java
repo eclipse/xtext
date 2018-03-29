@@ -248,8 +248,8 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 							newFullyInitialized = false;
 							operationCanceledManager.propagateAsErrorIfCancelException(e);
 						}
-						Throwables.throwIfUnchecked(e);
-						throw new RuntimeException(e);
+						// Needed for Guava 14-19
+						Throwables.propagate(e);
 					}
 				}
 			} catch (RuntimeException e) {
@@ -280,8 +280,8 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 			if (operationCanceledManager.isOperationCanceledException(e)) {
 				throw new IllegalStateException("IDerivedStateComputer#discardDerivedState should not check whether the current operation is canceled.", e);
 			}
-			Throwables.throwIfUnchecked(e);
-			throw new RuntimeException(e);
+			// Needed for Guava 14-19
+			Throwables.propagate(e);
 		}
 	}
 	
