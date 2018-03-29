@@ -29,7 +29,6 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 	}
 
 	CompositeGeneratorNode currentParent = this
-	boolean isEmptyLine = true;
 
 	override append(Object object, String indentation) {
 		if (indentation.length > 0) {
@@ -63,8 +62,6 @@ class TemplateNode extends CompositeGeneratorNode implements TargetStringConcate
 				val iter = lineSplitter.split(str).iterator
 				while (iter.hasNext) {
 					val segment = iter.next
-					if (!segment.isEmpty)
-						isEmptyLine = false				
 					nodeFactory.append(currentParent, segment)
 					if (iter.hasNext) {
 						newLine
