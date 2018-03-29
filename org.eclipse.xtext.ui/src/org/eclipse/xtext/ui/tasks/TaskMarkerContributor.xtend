@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.markers.IMarkerContributor
  */
 class TaskMarkerContributor implements IMarkerContributor {
 
-	static final val log = Logger.getLogger(TaskMarkerContributor);
+	static val log = Logger.getLogger(TaskMarkerContributor);
 
 	@Inject
 	TaskMarkerCreator markerCreator
