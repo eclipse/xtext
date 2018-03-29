@@ -86,11 +86,11 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		fsa.generateFile(path, new ByteArrayInputStream(bout.toByteArray, 0, bout.length))
 	}
 	
-	override def ResourceStorageLoadable createResourceStorageLoadable(InputStream in) {
+	override ResourceStorageLoadable createResourceStorageLoadable(InputStream in) {
 		return new ResourceStorageLoadable(in, isStoreNodeModel)
 	}
 	
-	override def ResourceStorageWritable createResourceStorageWritable(OutputStream out) {
+	override ResourceStorageWritable createResourceStorageWritable(OutputStream out) {
 		return new ResourceStorageWritable(out, isStoreNodeModel)
 	}
 	

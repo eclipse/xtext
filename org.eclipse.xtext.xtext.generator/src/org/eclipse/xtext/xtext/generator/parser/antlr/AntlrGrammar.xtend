@@ -26,7 +26,7 @@ class AntlrGrammar {
 		name.replace('.', '/') + ".tokens"
 	}
 	
-	override def toString() {
+	override toString() {
 		name
 	}
 }

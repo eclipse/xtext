@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Holger Schill - Initial contribution and API
