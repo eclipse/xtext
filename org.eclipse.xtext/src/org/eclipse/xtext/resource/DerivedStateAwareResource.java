@@ -249,7 +249,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 							operationCanceledManager.propagateAsErrorIfCancelException(e);
 						}
 						// Needed for Guava 14-19
-						Throwables.propagate(e);
+						throw Throwables.propagate(e);
 					}
 				}
 			} catch (RuntimeException e) {
@@ -281,7 +281,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 				throw new IllegalStateException("IDerivedStateComputer#discardDerivedState should not check whether the current operation is canceled.", e);
 			}
 			// Needed for Guava 14-19
-			Throwables.propagate(e);
+			throw Throwables.propagate(e);
 		}
 	}
 	
