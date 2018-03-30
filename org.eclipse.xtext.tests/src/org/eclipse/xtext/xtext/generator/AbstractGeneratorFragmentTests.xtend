@@ -46,7 +46,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	
 	@Before
 	override setUp() {
-		globalStateMemento = globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
+		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
 		super.setUp();
 		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
 		with(XtextStandaloneSetup)
