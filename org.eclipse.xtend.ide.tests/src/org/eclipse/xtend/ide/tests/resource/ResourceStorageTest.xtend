@@ -158,7 +158,7 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		testShouldLoadFromStorageJob.join
 		val t = throwables.head
 		if (t !== null) {
-			Throwables.propagate(t)
+			throw Throwables.propagate(t)
 		}
 	}
 
