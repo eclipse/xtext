@@ -893,7 +893,8 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (t instanceof VirtualMachineError)
 			throw t;
 		if (this.lastPhase == ActiveAnnotationContexts.AnnotationCallback.GENERATION) {
-			Throwables.propagateIfPossible(t)
+			// Needed for Guava 14-19
+			Throwables.propagateIfPossible(t);
 			throw new RuntimeException(getMessageWithoutStackTrace(t), t)
 		}
 		val msg = getMessageWithStackTrace(t)

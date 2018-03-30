@@ -377,5 +377,4 @@ abstract class AssignabilityTest extends CommonAssignabilityTest {
 	
 }
 
-interface StrangeIterable<T> extends Iterable {}
 interface StringIntMap extends Map<String, Integer> {}

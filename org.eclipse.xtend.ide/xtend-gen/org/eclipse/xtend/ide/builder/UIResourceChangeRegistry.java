@@ -220,7 +220,8 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     try {
       this.workspace = workspace;
       this.load();
-      workspace.addSaveParticipant(this.uiPlugin, new ISaveParticipant() {
+      String _symbolicName = this.uiPlugin.getBundle().getSymbolicName();
+      workspace.addSaveParticipant(_symbolicName, new ISaveParticipant() {
         @Override
         public void saving(final ISaveContext context) throws CoreException {
           UIResourceChangeRegistry.this.save();

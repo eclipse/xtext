@@ -110,7 +110,7 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 	
 	@Test def void testIssue383() {
 		if (fs instanceof AbstractFileSystemSupport) {
-			val afs = fs as AbstractFileSystemSupport
+			val afs = fs
 			val px = createProject("px")
 			createProject("py")
 			val rs = resourceSetProvider.get(px)

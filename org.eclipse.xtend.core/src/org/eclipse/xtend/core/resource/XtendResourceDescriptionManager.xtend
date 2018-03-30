@@ -80,7 +80,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 	
 
-	def override Iterable<QualifiedName> getImportedNames() {
+	override Iterable<QualifiedName> getImportedNames() {
 		if (importedNames !== null) {
 			return importedNames;
 		}
