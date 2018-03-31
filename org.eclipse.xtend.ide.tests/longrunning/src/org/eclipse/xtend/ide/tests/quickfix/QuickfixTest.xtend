@@ -4023,4 +4023,38 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Ignore("java.lang.ClassCastException: org.eclipse.xtext.nodemodel.impl.CompositeNode cannot be cast to org.eclipse.xtext.nodemodel.ILeafNode")
+	@Test
+	def void redundantModifiers_15(){
+		// Xtend extension field without name having a 'private' modifier
+		create('Foo.xtend', '''
+			import java.text.DateFormat
+			import java.text.SimpleDateFormat
+			import java.util.Date
+			
+			class Foo {
+				priva|te extension DateFormat = new SimpleDateFormat
+				
+				def a(){
+					new Date().format
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			import java.text.DateFormat
+			import java.text.SimpleDateFormat
+			import java.util.Date
+			
+			class Foo {
+				extension DateFormat = new SimpleDateFormat
+				
+				def a(){
+					new Date().format
+				}
+			}
+		''')
+	}
 }
