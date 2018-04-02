@@ -521,6 +521,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_86() {
 		"AbstractForm<? extends AbstractP<? extends View<?>>>".isSuperTypeOf("gh158.Form1", "gh158.Form2")
 	}
+	
+	@Test
+	def void testCommonSuperType_87() {
+		"Map<? extends AbstractForm<? extends AbstractP<? extends View<?>>>, ? extends AbstractForm<? extends AbstractP<? extends View<?>>>>".isSuperTypeOf("java.util.Map<gh158.Form1, gh158.Form1>", "java.util.Map<gh158.Form2, gh158.Form2>")
+	}
 }
 
 

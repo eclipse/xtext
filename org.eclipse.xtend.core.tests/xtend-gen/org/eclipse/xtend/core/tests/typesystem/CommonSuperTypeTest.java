@@ -651,4 +651,9 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_86() {
     this.isSuperTypeOf("AbstractForm<? extends AbstractP<? extends View<?>>>", "gh158.Form1", "gh158.Form2");
   }
+  
+  @Test
+  public void testCommonSuperType_87() {
+    this.isSuperTypeOf("Map<? extends AbstractForm<? extends AbstractP<? extends View<?>>>, ? extends AbstractForm<? extends AbstractP<? extends View<?>>>>", "java.util.Map<gh158.Form1, gh158.Form1>", "java.util.Map<gh158.Form2, gh158.Form2>");
+  }
 }
