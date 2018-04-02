@@ -612,13 +612,15 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 * 
 	 * May return <code>null</code> in case one of the types is primitive void but not all 
 	 * of them are.
+	 * 
+	 * @see TypeConformanceComputer#newCommonSuperTypeFinder(ITypeReferenceOwner)
 	 */
 	/* @Nullable */
 	public LightweightTypeReference getCommonSuperType(final /* @NonNull */ List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
 		return newCommonSuperTypeFinder(owner).getCommonSuperType(types);
 	}
 
-	private CommonSuperTypeFinder newCommonSuperTypeFinder(ITypeReferenceOwner owner) {
+	protected CommonSuperTypeFinder newCommonSuperTypeFinder(ITypeReferenceOwner owner) {
 		return new CommonSuperTypeFinder(owner);
 	}
 	
