@@ -206,6 +206,22 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		return flags | SUCCESS;
 	}
 	
+	protected static class ListSizeMemento {
+		private final int depth;
+		private final List<?> list;
+		
+		public ListSizeMemento(List<?> list) {
+			this.list = list;
+			this.depth = list.size();
+		}
+		
+		void restore() {
+			for(int i = list.size(); i > depth; i--) {
+				list.remove(i-1);
+			}
+		}
+	}
+	
 	/**
 	 * Extracted helper class to compute the common super type of an arbitrary list of given types.
 	 * 
@@ -224,7 +240,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			this.owner = owner;
 		}
 		
-		public LightweightTypeReference getCommonSuperType(List<LightweightTypeReference> types) {
+		protected LightweightTypeReference getCommonSuperType(List<LightweightTypeReference> types) {
 			if (types==null || types.isEmpty())
 				throw new IllegalArgumentException("Types can't be null or empty "+types);
 			if (types.size()==1)
@@ -251,7 +267,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return doGetCommonSuperType(types);
 		}
 		
-		public LightweightTypeReference doGetCommonSuperType(List<LightweightTypeReference> types) {
+		protected LightweightTypeReference doGetCommonSuperType(List<LightweightTypeReference> types) {
 			LightweightTypeReference firstType = types.get(0);
 			final List<LightweightTypeReference> tail = types.subList(1, types.size());
 			// mapping from rawtype to resolved parameterized types
@@ -273,7 +289,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return wrapInCompoundTypeIfNecessary(referencesWithSameDistance);
 		}
 
-		private LightweightTypeReference wrapInCompoundTypeIfNecessary(
+		protected LightweightTypeReference wrapInCompoundTypeIfNecessary(
 				List<LightweightTypeReference> referencesWithSameDistance) {
 			if (referencesWithSameDistance.size() == 1) {
 				return referencesWithSameDistance.get(0);
@@ -287,7 +303,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 
-		private List<LightweightTypeReference> getMostSpecialCandidates(List<LightweightTypeReference> types,
+		protected List<LightweightTypeReference> getMostSpecialCandidates(List<LightweightTypeReference> types,
 				Multimap<JvmType, LightweightTypeReference> all, List<Entry<JvmType>> candidates) {
 			// try to find a matching parameterized type for the raw types in ascending order
 			List<LightweightTypeReference> result = Lists.newArrayListWithExpectedSize(2);
@@ -327,7 +343,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return result;
 		}
 		
-		private LightweightTypeReference findConformsToAllOrVoid(final List<LightweightTypeReference> types) {
+		protected LightweightTypeReference findConformsToAllOrVoid(final List<LightweightTypeReference> types) {
 			for(LightweightTypeReference type: types) {
 				LightweightTypeReference conformantType = conformsToAll(type, types);
 				if (conformantType != null)
@@ -340,7 +356,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 
-		private boolean allPrimitiveVoid(final List<LightweightTypeReference> types) {
+		protected boolean allPrimitiveVoid(final List<LightweightTypeReference> types) {
 			boolean allVoid = true;
 			for(LightweightTypeReference type: types) {
 				if (!type.isPrimitiveVoid()) {
@@ -365,7 +381,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 
-		private LightweightTypeReference doGetTypeParametersForSuperType(
+		protected LightweightTypeReference doGetTypeParametersForSuperType(
 				final Multimap<JvmType, LightweightTypeReference> all, JvmArrayType rawType, ITypeReferenceOwner owner,
 				List<LightweightTypeReference> types) {
 			JvmComponentType componentType = rawType.getComponentType();
@@ -391,7 +407,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 
-		private LightweightTypeReference doGetTypeParametersForSuperType(
+		protected LightweightTypeReference doGetTypeParametersForSuperType(
 				final Multimap<JvmType, LightweightTypeReference> all, JvmGenericType rawType, ITypeReferenceOwner owner,
 				List<LightweightTypeReference> types) {
 			// if we do not declare any parameters it is safe to return the first candidate
@@ -409,29 +425,19 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return result;
 		}
 
-		private void pushRequestedTypes(List<LightweightTypeReference> types) {
+		protected void pushRequestedTypes(List<LightweightTypeReference> types) {
 			if (requestsInProgress == null) {
 				requestsInProgress = Lists.newArrayListWithCapacity(5);
 			}
 			requestsInProgress.add(types);
 		}
 		
-		protected class RequestedTypesMemento {
-			int depth = requestsInProgress.size();
-			
-			void restore() {
-				for(int i = requestsInProgress.size(); i > depth; i--) {
-					requestsInProgress.remove(i-1);
-				}
-			}
-		}
-
 		protected boolean enhanceSuperType(List<LightweightTypeReference> superTypes, ParameterizedTypeReference result) {
 			JvmType rawType = result.getType();
 			ITypeReferenceOwner owner = result.getOwner();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
 			List<LightweightTypeReference> parameterSuperTypes = Lists.newArrayListWithCapacity(superTypes.size());
-			RequestedTypesMemento memento = new RequestedTypesMemento();
+			ListSizeMemento memento = new ListSizeMemento(requestsInProgress);
 			for(int i = 0, size = typeParameters.size(); i < size; i++) {
 				List<LightweightTypeReference> parameterReferences = Lists.newArrayListWithCapacity(typeParameters.size());
 				for(int j = 0, superTypesSize = superTypes.size(); j < superTypesSize; j++) {
@@ -486,7 +492,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return true;
 		}
 		
-		private boolean hasTypeParameters(JvmGenericType type) {
+		protected boolean hasTypeParameters(JvmGenericType type) {
 			if (!type.getTypeParameters().isEmpty()) {
 				return true;
 			}
@@ -496,7 +502,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return false;
 		}
 
-		public LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types) {
+		protected LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types) {
 			LightweightTypeReference mostSpecialTypeIfAllWildcards = getMostSpecialTypeIfAllWildcards(types);
 			if (mostSpecialTypeIfAllWildcards != null) {
 				if (mostSpecialTypeIfAllWildcards instanceof WildcardTypeReference)
@@ -567,7 +573,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return true;
 		}
 		
-		private void addIdentifier(LightweightTypeReference type, Set<String> allNames, Set<String> allBoundNames) {
+		protected void addIdentifier(LightweightTypeReference type, Set<String> allNames, Set<String> allBoundNames) {
 			if (type instanceof UnboundTypeReference && !type.isResolved()) {
 				allNames.add(((UnboundTypeReference) type).getHandle().toString());
 			} else {
@@ -577,13 +583,13 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			}
 		}
 		
-		private String getIdentifier(LightweightTypeReference type) {
+		protected String getIdentifier(LightweightTypeReference type) {
 			if (type instanceof UnboundTypeReference && !type.isResolved())
 				return ((UnboundTypeReference) type).getHandle().toString();
 			return type.getJavaIdentifier();
 		}
 		
-		private LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types) {
+		protected LightweightTypeReference getMostSpecialTypeIfAllWildcards(List<LightweightTypeReference> types) {
 			boolean objectIsCandidate = false;
 			boolean lowerBoundSeen = false;
 			for(LightweightTypeReference type: types) {
@@ -792,7 +798,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	@Deprecated
 	protected final boolean enhanceSuperType(List<LightweightTypeReference> superTypes, List<LightweightTypeReference> initiallyRequested,
 			ParameterizedTypeReference result) {
-		CommonSuperTypeFinder typeFinder = new CommonSuperTypeFinder(superTypes.get(0).getOwner());
+		CommonSuperTypeFinder typeFinder = newCommonSuperTypeFinder(superTypes.get(0).getOwner());
 		typeFinder.requestsInProgress = Lists.newArrayList();
 		typeFinder.requestsInProgress.add(initiallyRequested);
 		return typeFinder.enhanceSuperType(superTypes, result);
@@ -822,7 +828,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 */
 	@Deprecated
 	protected final boolean isRecursiveRequest(List<LightweightTypeReference> types, Set<String> allNames, List<LightweightTypeReference> initiallyRequested) {
-		CommonSuperTypeFinder typeFinder = new CommonSuperTypeFinder(types.get(0).getOwner());
+		CommonSuperTypeFinder typeFinder = newCommonSuperTypeFinder(types.get(0).getOwner());
 		typeFinder.requestsInProgress = Lists.newArrayList();
 		typeFinder.requestsInProgress.add(initiallyRequested);
 		return typeFinder.isRecursiveRequest(types, allNames);
