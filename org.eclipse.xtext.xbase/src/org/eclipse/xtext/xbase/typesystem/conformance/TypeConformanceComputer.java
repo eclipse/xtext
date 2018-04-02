@@ -302,7 +302,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					if (wasDistance != rawTypeCandidate.getCount()) {
 						if (classSeen)
 							break;
-						candidate = getTypeParametersForSupertype(all, rawType, owner, types);
+						candidate = getTypeParametersForSuperType(all, rawType, owner, types);
 						for(LightweightTypeReference prev: result) {
 							if ((isConformant(candidate, prev,
 									RawTypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
@@ -314,7 +314,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					}
 				}
 				if (candidate == null)
-					candidate = getTypeParametersForSupertype(all, rawType, owner, types);
+					candidate = getTypeParametersForSuperType(all, rawType, owner, types);
 				if (candidate != null) {
 					boolean isClass = isClass(rawType);
 					classSeen = classSeen || isClass;
@@ -351,21 +351,21 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return allVoid;
 		}
 		
-		protected LightweightTypeReference getTypeParametersForSupertype(
+		protected LightweightTypeReference getTypeParametersForSuperType(
 				final Multimap<JvmType, LightweightTypeReference> all, 
 				JvmType rawType, 
 				ITypeReferenceOwner owner,
 				List<LightweightTypeReference> types) {
 			EClass rawTypeClass = rawType.eClass();
 			if (rawTypeClass == TypesPackage.Literals.JVM_GENERIC_TYPE) {
-				return doGetTypeParametersForSupertype(all, (JvmGenericType) rawType, owner, types);
+				return doGetTypeParametersForSuperType(all, (JvmGenericType) rawType, owner, types);
 			} else if (rawTypeClass == TypesPackage.Literals.JVM_ARRAY_TYPE) {
-				return doGetTypeParametersForSupertype(all, (JvmArrayType) rawType, owner, types);
+				return doGetTypeParametersForSuperType(all, (JvmArrayType) rawType, owner, types);
 			}
 			return null;
 		}
 
-		private LightweightTypeReference doGetTypeParametersForSupertype(
+		private LightweightTypeReference doGetTypeParametersForSuperType(
 				final Multimap<JvmType, LightweightTypeReference> all, JvmArrayType rawType, ITypeReferenceOwner owner,
 				List<LightweightTypeReference> types) {
 			JvmComponentType componentType = rawType.getComponentType();
@@ -380,7 +380,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			for(LightweightTypeReference type: types) {
 				addComponentType(type, componentRequests);
 			}
-			LightweightTypeReference componentTypeReference = getTypeParametersForSupertype(
+			LightweightTypeReference componentTypeReference = getTypeParametersForSuperType(
 					copiedMultimap, 
 					componentType,
 					owner,
@@ -391,7 +391,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return null;
 		}
 
-		private LightweightTypeReference doGetTypeParametersForSupertype(
+		private LightweightTypeReference doGetTypeParametersForSuperType(
 				final Multimap<JvmType, LightweightTypeReference> all, JvmGenericType rawType, ITypeReferenceOwner owner,
 				List<LightweightTypeReference> types) {
 			// if we do not declare any parameters it is safe to return the first candidate
@@ -399,10 +399,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 				return getFirstForRawType(all, rawType); 
 			}
 			ParameterizedTypeReference result = owner.newParameterizedTypeReference(rawType);
-			if (requestsInProgress == null) {
-				requestsInProgress = Lists.newArrayListWithCapacity(5);
-			}
-			requestsInProgress.add(types);
+			pushRequestedTypes(types);
 			if (!enhanceSuperType(Lists.newArrayList(all.get(rawType)), result)) {
 				return null;
 			}
@@ -412,11 +409,29 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			return result;
 		}
 
+		private void pushRequestedTypes(List<LightweightTypeReference> types) {
+			if (requestsInProgress == null) {
+				requestsInProgress = Lists.newArrayListWithCapacity(5);
+			}
+			requestsInProgress.add(types);
+		}
+		
+		protected class RequestedTypesMemento {
+			int depth = requestsInProgress.size();
+			
+			void restore() {
+				for(int i = requestsInProgress.size(); i > depth; i--) {
+					requestsInProgress.remove(i-1);
+				}
+			}
+		}
+
 		protected boolean enhanceSuperType(List<LightweightTypeReference> superTypes, ParameterizedTypeReference result) {
 			JvmType rawType = result.getType();
 			ITypeReferenceOwner owner = result.getOwner();
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();
 			List<LightweightTypeReference> parameterSuperTypes = Lists.newArrayListWithCapacity(superTypes.size());
+			RequestedTypesMemento memento = new RequestedTypesMemento();
 			for(int i = 0, size = typeParameters.size(); i < size; i++) {
 				List<LightweightTypeReference> parameterReferences = Lists.newArrayListWithCapacity(typeParameters.size());
 				for(int j = 0, superTypesSize = superTypes.size(); j < superTypesSize; j++) {
@@ -452,6 +467,9 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					return false;
 				} else {
 					parameterSuperTypes.add(parameterSuperType);
+				}
+				if (i<size) {
+					memento.restore();
 				}
 			}
 			for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
@@ -597,7 +615,11 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 */
 	/* @Nullable */
 	public LightweightTypeReference getCommonSuperType(final /* @NonNull */ List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
-		return new CommonSuperTypeFinder(owner).getCommonSuperType(types);
+		return newCommonSuperTypeFinder(owner).getCommonSuperType(types);
+	}
+
+	private CommonSuperTypeFinder newCommonSuperTypeFinder(ITypeReferenceOwner owner) {
+		return new CommonSuperTypeFinder(owner);
 	}
 	
 	protected boolean isClass(JvmType type) {
@@ -747,7 +769,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 * 
 	 * This method is scheduled for deletion in Xtext 2.15
 	 * 
-	 * @deprecated see {@link CommonSuperTypeFinder#getTypeParametersForSupertype(Multimap, JvmType, ITypeReferenceOwner, List)}
+	 * @deprecated see {@link CommonSuperTypeFinder#getTypeParametersForSuperType(Multimap, JvmType, ITypeReferenceOwner, List)}
 	 */
 	@Deprecated
 	protected final LightweightTypeReference getTypeParametersForSupertype(
@@ -755,7 +777,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			JvmType rawType, 
 			ITypeReferenceOwner owner,
 			List<LightweightTypeReference> initiallyRequested) {
-		return new CommonSuperTypeFinder(owner).getTypeParametersForSupertype(all, rawType, owner, initiallyRequested);
+		return newCommonSuperTypeFinder(owner).getTypeParametersForSuperType(all, rawType, owner, initiallyRequested);
 	}
 	
 	/**
@@ -783,7 +805,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 */
 	@Deprecated
 	public final LightweightTypeReference getCommonParameterSuperType(List<LightweightTypeReference> types, List<LightweightTypeReference> initiallyRequested, ITypeReferenceOwner owner) {
-		CommonSuperTypeFinder typeFinder = new CommonSuperTypeFinder(owner);
+		CommonSuperTypeFinder typeFinder = newCommonSuperTypeFinder(owner);
 		typeFinder.requestsInProgress = Lists.newArrayList();
 		typeFinder.requestsInProgress.add(initiallyRequested);
 		return typeFinder.getCommonParameterSuperType(types);
