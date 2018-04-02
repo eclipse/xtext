@@ -496,6 +496,31 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_81() {
 		"Class<?>".isSuperTypeOf("Class<Number>", "Class<CharSequence>")
 	}
+	
+	@Test
+	def void testCommonSuperType_82() {
+		"ParameterizedAbstractType2<? extends ParameterizedAbstractType<?>>".isSuperTypeOf("bug495314.ClassA", "bug495314.ClassB")
+	}
+	
+	@Test
+	def void testCommonSuperType_83() {
+		"ParameterizedAbstractType2<? extends ParameterizedAbstractType<? extends ParameterizedAbstractType<?>>>".isSuperTypeOf("bug495314.ClassC", "bug495314.ClassD")
+	}
+	
+	@Test
+	def void testCommonSuperType_84() {
+		"ParameterizedAbstractType2<? extends ParameterizedAbstractType<?>>".isSuperTypeOf("bug495314.ClassA", "bug495314.ClassB", "bug495314.ClassC", "bug495314.ClassD")
+	}
+	
+	@Test
+	def void testCommonSuperType_85() {
+		"ParameterizedAbstractType2<? extends ParameterizedAbstractType<? extends ParameterizedAbstractType<?>>>".isSuperTypeOf("bug495314.ClassC", "bug495314.ClassD", "bug495314.ClassE")
+	}
+	
+	@Test
+	def void testCommonSuperType_86() {
+		"AbstractForm<? extends AbstractP<? extends View<?>>>".isSuperTypeOf("gh158.Form1", "gh158.Form2")
+	}
 }
 
 

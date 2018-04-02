@@ -626,4 +626,29 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_81() {
     this.isSuperTypeOf("Class<?>", "Class<Number>", "Class<CharSequence>");
   }
+  
+  @Test
+  public void testCommonSuperType_82() {
+    this.isSuperTypeOf("ParameterizedAbstractType2<? extends ParameterizedAbstractType<?>>", "bug495314.ClassA", "bug495314.ClassB");
+  }
+  
+  @Test
+  public void testCommonSuperType_83() {
+    this.isSuperTypeOf("ParameterizedAbstractType2<? extends ParameterizedAbstractType<? extends ParameterizedAbstractType<?>>>", "bug495314.ClassC", "bug495314.ClassD");
+  }
+  
+  @Test
+  public void testCommonSuperType_84() {
+    this.isSuperTypeOf("ParameterizedAbstractType2<? extends ParameterizedAbstractType<?>>", "bug495314.ClassA", "bug495314.ClassB", "bug495314.ClassC", "bug495314.ClassD");
+  }
+  
+  @Test
+  public void testCommonSuperType_85() {
+    this.isSuperTypeOf("ParameterizedAbstractType2<? extends ParameterizedAbstractType<? extends ParameterizedAbstractType<?>>>", "bug495314.ClassC", "bug495314.ClassD", "bug495314.ClassE");
+  }
+  
+  @Test
+  public void testCommonSuperType_86() {
+    this.isSuperTypeOf("AbstractForm<? extends AbstractP<? extends View<?>>>", "gh158.Form1", "gh158.Form2");
+  }
 }
