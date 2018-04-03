@@ -166,7 +166,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			
 			@SuppressWarnings("restriction")
 			public class FooConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {
-				protected static final String ISSUE_CODE_PREFIX = "org.xtext.example.mydsl.";
+				protected static final String ISSUE_CODE_PREFIX = grammar.runtimeBasePackage + ".";
 			
 				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
 			
@@ -245,9 +245,9 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 				@Override
 				protected IDialogSettings getDialogSettings() {
 					IDialogSettings dialogSettings = super.getDialogSettings();
-					IDialogSettings section = dialogSettings.getSection("MyDsl");
+					IDialogSettings section = dialogSettings.getSection("Foo");
 					if (section == null) {
-						return dialogSettings.addNewSection("MyDsl");
+						return dialogSettings.addNewSection("Foo");
 					}
 					return section;
 				}
