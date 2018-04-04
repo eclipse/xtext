@@ -10,24 +10,24 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.xtext.ui.label.AbstractLabelProvider;
 
 /**
- * Simple label provider used by the new project wizard in the template selection page.
+ * Simple label provider used by the new wizards in the template selection page.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-public class ProjectTemplateLabelProvider extends AbstractLabelProvider {
+public class TemplateLabelProvider extends AbstractLabelProvider {
 
 	@Override
 	protected Object doGetText(Object element) {
-		if (element instanceof AbstractProjectTemplate)
-			return ((AbstractProjectTemplate) element).getLabel();
+		if (element instanceof AbstractTemplate)
+			return ((AbstractTemplate) element).getLabel();
 		return null;
 	}
 
 	@Override
 	protected Object doGetImage(Object element) {
-		if (element instanceof AbstractProjectTemplate)
-			return ((AbstractProjectTemplate) element).getIcon();
+		if (element instanceof AbstractTemplate)
+			return ((AbstractTemplate) element).getIcon();
 		return null;
 	}
 

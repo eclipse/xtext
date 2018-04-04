@@ -8,11 +8,11 @@
 package org.eclipse.xtext.ui.wizard.template;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
+import org.eclipse.xtext.ui.wizard.template.TemplateVariable;
 
 @SuppressWarnings("all")
-public abstract class ContainerProjectVariable extends ProjectVariable {
-  public ContainerProjectVariable(final String label, final String description, final ContainerProjectVariable container) {
+public abstract class ContainerTemplateVariable extends TemplateVariable {
+  public ContainerTemplateVariable(final String label, final String description, final ContainerTemplateVariable container) {
     super(label, description, container);
   }
   

@@ -7,19 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
-import org.eclipse.core.runtime.IStatus;
-
 /**
- * Interface to avoid passing concrete implementation of parameter page to {@link TemplateVariable}.
+ * Provide the templates to be shown in the new file wizard.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-public interface IParameterPage {
+public interface IFileTemplateProvider {
 
 	/**
-	 * Callback to update the parameter page after a variable has changed.
+	 * @return all templates to be shown in the list of the new file wizard.
 	 */
-	void setStatus(IStatus status);
-
+	AbstractFileTemplate[] getFileTemplates();
 }

@@ -11,19 +11,19 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
-import org.eclipse.xtext.ui.wizard.template.IParameterPage;
+import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
+import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
- * Part of a project template the variable defines the UI for the user to configure the generated files.
+ * Part of a template the variable defines the UI for the user to configure the generated files.
  * A variable will be associated with a widget to represent it inside the UI.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
 @SuppressWarnings("all")
-public abstract class ProjectVariable {
+public abstract class TemplateVariable {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final String label;
   
@@ -34,9 +34,9 @@ public abstract class ProjectVariable {
   private boolean enabled;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private ContainerProjectVariable container;
+  private ContainerTemplateVariable container;
   
-  ProjectVariable(final String label, final String description, final ContainerProjectVariable container) {
+  TemplateVariable(final String label, final String description, final ContainerTemplateVariable container) {
     this.label = label;
     this.description = description;
     this.enabled = true;
@@ -47,7 +47,7 @@ public abstract class ProjectVariable {
    * Subclasses should override and create a widget representing the variable in UI. A reference to the widget should
    * be maintained.
    */
-  public abstract void createWidget(final IParameterPage parameterPage, final Composite parent);
+  public abstract void createWidget(final ParameterComposite parameterComposite, final Composite parent);
   
   /**
    * Subclasses should override to refresh the UI widget with data set to the variable in the meantime.
@@ -80,7 +80,7 @@ public abstract class ProjectVariable {
   }
   
   @Pure
-  public ContainerProjectVariable getContainer() {
+  public ContainerTemplateVariable getContainer() {
     return this.container;
   }
 }

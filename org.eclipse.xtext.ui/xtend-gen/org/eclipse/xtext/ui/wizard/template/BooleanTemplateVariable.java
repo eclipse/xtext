@@ -15,18 +15,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
-import org.eclipse.xtext.ui.wizard.template.IParameterPage;
-import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
+import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
+import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
+import org.eclipse.xtext.ui.wizard.template.TemplateVariable;
 
 @SuppressWarnings("all")
-public class BooleanProjectVariable extends ProjectVariable {
+public class BooleanTemplateVariable extends TemplateVariable {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean value;
   
   private Button checkbox;
   
-  public BooleanProjectVariable(final String label, final boolean defaultValue, final String description, final ContainerProjectVariable container) {
+  public BooleanTemplateVariable(final String label, final boolean defaultValue, final String description, final ContainerTemplateVariable container) {
     super(label, description, container);
     this.value = defaultValue;
   }
@@ -36,7 +36,7 @@ public class BooleanProjectVariable extends ProjectVariable {
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+  public void createWidget(final ParameterComposite parameterComposite, final Composite parent) {
     Button _button = new Button(parent, SWT.CHECK);
     this.checkbox = _button;
     this.checkbox.setText(this.getLabel());
@@ -45,8 +45,8 @@ public class BooleanProjectVariable extends ProjectVariable {
     this.checkbox.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        BooleanProjectVariable.this.setValue(BooleanProjectVariable.this.checkbox.getSelection());
-        parameterPage.update();
+        BooleanTemplateVariable.this.setValue(BooleanTemplateVariable.this.checkbox.getSelection());
+        parameterComposite.update();
       }
     });
   }

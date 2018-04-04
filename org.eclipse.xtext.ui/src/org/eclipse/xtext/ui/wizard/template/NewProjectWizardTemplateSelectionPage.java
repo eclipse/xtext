@@ -33,7 +33,7 @@ import org.eclipse.ui.forms.widgets.FormText;
 
 /**
  * Page of the new project wizard to present a list of templates to the user. The user can select a template and press finish. If the
- * template is configurable the variables can be configured in the following page, the {@link NewProjectWizardTemplateParameterPage}.
+ * template is configurable the variables can be configured in the following page, the {@link TemplateParameterPage}.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
@@ -47,11 +47,11 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 
 	private static final Logger logger = Logger.getLogger(NewProjectWizardTemplateSelectionPage.class);
 
-	private ProjectTemplateLabelProvider labelProvider;
+	private TemplateLabelProvider labelProvider;
 	private AbstractProjectTemplate selectedTemplate;
 	private String grammarName;
 
-	public NewProjectWizardTemplateSelectionPage(String pageName, String grammarName, ProjectTemplateLabelProvider labelProvider) {
+	public NewProjectWizardTemplateSelectionPage(String pageName, String grammarName, TemplateLabelProvider labelProvider) {
 		super(pageName);
 		this.grammarName = grammarName;
 		this.labelProvider = labelProvider;

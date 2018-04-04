@@ -7,25 +7,33 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
-import org.eclipse.xtext.generator.IFileSystemAccess2;
-
 /**
- * Default implementation of IProjectFileGeneratorm based on IFileSystemAccess2.
+ * Information about the file to create.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
-public class ProjectFileGenerator implements IProjectFileGenerator {
+public class TemplateFileInfo {
+	private final String location;
+	private final String name;
+	private final AbstractFileTemplate template;
 
-	private final IFileSystemAccess2 access;
-
-	public ProjectFileGenerator(IFileSystemAccess2 access) {
-		this.access = access;
+	public TemplateFileInfo(String location, String name, AbstractFileTemplate template) {
+		this.location = location;
+		this.name = name;
+		this.template = template;
 	}
 
-	@Override
-	public void generate(CharSequence fileName, CharSequence contents) {
-		access.generateFile(fileName.toString(), contents);
+	public String getLocation() {
+		return location;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public AbstractFileTemplate getFileTemplate() {
+		return template;
 	}
 
 }

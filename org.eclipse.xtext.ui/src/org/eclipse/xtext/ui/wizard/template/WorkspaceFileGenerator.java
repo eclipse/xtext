@@ -1,0 +1,63 @@
+/*******************************************************************************
+ * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.wizard.template;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import org.apache.commons.io.IOUtils;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+
+/**
+ * Implementation of {@link IFileGenerator} to create the files from the template inside the eclipse workspace.
+ * 
+ * @author Arne Deutsch - Initial contribution and API
+ * @since 2.14
+ */
+public class WorkspaceFileGenerator extends WorkspaceModifyOperation implements IFileGenerator {
+
+	private final SortedMap<String, CharSequence> files = new TreeMap<>();
+	private IFile firstFile;
+
+	@Override
+	public void generate(CharSequence path, CharSequence content) {
+		files.put(path.toString(), content);
+	}
+
+	@Override
+	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, files.size());
+		try {
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			for (Map.Entry<String, CharSequence> fileEntry : files.entrySet()) {
+				IFile file = workspace.getRoot().getFile(new Path(fileEntry.getKey()));
+				file.create(IOUtils.toInputStream(fileEntry.getValue().toString()), true, subMonitor);
+				if (firstFile == null) {
+					firstFile = file;
+				}
+				subMonitor.worked(1);
+			}
+		} finally {
+			subMonitor.done();
+		}
+	}
+
+	public IFile getResult() {
+		return firstFile;
+	}
+
+}

@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
  * @since 2.14
  */
 public class TemplateProjectInfo extends DefaultProjectInfo {
-	private AbstractProjectTemplate projectTemplate;
+	private final AbstractProjectTemplate projectTemplate;
 
 	public TemplateProjectInfo(AbstractProjectTemplate projectTemplate) {
 		this.projectTemplate = projectTemplate;
