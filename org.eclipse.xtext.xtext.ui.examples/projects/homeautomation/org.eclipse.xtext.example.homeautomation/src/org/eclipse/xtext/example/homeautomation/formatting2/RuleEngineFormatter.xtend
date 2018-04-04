@@ -19,7 +19,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
 class RuleEngineFormatter extends XbaseFormatter {
 	
-		def dispatch void format(Model model, extension IFormattableDocument document) {
+	def dispatch void format(Model model, extension IFormattableDocument document) {
 		model.prepend[setNewLines(0, 0, 1); noSpace]
 		for (Declaration declaration : model.getDeclarations()) {
 			declaration.format.append[setNewLines(1, 1, 2)]
