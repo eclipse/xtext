@@ -279,7 +279,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     _builder_1.append("public class FooConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("protected static final String ISSUE_CODE_PREFIX = \"org.xtext.example.mydsl.\";");
+    _builder_1.append("protected static final String ISSUE_CODE_PREFIX = \"org.xtext.\";");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("\t");
@@ -458,13 +458,13 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     _builder_1.append("IDialogSettings dialogSettings = super.getDialogSettings();");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("IDialogSettings section = dialogSettings.getSection(\"MyDsl\");");
+    _builder_1.append("IDialogSettings section = dialogSettings.getSection(\"Foo\");");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("if (section == null) {");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("return dialogSettings.addNewSection(\"MyDsl\");");
+    _builder_1.append("return dialogSettings.addNewSection(\"Foo\");");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("}");
