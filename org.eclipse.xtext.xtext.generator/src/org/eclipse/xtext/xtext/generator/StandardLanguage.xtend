@@ -27,6 +27,7 @@ import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
+import org.eclipse.xtext.xtext.generator.ui.fileWizard.TemplateFileWizardFragment
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2
@@ -126,6 +127,8 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 	
 	TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment
 	
+	TemplateFileWizardFragment newTemplateFileWizardForEclipse = new TemplateFileWizardFragment
+	
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
@@ -183,6 +186,7 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
 		fragments += newTemplateProjectWizardForEclipse
+		fragments += newTemplateFileWizardForEclipse
 		fragments
 	}
 	

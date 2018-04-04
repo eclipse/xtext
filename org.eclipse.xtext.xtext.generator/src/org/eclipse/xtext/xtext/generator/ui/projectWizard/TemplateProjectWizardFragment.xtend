@@ -26,7 +26,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * <pre> 
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         fragment = ui.projectWizard.TemplateProjectWizardFragment {
+ *         newTemplateProjectWizardForEclipse = {
  *             generate = true
  *         }
  *     }
@@ -96,8 +96,17 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 				      point="org.eclipse.xtext.ui.projectTemplate">
 				   <projectTemplateProvider
 				         class="«getProjectTemplateProviderClassName»"
-				         grammarName="«grammar.name»">
+				         grammarName="«grammar.languageId»">
 				   </projectTemplateProvider>
+				</extension>
+				<extension
+					point="org.eclipse.ui.perspectiveExtensions">
+					<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+						<newWizardShortcut id="«projectWizardClassName»"/>
+					</perspectiveExtension>
+					<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+						<newWizardShortcut id="«projectWizardClassName»"/>
+					</perspectiveExtension>
 				</extension>
 			'''
 		}
@@ -143,13 +152,13 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 			}
 			
 			@ProjectTemplate(label="Hello World", icon="project_template.png", description="<p><b>Hello World</b></p>
-			<p>This is a parameterized hello world for «grammar.name». You can set a parameter to modify the content in the generated file
+			<p>This is a parameterized hello world for «grammar.simpleName». You can set a parameter to modify the content in the generated file
 			and a parameter to set the package the file is created in.</p>")
 			final class HelloWorldProject {
-				val advanced = check("Advanced", false)
+				val advanced = check("Advanced:", false)
 				val advancedGroup = group("Properties")
-				val name = combo("Name", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to", advancedGroup)
-				val path = text("Package", "mydsl", "The package path to place the files in", advancedGroup)
+				val name = combo("Name:", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to", advancedGroup)
+				val path = text("Package:", "mydsl", "The package path to place the files in", advancedGroup)
 			
 				override protected updateVariables() {
 					name.enabled = advanced.value
