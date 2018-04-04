@@ -226,7 +226,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		javaFile.content = '''
 			@SuppressWarnings("restriction")
 			public class «configurableIssueCodesProviderClass» extends «superConfigurableIssueCodesProviderClass» {
-				protected static final String ISSUE_CODE_PREFIX = grammar.runtimeBasePackage + ".";
+				protected static final String ISSUE_CODE_PREFIX = "«grammar.runtimeBasePackage».";
 			
 				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
 			

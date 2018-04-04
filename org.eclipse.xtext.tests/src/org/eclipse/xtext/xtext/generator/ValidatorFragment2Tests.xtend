@@ -166,7 +166,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			
 			@SuppressWarnings("restriction")
 			public class FooConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {
-				protected static final String ISSUE_CODE_PREFIX = grammar.runtimeBasePackage + ".";
+				protected static final String ISSUE_CODE_PREFIX = "org.xtext.";
 			
 				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
 			
