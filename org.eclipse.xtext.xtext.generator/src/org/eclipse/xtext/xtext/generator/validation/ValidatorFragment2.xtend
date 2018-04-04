@@ -226,7 +226,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		javaFile.content = '''
 			@SuppressWarnings("restriction")
 			public class «configurableIssueCodesProviderClass» extends «superConfigurableIssueCodesProviderClass» {
-				protected static final String ISSUE_CODE_PREFIX = "org.xtext.example.mydsl.";
+				protected static final String ISSUE_CODE_PREFIX = "«grammar.runtimeBasePackage».";
 			
 				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
 			
@@ -285,9 +285,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				@Override
 				protected «typeRef('org.eclipse.jface.dialogs.IDialogSettings')» getDialogSettings() {
 					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» dialogSettings = super.getDialogSettings();
-					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» section = dialogSettings.getSection("MyDsl");
+					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» section = dialogSettings.getSection("«grammar.simpleName»");
 					if (section == null) {
-						return dialogSettings.addNewSection("MyDsl");
+						return dialogSettings.addNewSection("«grammar.simpleName»");
 					}
 					return section;
 				}
