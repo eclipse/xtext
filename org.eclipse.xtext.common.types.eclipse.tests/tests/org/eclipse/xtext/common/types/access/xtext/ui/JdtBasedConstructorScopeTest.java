@@ -70,7 +70,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	
 	@Test public void testGetContents_03() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
-		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				return AbstractList.class.getName().equals(input.getName().toString());
@@ -80,9 +80,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	
 	@Test public void testGetContents_04() {
 		Iterable<IEObjectDescription> contents = constructorScope.getAllElements();
-		// TODO Fix assertion
-//		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
-		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				return ArrayList.class.getName().equals(input.getName().toString());
