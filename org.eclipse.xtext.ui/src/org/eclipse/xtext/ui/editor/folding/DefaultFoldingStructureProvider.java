@@ -129,6 +129,7 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Annotation[] mergeFoldingRegions(Collection<FoldedPosition> foldedPositions,
 			ProjectionAnnotationModel projectionAnnotationModel) {
 		List<Annotation> deletions = new ArrayList<Annotation>();

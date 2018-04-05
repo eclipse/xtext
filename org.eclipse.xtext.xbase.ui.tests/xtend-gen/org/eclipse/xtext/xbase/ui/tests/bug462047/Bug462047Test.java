@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.tests.bug462047;
 import com.google.inject.Inject;
 import org.apache.log4j.Level;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -53,15 +52,13 @@ public class Bug462047Test extends AbstractEditorTest {
     }
   }
   
-  private IProject project;
-  
   @Inject
   private XtextEditorInfo editorInfo;
   
   @Before
   public void createProjects() {
     try {
-      this.project = AbstractXbaseUITestCase.createPluginProject("bug462047");
+      AbstractXbaseUITestCase.createPluginProject("bug462047");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

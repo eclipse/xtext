@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 /**
  * Use this class to register components to be used within the IDE.
  */
-@SuppressWarnings("restriction")
+@SuppressWarnings("all")
 public class XbaseUiModule extends AbstractXbaseUiModule {
   public XbaseUiModule(final AbstractUIPlugin plugin) {
     super(plugin);

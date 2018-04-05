@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.tests.bug462047
 
 import com.google.inject.Inject
 import org.apache.log4j.Level
-import org.eclipse.core.resources.IProject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.resource.XtextResource
@@ -42,13 +41,11 @@ class Bug462047Test extends AbstractEditorTest {
 		TargetPlatformUtil.setTargetPlatform(Bug462047Test);
 	}
 	
-	IProject project
-	
 	@Inject XtextEditorInfo editorInfo
 	
 	@Before
 	def void createProjects() {
-		project = AbstractXbaseUITestCase.createPluginProject('bug462047')
+		AbstractXbaseUITestCase.createPluginProject('bug462047')
 	}
 	 
 	@After
