@@ -361,6 +361,16 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			return node.getNode();
 		}
 
+		public ICompositeNode getCompositeNode() {
+			INode result = this.getNode();
+			return result instanceof ICompositeNode ? (ICompositeNode) result : null;
+		}
+
+		public ILeafNode getLeafNode() {
+			INode result = this.getNode();
+			return result instanceof ILeafNode ? (ILeafNode) result : null;
+		}
+
 		public SerializableObject getObj() {
 			return obj;
 		}
@@ -433,16 +443,16 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			if (ele instanceof RuleCall)
 				feeder.accept((RuleCall) ele, ti.getValue(), ti.getIndex(), ti.getNode());
 			else if (ele instanceof Action)
-				feeder.accept((Action) ele, (EObject) ti.getValue(), (ICompositeNode) ti.getNode());
+				feeder.accept((Action) ele, (EObject) ti.getValue(), ti.getCompositeNode());
 			else if (ele instanceof Keyword)
-				feeder.accept((Keyword) ele, ti.getValue(), ti.getIndex(), (ILeafNode) ti.getNode());
+				feeder.accept((Keyword) ele, ti.getValue(), ti.getIndex(), ti.getLeafNode());
 		} else {
 			if (ele instanceof RuleCall)
 				feeder.accept((RuleCall) ele, ti.getValue(), ti.getNode());
 			else if (ele instanceof Action)
-				feeder.accept((Action) ele, (EObject) ti.getValue(), (ICompositeNode) ti.getNode());
+				feeder.accept((Action) ele, (EObject) ti.getValue(), ti.getCompositeNode());
 			else if (ele instanceof Keyword)
-				feeder.accept((Keyword) ele, ti.getValue(), (ILeafNode) ti.getNode());
+				feeder.accept((Keyword) ele, ti.getValue(), ti.getLeafNode());
 		}
 	}
 
