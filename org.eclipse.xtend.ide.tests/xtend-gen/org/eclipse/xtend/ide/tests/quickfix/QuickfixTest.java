@@ -7203,7 +7203,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("java.lang.ClassCastException: org.eclipse.xtext.nodemodel.impl.CompositeNode cannot be cast to org.eclipse.xtext.nodemodel.ILeafNode")
   @Test
   public void redundantModifiers_15() {
     StringConcatenation _builder = new StringConcatenation();
@@ -7256,6 +7255,42 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void redundantModifiers_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.text.DateFormat");
+    _builder.newLine();
+    _builder.append("import java.text.SimpleDateFormat");
+    _builder.newLine();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var priv|ate SimpleDateFormat dateFormat = new SimpleDateFormat");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.text.DateFormat");
+    _builder_1.newLine();
+    _builder_1.append("import java.text.SimpleDateFormat");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Date");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("var SimpleDateFormat dateFormat = new SimpleDateFormat");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
