@@ -4060,9 +4060,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test
 	def void redundantModifiers_16(){
 		create('Foo.xtend', '''
-			import java.text.DateFormat
 			import java.text.SimpleDateFormat
-			import java.util.Date
 			
 			class Foo {
 				var priv|ate SimpleDateFormat dateFormat = new SimpleDateFormat
@@ -4071,9 +4069,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(REDUNDANT_MODIFIER)
 		.assertResolutionLabels("Remove the redundant modifier.")
 		.assertModelAfterQuickfix('''
-			import java.text.DateFormat
 			import java.text.SimpleDateFormat
-			import java.util.Date
 			
 			class Foo {
 				var SimpleDateFormat dateFormat = new SimpleDateFormat
