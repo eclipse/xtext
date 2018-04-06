@@ -7264,11 +7264,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Test
   public void redundantModifiers_16() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.text.DateFormat");
-    _builder.newLine();
     _builder.append("import java.text.SimpleDateFormat");
-    _builder.newLine();
-    _builder.append("import java.util.Date");
     _builder.newLine();
     _builder.newLine();
     _builder.append("class Foo {");
@@ -7280,11 +7276,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.text.DateFormat");
-    _builder_1.newLine();
     _builder_1.append("import java.text.SimpleDateFormat");
-    _builder_1.newLine();
-    _builder_1.append("import java.util.Date");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo {");
