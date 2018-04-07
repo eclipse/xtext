@@ -4076,4 +4076,422 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_17(){
+		// Xtend class with javadoc having a 'public' modifier
+		create('Foo.xtend', '''
+			/**
+			 * javadoc
+			 */
+			publ|ic class Foo {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			/**
+			 * javadoc
+			 */
+«««TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 class Foo {}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_18(){
+		// Xtend class with javadoc having a 'public' modifier
+		create('Foo.xtend', '''
+			package a
+			
+			/**
+			 * javadoc
+			 */
+			publ|ic class Foo {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			package a
+			
+			/**
+			 * javadoc
+			 */
+«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 class Foo {}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_19(){
+		// Xtend class with javadoc having a 'public' modifier
+		create('Foo.xtend', '''
+			package a
+			class A {}
+			
+			/**
+			 * javadoc
+			 */
+			publ|ic class B {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			package a
+			class A {}
+			
+			/**
+			 * javadoc
+			 */
+«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 class B {}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_20(){
+		// Xtend field with javadoc having a 'private' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				pri|vate int a = 10
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				int a = 10
+			}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_21(){
+		// Xtend function with javadoc having a 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				p|ublic def m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				def m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_22(){
+		// Xtend function with javadoc having a 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				def p|ublic   m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				def m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_23(){
+		// Xtend field with javadoc having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				f|inal val a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_24(){
+		// Xtend field with javadoc having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_25(){
+		// Xtend field with javadoc having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				package val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				package val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_26(){
+		// Xtend field with javadoc having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				public static val f|inal a = 1
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				public static val a = 1
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_27(){
+		// Xtend function with javadoc having both 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				override de|f m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_28(){
+		// Xtend function with javadoc having both 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m() {}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				de|f override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m() {}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_29(){
+		// Xtend function with javadoc having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				pub|lic def override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				def override m() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_30(){
+		// Xtend function with javadoc having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				public d|ef override m() {}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class A {
+				def m(){}
+			}
+			class B extends A {
+				/**
+				 * javadoc
+				 */
+				public override m() {}
+			}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_31(){
+		// Xtend extension field without name with javadoc having a 'private' modifier
+		create('Foo.xtend', '''
+			import java.text.DateFormat
+			import java.text.SimpleDateFormat
+			import java.util.Date
+			
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				priva|te extension DateFormat = new SimpleDateFormat
+				
+				def a(){
+					new Date().format
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			import java.text.DateFormat
+			import java.text.SimpleDateFormat
+			import java.util.Date
+			
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				extension DateFormat = new SimpleDateFormat
+				
+				def a(){
+					new Date().format
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_32(){
+		create('Foo.xtend', '''
+			import java.text.SimpleDateFormat
+			
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				var priv|ate SimpleDateFormat dateFormat = new SimpleDateFormat
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			import java.text.SimpleDateFormat
+			
+			class Foo {
+				/**
+				 * javadoc
+				 */
+				var SimpleDateFormat dateFormat = new SimpleDateFormat
+			}
+		''')
+	}
 }
