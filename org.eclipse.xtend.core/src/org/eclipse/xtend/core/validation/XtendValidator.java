@@ -2024,7 +2024,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	protected void checkModifiers(XtendField field) {
-		if(field.getDeclaringType() instanceof XtendClass) {
+		if(field.getDeclaringType() instanceof XtendClass || field.getDeclaringType() instanceof AnonymousClass) {
 			if (field.isFinal() && field.isVolatile()) {
 				error("The field " + field.getName() + " can be either final or volatile, not both.", XTEND_FIELD__NAME, -1, INVALID_MODIFIER);
 			}
@@ -2047,7 +2047,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	protected void checkModifiers(XtendFunction method) {
-		if(method.getDeclaringType() instanceof XtendClass) {
+		if(method.getDeclaringType() instanceof XtendClass || method.getDeclaringType() instanceof AnonymousClass) {
 			methodModifierValidator.checkModifiers(method, "method " + method.getName());
 			int abstractIndex = method.getModifiers().indexOf("abstract");
 			int nativeIndex = method.getModifiers().indexOf("native");
