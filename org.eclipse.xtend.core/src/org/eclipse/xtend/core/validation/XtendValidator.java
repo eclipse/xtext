@@ -2024,14 +2024,14 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	protected void checkModifiers(XtendField field) {
-		if(field.getDeclaringType() instanceof XtendClass || field.getDeclaringType() instanceof AnonymousClass) {
+		XtendTypeDeclaration declaringType = field.getDeclaringType();
+		if(declaringType instanceof XtendClass || declaringType instanceof AnonymousClass) {
 			if (field.isFinal() && field.isVolatile()) {
 				error("The field " + field.getName() + " can be either final or volatile, not both.", XTEND_FIELD__NAME, -1, INVALID_MODIFIER);
 			}
 			fieldModifierValidator.checkModifiers(field, "field " + field.getName());
 		}
-		else if(field.getDeclaringType() instanceof XtendInterface 
-				|| field.getDeclaringType() instanceof XtendAnnotationType)
+		else if(declaringType instanceof XtendInterface || declaringType instanceof XtendAnnotationType)
 			fieldInInterfaceModifierValidator.checkModifiers(field,  "field " + field.getName());
 	}
 	
@@ -2047,7 +2047,8 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	
 	@Check
 	protected void checkModifiers(XtendFunction method) {
-		if(method.getDeclaringType() instanceof XtendClass || method.getDeclaringType() instanceof AnonymousClass) {
+		XtendTypeDeclaration declaringType = method.getDeclaringType();
+		if(declaringType instanceof XtendClass || declaringType instanceof AnonymousClass) {
 			methodModifierValidator.checkModifiers(method, "method " + method.getName());
 			int abstractIndex = method.getModifiers().indexOf("abstract");
 			int nativeIndex = method.getModifiers().indexOf("native");
@@ -2067,7 +2068,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 				if(staticIndex != -1) 
 					error("Abstract method " + method.getName() + " cannot be static", XTEND_MEMBER__MODIFIERS, staticIndex, INVALID_MODIFIER);
 			}
-		} else if (method.getDeclaringType() instanceof XtendInterface) {
+		} else if (declaringType instanceof XtendInterface) {
 			// The validator for interface methods is created lazily when the generator configuration is loaded
 			GeneratorConfig config = getGeneratorConfig(method);
 			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());
