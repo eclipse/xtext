@@ -4494,4 +4494,248 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def void redundantModifiers_33(){
+		// Xtend function in anonymous class with javadoc having 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						pub|lic override run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						override run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_34(){
+		// Xtend function in anonymous class with javadoc having both 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						override d|ef run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						override run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_35(){
+		// Xtend function in anonymous class with javadoc having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						pu|blic override def run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						override def run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_36(){
+		// Xtend function in anonymous class with javadoc having 'public', 'def' and 'override' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						pu|blic def override run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						def override run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Ignore("Javadoc will be not preserved after applying the quickfix")
+	@Test
+	def void redundantModifiers_37(){
+		// Xtend field in anonymous class with javadoc having 'private' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						pri|vate int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_38(){
+		// Xtend field in anonymous class with javadoc having both 'final' and 'val' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						f|inal val int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						val int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_39(){
+		// Xtend field in anonymous class with javadoc having both 'val' and 'final' modifiers
+		create('Foo.xtend', '''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						val f|inal int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def m(){
+					new Runnable(){
+						/**
+						 * javadoc
+						 */
+						val int a = 10
+						
+						override run() {}
+					}
+				}
+			}
+		''')
+	}
 }
