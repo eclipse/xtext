@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageServer;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
@@ -75,8 +74,6 @@ public class WizardConfiguration {
   
   private final UiProjectDescriptor uiProject = new UiProjectDescriptor(this);
   
-  private final IntellijProjectDescriptor intellijProject = new IntellijProjectDescriptor(this);
-  
   private final WebProjectDescriptor webProject = new WebProjectDescriptor(this);
   
   private final ParentProjectDescriptor parentProject = new ParentProjectDescriptor(this);
@@ -93,7 +90,7 @@ public class WizardConfiguration {
       final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
         return Boolean.valueOf(it.isEnabled());
       };
-      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject, this.sdkProject, this.p2Project)), _function);
+      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.webProject, this.targetPlatformProject, this.sdkProject, this.p2Project)), _function);
       final Function1<TestedProjectDescriptor, TestProjectDescriptor> _function_1 = (TestedProjectDescriptor it) -> {
         return it.getTestProject();
       };
@@ -116,7 +113,7 @@ public class WizardConfiguration {
   }
   
   public boolean needsGradleBuild() {
-    return (Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE) || this.intellijProject.isEnabled());
+    return Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE);
   }
   
   public boolean isNeedsGradleWrapper() {
@@ -240,11 +237,6 @@ public class WizardConfiguration {
   @Pure
   public UiProjectDescriptor getUiProject() {
     return this.uiProject;
-  }
-  
-  @Pure
-  public IntellijProjectDescriptor getIntellijProject() {
-    return this.intellijProject;
   }
   
   @Pure

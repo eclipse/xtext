@@ -81,9 +81,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					dependencies {
 						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
-						«IF config.intellijProject.isEnabled»
-							classpath 'org.xtext:xtext-idea-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
-						«ENDIF»
 					}
 				}
 				
@@ -103,7 +100,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					apply from: "${rootDir}/gradle/source-layout.gradle"
 					apply from: "${rootDir}/gradle/maven-deployment.gradle"
 					apply plugin: 'eclipse'
-					apply plugin: 'idea'
 					
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
@@ -187,10 +183,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		
 		plugins.withId('war') {
 			webAppDirName = "«Outlet.WEBAPP.sourceFolder»"
-		}
-		
-		plugins.withId('org.xtext.idea-plugin') {
-			assembleSandbox.metaInf.from('«Outlet.META_INF.sourceFolder»')
 		}
 	'''
 	

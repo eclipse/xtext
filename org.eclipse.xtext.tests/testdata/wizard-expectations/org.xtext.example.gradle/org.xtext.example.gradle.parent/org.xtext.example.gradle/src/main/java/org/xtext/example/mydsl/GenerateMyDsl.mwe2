@@ -15,9 +15,6 @@ Workflow {
 				runtimeTest = {
 					enabled = true
 				}
-				ideaPlugin = {
-					enabled = true
-				}
 				web = {
 					enabled = true
 				}

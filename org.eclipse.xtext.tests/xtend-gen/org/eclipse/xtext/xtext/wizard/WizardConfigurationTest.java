@@ -24,7 +24,6 @@ import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.PomFile;
@@ -174,13 +173,6 @@ public class WizardConfigurationTest {
   }
   
   @Test
-  public void intellijNeedsAGradleBuild() {
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
-    _intellijProject.setEnabled(true);
-    Assert.assertTrue(this.config.needsGradleBuild());
-  }
-  
-  @Test
   public void mavenNeedsAParentProject() {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     Assert.assertTrue(this.config.getParentProject().isEnabled());
@@ -302,15 +294,11 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.GRADLE);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
-    _intellijProject.setEnabled(true);
     XtextVersion _xtextVersion = new XtextVersion("2.9.0-SNAPSHOT");
     this.config.setXtextVersion(_xtextVersion);
     final String snapshotsRepo = "repositories/snapshots";
     Assert.assertTrue(this.config.getParentProject().pom().getContent().contains(snapshotsRepo));
     Assert.assertTrue(this.config.getParentProject().buildGradle().getContent().contains(snapshotsRepo));
-    final String xtextIntellijSnapshots = "/xtext-intellij/lastSuccessfulBuild/";
-    Assert.assertTrue(this.config.getIntellijProject().buildGradle().getContent().contains(xtextIntellijSnapshots));
     final String nightlyUpdateSite = "xtext/updates/nightly";
     Assert.assertTrue(this.config.getTargetPlatformProject().target().toString().contains(nightlyUpdateSite));
   }
@@ -320,15 +308,11 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.GRADLE);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
-    _intellijProject.setEnabled(true);
     XtextVersion _xtextVersion = new XtextVersion("2.9.0");
     this.config.setXtextVersion(_xtextVersion);
     final String snapshotsRepo = "repositories/snapshots";
     Assert.assertFalse(this.config.getParentProject().pom().getContent().contains(snapshotsRepo));
     Assert.assertFalse(this.config.getParentProject().buildGradle().getContent().contains(snapshotsRepo));
-    final String xtextIntellijRelease = "xtext/idea/${xtextVersion}";
-    Assert.assertTrue(this.config.getIntellijProject().buildGradle().getContent().contains(xtextIntellijRelease));
     final String releaseUpdateSite = "xtext/updates/releases/2.9.0";
     Assert.assertTrue(this.config.getTargetPlatformProject().target().toString().contains(releaseUpdateSite));
   }
@@ -534,9 +518,8 @@ public class WizardConfigurationTest {
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     TestProjectDescriptor _testProject_1 = this.config.getUiProject().getTestProject();
     IdeProjectDescriptor _ideProject = this.config.getIdeProject();
-    IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
     WebProjectDescriptor _webProject = this.config.getWebProject();
-    return Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _testProject, _uiProject, _testProject_1, _ideProject, _intellijProject, _webProject));
+    return Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _testProject, _uiProject, _testProject_1, _ideProject, _webProject));
   }
   
   @Test

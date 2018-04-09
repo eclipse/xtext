@@ -148,17 +148,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append(_xtextGradlePluginVersion, "\t\t");
       _builder.append("\'");
       _builder.newLineIfNotEmpty();
-      {
-        boolean _isEnabled = this.getConfig().getIntellijProject().isEnabled();
-        if (_isEnabled) {
-          _builder.append("\t\t");
-          _builder.append("classpath \'org.xtext:xtext-idea-gradle-plugin:");
-          String _xtextGradlePluginVersion_1 = this.getConfig().getXtextVersion().getXtextGradlePluginVersion();
-          _builder.append(_xtextGradlePluginVersion_1, "\t\t");
-          _builder.append("\'");
-          _builder.newLineIfNotEmpty();
-        }
-      }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -213,9 +202,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("apply plugin: \'eclipse\'");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("apply plugin: \'idea\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -517,17 +503,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     String _sourceFolder_20 = this.sourceFolder(Outlet.WEBAPP);
     _builder.append(_sourceFolder_20, "\t");
     _builder.append("\"");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("plugins.withId(\'org.xtext.idea-plugin\') {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("assembleSandbox.metaInf.from(\'");
-    String _sourceFolder_21 = this.sourceFolder(Outlet.META_INF);
-    _builder.append(_sourceFolder_21, "\t");
-    _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();

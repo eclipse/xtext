@@ -1,5 +1,4 @@
 include 'org.xtext.example.full'
 include 'org.xtext.example.full.ide'
-include 'org.xtext.example.full.idea'
 include 'org.xtext.example.full.web'
 include 'org.xtext.example.full.tests'

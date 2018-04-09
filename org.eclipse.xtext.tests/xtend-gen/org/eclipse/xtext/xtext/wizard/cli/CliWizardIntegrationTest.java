@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageServer;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
@@ -203,8 +202,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = it.getIntellijProject();
-    _intellijProject.setEnabled(true);
     it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -273,8 +270,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    IntellijProjectDescriptor _intellijProject = it.getIntellijProject();
-    _intellijProject.setEnabled(true);
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
     it.setLineDelimiter("\n");

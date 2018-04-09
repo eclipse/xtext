@@ -3,8 +3,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:1.0.20'
-		classpath 'org.xtext:xtext-idea-gradle-plugin:1.0.20'
+		classpath 'org.xtext:xtext-gradle-plugin:1.0.21'
 	}
 }
 
@@ -19,7 +18,6 @@ subprojects {
 	apply from: "${rootDir}/gradle/source-layout.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply plugin: 'eclipse'
-	apply plugin: 'idea'
 	
 	group = 'org.xtext.example.full'
 	version = '1.0.0-SNAPSHOT'

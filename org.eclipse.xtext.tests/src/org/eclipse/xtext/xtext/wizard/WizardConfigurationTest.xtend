@@ -116,12 +116,6 @@ class WizardConfigurationTest {
 	}
 
 	@Test
-	def void intellijNeedsAGradleBuild() {
-		config.intellijProject.enabled = true
-		assertTrue(config.needsGradleBuild)
-	}
-
-	@Test
 	def void mavenNeedsAParentProject() {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		assertTrue(config.parentProject.enabled)
@@ -201,14 +195,11 @@ class WizardConfigurationTest {
 	def void projectsCanBeBuiltAgainstXtextNightlies() {
 		config.preferredBuildSystem = BuildSystem.GRADLE
 		config.uiProject.enabled = true
-		config.intellijProject.enabled = true
 		config.xtextVersion = new XtextVersion("2.9.0-SNAPSHOT")
 		
 		val snapshotsRepo = "repositories/snapshots"
 		assertTrue(config.parentProject.pom.content.contains(snapshotsRepo))
 		assertTrue(config.parentProject.buildGradle.content.contains(snapshotsRepo))
-		val xtextIntellijSnapshots = "/xtext-intellij/lastSuccessfulBuild/"
-		assertTrue(config.intellijProject.buildGradle.content.contains(xtextIntellijSnapshots))
 		val nightlyUpdateSite = 'xtext/updates/nightly'
 		assertTrue(config.targetPlatformProject.target.toString.contains(nightlyUpdateSite))
 	}
@@ -217,14 +208,11 @@ class WizardConfigurationTest {
 	def void projectsCanBeBuiltAgainstXtextReleases() {
 		config.preferredBuildSystem = BuildSystem.GRADLE
 		config.uiProject.enabled = true
-		config.intellijProject.enabled = true
 		config.xtextVersion = new XtextVersion("2.9.0")
 		
 		val snapshotsRepo = "repositories/snapshots"
 		assertFalse(config.parentProject.pom.content.contains(snapshotsRepo))
 		assertFalse(config.parentProject.buildGradle.content.contains(snapshotsRepo))
-		val xtextIntellijRelease = "xtext/idea/${xtextVersion}"
-		assertTrue(config.intellijProject.buildGradle.content.contains(xtextIntellijRelease))
 		val releaseUpdateSite = 'xtext/updates/releases/2.9.0'
 		assertTrue(config.targetPlatformProject.target.toString.contains(releaseUpdateSite))
 	}
@@ -374,7 +362,6 @@ class WizardConfigurationTest {
 			config.uiProject,
 			config.uiProject.testProject,
 			config.ideProject,
-			config.intellijProject,
 			config.webProject
 		]
 	}
