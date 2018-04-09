@@ -2,6 +2,7 @@
 <?pde version="3.8"?>
 <target name="org.eclipse.xtext.sdk.target" sequenceNumber="6">
 <locations>
+
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib" version="0.0.0"/>
@@ -134,6 +135,20 @@
 		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository/"/>
+		<unit id="com.google.gson" version="2.7.0.v20170129-0911"/>
+		<unit id="com.google.gson.source" version="2.7.0.v20170129-0911"/>
+		<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
+		<unit id="org.antlr.runtime.source" version="3.2.0.v201101311130"/>
+		<unit id="org.junit" version="4.12.0.v201504281640"/>
+		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
+		<unit id="org.objectweb.asm" version="6.0.0.v20180116-1719"/>
+		<unit id="org.objectweb.asm.source" version="6.0.0.v20180116-1719"/>
+		<unit id="org.objectweb.asm.tree" version="6.0.0.v20180116-1719"/>
+		<unit id="org.objectweb.asm.tree.source" version="6.0.0.v20180116-1719"/>
+	</location>
+	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
@@ -148,18 +163,6 @@
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="1.5.1.20150109-1820"/>
 		<repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
-	</location>
-	
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository/"/>
-		<unit id="com.google.gson" version="2.7.0.v20170129-0911"/>
-		<unit id="com.google.gson.source" version="2.7.0.v20170129-0911"/>
-		<unit id="org.junit" version="4.12.0.v201504281640"/>
-		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
-		<unit id="org.objectweb.asm" version="6.0.0.v20170929-1901"/>
-		<unit id="org.objectweb.asm.source" version="6.0.0.v20170929-1901"/>
-		<unit id="org.objectweb.asm.tree" version="6.0.0.v20170929-1901"/>
-		<unit id="org.objectweb.asm.tree.source" version="6.0.0.v20170929-1901"/>
 	</location>
 </locations>
 </target>
