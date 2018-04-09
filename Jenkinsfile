@@ -10,6 +10,7 @@ node {
 		dir('build') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
+		dir('.m2/') { deleteDir() }
 	}
 	
 	stage('Maven Build') {
