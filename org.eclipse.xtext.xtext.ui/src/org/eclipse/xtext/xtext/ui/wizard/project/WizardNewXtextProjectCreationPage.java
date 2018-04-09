@@ -63,11 +63,11 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 * Constructs a new WizardNewXtextProjectCreationPage.
 	 * 
 	 * @param pageName
-	 *            the name of the page
+	 *                      the name of the page
 	 * 
 	 * @param selection
-	 *            The current selection. If the current selection includes workingsets the workingsets field is initialized with the
-	 *            selection.
+	 *                      The current selection. If the current selection includes workingsets the workingsets field is initialized with
+	 *                      the selection.
 	 */
 	public WizardNewXtextProjectCreationPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
@@ -137,7 +137,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected void fillBreeCombo(Combo comboToFill) {
-		Set<String> brees = Sets.newHashSet(JREContainerProvider.getDefaultBREE());
+		Set<String> brees = Sets.newHashSet();
 		Set<String> availableBrees = Sets.newHashSet();
 		for (IExecutionEnvironment ee : JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()) {
 			availableBrees.add(ee.getId());
@@ -154,8 +154,13 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		String selectionMemento = comboToFill.getText();
 		comboToFill.setItems(array);
 		int index = comboToFill.indexOf(selectionMemento);
+		String defaultBree = JREContainerProvider.getDefaultBREE();
 		if (index < 0) {
-			comboToFill.select(comboToFill.indexOf(JREContainerProvider.getDefaultBREE()));
+			if (brees.contains(defaultBree)) {
+				comboToFill.select(comboToFill.indexOf(defaultBree));
+			} else {
+				comboToFill.select(array.length - 1);
+			}
 		}
 		comboToFill.select(index);
 	}
@@ -171,7 +176,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 * Sets the defaults for the languageName and extensions.
 	 * 
 	 * @param projectSuffix
-	 *            the name of the DSL
+	 *                          the name of the DSL
 	 * @see findNextValidProjectSuffix(String, String)
 	 */
 	protected void setDefaults(String projectSuffix) {
@@ -213,17 +218,22 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageName + status.getMessage());
 			return false;
 		}
-		
-		if(!languageNameField.getText().contains(".")) { //$NON-NLS-1$
+
+		if (!languageNameField.getText().contains(".")) { //$NON-NLS-1$
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage);
 			return false;
 		}
-		
+
 		if (extensionsField.getText().length() == 0)
 			return false;
 		if (!PATTERN_EXTENSIONS.matcher(extensionsField.getText()).matches()) {
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageExtensions);
 			return false;
+		}
+		JavaVersion javaVersion = JavaVersion.fromBree(breeCombo.getText());
+		if (javaVersion != null && !javaVersion.isAtLeast(JavaVersion.JAVA8)) {
+			setMessage(Messages.WizardNewXtextProjectCreationPage_MessageAtLeastJava8, IStatus.WARNING);
+			return true;
 		}
 		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
 			setMessage(Messages.WizardNewXtextProjectCreationPage_eeInfo_0 + breeCombo.getText()
@@ -242,7 +252,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			// https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.8
 			// for historical reasons only underscore and $ are accepted as package name, but not for Xtext projects  
 			if (projectName.contains("$")) {
-				status = new Status(IStatus.ERROR, Activator.getInstance().getBundle().getSymbolicName(), -1, Messages.WizardNewXtextProjectCreationPage_ErrorMessageProjectName, null);
+				status = new Status(IStatus.ERROR, Activator.getInstance().getBundle().getSymbolicName(), -1,
+						Messages.WizardNewXtextProjectCreationPage_ErrorMessageProjectName, null);
 			}
 		}
 		return status;

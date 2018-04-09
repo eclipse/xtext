@@ -48,7 +48,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		this.getRequiredBundles().addAll(requiredBundles);
 		return this;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -62,7 +62,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		this.getExportedPackages().addAll(exportedPackages);
 		return this;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -76,7 +76,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		this.getImportedPackages().addAll(importedPackages);
 		return this;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */
@@ -130,6 +130,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 
 	protected void createManifest(IProject project, IProgressMonitor progressMonitor) throws CoreException {
 		final StringBuilder content = new StringBuilder("Manifest-Version: 1.0\n");
+		content.append("Automatic-Module-Name: " + projectName + "\n");
 		content.append("Bundle-ManifestVersion: 2\n");
 		content.append("Bundle-Name: " + projectName + "\n");
 		content.append("Bundle-Vendor: My Company\n");
@@ -171,7 +172,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	 * 
 	 * @see JREContainerProvider#getDefaultBREE()
 	 * @param breeToUse
-	 *            - BREE to use (e.g. JavaSE-1.6)
+	 *                      - BREE to use (e.g. JavaSE-1.6)
 	 * @since 2.7
 	 */
 	public void setBreeToUse(String breeToUse) {
@@ -248,7 +249,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		this.getDevelopmentTimeBundles().addAll(devTimeBundles);
 		return this;
 	}
-	
+
 	/**
 	 * @since 2.14
 	 */

@@ -14,6 +14,7 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_eeInfo_0;
 	public static String WizardNewXtextProjectCreationPage_eeInfo_1;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageExtensions;
+	public static String WizardNewXtextProjectCreationPage_MessageAtLeastJava8;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;
@@ -25,8 +26,6 @@ public class Messages extends NLS {
 	public static String AdvancedNewProjectPage_Description;
 	public static String AdvancedNewProjectPage_LabelFacets;
 	public static String AdvancedNewProjectPage_eclipseAndGradleWarn;
-	public static String AdvancedNewProjectPage_ideaAndMavenWarn;
-	public static String AdvancedNewProjectPage_ideaReqGradleInfo;
 	
 	public static String AdvancedNewProjectPage_noBuildship;
 	public static String AdvancedNewProjectPage_noM2e;
@@ -38,7 +37,6 @@ public class Messages extends NLS {
 	public static String AdvancedNewProjectPage_projIde_description;
 	public static String AdvancedNewProjectPage_languageServer;
 	public static String AdvancedNewProjectPage_languageServer_description;
-	public static String AdvancedNewProjectPage_projIdea;
 	public static String AdvancedNewProjectPage_projWeb;
 	public static String AdvancedNewProjectPage_srcLayout;
 	public static String AdvancedNewProjectPage_p2AndSdkInfo;
