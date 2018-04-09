@@ -52,8 +52,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Button createP2Project;
   
-  private Button createIdeaProject;
-  
   private Button createWebProject;
   
   private Button createIdeProject;
@@ -106,27 +104,22 @@ public class AdvancedNewProjectPage extends WizardPage {
         };
         this.createUiProjectSubGroup = this.Group(it_1, _function_3);
         final Procedure1<Button> _function_4 = (Button it_2) -> {
-          it_2.setText(Messages.AdvancedNewProjectPage_projIdea);
-          it_2.setEnabled(true);
-        };
-        this.createIdeaProject = this.CheckBox(it_1, _function_4);
-        final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projWeb);
           it_2.setEnabled(true);
         };
-        this.createWebProject = this.CheckBox(it_1, _function_5);
-        final Procedure1<Button> _function_6 = (Button it_2) -> {
+        this.createWebProject = this.CheckBox(it_1, _function_4);
+        final Procedure1<Button> _function_5 = (Button it_2) -> {
           it_2.setText(Messages.AdvancedNewProjectPage_projIde);
           it_2.setEnabled(false);
           this.InfoDecoration(it_2, Messages.AdvancedNewProjectPage_projIde_description);
           GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, true, false);
           it_2.setLayoutData(_gridData_1);
         };
-        this.createIdeProject = this.CheckBox(it_1, _function_6);
-        final Procedure1<Button> _function_7 = (Button it_2) -> {
+        this.createIdeProject = this.CheckBox(it_1, _function_5);
+        final Procedure1<Button> _function_6 = (Button it_2) -> {
           it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
         };
-        this.createTestProject = this.CheckBox(it_1, _function_7);
+        this.createTestProject = this.CheckBox(it_1, _function_6);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {
@@ -182,7 +175,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.validate(e);
       }
     };
-    final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
+    final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createWebProject));
     final SelectionAdapter selectionControlUi = new SelectionAdapter() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
@@ -280,7 +273,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.sourceLayout.addSelectionListener(selectionControl);
     this.createTestProject.addSelectionListener(selectionControl);
     this.createUiProject.addSelectionListener(selectionControlUi);
-    this.createIdeaProject.addSelectionListener(selectionControlUi);
     this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
     this.createSDKProject.addSelectionListener(selectionControl);
@@ -301,7 +293,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   public Procedure0 checkWidgets(final SelectionEvent e) {
     Procedure0 _xblockexpression = null;
     {
-      final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
+      final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createWebProject));
       if ((this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN) && (!this.isBundleResolved("org.eclipse.m2e.maven.runtime")))) {
         this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noM2e);
       }
@@ -311,14 +303,6 @@ public class AdvancedNewProjectPage extends WizardPage {
       if ((this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE) && this.createUiProject.getSelection())) {
         this.<Control>reportIssue(IMessageProvider.WARNING, 
           Messages.AdvancedNewProjectPage_eclipseAndGradleWarn);
-      }
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN) && this.createIdeaProject.getSelection())) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, 
-          Messages.AdvancedNewProjectPage_ideaAndMavenWarn);
-      }
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.NONE) && this.createIdeaProject.getSelection())) {
-        this.<Control>reportIssue(IMessageProvider.INFORMATION, 
-          Messages.AdvancedNewProjectPage_ideaReqGradleInfo);
       }
       if (((this.createUiProject.getSelection() && this.createP2Project.getSelection()) && (!this.createSDKProject.getSelection()))) {
         this.<Control>addIssue(IMessageProvider.INFORMATION, 
@@ -566,7 +550,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createUiProject.setSelection(true);
     this.createIdeProject.setSelection(true);
     this.createTestProject.setSelection(true);
-    this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
     this.createSDKProject.setSelection(false);
     this.createP2Project.setSelection(false);
@@ -585,10 +568,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateIdeProject() {
     return this.createIdeProject.getSelection();
-  }
-  
-  public boolean isCreateIntellijProject() {
-    return this.createIdeaProject.getSelection();
   }
   
   public boolean isCreateWebProject() {
