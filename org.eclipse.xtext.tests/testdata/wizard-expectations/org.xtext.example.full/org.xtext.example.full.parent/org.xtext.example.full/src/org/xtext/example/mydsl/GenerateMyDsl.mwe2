@@ -21,9 +21,6 @@ Workflow {
 				eclipsePluginTest = {
 					enabled = true
 				}
-				ideaPlugin = {
-					enabled = true
-				}
 				web = {
 					enabled = true
 				}

@@ -38,7 +38,6 @@ class WizardConfiguration {
 	val runtimeProject = new RuntimeProjectDescriptor(this)
 	val ideProject = new IdeProjectDescriptor(this)
 	val uiProject = new UiProjectDescriptor(this)
-	val intellijProject = new IntellijProjectDescriptor(this)
 	val webProject = new WebProjectDescriptor(this)
 	val parentProject = new ParentProjectDescriptor(this)
 	val targetPlatformProject = new TargetPlatformProject(this)
@@ -51,7 +50,6 @@ class WizardConfiguration {
 			runtimeProject,
 			ideProject,
 			uiProject,
-			intellijProject,
 			webProject,
 			targetPlatformProject,
 			sdkProject,
@@ -74,7 +72,7 @@ class WizardConfiguration {
 	}
 	
 	def boolean needsGradleBuild() {
-		preferredBuildSystem == BuildSystem.GRADLE || intellijProject.isEnabled
+		preferredBuildSystem == BuildSystem.GRADLE
 	}
 	
 	def boolean isNeedsGradleWrapper() {

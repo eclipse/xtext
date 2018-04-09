@@ -1,4 +1,3 @@
 include 'org.xtext.example.gradle'
 include 'org.xtext.example.gradle.ide'
-include 'org.xtext.example.gradle.idea'
 include 'org.xtext.example.gradle.web'

@@ -92,7 +92,6 @@ class CliWizardIntegrationTest {
 			runtimeProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			intellijProject.enabled = true
 			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
@@ -141,7 +140,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			intellijProject.enabled = true
 			p2Project.enabled = true
 			lineDelimiter = "\n"
 		],

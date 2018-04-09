@@ -354,7 +354,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      if ((this.getConfig().getIdeProject().isEnabled() && (!IterableExtensions.exists(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.getConfig().getWebProject(), this.getConfig().getIntellijProject(), this.getConfig().getUiProject())), ((Function1<ProjectDescriptor, Boolean>) (ProjectDescriptor it) -> {
+      if ((this.getConfig().getIdeProject().isEnabled() && (!IterableExtensions.exists(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.getConfig().getWebProject(), this.getConfig().getUiProject())), ((Function1<ProjectDescriptor, Boolean>) (ProjectDescriptor it) -> {
         return Boolean.valueOf(it.isEnabled());
       }))))) {
         _builder.append("\t\t\t\t");
@@ -400,23 +400,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      boolean _isEnabled_3 = this.getConfig().getIntellijProject().isEnabled();
+      boolean _isEnabled_3 = this.getConfig().getWebProject().isEnabled();
       if (_isEnabled_3) {
-        _builder.append("\t\t\t\t");
-        _builder.append("ideaPlugin = {");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("enabled = true");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _isEnabled_4 = this.getConfig().getWebProject().isEnabled();
-      if (_isEnabled_4) {
         _builder.append("\t\t\t\t");
         _builder.append("web = {");
         _builder.newLine();

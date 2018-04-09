@@ -40,7 +40,3 @@ jar {
 plugins.withId('war') {
 	webAppDirName = "WebRoot"
 }
-
-plugins.withId('org.xtext.idea-plugin') {
-	assembleSandbox.metaInf.from('META-INF')
-}

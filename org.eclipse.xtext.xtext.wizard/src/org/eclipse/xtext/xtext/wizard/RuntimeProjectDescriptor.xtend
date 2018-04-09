@@ -200,7 +200,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 								}
 							«ENDIF»
 							«IF config.ideProject.enabled 
-								&& !#[config.webProject, config.intellijProject, config.uiProject].exists[enabled]»
+								&& !#[config.webProject, config.uiProject].exists[enabled]»
 								genericIde = {
 									enabled = true
 								}
@@ -212,11 +212,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							«ENDIF»
 							«IF config.uiProject.testProject.enabled»
 								eclipsePluginTest = {
-									enabled = true
-								}
-							«ENDIF»
-							«IF config.intellijProject.enabled»
-								ideaPlugin = {
 									enabled = true
 								}
 							«ENDIF»
