@@ -147,7 +147,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Import-Package: com.ibm.icu.text;version="4.0.0",
- org.apache.commons.io,
  org.apache.commons.lang,
  org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.ui

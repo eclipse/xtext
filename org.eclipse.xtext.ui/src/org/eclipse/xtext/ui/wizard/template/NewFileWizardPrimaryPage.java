@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -132,7 +133,7 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		} else if (element instanceof IResource) {
 			container = ((IResource) element).getParent();
 		} else if (element instanceof IAdaptable) {
-			IResource adapter = ((IAdaptable) element).getAdapter(IResource.class);
+			IResource adapter = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
 			if (adapter instanceof IContainer) {
 				container = (IContainer) adapter;
 			} else if (adapter != null) {
@@ -197,7 +198,8 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		setStatus(null);
 		IContainer folder = getFolder();
 		if (folder == null || !folder.exists()) {
-			setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_unexistint_folder_pre + folderText.getText() + Messages.NewFileWizardPrimaryPage_unexistent_folder_post)); //$NON-NLS-1$
+			setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_unexistint_folder_pre //$NON-NLS-1$
+					+ folderText.getText() + Messages.NewFileWizardPrimaryPage_unexistent_folder_post));
 			return;
 		}
 		if (parameterComposite != null) {
@@ -210,7 +212,8 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		setStatus(null);
 		IContainer folder = getFolder();
 		if (folder == null || !folder.exists()) {
-			setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_unexistint_folder_pre + folderText.getText() + Messages.NewFileWizardPrimaryPage_unexistent_folder_post)); //$NON-NLS-1$
+			setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_unexistint_folder_pre //$NON-NLS-1$
+					+ folderText.getText() + Messages.NewFileWizardPrimaryPage_unexistent_folder_post));
 			return;
 		}
 		if ("".equals(fileText.getText().trim())) { //$NON-NLS-1$
@@ -228,7 +231,8 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 			for (CharSequence path : fileCollector.getResult()) {
 				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path.toString()));
 				if (file.exists()) {
-					setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_file_already_exist_pre + path + Messages.NewFileWizardPrimaryPage_file_already_exist_post)); //$NON-NLS-1$
+					setStatus(new Status(IStatus.ERROR, "NewFileWizard", Messages.NewFileWizardPrimaryPage_file_already_exist_pre + path //$NON-NLS-1$
+							+ Messages.NewFileWizardPrimaryPage_file_already_exist_post));
 					return;
 				}
 			}
@@ -287,7 +291,11 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		if (templates.length == 1) {
 			return templates[0];
 		}
-		return (AbstractFileTemplate) templateCombo.getStructuredSelection().getFirstElement();
+		ISelection selection = templateCombo.getSelection();
+		if (selection instanceof IStructuredSelection) {
+			return (AbstractFileTemplate) ((IStructuredSelection) selection).getFirstElement();
+		}
+		return null;
 	}
 
 	private final class PathCollector implements IFileGenerator {

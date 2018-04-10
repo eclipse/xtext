@@ -27,7 +27,7 @@ public abstract class AbstractFileTemplate extends AbstractTemplate {
 	}
 	
 	protected String getFolder() {
-		return info.getLocation();
+		return info.getFolder();
 	}
 
 	protected String getName() {

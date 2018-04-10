@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.io.IOUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,6 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * Implementation of {@link IFileGenerator} to create the files from the template inside the eclipse workspace.
@@ -45,7 +45,7 @@ public class WorkspaceFileGenerator extends WorkspaceModifyOperation implements 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			for (Map.Entry<String, CharSequence> fileEntry : files.entrySet()) {
 				IFile file = workspace.getRoot().getFile(new Path(fileEntry.getKey()));
-				file.create(IOUtils.toInputStream(fileEntry.getValue().toString()), true, subMonitor);
+				file.create(new StringInputStream(fileEntry.getValue().toString()), true, subMonitor);
 				if (firstFile == null) {
 					firstFile = file;
 				}

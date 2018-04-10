@@ -176,25 +176,25 @@ public abstract class AbstractTemplate {
 	/**
 	 * @return The label read from the {@link ProjectTemplate} annotation.
 	 */
-	public final String getLabel() {
+	public String getLabel() {
 		return getLocalizedValue("Label"); //$NON-NLS-1$
 	}
 
 	/**
 	 * @return The icon read from the {@link ProjectTemplate} annotation.
 	 */
-	public final String getIcon() {
+	public String getIcon() {
 		return getProjectTemplateAnnotation().icon();
 	}
 
 	/**
 	 * @return The description read from the {@link ProjectTemplate} annotation.
 	 */
-	public final String getDescription() {
+	public String getDescription() {
 		return getLocalizedValue("Description"); //$NON-NLS-1$
 	}
 
-	private String getLocalizedValue(String fieldName) {
+	protected String getLocalizedValue(String fieldName) {
 		try {
 			return (String) getClass().getClassLoader().loadClass(getClass().getPackage().getName() + ".Messages") //$NON-NLS-1$
 					.getField(getClass().getSimpleName() + "_" + fieldName).get(null); //$NON-NLS-1$
@@ -207,7 +207,7 @@ public abstract class AbstractTemplate {
 	/**
 	 * @return The variables read reflectively from this class.
 	 */
-	public final List<TemplateVariable> getVariables() {
+	public List<TemplateVariable> getVariables() {
 		return Collections.unmodifiableList(variables);
 	}
 
@@ -227,7 +227,7 @@ public abstract class AbstractTemplate {
 	protected void updateVariables() {
 	}
 
-	private ProjectTemplate getProjectTemplateAnnotation() {
+	protected ProjectTemplate getProjectTemplateAnnotation() {
 		Class<? extends Object> projectTemplateClass = getClass();
 		ProjectTemplate projectTemplateAnnotation = projectTemplateClass.getAnnotation(ProjectTemplate.class);
 		if (projectTemplateAnnotation == null)

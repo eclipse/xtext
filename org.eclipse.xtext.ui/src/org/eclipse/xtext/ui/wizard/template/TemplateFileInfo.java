@@ -14,18 +14,18 @@ package org.eclipse.xtext.ui.wizard.template;
  * @since 2.14
  */
 public class TemplateFileInfo {
-	private final String location;
+	private final String folder;
 	private final String name;
 	private final AbstractFileTemplate template;
 
-	public TemplateFileInfo(String location, String name, AbstractFileTemplate template) {
-		this.location = location;
+	public TemplateFileInfo(String folder, String name, AbstractFileTemplate template) {
+		this.folder = folder;
 		this.name = name;
 		this.template = template;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getFolder() {
+		return folder;
 	}
 
 	public String getName() {
