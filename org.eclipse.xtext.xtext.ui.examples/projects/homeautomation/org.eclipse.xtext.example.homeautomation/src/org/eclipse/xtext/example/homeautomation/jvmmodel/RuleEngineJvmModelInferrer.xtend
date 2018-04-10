@@ -28,7 +28,7 @@ class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
 	@Inject extension JvmTypesBuilder
 
 	def dispatch void infer(Model element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
-		val className = element.eResource.URI.trimFileExtension.lastSegment
+		val className = element.eResource.URI.trimFileExtension.lastSegment.toFirstUpper
 		acceptor.accept(element.toClass(className)) [
 			for (device : element.declarations.filter(Rule)) {
 				members += device.toMethod(getRuleMethodName(device), typeRef(void)) [

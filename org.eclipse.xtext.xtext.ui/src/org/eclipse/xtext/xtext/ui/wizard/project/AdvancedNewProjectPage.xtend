@@ -34,7 +34,6 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createUiProject
 	Button createSDKProject
 	Button createP2Project
-	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
@@ -71,10 +70,6 @@ class AdvancedNewProjectPage extends WizardPage {
 					createP2Project = CheckBox [
 						text = AdvancedNewProjectPage_projEclipseP2
 					]
-				]
-				createIdeaProject = CheckBox [
-					text = AdvancedNewProjectPage_projIdea
-					enabled = true
 				]
 				createWebProject = CheckBox [
 					text = AdvancedNewProjectPage_projWeb
@@ -124,7 +119,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				validate(e)
 			}
 		}
-		val uiButtons = #[createUiProject,createIdeaProject,createWebProject]
+		val uiButtons = #[createUiProject,createWebProject]
 		val selectionControlUi = new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
 				if ((e.source as Button).selection) {
@@ -196,7 +191,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		sourceLayout.addSelectionListener(selectionControl)
 		createTestProject.addSelectionListener(selectionControl)
 		createUiProject.addSelectionListener(selectionControlUi)
-		createIdeaProject.addSelectionListener(selectionControlUi)
 		createWebProject.addSelectionListener(selectionControlUi)
 		createIdeProject.addSelectionListener(selectionControl)
 		createSDKProject.addSelectionListener(selectionControl)
@@ -214,7 +208,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def checkWidgets(SelectionEvent e) {
-		val uiButtons = #[createUiProject,createIdeaProject,createWebProject]
+		val uiButtons = #[createUiProject,createWebProject]
 		
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
 			reportIssue(WARNING, AdvancedNewProjectPage_noM2e)
@@ -225,14 +219,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && createUiProject.selection) {
 			reportIssue(WARNING,
 				AdvancedNewProjectPage_eclipseAndGradleWarn)
-		}
-		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
-			reportIssue(WARNING,
-				AdvancedNewProjectPage_ideaAndMavenWarn)
-		}
-		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && createIdeaProject.selection) {
-			reportIssue(INFORMATION,
-				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
 		if (createUiProject.selection && createP2Project.selection && !createSDKProject.selection) {
 			addIssue(INFORMATION,
@@ -376,7 +362,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		createUiProject.selection = true
 		createIdeProject.selection = true
 		createTestProject.selection = true
-		createIdeaProject.selection = false
 		createWebProject.selection = false
 		createSDKProject.selection = false
 		createP2Project.selection = false
@@ -395,10 +380,6 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def boolean isCreateIdeProject() {
 		createIdeProject.selection
-	}
-
-	def boolean isCreateIntellijProject() {
-		createIdeaProject.selection
 	}
 
 	def boolean isCreateWebProject() {

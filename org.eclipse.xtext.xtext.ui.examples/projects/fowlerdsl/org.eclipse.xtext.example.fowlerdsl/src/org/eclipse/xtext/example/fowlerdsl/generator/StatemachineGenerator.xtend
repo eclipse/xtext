@@ -24,7 +24,7 @@ class StatemachineGenerator extends AbstractGenerator {
 	
 	def className(Resource res) {
 		var name = res.URI.lastSegment
-		return name.substring(0, name.indexOf('.'))
+		return name.substring(0, name.indexOf('.')).toFirstUpper
 	}
 	
 	def toJavaCode(Statemachine sm) '''

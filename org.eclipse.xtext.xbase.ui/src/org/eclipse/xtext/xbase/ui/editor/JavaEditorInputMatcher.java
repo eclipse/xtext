@@ -94,6 +94,8 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 		return false;
 	}
 
+	// IFile is an IStorage and an IResource
+	@SuppressWarnings("unlikely-arg-type")
 	protected boolean isCurrentResource(IResource currentResource, IEclipseTrace traceToSource) {
 		Iterator<? extends ILocationInEclipseResource> iterator = traceToSource.getAllAssociatedLocations().iterator();
 		if (!iterator.hasNext()) {

@@ -37,7 +37,7 @@ public class StatemachineGenerator extends AbstractGenerator {
   
   public String className(final Resource res) {
     String name = res.getURI().lastSegment();
-    return name.substring(0, name.indexOf("."));
+    return StringExtensions.toFirstUpper(name.substring(0, name.indexOf(".")));
   }
   
   public CharSequence toJavaCode(final Statemachine sm) {
