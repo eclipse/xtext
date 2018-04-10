@@ -127,7 +127,7 @@ Furthermore it's a good idea to have some kind of conflict resolution strategy t
 
 ## Integration with GMF Editors {#gmf-integration}
 
-We do no longer maintain the GMF example code and have removed it from our installation. You can still access the last version of the source code form our [source code repository](http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/examples/org.eclipse.xtext.xtext.ui.examples/contents).
+We do no longer maintain the GMF example code and have removed it from our installation. You can still access the last version of the source code form our [source code repository](https://github.com/eclipse/xtext/tree/v2.10.0/examples/org.eclipse.xtext.xtext.ui.examples/contents).
 
 The [Graphical Modeling Framework (GMF)](http://www.eclipse.org/modeling/gmp/?project=gmf) allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an [XtextResource]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java) we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. 
 

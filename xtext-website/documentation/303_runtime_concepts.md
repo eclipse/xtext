@@ -24,7 +24,7 @@ If you go with the default MWE workflow for your language and you haven't used X
 
 The [IFileSystemAccess2]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess2.java) API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is `java.io.File`.
 
-A very simple implementation of a code generator for the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) could be the following:
+A very simple implementation of a code generator for the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) could be the following:
 
 ```xtend
 class StatemachineGenerator extends AbstractGenerator {
