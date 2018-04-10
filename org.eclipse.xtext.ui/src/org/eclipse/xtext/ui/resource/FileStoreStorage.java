@@ -34,7 +34,8 @@ public class FileStoreStorage implements IEncodedStorage {
 	}
 
 	@Override
-	public <T> T getAdapter(Class<T> adapter) {
+	@SuppressWarnings("rawtypes")
+	public Class getAdapter(Class adapter) {
 		return null;
 	}
 
@@ -69,12 +70,15 @@ public class FileStoreStorage implements IEncodedStorage {
 
 	@Override
 	public boolean equals(Object object) {
-		return getFullPath().equals(object);
+		if (!(object instanceof FileStoreStorage)) {
+			return false;
+		}
+		return filePath.equals(((FileStoreStorage) object).filePath);
 	}
 
 	@Override
 	public int hashCode() {
-		return getFullPath().hashCode();
+		return filePath.hashCode();
 	}
 
 }
