@@ -29,9 +29,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
+import org.eclipse.xtext.ui.resource.FileStoreStorage;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -82,7 +84,7 @@ public class EditorUtils {
 		IEditorPart activeEditor = HandlerUtil.getActiveEditor(event);
 		if (activeEditor == null)
 			return null;
-		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
+		XtextEditor xtextEditor = activeEditor.getAdapter(XtextEditor.class);
 		return xtextEditor;
 	}
 
@@ -97,13 +99,13 @@ public class EditorUtils {
 		IEditorPart activeEditor = activePage.getActiveEditor();
 		if (activeEditor == null)
 			return null;
-		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
+		XtextEditor xtextEditor = activeEditor.getAdapter(XtextEditor.class);
 		return xtextEditor;
 	}
 
 	public static XtextEditor getXtextEditor(IEditorPart openEditor) {
 		if (openEditor != null) {
-			return (XtextEditor) openEditor.getAdapter(XtextEditor.class);
+			return openEditor.getAdapter(XtextEditor.class);
 		}
 		return null;
 	}
@@ -119,6 +121,9 @@ public class EditorUtils {
 				return new JarEntryEditorInput(storage);
 		} catch (NoClassDefFoundError e) {
 			// ignore. can happen if JDT is not available.
+		}
+		if (storage instanceof FileStoreStorage) {
+			return new FileStoreEditorInput(((FileStoreStorage)storage).getFileStore());
 		}
 		return new XtextReadonlyEditorInput(storage);
 	}
