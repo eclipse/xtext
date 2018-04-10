@@ -40,7 +40,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * <pre>
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         fragment = ui.projectWizard.TemplateProjectWizardFragment {
+ *         newTemplateProjectWizardForEclipse = {
  *             generate = true
  *         }
  *     }
@@ -175,12 +175,43 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
       _builder.newLineIfNotEmpty();
       _builder.append("         ");
       _builder.append("grammarName=\"");
-      String _name = this.getGrammar().getName();
-      _builder.append(_name, "         ");
+      String _languageId = GrammarUtil.getLanguageId(this.getGrammar());
+      _builder.append(_languageId, "         ");
       _builder.append("\">");
       _builder.newLineIfNotEmpty();
       _builder.append("   ");
       _builder.append("</projectTemplateProvider>");
+      _builder.newLine();
+      _builder.append("</extension>");
+      _builder.newLine();
+      _builder.append("<extension");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("point=\"org.eclipse.ui.perspectiveExtensions\">");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("<perspectiveExtension targetID=\"org.eclipse.ui.resourcePerspective\">");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<newWizardShortcut id=\"");
+      String _projectWizardClassName_1 = this.getProjectWizardClassName();
+      _builder.append(_projectWizardClassName_1, "\t\t");
+      _builder.append("\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("</perspectiveExtension>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("<perspectiveExtension targetID=\"org.eclipse.jdt.ui.JavaPerspective\">");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<newWizardShortcut id=\"");
+      String _projectWizardClassName_2 = this.getProjectWizardClassName();
+      _builder.append(_projectWizardClassName_2, "\t\t");
+      _builder.append("\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("</perspectiveExtension>");
       _builder.newLine();
       _builder.append("</extension>");
       _builder.newLine();
@@ -262,8 +293,8 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.append("@ProjectTemplate(label=\"Hello World\", icon=\"project_template.png\", description=\"<p><b>Hello World</b></p>");
         _builder.newLine();
         _builder.append("<p>This is a parameterized hello world for ");
-        String _name = TemplateProjectWizardFragment.this.getGrammar().getName();
-        _builder.append(_name);
+        String _simpleName_1 = GrammarUtil.getSimpleName(TemplateProjectWizardFragment.this.getGrammar());
+        _builder.append(_simpleName_1);
         _builder.append(". You can set a parameter to modify the content in the generated file");
         _builder.newLineIfNotEmpty();
         _builder.append("and a parameter to set the package the file is created in.</p>\")");
@@ -271,16 +302,16 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
         _builder.append("final class HelloWorldProject {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("val advanced = check(\"Advanced\", false)");
+        _builder.append("val advanced = check(\"Advanced:\", false)");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("val advancedGroup = group(\"Properties\")");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("val name = combo(\"Name\", #[\"Xtext\", \"World\", \"Foo\", \"Bar\"], \"The name to say \'Hello\' to\", advancedGroup)");
+        _builder.append("val name = combo(\"Name:\", #[\"Xtext\", \"World\", \"Foo\", \"Bar\"], \"The name to say \'Hello\' to\", advancedGroup)");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("val path = text(\"Package\", \"mydsl\", \"The package path to place the files in\", advancedGroup)");
+        _builder.append("val path = text(\"Package:\", \"mydsl\", \"The package path to place the files in\", advancedGroup)");
         _builder.newLine();
         _builder.newLine();
         _builder.append("\t");

@@ -37,6 +37,7 @@ import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2;
 import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2;
+import org.eclipse.xtext.xtext.generator.ui.fileWizard.TemplateFileWizardFragment;
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2;
@@ -136,6 +137,8 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment();
   
+  private TemplateFileWizardFragment newTemplateFileWizardForEclipse = new TemplateFileWizardFragment();
+  
   public StandardLanguage() {
     try {
       this.getClass().getClassLoader().loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
@@ -220,6 +223,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
       this.operator_add(fragments, this.newTemplateProjectWizardForEclipse);
+      this.operator_add(fragments, this.newTemplateFileWizardForEclipse);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -492,6 +496,15 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setNewTemplateProjectWizardForEclipse(final TemplateProjectWizardFragment newTemplateProjectWizardForEclipse) {
     this.newTemplateProjectWizardForEclipse = newTemplateProjectWizardForEclipse;
+  }
+  
+  @Pure
+  protected TemplateFileWizardFragment getNewTemplateFileWizardForEclipse() {
+    return this.newTemplateFileWizardForEclipse;
+  }
+  
+  public void setNewTemplateFileWizardForEclipse(final TemplateFileWizardFragment newTemplateFileWizardForEclipse) {
+    this.newTemplateFileWizardForEclipse = newTemplateFileWizardForEclipse;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);
