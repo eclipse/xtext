@@ -135,6 +135,9 @@ public class PartialSerializer {
 
 		public SerializeRecursiveStrategy(ISequentialRegion insertAt, EObject root, ISerializationContext context) {
 			super();
+			Preconditions.checkNotNull(insertAt);
+			Preconditions.checkNotNull(context);
+			Preconditions.checkNotNull(root);
 			this.insertAt = insertAt;
 			this.context = context;
 			this.root = root;
@@ -247,38 +250,48 @@ public class PartialSerializer {
 		SerializationContextMap<IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
 		List<EObjectChange> rootChanges = collectRootChanges(changes.getRootEObjectRecordings());
 		List<SerializationStrategy> strategies = Lists.newArrayList();
-		while (!rootChanges.isEmpty()) {
-			List<EObjectChange> nextRoots = Lists.newArrayList();
-			for (EObjectChange change : rootChanges) {
-				EObject obj = change.getEObject();
-				IEObjectRegion originalEObjectRegion = result.getOriginalTextRegionAccess().regionForEObject(obj);
-				ISerializationContext modified = getSerializationContext(obj);
-				if (originalEObjectRegion == null) {
-					strategies.add(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
-					continue;
-				}
-				ISerializationContext original = getSerializationContext(originalEObjectRegion);
-				if (!original.equals(modified)) {
-					strategies.add(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
-					// TODO: need to serialize container sometimes?
-					continue;
-				}
-				IConstraint constraint = constraints.get(modified);
-				List<SerializationStrategy> features = trySerializeIndividualFeatures(change, originalEObjectRegion,
-						modified, constraint);
-				if (features != null) {
-					strategies.addAll(features);
-					nextRoots.addAll(change.getChildren());
-				} else {
-
-					strategies.add(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
-				}
+		for (EObjectChange change : rootChanges) {
+			List<SerializationStrategy> strat = trySerializeEObject(change, result, constraints);
+			if (strat != null) {
+				strategies.addAll(strat);
 			}
-			rootChanges = collectRootChanges(nextRoots);
 		}
 		for (SerializationStrategy strategy : strategies) {
 			strategy.serialize(result);
 		}
+	}
+
+	protected List<SerializationStrategy> trySerializeEObject(EObjectChange change, ITextRegionDiffBuilder result,
+			SerializationContextMap<IConstraint> constraints) {
+		List<SerializationStrategy> strategies = Lists.newArrayList();
+		EObject obj = change.getEObject();
+		IEObjectRegion originalEObjectRegion = result.getOriginalTextRegionAccess().regionForEObject(obj);
+		ISerializationContext modified = getSerializationContext(obj);
+		if (originalEObjectRegion == null) {
+			return null;
+		}
+		ISerializationContext original = getSerializationContext(originalEObjectRegion);
+		if (!original.equals(modified)) {
+			strategies.add(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
+			return strategies;
+		}
+		IConstraint constraint = constraints.get(modified);
+		List<SerializationStrategy> features = trySerializeIndividualFeatures(change, originalEObjectRegion, modified,
+				constraint);
+		if (features == null) {
+			strategies.add(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
+			return strategies;
+		}
+		strategies.addAll(features);
+		for (EObjectChange child : change.getChildren()) {
+			List<SerializationStrategy> c = trySerializeEObject(child, result, constraints);
+			if (c == null) {
+				return Collections.singletonList(new SerializeRecursiveStrategy(originalEObjectRegion, obj, modified));
+			} else {
+				strategies.addAll(c);
+			}
+		}
+		return strategies;
 	}
 
 	public void setErrorAcceptor(ISerializationDiagnostic.Acceptor errorAcceptor) {
@@ -456,6 +469,9 @@ public class PartialSerializer {
 					insertAt = ((ISequentialRegion) originals.get(originals.size() - 1)).getNextHiddenRegion();
 				} else {
 					insertAt = ((ISequentialRegion) originals.get(index)).getPreviousHiddenRegion();
+				}
+				if (insertAt == null) {
+					return null;
 				}
 				EObject value = (EObject) modifying.get(index);
 				modifying.remove(index);
