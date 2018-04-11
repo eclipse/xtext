@@ -7436,7 +7436,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void redundantModifiers_21() {
     StringConcatenation _builder = new StringConcatenation();
