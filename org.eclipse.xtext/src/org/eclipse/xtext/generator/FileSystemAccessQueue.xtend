@@ -40,6 +40,12 @@ class FileSystemAccessQueue extends AdapterImpl {
 			throw new OperationCanceledException
 		}
 	}
+	
+	def void waitForEmptyQueue() {
+		while (!requestQueue.isEmpty) {
+			Thread.yield
+		}
+	}
 
 }
 
