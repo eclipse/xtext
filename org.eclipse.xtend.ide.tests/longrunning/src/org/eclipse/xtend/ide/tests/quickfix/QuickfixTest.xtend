@@ -4174,7 +4174,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void redundantModifiers_21(){
 		// Xtend function with javadoc having a 'public' modifier
