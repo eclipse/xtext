@@ -9,10 +9,15 @@
 package org.eclipse.xtext.ui.wizard.template;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -20,31 +25,31 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ui.util.FileOpener;
-import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
-import org.eclipse.xtext.ui.wizard.IProjectCreator;
-import org.eclipse.xtext.ui.wizard.IProjectInfo;
 
 import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 
 /**
- * A wizard to create new projects based on project templates contributed by the "projectTemplate" extension point.
+ * A wizard to create new files based on file templates contributed by the "fileTemplate" extension point.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
 @Beta
-public class TemplateNewProjectWizard extends Wizard implements INewWizard {
+public class TemplateNewFileWizard extends Wizard implements INewWizard {
 
-	private static final Logger logger = Logger.getLogger(TemplateNewProjectWizard.class);
+	private static final String FILE_TEMPLATE_PROVIDER_EXTENSION_POINT_ID = "org.eclipse.xtext.ui.fileTemplate"; //$NON-NLS-1$
+	private static final String FILE_TEMPLATE_PROVIDER_ID = "fileTemplateProvider"; //$NON-NLS-1$
+	private static final String FILE_TEMPLATE_PROVIDER_GRAMMAR_NAME_ATTRIBUTE = "grammarName"; //$NON-NLS-1$
+	private static final String FILE_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE = "class"; //$NON-NLS-1$
+
+	private static final Logger logger = Logger.getLogger(TemplateNewFileWizard.class);
 
 	protected IStructuredSelection selection;
 
-	protected WizardNewProjectCreationPage mainPage;
-	protected NewProjectWizardTemplateSelectionPage templatePage;
+	protected NewFileWizardPrimaryPage mainPage;
 	protected TemplateParameterPage templateParameterPage;
 
 	@Inject
@@ -52,15 +57,15 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 	@Inject
 	private FileOpener fileOpener;
 	@Inject
-	private IProjectCreator projectCreator;
-	@Inject
 	private IGrammarAccess grammarAccess;
 
 	private IWorkbench workbench;
 
-	public TemplateNewProjectWizard() {
+	private AbstractFileTemplate[] templates;
+
+	public TemplateNewFileWizard() {
 		setNeedsProgressMonitor(true);
-		setWindowTitle(Messages.TemplateNewProjectWizard_title);
+		setWindowTitle(Messages.TemplateNewFileWizard_title);
 	}
 
 	/**
@@ -69,55 +74,34 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public void addPages() {
-		mainPage = createMainPage("basicNewProjectPage"); //$NON-NLS-1$
-		mainPage.setTitle(shortName(getGrammarName()) + Messages.TemplateNewProjectWizard_title_suffix);
-		mainPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + shortName(getGrammarName())
-				+ Messages.TemplateNewProjectWizard_create_new_suffix);
+		templates = loadTemplatesFromExtensionPoint();
+
+		mainPage = createMainPage("basicNewFilePage"); //$NON-NLS-1$
 		addPage(mainPage);
-		templatePage = createTemplatePage("templateNewProjectPage"); //$NON-NLS-1$
-		templatePage.setTitle(shortName(getGrammarName()) + Messages.TemplateNewProjectWizard_title_suffix);
-		templatePage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + shortName(getGrammarName())
-				+ Messages.TemplateNewProjectWizard_create_new_suffix);
-		addPage(templatePage);
+
+		setForcePreviousAndNextButtons(hasMoreThenOneTemplate());
 	}
 
-	protected WizardNewProjectCreationPage createMainPage(String pageName) {
-		return new WizardNewProjectCreationPage(pageName);
-	}
-
-	protected NewProjectWizardTemplateSelectionPage createTemplatePage(String pageName) {
-		return new NewProjectWizardTemplateSelectionPage(pageName, getGrammarName(), labelProvider);
+	protected NewFileWizardPrimaryPage createMainPage(String pageName) {
+		return new NewFileWizardPrimaryPage(pageName, templates, selection, labelProvider);
 	}
 
 	protected String getGrammarName() {
 		return grammarAccess.getGrammar().getName();
 	}
 
-	private String shortName(String fullName) {
-		return fullName.contains(".") ? fullName.substring(fullName.lastIndexOf('.') + 1) : fullName; //$NON-NLS-1$
-	}
-
-	protected IExtendedProjectInfo getProjectInfo() {
-		IExtendedProjectInfo projectInfo = createProjectInfo();
-		projectInfo.setProjectName(mainPage.getProjectName());
-		if (!mainPage.useDefaults()) {
-			projectInfo.setLocationPath(mainPage.getLocationPath());
-		}
-		return projectInfo;
-	}
-
-	protected IExtendedProjectInfo createProjectInfo() {
-		return new TemplateProjectInfo(templatePage == null ? null : templatePage.getSelectedTemplate());
+	protected TemplateFileInfo getFileInfo() {
+		return mainPage.getFileInfo();
 	}
 
 	@Override
 	public boolean performFinish() {
-		final IProjectInfo projectInfo = getProjectInfo();
+		final TemplateFileInfo info = getFileInfo();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
-					doFinish(projectInfo, monitor);
+					doFinish(info, monitor);
 				} catch (Exception e) {
 					throw new InvocationTargetException(e);
 				} finally {
@@ -138,16 +122,15 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 		return true;
 	}
 
-	protected void doFinish(final IProjectInfo projectInfo, final IProgressMonitor monitor) {
+	protected void doFinish(final TemplateFileInfo info, final IProgressMonitor monitor) {
 		try {
-			TemplateProjectInfo templateProjectInfo = (TemplateProjectInfo) projectInfo;
-			AbstractProjectTemplate projectTemplate = templateProjectInfo.getProjectTemplate();
-			projectTemplate.setProjectInfo(templateProjectInfo);
-			projectTemplate.generateProjects((IProjectGenerator) projectCreator);
-			projectCreator.setProjectInfo(projectInfo);
-			projectCreator.run(monitor);
-			fileOpener.selectAndReveal(projectCreator.getResult());
-			fileOpener.openFileToEdit(getShell(), projectCreator.getResult());
+			AbstractFileTemplate fileTemplate = info.getFileTemplate();
+			WorkspaceFileGenerator fileGenerator = new WorkspaceFileGenerator();
+			fileTemplate.setTemplateInfo(info);
+			fileTemplate.generateFiles(fileGenerator);
+			fileGenerator.run(monitor);
+			fileOpener.selectAndReveal(fileGenerator.getResult());
+			fileOpener.openFileToEdit(getShell(), fileGenerator.getResult());
 		} catch (final InvocationTargetException e) {
 			logger.error(e.getMessage(), e);
 		} catch (final InterruptedException e) {
@@ -168,21 +151,18 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 
 	@Override
 	public IWizardPage getNextPage(IWizardPage page) {
-		if (page instanceof NewProjectWizardTemplateSelectionPage) {
-			AbstractProjectTemplate selectedTemplate = templatePage.getSelectedTemplate();
-			if (selectedTemplate == null)
-				return null;
+		if (page instanceof NewFileWizardPrimaryPage && hasMoreThenOneTemplate()) {
+			AbstractFileTemplate selectedTemplate = mainPage.getSelectedTemplate();
 			List<TemplateVariable> variables = selectedTemplate.getVariables();
 			if (variables.isEmpty())
 				return null;
-			selectedTemplate.setProjectInfo(getProjectInfo());
+			selectedTemplate.setTemplateInfo(getFileInfo());
 			TemplateParameterPage parameterPage = new TemplateParameterPage(selectedTemplate);
 
 			parameterPage.setWizard(this);
 			templateParameterPage = parameterPage;
-			parameterPage.setTitle(getGrammarName() + Messages.TemplateNewProjectWizard_title_suffix);
-			parameterPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + getGrammarName()
-					+ Messages.TemplateNewProjectWizard_create_new_suffix);
+			parameterPage.setTitle(page.getTitle());
+			parameterPage.setDescription(page.getDescription());
 			return parameterPage;
 		}
 		return super.getNextPage(page);
@@ -192,7 +172,7 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 	public IWizardPage getPreviousPage(IWizardPage page) {
 		if (page instanceof TemplateParameterPage) {
 			templateParameterPage = null;
-			return templatePage;
+			return mainPage;
 		}
 		return super.getPreviousPage(page);
 	}
@@ -201,4 +181,28 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 	public boolean canFinish() {
 		return super.canFinish() && (templateParameterPage == null ? true : templateParameterPage.isPageComplete());
 	}
+
+	private boolean hasMoreThenOneTemplate() {
+		return templates.length > 1;
+	}
+
+	private AbstractFileTemplate[] loadTemplatesFromExtensionPoint() {
+		List<AbstractFileTemplate> result = new ArrayList<>();
+		for (IConfigurationElement element : Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(FILE_TEMPLATE_PROVIDER_EXTENSION_POINT_ID)) {
+			if (FILE_TEMPLATE_PROVIDER_ID.equals(element.getName())
+					&& getGrammarName().equals(element.getAttribute(FILE_TEMPLATE_PROVIDER_GRAMMAR_NAME_ATTRIBUTE))) {
+				try {
+					IFileTemplateProvider provider = (IFileTemplateProvider) element
+							.createExecutableExtension(FILE_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE);
+					result.addAll(Arrays.asList(provider.getFileTemplates()));
+				} catch (CoreException e) {
+					logger.error("Can not instantiate '" + element.getAttribute(FILE_TEMPLATE_PROVIDER_GRAMMAR_CLASS_ATTRIBUTE) + "'", //$NON-NLS-1$ //$NON-NLS-2$
+							e);
+				}
+			}
+		}
+		return result.toArray(new AbstractFileTemplate[0]);
+	}
+
 }

@@ -7,24 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
-import org.eclipse.swt.widgets.Composite;
+import org.eclipse.core.runtime.IStatus;
+
+import com.google.common.annotations.Beta;
 
 /**
- * Interface to avoid passing concrete implementation of parameter page to {@link ProjectVariable}.
+ * Interface to avoid passing concrete implementation of parameter page to {@link TemplateVariable}.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public interface IParameterPage {
 
 	/**
 	 * Callback to update the parameter page after a variable has changed.
 	 */
-	void update();
-
-	/**
-	 * Parent element for all the parameter widgets.
-	 */
-	Composite getControl();
+	void setStatus(IStatus status);
 
 }

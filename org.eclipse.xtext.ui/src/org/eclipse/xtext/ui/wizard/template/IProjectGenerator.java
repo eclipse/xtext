@@ -10,12 +10,15 @@ package org.eclipse.xtext.ui.wizard.template;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Generate {@link IProject}'s by providing {@link ProjectFactory} instances.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public interface IProjectGenerator {
 
 	/**

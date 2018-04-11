@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,16 +10,22 @@ package org.eclipse.xtext.ui.wizard.template;
 import com.google.common.annotations.Beta;
 
 /**
- * Provide the templates to be shown in the new project wizard.
+ * Instances will be handled to {@link AbstractFileTemplate#generateFiles(IFileGenerator)} to collect the files the wizard will create.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
 @Beta
-public interface IProjectTemplateProvider {
+public interface IFileGenerator {
 
 	/**
-	 * @return all templates to be shown in the list of the new project wizard.
+	 * Called once for each file that should be created in the workspace.
+	 * 
+	 * @param path
+	 *                    workspace relative location of the file to create.
+	 * @param content
+	 *                    The content of the file to create.
 	 */
-	AbstractProjectTemplate[] getProjectTemplates();
+	void generate(CharSequence path, CharSequence content);
+
 }

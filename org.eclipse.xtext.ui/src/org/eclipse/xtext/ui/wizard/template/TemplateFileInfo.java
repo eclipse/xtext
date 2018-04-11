@@ -10,16 +10,33 @@ package org.eclipse.xtext.ui.wizard.template;
 import com.google.common.annotations.Beta;
 
 /**
- * Provide the templates to be shown in the new project wizard.
+ * Information about the file to create.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
 @Beta
-public interface IProjectTemplateProvider {
+public class TemplateFileInfo {
+	private final String folder;
+	private final String name;
+	private final AbstractFileTemplate template;
 
-	/**
-	 * @return all templates to be shown in the list of the new project wizard.
-	 */
-	AbstractProjectTemplate[] getProjectTemplates();
+	public TemplateFileInfo(String folder, String name, AbstractFileTemplate template) {
+		this.folder = folder;
+		this.name = name;
+		this.template = template;
+	}
+
+	public String getFolder() {
+		return folder;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public AbstractFileTemplate getFileTemplate() {
+		return template;
+	}
+
 }

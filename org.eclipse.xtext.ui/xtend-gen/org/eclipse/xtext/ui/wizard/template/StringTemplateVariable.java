@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,32 +14,32 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
-import org.eclipse.xtext.ui.wizard.template.IParameterPage;
-import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
+import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
+import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
+import org.eclipse.xtext.ui.wizard.template.TemplateVariable;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class StringProjectVariable extends ProjectVariable {
+public class StringTemplateVariable extends TemplateVariable {
   @Accessors
   private String value;
   
   private Text text;
   
-  public StringProjectVariable(final String label, final String defaultValue, final String description, final ContainerProjectVariable container) {
+  public StringTemplateVariable(final String label, final String defaultValue, final String description, final ContainerTemplateVariable container) {
     super(label, description, container);
     this.value = defaultValue;
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+  public void createWidget(final ParameterComposite parameterComposite, final Composite parent) {
     Text _text = new Text(parent, (SWT.SINGLE | SWT.BORDER));
     this.text = _text;
     this.text.setText(this.getValue());
     this.text.setToolTipText(this.getDescription());
     final ModifyListener _function = (ModifyEvent it) -> {
       this.setValue(this.text.getText());
-      parameterPage.update();
+      parameterComposite.update();
     };
     this.text.addModifyListener(_function);
   }
