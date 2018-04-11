@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.ui.projectWizard
 
+import com.google.common.annotations.Beta
 import com.google.common.io.ByteStreams
 import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -26,7 +27,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * <pre> 
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         newTemplateProjectWizardForEclipse = {
+ *         projectWizard = {
  *             generate = true
  *         }
  *     }
@@ -36,6 +37,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 
 	@Inject
@@ -44,10 +46,8 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 	@Inject
 	FileAccessFactory fileAccessFactory
 
-	@Accessors
-	boolean generate = false;
-	@Accessors
-	boolean pluginProject = true;
+	@Accessors boolean generate = false;
+	@Accessors boolean pluginProject = true;
 
 	override generate() {
 		if (!generate)
@@ -242,4 +242,20 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 	protected def String getProjectWizardPackage() {
 		grammar.getEclipsePluginBasePackage + ".wizard."
 	}
+	
+	/**
+	 * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
+	 */
+	def setGenerate(boolean value) {
+		generate = value
+	}
+
+	/**
+	 * Generate the projects as eclipse plugins. Affects only the example content of the templates. Can be changed
+	 * manually afterwards.
+	 */
+	def setPluginProject(boolean value) {
+		pluginProject = value
+	}
+
 }

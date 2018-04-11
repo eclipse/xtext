@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -70,6 +70,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill
+ * @author Arne Deutsch - Add projectWizard and fileWizard, deprecate 'newProjectWizardForEclipse'
  * @noextend This class should not be extended by clients.
  */
 @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
@@ -133,11 +134,12 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
   
+  @Deprecated
   private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
-  private TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment();
+  private TemplateProjectWizardFragment projectWizard = new TemplateProjectWizardFragment();
   
-  private TemplateFileWizardFragment newTemplateFileWizardForEclipse = new TemplateFileWizardFragment();
+  private TemplateFileWizardFragment fileWizard = new TemplateFileWizardFragment();
   
   public StandardLanguage() {
     try {
@@ -222,8 +224,8 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.ideaPlugin);
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
-      this.operator_add(fragments, this.newTemplateProjectWizardForEclipse);
-      this.operator_add(fragments, this.newTemplateFileWizardForEclipse);
+      this.operator_add(fragments, this.projectWizard);
+      this.operator_add(fragments, this.fileWizard);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -235,6 +237,30 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       _xifexpression = list.add(fragment);
     }
     return _xifexpression;
+  }
+  
+  /**
+   * @deprecated Use 'projectWizard' instead
+   */
+  @Deprecated
+  public SimpleProjectWizardFragment2 setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 fragment) {
+    return this.newProjectWizardForEclipse = fragment;
+  }
+  
+  /**
+   * Create a wizard able to create new projects with initial content based on template definitions.
+   * Supported options: 'generate', 'pluginProject'.
+   */
+  public TemplateProjectWizardFragment setProjectWizard(final TemplateProjectWizardFragment fragment) {
+    return this.projectWizard = fragment;
+  }
+  
+  /**
+   * Create a wizard able to create new files with initial content based on template definitions.
+   * Supported options: 'generate'.
+   */
+  public TemplateFileWizardFragment setFileWizard(final TemplateFileWizardFragment fragment) {
+    return this.fileWizard = fragment;
   }
   
   @Pure
@@ -485,26 +511,14 @@ public class StandardLanguage extends XtextGeneratorLanguage {
     return this.newProjectWizardForEclipse;
   }
   
-  public void setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 newProjectWizardForEclipse) {
-    this.newProjectWizardForEclipse = newProjectWizardForEclipse;
+  @Pure
+  protected TemplateProjectWizardFragment getProjectWizard() {
+    return this.projectWizard;
   }
   
   @Pure
-  protected TemplateProjectWizardFragment getNewTemplateProjectWizardForEclipse() {
-    return this.newTemplateProjectWizardForEclipse;
-  }
-  
-  public void setNewTemplateProjectWizardForEclipse(final TemplateProjectWizardFragment newTemplateProjectWizardForEclipse) {
-    this.newTemplateProjectWizardForEclipse = newTemplateProjectWizardForEclipse;
-  }
-  
-  @Pure
-  protected TemplateFileWizardFragment getNewTemplateFileWizardForEclipse() {
-    return this.newTemplateFileWizardForEclipse;
-  }
-  
-  public void setNewTemplateFileWizardForEclipse(final TemplateFileWizardFragment newTemplateFileWizardForEclipse) {
-    this.newTemplateFileWizardForEclipse = newTemplateFileWizardForEclipse;
+  protected TemplateFileWizardFragment getFileWizard() {
+    return this.fileWizard;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);

@@ -23,6 +23,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  */
+@Deprecated
 class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Inject

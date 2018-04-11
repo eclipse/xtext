@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.projectWizard;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteStreams;
 import java.io.InputStream;
@@ -40,7 +41,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * <pre>
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         newTemplateProjectWizardForEclipse = {
+ *         projectWizard = {
  *             generate = true
  *         }
  *     }
@@ -50,6 +51,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 @SuppressWarnings("all")
 public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
   @Inject
@@ -558,21 +560,28 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     return (_eclipsePluginBasePackage + ".wizard.");
   }
   
+  /**
+   * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
+   */
+  public boolean setGenerate(final boolean value) {
+    return this.generate = value;
+  }
+  
+  /**
+   * Generate the projects as eclipse plugins. Affects only the example content of the templates. Can be changed
+   * manually afterwards.
+   */
+  public boolean setPluginProject(final boolean value) {
+    return this.pluginProject = value;
+  }
+  
   @Pure
   public boolean isGenerate() {
     return this.generate;
   }
   
-  public void setGenerate(final boolean generate) {
-    this.generate = generate;
-  }
-  
   @Pure
   public boolean isPluginProject() {
     return this.pluginProject;
-  }
-  
-  public void setPluginProject(final boolean pluginProject) {
-    this.pluginProject = pluginProject;
   }
 }
