@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.ui.fileWizard
 
+import com.google.common.annotations.Beta
 import com.google.common.io.ByteStreams
 import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -24,7 +25,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * <pre> 
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         newTemplateFileWizardForEclipse = {
+ *         fileWizard = {
  *             generate = true
  *         }
  *     }
@@ -34,6 +35,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 
 	@Inject
@@ -169,4 +171,12 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 	protected def String getFileWizardPackage() {
 		grammar.getEclipsePluginBasePackage + ".wizard."
 	}
+
+	/**
+	 * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
+	 */
+	def setGenerate(boolean value) {
+		generate = value
+	}
+
 }

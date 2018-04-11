@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.fileWizard;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteStreams;
 import java.io.InputStream;
@@ -39,7 +40,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * <pre>
  * component = XtextGenerator {
  *     language = StandardLanguage {
- *         newTemplateFileWizardForEclipse = {
+ *         fileWizard = {
  *             generate = true
  *         }
  *     }
@@ -49,6 +50,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 @SuppressWarnings("all")
 public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
   @Inject
@@ -359,12 +361,15 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
     return (_eclipsePluginBasePackage + ".wizard.");
   }
   
+  /**
+   * Generate the wizard. Set to 'false' by default. Change to 'true' to generate the wizard.
+   */
+  public boolean setGenerate(final boolean value) {
+    return this.generate = value;
+  }
+  
   @Pure
   public boolean isGenerate() {
     return this.generate;
-  }
-  
-  public void setGenerate(final boolean generate) {
-    this.generate = generate;
   }
 }

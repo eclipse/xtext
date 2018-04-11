@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment
+import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.eclipse.xtext.xtext.generator.junit.Junit4Fragment2
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2
@@ -40,7 +41,6 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 
 /**
  * This specialization of the {@link XtextGeneratorLanguage} adds all the standard generator fragments
@@ -61,6 +61,7 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill
+ * @author Arne Deutsch - Add projectWizard and fileWizard, deprecate 'newProjectWizardForEclipse'
  * @noextend This class should not be extended by clients.
  */
 @Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
@@ -123,11 +124,11 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
-	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
+	@Deprecated SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
 	
-	TemplateProjectWizardFragment newTemplateProjectWizardForEclipse = new TemplateProjectWizardFragment
+	TemplateProjectWizardFragment projectWizard = new TemplateProjectWizardFragment
 	
-	TemplateFileWizardFragment newTemplateFileWizardForEclipse = new TemplateFileWizardFragment
+	TemplateFileWizardFragment fileWizard = new TemplateFileWizardFragment
 	
 	new() {
 		try {
@@ -185,8 +186,8 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 		fragments += ideaPlugin
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
-		fragments += newTemplateProjectWizardForEclipse
-		fragments += newTemplateFileWizardForEclipse
+		fragments += projectWizard
+		fragments += fileWizard
 		fragments
 	}
 	
@@ -194,5 +195,29 @@ import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragme
 		if (fragment !== null) {
 			list.add(fragment)
 		}
+	}
+	
+	/**
+	 * @deprecated Use 'projectWizard' instead
+	 */
+	@Deprecated
+	def setNewProjectWizardForEclipse(SimpleProjectWizardFragment2 fragment) {
+		this.newProjectWizardForEclipse = fragment
+	}
+	
+	/**
+	 * Create a wizard able to create new projects with initial content based on template definitions.
+	 * Supported options: 'generate', 'pluginProject'.
+	 */
+	def setProjectWizard(TemplateProjectWizardFragment fragment) {
+		this.projectWizard = fragment
+	}
+	
+	/**
+	 * Create a wizard able to create new files with initial content based on template definitions.
+	 * Supported options: 'generate'.
+	 */
+	def setFileWizard(TemplateFileWizardFragment fragment) {
+		this.fileWizard = fragment
 	}
 }

@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
  * 
  * @author Lorenzo Bettini - Initial contribution and API
  */
+@Deprecated
 @SuppressWarnings("all")
 public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
