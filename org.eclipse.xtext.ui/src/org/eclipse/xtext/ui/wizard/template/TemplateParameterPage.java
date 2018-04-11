@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,6 +14,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Page in the new project wizard to display a list with project templates. User get some description text and can select a template. In a
  * later page he can eventually configure the project template further.
@@ -21,6 +23,7 @@ import org.eclipse.swt.widgets.Composite;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class TemplateParameterPage extends WizardPage implements IParameterPage {
 
 	private final AbstractTemplate template;

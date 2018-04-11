@@ -15,12 +15,15 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Composite to be used inside a wizard to select the parameters for a template. These might be parameters for a project or a file template.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class ParameterComposite extends Composite {
 
 	private final AbstractTemplate template;
@@ -47,7 +50,7 @@ public class ParameterComposite extends Composite {
 				variable.getWidget().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 			}
 			if (variable.getDescription() != null) {
-				ControlDecoration decorator = new ControlDecoration(variable.getWidget(), SWT.RIGHT | SWT.TOP);
+				ControlDecoration decorator = new ControlDecoration(variable.getWidget(), SWT.RIGHT | SWT.TOP, varParent);
 				decorator.setDescriptionText(variable.getDescription());
 				decorator.setImage(
 						FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());

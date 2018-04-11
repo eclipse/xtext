@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Instances will be handled to {@link AbstractFileTemplate#generateFiles(IFileGenerator)} to collect the files the wizard will create.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public interface IFileGenerator {
 
 	/**

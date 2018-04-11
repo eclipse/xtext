@@ -40,6 +40,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
+import com.google.common.annotations.Beta;
+
 /**
  * The first page shown in the {@link TemplateNewFileWizard}. Allows selection of a path, a name and optionally of any parameters provided
  * by a template. In case multiple templates are available a combo box is shown to select the template. In that case the configuration of
@@ -48,6 +50,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPage {
 
 	private final AbstractFileTemplate[] templates;
@@ -79,7 +82,7 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 
 		Composite main = new Composite(parent, SWT.NONE);
 		main.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		main.setLayout(new GridLayout(1, false));
+		main.setLayout(new GridLayout(2, false));
 
 		createHeader(main);
 		createTemplateWidgets(main);
@@ -91,7 +94,7 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 
 	private void createHeader(Composite parent) {
 		Composite main = new Composite(parent, SWT.NONE);
-		main.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		main.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 		main.setLayout(new GridLayout(3, false));
 
 		Label folderLabel = new Label(main, SWT.NONE);
@@ -161,18 +164,21 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 	private void createTemplateWidgets(Composite main) {
 		if (hasExactlyOneTemplateWithVariables()) {
 			Label seperator = new Label(main, SWT.SEPARATOR | SWT.HORIZONTAL);
-			seperator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			seperator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 			parameterComposite = new ParameterComposite(main, SWT.NONE, templates[0], this);
-			parameterComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			parameterComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		} else if (hasMoreThenOneTempalte()) {
 			Label seperator = new Label(main, SWT.SEPARATOR | SWT.HORIZONTAL);
-			seperator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			seperator.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+			Label templateLabel = new Label(main, SWT.NONE);
+			templateLabel.setText(Messages.NewFileWizardPrimaryPage_template_label);
+			templateLabel.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
 			templateCombo = new ComboViewer(main);
 			templateCombo.setLabelProvider(labelProvider);
 			templateCombo.setContentProvider(new ArrayContentProvider());
 			templateCombo.setInput(templates);
 			templateCombo.setSelection(new StructuredSelection(templates[0]));
-			templateCombo.getCombo().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			templateCombo.getCombo().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 			templateCombo.getCombo().setToolTipText(getSelectedTemplate().getDescription());
 			templateCombo.addSelectionChangedListener(e -> {
 				templateCombo.getCombo().setToolTipText(getSelectedTemplate().getDescription());

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
+import com.google.common.annotations.Beta
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
 import org.eclipse.swt.events.SelectionEvent
+import org.eclipse.swt.layout.GridLayout
 import org.eclipse.swt.widgets.Button
 import org.eclipse.swt.widgets.Combo
 import org.eclipse.swt.widgets.Composite
@@ -17,7 +19,6 @@ import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Group
 import org.eclipse.swt.widgets.Text
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.swt.layout.GridLayout
 
 /**
  * Part of a template the variable defines the UI for the user to configure the generated files.
@@ -26,6 +27,7 @@ import org.eclipse.swt.layout.GridLayout
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 abstract class TemplateVariable {
 
 	@Accessors(PUBLIC_GETTER) final String label

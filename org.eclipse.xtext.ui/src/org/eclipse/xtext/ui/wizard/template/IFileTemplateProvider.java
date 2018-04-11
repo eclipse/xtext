@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Provide the templates to be shown in the new file wizard.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public interface IFileTemplateProvider {
 
 	/**

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ui.wizard.template;
 
+import com.google.common.annotations.Beta;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 @SuppressWarnings("all")
 public abstract class TemplateProcessor extends AbstractClassProcessor {
   private Map<Path, String> propertyContentMap;

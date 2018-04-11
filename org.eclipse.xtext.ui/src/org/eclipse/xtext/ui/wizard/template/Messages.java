@@ -30,6 +30,7 @@ public class Messages extends NLS {
 	public static String NewFileWizardPrimaryPage_unexistint_folder_pre;
 	public static String NewFileWizardTemplateSelectionPage_location_label;
 	public static String NewFileWizardTemplateSelectionPage_browse_location_button;
+	public static String NewFileWizardPrimaryPage_template_label;
 	public static String NewFileWizardTemplateSelectionPage_name_label;
 	public static String NewFileWizardTemplateSelectionPage_available_templates;
 	public static String TemplateNewFileWizard_title;

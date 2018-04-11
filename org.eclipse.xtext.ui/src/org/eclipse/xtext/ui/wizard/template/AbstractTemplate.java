@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
+import com.google.common.annotations.Beta;
+
 /**
  * A template definition used by the new wizards. Defines the UI (label, description, icon, variables) on how to present the template to the
  * user.
@@ -22,6 +24,7 @@ import org.eclipse.core.runtime.Status;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public abstract class AbstractTemplate {
 
 	private static final Logger logger = Logger.getLogger(AbstractTemplate.class);

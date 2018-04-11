@@ -22,12 +22,15 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Implementation of {@link IFileGenerator} to create the files from the template inside the eclipse workspace.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class WorkspaceFileGenerator extends WorkspaceModifyOperation implements IFileGenerator {
 
 	private final SortedMap<String, CharSequence> files = new TreeMap<>();

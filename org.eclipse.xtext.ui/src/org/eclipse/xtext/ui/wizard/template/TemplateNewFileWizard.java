@@ -28,6 +28,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ui.util.FileOpener;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 
 /**
@@ -36,6 +37,7 @@ import com.google.inject.Inject;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class TemplateNewFileWizard extends Wizard implements INewWizard {
 
 	private static final String FILE_TEMPLATE_PROVIDER_EXTENSION_POINT_ID = "org.eclipse.xtext.ui.fileTemplate"; //$NON-NLS-1$

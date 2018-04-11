@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ui.wizard.template;
 
+import com.google.common.annotations.Beta;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 @SuppressWarnings("all")
 public abstract class TemplateVariable {
   @Accessors(AccessorType.PUBLIC_GETTER)

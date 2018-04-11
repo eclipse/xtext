@@ -24,12 +24,15 @@ import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Project creator that creates all projects as configured through a selected template.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class DefaultTemplateProjectCreator extends WorkspaceModifyOperation implements IProjectCreator, IProjectGenerator {
 
 	private IProjectInfo projectInfo;

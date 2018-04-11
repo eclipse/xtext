@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 
 /**
@@ -35,6 +36,7 @@ import com.google.inject.Inject;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 
 	private static final Logger logger = Logger.getLogger(TemplateNewProjectWizard.class);

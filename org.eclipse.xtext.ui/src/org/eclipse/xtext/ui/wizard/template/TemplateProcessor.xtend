@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.wizard.template
 
+import com.google.common.annotations.Beta
 import java.util.HashMap
 import java.util.List
 import java.util.Map
@@ -30,6 +31,7 @@ import org.eclipse.xtend.lib.macro.file.Path
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 abstract class TemplateProcessor extends AbstractClassProcessor {
 
 	Map<Path, String> propertyContentMap // need to make sure to read the files only once

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,6 +31,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormText;
 
+import com.google.common.annotations.Beta;
+
 /**
  * Page of the new project wizard to present a list of templates to the user. The user can select a template and press finish. If the
  * template is configurable the variables can be configured in the following page, the {@link TemplateParameterPage}.
@@ -38,6 +40,7 @@ import org.eclipse.ui.forms.widgets.FormText;
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
+@Beta
 public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 
 	private static final String PROJECT_TEMPLATE_PROVIDER_EXTENSION_POINT_ID = "org.eclipse.xtext.ui.projectTemplate"; //$NON-NLS-1$
