@@ -1,0 +1,57 @@
+<!-- Performs see https://wiki.eclipse.org/CBI/p2repoAnalyzers/Repo_Reports -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtext.releng.simrel.tests</artifactId>
+	<version>2.14.0-SNAPSHOT</version>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<properties>
+		<tycho-version>1.1.0</tycho-version>
+		<reportRepoDir></reportRepoDir>
+		<reportOutputDir>${project.build.directory}</reportOutputDir>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<testClass>org.eclipse.xtext.releng.simrel.tests.RepositoryTest</testClass>
+					<systemProperties>
+						<reportRepoDir>${reportRepoDir}</reportRepoDir>
+						<reportOutputDir>${reportOutputDir}</reportOutputDir>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>cbi-analyzer</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/cbi/updates/analyzers/4.7</url>
+		</repository>
+		<repository>
+			<id>eclipse-updates</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/eclipse/updates/4.7/R-4.7.3-201803010715</url>
+		</repository>
+	</repositories>
+
+</project>
