@@ -43,7 +43,12 @@ public enum JavaVersion {
 	/**
 	 * Java 9 language enhancements: mainly modules and a different version scheme (9 is favored over 1.9).
 	 */
-	JAVA9("Java 9", new String[] {"9", "1.9"}, "JavaSE-9", "-1.9", Constants.JAVA9)
+	JAVA9("Java 9", new String[] {"9", "1.9"}, "JavaSE-9", "-1.9", Constants.JAVA9),
+	
+	/**
+	 * Java 10 language enhancements: local variable type inference (keyword 'var') (10 is favored over 1.10).
+	 */
+	JAVA10("Java 10", new String[] {"10", "1.10"}, "JavaSE-10", "-1.10", Constants.JAVA10)
 	;
 
 	private static final class Constants {
@@ -54,6 +59,7 @@ public enum JavaVersion {
 		private static final long JAVA7 = ((long)(MAJOR_VERSION_1_5 + 2) << 16) + MINOR_VERSION_0;
 		private static final long JAVA8 = ((long)(MAJOR_VERSION_1_5 + 3) << 16) + MINOR_VERSION_0;
 		private static final long JAVA9 = ((long)(MAJOR_VERSION_1_5 + 4) << 16) + MINOR_VERSION_0;
+		private static final long JAVA10 = ((long)(MAJOR_VERSION_1_5 + 5) << 16) + MINOR_VERSION_0;
 	}
 
 	//	 if you introduce a new JavaVersion don't forget to adapt
