@@ -18,6 +18,8 @@ public class JavaVersionTest {
 	
 	@Test
 	public void testFromQualifier() {
+		assertEquals(JavaVersion.JAVA10, JavaVersion.fromQualifier("10"));
+		assertEquals(JavaVersion.JAVA10, JavaVersion.fromQualifier("1.10"));
 		assertEquals(JavaVersion.JAVA9, JavaVersion.fromQualifier("9"));
 		assertEquals(JavaVersion.JAVA9, JavaVersion.fromQualifier("1.9"));
 		assertEquals(JavaVersion.JAVA8, JavaVersion.fromQualifier("8"));
