@@ -63,7 +63,7 @@ public class ClassFileBytesAccess {
 		// eclipse oxygen 3a and probabably eclipse photon
 		
 		// START HACK
-		if (result[7] == 54) {
+		if (result != null && result[7] == 54) {
 			result[7] = 53;
 		}
 		// END HACK
