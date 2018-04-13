@@ -2057,7 +2057,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public void testInnerAnnotationType() throws Exception {
 		JvmDeclaredType declaredType = (JvmDeclaredType) getTypeProvider()
 				.findTypeByName(TypeWithInnerAnnotation.class.getName());
-		assertEquals(2, declaredType.getMembers().size());
+		assertEquals(3, declaredType.getMembers().size());
 		// default constructor
 		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
 			@Override
@@ -2073,6 +2073,12 @@ public abstract class AbstractTypeProviderTest extends Assert {
 				return (input instanceof JvmAnnotationType)
 						&& input.getIdentifier().equals(TypeWithInnerAnnotation.MyAnnotation.class.getName())
 						&& input.getVisibility() == JvmVisibility.PUBLIC;
+			}
+		}));
+		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmOperation) && ((JvmOperation) input).getParameters().size() == 1;
 			}
 		}));
 	}

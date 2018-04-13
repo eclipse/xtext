@@ -232,18 +232,13 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 			}
 		};
     }
-
-    @Override
-	public AnnotationVisitor visitParameterAnnotation(
-        final int parameter,
-        final String desc,
-        final boolean visible)
-    {
-    	if (parameter < offset)
-    		return null;
-    	JvmFormalParameter formalParameter = result.getParameters().get(parameter - offset);
-    	return new JvmAnnotationReferenceBuilder((InternalEList<JvmAnnotationReference>) formalParameter.getAnnotations(), desc, proxies);
-    }
+    
+	@Override
+	public AnnotationVisitor visitParameterAnnotation(final int parameter, final String desc, final boolean visible) {
+			JvmFormalParameter formalParameter = result.getParameters().get(parameter);
+			return new JvmAnnotationReferenceBuilder(
+					(InternalEList<JvmAnnotationReference>) formalParameter.getAnnotations(), desc, proxies);
+	}
 
     @Override
 	public void visitCode() {

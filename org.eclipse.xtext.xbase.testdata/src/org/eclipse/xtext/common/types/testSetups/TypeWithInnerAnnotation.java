@@ -12,4 +12,5 @@ package org.eclipse.xtext.common.types.testSetups;
  */
 public class TypeWithInnerAnnotation {
 	public @interface MyAnnotation {}
+	void m(TypeWithInnerAnnotation this, int m) {}
 }

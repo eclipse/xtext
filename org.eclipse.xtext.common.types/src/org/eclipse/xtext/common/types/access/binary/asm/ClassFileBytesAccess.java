@@ -55,19 +55,6 @@ public class ClassFileBytesAccess {
 		}
 		result = clazz.getBytes();
 		
-		// XXX This is a hack to be able to work with ASM 6.0 which is not Java 10 compatible. As ASM 6.1 is buggy
-		// and ASM 6.1.1 not yet released we check if the loaded class is compiled with Java 10. If so we modify the
-		// major version byte from 54 (Java 10) to 53 (Java 9). The the byte codes between both versions are otherwise
-		// unchanged this is not critical.
-		// TODO remove hack as soon as ASM 6.1.1 is included in eclipse and we can remove backwards compatibility with
-		// eclipse oxygen 3a and probabably eclipse photon
-		
-		// START HACK
-		if (result != null && result[7] == 54) {
-			result[7] = 53;
-		}
-		// END HACK
-		
 		cache.put(className, result != null ? result : notAvailable);
 		return result;
 	}
