@@ -136,17 +136,17 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository/"/>
 		<unit id="com.google.gson" version="2.7.0.v20170129-0911"/>
 		<unit id="com.google.gson.source" version="2.7.0.v20170129-0911"/>
 		<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 		<unit id="org.antlr.runtime.source" version="3.2.0.v201101311130"/>
 		<unit id="org.junit" version="4.12.0.v201504281640"/>
 		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
-		<unit id="org.objectweb.asm" version="6.0.0.v20180116-1719"/>
-		<unit id="org.objectweb.asm.source" version="6.0.0.v20180116-1719"/>
-		<unit id="org.objectweb.asm.tree" version="6.0.0.v20180116-1719"/>
-		<unit id="org.objectweb.asm.tree.source" version="6.0.0.v20180116-1719"/>
+		<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.source" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.tree.source" version="6.1.1.v20180414-0329"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
