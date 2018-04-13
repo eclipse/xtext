@@ -117,8 +117,10 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
 		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
 	</location>
 </locations>
 </target>
