@@ -24,7 +24,7 @@ repositories {
 	jcenter()
 	if (findProperty('useJenkinsSnapshots') == 'true') {
 		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
-		maven { url jenkinsPipelineRepo('xtext-lib') }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/java-10-integration/lastSuccessfulBuild/artifact/build/maven-repository/' }
 	} else {
 		mavenLocal()
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
