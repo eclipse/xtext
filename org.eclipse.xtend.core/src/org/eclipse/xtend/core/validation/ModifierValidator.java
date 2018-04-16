@@ -15,9 +15,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.validation.Check;
@@ -77,7 +81,14 @@ public class ModifierValidator {
 					if("private".equals(modifier) && member instanceof XtendField) {
 						redundantModifierWarning("private", memberName, member, i);
 					}
-					if("public".equals(modifier) && (member instanceof XtendClass || member instanceof XtendFunction)) {
+					if("public".equals(modifier) && (
+							member instanceof XtendAnnotationType ||
+							member instanceof XtendClass ||
+							member instanceof XtendEnum ||
+							member instanceof XtendInterface ||
+							member instanceof XtendConstructor ||
+							member instanceof XtendFunction
+					)) {
 						redundantModifierWarning("public", memberName, member, i);
 					}
 				}

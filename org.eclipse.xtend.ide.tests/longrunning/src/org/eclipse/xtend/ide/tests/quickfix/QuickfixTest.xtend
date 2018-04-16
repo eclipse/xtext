@@ -4737,4 +4737,107 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test
+	def void redundantModifiers_40(){
+		// Xtend interface having a 'public' modifier
+		create('Foo.xtend', '''
+			publ|ic interface Foo {}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix(
+// TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+		''' interface Foo {}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_41(){
+		// Xtend class having a constructor with 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				pu|blic new(){}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+ллл TODO: improve formatting after Quickfix application
+			class Foo { new(){}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_42(){
+		// Xtend class having an inner interface with 'public' modifier
+		create('Foo.xtend', '''
+			class Foo {
+				pu|blic interface Bar {
+					def m() {}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+ллл TODO: improve formatting after Quickfix application
+			class Foo { interface Bar {
+					def m() {}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_43(){
+		// Xtend interface having a method with 'public' modifier
+		create('Foo.xtend', '''
+			interface Foo {
+				pu|blic def m() {}
+				}
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+			interface Foo {
+				def m() {}
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_44(){
+		// Xtend annotation having a method with 'public' modifier
+		create('Foo.xtend', '''
+			pub|lic annotation Foo {
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+ллл TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 annotation Foo {
+			}
+		''')
+	}
+	
+	@Test
+	def void redundantModifiers_45(){
+		// Xtend enum having a method with 'public' modifier
+		create('Foo.xtend', '''
+			pub|lic enum Foo {
+			}
+		''')
+		.assertIssueCodes(REDUNDANT_MODIFIER)
+		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertModelAfterQuickfix('''
+ллл TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
+			 enum Foo {
+			}
+		''')
+	}
 }
