@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -57,6 +58,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   private Button createIdeProject;
   
   private Button createTestProject;
+  
+  private Button junitVersion4;
+  
+  private Button junitVersion5;
   
   private Combo preferredBuildSystem;
   
@@ -116,10 +121,33 @@ public class AdvancedNewProjectPage extends WizardPage {
           it_2.setLayoutData(_gridData_1);
         };
         this.createIdeProject = this.CheckBox(it_1, _function_5);
-        final Procedure1<Button> _function_6 = (Button it_2) -> {
-          it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+        Composite _composite_1 = new Composite(it_1, SWT.NONE);
+        final Procedure1<Composite> _function_6 = (Composite it_2) -> {
+          final GridLayout _layout = new GridLayout(3, false);
+          _layout.marginWidth = 0;
+          _layout.marginHeight = 0;
+          it_2.setLayout(_layout);
+          final Procedure1<Button> _function_7 = (Button it_3) -> {
+            it_3.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+          };
+          this.createTestProject = this.CheckBox(it_2, _function_7);
+          final Procedure1<Button> _function_8 = (Button it_3) -> {
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+            it_3.setText("4");
+            it_3.setSelection(true);
+          };
+          this.junitVersion4 = this.Radio(it_2, _function_8);
+          final Procedure1<Button> _function_9 = (Button it_3) -> {
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+            it_3.setText("5");
+          };
+          this.junitVersion5 = this.Radio(it_2, _function_9);
         };
-        this.createTestProject = this.CheckBox(it_1, _function_6);
+        ObjectExtensions.<Composite>operator_doubleArrow(_composite_1, _function_6);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {
@@ -270,8 +298,17 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.validate(e);
       }
     });
+    this.createTestProject.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _selection = AdvancedNewProjectPage.this.createTestProject.getSelection();
+        final boolean enabled = (_selection == true);
+        AdvancedNewProjectPage.this.junitVersion4.setEnabled(enabled);
+        AdvancedNewProjectPage.this.junitVersion5.setEnabled(enabled);
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    });
     this.sourceLayout.addSelectionListener(selectionControl);
-    this.createTestProject.addSelectionListener(selectionControl);
     this.createUiProject.addSelectionListener(selectionControlUi);
     this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
@@ -601,5 +638,19 @@ public class AdvancedNewProjectPage extends WizardPage {
       _xblockexpression = LanguageServer.values()[this.createLanguageServer.getSelectionIndex()];
     }
     return _xblockexpression;
+  }
+  
+  public JUnitVersion getJUnitVersion() {
+    boolean _selection = this.junitVersion4.getSelection();
+    if (_selection) {
+      return JUnitVersion.JUNIT_4;
+    } else {
+      boolean _selection_1 = this.junitVersion5.getSelection();
+      if (_selection_1) {
+        return JUnitVersion.JUNIT_5;
+      } else {
+        throw new IllegalStateException();
+      }
+    }
   }
 }

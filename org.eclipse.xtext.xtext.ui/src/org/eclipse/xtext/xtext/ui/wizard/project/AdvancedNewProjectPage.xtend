@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtext.wizard.SourceLayout
 
 import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
+import org.eclipse.xtext.util.JUnitVersion
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -37,6 +38,8 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
+	Button junitVersion4
+	Button junitVersion5
 	Combo preferredBuildSystem
 	Combo createLanguageServer
 	Combo sourceLayout
@@ -81,8 +84,25 @@ class AdvancedNewProjectPage extends WizardPage {
 					it.InfoDecoration(AdvancedNewProjectPage_projIde_description)
 					layoutData = new GridData(SWT.LEFT, SWT.CENTER, true, false)
 				]
-				createTestProject = CheckBox [
-					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+				new Composite(it, SWT.NONE) => [
+					val _layout = new GridLayout(3, false)
+					_layout.marginWidth = 0
+					_layout.marginHeight = 0
+					
+					layout = _layout
+					createTestProject = CheckBox [
+						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
+					]
+					junitVersion4 = Radio [
+						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
+						text = "4"
+						selection = true
+					]
+					junitVersion5 = Radio [
+						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
+						text = "5"
+					]
 				]
 			]
 			Group [
@@ -187,9 +207,16 @@ class AdvancedNewProjectPage extends WizardPage {
 				validate(e)
 			}
 		})
+		createTestProject.addSelectionListener(new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				val enabled = createTestProject.selection==true
+				junitVersion4.enabled = enabled
+				junitVersion5.enabled = enabled
+				validate(e)
+			}
+		})
 		
 		sourceLayout.addSelectionListener(selectionControl)
-		createTestProject.addSelectionListener(selectionControl)
 		createUiProject.addSelectionListener(selectionControlUi)
 		createWebProject.addSelectionListener(selectionControlUi)
 		createIdeProject.addSelectionListener(selectionControl)
@@ -406,6 +433,16 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (getPreferredBuildSystem==BuildSystem.NONE)
 			return LanguageServer.NONE
 		LanguageServer.values.get(createLanguageServer.selectionIndex)
+	}
+	
+	def JUnitVersion getJUnitVersion () {
+		if (junitVersion4.selection) {
+			return JUnitVersion.JUNIT_4;
+		} else if (junitVersion5.selection) {
+			return JUnitVersion.JUNIT_5;
+		} else {
+			throw new IllegalStateException
+		}
 	}
 
 }
