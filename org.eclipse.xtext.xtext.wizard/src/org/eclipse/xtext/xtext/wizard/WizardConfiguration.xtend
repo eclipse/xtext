@@ -14,6 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.JUnitVersion
 
 @Accessors
 class WizardConfiguration {
@@ -32,6 +33,7 @@ class WizardConfiguration {
 	boolean needsGradleWrapper = true
 	JavaVersion javaVersion = JavaVersion.JAVA8
 	LanguageServer languageServer = LanguageServer.NONE
+	JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
 	
 	val LanguageDescriptor language = new LanguageDescriptor
 

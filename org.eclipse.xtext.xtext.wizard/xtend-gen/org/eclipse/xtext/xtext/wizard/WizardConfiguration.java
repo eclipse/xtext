@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextVersion;
@@ -65,6 +66,8 @@ public class WizardConfiguration {
   private JavaVersion javaVersion = JavaVersion.JAVA8;
   
   private LanguageServer languageServer = LanguageServer.NONE;
+  
+  private JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
   
   private final LanguageDescriptor language = new LanguageDescriptor();
   
@@ -217,6 +220,15 @@ public class WizardConfiguration {
   
   public void setLanguageServer(final LanguageServer languageServer) {
     this.languageServer = languageServer;
+  }
+  
+  @Pure
+  public JUnitVersion getJunitVersion() {
+    return this.junitVersion;
+  }
+  
+  public void setJunitVersion(final JUnitVersion junitVersion) {
+    this.junitVersion = junitVersion;
   }
   
   @Pure

@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -76,23 +77,116 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
     final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
     Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
     Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
-    ExternalDependency _externalDependency = new ExternalDependency();
-    final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
-      ExternalDependency.P2Coordinates _p2 = it.getP2();
-      _p2.setBundleId("org.junit");
-      ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-      _p2_1.setVersion("4.12.0");
-      ExternalDependency.MavenCoordinates _maven = it.getMaven();
-      _maven.setGroupId("junit");
-      ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
-      _maven_1.setArtifactId("junit");
-      ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
-      _maven_2.setVersion("4.12");
-      ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
-      _maven_3.setScope(Scope.TESTCOMPILE);
-    };
-    ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
-    deps.add(_doubleArrow);
+    JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+    boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_4);
+    if (_equals) {
+      ExternalDependency _externalDependency = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("4.12.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("junit");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("4.12");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
+      deps.add(_doubleArrow);
+    }
+    JUnitVersion _junitVersion_1 = this.getConfig().getJunitVersion();
+    boolean _equals_1 = Objects.equal(_junitVersion_1, JUnitVersion.JUNIT_5);
+    if (_equals_1) {
+      ExternalDependency _externalDependency_1 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit.jupiter.api");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("5.1.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.jupiter");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-jupiter-api");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("5.1.0");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_1);
+      deps.add(_doubleArrow_1);
+      ExternalDependency _externalDependency_2 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit.jupiter.engine");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("5.1.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.jupiter");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-jupiter-engine");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("5.1.0");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_2);
+      deps.add(_doubleArrow_2);
+      ExternalDependency _externalDependency_3 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_3 = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit.platform.commons");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("1.1.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.platform");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-platform-commons");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("1.1.0");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_3 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_3, _function_3);
+      deps.add(_doubleArrow_3);
+      ExternalDependency _externalDependency_4 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_4 = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.junit.platform.engine");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("1.1.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.platform");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-platform-engine");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("1.1.0");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_4 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_4, _function_4);
+      deps.add(_doubleArrow_4);
+      ExternalDependency _externalDependency_5 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_5 = (ExternalDependency it) -> {
+        ExternalDependency.P2Coordinates _p2 = it.getP2();
+        _p2.setBundleId("org.opentest4j");
+        ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+        _p2_1.setVersion("1.0.0");
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.opentest4j");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("opentest4j");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("1.0.0");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTCOMPILE);
+      };
+      ExternalDependency _doubleArrow_5 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_5, _function_5);
+      deps.add(_doubleArrow_5);
+    }
     return deps;
   }
   

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.JUnitVersion
 
 abstract class TestProjectDescriptor extends ProjectDescriptor {
 	@Accessors val ProjectDescriptor testedProject
@@ -44,14 +45,58 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 	override getExternalDependencies() {
 		val deps = newLinkedHashSet
 		deps += super.externalDependencies
-		deps += new ExternalDependency()=>[
-			p2.bundleId = "org.junit"
-			p2.version = "4.12.0"
-			maven.groupId = "junit"
-			maven.artifactId = "junit"
-			maven.version = "4.12"
-			maven.scope = Scope.TESTCOMPILE
-		]
+		if (config.junitVersion == JUnitVersion.JUNIT_4) {
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.junit"
+				p2.version = "4.12.0"
+				maven.groupId = "junit"
+				maven.artifactId = "junit"
+				maven.version = "4.12"
+				maven.scope = Scope.TESTCOMPILE
+			]
+		}
+		if (config.junitVersion == JUnitVersion.JUNIT_5) {
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.junit.jupiter.api"
+				p2.version = "5.1.0"
+				maven.groupId = "org.junit.jupiter"
+				maven.artifactId = "junit-jupiter-api"
+				maven.version = "5.1.0"
+				maven.scope = Scope.TESTCOMPILE
+			]
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.junit.jupiter.engine"
+				p2.version = "5.1.0"
+				maven.groupId = "org.junit.jupiter"
+				maven.artifactId = "junit-jupiter-engine"
+				maven.version = "5.1.0"
+				maven.scope = Scope.TESTCOMPILE
+			]
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.junit.platform.commons"
+				p2.version = "1.1.0"
+				maven.groupId = "org.junit.platform"
+				maven.artifactId = "junit-platform-commons"
+				maven.version = "1.1.0"
+				maven.scope = Scope.TESTCOMPILE
+			]
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.junit.platform.engine"
+				p2.version = "1.1.0"
+				maven.groupId = "org.junit.platform"
+				maven.artifactId = "junit-platform-engine"
+				maven.version = "1.1.0"
+				maven.scope = Scope.TESTCOMPILE
+			]
+			deps += new ExternalDependency()=>[
+				p2.bundleId = "org.opentest4j"
+				p2.version = "1.0.0"
+				maven.groupId = "org.opentest4j"
+				maven.artifactId = "opentest4j"
+				maven.version = "1.0.0"
+				maven.scope = Scope.TESTCOMPILE
+			]
+		}
 		return deps
 	}
 	
