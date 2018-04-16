@@ -41,7 +41,7 @@ public interface IReadAccess<State> {
 	 */
 	default <Result> Result tryReadOnly(
 		IUnitOfWork<Result, State> work,
-		Supplier<Result> defaultResult
+		Supplier<? extends Result> defaultResult
 	) {
 		return readOnly((state) -> {
 			if (state == null) {
@@ -65,7 +65,7 @@ public interface IReadAccess<State> {
 	 */
 	default <Result> Result tryReadOnly(
 		IUnitOfWork<Result, State> work,
-		Supplier<Result> defaultResult,
+		Supplier<? extends Result> defaultResult,
 		Function<? super Exception, ? extends Result> exceptionHandler
 	) {
 		try {
@@ -107,7 +107,7 @@ public interface IReadAccess<State> {
 		 */
 		default <Result> Result tryPriorityReadOnly(
 			IUnitOfWork<Result, State> work,
-			Supplier<Result> defaultResult
+			Supplier<? extends Result> defaultResult
 		) {
 			return priorityReadOnly((state) -> {
 				if (state == null) {
@@ -134,7 +134,7 @@ public interface IReadAccess<State> {
 		 */
 		default <Result> Result tryPriorityReadOnly(
 			IUnitOfWork<Result, State> work,
-			Supplier<Result> defaultResult,
+			Supplier<? extends Result> defaultResult,
 			Function<? super Exception, ? extends Result> exceptionHandler
 		) {
 			try {

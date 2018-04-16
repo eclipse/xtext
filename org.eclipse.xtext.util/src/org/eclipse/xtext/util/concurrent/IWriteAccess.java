@@ -40,7 +40,7 @@ public interface IWriteAccess<State> {
 	 */
 	default <Result> Result tryModify(
 		IUnitOfWork<Result, State> work,
-		Supplier<Result> defaultResult
+		Supplier<? extends Result> defaultResult
 	) {
 		return modify((state) -> {
 			if (state == null) {
@@ -64,7 +64,7 @@ public interface IWriteAccess<State> {
 	 */
 	default <Result> Result tryModify(
 		IUnitOfWork<Result, State> work,
-		Supplier<Result> defaultResult,
+		Supplier<? extends Result> defaultResult,
 		Function<? super Exception, ? extends Result> exceptionHandler
 	) {
 		try {
