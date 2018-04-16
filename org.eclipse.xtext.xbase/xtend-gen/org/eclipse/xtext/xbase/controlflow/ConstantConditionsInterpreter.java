@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
@@ -192,7 +193,7 @@ public class ConstantConditionsInterpreter {
                 Object _rawValue_1 = result.getRawValue();
                 return new EvaluationResult(_rawValue_1, false);
               } else {
-                List<Object> _switchResult_1 = null;
+                ArrayList<Object> _switchResult_1 = null;
                 Object _rawValue_2 = receiver.getRawValue();
                 final Object v = _rawValue_2;
                 boolean _matched_1 = false;
@@ -214,9 +215,13 @@ public class ConstantConditionsInterpreter {
                   }
                 }
                 if (!_matched_1) {
-                  _switchResult_1 = CollectionLiterals.<Object>emptyList();
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("Invalid rawValue: ");
+                  Object _rawValue_3 = receiver.getRawValue();
+                  _builder.append(_rawValue_3);
+                  throw new IllegalStateException(_builder.toString());
                 }
-                final List<Object> list = _switchResult_1;
+                final ArrayList<Object> list = _switchResult_1;
                 list.add(feature);
                 return new EvaluationResult(list, false);
               }
@@ -224,8 +229,8 @@ public class ConstantConditionsInterpreter {
               final XExpression associatedExpression_1 = this.getAssociatedExpression(((JvmField)feature));
               if ((associatedExpression_1 != null)) {
                 final EvaluationResult result_1 = this.evaluateAssociatedExpression(associatedExpression_1, context);
-                Object _rawValue_3 = result_1.getRawValue();
-                return new EvaluationResult(_rawValue_3, false);
+                Object _rawValue_4 = result_1.getRawValue();
+                return new EvaluationResult(_rawValue_4, false);
               } else {
                 ArrayList<JvmField> _newArrayList = CollectionLiterals.<JvmField>newArrayList(((JvmField)feature));
                 return new EvaluationResult(_newArrayList, false);
