@@ -255,13 +255,11 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 
 	protected static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
 		
-		Naming oldNaming
 		GrammarNaming prodNaming
 		ContentAssistGrammarNaming caNaming
 		
 		new(Naming oldNaming, GrammarNaming prodNaming, ContentAssistGrammarNaming caNaming) {
 			super(oldNaming)
-			this.oldNaming = oldNaming
 			this.prodNaming = prodNaming
 			this.caNaming = caNaming
 		}

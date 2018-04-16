@@ -7,19 +7,26 @@
  */
 package org.eclipse.xtext.xbase.interpreter;
 
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
 public class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
-  private JvmField field;
-  
-  private ConstantExpressionEvaluationException cause;
-  
   public StackedConstantExpressionEvaluationException(final XExpression expression, final JvmField field, final ConstantExpressionEvaluationException cause) {
-    super(((("Error during call to " + field.getSimpleName()) + " : ") + cause.getMessage()), expression);
-    this.field = field;
-    this.cause = cause;
+    super(new Function0<String>() {
+      public String apply() {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Error during call to ");
+        String _simpleName = field.getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" : ");
+        String _message = cause.getMessage();
+        _builder.append(_message);
+        return _builder.toString();
+      }
+    }.apply(), expression, cause);
   }
 }

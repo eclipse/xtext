@@ -148,6 +148,7 @@ class ConstantConditionsInterpreter {
 								JvmIdentifiableElement,
 								ThisReference: <Object>newArrayList(v)
 								List<Object>: new ArrayList(v)
+								default: throw new IllegalStateException('''Invalid rawValue: «receiver.rawValue»''')
 							}
 							list.add(feature)
 							return new EvaluationResult(list, false)

@@ -188,6 +188,11 @@ class ConstantExpressionEvaluationException extends RuntimeException {
 		this(message)
 		this.expression = expression
 	}
+	
+	new(String message, XExpression expression, Throwable cause) {
+		super(message, cause)
+		this.expression = expression
+	}
 
 	def getExpression() {
 		expression
@@ -204,13 +209,8 @@ class UnresolvableFeatureException extends ConstantExpressionEvaluationException
 
 class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
 	
-	JvmField field
-	ConstantExpressionEvaluationException cause
-	
 	new(XExpression expression, JvmField field, ConstantExpressionEvaluationException cause) {
-		super('Error during call to '+field.simpleName+' : ' +cause.message, expression)
-		this.field = field
-		this.cause = cause
+		super('''Error during call to «field.simpleName» : «cause.message»''', expression, cause)
 	}
 	
 }

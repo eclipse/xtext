@@ -25,6 +25,11 @@ public class ConstantExpressionEvaluationException extends RuntimeException {
     this.expression = expression;
   }
   
+  public ConstantExpressionEvaluationException(final String message, final XExpression expression, final Throwable cause) {
+    super(message, cause);
+    this.expression = expression;
+  }
+  
   public XExpression getExpression() {
     return this.expression;
   }

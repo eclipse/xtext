@@ -4222,7 +4222,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(newArrayList("Foo", "Bar"), "#['Foo', 'Bar']");
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test 
 	public void testListLiteral_2() throws Exception {
 		assertEvaluatesTo(newArrayList(1, "Foo", true), "#[1, 'Foo', true]");

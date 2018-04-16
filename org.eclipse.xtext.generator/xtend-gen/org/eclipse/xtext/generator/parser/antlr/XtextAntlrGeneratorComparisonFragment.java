@@ -141,15 +141,12 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   }
   
   protected static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
-    private Naming oldNaming;
-    
     private GrammarNaming prodNaming;
     
     private ContentAssistGrammarNaming caNaming;
     
     public AntlrFragmentHelperEx(final Naming oldNaming, final GrammarNaming prodNaming, final ContentAssistGrammarNaming caNaming) {
       super(oldNaming);
-      this.oldNaming = oldNaming;
       this.prodNaming = prodNaming;
       this.caNaming = caNaming;
     }
