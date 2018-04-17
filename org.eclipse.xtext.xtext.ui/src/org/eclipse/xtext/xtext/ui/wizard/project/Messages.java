@@ -40,6 +40,7 @@ public class Messages extends NLS {
 	public static String AdvancedNewProjectPage_projWeb;
 	public static String AdvancedNewProjectPage_srcLayout;
 	public static String AdvancedNewProjectPage_p2AndSdkInfo;
+	public static String AdvancedNewProjectPage_junitVersion;
 
 	static {
 		// initialize resource bundle

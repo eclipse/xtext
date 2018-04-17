@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JUnitVersion;
@@ -37,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.ui.internal.Activator;
+import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.project.StatusWidget;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -123,29 +124,40 @@ public class AdvancedNewProjectPage extends WizardPage {
         this.createIdeProject = this.CheckBox(it_1, _function_5);
         Composite _composite_1 = new Composite(it_1, SWT.NONE);
         final Procedure1<Composite> _function_6 = (Composite it_2) -> {
-          final GridLayout _layout = new GridLayout(3, false);
-          _layout.marginWidth = 0;
-          _layout.marginHeight = 0;
-          it_2.setLayout(_layout);
-          final Procedure1<Button> _function_7 = (Button it_3) -> {
+          GridLayout _gridLayout_1 = new GridLayout(4, false);
+          final Procedure1<GridLayout> _function_7 = (GridLayout it_3) -> {
+            it_3.marginWidth = 0;
+            it_3.marginHeight = 0;
+          };
+          GridLayout _doubleArrow = ObjectExtensions.<GridLayout>operator_doubleArrow(_gridLayout_1, _function_7);
+          it_2.setLayout(_doubleArrow);
+          final Procedure1<Button> _function_8 = (Button it_3) -> {
             it_3.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
           };
-          this.createTestProject = this.CheckBox(it_2, _function_7);
-          final Procedure1<Button> _function_8 = (Button it_3) -> {
+          this.createTestProject = this.CheckBox(it_2, _function_8);
+          Label _label = new Label(it_2, SWT.LEFT);
+          final Procedure1<Label> _function_9 = (Label it_3) -> {
+            it_3.setText(Messages.AdvancedNewProjectPage_junitVersion);
+          };
+          ObjectExtensions.<Label>operator_doubleArrow(_label, _function_9);
+          final Procedure1<Button> _function_10 = (Button it_3) -> {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("4");
-            it_3.setSelection(true);
+            boolean _isJUnit5Available = Activator.isJUnit5Available();
+            boolean _not = (!_isJUnit5Available);
+            it_3.setSelection(_not);
           };
-          this.junitVersion4 = this.Radio(it_2, _function_8);
-          final Procedure1<Button> _function_9 = (Button it_3) -> {
+          this.junitVersion4 = this.Radio(it_2, _function_10);
+          final Procedure1<Button> _function_11 = (Button it_3) -> {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("5");
+            it_3.setSelection(Activator.isJUnit5Available());
           };
-          this.junitVersion5 = this.Radio(it_2, _function_9);
+          this.junitVersion5 = this.Radio(it_2, _function_11);
         };
         ObjectExtensions.<Composite>operator_doubleArrow(_composite_1, _function_6);
       };
@@ -518,7 +530,7 @@ public class AdvancedNewProjectPage extends WizardPage {
       String _symbolicName = it.getSymbolicName();
       return Boolean.valueOf(Objects.equal(bundleId, _symbolicName));
     };
-    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
+    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
     return ((bundle != null) && ((bundle.getState() & ((Bundle.RESOLVED | Bundle.STARTING) | Bundle.ACTIVE)) != 0));
   }
   

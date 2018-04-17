@@ -29,6 +29,7 @@ import org.eclipse.xtext.xtext.wizard.SourceLayout
 import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 import org.eclipse.xtext.util.JUnitVersion
+import org.eclipse.swt.widgets.Label
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -85,23 +86,28 @@ class AdvancedNewProjectPage extends WizardPage {
 					layoutData = new GridData(SWT.LEFT, SWT.CENTER, true, false)
 				]
 				new Composite(it, SWT.NONE) => [
-					val _layout = new GridLayout(3, false)
-					_layout.marginWidth = 0
-					_layout.marginHeight = 0
-					
-					layout = _layout
+					layout = new GridLayout(4, false) => [
+						marginWidth = 0
+						marginHeight = 0
+					]
 					createTestProject = CheckBox [
 						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 					]
+					new Label(it, SWT.LEFT) => [
+						text = AdvancedNewProjectPage_junitVersion
+					]
 					junitVersion4 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "4"
-						selection = true
+						// auto-select when JUnit5 is NOT available 
+						selection = !org.eclipse.xtext.xtext.ui.Activator.isJUnit5Available
 					]
 					junitVersion5 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "5"
+						// auto-select when JUnit5 is available 
+						selection = org.eclipse.xtext.xtext.ui.Activator.isJUnit5Available
 					]
 				]
 			]
