@@ -110,7 +110,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/releases/oxygen/201712201001\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/releases/oxygen/201804111000\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
