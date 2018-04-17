@@ -20,7 +20,7 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
-import org.eclipse.xtext.xtext.generator.junit.Junit4Fragment2
+import org.eclipse.xtext.xtext.generator.junit.JUnitFragment
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
@@ -104,7 +104,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	ContentAssistFragment2 contentAssist = new ContentAssistFragment2
 	
-	Junit4Fragment2 junitSupport = new Junit4Fragment2
+	JUnitFragment junitSupport = new JUnitFragment
 	
 	RefactorElementNameFragment2 renameRefactoring = new RefactorElementNameFragment2
 	

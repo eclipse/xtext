@@ -13,6 +13,7 @@ import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.JUnitVersion
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -256,6 +257,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						validator = {
 							// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 						}
+						«IF config.junitVersion == JUnitVersion.JUNIT_5»
+							junitSupport = {
+								junitVersion = "5"
+							}
+						«ENDIF»
 					}
 				}
 			}

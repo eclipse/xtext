@@ -16,6 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -532,6 +533,22 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
+    {
+      JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+      boolean _equals_1 = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
+      if (_equals_1) {
+        _builder.append("\t\t\t");
+        _builder.append("junitSupport = {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("junitVersion = \"5\"");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();

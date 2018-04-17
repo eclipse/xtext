@@ -6,6 +6,8 @@ dependencies {
 	compile project(':org.eclipse.xtext.ide')
 	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
 	optional "junit:junit:$versions.junit"
+	optional "org.junit.jupiter:junit-jupiter-api:$versions.junit5"
+	optional "org.junit.jupiter:junit-jupiter-engine:$versions.junit5"
 }
 
 sourceSets.test.java.srcDir 'tests'

@@ -26,5 +26,6 @@ ext.versions = [
 	'antlr': '3.2',
 	'asm': '6.0',
 	'icu': '52.1',
-	'junit': '4.12'
+	'junit': '4.12',
+	'junit5': '5.1.0'
 ]
