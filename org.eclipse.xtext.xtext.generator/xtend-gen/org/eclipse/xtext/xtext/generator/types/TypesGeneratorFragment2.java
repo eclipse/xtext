@@ -50,13 +50,13 @@ public class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (_tripleNotEquals) {
       CollectionExtensions.<String>addAll(this.getProjectConfig().getRuntime().getManifest().getRequiredBundles(), 
         "org.eclipse.xtext.common.types", 
-        "org.objectweb.asm;bundle-version=\"[5.0.1,6.0.0)\";resolution:=optional");
+        "org.objectweb.asm;bundle-version=\"[6.1.1,7.0.0)\";resolution:=optional");
     }
     ManifestAccess _manifest_1 = this.getProjectConfig().getRuntimeTest().getManifest();
     boolean _tripleNotEquals_1 = (_manifest_1 != null);
     if (_tripleNotEquals_1) {
       this.getProjectConfig().getRuntimeTest().getManifest().getRequiredBundles().add(
-        "org.objectweb.asm;bundle-version=\"[5.0.1,6.0.0)\";resolution:=optional");
+        "org.objectweb.asm;bundle-version=\"[6.1.1,7.0.0)\";resolution:=optional");
     }
     ManifestAccess _manifest_2 = this.getProjectConfig().getEclipsePlugin().getManifest();
     boolean _tripleNotEquals_2 = (_manifest_2 != null);
