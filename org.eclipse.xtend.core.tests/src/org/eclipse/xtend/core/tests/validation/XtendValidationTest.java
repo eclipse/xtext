@@ -3029,7 +3029,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testAnonymousClassNotOverridingEquals() throws Exception {
 		XtendFile file = file(
-			"public interface Foo {"+
+			"interface Foo {"+
 			"	override equals(Object obj);"+
 			"}"+
 			"class Bar{"+
