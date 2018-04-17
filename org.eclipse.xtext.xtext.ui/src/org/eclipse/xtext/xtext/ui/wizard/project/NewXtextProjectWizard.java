@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 Dakshinamurthy Karra, itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2018 Dakshinamurthy Karra, itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -97,6 +97,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.getSdkProject().setEnabled(advancedPage.isCreateSdkProject());
 		projectInfo.getP2Project().setEnabled(advancedPage.isCreateP2Project());
 		projectInfo.setLanguageServer(advancedPage.getLanguageServer());
+		projectInfo.setJunitVersion(advancedPage.getJUnitVersion());
 		
 		if (advancedPage.isCreateTestProject()) {
 			for (ProjectDescriptor project : projectInfo.getEnabledProjects()) {

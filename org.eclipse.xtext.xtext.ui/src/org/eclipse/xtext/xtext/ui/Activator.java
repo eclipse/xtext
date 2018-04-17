@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -61,5 +63,13 @@ public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public static boolean isJUnit5Available () {
+		Bundle jupiterEngineBundle = Platform.getBundle("org.junit.jupiter.engine");
+		return jupiterEngineBundle != null && ((jupiterEngineBundle.getState() & (Bundle.RESOLVED|Bundle.ACTIVE)) > 0);
 	}
 }

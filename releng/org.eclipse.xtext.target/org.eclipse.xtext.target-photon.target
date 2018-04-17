@@ -32,7 +32,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-core/job/kth_issue666_junit5/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -111,9 +111,16 @@
 		<unit id="com.google.inject" version="0.0.0"/>
 		<unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="6.0.0.v20170929-1901"/>
-		<unit id="org.objectweb.asm.tree" version="6.0.0.v20170929-1901"/>
-		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository"/>
+		<unit id="org.objectweb.asm" version="6.0.0.v20180116-1719"/>
+		<unit id="org.objectweb.asm.tree" version="6.0.0.v20180116-1719"/>
+		<unit id="org.apiguardian" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180206163158/repository"/>
 	</location>
 </locations>
 </target>
