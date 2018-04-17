@@ -67,7 +67,7 @@ public class WizardConfiguration {
   
   private LanguageServer languageServer = LanguageServer.NONE;
   
-  private JUnitVersion junitVersion = JUnitVersion.JUNIT_4;
+  private JUnitVersion junitVersion = JUnitVersion.DEFAULT;
   
   private final LanguageDescriptor language = new LanguageDescriptor();
   
