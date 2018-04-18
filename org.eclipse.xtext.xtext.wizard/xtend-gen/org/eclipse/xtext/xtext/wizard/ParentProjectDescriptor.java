@@ -115,6 +115,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     return this.getConfig().getJavaVersion().getQualifier();
   }
   
+  public String getTychoVersion() {
+    return "1.2.0-SNAPSHOT";
+  }
+  
   private CharSequence loadResource(final String resourcePath) {
     try {
       return Resources.toString(this.getClass().getClassLoader().getResource(resourcePath), Charsets.ISO_8859_1);
@@ -580,8 +584,11 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<!-- Tycho settings -->");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("<tycho-version>1.1.0</tycho-version>");
-          _builder.newLine();
+          _builder.append("<tycho-version>");
+          String _tychoVersion = this.getTychoVersion();
+          _builder.append(_tychoVersion, "\t");
+          _builder.append("</tycho-version>");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("<!-- Define overridable properties for tycho-surefire-plugin -->");
           _builder.newLine();
@@ -1678,6 +1685,24 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t");
           _builder.append("\t");
           _builder.append("<snapshots><enabled>true</enabled></snapshots>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("</pluginRepository>");
+          _builder.newLine();
+        }
+      }
+      {
+        if ((this.getConfig().needsTychoBuild() && this.getTychoVersion().endsWith("-SNAPSHOT"))) {
+          _builder.append("\t");
+          _builder.append("<pluginRepository>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("<id>tycho-snapshots</id>");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</pluginRepository>");

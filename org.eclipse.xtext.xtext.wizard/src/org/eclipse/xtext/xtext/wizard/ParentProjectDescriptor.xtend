@@ -68,6 +68,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		config.javaVersion.qualifier	
 	}
 	
+	def String getTychoVersion() {
+		'1.2.0-SNAPSHOT'
+	}
+	
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
@@ -211,7 +215,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>1.1.0</tycho-version>
+						<tycho-version>«tychoVersion»</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
@@ -513,6 +517,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
+						</pluginRepository>
+					«ENDIF»
+					«IF config.needsTychoBuild && tychoVersion.endsWith("-SNAPSHOT")»
+						<pluginRepository>
+							<id>tycho-snapshots</id>
+							<url>https://repo.eclipse.org/content/repositories/tycho-snapshots/</url>
 						</pluginRepository>
 					«ENDIF»
 				</pluginRepositories>
