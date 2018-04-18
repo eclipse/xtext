@@ -108,6 +108,6 @@ public final class IssueCodes {
 	/**
 	 * @since 2.14
 	 */
-	public static final String REDUNDANT_MODIFIER = ISSUE_CODE_PREFIX +  "redundant_modifier";
+	public static final String UNNECESSARY_MODIFIER = ISSUE_CODE_PREFIX +  "unnecessary_modifier";
 	
 }

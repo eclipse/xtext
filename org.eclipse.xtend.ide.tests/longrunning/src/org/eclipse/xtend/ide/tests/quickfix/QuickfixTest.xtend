@@ -3766,13 +3766,13 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	def void redundantModifiers_01(){
+	def void unnecessaryModifier_01(){
 		// Xtend class having a 'public' modifier
 		create('Foo.xtend', '''
 			publ|ic class Foo {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix(
 			// TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
 			''' class Foo {}
@@ -3780,14 +3780,14 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_02(){
+	def void unnecessaryModifier_02(){
 		// Xtend class having a 'public' modifier
 		create('Foo.xtend', '''
 			package a
 			publ|ic class Foo {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			package a
 ллл			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
@@ -3796,15 +3796,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_03(){
+	def void unnecessaryModifier_03(){
 		// Xtend class having a 'public' modifier
 		create('Foo.xtend', '''
 			package a
 			class A {}
 			publ|ic class B {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			package a
 			class A {}
@@ -3814,15 +3814,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_04(){
+	def void unnecessaryModifier_04(){
 		// Xtend field having a 'private' modifier
 		create('Foo.xtend', '''
 			class Foo {
 				pri|vate int a = 10
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				int a = 10
@@ -3831,15 +3831,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_05(){
+	def void unnecessaryModifier_05(){
 		// Xtend function having a 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
 				p|ublic def m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				def m() {}
@@ -3848,15 +3848,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_06(){
+	def void unnecessaryModifier_06(){
 		// Xtend function having a 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
 				def p|ublic   m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				def m() {}
@@ -3865,15 +3865,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_07(){
+	def void unnecessaryModifier_07(){
 		// Xtend field having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
 				f|inal val a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				val a = 1
@@ -3882,15 +3882,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_08(){
+	def void unnecessaryModifier_08(){
 		// Xtend field having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
 				val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				val a = 1
@@ -3899,15 +3899,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_09(){
+	def void unnecessaryModifier_09(){
 		// Xtend field having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
 				package val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				package val a = 1
@@ -3916,15 +3916,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_10(){
+	def void unnecessaryModifier_10(){
 		// Xtend field having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
 				public static val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				public static val a = 1
@@ -3933,7 +3933,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_11(){
+	def void unnecessaryModifier_11(){
 		// Xtend function having both 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -3943,8 +3943,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				override de|f m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -3956,7 +3956,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_12(){
+	def void unnecessaryModifier_12(){
 		// Xtend function having both 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -3966,8 +3966,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				de|f override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m() {}
@@ -3979,7 +3979,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_13(){
+	def void unnecessaryModifier_13(){
 		// Xtend function having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -3989,8 +3989,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				pub|lic def override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -4002,7 +4002,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_14(){
+	def void unnecessaryModifier_14(){
 		// Xtend function having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -4012,8 +4012,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				public d|ef override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -4025,7 +4025,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_15(){
+	def void unnecessaryModifier_15(){
 		// Xtend extension field without name having a 'private' modifier
 		create('Foo.xtend', '''
 			import java.text.DateFormat
@@ -4040,8 +4040,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			import java.text.DateFormat
 			import java.text.SimpleDateFormat
@@ -4058,7 +4058,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_16(){
+	def void unnecessaryModifier_16(){
 		create('Foo.xtend', '''
 			import java.text.SimpleDateFormat
 			
@@ -4066,8 +4066,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				var priv|ate SimpleDateFormat dateFormat = new SimpleDateFormat
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			import java.text.SimpleDateFormat
 			
@@ -4079,7 +4079,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_17(){
+	def void unnecessaryModifier_17(){
 		// Xtend class with javadoc having a 'public' modifier
 		create('Foo.xtend', '''
 			/**
@@ -4087,8 +4087,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			 */
 			publ|ic class Foo {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			/**
 			 * javadoc
@@ -4100,7 +4100,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_18(){
+	def void unnecessaryModifier_18(){
 		// Xtend class with javadoc having a 'public' modifier
 		create('Foo.xtend', '''
 			package a
@@ -4110,8 +4110,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			 */
 			publ|ic class Foo {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			package a
 			
@@ -4125,7 +4125,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_19(){
+	def void unnecessaryModifier_19(){
 		// Xtend class with javadoc having a 'public' modifier
 		create('Foo.xtend', '''
 			package a
@@ -4136,8 +4136,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			 */
 			publ|ic class B {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			package a
 			class A {}
@@ -4152,7 +4152,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_20(){
+	def void unnecessaryModifier_20(){
 		// Xtend field with javadoc having a 'private' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4162,8 +4162,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				pri|vate int a = 10
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4175,7 +4175,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_21(){
+	def void unnecessaryModifier_21(){
 		// Xtend function with javadoc having a 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4185,8 +4185,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				p|ublic def m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4198,7 +4198,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_22(){
+	def void unnecessaryModifier_22(){
 		// Xtend function with javadoc having a 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4208,8 +4208,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				def p|ublic   m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4221,7 +4221,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_23(){
+	def void unnecessaryModifier_23(){
 		// Xtend field with javadoc having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4231,8 +4231,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				f|inal val a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4244,7 +4244,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_24(){
+	def void unnecessaryModifier_24(){
 		// Xtend field with javadoc having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4254,8 +4254,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4267,7 +4267,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_25(){
+	def void unnecessaryModifier_25(){
 		// Xtend field with javadoc having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4277,8 +4277,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				package val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4290,7 +4290,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_26(){
+	def void unnecessaryModifier_26(){
 		// Xtend field with javadoc having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4300,8 +4300,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				public static val f|inal a = 1
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				/**
@@ -4313,7 +4313,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_27(){
+	def void unnecessaryModifier_27(){
 		// Xtend function with javadoc having both 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -4326,8 +4326,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				override de|f m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -4342,7 +4342,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_28(){
+	def void unnecessaryModifier_28(){
 		// Xtend function with javadoc having both 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -4355,8 +4355,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				de|f override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m() {}
@@ -4371,7 +4371,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_29(){
+	def void unnecessaryModifier_29(){
 		// Xtend function with javadoc having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -4384,8 +4384,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				pub|lic def override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -4400,7 +4400,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_30(){
+	def void unnecessaryModifier_30(){
 		// Xtend function with javadoc having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class A {
@@ -4413,8 +4413,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				public d|ef override m() {}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class A {
 				def m(){}
@@ -4430,7 +4430,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_31(){
+	def void unnecessaryModifier_31(){
 		// Xtend extension field without name with javadoc having a 'private' modifier
 		create('Foo.xtend', '''
 			import java.text.DateFormat
@@ -4448,8 +4448,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			import java.text.DateFormat
 			import java.text.SimpleDateFormat
@@ -4469,7 +4469,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_32(){
+	def void unnecessaryModifier_32(){
 		create('Foo.xtend', '''
 			import java.text.SimpleDateFormat
 			
@@ -4480,8 +4480,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				var priv|ate SimpleDateFormat dateFormat = new SimpleDateFormat
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			import java.text.SimpleDateFormat
 			
@@ -4495,7 +4495,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_33(){
+	def void unnecessaryModifier_33(){
 		// Xtend function in anonymous class with javadoc having 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4510,8 +4510,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4528,7 +4528,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_34(){
+	def void unnecessaryModifier_34(){
 		// Xtend function in anonymous class with javadoc having both 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4543,8 +4543,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4561,7 +4561,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_35(){
+	def void unnecessaryModifier_35(){
 		// Xtend function in anonymous class with javadoc having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4576,8 +4576,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4594,7 +4594,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_36(){
+	def void unnecessaryModifier_36(){
 		// Xtend function in anonymous class with javadoc having 'public', 'def' and 'override' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4609,8 +4609,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4628,7 +4628,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
-	def void redundantModifiers_37(){
+	def void unnecessaryModifier_37(){
 		// Xtend field in anonymous class with javadoc having 'private' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4645,8 +4645,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4665,7 +4665,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_38(){
+	def void unnecessaryModifier_38(){
 		// Xtend field in anonymous class with javadoc having both 'final' and 'val' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4682,8 +4682,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4702,7 +4702,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_39(){
+	def void unnecessaryModifier_39(){
 		// Xtend field in anonymous class with javadoc having both 'val' and 'final' modifiers
 		create('Foo.xtend', '''
 			class Foo {
@@ -4719,8 +4719,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			class Foo {
 				
@@ -4739,13 +4739,13 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_40(){
+	def void unnecessaryModifier_40(){
 		// Xtend interface having a 'public' modifier
 		create('Foo.xtend', '''
 			publ|ic interface Foo {}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix(
 // TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
 		''' interface Foo {}
@@ -4753,15 +4753,15 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_41(){
+	def void unnecessaryModifier_41(){
 		// Xtend class having a constructor with 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
 				pu|blic new(){}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 ллл TODO: improve formatting after Quickfix application
 			class Foo { new(){}
@@ -4770,7 +4770,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_42(){
+	def void unnecessaryModifier_42(){
 		// Xtend class having an inner interface with 'public' modifier
 		create('Foo.xtend', '''
 			class Foo {
@@ -4779,8 +4779,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 ллл TODO: improve formatting after Quickfix application
 			class Foo { interface Bar {
@@ -4791,7 +4791,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_43(){
+	def void unnecessaryModifier_43(){
 		// Xtend interface having a method with 'public' modifier
 		create('Foo.xtend', '''
 			interface Foo {
@@ -4799,8 +4799,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			interface Foo {
 				def m() {}
@@ -4810,14 +4810,14 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_44(){
+	def void unnecessaryModifier_44(){
 		// Xtend annotation having a method with 'public' modifier
 		create('Foo.xtend', '''
 			pub|lic annotation Foo {
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 ллл TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
 			 annotation Foo {
@@ -4826,14 +4826,14 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
-	def void redundantModifiers_45(){
+	def void unnecessaryModifier_45(){
 		// Xtend enum having a method with 'public' modifier
 		create('Foo.xtend', '''
 			pub|lic enum Foo {
 			}
 		''')
-		.assertIssueCodes(REDUNDANT_MODIFIER)
-		.assertResolutionLabels("Remove the redundant modifier.")
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 ллл TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
 			 enum Foo {

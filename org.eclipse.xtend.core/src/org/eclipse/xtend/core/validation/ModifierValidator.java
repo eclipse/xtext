@@ -79,7 +79,7 @@ public class ModifierValidator {
 								member, i);
 					visibilitySeen = true;
 					if("private".equals(modifier) && member instanceof XtendField) {
-						redundantModifierWarning("private", memberName, member, i);
+						unnecessaryModifierIssue("private", memberName, member, i);
 					}
 					if("public".equals(modifier) && (
 							member instanceof XtendAnnotationType ||
@@ -89,7 +89,7 @@ public class ModifierValidator {
 							member instanceof XtendConstructor ||
 							member instanceof XtendFunction
 					)) {
-						redundantModifierWarning("public", memberName, member, i);
+						unnecessaryModifierIssue("public", memberName, member, i);
 					}
 				}
 			} 
@@ -124,9 +124,9 @@ public class ModifierValidator {
 				if(finalSeen) {
 					/*
 					 * Independent of the order of the keywords (such as 'final val' or 'val final'), 
-					 * the 'final' keyword should be marked with the warning marker
+					 * the 'final' keyword should be marked with the issue marker
 					 */
-					redundantModifierWarning("final", memberName, member, finalKeywordIndex);
+					unnecessaryModifierIssue("final", memberName, member, finalKeywordIndex);
 				}
 				finalSeen = true;
 			} else if(equal(modifier, "var")) {
@@ -142,17 +142,17 @@ public class ModifierValidator {
 				if(defSeen) {
 					/*
 					 * Independent of the order of the keywords (such as 'override def' or 'def override'), 
-					 * the 'def' keyword should be marked with the warning marker
+					 * the 'def' keyword should be marked with the issue marker
 					 */
-					redundantModifierWarning("def", memberName, member, defKeywordIndex);
+					unnecessaryModifierIssue("def", memberName, member, defKeywordIndex);
 				}
 				defSeen = true;
 			}
 		}
 	}
 
-	protected void redundantModifierWarning(String modifier, String memberName, EObject source, int index) {
-		issue("The "+ modifier + " modifier is redundant on " + memberName, source, index, IssueCodes.REDUNDANT_MODIFIER, modifier);
+	protected void unnecessaryModifierIssue(String modifier, String memberName, EObject source, int index) {
+		issue("The "+ modifier + " modifier is unnecessary on " + memberName, source, index, IssueCodes.UNNECESSARY_MODIFIER, modifier);
 	}
 	
 	protected void issue(String message, EObject source, int index, String code, String... issueData) {

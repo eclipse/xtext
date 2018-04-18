@@ -31,7 +31,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		clazz('''abstract class Foo{}''').assertNoErrors
 		clazz('''dispatch class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
 		clazz('''final class Foo{}''').assertNoErrors
-		clazz('''public class Foo{}''').assertWarning(XTEND_CLASS, REDUNDANT_MODIFIER)
+		clazz('''public class Foo{}''').assertWarning(XTEND_CLASS, UNNECESSARY_MODIFIER)
 	}
 	
 	@Test def void testNestedClassAllowedModifiers() {
@@ -130,7 +130,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		abstractFunction('''static def int foo();''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''dispatch def foo (int i){}''').assertNoErrors
 		function('''final def foo() {}''').assertNoErrors
-		function('''public def foo() {}''').assertWarning(XTEND_FUNCTION, REDUNDANT_MODIFIER)
+		function('''public def foo() {}''').assertWarning(XTEND_FUNCTION, UNNECESSARY_MODIFIER)
 	}
 
 	@Test def void testMethodInInterfaceAllowedModifiers() {
@@ -145,8 +145,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
-		memberInInterface('''override def foo() {}''').assertWarning(XTEND_FUNCTION, REDUNDANT_MODIFIER)
-		memberInInterface('''def override foo() {}''').assertWarning(XTEND_FUNCTION, REDUNDANT_MODIFIER)
+		memberInInterface('''override def foo() {}''').assertWarning(XTEND_FUNCTION, UNNECESSARY_MODIFIER)
+		memberInInterface('''def override foo() {}''').assertWarning(XTEND_FUNCTION, UNNECESSARY_MODIFIER)
 	}
 	
 	@Test def void testConstructorAllowedModifiers() {
@@ -175,8 +175,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''final volatile int foo = 42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''volatile transient int foo''').assertNoErrors
 		field('''private transient volatile int foo''').assertNoErrors
-		field('''private int foo''').assertWarning(XTEND_FIELD, REDUNDANT_MODIFIER)
-		field('''private val foo=42''').assertWarning(XTEND_FIELD, REDUNDANT_MODIFIER)
+		field('''private int foo''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
+		field('''private val foo=42''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
 	}
 	
 	@Test def void testFieldInInterfaceAllowedModifiers() {
@@ -271,8 +271,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''var final int i=42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final val int i=42''').assertNoErrors
 		field('''val final int i=42''').assertNoErrors
-		field('''final val int i=42''').assertWarning(XTEND_FIELD, REDUNDANT_MODIFIER)
-		field('''val final int i=42''').assertWarning(XTEND_FIELD, REDUNDANT_MODIFIER)
+		field('''final val int i=42''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
+		field('''val final int i=42''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
 	}
 	
 	def protected memberInInterface(String model) {
