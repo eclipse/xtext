@@ -13,6 +13,7 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,6 +36,7 @@ import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.CompletionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
 import org.eclipse.lsp4j.DidCloseTextDocumentParams;
@@ -195,9 +197,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  protected com.google.inject.Module getServerModule() {
+  protected Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
-    final com.google.inject.Module _function = (Binder it) -> {
+    final Module _function = (Binder it) -> {
       AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
       _bind.toInstance(new RequestManager() {
         @Override
@@ -768,8 +770,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final String filePath = this.initializeContext(configuration).getUri();
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+      CompletionParams _completionParams = new CompletionParams();
+      final Procedure1<CompletionParams> _function = (CompletionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
         it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
@@ -777,7 +779,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Position _position = new Position(_line, _column);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      CompletionParams _doubleArrow = ObjectExtensions.<CompletionParams>operator_doubleArrow(_completionParams, _function);
       final CompletableFuture<Either<List<CompletionItem>, CompletionList>> completionItems = this.languageServer.completion(_doubleArrow);
       final Either<List<CompletionItem>, CompletionList> result = completionItems.get();
       List<CompletionItem> _xifexpression = null;

@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import org.eclipse.lsp4j.CompletionParams
 import org.eclipse.lsp4j.DidOpenTextDocumentParams
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.TextDocumentItem
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.junit.Test
 
 class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
@@ -77,7 +77,7 @@ class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
 	}
 	
 	protected def checkCompletion(String uri) {
-		val completionItems = languageServer.completion(new TextDocumentPositionParams => [
+		val completionItems = languageServer.completion(new CompletionParams => [
 			textDocument = new TextDocumentIdentifier(uri)
 			position = new Position(0, 10)
 		])

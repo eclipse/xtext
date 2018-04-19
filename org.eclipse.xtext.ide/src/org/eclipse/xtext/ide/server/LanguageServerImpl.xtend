@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
-import static org.eclipse.xtext.diagnostics.Severity.*
 import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
@@ -24,6 +23,7 @@ import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.CompletionOptions
+import org.eclipse.lsp4j.CompletionParams
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DiagnosticSeverity
 import org.eclipse.lsp4j.DidChangeConfigurationParams
@@ -36,6 +36,8 @@ import org.eclipse.lsp4j.DocumentFormattingParams
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
 import org.eclipse.lsp4j.DocumentSymbolParams
+import org.eclipse.lsp4j.ExecuteCommandOptions
+import org.eclipse.lsp4j.ExecuteCommandParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
@@ -51,6 +53,7 @@ import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextDocumentSyncKind
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod
@@ -70,12 +73,14 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
+import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
+import org.eclipse.xtext.ide.server.rename.IRenameService
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
@@ -85,11 +90,8 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.lsp4j.ExecuteCommandOptions
-import org.eclipse.lsp4j.ExecuteCommandParams
-import org.eclipse.xtext.ide.server.commands.ExecutableCommandRegistry
-import org.eclipse.xtext.ide.server.rename.IRenameService
-import org.eclipse.lsp4j.WorkspaceEdit
+
+import static org.eclipse.xtext.diagnostics.Severity.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -329,12 +331,12 @@ import org.eclipse.lsp4j.WorkspaceEdit
 	    
 	}
 	// completion stuff
-	override completion(TextDocumentPositionParams params) {
-		return requestManager.runRead[origialCancelIndicator|completion(origialCancelIndicator, params)]
+	override completion(CompletionParams params) {
+		return requestManager.runRead[cancelIndicator | completion(cancelIndicator, params)]
 	}
 	
-	protected def Either<List<CompletionItem>, CompletionList> completion(CancelIndicator origialCancelIndicator, TextDocumentPositionParams params) {
-		val cancelIndicator = new BufferedCancelIndicator(origialCancelIndicator)
+	protected def Either<List<CompletionItem>, CompletionList> completion(CancelIndicator originalCancelIndicator, CompletionParams params) {
+		val cancelIndicator = new BufferedCancelIndicator(originalCancelIndicator)
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
 		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
