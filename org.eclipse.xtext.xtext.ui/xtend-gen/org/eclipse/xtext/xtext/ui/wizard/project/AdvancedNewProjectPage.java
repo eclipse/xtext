@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,8 +25,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -36,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.ui.internal.Activator;
+import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.project.StatusWidget;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -57,6 +59,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   private Button createIdeProject;
   
   private Button createTestProject;
+  
+  private Button junitVersion4;
+  
+  private Button junitVersion5;
   
   private Combo preferredBuildSystem;
   
@@ -116,10 +122,44 @@ public class AdvancedNewProjectPage extends WizardPage {
           it_2.setLayoutData(_gridData_1);
         };
         this.createIdeProject = this.CheckBox(it_1, _function_5);
-        final Procedure1<Button> _function_6 = (Button it_2) -> {
-          it_2.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+        Composite _composite_1 = new Composite(it_1, SWT.NONE);
+        final Procedure1<Composite> _function_6 = (Composite it_2) -> {
+          GridLayout _gridLayout_1 = new GridLayout(4, false);
+          final Procedure1<GridLayout> _function_7 = (GridLayout it_3) -> {
+            it_3.marginWidth = 0;
+            it_3.marginHeight = 0;
+          };
+          GridLayout _doubleArrow = ObjectExtensions.<GridLayout>operator_doubleArrow(_gridLayout_1, _function_7);
+          it_2.setLayout(_doubleArrow);
+          final Procedure1<Button> _function_8 = (Button it_3) -> {
+            it_3.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+          };
+          this.createTestProject = this.CheckBox(it_2, _function_8);
+          Label _label = new Label(it_2, SWT.LEFT);
+          final Procedure1<Label> _function_9 = (Label it_3) -> {
+            it_3.setText(Messages.AdvancedNewProjectPage_junitVersion);
+          };
+          ObjectExtensions.<Label>operator_doubleArrow(_label, _function_9);
+          final Procedure1<Button> _function_10 = (Button it_3) -> {
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+            it_3.setText("4");
+            boolean _isJUnit5Available = Activator.isJUnit5Available();
+            boolean _not = (!_isJUnit5Available);
+            it_3.setSelection(_not);
+          };
+          this.junitVersion4 = this.Radio(it_2, _function_10);
+          final Procedure1<Button> _function_11 = (Button it_3) -> {
+            GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+            it_3.setLayoutData(_gridData_1);
+            it_3.setText("5");
+            it_3.setSelection(Activator.isJUnit5Available());
+          };
+          this.junitVersion5 = this.Radio(it_2, _function_11);
         };
-        this.createTestProject = this.CheckBox(it_1, _function_6);
+        ObjectExtensions.<Composite>operator_doubleArrow(_composite_1, _function_6);
       };
       this.Group(it, _function_1);
       final Procedure1<Group> _function_2 = (Group it_1) -> {
@@ -270,8 +310,17 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.validate(e);
       }
     });
+    this.createTestProject.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        boolean _selection = AdvancedNewProjectPage.this.createTestProject.getSelection();
+        final boolean enabled = (_selection == true);
+        AdvancedNewProjectPage.this.junitVersion4.setEnabled(enabled);
+        AdvancedNewProjectPage.this.junitVersion5.setEnabled(enabled);
+        AdvancedNewProjectPage.this.validate(e);
+      }
+    });
     this.sourceLayout.addSelectionListener(selectionControl);
-    this.createTestProject.addSelectionListener(selectionControl);
     this.createUiProject.addSelectionListener(selectionControlUi);
     this.createWebProject.addSelectionListener(selectionControlUi);
     this.createIdeProject.addSelectionListener(selectionControl);
@@ -481,7 +530,7 @@ public class AdvancedNewProjectPage extends WizardPage {
       String _symbolicName = it.getSymbolicName();
       return Boolean.valueOf(Objects.equal(bundleId, _symbolicName));
     };
-    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
+    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
     return ((bundle != null) && ((bundle.getState() & ((Bundle.RESOLVED | Bundle.STARTING) | Bundle.ACTIVE)) != 0));
   }
   
@@ -601,5 +650,19 @@ public class AdvancedNewProjectPage extends WizardPage {
       _xblockexpression = LanguageServer.values()[this.createLanguageServer.getSelectionIndex()];
     }
     return _xblockexpression;
+  }
+  
+  public JUnitVersion getJUnitVersion() {
+    boolean _selection = this.junitVersion4.getSelection();
+    if (_selection) {
+      return JUnitVersion.JUNIT_4;
+    } else {
+      boolean _selection_1 = this.junitVersion5.getSelection();
+      if (_selection_1) {
+        return JUnitVersion.JUNIT_5;
+      } else {
+        throw new IllegalStateException();
+      }
+    }
   }
 }

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -46,7 +47,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
   private JvmTypesBuilder _jvmTypesBuilder;
   
   protected void _infer(final Model element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
-    final String className = element.eResource().getURI().trimFileExtension().lastSegment();
+    final String className = StringExtensions.toFirstUpper(element.eResource().getURI().trimFileExtension().lastSegment());
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
       Iterable<Rule> _filter = Iterables.<Rule>filter(element.getDeclarations(), Rule.class);
       for (final Rule device : _filter) {

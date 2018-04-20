@@ -13,35 +13,30 @@ import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.Active
 
 /**
- * Annotation to define a project templates that is selected by the user in the new project wizard and declared in a
- * language specific ProjectTemplateProvider.
+ * Annotation to define a file templates that is used in the new file wizard and declared in a language specific
+ * FileTemplateProvider.
  * 
  * @author Arne Deutsch - Initial contribution and API
  * @since 2.14
  */
 @Target(TYPE)
 @Retention(RUNTIME)
-@Active(ProjectTemplateProcessor)
+@Active(FileTemplateProcessor)
 @Beta
-annotation ProjectTemplate {
+annotation FileTemplate {
 	/**
-	 * Label of the project template presented to the user in the list of templates. The label is written to a file
+	 * Label of the file template presented to the user in the list of templates. The label is written to a file
 	 * "messages.properties" and read from there at runtime. This way it is possible to internationalize using i18n.
 	 */
 	String label
 	/**
-	 * Path to the icon of the project template presented to the user in the list of templates.
+	 * Path to the icon of the file template presented to the user in the list of templates. Currently not used in the
+	 * UI.
 	 */
 	String icon
 	/**
-	 * Description of the project template presented to the user in a a text field in the new project wizard. is
-	 * rendered inside a FormText widget and has to conform to a simplified HTML format. Example:
-	 * 
-	 * <pre>
-	 * &lt;p&gt;&lt;b&gt;Hello World&lt;/b&gt;&lt;/p&gt;
-	 * &lt;p>This is a parameterized hello world for com.daimler.pas.PAS. You can set a parameter to modify the content
-	 * in the generated file and a parameter to set the package the file is created in.&lt;/p&gt;
-	 * </pre>
+	 * Description of the file template presented to the user in a a text field in the new file wizard when hovering
+	 * over the combo box of available templates. If only one template is available used as text for the wizard page.
 	 * 
 	 * The description is written to a file "messages.properties" and read from there at runtime. This way it is
 	 * possible to internationalize using i18n.

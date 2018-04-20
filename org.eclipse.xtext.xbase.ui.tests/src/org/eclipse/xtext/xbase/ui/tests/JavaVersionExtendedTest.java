@@ -35,6 +35,12 @@ public class JavaVersionExtendedTest {
 		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
 			// ok
 		}
+		try {
+			long value = ClassFileConstants.class.getField("JDK10").getLong(null);
+			assertEquals(value, JavaVersion.JAVA10.toJdtClassFileConstant());
+		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
+			// ok
+		}
 	}
 
 }

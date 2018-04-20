@@ -12,8 +12,8 @@ import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
-import org.eclipse.xtext.ui.wizard.template.AbstractProjectTemplate;
-import org.eclipse.xtext.ui.wizard.template.ProjectTemplate;
+import org.eclipse.xtext.ui.wizard.template.AbstractFileTemplate;
+import org.eclipse.xtext.ui.wizard.template.FileTemplate;
 import org.eclipse.xtext.ui.wizard.template.TemplateProcessor;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * Generate some code to simplify implementation of project templates.
  * 
  * <ol>
- * <li>Automatically extend AbstractProjectTemplate</li>
+ * <li>Automatically extend AbstractFileTemplate</li>
  * <li>Generate "messages.properties" for i18n</li>
  * <li>Generate "Messages.java" for i18n</li>
  * </ol>
@@ -35,19 +35,19 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @Beta
 @SuppressWarnings("all")
-public class ProjectTemplateProcessor extends TemplateProcessor {
+public class FileTemplateProcessor extends TemplateProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    annotatedClass.setExtendedClass(context.newTypeReference(AbstractProjectTemplate.class));
+    annotatedClass.setExtendedClass(context.newTypeReference(AbstractFileTemplate.class));
   }
   
   @Override
   protected String getLabel(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
-    return annotatedClass.findAnnotation(context.findTypeGlobally(ProjectTemplate.class)).getStringValue("label");
+    return annotatedClass.findAnnotation(context.findTypeGlobally(FileTemplate.class)).getStringValue("label");
   }
   
   @Override
   protected String getDescription(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
-    return annotatedClass.findAnnotation(context.findTypeGlobally(ProjectTemplate.class)).getStringValue("description");
+    return annotatedClass.findAnnotation(context.findTypeGlobally(FileTemplate.class)).getStringValue("description");
   }
 }

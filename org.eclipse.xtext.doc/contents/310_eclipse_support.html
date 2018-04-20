@@ -19,7 +19,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="ide-concepts">Eclipse Support</h1>
 
-<p>For the following part we will refer to the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext">state machine example</a> to describe the different aspects of Xtext’s UI features.</p>
+<p>For the following part we will refer to the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext">state machine example</a> to describe the different aspects of Xtext’s UI features.</p>
 
 <h2 id="label-provider">Label Provider</h2>
 
@@ -273,7 +273,7 @@ ${event:CrossReference('Transition.event')} =&gt;
 
 <h3 id="enumeration-template-variable-resolver">Enumeration Template Variable Resolver</h3>
 
-<p>The <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java">EnumTemplateVariableResolver</a> resolves a template variable to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java">EEnumLiterals</a> which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em> template variable.</p>
+<p>The <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java">EnumTemplateVariableResolver</a> resolves a template variable to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java">EEnumLiterals</a> which are assignment-compatible to the enumeration type declared as the first parameter of the <em>Enum</em> template variable.</p>
 
 <p>The syntax is as follows:</p>
 
@@ -655,6 +655,42 @@ fragment = refactoring.RefactorElementNameFragment {}
 </code></pre>
 
 <p>In the <code>src</code> folder of the <code>ui</code> project a <code>MyDslNewProjectWizardInitialContents</code> Xtend file will also be generated, where you can specify the initial contents that your language wizard will generate.</p>
+
+<h2 id="code-mining">Code Mining</h2>
+
+<p>Code Mining shows inline annotations in the text editor that are not part of the text itself, but derived from its contents. It can be very helpful to leverage code minings for example to show inferred types, parameter names for literals and other kind of meta information.</p>
+
+<p>Code minings come in two flavors: “header annotations” are printed in a separate line above the mined text, “inline annotations” are shown in-line. The following screenshot shows both flavors:</p>
+
+<p><img src="images/code_mining.png" alt="" /></p>
+
+<p>To enable code mining, the <code>org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment</code> has to be integrated in the <code>language</code> section of the MWE2 file as follows:</p>
+
+<pre><code class="language-mwe2">fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
+</code></pre>
+
+<p>With execution of the generator a stub class <code>&lt;LanguageName&gt;CodeMiningProvider</code> is created in the <code>.codemining</code> sub-package of the UI plugin. Furthermore the provider is registered to the <code>org.eclipse.ui.workbench.texteditor.codeMiningProviders</code> extension point in <code>plugin.xml</code>.</p>
+
+<p>The following class <code>MyDslCodeMiningProvider</code> shows a simple example:</p>
+
+<pre><code class="language-java">public class MyDslCodeMiningProvider extends AbstractXtextCodeMiningProvider {
+	@Override
+	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
+		IAcceptor&lt;ICodeMining&gt; acceptor) throws BadLocationException {
+
+		acceptor.accept(createNewLineHeaderCodeMining(1, document, "header annotation"));
+
+		acceptor.accept(createNewLineContentCodeMining(5, " inline annotation "));
+	}
+
+}
+</code></pre>
+
+<p>Clients have to implement the <code>createCodeMinings()</code> method, compute text and position of meta information that should be presented in the text editor. Finally instances of <code>ICodeMining</code> are created with that information and passed to the <code>acceptor</code>.</p>
+
+<p>The base class <code>AbstractXtextCodeMiningProvider</code> provides some factory methods for creating <code>ICodeMining</code> instances for convenience. Use <code>createNewLineHeaderCodeMining()</code> and <code>createNewLineContentCodeMining()</code> for that purpose.</p>
+
+<p>For an implementation reference, have a look at the Domainmodel Example.</p>
 
 <hr />
 

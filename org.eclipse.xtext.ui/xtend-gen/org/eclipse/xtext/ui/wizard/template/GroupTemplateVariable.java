@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,14 +11,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
-import org.eclipse.xtext.ui.wizard.template.IParameterPage;
+import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
+import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
 
 @SuppressWarnings("all")
-public class GroupProjectVariable extends ContainerProjectVariable {
+public class GroupTemplateVariable extends ContainerTemplateVariable {
   private Group group;
   
-  public GroupProjectVariable(final String label, final String description, final ContainerProjectVariable container) {
+  public GroupTemplateVariable(final String label, final String description, final ContainerTemplateVariable container) {
     super(label, description, container);
   }
   
@@ -27,7 +27,7 @@ public class GroupProjectVariable extends ContainerProjectVariable {
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+  public void createWidget(final ParameterComposite parameterComposite, final Composite parent) {
     Group _group = new Group(parent, SWT.READ_ONLY);
     this.group = _group;
     GridLayout _gridLayout = new GridLayout(2, false);

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -23,7 +22,6 @@ import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -137,7 +135,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected void fillBreeCombo(Combo comboToFill) {
-		Set<String> brees = Sets.newHashSet();
+		Set<String> brees = Sets.newLinkedHashSet();
 		Set<String> availableBrees = Sets.newHashSet();
 		for (IExecutionEnvironment ee : JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()) {
 			availableBrees.add(ee.getId());
@@ -150,7 +148,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			}
 		}
 		String[] array = brees.toArray(new String[] {});
-		Arrays.sort(array, Policy.getComparator());
 		String selectionMemento = comboToFill.getText();
 		comboToFill.setItems(array);
 		int index = comboToFill.indexOf(selectionMemento);

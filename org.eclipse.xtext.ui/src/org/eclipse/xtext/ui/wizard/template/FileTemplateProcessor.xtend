@@ -17,7 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
  * Generate some code to simplify implementation of project templates.
  * 
  * <ol>
- * <li>Automatically extend AbstractProjectTemplate</li>
+ * <li>Automatically extend AbstractFileTemplate</li>
  * <li>Generate "messages.properties" for i18n</li>
  * <li>Generate "Messages.java" for i18n</li>
  * </ol>
@@ -30,18 +30,18 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
  * @since 2.14
  */
 @Beta
-class ProjectTemplateProcessor extends TemplateProcessor {
+class FileTemplateProcessor extends TemplateProcessor {
 
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-		annotatedClass.extendedClass = AbstractProjectTemplate.newTypeReference // extend AbstractProjectTemplate
+		annotatedClass.extendedClass = AbstractFileTemplate.newTypeReference // extend AbstractFileTemplate
 	}
 
 	override protected getLabel(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-		return annotatedClass.findAnnotation(findTypeGlobally(ProjectTemplate)).getStringValue("label")
+		return annotatedClass.findAnnotation(findTypeGlobally(FileTemplate)).getStringValue("label")
 	}
 
 	override protected getDescription(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-		return annotatedClass.findAnnotation(findTypeGlobally(ProjectTemplate)).getStringValue("description")
+		return annotatedClass.findAnnotation(findTypeGlobally(FileTemplate)).getStringValue("description")
 	}
 
 }

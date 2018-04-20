@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,13 +15,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ui.wizard.template.ContainerProjectVariable;
-import org.eclipse.xtext.ui.wizard.template.IParameterPage;
-import org.eclipse.xtext.ui.wizard.template.ProjectVariable;
+import org.eclipse.xtext.ui.wizard.template.ContainerTemplateVariable;
+import org.eclipse.xtext.ui.wizard.template.ParameterComposite;
+import org.eclipse.xtext.ui.wizard.template.TemplateVariable;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class StringSelectionProjectVariable extends ProjectVariable {
+public class StringSelectionTemplateVariable extends TemplateVariable {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private String[] possibleValues;
   
@@ -30,7 +30,7 @@ public class StringSelectionProjectVariable extends ProjectVariable {
   
   private Combo combo;
   
-  public StringSelectionProjectVariable(final String label, final String[] possibleValues, final String description, final ContainerProjectVariable container) {
+  public StringSelectionTemplateVariable(final String label, final String[] possibleValues, final String description, final ContainerTemplateVariable container) {
     super(label, description, container);
     this.possibleValues = possibleValues;
     this.value = possibleValues[0];
@@ -41,7 +41,7 @@ public class StringSelectionProjectVariable extends ProjectVariable {
   }
   
   @Override
-  public void createWidget(final IParameterPage parameterPage, final Composite parent) {
+  public void createWidget(final ParameterComposite parameterComposite, final Composite parent) {
     Combo _combo = new Combo(parent, SWT.READ_ONLY);
     this.combo = _combo;
     this.combo.setItems(this.getPossibleValues());
@@ -50,8 +50,8 @@ public class StringSelectionProjectVariable extends ProjectVariable {
     this.combo.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        StringSelectionProjectVariable.this.setValue(StringSelectionProjectVariable.this.combo.getText());
-        parameterPage.update();
+        StringSelectionTemplateVariable.this.setValue(StringSelectionTemplateVariable.this.combo.getText());
+        parameterComposite.update();
       }
     });
   }
