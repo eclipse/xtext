@@ -53,4 +53,10 @@ public class FileSystemAccessQueue extends AdapterImpl {
       }
     }
   }
+  
+  public void waitForEmptyQueue() {
+    while ((!this.requestQueue.isEmpty())) {
+      Thread.yield();
+    }
+  }
 }
