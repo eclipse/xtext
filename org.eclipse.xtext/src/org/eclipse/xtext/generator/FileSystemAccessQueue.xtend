@@ -41,6 +41,10 @@ class FileSystemAccessQueue extends AdapterImpl {
 		}
 	}
 	
+	/**
+	 * @since 2.14
+	 * @beta
+	 */
 	def void waitForEmptyQueue() {
 		while (!requestQueue.isEmpty) {
 			Thread.yield
