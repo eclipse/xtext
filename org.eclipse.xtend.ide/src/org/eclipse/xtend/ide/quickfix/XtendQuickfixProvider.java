@@ -651,8 +651,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 	
-	@Fix(IssueCodes.REDUNDANT_MODIFIER)
-	public void removeRedundantModifier(final Issue issue, IssueResolutionAcceptor acceptor) {
+	@Fix(IssueCodes.UNNECESSARY_MODIFIER)
+	public void removeUnnecessaryModifier(final Issue issue, IssueResolutionAcceptor acceptor) {
 		String[] issueData = issue.getData();
 		if(issueData==null || issueData.length==0) {
 			return;
@@ -662,8 +662,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		
 		// use the same label, description and image
 		// to be able to use the quickfixes (issue resolution) in batch mode
-		String label = "Remove the redundant modifier.";
-		String description = "The modifier is unnecessary and should be removed.";
+		String label = "Remove the unnecessary modifier.";
+		String description = "The modifier is unnecessary and could be removed.";
 		String image = "fix_indent.gif";
 		acceptor.acceptMulti(issue, label, description, image, new IMultiModification<XtendMember>() {
 			@Override

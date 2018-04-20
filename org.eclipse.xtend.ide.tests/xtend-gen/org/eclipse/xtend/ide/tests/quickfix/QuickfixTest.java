@@ -6855,11 +6855,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_01() {
+  public void unnecessaryModifier_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("publ|ic class Foo {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("class Foo {}");
@@ -6868,13 +6868,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_02() {
+  public void unnecessaryModifier_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package a");
     _builder.newLine();
     _builder.append("publ|ic class Foo {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package a");
     _builder_1.newLine();
@@ -6885,7 +6885,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_03() {
+  public void unnecessaryModifier_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package a");
     _builder.newLine();
@@ -6893,7 +6893,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("publ|ic class B {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package a");
     _builder_1.newLine();
@@ -6906,7 +6906,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_04() {
+  public void unnecessaryModifier_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -6915,7 +6915,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -6928,7 +6928,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_05() {
+  public void unnecessaryModifier_05() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -6937,7 +6937,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -6950,7 +6950,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_06() {
+  public void unnecessaryModifier_06() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -6959,7 +6959,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -6972,7 +6972,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_07() {
+  public void unnecessaryModifier_07() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -6981,7 +6981,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -6994,7 +6994,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_08() {
+  public void unnecessaryModifier_08() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7003,7 +7003,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7016,7 +7016,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_09() {
+  public void unnecessaryModifier_09() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7025,7 +7025,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7038,7 +7038,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_10() {
+  public void unnecessaryModifier_10() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7047,7 +7047,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7060,7 +7060,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_11() {
+  public void unnecessaryModifier_11() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7076,7 +7076,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7096,7 +7096,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_12() {
+  public void unnecessaryModifier_12() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7112,7 +7112,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7132,7 +7132,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_13() {
+  public void unnecessaryModifier_13() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7148,7 +7148,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7168,7 +7168,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_14() {
+  public void unnecessaryModifier_14() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7184,7 +7184,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7204,7 +7204,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_15() {
+  public void unnecessaryModifier_15() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.text.DateFormat");
     _builder.newLine();
@@ -7231,7 +7231,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.text.DateFormat");
     _builder_1.newLine();
@@ -7262,7 +7262,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_16() {
+  public void unnecessaryModifier_16() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.text.SimpleDateFormat");
     _builder.newLine();
@@ -7274,7 +7274,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.text.SimpleDateFormat");
     _builder_1.newLine();
@@ -7291,7 +7291,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_17() {
+  public void unnecessaryModifier_17() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -7303,7 +7303,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("publ|ic class Foo {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("/**");
     _builder_1.newLine();
@@ -7321,7 +7321,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_18() {
+  public void unnecessaryModifier_18() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package a");
     _builder.newLine();
@@ -7336,7 +7336,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("publ|ic class Foo {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package a");
     _builder_1.newLine();
@@ -7357,7 +7357,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_19() {
+  public void unnecessaryModifier_19() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package a");
     _builder.newLine();
@@ -7374,7 +7374,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("publ|ic class B {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package a");
     _builder_1.newLine();
@@ -7397,7 +7397,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_20() {
+  public void unnecessaryModifier_20() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7415,7 +7415,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7437,7 +7437,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_21() {
+  public void unnecessaryModifier_21() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7455,7 +7455,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7477,7 +7477,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_22() {
+  public void unnecessaryModifier_22() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7495,7 +7495,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7517,7 +7517,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_23() {
+  public void unnecessaryModifier_23() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7535,7 +7535,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7557,7 +7557,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_24() {
+  public void unnecessaryModifier_24() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7575,7 +7575,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7597,7 +7597,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_25() {
+  public void unnecessaryModifier_25() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7615,7 +7615,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7637,7 +7637,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_26() {
+  public void unnecessaryModifier_26() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -7655,7 +7655,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -7677,7 +7677,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_27() {
+  public void unnecessaryModifier_27() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7702,7 +7702,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7731,7 +7731,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_28() {
+  public void unnecessaryModifier_28() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7756,7 +7756,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7785,7 +7785,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_29() {
+  public void unnecessaryModifier_29() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7810,7 +7810,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7839,7 +7839,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_30() {
+  public void unnecessaryModifier_30() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
     _builder.newLine();
@@ -7864,7 +7864,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class A {");
     _builder_1.newLine();
@@ -7894,7 +7894,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_31() {
+  public void unnecessaryModifier_31() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.text.DateFormat");
     _builder.newLine();
@@ -7930,7 +7930,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.text.DateFormat");
     _builder_1.newLine();
@@ -7970,7 +7970,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_32() {
+  public void unnecessaryModifier_32() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.text.SimpleDateFormat");
     _builder.newLine();
@@ -7991,7 +7991,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.text.SimpleDateFormat");
     _builder_1.newLine();
@@ -8016,7 +8016,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_33() {
+  public void unnecessaryModifier_33() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8048,7 +8048,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8084,7 +8084,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_34() {
+  public void unnecessaryModifier_34() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8116,7 +8116,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8152,7 +8152,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_35() {
+  public void unnecessaryModifier_35() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8184,7 +8184,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8220,7 +8220,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_36() {
+  public void unnecessaryModifier_36() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8252,7 +8252,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8289,7 +8289,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
-  public void redundantModifiers_37() {
+  public void unnecessaryModifier_37() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8326,7 +8326,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8367,7 +8367,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_38() {
+  public void unnecessaryModifier_38() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8404,7 +8404,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8445,7 +8445,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_39() {
+  public void unnecessaryModifier_39() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8482,7 +8482,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -8523,11 +8523,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_40() {
+  public void unnecessaryModifier_40() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("publ|ic interface Foo {}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("interface Foo {}");
@@ -8536,7 +8536,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_41() {
+  public void unnecessaryModifier_41() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8545,7 +8545,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo { new(){}");
     _builder_1.newLine();
@@ -8555,7 +8555,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_42() {
+  public void unnecessaryModifier_42() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -8570,7 +8570,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo { interface Bar {");
     _builder_1.newLine();
@@ -8586,7 +8586,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_43() {
+  public void unnecessaryModifier_43() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo {");
     _builder.newLine();
@@ -8598,7 +8598,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("interface Foo {");
     _builder_1.newLine();
@@ -8614,13 +8614,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_44() {
+  public void unnecessaryModifier_44() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("pub|lic annotation Foo {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("annotation Foo {");
@@ -8631,13 +8631,13 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void redundantModifiers_45() {
+  public void unnecessaryModifier_45() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("pub|lic enum Foo {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.REDUNDANT_MODIFIER).assertResolutionLabels("Remove the redundant modifier.");
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(" ");
     _builder_1.append("enum Foo {");
