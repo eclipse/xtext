@@ -347,13 +347,17 @@
 			<topic href="contents/350_continuous_integration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
 			</topic>
 			<topic href="contents/350_continuous_integration.html#tycho-build" label="Building an Xtext language with Maven and Tycho">
-				<topic href="contents/350_continuous_integration.html#the-releng-project-mymavenizedherolanguagereleng" label="The releng project (my.mavenized.herolanguage.releng)">
+				<topic href="contents/350_continuous_integration.html#the-parent-project-mymavenizedherolanguageroot" label="The parent project (my.mavenized.herolanguage.root)">
 				</topic>
 				<topic href="contents/350_continuous_integration.html#the-update-site-project-mymavenizedherolanguageupdatesite" label="The update site project (my.mavenized.herolanguage.updatesite)">
 				</topic>
 				<topic href="contents/350_continuous_integration.html#the-feature-project-mymavenizedherolanguagesdk" label="The feature project (my.mavenized.herolanguage.sdk)">
 				</topic>
 				<topic href="contents/350_continuous_integration.html#the-core-language-project-mymavenizedherolanguage" label="The core language project (my.mavenized.herolanguage)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-ui-language-project-mymavenizedherolanguageui" label="The ui language project (my.mavenized.herolanguage.ui)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-tests-language-project-mymavenizedherolanguagetests" label="The tests language project (my.mavenized.herolanguage.tests)">
 				</topic>
 			</topic>
 			<topic href="contents/350_continuous_integration.html#standalone-build" label="Integration in Standard Maven Builds">
