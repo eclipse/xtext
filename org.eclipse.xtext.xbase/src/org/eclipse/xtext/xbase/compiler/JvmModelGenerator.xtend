@@ -957,7 +957,7 @@ class JvmModelGenerator implements IGenerator {
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val cachingConverter = new ITraceURIConverter() {
 			
-			private Map<URI, SourceRelativeURI> uriForTraceCache = newHashMap();
+			Map<URI, SourceRelativeURI> uriForTraceCache = newHashMap();
 			
 			override SourceRelativeURI getURIForTrace(IProjectConfig config, AbsoluteURI uri) {
 				if (!uriForTraceCache.containsKey(uri.getURI)) {
