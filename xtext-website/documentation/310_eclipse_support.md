@@ -268,7 +268,7 @@ ${event:CrossReference('Transition.event')} =>
 
 ### Enumeration Template Variable Resolver
 
-The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the the *Enum* template variable. 
+The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the *Enum* template variable. 
 
 The syntax is as follows: 
 
@@ -676,7 +676,7 @@ To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.Code
 fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
 ```
 
-With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
 
 The following class `MyDslCodeMiningProvider` shows a simple example:
 
