@@ -676,7 +676,7 @@ To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.Code
 fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
 ```
 
-With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+With execution of the generator a stub class `<LanguageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
 
 The following class `MyDslCodeMiningProvider` shows a simple example:
 
