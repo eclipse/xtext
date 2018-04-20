@@ -36,6 +36,7 @@ import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.CompletionOptions;
+import org.eclipse.lsp4j.CompletionParams;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.DiagnosticSeverity;
 import org.eclipse.lsp4j.DidChangeConfigurationParams;
@@ -372,7 +373,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         String _text = event.getText();
         return new TextEdit(_range, _text);
       };
-      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
+      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), (params.getTextDocument().getVersion()).intValue(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);
@@ -516,15 +517,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<Either<List<CompletionItem>, CompletionList>> completion(final TextDocumentPositionParams params) {
-    final Function1<CancelIndicator, Either<List<CompletionItem>, CompletionList>> _function = (CancelIndicator origialCancelIndicator) -> {
-      return this.completion(origialCancelIndicator, params);
+  public CompletableFuture<Either<List<CompletionItem>, CompletionList>> completion(final CompletionParams params) {
+    final Function1<CancelIndicator, Either<List<CompletionItem>, CompletionList>> _function = (CancelIndicator cancelIndicator) -> {
+      return this.completion(cancelIndicator, params);
     };
     return this.requestManager.<Either<List<CompletionItem>, CompletionList>>runRead(_function);
   }
   
-  protected Either<List<CompletionItem>, CompletionList> completion(final CancelIndicator origialCancelIndicator, final TextDocumentPositionParams params) {
-    final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(origialCancelIndicator);
+  protected Either<List<CompletionItem>, CompletionList> completion(final CancelIndicator originalCancelIndicator, final CompletionParams params) {
+    final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(originalCancelIndicator);
     final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
     final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
     ContentAssistService _get = null;

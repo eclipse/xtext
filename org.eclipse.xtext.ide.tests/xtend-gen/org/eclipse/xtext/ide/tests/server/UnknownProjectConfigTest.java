@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.CompletionParams;
 import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
@@ -123,14 +123,14 @@ public class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest
   
   protected void checkCompletion(final String uri) {
     try {
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+      CompletionParams _completionParams = new CompletionParams();
+      final Procedure1<CompletionParams> _function = (CompletionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(uri);
         it.setTextDocument(_textDocumentIdentifier);
         Position _position = new Position(0, 10);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      CompletionParams _doubleArrow = ObjectExtensions.<CompletionParams>operator_doubleArrow(_completionParams, _function);
       final CompletableFuture<Either<List<CompletionItem>, CompletionList>> completionItems = this.languageServer.completion(_doubleArrow);
       final Either<List<CompletionItem>, CompletionList> result = completionItems.get();
       List<CompletionItem> _xifexpression = null;

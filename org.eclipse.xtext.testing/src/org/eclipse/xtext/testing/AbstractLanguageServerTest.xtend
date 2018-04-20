@@ -9,6 +9,7 @@ package org.eclipse.xtext.testing
 
 import com.google.inject.Guice
 import com.google.inject.Inject
+import com.google.inject.Module
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -26,6 +27,7 @@ import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
+import org.eclipse.lsp4j.CompletionParams
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.DidCloseTextDocumentParams
@@ -66,14 +68,13 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
+import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
+import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.xtext.util.Modules2
-import com.google.inject.Module
-import org.eclipse.xtext.ide.server.concurrent.RequestManager
-import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -381,7 +382,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
 		val filePath = initializeContext(configuration).uri
-		val completionItems = languageServer.completion(new TextDocumentPositionParams => [
+		val completionItems = languageServer.completion(new CompletionParams => [
 			textDocument = new TextDocumentIdentifier(filePath)
 			position = new Position(line, column)
 		])

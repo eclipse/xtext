@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.ApplyWorkspaceEditParams;
 import org.eclipse.lsp4j.ApplyWorkspaceEditResponse;
 import org.eclipse.lsp4j.ClientCapabilities;
+import org.eclipse.lsp4j.ConfigurationParams;
 import org.eclipse.lsp4j.ExecuteCommandCapabilities;
 import org.eclipse.lsp4j.ExecuteCommandParams;
 import org.eclipse.lsp4j.MessageActionItem;
@@ -27,6 +28,7 @@ import org.eclipse.lsp4j.ShowMessageRequestParams;
 import org.eclipse.lsp4j.Unregistration;
 import org.eclipse.lsp4j.UnregistrationParams;
 import org.eclipse.lsp4j.WorkspaceClientCapabilities;
+import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
@@ -175,6 +177,10 @@ public class CommandRegistryTest implements IResourceServiceProvider, IExecutabl
     return this.noImpl3.applyEdit(params);
   }
   
+  public CompletableFuture<List<Object>> configuration(final ConfigurationParams configurationParams) {
+    return this.noImpl3.configuration(configurationParams);
+  }
+  
   public void logMessage(final MessageParams message) {
     this.noImpl3.logMessage(message);
   }
@@ -193,5 +199,9 @@ public class CommandRegistryTest implements IResourceServiceProvider, IExecutabl
   
   public void telemetryEvent(final Object object) {
     this.noImpl3.telemetryEvent(object);
+  }
+  
+  public CompletableFuture<List<WorkspaceFolder>> workspaceFolders() {
+    return this.noImpl3.workspaceFolders();
   }
 }
