@@ -136,9 +136,9 @@
 		<unit id="com.google.inject" version="0.0.0"/>
 		<unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
-		<unit id="org.objectweb.asm" version="6.0.0.v20170929-1901"/>
-		<unit id="org.objectweb.asm.tree" version="6.0.0.v20170929-1901"/>
-		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository"/>
+		<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
 	</location>
 </locations>
 </target>
