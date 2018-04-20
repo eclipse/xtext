@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
+ * @author Arne Deutsch - Add wait to read operations
  */
 @SuppressWarnings("all")
 public class ParallelFileSystemSupport implements MutableFileSystemSupport {
@@ -66,46 +67,91 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public boolean exists(final Path path) {
-    return this.delegate.exists(path);
+    boolean _xblockexpression = false;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.exists(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public String getCharset(final Path path) {
-    return this.delegate.getCharset(path);
+    String _xblockexpression = null;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.getCharset(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
-    return this.delegate.getChildren(path);
+    Iterable<? extends Path> _xblockexpression = null;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.getChildren(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public CharSequence getContents(final Path path) {
-    return this.delegate.getContents(path);
+    CharSequence _xblockexpression = null;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.getContents(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public InputStream getContentsAsStream(final Path path) {
-    return this.delegate.getContentsAsStream(path);
+    InputStream _xblockexpression = null;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.getContentsAsStream(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public long getLastModification(final Path path) {
-    return this.delegate.getLastModification(path);
+    long _xblockexpression = (long) 0;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.getLastModification(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public boolean isFile(final Path path) {
-    return this.delegate.isFile(path);
+    boolean _xblockexpression = false;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.isFile(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public boolean isFolder(final Path path) {
-    return this.delegate.isFolder(path);
+    boolean _xblockexpression = false;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.isFolder(path);
+    }
+    return _xblockexpression;
   }
   
   @Override
   public java.net.URI toURI(final Path path) {
-    return this.delegate.toURI(path);
+    java.net.URI _xblockexpression = null;
+    {
+      this.queue.waitForEmptyQueue();
+      _xblockexpression = this.delegate.toURI(path);
+    }
+    return _xblockexpression;
   }
 }

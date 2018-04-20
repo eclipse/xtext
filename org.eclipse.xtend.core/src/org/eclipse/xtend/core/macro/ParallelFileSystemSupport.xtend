@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.FileSystemAccessQueue
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
+ * @author Arne Deutsch - Add wait to read operations
  */
 class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	
@@ -55,38 +56,47 @@ class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	}
 	
 	override exists(Path path) {
+		queue.waitForEmptyQueue
 		delegate.exists(path)
 	}
 	
 	override getCharset(Path path) {
+		queue.waitForEmptyQueue
 		delegate.getCharset(path)
 	}
 	
 	override getChildren(Path path) {
+		queue.waitForEmptyQueue
 		delegate.getChildren(path)
 	}
 	
 	override getContents(Path path) {
+		queue.waitForEmptyQueue
 		delegate.getContents(path)
 	}
 	
 	override getContentsAsStream(Path path) {
+		queue.waitForEmptyQueue
 		delegate.getContentsAsStream(path)
 	}
 	
 	override getLastModification(Path path) {
+		queue.waitForEmptyQueue
 		delegate.getLastModification(path)
 	}
 	
 	override isFile(Path path) {
+		queue.waitForEmptyQueue
 		delegate.isFile(path)
 	}
 	
 	override isFolder(Path path) {
+		queue.waitForEmptyQueue
 		delegate.isFolder(path)
 	}
 	
 	override toURI(Path path) {
+		queue.waitForEmptyQueue
 		delegate.toURI(path)
 	}
 	
