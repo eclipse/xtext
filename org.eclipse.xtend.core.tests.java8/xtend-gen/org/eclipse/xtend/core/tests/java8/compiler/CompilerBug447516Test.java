@@ -57,7 +57,7 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public <T extends Object> T readOnly(final IUnitOfWork<T, String> it) {");
+    _builder_1.append("public <Result extends Object> Result readOnly(final IUnitOfWork<Result, String> it) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("try {");

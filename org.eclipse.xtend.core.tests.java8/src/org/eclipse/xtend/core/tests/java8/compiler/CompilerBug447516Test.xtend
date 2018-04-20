@@ -36,7 +36,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			public class C {
 			  private final IReadAccess<String> readAccess = new IReadAccess<String>() {
 			    @Override
-			    public <T extends Object> T readOnly(final IUnitOfWork<T, String> it) {
+			    public <Result extends Object> Result readOnly(final IUnitOfWork<Result, String> it) {
 			      try {
 			        return it.exec("");
 			      } catch (Throwable _e) {

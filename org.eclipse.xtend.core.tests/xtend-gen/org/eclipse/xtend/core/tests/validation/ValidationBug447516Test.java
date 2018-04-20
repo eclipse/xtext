@@ -45,7 +45,7 @@ public class ValidationBug447516Test extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       final XtendFile file = this.parser.parse(_builder);
-      this.helper.assertError(file, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to T");
+      this.helper.assertError(file, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to Result");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

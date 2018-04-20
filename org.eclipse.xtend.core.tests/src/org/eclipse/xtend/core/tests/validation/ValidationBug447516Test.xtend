@@ -31,7 +31,7 @@ class ValidationBug447516Test extends AbstractXtendTestCase {
 				public val IReadAccess<CharSequence> stateAccess = [ return "" ]
 			}
 		''')
-		file.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to T")
+		file.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to Result")
 	}
 	
 	@Test def void test_02() {
