@@ -2054,30 +2054,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	}
 
 	@Test
-	public void testInnerAnnotationType() throws Exception {
-		JvmDeclaredType declaredType = (JvmDeclaredType) getTypeProvider()
-				.findTypeByName(TypeWithInnerAnnotation.class.getName());
-		assertEquals(2, declaredType.getMembers().size());
-		// default constructor
-		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
-			@Override
-			public boolean apply(JvmMember input) {
-				return (input instanceof JvmConstructor)
-						&& input.getSimpleName().equals(TypeWithInnerAnnotation.class.getSimpleName());
-			}
-		}));
-		// inner annotation type
-		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
-			@Override
-			public boolean apply(JvmMember input) {
-				return (input instanceof JvmAnnotationType)
-						&& input.getIdentifier().equals(TypeWithInnerAnnotation.MyAnnotation.class.getName())
-						&& input.getVisibility() == JvmVisibility.PUBLIC;
-			}
-		}));
-	}
-
-	@Test
 	public void testInnerType_WrappedIterator_01() throws Exception {
 		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider()
 				.findTypeByName("org.eclipse.xtext.common.types.testSetups.Bug438740$Coll$Iter");
@@ -3889,5 +3865,35 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmOperation method = (JvmOperation) Iterables.getOnlyElement(methods);
 		JvmTypeReference paramType = method.getParameters().get(0).getParameterType();
 		assertEquals("int", paramType.getSimpleName());
+	}
+
+	@Test
+	public void testInnerAnnotationType() throws Exception {
+		JvmDeclaredType declaredType = (JvmDeclaredType) getTypeProvider()
+				.findTypeByName(TypeWithInnerAnnotation.class.getName());
+		assertEquals(3, declaredType.getMembers().size());
+		// default constructor
+		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmConstructor)
+						&& input.getSimpleName().equals(TypeWithInnerAnnotation.class.getSimpleName());
+			}
+		}));
+		// inner annotation type
+		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmAnnotationType)
+						&& input.getIdentifier().equals(TypeWithInnerAnnotation.MyAnnotation.class.getName())
+						&& input.getVisibility() == JvmVisibility.PUBLIC;
+			}
+		}));
+		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmOperation) && ((JvmOperation) input).getParameters().size() == 1;
+			}
+		}));
 	}
 }

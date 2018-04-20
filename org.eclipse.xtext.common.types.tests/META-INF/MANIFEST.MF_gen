@@ -6,7 +6,7 @@ Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.common.types.xtext.ui
-Require-Bundle: org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+Require-Bundle: org.objectweb.asm;bundle-version="[6.1.1,7.0.0)";resolution:=optional,
  org.eclipse.xtext.common.types.tests,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.lib,
