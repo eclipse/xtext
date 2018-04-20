@@ -1243,7 +1243,7 @@ if (myList.isEmpty)
   </tbody>
 </table>
 
-<p>As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the <code>IF hasChildren</code> condition in the template which is nested in the node. The additional nesting of the recursive invocation <code>children.map[print]</code> is not visible in the output as it is relative the the surrounding control structure. The line with <code>IF</code> and <code>ENDIF</code> contain only control structures thus they are skipped in the output. Note the additional indentation of the node <em>Leaf</em> which happens due to the first rule: Indentation is propagated to called templates.</p>
+<p>As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the <code>IF hasChildren</code> condition in the template which is nested in the node. The additional nesting of the recursive invocation <code>children.map[print]</code> is not visible in the output as it is relative the surrounding control structure. The line with <code>IF</code> and <code>ENDIF</code> contain only control structures thus they are skipped in the output. Note the additional indentation of the node <em>Leaf</em> which happens due to the first rule: Indentation is propagated to called templates.</p>
 
 <hr />
 

@@ -152,7 +152,7 @@ class Movies {
 
 <p>The calls to <code>movie.year</code> as well as <code>movie.categories</code> in the previous example in fact access the corresponding <a href="203_xtend_expressions.html#property-access">getter methods</a>.</p>
 
-<h3 id="question3">Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?</h3>
+<h3 id="question3">Question 3 : What Is The Sum Of All Votes Of The Top Two Movies?</h3>
 
 <pre><code class="language-xtend">@Test def void sumOfVotesOfTop2() {
   val long sum = movies.sortBy[ -rating ].take(2).map[ numberOfVotes ].reduce[ a, b | a + b ]
