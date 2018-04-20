@@ -652,7 +652,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     return _xblockexpression;
   }
   
-  public JUnitVersion getJUnitVersion() {
+  public JUnitVersion getSelectedJUnitVersion() {
     boolean _selection = this.junitVersion4.getSelection();
     if (_selection) {
       return JUnitVersion.JUNIT_4;
