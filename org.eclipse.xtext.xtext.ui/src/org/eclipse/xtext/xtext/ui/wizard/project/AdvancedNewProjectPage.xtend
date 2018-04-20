@@ -441,7 +441,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		LanguageServer.values.get(createLanguageServer.selectionIndex)
 	}
 	
-	def JUnitVersion getJUnitVersion () {
+	def JUnitVersion getSelectedJUnitVersion () {
 		if (junitVersion4.selection) {
 			return JUnitVersion.JUNIT_4;
 		} else if (junitVersion5.selection) {
