@@ -61,9 +61,9 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
@@ -665,11 +665,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		String label = "Remove the unnecessary modifier.";
 		String description = "The modifier is unnecessary and could be removed.";
 		String image = "fix_indent.gif";
-		acceptor.acceptMulti(issue, label, description, image, new IMultiModification<XtendMember>() {
-			@Override
-			public void apply(XtendMember element) {
-				element.getModifiers().remove(modifier);
-			}
+		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XtendMember>) (element, ctx) -> {
+			ctx.setUpdateCrossReferences(false);
+			ctx.setUpdateRelatedFiles(false);
+			ctx.addModification(element, ele -> ele.getModifiers().remove(modifier));
 		});
 	}
 	
