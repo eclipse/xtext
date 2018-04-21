@@ -78,7 +78,7 @@
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/oxygen/201712201001"/>
+		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
