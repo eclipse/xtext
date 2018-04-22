@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.internal.Activator;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
 import org.eclipse.xtext.xtext.ui.wizard.project.StatusWidget;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -146,16 +146,13 @@ public class AdvancedNewProjectPage extends WizardPage {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("4");
-            boolean _isJUnit5Available = Activator.isJUnit5Available();
-            boolean _not = (!_isJUnit5Available);
-            it_3.setSelection(_not);
+            it_3.setSelection(true);
           };
           this.junitVersion4 = this.Radio(it_2, _function_10);
           final Procedure1<Button> _function_11 = (Button it_3) -> {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("5");
-            it_3.setSelection(Activator.isJUnit5Available());
           };
           this.junitVersion5 = this.Radio(it_2, _function_11);
         };
@@ -530,7 +527,7 @@ public class AdvancedNewProjectPage extends WizardPage {
       String _symbolicName = it.getSymbolicName();
       return Boolean.valueOf(Objects.equal(bundleId, _symbolicName));
     };
-    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
+    final Bundle bundle = IterableExtensions.<Bundle>findFirst(((Iterable<Bundle>)Conversions.doWrapArray(Activator.getInstance().getBundle().getBundleContext().getBundles())), _function);
     return ((bundle != null) && ((bundle.getState() & ((Bundle.RESOLVED | Bundle.STARTING) | Bundle.ACTIVE)) != 0));
   }
   
