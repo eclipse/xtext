@@ -29,7 +29,7 @@ public interface ResolvedExecutable {
 	 * @return the {@link ResolvedExecutable resolved} exceptions
 	 */
 	Iterable<? extends TypeReference> getResolvedExceptionTypes();
-	
+
 	/**
 	 * Returns the simple signature of this executable. The simple signature of
 	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
@@ -37,4 +37,14 @@ public interface ResolvedExecutable {
 	 * @return the simple, human-readable signature
 	 */
 	String getSimpleSignature();
+
+	/**
+	 * Returns the resolved erased signature of this feature. The resolved representation of
+	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is
+	 * <code>addAll(int,Collection)</code>.
+	 * 
+	 * @since 2.14
+	 * @return resolved erasure signature
+	 */
+	String getResolvedErasureSignature();
 }
