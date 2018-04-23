@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Data
 @SuppressWarnings("all")
 public class Document {
-  private final int version;
+  private final Integer version;
   
   private final String contents;
   
@@ -104,10 +104,16 @@ public class Document {
         newContent = _plus_1;
       }
     }
-    return new Document((this.version + 1), newContent);
+    Integer _xifexpression = null;
+    if ((this.version != null)) {
+      _xifexpression = Integer.valueOf(((this.version).intValue() + 1));
+    } else {
+      _xifexpression = null;
+    }
+    return new Document(_xifexpression, newContent);
   }
   
-  public Document(final int version, final String contents) {
+  public Document(final Integer version, final String contents) {
     super();
     this.version = version;
     this.contents = contents;
@@ -118,7 +124,7 @@ public class Document {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + this.version;
+    result = prime * result + ((this.version== null) ? 0 : this.version.hashCode());
     return prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
   }
   
@@ -132,7 +138,10 @@ public class Document {
     if (getClass() != obj.getClass())
       return false;
     Document other = (Document) obj;
-    if (other.version != this.version)
+    if (this.version == null) {
+      if (other.version != null)
+        return false;
+    } else if (!this.version.equals(other.version))
       return false;
     if (this.contents == null) {
       if (other.contents != null)
@@ -152,7 +161,7 @@ public class Document {
   }
   
   @Pure
-  public int getVersion() {
+  public Integer getVersion() {
     return this.version;
   }
   

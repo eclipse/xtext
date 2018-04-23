@@ -13,7 +13,6 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.io.File;
 import java.io.FileWriter;
@@ -197,9 +196,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
-  protected Module getServerModule() {
+  protected com.google.inject.Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
-    final Module _function = (Binder it) -> {
+    final com.google.inject.Module _function = (Binder it) -> {
       AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
       _bind.toInstance(new RequestManager() {
         @Override
@@ -1079,7 +1078,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       DocumentFormattingParams _doubleArrow = ObjectExtensions.<DocumentFormattingParams>operator_doubleArrow(_documentFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_doubleArrow);
       String _contents = fileInfo.getContents();
-      final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
+      final Document result = new Document(Integer.valueOf(1), _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
       this.assertEqualsStricter(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1110,7 +1109,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       DocumentRangeFormattingParams _doubleArrow = ObjectExtensions.<DocumentRangeFormattingParams>operator_doubleArrow(_documentRangeFormattingParams, _function);
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_doubleArrow);
       String _contents = fileInfo.getContents();
-      final Document result = new Document(1, _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
+      final Document result = new Document(Integer.valueOf(1), _contents).applyChanges(ListExtensions.<TextEdit>reverse(CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(changes.get(), TextEdit.class)))));
       this.assertEqualsStricter(configuration.getExpectedText(), result.getContents());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

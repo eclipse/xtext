@@ -357,7 +357,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
     final Function0<BuildManager.Buildable> _function = () -> {
-      return this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getTextDocument().getText());
+      return this.workspaceManager.didOpen(this._uriExtensions.toUri(params.getTextDocument().getUri()), Integer.valueOf(params.getTextDocument().getVersion()), params.getTextDocument().getText());
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);
@@ -373,7 +373,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         String _text = event.getText();
         return new TextEdit(_range, _text);
       };
-      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), (params.getTextDocument().getVersion()).intValue(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
+      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);

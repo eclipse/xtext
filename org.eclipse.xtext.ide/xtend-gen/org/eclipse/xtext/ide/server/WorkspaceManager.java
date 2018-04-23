@@ -213,11 +213,11 @@ public class WorkspaceManager {
     return new ArrayList<ProjectManager>(_values);
   }
   
-  public List<IResourceDescription.Delta> didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+  public List<IResourceDescription.Delta> didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
     return this.didChange(uri, version, changes).build(cancelIndicator);
   }
   
-  public BuildManager.Buildable didChange(final URI uri, final int version, final Iterable<TextEdit> changes) {
+  public BuildManager.Buildable didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes) {
     boolean _containsKey = this.openDocuments.containsKey(uri);
     boolean _not = (!_containsKey);
     if (_not) {
@@ -232,11 +232,11 @@ public class WorkspaceManager {
     return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
-  public List<IResourceDescription.Delta> didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
+  public List<IResourceDescription.Delta> didOpen(final URI uri, final Integer version, final String contents, final CancelIndicator cancelIndicator) {
     return this.didOpen(uri, version, contents).build(cancelIndicator);
   }
   
-  public BuildManager.Buildable didOpen(final URI uri, final int version, final String contents) {
+  public BuildManager.Buildable didOpen(final URI uri, final Integer version, final String contents) {
     Document _document = new Document(version, contents);
     this.openDocuments.put(uri, _document);
     return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
@@ -290,7 +290,7 @@ public class WorkspaceManager {
       _elvis = _get;
     } else {
       String _text = resource.getParseResult().getRootNode().getText();
-      Document _document = new Document(1, _text);
+      Document _document = new Document(Integer.valueOf(1), _text);
       _elvis = _document;
     }
     return _elvis;
