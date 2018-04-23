@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,14 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -23,14 +20,23 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
+import com.google.common.base.Preconditions;
+import com.google.common.io.ByteStreams;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
  */
 public class Files {
-
 	private static Logger log = Logger.getLogger(Files.class);
 
+	/**
+	 * Copies a list of files from a source to a target directory. Existing files
+	 * are not overwritten. If the target directory does not exist it will be created.
+	 * 
+	 * @param sourceDir source directory
+	 * @param targetDir target directory. Not mandatory to exist before.
+	 * @param files File paths relative to the source directory to copy
+	 */
 	public static void copyFiles(String sourceDir, String targetDir, List<String> files) {
 		File target = new File(targetDir);
 		if (!target.exists()) {
@@ -126,6 +132,10 @@ public class Files {
 		}, true, false);
 	}
 
+	/**
+	 * @deprecated Use com.google.common.io.Files.toString(File, Charset) instead
+	 */
+	@Deprecated
 	public static String readFileIntoString(String filename) {
 		FileInputStream inputStream;
 		try {
@@ -139,64 +149,30 @@ public class Files {
 	
 	/**
 	 * @since 2.3
+	 * @deprecated Use com.google.common.io.ByteStreams.toByteArray(InputStream) instead
 	 */
+	@Deprecated
 	public static byte[] readStreamIntoByteArray(InputStream inputStream) {
 		try {
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-	
-			int nRead;
-			byte[] data = new byte[16384];
-	
-				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-				  buffer.write(data, 0, nRead);
-				}
-	
-			buffer.flush();
-	
-			return buffer.toByteArray();
+			return ByteStreams.toByteArray(inputStream);
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 	}
+	
 	public static String readStreamIntoString(InputStream inputStream) {
-		if (inputStream==null)
-			throw new NullPointerException("inputStream");
-		BufferedInputStream source = null;
-		if (inputStream instanceof BufferedInputStream) {
-			source = (BufferedInputStream) inputStream;
-		} else {
-			source = new BufferedInputStream(inputStream);
-		}
+		Preconditions.checkNotNull(inputStream, "inputStream");
 		try {
-			byte[] buffer = new byte[2048];
-			int bytesRead = 0;
-			StringBuffer b = new StringBuffer();
-			do {
-				bytesRead = source.read(buffer);
-				if (bytesRead != -1)
-					b.append(new String(buffer, 0, bytesRead));
-			} while (bytesRead != -1);
-			return b.toString();
+			return new String(ByteStreams.toByteArray(inputStream));
 		} catch (IOException e) {
 			throw new WrappedException(e);
-		} finally {
-			try {
-				source.close();
-			} catch (IOException e) {
-				throw new WrappedException(e);
-			}
 		}
 	}
 
 	public static void writeStringIntoFile(String filename, String content) {
 		try {
 			final File file = new File(filename);
-			FileWriter writer = new FileWriter(file);
-			try {
-				writer.append(content);
-			} finally {
-				writer.close();
-			}
+			com.google.common.io.Files.write(content.getBytes(), file);
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
