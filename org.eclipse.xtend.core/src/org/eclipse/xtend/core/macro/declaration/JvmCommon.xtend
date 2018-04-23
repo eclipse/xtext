@@ -98,6 +98,11 @@ class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Executable
 	override toString() {
 		delegate.toString
 	}
+	
+	override getResolvedErasureSignature() {
+		delegate.resolvedErasureSignature
+	}
+	
 }
 
 class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperation, MethodDeclaration> implements ResolvedMethod {
