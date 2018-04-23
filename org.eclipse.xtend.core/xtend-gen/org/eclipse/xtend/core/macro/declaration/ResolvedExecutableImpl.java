@@ -67,4 +67,9 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
   public String toString() {
     return this.getDelegate().toString();
   }
+  
+  @Override
+  public String getResolvedErasureSignature() {
+    return this.getDelegate().getResolvedErasureSignature();
+  }
 }
