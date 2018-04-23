@@ -8646,4 +8646,76 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
+  
+  @Ignore("java.lang.IllegalArgumentException: length must be >= 0")
+  @Test
+  public void unnecessaryModifier_46() {
+    final String tripleQuotes = "\'\'\'";
+    final String ifLiteral = "«IF true»";
+    final String endifLiteral = "«ENDIF»";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements Runnable {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override de|f run() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val e = ");
+    _builder.append(tripleQuotes, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append(ifLiteral, "\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("a");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("b");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append(endifLiteral, "\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append(tripleQuotes, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo implements Runnable {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override run() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val e = ");
+    _builder_1.append(tripleQuotes, "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append(ifLiteral, "\t\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t\t");
+    _builder_1.append("a");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t\t");
+    _builder_1.append("b");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append(endifLiteral, "\t\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append(tripleQuotes, "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
 }
