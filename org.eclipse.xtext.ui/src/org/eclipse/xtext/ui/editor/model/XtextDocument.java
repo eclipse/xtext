@@ -51,7 +51,9 @@ import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork.ReconcilingU
 import org.eclipse.xtext.ui.util.DisplayRunnable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.concurrent.IWriteAccess;
 
 import com.google.inject.Inject;
 
@@ -295,7 +297,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	protected class XtextDocumentLocker implements Processor {
+	protected class XtextDocumentLocker implements Processor, IReadAccess<XtextResource>, Priority<XtextResource>, IWriteAccess<XtextResource> {
 		
 		private AtomicInteger potentialUpdaterCount = new AtomicInteger(0);
 		
@@ -414,6 +416,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return resource;
 		}
 
+		@Override
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			boolean isCancelable = work instanceof CancelableUnitOfWork;
 			try {
@@ -483,6 +486,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 * 
 		 * @since 2.7
 		 */
+		@Override
 		public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
 			return internalReadOnly(work, true);
 		}
@@ -490,6 +494,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		/**
 		 * @since 2.4
 		 */
+		@Override
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 			return internalReadOnly(work, false);
 		}

@@ -78,7 +78,7 @@
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/oxygen/201712201001"/>
+		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
@@ -92,8 +92,20 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
 		<unit id="org.junit" version="0.0.0"/>
+		<unit id="com.google.inject" version="0.0.0"/>
+		<unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
+		<unit id="org.apache.commons.cli" version="0.0.0"/>
+		<unit id="org.apiguardian" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.params" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
+		<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+		<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
 	</location>
 </locations>
 </target>

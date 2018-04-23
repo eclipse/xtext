@@ -31,9 +31,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on <a href="http://eclipse.org/tycho/">Tycho</a>, which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle’s manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.</p>
 
-<h3 id="the-releng-project-mymavenizedherolanguagereleng">The releng project (my.mavenized.herolanguage.releng)</h3>
+<h3 id="the-parent-project-mymavenizedherolanguageroot">The parent project (my.mavenized.herolanguage.root)</h3>
 
-<p>All of the projects are aggregated in a parent pom in <code>my.mavenized.herolanguage.releng</code>. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don’t need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:</p>
+<p>All of the projects are aggregated in a parent pom in the root directory. If you import the projects into eclipse the imported project is called <code>my.mavenized.herolanguage.root</code>. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don’t need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:</p>
 
 <ul>
   <li>
@@ -51,17 +51,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
       &lt;version&gt;${xtext.version}&lt;/version&gt;
       &lt;executions&gt;
-  &lt;execution&gt;
-    &lt;goals&gt;
-      &lt;goal&gt;compile&lt;/goal&gt;
-      &lt;goal&gt;xtend-install-debug-info&lt;/goal&gt;
-      &lt;goal&gt;testCompile&lt;/goal&gt;
-      &lt;goal&gt;xtend-test-install-debug-info&lt;/goal&gt;
-    &lt;/goals&gt;
-  &lt;/execution&gt;
+        &lt;execution&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;compile&lt;/goal&gt;
+            &lt;goal&gt;xtend-install-debug-info&lt;/goal&gt;
+            &lt;goal&gt;testCompile&lt;/goal&gt;
+            &lt;goal&gt;xtend-test-install-debug-info&lt;/goal&gt;
+          &lt;/goals&gt;
+        &lt;/execution&gt;
       &lt;/executions&gt;
       &lt;configuration&gt;
-  &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
+        &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
       &lt;/configuration&gt;
     &lt;/plugin&gt;
   &lt;/plugins&gt;
@@ -83,6 +83,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 </ul>
 
+<p>To build the entire project you have to run your maven build with this pom file.</p>
+
 <h3 id="the-update-site-project-mymavenizedherolanguageupdatesite">The update site project (my.mavenized.herolanguage.updatesite)</h3>
 
 <p>The project <code>my.mavenized.herolanguage.updatesite</code> denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features are contained in the update site. As you can see, the <code>category.xml</code> file points to the single feature, which is defined in the project <code>my.mavenized.herolanguage.sdk</code>.</p>
@@ -93,40 +95,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 id="the-core-language-project-mymavenizedherolanguage">The core language project (my.mavenized.herolanguage)</h3>
 
-<p>The <code>pom.xml</code> for the language project contains information about how Maven should run Xtext’s code generator. The first used plug-in cleans the directories containing generated resources during the clean phase:</p>
-
-<pre><code class="language-xml">&lt;plugin&gt;
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.5&lt;/version&gt;
-  &lt;configuration&gt;
-    &lt;filesets&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/src-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/xtend-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-      &lt;!-- clean ui plugin as well --&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/../${project.artifactId}.ui/src-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/../${project.artifactId}.ui/xtend-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-      &lt;!-- clean test fragment as well --&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/../${project.artifactId}.tests/src-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-      &lt;fileset&gt;
-  &lt;directory&gt;${basedir}/../${project.artifactId}.tests/xtend-gen&lt;/directory&gt;
-      &lt;/fileset&gt;
-    &lt;/filesets&gt;
-  &lt;/configuration&gt;
-&lt;/plugin&gt;
-</code></pre>
-
-<p>The second plug-in invokes the MWE2 file through a standard Java process:</p>
+<p>The <code>pom.xml</code> for the language project contains information about how Maven should run Xtext’s code generator. The first plug-in invokes the MWE2 file through a standard Java process:</p>
 
 <pre><code class="language-xml">&lt;plugin&gt;
   &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
@@ -156,22 +125,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.emf&lt;/groupId&gt;
       &lt;artifactId&gt;org.eclipse.emf.mwe2.launch&lt;/artifactId&gt;
-      &lt;version&gt;2.9.0.201605261059&lt;/version&gt;
+      &lt;version&gt;2.9.1.201705291010&lt;/version&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
       &lt;artifactId&gt;org.eclipse.xtext.common.types&lt;/artifactId&gt;
-      &lt;version&gt;2.11.0&lt;/version&gt;
+      &lt;version&gt;${xtext.version}&lt;/version&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
       &lt;artifactId&gt;org.eclipse.xtext.xtext.generator&lt;/artifactId&gt;
-      &lt;version&gt;2.11.0&lt;/version&gt;
+      &lt;version&gt;${xtext.version}&lt;/version&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
       &lt;artifactId&gt;org.eclipse.xtext.xbase&lt;/artifactId&gt;
-      &lt;version&gt;2.11.0&lt;/version&gt;
+      &lt;version&gt;${xtext.version}&lt;/version&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
@@ -182,86 +151,105 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 &lt;/plugin&gt;
 </code></pre>
 
-<p>You need to adjust the mwe file as well to be able to run it this way. There are three important adjustments you need to make:</p>
+<p>The second used plug-in cleans the directories containing generated resources during the clean phase:</p>
 
-<p>First you need to use a <em>platform:resource</em> URI instead of a <em>classpath</em> URI to point to your Xtext grammar file. This is because we don’t have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example:</p>
-
-<pre><code class="language-mwe2">  // grammarURI has to be platform:/resource as it is not on the classpath
-  var grammarURI = "platform:/resource/${projectName}/src/my/mavenized/HeroLanguage.xtext"
+<pre><code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.5&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;filesets&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/../my.mavenized.herolanguage/src-gen/&lt;/directory&gt;
+			&lt;includes&gt;
+				&lt;include&gt;**/*&lt;/include&gt;
+			&lt;/includes&gt;
+		&lt;/fileset&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/../my.mavenized.herolanguage.tests/src-gen/&lt;/directory&gt;
+			&lt;includes&gt;
+				&lt;include&gt;**/*&lt;/include&gt;
+			&lt;/includes&gt;
+		&lt;/fileset&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/../my.mavenized.herolanguage.ide/src-gen/&lt;/directory&gt;
+			&lt;includes&gt;
+				&lt;include&gt;**/*&lt;/include&gt;
+			&lt;/includes&gt;
+		&lt;/fileset&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/../my.mavenized.herolanguage.ui/src-gen/&lt;/directory&gt;
+			&lt;includes&gt;
+				&lt;include&gt;**/*&lt;/include&gt;
+			&lt;/includes&gt;
+		&lt;/fileset&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/../my.mavenized.herolanguage.ui.tests/src-gen/&lt;/directory&gt;
+			&lt;includes&gt;
+				&lt;include&gt;**/*&lt;/include&gt;
+			&lt;/includes&gt;
+		&lt;/fileset&gt;
+		&lt;fileset&gt;
+			&lt;directory&gt;${basedir}/model/generated/&lt;/directory&gt;
+		&lt;/fileset&gt;
+    &lt;/filesets&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;
 </code></pre>
 
-<p>Next we need to register some URI mappings and make sure we use an <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java">XtextResourceSet</a> in the build process. This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example it is needed to resolve the URIs to the Xbase related EPackages.</p>
+<h3 id="the-ui-language-project-mymavenizedherolanguageui">The ui language project (my.mavenized.herolanguage.ui)</h3>
 
-<pre><code class="language-mwe2">  // use an XtextResourceset throughout the process, which is able to resolve classpath:/ URIs.
-  resourceSet = org.eclipse.xtext.resource.XtextResourceSet:theResourceSet {}
-  
-  // add mappings from platform:/resource to classpath:/
-  uriMap = {
-    from = "platform:/resource/org.eclipse.xtext.xbase/"
-    to = "classpath:/"
-  }
-  uriMap = {
-    from = "platform:/resource/org.eclipse.xtext.common.types/"
-    to = "classpath:/"
-  }
-</code></pre>
+<p>Here all code that is specific to eclipse is located. All the additions that you place for the UI of the language, all editors, wizards and preferences, are to be placed inside this project. Regarding the maven build the <code>pom.xml</code> is not very special.</p>
 
-<p>Finally we need to tell the generator to use the created <code>XtextResourceSet</code> by adding this line :</p>
+<h3 id="the-tests-language-project-mymavenizedherolanguagetests">The tests language project (my.mavenized.herolanguage.tests)</h3>
 
-<pre><code class="language-mwe2">  ....
-  language = auto-inject {
-    // make sure we use the resourceSet created during standalone setup.
-    forcedResourceSet = theResourceSet
-    ...
-</code></pre>
+<p>To separate the testing code from the application you should place all your unit tests into this project. The <code>pom.xml</code> includes the <code>tycho-surefire-plugin</code> for the testing but nothing special apart.</p>
 
 <h2 id="standalone-build">Integration in Standard Maven Builds</h2>
 
 <p>Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For this purpose a dedicated maven-plugin is available in Maven central. We now refer to the project <code>example-project</code>, which is a standard Java-project that shouldn’t contain any Eclipse plug-in specific information, nor should it be built with Tycho. Let’s have a look at the pom.xml and therein the Xtext plug-in.</p>
 
 <pre><code class="language-xml">&lt;plugin&gt;
-  &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
-  &lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.11.0&lt;/version&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;generate&lt;/goal&gt;
-      &lt;/goals&gt;
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-  &lt;configuration&gt;
-    &lt;languages&gt;
-      &lt;!-- Add additional standalone setups if you have more than one language --&gt;
-      &lt;language&gt;
-  &lt;setup&gt;my.mavenized.HeroLanguageStandaloneSetup&lt;/setup&gt;
-  &lt;outputConfigurations&gt;
-    &lt;outputConfiguration&gt;
-      &lt;outputDirectory&gt;src/main/generated-sources/xtend/&lt;/outputDirectory&gt;
-    &lt;/outputConfiguration&gt;
-  &lt;/outputConfigurations&gt;
-      &lt;/language&gt;
-    &lt;/languages&gt;
-  &lt;/configuration&gt;
-  &lt;dependencies&gt;
-    &lt;!-- add a dependency to the language core bundle, this will only be needed during generation and will not pollute your project's classpath. --&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;my.mavenized.herolanguage&lt;/groupId&gt;
-      &lt;artifactId&gt;my.mavenized.herolanguage&lt;/artifactId&gt;
-      &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
+	&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+	&lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;${xtext-version}&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;generate&lt;/goal&gt;
+			&lt;/goals&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;configuration&gt;
+		&lt;languages&gt;
+			&lt;language&gt;
+				&lt;setup&gt;my.mavenized.HeroLanguageStandaloneSetup&lt;/setup&gt;
+				&lt;outputConfigurations&gt;
+					&lt;outputConfiguration&gt;
+						&lt;outputDirectory&gt;src/main/generated-sources/xtend/&lt;/outputDirectory&gt;
+					&lt;/outputConfiguration&gt;
+				&lt;/outputConfigurations&gt;
+			&lt;/language&gt;
+		&lt;/languages&gt;
+	&lt;/configuration&gt;
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;my.mavenized.herolanguage&lt;/groupId&gt;
+			&lt;artifactId&gt;my.mavenized.herolanguage&lt;/artifactId&gt;
+			&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
 &lt;/plugin&gt;
 </code></pre>
 
-<p>As the comments suggest, you may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.</p>
+<p>You may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences.</p>
 
 <h2 id="maven-tycho-hints">Maven Tycho Hints</h2>
 
 <p>Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the <code>pom.xml</code> using maven <code>&lt;repositories&gt;</code> section. The p2 repositories need to be marked with layout=p2.<br />
 The second way is to use eclipse <a href="https://wiki.eclipse.org/Tycho/Target_Platform#Target_files">target platform files</a>. This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.</p>
 
-<p>To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project’s repository or the huge <a href="http://download.eclipse.org/releases/mars/">eclipse common</a> composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.</p>
+<p>To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project’s repository or the huge <a href="http://download.eclipse.org/releases/oxygen/">eclipse common</a> composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.</p>
 
 <table>
   <thead>
