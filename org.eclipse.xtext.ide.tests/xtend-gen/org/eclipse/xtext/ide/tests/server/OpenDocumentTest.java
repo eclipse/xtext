@@ -96,7 +96,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
       VersionedTextDocumentIdentifier _versionedTextDocumentIdentifier = new VersionedTextDocumentIdentifier();
       final Procedure1<VersionedTextDocumentIdentifier> _function_1 = (VersionedTextDocumentIdentifier it_1) -> {
         it_1.setUri(firstFile);
-        it_1.setVersion(2);
+        it_1.setVersion(Integer.valueOf(2));
       };
       VersionedTextDocumentIdentifier _doubleArrow = ObjectExtensions.<VersionedTextDocumentIdentifier>operator_doubleArrow(_versionedTextDocumentIdentifier, _function_1);
       it.setTextDocument(_doubleArrow);

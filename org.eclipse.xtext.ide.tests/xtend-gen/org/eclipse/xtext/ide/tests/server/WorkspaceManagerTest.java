@@ -62,7 +62,7 @@ public class WorkspaceManagerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String inMemContents = _builder_1.toString();
-    this.workspaceManger.didOpen(path, 1, inMemContents).build(null);
+    this.workspaceManger.didOpen(path, Integer.valueOf(1), inMemContents).build(null);
     final Function2<Document, XtextResource, String> _function = (Document $0, XtextResource $1) -> {
       return $0.getContents();
     };

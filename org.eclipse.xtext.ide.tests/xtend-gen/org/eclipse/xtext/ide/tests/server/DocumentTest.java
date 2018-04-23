@@ -35,7 +35,7 @@ public class DocumentTest {
     _builder.append("bar");
     _builder.newLine();
     String _normalize = this.normalize(_builder);
-    Document _document = new Document(1, _normalize);
+    Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       Assert.assertEquals(0, it.getOffSet(this.position(0, 0)));
       Assert.assertEquals(11, it.getOffSet(this.position(0, 11)));
@@ -59,7 +59,7 @@ public class DocumentTest {
   
   @Test
   public void testOffSet_empty() {
-    Document _document = new Document(1, "");
+    Document _document = new Document(Integer.valueOf(1), "");
     final Procedure1<Document> _function = (Document it) -> {
       Assert.assertEquals(0, it.getOffSet(this.position(0, 0)));
       try {
@@ -85,7 +85,7 @@ public class DocumentTest {
     _builder.append("bar");
     _builder.newLine();
     String _normalize = this.normalize(_builder);
-    Document _document = new Document(1, _normalize);
+    Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("hello world");
@@ -109,7 +109,7 @@ public class DocumentTest {
     _builder.append("bar");
     _builder.newLine();
     String _normalize = this.normalize(_builder);
-    Document _document = new Document(1, _normalize);
+    Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("hello world");
@@ -134,7 +134,7 @@ public class DocumentTest {
     _builder.newLine();
     _builder.append("bar");
     String _normalize = this.normalize(_builder);
-    Document _document = new Document(1, _normalize);
+    Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       TextEdit _change = this.change(this.position(0, 0), this.position(2, 3), "");
       Assert.assertEquals("", it.applyChanges(
@@ -152,7 +152,7 @@ public class DocumentTest {
     _builder.newLine();
     _builder.append("bar");
     String _normalize = this.normalize(_builder);
-    Document _document = new Document(1, _normalize);
+    Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       TextEdit _change = this.change(null, null, " foo ");
       Assert.assertEquals(" foo ", it.applyChanges(

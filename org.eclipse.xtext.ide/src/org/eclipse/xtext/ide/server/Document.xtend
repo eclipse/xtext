@@ -18,7 +18,7 @@ import org.eclipse.lsp4j.Range
  */
 @Data class Document {
 
-    int version
+    Integer version
     String contents
 
     def int getOffSet(Position position) {
@@ -84,7 +84,7 @@ import org.eclipse.lsp4j.Range
                 newContent = newContent.substring(0, start) + change.newText + newContent.substring(end)
             }
         }
-        return new Document(version + 1, newContent)
+        return new Document(if (version !== null) version + 1 else null, newContent)
     }
 
 }

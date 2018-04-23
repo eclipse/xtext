@@ -235,7 +235,7 @@ public class FormattingTest extends AbstractTestLangLanguageServerTest {
       StringInputStream _stringInputStream = new StringInputStream(model);
       r.load(_stringInputStream, null);
       try {
-        Document _document = new Document(1, model);
+        Document _document = new Document(Integer.valueOf(1), model);
         DocumentFormattingParams _documentFormattingParams = new DocumentFormattingParams();
         fs.format(_document, r, _documentFormattingParams, CancelIndicator.NullImpl);
         Assert.fail("IllegalStateException expected");

@@ -166,11 +166,11 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		new ArrayList(projectName2ProjectManager.values)
 	}
 
-	def didChange(URI uri, int version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
+	def didChange(URI uri, Integer version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
 		didChange(uri, version, changes).build(cancelIndicator)
 	}
 
-	def Buildable didChange(URI uri, int version, Iterable<TextEdit> changes) {
+	def Buildable didChange(URI uri, Integer version, Iterable<TextEdit> changes) {
 		if (!openDocuments.containsKey(uri)) {
 			LOG.error("The document " + uri + " has not been opened.")
 			return [];
@@ -180,11 +180,11 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		return didChangeFiles(#[uri], newArrayList)
 	}
 
-	def didOpen(URI uri, int version, String contents, CancelIndicator cancelIndicator) {
+	def didOpen(URI uri, Integer version, String contents, CancelIndicator cancelIndicator) {
 		didOpen(uri, version, contents).build(cancelIndicator)
 	}
 
-	def Buildable didOpen(URI uri, int version, String contents) {
+	def Buildable didOpen(URI uri, Integer version, String contents) {
 		openDocuments.put(uri, new Document(version, contents))
 		return didChangeFiles(#[uri], newArrayList)
 	}
