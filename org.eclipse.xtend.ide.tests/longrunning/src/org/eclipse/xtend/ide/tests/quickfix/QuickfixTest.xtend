@@ -4840,4 +4840,41 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Ignore("java.lang.IllegalArgumentException: length must be >= 0")
+	@Test
+	def void unnecessaryModifier_46(){
+		// Xtend function having both 'def' and 'override' modifiers
+		val tripleQuotes = "'''"
+		val ifLiteral = "«IF true»"
+		val endifLiteral = "«ENDIF»"
+		create('Foo.xtend', '''
+			class Foo implements Runnable {
+				override de|f run() {
+					val e = «tripleQuotes»
+						«ifLiteral»
+							a
+			
+							b
+						«endifLiteral»
+					«tripleQuotes»
+				}
+			}
+		''')
+		.assertIssueCodes(UNNECESSARY_MODIFIER)
+		.assertResolutionLabels("Remove the unnecessary modifier.")
+		.assertModelAfterQuickfix('''
+			class Foo implements Runnable {
+				override run() {
+					val e = «tripleQuotes»
+						«ifLiteral»
+							a
+			
+							b
+						«endifLiteral»
+					«tripleQuotes»
+				}
+			}
+		''')
+	}
 }
