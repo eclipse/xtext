@@ -47,11 +47,11 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 	@Override
 	protected Region getHoverRegionInternal(final int lineNumber, final int offset) {
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
-		for (Annotation annotation : annotations) {
+		for (Annotation annotation : sortBySeverity(annotations)) {
 			Position position = sourceViewer.getAnnotationModel().getPosition(annotation);
 			if (position != null) {
 				final int start = position.getOffset();
-				return new Region (start, position.getLength());	
+				return new Region(start, position.getLength());	
 			}
 		}
 		return null;
@@ -67,7 +67,7 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 				messages.add(text.trim());
 			}
 		}
-		if (messages.size()>0)
+		if (messages.size() > 0)
 			return formatInfo(messages);
 		return null;
 	}
