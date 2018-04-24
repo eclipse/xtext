@@ -1025,6 +1025,115 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		Assert.assertEquals(expected, events);
 	}
 	
+	@Test public void testProcessorEvents2() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"'''\n" +
+				" «IF true»\n" +
+				" «ENDIF»\n" +
+				"'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText( )\n"+
+				"acceptIfCondition()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText( )\n"+
+				"acceptEndIf()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText()";
+		Assert.assertEquals(expected, events);
+	}
+	
+	@Test public void testProcessorEvents3() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"'''\n" +
+				"«IF true»\n" +
+				"«ENDIF»\n" +
+				"'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText()\n"+
+				"acceptIfCondition()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText()\n"+
+				"acceptEndIf()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText()";
+		Assert.assertEquals(expected, events);
+	}
+	
+	@Test public void testProcessorEvents4() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"\t'''\n" +
+				"\t«IF true»\n" +
+				"\t\n" +
+				"\t«ENDIF»\n" +
+				"\t'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(\t)\n"+
+				"acceptIfCondition()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(\t)\n"+
+				"acceptSemanticText()\n"+
+				"acceptTemplateText()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticLineBreak()\n"+
+				"acceptTemplateText(	)\n"+
+				"acceptEndIf()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(\t)";
+		Assert.assertEquals(expected, events);
+//		System.out.println(events);
+	}
+	
+	@Test public void testProcessorEvents5() throws Exception {
+		String events = recordRichStringProcessorEvents(
+				"\t'''\n" +
+						"\t«IF true»\n" +
+						"\n" +
+						"\t«ENDIF»\n" +
+				"\t'''");
+		String expected = 
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(\t)\n"+
+				"acceptIfCondition()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticText()\n"+
+				"acceptSemanticLineBreak()\n"+
+				"acceptTemplateText(	)\n"+
+				"acceptEndIf()\n"+
+				"announceNextLiteral()\n"+
+				"acceptTemplateText()\n"+
+				"acceptTemplateLineBreak()\n"+
+				"acceptTemplateText(\t)";
+		Assert.assertEquals(expected, events);
+//		System.out.println(events);
+	}
+	
 	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
 	@Test public void testProcessorEventsBug394277_01() throws Exception {
 		String events = recordRichStringProcessorEvents(

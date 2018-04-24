@@ -597,4 +597,113 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichString(_builder);
   }
+  
+  @Test
+  public void indentThreeTabsLineInIf() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Generator {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<IF true>>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Generator {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def generate() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("```");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<<IF true>>");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("```");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
+  }
+  
+  @Test
+  public void indentEmptyLineInIf() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Generator {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<IF true>>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Generator {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def generate() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("```");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<<IF true>>");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("<<ENDIF>>");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("```");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(this.decode(_builder), this.decode(_builder_1));
+  }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtend.core.formatting2.Chunk;
 import org.eclipse.xtend.core.formatting2.Line;
 import org.eclipse.xtend.core.formatting2.RichStringToLineModel;
@@ -60,6 +61,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  *  4. multi-line with only whitespace after opening ''' and before closing ''': one level of extra indentation between ''' and '''
  * 
  * @author Moritz Eysholdt - Initial implementation and API
+ * @author Arne Deutsch - Workaround for exception thrown for blank lines
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -167,7 +169,12 @@ public class RichStringFormatter {
             return _switchResult;
           };
           final String text = IterableExtensions.join(ListExtensions.<Chunk, CharSequence>map(line.getChunks(), _function));
-          this.setSpace(doc, offset, length, text);
+          if ((length >= 0)) {
+            this.setSpace(doc, offset, length, text);
+          } else {
+            RuntimeException _runtimeException = new RuntimeException(("Programmatic error: length == " + Integer.valueOf(length)));
+            EcorePlugin.INSTANCE.log(_runtimeException);
+          }
         }
       }
     }

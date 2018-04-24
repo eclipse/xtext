@@ -4841,7 +4841,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("java.lang.IllegalArgumentException: length must be >= 0")
 	@Test
 	def void unnecessaryModifier_46(){
 		// Xtend function having both 'def' and 'override' modifiers
@@ -4869,7 +4868,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					val e = «tripleQuotes»
 						«ifLiteral»
 							a
-			
+						
 							b
 						«endifLiteral»
 					«tripleQuotes»
