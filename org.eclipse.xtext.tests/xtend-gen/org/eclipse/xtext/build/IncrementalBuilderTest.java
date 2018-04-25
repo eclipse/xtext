@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.build;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -285,10 +286,22 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
       URI _uri = this.uri("src/B.indextestlanguage");
       it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
       final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
-        Assert.assertEquals(this.uri("src/A.indextestlanguage"), uri);
-        Assert.assertTrue(issues.toString(), IterableExtensions.<Issue>head(issues).getMessage().contains("Couldn\'t resolve reference to Type \'foo.B\'"));
-        validateCalled.set(true);
-        return false;
+        URI _uri_1 = this.uri("src/A.indextestlanguage");
+        boolean _equals = Objects.equal(_uri_1, uri);
+        if (_equals) {
+          Assert.assertTrue(issues.toString(), IterableExtensions.<Issue>head(issues).getMessage().contains("Couldn\'t resolve reference to Type \'foo.B\'"));
+          validateCalled.set(true);
+          return false;
+        } else {
+          URI _uri_2 = this.uri("src/B.indextestlanguage");
+          boolean _equals_1 = Objects.equal(_uri_2, uri);
+          if (_equals_1) {
+            Assert.assertEquals("zero issues expected", 0, IterableExtensions.size(issues));
+            return true;
+          } else {
+            throw new IllegalStateException(("unexpected issues for " + uri));
+          }
+        }
       };
       it.setAfterValidate(_function_2);
     };
@@ -329,11 +342,23 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
       URI _uri = this.uri("src/B.indextestlanguage");
       it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
       final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
-        Assert.assertEquals(this.uri("src/A.indextestlanguage"), uri);
-        String _string = issues.toString();
-        Assert.assertTrue(_string, ((!IterableExtensions.isEmpty(issues)) && IterableExtensions.<Issue>head(issues).getMessage().contains("Couldn\'t resolve reference to Type \'foo.B\'")));
-        validateCalled.set(true);
-        return false;
+        URI _uri_1 = this.uri("src/A.indextestlanguage");
+        boolean _equals = Objects.equal(_uri_1, uri);
+        if (_equals) {
+          String _string = issues.toString();
+          Assert.assertTrue(_string, ((!IterableExtensions.isEmpty(issues)) && IterableExtensions.<Issue>head(issues).getMessage().contains("Couldn\'t resolve reference to Type \'foo.B\'")));
+          validateCalled.set(true);
+          return false;
+        } else {
+          URI _uri_2 = this.uri("src/B.indextestlanguage");
+          boolean _equals_1 = Objects.equal(_uri_2, uri);
+          if (_equals_1) {
+            Assert.assertEquals("zero issues expected", 0, IterableExtensions.size(issues));
+            return true;
+          } else {
+            throw new IllegalStateException(("unexpected issues for " + uri));
+          }
+        }
       };
       it.setAfterValidate(_function_2);
       it.setResourceSet(resourceSet);

@@ -210,6 +210,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		return file.toURI.normalize.toUriString
 	}
 
+	def void deleteFile(String path) {
+		new File(root, path).delete
+	}
+
 	def String getVirtualFile(String path) {
 		val file = new File(root, path)
 		return file.toURI.normalize.toUriString

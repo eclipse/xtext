@@ -73,6 +73,23 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])
     }
     
+	@Test
+	def void testIncrementalDeletion() {
+		val path = 'MyType1.testlang'.writeFile( '''
+			type Test {
+			    NonExisting foo
+			}
+		''')
+		initialize
+		assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.",
+			diagnostics.values.head.head.message)
+		'MyType1.testlang'.deleteFile
+		languageServer.getWorkspaceService.didChangeWatchedFiles(
+			new DidChangeWatchedFilesParams(#[new FileEvent(path, FileChangeType.Deleted)])
+		)
+		assertTrue(diagnostics.values.head.empty)
+	}
+    
     @Test
     def void testMissingInitialize() {
 	    	try {
