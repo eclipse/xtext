@@ -189,10 +189,16 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(newBuildRequest [
 			deletedFiles = #[uri('src/foo/B.xtend').delete]
 			afterValidate = [ uri, issues |
-				assertEquals(uri('src/A.xtend'), uri)
-				assertTrue(issues.head.message, issues.head.message.contains("foo.B cannot be resolved to a type"))
-				validateCalled.set(true)
-				return false
+				if (uri('src/A.xtend') == uri) {
+					assertTrue(issues.head.message, issues.head.message.contains("foo.B cannot be resolved to a type"))
+					validateCalled.set(true)
+					return false
+				} else if (uri('src/foo/B.xtend') == uri) {
+					assertEquals("zero issues expected", 0, issues.size)
+					return true
+				} else {
+					throw new IllegalStateException("unexpected issues for " + uri)
+				}
 			]
 		])
 		assertTrue(validateCalled.get)
