@@ -125,47 +125,72 @@ The Xtend compiler version used in the build should be the current snapshot or t
 
 Build jobs for releases must be executed in proper order on the build server, i.e. from upstream to downstream jobs. For every upstream change, the downstream jobs must be retriggered manually.
 
-1. xtext-lib
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
-   * `./gradlew generateP2Build`
-2. xtext-core
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `xtext_bootstrap` property in `gradle/versions.gradle` to the used Xtend compiler version.
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
-3. xtext-extras
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `xtext_bootstrap` property in `gradle/versions.gradle` to the used Xtend compiler version.
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
-4. xtext-eclipse
+1. Make sure all repositories are on branch `master`.
+2. xtext-umbrella
+   * `export BRANCHNAME=<BRANCHNAME>`
+   * `./gitAll reset --hard`. Make sure before that no relevant change gets lost.
+   * `./gitAll pull`.
+   * `./gitAll checkout -b $BRANCHNAME`.
    * Replace all occurrences of `job/master` according to the release branch name.
-   * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtext.tycho.parent/pom.xml` to the used Xtend compiler version.
-5. xtext-idea
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
-6. xtext-web
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`: Update the name of the zipped p2 repository according to the release version (`tofile` property).
+3. xtext-lib
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
+   * `./gradlew generateP2Build`
+4. xtext-core
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/versions.gradle`: Set `xtext_bootstrap` property to the used Xtend compiler version.
+   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
+   * `releng/releng-target/pom.xml`: Set `version` property to the release version.
+5. xtext-extras
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/versions.gradle`: Set `xtext_bootstrap` property to the used Xtend compiler version
+   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
+6. xtext-eclipse
+   * Replace all occurrences of `job/master` according to the release branch name.
+   * `releng/org.eclipse.xtext.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
+7. xtext-idea
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
+8. xtext-web
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
 7. xtext-maven
    * Replace all occurrences of the previous version with the release version.
-   * Replace all occurrences of `job/master` according to the release branch name.
+   * `org.eclipse.xtext.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
+   * `org.eclipse.xtext.maven.plugin/src/test/resources/it/generate/pom.xml`: Replace all occurrences of `job/master` (except `lsp4j/job/master`) according to the release branch name.
 8. xtext-xtend
-   * Create release branch.
-   * Set `version` property in `gradle/versions.gradle` to the release version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
-   * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files (`maven-pom.xml`, `org.eclipse.xtend.maven.*`).
+   * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version. Use a released version here.
+   * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files
+     * `maven-pom.xml`
+     * `org.eclipse.xtend.maven.*/pom.xml`
+     * `releng/org.eclipse.xtend.maven.parent/pom.xml`
    * Replace all occurrences of `job/master` according to the release branch name.
-   * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
-9. xtext-umbrella
-   * Replace all occurrences of `job/master` according to the release branch name.
-   * Update the name of the zipped p2 repository  according to the release version in `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml` (`tofile` property).
-10. Once all previous builds are successful, trigger the build job https://ci.eclipse.org/xtext/job/xtext-release/ with the release version and branch name as parameters.
-11. Ask @dhuebner to publish the Eclipse and Maven artifacts.
+   * `releng/org.eclipse.xtend.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
+   * `releng/org.eclipse.xtend.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
+9. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
+10. Create release tags on all repositories. Name `v<version>` and commit message `release v<version>`.
+11. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
+   * Log in with user 'xtext.team'.
+   * Select _Staging Repositories_
+   * Search for _orgeclipsextext-NNNN_ and _orgeclipsextend-NNNN_ with status _open_
+   * Select both and perform the _Close_ toolbar action
+   * Wait until the checks have run successfully
+   * Select both repositories again the perform the _Release_ toolbar action
+   * It will take some hours until the artifacts are mirrored to Maven Central.
+12. (Should be done by promote script) Manually edit the composite repository
+   * `/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/[milestones|releases]/[compositeArtifacts.xml|compositeContent.xml]`
+13. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+   * Edit `simrel.aggr` from [org.eclipse.simrel.build repository](https://git.eclipse.org/c/simrel/org.eclipse.simrel.build.git/)
+   * Edit Contribution `Xtext, Xtend`
+   * Change `location` property of the Mapped Repository to the release / milestone repository URL
+   * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
+
+Check that everything was promoted correctly:
+1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
+   * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
+
 
 ### Lifting the Version Number
 
@@ -174,34 +199,34 @@ Once the release branch for a major or minor release has been created, the maste
 Note that the Xtend compiler cannot be set to use snapshot versions from the beginning, since the new snapshots do not exist yet. It should be set to the latest published version (a release candidate or the actual release), and changed to the new snapshot version when it's available.
 
 1. xtext-lib
-   * Set `version` property in `gradle/versions.gradle` to the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/versions.gradle`: Set `version` property to the next version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
    * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
    * `./gradlew generateP2Build`
 2. xtext-core
-   * Set `version` property in `gradle/versions.gradle` to the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/versions.gradle`: Set `version` property to the next version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
    * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 3. xtext-extras
-   * Set `version` property in `gradle/versions.gradle` to the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/versions.gradle`: Set `version` property to the next version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
    * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 4. xtext-eclipse
    * Replace occurrences of the previous version in `MANIFEST.MF`, `feature.xml`, `pom.xml`, and `category.xml` files.
-   * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtext.tycho.parent/pom.xml` to the used Xtend compiler version.
+   * `releng/org.eclipse.xtext.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
 5. xtext-idea
-   * Set `version` property in `gradle/versions.gradle` to the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/versions.gradle`: Set `version` property to the next version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
 6. xtext-web
-   * Set `version` property in `gradle/versions.gradle` to the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/versions.gradle`: Set `version` property to the next version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
 7. xtext-maven
    * Replace all occurrences of the previous version with the next version.
 8. xtext-xtend
    * Replace all occurrences of the previous version with the next version.
-   * Set `bootstrapXtendVersion` property in `gradle/bootstrap-setup.gradle` to the used Xtend compiler version.
+   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
    * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
 9. xtext-umbrella
    * Replace all occurrences of the previous version with the next version.
