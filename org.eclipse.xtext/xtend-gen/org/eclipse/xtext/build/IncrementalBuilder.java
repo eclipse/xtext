@@ -181,6 +181,7 @@ public class IncrementalBuilder {
         }
       }
       final Consumer<URI> _function = (URI source) -> {
+        this.request.getAfterValidate().afterValidate(source, CollectionLiterals.<Issue>newArrayList());
         final Consumer<URI> _function_1 = (URI generated) -> {
           try {
             boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();

@@ -105,6 +105,28 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
+  public void testIncrementalDeletion() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Test {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("NonExisting foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String path = this.writeFile("MyType1.testlang", _builder);
+    this.initialize();
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", 
+      IterableExtensions.<Diagnostic>head(IterableExtensions.<List<Diagnostic>>head(this.getDiagnostics().values())).getMessage());
+    this.deleteFile("MyType1.testlang");
+    WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
+    FileEvent _fileEvent = new FileEvent(path, FileChangeType.Deleted);
+    DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams(Collections.<FileEvent>unmodifiableList(CollectionLiterals.<FileEvent>newArrayList(_fileEvent)));
+    _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParams);
+    Assert.assertTrue(IterableExtensions.<List<Diagnostic>>head(this.getDiagnostics().values()).isEmpty());
+  }
+  
+  @Test
   public void testMissingInitialize() {
     try {
       try {

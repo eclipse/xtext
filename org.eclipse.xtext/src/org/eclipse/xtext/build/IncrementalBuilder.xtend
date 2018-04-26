@@ -78,6 +78,7 @@ import org.eclipse.xtext.generator.GeneratorContext
                 }
             }
 			request.deletedFiles.forEach [ source |
+				request.afterValidate.afterValidate(source, newArrayList)
 				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
 					if (LOG.isInfoEnabled)
 						LOG.info("Deleting " + generated)

@@ -209,10 +209,16 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(newBuildRequest [
 			deletedFiles = #[uri('src/B.indextestlanguage')]
 			afterValidate = [ uri, issues |
-				assertEquals(uri('src/A.indextestlanguage'), uri)
-				assertTrue(issues.toString, issues.head.message.contains("Couldn't resolve reference to Type 'foo.B'"))
-				validateCalled.set(true)
-				return false
+				if (uri('src/A.indextestlanguage') == uri) {
+					assertTrue(issues.toString, issues.head.message.contains("Couldn't resolve reference to Type 'foo.B'"))
+					validateCalled.set(true)
+					return false
+				} else if (uri('src/B.indextestlanguage') == uri) {
+					assertEquals("zero issues expected", 0, issues.size)
+					return true
+				} else {
+					throw new IllegalStateException("unexpected issues for " + uri)
+				}
 			]
 		])
 		assertTrue(validateCalled.get)
@@ -241,10 +247,16 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
         build(newBuildRequest [
             deletedFiles = #[uri('src/B.indextestlanguage')]
             afterValidate = [ uri, issues |
-                assertEquals(uri('src/A.indextestlanguage'), uri)
-                assertTrue(issues.toString, !issues.isEmpty && issues.head.message.contains("Couldn't resolve reference to Type 'foo.B'"))
-                validateCalled.set(true)
-                return false
+                if (uri('src/A.indextestlanguage') == uri) {	
+	                assertTrue(issues.toString, !issues.isEmpty && issues.head.message.contains("Couldn't resolve reference to Type 'foo.B'"))
+	                validateCalled.set(true)
+	                return false
+                } else if (uri('src/B.indextestlanguage') == uri) {
+                    assertEquals("zero issues expected", 0, issues.size)
+                    return true
+                } else {
+                    throw new IllegalStateException("unexpected issues for " + uri)
+                }
             ]
             it.resourceSet = resourceSet
             val desc = ChunkedResourceDescriptions.findInEmfObject(it.resourceSet)

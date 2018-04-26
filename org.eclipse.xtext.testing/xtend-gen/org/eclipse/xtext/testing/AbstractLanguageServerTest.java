@@ -361,6 +361,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  public void deleteFile(final String path) {
+    new File(this.root, path).delete();
+  }
+  
   public String getVirtualFile(final String path) {
     final File file = new File(this.root, path);
     return this._uriExtensions.toUriString(file.toURI().normalize());
