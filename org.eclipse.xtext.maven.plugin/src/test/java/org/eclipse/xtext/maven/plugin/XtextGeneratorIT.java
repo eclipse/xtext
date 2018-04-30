@@ -113,6 +113,7 @@ public class XtextGeneratorIT {
 				verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
 		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
 				"(?s).*MY_FIRST_LITERAL\\(-7.*MY_SECOND_LITERAL\\(137.*");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/classes/model/Funny.ecore");
 	}
 
 	@Test

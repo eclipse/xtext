@@ -15,6 +15,8 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
@@ -139,6 +141,7 @@ public class XtextGenerator extends AbstractMojo {
 		} else {
 			new MavenLog4JConfigurator().configureLog4j(getLog());
 			configureDefaults();
+			addToPlatformResourceMap(project);
 			internalExecute();
 		}
 	}
@@ -226,5 +229,35 @@ public class XtextGenerator extends AbstractMojo {
 		if (javaSourceRoots == null) {
 			javaSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		}
+	}
+
+	/**
+	 * Adds the given project and its child modules ({@link MavenProject#getModules()})
+	 * to {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses
+	 * {@link MavenProject#getParent()} recursively, if set.
+	 *
+	 * @param project the project
+	 */
+	private static void addToPlatformResourceMap(final MavenProject project) {
+		addToPlatformResourceMap(project.getBasedir());
+		project.getModules().stream()
+				.map(module -> new File(project.getBasedir(), module))
+				.forEach(XtextGenerator::addToPlatformResourceMap);
+
+		if (project.getParent() != null)
+			addToPlatformResourceMap(project.getParent());
+	}
+
+	/**
+	 * Adds the given file to EcorePlugin's platform resource map.
+	 * The file's name will be used as the map entry's key.
+	 *
+	 * @param file a file to register
+	 * @return the registered URI pointing to the given file
+	 * @see EcorePlugin#getPlatformResourceMap()
+	 */
+	private static URI addToPlatformResourceMap(final File file) {
+		final URI uri = URI.createURI(file.toURI().toString());
+		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
 	}
 }
