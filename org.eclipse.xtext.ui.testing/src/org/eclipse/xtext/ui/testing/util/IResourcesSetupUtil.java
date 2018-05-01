@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -207,6 +207,14 @@ public class IResourcesSetupUtil {
 
 		}.run(monitor());
 		return folder;
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	public static IFile createFile(String projectName, String fileName, String fileExtension, String content)
+			throws CoreException, InvocationTargetException, InterruptedException {
+		return createFile(projectName + "/" + fileName + "." + fileExtension, content);
 	}
 	
 	public static IFile createFile(String wsRelativePath, String s)
