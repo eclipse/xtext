@@ -180,7 +180,7 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 	}
 	
 	@Test
-	def testGenerateConfigurableIssueProvideXbaser() {
+	def testGenerateConfigurableIssueProvideXbase() {
 		val fragment = initializeFragmentWithGrammarFromStringWithXbase(TestableValidatorFragment2, '''
 			grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase
 			generate foo "http://org.xtext/foo"

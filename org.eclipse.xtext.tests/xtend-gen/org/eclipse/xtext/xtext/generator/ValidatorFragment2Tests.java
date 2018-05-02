@@ -307,7 +307,7 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
   }
   
   @Test
-  public void testGenerateConfigurableIssueProvideXbaser() {
+  public void testGenerateConfigurableIssueProvideXbase() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.Foo with org.eclipse.xtext.xbase.Xbase");
     _builder.newLine();
