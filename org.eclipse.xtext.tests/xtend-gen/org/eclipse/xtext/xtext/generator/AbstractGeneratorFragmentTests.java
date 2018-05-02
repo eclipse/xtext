@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -152,8 +153,34 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     }
   }
   
+  private ResourceSet rs = null;
+  
+  public <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromStringWithXbase(final Class<T> fragmentClass, final String grammarString) {
+    try {
+      if ((this.rs == null)) {
+        this.rs = this.<XtextResourceSet>get(XtextResourceSet.class);
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("grammar org.eclipse.xtext.xbase.Xbase with org.eclipse.xtext.common.Terminals");
+      _builder.newLine();
+      _builder.append("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore");
+      _builder.newLine();
+      _builder.append("Model returns ecore::EClass : name=ID;");
+      _builder.newLine();
+      String _currentFileExtension = this.getCurrentFileExtension();
+      String _plus = ("fakeXbase." + _currentFileExtension);
+      this.getResource(this.getAsStream(_builder.toString()), URI.createURI(_plus));
+      return this.<T>initializeFragmentWithGrammarFromString(fragmentClass, grammarString);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(final Class<T> fragmentClass, final String grammarString) {
     try {
+      if ((this.rs == null)) {
+        this.rs = this.<XtextResourceSet>get(XtextResourceSet.class);
+      }
       final XtextResource resource = this.getResourceFromString(grammarString);
       EObject _head = IterableExtensions.<EObject>head(resource.getContents());
       final Grammar grammar = ((Grammar) _head);
@@ -167,6 +194,7 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
       emfGeneratorFragment.initialize(generatorInjector);
       emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.getGeneratedPackages(), resource.getResourceSet());
       AbstractGeneratorFragmentTests.lang.setResourceSet(resource.getResourceSet());
+      this.rs = null;
       return generatorInjector.<T>getInstance(fragmentClass);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -179,11 +207,9 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
   
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
-    final XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
-    rs.setClasspathURIContext(this.getClass());
     Resource _createResource = this.getResourceFactory().createResource(uri);
     final XtextResource resource = ((XtextResource) _createResource);
-    rs.getResources().add(resource);
+    this.rs.getResources().add(resource);
     resource.load(in, null);
     return resource;
   }
