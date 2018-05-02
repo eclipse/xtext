@@ -34,6 +34,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.preferences.PreferenceKey
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 /**
  * By using this fragment validation gets enabled.
@@ -45,6 +46,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
+	@Inject extension XbaseUsageDetector
 	
 	@Accessors
 	boolean generateDeprecationValidation = true;
@@ -75,18 +77,29 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		return new TypeReference(grammar.runtimeBasePackage + '.validation.' + grammar.simpleName + 'ValidatorConfigurationBlock')
 	}
 	
-		/**
+	/**
 	 * @since 2.14
 	 */
 	protected def getAbstractValidatorConfigurationBlockClass(){
 		return new TypeReference("org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock")
+	}
+	
+	/**
+	 * @since 2.14
+	 */
+	protected def getXbaseValidationConfigurationBlockClass(){
+		return new TypeReference("org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock");
 	}
 
 	/**
 	 * @since 2.14
 	 */
 	protected def getSuperConfigurableIssueCodesProviderClass(){
-		return new TypeReference(ConfigurableIssueCodesProvider)
+		if(language.grammar.inheritsXbase){
+			return new TypeReference("org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes")
+		} else {
+			return new TypeReference(ConfigurableIssueCodesProvider)	
+		}
 	}
 
 	protected def TypeReference getGenValidatorSuperClass(Grammar grammar) {
@@ -232,6 +245,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			
 				@Override
 				protected void initialize(«IAcceptor»<«PreferenceKey»> acceptor) {
+					super.initialize(acceptor);
 					acceptor.accept(create(DEPRECATED_MODEL_PART, «SeverityConverter».SEVERITY_WARNING));
 				}
 			}
@@ -243,11 +257,12 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(validatorConfigurationBlockClass)
 		javaFile.content = '''
 			@SuppressWarnings("restriction")
-			public class «validatorConfigurationBlockClass» extends «abstractValidatorConfigurationBlockClass» {
+			public class «validatorConfigurationBlockClass» extends «if(language.grammar.inheritsXbase) xbaseValidationConfigurationBlockClass else abstractValidatorConfigurationBlockClass» {
 			
 				@Override
 				protected void fillSettingsPage(«typeRef("org.eclipse.swt.widgets.Composite")» composite, int nColumns, int defaultIndent) {
 					addComboBox(«getConfigurableIssueCodesProviderClass».DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
+					super.fillSettingsPage(composite, nColumns, defaultIndent);
 				}
 			
 				@Override
@@ -266,6 +281,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			
 				@Override
 				protected void validateSettings(String changedKey, String oldValue, String newValue) {
+					super.validateSettings(changedKey, oldValue, newValue);
 				}
 			
 				protected «typeRef('org.eclipse.swt.widgets.Combo')» addComboBox(String prefKey, String label, Composite parent, int indent) {

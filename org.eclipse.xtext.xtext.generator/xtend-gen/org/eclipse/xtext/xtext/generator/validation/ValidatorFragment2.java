@@ -50,6 +50,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**
  * By using this fragment validation gets enabled.
@@ -68,6 +69,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
+  
+  @Inject
+  @Extension
+  private XbaseUsageDetector _xbaseUsageDetector;
   
   @Accessors
   private boolean generateDeprecationValidation = true;
@@ -118,8 +123,20 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   /**
    * @since 2.14
    */
+  protected TypeReference getXbaseValidationConfigurationBlockClass() {
+    return new TypeReference("org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock");
+  }
+  
+  /**
+   * @since 2.14
+   */
   protected TypeReference getSuperConfigurableIssueCodesProviderClass() {
-    return new TypeReference(ConfigurableIssueCodesProvider.class);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.getLanguage().getGrammar());
+    if (_inheritsXbase) {
+      return new TypeReference("org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes");
+    } else {
+      return new TypeReference(ConfigurableIssueCodesProvider.class);
+    }
   }
   
   protected TypeReference getGenValidatorSuperClass(final Grammar grammar) {
@@ -478,6 +495,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append("> acceptor) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
+          _builder.append("super.initialize(acceptor);");
+          _builder.newLine();
+          _builder.append("\t\t");
           _builder.append("acceptor.accept(create(DEPRECATED_MODEL_PART, ");
           _builder.append(SeverityConverter.class, "\t\t");
           _builder.append(".SEVERITY_WARNING));");
@@ -508,8 +528,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           TypeReference _validatorConfigurationBlockClass = ValidatorFragment2.this.getValidatorConfigurationBlockClass();
           _builder.append(_validatorConfigurationBlockClass);
           _builder.append(" extends ");
-          TypeReference _abstractValidatorConfigurationBlockClass = ValidatorFragment2.this.getAbstractValidatorConfigurationBlockClass();
-          _builder.append(_abstractValidatorConfigurationBlockClass);
+          TypeReference _xifexpression = null;
+          boolean _inheritsXbase = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+          if (_inheritsXbase) {
+            _xifexpression = ValidatorFragment2.this.getXbaseValidationConfigurationBlockClass();
+          } else {
+            _xifexpression = ValidatorFragment2.this.getAbstractValidatorConfigurationBlockClass();
+          }
+          _builder.append(_xifexpression);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -528,6 +554,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append(_configurableIssueCodesProviderClass, "\t\t");
           _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
           _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
+          _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -589,6 +618,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("protected void validateSettings(String changedKey, String oldValue, String newValue) {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("super.validateSettings(changedKey, oldValue, newValue);");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");

@@ -122,7 +122,24 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		
 	}
 	
+	ResourceSet rs = null;
+	
+	def <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromStringWithXbase(Class<T> fragmentClass, String grammarString){
+		if(rs === null){
+			rs = get(XtextResourceSet);
+		}
+		getResource(getAsStream('''
+			grammar org.eclipse.xtext.xbase.Xbase with org.eclipse.xtext.common.Terminals
+			import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+			Model returns ecore::EClass : name=ID;
+		'''), URI.createURI("fakeXbase."+ getCurrentFileExtension()))
+		return initializeFragmentWithGrammarFromString(fragmentClass, grammarString)
+	}
+	
 	def <T extends AbstractXtextGeneratorFragment> T initializeFragmentWithGrammarFromString(Class<T> fragmentClass, String grammarString){
+		if(rs === null){
+			rs = get(XtextResourceSet);
+		}
 		val resource = getResourceFromString(grammarString)
 		val grammar = resource.contents.head as Grammar
 		val generatorInjector = Guice.createInjector(
@@ -136,6 +153,7 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 		// Create GenModel out of generated EPackages
 		emfGeneratorFragment.getSaveAndReconcileGenModel(grammar, transformer.generatedPackages, resource.resourceSet)
 		lang.resourceSet = resource.resourceSet
+		rs = null;
 		return generatorInjector.getInstance(fragmentClass);
 	}
 	
@@ -144,8 +162,6 @@ abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests {
 	}	
 	
 	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {
-		val rs = get(XtextResourceSet);
-		rs.setClasspathURIContext(getClass());
 		val resource = getResourceFactory().createResource(uri) as XtextResource
 		rs.getResources().add(resource);
 		resource.load(in, null);
