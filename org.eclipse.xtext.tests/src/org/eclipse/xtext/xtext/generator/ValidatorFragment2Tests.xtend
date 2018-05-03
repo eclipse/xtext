@@ -243,7 +243,6 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 				@Override
 				protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 					addComboBox(FooConfigurableIssueCodesProvider.DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
-					super.fillSettingsPage(composite, nColumns, defaultIndent);
 				}
 			
 				@Override
@@ -262,7 +261,6 @@ class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
 			
 				@Override
 				protected void validateSettings(String changedKey, String oldValue, String newValue) {
-					super.validateSettings(changedKey, oldValue, newValue);
 				}
 			
 				protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {

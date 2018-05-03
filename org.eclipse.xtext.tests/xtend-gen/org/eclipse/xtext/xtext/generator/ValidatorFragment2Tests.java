@@ -424,9 +424,6 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     _builder_1.append("\t\t");
     _builder_1.append("addComboBox(FooConfigurableIssueCodesProvider.DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
-    _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
@@ -474,9 +471,6 @@ public class ValidatorFragment2Tests extends AbstractGeneratorFragmentTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("protected void validateSettings(String changedKey, String oldValue, String newValue) {");
-    _builder_1.newLine();
-    _builder_1.append("\t\t");
-    _builder_1.append("super.validateSettings(changedKey, oldValue, newValue);");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");

@@ -554,9 +554,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append(_configurableIssueCodesProviderClass, "\t\t");
           _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
-          _builder.newLine();
+          {
+            boolean _inheritsXbase_1 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+            if (_inheritsXbase_1) {
+              _builder.append("\t\t");
+              _builder.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -619,9 +624,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append("\t");
           _builder.append("protected void validateSettings(String changedKey, String oldValue, String newValue) {");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("super.validateSettings(changedKey, oldValue, newValue);");
-          _builder.newLine();
+          {
+            boolean _inheritsXbase_2 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+            if (_inheritsXbase_2) {
+              _builder.append("\t\t");
+              _builder.append("super.validateSettings(changedKey, oldValue, newValue);");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();

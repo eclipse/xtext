@@ -262,7 +262,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				@Override
 				protected void fillSettingsPage(«typeRef("org.eclipse.swt.widgets.Composite")» composite, int nColumns, int defaultIndent) {
 					addComboBox(«getConfigurableIssueCodesProviderClass».DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
-					super.fillSettingsPage(composite, nColumns, defaultIndent);
+					«IF language.grammar.inheritsXbase»
+						super.fillSettingsPage(composite, nColumns, defaultIndent);
+					«ENDIF»
 				}
 			
 				@Override
@@ -281,7 +283,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			
 				@Override
 				protected void validateSettings(String changedKey, String oldValue, String newValue) {
-					super.validateSettings(changedKey, oldValue, newValue);
+					«IF language.grammar.inheritsXbase»
+						super.validateSettings(changedKey, oldValue, newValue);
+					«ENDIF»
 				}
 			
 				protected «typeRef('org.eclipse.swt.widgets.Combo')» addComboBox(String prefKey, String label, Composite parent, int indent) {
