@@ -1069,18 +1069,21 @@
             <enablement>
                <with variable="selection">
                   <count value="1"/>
-               	  <iterate>
-               	     <and>
-               	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
+                  <iterate>
+                     <and>
+                       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
                        <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
-	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
-			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
-			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
-			                <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
-			             </adapt>
-		               </adapt>
-		             </and>
-		          </iterate>
+                         <adapt type="org.eclipse.jdt.core.IJavaElement">
+                            <test property="org.eclipse.jdt.core.isInJavaProject"/>
+                            <or>
+                              <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+                              <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.jupiter.api.Test"/>
+                            </or>
+                            <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+                         </adapt>
+                       </adapt>
+                     </and>
+                  </iterate>
                </with>
             </enablement>
          </contextualLaunch>
