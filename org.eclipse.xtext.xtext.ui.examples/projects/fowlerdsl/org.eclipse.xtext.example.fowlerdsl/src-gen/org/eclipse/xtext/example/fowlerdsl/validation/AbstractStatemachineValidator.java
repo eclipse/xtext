@@ -16,5 +16,4 @@ public abstract class AbstractStatemachineValidator extends AbstractDeclarativeV
 		result.add(org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.eINSTANCE);
 		return result;
 	}
-	
 }
