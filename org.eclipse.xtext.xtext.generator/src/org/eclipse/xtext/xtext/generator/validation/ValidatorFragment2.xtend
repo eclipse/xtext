@@ -241,12 +241,16 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			public class «configurableIssueCodesProviderClass» extends «superConfigurableIssueCodesProviderClass» {
 				protected static final String ISSUE_CODE_PREFIX = "«grammar.runtimeBasePackage».";
 			
-				public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
+				«IF generateDeprecationValidation»
+					public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + "deprecatedModelPart";
+				«ENDIF»
 			
 				@Override
 				protected void initialize(«IAcceptor»<«PreferenceKey»> acceptor) {
 					super.initialize(acceptor);
-					acceptor.accept(create(DEPRECATED_MODEL_PART, «SeverityConverter».SEVERITY_WARNING));
+					«IF generateDeprecationValidation»
+						acceptor.accept(create(DEPRECATED_MODEL_PART, «SeverityConverter».SEVERITY_WARNING));
+					«ENDIF»
 				}
 			}
 		'''
@@ -261,7 +265,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			
 				@Override
 				protected void fillSettingsPage(«typeRef("org.eclipse.swt.widgets.Composite")» composite, int nColumns, int defaultIndent) {
-					addComboBox(«getConfigurableIssueCodesProviderClass».DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
+					«IF generateDeprecationValidation»
+						addComboBox(«getConfigurableIssueCodesProviderClass».DEPRECATED_MODEL_PART, "Deprecated Model Part", composite, defaultIndent);
+					«ENDIF»
 					«IF language.grammar.inheritsXbase»
 						super.fillSettingsPage(composite, nColumns, defaultIndent);
 					«ENDIF»
