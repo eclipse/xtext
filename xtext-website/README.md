@@ -3,15 +3,15 @@ How to Test the Website
 
 The website is generated with [Jekyll](http://jekyllrb.com).
 ```
-gem install jekyll
+gem install bundler jekyll jekyll-markdown-block
 ```
 To generate the website, run
 ```
-  jekyll build
+  jekyll build --unpublished
 ```
 You will find the result in the `_site` folder. You can test it locally with
 ```
-  jekyll serve
+  jekyll serve --unpublished
 ```
 which will start a [server](http://127.0.0.1:4000) displaying the site. The server also listens for file changes and
 automatically rebuilds the website.
