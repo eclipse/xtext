@@ -34,6 +34,7 @@ import org.eclipse.xtext.example.homeautomation.ui.labeling.RuleEngineDescriptio
 import org.eclipse.xtext.example.homeautomation.ui.labeling.RuleEngineLabelProvider;
 import org.eclipse.xtext.example.homeautomation.ui.outline.RuleEngineOutlineTreeProvider;
 import org.eclipse.xtext.example.homeautomation.ui.quickfix.RuleEngineQuickfixProvider;
+import org.eclipse.xtext.example.homeautomation.validation.RuleEngineValidatorConfigurationBlock;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
@@ -92,6 +93,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider;
 import org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler;
@@ -177,6 +179,11 @@ public abstract class AbstractRuleEngineUiModule extends DefaultXbaseUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
 		return IndentationAwareCompletionPrefixProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return RuleEngineValidatorConfigurationBlock.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
