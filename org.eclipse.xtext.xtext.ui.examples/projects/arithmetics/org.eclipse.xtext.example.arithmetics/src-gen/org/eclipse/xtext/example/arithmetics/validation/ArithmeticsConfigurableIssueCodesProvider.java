@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.preferences.PreferenceKey;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
-public abstract class AbstractArithmeticsValidator extends AbstractDeclarativeValidator {
-	
+@SuppressWarnings("restriction")
+public class ArithmeticsConfigurableIssueCodesProvider extends ConfigurableIssueCodesProvider {
+	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.example.arithmetics.";
+
+
 	@Override
-	protected List<EPackage> getEPackages() {
-		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.eINSTANCE);
-		return result;
+	protected void initialize(IAcceptor<PreferenceKey> acceptor) {
+		super.initialize(acceptor);
 	}
 }

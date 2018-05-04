@@ -249,6 +249,15 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="org.eclipse.xtext.example.arithmetics.Arithmetics"
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.eclipse.xtext.example.arithmetics.Arithmetics.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="org.eclipse.xtext.example.arithmetics.ui.keyword_Arithmetics"/>
+		</page>
+	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"

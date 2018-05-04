@@ -31,6 +31,7 @@ import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsDescriptionL
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.outline.ArithmeticsOutlineTreeProvider;
 import org.eclipse.xtext.example.arithmetics.ui.quickfix.ArithmeticsQuickfixProvider;
+import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidatorConfigurationBlock;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
@@ -80,6 +81,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 
 /**
  * Manual modifications go to {@link ArithmeticsUiModule}.
@@ -135,6 +137,11 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalArithmeticsLexer.class).toProvider(LexerProvider.create(InternalArithmeticsLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return ArithmeticsValidatorConfigurationBlock.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2

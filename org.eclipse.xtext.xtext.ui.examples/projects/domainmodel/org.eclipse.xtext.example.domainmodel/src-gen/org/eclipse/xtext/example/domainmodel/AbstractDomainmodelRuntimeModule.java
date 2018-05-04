@@ -19,6 +19,7 @@ import org.eclipse.xtext.example.domainmodel.scoping.DomainmodelScopeProvider;
 import org.eclipse.xtext.example.domainmodel.serializer.DomainmodelSemanticSequencer;
 import org.eclipse.xtext.example.domainmodel.serializer.DomainmodelSyntacticSequencer;
 import org.eclipse.xtext.example.domainmodel.services.DomainmodelGrammarAccess;
+import org.eclipse.xtext.example.domainmodel.validation.DomainmodelConfigurableIssueCodesProvider;
 import org.eclipse.xtext.example.domainmodel.validation.DomainmodelValidator;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
@@ -65,6 +66,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTyp
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
+import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 /**
  * Manual modifications go to {@link DomainmodelRuntimeModule}.
@@ -155,6 +157,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultXbaseRunti
 	@SingletonBinding(eager=true)
 	public Class<? extends DomainmodelValidator> bindDomainmodelValidator() {
 		return DomainmodelValidator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends XbaseConfigurableIssueCodes> bindXbaseConfigurableIssueCodes() {
+		return DomainmodelConfigurableIssueCodesProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
