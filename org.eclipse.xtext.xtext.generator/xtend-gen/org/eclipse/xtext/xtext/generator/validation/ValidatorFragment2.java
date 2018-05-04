@@ -480,9 +480,13 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append(".\";");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + \"deprecatedModelPart\";");
-          _builder.newLine();
+          {
+            if (ValidatorFragment2.this.generateDeprecationValidation) {
+              _builder.append("\t");
+              _builder.append("public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + \"deprecatedModelPart\";");
+              _builder.newLine();
+            }
+          }
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Override");
@@ -497,11 +501,15 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append("\t\t");
           _builder.append("super.initialize(acceptor);");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("acceptor.accept(create(DEPRECATED_MODEL_PART, ");
-          _builder.append(SeverityConverter.class, "\t\t");
-          _builder.append(".SEVERITY_WARNING));");
-          _builder.newLineIfNotEmpty();
+          {
+            if (ValidatorFragment2.this.generateDeprecationValidation) {
+              _builder.append("\t\t");
+              _builder.append("acceptor.accept(create(DEPRECATED_MODEL_PART, ");
+              _builder.append(SeverityConverter.class, "\t\t");
+              _builder.append(".SEVERITY_WARNING));");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -548,12 +556,16 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           _builder.append(_typeRef, "\t");
           _builder.append(" composite, int nColumns, int defaultIndent) {");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("addComboBox(");
-          TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
-          _builder.append(_configurableIssueCodesProviderClass, "\t\t");
-          _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
-          _builder.newLineIfNotEmpty();
+          {
+            if (ValidatorFragment2.this.generateDeprecationValidation) {
+              _builder.append("\t\t");
+              _builder.append("addComboBox(");
+              TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
+              _builder.append(_configurableIssueCodesProviderClass, "\t\t");
+              _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           {
             boolean _inheritsXbase_1 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
             if (_inheritsXbase_1) {
