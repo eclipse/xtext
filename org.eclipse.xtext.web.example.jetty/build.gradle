@@ -12,7 +12,7 @@ dependencies {
 	compile group: 'org.webjars', name: 'jquery', version: '2.2.4'
 	compile group: 'org.webjars', name: 'ace', version: '1.2.3'
 	compile group: 'org.webjars', name: 'codemirror', version: '5.13.2'
-	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.3.+'
+	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.4.+'
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
 
