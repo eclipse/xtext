@@ -33,7 +33,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   private final static String JQUERY_VERSION = "2.2.4";
   
-  private final static String JETTY_VERSION = "9.3.8.v20160314";
+  private final static String JETTY_VERSION = "9.4.9.v20180320";
   
   private final static String SLF4J_VERSION = "1.7.21";
   
@@ -253,8 +253,10 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       _builder.append("<artifactId>jetty-maven-plugin</artifactId>");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("<version>9.2.13.v20150730</version>");
-      _builder.newLine();
+      _builder.append("<version>");
+      _builder.append(WebProjectDescriptor.JETTY_VERSION, "\t\t\t");
+      _builder.append("</version>");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
       _builder.append("<configuration>");
       _builder.newLine();

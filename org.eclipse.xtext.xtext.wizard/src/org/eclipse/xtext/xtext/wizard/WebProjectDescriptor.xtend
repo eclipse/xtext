@@ -17,7 +17,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 	static val REQUIREJS_VERSION = '2.3.2'
 //	static val REQUIREJS_TEXT_VERSION = '2.0.15'
 	static val JQUERY_VERSION = '2.2.4'
-	static val JETTY_VERSION = '9.3.8.v20160314'
+	static val JETTY_VERSION = '9.4.9.v20180320'
 	static val SLF4J_VERSION = '1.7.21'
 	static val ACE_VERSION = '1.2.3'
 	
@@ -110,7 +110,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 						<plugin>
 							<groupId>org.eclipse.jetty</groupId>
 							<artifactId>jetty-maven-plugin</artifactId>
-							<version>9.2.13.v20150730</version>
+							<version>«JETTY_VERSION»</version>
 							<configuration>
 								<webAppSourceDirectory>«Outlet.WEBAPP.sourceFolder»</webAppSourceDirectory>
 							</configuration>
