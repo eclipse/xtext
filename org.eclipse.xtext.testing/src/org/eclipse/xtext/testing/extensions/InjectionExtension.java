@@ -15,7 +15,6 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.runners.model.TestClass;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ClassToInstanceMap;

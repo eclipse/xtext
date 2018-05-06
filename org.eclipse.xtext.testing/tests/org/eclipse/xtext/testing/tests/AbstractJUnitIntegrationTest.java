@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
-import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
