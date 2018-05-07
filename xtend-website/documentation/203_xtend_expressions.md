@@ -1131,7 +1131,7 @@ node Parent{
 
 |
 
-As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node *Leaf* which happens due to the first rule: Indentation is propagated to called templates.
+As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node *Leaf* which happens due to the first rule: Indentation is propagated to called templates.
 
 ---
 
