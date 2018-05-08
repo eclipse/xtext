@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.resourceloader;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,6 +30,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.archive.ArchiveURLConnection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -37,6 +39,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -87,6 +90,38 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 						// we will recover & load the resource in the main builder thread (that owns the project resource lock)
 						// (if we do try to load resources that are out of sync, we create a deadlock)
 						return null;
+					}
+				} else if (uri.isArchive()) {
+					String authority = uri.authority();
+					// we dont treat recursive/nested jars here cause Xtext does not support them.
+					if (authority != null && authority.startsWith("platform:/resource/")) {
+						class MyArchiveURLConnection extends ArchiveURLConnection {
+							public MyArchiveURLConnection(String url) {
+								super(url);
+							}
+							public String getNestedURI() {
+								try {
+									return getNestedURL();
+								} catch (IOException exception) {
+									return ""; //$NON-NLS-1$
+								}
+							}
+						}
+						MyArchiveURLConnection archiveURLConnection = new MyArchiveURLConnection(uri.toString());
+						String nestedURIString = archiveURLConnection.getNestedURI();
+						if (Strings.isNullOrEmpty(nestedURIString)) {
+							return null;
+						}
+						URI nestedURI = URI.createURI(nestedURIString);
+						if (nestedURI.isPlatformResource()) {
+							IFile file = root.getFile(new Path(nestedURI.toPlatformString(true)));
+							if (!file.isSynchronized(IResource.DEPTH_ZERO)) {
+								// don't bother trying to refresh it, this loading-thread doesn't own the project resource lock
+								// we will recover & load the resource in the main builder thread (that owns the project resource lock)
+								// (if we do try to load resources that are out of sync, we create a deadlock)
+								return null;
+							}
+						}
 					}
 				}
 			}
