@@ -27,20 +27,56 @@
 	<!--[if lt IE 9]>
 	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
 	<![endif]-->
-		
-	<script type="text/javascript">
-		var _gaq = _gaq || [];	
-	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
-		_gaq.push([ '_trackPageview' ]);
-		(function() {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-					: 'http://www')
-					+ '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
+
+	<!-- BEGIN Cookie Consent
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+	<script>
+	window.addEventListener("load", function(){
+	window.cookieconsent.initialise({
+		"palette": {
+		"popup": {
+		  "background": "#000"
+		},
+		"button": {
+		  "background": "#f1d600"
+		}
+		},
+		"theme": "edgeless",
+		"type": "opt-in",
+		onInitialise: function (status) {
+		  var type = this.options.type;
+		  var didConsent = this.hasConsented();
+		  if (type == 'opt-in' && didConsent) {
+		    // TODO: enable cookies
+		  }
+		  if (type == 'opt-out' && !didConsent) {
+		    // TODO: disable cookies
+		  }
+		},
+		onStatusChange: function(status, chosenBefore) {
+		  var type = this.options.type;
+		  var didConsent = this.hasConsented();
+		  if (type == 'opt-in' && didConsent) {
+		    // TODO: enable cookies
+		  }
+		  if (type == 'opt-out' && !didConsent) {
+		    // TODO: disable cookies
+		  }
+		}, 
+		onRevokeChoice: function() {
+		  var type = this.options.type;
+		  if (type == 'opt-in') {
+		    // TODO: disable cookies
+		  }
+		  if (type == 'opt-out') {
+		    // TODO: enable cookies
+		  }
+		},
+		"content": {
+		"href": "http://www.eclipse.org/legal/privacy.php"
+		}
+	})});
 	</script>
+	END Cookie Consent -->
 </head>
