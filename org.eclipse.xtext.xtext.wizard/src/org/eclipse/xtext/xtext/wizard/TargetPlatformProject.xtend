@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.wizard
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.JUnitVersion
 
 @FinalFieldsConstructor
 class TargetPlatformProject extends ProjectDescriptor {
@@ -76,6 +77,23 @@ class TargetPlatformProject extends ProjectDescriptor {
 		«ELSE»
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
 		«ENDIF»
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<unit id="com.google.gson" version="2.7.0.v20170129-0911"/>
+			<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
+			<unit id="org.junit" version="4.12.0.v201504281640"/>
+			«IF config.junitVersion == JUnitVersion.JUNIT_5»
+			<unit id="org.junit.jupiter.api" version="5.1.0.v20180327-1502"/>
+			<unit id="org.junit.jupiter.engine" version="5.1.0.v20180327-1502"/>
+			<unit id="org.junit.platform.commons" version="1.1.0.v20180327-1502"/>
+			<unit id="org.junit.platform.engine" version="1.1.0.v20180327-1502"/>
+			<unit id="org.junit.platform.launcher" version="1.1.0.v20180327-1502"/>
+			<unit id="org.junit.platform.runner" version="1.1.0.v20180327-1502"/>
+			<unit id="org.opentest4j" version="1.0.0.v20180327-1502"/>
+			«ENDIF»
+			<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+			<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
+			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository"/>
 		</location>
 		</locations>
 		</target>
