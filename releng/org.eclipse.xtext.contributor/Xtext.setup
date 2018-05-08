@@ -99,7 +99,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
+      value="http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"

@@ -34,7 +34,7 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
 	org.eclipse.xtext.sdk.feature.group lazy
 }
 
-location "http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/" {
+location "http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository" {
 	org.objectweb.asm [6.1.1,6.2.0)
 	org.objectweb.asm.tree [6.1.1,6.2.0)
 	com.google.inject [3.0.0,4.0.0)
