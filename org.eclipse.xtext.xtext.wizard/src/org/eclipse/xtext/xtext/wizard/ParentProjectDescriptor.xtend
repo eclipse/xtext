@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.JavaVersion
 
 @FinalFieldsConstructor
 class ParentProjectDescriptor extends ProjectDescriptor {
@@ -69,7 +70,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	def String getTychoVersion() {
-		'1.2.0-SNAPSHOT'
+		'1.1.0'
 	}
 	
 	def private CharSequence loadResource(String resourcePath) {
@@ -215,7 +216,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						<tycho-version>«tychoVersion»</tycho-version>
+						«IF config.javaVersion == JavaVersion.JAVA10»
+							<!-- Java 10 support requires Tycho 1.2.0, which was not released at release date of Xtext 2.14.0. When not available downgrade to Java 9 and Tycho 1.1.0. -->
+							<tycho-version>1.2.0</tycho-version>
+						«ELSE»
+							<tycho-version>«tychoVersion»</tycho-version>
+						«ENDIF»
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
