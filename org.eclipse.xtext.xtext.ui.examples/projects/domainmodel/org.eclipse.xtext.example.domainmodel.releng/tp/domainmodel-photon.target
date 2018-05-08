@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Xtext Domainmodel Example - Eclipse Oxygen" sequenceNumber="1517350278">
+<target name="Xtext Domainmodel Example - Eclipse Oxygen" sequenceNumber="1525785232">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
@@ -20,12 +20,12 @@
       <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.objectweb.asm" version="6.0.0.v20170929-1901"/>
-      <unit id="org.objectweb.asm.tree" version="6.0.0.v20170929-1901"/>
+      <unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
+      <unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
       <unit id="com.google.inject" version="3.0.0.v201605172100"/>
       <unit id="org.apache.commons.cli" version="1.2.0.v201404270220"/>
       <unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
-      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository"/>
+      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.draw2d.feature.group" version="3.10.100.201606061308"/>
