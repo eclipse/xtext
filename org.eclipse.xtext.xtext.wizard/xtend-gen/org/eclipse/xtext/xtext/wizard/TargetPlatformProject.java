@@ -7,12 +7,14 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -145,6 +147,55 @@ public class TargetPlatformProject extends ProjectDescriptor {
         }
       }
     }
+    _builder.append("</location>");
+    _builder.newLine();
+    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<unit id=\"com.google.gson\" version=\"2.7.0.v20170129-0911\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
+    _builder.newLine();
+    {
+      JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+      boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
+      if (_equals) {
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.opentest4j\" version=\"1.0.0.v20180327-1502\"/>");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("<unit id=\"org.objectweb.asm\" version=\"6.1.1.v20180414-0329\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"6.1.1.v20180414-0329\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<repository location=\"http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository\"/>");
+    _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
     _builder.append("</locations>");
