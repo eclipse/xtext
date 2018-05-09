@@ -162,6 +162,11 @@
       value="http://download.eclipse.org/technology/swtbot/releases/latest"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      type="URI"
+      name="p2.cbi.analyzer"
+      value="http://download.eclipse.org/cbi/updates/analyzers/4.7"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       id="github.user.password"
       type="PASSWORD"
       name="github.user.password"
@@ -517,7 +522,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -596,7 +601,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -673,7 +678,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -772,6 +777,12 @@
             name="org.objectweb.asm.tree"
             versionRange="[6.1.1,6.2.0)"/>
         <requirement
+            name="org.eclipse.cbi.p2repo.analyzers"
+            optional="true"/>
+        <requirement
+            name="org.eclipse.cbi.p2repo.analyzers.common"
+            optional="true"/>
+        <requirement
             name="*"/>
         <repositoryList
             name="Photon">
@@ -802,7 +813,7 @@
           <repository
               url="${p2.webtools}"/>
           <repository
-              url="${p2.lsp4j}"/>
+              url="${p2.cbi.analyzer}"/>
         </repositoryList>
         <repositoryList
             name="Photon - Integration">
@@ -834,6 +845,8 @@
               url="${p2.webtools}"/>
           <repository
               url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
         </repositoryList>
         <repositoryList
             name="Oxygen">
@@ -863,6 +876,8 @@
               url="${p2.webtools}"/>
           <repository
               url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
         </repositoryList>
         <repositoryList
             name="Neon">
@@ -892,6 +907,8 @@
               url="${p2.webtools}"/>
           <repository
               url="${p2.lsp4j}"/>
+          <repository
+              url="http://download.eclipse.org/cbi/updates/analyzers/4.6"/>
         </repositoryList>
         <repositoryList
             name="Mars">
@@ -972,7 +989,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -984,7 +1001,7 @@
               project="xtext-umbrella"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -999,7 +1016,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -1086,7 +1103,7 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1165,7 +1182,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1228,7 +1245,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1323,7 +1340,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.26/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
