@@ -742,6 +742,27 @@
             name="org.junit"
             versionRange="[4.12.0,4.13.0)"/>
         <requirement
+            name="org.junit.jupiter.api"
+            versionRange="[5.1.0,5.2.0)"/>
+        <requirement
+            name="org.junit.jupiter.engine"
+            versionRange="[5.1.0,5.2.0)"/>
+        <requirement
+            name="org.junit.platform.commons"
+            versionRange="[1.1.0,1.2.0)"/>
+        <requirement
+            name="org.junit.platform.engine"
+            versionRange="[1.1.0,1.2.0)"/>
+        <requirement
+            name="org.junit.platform.launcher"
+            versionRange="[1.1.0,1.2.0)"/>
+        <requirement
+            name="org.junit.platform.runner"
+            versionRange="[1.1.0,1.2.0)"/>
+        <requirement
+            name="org.opentest4j"
+            versionRange="[1.0.0,1.1.0)"/>
+        <requirement
             name="org.eclipse.jdt.java8patch.feature.group"
             optional="true"/>
         <requirement
