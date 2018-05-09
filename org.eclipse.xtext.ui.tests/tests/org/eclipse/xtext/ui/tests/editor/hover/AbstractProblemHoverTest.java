@@ -105,12 +105,6 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 		info.setAttribute(IMarker.MESSAGE, "Bar");
 		
 		List<Annotation> annotations = hover.getAnnotations(1, -1);
-		assertEquals(3, annotations.size());
-		// The order of annotations must be stable
-		assertEquals("org.eclipse.xtext.ui.editor.info", annotations.get(0).getType());
-		assertEquals("org.eclipse.xtext.ui.editor.error", annotations.get(1).getType());
-		assertEquals("org.eclipse.xtext.ui.editor.warning", annotations.get(2).getType());
-		
 		List<Annotation> sorted = hover.sortBySeverity(annotations);
 		assertEquals(3, sorted.size());
 		// First errors, then warnings, then the rest
