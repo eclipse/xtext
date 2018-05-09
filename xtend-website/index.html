@@ -19,12 +19,22 @@ title: Modernized Java
 				<a href="documentation/index.html" class="btn_documentation"></a>
 			</div>
 			<div class="span4">
-				<video class="embedded-video" controls width="100%" poster="images/intro_thumb.png">
-					<source src="http://download.eclipse.org/modeling/tmf/xtext/downloads/media/xtend_intro_720p.mp4" type="video/mp4">
-					<source src="http://download.eclipse.org/modeling/tmf/xtext/downloads/media/xtend_intro_360p.mp4" type="video/mp4">
-  					<source src="http://download.eclipse.org/modeling/tmf/xtext/downloads/media/xtend_intro_270p.mp4" type="video/mp4">
+				<video id="video" class="embedded-video" controls width="100%" poster="images/intro_thumb.png">
+					<source src="media/Xtend_intro_720p.mp4" type="video/mp4">
+					
   					Your browser does not support the video tag.
 				</video>
+				<script type="text/javascript">
+				var base = "media/xtend_intro_";
+				if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+					base = location.protocol+"//eclipse.org/xtend/media/xtend_intro_";
+				}
+				var videoList = new Array(base+"720p.mp4",base+"360p.mp4",base+"270p.mp4");
+				var video = document.getElementById('video');
+				if (window.innerWidth <= 800) video.setAttribute("src", videoList[2]);
+				else if (window.innerWidth <= 1400) video.setAttribute("src", videoList[1]);
+				else video.setAttribute("src", videoList[0]);
+				</script>
 			</div>
 		</div>
 	</div>
