@@ -42,7 +42,7 @@ import static extension org.eclipse.xtext.xtext.generator.web.RegexpExtensions.*
  */
 class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	
-	public static enum Framework {
+	static enum Framework {
 		ORION, ACE, CODEMIRROR
 	}
 	
