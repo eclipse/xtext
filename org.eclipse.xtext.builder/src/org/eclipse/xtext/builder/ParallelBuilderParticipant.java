@@ -304,7 +304,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 					Set<IFile> derivedResources = getDerivedResources(delta, buildContext.outputConfigurations, buildContext.generatorMarkers);
 
 					FileSystemAccessQueue fileSystemAccessQueue = buildContext.fileSystemAccessQueue;
-					IFileSystemAccess2 fsa = getParalleFileSystemAccess(delta, buildContext, derivedResources, fileSystemAccessQueue, buildContext.synchronousFileSystemAccess);
+					IFileSystemAccess2 fsa = getParallelFileSystemAccess(delta, buildContext, derivedResources, fileSystemAccessQueue, buildContext.synchronousFileSystemAccess);
 					boolean generated = doGenerate(delta, buildContext, fsa);
 					
 					final Runnable derivedResourceCallback = getFlushAndCleanDerivedResourcesCallback(buildContext, derivedResources, generated);
@@ -382,8 +382,18 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 
 	/**
 	 * @since 2.9
+	 * @deprecated Use {@link #getParallelFileSystemAccess(Delta, org.eclipse.xtext.builder.IXtextBuilderParticipant.IBuildContext, Set, FileSystemAccessQueue, IFileSystemAccess2)}
 	 */
+	@Deprecated
 	protected IFileSystemAccess2 getParalleFileSystemAccess(final IResourceDescription.Delta delta,
+			final IBuildContext context, Set<IFile> derivedResources, FileSystemAccessQueue fileSystemAccessQueue, IFileSystemAccess2 delegate) {
+		return getParallelFileSystemAccess(delta, context, derivedResources, fileSystemAccessQueue, delegate);
+	}
+
+	/**
+	 * @since 2.14
+	 */
+	protected IFileSystemAccess2 getParallelFileSystemAccess(final IResourceDescription.Delta delta,
 			final IBuildContext context, Set<IFile> derivedResources, FileSystemAccessQueue fileSystemAccessQueue, IFileSystemAccess2 delegate) {
 		String currentSourceFolder = getCurrentSourceFolder(context, delta);
 		IFileCallback postProcessor = getPostProcessor(delta, context, derivedResources);
