@@ -38,11 +38,13 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
@@ -124,6 +126,11 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		}
 		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
+		}
+		if (descriptor instanceof TestProjectDescriptor) {
+			JUnitVersion junitVersion = descriptor.getConfig().getJunitVersion();
+			factory.addClasspathEntries(JavaCore.newContainerEntry(
+					new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER").append(Integer.toString(junitVersion.getVersion()))));
 		}
 	}
 
