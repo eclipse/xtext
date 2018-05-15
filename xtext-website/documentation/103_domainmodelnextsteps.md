@@ -6,7 +6,7 @@ part: Getting Started
 
 # {{page.title}} {#domainmodel-next-steps}
 
-After you have developed you first own DSL, the question arises how the behavior and the semantics of the language can be customized. Here you find a few mini-tutorials that illustrate common use cases when crafting an own DSL. These lessons are independent from each other. Each of them will be based on the language that was built in the first [domain model tutorial](102_domainmodelwalkthrough.html).
+After you have developed your first own DSL, the question arises how the behavior and the semantics of the language can be customized. Here you find a few mini-tutorials that illustrate common use cases when crafting an own DSL. These lessons are independent from each other. Each of them will be based on the language that was built in the first [domain model tutorial](102_domainmodelwalkthrough.html).
 
 ## Writing a Code Generator With Xtend {#tutorial-code-generation}
 
@@ -133,7 +133,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Now simply create a new source folder *src-gen* in the that project and see how the compiler will pick up your sample *Entities* and generate Java code for them. 
+The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Now simply create a new source folder *src-gen* in that project and see how the compiler will pick up your sample *Entities* and generate Java code for them. 
 
 ```xtend
 package org.example.domainmodel.generator

@@ -6,7 +6,7 @@ part: Reference Documentation
 
 # {{page.title}} {#ide-concepts}
 
-For the following part we will refer to the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
+For the following part we will refer to the [state machine example]({{site.src.xtext_eclipse}}/org.eclipse.xtext.xtext.ui.examples/projects/fowlerdsl/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
 
 ## Label Provider {#label-provider}
 
@@ -268,7 +268,7 @@ ${event:CrossReference('Transition.event')} =>
 
 ### Enumeration Template Variable Resolver
 
-The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the the *Enum* template variable. 
+The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java) resolves a template variable to [EEnumLiterals]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EEnumLiteral.java) which are assignment-compatible to the enumeration type declared as the first parameter of the *Enum* template variable. 
 
 The syntax is as follows: 
 
@@ -639,14 +639,14 @@ The second component you might want to customize is the [IDependentElementsCalcu
 
 One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) should be renamed, too. For these cases, you can register a [RenameParticipant]({{site.javadoc.eclipse-platform}}/org/eclipse/ltk/core/refactoring/participants/RenameParticipant.html) by the common means of LTK. If the target of the participant is Xtext based, you can use a [AbstractProcessorBasedRenameParticipant]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.java).
 
-## Project Wizard
+## Project Wizard {#projectwizard}
 
-The MWE2 workflow can generate a wizard that clients of your language can use to create model projects.  This will be generated in the `.ui` project, and the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
+The MWE2 workflow can generate a wizard that clients of your language can use to create model projects. This will be generated in the `.ui` project. If the language was generated before the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
 
 This must be explicitly specified in the MWE2 file in the `language` section as follows
 
 ```mwe2
-newProjectWizardForEclipse = {
+projectWizard = {
 	generate = true
 }
 ```
@@ -654,13 +654,89 @@ newProjectWizardForEclipse = {
 By default, the generated wizard will create a Plug-in project. If you want a General project you need to set the following property to false: `pluginProject=false`, for example
 
 ```mwe2
-newProjectWizardForEclipse = {
+projectWizard = {
 	generate = true
-	pluginProject=false
+	pluginProject = false
 }
 ```
 
-In the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file will also be generated, where you can specify the initial contents that your language wizard will generate.
+In the `src` folder of the `ui` project a `MyDslProjectTemplateProvider` Xtend file will be generated, where you can specify the templates the user can select from to generate new projects.
+
+The templates define two things. On the one hand they define how the template is presented to the user. A name, a description and the layout of the widgets the user gets presented to select values for the parameters of the template. On the other hand the content of the projects that the template generates is defined. The wizard is able to generate any number and kind of projects with any number and kind of files as content.
+
+The templates are contributed to the wizard by the extension point `org.eclipse.xtext.ui.projectTemplate`. An implementor of [IProjectTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IProjectTemplateProvider.java) is registered for the language it provides templates to. The method of this interface returns instances of [AbstractProjectTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractProjectTemplate.java). Each of these instances defines one template.
+
+To create a subclass of `AbstractProjectTemplate` it is advisable to annotate a class with the active annotation [ProjectTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/ProjectTemplate.xtend). With this annotation the name and description can be defined and will be made available to the user interface. Also the extension of `AbstractProjectTemplate` will be done for you.
+
+In a project template the method `generateProjects(IProjectGenerator)` needs to be overridden. The parameter instance offers a single `generate` method that takes an instance of [ProjectFactory]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/util/ProjectFactory.java). Using this class, or available subclasses, all kind of projects can be generated by the template. The following illustrates a simple example to generate a plugin project with a template:
+
+```xtend
+generator.generate(new PluginProjectFactory => [
+    projectName = projectInfo.projectName
+    location = projectInfo.locationPath
+    projectNatures += #[JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID]
+    builderIds += JavaCore.BUILDER_ID
+    folders += "src"
+    addFile('''src/Model.mydsl''', '''
+        Hello World!
+    ''')
+])
+```
+
+The `AbstractProjectTemplate` offers methods to create check boxes, text fields and combo boxes. These will be made available to the user in the wizard to configure the selected template. The values inserted by the user can then be used to configure the templates. In the following example a check box is used to control if a file is generated or not.
+
+```xtend
+@ProjectTemplate(label="Test", icon="project_template.png", description="<p><b>Test</b></p><p>This is a test project.</p>")
+final class TestProject {
+    val generateHello = check("Generate Hello", true)
+
+    override generateProjects(IProjectGenerator generator) {
+        if (generateHello.value) {
+            generator.generate(new PluginProjectFactory => [
+                projectName = projectInfo.projectName
+                location = projectInfo.locationPath
+                projectNatures += #[JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID]
+                builderIds += JavaCore.BUILDER_ID
+                folders += "src"
+                addFile('''src/Model.mydsl''', '''
+                    Hello World!
+                ''')
+            ])
+        }
+    }
+}
+```
+
+For more elaborate templates it is also possible to group parameters together, enable/disable parameters, have parameter values be changed in response of the change of a different parameter and add validations to the wizard if the selected parameters are correct. This can be done by implementing the provided methods `updateVariables` and `validate`. 
+
+## File Wizard
+
+Similar to the [Project Wizard](#projectwizard)  it is possible to generate a wizard for file generaten with the MWE2 workflow. The wizard will be generated in the `.ui` project. If the language was generated before the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
+
+This must be explicitly specified in the MWE2 file in the `language` section as follows
+
+```mwe2
+fileWizard = {
+	generate = true
+}
+```
+
+The API for the file wizard is very similar to the one of the project wizard. The templates are defined with the same widgets/parameters but instead of generating whole projects one or many files are generated. To add new template providers there is the extension point `org.eclipse.xtext.ui.projectTemplate` to register a [IFileTemplateProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/IFileTemplateProvider.java). To create instances of [AbstractFileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/AbstractFileTemplate.xtend) one should use the active annotation [FileTemplate]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/wizard/template/FileTemplate.xtend).
+
+An simple example template might look like this:
+
+```
+@FileTemplate(label="Hello World", icon="file_template.png", description="Create a hello world for MyDsl.")
+final class HelloWorldFile {
+    val helloName = combo("Hello Name:", #["Xtext", "World", "Foo", "Bar"], "The name to say 'Hello' to")
+
+    override generateFiles(IFileGenerator generator) {
+        generator.generate('''«folder»/«name».mydsl''', '''
+            Hello «helloName»!
+        ''')
+    }
+}
+```
 
 ## Code Mining
 
@@ -676,7 +752,7 @@ To enable code mining, the `org.eclipse.xtext.xtext.generator.ui.codemining.Code
 fragment = org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment {}
 ```
 
-With execution of the generator a stub class `<LanuageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
+With execution of the generator a stub class `<LanguageName>CodeMiningProvider` is created in the `.codemining` sub-package of the UI plugin. Furthermore the provider is registered to the `org.eclipse.ui.workbench.texteditor.codeMiningProviders` extension point in `plugin.xml`.
 
 The following class `MyDslCodeMiningProvider` shows a simple example:
 

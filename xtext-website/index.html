@@ -2,7 +2,7 @@
 layout: default
 title: Language Engineering Made Easy!
 ---
-<a href="https://github.com/eclipse/xtext"><img style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+<a href="https://github.com/eclipse/xtext"><img style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
 <!--Container-->
 <div id="header_wrapper">
   <div class="container image-slider">
@@ -12,7 +12,7 @@ title: Language Engineering Made Easy!
       </h2>
       <p>Xtext is a framework for development of programming languages
         and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure,
-        including <b>parser</b>, <b>linker</b>, <b>typechecker</b>, <b>compiler</b> as well as editing support for <b>Eclipse</b>, <b>IntelliJ IDEA</b> and your favorite <b>web browser</b>.
+        including <b>parser</b>, <b>linker</b>, <b>typechecker</b>, <b>compiler</b> as well as editing support for <b>Eclipse</b>, <b>any editor that supports the Language Server Protocol</b> and your favorite <b>web browser</b>.
         <br/><i><a href="#intro-quotes">Learn more...</a></i></p>
     </div>
   </div>
@@ -21,7 +21,7 @@ title: Language Engineering Made Easy!
       <div id="coverflow">
         <img class="intro-screenshot" style="display:none;" src="{{ site.baseurl }}/images/web_screenshot.png" alt="Xtext in Web Browser">
         <img class="intro-screenshot" src="{{ site.baseurl }}/images/eclipse_screenshot.png" alt="Xtext in Eclipse">
-        <img class="intro-screenshot" style="display:none;" src="{{ site.baseurl }}/images/idea_screenshot.png" alt="Xtext in IntelliJ IDEA">
+        <img class="intro-screenshot" style="display:none;" src="{{ site.baseurl }}/images/vscode_screenshot.png" alt="Xtext in Visual Studio Code via Language Server Protocol">
       </div>
     </div>
     <div class="cta-section">
@@ -62,7 +62,7 @@ title: Language Engineering Made Easy!
         <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
           Multi Platform</h4>
         <p>
-          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Eclipse, IntelliJ IDEA and various browser
+          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Eclipse, any editor that supports the Language Server Protocol and various browser
           editors are supported. Have a look at our <a href="#platform-comparison">platform comparison chart</a>.
         </p>
       </div>
@@ -180,7 +180,7 @@ title: Language Engineering Made Easy!
     <thead>
       <tr>
         <th></th>
-        <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_intellij_idea.png" alt="IntelliJ IDEA" style="width:100%;"></th>
+        <th style="width:25%;vertical-align: middle;">LSP</th>
         <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_eclipse.png" alt="Eclipse" style="width:100%;"></th>
         <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_browsers.png" alt="Web Browser" style="width:100%;"></th>
       </tr>
@@ -189,14 +189,14 @@ title: Language Engineering Made Easy!
       <tr class="has-popover"
       	data-content="Keywords, comments, strings, and other basic text elements are colored according to the syntax definition.">
         <td>Syntax Coloring</td>
-        <td><div class="supported"></div></td>
+        <td><div class="partly-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="supported"></div></td>
       </tr>
       <tr class="has-popover"
       	data-content="Text elements with special meaning in the context of your language can be highlighted with a custom text style, e.g. static fields in Java have an italic font.">
         <td>Semantic Coloring</td>
-        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="supported"></div></td>
       </tr>
@@ -252,14 +252,14 @@ title: Language Engineering Made Easy!
       <tr class="has-popover"
       	data-content="If your language interoperates with Java, the source files are considered during debug sessions in your IDE, i.e. you can set breakpoints and step through statements.">
         <td>Debugging</td>
-        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="not-supported"></div></td>
       </tr>
       <tr class="has-popover"
       	data-content="Disable the selected lines of code by inserting comments into each line, or reenable them by removing such comments.">
         <td>Toggle Comments</td>
-        <td><div class="supported"></div></td>
+        <td><div class="partly-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="not-supported"></div></td>
       </tr>
@@ -287,14 +287,14 @@ title: Language Engineering Made Easy!
       <tr class="has-popover"
       	data-content="If your language interoperates with Java, a tree view of all directly and indirectly called methods can be generated for the selected method.">
         <td>Call Hierarchy</td>
-        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="not-supported"></div></td>
       </tr>
       <tr class="has-popover"
       	data-content="If your language interoperates with Java, a tree view of all directly and indirectly inherited classes and interfaces can be generated for the selected type.">
         <td>Type Hierarchy</td>
-        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
         <td><div class="supported"></div></td>
         <td><div class="not-supported"></div></td>
       </tr>

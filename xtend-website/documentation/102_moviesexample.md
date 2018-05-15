@@ -157,7 +157,7 @@ Note that first sorting and then taking the last or first is slightly more expen
 
 The calls to `movie.year` as well as `movie.categories` in the previous example in fact access the corresponding [getter methods](203_xtend_expressions.html#property-access).
 
-### Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies? {#question3}
+### Question 3 : What Is The Sum Of All Votes Of The Top Two Movies? {#question3}
 
 ```xtend
 @Test def void sumOfVotesOfTop2() {

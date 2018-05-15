@@ -8,7 +8,7 @@ title: Download
 			<div class="span12">
 				<h2>Download Options</h2>
 				<p>
-		Xtend can be used in Eclipse, IntelliJ IDEA and Android Studio. You can use your favorite IDE's plug-in mechanism to add Xtend, using one of the URLs below.
+		Xtend can be used in Eclipse. You can use your IDE's plug-in mechanism to add Xtend, using one of the URLs below.
 				</p>
 				<p>
 				{% for post in site.categories.releasenotes limit:1 %}
@@ -18,8 +18,7 @@ title: Download
 			</div>
 		</div>
 		<div class="row">
-			<div class="span6">
-				<h2>Eclipse Users</h2>
+			<div class="span12">
 				<a href="https://www.eclipse.org/downloads/" target="_blank" class="has-popover btn btn-success btn-large pull_left">Download Eclipse</a>
 
 				<h3>Eclipse Updatesites</h3>
@@ -33,24 +32,6 @@ title: Download
 					<li>Insert one of the update site URLs below. This site aggregates all the necessary and optional components and dependencies of Xtend.</li>
 					<li>Select the <e>Xtend IDE</e> from the category <e>Xtend</e> and complete the wizard by clicking the <e>Next</e> button until you can click <e>Finish</e>.</li>
 					<li>After a quick download and a restart of Eclipse, Xtend is ready to use.</li>
-				</ul>
-			</div>
-			<div class="span6">
-				<h2>IntelliJ IDEA 15 / Android Studio 2.0 Users</h2>
-				<a href="http://www.jetbrains.com/idea/download/index.html" target="_blank" class="has-popover btn btn-success btn-large pull_left">Download IDEA</a>
-			    
-			    <h3>Plug-In Repositories</h3>
-				<p>Choose one of the following repository URLs for IDEA :</p>
-				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/idea/2.10.0/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
-				<!--p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p-->
-				<p><a href="https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Nightly Builds (right click &amp; copy)</a>
-				</p>
-				<h3>Installation Instructions</h3>
-				<ul>
-				 <li>Choose <e>Preferences</e> from the menu bar. </li>
-				 <li>Chosse the <e>plugin</e> section and add one of the URLs as a new repository.</li>
-				 <li>Install <e>org.eclipse.xtext</e> and <e>org.eclipse.xtend</e>.</li>
-				 <li>Follow the instructions given by IDEA.</li>
 				</ul>
 			</div>
 		</div>
@@ -71,7 +52,7 @@ If you already have a project, you need to add the Xtend library:
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.lib</artifactId>
-  <version>2.12.0</version>
+  <version>2.13.0</version>
 </dependency>
 ```
 
@@ -81,7 +62,7 @@ and the Xtend compiler plugin:
 <plugin>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>xtend-maven-plugin</artifactId>
-  <version>2.12.0</version>
+  <version>2.13.0</version>
   <executions>
     <execution>
       <goals>
@@ -103,13 +84,13 @@ Here is a minimal Gradle build script using Xtend:
 
 ```groovy
 plugins {
-  id "org.xtext.xtend" version "1.0.19"
+  id "org.xtext.xtend" version "1.0.21"
 }
 
 repositories.jcenter()
 
 dependencies {
-  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.12.0'
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.13.0'
 }
 ```
 

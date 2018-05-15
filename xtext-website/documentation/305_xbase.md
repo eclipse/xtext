@@ -1295,4 +1295,4 @@ html [
 
 ---
 
-**[Next Chapter: Integration with EMF](308_emf_integration.html)**
+**[Next Chapter: Typical Language Configurations](307_special_languages.html)**
