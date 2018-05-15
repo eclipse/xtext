@@ -267,6 +267,8 @@ language = XtextGeneratorLanguage {
     fragment = web.WebIntegrationFragment {
         framework = "Ace"
     }
+    fragment = ui.projectWizard.TemplateProjectWizardFragment {}
+    fragment = ui.fileWizard.TemplateFileWizardFragment {}
 }
 ```
 
