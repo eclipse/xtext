@@ -94,31 +94,6 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 			projectConfig.eclipsePlugin.manifest.exportedPackages.add(eclipsePluginActivator.packageName)
 		}
 		
-		#[
-			projectConfig.runtimeTest.manifest,
-			projectConfig.eclipsePluginTest.manifest
-		].filterNull.forEach [
-			if (junitVersion == JUnitVersion.JUNIT_4) {
-				importedPackages.addAll(
-					"org.junit;version=\"4.5.0\"",
-					"org.junit.runner;version=\"4.5.0\"",
-					"org.junit.runner.manipulation;version=\"4.5.0\"",
-					"org.junit.runner.notification;version=\"4.5.0\"",
-					"org.junit.runners;version=\"4.5.0\"",
-					"org.junit.runners.model;version=\"4.5.0\"",
-					"org.hamcrest.core"
-				)
-			}
-			if (junitVersion == JUnitVersion.JUNIT_5) {
-				requiredBundles.addAll(
-					"org.junit.jupiter.api;bundle-version=\"5.1.0\"",
-					"org.junit.jupiter.engine;bundle-version=\"5.1.0\"",
-					"org.junit.platform.commons;bundle-version=\"1.1.0\"",
-					"org.junit.platform.engine;bundle-version=\"1.1.0\"",
-					"org.opentest4j;bundle-version=\"1.0.0\""
-				)
-			}
-		]
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
 		if (isGenerateStub)
 			generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)

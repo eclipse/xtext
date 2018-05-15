@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.generator.junit;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import java.util.Collections;
-import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,7 +20,6 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -143,31 +140,6 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
     if (_tripleNotEquals_2) {
       this.getProjectConfig().getEclipsePlugin().getManifest().getExportedPackages().add(this._xtextGeneratorNaming.getEclipsePluginActivator().getPackageName());
     }
-    ManifestAccess _manifest_5 = this.getProjectConfig().getRuntimeTest().getManifest();
-    ManifestAccess _manifest_6 = this.getProjectConfig().getEclipsePluginTest().getManifest();
-    final Consumer<ManifestAccess> _function_2 = (ManifestAccess it) -> {
-      boolean _equals = Objects.equal(this.junitVersion, JUnitVersion.JUNIT_4);
-      if (_equals) {
-        CollectionExtensions.<String>addAll(it.getImportedPackages(), 
-          "org.junit;version=\"4.5.0\"", 
-          "org.junit.runner;version=\"4.5.0\"", 
-          "org.junit.runner.manipulation;version=\"4.5.0\"", 
-          "org.junit.runner.notification;version=\"4.5.0\"", 
-          "org.junit.runners;version=\"4.5.0\"", 
-          "org.junit.runners.model;version=\"4.5.0\"", 
-          "org.hamcrest.core");
-      }
-      boolean _equals_1 = Objects.equal(this.junitVersion, JUnitVersion.JUNIT_5);
-      if (_equals_1) {
-        CollectionExtensions.<String>addAll(it.getRequiredBundles(), 
-          "org.junit.jupiter.api;bundle-version=\"5.1.0\"", 
-          "org.junit.jupiter.engine;bundle-version=\"5.1.0\"", 
-          "org.junit.platform.commons;bundle-version=\"1.1.0\"", 
-          "org.junit.platform.engine;bundle-version=\"1.1.0\"", 
-          "org.opentest4j;bundle-version=\"1.0.0\"");
-      }
-    };
-    IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_5, _manifest_6))).forEach(_function_2);
     this.generateInjectorProvider().writeTo(this.getProjectConfig().getRuntimeTest().getSrcGen());
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
