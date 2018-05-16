@@ -381,16 +381,6 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 	}
 
 	/**
-	 * @since 2.9
-	 * @deprecated Use {@link #getParallelFileSystemAccess(Delta, org.eclipse.xtext.builder.IXtextBuilderParticipant.IBuildContext, Set, FileSystemAccessQueue, IFileSystemAccess2)}
-	 */
-	@Deprecated
-	protected IFileSystemAccess2 getParalleFileSystemAccess(final IResourceDescription.Delta delta,
-			final IBuildContext context, Set<IFile> derivedResources, FileSystemAccessQueue fileSystemAccessQueue, IFileSystemAccess2 delegate) {
-		return getParallelFileSystemAccess(delta, context, derivedResources, fileSystemAccessQueue, delegate);
-	}
-
-	/**
 	 * @since 2.14
 	 */
 	protected IFileSystemAccess2 getParallelFileSystemAccess(final IResourceDescription.Delta delta,
