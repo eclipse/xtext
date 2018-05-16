@@ -27,11 +27,6 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>domainmodel-oxygen.target</file>
-									<type>target</type>
-									<classifier>domainmodel-oxygen</classifier>
-								</artifact>
-								<artifact>
 									<file>domainmodel-photon.target</file>
 									<type>target</type>
 									<classifier>domainmodel-photon</classifier>
