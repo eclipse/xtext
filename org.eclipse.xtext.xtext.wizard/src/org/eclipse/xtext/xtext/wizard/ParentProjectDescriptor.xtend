@@ -358,6 +358,26 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									</filesets>
 								</configuration>
 							</plugin>
+							«IF !isEclipsePluginProject && config.junitVersion == JUnitVersion.JUNIT_5»
+								<!-- required to execute JUnit 5 tests -->
+								<plugin>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-surefire-plugin</artifactId>
+									<version>2.21.0</version>
+									<dependencies>
+										<dependency>
+											<groupId>org.junit.platform</groupId>
+											<artifactId>junit-platform-surefire-provider</artifactId>
+											<version>1.2.0</version>
+										</dependency>
+										<dependency>
+											<groupId>org.junit.jupiter</groupId>
+											<artifactId>junit-jupiter-engine</artifactId>
+											<version>5.1.0</version>
+										</dependency>
+									</dependencies>
+								</plugin>
+							«ENDIF»
 							<plugin>
 								<groupId>org.eclipse.m2e</groupId>
 								<artifactId>lifecycle-mapping</artifactId>
