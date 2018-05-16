@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
+import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -118,6 +119,26 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_1);
       deps.add(_doubleArrow_1);
+      boolean _needsGradleBuild = this.getConfig().needsGradleBuild();
+      if (_needsGradleBuild) {
+        ExternalDependency _externalDependency_2 = new ExternalDependency();
+        final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
+          ExternalDependency.P2Coordinates _p2 = it.getP2();
+          _p2.setBundleId("org.junit.jupiter.engine");
+          ExternalDependency.P2Coordinates _p2_1 = it.getP2();
+          _p2_1.setVersion("5.1.0");
+          ExternalDependency.MavenCoordinates _maven = it.getMaven();
+          _maven.setGroupId("org.junit.jupiter");
+          ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+          _maven_1.setArtifactId("junit-jupiter-engine");
+          ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+          _maven_2.setVersion("5.1.0");
+          ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+          _maven_3.setScope(Scope.TESTRUNTIME);
+        };
+        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_2);
+        deps.add(_doubleArrow_2);
+      }
     }
     return deps;
   }
@@ -542,6 +563,27 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   
   public boolean needsUiHarness() {
     return false;
+  }
+  
+  @Override
+  public GradleBuildFile buildGradle() {
+    GradleBuildFile _buildGradle = super.buildGradle();
+    final Procedure1<GradleBuildFile> _function = (GradleBuildFile it) -> {
+      JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+      boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
+      if (_equals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("test {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("useJUnitPlatform()");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        it.setAdditionalContent(_builder.toString());
+      }
+    };
+    return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
   }
   
   @Pure

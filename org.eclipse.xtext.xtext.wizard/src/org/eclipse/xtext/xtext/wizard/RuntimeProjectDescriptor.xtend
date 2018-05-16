@@ -303,6 +303,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					args += "-p"
 					args += "rootPath=/${projectDir}/.."
 				}
+				«IF testProject.inlined»
+					
+					«testProject.buildGradle.additionalContent»
+				«ENDIF»
 				
 				generateXtext.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)

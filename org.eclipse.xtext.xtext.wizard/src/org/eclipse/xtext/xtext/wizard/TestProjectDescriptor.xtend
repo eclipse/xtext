@@ -64,6 +64,16 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 				maven.version = "5.1.0"
 				maven.scope = Scope.TESTCOMPILE
 			]
+			if (config.needsGradleBuild) {
+				deps += new ExternalDependency()=>[
+					p2.bundleId = "org.junit.jupiter.engine"
+					p2.version = "5.1.0"
+					maven.groupId = "org.junit.jupiter"
+					maven.artifactId = "junit-jupiter-engine"
+					maven.version = "5.1.0"
+					maven.scope = Scope.TESTRUNTIME
+				]
+			}
 		}
 		return deps
 	}
@@ -188,4 +198,17 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 	def needsUiHarness() {
 		false
 	}
+	
+	override buildGradle() {
+		super.buildGradle => [
+			if (config.junitVersion == JUnitVersion.JUNIT_5) {
+				additionalContent = '''
+					test {
+						useJUnitPlatform()
+					}
+				'''
+			}
+		]
+	}
+	
 }
