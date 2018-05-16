@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -585,11 +586,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<!-- Tycho settings -->");
           _builder.newLine();
           {
-            JavaVersion _javaVersion_2 = this.getConfig().getJavaVersion();
-            boolean _equals = Objects.equal(_javaVersion_2, JavaVersion.JAVA10);
-            if (_equals) {
+            if ((Objects.equal(this.getConfig().getJavaVersion(), JavaVersion.JAVA10) || Objects.equal(this.getConfig().getJunitVersion(), JUnitVersion.JUNIT_5))) {
               _builder.append("\t");
-              _builder.append("<!-- Java 10 support requires Tycho 1.2.0, which was not released at release date of Xtext 2.14.0. When not available downgrade to Java 9 and Tycho 1.1.0. -->");
+              _builder.append("<!-- Java 10 and JUnit 5 support require Tycho 1.2.0, which was not released at release date of Xtext 2.14.0. When not available downgrade to Java 9, JUnit 4 and Tycho 1.1.0. -->");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("<tycho-version>1.2.0</tycho-version>");
@@ -634,8 +633,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<module>");
           {
             ProjectLayout _projectLayout = this.getConfig().getProjectLayout();
-            boolean _equals_1 = Objects.equal(_projectLayout, ProjectLayout.FLAT);
-            if (_equals_1) {
+            boolean _equals = Objects.equal(_projectLayout, ProjectLayout.FLAT);
+            if (_equals) {
               _builder.append("../");
             }
           }
