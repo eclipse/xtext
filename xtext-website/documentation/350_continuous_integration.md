@@ -24,9 +24,9 @@ If you have a look at the example, you'll find seven different projects of which
 
 Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on [Tycho](http://eclipse.org/tycho/), which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle's manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.
 
-### The parent project (my.mavenized.herolanguage.root)
+### The parent project (my.mavenized.herolanguage.parent)
 
-All of the projects are aggregated in a parent pom in the root directory. If you import the projects into eclipse the imported project is called `my.mavenized.herolanguage.root`. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
+All of the projects are aggregated in a parent pom in the root directory. If you import the projects into eclipse the imported project is called `my.mavenized.herolanguage.parent`. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
 
 *   The Xtend compiler plug-in will generate the Java source code for any Xtend files during the 'generate-sources' phase     
     
@@ -243,7 +243,7 @@ You may add multiple languages in the languages section. A language will use the
 Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the `pom.xml` using maven `<repositories>` section. The p2 repositories need to be marked with layout=p2.
 The second way is to use eclipse [target platform files](https://wiki.eclipse.org/Tycho/Target_Platform#Target_files). This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.
 
-To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project's repository or the huge [eclipse common]({{page.upsite.eclipse}}releases/oxygen/) composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.
+To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project's repository or the huge [eclipse common]({{page.upsite.eclipse}}releases/photon/) composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.
 
 | Xtext 													|				EMF  								| MWE2/MWE | Xpand   | Eclipse  | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
