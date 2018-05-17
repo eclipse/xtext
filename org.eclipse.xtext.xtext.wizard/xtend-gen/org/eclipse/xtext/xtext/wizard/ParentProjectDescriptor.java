@@ -1143,7 +1143,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        if (((!this.isEclipsePluginProject()) && Objects.equal(this.getConfig().getJunitVersion(), JUnitVersion.JUNIT_5))) {
+        if (((!this.getConfig().needsTychoBuild()) && Objects.equal(this.getConfig().getJunitVersion(), JUnitVersion.JUNIT_5))) {
           _builder.append("\t\t\t");
           _builder.append("<!-- required to execute JUnit 5 tests -->");
           _builder.newLine();
@@ -1620,7 +1620,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
-          _builder.append("<version>${tychoVersion}</version>");
+          _builder.append("<version>${tycho-version}</version>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
@@ -1633,6 +1633,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t\t");
           _builder.append("\t\t");
           _builder.append("<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<failIfNoTests>false</failIfNoTests>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<useUIHarness>false</useUIHarness>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
