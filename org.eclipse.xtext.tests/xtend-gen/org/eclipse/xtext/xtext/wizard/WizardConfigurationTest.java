@@ -464,17 +464,7 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
-    final Function1<TestProjectDescriptor, Boolean> _function = (TestProjectDescriptor it) -> {
-      return Boolean.valueOf(it.isEclipsePluginProject());
-    };
-    final Function1<TestProjectDescriptor, PomFile> _function_1 = (TestProjectDescriptor it) -> {
-      return it.pom();
-    };
-    final Iterable<PomFile> poms = IterableExtensions.<TestProjectDescriptor, PomFile>map(IterableExtensions.<TestProjectDescriptor>filter(Iterables.<TestProjectDescriptor>filter(this.allJavaProjects(), TestProjectDescriptor.class), _function), _function_1);
-    final Consumer<PomFile> _function_2 = (PomFile it) -> {
-      Assert.assertTrue(it.getContent().contains("failIfNoTests"));
-    };
-    poms.forEach(_function_2);
+    Assert.assertTrue(this.config.getParentProject().pom().getContent().contains("failIfNoTests"));
   }
   
   @Test

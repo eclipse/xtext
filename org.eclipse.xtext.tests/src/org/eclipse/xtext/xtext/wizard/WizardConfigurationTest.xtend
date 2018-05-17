@@ -322,10 +322,7 @@ class WizardConfigurationTest {
 	def void tychoDoesNotFailOnMissingTests() {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		config.uiProject.enabled = true
-		val poms = allJavaProjects.filter(TestProjectDescriptor).filter[isEclipsePluginProject].map[pom]
-		poms.forEach[
-			assertTrue(content.contains("failIfNoTests"))
-		]
+		assertTrue(config.parentProject.pom.content.contains("failIfNoTests"));
 	}
 	
 	@Test
