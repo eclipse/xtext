@@ -107,7 +107,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         ExternalDependency.P2Coordinates _p2 = it.getP2();
         _p2.setBundleId("org.junit.jupiter.api");
         ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-        _p2_1.setVersion("5.1.0");
+        _p2_1.setVersion("[5.0.0,6.0.0)");
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
         _maven.setGroupId("org.junit.jupiter");
         ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
@@ -126,7 +126,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           ExternalDependency.P2Coordinates _p2 = it.getP2();
           _p2.setBundleId("org.junit.jupiter.engine");
           ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-          _p2_1.setVersion("5.1.0");
+          _p2_1.setVersion("[5.0.0,6.0.0)");
           ExternalDependency.MavenCoordinates _maven = it.getMaven();
           _maven.setGroupId("org.junit.jupiter");
           ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
