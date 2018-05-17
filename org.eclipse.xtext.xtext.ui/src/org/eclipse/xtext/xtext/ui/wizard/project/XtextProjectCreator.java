@@ -45,6 +45,7 @@ import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
@@ -127,11 +128,23 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
 		}
-		if (descriptor instanceof TestProjectDescriptor) {
+		if (requiresJUnitLibContainer(descriptor)) {
 			JUnitVersion junitVersion = descriptor.getConfig().getJunitVersion();
 			factory.addClasspathEntries(JavaCore.newContainerEntry(
 					new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER").append(Integer.toString(junitVersion.getVersion()))));
 		}
+	}
+	
+	private boolean requiresJUnitLibContainer (ProjectDescriptor descriptor) {
+		if (descriptor instanceof TestProjectDescriptor) {
+			return true;
+		} else if (descriptor instanceof TestedProjectDescriptor) {
+			TestedProjectDescriptor tpd = (TestedProjectDescriptor) descriptor;
+			if (tpd.getTestProject().isInlined()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private IProject createFeatureProject(ProjectDescriptor descriptor, SubMonitor monitor) {
