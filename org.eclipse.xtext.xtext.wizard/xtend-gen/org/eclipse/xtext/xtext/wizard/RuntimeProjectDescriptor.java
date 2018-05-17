@@ -670,16 +670,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
+      _builder.newLine();
       {
         boolean _isInlined = this.testProject.isInlined();
         if (_isInlined) {
-          _builder.newLine();
           String _additionalContent = this.testProject.buildGradle().getAdditionalContent();
           _builder.append(_additionalContent);
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLine();
       _builder.append("generateXtext.dependsOn(generateXtextLanguage)");
       _builder.newLine();
       _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");
