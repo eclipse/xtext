@@ -112,7 +112,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 	protected ISemanticRegion copyAndAppend(ISemanticRegion source) {
 		StringHiddenRegion hidden = (StringHiddenRegion) this.last;
 		EObject semanticElement = source.getSemanticElement();
-		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion());
+		AbstractEObjectRegion region = getOrCreateEObjectRegion(semanticElement, source.getEObjectRegion(), null);
 		String changedText = textChanges.get(source);
 		String newText = changedText != null ? changedText : source.getText();
 		int offset = result.append(newText);
@@ -168,16 +168,21 @@ public class StringBasedTextRegionAccessDiffAppender {
 		return result;
 	}
 
-	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original) {
+	protected AbstractEObjectRegion getOrCreateEObjectRegion(EObject eobj, IEObjectRegion original,
+			ITextRegionAccess access) {
 		AbstractEObjectRegion eobjRegion = result.regionForEObject(eobj);
 		if (eobjRegion == null) {
+			if (access == null) {
+				access = result.getOriginalTextRegionAccess();
+			}
 			if (original == null) {
-				original = result.getOriginalTextRegionAccess().regionForEObject(eobj);
+				original = access.regionForEObject(eobj);
 			}
 			if (original != null) {
 				eobjRegion = new StringEObjectRegion(result, original.getGrammarElement(), eobj);
 				result.add(eobjRegion);
-				AbstractEObjectRegion parent = getOrCreateEObjectRegion(eobj.eContainer(), null);
+				AbstractEObjectRegion parent = getOrCreateEObjectRegion(eobj.eContainer(), null,
+						original.getTextRegionAccess());
 				if (parent != null) {
 					parent.addChild(eobjRegion);
 				}
@@ -206,7 +211,7 @@ public class StringBasedTextRegionAccessDiffAppender {
 			EObject eobj = sem.getSemanticElement();
 			IHiddenRegion nextHiddenRegion = sem.getNextHiddenRegion();
 			while (eobj != null) {
-				AbstractEObjectRegion eobjRegion = getOrCreateEObjectRegion(eobj, null);
+				AbstractEObjectRegion eobjRegion = getOrCreateEObjectRegion(eobj, null, null);
 				if (eobjRegion.getNextHiddenRegion() != null) {
 					break;
 				}
