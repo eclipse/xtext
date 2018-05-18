@@ -111,7 +111,7 @@ The purpose of the [AbstractDeclarativeValidator]({{site.src.xtext_core}}/org.ec
 
 The Check annotation has a parameter that can be used to declare when a check should be run, *FAST* will be run whenever a file is modified, *NORMAL* checks will run when saving the file, and *EXPENSIVE* checks are run when explicitly validating the file via the menu option.
 
-All in all this is very similar to how JUnit 4 works. Here is an example written in Xtend:
+All in all this is very similar to how JUnit works. Here is an example written in Xtend:
 
 ```xtend
 class DomainmodelValidator extends AbstractDomainmodelValidator {
@@ -723,33 +723,56 @@ myXtextResource.save(#{XtextResource.OPTION_ENCODING -> "ISO-8859-1"})
 
 ## Unit Testing {#testing}
 
-Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates test projects for that purpose, which simplify the setup procedure for the basic language implementation as well as platform-specific integrations.
+Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates test projects for that purpose, which simplify the setup procedure for the basic language implementation as well as platform-specific integrations. It supports an option to either create your tests for JUnit 4 or JUnit 5. Depending on your choice your test layout will vary in some details.
 
 ### Creating a Simple Test Class
 
-The core of the test infrastructure is the [XtextRunner]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java) and the language specific [IInjectorProvider]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java). Both have to be provided by means of class annotations:
+The core of the test infrastructure for JUnit 4 is the [XtextRunner]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java) and the language specific [IInjectorProvider]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java). Both have to be provided by means of class annotations. Your test cases should be annotated with [org.junit.Test](https://github.com/junit-team/junit4/blob/master/src/main/java/org/junit/Test.java). A static import [org.junit.Assert](https://github.com/junit-team/junit4/blob/master/src/main/java/org/junit/Assert.java) makes your tests more readable.
 
 ```xtend
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.junit.runner.RunWith
+import org.junit.Test
+import static org.junit.Assert.*
 import org.example.domainmodel.DomainmodelInjectorProvider
 
 @InjectWith(DomainmodelInjectorProvider)
 @RunWith(XtextRunner)
 class ParserTest {
-    
+    @Test void simple() {
+        assertTrue(true)
+    }
 }
 ```
 
 This configuration will make sure that you can use dependency injection in your test class, and that the global EMF registries are properly populated before and cleaned up after each test.
 
-### Testing the Parser
-
-The class [ParseHelper]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java) allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of [Assert]({{site.javadoc.junit}}/org/junit/Assert.html) leads to concise and readable test cases.
+A test class for JUnit 5 looks quite similar. Instead of runners JUnit 5 has a notion of [Extensions](https://junit.org/junit5/docs/current/user-guide/#extensions). While there can only be one runner per test class for JUnit 4 there could be multiple extensions for JUnit 5. The replacement for the XtextRunner is the new [InjectionExtension]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/extensions/InjectionExtension.java). Still needed is the language specific [IInjectorProvider]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java). Instead of `org.junit.Test` you have to annotate your cases with [org.junit.jupiter.api.Test](https://github.com/junit-team/junit5/blob/master/junit-jupiter-api/src/main/java/org/junit/jupiter/api/Test.java) and import the methods from [org.junit.jupiter.api.Assertions](https://github.com/junit-team/junit5/blob/master/junit-jupiter-api/src/main/java/org/junit/jupiter/api/Assertions.java). A simple test class for JUnit 5 will then look like this:
 
 ```xtend
-import org.eclipse.xtext.junit4.util.ParseHelper
-import static org.junit.Assert.*
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.extensions.InjectionExtension
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.Test
+import static org.junit.jupiter.api.Assertions.*
+import org.example.domainmodel.DomainmodelInjectorProvider
 
+@InjectWith(DomainmodelInjectorProvider)
+@ExtendWith(InjectionExtension)
+class ParserTest {
+    @Test void simple() {
+        assertTrue(true)
+    }
+}
+```
+
+### Testing the Parser
+
+The class [ParseHelper]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java) allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards.
+
+```xtend
+import org.eclipse.xtext.testing.util.ParseHelper
 ...
 
 @Inject ParseHelper<Domainmodel> parser
@@ -800,7 +823,8 @@ class MyLanguageWithDependenciesInjectorProvider extends MyLanguageInjectorProvi
     }
 }
 
-@RunWith(XtextRunner)
+// @RunWith(XtextRunner) // JUnit 4
+@ExtendWith(InjectionExtension) // JUnit 5
 @InjectWith(MyLanguageWithDependenciesInjectorProvider)
 class YourTest {
     ...
