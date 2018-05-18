@@ -7,15 +7,6 @@
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
-<!-- End Google Tag Manager -->
 
 <h1 id="grammarLanguage">The Grammar Language</h1>
 
@@ -576,6 +567,20 @@ Fullname:
 </code></pre>
 
 <p>with the input of <code>element Foo</code> the resulting instance <em>Foo</em> will hold the enum value with the internal representation of <code>0</code> (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation. You can overcome this by importing a meta model where the enum is defined and omitting some of its literals in the grammar.</p>
+
+<h3 id="grammar-annotations">Grammar Annotations</h3>
+<p>Parser Rules can be annotated with several useful annotations. In the following sections there is an overview. Please keep in mind that those annotations will only work on Parser Rules. You’ll get an error if you try to use them on Terminal or Enum Rules.</p>
+
+<h4 id="override">Override</h4>
+<p>Sometimes you want to override an existing Parser Rule of a given super grammar to customize it. To do that, you have to create a rule with the same name. It’s clear for you that this is a customization, but for the reader of the grammar it’s not. To make that more explicit <code>@Override</code> marks a rule as being a customization of an already existing rule in a super grammar. You’ll get a warning if a rule is a customization and is not marked as Override and an error if it’s not an customization and therefore must not be marked as Override.</p>
+<h4 id="final">Final</h4>
+<p>Overriding Parser Rules is a common thing but if you want to make sure that nobody overrides a special rule the <code>@Final</code> annotation gives support for that.</p>
+<h4 id="deprecated">Deprecated</h4>
+<p>Language evolution is an important part of building serious DSLs. Adding something to a grammar is easy as long as the old instances of the grammar are still valid to the new grammar. It becomes hard if you want to remove something and you have to be very careful. Marking classes as deprecated is a good indicator for users to switch to the new API. With <code>@Deprecated</code> Xtext has support to mark Parser Rules to be deprecated. <br />
+This will generate validations and the possibility to change the severity through preferences. As a default users will get a warning when using these rules. Of course it’s up to you to decide what the severity should be - this opens the possibility to safely remove parts of the grammar by informing in advance with an warning and raise the severity f to error.</p>
+
+<h4 id="exported">Exported</h4>
+<p>As a default all elements that have a name are exposed through the index to be referenced from outside. As a start this might fit your needs, but soon or later you might run out of memory (big index) or you simply want to hide elements for the outside world. To do that you can write a custom version of the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java">IDefaultResourceDescriptionStrategy</a> or simply use the <code>@Exported</code> annotation. This will generate a custom strategy as soon as there is at least one <code>@Exported</code> annotation in your grammar.</p>
 
 <hr />
 
