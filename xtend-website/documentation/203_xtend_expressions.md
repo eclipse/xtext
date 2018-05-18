@@ -766,7 +766,7 @@ switch myString : someComputation() {
 Instead of or in addition to the case guard you can specify a *type guard*. The case only matches if the switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match. If the switch value is a field, parameter or variable, it is automatically casted to the given type within the predicate and the case body.
 
 ```xtend
-def length(Object x) {
+def length (Object x) {
   switch x {
     String case x.length > 0 : x.length // length is defined for String 
     List<?> : x.size    // size is defined for List
@@ -778,7 +778,7 @@ def length(Object x) {
 Handling multiple types in one case statement can be realized with a *multi-type guard* expression. By specifying an arbitrary number of types separated by a `|` multiple types can be processed by a single case statement. Within the case block, the intersection type is available for further processing.
 
 ```xtend
-def length(Object x) {
+def length (Object x) {
   switch x {
 	List<?> | Set<?> : x.size // size is defined for intersection type Collection
 	String case x.length > 0: x.length // length is defined for String
@@ -932,17 +932,18 @@ val name = try {
   }
 ```
 
-Handling multiple exceptions in a single catch block can be realized using a *multi-catch clause*. The *multi-catch clause* can handle an arbitrary number of exceptions separated by `|`. Within the catch block, the intersection exception type of the exceptions caught by the *multi-catch clause* is available for further processing.
+Handling multiple exceptions in a single catch block can be realized using a *multi-catch clause*. The *multi-catch clause* can handle an arbitrary number of exceptions separated by `|`. Within the catch block, the intersection exception type of the exceptions caught by the *multi-catch clause* is available for further processing. If handling one exception covers another exception handled in the *multi-catch clause* an error is raised. 
 
 ```xtend
-def readFile(String path){
-  try{
-    readFromPath(path)
-  }catch(FileNotFoundException |StreamCorruptedException it){
+def readFile (String path) {
+  try {
+    readFromPath (path)
+  } catch (FileNotFoundException | StreamCorruptedException it) {
     logException
   }
 }
 ```
+
 ## Synchronized {#xtend-expressions-synchronized}
 
 The synchonized expression does the same as it does in Java (see [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19)). The only difference is that in Xtend it is an expression and can therefore be used at more places.
