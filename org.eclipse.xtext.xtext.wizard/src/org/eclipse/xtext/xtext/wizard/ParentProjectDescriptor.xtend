@@ -358,7 +358,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									</filesets>
 								</configuration>
 							</plugin>
-							«IF !isEclipsePluginProject && config.junitVersion == JUnitVersion.JUNIT_5»
+							«IF !config.needsTychoBuild && config.junitVersion == JUnitVersion.JUNIT_5»
 								<!-- required to execute JUnit 5 tests -->
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
@@ -495,10 +495,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<plugin>
 									<groupId>org.eclipse.tycho</groupId>
 									<artifactId>tycho-surefire-plugin</artifactId>
-									<version>${tychoVersion}</version>
+									<version>${tycho-version}</version>
 									<configuration>
 										<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
 										<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>
+										<failIfNoTests>false</failIfNoTests>
+										<useUIHarness>false</useUIHarness>
 									</configuration>
 								</plugin>
 							«ENDIF»
