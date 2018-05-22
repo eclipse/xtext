@@ -116,12 +116,16 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		}
 	}
 
-	private void appendSemantic(AbstractElement element, String token) {
+	protected void acceptSemantic(EObject grammarElement, String token) {
+		appendSemantic(grammarElement, token);
+	}
+	
+	private void appendSemantic(EObject grammarElement, String token) {
 		if (token == null || token.length() == 0)
 			return;
 		AbstractEObjectRegion tokens = stack.peek();
 		int offset = regionAccess.append(token);
-		StringSemanticRegion semantic = createSemanticRegion(element, token, tokens, offset);
+		StringSemanticRegion semantic = doCreateSemanticRegion(grammarElement, token, tokens, offset);
 		last.setNext(semantic);
 		semantic.setLeadingHiddenRegion(last);
 		last = createHiddenRegion();
@@ -141,9 +145,18 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return new StringHiddenRegion(regionAccess);
 	}
 
-	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token,
+	protected StringSemanticRegion doCreateSemanticRegion(EObject element, String token,
 			AbstractEObjectRegion obj, int offset) {
 		return new StringSemanticRegion(regionAccess, obj, element, offset, token.length());
+	}
+
+	/**
+	 * @deprecated use {@link #doCreateSemanticRegion(EObject, String, AbstractEObjectRegion, int)} instead.
+	 */
+	@Deprecated
+	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token,
+			AbstractEObjectRegion obj, int offset) {
+		return doCreateSemanticRegion(element, token, obj, offset);
 	}
 
 	protected StringWhitespace createWhitespace(AbstractRule rule, String token, int offset) {
