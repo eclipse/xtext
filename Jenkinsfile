@@ -18,7 +18,7 @@ node {
 	}
 	
 	stage('Gradle Build') {
-		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true -PignoreTestFailures=true --refresh-dependencies --continue"
+		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true -PignoreTestFailures=true -PupstreamBranch=develop_2.15.0 --refresh-dependencies --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 	

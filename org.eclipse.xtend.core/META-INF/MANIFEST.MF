@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend.core;singleton:=true
-Bundle-Version: 2.14.0.qualifier
+Bundle-Version: 2.15.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -75,8 +75,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0",
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.15.0",
+ org.eclipse.xtend.lib;bundle-version="2.15.0",
  org.eclipse.xtext.smap,
  org.apache.ant;bundle-version="1.7.1";resolution:=optional;x-installation:=greedy,
  org.objectweb.asm;bundle-version="[6.1.1,6.2.0)";resolution:=optional,

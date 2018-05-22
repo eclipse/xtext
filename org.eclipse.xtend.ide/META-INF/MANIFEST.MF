@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.14.0.qualifier
+Bundle-Version: 2.15.0.qualifier
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtend.ide;singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -27,7 +27,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.jdt.debug.ui;bundle-version="3.5.2",
  org.eclipse.ui.editors;bundle-version="3.6.0",
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+ org.eclipse.xtext.xbase.lib;bundle-version="2.15.0"
 Import-Package: com.ibm.icu.text,
  org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
