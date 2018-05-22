@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -112,6 +113,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     document.<Object>internalModify(_function_2);
   }
   
+  @Ignore("https://github.com/eclipse/xtext-eclipse/issues/681")
   @Test
   public void testPriorityReadOnlyCancelsReaders() {
     try {

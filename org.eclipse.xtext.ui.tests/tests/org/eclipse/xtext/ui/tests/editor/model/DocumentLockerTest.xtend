@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -74,6 +75,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 		]
 	}
 	
+	@Ignore("https://github.com/eclipse/xtext-eclipse/issues/681")
 	@Test def void testPriorityReadOnlyCancelsReaders() {
 		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager, operationCanceledManager)
 		document.input = new XtextResource => [

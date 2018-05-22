@@ -7,9 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 /**
  * @author kosyakov - Initial contribution and API
  */
 public class FSSynchronizationTest extends AbstractFSSynchronizationTest {
+	
+	@Override
+	@Test
+	@Ignore("https://github.com/eclipse/xtext-eclipse/issues/681")
+	// TODO fix and delete me
+	public void testCleanUpDerivedResourcesWithCreateBetween() {
+		super.testCleanUpDerivedResourcesWithCreateBetween();
+	}
 
 }
