@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pure Xbase Tests
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.14.0.qualifier
+Bundle-Version: 2.15.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,
@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.builder,
  org.eclipse.jdt.core;bundle-version="3.6.0",
  org.objectweb.asm;bundle-version="[6.1.1,6.2.0)";resolution:=optional,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.15.0",
  org.eclipse.xtext.xbase.testing
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15",
