@@ -595,6 +595,20 @@ Element:
 
 with the input of `element Foo` the resulting instance *Foo* will hold the enum value with the internal representation of `0` (zero). When generating the EPackage from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation. You can overcome this by importing a meta model where the enum is defined and omitting some of its literals in the grammar.
 
+### Grammar Annotations {#grammar-annotations}
+Parser Rules can be annotated with several useful annotations. In the following sections there is an overview. Please keep in mind that those annotations will only work on Parser Rules. You'll get an error if you try to use them on Terminal or Enum Rules. 
+
+#### Override
+Sometimes you want to override an existing Parser Rule of a given super grammar to customize it. To do that, you have to create a rule with the same name. It's clear for you that this is a customization, but for the reader of the grammar it's not. To make that more explicit `@Override` marks a rule as being a customization of an already existing rule in a super grammar. You'll get a warning if a rule is a customization and is not marked as Override and an error if it's not an customization and therefore must not be marked as Override.
+#### Final
+Overriding Parser Rules is a common thing but if you want to make sure that nobody overrides a special rule the `@Final` annotation gives support for that. 
+#### Deprecated
+Language evolution is an important part of building serious DSLs. Adding something to a grammar is easy as long as the old instances of the grammar are still valid to the new grammar. It becomes hard if you want to remove something and you have to be very careful. Marking classes as deprecated is a good indicator for users to switch to the new API. With `@Deprecated` Xtext has support to mark Parser Rules to be deprecated. 
+This will generate validations and the possibility to change the severity through preferences. As a default users will get a warning when using these rules. Of course it's up to you to decide what the severity should be - this opens the possibility to safely remove parts of the grammar by informing in advance with an warning and raise the severity f to error.
+
+#### Exported
+As a default all elements that have a name are exposed through the index to be referenced from outside. As a start this might fit your needs, but soon or later you might run out of memory (big index) or you simply want to hide elements for the outside world. To do that you can write a custom version of the [IDefaultResourceDescriptionStrategy]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) or simply use the `@Exported` annotation. This will generate a custom strategy as soon as there is at least one `@Exported` annotation in your grammar. 
+
 ---
 
 ## Ecore Model Inference {#metamodel-inference}

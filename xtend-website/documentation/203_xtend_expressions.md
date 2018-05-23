@@ -766,7 +766,7 @@ switch myString : someComputation() {
 Instead of or in addition to the case guard you can specify a *type guard*. The case only matches if the switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match. If the switch value is a field, parameter or variable, it is automatically casted to the given type within the predicate and the case body.
 
 ```xtend
-def length(Object x) {
+def length (Object x) {
   switch x {
     String case x.length > 0 : x.length // length is defined for String 
     List<?> : x.size    // size is defined for List
@@ -775,7 +775,20 @@ def length(Object x) {
 }
 ```
 
+Handling multiple types in one case statement can be realized with a *multi-type guard* expression. By specifying an arbitrary number of types separated by a `|` multiple types can be processed by a single case statement. Within the case block, the intersection type is available for further processing.
+
+```xtend
+def length (Object x) {
+  switch x {
+	List<?> | Set<?> : x.size // size is defined for intersection type Collection
+	String case x.length > 0: x.length // length is defined for String
+	default: -1
+  }
+}
+```
+
 Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you might know from Java.
+
 
 ### Fall Through
 
@@ -917,6 +930,18 @@ val name = try {
   } catch (IOException e) {
     "unknown"
   }
+```
+
+Handling multiple exceptions in a single catch block can be realized using a *multi-catch clause*. The *multi-catch clause* can handle an arbitrary number of exceptions separated by `|`. Within the catch block, the intersection exception type of the exceptions caught by the *multi-catch clause* is available for further processing. If handling one exception covers another exception handled in the *multi-catch clause* an error is raised. 
+
+```xtend
+def readFile (String path) {
+  try {
+    readFromPath (path)
+  } catch (FileNotFoundException | StreamCorruptedException it) {
+    logException
+  }
+}
 ```
 
 ## Synchronized {#xtend-expressions-synchronized}
@@ -1131,7 +1156,7 @@ node Parent{
 
 |
 
-As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node *Leaf* which happens due to the first rule: Indentation is propagated to called templates.
+As in the previous example, there is no indentation on the root level for the same reason. The first nesting level has only one indentation level in the output. This is derived from the indentation of the `IF hasChildren` condition in the template which is nested in the node. The additional nesting of the recursive invocation `children.map[print]` is not visible in the output as it is relative the surrounding control structure. The line with `IF` and `ENDIF` contain only control structures thus they are skipped in the output. Note the additional indentation of the node *Leaf* which happens due to the first rule: Indentation is propagated to called templates.
 
 ---
 
