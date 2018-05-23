@@ -129,8 +129,9 @@ Build jobs for releases must be executed in proper order on the build server, i.
 2. xtext-umbrella
    * `export BRANCHNAME=<BRANCHNAME>`
    * `./gitAll reset --hard`. Make sure before that no relevant change gets lost.
-   * `./gitAll pull`.
-   * `./gitAll checkout -b $BRANCHNAME`.
+   * `./gitAll pull`
+   * `./gitAll checkout -b $BRANCHNAME`
+   * `./adjustPipelines.sh $BRANCHNAME`
    * Replace all occurrences of `job/master` according to the release branch name.
    * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`: Update the name of the zipped p2 repository according to the release version (`tofile` property).
 3. xtext-lib
@@ -201,20 +202,37 @@ Note that the Xtend compiler cannot be set to use snapshot versions from the beg
 1. xtext-lib
    * `gradle/versions.gradle`: Set `version` property to the next version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * Replace occurrences of the previous version in files:
+     * `MANIFEST.MF`
+     * `feature.xml`
+     * `category.xml`
    * `./gradlew generateP2Build`
 2. xtext-core
    * `gradle/versions.gradle`: Set `version` property to the next version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * Replace occurrences of the previous version in files:
+     * `MANIFEST.MF`
+     * `releng/pom.xml`
+     * `releng/p2/pom.xml`
+     * `releng/releng-target/pom.xml`
+     * `releng/p2/category.xml`
+   * `releng/releng-target/xtext-core.target.target`: Set p2 URL to latest Xtext release version
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 3. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the next version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in `MANIFEST.MF` and `feature.xml` files.
+   * Replace occurrences of the previous version in files:
+     * `MANIFEST.MF`
+     * `releng/pom.xml`
+     * `releng/p2/pom.xml`
+     * `releng/releng-target/pom.xml`
+     * `releng/p2/category.xml`
    * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
 4. xtext-eclipse
-   * Replace occurrences of the previous version in `MANIFEST.MF`, `feature.xml`, `pom.xml`, and `category.xml` files.
+   * Replace occurrences of the previous version in files:
+     * `MANIFEST.MF`
+     * `pom.xml`
+     * `releng/org.eclipse.xtext.p2-repository/category.xml`
    * `releng/org.eclipse.xtext.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
 5. xtext-idea
    * `gradle/versions.gradle`: Set `version` property to the next version.
@@ -223,13 +241,18 @@ Note that the Xtend compiler cannot be set to use snapshot versions from the beg
    * `gradle/versions.gradle`: Set `version` property to the next version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
 7. xtext-maven
-   * Replace all occurrences of the previous version with the next version.
+   * Replace occurrences of the previous version in files:
+     * `pom.xml`
 8. xtext-xtend
    * Replace all occurrences of the previous version with the next version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
    * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
 9. xtext-umbrella
-   * Replace all occurrences of the previous version with the next version.
+   * Replace occurrences of the previous version in files:
+     * `releng/org.eclipse.xtext.sdk.p2-repository/category.xml`
+     * `releng/org.eclipse.xtext.sdk.parent/pom.xml`
+     * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`
+     * `releng/org.eclipse.xtext.sdk.target/pom.xml`
 
 ### GitHub Milestones
 
