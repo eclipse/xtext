@@ -157,11 +157,11 @@ Build jobs for releases must be executed in proper order on the build server, i.
 8. xtext-web
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-7. xtext-maven
+9. xtext-maven
    * Replace all occurrences of the previous version with the release version.
    * `org.eclipse.xtext.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
    * `org.eclipse.xtext.maven.plugin/src/test/resources/it/generate/pom.xml`: Replace all occurrences of `job/master` (except `lsp4j/job/master`) according to the release branch name.
-8. xtext-xtend
+10. xtext-xtend
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version. Use a released version here.
    * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files
@@ -171,11 +171,11 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Replace all occurrences of `job/master` according to the release branch name.
    * `releng/org.eclipse.xtend.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
    * `releng/org.eclipse.xtend.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
-9. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
-10. Create release tags on all repositories. Name `v<version>` and commit message `release v<version>`.
+11. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
+12. Create release tags on all repositories. Name `v<version>` and commit message `release v<version>`.
    * `./gitAll -a v<version> -m "release v<version>"`   
    * `./gitAll -a $TAGNAME -m "release $TAGNAME"`
-11. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
+13. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
    * Search for _orgeclipsextext-NNNN_ and _orgeclipsextend-NNNN_ with status _open_
@@ -183,13 +183,16 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Wait until the checks have run successfully
    * Select both repositories again the perform the _Release_ toolbar action
    * It will take some hours until the artifacts are mirrored to Maven Central.
-12. (Should be done by promote script) Manually edit the composite repository
+14. (Should be done by promote script) Manually edit the composite repository
    * `/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/[milestones|releases]/[compositeArtifacts.xml|compositeContent.xml]`
-13. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+15. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
    * Edit `simrel.aggr` from [org.eclipse.simrel.build repository](https://git.eclipse.org/c/simrel/org.eclipse.simrel.build.git/)
    * Edit Contribution `Xtext, Xtend`
    * Change `location` property of the Mapped Repository to the release / milestone repository URL
    * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
+16. Publish websites
+   * Remove `published: false` from release post
+   * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published` 
 
 Check that everything was promoted correctly:
 1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
