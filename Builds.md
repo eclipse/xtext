@@ -128,6 +128,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 1. Make sure all repositories are on branch `master`.
 2. xtext-umbrella
    * `export BRANCHNAME=<BRANCHNAME>`
+   * `export TAGNAME=v<VERSION>`
    * `./gitAll reset --hard`. Make sure before that no relevant change gets lost.
    * `./gitAll pull`
    * `./gitAll checkout -b $BRANCHNAME`
@@ -172,6 +173,8 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `releng/org.eclipse.xtend.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
 9. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
 10. Create release tags on all repositories. Name `v<version>` and commit message `release v<version>`.
+   * `./gitAll -a v<version> -m "release v<version>"`   
+   * `./gitAll -a $TAGNAME -m "release $TAGNAME"`
 11. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
