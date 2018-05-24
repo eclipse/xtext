@@ -26,21 +26,21 @@ public class EObjectDiagnosticImpl extends AbstractDiagnostic {
 	
 	private EObject problematicObject;
 	private EStructuralFeature problematicFeature;
-	private int indexOfProblemanticValueInFeature = -1;
+	private int indexOfProblematicValueInFeature = -1;
 	private Severity severity;
 	private String code;
 	private String message;
 	private String[] data;
 	
 	public EObjectDiagnosticImpl(Severity severity, String problemCode, String message, EObject problematicObject,
-			EStructuralFeature problematicFeature, int indexOfProblemanticValueInFeature, String[] data) {
+			EStructuralFeature problematicFeature, int indexOfProblematicValueInFeature, String[] data) {
 		super();
 		this.severity = severity;
 		this.code = problemCode;
 		this.message = message;
 		this.problematicObject = problematicObject;
 		this.problematicFeature = problematicFeature;
-		this.indexOfProblemanticValueInFeature = indexOfProblemanticValueInFeature;
+		this.indexOfProblematicValueInFeature = indexOfProblematicValueInFeature;
 		this.data = data;
 	}
 
@@ -51,7 +51,7 @@ public class EObjectDiagnosticImpl extends AbstractDiagnostic {
 
 	@Override
 	protected INode getNode() {
-		return doGetNode(problematicObject, problematicFeature, indexOfProblemanticValueInFeature);
+		return doGetNode(problematicObject, problematicFeature, indexOfProblematicValueInFeature);
 	}
 	
 	protected INode doGetNode(EObject object, EStructuralFeature feature, int idx) {
