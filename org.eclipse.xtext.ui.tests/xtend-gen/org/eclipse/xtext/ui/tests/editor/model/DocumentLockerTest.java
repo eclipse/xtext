@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.model;
 import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.text.edits.TextEdit;
@@ -31,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -113,7 +113,6 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     document.<Object>internalModify(_function_2);
   }
   
-  @Ignore("https://github.com/eclipse/xtext-eclipse/issues/681")
   @Test
   public void testPriorityReadOnlyCancelsReaders() {
     try {
@@ -126,12 +125,12 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       };
       XtextResource _doubleArrow = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
       document.setInput(_doubleArrow);
-      final boolean[] check = new boolean[1];
+      final CountDownLatch check = new CountDownLatch(1);
       final Runnable _function_1 = () -> {
         document.<Object>readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
           @Override
           public Object exec(final XtextResource state, final CancelIndicator cancelIndicator) throws Exception {
-            check[0] = true;
+            check.countDown();
             final int wait = 4000;
             int i = 0;
             while ((!cancelIndicator.isCanceled())) {
@@ -149,9 +148,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       };
       final Thread thread = new Thread(_function_1);
       thread.start();
-      while ((!check[0])) {
-        Thread.sleep(1);
-      }
+      check.await();
       final IUnitOfWork<Object, XtextResource> _function_2 = (XtextResource it) -> {
         return null;
       };

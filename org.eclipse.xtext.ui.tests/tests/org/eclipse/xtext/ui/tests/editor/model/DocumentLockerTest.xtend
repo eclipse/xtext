@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.model
 
 import com.google.inject.Provider
 import java.util.List
+import java.util.concurrent.CountDownLatch
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer
@@ -20,7 +21,6 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -75,17 +75,16 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 		]
 	}
 	
-	@Ignore("https://github.com/eclipse/xtext-eclipse/issues/681")
 	@Test def void testPriorityReadOnlyCancelsReaders() {
 		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager, operationCanceledManager)
 		document.input = new XtextResource => [
 			new XtextResourceSet().resources += it
 		]
-		val boolean[] check = newBooleanArrayOfSize(1) 
+		val check = new CountDownLatch(1)
 		val thread = new Thread([
 			document.readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
 				override Object exec(XtextResource state, CancelIndicator cancelIndicator) throws Exception {
-					check.set(0,true)
+					check.countDown
 					val wait = 4000;
 					var i = 0;
 					while (!cancelIndicator.isCanceled) {
@@ -100,9 +99,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 			})
 		])
 		thread.start
-		while (!check.get(0)) {
-			Thread.sleep(1)
-		}
+		check.await
 		document.priorityReadOnly[
 			null
 		]
