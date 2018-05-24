@@ -6,6 +6,9 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>xtext-maven-plugin-it</artifactId>
 	<packaging>pom</packaging>
+	<properties>
+		<branch_url_segment>master</branch_url_segment>
+	</properties>
 	<repositories>
 		<repository>
 			<id>lsp4j-from-jenkins</id>
@@ -13,15 +16,15 @@
 		</repository>
 		<repository>
 			<id>xtext-lib-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-core-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>central snapshots</id>
@@ -45,15 +48,15 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-lib-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-core-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>central snapshots</id>
