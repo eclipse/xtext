@@ -7,12 +7,11 @@
  */
 package org.eclipse.xtext.tasks;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -39,10 +38,7 @@ public class DefaultTaskParser implements ITaskParser {
       if (_isEmpty) {
         return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
-      final Function<TaskTag, String> _function = (TaskTag it) -> {
-        return it.getName().toLowerCase();
-      };
-      final ImmutableMap<String, TaskTag> taskTagsByName = Maps.<String, TaskTag>uniqueIndex(taskTags, _function);
+      final Map<String, TaskTag> taskTagsByName = this.getTaskTagsByName(taskTags);
       final Matcher matcher = this.toPattern(taskTags).matcher(source);
       final ArrayList<Task> tasks = CollectionLiterals.<Task>newArrayList();
       int prevLine = 1;
@@ -50,7 +46,15 @@ public class DefaultTaskParser implements ITaskParser {
       while (matcher.find()) {
         {
           final Task task = new Task();
-          task.setTag(taskTagsByName.get(matcher.group(2).toLowerCase()));
+          final String matchedTag = matcher.group(2);
+          String _xifexpression = null;
+          boolean _isCaseSensitive = taskTags.isCaseSensitive();
+          if (_isCaseSensitive) {
+            _xifexpression = matchedTag;
+          } else {
+            _xifexpression = matchedTag.toLowerCase();
+          }
+          task.setTag(taskTagsByName.get(_xifexpression));
           task.setDescription(matcher.group(3));
           task.setOffset(matcher.start(2));
           int _countLineBreaks = Strings.countLineBreaks(source, prevOffset, task.getOffset());
@@ -64,6 +68,34 @@ public class DefaultTaskParser implements ITaskParser {
       _xblockexpression = tasks;
     }
     return _xblockexpression;
+  }
+  
+  protected Map<String, TaskTag> getTaskTagsByName(final TaskTags taskTags) {
+    final HashMap<String, TaskTag> taskTagsByName = new HashMap<String, TaskTag>();
+    for (final TaskTag tag : taskTags) {
+      {
+        String _xifexpression = null;
+        boolean _isCaseSensitive = taskTags.isCaseSensitive();
+        if (_isCaseSensitive) {
+          _xifexpression = tag.getName();
+        } else {
+          _xifexpression = tag.getName().toLowerCase();
+        }
+        final String name = _xifexpression;
+        final TaskTag oldTag = taskTagsByName.get(name);
+        if ((oldTag != null)) {
+          int _ordinal = tag.getPriority().ordinal();
+          int _ordinal_1 = oldTag.getPriority().ordinal();
+          boolean _lessThan = (_ordinal < _ordinal_1);
+          if (_lessThan) {
+            taskTagsByName.put(name, tag);
+          }
+        } else {
+          taskTagsByName.put(name, tag);
+        }
+      }
+    }
+    return taskTagsByName;
   }
   
   protected Pattern toPattern(final TaskTags taskTags) {

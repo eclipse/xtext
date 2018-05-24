@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource
  */
 class DefaultTaskTagProvider implements ITaskTagProvider {
 
-	override getTaskTags(Resource resouce) {
+	override getTaskTags(Resource resource) {
 		new TaskTags => [
 			caseSensitive = true
 			taskTags += #[

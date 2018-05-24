@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class DefaultTaskTagProvider implements ITaskTagProvider {
   @Override
-  public TaskTags getTaskTags(final Resource resouce) {
+  public TaskTags getTaskTags(final Resource resource) {
     TaskTags _taskTags = new TaskTags();
     final Procedure1<TaskTags> _function = (TaskTags it) -> {
       it.setCaseSensitive(true);
