@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
-import com.google.common.collect.Maps
+import java.util.HashMap
 import java.util.regex.Pattern
 import org.eclipse.xtext.util.Strings
+import java.util.Map
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -19,7 +20,9 @@ class DefaultTaskParser implements ITaskParser {
 
 	override parseTasks(String source, TaskTags taskTags) {
 		if (taskTags.empty) return #[]
-		val taskTagsByName = Maps.uniqueIndex(taskTags)[name.toLowerCase]
+
+		val taskTagsByName = getTaskTagsByName(taskTags)
+
 		val matcher = taskTags.toPattern.matcher(source)
 		val tasks = newArrayList
 		// keep track of the offset and line numbers to avoid unnecessary line counting from start
@@ -27,7 +30,8 @@ class DefaultTaskParser implements ITaskParser {
 		var prevOffset = 0;
 		while (matcher.find) {
 			val task = new Task()
-			task.tag = taskTagsByName.get(matcher.group(2).toLowerCase)
+			val matchedTag = matcher.group(2)
+			task.tag = taskTagsByName.get(if (taskTags.caseSensitive) matchedTag else matchedTag.toLowerCase)
 			task.description = matcher.group(3)
 			task.offset = matcher.start(2)
 			task.lineNumber = Strings.countLineBreaks(source, prevOffset, task.offset) + prevLine
@@ -37,7 +41,24 @@ class DefaultTaskParser implements ITaskParser {
 		}
 		tasks
 	}
-	
+
+	protected def Map<String, TaskTag> getTaskTagsByName(TaskTags taskTags) {
+		val taskTagsByName = new HashMap<String, TaskTag>
+		for (tag : taskTags) {
+			val name = if (taskTags.caseSensitive) tag.name else tag.name.toLowerCase
+			val oldTag = taskTagsByName.get(name)
+			if (oldTag !== null) {
+				// prioritize higher priority tags
+				if (tag.priority.ordinal < oldTag.priority.ordinal) {
+					taskTagsByName.put(name, tag)
+				}
+			} else {
+				taskTagsByName.put(name, tag)
+			}
+		}
+		return taskTagsByName
+	}
+
 	protected def toPattern(TaskTags taskTags) {
 		//this takes roughly 1µs per call, so we think its not worth caching patterns here
 		var flags = Pattern.MULTILINE

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.tasks;
 
+import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,11 +39,247 @@ public class DefaultTaskParserTest {
   
   private TaskTags definitions;
   
+  private final TaskTag TODO = DefaultTaskParserTest.createTaskTag("TODO", Priority.NORMAL);
+  
+  private final TaskTag todo = DefaultTaskParserTest.createTaskTag("todo", Priority.NORMAL);
+  
+  @Pure
+  private static TaskTag createTaskTag(final String tag, final Priority priority) {
+    TaskTag _taskTag = new TaskTag();
+    final Procedure1<TaskTag> _function = (TaskTag it) -> {
+      it.setName(tag);
+      it.setPriority(priority);
+    };
+    return ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
+  }
+  
   @Before
   public void setup() {
     DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
     this.parser = _defaultTaskParser;
     this.definitions = new DefaultTaskTagProvider().getTaskTags(null);
+  }
+  
+  @Test
+  public void testTasksWithDifferentCase() {
+    DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
+    this.parser = _defaultTaskParser;
+    TaskTags _taskTags = new TaskTags();
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(true);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(this.TODO, this.todo)));
+    };
+    TaskTags _doubleArrow = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
+    this.definitions = _doubleArrow;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* TODO uppercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* todo lowercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    Task _task = new Task();
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" uppercase match");
+      it.setLineNumber(2);
+      it.setOffset(6);
+    };
+    Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
+    Task _task_1 = new Task();
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      it.setTag(this.todo);
+      it.setDescription(" lowercase match");
+      it.setLineNumber(3);
+      it.setOffset(30);
+    };
+    Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_2);
+    this.assertContainsTasks(_builder, 
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow_1, _doubleArrow_2)));
+  }
+  
+  @Test
+  public void testTasksWithDifferentCaseCaseInsensitive() {
+    DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
+    this.parser = _defaultTaskParser;
+    TaskTags _taskTags = new TaskTags();
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(false);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(this.TODO, this.todo)));
+    };
+    TaskTags _doubleArrow = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
+    this.definitions = _doubleArrow;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* TODO uppercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* todo lowercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    Task _task = new Task();
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" uppercase match");
+      it.setLineNumber(2);
+      it.setOffset(6);
+    };
+    Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
+    Task _task_1 = new Task();
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" lowercase match");
+      it.setLineNumber(3);
+      it.setOffset(30);
+    };
+    Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_2);
+    this.assertContainsTasks(_builder, 
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow_1, _doubleArrow_2)));
+  }
+  
+  @Test
+  public void testTasksWithDifferentCasePriorityMergeIfHigher() {
+    DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
+    this.parser = _defaultTaskParser;
+    TaskTags _taskTags = new TaskTags();
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(false);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      TaskTag _createTaskTag = DefaultTaskParserTest.createTaskTag("todo", Priority.HIGH);
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(this.TODO, _createTaskTag)));
+    };
+    TaskTags _doubleArrow = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
+    this.definitions = _doubleArrow;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* TODO uppercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* todo lowercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    Task _task = new Task();
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      it.setTag(DefaultTaskParserTest.createTaskTag("todo", Priority.HIGH));
+      it.setDescription(" uppercase match");
+      it.setLineNumber(2);
+      it.setOffset(6);
+    };
+    Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
+    Task _task_1 = new Task();
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      it.setTag(DefaultTaskParserTest.createTaskTag("todo", Priority.HIGH));
+      it.setDescription(" lowercase match");
+      it.setLineNumber(3);
+      it.setOffset(30);
+    };
+    Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_2);
+    this.assertContainsTasks(_builder, 
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow_1, _doubleArrow_2)));
+  }
+  
+  @Test
+  public void testTasksWithDifferentCasePriorityNoMergeIfLower() {
+    DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
+    this.parser = _defaultTaskParser;
+    TaskTags _taskTags = new TaskTags();
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(false);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      TaskTag _createTaskTag = DefaultTaskParserTest.createTaskTag("todo", Priority.LOW);
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(this.TODO, _createTaskTag)));
+    };
+    TaskTags _doubleArrow = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
+    this.definitions = _doubleArrow;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* TODO uppercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* todo lowercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    Task _task = new Task();
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" uppercase match");
+      it.setLineNumber(2);
+      it.setOffset(6);
+    };
+    Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
+    Task _task_1 = new Task();
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" lowercase match");
+      it.setLineNumber(3);
+      it.setOffset(30);
+    };
+    Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_2);
+    this.assertContainsTasks(_builder, 
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow_1, _doubleArrow_2)));
+  }
+  
+  @Test
+  public void testTasksWithDifferentCasePriorityNoMergeIfSame() {
+    DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
+    this.parser = _defaultTaskParser;
+    TaskTags _taskTags = new TaskTags();
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(false);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(this.TODO, this.todo)));
+    };
+    TaskTags _doubleArrow = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
+    this.definitions = _doubleArrow;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* TODO uppercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* todo lowercase match");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    Task _task = new Task();
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" uppercase match");
+      it.setLineNumber(2);
+      it.setOffset(6);
+    };
+    Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task, _function_1);
+    Task _task_1 = new Task();
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      it.setTag(this.TODO);
+      it.setDescription(" lowercase match");
+      it.setLineNumber(3);
+      it.setOffset(30);
+    };
+    Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_2);
+    this.assertContainsTasks(_builder, 
+      Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList(_doubleArrow_1, _doubleArrow_2)));
   }
   
   @Test
@@ -51,21 +289,15 @@ public class DefaultTaskParserTest {
     _builder.append("/*");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* FixMe case insensitve match");
+    _builder.append("* FixMe case insensitive match");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
     Task _task = new Task();
     final Procedure1<Task> _function = (Task it) -> {
-      TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
-        it_1.setName("FIXME");
-        it_1.setPriority(Priority.HIGH);
-      };
-      TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
-      it.setTag(_doubleArrow);
-      it.setDescription(" case insensitve match");
+      it.setTag(DefaultTaskParserTest.createTaskTag("FIXME", Priority.HIGH));
+      it.setDescription(" case insensitive match");
       it.setLineNumber(2);
       it.setOffset(6);
     };
@@ -75,7 +307,7 @@ public class DefaultTaskParserTest {
   }
   
   @Test
-  public void testCaseSensitve() {
+  public void testCaseSensitive() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* TODO this is a task");
     _builder.newLine();
@@ -96,13 +328,7 @@ public class DefaultTaskParserTest {
     _builder.newLine();
     Task _task = new Task();
     final Procedure1<Task> _function = (Task it) -> {
-      TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
-        it_1.setName("TODO");
-        it_1.setPriority(Priority.NORMAL);
-      };
-      TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
-      it.setTag(_doubleArrow);
+      it.setTag(this.TODO);
       it.setDescription(" this is a task");
       it.setLineNumber(1);
       it.setOffset(3);
@@ -110,13 +336,7 @@ public class DefaultTaskParserTest {
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
     Task _task_1 = new Task();
     final Procedure1<Task> _function_1 = (Task it) -> {
-      TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function_2 = (TaskTag it_1) -> {
-        it_1.setName("FIXME");
-        it_1.setPriority(Priority.HIGH);
-      };
-      TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_2);
-      it.setTag(_doubleArrow_1);
+      it.setTag(DefaultTaskParserTest.createTaskTag("FIXME", Priority.HIGH));
       it.setDescription(" this cannot work");
       it.setLineNumber(2);
       it.setOffset(26);
@@ -124,13 +344,7 @@ public class DefaultTaskParserTest {
     Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
     Task _task_2 = new Task();
     final Procedure1<Task> _function_2 = (Task it) -> {
-      TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function_3 = (TaskTag it_1) -> {
-        it_1.setName("XXX");
-        it_1.setPriority(Priority.NORMAL);
-      };
-      TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_3);
-      it.setTag(_doubleArrow_2);
+      it.setTag(DefaultTaskParserTest.createTaskTag("XXX", Priority.NORMAL));
       it.setDescription(": god, this is bad");
       it.setLineNumber(3);
       it.setOffset(52);
@@ -138,13 +352,7 @@ public class DefaultTaskParserTest {
     Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_2, _function_2);
     Task _task_3 = new Task();
     final Procedure1<Task> _function_3 = (Task it) -> {
-      TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function_4 = (TaskTag it_1) -> {
-        it_1.setName("TODO");
-        it_1.setPriority(Priority.NORMAL);
-      };
-      TaskTag _doubleArrow_3 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_4);
-      it.setTag(_doubleArrow_3);
+      it.setTag(this.TODO);
       it.setDescription("");
       it.setLineNumber(4);
       it.setOffset(77);
