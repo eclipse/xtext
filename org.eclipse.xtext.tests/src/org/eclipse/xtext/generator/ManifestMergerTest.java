@@ -13,10 +13,10 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest.Attributes;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
