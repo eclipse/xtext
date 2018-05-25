@@ -2,10 +2,10 @@
 <feature
       id="org.eclipse.xtext.ui"
       label="%featureName"
-      version="2.14.0.qualifier"
+      version="2.15.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.14.0.qualifier">
+      license-feature-version="2.15.0.qualifier">
 
    <description>
       %description
