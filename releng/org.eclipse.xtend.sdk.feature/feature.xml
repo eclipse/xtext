@@ -26,12 +26,12 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.ui" version="2.14.0" match="equivalent"/>
-      <import feature="org.eclipse.xtext.xbase.lib" version="2.14.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib" version="2.14.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro" version="2.14.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.source" version="2.14.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.14.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="2.15.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.xbase.lib" version="2.15.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib" version="2.15.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro" version="2.15.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.source" version="2.15.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.15.0" match="equivalent"/>
       <import plugin="com.google.guava"/>
       <import plugin="org.apache.commons.lang"/>
    </requires>
