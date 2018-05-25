@@ -116,6 +116,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   @Test
   public void testPriorityReadOnlyCancelsReaders() {
     try {
+      Thread.currentThread().isInterrupted();
       DocumentTokenSource _createTokenSource = this.createTokenSource();
       final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
       XtextResource _xtextResource = new XtextResource();

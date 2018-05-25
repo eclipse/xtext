@@ -76,6 +76,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 	
 	@Test def void testPriorityReadOnlyCancelsReaders() {
+		Thread.currentThread.interrupted // prevent random test failures: https://github.com/junit-team/junit4/issues/1365
 		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager, operationCanceledManager)
 		document.input = new XtextResource => [
 			new XtextResourceSet().resources += it
