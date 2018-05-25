@@ -8,7 +8,7 @@ node {
 	}
 	
 	stage('Build') {
-		sh "./gradlew clean build createLocalMavenRepo -PuseJenkinsSnapshots=true -PignoreTestFailures=true -PupstreamBranch=$BRANCH_NAME --refresh-dependencies --continue"
+		sh "./gradlew clean build createLocalMavenRepo -PuseJenkinsSnapshots=true -PignoreTestFailures=true --refresh-dependencies --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 	
