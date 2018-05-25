@@ -30,11 +30,11 @@
 		</repository>
 		<repository>
 			<id>maven2</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/develop_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>maven3</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/develop_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
