@@ -4,7 +4,7 @@
 
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>xtext-extras.releng</artifactId>
-	<version>2.14.0-SNAPSHOT</version>
+	<version>2.15.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -30,11 +30,11 @@
 		</repository>
 		<repository>
 			<id>maven2</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>maven3</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
@@ -42,177 +42,177 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages.ide</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.tests</artifactId>
-			<version>2.14.0-SNAPSHOT</version>
+			<version>2.15.0-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 	</dependencies>
@@ -240,7 +240,7 @@
 						<artifact>
 							<groupId>org.eclipse.xtext</groupId>
 							<artifactId>xtext-extras.target</artifactId>
-							<version>2.14.0-SNAPSHOT</version>
+							<version>2.15.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>
