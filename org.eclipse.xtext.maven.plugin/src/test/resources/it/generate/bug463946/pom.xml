@@ -12,7 +12,7 @@
 		<artifactId>xtext-maven-plugin-it</artifactId>
 	</parent>
 	<properties>
-		<xtext-version>2.14.0-SNAPSHOT</xtext-version>
+		<xtext-version>2.15.0-SNAPSHOT</xtext-version>
 		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ecore-xtext-version>[1.1.1-SNAPSHOT,)</ecore-xtext-version>
