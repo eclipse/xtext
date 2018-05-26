@@ -12,7 +12,7 @@ repositories {
 }
 
 // The Xtend compiler version to use
-def bootstrapXtendVersion = '2.13.0'
+def bootstrapXtendVersion = '2.14.0'
 
 configurations {
 	xtendCompiler {
