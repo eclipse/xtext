@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.8"?>
-<target name="org.eclipse.xtext.core.target" sequenceNumber="0">
+<target name="org.eclipse.xtext.helios.target" sequenceNumber="0">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.13.0"/>
