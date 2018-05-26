@@ -1407,7 +1407,7 @@
             name="org.eclipse.buildship.feature.group"/>
         <requirement
             name="org.eclipse.xtext.xbase.lib.feature.group"
-            versionRange="2.13.0"/>
+            versionRange="2.14.0"/>
         <requirement
             name="org.eclipse.xtext.testing"/>
         <requirement
