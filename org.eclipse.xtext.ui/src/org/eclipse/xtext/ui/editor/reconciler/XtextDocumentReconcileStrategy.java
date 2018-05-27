@@ -213,14 +213,23 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		} catch(OperationCanceledException e) {
 			throw e;
 		} catch(RuntimeException e) {
-			String message = "Error post-processing resource with content";
-			IParseResult parseResult = resource.getParseResult();
-			if (parseResult != null && parseResult.getRootNode() != null) {
-				message = message + ":\n" + parseResult.getRootNode().getText();
-			}
+			String message = createPostParseErrorMessage(resource);
 			log.error(message, e);
 			resource.getCache().clear(resource);
 		}
 	}
-	
+
+	/**
+	 * Creates an error message containing the source code of the {@code resource}
+	 * 
+	 * @since 2.15
+	 */
+	protected String createPostParseErrorMessage(XtextResource resource) {
+		String message = "Error post-processing resource with content";
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult != null && parseResult.getRootNode() != null) {
+			message += ":\n" + parseResult.getRootNode().getText();
+		}
+		return message;
+	}
 }
