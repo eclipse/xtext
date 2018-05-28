@@ -15,6 +15,8 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.pde.core.plugin.IPluginModelBase;
+import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -146,13 +148,16 @@ public class AdvancedNewProjectPage extends WizardPage {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("4");
-            it_3.setSelection(true);
+            boolean _isJUnit5PluginAvailable = this.isJUnit5PluginAvailable();
+            boolean _not = (!_isJUnit5PluginAvailable);
+            it_3.setSelection(_not);
           };
           this.junitVersion4 = this.Radio(it_2, _function_10);
           final Procedure1<Button> _function_11 = (Button it_3) -> {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("5");
+            it_3.setSelection(this.isJUnit5PluginAvailable());
           };
           this.junitVersion5 = this.Radio(it_2, _function_11);
         };
@@ -661,5 +666,10 @@ public class AdvancedNewProjectPage extends WizardPage {
         throw new IllegalStateException();
       }
     }
+  }
+  
+  private boolean isJUnit5PluginAvailable() {
+    IPluginModelBase _findModel = PluginRegistry.findModel("org.junit.jupiter.engine");
+    return (_findModel != null);
   }
 }
