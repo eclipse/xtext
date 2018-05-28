@@ -317,9 +317,14 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
       IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
-      IResourcesSetupUtil.cleanBuild();
-      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
-      Assert.assertTrue(((List<String>)Conversions.doWrapArray(ouputDirectory.list())).contains("Lalala.txt"));
+      final boolean oldAutobuild = IResourcesSetupUtil.setAutobuild(false);
+      try {
+        IResourcesSetupUtil.cleanBuild();
+        Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
+        Assert.assertTrue(((List<String>)Conversions.doWrapArray(ouputDirectory.list())).contains("Lalala.txt"));
+      } finally {
+        IResourcesSetupUtil.setAutobuild(oldAutobuild);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -339,12 +344,17 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
       IResourcesSetupUtil.createFile(this.project.getFile(("src/Foo" + this.F_EXT)).getFullPath(), "object Foo");
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Assert.assertNotEquals(initialSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
-      Path _path = new Path("Lalala.txt");
-      this.createJavaIoFile(output.getFile(_path).getLocation());
-      final int expectedSize = (initialSize + 1);
-      IResourcesSetupUtil.cleanBuild();
-      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
-      Assert.assertTrue(((List<String>)Conversions.doWrapArray(outputDirectory.list())).contains("Lalala.txt"));
+      final boolean oldAutobuild = IResourcesSetupUtil.setAutobuild(false);
+      try {
+        Path _path = new Path("Lalala.txt");
+        this.createJavaIoFile(output.getFile(_path).getLocation());
+        final int expectedSize = (initialSize + 1);
+        IResourcesSetupUtil.cleanBuild();
+        Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+        Assert.assertTrue(((List<String>)Conversions.doWrapArray(outputDirectory.list())).contains("Lalala.txt"));
+      } finally {
+        IResourcesSetupUtil.setAutobuild(oldAutobuild);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -365,13 +375,18 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
-      Path _path = new Path("Foo.txt");
-      final IFile file = output.getFile(_path);
-      File _file = file.getLocation().toFile();
-      this.setContent(_file, "Lalala");
-      Assert.assertFalse(this.isSynchronized(file));
-      IResourcesSetupUtil.cleanBuild();
-      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+      final boolean oldAutobuild = IResourcesSetupUtil.setAutobuild(false);
+      try {
+        Path _path = new Path("Foo.txt");
+        final IFile file = output.getFile(_path);
+        File _file = file.getLocation().toFile();
+        this.setContent(_file, "Lalala");
+        Assert.assertFalse(this.isSynchronized(file));
+        IResourcesSetupUtil.cleanBuild();
+        Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+      } finally {
+        IResourcesSetupUtil.setAutobuild(oldAutobuild);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -392,12 +407,17 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
       IResourcesSetupUtil.reallyWaitForAutoBuild();
       Assert.assertNotEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
       Thread.sleep(1000);
-      Path _path = new Path("Foo.txt");
-      final IFile file = output.getFile(_path);
-      Assert.assertTrue(file.getLocation().toFile().delete());
-      Assert.assertFalse(this.isSynchronized(file));
-      IResourcesSetupUtil.cleanBuild();
-      Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+      final boolean oldAutobuild = IResourcesSetupUtil.setAutobuild(false);
+      try {
+        Path _path = new Path("Foo.txt");
+        final IFile file = output.getFile(_path);
+        Assert.assertTrue(file.getLocation().toFile().delete());
+        Assert.assertFalse(this.isSynchronized(file));
+        IResourcesSetupUtil.cleanBuild();
+        Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
+      } finally {
+        IResourcesSetupUtil.setAutobuild(oldAutobuild);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
