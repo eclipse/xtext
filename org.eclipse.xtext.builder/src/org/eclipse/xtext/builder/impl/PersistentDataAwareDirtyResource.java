@@ -45,14 +45,4 @@ public class PersistentDataAwareDirtyResource extends DocumentBasedDirtyResource
 	public IResourceDescriptions getResourceDescriptions() {
 		return resourceDescriptions;
 	}
-
-	@Deprecated // use setResourceDescriptions
-	public void setResourceDesriptions(IResourceDescriptions resourceDescriptions) {
-		setResourceDescriptions(resourceDescriptions);
-	}
-
-	@Deprecated // use getResourceDescriptions
-	public IResourceDescriptions getResourceDesriptions() {
-		return getResourceDescriptions();
-	}
 }
