@@ -26,11 +26,11 @@ public class PersistentDataAwareDirtyResource extends DocumentBasedDirtyResource
 	
 	@Inject
 	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
-	private IResourceDescriptions resourceDesriptions;
+	private IResourceDescriptions resourceDescriptions;
 	
 	@Override
 	protected void initiallyProcessResource(XtextResource resource) {
-		IResourceDescription description = resourceDesriptions.getResourceDescription(resource.getURI());
+		IResourceDescription description = resourceDescriptions.getResourceDescription(resource.getURI());
 		if (description != null) {
 			copyState(description);
 		} else {
@@ -38,11 +38,11 @@ public class PersistentDataAwareDirtyResource extends DocumentBasedDirtyResource
 		}
 	}
 
-	public void setResourceDesriptions(IResourceDescriptions resourceDesriptions) {
-		this.resourceDesriptions = resourceDesriptions;
+	public void setResourceDescriptions(IResourceDescriptions resourceDescriptions) {
+		this.resourceDescriptions = resourceDescriptions;
 	}
 
-	public IResourceDescriptions getResourceDesriptions() {
-		return resourceDesriptions;
+	public IResourceDescriptions getResourceDescriptions() {
+		return resourceDescriptions;
 	}
 }
