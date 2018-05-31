@@ -38,6 +38,10 @@ Workflow {
 			name = "org.eclipse.xtext.example.fowlerdsl.Statemachine"
 			fileExtensions = "statemachine"
 
+			formatter = {
+				generateStub = true
+			}
+
 			serializer = {
 				generateStub = false
 			}
