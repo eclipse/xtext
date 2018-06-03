@@ -13,6 +13,9 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
  */
 public class TypeConformanceComputationArgument {
 
+	public static final TypeConformanceComputationArgument RAW = new TypeConformanceComputationArgument(true, false, true, true, false, true);
+	public static final TypeConformanceComputationArgument DEFAULT = new TypeConformanceComputationArgument();
+	
 	protected final boolean rawType;
 	protected final boolean asTypeArgument;
 	protected final boolean allowPrimitiveConversion;

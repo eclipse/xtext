@@ -502,8 +502,7 @@ public abstract class LightweightTypeReference {
      * the given {@code reference}.
      */
 	public boolean isAssignableFrom(LightweightTypeReference reference) {
-		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument();
-		return isAssignableFrom(reference, argument);
+		return isAssignableFrom(reference, TypeConformanceComputationArgument.DEFAULT);
 	}
 	
 	public boolean isAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {

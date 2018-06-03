@@ -192,7 +192,7 @@ public class BoundTypeArgumentMerger {
 			if (VarianceInfo.OUT.equals(singleArgument.getActualVariance()) && singleArgument.getActualVariance().equals(singleArgument.getDeclaredVariance())) {
 				LightweightTypeReference singleReference = singleArgument.getTypeReference();
 				if (singleReference.isResolved())
-					return candidate.isAssignableFrom(singleReference, new TypeConformanceComputationArgument());
+					return candidate.isAssignableFrom(singleReference, TypeConformanceComputationArgument.DEFAULT);
 			}
 		}
 		LightweightMergedBoundTypeArgument merged = merge(allArguments, candidate.getOwner());
@@ -211,8 +211,8 @@ public class BoundTypeArgumentMerger {
 				}
 				return false;
 			}
-			case OUT: return type.isAssignableFrom(candidate, new TypeConformanceComputationArgument());
-			case IN: return candidate.isAssignableFrom(type, new TypeConformanceComputationArgument());
+			case OUT: return type.isAssignableFrom(candidate, TypeConformanceComputationArgument.DEFAULT);
+			case IN: return candidate.isAssignableFrom(type, TypeConformanceComputationArgument.DEFAULT);
 			default: throw new IllegalStateException("Unknown variance info: " + variance);
 		}
 	}

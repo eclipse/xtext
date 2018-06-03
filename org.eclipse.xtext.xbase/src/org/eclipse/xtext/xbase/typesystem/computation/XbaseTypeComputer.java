@@ -744,7 +744,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				if (forExpressionType.isAny() || forExpressionType.isUnknown()) {
 					iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
 				} else if (forExpressionType.isResolved()) {
-					int assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, new TypeConformanceComputationArgument());
+					int assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, TypeConformanceComputationArgument.DEFAULT);
 					if ((assignability & ConformanceFlags.SUCCESS) != 0 && (assignability & ConformanceFlags.RAW_TYPE_CONVERSION) == 0)
 						iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 					else {
