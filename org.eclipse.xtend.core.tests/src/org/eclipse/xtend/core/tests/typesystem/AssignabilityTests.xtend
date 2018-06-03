@@ -957,7 +957,7 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 class AssignabilityTest extends CommonAssignabilityTest {
 	
 	override doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(false, false, true, true, false, true))
+		val result = lhs.internalIsAssignableFrom(rhs, TypeConformanceComputationArgument.DEFAULT)
 		assertTrue(result.bitwiseAnd(ConformanceFlags.RAW_TYPE) == 0)
 		return result.bitwiseAnd(ConformanceFlags.SUCCESS) != 0;
 	}
@@ -1321,7 +1321,7 @@ class AssignabilityTest extends CommonAssignabilityTest {
 class RawAssignabilityTest extends CommonAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
+		val result = lhs.internalIsAssignableFrom(rhs, TypeConformanceComputationArgument.RAW)
 		assertTrue(result.bitwiseAnd(ConformanceFlags.RAW_TYPE) != 0)
 		return result.bitwiseAnd(ConformanceFlags.SUCCESS) != 0;
 	}
