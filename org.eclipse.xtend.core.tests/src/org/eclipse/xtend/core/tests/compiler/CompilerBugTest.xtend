@@ -14,6 +14,198 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testIssue461_01() {
+		assertCompilesTo('''
+			package com.acme;
+			
+			class IdentifiedInterfaceWithAclBuilder {
+			
+				def void identifier(InstanceIdentifierBuilder<Object> b) {
+					b.child(Interface, null)
+				}
+				interface ChildOf<P> {}
+				interface ChoiceIn<P> {}
+				interface Identifiable<T> {}
+				interface Identifier<T extends Identifiable<?>> {}
+				interface InterfaceKey extends Identifier<Interface> {}
+				interface Interface extends ChildOf<Object>, Identifiable<InterfaceKey> {}
+				interface InstanceIdentifier<T> {}
+				interface InstanceIdentifierBuilder<T> {
+					def <C extends ChoiceIn<? super T>, N extends ChildOf<? super C>> InstanceIdentifierBuilder<N> child(
+						Class<C> caze, Class<N> container);
+					def <N extends Identifiable<K> & ChildOf<? super T>, K extends Identifier<N>> InstanceIdentifierBuilder<N> child(
+						Class<N> listItem, K listKey);
+				}
+			}
+		''','''
+			package com.acme;
+			
+			@SuppressWarnings("all")
+			public class IdentifiedInterfaceWithAclBuilder {
+			  public interface ChildOf<P extends Object> {
+			  }
+			  
+			  public interface ChoiceIn<P extends Object> {
+			  }
+			  
+			  public interface Identifiable<T extends Object> {
+			  }
+			  
+			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {
+			  }
+			  
+			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {
+			  }
+			  
+			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
+			  }
+			  
+			  public interface InstanceIdentifier<T extends Object> {
+			  }
+			  
+			  public interface InstanceIdentifierBuilder<T extends Object> {
+			    public abstract <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
+			    
+			    public abstract <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
+			  }
+			  
+			  public void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<Object> b) {
+			    b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIssue461_02() {
+		assertCompilesTo('''
+			package com.acme;
+			
+			class IdentifiedInterfaceWithAclBuilder {
+				def <X> void identifier(InstanceIdentifierBuilder<X> b) {
+					b.child(Interface, null)
+				}
+				interface ChildOf<P> {}
+				interface ChoiceIn<P> {}
+				interface Identifiable<T> {}
+				interface Identifier<T extends Identifiable<?>> {}
+				interface InterfaceKey extends Identifier<Interface> {}
+				interface Interface extends ChildOf<Object>, Identifiable<InterfaceKey> {}
+				interface InstanceIdentifier<T> {}
+				interface InstanceIdentifierBuilder<T> {
+					def <C extends ChoiceIn<? super T>, N extends ChildOf<? super C>> InstanceIdentifierBuilder<N> child(
+						Class<C> caze, Class<N> container);
+					def <N extends Identifiable<K> & ChildOf<? super T>, K extends Identifier<N>> InstanceIdentifierBuilder<N> child(
+						Class<N> listItem, K listKey);
+					def <C extends ChoiceIn<? super T>, K extends Identifier<N>, N extends Identifiable<K> & ChildOf<? super C>> InstanceIdentifierBuilder<N> child(
+						Class<C> caze, Class<N> listItem, K listKey);
+				}
+			}
+		''','''
+			package com.acme;
+			
+			@SuppressWarnings("all")
+			public class IdentifiedInterfaceWithAclBuilder {
+			  public interface ChildOf<P extends Object> {
+			  }
+			  
+			  public interface ChoiceIn<P extends Object> {
+			  }
+			  
+			  public interface Identifiable<T extends Object> {
+			  }
+			  
+			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<?>> {
+			  }
+			  
+			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface> {
+			  }
+			  
+			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
+			  }
+			  
+			  public interface InstanceIdentifier<T extends Object> {
+			  }
+			  
+			  public interface InstanceIdentifierBuilder<T extends Object> {
+			    public abstract <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
+			    
+			    public abstract <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
+			    
+			    public abstract <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
+			  }
+			  
+			  public <X extends Object> void identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {
+			    b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIssue461_03() {
+		assertCompilesTo('''
+			package com.acme;
+			
+			class IdentifiedInterfaceWithAclBuilder {
+				def <X> InstanceIdentifierBuilder<Interface> identifier(InstanceIdentifierBuilder<X> b) {
+					b.child(Interface, null)
+				}
+				interface ChildOf<P> {}
+				interface ChoiceIn<P> {}
+				interface Identifiable<T> {}
+				interface Identifier<T extends Identifiable<N>, N extends Identifier<T, N>> {}
+				interface InterfaceKey extends Identifier<Interface, InterfaceKey> {}
+				interface Interface extends ChildOf<Object>, Identifiable<InterfaceKey> {}
+				interface InstanceIdentifier<T> {}
+				interface InstanceIdentifierBuilder<T> {
+					def <C extends ChoiceIn<? super T>, N extends ChildOf<? super C>> InstanceIdentifierBuilder<N> child(
+						Class<C> caze, Class<N> container);
+					def <N extends Identifiable<K> & ChildOf<? super T>, K extends Identifier<N, K>> InstanceIdentifierBuilder<N> child(
+						Class<N> listItem, K listKey);
+					def <C extends ChoiceIn<? super T>, K extends Identifier<N, K>, N extends Identifiable<K> & ChildOf<? super C>> InstanceIdentifierBuilder<N> child(
+						Class<C> caze, Class<N> listItem, K listKey);
+				}
+			}
+		''','''
+			package com.acme;
+			
+			@SuppressWarnings("all")
+			public class IdentifiedInterfaceWithAclBuilder {
+			  public interface ChildOf<P extends Object> {
+			  }
+			  
+			  public interface ChoiceIn<P extends Object> {
+			  }
+			  
+			  public interface Identifiable<T extends Object> {
+			  }
+			  
+			  public interface Identifier<T extends IdentifiedInterfaceWithAclBuilder.Identifiable<N>, N extends IdentifiedInterfaceWithAclBuilder.Identifier<T, N>> {
+			  }
+			  
+			  public interface InterfaceKey extends IdentifiedInterfaceWithAclBuilder.Identifier<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
+			  }
+			  
+			  public interface Interface extends IdentifiedInterfaceWithAclBuilder.ChildOf<Object>, IdentifiedInterfaceWithAclBuilder.Identifiable<IdentifiedInterfaceWithAclBuilder.InterfaceKey> {
+			  }
+			  
+			  public interface InstanceIdentifier<T extends Object> {
+			  }
+			  
+			  public interface InstanceIdentifierBuilder<T extends Object> {
+			    public abstract <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, N extends IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> container);
+			    
+			    public abstract <N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<N> listItem, final K listKey);
+			    
+			    public abstract <C extends IdentifiedInterfaceWithAclBuilder.ChoiceIn<? super T>, K extends IdentifiedInterfaceWithAclBuilder.Identifier<N, K>, N extends IdentifiedInterfaceWithAclBuilder.Identifiable<K> & IdentifiedInterfaceWithAclBuilder.ChildOf<? super C>> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<N> child(final Class<C> caze, final Class<N> listItem, final K listKey);
+			  }
+			  
+			  public <X extends Object> IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<IdentifiedInterfaceWithAclBuilder.Interface> identifier(final IdentifiedInterfaceWithAclBuilder.InstanceIdentifierBuilder<X> b) {
+			    return b.<IdentifiedInterfaceWithAclBuilder.Interface, IdentifiedInterfaceWithAclBuilder.InterfaceKey>child(IdentifiedInterfaceWithAclBuilder.Interface.class, null);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testCompoundOperatorPrecedence() {
 		assertCompilesTo('''
 			import java.util.List
