@@ -91,7 +91,9 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 					if (source == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
 						wrapped = getStricterConstraint(typeParameter, wrapped);
 					}
-					typeParameter.acceptHint(wrapped, source, getOrigin(), getExpectedVariance(), getActualVariance());
+					if (wrapped != null) {
+						typeParameter.acceptHint(wrapped, source, getOrigin(), getExpectedVariance(), getActualVariance());	
+					}
 				}
 			};
 			collector.processPairedReferences(declared, actual);
