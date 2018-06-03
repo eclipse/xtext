@@ -174,7 +174,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 					result.setLowerBound(lowerBoundSubstitute);
 				}
 			} else {
-				result.setLowerBound(visited);
+				result.setLowerBound(visited.copyInto(result.getOwner()));
 			}
 		} 
 		for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
