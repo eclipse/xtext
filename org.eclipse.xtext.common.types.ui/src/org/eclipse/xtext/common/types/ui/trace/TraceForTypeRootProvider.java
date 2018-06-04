@@ -41,7 +41,6 @@ import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.internal.Nullable;
 
 import com.google.common.base.Charsets;
 import com.google.inject.Inject;
