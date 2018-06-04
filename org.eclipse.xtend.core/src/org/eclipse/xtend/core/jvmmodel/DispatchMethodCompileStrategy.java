@@ -94,8 +94,8 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 					laters.add(new Later() {
 						@Override
 						public void exec(ITreeAppendable appendable) {
-							if (caseParamType.isAssignableFrom(dispatchParamType, 
-									new TypeConformanceComputationArgument(true, false, true, true, false, false)) && !dispatchParamType.isPrimitive()) {
+							TypeConformanceComputationArgument rawNoSynonyms = new TypeConformanceComputationArgument(true, false, true, true, false, false);
+							if (caseParamType.isAssignableFrom(dispatchParamType, rawNoSynonyms) && !dispatchParamType.isPrimitive()) {
 								appendable.append(name).append(" != null");
 							} else {
 								appendable.append(name).append(" instanceof ");

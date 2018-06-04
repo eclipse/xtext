@@ -19,7 +19,7 @@ import org.junit.Test
 abstract class AssignabilityTest extends CommonAssignabilityTest {
 	
 	override doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(false, false, true, true, false, true))
+		val result = lhs.internalIsAssignableFrom(rhs, TypeConformanceComputationArgument.DEFAULT)
 		assertTrue(result.bitwiseAnd(ConformanceFlags.RAW_TYPE) == 0)
 		return result.bitwiseAnd(ConformanceFlags.SUCCESS) != 0;
 	}

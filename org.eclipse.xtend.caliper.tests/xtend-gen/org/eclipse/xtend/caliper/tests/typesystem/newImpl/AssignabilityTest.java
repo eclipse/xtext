@@ -22,8 +22,7 @@ import org.junit.Test;
 public abstract class AssignabilityTest extends CommonAssignabilityTest {
   @Override
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
-    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(false, false, true, true, false, true);
-    final int result = lhs.internalIsAssignableFrom(rhs, _typeConformanceComputationArgument);
+    final int result = lhs.internalIsAssignableFrom(rhs, TypeConformanceComputationArgument.DEFAULT);
     Assert.assertTrue(((result & ConformanceFlags.RAW_TYPE) == 0));
     return ((result & ConformanceFlags.SUCCESS) != 0);
   }
