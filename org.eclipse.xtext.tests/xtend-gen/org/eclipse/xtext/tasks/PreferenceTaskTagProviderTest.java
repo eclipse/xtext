@@ -13,7 +13,6 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.tasks.PreferenceTaskTagProvider;
 import org.eclipse.xtext.tasks.Priority;
-import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -66,7 +65,7 @@ public class PreferenceTaskTagProviderTest {
     int _size = tags.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      TaskAssert.assertExactMatch(tags.get((i).intValue()), ((TaskTag[])Conversions.unwrapArray(parsedTags, TaskTag.class))[(i).intValue()]);
+      Assert.assertEquals(tags.get((i).intValue()), ((Object[])Conversions.unwrapArray(parsedTags, Object.class))[(i).intValue()]);
     }
   }
 }

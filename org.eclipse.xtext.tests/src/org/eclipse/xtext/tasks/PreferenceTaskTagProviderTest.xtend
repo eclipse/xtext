@@ -10,7 +10,6 @@ package org.eclipse.xtext.tasks
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider
 import org.junit.Test
 
-import static org.eclipse.xtext.tasks.TaskAssert.*
 import static org.junit.Assert.*
 
 /**
@@ -51,7 +50,7 @@ class PreferenceTaskTagProviderTest {
 		assertEquals(false, parsedTags.caseSensitive)
 		assertEquals(tags.size, parsedTags.size)
 		for (i : 0 ..< tags.size) {
-			assertExactMatch(tags.get(i), parsedTags.get(i))
+			assertEquals(tags.get(i), parsedTags.get(i))
 		}
 	}
 }

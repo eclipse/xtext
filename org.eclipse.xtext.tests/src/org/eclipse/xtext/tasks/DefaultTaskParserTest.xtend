@@ -12,9 +12,8 @@ import org.eclipse.xtext.tests.LineDelimiters
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.tasks.TaskAssert.*
-import static org.junit.Assert.*
 import static org.eclipse.xtext.tasks.Priority.*
+import static org.junit.Assert.*
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -282,7 +281,7 @@ class DefaultTaskParserTest {
 		val actualTasks = parser.parseTasks(LineDelimiters.toUnix(source.toString), definitions)
 		assertEquals(expectedTasks.size, actualTasks.size)
 		for (i : 0 ..< expectedTasks.size) {
-			assertExactMatch(expectedTasks.get(i), actualTasks.get(i))
+			assertEquals(expectedTasks.get(i), actualTasks.get(i))
 		}
 	}
 }
