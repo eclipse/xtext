@@ -159,10 +159,9 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 				if (!recursive[0]) {
 					if (hint.isAssignableFrom(lightweightReference)) {
 						hint = lightweightReference;	
-					} else if (hint.isResolved() && !(lightweightReference.getType() instanceof JvmTypeParameter) && !lightweightReference.isAssignableFrom(hint, TypeConformanceComputationArgument.RAW)) {
+					} else if (hint.isResolved() && !lightweightReference.getRawTypeReference().isAssignableFrom(hint, TypeConformanceComputationArgument.RAW)) {
 						return null;
 					}
-					
 				}
 			}
 		}

@@ -632,13 +632,8 @@ public class RawTypeConformanceComputer {
 		if (leftHints.isEmpty() && (flags & UNBOUND_COMPUTATION_ADDS_HINTS) == 0) {
 			return flags; 
 		}
-		for(LightweightBoundTypeArgument leftHint: leftHints) {
-			if (leftHint.getSource() == BoundTypeArgumentSource.INFERRED_LATER && leftHint.getActualVariance() == VarianceInfo.INVARIANT) {
-				LightweightTypeReference leftHintReference = leftHint.getTypeReference();
-				if (leftHintReference.getUniqueIdentifier().equals(right.getUniqueIdentifier())) {
-					return flags | SUCCESS;
-				}
-			}
+		if (isConstrainedRecursiveHintCheck(leftHints, right)) {
+			return flags | SUCCESS;
 		}
 		int result = isConformantToConstraints(left, right, leftHints, 
 				flags & ~(AS_TYPE_ARGUMENT | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION));
@@ -655,6 +650,25 @@ public class RawTypeConformanceComputer {
 			}
 		}
 		return flags;
+	}
+	
+	private boolean isConstrainedRecursiveHintCheck(List<LightweightBoundTypeArgument> leftHints, LightweightTypeReference right) {
+		boolean hasConstraints = false;
+		for(LightweightBoundTypeArgument leftHint: leftHints) {
+			if (leftHint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+				hasConstraints = true;
+			}
+			if (leftHint.getSource() == BoundTypeArgumentSource.INFERRED_LATER && leftHint.getActualVariance() == VarianceInfo.INVARIANT) {
+				if (!hasConstraints) {
+					return false;
+				}
+				LightweightTypeReference leftHintReference = leftHint.getTypeReference();
+				if (leftHintReference.getUniqueIdentifier().equals(right.getUniqueIdentifier())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	protected int isConformantToConstraints(
