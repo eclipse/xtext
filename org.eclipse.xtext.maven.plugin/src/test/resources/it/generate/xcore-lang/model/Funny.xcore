@@ -1,5 +1,4 @@
-@GenModel(modelDirectory="./src-gen",
-    publicationLocation="/xcore-lang/target/classes/model/Funny.ecore")
+@GenModel(modelDirectory="./src-gen")
 
 package org.eclipse.xcoretest
 
