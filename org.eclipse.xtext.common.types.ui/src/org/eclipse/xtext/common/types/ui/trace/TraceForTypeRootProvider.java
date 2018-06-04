@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.ui.generator.trace.IEclipseTrace;
 import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.internal.Nullable;
 
 import com.google.common.base.Charsets;
 import com.google.inject.Inject;
@@ -73,6 +75,10 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	@Inject
 	private ITraceForStorageProvider traceForStorageProvider;
+	
+	@Inject(optional=true) 
+	@Nullable
+	private IWorkspace workspace;
 	
 	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
 
@@ -181,12 +187,27 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	public IEclipseTrace getTraceToSource(final ICompilationUnit javaFile) {
-		IWorkspaceRoot workspace = ResourcesPlugin.getWorkspace().getRoot();
-		IResource resource = workspace.findMember(javaFile.getPath());
-		
+		IResource resource = null;
+		try {
+			resource = javaFile.getUnderlyingResource();
+		} catch (JavaModelException e) {
+			resource = getResourceFromNonSrcFolder(javaFile);
+			if(null == resource) {
+				log.error("Error finding trace to source", e);
+			}
+		}
 		if (resource instanceof IStorage)
 			return traceForStorageProvider.getTraceToSource((IStorage) resource);
 		return null;
+	}
+
+	private IResource getResourceFromNonSrcFolder(final ICompilationUnit javaFile) {
+		IResource resource = null;
+		if(null != workspace) {
+			IWorkspaceRoot workspaceRoot = workspace.getRoot();
+			resource = workspaceRoot.findMember(javaFile.getPath());
+		}
+		return resource;
 	}
 
 	public IEclipseTrace getTraceToSource(final IClassFile classFile) {
