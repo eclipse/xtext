@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -129,6 +131,9 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void warnRawType(JvmType type, JvmParameterizedTypeReference typeRef) {
+		if (typeRef.eContainer() instanceof XInstanceOfExpression) {
+			return;
+		}
 		StringBuilder message = new StringBuilder(64);
 		message.append(type.getSimpleName());
 		message.append(" is a raw type. References to generic type ");
