@@ -76,7 +76,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		LightweightTypeReference result = super.deferredBindTypeArgument(expectation, type);
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null && getConstructorCall().getTypeArguments().isEmpty() && !result.isRawType() && !getDeclaredTypeParameters().isEmpty()) {
-			if (!expectedType.isAssignableFrom(result, new TypeConformanceComputationArgument())) {
+			if (!expectedType.isAssignableFrom(result, TypeConformanceComputationArgument.DEFAULT)) {
 				LightweightTypeReference rawFeatureType = result.getRawTypeReference();
 				if (expectedType.isAssignableFrom(rawFeatureType)) {
 					result = rawFeatureType;

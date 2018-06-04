@@ -197,13 +197,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		b.append(typeParameter.getName());
 		ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
 		if(!typeParameter.getConstraints().isEmpty()) {
+			boolean firstUpperBound = true;
 			for(int j=0; j<typeParameter.getConstraints().size(); ++j) {
 				JvmTypeConstraint constraint = typeParameter.getConstraints().get(j);
 				LightweightTypeReference typeRef = referenceOwner.toLightweightTypeReference(constraint.getTypeReference());
 				if(constraint instanceof JvmUpperBound) {
 					if(typeRef.isType(Object.class))
 						continue;
-					b.append(" extends ");
+					if (firstUpperBound) {
+						b.append(" extends ");
+						firstUpperBound = false;
+					} else {
+						b.append(" & ");
+					}
 				} else 
 					b.append(" super ");
 				b.append(typeRef.getHumanReadableName());
@@ -1047,14 +1053,14 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 
 	protected int compareDeclaredTypes(LightweightTypeReference left, LightweightTypeReference right, boolean leftResolved, boolean rightResolved) {
-		int rightToLeftConformance = left.internalIsAssignableFrom(right, new TypeConformanceComputationArgument());
+		int rightToLeftConformance = left.internalIsAssignableFrom(right, TypeConformanceComputationArgument.DEFAULT);
 		if ((rightToLeftConformance & ConformanceFlags.SUCCESS) != 0) {
 			if (!right.isAssignableFrom(left) && 
 					(!leftResolved || !rightResolved || ((rightToLeftConformance & ConformanceFlags.RAW_TYPE_CONVERSION) == 0))) {
 				return 1;
 			}
 		} else {
-			int leftToRightConformance = right.internalIsAssignableFrom(left, new TypeConformanceComputationArgument());
+			int leftToRightConformance = right.internalIsAssignableFrom(left, TypeConformanceComputationArgument.DEFAULT);
 			if ((leftToRightConformance & ConformanceFlags.SUCCESS) != 0 && 
 					(!leftResolved || !rightResolved || ((leftToRightConformance & ConformanceFlags.RAW_TYPE_CONVERSION) == 0))) {
 				return -1;

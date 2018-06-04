@@ -13,6 +13,16 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
  */
 public class TypeConformanceComputationArgument {
 
+	/**
+	 * Do not check type arguments but still apply synonym type conversion rules.
+	 */
+	public static final TypeConformanceComputationArgument RAW = new TypeConformanceComputationArgument(true, false, true, true, false, true);
+	
+	/**
+	 * Default Xbase type conformance rules including synonym type conformance checks.
+	 */
+	public static final TypeConformanceComputationArgument DEFAULT = new TypeConformanceComputationArgument();
+	
 	protected final boolean rawType;
 	protected final boolean asTypeArgument;
 	protected final boolean allowPrimitiveConversion;
@@ -20,6 +30,10 @@ public class TypeConformanceComputationArgument {
 	protected final boolean unboundComputationAddsHints;
 	protected final boolean allowSynonyms;
 	
+	/**
+	 * @deprecated use {@link TypeConformanceComputationArgument#DEFAULT} instead.
+	 */
+	@Deprecated
 	public TypeConformanceComputationArgument() {
 		this(false, false, true, true, false, true);
 	}

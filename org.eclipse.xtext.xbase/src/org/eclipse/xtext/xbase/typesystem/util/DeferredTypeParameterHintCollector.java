@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -128,7 +129,9 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 
 	protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 		LightweightTypeReference wrapped = getStricterConstraint(typeParameter, reference.getWrapperTypeIfPrimitive());
-		typeParameter.acceptHint(wrapped, getTypeArgumentSource(), getOrigin(), getExpectedVariance(), getActualVariance());
+		if (wrapped != null) {
+			typeParameter.acceptHint(wrapped, getTypeArgumentSource(), getOrigin(), getExpectedVariance(), getActualVariance());	
+		}
 	}
 
 	protected BoundTypeArgumentSource getTypeArgumentSource() {
@@ -153,8 +156,12 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 					}
 				};
 				LightweightTypeReference lightweightReference = factory.toLightweightReference(constraintReference);
-				if (!recursive[0] && hint.isAssignableFrom(lightweightReference)) {
-					hint = lightweightReference;
+				if (!recursive[0]) {
+					if (hint.isAssignableFrom(lightweightReference)) {
+						hint = lightweightReference;	
+					} else if (hint.isResolved() && !lightweightReference.getRawTypeReference().isAssignableFrom(hint, TypeConformanceComputationArgument.RAW)) {
+						return null;
+					}
 				}
 			}
 		}
