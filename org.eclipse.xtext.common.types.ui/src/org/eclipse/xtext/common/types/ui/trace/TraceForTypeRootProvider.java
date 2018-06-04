@@ -76,8 +76,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	@Inject
 	private ITraceForStorageProvider traceForStorageProvider;
 	
-	@Inject(optional=true) 
-	@Nullable
+	@Inject
 	private IWorkspace workspace;
 	
 	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
@@ -202,12 +201,8 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	private IResource getResourceFromNonSrcFolder(final ICompilationUnit javaFile) {
-		IResource resource = null;
-		if(null != workspace) {
-			IWorkspaceRoot workspaceRoot = workspace.getRoot();
-			resource = workspaceRoot.findMember(javaFile.getPath());
-		}
-		return resource;
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		return workspaceRoot.findMember(javaFile.getPath());
 	}
 
 	public IEclipseTrace getTraceToSource(final IClassFile classFile) {
