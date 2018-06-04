@@ -13,8 +13,10 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
@@ -66,21 +68,30 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	}
 	
 	protected IProject createPluginProject(String name) throws CoreException {
-		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
-		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
-		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
-		projectFactory.setProjectName(name);
-		projectFactory.addFolders(Collections.singletonList("src"));
-		projectFactory.addBuilderIds(
-			JavaCore.BUILDER_ID, 
-			"org.eclipse.pde.ManifestBuilder",
-			"org.eclipse.pde.SchemaBuilder",
-			XtextProjectHelper.BUILDER_ID);
-		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
-		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib"));
-		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
-		JavaProjectSetupUtil.setUnixLineEndings(result);
-		return result;
+		final IProject[] result = new IProject[1];
+		IWorkspaceRunnable creatorTask = new IWorkspaceRunnable() {
+			@Override
+			public void run(IProgressMonitor monitor) throws CoreException {
+				Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
+				PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
+				projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
+				projectFactory.setProjectName(name);
+				projectFactory.addFolders(Collections.singletonList("src"));
+				projectFactory.addBuilderIds(
+					JavaCore.BUILDER_ID, 
+					"org.eclipse.pde.ManifestBuilder",
+					"org.eclipse.pde.SchemaBuilder",
+					XtextProjectHelper.BUILDER_ID);
+				projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
+				projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib"));
+				IProject project = projectFactory.createProject(new NullProgressMonitor(), null);
+				JavaProjectSetupUtil.setUnixLineEndings(project);
+				
+				result[0] = project;
+			}
+		};
+		ResourcesPlugin.getWorkspace().run(creatorTask, new NullProgressMonitor());
+		return result[0];
 	}
 	
 	@Test public void testCurlyBraceBlockAndRichStrings_0() throws Exception {
