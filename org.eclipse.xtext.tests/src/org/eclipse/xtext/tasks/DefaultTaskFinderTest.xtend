@@ -19,7 +19,6 @@ import org.eclipse.xtext.tests.LineDelimiters
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtext.tasks.TaskAssert.*
 import com.google.inject.name.Names
 import org.eclipse.xtext.documentation.impl.AbstractMultiLineCommentProvider
 
@@ -130,7 +129,7 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 		val actualTasks = finder.findTasks(resource)
 		assertEquals(expectedTasks.size, actualTasks.size)
 		for (i : 0 ..< expectedTasks.size) {
-			assertExactMatch(expectedTasks.get(i), actualTasks.get(i))
+			assertEquals(expectedTasks.get(i), actualTasks.get(i))
 		}
 	}
 }

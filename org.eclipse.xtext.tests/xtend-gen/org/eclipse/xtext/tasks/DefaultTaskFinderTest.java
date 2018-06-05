@@ -21,7 +21,6 @@ import org.eclipse.xtext.tasks.DefaultTaskFinder;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.Task;
-import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
@@ -187,7 +186,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
     int _size = expectedTasks.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      TaskAssert.assertExactMatch(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
+      Assert.assertEquals(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
     }
   }
 }
