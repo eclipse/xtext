@@ -11,7 +11,7 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<properties>
-		<tycho-version>1.1.0</tycho-version>
+		<tycho-version>1.2.0</tycho-version>
 		<reportRepoDir></reportRepoDir>
 		<reportOutputDir>${project.build.directory}</reportOutputDir>
 		<maven.compiler.source>1.8</maven.compiler.source>
