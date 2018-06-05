@@ -16,7 +16,6 @@ import org.eclipse.xtext.tasks.DefaultTaskTagProvider;
 import org.eclipse.xtext.tasks.ITaskParser;
 import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.Task;
-import org.eclipse.xtext.tasks.TaskAssert;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.tests.LineDelimiters;
@@ -394,7 +393,7 @@ public class DefaultTaskParserTest {
     int _size = expectedTasks.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      TaskAssert.assertExactMatch(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
+      Assert.assertEquals(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
     }
   }
 }

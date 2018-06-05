@@ -9,12 +9,14 @@ package org.eclipse.xtext.tasks
 
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
 @Accessors
+@EqualsHashCode
 class TaskTag {
 	String name
 	Priority priority

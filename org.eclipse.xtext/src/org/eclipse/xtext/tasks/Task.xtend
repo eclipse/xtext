@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
- @Accessors
+@Accessors
+@EqualsHashCode
 class Task {
 	TaskTag tag;
 	String description;
