@@ -18,7 +18,6 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JUnitVersion;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -118,7 +117,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   public String getTychoVersion() {
-    return "1.1.0";
+    return "1.2.0";
   }
   
   private CharSequence loadResource(final String resourcePath) {
@@ -585,23 +584,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t");
           _builder.append("<!-- Tycho settings -->");
           _builder.newLine();
-          {
-            if ((Objects.equal(this.getConfig().getJavaVersion(), JavaVersion.JAVA10) || Objects.equal(this.getConfig().getJunitVersion(), JUnitVersion.JUNIT_5))) {
-              _builder.append("\t");
-              _builder.append("<!-- Java 10 and JUnit 5 support require Tycho 1.2.0, which was not released at release date of Xtext 2.14.0. When not available downgrade to Java 9, JUnit 4 and Tycho 1.1.0. -->");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("<tycho-version>1.2.0</tycho-version>");
-              _builder.newLine();
-            } else {
-              _builder.append("\t");
-              _builder.append("<tycho-version>");
-              String _tychoVersion = this.getTychoVersion();
-              _builder.append(_tychoVersion, "\t");
-              _builder.append("</tycho-version>");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t");
+          _builder.append("<tycho-version>");
+          String _tychoVersion = this.getTychoVersion();
+          _builder.append(_tychoVersion, "\t");
+          _builder.append("</tycho-version>");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("<!-- Define overridable properties for tycho-surefire-plugin -->");
           _builder.newLine();

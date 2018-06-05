@@ -71,7 +71,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	def String getTychoVersion() {
-		'1.1.0'
+		'1.2.0'
 	}
 	
 	def private CharSequence loadResource(String resourcePath) {
@@ -217,12 +217,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 					«IF config.needsTychoBuild»
 						<!-- Tycho settings -->
-						«IF config.javaVersion == JavaVersion.JAVA10 || config.junitVersion == JUnitVersion.JUNIT_5»
-							<!-- Java 10 and JUnit 5 support require Tycho 1.2.0, which was not released at release date of Xtext 2.14.0. When not available downgrade to Java 9, JUnit 4 and Tycho 1.1.0. -->
-							<tycho-version>1.2.0</tycho-version>
-						«ELSE»
-							<tycho-version>«tychoVersion»</tycho-version>
-						«ENDIF»
+						<tycho-version>«tychoVersion»</tycho-version>
 						<!-- Define overridable properties for tycho-surefire-plugin -->
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
