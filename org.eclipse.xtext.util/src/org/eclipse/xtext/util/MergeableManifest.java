@@ -588,6 +588,9 @@ public class MergeableManifest implements Cloneable {
 					continue;
 				}
 			} else {
+				if (lastline == null) {
+					throw new IOException("misplaced continuation line");
+				}
 				// continuation line
 				byte[] buf = new byte[lastline.length + len - 1];
 				System.arraycopy(lastline, 0, buf, 0, lastline.length);
@@ -1104,7 +1107,7 @@ public class MergeableManifest implements Cloneable {
 				int i = 0;
 				if (lbuf[0] == ' ') {
 					// continuation of previous line
-					if (name == null) {
+					if (name == null || lastline == null) {
 						throw new IOException("misplaced continuation line");
 					}
 					lineContinued = true;
