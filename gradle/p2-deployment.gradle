@@ -8,7 +8,7 @@ apply plugin: 'io.typefox.gradle.p2gen'
 group = 'org.eclipse.xtext'
 
 p2gen {
-	tychoVersion '1.1.0'
+	tychoVersion '1.2.0'
 	
 	exclude 'org.eclipse.xtext.xtext.bootstrap'
 
