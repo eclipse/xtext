@@ -1166,26 +1166,14 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateFileHeader(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final FileHeaderAdapter fileHeaderAdapter = IterableExtensions.<FileHeaderAdapter>head(Iterables.<FileHeaderAdapter>filter(it.eAdapters(), FileHeaderAdapter.class));
-    String _headerText = null;
-    if (fileHeaderAdapter!=null) {
-      _headerText=fileHeaderAdapter.getHeaderText();
-    }
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_headerText);
-    boolean _not = (!_isNullOrEmpty);
-    if (_not) {
+    if (((fileHeaderAdapter != null) && (!StringExtensions.isNullOrEmpty(fileHeaderAdapter.getHeaderText())))) {
       this.generateDocumentation(fileHeaderAdapter.getHeaderText(), this.fileHeaderProvider.getFileHeaderNodes(it.eResource()), appendable, config);
     }
   }
   
   public void generateJavaDoc(final EObject it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final DocumentationAdapter adapter = IterableExtensions.<DocumentationAdapter>head(Iterables.<DocumentationAdapter>filter(it.eAdapters(), DocumentationAdapter.class));
-    String _documentation = null;
-    if (adapter!=null) {
-      _documentation=adapter.getDocumentation();
-    }
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
-    boolean _not = (!_isNullOrEmpty);
-    if (_not) {
+    if (((adapter != null) && (!StringExtensions.isNullOrEmpty(adapter.getDocumentation())))) {
       final Set<EObject> sourceElements = this.getSourceElements(it);
       if (((sourceElements.size() == 1) && (this.documentationProvider instanceof IEObjectDocumentationProviderExtension))) {
         final List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) this.documentationProvider).getDocumentationNodes(IterableExtensions.<EObject>head(sourceElements));
