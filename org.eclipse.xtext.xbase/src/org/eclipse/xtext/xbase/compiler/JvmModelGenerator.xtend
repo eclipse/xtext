@@ -756,14 +756,14 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
         val fileHeaderAdapter = it.eAdapters.filter(FileHeaderAdapter).head
-        if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
+        if(fileHeaderAdapter !== null && !fileHeaderAdapter.headerText.nullOrEmpty) {
 			generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
         }
     }
 
 	def void generateJavaDoc(EObject it, ITreeAppendable appendable, GeneratorConfig config) {
 		val adapter = it.eAdapters.filter(DocumentationAdapter).head
-		if(!adapter?.documentation.nullOrEmpty) {
+		if(adapter !== null && !adapter.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
 			val sourceElements = it.sourceElements
 			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
