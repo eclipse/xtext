@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.wizard
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.JUnitVersion
 
 @FinalFieldsConstructor
