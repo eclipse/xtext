@@ -49,7 +49,24 @@ public interface IWriteAccess<State> {
 			return work.exec(state);
 		});
 	}
-	
+
+	/**
+	 * Tries to modify the State by executing {@code work} on it.
+	 * 
+	 * @param work Work that modifies the State
+	 * 
+	 * @return The result of executing {@code work}, or
+	 *         null if the State is null
+	 * @since 2.15
+	 */
+	default <Result> Result tryModify(IUnitOfWork<Result, State> work) {
+		return modify((state) -> {
+			if (state == null) return null;
+
+			return work.exec(state);
+		});
+	}
+
 	/**
 	 * Tries to modify the State by executing {@code work} on it.
 	 * 

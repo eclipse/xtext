@@ -50,7 +50,24 @@ public interface IReadAccess<State> {
 			return work.exec(state);
 		});
 	}
-	
+
+	/**
+	 * Tries to get a read-only copy of the State and execute {@code work} on it.
+	 * 
+	 * @param work Work to execute on the State
+	 * 
+	 * @return The result of executing {@code work}, or
+	 *         null if the State is null
+	 * @since 2.15
+	 */
+	default <Result> Result tryReadOnly(IUnitOfWork<Result, State> work) {
+		return readOnly((state) -> {
+			if (state == null) return null;
+
+			return work.exec(state);
+		});
+	}
+
 	/**
 	 * Tries to get a read-only copy of the State and execute {@code work} on it.
 	 * 
@@ -116,7 +133,27 @@ public interface IReadAccess<State> {
 				return work.exec(state);
 			});
 		}
-		
+
+		/**
+		 * Tries to get a read-only copy of the State and execute {@code work} on it.
+		 * Cancels all cancelable readers before executing the {@link IUnitOfWork}.
+		 * For interactive jobs that need fastest possible execution.
+		 * 
+		 * @param work Work to execute on the State
+		 * 
+		 * @return The result of executing {@code work}, or
+		 *         null if the State is null
+		 * @since 2.15
+		 * @see CancelableUnitOfWork
+		 */
+		default <Result> Result tryPriorityReadOnly(IUnitOfWork<Result, State> work) {
+			return priorityReadOnly((state) -> {
+				if (state == null) return null;
+
+				return work.exec(state);
+			});
+		}
+
 		/**
 		 * Tries to get a read-only copy of the State and execute {@code work} on it.
 		 * Cancels all cancelable readers before executing the {@link IUnitOfWork}.
