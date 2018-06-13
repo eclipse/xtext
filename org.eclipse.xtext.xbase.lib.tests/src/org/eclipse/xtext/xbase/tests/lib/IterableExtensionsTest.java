@@ -197,6 +197,15 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 	}
 	
 	@Test public void testReject() {
+		List<Integer> nullList = new ArrayList<>();
+		nullList.add(null);
+		List<Object> objects = newArrayList(1, 2, null, 4l, "String");
+		assertEquals(newArrayList(1, 2, null, 4l), newArrayList(IterableExtensions.reject(objects, String.class)));
+		assertEquals(nullList, newArrayList(IterableExtensions.reject(objects, Object.class)));
+		
+		List<Integer> integerObjects = newArrayList(1, 2, null, 4);
+		assertEquals(nullList, newArrayList(IterableExtensions.reject(integerObjects, Integer.class)));
+		
 		Function1<Integer, Boolean> function = new Function1<Integer, Boolean>() {
 			@Override
 			public Boolean apply(Integer p) {
@@ -218,7 +227,15 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 			// expected NPE
 		}
 		try {
-			newArrayList(IterableExtensions.reject(newArrayList(1,2,3), null));
+			Function1<? super Integer, Boolean> nullFn = null;
+			newArrayList(IterableExtensions.reject(newArrayList(1,2,3), nullFn));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+		try {
+			Class<Integer> nullClass = null;
+			newArrayList(IterableExtensions.reject(newArrayList(1,2,3), nullClass));
 			fail("NullPointerException expected");
 		} catch (NullPointerException e) {
 			// expected NPE
