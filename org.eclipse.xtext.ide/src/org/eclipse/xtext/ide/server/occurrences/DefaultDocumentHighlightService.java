@@ -96,7 +96,6 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 
 	@Override
 	public List<DocumentHighlight> getDocumentHighlights(final XtextResource resource, final int offset) {
-
 		if (resource == null) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.warn("Resource was null.");
@@ -131,13 +130,13 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 			return emptyList();
 		}
 
-		final EObject selectedElemnt = offsetHelper.resolveElementAt(resource, offset);
-		if (!isDocumentHighlightAvailableFor(selectedElemnt, resource, offset)) {
+		final EObject selectedElement = offsetHelper.resolveElementAt(resource, offset);
+		if (!isDocumentHighlightAvailableFor(selectedElement, resource, offset)) {
 			return emptyList();
 		}
 
 		final Supplier<Document> docSupplier = Suppliers.memoize(() -> new Document(UNUSED_VERSION, docContent));
-		Iterable<URI> targetURIs = getTargetURIs(selectedElemnt);
+		Iterable<URI> targetURIs = getTargetURIs(selectedElement);
 		if (!(targetURIs instanceof TargetURIs)) {
 			final TargetURIs result = targetURIsProvider.get();
 			result.addAllURIs(targetURIs);
@@ -153,8 +152,8 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 		};
 		referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, new NullProgressMonitor());
 
-		if (resource.equals(selectedElemnt.eResource())) {
-			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(selectedElemnt);
+		if (resource.equals(selectedElement.eResource())) {
+			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(selectedElement);
 			if (!isNullOrEmpty(region)) {
 				resultBuilder.add(textRegionTransformer.apply(docSupplier.get(), region, DocumentHighlightKind.Write));
 			}
@@ -170,7 +169,7 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 	 * <p>
 	 * Clients may override this method to change the default behavior.
 	 * 
-	 * @param selectedElemnt
+	 * @param selectedElement
 	 *            the selected element resolved via the offset from the
 	 *            resource. Can be {@code null}.
 	 * @param resource
@@ -182,17 +181,16 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 	 *         selected element, otherwise {@code false}.
 	 *
 	 */
-	protected boolean isDocumentHighlightAvailableFor(final EObject selectedElemnt, final XtextResource resource,
+	protected boolean isDocumentHighlightAvailableFor(final EObject selectedElement, final XtextResource resource,
 			final int offset) {
-
-		if (selectedElemnt == null || !getSelectedElementFilter().apply(selectedElemnt)) {
+		if (selectedElement == null || !getSelectedElementFilter().apply(selectedElement)) {
 			return false;
 		}
 
 		final EObject containedElement = offsetHelper.resolveContainedElementAt(resource, offset);
 		// Special handling to avoid such cases when the selection is not
 		// exactly on the desired element.
-		if (selectedElemnt == containedElement) {
+		if (selectedElement == containedElement) {
 			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(containedElement);
 			return !isNullOrEmpty(region)
 					// Region is comparable to a selection in an editor,
