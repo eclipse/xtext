@@ -20,8 +20,22 @@ import org.eclipse.lsp4j.Range
 
     Integer version
     String contents
+    boolean printSourceOnError
 
-    def int getOffSet(Position position) {
+    new(Integer version, String contents) {
+        this(version, contents, true)
+    }
+
+    /**
+     * @since 2.15
+     */
+    new(Integer version, String contents, boolean printSourceOnError) {
+        this.version = version
+        this.contents = contents
+        this.printSourceOnError = printSourceOnError
+    }
+
+    def int getOffSet(Position position) throws IndexOutOfBoundsException {
         val l = contents.length
         val char NL = '\n'
         var line = 0
@@ -41,13 +55,13 @@ import org.eclipse.lsp4j.Range
         if (position.line === line && position.character === column) {
             return l
         }
-        throw new IndexOutOfBoundsException(position.toString + " text was : " + contents)
+        throw new IndexOutOfBoundsException(position.toString + if (printSourceOnError) "" else (" text was : " + contents))
     }
 
-    def Position getPosition(int offset) {
+    def Position getPosition(int offset) throws IndexOutOfBoundsException{
         val l = contents.length
         if (offset < 0 || offset > l)
-            throw new IndexOutOfBoundsException(offset + " text was : " + contents)
+            throw new IndexOutOfBoundsException(offset + if (printSourceOnError) "" else (" text was : " + contents))
 
         val char NL = '\n'
         var line = 0
