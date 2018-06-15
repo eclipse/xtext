@@ -138,6 +138,14 @@ public class Document {
     return new Document(_xifexpression, newContent);
   }
   
+  /**
+   * @since 2.15
+   */
+  @Pure
+  public boolean isPrintSourceOnError() {
+    return this.printSourceOnError;
+  }
+  
   @Override
   @Pure
   public int hashCode() {
@@ -191,10 +199,5 @@ public class Document {
   @Pure
   public String getContents() {
     return this.contents;
-  }
-  
-  @Pure
-  public boolean isPrintSourceOnError() {
-    return this.printSourceOnError;
   }
 }

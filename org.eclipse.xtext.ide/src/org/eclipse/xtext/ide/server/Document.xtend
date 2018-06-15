@@ -100,5 +100,13 @@ import org.eclipse.lsp4j.Range
         }
         return new Document(if (version !== null) version + 1 else null, newContent)
     }
+    
+    /**
+     * @since 2.15
+     */
+    @Pure
+    def boolean isPrintSourceOnError() {
+    	printSourceOnError
+    }
 
 }
