@@ -12,6 +12,7 @@ import com.google.common.collect.Multimap;
  * @goal xtend-install-debug-info
  * @phase process-classes
  * @requiresDependencyResolution compile
+ * @threadSafe true
  */
 public class XtendInstallDebugInfo extends AbstractXtendInstallDebugInfoMojo {
 
