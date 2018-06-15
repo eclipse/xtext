@@ -36,8 +36,14 @@ import com.google.inject.Injector;
  * @goal generate
  * @phase generate-sources
  * @requiresDependencyResolution compile
+ * @threadSafe true
  */
 public class XtextGenerator extends AbstractMojo {
+    
+	/**
+	 * Lock object to ensure thread-safety
+	 */
+	private static final Object lock = new Object();
 
 	/**
 	 * Location of the generated source files.
@@ -167,11 +173,13 @@ public class XtextGenerator extends AbstractMojo {
 		if (skip) {
 			getLog().info("skipped.");
 		} else {
-			new MavenLog4JConfigurator().configureLog4j(getLog());
-			configureDefaults();
-			autoAddToPlatformResourceMap(project);
-			manuallyAddToPlatformResourceMap();
-			internalExecute();
+			synchronized(lock) {
+				new MavenLog4JConfigurator().configureLog4j(getLog());
+				configureDefaults();
+				autoAddToPlatformResourceMap(project);
+				manuallyAddToPlatformResourceMap();
+				internalExecute();
+			}
 		}
 	}
 
