@@ -23,6 +23,7 @@ import com.google.common.collect.Sets;
  * @goal compile
  * @phase generate-sources
  * @requiresDependencyResolution compile
+ * @threadSafe true
  */
 public class XtendCompile extends AbstractXtendCompilerMojo {
 	/**

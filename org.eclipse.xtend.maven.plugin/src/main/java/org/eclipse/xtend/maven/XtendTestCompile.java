@@ -23,6 +23,7 @@ import com.google.common.collect.Sets;
  * @goal testCompile
  * @phase generate-test-sources
  * @requiresDependencyResolution test
+ * @threadSafe true
  */
 public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	/**

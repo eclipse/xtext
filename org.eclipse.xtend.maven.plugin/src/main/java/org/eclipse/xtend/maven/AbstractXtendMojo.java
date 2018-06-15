@@ -9,6 +9,8 @@ import com.google.inject.Inject;
 
 public abstract class AbstractXtendMojo extends AbstractMojo {
 
+	private static final Object lock = new Object();
+
 	@Inject
 	protected MavenLog4JConfigurator log4jConfigurator;
 
@@ -35,8 +37,10 @@ public abstract class AbstractXtendMojo extends AbstractMojo {
 		if (isSkipped()) {
 			getLog().info("skipped.");
 		} else {
-			log4jConfigurator.configureLog4j(getLog());
-			internalExecute();
+			synchronized(lock) {
+				log4jConfigurator.configureLog4j(getLog());
+				internalExecute();
+			}
 		}
 	}
 
