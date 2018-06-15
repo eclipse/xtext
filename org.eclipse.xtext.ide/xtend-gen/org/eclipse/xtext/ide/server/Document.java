@@ -25,7 +25,22 @@ public class Document {
   
   private final String contents;
   
-  public int getOffSet(final Position position) {
+  private final boolean printSourceOnError;
+  
+  public Document(final Integer version, final String contents) {
+    this(version, contents, true);
+  }
+  
+  /**
+   * @since 2.15
+   */
+  public Document(final Integer version, final String contents, final boolean printSourceOnError) {
+    this.version = version;
+    this.contents = contents;
+    this.printSourceOnError = printSourceOnError;
+  }
+  
+  public int getOffSet(final Position position) throws IndexOutOfBoundsException {
     final int l = this.contents.length();
     final char NL = '\n';
     int line = 0;
@@ -48,17 +63,27 @@ public class Document {
       return l;
     }
     String _string = position.toString();
-    String _plus = (_string + " text was : ");
-    String _plus_1 = (_plus + this.contents);
-    throw new IndexOutOfBoundsException(_plus_1);
+    String _xifexpression = null;
+    if (this.printSourceOnError) {
+      _xifexpression = "";
+    } else {
+      _xifexpression = (" text was : " + this.contents);
+    }
+    String _plus = (_string + _xifexpression);
+    throw new IndexOutOfBoundsException(_plus);
   }
   
-  public Position getPosition(final int offset) {
+  public Position getPosition(final int offset) throws IndexOutOfBoundsException {
     final int l = this.contents.length();
     if (((offset < 0) || (offset > l))) {
-      String _plus = (Integer.valueOf(offset) + " text was : ");
-      String _plus_1 = (_plus + this.contents);
-      throw new IndexOutOfBoundsException(_plus_1);
+      String _xifexpression = null;
+      if (this.printSourceOnError) {
+        _xifexpression = "";
+      } else {
+        _xifexpression = (" text was : " + this.contents);
+      }
+      String _plus = (Integer.valueOf(offset) + _xifexpression);
+      throw new IndexOutOfBoundsException(_plus);
     }
     final char NL = '\n';
     int line = 0;
@@ -113,19 +138,14 @@ public class Document {
     return new Document(_xifexpression, newContent);
   }
   
-  public Document(final Integer version, final String contents) {
-    super();
-    this.version = version;
-    this.contents = contents;
-  }
-  
   @Override
   @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.version== null) ? 0 : this.version.hashCode());
-    return prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
+    result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
+    return prime * result + (this.printSourceOnError ? 1231 : 1237);
   }
   
   @Override
@@ -148,6 +168,8 @@ public class Document {
         return false;
     } else if (!this.contents.equals(other.contents))
       return false;
+    if (other.printSourceOnError != this.printSourceOnError)
+      return false;
     return true;
   }
   
@@ -157,6 +179,7 @@ public class Document {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("version", this.version);
     b.add("contents", this.contents);
+    b.add("printSourceOnError", this.printSourceOnError);
     return b.toString();
   }
   
@@ -168,5 +191,10 @@ public class Document {
   @Pure
   public String getContents() {
     return this.contents;
+  }
+  
+  @Pure
+  public boolean isPrintSourceOnError() {
+    return this.printSourceOnError;
   }
 }
