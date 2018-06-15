@@ -114,6 +114,16 @@ public class XtextGeneratorIT {
 		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
 				"(?s).*MY_FIRST_LITERAL\\(-7.*MY_SECOND_LITERAL\\(137.*");
 	}
+	
+	@Test
+	public void xcoreMapping() throws Exception {
+		verifyErrorFreeLog(ROOT + "/xcore-mapping", true, "clean", "verify");
+	}
+	
+	@Test
+	public void xcoreAutoMapping() throws Exception {
+		verifyErrorFreeLog(ROOT + "/xcore-auto-mapping", true, "clean", "verify");
+	}
 
 	@Test
 	public void bug463946() throws Exception {

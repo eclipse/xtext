@@ -15,6 +15,8 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
@@ -99,6 +101,26 @@ public class XtextGenerator extends AbstractMojo {
 	 * @required
 	 */
 	private List<Language> languages;
+	
+	/**
+	 * you can specify a list of project mappings that is used to populate the EMF  Platform Resource Map.
+	 * 
+	 * <pre>
+		&lt;projectMappings&gt;
+			&lt;projectMapping&gt;
+				&lt;projectName&gt;sample.emf&lt;/projectName&gt;
+				&lt;path&gt;${project.basedir}&lt;/path&gt;
+			&lt;/projectMapping&gt;
+			&lt;projectMapping&gt;
+				&lt;projectName&gt;sample.emf.edit&lt;/projectName&gt;
+				&lt;path&gt;${project.basedir}/../sample.emf.edit&lt;/path&gt;
+			&lt;/projectMapping&gt;
+		&lt;/projectMappings&gt;
+	 * </pre>
+	 * 
+	 * @parameter
+	 */
+	private List<ProjectMapping> projectMappings;
 
 	/**
 	 * @parameter expression="${xtext.generator.skip}" default-value="false"
@@ -134,6 +156,14 @@ public class XtextGenerator extends AbstractMojo {
 	 */
 	private ClusteringConfig clusteringConfig;
 
+	/**
+	 * if enabled the plugin will scan the project and its siblings and add them to
+	 * the platform resource map automatically
+	 * 
+	 * @parameter default-value="false"
+	 */
+	private Boolean autoFillPlatformResourceMap = Boolean.FALSE;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -146,6 +176,8 @@ public class XtextGenerator extends AbstractMojo {
 			synchronized(lock) {
 				new MavenLog4JConfigurator().configureLog4j(getLog());
 				configureDefaults();
+				autoAddToPlatformResourceMap(project);
+				manuallyAddToPlatformResourceMap();
 				internalExecute();
 			}
 		}
@@ -227,6 +259,14 @@ public class XtextGenerator extends AbstractMojo {
 		this.languages = languages;
 	}
 
+	public List<ProjectMapping> getProjectMappings() {
+		return projectMappings;
+	}
+
+	public void setProjectMappings(List<ProjectMapping> projectMappings) {
+		this.projectMappings = projectMappings;
+	}
+
 	private void configureDefaults() {
 		if (sourceRoots == null) {
 			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
@@ -234,5 +274,51 @@ public class XtextGenerator extends AbstractMojo {
 		if (javaSourceRoots == null) {
 			javaSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		}
+	}
+
+	/**
+	 * Adds the given project and its child modules ({@link MavenProject#getModules()})
+	 * to {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses
+	 * {@link MavenProject#getParent()} recursively, if set.
+	 *
+	 * @param project the project
+	 */
+	private void autoAddToPlatformResourceMap(final MavenProject project) {
+		if (autoFillPlatformResourceMap) {
+			addToPlatformResourceMap(project.getBasedir());
+			project.getModules().stream().map(module -> new File(project.getBasedir(), module))
+					.forEach(e -> addToPlatformResourceMap(e));
+
+			if (project.getParent() != null)
+				autoAddToPlatformResourceMap(project.getParent());
+		}
+	}
+	
+	private void manuallyAddToPlatformResourceMap() {
+		if (projectMappings != null) {
+			for (ProjectMapping projectMapping : projectMappings) {
+				if (projectMapping.getPath() != null && projectMapping.getProjectName() != null) {
+					String path = projectMapping.getPath().toURI().toString();
+					String name = projectMapping.getProjectName();
+					getLog().info("Adding project '" + name + "' with path '" + path +"' to Platform Resource Map");
+					final URI uri = URI.createURI(path);
+					EcorePlugin.getPlatformResourceMap().put(name, uri);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Adds the given file to EcorePlugin's platform resource map.
+	 * The file's name will be used as the map entry's key.
+	 *
+	 * @param file a file to register
+	 * @return the registered URI pointing to the given file
+	 * @see EcorePlugin#getPlatformResourceMap()
+	 */
+	private URI addToPlatformResourceMap(final File file) {
+		getLog().info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString()+"' to Platform Resource Map");
+		final URI uri = URI.createURI(file.toURI().toString());
+		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
 	}
 }

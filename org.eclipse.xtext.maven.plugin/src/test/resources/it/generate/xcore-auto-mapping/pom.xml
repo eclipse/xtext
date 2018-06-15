@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>xtext-maven-plugin-it</artifactId>
+	</parent>
+	<groupId>sample-auto</groupId>
+	<artifactId>sample-auto.parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>sample-auto.emf</module>
+		<module>sample-auto.emf.edit</module>
+	</modules>
+
+	<properties>
+		<xtext-version>2.15.0-SNAPSHOT</xtext-version>
+		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
+		<eclipse-text-version>3.6.0</eclipse-text-version>
+		<core-resources-version>3.11.1</core-resources-version>
+		<core-runtime-version>3.12.0</core-runtime-version>
+		<ecore-xtextVersion>1.2.0</ecore-xtextVersion>
+		<emf-common-version>2.12.0</emf-common-version>
+		<emf-version>2.12.0</emf-version>
+		<emf-codegen-version>2.11.0</emf-codegen-version>
+		<ecore-xcore-version>1.3.1</ecore-xcore-version>
+		<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+</project>
