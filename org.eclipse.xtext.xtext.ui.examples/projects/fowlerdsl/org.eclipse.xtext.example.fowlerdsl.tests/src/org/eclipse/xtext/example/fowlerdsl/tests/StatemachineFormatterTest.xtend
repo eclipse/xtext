@@ -116,6 +116,52 @@ class StatemachineFormatterTest {
 			'''
 		]
 	}
+	
+	@Test def events_commands() {
+		assertFormatted[
+			toBeFormatted = '''
+				events doorClosed D1CL drawerOpened D2OP lightOn L1ON doorOpened D1OP panelClosed PNCL end
+				commands unlockPanel PNUL lockPanel NLK lockDoor D1LK unlockDoor D1UL end
+			'''
+			expectation = '''
+				events
+					doorClosed   D1CL
+					drawerOpened D2OP
+					lightOn      L1ON
+					doorOpened   D1OP
+					panelClosed  PNCL
+				end
+				
+				commands
+					unlockPanel PNUL
+					lockPanel   NLK
+					lockDoor    D1LK
+					unlockDoor  D1UL
+				end
+			'''
+		]
+	}
+
+	@Test def events_state() {
+		assertFormatted[
+			toBeFormatted = '''
+				events doorClosed D1CL drawerOpened D2OP lightOn L1ON doorOpened D1OP panelClosed PNCL end
+				state idle end
+			'''
+			expectation = '''
+				events
+					doorClosed   D1CL
+					drawerOpened D2OP
+					lightOn      L1ON
+					doorOpened   D1OP
+					panelClosed  PNCL
+				end
+				
+				state idle
+				end
+			'''
+		]
+	}
 
 	@Test def events_resetEvents_commands() {
 		assertFormatted[
@@ -142,6 +188,32 @@ class StatemachineFormatterTest {
 					lockPanel   NLK
 					lockDoor    D1LK
 					unlockDoor  D1UL
+				end
+			'''
+		]
+	}
+	
+	@Test def events_resetEvents_state() {
+		assertFormatted[
+			toBeFormatted = '''
+				events doorClosed D1CL drawerOpened D2OP lightOn L1ON doorOpened D1OP panelClosed PNCL end
+				resetEvents doorOpened end state idle doorClosed => active end
+			'''
+			expectation = '''
+				events
+					doorClosed   D1CL
+					drawerOpened D2OP
+					lightOn      L1ON
+					doorOpened   D1OP
+					panelClosed  PNCL
+				end
+				
+				resetEvents
+					doorOpened
+				end
+				
+				state idle
+					doorClosed => active
 				end
 			'''
 		]
