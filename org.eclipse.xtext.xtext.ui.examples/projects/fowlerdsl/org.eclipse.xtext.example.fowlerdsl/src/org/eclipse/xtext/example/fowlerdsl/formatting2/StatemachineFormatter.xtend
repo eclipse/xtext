@@ -43,7 +43,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		
 		events.forEach[format]
 		
-		if(hasResetEvents) {
+		if(hasResetEvents || hasCommands || hasStates) {
 			end.append[setNewLines(2)]
 		}
 	}
@@ -61,7 +61,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		
 		end.prepend[newLine]
 		
-		if(hasCommands) {
+		if(hasCommands || hasStates) {
 			end.append[setNewLines(2)]
 		}
 	}

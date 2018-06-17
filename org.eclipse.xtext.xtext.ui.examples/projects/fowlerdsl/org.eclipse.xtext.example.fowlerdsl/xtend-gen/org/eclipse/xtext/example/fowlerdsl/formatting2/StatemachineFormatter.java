@@ -56,8 +56,7 @@ public class StatemachineFormatter extends AbstractFormatter2 {
       document.<Event>format(it_1);
     };
     it.getEvents().forEach(_function_2);
-    boolean _hasResetEvents = this.hasResetEvents(it);
-    if (_hasResetEvents) {
+    if (((this.hasResetEvents(it) || this.hasCommands(it)) || this.hasStates(it))) {
       final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it_1) -> {
         it_1.setNewLines(2);
       };
@@ -84,8 +83,7 @@ public class StatemachineFormatter extends AbstractFormatter2 {
       it_1.newLine();
     };
     document.prepend(end, _function_3);
-    boolean _hasCommands = this.hasCommands(it);
-    if (_hasCommands) {
+    if ((this.hasCommands(it) || this.hasStates(it))) {
       final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
         it_1.setNewLines(2);
       };
