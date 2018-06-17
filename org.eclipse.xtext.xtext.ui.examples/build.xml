@@ -63,6 +63,7 @@
 		<zip_example subdir="domainmodel"    name="org.eclipse.xtext.example.domainmodel.releng" />
 		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl" />
 		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ide" />
+		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.tests" />
 		<zip_example subdir="fowlerdsl"      name="org.eclipse.xtext.example.fowlerdsl.ui" />
 		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation" />
 		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.tests" />

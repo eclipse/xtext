@@ -72,6 +72,7 @@
 		<example wizardID="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" pageImage="icons/genproject.gif">
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.zip" description="Contains the parser, serializer, linker, etc."/>
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ide" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ide.zip" description="Contains Generic IDE"/>
+			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.tests" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.tests.zip" description="Runtime tests for the language."/>
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 			<fileToOpen location="org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext"/>
 			<fileToOpen location="org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/generator/StatemachineGenerator.xtend"/>
