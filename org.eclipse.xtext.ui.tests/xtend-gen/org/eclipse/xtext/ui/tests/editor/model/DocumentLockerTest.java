@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.model;
 import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.text.edits.TextEdit;
@@ -115,6 +116,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   @Test
   public void testPriorityReadOnlyCancelsReaders() {
     try {
+      Thread.interrupted();
       DocumentTokenSource _createTokenSource = this.createTokenSource();
       final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
       XtextResource _xtextResource = new XtextResource();
@@ -124,12 +126,12 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       };
       XtextResource _doubleArrow = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
       document.setInput(_doubleArrow);
-      final boolean[] check = new boolean[1];
+      final CountDownLatch check = new CountDownLatch(1);
       final Runnable _function_1 = () -> {
         document.<Object>readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
           @Override
           public Object exec(final XtextResource state, final CancelIndicator cancelIndicator) throws Exception {
-            check[0] = true;
+            check.countDown();
             final int wait = 4000;
             int i = 0;
             while ((!cancelIndicator.isCanceled())) {
@@ -147,9 +149,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       };
       final Thread thread = new Thread(_function_1);
       thread.start();
-      while ((!check[0])) {
-        Thread.sleep(1);
-      }
+      check.await();
       final IUnitOfWork<Object, XtextResource> _function_2 = (XtextResource it) -> {
         return null;
       };

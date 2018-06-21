@@ -78,7 +78,7 @@
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/oxygen/201712201001"/>
+		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
@@ -105,7 +105,7 @@
 		<unit id="org.opentest4j" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="6.1.1.v20180414-0329"/>
 		<unit id="org.objectweb.asm.tree" version="6.1.1.v20180414-0329"/>
-		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/I20180417184143/repository/"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository"/>
 	</location>
 </locations>
 </target>

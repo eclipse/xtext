@@ -34,22 +34,29 @@ import org.eclipse.xtend.lib.macro.file.Path
 @Beta
 abstract class TemplateProcessor extends AbstractClassProcessor {
 
+	// the annotation processors run in parallel but write the same file ... we synchronize to avoid race conditions 
+	static final Object LOCK = TemplateProcessor
+
 	Map<Path, String> propertyContentMap // need to make sure to read the files only once
 	String actualPropertyContents // content from currently active "messages.properties" file
 
 	override doGenerateCode(List<? extends ClassDeclaration> annotatedSourceElements,
 		extension CodeGenerationContext context) {
-		buildFileMaps(annotatedSourceElements, context)
-		for (ClassDeclaration annotatedClass : annotatedSourceElements) {
-			actualPropertyContents = propertyContentMap.get(annotatedClass.messagesProperties)
-			doGenerateCode(annotatedClass, context);
+		synchronized (LOCK) {
+			buildFileMaps(annotatedSourceElements, context)
+			for (ClassDeclaration annotatedClass : annotatedSourceElements) {
+				actualPropertyContents = propertyContentMap.get(annotatedClass.messagesProperties)
+				doGenerateCode(annotatedClass, context);
+			}
+			saveFileMaps(annotatedSourceElements, context)
 		}
-		saveFileMaps(annotatedSourceElements, context)
 	}
 
 	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
-		val propertyContents = generatePropertiesFile(annotatedClass, context) // "messages.properties" for i18n
-		generateMessagesClass(propertyContents, annotatedClass, context) // "Messages.java" for i18n
+		synchronized (LOCK) {
+			val propertyContents = generatePropertiesFile(annotatedClass, context) // "messages.properties" for i18n
+			generateMessagesClass(propertyContents, annotatedClass, context) // "Messages.java" for i18n
+		}
 	}
 
 	// read the "label" and "description" from the ProjectTemplateAnnotation and update "messages.properties" with the values

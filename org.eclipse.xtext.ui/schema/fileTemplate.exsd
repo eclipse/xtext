@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="fileTemplate" name="Xtext File Template"/>
+       </appInfo>
+      <documentation>
+         A template for a new file to be selectable by the user in the new file wizard. Only available if the template file wizard is actually used.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="fileTemplateProvider"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="fileTemplateProvider">
+      <annotation>
+         <documentation>
+            Provider for any number of file templates to be selected in the new file wizard.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The class implementing IFileTemplateProvider that will provide instances of AbstractFileTemplate. These instances represent templates and will be made available to the user with the template new file wizard.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.wizard.template.IFileTemplateProvider"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="grammarName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the grammar these templates belong to. Determines which wizard displays the templates.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         Xtext 2.14
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         Register a provider for file templates for the example language.
+&lt;pre&gt;
+&lt;extension
+      point=&quot;org.eclipse.xtext.ui.fileTemplate&quot;&gt;
+   &lt;fileTemplateProvider
+         class=&quot;org.xtext.example.mydsl.ui.wizard.MyDslFileTemplateProvider&quot;
+         grammarName=&quot;org.xtext.example.mydsl.MyDsl&quot;&gt;
+   &lt;/fileTemplateProvider&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
+
+From a newly generated template new file wizard.
+      </documentation>
+   </annotation>
+
+
+
+
+</schema>

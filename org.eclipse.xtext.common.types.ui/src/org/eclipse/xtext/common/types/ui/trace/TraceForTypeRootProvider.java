@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -72,6 +74,9 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	@Inject
 	private ITraceForStorageProvider traceForStorageProvider;
+	
+	@Inject
+	private IWorkspace workspace;
 	
 	private Pair<ITypeRoot, IEclipseTrace> lruCache = null;
 
@@ -180,14 +185,23 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	public IEclipseTrace getTraceToSource(final ICompilationUnit javaFile) {
+		IResource resource = null;
 		try {
-			IResource resource = javaFile.getUnderlyingResource();
-			if (resource instanceof IStorage)
-				return traceForStorageProvider.getTraceToSource((IStorage) resource);
+			resource = javaFile.getUnderlyingResource();
 		} catch (JavaModelException e) {
-			log.error("Error finding trace to source", e);
+			resource = getResourceFromNonSrcFolder(javaFile);
+			if(null == resource) {
+				log.error("Error finding trace to source", e);
+			}
 		}
+		if (resource instanceof IStorage)
+			return traceForStorageProvider.getTraceToSource((IStorage) resource);
 		return null;
+	}
+
+	private IResource getResourceFromNonSrcFolder(final ICompilationUnit javaFile) {
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		return workspaceRoot.findMember(javaFile.getPath());
 	}
 
 	public IEclipseTrace getTraceToSource(final IClassFile classFile) {

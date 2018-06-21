@@ -100,14 +100,11 @@ class AdvancedNewProjectPage extends WizardPage {
 					junitVersion4 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "4"
-						// auto-select when JUnit5 is NOT available 
-						selection = !org.eclipse.xtext.xtext.ui.Activator.isJUnit5Available
+						selection = true
 					]
 					junitVersion5 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "5"
-						// auto-select when JUnit5 is available 
-						selection = org.eclipse.xtext.xtext.ui.Activator.isJUnit5Available
 					]
 				]
 			]
@@ -441,7 +438,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		LanguageServer.values.get(createLanguageServer.selectionIndex)
 	}
 	
-	def JUnitVersion getJUnitVersion () {
+	def JUnitVersion getSelectedJUnitVersion () {
 		if (junitVersion4.selection) {
 			return JUnitVersion.JUNIT_4;
 		} else if (junitVersion5.selection) {

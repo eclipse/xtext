@@ -12,6 +12,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 
 /**
  * @author Karsten Thoms (karsten.thoms@itemis.de) - Initial contribution and API
+ * @since 2.14
  */
 public interface IReconcileStrategyFactory {
 

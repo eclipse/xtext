@@ -31,7 +31,7 @@ public class EditorResourceAccess implements IReferenceFinder.ILocalResourceAcce
 	public <R> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
 		IXtextDocument document = openDocumentTracker.getOpenDocument(targetURI.trimFragment());
 		if (document != null) {
-			return document.readOnly(new IUnitOfWork<R, XtextResource>() {
+			return document.tryReadOnly(new IUnitOfWork<R, XtextResource>() {
 				@Override
 				public R exec(XtextResource state) throws Exception {
 					ResourceSet localContext = state.getResourceSet();
@@ -39,7 +39,7 @@ public class EditorResourceAccess implements IReferenceFinder.ILocalResourceAcce
 						return work.exec(localContext);
 					return null;
 				}
-			});
+			}, () -> { return null; });
 		} else {
 			return delegate.readOnly(targetURI, work);
 		}

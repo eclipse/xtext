@@ -672,13 +672,11 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	protected Region getHoverRegionInternal(final int lineNumber, final int offset) {
 		recentAnnotationInfo = null;
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
-		if (annotations != null) {
-			for (Annotation annotation : annotations) {
-				Position position = sourceViewer.getAnnotationModel().getPosition(annotation);
-				if (position != null) {
-					final int start = position.getOffset();
-					return new Region (start, position.getLength());	
-				}
+		for (Annotation annotation : sortBySeverity(annotations)) {
+			Position position = sourceViewer.getAnnotationModel().getPosition(annotation);
+			if (position != null) {
+				final int start = position.getOffset();
+				return new Region(start, position.getLength());	
 			}
 		}
 		return null;
@@ -693,23 +691,21 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 		if (result != null)
 			return result;
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
-		if (annotations != null) {
-			for (Annotation annotation : annotations) {
-				Position position = getAnnotationModel().getPosition(annotation);
-				if (annotation.getText() != null && position != null) {
-					final QuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
-					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
-					// Note: the resolutions have to be retrieved from the UI thread, otherwise
-					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
-					// cause an exception
-					Display.getDefault().syncExec(runnable);
-					if (invocationContext.isMarkedCancelled()) {
-						return null;
-					}
-					result = new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);
-					recentAnnotationInfo = result;
-					return result;
+		for (Annotation annotation : sortBySeverity(annotations)) {
+			Position position = getAnnotationModel().getPosition(annotation);
+			if (annotation.getText() != null && position != null) {
+				final QuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
+				CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);
+				// Note: the resolutions have to be retrieved from the UI thread, otherwise
+				// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
+				// cause an exception
+				Display.getDefault().syncExec(runnable);
+				if (invocationContext.isMarkedCancelled()) {
+					return null;
 				}
+				result = new AnnotationInfo(annotation, position, sourceViewer, runnable.proposals);
+				recentAnnotationInfo = result;
+				return result;
 			}
 		}
 		return null;

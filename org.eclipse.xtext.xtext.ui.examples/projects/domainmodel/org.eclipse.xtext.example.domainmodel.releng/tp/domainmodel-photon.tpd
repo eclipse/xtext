@@ -9,14 +9,15 @@
 // This target definition was defined with the Target Platform DSL
 // See https://github.com/mbarbero/fr.obeo.releng.targetplatform for details
 
-target "Xtext Domainmodel Example - Eclipse Oxygen"
+target "Xtext Domainmodel Example - Eclipse Photon"
 
 with source allEnvironments
 
-location "http://download.eclipse.org/eclipse/updates/4.8-I-builds" {
+location "http://download.eclipse.org/releases/photon" {
 	org.eclipse.jdt.feature.group lazy
 	org.eclipse.platform.feature.group lazy
 	org.eclipse.pde.feature.group lazy
+	org.eclipse.emf.sdk.feature.group lazy
 }
 
 location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1/" {
@@ -29,9 +30,9 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
 	org.eclipse.xtext.sdk.feature.group lazy
 }
 
-location "http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository" {
-	org.objectweb.asm [6.0.0,7.0.0)
-	org.objectweb.asm.tree [6.0.0,7.0.0)
+location "http://download.eclipse.org/tools/orbit/downloads/drops/S20180504181223/repository" {
+	org.objectweb.asm [6.1.1,6.2.0)
+	org.objectweb.asm.tree [6.1.1,6.2.0)
 	com.google.inject [3.0.0,4.0.0)
 	org.apache.commons.cli
 	com.google.guava [21.0.0,22.0.0)
@@ -45,8 +46,4 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/xpand/
 	org.eclipse.xpand
 	org.eclipse.xtend
 	org.eclipse.xtend.typesystem.emf	
-}
-
-location "http://download.eclipse.org/modeling/emf/emf/builds/nightly/latest" {
-	org.eclipse.emf.sdk.feature.group lazy
 }

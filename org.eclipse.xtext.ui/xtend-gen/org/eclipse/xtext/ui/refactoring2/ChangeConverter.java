@@ -123,7 +123,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     final Procedure0 _function = () -> {
       try {
-        final IFile file = this.resourceUriConverter.toFile(change.getResource().getURI());
+        final IFile file = this.resourceUriConverter.toFile(change.getOldURI());
         boolean _canWrite = this.canWrite(file);
         boolean _not = (!_canWrite);
         if (_not) {

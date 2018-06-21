@@ -66,8 +66,6 @@ public class ResetPromptDialogSettingsField extends FieldEditor {
 	protected ResetPromptDialogSettingsField createField(Composite parent, int colums) {
 		if (dontAskGroup == null) {
 			GridLayout layout = new GridLayout(2, false);
-			layout.marginHeight = 0;
-			layout.marginWidth = 0;
 			dontAskGroup = new Group(parent, SWT.NONE);
 			dontAskGroup.setLayout(layout);
 			GridData gridData = new GridData(GridData.FILL_HORIZONTAL);

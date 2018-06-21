@@ -27,6 +27,7 @@ import org.eclipse.xtext.example.fowlerdsl.ui.labeling.StatemachineDescriptionLa
 import org.eclipse.xtext.example.fowlerdsl.ui.labeling.StatemachineLabelProvider;
 import org.eclipse.xtext.example.fowlerdsl.ui.outline.StatemachineOutlineTreeProvider;
 import org.eclipse.xtext.example.fowlerdsl.ui.quickfix.StatemachineQuickfixProvider;
+import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidatorConfigurationBlock;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
@@ -58,6 +59,8 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
+import org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
@@ -76,6 +79,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 
 /**
  * Manual modifications go to {@link StatemachineUiModule}.
@@ -133,6 +137,11 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 		binder.bind(InternalStatemachineLexer.class).toProvider(LexerProvider.create(InternalStatemachineLexer.class));
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return StatemachineValidatorConfigurationBlock.class;
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
 	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
 		return FQNPrefixMatcher.class;
@@ -183,6 +192,11 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 		binder.bind(IPreferenceStoreInitializer.class)
 			.annotatedWith(Names.named("builderPreferenceInitializer"))
 			.to(BuilderPreferenceAccess.Initializer.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public Class<? extends IContentFormatterFactory> bindIContentFormatterFactory() {
+		return ContentFormatterFactory.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2

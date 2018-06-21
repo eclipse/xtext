@@ -51,6 +51,8 @@
 				</topic>
 				<topic href="contents/301_grammarlanguage.html#enum-rules" label="Enum Rules">
 				</topic>
+				<topic href="contents/301_grammarlanguage.html#grammar-annotations" label="Grammar Annotations">
+				</topic>
 			</topic>
 			<topic href="contents/301_grammarlanguage.html#metamodel-inference" label="Ecore Model Inference">
 				<topic href="contents/301_grammarlanguage.html#type-and-package-generation" label="Type and Package Generation">
@@ -306,7 +308,9 @@
 				<topic href="contents/310_eclipse_support.html#rename-participants" label="Rename Participants">
 				</topic>
 			</topic>
-			<topic href="contents/310_eclipse_support.html#project-wizard" label="Project Wizard">
+			<topic href="contents/310_eclipse_support.html#projectwizard" label="Project Wizard">
+			</topic>
+			<topic href="contents/310_eclipse_support.html#file-wizard" label="File Wizard">
 			</topic>
 			<topic href="contents/310_eclipse_support.html#code-mining" label="Code Mining">
 			</topic>
@@ -347,7 +351,7 @@
 			<topic href="contents/350_continuous_integration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
 			</topic>
 			<topic href="contents/350_continuous_integration.html#tycho-build" label="Building an Xtext language with Maven and Tycho">
-				<topic href="contents/350_continuous_integration.html#the-parent-project-mymavenizedherolanguageroot" label="The parent project (my.mavenized.herolanguage.root)">
+				<topic href="contents/350_continuous_integration.html#the-parent-project-mymavenizedherolanguageparent" label="The parent project (my.mavenized.herolanguage.parent)">
 				</topic>
 				<topic href="contents/350_continuous_integration.html#the-update-site-project-mymavenizedherolanguageupdatesite" label="The update site project (my.mavenized.herolanguage.updatesite)">
 				</topic>

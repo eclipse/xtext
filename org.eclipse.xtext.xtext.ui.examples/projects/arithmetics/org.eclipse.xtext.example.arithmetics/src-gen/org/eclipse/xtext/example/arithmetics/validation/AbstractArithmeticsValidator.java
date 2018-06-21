@@ -20,5 +20,4 @@ public abstract class AbstractArithmeticsValidator extends AbstractDeclarativeVa
 		result.add(org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.eINSTANCE);
 		return result;
 	}
-	
 }

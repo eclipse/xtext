@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Fowler DSL Example - Runtime Tests
+Bundle-Vendor: Eclipse Xtext
+Bundle-Version: 2.15.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.tests;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
+ org.junit,
+ org.objectweb.asm;bundle-version="[6.1.1,6.2.0)";resolution:=optional,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.xtext.example.fowlerdsl.tests;x-internal=true
+Import-Package: org.hamcrest.core,
+ org.junit;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0"
+Automatic-Module-Name: org.eclipse.xtext.example.fowlerdsl.tests

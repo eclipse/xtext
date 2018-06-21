@@ -7,9 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import org.junit.Test;
+
 /**
  * @author kosyakov - Initial contribution and API
  */
 public class FSSynchronizationTest extends AbstractFSSynchronizationTest {
+	
+	@Override
+	@Test
+	public void testCleanUpDerivedResourcesWithCreateBetween() {
+		super.testCleanUpDerivedResourcesWithCreateBetween();
+	}
 
 }

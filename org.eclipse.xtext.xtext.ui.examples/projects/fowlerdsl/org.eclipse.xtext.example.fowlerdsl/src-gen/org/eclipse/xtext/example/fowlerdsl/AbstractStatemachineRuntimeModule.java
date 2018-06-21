@@ -9,6 +9,7 @@ import com.google.inject.name.Names;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.example.fowlerdsl.formatting2.StatemachineFormatter;
 import org.eclipse.xtext.example.fowlerdsl.generator.StatemachineGenerator;
 import org.eclipse.xtext.example.fowlerdsl.parser.antlr.StatemachineAntlrTokenFileProvider;
 import org.eclipse.xtext.example.fowlerdsl.parser.antlr.StatemachineParser;
@@ -17,7 +18,11 @@ import org.eclipse.xtext.example.fowlerdsl.scoping.StatemachineScopeProvider;
 import org.eclipse.xtext.example.fowlerdsl.serializer.StatemachineSemanticSequencer;
 import org.eclipse.xtext.example.fowlerdsl.serializer.StatemachineSyntacticSequencer;
 import org.eclipse.xtext.example.fowlerdsl.services.StatemachineGrammarAccess;
+import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineConfigurableIssueCodesProvider;
 import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -30,6 +35,7 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -49,6 +55,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
 /**
  * Manual modifications go to {@link StatemachineRuntimeModule}.
@@ -141,6 +148,11 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 		return StatemachineValidator.class;
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
+		return StatemachineConfigurableIssueCodesProvider.class;
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return StatemachineScopeProvider.class;
@@ -189,6 +201,16 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public Class<? extends IGenerator2> bindIGenerator2() {
 		return StatemachineGenerator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public Class<? extends IFormatter2> bindIFormatter2() {
+		return StatemachineFormatter.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public void configureFormatterPreferences(Binder binder) {
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
 	}
 	
 }

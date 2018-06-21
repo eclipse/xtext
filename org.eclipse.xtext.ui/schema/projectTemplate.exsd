@@ -50,7 +50,7 @@
    <element name="projectTemplateProvider">
       <annotation>
          <documentation>
-            Provider for any number of project templates to be sleected in the new project wizard.
+            Provider for any number of project templates to be selected in the new project wizard.
          </documentation>
       </annotation>
       <complexType>

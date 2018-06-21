@@ -18,6 +18,7 @@ import org.eclipse.xtext.example.homeautomation.scoping.RuleEngineScopeProvider;
 import org.eclipse.xtext.example.homeautomation.serializer.RuleEngineSemanticSequencer;
 import org.eclipse.xtext.example.homeautomation.serializer.RuleEngineSyntacticSequencer;
 import org.eclipse.xtext.example.homeautomation.services.RuleEngineGrammarAccess;
+import org.eclipse.xtext.example.homeautomation.validation.RuleEngineConfigurableIssueCodesProvider;
 import org.eclipse.xtext.example.homeautomation.validation.RuleEngineValidator;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
@@ -65,6 +66,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTyp
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
+import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 /**
  * Manual modifications go to {@link RuleEngineRuntimeModule}.
@@ -155,6 +157,11 @@ public abstract class AbstractRuleEngineRuntimeModule extends DefaultXbaseRuntim
 	@SingletonBinding(eager=true)
 	public Class<? extends RuleEngineValidator> bindRuleEngineValidator() {
 		return RuleEngineValidator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+	public Class<? extends XbaseConfigurableIssueCodes> bindXbaseConfigurableIssueCodes() {
+		return RuleEngineConfigurableIssueCodesProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2

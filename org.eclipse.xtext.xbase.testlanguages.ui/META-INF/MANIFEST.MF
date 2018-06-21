@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Xtext Testlanguages for UI and Runtime - UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.14.0.qualifier
+Bundle-Version: 2.15.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase.testlanguages.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.xbase.testlanguages;visibility:=reexport,
@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.xtext.xbase.testlanguages;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;bundle-version="3.6.0";resolution:=optional,
- org.objectweb.asm;bundle-version="[6.1.1,7.0.0)";resolution:=optional,
+ org.objectweb.asm;bundle-version="[6.1.1,6.2.0)";resolution:=optional,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.junit.runner;version="4.5.0",

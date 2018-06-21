@@ -36,26 +36,32 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @Beta
 @SuppressWarnings("all")
 public abstract class TemplateProcessor extends AbstractClassProcessor {
+  private final static Object LOCK = TemplateProcessor.class;
+  
   private Map<Path, String> propertyContentMap;
   
   private String actualPropertyContents;
   
   @Override
   public void doGenerateCode(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
-    this.buildFileMaps(annotatedSourceElements, context);
-    for (final ClassDeclaration annotatedClass : annotatedSourceElements) {
-      {
-        this.actualPropertyContents = this.propertyContentMap.get(this.getMessagesProperties(annotatedClass));
-        this.doGenerateCode(annotatedClass, context);
+    synchronized (TemplateProcessor.LOCK) {
+      this.buildFileMaps(annotatedSourceElements, context);
+      for (final ClassDeclaration annotatedClass : annotatedSourceElements) {
+        {
+          this.actualPropertyContents = this.propertyContentMap.get(this.getMessagesProperties(annotatedClass));
+          this.doGenerateCode(annotatedClass, context);
+        }
       }
+      this.saveFileMaps(annotatedSourceElements, context);
     }
-    this.saveFileMaps(annotatedSourceElements, context);
   }
   
   @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
-    final String propertyContents = this.generatePropertiesFile(annotatedClass, context);
-    this.generateMessagesClass(propertyContents, annotatedClass, context);
+    synchronized (TemplateProcessor.LOCK) {
+      final String propertyContents = this.generatePropertiesFile(annotatedClass, context);
+      this.generateMessagesClass(propertyContents, annotatedClass, context);
+    }
   }
   
   private String generatePropertiesFile(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
