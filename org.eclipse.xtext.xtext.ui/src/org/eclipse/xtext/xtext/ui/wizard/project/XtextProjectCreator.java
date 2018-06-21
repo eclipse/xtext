@@ -26,6 +26,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -44,6 +46,7 @@ import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
@@ -117,7 +120,9 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
-		factory.addFolders(Lists.newArrayList(descriptor.getSourceFolders()));
+		for (SourceFolderDescriptor sourceFolder : descriptor.getSourceFolders()) {
+			factory.addSourceFolder(sourceFolder.getPath(), sourceFolder.getOutput(), sourceFolder.isTest());
+		}
 		factory.setJreContainerEntry(JREContainerProvider.getJREContainerEntry(descriptor.getBree()));
 		if (needsM2eIntegration(descriptor)) {
 			factory.setDefaultOutput("target/classes");
@@ -131,7 +136,9 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (requiresJUnitLibContainer(descriptor)) {
 			JUnitVersion junitVersion = descriptor.getConfig().getJunitVersion();
 			factory.addClasspathEntries(JavaCore.newContainerEntry(
-					new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER").append(Integer.toString(junitVersion.getVersion()))));
+					new Path("org.eclipse.jdt.junit.JUNIT_CONTAINER").append(Integer.toString(junitVersion.getVersion())),
+					new IAccessRule[0], new IClasspathAttribute[] { JavaCore.newClasspathAttribute("test", "true") },
+					false/*not exported*/));
 		}
 	}
 	
