@@ -34,6 +34,7 @@ import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -1866,8 +1867,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Set<String> getSourceFolders() {
-    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
+  public Set<SourceFolderDescriptor> getSourceFolders() {
+    return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
   
   public ParentProjectDescriptor(final WizardConfiguration config) {

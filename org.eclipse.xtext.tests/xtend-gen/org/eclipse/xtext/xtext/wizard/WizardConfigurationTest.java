@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
@@ -219,8 +220,8 @@ public class WizardConfigurationTest {
     TestProjectDescriptor _testProject = this.config.getRuntimeProject().getTestProject();
     _testProject.setEnabled(true);
     this.config.setSourceLayout(SourceLayout.MAVEN);
-    final Consumer<String> _function = (String testFolder) -> {
-      Assert.assertTrue(this.config.getRuntimeProject().getSourceFolders().contains(testFolder));
+    final Consumer<SourceFolderDescriptor> _function = (SourceFolderDescriptor folder) -> {
+      Assert.assertTrue(this.config.getRuntimeProject().getSourceFolders().contains(folder));
     };
     this.config.getRuntimeProject().getTestProject().getSourceFolders().forEach(_function);
   }

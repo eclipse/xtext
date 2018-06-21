@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -77,8 +78,8 @@ public class TargetPlatformProject extends ProjectDescriptor {
   }
   
   @Override
-  public Set<String> getSourceFolders() {
-    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
+  public Set<SourceFolderDescriptor> getSourceFolders() {
+    return Collections.<SourceFolderDescriptor>unmodifiableSet(CollectionLiterals.<SourceFolderDescriptor>newHashSet());
   }
   
   public CharSequence target() {

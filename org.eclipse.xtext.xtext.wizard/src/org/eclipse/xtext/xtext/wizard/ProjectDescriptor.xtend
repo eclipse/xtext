@@ -39,8 +39,13 @@ abstract class ProjectDescriptor {
 		emptySet
 	}
 
-	def Set<String> getSourceFolders() {
-		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map[sourceFolder].toSet
+	/**
+	 * @since 2.15 (changed return value use 'path' of 'SourceFolderDescriptor' to get same result as before)
+	 */
+	def getSourceFolders() {
+		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map [
+			new SourceFolderDescriptor(sourceFolder, outputFolder, isTest)
+		].toSet
 	}
 
 	def Iterable<? extends AbstractFile> getFiles() {
@@ -60,39 +65,39 @@ abstract class ProjectDescriptor {
 		}
 		return files
 	}
-	
+
 	def boolean isPartOfGradleBuild()
-	
+
 	def boolean isPartOfMavenBuild()
-	
+
 	def boolean isEclipsePluginProject()
 
 	def boolean isEclipseFeatureProject() {
 		false
 	}
-	
+
 	def CharSequence buildProperties() '''
-		«buildPropertiesEntry("source..", sourceFolders.map[it + "/"])»
+		«buildPropertiesEntry("source..", sourceFolders.map[it.path + "/"])»
 		«buildPropertiesEntry("bin.includes", binIncludes)»
 		«buildPropertiesEntry("bin.excludes", binExcludes)»
 		«buildPropertiesEntry("additional.bundles", developmentBundles)»
 	'''
-	
+
 	def Set<String> getBinIncludes() {
-		newLinkedHashSet(".", '''«Outlet.META_INF.sourceFolder»/''')	
+		newLinkedHashSet(".", '''«Outlet.META_INF.sourceFolder»/''')
 	}
-	
+
 	/**
 	 * @since 2.11
 	 */
 	def Set<String> getBinExcludes() {
 		newLinkedHashSet("**/*.xtend")
 	}
-	
+
 	def Set<String> getDevelopmentBundles() {
 		emptySet
 	}
-	
+
 	private def buildPropertiesEntry(String key, Iterable<String> value) {
 		if (value.isEmpty)
 			return ""
@@ -117,12 +122,11 @@ abstract class ProjectDescriptor {
 		Bundle-RequiredExecutionEnvironment: «bree»
 		Automatic-Module-Name: «name»
 	'''
-	
-	
+
 	def getBree() {
 		return config.javaVersion.bree
 	}
-	
+
 	private def manifestEntry(String key, Iterable<String> value) {
 		if (value.isEmpty)
 			return ""
@@ -132,23 +136,24 @@ abstract class ProjectDescriptor {
 	def Set<String> getRequiredBundles() {
 		val bundles = newLinkedHashSet
 		bundles += upstreamProjects.map[name]
-		bundles += externalDependencies.map[p2].filter[bundleId !== null]
-			.map[bundleId + if (version === null) "" else ';bundle-version="' +version+ '"']
+		bundles += externalDependencies.map[p2].filter[bundleId !== null].map [
+			bundleId + if(version === null) "" else ';bundle-version="' + version + '"'
+		]
 		bundles
 	}
 
 	def Set<String> getImportedPackages() {
 		externalDependencies.map[p2.packages].flatten.toSet
 	}
-	
+
 	def Set<ExternalDependency> getExternalDependencies() {
 		val deps = newLinkedHashSet()
-		for (ePackage: config.ecore2Xtext.EPackageInfos) {
+		for (ePackage : config.ecore2Xtext.EPackageInfos) {
 			deps += ExternalDependency.createBundleDependency(ePackage.bundleID)
 		}
 		return deps
 	}
-	
+
 	def getActivatorClassName() {
 		null
 	}
@@ -169,14 +174,22 @@ abstract class ProjectDescriptor {
 		config.sourceLayout.getPathFor(outlet);
 	}
 
+	def outputFolder(Outlet outlet) {
+		config.sourceLayout.getOutputFor(outlet);
+	}
+
+	def isTest(Outlet outlet) {
+		config.sourceLayout.isTest(outlet);
+	}
+
 	protected def file(Outlet outlet, String relativePath, CharSequence content) {
 		new PlainTextFile(outlet, relativePath, this, content)
 	}
-	
+
 	protected def file(Outlet outlet, String relativePath, CharSequence content, boolean executable) {
 		new PlainTextFile(outlet, relativePath, this, content, executable)
 	}
-	
+
 	protected def binaryFile(Outlet outlet, String relativePath, URL url) {
 		return new BinaryFile(outlet, relativePath, this, false, url)
 	}
