@@ -1197,7 +1197,7 @@ public class XbaseFormatter extends XtypeFormatter {
             final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
               it.oneSpace();
             };
-            final ISemanticRegion last_1 = this.formatClosureParams(expr, open, format, _function_5);
+            final ISemanticRegion last_1 = this.formatClosureParams(expr, open, doc, _function_5);
             this.formatExpressionsMultiline(children, last_1, close, doc);
           };
           format.formatConditionally(offset, length, _function_3, _function_4);

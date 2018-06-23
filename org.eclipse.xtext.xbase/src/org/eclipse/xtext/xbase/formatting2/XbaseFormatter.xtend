@@ -554,7 +554,7 @@ class XbaseFormatter extends XtypeFormatter {
 						c.append[if(c == children.last) noSpace else oneSpace]
 				}
 			], [ doc |
-				val last = expr.formatClosureParams(open, format)[oneSpace]
+				val last = expr.formatClosureParams(open, doc)[oneSpace]
 				formatExpressionsMultiline(children, last, close, doc)
 			])
 		}
