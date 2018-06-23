@@ -6,6 +6,7 @@ import javax.inject.Provider
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device
 import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEngineFactory
+import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.SaveOptions
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.serializer.ISerializer
@@ -19,9 +20,11 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineInjectorProvider)
 class SerializerTest extends Assert {
+	
 	@Inject ISerializer serializer
 	extension RuleEngineFactory = RuleEngineFactory.eINSTANCE
 	extension XbaseFactory = XbaseFactory.eINSTANCE
+	@Inject extension FileExtensionProvider
 	@Inject Provider<XtextResourceSet> rsProvider
 	
 	@Test
@@ -55,7 +58,7 @@ class SerializerTest extends Assert {
 			]
 		]
 		
-		val resource = rs.createResource(URI.createURI("heater.rules"))
+		val resource = rs.createResource(URI.createURI("heater." + primaryFileExtension))
 		resource.contents += model
 		
 		val sw = new StringWriter

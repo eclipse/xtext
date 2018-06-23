@@ -18,6 +18,7 @@ import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEngineFactory;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.State;
 import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.ISerializer;
@@ -53,6 +54,10 @@ public class SerializerTest extends Assert {
   
   @Extension
   private XbaseFactory _xbaseFactory = XbaseFactory.eINSTANCE;
+  
+  @Inject
+  @Extension
+  private FileExtensionProvider _fileExtensionProvider;
   
   @Inject
   private Provider<XtextResourceSet> rsProvider;
@@ -136,7 +141,9 @@ public class SerializerTest extends Assert {
       };
       Rule _doubleArrow_2 = ObjectExtensions.<Rule>operator_doubleArrow(_createRule, _function_2);
       _declarations_2.add(_doubleArrow_2);
-      final Resource resource = rs.createResource(URI.createURI("heater.rules"));
+      String _primaryFileExtension = this._fileExtensionProvider.getPrimaryFileExtension();
+      String _plus = ("heater." + _primaryFileExtension);
+      final Resource resource = rs.createResource(URI.createURI(_plus));
       EList<EObject> _contents = resource.getContents();
       _contents.add(model);
       final StringWriter sw = new StringWriter();
