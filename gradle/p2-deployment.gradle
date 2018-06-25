@@ -24,7 +24,7 @@ p2gen {
 		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000'
 	}
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/tools/orbit/downloads/drops/R20170919201930/repository'
+		repositoryUrl 'http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository'
 		bundle 'org.junit'
 		includeSource true
 	}
