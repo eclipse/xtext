@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -409,7 +409,18 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		if (prefixNode instanceof ILeafNode) {
 			if (((ILeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
 				return "";
-			return getNodeTextUpToCompletionOffset(prefixNode);
+			INode startingNode = prefixNode;
+			// As long as there are leaf nodes with syntax errors one after the other go back until the first one is
+			// found
+			while (startingNode.getSyntaxErrorMessage() != null) {
+				INode nodeBefore = startingNode.getPreviousSibling();
+				if (nodeBefore.getSyntaxErrorMessage() != null) {
+					startingNode = nodeBefore;
+				} else {
+					break;
+				}
+			}
+			return getNodeTextUpToCompletionOffset(startingNode);
 		}
 		StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
 		doComputePrefix((ICompositeNode) prefixNode, result);
@@ -419,7 +430,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 	public String getNodeTextUpToCompletionOffset(INode currentNode) {
 		int startOffset = currentNode.getOffset();
 		int length = completionOffset - startOffset;
-		String nodeText = ((ILeafNode) currentNode).getText();
+		String nodeText = currentNode.getRootNode().getText().substring(startOffset, startOffset + length);
 		String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
 		try {
 			String text = document.substring(startOffset, startOffset + trimmedNodeText.length());
