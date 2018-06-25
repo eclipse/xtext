@@ -22,6 +22,12 @@ project {
 			name = 'Michael Clay'
 		}
 		developer {
+			name = 'Arne Deutsch'
+			email = 'arne.deutsch@itemis.de'
+			organization = 'itemis'
+			organizationUrl = 'http://www.itemis.com'
+		}
+		developer {
 			name = 'Christian Dietrich'
 			email = 'christian.dietrich@itemis.de'
 			organization = 'itemis'
