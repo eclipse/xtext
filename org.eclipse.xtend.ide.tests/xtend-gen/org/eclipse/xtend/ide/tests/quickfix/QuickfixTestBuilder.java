@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
@@ -71,6 +72,10 @@ public class QuickfixTestBuilder {
   
   private Set<String> modifiedIssueCodes;
   
+  private final String primaryPositionMarker = "<|>";
+  
+  private final String secondaryPositionMarker = "|";
+  
   private IPersistentPreferenceStore getPreferenceStore() {
     IPreferenceStore _writablePreferenceStore = this.preferenceStoreAccess.getWritablePreferenceStore(this._workbenchTestHelper.getProject());
     return ((IPersistentPreferenceStore) _writablePreferenceStore);
@@ -88,12 +93,12 @@ public class QuickfixTestBuilder {
     this.xbaseBuilderPreferenceAccess.setJavaVersion(this._workbenchTestHelper.getProject(), javaVersion);
   }
   
-  public QuickfixTestBuilder create(final String fileName, final CharSequence model) {
+  public QuickfixTestBuilder create(final String fileName, final String model) {
     try {
       QuickfixTestBuilder _xblockexpression = null;
       {
-        Assert.assertNotSame("No position marker | found in model", Integer.valueOf((-1)), Integer.valueOf(model.toString().indexOf("|")));
-        final IFile file = this._workbenchTestHelper.createFile(fileName, model.toString().replace("|", ""));
+        final String positionMarker = this.getPositionMarker(model);
+        final IFile file = this._workbenchTestHelper.createFile(fileName, model.replace(positionMarker, ""));
         this.editor = this.openEditorSafely(file);
         final IXtextDocument document = this.editor.getDocument();
         Assert.assertNotNull("Error getting document from editor", document);
@@ -101,7 +106,7 @@ public class QuickfixTestBuilder {
           return this.issues = this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
         };
         document.<List<Issue>>readOnly(_function);
-        this.caretOffset = model.toString().indexOf("|");
+        this.caretOffset = model.indexOf(positionMarker);
         _xblockexpression = this;
       }
       return _xblockexpression;
@@ -306,6 +311,38 @@ public class QuickfixTestBuilder {
       this._syncUtil.waitForReconciler(editor);
       this._syncUtil.yieldToQueuedDisplayJobs(monitor);
       _xblockexpression = editor;
+    }
+    return _xblockexpression;
+  }
+  
+  protected String getPositionMarker(final String model) {
+    int _count = this.count(model, this.primaryPositionMarker);
+    boolean _equals = (_count == 1);
+    if (_equals) {
+      return this.primaryPositionMarker;
+    } else {
+      int _count_1 = this.count(model, this.secondaryPositionMarker);
+      boolean _equals_1 = (_count_1 == 1);
+      if (_equals_1) {
+        return this.secondaryPositionMarker;
+      } else {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(this.primaryPositionMarker);
+        _builder.append(" may be used to disambiguate ordinary ");
+        _builder.append(this.secondaryPositionMarker);
+        _builder.append(" from a position marker!");
+        Assert.fail(_builder.toString());
+      }
+    }
+    return null;
+  }
+  
+  protected int count(final String model, final String positionMarker) {
+    int _xblockexpression = (int) 0;
+    {
+      final String regex = Pattern.quote(positionMarker);
+      int _length = model.split(regex).length;
+      _xblockexpression = (_length - 1);
     }
     return _xblockexpression;
   }
