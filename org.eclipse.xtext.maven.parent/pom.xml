@@ -329,6 +329,13 @@
 			<organization>Codeworkz</organization>
 		</developer>
 		<developer>
+			<id>arne.deutsch</id>
+			<name>Arne Deutsch</name>
+			<email>arne.deutsch@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
 			<id>christian.dietrich</id>
 			<name>Christian Dietrich</name>
 			<email>christian.dietrich@itemis.de</email>
