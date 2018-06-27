@@ -96,6 +96,8 @@ Workflow {
 			}
 			fragment = validation.ValidatorFragment2 {
 				generateXtendStub = false
+				generatePropertyPage = false
+				generateDeprecationValidation = false
 			}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
