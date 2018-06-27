@@ -787,25 +787,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleMultiCatchType
-entryRuleMultiCatchType
+// Entry rule entryRuleMultiTypeReference
+entryRuleMultiTypeReference
 :
-{ before(grammarAccess.getMultiCatchTypeRule()); }
-	 ruleMultiCatchType
-{ after(grammarAccess.getMultiCatchTypeRule()); } 
+{ before(grammarAccess.getMultiTypeReferenceRule()); }
+	 ruleMultiTypeReference
+{ after(grammarAccess.getMultiTypeReferenceRule()); } 
 	 EOF 
 ;
 
-// Rule MultiCatchType
-ruleMultiCatchType 
+// Rule MultiTypeReference
+ruleMultiTypeReference 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getMultiCatchTypeAccess().getGroup()); }
-		(rule__MultiCatchType__Group__0)
-		{ after(grammarAccess.getMultiCatchTypeAccess().getGroup()); }
+		{ before(grammarAccess.getMultiTypeReferenceAccess().getGroup()); }
+		(rule__MultiTypeReference__Group__0)
+		{ after(grammarAccess.getMultiTypeReferenceAccess().getGroup()); }
 	)
 ;
 finally {
@@ -16196,53 +16196,53 @@ finally {
 }
 
 
-rule__MultiCatchType__Group__0
+rule__MultiTypeReference__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group__0__Impl
-	rule__MultiCatchType__Group__1
+	rule__MultiTypeReference__Group__0__Impl
+	rule__MultiTypeReference__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group__0__Impl
+rule__MultiTypeReference__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0()); }
+	{ before(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); }
 	ruleJvmTypeReference
-	{ after(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0()); }
+	{ after(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group__1
+rule__MultiTypeReference__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group__1__Impl
+	rule__MultiTypeReference__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group__1__Impl
+rule__MultiTypeReference__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMultiCatchTypeAccess().getGroup_1()); }
-	(rule__MultiCatchType__Group_1__0)?
-	{ after(grammarAccess.getMultiCatchTypeAccess().getGroup_1()); }
+	{ before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1()); }
+	(rule__MultiTypeReference__Group_1__0)?
+	{ after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1()); }
 )
 ;
 finally {
@@ -16250,59 +16250,59 @@ finally {
 }
 
 
-rule__MultiCatchType__Group_1__0
+rule__MultiTypeReference__Group_1__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group_1__0__Impl
-	rule__MultiCatchType__Group_1__1
+	rule__MultiTypeReference__Group_1__0__Impl
+	rule__MultiTypeReference__Group_1__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1__0__Impl
+rule__MultiTypeReference__Group_1__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); }
+	{ before(grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); }
 	()
-	{ after(grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); }
+	{ after(grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1__1
+rule__MultiTypeReference__Group_1__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group_1__1__Impl
+	rule__MultiTypeReference__Group_1__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1__1__Impl
+rule__MultiTypeReference__Group_1__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
 	(
-		{ before(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); }
-		(rule__MultiCatchType__Group_1_1__0)
-		{ after(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); }
+		{ before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); }
+		(rule__MultiTypeReference__Group_1_1__0)
+		{ after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); }
 	)
 	(
-		{ before(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); }
-		(rule__MultiCatchType__Group_1_1__0)*
-		{ after(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); }
+		{ before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); }
+		(rule__MultiTypeReference__Group_1_1__0)*
+		{ after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); }
 	)
 )
 ;
@@ -16311,53 +16311,53 @@ finally {
 }
 
 
-rule__MultiCatchType__Group_1_1__0
+rule__MultiTypeReference__Group_1_1__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group_1_1__0__Impl
-	rule__MultiCatchType__Group_1_1__1
+	rule__MultiTypeReference__Group_1_1__0__Impl
+	rule__MultiTypeReference__Group_1_1__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1_1__0__Impl
+rule__MultiTypeReference__Group_1_1__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0()); }
+	{ before(grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0()); }
 	'|'
-	{ after(grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0()); }
+	{ after(grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1_1__1
+rule__MultiTypeReference__Group_1_1__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MultiCatchType__Group_1_1__1__Impl
+	rule__MultiTypeReference__Group_1_1__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__Group_1_1__1__Impl
+rule__MultiTypeReference__Group_1_1__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1()); }
-	(rule__MultiCatchType__ReferencesAssignment_1_1_1)
-	{ after(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1()); }
+	{ before(grammarAccess.getMultiTypeReferenceAccess().getReferencesAssignment_1_1_1()); }
+	(rule__MultiTypeReference__ReferencesAssignment_1_1_1)
+	{ after(grammarAccess.getMultiTypeReferenceAccess().getReferencesAssignment_1_1_1()); }
 )
 ;
 finally {
@@ -32448,9 +32448,9 @@ rule__FullJvmFormalParameter__ParameterTypeAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0()); }
-		ruleMultiCatchType
-		{ after(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0()); }
+		{ before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0()); }
+		ruleMultiTypeReference
+		{ after(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -32472,15 +32472,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MultiCatchType__ReferencesAssignment_1_1_1
+rule__MultiTypeReference__ReferencesAssignment_1_1_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); }
+		{ before(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); }
 		ruleJvmTypeReference
-		{ after(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); }
+		{ after(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); }
 	)
 ;
 finally {
@@ -32583,9 +32583,9 @@ rule__XCasePart__TypeGuardAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0()); }
-		ruleMultiCatchType
-		{ after(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0()); }
+		{ before(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0()); }
+		ruleMultiTypeReference
+		{ after(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0()); }
 	)
 ;
 finally {

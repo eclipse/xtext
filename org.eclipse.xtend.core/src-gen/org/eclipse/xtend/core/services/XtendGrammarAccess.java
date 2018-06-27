@@ -3351,16 +3351,16 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cExtensionAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cExtensionExtensionKeyword_0_0 = (Keyword)cExtensionAssignment_0.eContents().get(0);
 		private final Assignment cParameterTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParameterTypeMultiCatchTypeParserRuleCall_1_0 = (RuleCall)cParameterTypeAssignment_1.eContents().get(0);
+		private final RuleCall cParameterTypeMultiTypeReferenceParserRuleCall_1_0 = (RuleCall)cParameterTypeAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameInnerVarIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//@Override
 		//FullJvmFormalParameter XtendFormalParameter:
-		//	extension?='extension'? parameterType=MultiCatchType name=InnerVarID;
+		//	extension?='extension'? parameterType=MultiTypeReference name=InnerVarID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//extension?='extension'? parameterType=MultiCatchType name=InnerVarID
+		//extension?='extension'? parameterType=MultiTypeReference name=InnerVarID
 		public Group getGroup() { return cGroup; }
 		
 		//extension?='extension'?
@@ -3369,11 +3369,11 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//'extension'
 		public Keyword getExtensionExtensionKeyword_0_0() { return cExtensionExtensionKeyword_0_0; }
 		
-		//parameterType=MultiCatchType
+		//parameterType=MultiTypeReference
 		public Assignment getParameterTypeAssignment_1() { return cParameterTypeAssignment_1; }
 		
-		//MultiCatchType
-		public RuleCall getParameterTypeMultiCatchTypeParserRuleCall_1_0() { return cParameterTypeMultiCatchTypeParserRuleCall_1_0; }
+		//MultiTypeReference
+		public RuleCall getParameterTypeMultiTypeReferenceParserRuleCall_1_0() { return cParameterTypeMultiTypeReferenceParserRuleCall_1_0; }
 		
 		//name=InnerVarID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -3381,8 +3381,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//InnerVarID
 		public RuleCall getNameInnerVarIDParserRuleCall_2_0() { return cNameInnerVarIDParserRuleCall_2_0; }
 	}
-	public class MultiCatchTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtend.core.Xtend.MultiCatchType");
+	public class MultiTypeReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtend.core.Xtend.MultiTypeReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cJvmTypeReferenceParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -3392,7 +3392,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReferencesAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cReferencesJvmTypeReferenceParserRuleCall_1_1_1_0 = (RuleCall)cReferencesAssignment_1_1_1.eContents().get(0);
 		
-		//MultiCatchType types::JvmTypeReference:
+		//MultiTypeReference types::JvmTypeReference:
 		//	JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3584,7 +3584,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cXCasePartAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cTypeGuardAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeGuardMultiCatchTypeParserRuleCall_1_0 = (RuleCall)cTypeGuardAssignment_1.eContents().get(0);
+		private final RuleCall cTypeGuardMultiTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeGuardAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCaseKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cCaseAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -3599,20 +3599,20 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//@Override
 		//XCasePart xbase::XCasePart:
-		//	{xbase::XCasePart} typeGuard=MultiCatchType? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',');
+		//	{xbase::XCasePart} typeGuard=MultiTypeReference? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{xbase::XCasePart} typeGuard=MultiCatchType? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',')
+		//{xbase::XCasePart} typeGuard=MultiTypeReference? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',')
 		public Group getGroup() { return cGroup; }
 		
 		//{xbase::XCasePart}
 		public Action getXCasePartAction_0() { return cXCasePartAction_0; }
 		
-		//typeGuard=MultiCatchType?
+		//typeGuard=MultiTypeReference?
 		public Assignment getTypeGuardAssignment_1() { return cTypeGuardAssignment_1; }
 		
-		//MultiCatchType
-		public RuleCall getTypeGuardMultiCatchTypeParserRuleCall_1_0() { return cTypeGuardMultiCatchTypeParserRuleCall_1_0; }
+		//MultiTypeReference
+		public RuleCall getTypeGuardMultiTypeReferenceParserRuleCall_1_0() { return cTypeGuardMultiTypeReferenceParserRuleCall_1_0; }
 		
 		//('case' case=XExpression)?
 		public Group getGroup_2() { return cGroup_2; }
@@ -4188,7 +4188,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	private final XbaseConstructorCallElements pXbaseConstructorCall;
 	private final JvmFormalParameterElements pJvmFormalParameter;
 	private final FullJvmFormalParameterElements pFullJvmFormalParameter;
-	private final MultiCatchTypeElements pMultiCatchType;
+	private final MultiTypeReferenceElements pMultiTypeReference;
 	private final XStringLiteralElements pXStringLiteral;
 	private final XSwitchExpressionElements pXSwitchExpression;
 	private final XCasePartElements pXCasePart;
@@ -4260,7 +4260,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		this.pXbaseConstructorCall = new XbaseConstructorCallElements();
 		this.pJvmFormalParameter = new JvmFormalParameterElements();
 		this.pFullJvmFormalParameter = new FullJvmFormalParameterElements();
-		this.pMultiCatchType = new MultiCatchTypeElements();
+		this.pMultiTypeReference = new MultiTypeReferenceElements();
 		this.pXStringLiteral = new XStringLiteralElements();
 		this.pXSwitchExpression = new XSwitchExpressionElements();
 		this.pXCasePart = new XCasePartElements();
@@ -4687,7 +4687,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//@Override
 	//FullJvmFormalParameter XtendFormalParameter:
-	//	extension?='extension'? parameterType=MultiCatchType name=InnerVarID;
+	//	extension?='extension'? parameterType=MultiTypeReference name=InnerVarID;
 	public FullJvmFormalParameterElements getFullJvmFormalParameterAccess() {
 		return pFullJvmFormalParameter;
 	}
@@ -4696,14 +4696,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getFullJvmFormalParameterAccess().getRule();
 	}
 	
-	//MultiCatchType types::JvmTypeReference:
+	//MultiTypeReference types::JvmTypeReference:
 	//	JvmTypeReference ({types::JvmSynonymTypeReference.references+=current} ('|' references+=JvmTypeReference)+)?;
-	public MultiCatchTypeElements getMultiCatchTypeAccess() {
-		return pMultiCatchType;
+	public MultiTypeReferenceElements getMultiTypeReferenceAccess() {
+		return pMultiTypeReference;
 	}
 	
-	public ParserRule getMultiCatchTypeRule() {
-		return getMultiCatchTypeAccess().getRule();
+	public ParserRule getMultiTypeReferenceRule() {
+		return getMultiTypeReferenceAccess().getRule();
 	}
 	
 	//@Override
@@ -4734,7 +4734,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//@Override
 	//XCasePart xbase::XCasePart:
-	//	{xbase::XCasePart} typeGuard=MultiCatchType? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',');
+	//	{xbase::XCasePart} typeGuard=MultiTypeReference? ('case' case=XExpression)? (':' then=XExpression | fallThrough?=',');
 	public XCasePartElements getXCasePartAccess() {
 		return pXCasePart;
 	}

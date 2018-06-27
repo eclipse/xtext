@@ -5505,9 +5505,9 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0());
 				}
-				lv_parameterType_1_0=ruleMultiCatchType
+				lv_parameterType_1_0=ruleMultiTypeReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFullJvmFormalParameterRule());
@@ -5516,7 +5516,7 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 						$current,
 						"parameterType",
 						lv_parameterType_1_0,
-						"org.eclipse.xtend.core.Xtend.MultiCatchType");
+						"org.eclipse.xtend.core.Xtend.MultiTypeReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -5543,15 +5543,15 @@ ruleFullJvmFormalParameter returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleMultiCatchType
-entryRuleMultiCatchType returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getMultiCatchTypeRule()); }
-	iv_ruleMultiCatchType=ruleMultiCatchType
-	{ $current=$iv_ruleMultiCatchType.current; }
+// Entry rule entryRuleMultiTypeReference
+entryRuleMultiTypeReference returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMultiTypeReferenceRule()); }
+	iv_ruleMultiTypeReference=ruleMultiTypeReference
+	{ $current=$iv_ruleMultiTypeReference.current; }
 	EOF;
 
-// Rule MultiCatchType
-ruleMultiCatchType returns [EObject current=null]
+// Rule MultiTypeReference
+ruleMultiTypeReference returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -5560,7 +5560,7 @@ ruleMultiCatchType returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0());
+			newCompositeNode(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0());
 		}
 		this_JvmTypeReference_0=ruleJvmTypeReference
 		{
@@ -5571,24 +5571,24 @@ ruleMultiCatchType returns [EObject current=null]
 			(
 				{
 					$current = forceCreateModelElementAndAdd(
-						grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0(),
+						grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0(),
 						$current);
 				}
 			)
 			(
 				otherlv_2='|'
 				{
-					newLeafNode(otherlv_2, grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0());
+					newLeafNode(otherlv_2, grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0());
 				}
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
+							newCompositeNode(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
 						}
 						lv_references_3_0=ruleJvmTypeReference
 						{
 							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getMultiCatchTypeRule());
+								$current = createModelElementForParent(grammarAccess.getMultiTypeReferenceRule());
 							}
 							add(
 								$current,
@@ -5878,9 +5878,9 @@ ruleXCasePart returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0());
 				}
-				lv_typeGuard_1_0=ruleMultiCatchType
+				lv_typeGuard_1_0=ruleMultiTypeReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getXCasePartRule());
@@ -5889,7 +5889,7 @@ ruleXCasePart returns [EObject current=null]
 						$current,
 						"typeGuard",
 						lv_typeGuard_1_0,
-						"org.eclipse.xtend.core.Xtend.MultiCatchType");
+						"org.eclipse.xtend.core.Xtend.MultiTypeReference");
 					afterParserOrEnumRuleCall();
 				}
 			)

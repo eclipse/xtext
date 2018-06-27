@@ -230,9 +230,9 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getXbaseConstructorCallAccess().getGroup_4_1_1_1(), "rule__XbaseConstructorCall__Group_4_1_1_1__0");
 			builder.put(grammarAccess.getJvmFormalParameterAccess().getGroup(), "rule__JvmFormalParameter__Group__0");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getGroup(), "rule__FullJvmFormalParameter__Group__0");
-			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup(), "rule__MultiCatchType__Group__0");
-			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup_1(), "rule__MultiCatchType__Group_1__0");
-			builder.put(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1(), "rule__MultiCatchType__Group_1_1__0");
+			builder.put(grammarAccess.getMultiTypeReferenceAccess().getGroup(), "rule__MultiTypeReference__Group__0");
+			builder.put(grammarAccess.getMultiTypeReferenceAccess().getGroup_1(), "rule__MultiTypeReference__Group_1__0");
+			builder.put(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1(), "rule__MultiTypeReference__Group_1_1__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup(), "rule__XSwitchExpression__Group__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0(), "rule__XSwitchExpression__Group_2_0__0");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0_0(), "rule__XSwitchExpression__Group_2_0_0__0");
@@ -610,7 +610,7 @@ public class XtendParser extends AbstractPartialContentAssistParser {
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getExtensionAssignment_0(), "rule__FullJvmFormalParameter__ExtensionAssignment_0");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeAssignment_1(), "rule__FullJvmFormalParameter__ParameterTypeAssignment_1");
 			builder.put(grammarAccess.getFullJvmFormalParameterAccess().getNameAssignment_2(), "rule__FullJvmFormalParameter__NameAssignment_2");
-			builder.put(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1(), "rule__MultiCatchType__ReferencesAssignment_1_1_1");
+			builder.put(grammarAccess.getMultiTypeReferenceAccess().getReferencesAssignment_1_1_1(), "rule__MultiTypeReference__ReferencesAssignment_1_1_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_0_0_0_1(), "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_0_1(), "rule__XSwitchExpression__SwitchAssignment_2_0_1");
 			builder.put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_1_0_0_0(), "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0");

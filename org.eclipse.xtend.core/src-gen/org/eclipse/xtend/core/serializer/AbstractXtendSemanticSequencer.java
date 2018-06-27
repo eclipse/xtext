@@ -104,8 +104,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		if (epackage == TypesPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:
-				if (rule == grammarAccess.getMultiCatchTypeRule()
-						|| action == grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
+				if (rule == grammarAccess.getMultiTypeReferenceRule()
+						|| action == grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
 						|| rule == grammarAccess.getJvmTypeReferenceRule()
 						|| action == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()
 						|| rule == grammarAccess.getJvmArgumentTypeReferenceRule()) {
@@ -127,8 +127,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				else break;
 			case TypesPackage.JVM_INNER_TYPE_REFERENCE:
 				if (rule == grammarAccess.getJvmSuperTypeReferenceRule()
-						|| rule == grammarAccess.getMultiCatchTypeRule()
-						|| action == grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
+						|| rule == grammarAccess.getMultiTypeReferenceRule()
+						|| action == grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
 						|| rule == grammarAccess.getJvmTypeReferenceRule()
 						|| action == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()
 						|| rule == grammarAccess.getJvmParameterizedTypeReferenceRule()
@@ -161,8 +161,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					return; 
 				}
 				else if (rule == grammarAccess.getJvmSuperTypeReferenceRule()
-						|| rule == grammarAccess.getMultiCatchTypeRule()
-						|| action == grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
+						|| rule == grammarAccess.getMultiTypeReferenceRule()
+						|| action == grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
 						|| rule == grammarAccess.getJvmTypeReferenceRule()
 						|| action == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()
 						|| rule == grammarAccess.getJvmParameterizedTypeReferenceRule()
@@ -184,7 +184,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				}
 				else break;
 			case TypesPackage.JVM_SYNONYM_TYPE_REFERENCE:
-				sequence_MultiCatchType(context, (JvmSynonymTypeReference) semanticObject); 
+				sequence_MultiTypeReference(context, (JvmSynonymTypeReference) semanticObject); 
 				return; 
 			case TypesPackage.JVM_TYPE_PARAMETER:
 				sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
@@ -646,8 +646,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					return; 
 				}
 				else if (rule == grammarAccess.getTypeReferenceWithTypeArgsRule()
-						|| rule == grammarAccess.getMultiCatchTypeRule()
-						|| action == grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
+						|| rule == grammarAccess.getMultiTypeReferenceRule()
+						|| action == grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()
 						|| rule == grammarAccess.getJvmTypeReferenceRule()
 						|| rule == grammarAccess.getXFunctionTypeRefRule()
 						|| rule == grammarAccess.getJvmArgumentTypeReferenceRule()) {
@@ -800,7 +800,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     FullJvmFormalParameter returns XtendFormalParameter
 	 *
 	 * Constraint:
-	 *     (extension?='extension'? parameterType=MultiCatchType name=InnerVarID)
+	 *     (extension?='extension'? parameterType=MultiTypeReference name=InnerVarID)
 	 */
 	protected void sequence_FullJvmFormalParameter(ISerializationContext context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -990,12 +990,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Contexts:
-	 *     MultiCatchType returns JvmSynonymTypeReference
+	 *     MultiTypeReference returns JvmSynonymTypeReference
 	 *
 	 * Constraint:
-	 *     (references+=MultiCatchType_JvmSynonymTypeReference_1_0 references+=JvmTypeReference+)
+	 *     (references+=MultiTypeReference_JvmSynonymTypeReference_1_0 references+=JvmTypeReference+)
 	 */
-	protected void sequence_MultiCatchType(ISerializationContext context, JvmSynonymTypeReference semanticObject) {
+	protected void sequence_MultiTypeReference(ISerializationContext context, JvmSynonymTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1425,7 +1425,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     XCasePart returns XCasePart
 	 *
 	 * Constraint:
-	 *     (typeGuard=MultiCatchType? case=XExpression? (then=XExpression | fallThrough?=','))
+	 *     (typeGuard=MultiTypeReference? case=XExpression? (then=XExpression | fallThrough?=','))
 	 */
 	protected void sequence_XCasePart(ISerializationContext context, XCasePart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

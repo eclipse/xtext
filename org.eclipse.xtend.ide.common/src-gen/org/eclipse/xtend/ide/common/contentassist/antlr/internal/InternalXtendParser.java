@@ -1867,19 +1867,19 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void entryRuleMultiCatchType() throws RecognitionException {
+    public final void entryRuleMultiTypeReference() throws RecognitionException {
         try {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeRule()); 
+               before(grammarAccess.getMultiTypeReferenceRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleMultiCatchType();
+            ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeRule()); 
+               after(grammarAccess.getMultiTypeReferenceRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -1894,7 +1894,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void ruleMultiCatchType() throws RecognitionException {
+    public final void ruleMultiTypeReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -1902,11 +1902,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getGroup()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getGroup()); 
             }
             {
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group__0();
+            rule__MultiTypeReference__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1914,7 +1914,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             }
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getGroup()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getGroup()); 
             }
 
             }
@@ -44900,19 +44900,19 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group__0() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_66);
-            rule__MultiCatchType__Group__0__Impl();
+            rule__MultiTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group__1();
+            rule__MultiTypeReference__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -44931,7 +44931,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group__0__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -44939,7 +44939,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleJvmTypeReference();
@@ -44947,7 +44947,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0()); 
             }
 
             }
@@ -44967,14 +44967,14 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group__1() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group__1__Impl();
+            rule__MultiTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -44993,7 +44993,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group__1__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -45001,7 +45001,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getGroup_1()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1()); 
             }
             int alt196=2;
             int LA196_0 = input.LA(1);
@@ -45013,7 +45013,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
                 case 1 :
                     {
                     pushFollow(FOLLOW_2);
-                    rule__MultiCatchType__Group_1__0();
+                    rule__MultiTypeReference__Group_1__0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -45024,7 +45024,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             }
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getGroup_1()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1()); 
             }
 
             }
@@ -45044,19 +45044,19 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1__0() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_66);
-            rule__MultiCatchType__Group_1__0__Impl();
+            rule__MultiTypeReference__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group_1__1();
+            rule__MultiTypeReference__Group_1__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45075,7 +45075,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1__0__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -45083,13 +45083,13 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); 
             }
             {
             }
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0()); 
             }
 
             }
@@ -45105,14 +45105,14 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1__1() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group_1__1__Impl();
+            rule__MultiTypeReference__Group_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45131,7 +45131,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1__1__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -45140,11 +45140,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); 
             }
             {
             pushFollow(FOLLOW_67);
-            rule__MultiCatchType__Group_1_1__0();
+            rule__MultiTypeReference__Group_1_1__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45152,13 +45152,13 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             }
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); 
             }
 
             }
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); 
             }
             loop197:
             do {
@@ -45174,7 +45174,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    {
             	    pushFollow(FOLLOW_67);
-            	    rule__MultiCatchType__Group_1_1__0();
+            	    rule__MultiTypeReference__Group_1_1__0();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -45188,7 +45188,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getGroup_1_1()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getGroup_1_1()); 
             }
 
             }
@@ -45211,19 +45211,19 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1_1__0() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_28);
-            rule__MultiCatchType__Group_1_1__0__Impl();
+            rule__MultiTypeReference__Group_1_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group_1_1__1();
+            rule__MultiTypeReference__Group_1_1__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45242,7 +45242,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1_1__0__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -45250,11 +45250,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0()); 
             }
             match(input,KW_VerticalLine,FOLLOW_2); if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0()); 
             }
 
             }
@@ -45274,14 +45274,14 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1_1__1() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
             {
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__Group_1_1__1__Impl();
+            rule__MultiTypeReference__Group_1_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45300,7 +45300,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__Group_1_1__1__Impl() throws RecognitionException {
+    public final void rule__MultiTypeReference__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -45308,11 +45308,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getReferencesAssignment_1_1_1()); 
             }
             {
             pushFollow(FOLLOW_2);
-            rule__MultiCatchType__ReferencesAssignment_1_1_1();
+            rule__MultiTypeReference__ReferencesAssignment_1_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -45320,7 +45320,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             }
 
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getReferencesAssignment_1_1_1()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getReferencesAssignment_1_1_1()); 
             }
 
             }
@@ -85678,15 +85678,15 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0()); 
+               before(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleMultiCatchType();
+            ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0()); 
+               after(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0()); 
             }
 
             }
@@ -85742,7 +85742,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    public final void rule__MultiCatchType__ReferencesAssignment_1_1_1() throws RecognitionException {
+    public final void rule__MultiTypeReference__ReferencesAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -85750,7 +85750,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); 
+               before(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleJvmTypeReference();
@@ -85758,7 +85758,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             state._fsp--;
             if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); 
+               after(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0()); 
             }
 
             }
@@ -86002,15 +86002,15 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             {
             {
             if (! isBacktracking() ) {
-               before(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0()); 
+               before(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleMultiCatchType();
+            ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if (! isBacktracking() ) {
-               after(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0()); 
+               after(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0()); 
             }
 
             }
