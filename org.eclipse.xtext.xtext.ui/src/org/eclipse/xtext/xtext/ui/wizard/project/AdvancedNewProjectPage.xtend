@@ -30,6 +30,7 @@ import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 import org.eclipse.xtext.util.JUnitVersion
 import org.eclipse.swt.widgets.Label
+import org.eclipse.pde.core.plugin.PluginRegistry
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -100,11 +101,12 @@ class AdvancedNewProjectPage extends WizardPage {
 					junitVersion4 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "4"
-						selection = true
+						selection = !isJUnit5PluginAvailable
 					]
 					junitVersion5 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "5"
+						selection = isJUnit5PluginAvailable
 					]
 				]
 			]
@@ -446,6 +448,10 @@ class AdvancedNewProjectPage extends WizardPage {
 		} else {
 			throw new IllegalStateException
 		}
+	}
+	
+	private def boolean isJUnit5PluginAvailable() {
+		PluginRegistry.findModel("org.junit.jupiter.engine") !== null
 	}
 
 }
