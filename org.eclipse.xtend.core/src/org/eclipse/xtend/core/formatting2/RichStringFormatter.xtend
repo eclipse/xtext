@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XbasePackage
 
 import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
+import org.eclipse.emf.ecore.plugin.EcorePlugin
 
 /**
  * cases to distinguish:
@@ -47,6 +48,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
  *  4. multi-line with only whitespace after opening ''' and before closing ''': one level of extra indentation between ''' and '''
  * 
  * @author Moritz Eysholdt - Initial implementation and API
+ * @author Arne Deutsch - Workaround for exception thrown for blank lines
  */
 @FinalFieldsConstructor class RichStringFormatter {
 
@@ -101,7 +103,16 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 							TemplateWhitespace: doc.formatter.getPreference(indentation)
 						}
 					].join
-					doc.setSpace(offset, length, text)
+					// TODO The if statement is a workaround. Without it an exception is generated in case a blank line
+					// without any whitespace is placed e.g. between an «IF». This way the indentation is not correct
+					// but at least the file is formatted. There is a test case in XtendRichStringFormatterTest that
+					// needs to be adapted as soon as the root cause of the issue is found.
+					// See: https://github.com/eclipse/xtext-core/issues/710
+					if (length >= 0) {
+						doc.setSpace(offset, length, text)
+					} else {
+						EcorePlugin.INSTANCE.log(new RuntimeException("Programmatic error: length == " + length));
+					}
 				}
 			}
 		}

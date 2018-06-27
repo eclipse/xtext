@@ -307,5 +307,58 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			}
 		''')
 	}
+
+	@Test def indentThreeTabsLineInIf() {
+		assertFormatted('''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+							
+						<<ENDIF>>
+					```
+				}
+			}
+		'''.decode, '''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+						
+						<<ENDIF>>
+					```
+				}
+			}
+		'''.decode)
+	}
+	
+	// TODO this test case is not 100% correct ... one additional tab should be generated for the blank line.
+	// But the formatter code is to complicated. Was not able to generate the correct indentation. But as it is now
+	// the test at least ensures that there is no exception generated.
+	// See: https://github.com/eclipse/xtext-core/issues/710
+	@Test def indentEmptyLineInIf() {
+		assertFormatted('''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+						
+						<<ENDIF>>
+					```
+				}
+			}
+		'''.decode, '''
+			class Generator {
+				def generate() {
+					```
+						<<IF true>>
+			
+						<<ENDIF>>
+					```
+				}
+			}
+		'''.decode)
+	}
+	
 }
 	 
