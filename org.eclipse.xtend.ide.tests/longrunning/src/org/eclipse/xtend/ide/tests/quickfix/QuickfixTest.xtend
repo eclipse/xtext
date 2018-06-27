@@ -3764,6 +3764,35 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(FEATURE_NOT_VISIBLE)
 		.assertResolutionLabels("Add cast to Foo.")
 	}
+	
+	@Test
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402920
+	def void useXtendTypeSignature() {
+		val quickfixLabel = "Create method 'baz((String)=>String)'" 
+		create('Foo.xtend', '''
+			class Foo {
+				def bar() {
+					b<|>az([String e | e.toString])
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Change to 'bar'",
+			quickfixLabel)
+		.assertModelAfterQuickfix(quickfixLabel, '''
+			class Foo {
+				def bar() {
+					baz([String e | e.toString])
+				}
+				
+				def baz((String)=>String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
 
 	@Test
 	def void unnecessaryModifier_01(){
