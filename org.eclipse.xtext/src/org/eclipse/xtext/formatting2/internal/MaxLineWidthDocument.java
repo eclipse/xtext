@@ -51,7 +51,7 @@ public class MaxLineWidthDocument extends SubDocument {
 	protected void validate(HiddenRegionReplacer replacer) throws FormattingNotApplicableException {
 		IHiddenRegionFormatting formatting = replacer.getFormatting();
 		Integer newLineMin = formatting.getNewLineMin();
-		if (newLineMin != null && newLineMin > 0)
+		if (newLineMin != null && newLineMin < 0)
 			throw new FormattingNotApplicableException();
 	}
 
