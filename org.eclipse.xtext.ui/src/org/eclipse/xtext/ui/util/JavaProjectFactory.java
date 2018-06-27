@@ -11,7 +11,12 @@ import static org.eclipse.xtext.ui.util.JREContainerProvider.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFolder;
@@ -20,10 +25,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.ui.wizards.buildpaths.BuildPathSupport;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.swt.widgets.Shell;
@@ -43,6 +50,9 @@ public class JavaProjectFactory extends ProjectFactory {
 
 	private IClasspathEntry jreContainerEntry;
 
+	private Map<String, String> sourceFolderOutputs = new HashMap<>();
+	private Set<String> testSourceFolders = new HashSet<>();
+
 	@Override
 	protected void enhanceProject(IProject project, SubMonitor monitor, Shell shell) throws CoreException {
 		super.enhanceProject(project, monitor, shell);
@@ -59,7 +69,12 @@ public class JavaProjectFactory extends ProjectFactory {
 				}
 				for (final String folderName : folders) {
 					final IFolder sourceFolder = project.getFolder(folderName);
-					final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(sourceFolder.getFullPath());
+					final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(sourceFolder.getFullPath(),
+							ClasspathEntry.INCLUDE_ALL, ClasspathEntry.EXCLUDE_NONE,
+							project.getFolder(sourceFolderOutputs.get(folderName)).getFullPath(),
+							testSourceFolders.contains(folderName)
+									? new IClasspathAttribute[] { JavaCore.newClasspathAttribute("test", "true") }
+									: new IClasspathAttribute[0]);
 					classpathEntries.add(srcClasspathEntry);
 				}
 				classpathEntries.addAll(extraClasspathEntries);
@@ -158,6 +173,18 @@ public class JavaProjectFactory extends ProjectFactory {
 	 */
 	public JavaProjectFactory setDefaultOutput(String defaultOutput) {
 		this.defaultOutput= defaultOutput;
+		return this;
+	}
+
+	/**
+	 * @since 2.15
+	 */
+	public JavaProjectFactory addSourceFolder(String path, String output, boolean isTest) {
+		addFolders(Collections.singletonList(path));
+		this.sourceFolderOutputs.put(path, output);
+		if (isTest) {
+			this.testSourceFolders.add(path);
+		}
 		return this;
 	}
 }
