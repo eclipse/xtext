@@ -1741,5 +1741,23 @@ class XbaseFormatterTest {
 				val j = true&&(class.startsWith("Hugo"))
 			'''
 		]
+	}
+	
+	@Test def void testIssue527() {
+		assertFormattedExpression[
+			expectation = '''
+				var veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname = #[
+					1, 2, 3, 4, 5]
+				veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname.
+					map [ l |
+						veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname
+					]
+			'''
+			toBeFormatted = '''
+				var veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname = #[1,2,3,4,5]
+				veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname.map[l|veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname]
+				
+			'''
+		]
 	}	
 }

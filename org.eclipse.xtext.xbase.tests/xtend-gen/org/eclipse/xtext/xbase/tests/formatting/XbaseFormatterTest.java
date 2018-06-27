@@ -2825,4 +2825,36 @@ public class XbaseFormatterTest {
     };
     this._xbaseFormatterTester.assertFormattedExpression(_function);
   }
+  
+  @Test
+  public void testIssue527() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname = #[");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("1, 2, 3, 4, 5]");
+      _builder.newLine();
+      _builder.append("veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname.");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("map [ l |");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("]");
+      _builder.newLine();
+      it.setExpectation(_builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("var veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname = #[1,2,3,4,5]");
+      _builder_1.newLine();
+      _builder_1.append("veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname.map[l|veryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryveryname]");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      it.setToBeFormatted(_builder_1);
+    };
+    this._xbaseFormatterTester.assertFormattedExpression(_function);
+  }
 }
