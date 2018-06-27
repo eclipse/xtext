@@ -69,9 +69,10 @@ public class JavaProjectFactory extends ProjectFactory {
 				}
 				for (final String folderName : folders) {
 					final IFolder sourceFolder = project.getFolder(folderName);
+					String outputFolderName = sourceFolderOutputs.get(folderName);
 					final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(sourceFolder.getFullPath(),
 							ClasspathEntry.INCLUDE_ALL, ClasspathEntry.EXCLUDE_NONE,
-							project.getFolder(sourceFolderOutputs.get(folderName)).getFullPath(),
+							outputFolderName == null ? null : project.getFolder(outputFolderName).getFullPath(),
 							testSourceFolders.contains(folderName)
 									? new IClasspathAttribute[] { JavaCore.newClasspathAttribute("test", "true") }
 									: new IClasspathAttribute[0]);
