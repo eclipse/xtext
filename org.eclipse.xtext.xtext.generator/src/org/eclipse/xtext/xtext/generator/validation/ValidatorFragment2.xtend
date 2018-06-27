@@ -50,7 +50,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	
 	@Accessors
 	boolean generateDeprecationValidation = true;
-
+	@Accessors
+	boolean generatePropertyPage = true;
+	
 	val List<String> composedChecks = newArrayList
 
 	/**
@@ -120,16 +122,20 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
 		bindingFactory.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
-		bindingFactory.addTypeToType(superConfigurableIssueCodesProviderClass,configurableIssueCodesProviderClass)
+		if (generateDeprecationValidation || generatePropertyPage) {
+			bindingFactory.addTypeToType(superConfigurableIssueCodesProviderClass,configurableIssueCodesProviderClass)
+		}
 		bindingFactory.contributeTo(language.runtimeGenModule)
 	}
 	/**
 	 * @since 2.14
 	 */
 	protected def contributePluginGuiceBindings() {
-		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		bindingFactory.addTypeToType(abstractValidatorConfigurationBlockClass,validatorConfigurationBlockClass)
-		bindingFactory.contributeTo(language.eclipsePluginGenModule)
+		if (generateDeprecationValidation || generatePropertyPage) {
+			val bindingFactory = new GuiceModuleAccess.BindingFactory
+			bindingFactory.addTypeToType(abstractValidatorConfigurationBlockClass,validatorConfigurationBlockClass)
+			bindingFactory.contributeTo(language.eclipsePluginGenModule)
+		}
 	}
 
 	override generate() {
@@ -143,8 +149,10 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				generateJavaValidatorStub()
 		}
 		generateGenValidator().writeTo(projectConfig.runtime.srcGen)
-		generateIssueProvider().writeTo(projectConfig.runtime.srcGen)
-		generateValidationConfigurationBlock().writeTo(projectConfig.eclipsePlugin.srcGen)
+		if (generateDeprecationValidation || generatePropertyPage) {
+			generateIssueProvider().writeTo(projectConfig.runtime.srcGen)
+			generateValidationConfigurationBlock().writeTo(projectConfig.eclipsePlugin.srcGen)	
+		}
 
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
@@ -228,7 +236,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				«generateValidationToDeprecateRules»
 			}
 		'''
-		javaFile
+		return javaFile
 	}
 	
 	/**
@@ -254,7 +262,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				}
 			}
 		'''
-		javaFile
+		return javaFile
 	}
 	
 	protected def generateValidationConfigurationBlock() {
@@ -319,7 +327,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				}
 			}
 		'''
-		javaFile
+		return javaFile
 	}
 
 	protected def StringConcatenationClient generateValidationToDeprecateRules() '''
@@ -336,7 +344,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	'''
 
 	protected def getGeneratedPackagesToValidate() {
-		grammar.metamodelDeclarations.filter(GeneratedMetamodel).map[EPackage]
+		return grammar.metamodelDeclarations.filter(GeneratedMetamodel).map[EPackage]
 	}
 
 	protected def getRegistryPackagesToValidate() {
@@ -374,15 +382,17 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				<super type="org.eclipse.xtext.ui.check.expensive"/>
 				<persistent value="true"/>
 			</extension>
-			<extension point="org.eclipse.ui.preferencePages">
-				<page
-					category="«grammar.name»"
-					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-					id="«grammar.name».validator.preferencePage"
-					name="Errors/Warnings">
-					<keywordReference id="«grammar.eclipsePluginBasePackage».keyword_«simpleName»"/>
-				</page>
-			</extension>
+			«IF generateDeprecationValidation || generatePropertyPage»
+				<extension point="org.eclipse.ui.preferencePages">
+					<page
+						category="«grammar.name»"
+						class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+						id="«grammar.name».validator.preferencePage"
+						name="Errors/Warnings">
+						<keywordReference id="«grammar.eclipsePluginBasePackage».keyword_«simpleName»"/>
+					</page>
+				</extension>
+			«ENDIF»
 		'''
 	}
 
@@ -391,7 +401,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	 */
 	protected def getDeprecatedRulesFromGrammar() {
 		val alreadyCollected = newHashSet
-		grammar.rules.filter[isDeprecated && alreadyCollected.add(it.type.classifier)].toList
+		return grammar.rules.filter[isDeprecated && alreadyCollected.add(it.type.classifier)].toList
 	}
 	
 	/**

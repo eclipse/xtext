@@ -77,6 +77,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   @Accessors
   private boolean generateDeprecationValidation = true;
   
+  @Accessors
+  private boolean generatePropertyPage = true;
+  
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
   /**
@@ -164,7 +167,9 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     bindingFactory.addTypeToTypeEagerSingleton(this._validatorNaming.getValidatorClass(this.getGrammar()), this._validatorNaming.getValidatorClass(this.getGrammar()));
-    bindingFactory.addTypeToType(this.getSuperConfigurableIssueCodesProviderClass(), this.getConfigurableIssueCodesProviderClass());
+    if ((this.generateDeprecationValidation || this.generatePropertyPage)) {
+      bindingFactory.addTypeToType(this.getSuperConfigurableIssueCodesProviderClass(), this.getConfigurableIssueCodesProviderClass());
+    }
     bindingFactory.contributeTo(this.getLanguage().getRuntimeGenModule());
   }
   
@@ -172,9 +177,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
    * @since 2.14
    */
   protected void contributePluginGuiceBindings() {
-    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    bindingFactory.addTypeToType(this.getAbstractValidatorConfigurationBlockClass(), this.getValidatorConfigurationBlockClass());
-    bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    if ((this.generateDeprecationValidation || this.generatePropertyPage)) {
+      final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
+      bindingFactory.addTypeToType(this.getAbstractValidatorConfigurationBlockClass(), this.getValidatorConfigurationBlockClass());
+      bindingFactory.contributeTo(this.getLanguage().getEclipsePluginGenModule());
+    }
   }
   
   @Override
@@ -191,8 +198,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       }
     }
     this.generateGenValidator().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
-    this.generateIssueProvider().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
-    this.generateValidationConfigurationBlock().writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
+    if ((this.generateDeprecationValidation || this.generatePropertyPage)) {
+      this.generateIssueProvider().writeTo(this.getProjectConfig().getRuntime().getSrcGen());
+      this.generateValidationConfigurationBlock().writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
+    }
     ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
@@ -330,426 +339,414 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   }
   
   protected GeneratedJavaFileAccess generateGenValidator() {
-    GeneratedJavaFileAccess _xblockexpression = null;
-    {
-      TypeReference _xifexpression = null;
-      boolean _isGenerateStub = this.isGenerateStub();
-      if (_isGenerateStub) {
-        _xifexpression = this._validatorNaming.getAbstractValidatorClass(this.getGrammar());
-      } else {
-        _xifexpression = this._validatorNaming.getValidatorClass(this.getGrammar());
-      }
-      final TypeReference genClass = _xifexpression;
-      final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          {
-            boolean _isEmpty = ValidatorFragment2.this.composedChecks.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              _builder.append("@");
-              _builder.append(ComposedChecks.class);
-              _builder.append("(validators = {");
-              {
-                boolean _hasElements = false;
-                for(final String validator : ValidatorFragment2.this.composedChecks) {
-                  if (!_hasElements) {
-                    _hasElements = true;
-                  } else {
-                    _builder.appendImmediate(", ", "");
-                  }
-                  TypeReference _typeRef = TypeReference.typeRef(validator);
-                  _builder.append(_typeRef);
-                  _builder.append(".class");
-                }
-              }
-              _builder.append("})");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("public ");
-          {
-            boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
-            if (_isGenerateStub) {
-              _builder.append("abstract ");
-            }
-          }
-          _builder.append("class ");
-          String _simpleName = genClass.getSimpleName();
-          _builder.append(_simpleName);
-          _builder.append(" extends ");
-          TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(ValidatorFragment2.this.getGrammar());
-          _builder.append(_genValidatorSuperClass);
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected ");
-          _builder.append(List.class, "\t");
-          _builder.append("<");
-          _builder.append(EPackage.class, "\t");
-          _builder.append("> getEPackages() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append(List.class, "\t\t");
-          _builder.append("<");
-          _builder.append(EPackage.class, "\t\t");
-          _builder.append("> result = new ");
-          _builder.append(ArrayList.class, "\t\t");
-          _builder.append("<");
-          _builder.append(EPackage.class, "\t\t");
-          _builder.append(">(");
-          {
-            if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
-              _builder.append("super.getEPackages()");
-            }
-          }
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          {
-            Iterable<EPackage> _generatedPackagesToValidate = ValidatorFragment2.this.getGeneratedPackagesToValidate();
-            for(final EPackage e : _generatedPackagesToValidate) {
-              _builder.append("\t\t");
-              _builder.append("result.add(");
-              String _generatedEPackageName = ValidatorFragment2.this.getGeneratedEPackageName(e);
-              _builder.append(_generatedEPackageName, "\t\t");
-              _builder.append(".eINSTANCE);");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          {
-            Collection<EPackage> _registryPackagesToValidate = ValidatorFragment2.this.getRegistryPackagesToValidate();
-            for(final EPackage e_1 : _registryPackagesToValidate) {
-              _builder.append("\t\t");
-              _builder.append("result.add(EPackage.Registry.INSTANCE.getEPackage(\"");
-              String _nsURI = e_1.getNsURI();
-              _builder.append(_nsURI, "\t\t");
-              _builder.append("\"));");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("return result;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          StringConcatenationClient _generateValidationToDeprecateRules = ValidatorFragment2.this.generateValidationToDeprecateRules();
-          _builder.append(_generateValidationToDeprecateRules, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      };
-      javaFile.setContent(_client);
-      _xblockexpression = javaFile;
+    TypeReference _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      _xifexpression = this._validatorNaming.getAbstractValidatorClass(this.getGrammar());
+    } else {
+      _xifexpression = this._validatorNaming.getValidatorClass(this.getGrammar());
     }
-    return _xblockexpression;
+    final TypeReference genClass = _xifexpression;
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          boolean _isEmpty = ValidatorFragment2.this.composedChecks.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _builder.append("@");
+            _builder.append(ComposedChecks.class);
+            _builder.append("(validators = {");
+            {
+              boolean _hasElements = false;
+              for(final String validator : ValidatorFragment2.this.composedChecks) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(", ", "");
+                }
+                TypeReference _typeRef = TypeReference.typeRef(validator);
+                _builder.append(_typeRef);
+                _builder.append(".class");
+              }
+            }
+            _builder.append("})");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("public ");
+        {
+          boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
+            _builder.append("abstract ");
+          }
+        }
+        _builder.append("class ");
+        String _simpleName = genClass.getSimpleName();
+        _builder.append(_simpleName);
+        _builder.append(" extends ");
+        TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(ValidatorFragment2.this.getGrammar());
+        _builder.append(_genValidatorSuperClass);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(List.class, "\t");
+        _builder.append("<");
+        _builder.append(EPackage.class, "\t");
+        _builder.append("> getEPackages() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append(List.class, "\t\t");
+        _builder.append("<");
+        _builder.append(EPackage.class, "\t\t");
+        _builder.append("> result = new ");
+        _builder.append(ArrayList.class, "\t\t");
+        _builder.append("<");
+        _builder.append(EPackage.class, "\t\t");
+        _builder.append(">(");
+        {
+          if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
+            _builder.append("super.getEPackages()");
+          }
+        }
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        {
+          Iterable<EPackage> _generatedPackagesToValidate = ValidatorFragment2.this.getGeneratedPackagesToValidate();
+          for(final EPackage e : _generatedPackagesToValidate) {
+            _builder.append("\t\t");
+            _builder.append("result.add(");
+            String _generatedEPackageName = ValidatorFragment2.this.getGeneratedEPackageName(e);
+            _builder.append(_generatedEPackageName, "\t\t");
+            _builder.append(".eINSTANCE);");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          Collection<EPackage> _registryPackagesToValidate = ValidatorFragment2.this.getRegistryPackagesToValidate();
+          for(final EPackage e_1 : _registryPackagesToValidate) {
+            _builder.append("\t\t");
+            _builder.append("result.add(EPackage.Registry.INSTANCE.getEPackage(\"");
+            String _nsURI = e_1.getNsURI();
+            _builder.append(_nsURI, "\t\t");
+            _builder.append("\"));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("return result;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        StringConcatenationClient _generateValidationToDeprecateRules = ValidatorFragment2.this.generateValidationToDeprecateRules();
+        _builder.append(_generateValidationToDeprecateRules, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setContent(_client);
+    return javaFile;
   }
   
   /**
    * @since 2.14
    */
   protected GeneratedJavaFileAccess generateIssueProvider() {
-    GeneratedJavaFileAccess _xblockexpression = null;
-    {
-      final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getConfigurableIssueCodesProviderClass());
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("@SuppressWarnings(\"restriction\")");
-          _builder.newLine();
-          _builder.append("public class ");
-          TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
-          _builder.append(_configurableIssueCodesProviderClass);
-          _builder.append(" extends ");
-          TypeReference _superConfigurableIssueCodesProviderClass = ValidatorFragment2.this.getSuperConfigurableIssueCodesProviderClass();
-          _builder.append(_superConfigurableIssueCodesProviderClass);
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("protected static final String ISSUE_CODE_PREFIX = \"");
-          String _runtimeBasePackage = ValidatorFragment2.this._xtextGeneratorNaming.getRuntimeBasePackage(ValidatorFragment2.this.getGrammar());
-          _builder.append(_runtimeBasePackage, "\t");
-          _builder.append(".\";");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          {
-            if (ValidatorFragment2.this.generateDeprecationValidation) {
-              _builder.append("\t");
-              _builder.append("public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + \"deprecatedModelPart\";");
-              _builder.newLine();
-            }
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getConfigurableIssueCodesProviderClass());
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("@SuppressWarnings(\"restriction\")");
+        _builder.newLine();
+        _builder.append("public class ");
+        TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
+        _builder.append(_configurableIssueCodesProviderClass);
+        _builder.append(" extends ");
+        TypeReference _superConfigurableIssueCodesProviderClass = ValidatorFragment2.this.getSuperConfigurableIssueCodesProviderClass();
+        _builder.append(_superConfigurableIssueCodesProviderClass);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("protected static final String ISSUE_CODE_PREFIX = \"");
+        String _runtimeBasePackage = ValidatorFragment2.this._xtextGeneratorNaming.getRuntimeBasePackage(ValidatorFragment2.this.getGrammar());
+        _builder.append(_runtimeBasePackage, "\t");
+        _builder.append(".\";");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        {
+          if (ValidatorFragment2.this.generateDeprecationValidation) {
+            _builder.append("\t");
+            _builder.append("public static final String DEPRECATED_MODEL_PART = ISSUE_CODE_PREFIX + \"deprecatedModelPart\";");
+            _builder.newLine();
           }
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected void initialize(");
-          _builder.append(IAcceptor.class, "\t");
-          _builder.append("<");
-          _builder.append(PreferenceKey.class, "\t");
-          _builder.append("> acceptor) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("super.initialize(acceptor);");
-          _builder.newLine();
-          {
-            if (ValidatorFragment2.this.generateDeprecationValidation) {
-              _builder.append("\t\t");
-              _builder.append("acceptor.accept(create(DEPRECATED_MODEL_PART, ");
-              _builder.append(SeverityConverter.class, "\t\t");
-              _builder.append(".SEVERITY_WARNING));");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
         }
-      };
-      javaFile.setContent(_client);
-      _xblockexpression = javaFile;
-    }
-    return _xblockexpression;
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected void initialize(");
+        _builder.append(IAcceptor.class, "\t");
+        _builder.append("<");
+        _builder.append(PreferenceKey.class, "\t");
+        _builder.append("> acceptor) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("super.initialize(acceptor);");
+        _builder.newLine();
+        {
+          if (ValidatorFragment2.this.generateDeprecationValidation) {
+            _builder.append("\t\t");
+            _builder.append("acceptor.accept(create(DEPRECATED_MODEL_PART, ");
+            _builder.append(SeverityConverter.class, "\t\t");
+            _builder.append(".SEVERITY_WARNING));");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setContent(_client);
+    return javaFile;
   }
   
   protected GeneratedJavaFileAccess generateValidationConfigurationBlock() {
-    GeneratedJavaFileAccess _xblockexpression = null;
-    {
-      final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getValidatorConfigurationBlockClass());
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("@SuppressWarnings(\"restriction\")");
-          _builder.newLine();
-          _builder.append("public class ");
-          TypeReference _validatorConfigurationBlockClass = ValidatorFragment2.this.getValidatorConfigurationBlockClass();
-          _builder.append(_validatorConfigurationBlockClass);
-          _builder.append(" extends ");
-          TypeReference _xifexpression = null;
-          boolean _inheritsXbase = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
-          if (_inheritsXbase) {
-            _xifexpression = ValidatorFragment2.this.getXbaseValidationConfigurationBlockClass();
-          } else {
-            _xifexpression = ValidatorFragment2.this.getAbstractValidatorConfigurationBlockClass();
-          }
-          _builder.append(_xifexpression);
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected void fillSettingsPage(");
-          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.swt.widgets.Composite");
-          _builder.append(_typeRef, "\t");
-          _builder.append(" composite, int nColumns, int defaultIndent) {");
-          _builder.newLineIfNotEmpty();
-          {
-            if (ValidatorFragment2.this.generateDeprecationValidation) {
-              _builder.append("\t\t");
-              _builder.append("addComboBox(");
-              TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
-              _builder.append(_configurableIssueCodesProviderClass, "\t\t");
-              _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-          {
-            boolean _inheritsXbase_1 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
-            if (_inheritsXbase_1) {
-              _builder.append("\t\t");
-              _builder.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected ");
-          TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.core.runtime.jobs.Job");
-          _builder.append(_typeRef_1, "\t");
-          _builder.append(" getBuildJob(");
-          TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.core.resources.IProject");
-          _builder.append(_typeRef_2, "\t");
-          _builder.append(" project) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.core.runtime.jobs.Job");
-          _builder.append(_typeRef_3, "\t\t");
-          _builder.append(" buildJob = new ");
-          TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock");
-          _builder.append(_typeRef_4, "\t\t");
-          _builder.append(".BuildJob(\"Validation Settings Changed\", project);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("buildJob.setRule(");
-          TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.core.resources.ResourcesPlugin");
-          _builder.append(_typeRef_5, "\t\t");
-          _builder.append(".getWorkspace().getRuleFactory().buildRule());");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("buildJob.setUser(true);");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return buildJob;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return new String[] { \"Validation Settings Changed\",");
-          _builder.newLine();
-          _builder.append("\t\t\t\t");
-          _builder.append("\"Validation settings have changed. A full rebuild is required for changes to take effect. Do the full build now?\" };");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected void validateSettings(String changedKey, String oldValue, String newValue) {");
-          _builder.newLine();
-          {
-            boolean _inheritsXbase_2 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
-            if (_inheritsXbase_2) {
-              _builder.append("\t\t");
-              _builder.append("super.validateSettings(changedKey, oldValue, newValue);");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected ");
-          TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.swt.widgets.Combo");
-          _builder.append(_typeRef_6, "\t");
-          _builder.append(" addComboBox(String prefKey, String label, Composite parent, int indent) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("String[] values = new String[] { ");
-          TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
-          _builder.append(_typeRef_7, "\t\t");
-          _builder.append(".SEVERITY_ERROR, ");
-          TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
-          _builder.append(_typeRef_8, "\t\t");
-          _builder.append(".SEVERITY_WARNING,");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t\t\t");
-          TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
-          _builder.append(_typeRef_9, "\t\t\t\t");
-          _builder.append(".SEVERITY_INFO, ");
-          TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
-          _builder.append(_typeRef_10, "\t\t\t\t");
-          _builder.append(".SEVERITY_IGNORE };");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("String[] valueLabels = new String[] { \"Error\", \"Warning\", \"Info\", \"Ignore\" };");
-          _builder.newLine();
-          _builder.append("\t\t");
-          TypeReference _typeRef_11 = TypeReference.typeRef("org.eclipse.swt.widgets.Combo");
-          _builder.append(_typeRef_11, "\t\t");
-          _builder.append(" comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("return comboBox;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("public void dispose() {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("storeSectionExpansionStates(getDialogSettings());");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("super.dispose();");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("@Override");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("protected ");
-          TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
-          _builder.append(_typeRef_12, "\t");
-          _builder.append(" getDialogSettings() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
-          _builder.append(_typeRef_13, "\t\t");
-          _builder.append(" dialogSettings = super.getDialogSettings();");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
-          _builder.append(_typeRef_14, "\t\t");
-          _builder.append(" section = dialogSettings.getSection(\"");
-          String _simpleName = GrammarUtil.getSimpleName(ValidatorFragment2.this.getGrammar());
-          _builder.append(_simpleName, "\t\t");
-          _builder.append("\");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("if (section == null) {");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("return dialogSettings.addNewSection(\"");
-          String _simpleName_1 = GrammarUtil.getSimpleName(ValidatorFragment2.this.getGrammar());
-          _builder.append(_simpleName_1, "\t\t\t");
-          _builder.append("\");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return section;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(this.getValidatorConfigurationBlockClass());
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("@SuppressWarnings(\"restriction\")");
+        _builder.newLine();
+        _builder.append("public class ");
+        TypeReference _validatorConfigurationBlockClass = ValidatorFragment2.this.getValidatorConfigurationBlockClass();
+        _builder.append(_validatorConfigurationBlockClass);
+        _builder.append(" extends ");
+        TypeReference _xifexpression = null;
+        boolean _inheritsXbase = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+        if (_inheritsXbase) {
+          _xifexpression = ValidatorFragment2.this.getXbaseValidationConfigurationBlockClass();
+        } else {
+          _xifexpression = ValidatorFragment2.this.getAbstractValidatorConfigurationBlockClass();
         }
-      };
-      javaFile.setContent(_client);
-      _xblockexpression = javaFile;
-    }
-    return _xblockexpression;
+        _builder.append(_xifexpression);
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected void fillSettingsPage(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.swt.widgets.Composite");
+        _builder.append(_typeRef, "\t");
+        _builder.append(" composite, int nColumns, int defaultIndent) {");
+        _builder.newLineIfNotEmpty();
+        {
+          if (ValidatorFragment2.this.generateDeprecationValidation) {
+            _builder.append("\t\t");
+            _builder.append("addComboBox(");
+            TypeReference _configurableIssueCodesProviderClass = ValidatorFragment2.this.getConfigurableIssueCodesProviderClass();
+            _builder.append(_configurableIssueCodesProviderClass, "\t\t");
+            _builder.append(".DEPRECATED_MODEL_PART, \"Deprecated Model Part\", composite, defaultIndent);");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          boolean _inheritsXbase_1 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+          if (_inheritsXbase_1) {
+            _builder.append("\t\t");
+            _builder.append("super.fillSettingsPage(composite, nColumns, defaultIndent);");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.core.runtime.jobs.Job");
+        _builder.append(_typeRef_1, "\t");
+        _builder.append(" getBuildJob(");
+        TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.core.resources.IProject");
+        _builder.append(_typeRef_2, "\t");
+        _builder.append(" project) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.core.runtime.jobs.Job");
+        _builder.append(_typeRef_3, "\t\t");
+        _builder.append(" buildJob = new ");
+        TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock");
+        _builder.append(_typeRef_4, "\t\t");
+        _builder.append(".BuildJob(\"Validation Settings Changed\", project);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("buildJob.setRule(");
+        TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.core.resources.ResourcesPlugin");
+        _builder.append(_typeRef_5, "\t\t");
+        _builder.append(".getWorkspace().getRuleFactory().buildRule());");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("buildJob.setUser(true);");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return buildJob;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return new String[] { \"Validation Settings Changed\",");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("\"Validation settings have changed. A full rebuild is required for changes to take effect. Do the full build now?\" };");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected void validateSettings(String changedKey, String oldValue, String newValue) {");
+        _builder.newLine();
+        {
+          boolean _inheritsXbase_2 = ValidatorFragment2.this._xbaseUsageDetector.inheritsXbase(ValidatorFragment2.this.getLanguage().getGrammar());
+          if (_inheritsXbase_2) {
+            _builder.append("\t\t");
+            _builder.append("super.validateSettings(changedKey, oldValue, newValue);");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.swt.widgets.Combo");
+        _builder.append(_typeRef_6, "\t");
+        _builder.append(" addComboBox(String prefKey, String label, Composite parent, int indent) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("String[] values = new String[] { ");
+        TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
+        _builder.append(_typeRef_7, "\t\t");
+        _builder.append(".SEVERITY_ERROR, ");
+        TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
+        _builder.append(_typeRef_8, "\t\t");
+        _builder.append(".SEVERITY_WARNING,");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
+        _builder.append(_typeRef_9, "\t\t\t\t");
+        _builder.append(".SEVERITY_INFO, ");
+        TypeReference _typeRef_10 = TypeReference.typeRef("org.eclipse.xtext.validation.SeverityConverter");
+        _builder.append(_typeRef_10, "\t\t\t\t");
+        _builder.append(".SEVERITY_IGNORE };");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("String[] valueLabels = new String[] { \"Error\", \"Warning\", \"Info\", \"Ignore\" };");
+        _builder.newLine();
+        _builder.append("\t\t");
+        TypeReference _typeRef_11 = TypeReference.typeRef("org.eclipse.swt.widgets.Combo");
+        _builder.append(_typeRef_11, "\t\t");
+        _builder.append(" comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return comboBox;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void dispose() {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("storeSectionExpansionStates(getDialogSettings());");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("super.dispose();");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
+        _builder.append(_typeRef_12, "\t");
+        _builder.append(" getDialogSettings() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
+        _builder.append(_typeRef_13, "\t\t");
+        _builder.append(" dialogSettings = super.getDialogSettings();");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.jface.dialogs.IDialogSettings");
+        _builder.append(_typeRef_14, "\t\t");
+        _builder.append(" section = dialogSettings.getSection(\"");
+        String _simpleName = GrammarUtil.getSimpleName(ValidatorFragment2.this.getGrammar());
+        _builder.append(_simpleName, "\t\t");
+        _builder.append("\");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("if (section == null) {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("return dialogSettings.addNewSection(\"");
+        String _simpleName_1 = GrammarUtil.getSimpleName(ValidatorFragment2.this.getGrammar());
+        _builder.append(_simpleName_1, "\t\t\t");
+        _builder.append("\");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("return section;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setContent(_client);
+    return javaFile;
   }
   
   protected StringConcatenationClient generateValidationToDeprecateRules() {
@@ -906,45 +903,49 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       _builder.newLine();
       _builder.append("</extension>");
       _builder.newLine();
-      _builder.append("<extension point=\"org.eclipse.ui.preferencePages\">");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("<page");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("category=\"");
-      String _name_1 = this.getGrammar().getName();
-      _builder.append(_name_1, "\t\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("class=\"");
-      TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
-      _builder.append(_eclipsePluginExecutableExtensionFactory, "\t\t");
-      _builder.append(":org.eclipse.xtext.ui.validation.ValidatorPreferencePage\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("id=\"");
-      String _name_2 = this.getGrammar().getName();
-      _builder.append(_name_2, "\t\t");
-      _builder.append(".validator.preferencePage\"");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("name=\"Errors/Warnings\">");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("<keywordReference id=\"");
-      String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
-      _builder.append(_eclipsePluginBasePackage, "\t\t");
-      _builder.append(".keyword_");
-      _builder.append(simpleName, "\t\t");
-      _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("</page>");
-      _builder.newLine();
-      _builder.append("</extension>");
-      _builder.newLine();
+      {
+        if ((this.generateDeprecationValidation || this.generatePropertyPage)) {
+          _builder.append("<extension point=\"org.eclipse.ui.preferencePages\">");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("<page");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("category=\"");
+          String _name_1 = this.getGrammar().getName();
+          _builder.append(_name_1, "\t\t");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("class=\"");
+          TypeReference _eclipsePluginExecutableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(this.getGrammar());
+          _builder.append(_eclipsePluginExecutableExtensionFactory, "\t\t");
+          _builder.append(":org.eclipse.xtext.ui.validation.ValidatorPreferencePage\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("id=\"");
+          String _name_2 = this.getGrammar().getName();
+          _builder.append(_name_2, "\t\t");
+          _builder.append(".validator.preferencePage\"");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("name=\"Errors/Warnings\">");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("<keywordReference id=\"");
+          String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
+          _builder.append(_eclipsePluginBasePackage, "\t\t");
+          _builder.append(".keyword_");
+          _builder.append(simpleName, "\t\t");
+          _builder.append("\"/>");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("</page>");
+          _builder.newLine();
+          _builder.append("</extension>");
+          _builder.newLine();
+        }
+      }
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
@@ -954,15 +955,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
    * @since 2.14
    */
   protected List<AbstractRule> getDeprecatedRulesFromGrammar() {
-    List<AbstractRule> _xblockexpression = null;
-    {
-      final HashSet<EClassifier> alreadyCollected = CollectionLiterals.<EClassifier>newHashSet();
-      final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
-        return Boolean.valueOf((this.isDeprecated(it) && alreadyCollected.add(it.getType().getClassifier())));
-      };
-      _xblockexpression = IterableExtensions.<AbstractRule>toList(IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function));
-    }
-    return _xblockexpression;
+    final HashSet<EClassifier> alreadyCollected = CollectionLiterals.<EClassifier>newHashSet();
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf((this.isDeprecated(it) && alreadyCollected.add(it.getType().getClassifier())));
+    };
+    return IterableExtensions.<AbstractRule>toList(IterableExtensions.<AbstractRule>filter(this.getGrammar().getRules(), _function));
   }
   
   /**
@@ -982,5 +979,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   public void setGenerateDeprecationValidation(final boolean generateDeprecationValidation) {
     this.generateDeprecationValidation = generateDeprecationValidation;
+  }
+  
+  @Pure
+  public boolean isGeneratePropertyPage() {
+    return this.generatePropertyPage;
+  }
+  
+  public void setGeneratePropertyPage(final boolean generatePropertyPage) {
+    this.generatePropertyPage = generatePropertyPage;
   }
 }
