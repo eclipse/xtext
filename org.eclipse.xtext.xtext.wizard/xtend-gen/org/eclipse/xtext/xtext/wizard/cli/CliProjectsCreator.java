@@ -19,6 +19,7 @@ import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -68,8 +69,9 @@ public class CliProjectsCreator implements ProjectsCreator {
       }
     };
     project.getFiles().forEach(_function);
-    final Consumer<String> _function_1 = (String it) -> {
-      new File(projectRoot, it).mkdirs();
+    final Consumer<SourceFolderDescriptor> _function_1 = (SourceFolderDescriptor it) -> {
+      String _path = it.getPath();
+      new File(projectRoot, _path).mkdirs();
     };
     project.getSourceFolders().forEach(_function_1);
   }

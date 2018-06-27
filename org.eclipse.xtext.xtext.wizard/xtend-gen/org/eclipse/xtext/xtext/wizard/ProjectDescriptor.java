@@ -33,6 +33,7 @@ import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -74,11 +75,17 @@ public abstract class ProjectDescriptor {
     return CollectionLiterals.<ProjectDescriptor>emptySet();
   }
   
-  public Set<String> getSourceFolders() {
-    final Function1<Outlet, String> _function = (Outlet it) -> {
-      return this.sourceFolder(it);
+  /**
+   * @since 2.15 (changed return value use 'path' of 'SourceFolderDescriptor' to get same result as before)
+   */
+  public Set<SourceFolderDescriptor> getSourceFolders() {
+    final Function1<Outlet, SourceFolderDescriptor> _function = (Outlet it) -> {
+      String _sourceFolder = this.sourceFolder(it);
+      String _outputFolder = this.outputFolder(it);
+      boolean _isTest = this.isTest(it);
+      return new SourceFolderDescriptor(_sourceFolder, _outputFolder, _isTest);
     };
-    return IterableExtensions.<String>toSet(ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function));
+    return IterableExtensions.<SourceFolderDescriptor>toSet(ListExtensions.<Outlet, SourceFolderDescriptor>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function));
   }
   
   public Iterable<? extends AbstractFile> getFiles() {
@@ -118,10 +125,11 @@ public abstract class ProjectDescriptor {
   
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();
-    final Function1<String, String> _function = (String it) -> {
-      return (it + "/");
+    final Function1<SourceFolderDescriptor, String> _function = (SourceFolderDescriptor it) -> {
+      String _path = it.getPath();
+      return (_path + "/");
     };
-    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", IterableExtensions.<String, String>map(this.getSourceFolders(), _function));
+    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", IterableExtensions.<SourceFolderDescriptor, String>map(this.getSourceFolders(), _function));
     _builder.append(_buildPropertiesEntry);
     _builder.newLineIfNotEmpty();
     String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", this.getBinIncludes());
@@ -307,6 +315,14 @@ public abstract class ProjectDescriptor {
   
   public String sourceFolder(final Outlet outlet) {
     return this.config.getSourceLayout().getPathFor(outlet);
+  }
+  
+  public String outputFolder(final Outlet outlet) {
+    return this.config.getSourceLayout().getOutputFor(outlet);
+  }
+  
+  public boolean isTest(final Outlet outlet) {
+    return this.config.getSourceLayout().isTest(outlet);
   }
   
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content) {

@@ -49,7 +49,7 @@ class CliProjectsCreator implements ProjectsCreator {
 			}
 		]
 		project.sourceFolders.forEach [
-			new File(projectRoot, it).mkdirs
+			new File(projectRoot, it.path).mkdirs
 		]
 	}
 

@@ -154,8 +154,8 @@ class WizardConfigurationTest {
 	def void inlinedTestProjectsAddTheirSourceFoldersToTheMainProject() {
 		config.runtimeProject.testProject.enabled = true
 		config.sourceLayout = SourceLayout.MAVEN
-		config.runtimeProject.testProject.sourceFolders.forEach[testFolder|
-			assertTrue(config.runtimeProject.sourceFolders.contains(testFolder))
+		config.runtimeProject.testProject.sourceFolders.forEach[folder|
+			assertTrue(config.runtimeProject.sourceFolders.contains(folder))
 		]
 	}
 	

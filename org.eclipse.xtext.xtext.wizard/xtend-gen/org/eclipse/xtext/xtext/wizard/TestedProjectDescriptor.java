@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SourceFolderDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -45,16 +46,16 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public Set<String> getSourceFolders() {
-    LinkedHashSet<String> _xblockexpression = null;
+  public Set<SourceFolderDescriptor> getSourceFolders() {
+    LinkedHashSet<SourceFolderDescriptor> _xblockexpression = null;
     {
-      final LinkedHashSet<String> sourceFolders = CollectionLiterals.<String>newLinkedHashSet();
-      Set<String> _sourceFolders = super.getSourceFolders();
-      Iterables.<String>addAll(sourceFolders, _sourceFolders);
+      final LinkedHashSet<SourceFolderDescriptor> sourceFolders = CollectionLiterals.<SourceFolderDescriptor>newLinkedHashSet();
+      Set<SourceFolderDescriptor> _sourceFolders = super.getSourceFolders();
+      Iterables.<SourceFolderDescriptor>addAll(sourceFolders, _sourceFolders);
       boolean _isInlined = this.getTestProject().isInlined();
       if (_isInlined) {
-        Set<String> _sourceFolders_1 = this.getTestProject().getSourceFolders();
-        Iterables.<String>addAll(sourceFolders, _sourceFolders_1);
+        Set<SourceFolderDescriptor> _sourceFolders_1 = this.getTestProject().getSourceFolders();
+        Iterables.<SourceFolderDescriptor>addAll(sourceFolders, _sourceFolders_1);
       }
       _xblockexpression = sourceFolders;
     }
