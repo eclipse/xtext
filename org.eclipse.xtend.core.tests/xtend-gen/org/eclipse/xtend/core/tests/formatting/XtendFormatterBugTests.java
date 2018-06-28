@@ -12,6 +12,95 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
   @Test
+  public void testCoreIssue527_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val static SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH = #[]");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def fn() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH.map [ l |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void testtestCoreIssue527_02() {
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class ModuleDeclaration {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public List<Object> moduleComponents");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class AbstractTypeDeclaration {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class AliasDeclaration extends AbstractTypeDeclaration {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class JavaGenerator {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void generateCommon(String projectSourceRootPath,");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("ModuleDeclaration module) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("for (element : module.moduleComponents.filter(AbstractTypeDeclaration).");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("filter [ e |");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("!(e instanceof AliasDeclaration)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("]) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+    };
+    this.tester.assertFormatted(_function);
+  }
+  
+  @Test
   public void testBug402917_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

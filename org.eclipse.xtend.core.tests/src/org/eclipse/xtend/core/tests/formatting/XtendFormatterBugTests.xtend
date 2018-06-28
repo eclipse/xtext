@@ -5,6 +5,52 @@ import org.junit.Ignore
 import org.junit.Test
 
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
+	
+	@Test
+	def testCoreIssue527_01() {
+		assertFormatted('''
+		class test {
+			val static SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH = #[]
+		
+			def fn() {
+				return SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH.map [ l |
+					SUPER_LONG_LIST_TO_TEST_IF_FORMATTING_WORKS_HERE_AND_SUCH
+				]
+			}
+		}
+		''')
+	}
+	@Test
+	def testtestCoreIssue527_02() {
+		tester.assertFormatted [
+			preferences[
+				put(FormatterPreferenceKeys.maxLineWidth, 80)
+			]
+			toBeFormatted = '''
+				class ModuleDeclaration {
+					public List<Object> moduleComponents
+				}
+				
+				class AbstractTypeDeclaration {
+				}
+				
+				class AliasDeclaration extends AbstractTypeDeclaration {
+				}
+				
+				class JavaGenerator {
+					def void generateCommon(String projectSourceRootPath,
+						ModuleDeclaration module) {
+						for (element : module.moduleComponents.filter(AbstractTypeDeclaration).
+							filter [ e |
+								!(e instanceof AliasDeclaration)
+							]) {
+						}
+				
+					}
+				}
+			'''
+		]
+	}
 
 	@Test
 	def testBug402917_01() {
