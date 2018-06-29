@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource
 	val ClassLoader classLoader
 	val IResourceDescriptions resourceDescriptions
 	val EObjectDescriptionBasedStubGenerator stubGenerator
+	val ClassFileCache classFileCache
 
 	Map<QualifiedName, NameEnvironmentAnswer> cache = newHashMap()
     
@@ -31,7 +32,15 @@ import org.eclipse.emf.ecore.resource.Resource
 		return findType(className)
 	}
 	
-	def findType(QualifiedName className) {
+	def NameEnvironmentAnswer findType(QualifiedName className) {
+		if (classFileCache.containsKey(className)) {
+			val t = classFileCache.get(className)
+			// TODO is this ok?
+			if (t===null) {
+				return null
+			}
+			return new NameEnvironmentAnswer(t, null)
+		}
 		if (cache.containsKey(className)) {
 			return cache.get(className)
 		}
@@ -51,9 +60,13 @@ import org.eclipse.emf.ecore.resource.Resource
 			val url = classLoader.getResource(fileName)
 			if (url === null) {
 				cache.put(className, null)
+				//TODO is that ok
+				classFileCache.put(className, null)
 				return null;
 			}
 			val reader = ClassFileReader.read(url.openStream, fileName)
+			// TODO is this ok?
+			classFileCache.put(className, reader)
 			result = new NameEnvironmentAnswer(reader, null)
 		}
 		cache.put(className, result)

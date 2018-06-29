@@ -11,6 +11,7 @@ import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.parser.Parser
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
@@ -22,6 +23,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -34,6 +36,7 @@ class JavaDerivedStateComputer {
 	@Inject IReferableElementsUnloader unloader;
 	@Inject EObjectDescriptionBasedStubGenerator stubGenerator
 	@Inject IResourceDescriptionsProvider resourceDescriptionsProvider
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	def discardDerivedState(Resource resource) {
 		var EList<EObject> resourcesContentsList=resource.getContents() 
@@ -101,9 +104,19 @@ class JavaDerivedStateComputer {
 		(resource as JavaResource).getCompilationUnit()
 	}
 	
+	protected def ClassFileCache findOrCreateClassFileCache(ResourceSet rs) {
+		var cache = ClassFileCache.findInEmfObject(rs)
+		if (cache === null) {
+			cache = new ClassFileCache
+			cache.attachToEmfObject(rs)
+		}
+		cache
+	}
+	
 	def void installFull(Resource resource) {
 		if (resource.isInfoFile)
 			return;
+		val classFileCache = resource.resourceSet.findOrCreateClassFileCache
 		val compilationUnit = getCompilationUnit(resource)
 		val classLoader = getClassLoader(resource)
 		
@@ -111,8 +124,16 @@ class JavaDerivedStateComputer {
 		if (data === null)
 			throw new IllegalStateException("no index installed")
 		// TODO use container manager
-		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator)
+		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator, classFileCache)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
+			for (cls : it.classFiles) {
+				// TODO What is with inner classes (they contain $)
+				// TODO is there a better way to obtain the class name
+				val key = qualifiedNameConverter.toQualifiedName(new String(cls.fileName).replace("/","."))
+				if (!classFileCache.containsKey(key)) {
+					classFileCache.put(key, new ClassFileReader(cls.bytes,cls.fileName))
+				}
+			}
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap
 				var List<String> topLevelTypes = newArrayList

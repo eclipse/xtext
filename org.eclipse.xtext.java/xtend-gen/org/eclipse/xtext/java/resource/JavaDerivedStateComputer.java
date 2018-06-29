@@ -20,6 +20,7 @@ import org.eclipse.jdt.internal.compiler.ast.ImportReference;
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeParameter;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.parser.Parser;
@@ -34,10 +35,13 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
+import org.eclipse.xtext.java.resource.ClassFileCache;
 import org.eclipse.xtext.java.resource.InMemoryClassLoader;
 import org.eclipse.xtext.java.resource.IndexAwareNameEnvironment;
 import org.eclipse.xtext.java.resource.JavaConfig;
 import org.eclipse.xtext.java.resource.JavaResource;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
@@ -64,6 +68,9 @@ public class JavaDerivedStateComputer {
   
   @Inject
   private IResourceDescriptionsProvider resourceDescriptionsProvider;
+  
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
   public void discardDerivedState(final Resource resource) {
     EList<EObject> resourcesContentsList = resource.getContents();
@@ -169,56 +176,90 @@ public class JavaDerivedStateComputer {
     return ((JavaResource) resource).getCompilationUnit();
   }
   
+  protected ClassFileCache findOrCreateClassFileCache(final ResourceSet rs) {
+    ClassFileCache _xblockexpression = null;
+    {
+      ClassFileCache cache = ClassFileCache.findInEmfObject(rs);
+      if ((cache == null)) {
+        ClassFileCache _classFileCache = new ClassFileCache();
+        cache = _classFileCache;
+        cache.attachToEmfObject(rs);
+      }
+      _xblockexpression = cache;
+    }
+    return _xblockexpression;
+  }
+  
   public void installFull(final Resource resource) {
     boolean _isInfoFile = this.isInfoFile(resource);
     if (_isInfoFile) {
       return;
     }
+    final ClassFileCache classFileCache = this.findOrCreateClassFileCache(resource.getResourceSet());
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     final ClassLoader classLoader = this.getClassLoader(resource);
     final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(resource.getResourceSet());
     if ((data == null)) {
       throw new IllegalStateException("no index installed");
     }
-    final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, this.stubGenerator);
+    final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, this.stubGenerator, classFileCache);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     final ICompilerRequestor _function = (CompilationResult it) -> {
-      boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
-      if (_equals) {
-        final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
-        List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
+      try {
         ClassFile[] _classFiles = it.getClassFiles();
-        for (final ClassFile cf : _classFiles) {
+        for (final ClassFile cls : _classFiles) {
           {
-            final Function1<char[], String> _function_1 = (char[] it_1) -> {
-              return String.valueOf(it_1);
-            };
-            final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
-            map.put(className, cf.getBytes());
-            if ((!cf.isNestedType)) {
-              topLevelTypes.add(className);
+            char[] _fileName = cls.fileName();
+            final QualifiedName key = this.qualifiedNameConverter.toQualifiedName(new String(_fileName).replace("/", "."));
+            boolean _containsKey = classFileCache.containsKey(key);
+            boolean _not = (!_containsKey);
+            if (_not) {
+              byte[] _bytes = cls.getBytes();
+              char[] _fileName_1 = cls.fileName();
+              ClassFileReader _classFileReader = new ClassFileReader(_bytes, _fileName_1);
+              classFileCache.put(key, _classFileReader);
             }
           }
         }
-        final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
-        for (final String topLevel : topLevelTypes) {
-          try {
-            BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
-            ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
-            final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
-            final JvmDeclaredType type = builder.buildType();
-            EList<EObject> _contents = resource.getContents();
-            _contents.add(type);
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable t = (Throwable)_t;
-              throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
+        boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
+        if (_equals) {
+          final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
+          List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
+          ClassFile[] _classFiles_1 = it.getClassFiles();
+          for (final ClassFile cf : _classFiles_1) {
+            {
+              final Function1<char[], String> _function_1 = (char[] it_1) -> {
+                return String.valueOf(it_1);
+              };
+              final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
+              map.put(className, cf.getBytes());
+              if ((!cf.isNestedType)) {
+                topLevelTypes.add(className);
+              }
+            }
+          }
+          final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
+          for (final String topLevel : topLevelTypes) {
+            try {
+              BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
+              ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
+              final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
+              final JvmDeclaredType type = builder.buildType();
+              EList<EObject> _contents = resource.getContents();
+              _contents.add(type);
+            } catch (final Throwable _t) {
+              if (_t instanceof Throwable) {
+                final Throwable t = (Throwable)_t;
+                throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
+              } else {
+                throw Exceptions.sneakyThrow(_t);
+              }
             }
           }
         }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();

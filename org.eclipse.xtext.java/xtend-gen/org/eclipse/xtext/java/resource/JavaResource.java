@@ -122,14 +122,17 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   
   private CompilationUnit compilationUnit;
   
+  private String contentsAsString;
+  
   @Override
   protected void doLoad(final InputStream inputStream, final Map<?, ?> options) throws IOException {
     final String encoding = this.getEncoding(this.getURI(), options);
     InputStreamReader _inputStreamReader = new InputStreamReader(inputStream, encoding);
     final String contentsAsString = CharStreams.toString(_inputStreamReader);
+    this.contentsAsString = contentsAsString;
     char[] _charArray = contentsAsString.toCharArray();
     String _lastSegment = this.getURI().lastSegment();
-    CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding);
+    CompilationUnit _compilationUnit = new CompilationUnit(_charArray, _lastSegment, encoding, null);
     this.compilationUnit = _compilationUnit;
   }
   
@@ -190,6 +193,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   public void installFull() {
     final Procedure0 _function = () -> {
       this.derivedStateComputer.installFull(this);
+      this.compilationUnit = null;
       this.initialized = true;
     };
     this.initializing(_function);
@@ -334,7 +338,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   }
   
   public String getOriginalSource() {
-    return String.copyValueOf(this.compilationUnit.contents);
+    return this.contentsAsString;
   }
   
   @Pure
