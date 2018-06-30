@@ -29,7 +29,7 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(ArithmeticsUiInjectorProvider)
 class AutoEditTest extends AbstractAutoEditTest {
-	
+
 	@Test def void testCalculatorAutoEdit() {
 		openEditor('''
 			module MyModule
@@ -47,10 +47,10 @@ class AutoEditTest extends AbstractAutoEditTest {
 		]
 		
 	}
-	
+
 	@Inject FileExtensionProvider extensionProvider
 	@Inject PluginProjectFactory projectFactory
-	
+
 	@Before def void doSetup() {
 		createPluginProject("foo")
 	}
@@ -58,20 +58,20 @@ class AutoEditTest extends AbstractAutoEditTest {
 	override protected getFileExtension() {
 		extensionProvider.primaryFileExtension
 	}
-	
+
 	override protected getEditorId() {
 		ArithmeticsActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS
 	}
-	
+
 	def protected IProject createPluginProject(String name) throws CoreException {
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE) 
 		projectFactory.setProjectName(name) 
 		projectFactory.addFolders(Collections.singletonList("src")) 
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID) 
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID) 
-		var IProject result=projectFactory.createProject(new NullProgressMonitor(), null) 
+		var IProject result=projectFactory.createProject(new NullProgressMonitor(), null)
 		JavaProjectSetupUtil.setUnixLineEndings(result) 
 		return result 
 	}
-	
+
 }

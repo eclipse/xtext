@@ -24,9 +24,9 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class RuleEngineValidator extends AbstractRuleEngineValidator {
-	
+
 	@Inject extension IJvmModelAssociations
-	
+
 	@Check
 	def checkUniqueDeclarations(Model model) {
 		val deviceNames = newHashSet
@@ -44,14 +44,14 @@ class RuleEngineValidator extends AbstractRuleEngineValidator {
 			}
 		}
 	}
-	
+
 	@Check
 	def checkStatesNotEmpty(Device device) {
 		if (device.states.empty) {
 			error('''The device "«device.name»" must have at least one state.''', device, DEVICE__NAME)
 		}
 	}
-	
+
 	@Check
 	def checkUniqueStates(Device device) {
 		val stateNames = newHashSet
@@ -61,7 +61,7 @@ class RuleEngineValidator extends AbstractRuleEngineValidator {
 			}
 		}
 	}
-	
+
 	@Check
 	def checkRuleDescriptionNotEmpty(Rule rule) {
 		if (rule.description.nullOrEmpty) {
@@ -85,5 +85,5 @@ class RuleEngineValidator extends AbstractRuleEngineValidator {
 			}
 		}
 	}
-	
+
 }

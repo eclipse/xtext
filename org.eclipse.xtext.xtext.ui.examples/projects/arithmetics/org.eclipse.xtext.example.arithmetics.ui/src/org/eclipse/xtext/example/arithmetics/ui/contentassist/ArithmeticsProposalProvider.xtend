@@ -15,12 +15,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
-/** 
+/**
  * Implementation for custom code completion proposals.
  */
 class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProvider {
 	
-	/** 
+	/**
 	 * sets the selection on the arguments for proposed functions.
 	 */
 	override void completePrimaryExpression_Func(EObject model, Assignment assignment, ContentAssistContext context,

@@ -32,7 +32,7 @@ abstract class AbstractTest {
 				fire(Heater.off)
 		'''.test
 	}
-	
+
 	@Test def void test3() {
 		'''
 			Device Window can be open, closed

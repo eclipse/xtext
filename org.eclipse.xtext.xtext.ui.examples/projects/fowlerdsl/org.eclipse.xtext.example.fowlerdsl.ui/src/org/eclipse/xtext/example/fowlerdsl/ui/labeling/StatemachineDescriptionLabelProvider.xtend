@@ -13,7 +13,7 @@ package org.eclipse.xtext.example.fowlerdsl.ui.labeling
 class StatemachineDescriptionLabelProvider extends org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider {
 
 	// Labels and icons can be computed like this:
-	
+
 //	override text(IEObjectDescription ele) {
 //		ele.name.toString
 //	}

@@ -15,12 +15,12 @@ import static org.junit.Assert.*
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
 class CompilerTest {
-	
+
 	@Rule
 	@Inject public TemporaryFolder temporaryFolder 
 	@Inject extension CompilationTestHelper
 	@Inject extension ReflectExtensions
-	
+
 	@Test
 	def void testGeneratedJava() {
 		'''
@@ -61,7 +61,7 @@ class CompilerTest {
 			assertEquals("Hello Bar", fooObj.invoke('doStuff','Hello'))
 		]
 	}
-	
+
 	@Test
 	def void compareGeneratedJava() {
 		'''
@@ -100,6 +100,4 @@ class CompilerTest {
 		'''.toString, getSingleGeneratedCode)
 		]
 	}
-	
-	
 }

@@ -35,7 +35,7 @@ class InterpreterAutoEdit implements IAutoEditStrategy {
 						if (computedResult !== null)
 							command.text = lineDelimiter+"// = "+computedResult+lineDelimiter
 					}
-				} catch (BadLocationException e) { 
+				} catch (BadLocationException e) {
 					// ignore
 				}
 			}

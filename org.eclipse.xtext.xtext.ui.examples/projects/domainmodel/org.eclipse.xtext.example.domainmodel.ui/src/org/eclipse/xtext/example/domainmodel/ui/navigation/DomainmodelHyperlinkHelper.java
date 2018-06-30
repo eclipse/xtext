@@ -38,19 +38,19 @@ import com.google.inject.Provider;
 public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 
 	private static final Logger logger = Logger.getLogger(DomainmodelHyperlinkHelper.class);
-	
+
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
-	
+
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-	
+
 	@Inject
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
-	
+
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-	
+
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
@@ -85,5 +85,5 @@ public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
 			}
 		}
 	}
-	
+
 }

@@ -21,13 +21,13 @@ class RuleEngineParsingTest{
 	@Test 
 	def void loadModel() {
 		val result = parseHelper.parse('''
-		    Device Window can be open, closed
-		     
-		    Device Heater can be on, off, error
-		     
-		    Rule 'Save energy' when Window.open then
-		        fire(Heater.off)
-		        println('Another penny to the piggy bank!')
+			Device Window can be open, closed
+			
+			Device Heater can be on, off, error
+			
+			Rule 'Save energy' when Window.open then
+				fire(Heater.off)
+				println('Another penny to the piggy bank!')
 		''')
 		Assert.assertNotNull(result)
 	}

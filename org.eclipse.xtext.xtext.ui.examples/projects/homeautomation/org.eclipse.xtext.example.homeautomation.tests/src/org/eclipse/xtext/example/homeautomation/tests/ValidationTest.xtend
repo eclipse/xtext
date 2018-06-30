@@ -16,25 +16,25 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineInjectorProvider)
 class ValidationTest {
-	
+
 	@Inject extension ParseHelper<Model>
-	
+
 	extension ValidationTestHelper = new ValidationTestHelper(ValidationTestHelper.Mode.EXACT)
-	
+
 	@Test def testDeviceWithNoStates() {
 		'''
 		Device Window can be
 		
 		'''.assertError(DEVICE, 'The device "Window" must have at least one state.')
 	}
-	
+
 	@Test def testStatesWithSameName() {
 		'''
 		Device Window can be open, open
 		
 		'''.assertError(STATE, 'State names must be unique.')
 	}
-	
+
 	@Test def testTwoDevicesWithSameName() {
 		'''
 		Device Window can be open
@@ -42,7 +42,7 @@ class ValidationTest {
 		
 		'''.assertError(DEVICE, "Device names must be unique.")
 	}
-	
+
 	@Test def testTwoRulesWithSameDescription() {
 		'''
 		Device Window can be open, closed
@@ -54,7 +54,7 @@ class ValidationTest {
 			fire(Window.open)
 		'''.assertError(RULE, "Rule descriptions must be unique.")
 	}
-	
+
 	@Test def testRuleWithEmptyDescription() {
 		'''
 		Device Window can be open, closed
@@ -63,7 +63,7 @@ class ValidationTest {
 			fire(Window.closed)
 		'''.assertError(RULE, "A rule description must not be empty.")
 	}
-	
+
 	@Test def testRecursiveRule() {
 		'''
 		Device Window can be open
@@ -73,11 +73,11 @@ class ValidationTest {
 		'''.assertWarning(XFEATURE_CALL,
 			'Firing the same device state that triggers the rule "Recursive rule" may lead to endless recursion.')
 	}
-	
+
 	private def assertWarning(CharSequence text, EClass objectType, String message) {
 		text.parse.assertWarning(objectType, null, message)
 	}
-	
+
 	private def assertError(CharSequence text, EClass objectType, String message) {
 		text.parse.assertError(objectType, null, message)
 	}

@@ -43,32 +43,32 @@ public class FantasticEditStrategyProvider extends DefaultAutoEditStrategyProvid
 		private String getText() {
 			return 
 			"\n\n\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM  MMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM      MMMMMMMM\n"+
-            "\t\t\tMMMMMM   MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM     MMMMMMMM\n"+
-            "\t\t\tMMMM       MMMMMMMMMMMMMMMMMMMMMMMMMMMMM    MMMMMMMM\n"+
-            "\t\t\tMMM          MMMMMMMMMMMMMMMMMMMMMMMMMMMM   MMMMMMMM\n"+
-            "\t\t\tM              MMMMMMMMMMMMMMMMMMMMMMMMM   MMMMMMMMM\n"+
-            "\t\t\tMM                MMMMMMMMMMMMMMMMMMMMM   MMMMMMMMMM\n"+
-            "\t\t\tMMMM                 MMMMMMMMMMMMMMMM   MMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMM                   MMMMMMMMM     MMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMM                             MMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMM                        MMMMMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMM                MMMMMMMMMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMMMMM            MMMMMMMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMM                     MMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMM                           MMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMM       MMM                      MMMMMMMM\n"+ 
-            "\t\t\tMMMMMMMMMM    MMMMMMMMMMMMMMM                 MMMMMM\n"+  
-            "\t\t\tMMMMMMMMM   MMMMMMMMMMMMMMMMMMMM                MMMM\n"+  
-            "\t\t\tMMMMMMMM  MMMMMMMMMMMMMMMMMMMMMMMMM               MM\n"+  
-            "\t\t\tMMMMMMM   MMMMMMMMMMMMMMMMMMMMMMMMMMM            MMM\n"+             
-            "\t\t\tMMMMMM    MMMMMMMMMMMMMMMMMMMMMMMMMMMMM        MMMMM\n"+        
-            "\t\t\tMMMMMM      MMMMMMMMMMMMMMMMMMMMMMMMMMMMM    MMMMMMM\n"+    
-            "\t\t\tMMMMMM      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM  MMMMMMMM\n"+
-            "\t\t\tMMMMMMM    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n"+
-            "\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n";
+			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM  MMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM      MMMMMMMM\n"+
+			"\t\t\tMMMMMM   MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM     MMMMMMMM\n"+
+			"\t\t\tMMMM       MMMMMMMMMMMMMMMMMMMMMMMMMMMMM    MMMMMMMM\n"+
+			"\t\t\tMMM          MMMMMMMMMMMMMMMMMMMMMMMMMMMM   MMMMMMMM\n"+
+			"\t\t\tM              MMMMMMMMMMMMMMMMMMMMMMMMM   MMMMMMMMM\n"+
+			"\t\t\tMM                MMMMMMMMMMMMMMMMMMMMM   MMMMMMMMMM\n"+
+			"\t\t\tMMMM                 MMMMMMMMMMMMMMMM   MMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMM                   MMMMMMMMM     MMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMM                             MMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMM                        MMMMMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMM                MMMMMMMMMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMMMMMMMM            MMMMMMMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMMMMM                     MMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMM                           MMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMM       MMM                      MMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMM    MMMMMMMMMMMMMMM                 MMMMMM\n"+
+			"\t\t\tMMMMMMMMM   MMMMMMMMMMMMMMMMMMMM                MMMM\n"+
+			"\t\t\tMMMMMMMM  MMMMMMMMMMMMMMMMMMMMMMMMM               MM\n"+
+			"\t\t\tMMMMMMM   MMMMMMMMMMMMMMMMMMMMMMMMMMM            MMM\n"+
+			"\t\t\tMMMMMM    MMMMMMMMMMMMMMMMMMMMMMMMMMMMM        MMMMM\n"+
+			"\t\t\tMMMMMM      MMMMMMMMMMMMMMMMMMMMMMMMMMMMM    MMMMMMM\n"+
+			"\t\t\tMMMMMM      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM  MMMMMMMM\n"+
+			"\t\t\tMMMMMMM    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n"+
+			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n";
 		}
 	}
 

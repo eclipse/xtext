@@ -45,5 +45,5 @@ class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		val method = clazz.getDeclaredMethod("doStuff")
 		method.invoke(foo)
 	}
-	
+
 }

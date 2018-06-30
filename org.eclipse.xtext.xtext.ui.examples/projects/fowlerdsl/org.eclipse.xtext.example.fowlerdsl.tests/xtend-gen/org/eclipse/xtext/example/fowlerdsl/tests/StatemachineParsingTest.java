@@ -47,7 +47,7 @@ public class StatemachineParsingTest {
       _builder.append("doorOpened\t\tD1OP");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("panelClosed \tPNCL");
+      _builder.append("panelClosed\t\tPNCL");
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();

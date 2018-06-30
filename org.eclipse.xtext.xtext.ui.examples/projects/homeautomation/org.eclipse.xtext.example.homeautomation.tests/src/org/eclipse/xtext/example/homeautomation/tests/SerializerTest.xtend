@@ -20,13 +20,13 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineInjectorProvider)
 class SerializerTest extends Assert {
-	
+
 	@Inject ISerializer serializer
 	extension RuleEngineFactory = RuleEngineFactory.eINSTANCE
 	extension XbaseFactory = XbaseFactory.eINSTANCE
 	@Inject extension FileExtensionProvider
 	@Inject Provider<XtextResourceSet> rsProvider
-	
+
 	@Test
 	def test() {
 		
@@ -71,5 +71,5 @@ class SerializerTest extends Assert {
 				val x = 1
 		'''.toString, sw.toString)
 	}
-	
+
 }

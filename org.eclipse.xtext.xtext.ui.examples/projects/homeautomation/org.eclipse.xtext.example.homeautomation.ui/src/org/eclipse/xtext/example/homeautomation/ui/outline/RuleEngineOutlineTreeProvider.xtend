@@ -19,7 +19,7 @@ class RuleEngineOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (!(modelElement instanceof Rule))
 			super._createChildren(parentNode, modelElement)
 	}
-	
+
 	override _isLeaf(EObject modelElement) {
 		if (modelElement instanceof Rule)
 			return true

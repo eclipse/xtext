@@ -17,16 +17,16 @@ import org.eclipse.xtext.generator.IGeneratorContext
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class StatemachineGenerator extends AbstractGenerator {
-	
+
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		fsa.generateFile(resource.className+".java", toJavaCode(resource.contents.head as Statemachine))
 	}
-	
+
 	def className(Resource res) {
 		var name = res.URI.lastSegment
 		return name.substring(0, name.indexOf('.')).toFirstUpper
 	}
-	
+
 	def toJavaCode(Statemachine sm) '''
 		import java.io.BufferedReader;
 		import java.io.IOException;
@@ -73,13 +73,13 @@ class StatemachineGenerator extends AbstractGenerator {
 			}
 		}
 	'''
-	
+
 	def declareCommand(Command command) '''
 		protected void do«command.name.toFirstUpper»() {
 			System.out.println("Executing command «command.name» («command.code»)");
 		}
 	'''
-	
+
 	def generateCode(State state) '''
 		if (currentState.equals("«state.name»")) {
 			if (executeActions) {
@@ -99,5 +99,5 @@ class StatemachineGenerator extends AbstractGenerator {
 			«ENDFOR»
 		}
 	'''
-	
+
 }
