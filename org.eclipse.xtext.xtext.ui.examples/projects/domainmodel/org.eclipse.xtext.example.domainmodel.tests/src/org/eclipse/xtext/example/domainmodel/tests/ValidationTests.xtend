@@ -15,14 +15,14 @@ import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
 /** 
- * @author Jan Koehnlein - copied and adapted from Xtend 
+ * @author Jan Koehnlein - copied and adapted from Xtend
  */
 class ValidationTests {
-	
+
 	@Inject extension ParseHelper<DomainModel> parseHelper
-	
+
 	@Inject extension ValidationTestHelper validationTestHelper
-	
+
 	@Test def testImportUnused() {
 		val model = parse('''
 			import java.util.List
@@ -30,7 +30,7 @@ class ValidationTests {
 		''');
 		assertWarning(model, XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
-	
+
 	@Test def testImportUnused_1() {
 		val model = parse('''
 			import java.util.List
@@ -40,7 +40,7 @@ class ValidationTests {
 		''');
 		assertWarning(model, XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
-	
+
 	@Test def testImportUnused_2() {
 		val model = parse('''
 			import java.util.List
@@ -53,7 +53,7 @@ class ValidationTests {
 		''');
 		assertNoIssues(model);
 	}
-	
+
 	@Test def testImportUnused_3() {
 		val model = parse('''
 			import java.util.Map$Entry
@@ -66,7 +66,7 @@ class ValidationTests {
 		''');
 		assertNoIssues(model);
 	}
-	
+
 	@Test def testImportUnused_4() {
 		val model = parse('''
 			import java.util.Map
@@ -79,7 +79,7 @@ class ValidationTests {
 		''');
 		assertNoIssues(model);
 	}
-	
+
 	@Test def testImportUnused_5() {
 		val model = parse('''
 			import java.util.Map$Entry
@@ -92,7 +92,7 @@ class ValidationTests {
 		''');
 		assertNoIssues(model);
 	}
-	
+
 	@Test def testImportUnused_6() {
 		val model = parse('''
 			import java.awt.Label
@@ -124,7 +124,7 @@ class ValidationTests {
 		''');
 		assertWarning(model, XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
-	
+
 	@Test def testImportCollision() {
 		val model = parse('''
 			import java.util.List
@@ -138,7 +138,7 @@ class ValidationTests {
 		''');
 		assertError(model, XIMPORT_DECLARATION, IMPORT_COLLISION);
 	}
-	
+
 	@Test def testImportWildcard() {
 		val model = parse('''
 			import java.util.*
@@ -152,7 +152,7 @@ class ValidationTests {
 		''');
 		assertWarning(model, XIMPORT_DECLARATION, IMPORT_WILDCARD_DEPRECATED);
 	}
-	
+
 	@Test def testImportConflictWithTypeInSameFile() {
 		val model = parse('''
 			import java.util.List 
@@ -162,7 +162,7 @@ class ValidationTests {
 		''');
 		assertError(model, XIMPORT_DECLARATION, IMPORT_CONFLICT);
 	}
-	
+
 	@Test def testImportNoConflictWithTypeInSameFile() {
 		val model = parse('''
 			import java.util.List
@@ -171,10 +171,8 @@ class ValidationTests {
 		''');
 		assertNoErrors(model);
 	}
-	
+
 	def protected parse(CharSequence modelAsText) {
 		parseHelper.parse(modelAsText)
 	}
-	
-		
 }

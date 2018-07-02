@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtext.example.fowlerdsl
 
-/** 
+/**
  * Initialization support for running Xtext languages 
  * without equinox extension registry
  */

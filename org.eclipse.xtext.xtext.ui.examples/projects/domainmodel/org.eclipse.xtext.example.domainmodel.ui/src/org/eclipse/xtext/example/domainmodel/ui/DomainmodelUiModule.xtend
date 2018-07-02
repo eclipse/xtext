@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution
 
-/** 
+/**
  * Use this class to register components to be used within the IDE.
  */
 class DomainmodelUiModule extends AbstractDomainmodelUiModule {

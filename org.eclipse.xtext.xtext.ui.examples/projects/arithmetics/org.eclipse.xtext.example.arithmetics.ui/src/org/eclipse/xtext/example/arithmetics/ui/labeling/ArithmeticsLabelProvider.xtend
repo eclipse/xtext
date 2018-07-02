@@ -28,12 +28,12 @@ class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
 	def text(Module ele) {
 		return ele.name
 	}
-	
+
 	def text(Definition ele) {
 		ele.name + ele.args.join('(', ',', ')', [it.name])
 	}
-	
-    def image(Module ele) {
-    	'home_nav.gif'
-    }
+
+	def image(Module ele) {
+		'home_nav.gif'
+	}
 }

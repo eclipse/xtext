@@ -19,8 +19,8 @@ import static org.junit.Assert.*
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
 class OrganizeImportsTest {
-	
-	@Inject extension ParseHelper<DomainModel> 
+
+	@Inject extension ParseHelper<DomainModel>
 	@Inject ImportOrganizer importOrganizer
 
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
@@ -406,7 +406,6 @@ class OrganizeImportsTest {
 		''')
 	}
 
-
 	@Test def testStaticImport_01() {
 		'''
 			import static java.util.Collections.*
@@ -448,7 +447,7 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
-	
+
 	@Test def testImplicitExtensions() {
 		'''
 			entity Foo {
@@ -735,7 +734,7 @@ class OrganizeImportsTest {
 			entity Foo {}
 		''')
 	}
-	
+
 	@Test def testLocalNameClash() {
 		'''
 			package foo {
@@ -773,7 +772,7 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
-	
+
 	@Test def testSamePackage() {
 		'''
 			package bar {
@@ -791,7 +790,7 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
-	
+
 	@Test def testSuperPackage() {
 		'''
 			package bar {
@@ -815,7 +814,7 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
-	
+
 	@Test def testSubPackage() {
 		'''
 			import bar.Foo
@@ -841,5 +840,4 @@ class OrganizeImportsTest {
 			}
 		''')
 	}
-	
 }

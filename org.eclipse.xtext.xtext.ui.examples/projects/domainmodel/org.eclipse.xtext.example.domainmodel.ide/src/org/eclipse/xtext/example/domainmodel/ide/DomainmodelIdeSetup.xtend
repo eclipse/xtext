@@ -16,5 +16,5 @@ class DomainmodelIdeSetup extends DomainmodelStandaloneSetup {
 	override createInjector() {
 		Guice.createInjector(Modules2.mixin(new DomainmodelRuntimeModule, new DomainmodelIdeModule))
 	}
-	
+
 }

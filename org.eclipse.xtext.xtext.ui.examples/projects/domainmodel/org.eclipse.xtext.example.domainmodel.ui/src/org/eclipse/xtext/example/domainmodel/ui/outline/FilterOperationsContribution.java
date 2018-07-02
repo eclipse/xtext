@@ -25,7 +25,7 @@ public class FilterOperationsContribution extends AbstractFilterOutlineContribut
 
 	@Inject
 	private PluginImageHelper imageHelper;
-	
+
 	@Override
 	protected boolean apply(IOutlineNode node) {
 		return !(node instanceof EObjectNode)

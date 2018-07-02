@@ -13,7 +13,7 @@ public class RuleEngineTokenSource extends AbstractIndentationTokenSource {
 	public RuleEngineTokenSource(TokenSource delegate) {
 		super(delegate);
 	}
-	
+
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
 		return token.getType() == InternalRuleEngineParser.RULE_WS;

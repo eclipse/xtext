@@ -15,10 +15,10 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(StatemachineInjectorProvider)
 class StatemachineParsingTest {
-	
+
 	@Inject extension ParseHelper<Statemachine>
 	@Inject extension ValidationTestHelper
-	
+
 	@Test def loadModel() {
 		'''
 		events
@@ -26,7 +26,7 @@ class StatemachineParsingTest {
 			drawerOpened	D2OP
 			lightOn			L1ON
 			doorOpened		D1OP
-			panelClosed 	PNCL
+			panelClosed		PNCL
 		end
 		
 		resetEvents

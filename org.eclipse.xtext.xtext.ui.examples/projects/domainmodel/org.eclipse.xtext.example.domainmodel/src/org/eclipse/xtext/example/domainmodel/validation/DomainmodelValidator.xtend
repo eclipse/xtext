@@ -17,7 +17,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class DomainmodelValidator extends AbstractDomainmodelValidator {
-	
+
 	@Check def void checkTypeNameStartsWithCapital(Entity entity) {
 		if (!Character::isUpperCase(entity.getName().charAt(0))) {
 			warning("Name should start with a capital", DomainmodelPackage.Literals::ABSTRACT_ELEMENT__NAME,
@@ -40,5 +40,5 @@ class DomainmodelValidator extends AbstractDomainmodelValidator {
 			error("Invalid package name", DomainmodelPackage.Literals::ABSTRACT_ELEMENT__NAME)
 		}
 	}
-	
+
 }

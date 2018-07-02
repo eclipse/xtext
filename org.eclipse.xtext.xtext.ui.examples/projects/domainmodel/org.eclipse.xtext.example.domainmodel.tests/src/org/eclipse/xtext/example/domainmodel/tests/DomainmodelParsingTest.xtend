@@ -49,7 +49,7 @@ class DomainmodelParsingTest{
 		Assert.assertEquals("property", property.getName());
 		Assert.assertEquals("java.lang.String", property.getType().getIdentifier());
 	}
-	
+
 	@Test
 	def void testJvmTypeReferencesValidator() {
 		'''
@@ -65,7 +65,7 @@ class DomainmodelParsingTest{
 			"The primitive 'int' cannot be a type argument"
 		)
 	}
-	
+
 	@Test
 	def void testParsingAndLinking() {
 		'''
@@ -80,7 +80,7 @@ class DomainmodelParsingTest{
 			}
 		'''.parse.assertNoErrors
 	}
-	
+
 	@Test
 	def void testParsingAndLinkingWithImports() {
 		'''
@@ -92,7 +92,7 @@ class DomainmodelParsingTest{
 			}
 		'''.parse.assertNoErrors
 	}
-	
+
 	@Test
 	def void testReturnTypeInference() {
 		val model = '''

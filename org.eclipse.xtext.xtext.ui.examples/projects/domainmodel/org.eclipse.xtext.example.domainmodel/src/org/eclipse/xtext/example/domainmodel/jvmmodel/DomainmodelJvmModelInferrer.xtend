@@ -25,7 +25,7 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			members += entity.toConstructor []
 			
 			// and one which can be called with a lambda for initialization.
-			val procedureType = typeRef(Procedure1, typeRef(it)) /* Procedure<MyEntity> */ 
+			val procedureType = typeRef(Procedure1, typeRef(it)) /* Procedure<MyEntity> */
 			members += entity.toConstructor [
 				parameters += entity.toParameter("initializer", procedureType)
 				// here we implement the body using black box Java code.
@@ -54,8 +54,8 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 								parameters += p.toParameter(p.name, p.parameterType)
 							}
 							// here the body is implemented using a user expression.
-							// Note that by doing this we set the expression into the context of this method, 
-							// The parameters, 'this' and all the members of this method will be visible for the expression. 
+							// Note that by doing this we set the expression into the context of this method,
+							// The parameters, 'this' and all the members of this method will be visible for the expression.
 							body = f.body
 						]
 					}
@@ -66,5 +66,5 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 			members += entity.toToStringMethod(it)
 		]
 	}
-	
+
 }

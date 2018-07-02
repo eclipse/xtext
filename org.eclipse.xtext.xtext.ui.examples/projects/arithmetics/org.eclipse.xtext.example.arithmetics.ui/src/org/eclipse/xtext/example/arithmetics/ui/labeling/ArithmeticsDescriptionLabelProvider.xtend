@@ -24,8 +24,8 @@ class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabelProvide
 	override getImage(Object element) {
 		if (element instanceof IEObjectDescription) 
 			labelProvider.getImage(element.EObjectOrProxy)
-		else 
+		else
 			super.getImage(element)
 	}
-	 
+
 }

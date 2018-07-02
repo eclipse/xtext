@@ -3,7 +3,7 @@ grammar org.eclipse.xtext.example.fowlerdsl.Statemachine with org.eclipse.xtext.
 generate statemachine "http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine"
 
 Statemachine :
-     {Statemachine}
+	{Statemachine}
 	('events' 
 		events+=Event+ 
 	'end')?

@@ -12,19 +12,19 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelUiInjectorProvider)
 class ContentAssistTest extends AbstractContentAssistTest {
-	
+
 	@Test def void testImportCompletion() {
 		newBuilder.append('import java.util.Da').assertText('java.util.Date')
 	}
-	
+
 	@Test def void testImportCompletion_1() {
 		newBuilder.append('import LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
-	
+
 	@Test def void testTypeCompletion() {
 		newBuilder.append('entity Foo { bar: LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
-	
+
 	@Test def void testTemplateProposal() {
 		newBuilder.applyProposal("Entity - template for an Entity").expectContent('''
 		entity name {
