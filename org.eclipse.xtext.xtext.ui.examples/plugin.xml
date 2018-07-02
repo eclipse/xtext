@@ -74,6 +74,7 @@
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ide" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ide.zip" description="%IdePlugin_description"/>
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.tests" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.tests.zip" description="%RuntimeTestsPlugin_description"/>
 			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ui.zip"  description="%UiPlugin_description"/>
+			<projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui.tests" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ui.tests.zip" description="%UiTestsPlugin_description"/>
 			<fileToOpen location="org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext"/>
 			<fileToOpen location="org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/generator/StatemachineGenerator.xtend"/>
 		</example>
