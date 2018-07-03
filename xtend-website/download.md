@@ -23,6 +23,7 @@ title: Download
 
 				<h3>Eclipse Updatesites</h3>
 				<p> To install the Xtend plug-in into a running Eclipse.</p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0/" class="has-popover btn btn-primary btn-medium">Latest Release (right click &amp; copy)</a></p>
 				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
 				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p>
 				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" class="has-popover btn btn-primary btn-medium">Nightly Builds (right click &amp; copy)</a></p>
