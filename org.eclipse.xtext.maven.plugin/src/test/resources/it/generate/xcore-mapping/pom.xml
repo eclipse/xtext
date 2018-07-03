@@ -18,9 +18,9 @@
 	<properties>
 		<xtext-version>2.15.0-SNAPSHOT</xtext-version>
 		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
-		<eclipse-text-version>3.6.0</eclipse-text-version>
-		<core-resources-version>3.11.1</core-resources-version>
-		<core-runtime-version>3.12.0</core-runtime-version>
+		<eclipse-text-version>3.6.100</eclipse-text-version>
+		<core-resources-version>3.12.0</core-resources-version>
+		<core-runtime-version>3.13.0</core-runtime-version>
 		<ecore-xtextVersion>1.2.0</ecore-xtextVersion>
 		<emf-common-version>2.12.0</emf-common-version>
 		<emf-version>2.12.0</emf-version>
