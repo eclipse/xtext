@@ -12,7 +12,9 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	compile "com.google.inject:guice:$versions.guice"
 	compile "org.antlr:antlr-runtime:$versions.antlr"
-	optional "org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore"
+	optional("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+	}
 	optional "org.eclipse.platform:org.eclipse.equinox.registry:$versions.equinoxRegistry"
 	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
 	optional "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"

@@ -3,7 +3,10 @@ apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 dependencies {
 	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.testing')
-	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore"
+	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
+	compile("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+	}
 	compile "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:$versions.emfMwe2"
 }
 

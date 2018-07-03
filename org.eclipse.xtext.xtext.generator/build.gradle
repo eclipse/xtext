@@ -8,5 +8,12 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
 	compile "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
 	compile "com.ibm.icu:icu4j:$versions.icu"
-	optional "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
+	optional("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+	}
+	optional("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
+	}
 }
