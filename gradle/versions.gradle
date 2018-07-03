@@ -9,5 +9,6 @@ ext.versions = [
 	'xtext_gradle_plugin': '1.0.21',
 	'guava': '[14.0,22)',
 	'guice': '3.0',
-	'gwt': '2.8.0'
+	'gwt': '2.8.0',
+	'jdtCore': '3.13.102',
 ]
