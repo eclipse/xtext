@@ -8,7 +8,14 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase.testdata')
 	compile project(':org.eclipse.xtext.xbase.ide')
 
-	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
+	compile("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+	}
+	compile("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
+		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
+		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
+	}
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
