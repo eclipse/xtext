@@ -16,8 +16,12 @@ dependencies {
 		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
 		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
 	}
-	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt"
-	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool"
+	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
+		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
+	}
+	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerTool") {
+		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
+	}
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "junit:junit:$versions.junit"
 }
