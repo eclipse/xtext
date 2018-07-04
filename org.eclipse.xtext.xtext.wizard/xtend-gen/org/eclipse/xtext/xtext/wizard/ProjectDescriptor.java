@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -81,9 +82,8 @@ public abstract class ProjectDescriptor {
   public Set<SourceFolderDescriptor> getSourceFolders() {
     final Function1<Outlet, SourceFolderDescriptor> _function = (Outlet it) -> {
       String _sourceFolder = this.sourceFolder(it);
-      String _outputFolder = this.outputFolder(it);
       boolean _isTest = this.isTest(it);
-      return new SourceFolderDescriptor(_sourceFolder, _outputFolder, _isTest);
+      return new SourceFolderDescriptor(_sourceFolder, _isTest);
     };
     return IterableExtensions.<SourceFolderDescriptor>toSet(ListExtensions.<Outlet, SourceFolderDescriptor>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function));
   }
@@ -317,12 +317,8 @@ public abstract class ProjectDescriptor {
     return this.config.getSourceLayout().getPathFor(outlet);
   }
   
-  public String outputFolder(final Outlet outlet) {
-    return this.config.getSourceLayout().getOutputFor(outlet);
-  }
-  
   public boolean isTest(final Outlet outlet) {
-    return this.config.getSourceLayout().isTest(outlet);
+    return Arrays.<Outlet>asList(Outlet.testOutlets()).contains(outlet);
   }
   
   protected PlainTextFile file(final Outlet outlet, final String relativePath, final CharSequence content) {
