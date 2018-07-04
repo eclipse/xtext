@@ -876,12 +876,12 @@ ruleJvmFormalParameter:
 ruleFullJvmFormalParameter:
 	'extension'
 	?
-	ruleMultiCatchType
+	ruleMultiTypeReference
 	ruleInnerVarID
 ;
 
-// Rule MultiCatchType
-ruleMultiCatchType:
+// Rule MultiTypeReference
+ruleMultiTypeReference:
 	ruleJvmTypeReference
 	(
 		(
@@ -938,7 +938,7 @@ ruleXSwitchExpression:
 
 // Rule XCasePart
 ruleXCasePart:
-	ruleMultiCatchType
+	ruleMultiTypeReference
 	?
 	(
 		'case'

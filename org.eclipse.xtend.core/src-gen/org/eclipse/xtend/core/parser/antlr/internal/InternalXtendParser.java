@@ -12592,11 +12592,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiCatchTypeParserRuleCall_1_0());
+              					newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess().getParameterTypeMultiTypeReferenceParserRuleCall_1_0());
               				
             }
             pushFollow(FOLLOW_60);
-            lv_parameterType_1_0=ruleMultiCatchType();
+            lv_parameterType_1_0=ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return current;
@@ -12609,7 +12609,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
               						current,
               						"parameterType",
               						lv_parameterType_1_0,
-              						"org.eclipse.xtend.core.Xtend.MultiCatchType");
+              						"org.eclipse.xtend.core.Xtend.MultiTypeReference");
               					afterParserOrEnumRuleCall();
               				
             }
@@ -12670,24 +12670,24 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    public final EObject entryRuleMultiCatchType() throws RecognitionException {
+    public final EObject entryRuleMultiTypeReference() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleMultiCatchType = null;
+        EObject iv_ruleMultiTypeReference = null;
 
 
         try {
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getMultiCatchTypeRule()); 
+               newCompositeNode(grammarAccess.getMultiTypeReferenceRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleMultiCatchType=ruleMultiCatchType();
+            iv_ruleMultiTypeReference=ruleMultiTypeReference();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleMultiCatchType; 
+               current =iv_ruleMultiTypeReference; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -12703,7 +12703,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    public final EObject ruleMultiCatchType() throws RecognitionException {
+    public final EObject ruleMultiTypeReference() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_2=null;
@@ -12720,7 +12720,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getJvmTypeReferenceParserRuleCall_0());
+              			newCompositeNode(grammarAccess.getMultiTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0());
               		
             }
             pushFollow(FOLLOW_67);
@@ -12747,7 +12747,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       					current = forceCreateModelElementAndAdd(
-                      						grammarAccess.getMultiCatchTypeAccess().getJvmSynonymTypeReferenceReferencesAction_1_0(),
+                      						grammarAccess.getMultiTypeReferenceAccess().getJvmSynonymTypeReferenceReferencesAction_1_0(),
                       						current);
                       				
                     }
@@ -12770,14 +12770,14 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	    otherlv_2=(Token)match(input,KW_VerticalLine,FOLLOW_29); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
-                    	      					newLeafNode(otherlv_2, grammarAccess.getMultiCatchTypeAccess().getVerticalLineKeyword_1_1_0());
+                    	      					newLeafNode(otherlv_2, grammarAccess.getMultiTypeReferenceAccess().getVerticalLineKeyword_1_1_0());
                     	      				
                     	    }
                     	    {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							newCompositeNode(grammarAccess.getMultiCatchTypeAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
+                    	      							newCompositeNode(grammarAccess.getMultiTypeReferenceAccess().getReferencesJvmTypeReferenceParserRuleCall_1_1_1_0());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_67);
@@ -12788,7 +12788,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	    if ( state.backtracking==0 ) {
 
                     	      							if (current==null) {
-                    	      								current = createModelElementForParent(grammarAccess.getMultiCatchTypeRule());
+                    	      								current = createModelElementForParent(grammarAccess.getMultiTypeReferenceRule());
                     	      							}
                     	      							add(
                     	      								current,
@@ -13458,11 +13458,11 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardMultiCatchTypeParserRuleCall_1_0());
+                      					newCompositeNode(grammarAccess.getXCasePartAccess().getTypeGuardMultiTypeReferenceParserRuleCall_1_0());
                       				
                     }
                     pushFollow(FOLLOW_70);
-                    lv_typeGuard_1_0=ruleMultiCatchType();
+                    lv_typeGuard_1_0=ruleMultiTypeReference();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -13475,7 +13475,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                       						current,
                       						"typeGuard",
                       						lv_typeGuard_1_0,
-                      						"org.eclipse.xtend.core.Xtend.MultiCatchType");
+                      						"org.eclipse.xtend.core.Xtend.MultiTypeReference");
                       					afterParserOrEnumRuleCall();
                       				
                     }
