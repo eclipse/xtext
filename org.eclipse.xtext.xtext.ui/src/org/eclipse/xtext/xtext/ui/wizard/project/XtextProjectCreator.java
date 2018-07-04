@@ -121,7 +121,8 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
 		for (SourceFolderDescriptor sourceFolder : descriptor.getSourceFolders()) {
-			factory.addSourceFolder(sourceFolder.getPath(), sourceFolder.getOutput(), sourceFolder.isTest());
+			String output = sourceFolder.isTest() ? (needsM2eIntegration(descriptor) ? "target/test-classes" : "test-bin") : null;
+			factory.addSourceFolder(sourceFolder.getPath(), output, sourceFolder.isTest());
 		}
 		factory.setJreContainerEntry(JREContainerProvider.getJREContainerEntry(descriptor.getBree()));
 		if (needsM2eIntegration(descriptor)) {
