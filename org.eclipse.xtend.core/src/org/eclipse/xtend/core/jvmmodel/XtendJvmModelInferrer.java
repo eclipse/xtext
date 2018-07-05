@@ -522,6 +522,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		JvmVisibility commonVisibility = null;
 		boolean isFirst = true;
 		boolean allStatic = true;
+		boolean override = false;
 		for (JvmOperation jvmOperation : localOperations) {
 			Iterable<XtendFunction> xtendFunctions = Iterables.filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
@@ -536,6 +537,8 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 				associator.associate(func, result);
 				if (!func.isStatic())
 					allStatic = false;
+				if (func.isOverride())
+					override = true;
 			}
 			for (JvmTypeReference declaredException : jvmOperation.getExceptions())
 				result.getExceptions().add(jvmTypesBuilder.cloneWithProxies(declaredException));
@@ -545,6 +548,8 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		else
 			result.setVisibility(commonVisibility);
 		result.setStatic(allStatic);
+		if (override)
+			setOverride(result);
 		return result;
 	}
 
@@ -620,17 +625,20 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		translateAnnotationsTo(source.getAnnotations(), operation);
-		if (source.isOverride() && generatorConfig.getJavaSourceVersion().isAtLeast(JAVA6)
-				&& !containsAnnotation(operation, Override.class)
-				&& typeReferences.findDeclaredType(Override.class, source) != null) {
-			operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Override.class));
-		}
+		if (source.isOverride() && typeReferences.findDeclaredType(Override.class, source) != null)
+			setOverride(operation);
 		if (createExtensionInfo != null) {
 			transformCreateExtension(source, createExtensionInfo, container, operation, returnType);
 		} else {
 			setBody(operation, expression);
 		}
 		jvmTypesBuilder.copyDocumentationTo(source, operation);
+	}
+
+	protected void setOverride(JvmOperation operation) {
+		if (generatorConfig.getJavaSourceVersion().isAtLeast(JAVA6) && !containsAnnotation(operation, Override.class)) {
+			operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Override.class));
+		}
 	}
 	
 	private boolean containsAnnotation(JvmAnnotationTarget annotationTarget, Class<? extends Annotation> annotationClass) {
