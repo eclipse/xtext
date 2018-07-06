@@ -23,6 +23,12 @@
 
 	<profiles>
 		<profile>
+			<id>latest</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-latest</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>photon</id>
 			<properties>
 				<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>

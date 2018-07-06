@@ -42,6 +42,11 @@
 									<type>target</type>
 									<classifier>${project.artifactId}-photon</classifier>
 								</artifact>
+								<artifact>
+									<file>${project.artifactId}-latest.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-latest</classifier>
+								</artifact>
 							</artifacts>
 						</configuration>
 					</execution>
