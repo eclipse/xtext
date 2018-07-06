@@ -272,6 +272,26 @@ public class IterableExtensions {
 	}
 
 	/**
+	 * Returns the elements of {@code unfiltered} that are not instanceof {@code type}. The resulting iterable's iterator does not
+	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered
+	 * original are reflected in the view.
+	 *
+	 * @param unfiltered
+	 *            the unfiltered iterable. May not be <code>null</code>.
+	* @param type
+	 *            the type of elements undesired. May not be <code>null</code>.
+	 * @return an iterable that contains only the elements that are not instances of {@code type}. Never <code>null</code>.
+	 *         Note that the elements of the iterable can be null as null is an instance of nothing.
+	 *
+	 * @since 2.15
+	 */
+	@GwtIncompatible("Class.isInstance")
+	@Pure
+	public static <T> Iterable<T> reject(Iterable<T> unfiltered, Class<? extends T> type) {
+		return filter(unfiltered, (t) -> !type.isInstance(t));
+	}
+
+	/**
 	 * Returns all instances of class {@code type} in {@code unfiltered}. The returned iterable has elements whose class
 	 * is {@code type} or a subclass of {@code type}. The returned iterable's iterator does not support {@code remove()}
 	 * . The returned iterable is a view on the original elements. Changes in the unfiltered original are reflected in
