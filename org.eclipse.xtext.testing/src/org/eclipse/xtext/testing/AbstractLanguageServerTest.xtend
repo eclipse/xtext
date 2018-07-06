@@ -75,6 +75,7 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -85,7 +86,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	@Accessors
 	protected val String fileExtension
 
-	@Before
+	@Before @BeforeEach
 	def void setup() {
 		val injector = Guice.createInjector(getServerModule())
 		injector.injectMembers(this)

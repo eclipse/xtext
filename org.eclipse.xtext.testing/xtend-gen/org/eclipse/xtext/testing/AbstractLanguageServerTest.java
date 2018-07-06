@@ -111,6 +111,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -172,6 +173,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected final String fileExtension;
   
   @Before
+  @BeforeEach
   public void setup() {
     try {
       final Injector injector = Guice.createInjector(this.getServerModule());
