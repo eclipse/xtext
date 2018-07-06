@@ -31,6 +31,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  * @since 2.12
@@ -49,6 +51,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   private static IJavaProject javaProject;
   
   @BeforeClass
+  @BeforeAll
   public static void setUp() {
     try {
       AbstractContentAssistTest.javaProject = JavaProjectSetupUtil.createJavaProject("contentAssistTest");
@@ -58,6 +61,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   }
   
   @AfterClass
+  @AfterAll
   public static void tearDown() {
     try {
       IProject _project = AbstractContentAssistTest.javaProject.getProject();
