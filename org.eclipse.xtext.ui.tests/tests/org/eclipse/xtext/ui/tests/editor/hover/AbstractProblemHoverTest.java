@@ -69,12 +69,6 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 	}
 
 	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		editor.close(false);
-	}
-
-	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.ui.tests.TestLanguage";
 	}
