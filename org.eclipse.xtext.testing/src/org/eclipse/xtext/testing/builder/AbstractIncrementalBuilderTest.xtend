@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.eclipse.xtext.validation.Issue
 import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 
 /**
  * Abstract base class for testing languages in the incremental builder.
@@ -50,7 +51,7 @@ abstract class AbstractIncrementalBuilderTest {
 	protected List<Issue> issues
 	protected InMemoryURIHandler inMemoryURIHandler
 
-	@Before def void setUp() {
+	@Before @BeforeEach def void setUp() {
 		clean()
 		inMemoryURIHandler = new InMemoryURIHandler()
 	}

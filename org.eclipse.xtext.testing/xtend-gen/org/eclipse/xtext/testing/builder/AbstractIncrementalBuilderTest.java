@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Abstract base class for testing languages in the incremental builder.
@@ -83,6 +84,7 @@ public abstract class AbstractIncrementalBuilderTest {
   protected InMemoryURIHandler inMemoryURIHandler;
   
   @Before
+  @BeforeEach
   public void setUp() {
     this.clean();
     InMemoryURIHandler _inMemoryURIHandler = new InMemoryURIHandler();
