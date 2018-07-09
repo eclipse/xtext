@@ -97,6 +97,20 @@ public class OutputConfiguration {
 	 */
 	private List<SourceMapping> sourceMappings = Lists.newArrayList();
 
+	/**
+	 * whether generated files should be marked as derived (used by eclipse/m2e only).
+	 * 
+	 * @property
+	 */
+	private boolean setDerivedProperty = true;
+
+	/**
+	 * whether local history of generated files should be kept (used by eclipse/m2e only).
+	 * 
+	 * @property
+	 */
+	private boolean keepLocalHistory = false;
+
 	public OutputConfiguration() {
 		super();
 	}
@@ -178,6 +192,22 @@ public class OutputConfiguration {
 		this.sourceMappings = sourceMappings;
 	}
 
+	public boolean isSetDerivedProperty() {
+		return setDerivedProperty;
+	}
+
+	public void setSetDerivedProperty(boolean setDerivedProperty) {
+		this.setDerivedProperty = setDerivedProperty;
+	}
+
+	public boolean isKeepLocalHistory() {
+		return keepLocalHistory;
+	}
+
+	public void setKeepLocalHistory(boolean keepLocalHistory) {
+		this.keepLocalHistory = keepLocalHistory;
+	}
+
 	public org.eclipse.xtext.generator.OutputConfiguration toOutputConfiguration() {
 		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(
 				name);
@@ -189,6 +219,8 @@ public class OutputConfiguration {
 		copy.setInstallDslAsPrimarySource(installDslAsPrimarySource);
 		copy.setOutputDirectory(outputDirectory);
 		copy.setOverrideExistingResources(overrideExistingResources);
+		copy.setSetDerivedProperty(setDerivedProperty);
+		copy.setKeepLocalHistory(keepLocalHistory);
 		if (!sourceMappings.isEmpty()) {
 			copy.setUseOutputPerSourceFolder(true);
 			for (SourceMapping mapping : sourceMappings) {
