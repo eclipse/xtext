@@ -15,7 +15,7 @@ dependencies {
 	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
 		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
 	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerTool") {
+	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool") {
 		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
 	}
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
