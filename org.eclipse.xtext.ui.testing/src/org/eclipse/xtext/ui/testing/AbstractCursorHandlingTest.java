@@ -18,6 +18,8 @@ import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.common.collect.Lists;
 
@@ -33,14 +35,14 @@ public abstract class AbstractCursorHandlingTest extends AbstractEditorTest {
 	protected abstract String getFileExtension();
 	
 	@Override
-	@Before
+	@Before @BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		closeWelcomePage();
 	}
 	
 	@Override
-	@After
+	@After @AfterEach
 	public void tearDown() throws Exception {
 		files.clear();
 		closeEditors();

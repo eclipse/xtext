@@ -20,11 +20,13 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
 
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper
 
 /**
  * @since 2.12
@@ -39,12 +41,12 @@ class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvi
 	
 	static IJavaProject javaProject
 	
-	@BeforeClass
+	@BeforeClass @BeforeAll
 	def static void setUp() {
 		javaProject = createJavaProject("contentAssistTest")
 	}	
 	
-	@AfterClass
+	@AfterClass @AfterAll
 	def static void tearDown() {
 		javaProject.project.delete(true, new NullProgressMonitor)
 	}

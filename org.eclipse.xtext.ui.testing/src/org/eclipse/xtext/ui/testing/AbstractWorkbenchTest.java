@@ -18,6 +18,8 @@ import org.eclipse.ui.PlatformUI;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Abstract base class for test classes that need access to the workbench.
@@ -28,7 +30,7 @@ import org.junit.Before;
  */
 public abstract class AbstractWorkbenchTest extends Assert {
 
-	@Before
+	@Before @BeforeEach
 	public void setUp() throws Exception {
 		closeWelcomePage();
 		closeEditors();
@@ -36,7 +38,7 @@ public abstract class AbstractWorkbenchTest extends Assert {
 		waitForBuild();
 	}
 	
-	@After
+	@After @AfterEach
 	public void tearDown() throws Exception {
 		closeEditors();
 		cleanWorkspace();

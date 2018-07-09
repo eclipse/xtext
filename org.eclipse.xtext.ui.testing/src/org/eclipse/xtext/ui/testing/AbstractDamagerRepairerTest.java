@@ -25,6 +25,8 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.inject.Provider;
 
@@ -44,12 +46,12 @@ public abstract class AbstractDamagerRepairerTest extends Assert implements IDoc
 
 	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager(); 
 	
-	@Before
+	@Before @BeforeEach
 	public void setUp() throws Exception {
 		damager = createRegionDamager();
 	}
 	
-	@After
+	@After @AfterEach
 	public void tearDown() throws Exception {
 		damager = null;
 		lastRegion = null;
