@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,10 +12,13 @@ import static java.util.Collections.*;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
@@ -70,5 +73,31 @@ public class XAnnotationUtil {
 		}
 		return emptySet();
 	}
-	
+
+	/**
+	 * @param qualifiedNames
+	 *            The annotations' qualified names to search for.
+	 * 
+	 * @param annotationTarget
+	 *            The element the annotations are search on.
+	 * 
+	 * @return The annotations that are applied on the <i>annotationTarget</i>
+	 *         and their qualified names appear in the <i>qualifiedNames</i> set.
+	 *         The annotations are returned in the order of their appearance.
+	 * 
+	 * @since 2.15
+	 */
+	public List<JvmAnnotationReference> findAnnotations(Set<String> qualifiedNames,	JvmAnnotationTarget annotationTarget) {
+		List<JvmAnnotationReference> result = new ArrayList<>();
+
+		if (annotationTarget != null) {
+			for (JvmAnnotationReference annotation : annotationTarget.getAnnotations()) {
+				String id = annotation.getAnnotation().getIdentifier();
+				if (qualifiedNames.contains(id)) {
+					result.add(annotation);
+				}
+			}
+		}
+		return result;
+	}
 }
