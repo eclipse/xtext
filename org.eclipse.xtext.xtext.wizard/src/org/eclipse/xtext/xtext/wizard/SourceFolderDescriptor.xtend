@@ -16,6 +16,5 @@ import org.eclipse.xtend.lib.annotations.Data
 @Data
 class SourceFolderDescriptor {
 	val String path
-	val String output
 	val boolean test
 }

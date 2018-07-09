@@ -20,14 +20,11 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class SourceFolderDescriptor {
   private final String path;
   
-  private final String output;
-  
   private final boolean test;
   
-  public SourceFolderDescriptor(final String path, final String output, final boolean test) {
+  public SourceFolderDescriptor(final String path, final boolean test) {
     super();
     this.path = path;
-    this.output = output;
     this.test = test;
   }
   
@@ -37,7 +34,6 @@ public class SourceFolderDescriptor {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.path== null) ? 0 : this.path.hashCode());
-    result = prime * result + ((this.output== null) ? 0 : this.output.hashCode());
     return prime * result + (this.test ? 1231 : 1237);
   }
   
@@ -56,11 +52,6 @@ public class SourceFolderDescriptor {
         return false;
     } else if (!this.path.equals(other.path))
       return false;
-    if (this.output == null) {
-      if (other.output != null)
-        return false;
-    } else if (!this.output.equals(other.output))
-      return false;
     if (other.test != this.test)
       return false;
     return true;
@@ -71,7 +62,6 @@ public class SourceFolderDescriptor {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("path", this.path);
-    b.add("output", this.output);
     b.add("test", this.test);
     return b.toString();
   }
@@ -79,11 +69,6 @@ public class SourceFolderDescriptor {
   @Pure
   public String getPath() {
     return this.path;
-  }
-  
-  @Pure
-  public String getOutput() {
-    return this.output;
   }
   
   @Pure

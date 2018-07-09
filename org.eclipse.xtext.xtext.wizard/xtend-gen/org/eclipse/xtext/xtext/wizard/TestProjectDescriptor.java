@@ -46,9 +46,8 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   public Set<SourceFolderDescriptor> getSourceFolders() {
     final Function1<Outlet, SourceFolderDescriptor> _function = (Outlet it) -> {
       String _sourceFolder = this.sourceFolder(it);
-      String _outputFolder = this.outputFolder(it);
       boolean _isTest = this.isTest(it);
-      return new SourceFolderDescriptor(_sourceFolder, _outputFolder, _isTest);
+      return new SourceFolderDescriptor(_sourceFolder, _isTest);
     };
     return IterableExtensions.<SourceFolderDescriptor>toSet(ListExtensions.<Outlet, SourceFolderDescriptor>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.TEST_JAVA, Outlet.TEST_RESOURCES, Outlet.TEST_SRC_GEN, Outlet.TEST_XTEND_GEN)), _function));
   }

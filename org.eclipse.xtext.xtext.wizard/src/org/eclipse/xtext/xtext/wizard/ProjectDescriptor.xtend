@@ -14,6 +14,7 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.JavaVersion
+import java.util.Arrays
 
 @FinalFieldsConstructor
 @Accessors
@@ -44,7 +45,7 @@ abstract class ProjectDescriptor {
 	 */
 	def getSourceFolders() {
 		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map [
-			new SourceFolderDescriptor(sourceFolder, outputFolder, isTest)
+			new SourceFolderDescriptor(sourceFolder, isTest)
 		].toSet
 	}
 
@@ -174,12 +175,8 @@ abstract class ProjectDescriptor {
 		config.sourceLayout.getPathFor(outlet);
 	}
 
-	def outputFolder(Outlet outlet) {
-		config.sourceLayout.getOutputFor(outlet);
-	}
-
 	def isTest(Outlet outlet) {
-		config.sourceLayout.isTest(outlet);
+		return Arrays.asList(Outlet.testOutlets).contains(outlet)
 	}
 
 	protected def file(Outlet outlet, String relativePath, CharSequence content) {
