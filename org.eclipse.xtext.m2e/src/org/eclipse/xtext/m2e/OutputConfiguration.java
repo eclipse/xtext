@@ -25,6 +25,10 @@ public class OutputConfiguration {
 
 	private boolean overrideExistingResources = true;
 
+	private boolean setDerivedProperty = true;
+
+	private boolean keepLocalHistory = false;
+
 	private List<SourceMapping> sourceMappings = Lists
 			.<SourceMapping> newArrayList();
 
@@ -68,6 +72,14 @@ public class OutputConfiguration {
 		return this.overrideExistingResources;
 	}
 
+	public boolean isSetDerivedProperty() {
+		return setDerivedProperty;
+	}
+
+	public boolean isKeepLocalHistory() {
+		return keepLocalHistory;
+	}
+
 	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
 		this.canClearOutputDirectory = canClearOutputDirectory;
 	}
@@ -109,6 +121,14 @@ public class OutputConfiguration {
 		this.sourceMappings = sourceMappings;
 	}
 
+	public void setSetDerivedProperty(boolean setDerivedProperty) {
+		this.setDerivedProperty = setDerivedProperty;
+	}
+
+	public void setKeepLocalHistory(boolean keepLocalHistory) {
+		this.keepLocalHistory = keepLocalHistory;
+	}
+
 	public org.eclipse.xtext.generator.OutputConfiguration toGeneratorConfiguration() {
 		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(
 				name);
@@ -120,6 +140,8 @@ public class OutputConfiguration {
 		copy.setHideSyntheticLocalVariables(hideSyntheticLocalVariables);
 		copy.setCanClearOutputDirectory(canClearOutputDirectory);
 		copy.setCleanUpDerivedResources(cleanUpDerivedResources);
+		copy.setSetDerivedProperty(setDerivedProperty);
+		copy.setKeepLocalHistory(keepLocalHistory);
 		if (!sourceMappings.isEmpty()) {
 			copy.setUseOutputPerSourceFolder(true);
 			for (SourceMapping mapping : getSourceMappings()) {
