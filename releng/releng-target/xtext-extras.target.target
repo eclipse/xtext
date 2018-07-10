@@ -11,7 +11,7 @@
 			<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-			<repository location="http://download.eclipse.org/releases/luna/201502271000"/>
+			<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository"/>

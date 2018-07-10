@@ -24,7 +24,7 @@ p2gen {
 		feature 'org.eclipse.emf.mwe2.language.sdk'
 	}
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000'
+		repositoryUrl 'http://download.eclipse.org/releases/oxygen/201804111000'
 	}
 	dependencies {
 		repositoryUrl 'http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository'
