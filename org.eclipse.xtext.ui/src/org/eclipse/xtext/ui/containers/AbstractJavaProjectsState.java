@@ -96,4 +96,12 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 	public void setJdtHelper(IJdtHelper jdtHelper) {
 		this.jdtHelper = jdtHelper;
 	}
+
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setJavaProjectClasspathChangeAnalyzer(JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer) {
+		this.javaProjectClasspathChangeAnalyzer = javaProjectClasspathChangeAnalyzer;
+	}
+
 }
