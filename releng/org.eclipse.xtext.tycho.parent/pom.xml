@@ -36,17 +36,11 @@
 		</profile>
 		<profile>
 			<id>oxygen</id>
-			<properties>
-				<target-platform-classifier>org.eclipse.xtext.target-oxygen</target-platform-classifier>
-			</properties>
-		</profile>
-		<profile>
-			<id>luna</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<target-platform-classifier>org.eclipse.xtext.target-luna</target-platform-classifier>
+				<target-platform-classifier>org.eclipse.xtext.target-oxygen</target-platform-classifier>
 			</properties>
 		</profile>
 	</profiles>

@@ -198,6 +198,8 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(bar_file));
 	}
 
+	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
+	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testTwoFilesInTwoReferencedProjectsAddNature() throws Exception {
 		foo_project = createJavaProjectWithRootSrc("foo");
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -273,6 +275,8 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
+	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
+	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testChangeReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
@@ -287,6 +291,8 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
+	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
+	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testDeleteReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 

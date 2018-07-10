@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -336,6 +337,8 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		assertEquals(BuilderTestLanguagePackage.Literals.ELEMENT__REFERENCES,next.getEReference());
 	}
 	
+	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
+	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test
 	public void testNewlyAddedReexportedSource() throws Exception {
 		IJavaProject foo = createJavaProject("foo");
@@ -358,6 +361,8 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		assertEquals(0,countMarkers(bazFile));
 	}
 	
+	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
+	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test
 	public void testReexportedJarRemoved() throws Exception {
 		IJavaProject foo = createJavaProject("foo");
