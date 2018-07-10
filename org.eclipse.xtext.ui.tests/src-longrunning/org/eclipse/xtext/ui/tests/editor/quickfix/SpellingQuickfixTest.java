@@ -46,12 +46,6 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_SPELLING_QUICKFIX_IN_SL_COLMMENT);
 	}
 
-	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		xtextEditor.close(false);
-	}
-
 	@Test
 	public void testSpellingQuickfixInSlComment() throws Exception {
 		ICompletionProposal[] quickAssistProposals = computeQuickAssistProposals(getDocument().getLength());

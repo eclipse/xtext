@@ -36,12 +36,6 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	
 	private XtextEditor xtextEditor;
 
-	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		xtextEditor.close(false);
-	}
-
 	@Test public void testQuickfixTurnaround() throws Exception {
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 		IXtextDocument document = xtextEditor.getDocument();

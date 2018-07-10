@@ -60,12 +60,6 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 		});	
 	}
 	
-	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		editor.close(false);
-	}
-	
 	@Test public void testDefaultScheme () throws Exception {
 		String link = elementLinks.createLink (f.getStuff().get(0));
 		assertTrue (isLinkOfType (link, XtextElementLinks.XTEXTDOC_SCHEME));
