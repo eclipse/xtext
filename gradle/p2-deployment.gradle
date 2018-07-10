@@ -20,7 +20,7 @@ p2gen {
 	exclude 'org.eclipse.xtend.lib.gwt.test'
 	
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000/'
+		repositoryUrl 'http://download.eclipse.org/releases/oxygen/201804111000'
 		bundle 'com.google.guava'
 	}
 }
