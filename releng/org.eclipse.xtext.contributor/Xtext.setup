@@ -64,15 +64,6 @@
     <choice
         value="Oxygen"
         label="Eclipse Oxygen - 4.7"/>
-    <choice
-        value="Neon"
-        label="Eclipse Neon - 4.6"/>
-    <choice
-        value="Mars"
-        label="Eclipse Mars - 4.5"/>
-    <choice
-        value="Luna"
-        label="Eclipse Luna - 4.4"/>
     <description>Choose the compatibility level of the target platform</description>
   </setupTask>
   <setupTask
@@ -152,7 +143,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.webtools"
-      value="http://download.eclipse.org/webtools/repository/luna/">
+      value="http://download.eclipse.org/webtools/repository/oxygen/">
     <description>required by m2e</description>
   </setupTask>
   <setupTask
@@ -900,95 +891,6 @@
           <repository
               url="${p2.cbi.analyzer}"/>
         </repositoryList>
-        <repositoryList
-            name="Neon">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.7"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-          <repository
-              url="http://download.eclipse.org/cbi/updates/analyzers/4.6"/>
-        </repositoryList>
-        <repositoryList
-            name="Mars">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.6"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-        </repositoryList>
-        <repositoryList
-            name="Luna">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.5"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-          <repository
-              url="${p2.lsp4j}"/>
-        </repositoryList>
       </targlet>
       <description>Target platform</description>
     </setupTask>
@@ -1519,87 +1421,6 @@
               url="${p2.draw2d}"/>
           <repository
               url="http://download.eclipse.org/staging/oxygen/"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
-        <repositoryList
-            name="Neon">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.7"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
-        <repositoryList
-            name="Mars">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.6"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.draw2d}"/>
-          <repository
-              url="${p2.xpand}"/>
-          <repository
-              url="${p2.buildship}"/>
-          <repository
-              url="${p2.webtools}"/>
-        </repositoryList>
-        <repositoryList
-            name="Luna">
-          <repository
-              url="${p2.xtext}"/>
-          <repository
-              url="${p2.mwe2}"/>
-          <repository
-              url="${p2.gef}"/>
-          <repository
-              url="${p2.m2e}/1.5"/>
-          <repository
-              url="${p2.swtbot}"/>
-          <repository
-              url="${p2.orbit}"/>
-          <repository
-              url="${p2.emf}"/>
-          <repository
-              url="${p2.antlr-gen}"/>
-          <repository
-              url="${p2.draw2d}"/>
           <repository
               url="${p2.xpand}"/>
           <repository
