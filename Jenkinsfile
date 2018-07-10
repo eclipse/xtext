@@ -2,7 +2,7 @@ node {
 	properties([
 		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
 		parameters([
-			choice(choices: 'luna\noxygen\nphoton\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
+			choice(choices: 'oxygen\nphoton\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
 		])
 	])
 	
@@ -10,12 +10,10 @@ node {
 		checkout scm
 		if ("latest" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(x)"
-		} else if ("oxygen" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(o)"
 		} else if ("photon" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(p)"
 		} else {
-			currentBuild.displayName = "#${BUILD_NUMBER}(l)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(o)"
 		}
 	}
 	
@@ -35,11 +33,9 @@ node {
 	}
 	
 	stage('Maven Tycho Build') {
-		def targetProfile = "-Pluna"
+		def targetProfile = "-Poxygen"
 		if ("latest" == params.target_platform) {
 			targetProfile = "-Platest"
-		} else if ("oxygen" == params.target_platform) {
-			targetProfile = "-Poxygen"
 		} else if ("photon" == params.target_platform) {
 			targetProfile = "-Pphoton"
 		}
