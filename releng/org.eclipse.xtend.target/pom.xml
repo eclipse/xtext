@@ -28,11 +28,6 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>${project.artifactId}-luna.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-luna</classifier>
-								</artifact>
-								<artifact>
 									<file>${project.artifactId}-oxygen.target</file>
 									<type>target</type>
 									<classifier>${project.artifactId}-oxygen</classifier>
