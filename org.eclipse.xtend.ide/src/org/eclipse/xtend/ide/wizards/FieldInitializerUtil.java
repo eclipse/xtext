@@ -34,7 +34,7 @@ public class FieldInitializerUtil {
 			Object o = selection.getFirstElement();
 			if(o instanceof IAdaptable) {
 				IAdaptable adaptable = (IAdaptable)o;
-				elem = (IJavaElement)adaptable.getAdapter(IJavaElement.class);
+				elem = adaptable.getAdapter(IJavaElement.class);
 				if(elem == null){
 					elem = getPackage(adaptable);
 				}
@@ -67,11 +67,11 @@ public class FieldInitializerUtil {
 
 	private IJavaElement getPackage(IAdaptable adaptable) {
 		IJavaElement elem = null;
-		IResource resource = (IResource) adaptable.getAdapter(IResource.class);
+		IResource resource = adaptable.getAdapter(IResource.class);
 		if (resource != null && resource.getType() != IResource.ROOT) {
 			while(elem == null && resource.getType() != IResource.PROJECT){
 				resource = resource.getParent();
-				elem = (IJavaElement) resource.getAdapter(IJavaElement.class);
+				elem = resource.getAdapter(IJavaElement.class);
 			}
 		}
 		if (elem == null) {

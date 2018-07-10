@@ -98,8 +98,8 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 	}
 	
 	private TestingTypeHierarchyHandler invokeTestingHandler(XtextEditor xtextEditor, String commandID) throws Exception {
-		IHandlerService handlerService = (IHandlerService) xtextEditor.getSite().getService(IHandlerService.class);
-		final ICommandService commandService = (ICommandService) xtextEditor.getSite()
+		IHandlerService handlerService = xtextEditor.getSite().getService(IHandlerService.class);
+		final ICommandService commandService = xtextEditor.getSite()
 				.getService(ICommandService.class);
 		Command command = commandService.getCommand("org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy");
 		TestingTypeHierarchyHandler testingHandler = new TestingTypeHierarchyHandler();

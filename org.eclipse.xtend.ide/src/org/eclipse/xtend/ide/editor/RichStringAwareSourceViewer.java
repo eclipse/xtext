@@ -15,6 +15,7 @@ import org.eclipse.jface.text.DocumentRewriteSession;
 import org.eclipse.jface.text.DocumentRewriteSessionType;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
+import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITypedRegion;
@@ -66,8 +67,7 @@ public class RichStringAwareSourceViewer extends XtextSourceViewer {
 				fUndoManager.beginCompoundChange();
 
 			IDocument d= getDocument();
-			@SuppressWarnings("rawtypes")
-			Map partitioners= null;
+			Map<String, IDocumentPartitioner> partitioners= null;
 			DocumentRewriteSession rewriteSession= null;
 			try {
 				ITextSelection selection= (ITextSelection) getSelection();

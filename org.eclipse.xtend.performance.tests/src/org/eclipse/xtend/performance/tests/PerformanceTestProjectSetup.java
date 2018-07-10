@@ -153,7 +153,6 @@ public class PerformanceTestProjectSetup {
 	}
 
 	public static void makeJava5Compliant(IJavaProject javaProject) {
-		@SuppressWarnings("unchecked")
 		Map<String, String> options= javaProject.getOptions(false);
 		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
 		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
