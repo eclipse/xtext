@@ -51,13 +51,13 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 		try {
 			// very pessimistic guards - most things should never happen
-			ITextEditor textEditor = (ITextEditor) getAdapter(ITextEditor.class);
+			ITextEditor textEditor = getAdapter(ITextEditor.class);
 			if (textEditor == null)
 				return null;
 			IEditorInput editorInput = textEditor.getEditorInput();
 			if (editorInput == null)
 				return null;
-			IJavaElement adaptedJavaElement = (IJavaElement) Platform.getAdapterManager().getAdapter(editorInput, IJavaElement.class);
+			IJavaElement adaptedJavaElement = Platform.getAdapterManager().getAdapter(editorInput, IJavaElement.class);
 			if (adaptedJavaElement == null)
 				return null;
 			ICompilationUnit compilationUnit = (ICompilationUnit) adaptedJavaElement.getAncestor(IJavaElement.COMPILATION_UNIT);

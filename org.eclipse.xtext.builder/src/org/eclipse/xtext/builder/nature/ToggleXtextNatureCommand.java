@@ -39,7 +39,7 @@ public class ToggleXtextNatureCommand extends AbstractHandler {
 				Object element = it.next();
 				IProject project = null;
 				if (element instanceof IAdaptable) {
-					project = (IProject) ((IAdaptable) element).getAdapter(IProject.class);
+					project = ((IAdaptable) element).getAdapter(IProject.class);
 				}
 				if (project != null) {
 					toggleNature(project);

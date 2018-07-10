@@ -50,7 +50,7 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 	
 	@Override
 	public List<String> resolveValues(TemplateVariable variable, XtextTemplateContext castedContext) {
-		String abbreviatedCrossReference = (String) variable.getVariableType().getParams().iterator().next();
+		String abbreviatedCrossReference = variable.getVariableType().getParams().iterator().next();
 		int dotIndex = abbreviatedCrossReference.lastIndexOf('.');
 		if (dotIndex <= 0) {
 			log.error("CrossReference '" + abbreviatedCrossReference + "' could not be resolved."); //$NON-NLS-1$ //$NON-NLS-2$

@@ -35,8 +35,7 @@ public class FileStoreStorage implements IEncodedStorage {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public Class getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 		return null;
 	}
 

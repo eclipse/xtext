@@ -26,7 +26,7 @@ public class LaunchShortcutUtil {
 				fakeSelection[i] = original;
 			} else {
 				IAdaptable adaptable = (IAdaptable) original;
-				JavaElementDelegate javaElementDelegate = (JavaElementDelegate) adaptable.getAdapter(delegateType);
+				JavaElementDelegate javaElementDelegate = adaptable.getAdapter(delegateType);
 				if (javaElementDelegate != null) {
 					fakeSelection[i] = javaElementDelegate;
 				} else {

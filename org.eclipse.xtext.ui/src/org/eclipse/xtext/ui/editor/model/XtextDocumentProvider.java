@@ -401,7 +401,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	public long getModificationStamp(Object element) {
 		if (isWorkspaceExternalEditorInput(element)) {
 			if (element instanceof IAdaptable) {
-				IFileStore fileStore = (IFileStore)((IAdaptable) element).getAdapter(IFileStore.class);
+				IFileStore fileStore = ((IAdaptable) element).getAdapter(IFileStore.class);
 				if (fileStore != null) {
 					IFileInfo info = fileStore.fetchInfo();
 					if (info.exists()) {

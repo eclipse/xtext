@@ -361,11 +361,10 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		return null;
 	}
 
-	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 		if (IContentOutlinePage.class.isAssignableFrom(adapter)) {
-			return getContentOutlinePage();
+			return adapter.cast(getContentOutlinePage());
 		}
 		return super.getAdapter(adapter);
 	}

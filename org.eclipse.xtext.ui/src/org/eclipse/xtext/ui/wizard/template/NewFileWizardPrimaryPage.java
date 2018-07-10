@@ -136,7 +136,7 @@ public class NewFileWizardPrimaryPage extends WizardPage implements IParameterPa
 		} else if (element instanceof IResource) {
 			container = ((IResource) element).getParent();
 		} else if (element instanceof IAdaptable) {
-			IResource adapter = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
+			IResource adapter = ((IAdaptable) element).getAdapter(IResource.class);
 			if (adapter instanceof IContainer) {
 				container = (IContainer) adapter;
 			} else if (adapter != null) {

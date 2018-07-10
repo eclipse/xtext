@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import com.google.common.collect.Lists;

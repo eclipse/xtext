@@ -104,7 +104,6 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Severity getSeverity(XtextEditor xtextEditor) {
 		if (xtextEditor == null || xtextEditor.getInternalSourceViewer() == null)
 			return null;

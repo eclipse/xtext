@@ -31,7 +31,7 @@ public class EnumTemplateVariableResolver extends
 	@Override
 	public List<String> resolveValues(TemplateVariable variable,
 			XtextTemplateContext castedContext) {
-		String enumerationName = (String) variable.getVariableType()
+		String enumerationName = variable.getVariableType()
 				.getParams().iterator().next();
 		Grammar grammar = getGrammar(castedContext);
 		if (grammar == null)

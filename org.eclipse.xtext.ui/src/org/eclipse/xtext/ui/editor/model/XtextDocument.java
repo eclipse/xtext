@@ -97,7 +97,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private XtextResource resource = null;
 	
 	private final List<IXtextModelListener> modelListeners = new ArrayList<IXtextModelListener>();
-	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
+	private final ListenerList<IXtextDocumentContentObserver> xtextDocumentObservers = new ListenerList<IXtextDocumentContentObserver>(ListenerList.IDENTITY);
 
 
 	public void setInput(XtextResource resource) {

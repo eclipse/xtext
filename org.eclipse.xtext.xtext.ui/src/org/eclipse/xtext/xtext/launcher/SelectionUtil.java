@@ -56,7 +56,7 @@ public class SelectionUtil {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			Object firstElement = ssel.getFirstElement();
 			if (firstElement instanceof IAdaptable) {
-				return (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
+				return ((IAdaptable) firstElement).getAdapter(IFile.class);
 			}
 			else if (firstElement instanceof IOutlineNode) {
 				IOutlineNode outlineNode = (IOutlineNode) firstElement;

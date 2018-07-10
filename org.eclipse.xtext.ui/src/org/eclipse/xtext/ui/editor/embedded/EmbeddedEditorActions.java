@@ -121,8 +121,8 @@ public class EmbeddedEditorActions {
 	
 	protected void initialize() {
 		final List<IHandlerActivation> handlerActivations = Lists.newArrayListWithExpectedSize(3);
-		final IHandlerService handlerService = (IHandlerService) workbench.getAdapter(IHandlerService.class);
-		final IContextService contextService = (IContextService) workbench.getAdapter(IContextService.class);
+		final IHandlerService handlerService = workbench.getAdapter(IHandlerService.class);
+		final IContextService contextService = workbench.getAdapter(IContextService.class);
 		Shell shell = viewer.getTextWidget().getShell();
 		final ActiveShellExpression expression = new ActiveShellExpression(shell);
 		final IContextActivation contextActivation = contextService.activateContext(EMBEDDED_TEXT_EDITOR_SCOPE, expression);

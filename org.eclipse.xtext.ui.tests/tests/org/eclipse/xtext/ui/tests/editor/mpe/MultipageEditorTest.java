@@ -34,7 +34,7 @@ public class MultipageEditorTest extends AbstractEditorTest {
 		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
 		
-		ICommandService service = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
+		ICommandService service = PlatformUI.getWorkbench().getService(ICommandService.class);
 		Command command = service.getCommand("org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration");
 		assertTrue(command.isEnabled());
 		

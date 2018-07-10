@@ -410,7 +410,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	 * @return the keybinding for Refactor &gt; Rename
 	 */
 	protected static String getOpenDialogBinding() {
-		IBindingService bindingService = (IBindingService) PlatformUI.getWorkbench().getAdapter(IBindingService.class);
+		IBindingService bindingService = PlatformUI.getWorkbench().getAdapter(IBindingService.class);
 		if (bindingService == null)
 			return ""; //$NON-NLS-1$
 		String binding = bindingService

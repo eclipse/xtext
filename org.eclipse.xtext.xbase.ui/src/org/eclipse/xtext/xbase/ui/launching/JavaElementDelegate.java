@@ -86,18 +86,17 @@ public class JavaElementDelegate implements IAdaptable {
 		this.resource = resource;
 	}
 
-	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 		if (IJavaElement.class.equals(adapter)) {
 			if (editor != null) {
 				IJavaElement javaMethod = getJavaElementForXtextEditor(editor);
 				if (javaMethod != null) {
-					return javaMethod;
+					return adapter.cast(javaMethod);
 				}
 			}
 			if (resource != null && fileExtensionProvider.isValid(resource.getFileExtension())) {
-				return getJavaElementForResource(resource);
+				return adapter.cast(getJavaElementForResource(resource));
 			}
 		}
 		return null;

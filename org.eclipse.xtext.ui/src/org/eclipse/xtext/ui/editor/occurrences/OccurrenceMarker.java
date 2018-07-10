@@ -155,7 +155,6 @@ public class OccurrenceMarker {
 			return null;
 		}
 
-		@SuppressWarnings("unchecked")
 		protected Annotation[] getExistingOccurrenceAnnotations(IAnnotationModel annotationModel) {
 			Set<Annotation> removeSet = newHashSet();
 			for (Iterator<Annotation> annotationIter = annotationModel.getAnnotationIterator(); annotationIter

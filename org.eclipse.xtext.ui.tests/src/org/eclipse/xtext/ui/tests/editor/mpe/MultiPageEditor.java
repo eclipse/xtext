@@ -30,17 +30,15 @@ public class MultiPageEditor extends MultiPageEditorPart {
 	public MultiPageEditor() {
 		Platform.getAdapterManager().registerAdapters(new IAdapterFactory() {
 			@Override
-			@SuppressWarnings("rawtypes")
-			public Object getAdapter(Object adaptableObject, Class adapterType) {
+			public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 				if (adaptableObject instanceof MultiPageEditor) {
 					MultiPageEditor mpe = (MultiPageEditor) adaptableObject;
-					return mpe.editor;
+					return adapterType.cast(mpe.editor);
 				}
 				return null;
 			}
 			@Override
-			@SuppressWarnings("rawtypes")
-			public Class[] getAdapterList() {
+			public Class<?>[] getAdapterList() {
 				return new Class[]{XtextEditor.class};
 			}
 		}, MultiPageEditor.class);

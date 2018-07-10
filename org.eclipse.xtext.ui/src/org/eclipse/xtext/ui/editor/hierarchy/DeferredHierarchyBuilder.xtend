@@ -48,9 +48,9 @@ class DeferredHierarchyBuilder implements IHierarchyBuilder {
 		val IHierarchyNode delegate
 		extension val IHierarchyBuilder hierarchyBuilder
 
-		override getAdapter(Class adapterType) {
+		override <T> getAdapter(Class<T> adapterType) {
 			if (adapterType.isInstance(this))
-				return this
+				return this as T
 		}
 
 		override fetchDeferredChildren(Object object, IElementCollector collector, IProgressMonitor monitor) {

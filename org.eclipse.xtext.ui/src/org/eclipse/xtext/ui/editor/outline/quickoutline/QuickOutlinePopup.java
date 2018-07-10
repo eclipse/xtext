@@ -390,7 +390,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	@Override
 	protected Point getDefaultLocation(Point initialSize) {
-		Control textWidget = (Control) xtextEditor.getAdapter(Control.class);
+		Control textWidget = xtextEditor.getAdapter(Control.class);
 		Point size = textWidget.getSize();
 
 		Point popupLocation = new Point((size.x / 2) - (initialSize.x / 2), (size.y / 2) - (initialSize.y / 2));

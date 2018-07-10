@@ -44,10 +44,10 @@ public class DeferredHierarchyBuilder implements IHierarchyBuilder {
     private final IHierarchyBuilder hierarchyBuilder;
     
     @Override
-    public Object getAdapter(final Class adapterType) {
+    public <T extends Object> T getAdapter(final Class<T> adapterType) {
       boolean _isInstance = adapterType.isInstance(this);
       if (_isInstance) {
-        return this;
+        return ((T) this);
       }
       return null;
     }

@@ -25,7 +25,7 @@ public class XtextEditorPropertyTester extends PropertyTester {
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver instanceof IAdaptable) {
 			IAdaptable adaptable = (IAdaptable) receiver;
-			XtextEditor xtextEditor = (XtextEditor) adaptable.getAdapter(XtextEditor.class);
+			XtextEditor xtextEditor = adaptable.getAdapter(XtextEditor.class);
 			if (xtextEditor != null) {
 				if (Constants.LANGUAGE_NAME.equals(property)) {
 					return xtextEditor.getLanguageName().equals(expectedValue);

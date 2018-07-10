@@ -117,7 +117,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	protected String getStatusMessage() {
 		String binding = "<binding>";
 		if (workbench != null) {
-			IBindingService bindingService = (IBindingService) workbench.getAdapter(IBindingService.class);
+			IBindingService bindingService = workbench.getAdapter(IBindingService.class);
 			binding = bindingService.getBestActiveBindingFormattedFor(IWorkbenchCommandConstants.EDIT_CONTENT_ASSIST);
 		}
 		String category = getModeAwareProposalProvider().getNextCategory();

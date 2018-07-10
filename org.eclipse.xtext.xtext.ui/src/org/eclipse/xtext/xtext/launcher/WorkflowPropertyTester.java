@@ -35,7 +35,7 @@ public class WorkflowPropertyTester extends PropertyTester {
 		if (receiver == null)
 			return false;
 
-		IResource resource = (IResource) Platform.getAdapterManager().getAdapter(receiver,
+		IResource resource = Platform.getAdapterManager().getAdapter(receiver,
 				org.eclipse.core.resources.IResource.class);
 		if (resource != null) {
 			return WorkflowLaunchUtils.workflowFileAvailableForGrammarFile(resource);
@@ -47,7 +47,7 @@ public class WorkflowPropertyTester extends PropertyTester {
 			return WorkflowLaunchUtils.workflowFileAvailableFor(activeEditor);
 		}
 
-		TextSelection textSelection = (TextSelection) Platform.getAdapterManager().getAdapter(receiver,
+		TextSelection textSelection = Platform.getAdapterManager().getAdapter(receiver,
 				org.eclipse.jface.text.TextSelection.class);
 		if (textSelection != null) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();

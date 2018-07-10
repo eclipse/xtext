@@ -185,7 +185,6 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private static class TaskTagSorter extends ViewerComparator {
 		@Override
 		public int compare(Viewer viewer, Object e1, Object e2) {
