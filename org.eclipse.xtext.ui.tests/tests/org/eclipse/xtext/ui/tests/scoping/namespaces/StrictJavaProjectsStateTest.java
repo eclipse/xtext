@@ -13,6 +13,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
 import org.eclipse.xtext.ui.containers.StrictJavaProjectsState;
@@ -32,6 +33,7 @@ public class StrictJavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 		StrictJavaProjectsState result = new StrictJavaProjectsState();
 		result.setMapper(mapper);
 		result.setJdtHelper(new JdtHelper());
+		result.setJavaProjectClasspathChangeAnalyzer(new JavaProjectClasspathChangeAnalyzer());
 		JavaProjectsStateHelper javaProjectsStateHelper = new JavaProjectsStateHelper();
 		javaProjectsStateHelper.setMapper(mapper);
 		javaProjectsStateHelper.setUriMapperExtensions((IStorage2UriMapperJdtExtensions) ((Storage2UriMapperImpl)mapper).getContribution());
