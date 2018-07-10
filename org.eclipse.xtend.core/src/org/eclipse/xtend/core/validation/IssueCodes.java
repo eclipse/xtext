@@ -110,4 +110,9 @@ public final class IssueCodes {
 	 */
 	public static final String UNNECESSARY_MODIFIER = ISSUE_CODE_PREFIX +  "unnecessary_modifier";
 	
+	/**
+	 * @since 2.15
+	 */
+	public static final String INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION = ISSUE_CODE_PREFIX +  "invalid_return_type_in_case_of_junit_annotation";
+	
 }

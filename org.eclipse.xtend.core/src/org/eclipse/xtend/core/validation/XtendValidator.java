@@ -235,6 +235,23 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	private IGeneratorConfigProvider generatorConfigProvider;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
+	
+	protected final Set<String> junitAnnotations = ImmutableSet.of(
+		// JUnit4 annotations
+		"org.junit.Test",
+		"org.junit.Before",
+		"org.junit.After",
+		"org.junit.BeforeClass",
+		"org.junit.AfterClass",
+		
+		// JUnit5 annotations
+		"org.junit.jupiter.api.Test",
+		"org.junit.jupiter.api.BeforeEach",
+		"org.junit.jupiter.api.AfterEach",
+		"org.junit.jupiter.api.BeforeAll",
+		"org.junit.jupiter.api.AfterAll"
+		);
+	
 	protected final Multimap<Class<?>, ElementType> targetInfos;
 	
 	{
@@ -313,7 +330,37 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			}
 		}
 	}
-
+	
+	@Check
+	public void checkJUnitMethodReturnType(XtendFunction function) {
+		JvmOperation operation = associations.getDirectlyInferredOperation(function);
+		
+		/*
+		 * Active annotations could also change the return type.
+		 * Checking that the JvmOperation really has a JUnit annotation.
+		 */
+		if(hasJUnitAnnotation(operation)) {
+			LightweightTypeReference actualType = determineReturnType(operation);
+			if(actualType !=null && !actualType.isPrimitiveVoid()) {
+				String message = String.format("JUnit method %s() must be void but is %s.", function.getName(), actualType.getHumanReadableName());
+				EAttribute location = XTEND_FUNCTION__NAME;
+				error(message, function, location, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION);
+			}
+		}
+	}
+	
+	private LightweightTypeReference determineReturnType(JvmOperation operation) {
+		// operation could have been removed by AA, thus the resource is possibly null
+		if(operation != null && operation.eResource() != null) {
+			return batchTypeResolver.resolveTypes(operation).getActualType(operation);
+		}
+		return null;
+	}
+	
+	private boolean hasJUnitAnnotation(JvmOperation operation) {
+		return !annotationUtil.findAnnotations(junitAnnotations, operation).isEmpty();
+	}
+	
 	protected void validateInferredType(JvmTypeReference inferredType, XtendMember member, String messagePrefix,
 			EAttribute location) {
 		if (inferredType != null) {
