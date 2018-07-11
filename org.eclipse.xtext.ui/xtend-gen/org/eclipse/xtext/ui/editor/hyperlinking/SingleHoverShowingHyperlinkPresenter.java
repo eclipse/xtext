@@ -105,7 +105,14 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
         if (((it != null) && (it.getHyperlinkRegion() != null))) {
           list.add(it);
         } else {
-          String _name = it.getClass().getName();
+          Class<? extends IHyperlink> _class = null;
+          if (it!=null) {
+            _class=it.getClass();
+          }
+          String _name = null;
+          if (_class!=null) {
+            _name=_class.getName();
+          }
           String _plus = ("Filtered invalid hyperlink: " + _name);
           SingleHoverShowingHyperlinkPresenter.log.warn(_plus);
         }
