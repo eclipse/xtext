@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.xtext.xtext.ui.graph,
  org.eclipse.xtext.testing,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext,
- org.eclipse.draw2d;bundle-version="3.5.1",
+ org.eclipse.draw2d;bundle-version="3.10.100",
  org.eclipse.xtext.xtext.ui
 Import-Package: org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0"
