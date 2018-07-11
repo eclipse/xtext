@@ -3793,7 +3793,127 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
-
+	
+	@Test
+	def void junitTestMethodReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.Test
+			class Foo {
+				@Test def <|>test001() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.Test
+			class Foo {
+				@Test def void test001() {
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void junitTestMethodIntReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.Test
+			class Foo {
+				@Test def int <|>test001() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.Test
+			class Foo {
+				@Test def void test001() {
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void junitBeforeMethodReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.Before
+			class Foo {
+				@Before def <|>before() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.Before
+			class Foo {
+				@Before def void before() {
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void junitAfterMethodReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.After
+			class Foo {
+				@After def <|>after() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.After
+			class Foo {
+				@After def void after() {
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void junitBeforeClassMethodReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.BeforeClass
+			class Foo {
+				@BeforeClass def static <|>beforeClass() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.BeforeClass
+			class Foo {
+				@BeforeClass def static void beforeClass() {
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void junitAfterClassMethodReturnType() {
+		create('Foo.xtend', '''
+			import org.junit.AfterClass
+			class Foo {
+				@AfterClass def static <|>afterClass() {
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+		.assertResolutionLabels("Change return type to void.")
+		.assertModelAfterQuickfix('''
+			import org.junit.AfterClass
+			class Foo {
+				@AfterClass def static void afterClass() {
+				}
+			}
+		''')
+	}
+	
 	@Test
 	def void unnecessaryModifier_01(){
 		// Xtend class having a 'public' modifier
