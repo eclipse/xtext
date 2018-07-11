@@ -54,6 +54,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -124,6 +125,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private IBatchTypeResolver batchTypeResolver;
 	
 	@Inject private ProjectUtil projectUtil; 
+	
+	@Inject
+	private TypeReferences typeReferences;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			Diagnostic.LINKING_DIAGNOSTIC,
@@ -669,6 +673,20 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			ctx.setUpdateCrossReferences(false);
 			ctx.setUpdateRelatedFiles(false);
 			ctx.addModification(element, ele -> ele.getModifiers().remove(modifier));
+		});
+	}
+	
+	@Fix(IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
+	public void changeJUnitMethodReturnTypeToVoid(final Issue issue, IssueResolutionAcceptor acceptor) {
+		// use the same label, description and image
+		// to be able to use the quickfixes (issue resolution) in batch mode
+		String label = "Change return type to void.";
+		String description = "Change the return type to void to be recognized by JUnit.";
+		String image = "fix_indent.gif";
+		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XtendFunction>) (element, ctx) -> {
+			ctx.setUpdateCrossReferences(false);
+			ctx.setUpdateRelatedFiles(false);
+			ctx.addModification(element, ele -> ele.setReturnType(typeReferences.getTypeForName(Void.TYPE, ele)));
 		});
 	}
 	

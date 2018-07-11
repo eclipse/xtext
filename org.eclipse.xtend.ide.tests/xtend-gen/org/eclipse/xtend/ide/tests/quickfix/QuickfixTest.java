@@ -6904,6 +6904,198 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void junitTestMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.Test");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def <|>test001() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.Test");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@Test def void test001() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void junitTestMethodIntReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.Test");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def int <|>test001() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.Test");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@Test def void test001() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void junitBeforeMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.Before");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Before def <|>before() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.Before");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@Before def void before() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void junitAfterMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.After");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@After def <|>after() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.After");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@After def void after() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void junitBeforeClassMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.BeforeClass");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@BeforeClass def static <|>beforeClass() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.BeforeClass");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@BeforeClass def static void beforeClass() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void junitAfterClassMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.AfterClass");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@AfterClass def static <|>afterClass() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION).assertResolutionLabels("Change return type to void.");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.junit.AfterClass");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@AfterClass def static void afterClass() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void unnecessaryModifier_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("publ|ic class Foo {}");
