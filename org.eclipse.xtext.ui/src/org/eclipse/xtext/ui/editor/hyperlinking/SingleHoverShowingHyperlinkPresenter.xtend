@@ -79,7 +79,7 @@ class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
 				if (it !== null && it.hyperlinkRegion !== null) {
 					list.add(it)
 				} else {
-					log.warn('Filtered invalid hyperlink: '+ it.getClass.name)
+					log.warn('Filtered invalid hyperlink: '+ it?.class?.name)
 				}
 			]
 			return list.toArray(newArrayOfSize(list.size))
