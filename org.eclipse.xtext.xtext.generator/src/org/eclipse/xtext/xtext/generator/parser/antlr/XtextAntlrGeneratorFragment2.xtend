@@ -504,7 +504,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					grammar.parserClass.packageName,
 					grammar.internalParserClass.packageName
 				]
-				requiredBundles += "org.antlr.runtime"
+				requiredBundles += "org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""
 			]
 		}
 		val rtBindings = new GuiceModuleAccess.BindingFactory()
@@ -541,7 +541,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					grammar.parserClass.packageName,
 					grammar.internalParserClass.packageName
 				]
-				requiredBundles += "org.antlr.runtime"
+				requiredBundles += "org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""
 			]
 		}
 		val ideBindings = new GuiceModuleAccess.BindingFactory()

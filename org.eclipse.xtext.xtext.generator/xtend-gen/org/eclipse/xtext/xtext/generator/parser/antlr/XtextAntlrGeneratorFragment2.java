@@ -1262,7 +1262,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         String _packageName_2 = naming.getInternalParserClass(this.getGrammar()).getPackageName();
         Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
         Set<String> _requiredBundles = it.getRequiredBundles();
-        _requiredBundles.add("org.antlr.runtime");
+        _requiredBundles.add("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"");
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
@@ -1327,7 +1327,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         String _packageName_2 = naming.getInternalParserClass(this.getGrammar()).getPackageName();
         Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
         Set<String> _requiredBundles = it.getRequiredBundles();
-        _requiredBundles.add("org.antlr.runtime");
+        _requiredBundles.add("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"");
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
