@@ -8,7 +8,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.ui.codetemplates,
- org.antlr.runtime
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Export-Package: org.eclipse.xtext.ui.codetemplates.ide,
  org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr,
  org.eclipse.xtext.ui.codetemplates.ide.contentassist.antlr.internal,
