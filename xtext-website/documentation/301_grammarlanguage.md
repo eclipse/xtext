@@ -607,7 +607,7 @@ Language evolution is an important part of building serious DSLs. Adding somethi
 This will generate validations and the possibility to change the severity through preferences. As a default users will get a warning when using these rules. Of course it's up to you to decide what the severity should be - this opens the possibility to safely remove parts of the grammar by informing in advance with an warning and raise the severity f to error.
 
 #### Exported
-As a default all elements that have a name are exposed through the index to be referenced from outside. As a start this might fit your needs, but soon or later you might run out of memory (big index) or you simply want to hide elements for the outside world. To do that you can write a custom version of the [IDefaultResourceDescriptionStrategy]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) or simply use the `@Exported` annotation. This will generate a custom strategy as soon as there is at least one `@Exported` annotation in your grammar. 
+As a default all elements that have a name are exposed through the index to be referenced from outside. As a start this might fit your needs, but soon or later you might run out of memory (big index) or you simply want to hide elements from the outside world. To do that you can write a custom version of the [IDefaultResourceDescriptionStrategy]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IDefaultResourceDescriptionStrategy.java) or simply use the `@Exported` annotation. This will generate a custom strategy as soon as there is at least one `@Exported` annotation in your grammar. 
 
 ---
 
