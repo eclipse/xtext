@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.java.tests;singleton:=true
 Bundle-Version: 2.15.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.antlr.runtime,
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.equinox.common,

@@ -37,7 +37,7 @@ Export-Package: org.eclipse.xtext.enumrules,
  org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage,
  org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl,
  org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.util
-Require-Bundle: org.antlr.runtime,
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.equinox.common,
