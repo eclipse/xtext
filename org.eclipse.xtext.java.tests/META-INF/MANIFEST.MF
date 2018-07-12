@@ -8,7 +8,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
- org.eclipse.equinox.common,
+ org.eclipse.equinox.common;bundle-version="3.9.0",
  org.eclipse.xtext,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.ecore,
@@ -19,10 +19,10 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.java,
  org.eclipse.xtext.xbase.testdata
 Import-Package: org.apache.log4j,
- org.junit;version="4.5.0",
- org.junit.rules;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
+ org.junit;version="4.12.0",
+ org.junit.rules;version="4.12.0",
+ org.junit.runner;version="4.12.0",
+ org.junit.runners;version="4.12.0",
+ org.junit.runners.model;version="4.12.0"
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.extras.tests
