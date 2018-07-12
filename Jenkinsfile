@@ -8,7 +8,7 @@ node {
 	}
 	
 	stage('Gradle Build') {
-		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PcompileXtend=true -PignoreTestFailures=true --refresh-dependencies --continue"
+		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PcompileXtend=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --refresh-dependencies --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 	
@@ -17,7 +17,7 @@ node {
 		env.M2_HOME = "${mvnHome}"
 		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
-		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -Dmaven.repo.local=.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
+		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -Dmaven.repo.local=.m2/repository -DJENKINS_URL=$JENKINS_URL -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
 	}
 	
 	archive 'build/**'
