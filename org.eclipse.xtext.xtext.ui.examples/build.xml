@@ -70,6 +70,7 @@
 		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.tests" />
 		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ide" />
 		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ui" />
+		<zip_example subdir="homeautomation" name="org.eclipse.xtext.example.homeautomation.ui.tests" />
 		<zip_example subdir="."              name="xbase.tutorial" />
 	</target>
 
