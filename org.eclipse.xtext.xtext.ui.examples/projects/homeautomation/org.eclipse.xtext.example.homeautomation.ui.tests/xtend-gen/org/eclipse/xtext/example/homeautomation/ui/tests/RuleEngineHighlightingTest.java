@@ -92,6 +92,146 @@ public class RuleEngineHighlightingTest extends AbstractHighlightingTest {
   }
   
   @Test
+  public void switch_keyword() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \"Save energy\" when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch new java.util.Random().nextInt");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.on)");
+    _builder.newLine();
+    this.testHighlighting(_builder, "switch", this._defaultHighlightingConfiguration.keywordTextStyle());
+  }
+  
+  @Test
+  public void case_keyword() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \"Save energy\" when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch new java.util.Random().nextInt");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.on)");
+    _builder.newLine();
+    this.testHighlighting(_builder, "case", this._defaultHighlightingConfiguration.keywordTextStyle());
+  }
+  
+  @Test
+  public void default_keyword() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \"Save energy\" when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch new java.util.Random().nextInt");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.on)");
+    _builder.newLine();
+    this.testHighlighting(_builder, "default", this._defaultHighlightingConfiguration.keywordTextStyle());
+  }
+  
+  @Test
+  public void number() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \"Save energy\" when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("switch new java.util.Random().nextInt");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 1,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("case 2:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default:");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fire(Heater.on)");
+    _builder.newLine();
+    this.testHighlighting(_builder, "1", this._defaultHighlightingConfiguration.numberTextStyle());
+  }
+  
+  @Test
+  public void punctuation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Device Window can be open, closed");
+    _builder.newLine();
+    _builder.append("Device Heater can be on, off, error");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Rule \'rule1\' when Window.open then");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("fire(Heater.off)");
+    _builder.newLine();
+    this.testHighlighting(_builder, ".", this._defaultHighlightingConfiguration.punctuationTextStyle());
+  }
+  
+  @Test
   public void single_quoted_rule_description() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Device Window can be open, closed");

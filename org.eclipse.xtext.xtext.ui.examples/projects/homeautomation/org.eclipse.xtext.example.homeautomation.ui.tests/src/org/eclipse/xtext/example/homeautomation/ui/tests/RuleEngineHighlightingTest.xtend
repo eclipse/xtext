@@ -41,7 +41,7 @@ class RuleEngineHighlightingTest extends AbstractHighlightingTest {
 				fire(Heater.off)
 		'''.testHighlighting("Rule", keywordTextStyle)
 	}
-	
+
 	@Test def when_keyword() {
 		'''
 			Device Window can be open, closed
@@ -51,7 +51,7 @@ class RuleEngineHighlightingTest extends AbstractHighlightingTest {
 				fire(Heater.off)
 		'''.testHighlighting("when", keywordTextStyle)
 	}
-	
+
 	@Test def then_keyword() {
 		'''
 			Device Window can be open, closed
@@ -60,6 +60,76 @@ class RuleEngineHighlightingTest extends AbstractHighlightingTest {
 			Rule 'rule1' when Window.open then
 				fire(Heater.off)
 		'''.testHighlighting("then", keywordTextStyle)
+	}
+
+	@Test def switch_keyword() {
+		'''
+			Device Window can be open, closed
+			Device Heater can be on, off
+			
+			Rule "Save energy" when Window.open then
+				switch new java.util.Random().nextInt
+					case 1,
+					case 2:
+						fire(Heater.off)
+					default:
+						fire(Heater.on)
+		'''.testHighlighting("switch", keywordTextStyle)
+	}
+
+	@Test def case_keyword() {
+		'''
+			Device Window can be open, closed
+			Device Heater can be on, off
+			
+			Rule "Save energy" when Window.open then
+				switch new java.util.Random().nextInt
+					case 1,
+					case 2:
+						fire(Heater.off)
+					default:
+						fire(Heater.on)
+		'''.testHighlighting("case", keywordTextStyle)
+	}
+
+	@Test def default_keyword() {
+		'''
+			Device Window can be open, closed
+			Device Heater can be on, off
+			
+			Rule "Save energy" when Window.open then
+				switch new java.util.Random().nextInt
+					case 1,
+					case 2:
+						fire(Heater.off)
+					default:
+						fire(Heater.on)
+		'''.testHighlighting("default", keywordTextStyle)
+	}
+
+	@Test def number() {
+		'''
+			Device Window can be open, closed
+			Device Heater can be on, off
+			
+			Rule "Save energy" when Window.open then
+				switch new java.util.Random().nextInt
+					case 1,
+					case 2:
+						fire(Heater.off)
+					default:
+						fire(Heater.on)
+		'''.testHighlighting("1", numberTextStyle)
+	}
+
+	@Test def punctuation() {
+		'''
+			Device Window can be open, closed
+			Device Heater can be on, off, error
+			
+			Rule 'rule1' when Window.open then
+				fire(Heater.off)
+		'''.testHighlighting(".", punctuationTextStyle)
 	}
 
 	@Test def single_quoted_rule_description() {
@@ -71,7 +141,7 @@ class RuleEngineHighlightingTest extends AbstractHighlightingTest {
 				fire(Heater.off)
 		'''.testHighlighting("rule1", stringTextStyle)
 	}
-	
+
 	@Test def double_quoted_rule_description() {
 		'''
 			Device Window can be open, closed
