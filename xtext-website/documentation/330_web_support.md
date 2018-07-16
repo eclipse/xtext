@@ -264,7 +264,7 @@ The following functions are available, provided that the respective services are
  * `revertResource()`
    Reverts the resource to the last saved state and returns an object with properties `fullText` and `dirty`.
  * `update()`
-   Computes the difference between the current editor content and the last version that has been committed to the server. If there is a difference, an update request is sent to refresh the server state. The return value has a single property `stateId`, which is an identifier for the new server state. All requests have to include the last obtained state identifier in order to suceed.
+   Computes the difference between the current editor content and the last version that has been committed to the server. If there is a difference, an update request is sent to refresh the server state. The return value has a single property `stateId`, which is an identifier for the new server state. All requests have to include the last obtained state identifier in order to succeed.
 
 ### Full List of Options {#options-reference}
 
@@ -329,7 +329,7 @@ The following functions are available, provided that the respective services are
 
 ## The Server {#server}
 
-The language-specific resources are provided through HTTP requests which are processed by the [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend). This class is also responsible for managing the lifecycle of the language [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) (see [Dependency Injection](302_configuration.html#dependency-injection)). The default approach is to create an injector when the servlet is started and to register it in the [IResourceServiceProvider.Registry]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). In order to override default behavior, you can change or add bindings in the `<LanguageName>WebModule` or `<LanguageName>IdeModule` of your language.
+The language-specific resources are provided through HTTP requests which are processed by the [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend). This class is also responsible for managing the lifecycle of the language [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) (see [Dependency Injection](302_configuration.html#dependency-injection)). The default approach is to create an injector when the servlet is started and to register it in the [IResourceServiceProvider.Registry]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). In order to override the default behavior, you can change or add bindings in the `<LanguageName>WebModule` or `<LanguageName>IdeModule` of your language.
 
 The usual way to include the Xtext servlet in a server application is to create a subclass of [XtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend), override `init()` and `destroy()` to manage the runtime resources, and add a [WebServlet]({{site.javadoc.javaee}}/javax/servlet/annotation/WebServlet.html) annotation with `urlPatterns = "/xtext-service/*"` as parameter. See [MyXtextServlet]({{site.src.xtext_web}}/org.eclipse.xtext.web.example.jetty/src/main/java/org/eclipse/xtext/web/example/jetty/MyXtextServlet.xtend) for an example.
 

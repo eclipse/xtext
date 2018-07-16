@@ -46,7 +46,7 @@ public class MyLabelProvider {
 
 #### DefaultEObjectLabelProvider {#default-eobject-label-provider}
 
-The default implementation of the [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides a image filename or the text to be used to represent your model element. Have a look at following example to get a more detailed idea about the [DefaultEObjectLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java).
+The default implementation of the [ILabelProvider]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/viewers/ILabelProvider.html) interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides an image filename or the text to be used to represent your model element. Have a look at the following example to get a more detailed idea about the [DefaultEObjectLabelProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java).
 
 ```java
 public class SecretCompartmentsLabelProvider 
@@ -66,9 +66,9 @@ public class SecretCompartmentsLabelProvider
 }
 ```
 
-What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) *name* and try to use this one. If it cannot find such a feature, it will try to use the first feature that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
+What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will first look for an [EAttribute]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) *name* and try to use this one. If it cannot find such a feature, it will try to use the first feature that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.
 
-You can a also customize error handling by overriding the methods `handleTextError()` or `handleImageError()`.
+You can also customize error handling by overriding the methods `handleTextError()` or `handleImageError()`.
 
 ### Label Providers For Index Entries {#description-label-provider}
 
@@ -238,7 +238,7 @@ By default Xtext registers *context types* that follow certain patterns. A conte
 
 If you don't like these defaults you'll have to subclass [XtextTemplateContextTypeRegistry]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java) and configure it via [Guice](302_configuration.html#guicemodules). 
 
-In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) to resolve special variable types in templates. Besides the standard template variables available in [GlobalTemplateVariables]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/GlobalTemplateVariables.html) like `${user}`, `${date}`, `${time}`, `${cursor}`, etc., these [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) support the automatic resolving of cross references enumeration values. Both resolvers are explained in the following sections.
+In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) to resolve special variable types in templates. Besides the standard template variables available in [GlobalTemplateVariables]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/GlobalTemplateVariables.html) like `${user}`, `${date}`, `${time}`, `${cursor}`, etc., these [TemplateVariableResolvers]({{site.javadoc.eclipse-platform}}/org/eclipse/jface/text/templates/TemplateVariableResolver.html) support the automatic resolution of cross references enumeration values. Both resolvers are explained in the following sections.
 
 It is best practice to edit the templates in the preferences page, export them into the *templates.xml*-file and put this one into the *templates* folder of your UI-plug-in. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an `id` attribute for each template element. Note that the attribute name is case sensitive. As always in eclipse plug-in development, if the folder *templates* did not exist before, you have to add it to the *bin.includes* in your *build.properties*. 
 
@@ -299,11 +299,11 @@ Xtext provides an outline view to help you navigate your models. By default, it 
 
 In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e. by omitting a certain kind of node or by introducing additional nodes, you can customize the outline by implementing your own [IOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java).
 
-If your workflow defines the [OutlineTreeProviderFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/OutlineTreeProviderFragment2.xtend), Xtext generates a stub for your own [IOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java) that allows you to customize every aspect of the outline by inheriting the powerful customization methods of [DefaultOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java). The following sections show how to do fill this stub with life.
+If your workflow defines the [OutlineTreeProviderFragment2]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/OutlineTreeProviderFragment2.xtend), Xtext generates a stub for your own [IOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java) that allows you to customize every aspect of the outline by inheriting the powerful customization methods of [DefaultOutlineTreeProvider]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java). The following sections show how to fill this stub with life.
 
 ### Influencing the outline structure
 
-Each node the outline tree is an instance of [IOutlineNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineNode.java). The outline tree is always rooted in a [DocumentRootNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DocumentRootNode.java). This node is automatically created for you. Its children are the root nodes in the displayed view.
+Each node in the outline tree is an instance of [IOutlineNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineNode.java). The outline tree is always rooted in a [DocumentRootNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DocumentRootNode.java). This node is automatically created for you. Its children are the root nodes in the displayed view.
 
 An [EObjectNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java) represents a model element. By default, Xtext creates an [EObjectNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java) for each model element in the node of its container. Nodes are created by calling the method `createNode(parentNode, modelElement)` which delegates to `createEObjectNode(..)` if not specified differently.
 
@@ -325,7 +325,7 @@ protected void _createChildren(DocumentRootNode parentNode,
 }
 ```
 
-You can choose not to create any node in the `_createChildren()` method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn't reveal any children if expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method `_isLeaf(modelElement)` with the appropriate argument type, e.g.
+You can choose not to create any node in the `_createChildren()` method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn't reveal any children even if it is expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method `_isLeaf(modelElement)` with the appropriate argument type, e.g.
 
 ```java
 // feature nodes are leafs and not expandable
@@ -334,7 +334,7 @@ protected boolean _isLeaf(Feature feature) {
 }
 ```
 
-Xtext provides a third type of node: [EStructuralFeatureNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java). It is used to represent a feature of a model element rather than element itself. The following simplified snippet from Xtend2 illustrates how to use it: 
+Xtext provides a third type of node: [EStructuralFeatureNode]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java). It is used to represent a feature of a model element rather than the element itself. The following simplified snippet from Xtend2 illustrates how to use it: 
 
 ```java
 protected void _createChildren(DocumentRootNode parentNode, 
@@ -391,7 +391,7 @@ To access images we recommend to use the [PluginImageHelper]({{site.src.xtext_ec
 
 ### Filtering actions
 
-Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend [AbstractFilterOutlineContribution]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java) to ensure that the action toggle state is handled correctly. Here is an example form our domain model example:
+Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend [AbstractFilterOutlineContribution]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java) to ensure that the action toggle state is handled correctly. Here is an example from our domain model example:
 
 ```java
 public class FilterOperationsContribution 
@@ -557,7 +557,7 @@ Implementations of the [ITokenScanner]({{site.javadoc.eclipse-platform}}/org/ecl
 
 The semantic highlighting stage is executed asynchronously in the background and can be used to calculate highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.
 
-As for the lexical highlighting the interface to register the available styles is the [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java). The [ISemanticHighlightingCalculator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements. 
+As for the lexical highlighting the interface to register the available styles is the [IHighlightingConfiguration]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java). The [ISemanticHighlightingCalculator]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java) is the primary hook to implement the logic that will compute the to-be-highlighted ranges based on the model elements. 
 
 The framework will pass the current [XtextResource]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java) and an [IHighlightedPositionAcceptor]({{site.src.xtext_eclipse}}/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java) to the calculator. It is ensured that the resource will not be altered externally until the called method `provideHighlightingFor()` returns. However, the resource may be `null` in case of errors in the model. The implementor's task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:
 
