@@ -1122,7 +1122,7 @@ public class CompilerTest {
       _builder.append("* in Java. There are two differences:");
       _builder.newLine();
       _builder.append(" ");
-      _builder.append("* 1) Checked exceptions must not be catched in closures.");
+      _builder.append("* 1) Checked exceptions must not be caught in closures.");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* 2) Try-catch is an expression and can therefore be used in a deeply ");

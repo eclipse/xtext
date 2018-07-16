@@ -129,7 +129,7 @@ public class CompositeGeneratorFragmentTest extends Assert {
 			fail("CompositeGeneratorException was not thrown");
 		} catch (CompositeGeneratorException e) {
 			Iterable<Exception> exceptions = e.getExceptions();
-			assertEquals("Two exceptions catched and re thrown", 2, Iterables.size(exceptions));
+			assertEquals("Two exceptions caught and re thrown", 2, Iterables.size(exceptions));
 
 			for (Exception exception : exceptions) {
 				if (exception instanceof WrappedException) {
