@@ -44,7 +44,7 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 		/**
 		 * @return whether the closing terminal should be inserted, based on the cursor position
 		 * @throws BadLocationException
-		 *             exceptions are not thrown, thrown exceptions are catched and interpreted like return
+		 *             exceptions are not thrown, thrown exceptions are caught and interpreted like return
 		 *             <code>true</code>
 		 */
 		boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException;
