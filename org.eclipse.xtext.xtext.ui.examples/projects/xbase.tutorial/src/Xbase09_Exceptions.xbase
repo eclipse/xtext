@@ -1,7 +1,7 @@
 /*
  * Xbase supports Exception handling using the same syntax as is used 
  * in Java. There are two differences:
- * 1) Checked exceptions must not be catched in closures.
+ * 1) Checked exceptions must not be caught in closures.
  * 2) Try-catch is an expression and can therefore be used in a deeply 
  *    nested way 
  */
