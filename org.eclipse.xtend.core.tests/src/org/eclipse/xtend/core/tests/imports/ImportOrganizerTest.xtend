@@ -2145,6 +2145,140 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testTryMultiCatch() {
+		'''
+			package pack
+			
+			import java.io.FileNotFoundException
+			
+			class SomeClass {
+				def void test() {
+					try {
+						println();
+					} catch (FileNotFoundException | IllegalArgumentException e) {
+						e.printStackTrace
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package pack
+			
+			import java.io.FileNotFoundException
+			
+			class SomeClass {
+				def void test() {
+					try {
+						println();
+					} catch (FileNotFoundException | IllegalArgumentException e) {
+						e.printStackTrace
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test def testTryMultiCatch_02() {
+		'''
+			package pack
+			
+			class SomeClass {
+				def void test() {
+					try {
+						println();
+					} catch (java.io.FileNotFoundException | IllegalArgumentException e) {
+						e.printStackTrace
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			package pack
+			
+			import java.io.FileNotFoundException
+			
+			class SomeClass {
+				def void test() {
+					try {
+						println();
+					} catch (FileNotFoundException | IllegalArgumentException e) {
+						e.printStackTrace
+					}
+				}
+			}
+		''')
+	}
+	
+	@Test def void testSwitchMultiType() {
+		'''
+		package abc
+		
+		import java.util.Collection
+		import java.util.List
+		import java.util.Set
+		
+		class Sample {
+			
+			def doit(Collection<String> l) {
+				switch(l) {
+					List<String> | Set<String> : println("a")
+					default: println("b")
+				}
+			}
+			
+		}
+		'''.assertIsOrganizedTo('''
+		package abc
+		
+		import java.util.Collection
+		import java.util.List
+		import java.util.Set
+		
+		class Sample {
+			
+			def doit(Collection<String> l) {
+				switch(l) {
+					List<String> | Set<String> : println("a")
+					default: println("b")
+				}
+			}
+			
+		}
+		''')
+	}
+	
+	@Test def void testSwitchMultiType_02() {
+		'''
+		package abc
+		
+		class Sample {
+			
+			def doit(java.util.Collection<java.lang.String> l) {
+				switch(l) {
+					java.util.List<java.lang.String> | java.util.Set<java.lang.String> : println("a")
+					default: println("b")
+				}
+			}
+			
+		}
+		'''.assertIsOrganizedTo('''
+		package abc
+		
+		import java.util.Collection
+		import java.util.List
+		import java.util.Set
+		
+		class Sample {
+			
+			def doit(Collection<String> l) {
+				switch(l) {
+					List<String> | Set<String> : println("a")
+					default: println("b")
+				}
+			}
+			
+		}
+		''')
+	}
+	
 	@Test def testBug409648() {
 		'''
 			import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
