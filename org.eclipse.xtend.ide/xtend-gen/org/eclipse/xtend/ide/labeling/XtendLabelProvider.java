@@ -245,6 +245,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
     return ((JvmTypeReference)_xblockexpression);
   }
   
+  @Override
   protected ImageDescriptor imageDescriptor(final Object operation) {
     if (operation instanceof JvmConstructor) {
       return _imageDescriptor((JvmConstructor)operation);
