@@ -85,11 +85,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private final Method method;
 		private final String s;
 		private final AbstractDeclarativeValidator instance;
+		private final CheckType checkType;
 
 		protected MethodWrapper(AbstractDeclarativeValidator instance, Method m) {
 			this.instance = instance;
 			this.method = m;
 			this.s = m.getName() + ":" + m.getParameterTypes()[0].getName();
+			Check annotation = m.getAnnotation(Check.class);
+			checkType = annotation.value();
 		}
 
 		@Override
@@ -108,12 +111,11 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			if (wasNull)
 				instance.state.set(state);
 			try {
-				Check annotation = method.getAnnotation(Check.class);
-				if (!state.checkMode.shouldCheck(annotation.value()))
+				if (!state.checkMode.shouldCheck(checkType))
 					return;
 				try {
 					state.currentMethod = method;
-					state.currentCheckType = annotation.value();
+					state.currentCheckType = checkType;
 					method.setAccessible(true);
 					method.invoke(instance, state.currentObject);
 				} catch (IllegalArgumentException e) {
