@@ -1280,6 +1280,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     return false;
   }
   
+  @Override
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof Alternatives) {
       return _compileRule((Alternatives)it, grammar, options);
@@ -1303,6 +1304,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     }
   }
   
+  @Override
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportsActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportsActions);
@@ -1324,6 +1326,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     }
   }
   
+  @Override
   protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
@@ -1350,6 +1353,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     }
   }
   
+  @Override
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);

@@ -28,6 +28,7 @@ public abstract class GenericFormatter<T extends EObject> extends AbstractFormat
   
   protected abstract void format(final T model, final ITextRegionExtensions regionAccess, final IFormattableDocument document);
   
+  @Override
   public void format(final Object obj, final IFormattableDocument document) {
     if (obj instanceof XtextResource) {
       _format((XtextResource)obj, document);
