@@ -616,6 +616,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     return _xifexpression;
   }
   
+  @Override
   public void format(final Object anonymousClass, final IFormattableDocument format) {
     if (anonymousClass instanceof AnonymousClass) {
       _format((AnonymousClass)anonymousClass, format);
