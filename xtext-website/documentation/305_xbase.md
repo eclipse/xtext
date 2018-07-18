@@ -19,6 +19,8 @@ The implementation will be selected transparently depending on how the client co
 Using the JVM types model is very simple. First of all, the grammar has to import the *JavaVMTypes* Ecore model. Thanks to content assist this is easy to spot in the list of proposals. 
 
 ```xtext
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xtype
+...
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
 ```
 

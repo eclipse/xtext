@@ -260,7 +260,7 @@ This small example yields the text *event =\> state* and allows selecting any ev
     context="org.xtext.example.SecretCompartments.Transition" 
     enabled="true">
 ${event:CrossReference('Transition.event')} =>
-  ${state:CrossReference('Transition.state')
+  ${state:CrossReference('Transition.state')}
 </template>
 ```
 
@@ -272,7 +272,7 @@ The [EnumTemplateVariableResolver]({{site.src.xtext_eclipse}}/org.eclipse.xtext.
 
 The syntax is as follows: 
 
-`${<displayText>:Enum([<MyPackage>.]<EnumType>)`
+`${<displayText>:Enum([<MyPackage>.]<EnumType>)}`
 
 For example the following template (taken from another example):
 
