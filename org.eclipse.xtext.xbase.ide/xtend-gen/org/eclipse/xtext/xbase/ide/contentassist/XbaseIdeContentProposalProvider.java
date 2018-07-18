@@ -636,6 +636,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     return ruleCall.getRule().getName();
   }
   
+  @Override
   public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     if (assignment instanceof Assignment) {
       _createProposals((Assignment)assignment, context, acceptor);
