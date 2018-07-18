@@ -660,6 +660,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
   
+  @Override
   protected String ebnf2(final AbstractElement it, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _ebnf2((Alternatives)it, options, supportActions);
@@ -685,6 +686,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
   
+  @Override
   protected String assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _assignmentEbnf((Alternatives)it, assignment, options, supportActions);
@@ -706,6 +708,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     }
   }
   
+  @Override
   public boolean mustBeParenthesized(final AbstractElement it) {
     if (it instanceof Alternatives) {
       return _mustBeParenthesized((Alternatives)it);

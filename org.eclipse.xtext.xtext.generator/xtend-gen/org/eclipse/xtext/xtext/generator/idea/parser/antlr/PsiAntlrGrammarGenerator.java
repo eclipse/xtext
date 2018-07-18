@@ -1050,6 +1050,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     return "Boolean";
   }
   
+  @Override
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
     if (it instanceof EnumRule) {
       return _compileRule((EnumRule)it, grammar, options);
