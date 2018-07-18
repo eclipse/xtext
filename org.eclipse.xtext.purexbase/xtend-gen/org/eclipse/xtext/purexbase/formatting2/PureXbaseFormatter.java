@@ -77,6 +77,7 @@ public class PureXbaseFormatter extends XbaseFormatter {
     }
   }
   
+  @Override
   public void format(final Object xBlockExpression, final IFormattableDocument document) {
     if (xBlockExpression instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)xBlockExpression, document);
