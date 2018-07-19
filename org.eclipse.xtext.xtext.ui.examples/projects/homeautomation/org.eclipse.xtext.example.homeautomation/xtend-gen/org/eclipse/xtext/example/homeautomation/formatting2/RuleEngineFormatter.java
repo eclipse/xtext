@@ -303,6 +303,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
     doc.<XExpression>format(expr);
   }
   
+  @Override
   public void format(final Object device, final IFormattableDocument document) {
     if (device instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)device, document);
