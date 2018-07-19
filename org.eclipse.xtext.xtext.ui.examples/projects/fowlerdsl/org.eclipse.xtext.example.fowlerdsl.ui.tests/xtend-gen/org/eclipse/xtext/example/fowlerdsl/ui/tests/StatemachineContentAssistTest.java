@@ -273,7 +273,7 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.append("end");
     _builder_1.newLine();
     this.testContentAssistant(_builder, 
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "end")), "doorClosed", _builder_1.toString());
+      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Transition - Template for a Transition", "doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "end")), "doorClosed", _builder_1.toString());
   }
   
   @Test
@@ -469,6 +469,78 @@ public class StatemachineContentAssistTest extends AbstractContentAssistTest {
     _builder_1.newLine();
     this.testContentAssistant(_builder, 
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("idle", "active", "waitingForLight", "waitingForDrawer", "unlockedPanel")), "idle", _builder_1.toString());
+  }
+  
+  @Test
+  public void transition_template() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("events");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorClosed   D1CL");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("drawerOpened D2OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lightOn      L1ON");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorOpened   D1OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("panelClosed  PNCL");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("state idle");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(this.c, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("end");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("state active");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("events");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("doorClosed   D1CL");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("drawerOpened D2OP");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("lightOn      L1ON");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("doorOpened   D1OP");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("panelClosed  PNCL");
+    _builder_1.newLine();
+    _builder_1.append("end");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("state idle");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("doorClosed => idle");
+    _builder_1.newLine();
+    _builder_1.append("end");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("state active");
+    _builder_1.newLine();
+    _builder_1.append("end");
+    _builder_1.newLine();
+    this.testContentAssistant(_builder, 
+      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("doorClosed", "drawerOpened", "lightOn", "doorOpened", "panelClosed", "actions", "end", "Transition - Template for a Transition")), "Transition - Template for a Transition", _builder_1.toString());
   }
   
   private void testContentAssistant(final CharSequence text, final List<String> expectedProposals, final String proposalToApply, final String expectedContent) {
