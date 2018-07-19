@@ -306,7 +306,7 @@ bean = StandaloneSetup {
 
 ## Dependency Injection {#dependency-injection}
 
-All Xtext components are assembled by means of dependency injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.
+All Xtext components are assembled by means of dependency injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather than stating how to resolve it, i.e. obtaining that component.
 
 For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and adds the [Inject]({{site.javadoc.guice}}/com/google/inject/Inject.html) annotation: 
 
@@ -407,9 +407,9 @@ public static void main(String[] args) {
 }
 ```
 
-The setup method returns an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html), which can further be used to obtain a parser, etc. It also registers the [Resource.Factory]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) to the respective global registries provided by EMF. So basically after having run the setup and you can start using EMF API to load and store models of your language.
+The setup method returns an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html), which can further be used to obtain a parser, etc. It also registers the [Resource.Factory]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) to the respective global registries provided by EMF. So basically after having run the setup you can start using EMF API to load and store models of your language.
 
-**Caveat:** The [ISetup]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) class is intended to be used for runtime and for unit testing, only. if you use it in an Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.
+**Caveat:** The [ISetup]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) class is intended to be used for runtime and for unit testing, only. If you use it in an Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.
 
 #### Setup within Eclipse-Equinox (OSGi) {#equinox-setup}
 

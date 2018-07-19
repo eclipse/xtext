@@ -25,7 +25,7 @@ grammar org.example.domainmodel.Domainmodel
 
 The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be *SecretCompartments.xtext* and must be placed in a package *org.xtext.example* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
 
-The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](301_grammarlanguage.html#grammar-mixins)).
+The second aspect that can be deduced from the first line of the grammar is its relationship to other languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called [grammar mixin](301_grammarlanguage.html#grammar-mixins).
 
 ### EPackage Declarations {#package-declarations}
 
@@ -64,20 +64,20 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 When referring to a type somewhere in the grammar you need to qualify the reference using that alias (e.g. `another::SomeType`). Cases where such type references occur are explained below.
 
-It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) with the same name. In that case none of them can be referenced. It is even possible to `import` multiple and `generate` one Ecore model and declare all of them with same alias. If you do so, for a reference to an [EClassifier]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) first the imported [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) are scanned before it is assumed that a type needs to be generated into the inferred package. 
+It is also supported to put multiple EPackage imports into one alias. This is no problem as long as there are not any two [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) with the same name. In that case none of them can be referenced. It is even possible to `import` multiple and `generate` one Ecore model and declare all of them with the same alias. If you do so, for a reference to an [EClassifier]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) first the imported [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) are scanned before it is assumed that a type needs to be generated into the inferred package. 
 
 Note that using the same alias for multiple EPackages is not recommended, because it might cause problems that are hard to track down. For instance, a reference to `classA` could mistakenly be linked to a newly created EClass instead of an existing EClass `ClassA` because the latter is written with a capital letter.
 
 ### Terminal Rules {#terminal-rules}
 
-Basically parsing can be separated in the following phases. 
+Basically parsing can be separated in the following phases: 
 
 1.  Lexing
 1.  Parsing
 1.  Linking
 1.  Validation
 
-In the first stage called *lexing*, a sequence of characters (the text input) is transformed into a sequence of so-called *tokens*. In this context, a token is sort of a strongly typed part or region of the input sequence. It consists of one or more characters and is matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as *token rules* or *lexer rules*. There is an informal naming convention that names of terminal rules are all upper-case.
+In the first stage called *lexing*, a sequence of characters (the text input) is transformed into a sequence of so-called *tokens*. In this context, a token is a sort of a strongly typed part or region of the input sequence. It consists of one or more characters and is matched by a particular terminal rule or keyword and therefore represents an atomic symbol. Terminal rules are also referred to as *token rules* or *lexer rules*. There is an informal naming convention that names of terminal rules are all upper-case.
 
 In the [entities example](102_domainmodelwalkthrough.html) there are no explicitly defined terminal rules, since it only uses the *ID* rule which is inherited from the grammar `org.eclipse.xtext.common.Terminals` (see [Common Terminals](#common-terminals)). Therein the *ID* rule is defined as follows:
 
@@ -98,13 +98,13 @@ TerminalRule:
     alternatives=TerminalAlternatives ';';
 ```
 
-Note that *the order of terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
+Note that *the order of the terminal rules is crucial for your grammar*, as they may shadow each other. This is especially important for newly introduced rules in connection with imported rules from used grammars. 
 
 It's almost in any case recommended to use [data type rules](#datatype-rules) instead. Let's assume you want to add a rule to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment looks like a plain ID, you should implement it as a data type rule instead of adding another terminal rule. The same rule of thumb applies to floating point literals, too.
 
 #### Return Types
 
-Each terminal rule returns an atomic value (an [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java)). By default, it's assumed that an instance of `ecore::EString`) should be returned. However, if you want to provide a different type you can specify it. For instance, the rule *INT* is defined as:
+Each terminal rule returns an atomic value (an [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java)). By default, it's assumed that an instance of `ecore::EString` should be returned. However, if you want to provide a different type you can specify it. For instance, the rule *INT* is defined as:
 
 ```xtext
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
@@ -288,7 +288,7 @@ Feature:
     (many ?= 'many')? name = ID ':' type = [Type];
 ```
 
-It is important to understand that the text between the square brackets does not refer to another rule, but to an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) &ndash; which is a type and not a parser rule. This can be sometimes confusing because one usually uses the same name for the rules and the returned types.
+It is important to understand that the text between the square brackets does not refer to another rule, but to an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) &ndash; which is a type and not a parser rule. This can be sometimes confusing because one usually uses the same name for the rules and for the returned types.
 
 Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by *CrossReferenceableTerminal*. This is the part describing the concrete text from which the cross-link should be established. If the terminal is omitted, it is expected to be the rule with the name *ID* &ndash; if one can be found. The terminal is mandatory for languages that do not define a rule with the name *ID*.
 
@@ -335,7 +335,7 @@ can parse these lines
 x 0 8 15 
 ```
 
-but not does not consume the following sequence without raising an error
+but does not consume the following sequence without raising an error
 
 ```java
 0 x 8 15 // wrong, as values must not be interrupted by a name (ID)
@@ -515,7 +515,7 @@ Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an 
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define the important parts of the input. Xtext introduces the concept of hidden tokens to handle semantically irrelevant things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they are transparently woven into the node model, but not relevant for the semantic model. 
 
-Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [reusing a single grammar](301_grammarlanguage.html#grammar-mixins) its definition of hidden tokens is reused, too. The grammar `org.eclipse.xtext.common.Terminals` comes with a reasonable default and hides all comments and white space from the parser rules.
+Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule or for the whole grammar. When [reusing a single grammar](301_grammarlanguage.html#grammar-mixins) its definition of hidden tokens is reused, too. The grammar `org.eclipse.xtext.common.Terminals` comes with a reasonable default and hides all comments and white spaces from the parser rules.
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called transitively by the declaring rule uses the same hidden terminals as the calling rule, unless it defines hidden tokens itself.
 
@@ -542,7 +542,7 @@ A list of all default terminals such as `WS` can be found in [Common Terminals](
 Data type rules create instances of [EDataType]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java) instead of [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java). They are quite similar to terminal rules, but they are actually parser rules and are therefore
 
 1. context sensitive and
-1. allow for use of hidden tokens.
+1. allow to use of hidden tokens.
 
 Assuming you want to define a rule to consume Java-like qualified names (e.g. `foo.bar.Baz`) you could write:
 
@@ -622,7 +622,7 @@ Xtext uses Ecore's EPackages to define Ecore models. Ecore models are declared t
 Xtext creates
 
 * an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java)    
-  * for each `generate` declaration. The *name* of the EPackage is set to the first parameter of such a declaration, its *nsURI* to the second parameter. An optional alias as the third parameter allows to distinguish generated EPackages later. Only one generated package declaration per alias is allowed.
+  * for each `generate` declaration. The *name* of the EPackage is set to the first parameter of such a declaration, its *nsURI* to the second parameter. An optional alias as the third parameter allows to distinguish the generated EPackages later. Only one generated package declaration per alias is allowed.
 * an [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java)    
   * for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify multiple rules that return the same type, but only one EClass is generated for each type name.
   * for each type defined in an action or a cross-reference.
@@ -680,7 +680,7 @@ The following conditions cause an error
 *   An EAttribute or EReference has two different types or different cardinalities.
 *   There is an EAttribute and an EReference with the same name in the same EClass.
 *   There is a cycle in the type hierarchy.
-*   An new EAttribute, EReference or super type is added to an imported type.
+*   A new EAttribute, EReference or super type is added to an imported type.
 *   An EClass is added to an imported EPackage.
 *   An undeclared alias is used. 
 *   An imported Ecore model cannot be loaded.
