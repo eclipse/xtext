@@ -119,6 +119,7 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 				«c»
 			end
 		'''.testContentAssistant(#[
+			'Transition - Template for a Transition',
 			'doorClosed',
 			'drawerOpened',
 			'lightOn',
@@ -242,6 +243,49 @@ class StatemachineContentAssistTest extends AbstractContentAssistTest {
 			state unlockedPanel
 				actions {unlockPanel lockDoor}
 				panelClosed => idle
+			end
+		''')
+	}
+
+	@Test def transition_template() {
+		'''
+			events
+				doorClosed   D1CL
+				drawerOpened D2OP
+				lightOn      L1ON
+				doorOpened   D1OP
+				panelClosed  PNCL
+			end
+			
+			state idle
+				«c»
+			end
+			
+			state active
+			end
+		'''.testContentAssistant(#[
+			'doorClosed',
+			'drawerOpened',
+			'lightOn',
+			'doorOpened',
+			'panelClosed',
+			'actions',
+			'end',
+			'Transition - Template for a Transition'
+		], 'Transition - Template for a Transition', '''
+			events
+				doorClosed   D1CL
+				drawerOpened D2OP
+				lightOn      L1ON
+				doorOpened   D1OP
+				panelClosed  PNCL
+			end
+			
+			state idle
+				doorClosed => idle
+			end
+			
+			state active
 			end
 		''')
 	}
