@@ -37,12 +37,12 @@ public interface IFeatureScopeTracker {
 	}
 	
 	/**
-	 * @see IResolvedTypes#getExpressionScope(EObject, Anchor)
+	 * @see IResolvedTypes#getExpressionScope(EObject, IExpressionScope.Anchor)
 	 */
 	IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor);
 
 	/**
-	 * @see IResolvedTypes#hasExpressionScope(EObject, Anchor)
+	 * @see IResolvedTypes#hasExpressionScope(EObject, IExpressionScope.Anchor)
 	 */
 	boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor);
 	

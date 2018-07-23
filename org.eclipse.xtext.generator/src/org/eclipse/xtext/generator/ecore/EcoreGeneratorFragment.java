@@ -88,7 +88,7 @@ public class EcoreGeneratorFragment extends EMFGeneratorFragment {
 	}
 
 	/**
-	 * Use {@link GenModelAccess#getGenPackage(EPackage)}
+	 * Use {@link GenModelAccess#getGenPackage(EPackage, ResourceSet)}
 	 */
 	@Deprecated
 	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {

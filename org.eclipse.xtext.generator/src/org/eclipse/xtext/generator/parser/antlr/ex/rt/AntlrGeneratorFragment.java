@@ -100,7 +100,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	}
 	
 	/**
-	 * @deprecated use {@link #createLexerTokensProvider(String, Charset)} instead
+	 * @deprecated use {@link #createLexerTokensProvider(String, KeywordHelper, Charset)} instead
 	 */
 	@Deprecated
 	protected MutableTokenDefProvider createLexerTokensProvider(final String lexerBaseFileName) {
