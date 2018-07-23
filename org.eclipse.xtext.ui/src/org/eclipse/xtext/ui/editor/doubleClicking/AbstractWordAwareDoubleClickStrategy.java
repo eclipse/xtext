@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.doubleClicking;
 
+
+import java.text.CharacterIterator;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DefaultTextDoubleClickStrategy;
 import org.eclipse.jface.text.IDocument;
@@ -36,7 +39,8 @@ public class AbstractWordAwareDoubleClickStrategy extends DefaultTextDoubleClick
 				return null;
 
 			com.ibm.icu.text.BreakIterator breakIter = createBreakIterator();
-			breakIter.setText(new DocumentCharacterIterator(document));
+			CharacterIterator characterIterator = new DocumentCharacterIterator(document);
+			breakIter.setText(characterIterator);
 			int start = breakIter.preceding(offset);
 			if (start == BreakIterator.DONE)
 				start = line.getOffset();
