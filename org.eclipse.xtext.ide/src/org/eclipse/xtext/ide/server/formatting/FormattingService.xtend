@@ -78,7 +78,7 @@ class FormattingService {
 	}
 	
 	/**
-	 * @deprecated use {@link #format(XtextResource, document, offset, length, FormattingOptions} instead.
+	 * @deprecated use {@link #format(XtextResource, Document, int, int, FormattingOptions)} instead.
 	 */
 	@Deprecated
 	def List<TextEdit> format(XtextResource resource, Document document, int offset, int length) {
