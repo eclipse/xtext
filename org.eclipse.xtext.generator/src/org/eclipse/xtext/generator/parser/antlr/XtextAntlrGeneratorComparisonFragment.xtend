@@ -39,7 +39,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
  * org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
  * XtextAntlrGeneratorFragment2} with that of {@link XtextAntlrGeneratorFragment}
  * by running its grammar generation in a temporary folder and calling {@link
- * GrammarComparator} to compare them.
+ * AntlrGrammarComparator} to compare them.
  * 
  * @author Christian Schneider - Initial contribution and API
  * @noreference
@@ -124,7 +124,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 	 * Tweaks the generation of the {@link Generator#SRC_GEN Generator.SRC_GEN},
 	 * {@link Generator#SRC_GEN_IDE Generator.SRC_GEN_IDE}, and
 	 * {@link Generator#SRC_GEN_UI Generator.SRC_GEN_UI} outlets
-	 * and injects the {@link #getTmpPath()}.
+	 * and injects the {@link #getTmpFolder()}.
 	 */
 	override protected createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
 		if (name == Generator.SRC_GEN || name == Generator.SRC_GEN_IDE || name == Generator.SRC_GEN_UI) {
