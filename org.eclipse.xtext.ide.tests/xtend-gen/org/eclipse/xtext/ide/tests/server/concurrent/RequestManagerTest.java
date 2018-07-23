@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -145,6 +146,7 @@ public class RequestManagerTest {
   }
   
   @Test(timeout = 1000)
+  @Ignore("https://github.com/eclipse/xtext-core/issues/622")
   public void testRunWriteAfterRead() {
     final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());

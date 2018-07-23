@@ -15,6 +15,7 @@ import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -95,7 +96,9 @@ class RequestManagerTest {
 		assertEquals(2, sharedState.get)
 	}
 
+	//FIXME https://github.com/eclipse/xtext-core/issues/622
 	@Test(timeout = 1000)
+	@Ignore("https://github.com/eclipse/xtext-core/issues/622")
 	def void testRunWriteAfterRead() {
 		requestManager.runRead [
 			sharedState.incrementAndGet
