@@ -7,10 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing.tests;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Benz - Initial contribution and API
@@ -18,6 +24,9 @@ import org.junit.runner.RunWith;
 @InjectWith(XtextRunnerTest.MyInjectorProvider.class)
 @RunWith(XtextRunner.class)
 public class XtextRunnerTest extends AbstractJUnitIntegrationTest {
+	@Inject
+	private Injector injector;
+	
 	/**
 	 * Need to override, otherwise no tests are found in Gradle build
 	 */
@@ -26,4 +35,10 @@ public class XtextRunnerTest extends AbstractJUnitIntegrationTest {
 	public void shouldSaveRegistriesBeforeCreatingAnInjector() {
 		super.shouldSaveRegistriesBeforeCreatingAnInjector();
 	}
+	
+	@Before
+	public void setUp () {
+		assertNotNull(injector);
+	}
+	
 }
