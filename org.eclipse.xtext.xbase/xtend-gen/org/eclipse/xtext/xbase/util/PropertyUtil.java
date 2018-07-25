@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xbase.util;
 
 import java.beans.Introspector;
+import java.util.Locale;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -65,5 +67,46 @@ public class PropertyUtil {
   
   protected static boolean startsWithPrefix(final String methodName, final String prefix, final int prefixLength) {
     return (((methodName.length() > prefixLength) && methodName.startsWith(prefix)) && Character.isUpperCase(methodName.charAt(prefixLength)));
+  }
+  
+  /**
+   * @Nullable
+   */
+  public static String tryGetShorthandName(final String fullName) {
+    String _xifexpression = null;
+    if ((fullName.startsWith("get") || fullName.startsWith("set"))) {
+      _xifexpression = fullName.substring(3);
+    } else {
+      String _xifexpression_1 = null;
+      boolean _startsWith = fullName.startsWith("is");
+      if (_startsWith) {
+        _xifexpression_1 = fullName.substring(2);
+      } else {
+        return null;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    final String name = _xifexpression;
+    int _length = name.length();
+    boolean _equals = (_length == 1);
+    if (_equals) {
+      return name.toLowerCase(Locale.ENGLISH);
+    } else {
+      int _length_1 = name.length();
+      boolean _greaterThan = (_length_1 > 1);
+      if (_greaterThan) {
+        boolean _isUpperCase = Character.isUpperCase(name.charAt(1));
+        if (_isUpperCase) {
+          boolean _isUpperCase_1 = Character.isUpperCase(name.charAt(0));
+          if (_isUpperCase_1) {
+            return name;
+          }
+          return null;
+        } else {
+          return Strings.toFirstLower(name);
+        }
+      }
+    }
+    return null;
   }
 }

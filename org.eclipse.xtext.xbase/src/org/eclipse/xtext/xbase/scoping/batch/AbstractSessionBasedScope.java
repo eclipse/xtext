@@ -110,7 +110,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	/**
-	 * Returns the name as a property name, e.g. a prefix {@code get}, {@code is} or {@code set} 
+	 * Returns the name as a property name, e.g. a prefix {@code get}, {@code is} or {@code set}
 	 * can be used with the result of this method.
 	 * If the given name is invalid, the result is <code>null</code>.
 	 */
@@ -145,7 +145,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		// length 0 is invalid
 		return null;
 	}
-	
+
 	/**
 	 * Clients may override to reject certain descriptions from the result. All subtypes of {@link AbstractSessionBasedScope}
 	 * in the framework code will delegate to this method to accumulate descriptions in a list.

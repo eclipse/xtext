@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.types.JvmOperation
 
 import static extension java.beans.Introspector.*
 import static extension java.lang.Character.*
+import java.util.Locale
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -48,4 +50,42 @@ class PropertyUtil {
 		methodName.length > prefixLength && methodName.startsWith(prefix) && methodName.charAt(prefixLength).upperCase
 	}
 
+	/**
+	 * Returns the shorthand name for a function
+	 * e.g. URI for getURI; uri for setUri; null for getuRI; enum for isEnum
+	 * If the given name is invalid, the result is <code>null</code>.
+	 * 
+	 * @param fullName the fullName of the function we're trying to shorthand (including 'get' or 'is')
+	 * 
+	 * @since 2.15
+	 */
+	/* @Nullable */
+	def static String tryGetShorthandName(String fullName) {
+		val name = if (fullName.startsWith("get") || fullName.startsWith("set")) {
+				fullName.substring(3)
+			} else if (fullName.startsWith("is")) {
+				fullName.substring(2)
+			} else {
+				return null
+			}
+
+		if (name.length() == 1) { // e.g. Point.getX()
+			return name.toLowerCase(Locale.ENGLISH);
+		} else if (name.length() > 1) {
+			if (Character.isUpperCase(name.charAt(1))) {
+				// if second char is uppercase, the name itself is the shorthand
+				// URI is the property name for getURI
+				if (Character.isUpperCase(name.charAt(0))) {
+					return name;
+				}
+				// if the first character is not upper case, but the second is, then there is no shorthand
+				// e.g. geteObject has no shorthand
+				return null;
+			} else {
+				return Strings.toFirstLower(name);
+			}
+		}
+		// length 0 is invalid
+		return null;
+	}
 }	

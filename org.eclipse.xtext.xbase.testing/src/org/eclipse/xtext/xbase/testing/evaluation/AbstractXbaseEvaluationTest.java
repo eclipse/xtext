@@ -4990,16 +4990,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		}
 	}
 	
-	@Test 
+	@Test
 	public void testNullSaveLazyEvaluation1() throws Exception {
 		assertEvaluatesTo(0, "{ var x = 0; (null as String)?.substring(x = 1); return x; }");
 	}
 	
-	@Test 
+	@Test
 	public void testNullSaveLazyEvaluation2() throws Exception {
 		assertEvaluatesTo(0, "{ val x = <String>newArrayList; var c = [|x += 'x';1]; (null as String)?.substring(c.apply); return x.size; }");
 	}
-	
+
 	/**
 	 * @param expression the input that should be executed 
 	 */

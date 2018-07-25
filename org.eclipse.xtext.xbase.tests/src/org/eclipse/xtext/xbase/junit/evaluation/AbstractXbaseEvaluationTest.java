@@ -5077,6 +5077,61 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testBug485032_03() throws Exception {
 		assertEvaluatesTo(-1, "{var x = testdata.AssertJLikeAssertions.assertThat(1 as Integer).compareTo(2); return x;}");
 	}
+
+	@Test
+	public void testShorthandLowerbool() throws Exception {
+		assertEvaluatesTo(true, "(new testdata.ShorthandNames() => [ lowerbool = true ]).lowerbool");
+	}
+
+	@Test
+	public void testShorthandLower() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ lower = 1 ]).lower");
+	}
+
+	@Test
+	public void testShorthandCamelCaseBool() throws Exception {
+		assertEvaluatesTo(true, "(new testdata.ShorthandNames() => [ camelCaseBool = true ]).camelCaseBool");
+	}
+
+	@Test
+	public void testShorthandCamelCase() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ camelCase = 1 ]).camelCase");
+	}
+
+	@Test
+	public void testShorthandUpperbool() throws Exception {
+		assertEvaluatesTo(true, "(new testdata.ShorthandNames() => [ UPPERBOOL = true ]).UPPERBOOL");
+	}
+
+	@Test
+	public void testShorthandUpper() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ UPPER = 1 ]).UPPER");
+	}
+
+	@Test
+	public void testShorthandJustGetAndSet() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ set = 1 ]).get");
+	}
+
+	@Test
+	public void testShorthandJustIs() throws Exception {
+		assertEvaluatesTo(true, "(new testdata.ShorthandNames()).is");
+	}
+
+	@Test
+	public void testShorthandFirstAndSecondUpper() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ UPper = 1 ]).UPper");
+	}
+
+	@Test
+	public void testShorthandFirstAndSecondUpperBool() throws Exception {
+		assertEvaluatesTo(true, "(new testdata.ShorthandNames() => [ UPperBool = true ]).UPperBool");
+	}
+
+	@Test
+	public void testShorthandOneLetter() throws Exception {
+		assertEvaluatesTo(1, "(new testdata.ShorthandNames() => [ x = 1 ]).x");
+	}
 	
 	/**
 	 * @param expression the input that should be executed 
