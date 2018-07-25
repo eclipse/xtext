@@ -74,6 +74,9 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 	protected ILocationInFileProvider locationInFileProvider;
 
 	@Inject
+	protected ITextRegionTransformer textRegionTransformer;
+
+	@Inject
 	private Provider<TargetURIs> targetURIsProvider;
 
 	@Inject
@@ -81,9 +84,6 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 
 	@Inject
 	private TargetURICollector uriCollector;
-
-	@Inject
-	private ITextRegionTransformer textRegionTransformer;
 
 	@Inject
 	private DocumentHighlightComparator comparator;
