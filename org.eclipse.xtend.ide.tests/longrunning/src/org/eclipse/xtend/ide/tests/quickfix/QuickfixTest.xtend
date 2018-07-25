@@ -123,6 +123,73 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			''')
 	}
 
+	// see https://github.com/eclipse/xtext-xtend/issues/514
+	@Test
+	def void testBug514() {
+		create('test/Foo.xtend', '''
+			package obviously.not.the.correct.pkg.name|
+			
+			class Test {
+				
+				def void doThing() {
+					val Object e = null
+					e.URI
+				}
+				
+				def void getURI(Object o){}
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		.assertModelAfterQuickfix('''
+			package test
+			
+			class Test {
+				
+				def void doThing() {
+					val Object e = null
+					e.URI
+				}
+				
+				def void getURI(Object o){}
+			}
+		''')
+	}
+
+	// see https://github.com/eclipse/xtext-xtend/issues/514
+	@Test
+	def void testAssignmentBug514() {
+		create('test/Foo.xtend', '''
+			package obviously.not.the.correct.pkg.name|
+			
+			class Test {
+				
+				def void doThing() {
+					val Object e = null
+					val uri = e.URI
+					println(uri)
+				}
+				
+				def void getURI(Object o){}
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		.assertModelAfterQuickfix('''
+			package test
+			
+			class Test {
+				
+				def void doThing() {
+					val Object e = null
+					val uri = e.URI
+					println(uri)
+				}
+				
+				def void getURI(Object o){}
+			}
+		''')
+	}
 	@Test 
 	def void fixPackageName_0() {
 		create('test/Foo.xtend', '''
