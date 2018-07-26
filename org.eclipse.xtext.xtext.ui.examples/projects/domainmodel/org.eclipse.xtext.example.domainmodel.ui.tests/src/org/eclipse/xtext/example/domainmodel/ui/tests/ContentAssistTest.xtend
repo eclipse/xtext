@@ -25,10 +25,17 @@ class ContentAssistTest extends AbstractContentAssistTest {
 		newBuilder.append('entity Foo { bar: LinkedHashSet').assertText('java.util.LinkedHashSet')
 	}
 
-	@Test def void testTemplateProposal() {
+	@Test def void testEntityTemplateProposal() {
 		newBuilder.applyProposal("Entity - template for an Entity").expectContent('''
 		entity name {
 			 
+		}''')
+	}
+
+	@Test def void testPackageTemplateProposal() {
+		newBuilder.applyProposal("Package - template for a Package").expectContent('''
+		package name { 
+		       
 		}''')
 	}
 }
