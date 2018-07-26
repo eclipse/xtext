@@ -116,7 +116,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 								log.error("Don't resolve expressions during indexing!", new IllegalStateException("Resource URI : "+getURI()+", fragment : "+uriFragment));
 							return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
 						}
-						return super.getEObject(uriFragment, triple);
+						return getEObject(uriFragment, triple);
 					} else {
 						return null;
 					}
