@@ -143,6 +143,7 @@ public class KeywordHelper implements Adapter {
 				result.charAt(0) == '_' // rule names may not start with an underscore 
 			|| "System".equals(result) // the generated code contains System.err.printlns which is ambiguous with the generated field name
 			|| result.startsWith("DFA") // the generated code may have fields named DFA... - avoid (unlikely) conflicts
+			|| result.startsWith("EOF") // the generated code may have fields named EOF... - avoid (unlikely) conflicts
 			|| result.startsWith("FOLLOW") // same with FOLLOW_ field names
 			|| result.startsWith("Internal") && result.endsWith("Parser") // same with the name of the class itself
 			) { 
