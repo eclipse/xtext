@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.testing.tests;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * Test for {@link InjectionExtension}.
@@ -20,4 +26,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @InjectWith(InjectionExtensionTest.MyInjectorProvider.class)
 @ExtendWith(InjectionExtension.class)
 public class InjectionExtensionTest extends AbstractJUnitIntegrationTest {
+	@Inject Injector injector;
+	
+	@BeforeEach
+	public void setUp () {
+		assertNotNull(injector);
+	}
 }

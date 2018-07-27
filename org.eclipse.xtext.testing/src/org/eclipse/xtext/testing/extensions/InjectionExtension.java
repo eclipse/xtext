@@ -12,8 +12,8 @@ import static org.eclipse.xtext.util.Exceptions.throwUncheckedException;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
 import org.eclipse.xtext.testing.InjectWith;
-import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
-import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.google.common.annotations.Beta;
@@ -33,18 +33,18 @@ import com.google.inject.Injector;
  * @since 2.14
  */
 @Beta
-public class InjectionExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
+public class InjectionExtension implements BeforeEachCallback, AfterEachCallback {
 	/**
 	 * Maintains a map of injector provider types to their instance.
 	 * <p>
-	 * {@link #getOrCreateInjectorProvider(TestClass)} is used to obtain
-	 * an valid injector provider in the context of a given {@link TestClass}.
+	 * {@link #getOrCreateInjectorProvider(ExtensionContext)} is used to obtain
+	 * an valid injector provider in the context of a given {@link ExtensionContext}.
 	 * </p>
 	 */
 	private static ClassToInstanceMap<IInjectorProvider> injectorProviderClassCache = MutableClassToInstanceMap.create();
 
 	@Override
-	public void beforeTestExecution(ExtensionContext context) throws Exception {
+	public void beforeEach(ExtensionContext context) throws Exception {
 		IInjectorProvider injectorProvider = getOrCreateInjectorProvider(context);
 		if (injectorProvider instanceof IRegistryConfigurator) {
 			final IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
@@ -58,7 +58,7 @@ public class InjectionExtension implements BeforeTestExecutionCallback, AfterTes
 	}
 
 	@Override
-	public void afterTestExecution(ExtensionContext context) throws Exception {
+	public void afterEach(ExtensionContext context) throws Exception {
 		IInjectorProvider injectorProvider = getOrCreateInjectorProvider(context);
 		if (injectorProvider instanceof IRegistryConfigurator) {
 			final IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
