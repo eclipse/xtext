@@ -140,12 +140,12 @@ public class IncrementalBuilder {
   }
   
   @Log
-  protected static class InternalStatefulIncrementalBuilder {
-    @Accessors(AccessorType.PROTECTED_SETTER)
+  public static class InternalStatefulIncrementalBuilder {
+    @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
     @Extension
     private BuildContext context;
     
-    @Accessors(AccessorType.PROTECTED_SETTER)
+    @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
     private BuildRequest request;
     
     @Inject
@@ -363,8 +363,18 @@ public class IncrementalBuilder {
     
     private final static Logger LOG = Logger.getLogger(InternalStatefulIncrementalBuilder.class);
     
+    @Pure
+    protected BuildContext getContext() {
+      return this.context;
+    }
+    
     protected void setContext(final BuildContext context) {
       this.context = context;
+    }
+    
+    @Pure
+    protected BuildRequest getRequest() {
+      return this.request;
     }
     
     protected void setRequest(final BuildRequest request) {
@@ -393,8 +403,8 @@ public class IncrementalBuilder {
       CancelIndicator _cancelIndicator = request.getCancelIndicator();
       final BuildContext context = new BuildContext(languages, resourceSet, oldState, clusteringPolicy, _cancelIndicator);
       final IncrementalBuilder.InternalStatefulIncrementalBuilder builder = this.provider.get();
-      builder.context = context;
-      builder.request = request;
+      builder.setContext(context);
+      builder.setRequest(request);
       try {
         return builder.launch();
       } catch (final Throwable _t) {
