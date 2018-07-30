@@ -48,10 +48,10 @@ import org.eclipse.xtext.generator.GeneratorContext
 		List<IResourceDescription.Delta> affectedResources
 	}
 	
-	@Log protected static class InternalStatefulIncrementalBuilder {
+	@Log static class InternalStatefulIncrementalBuilder {
 	
-		@Accessors(PROTECTED_SETTER) extension BuildContext context
-		@Accessors(PROTECTED_SETTER) BuildRequest request
+		@Accessors(#[PROTECTED_SETTER, PROTECTED_GETTER]) extension BuildContext context
+		@Accessors(#[PROTECTED_SETTER, PROTECTED_GETTER]) BuildRequest request
 	
 		@Inject Indexer indexer
 		@Inject extension OperationCanceledManager
@@ -219,8 +219,8 @@ import org.eclipse.xtext.generator.GeneratorContext
 									, clusteringPolicy,
 									request.cancelIndicator)
 		val builder = provider.get
-		builder.context = context
-		builder.request = request
+		builder.setContext(context)
+		builder.setRequest(request)
 		try {
 			return builder.launch
 		} catch(Throwable t) {
