@@ -10,9 +10,15 @@
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtext.ui.testing</artifactId>
 	
-	<!-- This bundle can only be build with Eclipse Photon -->
-	<!-- Activate Photon target only for this bundle, other plugins might use older profiles -->
-	<properties>
-		<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>
-	</properties>
+	<!-- This bundle can only be build with Eclipse Photon (or later) -->
+	<!-- Activate Photon (or later) target only for this bundle, other plugins might use older profiles -->
+	<profiles>
+		<profile>
+			<id>oxygen</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>
+			</properties>
+		</profile>
+	</profiles>
+	
 </project>
