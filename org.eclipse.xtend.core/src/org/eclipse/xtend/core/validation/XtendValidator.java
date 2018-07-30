@@ -134,6 +134,7 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
@@ -341,7 +342,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		 */
 		if(hasJUnitAnnotation(operation)) {
 			LightweightTypeReference actualType = determineReturnType(operation);
-			if(actualType !=null && !actualType.isPrimitiveVoid()) {
+			if(actualType !=null && !actualType.isUnknown() && !actualType.isPrimitiveVoid()) {
 				String message = String.format("JUnit method %s() must be void but is %s.", function.getName(), actualType.getHumanReadableName());
 				EAttribute location = XTEND_FUNCTION__NAME;
 				error(message, function, location, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION);
