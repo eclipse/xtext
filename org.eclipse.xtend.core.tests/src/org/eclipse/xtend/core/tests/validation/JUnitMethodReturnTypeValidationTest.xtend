@@ -8,14 +8,17 @@
 package org.eclipse.xtend.core.tests.validation
 
 import javax.inject.Inject
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
-import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtend.core.validation.IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION
+import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
+import static org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
 class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
 
@@ -423,14 +426,35 @@ class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
 			}
 		'''.hasOneValidationIssue("JUnit method afterClass() must be void but is Object.")
 	}
+	
+	@Test def test033() {
+		/**
+		 * Ensure that the 'JUnit Method Return Type Validation Check'
+		 * does not report a follow up issue of an unknown return type.
+		 */
+		'''
+			import org.junit.Test
+			
+			class Foo {
+				
+				@Test def test() {
+					foo
+				}
+			}
+		'''.hasOneValidationIssue(XFEATURE_CALL, LINKING_DIAGNOSTIC, "The method or field foo is undefined")
+	}
 
 	private def void hasNoValidationIssue(CharSequence it) {
 		assertNumberOfValidationIssues(0)
 	}
 
 	private def hasOneValidationIssue(CharSequence it, String message) {
+		it.hasOneValidationIssue(XTEND_FUNCTION, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message)
+	}
+
+	private def hasOneValidationIssue(CharSequence it, EClass objectType, String issueCode, String message) {
 		assertNumberOfValidationIssues(1).
-		assertError(XTEND_FUNCTION, INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message)
+		assertError(objectType, issueCode, message)
 	}
 
 	private def assertNumberOfValidationIssues(CharSequence it, int expectedNumberOfIssues) {

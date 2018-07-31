@@ -8,13 +8,16 @@
 package org.eclipse.xtend.core.tests.validation;
 
 import javax.inject.Inject;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
@@ -757,12 +760,40 @@ public class JUnitMethodReturnTypeValidationTest extends AbstractXtendTestCase {
     this.hasOneValidationIssue(_builder, "JUnit method afterClass() must be void but is Object.");
   }
   
+  @Test
+  public void test033() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.junit.Test");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def test() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.hasOneValidationIssue(_builder, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "The method or field foo is undefined");
+  }
+  
   private void hasNoValidationIssue(final CharSequence it) {
     this.assertNumberOfValidationIssues(it, 0);
   }
   
   private void hasOneValidationIssue(final CharSequence it, final String message) {
-    this._validationTestHelper.assertError(this.assertNumberOfValidationIssues(it, 1), XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message);
+    this.hasOneValidationIssue(it, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION, message);
+  }
+  
+  private void hasOneValidationIssue(final CharSequence it, final EClass objectType, final String issueCode, final String message) {
+    this._validationTestHelper.assertError(this.assertNumberOfValidationIssues(it, 1), objectType, issueCode, message);
   }
   
   private XtendFile assertNumberOfValidationIssues(final CharSequence it, final int expectedNumberOfIssues) {
