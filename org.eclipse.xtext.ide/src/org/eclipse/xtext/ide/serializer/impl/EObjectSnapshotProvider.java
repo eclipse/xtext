@@ -148,10 +148,14 @@ public class EObjectSnapshotProvider {
 		protected final Resource resource;
 		protected final URI uri;
 
-		public ResourceSnapshot(EObjectSnapshotProvider strategy, Resource resource) {
+		public ResourceSnapshot(EObjectSnapshotProvider strategy, Resource resource, boolean recordReferences) {
 			this.resource = resource;
 			this.regions = strategy.getTextRegionAccess(resource);
-			this.objects = strategy.createEObjectSnapshots(resource);
+			if (recordReferences) {
+				this.objects = strategy.createEObjectSnapshots(resource);
+			} else {
+				this.objects = Collections.emptyMap();
+			}
 			this.uri = resource.getURI();
 		}
 
@@ -236,8 +240,8 @@ public class EObjectSnapshotProvider {
 
 	}
 
-	public IResourceSnapshot createResourceSnapshot(Resource resource) {
-		return new ResourceSnapshot(this, resource);
+	public IResourceSnapshot createResourceSnapshot(Resource resource, boolean recordReferences) {
+		return new ResourceSnapshot(this, resource, recordReferences);
 	}
 
 	protected EObjectSnapshot getOrCreate(Map<EObject, IEObjectSnapshot> map, EObject obj) {

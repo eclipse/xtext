@@ -92,7 +92,7 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 
 	public ITextRegionDiffBuilder beginRecording(IChangeSerializer serializer, XtextResource resource) {
 		this.serializer = serializer;
-		this.snapshot = snapshotProvider.createResourceSnapshot(resource);
+		this.snapshot = snapshotProvider.createResourceSnapshot(resource, serializer.isUpdateCrossReferences());
 		this.document = new StringBasedTextRegionAccessDiffBuilder(this.snapshot.getRegions());
 		EcoreUtil.resolveAll(resource);
 		this.recorder = new ChangeRecorder(resource);

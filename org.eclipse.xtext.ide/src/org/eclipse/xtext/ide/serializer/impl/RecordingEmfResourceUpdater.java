@@ -40,7 +40,7 @@ public class RecordingEmfResourceUpdater extends RecordingResourceUpdater {
 
 	public void beginRecording(IChangeSerializer serializer, Resource resource) {
 		this.serializer = serializer;
-		this.snapshot = snapshotProvider.createResourceSnapshot(resource);
+		this.snapshot = snapshotProvider.createResourceSnapshot(resource, serializer.isUpdateCrossReferences());
 		EcoreUtil.resolveAll(resource);
 	}
 
