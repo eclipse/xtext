@@ -33,6 +33,7 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 	@Fix(QuickfixCrossrefTestLanguageValidator.MULTIFIXABLE_ISSUE)
 	public void addDocumentation(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.acceptMulti(issue, "Multi fix", "Multi fix", null, (Element main, ICompositeModificationContext<Element> ctx) -> {
+			ctx.setUpdateCrossReferences(false);
 			ctx.addModification(main, (obj) -> {
 				main.setDoc("Better documentation");
 			});
@@ -64,6 +65,16 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 					e.setName("goodname");
 				});
 			}
+		});
+	}
+	
+	@Fix(QuickfixCrossrefTestLanguageValidator.FIXABLE)
+	public void renameFixable(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.acceptMulti(issue, "rename fixable", "rename fixable", null, (Element main, ICompositeModificationContext<Element> ctx) -> {
+			ctx.setUpdateCrossReferences(false);
+			ctx.addModification(main, (obj) -> {
+				main.setName("fixedName");
+			});
 		});
 	}
 }

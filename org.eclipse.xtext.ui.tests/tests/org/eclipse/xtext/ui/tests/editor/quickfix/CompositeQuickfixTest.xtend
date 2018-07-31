@@ -161,5 +161,20 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			a {	badname { bar {} } }
 		'''.toString, editor.document.get)
 	}
+	
+	@Test
+	def void testNoCrossRef() throws Exception {
+		val editor = createGeneralXtextProject("myProject").newXtextEditor("test.quickfixcrossreftestlanguage", '''
+			fixable_a {	ref fixable_b }
+			fixable_b {	ref fixable_a }
+		''')
+		val proposals = computeQuickAssistProposals(editor, 1)
+		assertEquals('''rename fixable'''.toString, proposals.map[displayString].join("\n"))
+		proposals.head.apply(editor.document)
+		assertEquals('''
+			fixedName {	ref fixable_b }
+			fixable_b {	ref fixable_a }
+		'''.toString, editor.document.get)
+	}
 
 }

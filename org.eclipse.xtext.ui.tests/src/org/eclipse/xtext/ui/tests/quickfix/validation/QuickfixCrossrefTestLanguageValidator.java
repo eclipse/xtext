@@ -28,6 +28,7 @@ public class QuickfixCrossrefTestLanguageValidator extends AbstractQuickfixCross
 	public static final String MULTIFIXABLE_ISSUE = "multiFixableIssue";
 	public static final String MULTIFIXABLE_ISSUE_2 = "multiFixableIssue2";
 	public static final String BAD_NAME_IN_SUBELEMENTS = "badNameInSubelements";
+	public static final String FIXABLE = "fixable";
 		
 	public static final String ISSUE_DATA_0 = "data0";
 	public static final String ISSUE_DATA_1 = "data1";
@@ -76,6 +77,13 @@ public class QuickfixCrossrefTestLanguageValidator extends AbstractQuickfixCross
 				warning(BAD_NAME_IN_SUBELEMENTS, root, QuickfixCrossrefPackage.Literals.ELEMENT__NAME,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, BAD_NAME_IN_SUBELEMENTS, Joiner.on(";").join(fragments));
 			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkFixable(Element ele) {
+		if (ele.getName().startsWith("fixable")) {
+			warning(FIXABLE, ele, QuickfixCrossrefPackage.Literals.ELEMENT__NAME, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, FIXABLE);
 		}
 	}
 }

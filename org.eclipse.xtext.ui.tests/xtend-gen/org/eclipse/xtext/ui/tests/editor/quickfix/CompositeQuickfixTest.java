@@ -275,4 +275,29 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder_2.newLine();
     Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
   }
+  
+  @Test
+  public void testNoCrossRef() throws Exception {
+    IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("fixable_a {\tref fixable_b }");
+    _builder.newLine();
+    _builder.append("fixable_b {\tref fixable_a }");
+    _builder.newLine();
+    final XtextEditor editor = this.newXtextEditor(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+    final ICompletionProposal[] proposals = this.computeQuickAssistProposals(editor, 1);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("rename fixable");
+    final Function1<ICompletionProposal, String> _function = (ICompletionProposal it) -> {
+      return it.getDisplayString();
+    };
+    Assert.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
+    IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).apply(editor.getDocument());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("fixedName {\tref fixable_b }");
+    _builder_2.newLine();
+    _builder_2.append("fixable_b {\tref fixable_a }");
+    _builder_2.newLine();
+    Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
+  }
 }
