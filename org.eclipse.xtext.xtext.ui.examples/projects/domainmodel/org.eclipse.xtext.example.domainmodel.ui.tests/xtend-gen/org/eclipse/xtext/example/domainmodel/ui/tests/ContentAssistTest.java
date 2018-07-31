@@ -45,13 +45,29 @@ public class ContentAssistTest extends AbstractContentAssistTest {
   }
   
   @Test
-  public void testTemplateProposal() {
+  public void testEntityTemplateProposal() {
     try {
       ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Entity - template for an Entity");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("entity name {");
       _builder.newLine();
       _builder.append("\t ");
+      _builder.newLine();
+      _builder.append("}");
+      _applyProposal.expectContent(_builder.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPackageTemplateProposal() {
+    try {
+      ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Package - template for a Package");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package name { ");
+      _builder.newLine();
+      _builder.append("       ");
       _builder.newLine();
       _builder.append("}");
       _applyProposal.expectContent(_builder.toString());
