@@ -1118,7 +1118,10 @@
                        <adapt type="org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch">
                          <adapt type="org.eclipse.jdt.core.IJavaElement">
 		                   <test property="org.eclipse.jdt.core.isInJavaProjectWithNature" value="org.eclipse.pde.PluginNature"/>
-		                   <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+                             <or>
+                               <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+                               <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.jupiter.api.Test"/>
+                             </or>
 		                   <test property="org.eclipse.jdt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
 		                 </adapt>
                        </adapt>
