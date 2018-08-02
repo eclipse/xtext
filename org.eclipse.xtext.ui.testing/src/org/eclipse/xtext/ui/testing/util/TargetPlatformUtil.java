@@ -46,6 +46,9 @@ public class TargetPlatformUtil {
 	 * @since 2.14
 	 */
 	public static void setTargetPlatform(Class<?> context) throws Exception {
+		if (isPdeLaunch()) {
+			return;
+		}
 		Bundle currentBundle = FrameworkUtil.getBundle(context);
 		ITargetPlatformService tpService = TargetPlatformService.getDefault();
 		ITargetDefinition targetDef = tpService.newTarget();
@@ -83,6 +86,10 @@ public class TargetPlatformUtil {
 		Job job = new LoadTargetDefinitionJob(targetDef);
 		job.schedule();
 		job.join();
+	}
+
+	private static boolean isPdeLaunch() {
+		return Boolean.getBoolean("eclipse.pde.launch");
 	}
 
 }
