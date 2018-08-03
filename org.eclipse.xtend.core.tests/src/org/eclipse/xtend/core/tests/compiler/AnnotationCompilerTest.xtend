@@ -371,4 +371,42 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def void testInterfaceExtendsAnnotation() {
+		'''
+		import java.lang.annotation.Annotation
+		annotation MyAnno {
+			static interface MyIf extends MyAnno {
+			}
+			static class MyClass implements MyIf {
+				override Class<? extends Annotation> annotationType() {
+					return null;
+				}
+			}
+			static class MyClass2 implements MyAnno {
+				override Class<? extends Annotation> annotationType() {
+					return null;
+				}
+			}
+		}
+		'''.assertCompilesTo('''
+		import java.lang.annotation.Annotation;
+		
+		public @interface MyAnno {
+		  public interface MyIf extends MyAnno {
+		  }
+		  public static class MyClass implements MyAnno.MyIf {
+		    public Class<? extends Annotation> annotationType() {
+		      return null;
+		    }
+		  }
+		  public static class MyClass2 implements MyAnno {
+		    public Class<? extends Annotation> annotationType() {
+		      return null;
+		    }
+		  }
+		}
+		''')
+	}
 }
