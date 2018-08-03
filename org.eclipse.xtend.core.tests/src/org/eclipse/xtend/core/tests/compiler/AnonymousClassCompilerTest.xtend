@@ -2386,4 +2386,46 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def void testAnnotation() {
+		'''
+		class InstanceTest {
+		
+		    def doSomething() {
+		        
+		        var MyConfiguration config = new MyConfiguration() {
+		             
+		             override annotationType() {
+		                 null
+		             }
+		
+		             override name() {
+		                 null
+		             }
+		        }
+		    }
+		}
+		annotation MyConfiguration {
+			String name = 'osgi'
+		}
+		'''.assertCompilesTo('''
+		import java.lang.annotation.Annotation;
+		
+		@SuppressWarnings("all")
+		public class InstanceTest {
+		  public void doSomething() {
+		    MyConfiguration config = new MyConfiguration() {
+		      public Class<? extends Annotation> annotationType() {
+		        return null;
+		      }
+		      
+		      public String name() {
+		        return null;
+		      }
+		    };
+		  }
+		}
+		''')
+	}
+	
 }
