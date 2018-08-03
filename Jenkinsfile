@@ -50,5 +50,5 @@ node {
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 	}
 	
-	archive 'build/**'
+	archive 'build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
 }
