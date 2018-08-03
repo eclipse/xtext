@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing.util;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -243,6 +245,18 @@ public class IResourcesSetupUtil {
 			}
 
 		}.run(monitor());
+		return file;
+	}
+
+	public static File createTempFile(String fileName, String suffix, String content)
+			throws Exception {
+		File file = File.createTempFile(fileName, suffix);
+		FileWriter writer = new FileWriter(file);
+		try {
+			writer.write(content);
+		} finally {
+			writer.close();
+		}
 		return file;
 	}
 

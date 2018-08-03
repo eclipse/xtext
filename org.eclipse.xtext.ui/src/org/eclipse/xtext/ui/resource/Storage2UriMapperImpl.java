@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileInfo;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -216,9 +219,22 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 
 	private Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri, IFile file) {
 		if (file == null || !file.isAccessible()) {
-			return contribution.getStorages(uri);
+			Iterable<Pair<IStorage, IProject>> result = contribution.getStorages(uri);
+			if (result == null || !result.iterator().hasNext()) {
+				 // Handle files external to the workspace. But check contribution first to be backwards compatible.
+				if (uri.isFile()) {
+					Path filePath = new Path(uri.toFileString());
+					IFileStore fileStore = EFS.getLocalFileSystem().getStore(filePath);
+					IFileInfo fileInfo = fileStore.fetchInfo();
+					if (fileInfo.exists() && !fileInfo.isDirectory()) {
+						return Collections.singletonList(
+								Tuples.<IStorage, IProject> create(new FileStoreStorage(fileStore, fileInfo, filePath), (IProject) null));
+					}
+				}
+			}
+			return result;
 		}
-		return Collections.singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
+		return Collections.singleton(Tuples.<IStorage, IProject> create(file, file.getProject()));
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {
@@ -238,10 +254,11 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	private URI internalGetUri(/* @NonNull */ IStorage storage) {
 		if (storage instanceof IFile) {
 			return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
-		} 
+		} else if (storage instanceof FileStoreStorage) {
+			return URI.createFileURI(((FileStoreStorage) storage).getFullPath().makeAbsolute().toOSString());
+		}
 		return contribution.getUri(storage);
-	}
-	
+	}	
 
 	public boolean isValidUri(URI uri, IStorage storage) {
 		boolean valid = uriValidator.isValid(uri, storage);
