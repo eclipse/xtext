@@ -79,6 +79,7 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 			ResourceRecording recordedResource = tree.getRecordedResource(resource);
 			partialSerializer.serializeChanges(recordedResource, document);
 		}
+		recorder.dispose();
 		List<IUpdatableReference> updatableReferences = ctx.getUpdatableReferences();
 		for (IUpdatableReference upd : updatableReferences) {
 			referenceUpdater.updateReference(document, upd);
@@ -95,8 +96,12 @@ public class RecordingXtextResourceUpdater extends RecordingResourceUpdater {
 		this.snapshot = snapshotProvider.createResourceSnapshot(resource, serializer.isUpdateCrossReferences());
 		this.document = new StringBasedTextRegionAccessDiffBuilder(this.snapshot.getRegions());
 		EcoreUtil.resolveAll(resource);
-		this.recorder = new ChangeRecorder(resource);
+		this.recorder = createChangeRecorder(resource);
 		return this.document;
+	}
+
+	protected ChangeRecorder createChangeRecorder(XtextResource resource) {
+		return new ChangeRecorder(resource.getContents().get(0));
 	}
 
 	public ITextRegionDiffBuilder getDocument() {

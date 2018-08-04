@@ -65,16 +65,20 @@ public class RelatedXtextResourceUpdater extends RelatedResourceUpdater {
 		ReferenceUpdaterContext context = new ReferenceUpdaterContext(deltas, rewriter, getResource());
 		referenceUpdater.update(context);
 		if (!context.getModifications().isEmpty()) {
-			ChangeRecorder rec = new ChangeRecorder(res);
-			for (Runnable run : context.getModifications()) {
-				run.run();
-			}
-			ChangeDescription recording = rec.endRecording();
-			ResourceSet rs = res.getResourceSet();
-			ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, Collections.emptyList(), recording);
-			ResourceRecording recordedResource = tree.getRecordedResource(res);
-			if (recordedResource != null) {
-				serializer.serializeChanges(recordedResource, rewriter);
+			ChangeRecorder rec = createChangeRecorder(res);
+			try {
+				for (Runnable run : context.getModifications()) {
+					run.run();
+				}
+				ChangeDescription recording = rec.endRecording();
+				ResourceSet rs = res.getResourceSet();
+				ResourceSetRecording tree = changeTreeProvider.createChangeTree(rs, Collections.emptyList(), recording);
+				ResourceRecording recordedResource = tree.getRecordedResource(res);
+				if (recordedResource != null) {
+					serializer.serializeChanges(recordedResource, rewriter);
+				}
+			} finally {
+				rec.dispose();
 			}
 		}
 		for (IUpdatableReference upd : context.getUpdatableReferences()) {
@@ -84,7 +88,10 @@ public class RelatedXtextResourceUpdater extends RelatedResourceUpdater {
 		List<ITextReplacement> rep = formatter.format(rewritten);
 		TextDocumentChange change = new TextDocumentChange(rewritten, getResource().getUri(), rep);
 		changeAcceptor.accept(change);
+	}
 
+	protected ChangeRecorder createChangeRecorder(XtextResource res) {
+		return new ChangeRecorder(res.getContents().get(0));
 	}
 
 	@Override
