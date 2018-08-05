@@ -134,7 +134,6 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
@@ -662,7 +661,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
 			JvmTypeReference implementedType = xtendClass.getImplements().get(i);
-			if (!isInterface(implementedType.getType())) {
+			if (!isInterface(implementedType.getType()) && !isAnnotation(implementedType.getType())) {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
 			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
@@ -678,7 +677,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 	public void checkSuperTypes(XtendInterface xtendInterface) {
 		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
 			JvmTypeReference extendedType = xtendInterface.getExtends().get(i);
-			if (!isInterface(extendedType.getType())) {
+			if (!isInterface(extendedType.getType()) && !isAnnotation(extendedType.getType())) {
 				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
 			}
 			checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
@@ -688,6 +687,10 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			error("The inheritance hierarchy of " + notNull(xtendInterface.getName()) + " contains cycles",
 					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 		}
+	}
+	
+	protected boolean isAnnotation(JvmType jvmType) {
+		return jvmType instanceof JvmAnnotationType;
 	}
 	
 	@Check
