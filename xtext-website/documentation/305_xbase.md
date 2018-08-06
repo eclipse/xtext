@@ -19,6 +19,8 @@ The implementation will be selected transparently depending on how the client co
 Using the JVM types model is very simple. First of all, the grammar has to import the *JavaVMTypes* Ecore model. Thanks to content assist this is easy to spot in the list of proposals. 
 
 ```xtext
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xtype
+...
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
 ```
 
@@ -471,7 +473,7 @@ Some types in Xbase can be used synonymously even if they do not conform to each
 
 Because of type inference Xbase sometimes needs to compute the most common super type of a given set of types. 
 
-For a set *\[T1,T2,...Tn\]* of types the common super type is computed by using the linear type inheritance sequence of *T1* and is iterated until one type conforms to each *T2,..,Tn*. The linear type inheritance sequence of *T1* is computed by ordering all types which are part if the type hierarchy of *T1* by their specificity. A type *T1* is considered more specific than *T2* if *T1* is a subtype of *T2*. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. *CharSequence* has distance 2 to *StringBuilder* because the super type *AbstractStringBuilder* implements the interface, too. Even if *StringBuilder* implements *CharSequence* directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
+For a set *\[T1,T2,...Tn\]* of types the common super type is computed by using the linear type inheritance sequence of *T1* and is iterated until one type conforms to each *T2,..,Tn*. The linear type inheritance sequence of *T1* is computed by ordering all types which are part in the type hierarchy of *T1* by their specificity. A type *T1* is considered more specific than *T2* if *T1* is a subtype of *T2*. Any types with equal specificity will be sorted by the maximal distance to the originating subtype. *CharSequence* has distance 2 to *StringBuilder* because the super type *AbstractStringBuilder* implements the interface, too. Even if *StringBuilder* implements *CharSequence* directly, the interface gets distance 2 in the ordering because it is not the most general class in the type hierarchy that implements the interface. If the distances for two classes are the same in the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
 
 ---
 
@@ -733,7 +735,7 @@ one can write
 
 ##### Static Feature Calls {#xbase-expressions-static-feature-calls}
 
-Static feature calls use the same notation as in Java, e.g. it is possible write `Collections.emptyList()` in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter. The following snippets are fully equivalent:
+Static feature calls use the same notation as in Java, e.g. it is possible to write `Collections.emptyList()` in Xbase. To make the static invocation more explicit, the double colon can be used as the delimiter. The following snippets are fully equivalent:
 
 ```xbase
    java.util.Collections::emptyList
@@ -901,7 +903,7 @@ val (String s)=>String function = [ toUpperCase ]
 
 ##### Refering the current function {#xbase-lambda-self}
 
-If a lambda expressions implements an abstract SAM type that offers additional methods, those can be accessed on the receiver `self`: 
+If a lambda expression implements an abstract SAM type that offers additional methods, those can be accessed on the receiver `self`: 
 
 ```xbase
 val AbstractIterator<String> emptyIterator = [
@@ -929,7 +931,7 @@ is the a short hand for
 
 ##### Typing {#xbase-expressions-if-type-inference}
 
-The type of an `if` expression is calculated from the types `T1` and `T2` of the two expression `e1` and `e2`. It uses the rules defined in the [common super types](#xbase-types-common-super-type) section, if an explicit `else` branch is given. If it is ommitted, the type of the `if` expression is the type `T` of the expression `e` of the form `if (b) e`.
+The type of an `if` expression is calculated from the types `T1` and `T2` of the two expressions `e1` and `e2`. It uses the rules defined in the [common super types](#xbase-types-common-super-type) section, if an explicit `else` branch is given. If it is ommitted, the type of the `if` expression is the type `T` of the expression `e` of the form `if (b) e`.
 
 ##### Examples
 
@@ -969,7 +971,7 @@ switch myString {
 
 ##### Type guards
 
-In addition to the case guards one can add a so called *Type Guard* which is syntactically just a [type reference](#xbase-types-type-references) preceding the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example: 
+In addition to the case guards one can add a so called *Type Guard* which is syntactically just a [type reference](#xbase-types-type-references) preceding the optional case keyword. The compiler will use that type for the switch expression in subsequent expressions. Example: 
 
 ```xbase
 var Object x = ...;
@@ -1041,7 +1043,7 @@ A typical example for using `var` is a counter in a loop.
 }
 ```
 
-Variables declared outside a lambda expression using the `var` keyword are not accessible from within a the lambda expression.
+Variables declared outside a lambda expression using the `var` keyword are not accessible from the lambda expression.
 
 ##### Typing
 
@@ -1114,7 +1116,7 @@ The traditional for loop is very similar to the one known from Java, or even C.
   for (<init-expression> ;  <predicate> ; <update-expression>) body-expression
 ```
 
-When executed, it first executes the `init-expression`, where local variables can be declared. Next the `predicate` is executed and if it evaluates to `true`, the `body-expression` is executed. On any subsequent iterations the `update-expressio` is executed instead of the init-expression. This happens until the `predicate` returns `false`.
+When executed, it first executes the `init-expression`, where local variables can be declared. Next the `predicate` is executed and if it evaluates to `true`, the `body-expression` is executed. On any subsequent iterations the `update-expression` is executed instead of the init-expression. This happens until the `predicate` returns `false`.
 
 The type of a for loop is `void`.
 
@@ -1206,7 +1208,7 @@ The try-catch-finally expression is used to handle exceptional situations. You a
 
 #### Synchronized {#xbase-expressions-synchronized}
 
-The synchonized expression does the same as it does in Java (see [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19)). The only difference is that in Xtend it is an expression and can therefore be used at more places.
+The synchonized expression does the same as it does in Java (see [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19)). The only difference is that in Xbase it is an expression and can therefore be used at more places.
 
 ```xtend
   synchronized(lock) {
@@ -1232,7 +1234,7 @@ These extension methods are declared in separate Java classes. There are various
 
 Another alternative is to have them looked up by a certain naming convention. Also for more general languages it is possible to let users add extension methods using imports or similar mechanisms. This approach can be seen in the language [Xtend](http://www.xtend-lang.org), where extension methods are lexically imported through static imports and/or dependency injection.
 
-The precedence of extension methods is always lower than real member methods, i.e. you cannot override member features. Also the extension members are not invoked polymorphic. If you have two extension methods on the scope (`foo(Object)` and `foo(String)`) the expression `(foo as Object).foo` would bind and invoke `foo(Object)`.
+The precedence of extension methods is always lower than real member methods, i.e. you cannot override member features. Also the extension methods are not invoked polymorphic. If you have two extension methods on the scope (`foo(Object)` and `foo(String)`) the expression `(foo as Object).foo` would bind and invoke `foo(Object)`.
 
 #### Examples
 

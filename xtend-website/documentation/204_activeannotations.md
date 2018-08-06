@@ -240,7 +240,13 @@ Therefore, careful testing and debugging of the processor is essential. It is be
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.core</artifactId>
-  <version>2.7.1</version>
+  <version>2.14.0</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>org.eclipse.xtext.xbase.testing</artifactId>
+  <version>2.14.0</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -255,7 +261,7 @@ The example project contains a couple of test cases:
 
 ```xtend
 class LazyTest {
-  extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy)
+  extension XtendCompilerTester compilerTester = XtendCompilerTester.newXtendCompilerTester(Lazy.classLoader)
 
   @Test def void testLazy() {
     '''

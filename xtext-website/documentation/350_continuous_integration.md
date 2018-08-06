@@ -85,7 +85,7 @@ This is another project made up on configuration data solely. It contains the `f
 
 ### The core language project (my.mavenized.herolanguage)
 
-The `pom.xml` for the language project contains information about how Maven should run Xtext's code generator. The first plug-in invokes the MWE2 file through a standard Java process:
+The `pom.xml` for the language project contains information about how Maven should run the Xtext's code generator. The first plug-in invokes the MWE2 file through a standard Java process:
 
 ```xml
 <plugin>

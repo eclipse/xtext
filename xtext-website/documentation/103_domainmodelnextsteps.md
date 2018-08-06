@@ -225,7 +225,7 @@ This tutorial is about testing the parser and the linker for the *Domainmodel*. 
     
         @Test 
         def void parseDomainmodel() {
-            val model = parser.parse(
+            val model = parseHelper.parse(
                 "entity MyEntity {
                     parent: MyEntity
                 }")
