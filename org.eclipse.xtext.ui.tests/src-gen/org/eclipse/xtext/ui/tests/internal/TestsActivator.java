@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguageRunt
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguageRuntimeModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguageRuntimeModule;
@@ -66,6 +67,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug377311TestLanguageU
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug381381TestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistContextTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistNoTerminalExtensionTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
@@ -131,6 +133,7 @@ public class TestsActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BACKTRACKINGCONTENTASSISTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCONTEXTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCUSTOMIZINGTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTNOTERMINALEXTENSIONTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CROSSREFERENCEPROPOSALTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DATATYPERULETESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_LOOKAHEADCONTENTASSISTTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage";
@@ -268,6 +271,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCUSTOMIZINGTESTLANGUAGE.equals(grammar)) {
 			return new ContentAssistCustomizingTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTNOTERMINALEXTENSIONTESTLANGUAGE.equals(grammar)) {
+			return new ContentAssistNoTerminalExtensionTestLanguageRuntimeModule();
+		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CROSSREFERENCEPROPOSALTESTLANGUAGE.equals(grammar)) {
 			return new CrossReferenceProposalTestLanguageRuntimeModule();
 		}
@@ -403,6 +409,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTCUSTOMIZINGTESTLANGUAGE.equals(grammar)) {
 			return new ContentAssistCustomizingTestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CONTENTASSISTNOTERMINALEXTENSIONTESTLANGUAGE.equals(grammar)) {
+			return new ContentAssistNoTerminalExtensionTestLanguageUiModule(this);
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_CROSSREFERENCEPROPOSALTESTLANGUAGE.equals(grammar)) {
 			return new CrossReferenceProposalTestLanguageUiModule(this);

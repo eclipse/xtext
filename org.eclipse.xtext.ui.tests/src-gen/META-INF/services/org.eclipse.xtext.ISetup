@@ -20,6 +20,7 @@ org.eclipse.xtext.ui.tests.editor.contentassist.ide.GH341TestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.BacktrackingContentAssistTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ContentAssistContextTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.ContentAssistCustomizingTestLanguageIdeSetup
+org.eclipse.xtext.ui.tests.editor.contentassist.ide.ContentAssistNoTerminalExtensionTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.CrossReferenceProposalTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.DatatypeRuleTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.LookAheadContentAssistTestLanguageIdeSetup

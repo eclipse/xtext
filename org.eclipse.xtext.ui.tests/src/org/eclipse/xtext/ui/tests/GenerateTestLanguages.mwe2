@@ -166,6 +166,10 @@ Workflow {
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistNoTerminalExtensionTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
 			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
