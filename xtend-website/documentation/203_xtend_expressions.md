@@ -1044,7 +1044,24 @@ def someHTML(Paragraph p) '''
   </html>
 '''
 ```
+You can also use `IF...ELSE...ENDIF` or `IF...ELSEIF...ENDIF` expressions:
 
+```xtend
+def someHTML(Paragraph p) '''
+  <html>
+    <body>
+      «IF p.headLine != null»
+        <h1>«p.headline»</h1>
+      «ELSE»
+        <h1>«p.standartHeadline»</h1>
+      «ENDIF»
+      <p>
+        «p.text»
+      </p>
+    </body>
+  </html>
+'''
+```
 ### Loops in Templates {#template-foreach}
 
 Also a `FOR` expression is available:
