@@ -7,33 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.findReferences.TargetURIs;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class TargetURIConverter {
-
-	@Inject
-	private Provider<TargetURIs> targetURIProvider;
-
-	public void setTargetURIProvider(Provider<TargetURIs> targetURIProvider) {
-		this.targetURIProvider = targetURIProvider;
-	}
-	
-	public TargetURIs fromIterable(Iterable<URI> uris) {
-		if (uris instanceof TargetURIs) {
-			return (TargetURIs) uris;
-		}
-		TargetURIs result = targetURIProvider.get();
-		result.addAllURIs(uris);
-		return result;
-	}
-	
+public class TargetURIConverter extends org.eclipse.xtext.findReferences.TargetURIConverter {
 }
