@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter;
 import org.eclipse.xtext.ui.refactoring2.TryWithResource;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.internal.Nullable;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -68,6 +69,7 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     private ResourceURIConverter resourceURIConverter;
     
     @Inject(optional = true)
+    @Nullable
     private IWorkbench workbench;
     
     public ChangeConverter create(final String name, final Predicate<Change> changeFilter, final RefactoringIssueAcceptor issues) {
@@ -254,20 +256,27 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   }
   
   protected ITextEditor findOpenEditor(final IFile file) {
-    return new DisplayRunnableWithResult<ITextEditor>() {
-      @Override
-      protected ITextEditor run() throws Exception {
-        final FileEditorInput editorInput = new FileEditorInput(file);
-        final Function1<IEditorReference, IEditorPart> _function = (IEditorReference it) -> {
-          return it.getEditor(false);
-        };
-        final Function1<ITextEditor, Boolean> _function_1 = (ITextEditor it) -> {
-          IEditorInput _editorInput = it.getEditorInput();
-          return Boolean.valueOf(Objects.equal(_editorInput, editorInput));
-        };
-        return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, IEditorPart>map(((List<IEditorReference>)Conversions.doWrapArray(ChangeConverter.this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
+    ITextEditor _xblockexpression = null;
+    {
+      if ((this.workbench == null)) {
+        return null;
       }
-    }.syncExec();
+      _xblockexpression = new DisplayRunnableWithResult<ITextEditor>() {
+        @Override
+        protected ITextEditor run() throws Exception {
+          final FileEditorInput editorInput = new FileEditorInput(file);
+          final Function1<IEditorReference, IEditorPart> _function = (IEditorReference it) -> {
+            return it.getEditor(false);
+          };
+          final Function1<ITextEditor, Boolean> _function_1 = (ITextEditor it) -> {
+            IEditorInput _editorInput = it.getEditorInput();
+            return Boolean.valueOf(Objects.equal(_editorInput, editorInput));
+          };
+          return IterableExtensions.<ITextEditor>findFirst(Iterables.<ITextEditor>filter(ListExtensions.<IEditorReference, IEditorPart>map(((List<IEditorReference>)Conversions.doWrapArray(ChangeConverter.this.workbench.getActiveWorkbenchWindow().getActivePage().getEditorReferences())), _function), ITextEditor.class), _function_1);
+        }
+      }.syncExec();
+    }
+    return _xblockexpression;
   }
   
   protected boolean affectsPersistedFiles() {

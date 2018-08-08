@@ -29,6 +29,7 @@ import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult
 import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.util.internal.Nullable
 
 import static org.eclipse.xtext.ui.refactoring2.TryWithResource.*
 
@@ -42,7 +43,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	
 	static class Factory {
 		@Inject ResourceURIConverter resourceURIConverter
-		@Inject(optional=true) IWorkbench workbench
+		@Inject(optional=true) @Nullable IWorkbench workbench
 		
 		def create(String name, Predicate<Change> changeFilter, RefactoringIssueAcceptor issues) {
 			new ChangeConverter(name, changeFilter, issues, resourceURIConverter, workbench)
@@ -156,6 +157,9 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 	
 	protected def ITextEditor findOpenEditor(IFile file) {
+		if (workbench === null) {
+			return null
+		}
 		new DisplayRunnableWithResult<ITextEditor>() {
 			override protected run() throws Exception {
 				val editorInput = new FileEditorInput(file)
