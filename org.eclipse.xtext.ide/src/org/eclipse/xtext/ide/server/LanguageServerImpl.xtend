@@ -35,6 +35,7 @@ import org.eclipse.lsp4j.DidSaveTextDocumentParams
 import org.eclipse.lsp4j.DocumentFormattingParams
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
+import org.eclipse.lsp4j.DocumentSymbol
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.ExecuteCommandOptions
 import org.eclipse.lsp4j.ExecuteCommandParams
@@ -47,6 +48,7 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceParams
 import org.eclipse.lsp4j.RenameParams
+import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities
 import org.eclipse.lsp4j.ServerCapabilities
 import org.eclipse.lsp4j.SignatureHelpOptions
 import org.eclipse.lsp4j.SymbolInformation
@@ -81,6 +83,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.rename.IRenameService
+import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
@@ -104,6 +107,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 	@Inject ExecutableCommandRegistry commandRegistry
+	@Inject SemanticHighlightingRegistry semanticHighlightingRegistry
 	
 	// injected below
 	WorkspaceManager workspaceManager
@@ -151,7 +155,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			// check if a language with code actions capability exists
 			codeActionProvider = allLanguages.exists[get(ICodeActionService)!==null] 
 			
-            signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
+			signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptions => [
 				resolveProvider = false
@@ -162,13 +166,18 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			documentHighlightProvider = true
 			renameProvider = allLanguages.exists[get(IRenameService)!==null]
 
+			val clientCapabilities = params.capabilities;
 			// register execute command capability
-			if (params.capabilities?.workspace?.executeCommand !== null) {
-				this.commandRegistry.initialize(allLanguages, params.capabilities, client)
+			if (clientCapabilities?.workspace?.executeCommand !== null) {
+				this.commandRegistry.initialize(allLanguages, clientCapabilities, client)
 				executeCommandProvider = new ExecuteCommandOptions => [
 					commands = this.commandRegistry.getCommands()
 				]
 			}
+
+			semanticHighlightingRegistry.initialize(allLanguages, clientCapabilities, client);
+			semanticHighlighting = new SemanticHighlightingServerCapabilities(semanticHighlightingRegistry.allScopes);
+
 		]
 		for (language : allLanguages) {
 			language.get(ICapabilitiesContributor)?.contribute(capabilities, params)
@@ -383,12 +392,13 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	}
 
 	override documentSymbol(DocumentSymbolParams params) {
-		return requestManager.<List<? extends SymbolInformation>>runRead[ cancelIndicator |
+		return requestManager.<List<Either<SymbolInformation, DocumentSymbol>>>runRead[ cancelIndicator |
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
-			if (documentSymbolService === null)
+			if (documentSymbolService === null) {
 				return emptyList
+			}
 	
 			return workspaceManager.doRead(uri) [ document, resource |
 				return documentSymbolService.getSymbols(document, resource, params, cancelIndicator)
@@ -445,7 +455,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		return requestManager.runRead [ cancelIndicator |
 			val uri = params.textDocument.uri.toUri;
 			val serviceProvider = uri.resourceServiceProvider;
-			val service =  serviceProvider?.get(IDocumentHighlightService);
+			val service = serviceProvider?.get(IDocumentHighlightService);
 			if (service === null)
 				return emptyList
 			
@@ -459,7 +469,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		return requestManager.runRead [ cancelIndicator |
 			val uri = params.textDocument.uri.toUri;
 			val serviceProvider = uri.resourceServiceProvider;
-			val service =  serviceProvider?.get(ICodeActionService);
+			val service = serviceProvider?.get(ICodeActionService);
 			if (service === null)
 				return emptyList
 			
@@ -468,7 +478,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			]
 		]
 	}
-	
+
 	private def void installURI(List<? extends CodeLens> codeLenses, String uri) {
 		for (lens : codeLenses) {
 			if (lens.data !== null) {
@@ -478,7 +488,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			}
 		}
 	}
-	
+
 	private def URI uninstallURI(CodeLens lens) {
 		var URI result = null
 		if (lens.data instanceof String) {
@@ -667,7 +677,6 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	}
 	
 	override afterBuild(List<Delta> deltas) {
-		if (client instanceof LanguageClientExtensions) {
 		deltas.filter[^new !== null].map[uri.toString].forEach [
 				access.<Void>doRead(it) [ ctx |
 					if (ctx.documentOpen) {
@@ -677,19 +686,21 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 							val serviceProvider = resource.URI.resourceServiceProvider;
 							val coloringService = serviceProvider?.get(IColoringService);
 							if (coloringService !== null) {
-								val doc = ctx.document;
-								val coloringInfos = coloringService.getColoring(resource, doc);
-								if (!coloringInfos.nullOrEmpty) {
-									val uri = resource.URI.toString;
-									client.updateColoring(new ColoringParams(uri, coloringInfos));
+								if (client instanceof LanguageClientExtensions) {
+									val doc = ctx.document;
+									val coloringInfos = coloringService.getColoring(resource, doc);
+									if (!coloringInfos.nullOrEmpty) {
+										val uri = resource.URI.toString;
+										client.updateColoring(new ColoringParams(uri, coloringInfos));
+									}
 								}
 							}
 						}
-						return /*void*/ null;
 					}
+					semanticHighlightingRegistry.update(ctx);
+					return /*void*/ null;
 				];
 			];
-		}
 	}
 
 }

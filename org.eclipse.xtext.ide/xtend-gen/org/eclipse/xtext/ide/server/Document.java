@@ -105,6 +105,60 @@ public class Document {
     return new Position(line, column);
   }
   
+  /**
+   * Returns with the text for a certain line without the trailing LF. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
+   * argument is negative or exceeds the number of lines in the document.
+   */
+  public String getLineContent(final int lineNumber) throws IndexOutOfBoundsException {
+    if ((lineNumber < 0)) {
+      String _xifexpression = null;
+      if (this.printSourceOnError) {
+        _xifexpression = "";
+      } else {
+        _xifexpression = (" text was : " + this.contents);
+      }
+      String _plus = (Integer.valueOf(lineNumber) + _xifexpression);
+      throw new IndexOutOfBoundsException(_plus);
+    }
+    final char NL = '\n';
+    final int l = this.contents.length();
+    final StringBuilder lineContent = new StringBuilder();
+    int line = 0;
+    for (int i = 0; (i < l); i++) {
+      {
+        if ((line > lineNumber)) {
+          return lineContent.toString();
+        }
+        final char ch = this.contents.charAt(i);
+        if (((line == lineNumber) && (ch != NL))) {
+          lineContent.append(ch);
+        }
+        if ((ch == NL)) {
+          line++;
+        }
+      }
+    }
+    if ((line < lineNumber)) {
+      String _xifexpression_1 = null;
+      if (this.printSourceOnError) {
+        _xifexpression_1 = "";
+      } else {
+        _xifexpression_1 = (" text was : " + this.contents);
+      }
+      String _plus_1 = (Integer.valueOf(lineNumber) + _xifexpression_1);
+      throw new IndexOutOfBoundsException(_plus_1);
+    }
+    return lineContent.toString();
+  }
+  
+  /**
+   * Get the number of lines in the document. Empty document has line count: {@code 1}.
+   */
+  public int getLineCount() {
+    int _line = this.getPosition(this.contents.length()).getLine();
+    return (_line + 1);
+  }
+  
   public String getSubstring(final Range range) {
     final int start = this.getOffSet(range.getStart());
     final int end = this.getOffSet(range.getEnd());

@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.ClientCapabilities;
+import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensOptions;
@@ -49,6 +50,7 @@ import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.ExecuteCommandCapabilities;
 import org.eclipse.lsp4j.ExecuteCommandOptions;
@@ -64,6 +66,7 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.RenameParams;
+import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities;
 import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
@@ -109,6 +112,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.rename.IRenameService;
+import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
@@ -177,6 +181,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Inject
   private ExecutableCommandRegistry commandRegistry;
+  
+  @Inject
+  private SemanticHighlightingRegistry semanticHighlightingRegistry;
   
   private WorkspaceManager workspaceManager;
   
@@ -258,10 +265,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return Boolean.valueOf((_get != null));
       };
       it.setRenameProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_5)));
-      ClientCapabilities _capabilities = params.getCapabilities();
+      final ClientCapabilities clientCapabilities = params.getCapabilities();
       WorkspaceClientCapabilities _workspace = null;
-      if (_capabilities!=null) {
-        _workspace=_capabilities.getWorkspace();
+      if (clientCapabilities!=null) {
+        _workspace=clientCapabilities.getWorkspace();
       }
       ExecuteCommandCapabilities _executeCommand = null;
       if (_workspace!=null) {
@@ -269,7 +276,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       boolean _tripleNotEquals = (_executeCommand != null);
       if (_tripleNotEquals) {
-        this.commandRegistry.initialize(this.getAllLanguages(), params.getCapabilities(), this.client);
+        this.commandRegistry.initialize(this.getAllLanguages(), clientCapabilities, this.client);
         ExecuteCommandOptions _executeCommandOptions = new ExecuteCommandOptions();
         final Procedure1<ExecuteCommandOptions> _function_6 = (ExecuteCommandOptions it_1) -> {
           it_1.setCommands(this.commandRegistry.getCommands());
@@ -277,6 +284,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_6);
         it.setExecuteCommandProvider(_doubleArrow_2);
       }
+      this.semanticHighlightingRegistry.initialize(this.getAllLanguages(), clientCapabilities, this.client);
+      List<List<String>> _allScopes = this.semanticHighlightingRegistry.getAllScopes();
+      SemanticHighlightingServerCapabilities _semanticHighlightingServerCapabilities = new SemanticHighlightingServerCapabilities(_allScopes);
+      it.setSemanticHighlighting(_semanticHighlightingServerCapabilities);
     };
     ServerCapabilities capabilities = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     Iterable<? extends IResourceServiceProvider> _allLanguages = this.getAllLanguages();
@@ -591,8 +602,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<List<? extends SymbolInformation>> documentSymbol(final DocumentSymbolParams params) {
-    final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
+  public CompletableFuture<List<Either<SymbolInformation, DocumentSymbol>>> documentSymbol(final DocumentSymbolParams params) {
+    final Function1<CancelIndicator, List<Either<SymbolInformation, DocumentSymbol>>> _function = (CancelIndicator cancelIndicator) -> {
       final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       DocumentSymbolService _get = null;
@@ -601,14 +612,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final DocumentSymbolService documentSymbolService = _get;
       if ((documentSymbolService == null)) {
-        return CollectionLiterals.<SymbolInformation>emptyList();
+        return CollectionLiterals.<Either<SymbolInformation, DocumentSymbol>>emptyList();
       }
-      final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function_1 = (Document document, XtextResource resource) -> {
+      final Function2<Document, XtextResource, List<Either<SymbolInformation, DocumentSymbol>>> _function_1 = (Document document, XtextResource resource) -> {
         return documentSymbolService.getSymbols(document, resource, params, cancelIndicator);
       };
-      return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function_1);
+      return this.workspaceManager.<List<Either<SymbolInformation, DocumentSymbol>>>doRead(uri, _function_1);
     };
-    return this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
+    return this.requestManager.<List<Either<SymbolInformation, DocumentSymbol>>>runRead(_function);
   }
   
   @Override
@@ -689,8 +700,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<List<? extends Command>> codeAction(final CodeActionParams params) {
-    final Function1<CancelIndicator, List<? extends Command>> _function = (CancelIndicator cancelIndicator) -> {
+  public CompletableFuture<List<Either<Command, CodeAction>>> codeAction(final CodeActionParams params) {
+    final Function1<CancelIndicator, List<Either<Command, CodeAction>>> _function = (CancelIndicator cancelIndicator) -> {
       final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
       ICodeActionService _get = null;
@@ -699,14 +710,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final ICodeActionService service = _get;
       if ((service == null)) {
-        return CollectionLiterals.<Command>emptyList();
+        return CollectionLiterals.<Either<Command, CodeAction>>emptyList();
       }
-      final Function2<Document, XtextResource, List<? extends Command>> _function_1 = (Document doc, XtextResource resource) -> {
+      final Function2<Document, XtextResource, List<Either<Command, CodeAction>>> _function_1 = (Document doc, XtextResource resource) -> {
         return service.getCodeActions(doc, resource, params, cancelIndicator);
       };
-      return this.workspaceManager.<List<? extends Command>>doRead(uri, _function_1);
+      return this.workspaceManager.<List<Either<Command, CodeAction>>>doRead(uri, _function_1);
     };
-    return this.requestManager.<List<? extends Command>>runRead(_function);
+    return this.requestManager.<List<Either<Command, CodeAction>>>runRead(_function);
   }
   
   private void installURI(final List<? extends CodeLens> codeLenses, final String uri) {
@@ -996,29 +1007,29 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void afterBuild(final List<IResourceDescription.Delta> deltas) {
-    if ((this.client instanceof LanguageClientExtensions)) {
-      final Function1<IResourceDescription.Delta, Boolean> _function = (IResourceDescription.Delta it) -> {
-        IResourceDescription _new = it.getNew();
-        return Boolean.valueOf((_new != null));
-      };
-      final Function1<IResourceDescription.Delta, String> _function_1 = (IResourceDescription.Delta it) -> {
-        return it.getUri().toString();
-      };
-      final Consumer<String> _function_2 = (String it) -> {
-        final Function<ILanguageServerAccess.Context, Void> _function_3 = (ILanguageServerAccess.Context ctx) -> {
-          boolean _isDocumentOpen = ctx.isDocumentOpen();
-          if (_isDocumentOpen) {
-            Resource _resource = ctx.getResource();
-            if ((_resource instanceof XtextResource)) {
-              Resource _resource_1 = ctx.getResource();
-              final XtextResource resource = ((XtextResource) _resource_1);
-              final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(resource.getURI());
-              IColoringService _get = null;
-              if (serviceProvider!=null) {
-                _get=serviceProvider.<IColoringService>get(IColoringService.class);
-              }
-              final IColoringService coloringService = _get;
-              if ((coloringService != null)) {
+    final Function1<IResourceDescription.Delta, Boolean> _function = (IResourceDescription.Delta it) -> {
+      IResourceDescription _new = it.getNew();
+      return Boolean.valueOf((_new != null));
+    };
+    final Function1<IResourceDescription.Delta, String> _function_1 = (IResourceDescription.Delta it) -> {
+      return it.getUri().toString();
+    };
+    final Consumer<String> _function_2 = (String it) -> {
+      final Function<ILanguageServerAccess.Context, Void> _function_3 = (ILanguageServerAccess.Context ctx) -> {
+        boolean _isDocumentOpen = ctx.isDocumentOpen();
+        if (_isDocumentOpen) {
+          Resource _resource = ctx.getResource();
+          if ((_resource instanceof XtextResource)) {
+            Resource _resource_1 = ctx.getResource();
+            final XtextResource resource = ((XtextResource) _resource_1);
+            final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(resource.getURI());
+            IColoringService _get = null;
+            if (serviceProvider!=null) {
+              _get=serviceProvider.<IColoringService>get(IColoringService.class);
+            }
+            final IColoringService coloringService = _get;
+            if ((coloringService != null)) {
+              if ((this.client instanceof LanguageClientExtensions)) {
                 final Document doc = ctx.getDocument();
                 final List<? extends ColoringInformation> coloringInfos = coloringService.getColoring(resource, doc);
                 boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(coloringInfos);
@@ -1030,14 +1041,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
                 }
               }
             }
-            return null;
           }
-          return null;
-        };
-        this.access.<Void>doRead(it, _function_3);
+        }
+        this.semanticHighlightingRegistry.update(ctx);
+        return null;
       };
-      IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
-    }
+      this.access.<Void>doRead(it, _function_3);
+    };
+    IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
   }
   
   private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);

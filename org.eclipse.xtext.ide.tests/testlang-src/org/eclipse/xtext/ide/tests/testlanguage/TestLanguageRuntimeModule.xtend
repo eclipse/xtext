@@ -8,9 +8,13 @@
 package org.eclipse.xtext.ide.tests.testlanguage
 
 import org.eclipse.xtext.formatting2.IFormatter2
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.server.coloring.IColoringService
+import org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyleToTokenMapper
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.tests.testlanguage.coloring.ColoringServiceImpl
+import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingCalculatorImpl
+import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingStyleToTokenMapper
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl
 
@@ -23,12 +27,20 @@ class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
 		return TestLanguageFormatter;
 	}
 	
-    def Class<? extends ISignatureHelpService> bindSignatureHelpService() {
-        return SignatureHelpServiceImpl;
-    }
-    
-    def Class<? extends IColoringService> bindIColoringService() {
-    	return ColoringServiceImpl;
-    }
+	def Class<? extends ISignatureHelpService> bindSignatureHelpService() {
+		return SignatureHelpServiceImpl;
+	}
+
+	def Class<? extends IColoringService> bindIColoringService() {
+		return ColoringServiceImpl;
+	}
+
+	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SemanticHighlightingCalculatorImpl;
+	}
+
+	def Class<? extends ISemanticHighlightingStyleToTokenMapper> bindISemanticHighlightingStyleToTokenMapper() {
+		return SemanticHighlightingStyleToTokenMapper;
+	}
 
 }

@@ -8,10 +8,14 @@
 package org.eclipse.xtext.ide.tests.testlanguage;
 
 import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
+import org.eclipse.xtext.ide.server.semanticHighlight.ISemanticHighlightingStyleToTokenMapper;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.AbstractTestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.coloring.ColoringServiceImpl;
+import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingCalculatorImpl;
+import org.eclipse.xtext.ide.tests.testlanguage.editor.syntaxcoloring.SemanticHighlightingStyleToTokenMapper;
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter;
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl;
 
@@ -30,5 +34,13 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
   
   public Class<? extends IColoringService> bindIColoringService() {
     return ColoringServiceImpl.class;
+  }
+  
+  public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+    return SemanticHighlightingCalculatorImpl.class;
+  }
+  
+  public Class<? extends ISemanticHighlightingStyleToTokenMapper> bindISemanticHighlightingStyleToTokenMapper() {
+    return SemanticHighlightingStyleToTokenMapper.class;
   }
 }

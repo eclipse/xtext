@@ -161,6 +161,59 @@ public class DocumentTest {
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
   
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testGetLineContent_negative() {
+    new Document(Integer.valueOf(1), "").getLineContent((-1));
+  }
+  
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testGetLineContent_exceeds() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("aaa");
+    _builder.newLine();
+    _builder.append("bbb");
+    _builder.newLine();
+    _builder.append("ccc");
+    new Document(Integer.valueOf(1), _builder.toString()).getLineContent(3);
+  }
+  
+  @Test
+  public void testGetLineContent_empty() {
+    Assert.assertEquals("", new Document(Integer.valueOf(1), "").getLineContent(0));
+  }
+  
+  @Test
+  public void testGetLineContent() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("aaa");
+    _builder.newLine();
+    _builder.append("bbb");
+    _builder.newLine();
+    _builder.append("ccc");
+    Assert.assertEquals("bbb", new Document(Integer.valueOf(1), _builder.toString()).getLineContent(1));
+  }
+  
+  @Test
+  public void testGetLineCount_empty() {
+    Assert.assertEquals(1, new Document(Integer.valueOf(1), "").getLineCount());
+  }
+  
+  @Test
+  public void testGetLineCount_single() {
+    Assert.assertEquals(1, new Document(Integer.valueOf(1), "aaa bbb ccc").getLineCount());
+  }
+  
+  @Test
+  public void testGetLineCount_multi() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("aaa");
+    _builder.newLine();
+    _builder.append("bbb");
+    _builder.newLine();
+    _builder.append("ccc");
+    Assert.assertEquals(3, new Document(Integer.valueOf(1), _builder.toString()).getLineCount());
+  }
+  
   private TextEdit change(final Position startPos, final Position endPos, final String newText) {
     TextEdit _textEdit = new TextEdit();
     final Procedure1<TextEdit> _function = (TextEdit it) -> {
