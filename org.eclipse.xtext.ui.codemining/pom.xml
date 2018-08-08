@@ -20,6 +20,11 @@
 			<properties>
 				<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>
 			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
+		<profile><id>photon</id></profile>
+		<profile><id>latest</id></profile>
 	</profiles>
 </project>
