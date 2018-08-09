@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
+import org.eclipse.xtext.ui.preferences.XtextBuildPreferenceEvaluator;
 import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
 
 import com.google.common.base.Strings;
@@ -31,19 +32,19 @@ import com.google.inject.Inject;
  * @since 2.1
  */
 public class EclipseOutputConfigurationProvider extends Delegate {
-	public static final String OUTPUT_PREFERENCE_TAG = "outlet";
+	public static final String OUTPUT_PREFERENCE_TAG = XtextBuildPreferenceEvaluator.OUTPUT_PREFERENCE_TAG;
 	public static final String OUTPUT_NAME = "name";
 	public static final String OUTPUT_DESCRIPTION = "description";
 	public static final String OUTPUT_DIRECTORY = "directory";
-	public static final String OUTPUT_CREATE_DIRECTORY = "createDirectory";
-	public static final String OUTPUT_CLEAN_DIRECTORY = "cleanDirectory";
-	public static final String OUTPUT_OVERRIDE = "override";
-	public static final String OUTPUT_CLEANUP_DERIVED = "cleanupDerived";
-	public static final String OUTPUT_DERIVED = "derived";
+	public static final String OUTPUT_CREATE_DIRECTORY = XtextBuildPreferenceEvaluator.OUTPUT_CREATE_DIRECTORY;
+	public static final String OUTPUT_CLEAN_DIRECTORY = XtextBuildPreferenceEvaluator.OUTPUT_CLEAN_DIRECTORY;
+	public static final String OUTPUT_OVERRIDE = XtextBuildPreferenceEvaluator.OUTPUT_OVERRIDE;
+	public static final String OUTPUT_CLEANUP_DERIVED = XtextBuildPreferenceEvaluator.OUTPUT_CLEANUP_DERIVED;
+	public static final String OUTPUT_DERIVED = XtextBuildPreferenceEvaluator.OUTPUT_DERIVED;
 	/**
 	 * @since 2.5
 	 */
-	public static final String OUTPUT_KEEP_LOCAL_HISTORY = "keepLocalHistory";
+	public static final String OUTPUT_KEEP_LOCAL_HISTORY = XtextBuildPreferenceEvaluator.OUTPUT_KEEP_LOCAL_HISTORY;
 	/**
 	 * @since 2.4
 	 */

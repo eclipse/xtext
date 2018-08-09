@@ -105,6 +105,8 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.markers.IMarkerContributor;
 import org.eclipse.xtext.ui.preferences.EclipsePreferencesProvider;
+import org.eclipse.xtext.ui.preferences.IBuildPreferenceEvaluator;
+import org.eclipse.xtext.ui.preferences.XtextBuildPreferenceEvaluator;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
@@ -451,5 +453,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public void configureSpellChecker(Binder binder) {
 		binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("spellChecker")) //$NON-NLS-1$
 		.to(XtextSpellingReconcileStrategy.Factory.class);
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	public Class<? extends IBuildPreferenceEvaluator> bindIBuildPreferenceEvaluator() {
+		return XtextBuildPreferenceEvaluator.class;
 	}
 }

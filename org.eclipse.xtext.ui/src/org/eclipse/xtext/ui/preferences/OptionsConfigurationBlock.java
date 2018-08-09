@@ -70,6 +70,9 @@ public abstract class OptionsConfigurationBlock {
 	@Inject
 	protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
 
+	@Inject
+	private IBuildPreferenceEvaluator buildPreferenceEvaluator;
+
 	private static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
 	private static final String SETTINGS_EXPANDED = "expanded"; //$NON-NLS-1$
 	private static final String REBUILD_COUNT_KEY = "preferences_build_requested"; //$NON-NLS-1$
@@ -528,7 +531,7 @@ public abstract class OptionsConfigurationBlock {
 	}
 
 	protected boolean processChanges(IWorkbenchPreferenceContainer container) {
-		boolean needsBuild = !getPreferenceChanges().isEmpty();
+		boolean needsBuild = buildPreferenceEvaluator.isAffectingBuild(getPreferenceChanges());
 		boolean doBuild = false;
 		if (needsBuild) {
 			int count = getRebuildCount();
