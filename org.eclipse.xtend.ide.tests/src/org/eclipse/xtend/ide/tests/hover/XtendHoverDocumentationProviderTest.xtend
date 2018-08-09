@@ -395,6 +395,104 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void testLinkToMethodHoverUnQualifiedOnType() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		/**
+		 * see {@link #bar(int)}
+		 */
+		class Foo {
+			def bar(int n){}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">#bar(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
+	def void testLinkToMethodHoverQualifiedOnType() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		/**
+		 * see {@link Foo#bar(int)}
+		 */
+		class Foo {
+			def bar(int n) {}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1">Foo#bar(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
+	def void testLinkToConstructorHoverUnQualifiedOnType() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		/**
+		 * see {@link #Foo(int)}
+		 */
+		class Foo {
+			def new(int n){}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0">#Foo(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
+	def void testLinkToConstructorHoverQualifiedOnType() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		/**
+		 * see {@link Foo#Foo(int)}
+		 */
+		class Foo {
+			new(int n){}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0">Foo#Foo(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
+	def void testLinkToConstructorHoverUnQualifiedOnMethod() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		class Foo {
+			new(int n){}
+			/**
+			 * see {@link #Foo(int)}
+			 */
+			def void bla(){}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz.members.filter(XtendFunction).head)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0">#Foo(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
+	def void testLinkToConstructorHoverQualifiedOnMethod() {
+		val xtendFile = parseHelper.parse('''
+		package testpackage
+		class Foo {
+			new(int n){}
+			/**
+			 * see {@link #Foo(int)}
+			 */
+			def void bla(){}
+		}
+		''',resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val docu = documentationProvider.getDocumentation(clazz.members.filter(XtendFunction).head)
+		assertEquals('''see <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0">#Foo(int)</a></code>'''.toString, docu)
+	}
+	
+	@Test
     def bug380551(){
         val xtendFile = parseHelper.parse('''
         package testpackage
