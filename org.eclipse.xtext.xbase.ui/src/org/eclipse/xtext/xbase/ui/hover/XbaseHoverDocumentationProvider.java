@@ -411,7 +411,14 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 				int indexOfClosingBracket = signature.indexOf(")");
 				String simpleNameOfFeature = indexOfOpenBracket != -1 ? signature.substring(0, indexOfOpenBracket)
 						: signature;
-				Iterable<JvmFeature> possibleCandidates = resolvedDeclarator.findAllFeaturesByName(simpleNameOfFeature);
+				Iterable<JvmConstructor> constructorCandidates = new ArrayList<JvmConstructor>();
+				if (resolvedDeclarator.getSimpleName().equals(simpleNameOfFeature)) {
+					constructorCandidates = resolvedDeclarator.getDeclaredConstructors();
+				}
+				Iterable<JvmFeature> possibleCandidates = Iterables.concat(
+					resolvedDeclarator.findAllFeaturesByName(simpleNameOfFeature),
+					constructorCandidates
+				);
 				List<String> parameterNames = null;
 				if (indexOfOpenBracket != -1 && indexOfClosingBracket != -1) {
 					parameterNames = Strings.split(signature.substring(indexOfOpenBracket + 1, indexOfClosingBracket),
@@ -488,6 +495,9 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	}
 
 	protected JvmDeclaredType getDeclaringType(EObject eObject) {
+		if (eObject instanceof JvmDeclaredType) {
+			return (JvmDeclaredType) eObject;
+		}
 		if (eObject instanceof JvmMember) {
 			return ((JvmMember) eObject).getDeclaringType();
 		}
