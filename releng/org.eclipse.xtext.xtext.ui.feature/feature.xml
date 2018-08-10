@@ -19,12 +19,19 @@ are made available under the terms of the Eclipse Public License
 v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
+
    <license url="http://www.eclipse.org/legal/epl-v10.html">
       %license
    </license>
+
    <includes
          id="org.eclipse.xtext.ui"
          version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.xtext.ui.graph"
+         version="0.0.0"
+         optional="true"/>
 
    <requires>
       <import plugin="org.eclipse.emf.mwe2.runtime" version="2.7.0" match="greaterOrEqual"/>
@@ -53,20 +60,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.xtext.ui.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtext.ui.graph"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtext.ui.graph.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

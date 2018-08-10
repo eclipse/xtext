@@ -26,6 +26,7 @@
 		<module>org.eclipse.xtext.ui.feature</module>
 		<module>org.eclipse.xtext.xbase.feature</module>
 		<module>org.eclipse.xtext.xtext.ui.feature</module>
+		<module>org.eclipse.xtext.xtext.ui.graph.feature</module>
 		<module>org.eclipse.xtend.sdk.feature</module>
 		<module>org.eclipse.xtext.sdk.p2-repository</module>
 		<module>org.eclipse.emf.mwe2.language.sdk.dummy</module>
