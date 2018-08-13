@@ -7,9 +7,10 @@
  */
 package org.eclipse.xtext.java.resource;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -41,18 +42,33 @@ public class ClassFileCache {
     }
   }
   
-  private final Map<QualifiedName, IBinaryType> cache = new HashMap<QualifiedName, IBinaryType>();
+  private final static Object NULL = new Object();
+  
+  private final Map<QualifiedName, Object> cache = new ConcurrentHashMap<QualifiedName, Object>();
   
   public boolean containsKey(final QualifiedName qualifiedName) {
     return this.cache.containsKey(qualifiedName);
   }
   
   public IBinaryType get(final QualifiedName qualifiedName) {
-    return this.cache.get(qualifiedName);
+    final Object result = this.cache.get(qualifiedName);
+    if ((result == ClassFileCache.NULL)) {
+      return null;
+    }
+    return ((IBinaryType) result);
   }
   
   public void put(final QualifiedName qualifiedName, final IBinaryType answer) {
-    this.cache.put(qualifiedName, answer);
+    if ((answer == null)) {
+      this.cache.put(qualifiedName, ClassFileCache.NULL);
+    } else {
+      this.cache.put(qualifiedName, answer);
+    }
+  }
+  
+  public IBinaryType computeIfAbsent(final QualifiedName qualifiedName, final Function<? super QualifiedName, ? extends IBinaryType> fun) {
+    Object _computeIfAbsent = this.cache.computeIfAbsent(qualifiedName, fun);
+    return ((IBinaryType) _computeIfAbsent);
   }
   
   public void clear() {

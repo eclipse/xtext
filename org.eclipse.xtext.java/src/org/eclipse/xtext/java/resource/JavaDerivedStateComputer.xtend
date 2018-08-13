@@ -1,6 +1,8 @@
 package org.eclipse.xtext.java.resource
 
+import com.google.common.base.Splitter
 import com.google.inject.Inject
+import java.nio.CharBuffer
 import java.util.Arrays
 import java.util.List
 import org.eclipse.emf.common.util.EList
@@ -24,6 +26,7 @@ import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
 import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -129,10 +132,9 @@ class JavaDerivedStateComputer {
 			for (cls : it.classFiles) {
 				// TODO What is with inner classes (they contain $)
 				// TODO is there a better way to obtain the class name
-				val key = qualifiedNameConverter.toQualifiedName(new String(cls.fileName).replace("/","."))
-				if (!classFileCache.containsKey(key)) {
-					classFileCache.put(key, new ClassFileReader(cls.bytes,cls.fileName))
-				}
+				val key = QualifiedName.create(Splitter.on("/").splitToList(CharBuffer.wrap(cls.fileName)))
+				// qualifiedNameConverter.toQualifiedName(new String(cls.fileName).replace("/","."))
+				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes,cls.fileName)])
 			}
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap

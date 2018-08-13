@@ -1,10 +1,13 @@
 package org.eclipse.xtext.java.resource;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Splitter;
 import com.google.inject.Inject;
+import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -21,6 +24,7 @@ import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.ast.TypeParameter;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
+import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.internal.compiler.parser.Parser;
@@ -206,60 +210,57 @@ public class JavaDerivedStateComputer {
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     final ICompilerRequestor _function = (CompilationResult it) -> {
-      try {
-        ClassFile[] _classFiles = it.getClassFiles();
-        for (final ClassFile cls : _classFiles) {
-          {
-            char[] _fileName = cls.fileName();
-            final QualifiedName key = this.qualifiedNameConverter.toQualifiedName(new String(_fileName).replace("/", "."));
-            boolean _containsKey = classFileCache.containsKey(key);
-            boolean _not = (!_containsKey);
-            if (_not) {
-              byte[] _bytes = cls.getBytes();
-              char[] _fileName_1 = cls.fileName();
-              ClassFileReader _classFileReader = new ClassFileReader(_bytes, _fileName_1);
-              classFileCache.put(key, _classFileReader);
-            }
-          }
-        }
-        boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
-        if (_equals) {
-          final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
-          List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
-          ClassFile[] _classFiles_1 = it.getClassFiles();
-          for (final ClassFile cf : _classFiles_1) {
-            {
-              final Function1<char[], String> _function_1 = (char[] it_1) -> {
-                return String.valueOf(it_1);
-              };
-              final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
-              map.put(className, cf.getBytes());
-              if ((!cf.isNestedType)) {
-                topLevelTypes.add(className);
-              }
-            }
-          }
-          final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
-          for (final String topLevel : topLevelTypes) {
+      ClassFile[] _classFiles = it.getClassFiles();
+      for (final ClassFile cls : _classFiles) {
+        {
+          final QualifiedName key = QualifiedName.create(Splitter.on("/").splitToList(CharBuffer.wrap(cls.fileName())));
+          final Function<QualifiedName, IBinaryType> _function_1 = (QualifiedName name) -> {
             try {
-              BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
-              ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
-              final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
-              final JvmDeclaredType type = builder.buildType();
-              EList<EObject> _contents = resource.getContents();
-              _contents.add(type);
-            } catch (final Throwable _t) {
-              if (_t instanceof Throwable) {
-                final Throwable t = (Throwable)_t;
-                throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
+              byte[] _bytes = cls.getBytes();
+              char[] _fileName = cls.fileName();
+              return new ClassFileReader(_bytes, _fileName);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          classFileCache.computeIfAbsent(key, _function_1);
+        }
+      }
+      boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
+      if (_equals) {
+        final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
+        List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
+        ClassFile[] _classFiles_1 = it.getClassFiles();
+        for (final ClassFile cf : _classFiles_1) {
+          {
+            final Function1<char[], String> _function_1 = (char[] it_1) -> {
+              return String.valueOf(it_1);
+            };
+            final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
+            map.put(className, cf.getBytes());
+            if ((!cf.isNestedType)) {
+              topLevelTypes.add(className);
             }
           }
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+        final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
+        for (final String topLevel : topLevelTypes) {
+          try {
+            BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
+            ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
+            final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
+            final JvmDeclaredType type = builder.buildType();
+            EList<EObject> _contents = resource.getContents();
+            _contents.add(type);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable t = (Throwable)_t;
+              throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+        }
       }
     };
     DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();

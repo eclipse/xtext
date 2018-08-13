@@ -1,5 +1,6 @@
 package org.eclipse.xtext.java.resource;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,21 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
           this.classFileCache.put(className, null);
           return null;
         }
-        final ClassFileReader reader = ClassFileReader.read(url.openStream(), fileName);
+        InputStream stream = null;
+        ClassFileReader _xtrycatchfinallyexpression = null;
+        try {
+          ClassFileReader _xblockexpression = null;
+          {
+            stream = url.openStream();
+            _xblockexpression = ClassFileReader.read(url.openStream(), fileName);
+          }
+          _xtrycatchfinallyexpression = _xblockexpression;
+        } finally {
+          if ((stream != null)) {
+            stream.close();
+          }
+        }
+        final IBinaryType reader = _xtrycatchfinallyexpression;
         this.classFileCache.put(className, reader);
         NameEnvironmentAnswer _nameEnvironmentAnswer_1 = new NameEnvironmentAnswer(reader, null);
         result = _nameEnvironmentAnswer_1;

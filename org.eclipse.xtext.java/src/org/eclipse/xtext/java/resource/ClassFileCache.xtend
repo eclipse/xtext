@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.java.resource
 
-import java.util.HashMap
 import java.util.Map
+import java.util.concurrent.ConcurrentHashMap
+import java.util.function.Function
 import org.eclipse.jdt.internal.compiler.env.IBinaryType
+import org.eclipse.jdt.internal.compiler.env.ITypeAnnotationWalker
+import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.util.internal.EmfAdaptable
 
@@ -20,21 +23,36 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 @EmfAdaptable
 class ClassFileCache {
 	
+	static val NULL = new Object();
+	
 	//TODO: concurrency
 	//TODO: clear
 	//TODO: weak?
-	val Map<QualifiedName, IBinaryType> cache = new HashMap()
+	// type if Object by intention, but we store IBinaryTypes only
+	val Map<QualifiedName, Object> cache = new ConcurrentHashMap()
 	
 	def boolean containsKey(QualifiedName qualifiedName) {
 		return cache.containsKey(qualifiedName)
 	}
 	
 	def IBinaryType get(QualifiedName qualifiedName) {
-		return cache.get(qualifiedName)
+		val result = cache.get(qualifiedName)
+		if (result === NULL) {
+			return null
+		}
+		return result as IBinaryType
 	}
 	
 	def void put(QualifiedName qualifiedName, IBinaryType answer) {
-		cache.put(qualifiedName, answer)
+		if (answer === null) {
+			cache.put(qualifiedName, NULL)
+		} else {
+			cache.put(qualifiedName, answer)
+		}
+	}
+	
+	def IBinaryType computeIfAbsent(QualifiedName qualifiedName, Function<? super QualifiedName, ? extends IBinaryType> fun) {
+		cache.computeIfAbsent(qualifiedName, fun) as IBinaryType
 	}
 	
 	def void clear() {

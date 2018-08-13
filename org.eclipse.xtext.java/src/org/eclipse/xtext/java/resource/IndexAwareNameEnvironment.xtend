@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGe
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.emf.ecore.resource.Resource
+import java.io.InputStream
+import org.eclipse.jdt.internal.compiler.env.IBinaryType
 
 @FinalFieldsConstructor class IndexAwareNameEnvironment implements INameEnvironment {
 
@@ -64,7 +66,16 @@ import org.eclipse.emf.ecore.resource.Resource
 				classFileCache.put(className, null)
 				return null;
 			}
-			val reader = ClassFileReader.read(url.openStream, fileName)
+			// todo: try with resources/ close Stream
+			var InputStream stream = null
+			val IBinaryType reader = try {
+				stream = url.openStream
+				ClassFileReader.read(url.openStream, fileName)
+			} finally {
+				if (stream !== null) {
+					stream.close
+				}
+			}
 			// TODO is this ok?
 			classFileCache.put(className, reader)
 			result = new NameEnvironmentAnswer(reader, null)
@@ -88,3 +99,4 @@ import org.eclipse.emf.ecore.resource.Resource
 		return Character.isLowerCase(packageName.head)
 	}
 }	
+ 
