@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.findReferences.TargetURIConverter;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;

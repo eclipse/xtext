@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Iterables.concat;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 
@@ -33,12 +34,12 @@ import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
+import org.eclipse.xtext.findReferences.TargetURIConverter;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.TargetURIConverter;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;

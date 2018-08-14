@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceFinder;
+import org.eclipse.xtext.findReferences.TargetURIConverter;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
