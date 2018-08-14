@@ -6,7 +6,7 @@ dependencies {
 	compile "org.ow2.asm:asm-commons:$versions.asm"
 	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
 	optional "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
-	optional "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
+	optional "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfCodegen"
 	optional "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
 }
 
