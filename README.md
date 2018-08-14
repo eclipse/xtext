@@ -8,6 +8,6 @@ Check out and run `./gradlew build`.
 
 The additional command line argument `-PcompileXtend=true` activates the [Xtend](http://xtend-lang.org) compiler, but this is optional because the generated Java code is included in the repository.
 
-## Continuos Integration
+## Continuous Integration
 
 This project is built by the [xtext-lib multi-branch job on Jenkins](http://services.typefox.io/open-source/jenkins/job/xtext-lib/).
