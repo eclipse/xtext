@@ -11,7 +11,9 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link org.eclipse.xtext.findReferences.TargetURIConverter} instead.
  */
+@Deprecated
 @Singleton
 public class TargetURIConverter extends org.eclipse.xtext.findReferences.TargetURIConverter {
 }

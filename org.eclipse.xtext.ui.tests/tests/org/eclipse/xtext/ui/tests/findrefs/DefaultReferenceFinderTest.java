@@ -27,7 +27,7 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
-import org.eclipse.xtext.ui.editor.findrefs.TargetURIConverter;
+import org.eclipse.xtext.findReferences.TargetURIConverter;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
