@@ -138,7 +138,7 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.codegen</artifactId>
-			<version>${emf.version}</version>
+			<version>${emfCodegen.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
