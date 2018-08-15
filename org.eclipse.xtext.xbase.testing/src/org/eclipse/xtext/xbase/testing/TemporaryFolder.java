@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.junit.Rule;
 import org.junit.rules.ExternalResource;
 
 import com.google.common.io.Files;
