@@ -44,7 +44,7 @@ public class RailroadSelectionProvider implements MouseListener, ISelectionProvi
 	@Inject
 	private RailroadView view;
 
-	private ListenerList selectionListeners = new ListenerList();
+	private ListenerList<ISelectionChangedListener> selectionListeners = new ListenerList<ISelectionChangedListener>();
 
 	private IFigure currentSelectedFigure;
 

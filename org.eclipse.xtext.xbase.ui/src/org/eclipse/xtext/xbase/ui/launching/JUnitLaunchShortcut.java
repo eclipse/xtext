@@ -27,7 +27,7 @@ public class JUnitLaunchShortcut extends org.eclipse.jdt.junit.launcher.JUnitLau
 	
 	@Override
 	public void launch(IEditorPart editor, String mode) {
-		JavaElementDelegate javaElementDelegate = (JavaElementDelegate) editor.getAdapter(JavaElementDelegateJunitLaunch.class);
+		JavaElementDelegate javaElementDelegate = editor.getAdapter(JavaElementDelegateJunitLaunch.class);
 		if (javaElementDelegate != null) {
 			launch(new StructuredSelection(javaElementDelegate), mode);
 		} else {

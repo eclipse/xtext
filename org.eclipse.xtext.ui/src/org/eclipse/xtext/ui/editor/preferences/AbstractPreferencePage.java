@@ -87,7 +87,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	@Override
 	public void setElement(IAdaptable element) {
-		this.project = (IProject) element.getAdapter(IProject.class);
+		this.project = element.getAdapter(IProject.class);
 	}
 
 	@Override

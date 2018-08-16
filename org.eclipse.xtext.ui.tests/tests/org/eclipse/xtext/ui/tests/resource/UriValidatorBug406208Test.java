@@ -34,7 +34,7 @@ public class UriValidatorBug406208Test implements IStorage, IResourceServiceProv
 	}
 	
 	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 		throw new UnsupportedOperationException();
 	}
 

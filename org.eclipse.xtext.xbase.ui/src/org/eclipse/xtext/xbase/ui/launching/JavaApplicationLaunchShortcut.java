@@ -28,7 +28,7 @@ public class JavaApplicationLaunchShortcut extends
 
 	@Override
 	public void launch(IEditorPart editor, String mode) {
-		JavaElementDelegate javaElementDelegate = (JavaElementDelegate) editor.getAdapter(JavaElementDelegateMainLaunch.class);
+		JavaElementDelegate javaElementDelegate = editor.getAdapter(JavaElementDelegateMainLaunch.class);
 		if (javaElementDelegate != null) {
 			launch(new StructuredSelection(javaElementDelegate), mode);
 		} else {

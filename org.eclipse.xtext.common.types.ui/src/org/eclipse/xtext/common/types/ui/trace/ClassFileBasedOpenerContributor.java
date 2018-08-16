@@ -50,7 +50,7 @@ public class ClassFileBasedOpenerContributor extends OppositeFileOpenerContribut
 	public boolean collectSourceFileOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor) {
 		if (!(editor instanceof XtextEditor) && editor.getEditorInput() != null) {
 			try {
-				IClassFile classFile = (IClassFile) editor.getEditorInput().getAdapter(IClassFile.class);
+				IClassFile classFile = editor.getEditorInput().getAdapter(IClassFile.class);
 				if (classFile == null) {
 					return false;
 				}

@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTargetExtension;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -72,11 +73,11 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	@Inject
 	private XbaseBreakpointUtil breakpointUtil;
 
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({ "rawtypes"})
-	public Object getAdapter(Object adaptableObject, Class adapterType) {
-		if (adaptableObject instanceof XtextEditor) {
-			return this;
+	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
+		if (adaptableObject instanceof XtextEditor && adapterType == IToggleBreakpointsTarget.class) {
+			return (T) this;
 		}
 		return null;
 	}
@@ -120,7 +121,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					result.lang = provider.get(LanguageInfo.class);
 					result.sourceUri = state.getURI();
 					if (editorInput.getAdapter(IClassFile.class) != null) {
-						result.classHandle = ((IClassFile)editorInput.getAdapter(IClassFile.class)).getHandleIdentifier();
+						result.classHandle = editorInput.getAdapter(IClassFile.class).getHandleIdentifier();
 					}
 					return result;
 				}

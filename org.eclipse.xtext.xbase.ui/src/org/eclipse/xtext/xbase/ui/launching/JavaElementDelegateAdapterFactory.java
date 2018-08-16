@@ -31,7 +31,7 @@ public class JavaElementDelegateAdapterFactory implements IAdapterFactory {
 	private Provider<JavaElementDelegateMainLaunch> mainDelegateProvider;
 	
 	@Override
-	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes")  Class adapterType) {
+	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (adaptableObject instanceof JavaElementDelegate) {
 			return ((JavaElementDelegate) adaptableObject).getAdapter(adapterType);
 		}
@@ -46,23 +46,22 @@ public class JavaElementDelegateAdapterFactory implements IAdapterFactory {
 		if (result != null) {
 			if (adaptableObject instanceof IFileEditorInput) {
 				result.initializeWith((IFileEditorInput) adaptableObject);
-				return result;
+				return adapterType.cast(result);
 			}
 			if (adaptableObject instanceof IResource) {
 				result.initializeWith((IResource) adaptableObject);
-				return result;
+				return adapterType.cast(result);
 			}
 			if (adaptableObject instanceof IEditorPart) {
 				result.initializeWith((IEditorPart) adaptableObject);
-				return result;
+				return adapterType.cast(result);
 			}
 		}
 		return null;
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes" })
-	public Class[] getAdapterList() {
+	public Class<?>[] getAdapterList() {
 		return new Class[] { JavaElementDelegate.class };
 	}
 	

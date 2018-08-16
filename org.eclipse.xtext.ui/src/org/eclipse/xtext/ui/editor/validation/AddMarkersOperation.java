@@ -130,7 +130,6 @@ public class AddMarkersOperation extends WorkspaceModifyOperation {
 
 	private void deleteAnnotations() {
 		if (annotationModel != null) {
-			@SuppressWarnings("unchecked")
 			Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 			List<Annotation> toRemove = new ArrayList<>();
 			while (iterator.hasNext()) {

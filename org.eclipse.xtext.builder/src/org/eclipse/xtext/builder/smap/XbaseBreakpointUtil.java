@@ -66,7 +66,7 @@ public class XbaseBreakpointUtil {
 					return underlyingResource;
 			}
 		} else if (input.getAdapter(IClassFile.class) != null) {
-			IClassFile classFile = (IClassFile) input.getAdapter(IClassFile.class);
+			IClassFile classFile = input.getAdapter(IClassFile.class);
 			return getBreakpointResource(classFile.findPrimaryType());
 		}
 		return ResourcesPlugin.getWorkspace().getRoot();
@@ -100,7 +100,7 @@ public class XbaseBreakpointUtil {
 				return null;
 			}
 		} else if (input.getAdapter(IClassFile.class) != null) {
-			IClassFile classFile = (IClassFile) input.getAdapter(IClassFile.class);
+			IClassFile classFile = input.getAdapter(IClassFile.class);
 			ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
 			if (traceToSource == null)
 				return null;

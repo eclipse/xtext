@@ -117,7 +117,6 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	}
 
 	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
-		@SuppressWarnings("unchecked")
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
 
@@ -167,7 +166,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 				if (editor instanceof XtextEditor) {
 					result = (XtextEditor) editor;
 				} else if (editor != null) {
-					result = (XtextEditor) editor.getAdapter(XtextEditor.class);
+					result = editor.getAdapter(XtextEditor.class);
 				}
 			} catch (PartInitException e) {
 				return null;
@@ -184,7 +183,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			if(editor instanceof XtextEditor) {
 				return (XtextEditor)editor;
 			} else if (editor != null) {
-				return (XtextEditor) editor.getAdapter(XtextEditor.class);
+				return editor.getAdapter(XtextEditor.class);
 			}
 		}
 		return null;

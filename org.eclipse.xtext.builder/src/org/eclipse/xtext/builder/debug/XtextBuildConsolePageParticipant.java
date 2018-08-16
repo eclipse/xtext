@@ -25,9 +25,8 @@ public class XtextBuildConsolePageParticipant implements IConsolePageParticipant
 	
 	private CloseConsoleAction fCloseAction;
 
-	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 		return null;
 	}
 

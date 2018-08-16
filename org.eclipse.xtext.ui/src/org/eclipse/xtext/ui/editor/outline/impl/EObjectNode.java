@@ -62,10 +62,9 @@ public class EObjectNode extends AbstractOutlineNode {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public Object getAdapter(Class adapterType) {
+	public <T> T getAdapter(Class<T> adapterType) {
 		if (adapterType == EClass.class) {
-			return eClass;
+			return adapterType.cast(eClass);
 		}
 		return super.getAdapter(adapterType);
 	}

@@ -34,7 +34,7 @@ public class ValidateActionHandlerTest extends AbstractEditorTest {
 	@Test public void testExpensiveMarkerCreation() throws Exception {
 		IFile iFile = createFile("foo/bar.testlanguage", "stuff foo");
 		XtextEditor xtextEditor = openEditor(iFile);
-		IHandlerService handlerService = (IHandlerService) xtextEditor.getSite().getService(IHandlerService.class);
+		IHandlerService handlerService = xtextEditor.getSite().getService(IHandlerService.class);
 		handlerService.executeCommand("org.eclipse.xtext.ui.tests.TestLanguage.validate", null);
 		closeEditors();
 		Job[] find = Job.getJobManager().find(ValidationJob.XTEXT_VALIDATION_FAMILY);

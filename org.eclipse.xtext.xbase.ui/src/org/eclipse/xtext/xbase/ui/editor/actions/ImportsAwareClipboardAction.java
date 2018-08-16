@@ -254,7 +254,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData, boolean withImports) {
-		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
+		IRewriteTarget target = getTextEditor().getAdapter(IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
@@ -275,7 +275,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent, boolean withImports) {
-		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
+		IRewriteTarget target = getTextEditor().getAdapter(IRewriteTarget.class);
 		if (target != null) {
 			target.beginCompoundChange();
 		}
@@ -347,7 +347,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 		}
 		ITextEditor editor = getTextEditor();
 		if (textOperationTarget == null && editor != null)
-			textOperationTarget = (ITextOperationTarget) editor.getAdapter(ITextOperationTarget.class);
+			textOperationTarget = editor.getAdapter(ITextOperationTarget.class);
 		boolean isEnabled = (textOperationTarget != null && textOperationTarget.canDoOperation(getOperationCode()));
 		setEnabled(isEnabled);
 	}

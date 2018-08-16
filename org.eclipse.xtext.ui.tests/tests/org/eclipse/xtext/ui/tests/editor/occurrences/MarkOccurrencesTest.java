@@ -159,7 +159,6 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 			syncer.start();
 		}
 
-		@SuppressWarnings("unchecked")
 		public void verify(int timeout) throws TimeoutException, InterruptedException {
 			syncer.awaitSignal(timeout);
 			for (Annotation a : event.getRemovedAnnotations()) {

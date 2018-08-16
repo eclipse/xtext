@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
+import org.eclipse.ltk.core.refactoring.GroupCategory;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChange;
 import org.eclipse.ltk.core.refactoring.TextEditBasedChangeGroup;
@@ -98,9 +99,8 @@ public class DisplayChangeWrapper {
 			return delegate.getAffectedObjects();
 		}
 	
-		@SuppressWarnings({ "rawtypes" })
 		@Override
-		public Object getAdapter(Class adapter) {
+		public <T> T getAdapter(Class<T> adapter) {
 			return delegate.getAdapter(adapter);
 		}
 	
@@ -202,9 +202,8 @@ public class DisplayChangeWrapper {
 			return delegate.getAffectedObjects();
 		}
 
-		@SuppressWarnings({ "rawtypes" })
 		@Override
-		public Object getAdapter(Class adapter) {
+		public <T> T getAdapter(Class<T> adapter) {
 			return delegate.getAdapter(adapter);
 		}
 
@@ -256,9 +255,8 @@ public class DisplayChangeWrapper {
 			delegate.addTextEditGroup(group);
 		}
 
-		@SuppressWarnings({ "rawtypes" })
 		@Override
-		public boolean hasOneGroupCategory(List groupCategories) {
+		public boolean hasOneGroupCategory(List<GroupCategory> groupCategories) {
 			return delegate.hasOneGroupCategory(groupCategories);
 		}
 

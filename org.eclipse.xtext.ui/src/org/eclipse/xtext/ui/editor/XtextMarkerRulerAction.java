@@ -52,7 +52,7 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 				textEditor.getInternalSourceViewer().setSelectedRange(annotationLineOffet, 0);
 		
 			// show QuickFix dialog
-			ITextOperationTarget operation = (ITextOperationTarget) textEditor.getAdapter(ITextOperationTarget.class);
+			ITextOperationTarget operation = textEditor.getAdapter(ITextOperationTarget.class);
 			final int opCode = ISourceViewer.QUICK_ASSIST;
 			if (operation != null && operation.canDoOperation(opCode))
 				operation.doOperation(opCode);
