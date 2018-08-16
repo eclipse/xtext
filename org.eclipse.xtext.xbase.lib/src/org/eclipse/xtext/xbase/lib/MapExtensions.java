@@ -11,9 +11,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
+import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.UnmodifiableMergingMapView;
 
 import com.google.common.annotations.GwtCompatible;
@@ -395,6 +397,24 @@ import com.google.common.collect.Maps;
 	@Inline(value = "(new $3<$5, $6>($1, $2))", imported = UnmodifiableMergingMapView.class, constantExpression = true)
 	public static <K, V> Map<K, V> union(Map<? extends K, ? extends V> left, Map<? extends K, ? extends V> right) {
 		return new UnmodifiableMergingMapView<K, V>(left, right);
+	}
+
+	/**
+	 * <p>Returns a map that performs the given {@code transformation} for each value of {@code original} when requested.</p>
+	 * 
+	 * <p>The mapping is done lazily. That is, subsequent access of the values in the map will repeatedly apply the
+	 * transformation. Characteristics of the original map, such as iteration order, are left intact. Changes in the
+	 * original map are reflected in the result map. The results supports removal if the original map supports removal.</p>
+	 * 
+	 * @param original
+	 *            the original map. May not be <code>null</code>.
+	 * @param transformation
+	 *            the transformation. May not be <code>null</code>.
+	 * @return a map with equal keys but transformed values. Never <code>null</code>.
+	 * @since 2.4
+	 */
+	public static <K, V1, V2> Map<K, V2> mapValues(Map<K, V1> original, Function1<? super V1, ? extends V2> transformation) {
+		return Maps.transformValues(original, new FunctionDelegate<V1, V2>(transformation));
 	}
 
 }
