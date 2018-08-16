@@ -771,6 +771,206 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   }
   
   @Test
+  public void testLinkToMethodHoverUnQualifiedOnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* see {@link #bar(int)}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(int n){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#bar(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLinkToMethodHoverQualifiedOnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* see {@link Foo#bar(int)}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(int n) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">Foo#bar(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLinkToConstructorHoverUnQualifiedOnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* see {@link #Foo(int)}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def new(int n){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0\">#Foo(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLinkToConstructorHoverQualifiedOnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* see {@link Foo#Foo(int)}");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(int n){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0\">Foo#Foo(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLinkToConstructorHoverUnQualifiedOnMethod() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(int n){}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("* see {@link #Foo(int)}");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bla(){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(clazz.getMembers(), XtendFunction.class)));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0\">#Foo(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLinkToConstructorHoverQualifiedOnMethod() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(int n){}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("* see {@link #Foo(int)}");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bla(){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, this.getResourceSet());
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(Iterables.<XtendClass>filter(xtendFile.getXtendTypes(), XtendClass.class));
+      final String docu = this.documentationProvider.getDocumentation(IterableExtensions.<XtendFunction>head(Iterables.<XtendFunction>filter(clazz.getMembers(), XtendFunction.class)));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("see <code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.0\">#Foo(int)</a></code>");
+      Assert.assertEquals(_builder_1.toString(), docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void bug380551() {
     try {
       StringConcatenation _builder = new StringConcatenation();
