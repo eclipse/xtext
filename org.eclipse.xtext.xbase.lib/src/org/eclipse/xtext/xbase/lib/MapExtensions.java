@@ -7,28 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import java.lang.reflect.Array;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
-import org.eclipse.xtext.xbase.lib.internal.FunctionDelegate;
 import org.eclipse.xtext.xbase.lib.internal.UnmodifiableMergingMapView;
 
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 
 /**
