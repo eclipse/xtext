@@ -298,7 +298,6 @@ public class WorkbenchTestHelper extends Assert {
 	}
 	
 	public static void makeCompliantFor(IJavaProject javaProject, JavaVersion javaVersion) {
-		@SuppressWarnings("unchecked")
 		Map<String, String> options= javaProject.getOptions(false);
 		String jreLevel = javaVersion.getQualifier();
 		options.put(JavaCore.COMPILER_COMPLIANCE, jreLevel);

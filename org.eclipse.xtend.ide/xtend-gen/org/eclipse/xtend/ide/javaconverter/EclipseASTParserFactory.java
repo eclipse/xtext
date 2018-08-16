@@ -42,7 +42,7 @@ public class EclipseASTParserFactory extends ASTParserFactory {
   
   public void tweakOptions(final ASTParser parser, final IJavaProject project) {
     if ((project != null)) {
-      final Map options = project.getOptions(true);
+      final Map<String, String> options = project.getOptions(true);
       options.remove(JavaCore.COMPILER_TASK_TAGS);
       options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);
       parser.setCompilerOptions(options);

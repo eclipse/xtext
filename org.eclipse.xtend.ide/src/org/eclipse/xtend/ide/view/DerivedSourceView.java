@@ -156,7 +156,6 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 				getSharedTextColors());
 		AnnotationRulerColumn annotationRulerColumn = new AnnotationRulerColumn(VERTICAL_RULER_WIDTH,
 				defaultMarkerAnnotationAccess);
-		@SuppressWarnings("unchecked")
 		List<AnnotationPreference> annotationPreferences = markerAnnotationPreferences.getAnnotationPreferences();
 		for (AnnotationPreference annotationPreference : annotationPreferences) {
 			String key = annotationPreference.getVerticalRulerPreferenceKey();

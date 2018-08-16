@@ -18,20 +18,20 @@ import org.eclipse.xtend.ide.view.DerivedSourceView;
 public class XtendEditorAdapterFactory implements IAdapterFactory {
 
 	@Override
-	public Object getAdapter(Object adaptableObject, Class adapterType) {
+	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {
 		if (adaptableObject instanceof XtendEditor && IShowInTargetList.class.equals(adapterType)) {
-			return new IShowInTargetList() {
+			return adapterType.cast(new IShowInTargetList() {
 				@Override
 				public String[] getShowInTargetIds() {
 					return new String[] { DerivedSourceView.class.getName() };
 				}
-			};
+			});
 		}
 		return null;
 	}
 
 	@Override
-	public Class[] getAdapterList() {
+	public Class<?>[] getAdapterList() {
 		return new Class[] { IShowInTargetList.class };
 	}
 
