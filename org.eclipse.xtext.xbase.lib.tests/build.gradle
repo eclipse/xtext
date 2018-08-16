@@ -5,6 +5,7 @@ dependencies {
 	compile project(':org.eclipse.xtend.lib')
 	compile "com.google.guava:guava:$versions.guava"
 	compile 'junit:junit:4.12'
+	compile "com.google.guava:guava-testlib:$versions.guava"
 }
 
 jar {
