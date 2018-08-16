@@ -113,7 +113,7 @@ import com.google.common.collect.Maps;
 	 * @param entry the entry (key, value) to add into the map.
 	 * @return the value previously associated to the key, or <code>null</code>
 	 *     if the key was not present in the map before the addition.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Inline(value = "$1.put($2.getKey(), $2.getValue())", statementExpression = true)
 	public static <K, V> V operator_add(Map<K, V> map, Pair<? extends K, ? extends V> entry) {
@@ -132,7 +132,7 @@ import com.google.common.collect.Maps;
 	 * @param <V> type of the map values.
 	 * @param outputMap the map to update.
 	 * @param inputMap the entries to add.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Inline(value = "$1.putAll($2)", statementExpression = true)
 	public static <K, V> void operator_add(Map<K, V> outputMap, Map<? extends K, ? extends V> inputMap) {
@@ -157,7 +157,7 @@ import com.google.common.collect.Maps;
 	 * @param right the entry (key, value) to add into the map.
 	 * @return an immutable map with the content of the map and with the given entry.
 	 * @throws IllegalArgumentException - when the right operand key exists in the left operand.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	@Inline(value = "$3.union($1, $4.singletonMap($2.getKey(), $2.getValue()))",
@@ -184,7 +184,7 @@ import com.google.common.collect.Maps;
 	 * @param right the right map.
 	 * @return a map with the merged contents from the two maps.
 	 * @throws IllegalArgumentException - when a right operand key exists in the left operand.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	@Inline(value = "$3.union($1, $2)", imported = MapExtensions.class)
@@ -201,7 +201,7 @@ import com.google.common.collect.Maps;
 	 * @param key the key to remove.
 	 * @return the removed value, or <code>null</code> if the key was not
 	 *     present in the map.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Inline(value = "$1.remove($2)", statementExpression = true)
 	public static <K, V> V operator_remove(Map<K, V> map, K key) {
@@ -221,7 +221,7 @@ import com.google.common.collect.Maps;
 	 * @param map the map to update.
 	 * @param entry the entry (key, value) to remove from the map.
 	 * @return {@code true} if the pair was removed.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Inline(value = "$1.remove($2.getKey(), $2.getValue())", statementExpression = true)
 	public static <K, V> boolean operator_remove(Map<K, V> map, Pair<? extends K, ? extends V> entry) {
@@ -243,7 +243,7 @@ import com.google.common.collect.Maps;
 	 * @param <V> type of the map values.
 	 * @param map the map to update.
 	 * @param keysToRemove the keys of the pairs to remove.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	public static <K, V> void operator_remove(Map<K, V> map, Iterable<? super K> keysToRemove) {
 		for (final Object key : keysToRemove) {
@@ -270,7 +270,7 @@ import com.google.common.collect.Maps;
 	 * @param right the entry (key, value) to remove from the map.
 	 * @return an immutable map with the content of the map and with the given entry.
 	 * @throws IllegalArgumentException - when the right operand key exists in the left operand.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	public static <K, V> Map<K, V> operator_minus(Map<K, V> left, final Pair<? extends K, ? extends V> right) {
@@ -295,7 +295,7 @@ import com.google.common.collect.Maps;
 	 * @param map the map to update.
 	 * @param key the key to remove.
 	 * @return the map with the content of the map except the key.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	public static <K, V> Map<K, V> operator_minus(Map<K, V> map, final K key) {
@@ -329,7 +329,7 @@ import com.google.common.collect.Maps;
 	 * @param left the map to update.
 	 * @param right the pairs to remove.
 	 * @return the map with the content of the left map except the pairs of the right map.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	public static <K, V> Map<K, V> operator_minus(Map<K, V> left, final Map<? extends K, ? extends V> right) {
@@ -358,7 +358,7 @@ import com.google.common.collect.Maps;
 	 * @param map the map to update.
 	 * @param keys the keys of the pairs to remove.
 	 * @return the map with the content of the map except the pairs.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	public static <K, V> Map<K, V> operator_minus(Map<K, V> map, final Iterable<?> keys) {
@@ -391,7 +391,7 @@ import com.google.common.collect.Maps;
 	 * @param left the left map.
 	 * @param right the right map.
 	 * @return a map with the merged contents from the two maps.
-	 * @since 2.14
+	 * @since 2.15
 	 */
 	@Pure
 	@Inline(value = "(new $3<$5, $6>($1, $2))", imported = UnmodifiableMergingMapView.class, constantExpression = true)
