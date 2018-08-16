@@ -51,7 +51,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	/**
 	 * Create Java Source Code that is compatible to this Java version.
 	 * 
-	 * Supported values: 1.5, 1.6, 1.7, and 1.8
+	 * Supported values: 1.5, 1.6, 1.7, 1.8, 9 and 10
 	 *
 	 * @parameter expression="${maven.compiler.source}" default-value="1.6"
 	 */
