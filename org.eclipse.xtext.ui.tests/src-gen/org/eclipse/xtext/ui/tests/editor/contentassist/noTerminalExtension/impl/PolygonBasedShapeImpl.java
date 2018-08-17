@@ -3,12 +3,15 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.NoTerminalExtensionPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape;
@@ -30,24 +33,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.Polyg
 public class PolygonBasedShapeImpl extends MinimalEObjectImpl.Container implements PolygonBasedShape
 {
   /**
-   * The default value of the '{@link #getShape() <em>Shape</em>}' attribute.
+   * The cached value of the '{@link #getShape() <em>Shape</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getShape()
    * @generated
    * @ordered
    */
-  protected static final PolygonBasedNodeShape SHAPE_EDEFAULT = PolygonBasedNodeShape.OCTAGON;
-
-  /**
-   * The cached value of the '{@link #getShape() <em>Shape</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getShape()
-   * @generated
-   * @ordered
-   */
-  protected PolygonBasedNodeShape shape = SHAPE_EDEFAULT;
+  protected EList<PolygonBasedNodeShape> shape;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,22 +68,13 @@ public class PolygonBasedShapeImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public PolygonBasedNodeShape getShape()
+  public EList<PolygonBasedNodeShape> getShape()
   {
+    if (shape == null)
+    {
+      shape = new EDataTypeEList<PolygonBasedNodeShape>(PolygonBasedNodeShape.class, this, NoTerminalExtensionPackage.POLYGON_BASED_SHAPE__SHAPE);
+    }
     return shape;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setShape(PolygonBasedNodeShape newShape)
-  {
-    PolygonBasedNodeShape oldShape = shape;
-    shape = newShape == null ? SHAPE_EDEFAULT : newShape;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, NoTerminalExtensionPackage.POLYGON_BASED_SHAPE__SHAPE, oldShape, shape));
   }
 
   /**
@@ -114,13 +98,15 @@ public class PolygonBasedShapeImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case NoTerminalExtensionPackage.POLYGON_BASED_SHAPE__SHAPE:
-        setShape((PolygonBasedNodeShape)newValue);
+        getShape().clear();
+        getShape().addAll((Collection<? extends PolygonBasedNodeShape>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,7 +123,7 @@ public class PolygonBasedShapeImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case NoTerminalExtensionPackage.POLYGON_BASED_SHAPE__SHAPE:
-        setShape(SHAPE_EDEFAULT);
+        getShape().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,7 +140,7 @@ public class PolygonBasedShapeImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case NoTerminalExtensionPackage.POLYGON_BASED_SHAPE__SHAPE:
-        return shape != SHAPE_EDEFAULT;
+        return shape != null && !shape.isEmpty();
     }
     return super.eIsSet(featureID);
   }

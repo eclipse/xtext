@@ -15,6 +15,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
@@ -28,10 +29,10 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		private final RuleCall cShapePolygonBasedNodeShapeEnumRuleCall_0 = (RuleCall)cShapeAssignment.eContents().get(0);
 		
 		//PolygonBasedShape:
-		//	shape=PolygonBasedNodeShape;
+		//	shape+=PolygonBasedNodeShape+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//shape=PolygonBasedNodeShape
+		//shape+=PolygonBasedNodeShape+
 		public Assignment getShapeAssignment() { return cShapeAssignment; }
 		
 		//PolygonBasedNodeShape
@@ -215,6 +216,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 	
 	private final PolygonBasedShapeElements pPolygonBasedShape;
 	private final PolygonBasedNodeShapeElements ePolygonBasedNodeShape;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
@@ -223,6 +225,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pPolygonBasedShape = new PolygonBasedShapeElements();
 		this.ePolygonBasedNodeShape = new PolygonBasedNodeShapeElements();
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguage.WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -249,7 +252,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 
 	
 	//PolygonBasedShape:
-	//	shape=PolygonBasedNodeShape;
+	//	shape+=PolygonBasedNodeShape+;
 	public PolygonBasedShapeElements getPolygonBasedShapeAccess() {
 		return pPolygonBasedShape;
 	}
@@ -268,5 +271,11 @@ public class ContentAssistNoTerminalExtensionTestLanguageGrammarAccess extends A
 	
 	public EnumRule getPolygonBasedNodeShapeRule() {
 		return getPolygonBasedNodeShapeAccess().getRule();
+	}
+	
+	//terminal WS:
+	//	' '+;
+	public TerminalRule getWSRule() {
+		return tWS;
 	}
 }

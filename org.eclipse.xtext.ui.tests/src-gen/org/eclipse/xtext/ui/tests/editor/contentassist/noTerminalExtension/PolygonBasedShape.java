@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,32 +26,21 @@ import org.eclipse.emf.ecore.EObject;
 public interface PolygonBasedShape extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Shape</b></em>' attribute.
+   * Returns the value of the '<em><b>Shape</b></em>' attribute list.
+   * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape}.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Shape</em>' attribute isn't clear,
+   * If the meaning of the '<em>Shape</em>' attribute list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Shape</em>' attribute.
+   * @return the value of the '<em>Shape</em>' attribute list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape
-   * @see #setShape(PolygonBasedNodeShape)
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.NoTerminalExtensionPackage#getPolygonBasedShape_Shape()
-   * @model
+   * @model unique="false"
    * @generated
    */
-  PolygonBasedNodeShape getShape();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedShape#getShape <em>Shape</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Shape</em>' attribute.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape
-   * @see #getShape()
-   * @generated
-   */
-  void setShape(PolygonBasedNodeShape value);
+  EList<PolygonBasedNodeShape> getShape();
 
 } // PolygonBasedShape

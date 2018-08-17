@@ -16,7 +16,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageParser extends Abstract
 
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
-		tokenStream.setInitialHiddenTokens();
+		tokenStream.setInitialHiddenTokens("RULE_WS");
 	}
 	
 

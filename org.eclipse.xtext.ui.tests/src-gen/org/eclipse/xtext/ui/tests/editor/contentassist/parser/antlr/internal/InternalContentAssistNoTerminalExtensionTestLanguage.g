@@ -86,7 +86,7 @@ rulePolygonBasedShape returns [EObject current=null]
 				if ($current==null) {
 					$current = createModelElementForParent(grammarAccess.getPolygonBasedShapeRule());
 				}
-				set(
+				add(
 					$current,
 					"shape",
 					lv_shape_0_0,
@@ -94,7 +94,7 @@ rulePolygonBasedShape returns [EObject current=null]
 				afterParserOrEnumRuleCall();
 			}
 		)
-	)
+	)+
 ;
 
 // Rule PolygonBasedNodeShape
@@ -267,3 +267,5 @@ rulePolygonBasedNodeShape returns [Enumerator current=null]
 		)
 	)
 ;
+
+RULE_WS : ' '+;

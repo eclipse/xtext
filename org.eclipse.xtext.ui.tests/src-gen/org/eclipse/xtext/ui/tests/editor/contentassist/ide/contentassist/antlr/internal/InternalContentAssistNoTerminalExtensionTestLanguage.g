@@ -65,9 +65,16 @@ rulePolygonBasedShape
 	}
 	:
 	(
-		{ before(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
-		(rule__PolygonBasedShape__ShapeAssignment)
-		{ after(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
+		(
+			{ before(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
+			(rule__PolygonBasedShape__ShapeAssignment)
+			{ after(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
+		)
+		(
+			{ before(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
+			(rule__PolygonBasedShape__ShapeAssignment)*
+			{ after(grammarAccess.getPolygonBasedShapeAccess().getShapeAssignment()); }
+		)
 	)
 ;
 finally {
@@ -233,3 +240,5 @@ rule__PolygonBasedShape__ShapeAssignment
 finally {
 	restoreStackSize(stackSize);
 }
+
+RULE_WS : ' '+;
