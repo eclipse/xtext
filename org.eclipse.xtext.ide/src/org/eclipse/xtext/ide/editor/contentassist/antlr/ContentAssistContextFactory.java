@@ -409,32 +409,61 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		if (prefixNode instanceof ILeafNode) {
 			if (((ILeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
 				return "";
+			// if (prefixNode.getGrammarElement() == null) {
+			// return getPrefix(prefixNode.getParent());
+			// }
 			INode startingNode = prefixNode;
 			// As long as there are leaf nodes with syntax errors one after the other go back until the first one is
 			// found
-			while (startingNode.getSyntaxErrorMessage() != null) {
+			
+			// XXX the fix for https://github.com/eclipse/xtext-core/issues/69 works ... but checking the error
+			// message is quite ugly ... not production ready
+			while (startingNode instanceof ILeafNode && startingNode.getSyntaxErrorMessage() != null
+					&& startingNode.getSyntaxErrorMessage().getMessage().contains("no viable alternative at character ")
+					&& startingNode.getGrammarElement() == null) {
 				INode nodeBefore = startingNode.getPreviousSibling();
-				if (nodeBefore.getSyntaxErrorMessage() != null) {
+				if (nodeBefore instanceof ILeafNode && nodeBefore.getSyntaxErrorMessage() != null
+						&& nodeBefore.getSyntaxErrorMessage().getMessage()
+								.contains("no viable alternative at character ")
+						&& startingNode.getGrammarElement() == null) {
 					startingNode = nodeBefore;
 				} else {
 					break;
 				}
 			}
-			return getNodeTextUpToCompletionOffset(startingNode);
+			return getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes(startingNode);
 		}
 		StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
 		doComputePrefix((ICompositeNode) prefixNode, result);
 		return result.toString();
 	}
 
-	public String getNodeTextUpToCompletionOffset(INode currentNode) {
+	// XXX differs from getNodeTextUpToCompletionOffset only in line 449
+	public String getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes(INode currentNode) {
 		int startOffset = currentNode.getOffset();
 		int length = completionOffset - startOffset;
-		String nodeText = currentNode.getRootNode().getText().substring(startOffset, startOffset + length);
+		String nodeText = ((ILeafNode) currentNode).getText();
 		String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
 		try {
 			String text = document.substring(startOffset, startOffset + trimmedNodeText.length());
-			if (trimmedNodeText.equals(text))
+			if (trimmedNodeText.equals(text) && trimmedNodeText.length() == length)
+				return text;
+			return document.substring(startOffset, startOffset + length);
+		} catch (IndexOutOfBoundsException e) {
+			log.error(e.getMessage(), e);
+		}
+		return trimmedNodeText;
+	}
+
+	// XXX differs from getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes only in line 466
+	public String getNodeTextUpToCompletionOffset(INode currentNode) {
+		int startOffset = currentNode.getOffset();
+		int length = completionOffset - startOffset;
+		String nodeText = ((ILeafNode) currentNode).getText();
+		String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
+		try {
+			String text = document.substring(startOffset, startOffset + trimmedNodeText.length());
+			if (trimmedNodeText.equals(text)/* && trimmedNodeText.length() == length */)
 				return text;
 			return document.substring(startOffset, startOffset + length);
 		} catch (IndexOutOfBoundsException e) {
