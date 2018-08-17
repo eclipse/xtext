@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -409,53 +409,13 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		if (prefixNode instanceof ILeafNode) {
 			if (((ILeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
 				return "";
-			// if (prefixNode.getGrammarElement() == null) {
-			// return getPrefix(prefixNode.getParent());
-			// }
-			INode startingNode = prefixNode;
-			// As long as there are leaf nodes with syntax errors one after the other go back until the first one is
-			// found
-			
-			// XXX the fix for https://github.com/eclipse/xtext-core/issues/69 works ... but checking the error
-			// message is quite ugly ... not production ready
-			while (startingNode instanceof ILeafNode && startingNode.getSyntaxErrorMessage() != null
-					&& startingNode.getSyntaxErrorMessage().getMessage().contains("no viable alternative at character ")
-					&& startingNode.getGrammarElement() == null) {
-				INode nodeBefore = startingNode.getPreviousSibling();
-				if (nodeBefore instanceof ILeafNode && nodeBefore.getSyntaxErrorMessage() != null
-						&& nodeBefore.getSyntaxErrorMessage().getMessage()
-								.contains("no viable alternative at character ")
-						&& startingNode.getGrammarElement() == null) {
-					startingNode = nodeBefore;
-				} else {
-					break;
-				}
-			}
-			return getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes(startingNode);
+			return getNodeTextUpToCompletionOffset(prefixNode);
 		}
 		StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
 		doComputePrefix((ICompositeNode) prefixNode, result);
 		return result.toString();
 	}
 
-	// XXX differs from getNodeTextUpToCompletionOffset only in line 449
-	public String getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes(INode currentNode) {
-		int startOffset = currentNode.getOffset();
-		int length = completionOffset - startOffset;
-		String nodeText = ((ILeafNode) currentNode).getText();
-		String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
-		try {
-			String text = document.substring(startOffset, startOffset + trimmedNodeText.length());
-			if (trimmedNodeText.equals(text) && trimmedNodeText.length() == length)
-				return text;
-			return document.substring(startOffset, startOffset + length);
-		} catch (IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-		}
-		return trimmedNodeText;
-	}
-
-	// XXX differs from getNodeTextUpToCompletionOffsetIncludingPreceedingErrorNodes only in line 466
 	public String getNodeTextUpToCompletionOffset(INode currentNode) {
 		int startOffset = currentNode.getOffset();
 		int length = completionOffset - startOffset;
@@ -463,7 +423,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
 		try {
 			String text = document.substring(startOffset, startOffset + trimmedNodeText.length());
-			if (trimmedNodeText.equals(text)/* && trimmedNodeText.length() == length */)
+			if (trimmedNodeText.equals(text))
 				return text;
 			return document.substring(startOffset, startOffset + length);
 		} catch (IndexOutOfBoundsException e) {
