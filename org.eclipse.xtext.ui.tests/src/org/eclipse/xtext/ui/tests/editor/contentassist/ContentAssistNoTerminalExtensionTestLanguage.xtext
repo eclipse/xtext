@@ -5,14 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguage
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistNoTerminalExtensionTestLanguage hidden(WS)
 
 generate noTerminalExtension "http://www.eclipse.org/xtext/ui/common/tests/2018/contentAssistNoTerminalExtension"
 
+import "http://www.eclipse.org/emf/2002/Ecore"
+
 PolygonBasedShape:
-    shape = PolygonBasedNodeShape;
+    shape += PolygonBasedNodeShape+;
 
 enum PolygonBasedNodeShape:
     octagon | oval |
     parallelogram | pentagon | plain | plaintext | point | polygon | primersite | promoter | proteasesite | proteinstab |
     rarrow | record | rect | rectangle | restrictionsite | ribosite | rnastab | rpromoter;
+    
+terminal WS: (' ')+;

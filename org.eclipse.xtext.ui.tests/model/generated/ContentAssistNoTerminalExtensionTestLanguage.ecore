@@ -3,7 +3,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="noTerminalExtension" nsURI="http://www.eclipse.org/xtext/ui/common/tests/2018/contentAssistNoTerminalExtension"
     nsPrefix="noTerminalExtension">
   <eClassifiers xsi:type="ecore:EClass" name="PolygonBasedShape">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//PolygonBasedNodeShape"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" unique="false" upperBound="-1"
+        eType="#//PolygonBasedNodeShape"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PolygonBasedNodeShape">
     <eLiterals name="octagon" literal="octagon"/>

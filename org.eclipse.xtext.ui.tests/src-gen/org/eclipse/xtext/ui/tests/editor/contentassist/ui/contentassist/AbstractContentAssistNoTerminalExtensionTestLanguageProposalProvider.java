@@ -27,4 +27,7 @@ public abstract class AbstractContentAssistNoTerminalExtensionTestLanguagePropos
 	public void complete_PolygonBasedNodeShape(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_WS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

@@ -11,9 +11,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.NoTerminalExtensionPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedShape;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistNoTerminalExtensionTestLanguageGrammarAccess;
@@ -45,16 +43,10 @@ public class ContentAssistNoTerminalExtensionTestLanguageSemanticSequencer exten
 	 *     PolygonBasedShape returns PolygonBasedShape
 	 *
 	 * Constraint:
-	 *     shape=PolygonBasedNodeShape
+	 *     shape+=PolygonBasedNodeShape+
 	 */
 	protected void sequence_PolygonBasedShape(ISerializationContext context, PolygonBasedShape semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, NoTerminalExtensionPackage.Literals.POLYGON_BASED_SHAPE__SHAPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, NoTerminalExtensionPackage.Literals.POLYGON_BASED_SHAPE__SHAPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPolygonBasedShapeAccess().getShapePolygonBasedNodeShapeEnumRuleCall_0(), semanticObject.getShape());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

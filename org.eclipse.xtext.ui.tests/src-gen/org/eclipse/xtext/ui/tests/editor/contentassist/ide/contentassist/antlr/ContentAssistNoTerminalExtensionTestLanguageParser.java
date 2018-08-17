@@ -56,7 +56,7 @@ public class ContentAssistNoTerminalExtensionTestLanguageParser extends Abstract
 
 	@Override
 	protected String[] getInitialHiddenTokens() {
-		return new String[] {  };
+		return new String[] { "RULE_WS" };
 	}
 
 	public ContentAssistNoTerminalExtensionTestLanguageGrammarAccess getGrammarAccess() {
