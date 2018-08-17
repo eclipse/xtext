@@ -78,11 +78,11 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 					</wizard>
 				</extension>
 				<extension
-				      point="org.eclipse.xtext.ui.fileTemplate">
-				   <fileTemplateProvider
-				         class="«getFileTemplateProviderClassName»"
-				         grammarName="«grammar.languageId»">
-				   </fileTemplateProvider>
+					point="org.eclipse.xtext.ui.fileTemplate">
+					<fileTemplateProvider
+						class="«grammar.eclipsePluginExecutableExtensionFactory»:«getFileTemplateProviderClassName»"
+						grammarName="«grammar.languageId»">
+					</fileTemplateProvider>
 				</extension>
 				<extension
 					point="org.eclipse.ui.perspectiveExtensions">

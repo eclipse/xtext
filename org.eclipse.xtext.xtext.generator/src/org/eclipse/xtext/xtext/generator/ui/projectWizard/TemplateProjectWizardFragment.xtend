@@ -93,11 +93,11 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 					</wizard>
 				</extension>
 				<extension
-				      point="org.eclipse.xtext.ui.projectTemplate">
-				   <projectTemplateProvider
-				         class="«getProjectTemplateProviderClassName»"
-				         grammarName="«grammar.languageId»">
-				   </projectTemplateProvider>
+					point="org.eclipse.xtext.ui.projectTemplate">
+					<projectTemplateProvider
+						class="«grammar.eclipsePluginExecutableExtensionFactory»:«getProjectTemplateProviderClassName»"
+						grammarName="«grammar.languageId»">
+					</projectTemplateProvider>
 				</extension>
 				<extension
 					point="org.eclipse.ui.perspectiveExtensions">
