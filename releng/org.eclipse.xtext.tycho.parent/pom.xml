@@ -22,6 +22,11 @@
 	</properties>
 
 	<profiles>
+		<!--
+			dont forget to adapt
+			org.eclipse.xtext.ui.codemining/pom.xml
+			org.eclipse.xtext.ui.testing/pom.xml
+		-->
 		<profile>
 			<id>latest</id>
 			<properties>
