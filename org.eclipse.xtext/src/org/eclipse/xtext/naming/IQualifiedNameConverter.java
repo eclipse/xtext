@@ -18,7 +18,7 @@ import com.google.inject.Singleton;
 /**
  * Converts {@link QualifiedName}s to strings and back.
  * 
- * Clients can change the namespace delimiter her by overriding
+ * Clients can change the namespace delimiter here by overriding
  * {@link IQualifiedNameConverter.DefaultImpl#getDelimiter()}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
