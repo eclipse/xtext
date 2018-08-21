@@ -19,7 +19,7 @@ ext.versions = [
 	'jdtCompilerApt': '1.3.110',
 	'jdtCompilerTool': '1.2.101',
 	'xpand': '2.0.0',
-	'asm': '6.1.1',
+	'asm': '6.2.1',
 	'icu': '52.1',
 	'guice': '3.0',
 	'junit': '4.12'
