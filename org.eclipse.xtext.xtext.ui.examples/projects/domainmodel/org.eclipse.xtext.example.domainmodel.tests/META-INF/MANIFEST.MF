@@ -8,7 +8,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
- org.objectweb.asm;bundle-version="[6.1.1,6.2.0)";resolution:=optional,
+ org.objectweb.asm;bundle-version="[6.2.1,6.3.0)";resolution:=optional,
  org.eclipse.xtext.xbase.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.domainmodel.tests;x-internal=true
