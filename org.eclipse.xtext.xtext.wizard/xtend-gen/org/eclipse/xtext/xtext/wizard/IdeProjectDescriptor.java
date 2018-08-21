@@ -122,7 +122,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("<artifactId>asm</artifactId>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<version>6.1.1</version>");
+          _builder.append("<version>6.2.1</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
@@ -137,7 +137,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("<artifactId>asm-commons</artifactId>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<version>6.1.1</version>");
+          _builder.append("<version>6.2.1</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
@@ -152,7 +152,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("<artifactId>asm-tree</artifactId>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<version>6.1.1</version>");
+          _builder.append("<version>6.2.1</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
