@@ -89,12 +89,6 @@ public abstract class AbstractOutlineTest extends AbstractEditorTest {
 		return javaProject;
 	}
 
-	@Override
-	public void tearDown() throws Exception {
-		super.tearDown();
-		editor.close(false);
-	}
-
 	protected IOutlineNode getOutlineTree(CharSequence modelAsText)
 			throws Exception {
 		file = IResourcesSetupUtil.createFile(TEST_PROJECT + "/test."
