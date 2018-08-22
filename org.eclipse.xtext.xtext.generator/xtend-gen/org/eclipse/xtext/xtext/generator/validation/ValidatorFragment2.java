@@ -75,10 +75,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   private XbaseUsageDetector _xbaseUsageDetector;
   
   @Accessors
-  private boolean generateDeprecationValidation = true;
+  private boolean generateDeprecationValidation = false;
   
   @Accessors
-  private boolean generatePropertyPage = true;
+  private boolean generatePropertyPage = false;
   
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   

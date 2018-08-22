@@ -530,6 +530,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("\t\t\t\t");
     _builder.append("// composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
     _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponsing PropertyPage");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("generateDeprecationValidation = true");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
