@@ -180,8 +180,8 @@ public class TemplateNewProjectWizard extends Wizard implements INewWizard {
 
 			parameterPage.setWizard(this);
 			templateParameterPage = parameterPage;
-			parameterPage.setTitle(getGrammarName() + Messages.TemplateNewProjectWizard_title_suffix);
-			parameterPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + getGrammarName()
+			parameterPage.setTitle(shortName(getGrammarName()) + Messages.TemplateNewProjectWizard_title_suffix);
+			parameterPage.setDescription(Messages.TemplateNewProjectWizard_create_new_prefix + shortName(getGrammarName())
 					+ Messages.TemplateNewProjectWizard_create_new_suffix);
 			return parameterPage;
 		}
