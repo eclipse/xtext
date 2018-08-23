@@ -49,9 +49,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	@Inject extension XbaseUsageDetector
 	
 	@Accessors
-	boolean generateDeprecationValidation = true;
+	boolean generateDeprecationValidation = false;
 	@Accessors
-	boolean generatePropertyPage = true;
+	boolean generatePropertyPage = false;
 	
 	val List<String> composedChecks = newArrayList
 
