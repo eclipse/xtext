@@ -79,20 +79,24 @@ public class ImportOrganizer {
 		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
 		addImports(resolvedConflicts, typeUsages, newImportSection);
 		List<ReplaceRegion> replaceRegions = getReplacedUsageSites(resolvedConflicts, typeUsages, newImportSection);
-		for (JvmMember staticImport : typeUsages.getStaticImports()) {
-			JvmDeclaredType declaringType = staticImport.getDeclaringType();
-			if (oldImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), false)) {
-				newImportSection.addStaticImport(staticImport);
-			} else {
-				newImportSection.addStaticImport(declaringType, null);
-			}
-		}
 		for (JvmMember extensionImport : typeUsages.getExtensionImports()) {
 			JvmDeclaredType declaringType = extensionImport.getDeclaringType();
 			if (oldImportSection.hasStaticImport(declaringType, extensionImport.getSimpleName(), true)) {
 				newImportSection.addStaticExtensionImport(extensionImport);
 			} else {
 				newImportSection.addStaticExtensionImport(declaringType, null);
+			}
+		}
+		for (JvmMember staticImport : typeUsages.getStaticImports()) {
+			JvmDeclaredType declaringType = staticImport.getDeclaringType();
+			if (oldImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), false)) {
+				if (!newImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), true)) {
+					newImportSection.addStaticImport(staticImport);
+				}
+			} else {
+				if (!newImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), true)) {
+					newImportSection.addStaticImport(declaringType, null);
+				}
 			}
 		}
 		replaceRegions.addAll(newImportSection.rewrite());
