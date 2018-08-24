@@ -256,7 +256,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						}
 						validator = {
 							// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-							// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponsing PropertyPage
+							// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 							generateDeprecationValidation = true
 						}
 						«IF config.junitVersion == JUnitVersion.JUNIT_5»
