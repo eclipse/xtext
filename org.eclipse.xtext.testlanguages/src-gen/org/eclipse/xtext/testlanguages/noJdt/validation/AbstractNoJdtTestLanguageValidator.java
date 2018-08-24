@@ -16,5 +16,4 @@ public abstract class AbstractNoJdtTestLanguageValidator extends AbstractDeclara
 		result.add(org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage.eINSTANCE);
 		return result;
 	}
-	
 }

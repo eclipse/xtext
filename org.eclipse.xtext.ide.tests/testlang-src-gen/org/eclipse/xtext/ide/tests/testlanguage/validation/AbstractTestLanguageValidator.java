@@ -20,5 +20,4 @@ public abstract class AbstractTestLanguageValidator extends AbstractDeclarativeV
 		result.add(org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }

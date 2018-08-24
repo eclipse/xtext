@@ -16,5 +16,4 @@ public abstract class AbstractFileAwareTestLanguageValidator extends AbstractDec
 		result.add(org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage.eINSTANCE);
 		return result;
 	}
-	
 }

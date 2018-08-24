@@ -15,5 +15,4 @@ public abstract class AbstractExBeeLangTestLanguageValidator extends BeeLangTest
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"));
 		return result;
 	}
-	
 }

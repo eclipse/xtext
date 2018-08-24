@@ -16,5 +16,4 @@ public class XtextGrammarTestLanguageValidator extends AbstractDeclarativeValida
 		result.add(org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.XtextGrammarTestPackage.eINSTANCE);
 		return result;
 	}
-	
 }
