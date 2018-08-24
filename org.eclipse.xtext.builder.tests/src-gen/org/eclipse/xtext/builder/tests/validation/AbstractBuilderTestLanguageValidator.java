@@ -16,5 +16,4 @@ public abstract class AbstractBuilderTestLanguageValidator extends AbstractDecla
 		result.add(org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }

@@ -68,7 +68,7 @@ public interface NoTerminalExtensionPackage extends EPackage
   int POLYGON_BASED_SHAPE = 0;
 
   /**
-   * The feature id for the '<em><b>Shape</b></em>' attribute.
+   * The feature id for the '<em><b>Shape</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -107,10 +107,10 @@ public interface NoTerminalExtensionPackage extends EPackage
   EClass getPolygonBasedShape();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedShape#getShape <em>Shape</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedShape#getShape <em>Shape</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Shape</em>'.
+   * @return the meta object for the attribute list '<em>Shape</em>'.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedShape#getShape()
    * @see #getPolygonBasedShape()
    * @generated
@@ -161,7 +161,7 @@ public interface NoTerminalExtensionPackage extends EPackage
     EClass POLYGON_BASED_SHAPE = eINSTANCE.getPolygonBasedShape();
 
     /**
-     * The meta object literal for the '<em><b>Shape</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Shape</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
