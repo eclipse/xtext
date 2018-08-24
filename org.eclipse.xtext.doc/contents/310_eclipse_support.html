@@ -48,7 +48,7 @@ public void configureContentProposalLabelProvider(Binder binder) {
 
 <h4 id="default-eobject-label-provider">DefaultEObjectLabelProvider</h4>
 
-<p>The default implementation of the <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html">ILabelProvider</a> interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides a image filename or the text to be used to represent your model element. Have a look at following example to get a more detailed idea about the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">DefaultEObjectLabelProvider</a>.</p>
+<p>The default implementation of the <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html">ILabelProvider</a> interface utilizes the polymorphic dispatcher idiom to implement an external visitor as the requirements of the label provider are kind of a best match for this pattern. It boils down to the fact that the only thing you need to do is to implement a method that matches a specific signature. It either provides an image filename or the text to be used to represent your model element. Have a look at the following example to get a more detailed idea about the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java">DefaultEObjectLabelProvider</a>.</p>
 
 <pre><code class="language-java">public class SecretCompartmentsLabelProvider 
     extends DefaultLabelProvider {
@@ -67,9 +67,9 @@ public void configureContentProposalLabelProvider(Binder binder) {
 }
 </code></pre>
 
-<p>What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will at first have a look for an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> <em>name</em> and try to use this one. If it cannot find such a feature, it will try to use the first feature that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.</p>
+<p>What is especially nice about the default implementation is the actual reason for its class name: It provides very reasonable defaults. To compute the label for a certain model element, it will first look for an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> <em>name</em> and try to use this one. If it cannot find such a feature, it will try to use the first feature that can be used best as a label. At worst it will return the class name of the model element, which is kind of unlikely to happen.</p>
 
-<p>You can a also customize error handling by overriding the methods <code>handleTextError()</code> or <code>handleImageError()</code>.</p>
+<p>You can also customize error handling by overriding the methods <code>handleTextError()</code> or <code>handleImageError()</code>.</p>
 
 <h3 id="description-label-provider">Label Providers For Index Entries</h3>
 
@@ -235,7 +235,7 @@ public void fixName(final Issue issue,
 
 <p>If you don’t like these defaults you’ll have to subclass <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java">XtextTemplateContextTypeRegistry</a> and configure it via <a href="302_configuration.html#guicemodules">Guice</a>.</p>
 
-<p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> to resolve special variable types in templates. Besides the standard template variables available in <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html">GlobalTemplateVariables</a> like <code>${user}</code>, <code>${date}</code>, <code>${time}</code>, <code>${cursor}</code>, etc., these <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> support the automatic resolving of cross references enumeration values. Both resolvers are explained in the following sections.</p>
+<p>In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set of <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> to resolve special variable types in templates. Besides the standard template variables available in <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html">GlobalTemplateVariables</a> like <code>${user}</code>, <code>${date}</code>, <code>${time}</code>, <code>${cursor}</code>, etc., these <a href="http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html">TemplateVariableResolvers</a> support the automatic resolution of cross references enumeration values. Both resolvers are explained in the following sections.</p>
 
 <p>It is best practice to edit the templates in the preferences page, export them into the <em>templates.xml</em>-file and put this one into the <em>templates</em> folder of your UI-plug-in. However, these templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert an <code>id</code> attribute for each template element. Note that the attribute name is case sensitive. As always in eclipse plug-in development, if the folder <em>templates</em> did not exist before, you have to add it to the <em>bin.includes</em> in your <em>build.properties</em>.</p>
 
@@ -256,7 +256,7 @@ public void fixName(final Issue issue,
     context="org.xtext.example.SecretCompartments.Transition" 
     enabled="true"&gt;
 ${event:CrossReference('Transition.event')} =&gt;
-  ${state:CrossReference('Transition.state')
+  ${state:CrossReference('Transition.state')}
 &lt;/template&gt;
 </code></pre>
 
@@ -268,7 +268,7 @@ ${event:CrossReference('Transition.event')} =&gt;
 
 <p>The syntax is as follows:</p>
 
-<p><code>${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)</code></p>
+<p><code>${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)}</code></p>
 
 <p>For example the following template (taken from another example):</p>
 
@@ -294,11 +294,11 @@ ${public:Enum('Visibility')} entity ${Name} {
 
 <p>In its default implementation, the outline view shows the containment hierarchy of your model. This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e. by omitting a certain kind of node or by introducing additional nodes, you can customize the outline by implementing your own <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java">IOutlineTreeProvider</a>.</p>
 
-<p>If your workflow defines the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/OutlineTreeProviderFragment2.xtend">OutlineTreeProviderFragment2</a>, Xtext generates a stub for your own <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java">IOutlineTreeProvider</a> that allows you to customize every aspect of the outline by inheriting the powerful customization methods of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java">DefaultOutlineTreeProvider</a>. The following sections show how to do fill this stub with life.</p>
+<p>If your workflow defines the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/ui/outline/OutlineTreeProviderFragment2.xtend">OutlineTreeProviderFragment2</a>, Xtext generates a stub for your own <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java">IOutlineTreeProvider</a> that allows you to customize every aspect of the outline by inheriting the powerful customization methods of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java">DefaultOutlineTreeProvider</a>. The following sections show how to fill this stub with life.</p>
 
 <h3 id="influencing-the-outline-structure">Influencing the outline structure</h3>
 
-<p>Each node the outline tree is an instance of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineNode.java">IOutlineNode</a>. The outline tree is always rooted in a <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DocumentRootNode.java">DocumentRootNode</a>. This node is automatically created for you. Its children are the root nodes in the displayed view.</p>
+<p>Each node in the outline tree is an instance of <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineNode.java">IOutlineNode</a>. The outline tree is always rooted in a <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DocumentRootNode.java">DocumentRootNode</a>. This node is automatically created for you. Its children are the root nodes in the displayed view.</p>
 
 <p>An <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java">EObjectNode</a> represents a model element. By default, Xtext creates an <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java">EObjectNode</a> for each model element in the node of its container. Nodes are created by calling the method <code>createNode(parentNode, modelElement)</code> which delegates to <code>createEObjectNode(..)</code> if not specified differently.</p>
 
@@ -318,7 +318,7 @@ parentModelElement)
 }
 </code></pre>
 
-<p>You can choose not to create any node in the <code>_createChildren()</code> method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn’t reveal any children if expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method <code>_isLeaf(modelElement)</code> with the appropriate argument type, e.g.</p>
+<p>You can choose not to create any node in the <code>_createChildren()</code> method. Because the outline nodes are calculated on demand, the UI will show you an expandable node that doesn’t reveal any children even if it is expanded. This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method <code>_isLeaf(modelElement)</code> with the appropriate argument type, e.g.</p>
 
 <pre><code class="language-java">// feature nodes are leafs and not expandable
 protected boolean _isLeaf(Feature feature) {
@@ -326,7 +326,7 @@ protected boolean _isLeaf(Feature feature) {
 }
 </code></pre>
 
-<p>Xtext provides a third type of node: <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java">EStructuralFeatureNode</a>. It is used to represent a feature of a model element rather than element itself. The following simplified snippet from Xtend2 illustrates how to use it:</p>
+<p>Xtext provides a third type of node: <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.java">EStructuralFeatureNode</a>. It is used to represent a feature of a model element rather than the element itself. The following simplified snippet from Xtend2 illustrates how to use it:</p>
 
 <pre><code class="language-java">protected void _createChildren(DocumentRootNode parentNode, 
                                XtendFile xtendFile) {
@@ -381,7 +381,7 @@ protected TextStyle getTypeTextStyle() {
 
 <h3 id="filtering-actions">Filtering actions</h3>
 
-<p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java">AbstractFilterOutlineContribution</a> to ensure that the action toggle state is handled correctly. Here is an example form our domain model example:</p>
+<p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add a filter action to your outline. Filter actions must extend <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.java">AbstractFilterOutlineContribution</a> to ensure that the action toggle state is handled correctly. Here is an example from our domain model example:</p>
 
 <pre><code class="language-java">public class FilterOperationsContribution 
     extends AbstractFilterOutlineContribution {
@@ -543,7 +543,7 @@ public Class&lt;? extends IComparator&gt;
 
 <p>The semantic highlighting stage is executed asynchronously in the background and can be used to calculate highlighting states based on the meaning of the different model elements. Users of the editor will notice a very short delay after they have edited the text until the styles are actually applied to the document. This keeps the editor responsive while providing aid when reading and writing your model.</p>
 
-<p>As for the lexical highlighting the interface to register the available styles is the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a>. The <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java">ISemanticHighlightingCalculator</a> is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model elements.</p>
+<p>As for the lexical highlighting the interface to register the available styles is the <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java">IHighlightingConfiguration</a>. The <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java">ISemanticHighlightingCalculator</a> is the primary hook to implement the logic that will compute the to-be-highlighted ranges based on the model elements.</p>
 
 <p>The framework will pass the current <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> and an <a href="https://github.com/eclipse/xtext-eclipse/blob/master/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java">IHighlightedPositionAcceptor</a> to the calculator. It is ensured that the resource will not be altered externally until the called method <code>provideHighlightingFor()</code> returns. However, the resource may be <code>null</code> in case of errors in the model. The implementor’s task is to navigate the semantic model and compute various ranges based on the attached node information and associate styles with them. This may read similar to the following snippet:</p>
 
