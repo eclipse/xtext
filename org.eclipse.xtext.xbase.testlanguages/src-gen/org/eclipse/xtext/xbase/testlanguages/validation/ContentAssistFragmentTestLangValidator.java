@@ -19,5 +19,4 @@ public class ContentAssistFragmentTestLangValidator extends XbaseValidator {
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/xbase/Xtype"));
 		return result;
 	}
-	
 }
