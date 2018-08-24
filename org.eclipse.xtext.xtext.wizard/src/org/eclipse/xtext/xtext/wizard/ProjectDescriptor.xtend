@@ -43,7 +43,7 @@ abstract class ProjectDescriptor {
 	/**
 	 * @since 2.15 (changed return value use 'path' of 'SourceFolderDescriptor' to get same result as before)
 	 */
-	def getSourceFolders() {
+	def Set<SourceFolderDescriptor> getSourceFolders() {
 		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map [
 			new SourceFolderDescriptor(sourceFolder, isTest)
 		].toSet
