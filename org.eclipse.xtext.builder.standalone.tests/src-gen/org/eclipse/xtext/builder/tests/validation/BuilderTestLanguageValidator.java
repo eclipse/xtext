@@ -16,5 +16,4 @@ public class BuilderTestLanguageValidator extends AbstractDeclarativeValidator {
 		result.add(org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }

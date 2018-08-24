@@ -24,10 +24,11 @@ Export-Package: org.eclipse.xtext.enumrules,
  org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal,
  org.eclipse.xtext.generator.grammarAccess.serializer,
  org.eclipse.xtext.generator.grammarAccess.services
-Require-Bundle: org.antlr.runtime,
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.xtext.extras.tests
