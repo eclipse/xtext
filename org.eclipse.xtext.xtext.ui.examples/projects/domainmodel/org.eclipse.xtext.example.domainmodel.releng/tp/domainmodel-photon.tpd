@@ -41,9 +41,3 @@ location "http://download.eclipse.org/tools/orbit/downloads/drops/R2018060614512
 location "http://download.eclipse.org/tools/gef/updates/legacy/releases" {
 	org.eclipse.draw2d.feature.group	
 }
-
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/xpand/R201406030414" {
-	org.eclipse.xpand
-	org.eclipse.xtend
-	org.eclipse.xtend.typesystem.emf	
-}
