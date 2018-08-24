@@ -20,5 +20,4 @@ public abstract class AbstractIndentationAwareUiTestLanguageValidator extends Ab
 		result.add(org.eclipse.xtext.ide.tests.testlanguage.indentationAwareUiTestLanguage.IndentationAwareUiTestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }

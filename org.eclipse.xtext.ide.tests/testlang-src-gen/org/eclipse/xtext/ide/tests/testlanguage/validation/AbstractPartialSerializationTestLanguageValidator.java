@@ -21,5 +21,4 @@ public abstract class AbstractPartialSerializationTestLanguageValidator extends 
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/emf/2002/Ecore"));
 		return result;
 	}
-	
 }

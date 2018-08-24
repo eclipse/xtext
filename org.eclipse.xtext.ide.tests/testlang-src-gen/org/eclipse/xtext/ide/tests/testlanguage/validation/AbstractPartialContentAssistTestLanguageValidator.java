@@ -20,5 +20,4 @@ public abstract class AbstractPartialContentAssistTestLanguageValidator extends 
 		result.add(org.eclipse.xtext.ide.tests.testlanguage.partialContentAssistTestLanguage.PartialContentAssistTestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }

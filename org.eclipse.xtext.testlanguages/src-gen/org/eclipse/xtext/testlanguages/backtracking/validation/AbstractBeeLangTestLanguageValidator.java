@@ -16,5 +16,4 @@ public abstract class AbstractBeeLangTestLanguageValidator extends AbstractDecla
 		result.add(org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage.eINSTANCE);
 		return result;
 	}
-	
 }
