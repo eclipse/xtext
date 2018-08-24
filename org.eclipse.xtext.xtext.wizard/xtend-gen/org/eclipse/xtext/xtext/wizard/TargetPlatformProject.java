@@ -107,12 +107,17 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<unit id=\"org.eclipse.xpand\" version=\"0.0.0\"/>");
-    _builder.newLine();
-    _builder.append("<unit id=\"org.eclipse.xtend\" version=\"0.0.0\"/>");
-    _builder.newLine();
-    _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
-    _builder.newLine();
+    {
+      boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
+      if (_isFromExistingEcoreModels) {
+        _builder.append("<unit id=\"org.eclipse.xpand\" version=\"0.0.0\"/>");
+        _builder.newLine();
+        _builder.append("<unit id=\"org.eclipse.xtend\" version=\"0.0.0\"/>");
+        _builder.newLine();
+        _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
+        _builder.newLine();
+      }
+    }
     _builder.append("<repository location=\"http://download.eclipse.org/releases/2018-09\"/>");
     _builder.newLine();
     _builder.append("</location>");
