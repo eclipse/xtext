@@ -126,7 +126,7 @@ The Xtend compiler version used in the build should be the current snapshot or t
 Build jobs for releases must be executed in proper order on the build server, i.e. from upstream to downstream jobs. For every upstream change, the downstream jobs must be retriggered manually.
 
 1. Make sure all repositories are on branch `master`.
-1. Make sure the docs plugins in `xtext-eclipse` and `xtext-xtend` are up to date (run ant script in the plugins that copy over the docs from `xtext`)
+1. Make sure the docs plugins in `xtext-eclipse` and `xtext-xtend` are up to date (run ant scripts `xtext-eclipse/org.eclipse.xtext.doc/gen_eclipse_help_xtext.launch` and `xtext-xtend/org.eclipse.xtend.doc/gen_eclipse_help_xtend.launch` in the plugins that copy over the docs from `xtext`)
 2. xtext-umbrella
    * `export BRANCHNAME=<BRANCHNAME>`
    * `export TAGNAME=v<VERSION>`
