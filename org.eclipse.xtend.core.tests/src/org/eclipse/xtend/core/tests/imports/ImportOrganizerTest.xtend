@@ -2436,4 +2436,67 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	} 
+
+	@Test def test_xtext_xtend_issues_536_1() {
+		'''
+			import org.eclipse.emf.ecore.EObject
+			
+			import static extension org.eclipse.emf.ecore.util.EcoreUtil.getURI
+			
+			class Test {
+				
+				def void doSomething() {
+					val EObject e = null
+					val a = e.URI // Extended call
+					val b = getURI(e) // Static call
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.EObject
+			
+			import static extension org.eclipse.emf.ecore.util.EcoreUtil.getURI
+			
+			class Test {
+				
+				def void doSomething() {
+					val EObject e = null
+					val a = e.URI // Extended call
+					val b = getURI(e) // Static call
+				}
+			}
+		''')
+	} 
+
+
+	@Test def test_xtext_xtend_issues_536_2() {
+		'''
+			import org.eclipse.emf.ecore.EObject
+			
+			import static org.eclipse.emf.ecore.util.EcoreUtil.*
+			
+			import static extension org.eclipse.emf.ecore.util.EcoreUtil.getURI
+			
+			class Test {
+				
+				def void doSomething() {
+					val EObject e = null
+					val a = e.URI // Extended call
+					val b = getURI(e) // Static call
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import org.eclipse.emf.ecore.EObject
+			
+			import static extension org.eclipse.emf.ecore.util.EcoreUtil.getURI
+			
+			class Test {
+				
+				def void doSomething() {
+					val EObject e = null
+					val a = e.URI // Extended call
+					val b = getURI(e) // Static call
+				}
+			}
+		''')
+	} 
 }
