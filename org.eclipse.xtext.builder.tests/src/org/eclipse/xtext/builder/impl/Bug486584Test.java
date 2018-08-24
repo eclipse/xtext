@@ -34,12 +34,15 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import com.google.common.io.Files;
 
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
+// TODO https://github.com/eclipse/xtext-eclipse/issues/606
+@Ignore("https://github.com/eclipse/xtext-eclipse/issues/606")
 public class Bug486584Test extends AbstractBuilderTest {
 
 	private static final String PROJECT_NAME = "foo";
