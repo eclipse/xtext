@@ -95,7 +95,7 @@
 <p>There are some limitations to the concrete syntax validator which result from the fact that it treats the grammar as declarative, which is something the parser doesn’t always do.</p>
 
 <ul>
-  <li>Grammar rules containing assigned actions (e.g. <code>{MyType.myFeature=current}</code> are ignored. Unassigned actions (e.g. <code>{MyType}</code>), however, are supported.</li>
+  <li>Grammar rules containing assigned actions (e.g. <code>{MyType.myFeature=current}</code>) are ignored. Unassigned actions (e.g. <code>{MyType}</code>), however, are supported.</li>
   <li>Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule calls are ignored.</li>
   <li>Orders within list-features cannot be validated. e.g. <code>Rule: (foo+=R1 foo+=R2)*</code> implies that <em>foo</em> is expected to contain instances of <em>R1</em> and <em>R2</em> in an alternating order.</li>
 </ul>
@@ -108,17 +108,17 @@ def Class&lt;? extends ConcreteSyntaxEValidator&gt; bindConcreteSyntaxEValidator
 }
 </code></pre>
 
-<p>To customize error messages please see <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxDiagnosticProvider.java">IConcreteSyntaxDiagnosticProvider</a> and subclass <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxDiagnosticProvider.java">ConcreteSyntaxDiagnosticProvider</a>.</p>
+<p>To customize the error messages please see <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxDiagnosticProvider.java">IConcreteSyntaxDiagnosticProvider</a> and subclass <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxDiagnosticProvider.java">ConcreteSyntaxDiagnosticProvider</a>.</p>
 
 <h3 id="custom-validation">Custom Validation</h3>
 
-<p>In addition to the afore mentioned kinds of validation, which are more or less done automatically, you can specify additional constraints specific for your Ecore model. The Xtext language generator will provide you with two Java classes. The first is an abstract class generated to <em>src-gen/</em> which extends the library class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a>. This one just registers the EPackages for which this validator introduces constraints. The other class is a subclass of that abstract class and is generated to the <em>src/</em> folder in order to be edited by you. That is where you put the constraints in.</p>
+<p>In addition to the afore mentioned kinds of validation, which are more or less done automatically, you can specify additional constraints specific for your Ecore model. The Xtext language generator will provide you two Java classes. The first is an abstract class generated to <em>src-gen/</em> which extends the library class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a>. This one just registers the EPackages for which this validator introduces constraints. The other class is a subclass of that abstract class and is generated to the <em>src/</em> folder in order to be edited by you. That is where you put the constraints in.</p>
 
 <p>The purpose of the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java">AbstractDeclarativeValidator</a> is to allow you to write constraints in a declarative way - as the class name already suggests. That is instead of writing exhaustive if-else constructs or extending the generated EMF switch you just have to add the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation to any method and it will be invoked automatically when validation takes place. Moreover you can state for what type the respective constraint method is, just by declaring a typed parameter. This also lets you avoid any type casts. In addition to the reflective invocation of validation methods the AbstractDeclarativeValidator provides a few convenient assertions.</p>
 
-<p>The Check annotation has a parameter that can be used to declare when a check should be run, <em>FAST</em> will be run whenever a file is modified, <em>NORMAL</em> checks will run when saving the file, and <em>EXPENSIVE</em> checks are run when explicitly validating the file via the menu option.</p>
+<p>The Check annotation has a parameter that can be used to declare when a check should run: <em>FAST</em> will run whenever a file is modified, <em>NORMAL</em> checks will run when saving the file, and <em>EXPENSIVE</em> checks will run when explicitly validating the file via the menu option.</p>
 
-<p>All in all this is very similar to how JUnit 4 works. Here is an example written in Xtend:</p>
+<p>All in all this is very similar to how JUnit works. Here is an example written in Xtend:</p>
 
 <pre><code class="language-xtend">class DomainmodelValidator extends AbstractDomainmodelValidator {
     
@@ -251,7 +251,7 @@ Element:
 }
 </code></pre>
 
-<p>There are different useful implementations for IScopes shipped with Xtext. We want to mention only some of them here.</p>
+<p>There are different useful implementations for IScope shipped with Xtext. We want to mention only some of them here.</p>
 
 <p>The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MapBasedScope.java">MapBasedScope</a> comes with the efficiency of a map to look up a certain name. If you prefer to deal with Multimaps the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/MultimapBasedScope.java">MultimapBasedScope</a> should work for you. For situations where some elements should be filtered out of an existing scope, the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/FilteringScope.java">FilteringScope</a> is the right way to go. As scopes can be nested, we strongly recommend to use FilteringScope only for leaf scopes without nested scopes.</p>
 
@@ -319,7 +319,7 @@ def void printExportedObjects(Resource resource) {
 
 <p>Instead of explicitly referring to imported resources, another option is to have some kind of external configuration in order to define what is visible from outside a resource. Java for instance uses the notion of the class path to define containers (jars and class folders) which contain referenceable elements. In the case of Java the order of such entries is also important.</p>
 
-<p>To enable support for this kind of global scoping in Xtext, a <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java">DefaultGlobalScopeProvider</a> has to be bound to the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a> interface. By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: you can reuse the infrastructure without using Java and be independent from the JDT.</p>
+<p>To enable support for this kind of global scoping in Xtext, a <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java">DefaultGlobalScopeProvider</a> has to be bound to the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">IGlobalScopeProvider</a> interface. By default Xtext leverages the class path mechanism since it is well designed and already understood by most of our users. The available tooling provided by JDT and PDE to configure the class path adds even more value. However, it is just a default: you can reuse the infrastructure without using Java and be independent of the JDT.</p>
 
 <p>In order to know what is available in the “world”, a global scope provider which relies on external configuration needs to read that configuration in and be able to find all candidates for a certain <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReference</a>. If you don’t want to force users to have a folder and file name structure reflecting the actual qualified names of the referenceable <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a>, you’ll have to load all resources up front and either keep holding them in memory or remember all information which is needed for the resolution of cross-references. In Xtext that information is provided by a so-called <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">IEObjectDescription</a>.</p>
 
@@ -329,7 +329,7 @@ def void printExportedObjects(Resource resource) {
 
 <p>The index is basically a flat list of instances of <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>. The index itself doesn’t know about visibility constraints due to class path restriction. Rather than that, they are defined by the referencing language by means of so called <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainers</a>: While Java might load a resource via <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html">ClassLoader.loadResource()</a> (i.e. using the class path mechanism), another language could load the same resource using the file system paths.</p>
 
-<p>Consequently, the information which container a resource belongs to depends on the referencing context. Therefore an <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">IResourceServiceProvider</a> provides another interesting service, which is called <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer.Manager</a>. For a given <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>, the Manager provides you with the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer</a> as well as with a list of all IContainers which are visible from there. Note that the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">index</a> is globally shared between all languages while the Manager, which adds the semantics of containers, can be very different depending on the language. The following method lists all resources visible from a given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource</a>:</p>
+<p>Consequently, the information which container a resource belongs to depends on the referencing context. Therefore an <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java">IResourceServiceProvider</a> provides another interesting service, which is called <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer.Manager</a>. For a given <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java">IResourceDescription</a>, the Manager provides you the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java">IContainer</a> as well as a list of all IContainers which are visible from there. Note that the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java">index</a> is globally shared between all languages while the Manager, which adds the semantics of containers, can be very different depending on the language. The following method lists all resources visible from a given <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Resource</a>:</p>
 
 <pre><code class="language-xtend">@Inject IContainer.Manager manager
  
@@ -502,7 +502,7 @@ def IValueConverter&lt;MyDataType&gt; getMyRuleNameConverter() {
 
 <p>If you use the common terminals grammar <code>org.eclipse.xtext.common.Terminals</code> you should extend the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/common/services/DefaultTerminalConverters.java">DefaultTerminalConverters</a> and override or add value converters by adding the respective methods. In addition to the explicitly defined converters in the default implementation, a delegating converter is registered for each available <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EDataType.java">EDataType</a>. The delegating converter reuses the functionality of the corresponding EMF <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EFactory.java">EFactory</a>.</p>
 
-<p>Many languages introduce a concept for qualified names, i.e. names composed of namespaces separated by a delimiter. Since this is such a common use case, Xtext provides an extensible converter implementation for qualified names. The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/QualifiedNameValueConverter.java">QualifiedNameValueConverter</a> handles comments and white space gracefully and is capable to use the appropriate value converter for each segment of a qualified name. This allows for individually quoted segments. The domainmodel example shows how to use it.</p>
+<p>Many languages introduce a concept for qualified names, i.e. names composed of namespaces separated by a delimiter. Since this is such a common use case, Xtext provides an extensible converter implementation for qualified names. The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/QualifiedNameValueConverter.java">QualifiedNameValueConverter</a> handles comments and white spaces gracefully and is capable to use the appropriate value converter for each segment of a qualified name. This allows for individually quoted segments. The domainmodel example shows how to use it.</p>
 
 <p>The protocol of an <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java">IValueConverter</a> allows to throw a <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/ValueConverterException.java">ValueConverterException</a> if something went wrong. The exception is propagated as a syntax error by the parser or as a validation problem by the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxValidator.java">ConcreteSyntaxValidator</a> if the value cannot be converted to a valid string. The <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractLexerBasedConverter.java">AbstractLexerBasedConverter</a> is useful when implementing a custom value converter. If the converter needs to know about the rule that it currently works with, it may implement the interface <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java">RuleSpecific</a>. The framework will set the rule such that the implementation can use it afterwards.</p>
 
@@ -615,7 +615,7 @@ terminal Plural:
   'item' | 'items';
 </code></pre>
 
-<p>Valid models for this example are <code>contents 1 item</code> or `contents 5 items. However, it is not stored in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact that the rule call <em>Plural</em> is unassigned. However, the <a href="#parse-tree-constructor">parse tree constructor</a> needs to decide which value to write during serialization. This decision can be be made by customizing the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java">IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</a>.</p>
+<p>Valid models for this example are <code>contents 1 item</code> or <code>contents 5 items</code>. However, it is not stored in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact that the rule call <em>Plural</em> is unassigned. However, the <a href="#parse-tree-constructor">parse tree constructor</a> needs to decide which value to write during serialization. This decision can be be made by customizing the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java">IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)</a>.</p>
 
 <h3 id="cross-reference-serializer">Cross-Reference Serializer</h3>
 
@@ -623,7 +623,7 @@ terminal Plural:
 
 <h3 id="hidden-token-merger">Merge White Space</h3>
 
-<p>After the <a href="#parse-tree-constructor">parse tree constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, and the <a href="#comment-associater">comment associator</a> has done its work, existing white space form the node model is merged into the stream.</p>
+<p>After the <a href="#parse-tree-constructor">parse tree constructor</a> has done its job to create a stream of tokens which are to be written to the textual representation, and the <a href="#comment-associater">comment associator</a> has done its work, the existing white spaces from the node model are merged into the stream.</p>
 
 <p>The strategy is as follows: If two tokens follow each other in the stream and the corresponding nodes in the node model follow each other as well, then the white space information in between is kept. In all other cases it is up to the <a href="#formatting">formatter</a> to calculate new white space information.</p>
 
@@ -724,31 +724,53 @@ terminal Plural:
 
 <h2 id="testing">Unit Testing</h2>
 
-<p>Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates test projects for that purpose, which simplify the setup procedure for the basic language implementation as well as platform-specific integrations.</p>
+<p>Automated tests are crucial for the maintainability and the quality of a software product. That is why it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates test projects for that purpose, which simplify the setup procedure for the basic language implementation as well as platform-specific integrations. It supports an option to either create your tests for JUnit 4 or JUnit 5. Depending on your choice your test layout will vary in some details.</p>
 
 <h3 id="creating-a-simple-test-class">Creating a Simple Test Class</h3>
 
-<p>The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:</p>
+<p>The core of the test infrastructure for JUnit 4 is the <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations. Your test cases should be annotated with <a href="https://github.com/junit-team/junit4/blob/master/src/main/java/org/junit/Test.java">org.junit.Test</a>. A static import <a href="https://github.com/junit-team/junit4/blob/master/src/main/java/org/junit/Assert.java">org.junit.Assert</a> makes your tests more readable.</p>
 
-<pre><code class="language-xtend">import org.eclipse.xtext.junit4.XtextRunner
+<pre><code class="language-xtend">import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.junit.runner.RunWith
+import org.junit.Test
+import static org.junit.Assert.*
 import org.example.domainmodel.DomainmodelInjectorProvider
 
 @InjectWith(DomainmodelInjectorProvider)
 @RunWith(XtextRunner)
 class ParserTest {
-    
+    @Test void simple() {
+        assertTrue(true)
+    }
 }
 </code></pre>
 
 <p>This configuration will make sure that you can use dependency injection in your test class, and that the global EMF registries are properly populated before and cleaned up after each test.</p>
 
+<p>A test class for JUnit 5 looks quite similar. Instead of runners JUnit 5 has a notion of <a href="https://junit.org/junit5/docs/current/user-guide/#extensions">Extensions</a>. While there can only be one runner per test class for JUnit 4 there could be multiple extensions for JUnit 5. The replacement for the XtextRunner is the new <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/extensions/InjectionExtension.java">InjectionExtension</a>. Still needed is the language specific <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java">IInjectorProvider</a>. Instead of <code>org.junit.Test</code> you have to annotate your cases with <a href="https://github.com/junit-team/junit5/blob/master/junit-jupiter-api/src/main/java/org/junit/jupiter/api/Test.java">org.junit.jupiter.api.Test</a> and import the methods from <a href="https://github.com/junit-team/junit5/blob/master/junit-jupiter-api/src/main/java/org/junit/jupiter/api/Assertions.java">org.junit.jupiter.api.Assertions</a>. A simple test class for JUnit 5 will then look like this:</p>
+
+<pre><code class="language-xtend">import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.extensions.InjectionExtension
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.Test
+import static org.junit.jupiter.api.Assertions.*
+import org.example.domainmodel.DomainmodelInjectorProvider
+
+@InjectWith(DomainmodelInjectorProvider)
+@ExtendWith(InjectionExtension)
+class ParserTest {
+    @Test void simple() {
+        assertTrue(true)
+    }
+}
+</code></pre>
+
 <h3 id="testing-the-parser">Testing the Parser</h3>
 
-<p>The class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards. A static import of <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> leads to concise and readable test cases.</p>
+<p>The class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/util/ParseHelper.java">ParseHelper</a> allows to parse an arbitrary string into an AST model. The AST model itself can be traversed and checked afterwards.</p>
 
-<pre><code class="language-xtend">import org.eclipse.xtext.junit4.util.ParseHelper
-import static org.junit.Assert.*
-
+<pre><code class="language-xtend">import org.eclipse.xtext.testing.util.ParseHelper
 ...
 
 @Inject ParseHelper&lt;Domainmodel&gt; parser
@@ -797,7 +819,8 @@ def void testLowercaseName() {
     }
 }
 
-@RunWith(XtextRunner)
+// @RunWith(XtextRunner) // JUnit 4
+@ExtendWith(InjectionExtension) // JUnit 5
 @InjectWith(MyLanguageWithDependenciesInjectorProvider)
 class YourTest {
     ...
