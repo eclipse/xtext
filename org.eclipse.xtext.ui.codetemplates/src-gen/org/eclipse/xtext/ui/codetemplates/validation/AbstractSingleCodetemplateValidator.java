@@ -15,5 +15,4 @@ public abstract class AbstractSingleCodetemplateValidator extends CodetemplatesV
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/codetemplate/Codetemplates"));
 		return result;
 	}
-	
 }

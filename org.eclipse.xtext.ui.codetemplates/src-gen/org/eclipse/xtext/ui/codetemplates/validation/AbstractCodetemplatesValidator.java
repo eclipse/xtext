@@ -16,5 +16,4 @@ public abstract class AbstractCodetemplatesValidator extends AbstractDeclarative
 		result.add(org.eclipse.xtext.ui.codetemplates.templates.TemplatesPackage.eINSTANCE);
 		return result;
 	}
-	
 }

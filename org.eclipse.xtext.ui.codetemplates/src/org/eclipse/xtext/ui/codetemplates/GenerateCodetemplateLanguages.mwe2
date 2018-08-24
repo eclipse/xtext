@@ -81,6 +81,10 @@ Workflow {
 			junitSupport = {
 				generateStub = false
 			}
+			
+			renameRefactoring = {
+				useChangeSerializer = false
+			}
 		}
 		language = StandardLanguage {
 			name = "org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
