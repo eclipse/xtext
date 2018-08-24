@@ -199,7 +199,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
 
     // Initialize classes and features; add operations and parameters
     initEClass(polygonBasedShapeEClass, PolygonBasedShape.class, "PolygonBasedShape", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPolygonBasedShape_Shape(), this.getPolygonBasedNodeShape(), "shape", null, 0, 1, PolygonBasedShape.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPolygonBasedShape_Shape(), this.getPolygonBasedNodeShape(), "shape", null, 0, -1, PolygonBasedShape.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(polygonBasedNodeShapeEEnum, PolygonBasedNodeShape.class, "PolygonBasedNodeShape");

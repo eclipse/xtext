@@ -16,5 +16,4 @@ public abstract class AbstractReferringTestLanguageValidator extends AbstractDec
 		result.add(org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage.eINSTANCE);
 		return result;
 	}
-	
 }

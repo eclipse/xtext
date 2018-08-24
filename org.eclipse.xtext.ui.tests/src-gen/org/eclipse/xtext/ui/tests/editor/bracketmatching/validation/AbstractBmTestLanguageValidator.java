@@ -16,5 +16,4 @@ public abstract class AbstractBmTestLanguageValidator extends AbstractDeclarativ
 		result.add(org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage.eINSTANCE);
 		return result;
 	}
-	
 }

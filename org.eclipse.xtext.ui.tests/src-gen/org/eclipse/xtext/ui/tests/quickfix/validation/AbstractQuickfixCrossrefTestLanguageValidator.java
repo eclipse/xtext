@@ -16,5 +16,4 @@ public abstract class AbstractQuickfixCrossrefTestLanguageValidator extends Abst
 		result.add(org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage.eINSTANCE);
 		return result;
 	}
-	
 }

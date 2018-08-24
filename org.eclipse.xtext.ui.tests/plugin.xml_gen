@@ -9095,15 +9095,6 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.TestLanguage"
-			class="org.eclipse.xtext.ui.tests.ui.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.TestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_TestLanguage"/>
-		</page>
-	</extension>
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
@@ -9351,15 +9342,6 @@
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
-	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.FoldingTestLanguage"
-			class="org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.FoldingTestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.ui.keyword_FoldingTestLanguage"/>
-		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.editors">
@@ -9609,15 +9591,6 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage"
-			class="org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"/>
-		</page>
-	</extension>
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
@@ -9865,15 +9838,6 @@
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
-	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage"
-			class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.quickfix.ui.keyword_QuickfixCrossrefTestLanguage"/>
-		</page>
 	</extension>
 	<!-- quickfix marker resolution generator for org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage -->
 	<extension
@@ -10150,15 +10114,6 @@
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
-	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"
-			class="org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_RefactoringTestLanguage"/>
-		</page>
 	</extension>
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
@@ -10441,15 +10396,6 @@
 			point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
-	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage"
-			class="org.eclipse.xtext.ui.tests.refactoring.ui.ReferringTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.ui.tests.refactoring.ui.keyword_ReferringTestLanguage"/>
-		</page>
 	</extension>
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">

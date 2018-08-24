@@ -210,6 +210,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="buildertestlanguage"
+			id="org.eclipse.xtext.builder.tests.BuilderTestLanguage.contenttype"
+			name="BuilderTestLanguage File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -366,12 +375,18 @@
 			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="buildertestlanguage">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.builder.tests.BuilderTestLanguage.contenttype"
+			contentViewerId="org.eclipse.xtext.builder.tests.BuilderTestLanguage.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.builder.tests.BuilderTestLanguage.compare.contentMergeViewers"
 			class="org.eclipse.xtext.builder.tests.ui.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="buildertestlanguage" label="BuilderTestLanguage Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.builder.tests.BuilderTestLanguage.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.builder.tests.BuilderTestLanguage.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.builder.tests.BuilderTestLanguage.editors.documentProviders"

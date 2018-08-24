@@ -16,5 +16,4 @@ public abstract class AbstractFoldingTestLanguageValidator extends AbstractDecla
 		result.add(org.eclipse.xtext.ui.tests.folding.FoldingPackage.eINSTANCE);
 		return result;
 	}
-	
 }

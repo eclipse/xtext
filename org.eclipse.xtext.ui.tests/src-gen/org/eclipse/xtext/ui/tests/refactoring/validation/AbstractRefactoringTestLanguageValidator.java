@@ -16,5 +16,4 @@ public abstract class AbstractRefactoringTestLanguageValidator extends AbstractD
 		result.add(org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage.eINSTANCE);
 		return result;
 	}
-	
 }

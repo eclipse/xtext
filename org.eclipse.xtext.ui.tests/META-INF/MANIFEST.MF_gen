@@ -207,7 +207,7 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.testlanguages.tests;x-internal=true,
  org.eclipse.xtext.ui.tests.tests;x-internal=true,
  org.eclipse.xtext.ui.tests.validation
-Require-Bundle: org.antlr.runtime,
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.xtext,
