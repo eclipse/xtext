@@ -270,10 +270,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		'''
 	}
 	
-	private def isFromExistingEcoreModels() {
-		!config.ecore2Xtext.EPackageInfos.isEmpty
-	}
-	
 	override buildGradle() {
 		super.buildGradle => [
 			additionalContent = '''

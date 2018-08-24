@@ -333,6 +333,11 @@ public abstract class ProjectDescriptor {
     return new BinaryFile(outlet, relativePath, this, false, url);
   }
   
+  protected boolean isFromExistingEcoreModels() {
+    boolean _isEmpty = this.config.getEcore2Xtext().getEPackageInfos().isEmpty();
+    return (!_isEmpty);
+  }
+  
   public ProjectDescriptor(final WizardConfiguration config) {
     super();
     this.config = config;

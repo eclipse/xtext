@@ -566,11 +566,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     return _builder;
   }
   
-  private boolean isFromExistingEcoreModels() {
-    boolean _isEmpty = this.getConfig().getEcore2Xtext().getEPackageInfos().isEmpty();
-    return (!_isEmpty);
-  }
-  
   @Override
   public GradleBuildFile buildGradle() {
     GradleBuildFile _buildGradle = super.buildGradle();

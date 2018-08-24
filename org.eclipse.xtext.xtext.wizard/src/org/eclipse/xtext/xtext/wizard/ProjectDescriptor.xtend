@@ -190,4 +190,8 @@ abstract class ProjectDescriptor {
 	protected def binaryFile(Outlet outlet, String relativePath, URL url) {
 		return new BinaryFile(outlet, relativePath, this, false, url)
 	}
+
+	protected def isFromExistingEcoreModels() {
+		!config.ecore2Xtext.EPackageInfos.isEmpty
+	}
 }
