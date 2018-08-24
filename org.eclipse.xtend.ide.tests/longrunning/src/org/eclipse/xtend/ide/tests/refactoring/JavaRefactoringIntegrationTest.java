@@ -538,7 +538,8 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		String xtendModel = "class XtendClass { val baz = null def setFoo(Object x) {} def bar() { foo=null } }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 		final XtextEditor editor = openEditorSafely(xtendClass);
-		renameXtendElementWithError(editor, xtendModel.indexOf("setFoo"), "setBaz");
+		renameXtendElement(editor, xtendModel.indexOf("setFoo"), "setBaz");
+		assertDocumentContains(editor, xtendModel.replace("setFoo", "setBaz").replace("foo", "setBaz"));
 	}
 
 	@Test

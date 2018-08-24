@@ -205,6 +205,132 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testBug514() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package obviously.not.the.correct.pkg.name|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void doThing() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Object e = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("e.URI");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getURI(Object o){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("test/Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_PACKAGE).assertResolutionLabels("Change package declaration to \'test\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package test");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void doThing() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val Object e = null");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("e.URI");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void getURI(Object o){}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void testAssignmentBug514() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package obviously.not.the.correct.pkg.name|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Test {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void doThing() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Object e = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val uri = e.URI");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println(uri)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getURI(Object o){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _assertResolutionLabels = this.builder.create("test/Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_PACKAGE).assertResolutionLabels("Change package declaration to \'test\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package test");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Test {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void doThing() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val Object e = null");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val uri = e.URI");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("println(uri)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void getURI(Object o){}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void fixPackageName_0() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("|class Foo {");
