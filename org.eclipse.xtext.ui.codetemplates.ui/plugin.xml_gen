@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="codetemplates"
+			id="org.eclipse.xtext.ui.codetemplates.Codetemplates.contenttype"
+			name="Codetemplates File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -388,12 +397,18 @@
 			class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="codetemplates">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.ui.codetemplates.Codetemplates.contenttype"
+			contentViewerId="org.eclipse.xtext.ui.codetemplates.Codetemplates.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.ui.codetemplates.Codetemplates.compare.contentMergeViewers"
 			class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="codetemplates" label="Codetemplates Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.ui.codetemplates.Codetemplates.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.ui.codetemplates.Codetemplates.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.ui.codetemplates.Codetemplates.editors.documentProviders"
@@ -610,6 +625,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="___singlecodetemplate"
+			id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.contenttype"
+			name="SingleCodetemplate File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -794,12 +818,18 @@
 			class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="___singlecodetemplate">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.contenttype"
+			contentViewerId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.compare.contentMergeViewers"
 			class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="___singlecodetemplate" label="SingleCodetemplate Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.contenttype"
+			contentMergeViewerId="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.editors.documentProviders"

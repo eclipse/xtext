@@ -33,7 +33,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		private final Assignment cTemplatesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTemplatesCodetemplateParserRuleCall_3_0 = (RuleCall)cTemplatesAssignment_3.eContents().get(0);
 		
-		//@ Override Codetemplates:
+		//@Override
+		//Codetemplates:
 		//	'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -76,7 +77,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		private final Assignment cBodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cBodyTemplateBodyWithQuotesParserRuleCall_3_0 = (RuleCall)cBodyAssignment_3.eContents().get(0);
 		
-		//@ Override Codetemplate:
+		//@Override
+		//Codetemplate:
 		//	name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -122,7 +124,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cGreaterThanSignGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cTemplateBodyParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		//@ Override TemplateBodyWithQuotes TemplateBody hidden():
+		//@Override
+		//TemplateBodyWithQuotes TemplateBody hidden():
 		//	'>>' // EOL
 		//	TemplateBody;
 		@Override public ParserRule getRule() { return rule; }
@@ -145,7 +148,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		private final RuleCall cANY_OTHERTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//@ Override LiteralValue hidden():
+		//@Override
+		//LiteralValue hidden():
 		//	(WS | ANY_OTHER | ID)+;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -210,7 +214,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	
-	//@ Override Codetemplates:
+	//@Override
+	//Codetemplates:
 	//	'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate;
 	public CodetemplatesElements getCodetemplatesAccess() {
 		return pCodetemplates;
@@ -220,7 +225,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		return getCodetemplatesAccess().getRule();
 	}
 	
-	//@ Override Codetemplate:
+	//@Override
+	//Codetemplate:
 	//	name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
 	public CodetemplateElements getCodetemplateAccess() {
 		return pCodetemplate;
@@ -230,7 +236,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		return getCodetemplateAccess().getRule();
 	}
 	
-	//@ Override TemplateBodyWithQuotes TemplateBody hidden():
+	//@Override
+	//TemplateBodyWithQuotes TemplateBody hidden():
 	//	'>>' // EOL
 	//	TemplateBody;
 	public TemplateBodyWithQuotesElements getTemplateBodyWithQuotesAccess() {
@@ -241,7 +248,8 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		return getTemplateBodyWithQuotesAccess().getRule();
 	}
 	
-	//@ Override LiteralValue hidden():
+	//@Override
+	//LiteralValue hidden():
 	//	(WS | ANY_OTHER | ID)+;
 	public LiteralValueElements getLiteralValueAccess() {
 		return pLiteralValue;
