@@ -44,7 +44,7 @@ Workflow {
 		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
 	}
 	
-	bean = testlanguages.ecore.EcoreSupport {}
+	bean = org.eclipse.xtext.ecore.EcoreSupport {}
 	
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"
