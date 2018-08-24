@@ -112,6 +112,9 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
           }
         }
         final IBinaryType reader = _xtrycatchfinallyexpression;
+        if ((reader == null)) {
+          return null;
+        }
         this.classFileCache.put(className, reader);
         NameEnvironmentAnswer _nameEnvironmentAnswer_1 = new NameEnvironmentAnswer(reader, null);
         result = _nameEnvironmentAnswer_1;

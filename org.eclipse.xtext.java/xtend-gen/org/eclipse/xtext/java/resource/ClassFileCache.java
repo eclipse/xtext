@@ -67,8 +67,13 @@ public class ClassFileCache {
   }
   
   public IBinaryType computeIfAbsent(final QualifiedName qualifiedName, final Function<? super QualifiedName, ? extends IBinaryType> fun) {
-    Object _computeIfAbsent = this.cache.computeIfAbsent(qualifiedName, fun);
-    return ((IBinaryType) _computeIfAbsent);
+    final Object result = this.cache.computeIfAbsent(qualifiedName, fun);
+    if ((result != ClassFileCache.NULL)) {
+      return ((IBinaryType) result);
+    }
+    IBinaryType value = fun.apply(qualifiedName);
+    this.put(qualifiedName, value);
+    return value;
   }
   
   public void clear() {

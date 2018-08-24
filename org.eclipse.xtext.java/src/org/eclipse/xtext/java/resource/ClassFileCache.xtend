@@ -11,8 +11,6 @@ import java.util.Map
 import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Function
 import org.eclipse.jdt.internal.compiler.env.IBinaryType
-import org.eclipse.jdt.internal.compiler.env.ITypeAnnotationWalker
-import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.util.internal.EmfAdaptable
 
@@ -52,7 +50,13 @@ class ClassFileCache {
 	}
 	
 	def IBinaryType computeIfAbsent(QualifiedName qualifiedName, Function<? super QualifiedName, ? extends IBinaryType> fun) {
-		cache.computeIfAbsent(qualifiedName, fun) as IBinaryType
+		val result = cache.computeIfAbsent(qualifiedName, fun)
+		if (result !== NULL) { // TODO should this ever happen
+			return result as IBinaryType;
+		}
+		var value = fun.apply(qualifiedName)
+		put(qualifiedName, value)
+		return value
 	}
 	
 	def void clear() {

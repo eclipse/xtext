@@ -20,8 +20,8 @@ import org.junit.runner.RunWith
 class JavaSourceLanguagePerformanceTest {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider
-    @Inject IResourceDescription.Manager resourceDesriptionManager
-    @Inject IJvmTypeProvider.Factory typeProviderFactory
+	@Inject IResourceDescription.Manager resourceDesriptionManager
+	@Inject IJvmTypeProvider.Factory typeProviderFactory
 	
 	@Test(timeout=30000)
 	def void testPerformance() {

@@ -71,12 +71,17 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			val IBinaryType reader = try {
 				stream = url.openStream
 				ClassFileReader.read(url.openStream, fileName)
+				//TODO what if read fails
 			} finally {
 				if (stream !== null) {
 					stream.close
 				}
 			}
 			// TODO is this ok?
+			// TODO what if reader is null
+			if (reader === null) {
+				return null;
+			}
 			classFileCache.put(className, reader)
 			result = new NameEnvironmentAnswer(reader, null)
 		}
