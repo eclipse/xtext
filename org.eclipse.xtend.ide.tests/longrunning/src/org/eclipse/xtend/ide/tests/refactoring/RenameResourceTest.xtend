@@ -1,23 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring
 
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.junit.Test
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import com.google.inject.Inject
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring
-import org.eclipse.ltk.internal.core.refactoring.resource.RenameResourceProcessor
-import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.core.resources.IWorkspace
-import org.eclipse.core.resources.IFile
-import org.eclipse.core.runtime.Path
 
-class RenameResourceTest extends AbstractXtendUITestCase {
-	
-	@Inject extension WorkbenchTestHelper
-	
-	@Inject IWorkspace workspace
-	
-	@Inject extension FileAsserts
+class RenameResourceTest extends AbstractXtendRenameRefactoringTest {
 	
 	@Test 
 	def void testRenameClassWithSameName() {
@@ -50,20 +42,5 @@ class RenameResourceTest extends AbstractXtendUITestCase {
 		} finally {
 			getFile('Bar').delete(true, null)
 		}
-	}
-	
-	def protected renameTo(IFile file, String newFileName) {
-		val renameResourceProcessor = new RenameResourceProcessor(file)
-		renameResourceProcessor.setNewResourceName(newFileName)
-		val renameRefactoring = new RenameRefactoring(renameResourceProcessor)
-		renameRefactoring.checkAllConditions(new NullProgressMonitor)
-		val change = renameRefactoring.createChange(new NullProgressMonitor)
-		workspace.run([
-			change.perform(it)
-		], new NullProgressMonitor)
-		val newFile = project.findMember(new Path("src/" + newFileName))
-		assertTrue(newFile.exists)
-		assertTrue(newFile instanceof IFile)
-		newFile as IFile
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,22 +7,10 @@
  */
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.ui.refactoring.RenameSupport;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtend.ide.tests.refactoring.FileAsserts;
+import org.eclipse.xtend.ide.tests.refactoring.AbstractXtendRenameRefactoringTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor;
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,30 +19,7 @@ import org.junit.Test;
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class RenameJvmOperationTest extends AbstractXtendUITestCase {
-  @Inject
-  private SyncUtil syncUtil;
-  
-  @Inject
-  private IWorkbench workbench;
-  
-  @Inject
-  @Extension
-  private FileAsserts _fileAsserts;
-  
-  @Inject
-  @Extension
-  private WorkbenchTestHelper testHelper;
-  
-  @Inject
-  private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
-  
-  @Override
-  public void tearDown() throws Exception {
-    this.testHelper.tearDown();
-    super.tearDown();
-  }
-  
+public class RenameJvmOperationTest extends AbstractXtendRenameRefactoringTest {
   @Test
   public void renameUnusedMethod() {
     this.renameUnusedMethod(false);
@@ -113,7 +78,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("class Bar {}");
       _builder_2.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -250,7 +215,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -438,7 +403,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -631,7 +596,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_2.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -849,7 +814,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -965,7 +930,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_4.newLine();
       _builder_4.append("}");
       _builder_4.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_4.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_4.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1074,7 +1039,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1201,7 +1166,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_4.newLine();
       _builder_4.append("}");
       _builder_4.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_4.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_4.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1321,7 +1286,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1439,42 +1404,9 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this._fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
+      this.fileAsserts.assertFileContains(xtendFile, _builder_3.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public IType findJavaType(final String typeName) throws Exception {
-    IType _xblockexpression = null;
-    {
-      this.syncUtil.totalSync(false);
-      _xblockexpression = JavaCore.create(this.testHelper.getProject()).findType(typeName);
-    }
-    return _xblockexpression;
-  }
-  
-  public void renameJavaElement(final IType javaElement, final String newName) throws Exception {
-    this.syncUtil.totalSync(false);
-    final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
-    this.syncUtil.totalSync(false);
-    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
-  }
-  
-  public void renameJavaElement(final IMethod javaElement, final String newName) throws Exception {
-    this.syncUtil.totalSync(false);
-    final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
-    this.syncUtil.totalSync(false);
-    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
-  }
-  
-  public void renameJavaElement(final IField javaElement, final String newName) throws Exception {
-    this.syncUtil.totalSync(false);
-    final RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-    renameSupport.perform(this.workbench.getActiveWorkbenchWindow().getShell(), this.workbench.getActiveWorkbenchWindow());
-    this.syncUtil.totalSync(false);
-    Assert.assertTrue(this.compositeRefactoringProcessorAccess.isDisposed());
   }
 }
