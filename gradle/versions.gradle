@@ -8,7 +8,7 @@ ext.versions = [
 	'xtext': version,
 	'xtext_bootstrap': '2.14.0',
 	'gradle_plugins': '0.1.0',
-	'xtext_gradle_plugin': '1.0.21',
+	'xtext_gradle_plugin': '2.0.1',
 	'lsp4j': '0.4.0', // dont forget to adapt IdeProjectDescriptor + Tests
 	'log4j': '1.2.16',
 	'equinoxCommon' : '3.9.0',
