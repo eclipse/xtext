@@ -4,7 +4,7 @@ Bundle-SymbolicName: org.eclipse.xtend.lib.gwt
 Bundle-Name: %Bundle-Name
 Bundle-Vendor: %Bundle-Vendor
 Bundle-Version: 2.15.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtend.lib
 Require-Bundle: org.eclipse.xtend.lib
 Automatic-Module-Name: org.eclipse.xtend.lib.gwt
