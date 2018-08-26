@@ -18,7 +18,6 @@ import org.eclipse.xtext.example.fowlerdsl.scoping.StatemachineScopeProvider;
 import org.eclipse.xtext.example.fowlerdsl.serializer.StatemachineSemanticSequencer;
 import org.eclipse.xtext.example.fowlerdsl.serializer.StatemachineSyntacticSequencer;
 import org.eclipse.xtext.example.fowlerdsl.services.StatemachineGrammarAccess;
-import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineConfigurableIssueCodesProvider;
 import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
@@ -55,7 +54,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
 /**
  * Manual modifications go to {@link StatemachineRuntimeModule}.
@@ -146,11 +144,6 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	@SingletonBinding(eager=true)
 	public Class<? extends StatemachineValidator> bindStatemachineValidator() {
 		return StatemachineValidator.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
-	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
-		return StatemachineConfigurableIssueCodesProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2

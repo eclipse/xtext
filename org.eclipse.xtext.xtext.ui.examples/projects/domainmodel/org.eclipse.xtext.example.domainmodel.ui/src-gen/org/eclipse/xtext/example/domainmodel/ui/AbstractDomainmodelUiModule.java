@@ -38,7 +38,6 @@ import org.eclipse.xtext.example.domainmodel.ui.labeling.DomainmodelDescriptionL
 import org.eclipse.xtext.example.domainmodel.ui.labeling.DomainmodelLabelProvider;
 import org.eclipse.xtext.example.domainmodel.ui.outline.DomainmodelOutlineTreeProvider;
 import org.eclipse.xtext.example.domainmodel.ui.quickfix.DomainmodelQuickfixProvider;
-import org.eclipse.xtext.example.domainmodel.validation.DomainmodelValidatorConfigurationBlock;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
@@ -98,7 +97,6 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
-import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider;
@@ -181,11 +179,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultXbaseUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalDomainmodelLexer.class).toProvider(LexerProvider.create(InternalDomainmodelLexer.class));
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
-	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
-		return DomainmodelValidatorConfigurationBlock.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2

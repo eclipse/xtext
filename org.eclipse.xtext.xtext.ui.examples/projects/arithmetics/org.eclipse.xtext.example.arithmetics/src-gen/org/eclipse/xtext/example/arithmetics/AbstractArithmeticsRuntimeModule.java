@@ -21,7 +21,6 @@ import org.eclipse.xtext.example.arithmetics.scoping.ArithmeticsScopeProvider;
 import org.eclipse.xtext.example.arithmetics.serializer.ArithmeticsSemanticSequencer;
 import org.eclipse.xtext.example.arithmetics.serializer.ArithmeticsSyntacticSequencer;
 import org.eclipse.xtext.example.arithmetics.services.ArithmeticsGrammarAccess;
-import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsConfigurableIssueCodesProvider;
 import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
@@ -54,7 +53,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
 /**
  * Manual modifications go to {@link ArithmeticsRuntimeModule}.
@@ -145,11 +143,6 @@ public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeMod
 	@SingletonBinding(eager=true)
 	public Class<? extends ArithmeticsValidator> bindArithmeticsValidator() {
 		return ArithmeticsValidator.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
-	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
-		return ArithmeticsConfigurableIssueCodesProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
