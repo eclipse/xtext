@@ -413,6 +413,7 @@ import com.google.common.collect.Maps;
 	 * @return a map with equal keys but transformed values. Never <code>null</code>.
 	 * @since 2.4
 	 */
+	@Pure
 	public static <K, V1, V2> Map<K, V2> mapValues(Map<K, V1> original, Function1<? super V1, ? extends V2> transformation) {
 		return Maps.transformValues(original, new FunctionDelegate<V1, V2>(transformation));
 	}
