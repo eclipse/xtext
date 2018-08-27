@@ -49,7 +49,7 @@ public class DontAskAgainPreferences {
 	 * @return Whether to show the question again or not
 	 */
 	public boolean shouldAskAgain(String key) {
-		return getUserDecision(key) != MessageDialogWithToggle.NEVER;
+		return !MessageDialogWithToggle.NEVER.equals(getUserDecision(key));
 	}
 
 	/**
