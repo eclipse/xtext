@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,45 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring
 
-import com.google.inject.Inject
 import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.jdt.core.IField
-import org.eclipse.jdt.core.IMethod
-import org.eclipse.jdt.core.IType
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.ui.refactoring.RenameSupport
-import org.eclipse.ui.IWorkbench
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
-class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
-
-	@Inject
-	SyncUtil syncUtil
-
-	@Inject
-	IWorkbench workbench
-
-	@Inject
-	extension FileAsserts
-
-	@Inject
-	extension WorkbenchTestHelper testHelper
-
-	@Inject
-	CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess
-
-	override tearDown() throws Exception {
-		testHelper.tearDown
-		super.tearDown()
-	}
+class XImportSectionUpdateOnRenameTest extends AbstractXtendRenameRefactoringTest {
 
 	@Test def void renameUnusedType() {
 		try {
@@ -899,35 +868,6 @@ class XImportSectionUpdateOnRenameTest extends AbstractXtendUITestCase {
 				
 				}
 			''')
-	}
-
-	def findJavaType(String typeName) throws Exception {
-		syncUtil.totalSync(false)
-		JavaCore.create(testHelper.project).findType(typeName)
-	}
-
-	def void renameJavaElement(IType javaElement, String newName) throws Exception {
-		syncUtil.totalSync(false)
-		val renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES)
-		renameSupport.perform(workbench.activeWorkbenchWindow.shell, workbench.activeWorkbenchWindow)
-		syncUtil.totalSync(false)
-		assertTrue(compositeRefactoringProcessorAccess.disposed)
-	}
-
-	def void renameJavaElement(IMethod javaElement, String newName) throws Exception {
-		syncUtil.totalSync(false)
-		val renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES)
-		renameSupport.perform(workbench.activeWorkbenchWindow.shell, workbench.activeWorkbenchWindow)
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.disposed)
-	}
-
-	def void renameJavaElement(IField javaElement, String newName) throws Exception {
-		syncUtil.totalSync(false)
-		val renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES)
-		renameSupport.perform(workbench.activeWorkbenchWindow.shell, workbench.activeWorkbenchWindow)
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.disposed)
 	}
 
 }

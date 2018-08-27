@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,78 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
-import org.eclipse.jdt.ui.refactoring.RenameSupport;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.common.types.ui.refactoring.participant.CompositeRefactoringProcessor;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
-import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
-
-	@Inject
-	protected EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
-	@Inject
-	protected IRenameRefactoringProvider renameRefactoringProvider;
-
-	@Inject
-	protected IRenameContextFactory renameContextFactory;
-
-	@Inject
-	private WorkbenchTestHelper testHelper;
-
-	@Inject
-	private IWorkbench workbench;
-
-	@Inject 
-	private FileAsserts fileAsserts;
-	
-	@Inject 
-	private SyncUtil syncUtil;
-	
-	@Inject 
-	private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
-	
-	@Override
-	public void tearDown() throws Exception {
-		testHelper.tearDown();
-		super.tearDown();
-	}
+public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactoringTest {
 	
 	@Test
 	public void testRenameJavaClass() throws Exception {
@@ -1391,121 +1333,4 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		fileAsserts.assertFileContains(barClass, "new Foo1() {}");
 	}
 	
-	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
-		String editorContent = editor.getDocument().get();
-		if (!editorContent.contains(expectedContent)) {
-			assertEquals(expectedContent, editorContent);
-		}
-	}
-
-	protected void assertDocumentContainsIgnoreWhitespace(XtextEditor editor, String expectedContent) throws CoreException {
-		String editorContent = editor.getDocument().get();
-		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, 
-				editorContent.replaceAll("\\s*", " ").contains(expectedContent.replaceAll("\\s*",  " ")));
-	}
-
-	protected XtextEditor openEditorSafely(IFile file) throws Exception {
-		NullProgressMonitor monitor = new NullProgressMonitor();
-		syncUtil.waitForBuild(monitor);
-		syncUtil.yieldToQueuedDisplayJobs(monitor);
-		XtextEditor editor = testHelper.openEditor(file);
-		syncUtil.waitForReconciler(editor);
-		syncUtil.yieldToQueuedDisplayJobs(monitor);
-		return editor;
-	}
-	
-	protected XtextEditor openEditorSafely(String fileName, String contents) throws Exception {
-		IFile file = testHelper.createFile(fileName, contents);
-		return openEditorSafely(file);
-	}
-	
-	protected void renameXtendElement(final XtextEditor editor, final int offset, final String newName, final int allowedSeverity) throws Exception {
-		syncUtil.totalSync(false);
-		new WorkspaceModifyOperation() {
-			@Override
-			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-					InterruptedException {
-				ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
-				assertTrue("Refactoring not applicable", renameRefactoring.isApplicable());
-				RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-				assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
-				Change change = renameRefactoring.createChange(new NullProgressMonitor());
-				change.perform(new NullProgressMonitor());
-			}
-		}.run(new NullProgressMonitor());
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
-	}
-
-	protected void renameXtendElement(final XtextEditor editor, final int offset, String newName) throws Exception {
-		renameXtendElement(editor, offset, newName, RefactoringStatus.OK);
-	}
-
-	protected RefactoringStatus renameXtendElementWithError(final XtextEditor editor, final int offset, String newName) throws Exception {
-		syncUtil.totalSync(false);
-		ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
-		RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
-		assertFalse("Expected an error", status.isOK());
-		return status;
-	}
-
-	protected ProcessorBasedRefactoring createXtendRenameRefactoring(final XtextEditor editor, final int offset,
-			String newName) {
-		IRenameElementContext renameElementContext = createRenameElementContext(editor, offset);
-		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider
-				.getRenameRefactoring(renameElementContext);
-		RefactoringProcessor processor = renameRefactoring.getProcessor();
-		if (processor instanceof AbstractRenameProcessor)
-			((AbstractRenameProcessor) processor).setNewName(newName);
-		else if (processor instanceof JavaRenameProcessor)
-			((JavaRenameProcessor) processor).setNewElementName(newName);
-		return renameRefactoring;
-	}
-
-	protected IRenameElementContext createRenameElementContext(final XtextEditor editor, final int offset) {
-		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
-				new IUnitOfWork<IRenameElementContext, XtextResource>() {
-					@Override
-					public IRenameElementContext exec(XtextResource state) throws Exception {
-						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, offset);
-						return renameContextFactory.createRenameElementContext(element, editor, new TextSelection(
-								offset, 1), state);
-					}
-				});
-		return renameElementContext;
-	}
-
-	protected void renameJavaElement(IType javaElement, String newName) throws CoreException, InterruptedException,
-			InvocationTargetException {
-		syncUtil.totalSync(false);
-		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
-	}
-
-	protected void renameJavaElement(IMethod javaElement, String newName) throws CoreException, InterruptedException,
-			InvocationTargetException {
-		syncUtil.totalSync(false);
-		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
-	}
-
-	protected void renameJavaElement(IField javaElement, String newName) throws CoreException, InterruptedException,
-			InvocationTargetException {
-		syncUtil.totalSync(false);
-		RenameSupport renameSupport = RenameSupport.create(javaElement, newName, RenameSupport.UPDATE_REFERENCES);
-		renameSupport.perform(workbench.getActiveWorkbenchWindow().getShell(), workbench.getActiveWorkbenchWindow());
-		syncUtil.totalSync(false);
-		assertTrue(compositeRefactoringProcessorAccess.isDisposed());
-	}
-
-	protected IType findJavaType(String typeName) throws Exception {
-		syncUtil.totalSync(false);
-		IJavaProject javaProject = JavaCore.create(testHelper.getProject());
-		IType javaClass = javaProject.findType(typeName);
-		return javaClass;
-	}
 }
