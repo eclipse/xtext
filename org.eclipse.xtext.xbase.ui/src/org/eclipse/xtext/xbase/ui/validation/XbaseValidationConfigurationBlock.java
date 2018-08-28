@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.validation;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.osgi.util.NLS;
@@ -17,7 +14,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtext.preferences.PreferenceKey;
-import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
@@ -34,6 +30,7 @@ import com.google.inject.Inject;
  * {@link #fillUnusedCodeSection(ComboBoxBuilder)}
  * 
  * @author Dennis Huebner - Initial contribution and API
+ * @author Holger Schill
  * 
  */
 public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
@@ -113,48 +110,12 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
 				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE, javaIssueCode };
 		String javaValue = javaValue(javaIssueCode);
-		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
-				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_info,
-				Messages.XbaseValidationConfigurationBlock_ignore,
+		String[] valueLabels = new String[] { org.eclipse.xtext.ui.validation.Messages.ValidationConfigurationBlock_error,
+				org.eclipse.xtext.ui.validation.Messages.ValidationConfigurationBlock_warning, org.eclipse.xtext.ui.validation.Messages.ValidationConfigurationBlock_info,
+				org.eclipse.xtext.ui.validation.Messages.ValidationConfigurationBlock_ignore,
 				NLS.bind(Messages.XbaseValidationConfigurationBlock_java_label, javaValue) };
 		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
 		return comboBox;
-	}
-
-	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
-		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
-				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE };
-		String[] valueLabels = new String[] { Messages.XbaseValidationConfigurationBlock_error,
-				Messages.XbaseValidationConfigurationBlock_warning, Messages.XbaseValidationConfigurationBlock_info, Messages.XbaseValidationConfigurationBlock_ignore };
-		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
-		return comboBox;
-	}
-
-	@Override
-	protected Job getBuildJob(IProject project) {
-		Job buildJob = new OptionsConfigurationBlock.BuildJob(
-				Messages.XbaseValidationConfigurationBlock_build_job_title, project);
-		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
-		buildJob.setUser(true);
-		return buildJob;
-
-	}
-
-	@Override
-	protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {
-		String title = Messages.XbaseValidationConfigurationBlock_build_dialog_title;
-		String message;
-		if (workspaceSettings) {
-			message = Messages.XbaseValidationConfigurationBlock_build_dailog_ws_message;
-		} else {
-			message = Messages.XbaseValidationConfigurationBlock_build_dailog_project_message;
-		}
-		return new String[] { title, message };
-	}
-
-	@Override
-	protected void validateSettings(String changedKey, String oldValue, String newValue) {
-		// Clients may override
 	}
 
 	protected String javaValue(final String javaIssueCode) {
