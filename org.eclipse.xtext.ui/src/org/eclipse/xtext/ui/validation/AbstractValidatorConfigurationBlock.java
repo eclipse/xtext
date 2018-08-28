@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,9 @@ package org.eclipse.xtext.ui.validation;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.CellEditor.LayoutData;
 import org.eclipse.swt.SWT;
@@ -24,12 +27,14 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 import org.eclipse.xtext.ui.util.PixelConverter;
+import org.eclipse.xtext.validation.SeverityConverter;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
+ * @author Holger Schill
  * @since 2.4
  */
 public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigurationBlock {
@@ -173,5 +178,53 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	@Override
 	public String getPropertyPrefix() {
 		return PROPERTY_PREFIX;
+	}
+	
+	/**
+	 * @since 2.15
+	 */
+	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
+		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
+				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE };
+		String[] valueLabels = new String[] { Messages.ValidationConfigurationBlock_error,
+				Messages.ValidationConfigurationBlock_warning, Messages.ValidationConfigurationBlock_info, Messages.ValidationConfigurationBlock_ignore };
+		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
+		return comboBox;
+	}
+	
+	/**
+	 * @since 2.15
+	 */
+	@Override
+	protected Job getBuildJob(IProject project) {
+		Job buildJob = new OptionsConfigurationBlock.BuildJob(
+				Messages.ValidationConfigurationBlock_build_job_title, project);
+		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
+		buildJob.setUser(true);
+		return buildJob;
+
+	}
+	
+	/**
+	 * @since 2.15
+	 */
+	@Override
+	protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {
+		String title = Messages.ValidationConfigurationBlock_build_dialog_title;
+		String message;
+		if (workspaceSettings) {
+			message = Messages.ValidationConfigurationBlock_build_dailog_ws_message;
+		} else {
+			message = Messages.ValidationConfigurationBlock_build_dailog_project_message;
+		}
+		return new String[] { title, message };
+	}
+	
+	/**
+	 * @since 2.15
+	 */
+	@Override
+	protected void validateSettings(String changedKey, String oldValue, String newValue) {
+		// Clients may override
 	}
 }
