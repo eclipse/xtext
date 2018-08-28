@@ -11,6 +11,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public interface IShouldGenerate {
   @Beta
+  @Singleton
   public static class OnlyWithoutErrors implements IShouldGenerate {
     @Inject
     private IResourceValidator resourceValidator;
@@ -53,6 +55,7 @@ public interface IShouldGenerate {
   }
   
   @Beta
+  @Singleton
   public static class Always implements IShouldGenerate {
     @Override
     public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {

@@ -11,13 +11,13 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -42,6 +42,7 @@ import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
@@ -51,7 +52,6 @@ import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -72,7 +72,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
-@Log
 @SuppressWarnings("all")
 public class IncrementalBuilder {
   @Data
@@ -139,8 +138,61 @@ public class IncrementalBuilder {
     }
   }
   
-  @Log
   public static class InternalStatefulIncrementalBuilder {
+    @Singleton
+    public static class URIBasedFileSystemAccessFactory {
+      @Inject
+      private IContextualOutputConfigurationProvider outputConfigurationProvider;
+      
+      @Inject
+      private IFilePostProcessor postProcessor;
+      
+      @Inject(optional = true)
+      private IEncodingProvider encodingProvider;
+      
+      @Inject
+      private TraceFileNameProvider traceFileNameProvider;
+      
+      @Inject
+      private TraceRegionSerializer traceRegionSerializer;
+      
+      @Inject(optional = true)
+      private IProjectConfigProvider projectConfigProvider;
+      
+      public URIBasedFileSystemAccess newFileSystemAccess(final Resource resource, final BuildRequest request) {
+        URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
+        final Procedure1<URIBasedFileSystemAccess> _function = (URIBasedFileSystemAccess it) -> {
+          final Function1<OutputConfiguration, String> _function_1 = (OutputConfiguration it_1) -> {
+            return it_1.getName();
+          };
+          it.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(this.outputConfigurationProvider.getOutputConfigurations(resource), _function_1));
+          it.setPostProcessor(this.postProcessor);
+          if ((this.encodingProvider != null)) {
+            it.setEncodingProvider(this.encodingProvider);
+          }
+          it.setTraceFileNameProvider(this.traceFileNameProvider);
+          it.setTraceRegionSerializer(this.traceRegionSerializer);
+          it.setGenerateTraces(true);
+          it.setBaseDir(request.getBaseDir());
+          if ((this.projectConfigProvider != null)) {
+            IProjectConfig _projectConfig = this.projectConfigProvider.getProjectConfig(resource.getResourceSet());
+            ISourceFolder _findSourceFolderContaining = null;
+            if (_projectConfig!=null) {
+              _findSourceFolderContaining=_projectConfig.findSourceFolderContaining(resource.getURI());
+            }
+            final ISourceFolder sourceFolder = _findSourceFolderContaining;
+            String _name = null;
+            if (sourceFolder!=null) {
+              _name=sourceFolder.getName();
+            }
+            it.setCurrentSource(_name);
+          }
+          it.setConverter(resource.getResourceSet().getURIConverter());
+        };
+        return ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
+      }
+    }
+    
     @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PROTECTED_GETTER })
     @Extension
     private BuildContext context;
@@ -184,10 +236,6 @@ public class IncrementalBuilder {
         this.request.getAfterValidate().afterValidate(source, CollectionLiterals.<Issue>newArrayList());
         final Consumer<URI> _function_1 = (URI generated) -> {
           try {
-            boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();
-            if (_isInfoEnabled) {
-              IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting " + generated));
-            }
             final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(source);
             final Set<OutputConfiguration> configs = serviceProvider.<IContextualOutputConfigurationProvider2>get(IContextualOutputConfigurationProvider2.class).getOutputConfigurations(this.request.getResourceSet());
             final String configName = newSource2GeneratedMapping.getOutputConfigName(generated);
@@ -235,7 +283,7 @@ public class IncrementalBuilder {
         resource.getContents();
         EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
         this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
-        final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(resource.getURI());
+        final IResourceServiceProvider serviceProvider = this.getResourceServiceProvider(resource);
         final IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
         final IResourceDescription description = manager.getResourceDescription(resource);
         final SerializableResourceDescription copiedDescription = SerializableResourceDescription.createCopy(description);
@@ -254,21 +302,24 @@ public class IncrementalBuilder {
       return new IncrementalBuilder.Result(_state, resolvedDeltas);
     }
     
+    private IResourceServiceProvider getResourceServiceProvider(final Resource resource) {
+      if ((resource instanceof XtextResource)) {
+        return ((XtextResource)resource).getResourceServiceProvider();
+      }
+      return this.context.getResourceServiceProvider(resource.getURI());
+    }
+    
     protected boolean validate(final Resource resource) {
-      final IResourceValidator resourceValidator = this.context.getResourceServiceProvider(resource.getURI()).getResourceValidator();
+      final IResourceValidator resourceValidator = this.getResourceServiceProvider(resource).getResourceValidator();
       if ((resourceValidator == null)) {
         return true;
       }
-      String _lastSegment = resource.getURI().lastSegment();
-      String _plus = ("Starting validation for input: \'" + _lastSegment);
-      String _plus_1 = (_plus + "\'");
-      IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(_plus_1);
       final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
       return this.request.getAfterValidate().afterValidate(resource.getURI(), validationResult);
     }
     
     protected void generate(final Resource resource, final BuildRequest request, final Source2GeneratedMapping newMappings) {
-      final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(resource.getURI());
+      final IResourceServiceProvider serviceProvider = this.getResourceServiceProvider(resource);
       final GeneratorDelegate generator = serviceProvider.<GeneratorDelegate>get(GeneratorDelegate.class);
       if ((generator == null)) {
         return;
@@ -309,7 +360,6 @@ public class IncrementalBuilder {
       generator.generate(resource, fileSystemAccess, generatorContext);
       final Consumer<URI> _function_1 = (URI it) -> {
         try {
-          IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
           this.context.getResourceSet().getURIConverter().delete(it, CollectionLiterals.<Object, Object>emptyMap());
           request.getAfterDeleteFile().apply(it);
         } catch (Throwable _e) {
@@ -320,48 +370,8 @@ public class IncrementalBuilder {
     }
     
     protected URIBasedFileSystemAccess createFileSystemAccess(final IResourceServiceProvider serviceProvider, final Resource resource) {
-      URIBasedFileSystemAccess _xblockexpression = null;
-      {
-        final IProjectConfigProvider projectConfigProvider = serviceProvider.<IProjectConfigProvider>get(IProjectConfigProvider.class);
-        IProjectConfig _projectConfig = null;
-        if (projectConfigProvider!=null) {
-          _projectConfig=projectConfigProvider.getProjectConfig(resource.getResourceSet());
-        }
-        final IProjectConfig projectConfig = _projectConfig;
-        ISourceFolder _findSourceFolderContaining = null;
-        if (projectConfig!=null) {
-          _findSourceFolderContaining=projectConfig.findSourceFolderContaining(resource.getURI());
-        }
-        final ISourceFolder sourceFolder = _findSourceFolderContaining;
-        URIBasedFileSystemAccess _uRIBasedFileSystemAccess = new URIBasedFileSystemAccess();
-        final Procedure1<URIBasedFileSystemAccess> _function = (URIBasedFileSystemAccess it) -> {
-          final IContextualOutputConfigurationProvider outputConfigProvider = serviceProvider.<IContextualOutputConfigurationProvider>get(IContextualOutputConfigurationProvider.class);
-          final Function1<OutputConfiguration, String> _function_1 = (OutputConfiguration it_1) -> {
-            return it_1.getName();
-          };
-          it.setOutputConfigurations(IterableExtensions.<String, OutputConfiguration>toMap(outputConfigProvider.getOutputConfigurations(resource), _function_1));
-          it.setPostProcessor(serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class));
-          final IEncodingProvider newEncodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
-          if ((newEncodingProvider != null)) {
-            it.setEncodingProvider(newEncodingProvider);
-          }
-          it.setTraceFileNameProvider(serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class));
-          it.setTraceRegionSerializer(serviceProvider.<TraceRegionSerializer>get(TraceRegionSerializer.class));
-          it.setGenerateTraces(true);
-          it.setBaseDir(this.request.getBaseDir());
-          String _name = null;
-          if (sourceFolder!=null) {
-            _name=sourceFolder.getName();
-          }
-          it.setCurrentSource(_name);
-          it.setConverter(resource.getResourceSet().getURIConverter());
-        };
-        _xblockexpression = ObjectExtensions.<URIBasedFileSystemAccess>operator_doubleArrow(_uRIBasedFileSystemAccess, _function);
-      }
-      return _xblockexpression;
+      return serviceProvider.<IncrementalBuilder.InternalStatefulIncrementalBuilder.URIBasedFileSystemAccessFactory>get(IncrementalBuilder.InternalStatefulIncrementalBuilder.URIBasedFileSystemAccessFactory.class).newFileSystemAccess(resource, this.request);
     }
-    
-    private final static Logger LOG = Logger.getLogger(InternalStatefulIncrementalBuilder.class);
     
     @Pure
     protected BuildContext getContext() {
@@ -420,6 +430,4 @@ public class IncrementalBuilder {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
-  private final static Logger LOG = Logger.getLogger(IncrementalBuilder.class);
 }

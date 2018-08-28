@@ -55,7 +55,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9
  */
-@Log
 @SuppressWarnings("all")
 public class Indexer {
   @Data
@@ -202,16 +201,6 @@ public class Indexer {
     final ResourceDescriptionsData previousIndex = context.getOldState().getResourceDescriptions();
     final ResourceDescriptionsData newIndex = request.getState().getResourceDescriptions();
     final List<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
-    boolean _isInfoEnabled = Indexer.LOG.isInfoEnabled();
-    if (_isInfoEnabled) {
-      Set<URI> _set = IterableExtensions.<URI>toSet(request.getDeletedFiles());
-      String _plus = ("Creating Deltas for changes. Deleted : " + _set);
-      String _plus_1 = (_plus + ", Changed : ");
-      Set<URI> _set_1 = IterableExtensions.<URI>toSet(request.getDirtyFiles());
-      String _plus_2 = (_plus_1 + _set_1);
-      String _plus_3 = (_plus_2 + ".");
-      Indexer.LOG.info(_plus_3);
-    }
     deltas.addAll(this.getDeltasForDeletedResources(request, previousIndex, context));
     deltas.addAll(this.getDeltasForChangedResources(request.getDirtyFiles(), previousIndex, context));
     for (final IResourceDescription.Delta delta : deltas) {
@@ -238,12 +227,6 @@ public class Indexer {
       return Boolean.valueOf(isAffected);
     };
     final List<URI> allAffected = IterableExtensions.<URI>toList(IterableExtensions.<URI>filter(remainingURIs, _function_2));
-    if ((Indexer.LOG.isInfoEnabled() && (!allAffected.isEmpty()))) {
-      Set<URI> _set_2 = IterableExtensions.<URI>toSet(allAffected);
-      String _plus_4 = ("Creating Deltas for affected resources : " + _set_2);
-      String _plus_5 = (_plus_4 + ".");
-      Indexer.LOG.info(_plus_5);
-    }
     deltas.addAll(this.getDeltasForChangedResources(allAffected, previousIndex, context));
     return new Indexer.IndexResult(deltas, newIndex);
   }
@@ -309,6 +292,4 @@ public class Indexer {
       }
     }
   }
-  
-  private final static Logger LOG = Logger.getLogger(Indexer.class);
 }

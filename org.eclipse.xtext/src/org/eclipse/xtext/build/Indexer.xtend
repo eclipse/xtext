@@ -39,7 +39,7 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProv
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-@Log class Indexer {
+class Indexer {
 
 	@Inject CompilerPhases compilerPhases
 	@Inject extension OperationCanceledManager
@@ -55,10 +55,6 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProv
 
 		// get the direct deltas
 		val List<Delta> deltas = newArrayList
-		if (LOG.isInfoEnabled)
-			LOG.info(
-				'Creating Deltas for changes. Deleted : ' + request.deletedFiles.toSet + ', Changed : ' +
-					request.dirtyFiles.toSet + '.')
 		deltas.addAll(getDeltasForDeletedResources(request, previousIndex, context))
 		deltas.addAll(getDeltasForChangedResources(request.dirtyFiles, previousIndex, context))
 		// update the index with the direct deltas
@@ -79,8 +75,6 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProv
 			val isAffected = resourceDescription.isAffected(manager, allDeltas, allDeltas, newIndex)
 			return isAffected
 		].toList
-		if (LOG.isInfoEnabled && !allAffected.empty)
-			LOG.info('Creating Deltas for affected resources : ' + allAffected.toSet + ".")
 		deltas.addAll(getDeltasForChangedResources(allAffected, previousIndex, context))
 
 		return new IndexResult(deltas, newIndex)
