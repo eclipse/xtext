@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -271,6 +271,8 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			@SuppressWarnings("restriction")
 			public class «validatorConfigurationBlockClass» extends «if(language.grammar.inheritsXbase) xbaseValidationConfigurationBlockClass else abstractValidatorConfigurationBlockClass» {
 			
+				protected static final String SETTINGS_SECTION_NAME = "«grammar.simpleName»";
+			
 				@Override
 				protected void fillSettingsPage(«typeRef("org.eclipse.swt.widgets.Composite")» composite, int nColumns, int defaultIndent) {
 					«IF generateDeprecationValidation»
@@ -282,35 +284,6 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				}
 			
 				@Override
-				protected «typeRef('org.eclipse.core.runtime.jobs.Job')» getBuildJob(«typeRef('org.eclipse.core.resources.IProject')» project) {
-					«typeRef('org.eclipse.core.runtime.jobs.Job')» buildJob = new «typeRef('org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock')».BuildJob("Validation Settings Changed", project);
-					buildJob.setRule(«typeRef('org.eclipse.core.resources.ResourcesPlugin')».getWorkspace().getRuleFactory().buildRule());
-					buildJob.setUser(true);
-					return buildJob;
-				}
-			
-				@Override
-				protected String[] getFullBuildDialogStrings(boolean workspaceSettings) {
-					return new String[] { "Validation Settings Changed",
-							"Validation settings have changed. A full rebuild is required for changes to take effect. Do the full build now?" };
-				}
-			
-				@Override
-				protected void validateSettings(String changedKey, String oldValue, String newValue) {
-					«IF language.grammar.inheritsXbase»
-						super.validateSettings(changedKey, oldValue, newValue);
-					«ENDIF»
-				}
-			
-				protected «typeRef('org.eclipse.swt.widgets.Combo')» addComboBox(String prefKey, String label, Composite parent, int indent) {
-					String[] values = new String[] { «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_ERROR, «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_WARNING,
-							«typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_INFO, «typeRef('org.eclipse.xtext.validation.SeverityConverter')».SEVERITY_IGNORE };
-					String[] valueLabels = new String[] { "Error", "Warning", "Info", "Ignore" };
-					«typeRef('org.eclipse.swt.widgets.Combo')» comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
-					return comboBox;
-				}
-			
-				@Override
 				public void dispose() {
 					storeSectionExpansionStates(getDialogSettings());
 					super.dispose();
@@ -319,9 +292,9 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				@Override
 				protected «typeRef('org.eclipse.jface.dialogs.IDialogSettings')» getDialogSettings() {
 					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» dialogSettings = super.getDialogSettings();
-					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» section = dialogSettings.getSection("«grammar.simpleName»");
+					«typeRef('org.eclipse.jface.dialogs.IDialogSettings')» section = dialogSettings.getSection(SETTINGS_SECTION_NAME);
 					if (section == null) {
-						return dialogSettings.addNewSection("«grammar.simpleName»");
+						return dialogSettings.addNewSection(SETTINGS_SECTION_NAME);
 					}
 					return section;
 				}
