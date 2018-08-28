@@ -9,6 +9,8 @@ package org.eclipse.xtext.resource.persistence
 
 import com.google.common.collect.ImmutableSet
 import java.util.Collection
+import java.util.Collections
+import java.util.Set
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -28,21 +30,38 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class SourceLevelURIsAdapter extends AdapterImpl {
 
-	@Accessors ImmutableSet<URI> sourceLevelURIs
+	@Accessors Set<URI> sourceLevelURIs
+	
+	def Set<URI> getSourceLevelURIs() {
+		return Collections.unmodifiableSet(this.sourceLevelURIs);
+	}
 	
 	override isAdapterForType(Object type) {
 		return type == SourceLevelURIsAdapter 
 	}
 	
 	def static void setSourceLevelUris(ResourceSet resourceSet, Collection<URI> uris) {
-		val adapter = findInstalledAdapter(resourceSet) 
-			?: (new SourceLevelURIsAdapter => [
-				resourceSet.eAdapters += it
-			])
+		val adapter = findOrCreateAdapter(resourceSet)
 		adapter.sourceLevelURIs = ImmutableSet.copyOf(uris) 
 	}
 	
+	protected def static SourceLevelURIsAdapter findOrCreateAdapter(ResourceSet resourceSet) {
+		return findInstalledAdapter(resourceSet) 
+			?: (new SourceLevelURIsAdapter => [
+				resourceSet.eAdapters += it
+			])
+	}
+	
+	/**
+	 * Installs the given set of URIs as the source level URIs. Does not copy the given
+	 * set but uses it directly.
+	 */
+	def static void setSourceLevelUrisWithoutCopy(ResourceSet resourceSet, Set<URI> uris) {
+		val adapter = findOrCreateAdapter(resourceSet)
+		adapter.sourceLevelURIs = uris; 
+	}
+	
 	def static SourceLevelURIsAdapter findInstalledAdapter(ResourceSet resourceSet) {
-		resourceSet.eAdapters.filter(SourceLevelURIsAdapter).head
+		return resourceSet.eAdapters.filter(SourceLevelURIsAdapter).head
 	}
 }
