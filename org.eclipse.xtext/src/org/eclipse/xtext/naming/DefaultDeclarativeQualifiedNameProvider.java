@@ -97,12 +97,24 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 	 * If there is no such reflective name found, it tries to read an {@link EAttribute} {@code name} from the
 	 * the given object and appends that to its containers qualified name.
 	 * 
+	 * @see #computeFullyQualifiedNameFromNameAttribute(EObject)
+	 * 
 	 * @since 2.15
 	 */
 	protected QualifiedName computeFullyQualifiedName(EObject obj) {
 		QualifiedName qualifiedNameFromDispatcher = qualifiedName.invoke(obj);
 		if (qualifiedNameFromDispatcher!=null)
 			return qualifiedNameFromDispatcher;
+		return computeFullyQualifiedNameFromNameAttribute(obj);
+	}
+
+	/**
+	 * Tries to read an {@link EAttribute} {@code name} from the
+	 * the given object and appends that to its containers qualified name.
+	 * 
+	 * @since 2.15
+	 */
+	protected QualifiedName computeFullyQualifiedNameFromNameAttribute(EObject obj) {
 		String name = getResolver().apply(obj);
 		if (Strings.isEmpty(name))
 			return null;
