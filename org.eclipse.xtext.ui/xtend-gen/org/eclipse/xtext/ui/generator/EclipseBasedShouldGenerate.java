@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.generator;
 
 import com.google.common.base.Objects;
+import com.google.inject.Singleton;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -22,8 +23,12 @@ import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
+ * Answers true if the resource does not contain any error markers and is contained
+ * in an Eclipse project.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 @SuppressWarnings("all")
 public class EclipseBasedShouldGenerate implements IShouldGenerate {
   @Override
