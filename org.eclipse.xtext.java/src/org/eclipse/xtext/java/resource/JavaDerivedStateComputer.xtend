@@ -1,14 +1,13 @@
 package org.eclipse.xtext.java.resource
 
-import com.google.common.base.Splitter
 import com.google.inject.Inject
-import java.nio.CharBuffer
 import java.util.Arrays
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.jdt.core.compiler.CharOperation
 import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
@@ -25,7 +24,6 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
-import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
@@ -39,7 +37,6 @@ class JavaDerivedStateComputer {
 	@Inject IReferableElementsUnloader unloader;
 	@Inject EObjectDescriptionBasedStubGenerator stubGenerator
 	@Inject IResourceDescriptionsProvider resourceDescriptionsProvider
-	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	def discardDerivedState(Resource resource) {
 		var EList<EObject> resourcesContentsList=resource.getContents() 
@@ -59,6 +56,7 @@ class JavaDerivedStateComputer {
 				new DefaultProblemFactory()), true)
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
+		
 		if (result.types !== null) {
 			for (type : result.types) {
 				val packageName = result.currentPackage?.importName?.map[String.valueOf(it)]?.join('.')
@@ -132,15 +130,14 @@ class JavaDerivedStateComputer {
 			for (cls : it.classFiles) {
 				// TODO What is with inner classes (they contain $)
 				// TODO is there a better way to obtain the class name
-				val key = QualifiedName.create(Splitter.on("/").splitToList(CharBuffer.wrap(cls.fileName)))
-				// qualifiedNameConverter.toQualifiedName(new String(cls.fileName).replace("/","."))
-				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes,cls.fileName)])
+				val key = QualifiedName.create(CharOperation.toStrings(cls.compoundName))
+				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes, cls.fileName)])
 			}
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap
 				var List<String> topLevelTypes = newArrayList
 				for (cf : it.getClassFiles()) {
-					val className = cf.compoundName.map[String.valueOf(it)].join('.')
+					val className = CharOperation.toString(cf.compoundName)
 					map.put(className, cf.bytes)
 					if (!cf.isNestedType) {
 						topLevelTypes += className

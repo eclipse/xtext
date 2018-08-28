@@ -22,11 +22,12 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 	val IResourceDescriptions resourceDescriptions
 	val EObjectDescriptionBasedStubGenerator stubGenerator
 	val ClassFileCache classFileCache
+	
+	Map<QualifiedName, NameEnvironmentAnswer> nameToAnswerCache = newHashMap()
 
-	Map<QualifiedName, NameEnvironmentAnswer> cache = newHashMap()
-    
 	override cleanup() {
-		cache.clear
+		nameToAnswerCache.clear
+		classFileCache.clear
 	}
 
 	override findType(char[][] compoundTypeName) {
@@ -43,8 +44,8 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			}
 			return new NameEnvironmentAnswer(t, null)
 		}
-		if (cache.containsKey(className)) {
-			return cache.get(className)
+		if (nameToAnswerCache.containsKey(className)) {
+			return nameToAnswerCache.get(className)
 		}
 		val candidate = resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
 		var NameEnvironmentAnswer result = null 
@@ -61,7 +62,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			val fileName = className.toString('/') + ".class"
 			val url = classLoader.getResource(fileName)
 			if (url === null) {
-				cache.put(className, null)
+				nameToAnswerCache.put(className, null)
 				//TODO is that ok
 				classFileCache.put(className, null)
 				return null;
@@ -85,7 +86,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			classFileCache.put(className, reader)
 			result = new NameEnvironmentAnswer(reader, null)
 		}
-		cache.put(className, result)
+		nameToAnswerCache.put(className, result)
 		return result
 	}
 

@@ -1,8 +1,9 @@
 package org.eclipse.xtext.java.tests
 
+import com.google.common.base.Stopwatch
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.util.List
+import java.util.concurrent.TimeUnit
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.resource.IResourceDescription
@@ -23,9 +24,7 @@ class JavaSourceLanguagePerformanceTest {
 	@Inject IResourceDescription.Manager resourceDesriptionManager
 	@Inject IJvmTypeProvider.Factory typeProviderFactory
 	
-	@Test(timeout=30000)
-	def void testPerformance() {
-		val max = 10000
+	def void doTestPerformance(int max) {
 		val rs = (1..max).map["demo/Demo"+it+".java"->'''package demo; public class Demo«it» {
 			private String x;
 			«IF it > 1»
@@ -38,12 +37,61 @@ class JavaSourceLanguagePerformanceTest {
 			private Demo«it+1» demo;
 			«ENDIF»
 		}'''].toList.resourceSet
-		val start = System.currentTimeMillis
+		val sw = Stopwatch.createStarted
 		for (r : rs.resources) {
 			r.contents
 		}
-		val end = System.currentTimeMillis
-		println(end-start)
+		println('''«max» file took «sw.elapsed(TimeUnit.MILLISECONDS)» ms''')
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf00100() {
+		doTestPerformance(100)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf00200() {
+		doTestPerformance(200)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf00400() {
+		doTestPerformance(400)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf00800() {
+		doTestPerformance(800)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf01600() {
+		doTestPerformance(1600)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf03200() {
+		doTestPerformance(3200)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf06400() {
+		doTestPerformance(6400)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf12800() {
+		doTestPerformance(12800)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf25600() {
+		doTestPerformance(25600)
+	}
+	
+	@Test(timeout=30000)
+	def void testPerf51200() {
+		doTestPerformance(51200)
 	}
 	
 	def protected resourceSet(Pair<String, String> ... files) {
@@ -60,7 +108,7 @@ class JavaSourceLanguagePerformanceTest {
             return uri
         ]
         result.URIConverter.URIHandlers.add(uriHandler)
-        val List<IResourceDescription> descriptions = newArrayList()
+        val descriptions = newArrayList()
         for (uri : uris) {
             val resource = result.getResource(uri, true)
             descriptions += resourceDesriptionManager.getResourceDescription(resource);

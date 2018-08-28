@@ -14,9 +14,12 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class XbaseQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	@Override

@@ -1,10 +1,13 @@
 package org.eclipse.xtext.java.tests;
 
+import com.google.common.base.Stopwatch;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,9 +46,7 @@ public class JavaSourceLanguagePerformanceTest {
   @Inject
   private IJvmTypeProvider.Factory typeProviderFactory;
   
-  @Test(timeout = 30000)
-  public void testPerformance() {
-    final int max = 10000;
+  public void doTestPerformance(final int max) {
     final Function1<Integer, Pair<String, String>> _function = (Integer it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package demo; public class Demo");
@@ -87,13 +88,68 @@ public class JavaSourceLanguagePerformanceTest {
       return Pair.<String, String>of((("demo/Demo" + it) + ".java"), _builder.toString());
     };
     final XtextResourceSet rs = this.resourceSet(((Pair<String, String>[])Conversions.unwrapArray(IterableExtensions.<Pair<String, String>>toList(IterableExtensions.<Integer, Pair<String, String>>map(new IntegerRange(1, max), _function)), Pair.class)));
-    final long start = System.currentTimeMillis();
+    final Stopwatch sw = Stopwatch.createStarted();
     EList<Resource> _resources = rs.getResources();
     for (final Resource r : _resources) {
       r.getContents();
     }
-    final long end = System.currentTimeMillis();
-    InputOutput.<Long>println(Long.valueOf((end - start)));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(max);
+    _builder.append(" file took ");
+    long _elapsed = sw.elapsed(TimeUnit.MILLISECONDS);
+    _builder.append(_elapsed);
+    _builder.append(" ms");
+    InputOutput.<String>println(_builder.toString());
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf00100() {
+    this.doTestPerformance(100);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf00200() {
+    this.doTestPerformance(200);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf00400() {
+    this.doTestPerformance(400);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf00800() {
+    this.doTestPerformance(800);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf01600() {
+    this.doTestPerformance(1600);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf03200() {
+    this.doTestPerformance(3200);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf06400() {
+    this.doTestPerformance(6400);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf12800() {
+    this.doTestPerformance(12800);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf25600() {
+    this.doTestPerformance(25600);
+  }
+  
+  @Test(timeout = 30000)
+  public void testPerf51200() {
+    this.doTestPerformance(51200);
   }
   
   protected XtextResourceSet resourceSet(final Pair<String, String>... files) {
@@ -117,7 +173,7 @@ public class JavaSourceLanguagePerformanceTest {
     };
     final List<URI> uris = ListExtensions.<Pair<String, String>, URI>map(((List<Pair<String, String>>)Conversions.doWrapArray(files)), _function);
     result.getURIConverter().getURIHandlers().add(uriHandler);
-    final List<IResourceDescription> descriptions = CollectionLiterals.<IResourceDescription>newArrayList();
+    final ArrayList<IResourceDescription> descriptions = CollectionLiterals.<IResourceDescription>newArrayList();
     for (final URI uri : uris) {
       {
         final Resource resource = result.getResource(uri, true);

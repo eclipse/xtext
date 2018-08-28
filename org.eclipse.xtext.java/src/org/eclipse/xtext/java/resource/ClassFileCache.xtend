@@ -50,13 +50,13 @@ class ClassFileCache {
 	}
 	
 	def IBinaryType computeIfAbsent(QualifiedName qualifiedName, Function<? super QualifiedName, ? extends IBinaryType> fun) {
-		val result = cache.computeIfAbsent(qualifiedName, fun)
+		val result = cache.computeIfAbsent(qualifiedName) [
+			fun.apply(it) ?: NULL
+		]
 		if (result !== NULL) { // TODO should this ever happen
 			return result as IBinaryType;
 		}
-		var value = fun.apply(qualifiedName)
-		put(qualifiedName, value)
-		return value
+		return null
 	}
 	
 	def void clear() {

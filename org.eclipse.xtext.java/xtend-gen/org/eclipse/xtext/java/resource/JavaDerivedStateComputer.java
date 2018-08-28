@@ -1,9 +1,7 @@
 package org.eclipse.xtext.java.resource;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Splitter;
 import com.google.inject.Inject;
-import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ClassFile;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.java.resource.InMemoryClassLoader;
 import org.eclipse.xtext.java.resource.IndexAwareNameEnvironment;
 import org.eclipse.xtext.java.resource.JavaConfig;
 import org.eclipse.xtext.java.resource.JavaResource;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -72,9 +70,6 @@ public class JavaDerivedStateComputer {
   
   @Inject
   private IResourceDescriptionsProvider resourceDescriptionsProvider;
-  
-  @Inject
-  private IQualifiedNameConverter qualifiedNameConverter;
   
   public void discardDerivedState(final Resource resource) {
     EList<EObject> resourcesContentsList = resource.getContents();
@@ -213,7 +208,7 @@ public class JavaDerivedStateComputer {
       ClassFile[] _classFiles = it.getClassFiles();
       for (final ClassFile cls : _classFiles) {
         {
-          final QualifiedName key = QualifiedName.create(Splitter.on("/").splitToList(CharBuffer.wrap(cls.fileName())));
+          final QualifiedName key = QualifiedName.create(CharOperation.toStrings(cls.getCompoundName()));
           final Function<QualifiedName, IBinaryType> _function_1 = (QualifiedName name) -> {
             try {
               byte[] _bytes = cls.getBytes();
@@ -233,10 +228,7 @@ public class JavaDerivedStateComputer {
         ClassFile[] _classFiles_1 = it.getClassFiles();
         for (final ClassFile cf : _classFiles_1) {
           {
-            final Function1<char[], String> _function_1 = (char[] it_1) -> {
-              return String.valueOf(it_1);
-            };
-            final String className = IterableExtensions.join(ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(cf.getCompoundName())), _function_1), ".");
+            final String className = CharOperation.toString(cf.getCompoundName());
             map.put(className, cf.getBytes());
             if ((!cf.isNestedType)) {
               topLevelTypes.add(className);

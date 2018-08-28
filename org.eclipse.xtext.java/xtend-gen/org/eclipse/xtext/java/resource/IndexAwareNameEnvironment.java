@@ -40,11 +40,12 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   private final ClassFileCache classFileCache;
   
-  private Map<QualifiedName, NameEnvironmentAnswer> cache = CollectionLiterals.<QualifiedName, NameEnvironmentAnswer>newHashMap();
+  private Map<QualifiedName, NameEnvironmentAnswer> nameToAnswerCache = CollectionLiterals.<QualifiedName, NameEnvironmentAnswer>newHashMap();
   
   @Override
   public void cleanup() {
-    this.cache.clear();
+    this.nameToAnswerCache.clear();
+    this.classFileCache.clear();
   }
   
   @Override
@@ -66,9 +67,9 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
         }
         return new NameEnvironmentAnswer(t, null);
       }
-      boolean _containsKey_1 = this.cache.containsKey(className);
+      boolean _containsKey_1 = this.nameToAnswerCache.containsKey(className);
       if (_containsKey_1) {
-        return this.cache.get(className);
+        return this.nameToAnswerCache.get(className);
       }
       final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(this.resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false));
       NameEnvironmentAnswer result = null;
@@ -93,7 +94,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
         final String fileName = (_string_1 + ".class");
         final URL url = this.classLoader.getResource(fileName);
         if ((url == null)) {
-          this.cache.put(className, null);
+          this.nameToAnswerCache.put(className, null);
           this.classFileCache.put(className, null);
           return null;
         }
@@ -119,7 +120,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
         NameEnvironmentAnswer _nameEnvironmentAnswer_1 = new NameEnvironmentAnswer(reader, null);
         result = _nameEnvironmentAnswer_1;
       }
-      this.cache.put(className, result);
+      this.nameToAnswerCache.put(className, result);
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
