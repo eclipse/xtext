@@ -126,10 +126,6 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       if (_needsGradleBuild) {
         ExternalDependency _externalDependency_2 = new ExternalDependency();
         final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
-          ExternalDependency.P2Coordinates _p2 = it.getP2();
-          _p2.setBundleId("org.junit.jupiter.engine");
-          ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-          _p2_1.setVersion("[5.0.0,6.0.0)");
           ExternalDependency.MavenCoordinates _maven = it.getMaven();
           _maven.setGroupId("org.junit.jupiter");
           ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();

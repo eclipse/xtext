@@ -68,8 +68,6 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 			]
 			if (config.needsGradleBuild) {
 				deps += new ExternalDependency()=>[
-					p2.bundleId = "org.junit.jupiter.engine"
-					p2.version = "[5.0.0,6.0.0)"
 					maven.groupId = "org.junit.jupiter"
 					maven.artifactId = "junit-jupiter-engine"
 					maven.version = "5.1.0"
