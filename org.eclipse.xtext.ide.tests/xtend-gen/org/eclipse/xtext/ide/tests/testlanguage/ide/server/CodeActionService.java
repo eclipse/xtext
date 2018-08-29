@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.Diagnostic;
@@ -23,6 +24,7 @@ import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
@@ -57,7 +59,7 @@ public class CodeActionService implements ICodeActionService {
   private IChangeSerializer serializer;
   
   @Override
-  public List<? extends Command> getCodeActions(final Document document, final XtextResource resource, final CodeActionParams params, final CancelIndicator indicator) {
+  public List<Either<Command, CodeAction>> getCodeActions(final Document document, final XtextResource resource, final CodeActionParams params, final CancelIndicator indicator) {
     final ArrayList<Command> commands = CollectionLiterals.<Command>newArrayList();
     List<Diagnostic> _diagnostics = params.getContext().getDiagnostics();
     for (final Diagnostic d : _diagnostics) {
@@ -75,7 +77,10 @@ public class CodeActionService implements ICodeActionService {
         }
       }
     }
-    return commands;
+    final Function1<Command, Either<Command, CodeAction>> _function = (Command it) -> {
+      return Either.<Command, CodeAction>forLeft(it);
+    };
+    return ListExtensions.<Command, Either<Command, CodeAction>>map(commands, _function);
   }
   
   private Command fixInvalidName(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {

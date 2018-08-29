@@ -107,6 +107,43 @@ class DocumentTest {
         ]
     }
     
+    @Test(expected=IndexOutOfBoundsException) def void testGetLineContent_negative() {
+        new Document(1, '').getLineContent(-1);
+    }
+
+    @Test(expected=IndexOutOfBoundsException) def void testGetLineContent_exceeds() {
+        new Document(1, '''
+        aaa
+        bbb
+        ccc''').getLineContent(3);
+    }
+
+    @Test def void testGetLineContent_empty() {
+        assertEquals('', new Document(1, '').getLineContent(0));
+    }
+
+    @Test def void testGetLineContent() {
+        assertEquals('bbb', new Document(1, '''
+        aaa
+        bbb
+        ccc''').getLineContent(1));
+    }
+
+    @Test def void testGetLineCount_empty() {
+        assertEquals(1, new Document(1, '').lineCount);
+    }
+
+    @Test def void testGetLineCount_single() {
+        assertEquals(1, new Document(1, 'aaa bbb ccc').lineCount);
+    }
+
+    @Test def void testGetLineCount_multi() {
+        assertEquals(3, new Document(1, '''
+        aaa
+        bbb
+        ccc''').lineCount);
+    }
+
     private def change(Position startPos, Position endPos, String newText) {
         new TextEdit => [
               if (startPos !== null) {

@@ -18,6 +18,7 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.CodeAction
 import org.eclipse.lsp4j.CodeActionContext
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
@@ -48,6 +49,8 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.SemanticHighlightingInformation
+import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.TextDocumentIdentifier
@@ -60,6 +63,7 @@ import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClientExtensions
+import org.eclipse.lsp4j.util.SemanticHighlightingTokens
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
@@ -107,11 +111,11 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 		root.deleteOnExit
 	}
-	
+
 	protected def Module getServerModule() {
 		Modules2.mixin(new ServerModule, [
 			bind(RequestManager).toInstance(new RequestManager() {
-				
+
 				override <V> runRead((CancelIndicator)=>V request) {
 					val result = new CompletableFuture()
 					try {
@@ -121,7 +125,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 					}
 					return result
 				}
-				
+
 				override <U,V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V request) {
 					val result = new CompletableFuture()
 					try {
@@ -310,20 +314,32 @@ abstract class AbstractLanguageServerTest implements Endpoint {
  		];
 		return sb.toString;
 	}
-	
+
 	protected dispatch def String toExpectation(ColoringInformation it) {
 		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
 	}
-	
+
+	protected dispatch def String toExpectation(Pair<SemanticHighlightingInformation, List<List<String>>> it) {
+		val sb = new StringBuilder()
+		val tokens = SemanticHighlightingTokens.decode(key.tokens).sort;
+		for (token : tokens) {
+			if (sb.length > 0) {
+				sb.append(', ');
+			}
+			sb.append('''«token.character»:«token.length»:«value.get(token.scope)»''')
+		}
+		return '''«key.line» : [«sb.toString»]''';
+	}
+
 	protected dispatch def String toExpectation(CodeLens it) {
 		return command.title + " " +range.toExpectation
 	}
-	
+
 	@Accessors static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
 		String expectedCodeLensItems = ''
 		(List<? extends CodeLens>)=>void assertCodeLenses = null
 	}
-	
+
 	protected def void testCodeLens((TestCodeLensConfiguration)=>void configurator) {
 		val extension configuration = new TestCodeLensConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
@@ -340,14 +356,14 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			assertEquals(expectedCodeLensItems, result.toExpectation)
 		}
 	}
-	
+
 	protected dispatch def String toExpectation(Command it) '''
 		command : «command»
 		title : «title»
 		args : 
 			«arguments.join(',')[toExpectation]»
 	'''
-	
+
 	protected dispatch def String toExpectation(WorkspaceEdit it) '''
 		changes :
 			«FOR entry : changes.entrySet»
@@ -356,13 +372,13 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		documentChanges : 
 			«documentChanges.toExpectation»
 	'''
-	
+
 	@Accessors static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
 		String expectedCodeActions = ''
-		
-		(List<? extends Command>)=>void assertCodeActions= null
+
+		(List<Either<Command, CodeAction>>)=>void assertCodeActions= null
 	}
-	
+
 	protected def void testCodeAction((TestCodeActionConfiguration)=>void configurator) {
 		val extension configuration = new TestCodeActionConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
@@ -393,7 +409,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 
 		val result = completionItems.get
-		val items = if (result.isLeft) result.getLeft else result.getRight.items 
+		val items = if (result.isLeft) result.getLeft else result.getRight.items
 		// assert ordered by sortText
 		Assert.assertEquals(items, items.sortBy[sortText].toList)
 		if (configuration.assertCompletionList !== null) {
@@ -503,7 +519,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val symbolsFuture = languageServer.documentSymbol(new DocumentSymbolParams(new TextDocumentIdentifier(fileUri)))
 		val symbols = symbolsFuture.get
 		if (configuration.assertSymbols !== null) {
-			configuration.assertSymbols.apply(symbols)
+			configuration.assertSymbols.apply(symbols.map[getLeft])
 		} else {
 			val String actualSymbols = symbols.toExpectation
 			assertEquals(expectedSymbols, actualSymbols)
@@ -549,7 +565,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val actualM = actual.replace(System.lineSeparator, '\n')
 		Assert.assertEquals(expectedM.replace('\t', '    '), actualM.replace('\t', '    '))
 	}
-	
+
 	def void assertEqualsStricter(String expected, String actual) {
 		val expectedM = expected.replace(System.lineSeparator, '\n')
 		val actualM = actual.replace(System.lineSeparator, '\n')
@@ -559,7 +575,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected def testFormatting((FormattingConfiguration)=>void configurator) {
 		testFormatting(null, configurator)
 	}
-	
+
 	protected def testFormatting((DocumentFormattingParams)=>void paramsConfigurator, (FormattingConfiguration)=>void configurator) {
 		val extension configuration = new FormattingConfiguration
 		configuration.filePath = 'MyModel.' + fileExtension
@@ -575,7 +591,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
 		assertEqualsStricter(configuration.expectedText, result.contents)
 	}
-	
+
 	protected def testRangeFormatting((RangeFormattingConfiguration)=>void configurator) {
 		testRangeFormatting(null, configurator)
 	}
@@ -601,11 +617,11 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	override notify(String method, Object parameter) {
 		this.notifications.add(method -> parameter)
 	}
-	
+
 	override request(String method, Object parameter) {
 		return CompletableFuture.completedFuture(null)
 	}
-	
+
 	protected def Map<String, List<Diagnostic>> getDiagnostics() {
 		languageServer.requestManager.runRead[
 			val result = <String, List<Diagnostic>>newHashMap
@@ -615,10 +631,16 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			return result 
 		].get
 	}
-	
+
 	protected def getColoringParams() {
-		languageServer.requestManager.runRead[		
+		languageServer.requestManager.runRead[
 			return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+		].get
+	}
+
+	protected def getSemanticHighlightingParams() {
+		languageServer.requestManager.runRead[
+			return notifications.map[value].filter(SemanticHighlightingParams).toMap([textDocument], [lines]);
 		].get
 	}
 }

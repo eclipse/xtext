@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.SymbolKind;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -49,6 +51,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -156,11 +159,11 @@ public class DocumentSymbolService {
     return targetURIs;
   }
   
-  public List<? extends SymbolInformation> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator) {
+  public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator) {
     return this.getSymbols(resource, cancelIndicator);
   }
   
-  public List<? extends SymbolInformation> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
+  public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
     final LinkedHashMap<EObject, SymbolInformation> symbols = CollectionLiterals.<EObject, SymbolInformation>newLinkedHashMap();
     final TreeIterator<Object> contents = EcoreUtil.<Object>getAllProperContents(resource, true);
     while (contents.hasNext()) {
@@ -181,7 +184,10 @@ public class DocumentSymbolService {
         }
       }
     }
-    return IterableExtensions.<SymbolInformation>toList(symbols.values());
+    final Function1<SymbolInformation, Either<SymbolInformation, DocumentSymbol>> _function = (SymbolInformation it) -> {
+      return Either.<SymbolInformation, DocumentSymbol>forLeft(it);
+    };
+    return IterableExtensions.<Either<SymbolInformation, DocumentSymbol>>toList(IterableExtensions.<SymbolInformation, Either<SymbolInformation, DocumentSymbol>>map(symbols.values(), _function));
   }
   
   protected EObject getContainer(final EObject obj) {

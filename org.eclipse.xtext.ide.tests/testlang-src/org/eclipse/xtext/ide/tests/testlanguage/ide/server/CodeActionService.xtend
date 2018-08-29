@@ -29,6 +29,7 @@ import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.eclipse.xtext.util.StringInputStream
 
 import static org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator.*
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -46,7 +47,7 @@ class CodeActionService implements ICodeActionService {
 				case UNSORTED_MEMBERS: commands += d.fixUnsortedMembers(document, resource, params)
 			}
 		}
-		return commands
+		return commands.map[Either.forLeft(it)];
 	}
 
 	def private Command fixInvalidName(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {

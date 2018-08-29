@@ -14,10 +14,14 @@ import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.DocumentSymbol
+import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.Location
+import org.eclipse.lsp4j.ReferenceParams
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.SymbolKind
 import org.eclipse.lsp4j.TextDocumentPositionParams
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtext.findReferences.IReferenceFinder
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.findReferences.ReferenceAcceptor
@@ -38,8 +42,6 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.eclipse.lsp4j.ReferenceParams
-import org.eclipse.lsp4j.DocumentSymbolParams
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -162,7 +164,7 @@ class DocumentSymbolService {
 		return targetURIs
 	}
 	
-	def List<? extends SymbolInformation> getSymbols(
+	def List<Either<SymbolInformation, DocumentSymbol>> getSymbols(
 		Document document,
 		XtextResource resource,
 		DocumentSymbolParams params,
@@ -171,7 +173,7 @@ class DocumentSymbolService {
 		return getSymbols(resource, cancelIndicator)
 	}
 
-	def List<? extends SymbolInformation> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
+	def List<Either<SymbolInformation, DocumentSymbol>> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
 		val symbols = newLinkedHashMap
 		val contents = resource.getAllProperContents(true)
 		while (contents.hasNext) {
@@ -187,7 +189,7 @@ class DocumentSymbolService {
 				symbol.containerName = containerSymbol?.name
 			}
 		}
-		return symbols.values.toList
+		return symbols.values.map[Either.forLeft(it)].toList
 	}
 
 	protected def EObject getContainer(EObject obj) {

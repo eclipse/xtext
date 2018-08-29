@@ -24,6 +24,7 @@ import org.eclipse.lsp4j.MessageParams;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Registration;
 import org.eclipse.lsp4j.RegistrationParams;
+import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.ShowMessageRequestParams;
 import org.eclipse.lsp4j.Unregistration;
 import org.eclipse.lsp4j.UnregistrationParams;
@@ -187,6 +188,10 @@ public class CommandRegistryTest implements IResourceServiceProvider, IExecutabl
   
   public void publishDiagnostics(final PublishDiagnosticsParams diagnostics) {
     this.noImpl3.publishDiagnostics(diagnostics);
+  }
+  
+  public void semanticHighlighting(final SemanticHighlightingParams params) {
+    this.noImpl3.semanticHighlighting(params);
   }
   
   public void showMessage(final MessageParams messageParams) {

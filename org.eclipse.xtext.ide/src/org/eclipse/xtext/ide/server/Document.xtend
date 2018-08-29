@@ -80,7 +80,44 @@ import org.eclipse.lsp4j.Range
         }
         return new Position(line, column)
     }
-    
+
+    /**
+     * Returns with the text for a certain line without the trailing LF. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
+     * argument is negative or exceeds the number of lines in the document.
+     */
+    def String getLineContent(int lineNumber) throws IndexOutOfBoundsException {
+        if (lineNumber < 0) {
+            throw new IndexOutOfBoundsException(lineNumber + if (printSourceOnError) "" else (" text was : " + contents));
+        }
+        val char NL = '\n';
+        val l = contents.length;
+        val lineContent = new StringBuilder;
+        var line = 0;
+        for (var i = 0; i < l; i++) {
+            if (line > lineNumber) {
+                return lineContent.toString;
+            }
+            val ch = contents.charAt(i);
+            if (line === lineNumber && ch !== NL) {
+                lineContent.append(ch);
+            }
+            if (ch === NL) {
+                line++;
+            }
+        }
+        if (line < lineNumber) {
+            throw new IndexOutOfBoundsException(lineNumber + if (printSourceOnError) "" else (" text was : " + contents));
+        }
+        return lineContent.toString;
+    }
+
+    /**
+     * Get the number of lines in the document. Empty document has line count: {@code 1}.
+     */
+    def int getLineCount() {
+        return getPosition(contents.length).line + 1;
+    }
+
     def String getSubstring(Range range) {
     		val start = getOffSet(range.start)
     		val end = getOffSet(range.end)

@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionContext;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
@@ -44,6 +45,7 @@ import org.eclipse.lsp4j.DocumentFormattingParams;
 import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentHighlightKind;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
@@ -56,6 +58,8 @@ import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.SemanticHighlightingInformation;
+import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
@@ -63,12 +67,14 @@ import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClientExtensions;
+import org.eclipse.lsp4j.util.SemanticHighlightingTokens;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -148,7 +154,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   public static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
     private String expectedCodeActions = "";
     
-    private Procedure1<? super List<? extends Command>> assertCodeActions = null;
+    private Procedure1<? super List<Either<Command, CodeAction>>> assertCodeActions = null;
     
     @Pure
     public String getExpectedCodeActions() {
@@ -160,11 +166,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
     
     @Pure
-    public Procedure1<? super List<? extends Command>> getAssertCodeActions() {
+    public Procedure1<? super List<Either<Command, CodeAction>>> getAssertCodeActions() {
       return this.assertCodeActions;
     }
     
-    public void setAssertCodeActions(final Procedure1<? super List<? extends Command>> assertCodeActions) {
+    public void setAssertCodeActions(final Procedure1<? super List<Either<Command, CodeAction>>> assertCodeActions) {
       this.assertCodeActions = assertCodeActions;
     }
   }
@@ -652,6 +658,36 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return _builder.toString();
   }
   
+  protected String _toExpectation(final Pair<SemanticHighlightingInformation, List<List<String>>> it) {
+    final StringBuilder sb = new StringBuilder();
+    final List<SemanticHighlightingTokens.Token> tokens = IterableExtensions.<SemanticHighlightingTokens.Token>sort(SemanticHighlightingTokens.decode(it.getKey().getTokens()));
+    for (final SemanticHighlightingTokens.Token token : tokens) {
+      {
+        int _length = sb.length();
+        boolean _greaterThan = (_length > 0);
+        if (_greaterThan) {
+          sb.append(", ");
+        }
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(token.character);
+        _builder.append(":");
+        _builder.append(token.length);
+        _builder.append(":");
+        List<String> _get = it.getValue().get(token.scope);
+        _builder.append(_get);
+        sb.append(_builder);
+      }
+    }
+    StringConcatenation _builder = new StringConcatenation();
+    int _line = it.getKey().getLine();
+    _builder.append(_line);
+    _builder.append(" : [");
+    String _string = sb.toString();
+    _builder.append(_string);
+    _builder.append("]");
+    return _builder.toString();
+  }
+  
   protected String _toExpectation(final CodeLens it) {
     String _title = it.getCommand().getTitle();
     String _plus = (_title + " ");
@@ -757,7 +793,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setContext(_doubleArrow);
       };
       CodeActionParams _doubleArrow = ObjectExtensions.<CodeActionParams>operator_doubleArrow(_codeActionParams, _function);
-      final CompletableFuture<List<? extends Command>> codeLenses = this.languageServer.codeAction(_doubleArrow);
+      final CompletableFuture<List<Either<Command, CodeAction>>> codeLenses = this.languageServer.codeAction(_doubleArrow);
       if ((configuration.assertCodeActions != null)) {
         configuration.assertCodeActions.apply(codeLenses.get());
       } else {
@@ -976,12 +1012,15 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final String fileUri = this.initializeContext(configuration).getUri();
       TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
       DocumentSymbolParams _documentSymbolParams = new DocumentSymbolParams(_textDocumentIdentifier);
-      final CompletableFuture<List<? extends SymbolInformation>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParams);
-      final List<? extends SymbolInformation> symbols = symbolsFuture.get();
+      final CompletableFuture<List<Either<SymbolInformation, DocumentSymbol>>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParams);
+      final List<Either<SymbolInformation, DocumentSymbol>> symbols = symbolsFuture.get();
       Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
       if (_tripleNotEquals) {
-        configuration.getAssertSymbols().apply(symbols);
+        final Function1<Either<SymbolInformation, DocumentSymbol>, SymbolInformation> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
+          return it.getLeft();
+        };
+        configuration.getAssertSymbols().apply(ListExtensions.<Either<SymbolInformation, DocumentSymbol>, SymbolInformation>map(symbols, _function));
       } else {
         final String actualSymbols = this.toExpectation(symbols);
         this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
@@ -1172,6 +1211,26 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  protected Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>> getSemanticHighlightingParams() {
+    try {
+      final Function1<CancelIndicator, Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>> _function = (CancelIndicator it) -> {
+        final Function1<Pair<String, Object>, Object> _function_1 = (Pair<String, Object> it_1) -> {
+          return it_1.getValue();
+        };
+        final Function1<SemanticHighlightingParams, VersionedTextDocumentIdentifier> _function_2 = (SemanticHighlightingParams it_1) -> {
+          return it_1.getTextDocument();
+        };
+        final Function1<SemanticHighlightingParams, List<SemanticHighlightingInformation>> _function_3 = (SemanticHighlightingParams it_1) -> {
+          return it_1.getLines();
+        };
+        return IterableExtensions.<SemanticHighlightingParams, VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>toMap(Iterables.<SemanticHighlightingParams>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_1), SemanticHighlightingParams.class), _function_2, _function_3);
+      };
+      return this.languageServer.getRequestManager().<Map<VersionedTextDocumentIdentifier, List<SemanticHighlightingInformation>>>runRead(_function).get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected String toExpectation(final Object it) {
     if (it instanceof Integer) {
       return _toExpectation((Integer)it);
@@ -1181,6 +1240,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((DocumentHighlightKind)it);
     } else if (it instanceof String) {
       return _toExpectation((String)it);
+    } else if (it instanceof Pair) {
+      return _toExpectation((Pair<SemanticHighlightingInformation, List<List<String>>>)it);
     } else if (it == null) {
       return _toExpectation((Void)null);
     } else if (it instanceof Map) {
