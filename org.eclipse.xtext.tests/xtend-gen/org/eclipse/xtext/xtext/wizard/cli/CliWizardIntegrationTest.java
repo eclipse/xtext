@@ -39,6 +39,7 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageServer;
+import org.eclipse.xtext.xtext.wizard.LineDelimiter;
 import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
@@ -154,7 +155,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.mavenTycho");
@@ -171,7 +171,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.mavenTychoJ9");
@@ -188,7 +187,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    it.setLineDelimiter("\n");
     it.setJavaVersion(JavaVersion.JAVA9);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -202,7 +200,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.eclipsePlugin");
@@ -217,7 +214,6 @@ public class CliWizardIntegrationTest {
     _uiProject.setEnabled(true);
     TestProjectDescriptor _testProject_1 = it.getUiProject().getTestProject();
     _testProject_1.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.eclipsePluginP2");
@@ -234,7 +230,6 @@ public class CliWizardIntegrationTest {
     _testProject_1.setEnabled(true);
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.mavenTychoP2");
@@ -253,7 +248,6 @@ public class CliWizardIntegrationTest {
     _webProject.setEnabled(true);
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.full");
@@ -272,7 +266,6 @@ public class CliWizardIntegrationTest {
     _webProject.setEnabled(true);
     P2RepositoryProject _p2Project = it.getP2Project();
     _p2Project.setEnabled(true);
-    it.setLineDelimiter("\n");
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.lsMavenFatjar");
@@ -289,7 +282,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.FATJAR);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -307,7 +299,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.FATJAR);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -325,7 +316,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.FATJAR);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -343,7 +333,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.APP);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -361,7 +350,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.APP);
   })), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
@@ -379,7 +367,6 @@ public class CliWizardIntegrationTest {
     _ideProject.setEnabled(true);
     WebProjectDescriptor _webProject = it.getWebProject();
     _webProject.setEnabled(false);
-    it.setLineDelimiter("\n");
     it.setLanguageServer(LanguageServer.APP);
   }))));
   
@@ -389,6 +376,7 @@ public class CliWizardIntegrationTest {
       XtextVersion _xtextVersion = new XtextVersion("unspecified");
       it.setXtextVersion(_xtextVersion);
       it.setEncoding(Charsets.UTF_8);
+      it.setLineDelimiter(LineDelimiter.UNIX.getValue());
       LanguageDescriptor _language = it.getLanguage();
       final Procedure1<LanguageDescriptor> _function_1 = (LanguageDescriptor it_1) -> {
         it_1.setName("org.xtext.example.mydsl.MyDsl");

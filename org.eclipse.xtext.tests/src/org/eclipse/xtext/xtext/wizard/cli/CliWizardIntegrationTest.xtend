@@ -30,6 +30,7 @@ import org.junit.rules.TemporaryFolder
 import static org.junit.Assert.*
 import org.eclipse.xtext.xtext.wizard.LanguageServer
 import org.eclipse.xtext.util.JavaVersion
+import org.eclipse.xtext.xtext.wizard.LineDelimiter
 
 class CliWizardIntegrationTest {
 
@@ -57,7 +58,6 @@ class CliWizardIntegrationTest {
 			runtimeProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.mavenTycho"
@@ -69,7 +69,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.mavenTychoJ9"
@@ -81,7 +80,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			lineDelimiter = "\n"
 			javaVersion = JavaVersion.JAVA9
 		],
 		newProjectConfig => [
@@ -92,7 +90,6 @@ class CliWizardIntegrationTest {
 			runtimeProject.testProject.enabled = true
 			ideProject.enabled = true
 			webProject.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.eclipsePlugin"
@@ -103,7 +100,6 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			uiProject.enabled = true
 			uiProject.testProject.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.eclipsePluginP2"
@@ -115,7 +111,6 @@ class CliWizardIntegrationTest {
 			uiProject.enabled = true
 			uiProject.testProject.enabled = true
 			p2Project.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.mavenTychoP2"
@@ -128,7 +123,6 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			p2Project.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.full"
@@ -141,7 +135,6 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			p2Project.enabled = true
-			lineDelimiter = "\n"
 		],
 		newProjectConfig => [
 			baseName = "org.xtext.example.lsMavenFatjar"
@@ -153,7 +146,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.FATJAR
 		],
 		newProjectConfig => [
@@ -166,7 +158,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.FATJAR
 		],
 		newProjectConfig => [
@@ -179,7 +170,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.FATJAR
 		],
 		newProjectConfig => [
@@ -192,7 +182,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.APP
 		],
 		newProjectConfig => [
@@ -205,7 +194,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.APP
 		],
 		newProjectConfig => [
@@ -218,7 +206,6 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = false
 			ideProject.enabled = true
 			webProject.enabled = false
-			lineDelimiter = "\n"
 			languageServer = LanguageServer.APP
 		]
 	]
@@ -227,6 +214,7 @@ class CliWizardIntegrationTest {
 		new WizardConfiguration => [
 			xtextVersion = new XtextVersion("unspecified")
 			encoding = Charsets.UTF_8
+			lineDelimiter = LineDelimiter.UNIX.value
 			language => [
 				name = "org.xtext.example.mydsl.MyDsl"
 				fileExtensions = FileExtensions.fromString("mydsl")

@@ -32,5 +32,6 @@ ext.versions = [
 	'asm': '6.2.1',
 	'icu': '52.1',
 	'junit': '4.12',
-	'junit5': '5.1.0'
+	'junit5': '5.1.0',
+	'args4j': '2.33'
 ]

@@ -11,6 +11,7 @@ dependencies {
 	optional files('lib/simple.jar')
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
 	testCompile sourceSets.mwe2.output
+	testCompile "args4j:args4j:$versions.args4j"
 }
 
 sourceSets.test {
