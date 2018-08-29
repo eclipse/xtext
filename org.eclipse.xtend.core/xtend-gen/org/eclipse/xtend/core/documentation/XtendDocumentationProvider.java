@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.documentation;
 
 import com.google.common.base.Objects;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 @SuppressWarnings("all")
 public class XtendDocumentationProvider extends MultiLineCommentDocumentationProvider {
   @Override

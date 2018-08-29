@@ -21,11 +21,13 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
+@Singleton
 public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 
 	@Inject
@@ -74,6 +76,11 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 		if (parentName == null)
 			return null;
 		return parentName.append(name);
+	}
+	
+	@Override
+	protected QualifiedName getOrComputeFullyQualifiedName(EObject obj) {
+		return computeFullyQualifiedName(obj);
 	}
 
 }
