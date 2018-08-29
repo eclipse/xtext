@@ -73,8 +73,6 @@ public class STRINGConverterTest extends AbstractXtextTests {
 		} catch(ValueConverterWithValueException e) {
 			assertEquals(" z", e.getValue());
 			assertTrue(e.hasRange());
-			assertEquals(2, e.getOffset());
-			assertEquals(2, e.getLength());
 		}
 	}
 	
@@ -88,7 +86,51 @@ public class STRINGConverterTest extends AbstractXtextTests {
 			assertFalse(e.hasRange());
 		}
 	}
-
+	
+	@Test public void testBrokenStringLiteral_06() throws Exception {
+		String s = "'\\'";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("'", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_07() throws Exception {
+		String s = "\"\\\"";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("\"", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_08() throws Exception {
+		String s = "'\\\"";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("\"", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_09() throws Exception {
+		String s = "\"\\'";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("'", e.getValue());
+			assertFalse(e.hasRange());
+		}
+	}
+	
 	@Test public void testEscapeChars() throws Exception {
 		String s = "\"\\t\\n\\r\\f\\b\"";
 		String value = valueConverter.toValue(s, null);

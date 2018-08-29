@@ -153,7 +153,6 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 						errorIndex = off - 1;
 						errorLength = 1;
 					}
-					out[outLen++] = aChar;
 				}
 			} else {
 				out[outLen++] = aChar;
@@ -180,6 +179,8 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 					errorLength = -1;
 				}
 			}
+		} else if (off == end) {
+			errorMessage = getStringNotClosedMessage();
 		}
 		if (errorMessage != null) {
 			throw new ValueConverterWithValueException(errorMessage, node, new String(out, 0, outLen), errorIndex,
