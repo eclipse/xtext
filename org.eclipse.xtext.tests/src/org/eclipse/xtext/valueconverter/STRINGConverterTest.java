@@ -72,9 +72,7 @@ public class STRINGConverterTest extends AbstractXtextTests {
 			fail();
 		} catch(ValueConverterWithValueException e) {
 			assertEquals(" z", e.getValue());
-			assertTrue(e.hasRange());
-			assertEquals(2, e.getOffset());
-			assertEquals(2, e.getLength());
+			assertFalse(e.hasRange());
 		}
 	}
 	
@@ -86,6 +84,19 @@ public class STRINGConverterTest extends AbstractXtextTests {
 		} catch(ValueConverterWithValueException e) {
 			assertEquals(" z ", e.getValue());
 			assertFalse(e.hasRange());
+		}
+	}
+	
+	@Test public void testBrokenStringLiteral_06() throws Exception {
+		String s = "\"\\\"";
+		try {
+			valueConverter.toValue(s, null);
+			fail();
+		} catch(ValueConverterWithValueException e) {
+			assertEquals("", e.getValue());
+			assertTrue(e.hasRange());
+			assertEquals(1, e.getOffset());
+			assertEquals(1, e.getLength());
 		}
 	}
 
