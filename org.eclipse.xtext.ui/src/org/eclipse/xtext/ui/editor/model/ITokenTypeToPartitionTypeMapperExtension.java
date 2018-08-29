@@ -25,7 +25,7 @@ import com.google.inject.ImplementedBy;
 public interface ITokenTypeToPartitionTypeMapperExtension {
 
 	/**
-	 * Returns true of the given partitionType is to be treated as 
+	 * Returns true if the given partitionType is to be treated as 
 	 * as a multi line comment.
 	 * @see DefaultFoldingRegionProvider#computeCommentFolding
 	 * @see XtextEditor SmartLineStartAction in XtextEditor
@@ -34,7 +34,7 @@ public interface ITokenTypeToPartitionTypeMapperExtension {
 	boolean isMultiLineComment(String partitionType);
 	
 	/**
-	 * Returns true of the given partitionType is to be treated as 
+	 * Returns true if the given partitionType is to be treated as 
 	 * as a single line comment.
 	 * @see XtextEditor SmartLineStartAction in XtextEditor
 	 * @see XtextSpellingReconcileStrategy
