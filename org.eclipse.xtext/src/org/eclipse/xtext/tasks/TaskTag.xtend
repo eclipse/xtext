@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
+import java.util.HashMap
 import java.util.List
+import java.util.Map
+import java.util.regex.Pattern
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
-import java.util.regex.Pattern
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -39,6 +41,8 @@ class TaskTags implements Iterable<TaskTag> {
 	
 	@Accessors(NONE)
 	var Pattern pattern
+	@Accessors(NONE)
+	var Map<String, TaskTag> taskTagsByName
 
 	override iterator() {
 		taskTags.iterator
@@ -56,5 +60,25 @@ class TaskTags implements Iterable<TaskTag> {
 		}
 		return pattern
 	}
+
+	def Map<String, TaskTag> getTaskTagsByName() {
+		if (taskTagsByName === null) {
+			taskTagsByName = new HashMap<String, TaskTag>
+			for (tag : taskTags) {
+				val name = if (caseSensitive) tag.name else tag.name.toLowerCase
+				val oldTag = taskTagsByName.get(name)
+				if (oldTag !== null) {
+					// prioritize higher priority tags
+					if (tag.priority.ordinal < oldTag.priority.ordinal) {
+						taskTagsByName.put(name, tag)
+					}
+				} else {
+					taskTagsByName.put(name, tag)
+				}
+			}
+		}
+		return taskTagsByName
+	}
+
 
 }

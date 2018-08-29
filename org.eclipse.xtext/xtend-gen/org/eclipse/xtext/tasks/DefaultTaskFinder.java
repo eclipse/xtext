@@ -7,9 +7,9 @@
  */
 package org.eclipse.xtext.tasks;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,7 +29,6 @@ import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -94,10 +93,12 @@ public class DefaultTaskFinder implements ITaskFinder {
   }
   
   protected List<Task> findTasks(final ICompositeNode it, final TaskTags taskTags) {
-    final Function1<ILeafNode, List<Task>> _function = (ILeafNode it_1) -> {
-      return this.findTasks(it_1, taskTags);
+    final ArrayList<Task> result = CollectionLiterals.<Task>newArrayList();
+    final Consumer<ILeafNode> _function = (ILeafNode it_1) -> {
+      result.addAll(this.findTasks(it_1, taskTags));
     };
-    return IterableExtensions.<Task>toList(Iterables.<Task>concat(IterableExtensions.<ILeafNode, List<Task>>map(it.getLeafNodes(), _function)));
+    it.getLeafNodes().forEach(_function);
+    return result;
   }
   
   protected List<Task> findTasks(final ILeafNode node, final TaskTags taskTags) {
@@ -118,7 +119,7 @@ public class DefaultTaskFinder implements ITaskFinder {
       tasks.forEach(_function);
       return tasks;
     }
-    return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
+    return Collections.<Task>emptyList();
   }
   
   /**
