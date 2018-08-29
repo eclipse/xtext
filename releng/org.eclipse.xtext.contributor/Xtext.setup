@@ -93,7 +93,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository"/>
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-09"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -787,10 +787,10 @@
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
             name="org.objectweb.asm"
-            versionRange="[6.1.1,6.2.0)"/>
+            versionRange="[6.2.1,6.3.0)"/>
         <requirement
             name="org.objectweb.asm.tree"
-            versionRange="[6.1.1,6.2.0)"/>
+            versionRange="[6.2.1,6.3.0)"/>
         <requirement
             name="org.eclipse.cbi.p2repo.analyzers"
             optional="true"/>
