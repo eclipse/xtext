@@ -8,22 +8,21 @@
 package org.eclipse.xtext.tasks
 
 import java.util.HashMap
-import java.util.regex.Pattern
-import org.eclipse.xtext.util.Strings
 import java.util.Map
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
 class DefaultTaskParser implements ITaskParser {
-
+	
 	override parseTasks(String source, TaskTags taskTags) {
 		if (taskTags.empty) return #[]
 
 		val taskTagsByName = getTaskTagsByName(taskTags)
 
-		val matcher = taskTags.toPattern.matcher(source)
+		val matcher = toPattern(taskTags).matcher(source)
 		val tasks = newArrayList
 		// keep track of the offset and line numbers to avoid unnecessary line counting from start
 		var prevLine = 1;
@@ -60,11 +59,6 @@ class DefaultTaskParser implements ITaskParser {
 	}
 
 	protected def toPattern(TaskTags taskTags) {
-		//this takes roughly 1µs per call, so we think its not worth caching patterns here
-		var flags = Pattern.MULTILINE
-		if (!taskTags.caseSensitive) {
-			flags = flags.bitwiseOr(Pattern.CASE_INSENSITIVE).bitwiseOr(Pattern.UNICODE_CASE)
-		}
-		Pattern.compile('''^.*((«taskTags.map[Pattern.quote(name)].join("|")»)(.*)?)$''', flags)
+		return taskTags.toPattern
 	}
 }

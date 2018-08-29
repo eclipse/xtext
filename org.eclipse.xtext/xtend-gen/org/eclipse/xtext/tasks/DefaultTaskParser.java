@@ -14,14 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.tasks.ITaskParser;
 import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -99,24 +97,6 @@ public class DefaultTaskParser implements ITaskParser {
   }
   
   protected Pattern toPattern(final TaskTags taskTags) {
-    Pattern _xblockexpression = null;
-    {
-      int flags = Pattern.MULTILINE;
-      boolean _isCaseSensitive = taskTags.isCaseSensitive();
-      boolean _not = (!_isCaseSensitive);
-      if (_not) {
-        flags = ((flags | Pattern.CASE_INSENSITIVE) | Pattern.UNICODE_CASE);
-      }
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("^.*((");
-      final Function1<TaskTag, String> _function = (TaskTag it) -> {
-        return Pattern.quote(it.getName());
-      };
-      String _join = IterableExtensions.join(IterableExtensions.<TaskTag, String>map(taskTags, _function), "|");
-      _builder.append(_join);
-      _builder.append(")(.*)?)$");
-      _xblockexpression = Pattern.compile(_builder.toString(), flags);
-    }
-    return _xblockexpression;
+    return taskTags.toPattern();
   }
 }

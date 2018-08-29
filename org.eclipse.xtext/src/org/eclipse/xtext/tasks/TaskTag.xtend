@@ -10,6 +10,7 @@ package org.eclipse.xtext.tasks
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import java.util.regex.Pattern
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -35,9 +36,25 @@ class TaskTags implements Iterable<TaskTag> {
 
 	boolean caseSensitive
 	val List<TaskTag> taskTags = newArrayList
+	
+	@Accessors(NONE)
+	var Pattern pattern
 
 	override iterator() {
 		taskTags.iterator
+	}
+	
+	def Pattern toPattern() {
+		if (pattern === null) {
+			// for projects with a lot of comments around 5-10% of full build is spend to compile pattern
+			// hence we cache it
+			var flags = Pattern.MULTILINE
+			if (!caseSensitive) {
+				flags = flags.bitwiseOr(Pattern.CASE_INSENSITIVE).bitwiseOr(Pattern.UNICODE_CASE)
+			}
+			pattern = Pattern.compile('''^.*((«taskTags.map[Pattern.quote(name)].join("|")»)(.*)?)$''', flags)
+		}
+		return pattern
 	}
 
 }
