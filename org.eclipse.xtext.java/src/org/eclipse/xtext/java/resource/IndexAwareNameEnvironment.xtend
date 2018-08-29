@@ -38,7 +38,6 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 	def NameEnvironmentAnswer findType(QualifiedName className) {
 		if (classFileCache.containsKey(className)) {
 			val t = classFileCache.get(className)
-			// TODO is this ok?
 			if (t===null) {
 				return null
 			}
@@ -63,23 +62,18 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			val url = classLoader.getResource(fileName)
 			if (url === null) {
 				nameToAnswerCache.put(className, null)
-				//TODO is that ok
 				classFileCache.put(className, null)
 				return null;
 			}
-			// todo: try with resources/ close Stream
 			var InputStream stream = null
 			val IBinaryType reader = try {
 				stream = url.openStream
 				ClassFileReader.read(stream, fileName)
-				//TODO what if read fails
 			} finally {
 				if (stream !== null) {
 					stream.close
 				}
 			}
-			// TODO is this ok?
-			// TODO what if reader is null
 			if (reader === null) {
 				return null;
 			}

@@ -128,8 +128,6 @@ class JavaDerivedStateComputer {
 		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator, classFileCache)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
 			for (cls : it.classFiles) {
-				// TODO What is with inner classes (they contain $)
-				// TODO is there a better way to obtain the class name
 				val key = QualifiedName.create(CharOperation.toStrings(cls.compoundName))
 				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes, cls.fileName)])
 			}
@@ -190,19 +188,9 @@ class JavaDerivedStateComputer {
         compilerOptions.sourceLevel = sourceLevel
         compilerOptions.produceMethodParameters = true
         compilerOptions.produceReferenceInfo = true
-        // these fields have been introduces in JDT 3.7
-        try {
-            CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, targetLevel)
-        } catch (NoSuchFieldException e) {
-            // ignore
-        }
+        compilerOptions.originalSourceLevel = targetLevel
         compilerOptions.complianceLevel = sourceLevel
-        // these fields have been introduces in JDT 3.7
-        try {
-            CompilerOptions.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel)
-        } catch (NoSuchFieldException e) {
-            // ignore
-        }
+        compilerOptions.originalComplianceLevel = targetLevel
         return compilerOptions
     }
 

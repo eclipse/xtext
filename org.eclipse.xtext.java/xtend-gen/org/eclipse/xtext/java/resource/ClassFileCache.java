@@ -19,8 +19,11 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 
 /**
+ * A cache for parsed class or java source file content. It is bound to the
+ * lifecycle of a resource set.
+ * 
  * @author Christian Dietrich - Initial contribution and API
- * @since 2.14
+ * @since 2.15
  */
 @EmfAdaptable
 @SuppressWarnings("all")
@@ -78,8 +81,8 @@ public class ClassFileCache {
       return _elvis;
     };
     final Object result = this.cache.computeIfAbsent(qualifiedName, _function);
-    if ((result != ClassFileCache.NULL)) {
-      return ((IBinaryType) result);
+    if ((result instanceof IBinaryType)) {
+      return ((IBinaryType)result);
     }
     return null;
   }

@@ -290,62 +290,44 @@ public class JavaDerivedStateComputer {
   }
   
   protected CompilerOptions getCompilerOptions(final JavaConfig javaConfig) {
-    try {
-      JavaVersion _elvis = null;
-      JavaVersion _javaSourceLevel = null;
-      if (javaConfig!=null) {
-        _javaSourceLevel=javaConfig.getJavaSourceLevel();
-      }
-      if (_javaSourceLevel != null) {
-        _elvis = _javaSourceLevel;
-      } else {
-        _elvis = JavaVersion.JAVA8;
-      }
-      final JavaVersion sourceVersion = _elvis;
-      JavaVersion _elvis_1 = null;
-      JavaVersion _javaTargetLevel = null;
-      if (javaConfig!=null) {
-        _javaTargetLevel=javaConfig.getJavaTargetLevel();
-      }
-      if (_javaTargetLevel != null) {
-        _elvis_1 = _javaTargetLevel;
-      } else {
-        _elvis_1 = JavaVersion.JAVA8;
-      }
-      final JavaVersion targetVersion = _elvis_1;
-      boolean _equals = Objects.equal(sourceVersion, JavaVersion.JAVA7);
-      if (_equals) {
-        JavaDerivedStateComputer.LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.");
-      }
-      final long sourceLevel = this.toJdtVersion(sourceVersion);
-      final long targetLevel = this.toJdtVersion(targetVersion);
-      final CompilerOptions compilerOptions = new CompilerOptions();
-      compilerOptions.targetJDK = targetLevel;
-      compilerOptions.inlineJsrBytecode = true;
-      compilerOptions.sourceLevel = sourceLevel;
-      compilerOptions.produceMethodParameters = true;
-      compilerOptions.produceReferenceInfo = true;
-      try {
-        CompilerOptions.class.getField("originalSourceLevel").setLong(compilerOptions, targetLevel);
-      } catch (final Throwable _t) {
-        if (_t instanceof NoSuchFieldException) {
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-      compilerOptions.complianceLevel = sourceLevel;
-      try {
-        CompilerOptions.class.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel);
-      } catch (final Throwable _t_1) {
-        if (_t_1 instanceof NoSuchFieldException) {
-        } else {
-          throw Exceptions.sneakyThrow(_t_1);
-        }
-      }
-      return compilerOptions;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    JavaVersion _elvis = null;
+    JavaVersion _javaSourceLevel = null;
+    if (javaConfig!=null) {
+      _javaSourceLevel=javaConfig.getJavaSourceLevel();
     }
+    if (_javaSourceLevel != null) {
+      _elvis = _javaSourceLevel;
+    } else {
+      _elvis = JavaVersion.JAVA8;
+    }
+    final JavaVersion sourceVersion = _elvis;
+    JavaVersion _elvis_1 = null;
+    JavaVersion _javaTargetLevel = null;
+    if (javaConfig!=null) {
+      _javaTargetLevel=javaConfig.getJavaTargetLevel();
+    }
+    if (_javaTargetLevel != null) {
+      _elvis_1 = _javaTargetLevel;
+    } else {
+      _elvis_1 = JavaVersion.JAVA8;
+    }
+    final JavaVersion targetVersion = _elvis_1;
+    boolean _equals = Objects.equal(sourceVersion, JavaVersion.JAVA7);
+    if (_equals) {
+      JavaDerivedStateComputer.LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.");
+    }
+    final long sourceLevel = this.toJdtVersion(sourceVersion);
+    final long targetLevel = this.toJdtVersion(targetVersion);
+    final CompilerOptions compilerOptions = new CompilerOptions();
+    compilerOptions.targetJDK = targetLevel;
+    compilerOptions.inlineJsrBytecode = true;
+    compilerOptions.sourceLevel = sourceLevel;
+    compilerOptions.produceMethodParameters = true;
+    compilerOptions.produceReferenceInfo = true;
+    compilerOptions.originalSourceLevel = targetLevel;
+    compilerOptions.complianceLevel = sourceLevel;
+    compilerOptions.originalComplianceLevel = targetLevel;
+    return compilerOptions;
   }
   
   protected long toJdtVersion(final JavaVersion version) {

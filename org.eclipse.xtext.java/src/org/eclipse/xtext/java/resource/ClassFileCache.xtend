@@ -15,18 +15,17 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.util.internal.EmfAdaptable
 
 /**
+ * A cache for parsed class or java source file content. It is bound to the
+ * lifecycle of a resource set.
+ * 
  * @author Christian Dietrich - Initial contribution and API
- * @since 2.14
+ * @since 2.15
  */
 @EmfAdaptable
 class ClassFileCache {
 	
 	static val NULL = new Object();
 	
-	//TODO: concurrency
-	//TODO: clear
-	//TODO: weak?
-	// type if Object by intention, but we store IBinaryTypes only
 	val Map<QualifiedName, Object> cache = new ConcurrentHashMap()
 	
 	def boolean containsKey(QualifiedName qualifiedName) {
@@ -53,8 +52,8 @@ class ClassFileCache {
 		val result = cache.computeIfAbsent(qualifiedName) [
 			fun.apply(it) ?: NULL
 		]
-		if (result !== NULL) { // TODO should this ever happen
-			return result as IBinaryType;
+		if (result instanceof IBinaryType) {
+			return result
 		}
 		return null
 	}
