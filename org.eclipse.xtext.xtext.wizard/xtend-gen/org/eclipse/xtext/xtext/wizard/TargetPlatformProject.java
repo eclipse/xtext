@@ -194,13 +194,13 @@ public class TargetPlatformProject extends ProjectDescriptor {
       }
     }
     _builder.append("\t");
-    _builder.append("<unit id=\"org.objectweb.asm\" version=\"6.1.1.v20180414-0329\"/>");
+    _builder.append("<unit id=\"org.objectweb.asm\" version=\"6.2.1.v20180823-1831\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"6.1.1.v20180414-0329\"/>");
+    _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"6.2.1.v20180823-1831\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<repository location=\"http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-09\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
