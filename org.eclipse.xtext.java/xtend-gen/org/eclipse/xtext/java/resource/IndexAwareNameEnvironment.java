@@ -104,7 +104,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
           ClassFileReader _xblockexpression = null;
           {
             stream = url.openStream();
-            _xblockexpression = ClassFileReader.read(url.openStream(), fileName);
+            _xblockexpression = ClassFileReader.read(stream, fileName);
           }
           _xtrycatchfinallyexpression = _xblockexpression;
         } finally {

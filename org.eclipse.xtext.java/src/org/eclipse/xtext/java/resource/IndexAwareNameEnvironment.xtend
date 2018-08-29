@@ -71,7 +71,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 			var InputStream stream = null
 			val IBinaryType reader = try {
 				stream = url.openStream
-				ClassFileReader.read(url.openStream, fileName)
+				ClassFileReader.read(stream, fileName)
 				//TODO what if read fails
 			} finally {
 				if (stream !== null) {
