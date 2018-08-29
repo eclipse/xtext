@@ -75,18 +75,40 @@ class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 		if (resourceURIs.size > 1) {
 			addIssue(type, resourceURIs.filter[it != type.eResource.URI].head.lastSegment)
 			return false
+		} else {
+			// There is more than one description in one single file -> local duplication
+			if(descriptions.size > 1){
+				addIssue(type)
+				return false
+			}
 		}
 		return true
 	}
 	
-	protected def void addIssue(JvmDeclaredType type, String fileName) {
-		val sourceElement = associations.getPrimarySourceElement(type)
-		if (sourceElement === null)
-			addIssue('''The type «type.simpleName» is already defined in «fileName».''', type, IssueCodes.DUPLICATE_TYPE)
-		else {
-			val feature = sourceElement.eClass.getEStructuralFeature('name')
-			addIssue('''The type «type.simpleName» is already defined in «fileName».''', sourceElement, feature, IssueCodes.DUPLICATE_TYPE)
-		}
+	/**
+	 * Marks a type as already defined.
+	 * @since 2.15
+	 */
+	protected def void addIssue(JvmDeclaredType type){
+		addIssue(type, null)
 	}
 	
+	/**
+	 * Marks a type as already defined.
+	 * 
+	 * @param type - the type to mark already defined.
+	 * @param fileName - a file where the type is already defined.
+	 * 					 If fileName is null this information will not be part of the message.
+	 * 
+	 */
+	protected def void addIssue(JvmDeclaredType type, String fileName) {
+		val message = '''The type «type.simpleName» is already defined«IF fileName !== null» in «fileName»«ENDIF».'''
+		val sourceElement = associations.getPrimarySourceElement(type)
+		if (sourceElement === null)
+			addIssue(message, type, IssueCodes.DUPLICATE_TYPE)
+		else {
+			val feature = sourceElement.eClass.getEStructuralFeature('name')
+			addIssue(message, sourceElement, feature, IssueCodes.DUPLICATE_TYPE)
+		}
+	}
 }

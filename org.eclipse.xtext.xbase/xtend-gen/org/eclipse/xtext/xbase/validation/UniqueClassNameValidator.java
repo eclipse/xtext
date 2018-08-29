@@ -109,31 +109,52 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       };
       this.addIssue(type, IterableExtensions.<URI>head(IterableExtensions.<URI>filter(resourceURIs, _function_1)).lastSegment());
       return false;
+    } else {
+      int _size_1 = IterableExtensions.size(descriptions);
+      boolean _greaterThan_1 = (_size_1 > 1);
+      if (_greaterThan_1) {
+        this.addIssue(type);
+        return false;
+      }
     }
     return true;
   }
   
+  /**
+   * Marks a type as already defined.
+   * @since 2.15
+   */
+  protected void addIssue(final JvmDeclaredType type) {
+    this.addIssue(type, null);
+  }
+  
+  /**
+   * Marks a type as already defined.
+   * 
+   * @param type - the type to mark already defined.
+   * @param fileName - a file where the type is already defined.
+   * 					 If fileName is null this information will not be part of the message.
+   */
   protected void addIssue(final JvmDeclaredType type, final String fileName) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("The type ");
+    String _simpleName = type.getSimpleName();
+    _builder.append(_simpleName);
+    _builder.append(" is already defined");
+    {
+      if ((fileName != null)) {
+        _builder.append(" in ");
+        _builder.append(fileName);
+      }
+    }
+    _builder.append(".");
+    final String message = _builder.toString();
     final EObject sourceElement = this.associations.getPrimarySourceElement(type);
     if ((sourceElement == null)) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("The type ");
-      String _simpleName = type.getSimpleName();
-      _builder.append(_simpleName);
-      _builder.append(" is already defined in ");
-      _builder.append(fileName);
-      _builder.append(".");
-      this.addIssue(_builder.toString(), type, IssueCodes.DUPLICATE_TYPE);
+      this.addIssue(message, type, IssueCodes.DUPLICATE_TYPE);
     } else {
       final EStructuralFeature feature = sourceElement.eClass().getEStructuralFeature("name");
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("The type ");
-      String _simpleName_1 = type.getSimpleName();
-      _builder_1.append(_simpleName_1);
-      _builder_1.append(" is already defined in ");
-      _builder_1.append(fileName);
-      _builder_1.append(".");
-      this.addIssue(_builder_1.toString(), sourceElement, feature, IssueCodes.DUPLICATE_TYPE);
+      this.addIssue(message, sourceElement, feature, IssueCodes.DUPLICATE_TYPE);
     }
   }
 }
