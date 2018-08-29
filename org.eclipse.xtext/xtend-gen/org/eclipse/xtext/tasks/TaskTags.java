@@ -7,8 +7,10 @@
  */
 package org.eclipse.xtext.tasks;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -34,6 +36,9 @@ public class TaskTags implements Iterable<TaskTag> {
   @Accessors(AccessorType.NONE)
   private Pattern pattern;
   
+  @Accessors(AccessorType.NONE)
+  private Map<String, TaskTag> taskTagsByName;
+  
   @Override
   public Iterator<TaskTag> iterator() {
     return this.taskTags.iterator();
@@ -56,6 +61,36 @@ public class TaskTags implements Iterable<TaskTag> {
       this.pattern = Pattern.compile(_builder.toString(), flags);
     }
     return this.pattern;
+  }
+  
+  public Map<String, TaskTag> getTaskTagsByName() {
+    if ((this.taskTagsByName == null)) {
+      HashMap<String, TaskTag> _hashMap = new HashMap<String, TaskTag>();
+      this.taskTagsByName = _hashMap;
+      for (final TaskTag tag : this.taskTags) {
+        {
+          String _xifexpression = null;
+          if (this.caseSensitive) {
+            _xifexpression = tag.getName();
+          } else {
+            _xifexpression = tag.getName().toLowerCase();
+          }
+          final String name = _xifexpression;
+          final TaskTag oldTag = this.taskTagsByName.get(name);
+          if ((oldTag != null)) {
+            int _ordinal = tag.getPriority().ordinal();
+            int _ordinal_1 = oldTag.getPriority().ordinal();
+            boolean _lessThan = (_ordinal < _ordinal_1);
+            if (_lessThan) {
+              this.taskTagsByName.put(name, tag);
+            }
+          } else {
+            this.taskTagsByName.put(name, tag);
+          }
+        }
+      }
+    }
+    return this.taskTagsByName;
   }
   
   @Pure

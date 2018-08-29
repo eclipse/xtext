@@ -9,6 +9,7 @@ package org.eclipse.xtext.tasks
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
+import java.util.Collections
 import java.util.List
 import java.util.regex.Pattern
 import org.eclipse.emf.ecore.resource.Resource
@@ -52,7 +53,9 @@ class DefaultTaskFinder implements ITaskFinder {
 	}
 
 	protected def List<Task> findTasks(ICompositeNode it, TaskTags taskTags) {
-		leafNodes.map[findTasks(taskTags)].flatten.toList
+		val result = newArrayList
+		leafNodes.forEach[result.addAll(findTasks(taskTags))]
+		return result
 	}
 
 	protected def List<Task> findTasks(ILeafNode node, TaskTags taskTags) {
@@ -65,7 +68,7 @@ class DefaultTaskFinder implements ITaskFinder {
 			]
 			return tasks
 		}
-		return #[]
+		return Collections.emptyList
 	}
 
 	/**

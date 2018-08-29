@@ -7,9 +7,7 @@
  */
 package org.eclipse.xtext.tasks;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -30,19 +28,22 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class DefaultTaskParser implements ITaskParser {
   @Override
   public List<Task> parseTasks(final String source, final TaskTags taskTags) {
-    ArrayList<Task> _xblockexpression = null;
+    List<Task> _xblockexpression = null;
     {
       boolean _isEmpty = IterableExtensions.isEmpty(taskTags);
       if (_isEmpty) {
-        return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
+        return Collections.<Task>emptyList();
       }
       final Map<String, TaskTag> taskTagsByName = this.getTaskTagsByName(taskTags);
       final Matcher matcher = this.toPattern(taskTags).matcher(source);
-      final ArrayList<Task> tasks = CollectionLiterals.<Task>newArrayList();
+      List<Task> tasks = null;
       int prevLine = 1;
       int prevOffset = 0;
       while (matcher.find()) {
         {
+          if ((tasks == null)) {
+            tasks = CollectionLiterals.<Task>newArrayList();
+          }
           final Task task = new Task();
           final String matchedTag = matcher.group(2);
           String _xifexpression = null;
@@ -63,37 +64,20 @@ public class DefaultTaskParser implements ITaskParser {
           tasks.add(task);
         }
       }
-      _xblockexpression = tasks;
+      List<Task> _elvis = null;
+      if (tasks != null) {
+        _elvis = tasks;
+      } else {
+        List<Task> _emptyList = Collections.<Task>emptyList();
+        _elvis = _emptyList;
+      }
+      _xblockexpression = _elvis;
     }
     return _xblockexpression;
   }
   
   protected Map<String, TaskTag> getTaskTagsByName(final TaskTags taskTags) {
-    final HashMap<String, TaskTag> taskTagsByName = new HashMap<String, TaskTag>();
-    for (final TaskTag tag : taskTags) {
-      {
-        String _xifexpression = null;
-        boolean _isCaseSensitive = taskTags.isCaseSensitive();
-        if (_isCaseSensitive) {
-          _xifexpression = tag.getName();
-        } else {
-          _xifexpression = tag.getName().toLowerCase();
-        }
-        final String name = _xifexpression;
-        final TaskTag oldTag = taskTagsByName.get(name);
-        if ((oldTag != null)) {
-          int _ordinal = tag.getPriority().ordinal();
-          int _ordinal_1 = oldTag.getPriority().ordinal();
-          boolean _lessThan = (_ordinal < _ordinal_1);
-          if (_lessThan) {
-            taskTagsByName.put(name, tag);
-          }
-        } else {
-          taskTagsByName.put(name, tag);
-        }
-      }
-    }
-    return taskTagsByName;
+    return taskTags.getTaskTagsByName();
   }
   
   protected Pattern toPattern(final TaskTags taskTags) {

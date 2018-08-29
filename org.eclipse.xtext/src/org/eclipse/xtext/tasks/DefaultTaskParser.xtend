@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.tasks
 
-import java.util.HashMap
+import java.util.Collections
+import java.util.List
 import java.util.Map
 import org.eclipse.xtext.util.Strings
 
@@ -18,16 +19,18 @@ import org.eclipse.xtext.util.Strings
 class DefaultTaskParser implements ITaskParser {
 	
 	override parseTasks(String source, TaskTags taskTags) {
-		if (taskTags.empty) return #[]
+		if (taskTags.empty) return Collections.emptyList
 
 		val taskTagsByName = getTaskTagsByName(taskTags)
 
 		val matcher = toPattern(taskTags).matcher(source)
-		val tasks = newArrayList
+		var List<Task> tasks
 		// keep track of the offset and line numbers to avoid unnecessary line counting from start
 		var prevLine = 1;
 		var prevOffset = 0;
 		while (matcher.find) {
+			if (tasks === null)
+				tasks = newArrayList
 			val task = new Task()
 			val matchedTag = matcher.group(2)
 			task.tag = taskTagsByName.get(if (taskTags.caseSensitive) matchedTag else matchedTag.toLowerCase)
@@ -38,24 +41,11 @@ class DefaultTaskParser implements ITaskParser {
 			prevOffset = task.offset
 			tasks += task
 		}
-		tasks
+		tasks ?: Collections.emptyList
 	}
 
 	protected def Map<String, TaskTag> getTaskTagsByName(TaskTags taskTags) {
-		val taskTagsByName = new HashMap<String, TaskTag>
-		for (tag : taskTags) {
-			val name = if (taskTags.caseSensitive) tag.name else tag.name.toLowerCase
-			val oldTag = taskTagsByName.get(name)
-			if (oldTag !== null) {
-				// prioritize higher priority tags
-				if (tag.priority.ordinal < oldTag.priority.ordinal) {
-					taskTagsByName.put(name, tag)
-				}
-			} else {
-				taskTagsByName.put(name, tag)
-			}
-		}
-		return taskTagsByName
+		return taskTags.taskTagsByName
 	}
 
 	protected def toPattern(TaskTags taskTags) {
