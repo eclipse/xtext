@@ -389,7 +389,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
-            _builder.append("builderIds += JavaCore.BUILDER_ID");
+            _builder.append("builderIds += #[JavaCore.BUILDER_ID, XtextProjectHelper.BUILDER_ID]");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
@@ -461,6 +461,10 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
             _builder.append("\t");
             _builder.append("\t\t");
             _builder.append("projectNatures += XtextProjectHelper.NATURE_ID");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("builderIds += XtextProjectHelper.BUILDER_ID");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
