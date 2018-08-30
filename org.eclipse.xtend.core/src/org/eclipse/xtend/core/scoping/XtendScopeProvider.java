@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.scoping;
 
+import com.google.inject.Singleton;
 
 /**
  * This class contains custom scoping description.
@@ -14,6 +15,7 @@ package org.eclipse.xtend.core.scoping;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
  * on how and when to use it.
  */
+@Singleton
 public class XtendScopeProvider extends AbstractXtendScopeProvider {
 
 }

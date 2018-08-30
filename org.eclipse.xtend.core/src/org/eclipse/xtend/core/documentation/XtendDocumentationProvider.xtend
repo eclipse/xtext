@@ -11,10 +11,12 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider
+import com.google.inject.Singleton
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 class XtendDocumentationProvider extends MultiLineCommentDocumentationProvider {
 	
 	override getDocumentation(EObject o) {

@@ -60,11 +60,13 @@ import org.eclipse.xtext.xtype.XImportSection;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Improved support for nested types in connection with imports
  */
+@Singleton
 public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespaceScopeProvider {
 
 	public static final QualifiedName OLD_DATA_ANNOTATION = QualifiedName.create("org","eclipse","xtend","lib", "Data");

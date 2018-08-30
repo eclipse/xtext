@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Optimized lazy linker implementation for Xtend. It's based on the {@link org.eclipse.xtext.xbase.resource.BatchLinkableResource BatchLinkableResource}.
@@ -39,6 +40,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class Linker extends XbaseLazyLinker {
 	
 	@Inject

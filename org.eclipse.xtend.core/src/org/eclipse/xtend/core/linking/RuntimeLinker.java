@@ -9,9 +9,12 @@ package org.eclipse.xtend.core.linking;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class RuntimeLinker extends Linker {
 
 	@Override

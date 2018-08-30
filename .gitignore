@@ -1,5 +1,7 @@
 /.m2/
 build/
+!**/src/**/build
+!**/xtend-gen/**/build
 bin/
 target/
 .gradle/
