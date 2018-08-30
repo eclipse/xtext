@@ -73,6 +73,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  * @author Anton Kosyakov
+ * @author Holger Schill
  * @since 2.1
  */
 public class BuilderParticipant implements IXtextBuilderParticipant {
@@ -243,7 +244,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			IProject builtProject = context.getBuiltProject();
 			access.setProject(builtProject);
 			Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
-			refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
+			refreshOutputFolders(context, outputConfigurations, subMonitor.split(1));
 			if (subMonitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
@@ -267,8 +268,6 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			task.stop();
 		}
 	}
-
-	private static final int MONITOR_CHUNK_SIZE = 10;
 	
 	/**
 	 * @since 2.7
@@ -278,7 +277,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers, IBuildContext context,
 			EclipseResourceFileSystemAccess2 access, IProgressMonitor progressMonitor) throws CoreException {
 		final int numberOfDeltas = deltas.size();
-		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, numberOfDeltas / MONITOR_CHUNK_SIZE + 1);
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, numberOfDeltas);
 		SubMonitor currentMonitor = null;
 		int clusterIndex = 0;
 		for (int i = 0; i < numberOfDeltas; i++) {
@@ -287,11 +286,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (subMonitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			if (i % 10 == 0) {
-				subMonitor.subTask("Compiling chunk " + (i / MONITOR_CHUNK_SIZE + 1) + " of " + (numberOfDeltas / MONITOR_CHUNK_SIZE + 1));
-				currentMonitor = subMonitor.newChild(1);
-				access.setMonitor(currentMonitor);
-			}
+			currentMonitor = subMonitor.split(1);
+			access.setMonitor(currentMonitor);
 			if (logger.isDebugEnabled()) {
 				logger.debug("Compiling " + delta.getUri() + " (" + i + " of " + numberOfDeltas + ")");
 			}
@@ -466,13 +462,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, outputConfigurations.size());
 		for (OutputConfiguration config : outputConfigurations.values()) {
-			SubMonitor child = subMonitor.newChild(1);
+			SubMonitor split = subMonitor.split(1);
 			final IProject project = ctx.getBuiltProject();
 			for (IContainer container : getOutputs(project, config)) {
 				if (monitor.isCanceled()) {
 					throw new OperationCanceledException();
 				}
-				sync(container, IResource.DEPTH_INFINITE, child);
+				sync(container, IResource.DEPTH_INFINITE, split);
 			}
 		}
 	}
@@ -590,9 +586,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
+				IProgressMonitor fsaMonitor = fileSystemAccess.getMonitor();
 				MonitorBasedCancelIndicator cancelIndicator = new MonitorBasedCancelIndicator(fileSystemAccess.getMonitor());
 				GeneratorContext generatorContext = new GeneratorContext();
 				generatorContext.setCancelIndicator(cancelIndicator);
+				// Since we make use of SubMonitor.split instead of SubMonitor.newChild
+				// there is no reason anymore to avoid showing each resource.
+				fsaMonitor.subTask("Compile " + resource.getURI());
 				generatorDelegate.generate(resource, fileSystemAccess, generatorContext);
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE

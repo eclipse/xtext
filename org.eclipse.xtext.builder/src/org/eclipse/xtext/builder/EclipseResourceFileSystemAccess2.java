@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -56,6 +57,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay - https://bugs.eclipse.org/bugs/show_bug.cgi?id=386135
+ * @author Holger Schill
  * @since 2.1
  */
 public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 {
@@ -206,7 +208,6 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		IFile file = getFile(fileName, outputName);
 		if (file == null)
 			return;
-		
 		IFile traceFile = getTraceFile(file);
 		try {
 			String encoding = getEncoding(file);
@@ -533,12 +534,15 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	}
 
 	private void syncIfNecessary(IResource result) {
-		syncIfNecessary(result, monitor);
+		syncIfNecessary(result, this.monitor);
 	}
 
 	private void syncIfNecessary(IResource result, IProgressMonitor progressMonitor) {
 		try {
-			sync(result, IResource.DEPTH_ZERO, progressMonitor);
+			// org.eclipse.core.internal.resources.Resource.refreshLocal(int, IProgressMonitor) starts a new subtask
+			// that we don't want to propagate to the parent monitor.
+			SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
+			sync(result, IResource.DEPTH_ZERO, subMonitor.split(1, SubMonitor.SUPPRESS_ALL_LABELS));
 		} catch (CoreException c) {
 			// ignore
 		}

@@ -113,7 +113,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 			throw new OperationCanceledException();
 
 		final ResourceDescriptionsData newData = getCopiedResourceDescriptionsData();
-		final Collection<IResourceDescription.Delta> result = doUpdate(buildData, newData, subMonitor.newChild(1));
+		final Collection<IResourceDescription.Delta> result = doUpdate(buildData, newData, subMonitor.split(1));
 
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
@@ -140,7 +140,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 			return ImmutableList.of();
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		Collection<IResourceDescription.Delta> deltas = doClean(toBeRemoved, subMonitor.newChild(1));
+		Collection<IResourceDescription.Delta> deltas = doClean(toBeRemoved, subMonitor.split(1));
 
 		final ResourceDescriptionsData newData = getCopiedResourceDescriptionsData();
 		if (monitor.isCanceled())
