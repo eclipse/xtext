@@ -587,12 +587,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (shouldGenerate(resource, context)) {
 			try {
 				IProgressMonitor fsaMonitor = fileSystemAccess.getMonitor();
-				MonitorBasedCancelIndicator cancelIndicator = new MonitorBasedCancelIndicator(fileSystemAccess.getMonitor());
+				MonitorBasedCancelIndicator cancelIndicator = new MonitorBasedCancelIndicator(fsaMonitor);
 				GeneratorContext generatorContext = new GeneratorContext();
 				generatorContext.setCancelIndicator(cancelIndicator);
 				// Since we make use of SubMonitor.split instead of SubMonitor.newChild
 				// there is no reason anymore to avoid showing each resource.
-				fsaMonitor.subTask("Compile " + resource.getURI());
+				fsaMonitor.subTask("Compile " + resource.getURI().lastSegment());
 				generatorDelegate.generate(resource, fileSystemAccess, generatorContext);
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE
