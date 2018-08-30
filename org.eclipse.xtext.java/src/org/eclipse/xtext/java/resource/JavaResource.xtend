@@ -50,11 +50,13 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	@Inject JavaDerivedStateComputer derivedStateComputer
 	
 	CompilationUnit compilationUnit
+	String contentsAsString 
 	
 	override protected doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		val encoding = getEncoding(getURI, options)
 		val contentsAsString = CharStreams.toString(new InputStreamReader(inputStream, encoding))
-		compilationUnit = new CompilationUnit(contentsAsString.toCharArray, URI.lastSegment, encoding)
+		this.contentsAsString = contentsAsString
+		compilationUnit = new CompilationUnit(contentsAsString.toCharArray, URI.lastSegment, encoding, null)
 	}
 	
 	protected def getEncoding(URI uri, Map<?, ?> options) {
@@ -105,6 +107,7 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	def installFull() {
 		initializing[
 			derivedStateComputer.installFull(this)
+			this.compilationUnit = null
 			initialized = true
 		]
 	}
@@ -281,7 +284,7 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	}
     
     def getOriginalSource() {
-        String.copyValueOf(this.compilationUnit.contents)
+        return contentsAsString;
     }
 	
 }

@@ -7,10 +7,12 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.jdt.core.compiler.CharOperation
 import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
 import org.eclipse.jdt.internal.compiler.ast.TypeDeclaration
+import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions
 import org.eclipse.jdt.internal.compiler.parser.Parser
 import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
@@ -22,6 +24,7 @@ import org.eclipse.xtext.common.types.access.binary.BinaryClass
 import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -53,6 +56,7 @@ class JavaDerivedStateComputer {
 				new DefaultProblemFactory()), true)
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
+		
 		if (result.types !== null) {
 			for (type : result.types) {
 				val packageName = result.currentPackage?.importName?.map[String.valueOf(it)]?.join('.')
@@ -101,9 +105,19 @@ class JavaDerivedStateComputer {
 		(resource as JavaResource).getCompilationUnit()
 	}
 	
+	protected def ClassFileCache findOrCreateClassFileCache(ResourceSet rs) {
+		var cache = ClassFileCache.findInEmfObject(rs)
+		if (cache === null) {
+			cache = new ClassFileCache
+			cache.attachToEmfObject(rs)
+		}
+		cache
+	}
+	
 	def void installFull(Resource resource) {
 		if (resource.isInfoFile)
 			return;
+		val classFileCache = resource.resourceSet.findOrCreateClassFileCache
 		val compilationUnit = getCompilationUnit(resource)
 		val classLoader = getClassLoader(resource)
 		
@@ -111,13 +125,17 @@ class JavaDerivedStateComputer {
 		if (data === null)
 			throw new IllegalStateException("no index installed")
 		// TODO use container manager
-		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator)
+		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator, classFileCache)
 		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
+			for (cls : it.classFiles) {
+				val key = QualifiedName.create(CharOperation.toStrings(cls.compoundName))
+				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes, cls.fileName)])
+			}
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap
 				var List<String> topLevelTypes = newArrayList
 				for (cf : it.getClassFiles()) {
-					val className = cf.compoundName.map[String.valueOf(it)].join('.')
+					val className = CharOperation.toString(cf.compoundName)
 					map.put(className, cf.bytes)
 					if (!cf.isNestedType) {
 						topLevelTypes += className
@@ -170,19 +188,9 @@ class JavaDerivedStateComputer {
         compilerOptions.sourceLevel = sourceLevel
         compilerOptions.produceMethodParameters = true
         compilerOptions.produceReferenceInfo = true
-        // these fields have been introduces in JDT 3.7
-        try {
-            CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, targetLevel)
-        } catch (NoSuchFieldException e) {
-            // ignore
-        }
+        compilerOptions.originalSourceLevel = targetLevel
         compilerOptions.complianceLevel = sourceLevel
-        // these fields have been introduces in JDT 3.7
-        try {
-            CompilerOptions.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel)
-        } catch (NoSuchFieldException e) {
-            // ignore
-        }
+        compilerOptions.originalComplianceLevel = targetLevel
         return compilerOptions
     }
 

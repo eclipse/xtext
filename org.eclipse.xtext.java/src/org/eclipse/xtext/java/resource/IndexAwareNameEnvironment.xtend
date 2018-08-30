@@ -12,6 +12,8 @@ import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGe
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.emf.ecore.resource.Resource
+import java.io.InputStream
+import org.eclipse.jdt.internal.compiler.env.IBinaryType
 
 @FinalFieldsConstructor class IndexAwareNameEnvironment implements INameEnvironment {
 
@@ -19,11 +21,13 @@ import org.eclipse.emf.ecore.resource.Resource
 	val ClassLoader classLoader
 	val IResourceDescriptions resourceDescriptions
 	val EObjectDescriptionBasedStubGenerator stubGenerator
+	val ClassFileCache classFileCache
+	
+	Map<QualifiedName, NameEnvironmentAnswer> nameToAnswerCache = newHashMap()
 
-	Map<QualifiedName, NameEnvironmentAnswer> cache = newHashMap()
-    
 	override cleanup() {
-		cache.clear
+		nameToAnswerCache.clear
+		classFileCache.clear
 	}
 
 	override findType(char[][] compoundTypeName) {
@@ -31,9 +35,16 @@ import org.eclipse.emf.ecore.resource.Resource
 		return findType(className)
 	}
 	
-	def findType(QualifiedName className) {
-		if (cache.containsKey(className)) {
-			return cache.get(className)
+	def NameEnvironmentAnswer findType(QualifiedName className) {
+		if (classFileCache.containsKey(className)) {
+			val t = classFileCache.get(className)
+			if (t===null) {
+				return null
+			}
+			return new NameEnvironmentAnswer(t, null)
+		}
+		if (nameToAnswerCache.containsKey(className)) {
+			return nameToAnswerCache.get(className)
 		}
 		val candidate = resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
 		var NameEnvironmentAnswer result = null 
@@ -50,13 +61,24 @@ import org.eclipse.emf.ecore.resource.Resource
 			val fileName = className.toString('/') + ".class"
 			val url = classLoader.getResource(fileName)
 			if (url === null) {
-				cache.put(className, null)
+				nameToAnswerCache.put(className, null)
+				classFileCache.put(className, null)
 				return null;
 			}
-			val reader = ClassFileReader.read(url.openStream, fileName)
+			var InputStream stream = null
+			val IBinaryType reader = try {
+				stream = url.openStream
+				ClassFileReader.read(stream, fileName)
+			} finally {
+				stream?.close
+			}
+			if (reader === null) {
+				return null;
+			}
+			classFileCache.put(className, reader)
 			result = new NameEnvironmentAnswer(reader, null)
 		}
-		cache.put(className, result)
+		nameToAnswerCache.put(className, result)
 		return result
 	}
 
@@ -75,3 +97,4 @@ import org.eclipse.emf.ecore.resource.Resource
 		return Character.isLowerCase(packageName.head)
 	}
 }	
+ 
