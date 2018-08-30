@@ -218,7 +218,7 @@ public class ToBeBuiltComputer {
 	public ToBeBuilt updateProjectNewResourcesOnly(IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingResources, 1);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingResources);
-		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
+		ToBeBuilt toBeBuilt = updateProject(project, progress.split(1));
 		Iterable<URI> existingURIs = Iterables.transform(builderState.getAllResourceDescriptions(),
 				new Function<IResourceDescription, URI>() {
 					@Override
@@ -245,12 +245,12 @@ public class ToBeBuiltComputer {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingResources, 10);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingResources);
 
-		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(8));
+		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.split(8));
 		if (!project.isAccessible())
 			return toBeBuilt;
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
-		final SubMonitor childMonitor = progress.newChild(1);
+		final SubMonitor childMonitor = progress.split(1);
 		project.accept(new IResourceVisitor() {
 			@Override
 			public boolean visit(IResource resource) throws CoreException {
@@ -267,7 +267,7 @@ public class ToBeBuiltComputer {
 		});
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
-		contribution.updateProject(toBeBuilt, project, progress.newChild(1));
+		contribution.updateProject(toBeBuilt, project, progress.split(1));
 		return toBeBuilt;
 	}
 

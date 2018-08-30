@@ -207,7 +207,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 		try {
 			SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 1);
 			subMonitor.subTask("Compiling...");
-			access.setMonitor(subMonitor.newChild(1));
+			access.setMonitor(subMonitor.split(1));
 			
 			List<ListenableFuture<?>> tasks = Lists.newArrayList();
 	

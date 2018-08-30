@@ -66,7 +66,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		for (IXtextBuilderParticipant participant : participants) {
 			if (progress.isCanceled())
 				throw new OperationCanceledException();
-			participant.build(buildContext, progress.newChild(1));
+			participant.build(buildContext, progress.split(1));
 		}
 	}
 

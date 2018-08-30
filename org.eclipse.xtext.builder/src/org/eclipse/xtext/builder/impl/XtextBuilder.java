@@ -153,13 +153,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 			SubMonitor progress = SubMonitor.convert(monitor, 1);
 			if (kind == FULL_BUILD) {
-				fullBuild(progress.newChild(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
+				fullBuild(progress.split(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 				if (delta == null || isOpened(delta)) {
-					fullBuild(progress.newChild(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
+					fullBuild(progress.split(1), IBuildFlag.RECOVERY_BUILD.isSet(args));
 				} else {
-					incrementalBuild(delta, progress.newChild(1));
+					incrementalBuild(delta, progress.split(1));
 				}
 			}
 		} catch (CoreException e) {
@@ -265,7 +265,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
 		progress.worked(2);
-		doBuild(toBeBuilt, progress.newChild(8), BuildType.INCREMENTAL);
+		doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
 	}
 
 	/**
@@ -285,12 +285,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly);
-		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
+		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
 			Set<URI> sources = sourceLevelURIs.getSources();
 			participant.build(new BuildContext(this, resourceSet, deltas, sources, type),
-					progress.newChild(1));
+					progress.split(1));
 			try {
 				getProject().getWorkspace().checkpoint(false);
 			} catch(NoClassDefFoundError e) { // guard against broken Eclipse installations / bogus project configuration
@@ -318,9 +318,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		IProject project = getProject();
 		ToBeBuilt toBeBuilt = 
 			isRecoveryBuild
-				? toBeBuiltComputer.updateProjectNewResourcesOnly(project, progress.newChild(2)) 
-				: toBeBuiltComputer.updateProject(project, progress.newChild(2));
-		doBuild(toBeBuilt, progress.newChild(8), 
+				? toBeBuiltComputer.updateProjectNewResourcesOnly(project, progress.split(2)) 
+				: toBeBuiltComputer.updateProject(project, progress.split(2));
+		doBuild(toBeBuilt, progress.split(8), 
 			isRecoveryBuild 
 				? BuildType.RECOVERY 
 				: BuildType.FULL);
@@ -341,11 +341,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	protected void clean(IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
 		try {
-			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.newChild(2));
+			ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject(getProject(), progress.split(2));
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			doClean(toBeBuilt, progress.newChild(8));
+			doClean(toBeBuilt, progress.split(8));
 		} finally {
 			if (monitor != null)
 				monitor.done();
@@ -359,7 +359,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 */
 	protected void doClean(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.newChild(1));
+		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.split(1));
 		if (participant != null) {
 			Set<URI> sourceURIs = new SourceLevelURICache().getSourcesFrom(toBeBuilt.getToBeDeleted(), resourceServiceProvideRegistry);
 			
@@ -368,7 +368,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					deltas,
 					sourceURIs,
 					BuildType.CLEAN), 
-					progress.newChild(1));
+					progress.split(1));
 		} else {
 			progress.worked(1);
 		}
