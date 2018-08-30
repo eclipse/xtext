@@ -108,7 +108,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
           }
           _xtrycatchfinallyexpression = _xblockexpression;
         } finally {
-          if ((stream != null)) {
+          if (stream!=null) {
             stream.close();
           }
         }

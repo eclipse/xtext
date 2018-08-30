@@ -70,9 +70,7 @@ import org.eclipse.jdt.internal.compiler.env.IBinaryType
 				stream = url.openStream
 				ClassFileReader.read(stream, fileName)
 			} finally {
-				if (stream !== null) {
-					stream.close
-				}
+				stream?.close
 			}
 			if (reader === null) {
 				return null;
