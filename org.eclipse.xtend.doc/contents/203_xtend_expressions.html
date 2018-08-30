@@ -1130,6 +1130,24 @@ if (myList.isEmpty)
 '''
 </code></pre>
 
+<p>You can also use <code>IF...ELSE...ENDIF</code> or <code>IF...ELSEIF...ENDIF</code> expressions:</p>
+
+<pre><code class="language-xtend">def someHTML(Paragraph p) '''
+  &lt;html&gt;
+    &lt;body&gt;
+      «IF p.headLine != null»
+        &lt;h1&gt;«p.headline»&lt;/h1&gt;
+      «ELSE»
+        &lt;h1&gt;«p.standartHeadline»&lt;/h1&gt;
+      «ENDIF»
+      &lt;p&gt;
+        «p.text»
+      &lt;/p&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+'''
+</code></pre>
+
 <h3 id="template-foreach">Loops in Templates</h3>
 
 <p>Also a <code>FOR</code> expression is available:</p>
