@@ -182,7 +182,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 							projectName = projectInfo.projectName
 							location = projectInfo.locationPath
 							projectNatures += #[JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID]
-							builderIds += JavaCore.BUILDER_ID
+							builderIds += #[JavaCore.BUILDER_ID, XtextProjectHelper.BUILDER_ID]
 							folders += "src"
 							addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
 								/*
@@ -198,6 +198,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 							projectName = projectInfo.projectName
 							location = projectInfo.locationPath
 							projectNatures += XtextProjectHelper.NATURE_ID
+							builderIds += XtextProjectHelper.BUILDER_ID
 							addFile(«quotes»src/«openVar»path«closeVar»/Model.«language.fileExtensions.get(0)»«quotes», «quotes»
 								/*
 								 * This is an example model
