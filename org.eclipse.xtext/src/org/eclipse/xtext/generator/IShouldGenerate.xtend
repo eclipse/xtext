@@ -15,6 +15,7 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
+import com.google.inject.Singleton
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,6 +32,7 @@ interface IShouldGenerate {
 	def boolean shouldGenerate(Resource resource, CancelIndicator cancelIndicator);
 	
 	@Beta
+	@Singleton
 	static class OnlyWithoutErrors implements IShouldGenerate {
 		
 		@Inject IResourceValidator resourceValidator
@@ -44,6 +46,7 @@ interface IShouldGenerate {
 		
 	}
 	@Beta
+	@Singleton
 	static class Always implements IShouldGenerate {
 		
 		override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {

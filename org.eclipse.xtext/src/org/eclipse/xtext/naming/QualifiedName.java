@@ -37,6 +37,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	private static final boolean USE_INTERNING = Boolean.getBoolean("xtext.qn.interning");
 
+	/**
+	 * The single existing empty QualifiedName.
+	 */
 	public static final QualifiedName EMPTY = new QualifiedName() {
 		@Override
 		public QualifiedName append(QualifiedName relativeQualifiedName) {
@@ -63,6 +66,38 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			return "";
 		}
 	};
+	
+	/**
+	 * The Builder allows to create instances of QualifiedName in a slightly
+	 * more efficient way by pre-allocating the underlying data for a known
+	 * length.
+	 * 
+	 * Clients are supposed to create an instance of the builder with the predefined
+	 * length and call {@link #add(String)} for each segment sequentially. The final
+	 * {@link QualifiedName name} is obtained via {@link #build()}. 
+	 * 
+	 * @since 2.15
+	 */
+	public static final class Builder {
+		private final String[] segments;
+		private int next;
+
+		public Builder(int size) {
+			this.segments = new String[size];
+			this.next = 0;
+		}
+		
+		public void add(String segment) {
+			segments[next++] = intern(segment);
+		}
+		
+		public QualifiedName build() {
+			if (next != segments.length) {
+				throw new IllegalStateException("Unexpected number of segments");
+			}
+			return new QualifiedName(segments);
+		}
+	}
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.

@@ -32,23 +32,24 @@ import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.workspace.IProjectConfigProvider
 import org.eclipse.xtext.generator.GeneratorContext
+import org.eclipse.xtext.resource.XtextResource
+import com.google.inject.Singleton
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.9 
  */
-@Log class IncrementalBuilder {
+class IncrementalBuilder {
 	
 	@Data static class Result {
 		IndexState indexState
 		List<IResourceDescription.Delta> affectedResources
 	}
 	
-	@Log static class InternalStatefulIncrementalBuilder {
+	static class InternalStatefulIncrementalBuilder {
 	
 		@Accessors(#[PROTECTED_SETTER, PROTECTED_GETTER]) extension BuildContext context
 		@Accessors(#[PROTECTED_SETTER, PROTECTED_GETTER]) BuildRequest request
@@ -80,9 +81,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 			request.deletedFiles.forEach [ source |
 				request.afterValidate.afterValidate(source, newArrayList)
 				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
-					if (LOG.isInfoEnabled)
-						LOG.info("Deleting " + generated)
-					val serviceProvider = context.getResourceServiceProvider(source)
+					val serviceProvider = source.resourceServiceProvider
 					val configs = serviceProvider.get(IContextualOutputConfigurationProvider2).getOutputConfigurations(request.resourceSet)
 					val configName = newSource2GeneratedMapping.getOutputConfigName(generated)
 					val config = configs.findFirst[name == configName]
@@ -111,7 +110,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 					resource.contents // fully initialize
 					EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
 					request.cancelIndicator.checkCanceled
-					val serviceProvider = context.getResourceServiceProvider(resource.getURI)
+					val serviceProvider = resource.resourceServiceProvider
 					val manager = serviceProvider.resourceDescriptionManager
 					val description = manager.getResourceDescription(resource);
                     val copiedDescription = SerializableResourceDescription.createCopy(description);
@@ -130,18 +129,24 @@ import org.eclipse.xtext.generator.GeneratorContext
 			return new Result(request.state, resolvedDeltas)
 		}
 		
+		def private IResourceServiceProvider getResourceServiceProvider(Resource resource) {
+			if (resource instanceof XtextResource) {
+				return resource.resourceServiceProvider;
+			}
+			return resource.getURI.resourceServiceProvider
+		}
+		
 		def protected boolean validate(Resource resource) {
-			val resourceValidator = getResourceServiceProvider(resource.getURI).getResourceValidator();
+			val resourceValidator = resource.resourceServiceProvider.resourceValidator;
 			if (resourceValidator === null) {
 				return true
 			}
-			LOG.info("Starting validation for input: '" + resource.getURI.lastSegment + "'");
 			val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
 			return request.afterValidate.afterValidate(resource.getURI, validationResult)
 		}
 	
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
-			val serviceProvider = resource.getURI.getResourceServiceProvider
+			val serviceProvider = resource.resourceServiceProvider
 			val generator = serviceProvider.get(GeneratorDelegate)
 			if (generator === null) {
 				return;
@@ -173,32 +178,43 @@ import org.eclipse.xtext.generator.GeneratorContext
 			generator.generate(resource, fileSystemAccess, generatorContext)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
-				LOG.info('Deleting stale generated file ' + it)
 				context.resourceSet.getURIConverter.delete(it, emptyMap)
 				request.getAfterDeleteFile.apply(it)
 			]
 		}
+		
+		@Singleton
+		static class URIBasedFileSystemAccessFactory {
+			@Inject IContextualOutputConfigurationProvider outputConfigurationProvider;
+			@Inject IFilePostProcessor postProcessor;
+			@Inject(optional=true) IEncodingProvider encodingProvider
+			@Inject TraceFileNameProvider traceFileNameProvider
+			@Inject TraceRegionSerializer traceRegionSerializer
+			@Inject(optional=true) IProjectConfigProvider projectConfigProvider
+			
+			def URIBasedFileSystemAccess newFileSystemAccess(Resource resource, BuildRequest request) {
+				return new URIBasedFileSystemAccess() => [
+					outputConfigurations = outputConfigurationProvider.getOutputConfigurations(resource).toMap[name]
+					
+					it.postProcessor = postProcessor
+					if (encodingProvider !== null)
+						it.encodingProvider = encodingProvider
+					it.traceFileNameProvider = traceFileNameProvider
+					it.traceRegionSerializer = traceRegionSerializer
+					generateTraces = true
+					
+					baseDir = request.baseDir
+					if (projectConfigProvider !== null) {
+						val sourceFolder = projectConfigProvider.getProjectConfig(resource.resourceSet)?.findSourceFolderContaining(resource.getURI)
+						currentSource = sourceFolder?.name
+					}
+					converter = resource.resourceSet.getURIConverter
+				]
+			}
+		}
 	
 		protected def createFileSystemAccess(IResourceServiceProvider serviceProvider, Resource resource) {
-			val projectConfigProvider = serviceProvider.get(IProjectConfigProvider)
-			val projectConfig = projectConfigProvider?.getProjectConfig(resource.resourceSet)
-			val sourceFolder = projectConfig?.findSourceFolderContaining(resource.getURI)
-			new URIBasedFileSystemAccess() => [
-				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
-				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]
-				
-				postProcessor = serviceProvider.get(IFilePostProcessor)
-				val newEncodingProvider = serviceProvider.get(IEncodingProvider)
-				if (newEncodingProvider !== null)
-					encodingProvider = newEncodingProvider
-				traceFileNameProvider = serviceProvider.get(TraceFileNameProvider)
-				traceRegionSerializer = serviceProvider.get(TraceRegionSerializer)
-				generateTraces = true
-				
-				baseDir = request.baseDir
-				currentSource = sourceFolder?.name
-				converter = resource.resourceSet.getURIConverter
-			]
+			return serviceProvider.get(URIBasedFileSystemAccessFactory).newFileSystemAccess(resource, request)
 		}
 	
 	}

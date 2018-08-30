@@ -23,20 +23,19 @@ class ClusteringStorageAwareResourceLoader {
 	val extension BuildContext context
 
 	def <T> Iterable<T> executeClustered(Iterable<URI> uris, (Resource)=>T operation) {
-		val loadedURIs = <URI>newArrayList
-		val sourceLevelURIs = <URI>newArrayList
+		var loadedURIsCount = 0
+		val sourceLevelURIs = <URI>newHashSet
 		val resources = newArrayList
 		val result = newArrayList
 		val iter = uris.iterator
 		while (iter.hasNext) {
 			val uri = iter.next
-			if (!clusteringPolicy.continueProcessing(resourceSet, uri, loadedURIs.size)) {
+			if (!clusteringPolicy.continueProcessing(resourceSet, uri, loadedURIsCount)) {
 				result += resources.map[operation.apply(it)]
-				resources.clear
 				clearResourceSet
-				loadedURIs.clear
+				loadedURIsCount = 0
 			}
-			loadedURIs += uri
+			loadedURIsCount++;
 			if (uri.isSource) {
 				sourceLevelURIs.add(uri) 
 				val existingResource = resourceSet.getResource(uri, false)
@@ -44,12 +43,12 @@ class ClusteringStorageAwareResourceLoader {
 					if(existingResource.isLoadedFromStorage)
 						existingResource.unload
 				}
-				SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, sourceLevelURIs)
+				SourceLevelURIsAdapter.setSourceLevelUrisWithoutCopy(resourceSet, sourceLevelURIs)
 			}
 			resources += resourceSet.getResource(uri, true)
 		}
 		result += resources.map[operation.apply(it)]
-		result
+		return result
 	}
 	
 	protected def isSource(URI uri) {
