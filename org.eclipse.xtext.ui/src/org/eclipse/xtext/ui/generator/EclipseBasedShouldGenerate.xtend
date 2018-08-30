@@ -15,10 +15,15 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IShouldGenerate
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.workspace.ProjectConfigAdapter
+import com.google.inject.Singleton
 
 /**
+ * Answers true if the resource does not contain any error markers and is contained
+ * in an Eclipse project.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 class EclipseBasedShouldGenerate implements IShouldGenerate {
 
 	override shouldGenerate(Resource resource, CancelIndicator cancelIndicator) {
