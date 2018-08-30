@@ -119,7 +119,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     	// 1 for queueAffectedResources
     	// 80 for updating and queueAffectedResources
     	// Within the mentioned 80 ticks we assume that 2/3 is spent for updating and 1/3 for queueAffectedResources
-    	final SubMonitor progress = SubMonitor.convert(monitor, 100);
+    	final SubMonitor progress = SubMonitor.convert(monitor, 101);
 
 
         // Step 1: Clean the set of deleted URIs. If any of them are also added, they're not deleted.
