@@ -1705,17 +1705,6 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			collectReturnExpressions(child, found);
 		}
 	}
-
-	@Check
-	public void checkClasses(XtendFile file) {
-		//TODO this check should not be file local, but instead check for any other sources which might declare a
-		// java type with the same name. Also this then belongs to Xbase and should be defined on JvmDeclaredType
-		Set<String> names = newLinkedHashSet();
-		for (XtendTypeDeclaration clazz : file.getXtendTypes()) {	
-			if (clazz.getName() != null && !names.add(clazz.getName()))
-				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_TYPE_NAME);
-		}
-	}
 	
 	public boolean doCheckValidMemberName(XtendMember member) {
 		EStructuralFeature nameAttribute = member.eClass().getEStructuralFeature("name");
