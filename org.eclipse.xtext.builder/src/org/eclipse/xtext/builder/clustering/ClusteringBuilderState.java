@@ -215,7 +215,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         changedURI = loadResult.getUri();
                         actualResourceURI = loadResult.getResource().getURI();
                         resource = addResource(loadResult.getResource(), resourceSet);
-                        subProgress.subTask("Updating resource " + resource.getURI());
+                        subProgress.subTask("Updating resource " + resource.getURI().lastSegment());
                         if (LOGGER.isDebugEnabled()) {
                         	LOGGER.debug("Update resource description " + actualResourceURI);
                         }
@@ -378,7 +378,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     LoadResult loadResult = loadOperation.next();
                     uri = loadResult.getUri();
                     resource = addResource(loadResult.getResource(), resourceSet);
-                    subMonitor.subTask("Writing new resource description " + resource.getURI());
+                    subMonitor.subTask("Writing new resource description " + resource.getURI().lastSegment());
                     if (LOGGER.isDebugEnabled()) {
                     	LOGGER.debug("Writing new resource description " + uri);
                     }
