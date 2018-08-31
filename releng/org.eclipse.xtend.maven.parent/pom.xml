@@ -6,7 +6,7 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.maven.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.15.0-SNAPSHOT</version>
+	<version>2.15.0</version>
 
 	<properties>
 		<root-dir>${basedir}/../..</root-dir>
@@ -35,7 +35,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<branch_url_segment>master</branch_url_segment>
+		<branch_url_segment>release_2.15.0</branch_url_segment>
 	</properties>
 	
 	<build>
@@ -256,15 +256,15 @@
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/release_2.15.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-core-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/release_2.15.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-extras-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/release_2.15.0/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 			</repositories>
 		</profile>

@@ -24,10 +24,10 @@ repositories {
 	jcenter()
 	if (findProperty('useJenkinsSnapshots') == 'true') {
 		maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/" }
-		maven { url jenkinsPipelineRepo('xtext-lib') }
-		maven { url jenkinsPipelineRepo('xtext-core') }
-		maven { url jenkinsPipelineRepo('xtext-extras') }
-		maven { url jenkinsPipelineRepo('xtext-eclipse') }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/release_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/' }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-core/job/release_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/' }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/release_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/' }
+		maven { url 'http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/release_2.15.0/lastSuccessfulBuild/artifact/build/maven-repository/' }
 	} else {
 		mavenLocal()
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
