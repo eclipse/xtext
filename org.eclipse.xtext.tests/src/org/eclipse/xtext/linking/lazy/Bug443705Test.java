@@ -28,9 +28,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.name.Names;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -62,6 +64,11 @@ public class Bug443705Test {
 		@Override
 		public Class<? extends XtextResource> bindXtextResource() {
 			return CyclicResolutionExceptionIgnoringResource.class;
+		}
+		
+		public void configureCyclicLinkingLimit(Binder binder) {
+			// disable shortcut for test
+			binder.bind(Integer.TYPE).annotatedWith(Names.named(LazyLinkingResource.CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT)).toInstance(0);
 		}
 	}
 

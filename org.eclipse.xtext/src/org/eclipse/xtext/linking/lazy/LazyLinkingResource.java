@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Named;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -78,6 +80,12 @@ public class LazyLinkingResource extends XtextResource {
 	 */
 	public static final String UNRESOLVEABLE_PROXIES_KEY = "UNRESOLVEABLE_PROXIES";
 
+	/**
+	 * Determines the limit that is used to switch from a counter to a set to detect cyclic linking.
+	 * @since 2.16
+	 */
+	public static final String CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT = "CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT";
+
 	@Inject
 	private ILinkingService linkingService;
 
@@ -94,6 +102,12 @@ public class LazyLinkingResource extends XtextResource {
 	private LinkingHelper linkingHelper;
 
 	private boolean eagerLinking = false;
+
+	@Named(CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT)
+	@Inject(optional=true)
+	private int cyclicLinkingDectectionCounterLimit = 100;
+
+	private int cyclicLinkingDetectionCounter = 0;
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
@@ -236,8 +250,12 @@ public class LazyLinkingResource extends XtextResource {
 	 * @since 2.4
 	 */
 	protected EObject getEObject(String uriFragment, Triple<EObject, EReference, INode> triple) throws AssertionError {
-		if (!resolving.add(triple))
-			return handleCyclicResolution(triple);
+		cyclicLinkingDetectionCounter++;
+		if (cyclicLinkingDetectionCounter > cyclicLinkingDectectionCounterLimit) {
+			if (!resolving.add(triple)) {
+				return handleCyclicResolution(triple);
+			}
+		}
 		try {
 			Set<String> unresolveableProxies = getUnresolvableURIFragments();
 			if (unresolveableProxies.contains(uriFragment))
@@ -287,7 +305,10 @@ public class LazyLinkingResource extends XtextResource {
 			createAndAddDiagnostic(triple, ex);
 			return null;
 		} finally {
-			resolving.remove(triple);
+			if (cyclicLinkingDetectionCounter > cyclicLinkingDectectionCounterLimit) {
+                resolving.remove(triple);
+            }
+            cyclicLinkingDetectionCounter--;
 		}
 	}
 
