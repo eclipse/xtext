@@ -25,7 +25,7 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
       final XtendFileHyperlink link = new XtendFileHyperlink(_get, this.workbench, this.console);
       this.console.addHyperlink(link, offset, length);
     } catch (final Throwable _t) {
-      if (_t instanceof BadLocationException) {
+      if (_t instanceof BadLocationException || _t instanceof NumberFormatException) {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
