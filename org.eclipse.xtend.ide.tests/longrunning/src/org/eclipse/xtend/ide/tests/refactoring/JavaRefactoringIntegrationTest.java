@@ -1209,7 +1209,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 	}
 	
 	@Test
-	@Ignore
 	public void testRenameXtendProperty() throws Exception {
 		String xtendModel = "import org.eclipse.xtend.lib.Property class XtendClass { @Property int foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
