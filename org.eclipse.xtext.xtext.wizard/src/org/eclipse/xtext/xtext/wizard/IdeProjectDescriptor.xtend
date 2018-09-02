@@ -55,7 +55,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 						<dependency>
 							<groupId>org.eclipse.lsp4j</groupId>
 							<artifactId>org.eclipse.lsp4j</artifactId>
-							<version>0.5.0.M1</version>
+							<version>0.5.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
