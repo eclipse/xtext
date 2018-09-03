@@ -13,7 +13,7 @@ ext.versions = [
 	// - Update the version in `IdeProjectDescriptor#pom`.
 	// - Update the test expectations by running `CliWizardIntegrationTest#main`.
 	// - Update the versions in the `/org.eclipse.xtext.ide/META-INF/MANIFEST.MF` and `/org.eclipse.xtext.ide.tests/META-INF/MANIFEST.MF` files.
-	'lsp4j': '0.5.0.M1',
+	'lsp4j': '0.5.0',
 	'log4j': '1.2.16',
 	'equinoxCommon' : '3.9.0',
 	'equinoxRegistry' : '3.7.0',
