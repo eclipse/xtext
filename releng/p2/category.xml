@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<bundle id="org.eclipse.xtext" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ide" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.ide" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ide.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.ide.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ide.tests" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.ide.tests" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.ide.tests.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.ide.tests.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testing" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testing" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testing.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testing.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testlanguages" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testlanguages" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testlanguages.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testlanguages.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testlanguages.ide" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testlanguages.ide" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.testlanguages.ide.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.testlanguages.ide.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.tests" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.tests" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.tests.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.tests.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.util" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.util" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.util.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.util.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.generator" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.generator" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.generator.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.generator.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.ide" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.ide" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.ide.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.ide.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.wizard" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.wizard" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
-	<bundle id="org.eclipse.xtext.xtext.wizard.source" version="2.15.0.qualifier">
+	<bundle id="org.eclipse.xtext.xtext.wizard.source" version="2.16.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
    <category-def name="xtext-core" label="Xtext-core"/>
