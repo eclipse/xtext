@@ -28,6 +28,7 @@ import static org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguage
  * 
  * @author akos.kitta - Initial contribution and API
  */
+@Deprecated
 class ColoringServiceImpl implements IColoringService {
 
 	static val STYLE_IDS = Collections.singletonList(ColoringStyle.Identifier);
