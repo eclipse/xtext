@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * 
  * @author akos.kitta - Initial contribution and API
  */
+@Deprecated
 @SuppressWarnings("all")
 public class ColoringServiceImpl implements IColoringService {
   private final static List<Integer> STYLE_IDS = Collections.<Integer>singletonList(Integer.valueOf(ColoringStyle.Identifier));
