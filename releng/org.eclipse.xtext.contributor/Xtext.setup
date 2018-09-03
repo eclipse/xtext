@@ -442,7 +442,7 @@
       xsi:type="setup:ResourceCreationTask"
       id="generateLocationProperties"
       excludedTriggers="BOOTSTRAP"
-      content="git.clone.xtext.lib.location=gitclonextextliblocationprototype&#xD;&#xA;git.clone.xtext.core.location=gitclonextextcorelocationprototype&#xD;&#xA;git.clone.xtext.extras.location=gitclonextextextraslocationprototype&#xD;&#xA;git.clone.xtext.idea.location=gitclonextextidealocationprototype&#xD;&#xA;git.clone.xtext.xtend.location=gitclonextextxtendlocationprototype&#xD;&#xA;git.clone.xtext.web.location=gitclonextextweblocationprototype"
+      content="git.clone.xtext.lib.location=gitclonextextliblocationprototype&#xD;&#xA;git.clone.xtext.core.location=gitclonextextcorelocationprototype&#xD;&#xA;git.clone.xtext.extras.location=gitclonextextextraslocationprototype&#xD;&#xA;git.clone.xtext.xtend.location=gitclonextextxtendlocationprototype&#xD;&#xA;git.clone.xtext.web.location=gitclonextextweblocationprototype"
       targetURL="file://${git.clone.xtext.umbrella.location}/locations.properties"
       encoding="UTF-8">
     <description>Generates a Properties File of all Git Clone Locations</description>
@@ -998,85 +998,6 @@
     </stream>
     <description>Plug-ins for Eclipse</description>
   </project>
-  <project name="idea"
-      label="IntelliJ IDEA Support">
-    <setupTask
-        xsi:type="git:GitCloneTask"
-        id="git.clone.xtext.idea"
-        remoteURI="eclipse/xtext-idea"
-        checkoutBranch="${xtext.git.branch}">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/InducedChoices">
-        <detail
-            key="inherit">
-          <value>github.remoteURIs</value>
-        </detail>
-        <detail
-            key="label">
-          <value>Github Repository</value>
-        </detail>
-        <detail
-            key="target">
-          <value>remoteURI</value>
-        </detail>
-      </annotation>
-      <description>${scope.project.label}</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:TextModifyTask"
-        id="adaptLocationPropertiesForIdea"
-        excludedTriggers="BOOTSTRAP"
-        url="file://${git.clone.xtext.umbrella.location}/locations.properties"
-        encoding="UTF-8">
-      <modification
-          pattern="(gitclonextextidealocationprototype)">
-        <substitution>${git.clone.xtext.idea.location|property}</substitution>
-      </modification>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:StringSubstitutionTask"
-        name="git.xtext.idea.location"
-        value="${git.clone.xtext.idea.location}">
-      <description></description>
-    </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="buildship.xtext-idea"
-        launcher="GenerateBuildshipPreferences"/>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.xtext.idea.location}"
-          locateNestedProjects="true"/>
-      <description>Maven Dependencies</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.workingsets:WorkingSetTask">
-      <workingSet
-          name="IDEA"
-          id="">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.core.idea.tests"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
-        </predicate>
-      </workingSet>
-    </setupTask>
-    <stream
-        name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
-    <description>Plug-ins for IntelliJ IDEA</description>
-  </project>
   <project name="web"
       label="Web Support">
     <setupTask
@@ -1621,20 +1542,6 @@
       <setupTask
           xsi:type="mylyn:MylynQueriesTask"
           connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-idea"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Idea Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
           repositoryURL="https://github.com/eclipse/xtext-web"
           userID="${github.user.id}"
           password="${github.user.password}">
@@ -1756,20 +1663,6 @@
           password="${github.user.password}">
         <query
             summary="Xtext-Eclipse Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-idea"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Idea Issues"
             url="">
           <attribute
               key="state"
@@ -1907,24 +1800,6 @@
       </setupTask>
     </stream>
     <stream
-        name="xtext-idea"
-        label="Xtext IDEA Issues">
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="https://github.com/eclipse/xtext-idea"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="Xtext-Idea Issues"
-            url="">
-          <attribute
-              key="state"
-              value="open::"/>
-        </query>
-      </setupTask>
-    </stream>
-    <stream
         name="xtext-web"
         label="Xtext Web Support Issues">
       <setupTask
@@ -2046,14 +1921,6 @@
       <buildPlan
           name="${xtext.git.branch}"/>
       <description>xtext-eclipse Jenkins Build Job</description>
-    </setupTask>
-    <setupTask
-        xsi:type="mylyn:MylynBuildsTask"
-        id="build.xtext-idea"
-        serverURL="${jenkins.url}/job/xtext-idea/">
-      <buildPlan
-          name="${xtext.git.branch}"/>
-      <description>xtext-idea Jenkins Build Job</description>
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynBuildsTask"
