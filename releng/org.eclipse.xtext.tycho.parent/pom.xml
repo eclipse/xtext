@@ -19,6 +19,7 @@
 		<sign.skip>true</sign.skip>
 
 		<target-platform-classifier></target-platform-classifier>
+		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
 	<profiles>
@@ -59,7 +60,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>xtend-bootstrap</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/</url>
+			<url>${JENKINS_URL}/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
