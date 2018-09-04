@@ -177,7 +177,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `./gitAll commit -a -m "[release] version 2.15.0"`
 1. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
 1. Create release tags on all repositories. Name `$TAGNAME` and commit message `release $TAGNAME`.
-   * `./gitAll -a $TAGNAME -m "release $TAGNAME"`
+   * `./gitAll tag -a $TAGNAME -m "release $TAGNAME"`
    * `./gitAll push origin $TAGNAME`
 1. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
    * Log in with user 'xtext.team'.
