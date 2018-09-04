@@ -13,8 +13,10 @@ import org.eclipse.core.resources.IFolder
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
+import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -31,6 +33,11 @@ class MoreActiveAnnotationsTest {
 
 	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
 	
+	@BeforeClass
+	static def void createProjects() {
+		TargetPlatformUtil.setTargetPlatform(JdtBasedProcessorProviderTest)
+	}
+
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
 	}
