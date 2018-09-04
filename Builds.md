@@ -127,42 +127,43 @@ Build jobs for releases must be executed in proper order on the build server, i.
 
 1. Make sure all repositories are on branch `master`.
 1. Make sure the docs plugins in `xtext-eclipse` and `xtext-xtend` are up to date (run ant scripts `xtext-eclipse/org.eclipse.xtext.doc/gen_eclipse_help_xtext.launch` and `xtext-xtend/org.eclipse.xtend.doc/gen_eclipse_help_xtend.launch` in the plugins that copy over the docs from `xtext`)
-2. xtext-umbrella
+1. xtext-umbrella
+   * `export XTEXT_VERSION=<VERSION>`
    * `export BRANCHNAME=<BRANCHNAME>`
-   * `export TAGNAME=v<VERSION>`
+   * `export TAGNAME=v$XTEXT_VERSION`
    * `./gitAll reset --hard`. Make sure before that no relevant change gets lost.
    * `./gitAll pull`
    * `./gitAll checkout -b $BRANCHNAME`
    * `./adjustPipelines.sh $BRANCHNAME`
    * Replace all occurrences of `job/master` according to the release branch name.
    * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`: Update the name of the zipped p2 repository according to the release version (`tofile` property).
-3. xtext-lib
+1. xtext-lib
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * `./gradlew generateP2Build`
-4. xtext-core
+   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+1. xtext-core
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/versions.gradle`: Set `xtext_bootstrap` property to the used Xtend compiler version.
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
    * `releng/releng-target/pom.xml`: Set `version` property to the release version.
-5. xtext-extras
+   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+1. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/versions.gradle`: Set `xtext_bootstrap` property to the used Xtend compiler version
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
-6. xtext-eclipse
+   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+1. xtext-eclipse
    * Replace all occurrences of `job/master` according to the release branch name.
    * `releng/org.eclipse.xtext.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
-7. xtext-idea
+1. xtext-idea
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-8. xtext-web
+1. xtext-web
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-9. xtext-maven
+1. xtext-maven
    * Replace all occurrences of the previous version with the release version.
    * `org.eclipse.xtext.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
    * `org.eclipse.xtext.maven.plugin/src/test/resources/it/generate/pom.xml`: Replace all occurrences of `job/master` (except `lsp4j/job/master`) according to the release branch name.
-10. xtext-xtend
+1. xtext-xtend
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version. Use a released version here.
    * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files
@@ -172,11 +173,13 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Replace all occurrences of `job/master` according to the release branch name.
    * `releng/org.eclipse.xtend.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
    * `releng/org.eclipse.xtend.maven.parent/pom.xml`: Set property `branch_url_segment` to branch name
-11. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
-12. Create release tags on all repositories. Name `v<version>` and commit message `release v<version>`.
-   * `./gitAll -a v<version> -m "release v<version>"`   
+1. Switch back to xtext-umbrella
+   * `./gitAll commit -a -m "[release] version 2.15.0"`
+1. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
+1. Create release tags on all repositories. Name `$TAGNAME` and commit message `release $TAGNAME`.
    * `./gitAll -a $TAGNAME -m "release $TAGNAME"`
-13. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
+   * `./gitAll push origin $TAGNAME`
+1. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
    * Search for _orgeclipsextext-NNNN_ and _orgeclipsextend-NNNN_ with status _open_
@@ -184,14 +187,14 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Wait until the checks have run successfully
    * Select both repositories again the perform the _Release_ toolbar action
    * It will take some hours until the artifacts are mirrored to Maven Central.
-14. (Should be done by promote script) Manually edit the composite repository
+1. (Should be done by promote script) Manually edit the composite repository
    * `/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/[milestones|releases]/[compositeArtifacts.xml|compositeContent.xml]`
-15. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+1. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
    * Edit `simrel.aggr` from [org.eclipse.simrel.build repository](https://git.eclipse.org/c/simrel/org.eclipse.simrel.build.git/)
    * Edit Contribution `Xtext, Xtend`
    * Change `location` property of the Mapped Repository to the release / milestone repository URL
    * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
-16. Publish websites
+1. Publish websites
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published` 
 
