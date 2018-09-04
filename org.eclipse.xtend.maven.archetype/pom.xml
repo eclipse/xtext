@@ -17,7 +17,7 @@
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
 		<maven.archetype.version>2.3</maven.archetype.version>
-		<it-archetype-tests-skip>false</it-archetype-tests-skip>
+		<it-archetype-tests-skip>true</it-archetype-tests-skip>
 	</properties>
 
 	<build>
