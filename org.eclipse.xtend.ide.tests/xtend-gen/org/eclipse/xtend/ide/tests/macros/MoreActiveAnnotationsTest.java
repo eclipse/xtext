@@ -15,12 +15,15 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.StopwatchRule;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend.ide.tests.macros.JdtBasedProcessorProviderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,6 +35,15 @@ import org.junit.Test;
 public class MoreActiveAnnotationsTest {
   @Rule
   public StopwatchRule stopwatch = new StopwatchRule(true);
+  
+  @BeforeClass
+  public static void createProjects() {
+    try {
+      TargetPlatformUtil.setTargetPlatform(JdtBasedProcessorProviderTest.class);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @After
   public void tearDown() throws Exception {

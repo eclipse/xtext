@@ -13,9 +13,11 @@ import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Assert
+import org.junit.BeforeClass
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
@@ -28,6 +30,10 @@ import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
  * 
  */
 class JdtBasedProcessorProviderTest {
+	@BeforeClass
+	static def void createProjects() {
+		TargetPlatformUtil.setTargetPlatform(JdtBasedProcessorProviderTest)
+	}
 
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
