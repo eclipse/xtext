@@ -17,7 +17,7 @@ import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator
 class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(StatemachineValidator.INVALID_NAME)
-	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
+	def convertNameToFirstLowerCase(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change to '"+issue.data.head.toFirstLower+"'.", "Change to '"+issue.data.head.toFirstLower+"'.", 'upcase.png') [
 			val firstLetter = xtextDocument.get(issue.offset, 1)
 			xtextDocument.replace(issue.offset, 1, firstLetter.toLowerCase)
