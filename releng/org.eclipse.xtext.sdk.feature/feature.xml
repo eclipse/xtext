@@ -2,12 +2,12 @@
 <feature
       id="org.eclipse.xtext.sdk"
       label="%featureName"
-      version="2.15.0.qualifier"
+      version="2.16.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtext"
       image="modeling32.png"
       license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.15.0.qualifier">
+      license-feature-version="2.16.0.qualifier">
 
    <description>
       %description
