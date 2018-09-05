@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
   @Fix(StatemachineValidator.INVALID_NAME)
-  public void capitalizeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
+  public void convertNameToFirstLowerCase(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String _firstLower = StringExtensions.toFirstLower(IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(issue.getData()))));
     String _plus = ("Change to \'" + _firstLower);
     String _plus_1 = (_plus + "\'.");
