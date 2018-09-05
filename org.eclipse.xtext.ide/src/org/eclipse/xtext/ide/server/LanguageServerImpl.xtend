@@ -86,6 +86,8 @@ import org.eclipse.xtext.ide.server.rename.IRenameService
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
+import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService
+import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -395,7 +397,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		return requestManager.<List<Either<SymbolInformation, DocumentSymbol>>>runRead[ cancelIndicator |
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
-			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+			val documentSymbolService = resourceServiceProvider.IDocumentSymbolService
 			if (documentSymbolService === null) {
 				return emptyList
 			}
@@ -404,6 +406,25 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 				return documentSymbolService.getSymbols(document, resource, params, cancelIndicator)
 			]
 		]
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def IDocumentSymbolService getIDocumentSymbolService(IResourceServiceProvider serviceProvider) {
+		if (serviceProvider === null) {
+			return null;
+		}
+		val documentSymbolServiceClass = if(hierarchicalDocumentSymbolSupport) HierarchicalDocumentSymbolService else DocumentSymbolService;
+		return serviceProvider.get(documentSymbolServiceClass);
+	}
+
+	/**
+	 * {@code true} if the {@code TextDocumentClientCapabilities} explicitly declares the hierarchical document symbol support
+	 * at LS initialization time. Otherwise, false.
+	 */
+	protected def boolean isHierarchicalDocumentSymbolSupport() {
+		return this.params.capabilities?.textDocument?.documentSymbol?.hierarchicalDocumentSymbolSupport ?: false;
 	}
 
 	override symbol(WorkspaceSymbolParams params) {

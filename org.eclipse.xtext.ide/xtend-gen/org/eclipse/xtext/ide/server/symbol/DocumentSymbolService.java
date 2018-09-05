@@ -7,20 +7,21 @@
  */
 package org.eclipse.xtext.ide.server.symbol;
 
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.TreeTraverser;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import org.eclipse.emf.common.util.TreeIterator;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.Location;
@@ -35,6 +36,9 @@ import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
+import org.eclipse.xtext.ide.server.UriExtensions;
+import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
+import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService;
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -53,6 +57,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -61,7 +67,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @Singleton
 @SuppressWarnings("all")
-public class DocumentSymbolService {
+public class DocumentSymbolService implements IDocumentSymbolService {
+  @Inject
+  @Extension
+  private UriExtensions _uriExtensions;
+  
   @Inject
   @Extension
   private DocumentExtensions _documentExtensions;
@@ -88,6 +98,9 @@ public class DocumentSymbolService {
   
   @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+  
+  @Inject
+  private HierarchicalDocumentSymbolService hierarchicalDocumentSymbolService;
   
   public List<? extends Location> getDefinitions(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getPosition());
@@ -159,39 +172,70 @@ public class DocumentSymbolService {
     return targetURIs;
   }
   
+  @Override
   public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator) {
     return this.getSymbols(resource, cancelIndicator);
   }
   
   public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
-    final LinkedHashMap<EObject, SymbolInformation> symbols = CollectionLiterals.<EObject, SymbolInformation>newLinkedHashMap();
-    final TreeIterator<Object> contents = EcoreUtil.<Object>getAllProperContents(resource, true);
-    while (contents.hasNext()) {
-      {
-        this.operationCanceledManager.checkCanceled(cancelIndicator);
-        Object _next = contents.next();
-        final EObject obj = ((EObject) _next);
-        final SymbolInformation symbol = this.createSymbol(obj);
-        if ((symbol != null)) {
-          symbols.put(obj, symbol);
-          final EObject container = this.getContainer(obj);
-          final SymbolInformation containerSymbol = symbols.get(container);
-          String _name = null;
-          if (containerSymbol!=null) {
-            _name=containerSymbol.getName();
-          }
-          symbol.setContainerName(_name);
+    final String uri = this._uriExtensions.toUriString(resource.getURI());
+    final ArrayList<SymbolInformation> infos = CollectionLiterals.<SymbolInformation>newArrayList();
+    final Function1<Either<SymbolInformation, DocumentSymbol>, DocumentSymbol> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
+      return it.getRight();
+    };
+    final List<DocumentSymbol> rootSymbols = ListExtensions.<Either<SymbolInformation, DocumentSymbol>, DocumentSymbol>map(this.hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator), _function);
+    final Consumer<DocumentSymbol> _function_1 = (DocumentSymbol rootSymbol) -> {
+      final Function<DocumentSymbol, Iterable<DocumentSymbol>> _function_2 = (DocumentSymbol it) -> {
+        return it.getChildren();
+      };
+      final FluentIterable<DocumentSymbol> symbols = TreeTraverser.<DocumentSymbol>using(_function_2).preOrderTraversal(rootSymbol);
+      final Function1<DocumentSymbol, String> _function_3 = (DocumentSymbol symbol) -> {
+        final Function1<DocumentSymbol, Boolean> _function_4 = (DocumentSymbol it) -> {
+          return Boolean.valueOf((((it != symbol) && (!IterableExtensions.isNullOrEmpty(it.getChildren()))) && it.getChildren().contains(symbol)));
+        };
+        DocumentSymbol _findFirst = IterableExtensions.<DocumentSymbol>findFirst(symbols, _function_4);
+        String _name = null;
+        if (_findFirst!=null) {
+          _name=_findFirst.getName();
         }
-      }
-    }
-    final Function1<SymbolInformation, Either<SymbolInformation, DocumentSymbol>> _function = (SymbolInformation it) -> {
+        return _name;
+      };
+      final Function1<? super DocumentSymbol, ? extends String> containerNameProvider = _function_3;
+      final Function1<DocumentSymbol, SymbolInformation> _function_4 = (DocumentSymbol it) -> {
+        return this.createSymbol(uri, it, containerNameProvider);
+      };
+      Iterables.<SymbolInformation>addAll(infos, IterableExtensions.<DocumentSymbol, SymbolInformation>map(symbols, _function_4));
+    };
+    rootSymbols.forEach(_function_1);
+    final Function1<SymbolInformation, Either<SymbolInformation, DocumentSymbol>> _function_2 = (SymbolInformation it) -> {
       return Either.<SymbolInformation, DocumentSymbol>forLeft(it);
     };
-    return IterableExtensions.<Either<SymbolInformation, DocumentSymbol>>toList(IterableExtensions.<SymbolInformation, Either<SymbolInformation, DocumentSymbol>>map(symbols.values(), _function));
+    return ListExtensions.<SymbolInformation, Either<SymbolInformation, DocumentSymbol>>map(infos, _function_2);
   }
   
   protected EObject getContainer(final EObject obj) {
     return obj.eContainer();
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected SymbolInformation createSymbol(final String uri, final DocumentSymbol symbol, final Function1<? super DocumentSymbol, ? extends String> containerNameProvider) {
+    SymbolInformation _symbolInformation = new SymbolInformation();
+    final Procedure1<SymbolInformation> _function = (SymbolInformation it) -> {
+      it.setName(symbol.getName());
+      it.setKind(symbol.getKind());
+      it.setDeprecated(symbol.getDeprecated());
+      Location _location = new Location();
+      final Procedure1<Location> _function_1 = (Location it_1) -> {
+        it_1.setUri(uri);
+        it_1.setRange(symbol.getRange());
+      };
+      Location _doubleArrow = ObjectExtensions.<Location>operator_doubleArrow(_location, _function_1);
+      it.setLocation(_doubleArrow);
+      it.setContainerName(containerNameProvider.apply(symbol));
+    };
+    return ObjectExtensions.<SymbolInformation>operator_doubleArrow(_symbolInformation, _function);
   }
   
   protected SymbolInformation createSymbol(final EObject object) {

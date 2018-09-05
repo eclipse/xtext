@@ -37,6 +37,7 @@ import org.eclipse.lsp4j.DocumentFormattingParams
 import org.eclipse.lsp4j.DocumentHighlight
 import org.eclipse.lsp4j.DocumentHighlightKind
 import org.eclipse.lsp4j.DocumentRangeFormattingParams
+import org.eclipse.lsp4j.DocumentSymbol
 import org.eclipse.lsp4j.DocumentSymbolParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.FileEvent
@@ -148,6 +149,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected List<Pair<String, Object>> notifications = newArrayList()
 	protected File root
 	protected LanguageInfo languageInfo
+	protected boolean hierarchicalDocumentSymbolSupport = false;
 
 	protected def Path getTestRootPath() {
 		root.toPath().toAbsolutePath().normalize()
@@ -168,6 +170,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			rootUri = root.toURI.normalize.toUriString
 		]
 		initializer?.apply(params)
+		hierarchicalDocumentSymbolSupport = params.capabilities?.textDocument?.documentSymbol?.
+			hierarchicalDocumentSymbolSupport ?: false;
 		return languageServer.initialize(params).get
 	}
 
@@ -255,6 +259,24 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		    location: «location.toExpectation»
 		    «IF !containerName.nullOrEmpty»
 		    	container: "«containerName»"
+		    «ENDIF»
+		}
+	'''
+
+	/**
+	 * @since 2.16
+	 */
+	protected def dispatch String toExpectation(DocumentSymbol it) '''
+		symbol "«name»" {
+		    kind: «kind.value»
+		    range: «range.toExpectation»
+		    selectionRange: «selectionRange.toExpectation»
+		    details: «detail»
+		    deprecated: «deprecated»
+		    «IF !children.nullOrEmpty»
+		    children: [
+		    	«FOR child : children SEPARATOR'\n'»«child.toExpectation»«ENDFOR»
+		    ]
 		    «ENDIF»
 		}
 	'''
@@ -429,7 +451,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 
 	protected def FileInfo initializeContext(TextDocumentConfiguration configuration) {
-		initialize
+		initialize(configuration.initializer)
 		// create files on disk and notify languageServer
 		if (!configuration.filesInScope.isEmpty) {
 			val createdFiles = configuration.filesInScope.entrySet.map[key.writeFile(value.toString)]
@@ -527,9 +549,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val symbolsFuture = languageServer.documentSymbol(new DocumentSymbolParams(new TextDocumentIdentifier(fileUri)))
 		val symbols = symbolsFuture.get
 		if (configuration.assertSymbols !== null) {
-			configuration.assertSymbols.apply(symbols.map[getLeft])
+			configuration.assertSymbols.apply(symbols)
 		} else {
-			val String actualSymbols = symbols.toExpectation
+			val unwrappedSymbols = symbols.map[if(hierarchicalDocumentSymbolSupport) getRight else getLeft]
+			val String actualSymbols = unwrappedSymbols.toExpectation
 			assertEquals(expectedSymbols, actualSymbols)
 		}
 	}
@@ -690,7 +713,7 @@ class DocumentHighlightConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class DocumentSymbolConfiguraiton extends TextDocumentConfiguration {
 	String expectedSymbols = ''
-	(List<? extends SymbolInformation>)=>void assertSymbols = null
+	(List<Either<SymbolInformation, DocumentSymbol>>)=>void assertSymbols = null
 }
 
 @Accessors
@@ -718,6 +741,7 @@ class TextDocumentConfiguration {
 	Map<String, CharSequence> filesInScope = emptyMap
 	String model
 	String filePath
+	(InitializeParams)=>void initializer
 }
 
 @Accessors

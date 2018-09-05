@@ -8,7 +8,9 @@
 package org.eclipse.xtext.testing;
 
 import java.util.List;
+import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -19,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class DocumentSymbolConfiguraiton extends TextDocumentConfiguration {
   private String expectedSymbols = "";
   
-  private Procedure1<? super List<? extends SymbolInformation>> assertSymbols = null;
+  private Procedure1<? super List<Either<SymbolInformation, DocumentSymbol>>> assertSymbols = null;
   
   @Pure
   public String getExpectedSymbols() {
@@ -31,11 +33,11 @@ public class DocumentSymbolConfiguraiton extends TextDocumentConfiguration {
   }
   
   @Pure
-  public Procedure1<? super List<? extends SymbolInformation>> getAssertSymbols() {
+  public Procedure1<? super List<Either<SymbolInformation, DocumentSymbol>>> getAssertSymbols() {
     return this.assertSymbols;
   }
   
-  public void setAssertSymbols(final Procedure1<? super List<? extends SymbolInformation>> assertSymbols) {
+  public void setAssertSymbols(final Procedure1<? super List<Either<SymbolInformation, DocumentSymbol>>> assertSymbols) {
     this.assertSymbols = assertSymbols;
   }
 }

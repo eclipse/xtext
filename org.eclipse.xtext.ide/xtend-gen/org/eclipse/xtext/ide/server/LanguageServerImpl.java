@@ -51,6 +51,7 @@ import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbol;
+import org.eclipse.lsp4j.DocumentSymbolCapabilities;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.ExecuteCommandCapabilities;
 import org.eclipse.lsp4j.ExecuteCommandOptions;
@@ -71,6 +72,7 @@ import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextDocumentSyncKind;
@@ -115,6 +117,8 @@ import org.eclipse.xtext.ide.server.rename.IRenameService;
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
+import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
+import org.eclipse.xtext.ide.server.symbol.IDocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -606,11 +610,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     final Function1<CancelIndicator, List<Either<SymbolInformation, DocumentSymbol>>> _function = (CancelIndicator cancelIndicator) -> {
       final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
       final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-      DocumentSymbolService _get = null;
-      if (resourceServiceProvider!=null) {
-        _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-      }
-      final DocumentSymbolService documentSymbolService = _get;
+      final IDocumentSymbolService documentSymbolService = this.getIDocumentSymbolService(resourceServiceProvider);
       if ((documentSymbolService == null)) {
         return CollectionLiterals.<Either<SymbolInformation, DocumentSymbol>>emptyList();
       }
@@ -620,6 +620,51 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return this.workspaceManager.<List<Either<SymbolInformation, DocumentSymbol>>>doRead(uri, _function_1);
     };
     return this.requestManager.<List<Either<SymbolInformation, DocumentSymbol>>>runRead(_function);
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected IDocumentSymbolService getIDocumentSymbolService(final IResourceServiceProvider serviceProvider) {
+    if ((serviceProvider == null)) {
+      return null;
+    }
+    Class<? extends IDocumentSymbolService> _xifexpression = null;
+    boolean _isHierarchicalDocumentSymbolSupport = this.isHierarchicalDocumentSymbolSupport();
+    if (_isHierarchicalDocumentSymbolSupport) {
+      _xifexpression = HierarchicalDocumentSymbolService.class;
+    } else {
+      _xifexpression = DocumentSymbolService.class;
+    }
+    final Class<? extends IDocumentSymbolService> documentSymbolServiceClass = _xifexpression;
+    return serviceProvider.get(documentSymbolServiceClass);
+  }
+  
+  /**
+   * {@code true} if the {@code TextDocumentClientCapabilities} explicitly declares the hierarchical document symbol support
+   * at LS initialization time. Otherwise, false.
+   */
+  protected boolean isHierarchicalDocumentSymbolSupport() {
+    Boolean _elvis = null;
+    ClientCapabilities _capabilities = this.params.getCapabilities();
+    TextDocumentClientCapabilities _textDocument = null;
+    if (_capabilities!=null) {
+      _textDocument=_capabilities.getTextDocument();
+    }
+    DocumentSymbolCapabilities _documentSymbol = null;
+    if (_textDocument!=null) {
+      _documentSymbol=_textDocument.getDocumentSymbol();
+    }
+    Boolean _hierarchicalDocumentSymbolSupport = null;
+    if (_documentSymbol!=null) {
+      _hierarchicalDocumentSymbolSupport=_documentSymbol.getHierarchicalDocumentSymbolSupport();
+    }
+    if (_hierarchicalDocumentSymbolSupport != null) {
+      _elvis = _hierarchicalDocumentSymbolSupport;
+    } else {
+      _elvis = Boolean.valueOf(false);
+    }
+    return (boolean) _elvis;
   }
   
   @Override

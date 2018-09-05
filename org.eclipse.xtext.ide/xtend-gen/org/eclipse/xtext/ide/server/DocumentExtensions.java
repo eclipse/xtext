@@ -89,6 +89,18 @@ public class DocumentExtensions {
     return this.newLocation(resource, textRegion);
   }
   
+  /**
+   * Returns with the {@link Location location} that represents the {@link ILocationInFileProvider#getFullTextRegion full text region}
+   * of the argument.
+   * 
+   * @since 2.16
+   */
+  public Location newFullLocation(final EObject object) {
+    final Resource resource = object.eResource();
+    final ITextRegion textRegion = this.locationInFileProvider.getFullTextRegion(object);
+    return this.newLocation(resource, textRegion);
+  }
+  
   public Location newLocation(final EObject owner, final EStructuralFeature feature, final int indexInList) {
     final Resource resource = owner.eResource();
     final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList);

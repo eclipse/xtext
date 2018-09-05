@@ -8,8 +8,10 @@
 package org.eclipse.xtext.testing;
 
 import java.util.Map;
+import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
@@ -20,6 +22,8 @@ public class TextDocumentConfiguration {
   private String model;
   
   private String filePath;
+  
+  private Procedure1<? super InitializeParams> initializer;
   
   @Pure
   public Map<String, CharSequence> getFilesInScope() {
@@ -46,5 +50,14 @@ public class TextDocumentConfiguration {
   
   public void setFilePath(final String filePath) {
     this.filePath = filePath;
+  }
+  
+  @Pure
+  public Procedure1<? super InitializeParams> getInitializer() {
+    return this.initializer;
+  }
+  
+  public void setInitializer(final Procedure1<? super InitializeParams> initializer) {
+    this.initializer = initializer;
   }
 }

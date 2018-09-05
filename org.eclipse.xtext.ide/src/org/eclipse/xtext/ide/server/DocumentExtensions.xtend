@@ -75,6 +75,18 @@ class DocumentExtensions {
 		return resource.newLocation(textRegion)
 	}
 
+	/**
+	 * Returns with the {@link Location location} that represents the {@link ILocationInFileProvider#getFullTextRegion full text region}
+	 * of the argument.
+	 * 
+	 * @since 2.16
+	 */
+	def Location newFullLocation(EObject object) {
+		val resource = object.eResource
+		val textRegion = locationInFileProvider.getFullTextRegion(object)
+		return resource.newLocation(textRegion)
+	}
+
 	def Location newLocation(EObject owner, EStructuralFeature feature, int indexInList) {
 		val resource = owner.eResource
 		val textRegion = locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList)

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.symbol
 
+import com.google.common.collect.TreeTraverser
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
@@ -29,6 +30,7 @@ import org.eclipse.xtext.findReferences.TargetURICollector
 import org.eclipse.xtext.findReferences.TargetURIs
 import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.DocumentExtensions
+import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.naming.QualifiedName
@@ -41,14 +43,15 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 @Singleton
-class DocumentSymbolService {
+class DocumentSymbolService implements IDocumentSymbolService {
+
+	@Inject
+	extension UriExtensions
 
 	@Inject
 	extension DocumentExtensions
@@ -73,6 +76,9 @@ class DocumentSymbolService {
 
 	@Inject
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry
+	
+	@Inject
+	HierarchicalDocumentSymbolService hierarchicalDocumentSymbolService
 
 	def List<? extends Location> getDefinitions(
 		Document document,
@@ -164,7 +170,7 @@ class DocumentSymbolService {
 		return targetURIs
 	}
 	
-	def List<Either<SymbolInformation, DocumentSymbol>> getSymbols(
+	override List<Either<SymbolInformation, DocumentSymbol>> getSymbols(
 		Document document,
 		XtextResource resource,
 		DocumentSymbolParams params,
@@ -174,26 +180,39 @@ class DocumentSymbolService {
 	}
 
 	def List<Either<SymbolInformation, DocumentSymbol>> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
-		val symbols = newLinkedHashMap
-		val contents = resource.getAllProperContents(true)
-		while (contents.hasNext) {
-			operationCanceledManager.checkCanceled(cancelIndicator)
-
-			val obj = contents.next as EObject
-			val symbol = obj.createSymbol
-			if (symbol !== null) {
-				symbols.put(obj, symbol)
-
-				val container = obj.container
-				val containerSymbol = symbols.get(container)
-				symbol.containerName = containerSymbol?.name
-			}
-		}
-		return symbols.values.map[Either.forLeft(it)].toList
+		val uri = resource.URI.toUriString
+		val infos = newArrayList
+		val rootSymbols = hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator).map[getRight]
+		rootSymbols.forEach[ rootSymbol |
+			val symbols = TreeTraverser.<DocumentSymbol>using([children]).preOrderTraversal(rootSymbol)
+			val (DocumentSymbol)=>String containerNameProvider = [ symbol |
+				return symbols.findFirst [
+					it !== symbol && !children.nullOrEmpty && children.contains(symbol)
+				]?.name
+			]
+			infos.addAll(symbols.map[createSymbol(uri, it, containerNameProvider)])
+		]
+		return infos.map[Either.<SymbolInformation, DocumentSymbol>forLeft(it)]
 	}
 
 	protected def EObject getContainer(EObject obj) {
 		return obj.eContainer
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def SymbolInformation createSymbol(String uri, DocumentSymbol symbol, (DocumentSymbol)=>String containerNameProvider) {
+		return new SymbolInformation => [
+			name = symbol.name
+			kind = symbol.kind
+			deprecated = symbol.deprecated
+			location = new Location => [
+				it.uri = uri
+				range = symbol.range
+			]
+			containerName = containerNameProvider.apply(symbol)
+		]
 	}
 
 	protected def SymbolInformation createSymbol(EObject object) {

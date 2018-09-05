@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionContext;
 import org.eclipse.lsp4j.CodeActionParams;
@@ -46,6 +47,7 @@ import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.lsp4j.DocumentHighlightKind;
 import org.eclipse.lsp4j.DocumentRangeFormattingParams;
 import org.eclipse.lsp4j.DocumentSymbol;
+import org.eclipse.lsp4j.DocumentSymbolCapabilities;
 import org.eclipse.lsp4j.DocumentSymbolParams;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
@@ -63,6 +65,7 @@ import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
@@ -267,6 +270,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected LanguageInfo languageInfo;
   
+  protected boolean hierarchicalDocumentSymbolSupport = false;
+  
   protected Path getTestRootPath() {
     return this.root.toPath().toAbsolutePath().normalize();
   }
@@ -300,6 +305,26 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       if (initializer!=null) {
         initializer.apply(params);
       }
+      Boolean _elvis = null;
+      ClientCapabilities _capabilities = params.getCapabilities();
+      TextDocumentClientCapabilities _textDocument = null;
+      if (_capabilities!=null) {
+        _textDocument=_capabilities.getTextDocument();
+      }
+      DocumentSymbolCapabilities _documentSymbol = null;
+      if (_textDocument!=null) {
+        _documentSymbol=_textDocument.getDocumentSymbol();
+      }
+      Boolean _hierarchicalDocumentSymbolSupport = null;
+      if (_documentSymbol!=null) {
+        _hierarchicalDocumentSymbolSupport=_documentSymbol.getHierarchicalDocumentSymbolSupport();
+      }
+      if (_hierarchicalDocumentSymbolSupport != null) {
+        _elvis = _hierarchicalDocumentSymbolSupport;
+      } else {
+        _elvis = Boolean.valueOf(false);
+      }
+      this.hierarchicalDocumentSymbolSupport = (_elvis).booleanValue();
       return this.languageServer.initialize(params).get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -482,6 +507,74 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         _builder.append(_containerName, "    ");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected String _toExpectation(final DocumentSymbol it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("symbol \"");
+    String _name = it.getName();
+    _builder.append(_name);
+    _builder.append("\" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("kind: ");
+    int _value = it.getKind().getValue();
+    _builder.append(_value, "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("range: ");
+    String _expectation = this.toExpectation(it.getRange());
+    _builder.append(_expectation, "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("selectionRange: ");
+    String _expectation_1 = this.toExpectation(it.getSelectionRange());
+    _builder.append(_expectation_1, "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("details: ");
+    String _detail = it.getDetail();
+    _builder.append(_detail, "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("deprecated: ");
+    Boolean _deprecated = it.getDeprecated();
+    _builder.append(_deprecated, "    ");
+    _builder.newLineIfNotEmpty();
+    {
+      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(it.getChildren());
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("    ");
+        _builder.append("children: [");
+        _builder.newLine();
+        _builder.append("    ");
+        _builder.append("\t");
+        {
+          List<DocumentSymbol> _children = it.getChildren();
+          boolean _hasElements = false;
+          for(final DocumentSymbol child : _children) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate("\n", "    \t");
+            }
+            String _expectation_2 = this.toExpectation(child);
+            _builder.append(_expectation_2, "    \t");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        _builder.append("]");
+        _builder.newLine();
       }
     }
     _builder.append("}");
@@ -889,7 +982,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   protected FileInfo initializeContext(final TextDocumentConfiguration configuration) {
-    this.initialize();
+    this.initialize(configuration.getInitializer());
     boolean _isEmpty = configuration.getFilesInScope().isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
@@ -1054,15 +1147,22 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       DocumentSymbolParams _documentSymbolParams = new DocumentSymbolParams(_textDocumentIdentifier);
       final CompletableFuture<List<Either<SymbolInformation, DocumentSymbol>>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParams);
       final List<Either<SymbolInformation, DocumentSymbol>> symbols = symbolsFuture.get();
-      Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
+      Procedure1<? super List<Either<SymbolInformation, DocumentSymbol>>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
       if (_tripleNotEquals) {
-        final Function1<Either<SymbolInformation, DocumentSymbol>, SymbolInformation> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
-          return it.getLeft();
-        };
-        configuration.getAssertSymbols().apply(ListExtensions.<Either<SymbolInformation, DocumentSymbol>, SymbolInformation>map(symbols, _function));
+        configuration.getAssertSymbols().apply(symbols);
       } else {
-        final String actualSymbols = this.toExpectation(symbols);
+        final Function1<Either<SymbolInformation, DocumentSymbol>, Object> _function = (Either<SymbolInformation, DocumentSymbol> it) -> {
+          Object _xifexpression = null;
+          if (this.hierarchicalDocumentSymbolSupport) {
+            _xifexpression = it.getRight();
+          } else {
+            _xifexpression = it.getLeft();
+          }
+          return _xifexpression;
+        };
+        final List<Object> unwrappedSymbols = ListExtensions.<Either<SymbolInformation, DocumentSymbol>, Object>map(symbols, _function);
+        final String actualSymbols = this.toExpectation(unwrappedSymbols);
         this.assertEquals(configuration.getExpectedSymbols(), actualSymbols);
       }
     } catch (Throwable _e) {
@@ -1298,6 +1398,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((CompletionItem)it);
     } else if (it instanceof DocumentHighlight) {
       return _toExpectation((DocumentHighlight)it);
+    } else if (it instanceof DocumentSymbol) {
+      return _toExpectation((DocumentSymbol)it);
     } else if (it instanceof Hover) {
       return _toExpectation((Hover)it);
     } else if (it instanceof Location) {
