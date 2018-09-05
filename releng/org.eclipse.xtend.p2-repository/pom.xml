@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.eclipse.xtend</groupId>
 		<artifactId>org.eclipse.xtend.tycho.parent</artifactId>
-		<version>2.15.0-SNAPSHOT</version>
+		<version>2.16.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtend.tycho.parent</relativePath>
 	</parent>
 
@@ -38,7 +38,7 @@
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
-									file="${basedir}/target/org.eclipse.xtend.p2-repository-2.15.0-SNAPSHOT.zip"
+									file="${basedir}/target/org.eclipse.xtend.p2-repository-2.16.0-SNAPSHOT.zip"
 									toDir="${basedir}/../../build/" />
 							</tasks>
 						</configuration>
