@@ -45,7 +45,7 @@ sourcesJar {
 task longrunningTest(type: Test) {
 	group = 'Verification'
 	description = 'Runs the long-running unit tests.'
-	testClassesDir = sourceSets.longrunning.output.classesDir
+	testClassesDirs = sourceSets.longrunning.output.classesDirs
 	classpath = sourceSets.longrunning.runtimeClasspath
 }
 
