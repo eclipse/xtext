@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -231,16 +231,22 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	
 	/* @Nullable */
 	protected String getOperatorMethodName(XAbstractFeatureCall call) {
+		StringBuilder sb = new StringBuilder();
 		for(INode node: NodeModelUtils.findNodesForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)) {
 			for(ILeafNode leafNode: node.getLeafNodes()) {
 				if(!leafNode.isHidden()) {
-					String symbol = leafNode.getText();
-					QualifiedName methodName = operatorMapping.getMethodName(QualifiedName.create(symbol));
-					if(methodName != null)
-						return methodName.getFirstSegment();
+					sb.append(leafNode.getText());
 				}
 			}
 		}
+		
+		String symbol = sb.toString();
+		if(!symbol.isEmpty()) {
+			QualifiedName methodName = operatorMapping.getMethodName(QualifiedName.create(symbol));
+			if(methodName != null)
+				return methodName.getFirstSegment();
+		}
+		
 		return null;
 	}
 	
