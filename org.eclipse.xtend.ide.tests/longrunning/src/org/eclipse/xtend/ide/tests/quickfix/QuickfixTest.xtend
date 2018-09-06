@@ -1470,6 +1470,204 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test def void missingLessThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT <| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Change to '+'",
+			"Create extension method 'operator_lessThan(Object, String)'")
+		.assertModelAfterQuickfix("Create extension method 'operator_lessThan(Object, String)'", '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT < 'TEST'
+				}
+				
+				def operator_lessThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test def void missingGreaterThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT >| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Change to '+'",
+			"Change to '->'",
+			"Change to '=>'",
+			"Create extension method 'operator_greaterThan(Object, String)'")
+		.assertModelAfterQuickfix("Create extension method 'operator_greaterThan(Object, String)'", '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT > 'TEST'
+				}
+				
+				def operator_greaterThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test def void missingDoubleLessThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT <<| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Create extension method 'operator_doubleLessThan(Object, String)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT << 'TEST'
+				}
+				
+				def operator_doubleLessThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test def void missingDoubleGreaterThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT >>| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Change to '->'",
+			"Change to '=>'",
+			"Create extension method 'operator_doubleGreaterThan(Object, String)'")
+		.assertModelAfterQuickfix("Create extension method 'operator_doubleGreaterThan(Object, String)'", '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT >> 'TEST'
+				}
+				
+				def operator_doubleGreaterThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test def void missingTripleLessThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT <<<| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Create extension method 'operator_tripleLessThan(Object, String)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT <<< 'TEST'
+				}
+				
+				def operator_tripleLessThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test def void missingTripleGreaterThanMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT >>>| 'TEST'
+				}
+				
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels(
+			"Create extension method 'operator_tripleGreaterThan(Object, String)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				Object REPORT
+				
+				def a() {
+					REPORT >>> 'TEST'
+				}
+				
+				def operator_tripleGreaterThan(Object object, String string) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
 	@Test
 	def void inconsistentIndentation() {
 		val tripleQuotes = "'''"
