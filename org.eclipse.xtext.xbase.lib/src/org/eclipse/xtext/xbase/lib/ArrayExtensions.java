@@ -14,6 +14,7 @@ import com.google.common.annotations.GwtIncompatible;
  * first.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Stephane Galland - Add operations on 2-dimension arrays.
  * @since 2.4
  */
 @GwtCompatible
@@ -796,4 +797,311 @@ public class ArrayExtensions {
 		return array.clone();
 	}
 // END generated code
+
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given index
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static <T> T get(T[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static <T, E extends T> T set(T[][] array, int index0, int index1, E value) {
+		array[index0][index1] = value;
+		return value;
+	}
+
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static boolean get(boolean[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static boolean set(boolean[][] array, int index0, int index1, boolean value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static double get(double[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexex
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static double set(double[][] array, int index0, int index1, double value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the first index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static float get(float[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static float set(float[][] array, int index0, int index1, float value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static long get(long[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static long set(long[][] array, int index0, int index1, long value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2]")
+	public static int get(int[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static int set(int[][] array, int index0, int index1, int value) {
+		array[index0][index1] = value;
+		return value;
+	}
+		
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static char get(char[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static char set(char[][] array, int index0, int index1, char value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static short get(short[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static short set(short[][] array, int index0, int index1, short value) {
+		array[index0][index1] = value;
+		return value;
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index
+	 * @param index1
+	 *            the second index
+	 * @return the value at the given indexes
+	 * @since 2.15
+	 */
+	@Pure
+	@Inline("$1[$2][$3]")
+	public static byte get(byte[][] array, int index0, int index1) {
+		return array[index0][index1];
+	}
+	
+	/**
+	 * @param array
+	 *            the array
+	 * @param index0
+	 *            the first index the value should be set at
+	 * @param index1
+	 *            the second index the value should be set at
+	 * @param value
+	 *            the value to set at the given indexes
+	 * @return the new value
+	 * @since 2.15
+	 */
+	@Inline("$1[$2][$3] = $4")
+	public static byte set(byte[][] array, int index0, int index1, byte value) {
+		array[index0][index1] = value;
+		return value;
+	}
+
 }
