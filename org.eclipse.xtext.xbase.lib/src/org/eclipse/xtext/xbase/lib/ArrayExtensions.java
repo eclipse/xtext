@@ -806,7 +806,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given index
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -824,7 +824,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static <T, E extends T> T set(T[][] array, int index0, int index1, E value) {
@@ -840,7 +840,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -858,7 +858,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static boolean set(boolean[][] array, int index0, int index1, boolean value) {
@@ -874,7 +874,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -892,7 +892,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexex
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static double set(double[][] array, int index0, int index1, double value) {
@@ -908,7 +908,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the first index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -926,7 +926,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static float set(float[][] array, int index0, int index1, float value) {
@@ -942,7 +942,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -960,7 +960,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static long set(long[][] array, int index0, int index1, long value) {
@@ -976,7 +976,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2]")
@@ -994,7 +994,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given index
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static int set(int[][] array, int index0, int index1, int value) {
@@ -1010,7 +1010,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -1028,7 +1028,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static char set(char[][] array, int index0, int index1, char value) {
@@ -1044,7 +1044,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -1062,7 +1062,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static short set(short[][] array, int index0, int index1, short value) {
@@ -1078,7 +1078,7 @@ public class ArrayExtensions {
 	 * @param index1
 	 *            the second index
 	 * @return the value at the given indexes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("$1[$2][$3]")
@@ -1096,7 +1096,7 @@ public class ArrayExtensions {
 	 * @param value
 	 *            the value to set at the given indexes
 	 * @return the new value
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Inline("$1[$2][$3] = $4")
 	public static byte set(byte[][] array, int index0, int index1, byte value) {

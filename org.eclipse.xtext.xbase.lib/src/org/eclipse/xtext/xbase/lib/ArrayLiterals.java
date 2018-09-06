@@ -25,7 +25,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new $4[$1][$2]")
@@ -53,7 +53,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new char[$1][$2]")
@@ -79,7 +79,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new int[$1][$2]")
@@ -105,7 +105,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new boolean[$1][$2]")
@@ -131,7 +131,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new short[$1][$2]")
@@ -157,7 +157,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new long[$1][$2]")
@@ -183,7 +183,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new float[$1][$2]")
@@ -209,7 +209,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new double[$1][$2]")
@@ -236,7 +236,7 @@ public class ArrayLiterals {
 	 * @param size1
 	 *            the second size for the array to be created
 	 * @return an array of the given sizes
-	 * @since 2.15
+	 * @since 2.16
 	 */
 	@Pure
 	@Inline("new byte[$1][$2]")
