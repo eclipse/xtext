@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import org.eclipse.xtext.util.MergeableManifest.Attributes;
+import java.util.jar.Attributes;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
