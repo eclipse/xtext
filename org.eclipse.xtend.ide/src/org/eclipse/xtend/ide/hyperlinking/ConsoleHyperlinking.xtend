@@ -26,7 +26,7 @@ class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
             val length = event.getLength();
             val link = new XtendFileHyperlink(console.document.get(offset, length), workbench, console);
             console.addHyperlink(link, offset, length);   
-        } catch (BadLocationException e) {
+        } catch (BadLocationException | NumberFormatException e) {
         }
     }
 
@@ -62,7 +62,7 @@ class XtendFileHyperlink implements IHyperlink {
 	
 	override linkActivated() {
 		try {
-			switch l : launch.sourceLocator {
+			switch l : launch?.sourceLocator {
 				AbstractSourceLookupDirector : {
 					val result = l.getSourceElement(fileName)
 					switch result {	IFile : {

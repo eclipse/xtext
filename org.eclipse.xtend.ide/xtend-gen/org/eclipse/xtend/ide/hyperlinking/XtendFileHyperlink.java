@@ -41,7 +41,11 @@ public class XtendFileHyperlink implements IHyperlink {
   public void linkActivated() {
     try {
       try {
-        ISourceLocator _sourceLocator = this.getLaunch().getSourceLocator();
+        ILaunch _launch = this.getLaunch();
+        ISourceLocator _sourceLocator = null;
+        if (_launch!=null) {
+          _sourceLocator=_launch.getSourceLocator();
+        }
         final ISourceLocator l = _sourceLocator;
         boolean _matched = false;
         if (l instanceof AbstractSourceLookupDirector) {
