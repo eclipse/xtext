@@ -34,6 +34,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>r201809</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-r201809</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>photon</id>
 			<properties>
 				<target-platform-classifier>org.eclipse.xtext.target-photon</target-platform-classifier>
