@@ -245,6 +245,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 */
 	public interface IDirtyStateEditorSupportClient {
 
+		/**
+		 * May return <code>null</code> before EditorPart creation or after its disposal.
+		 */
 		IXtextDocument getDocument();
 
 		boolean isDirty();
