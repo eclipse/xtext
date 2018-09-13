@@ -5,11 +5,39 @@ node {
 	])
 	
 	stage('Checkout') {
-		checkout scm
+		sh '''
+			if [ -d ".git" ]; then
+				git reset --hard
+			fi
+		'''
 		
+		checkout scm
 		dir('build') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
+		
+		sh '''
+			branchname=${1:-master}
+			
+			escaped() {
+				echo $branchname | sed 's/\\//%252F/g'
+			}
+			
+			escapedBranch=$(escaped)
+			
+			sed_inplace() {
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					sed -i '' "$@"
+				else
+					sed -i "$@" 
+				fi	
+			}
+			
+			targetfile=releng/org.eclipse.xtext.sdk.target/org.eclipse.xtext.sdk.target.target
+
+			echo "Redirecting target platforms in $targetfile to $branchname"
+			sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/[^/]*/?<repository location=\\"$JENKINS_URL/job/\\1/job/$escapedBranch/?" $targetfile
+		'''
 	}
 	
 	stage('Maven Build') {
