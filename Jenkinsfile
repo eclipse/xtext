@@ -7,6 +7,12 @@ node {
 	])
 	
 	stage('Checkout') {
+		sh '''
+			if [ -d ".git" ]; then
+				git reset --hard
+			fi
+		'''
+
 		checkout scm
 		if ("latest" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(x)"
@@ -20,6 +26,31 @@ node {
 		dir('build') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
 		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
+
+		sh '''
+			branchname=${1:-master}
+			
+			escaped() {
+				echo $branchname | sed 's/\\//%252F/g'
+			}
+			
+			escapedBranch=$(escaped)
+			
+			sed_inplace() {
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					sed -i '' "$@"
+				else
+					sed -i "$@" 
+				fi	
+			}
+			
+			targetfiles="$(find releng -type f -iname '*.target')"
+			for targetfile in $targetfiles
+			do
+				echo "Redirecting target platforms in $targetfile to $branchname"
+				sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/[^/]*/?<repository location=\\"$JENKINS_URL/job/\\1/job/$escapedBranch/?" $targetfile
+			done
+		'''
 	}
 	
 	stage('Maven Build') {
