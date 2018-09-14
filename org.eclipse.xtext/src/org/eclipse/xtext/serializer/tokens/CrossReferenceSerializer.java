@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -115,7 +115,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			final IScope scope, Acceptor errors) {
 		String ruleName = linkingHelper.getRuleNameFrom(crossref);
 		boolean foundOne = false;
-		List<ISerializationDiagnostic> recordedErrros = null;
+		List<ISerializationDiagnostic> recordedErrors = null;
 		for (IEObjectDescription desc : scope.getElements(target)) {
 			foundOne = true;
 			String unconverted = qualifiedNameConverter.toString(desc.getName());
@@ -123,16 +123,16 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 				return valueConverter.toString(unconverted, ruleName);
 			} catch (ValueConverterException e) {
 				if (errors != null) {
-					if (recordedErrros == null)
-						recordedErrros = Lists.newArrayList();
-					recordedErrros.add(diagnostics.getValueConversionExceptionDiagnostic(semanticObject, crossref,
+					if (recordedErrors == null)
+						recordedErrors = Lists.newArrayList();
+					recordedErrors.add(diagnostics.getValueConversionExceptionDiagnostic(semanticObject, crossref,
 							unconverted, e));
 				}
 			}
 		}
 		if (errors != null) {
-			if (recordedErrros != null)
-				for (ISerializationDiagnostic diag : recordedErrros)
+			if (recordedErrors != null)
+				for (ISerializationDiagnostic diag : recordedErrors)
 					errors.accept(diag);
 			if (!foundOne)
 				errors.accept(diagnostics.getNoEObjectDescriptionFoundDiagnostic(semanticObject, crossref, target,
