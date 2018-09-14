@@ -11,9 +11,41 @@ import org.junit.Test
 import org.junit.Ignore
 
 class XtendRenameRefactoringTest extends AbstractXtendRenameRefactoringTest {
-	
+
 	@Ignore("https://github.com/eclipse/xtext-xtend/issues/164")
-	@Test def testRenameXtendMember() {
+	@Test def testRenameXtendMember001() {
+		val xtendModel = '''
+			class A {
+			
+				val i1 = new I(){}
+			
+				def a() { b(i1) }
+				
+				def b(I i2) {}
+			}
+			
+			interface I {}
+		'''
+		val editor = openEditorSafely("A.xtend", xtendModel)
+		
+		editor.renameXtendElement(xtendModel.indexOf("i1"), "i3")
+		
+		editor.assertDocumentContains('''
+			class A {
+			
+				val i3 = new I(){}
+			
+				def a() { b(i3) }
+				
+				def b(I i2) {}
+			}
+			
+			interface I {}
+		''')
+	}
+
+	@Ignore("https://github.com/eclipse/xtext-xtend/issues/164")
+	@Test def testRenameXtendMember002() {
 		testHelper.createFile("testb/B.java", '''
 			package testb;
 			
@@ -58,9 +90,9 @@ class XtendRenameRefactoringTest extends AbstractXtendRenameRefactoringTest {
 			}
 		'''
 		val editor = openEditorSafely("A.xtend", xtendModel)
-			
+		
 		editor.renameXtendElement(xtendModel.indexOf("ARROWHEAD__E"), "arrowhead__e1")
-			
+		
 		editor.assertDocumentContains("arrowhead__e1")
 	}
 }

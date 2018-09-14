@@ -18,7 +18,62 @@ import org.junit.Test;
 public class XtendRenameRefactoringTest extends AbstractXtendRenameRefactoringTest {
   @Ignore("https://github.com/eclipse/xtext-xtend/issues/164")
   @Test
-  public void testRenameXtendMember() {
+  public void testRenameXtendMember001() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val i1 = new I(){}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def a() { b(i1) }");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def b(I i2) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("interface I {}");
+      _builder.newLine();
+      final String xtendModel = _builder.toString();
+      final XtextEditor editor = this.openEditorSafely("A.xtend", xtendModel);
+      this.renameXtendElement(editor, xtendModel.indexOf("i1"), "i3");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class A {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("val i3 = new I(){}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def a() { b(i3) }");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def b(I i2) {}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("interface I {}");
+      _builder_1.newLine();
+      this.assertDocumentContains(editor, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Ignore("https://github.com/eclipse/xtext-xtend/issues/164")
+  @Test
+  public void testRenameXtendMember002() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testb;");
