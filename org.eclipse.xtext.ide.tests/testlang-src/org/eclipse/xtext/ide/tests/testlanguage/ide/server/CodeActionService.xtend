@@ -10,12 +10,14 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide.server
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.ECollections
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.lsp4j.CodeAction
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceEdit
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
@@ -29,7 +31,6 @@ import org.eclipse.xtext.util.CollectionBasedAcceptor
 import org.eclipse.xtext.util.StringInputStream
 
 import static org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator.*
-import org.eclipse.lsp4j.jsonrpc.messages.Either
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -40,14 +41,14 @@ class CodeActionService implements ICodeActionService {
 
 	override getCodeActions(Document document, XtextResource resource, CodeActionParams params,
 		CancelIndicator indicator) {
-		val commands = <Command>newArrayList
+		val actions = newArrayList
 		for (d : params.context.diagnostics) {
 			switch d.code {
-				case INVALID_NAME: commands += d.fixInvalidName(document, resource, params)
-				case UNSORTED_MEMBERS: commands += d.fixUnsortedMembers(document, resource, params)
+				case INVALID_NAME: actions += Either.forLeft(d.fixInvalidName(document, resource, params))
+				case UNSORTED_MEMBERS: actions += Either.forRight(d.fixUnsortedMembers(document, resource, params))
 			}
 		}
-		return commands.map[Either.forLeft(it)];
+		return actions
 	}
 
 	def private Command fixInvalidName(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {
@@ -66,17 +67,17 @@ class CodeActionService implements ICodeActionService {
 		]
 	}
 
-	def private Command fixUnsortedMembers(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {
-		val edit = recordWorkspaceEdit(doc, res) [ copiedResource |
+	def private CodeAction fixUnsortedMembers(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {
+		val wsEdit = recordWorkspaceEdit(doc, res) [ copiedResource |
 			val model = copiedResource.contents.filter(Model).head
 			for (type : model.types) {
 				ECollections.sort(type.members, [a, b|a.name <=> b.name])
 			}
 		]
-		return new Command => [
-			command = 'my.textedit.command'
+		return new CodeAction => [
 			title = '''Sort Members'''
-			arguments = #[edit]
+			diagnostics = #[d]
+			edit = wsEdit
 		]
 	}
 

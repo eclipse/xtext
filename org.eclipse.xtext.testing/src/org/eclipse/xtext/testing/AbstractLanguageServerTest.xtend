@@ -372,7 +372,15 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		documentChanges : 
 			«documentChanges.toExpectation»
 	'''
-
+	
+	protected dispatch def String toExpectation(CodeAction it)  '''
+		title : «title»
+		kind : «kind»
+		command : «command»
+		codes : «diagnostics.map[code].join(',')»
+		edit : «edit.toExpectation»
+	'''
+	
 	@Accessors static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
 		String expectedCodeActions = ''
 

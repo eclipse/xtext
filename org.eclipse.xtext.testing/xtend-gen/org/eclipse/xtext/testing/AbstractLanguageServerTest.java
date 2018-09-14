@@ -774,6 +774,34 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return _builder.toString();
   }
   
+  protected String _toExpectation(final CodeAction it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("title : ");
+    String _title = it.getTitle();
+    _builder.append(_title);
+    _builder.newLineIfNotEmpty();
+    _builder.append("kind : ");
+    String _kind = it.getKind();
+    _builder.append(_kind);
+    _builder.newLineIfNotEmpty();
+    _builder.append("command : ");
+    Command _command = it.getCommand();
+    _builder.append(_command);
+    _builder.newLineIfNotEmpty();
+    _builder.append("codes : ");
+    final Function1<Diagnostic, String> _function = (Diagnostic it_1) -> {
+      return it_1.getCode();
+    };
+    String _join = IterableExtensions.join(ListExtensions.<Diagnostic, String>map(it.getDiagnostics(), _function), ",");
+    _builder.append(_join);
+    _builder.newLineIfNotEmpty();
+    _builder.append("edit : ");
+    String _expectation = this.toExpectation(it.getEdit());
+    _builder.append(_expectation);
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {
     try {
       @Extension
@@ -1246,6 +1274,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((Void)null);
     } else if (it instanceof Map) {
       return _toExpectation((Map<Object, Object>)it);
+    } else if (it instanceof CodeAction) {
+      return _toExpectation((CodeAction)it);
     } else if (it instanceof CodeLens) {
       return _toExpectation((CodeLens)it);
     } else if (it instanceof ColoringInformation) {

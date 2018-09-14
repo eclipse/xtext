@@ -60,27 +60,24 @@ public class CodeActionService implements ICodeActionService {
   
   @Override
   public List<Either<Command, CodeAction>> getCodeActions(final Document document, final XtextResource resource, final CodeActionParams params, final CancelIndicator indicator) {
-    final ArrayList<Command> commands = CollectionLiterals.<Command>newArrayList();
+    final ArrayList<Either<Command, CodeAction>> actions = CollectionLiterals.<Either<Command, CodeAction>>newArrayList();
     List<Diagnostic> _diagnostics = params.getContext().getDiagnostics();
     for (final Diagnostic d : _diagnostics) {
       String _code = d.getCode();
       if (_code != null) {
         switch (_code) {
           case TestLanguageValidator.INVALID_NAME:
-            Command _fixInvalidName = this.fixInvalidName(d, document, resource, params);
-            commands.add(_fixInvalidName);
+            Either<Command, CodeAction> _forLeft = Either.<Command, CodeAction>forLeft(this.fixInvalidName(d, document, resource, params));
+            actions.add(_forLeft);
             break;
           case TestLanguageValidator.UNSORTED_MEMBERS:
-            Command _fixUnsortedMembers = this.fixUnsortedMembers(d, document, resource, params);
-            commands.add(_fixUnsortedMembers);
+            Either<Command, CodeAction> _forRight = Either.<Command, CodeAction>forRight(this.fixUnsortedMembers(d, document, resource, params));
+            actions.add(_forRight);
             break;
         }
       }
     }
-    final Function1<Command, Either<Command, CodeAction>> _function = (Command it) -> {
-      return Either.<Command, CodeAction>forLeft(it);
-    };
-    return ListExtensions.<Command, Either<Command, CodeAction>>map(commands, _function);
+    return actions;
   }
   
   private Command fixInvalidName(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
@@ -109,7 +106,7 @@ public class CodeActionService implements ICodeActionService {
     return ObjectExtensions.<Command>operator_doubleArrow(_command, _function);
   }
   
-  private Command fixUnsortedMembers(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
+  private CodeAction fixUnsortedMembers(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
     final IChangeSerializer.IModification<Resource> _function = (Resource copiedResource) -> {
       final Model model = IterableExtensions.<Model>head(Iterables.<Model>filter(copiedResource.getContents(), Model.class));
       EList<TypeDeclaration> _types = model.getTypes();
@@ -122,16 +119,16 @@ public class CodeActionService implements ICodeActionService {
         ECollections.<Member>sort(type.getMembers(), _function_1);
       }
     };
-    final WorkspaceEdit edit = this.recordWorkspaceEdit(doc, res, _function);
-    Command _command = new Command();
-    final Procedure1<Command> _function_1 = (Command it) -> {
-      it.setCommand("my.textedit.command");
+    final WorkspaceEdit wsEdit = this.recordWorkspaceEdit(doc, res, _function);
+    CodeAction _codeAction = new CodeAction();
+    final Procedure1<CodeAction> _function_1 = (CodeAction it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Sort Members");
       it.setTitle(_builder.toString());
-      it.setArguments(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(edit)));
+      it.setDiagnostics(Collections.<Diagnostic>unmodifiableList(CollectionLiterals.<Diagnostic>newArrayList(d)));
+      it.setEdit(wsEdit);
     };
-    return ObjectExtensions.<Command>operator_doubleArrow(_command, _function_1);
+    return ObjectExtensions.<CodeAction>operator_doubleArrow(_codeAction, _function_1);
   }
   
   private WorkspaceEdit recordWorkspaceEdit(final Document doc, final XtextResource resource, final IChangeSerializer.IModification<Resource> mod) {
