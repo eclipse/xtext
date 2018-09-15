@@ -73,13 +73,14 @@ public class JavaIDValueConverter extends IDValueConverter {
 	}
 
 	/**
-	 * Mostly copied from {@link Strings#convertFromJavaString(String, boolean)}
+	 * Converts a string with valid or invalid escape sequences to a semantic value.
+	 * If the escape sequences are invalid, a {@link ValueConverterException} is thrown
+	 * with detailed information about the broken character combination.
 	 */
-	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) {
+	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) throws ValueConverterException {
 		int off = firstEscapeSequence;
 		int len = identifier.length();
 		char[] convtBuf = new char[len];
-		char aChar;
 		char[] out = convtBuf;
 		identifier.getChars(0, firstEscapeSequence, out, 0);
 		int outLen = firstEscapeSequence;
@@ -87,13 +88,13 @@ public class JavaIDValueConverter extends IDValueConverter {
 		boolean error = false;
 		boolean badChar = false;
 		while (off < end) {
-			aChar = identifier.charAt(off++);
+			char aChar = identifier.charAt(off++);
 			if (aChar == '\\') {
 				if (off < end) {
 					aChar = identifier.charAt(off++);
 					switch (aChar) {
 						case 'u': {
-							// Read the xxxx
+							// Read the 4 hex digits
 							int value = 0;
 							if (off + 4 > end || !isHexSequence(identifier, off, 4)) {
 								error = true;
