@@ -35,12 +35,12 @@ public class StatemachineGenerator extends AbstractGenerator {
     fsa.generateFile(_plus, this.toJavaCode(((Statemachine) _head)));
   }
   
-  public String className(final Resource res) {
+  protected String className(final Resource res) {
     String name = res.getURI().lastSegment();
     return StringExtensions.toFirstUpper(name.substring(0, name.indexOf(".")));
   }
   
-  public CharSequence toJavaCode(final Statemachine sm) {
+  protected CharSequence toJavaCode(final Statemachine sm) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.BufferedReader;");
     _builder.newLine();
@@ -190,7 +190,7 @@ public class StatemachineGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence declareCommand(final Command command) {
+  protected CharSequence declareCommand(final Command command) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("protected void do");
     String _firstUpper = StringExtensions.toFirstUpper(command.getName());
@@ -211,7 +211,7 @@ public class StatemachineGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateCode(final State state) {
+  protected CharSequence generateCode(final State state) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (currentState.equals(\"");
     String _name = state.getName();

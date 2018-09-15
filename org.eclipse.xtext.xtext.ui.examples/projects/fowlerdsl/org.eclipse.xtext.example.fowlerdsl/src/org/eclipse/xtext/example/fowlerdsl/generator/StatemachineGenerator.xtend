@@ -22,12 +22,12 @@ class StatemachineGenerator extends AbstractGenerator {
 		fsa.generateFile(resource.className+".java", toJavaCode(resource.contents.head as Statemachine))
 	}
 
-	def className(Resource res) {
+	protected def className(Resource res) {
 		var name = res.URI.lastSegment
 		return name.substring(0, name.indexOf('.')).toFirstUpper
 	}
 
-	def toJavaCode(Statemachine sm) '''
+	protected def toJavaCode(Statemachine sm) '''
 		import java.io.BufferedReader;
 		import java.io.IOException;
 		import java.io.InputStreamReader;
@@ -74,13 +74,13 @@ class StatemachineGenerator extends AbstractGenerator {
 		}
 	'''
 
-	def declareCommand(Command command) '''
+	protected def declareCommand(Command command) '''
 		protected void do«command.name.toFirstUpper»() {
 			System.out.println("Executing command «command.name» («command.code»)");
 		}
 	'''
 
-	def generateCode(State state) '''
+	protected def generateCode(State state) '''
 		if (currentState.equals("«state.name»")) {
 			if (executeActions) {
 				«FOR c : state.actions»
