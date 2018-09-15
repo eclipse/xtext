@@ -1,123 +1,128 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
+import java.util.List
 
 class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest {
 
-	@Test
-	def void testTypeInJavaDoc() {
-		newBuilder.append(
+	// cursor position marker
+	val c = '''<|>'''
+
+	@Test def testTypeInJavaDoc_1() {
 		'''
-		package foo
-		/**
-		 * @see java.util.Dat
-		 */
-		class Foo {}
-		''').assertTextAtCursorPosition(37,'java.util.Date')
-		.applyProposal(37).
-		expectContent('''
-		package foo
+			package foo
+			/**
+			 * @see java.util.Dat«c»
+			 */
+			class Foo {}
+		'''.testContentAssistant(#["java.util.Date"], '''
+			package foo
 
-		import java.util.Date
+			import java.util.Date
 
-		/**
-		 * @see Date
-		 */
-		class Foo {}
+			/**
+			 * @see Date
+			 */
+			class Foo {}
 		''')
 	}
 
-	@Test
-	def void testTypeInJavaDoc_2() {
-		newBuilder.append(
+	@Test def testTypeInJavaDoc_2() {
 		'''
-		package foo
-		/**
-		 * @see java.lang.StringBuff
-		 */
-		class Foo {}
-		''').assertTextAtCursorPosition(44, "StringBuffer")
-		.applyProposal(44).
-		expectContent('''
-		package foo
-		/**
-		 * @see StringBuffer
-		 */
-		class Foo {}
+			package foo
+			/**
+			 * @see java.lang.StringBuff«c»
+			 */
+			class Foo {}
+		'''.testContentAssistant(#["StringBuffer"], '''
+			package foo
+			/**
+			 * @see StringBuffer
+			 */
+			class Foo {}
 		''')
 	}
 
-	@Test
-	def void testTypeInJavaDoc_3() {
-		assertTrue(newBuilder.append(
+	@Test def testTypeInJavaDoc_3() {
 		'''
-		package foo
-		/**
-		 * java.lang.StringBuff
-		 */
-		class Foo {}
-		''').computeCompletionProposals(39).isEmpty())
+			package foo
+			/**
+			 * java.lang.StringBuff«c»
+			 */
+			class Foo {}
+		'''.testEmptyContentAssistant
 	}
 
-
-	@Test
-	def void testTypeInJavaDoc_4() {
-		newBuilder.append(
+	@Test def testTypeInJavaDoc_4() {
 		'''
-		package foo
-		/**
-		 * @see    java.lang.StringBuff
-		 */
-		class Foo {}
-		''').assertTextAtCursorPosition(47, "StringBuffer")
-		.applyProposal(47).
-		expectContent('''
-		package foo
-		/**
-		 * @see    StringBuffer
-		 */
-		class Foo {}
+			package foo
+			/**
+			 * @see    java.lang.StringBuff«c»
+			 */
+			class Foo {}
+		'''.testContentAssistant(#["StringBuffer"], '''
+			package foo
+			/**
+			 * @see    StringBuffer
+			 */
+			class Foo {}
 		''')
 	}
 
-	@Test
-	def void testTypeInJavaDoc_5() {
-		newBuilder.append(
+	@Test def testTypeInJavaDoc_5() {
 		'''
-		package foo
-		/**
-		 * {@link java.lang.StringBuff
-		 */
-		class Foo {}
-		''').assertTextAtCursorPosition(46, "StringBuffer")
-		.applyProposal(46).
-		expectContent('''
-		package foo
-		/**
-		 * {@link StringBuffer
-		 */
-		class Foo {}
+			package foo
+			/**
+			 * {@link java.lang.StringBuff«c»
+			 */
+			class Foo {}
+		'''.testContentAssistant(#["StringBuffer"], '''
+			package foo
+			/**
+			 * {@link StringBuffer
+			 */
+			class Foo {}
 		''')
 	}
 
-	@Test
-	def void testTypeInJavaDoc_6() {
-		newBuilder.append(
+	@Test def testTypeInJavaDoc_6() {
 		'''
-		package foo
-		/**
-		 * {@link    java.lang.StringBuff
-		 */
-		class Foo {}
-		''').assertTextAtCursorPosition(49, "StringBuffer")
-		.applyProposal(49).
-		expectContent('''
-		package foo
-		/**
-		 * {@link    StringBuffer
-		 */
-		class Foo {}
+			package foo
+			/**
+			 * {@link    java.lang.StringBuff«c»
+			 */
+			class Foo {}
+		'''.testContentAssistant(#["StringBuffer"], '''
+			package foo
+			/**
+			 * {@link    StringBuffer
+			 */
+			class Foo {}
 		''')
 	}
 
+	private def testEmptyContentAssistant(CharSequence it) {
+		testContentAssistant(#[], null, null)
+	}
+	
+	private def testContentAssistant(CharSequence it, List<String> expectedProposals, String expectedContent) {
+		testContentAssistant(expectedProposals, expectedProposals.head, expectedContent)	
+	}
+
+	private def void testContentAssistant(CharSequence text, List<String> expectedProposals,
+		String proposalToApply, String expectedContent) {
+		
+		val cursorPosition = text.toString.indexOf(c)
+		if(cursorPosition == -1) {
+			fail("Can't locate cursor position symbols '" + c + "' in the input text.")
+		}
+		
+		val content = text.toString.replace(c, "")
+		
+		val builder = newBuilder.append(content).assertTextAtCursorPosition(cursorPosition, expectedProposals)
+		
+		if(proposalToApply !== null) {
+			builder.applyProposal(cursorPosition, proposalToApply).expectContent(expectedContent)
+		}
+	}
 }
