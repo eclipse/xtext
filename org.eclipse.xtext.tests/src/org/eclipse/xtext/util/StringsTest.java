@@ -218,4 +218,27 @@ public class StringsTest extends Assert {
 		assertEquals(2, Strings.countLineBreaks("\r\n\n", 0, 3));
 	}
 	
+	@Test public void testConvertBackAndForthWithUnicode() throws Exception {
+		for(int i = Character.MIN_VALUE; i <= Character.MAX_VALUE; i++) {
+			String originalString = String.valueOf((char)i);
+			String converted = Strings.convertToJavaString(originalString, true);
+			assertEquals(originalString, Strings.convertFromJavaString(converted, true));
+		}
+	}
+	
+	@Test public void testConvertBackAndForthWithoutUnicode() throws Exception {
+		for(int i = Character.MIN_VALUE; i <= Character.MAX_VALUE; i++) {
+			String originalString = String.valueOf((char)i);
+			String converted = Strings.convertToJavaString(originalString, false);
+			assertEquals(originalString, Strings.convertFromJavaString(converted, false));
+		}
+	}
+
+	@Test public void testConvertSpecialChars() throws Exception {
+		String input = "\b\f\n\r\"\'\\\u4444";
+		String expected = "\\b\\f\\n\\r\\\"\\'\\\\\\u4444";
+		assertEquals(expected, Strings.convertToJavaString(input, true));
+		assertEquals(input, Strings.convertFromJavaString(expected, true));
+	}
+	
 }
