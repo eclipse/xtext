@@ -122,178 +122,142 @@ public class Strings {
 	}
 
 	/**
-	 * Mostly copied from {@link java.util.Properties#loadConvert}
+	 * Resolve Java control character sequences with to the actual character value.
+	 * Optionally handle unicode escape sequences, too. 
 	 */
-	public static String convertFromJavaString(String javaString, boolean useUnicode) {
-		char[] in = javaString.toCharArray();
-		int off = 0;
-		int len = javaString.length();
-		char[] convtBuf = new char[len];
-		char aChar;
-		char[] out = convtBuf;
-		int outLen = 0;
-		int end = off + len;
-
-		while (off < end) {
-			aChar = in[off++];
-			if (aChar == '\\') {
-				aChar = in[off++];
-				if (useUnicode && aChar == 'u') {
-					// Read the xxxx
-					int value = 0;
-					if(off+4 > end)
-						throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
-					for (int i = 0; i < 4; i++) {
-						aChar = in[off++];
-						switch (aChar) {
-							case '0':
-							case '1':
-							case '2':
-							case '3':
-							case '4':
-							case '5':
-							case '6':
-							case '7':
-							case '8':
-							case '9':
-								value = (value << 4) + aChar - '0';
-								break;
-							case 'a':
-							case 'b':
-							case 'c':
-							case 'd':
-							case 'e':
-							case 'f':
-								value = (value << 4) + 10 + aChar - 'a';
-								break;
-							case 'A':
-							case 'B':
-							case 'C':
-							case 'D':
-							case 'E':
-							case 'F':
-								value = (value << 4) + 10 + aChar - 'A';
-								break;
-							default:
-								throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
-						}
-					}
-					out[outLen++] = (char) value;
-				} else {
-					if (aChar == 't')
-						aChar = '\t';
-					else if (aChar == 'r')
-						aChar = '\r';
-					else if (aChar == 'n')
-						aChar = '\n';
-					else if (aChar == 'f')
-						aChar = '\f';
-					else if (aChar == 'b')
-						aChar = '\b';
-					else if (aChar == '"')
-						aChar = '\"';
-					else if (aChar == '\'')
-						aChar = '\'';
-					else if (aChar == '\\')
-						aChar = '\\';
-					else
-						throw new IllegalArgumentException("Illegal escape character \\" + aChar);
-					out[outLen++] = aChar;
-				}
-			} else {
-				out[outLen++] = aChar;
-			}
+	public static String convertFromJavaString(String string, boolean useUnicode) {
+		int length = string.length();
+		StringBuilder result = new StringBuilder(length);
+		for(int nextIndex = 0; nextIndex < length;) {
+			nextIndex = unescapeCharAndAppendTo(string, useUnicode, nextIndex, result);
 		}
-		return new String(out, 0, outLen);
+		return result.toString();
 	}
 
+	private static int unescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
+		char c = string.charAt(index++);
+		if (c == '\\') {
+			index = doUnescapeCharAndAppendTo(string, useUnicode, index, result);
+		} else {
+			result.append(c);
+		}
+		return index;
+	}
+
+	private static int doUnescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
+		char c = string.charAt(index++);
+		switch(c) {
+			case 'b':
+				c = '\b';
+				break;	
+			case 't':
+				c = '\t';
+				break;
+			case 'n':
+				c = '\n';
+				break;
+			case 'f':
+				c = '\f';
+				break;
+			case 'r':
+				c = '\r';
+				break;
+			case '"':
+			case '\'':
+			case '\\':
+				break;
+			case 'u':
+				if (useUnicode) {
+					return unescapeUnicodeSequence(string, index, result);
+				}
+		}
+		result.append(c);
+		return index;
+	}
+
+	private static int unescapeUnicodeSequence(String string, int index, StringBuilder result) {
+		try {
+			if(index+4 > string.length())
+				throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
+			result.append((char) Integer.parseInt(string.substring(index, index + 4), 16));
+			return index + 4;
+		} catch(NumberFormatException e) {
+			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
+		}
+	}
+
+	/**
+	 * Escapes control characters with a preceding backslash.
+	 * Encodes special chars as unicode escape sequence. 
+	 * The resulting string is safe to be put into a Java string literal between
+	 * the quotes.
+	 */
 	public static String convertToJavaString(String theString) {
 		return convertToJavaString(theString, true);
 	}
-
+	
 	/**
-	 * Mostly copied from {@link java.util.Properties#saveConvert}
+	 * Escapes control characters with a preceding backslash.
+	 * Optionally encodes special chars as unicode escape sequence. 
+	 * The resulting string is safe to be put into a Java string literal between
+	 * the quotes.
 	 */
-	public static String convertToJavaString(String theString, boolean useUnicode) {
-		int len = theString.length();
-		int bufLen = len * 2;
-		if (bufLen < 0) {
-			bufLen = Integer.MAX_VALUE;
+	public static String convertToJavaString(String input, boolean useUnicode) {
+		int length = input.length();
+		StringBuilder result = new StringBuilder(length + 4);
+		for (int i = 0; i < length; i++) {
+			escapeAndAppendTo(input.charAt(i), useUnicode, result);
 		}
-		StringBuilder outBuffer = new StringBuilder(bufLen);
-
-		for (int x = 0; x < len; x++) {
-			char aChar = theString.charAt(x);
-			// Handle common case first, selecting largest block that
-			// avoids the specials below
-			if ((aChar > 61) && (aChar < 127)) {
-				if (aChar == '\\') {
-					outBuffer.append('\\');
-					outBuffer.append('\\');
-					continue;
-				}
-				outBuffer.append(aChar);
-				continue;
-			}
-			switch (aChar) {
-				case ' ':
-					outBuffer.append(' ');
-					break;
-				case '\t':
-					outBuffer.append('\\');
-					outBuffer.append('t');
-					break;
-				case '\n':
-					outBuffer.append('\\');
-					outBuffer.append('n');
-					break;
-				case '\r':
-					outBuffer.append('\\');
-					outBuffer.append('r');
-					break;
-				case '\f':
-					outBuffer.append('\\');
-					outBuffer.append('f');
-					break;
-				case '\b':
-					outBuffer.append('\\');
-					outBuffer.append('b');
-					break;
-				case '\'':
-					outBuffer.append('\\');
-					outBuffer.append('\'');
-					break;
-				case '"':
-					outBuffer.append('\\');
-					outBuffer.append('"');
-					break;
-				default:
-					if (useUnicode && ((aChar < 0x0020) || (aChar > 0x007e))) {
-						outBuffer.append('\\');
-						outBuffer.append('u');
-						outBuffer.append(toHex((aChar >> 12) & 0xF));
-						outBuffer.append(toHex((aChar >> 8) & 0xF));
-						outBuffer.append(toHex((aChar >> 4) & 0xF));
-						outBuffer.append(toHex(aChar & 0xF));
-					} else {
-						outBuffer.append(aChar);
-					}
-			}
-		}
-		return outBuffer.toString();
+		return result.toString();
 	}
 
-	/**
-	 * Copied from {@link java.util.Properties}
-	 */
-	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
-			'F' };
+	private static void escapeAndAppendTo(char c, boolean useUnicode, StringBuilder result) {
+		String appendMe;
+		switch (c) {
+			case '\b':
+				appendMe = "\\b";
+				break;	
+			case '\t':
+				appendMe = "\\t";
+				break;
+			case '\n':
+				appendMe = "\\n";
+				break;
+			case '\f':
+				appendMe = "\\f";
+				break;
+			case '\r':
+				appendMe = "\\r";
+				break;
+			case '"':
+				appendMe = "\\\"";
+				break;
+			case '\'':
+				appendMe = "\\'";
+				break;
+			case '\\':
+				appendMe = "\\\\";
+				break;
+			default:
+				if (useUnicode && mustEncodeAsEscapeSequence(c)) {
+					result.append("\\u");
+					for (int i = 12; i >= 0; i-=4) {
+						result.append(toHex((c >> i) & 0xF));
+					}
+				} else {
+					result.append(c);
+				}
+				return;
+		}
+		result.append(appendMe);
+	}
 
-	/**
-	 * Copied from {@link java.util.Properties}
-	 */
-	public static char toHex(int nibble) {
-		return hexDigit[(nibble & 0xF)];
+	private static boolean mustEncodeAsEscapeSequence(char next) {
+		return next < 0x0020 || next > 0x007e;
+	}
+
+	public static char toHex(int i) {
+		return "0123456789ABCDEF".charAt(i & 0xF);
 	}
 
 	/**
