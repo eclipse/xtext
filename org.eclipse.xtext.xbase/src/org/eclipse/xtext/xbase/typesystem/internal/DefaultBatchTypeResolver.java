@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -28,6 +29,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Stephane Galland - Update the error message "Cannot root twice".
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  * TODO JavaDoc, toString
@@ -70,7 +72,7 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 				if (result) {
 					from.put(e, new Throwable());
 				} else {
-					throw new RuntimeException("Cannot root twice", from.get(e));
+					throw new RuntimeException("Cannot root twice: " + EmfFormatter.objToStr(e), from.get(e));
 				}
 				return result;
 			}
