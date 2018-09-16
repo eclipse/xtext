@@ -35,7 +35,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 			throw new ValueConverterException(e.getMessage(), node, e);
 		}
 	}
-
+	
 	/**
 	 * Converts a string literal (including leading and trailing single or double quote) to a semantic
 	 * string value. Recovers from invalid escape sequences and announces the first problem with a
@@ -46,149 +46,45 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 	 * @see Strings#convertFromJavaString(String, boolean)
 	 */
 	protected String convertFromString(String literal, INode node) throws ValueConverterWithValueException {
-		char[] in = literal.toCharArray();
-		int off = 1;
-		int len = literal.length() - 1;
-		char[] convtBuf = new char[len];
-		char aChar;
-		char[] out = convtBuf;
-		int outLen = 0;
-		int end = off + len;
-
-		String errorMessage = null;
-		int errorIndex = -1;
-		int errorLength = -1;
-		while (off < end - 1) {
-			aChar = in[off++];
-			if (aChar == '\\') {
-				if (off < end) {
-					aChar = in[off++];
-					switch (aChar) {
-						case 'u':
-							// Try to read the xxxx
-							int value = 0;
-							if (off + 4 > end || !isHexSequence(in, off, 4)) {
-								out[outLen++] = aChar;
-								if (errorMessage == null) {
-									errorMessage = "Invalid unicode";
-									errorIndex = off - 2;
-									errorLength = 2;
-								}
-								break;
-							} else {
-								for (int i = 0; i < 4; i++) {
-									aChar = in[off++];
-									switch (aChar) {
-										case '0':
-										case '1':
-										case '2':
-										case '3':
-										case '4':
-										case '5':
-										case '6':
-										case '7':
-										case '8':
-										case '9':
-											value = (value << 4) + aChar - '0';
-											break;
-										case 'a':
-										case 'b':
-										case 'c':
-										case 'd':
-										case 'e':
-										case 'f':
-											value = (value << 4) + 10 + aChar - 'a';
-											break;
-										case 'A':
-										case 'B':
-										case 'C':
-										case 'D':
-										case 'E':
-										case 'F':
-											value = (value << 4) + 10 + aChar - 'A';
-											break;
-										default:
-											throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
-									}
-								}
-								out[outLen++] = (char) value;
-								break;
-							}
-						case 't':
-							out[outLen++] = '\t';
-							break;
-						case 'r':
-							out[outLen++] = '\r';
-							break;
-						case 'n':
-							out[outLen++] = '\n';
-							break;
-						case 'f':
-							out[outLen++] = '\f';
-							break;
-						case 'b':
-							out[outLen++] = '\b';
-							break;
-						case '"':
-							out[outLen++] = '"';
-							break;
-						case '\'':
-							out[outLen++] = '\'';
-							break;
-						case '\\':
-							out[outLen++] = '\\';
-							break;
-						default:
-							if (errorMessage == null) {
-								errorMessage = getInvalidEscapeSequenceMessage();
-								errorIndex = off - 2;
-								errorLength = 2;
-							}
-							out[outLen++] = aChar;
-							break;
-					}
-				} else {
-					if (errorMessage == null) {
-						errorMessage = getInvalidEscapeSequenceMessage();
-						errorIndex = off - 1;
-						errorLength = 1;
-					}
-				}
-			} else {
-				out[outLen++] = aChar;
-			}
+		int length = literal.length();
+		StringBuilder result = new StringBuilder(length);
+		ErrorInfo errorInfo = new ErrorInfo();
+		int nextIndex = 1;
+		while(nextIndex < length - 1) {
+			nextIndex = unescapeCharAndAppendTo(literal, nextIndex, result, errorInfo);
 		}
-		if (off < end) {
-			if (off != end - 1) {
+		
+		if (nextIndex < length) {
+			if (nextIndex != length - 1) {
 				throw new IllegalStateException();
 			}
-			aChar = in[off];
-			if (in[0] != in[off]) {
-				out[outLen++] = aChar;
-				if (errorMessage == null) {
-					if (in[off] == '\\') {
-						errorMessage = getInvalidEscapeSequenceMessage();
-						errorIndex = off;
-						errorLength = 1;
+			char next = literal.charAt(nextIndex);
+			if (literal.charAt(0) != next) {
+				result.append(next);
+				if (errorInfo.errorMessage == null) {
+					if (next == '\\') {
+						errorInfo.errorMessage = getInvalidEscapeSequenceMessage();
+						errorInfo.errorIndex = nextIndex;
+						errorInfo.errorLength = 1;
 					} else {
-						errorMessage = getStringNotClosedMessage();
+						errorInfo.errorMessage = getStringNotClosedMessage();
 					}
 				} else {
-					errorMessage = getStringNotClosedMessage();
-					errorIndex = -1;
-					errorLength = -1;
+					errorInfo.errorMessage = getStringNotClosedMessage();
+					errorInfo.errorIndex = -1;
+					errorInfo.errorLength = -1;
 				}
 			}
-		} else if (off == end) {
-			errorMessage = getStringNotClosedMessage();
+		} else if (nextIndex == length) {
+			errorInfo.errorMessage = getStringNotClosedMessage();
 		}
-		if (errorMessage != null) {
-			throw new ValueConverterWithValueException(errorMessage, node, new String(out, 0, outLen), errorIndex,
-					errorLength, null);
+		if (errorInfo.errorMessage != null) {
+			throw new ValueConverterWithValueException(errorInfo.errorMessage, node, result.toString(), errorInfo.errorIndex,
+					errorInfo.errorLength, null);
 		}
-		return new String(out, 0, outLen);
+		return result.toString();
 	}
-
+		
 	/**
 	 * @since 2.7
 	 */
@@ -201,6 +97,115 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 	 */
 	protected String getStringNotClosedMessage() {
 		return "String literal is not properly closed";
+	}
+	
+	private static class ErrorInfo {
+		String errorMessage = null;
+		int errorIndex = -1;
+		int errorLength = -1;
+	}
+		
+	private int unescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		char c = string.charAt(index++);
+		if (c == '\\') {
+			index = doUnescapeCharAndAppendTo(string, index, result, errorInfo);
+		} else {
+			result.append(c);
+		}
+		return index;
+	}
+	
+	private int doUnescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		if (string.length() == index) {
+			if (errorInfo.errorMessage == null) {
+				errorInfo.errorMessage = getInvalidEscapeSequenceMessage();
+				errorInfo.errorIndex = index - 1;
+				errorInfo.errorLength = 1;
+			}
+			return index;
+		}
+		char c = string.charAt(index++);
+		switch(c) {
+			case 'b':
+				c = '\b';
+				break;	
+			case 't':
+				c = '\t';
+				break;
+			case 'n':
+				c = '\n';
+				break;
+			case 'f':
+				c = '\f';
+				break;
+			case 'r':
+				c = '\r';
+				break;
+			case '"':
+			case '\'':
+			case '\\':
+				break;
+			case 'u':
+				return unescapeUnicodeSequence(string, index, result, errorInfo);
+			default:
+				if (errorInfo.errorMessage == null) {
+					errorInfo.errorMessage = getInvalidEscapeSequenceMessage();
+					errorInfo.errorIndex = index - 2;
+					errorInfo.errorLength = 2;
+				}
+		}
+		result.append(c);
+		return index;
+	}
+	
+	private int unescapeUnicodeSequence(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		try {
+			if (index+4 > string.length() || !isHexSequence(string, index, 4)) {
+				result.append('u');
+				errorInfo.errorMessage = "Invalid unicode";
+				errorInfo.errorIndex = index - 2;
+				errorInfo.errorLength = 2;
+				return index;
+			}
+			result.append((char) Integer.parseInt(string.substring(index, index + 4), 16));
+			return index + 4;
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
+		}
+	}
+	
+	private boolean isHexSequence(String in, int off, int chars) {
+		for (int i = off; i < in.length() && i < off + chars; i++) {
+			char c = in.charAt(i);
+			switch (c) {
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+				case 'a':
+				case 'b':
+				case 'c':
+				case 'd':
+				case 'e':
+				case 'f':
+				case 'A':
+				case 'B':
+				case 'C':
+				case 'D':
+				case 'E':
+				case 'F':
+					continue;
+				default:
+					return false;
+			}
+		}
+		return true;
 	}
 
 	/**
