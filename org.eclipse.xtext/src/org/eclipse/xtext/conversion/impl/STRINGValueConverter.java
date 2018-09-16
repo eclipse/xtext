@@ -160,7 +160,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 	
 	private int unescapeUnicodeSequence(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
 		try {
-			if(index+4 > string.length() || !isHexSequence(string, index, 4)) {
+			if (index+4 > string.length() || !isHexSequence(string, index, 4)) {
 				result.append('u');
 				errorInfo.errorMessage = "Invalid unicode";
 				errorInfo.errorIndex = index - 2;
@@ -169,7 +169,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 			}
 			result.append((char) Integer.parseInt(string.substring(index, index + 4), 16));
 			return index + 4;
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
 		}
 	}
