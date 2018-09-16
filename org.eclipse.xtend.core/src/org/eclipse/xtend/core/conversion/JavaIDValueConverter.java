@@ -105,7 +105,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 	
 	private static int unescapeUnicodeSequence(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
 		try {
-			if(index+4 > string.length() || !isHexSequence(string, index, 4)) {
+			if (index+4 > string.length() || !isHexSequence(string, index, 4)) {
 				result.append('u');
 				errorInfo.error = true;
 				return index;
@@ -113,7 +113,7 @@ public class JavaIDValueConverter extends IDValueConverter {
 			char appendMe = (char) Integer.parseInt(string.substring(index, index + 4), 16);
 			validateAndAppendChar(result, appendMe, errorInfo);
 			return index + 4;
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
 		}
 	}
