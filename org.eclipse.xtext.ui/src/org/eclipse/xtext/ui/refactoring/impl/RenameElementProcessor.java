@@ -112,7 +112,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
 			resourceSet = getResourceSet(renameElementContext);
-			// we may fail to obtain a resourceSet - in that case, it a fatal problem was logged already
+			// we may fail to obtain a resourceSet - in that case, a fatal problem was logged already
 			// so we just stop the initialization process
 			if (resourceSet != null) {
 				targetElement = resourceSet.getEObject(targetElementURI, true);
