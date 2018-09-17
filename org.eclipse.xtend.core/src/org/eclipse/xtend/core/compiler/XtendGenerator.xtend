@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -208,10 +208,10 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 						tracedAppendable.newLine
 						generateJavaDoc(tracedAppendable, config)
 						annotations.generateAnnotations(tracedAppendable, true, config)
-						if (isFinal && isStatic)
-							tracedAppendable.append("final ")
 						if (isStatic)
 							tracedAppendable.append("static ")
+						if (isFinal && isStatic)
+							tracedAppendable.append("final ")
 						if (isTransient)
 							tracedAppendable.append("transient ")
 						if (isVolatile)

@@ -3063,7 +3063,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public final static int bar = 42;");
+    _builder_1.append("public static final int bar = 42;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -13144,7 +13144,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final static int Y = (-7);");
+    _builder_1.append("private static final int Y = (-7);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();

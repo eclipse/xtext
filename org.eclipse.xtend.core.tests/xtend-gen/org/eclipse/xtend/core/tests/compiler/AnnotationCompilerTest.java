@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -595,7 +595,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class TestXtend {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final static int a = 4;");
+    _builder_1.append("private static final int a = 4;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
@@ -648,7 +648,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class TestXtend {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final static int a = 4;");
+    _builder_1.append("private static final int a = 4;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();

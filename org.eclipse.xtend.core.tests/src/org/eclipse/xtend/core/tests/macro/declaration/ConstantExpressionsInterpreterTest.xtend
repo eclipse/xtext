@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -54,11 +54,11 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 	@Test def void testNonConstant() {
 		val file = file('''
 			class C { 
-				public final static Class<?> REF = D.testFoo;
+				public static final Class<?> REF = D.testFoo;
 			}
 			
 			class D {
-				public final static Class<?> testFoo = Object
+				public static final Class<?> testFoo = Object
 			}
 		''')
 		// make sure the full resolution happened, so the constant values are set on the fields

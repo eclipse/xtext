@@ -5513,7 +5513,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("abstract class __Foo_1 {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final static int x = 1;");
+    _builder_1.append("static final int x = 1;");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.newLine();

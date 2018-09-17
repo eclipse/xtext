@@ -1321,7 +1321,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public interface Foo {
 			  public abstract int foo();
 			  
-			  public final static int bar = 42;
+			  public static final int bar = 42;
 			}
 		''')
 	}
@@ -5952,7 +5952,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  private final int X = 42;
 			  
-			  private final static int Y = (-7);
+			  private static final int Y = (-7);
 			  
 			  public void foo(final int x) {
 			    boolean _matched = false;
