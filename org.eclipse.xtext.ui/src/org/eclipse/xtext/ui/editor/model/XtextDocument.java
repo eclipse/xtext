@@ -37,6 +37,7 @@ import org.eclipse.jface.text.DocumentRewriteSessionEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
@@ -444,9 +445,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 								acquireReadLock();
 								releaseWriteLock();
 								ensureThatStateIsNotReturned(exec, work);
-								if(potentialUpdaterCount.decrementAndGet() == 0 && !(work instanceof ReconcilingUnitOfWork)) {
-									// changes of a ReconcilingUnitOfWork will be handled when the resulting document changes are applied
-									notifyModelListeners(state);
+								if (potentialUpdaterCount.decrementAndGet() == 0 && !(work instanceof ReconcilingUnitOfWork)) {
+									notifyModelListenersOnUiThread();
 								}
 							} catch (RuntimeException e) {
 								if (operationCanceledManager.isOperationCanceledException(e)) {
@@ -540,8 +540,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 							hadUpdates = false;
 							if (getCancelIndicator().isCanceled() && isCancelable)
 								throw new OperationCanceledException();
-							if (wasHadUpdates)
-								notifyModelListeners(state);
+							if (wasHadUpdates) {
+								notifyModelListenersOnUiThread();
+							}
 						}
 					} catch (RuntimeException e) {
 						if (operationCanceledManager.isOperationCanceledException(e)) {
@@ -556,8 +557,29 @@ public class XtextDocument extends Document implements IXtextDocument {
 				}
 			}
 		}
+
+		/**
+		 * Run the model listeners on the UI thread.
+		 * 
+		 * @note Some of the {@link IXtextModelListener}s assume that the {@link XtextDocument} that is associated with the model is not
+		 *       changing while they run. To achieve this, we run the {@link IXtextModelListener}s on the UI thread.
+		 */
+		private void notifyModelListenersOnUiThread() {
+			Display display = PlatformUI.getWorkbench().getDisplay();
+			if (Thread.currentThread() == display.getThread()) {
+				// We are already running on the display thread.  Run the listeners immediately.
+				notifyModelListeners(getState());
+			} else {
+				display.asyncExec(() -> {
+					XtextDocument.this.tryReadOnly(((XtextResource resource) -> {
+						notifyModelListeners(resource);
+						return null;
+					}));
+				});
+			}
+		}
 	}
-	
+
 	private void cancelReaders(XtextResource resource) {
 		if (validationJob != null) {
 			validationJob.cancel();
