@@ -19,6 +19,7 @@
 		<sign.skip>true</sign.skip>
 
 		<target-platform-classifier></target-platform-classifier>
+		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
 	<profiles>

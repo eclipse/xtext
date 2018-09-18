@@ -7,6 +7,12 @@ node {
 	])
 	
 	stage('Checkout') {
+		sh '''
+			if [ -d ".git" ]; then
+				git reset --hard
+			fi
+		'''
+
 		checkout scm
 		if ("latest" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(x)"
@@ -17,10 +23,35 @@ node {
 		} else {
 			currentBuild.displayName = "#${BUILD_NUMBER}(o)"
 		}
+
+		sh '''
+			branchname=${1:-master}
+			
+			escaped() {
+				echo $branchname | sed 's/\\//%252F/g'
+			}
+			
+			escapedBranch=$(escaped)
+			
+			sed_inplace() {
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					sed -i '' "$@"
+				else
+					sed -i "$@" 
+				fi	
+			}
+			
+			targetfiles="$(find releng -type f -iname '*.target')"
+			for targetfile in $targetfiles
+			do
+				echo "Redirecting target platforms in $targetfile to $branchname"
+				sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/[^/]*/?<repository location=\\"$JENKINS_URL/job/\\1/job/$escapedBranch/?" $targetfile
+			done
+		'''
 	}
 	
 	stage('Gradle Build') {
-		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PuseJenkinsSnapshots=true -PcompileXtend=true -PignoreTestFailures=true --refresh-dependencies --continue"
+		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PcompileXtend=true -PignoreTestFailures=true --refresh-dependencies --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 	
@@ -31,7 +62,7 @@ node {
 	dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 	
 	stage('Maven Plugin Build') {
-		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
+		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
 	}
 	
 	stage('Maven Tycho Build') {
@@ -44,13 +75,13 @@ node {
 			targetProfile = "-Pphoton"
 		}
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ${targetProfile} clean install"
+			sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -DJENKINS_URL=$JENKINS_URL -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ${targetProfile} clean install"
 		}
 		step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 	}
 	
 	stage('Gradle Longrunning Tests') {
-		sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PignoreTestFailures=true --continue"
+		sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 	}
 	
