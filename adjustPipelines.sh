@@ -40,6 +40,11 @@ sed_inplace() {
 	fi	
 }
 
+if [[ -z "${JENKINS_URL}" ]]; then
+	JENKINS_URL="http://services.typefox.io/open-source/jenkins"
+fi
+echo "JENKINS_URL=$JENKINS_URL"
+
 ./allDirectories | while read -r line
 do
 	directory=$(toDir $line)
@@ -59,8 +64,7 @@ do
 					logicalname=$(name $repo)
 					if changeDir $repository
 					then
-						sed_inplace "s?'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastSuccessfulBuild/artifact/build/maven-repository/'?jenkinsPipelineRepo('$logicalname')?" $upstream
-						isMaster ||	( isBranch && sed_inplace "s?jenkinsPipelineRepo('$logicalname')?'http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$escapedBranch/lastSuccessfulBuild/artifact/build/maven-repository/'?" $upstream )
+						sed_inplace "s?jenkinsPipelineRepo('$logicalname','.*')?jenkinsPipelineRepo('$logicalname','$escapedBranch')?" $upstream
 						dropDir
 					fi
 				fi
@@ -85,8 +89,7 @@ do
 					logicalname=$(name $repo)
 					if changeDir $repository
 					then
-						sed_inplace "s?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/p2-repository/?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/?" $targets/*.target
-						isMaster ||	( isBranch && sed_inplace "s?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/master/lastStableBuild/artifact/build/p2-repository/?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$escapedBranch/lastStableBuild/artifact/build/p2-repository/?" $targets/*.target )
+						sed_inplace "s?<repository location=\".*/job/$logicalname/job/[^/]*/?<repository location=\"$JENKINS_URL/job/$logicalname/job/$escapedBranch/?" $targets/*.target
 						dropDir
 					fi
 				fi
@@ -112,8 +115,7 @@ do
 						logicalname=$(name $repo)
 						if changeDir $repository
 						then
-							sed_inplace "s?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/[^/]*/lastStableBuild/artifact/build/maven-repository/?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/?" $pom
-							isMaster ||	( isBranch && sed_inplace "s?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/\${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/?http://services.typefox.io/open-source/jenkins/job/$logicalname/job/$escapedBranch/lastStableBuild/artifact/build/maven-repository/?" $pom )
+							sed_inplace "s?<branch_url_segment>.*</branch_url_segment>?<branch_url_segment>$escapedBranch</branch_url_segment>?" $pom
 							dropDir
 						fi
 					fi
