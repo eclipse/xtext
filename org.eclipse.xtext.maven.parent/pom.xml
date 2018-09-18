@@ -23,6 +23,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<branch_url_segment>master</branch_url_segment>
+		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
 	<modules>
@@ -239,19 +240,19 @@
 			<repositories>
 				<repository>
 					<id>lsp4j-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-core-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-extras-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 			</repositories>
 		</profile>
