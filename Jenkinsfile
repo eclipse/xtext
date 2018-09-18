@@ -1,6 +1,7 @@
 node {
 	properties([
 		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
+		disableConcurrentBuilds(),
 		parameters([
 			choice(choices: 'oxygen\nphoton\nr201809\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
 		])
@@ -55,7 +56,6 @@ node {
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 	
-	def workspace = pwd()
 	def mvnHome = tool 'M3'
 	env.M2_HOME = "${mvnHome}"
 	dir('.m2/repository/org/eclipse/xtext') { deleteDir() }

@@ -61,17 +61,6 @@ implementation                                               id     ns linear ru
            New                                 abcdefghij\u0050  67.84 =========
            New                 abcdefghijklm\u0050nopqrstuvwxyz 132.96 =================
            New                 abcdefghijklmnopqrstuvwxyz\u0050  75.22 ==========
-           Old                                                a  37.84 =====
-           Old                                           ABCDEF  60.71 ========
-           Old                                       abcdefghij  78.45 ==========
-           Old                               abcdefghijfawjoiug 107.47 ==============
-           Old                       abcdefghijklmnopqrstuvwxyz 137.68 ==================
-           Old abcdefghijklmnopqrstuvwxyzABCDEFGHAIEHFAIEWFK2ff 223.35 ==============================
-           Old                                           \u0050  56.14 =======
-           Old                                          a\u0050  65.11 ========
-           Old                                 abcdefghij\u0050  91.86 ============
-           Old                 abcdefghijklm\u0050nopqrstuvwxyz 150.49 ====================
-           Old                 abcdefghijklmnopqrstuvwxyz\u0050 144.80 ===================
           NOOP                                                a   2.41 =
           NOOP                                           ABCDEF   5.77 =
           NOOP                                       abcdefghij   6.06 =
@@ -96,13 +85,6 @@ public class JavaIDValueConverterBenchmark extends SimpleBenchmark {
 			@Override
 			String parsedStringToValue(String s) {
 				return JavaIDValueConverter.convertFromJavaIdentifier(s, null);
-			}
-		},
-		Old {
-
-			@Override
-			String parsedStringToValue(String s) {
-				return OldJavaIDValueConverter.convertFromJavaIdentifier(s, null);
 			}
 		},
 		NOOP {

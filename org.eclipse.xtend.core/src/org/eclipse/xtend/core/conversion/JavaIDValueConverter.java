@@ -71,124 +71,96 @@ public class JavaIDValueConverter extends IDValueConverter {
 		}
 		return doConvertFromJavaString(identifier, idx, node);
 	}
-
-	/**
-	 * Mostly copied from {@link Strings#convertFromJavaString(String, boolean)}
-	 */
-	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) {
-		int off = firstEscapeSequence;
-		int len = identifier.length();
-		char[] convtBuf = new char[len];
-		char aChar;
-		char[] out = convtBuf;
-		identifier.getChars(0, firstEscapeSequence, out, 0);
-		int outLen = firstEscapeSequence;
-		int end = len;
+	
+	private static class ErrorInfo {
 		boolean error = false;
 		boolean badChar = false;
-		while (off < end) {
-			aChar = identifier.charAt(off++);
-			if (aChar == '\\') {
-				if (off < end) {
-					aChar = identifier.charAt(off++);
-					switch (aChar) {
-						case 'u': {
-							// Read the xxxx
-							int value = 0;
-							if (off + 4 > end || !isHexSequence(identifier, off, 4)) {
-								error = true;
-								out[outLen++] = aChar;
-								break;
-							} else {
-								for (int i = 0; i < 4; i++) {
-									aChar = identifier.charAt(off++);
-									switch (aChar) {
-									case '0':
-									case '1':
-									case '2':
-									case '3':
-									case '4':
-									case '5':
-									case '6':
-									case '7':
-									case '8':
-									case '9':
-										value = (value << 4) + aChar - '0';
-										break;
-									case 'a':
-									case 'b':
-									case 'c':
-									case 'd':
-									case 'e':
-									case 'f':
-										value = (value << 4) + 10 + aChar - 'a';
-										break;
-									case 'A':
-									case 'B':
-									case 'C':
-									case 'D':
-									case 'E':
-									case 'F':
-										value = (value << 4) + 10 + aChar - 'A';
-										break;
-									default:
-										throw new IllegalArgumentException("Malformed \\uxxxx encoding.");
-									}
-								}
-								if (setChar(outLen, out, (char)value)) {
-									outLen++;
-								} else {
-									badChar = true;
-								}
-								break;
-							}
-						}
-						default: {
-							if (setChar(outLen, out, aChar)) {
-								outLen++;
-							} else {
-								badChar = true;
-							}
-						}
-					}
-				} else {
-					badChar = true;
-				}
-			} else {
-				if (setChar(outLen, out, aChar)) {
-					outLen++;
-				} else {
-					badChar = true;
-				}
-			}
+	}
+		
+	private static int unescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		char c = string.charAt(index++);
+		if (c == '\\') {
+			index = doUnescapeCharAndAppendTo(string, index, result, errorInfo);
+		} else {
+			validateAndAppendChar(result, c, errorInfo);
 		}
-		String result = new String(out, 0, outLen);
-		if (error) {
-			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, result, null);
-		}
-		if (badChar) {
-			if (result.length() != 0)
-				throw new ValueConverterWithValueException("Illegal character in identifier '" + result + "' (" + identifier + ")", node, result, null);
-			else
-				throw new ValueConverterWithValueException("Illegal character in identifier '" + identifier + "'", node, null, null);
-		}
-		return result;
+		return index;
 	}
 	
-	private static boolean setChar(final int outLen, char[] out, char c) {
-		if (outLen == 0) {
+	private static int doUnescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		if (string.length() == index) {
+			errorInfo.badChar = true;
+			return index;
+		}
+		char c = string.charAt(index++);
+		switch(c) {
+			case 'u':
+				return unescapeUnicodeSequence(string, index, result, errorInfo);
+			default:
+				errorInfo.badChar = true;
+		}
+		validateAndAppendChar(result, c, errorInfo);
+		return index;
+	}
+	
+	private static int unescapeUnicodeSequence(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
+		try {
+			if (index+4 > string.length() || !isHexSequence(string, index, 4)) {
+				result.append('u');
+				errorInfo.error = true;
+				return index;
+			}
+			char appendMe = (char) Integer.parseInt(string.substring(index, index + 4), 16);
+			validateAndAppendChar(result, appendMe, errorInfo);
+			return index + 4;
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
+		}
+	}
+
+	private static void validateAndAppendChar(StringBuilder result, char c, ErrorInfo error) {
+		if (result.length() == 0) {
 			if (!isValidIdentifierStart(c)) {
-				return false;
+				error.badChar = true;
+				return;
 			}
 		} else {
 			if (!isValidIdentifierPart(c)) {
-				return false;
+				error.badChar = true;
+				return;
 			}
 		}
-		out[outLen] = c;
-		return true;
+		result.append(c);
 	}
-
+	
+	/**
+	 * Converts a string with valid or invalid escape sequences to a semantic value.
+	 * If the escape sequences are invalid, a {@link ValueConverterException} is thrown
+	 * with detailed information about the broken character combination.
+	 */
+	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) throws ValueConverterException {
+		int length = identifier.length();
+		StringBuilder result = new StringBuilder(length);
+		result.append(identifier, 0, firstEscapeSequence);
+		ErrorInfo errorInfo = new ErrorInfo();
+		int nextIndex = firstEscapeSequence;
+		while(nextIndex < length) {
+			nextIndex = unescapeCharAndAppendTo(identifier, nextIndex, result, errorInfo);
+		}
+		
+		String asString = result.toString();
+		if (errorInfo.error) {
+			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, asString, null);
+		}
+		if (errorInfo.badChar) {
+			if (result.length() != 0)
+				throw new ValueConverterWithValueException("Illegal character in identifier '" + asString + "' (" + identifier + ")", node, asString, null);
+			else
+				throw new ValueConverterWithValueException("Illegal character in identifier '" + identifier + "'", node, null, null);
+		}
+		return asString;
+	}
+	
 	private static boolean isHexSequence(String in, int off, int chars) {
 		for(int i = off; i < in.length() && i < off + chars; i++) {
 			char c = in.charAt(i);
