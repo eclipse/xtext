@@ -2331,7 +2331,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public void foo() {
 			    abstract class __Foo_1 {
-			      final static int x = 1;
+			      static final int x = 1;
 			      
 			      public abstract void bar();
 			    }

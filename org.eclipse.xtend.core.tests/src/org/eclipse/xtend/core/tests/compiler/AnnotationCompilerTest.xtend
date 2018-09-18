@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -320,7 +320,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class TestXtend {
-			  private final static int a = 4;
+			  private static final int a = 4;
 			  
 			  @Click({ TestXtend.a, TestXtend.a })
 			  public Object meth() {
@@ -345,7 +345,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class TestXtend {
-			  private final static int a = 4;
+			  private static final int a = 4;
 			  
 			  @Click({ TestXtend.a, ((TestXtend.a & 3) << 1) })
 			  public Object meth() {

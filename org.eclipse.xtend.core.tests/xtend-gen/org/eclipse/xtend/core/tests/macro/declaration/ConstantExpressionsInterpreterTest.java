@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -93,7 +93,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("class C { ");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public final static Class<?> REF = D.testFoo;");
+      _builder.append("public static final Class<?> REF = D.testFoo;");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -101,7 +101,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.append("class D {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public final static Class<?> testFoo = Object");
+      _builder.append("public static final Class<?> testFoo = Object");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
