@@ -1,13 +1,16 @@
 /*
  * Root project configuration that is reused by subprojects to apply the Xtend compiler.
  */
+if (!hasProperty('JENKINS_URL')) {
+	ext.JENKINS_URL = 'http://services.typefox.io/open-source/jenkins'
+}
 
 // The repositories to query when constructing the Xtend compiler classpath
 repositories {
 	jcenter()
 	maven {
 		name 'xtend-bootstrap'
-		url 'http://services.typefox.io/open-source/jenkins/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/'
+		url "$JENKINS_URL/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/"
 	}
 }
 
