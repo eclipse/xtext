@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -540,13 +540,13 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       this.generateVisibilityModifier(it, appendable);
-      boolean _isFinal = it.isFinal();
-      if (_isFinal) {
-        appendable.append("final ");
-      }
       boolean _isStatic = it.isStatic();
       if (_isStatic) {
         appendable.append("static ");
+      }
+      boolean _isFinal = it.isFinal();
+      if (_isFinal) {
+        appendable.append("final ");
       }
       boolean _isTransient = it.isTransient();
       if (_isTransient) {
