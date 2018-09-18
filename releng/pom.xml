@@ -10,6 +10,7 @@
 	<properties>
 		<tycho-version>1.2.0</tycho-version>
 		<root-dir>${basedir}/..</root-dir>
+		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
 	<repositories>
@@ -26,15 +27,15 @@
 		</repository>
 		<repository>
 			<id>maven</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>maven2</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/xtext-lib/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>maven3</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/xtext-core/job/master/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
