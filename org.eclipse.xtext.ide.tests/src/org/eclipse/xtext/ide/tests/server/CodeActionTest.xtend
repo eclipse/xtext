@@ -44,16 +44,17 @@ class CodeActionTest extends AbstractTestLangLanguageServerTest {
 				type String {}
 			'''
 			expectedCodeActions = '''
-				command : my.textedit.command
 				title : Sort Members
-				args : 
-				    changes :
-				        MyModel.testlang : 
-				            String aaa
-				         [[0, 10] .. [0, 10]]
-				        
-				         [[1, 11] .. [3, 0]]
-				    documentChanges : 
+				kind : 
+				command : 
+				codes : unsorted_members
+				edit : changes :
+				    MyModel.testlang : 
+				        String aaa
+				     [[0, 10] .. [0, 10]]
+				    
+				     [[1, 11] .. [3, 0]]
+				documentChanges : 
 			'''
 		]
 
