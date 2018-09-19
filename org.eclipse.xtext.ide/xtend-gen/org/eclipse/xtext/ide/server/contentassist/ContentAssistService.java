@@ -11,9 +11,11 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionItemKind;
 import org.eclipse.lsp4j.CompletionList;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -39,6 +42,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @author Dennis Huebner - additionalTextEdits support
+ * 
  * @since 2.11
  */
 @Singleton
@@ -136,6 +141,23 @@ public class ContentAssistService {
     TextEdit _textEdit = new TextEdit(_range, _proposal_1);
     completionItem.setTextEdit(_textEdit);
     completionItem.setKind(this.translateKind(entry));
+    boolean _isEmpty = entry.getTextReplacements().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      List<TextEdit> _additionalTextEdits = completionItem.getAdditionalTextEdits();
+      boolean _tripleEquals = (_additionalTextEdits == null);
+      if (_tripleEquals) {
+        int _size = entry.getTextReplacements().size();
+        ArrayList<TextEdit> _arrayList = new ArrayList<TextEdit>(_size);
+        completionItem.setAdditionalTextEdits(_arrayList);
+      }
+      final Consumer<ReplaceRegion> _function = (ReplaceRegion it) -> {
+        List<TextEdit> _additionalTextEdits_1 = completionItem.getAdditionalTextEdits();
+        TextEdit _textEdit_1 = this.toTextEdit(it, document);
+        _additionalTextEdits_1.add(_textEdit_1);
+      };
+      entry.getTextReplacements().forEach(_function);
+    }
     return completionItem;
   }
   
@@ -206,5 +228,48 @@ public class ContentAssistService {
       _switchResult = CompletionItemKind.Value;
     }
     return _switchResult;
+  }
+  
+  protected TextEdit toTextEdit(final ReplaceRegion region, final Document doc) {
+    TextEdit _xblockexpression = null;
+    {
+      Position _xifexpression = null;
+      int _offset = region.getOffset();
+      int _length = doc.getContents().length();
+      boolean _greaterThan = (_offset > _length);
+      if (_greaterThan) {
+        Position _xblockexpression_1 = null;
+        {
+          final Position docEnd = doc.getPosition(doc.getContents().length());
+          int _line = docEnd.getLine();
+          int _character = docEnd.getCharacter();
+          int _length_1 = region.getLength();
+          int _plus = (_character + _length_1);
+          _xblockexpression_1 = new Position(_line, _plus);
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        _xifexpression = doc.getPosition(region.getOffset());
+      }
+      final Position start = _xifexpression;
+      Position _xifexpression_1 = null;
+      int _endOffset = region.getEndOffset();
+      int _length_1 = doc.getContents().length();
+      boolean _greaterThan_1 = (_endOffset > _length_1);
+      if (_greaterThan_1) {
+        int _line = start.getLine();
+        int _character = start.getCharacter();
+        int _length_2 = region.getLength();
+        int _plus = (_character + _length_2);
+        _xifexpression_1 = new Position(_line, _plus);
+      } else {
+        _xifexpression_1 = doc.getPosition(region.getEndOffset());
+      }
+      final Position end = _xifexpression_1;
+      Range _range = new Range(start, end);
+      String _text = region.getText();
+      _xblockexpression = new TextEdit(_range, _text);
+    }
+    return _xblockexpression;
   }
 }

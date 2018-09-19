@@ -11,6 +11,7 @@ import com.google.common.base.Strings
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
+import java.util.ArrayList
 import java.util.concurrent.ExecutorService
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionItemKind
@@ -28,10 +29,13 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @author Dennis Huebner - additionalTextEdits support
+ * 
  * @since 2.11
  */
 @Singleton
@@ -93,6 +97,14 @@ class ContentAssistService {
         val prefixPosition = document.getPosition(prefixOffset)
         completionItem.textEdit = new TextEdit(new Range(prefixPosition, caretPosition), entry.proposal)
         completionItem.kind = translateKind(entry)
+        if (!entry.textReplacements.empty) {
+            if (completionItem.additionalTextEdits === null) {
+                completionItem.additionalTextEdits = new ArrayList(entry.textReplacements.size)
+            }
+            entry.textReplacements.forEach [
+                completionItem.additionalTextEdits += toTextEdit(document)
+            ]
+        }
         return completionItem
     }
 
@@ -118,5 +130,18 @@ class ContentAssistService {
             case ContentAssistEntry.KIND_VARIABLE: CompletionItemKind.Variable
             default: CompletionItemKind.Value
         }
+    }
+
+    protected def toTextEdit(ReplaceRegion region, Document doc) {
+        val start = if (region.offset > doc.contents.length) {
+               val docEnd = doc.getPosition(doc.contents.length)
+               new Position(docEnd.line, docEnd.character + region.length)
+           } else
+                doc.getPosition(region.offset)
+        val end = if (region.endOffset > doc.contents.length)
+                new Position(start.line, start.character + region.length)
+            else
+                doc.getPosition(region.endOffset)
+        new TextEdit(new Range(start, end), region.text)
     }
 }

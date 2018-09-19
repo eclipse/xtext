@@ -73,6 +73,9 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("{ -> { [[1, 9] .. [1, 10]]");
       _builder_1.newLine();
+      _builder_1.append("   ");
+      _builder_1.append("+ } [[1, 11] .. [1, 11]]");
+      _builder_1.newLine();
       it.setExpectedCompletionItems(_builder_1.toString());
     };
     this.testCompletion(_function);
@@ -139,6 +142,53 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("} -> } [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
       _builder_1.append("{ -> { [[1, 9] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("   ");
+      _builder_1.append("+ } [[1, 11] .. [1, 11]]");
+      _builder_1.newLine();
+      it.setExpectedCompletionItems(_builder_1.toString());
+    };
+    this.testCompletion(_function);
+  }
+  
+  @Test
+  public void testCompletion_AdditionalEdits_01() {
+    final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo ");
+      _builder.newLine();
+      it.setModel(_builder.toString());
+      it.setLine(0);
+      it.setColumn("type Foo ".length());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("extends -> extends [[0, 9] .. [0, 9]]");
+      _builder_1.newLine();
+      _builder_1.append("{ -> { [[0, 9] .. [0, 9]]");
+      _builder_1.newLine();
+      _builder_1.append("   ");
+      _builder_1.append("+ } [[1, 0] .. [1, 0]]");
+      _builder_1.newLine();
+      it.setExpectedCompletionItems(_builder_1.toString());
+    };
+    this.testCompletion(_function);
+  }
+  
+  @Test
+  public void testCompletion_AdditionalEdits_02() {
+    final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo  ");
+      _builder.newLine();
+      it.setModel(_builder.toString());
+      it.setLine(0);
+      it.setColumn("type Foo ".length());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("extends -> extends [[0, 9] .. [0, 9]]");
+      _builder_1.newLine();
+      _builder_1.append("{ -> { [[0, 9] .. [0, 9]]");
+      _builder_1.newLine();
+      _builder_1.append("   ");
+      _builder_1.append("+ } [[0, 10] .. [0, 10]]");
       _builder_1.newLine();
       it.setExpectedCompletionItems(_builder_1.toString());
     };

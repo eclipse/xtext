@@ -510,6 +510,18 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         _builder.append(" -> ");
         String _expectation = this.toExpectation(it.getTextEdit());
         _builder.append(_expectation);
+        {
+          boolean _isNullOrEmpty_1 = IterableExtensions.isNullOrEmpty(it.getAdditionalTextEdits());
+          boolean _not_1 = (!_isNullOrEmpty_1);
+          if (_not_1) {
+            _builder.append("   + ");
+            final Function1<TextEdit, String> _function = (TextEdit it_1) -> {
+              return this.toExpectation(it_1);
+            };
+            String _join = IterableExtensions.join(ListExtensions.<TextEdit, String>map(it.getAdditionalTextEdits(), _function), "   + ");
+            _builder.append(_join);
+          }
+        }
       } else {
         if (((it.getInsertText() != null) && (!Objects.equal(it.getInsertText(), it.getLabel())))) {
           _builder.append(" -> ");

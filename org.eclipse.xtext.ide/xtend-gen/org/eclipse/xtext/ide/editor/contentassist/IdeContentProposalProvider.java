@@ -155,9 +155,8 @@ public class IdeContentProposalProvider {
   protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _filterKeyword = this.filterKeyword(keyword, context);
     if (_filterKeyword) {
-      final ContentAssistEntry entry = this.proposalCreator.createProposal(keyword.getValue(), context);
+      final ContentAssistEntry entry = this.proposalCreator.createProposal(keyword.getValue(), context, ContentAssistEntry.KIND_KEYWORD, null);
       if ((entry != null)) {
-        entry.setKind(ContentAssistEntry.KIND_KEYWORD);
         acceptor.accept(entry, this.proposalPriorities.getKeywordPriority(keyword.getValue(), entry));
       }
     }

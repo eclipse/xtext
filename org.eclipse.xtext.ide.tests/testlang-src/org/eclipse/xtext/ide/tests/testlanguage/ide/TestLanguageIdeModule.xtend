@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator
 import org.eclipse.xtext.ide.server.ILanguageServerExtension
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
@@ -40,4 +41,7 @@ class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
 		return TestLanguageExecutableCommandService
 	}
 	
+	def Class<? extends IdeContentProposalCreator> bindIdeContentProposalCreator() {
+		TestLanguageProposalCreator
+	}
 }
