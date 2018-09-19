@@ -97,7 +97,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		configureResourceSet(resourceSet, emfUri);
 		XtextResource resource = (XtextResource) resourceFactory.createResource(emfUri);
 		resourceSet.getResources().add(resource);
-		resource.setValidationDisabled(true);
+		resource.setValidationDisabled(isValidationDisabled(uri));
 		return resource;
 	}
 
@@ -117,6 +117,18 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		resourceSet.getResources().add(resource);
 		resource.setValidationDisabled(isValidationDisabled(uri, storage));
 		return resource;
+	}
+
+	/**
+	 * Checks whether syntax validation should be disabled for {@code uri}.
+	 * This is called when creating a resource for {@code uri}.
+	 * e.g. when we're creating a resource for an external file
+	 * 
+	 * @param uri the URI to the file we want to check
+	 * @since 2.16
+	 */
+	protected boolean isValidationDisabled(java.net.URI uri) {
+		return true;
 	}
 
 	/**
