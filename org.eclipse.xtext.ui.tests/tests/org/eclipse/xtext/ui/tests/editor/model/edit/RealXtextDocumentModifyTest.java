@@ -9,9 +9,13 @@ package org.eclipse.xtext.ui.tests.editor.model.edit;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.text.undo.DocumentUndoManagerRegistry;
 import org.eclipse.text.undo.IDocumentUndoManager;
 import org.eclipse.xtext.Grammar;
@@ -44,11 +48,13 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 		// wait for the forced reconcile operation to finish
 		Job.getJobManager().join(XtextReconciler.class.getName(), null);
 		
-		final int[] changeCounter = new int[] { 0 };
+		CountDownLatch countDownLatch = new CountDownLatch(1);
+		
+		final CountDownLatch[] changeCounter = new CountDownLatch[] { countDownLatch };
 		document.addModelListener(new IXtextModelListener() {
 			@Override
 			public void modelChanged(XtextResource resource) {
-				++changeCounter[0]; 
+				changeCounter[0].countDown(); 
 			}
 		});
 		document.modify(new IUnitOfWork.Void<XtextResource>() {
@@ -57,13 +63,29 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 				document.replace(grammar.indexOf("Foo"), 3, "Bar");
 			}
 		});
-		assertEquals("IXtextModelListener should not have been directly notified", 0, changeCounter[0]);
+		assertEquals("IXtextModelListener should not have been directly notified", 1, countDownLatch.getCount());
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
 			}
 		});
-		assertEquals("Reconciler should have notified IXtextModelListener", 1, changeCounter[0]);
+		
+		/* Let the UI thread process any queued operation for a while so that the IXtextModelListener
+		 * are called.  If processing fails too long, then give up.  */
+		
+		long start = System.currentTimeMillis();
+		long timeout = TimeUnit.MILLISECONDS.convert(10, TimeUnit.SECONDS);
+		long maxEndTime = start + timeout;
+		
+		boolean moreWorkForTheUiThread = true;
+		boolean latchReachedZero = false;
+		
+		while (moreWorkForTheUiThread && !latchReachedZero && System.currentTimeMillis() < maxEndTime) {
+			moreWorkForTheUiThread = Display.getDefault().readAndDispatch();
+			latchReachedZero = countDownLatch.getCount() <= 0;
+		}
+
+		assertEquals("Reconciler should have notified IXtextModelListener", 0, countDownLatch.getCount());
 	}
 	
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465082
