@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -172,10 +172,10 @@ public class MoreActiveAnnotationsTest {
       _builder_1.append("class StaticFeatures {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("public final static String BAR = \"Bar\"");
+      _builder_1.append("public static final String BAR = \"Bar\"");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("public final static String FOOBAR = \"Foo\" + BAR ");
+      _builder_1.append("public static final String FOOBAR = \"Foo\" + BAR ");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -621,32 +621,32 @@ public class MoreActiveAnnotationsTest {
       _builder_3.append("public class B {");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static int CONSTANT_INT = 42;");
+      _builder_3.append("public static final int CONSTANT_INT = 42;");
       _builder_3.newLine();
       _builder_3.append("  ");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static long CONSTANT_LONG = 42L;");
+      _builder_3.append("public static final long CONSTANT_LONG = 42L;");
       _builder_3.newLine();
       _builder_3.append("  ");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static float CONSTANT_FLOAT = 42.34f;");
+      _builder_3.append("public static final float CONSTANT_FLOAT = 42.34f;");
       _builder_3.newLine();
       _builder_3.append("  ");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static double CONSTANT_DOUBLE = 42.11d;");
+      _builder_3.append("public static final double CONSTANT_DOUBLE = 42.11d;");
       _builder_3.newLine();
       _builder_3.append("  ");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static char CONSTANT_CHAR = \'\\n\';");
+      _builder_3.append("public static final char CONSTANT_CHAR = \'\\n\';");
       _builder_3.newLine();
       _builder_3.append("  ");
       _builder_3.newLine();
       _builder_3.append("  ");
-      _builder_3.append("public final static String CONSTANT_STRING = \"\\n\\t\\\\all\";");
+      _builder_3.append("public static final String CONSTANT_STRING = \"\\n\\t\\\\all\";");
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -110,8 +110,8 @@ class MoreActiveAnnotationsTest {
 			package annotation
 			
 			class StaticFeatures {
-				public final static String BAR = "Bar"
-				public final static String FOOBAR = "Foo" + BAR 
+				public static final String BAR = "Bar"
+				public static final String FOOBAR = "Foo" + BAR 
 			}
 		''')
 		if(macroProject.project.addExportedPackages("annotation"))
@@ -350,17 +350,17 @@ class MoreActiveAnnotationsTest {
 			@MyAA
 			@SuppressWarnings("all")
 			public class B {
-			  public final static int CONSTANT_INT = 42;
+			  public static final int CONSTANT_INT = 42;
 			  
-			  public final static long CONSTANT_LONG = 42L;
+			  public static final long CONSTANT_LONG = 42L;
 			  
-			  public final static float CONSTANT_FLOAT = 42.34f;
+			  public static final float CONSTANT_FLOAT = 42.34f;
 			  
-			  public final static double CONSTANT_DOUBLE = 42.11d;
+			  public static final double CONSTANT_DOUBLE = 42.11d;
 			  
-			  public final static char CONSTANT_CHAR = '\n';
+			  public static final char CONSTANT_CHAR = '\n';
 			  
-			  public final static String CONSTANT_STRING = "\n\t\\all";
+			  public static final String CONSTANT_STRING = "\n\t\\all";
 			}
 		'''.toString, contents)
 		assertNoErrorsInWorkspace
