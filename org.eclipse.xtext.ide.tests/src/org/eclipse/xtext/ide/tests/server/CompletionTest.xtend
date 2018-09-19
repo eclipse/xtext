@@ -54,6 +54,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 				void -> void [[1, 10] .. [1, 10]]
 				} -> } [[1, 10] .. [1, 10]]
 				{ -> { [[1, 9] .. [1, 10]]
+				   + } [[1, 11] .. [1, 11]]
 			'''
 		]
 	}
@@ -98,6 +99,39 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
                 void -> void [[1, 10] .. [1, 10]]
                 } -> } [[1, 10] .. [1, 10]]
                 { -> { [[1, 9] .. [1, 10]]
+                   + } [[1, 11] .. [1, 11]]
+            '''
+        ]
+    }
+    
+    @Test
+    def void testCompletion_AdditionalEdits_01() {
+        testCompletion [
+            model = '''
+                type Foo 
+            '''
+            line = 0
+            column = 'type Foo '.length
+            expectedCompletionItems = '''
+                extends -> extends [[0, 9] .. [0, 9]]
+                { -> { [[0, 9] .. [0, 9]]
+                   + } [[1, 0] .. [1, 0]]
+            '''
+        ]
+    }
+    
+    @Test
+    def void testCompletion_AdditionalEdits_02() {
+        testCompletion [
+            model = '''
+                type Foo  
+            '''
+            line = 0
+            column = 'type Foo '.length
+            expectedCompletionItems = '''
+            extends -> extends [[0, 9] .. [0, 9]]
+            { -> { [[0, 9] .. [0, 9]]
+               + } [[0, 10] .. [0, 10]]
             '''
         ]
     }

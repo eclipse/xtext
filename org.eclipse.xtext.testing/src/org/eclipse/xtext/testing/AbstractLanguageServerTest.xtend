@@ -260,7 +260,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	'''
 
 	protected def dispatch String toExpectation(CompletionItem it) '''
-		«label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF textEdit !== null» -> «textEdit.toExpectation»«ELSEIF insertText !== null && insertText != label» -> «insertText»«ENDIF»
+		«label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF textEdit !== null» -> «textEdit.toExpectation»«IF !additionalTextEdits.nullOrEmpty»   + «additionalTextEdits.map[toExpectation].join('   + ')»«ENDIF»«ELSEIF insertText !== null && insertText != label» -> «insertText»«ENDIF»
 	'''
 
 	protected dispatch def String toExpectation(TextEdit it) '''

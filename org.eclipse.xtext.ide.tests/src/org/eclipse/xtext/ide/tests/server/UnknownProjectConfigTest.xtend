@@ -93,6 +93,7 @@ class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest {
 			void -> void [[0, 10] .. [0, 10]]
 			} -> } [[0, 10] .. [0, 10]]
 			{ -> { [[0, 9] .. [0, 10]]
+			   + } [[0, 11] .. [0, 11]]
 		'''
 		assertEquals(expectedCompletionItems, actualCompletionItems)
 	}

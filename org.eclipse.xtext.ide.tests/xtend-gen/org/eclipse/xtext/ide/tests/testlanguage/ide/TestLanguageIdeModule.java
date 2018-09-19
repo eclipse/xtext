@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.ide.server.commands.IExecutableCommandService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageExecutableCommandService;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageProposalCreator;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService;
 
@@ -41,5 +43,9 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
   
   public Class<? extends IExecutableCommandService> bindIExecutableCommandService() {
     return TestLanguageExecutableCommandService.class;
+  }
+  
+  public Class<? extends IdeContentProposalCreator> bindIdeContentProposalCreator() {
+    return TestLanguageProposalCreator.class;
   }
 }

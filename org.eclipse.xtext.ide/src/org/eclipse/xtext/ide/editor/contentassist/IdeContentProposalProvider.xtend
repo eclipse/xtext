@@ -105,9 +105,8 @@ class IdeContentProposalProvider {
 	protected def dispatch void createProposals(Keyword keyword, ContentAssistContext context,
 			IIdeContentProposalAcceptor acceptor) {
 		if (filterKeyword(keyword, context)) {
-			val entry = proposalCreator.createProposal(keyword.value, context)
+			val entry = proposalCreator.createProposal(keyword.value, context,ContentAssistEntry.KIND_KEYWORD, null)
 			if (entry !== null) {
-				entry.kind = ContentAssistEntry.KIND_KEYWORD
 				acceptor.accept(entry, proposalPriorities.getKeywordPriority(keyword.value, entry))
 			}
 		}

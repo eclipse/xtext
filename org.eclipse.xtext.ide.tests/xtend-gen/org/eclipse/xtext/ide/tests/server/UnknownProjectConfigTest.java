@@ -159,6 +159,9 @@ public class UnknownProjectConfigTest extends AbstractTestLangLanguageServerTest
       _builder.newLine();
       _builder.append("{ -> { [[0, 9] .. [0, 10]]");
       _builder.newLine();
+      _builder.append("   ");
+      _builder.append("+ } [[0, 11] .. [0, 11]]");
+      _builder.newLine();
       final String expectedCompletionItems = _builder.toString();
       this.assertEquals(expectedCompletionItems, actualCompletionItems);
     } catch (Throwable _e) {
