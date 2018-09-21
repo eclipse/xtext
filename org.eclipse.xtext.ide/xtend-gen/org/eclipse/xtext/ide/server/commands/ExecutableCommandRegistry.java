@@ -43,7 +43,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Log
 @SuppressWarnings("all")
 public class ExecutableCommandRegistry {
-  private final static String METHOD = "workspace/executeCommand";
+  private static final String METHOD = "workspace/executeCommand";
   
   private Multimap<String, IExecutableCommandService> registeredCommands;
   
@@ -153,5 +153,5 @@ public class ExecutableCommandRegistry {
     return IterableExtensions.<String>toList(this.registeredCommands.keySet());
   }
   
-  private final static Logger LOG = Logger.getLogger(ExecutableCommandRegistry.class);
+  private static final Logger LOG = Logger.getLogger(ExecutableCommandRegistry.class);
 }

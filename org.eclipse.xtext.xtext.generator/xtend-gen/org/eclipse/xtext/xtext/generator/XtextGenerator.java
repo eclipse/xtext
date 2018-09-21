@@ -482,7 +482,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextGenerator.class);
+  private static final Logger LOG = Logger.getLogger(XtextGenerator.class);
   
   @Pure
   public DefaultGeneratorModule getConfiguration() {

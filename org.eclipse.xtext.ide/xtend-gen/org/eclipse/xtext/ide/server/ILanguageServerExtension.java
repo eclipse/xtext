@@ -23,7 +23,7 @@ public interface ILanguageServerExtension {
    * 
    * To indicate that a request is not handled, this exception should be thrown by the service.
    */
-  public final static RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
+  public static final RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
   
   /**
    * the language server provides a access to language server documents, resources and build events.

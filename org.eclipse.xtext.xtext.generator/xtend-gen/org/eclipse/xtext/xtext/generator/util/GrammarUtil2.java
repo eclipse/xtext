@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class GrammarUtil2 extends GrammarUtil {
-  public final static String TERMINALS = "org.eclipse.xtext.common.Terminals";
+  public static final String TERMINALS = "org.eclipse.xtext.common.Terminals";
   
   public static boolean inherits(final Grammar grammar, final String languageID) {
     String _name = grammar.getName();

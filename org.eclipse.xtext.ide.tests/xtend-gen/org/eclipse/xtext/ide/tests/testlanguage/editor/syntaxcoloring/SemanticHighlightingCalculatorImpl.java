@@ -36,19 +36,19 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class SemanticHighlightingCalculatorImpl extends DefaultSemanticHighlightingCalculator {
-  private final static String IDENTIFIER_STYLE = "identifier";
+  private static final String IDENTIFIER_STYLE = "identifier";
   
-  private final static String PRIMITIVE_TYPE_STYLE = "primitiveType";
+  private static final String PRIMITIVE_TYPE_STYLE = "primitiveType";
   
-  private final static String TYPE_STYLE = "type";
+  private static final String TYPE_STYLE = "type";
   
-  private final static String TYPE_DECLARATION_STYLE = "typeDeclaration";
+  private static final String TYPE_DECLARATION_STYLE = "typeDeclaration";
   
-  private final static String PARAMETER_NAME_STYLE = "parameterName";
+  private static final String PARAMETER_NAME_STYLE = "parameterName";
   
-  private final static String OP_BODY_STYLE = "opBody";
+  private static final String OP_BODY_STYLE = "opBody";
   
-  public final static Set<String> STYLES = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(SemanticHighlightingCalculatorImpl.IDENTIFIER_STYLE, SemanticHighlightingCalculatorImpl.PRIMITIVE_TYPE_STYLE, SemanticHighlightingCalculatorImpl.TYPE_STYLE, SemanticHighlightingCalculatorImpl.TYPE_DECLARATION_STYLE, SemanticHighlightingCalculatorImpl.PARAMETER_NAME_STYLE, SemanticHighlightingCalculatorImpl.OP_BODY_STYLE));
+  public static final Set<String> STYLES = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(SemanticHighlightingCalculatorImpl.IDENTIFIER_STYLE, SemanticHighlightingCalculatorImpl.PRIMITIVE_TYPE_STYLE, SemanticHighlightingCalculatorImpl.TYPE_STYLE, SemanticHighlightingCalculatorImpl.TYPE_DECLARATION_STYLE, SemanticHighlightingCalculatorImpl.PARAMETER_NAME_STYLE, SemanticHighlightingCalculatorImpl.OP_BODY_STYLE));
   
   @Override
   protected boolean highlightElement(final EObject object, final IHighlightedPositionAcceptor acceptor, final CancelIndicator cancelIndicator) {

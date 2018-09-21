@@ -521,5 +521,5 @@ public class StandardLanguage extends XtextGeneratorLanguage {
     return this.fileWizard;
   }
   
-  private final static Logger LOG = Logger.getLogger(StandardLanguage.class);
+  private static final Logger LOG = Logger.getLogger(StandardLanguage.class);
 }

@@ -124,12 +124,12 @@ public class SemanticHighlightingRegistry {
   /**
    * Reserved TextMate scope identifier for styles that cannot be handled.
    */
-  public final static String UNKNOWN_SCOPE = "unknown.xtext";
+  public static final String UNKNOWN_SCOPE = "unknown.xtext";
   
   /**
    * TextMate scopes indicating an unhandled style ID to TextMate scope mapping.
    */
-  public final static List<String> UNKNOWN_SCOPES = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(SemanticHighlightingRegistry.UNKNOWN_SCOPE));
+  public static final List<String> UNKNOWN_SCOPES = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(SemanticHighlightingRegistry.UNKNOWN_SCOPE));
   
   @Inject
   @Extension
@@ -376,5 +376,5 @@ public class SemanticHighlightingRegistry {
     return ((nullable == null) || Objects.equal(nullable, SemanticHighlightingRegistry.UNKNOWN_SCOPES));
   }
   
-  private final static Logger LOG = Logger.getLogger(SemanticHighlightingRegistry.class);
+  private static final Logger LOG = Logger.getLogger(SemanticHighlightingRegistry.class);
 }

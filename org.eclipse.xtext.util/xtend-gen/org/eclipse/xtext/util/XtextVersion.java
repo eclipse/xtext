@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class XtextVersion {
   private static class Plugin extends EMFPlugin {
-    public final static XtextVersion.Plugin INSTANCE = new XtextVersion.Plugin();
+    public static final XtextVersion.Plugin INSTANCE = new XtextVersion.Plugin();
     
     private Plugin() {
       super(new ResourceLocator[] {});

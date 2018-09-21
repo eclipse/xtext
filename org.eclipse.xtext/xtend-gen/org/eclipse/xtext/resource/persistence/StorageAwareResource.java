@@ -34,9 +34,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class StorageAwareResource extends LazyLinkingResource {
-  public final static String UNRESOLVABLE_FRAGMENT = "UNRESOLVABLE";
+  public static final String UNRESOLVABLE_FRAGMENT = "UNRESOLVABLE";
   
-  private final static Logger LOG = Logger.getLogger(StorageAwareResource.class);
+  private static final Logger LOG = Logger.getLogger(StorageAwareResource.class);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Inject(optional = true)

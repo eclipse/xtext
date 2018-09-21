@@ -49,7 +49,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 @Singleton
 @SuppressWarnings("all")
 public class ContentAssistService {
-  public final static int DEFAULT_PROPOSALS_LIMIT = 1000;
+  public static final int DEFAULT_PROPOSALS_LIMIT = 1000;
   
   @Inject
   private Provider<ContentAssistContextFactory> contextFactoryProvider;

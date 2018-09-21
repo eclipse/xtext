@@ -300,5 +300,5 @@ public class WorkspaceManager {
     return this.openDocuments.containsKey(uri);
   }
   
-  private final static Logger LOG = Logger.getLogger(WorkspaceManager.class);
+  private static final Logger LOG = Logger.getLogger(WorkspaceManager.class);
 }

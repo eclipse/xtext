@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Deprecated
 @SuppressWarnings("all")
 public class ColoringServiceImpl implements IColoringService {
-  private final static List<Integer> STYLE_IDS = Collections.<Integer>singletonList(Integer.valueOf(ColoringStyle.Identifier));
+  private static final List<Integer> STYLE_IDS = Collections.<Integer>singletonList(Integer.valueOf(ColoringStyle.Identifier));
   
   @Override
   public List<? extends ColoringInformation> getColoring(final XtextResource resource, final Document document) {

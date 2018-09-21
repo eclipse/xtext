@@ -69,7 +69,7 @@ public class BuildRequest {
       return errorFree;
     }
     
-    private final static Logger LOG = Logger.getLogger(DefaultValidationCallback.class);
+    private static final Logger LOG = Logger.getLogger(DefaultValidationCallback.class);
   }
   
   private URI baseDir;

@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
-  private final static int LINE_NUMBER = 12;
+  private static final int LINE_NUMBER = 12;
   
   @Test
   public void singleArgsExactMatchAfterTriggerChar() {

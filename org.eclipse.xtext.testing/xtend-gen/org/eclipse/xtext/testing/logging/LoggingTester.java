@@ -393,7 +393,7 @@ public class LoggingTester {
     }
   }
   
-  private final static Comparator<LoggingTester.LogEntry> TEMPORAL_ORDER = ((Comparator<LoggingTester.LogEntry>) (LoggingTester.LogEntry $0, LoggingTester.LogEntry $1) -> {
+  private static final Comparator<LoggingTester.LogEntry> TEMPORAL_ORDER = ((Comparator<LoggingTester.LogEntry>) (LoggingTester.LogEntry $0, LoggingTester.LogEntry $1) -> {
     return Longs.compare($0.timeStamp, $1.timeStamp);
   });
 }

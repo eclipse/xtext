@@ -27,15 +27,15 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
  */
 @SuppressWarnings("all")
 public class CodeConfig implements IGuiceAwareGeneratorComponent {
-  private final static String FILE_HEADER_VAR_TIME = "${time}";
+  private static final String FILE_HEADER_VAR_TIME = "${time}";
   
-  private final static String FILE_HEADER_VAR_DATE = "${date}";
+  private static final String FILE_HEADER_VAR_DATE = "${date}";
   
-  private final static String FILE_HEADER_VAR_YEAR = "${year}";
+  private static final String FILE_HEADER_VAR_YEAR = "${year}";
   
-  private final static String FILE_HEADER_VAR_USER = "${user}";
+  private static final String FILE_HEADER_VAR_USER = "${user}";
   
-  private final static String FILE_HEADER_VAR_VERSION = "${version}";
+  private static final String FILE_HEADER_VAR_VERSION = "${version}";
   
   @Accessors
   private String encoding = Charset.defaultCharset().name();

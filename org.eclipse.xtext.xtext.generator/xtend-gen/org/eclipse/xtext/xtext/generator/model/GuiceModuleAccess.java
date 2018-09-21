@@ -463,7 +463,7 @@ public class GuiceModuleAccess {
     return Collections.<GuiceModuleAccess.Binding>unmodifiableSet(this.bindings);
   }
   
-  private final static Logger LOG = Logger.getLogger(GuiceModuleAccess.class);
+  private static final Logger LOG = Logger.getLogger(GuiceModuleAccess.class);
   
   @Pure
   public TypeReference getSuperClass() {

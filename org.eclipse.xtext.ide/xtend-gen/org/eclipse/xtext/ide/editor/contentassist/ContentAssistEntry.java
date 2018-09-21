@@ -84,43 +84,43 @@ public class ContentAssistEntry {
    */
   private String kind = ContentAssistEntry.KIND_UNKNOWN;
   
-  public final static String KIND_TEXT = "TEXT";
+  public static final String KIND_TEXT = "TEXT";
   
-  public final static String KIND_METHOD = "METHOD";
+  public static final String KIND_METHOD = "METHOD";
   
-  public final static String KIND_FUNCTION = "FUNCTION";
+  public static final String KIND_FUNCTION = "FUNCTION";
   
-  public final static String KIND_CONSTRUCTOR = "CONSTRUCTOR";
+  public static final String KIND_CONSTRUCTOR = "CONSTRUCTOR";
   
-  public final static String KIND_FIELD = "FIELD";
+  public static final String KIND_FIELD = "FIELD";
   
-  public final static String KIND_VARIABLE = "VARIABLE";
+  public static final String KIND_VARIABLE = "VARIABLE";
   
-  public final static String KIND_CLASS = "CLASS";
+  public static final String KIND_CLASS = "CLASS";
   
-  public final static String KIND_INTERFACE = "INTERFACE";
+  public static final String KIND_INTERFACE = "INTERFACE";
   
-  public final static String KIND_MODULE = "MODULE";
+  public static final String KIND_MODULE = "MODULE";
   
-  public final static String KIND_PROPERTY = "PROPERTY";
+  public static final String KIND_PROPERTY = "PROPERTY";
   
-  public final static String KIND_UNIT = "UNIT";
+  public static final String KIND_UNIT = "UNIT";
   
-  public final static String KIND_VALUE = "VALUE";
+  public static final String KIND_VALUE = "VALUE";
   
-  public final static String KIND_ENUM = "ENUM";
+  public static final String KIND_ENUM = "ENUM";
   
-  public final static String KIND_KEYWORD = "KEYWORD";
+  public static final String KIND_KEYWORD = "KEYWORD";
   
-  public final static String KIND_SNIPPET = "SNIPPET";
+  public static final String KIND_SNIPPET = "SNIPPET";
   
-  public final static String KIND_COLOR = "COLOR";
+  public static final String KIND_COLOR = "COLOR";
   
-  public final static String KIND_FILE = "FILE";
+  public static final String KIND_FILE = "FILE";
   
-  public final static String KIND_REFERENCE = "REFERENCE";
+  public static final String KIND_REFERENCE = "REFERENCE";
   
-  public final static String KIND_UNKNOWN = "UNKNOWN";
+  public static final String KIND_UNKNOWN = "UNKNOWN";
   
   @Pure
   public String getPrefix() {

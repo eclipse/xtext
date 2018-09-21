@@ -20,9 +20,9 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 @Singleton
 @SuppressWarnings("all")
 public class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAttributeIdMapper {
-  private final static Pattern QUOTED = Pattern.compile("(?:^\'([^\']*)\'$)|(?:^\"([^\"]*)\")$", Pattern.MULTILINE);
+  private static final Pattern QUOTED = Pattern.compile("(?:^\'([^\']*)\'$)|(?:^\"([^\"]*)\")$", Pattern.MULTILINE);
   
-  private final static Pattern PUNCTUATION = Pattern.compile("\\p{Punct}*");
+  private static final Pattern PUNCTUATION = Pattern.compile("\\p{Punct}*");
   
   @Override
   protected String calculateId(final String tokenName, final int tokenType) {

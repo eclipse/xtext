@@ -182,7 +182,7 @@ public class Indexer {
       return CollectionLiterals.<IReferenceDescription>emptyList();
     }
     
-    private final static Logger LOG = Logger.getLogger(ResolvedResourceDescription.class);
+    private static final Logger LOG = Logger.getLogger(ResolvedResourceDescription.class);
     
     @Pure
     public URI getURI() {

@@ -1732,7 +1732,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     this.fileAccessFactory.createTextFile(_grammarConstraintsPath, _client).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
   }
   
-  private final static Logger LOG = Logger.getLogger(SerializerFragment2.class);
+  private static final Logger LOG = Logger.getLogger(SerializerFragment2.class);
   
   @Pure
   public boolean isGenerateDebugData() {

@@ -283,7 +283,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     injector.injectMembers(this);
   }
   
-  private final static Logger LOG = Logger.getLogger(ManifestAccess.class);
+  private static final Logger LOG = Logger.getLogger(ManifestAccess.class);
   
   @Pure
   public String getBundleName() {
