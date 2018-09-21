@@ -234,10 +234,17 @@ public class XtendBatchCompiler {
 	}
 
 	/**
+	 * This option is only supported on JDK 8 and older and will be ignored when source level is 9 or newer.
 	 * @since 2.7
+	 * @see https://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html
 	 */
 	public void setBootClassPath(String bootClassPath) {
-		this.bootClassPath = bootClassPath;
+		JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
+		if (version.isAtLeast(JavaVersion.JAVA9)) {
+			log.warn("Option bootClassPath is only valid for Java 8 and lower. The velue '"+bootClassPath+"' will be ignored.");
+		} else {
+			this.bootClassPath = bootClassPath;
+		}
 	}
 	
 	/**
@@ -628,9 +635,14 @@ public class XtendBatchCompiler {
 		if (isVerbose()) {
 			commandLine.add("-verbose");
 		}
-		List<String> bootClassPathEntries = getBootClassPathEntries();
-		if (!isEmpty(bootClassPathEntries)) {
-			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, bootClassPathEntries) + "\"");
+		if (getJavaSourceVersion() != null) {
+			JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
+			if (!version.isAtLeast(JavaVersion.JAVA9)) {
+				List<String> bootClassPathEntries = getBootClassPathEntries();
+				if (!isEmpty(bootClassPathEntries)) {
+					commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, bootClassPathEntries) + "\"");
+				}
+			}
 		}
 		if (!isEmpty(classPathEntries)) {
 			commandLine.add("-cp \"" + Joiner.on(File.pathSeparator).join(classPathEntries) + "\"");

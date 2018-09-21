@@ -30,6 +30,7 @@ import org.apache.maven.toolchain.java.DefaultJavaToolChain;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -178,6 +179,12 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	private String getBootClassPath() {
+		if (javaSourceVersion != null) {
+			JavaVersion version = JavaVersion.fromQualifier(javaSourceVersion);
+			if (version.isAtLeast(JavaVersion.JAVA9)) {
+				return ""; // bootclasspath only supported on Java8 and older
+			}
+		}
 		Toolchain toolchain = toolchainManager.getToolchainFromBuildContext("jdk", session);
 		if (toolchain instanceof DefaultJavaToolChain) {
 			DefaultJavaToolChain javaToolChain = (DefaultJavaToolChain) toolchain;
