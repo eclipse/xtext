@@ -226,5 +226,5 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     return javaProject.getProject().getWorkspace().getRoot();
   }
   
-  private final static Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
+  private static final Logger LOG = Logger.getLogger(JdtBasedProcessorProvider.class);
 }

@@ -46,7 +46,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
-  private final static long VALIDATION_TIMEOUT = 2000L;
+  private static final long VALIDATION_TIMEOUT = 2000L;
   
   @Inject
   @Extension

@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @SuppressWarnings("all")
 public class XtendAntlrTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
-  private final static Set<String> RICH_TEXT_TERMINAL_RULE_NAMES = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_END", "RULE_RICH_TEXT_INBETWEEN"));
+  private static final Set<String> RICH_TEXT_TERMINAL_RULE_NAMES = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_END", "RULE_RICH_TEXT_INBETWEEN"));
   
   @Override
   protected String calculateId(final String tokenName, final int tokenType) {

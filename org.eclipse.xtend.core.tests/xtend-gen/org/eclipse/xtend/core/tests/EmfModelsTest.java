@@ -41,7 +41,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class EmfModelsTest {
   @Extension
-  private final static Logger LOGGER = Logger.getLogger(EmfModelsTest.class);
+  private static final Logger LOGGER = Logger.getLogger(EmfModelsTest.class);
   
   @Test
   public void checkXbase() {

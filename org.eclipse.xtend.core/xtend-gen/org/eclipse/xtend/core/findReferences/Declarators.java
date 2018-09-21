@@ -78,7 +78,7 @@ public class Declarators {
     }
   }
   
-  public final static TargetURIs.Key<Declarators.DeclaratorsData> KEY = TargetURIs.Key.<Declarators.DeclaratorsData>from("Xtend", Declarators.DeclaratorsData.class);
+  public static final TargetURIs.Key<Declarators.DeclaratorsData> KEY = TargetURIs.Key.<Declarators.DeclaratorsData>from("Xtend", Declarators.DeclaratorsData.class);
   
   @Inject
   private IQualifiedNameConverter nameConverter;

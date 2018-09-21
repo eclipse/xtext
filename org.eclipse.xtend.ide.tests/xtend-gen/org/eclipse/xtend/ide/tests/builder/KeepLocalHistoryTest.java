@@ -34,15 +34,15 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
-  private final static String FILE_NAME = "foo/Foo.xtend";
+  private static final String FILE_NAME = "foo/Foo.xtend";
   
-  private final static String GENERATE_FILE_NAME = "../xtend-gen/foo/Foo.java";
+  private static final String GENERATE_FILE_NAME = "../xtend-gen/foo/Foo.java";
   
-  private final static String GENERATE_TRACK_FILE_NAME = "../xtend-gen/foo/.Foo.java._trace";
+  private static final String GENERATE_TRACK_FILE_NAME = "../xtend-gen/foo/.Foo.java._trace";
   
-  private final static String CONTENT_WITHOUT_BODY = "package foo class Foo {}";
+  private static final String CONTENT_WITHOUT_BODY = "package foo class Foo {}";
   
-  private final static String CONTENT_WITH_BODY = "package foo class Foo { def foo() {} }";
+  private static final String CONTENT_WITH_BODY = "package foo class Foo { def foo() {} }";
   
   @Inject
   @Extension

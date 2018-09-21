@@ -53,7 +53,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Singleton
 @SuppressWarnings("all")
 public class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
-  private final static Logger logger = Logger.getLogger(UIResourceChangeRegistry.class);
+  private static final Logger logger = Logger.getLogger(UIResourceChangeRegistry.class);
   
   @Inject
   private QueuedBuildData queue;

@@ -53,7 +53,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
-  private final static Logger logger = Logger.getLogger(ActiveAnnotationContextProvider.class);
+  private static final Logger logger = Logger.getLogger(ActiveAnnotationContextProvider.class);
   
   @Inject
   @Extension

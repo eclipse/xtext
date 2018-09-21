@@ -53,7 +53,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class AnnotationProcessor {
   @Singleton
   public static class CancellationObserver {
-    private final static Logger log = Logger.getLogger(AnnotationProcessor.CancellationObserver.class);
+    private static final Logger log = Logger.getLogger(AnnotationProcessor.CancellationObserver.class);
     
     @Accessors(AccessorType.PROTECTED_GETTER)
     private ExecutorService pool = this.initPool();

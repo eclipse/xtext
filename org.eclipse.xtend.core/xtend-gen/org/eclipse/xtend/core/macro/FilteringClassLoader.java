@@ -19,9 +19,9 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class FilteringClassLoader extends ClassLoader {
-  private final static char DOT = '.';
+  private static final char DOT = '.';
   
-  private final static char SLASH = '/';
+  private static final char SLASH = '/';
   
   private final List<String> includes;
   

@@ -43,7 +43,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class SwtBotProjectHelper {
-  private final static String defaultProject = "test";
+  private static final String defaultProject = "test";
   
   public static SWTBotShell newXtendProject(final SWTWorkbenchBot it) {
     return SwtBotProjectHelper.newXtendProject(it, SwtBotProjectHelper.defaultProject);

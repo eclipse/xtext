@@ -37,7 +37,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
-  private final static long VALIDATION_TIMEOUT = 10000L;
+  private static final long VALIDATION_TIMEOUT = 10000L;
   
   @Inject
   @Extension

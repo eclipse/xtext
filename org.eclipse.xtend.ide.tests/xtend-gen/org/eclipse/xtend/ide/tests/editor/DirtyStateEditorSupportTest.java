@@ -209,7 +209,7 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     }
   }
   
-  private final static long VALIDATION_TIMEOUT = 2000L;
+  private static final long VALIDATION_TIMEOUT = 2000L;
   
   private void assertHasErrors(final XtextEditor editor) {
     this.assertHasErrors(editor, null);
