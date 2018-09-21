@@ -14,16 +14,13 @@ repositories {
 	}
 }
 
-// The Xtend compiler version to use
-def bootstrapXtendVersion = '2.14.0'
-
 configurations {
 	xtendCompiler {
 		description 'Bootstrap dependencies for the Xtend compiler'
 		resolutionStrategy {
 			eachDependency {
 				if (requested.group == 'org.eclipse.xtext' || requested.group == 'org.eclipse.xtend')
-					useVersion(bootstrapXtendVersion)
+					useVersion(versions.xtext_bootstrap)
 				if (requested.group == 'com.google.inject' && requested.name == 'guice')
 					useVersion(versions.guice)
 				if (requested.group == 'org.eclipse.jdt' && requested.name == 'org.eclipse.jdt.core')
@@ -35,7 +32,7 @@ configurations {
 }
 
 dependencies {
-	xtendCompiler "org.eclipse.xtend:org.eclipse.xtend.core:$bootstrapXtendVersion"
-	xtendCompiler "org.eclipse.xtext:org.eclipse.xtext.smap:$bootstrapXtendVersion"
+	xtendCompiler "org.eclipse.xtend:org.eclipse.xtend.core:${versions.xtext_bootstrap}"
+	xtendCompiler "org.eclipse.xtext:org.eclipse.xtext.smap:${versions.xtext_bootstrap}"
 	xtendCompiler "org.xtext:xtext-gradle-builder:$versions.xtext_gradle_plugin"
 }
