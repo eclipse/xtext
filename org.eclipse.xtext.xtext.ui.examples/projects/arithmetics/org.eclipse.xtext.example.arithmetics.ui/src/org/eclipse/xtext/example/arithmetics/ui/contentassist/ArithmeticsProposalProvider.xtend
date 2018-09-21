@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
  * Implementation for custom code completion proposals.
  */
 class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProvider {
-	
+
 	/**
 	 * sets the selection on the arguments for proposed functions.
 	 */

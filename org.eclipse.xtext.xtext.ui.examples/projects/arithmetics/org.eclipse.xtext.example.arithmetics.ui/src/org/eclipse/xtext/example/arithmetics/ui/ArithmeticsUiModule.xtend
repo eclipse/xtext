@@ -7,23 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.ui
 
+import com.google.inject.Binder
 import com.google.inject.Provider
+import com.google.inject.name.Names
 import org.eclipse.ui.plugin.AbstractUIPlugin
 import org.eclipse.xtext.example.arithmetics.ui.autoedit.AutoEditStrategy
 import org.eclipse.xtext.resource.containers.IAllContainersState
+import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory
 import org.eclipse.xtext.ui.shared.Access
-import com.google.inject.Binder
-import com.google.inject.name.Names
-import org.eclipse.xtext.ui.editor.XtextEditor
 
 /** 
  * Use this class to register components to be used within the IDE.
  */
 class ArithmeticsUiModule extends AbstractArithmeticsUiModule {
-	
+
 	new(AbstractUIPlugin plugin) {
 		super(plugin)
 	}
