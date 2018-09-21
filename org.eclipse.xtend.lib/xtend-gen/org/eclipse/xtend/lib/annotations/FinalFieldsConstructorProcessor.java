@@ -137,7 +137,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       it.addConstructor(_function);
     }
     
-    private final static Pattern EMPTY_BODY = Pattern.compile("(\\{(\\s*\\})?)?");
+    private static final Pattern EMPTY_BODY = Pattern.compile("(\\{(\\s*\\})?)?");
     
     public void makeFinalFieldsConstructor(final MutableConstructorDeclaration it) {
       boolean _isEmpty = this.getFinalFieldsConstructorArgumentTypes(it.getDeclaringType()).isEmpty();
