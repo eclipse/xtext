@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.xtend.core.XtendInjectorSingleton;
 import org.eclipse.xtend.core.macro.AnnotationProcessor.CancellationObserver;
+import org.eclipse.xtext.util.JavaVersion;
 
 import com.google.common.base.Joiner;
 import com.google.inject.Injector;
@@ -74,13 +76,16 @@ public class Main {
 
 	private static void printUsage() {
 		PrintStream out = System.out;
+		String allVersionQualifiers = Arrays.stream(JavaVersion.values())
+				.map(v -> v.getQualifier())
+				.collect(Collectors.joining(", "));
 		out.println("Usage: Main <options> <source directories>");
 		out.println("where possible options include:");
 		out.println("-d <directory>                      Specify where to place generated xtend files");
 		out.println("-tp <path>                          Temp directory to hold generated stubs and classes");
 		out.println("-cp <path>                          Specify where to find user class files");
 		out.println("-encoding <encoding>                Specify character encoding used by source files");
-		out.println("-javaSourceVersion <version>        Create Java Source compatible to this version. Can be: 1.5, 1.6, 1.7 or 1.8");
+		out.println("-javaSourceVersion <version>        Create Java Source compatible to this version. Can be: " + allVersionQualifiers);
 		out.println("-noSuppressWarningsAnnotation       Don't put @SuppressWarnings() into generated Java Code");
 		out.println("-generateGeneratedAnnotation        Put @Generated into generated Java Code");
 		out.println("-includeDateInGeneratedAnnnotation  If -generateGeneratedAnnotation is used, add the current date/time.");
