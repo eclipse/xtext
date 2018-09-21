@@ -126,11 +126,11 @@ public class AntlrGrammarComparator {
     }
   }
   
-  private final static List<String> SINGLE_CHAR_TOKENS = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\|", "=", "\\?", "\\*", "\\+", ":", ";"));
+  private static final List<String> SINGLE_CHAR_TOKENS = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\\(", "\\)", "\\[", "\\]", "\\{", "\\}", "\\|", "=", "\\?", "\\*", "\\+", ":", ";"));
   
-  private final static String QUOTED_TOKENS = IterableExtensions.join(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\'(\\\\\')+\'", "(\'[^\']*\')", "(\"[^\"]*\")")), "|");
+  private static final String QUOTED_TOKENS = IterableExtensions.join(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\'(\\\\\')+\'", "(\'[^\']*\')", "(\"[^\"]*\")")), "|");
   
-  private final static String TOKEN = new Function0<String>() {
+  private static final String TOKEN = new Function0<String>() {
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       String _join = IterableExtensions.join(AntlrGrammarComparator.SINGLE_CHAR_TOKENS, "|");
@@ -145,13 +145,13 @@ public class AntlrGrammarComparator {
     }
   }.apply();
   
-  private final static String NEWLINE = "\\r?\\n|\\r";
+  private static final String NEWLINE = "\\r?\\n|\\r";
   
-  private final static String WS = "( |\\t)+";
+  private static final String WS = "( |\\t)+";
   
-  private final static String SL_COMMENT = "//[^\\r\\n]*";
+  private static final String SL_COMMENT = "//[^\\r\\n]*";
   
-  private final static String ML_COMMENT = new Function0<String>() {
+  private static final String ML_COMMENT = new Function0<String>() {
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/\\*(\\*[^/]|[^\\*])*\\*/");

@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class StringConcatOutputImpl extends OutputImpl {
-  public final static String STRING_OUTLET = "StringConcatOutputImpl.StringOutlet";
+  public static final String STRING_OUTLET = "StringConcatOutputImpl.StringOutlet";
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private StringConcatenation stringOutlet;

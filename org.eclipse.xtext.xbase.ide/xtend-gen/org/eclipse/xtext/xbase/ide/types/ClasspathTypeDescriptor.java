@@ -30,11 +30,11 @@ import org.objectweb.asm.ClassReader;
 @Data
 @SuppressWarnings("all")
 public class ClasspathTypeDescriptor implements ITypeDescriptor {
-  private final static Splitter NESTED_CLASS_SPLITTER = Splitter.on("$");
+  private static final Splitter NESTED_CLASS_SPLITTER = Splitter.on("$");
   
-  private final static Splitter PACKAGE_AND_NESTED_CLASS_SPLITTER = Splitter.onPattern("\\.|\\$");
+  private static final Splitter PACKAGE_AND_NESTED_CLASS_SPLITTER = Splitter.onPattern("\\.|\\$");
   
-  private final static Pattern ANONYMOUS_CLASS_PATTERN = Pattern.compile("\\d+");
+  private static final Pattern ANONYMOUS_CLASS_PATTERN = Pattern.compile("\\d+");
   
   private final String name;
   

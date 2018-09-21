@@ -45,7 +45,7 @@ public class ClassFileCache {
     }
   }
   
-  private final static Object NULL = new Object();
+  private static final Object NULL = new Object();
   
   private final Map<QualifiedName, Object> cache = new ConcurrentHashMap<QualifiedName, Object>();
   

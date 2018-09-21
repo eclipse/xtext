@@ -69,7 +69,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class StandaloneBuilder {
-  private final static Logger LOG = Logger.getLogger(StandaloneBuilder.class);
+  private static final Logger LOG = Logger.getLogger(StandaloneBuilder.class);
   
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
