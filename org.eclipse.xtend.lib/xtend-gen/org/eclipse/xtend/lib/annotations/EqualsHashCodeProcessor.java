@@ -41,7 +41,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
    */
   @Beta
   public static class Util {
-    private final static int PRIME_VALUE = 31;
+    private static final int PRIME_VALUE = 31;
     
     @Extension
     private TransformationContext context;
