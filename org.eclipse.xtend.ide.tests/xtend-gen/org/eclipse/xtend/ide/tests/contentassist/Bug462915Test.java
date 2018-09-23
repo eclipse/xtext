@@ -34,7 +34,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class Bug462915Test extends AbstractXtendContentAssistBugTest {
-  private final static String NO_GUICE_PROJECT_NAME = "Bug462915";
+  private static final String NO_GUICE_PROJECT_NAME = "Bug462915";
   
   private IProject noGuiceProject;
   

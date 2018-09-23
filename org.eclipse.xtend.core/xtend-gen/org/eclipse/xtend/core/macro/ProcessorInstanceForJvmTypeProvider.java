@@ -97,7 +97,7 @@ public class ProcessorInstanceForJvmTypeProvider {
     }
   }
   
-  private final static Logger logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider.class);
+  private static final Logger logger = Logger.getLogger(ProcessorInstanceForJvmTypeProvider.class);
   
   /**
    * @return an instance of the given JvmType

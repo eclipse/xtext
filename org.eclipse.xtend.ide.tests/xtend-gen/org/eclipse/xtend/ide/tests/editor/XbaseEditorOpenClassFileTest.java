@@ -543,5 +543,5 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     return false;
   }
   
-  private final static Logger LOG = Logger.getLogger(XbaseEditorOpenClassFileTest.class);
+  private static final Logger LOG = Logger.getLogger(XbaseEditorOpenClassFileTest.class);
 }

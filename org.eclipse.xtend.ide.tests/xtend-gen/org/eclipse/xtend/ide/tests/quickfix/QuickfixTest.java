@@ -33,7 +33,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Extension
   private SyncUtil _syncUtil;
   
-  private final static String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
+  private static final String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   
   @After
   @Override

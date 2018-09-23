@@ -32,7 +32,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	def void testBug456803(){
+	def void testBug456803() {
 		createFile("bar/Foo.xtend",'''
 			package bar
 			class Outer {
@@ -76,7 +76,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 
 	@Test
 	def void missingSynchronized() {
-		setSeverity(MISSING_SYNCHRONIZED, "warning")		
+		setSeverity(MISSING_SYNCHRONIZED, "warning")
 		create('XXX.xtend', '''
 			class Bar {
 				def synchronized int doSth() {

@@ -30,7 +30,7 @@ import org.junit.Assert;
  */
 @SuppressWarnings("all")
 public class JavaEditorExtension {
-  private final static Boolean VERBOSE = Boolean.FALSE;
+  private static final Boolean VERBOSE = Boolean.FALSE;
   
   @Inject
   @Extension

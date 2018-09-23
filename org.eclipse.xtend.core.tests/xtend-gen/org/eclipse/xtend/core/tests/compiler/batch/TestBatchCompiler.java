@@ -77,7 +77,7 @@ public class TestBatchCompiler {
   
   private static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir";
   
-  private final static Set<File> abfalleimer = CollectionLiterals.<File>newHashSet();
+  private static final Set<File> abfalleimer = CollectionLiterals.<File>newHashSet();
   
   @Before
   public void onSetup() {

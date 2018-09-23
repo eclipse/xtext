@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class XtendResourceDescription extends DefaultResourceDescription {
-  private final static Set<String> primitivesFilter = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
+  private static final Set<String> primitivesFilter = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("boolean", "int", "char", "byte", "short", "long", "double", "float", "void"));
   
   private IBatchTypeResolver typeResolver;
   
