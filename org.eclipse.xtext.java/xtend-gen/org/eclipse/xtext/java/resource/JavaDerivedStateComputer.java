@@ -340,5 +340,5 @@ public class JavaDerivedStateComputer {
     return ((ClassLoader) _classpathURIContext);
   }
   
-  private final static Logger LOG = Logger.getLogger(JavaDerivedStateComputer.class);
+  private static final Logger LOG = Logger.getLogger(JavaDerivedStateComputer.class);
 }

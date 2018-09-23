@@ -49,7 +49,7 @@ public class ReadAndWriteTracking {
     return object.eAdapters().contains(ReadAndWriteTracking.READMARKER);
   }
   
-  private final static Adapter READMARKER = new Adapter() {
+  private static final Adapter READMARKER = new Adapter() {
     @Override
     public Notifier getTarget() {
       return null;

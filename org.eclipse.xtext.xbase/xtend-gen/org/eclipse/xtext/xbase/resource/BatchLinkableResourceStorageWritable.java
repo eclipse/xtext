@@ -48,7 +48,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
-  private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable.class);
+  private static final Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable.class);
   
   @Override
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) throws IOException {

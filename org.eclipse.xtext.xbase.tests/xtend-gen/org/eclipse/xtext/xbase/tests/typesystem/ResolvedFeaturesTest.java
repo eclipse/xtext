@@ -55,9 +55,9 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
   @Inject
   private OverrideHelper overrideHelper;
   
-  private final static String BASE_CLASS_METHOD_ERASED_SIGNATURE = "baseClassMethod(java.util.List)";
+  private static final String BASE_CLASS_METHOD_ERASED_SIGNATURE = "baseClassMethod(java.util.List)";
   
-  private final static String DERIVED_CLASS_METHOD_ERASED_SIGNATURE = "derivedClassMethod(java.util.List)";
+  private static final String DERIVED_CLASS_METHOD_ERASED_SIGNATURE = "derivedClassMethod(java.util.List)";
   
   public ResolvedFeatures toResolvedOperations(final Class<?> type) {
     try {

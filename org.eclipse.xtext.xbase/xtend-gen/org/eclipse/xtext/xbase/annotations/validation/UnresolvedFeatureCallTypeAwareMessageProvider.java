@@ -46,9 +46,9 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
    * A user data entry that indicates a broken feature link which could also be
    * a type literal, e.g. 'String::CASE_INSENSITIVE'.
    */
-  public final static String TYPE_LITERAL = "key:TypeLiteral";
+  public static final String TYPE_LITERAL = "key:TypeLiteral";
   
-  public final static String FEATURE_CALL = "key:FeatureCall";
+  public static final String FEATURE_CALL = "key:FeatureCall";
   
   @Inject
   private FeatureCallAsTypeLiteralHelper typeLiteralHelper;

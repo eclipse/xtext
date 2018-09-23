@@ -10,11 +10,11 @@ import org.eclipse.xtext.xbase.formatting.StringKey;
 @Deprecated
 @SuppressWarnings("all")
 public class BasicFormatterPreferenceKeys {
-  public final static StringKey lineSeparator = new StringKey("line.separator", System.getProperty("line.separator"));
+  public static final StringKey lineSeparator = new StringKey("line.separator", System.getProperty("line.separator"));
   
-  public final static StringKey indentation = new StringKey("indentation", "\t");
+  public static final StringKey indentation = new StringKey("indentation", "\t");
   
-  public final static IntegerKey indentationLength = new IntegerKey("indentation.length", Integer.valueOf(4));
+  public static final IntegerKey indentationLength = new IntegerKey("indentation.length", Integer.valueOf(4));
   
-  public final static IntegerKey maxLineWidth = new IntegerKey("line.width.max", Integer.valueOf(120));
+  public static final IntegerKey maxLineWidth = new IntegerKey("line.width.max", Integer.valueOf(120));
 }

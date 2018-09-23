@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTracker
  */
 @SuppressWarnings("all")
 public class DefaultXbaseIdeModule extends DefaultIdeModule {
-  protected final static ClasspathScanner classpathScanner = new ClasspathScanner();
+  protected static final ClasspathScanner classpathScanner = new ClasspathScanner();
   
   public void configureClasspathScanner(final Binder binder) {
     binder.<ClasspathScanner>bind(ClasspathScanner.class).toInstance(DefaultXbaseIdeModule.classpathScanner);

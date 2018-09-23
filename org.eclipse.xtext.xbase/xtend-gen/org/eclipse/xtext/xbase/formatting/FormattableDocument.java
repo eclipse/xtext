@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Deprecated
 @SuppressWarnings("all")
 public class FormattableDocument {
-  private final static Logger log = Logger.getLogger(FormattableDocument.class);
+  private static final Logger log = Logger.getLogger(FormattableDocument.class);
   
   @Accessors
   private final FormattingPreferenceValues cfg;

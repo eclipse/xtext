@@ -162,7 +162,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     }
   }
   
-  private final static String ENCODING = Charsets.ISO_8859_1.name();
+  private static final String ENCODING = Charsets.ISO_8859_1.name();
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
@@ -521,7 +521,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment.class);
+  private static final Logger LOG = Logger.getLogger(XtextAntlrGeneratorComparisonFragment.class);
   
   @Pure
   protected GrammarNaming getProductionNaming() {

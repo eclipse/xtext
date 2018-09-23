@@ -125,5 +125,5 @@ public class ResourceURICollector {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(ResourceURICollector.class);
+  private static final Logger LOG = Logger.getLogger(ResourceURICollector.class);
 }

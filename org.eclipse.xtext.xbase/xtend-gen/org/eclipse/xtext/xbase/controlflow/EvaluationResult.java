@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Data
 @SuppressWarnings("all")
 class EvaluationResult implements IConstantEvaluationResult<Object> {
-  protected final static EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
+  protected static final EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
     @Override
     public Object equalValue(final EvaluationResult other) {
       return Boolean.valueOf(false);

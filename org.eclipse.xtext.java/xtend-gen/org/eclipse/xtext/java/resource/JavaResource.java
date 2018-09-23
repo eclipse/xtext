@@ -112,7 +112,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     }
   }
   
-  public final static String OPTION_ENCODING = (JavaResource.class.getName() + ".DEFAULT_ENCODING");
+  public static final String OPTION_ENCODING = (JavaResource.class.getName() + ".DEFAULT_ENCODING");
   
   @Inject
   private IEncodingProvider encodingProvider;
