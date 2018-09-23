@@ -15,6 +15,14 @@ import org.junit.Test;
  * @author Christian Dietrich - Initial contribution and API
  */
 public class JavaVersionTest {
+	@Test
+	public void test_fromBree() {
+		assertEquals(JavaVersion.JAVA10, JavaVersion.fromBree("JavaSE-10"));
+		assertEquals(JavaVersion.JAVA9, JavaVersion.fromBree("JavaSE-9"));
+		assertEquals(JavaVersion.JAVA8, JavaVersion.fromBree("JavaSE-1.8"));
+		assertNull(JavaVersion.fromBree("JavaSE-1.10"));
+		assertNull(JavaVersion.fromBree(null));
+	}
 	
 	@Test
 	public void testFromQualifier() {
@@ -31,6 +39,29 @@ public class JavaVersionTest {
 		assertEquals(JavaVersion.JAVA5, JavaVersion.fromQualifier("1.5"));
 		assertNull(JavaVersion.fromQualifier("1.4"));
 		assertNull(JavaVersion.fromQualifier("5"));
+		assertNull(JavaVersion.fromQualifier(null));
+	}
+	
+	@Test
+	public void test_getQualifier() {
+		assertEquals("10", JavaVersion.JAVA10.getQualifier());
+		assertEquals("9", JavaVersion.JAVA9.getQualifier());
+		assertEquals("1.8", JavaVersion.JAVA8.getQualifier());
+	}
+	
+
+	@Test
+	public void test_isAtLeast() {
+		assertTrue(JavaVersion.JAVA9.isAtLeast(JavaVersion.JAVA9));
+		assertTrue(JavaVersion.JAVA9.isAtLeast(JavaVersion.JAVA8));
+		assertFalse(JavaVersion.JAVA9.isAtLeast(JavaVersion.JAVA10));
+	}
+
+	@Test
+	public void test_toJdtClassFileConstant () {
+		assertEquals(3538944, JavaVersion.JAVA10.toJdtClassFileConstant());
+		assertEquals(3473408, JavaVersion.JAVA9.toJdtClassFileConstant());
+		assertEquals(3407872, JavaVersion.JAVA8.toJdtClassFileConstant());
 	}
 
 }
