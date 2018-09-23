@@ -28,9 +28,9 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  */
 @SuppressWarnings("all")
 public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
-  private final static String XBASE_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider";
+  private static final String XBASE_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider";
   
-  private final static String XBASE_DESCRIPTION_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider";
+  private static final String XBASE_DESCRIPTION_LABEL_PROVIDER = "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider";
   
   @Inject
   @Extension

@@ -78,12 +78,12 @@ public class JavaFileAccess extends TextFileAccess {
   /**
    * A list of keywords in the Java language. Use this to avoid illegal variable names.
    */
-  public final static Set<String> JAVA_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "const", "float", "native", "super", "while"));
+  public static final Set<String> JAVA_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "const", "float", "native", "super", "while"));
   
   /**
    * Set this value for the 'importNestedTypeThreshold' property to disable importing of nested types
    */
-  public final static int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
+  public static final int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
   
   protected final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
   

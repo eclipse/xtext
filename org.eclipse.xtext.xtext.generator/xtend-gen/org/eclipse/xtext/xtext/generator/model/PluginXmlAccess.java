@@ -110,7 +110,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
     injector.injectMembers(this);
   }
   
-  private final static Logger LOG = Logger.getLogger(PluginXmlAccess.class);
+  private static final Logger LOG = Logger.getLogger(PluginXmlAccess.class);
   
   @Pure
   public CodeConfig getCodeConfig() {

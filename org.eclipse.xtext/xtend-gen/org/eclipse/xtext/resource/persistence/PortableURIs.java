@@ -136,7 +136,7 @@ public class PortableURIs {
     }
   }
   
-  public final static String PORTABLE_SCHEME = "portable";
+  public static final String PORTABLE_SCHEME = "portable";
   
   @Inject
   private IGlobalScopeProvider globalScopeProvider;

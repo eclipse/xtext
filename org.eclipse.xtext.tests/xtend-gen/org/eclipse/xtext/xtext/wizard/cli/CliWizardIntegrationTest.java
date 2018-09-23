@@ -143,7 +143,7 @@ public class CliWizardIntegrationTest {
     CliWizardIntegrationTest.projectConfigs.forEach(_function);
   }
   
-  private final static List<WizardConfiguration> projectConfigs = Collections.<WizardConfiguration>unmodifiableList(CollectionLiterals.<WizardConfiguration>newArrayList(ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+  private static final List<WizardConfiguration> projectConfigs = Collections.<WizardConfiguration>unmodifiableList(CollectionLiterals.<WizardConfiguration>newArrayList(ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
     CliWizardIntegrationTest.newProjectConfig(), ((Procedure1<WizardConfiguration>) (WizardConfiguration it) -> {
     it.setBaseName("org.xtext.example.plainMaven");
     it.setPreferredBuildSystem(BuildSystem.MAVEN);

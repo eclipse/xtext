@@ -22,7 +22,7 @@ public class XtendFileAccess extends JavaFileAccess {
   /**
    * A list of keywords in the Xtend language. Use this to avoid illegal variable names.
    */
-  public final static Set<String> XTEND_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "for", "new", "switch", "default", "package", "synchronized", "boolean", "do", "if", "private", "this", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "float", "native", "super", "while", "val", "var", "def", "override", "annotation", "extension", "create", "dispatch"));
+  public static final Set<String> XTEND_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "for", "new", "switch", "default", "package", "synchronized", "boolean", "do", "if", "private", "this", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "float", "native", "super", "while", "val", "var", "def", "override", "annotation", "extension", "create", "dispatch"));
   
   protected XtendFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
     super(typeRef, codeConfig);

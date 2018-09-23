@@ -171,5 +171,5 @@ public class XtextGeneratorResourceSetInitializer {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
+  private static final Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
 }

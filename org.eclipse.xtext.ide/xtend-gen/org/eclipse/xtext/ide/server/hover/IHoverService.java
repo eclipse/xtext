@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @ImplementedBy(HoverService.class)
 @SuppressWarnings("all")
 public interface IHoverService {
-  public final static Hover EMPTY_HOVER = new Hover(CollectionLiterals.<Either<String, MarkedString>>emptyList(), null);
+  public static final Hover EMPTY_HOVER = new Hover(CollectionLiterals.<Either<String, MarkedString>>emptyList(), null);
   
   /**
    * callback for 'textDocument/hover' requests.

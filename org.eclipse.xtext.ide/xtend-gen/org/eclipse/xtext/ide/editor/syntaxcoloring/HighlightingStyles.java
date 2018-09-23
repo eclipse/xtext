@@ -13,19 +13,19 @@ package org.eclipse.xtext.ide.editor.syntaxcoloring;
  */
 @SuppressWarnings("all")
 public interface HighlightingStyles {
-  public final static String KEYWORD_ID = "keyword";
+  public static final String KEYWORD_ID = "keyword";
   
-  public final static String PUNCTUATION_ID = "punctuation";
+  public static final String PUNCTUATION_ID = "punctuation";
   
-  public final static String COMMENT_ID = "comment";
+  public static final String COMMENT_ID = "comment";
   
-  public final static String STRING_ID = "string";
+  public static final String STRING_ID = "string";
   
-  public final static String NUMBER_ID = "number";
+  public static final String NUMBER_ID = "number";
   
-  public final static String DEFAULT_ID = "default";
+  public static final String DEFAULT_ID = "default";
   
-  public final static String INVALID_TOKEN_ID = "error";
+  public static final String INVALID_TOKEN_ID = "error";
   
-  public final static String TASK_ID = "task";
+  public static final String TASK_ID = "task";
 }

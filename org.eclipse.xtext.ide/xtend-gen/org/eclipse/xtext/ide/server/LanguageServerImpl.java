@@ -1051,7 +1051,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
   }
   
-  private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  private static final Logger LOG = Logger.getLogger(LanguageServerImpl.class);
   
   @Pure
   public RequestManager getRequestManager() {

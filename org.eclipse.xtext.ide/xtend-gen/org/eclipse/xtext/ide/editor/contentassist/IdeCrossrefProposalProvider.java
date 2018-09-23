@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class IdeCrossrefProposalProvider {
-  private final static Logger LOG = Logger.getLogger(IdeCrossrefProposalProvider.class);
+  private static final Logger LOG = Logger.getLogger(IdeCrossrefProposalProvider.class);
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject

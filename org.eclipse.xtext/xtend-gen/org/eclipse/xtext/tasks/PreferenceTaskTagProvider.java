@@ -37,13 +37,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class PreferenceTaskTagProvider implements ITaskTagProvider {
-  public final static PreferenceKey TAGS_KEY = new PreferenceKey("task.tags", "TODO,FIXME,XXX");
+  public static final PreferenceKey TAGS_KEY = new PreferenceKey("task.tags", "TODO,FIXME,XXX");
   
-  public final static PreferenceKey PRIORITIES_KEY = new PreferenceKey("task.priorities", "NORMAL,HIGH,NORMAL");
+  public static final PreferenceKey PRIORITIES_KEY = new PreferenceKey("task.priorities", "NORMAL,HIGH,NORMAL");
   
-  public final static PreferenceKey CASE_SENSITIVE_KEY = new PreferenceKey("task.caseSensitive", "true");
+  public static final PreferenceKey CASE_SENSITIVE_KEY = new PreferenceKey("task.caseSensitive", "true");
   
-  public final static List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(CollectionLiterals.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY, PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
+  public static final List<PreferenceKey> KEYS = Collections.<PreferenceKey>unmodifiableList(CollectionLiterals.<PreferenceKey>newArrayList(PreferenceTaskTagProvider.TAGS_KEY, PreferenceTaskTagProvider.PRIORITIES_KEY, PreferenceTaskTagProvider.CASE_SENSITIVE_KEY));
   
   public static List<TaskTag> parseTags(final String names, final String priorities) {
     final Splitter splitter = Splitter.on(",").omitEmptyStrings().trimResults();

@@ -1085,7 +1085,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(EMFGeneratorFragment2.class);
+  private static final Logger LOG = Logger.getLogger(EMFGeneratorFragment2.class);
   
   public void setBasePackage(final String basePackage) {
     this.basePackage = basePackage;

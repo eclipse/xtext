@@ -48,9 +48,9 @@ public class SerializerPerformanceTest {
   @Rule
   public final Timeout timeout = new Timeout(5000, TimeUnit.MILLISECONDS);
   
-  private final static int numberOfElements = 1000;
+  private static final int numberOfElements = 1000;
   
-  private final static int editEvery = 100;
+  private static final int editEvery = 100;
   
   private Model model;
   

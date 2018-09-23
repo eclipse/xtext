@@ -51,7 +51,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(ResourceStorageFacade.class);
+  private static final Logger LOG = Logger.getLogger(ResourceStorageFacade.class);
   
   @Inject
   private IContextualOutputConfigurationProvider outputConfigurationProvider;

@@ -331,5 +331,5 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     return GenModelUtil2.getGenFeature(feature, this.getLanguage().getResourceSet()).getName();
   }
   
-  private final static Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
+  private static final Logger LOG = Logger.getLogger(Formatter2Fragment2.class);
 }

@@ -203,7 +203,7 @@ public class TracedAccessorsProcessor extends AbstractClassProcessor {
     return _xblockexpression;
   }
   
-  private final static Set<String> TYPES_WITH_GOOD_TO_STRING = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("string", "boolean", "int", "long", "integer"));
+  private static final Set<String> TYPES_WITH_GOOD_TO_STRING = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("string", "boolean", "int", "long", "integer"));
   
   public boolean isSupportedGetter(final ResolvedMethod it) {
     boolean _isEmpty = IterableExtensions.isEmpty(it.getDeclaration().getParameters());

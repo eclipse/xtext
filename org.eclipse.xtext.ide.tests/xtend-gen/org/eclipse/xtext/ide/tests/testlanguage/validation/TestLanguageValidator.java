@@ -25,9 +25,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class TestLanguageValidator extends AbstractTestLanguageValidator {
-  public final static String INVALID_NAME = "invalidName";
+  public static final String INVALID_NAME = "invalidName";
   
-  public final static String UNSORTED_MEMBERS = "unsorted_members";
+  public static final String UNSORTED_MEMBERS = "unsorted_members";
   
   @Check
   public void checkGreetingStartsWithCapital(final TypeDeclaration type) {

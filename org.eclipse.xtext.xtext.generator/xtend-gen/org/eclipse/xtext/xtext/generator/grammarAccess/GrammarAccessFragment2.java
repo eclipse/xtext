@@ -1070,7 +1070,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
   
-  private final static Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
+  private static final Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
   
   public void setXmlVersion(final String xmlVersion) {
     this.xmlVersion = xmlVersion;

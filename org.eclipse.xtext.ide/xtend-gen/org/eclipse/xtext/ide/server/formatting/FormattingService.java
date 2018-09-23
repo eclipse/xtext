@@ -49,7 +49,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class FormattingService {
   private static class OverrideChecker {
-    private final static Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>();
+    private static final Map<Class<?>, Boolean> CLASSES_WITH_OVERRIDES = new ConcurrentHashMap<Class<?>, Boolean>();
     
     public static boolean hasFormatOverride(final Class<? extends FormattingService> formattingServiceClass) {
       Boolean result = FormattingService.OverrideChecker.CLASSES_WITH_OVERRIDES.get(formattingServiceClass);

@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class FragmentFakingEcoreResource extends XMIResourceImpl {
   @FinalFieldsConstructor
   public static class FactoryImpl extends EcoreResourceFactoryImpl {
-    public final static String ECORE_SUFFIX = "ecore";
+    public static final String ECORE_SUFFIX = "ecore";
     
     private final Wrapper<Boolean> isSaving;
     

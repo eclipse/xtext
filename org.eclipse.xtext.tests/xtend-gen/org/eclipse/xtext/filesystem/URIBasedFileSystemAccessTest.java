@@ -41,9 +41,9 @@ import org.junit.runner.RunWith;
 @InjectWith(XtextInjectorProvider.class)
 @SuppressWarnings("all")
 public class URIBasedFileSystemAccessTest {
-  private final static String MISSING_RESOURCE_NAME = "someMissingResource";
+  private static final String MISSING_RESOURCE_NAME = "someMissingResource";
   
-  private final static String EXISTING_RESOURCE_NAME = "someExistingResource";
+  private static final String EXISTING_RESOURCE_NAME = "someExistingResource";
   
   @Inject
   private URIBasedFileSystemAccess fsa;

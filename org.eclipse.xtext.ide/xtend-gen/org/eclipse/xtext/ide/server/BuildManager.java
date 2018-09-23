@@ -110,7 +110,7 @@ public class BuildManager {
     public abstract List<IResourceDescription.Delta> build(final CancelIndicator cancelIndicator);
   }
   
-  public final static String CYCLIC_PROJECT_DEPENDENCIES = (BuildManager.class.getCanonicalName() + ".cyclicProjectDependencies");
+  public static final String CYCLIC_PROJECT_DEPENDENCIES = (BuildManager.class.getCanonicalName() + ".cyclicProjectDependencies");
   
   @Accessors(AccessorType.PUBLIC_SETTER)
   private WorkspaceManager workspaceManager;

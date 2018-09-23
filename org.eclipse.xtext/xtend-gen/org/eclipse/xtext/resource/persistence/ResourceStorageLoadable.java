@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ResourceStorageLoadable {
-  private final static Logger LOG = Logger.getLogger(ResourceStorageLoadable.class);
+  private static final Logger LOG = Logger.getLogger(ResourceStorageLoadable.class);
   
   private final InputStream in;
   

@@ -392,7 +392,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     throw new IllegalStateException(msg);
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
+  private static final Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
   
   @Pure
   public Grammar getGrammar() {

@@ -58,17 +58,17 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class SignatureHelpServiceImpl implements ISignatureHelpService {
-  private final static String OPENING_CHAR = "(";
+  private static final String OPENING_CHAR = "(";
   
-  private final static String CLOSING_CHAR = ")";
+  private static final String CLOSING_CHAR = ")";
   
-  private final static String SEPARATOR_CHAR = ",";
+  private static final String SEPARATOR_CHAR = ",";
   
   /**
    * Shared comparator singleton to compare {@link SignatureInformation signature information} instances
    * based on the number of parameters first, then the parameter labels lexicographically.
    */
-  private final static Comparator<SignatureInformation> SIGNATURE_INFO_ORDERING = ((Comparator<SignatureInformation>) (SignatureInformation left, SignatureInformation right) -> {
+  private static final Comparator<SignatureInformation> SIGNATURE_INFO_ORDERING = ((Comparator<SignatureInformation>) (SignatureInformation left, SignatureInformation right) -> {
     int _size = left.getParameters().size();
     int _size_1 = right.getParameters().size();
     int result = (_size - _size_1);

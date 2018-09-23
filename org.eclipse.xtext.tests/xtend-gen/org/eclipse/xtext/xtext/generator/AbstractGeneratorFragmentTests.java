@@ -122,7 +122,7 @@ public abstract class AbstractGeneratorFragmentTests extends AbstractXtextTests 
     protected void saveResource(final Resource resource) {
     }
     
-    private final static Logger LOG = Logger.getLogger(FakeEMFGeneratorFragment2.class);
+    private static final Logger LOG = Logger.getLogger(FakeEMFGeneratorFragment2.class);
   }
   
   private GlobalRegistries.GlobalStateMemento globalStateMemento;

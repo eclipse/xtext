@@ -71,7 +71,7 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
     return IterableExtensions.map(IterableExtensions.filter(this.projectConfig.getEnabledProjects(), _function), _function_1);
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextGeneratorStandaloneSetup.class);
+  private static final Logger LOG = Logger.getLogger(XtextGeneratorStandaloneSetup.class);
   
   @Pure
   public boolean isScanClasspath() {
