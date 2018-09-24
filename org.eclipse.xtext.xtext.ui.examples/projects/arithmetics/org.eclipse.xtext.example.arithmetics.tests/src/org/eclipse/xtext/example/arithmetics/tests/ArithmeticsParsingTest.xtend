@@ -22,7 +22,7 @@ class ArithmeticsParsingTest{
 
 	@Inject
 	extension ParseHelper<Module> parseHelper
-	
+
 	@Inject
 	extension ValidationTestHelper validationTestHelper
 

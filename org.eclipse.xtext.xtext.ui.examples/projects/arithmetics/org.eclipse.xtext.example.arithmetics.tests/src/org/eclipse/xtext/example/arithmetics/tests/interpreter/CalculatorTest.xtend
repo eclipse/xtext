@@ -23,13 +23,13 @@ import static org.junit.Assert.*
 @RunWith(XtextRunner)
 @InjectWith(ArithmeticsInjectorProvider)
 class CalculatorTest {
-	
+
 	@Inject
 	ParseHelper<Module> parseHelper
-	
+
 	@Inject
 	Calculator calculator
-	
+
 	@Test def void testSimple() throws Exception {
 		check(6, "1 + 2 + 3")
 		check(0, "1 + 2 - 3")
@@ -37,7 +37,7 @@ class CalculatorTest {
 		check(-4, "1 - 2 - 3")
 		check(1.5, "1 / 2 * 3")
 	}
-	
+
 	@Test def void testFunction() {
 		check(12.0, '''
 			multiply(2,multiply(2, 3));

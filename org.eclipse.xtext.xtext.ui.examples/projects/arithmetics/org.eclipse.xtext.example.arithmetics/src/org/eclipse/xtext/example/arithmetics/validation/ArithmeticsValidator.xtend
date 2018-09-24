@@ -21,7 +21,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import static org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.Literals.*
 
 /**
- * Custom validation rules. 
+ * Custom validation rules.
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
@@ -35,13 +35,13 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 		if (bigDecimal.doubleValue()==0.0) 
 			error("Division by zero detected.", DIV__RIGHT)
 	}
-	
+
 	public static val String NORMALIZABLE = "normalizable-expression"
 
 	@Check
 	def void checkNormalizable(Expression expr) {
 		// ignore literals
-		if (expr instanceof NumberLiteral || expr instanceof FunctionCall) 
+		if (expr instanceof NumberLiteral || expr instanceof FunctionCall)
 			return;
 		// ignore evaluations
 		if (EcoreUtil2.getContainerOfType(expr, Evaluation)!==null)
@@ -50,13 +50,13 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 		val contents = expr.eAllContents
 		while(contents.hasNext()) {
 			val next = contents.next()
-			if (next instanceof FunctionCall) 
+			if (next instanceof FunctionCall)
 				return
 		}
 		val decimal = calculator.evaluate(expr)
 		if (decimal.toString().length()<=8) {
 			warning(
-					"Expression could be normalized to constant '"+decimal+"'", 
+					"Expression could be normalized to constant '"+decimal+"'",
 					null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					NORMALIZABLE,

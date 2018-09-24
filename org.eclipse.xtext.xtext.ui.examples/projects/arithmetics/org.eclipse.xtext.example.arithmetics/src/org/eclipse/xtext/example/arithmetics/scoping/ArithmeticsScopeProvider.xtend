@@ -10,13 +10,13 @@ package org.eclipse.xtext.example.arithmetics.scoping
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider
-import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage
 
 /**
  * This class contains custom scoping description.
@@ -39,7 +39,7 @@ class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScopeProvide
 		result = getModuleScope(context, reference, module, result)
 		return getDefinitionScope(context, reference, result)
 	}
-	
+
 	def getModuleScope(EObject context, EReference reference, Module module, IScope parent) {
 		val allDefinitions = module.statements.filter(Definition)
 		if (context instanceof FunctionCall) {
@@ -48,7 +48,7 @@ class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScopeProvide
 			return Scopes.scopeFor(allDefinitions, parent)
 		}
 	}
-	
+
 	def getDefinitionScope(EObject context, EReference reference, IScope parent) {
 		val containingDef = EcoreUtil2.getContainerOfType(context, Definition)
 		if (containingDef === null) {
