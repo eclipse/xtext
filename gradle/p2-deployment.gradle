@@ -16,7 +16,7 @@ p2gen {
 	exclude 'org.eclipse.xtext.xbase.testdata'
 	
 	dependencies {
-		repositoryUrl 'http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.14.0'
+		repositoryUrl 'http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.15.0'
 		feature 'org.eclipse.xtext.sdk'
 	}
 	dependencies {
