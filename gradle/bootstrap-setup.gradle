@@ -23,8 +23,6 @@ configurations {
 					useVersion(versions.xtext_bootstrap)
 				if (requested.group == 'com.google.inject' && requested.name == 'guice')
 					useVersion(versions.guice)
-				if (requested.group == 'org.eclipse.jdt' && requested.name == 'org.eclipse.jdt.core')
-					useVersion(versions.jdtCore)
 			}
 		}
 		exclude group: 'asm'
