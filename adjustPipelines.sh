@@ -48,31 +48,6 @@ echo "JENKINS_URL=$JENKINS_URL"
 ./allDirectories | while read -r line
 do
 	directory=$(toDir $line)
-	upstream=$(echo $directory/gradle/upstream-repositories.gradle)
-	if [[ -e $upstream ]]
-	then
-		changeDir $directory
-		if isBranch
-		then
-			echo "Redirecting maven repositories in $upstream to $branchname"
-			dropDir
-			./allDirectories | while read -r repo
-			do
-				repository=$(toDir $repo)
-				if [[ $directory != $repository ]]
-				then
-					logicalname=$(name $repo)
-					if changeDir $repository
-					then
-						sed_inplace "s?jenkinsPipelineRepo('$logicalname','.*')?jenkinsPipelineRepo('$logicalname','$escapedBranch')?" $upstream
-						dropDir
-					fi
-				fi
-			done
-		else
-			dropDir
-		fi
-	fi
 	targets=$(echo $directory/releng/*.target)
 	if [[ -d $targets ]]
 	then
