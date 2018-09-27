@@ -209,7 +209,7 @@ class DocumentSymbolService implements IDocumentSymbolService {
 			deprecated = symbol.deprecated
 			location = new Location => [
 				it.uri = uri
-				range = symbol.range
+				range = symbol.selectionRange
 			]
 			containerName = containerNameProvider.apply(symbol)
 		]

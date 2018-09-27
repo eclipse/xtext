@@ -20,7 +20,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServerTest {
-  private final static Procedure1<? super InitializeParams> INITIALIZER = ((Procedure1<InitializeParams>) (InitializeParams it) -> {
+  private static final Procedure1<? super InitializeParams> INITIALIZER = ((Procedure1<InitializeParams>) (InitializeParams it) -> {
     ClientCapabilities _clientCapabilities = new ClientCapabilities();
     final Procedure1<ClientCapabilities> _function = (ClientCapabilities it_1) -> {
       TextDocumentClientCapabilities _textDocumentClientCapabilities = new TextDocumentClientCapabilities();
@@ -66,10 +66,10 @@ public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServ
       _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("range: [[0, 5] .. [0, 8]]");
+      _builder_1.append("range: [[0, 0] .. [2, 1]]");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("selectionRange: [[0, 0] .. [2, 1]]");
+      _builder_1.append("selectionRange: [[0, 5] .. [0, 8]]");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("details: ");
@@ -87,10 +87,10 @@ public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServ
       _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("            ");
-      _builder_1.append("range: [[1, 5] .. [1, 8]]");
+      _builder_1.append("range: [[1, 1] .. [1, 8]]");
       _builder_1.newLine();
       _builder_1.append("            ");
-      _builder_1.append("selectionRange: [[1, 1] .. [1, 8]]");
+      _builder_1.append("selectionRange: [[1, 5] .. [1, 8]]");
       _builder_1.newLine();
       _builder_1.append("            ");
       _builder_1.append("details: ");
@@ -139,10 +139,10 @@ public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServ
       _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("range: [[3, 5] .. [3, 8]]");
+      _builder_1.append("range: [[3, 0] .. [5, 1]]");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("selectionRange: [[3, 0] .. [5, 1]]");
+      _builder_1.append("selectionRange: [[3, 5] .. [3, 8]]");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("details: ");
@@ -160,10 +160,10 @@ public class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServ
       _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("            ");
-      _builder_1.append("range: [[4, 5] .. [4, 8]]");
+      _builder_1.append("range: [[4, 1] .. [4, 8]]");
       _builder_1.newLine();
       _builder_1.append("            ");
-      _builder_1.append("selectionRange: [[4, 1] .. [4, 8]]");
+      _builder_1.append("selectionRange: [[4, 5] .. [4, 8]]");
       _builder_1.newLine();
       _builder_1.append("            ");
       _builder_1.append("details: ");

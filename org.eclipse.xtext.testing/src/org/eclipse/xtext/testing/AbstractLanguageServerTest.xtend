@@ -266,7 +266,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	/**
 	 * @since 2.16
 	 */
-	protected def dispatch String toExpectation(DocumentSymbol it) '''
+	protected def dispatch String toExpectation(DocumentSymbol it) {
+		Assert.assertTrue('''selectionRange must be contained in the range: «it»''', range.contains(selectionRange))
+	'''
 		symbol "«name»" {
 		    kind: «kind.value»
 		    range: «range.toExpectation»
@@ -278,8 +280,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		    	«FOR child : children SEPARATOR'\n'»«child.toExpectation»«ENDFOR»
 		    ]
 		    «ENDIF»
-		}
-	'''
+		}'''
+	}
 
 	protected def dispatch String toExpectation(CompletionItem it) '''
 		«label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF textEdit !== null» -> «textEdit.toExpectation»«IF !additionalTextEdits.nullOrEmpty»   + «additionalTextEdits.map[toExpectation].join('   + ')»«ENDIF»«ELSEIF insertText !== null && insertText != label» -> «insertText»«ENDIF»
@@ -555,6 +557,40 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			val String actualSymbols = unwrappedSymbols.toExpectation
 			assertEquals(expectedSymbols, actualSymbols)
 		}
+	}
+
+	/**
+	 * {@code true} if the {@code smaller} range is inside or equal to the {@code bigger} range.
+	 * Otherwise, {@code false}.
+	 */
+	// `private` visibility because this should be in LSP4J: https://github.com/eclipse/lsp4j/issues/261
+	private static def boolean contains(Range bigger, Range smaller) {
+		return bigger.contains(smaller.start) && bigger.contains(smaller.end);
+	}
+
+	/**
+	 * {@code true} if the position is either inside or on the border of the range.
+	 * Otherwise, {@code false}.
+	 */
+	private static def boolean contains(Range range, Position position) {
+		return (range.start == position || range.start.isBefore(position))
+			&& (range.end == position || position.isBefore(range.end))
+	}
+
+	/**
+	 * {@code true} if {@left} is strictly before than {@code right}.
+	 * Otherwise, {@code false}.
+	 * <p>
+	 * If you want to allow equality, use {@link Position#equals}.
+	 */
+	private static def boolean isBefore(Position left, Position right) {
+		if (left.line < right.line) {
+			return true;
+		}
+		if (left.line > right.line) {
+			return false;
+		}
+		return left.character < right.character;
 	}
 
 	protected def void testSymbol((WorkspaceSymbolConfiguration)=>void configurator) {

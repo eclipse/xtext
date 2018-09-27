@@ -40,15 +40,15 @@ class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServerTest 
 			expectedSymbols = '''
 				symbol "Foo" {
 				    kind: 7
-				    range: [[0, 5] .. [0, 8]]
-				    selectionRange: [[0, 0] .. [2, 1]]
+				    range: [[0, 0] .. [2, 1]]
+				    selectionRange: [[0, 5] .. [0, 8]]
 				    details: 
 				    deprecated: false
 				    children: [
 				        symbol "Foo.bar" {
 				            kind: 7
-				            range: [[1, 5] .. [1, 8]]
-				            selectionRange: [[1, 1] .. [1, 8]]
+				            range: [[1, 1] .. [1, 8]]
+				            selectionRange: [[1, 5] .. [1, 8]]
 				            details: 
 				            deprecated: false
 				            children: [
@@ -65,15 +65,15 @@ class HierarchicalDocumentSymbolTest extends AbstractTestLangLanguageServerTest 
 				}
 				symbol "Bar" {
 				    kind: 7
-				    range: [[3, 5] .. [3, 8]]
-				    selectionRange: [[3, 0] .. [5, 1]]
+				    range: [[3, 0] .. [5, 1]]
+				    selectionRange: [[3, 5] .. [3, 8]]
 				    details: 
 				    deprecated: false
 				    children: [
 				        symbol "Bar.foo" {
 				            kind: 7
-				            range: [[4, 5] .. [4, 8]]
-				            selectionRange: [[4, 1] .. [4, 8]]
+				            range: [[4, 1] .. [4, 8]]
+				            selectionRange: [[4, 5] .. [4, 8]]
 				            details: 
 				            deprecated: false
 				        }

@@ -141,14 +141,14 @@ class DocumentSymbolMapper {
 		 * like comments.
 		 */
 		def Range getRange(EObject object) {
-			return object.newLocation?.range;
+			return object.newFullLocation?.range;
 		}
 
 		/**
 		 * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.
 		 */
 		def Range getSelectionRange(EObject object) {
-			return object.newFullLocation?.range;
+			return object.newLocation?.range;
 		}
 
 	}

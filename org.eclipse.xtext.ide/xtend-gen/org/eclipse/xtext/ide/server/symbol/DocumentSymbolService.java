@@ -229,7 +229,7 @@ public class DocumentSymbolService implements IDocumentSymbolService {
       Location _location = new Location();
       final Procedure1<Location> _function_1 = (Location it_1) -> {
         it_1.setUri(uri);
-        it_1.setRange(symbol.getRange());
+        it_1.setRange(symbol.getSelectionRange());
       };
       Location _doubleArrow = ObjectExtensions.<Location>operator_doubleArrow(_location, _function_1);
       it.setLocation(_doubleArrow);

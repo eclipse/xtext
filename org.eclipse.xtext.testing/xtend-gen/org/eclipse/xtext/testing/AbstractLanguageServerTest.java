@@ -518,68 +518,75 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
    * @since 2.16
    */
   protected String _toExpectation(final DocumentSymbol it) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("symbol \"");
-    String _name = it.getName();
-    _builder.append(_name);
-    _builder.append("\" {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("kind: ");
-    int _value = it.getKind().getValue();
-    _builder.append(_value, "    ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("range: ");
-    String _expectation = this.toExpectation(it.getRange());
-    _builder.append(_expectation, "    ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("selectionRange: ");
-    String _expectation_1 = this.toExpectation(it.getSelectionRange());
-    _builder.append(_expectation_1, "    ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("details: ");
-    String _detail = it.getDetail();
-    _builder.append(_detail, "    ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("deprecated: ");
-    Boolean _deprecated = it.getDeprecated();
-    _builder.append(_deprecated, "    ");
-    _builder.newLineIfNotEmpty();
+    String _xblockexpression = null;
     {
-      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(it.getChildren());
-      boolean _not = (!_isNullOrEmpty);
-      if (_not) {
-        _builder.append("    ");
-        _builder.append("children: [");
-        _builder.newLine();
-        _builder.append("    ");
-        _builder.append("\t");
-        {
-          List<DocumentSymbol> _children = it.getChildren();
-          boolean _hasElements = false;
-          for(final DocumentSymbol child : _children) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate("\n", "    \t");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("selectionRange must be contained in the range: ");
+      _builder.append(it);
+      Assert.assertTrue(_builder.toString(), AbstractLanguageServerTest.contains(it.getRange(), it.getSelectionRange()));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("symbol \"");
+      String _name = it.getName();
+      _builder_1.append(_name);
+      _builder_1.append("\" {");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("    ");
+      _builder_1.append("kind: ");
+      int _value = it.getKind().getValue();
+      _builder_1.append(_value, "    ");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("    ");
+      _builder_1.append("range: ");
+      String _expectation = this.toExpectation(it.getRange());
+      _builder_1.append(_expectation, "    ");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("    ");
+      _builder_1.append("selectionRange: ");
+      String _expectation_1 = this.toExpectation(it.getSelectionRange());
+      _builder_1.append(_expectation_1, "    ");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("    ");
+      _builder_1.append("details: ");
+      String _detail = it.getDetail();
+      _builder_1.append(_detail, "    ");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("    ");
+      _builder_1.append("deprecated: ");
+      Boolean _deprecated = it.getDeprecated();
+      _builder_1.append(_deprecated, "    ");
+      _builder_1.newLineIfNotEmpty();
+      {
+        boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(it.getChildren());
+        boolean _not = (!_isNullOrEmpty);
+        if (_not) {
+          _builder_1.append("    ");
+          _builder_1.append("children: [");
+          _builder_1.newLine();
+          _builder_1.append("    ");
+          _builder_1.append("\t");
+          {
+            List<DocumentSymbol> _children = it.getChildren();
+            boolean _hasElements = false;
+            for(final DocumentSymbol child : _children) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder_1.appendImmediate("\n", "    \t");
+              }
+              String _expectation_2 = this.toExpectation(child);
+              _builder_1.append(_expectation_2, "    \t");
             }
-            String _expectation_2 = this.toExpectation(child);
-            _builder.append(_expectation_2, "    \t");
           }
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("    ");
+          _builder_1.append("]");
+          _builder_1.newLine();
         }
-        _builder.newLineIfNotEmpty();
-        _builder.append("    ");
-        _builder.append("]");
-        _builder.newLine();
       }
+      _builder_1.append("}");
+      _xblockexpression = _builder_1.toString();
     }
-    _builder.append("}");
-    _builder.newLine();
-    return _builder.toString();
+    return _xblockexpression;
   }
   
   protected String _toExpectation(final CompletionItem it) {
@@ -1168,6 +1175,46 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  /**
+   * {@code true} if the {@code smaller} range is inside or equal to the {@code bigger} range.
+   * Otherwise, {@code false}.
+   */
+  private static boolean contains(final Range bigger, final Range smaller) {
+    return (AbstractLanguageServerTest.contains(bigger, smaller.getStart()) && AbstractLanguageServerTest.contains(bigger, smaller.getEnd()));
+  }
+  
+  /**
+   * {@code true} if the position is either inside or on the border of the range.
+   * Otherwise, {@code false}.
+   */
+  private static boolean contains(final Range range, final Position position) {
+    return ((Objects.equal(range.getStart(), position) || AbstractLanguageServerTest.isBefore(range.getStart(), position)) && (Objects.equal(range.getEnd(), position) || AbstractLanguageServerTest.isBefore(position, range.getEnd())));
+  }
+  
+  /**
+   * {@code true} if {@left} is strictly before than {@code right}.
+   * Otherwise, {@code false}.
+   * <p>
+   * If you want to allow equality, use {@link Position#equals}.
+   */
+  private static boolean isBefore(final Position left, final Position right) {
+    int _line = left.getLine();
+    int _line_1 = right.getLine();
+    boolean _lessThan = (_line < _line_1);
+    if (_lessThan) {
+      return true;
+    }
+    int _line_2 = left.getLine();
+    int _line_3 = right.getLine();
+    boolean _greaterThan = (_line_2 > _line_3);
+    if (_greaterThan) {
+      return false;
+    }
+    int _character = left.getCharacter();
+    int _character_1 = right.getCharacter();
+    return (_character < _character_1);
   }
   
   protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguration> configurator) {

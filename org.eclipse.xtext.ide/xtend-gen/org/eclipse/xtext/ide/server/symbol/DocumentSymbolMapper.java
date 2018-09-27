@@ -131,10 +131,10 @@ public class DocumentSymbolMapper {
      * like comments.
      */
     public Range getRange(final EObject object) {
-      Location _newLocation = this._documentExtensions.newLocation(object);
+      Location _newFullLocation = this._documentExtensions.newFullLocation(object);
       Range _range = null;
-      if (_newLocation!=null) {
-        _range=_newLocation.getRange();
+      if (_newFullLocation!=null) {
+        _range=_newFullLocation.getRange();
       }
       return _range;
     }
@@ -143,10 +143,10 @@ public class DocumentSymbolMapper {
      * The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.
      */
     public Range getSelectionRange(final EObject object) {
-      Location _newFullLocation = this._documentExtensions.newFullLocation(object);
+      Location _newLocation = this._documentExtensions.newLocation(object);
       Range _range = null;
-      if (_newFullLocation!=null) {
-        _range=_newFullLocation.getRange();
+      if (_newLocation!=null) {
+        _range=_newLocation.getRange();
       }
       return _range;
     }
