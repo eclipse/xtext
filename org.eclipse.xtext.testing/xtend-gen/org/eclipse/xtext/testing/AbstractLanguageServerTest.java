@@ -893,12 +893,18 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     Command _command = it.getCommand();
     _builder.append(_command);
     _builder.newLineIfNotEmpty();
-    _builder.append("codes : ");
-    final Function1<Diagnostic, String> _function = (Diagnostic it_1) -> {
-      return it_1.getCode();
-    };
-    String _join = IterableExtensions.join(ListExtensions.<Diagnostic, String>map(it.getDiagnostics(), _function), ",");
-    _builder.append(_join);
+    {
+      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(it.getDiagnostics());
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("codes : ");
+        final Function1<Diagnostic, String> _function = (Diagnostic it_1) -> {
+          return it_1.getCode();
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Diagnostic, String>map(it.getDiagnostics(), _function), ",");
+        _builder.append(_join);
+      }
+    }
     _builder.newLineIfNotEmpty();
     _builder.append("edit : ");
     String _expectation = this.toExpectation(it.getEdit());
@@ -918,12 +924,22 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final Procedure1<CodeActionParams> _function = (CodeActionParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
         it.setTextDocument(_textDocumentIdentifier);
+        Range _range = new Range();
+        final Procedure1<Range> _function_1 = (Range it_1) -> {
+          int _line = configuration.getLine();
+          int _column = configuration.getColumn();
+          Position _position = new Position(_line, _column);
+          it_1.setStart(_position);
+          it_1.setEnd(it_1.getStart());
+        };
+        Range _doubleArrow = ObjectExtensions.<Range>operator_doubleArrow(_range, _function_1);
+        it.setRange(_doubleArrow);
         CodeActionContext _codeActionContext = new CodeActionContext();
-        final Procedure1<CodeActionContext> _function_1 = (CodeActionContext it_1) -> {
+        final Procedure1<CodeActionContext> _function_2 = (CodeActionContext it_1) -> {
           it_1.setDiagnostics(this.getDiagnostics().get(filePath));
         };
-        CodeActionContext _doubleArrow = ObjectExtensions.<CodeActionContext>operator_doubleArrow(_codeActionContext, _function_1);
-        it.setContext(_doubleArrow);
+        CodeActionContext _doubleArrow_1 = ObjectExtensions.<CodeActionContext>operator_doubleArrow(_codeActionContext, _function_2);
+        it.setContext(_doubleArrow_1);
       };
       CodeActionParams _doubleArrow = ObjectExtensions.<CodeActionParams>operator_doubleArrow(_codeActionParams, _function);
       final CompletableFuture<List<Either<Command, CodeAction>>> codeLenses = this.languageServer.codeAction(_doubleArrow);
