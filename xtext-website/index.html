@@ -2,7 +2,17 @@
 layout: default
 title: Language Engineering Made Easy!
 ---
-<a href="https://github.com/eclipse/xtext"><img style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<a href="https://github.com/eclipse/xtext"><img id="fork-button" style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<script>
+(function forkButtonQuickFix() {
+  var move = function() {
+    document.querySelector('#fork-button').style.top = 
+      document.querySelector('.navbar-inner').offsetHeight + 'px'
+  }
+  document.addEventListener('DOMContentLoaded', move)
+  window.addEventListener('resize', move)
+}())
+</script>
 <!--Container-->
 <div id="header_wrapper">
   <div class="container image-slider">
