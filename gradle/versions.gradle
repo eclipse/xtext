@@ -5,10 +5,10 @@
 version = '2.16.0-SNAPSHOT'
 
 ext.versions = [
+	'xtext_bootstrap': '2.15.0',
 	'gradle_plugins': '0.1.0',
 	'xtext_gradle_plugin': '2.0.1',
 	'guava': '[14.0,22)',
 	'guice': '3.0',
-	'gwt': '2.8.0',
-	'jdtCore': '3.13.102',
+	'gwt': '2.8.0'
 ]
