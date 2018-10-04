@@ -5,7 +5,8 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.16.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.example.domainmodel.ui,
+Require-Bundle: org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.example.domainmodel.ui,
  org.eclipse.xtext.testing,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench;resolution:=optional,
