@@ -37,7 +37,7 @@ public class QuickfixTest extends AbstractQuickfixTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Capitalize name", "Capitalize name  of \'blog\'", _builder_1.toString());
+    AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Capitalize name", "Capitalize name of \'blog\'", _builder_1.toString());
     this.testQuickfixesOn(_builder, IssueCodes.INVALID_TYPE_NAME, _quickfix);
   }
   
