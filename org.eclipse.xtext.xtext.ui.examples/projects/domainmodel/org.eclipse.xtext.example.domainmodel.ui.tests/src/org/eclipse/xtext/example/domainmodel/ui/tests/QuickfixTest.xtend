@@ -27,7 +27,7 @@ class QuickfixTest extends AbstractQuickfixTest {
 		'''
 			entity blog {
 			}
-		'''.testQuickfixesOn(INVALID_TYPE_NAME, new Quickfix("Capitalize name", "Capitalize name  of 'blog'", '''
+		'''.testQuickfixesOn(INVALID_TYPE_NAME, new Quickfix("Capitalize name", "Capitalize name of 'blog'", '''
 			entity Blog {
 			}
 		'''))

@@ -26,7 +26,7 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
   @Fix(IssueCodes.INVALID_TYPE_NAME)
   public void fixTypeName(final Issue issue, final IssueResolutionAcceptor acceptor) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Capitalize name  of \'");
+    _builder.append("Capitalize name of \'");
     String _get = issue.getData()[0];
     _builder.append(_get);
     _builder.append("\'");

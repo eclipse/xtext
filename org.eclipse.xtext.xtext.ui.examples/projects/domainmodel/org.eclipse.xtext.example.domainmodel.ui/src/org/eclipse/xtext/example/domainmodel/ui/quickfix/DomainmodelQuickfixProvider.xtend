@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider
  */
 class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
 	@Fix(IssueCodes.INVALID_TYPE_NAME) def void fixTypeName(Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Capitalize name", '''Capitalize name  of '«»«issue.getData().get(0)»'«»''',
+		acceptor.accept(issue, "Capitalize name", '''Capitalize name of '«»«issue.getData().get(0)»'«»''',
 			"upcase.png", // exemplary textual modification 
 			[IModificationContext context|
 				var IXtextDocument xtextDocument = context.getXtextDocument()
