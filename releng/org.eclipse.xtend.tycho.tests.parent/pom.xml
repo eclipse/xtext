@@ -61,11 +61,13 @@
 				<configuration>
 					<dependency-resolution>
 						<extraRequirements>
+							<!--
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.equinox.ds</id>
 								<versionRange>1.0.0</versionRange>
 							</requirement>
+							-->
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.equinox.event</id>
