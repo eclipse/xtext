@@ -406,18 +406,18 @@
 			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="statemachine">
 		</viewer>
-		<contentTypeBinding 
-				contentTypeId="org.eclipse.xtext.example.fowlerdsl.Statemachine.contenttype"
-				contentViewerId="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentViewers"/>
+		<contentTypeBinding
+			contentTypeId="org.eclipse.xtext.example.fowlerdsl.Statemachine.contenttype"
+			contentViewerId="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentMergeViewers"
 			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="statemachine" label="Statemachine Compare">
 		</viewer>
-				<contentTypeBinding 
+		<contentTypeBinding
 			contentTypeId="org.eclipse.xtext.example.fowlerdsl.Statemachine.contenttype"
-			contentMergeViewerId="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentMergeViewers"/>
+			contentMergeViewerId="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="org.eclipse.xtext.example.fowlerdsl.Statemachine.editors.documentProviders"
