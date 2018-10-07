@@ -66,7 +66,7 @@ public class TypeChooser {
 		int result = dialog.open();
 		if(originalSelection != null)
 			activeXtextEditor.getSelectionProvider().setSelection(originalSelection);
-		if(result == Window.OK) 
+		if(result == Window.OK && dialog.getResult().length > 0) 
 			return (JvmDeclaredType) dialog.getResult()[0];
 		else 
 			return null;
