@@ -249,15 +249,6 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
-	<extension point="org.eclipse.ui.preferencePages">
-		<page
-			category="org.eclipse.xtext.example.fowlerdsl.Statemachine"
-			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="org.eclipse.xtext.example.fowlerdsl.Statemachine.validator.preferencePage"
-			name="Errors/Warnings">
-			<keywordReference id="org.eclipse.xtext.example.fowlerdsl.ui.keyword_Statemachine"/>
-		</page>
-	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
