@@ -137,6 +137,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -422,25 +423,37 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
     final Function0<BuildManager.Buildable> _function = () -> {
-      BuildManager.Buildable _xblockexpression = null;
-      {
-        final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
-        final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-        List<FileEvent> _changes = params.getChanges();
-        for (final FileEvent fileEvent : _changes) {
-          FileChangeType _type = fileEvent.getType();
-          boolean _tripleEquals = (_type == FileChangeType.Deleted);
-          if (_tripleEquals) {
-            URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
-            deletedFiles.add(_uri);
-          } else {
-            URI _uri_1 = this._uriExtensions.toUri(fileEvent.getUri());
-            dirtyFiles.add(_uri_1);
-          }
+      final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
+      final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
+      final Function1<FileEvent, Pair<URI, FileChangeType>> _function_1 = (FileEvent fileEvent) -> {
+        URI _uri = this._uriExtensions.toUri(fileEvent.getUri());
+        FileChangeType _type = fileEvent.getType();
+        return Pair.<URI, FileChangeType>of(_uri, _type);
+      };
+      final Function1<Pair<URI, FileChangeType>, Boolean> _function_2 = (Pair<URI, FileChangeType> it) -> {
+        boolean _isDocumentOpen = this.workspaceManager.isDocumentOpen(it.getKey());
+        return Boolean.valueOf((!_isDocumentOpen));
+      };
+      final Consumer<Pair<URI, FileChangeType>> _function_3 = (Pair<URI, FileChangeType> it) -> {
+        FileChangeType _value = it.getValue();
+        boolean _tripleEquals = (_value == FileChangeType.Deleted);
+        if (_tripleEquals) {
+          URI _key = it.getKey();
+          deletedFiles.add(_key);
+        } else {
+          URI _key_1 = it.getKey();
+          dirtyFiles.add(_key_1);
         }
-        _xblockexpression = this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
+      };
+      IterableExtensions.<Pair<URI, FileChangeType>>filter(ListExtensions.<FileEvent, Pair<URI, FileChangeType>>map(params.getChanges(), _function_1), _function_2).forEach(_function_3);
+      final BuildManager.Buildable _function_4 = (CancelIndicator it) -> {
+        return null;
+      };
+      BuildManager.Buildable buildable = _function_4;
+      if (((!deletedFiles.isEmpty()) || (!dirtyFiles.isEmpty()))) {
+        buildable = this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
       }
-      return _xblockexpression;
+      return buildable;
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);
