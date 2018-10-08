@@ -165,6 +165,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 
 	protected def InitializeResult initialize((InitializeParams)=>void initializer) {
+		initialize(initializer, true)
+	}
+	
+	protected def InitializeResult initialize((InitializeParams)=>void initializer, boolean callInitialized) {
 		val params = new InitializeParams => [
 			processId = 1
 			rootUri = root.toURI.normalize.toUriString
@@ -172,7 +176,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		initializer?.apply(params)
 		hierarchicalDocumentSymbolSupport = params.capabilities?.textDocument?.documentSymbol?.
 			hierarchicalDocumentSymbolSupport ?: false;
-		return languageServer.initialize(params).get
+		val result = languageServer.initialize(params).get
+		if(callInitialized)
+			languageServer.initialized(null)
+		return result
 	}
 
 	protected def void open(String fileUri, String model) {

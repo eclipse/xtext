@@ -75,6 +75,21 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
+  public void testPublishDiagnosticsAfterInitialized() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Test {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("NonExisting foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.writeFile("MyType1.testlang", _builder);
+    this.initialize(null, false);
+    Assert.assertTrue("Diagnostics produced before \'initialized\' was called", this.getDiagnostics().isEmpty());
+  }
+  
+  @Test
   public void testIncrementalBuildWithError() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("type Test {");

@@ -86,7 +86,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		this.issueAcceptor = issueAcceptor
 		refreshWorkspaceConfig(cancelIndicator)
 	}
-
+	
 	protected def void refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
 		workspaceConfig = workspaceConfigFactory.getWorkspaceConfig(baseDir)
 		val newProjects = newArrayList

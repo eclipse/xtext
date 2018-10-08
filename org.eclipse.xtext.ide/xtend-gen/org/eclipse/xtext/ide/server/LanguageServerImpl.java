@@ -61,6 +61,7 @@ import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.InitializedParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
@@ -193,6 +194,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   private InitializeParams params;
   
+  private CompletableFuture<InitializedParams> initialized = new CompletableFuture<InitializedParams>();
+  
   private boolean hasShutdownBeenCalled = false;
   
   @Inject
@@ -317,6 +320,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return result;
     };
     return this.requestManager.<Object, Object>runWrite(_function_1, _function_2).<InitializeResult>thenApply(_function_3);
+  }
+  
+  @Override
+  public void initialized(final InitializedParams params) {
+    this.initialized.complete(params);
   }
   
   @Deprecated
@@ -457,20 +465,23 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   private LanguageClient client;
   
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
-    PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
-    final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
-      it.setUri(this._uriExtensions.toUriString(uri));
-      final Function1<Issue, Boolean> _function_1 = (Issue it_1) -> {
-        Severity _severity = it_1.getSeverity();
-        return Boolean.valueOf((_severity != Severity.IGNORE));
+    final Consumer<InitializedParams> _function = (InitializedParams it) -> {
+      PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
+      final Procedure1<PublishDiagnosticsParams> _function_1 = (PublishDiagnosticsParams it_1) -> {
+        it_1.setUri(this._uriExtensions.toUriString(uri));
+        final Function1<Issue, Boolean> _function_2 = (Issue it_2) -> {
+          Severity _severity = it_2.getSeverity();
+          return Boolean.valueOf((_severity != Severity.IGNORE));
+        };
+        final Function1<Issue, Diagnostic> _function_3 = (Issue it_2) -> {
+          return this.toDiagnostic(it_2);
+        };
+        it_1.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_2), _function_3)));
       };
-      final Function1<Issue, Diagnostic> _function_2 = (Issue it_1) -> {
-        return this.toDiagnostic(it_1);
-      };
-      it.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_1), _function_2)));
+      final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function_1);
+      this.client.publishDiagnostics(diagnostics);
     };
-    final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
-    this.client.publishDiagnostics(diagnostics);
+    this.initialized.thenAccept(_function);
   }
   
   private Diagnostic toDiagnostic(final Issue issue) {
@@ -1096,7 +1107,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
   }
   
-  private static final Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
   
   @Pure
   public RequestManager getRequestManager() {

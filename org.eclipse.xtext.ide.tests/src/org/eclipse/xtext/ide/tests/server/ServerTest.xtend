@@ -52,6 +52,17 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     }
     
     @Test
+    def void testPublishDiagnosticsAfterInitialized() {
+        'MyType1.testlang'.writeFile( '''
+            type Test {
+                NonExisting foo
+            }
+        ''')
+    	initialize(null, false)
+    	assertTrue("Diagnostics produced before 'initialized' was called", diagnostics.empty)
+    }
+    
+    @Test
     def void testIncrementalBuildWithError() {
         'MyType1.testlang'.writeFile( '''
             type Test {
