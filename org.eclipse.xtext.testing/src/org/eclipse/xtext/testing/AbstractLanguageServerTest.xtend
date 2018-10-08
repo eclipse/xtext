@@ -401,7 +401,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		title : «title»
 		kind : «kind»
 		command : «command»
-		codes : «diagnostics.map[code].join(',')»
+		«IF !diagnostics.nullOrEmpty»codes : «diagnostics.map[code].join(',')»«ENDIF»
 		edit : «edit.toExpectation»
 	'''
 	
@@ -418,6 +418,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		val filePath = initializeContext(configuration).uri
 		val codeLenses = languageServer.codeAction(new CodeActionParams=>[
 			textDocument = new TextDocumentIdentifier(filePath)
+			range = new Range => [
+				start = new Position(configuration.line, configuration.column)
+				end = start
+			]
 			context = new CodeActionContext => [
 				diagnostics = this.diagnostics.get(filePath)
 			]
