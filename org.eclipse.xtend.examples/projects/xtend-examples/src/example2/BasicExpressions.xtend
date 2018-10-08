@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -59,7 +59,7 @@ class BasicExpressions {
 		assertEquals(3, j++)
 		assertEquals(4, j)
 		
-		// More operators in Xtend described here http://www.eclipse.org/xtend/documentation.html?operators#operators
+		// More operators in Xtend described here http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#operators
 	}
 	
 	@Test def void collections() {
