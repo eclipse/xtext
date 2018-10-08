@@ -325,7 +325,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         _elvis = Boolean.valueOf(false);
       }
       this.hierarchicalDocumentSymbolSupport = (_elvis).booleanValue();
-      return this.languageServer.initialize(params).get();
+      final InitializeResult result = this.languageServer.initialize(params).get();
+      this.languageServer.initialized(null);
+      return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

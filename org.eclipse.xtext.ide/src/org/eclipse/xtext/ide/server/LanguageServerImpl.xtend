@@ -97,6 +97,7 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 
 import static org.eclipse.xtext.diagnostics.Severity.*
+import org.eclipse.lsp4j.InitializedParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -114,6 +115,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
+	CompletableFuture<InitializedParams>  initialized = new CompletableFuture
 	
 	boolean hasShutdownBeenCalled = false;
 	
@@ -192,6 +194,12 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
 		], []).thenApply [result]
+	}
+	
+	override void initialized(InitializedParams params) {
+		requestManager.runWrite([
+			initialized.complete(params) return null
+		], [])
 	}
 	
 	@Deprecated
@@ -298,11 +306,13 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	LanguageClient client
 
 	private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
-		val diagnostics = new PublishDiagnosticsParams => [
-			it.uri = toUriString(uri)
-			it.diagnostics = issues.filter[severity !== IGNORE].map[toDiagnostic].toList
-		]
-		client.publishDiagnostics(diagnostics)
+		initialized.thenAccept([
+			val diagnostics = new PublishDiagnosticsParams => [
+				it.uri = toUriString(uri)
+				it.diagnostics = issues.filter[severity !== IGNORE].map[toDiagnostic].toList
+			]
+			client.publishDiagnostics(diagnostics)
+		])
 	}
 
 	private def Diagnostic toDiagnostic(Issue issue) {

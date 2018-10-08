@@ -172,7 +172,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		initializer?.apply(params)
 		hierarchicalDocumentSymbolSupport = params.capabilities?.textDocument?.documentSymbol?.
 			hierarchicalDocumentSymbolSupport ?: false;
-		return languageServer.initialize(params).get
+		val result = languageServer.initialize(params).get
+		languageServer.initialized(null)
+		return result
 	}
 
 	protected def void open(String fileUri, String model) {
