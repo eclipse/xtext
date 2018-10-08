@@ -57,18 +57,18 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	/**
-	  * Test that the expected quickfixes are offered on a given validation issue in a given DSL text.
-	  * 
-	  * @param it The initial DSL text.
-	  * @param issueCode The code of the validation issue to that the offered quickfixes are to test.
-	  * @param quickfixes The quickfixes that are expected to be offered on the given <code>issueCode</code>.
-	  * Each expected quickfix should be described by the following triple:
-	  * <ol>
-	  * 	<li>the quickfix label</li>
-	  * 	<li>the quickfix description</li>
-	  * 	<li>the DSL text after the quickfix application</li>
-	  * </ol>
-	  */
+	 * Test that the expected quickfixes are offered on a given validation issue in a given DSL text.
+	 *
+	 * @param it The initial DSL text.
+	 * @param issueCode The code of the validation issue to that the offered quickfixes are to test.
+	 * @param quickfixes The quickfixes that are expected to be offered on the given <code>issueCode</code>.
+	 * Each expected quickfix should be described by the following triple:
+	 * <ol>
+	 * 	<li>the quickfix label</li>
+	 * 	<li>the quickfix description</li>
+	 * 	<li>the DSL text after the quickfix application</li>
+	 * </ol>
+	 */
 	def void testQuickfixesOn(CharSequence it, String issueCode, Quickfix... quickfixes) {
 		// given
 		dslFile.
@@ -80,7 +80,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 
 	protected def IFile dslFile(CharSequence content) {
 		val file = IResourcesSetupUtil.createFile(projectName, fileName, fileExtension, content.toString)
-		
+
 		/*
 		 * TODO: find a better (with good performance) solution
 		 * to set the Xtext nature on the test project.
@@ -89,7 +89,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		if(!project.hasNature(XtextProjectHelper.NATURE_ID)) {
 			project.addNature(XtextProjectHelper.NATURE_ID)
 		}
-		
+
 		file
 	}
 
@@ -117,7 +117,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		val document = editor.document
 		val originalText = document.get
 		val issue = document.getValidationIssue(issueCode)
-		
+
 		val actualIssueResolutions = issue.getResolutions
 		assertEquals("The number of quickfixes does not match!", expected.size, actualIssueResolutions.size)
 		for (i : 0..< actualIssueResolutions.size) {
@@ -164,13 +164,13 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		override getXtextDocument(URI uri) {
 			doc
 		}
-		
+
 		def setDocument(IXtextDocument doc) {
 			this.doc = doc
-		}		
-		
+		}
+
 	}
-	
+
 	@Data
 	protected static class Quickfix {
 		String label
@@ -191,8 +191,8 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	protected def XtextResource getXtextResource(String model) {
-		val in = new StringInputStream(Strings.emptyIfNull(model)) 
-		val uri = URI.createURI("") // creating an in-memory EMF Resource 
+		val in = new StringInputStream(Strings.emptyIfNull(model))
+		val uri = URI.createURI("") // creating an in-memory EMF Resource
 		
 		val rs = injector.getInstance(XtextResourceSet)
 		rs.setClasspathURIContext(AbstractQuickfixTest)
