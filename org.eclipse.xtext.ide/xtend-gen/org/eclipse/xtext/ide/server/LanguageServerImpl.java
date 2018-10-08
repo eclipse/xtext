@@ -324,14 +324,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void initialized(final InitializedParams params) {
-    final Function0<Object> _function = () -> {
-      this.initialized.complete(params);
-      return null;
-    };
-    final Function2<CancelIndicator, Object, Object> _function_1 = (CancelIndicator $0, Object $1) -> {
-      return null;
-    };
-    this.requestManager.<Object, Object>runWrite(_function, _function_1);
+    this.initialized.complete(params);
   }
   
   @Deprecated

@@ -197,9 +197,7 @@ import org.eclipse.lsp4j.InitializedParams
 	}
 	
 	override void initialized(InitializedParams params) {
-		requestManager.runWrite([
-			initialized.complete(params) return null
-		], [])
+		initialized.complete(params)
 	}
 	
 	@Deprecated
