@@ -295,6 +295,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   }
   
   protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer) {
+    return this.initialize(initializer, true);
+  }
+  
+  protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer, final boolean callInitialized) {
     try {
       InitializeParams _initializeParams = new InitializeParams();
       final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
@@ -326,7 +330,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       }
       this.hierarchicalDocumentSymbolSupport = (_elvis).booleanValue();
       final InitializeResult result = this.languageServer.initialize(params).get();
-      this.languageServer.initialized(null);
+      if (callInitialized) {
+        this.languageServer.initialized(null);
+      }
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
