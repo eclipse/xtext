@@ -42,6 +42,7 @@ import org.eclipse.lsp4j.ExecuteCommandParams
 import org.eclipse.lsp4j.FileChangeType
 import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
+import org.eclipse.lsp4j.InitializedParams
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.PublishDiagnosticsParams
@@ -70,6 +71,7 @@ import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
@@ -97,7 +99,6 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 
 import static org.eclipse.xtext.diagnostics.Severity.*
-import org.eclipse.lsp4j.InitializedParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -277,15 +278,20 @@ import org.eclipse.lsp4j.InitializedParams
 		requestManager.runWrite([
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
-			for (fileEvent : params.changes) {
-				if (fileEvent.type === FileChangeType.Deleted) {
-					deletedFiles += toUri(fileEvent.uri)
+			params.changes.map[fileEvent|toUri(fileEvent.uri) -> fileEvent.type].filter [
+				!workspaceManager.isDocumentOpen(key)
+			].forEach [
+				if (value === FileChangeType.Deleted) {
+					deletedFiles += key
 				} else {
-					dirtyFiles += toUri(fileEvent.uri)
+					dirtyFiles += key
 				}
-			}
-			workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
-		], [cancelIndicator , buildable | 
+			]
+			var Buildable buildable = []
+			if (!deletedFiles.isEmpty || !dirtyFiles.isEmpty)
+				buildable = workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
+			return buildable
+		], [ cancelIndicator, buildable |
 			buildable.build(cancelIndicator)
 		])
 	}
