@@ -101,6 +101,7 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ICapabilitiesContributor;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
+import org.eclipse.xtext.ide.server.ILanguageServerShutdownAndExitHandler;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
@@ -191,13 +192,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Inject
   private SemanticHighlightingRegistry semanticHighlightingRegistry;
   
+  @Inject
+  private ILanguageServerShutdownAndExitHandler shutdownAndExitHandler;
+  
   private WorkspaceManager workspaceManager;
   
   private InitializeParams params;
   
   private CompletableFuture<InitializedParams> initialized = new CompletableFuture<InitializedParams>();
-  
-  private boolean hasShutdownBeenCalled = false;
   
   @Inject
   public void setWorkspaceManager(final WorkspaceManager manager) {
@@ -354,16 +356,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void exit() {
-    if (this.hasShutdownBeenCalled) {
-      System.exit(0);
-    } else {
-      System.exit(1);
-    }
+    this.shutdownAndExitHandler.exit();
   }
   
   @Override
   public CompletableFuture<Object> shutdown() {
-    this.hasShutdownBeenCalled = true;
+    this.shutdownAndExitHandler.shutdown();
     Object _object = new Object();
     return CompletableFuture.<Object>completedFuture(_object);
   }
