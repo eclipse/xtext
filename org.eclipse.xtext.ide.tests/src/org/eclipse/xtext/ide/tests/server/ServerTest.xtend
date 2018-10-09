@@ -100,7 +100,34 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
 		)
 		assertTrue(diagnostics.values.head.empty)
 	}
-    
+
+	@Test
+	def void testTwoFilesDeleteClose() {
+		// create two files with cross ref
+		val fileURI = 'Foo.testlang'.writeFile('')
+		initialize
+		val referencingFileURI = 'Bar.testlang'.virtualFile
+		referencingFileURI.open('''
+			type Bar {
+			    Foo foo
+			}
+		''')
+		assertFalse("Bar.testlang references missing type Foo from Foo.testlang: expect error",
+			diagnostics.get(referencingFileURI).empty)
+		fileURI.open('type Foo {}')
+		// no errors
+		assertTrue("Bar.testlang references type Foo from Foo.testlang: expect no error",
+			diagnostics.get(referencingFileURI).empty)
+
+		fileURI.deleteFile
+		languageServer.getWorkspaceService.didChangeWatchedFiles(
+			new DidChangeWatchedFilesParams(#[new FileEvent(fileURI, FileChangeType.Deleted)])
+		)
+		assertTrue("delete file on disk: expect no error", diagnostics.get(referencingFileURI).empty)
+		close(fileURI);
+		assertFalse("close deleted file: expect error", diagnostics.get(referencingFileURI).empty)
+	}
+	
     @Test
     def void testMissingInitialize() {
 	    	try {
@@ -114,5 +141,6 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
 			Assert.assertEquals(ResponseErrorCode.serverNotInitialized.value, (exception.cause as ResponseErrorException).responseError.code)
 		}
     }
-    
+
+
 }

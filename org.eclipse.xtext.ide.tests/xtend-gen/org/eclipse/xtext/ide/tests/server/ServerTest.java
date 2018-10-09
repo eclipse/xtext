@@ -142,6 +142,35 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
+  public void testTwoFilesDeleteClose() {
+    final String fileURI = this.writeFile("Foo.testlang", "");
+    this.initialize();
+    final String referencingFileURI = this.getVirtualFile("Bar.testlang");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Bar {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Foo foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.open(referencingFileURI, _builder.toString());
+    Assert.assertFalse("Bar.testlang references missing type Foo from Foo.testlang: expect error", 
+      this.getDiagnostics().get(referencingFileURI).isEmpty());
+    this.open(fileURI, "type Foo {}");
+    Assert.assertTrue("Bar.testlang references type Foo from Foo.testlang: expect no error", 
+      this.getDiagnostics().get(referencingFileURI).isEmpty());
+    this.deleteFile(fileURI);
+    WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
+    FileEvent _fileEvent = new FileEvent(fileURI, FileChangeType.Deleted);
+    DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams(Collections.<FileEvent>unmodifiableList(CollectionLiterals.<FileEvent>newArrayList(_fileEvent)));
+    _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParams);
+    Assert.assertTrue("delete file on disk: expect no error", this.getDiagnostics().get(referencingFileURI).isEmpty());
+    this.close(fileURI);
+    Assert.assertFalse("close deleted file: expect error", this.getDiagnostics().get(referencingFileURI).isEmpty());
+  }
+  
+  @Test
   public void testMissingInitialize() {
     try {
       try {
