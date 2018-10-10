@@ -73,7 +73,7 @@ public class SimpleAttributeResolver<K extends EObject, T> implements Function<K
 	}
 
 	public T getValue(final K object) {
-		return valueCache.get(object);
+		return object != null ? valueCache.get(object) : null;
 	}
 
 	public Iterable<K> getMatches(final Iterable<K> candidates, final T value) {

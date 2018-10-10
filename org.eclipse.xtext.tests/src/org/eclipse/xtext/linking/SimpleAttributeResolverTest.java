@@ -39,6 +39,11 @@ public class SimpleAttributeResolverTest extends Assert {
 		superClassResolver = SimpleAttributeResolver.newResolver(EList.class, "eSuperTypes");
 	}
 	
+	@Test public void testGetNullValue() {
+		String value = nameResolver.getValue(null);
+		assertNull(value);
+	}
+	
 	@Test public void testGetNameValue() {
 		EClass clazz = factory.createEClass();
 		clazz.setName("ClassName");
