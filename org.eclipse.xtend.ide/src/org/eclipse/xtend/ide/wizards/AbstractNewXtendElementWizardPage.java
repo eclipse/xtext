@@ -26,7 +26,6 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.CompilationUnit;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.jdt.internal.core.PackageFragment;
-import org.eclipse.jdt.internal.corext.codemanipulation.StubUtility;
 import org.eclipse.jdt.internal.ui.dialogs.StatusInfo;
 import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -90,7 +89,7 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 		
 		String typeContent = getTypeContent(indentation, lineSeparator);
 		String packageDeclaration = getPackageDeclaration(lineSeparator);
-		return StubUtility.getCompilationUnitContent(compilationUnit, packageDeclaration, fileComment, typeComment, typeContent, lineSeparator);
+		return StubUtilityProxy.getCompilationUnitContent(compilationUnit, packageDeclaration, fileComment, typeComment, typeContent, lineSeparator);
 	}
 
 	protected abstract String getPackageDeclaration(String lineSeparator);
