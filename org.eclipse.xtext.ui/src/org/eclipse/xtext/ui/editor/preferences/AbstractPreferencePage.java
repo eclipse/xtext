@@ -296,7 +296,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			editor.setEnabled(enabled, parent);
 		}
 		Button defaultsButton = getDefaultsButton();
-		if (defaultsButton != null) {
+		if (defaultsButton != null && !defaultsButton.isDisposed()) {
 			defaultsButton.setEnabled(enabled);
 		}
 	}
