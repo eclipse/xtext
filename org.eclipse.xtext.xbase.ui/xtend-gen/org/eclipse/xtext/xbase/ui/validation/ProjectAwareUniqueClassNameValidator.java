@@ -74,7 +74,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   /**
    * Context key for output configurations.
    */
-  private final static String OUTPUT_CONFIGS = "ProjectAwareUniqueClassNameValidator.outputConfigs";
+  private static final String OUTPUT_CONFIGS = "ProjectAwareUniqueClassNameValidator.outputConfigs";
   
   @Inject
   private IJavaProjectProvider javaProjectProvider;

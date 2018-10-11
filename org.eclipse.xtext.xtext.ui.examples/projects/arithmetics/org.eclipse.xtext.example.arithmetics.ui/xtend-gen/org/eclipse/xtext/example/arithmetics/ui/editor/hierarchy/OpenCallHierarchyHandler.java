@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class OpenCallHierarchyHandler extends AbstractOpenHierarchyHandler {
-  private final static String HIERARCHY_VIEW_PART_ID = "org.eclipse.xtext.example.arithmetics.ui.ArithmeticsCallHierarchy";
+  private static final String HIERARCHY_VIEW_PART_ID = "org.eclipse.xtext.example.arithmetics.ui.ArithmeticsCallHierarchy";
   
   @Inject
   @Extension

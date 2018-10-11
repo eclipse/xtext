@@ -30,9 +30,9 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class DeclarativeQuickfixProviderTest extends Assert {
-  private final static String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
+  private static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
   
-  private final static String DUMMY_CODE2 = "DeclarativeQuickfixProviderTest.DummyCode2";
+  private static final String DUMMY_CODE2 = "DeclarativeQuickfixProviderTest.DummyCode2";
   
   @Test
   public void testHasResolutions() throws Exception {

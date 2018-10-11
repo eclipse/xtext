@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 public class ResourceRelocationStrategyRegistry {
   private static Logger LOG = Logger.getLogger(ResourceRelocationStrategyRegistry.class);
   
-  private final static String EXTENSION_POINT_ID = "org.eclipse.xtext.ui.resourceRelocationStrategy";
+  private static final String EXTENSION_POINT_ID = "org.eclipse.xtext.ui.resourceRelocationStrategy";
   
   private List<IResourceRelocationStrategy> strategies;
   

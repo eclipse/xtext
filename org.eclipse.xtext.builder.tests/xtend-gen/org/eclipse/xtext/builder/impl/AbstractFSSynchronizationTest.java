@@ -32,7 +32,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantTest {
-  private final static String PROJECT_NAME = "myProject";
+  private static final String PROJECT_NAME = "myProject";
   
   private IProject project;
   

@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class JavaBuilderState {
-  private final static Logger LOG = Logger.getLogger(JavaBuilderState.class);
+  private static final Logger LOG = Logger.getLogger(JavaBuilderState.class);
   
   private final State state;
   

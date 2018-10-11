@@ -61,7 +61,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class DefaultLinkedPositionGroupCalculator2 implements ILinkedPositionGroupCalculator {
-  private final static Logger LOG = Logger.getLogger(DefaultLinkedPositionGroupCalculator2.class);
+  private static final Logger LOG = Logger.getLogger(DefaultLinkedPositionGroupCalculator2.class);
   
   @Inject
   private ProjectUtil projectUtil;

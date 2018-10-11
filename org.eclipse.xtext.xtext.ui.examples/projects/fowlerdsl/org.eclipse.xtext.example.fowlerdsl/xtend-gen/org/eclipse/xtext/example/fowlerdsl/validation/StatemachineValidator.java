@@ -14,7 +14,7 @@ import org.eclipse.xtext.validation.Check;
  */
 @SuppressWarnings("all")
 public class StatemachineValidator extends AbstractStatemachineValidator {
-  public final static String INVALID_NAME = "invalidName";
+  public static final String INVALID_NAME = "invalidName";
   
   @Check
   public void checkStateNameStartsWithLowerCase(final org.eclipse.xtext.example.fowlerdsl.statemachine.State state) {

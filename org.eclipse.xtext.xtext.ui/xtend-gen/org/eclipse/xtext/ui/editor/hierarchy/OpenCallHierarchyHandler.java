@@ -24,7 +24,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  */
 @SuppressWarnings("all")
 public class OpenCallHierarchyHandler extends AbstractOpenHierarchyHandler {
-  public final static String HIERARCHY_VIEW_PART_ID = "org.eclipse.xtext.ui.XtextCallHierarchy";
+  public static final String HIERARCHY_VIEW_PART_ID = "org.eclipse.xtext.ui.XtextCallHierarchy";
   
   @Inject
   @Extension
