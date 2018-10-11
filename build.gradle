@@ -14,6 +14,10 @@ buildscript {
 	}
 }
 
+plugins {
+  id 'org.ajoberstar.grgit' version '2.2.0'
+}
+
 apply from: "${rootDir}/gradle/versions.gradle"
 apply from: "${rootDir}/gradle/bootstrap-setup.gradle"
 apply from: "${rootDir}/gradle/p2-deployment.gradle"
