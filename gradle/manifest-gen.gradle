@@ -22,7 +22,6 @@ task genManifest(type: Copy) {
 	from "META-INF/MANIFEST.MF"
 	into "$buildDir/tmp/genManifest/"
 	doLast {
-		println("genManifest")
 		def f = manifestFile
 		def modifiedText = f.text.replace(baseVersion + '.qualifier', qualifiedVersion)
 		def writer = new PrintWriter(f)
