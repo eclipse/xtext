@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 @Beta
 @SuppressWarnings("all")
 public abstract class TemplateProcessor extends AbstractClassProcessor {
-  private final static Object LOCK = TemplateProcessor.class;
+  private static final Object LOCK = TemplateProcessor.class;
   
   private Map<Path, String> propertyContentMap;
   

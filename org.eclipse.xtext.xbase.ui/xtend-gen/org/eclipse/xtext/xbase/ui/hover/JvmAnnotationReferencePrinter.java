@@ -46,7 +46,7 @@ import org.eclipse.xtext.xbase.ui.hover.HoverLinkHelper;
  */
 @SuppressWarnings("all")
 public class JvmAnnotationReferencePrinter {
-  private final static Logger LOG = Logger.getLogger(JvmAnnotationReferencePrinter.class);
+  private static final Logger LOG = Logger.getLogger(JvmAnnotationReferencePrinter.class);
   
   public String toHtmlString(final JvmAnnotationReference reference) {
     String _xtrycatchfinallyexpression = null;

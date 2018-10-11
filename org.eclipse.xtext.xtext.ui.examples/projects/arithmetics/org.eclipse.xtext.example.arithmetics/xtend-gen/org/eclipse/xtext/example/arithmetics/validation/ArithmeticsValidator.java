@@ -43,7 +43,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
     }
   }
   
-  public final static String NORMALIZABLE = "normalizable-expression";
+  public static final String NORMALIZABLE = "normalizable-expression";
   
   @Check
   public void checkNormalizable(final Expression expr) {

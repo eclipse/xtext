@@ -29,7 +29,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  */
 @SuppressWarnings("all")
 public class TaskMarkerContributor implements IMarkerContributor {
-  private final static Logger log = Logger.getLogger(TaskMarkerContributor.class);
+  private static final Logger log = Logger.getLogger(TaskMarkerContributor.class);
   
   @Inject
   private TaskMarkerCreator markerCreator;

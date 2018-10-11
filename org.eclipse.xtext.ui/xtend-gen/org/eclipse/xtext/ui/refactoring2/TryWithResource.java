@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
  */
 @SuppressWarnings("all")
 public class TryWithResource {
-  private final static Logger LOG = Logger.getLogger(TryWithResource.class);
+  private static final Logger LOG = Logger.getLogger(TryWithResource.class);
   
   public static <T extends Object> T tryWith(final Closeable closeable, final Function0<? extends T> action) {
     T _xtrycatchfinallyexpression = null;
