@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
@@ -37,7 +39,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Exceptions;
-import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -247,8 +248,7 @@ public class CompilationTestHelper {
 	 */
 	@SuppressWarnings("unchecked")
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
-		XtextResourceSet result = resourceSetProvider.get();
-		result.setClasspathURIContext(classpathUriContext);
+		XtextResourceSet result = newResourceSetWithUTF8Encoding();
 		FileProjectConfig projectConfig = new FileProjectConfig(new File(workspaceRoot,PROJECT_NAME), PROJECT_NAME);
 		projectConfig.addSourceFolder("src");
 		ProjectConfigAdapter.install(result, projectConfig);
@@ -257,8 +257,15 @@ public class CompilationTestHelper {
 			Resource resource = result.createResource(uri);
 			if (resource == null)
 				throw new IllegalStateException("Couldn't create resource for URI "+uri+". Resource.Factory not registered?");
-			resource.load(newHashMap());
+			resource.load(result.getLoadOptions());
 		}
+		return result;
+	}
+	
+	private XtextResourceSet newResourceSetWithUTF8Encoding() {
+		XtextResourceSet result = resourceSetProvider.get();
+		result.setClasspathURIContext(classpathUriContext);
+		result.getLoadOptions().put(XtextResource.OPTION_ENCODING, StandardCharsets.UTF_8.name());
 		return result;
 	}
 	
@@ -275,8 +282,17 @@ public class CompilationTestHelper {
 			mkDir(fullPath.getParentFile());
 		}
 		URI uri = URI.createFileURI(fullPath.getAbsolutePath());
-		Files.writeStringIntoFile(uri.toFileString(), contents.toString());
+		writeFileWithUTF8(uri.toFileString(), contents.toString());
 		return uri;
+	}
+	
+	private void writeFileWithUTF8(String filename, String content) {
+		try {
+			final File file = new File(filename);
+			com.google.common.io.Files.write(content.getBytes(StandardCharsets.UTF_8), file);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
 	}
 	
 	private void mkDir(File file) {
