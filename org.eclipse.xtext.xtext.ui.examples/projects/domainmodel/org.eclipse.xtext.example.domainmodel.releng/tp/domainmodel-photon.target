@@ -26,7 +26,7 @@
       <unit id="com.google.inject" version="3.0.0.v201605172100"/>
       <unit id="org.apache.commons.cli" version="1.2.0.v201404270220"/>
       <unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
-      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-09"/>
+      <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-12"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.draw2d.feature.group" version="3.10.100.201606061308"/>

@@ -105,7 +105,7 @@
 		<unit id="org.opentest4j" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="6.2.1.v20180823-1831"/>
 		<unit id="org.objectweb.asm.tree" version="6.2.1.v20180823-1831"/>
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-09"/>
+		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-12"/>
 	</location>
 </locations>
 </target>
