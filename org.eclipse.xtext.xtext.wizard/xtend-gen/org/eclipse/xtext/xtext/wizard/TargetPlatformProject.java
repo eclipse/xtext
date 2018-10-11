@@ -171,25 +171,25 @@ public class TargetPlatformProject extends ProjectDescriptor {
       boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
       if (_equals) {
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.1.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.3.1.v20181005-1442\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.opentest4j\" version=\"1.0.0.v20180327-1502\"/>");
+        _builder.append("<unit id=\"org.opentest4j\" version=\"1.1.1.v20181005-1442\"/>");
         _builder.newLine();
       }
     }
@@ -200,7 +200,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"6.2.1.v20180823-1831\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-09\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-12\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
