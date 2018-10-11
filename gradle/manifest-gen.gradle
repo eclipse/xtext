@@ -15,35 +15,46 @@ def qualifiedVersion = baseVersion + '.v' + buildTime
 //------------------------------------------------------
 // Copy the existing manifest and insert the qualifier
 
-def manifestFile = "$buildDir/tmp/jar/MANIFEST.MF"
+File manifestFile = project.file("$buildDir/tmp/genManifest/MANIFEST.MF")
 
 task genManifest(type: Copy) {
-    from "META-INF/MANIFEST.MF"
-    into "$buildDir/tmp/jar/"
-    doLast {
-    	def f = new File(manifestFile)
-    	def modifiedText = f.text.replace(baseVersion + '.qualifier', qualifiedVersion)
-    	def writer = new PrintWriter(f)
-    	writer.print(modifiedText)
-    	writer.close()
-    }
+	inputs.property('qualifiedVersion', qualifiedVersion)
+	from "META-INF/MANIFEST.MF"
+	into "$buildDir/tmp/genManifest/"
+	doLast {
+		def f = manifestFile
+		def modifiedText = f.text.replace(baseVersion + '.qualifier', qualifiedVersion)
+		def writer = new PrintWriter(f)
+		writer.print(modifiedText)
+		writer.close()
+	}
+}
+
+task configureManifest {
+	dependsOn genManifest
+	doLast {
+		if (manifestFile.isFile()) {
+			jar.manifest {
+				from manifestFile
+			}
+		}
+	}
 }
 
 jar {
-	dependsOn genManifest
-	inputs.file(manifestFile)
-	manifest {
-		from manifestFile
-	}
+	dependsOn configureManifest, genManifest
 }
 
 //------------------------------------------------------
 // Generate a manifest for the source bundle
 
-def sourcesManifestFile = "$buildDir/tmp/sourcesJar/MANIFEST.MF"
+def sourcesManifestFile = "$buildDir/tmp/genSourcesManifest/MANIFEST.MF"
 
 task genSourcesManifest {
 	outputs.file(sourcesManifestFile)
+	inputs.property('qualifiedVersion', qualifiedVersion)
+	inputs.property('projectName', project.name)
+	inputs.property('projectTitle', project.findProperty('title')).optional(true)
 	doLast {
 		def f = new File(sourcesManifestFile)
 		f.parentFile.mkdirs()
@@ -64,7 +75,6 @@ task genSourcesManifest {
 
 sourcesJar {
 	dependsOn genSourcesManifest
-	inputs.file(sourcesManifestFile)
 	manifest {
 		from sourcesManifestFile
 	}
