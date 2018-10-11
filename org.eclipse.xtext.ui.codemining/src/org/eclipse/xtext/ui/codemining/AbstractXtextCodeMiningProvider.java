@@ -141,7 +141,7 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 	 */
 	protected LineContentCodeMining createNewLineContentCodeMining(int beforeCharacter, String contentText,
 			Consumer<MouseEvent> action) {
-		return new LineContentCodeMining(new Position(beforeCharacter, contentText.length()), this, action) {
+		return new LineContentCodeMining(new Position(beforeCharacter, 1), this, action) {
 			@Override
 			protected CompletableFuture<Void> doResolve(ITextViewer viewer, IProgressMonitor monitor) {
 				return CompletableFuture.runAsync(() -> {
