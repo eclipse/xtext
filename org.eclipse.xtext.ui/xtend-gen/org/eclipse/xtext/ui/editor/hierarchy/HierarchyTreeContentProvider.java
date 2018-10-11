@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class HierarchyTreeContentProvider implements ITreeContentProvider {
-  private final static Object[] EMPTY_ARRAY = {};
+  private static final Object[] EMPTY_ARRAY = {};
   
   private final ViewPart viewPart;
   

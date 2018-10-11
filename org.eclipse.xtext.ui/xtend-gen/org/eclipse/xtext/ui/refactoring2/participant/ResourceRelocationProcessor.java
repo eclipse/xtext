@@ -51,7 +51,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class ResourceRelocationProcessor {
-  private final static Logger LOG = Logger.getLogger(ResourceRelocationProcessor.class);
+  private static final Logger LOG = Logger.getLogger(ResourceRelocationProcessor.class);
   
   @Inject
   private IResourceSetProvider resourceSetProvider;
