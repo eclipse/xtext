@@ -53,7 +53,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class RenameElementProcessor2 extends AbstractRenameProcessor {
-  protected final static Logger LOG = Logger.getLogger(RenameElementProcessor2.class);
+  protected static final Logger LOG = Logger.getLogger(RenameElementProcessor2.class);
   
   @Inject
   @Named(Constants.LANGUAGE_NAME)

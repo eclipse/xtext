@@ -43,7 +43,7 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
-  private final static Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter.class);
+  private static final Logger log = Logger.getLogger(SingleHoverShowingHyperlinkPresenter.class);
   
   @Extension
   private ReflectExtensions reflect = new ReflectExtensions();
@@ -52,7 +52,7 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
    * constant text needs to set into IHyperLink#getTypeLabel (which doesn't seem to be used otherwise)
    * if a hyperlink's label should be shown even if it's the only hyper link.
    */
-  public final static String SHOW_ALWAYS = "SHOW_ALWAYS";
+  public static final String SHOW_ALWAYS = "SHOW_ALWAYS";
   
   private final MultipleHyperlinkPresenter delegate;
   

@@ -91,7 +91,7 @@ public class InMemoryURIHandler implements URIHandler {
     }
   }
   
-  public final static String SCHEME = "inmemory";
+  public static final String SCHEME = "inmemory";
   
   private Map<URI, InMemoryURIHandler.InMemFile> files = CollectionLiterals.<URI, InMemoryURIHandler.InMemFile>newHashMap();
   
