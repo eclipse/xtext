@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
@@ -79,5 +81,10 @@ public class KeywordHelperTest extends AbstractXtextTests {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  protected InputStream getAsStream(final String model) {
+    return this.getAsStream(model, StandardCharsets.ISO_8859_1);
   }
 }

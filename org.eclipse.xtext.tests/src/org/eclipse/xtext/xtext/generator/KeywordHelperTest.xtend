@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import java.nio.charset.StandardCharsets
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage
 import org.eclipse.xtext.Grammar
@@ -14,11 +15,11 @@ import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.testing.GlobalRegistries
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento
 import org.eclipse.xtext.tests.AbstractXtextTests
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
+import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper
-import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 
 /**
  * @author Christian Dietrich - Initial contribution and API
@@ -54,6 +55,10 @@ class KeywordHelperTest extends AbstractXtextTests {
 		assertEquals("KW_EOF", keywordHelper.getRuleName("EOF"))
 		assertEquals("Model", keywordHelper.getRuleName("model"))
 		assertEquals("AeOeUeaeOeUe", keywordHelper.getRuleName("ƒ÷‹‰ˆ¸ﬂ")) //ﬂ is not escaped
+	}
+	
+	override protected getAsStream(String model) {
+		getAsStream(model, StandardCharsets.ISO_8859_1)
 	}
 	
 }

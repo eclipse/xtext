@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -38,7 +39,7 @@ import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -172,8 +173,19 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 		return getInjector().getInstance(InvariantChecker.class);
 	}
 
+	/**
+	 * Equivalent to <code>getAsStream(model, Charset.defaultCharset())</code>.
+	 */
 	protected InputStream getAsStream(String model) {
-		return new StringInputStream(model);
+		return getAsStream(model, Charset.defaultCharset());
+	}
+	
+	/**
+	 * Gets the string as input stream with specified encoding.
+	 * @since 2.16
+	 */
+	protected InputStream getAsStream(String model, Charset encoding) {
+		return new LazyStringInputStream(model, encoding.name());
 	}
 	
 	// parse methods
