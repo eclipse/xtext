@@ -1037,6 +1037,10 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	position: relative;
 }
 
+img#fork-button {
+	position: fixed; top: 0; right: 0;z-index:1000; border: 0;
+}
+
 @media (max-width: 767px) {
 	.navbar-inner {
 	  position: static;
@@ -1044,7 +1048,10 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	}
 	.navbar .container {
 		position: static;
-  }
+	}
+	img#fork-button {
+		position: absolute; top: 0; right: 0;z-index:1000; border: 0;
+	}
 }
 .navbar {
 	margin-bottom: 0;
