@@ -27,9 +27,9 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<file>domainmodel-photon.target</file>
+									<file>domainmodel.target</file>
 									<type>target</type>
-									<classifier>domainmodel-photon</classifier>
+									<classifier>domainmodel</classifier>
 								</artifact>
 							</artifacts>
 						</configuration>
