@@ -16,7 +16,7 @@
 		<targetplatform.groupId>${project.groupId}</targetplatform.groupId>
 		<targetplatform.artifactId>${project.groupId}.tp</targetplatform.artifactId>
 		<targetplatform.version>${project.version}</targetplatform.version>
-		<targetplatform.classifier>domainmodel-photon</targetplatform.classifier>
+		<targetplatform.classifier>domainmodel</targetplatform.classifier>
 		<!-- Define overridable properties for tycho-surefire-plugin -->
 		<platformSystemProperties></platformSystemProperties>
 		<moduleProperties></moduleProperties>
