@@ -341,7 +341,7 @@ public interface ITypeComputationState {
 	 * Example:
 	 * <pre>
 	 * val Object x = obtainInstance
-	 * if (x instanceof String && x.length > 0) {
+	 * if (x instanceof String &amp;&amp; x.length &gt; 0) {
 	 *   x.substring(1)
 	 * }
 	 * </pre>

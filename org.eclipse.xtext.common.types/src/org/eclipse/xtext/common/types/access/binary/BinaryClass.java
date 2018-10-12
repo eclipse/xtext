@@ -22,7 +22,7 @@ import com.google.common.base.Strings;
  * </p>
  * <p>
  * The binary class allows to obtain the persistent bytes to read them manually without defining the class object via
- * the class loader. </p
+ * the class loader. </p>
  * <p>
  * Instances are usually obtained via {@link BinaryClass#forName(String, ClassLoader)}.
  * </p>

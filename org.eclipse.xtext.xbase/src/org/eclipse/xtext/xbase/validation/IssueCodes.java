@@ -61,7 +61,7 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_type_arguments";
 	/**
 	 * Indicates that an invalid wildcard reference was defined, e.g.
-	 * &lt;? extends Number & CharSequence&gt;
+	 * &lt;? extends Number &amp; CharSequence&gt;
 	 */
 	public static final String INVALID_WILDCARD_CONSTRAINTS = ISSUE_CODE_PREFIX + "invalid_wildcard_constraints";
 	/**

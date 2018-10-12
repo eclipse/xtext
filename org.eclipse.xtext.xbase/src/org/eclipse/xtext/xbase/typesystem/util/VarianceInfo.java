@@ -17,8 +17,8 @@ public enum VarianceInfo {
 	
 	/**
 	 * <pre>
-	 *  public <T> void method(List<T> list) {
-	 *    List<String> someList = ..
+	 *  public &lt;T&gt; void method(List&lt;T&gt; list) {
+	 *    List&lt;String&gt; someList = ..
 	 *    method(someList)
 	 *  }
 	 * </pre>
@@ -41,8 +41,8 @@ public enum VarianceInfo {
 	
 	/**
 	 * <pre>
-	 *  public <T> void method(List<? super T> list) {
-	 *    List<String> someList = ..
+	 *  public &lt;T&gt; void method(List&lt;? super T&gt; list) {
+	 *    List&lt;String&gt; someList = ..
 	 *    method(someList)
 	 *  }
 	 * </pre>
@@ -87,8 +87,8 @@ public enum VarianceInfo {
 	
 	/**
 	 * <pre>
-	 *  public <T> void method(List<? extends T> list) {
-	 *    List<String> someList = ..
+	 *  public &lt;T&gt; void method(List&lt;? extends T&gt; list) {
+	 *    List&lt;String&gt; someList = ..
 	 *    method(someList)
 	 *  }
 	 * </pre>

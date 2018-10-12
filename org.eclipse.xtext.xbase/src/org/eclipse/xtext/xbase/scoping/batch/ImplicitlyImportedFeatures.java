@@ -46,8 +46,8 @@ import com.google.inject.Singleton;
  * Used to contribute features from Java types as
  * <ul>
  * <li>extension methods (see {@link #getExtensionClasses(Resource)}</li>
- * <l) statically imported methods (see {@link #getStaticImportClasses(Resource)}.</li>
- * <ul>
+ * <li> statically imported methods (see {@link #getStaticImportClasses(Resource)}.</li>
+ * </ul>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
