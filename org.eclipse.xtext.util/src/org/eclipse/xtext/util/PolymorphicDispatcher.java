@@ -210,11 +210,11 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	/**
-	 * returns > 0 when o1 is more specific than o2,
+	 * returns &gt; 0 when o1 is more specific than o2,
 	 * 
 	 * returns == 0 when o1 and o2 are equal or unrelated,
 	 * 
-	 * returns < 0 when o2 is more specific than o1,
+	 * returns &lt; 0 when o2 is more specific than o1,
 	 */
 	protected int compare(MethodDesc o1, MethodDesc o2) {
 		final Class<?>[] paramTypes1 = o1.getParameterTypes();

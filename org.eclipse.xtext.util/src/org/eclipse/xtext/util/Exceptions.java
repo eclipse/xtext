@@ -30,7 +30,7 @@ public class Exceptions {
 	/**
 	 * Invoke {@code Throwable#addSuppressed(Throwable)} reflectively if it is available.
 	 * 
-	 * It is not available on JRE < 1.7
+	 * It is not available on JRE &lt; 1.7
 	 * 
 	 * @since 2.8
 	 */

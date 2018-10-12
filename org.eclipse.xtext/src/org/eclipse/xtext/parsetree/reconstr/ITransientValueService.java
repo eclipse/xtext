@@ -32,7 +32,7 @@ public interface ITransientValueService {
 	 * Decides whether a value should be serialized.
 	 * 
 	 * If !feature.isMany() or !isMixedList(feature), this method is only called once for each feature. In this case,
-	 * index is < 0.
+	 * index is &lt; 0.
 	 * 
 	 * If feature.isMany() and isMixedList(feature), this method is called for each of the feature's values.
 	 * 

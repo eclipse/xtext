@@ -56,8 +56,8 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 * 
 	 * A node matches the <code>leafNodeOffset</code> if it fulfills the following condition:
 	 * <pre>
-	 *  node.totalOffset <= leafNodeOffset &&
-	 *  node.totalEndOffset > leafNodeOffset 
+	 *  node.totalOffset &lt;= leafNodeOffset &amp;&amp;
+	 *  node.totalEndOffset &gt; leafNodeOffset 
 	 * </pre>
 	 * 
 	 * @param node the container node. May not be <code>null</code>.
