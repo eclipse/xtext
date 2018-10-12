@@ -54,7 +54,11 @@ def upstream_branch (jobName, branch) {
     logger.info "$project.name $jobName] Using upstream branch $branch (explicitly set)"
     return branch
   }
-  def branch_candidates = [grgit.branch.current().name]
+  def branch_candidates = []
+  if (System.env['BRANCH_NAME'] != null) {
+    branch_candidates << System.env['BRANCH_NAME']
+  }
+  branch_candidates << grgit.branch.current().name
   if (grgit.branch.current().trackingBranch != null) {
     branch_candidates << grgit.branch.current().trackingBranch.name
   }
