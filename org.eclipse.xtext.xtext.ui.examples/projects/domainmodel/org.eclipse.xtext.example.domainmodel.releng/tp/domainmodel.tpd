@@ -13,7 +13,7 @@ target "Xtext Domainmodel Example - Eclipse Photon"
 
 with source allEnvironments
 
-location "http://download.eclipse.org/releases/2018-09" {
+location "http://download.eclipse.org/releases/2018-12" {
 	org.eclipse.jdt.feature.group lazy
 	org.eclipse.platform.feature.group lazy
 	org.eclipse.pde.feature.group lazy
