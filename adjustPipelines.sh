@@ -79,7 +79,7 @@ do
 		if isBranch
 		then
 			dropDir
-			find $directory -name pom.xml -type f -path '*.maven.parent/*' -print -o -name pom.xml -type f -path '*.maven.plugin/src/test/resources/it/generate/pom.xml' -print | while read -r pom
+			find $directory -name pom.xml -type f -path '*.maven.parent/*' -print -o -name pom.xml -type f -path '*.maven.plugin/src/test/resources/it/generate/pom.xml' -print -o -type f -path '*/releng/pom.xml' -print | while read -r pom
 			do
 				echo "Redirecting parent pom.xml files in $pom to $branchname"
 				./allDirectories | while read -r repo
@@ -90,7 +90,7 @@ do
 						logicalname=$(name $repo)
 						if changeDir $repository
 						then
-							sed_inplace "s?<branch_url_segment>.*</branch_url_segment>?<branch_url_segment>$escapedBranch</branch_url_segment>?" $pom
+							sed_inplace "s?<upstreamBranch>.*</upstreamBranch>?<upstreamBranch>$escapedBranch</upstreamBranch>?" $pom
 							dropDir
 						fi
 					fi
