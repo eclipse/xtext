@@ -2,7 +2,17 @@
 layout: default
 title: Language Engineering Made Easy!
 ---
-<a href="https://github.com/eclipse/xtext"><img style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<a href="https://github.com/eclipse/xtext"><img id="fork-button" style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<script>
+(function forkButtonQuickFix() {
+  var move = function() {
+    document.querySelector('#fork-button').style.top =
+      document.querySelector('.navbar-inner').offsetHeight + 'px'
+  }
+  document.addEventListener('DOMContentLoaded', move)
+  window.addEventListener('resize', move)
+}())
+</script>
 <!--Container-->
 <div id="header_wrapper">
   <div class="container image-slider">
@@ -164,7 +174,7 @@ title: Language Engineering Made Easy!
         <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
           Compatible with Graphical Editors</h4>
         <p>You can combine the text-based formats created with Xtext with many graphical editing frameworks,
-        e.g. <a href="https://www.eclipse.org/gef/" target="_blank">GEF</a>, 
+        e.g. <a href="https://www.eclipse.org/gef/" target="_blank">GEF</a>,
         <a href="https://www.eclipse.org/sirius/" target="_blank">Sirius</a> or
         <a href="https://www.eclipse.org/graphiti/" target="_blank">Graphiti</a>. Xtext offers this flexibility
         by supporting <a href="https://www.eclipse.org/modeling/emf/" target="_blank">EMF</a> as common data
