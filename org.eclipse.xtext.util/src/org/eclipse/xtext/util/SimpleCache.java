@@ -22,7 +22,7 @@ import com.google.common.base.Function;
  * Attention: The algorithm may not depend on itself in a circular manner. E.g. the following will lead 
  * to a stack overflow:
  * <pre>
- * SimpleCache<K, V> cache = new SimpleCache<K, V>(new Function<K, V>() {
+ * SimpleCache&lt;K, V&gt; cache = new SimpleCache&lt;K, V&gt;(new Function&lt;K, V&gt;() {
  *   public V apply(K k) {
  *     // DON'T DO THIS
  *     if (k == k1) {

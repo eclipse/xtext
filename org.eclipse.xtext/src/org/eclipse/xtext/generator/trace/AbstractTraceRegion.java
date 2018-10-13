@@ -456,10 +456,10 @@ public abstract class AbstractTraceRegion {
 	 * <code>r1</code> and <code>r2</code> are considered to be equal if
 	 * 
 	 * <pre>
-	 * (r1.getMyOffset() == r2.getMyOffset()) && (r1.getMyLength() == r2.getMyLength())
-	 * 		&& (r1.getAssociatedOffset() == r2.getAssociatedOffset())
-	 * 		&& (r1.getAssociatedLength() == r2.getAssociatedLength())
-	 * 		&& (r1.getParent() == null ? r2.getParent() == null : r1.getParent().equals(r2.getParent()))
+	 * (r1.getMyOffset() == r2.getMyOffset()) &amp;&amp; (r1.getMyLength() == r2.getMyLength())
+	 * 		&amp;&amp; (r1.getAssociatedOffset() == r2.getAssociatedOffset())
+	 * 		&amp;&amp; (r1.getAssociatedLength() == r2.getAssociatedLength())
+	 * 		&amp;&amp; (r1.getParent() == null ? r2.getParent() == null : r1.getParent().equals(r2.getParent()))
 	 * </pre>
 	 * 
 	 * This ensures that the {@link #equals(Object)} method works properly across different implementations of the
