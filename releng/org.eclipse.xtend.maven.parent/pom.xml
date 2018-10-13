@@ -35,7 +35,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<branch_url_segment>master</branch_url_segment>
+		<upstreamBranch>master</upstreamBranch>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 	
@@ -257,15 +257,15 @@
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
-					<url>${JENKINS_URL}/job/xtext-lib/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-core-from-jenkins</id>
-					<url>${JENKINS_URL}/job/xtext-core/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-extras-from-jenkins</id>
-					<url>${JENKINS_URL}/job/xtext-extras/job/${branch_url_segment}/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>${JENKINS_URL}/job/xtext-extras/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 			</repositories>
 		</profile>
