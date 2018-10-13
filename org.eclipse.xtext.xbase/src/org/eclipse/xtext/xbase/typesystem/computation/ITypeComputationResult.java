@@ -30,7 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * </pre>
  * 
  * The return type of the {@link XIfExpression if expression} is the 
- * type <code>Comparable&lt;?&gt; & Serializable</code> while the actual type
+ * type <code>Comparable&lt;?&gt; &amp; Serializable</code> while the actual type
  * of the conditional expression is type <code>int</code>. The first branch 
  * of the condition will never complete normally thus its type is not 
  * considered for the local expression type computation.

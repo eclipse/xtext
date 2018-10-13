@@ -438,7 +438,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	}
 	
 	/**
-	 * This is for backwards compatibility < 2.3RC2 due to change in the naming strategy for sequencer methods
+	 * This is for backwards compatibility &lt; 2.3RC2 due to change in the naming strategy for sequencer methods
 	 */
 	@Deprecated
 	protected void sequence_XExpression(EObject context, XNullLiteral semanticObject) {
@@ -446,7 +446,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	}
 	
 	/**
-	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 * This is for backwards compatibility &lt; 2.3RC3 due to change in the naming strategy for sequencer methods
 	 */
 	@Deprecated
 	protected void sequence_XAdditiveExpression(EObject context, XBinaryOperation operation) {
@@ -454,7 +454,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	}
 	
 	/**
-	 * This is for backwards compatibility < 2.3RC3 due to change in the naming strategy for sequencer methods
+	 * This is for backwards compatibility &lt; 2.3RC3 due to change in the naming strategy for sequencer methods
 	 */
 	@Deprecated
 	protected void sequence_XAssignment(EObject context, XAssignment semanticObject) {

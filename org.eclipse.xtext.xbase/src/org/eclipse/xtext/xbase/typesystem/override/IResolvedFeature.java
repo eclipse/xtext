@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public interface IResolvedFeature {
   /**
    * Returns the resolved signature of this feature. The resolved representation of
-   * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
+   * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt;)</code> is
    * <code>addAll(int,java.util.Collection&lt;String&gt;)</code>.
    * 
    * @return the resolved signature.
@@ -26,7 +26,7 @@ public interface IResolvedFeature {
   
   /**
    * Returns the simple signature of this feature. The simple signature of
-   * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
+   * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt;)</code> is
    * <code>addAll(int, Collection&lt;String&gt;)</code>.
    * 
    * @return the simple, human readable signature.
@@ -35,7 +35,7 @@ public interface IResolvedFeature {
   
   /**
    * Returns the resolved erased signature of this feature. The resolved representation of
-   * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is
+   * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt;)</code> is
    * <code>addAll(int,Collection)</code>.
    * 
    * @return the erased signature.

@@ -85,7 +85,7 @@ public class JvmCompoundTypeReferenceImplCustom extends JvmCompoundTypeReference
 	
 	/**
 	 * The simple name of a {@link org.eclipse.xtext.common.types.JvmMultiTypeReference JvmMultiTypeReference} 
-	 * is the concatenated simple name of its {@link #getReferences() components}. The delimiter is the <code>&</code>.
+	 * is the concatenated simple name of its {@link #getReferences() components}. The delimiter is the <code>&amp;</code>.
 	 */
 	@Override
 	public String getSimpleName() {
@@ -104,7 +104,7 @@ public class JvmCompoundTypeReferenceImplCustom extends JvmCompoundTypeReference
 	
 	/**
 	 * The qualified name of a {@link org.eclipse.xtext.common.types.JvmMultiTypeReference JvmMultiTypeReference} 
-	 * is the concatenated qualified name of its {@link #getReferences() components}. The delimiter is the <code>&</code>.
+	 * is the concatenated qualified name of its {@link #getReferences() components}. The delimiter is the <code>&amp;</code>.
 	 */
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {

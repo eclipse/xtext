@@ -122,7 +122,7 @@ public final class PackratParserGenUtil {
 	 * <li><code>A1234t = a1234TConsumer</code></li>
 	 * <li><code>A1234iElement = a1234IElementConsumer</code></li>
 	 * <li><code>null = consumer</code></li>
-	 * <li><code><> = consumer</code></li>
+	 * <li><code>&lt;&gt; = consumer</code></li>
 	 * <li><code>Root = rootConsumer</code></li>
 	 * </ul>
 	 * 

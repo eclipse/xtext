@@ -41,7 +41,7 @@ import com.google.inject.Singleton;
  *   <tr><td>&lt;&gt;</td><td>operator_diamond</td></tr>
  *   <tr><td>&lt;=&gt;</td><td>operator_spaceship</td></tr>
  *   <tr><td>||</td><td>operator_or</td></tr>
- *   <tr><td>&&</td><td>operator_and</td></tr>
+ *   <tr><td>&amp;&amp;</td><td>operator_and</td></tr>
  *   <tr><td>+=</td><td>operator_add</td></tr>
  *   <tr><td>-=</td><td>operator_remove</td></tr>
  *   <tr><td>*=</td><td>operator_multiplyAssign</td></tr>
