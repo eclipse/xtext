@@ -1141,7 +1141,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("plugins {");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("id \'com.github.johnrengelman.shadow\' version \'2.0.0\'");
+          _builder.append("id \'com.github.johnrengelman.shadow\' version \'4.0.1\'");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
