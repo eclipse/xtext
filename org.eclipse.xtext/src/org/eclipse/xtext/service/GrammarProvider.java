@@ -49,34 +49,40 @@ public class GrammarProvider {
 			// DCL on a volatile is safe as of Java 5, which we obviously require.
 			synchronized(this) {
 				if (grammar == null) {
-					XtextResourceSet resourceSet = resourceSetProvider.get();
-					if (classLoader != null) {
-						resourceSet.setClasspathURIContext(classLoader);
-					} else {
-						final ClassLoader classLoaderToUse = requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader();
-						resourceSet.setClasspathURIContext(classLoaderToUse);
-					}
-					String fileWithoutExt = ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/');
-					try {
-						grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xtextbin", resourceSet);
-						EcoreUtil.resolveAll(grammar.eResource());
-					} catch (RuntimeException e) {
-						Throwable cause = e;
-						while (cause.getCause() != null)
-							cause = cause.getCause();
-						if (cause instanceof FileNotFoundOnClasspathException) {
-							grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xmi", resourceSet);
-						} else
-							throw e;
-					}
-					if (grammar != null) {
-						AllRulesCache cache = new AllRulesCache(grammar);
-						cache.attachToEmfObject(grammar);
-					}
+					grammar = doGetGrammar(requestor);
 				}
 			}
 		}
 		return grammar;
+	}
+
+	private Grammar doGetGrammar(Object requestor) {
+		Grammar grammar_ = null;
+		XtextResourceSet resourceSet = resourceSetProvider.get();
+		if (classLoader != null) {
+			resourceSet.setClasspathURIContext(classLoader);
+		} else {
+			final ClassLoader classLoaderToUse = requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader();
+			resourceSet.setClasspathURIContext(classLoaderToUse);
+		}
+		String fileWithoutExt = ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/');
+		try {
+			grammar_ = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xtextbin", resourceSet);
+			EcoreUtil.resolveAll(grammar_.eResource());
+		} catch (RuntimeException e) {
+			Throwable cause = e;
+			while (cause.getCause() != null)
+				cause = cause.getCause();
+			if (cause instanceof FileNotFoundOnClasspathException) {
+				grammar_ = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xmi", resourceSet);
+			} else
+				throw e;
+		}
+		if (grammar_ != null) {
+			AllRulesCache cache = new AllRulesCache(grammar_);
+			cache.attachToEmfObject(grammar_);
+		}
+		return grammar_;
 	}
 	
 	/**
