@@ -70,7 +70,7 @@ public class ClassFileDebugInfoExtractor {
 		 * @param fileName
 		 */
 		public ClassVisitor(String fileName) {
-			super(Opcodes.ASM5);
+			super(Opcodes.ASM7_EXPERIMENTAL);
 			this.fileName = fileName;
 		}
 
@@ -113,7 +113,7 @@ public class ClassFileDebugInfoExtractor {
 		private ClassVisitor cls;
 
 		public MethodVisitor(ClassVisitor cls, String name) {
-			super(Opcodes.ASM5);
+			super(Opcodes.ASM7_EXPERIMENTAL);
 			this.cls = cls;
 			this.name = name;
 		}
