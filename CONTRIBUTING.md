@@ -48,7 +48,7 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 When you run your freshly installed Eclipse IDE for the first time it will clone the relevant repositories and automatically set up your workspace with a number of projects.
 
 ## Contribute via Fork
-All you need is a [GitHub](https://github.com/) account.
+You need a [GitHub](https://github.com/) and a [Eclipse](https://accounts.eclipse.org/user/register) account plus a signed [Eclipse Contributor Agreement](https://accounts.eclipse.org/user/login?destination=user/eca).
 
  1. Make sure there is a GitHub issue for what you want to work on.
  2. Announce in the comments section that you want to work on the issue. Also describe the solution you want to implement. To improve the chances for your contribution to be accepted, you'll want to wait for the feedback of the committers.
