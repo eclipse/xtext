@@ -37,7 +37,7 @@ public class OutlineNodeElementOpener {
 				textViewer.revealRange(offset, length);
 				textViewer.setSelectedRange(offset, length);
 			} else {
-				node.readOnly(new IUnitOfWork.Void<EObject>() {
+				node.tryReadOnly(new IUnitOfWork.Void<EObject>() {
 					@Override
 					public void process(EObject state) throws Exception {
 						openEObject(state);

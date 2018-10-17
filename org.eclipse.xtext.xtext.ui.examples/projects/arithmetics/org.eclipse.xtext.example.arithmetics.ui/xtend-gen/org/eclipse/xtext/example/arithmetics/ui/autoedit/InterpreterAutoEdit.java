@@ -58,13 +58,13 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
   
   private BigDecimal computeResult(final IDocument document, final DocumentCommand command) {
     final IUnitOfWork<BigDecimal, XtextResource> _function = (XtextResource resource) -> {
-      Evaluation stmt = this.findEvaluation(command, resource);
+      final Evaluation stmt = this.findEvaluation(command, resource);
       if ((stmt == null)) {
         return null;
       }
       return this.evaluate(stmt);
     };
-    return ((IXtextDocument) document).<BigDecimal>readOnly(_function);
+    return ((IXtextDocument) document).<BigDecimal>tryReadOnly(_function);
   }
   
   protected BigDecimal evaluate(final Evaluation stmt) {

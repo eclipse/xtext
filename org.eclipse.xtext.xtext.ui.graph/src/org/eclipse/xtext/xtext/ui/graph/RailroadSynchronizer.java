@@ -67,7 +67,7 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 			IXtextDocument xtextDocument = xtextEditor.getDocument();
 			if (xtextDocument != lastActiveDocument) {
 				selectionLinker.setXtextEditor(xtextEditor);
-				final IFigure contents = xtextDocument.readOnly(new IUnitOfWork<IFigure, XtextResource>() {
+				final IFigure contents = xtextDocument.tryReadOnly(new IUnitOfWork<IFigure, XtextResource>() {
 					@Override
 					public IFigure exec(XtextResource resource) throws Exception {
 						return createFigure(resource);

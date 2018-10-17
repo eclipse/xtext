@@ -193,7 +193,7 @@ public class RefactoringTest extends AbstractEditorTest {
 	protected IRenameSupport createRenameSupportForJvmReference() {
 		if(!languageServices.hasRefactoring())
 			return null;
-		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
+		IRenameElementContext renameElementContext = editor.getDocument().tryReadOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
 					@Override
 					public IRenameElementContext exec(XtextResource state) throws Exception {
@@ -203,6 +203,8 @@ public class RefactoringTest extends AbstractEditorTest {
 								editor, null, state);
 					}
 				});
+		if (renameElementContext == null) return null;
+
 		IRenameSupport renameSupport = languageServices.renameSupportFactory.create(renameElementContext,
 				"NewJavaClass");
 		return renameSupport;
@@ -211,7 +213,7 @@ public class RefactoringTest extends AbstractEditorTest {
 	protected IRenameSupport createRenameSupportForElement() {
 		if(!languageServices.hasRefactoring())
 			return null;
-		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
+		IRenameElementContext renameElementContext = editor.getDocument().tryReadOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
 					@Override
 					public IRenameElementContext exec(XtextResource state) throws Exception {
@@ -221,6 +223,8 @@ public class RefactoringTest extends AbstractEditorTest {
 								editor, null, state);
 					}
 				});
+		if (renameElementContext == null) return null;
+
 		IRenameSupport renameSupport = languageServices.renameSupportFactory.create(renameElementContext,
 				"newTestName");
 		return renameSupport;

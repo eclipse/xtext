@@ -83,10 +83,10 @@ public class ValidationJob extends Job {
 
 	public List<Issue> createIssues(final IProgressMonitor monitor) {
 		final List<Issue> issues = xtextDocument
-				.readOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
+				.tryReadOnly(new CancelableUnitOfWork<List<Issue>, XtextResource>() {
 					@Override
 					public List<Issue> exec(XtextResource resource, final CancelIndicator outerIndicator) throws Exception {
-						if (resource == null || resource.isValidationDisabled())
+						if (resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							@Override
@@ -95,7 +95,7 @@ public class ValidationJob extends Job {
 							}
 						});
 					}
-				});
+				}, () -> Collections.emptyList());
 		return issues;
 	}
 

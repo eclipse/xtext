@@ -74,12 +74,12 @@ public class OutlineNodeFactory {
 	
 	protected boolean isLocalElement(IOutlineNode node, final EObject element) {
 		if(node instanceof AbstractOutlineNode) {
-			return ((AbstractOutlineNode)node).getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+			return ((AbstractOutlineNode)node).getDocument().tryReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
 				@Override
 				public Boolean exec(XtextResource state) throws Exception {
 					return element.eResource() == state;
 				}
-			});
+			}, () -> false);
 		}
 		return true;
 	}

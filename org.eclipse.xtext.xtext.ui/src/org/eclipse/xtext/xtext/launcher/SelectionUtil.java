@@ -60,7 +60,7 @@ public class SelectionUtil {
 			}
 			else if (firstElement instanceof IOutlineNode) {
 				IOutlineNode outlineNode = (IOutlineNode) firstElement;
-				return outlineNode.readOnly(new IUnitOfWork<IFile, EObject>() {
+				return outlineNode.tryReadOnly(new IUnitOfWork<IFile, EObject>() {
 					@Override
 					public IFile exec(EObject state) throws Exception {
 						Resource resource = state.eResource();

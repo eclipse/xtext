@@ -219,7 +219,7 @@ public class RenameRefactoringController {
 	}
 
 	protected String getOriginalName(final XtextEditor xtextEditor) {
-		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+		return xtextEditor.getDocument().tryReadOnly(new IUnitOfWork<String, XtextResource>() {
 			@Override
 			public String exec(XtextResource state) throws Exception {
 				EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),

@@ -311,7 +311,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			final ISelection selection = getTextEditor().getSelectionProvider().getSelection();
 			if (selection instanceof ITextSelection && !selection.isEmpty()) {
 				final ITextSelection textSelection = (ITextSelection) selection;
-				return document.readOnly(new IUnitOfWork<XbaseClipboardData, XtextResource>() {
+				return document.tryReadOnly(new IUnitOfWork<XbaseClipboardData, XtextResource>() {
 					@Override
 					public XbaseClipboardData exec(XtextResource state) throws Exception {
 						ITextRegion region = new TextRegion(textSelection.getOffset(), textSelection.getLength() - 1);

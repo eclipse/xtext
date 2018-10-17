@@ -54,13 +54,9 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
 		// returning the region on a per token basis would be better.
 		try {
-			return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
+			return xtextDocument.tryReadOnly(new IUnitOfWork<IRegion, XtextResource>() {
 				@Override
 				public IRegion exec(XtextResource state) throws Exception {
-					// resource can be null e.g. read only zip/jar entry
-					if (state == null) {
-						return null;
-					}
 					Pair<EObject, IRegion> element = getXtextElementAt(state, offset);
 					if (element != null) {
 						return element.getSecond();
@@ -84,13 +80,9 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		if(xtextDocument == null) 
 			return null;
 		try {
-			return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
+			return xtextDocument.tryReadOnly(new IUnitOfWork<Object, XtextResource>() {
 				@Override
 				public Object exec(XtextResource state) throws Exception {
-					// resource can be null e.g. read only zip/jar entry
-					if (state == null) {
-						return null;
-					}
 					Pair<EObject, IRegion> element = getXtextElementAt(state, hoverRegion.getOffset());
 					if (element != null && element.getFirst() != null) {
 						return getHoverInfo(element.getFirst(), textViewer, hoverRegion);

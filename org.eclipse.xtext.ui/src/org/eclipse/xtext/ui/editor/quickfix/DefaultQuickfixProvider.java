@@ -124,7 +124,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		if (xtextDocument == null)
 			return;
-		xtextDocument.readOnly(new CancelableUnitOfWork<Void, XtextResource>() {
+		xtextDocument.tryReadOnly(new CancelableUnitOfWork<Void, XtextResource>() {
 			
 			IssueResolutionAcceptor myAcceptor = null;
 			

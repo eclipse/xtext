@@ -99,70 +99,68 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 			final SubMonitor monitor) {
 		final IXtextDocument document = editor.getDocument();
 		if(document != null) {
-			return document.readOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
+			return document.tryReadOnly(new CancelableUnitOfWork<Map<Annotation, Position>, XtextResource>() {
 				
 				@Override
 				public Map<Annotation, Position> exec(XtextResource resource, final CancelIndicator cancelIndicator)
 						throws Exception {
-					if(resource != null) {
-						EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
-						if (target != null && ! target.eIsProxy()) {
-							final List<EObjectReferenceAndIndex> references = newArrayList();
-							IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
-								@Override
-								public void accept(IReferenceDescription reference) {
-									throw new UnsupportedOperationException("Local references are announced per object");
-								}
+					EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
+					if (target != null && ! target.eIsProxy()) {
+						final List<EObjectReferenceAndIndex> references = newArrayList();
+						IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
+							@Override
+							public void accept(IReferenceDescription reference) {
+								throw new UnsupportedOperationException("Local references are announced per object");
+							}
 
-								@Override
-								public void accept(EObject source, URI sourceURI, EReference eReference, int index,
-										EObject targetOrProxy, URI targetURI) {
-									EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
-									acceptMe.source = source;
-									acceptMe.reference = eReference;
-									acceptMe.idx = index;
-									references.add(acceptMe);
-								}
-							};
-							Iterable<URI> targetURIs = getTargetURIs(target);
-							if (!(targetURIs instanceof TargetURIs)) {
-								TargetURIs result = targetURIsProvider.get();
-								result.addAllURIs(targetURIs);
-								targetURIs = result;
+							@Override
+							public void accept(EObject source, URI sourceURI, EReference eReference, int index,
+									EObject targetOrProxy, URI targetURI) {
+								EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
+								acceptMe.source = source;
+								acceptMe.reference = eReference;
+								acceptMe.idx = index;
+								references.add(acceptMe);
 							}
-							IProgressMonitor localMonitor = new NullProgressMonitor() {
-								@Override
-								public boolean isCanceled() {
-									return monitor.isCanceled() || cancelIndicator.isCanceled();
-								}
-							};
-							referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
-							operationCanceledManager.checkCanceled(cancelIndicator);
-							Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
-							if (target.eResource() == resource) {
-								if (!references.isEmpty() || canBeReferencedLocally(target)) {
-									ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
-									addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
-								}
-							}
-							for (EObjectReferenceAndIndex highlightMe : references) {
-								try {
-									if (localMonitor.isCanceled()) {
-										return emptyMap();
-									}
-									ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(highlightMe.source,
-											highlightMe.reference, highlightMe.idx);
-									addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
-								} catch(Exception exc) {
-									// outdated index information. Ignore
-								}
-							}
-							return result;
+						};
+						Iterable<URI> targetURIs = getTargetURIs(target);
+						if (!(targetURIs instanceof TargetURIs)) {
+							TargetURIs result = targetURIsProvider.get();
+							result.addAllURIs(targetURIs);
+							targetURIs = result;
 						}
+						IProgressMonitor localMonitor = new NullProgressMonitor() {
+							@Override
+							public boolean isCanceled() {
+								return monitor.isCanceled() || cancelIndicator.isCanceled();
+							}
+						};
+						referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, localMonitor);
+						operationCanceledManager.checkCanceled(cancelIndicator);
+						Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
+						if (target.eResource() == resource) {
+							if (!references.isEmpty() || canBeReferencedLocally(target)) {
+								ITextRegion declarationRegion = locationInFileProvider.getSignificantTextRegion(target);
+								addOccurrenceAnnotation(DECLARATION_ANNOTATION_TYPE, document, declarationRegion, result);
+							}
+						}
+						for (EObjectReferenceAndIndex highlightMe : references) {
+							try {
+								if (localMonitor.isCanceled()) {
+									return emptyMap();
+								}
+								ITextRegion textRegion = locationInFileProvider.getSignificantTextRegion(highlightMe.source,
+										highlightMe.reference, highlightMe.idx);
+								addOccurrenceAnnotation(OCCURRENCE_ANNOTATION_TYPE, document, textRegion, result);
+							} catch(Exception exc) {
+								// outdated index information. Ignore
+							}
+						}
+						return result;
 					}
 					return emptyMap();
 				}
-			});
+			}, () -> emptyMap());
 		} else {
 			return emptyMap();
 		}
