@@ -48,11 +48,11 @@ Before starting the setup process, make sure that you have both an [Eclipse](htt
 When you run your freshly installed Eclipse IDE for the first time it will clone the relevant repositories and automatically set up your workspace with a number of projects.
 
 ## Contribute via Fork
-You need a [GitHub](https://github.com/) and a [Eclipse](https://accounts.eclipse.org/user/register) account plus a signed [Eclipse Contributor Agreement](https://accounts.eclipse.org/user/login?destination=user/eca).
+You need a [GitHub](https://github.com/join) and an [Eclipse](https://accounts.eclipse.org/user/register) account for which you signed the [Eclipse Contributor Agreement](https://accounts.eclipse.org/user/login?destination=user/eca).
 
  1. Make sure there is a GitHub issue for what you want to work on.
  2. Announce in the comments section that you want to work on the issue. Also describe the solution you want to implement. To improve the chances for your contribution to be accepted, you'll want to wait for the feedback of the committers.
- 3. Implement your change. Take care to follow the [quality guidelines](QUALITY_GUIDELINES.md) to improve chances of accepting it by a committer.
+ 3. Implement your change. Take care to follow the [quality guidelines](QUALITY_GUIDELINES.md) to improve the chances of your contribution being accepted by a committer.
  4. [Sign off](https://git-scm.com/docs/git-commit#git-commit--s) your commits using the same email address you are using for your Eclipse account.
  5. Run the Maven/Gradle build locally to see if everything compiles and all tests pass.
  6. Push your changes to your forked repository. It is recommended to create a separate branch, this will make it easier to include the feedback from committers and update your changes.
