@@ -2,14 +2,14 @@
 
 # Eclipse Xtext™
 
-Eclipse Xtext is a framework for development of programming languages and [domain specific languages](https://en.wikipedia.org/wiki/Domain-specific_language). It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch IDE integration for Eclipse, IntelliJ and Web-based IDEs. Further, languages developed with Xtext can be integrated into editors supporting the [Language Server Protocol](https://github.com/Microsoft/language-server-protocol) (e.g. [VS Code](https://code.visualstudio.com/), [Eclipse Che](https://www.eclipse.org/che/)). Xtext comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
+Eclipse Xtext is a framework for development of programming languages and [domain specific languages](https://en.wikipedia.org/wiki/Domain-specific_language). It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch IDE integration for Eclipse and Web-based IDEs. Further, languages developed with Xtext can be integrated into editors supporting the [Language Server Protocol](https://github.com/Microsoft/language-server-protocol) (e.g. [VS Code](https://code.visualstudio.com/), [Eclipse Che](https://www.eclipse.org/che/)). Xtext comes with great defaults for all these aspects, which at the same time can be easily tailored to your individual needs.
 
-More information: [xtext.org](http://xtext.org)
+More information can be found on [xtext.org](http://xtext.org).
 
 ## Repositories
 
-This repository contains the website and documentation of Xtext, which is tracked in the [website-published](https://github.com/eclipse/xtext/tree/website-published) branch. The actual Xtext code is available in the following modules:
-- [xtext-core](https://github.com/eclipse/xtext-core): The core framework, [Language Server](https://github.com/Microsoft/language-server-protocol) support
+This repository contains the [website](https://www.eclipse.org/Xtext/) and documentation of Xtext, which is tracked in the [website-published](https://github.com/eclipse/xtext/tree/website-published) branch. The actual Xtext code is available in the following modules:
+- [xtext-core](https://github.com/eclipse/xtext-core): The core framework and [Language Server](https://github.com/Microsoft/language-server-protocol) support
 - [xtext-lib](https://github.com/eclipse/xtext-lib): Libraries for [Xbase](https://www.eclipse.org/Xtext/documentation/305_xbase.html) and [Xtend](http://www.xtend-lang.org)
 - [xtext-extras](https://github.com/eclipse/xtext-extras): Additional editor-independent features, mostly Java support
 - [xtext-eclipse](https://github.com/eclipse/xtext-eclipse): Plug-ins for [Eclipse](http://eclipse.org)
