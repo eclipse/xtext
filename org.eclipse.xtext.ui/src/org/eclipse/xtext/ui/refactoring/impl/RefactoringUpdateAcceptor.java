@@ -50,13 +50,17 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 	@Override
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		IRefactoringDocument document = getDocument(resourceURI);
-		document2textEdits.put(document, textEdit);
+		if (document != null) {
+			document2textEdits.put(document, textEdit);
+		}
 	}
 
 	@Override
 	public void accept(URI resourceURI, Change change) {
 		IRefactoringDocument document = getDocument(resourceURI);
-		document2change.put(document, change);
+		if (document != null) {
+			document2change.put(document, change);
+		}
 	}
 	
 	@Override
@@ -64,9 +68,13 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 		IRefactoringDocument document = uri2document.get(resourceURI);
 		if(document != null) 
 			return document;
-		IRefactoringDocument newDocument = refactoringDocumentProvider.get(resourceURI, status); 
-		uri2document.put(resourceURI, newDocument);
-		return newDocument;
+		IRefactoringDocument newDocument = refactoringDocumentProvider.get(resourceURI, status);
+		if (newDocument != null) {
+			uri2document.put(resourceURI, newDocument);
+			return newDocument;
+		}
+
+		return null;
 	}
 
 	@Override

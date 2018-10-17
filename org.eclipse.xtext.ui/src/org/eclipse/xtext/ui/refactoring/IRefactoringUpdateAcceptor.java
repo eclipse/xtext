@@ -32,6 +32,11 @@ public interface IRefactoringUpdateAcceptor {
 
 	StatusWrapper getRefactoringStatus();
 	
+	/**
+	 * Returns the document related to the refactoring.
+	 * 
+	 * @return The refactoring document or null if it can not be found or is not editable
+	 */
 	IRefactoringDocument getDocument(URI resourceURI);
 	
 	/**

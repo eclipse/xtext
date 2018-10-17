@@ -75,13 +75,15 @@ public class MultiImportOrganizer {
 					}
 					TextEdit textEdit = replaceConverter.convertToTextEdit(replace);
 					IRefactoringDocument iRefactoringDocument = provider.get(uri, status);
-					Change change = iRefactoringDocument.createChange(Messages.OrganizeImports, textEdit);
-					if (change instanceof EditorDocumentChange) {
-						if (((EditorDocument) iRefactoringDocument).getEditor().isDirty()) {
-							((EditorDocumentChange) change).setDoSave(false);
+					if (iRefactoringDocument != null) {
+						Change change = iRefactoringDocument.createChange(Messages.OrganizeImports, textEdit);
+						if (change instanceof EditorDocumentChange) {
+							if (((EditorDocument) iRefactoringDocument).getEditor().isDirty()) {
+								((EditorDocumentChange) change).setDoSave(false);
+							}
 						}
+						result.add(change);
 					}
-					result.add(change);
 				}
 				mon.worked(1);
 				if (mon.isCanceled()) {

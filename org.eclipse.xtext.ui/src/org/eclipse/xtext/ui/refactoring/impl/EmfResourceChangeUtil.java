@@ -30,6 +30,8 @@ public class EmfResourceChangeUtil {
 
 	public void addSaveAsUpdate(Resource resource, IRefactoringUpdateAcceptor updateAcceptor) throws IOException {
 		IRefactoringDocument document = updateAcceptor.getDocument(resource.getURI());
+		if (document == null) return;
+
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, null);
 		String newContent = new String(outputStream.toByteArray(), encodingProvider.getEncoding(resource.getURI()));
