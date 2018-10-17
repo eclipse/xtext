@@ -53,7 +53,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -655,12 +655,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 		OutputStream out = null;
 		try {
 			in = new FileInputStream(file);
-			MergeableManifest manifest = new MergeableManifest(in, projectName);
+			MergeableManifest2 manifest = new MergeableManifest2(in, projectName);
 			manifest.addExportedPackages(exported);
 			manifest.addRequiredBundles(requiredBundles);
 			manifest.addImportedPackages(imported);
-			if (activator != null && !manifest.getMainAttributes().containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
-				manifest.getMainAttributes().put(MergeableManifest.BUNDLE_ACTIVATOR, activator);
+			if (activator != null && !manifest.getMainAttributes().containsKey(MergeableManifest2.BUNDLE_ACTIVATOR)) {
+				manifest.getMainAttributes().put(MergeableManifest2.BUNDLE_ACTIVATOR, activator);
 			}
 			if (manifest.isModified()) {
 				out = new FileOutputStream(file);
