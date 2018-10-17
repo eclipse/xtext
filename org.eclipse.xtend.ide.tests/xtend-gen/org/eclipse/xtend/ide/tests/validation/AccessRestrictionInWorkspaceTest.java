@@ -29,7 +29,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -218,13 +218,13 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     try {
       final IFile manifestFile = pluginProject.getProject().getFile("META-INF/MANIFEST.MF");
       final InputStream contents = manifestFile.getContents();
-      MergeableManifest _xtrycatchfinallyexpression = null;
+      MergeableManifest2 _xtrycatchfinallyexpression = null;
       try {
-        _xtrycatchfinallyexpression = new MergeableManifest(contents);
+        _xtrycatchfinallyexpression = new MergeableManifest2(contents);
       } finally {
         contents.close();
       }
-      final MergeableManifest manifest = _xtrycatchfinallyexpression;
+      final MergeableManifest2 manifest = _xtrycatchfinallyexpression;
       manifest.addExportedPackages(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
       final ByteArrayOutputStream out = new ByteArrayOutputStream();
       manifest.write(out);

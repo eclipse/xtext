@@ -19,7 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
-import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.MergeableManifest2
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -141,7 +141,7 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
 		val contents = manifestFile.contents
 		val manifest = try {
-			new MergeableManifest(contents)	
+			new MergeableManifest2(contents)	
 		} finally {
 			contents.close
 		}
