@@ -303,7 +303,10 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	private def void appendCompilationTemplate(ITreeAppendable appendable, JvmIdentifiableElement it) {
+	/**
+	 * @since 2.16
+	 */
+	protected def void appendCompilationTemplate(ITreeAppendable appendable, JvmIdentifiableElement it) {
 		switch appendable {
 			TreeAppendable: {
 				val target = createImportingStringConcatenation(appendable.state, new StandardTypeReferenceOwner(commonServices, it));
@@ -634,7 +637,7 @@ class JvmModelGenerator implements IGenerator {
 				op.compilationStrategy.apply(appendable)
 				appendable.decreaseIndentation.newLine.append("}")
 			} else {
-				generateBodyWithIssues(appendable, errors)
+				op.generateBodyWithIssues(appendable, errors)
 			}
 		} else if (op.compilationTemplate !== null) {
 			val errors = op.directErrorsOrLogicallyContainedErrors
@@ -643,7 +646,7 @@ class JvmModelGenerator implements IGenerator {
 				appendCompilationTemplate(appendable, op)
 				appendable.decreaseIndentation.newLine.append("}")
 			} else {
-				generateBodyWithIssues(appendable, errors)
+				op.generateBodyWithIssues(appendable, errors)
 			}
 		} else {
 			val expression = op.getAssociatedExpression
@@ -659,7 +662,7 @@ class JvmModelGenerator implements IGenerator {
 					compile(op, expression, returnType, appendable, config)
 					appendable.decreaseIndentation.newLine.append("}")
 				} else {
-					generateBodyWithIssues(appendable, errors)	
+					op.generateBodyWithIssues(appendable, errors)
 				}
 			} else if(op instanceof JvmOperation) {
 				appendable.increaseIndentation.append("{").newLine
@@ -736,7 +739,14 @@ class JvmModelGenerator implements IGenerator {
 		if (declaredType !== null)
 			b.declareVariable(declaredType, 'this');
 	}
-
+	
+	/**
+	 * @since 2.16
+	 */
+	def generateBodyWithIssues(JvmExecutable op, ITreeAppendable appendable, Iterable<Issue> errors) {
+		generateBodyWithIssues(appendable, errors)
+	}
+	
 	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {
 		appendable.append('{').increaseIndentation.newLine
 			.append('throw new Error("Unresolved compilation problems:"')

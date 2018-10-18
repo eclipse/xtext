@@ -481,7 +481,10 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  private void appendCompilationTemplate(final ITreeAppendable appendable, final JvmIdentifiableElement it) {
+  /**
+   * @since 2.16
+   */
+  protected void appendCompilationTemplate(final ITreeAppendable appendable, final JvmIdentifiableElement it) {
     boolean _matched = false;
     if (appendable instanceof TreeAppendable) {
       _matched=true;
@@ -992,7 +995,7 @@ public class JvmModelGenerator implements IGenerator {
         this._jvmTypeExtensions.getCompilationStrategy(op).apply(appendable);
         appendable.decreaseIndentation().newLine().append("}");
       } else {
-        this.generateBodyWithIssues(appendable, errors);
+        this.generateBodyWithIssues(op, appendable, errors);
       }
     } else {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(op);
@@ -1005,7 +1008,7 @@ public class JvmModelGenerator implements IGenerator {
           this.appendCompilationTemplate(appendable, op);
           appendable.decreaseIndentation().newLine().append("}");
         } else {
-          this.generateBodyWithIssues(appendable, errors_1);
+          this.generateBodyWithIssues(op, appendable, errors_1);
         }
       } else {
         final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
@@ -1033,7 +1036,7 @@ public class JvmModelGenerator implements IGenerator {
             this.compile(op, expression, returnType, appendable, config);
             appendable.decreaseIndentation().newLine().append("}");
           } else {
-            this.generateBodyWithIssues(appendable, errors_2);
+            this.generateBodyWithIssues(op, appendable, errors_2);
           }
         } else {
           if ((op instanceof JvmOperation)) {
@@ -1140,6 +1143,13 @@ public class JvmModelGenerator implements IGenerator {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  public ITreeAppendable generateBodyWithIssues(final JvmExecutable op, final ITreeAppendable appendable, final Iterable<Issue> errors) {
+    return this.generateBodyWithIssues(appendable, errors);
   }
   
   public ITreeAppendable generateBodyWithIssues(final ITreeAppendable appendable, final Iterable<Issue> errors) {
