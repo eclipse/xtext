@@ -112,13 +112,12 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 	@Inject ExecutableCommandRegistry commandRegistry
 	@Inject SemanticHighlightingRegistry semanticHighlightingRegistry
+	@Inject ILanguageServerShutdownAndExitHandler shutdownAndExitHandler
 	
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
 	CompletableFuture<InitializedParams>  initialized = new CompletableFuture
-	
-	boolean hasShutdownBeenCalled = false;
 	
 	@Inject
 	def void setWorkspaceManager(WorkspaceManager manager) {
@@ -221,15 +220,11 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	}
 
 	override exit() {
-		if(this.hasShutdownBeenCalled) {
-			System.exit(0);
-		} else {
-			System.exit(1);
-		}
+		shutdownAndExitHandler.exit()
 	}
 
 	override CompletableFuture<Object> shutdown() {
-		this.hasShutdownBeenCalled = true;
+		shutdownAndExitHandler.shutdown()
 		return CompletableFuture.completedFuture(new Object());
 	}
 
