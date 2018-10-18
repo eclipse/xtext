@@ -90,5 +90,11 @@ project {
 		developer {
 			name = 'Sebastian Zarnekow'
 		}
+		developer {
+			name = 'Titouan Vervack'
+			email = 'titouan.vervack@sigasi.com'
+			organization = 'Sigasi'
+			organizationUrl = 'https://www.sigasi.com'
+		}
 	}
 }
