@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 /**
  * The result of the comparison of two linking candidates. 
  */
-enum CandidateCompareResult {
+public enum CandidateCompareResult {
 	/**
 	 * Indicates that the current candidate is a better match than the other one.
 	 */
