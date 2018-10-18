@@ -415,5 +415,12 @@
 			<email>sebastian.Zarnekow@gmail.com</email>
 			<organization>SMACC GmbH</organization>
 		</developer>
+		<developer>
+			<id>titouan.vervack</id>
+			<name>Titouan Vervack</name>
+			<email>titouan.vervack@sigasi.com</email>
+			<organization>Sigasi</organization>
+			<organizationUrl>https://www.sigasi.com</organizationUrl>
+		</developer>
 	</developers>
 </project>
