@@ -127,6 +127,13 @@ public class MergeableManifest2Test {
 		assertEquals("ttt ", getMainAttributeValue(manifest, "test"));
 	}
 
+	@Test
+	public void manifest_LineWith513Chars_separatedOnTwoLines() throws Exception {
+		MergeableManifest2 manifest = newManifest("test: " + repeat("a", 506) + NL + " " + repeat("a", 7) + NL);
+
+		assertEquals(repeat("a", 513), getMainAttributeValue(manifest, "test"));
+	}
+
 	@Test(expected = IOException.class)
 	public void manifest_oneMainEntry_blankAfterName() throws Exception {
 		newManifest("test : ttt\n");
@@ -969,6 +976,50 @@ public class MergeableManifest2Test {
 		MergeableManifest2 manifest1 = newManifest(NL + "Name: a" + NL + "a0: other" + NL);
 
 		assertNotEquals(manifest0.hashCode(), manifest1.hashCode());
+	}
+
+	@Test
+	public void readWrite_realisticManifest() throws Exception {
+		// @formatter:off
+		String content =
+			"Manifest-Version: 1.0\r\n" + 
+			"Bundle-ManifestVersion: 2\r\n" + 
+			"Bundle-Name: Xtext Homeautomation Example - Runtime\r\n" + 
+			"Bundle-Vendor: Eclipse Xtext\r\n" + 
+			"Bundle-Version: 2.16.0.qualifier\r\n" + 
+			"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true\r\n" + 
+			"Bundle-ActivationPolicy: lazy\r\n" + 
+			"Require-Bundle: org.eclipse.xtext,\r\n" + 
+			" org.eclipse.xtext.xbase,\r\n" + 
+			" org.eclipse.equinox.common;bundle-version=\"3.5.0\",\r\n" + 
+			" org.eclipse.emf.ecore,\r\n" + 
+			" org.objectweb.asm;bundle-version=\"[6.2.1,6.3.0)\";resolution:=optional,\r\n" + 
+			" org.eclipse.xtext.util,\r\n" + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\",\r\n" + 
+			" org.eclipse.xtend.lib;bundle-version=\"2.14.0\",\r\n" + 
+			" org.eclipse.emf.common,\r\n" + 
+			" org.eclipse.xtext.common.types,\r\n" + 
+			" org.eclipse.xtext.xbase.lib;bundle-version=\"2.14.0\"\r\n" + 
+			"Bundle-RequiredExecutionEnvironment: JavaSE-1.8\r\n" + 
+			"Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine.impl,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr.lexer,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr.internal,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.validation,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.jvmmodel,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.scoping,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.serializer,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.services,\r\n" + 
+			" org.eclipse.xtext.example.homeautomation.formatting2\r\n" + 
+			"Import-Package: org.apache.log4j\r\n" + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation\r\n" + 
+			"";
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		assertEquals(content, write(manifest));
 	}
 
 	private String make512Safe(String input) {

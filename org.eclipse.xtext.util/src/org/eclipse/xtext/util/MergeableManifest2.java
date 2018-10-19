@@ -105,6 +105,9 @@ public class MergeableManifest2 implements Cloneable {
 		int lineIndex = startIndex;
 		while (lineIndex < lines.size()) {
 			String line = lines.get(lineIndex);
+			if (line.length() > 512) {
+				throw new IOException("Line is to long '" + line + "'");
+			}
 			lineIndex++;
 			while (lineIndex < lines.size() && lines.get(lineIndex).startsWith(" ")) {
 				line += lines.get(lineIndex).substring(1);
@@ -112,8 +115,6 @@ public class MergeableManifest2 implements Cloneable {
 			}
 			if (line.isEmpty()) {
 				return lineIndex; // end of header
-			} else if (line.length() > 512) {
-				throw new IOException("Line is to long '" + line + "'");
 			} else if (line.contains(": ")) {
 				String[] split = line.split(": ", 2);
 				String name = split[0];
@@ -138,6 +139,7 @@ public class MergeableManifest2 implements Cloneable {
 			}
 		}
 		return lineIndex;
+
 	}
 
 	private void readEntries(List<String> lines, int startIndex) throws IOException {
