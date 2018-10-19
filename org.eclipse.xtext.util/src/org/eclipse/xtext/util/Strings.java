@@ -576,4 +576,5 @@ public class Strings {
 		}
 		return document.toString();
 	}
+
 }

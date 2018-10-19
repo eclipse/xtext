@@ -18,7 +18,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -262,13 +262,13 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       if ((fileSystemAccess != null)) {
         CharSequence _content = this.getContent();
         StringBuffer _stringBuffer = new StringBuffer(_content);
-        final String contentToWrite = MergeableManifest.make512Safe(_stringBuffer, this.lineDelimiter);
+        final String contentToWrite = MergeableManifest2.make512Safe(_stringBuffer, this.lineDelimiter);
         byte[] _bytes = contentToWrite.getBytes("UTF-8");
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
-        final MergeableManifest mergableManifest = new MergeableManifest(_byteArrayInputStream);
-        mergableManifest.setLineDelimiter(this.lineDelimiter);
+        final MergeableManifest2 mergeableManifest = new MergeableManifest2(_byteArrayInputStream);
+        mergeableManifest.setLineDelimiter(this.lineDelimiter);
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
-        mergableManifest.write(bout);
+        mergeableManifest.write(bout);
         byte[] _byteArray = bout.toByteArray();
         ByteArrayInputStream _byteArrayInputStream_1 = new ByteArrayInputStream(_byteArray);
         fileSystemAccess.generateFile(this.getPath(), _byteArrayInputStream_1);

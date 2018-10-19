@@ -19,7 +19,6 @@ import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
-import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.emf.mwe.utils.StandaloneSetup
@@ -29,7 +28,7 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.MergeableManifest2
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
@@ -183,7 +182,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 	}
 	
-	private def void handleException(Exception ex, Issues issues) {
+	private def void handleException(Exception ex, org.eclipse.emf.mwe.core.issues.Issues issues) {
 		if (ex instanceof CompositeGeneratorException) {
 			ex.exceptions.forEach[handleException(issues)]
 		} else {
@@ -270,7 +269,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		var InputStream in
 		try {
 			in = metaInf.readBinaryFile(manifest.path)
-			val merge = new MergeableManifest(in, manifest.bundleName)
+			val merge = new MergeableManifest2(in, manifest.bundleName)
 			merge.lineDelimiter = codeConfig.lineDelimiter
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)

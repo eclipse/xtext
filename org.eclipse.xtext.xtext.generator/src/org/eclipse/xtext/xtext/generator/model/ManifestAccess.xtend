@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
+import com.google.inject.Injector
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.util.MergeableManifest
+import org.eclipse.xtext.util.MergeableManifest2
+import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
-import com.google.inject.Injector
-import org.eclipse.xtext.util.Strings
 
 /**
  * Configuration object for MANIFEST.MF files for use in Eclipse.
@@ -129,12 +129,12 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 	
 	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
 		if (fileSystemAccess !== null) {
-			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content), lineDelimiter)
+			val contentToWrite = MergeableManifest2.make512Safe(new StringBuffer(content), lineDelimiter)
 			// make sure all the constraints for the manifest are respected
-			val mergableManifest = new MergeableManifest(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))
-			mergableManifest.lineDelimiter = lineDelimiter
+			val mergeableManifest = new MergeableManifest2(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))
+			mergeableManifest.lineDelimiter = lineDelimiter
 			var bout = new ByteArrayOutputStream()
-			mergableManifest.write(bout)
+			mergeableManifest.write(bout)
 			fileSystemAccess.generateFile(path, new ByteArrayInputStream(bout.toByteArray))
 		}
 	}

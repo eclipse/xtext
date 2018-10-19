@@ -35,7 +35,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.internal.Log;
@@ -362,7 +362,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     try {
       in = metaInf.readBinaryFile(manifest.getPath());
       String _bundleName = manifest.getBundleName();
-      final MergeableManifest merge = new MergeableManifest(in, _bundleName);
+      final MergeableManifest2 merge = new MergeableManifest2(in, _bundleName);
       merge.setLineDelimiter(this.codeConfig.getLineDelimiter());
       merge.addExportedPackages(manifest.getExportedPackages());
       merge.addRequiredBundles(manifest.getRequiredBundles());

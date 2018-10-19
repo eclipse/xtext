@@ -33,7 +33,10 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - merging of parameterized entries
  * @since 2.2 moved to org.eclipse.xtext.util
+ * @deprecated Uses reflection which will not work well with future java
+ * versions. Use {@link MergeableManifest2} instead.
  */
+@Deprecated
 public class MergeableManifest extends Manifest {
 
 	public static final Attributes.Name BUNDLE_NAME = new Attributes.Name("Bundle-Name");
@@ -117,8 +120,8 @@ public class MergeableManifest extends Manifest {
 		}
 
 		/*
-		 * Copied from base class, but replaced call to make72Safe(buffer) with make512Safe(buffer)
-         * and does not write empty values
+		 * Copied from base class, but replaced call to make72Safe(buffer) with
+		 * make512Safe(buffer) and does not write empty values
 		 */
 		@SuppressWarnings("deprecation")
 		public void myWriteMain(DataOutputStream out) throws IOException {
@@ -159,8 +162,8 @@ public class MergeableManifest extends Manifest {
 		}
 
 		/*
-		 * Copied from base class, but omitted call to make72Safe(buffer)
-		 * and does not write empty values
+		 * Copied from base class, but omitted call to make72Safe(buffer) and
+		 * does not write empty values
 		 */
 		@SuppressWarnings("deprecation")
 		public void myWrite(DataOutputStream out) throws IOException {
@@ -214,7 +217,8 @@ public class MergeableManifest extends Manifest {
 	 * adds the qualified names to the require-bundle attribute, if not already
 	 * present.
 	 *
-	 * @param bundles - passing parameterized bundled (e.g. versions, etc.) is not supported
+	 * @param bundles - passing parameterized bundled (e.g. versions, etc.) is
+	 * not supported
 	 */
 	public void addRequiredBundles(Set<String> bundles) {
 		// TODO manage transitive dependencies
@@ -227,7 +231,8 @@ public class MergeableManifest extends Manifest {
 				bundleName = bundleName.substring(0, idx);
 			}
 		}
-		if (bundleName != null && bundles.contains(bundleName) || projectName != null && bundles.contains(projectName)) {
+		if (bundleName != null && bundles.contains(bundleName)
+				|| projectName != null && bundles.contains(projectName)) {
 			bundlesToMerge = new LinkedHashSet<String>(bundles);
 			bundlesToMerge.remove(bundleName);
 			bundlesToMerge.remove(projectName);
@@ -247,13 +252,13 @@ public class MergeableManifest extends Manifest {
 	public String getBREE() {
 		return (String) getMainAttributes().get(BUNDLE_REQUIRED_EXECUTION_ENV);
 	}
-	
+
 	/**
 	 * @since 2.9
 	 */
 	public void setBREE(String bree) {
 		String oldValue = getBREE();
-		if(Objects.equal(oldValue, bree)) {
+		if (Objects.equal(oldValue, bree)) {
 			return;
 		}
 		getMainAttributes().put(BUNDLE_REQUIRED_EXECUTION_ENV, bree);
@@ -272,21 +277,21 @@ public class MergeableManifest extends Manifest {
 	 */
 	public void setBundleActivator(String activator) {
 		String oldValue = getBundleActivator();
-		if(Objects.equal(oldValue, activator)) {
+		if (Objects.equal(oldValue, activator)) {
 			return;
 		}
 		getMainAttributes().put(BUNDLE_ACTIVATOR, activator);
 		this.modified = true;
 	}
-	
+
 	/**
 	 * @since 2.11
 	 */
-	public void setLineDelimiter (String delimiter) {
+	public void setLineDelimiter(String delimiter) {
 		this.lineDelimiter = delimiter;
-		
+
 	}
-	
+
 	public boolean isModified() {
 		return modified;
 	}
@@ -299,7 +304,7 @@ public class MergeableManifest extends Manifest {
 	public void write(OutputStream out) throws IOException {
 		DataOutputStream dos = new DataOutputStream(out);
 		// Write out the main attributes for the manifest
-		((OrderAwareAttributes) getMainAttributes()).myWriteMain(dos);
+		getMainAttributes().myWriteMain(dos);
 		// Now write out the pre-entry attributes
 		Iterator<Map.Entry<String, Attributes>> it = getEntries().entrySet().iterator();
 		while (it.hasNext()) {
@@ -331,7 +336,7 @@ public class MergeableManifest extends Manifest {
 		this.modified = modified.get();
 		getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
-	
+
 	/**
 	 * adds the qualified names to the export-package attribute, if not already
 	 * present.
@@ -351,7 +356,7 @@ public class MergeableManifest extends Manifest {
 		this.modified = modified.get();
 		getMainAttributes().put(IMPORT_PACKAGE, result);
 	}
-	
+
 	/**
 	 * @since 2.0
 	 */
@@ -360,16 +365,16 @@ public class MergeableManifest extends Manifest {
 		boolean inQuote = false;
 		for (int i = 0; i < string.length(); i++)
 			switch (string.charAt(i)) {
-				case ',':
-					if (inQuote)
-						result.get(result.size() - 1).append(string.charAt(i));
-					else
-						result.add(new StringBuilder());
-					break;
-				case '"':
-					inQuote = !inQuote;
-				default:
+			case ',':
+				if (inQuote)
 					result.get(result.size() - 1).append(string.charAt(i));
+				else
+					result.add(new StringBuilder());
+				break;
+			case '"':
+				inQuote = !inQuote;
+			default:
+				result.get(result.size() - 1).append(string.charAt(i));
 			}
 		String[] resultArray = new String[result.size()];
 		for (int i = 0; i < result.size(); i++)
@@ -378,17 +383,21 @@ public class MergeableManifest extends Manifest {
 	}
 
 	/**
-	 * @deprecated Use {@link #mergeIntoCommaSeparatedList(String, Set, Wrapper, String)} instead.
+	 * @deprecated Use
+	 * {@link #mergeIntoCommaSeparatedList(String, Set, Wrapper, String)}
+	 * instead.
 	 */
 	@Deprecated
-	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
+	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn,
+			Wrapper<Boolean> modified) {
 		return mergeIntoCommaSeparatedList(currentString, toMergeIn, modified, LINEBREAK);
 	}
-	
+
 	/**
 	 * @since 2.11
 	 */
-	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified, String lineDelimiter) {
+	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn,
+			Wrapper<Boolean> modified, String lineDelimiter) {
 		String string = currentString == null ? "" : currentString;
 		String[] split = splitQuoteAware(string);
 		Map<String, String> name2parameters = new LinkedHashMap<String, String>();
@@ -404,7 +413,7 @@ public class MergeableManifest extends Manifest {
 			if (!value.trim().equals("")) {
 				Pair<String, String> nameParameter = getSplitEntry(value.trim());
 				String existingParameter = name2parameters.get(nameParameter.getFirst());
-				if(existingParameter != null) {
+				if (existingParameter != null) {
 					continue;
 				}
 				boolean newModified = modified.get();
@@ -418,30 +427,40 @@ public class MergeableManifest extends Manifest {
 		while (iterator.hasNext()) {
 			Entry<String, String> entry = iterator.next();
 			buff.append(entry.getKey());
-			if(entry.getValue() != null) {
+			if (entry.getValue() != null) {
 				buff.append(";").append(entry.getValue());
 			}
 			if (iterator.hasNext())
-				buff.append(","+lineDelimiter+" ");
+				buff.append("," + lineDelimiter + " ");
 		}
 		String result = buff.toString();
 		return result;
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
-	protected static Pair<String,String> getSplitEntry(String entry) {
+	protected static Pair<String, String> getSplitEntry(String entry) {
 		int semicolon = entry.indexOf(';');
 		String name;
 		String parameter;
-		if(semicolon == -1) {
-			name=entry;
+		if (semicolon == -1) {
+			name = entry;
 			parameter = null;
-		} else { 
+		} else {
 			name = entry.substring(0, semicolon);
 			parameter = entry.substring(semicolon + 1);
 		}
 		return Tuples.create(name, parameter);
 	}
+
+	public void addImportedPackages(String... packages) {
+		addImportedPackages(newHashSet(packages));
+	}
+
+	@Override
+	public OrderAwareAttributes getMainAttributes() {
+		return (OrderAwareAttributes) super.getMainAttributes();
+	}
+
 }
