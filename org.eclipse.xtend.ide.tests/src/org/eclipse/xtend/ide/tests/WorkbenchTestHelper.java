@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.jar.Attributes;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -53,18 +52,19 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.internal.XtendActivator;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
+import org.eclipse.xtext.util.MergeableManifest2.Attributes;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -319,9 +319,9 @@ public class WorkbenchTestHelper extends Assert {
 	public static Pair<String, Boolean> changeBree(IJavaProject javaProject, final JavaVersion javaVersion)
 			throws Exception {
 		final AtomicReference<String> bree = new AtomicReference<String>();
-		boolean changed = changeManifest(javaProject.getProject(), new Function<MergeableManifest, Boolean>() {
+		boolean changed = changeManifest(javaProject.getProject(), new Function<MergeableManifest2, Boolean>() {
 			@Override
-			public Boolean apply(MergeableManifest mf) {
+			public Boolean apply(MergeableManifest2 mf) {
 				mf.setBREE(getBree(javaVersion));
 				return mf.isModified();
 			}
@@ -333,9 +333,9 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static boolean  addExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
-		return changeManifest(project, new Function<MergeableManifest,Boolean>() {
+		return changeManifest(project, new Function<MergeableManifest2,Boolean>() {
 			@Override
-			public Boolean apply(MergeableManifest mf) {
+			public Boolean apply(MergeableManifest2 mf) {
 				 mf.addExportedPackages(exportedPackages);
 				return mf.isModified();
 			}
@@ -343,12 +343,12 @@ public class WorkbenchTestHelper extends Assert {
 	}
 	
 	public static boolean  removeExportedPackages(IProject project, final String... exportedPackages) throws Exception {
-		return changeManifest(project, new Function<MergeableManifest, Boolean>() {
+		return changeManifest(project, new Function<MergeableManifest2, Boolean>() {
 			@Override
-			public Boolean apply(MergeableManifest mf) {
+			public Boolean apply(MergeableManifest2 mf) {
 				Attributes attrs = mf.getMainAttributes();
-				Attributes.Name expPackKey = new Attributes.Name("Export-Package");
-				String oldValue = attrs.getValue(expPackKey);
+				String expPackKey = "Export-Package";
+				String oldValue = attrs.get(expPackKey);
 				if (!Strings.isNullOrEmpty(oldValue)) {
 					String[] existingExports = oldValue.split(",(\\s+)?");
 					System.out.println(Arrays.toString(existingExports));
@@ -372,12 +372,12 @@ public class WorkbenchTestHelper extends Assert {
 		});
 	}
 
-	public static boolean changeManifest(IProject project, Function<MergeableManifest, Boolean> config) throws Exception {
+	public static boolean changeManifest(IProject project, Function<MergeableManifest2, Boolean> config) throws Exception {
 		IFile manifest = project.getFile("META-INF/MANIFEST.MF");
 		InputStream content = manifest.getContents();
-		MergeableManifest mf;
+		MergeableManifest2 mf;
 		try {
-			mf = new MergeableManifest(content);
+			mf = new MergeableManifest2(content);
 		} finally {
 			content.close();
 		}

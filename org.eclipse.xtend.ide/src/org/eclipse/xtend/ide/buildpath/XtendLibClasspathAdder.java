@@ -28,7 +28,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.MergeableManifest2;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -54,12 +54,12 @@ public class XtendLibClasspathAdder {
 		IClasspathEntry xtendContainerEntry = JavaCore.newContainerEntry(XtendContainerInitializer.XTEND_LIBRARY_PATH);
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
 		IClasspathEntry[] newRawClasspath = new IClasspathEntry[rawClasspath.length + 1];
-		for(int i=0; i<rawClasspath.length; ++i) {
+		for (int i = 0; i < rawClasspath.length; ++i) {
 			IClasspathEntry entry = rawClasspath[i];
-			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && entry.getPath().equals(xtendContainerEntry.getPath())){
+			if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && entry.getPath().equals(xtendContainerEntry.getPath())) {
 				return false;
 			}
-			newRawClasspath[i+1] = entry;
+			newRawClasspath[i + 1] = entry;
 		}
 		newRawClasspath[0] = xtendContainerEntry;
 		javaProject.setRawClasspath(newRawClasspath, monitor);
@@ -73,7 +73,7 @@ public class XtendLibClasspathAdder {
 			OutputStream output = null;
 			InputStream input = null;
 			try {
-				MergeableManifest manifest = createMergableManifest(manifestFile);
+				MergeableManifest2 manifest = createMergableManifest(manifestFile);
 				manifest.addRequiredBundles(newHashSet(XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE));
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				output = new BufferedOutputStream(out);
@@ -92,10 +92,10 @@ public class XtendLibClasspathAdder {
 		return false;
 	}
 
-	private MergeableManifest createMergableManifest(IResource manifestFile) throws IOException, CoreException {
+	private MergeableManifest2 createMergableManifest(IResource manifestFile) throws IOException, CoreException {
 		InputStream originalManifest = ((IFile) manifestFile).getContents();
 		try {
-			return new MergeableManifest(originalManifest);
+			return new MergeableManifest2(originalManifest);
 		} finally {
 			originalManifest.close();
 		}
