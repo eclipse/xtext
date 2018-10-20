@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -79,6 +80,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Stephane Galland - Add support of JvmCustomAnnotationValue into isConstantExpression.
  */
 public class FeatureCallCompiler extends LiteralsCompiler {
 
@@ -576,7 +578,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	private static boolean isConstantExpression(JvmAnnotationReference reference) {
 		for (final JvmAnnotationValue annotationValue: reference.getValues()) {
 			if ("constantExpression".equals(annotationValue.getValueName())) {
-				return ((JvmBooleanAnnotationValue) annotationValue).getValues().get(0).booleanValue();
+				if (annotationValue instanceof JvmBooleanAnnotationValue) {
+					return ((JvmBooleanAnnotationValue) annotationValue).getValues().get(0).booleanValue();
+				} else if (annotationValue instanceof JvmCustomAnnotationValue) {
+					final EObject value = ((JvmCustomAnnotationValue) annotationValue).getValues().get(0);
+					if (value instanceof XBooleanLiteral) {
+						return ((XBooleanLiteral) value).isIsTrue();
+					}
+				}
 			}
 		}
 		return false;
