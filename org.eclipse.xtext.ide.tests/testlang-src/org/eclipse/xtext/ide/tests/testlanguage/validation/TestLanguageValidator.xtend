@@ -20,6 +20,7 @@ class TestLanguageValidator extends AbstractTestLanguageValidator {
 	
 	public static val INVALID_NAME = 'invalidName'
 	public static val UNSORTED_MEMBERS = 'unsorted_members'
+	public static val MULTILINE_PROBLEM = 'multiline_problem'
 
 	@Check
 	def checkGreetingStartsWithCapital(TypeDeclaration type) {
@@ -38,6 +39,13 @@ class TestLanguageValidator extends AbstractTestLanguageValidator {
 				TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME,
 				UNSORTED_MEMBERS
 			)
+		}
+	}
+	
+	@Check
+	def checkWithMultilineError(TypeDeclaration type) {
+		if (type.name.startsWith("Multiline")) {
+			warning("Test Validation to mark the whole type", null, MULTILINE_PROBLEM)
 		}
 	}
 	
