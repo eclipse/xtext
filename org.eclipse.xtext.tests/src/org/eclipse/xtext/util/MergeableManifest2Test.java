@@ -12,10 +12,17 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Test;
+
+import com.google.common.io.CharStreams;
 
 /**
  * @author Arne Deutsch - Initial contribution and API
@@ -982,44 +989,82 @@ public class MergeableManifest2Test {
 	public void readWrite_realisticManifest() throws Exception {
 		// @formatter:off
 		String content =
-			"Manifest-Version: 1.0\r\n" + 
-			"Bundle-ManifestVersion: 2\r\n" + 
-			"Bundle-Name: Xtext Homeautomation Example - Runtime\r\n" + 
-			"Bundle-Vendor: Eclipse Xtext\r\n" + 
-			"Bundle-Version: 2.16.0.qualifier\r\n" + 
-			"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true\r\n" + 
-			"Bundle-ActivationPolicy: lazy\r\n" + 
-			"Require-Bundle: org.eclipse.xtext,\r\n" + 
-			" org.eclipse.xtext.xbase,\r\n" + 
-			" org.eclipse.equinox.common;bundle-version=\"3.5.0\",\r\n" + 
-			" org.eclipse.emf.ecore,\r\n" + 
-			" org.objectweb.asm;bundle-version=\"[6.2.1,6.3.0)\";resolution:=optional,\r\n" + 
-			" org.eclipse.xtext.util,\r\n" + 
-			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\",\r\n" + 
-			" org.eclipse.xtend.lib;bundle-version=\"2.14.0\",\r\n" + 
-			" org.eclipse.emf.common,\r\n" + 
-			" org.eclipse.xtext.common.types,\r\n" + 
-			" org.eclipse.xtext.xbase.lib;bundle-version=\"2.14.0\"\r\n" + 
-			"Bundle-RequiredExecutionEnvironment: JavaSE-1.8\r\n" + 
-			"Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.ruleEngine,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.ruleEngine.impl,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.parser.antlr.lexer,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.parser.antlr.internal,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.validation,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.jvmmodel,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.scoping,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.serializer,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.parser.antlr,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.services,\r\n" + 
-			" org.eclipse.xtext.example.homeautomation.formatting2\r\n" + 
-			"Import-Package: org.apache.log4j\r\n" + 
-			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation\r\n" + 
-			"";
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+			"Bundle-Vendor: Eclipse Xtext" + NL + 
+			"Bundle-Version: 2.16.0.qualifier" + NL + 
+			"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+			"Bundle-ActivationPolicy: lazy" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.equinox.common;bundle-version=\"3.5.0\"," + NL + 
+			" org.eclipse.emf.ecore," + NL + 
+			" org.objectweb.asm;bundle-version=\"[6.2.1,6.3.0)\";resolution:=optional," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtend.lib;bundle-version=\"2.14.0\"," + NL + 
+			" org.eclipse.emf.common," + NL + 
+			" org.eclipse.xtext.common.types," + NL + 
+			" org.eclipse.xtext.xbase.lib;bundle-version=\"2.14.0\"" + NL + 
+			"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+			"Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util," + NL + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine," + NL + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine.impl," + NL + 
+			" org.eclipse.xtext.example.homeautomation," + NL + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr.lexer," + NL + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr.internal," + NL + 
+			" org.eclipse.xtext.example.homeautomation.validation," + NL + 
+			" org.eclipse.xtext.example.homeautomation.jvmmodel," + NL + 
+			" org.eclipse.xtext.example.homeautomation.scoping," + NL + 
+			" org.eclipse.xtext.example.homeautomation.serializer," + NL + 
+			" org.eclipse.xtext.example.homeautomation.parser.antlr," + NL + 
+			" org.eclipse.xtext.example.homeautomation.services," + NL + 
+			" org.eclipse.xtext.example.homeautomation.formatting2" + NL + 
+			"Import-Package: org.apache.log4j" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
 		// @formatter:on
 		MergeableManifest2 manifest = newManifest(content);
 		assertEquals(content, write(manifest));
+	}
+
+	/**
+	 * In this final test we read all "META-INF/MANIFEST.MF" files from
+	 * classpath. We the:
+	 * <ol>
+	 * <li>Read each file once as "manifest0"</li>
+	 * <li>Write it as string once and read the result again as "manifest1"</li>
+	 * <li>Compare "manifest0" and "manifest1"</li>
+	 * <li>Execute some sanity checks to ensure we do not compare empty files or
+	 * similar</li>
+	 * </ol>
+	 * This way we ensure we can read and write all manifest files.
+	 */
+	@Test
+	public void readWrite_allManifestsFromClasspath() throws Exception {
+		for (String content : readAllManifestsFromClasspath()) {
+			MergeableManifest2 manifest0 = newManifest(content);
+			MergeableManifest2 manifest1 = newManifest(write(manifest0));
+			assertEquals(manifest0, manifest1);
+			// start of sanity checks
+			assertTrue(content.length() > 0);
+			assertNotNull(manifest0.getMainAttributes().get(MergeableManifest2.MANIFEST_VERSION));
+		}
+	}
+
+	private List<String> readAllManifestsFromClasspath() throws IOException {
+		List<String> result = new ArrayList<>();
+		Enumeration<URL> resources = MergeableManifest2Test.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
+		while (resources.hasMoreElements()) {
+			try (InputStreamReader reader = new InputStreamReader(resources.nextElement().openStream(), "UTF-8")) {
+				String content = CharStreams.toString(reader);
+				result.add(content);
+			} catch (IOException e) {
+				fail(e.getMessage());
+			}
+		}
+		assertTrue("Expect to find at least one MANIFEST", result.size() > 0);
+		return result;
 	}
 
 	private String make512Safe(String input) {
