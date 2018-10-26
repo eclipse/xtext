@@ -33,6 +33,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -669,7 +670,15 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   private boolean isJUnit5PluginAvailable() {
-    IPluginModelBase _findModel = PluginRegistry.findModel("org.junit.jupiter.engine");
-    return (_findModel != null);
+    try {
+      IPluginModelBase _findModel = PluginRegistry.findModel("org.junit.jupiter.engine");
+      return (_findModel != null);
+    } catch (final Throwable _t) {
+      if (_t instanceof NoClassDefFoundError) {
+        return false;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
 }

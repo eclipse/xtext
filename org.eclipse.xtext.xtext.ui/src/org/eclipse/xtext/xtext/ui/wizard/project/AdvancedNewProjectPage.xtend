@@ -451,7 +451,11 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 	
 	private def boolean isJUnit5PluginAvailable() {
-		PluginRegistry.findModel("org.junit.jupiter.engine") !== null
+		try {
+			return PluginRegistry.findModel("org.junit.jupiter.engine") !== null
+		} catch (NoClassDefFoundError e) {
+			return false
+		}
 	}
 
 }
