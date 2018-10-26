@@ -241,4 +241,10 @@ public class StringsTest extends Assert {
 		assertEquals(input, Strings.convertFromJavaString(expected, true));
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConvertIllegalEscapeSequence() throws Exception {
+		String input = "\\/";
+		Strings.convertFromJavaString(input, true);
+	}
+	
 }
