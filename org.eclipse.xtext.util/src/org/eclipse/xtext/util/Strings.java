@@ -121,69 +121,14 @@ public class Strings {
 		return s.substring(0, 1).toLowerCase() + s.substring(1);
 	}
 
+	private static final JavaStringConverter CONVERTER = new JavaStringConverter();
+	
 	/**
 	 * Resolve Java control character sequences with to the actual character value.
 	 * Optionally handle unicode escape sequences, too. 
 	 */
 	public static String convertFromJavaString(String string, boolean useUnicode) {
-		int length = string.length();
-		StringBuilder result = new StringBuilder(length);
-		for(int nextIndex = 0; nextIndex < length;) {
-			nextIndex = unescapeCharAndAppendTo(string, useUnicode, nextIndex, result);
-		}
-		return result.toString();
-	}
-
-	private static int unescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
-		char c = string.charAt(index++);
-		if (c == '\\') {
-			index = doUnescapeCharAndAppendTo(string, useUnicode, index, result);
-		} else {
-			result.append(c);
-		}
-		return index;
-	}
-
-	private static int doUnescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
-		char c = string.charAt(index++);
-		switch(c) {
-			case 'b':
-				c = '\b';
-				break;	
-			case 't':
-				c = '\t';
-				break;
-			case 'n':
-				c = '\n';
-				break;
-			case 'f':
-				c = '\f';
-				break;
-			case 'r':
-				c = '\r';
-				break;
-			case '"':
-			case '\'':
-			case '\\':
-				break;
-			case 'u':
-				if (useUnicode) {
-					return unescapeUnicodeSequence(string, index, result);
-				}
-		}
-		result.append(c);
-		return index;
-	}
-
-	private static int unescapeUnicodeSequence(String string, int index, StringBuilder result) {
-		try {
-			if(index+4 > string.length())
-				throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
-			result.append((char) Integer.parseInt(string.substring(index, index + 4), 16));
-			return index + 4;
-		} catch(NumberFormatException e) {
-			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
-		}
+		return CONVERTER.convertFromJavaString(string, useUnicode);
 	}
 
 	/**
@@ -193,7 +138,7 @@ public class Strings {
 	 * the quotes.
 	 */
 	public static String convertToJavaString(String theString) {
-		return convertToJavaString(theString, true);
+		return CONVERTER.convertToJavaString(theString, true);
 	}
 	
 	/**
@@ -203,61 +148,11 @@ public class Strings {
 	 * the quotes.
 	 */
 	public static String convertToJavaString(String input, boolean useUnicode) {
-		int length = input.length();
-		StringBuilder result = new StringBuilder(length + 4);
-		for (int i = 0; i < length; i++) {
-			escapeAndAppendTo(input.charAt(i), useUnicode, result);
-		}
-		return result.toString();
-	}
-
-	private static void escapeAndAppendTo(char c, boolean useUnicode, StringBuilder result) {
-		String appendMe;
-		switch (c) {
-			case '\b':
-				appendMe = "\\b";
-				break;	
-			case '\t':
-				appendMe = "\\t";
-				break;
-			case '\n':
-				appendMe = "\\n";
-				break;
-			case '\f':
-				appendMe = "\\f";
-				break;
-			case '\r':
-				appendMe = "\\r";
-				break;
-			case '"':
-				appendMe = "\\\"";
-				break;
-			case '\'':
-				appendMe = "\\'";
-				break;
-			case '\\':
-				appendMe = "\\\\";
-				break;
-			default:
-				if (useUnicode && mustEncodeAsEscapeSequence(c)) {
-					result.append("\\u");
-					for (int i = 12; i >= 0; i-=4) {
-						result.append(toHex((c >> i) & 0xF));
-					}
-				} else {
-					result.append(c);
-				}
-				return;
-		}
-		result.append(appendMe);
-	}
-
-	private static boolean mustEncodeAsEscapeSequence(char next) {
-		return next < 0x0020 || next > 0x007e;
+		return CONVERTER.convertToJavaString(input, useUnicode);
 	}
 
 	public static char toHex(int i) {
-		return "0123456789ABCDEF".charAt(i & 0xF);
+		return CONVERTER.toHex(i);
 	}
 
 	/**
