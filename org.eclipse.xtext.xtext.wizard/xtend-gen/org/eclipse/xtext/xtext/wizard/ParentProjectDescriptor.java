@@ -118,7 +118,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   public String getTychoVersion() {
-    return "1.2.0";
+    return "1.3.0-SNAPSHOT";
   }
   
   private CharSequence loadResource(final String resourcePath) {
