@@ -23,8 +23,13 @@ public class JavaStringConverter {
 	public String convertFromJavaString(String string, boolean useUnicode) {
 		int length = string.length();
 		StringBuilder result = new StringBuilder(length);
-		for(int nextIndex = 0; nextIndex < length;) {
-			nextIndex = unescapeCharAndAppendTo(string, useUnicode, nextIndex, result);
+		return convertFromJavaString(string, useUnicode, 0, result);
+	}
+	
+	protected String convertFromJavaString(String string, boolean useUnicode, int index, StringBuilder result) {
+		int length = string.length();
+		while(index < length) {
+			index = unescapeCharAndAppendTo(string, useUnicode, index, result);
 		}
 		return result.toString();
 	}
@@ -34,11 +39,21 @@ public class JavaStringConverter {
 		if (c == '\\') {
 			index = doUnescapeCharAndAppendTo(string, useUnicode, index, result);
 		} else {
-			result.append(c);
+			validateAndAppendChar(result, c);
 		}
 		return index;
 	}
 	
+	protected void validateAndAppendChar(StringBuilder result, char c) {
+		if (validate(result, c)) {
+			result.append(c);	
+		}
+	}
+	
+	protected boolean validate(StringBuilder result, char c) {
+		return true;
+	}
+
 	protected int doUnescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
 		char c = string.charAt(index++);
 		switch(c) {
@@ -69,7 +84,7 @@ public class JavaStringConverter {
 			default:
 				return handleUnknownEscapeSequence(string, c, useUnicode, index, result);
 		}
-		result.append(c);
+		validateAndAppendChar(result, c);
 		return index;
 	}
 
@@ -79,13 +94,30 @@ public class JavaStringConverter {
 	
 	protected int unescapeUnicodeSequence(String string, int index, StringBuilder result) {
 		try {
-			if(index+4 > string.length())
-				throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
-			result.append((char) Integer.parseInt(string.substring(index, index + 4), 16));
-			return index + 4;
+			return doUnescapeUnicodeEscapeSequence(string, index, result);
 		} catch(NumberFormatException e) {
 			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
 		}
+	}
+
+	protected int doUnescapeUnicodeEscapeSequence(String string, int index, StringBuilder result) throws NumberFormatException {
+		if(isInvalidUnicodeEscapeSequence(string, index))
+			return handleInvalidUnicodeEscapeSequnce(string, index, result);
+		char appendMe = (char) Integer.parseInt(string.substring(index, index + 4), 16);
+		validateAndAppendChar(result, appendMe);
+		return index + 4;
+	}
+
+	/**
+	 * Return true if the chars starting at index do not appear to be a unicode
+	 * escape sequence (without the leading backslash u}.
+	 */
+	protected boolean isInvalidUnicodeEscapeSequence(String string, int index) {
+		return index+4 > string.length();
+	}
+	
+	protected int handleInvalidUnicodeEscapeSequnce(String string, int index, StringBuilder result) {
+		throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string + " at index " + index);
 	}
 	
 	/**
