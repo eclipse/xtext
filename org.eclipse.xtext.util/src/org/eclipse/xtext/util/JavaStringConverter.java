@@ -65,11 +65,18 @@ public class JavaStringConverter {
 				if (useUnicode) {
 					return unescapeUnicodeSequence(string, index, result);
 				}
+				// intentional fallThrough
+			default:
+				return handleUnknownEscapeSequence(string, c, useUnicode, index, result);
 		}
 		result.append(c);
 		return index;
 	}
 
+	protected int handleUnknownEscapeSequence(String string, char c, boolean useUnicode, int index, StringBuilder result) {
+		throw new IllegalArgumentException("Illegal escape character \\" + c);
+	}
+	
 	protected int unescapeUnicodeSequence(String string, int index, StringBuilder result) {
 		try {
 			if(index+4 > string.length())
