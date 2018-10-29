@@ -41,8 +41,11 @@ interface ISemanticHighlightingStyleToTokenMapper {
 	 */
 	def Set<String> getAllStyleIds();
 
+	/**
+	 * The shared, default NOOP implementation of the semantic style ID to TextMate token mapper.
+	 */
 	@Singleton
-	static class Noop implements ISemanticHighlightingStyleToTokenMapper {
+	static final class Noop implements ISemanticHighlightingStyleToTokenMapper {
 
 		override toScopes(String styleId) {
 			return SemanticHighlightingRegistry.UNKNOWN_SCOPES;

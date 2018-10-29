@@ -26,8 +26,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @ImplementedBy(ISemanticHighlightingStyleToTokenMapper.Noop.class)
 @SuppressWarnings("all")
 public interface ISemanticHighlightingStyleToTokenMapper {
+  /**
+   * The shared, default NOOP implementation of the semantic style ID to TextMate token mapper.
+   */
   @Singleton
-  public static class Noop implements ISemanticHighlightingStyleToTokenMapper {
+  public static final class Noop implements ISemanticHighlightingStyleToTokenMapper {
     @Override
     public List<String> toScopes(final String styleId) {
       return SemanticHighlightingRegistry.UNKNOWN_SCOPES;

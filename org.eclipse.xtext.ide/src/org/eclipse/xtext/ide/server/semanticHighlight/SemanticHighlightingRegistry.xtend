@@ -73,7 +73,7 @@ class SemanticHighlightingRegistry {
 	}
 
 	@Inject
-	extension UriExtensions; 
+	extension UriExtensions;
 
 	/**
 	 * Lookup table for all known TextMate scopes.
@@ -149,7 +149,7 @@ class SemanticHighlightingRegistry {
 		val resource = context.resource as XtextResource;
 		val calculator = resource.resourceServiceProvider?.get(ISemanticHighlightingCalculator);
 		val mapper = resource.resourceServiceProvider?.get(ISemanticHighlightingStyleToTokenMapper);
-		if (calculator === null || mapper === null) {
+		if (calculator === null || mapper.isIgnoredMapper) {
 			return;
 		}
 
@@ -168,6 +168,16 @@ class SemanticHighlightingRegistry {
 		val lines = ranges.toSemanticHighlightingInformation(document);
 		val textDocument = context.toVersionedTextDocumentIdentifier;
 		notifyClient(new SemanticHighlightingParams(textDocument, lines));
+	}
+
+	/**
+	 * {@code true} if the argument is an ignored mapper. Otherwise, {@code false}.
+	 * If a mapper is ignored, no semantic highlighting information will be calculated. Clients won't be notified at all.
+	 * 
+	 * By default, the argument is ignored if {@code null}, or instance of the {@link ISemanticHighlightingStyleToTokenMapper.Noop NOOP mapper}.
+	 */
+	protected def boolean isIgnoredMapper(ISemanticHighlightingStyleToTokenMapper mapper) {
+		return mapper === null || mapper instanceof ISemanticHighlightingStyleToTokenMapper.Noop;
 	}
 
 	protected def List<SemanticHighlightingInformation> toSemanticHighlightingInformation(
