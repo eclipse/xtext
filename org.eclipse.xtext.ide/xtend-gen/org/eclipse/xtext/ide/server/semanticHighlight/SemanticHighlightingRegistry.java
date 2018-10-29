@@ -260,7 +260,7 @@ public class SemanticHighlightingRegistry {
       _get_1=_resourceServiceProvider_1.<ISemanticHighlightingStyleToTokenMapper>get(ISemanticHighlightingStyleToTokenMapper.class);
     }
     final ISemanticHighlightingStyleToTokenMapper mapper = _get_1;
-    if (((calculator == null) || (mapper == null))) {
+    if (((calculator == null) || this.isIgnoredMapper(mapper))) {
       return;
     }
     final Document document = context.getDocument();
@@ -283,6 +283,16 @@ public class SemanticHighlightingRegistry {
     final VersionedTextDocumentIdentifier textDocument = this.toVersionedTextDocumentIdentifier(context);
     SemanticHighlightingParams _semanticHighlightingParams = new SemanticHighlightingParams(textDocument, lines);
     this.notifyClient(_semanticHighlightingParams);
+  }
+  
+  /**
+   * {@code true} if the argument is an ignored mapper. Otherwise, {@code false}.
+   * If a mapper is ignored, no semantic highlighting information will be calculated. Clients won't be notified at all.
+   * 
+   * By default, the argument is ignored if {@code null}, or instance of the {@link ISemanticHighlightingStyleToTokenMapper.Noop NOOP mapper}.
+   */
+  protected boolean isIgnoredMapper(final ISemanticHighlightingStyleToTokenMapper mapper) {
+    return ((mapper == null) || (mapper instanceof ISemanticHighlightingStyleToTokenMapper.Noop));
   }
   
   protected List<SemanticHighlightingInformation> toSemanticHighlightingInformation(final Iterable<? extends SemanticHighlightingRegistry.HighlightedRange> ranges, final Document document) {
