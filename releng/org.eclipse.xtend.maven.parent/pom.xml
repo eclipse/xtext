@@ -16,7 +16,7 @@
 		<emfCodegen.version>2.11.0</emfCodegen.version>
 
 		<maven-install-version>2.5.1</maven-install-version>
-		<asm.version>6.2.1</asm.version>
+		<asm.version>7.0</asm.version>
 		<guava.version>[14.0,22)</guava.version>
 		<google-inject.version>3.0</google-inject.version>
 		<log4j.version>1.2.16</log4j.version>
