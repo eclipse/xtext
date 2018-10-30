@@ -93,8 +93,8 @@ class TargetPlatformProject extends ProjectDescriptor {
 			<unit id="org.junit.platform.runner" version="1.3.1.v20181005-1442"/>
 			<unit id="org.opentest4j" version="1.1.1.v20181005-1442"/>
 			«ENDIF»
-			<unit id="org.objectweb.asm" version="6.2.1.v20180823-1831"/>
-			<unit id="org.objectweb.asm.tree" version="6.2.1.v20180823-1831"/>
+			<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
+			<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2018-12"/>
 		</location>
 		</locations>
