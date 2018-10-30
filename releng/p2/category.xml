@@ -9,9 +9,6 @@
 	<feature id="org.eclipse.xtend.gwt" version="2.16.0.qualifier">
 		<category name="xtext-lib"/>
 	</feature>
-	<feature id="org.eclipse.xtext.license" version="2.16.0.qualifier">
-		<category name="xtext-lib"/>
-	</feature>
 	<bundle id="org.eclipse.xtend.lib" version="2.16.0.qualifier">
 		<category name="xtext-lib"/>
 	</bundle>

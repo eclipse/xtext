@@ -90,7 +90,6 @@
 		<module>org.eclipse.xtext.xbase.lib</module>
 		<module>org.eclipse.xtext.gwt</module>
 		<module>org.eclipse.xtend.gwt</module>
-		<module>org.eclipse.xtext.license</module>
 	</modules>
 
 	<build>

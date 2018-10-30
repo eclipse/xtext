@@ -6,5 +6,9 @@
 			<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 			<unit id="com.google.guava" version="0.0.0"/>
 		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+			<unit id="org.eclipse.license.feature.group" version="0.0.0"/>
+			<repository location="http://download.eclipse.org/cbi/updates/license/"/>
+		</location>
 	</locations>
 </target>
