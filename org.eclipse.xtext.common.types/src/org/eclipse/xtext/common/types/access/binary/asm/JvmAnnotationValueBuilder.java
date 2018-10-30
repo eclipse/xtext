@@ -30,7 +30,7 @@ public abstract class JvmAnnotationValueBuilder extends AnnotationVisitor {
 	protected JvmAnnotationValue result;
 	
 	protected JvmAnnotationValueBuilder(Proxies proxies) {
-		super(Opcodes.ASM7_EXPERIMENTAL);
+		super(Opcodes.ASM7);
 		this.proxies = proxies;
 	}
 	
