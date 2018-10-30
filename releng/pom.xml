@@ -18,7 +18,6 @@
 		<module>org.eclipse.xtext.sdk.target</module>
 		<module>org.eclipse.xtext.sdk.parent</module>
 		<module>org.eclipse.xtext.docs.feature</module>
-		<module>org.eclipse.xtext.license.feature</module>
 		<module>org.eclipse.xtext.examples.feature</module>
 		<module>org.eclipse.xtext.redist.feature</module>
 		<module>org.eclipse.xtext.runtime.feature</module>
