@@ -50,7 +50,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Oxygen"
+      defaultValue="2018-12"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
@@ -339,6 +339,18 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.core.resources/encoding"
           value="UTF-8"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/maxConcurrentBuilds"
+          value="8"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.xtext.builder">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.xtext.builder/schedulingrule"
+          value="ALL_XTEXT_PROJECTS"/>
     </setupTask>
   </setupTask>
   <setupTask
@@ -363,6 +375,8 @@
         url="${p2.xtext}"/>
     <repository
         url="${p2.mwe2}"/>
+    <repository
+        url="https://ci.eclipse.org/xtext/job/xtext-eclipse/view/change-requests/job/PR-893/lastSuccessfulBuild/artifact/build/p2-repository/"/>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"

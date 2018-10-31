@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,14 +26,20 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.jobs.MultiRule;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.debug.IBuildLogger;
+import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -43,6 +50,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
+import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
@@ -57,7 +65,31 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
-
+	/**
+	 * Name of a preference defining the scheduling rule strategy for the builder.
+	 * 
+	 * @since 2.16
+	 */
+	@Beta
+	public static final String PREF_SCHEDULING_RULE = "schedulingrule"; //$NON-NLS-1$
+	/**
+	 * Options for scheduling rules.
+	 * 
+	 * @since 2.16
+	 */
+	public static enum SchedulingOption {
+		WORKSPACE,
+		// all Xtext projects in the workspace
+		ALL_XTEXT_PROJECTS,
+		// the currently building project
+		PROJECT,
+		// null scheduling rule
+		NULL;
+	}
+	
+	private IPreferenceStore preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,
+			Activator.PLUGIN_ID);
+	
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
 
@@ -373,5 +405,29 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			progress.worked(1);
 		}
 	}
-	
+
+	@Override
+	public ISchedulingRule getRule(int kind, Map<String, String> args) {
+		switch (getSchedulingOption()) {
+			case NULL: return null;
+			case WORKSPACE: return getProject().getWorkspace().getRoot();
+			case PROJECT: return getProject();
+			case ALL_XTEXT_PROJECTS: return new MultiRule(Arrays.stream(
+				getProject().getWorkspace().getRoot().getProjects())
+				.filter(XtextProjectHelper::hasNature)
+				.toArray(ISchedulingRule[]::new));
+			default: throw new IllegalArgumentException();
+		}
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	private SchedulingOption getSchedulingOption () {
+		String schedulingRuleName = preferenceStore.getString(PREF_SCHEDULING_RULE);
+		if (schedulingRuleName.isEmpty()) {
+			return SchedulingOption.WORKSPACE;
+		}
+		return SchedulingOption.valueOf(preferenceStore.getString(PREF_SCHEDULING_RULE));
+	}
 }
