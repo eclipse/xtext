@@ -19,7 +19,7 @@ ext.versions = [
 	'emfCodegen': '2.11.0',
 	'xpand': '2.0.0',
 	'guice': '3.0',
-	'asm': '6.2.1',
+	'asm': '7.0',
 	'ant': '[1.7,2)',
 	'jflex': '1.4.3'
 ]
