@@ -34,7 +34,7 @@ public class JvmAnnotationReferenceBuilder extends AnnotationVisitor {
 	private final BinaryTypeSignature annotationType;
 
 	public JvmAnnotationReferenceBuilder(InternalEList<JvmAnnotationReference> target, String desc, Proxies proxies) {
-		super(Opcodes.ASM7_EXPERIMENTAL);
+		super(Opcodes.ASM7);
 		this.proxies = proxies;
 		this.target = target;
 		this.annotationType = BinarySignatures.createTypeSignature(desc);
