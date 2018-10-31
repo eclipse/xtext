@@ -193,4 +193,62 @@ public class JavaStringConverter {
 	public char toHex(int i) {
 		return "0123456789ABCDEF".charAt(i & 0xF);
 	}
+	
+	protected boolean isHexSequence(String in, int off, int chars) {
+		return doIsHexSequence(in, off, chars);
+	}
+	
+	public static boolean doIsHexSequence(String in, int off, int chars) {
+		for (int i = off; i < in.length() && i < off + chars; i++) {
+			char c = in.charAt(i);
+			if (!isHex(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected boolean isHexSequence(char[] in, int off, int chars) {
+		return doIsHexSequence(in, off, chars);
+	}
+	
+	public static boolean doIsHexSequence(char[] in, int off, int chars) {
+		for (int i = off; i < in.length && i < off + chars; i++) {
+			char c = in[i];
+			if (!isHex(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	protected static boolean isHex(char c) {
+		switch (c) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+				return true;
+			default:
+				return false;
+		}
+	}
 }
