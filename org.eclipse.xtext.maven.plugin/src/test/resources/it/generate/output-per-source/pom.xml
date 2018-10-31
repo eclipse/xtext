@@ -14,7 +14,7 @@
 	<artifactId>purexbase-test</artifactId>
 	<packaging>jar</packaging>
 	<properties>
-		<tycho-version>1.2.0</tycho-version>
+		<tycho-version>1.3.0</tycho-version>
 		<xtend-version>2.17.0-SNAPSHOT</xtend-version>
 		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 	</properties>
