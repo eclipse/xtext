@@ -120,14 +120,6 @@
 							<include>**/*Test?.java</include>
 						</includes>
 						<appArgLine>-pluginCustomization ${basedir}/../releng/org.eclipse.xtext.tycho.tests.parent/pluginCustomization.ini</appArgLine>
-						<!-- TODO remove with tycho 1.3 -->
-						<bundleStartLevel>
-							<bundle>
-								<id>org.apache.felix.scr</id>
-								<level>1</level>
-								<autoStart>true</autoStart>
-							</bundle>
-						</bundleStartLevel>
 					</configuration>
 				</plugin>
 			</plugins>
