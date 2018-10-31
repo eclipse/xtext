@@ -23,7 +23,6 @@ import org.osgi.framework.Version;
  * @author Christian Dietrich - Initial contribution and API
  */
 public class ParallelBuildEnabledTest {
-
 	@Test
 	public void testIsParallelBuildEnabledInWorkspace() {
 		// preference and constant ResourcesPlugin#PREF_MAX_CONCURRENT_BUILDS only available on o.e.core.resources >= 3.13 
@@ -36,7 +35,7 @@ public class ParallelBuildEnabledTest {
 	
 	@Test
 	public void testBuilderSchedulingRuleEnabledInWorkspace() {
-		String schedulingRule = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID).getString(XtextBuilder.PREF_SCHEDULING_RULE);
+		String schedulingRule = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID).getString(XtextBuilder.BuilderPreferences.PREF_SCHEDULING_RULE);
 		assertEquals("non-default scheduling rule was not enabled", SchedulingOption.ALL_XTEXT_PROJECTS.name(), schedulingRule);
 	}
 	

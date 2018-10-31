@@ -53,6 +53,7 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -65,31 +66,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
-	/**
-	 * Name of a preference defining the scheduling rule strategy for the builder.
-	 * 
-	 * @since 2.16
-	 */
-	@Beta
-	public static final String PREF_SCHEDULING_RULE = "schedulingrule"; //$NON-NLS-1$
-	/**
-	 * Options for scheduling rules.
-	 * 
-	 * @since 2.16
-	 */
-	public static enum SchedulingOption {
-		WORKSPACE,
-		// all Xtext projects in the workspace
-		ALL_XTEXT_PROJECTS,
-		// the currently building project
-		PROJECT,
-		// null scheduling rule
-		NULL;
-	}
-	
-	private IPreferenceStore preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,
-			Activator.PLUGIN_ID);
-	
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
 
@@ -117,6 +93,58 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
+
+	/**
+	 * 
+	 * @since 2.16
+	 */
+	@Singleton
+	@Beta
+	public static class BuilderPreferences {
+		/**
+		 * Name of a preference defining the scheduling rule strategy for the builder.
+		 */
+		public static final String PREF_SCHEDULING_RULE = "schedulingrule"; //$NON-NLS-1$
+		
+		private SchedulingOption schedulingOption;
+		
+		public BuilderPreferences () {
+			IPreferenceStore preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,
+					Activator.PLUGIN_ID);
+
+			String schedulingRuleName = preferenceStore.getString(PREF_SCHEDULING_RULE);
+			if (schedulingRuleName.isEmpty()) {
+				schedulingOption = SchedulingOption.WORKSPACE;
+			} else {
+				schedulingOption = SchedulingOption.valueOf(schedulingRuleName);
+			}
+			
+			preferenceStore.addPropertyChangeListener(e -> {
+				if (PREF_SCHEDULING_RULE.equals(e.getProperty())) {
+					schedulingOption = SchedulingOption.valueOf(e.getNewValue().toString());
+				}
+			});
+		}
+	}
+	
+	@Inject
+	private BuilderPreferences preferences;
+	
+	/**
+	 * Options for scheduling rules.
+	 * 
+	 * @since 2.16
+	 */
+	public static enum SchedulingOption {
+		WORKSPACE,
+		// all Xtext projects in the workspace
+		ALL_XTEXT_PROJECTS,
+		// the currently building project
+		PROJECT,
+		// null scheduling rule
+		NULL;
+	}
+	
 	
 	/**
 	 * This is a fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=459525
@@ -408,7 +436,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Override
 	public ISchedulingRule getRule(int kind, Map<String, String> args) {
-		switch (getSchedulingOption()) {
+		switch (preferences.schedulingOption) {
 			case NULL: return null;
 			case WORKSPACE: return getProject().getWorkspace().getRoot();
 			case PROJECT: return getProject();
@@ -420,14 +448,4 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
-	/**
-	 * @since 2.16
-	 */
-	private SchedulingOption getSchedulingOption () {
-		String schedulingRuleName = preferenceStore.getString(PREF_SCHEDULING_RULE);
-		if (schedulingRuleName.isEmpty()) {
-			return SchedulingOption.WORKSPACE;
-		}
-		return SchedulingOption.valueOf(schedulingRuleName);
-	}
 }
