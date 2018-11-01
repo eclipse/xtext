@@ -72,6 +72,8 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		int errorLength = -1;
 		int nextIndex = 1;
 		
+		protected Implementation() {}
+		
 		public String convertFromJavaString(String literal) {
 			int idx = literal.indexOf('\\');
 			if (idx < 0 && literal.length() > 1 && literal.charAt(0) == literal.charAt(literal.length() - 1)) {
@@ -120,12 +122,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		}
 		
 		@Override
-		protected boolean isInvalidUnicodeEscapeSequence(String string, int index) {
-			return super.isInvalidUnicodeEscapeSequence(string, index) || !isHexSequence(string, index, 4);
-		}
-		
-		@Override
-		protected int handleInvalidUnicodeEscapeSequnce(String string, int index, StringBuilder result) {
+		protected int handleInvalidUnicodeEscapeSequence(String string, int index, StringBuilder result) {
 			result.append('u');
 			errorMessage = "Invalid unicode";
 			errorIndex = index - 2;

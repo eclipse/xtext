@@ -21,15 +21,44 @@ public class JavaStringConverter {
 	 * Optionally handle unicode escape sequences, too. 
 	 */
 	public String convertFromJavaString(String string, boolean useUnicode) {
+		int firstEscapeSequence = string.indexOf('\\');
+		if (firstEscapeSequence == -1) {
+			return string;
+		}
 		int length = string.length();
 		StringBuilder result = new StringBuilder(length);
-		return convertFromJavaString(string, useUnicode, 0, result);
+		appendRegion(string, 0, firstEscapeSequence, result);
+		return convertFromJavaString(string, useUnicode, firstEscapeSequence, result);
+	}
+
+	protected void appendRegion(String string, int fromInclusive, int toExclusive, StringBuilder result) {
+		if (validateRegion(string, fromInclusive, toExclusive, result)) {
+			result.append(string, fromInclusive, toExclusive);	
+		} else {
+			for(int i = fromInclusive; i < toExclusive; i++) {
+				validateAndAppendChar(result, string.charAt(i));
+			}
+		}
 	}
 	
+	protected boolean validateRegion(String string, int fromInclusive, int toExclusive, StringBuilder result) {
+		return true;
+	}
+
 	protected String convertFromJavaString(String string, boolean useUnicode, int index, StringBuilder result) {
 		int length = string.length();
 		while(index < length) {
 			index = unescapeCharAndAppendTo(string, useUnicode, index, result);
+			if (index < length) {
+				int nextEscapeSequence = string.indexOf('\\', index);
+				if (nextEscapeSequence == -1) {
+					appendRegion(string, index, length, result);
+					index = length;
+				} else {
+					appendRegion(string, index, nextEscapeSequence, result);
+					index = nextEscapeSequence;
+				}
+			}
 		}
 		return result.toString();
 	}
@@ -37,10 +66,9 @@ public class JavaStringConverter {
 	protected int unescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
 		char c = string.charAt(index++);
 		if (c == '\\') {
-			index = doUnescapeCharAndAppendTo(string, useUnicode, index, result);
-		} else {
-			validateAndAppendChar(result, c);
+			return doUnescapeCharAndAppendTo(string, useUnicode, index, result);
 		}
+		validateAndAppendChar(result, c);
 		return index;
 	}
 	
@@ -75,6 +103,7 @@ public class JavaStringConverter {
 			case '"':
 			case '\'':
 			case '\\':
+				// append as is
 				break;
 			case 'u':
 				if (useUnicode) {
@@ -93,19 +122,32 @@ public class JavaStringConverter {
 	}
 	
 	protected int unescapeUnicodeSequence(String string, int index, StringBuilder result) {
-		try {
-			return doUnescapeUnicodeEscapeSequence(string, index, result);
-		} catch(NumberFormatException e) {
-			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
+		if(!isInvalidUnicodeEscapeSequence(string, index)) {
+			char c1 = string.charAt(index);
+			char c2 = string.charAt(index+1);
+			char c3 = string.charAt(index+2);
+			char c4 = string.charAt(index+3);
+			if (isHex(c1) && isHex(c2) && isHex(c3) && isHex(c4)) {
+				int appendMe = 0;
+				appendMe = buildChar(appendMe, c1);
+				appendMe = buildChar(appendMe, c2);
+				appendMe = buildChar(appendMe, c3);
+				appendMe = buildChar(appendMe, c4);
+				validateAndAppendChar(result, (char) appendMe);
+				return index + 4;
+			}
 		}
+		return handleInvalidUnicodeEscapeSequence(string, index, result);
 	}
 
-	protected int doUnescapeUnicodeEscapeSequence(String string, int index, StringBuilder result) throws NumberFormatException {
-		if(isInvalidUnicodeEscapeSequence(string, index))
-			return handleInvalidUnicodeEscapeSequnce(string, index, result);
-		char appendMe = (char) Integer.parseInt(string.substring(index, index + 4), 16);
-		validateAndAppendChar(result, appendMe);
-		return index + 4;
+	private int buildChar(int appendMe, char c) {
+		if (c <= '9') {
+			return (appendMe << 4) + c - '0';
+		} else if (c >= 'a') {
+			return (appendMe << 4) + c - 'a' + 10;
+		} else {
+			return (appendMe << 4) + c - 'A' + 10;
+		}
 	}
 
 	/**
@@ -116,7 +158,7 @@ public class JavaStringConverter {
 		return index+4 > string.length();
 	}
 	
-	protected int handleInvalidUnicodeEscapeSequnce(String string, int index, StringBuilder result) {
+	protected int handleInvalidUnicodeEscapeSequence(String string, int index, StringBuilder result) {
 		throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string + " at index " + index);
 	}
 	
@@ -222,33 +264,15 @@ public class JavaStringConverter {
 		return true;
 	}
 
-	protected static boolean isHex(char c) {
-		switch (c) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'e':
-			case 'f':
-			case 'A':
-			case 'B':
-			case 'C':
-			case 'D':
-			case 'E':
-			case 'F':
+	public static boolean isHex(char c) {
+		if ('0' <= c && c <= 'f') {
+			if (c <= '9')
 				return true;
-			default:
-				return false;
+			if ('A' <= c && c <= 'F')
+				return true;
+			if ('a' <= c)
+				return true;	
 		}
+		return false;
 	}
 }
