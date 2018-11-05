@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.tests.server
 
 import org.junit.Test
+import org.eclipse.lsp4j.CompletionItem
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -17,9 +18,12 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 	@Test
 	def void testCompletion_01() {
 		testCompletion [
-		    model = ''
+			model = ''
 			expectedCompletionItems = '''
 				type -> type [[0, 0] .. [0, 0]]
+				Sample Snippet -> type ${1|A,B,C|} {
+				                
+				            } [[0, 0] .. [0, 0]]
 			'''
 		]
 	}
@@ -105,6 +109,26 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
     }
     
     @Test
+    def void testSnippet() {
+        withKind = true
+        testCompletion [
+            model = '''
+                type Foo {}
+                 
+            '''
+            line = 1
+            column = 0
+            expectedCompletionItems = '''
+               (Keyword) type -> type [[1, 0] .. [1, 0]]
+               (Snippet|Snippet) Sample Snippet -> type ${1|A,B,C|} {
+                               
+                           } [[1, 0] .. [1, 0]]
+            '''
+        ]
+        withKind = false
+    }
+    
+    @Test
     def void testCompletion_AdditionalEdits_01() {
         testCompletion [
             model = '''
@@ -135,4 +159,10 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
             '''
         ]
     }
+    
+    var withKind = false;
+    
+    protected override dispatch String toExpectation(CompletionItem it) '''
+		«IF withKind»(«kind»«IF insertTextFormat !== null»|«insertTextFormat»«ENDIF») «ENDIF»«label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF textEdit !== null» -> «textEdit.toExpectation»«IF !additionalTextEdits.nullOrEmpty»   + «additionalTextEdits.map[toExpectation].join('   + ')»«ENDIF»«ELSEIF insertText !== null && insertText != label» -> «insertText»«ENDIF»
+	'''
 }

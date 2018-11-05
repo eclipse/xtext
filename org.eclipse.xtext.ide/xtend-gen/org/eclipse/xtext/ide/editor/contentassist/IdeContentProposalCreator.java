@@ -38,6 +38,17 @@ public class IdeContentProposalCreator {
   }
   
   /**
+   * Returns an entry of kind snippet with the given proposal and label and the prefix from the context, or null if the proposal is not valid.
+   * @since 2.16
+   */
+  public ContentAssistEntry createSnippet(final String proposal, final String label, final ContentAssistContext context) {
+    final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
+      it.setLabel(label);
+    };
+    return this.createProposal(proposal, context.getPrefix(), context, ContentAssistEntry.KIND_SNIPPET, _function);
+  }
+  
+  /**
    * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
    * If it is valid, the initializer function is applied to it.
    */

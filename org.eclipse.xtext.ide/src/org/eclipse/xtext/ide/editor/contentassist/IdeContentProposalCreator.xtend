@@ -30,6 +30,16 @@ class IdeContentProposalCreator {
 	}
 	
 	/**
+	 * Returns an entry of kind snippet with the given proposal and label and the prefix from the context, or null if the proposal is not valid.
+	 * @since 2.16
+	 */
+	def ContentAssistEntry createSnippet(String proposal, String label, ContentAssistContext context) {
+		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_SNIPPET) [
+			it.label = label
+		]
+	}
+	
+	/**
 	 * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
 	 * If it is valid, the initializer function is applied to it.
 	 */

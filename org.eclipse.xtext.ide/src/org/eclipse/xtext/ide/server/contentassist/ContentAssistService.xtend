@@ -31,6 +31,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.lsp4j.InsertTextFormat
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -104,6 +105,9 @@ class ContentAssistService {
             entry.textReplacements.forEach [
                 completionItem.additionalTextEdits += toTextEdit(document)
             ]
+        }
+        if (entry.kind == ContentAssistEntry.KIND_SNIPPET) {
+            completionItem.insertTextFormat = InsertTextFormat.Snippet
         }
         return completionItem
     }

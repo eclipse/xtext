@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server.contentassist;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -19,6 +20,7 @@ import java.util.function.Consumer;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionItemKind;
 import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.InsertTextFormat;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
@@ -157,6 +159,11 @@ public class ContentAssistService {
         _additionalTextEdits_1.add(_textEdit_1);
       };
       entry.getTextReplacements().forEach(_function);
+    }
+    String _kind = entry.getKind();
+    boolean _equals = Objects.equal(_kind, ContentAssistEntry.KIND_SNIPPET);
+    if (_equals) {
+      completionItem.setInsertTextFormat(InsertTextFormat.Snippet);
     }
     return completionItem;
   }
