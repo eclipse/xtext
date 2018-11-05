@@ -60,6 +60,7 @@ Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide,
  org.eclipse.xtext.ide.server.hover,
  org.eclipse.xtext.ide.server.occurrences,
  org.eclipse.xtext.ide.server.rename;x-internal:=true,
+ org.eclipse.xtext.ide.server.semanticHighlight;x-internal:=true,
  org.eclipse.xtext.ide.server.signatureHelp,
  org.eclipse.xtext.ide.server.symbol,
  org.eclipse.xtext.ide.util
