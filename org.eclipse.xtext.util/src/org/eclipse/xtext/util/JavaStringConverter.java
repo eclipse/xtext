@@ -265,14 +265,10 @@ public class JavaStringConverter {
 	}
 
 	public static boolean isHex(char c) {
-		if ('0' <= c && c <= 'f') {
-			if (c <= '9')
-				return true;
-			if ('A' <= c && c <= 'F')
-				return true;
-			if ('a' <= c)
-				return true;	
-		}
-		return false;
+		// this performs slightly better than a switch on all the 22 valid chars especially
+		// for the mismatches
+		
+		return '0' <= c && (c = (char) (c| 0x20)) <= 'f' && (c <= '9' || 'a' <= c);
 	}
+	
 }
