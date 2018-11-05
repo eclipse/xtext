@@ -1093,35 +1093,38 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("\t\t\t\t\t");
       _builder.append("<filesets>");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("<fileset>");
-      _builder.newLine();
       {
         final Function1<Outlet, String> _function_2 = (Outlet it_1) -> {
           return this.sourceFolder(it_1);
         };
         Set<String> _set = IterableExtensions.<String>toSet(ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN)), _function_2));
         for(final String dir : _set) {
-          _builder.append("\t\t\t\t\t\t\t");
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("<fileset>");
+          _builder.newLine();
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("\t");
           _builder.append("<directory>${basedir}/");
           _builder.append(dir, "\t\t\t\t\t\t\t");
           _builder.append("</directory>");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t\t\t\t\t\t");
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("\t");
           _builder.append("<includes>");
           _builder.newLine();
-          _builder.append("\t\t\t\t\t\t\t");
-          _builder.append("\t");
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("\t\t");
           _builder.append("<include>**/*</include>");
           _builder.newLine();
-          _builder.append("\t\t\t\t\t\t\t");
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("\t");
           _builder.append("</includes>");
+          _builder.newLine();
+          _builder.append("\t\t\t\t\t\t");
+          _builder.append("</fileset>");
           _builder.newLine();
         }
       }
-      _builder.append("\t\t\t\t\t\t");
-      _builder.append("</fileset>");
-      _builder.newLine();
       _builder.append("\t\t\t\t\t");
       _builder.append("</filesets>");
       _builder.newLine();

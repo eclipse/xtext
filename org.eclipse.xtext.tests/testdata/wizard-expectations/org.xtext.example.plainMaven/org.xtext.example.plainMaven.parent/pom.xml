@@ -50,6 +50,8 @@
 								<includes>
 									<include>**/*</include>
 								</includes>
+							</fileset>
+							<fileset>
 								<directory>${basedir}/src/test/xtend-gen</directory>
 								<includes>
 									<include>**/*</include>
