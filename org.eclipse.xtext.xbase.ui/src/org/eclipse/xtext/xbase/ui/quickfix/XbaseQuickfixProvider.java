@@ -10,17 +10,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionDiffBuilder;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext.IModificationPart;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
@@ -34,6 +43,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -47,6 +57,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
@@ -81,6 +92,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	private InsertionOffsets insertionOffsets;
+	
+	@Inject
+	private OperatorMapping operatorMapping;
 
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -89,19 +103,33 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(IssueCodes.EQUALS_WITH_NULL)
 	public void fixEqualsWithNull(final Issue issue, IssueResolutionAcceptor acceptor) {
-		String[] data = issue.getData();
-		if (data == null || data.length == 0) {
-			return;
-		}
-		String operator = data[0];
-		String message = "Replace '" + operator + "' with '" + operator + "='";
-		acceptor.accept(issue, message, message, null, new IModification() {
+		String message = "Replace '==' with '===' and '!=' with '!=='";
+		acceptor.acceptMulti(issue, message, message, null, new ICompositeModification<XBinaryOperation>() {
 			@Override
-			public void apply(IModificationContext context) throws Exception {
-				IXtextDocument document = context.getXtextDocument();
-				document.replace(issue.getOffset(), issue.getLength(), operator + "=");
+			public void apply(XBinaryOperation element, ICompositeModificationContext<XBinaryOperation> context) {
+				context.setUpdateCrossReferences(false);
+				context.setUpdateRelatedFiles(false);
+				context.addModification(element, (object) -> {
+					replaceOperator(object, OperatorMapping.EQUALS, OperatorMapping.TRIPLE_EQUALS);
+					replaceOperator(object, OperatorMapping.NOT_EQUALS, OperatorMapping.TRIPLE_NOT_EQUALS);
+				});
 			}
 		});
+	}
+	
+	private void replaceOperator(XBinaryOperation operation, QualifiedName from, QualifiedName to) {
+		JvmIdentifiableElement feature = operation.getFeature();
+		String fromMethodName = operatorMapping.getMethodName(from).toString();
+		if (fromMethodName.equals(feature.getSimpleName())) {
+			JvmDeclaredType declaringType = ((JvmOperation) feature).getDeclaringType();
+			String toMethodName = operatorMapping.getMethodName(to).toString();
+			for (JvmFeature f : declaringType.findAllFeaturesByName(toMethodName)) {
+				if (f instanceof JvmOperation) {
+					operation.setFeature(f);
+					break;
+				}
+			}
+		}
 	}
 
 	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
