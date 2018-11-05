@@ -26,23 +26,18 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
+import org.eclipse.xtext.documentation.EObjectInComment;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.hyperlinking.AbstractHyperlink;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.ui.editor.hyperlinking.SingleHoverShowingHyperlinkPresenter;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -102,12 +97,6 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 	
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-	
-	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
-	
-	@Inject
-	private IScopeProvider scopeProvider;
 
 	protected ISourceViewer sourceViewer;
 	
@@ -179,29 +168,11 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 	 * @since 2.16
 	 */
 	protected void createHyperlinksInJavaDoc(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
-		IParseResult parseResult = resource.getParseResult();
-		if(parseResult != null) {
-			INode rootNode = parseResult.getRootNode();
-			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
-			EObject semanticObject = NodeModelUtils.findActualSemanticObjectFor(node);
-			if(semanticObject != null) {
-				IScope scope = scopeProvider.getScope(semanticObject, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-				List<ReplaceRegion> replaceRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(node);
-				for(ReplaceRegion replaceRegion : replaceRegions) {
-					if(replaceRegion.getOffset() <= offset && offset <= replaceRegion.getEndOffset()) {
-						String typeRefString = replaceRegion.getText();
-						if(typeRefString != null && typeRefString.length() > 0) {
-							Region region = new Region(replaceRegion.getOffset(), replaceRegion.getLength());
-							IEObjectDescription candidate = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(typeRefString));
-							if(candidate != null) {
-								EObject target = candidate.getEObjectOrProxy();
-								createHyperlinksTo(resource, region, target, acceptor);
-							}
-						}
-						return;
-					}
-				}
-			}
+		EObjectInComment eObjectReferencedInComment = javaDocTypeReferenceProvider.computeEObjectReferencedInComment(resource, offset);
+		if(eObjectReferencedInComment != null) {
+			EObject target = eObjectReferencedInComment.getEObject();
+			ITextRegion region = eObjectReferencedInComment.getRegion();
+			createHyperlinksTo(resource, new Region(region.getOffset(), region.getLength()), target, acceptor);
 		}
 	}
 
