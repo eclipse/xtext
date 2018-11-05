@@ -883,7 +883,8 @@ class CompilationUnitImpl implements CompilationUnit {
 				for (annotation : annotations) {
 					annotationReferences += annotation.translateAnnotation
 				}
-				return annotationReferences
+				val AnnotationReference[] result = annotationReferences
+				return result
 			}
 		}
 		value.evaluate(expectedType).translate
