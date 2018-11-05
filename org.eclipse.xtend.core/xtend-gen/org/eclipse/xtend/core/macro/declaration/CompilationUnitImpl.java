@@ -1664,7 +1664,8 @@ public class CompilationUnitImpl implements CompilationUnit {
             AnnotationReference _translateAnnotation = this.translateAnnotation(annotation);
             annotationReferences.add(_translateAnnotation);
           }
-          return annotationReferences;
+          final AnnotationReference[] result = ((AnnotationReference[])Conversions.unwrapArray(annotationReferences, AnnotationReference.class));
+          return result;
         }
       }
       _xblockexpression = this.translate(this.evaluate(value, expectedType));
