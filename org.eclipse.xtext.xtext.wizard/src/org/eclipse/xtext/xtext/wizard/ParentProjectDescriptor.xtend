@@ -352,24 +352,30 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									</filesets>
 								</configuration>
 							</plugin>
-							«IF !config.needsTychoBuild && config.junitVersion == JUnitVersion.JUNIT_5»
-								<!-- required to execute JUnit 5 tests -->
+							«IF !config.needsTychoBuild»
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-surefire-plugin</artifactId>
-									<version>2.21.0</version>
-									<dependencies>
-										<dependency>
-											<groupId>org.junit.platform</groupId>
-											<artifactId>junit-platform-surefire-provider</artifactId>
-											<version>1.2.0</version>
-										</dependency>
-										<dependency>
-											<groupId>org.junit.jupiter</groupId>
-											<artifactId>junit-jupiter-engine</artifactId>
-											<version>5.1.0</version>
-										</dependency>
-									</dependencies>
+									<version>2.22.1</version>
+									<configuration>
+										<!-- workaround for https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
+										<useSystemClassLoader>false</useSystemClassLoader>
+									</configuration>
+									«IF config.junitVersion == JUnitVersion.JUNIT_5»
+										<!-- required to execute JUnit 5 tests -->
+										<dependencies>
+											<dependency>
+												<groupId>org.junit.platform</groupId>
+												<artifactId>junit-platform-surefire-provider</artifactId>
+												<version>1.2.0</version>
+											</dependency>
+											<dependency>
+												<groupId>org.junit.jupiter</groupId>
+												<artifactId>junit-jupiter-engine</artifactId>
+												<version>5.1.0</version>
+											</dependency>
+										</dependencies>
+									«ENDIF»
 								</plugin>
 							«ENDIF»
 							<plugin>

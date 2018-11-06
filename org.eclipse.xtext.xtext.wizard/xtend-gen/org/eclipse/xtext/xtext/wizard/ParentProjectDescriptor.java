@@ -1135,10 +1135,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        if (((!this.getConfig().needsTychoBuild()) && Objects.equal(this.getConfig().getJunitVersion(), JUnitVersion.JUNIT_5))) {
-          _builder.append("\t\t\t");
-          _builder.append("<!-- required to execute JUnit 5 tests -->");
-          _builder.newLine();
+        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
+        boolean _not = (!_needsTychoBuild_2);
+        if (_not) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
@@ -1152,56 +1151,92 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
-          _builder.append("<version>2.21.0</version>");
+          _builder.append("<version>2.22.1</version>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
-          _builder.append("<dependencies>");
+          _builder.append("<configuration>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");
-          _builder.append("<dependency>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<groupId>org.junit.platform</groupId>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<artifactId>junit-platform-surefire-provider</artifactId>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<version>1.2.0</version>");
+          _builder.append("<!-- workaround for https://issues.apache.org/jira/browse/SUREFIRE-1588 -->");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");
-          _builder.append("</dependency>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t");
-          _builder.append("<dependency>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<groupId>org.junit.jupiter</groupId>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<artifactId>junit-jupiter-engine</artifactId>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<version>5.1.0</version>");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("\t\t");
-          _builder.append("</dependency>");
+          _builder.append("<useSystemClassLoader>false</useSystemClassLoader>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
-          _builder.append("</dependencies>");
+          _builder.append("</configuration>");
           _builder.newLine();
+          {
+            JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+            boolean _equals_1 = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
+            if (_equals_1) {
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("<!-- required to execute JUnit 5 tests -->");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("<dependencies>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("<dependency>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<groupId>org.junit.platform</groupId>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<artifactId>junit-platform-surefire-provider</artifactId>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<version>1.2.0</version>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("</dependency>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("<dependency>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<groupId>org.junit.jupiter</groupId>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<artifactId>junit-jupiter-engine</artifactId>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("<version>5.1.0</version>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("</dependency>");
+              _builder.newLine();
+              _builder.append("\t\t\t");
+              _builder.append("\t");
+              _builder.append("</dependencies>");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t\t\t");
           _builder.append("</plugin>");
           _builder.newLine();
@@ -1355,8 +1390,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginExecution>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_2) {
+        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_3) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<pluginExecution>");
           _builder.newLine();
@@ -1532,8 +1567,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_3) {
+        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_4) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
