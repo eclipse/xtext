@@ -113,6 +113,8 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 									<useUIHarness>true</useUIHarness>
 								</configuration>
 							</plugin>
+						«ENDIF»
+						«IF isEclipsePluginProject»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>target-platform-configuration</artifactId>
