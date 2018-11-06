@@ -22,7 +22,6 @@ import org.eclipse.cbi.p2repo.analyzers.BuildRepoTests;
 import org.eclipse.cbi.p2repo.analyzers.RepoTestsConfiguration;
 import org.eclipse.cbi.p2repo.analyzers.jars.BREETest;
 import org.eclipse.cbi.p2repo.analyzers.jars.ESTest;
-import org.eclipse.cbi.p2repo.analyzers.jars.Pack200Test;
 import org.eclipse.cbi.p2repo.analyzers.jars.SignerTest;
 import org.eclipse.cbi.p2repo.analyzers.jars.TestLayoutTest;
 import org.eclipse.cbi.p2repo.analyzers.jars.VersionTest;
@@ -160,14 +159,6 @@ public class RepositoryTest {
 		BREETest checker = new BREETest(CONF_FROM_SYSTEM_PROPERTIES);
 		if (configureChecker(checker)) {
 			assertTrue("Correct BREE", !checker.testBREESettingRule());
-		}
-	}
-
-	@Test
-	public void testPack200() throws OperationCanceledException, IOException {
-		Pack200Test checker = new Pack200Test(CONF_FROM_SYSTEM_PROPERTIES);
-		if (configureChecker(checker)) {
-			assertTrue("Correct Pack200", !checker.testBundlePack());
 		}
 	}
 
