@@ -1,6 +1,6 @@
 group = 'org.eclipse.xtext'
 ext.title = 'Eclipse Xbase GWT Library'
-description = 'The runtime library for Xbase languages for use with GWT.'
+description = 'The runtime library for Xbase languages for use with GWT. This library is deprecated and will be removed with a future version of Xtext.'
 
 apply from: "${rootDir}/gradle/gwtProject.gradle"
 
