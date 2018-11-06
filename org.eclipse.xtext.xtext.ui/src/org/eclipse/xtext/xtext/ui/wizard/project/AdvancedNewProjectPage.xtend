@@ -101,12 +101,12 @@ class AdvancedNewProjectPage extends WizardPage {
 					junitVersion4 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "4"
-						selection = !isJUnit5PluginAvailable
+						selection = false
 					]
 					junitVersion5 = Radio [
 						layoutData = new GridData(SWT.LEFT, SWT.CENTER, false, false)
 						text = "5"
-						selection = isJUnit5PluginAvailable
+						selection = true
 					]
 				]
 			]
@@ -447,14 +447,6 @@ class AdvancedNewProjectPage extends WizardPage {
 			return JUnitVersion.JUNIT_5;
 		} else {
 			throw new IllegalStateException
-		}
-	}
-	
-	private def boolean isJUnit5PluginAvailable() {
-		try {
-			return PluginRegistry.findModel("org.junit.jupiter.engine") !== null
-		} catch (NoClassDefFoundError e) {
-			return false
 		}
 	}
 
