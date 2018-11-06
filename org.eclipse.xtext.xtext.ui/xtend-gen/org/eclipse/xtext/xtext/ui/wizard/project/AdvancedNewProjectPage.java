@@ -15,8 +15,6 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.pde.core.plugin.IPluginModelBase;
-import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -33,7 +31,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -149,16 +146,14 @@ public class AdvancedNewProjectPage extends WizardPage {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("4");
-            boolean _isJUnit5PluginAvailable = this.isJUnit5PluginAvailable();
-            boolean _not = (!_isJUnit5PluginAvailable);
-            it_3.setSelection(_not);
+            it_3.setSelection(false);
           };
           this.junitVersion4 = this.Radio(it_2, _function_10);
           final Procedure1<Button> _function_11 = (Button it_3) -> {
             GridData _gridData_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false);
             it_3.setLayoutData(_gridData_1);
             it_3.setText("5");
-            it_3.setSelection(this.isJUnit5PluginAvailable());
+            it_3.setSelection(true);
           };
           this.junitVersion5 = this.Radio(it_2, _function_11);
         };
@@ -665,19 +660,6 @@ public class AdvancedNewProjectPage extends WizardPage {
         return JUnitVersion.JUNIT_5;
       } else {
         throw new IllegalStateException();
-      }
-    }
-  }
-  
-  private boolean isJUnit5PluginAvailable() {
-    try {
-      IPluginModelBase _findModel = PluginRegistry.findModel("org.junit.jupiter.engine");
-      return (_findModel != null);
-    } catch (final Throwable _t) {
-      if (_t instanceof NoClassDefFoundError) {
-        return false;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
