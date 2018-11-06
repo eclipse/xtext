@@ -1,6 +1,6 @@
 group = 'org.eclipse.xtend'
 ext.title = 'Eclipse Xtend GWT Library'
-description = 'The runtime library for Xtend for use with GWT.'
+description = 'The runtime library for Xtend for use with GWT. This library is deprecated and will be removed with a future version of Xtext.'
 
 apply from: "${rootDir}/gradle/gwtProject.gradle"
 
