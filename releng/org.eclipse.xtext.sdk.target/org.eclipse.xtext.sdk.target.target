@@ -178,5 +178,10 @@
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+		<repository location="http://download.eclipse.org/cbi/updates/license/"/>
+	</location>
 </locations>
 </target>
