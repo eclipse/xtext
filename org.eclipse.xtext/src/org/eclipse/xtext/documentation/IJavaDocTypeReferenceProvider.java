@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtext.documentation.impl.MultiLineJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.ImplementedBy;
@@ -34,4 +35,15 @@ public interface IJavaDocTypeReferenceProvider {
 	public List<ReplaceRegion> computeTypeRefRegions(INode commentNode);
 
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode commentNode);
+
+	/**
+	 * Returns the referenced element in javadoc comment at a given <i>offset</i>.
+	 * Returns null in case no element is referenced at the given <i>offset</i>.
+	 * 
+	 * @since 2.16
+	 */
+	default EObjectInComment computeEObjectReferencedInComment(XtextResource resource, int offset) {
+		return null;
+	}
+
 }
