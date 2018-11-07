@@ -105,7 +105,7 @@ public class LazyLinkingResource extends XtextResource {
 
 	@Named(CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT)
 	@Inject(optional=true)
-	private int cyclicLinkingDectectionCounterLimit = 100;
+	protected int cyclicLinkingDectectionCounterLimit = 100;
 
 	private int cyclicLinkingDetectionCounter = 0;
 
@@ -306,9 +306,9 @@ public class LazyLinkingResource extends XtextResource {
 			return null;
 		} finally {
 			if (cyclicLinkingDetectionCounter > cyclicLinkingDectectionCounterLimit) {
-                resolving.remove(triple);
-            }
-            cyclicLinkingDetectionCounter--;
+				resolving.remove(triple);
+			}
+			cyclicLinkingDetectionCounter--;
 		}
 	}
 
