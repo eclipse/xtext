@@ -21,6 +21,9 @@ import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -42,6 +45,13 @@ public class Bug281990Test extends AbstractXtextTests {
 			public Class<? extends IScopeProvider> bindIScopeProvider() {
 				return org.eclipse.xtext.linking.lazy.Bug281990Test.RecursiveScopeProvider.class;
 			}
+			
+			@Override
+			public void configure(Binder binder) {
+				super.configure(binder);
+				binder.bindConstant().annotatedWith(Names.named(LazyLinkingResource.CYCLIC_LINKING_DECTECTION_COUNTER_LIMIT)).to(0);
+			}
+			
 		});
 		new LazyLinkingTestLanguageStandaloneSetup().register(getInjector());
 	}
