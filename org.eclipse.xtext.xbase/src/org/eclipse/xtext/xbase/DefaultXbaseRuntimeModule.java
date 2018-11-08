@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase;
 import org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.debug.IStratumBreakpointSupport;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator;
@@ -56,6 +57,7 @@ import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseTransientValueService;
+import org.eclipse.xtext.xbase.util.XbaseJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator;
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
@@ -231,6 +233,13 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	 */
 	public Class<? extends TargetURICollector> bindTargetURICollector() {
 		return JvmModelTargetURICollector.class;
+	}
+	
+	/**
+	 * @since 2.16
+	 */
+	public Class<? extends IJavaDocTypeReferenceProvider> bindIJavaDocReferenceProvider() {
+		return XbaseJavaDocTypeReferenceProvider.class;
 	}
 	
 }
