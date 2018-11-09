@@ -123,7 +123,6 @@ public class MergeableManifest extends Manifest {
 		 * Copied from base class, but replaced call to make72Safe(buffer) with
 		 * make512Safe(buffer) and does not write empty values
 		 */
-		@SuppressWarnings("deprecation")
 		public void myWriteMain(DataOutputStream out) throws IOException {
 			// write out the *-Version header first, if it exists
 			String vername = Name.MANIFEST_VERSION.toString();
@@ -165,7 +164,6 @@ public class MergeableManifest extends Manifest {
 		 * Copied from base class, but omitted call to make72Safe(buffer) and
 		 * does not write empty values
 		 */
-		@SuppressWarnings("deprecation")
 		public void myWrite(DataOutputStream out) throws IOException {
 			Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
 			while (it.hasNext()) {
@@ -299,7 +297,6 @@ public class MergeableManifest extends Manifest {
 	/*
 	 * Copied from base class to omit the call to make72Safe(..).
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public void write(OutputStream out) throws IOException {
 		DataOutputStream dos = new DataOutputStream(out);
