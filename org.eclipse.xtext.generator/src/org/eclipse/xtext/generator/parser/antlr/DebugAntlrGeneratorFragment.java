@@ -37,6 +37,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment {
 
 	@Override

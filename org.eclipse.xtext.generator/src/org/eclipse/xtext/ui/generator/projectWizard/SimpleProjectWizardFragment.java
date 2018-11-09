@@ -34,6 +34,7 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Knut Wannheden
  */
+@SuppressWarnings("deprecation")
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	private static final Logger LOG = Logger.getLogger(SimpleProjectWizardFragment.class);

@@ -35,6 +35,7 @@ import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment {
 
 	@Override

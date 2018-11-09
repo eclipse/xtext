@@ -17,6 +17,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3 {
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {

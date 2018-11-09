@@ -268,7 +268,7 @@ public class CompilationTestHelper {
 	 * @return a ResourceSet, containing the given resources.
 	 * @throws IOException if the resource loading fails 
 	 */
-	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
+	public ResourceSet resourceSet(@SuppressWarnings("unchecked") Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = newResourceSetWithUTF8Encoding();
 		FileProjectConfig projectConfig = new FileProjectConfig(new File(workspaceRoot,PROJECT_NAME), PROJECT_NAME);
 		projectConfig.addSourceFolder("src");
@@ -322,7 +322,7 @@ public class CompilationTestHelper {
 	/**
 	 * same as {@link #resourceSet(Pair...)} but without actually loading the created resources.
 	 */
-	public ResourceSet unLoadedResourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
+	public ResourceSet unLoadedResourceSet(@SuppressWarnings("unchecked") Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = newResourceSetWithUTF8Encoding();
 		for (Pair<String, ? extends CharSequence> entry : resources) {
 			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());

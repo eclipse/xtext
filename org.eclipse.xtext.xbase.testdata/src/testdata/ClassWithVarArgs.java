@@ -47,11 +47,13 @@ public class ClassWithVarArgs {
 		return result;
 	}
 	
-	public <T> List<T> toList(T... args) {
+	@SafeVarargs
+	public final <T> List<T> toList(T... args) {
 		return Lists.newArrayList(args);
 	}
 	
-	public <T extends Number> List<T> toNumberList(T... args) {
+	@SafeVarargs
+	public final <T extends Number> List<T> toNumberList(T... args) {
 		return Lists.newArrayList(args);
 	}
 	

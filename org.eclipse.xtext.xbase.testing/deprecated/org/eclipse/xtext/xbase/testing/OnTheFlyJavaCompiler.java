@@ -296,7 +296,7 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected Pair<String, String> createFullCode(String statementCode,
-			Type returnType, Pair<Type, String>... params) {
+			Type returnType, @SuppressWarnings("unchecked") Pair<Type, String>... params) {
 		String className = "_$GeneratedClass";
 		StringBuilder sb = new StringBuilder("public class ").append(className)
 				.append(" implements ")
@@ -385,7 +385,7 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected Object internalCreateFunction(String code, Type returnType,
-			Pair<Type, String>... params) {
+			@SuppressWarnings("unchecked") Pair<Type, String>... params) {
 		Pair<String, String> fullCode = createFullCode(code, returnType, params);
 		Class<?> class1 = compileToClass(fullCode.getFirst(),
 				fullCode.getSecond());

@@ -4192,7 +4192,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	public void testSetLiteral_1() throws Exception {
 		assertEvaluatesTo(newHashSet("Foo", "Bar"), "#{'Foo', 'Bar'}");
 	}
-	@SuppressWarnings("unchecked")
+
 	@Test 
 	public void testSetLiteral_2() throws Exception {
 		assertEvaluatesTo(newHashSet(1, "Foo", true), "#{1, 'Foo', true}");

@@ -80,16 +80,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   @Extension
   private JvmTypeReferenceBuilder _jvmTypeReferenceBuilder;
   
-  private XtextResourceSet resourceSet;
-  
   @Inject
   public JvmTypeReferenceBuilder setJvmTypeReferenceBuilder(final JvmTypeReferenceBuilder.Factory factory, final XtextResourceSet resourceSet) {
-    JvmTypeReferenceBuilder _xblockexpression = null;
-    {
-      this.resourceSet = resourceSet;
-      _xblockexpression = this._jvmTypeReferenceBuilder = factory.create(resourceSet);
-    }
-    return _xblockexpression;
+    return this._jvmTypeReferenceBuilder = factory.create(resourceSet);
   }
   
   @Test

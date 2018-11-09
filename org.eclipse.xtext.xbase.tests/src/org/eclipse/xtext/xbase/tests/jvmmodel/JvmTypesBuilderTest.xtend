@@ -46,10 +46,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	extension JvmTypeReferenceBuilder
 	
-	XtextResourceSet resourceSet
-	
 	@Inject def setJvmTypeReferenceBuilder(JvmTypeReferenceBuilder.Factory factory, XtextResourceSet resourceSet) {
-		this.resourceSet = resourceSet
 		this._jvmTypeReferenceBuilder = factory.create(resourceSet)
 	}
 	

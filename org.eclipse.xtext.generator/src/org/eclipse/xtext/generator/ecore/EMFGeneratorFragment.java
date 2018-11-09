@@ -102,6 +102,7 @@ import com.google.common.io.CharStreams;
  * 
  * @since 2.4
  */
+@SuppressWarnings("deprecation")
 public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(EMFGeneratorFragment.class);

@@ -29,6 +29,7 @@ import com.google.common.base.Function;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3, IGeneratorFragmentExtension4, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);

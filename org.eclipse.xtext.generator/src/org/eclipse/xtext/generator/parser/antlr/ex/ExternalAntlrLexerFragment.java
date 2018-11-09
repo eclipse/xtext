@@ -36,10 +36,10 @@ import org.eclipse.xtext.util.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private String lexerGrammar;
