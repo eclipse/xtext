@@ -93,6 +93,7 @@ import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -108,6 +109,7 @@ import com.google.inject.Inject;
  * @author Lorenzo Bettini
  * @author Christian Dientrich - bug#493900
  * @author Karsten Thoms - bug#501975
+ * @author Stephane Galland
  */
 public class XbaseCompiler extends FeatureCallCompiler {
 	
@@ -1397,9 +1399,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
-	private void closeBlock(ITreeAppendable caseAppendable) {
-		caseAppendable.decreaseIndentation();
-		caseAppendable.newLine().append("}");
+	/**
+	 * Close a block of code.
+	 *
+	 * @param appendable the receiver of the block closing code.
+	 */
+	protected void closeBlock(ITreeAppendable appendable) {
+		appendable.decreaseIndentation();
+		appendable.newLine().append("}");
 	}
 
 	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName, XSwitchExpressionCompilationState state) {
@@ -1707,28 +1714,36 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return false;
 	}
 	
-	private void appendTypeParameters(ITreeAppendable b, JvmOperation operation, LightweightTypeReference instantiatedType) {
+	/**
+	 * Append the type parameters of the given operation.
+	 *
+	 * @param appendable the receiver of the Java code.
+	 * @param operation the source operation.
+	 * @param instantiatedType the type of the operation container.
+	 */
+	protected void appendTypeParameters(ITreeAppendable appendable, JvmOperation operation, LightweightTypeReference instantiatedType) {
+		Preconditions.checkArgument(!operation.getTypeParameters().isEmpty(), "the operation is not generic");
 		BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, instantiatedType, overrideTester);
 		List<JvmTypeParameter> typeParameters = resolvedOperation.getResolvedTypeParameters();
-		b.append("<");
+		appendable.append("<");
 		for(int i = 0; i < typeParameters.size(); i++) {
 			if (i != 0) {
-				b.append(", ");
+				appendable.append(", ");
 			}
 			JvmTypeParameter typeParameter = typeParameters.get(i);
-			b.append(typeParameter.getName());
+			appendable.append(typeParameter.getName());
 			List<LightweightTypeReference> constraints = resolvedOperation.getResolvedTypeParameterConstraints(i);
 			if (!constraints.isEmpty()) {
-				b.append(" extends ");
+				appendable.append(" extends ");
 				for(int j = 0; j < constraints.size(); j++) {
 					if (j != 0) {
-						b.append(" & ");
+						appendable.append(" & ");
 					}
-					b.append(constraints.get(j));
+					appendable.append(constraints.get(j));
 				}
 			}
 		}
-		b.append("> ");
+		appendable.append("> ");
 	}
 
 	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {
