@@ -36,7 +36,7 @@ public class JavaStringConverter {
 			result.append(string, fromInclusive, toExclusive);	
 		} else {
 			for(int i = fromInclusive; i < toExclusive; i++) {
-				validateAndAppendChar(result, string.charAt(i));
+				validateAndAppendChar(string.charAt(i), result);
 			}
 		}
 	}
@@ -68,17 +68,17 @@ public class JavaStringConverter {
 		if (c == '\\') {
 			return doUnescapeCharAndAppendTo(string, useUnicode, index, result);
 		}
-		validateAndAppendChar(result, c);
+		validateAndAppendChar(c, result);
 		return index;
 	}
 	
-	protected void validateAndAppendChar(StringBuilder result, char c) {
-		if (validate(result, c)) {
+	protected void validateAndAppendChar(char c, StringBuilder result) {
+		if (validate(c, result)) {
 			result.append(c);	
 		}
 	}
 	
-	protected boolean validate(StringBuilder result, char c) {
+	protected boolean validate(char c, StringBuilder result) {
 		return true;
 	}
 
@@ -113,7 +113,7 @@ public class JavaStringConverter {
 			default:
 				return handleUnknownEscapeSequence(string, c, useUnicode, index, result);
 		}
-		validateAndAppendChar(result, c);
+		validateAndAppendChar(c, result);
 		return index;
 	}
 
@@ -133,7 +133,7 @@ public class JavaStringConverter {
 				appendMe = buildChar(appendMe, c2);
 				appendMe = buildChar(appendMe, c3);
 				appendMe = buildChar(appendMe, c4);
-				validateAndAppendChar(result, (char) appendMe);
+				validateAndAppendChar((char) appendMe, result);
 				return index + 4;
 			}
 		}
