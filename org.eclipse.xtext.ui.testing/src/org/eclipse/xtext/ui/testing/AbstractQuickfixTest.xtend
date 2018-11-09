@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.testing
 import com.google.inject.Inject
 import com.google.inject.Injector
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -18,7 +19,6 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.XtextEditorInfo
@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
@@ -46,11 +47,14 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 
 	@Inject protected Injector injector
 	@Inject protected XtextEditorInfo editorInfo
+	@Inject protected IResourceSetProvider resourceSetProvider
 
 	@Inject protected extension SyncUtil
 	@Inject protected extension IResourceValidator
 	@Inject protected extension FileExtensionProvider
 	@Inject protected extension IssueResolutionProvider
+	
+	protected IProject project
 
 	override protected getEditorId() {
 		editorInfo.getEditorId
@@ -85,7 +89,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		 * TODO: find a better (with good performance) solution
 		 * to set the Xtext nature on the test project.
 		 */
-		val project = file.project
+		project = file.project
 		if(!project.hasNature(XtextProjectHelper.NATURE_ID)) {
 			project.addNature(XtextProjectHelper.NATURE_ID)
 		}
@@ -141,7 +145,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 
 	protected def void assertIssueResolutionResult(String expectedResult, IssueResolution actualIssueResolution, String originalText) {
 		/*
-		 * manually create an IModificationContext with a XtextDocument and call the
+		 * manually create an IModificationContext with an XtextDocument and call the
 		 * apply method of the actualIssueResolution with that IModificationContext
 		 */
 		val document = originalText.getDocument
@@ -194,8 +198,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		val in = new StringInputStream(Strings.emptyIfNull(model))
 		val uri = URI.createURI("") // creating an in-memory EMF Resource
 		
-		val rs = injector.getInstance(XtextResourceSet)
-		rs.setClasspathURIContext(AbstractQuickfixTest)
+		val rs = resourceSetProvider.get(project)
 		val resource = injector.getInstance(IResourceFactory).createResource(uri)
 		rs.resources += resource
 		resource.load(in, null)
