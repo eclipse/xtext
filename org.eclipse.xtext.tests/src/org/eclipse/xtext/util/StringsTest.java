@@ -10,6 +10,7 @@ package org.eclipse.xtext.util;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -239,6 +240,48 @@ public class StringsTest extends Assert {
 		String expected = "\\b\\f\\n\\r\\\"\\'\\\\\\u4444";
 		assertEquals(expected, Strings.convertToJavaString(input, true));
 		assertEquals(input, Strings.convertFromJavaString(expected, true));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConvertIllegalEscapeSequence() throws Exception {
+		String input = "\\/";
+		Strings.convertFromJavaString(input, true);
+	}
+	
+	@Test
+	public void testIsHex() {
+		IntPredicate ref = (c) -> {
+					switch (c) {
+					case '0':
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case 'a':
+					case 'b':
+					case 'c':
+					case 'd':
+					case 'e':
+					case 'f':
+					case 'A':
+					case 'B':
+					case 'C':
+					case 'D':
+					case 'E':
+					case 'F':
+						return true;
+					default:
+						return false;
+				}
+		};
+		for(int c = Character.MIN_VALUE; c <= Character.MAX_VALUE; c++) {
+			Assert.assertTrue((char)c +  " \\u" + Integer.toString(c, 16), ref.test(c) == JavaStringConverter.isHex((char) c));
+		}
 	}
 	
 }

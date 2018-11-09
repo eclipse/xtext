@@ -25,8 +25,8 @@ import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
+@SuppressWarnings("deprecation")
 public class ManifestMergerTest extends Assert {
 	private static final String NL = Strings.newLine();
 
