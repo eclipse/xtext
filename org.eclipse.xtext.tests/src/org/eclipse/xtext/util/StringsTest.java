@@ -10,7 +10,6 @@ package org.eclipse.xtext.util;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntFunction;
 import java.util.function.IntPredicate;
 
 import org.junit.Assert;
