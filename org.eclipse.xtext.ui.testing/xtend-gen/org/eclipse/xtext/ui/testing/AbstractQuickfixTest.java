@@ -17,13 +17,13 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
@@ -34,6 +34,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -163,6 +164,9 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
   protected XtextEditorInfo editorInfo;
   
   @Inject
+  protected IResourceSetProvider resourceSetProvider;
+  
+  @Inject
   @Extension
   protected SyncUtil _syncUtil;
   
@@ -177,6 +181,8 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
   @Inject
   @Extension
   protected IssueResolutionProvider _issueResolutionProvider;
+  
+  protected IProject project;
   
   @Override
   protected String getEditorId() {
@@ -205,11 +211,11 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
       IFile _xblockexpression = null;
       {
         final IFile file = IResourcesSetupUtil.createFile(this.getProjectName(), this.getFileName(), this.getFileExtension(), content.toString());
-        final IProject project = file.getProject();
-        boolean _hasNature = project.hasNature(XtextProjectHelper.NATURE_ID);
+        this.project = file.getProject();
+        boolean _hasNature = this.project.hasNature(XtextProjectHelper.NATURE_ID);
         boolean _not = (!_hasNature);
         if (_not) {
-          IResourcesSetupUtil.addNature(project, XtextProjectHelper.NATURE_ID);
+          IResourcesSetupUtil.addNature(this.project, XtextProjectHelper.NATURE_ID);
         }
         _xblockexpression = file;
       }
@@ -318,8 +324,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
         String _emptyIfNull = Strings.emptyIfNull(model);
         final StringInputStream in = new StringInputStream(_emptyIfNull);
         final URI uri = URI.createURI("");
-        final XtextResourceSet rs = this.injector.<XtextResourceSet>getInstance(XtextResourceSet.class);
-        rs.setClasspathURIContext(AbstractQuickfixTest.class);
+        final ResourceSet rs = this.resourceSetProvider.get(this.project);
         final Resource resource = this.injector.<IResourceFactory>getInstance(IResourceFactory.class).createResource(uri);
         EList<Resource> _resources = rs.getResources();
         _resources.add(resource);

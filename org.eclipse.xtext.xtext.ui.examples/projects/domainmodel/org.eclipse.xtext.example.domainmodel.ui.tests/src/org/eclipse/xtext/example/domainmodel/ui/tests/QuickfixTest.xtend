@@ -9,6 +9,8 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.INVALID_FEATURE_NAME
 import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.INVALID_TYPE_NAME
+import static org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_UNUSED
+import static org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_WILDCARD_DEPRECATED
 
 import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject
 
@@ -59,5 +61,74 @@ class QuickfixTest extends AbstractQuickfixTest {
 			
 			}
 		'''))
+	}
+
+	@Test def fix_unused_imports1() {
+		'''
+			import java.util.Date
+			
+			entity Blog {}
+		'''.testQuickfixesOn(IMPORT_UNUSED,
+			new Quickfix(
+				"Organize imports",
+				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
+				'''
+					entity Blog {}
+				'''
+			)
+		)
+	}
+
+	@Test def fix_unused_imports2() {
+		'''
+			import java.util.Date
+			import java.util.List
+			
+			entity Blog {
+				posts : List<Post>
+			}
+			
+			entity Post {}
+		'''.testQuickfixesOn(IMPORT_UNUSED,
+			new Quickfix(
+				"Organize imports",
+				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
+				'''
+					import java.util.List
+					
+					entity Blog {
+						posts : List<Post>
+					}
+					
+					entity Post {}
+				'''
+			)
+		)
+	}
+
+	@Test def fix_wildcard_imports() {
+		'''
+			import java.util.*
+			
+			entity Blog {
+				posts : List<Post>
+			}
+			
+			entity Post {}
+		'''.testQuickfixesOn(IMPORT_WILDCARD_DEPRECATED,
+			new Quickfix(
+				"Organize imports",
+				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
+				'''
+					import java.util.List
+					
+					entity Blog {
+						posts : List<Post>
+					}
+					
+					entity Post {}
+				'''
+			)
+		)
 	}
 }
