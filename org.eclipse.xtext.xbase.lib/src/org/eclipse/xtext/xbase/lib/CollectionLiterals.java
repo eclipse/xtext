@@ -81,6 +81,7 @@ import com.google.common.primitives.Ints;
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
 	@Pure
+	@SafeVarargs
 	public static <T> List<T> newImmutableList(T... elements) {
 		return ImmutableList.copyOf(elements);
 	}
@@ -97,6 +98,7 @@ import com.google.common.primitives.Ints;
 	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
 	 */
 	@Pure
+	@SafeVarargs
 	public static <T> Set<T> newImmutableSet(T... elements) {
 		return ImmutableSet.copyOf(elements);
 	}
@@ -115,6 +117,7 @@ import com.google.common.primitives.Ints;
 	 *             if duplicate keys are contained in {@code entries}.
 	 */
 	@Pure
+	@SafeVarargs
 	public static <K, V> Map<K, V> newImmutableMap(Pair<? extends K, ? extends V>... entries) {
 		if (entries.length == 0)
 			return emptyMap();
