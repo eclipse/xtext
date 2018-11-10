@@ -12,6 +12,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.util.JavaStringConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -63,136 +64,81 @@ public class JavaIDValueConverter extends IDValueConverter {
 	public static boolean isValidIdentifierPart(char c) {
 		return Character.isJavaIdentifierPart(c);
 	}
-
-	public static String convertFromJavaIdentifier(String identifier, INode node) {
-		int idx = identifier.indexOf('\\');
-		if (idx < 0) {
-			return identifier;
-		}
-		return doConvertFromJavaString(identifier, idx, node);
-	}
-	
-	private static class ErrorInfo {
-		boolean error = false;
-		boolean badChar = false;
-	}
-		
-	private static int unescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
-		char c = string.charAt(index++);
-		if (c == '\\') {
-			index = doUnescapeCharAndAppendTo(string, index, result, errorInfo);
-		} else {
-			validateAndAppendChar(result, c, errorInfo);
-		}
-		return index;
-	}
-	
-	private static int doUnescapeCharAndAppendTo(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
-		if (string.length() == index) {
-			errorInfo.badChar = true;
-			return index;
-		}
-		char c = string.charAt(index++);
-		switch(c) {
-			case 'u':
-				return unescapeUnicodeSequence(string, index, result, errorInfo);
-			default:
-				errorInfo.badChar = true;
-		}
-		validateAndAppendChar(result, c, errorInfo);
-		return index;
-	}
-	
-	private static int unescapeUnicodeSequence(String string, int index, StringBuilder result, ErrorInfo errorInfo) {
-		try {
-			if (index+4 > string.length() || !isHexSequence(string, index, 4)) {
-				result.append('u');
-				errorInfo.error = true;
-				return index;
-			}
-			char appendMe = (char) Integer.parseInt(string.substring(index, index + 4), 16);
-			validateAndAppendChar(result, appendMe, errorInfo);
-			return index + 4;
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Illegal \\uxxxx encoding in " + string);
-		}
-	}
-
-	private static void validateAndAppendChar(StringBuilder result, char c, ErrorInfo error) {
-		if (result.length() == 0) {
-			if (!isValidIdentifierStart(c)) {
-				error.badChar = true;
-				return;
-			}
-		} else {
-			if (!isValidIdentifierPart(c)) {
-				error.badChar = true;
-				return;
-			}
-		}
-		result.append(c);
-	}
 	
 	/**
 	 * Converts a string with valid or invalid escape sequences to a semantic value.
 	 * If the escape sequences are invalid, a {@link ValueConverterException} is thrown
 	 * with detailed information about the broken character combination.
 	 */
-	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) throws ValueConverterException {
-		int length = identifier.length();
-		StringBuilder result = new StringBuilder(length);
-		result.append(identifier, 0, firstEscapeSequence);
-		ErrorInfo errorInfo = new ErrorInfo();
-		int nextIndex = firstEscapeSequence;
-		while(nextIndex < length) {
-			nextIndex = unescapeCharAndAppendTo(identifier, nextIndex, result, errorInfo);
+	public static String convertFromJavaIdentifier(String identifier, INode node) {
+		int idx = identifier.indexOf('\\');
+		if (idx < 0) {
+			return identifier;
 		}
-		
-		String asString = result.toString();
-		if (errorInfo.error) {
-			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, asString, null);
+		Implementation converter = new Implementation();
+		String result = converter.convertFromJavaString(identifier, idx);
+		if (converter.error) {
+			throw new ValueConverterWithValueException("Illegal escape sequence in identifier '" + identifier + "'", node, result, null);
 		}
-		if (errorInfo.badChar) {
+		if (converter.badChar) {
 			if (result.length() != 0)
-				throw new ValueConverterWithValueException("Illegal character in identifier '" + asString + "' (" + identifier + ")", node, asString, null);
+				throw new ValueConverterWithValueException("Illegal character in identifier '" + result + "' (" + identifier + ")", node, result, null);
 			else
 				throw new ValueConverterWithValueException("Illegal character in identifier '" + identifier + "'", node, null, null);
 		}
-		return asString;
-	}
-	
-	private static boolean isHexSequence(String in, int off, int chars) {
-		for(int i = off; i < in.length() && i < off + chars; i++) {
-			char c = in.charAt(i);
-			switch (c) {
-				case '0':
-				case '1':
-				case '2':
-				case '3':
-				case '4':
-				case '5':
-				case '6':
-				case '7':
-				case '8':
-				case '9':
-				case 'a':
-				case 'b':
-				case 'c':
-				case 'd':
-				case 'e':
-				case 'f':
-				case 'A':
-				case 'B':
-				case 'C':
-				case 'D':
-				case 'E':
-				case 'F':
-					continue;
-				default:
-					return false;
-			}
-		}
-		return true;
+		return result;
 	}
 
+	protected static class Implementation extends JavaStringConverter {
+		boolean error = false;
+		boolean badChar = false;
+		
+		protected Implementation() {}
+		
+		public String convertFromJavaString(String identifier, int firstEscapeSequence) throws ValueConverterException {
+			StringBuilder result = new StringBuilder(identifier.length());
+			result.append(identifier, 0, firstEscapeSequence);
+			return convertFromJavaString(identifier, true, firstEscapeSequence, result);
+		}
+		
+		@Override
+		protected int handleInvalidUnicodeEscapeSequence(String string, int index, StringBuilder result) {
+			result.append('u');
+			error = true;
+			return index;
+		}
+		
+		@Override
+		protected int doUnescapeCharAndAppendTo(String string, boolean useUnicode, int index, StringBuilder result) {
+			if (string.length() == index) {
+				badChar = true;
+				return index;
+			}
+			return super.doUnescapeCharAndAppendTo(string, useUnicode, index, result);
+		}
+		
+		@Override
+		protected int handleUnknownEscapeSequence(String string, char c, boolean useUnicode, int index, StringBuilder result) {
+			badChar = true;
+			return index;
+		}
+		
+		@Override
+		protected boolean validate(char c, StringBuilder result) {
+			if (result.length() == 0) {
+				if (!isValidIdentifierStart(c)) {
+					badChar = true;
+					return false;
+				}
+			} else {
+				if (!isValidIdentifierPart(c)) {
+					badChar = true;
+					return false;
+				}
+			}
+			return super.validate(c, result);
+		}
+		
+	}
+	
 }

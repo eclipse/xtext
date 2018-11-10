@@ -19,7 +19,6 @@ import org.junit.Test
  */
 class JavaIDValueConverterTest extends AbstractXtendTestCase {
 	
-	
 	@Inject XtendValueConverterService valueConverterService
 	
 	@Test def void testSimple() {
