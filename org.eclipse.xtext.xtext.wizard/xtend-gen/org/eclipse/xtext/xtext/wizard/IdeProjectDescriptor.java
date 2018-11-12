@@ -107,7 +107,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("<artifactId>org.eclipse.lsp4j</artifactId>");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("<version>0.6.0-SNAPSHOT</version>");
+          _builder.append("<version>0.6.0</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
