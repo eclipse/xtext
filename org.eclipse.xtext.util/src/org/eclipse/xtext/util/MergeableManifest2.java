@@ -14,11 +14,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -127,7 +130,7 @@ public class MergeableManifest2 implements Cloneable {
 				} else if (version == null && name.equals(SIGNATURE_VERSION)) {
 					version = value;
 				} else if (name.equals(BUNDLE_SYMBOLIC_NAME)) {
-					this.name = bundleName(value);
+					this.name = Bundle.fromInput(value).getName();
 				} else if (name.equals(BUNDLE_REQUIREDEXECUTIONENVIRONMENT)) {
 					bree = value;
 				} else if (name.equals(BUNDLE_ACTIVATOR)) {
@@ -191,7 +194,7 @@ public class MergeableManifest2 implements Cloneable {
 
 	/**
 	 * @return the attributes read from the header. Does not include the entries
-	 * that are started with "Name: XXX" line.
+	 * that are started with "Name: [...]" line.
 	 */
 	public Attributes getMainAttributes() {
 		return mainAttributes;
@@ -199,14 +202,14 @@ public class MergeableManifest2 implements Cloneable {
 
 	/**
 	 * @return the attribute section that has been started with the name from
-	 * the "Name: XXX" line.
+	 * the "Name: [...]" line.
 	 */
 	public Attributes getAttributes(String name) {
 		return entries.get(name);
 	}
 
 	/**
-	 * @return all entries started with "Name: XXX" line but not the main
+	 * @return all entries started with "Name: [...]" line but not the main
 	 * attributes.
 	 */
 	public Map<String, Attributes> getEntries() {
@@ -247,12 +250,14 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(REQUIRE_BUNDLE);
 		if (oldBundles == null)
 			oldBundles = "";
-		String result = oldBundles;
+		BundleList resultList = BundleList.fromInput(oldBundles);
 		for (String bundle : requiredBundles) {
-			if (name != null && name.equals(bundleName(bundle)))
+			Bundle newBundle = Bundle.fromInput(bundle);
+			if (name != null && name.equals(newBundle.getName()))
 				continue;
-			result = mergeIntoCommaSeparatedList(bundle, result);
+			resultList.mergeInto(newBundle);
 		}
+		String result = resultList.toString();
 		modified |= !oldBundles.equals(result);
 		if (!oldBundles.equals(result))
 			mainAttributes.put(REQUIRE_BUNDLE, result);
@@ -276,10 +281,10 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(IMPORT_PACKAGE);
 		if (oldBundles == null)
 			oldBundles = "";
-		String result = oldBundles;
-		for (String bundle : importedPackages) {
-			result = mergeIntoCommaSeparatedList(bundle, result);
-		}
+		BundleList resultList = BundleList.fromInput(oldBundles);
+		for (String bundle : importedPackages)
+			resultList.mergeInto(Bundle.fromInput(bundle));
+		String result = resultList.toString();
 		modified |= !oldBundles.equals(result);
 		if (!oldBundles.equals(result))
 			mainAttributes.put(IMPORT_PACKAGE, result);
@@ -303,51 +308,13 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(EXPORT_PACKAGE);
 		if (oldBundles == null)
 			oldBundles = "";
-		String result = oldBundles;
-		for (String bundle : exportedPackages) {
-			result = mergeIntoCommaSeparatedList(bundle, result);
-		}
+		BundleList resultList = BundleList.fromInput(oldBundles);
+		for (String bundle : exportedPackages)
+			resultList.mergeInto(Bundle.fromInput(bundle));
+		String result = resultList.toString();
 		modified |= !oldBundles.equals(result);
 		if (!oldBundles.equals(result))
 			mainAttributes.put(EXPORT_PACKAGE, result);
-	}
-
-	private static String mergeIntoCommaSeparatedList(String bundle, String oldBundles) {
-		if (oldBundles.isEmpty())
-			return bundle;
-		String result = "";
-		String[] oldBundleList = oldBundles.split(",");
-		String newBundleName = bundleName(bundle);
-		String newBundleVersion = bundleVersion(bundle);
-		String seperator = "";
-		boolean merged = false;
-		for (String oldBundle : oldBundleList) {
-			String oldBundleName = bundleName(oldBundle);
-			String oldBundleVersion = bundleVersion(oldBundle);
-			String bundleName;
-			String bundleVersion;
-			if (oldBundleName.equals(newBundleName)) {
-				bundleName = newBundleName;
-				bundleVersion = !"".equals(oldBundleVersion) ? oldBundleVersion : newBundleVersion;
-				merged = true;
-			} else {
-				bundleName = oldBundleName;
-				bundleVersion = oldBundleVersion;
-			}
-			result += seperator + bundleName + (bundleVersion == "" ? "" : (";" + bundleVersion));
-			seperator = ",";
-		}
-		if (!merged)
-			result += "," + bundle;
-		return result;
-	}
-
-	private static String bundleName(String bundle) {
-		return bundle.contains(";") ? bundle.split(";")[0] : bundle;
-	}
-
-	private static String bundleVersion(String bundle) {
-		return bundle.contains(";") ? bundle.split(";")[1] : "";
 	}
 
 	/**
@@ -453,39 +420,47 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	private String separateCommas(String value) {
-		if (!value.contains(","))
-			return value;
 		String result = "";
+		String separator = "";
+		for (String part : splitAtCharHonorQuoting(value, ',')) {
+			result += separator + part;
+			separator = "," + newline + " ";
+		}
+		return result;
+	}
+
+	private static List<String> splitAtCharHonorQuoting(String value, char c) {
+		if (value.indexOf(c) == -1)
+			return Collections.singletonList(value);
+		List<String> result = new ArrayList<>();
 		String rest = value;
-		String seperator = "";
 		while (!rest.isEmpty()) {
-			int commaIndex = rest.indexOf(',');
+			int commaIndex = rest.indexOf(c);
 			if (commaIndex == -1) {
-				result += seperator + rest;
-				rest = "";
+				result.add(rest);
+				break;
 			} else {
 				int quote0Index = rest.indexOf('"');
 				if (quote0Index == -1 || commaIndex < quote0Index) {
-					result += seperator + rest.substring(0, commaIndex);
+					result.add(rest.substring(0, commaIndex));
 					rest = rest.substring(commaIndex + 1);
 				} else {
 					int quote1Index = rest.indexOf('"', quote0Index + 1);
 					if (quote1Index == -1) {
-						result += seperator + rest.substring(0, commaIndex);
+						result.add(rest.substring(0, commaIndex));
 						rest = rest.substring(commaIndex + 1);
 					} else {
-						commaIndex = rest.indexOf(',', quote1Index);
+						commaIndex = rest.indexOf(c, quote1Index);
 						if (commaIndex == -1) {
-							result += seperator + rest;
+							result.add(rest);
 							rest = "";
 						} else {
-							result += seperator + rest.substring(0, commaIndex);
+							result.add(rest.substring(0, commaIndex));
 							rest = rest.substring(commaIndex + 1);
 						}
 					}
 				}
 			}
-			seperator = "," + newline + " ";
 		}
 		return result;
 	}
@@ -524,7 +499,7 @@ public class MergeableManifest2 implements Cloneable {
 		return result.toString();
 	}
 
-	private static String append512Safe(String toAppend, StringBuilder result, String newline) {
+	private static void append512Safe(String toAppend, StringBuilder result, String newline) {
 		boolean hasAppended = false;
 		while (toAppend.length() > 512) {
 			if (hasAppended)
@@ -536,7 +511,6 @@ public class MergeableManifest2 implements Cloneable {
 		if (hasAppended)
 			result.append(" ");
 		result.append(toAppend).append(newline);
-		return toAppend;
 	}
 
 	@Override
@@ -667,6 +641,132 @@ public class MergeableManifest2 implements Cloneable {
 			} else if (!content.equals(other.content))
 				return false;
 			return true;
+		}
+
+	}
+
+	private static class BundleList {
+
+		private final List<Bundle> list;
+
+		public BundleList(List<Bundle> list) {
+			this.list = list;
+		}
+
+		private static BundleList fromInput(String input) {
+			if (input.isEmpty())
+				return new BundleList(new ArrayList<>());
+			return new BundleList(splitAtCharHonorQuoting(input, ',').stream().map(s -> Bundle.fromInput(s))
+					.collect(Collectors.toList()));
+		}
+
+		public void mergeInto(Bundle newBundle) {
+			if (list.isEmpty()) {
+				list.add(newBundle);
+				return;
+			}
+			boolean merged = false;
+			for (int i = 0; i < list.size(); i++) {
+				Bundle oldBundle = list.get(i);
+				if (oldBundle.hasSameName(newBundle)) {
+					String oldBundleName = oldBundle.getName();
+					String oldBundleVersion = oldBundle.getVersion();
+					String oldBundleSuffix = oldBundle.getSuffix();
+					String bundleVersion = oldBundleVersion == null ? newBundle.getVersion() : oldBundleVersion;
+					merged = true;
+					if (oldBundleSuffix == null) {
+						if (bundleVersion != null) {
+							list.set(i, Bundle.fromNameVersion(oldBundleName, bundleVersion));
+						}
+					} else {
+						if (bundleVersion != null) {
+							if (oldBundleVersion == null) {
+								list.set(i,
+										Bundle.fromNameVersionSuffix(oldBundleName, bundleVersion, oldBundleSuffix));
+							}
+						}
+					}
+				}
+			}
+			if (!merged)
+				list.add(newBundle);
+		}
+
+		// Output is used by algorithm ... do not change for debugging purposes!
+		@Override
+		public String toString() {
+			String separator = "";
+			StringBuilder result = new StringBuilder("");
+			for (Bundle bundle : list) {
+				result.append(separator).append(bundle);
+				separator = ",";
+			}
+			return result.toString();
+		}
+
+	}
+
+	private static class Bundle {
+		private final String input;
+		private final List<String> split;
+
+		public static Bundle fromInput(String input) {
+			return new Bundle(input);
+		}
+
+		public static Bundle fromNameVersion(String name, String version) {
+			return new Bundle(name + ";bundle-version=\"" + version + "\"");
+		}
+
+		public static Bundle fromNameVersionSuffix(String name, String version, String suffix) {
+			return new Bundle(name + ";bundle-version=\"" + version + "\";" + suffix);
+		}
+
+		private Bundle(String input) {
+			this.input = input;
+			if (this.input.contains(";"))
+				this.split = Collections.unmodifiableList(splitAtCharHonorQuoting(this.input, ';'));
+			else
+				this.split = Collections.singletonList(this.input);
+		}
+
+		public boolean hasSameName(Bundle other) {
+			return Objects.equals(getName(), other.getName());
+		}
+
+		public String getName() {
+			return split.get(0);
+		}
+
+		public String getSuffix() {
+			return split.size() > 1 ? split.subList(1, split.size()).stream().reduce((a, b) -> a + ";" + b).get()
+					: null;
+		}
+
+		public String getVersion() {
+			for (int n = 1; n < split.size(); n++) {
+				String part = split.get(n);
+				if (part.contains("bundle-version=")) {
+					int startIndex = part.indexOf("bundle-version=") + "bundle-version=".length();
+					if (part.charAt(startIndex) == '"') {
+						return part.substring(startIndex + 1, part.indexOf("\"", startIndex + 1));
+					} else {
+						return part.substring(startIndex);
+					}
+				}
+			}
+			return null;
+		}
+
+		// Output is used by algorithm ... do not change for debugging purposes!
+		@Override
+		public String toString() {
+			String bundleName = getName();
+			String bundleVersion = getVersion();
+			String bundleSuffix = getSuffix();
+			if (bundleVersion == null && bundleSuffix == null)
+				return bundleName;
+			return bundleName + ";" + bundleSuffix;
 		}
 
 	}

@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
@@ -539,7 +538,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_missingAttribute_oneEmptyValue() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton(""));
+		manifest.addRequiredBundles("");
 
 		assertFalse(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL, write(manifest));
@@ -548,7 +547,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_missingAttribute_twoValues() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(new HashSet<>(java.util.Arrays.asList("a", "b")));
+		manifest.addRequiredBundles("a", "b");
 
 		assertTrue(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a," + NL + " b" + NL, write(manifest));
@@ -557,7 +556,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingOneValue() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL);
-		manifest.addRequiredBundles(Collections.singleton("b"));
+		manifest.addRequiredBundles("b");
 
 		assertTrue(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a," + NL + " b" + NL, write(manifest));
@@ -566,7 +565,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingExistingValue() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a"));
+		manifest.addRequiredBundles("a");
 
 		assertFalse(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL, write(manifest));
@@ -575,7 +574,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_missingAttribute_oneValue_withVersion() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a;1.0"));
+		manifest.addRequiredBundles("a;1.0");
 
 		assertTrue(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL, write(manifest));
@@ -584,25 +583,26 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingExistingValue_withVersion() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a;1.0"));
+		manifest.addRequiredBundles("a;bundle-version=\"1.0\"");
 
 		assertTrue(manifest.isModified());
-		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL, write(manifest));
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"" + NL, write(manifest));
 	}
 
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingExistingValueVersion_withoutVersion() throws Exception {
-		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a"));
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"" + NL);
+		manifest.addRequiredBundles("a");
 
 		assertFalse(manifest.isModified());
-		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL, write(manifest));
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"" + NL, write(manifest));
 	}
 
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingExistingValueVersion_withSameVersion() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a;1.0"));
+		manifest.addRequiredBundles("a;1.0");
 
 		assertFalse(manifest.isModified());
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL, write(manifest));
@@ -610,27 +610,28 @@ public class MergeableManifest2Test {
 
 	@Test
 	public void addRequiredBundles_oneValueBefore_addingExistingValueVersion_withDifferentVersion() throws Exception {
-		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a;1.1"));
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"" + NL);
+		manifest.addRequiredBundles("a;bundle-version=\"1.1\"");
 
 		assertFalse(manifest.isModified());
-		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0" + NL, write(manifest));
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"" + NL, write(manifest));
 	}
 
 	@Test
 	public void addRequiredBundles_threeValuesBefore_addingMoreVersions() throws Exception {
-		MergeableManifest2 manifest = newManifest(
-				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0," + NL + " b," + NL + " c" + NL);
-		manifest.addRequiredBundles(new HashSet<>(java.util.Arrays.asList("b", "d;2.1", "e")));
+		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL
+				+ "Require-Bundle: a;bundle-version=\"1.0\"," + NL + " b," + NL + " c" + NL);
+		manifest.addRequiredBundles("b", "d;bundle-version=\"2.1\"", "e");
 
-		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;1.0," + NL + " b," + NL + " c," + NL + " d;2.1,"
-				+ NL + " e" + NL, write(manifest));
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"1.0\"," + NL + " b," + NL
+				+ " c," + NL + " d;bundle-version=\"2.1\"," + NL + " e" + NL, write(manifest));
 	}
 
 	@Test
 	public void addRequiredBundles_quoting() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("\"a,b\""));
+		manifest.addRequiredBundles("\"a,b\"");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a,b\"" + NL, write(manifest));
 	}
@@ -638,7 +639,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_quoting_quotedEntryAlreadyPresent() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a,b;1.0\"" + NL);
-		manifest.addRequiredBundles(Collections.singleton("c"));
+		manifest.addRequiredBundles("c");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a,b;1.0\"," + NL + " c" + NL, write(manifest));
 	}
@@ -646,7 +647,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_quoting_unclosed() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("\"a,b"));
+		manifest.addRequiredBundles("\"a,b");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a," + NL + " b" + NL, write(manifest));
 	}
@@ -654,7 +655,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_quoting_version() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
-		manifest.addRequiredBundles(Collections.singleton("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""));
+		manifest.addRequiredBundles("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""
 				+ NL, write(manifest));
@@ -664,7 +665,7 @@ public class MergeableManifest2Test {
 	public void addRequiredBundles_quoting_version_toExisting() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL
 				+ "Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version=\"[2.13.0,2.14.0)\"" + NL);
-		manifest.addRequiredBundles(Collections.singleton("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""));
+		manifest.addRequiredBundles("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"");
 
 		assertEquals("Manifest-Version: 1.0" + NL
 				+ "Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version=\"[2.13.0,2.14.0)\"," + NL
@@ -676,7 +677,7 @@ public class MergeableManifest2Test {
 		MergeableManifest2 manifest = newManifest(
 				"Manifest-Version: 1.0" + NL + "Require-Bundle: org.eclipse.xtext.util," + NL
 						+ " org.eclipse.xtext.xbase.lib;bundle-version=\"[2.13.0,2.14.0)\"" + NL);
-		manifest.addRequiredBundles(Collections.singleton("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\""));
+		manifest.addRequiredBundles("org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: org.eclipse.xtext.util," + NL
 				+ " org.eclipse.xtext.xbase.lib;bundle-version=\"[2.13.0,2.14.0)\"," + NL
@@ -684,9 +685,33 @@ public class MergeableManifest2Test {
 	}
 
 	@Test
+	public void addRequiredBundles_quoting_overMultipleLines() throws Exception {
+		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL
+				+ "Require-Bundle: org.eclipse.xtext.util.formallang;x-friends:=\"org.eclipse.xtext.ide," + NL
+				+ " org.eclipse.xtext.xtext.generator," + NL + " org.eclipse.xtext," + NL + " org.eclipse.xtext.tests\""
+				+ NL);
+		manifest.addRequiredBundles("org.eclipse.xtext.util.formallang;bundle-version=\"[3.2.0,3.2.1)\"");
+
+		assertEquals("Manifest-Version: 1.0" + NL
+				+ "Require-Bundle: org.eclipse.xtext.util.formallang;bundle-version=\"[3.2.0,3.2.1)\";x-friends:=\"org.eclipse.xtext.ide,"
+				+ NL + " org.eclipse.xtext.xtext.generator," + NL + " org.eclipse.xtext," + NL
+				+ " org.eclipse.xtext.tests\"" + NL, write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_quoting_quotedSemicolonInName() throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: \"org.eclipse.xtext.xbase.lib;\"" + NL);
+		manifest.addRequiredBundles("\"org.eclipse.xtext.xbase.lib;\";bundle-version=\"1\"");
+
+		assertEquals("Manifest-Version: 1.0" + NL
+				+ "Require-Bundle: \"org.eclipse.xtext.xbase.lib;\";bundle-version=\"1\"" + NL, write(manifest));
+	}
+
+	@Test
 	public void addRequiredBundles_bundleSymbolicNamePresent() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self" + NL);
-		manifest.addRequiredBundles(Collections.singleton("a"));
+		manifest.addRequiredBundles("a");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self" + NL + "Require-Bundle: a" + NL,
 				write(manifest));
@@ -695,7 +720,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_bundleSymbolicNamePresent_addSelf() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self" + NL);
-		manifest.addRequiredBundles(Collections.singleton("self"));
+		manifest.addRequiredBundles("self");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self" + NL, write(manifest));
 	}
@@ -703,7 +728,7 @@ public class MergeableManifest2Test {
 	@Test
 	public void addRequiredBundles_bundleSymbolicNameWithVersionPresent_addSelf() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self;1.1" + NL);
-		manifest.addRequiredBundles(Collections.singleton("self"));
+		manifest.addRequiredBundles("self");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Bundle-SymbolicName: self;1.1" + NL, write(manifest));
 	}
@@ -712,7 +737,7 @@ public class MergeableManifest2Test {
 	public void addRequiredBundles_projectNamePresent_addSelf() throws Exception {
 		MergeableManifest2 manifest = new MergeableManifest2(new StringInputStream("Manifest-Version: 1.0" + NL),
 				"self");
-		manifest.addRequiredBundles(Collections.singleton("self"));
+		manifest.addRequiredBundles("self");
 
 		assertEquals("Manifest-Version: 1.0" + NL, write(manifest));
 	}
@@ -721,9 +746,72 @@ public class MergeableManifest2Test {
 	public void addRequiredBundles_projectNamePresent_addOther() throws Exception {
 		MergeableManifest2 manifest = new MergeableManifest2(new StringInputStream("Manifest-Version: 1.0" + NL),
 				"self");
-		manifest.addRequiredBundles(Collections.singleton("other"));
+		manifest.addRequiredBundles("other");
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: other" + NL, write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_oneValueBefore_addingExistingValueVersionAndOthers_withoutVersion()
+			throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"2.14.0\";visibility:=reexport" + NL);
+		manifest.addRequiredBundles("a");
+
+		assertFalse(manifest.isModified());
+		assertEquals(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"2.14.0\";visibility:=reexport" + NL,
+				write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_oneValueBefore_addingExistingValueWithoutVersionButOthers_withVersion()
+			throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;visibility:=reexport" + NL);
+		manifest.addRequiredBundles("a;bundle-version=\"2.14.0\"");
+
+		assertTrue(manifest.isModified());
+		assertEquals(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"2.14.0\";visibility:=reexport" + NL,
+				write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_oneValueBefore_addingExistingValueVersionAndOthers_withoutVersion_noQuoting()
+			throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=2.14.0;visibility:=reexport" + NL);
+		manifest.addRequiredBundles("a");
+
+		assertFalse(manifest.isModified());
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=2.14.0;visibility:=reexport" + NL,
+				write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_oneValueBefore_addingExistingValueWithoutVersionButOthers_withVersion_noQuoting()
+			throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;visibility:=reexport" + NL);
+		manifest.addRequiredBundles("a;bundle-version=2.14.0");
+
+		assertTrue(manifest.isModified());
+		assertEquals(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;bundle-version=\"2.14.0\";visibility:=reexport" + NL,
+				write(manifest));
+	}
+
+	@Test
+	public void addRequiredBundles_oneValueBefore_addingExistingValueVersionAndOthersReversedOrder_withVersion_noQuoting()
+			throws Exception {
+		MergeableManifest2 manifest = newManifest(
+				"Manifest-Version: 1.0" + NL + "Require-Bundle: a;visibility:=reexport;bundle-version=2.14.0" + NL);
+		manifest.addRequiredBundles("a");
+
+		assertFalse(manifest.isModified());
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a;visibility:=reexport;bundle-version=2.14.0" + NL,
+				write(manifest));
 	}
 
 	@Test
@@ -1025,6 +1113,50 @@ public class MergeableManifest2Test {
 			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
 		// @formatter:on
 		MergeableManifest2 manifest = newManifest(content);
+		assertEquals(content, write(manifest));
+	}
+
+	@Test
+	public void readWrite_addRequiredBundles_realisticManifest_regression() throws Exception {
+		// @formatter:off
+        String content =
+            "Manifest-Version: 1.0" + NL + 
+            "Bundle-ManifestVersion: 2" + NL + 
+            "Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+            "Bundle-Vendor: Eclipse Xtext" + NL + 
+            "Bundle-Version: 2.16.0.qualifier" + NL + 
+            "Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+            "Bundle-ActivationPolicy: lazy" + NL + 
+            "Require-Bundle: org.eclipse.xtext," + NL + 
+            " org.eclipse.xtext.xbase," + NL + 
+            " org.eclipse.equinox.common;bundle-version=\"3.5.0\"," + NL + 
+            " org.eclipse.emf.ecore," + NL + 
+            " org.objectweb.asm;bundle-version=\"[6.2.1,6.3.0)\";resolution:=optional," + NL + 
+            " org.eclipse.xtext.util," + NL + 
+            " org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+            " org.eclipse.xtend.lib;bundle-version=\"2.14.0\"," + NL + 
+            " org.eclipse.emf.common," + NL + 
+            " org.eclipse.xtext.common.types;bundle-version=\"2.14.0\";visibility:=reexport," + NL + 
+            " org.eclipse.xtext.xbase.lib;bundle-version=\"2.14.0\"" + NL + 
+            "Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+            "Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util," + NL + 
+            " org.eclipse.xtext.example.homeautomation.ruleEngine," + NL + 
+            " org.eclipse.xtext.example.homeautomation.ruleEngine.impl," + NL + 
+            " org.eclipse.xtext.example.homeautomation," + NL + 
+            " org.eclipse.xtext.example.homeautomation.parser.antlr.lexer," + NL + 
+            " org.eclipse.xtext.example.homeautomation.parser.antlr.internal," + NL + 
+            " org.eclipse.xtext.example.homeautomation.validation," + NL + 
+            " org.eclipse.xtext.example.homeautomation.jvmmodel," + NL + 
+            " org.eclipse.xtext.example.homeautomation.scoping," + NL + 
+            " org.eclipse.xtext.example.homeautomation.serializer," + NL + 
+            " org.eclipse.xtext.example.homeautomation.parser.antlr," + NL + 
+            " org.eclipse.xtext.example.homeautomation.services," + NL + 
+            " org.eclipse.xtext.example.homeautomation.formatting2" + NL + 
+            "Import-Package: org.apache.log4j" + NL + 
+            "Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+        // @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addRequiredBundles("org.eclipse.xtext.common.types");
 		assertEquals(content, write(manifest));
 	}
 
