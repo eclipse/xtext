@@ -8,9 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
