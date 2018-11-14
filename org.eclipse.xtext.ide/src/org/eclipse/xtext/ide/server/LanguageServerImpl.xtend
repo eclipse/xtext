@@ -99,6 +99,8 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 
 import static org.eclipse.xtext.diagnostics.Severity.*
+import com.google.common.collect.ImmutableMultimap
+import com.google.common.collect.ImmutableMap
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -733,4 +735,66 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			];
 	}
 
+	/**
+	 * @since 2.16
+	 */
+	protected def ILanguageServerAccess getLanguageServerAccess() {
+		access
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def LanguageClient getLanguageClient() {
+		client
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def ExecutableCommandRegistry getCommandRegistry() {
+		commandRegistry
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def Multimap<String, Endpoint> getExtensionProviders() {
+		ImmutableMultimap.copyOf(extensionProviders)
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def Map<String, JsonRpcMethod> getSupportedMethods() {
+		ImmutableMap.copyOf(supportedMethods)
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def IResourceServiceProvider.Registry getLanguagesRegistry() {
+		languagesRegistry
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def WorkspaceResourceAccess getWorkspaceResourceAccess() {
+		resourceAccess
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def WorkspaceManager getWorkspaceManager() {
+		workspaceManager
+	}
+
+	/**
+	 * @since 2.16
+	 */
+	protected def WorkspaceSymbolService getWorkspaceSymbolService() {
+		workspaceSymbolService
+	}
 }
