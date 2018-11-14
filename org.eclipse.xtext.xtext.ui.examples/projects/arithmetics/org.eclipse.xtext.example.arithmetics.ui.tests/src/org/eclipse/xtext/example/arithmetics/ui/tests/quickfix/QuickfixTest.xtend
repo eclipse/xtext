@@ -16,6 +16,9 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator.NORMALIZABLE
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(ArithmeticsUiInjectorProvider)
 class QuickfixTest extends AbstractQuickfixTest {

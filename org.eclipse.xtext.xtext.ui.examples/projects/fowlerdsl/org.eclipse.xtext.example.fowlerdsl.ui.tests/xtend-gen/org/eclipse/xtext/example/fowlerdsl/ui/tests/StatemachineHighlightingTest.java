@@ -9,6 +9,9 @@ import org.eclipse.xtext.ui.testing.AbstractHighlightingTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner.class)
 @InjectWith(StatemachineUiInjectorProvider.class)
 @SuppressWarnings("all")
