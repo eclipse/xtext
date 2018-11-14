@@ -1322,9 +1322,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	 * @since 2.14
 	 */
 	protected boolean hasAnnotation(AbstractRule rule, String annotationName) {
-		if (rule == null) {
-			return false;
-		}
 		return rule.getAnnotations().stream().anyMatch(e -> annotationName.equals(e.getName()));
 	}
 	
