@@ -98,6 +98,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ICapabilitiesContributor;
@@ -1165,7 +1166,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   /**
    * @since 2.16
    */
-  protected WorkspaceResourceAccess getWorkspaceResourceAccess() {
+  protected IReferenceFinder.IResourceAccess getWorkspaceResourceAccess() {
     return this.resourceAccess;
   }
   

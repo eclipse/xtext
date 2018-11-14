@@ -101,6 +101,7 @@ import org.eclipse.xtext.validation.Issue
 import static org.eclipse.xtext.diagnostics.Severity.*
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.ImmutableMap
+import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -780,7 +781,7 @@ import com.google.common.collect.ImmutableMap
 	/**
 	 * @since 2.16
 	 */
-	protected def WorkspaceResourceAccess getWorkspaceResourceAccess() {
+	protected def IResourceAccess getWorkspaceResourceAccess() {
 		resourceAccess
 	}
 
