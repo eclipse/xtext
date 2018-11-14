@@ -14,6 +14,9 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_WILDCARD_DEPR
 
 import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelUiInjectorProvider)
 class QuickfixTest extends AbstractQuickfixTest {

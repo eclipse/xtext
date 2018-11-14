@@ -18,6 +18,9 @@ import static org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC
 
 import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineUiInjectorProvider)
 class RuleEngineQuickfixTest extends AbstractQuickfixTest {
