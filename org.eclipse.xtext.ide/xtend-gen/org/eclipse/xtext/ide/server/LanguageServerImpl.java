@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ide.server;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
@@ -96,6 +98,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ICapabilitiesContributor;
@@ -1116,6 +1119,69 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       this.access.<Void>doRead(it, _function_3);
     };
     IterableExtensions.<IResourceDescription.Delta, String>map(IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function), _function_1).forEach(_function_2);
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected ILanguageServerAccess getLanguageServerAccess() {
+    return this.access;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected LanguageClient getLanguageClient() {
+    return this.client;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected ExecutableCommandRegistry getCommandRegistry() {
+    return this.commandRegistry;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected Multimap<String, Endpoint> getExtensionProviders() {
+    return ImmutableMultimap.<String, Endpoint>copyOf(this.extensionProviders);
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected Map<String, JsonRpcMethod> getSupportedMethods() {
+    return ImmutableMap.<String, JsonRpcMethod>copyOf(this.supportedMethods);
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected IResourceServiceProvider.Registry getLanguagesRegistry() {
+    return this.languagesRegistry;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected IReferenceFinder.IResourceAccess getWorkspaceResourceAccess() {
+    return this.resourceAccess;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected WorkspaceManager getWorkspaceManager() {
+    return this.workspaceManager;
+  }
+  
+  /**
+   * @since 2.16
+   */
+  protected WorkspaceSymbolService getWorkspaceSymbolService() {
+    return this.workspaceSymbolService;
   }
   
   private static final Logger LOG = Logger.getLogger(LanguageServerImpl.class);
