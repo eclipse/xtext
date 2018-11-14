@@ -116,28 +116,25 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
         _maven_1.setArtifactId("junit-jupiter-api");
         ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
-        _maven_2.setVersion("5.1.0");
+        _maven_2.setVersion("5.3.1");
         ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
         _maven_3.setScope(Scope.TESTCOMPILE);
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_1);
       deps.add(_doubleArrow_1);
-      boolean _needsGradleBuild = this.getConfig().needsGradleBuild();
-      if (_needsGradleBuild) {
-        ExternalDependency _externalDependency_2 = new ExternalDependency();
-        final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setGroupId("org.junit.jupiter");
-          ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
-          _maven_1.setArtifactId("junit-jupiter-engine");
-          ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
-          _maven_2.setVersion("5.1.0");
-          ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
-          _maven_3.setScope(Scope.TESTRUNTIME);
-        };
-        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_2);
-        deps.add(_doubleArrow_2);
-      }
+      ExternalDependency _externalDependency_2 = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setGroupId("org.junit.jupiter");
+        ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+        _maven_1.setArtifactId("junit-jupiter-engine");
+        ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+        _maven_2.setVersion("5.3.1");
+        ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+        _maven_3.setScope(Scope.TESTRUNTIME);
+      };
+      ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_2);
+      deps.add(_doubleArrow_2);
     }
     return deps;
   }

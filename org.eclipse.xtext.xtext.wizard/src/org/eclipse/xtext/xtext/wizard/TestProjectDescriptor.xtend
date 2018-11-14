@@ -63,17 +63,15 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 				p2.version = "[5.0.0,6.0.0)"
 				maven.groupId = "org.junit.jupiter"
 				maven.artifactId = "junit-jupiter-api"
-				maven.version = "5.1.0"
+				maven.version = "5.3.1"
 				maven.scope = Scope.TESTCOMPILE
 			]
-			if (config.needsGradleBuild) {
-				deps += new ExternalDependency()=>[
-					maven.groupId = "org.junit.jupiter"
-					maven.artifactId = "junit-jupiter-engine"
-					maven.version = "5.1.0"
-					maven.scope = Scope.TESTRUNTIME
-				]
-			}
+			deps += new ExternalDependency()=>[
+				maven.groupId = "org.junit.jupiter"
+				maven.artifactId = "junit-jupiter-engine"
+				maven.version = "5.3.1"
+				maven.scope = Scope.TESTRUNTIME
+			]
 		}
 		return deps
 	}
