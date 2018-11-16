@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.impl.XtextBuilder.SchedulingOption;
 import org.eclipse.xtext.builder.internal.Activator;
@@ -29,13 +30,13 @@ public class ParallelBuildEnabledTest {
 		if (Platform.getBundle(ResourcesPlugin.PI_RESOURCES).getVersion().compareTo(new Version(3,13,0)) < 0) {
 			return; // running on too old platform
 		}
-		int maxConcurrentProjectBuilds = InstanceScope.INSTANCE.getNode(ResourcesPlugin.PI_RESOURCES).getInt("maxConcurrentBuilds", -1);
+		int maxConcurrentProjectBuilds = new ScopedPreferenceStore(InstanceScope.INSTANCE, ResourcesPlugin.PI_RESOURCES).getInt("maxConcurrentBuilds");
 		assertEquals("parallel build was not enabled", 8, maxConcurrentProjectBuilds);
 	}
 	
 	@Test
 	public void testBuilderSchedulingRuleEnabledInWorkspace() {
-		String schedulingRule = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID).get(XtextBuilder.PREF_SCHEDULING_RULE, "");
+		String schedulingRule = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID).getString(XtextBuilder.PREF_SCHEDULING_RULE);
 		assertEquals("non-default scheduling rule was not enabled", SchedulingOption.ALL_XTEXT_PROJECTS.name(), schedulingRule);
 	}
 	
