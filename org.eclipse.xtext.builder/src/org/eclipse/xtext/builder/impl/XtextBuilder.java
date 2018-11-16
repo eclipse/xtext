@@ -428,6 +428,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (schedulingRuleName.isEmpty()) {
 			return SchedulingOption.WORKSPACE;
 		}
-		return SchedulingOption.valueOf(preferenceStore.getString(PREF_SCHEDULING_RULE));
+		return SchedulingOption.valueOf(schedulingRuleName);
 	}
 }
