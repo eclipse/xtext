@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional
+ org.eclipse.core.runtime;bundle-version="3.13.0";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtend.ide.common.contentassist.antlr.internal;x-friends:="org.eclipse.xtend.ide,
