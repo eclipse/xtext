@@ -65,6 +65,8 @@ node {
 			targetProfile = "-Pr201809"
 		} else if ("photon" == params.target_platform) {
 			targetProfile = "-Pphoton"
+		} else if ("oxygen" == params.target_platform) {
+			targetProfile = "-Poxygen"
 		}
 		wrap([$class:'Xvnc', useXauthority: true]) {
 			sh "${mvnHome}/bin/mvn -f tycho-pom.xml --batch-mode -fae -Dmaven.test.failure.ignore=true -DJENKINS_URL=$JENKINS_URL -Dmaven.repo.local=${workspace}/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn ${targetProfile} clean install"
