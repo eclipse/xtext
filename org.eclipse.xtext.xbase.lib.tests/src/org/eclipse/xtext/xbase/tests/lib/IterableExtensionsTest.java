@@ -195,7 +195,12 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertEquals(new Pair<Integer, String>(1, "bar"), result.next());
 		assertFalse(result.hasNext());
 	}
-	
+
+	class A {}
+	interface C {}
+	class B extends A implements C {}
+	class D extends A {}
+
 	@Test public void testReject() {
 		List<Integer> nullList = new ArrayList<>();
 		nullList.add(null);
@@ -205,6 +210,12 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		
 		List<Integer> integerObjects = newArrayList(1, 2, null, 4);
 		assertEquals(nullList, newArrayList(IterableExtensions.reject(integerObjects, Integer.class)));
+		
+		List<A> bObjects = newArrayList(new B(), new B(), new D());
+		assertEquals(0, IterableExtensions.size(IterableExtensions.reject(bObjects, A.class)));
+		assertEquals(1, IterableExtensions.size(IterableExtensions.reject(bObjects, B.class)));
+		assertEquals(1, IterableExtensions.size(IterableExtensions.reject(bObjects, C.class)));
+		assertEquals(2, IterableExtensions.size(IterableExtensions.reject(bObjects, D.class)));
 		
 		Function1<Integer, Boolean> function = new Function1<Integer, Boolean>() {
 			@Override
