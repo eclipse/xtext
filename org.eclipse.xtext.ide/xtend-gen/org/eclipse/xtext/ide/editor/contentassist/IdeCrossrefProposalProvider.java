@@ -85,6 +85,7 @@ public class IdeCrossrefProposalProvider {
         _name=_eClass.getName();
       }
       it.setDescription(_name);
+      it.setKind(ContentAssistEntry.KIND_REFERENCE);
     };
     return this.proposalCreator.createProposal(this.qualifiedNameConverter.toString(candidate.getName()), context, _function);
   }
