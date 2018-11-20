@@ -119,6 +119,7 @@
 							<!-- matches *Tests.java as well as *Test<n>.java -->
 							<include>**/*Test?.java</include>
 						</includes>
+						<appArgLine>-pluginCustomization ${basedir}/../releng/org.eclipse.xtext.tycho.tests.parent/pluginCustomization.ini</appArgLine>
 						<!-- TODO remove with tycho 1.3 -->
 						<bundleStartLevel>
 							<bundle>

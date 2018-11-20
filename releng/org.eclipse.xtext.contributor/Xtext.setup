@@ -339,6 +339,18 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.core.resources/encoding"
           value="UTF-8"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/maxConcurrentBuilds"
+          value="8"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.xtext.builder">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.xtext.builder/schedulingrule"
+          value="ALL_XTEXT_PROJECTS"/>
     </setupTask>
   </setupTask>
   <setupTask
