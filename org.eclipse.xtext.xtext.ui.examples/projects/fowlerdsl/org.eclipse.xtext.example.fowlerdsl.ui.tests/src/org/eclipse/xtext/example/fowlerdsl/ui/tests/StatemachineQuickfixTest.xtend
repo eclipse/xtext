@@ -9,6 +9,9 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC
 import static org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator.INVALID_NAME
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(StatemachineUiInjectorProvider)
 class StatemachineQuickfixTest extends AbstractQuickfixTest {

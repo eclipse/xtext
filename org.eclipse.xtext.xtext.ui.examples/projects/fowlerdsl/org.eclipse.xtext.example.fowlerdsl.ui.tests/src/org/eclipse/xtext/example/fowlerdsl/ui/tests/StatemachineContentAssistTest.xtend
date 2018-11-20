@@ -7,6 +7,9 @@ import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(StatemachineUiInjectorProvider)
 class StatemachineContentAssistTest extends AbstractContentAssistTest {

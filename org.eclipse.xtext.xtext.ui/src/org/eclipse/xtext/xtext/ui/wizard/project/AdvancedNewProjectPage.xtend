@@ -30,7 +30,6 @@ import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 import org.eclipse.xtext.util.JUnitVersion
 import org.eclipse.swt.widgets.Label
-import org.eclipse.pde.core.plugin.PluginRegistry
 
 class AdvancedNewProjectPage extends WizardPage {
 

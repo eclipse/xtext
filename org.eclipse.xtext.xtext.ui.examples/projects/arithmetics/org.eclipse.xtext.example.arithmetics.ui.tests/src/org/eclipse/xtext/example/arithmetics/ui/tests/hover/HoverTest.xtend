@@ -5,32 +5,41 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.example.arithmetics.ui.tests.quickfix
+package org.eclipse.xtext.example.arithmetics.ui.tests.hover
 
+import org.eclipse.jface.text.Region
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
-import org.eclipse.xtext.ui.testing.AbstractQuickfixTest
+import org.eclipse.xtext.ui.testing.AbstractHoverTest
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import static org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator.NORMALIZABLE
 
 /**
  * @author miklossy - Initial contribution and API
  */
 @RunWith(XtextRunner)
 @InjectWith(ArithmeticsUiInjectorProvider)
-class QuickfixTest extends AbstractQuickfixTest {
+class HoverTest extends AbstractHoverTest {
 
-	@Test def normalize_expression() {
+	@Test def hover_over_function_call() {
+		val text = '''
+			module arithmetics
+			
+			/*
+			 * A mathematical constant.
+			 * It is approximately equal to 3.14.
+			 */
+			def pi: 3.14
+			
+			pi * 4;
 		'''
-			module test
-			def fun : 1+2;
-		'''.testQuickfixesOn(NORMALIZABLE, new Quickfix("Replace with 3", "Replace expression with '3'", '''
-			module test
-			def fun : 3;
-		'''))
+		
+		val hoverText = "pi"
+		val hoverRegion = new Region(text.lastIndexOf(hoverText), hoverText.length)
+		text.hasHoverOver(hoverRegion, '''
+			A mathematical constant.
+			It is approximately equal to 3.14.'''
+		)
 	}
-
 }

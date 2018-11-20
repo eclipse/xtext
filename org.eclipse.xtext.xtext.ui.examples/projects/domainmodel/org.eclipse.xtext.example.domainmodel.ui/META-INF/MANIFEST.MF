@@ -10,17 +10,17 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.ui.editors;bundle-version="3.5.0",
- org.eclipse.ui.ide;bundle-version="3.5.0",
- org.eclipse.ui,
- org.eclipse.compare,
+ org.eclipse.ui.editors;bundle-version="3.11.0",
+ org.eclipse.ui.ide;bundle-version="3.13.1",
+ org.eclipse.ui;bundle-version="3.109.0",
+ org.eclipse.compare;bundle-version="3.7.101",
  org.eclipse.xtext.builder,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.xbase.ui,
- org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.debug.ui
+ org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.debug.ui;bundle-version="3.8.100"
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.ui.codemining;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
