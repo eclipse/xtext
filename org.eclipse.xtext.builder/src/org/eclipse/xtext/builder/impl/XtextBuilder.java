@@ -136,12 +136,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @since 2.16
 	 */
 	public static enum SchedulingOption {
+		/** workspace root */ 
 		WORKSPACE,
-		// all Xtext projects in the workspace
+		/** all projects with Xtext nature in the workspace */
 		ALL_XTEXT_PROJECTS,
-		// the currently building project
+		/** the currently building project */
 		PROJECT,
-		// null scheduling rule
+		/** null scheduling rule */
 		NULL;
 	}
 	
