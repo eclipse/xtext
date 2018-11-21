@@ -74,6 +74,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       final LightweightTypeReferenceFactory converter = this.getTypeConverter(context.getResource());
       final EObject objectOrProxy = candidate.getEObjectOrProxy();
       final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry result) -> {
+        result.setKind(ContentAssistEntry.KIND_REFERENCE);
         if ((objectOrProxy instanceof JvmFeature)) {
           boolean _startsWith = bracketInfo.brackets.startsWith(" =");
           if (_startsWith) {
