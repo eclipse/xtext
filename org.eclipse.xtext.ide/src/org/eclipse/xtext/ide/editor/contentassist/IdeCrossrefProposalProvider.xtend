@@ -57,6 +57,7 @@ class IdeCrossrefProposalProvider {
 		proposalCreator.createProposal(qualifiedNameConverter.toString(candidate.name), context) [
 			source = candidate
 			description = candidate.getEClass?.name
+			kind = ContentAssistEntry.KIND_REFERENCE
 		]
 	}
 	
