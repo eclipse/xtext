@@ -172,6 +172,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 
 	GenRuntimeVersion emfRuntimeVersion
 	GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL
+	String rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
 	
 	/**
 	 * Sets the target EMF runtime version to generate for to the specified value.
@@ -197,6 +198,16 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		this.jdkLevel = GenJDKLevel.getByName(jdkLevel)
 		if (this.jdkLevel === null)
 			LOG.warn('Illegal JDK level: ' + jdkLevel)
+	}
+	
+	/**
+	 * Sets the BaseClass for the EClasses in the inferred GenModel.
+	 * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container}.
+	 * 
+	 * @since 2.16
+	 */
+	def void setRootExtendsClass(String rootExtendsClass) {
+		this.rootExtendsClass = rootExtendsClass
 	}
 	
 	boolean bindEPackageAndEFactory = false
@@ -600,7 +611,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			genModel.updateClasspath = false
 			genModel.complianceLevel = jdkLevel
 			genModel.runtimeVersion = emfRuntimeVersion
-			genModel.rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
+			genModel.rootExtendsClass = rootExtendsClass
 			genModel.lineDelimiter = codeConfig.lineDelimiter
 			if (codeConfig.fileHeader !== null) {
 				genModel.copyrightText = codeConfig.fileHeader.trimMultiLineComment

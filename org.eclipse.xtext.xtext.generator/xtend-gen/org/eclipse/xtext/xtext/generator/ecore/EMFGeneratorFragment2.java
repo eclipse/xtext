@@ -194,6 +194,8 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   private GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL;
   
+  private String rootExtendsClass = "org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container";
+  
   /**
    * Sets the target EMF runtime version to generate for to the specified value.
    */
@@ -220,6 +222,16 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if ((this.jdkLevel == null)) {
       EMFGeneratorFragment2.LOG.warn(("Illegal JDK level: " + jdkLevel));
     }
+  }
+  
+  /**
+   * Sets the BaseClass for the EClasses in the inferred GenModel.
+   * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container}.
+   * 
+   * @since 2.16
+   */
+  public void setRootExtendsClass(final String rootExtendsClass) {
+    this.rootExtendsClass = rootExtendsClass;
   }
   
   private boolean bindEPackageAndEFactory = false;
@@ -867,7 +879,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         genModel.setUpdateClasspath(false);
         genModel.setComplianceLevel(this.jdkLevel);
         genModel.setRuntimeVersion(this.emfRuntimeVersion);
-        genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+        genModel.setRootExtendsClass(this.rootExtendsClass);
         genModel.setLineDelimiter(this.codeConfig.getLineDelimiter());
         String _fileHeader = this.codeConfig.getFileHeader();
         boolean _tripleNotEquals = (_fileHeader != null);
