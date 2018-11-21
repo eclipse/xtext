@@ -28,7 +28,7 @@
 		</repository>
 		<repository>
 			<id>maven</id>
-			<url>${JENKINS_URL}/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
 		</repository>
 		<repository>
 			<id>maven2</id>
