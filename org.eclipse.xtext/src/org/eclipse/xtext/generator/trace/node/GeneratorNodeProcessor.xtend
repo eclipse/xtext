@@ -77,15 +77,15 @@ class GeneratorNodeProcessor {
 		
 		def void increaseIndent(IndentNode node) {
 			_currentIndents.push(node)
-			recalculateIdentLength
+			recalculateIndentLength
 		}
 		
 		def void decreaseIndents() {
 			_currentIndents.pop
-			recalculateIdentLength
+			recalculateIndentLength
 		}
 		
-		protected def recalculateIdentLength() {
+		protected def recalculateIndentLength() {
 			_indentLength = currentIndents.fold(0)[$0 + $1.indentationString.length]
 		}
 		

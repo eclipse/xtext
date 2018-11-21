@@ -165,15 +165,15 @@ public class GeneratorNodeProcessor {
     
     public void increaseIndent(final IndentNode node) {
       this._currentIndents.push(node);
-      this.recalculateIdentLength();
+      this.recalculateIndentLength();
     }
     
     public void decreaseIndents() {
       this._currentIndents.pop();
-      this.recalculateIdentLength();
+      this.recalculateIndentLength();
     }
     
-    protected int recalculateIdentLength() {
+    protected int recalculateIndentLength() {
       final Function2<Integer, IndentNode, Integer> _function = (Integer $0, IndentNode $1) -> {
         int _length = $1.getIndentationString().length();
         return Integer.valueOf((($0).intValue() + _length));
