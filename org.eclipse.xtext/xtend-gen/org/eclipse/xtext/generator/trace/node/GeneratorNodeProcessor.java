@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 import java.util.stream.IntStream;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
@@ -33,12 +32,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Dennis Huebner - New GeneratorNodeProcessor.Context implementation
  */
 @SuppressWarnings("all")
 public class GeneratorNodeProcessor {
@@ -126,77 +124,116 @@ public class GeneratorNodeProcessor {
     }
   }
   
-  @Accessors
   protected static class Context {
-    private List<StringBuilder> lines;
+    private List<StringBuilder> _lines = CollectionLiterals.<StringBuilder>newArrayList(new StringBuilder());
     
-    private Deque<IndentNode> currentIndents;
+    private Deque<IndentNode> _currentIndents = new ArrayDeque<IndentNode>();
     
-    private boolean pendingIndent;
+    private boolean _pendingIndent = true;
     
-    private AbstractTraceRegion currentRegion = null;
+    private AbstractTraceRegion _currentRegion = null;
     
-    public StringBuilder currentLine() {
-      return this.lines.get(this.currentLineNumber());
+    private int _contentLength = 0;
+    
+    private int _indentLength = 0;
+    
+    public String currentLineContent() {
+      return this._lines.get(this.currentLineNumber()).toString();
     }
     
     public int contentLength() {
-      final Function2<Integer, StringBuilder, Integer> _function = (Integer $0, StringBuilder $1) -> {
-        int _length = $1.length();
-        return Integer.valueOf((($0).intValue() + _length));
-      };
-      final Integer contentLength = IterableExtensions.<StringBuilder, Integer>fold(this.lines, Integer.valueOf(0), _function);
-      if (this.pendingIndent) {
-        final Function2<Integer, IndentNode, Integer> _function_1 = (Integer $0, IndentNode $1) -> {
-          int _length = $1.getIndentationString().length();
-          return Integer.valueOf((($0).intValue() + _length));
-        };
-        Integer _fold = IterableExtensions.<IndentNode, Integer>fold(this.currentIndents, Integer.valueOf(0), _function_1);
-        return ((contentLength).intValue() + (_fold).intValue());
+      boolean _isPendingIndent = this.isPendingIndent();
+      if (_isPendingIndent) {
+        return (this._contentLength + this._indentLength);
       } else {
-        return (contentLength).intValue();
+        return this._contentLength;
       }
     }
     
     public int currentLineNumber() {
-      int _size = this.lines.size();
+      int _size = this._lines.size();
       return (_size - 1);
     }
     
-    @Pure
-    public List<StringBuilder> getLines() {
-      return this.lines;
+    public String getContent() {
+      return IterableExtensions.join(this._lines);
     }
     
-    public void setLines(final List<StringBuilder> lines) {
-      this.lines = lines;
-    }
-    
-    @Pure
-    public Deque<IndentNode> getCurrentIndents() {
-      return this.currentIndents;
-    }
-    
-    public void setCurrentIndents(final Deque<IndentNode> currentIndents) {
-      this.currentIndents = currentIndents;
-    }
-    
-    @Pure
-    public boolean isPendingIndent() {
-      return this.pendingIndent;
-    }
-    
-    public void setPendingIndent(final boolean pendingIndent) {
-      this.pendingIndent = pendingIndent;
-    }
-    
-    @Pure
     public AbstractTraceRegion getCurrentRegion() {
-      return this.currentRegion;
+      return this._currentRegion;
     }
     
-    public void setCurrentRegion(final AbstractTraceRegion currentRegion) {
-      this.currentRegion = currentRegion;
+    public void increaseIndent(final IndentNode node) {
+      this._currentIndents.push(node);
+      this.recalculateIndentLength();
+    }
+    
+    public void decreaseIndents() {
+      this._currentIndents.pop();
+      this.recalculateIndentLength();
+    }
+    
+    protected int recalculateIndentLength() {
+      final Function2<Integer, IndentNode, Integer> _function = (Integer $0, IndentNode $1) -> {
+        int _length = $1.getIndentationString().length();
+        return Integer.valueOf((($0).intValue() + _length));
+      };
+      return this._indentLength = (IterableExtensions.<IndentNode, Integer>fold(this.getCurrentIndents(), Integer.valueOf(0), _function)).intValue();
+    }
+    
+    public void appendToCurrentLine(final CharSequence chars) {
+      this._lines.get(this.currentLineNumber()).append(chars);
+      int _length = chars.length();
+      int _plus = (this._contentLength + _length);
+      this._contentLength = _plus;
+    }
+    
+    public boolean isPendingIndent() {
+      return this._pendingIndent;
+    }
+    
+    public void addNewLine() {
+      StringBuilder _stringBuilder = new StringBuilder();
+      this._lines.add(_stringBuilder);
+    }
+    
+    public void setPendingIndent(final boolean pending) {
+      this._pendingIndent = pending;
+    }
+    
+    /**
+     * Replace the current line with new StringBuilder
+     */
+    public void resetCurrentLine() {
+      final StringBuilder lineContent = this._lines.get(this.currentLineNumber());
+      boolean _isNullOrEmpty = GeneratorNodeProcessor.isNullOrEmpty(lineContent);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        int _length = lineContent.length();
+        int _minus = (this._contentLength - _length);
+        this._contentLength = _minus;
+      }
+      int _currentLineNumber = this.currentLineNumber();
+      StringBuilder _stringBuilder = new StringBuilder();
+      this._lines.set(_currentLineNumber, _stringBuilder);
+    }
+    
+    public void insertIntoCurrentLine(final int i, final StringBuilder builder) {
+      this._lines.get(this.currentLineNumber()).insert(i, builder);
+      int _length = builder.length();
+      int _plus = (this._contentLength + _length);
+      this._contentLength = _plus;
+    }
+    
+    /**
+     * @returns a copy of current indent nodes
+     */
+    public Deque<IndentNode> getCurrentIndents() {
+      return new ArrayDeque<IndentNode>(this._currentIndents);
+    }
+    
+    public AbstractTraceRegion setCurrentRegion(final AbstractTraceRegion region) {
+      return this._currentRegion = region;
     }
   }
   
@@ -273,18 +310,11 @@ public class GeneratorNodeProcessor {
   }
   
   public GeneratorNodeProcessor.Result process(final IGeneratorNode root) {
-    GeneratorNodeProcessor.Context _context = new GeneratorNodeProcessor.Context();
-    final Procedure1<GeneratorNodeProcessor.Context> _function = (GeneratorNodeProcessor.Context it) -> {
-      StringBuilder _stringBuilder = new StringBuilder();
-      it.lines = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
-      ArrayDeque<IndentNode> _arrayDeque = new ArrayDeque<IndentNode>();
-      it.currentIndents = _arrayDeque;
-      it.pendingIndent = true;
-    };
-    final GeneratorNodeProcessor.Context ctx = ObjectExtensions.<GeneratorNodeProcessor.Context>operator_doubleArrow(_context, _function);
+    final GeneratorNodeProcessor.Context ctx = new GeneratorNodeProcessor.Context();
     this.doProcess(root, ctx);
-    String _join = IterableExtensions.join(ctx.lines);
-    return new GeneratorNodeProcessor.Result(_join, ctx.currentRegion);
+    String _content = ctx.getContent();
+    AbstractTraceRegion _currentRegion = ctx.getCurrentRegion();
+    return new GeneratorNodeProcessor.Result(_content, _currentRegion);
   }
   
   /**
@@ -293,47 +323,47 @@ public class GeneratorNodeProcessor {
   protected void _doProcess(final IndentNode node, final GeneratorNodeProcessor.Context ctx) {
     boolean __hasContent = this._hasContent(node, ctx);
     if (__hasContent) {
-      if ((node.isIndentImmediately() && (!ctx.pendingIndent))) {
-        ctx.currentLine().append(node.getIndentationString());
+      if ((node.isIndentImmediately() && (!ctx.isPendingIndent()))) {
+        ctx.appendToCurrentLine(node.getIndentationString());
       }
       try {
-        ctx.currentIndents.push(node);
+        ctx.increaseIndent(node);
         this.doProcessChildren(node, ctx);
       } finally {
-        ctx.currentIndents.pop();
+        ctx.decreaseIndents();
       }
     }
   }
   
   protected void _doProcess(final NewLineNode node, final GeneratorNodeProcessor.Context ctx) {
-    if ((node.isIfNotEmpty() && (!GeneratorNodeProcessor.hasNonWhitespace(ctx.currentLine())))) {
-      int _currentLineNumber = ctx.currentLineNumber();
-      StringBuilder _stringBuilder = new StringBuilder();
-      ctx.lines.set(_currentLineNumber, _stringBuilder);
+    if ((node.isIfNotEmpty() && (!GeneratorNodeProcessor.hasNonWhitespace(ctx.currentLineContent())))) {
+      ctx.resetCurrentLine();
     } else {
-      if (ctx.pendingIndent) {
+      boolean _isPendingIndent = ctx.isPendingIndent();
+      if (_isPendingIndent) {
         this.handlePendingIndent(ctx, true);
       }
-      ctx.currentLine().append(node.getLineDelimiter());
-      StringBuilder _stringBuilder_1 = new StringBuilder();
-      ctx.lines.add(_stringBuilder_1);
+      ctx.appendToCurrentLine(node.getLineDelimiter());
+      ctx.addNewLine();
     }
-    ctx.pendingIndent = true;
+    ctx.setPendingIndent(true);
   }
   
   protected void _doProcess(final TextNode node, final GeneratorNodeProcessor.Context ctx) {
     boolean __hasContent = this._hasContent(node, ctx);
     if (__hasContent) {
-      if (ctx.pendingIndent) {
+      boolean _isPendingIndent = ctx.isPendingIndent();
+      if (_isPendingIndent) {
         this.handlePendingIndent(ctx, false);
       }
-      ctx.currentLine().append(node.getText());
+      ctx.appendToCurrentLine(node.getText());
     }
   }
   
   protected void handlePendingIndent(final GeneratorNodeProcessor.Context ctx, final boolean endOfLine) {
     final StringBuilder indentString = new StringBuilder();
-    for (final IndentNode indentNode : ctx.currentIndents) {
+    Deque<IndentNode> _currentIndents = ctx.getCurrentIndents();
+    for (final IndentNode indentNode : _currentIndents) {
       if ((indentNode.isIndentEmptyLines() || (!endOfLine))) {
         indentString.append(indentNode.getIndentationString());
       }
@@ -341,26 +371,26 @@ public class GeneratorNodeProcessor {
     int _length = indentString.length();
     boolean _greaterThan = (_length > 0);
     if (_greaterThan) {
-      ctx.currentLine().insert(0, indentString);
+      ctx.insertIntoCurrentLine(0, indentString);
     }
-    ctx.pendingIndent = false;
+    ctx.setPendingIndent(false);
   }
   
   protected void _doProcess(final TraceNode node, final GeneratorNodeProcessor.Context ctx) {
     boolean __hasContent = this._hasContent(node, ctx);
     if (__hasContent) {
-      final AbstractTraceRegion beforeRegion = ctx.currentRegion;
+      final AbstractTraceRegion beforeRegion = ctx.getCurrentRegion();
       boolean _isUseForDebugging = node.isUseForDebugging();
       ILocationData _sourceLocation = node.getSourceLocation();
       final GeneratorNodeProcessor.CompletableTraceRegion newRegion = new GeneratorNodeProcessor.CompletableTraceRegion(_isUseForDebugging, _sourceLocation, beforeRegion);
       final int offset = ctx.contentLength();
       final int startLineNumber = ctx.currentLineNumber();
       try {
-        ctx.currentRegion = newRegion;
+        ctx.setCurrentRegion(newRegion);
         this.doProcessChildren(node, ctx);
       } finally {
         if ((beforeRegion != null)) {
-          ctx.currentRegion = beforeRegion;
+          ctx.setCurrentRegion(beforeRegion);
         }
         int _contentLength = ctx.contentLength();
         int _minus = (_contentLength - offset);
@@ -388,7 +418,7 @@ public class GeneratorNodeProcessor {
   }
   
   protected boolean _hasContent(final NewLineNode node, final GeneratorNodeProcessor.Context ctx) {
-    return (!(node.isIfNotEmpty() && (ctx.currentLine().length() == 0)));
+    return (!(node.isIfNotEmpty() && (ctx.currentLineContent().length() == 0)));
   }
   
   protected boolean _hasContent(final TextNode node, final GeneratorNodeProcessor.Context ctx) {
