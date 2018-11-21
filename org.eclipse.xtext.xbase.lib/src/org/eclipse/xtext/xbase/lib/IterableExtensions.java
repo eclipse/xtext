@@ -287,7 +287,7 @@ public class IterableExtensions {
 	 */
 	@GwtIncompatible("Class.isInstance")
 	@Pure
-	public static <T> Iterable<T> reject(Iterable<T> unfiltered, Class<? extends T> type) {
+	public static <T> Iterable<T> reject(Iterable<T> unfiltered, Class<?> type) {
 		return filter(unfiltered, (t) -> !type.isInstance(t));
 	}
 
