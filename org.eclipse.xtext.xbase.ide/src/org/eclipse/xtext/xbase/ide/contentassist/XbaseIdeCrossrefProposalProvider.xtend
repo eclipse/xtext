@@ -45,6 +45,7 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 			val converter = getTypeConverter(context.resource)
 			val objectOrProxy = candidate.getEObjectOrProxy
 			return proposalCreator.createProposal(proposalString, context) [ result |
+				result.kind = ContentAssistEntry.KIND_REFERENCE
 				if (objectOrProxy instanceof JvmFeature) {
 					if (bracketInfo.brackets.startsWith(" =")) {
 						addNameAndDescription(result, objectOrProxy,
