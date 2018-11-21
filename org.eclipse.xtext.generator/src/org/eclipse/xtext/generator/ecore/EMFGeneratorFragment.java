@@ -148,6 +148,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean bindEPackageAndEFactory = false;
 	
+	private String rootExtendsClass = "org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container";
+	
 	private String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
 	}
@@ -659,7 +661,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 			genModel.setUpdateClasspath(false);
 			genModel.setComplianceLevel(jdkLevel);
 			genModel.setRuntimeVersion(emfRuntimeVerison);
-			genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+			genModel.setRootExtendsClass(rootExtendsClass);
 			genModel.setLineDelimiter(getLineDelimiter());
 		}
 		genModelFile.getContents().add(genModel);
@@ -1037,6 +1039,16 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 */
 	public boolean isBindEPackageAndEFactory() {
 		return bindEPackageAndEFactory;
+	}
+
+	/**
+	 * Sets the BaseClass for the EClasses in the inferred GenModel.
+	 * Default value is {@link org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container}.
+	 * 
+	 * @since 2.16
+	 */
+	public void setRootExtendsClass(final String rootExtendsClass) {
+		this.rootExtendsClass = rootExtendsClass;
 	}
 
 	/**
