@@ -67,7 +67,7 @@ public class JavaProjectFactory extends ProjectFactory {
 							.getFullPath());
 					classpathEntries.add(referencedProjectClasspathEntry);
 				}
-				for (final String folderName : folders) {
+				for (final String folderName : getFolders()) {
 					final IFolder sourceFolder = project.getFolder(folderName);
 					String outputFolderName = sourceFolderOutputs.get(folderName);
 					final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(sourceFolder.getFullPath(),
