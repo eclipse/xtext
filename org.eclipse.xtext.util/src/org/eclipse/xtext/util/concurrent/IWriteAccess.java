@@ -42,6 +42,11 @@ public interface IWriteAccess<State> {
 		IUnitOfWork<Result, State> work,
 		Supplier<? extends Result> defaultResult
 	) {
+		// Some implementations rely on the type of {@code work}
+		if (work instanceof CancelableUnitOfWork<?, ?>) {
+			return modify(new WrappingCancelableUnitOfWork<>(defaultResult, work));
+		}
+
 		return modify((state) -> {
 			if (state == null) {
 				return defaultResult.get();
@@ -60,11 +65,7 @@ public interface IWriteAccess<State> {
 	 * @since 2.15
 	 */
 	default <Result> Result tryModify(IUnitOfWork<Result, State> work) {
-		return modify((state) -> {
-			if (state == null) return null;
-
-			return work.exec(state);
-		});
+		return tryModify(work, () -> null);
 	}
 
 	/**

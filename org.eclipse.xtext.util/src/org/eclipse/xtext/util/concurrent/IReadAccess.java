@@ -21,6 +21,7 @@ public interface IReadAccess<State> {
 	 * Gets a read-only copy of the State and executes {@code work} on it.
 	 * 
 	 * WARNING: the State passed to {@code work} can be null.
+	 * e.g. when reading from a read-only zip/jar entry
 	 * 
 	 * @param work Work to execute on the State
 	 * 
@@ -43,6 +44,11 @@ public interface IReadAccess<State> {
 		IUnitOfWork<Result, State> work,
 		Supplier<? extends Result> defaultResult
 	) {
+		// Some implementations rely on the type of {@code work}
+		if (work instanceof CancelableUnitOfWork<?, ?>) {
+			return readOnly(new WrappingCancelableUnitOfWork<>(defaultResult, work));
+		}
+
 		return readOnly((state) -> {
 			if (state == null) {
 				return defaultResult.get();
@@ -61,11 +67,7 @@ public interface IReadAccess<State> {
 	 * @since 2.15
 	 */
 	default <Result> Result tryReadOnly(IUnitOfWork<Result, State> work) {
-		return readOnly((state) -> {
-			if (state == null) return null;
-
-			return work.exec(state);
-		});
+		return tryReadOnly(work, () -> null);
 	}
 
 	/**
@@ -126,6 +128,11 @@ public interface IReadAccess<State> {
 			IUnitOfWork<Result, State> work,
 			Supplier<? extends Result> defaultResult
 		) {
+			// Some implementations rely on the type of {@code work}
+			if (work instanceof CancelableUnitOfWork<?, ?>) {
+				return priorityReadOnly(new WrappingCancelableUnitOfWork<>(defaultResult, work));
+			}
+
 			return priorityReadOnly((state) -> {
 				if (state == null) {
 					return defaultResult.get();
@@ -147,11 +154,7 @@ public interface IReadAccess<State> {
 		 * @see CancelableUnitOfWork
 		 */
 		default <Result> Result tryPriorityReadOnly(IUnitOfWork<Result, State> work) {
-			return priorityReadOnly((state) -> {
-				if (state == null) return null;
-
-				return work.exec(state);
-			});
+			return tryPriorityReadOnly(work, () -> null);
 		}
 
 		/**
