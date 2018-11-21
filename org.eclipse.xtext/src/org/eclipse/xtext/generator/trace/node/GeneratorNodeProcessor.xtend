@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.trace.node
 import java.util.ArrayDeque
 import java.util.Deque
 import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion
@@ -23,6 +22,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Dennis Huebner - New GeneratorNodeProcessor.Context implementation
  */
 class GeneratorNodeProcessor {
 	
@@ -42,38 +42,103 @@ class GeneratorNodeProcessor {
 		}
 	}
 	
-	@Accessors protected static class Context {
-		List<StringBuilder> lines
-		Deque<IndentNode> currentIndents
-		boolean pendingIndent
-		AbstractTraceRegion currentRegion = null
+	protected static class Context {
+		List<StringBuilder> _lines = newArrayList(new StringBuilder)
+		Deque<IndentNode> _currentIndents = new ArrayDeque
+		boolean _pendingIndent = true
+		AbstractTraceRegion _currentRegion = null
 		
-		def StringBuilder currentLine() {
-			return lines.get(currentLineNumber)
+		int _contentLength = 0
+		int _indentLength = 0
+		
+		def String currentLineContent() {
+			return _lines.get(currentLineNumber).toString
 		}
 		
 		def int contentLength() {
-			val contentLength = lines.fold(0) [ $0 + $1.length ]
-			if (pendingIndent) {
-				return contentLength + currentIndents.fold(0) [ $0 + $1.indentationString.length ] 
+			if (isPendingIndent) {
+				return _contentLength + _indentLength
 			} else {
-				return contentLength
+				return _contentLength
 			}
 		}
 		
 		def int currentLineNumber() {
-			return lines.size - 1	
+			return _lines.size - 1
 		}
+
+		def String getContent() {
+			_lines.join
+		}
+		
+		def getCurrentRegion() {
+			_currentRegion
+		}
+		
+		def void increaseIndent(IndentNode node) {
+			_currentIndents.push(node)
+			recalculateIdentLength
+		}
+		
+		def void decreaseIndents() {
+			_currentIndents.pop
+			recalculateIdentLength
+		}
+		
+		protected def recalculateIdentLength() {
+			_indentLength = currentIndents.fold(0)[$0 + $1.indentationString.length]
+		}
+		
+		def void appendToCurrentLine(CharSequence chars) {
+			_lines.get(currentLineNumber).append(chars)
+			_contentLength = _contentLength + chars.length
+		}
+		
+		def isPendingIndent() {
+			_pendingIndent
+		}
+		
+		def void addNewLine() {
+			_lines.add(new StringBuilder)
+		}
+		
+		def void setPendingIndent(boolean pending) {
+			_pendingIndent = pending
+		}
+		
+		/**
+		 * Replace the current line with new StringBuilder
+		 */
+		def void resetCurrentLine() {
+			val lineContent = _lines.get(currentLineNumber)
+			if (!lineContent.nullOrEmpty) {
+				_contentLength = _contentLength - lineContent.length
+			}
+			_lines.set(currentLineNumber, new StringBuilder)
+		}
+		
+		def void insertIntoCurrentLine(int i, StringBuilder builder) {
+			_lines.get(currentLineNumber).insert(i, builder)
+			_contentLength = _contentLength + builder.length
+		}
+		
+		/**
+		 * @returns a copy of current indent nodes
+		 */
+		def Deque<IndentNode> getCurrentIndents() {
+			new ArrayDeque(_currentIndents)
+		}
+		
+		def setCurrentRegion(AbstractTraceRegion region) {
+			_currentRegion = region
+		}
+		
 	}
 	
 	def Result process(IGeneratorNode root) {
-		val ctx = new Context => [
-			lines = newArrayList(new StringBuilder)
-			currentIndents = new ArrayDeque
-			pendingIndent = true
-		]
+		val ctx = new Context()
 		doProcess(root, ctx)
-		return new Result(ctx.lines.join, ctx.currentRegion)
+		return new Result(ctx.content, ctx.currentRegion)
 	}
 
 	/**
@@ -82,34 +147,36 @@ class GeneratorNodeProcessor {
 	protected def dispatch void doProcess(IndentNode node, Context ctx) {
 		if (node._hasContent(ctx)) {
 			if (node.indentImmediately && !ctx.pendingIndent) {
-				ctx.currentLine.append(node.indentationString)
+				ctx.appendToCurrentLine(node.indentationString)
 			}
 			try {
-				ctx.currentIndents.push(node)
+				ctx.increaseIndent(node)
 				doProcessChildren(node, ctx)
 			} finally {
-				ctx.currentIndents.pop
+				ctx.decreaseIndents
 			}
 		}
 	}
 	
 	protected def dispatch void doProcess(NewLineNode node, Context ctx) {
-		if (node.ifNotEmpty && !ctx.currentLine.hasNonWhitespace) {
-			ctx.lines.set(ctx.currentLineNumber, new StringBuilder)
+		if (node.ifNotEmpty && !ctx.currentLineContent.hasNonWhitespace) {
+			ctx.resetCurrentLine()
 		} else {
 			if (ctx.pendingIndent)
 				handlePendingIndent(ctx, true)
-			ctx.currentLine.append(node.lineDelimiter)
-			ctx.lines.add(new StringBuilder)
+			ctx.appendToCurrentLine(node.lineDelimiter)
+			ctx.addNewLine()
 		}
-		ctx.pendingIndent = true
+		ctx.setPendingIndent = true
 	}
+		
+		
 
 	protected def dispatch void doProcess(TextNode node, Context ctx) {
 		if (node._hasContent(ctx)) {
 			if (ctx.pendingIndent)
 				handlePendingIndent(ctx, false)
-			ctx.currentLine.append(node.text)
+			ctx.appendToCurrentLine(node.text)
 		}
 	}
 	
@@ -120,7 +187,7 @@ class GeneratorNodeProcessor {
 				indentString.append(indentNode.indentationString)
 		}
 		if (indentString.length > 0) {
-			ctx.currentLine.insert(0, indentString)
+			ctx.insertIntoCurrentLine(0, indentString)
 		}
 		ctx.pendingIndent = false
 	}
@@ -156,7 +223,7 @@ class GeneratorNodeProcessor {
 	}
 	
 	protected def dispatch boolean hasContent(NewLineNode node, Context ctx) {
-		!(node.ifNotEmpty && ctx.currentLine.length == 0)
+		!(node.ifNotEmpty && ctx.currentLineContent.length == 0)
 	}
 
 	protected def dispatch boolean hasContent(TextNode node, Context ctx) {
