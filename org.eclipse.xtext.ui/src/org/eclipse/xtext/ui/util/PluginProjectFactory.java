@@ -108,7 +108,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 
 	protected void createBuildProperties(IProject project, IProgressMonitor progressMonitor) {
 		final StringBuilder content = new StringBuilder();
-		Iterable<String> foldersTrailingSlash = Iterables.transform(folders, new Function<String, String>() {
+		Iterable<String> foldersTrailingSlash = Iterables.transform(getFolders(), new Function<String, String>() {
 			@Override
 			public String apply(String input) {
 				return input.replaceFirst("\\./", "") + "/";
