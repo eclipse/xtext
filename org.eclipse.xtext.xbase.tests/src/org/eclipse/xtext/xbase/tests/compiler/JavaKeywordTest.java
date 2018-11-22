@@ -1,11 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -18,23 +21,67 @@ import com.google.inject.Inject;
  */
 public class JavaKeywordTest extends AbstractXbaseTestCase {
 
-	@Inject 
+	@Inject
 	private JavaKeywords javaKeywords;
 	
-	@Test public void testAssert() {
-		assertTrue(javaKeywords.isJavaKeyword("assert"));
-	}
+	private final static List<String> JAVA_KEYWORDS = Arrays.asList(
+		"abstract",
+		"assert", // added in 1.4
+		"boolean",
+		"break",
+		"byte",
+		"case",
+		"catch",
+		"char",
+		"class",
+		"const", // not used
+		"continue",
+		"default",
+		"do",
+		"double",
+		"else",
+		"enum", // added in 5.0
+		"extends",
+		"false",
+		"final",
+		"finally",
+		"float",
+		"for",
+		"goto", // not used
+		"if",
+		"implements",
+		"import",
+		"instanceof",
+		"int",
+		"interface",
+		"long",
+		"native",
+		"new",
+		"null",
+		"package",
+		"private",
+		"protected",
+		"public",
+		"return",
+		"short",
+		"static",
+		"strictfp", // added in 1.2
+		"super",
+		"switch",
+		"synchronized",
+		"this",
+		"throw",
+		"throws",
+		"transient",
+		"true",
+		"try",
+		"void",
+		"volatile",
+		"while");
 
-	@Test public void testNull() {
-		assertTrue(javaKeywords.isJavaKeyword("null"));
+	@Test public void testJavaKeyword() {
+		for(String javaKeyword : JAVA_KEYWORDS) {
+			assertTrue(javaKeywords.isJavaKeyword(javaKeyword));
+		}
 	}
-	
-	@Test public void testTrue() {
-		assertTrue(javaKeywords.isJavaKeyword("true"));
-	}
-
-	@Test public void testFalse() {
-		assertTrue(javaKeywords.isJavaKeyword("false"));
-	}
-
 }
