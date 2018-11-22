@@ -46,7 +46,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -57,7 +57,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -68,7 +68,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ]
 			  )
 			]''')
@@ -88,7 +88,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -99,7 +99,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -110,7 +110,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
-			      kind = "UNKNOWN"
+			      kind = "REFERENCE"
 			    ]
 			  )
 			]''')
