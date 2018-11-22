@@ -101,6 +101,7 @@ class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvide
 		val qualifiedName = qualifiedNameConverter.toString(typeDesc.qualifiedName)
 		val proposal = if (importDecl) qualifiedName else typeDesc.simpleName
 		proposalCreator.createProposal(proposal, context) [
+			kind = ContentAssistEntry.KIND_REFERENCE
 			if (importDecl) {
 				label = typeDesc.simpleName
 				description = proposal

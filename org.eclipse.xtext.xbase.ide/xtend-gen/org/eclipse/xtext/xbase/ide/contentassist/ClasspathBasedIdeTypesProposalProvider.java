@@ -135,6 +135,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
       }
       final String proposal = _xifexpression;
       final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
+        it.setKind(ContentAssistEntry.KIND_REFERENCE);
         if (importDecl) {
           it.setLabel(typeDesc.getSimpleName());
           it.setDescription(proposal);
