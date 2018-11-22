@@ -241,7 +241,9 @@ public class XtendBatchCompiler {
 	public void setBootClassPath(String bootClassPath) {
 		JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
 		if (version.isAtLeast(JavaVersion.JAVA9)) {
-			log.warn("Option bootClassPath is only valid for Java 8 and lower. The velue '"+bootClassPath+"' will be ignored.");
+			if (!bootClassPath.isEmpty()) {
+				log.warn("Option bootClassPath is only valid for Java 8 and lower. The value '"+bootClassPath+"' will be ignored.");
+			}
 		} else {
 			this.bootClassPath = bootClassPath;
 		}
