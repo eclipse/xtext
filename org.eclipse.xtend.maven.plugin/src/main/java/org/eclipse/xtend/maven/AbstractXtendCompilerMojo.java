@@ -179,16 +179,17 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	private String getBootClassPath() {
-		if (javaSourceVersion != null) {
-			JavaVersion version = JavaVersion.fromQualifier(javaSourceVersion);
-			if (version.isAtLeast(JavaVersion.JAVA9)) {
-				return ""; // bootclasspath only supported on Java8 and older
-			}
-		}
 		Toolchain toolchain = toolchainManager.getToolchainFromBuildContext("jdk", session);
 		if (toolchain instanceof DefaultJavaToolChain) {
 			DefaultJavaToolChain javaToolChain = (DefaultJavaToolChain) toolchain;
 			getLog().info("Using toolchain " + javaToolChain);
+
+			if (javaSourceVersion != null) {
+				JavaVersion version = JavaVersion.fromQualifier(javaSourceVersion);
+				if (version.isAtLeast(JavaVersion.JAVA9)) {
+					return ""; // bootclasspath only supported on Java8 and older
+				}
+			}
 
 			String[] includes = { "jre/lib/*", "jre/lib/ext/*", "jre/lib/endorsed/*" };
 			String[] excludes = new String[0];
