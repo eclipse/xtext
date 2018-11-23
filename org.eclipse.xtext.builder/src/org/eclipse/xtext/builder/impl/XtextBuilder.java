@@ -66,6 +66,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
+	/** org.eclipse.jdt.internal.core.ExternalFoldersManager.EXTERNAL_PROJECT_NAME */
+	private static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.jdt.core.external.folders"; //$NON-NLS-1$
+
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
 
@@ -140,6 +143,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		WORKSPACE,
 		/** all projects with Xtext nature in the workspace */
 		ALL_XTEXT_PROJECTS,
+		/**
+		 * all projects with Xtext nature in the workspace, extended by JDTs External Folder Project
+		 * @see org.eclipse.jdt.internal.core.ExternalFoldersManager
+		 * */
+		ALL_XTEXT_PROJECTS_AND_JDTEXTFOLDER,
 		/** the currently building project */
 		PROJECT,
 		/** null scheduling rule */
@@ -442,9 +450,16 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			case WORKSPACE: return getProject().getWorkspace().getRoot();
 			case PROJECT: return getProject();
 			case ALL_XTEXT_PROJECTS: return new MultiRule(Arrays.stream(
-				getProject().getWorkspace().getRoot().getProjects())
-				.filter(XtextProjectHelper::hasNature)
-				.toArray(ISchedulingRule[]::new));
+					getProject().getWorkspace().getRoot().getProjects())
+					.filter(XtextProjectHelper::hasNature)
+					.toArray(ISchedulingRule[]::new));
+			case ALL_XTEXT_PROJECTS_AND_JDTEXTFOLDER: return new MultiRule(Arrays.stream(
+					getProject().getWorkspace().getRoot().getProjects())
+					.filter(p->
+						XtextProjectHelper.hasNature(p)
+						|| EXTERNAL_PROJECT_NAME.equals(p.getName())
+					)
+					.toArray(ISchedulingRule[]::new));
 			default: throw new IllegalArgumentException();
 		}
 	}
