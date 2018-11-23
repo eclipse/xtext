@@ -13,7 +13,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -60,7 +65,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      final IWorkspaceRunnable _function = (IProgressMonitor it) -> {
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      };
+      this.runInWorkspace(_function);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       Assert.assertEquals(IResourcesSetupUtil.printMarker(firstFileMarkers), 1, firstFileMarkers.length);
       Assert.assertEquals("The type A is already defined in B.xtend.", IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(firstFileMarkers))).getAttribute(IMarker.MESSAGE));
@@ -91,7 +99,10 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      final IWorkspaceRunnable _function = (IProgressMonitor it) -> {
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      };
+      this.runInWorkspace(_function);
       final IMarker[] firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       Assert.assertEquals(IResourcesSetupUtil.printMarker(firstFileMarkers), 0, firstFileMarkers.length);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
@@ -120,8 +131,11 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("first.p384008/src/acme/B.xtend", _builder_1.toString());
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      final IWorkspaceRunnable _function = (IProgressMonitor it) -> {
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      };
+      this.runInWorkspace(_function);
       final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE))));
       Assert.assertEquals(IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class))), 1, ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length);
       Assert.assertEquals("The type A is already defined in A.java.", IterableExtensions.<IMarker>head(secondFileMarkers).getAttribute(IMarker.MESSAGE));
@@ -149,8 +163,11 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       _builder_1.append("}");
       _builder_1.newLine();
       final IFile secondFile = IResourcesSetupUtil.createFile("second.p384008/src/acme/B.xtend", _builder_1.toString());
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
-      this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      final IWorkspaceRunnable _function = (IProgressMonitor it) -> {
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+        this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, UniqueClassNameValidatorUITest.emptyStringMap(), null);
+      };
+      this.runInWorkspace(_function);
       final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       Assert.assertEquals(IResourcesSetupUtil.printMarker(secondFileMarkers), 0, secondFileMarkers.length);
     } catch (Throwable _e) {
@@ -223,5 +240,15 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   public void tearDown() throws Exception {
     WorkbenchTestHelper.deleteProject(this.first);
     WorkbenchTestHelper.deleteProject(this.second);
+  }
+  
+  private void runInWorkspace(final IWorkspaceRunnable r) {
+    try {
+      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      _workspace.run(r, _nullProgressMonitor);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

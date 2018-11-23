@@ -7,22 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.validation
 
+import java.util.Map
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResource
+import org.eclipse.core.resources.IWorkspaceRunnable
 import org.eclipse.core.resources.IncrementalProjectBuilder
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtext.builder.impl.XtextBuilder
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import org.junit.Ignore
-import java.util.Map
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,7 +48,9 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 				class A {
 				}
 			''')
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+		runInWorkspace [
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+		]
 		val firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		assertEquals(printMarker(firstFileMarkers), 1, firstFileMarkers.length)
 		assertEquals('The type A is already defined in B.xtend.', firstFileMarkers.head.getAttribute(IMarker.MESSAGE))
@@ -67,7 +72,9 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 				class A {
 				}
 			''')
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+		runInWorkspace [
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+		]
 		val firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		assertEquals(printMarker(firstFileMarkers), 0, firstFileMarkers.length)
 		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
@@ -87,8 +94,10 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 				class A {
 				}
 			''')
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, emptyStringMap, null)
+		runInWorkspace [
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, emptyStringMap, null)
+		]
 		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).onlyErrors
 		assertEquals(printMarker(secondFileMarkers), 1, secondFileMarkers.length)
 		assertEquals('The type A is already defined in A.java.', secondFileMarkers.head.getAttribute(IMarker.MESSAGE))
@@ -107,8 +116,10 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 				class A {
 				}
 			''')
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
-		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, emptyStringMap, null)
+		runInWorkspace [
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
+			first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, emptyStringMap, null)
+		]
 		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		assertEquals(printMarker(secondFileMarkers), 0, secondFileMarkers.length)
 	}
@@ -155,10 +166,14 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 		second = createPluginProject('second.p384008')
 		setReference(second, first)
 	}
-
+	
 	@After override tearDown() throws Exception {
 		deleteProject(first)
 		deleteProject(second)
+	}
+	
+	private def runInWorkspace(IWorkspaceRunnable r) {
+		ResourcesPlugin.workspace.run(r, new NullProgressMonitor)
 	}
 	
 }
