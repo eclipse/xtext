@@ -139,15 +139,13 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`: Update the name of the zipped p2 repository according to the release version (`tofile` property).
 1. xtext-lib
    * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
 1. xtext-core
    * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/releng-target/pom.xml`: Set `version` property to the release version.
-   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
 1. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/releng-target/pom.xml`: Set `version` property to the release version.
-   * `releng/pom.xml`: Set `version` property to the release version. Also for dependencies.
+   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
 1. xtext-eclipse
    * all right here
 1. xtext-idea
@@ -162,6 +160,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
      * `maven-pom.xml`
      * `org.eclipse.xtend.maven.*/pom.xml`
      * `releng/org.eclipse.xtend.maven.parent/pom.xml`
+   * Jenkinsfile: Add `-Dit-archetype-tests-skip=true ` to `Maven Plugin Build` shell command
 1. Switch back to xtext-umbrella
    * `./gitAll commit -a -m "[release] version $XTEXT_VERSION"`
 1. Push changes to origin
@@ -170,6 +169,9 @@ Build jobs for releases must be executed in proper order on the build server, i.
 1. Create release tags on all repositories. Name `$TAGNAME` and commit message `release $TAGNAME`.
    * `./gitAll tag -a $TAGNAME -m "release $TAGNAME"`
    * `./gitAll push origin $TAGNAME`
+1. Delete the release branches
+   * `./gitAll branch -D $BRANCHNAME`
+   * `./gitAll push --delete origin $BRANCHNAME`
 1. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
