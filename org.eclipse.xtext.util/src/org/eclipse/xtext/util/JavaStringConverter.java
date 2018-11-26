@@ -8,7 +8,7 @@
 package org.eclipse.xtext.util;
 
 /**
- * Reusable and customizable implementation of the methdo pair 
+ * Reusable and customizable implementation of the method pair
  * {@link Strings#convertToJavaString(String)} and 
  * {@link Strings#convertFromJavaString(String, boolean)}.
  * 
@@ -17,7 +17,7 @@ package org.eclipse.xtext.util;
 public class JavaStringConverter {
 	
 	/**
-	 * Resolve Java control character sequences with to the actual character value.
+	 * Resolve Java control character sequences to the actual character value.
 	 * Optionally handle unicode escape sequences, too. 
 	 */
 	public String convertFromJavaString(String string, boolean useUnicode) {
