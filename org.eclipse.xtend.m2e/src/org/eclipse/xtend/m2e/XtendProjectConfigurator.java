@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
@@ -135,10 +136,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 	
 	private <T> T mojoParameterValue(String paramName, Class<T> paramType, ProjectConfigurationRequest request,
 			MojoExecution execution) throws CoreException {
-		/*TODO maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
-				new NullProgressMonitor());*/
-		return getParameterValue(
-				paramName, paramType,
-				request.getMavenSession(), execution);
+		return maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
+				new NullProgressMonitor());
 	}
 }
