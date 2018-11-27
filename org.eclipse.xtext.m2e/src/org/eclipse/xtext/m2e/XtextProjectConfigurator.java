@@ -18,11 +18,13 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getK
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
@@ -46,8 +48,10 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	private void configureLanguages(ProjectConfigurationRequest request, IProgressMonitor monitor) throws CoreException {
-		for (MojoExecution execution : getMojoExecutions(request, monitor)) {
-			Languages languages = getParameterValue("languages", Languages.class, request.getMavenSession(), execution);
+		List<MojoExecution> executions = getMojoExecutions(request, monitor);
+		SubMonitor progress = SubMonitor.convert(monitor, executions.size());
+		for (MojoExecution execution : executions) {
+			Languages languages = maven.getMojoParameterValue(request.getMavenProject(), execution, "languages", Languages.class, progress.split(1));
 			if(languages!=null) {
 				ProjectScope projectPreferences = new ProjectScope(request.getProject());
 				for (Language language : languages) {
