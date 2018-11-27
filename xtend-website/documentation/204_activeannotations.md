@@ -240,13 +240,13 @@ Therefore, careful testing and debugging of the processor is essential. It is be
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.core</artifactId>
-  <version>2.15.0</version>
+  <version>2.16.0</version>
   <scope>test</scope>
 </dependency>
 <dependency>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-  <version>2.15.0</version>
+  <version>2.16.0</version>
   <scope>test</scope>
 </dependency>
 ```
