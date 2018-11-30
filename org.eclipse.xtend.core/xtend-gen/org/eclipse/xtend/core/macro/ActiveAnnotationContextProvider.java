@@ -50,6 +50,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 /**
  * @author Sven Efftinge
+ * @author Stephane Galland
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
@@ -159,7 +160,7 @@ public class ActiveAnnotationContextProvider {
   /**
    * recursively looks for macro annotations on XtendAnnotationTargets
    */
-  private void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+  protected void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     boolean _matched = false;
     if (element instanceof XtendFile) {
       _matched=true;
@@ -236,7 +237,7 @@ public class ActiveAnnotationContextProvider {
     }
   }
   
-  private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+  protected void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     final Function1<XAnnotation, Boolean> _function = (XAnnotation it) -> {
       return Boolean.valueOf(this._xAnnotationExtensions.isProcessed(it));
     };

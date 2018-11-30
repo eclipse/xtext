@@ -99,6 +99,7 @@ class ActiveAnnotationContexts extends AdapterImpl {
 
 /**
  * @author Sven Efftinge
+ * @author Stephane Galland
  */
 class ActiveAnnotationContextProvider {
 	static val logger = Logger.getLogger(ActiveAnnotationContextProvider)
@@ -161,7 +162,7 @@ class ActiveAnnotationContextProvider {
 	/**
 	 * recursively looks for macro annotations on XtendAnnotationTargets 
 	 */
-	def private void searchAnnotatedElements(EObject element, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+	def protected void searchAnnotatedElements(EObject element, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
 		switch element {
 			XtendFile : {
 				element.xtendTypes.forEach [
@@ -210,7 +211,7 @@ class ActiveAnnotationContextProvider {
 		}
 	}
 	
-	def private void registerMacroAnnotations(XtendAnnotationTarget candidate, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
+	def protected void registerMacroAnnotations(XtendAnnotationTarget candidate, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
 		for (annotation : candidate.annotations.filter[ processed ]) {
 			val activeAnnotationDeclaration = annotation.tryFindAnnotationType
 			if (activeAnnotationDeclaration !== null) {
