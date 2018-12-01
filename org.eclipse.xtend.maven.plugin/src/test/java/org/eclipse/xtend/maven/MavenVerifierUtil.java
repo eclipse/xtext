@@ -37,7 +37,8 @@ public class MavenVerifierUtil {
 			verifier.addCliOption("-s");
 			verifier.addCliOption(testSettingsXML);
 		}
-		// verifier.setMavenDebug(true);
+		verifier.addCliOption("-U");
+		verifier.setMavenDebug(true);
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
 		return verifier;
