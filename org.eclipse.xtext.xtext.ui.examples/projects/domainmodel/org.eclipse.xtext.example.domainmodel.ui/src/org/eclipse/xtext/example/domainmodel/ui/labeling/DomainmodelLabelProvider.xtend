@@ -34,7 +34,7 @@ class DomainmodelLabelProvider extends XbaseLabelProvider {
 
 	override protected Object doGetImage(Object element) {
 		if (element instanceof EObject && !(element instanceof JvmIdentifiableElement)) {
-			return '''«((element as EObject)).eClass().getName()».gif'''
+			return '''«((element as EObject)).eClass().getName()».gif'''.toString
 		}
 		return super.doGetImage(element)
 	}

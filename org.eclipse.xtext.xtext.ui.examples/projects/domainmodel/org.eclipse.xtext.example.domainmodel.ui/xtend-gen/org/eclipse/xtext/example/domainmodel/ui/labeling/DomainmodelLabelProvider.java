@@ -42,7 +42,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
       String _name = ((EObject) element).eClass().getName();
       _builder.append(_name);
       _builder.append(".gif");
-      return _builder;
+      return _builder.toString();
     }
     return super.doGetImage(element);
   }
