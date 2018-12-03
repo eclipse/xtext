@@ -25,6 +25,8 @@ import org.junit.Test;
  */
 public class XtextTemplateContextTest extends Assert {
 
+	private final String NL = System.lineSeparator();
+
 	private Document document;
 	private Position position;
 	private XtextTemplateContext testMe;
@@ -35,43 +37,59 @@ public class XtextTemplateContextTest extends Assert {
 		position = new Position(0);
 		testMe = new XtextTemplateContext(new TemplateContextType(), document, position, null, null);
 	}
-	
+
 	@After
 	public void tearDown() {
 		document = null;
 		position = null;
 		testMe = null;
 	}
-	
-	@Test public void testEmptyDocAndEmptyTemplate() {
+
+	@Test
+	public void testEmptyDocAndEmptyTemplate() {
 		assertTemplateBuffer("", "", 0, "");
 	}
-	
-	@Test public void testBadLocation() {
+
+	@Test
+	public void testBadLocation() {
 		assertTemplateBuffer("", "", 1, "");
 		assertTemplateBuffer("foo\nbar", "\t", 2, "foo\nbar");
 	}
-	
-	@Test public void testSingleLineTemplate() {
+
+	@Test
+	public void testSingleLineTemplate() {
 		assertTemplateBuffer("foo", "\t", 1, "foo");
+		assertTemplateBuffer("foo", "\t\n", 1, "foo");
 	}
-	
-	@Test public void testMultiLineTemplate() {
-		assertTemplateBuffer("foo\n\tbar", "\t", 1, "foo\nbar");
-		assertTemplateBuffer("foo\r\n\tbar", "\t", 1, "foo\r\nbar");
-		assertTemplateBuffer("foo\r\tbar", "\t", 1, "foo\rbar");
+
+	@Test
+	public void testMultiLineTemplate() {
+		assertTemplateBuffer("foo" + NL + "\tbar", "\t", 1, "foo\nbar");
+		assertTemplateBuffer("foo" + NL + "\tbar", "\t", 1, "foo\r\nbar");
+		assertTemplateBuffer("foo" + NL + "\tbar", "\t", 1, "foo\rbar");
+		assertTemplateBuffer("foo\n\tbar", "\t\n", 1, "foo\nbar");
+		assertTemplateBuffer("foo\n\tbar", "\t\n", 1, "foo\r\nbar");
+		assertTemplateBuffer("foo\n\tbar", "\t\n", 1, "foo\rbar");
 	}
-	
-	@Test public void testMultiLineTemplateWithPrecedingText() {
-		assertTemplateBuffer("foo\n\tbar", "\tzonk", 5, "foo\nbar");
-		assertTemplateBuffer("foo\r\n\tbar", "\tzonk", 5, "foo\r\nbar");
-		assertTemplateBuffer("foo\r\tbar", "\tzonk", 5, "foo\rbar");
+
+	@Test
+	public void testMultiLineTemplateWithPrecedingText() {
+		assertTemplateBuffer("foo" + NL + "\tbar", "\tzonk", 5, "foo\nbar");
+		assertTemplateBuffer("foo" + NL + "\tbar", "\tzonk", 5, "foo\r\nbar");
+		assertTemplateBuffer("foo" + NL + "\tbar", "\tzonk", 5, "foo\rbar");
+		assertTemplateBuffer("foo\r\n\tbar", "\tzonk\r\n", 5, "foo\nbar");
+		assertTemplateBuffer("foo\r\n\tbar", "\tzonk\r\n", 5, "foo\r\nbar");
+		assertTemplateBuffer("foo\r\n\tbar", "\tzonk\r\n", 5, "foo\rbar");
 	}
-	
-	@Test public void testTrailingLineBreak() {
-		assertTemplateBuffer("foo\n\t  ", "\t  ", 3, "foo\n");
-		assertTemplateBuffer("foo\r\n\t  ", "\t  ", 3, "foo\r\n");
-		assertTemplateBuffer("foo\r\t  ", "\t  ", 3, "foo\r");
+
+	@Test
+	public void testTrailingLineBreak() {
+		assertTemplateBuffer("foo" + NL + "\t  ", "\t  ", 3, "foo\n");
+		assertTemplateBuffer("foo" + NL + "\t  ", "\t  ", 3, "foo\r\n");
+		assertTemplateBuffer("foo" + NL + "\t  ", "\t  ", 3, "foo\r");
+		assertTemplateBuffer("foo\r  ", "\t\r  ", 3, "foo\n");
+		assertTemplateBuffer("foo\r  ", "\t\r  ", 3, "foo\r\n");
+		assertTemplateBuffer("foo\r  ", "\t\r  ", 3, "foo\r");
 	}
 
 	protected void assertTemplateBuffer(String expectation, String document, int offset, String pattern) {
@@ -89,5 +107,5 @@ public class XtextTemplateContextTest extends Assert {
 			fail("Unexpected template expection: " + e);
 		}
 	}
-	
+
 }
