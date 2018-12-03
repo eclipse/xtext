@@ -52,7 +52,7 @@ If you already have a project, you need to add the Xtend library:
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.lib</artifactId>
-  <version>2.15.0</version>
+  <version>2.16.0</version>
 </dependency>
 ```
 
@@ -62,7 +62,7 @@ and the Xtend compiler plugin:
 <plugin>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>xtend-maven-plugin</artifactId>
-  <version>2.15.0</version>
+  <version>2.16.0</version>
   <executions>
     <execution>
       <goals>
@@ -84,13 +84,13 @@ Here is a minimal Gradle build script using Xtend:
 
 ```groovy
 plugins {
-  id "org.xtext.xtend" version "2.0.1"
+  id "org.xtext.xtend" version "2.0.2"
 }
 
 repositories.jcenter()
 
 dependencies {
-  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.15.0'
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.16.0'
 }
 ```
 

@@ -2,7 +2,17 @@
 layout: default
 title: Language Engineering Made Easy!
 ---
-<a href="https://github.com/eclipse/xtext"><img style="position: fixed; top: 0; right: 0;z-index:1000; border: 0; " alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<a href="https://github.com/eclipse/xtext"><img id="fork-button" alt="Fork me on GitHub" src="{{ site.baseurl }}/images/forkme_right_white_ffffff.png"></a>
+<script>
+(function forkButtonQuickFix() {
+  var move = function() {
+    document.querySelector('#fork-button').style.top =
+      document.querySelector('.navbar-inner').offsetHeight + 'px'
+  }
+  document.addEventListener('DOMContentLoaded', move)
+  window.addEventListener('resize', move)
+}())
+</script>
 <!--Container-->
 <div id="header_wrapper">
   <div class="container image-slider">
@@ -34,7 +44,7 @@ title: Language Engineering Made Easy!
 <div id="intro-quotes" class="intro-reference">
   <div class="container">
     <ul id="newsticker" class="newsticker">
-      <li>Event: <a href="https://www.eclipsecon.org/europe2017/" target="_blank" style="text-decoration: underline; color: #fff;">EclipseCon Europe 2017</a></li>
+      <li>Event: <a href="https://www.eclipsecon.org/europe2018/" target="_blank" style="text-decoration: underline; color: #fff;">EclipseCon Europe 2018</a></li>
     </ul>
   </div>
 </div>
@@ -102,11 +112,8 @@ title: Language Engineering Made Easy!
     <ul class="companies">
       <li><img src="{{ site.baseurl }}/images/logo-google.png" alt="Google"/>
         <img src="{{ site.baseurl }}/images/Siemens-logo.svg" alt="Siemens"/>
-        <img src="{{ site.baseurl }}/images/logo_morgan_stanley.svg" alt="Morgan Stanley"/></li>
       <li>
-        <img src="{{ site.baseurl }}/images/ESA_logo.svg" alt="ESA"/>
         <img src="{{ site.baseurl }}/images/Bosch-Logo.svg" alt="Bosch"/>
-        <img src="{{ site.baseurl }}/images/SAIC_Logo.svg" alt="SAIC"/>
         <img src="{{ site.baseurl }}/images/SAP-Logo.svg" alt="SAP"/></li>
     </ul>
   </div>
@@ -164,7 +171,7 @@ title: Language Engineering Made Easy!
         <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
           Compatible with Graphical Editors</h4>
         <p>You can combine the text-based formats created with Xtext with many graphical editing frameworks,
-        e.g. <a href="https://www.eclipse.org/gef/" target="_blank">GEF</a>, 
+        e.g. <a href="https://www.eclipse.org/gef/" target="_blank">GEF</a>,
         <a href="https://www.eclipse.org/sirius/" target="_blank">Sirius</a> or
         <a href="https://www.eclipse.org/graphiti/" target="_blank">Graphiti</a>. Xtext offers this flexibility
         by supporting <a href="https://www.eclipse.org/modeling/emf/" target="_blank">EMF</a> as common data
