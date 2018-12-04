@@ -9,3 +9,7 @@ dependencies {
 configurations {
 	compile.exclude module: 'jsr305'
 }
+
+test {
+    maxHeapSize = "768m"
+}
