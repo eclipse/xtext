@@ -8,7 +8,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
-			<url>file://${maven.repo.local}</url>
+			<url>file://${nonTestMavenRepo}</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -58,7 +58,7 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-			<url>file://${maven.repo.local}</url>
+			<url>file://${nonTestMavenRepo}</url>
 		</repository>
 	</repositories>
 </project>

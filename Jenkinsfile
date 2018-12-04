@@ -54,9 +54,9 @@ node {
 	dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 	
 	stage('Maven Plugin Build') {
-		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -DtestSettingsXML=${WORKSPACE}/org.eclipse.xtend.maven.plugin/src/test/resources/settings.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
+		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dit-archetype-tests-skip=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
 	}
-	
+
 	stage('Maven Tycho Build') {
 		def targetProfile = "-Poxygen"
 		if ("latest" == params.target_platform) {
@@ -78,6 +78,6 @@ node {
 		sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --continue"
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 	}
-	
+
 	archive 'build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
 }
