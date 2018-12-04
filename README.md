@@ -9,6 +9,7 @@ More information can be found on [xtext.org](http://xtext.org).
 ## Repositories
 
 This repository contains the [website](https://www.eclipse.org/Xtext/) and documentation of Xtext, which is tracked in the [website-published](https://github.com/eclipse/xtext/tree/website-published) branch. The actual Xtext code is available in the following modules:
+
 - [xtext-core](https://github.com/eclipse/xtext-core): The core framework and [Language Server](https://github.com/Microsoft/language-server-protocol) support
 - [xtext-lib](https://github.com/eclipse/xtext-lib): Libraries for [Xbase](https://www.eclipse.org/Xtext/documentation/305_xbase.html) and [Xtend](http://www.xtend-lang.org)
 - [xtext-extras](https://github.com/eclipse/xtext-extras): Additional editor-independent features, mostly Java support
@@ -21,14 +22,14 @@ This repository contains the [website](https://www.eclipse.org/Xtext/) and docum
 Please check the individual repositories for instructions for building and contributing.
 
 ## Quick Access
+
 - [All Open Pull Requests](https://github.com/search?utf8=✓&q=is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 - [All Open Issues](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
-- [All Open Issues of Milestone Release_2.16](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.16+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 - [All Open Issues of Milestone Release_2.17](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.17+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 - [All Open Issues of Milestone Release_2.18](https://github.com/search?utf8=✓&q=is%3Aissue+milestone%3ARelease_2.18+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-umbrella+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
 
 ## Developer Resources
 
- - [Contributing](CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
- - [Quality Guidelines](QUALITY_GUIDELINES.md): how to craft high-quality code changes, commits and pull-requests.
- - [Builds](Builds.md): details about the build infrastructure and release process.
+- [Contributing](CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
+- [Quality Guidelines](QUALITY_GUIDELINES.md): how to craft high-quality code changes, commits and pull-requests.
+- [Builds](Builds.md): details about the build infrastructure and release process.
