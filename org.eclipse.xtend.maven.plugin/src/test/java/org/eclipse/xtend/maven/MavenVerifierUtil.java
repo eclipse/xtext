@@ -22,15 +22,21 @@ public class MavenVerifierUtil {
 	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = System.getProperty("maven.repo.local");
 		System.out.println("gradle: " + System.getProperty("gradleMavenRepo"));
 		for (Object iterable_element : System.getProperties().keySet()) {
 			System.out.println(iterable_element + "=" + System.getProperty(iterable_element.toString()));
 		}
-		;
-
-		verifier.setSystemProperty("gradleMavenRepo", System.getProperty("gradleMavenRepo"));
-		verifier.setLocalRepo(localRepo);
+		
+		String gradleMavenRepo = System.getProperty("gradleMavenRepo");
+		Assert.assertNotNull("gradleMavenRepo is null", gradleMavenRepo);
+		verifier.setSystemProperty("gradleMavenRepo", gradleMavenRepo);
+		
+		verifier.setSystemProperty("nonTestMavenRepo", System.getProperty("maven.repo.local"));
+		
+		String testMavenRepo = System.getProperty("testMavenRepo");
+		Assert.assertNotNull("testMavenRepo is null", testMavenRepo);
+		verifier.setLocalRepo(testMavenRepo);
+		
 		verifier.setDebug(true);
 		String testSettingsXML = System.getProperty("testSettingsXML");
 		if (testSettingsXML != null) {
