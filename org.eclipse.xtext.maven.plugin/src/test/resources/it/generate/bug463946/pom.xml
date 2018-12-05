@@ -12,7 +12,7 @@
 		<artifactId>xtext-maven-plugin-it</artifactId>
 	</parent>
 	<properties>
-		<xtext-version>2.16.0-SNAPSHOT</xtext-version>
+		<xtext-version>2.17.0-SNAPSHOT</xtext-version>
 		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 		<eclipse-text-version>3.6.100</eclipse-text-version>
 		<core-resources-version>3.12.0</core-resources-version>
