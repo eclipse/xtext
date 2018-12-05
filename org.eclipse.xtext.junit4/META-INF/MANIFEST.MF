@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext JUnit4 Support
 Bundle-SymbolicName: org.eclipse.xtext.junit4
-Bundle-Version: 2.16.0.qualifier
+Bundle-Version: 2.17.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.junit4,
