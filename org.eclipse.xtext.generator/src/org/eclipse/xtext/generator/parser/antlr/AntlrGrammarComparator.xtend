@@ -20,7 +20,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class AntlrGrammarComparator {
 
-	public interface IErrorHandler {
+	interface IErrorHandler {
 		def void handleInvalidGeneratedGrammarFile(ErrorContext context);
 		
 		def void handleInvalidReferenceGrammarFile(ErrorContext context);
