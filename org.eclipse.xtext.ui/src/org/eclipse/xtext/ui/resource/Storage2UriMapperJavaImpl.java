@@ -640,7 +640,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 					countDown.countDown();
 				}
 			}
-		}).start();
+		}, "Storage2UriMapperJavaImpl::doInitializeCache").start();
 	}
 
 	private void doInitializeCache() throws CoreException {
