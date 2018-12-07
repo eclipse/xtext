@@ -3,10 +3,14 @@
 usage ()
 {
   echo "----------------------------------------------------------"
-  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>]"
-  echo "Example : fixVersions.sh -f '2.15.0' -t '2.16.0'"
-  echo "Example : fixVersions.sh -f '2.15.0' "
+  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>] [-b <StoS|StoR|MtoR|RCtoR>]"
+  echo "Example : fixVersions.sh -f '2.15.0' -t '2.16.0' -b StoS"
+  echo "Example : fixVersions.sh -f '2.15.0' -b StoS"
   echo "Note: '-t' is optional, if not given it will be derived from '-f'"
+  echo "Note: StoS - Snapshot version to another Snapshot version
+      StoR - Snapshot version to another Release version
+      MtoR - Milestone version to another Release version
+      RCtoR - RC version to another Release version"
   echo "----------------------------------------------------------"
   exit
 }
@@ -41,7 +45,48 @@ deriveFromVersion()
   echo "# Derived from_version from MVN version $from_version"
 }
 
-if [ $# -lt 2 ] || [ $# -gt 4 ] ; then
+xargs_sed_inplace() {
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		xargs  sed -i '' "$@"
+	else
+		xargs  sed -i "$@"
+	fi	
+}
+
+SnapshotToSnapshot() {
+	find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g" 
+	find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/;version=\"${from}\"/;version=\"${to}\"/g"
+	find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtext.xbase.lib;bundle-version=\"${from}\"/org.eclipse.xtext.xbase.lib;bundle-version=\"${to}\"/g"
+	find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtend.lib;bundle-version=\"${from}\"/org.eclipse.xtend.lib;bundle-version=\"${to}\"/g"
+	find $currentPath -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
+	find $currentPath -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	find $currentPath -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	find $currentPath -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
+	find $currentPath -type f -name "versions.gradle" | xargs_sed_inplace -e "s/version = '${from}-SNAPSHOT'/version = '${to}-SNAPSHOT'/g"
+	find $currentPath -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
+	find $currentPath -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
+	find $currentPath -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
+	find $currentPath -type f -name "plugin.xml" | xargs_sed_inplace -e "s/<version>${from}-SNAPSHOT<\/version>/<version>${to}-SNAPSHOT<\/version>/g"
+}
+
+SnapshotToRelease() {
+	echo "# not usable now"
+}
+
+SnapshotToMilestone() {
+ 	echo "# not usable now"
+}
+
+MilestoneToRelease() {
+	echo "# not usable now"
+}
+
+RCToRelease() {
+	echo "# not usable now"
+}
+
+
+if [ $# -lt 2 ] || [ $# -gt 6 ] ; then
     usage
 fi
 
@@ -51,6 +96,8 @@ while [ "$1" != "" ]; do
              from=$1 ;;
         -t ) shift 
              to=$1 ;;
+        -b ) shift 
+             bump=$1 ;;
          *)  echo "unknown: option $1" 
              usage
   esac
@@ -59,6 +106,7 @@ done
 
 echo "# from_version: $from"
 echo "# to_version: $to" 
+echo "# bump_to: $bump" 
 
 checkVersionFormat "$from"
 
@@ -70,26 +118,20 @@ fi
 
 checkVersionFormat "$to"
 
-xargs_sed_inplace() {
-	if [[ "$OSTYPE" == "darwin"* ]]; then
-		xargs sed -i '' "$@"
-	else
-		xargs sed -i "$@" 
-	fi	
-}
+if [ $bump == 'StoS' ]; then
+   echo "# bumping version from Snapshot to Snapshot"
+   directories=$(./allDirectories)
+   for directory in $directories
+   do
+       directory=$(echo $directory | tr -d '\r')
+       echo "Processing $directory"
+       pushd $directory &> /dev/null 
+       SnapshotToSnapshot
+       popd &> /dev/null
+       echo
+   done
+fi
 
 currentPath="`dirname \"$0\"`"
 
-find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
-find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/;version=\"${from}\"/;version=\"${to}\"/g"
-find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtext.xbase.lib;bundle-version=\"${from}\"/org.eclipse.xtext.xbase.lib;bundle-version=\"${to}\"/g"
-find $currentPath -type f -name "MANIFEST.MF" | xargs_sed_inplace -e "s/org.eclipse.xtend.lib;bundle-version=\"${from}\"/org.eclipse.xtend.lib;bundle-version=\"${to}\"/g"
-find $currentPath -type f -name "MANIFEST.MF_gen" | xargs_sed_inplace -e "s/${from}.qualifier/${to}.qualifier/g"
-find $currentPath -type f -name "pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-find $currentPath -type f -name "maven-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-find $currentPath -type f -name "tycho-pom.xml" | xargs_sed_inplace -e "s/${from}-SNAPSHOT/${to}-SNAPSHOT/g"
-find $currentPath -type f -name "versions.gradle" | xargs_sed_inplace -e "s/version = '${from}-SNAPSHOT'/version = '${to}-SNAPSHOT'/g"
-find $currentPath -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
-find $currentPath -type f -name "feature.xml" | xargs_sed_inplace -e "s/version=\"${from}\" match=\"equivalent\"/version=\"${to}\" match=\"equivalent\"/g"
-find $currentPath -type f -name "category.xml" | xargs_sed_inplace -e "s/version=\"${from}.qualifier\"/version=\"${to}.qualifier\"/g"
-find $currentPath -type f -name "plugin.xml" | xargs_sed_inplace -e "s/<version>${from}-SNAPSHOT<\/version>/<version>${to}-SNAPSHOT<\/version>/g"
+
