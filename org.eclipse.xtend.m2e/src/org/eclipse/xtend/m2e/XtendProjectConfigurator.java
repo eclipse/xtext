@@ -7,12 +7,14 @@ import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getK
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.getOutputForSourceFolderKey;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
@@ -38,16 +40,18 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		OutputConfiguration config = new XtendOutputConfigurationProvider()
 				.getOutputConfigurations().iterator().next();
 
-		for (MojoExecution execution : getMojoExecutions(request, monitor)) {
+		List<MojoExecution> executions = getMojoExecutions(request, monitor);
+		SubMonitor progress = SubMonitor.convert(monitor, executions.size());
+		for (MojoExecution execution : executions) {
 			String goal = execution.getGoal();
 			if (goal.equals("compile")) {
-				readCompileConfig(config, request, execution);
+				readCompileConfig(config, request, execution, progress.split(1));
 			} else if (goal.equals("testCompile")) {
-				readTestCompileConfig(config, request, execution);
+				readTestCompileConfig(config, request, execution, progress.split(1));
 			} else if (goal.equals("xtend-install-debug-info")) {
-				readDebugInfoConfig(config, request, execution);
+				readDebugInfoConfig(config, request, execution, progress.split(1));
 			} else if (goal.equals("xtend-test-install-debug-info")) {
-				readTestDebugInfoConfig(config, request, execution);
+				readTestDebugInfoConfig(config, request, execution, progress.split(1));
 			}
 		}
 
@@ -85,20 +89,24 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	private void readCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
-			MojoExecution execution) throws CoreException {
-		for (String source : request.getMavenProject().getCompileSourceRoots()) {
+			MojoExecution execution, SubMonitor progress) throws CoreException {
+		List<String> roots = request.getMavenProject().getCompileSourceRoots();
+		progress = SubMonitor.convert(progress, roots.size());
+		for (String source : roots) {
 			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
-			String outputDirectory = mojoParameterValue("outputDirectory", String.class, request, execution);
+			String outputDirectory = mojoParameterValue("outputDirectory", String.class, request, execution, progress);
 			mapping.setOutputDirectory(makeProjectRelative(outputDirectory, request));
 			config.getSourceMappings().add(mapping);
 		}
 	}
 
 	private void readTestCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
-			MojoExecution execution) throws CoreException {
-		for (String source : request.getMavenProject().getTestCompileSourceRoots()) {
+			MojoExecution execution, SubMonitor progress) throws CoreException {
+		List<String> roots = request.getMavenProject().getTestCompileSourceRoots();
+		progress = SubMonitor.convert(progress, roots.size());
+		for (String source : roots) {
 			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
-			String testOutputDirectory = mojoParameterValue("testOutputDirectory", String.class, request, execution);
+			String testOutputDirectory = mojoParameterValue("testOutputDirectory", String.class, request, execution, progress);
 			mapping.setOutputDirectory(makeProjectRelative(testOutputDirectory, request));
 			config.getSourceMappings().add(mapping);
 		}
@@ -118,27 +126,26 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 	}
 
 	private void readDebugInfoConfig(OutputConfiguration config, ProjectConfigurationRequest request,
-			MojoExecution execution) throws CoreException {
+			MojoExecution execution, SubMonitor progress) throws CoreException {
+		progress = SubMonitor.convert(progress, 2);
 		config.setHideSyntheticLocalVariables(
-				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution));
+				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution, progress));
 		config.setInstallDslAsPrimarySource(
-				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution));
+				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution, progress));
 	}
 
 	private void readTestDebugInfoConfig(OutputConfiguration config, ProjectConfigurationRequest request,
-			MojoExecution execution) throws CoreException {
+			MojoExecution execution, SubMonitor progress) throws CoreException {
+		progress = SubMonitor.convert(progress, 2);
 		config.setHideSyntheticLocalVariables(
-				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution));
+				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution, progress));
 		config.setInstallDslAsPrimarySource(
-				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution));
+				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution, progress));
 	}
 	
 	private <T> T mojoParameterValue(String paramName, Class<T> paramType, ProjectConfigurationRequest request,
-			MojoExecution execution) throws CoreException {
-		/*TODO maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
-				new NullProgressMonitor());*/
-		return getParameterValue(
-				paramName, paramType,
-				request.getMavenSession(), execution);
+			MojoExecution execution, SubMonitor progress) throws CoreException {
+		return maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
+				progress.split(1));
 	}
 }
