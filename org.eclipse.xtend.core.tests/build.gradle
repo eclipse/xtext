@@ -13,3 +13,7 @@ sourceSets.test {
 	java.srcDir 'testdata'
 	resources.srcDir 'testdata'
 }
+
+test {
+	maxHeapSize = "2G"
+}
