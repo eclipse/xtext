@@ -472,10 +472,13 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       this._validationTestHelper.assertNoErrors(this.field(_builder_11.toString()));
       StringConcatenation _builder_12 = new StringConcatenation();
       _builder_12.append("private int foo");
-      this._validationTestHelper.assertWarning(this.field(_builder_12.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNNECESSARY_MODIFIER);
+      this._validationTestHelper.assertWarning(this.field(_builder_12.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNNECESSARY_MODIFIER, "The private modifier is unnecessary on field foo");
       StringConcatenation _builder_13 = new StringConcatenation();
       _builder_13.append("private val foo=42");
-      this._validationTestHelper.assertWarning(this.field(_builder_13.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNNECESSARY_MODIFIER);
+      this._validationTestHelper.assertWarning(this.field(_builder_13.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNNECESSARY_MODIFIER, "The private modifier is unnecessary on field foo");
+      StringConcatenation _builder_14 = new StringConcatenation();
+      _builder_14.append("private extension Object");
+      this._validationTestHelper.assertWarning(this.field(_builder_14.toString()), XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNNECESSARY_MODIFIER, "The private modifier is unnecessary on extension field Object");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
