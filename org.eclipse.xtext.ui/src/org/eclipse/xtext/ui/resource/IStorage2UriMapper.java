@@ -29,7 +29,8 @@ public interface IStorage2UriMapper {
 	 * in the case that the same external class folder or jar is referenced in 
 	 * multiple projects multiple {@link IStorage}s are returned.
 	 * @param uri the {@link URI}. May not be <code>null</code>.
-	 * @return IStorages corresponding to the given URI. Never <code>null</code>. 
+	 * @return IStorages corresponding to the given URI. Never <code>null</code>.
+	 *   The contained pairs might contain a mapping to <code>null</code> project when the storage is external to the workspace.
 	 */
 	Iterable<Pair<IStorage, IProject>> getStorages(URI uri);
 

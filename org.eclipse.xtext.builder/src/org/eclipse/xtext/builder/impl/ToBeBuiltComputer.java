@@ -199,8 +199,9 @@ public class ToBeBuiltComputer {
 			Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
 			while (iterator.hasNext() && onlyOnThisProject) {
 				Pair<IStorage, IProject> storage2Project = iterator.next();
-				final boolean isSameProject = project.equals(storage2Project.getSecond());
-				onlyOnThisProject = isSameProject || !storage2Project.getSecond().isAccessible();
+				final IProject second = storage2Project.getSecond();
+				final boolean isSameProject = project.equals(second);
+				onlyOnThisProject = isSameProject || second == null || !second.isAccessible();
 			}
 			if (onlyOnThisProject)
 				result.getToBeDeleted().add(description.getURI());
