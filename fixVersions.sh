@@ -3,21 +3,23 @@
 usage ()
 {
   echo "----------------------------------------------------------"
-  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>] [-b <StoS|StoR|MtoR|RCtoR>]"
+  echo "Usage   : fixVersions.sh -f <from_version> [-t <to_version>] -b <StoS|StoR|MtoR|RCtoR|BST> "
   echo "Example : fixVersions.sh -f '2.15.0' -t '2.16.0' -b StoS"
+  echo "Example : fixVersions.sh -f '2.16.0.M1' -t '2.16.0' -b BST"
   echo "Example : fixVersions.sh -f '2.15.0' -b StoS"
   echo "Note: '-t' is optional, if not given it will be derived from '-f'"
   echo "Note: StoS - Snapshot version to another Snapshot version
       StoR - Snapshot version to another Release version
       MtoR - Milestone version to another Release version
-      RCtoR - RC version to another Release version"
+      RCtoR - RC version to another Release version
+      BST - BootStrap version to another version"
   echo "----------------------------------------------------------"
   exit
 }
 
 checkVersionFormat()
 {
- re='^[0-9]\.[0-9]+\.[0-9]$'
+ re='^[0-9]\.[0-9]+\.[0-9].*$'
   if ! [[ $1 =~ $re ]] ; then
      echo "Error: Version is not in proper format" 
      usage
@@ -86,6 +88,11 @@ RCToRelease() {
 }
 
 
+VersionBootstrap() {
+      find $currentPath -type f -name "pom.xml" | xargs_sed_inplace -e "s/<xtend-maven-plugin-version>${from}<\/xtend-maven-plugin-version>/<xtend-maven-plugin-version>${to}<\/xtend-maven-plugin-version>/g"
+      find $currentPath -type f -name "versions.gradle" | xargs_sed_inplace -e "s/'xtext_bootstrap': '${from}'/'xtext_bootstrap': '${to}'/g"
+}
+
 if [ $# -lt 2 ] || [ $# -gt 6 ] ; then
     usage
 fi
@@ -106,19 +113,24 @@ done
 
 echo "# from_version: $from"
 echo "# to_version: $to" 
-echo "# bump_to: $bump" 
+echo "# bump/bootstrap: $bump" 
 
 checkVersionFormat "$from"
 
-if [ -z "$to" ]; then
-    echo "# 'to_version' is unset or set to the empty string"
-    echo "# deriving 'to_version' from 'from_verison'"
-    deriveToVersion
+if [ -z "$to" ] ; then
+   if [ "$bump" != "BST" ]; then
+      echo "# 'to_version' is unset or set to the empty string"
+      echo "# deriving 'to_version' from 'from_verison'"
+      deriveToVersion
+   else
+      echo "ERROR# 'to_version' is mandatory for bootstrapping"
+      exit 1
+   fi
 fi
 
 checkVersionFormat "$to"
 
-if [ $bump == 'StoS' ]; then
+if [ "$bump" == "StoS" ]; then
    echo "# bumping version from Snapshot to Snapshot"
    directories=$(./allDirectories)
    for directory in $directories
@@ -127,6 +139,21 @@ if [ $bump == 'StoS' ]; then
        echo "Processing $directory"
        pushd $directory &> /dev/null 
        SnapshotToSnapshot
+       popd &> /dev/null
+       echo
+   done
+fi
+
+if [ "$bump" == "BST" ]; then
+   echo "# bootstrapping version from $from to $to"
+  
+   directories=$(./allDirectories)
+   for directory in $directories
+   do
+       directory=$(echo $directory | tr -d '\r')
+       echo "Processing $directory"
+       pushd $directory &> /dev/null 
+       VersionBootstrap
        popd &> /dev/null
        echo
    done
