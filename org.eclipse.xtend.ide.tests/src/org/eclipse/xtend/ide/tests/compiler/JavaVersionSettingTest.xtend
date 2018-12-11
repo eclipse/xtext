@@ -28,6 +28,7 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
@@ -44,6 +45,7 @@ class JavaVersionSettingTest extends Assert {
 	
 	@BeforeClass
 	static def setUpProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform(JavaVersionSettingTest)
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 

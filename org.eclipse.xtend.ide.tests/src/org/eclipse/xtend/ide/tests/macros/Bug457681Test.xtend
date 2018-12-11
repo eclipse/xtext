@@ -12,8 +12,10 @@ import org.eclipse.core.resources.IFolder
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.StopwatchRule
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 
@@ -27,6 +29,11 @@ import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 class Bug457681Test {
 
 	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
+
+	@BeforeClass
+	def static void prepareEclipse() throws Exception {
+		TargetPlatformUtil.setTargetPlatform(Bug457681Test);
+	}
 
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
