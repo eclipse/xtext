@@ -8,7 +8,7 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.testing,
  org.eclipse.xtext.testing.builder,
- org.eclipse.xtext.testing.extensions;x-internal:=true,
+ org.eclipse.xtext.testing.extensions,
  org.eclipse.xtext.testing.formatter,
  org.eclipse.xtext.testing.logging,
  org.eclipse.xtext.testing.serializer,

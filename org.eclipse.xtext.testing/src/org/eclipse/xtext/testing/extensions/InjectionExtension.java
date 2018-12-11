@@ -16,7 +16,6 @@ import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
 import com.google.inject.Injector;
@@ -32,7 +31,6 @@ import com.google.inject.Injector;
  * @author Karsten Thoms - Initial contribution and API
  * @since 2.14
  */
-@Beta
 public class InjectionExtension implements BeforeEachCallback, AfterEachCallback {
 	/**
 	 * Maintains a map of injector provider types to their instance.
