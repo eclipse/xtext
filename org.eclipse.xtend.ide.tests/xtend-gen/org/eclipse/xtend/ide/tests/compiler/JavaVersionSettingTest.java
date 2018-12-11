@@ -21,6 +21,7 @@ import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
@@ -45,6 +46,7 @@ public class JavaVersionSettingTest extends Assert {
   
   @BeforeClass
   public static void setUpProject() throws Exception {
+    TargetPlatformUtil.setTargetPlatform(JavaVersionSettingTest.class);
     IResourcesSetupUtil.cleanWorkspace();
   }
   
