@@ -2068,10 +2068,29 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			if (field.isFinal() && field.isVolatile()) {
 				error("The field " + field.getName() + " can be either final or volatile, not both.", XTEND_FIELD__NAME, -1, INVALID_MODIFIER);
 			}
-			fieldModifierValidator.checkModifiers(field, "field " + field.getName());
+			fieldModifierValidator.checkModifiers(field, getMemberName(field));
 		}
 		else if(declaringType instanceof XtendInterface || declaringType instanceof XtendAnnotationType)
 			fieldInInterfaceModifierValidator.checkModifiers(field,  "field " + field.getName());
+	}
+	
+	protected String getMemberName(XtendField field) {
+		String memberName = "field " + field.getName();
+		
+		/*
+		 * Determine the member name of an extension field where the field name is not explicitly set.
+		 */
+		if(field.isExtension() && field.getName() == null) {
+			JvmField jvmField = associations.getJvmField(field);
+			if(jvmField != null) {
+				LightweightTypeReference type = getActualType(jvmField);
+				if(type != null) {
+					memberName = "extension field " + type.getHumanReadableName();
+				}
+			}
+		}
+		
+		return memberName;
 	}
 	
 	@Check

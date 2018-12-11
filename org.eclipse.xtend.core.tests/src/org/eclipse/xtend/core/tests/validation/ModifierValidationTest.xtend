@@ -175,8 +175,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''final volatile int foo = 42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''volatile transient int foo''').assertNoErrors
 		field('''private transient volatile int foo''').assertNoErrors
-		field('''private int foo''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
-		field('''private val foo=42''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER)
+		field('''private int foo''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER, "The private modifier is unnecessary on field foo")
+		field('''private val foo=42''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER, "The private modifier is unnecessary on field foo")
+		field('''private extension Object''').assertWarning(XTEND_FIELD, UNNECESSARY_MODIFIER, "The private modifier is unnecessary on extension field Object")
 	}
 	
 	@Test def void testFieldInInterfaceAllowedModifiers() {
