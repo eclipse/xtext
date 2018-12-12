@@ -38,7 +38,20 @@
 					<argLine>${memory-settings} ${os-jvm-flags} -Dorg.eclipse.swtbot.keyboard.layout=EN_US -Dorg.eclipse.swtbot.playback.delay=60</argLine>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>screenshots</directory>
+							<includes>
+								<include>*.jpeg</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
 		</plugins>
-	</build>
+  	</build>
 
 </project>
