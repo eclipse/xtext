@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist
 
+import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/345")
 class Issue242Test extends AbstractXtendContentAssistBugTest {
 	
 	@Test def void test_01() throws Exception {

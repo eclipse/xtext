@@ -10,11 +10,13 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/345")
 @SuppressWarnings("all")
 public class Issue242Test extends AbstractXtendContentAssistBugTest {
   @Test
