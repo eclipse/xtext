@@ -33,6 +33,11 @@
 									<classifier>${project.artifactId}-oxygen</classifier>
 								</artifact>
 								<artifact>
+									<file>${project.artifactId}-r201812.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-r201812</classifier>
+								</artifact>
+								<artifact>
 									<file>${project.artifactId}-r201809.target</file>
 									<type>target</type>
 									<classifier>${project.artifactId}-r201809</classifier>
