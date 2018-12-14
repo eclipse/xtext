@@ -16,7 +16,8 @@ public class ContentProposalPriorities implements IContentProposalPriorities {
 	protected int keywordPriority = 300;
 	protected int defaultPriority = 400;
 	protected int proposalWithPrefixMultiplier = 2;
-	protected double sameTextMultiplier = 0.75;
+	// do not treat perfect matches differently, by default, but allow subclasses to change this:
+	protected double sameTextMultiplier = proposalWithPrefixMultiplier;
 	
 	protected void adjustPriority(ICompletionProposal proposal, String prefix, int priority) {
 		if (proposal == null || !(proposal instanceof ConfigurableCompletionProposal))
