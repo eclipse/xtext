@@ -70,7 +70,7 @@ public class MultiImportOrganizer {
 					XtextResource resource = (XtextResource) resSet.getResource(uri, true);
 					List<ReplaceRegion> replace = importOrganizer.getOrganizedImportChanges(resource);
 					//TODO - find out why \n\n changes are produced, even if there are any unused imports
-					if (replace == null) {
+					if (replace == null || replace.isEmpty()) {
 						continue;
 					}
 					TextEdit textEdit = replaceConverter.convertToTextEdit(replace);
