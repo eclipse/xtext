@@ -17,15 +17,19 @@ import org.junit.Test;
 public class JavaVersionTest {
 	@Test
 	public void test_fromBree() {
+		assertEquals(JavaVersion.JAVA11, JavaVersion.fromBree("JavaSE-11"));
 		assertEquals(JavaVersion.JAVA10, JavaVersion.fromBree("JavaSE-10"));
 		assertEquals(JavaVersion.JAVA9, JavaVersion.fromBree("JavaSE-9"));
 		assertEquals(JavaVersion.JAVA8, JavaVersion.fromBree("JavaSE-1.8"));
+		assertNull(JavaVersion.fromBree("JavaSE-1.11"));
 		assertNull(JavaVersion.fromBree("JavaSE-1.10"));
 		assertNull(JavaVersion.fromBree(null));
 	}
 	
 	@Test
 	public void testFromQualifier() {
+		assertEquals(JavaVersion.JAVA11, JavaVersion.fromQualifier("11"));
+		assertEquals(JavaVersion.JAVA11, JavaVersion.fromQualifier("1.11"));
 		assertEquals(JavaVersion.JAVA10, JavaVersion.fromQualifier("10"));
 		assertEquals(JavaVersion.JAVA10, JavaVersion.fromQualifier("1.10"));
 		assertEquals(JavaVersion.JAVA9, JavaVersion.fromQualifier("9"));
@@ -44,6 +48,7 @@ public class JavaVersionTest {
 	
 	@Test
 	public void test_getQualifier() {
+		assertEquals("11", JavaVersion.JAVA11.getQualifier());
 		assertEquals("10", JavaVersion.JAVA10.getQualifier());
 		assertEquals("9", JavaVersion.JAVA9.getQualifier());
 		assertEquals("1.8", JavaVersion.JAVA8.getQualifier());

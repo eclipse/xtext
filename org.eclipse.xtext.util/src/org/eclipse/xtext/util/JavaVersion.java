@@ -48,7 +48,11 @@ public enum JavaVersion {
 	/**
 	 * Java 10 language enhancements: local variable type inference (keyword 'var') (10 is favored over 1.10).
 	 */
-	JAVA10("Java 10", new String[] {"10", "1.10"}, "JavaSE-10", "-1.10", Constants.JAVA10)
+	JAVA10("Java 10", new String[] {"10", "1.10"}, "JavaSE-10", "-1.10", Constants.JAVA10),
+	/**
+	 * Well, Java 11
+	 */
+	JAVA11("Java 11", new String[] {"11", "1.11"}, "JavaSE-11", "-1.11", Constants.JAVA11)
 	;
 
 	private static final class Constants {
@@ -60,6 +64,7 @@ public enum JavaVersion {
 		private static final long JAVA8 = ((long)(MAJOR_VERSION_1_5 + 3) << 16) + MINOR_VERSION_0;
 		private static final long JAVA9 = ((long)(MAJOR_VERSION_1_5 + 4) << 16) + MINOR_VERSION_0;
 		private static final long JAVA10 = ((long)(MAJOR_VERSION_1_5 + 5) << 16) + MINOR_VERSION_0;
+		private static final long JAVA11 = ((long)(MAJOR_VERSION_1_5 + 6) << 16) + MINOR_VERSION_0;
 	}
 
 	//	 if you introduce a new JavaVersion don't forget to adapt
