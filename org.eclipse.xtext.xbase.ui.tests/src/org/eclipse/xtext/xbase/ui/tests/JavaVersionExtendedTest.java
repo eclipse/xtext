@@ -41,6 +41,13 @@ public class JavaVersionExtendedTest {
 		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
 			// ok
 		}
+		try {
+			long value = ClassFileConstants.class.getField("JDK11").getLong(null);
+			assertEquals(value, JavaVersion.JAVA11.toJdtClassFileConstant());
+		} catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | SecurityException e) {
+			System.err.println("ooops");
+			// ok
+		}
 	}
 
 }
