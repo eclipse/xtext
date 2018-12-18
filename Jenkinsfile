@@ -79,5 +79,5 @@ node {
 		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
 	}
 
-	archive 'screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
+	archive 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
 }
