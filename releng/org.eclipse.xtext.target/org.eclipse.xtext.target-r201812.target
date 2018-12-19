@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="org.eclipse.xtext.latest.target" sequenceNumber="6">
+<target name="org.eclipse.xtext.r201812.target" sequenceNumber="6">
 <locations>
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
@@ -70,7 +70,7 @@
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/eclipse/updates/4.11-I-builds"/>
+		<repository location="http://download.eclipse.org/eclipse/updates/4.10"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">

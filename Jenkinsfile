@@ -2,7 +2,7 @@ node {
 	properties([
 		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
 		parameters([
-			choice(choices: 'oxygen\nphoton\nr201809\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
+			choice(choices: 'oxygen\nphoton\nr201809\nr201812\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
 		])
 	])
 	
@@ -16,6 +16,8 @@ node {
 		checkout scm
 		if ("latest" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(x)"
+		} else if ("r201812" == params.target_platform) {
+			currentBuild.displayName = "#${BUILD_NUMBER}(r)"
 		} else if ("r201809" == params.target_platform) {
 			currentBuild.displayName = "#${BUILD_NUMBER}(q)"
 		} else if ("photon" == params.target_platform) {
@@ -50,6 +52,8 @@ node {
 		def targetProfile = "-Poxygen"
 		if ("latest" == params.target_platform) {
 			targetProfile = "-Platest"
+		} else if ("r201812" == params.target_platform) {
+			targetProfile = "-Pr201812"
 		} else if ("r201809" == params.target_platform) {
 			targetProfile = "-Pr201809"
 		} else if ("photon" == params.target_platform) {
