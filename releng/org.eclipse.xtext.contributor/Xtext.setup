@@ -894,7 +894,7 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.10-I-builds"/>
+              url="http://download.eclipse.org/eclipse/updates/4.10"/>
           <repository
               url="${p2.xpand}"/>
           <repository
