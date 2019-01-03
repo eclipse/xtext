@@ -52,7 +52,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	}
 	
 	@Override
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+	public synchronized void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (context.getBuildType() == BuildType.FULL)
 			invocationCount++;
 	}

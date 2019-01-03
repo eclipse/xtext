@@ -63,7 +63,7 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 		assertFalse(REFERENCING_FILE_NAME, affectedResourcesContain(PROJECT2, REFERENCING_FILE_NAME));
 	}
 
-	private boolean affectedResourcesContain(final String projectName, final String fileName) {
+	private synchronized boolean affectedResourcesContain(final String projectName, final String fileName) {
 		try {
 			final URI expected = URI.createPlatformResourceURI(projectName + "/" + SRC_FOLDER + "/" + fileName + F_EXT, true);
 			Iterables.find(getContext().getDeltas(), new Predicate<IResourceDescription.Delta>() {
