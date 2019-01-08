@@ -64,7 +64,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 			<unit id="org.eclipse.xtend" version="0.0.0"/>
 			<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		«ENDIF»
-		<repository location="http://download.eclipse.org/releases/2018-12"/>
+		<repository location="http://download.eclipse.org/releases/2019-03"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
