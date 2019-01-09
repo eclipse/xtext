@@ -135,7 +135,7 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 		protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 			super.initialize(iAcceptor);
 			iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_ERROR));
-			iAcceptor.accept(create(org.eclipse.xtend.core.validation.IssueCodes.ORPHAN_ELMENT, SeverityConverter.SEVERITY_WARNING));
+			iAcceptor.accept(create(org.eclipse.xtend.core.validation.IssueCodes.ORPHAN_ELEMENT, SeverityConverter.SEVERITY_WARNING));
 		}
 	}
 

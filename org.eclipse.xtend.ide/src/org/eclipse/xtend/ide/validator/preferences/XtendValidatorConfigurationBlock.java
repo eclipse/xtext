@@ -50,7 +50,7 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	}
 
 	protected void fillActiveAnnotationSection(ComboBoxBuilder builder) {
-		builder.addComboBox(ORPHAN_ELMENT, "JVM element without source element:");
+		builder.addComboBox(ORPHAN_ELEMENT, "JVM element without source element:");
 	}
 
 	@Override

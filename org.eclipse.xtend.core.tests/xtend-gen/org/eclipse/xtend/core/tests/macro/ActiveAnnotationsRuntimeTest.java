@@ -339,11 +339,11 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
         "The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
-      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
         "The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
-      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+      this.validator.assertIssue(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
         "The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -426,7 +426,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
-      this.validator.assertNoWarnings(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);
+      this.validator.assertNoWarnings(it.getXtendFile(), XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }

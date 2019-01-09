@@ -214,11 +214,11 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 					}
 				'''
 			)[
-				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
 					"The generated field 'myusercode.Foo.foo' is not associated with a source element.")
-				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
 					"The generated method 'myusercode.Foo.foo(Integer)' is not associated with a source element.")
-				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+				validator.assertIssue(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT, Severity.WARNING, 
 					"The generated type 'myusercode.Foo.Inner' is not associated with a source element.")
 			]
 	}
@@ -263,7 +263,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 					}
 				'''
 			)[
-				validator.assertNoWarnings(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT)
+				validator.assertNoWarnings(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELEMENT)
 			]
 	}
 

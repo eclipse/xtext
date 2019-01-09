@@ -34,7 +34,7 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(createDelegate(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, JavaCore.COMPILER_PB_INVALID_JAVADOC, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.API_TYPE_INFERENCE, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.IMPLICIT_RETURN, SeverityConverter.SEVERITY_IGNORE));
-		iAcceptor.accept(create(IssueCodes.ORPHAN_ELMENT, SeverityConverter.SEVERITY_IGNORE));
+		iAcceptor.accept(create(IssueCodes.ORPHAN_ELEMENT, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.WRONG_FILE, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.UNNECESSARY_MODIFIER, SeverityConverter.SEVERITY_WARNING));
 		// overwrite xbase default
