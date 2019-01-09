@@ -110,7 +110,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   
   private void addWarningsForOrphanedJvmElements(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     final IssueSeverities issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(resource);
-    final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT);
+    final Severity severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELEMENT);
     boolean _equals = Objects.equal(severity, Severity.IGNORE);
     if (_equals) {
       return;
@@ -142,7 +142,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     _builder.append(" is not associated with a source element. The producing active annotation should use \'setPrimarySourceElement\'.");
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     this.issueFromXtextResourceDiagnostic(new DiagnosticOnFirstKeyword(severity, 
-      IssueCodes.ORPHAN_ELMENT, _builder.toString(), _head, 
+      IssueCodes.ORPHAN_ELEMENT, _builder.toString(), _head, 
       null), severity, acceptor);
   }
   

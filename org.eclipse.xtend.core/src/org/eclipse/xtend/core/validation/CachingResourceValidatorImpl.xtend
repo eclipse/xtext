@@ -70,7 +70,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 
 	private def addWarningsForOrphanedJvmElements(Resource resource, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
 		val issueSeverities = issueSeveritiesProvider.getIssueSeverities(resource)
-		val severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELMENT)
+		val severity = issueSeverities.getSeverity(IssueCodes.ORPHAN_ELEMENT)
 		if (severity == Severity.IGNORE)
 			return;
 		for (jvmType : resource.contents.tail.filter(JvmDeclaredType)) {
@@ -87,7 +87,7 @@ class CachingResourceValidatorImpl extends DerivedStateAwareResourceValidator {
 	private def addWarningForOrphanedJvmElement(Resource resource, JvmMember jvmElement, Severity severity, IAcceptor<Issue> acceptor) {
 			new DiagnosticOnFirstKeyword(
 				severity,
-				IssueCodes.ORPHAN_ELMENT,
+				IssueCodes.ORPHAN_ELEMENT,
 				'''The generated «jvmElement.uiString» is not associated with a source element. The producing active annotation should use 'setPrimarySourceElement'.''',
 				resource.contents.head,
 				null
