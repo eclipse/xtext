@@ -12,16 +12,8 @@
 		<root-dir>${basedir}/../..</root-dir>
 		<mavenVersion>3.2.5</mavenVersion>
 		<tycho-version>1.3.0</tycho-version>
-		<emf.version>2.12.0</emf.version>
-		<emfCodegen.version>2.11.0</emfCodegen.version>
 
 		<maven-install-version>2.5.1</maven-install-version>
-		<asm.version>7.0</asm.version>
-		<guava.version>[14.0,22)</guava.version>
-		<google-inject.version>3.0</google-inject.version>
-		<log4j.version>1.2.16</log4j.version>
-		<antlr.version>3.2</antlr.version>
-		<junit-version>4.12</junit-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -38,6 +30,18 @@
 		<upstreamBranch>master</upstreamBranch>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 	<build>
 		<extensions>
@@ -426,7 +430,8 @@
 			<id>sebastian.zarnekow</id>
 			<name>Sebastian Zarnekow</name>
 			<email>sebastian.Zarnekow@gmail.com</email>
-			<organization>SMACC GmbH</organization>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
 		</developer>
 		<developer>
 			<id>titouan.vervack</id>

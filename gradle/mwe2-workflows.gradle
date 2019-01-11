@@ -11,9 +11,9 @@ eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
 dependencies {
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
 }
 

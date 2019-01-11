@@ -11,6 +11,7 @@
 			<url>file://${nonTestMavenRepo}</url>
 			<releases>
 				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
@@ -34,6 +35,7 @@
 			<url>${gradleMavenRepo}</url>
 			<releases>
 				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>
@@ -54,6 +56,7 @@
 			<id>central-real</id>
 			<releases>
 				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
 			</releases>
 			<snapshots>
 				<enabled>true</enabled>

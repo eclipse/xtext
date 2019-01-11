@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
+			<version>21.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
@@ -58,22 +58,18 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>
-			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
-			<version>${emf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
-			<version>${google-inject.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jmxtools</artifactId>
@@ -96,7 +92,6 @@
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm-commons</artifactId>
-			<version>${asm.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -106,7 +101,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -118,7 +112,6 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-			<version>${emf.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
@@ -126,7 +119,6 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr-runtime</artifactId>
-			<version>${antlr.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>stringtemplate</artifactId>
@@ -138,7 +130,6 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.codegen</artifactId>
-			<version>${emfCodegen.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>

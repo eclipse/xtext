@@ -4,29 +4,20 @@ apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	compile ("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
+	compile "org.eclipse.platform:org.eclipse.equinox.common"
+	compile "org.eclipse.platform:org.eclipse.core.runtime"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.apt"
+	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool"
 	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 	optional "org.apache.ant:ant:$versions.ant"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend"
 	mwe2Compile "de.jflex:jflex:$versions.jflex"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
 }
 
 sourceSets {

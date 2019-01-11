@@ -2,8 +2,8 @@ apply from: "${rootDir}/gradle/longrunning-tests.gradle"
 
 dependencies {
 	compile project(':org.eclipse.xtend.core')
-	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfCodegen"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
+	compile "org.eclipse.emf:org.eclipse.emf.codegen"
+	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore"
 	compile "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
