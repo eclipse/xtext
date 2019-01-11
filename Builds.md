@@ -189,7 +189,11 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
 1. Publish websites
    * Remove `published: false` from release post
-   * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published` 
+   * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
+1. Update Marketplace entries
+   * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext)
+   * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend)
+   * Update Version Number and Supported Eclipse Release(s)
 
 Check that everything was promoted correctly:
 1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
