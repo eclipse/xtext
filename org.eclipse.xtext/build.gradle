@@ -4,22 +4,20 @@ description = 'Core component of Xtext.'
 dependencies {
 	compile project(':org.eclipse.xtext.util')
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-	compile "log4j:log4j:$versions.log4j"
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
+	compile 'log4j:log4j'
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
 	// remove me, once the following is fixed : https://bugs.eclipse.org/bugs/show_bug.cgi?id=510504
-	compile "org.eclipse.platform:org.eclipse.osgi:$versions.eclipseOSGI"
-	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
-	compile "com.google.inject:guice:$versions.guice"
-	compile "org.antlr:antlr-runtime:$versions.antlr"
-	optional("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	optional "org.eclipse.platform:org.eclipse.equinox.registry:$versions.equinoxRegistry"
-	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
-	optional "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
-	optional "org.eclipse.xpand:org.eclipse.xtend.typesystem.emf:$versions.xpand"
-	optional "org.ow2.asm:asm-commons:$versions.asm"
+	compile 'org.eclipse.platform:org.eclipse.osgi'
+	compile 'org.eclipse.emf:org.eclipse.emf.common'
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
+	compile 'com.google.inject:guice'
+	compile 'org.antlr:antlr-runtime'
+	optional 'org.eclipse.platform:org.eclipse.core.runtime'
+	optional 'org.eclipse.platform:org.eclipse.equinox.registry'
+	optional 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+	optional 'org.eclipse.xpand:org.eclipse.xtend'
+	optional 'org.eclipse.xpand:org.eclipse.xtend.typesystem.emf'
+	optional 'org.ow2.asm:asm-commons'
 }
 
 sourceSets.main {

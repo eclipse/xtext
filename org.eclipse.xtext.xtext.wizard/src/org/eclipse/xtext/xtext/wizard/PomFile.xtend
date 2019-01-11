@@ -54,7 +54,9 @@ class PomFile extends TextFile {
 						<dependency>
 							<groupId>«dep.groupId»</groupId>
 							<artifactId>«dep.artifactId»</artifactId>
-							<version>«dep.version»</version>
+							«IF dep.version !== null»
+								<version>«dep.version»</version>
+							«ENDIF»
 							«IF dep.scope != Scope.COMPILE»
 								<scope>«dep.scope.mavenNotation»</scope>
 							«ENDIF»

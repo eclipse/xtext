@@ -3,11 +3,9 @@ apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 dependencies {
 	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.testing')
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	compile("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	compile "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:$versions.emfMwe2"
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	compile 'org.eclipse.platform:org.eclipse.core.runtime'
+	compile 'org.eclipse.emf:org.eclipse.emf.mwe2.runtime'
 }
 
 // Include the mwe2 and xtext files from the main source set when executing the workflow

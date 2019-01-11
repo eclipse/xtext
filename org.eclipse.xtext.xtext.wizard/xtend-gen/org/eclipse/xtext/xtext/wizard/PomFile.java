@@ -186,14 +186,20 @@ public class PomFile extends TextFile {
             _builder.append(_artifactId, "\t\t\t");
             _builder.append("</artifactId>");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("<version>");
-            String _version = dep.getVersion();
-            _builder.append(_version, "\t\t\t");
-            _builder.append("</version>");
-            _builder.newLineIfNotEmpty();
+            {
+              String _version = dep.getVersion();
+              boolean _tripleNotEquals = (_version != null);
+              if (_tripleNotEquals) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<version>");
+                String _version_1 = dep.getVersion();
+                _builder.append(_version_1, "\t\t\t");
+                _builder.append("</version>");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             {
               Scope _scope = dep.getScope();
               boolean _notEquals_1 = (!Objects.equal(_scope, Scope.COMPILE));

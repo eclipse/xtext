@@ -3,17 +3,12 @@ description = 'Generator for infrastructure of Xtext languages (supersedes org.e
 
 dependencies {
 	compile project(':org.eclipse.xtext')
-	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfCodegen"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
-	compile "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
-	compile "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
-	compile "com.ibm.icu:icu4j:$versions.icu"
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	optional("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	optional("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
-	}
+	compile 'org.eclipse.emf:org.eclipse.emf.codegen'
+	compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+	compile 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+	compile 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+	compile 'com.ibm.icu:icu4j'
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	optional 'org.eclipse.platform:org.eclipse.core.runtime'
+	optional 'org.eclipse.jdt:org.eclipse.jdt.core'
 }

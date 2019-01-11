@@ -85,6 +85,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					dependencies {
 						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
+						classpath 'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE'
 					}
 				}
 				
@@ -100,6 +101,12 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					
 					apply plugin: 'java'
+					apply plugin: 'io.spring.dependency-management'
+					dependencyManagement {
+						imports {
+							mavenBom "org.eclipse.xtext:xtext-dev-bom:«config.xtextVersion»"
+						}
+					}
 					apply plugin: 'org.xtext.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
 					apply from: "${rootDir}/gradle/maven-deployment.gradle"
@@ -228,6 +235,17 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						<module>«IF config.projectLayout == ProjectLayout.FLAT»../«ENDIF»«p.name»</module>
 					«ENDFOR»
 				</modules>
+				<dependencyManagement>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.xtext</groupId>
+							<artifactId>xtext-dev-bom</artifactId>
+							<version>${xtextVersion}</version>
+							<type>pom</type>
+							<scope>import</scope>
+						</dependency>
+					</dependencies>
+				</dependencyManagement>
 				<build>
 					«IF config.needsTychoBuild»
 						<plugins>

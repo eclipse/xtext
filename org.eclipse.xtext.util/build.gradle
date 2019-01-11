@@ -3,10 +3,10 @@ description = 'Utility classes used throughout Xtext.'
 
 dependencies {
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-	compile "log4j:log4j:$versions.log4j"
-	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore:$versions.emfEcore"
-	compile "com.google.inject:guice:$versions.guice"
+	compile 'log4j:log4j'
+	compile 'org.eclipse.emf:org.eclipse.emf.common'
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore'
+	compile 'com.google.inject:guice'
 }
 
 // Set the value of the Maven-Version attribute

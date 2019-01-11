@@ -4,6 +4,7 @@ buildscript {
 	}
 	dependencies {
 		classpath 'org.xtext:xtext-gradle-plugin:2.0.2'
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE'
 	}
 }
 
@@ -14,6 +15,12 @@ subprojects {
 	}
 	
 	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	dependencyManagement {
+		imports {
+			mavenBom "org.eclipse.xtext:xtext-dev-bom:unspecified"
+		}
+	}
 	apply plugin: 'org.xtext.xtend'
 	apply from: "${rootDir}/gradle/source-layout.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"

@@ -3,7 +3,7 @@ description = 'Platform-independent component for creating new Xtext projects.'
 
 dependencies {
 	compile project(':org.eclipse.xtext')
-	optional "args4j:args4j:$versions.args4j"
+	optional 'args4j:args4j'
 }
 
 sourceSets.main.resources.srcDir 'resources'
