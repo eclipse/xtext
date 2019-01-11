@@ -3,5 +3,5 @@ description = 'Integration of Ecore files in the Xtext indexing.'
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	optional "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:$versions.emfMwe2"
+	optional 'org.eclipse.emf:org.eclipse.emf.mwe2.runtime'
 }

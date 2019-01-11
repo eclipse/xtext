@@ -5,7 +5,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "junit:junit:$versions.junit"
+	compile 'junit:junit'
 	optional files('lib/simple.jar')
 	// The MWE2 workflow depends on emf-gen, so we have to include it in the test dependencies
 	testCompile sourceSets.mwe2.output

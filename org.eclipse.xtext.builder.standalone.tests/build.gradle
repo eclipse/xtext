@@ -4,7 +4,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.builder.standalone')
 	compile project(':org.eclipse.xtext.ecore')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "junit:junit:$versions.junit"
+	compile 'junit:junit'
 }
 
 // Include the mwe2 and xtext files from the test source set when executing the workflow

@@ -294,7 +294,6 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		assertEquals(1, firstParam.getAnnotations().size());
 		JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
 		JvmAnnotationType annotationType = annotationReference.getAnnotation();
-		assertTrue(annotationType.eIsProxy());
 		assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());
 	}
 	

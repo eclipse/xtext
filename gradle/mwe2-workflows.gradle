@@ -10,7 +10,7 @@ eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
 
 dependencies {
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2Runtime 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
 	mwe2Runtime project(':org.eclipse.xtext.common.types')
 	mwe2Runtime project(':org.eclipse.xtext.ecore')
 }

@@ -1,7 +1,7 @@
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
-	compile "com.google.inject:guice:$versions.guice"
-	compile "junit:junit:$versions.junit"
+	compile 'com.google.inject:guice'
+	compile 'junit:junit'
 }
 
 uploadArchives.enabled = false

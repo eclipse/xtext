@@ -4,23 +4,15 @@ apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase.testdata')
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	compile("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "com.google.errorprone:error_prone_annotations:2.0.15"
-	compile "junit:junit:$versions.junit"
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	compile 'org.eclipse.platform:org.eclipse.core.runtime'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.core'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
+	compile 'com.google.errorprone:error_prone_annotations'
+	compile 'junit:junit'
+	compile 'javax.annotation:javax.annotation-api'
 }
 
 sourceSets.test.java {

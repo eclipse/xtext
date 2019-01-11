@@ -4,21 +4,12 @@ description = 'Infrastructure for testing Xbase languages.'
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "junit:junit:$versions.junit"
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	compile("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
-	compile("org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
+	compile 'junit:junit'
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	compile 'org.eclipse.platform:org.eclipse.core.runtime'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.core'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
+	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
 }
 
 sourceSets.main.java.srcDir 'testdata'

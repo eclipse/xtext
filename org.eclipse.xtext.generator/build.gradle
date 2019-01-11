@@ -4,23 +4,14 @@ description = 'Generator for Xtext (superseded by org.eclipse.xtext.xtext.genera
 dependencies {
 	compile project(':org.eclipse.xtext.ecore')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfCodegen"
-	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
-	compile "org.eclipse.platform:org.eclipse.equinox.common:$versions.equinoxCommon"
-	optional("org.eclipse.platform:org.eclipse.core.runtime:$versions.eclipseCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-	}
-	optional("org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore") {
-		exclude group: "org.eclipse.platform", module: "org.eclipse.equinox.common"
-		exclude group: "org.eclipse.platform", module: "org.eclipse.core.runtime"
-	}
-	optional("org.eclipse.jdt:org.eclipse.jdt.compiler.apt:$versions.jdtCompilerApt") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
-	optional("org.eclipse.jdt:org.eclipse.jdt.compiler.tool:$versions.jdtCompilerTool") {
-		exclude group: "org.eclipse.jdt", module: "org.eclipse.jdt.core"
-	}
+	compile 'org.eclipse.emf:org.eclipse.emf.codegen'
+	compile 'org.eclipse.xpand:org.eclipse.xpand'
+	compile 'org.eclipse.xpand:org.eclipse.xtend'
+	compile 'org.eclipse.platform:org.eclipse.equinox.common'
+	optional 'org.eclipse.platform:org.eclipse.core.runtime'
+	optional 'org.eclipse.jdt:org.eclipse.jdt.core'
+	optional 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
+	optional 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
 }
 
 sourceSets.main.java.srcDir 'packrat'
