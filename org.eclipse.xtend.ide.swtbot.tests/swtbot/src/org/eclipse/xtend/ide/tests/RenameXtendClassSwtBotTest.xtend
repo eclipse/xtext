@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests
 
 import java.util.Collection
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized.Parameters
@@ -18,6 +19,7 @@ import static extension org.eclipse.xtend.ide.tests.SwtBotProjectHelper.*
  * @author Jan Koehnlein - Initial contribution and API
  */
 @RunWith(ParameterizedSWTBotRunner)
+@Ignore
 class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
 	
 	@Parameters(name="{0}")
