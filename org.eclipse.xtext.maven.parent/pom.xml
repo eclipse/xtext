@@ -26,6 +26,18 @@
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<modules>
 		<module>../org.eclipse.xtext.maven.plugin</module>
 	</modules>
