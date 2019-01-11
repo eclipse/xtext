@@ -21,8 +21,6 @@ configurations {
 			eachDependency {
 				if (requested.group == 'org.eclipse.xtext' || requested.group == 'org.eclipse.xtend')
 					useVersion(versions.xtext_bootstrap)
-				if (requested.group == 'com.google.inject' && requested.name == 'guice')
-					useVersion(versions.guice)
 			}
 		}
 		exclude group: 'asm'

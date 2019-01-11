@@ -6,7 +6,7 @@ description = 'Additional services for the web integration of Xbase.'
 dependencies {
 	compile project(':org.eclipse.xtext.web')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
-	testCompile "junit:junit:$versions.junit"
+	testCompile 'junit:junit'
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	testCompile project(':org.eclipse.xtext.web.example.entities.ide')
 }
