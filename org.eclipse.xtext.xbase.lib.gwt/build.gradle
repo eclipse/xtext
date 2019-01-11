@@ -7,7 +7,7 @@ apply from: "${rootDir}/gradle/gwtProject.gradle"
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
 	prepareGwt project(path: ':org.eclipse.xtext.xbase.lib', configuration: 'sourceJar')
-	compile "com.google.guava:guava-gwt:$versions.guava"
+	compile "com.google.guava:guava-gwt"
 }
 
 jar {

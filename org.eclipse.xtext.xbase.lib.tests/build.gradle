@@ -3,9 +3,9 @@ group = 'org.eclipse.xtext'
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
 	compile project(':org.eclipse.xtend.lib')
-	compile "com.google.guava:guava:$versions.guava"
-	compile 'junit:junit:4.12'
-	compile "com.google.guava:guava-testlib:$versions.guava"
+	compile 'com.google.guava:guava'
+	compile 'junit:junit'
+	compile 'com.google.guava:guava-testlib'
 }
 
 jar {

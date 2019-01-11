@@ -32,3 +32,7 @@ gwt {
 test {
 	dependsOn compileGwt
 }
+
+tasks.withType(Javadoc) {
+	enabled = false
+}

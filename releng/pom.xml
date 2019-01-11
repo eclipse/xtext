@@ -85,6 +85,7 @@
 	</dependencies>
 
 	<modules>
+		<module>org.eclipse.xtext.dev-bom</module>
 		<module>releng-target</module>
 		<module>p2</module>
 		<module>org.eclipse.xtext.xbase.lib</module>
