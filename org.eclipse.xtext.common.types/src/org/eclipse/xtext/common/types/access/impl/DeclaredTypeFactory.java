@@ -50,7 +50,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	 */
 	private final ClassFileBytesAccess bytesAccess;
 	
-	private static final boolean ASM_AVAILABLE = isAsm5Available();
+	private static final boolean ASM_AVAILABLE = isAsm7Available();
 	
 	private final boolean useASM;
 
@@ -65,9 +65,9 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		this.useASM = useASM;
 	}
 
-	private static boolean isAsm5Available() {
+	private static boolean isAsm7Available() {
 		try {
-			if(Opcodes.class.getDeclaredField("ASM5") != null) 
+			if(Opcodes.class.getDeclaredField("ASM7") != null) 
 				return true;
 		} catch(NoClassDefFoundError e) {
 			logger.warn("--- xtext.common.types ---------------------------------------------------");
@@ -77,7 +77,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 			logger.warn("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
 		logger.warn("Please note that no information about compile time constants is available.");
-		logger.warn("It's recommended to use org.objectweb.asm 5.0.1 or better (Maven group id: org.ow2.asm).");
+		logger.warn("It's recommended to use org.objectweb.asm 7.0 or better (Maven group id: org.ow2.asm).");
 		logger.warn("--------------------------------------------------------------------------");
 		return false;
 	}
