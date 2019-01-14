@@ -133,7 +133,7 @@ First of all, locate the file *DomainmodelGenerator.xtend* in the package *org.e
     '''
     ```
 
-The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Now simply create a new source folder *src-gen* in that project and see how the compiler will pick up your sample *Entities* and generate Java code for them. 
+The final code generator is listed below. Now you can give it a try! Launch a new Eclipse Application (*Run As &rarr; Eclipse Application* on the Xtext project) and create a *dmodel* file in a Java Project. Eclipse will ask you to turn the Java project into an Xtext project then. Simply agree and create a new source folder *src-gen* in that project. Then you can see how the compiler will pick up your sample *Entities* and generate Java code for them. 
 
 ```xtend
 package org.example.domainmodel.generator
