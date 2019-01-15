@@ -5,9 +5,18 @@
 	<version>2.17.0-SNAPSHOT</version>
 	<artifactId>org.eclipse.xtext.example.domainmodel.parent</artifactId>
 	<packaging>pom</packaging>
-
+	<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.eclipse.xtext</groupId>
+                <artifactId>xtext-dev-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 	<properties>
-		<xtextVersion>${project.version}</xtextVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -106,7 +115,7 @@
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>${xtextVersion}</version>
+					<version>${project.version}</version>
 					<executions>
 						<execution>
 							<goals>
