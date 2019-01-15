@@ -140,35 +140,97 @@ Build jobs for releases must be executed in proper order on the build server, i.
 1. xtext-lib
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
+   * `releng/org.eclipse.xtext.dev-bom/pom.xml`: Set `version` property to the release version.
 1. xtext-core
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-lib/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-core/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-eclipse
-   * all right here
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-idea
    * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-xtend/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-web
    * `gradle/versions.gradle`: Set `version` property to the release version.
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-maven
    * Replace all occurrences of the -SNAPSHOT version with the release version.
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. xtext-xtend
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files
      * `maven-pom.xml`
      * `org.eclipse.xtend.maven.*/pom.xml`
      * `releng/org.eclipse.xtend.maven.parent/pom.xml`
-   * Jenkinsfile: Add `-Dit-archetype-tests-skip=true ` to `Maven Plugin Build` shell command
+   * `Jenkinsfile`: Add `-Dit-archetype-tests-skip=true ` to `Maven Plugin Build` shell command
+   * `Jenkinsfile`: Add upstream trigger into `properties` section:
+   ```
+		, pipelineTriggers([
+			upstream(
+				threshold: 'SUCCESS',
+				upstreamProjects: 'xtext-eclipse/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+			)
+		])
+	```
 1. Switch back to xtext-umbrella
    * `./gitAll commit -a -m "[release] version $XTEXT_VERSION"`
-1. Push changes to origin
-   * `./gitAll push origin $BRANCHNAME`
-1. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
 1. Create release tags on all repositories. Name `$TAGNAME` and commit message `release $TAGNAME`.
    * `./gitAll tag -a $TAGNAME -m "release $TAGNAME"`
-   * `./gitAll push origin $TAGNAME`
+1. Push changes to origin
+   * `./gitAll push --tags origin $BRANCHNAME`
+1. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
 1. Delete the release branches
    * `./gitAll branch -D $BRANCHNAME`
    * `./gitAll push --delete origin $BRANCHNAME`
@@ -187,6 +249,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Edit Contribution `Xtext, Xtend`
    * Change `location` property of the Mapped Repository to the release / milestone repository URL
    * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
+   * (Likely) Disable EMF Parsley contribution for M1 builds
 1. Publish websites
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
