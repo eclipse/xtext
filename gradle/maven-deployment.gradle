@@ -4,7 +4,7 @@
 
 // Configuration function for generated POMs
 def configurePom = { pom ->
-	pom.project {
+	pom {
 		if (project.hasProperty('title')) {
 			name = project.title
 			description = project.description
@@ -34,10 +34,46 @@ afterEvaluate {
 		group = 'Upload'
 		description = 'Create or update the local Maven repository'
 		configuration = configurations.archives
-		repositories.mavenDeployer {
-			repository(url: "file:" + file("${rootDir}/build/maven-repository"))
-			configurePom(pom)
+
+		publishing {
+			repositories {
+				maven {
+					url = "file:" + file("${rootDir}/build/maven-repository")
+				}
+				publications {
+					mavenJava(MavenPublication) {
+						from components.java
+						artifact sourcesJar
+						
+						if (! project.name.endsWith("tests")) {
+							artifact javadocJar
+						}
+					
+						pom {
+							if (project.hasProperty('title')) {
+								name = project.title
+								description = project.description
+							}
+							packaging = 'jar'
+							url = 'https://www.eclipse.org/Xtext/'
+							licenses {
+								license {
+									name = 'Eclipse Public License, Version 1.0'
+									url = 'http://www.eclipse.org/legal/epl-v10.html'
+								}
+							}
+							scm {
+								connection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+								developerConnection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+								url = "git@github.com:eclipse/${rootProject.name}.git"
+							}
+							apply from: "${rootDir}/gradle/developers.gradle", to: pom
+						}
+					}
+				}
+			}
 		}
+
 	}
 	
 }
