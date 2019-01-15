@@ -17,6 +17,7 @@
 		<antlr-runtime-version>3.2</antlr-runtime-version>
 		<args4j-version>2.33</args4j-version>
 		<asm-version>7.0</asm-version>
+		
 		<error_prone_annotations-version>2.0.15</error_prone_annotations-version>
 		<guava-version>[14.0,22.0)</guava-version>
 		<guice-version>3.0</guice-version>
@@ -132,7 +133,17 @@
 			</dependency>
 			<dependency>
 				<groupId>org.ow2.asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>${asm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ow2.asm</groupId>
 				<artifactId>asm-commons</artifactId>
+				<version>${asm-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ow2.asm</groupId>
+				<artifactId>asm-tree</artifactId>
 				<version>${asm-version}</version>
 			</dependency>
 			<!-- Eclipse Platform -->
