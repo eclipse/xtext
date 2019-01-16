@@ -6,16 +6,16 @@
 	<artifactId>org.eclipse.xtext.example.domainmodel.parent</artifactId>
 	<packaging>pom</packaging>
 	<dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.eclipse.xtext</groupId>
-                <artifactId>xtext-dev-bom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
