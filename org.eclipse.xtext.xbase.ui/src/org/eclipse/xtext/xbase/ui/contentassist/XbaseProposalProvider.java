@@ -145,7 +145,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	private TypeReferences typeReferences;
 	
 	@Inject
-	IQualifiedNameConverter qualifiedNameConverter;
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	protected class XbaseProposalCreator extends DefaultProposalCreator {
 		
@@ -825,7 +825,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					Iterable<IEObjectDescription> scopedFeatures = Iterables.transform(featuresToImport, new Function<JvmFeature,IEObjectDescription>() {
 						@Override
 						public IEObjectDescription apply(JvmFeature feature) {
-							return new StaticFeatureDescription(qualifiedNameConverter.toQualifiedName(feature.getSimpleName()), feature, 0, true);
+							return new StaticFeatureDescription(QualifiedName.create(feature.getSimpleName()), feature, 0, true);
 						}
 					});
 					// Scope for all static features
