@@ -198,7 +198,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("compile platform (\"org.eclipse.xtext:xtext-dev-bom:");
+      _builder.append("compile platform(\"org.eclipse.xtext:xtext-dev-bom:");
       XtextVersion _xtextVersion_1 = this.getConfig().getXtextVersion();
       _builder.append(_xtextVersion_1, "\t\t");
       _builder.append("\")");
