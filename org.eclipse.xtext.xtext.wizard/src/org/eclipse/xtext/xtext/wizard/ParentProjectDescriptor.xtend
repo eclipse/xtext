@@ -53,7 +53,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		if (config.needsGradleBuild) {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
 			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
-			files += file(Outlet.ROOT, 'gradle/maven-deployment.gradle', mavenDeploymentGradle)
 			if(config.needsGradleWrapper) {
 				files += file(Outlet.ROOT, 'gradlew', loadResource("gradlew/gradlew"), true)
 				files += file(Outlet.ROOT, 'gradlew.bat', loadResource("gradlew/gradlew.bat"))
@@ -106,7 +105,6 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 
 					apply plugin: 'org.xtext.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
-					apply from: "${rootDir}/gradle/maven-deployment.gradle"
 					apply plugin: 'eclipse'
 					
 					group = '«config.baseName»'
@@ -194,19 +192,10 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 	'''
 	
-	def mavenDeploymentGradle() '''
-		//see https://docs.gradle.org/current/userguide/maven_plugin.html
-		apply plugin: 'maven'
-		
-		uploadArchives {
-			repositories {
-				mavenDeployer {
-					repository(url: "file://${buildDir}/localRepo")
-					snapshotRepository(url: "file://${buildDir}/localRepo")
-				}
-			}
-		}
-	'''
+	@Deprecated
+	def CharSequence mavenDeploymentGradle() {
+		throw new UnsupportedOperationException("Removed with 2.17")
+	}
 
 	override pom() {
 		super.pom => [
