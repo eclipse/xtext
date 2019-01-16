@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope
 import org.eclipse.jdt.ui.JavaUI
 import org.eclipse.jdt.ui.PreferenceConstants
 import org.junit.Test
+import org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -89,7 +90,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	def void testStaticFavoriteImports_operation(){
 		
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
 		
 		newBuilder.append('''
 			package mypack
@@ -110,7 +111,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	def void testStaticFavoriteImports_field(){
 		
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
 		
 		newBuilder.append('''
 			package mypack
@@ -131,7 +132,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	def void testStaticFavoriteImports_no_constructor(){
 		
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 		
 		newBuilder.append('''
 			package mypack
@@ -144,7 +145,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	def void testStaticFavoriteImports_field_No_additional_import(){
 		
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 		
 		newBuilder.append('''
 			package mypack
@@ -167,7 +168,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	def void testStaticFavoriteImports_No_additional_import(){
 		
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 		
 		newBuilder.append('''
 			package mypack

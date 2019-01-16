@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
+import org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -128,7 +129,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   public void testStaticFavoriteImports_operation() {
     try {
       final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
-      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*");
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
@@ -162,7 +165,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   public void testStaticFavoriteImports_field() {
     try {
       final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
-      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*");
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
@@ -196,7 +201,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   public void testStaticFavoriteImports_no_constructor() {
     try {
       final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
-      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*");
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
@@ -218,7 +225,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   public void testStaticFavoriteImports_field_No_additional_import() {
     try {
       final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
-      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*");
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
@@ -258,7 +267,9 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
   public void testStaticFavoriteImports_No_additional_import() {
     try {
       final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
-      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*");
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package mypack");
