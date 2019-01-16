@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -52,6 +53,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -235,6 +237,20 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 					});
 		}
+	}
+	
+	@Fix(IssueCodes.UNUSED_LOCAL_VARIABLE)
+	public void removeUnusedLocalVariable(final Issue issue, IssueResolutionAcceptor acceptor) {
+		// use the same label, description and image
+		// to be able to use the quickfixes (issue resolution) in batch mode
+		String label = "Remove local variable.";
+		String description = "Remove the unused local variable.";
+		String image = "delete_edit.png";
+		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XVariableDeclaration>) (element, ctx) -> {
+			ctx.setUpdateCrossReferences(false);
+			ctx.setUpdateRelatedFiles(false);
+			ctx.addModification(element, ele -> EcoreUtil.remove(ele));
+		});
 	}
 
 	private void addTypeCastToExplicitReceiver(XAbstractFeatureCall featureCall, IModificationContext context,
