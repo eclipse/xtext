@@ -44,35 +44,35 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	}
 	
 	@Override
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+	public synchronized void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (logging) {
 			invocationCount++;
 			this.context = context;
 		}
 	}
 	
-	public int getInvocationCount() {
+	public synchronized int getInvocationCount() {
 		return invocationCount;
 	}
 	
-	public IBuildContext getContext() {
+	public synchronized IBuildContext getContext() {
 		return context;
 	}
 	
-	public void startLogging() {
+	public synchronized void startLogging() {
 		logging = true;
 	}
 	
-	public void stopLogging() {
+	public synchronized void stopLogging() {
 		reset();
 		logging = false;
 	}
 	
-	public boolean isLogging() {
+	public synchronized boolean isLogging() {
 		return logging;
 	}
 	
-	public void reset() {
+	public synchronized void reset() {
 		invocationCount = 0;
 		context = null;
 	}
