@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -24,12 +25,16 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -42,8 +47,11 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
@@ -59,18 +67,23 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
+import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider.FQNImporter;
+import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -127,6 +140,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private SyntaxFilteredScopes syntaxFilteredScopes;
+	
+	@Inject
+	private TypeReferences typeReferences;
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	protected class XbaseProposalCreator extends DefaultProposalCreator {
 		
@@ -766,10 +785,84 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		// TODO use the type name information
 		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
 //		System.out.printf("XbaseProposalProvider.proposeDeclaringTypeForStaticInvocation = %d\n", System.currentTimeMillis() - time);
+		createFavoriteStaticFeature(context, contentAssistContext, acceptor, proposalFactory);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	protected void createFavoriteStaticFeature(
+			EObject context,ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, 
+			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+		// Favorite proposals coming from JDT - https://github.com/eclipse/xtext-xtend/issues/677
+		String pref= PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
+		String[] favourites= pref.split(";"); //$NON-NLS-1$
+		for(String fav : favourites) {
+			String typeName = fav.substring(0, fav.lastIndexOf("."));
+			JvmType type = typeReferences.findDeclaredType(typeName, context);
+			if(type != null) {
+				if(type instanceof JvmDeclaredType) {
+					JvmDeclaredType genericType = (JvmDeclaredType) type;
+					// All features but no Constructor
+					Iterable<JvmFeature> featuresToImport = Iterables.filter(Iterables.filter(genericType.getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
+						@Override
+						public boolean apply(JvmFeature input) {
+							return !(input instanceof JvmConstructor);
+						}
+					});
+					if(context != null) {
+						// Make sure that already imported static features are not proposed
+						RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context.eResource());
+						featuresToImport = Iterables.filter(featuresToImport, new Predicate<JvmFeature>() {
+							@Override
+							public boolean apply(JvmFeature input) {
+								return !importSection.hasStaticImport(input.getSimpleName(), false);
+							}
+						});
+					}
+					// Create StaticFeatureDescription instead of SimpleIdentifiableElementDescription since we want the Proposal to show parameters
+					Iterable<IEObjectDescription> scopedFeatures = Iterables.transform(featuresToImport, new Function<JvmFeature,IEObjectDescription>() {
+						@Override
+						public IEObjectDescription apply(JvmFeature feature) {
+							return new StaticFeatureDescription(QualifiedName.create(feature.getSimpleName()), feature, 0, true);
+						}
+					});
+					// Scope for all static features
+					IScope staticMemberScope = new SimpleScope(IScope.NULLSCOPE, scopedFeatures);
+					IReplacementTextApplier textApplier =  new FQNImporter(contentAssistContext.getResource(), contentAssistContext.getViewer(), staticMemberScope, qualifiedNameConverter,
+							qualifiedNameValueConverter, importSectionFactory, replaceConverter);
+					Function<IEObjectDescription, ICompletionProposal> importAddingProposalFactory = new Function<IEObjectDescription, ICompletionProposal>() {
+						@Override
+						public ICompletionProposal apply(IEObjectDescription input) {
+							ICompletionProposal proposal = proposalFactory.apply(input);
+							if(proposal instanceof ConfigurableCompletionProposal) {
+								ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
+								// Add textApplier to introduce imports if necessary
+								((ConfigurableCompletionProposal) proposal).setTextApplier(textApplier);
+								return castedProposal;
+							}
+							return proposal;
+						}
+					};
+					getCrossReferenceProposalCreator().lookupCrossReference(staticMemberScope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor,getFeatureDescriptionPredicate(contentAssistContext),importAddingProposalFactory);
+				}
+			}
+		}
 	}
 
+	@Inject
+	private RewritableImportSection.Factory importSectionFactory;
+	
+	@Inject
+	private ReplaceConverter replaceConverter;
+	
 	protected String getFeatureCallRuleName() {
 		return "IdOrSuper";
+	}
+	
+	protected String getQualifiedNameRuleName() {
+		return "QualifiedName";
 	}
 	
 	/**
