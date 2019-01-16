@@ -7,7 +7,12 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
+import org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -115,6 +120,186 @@ public class XImportSectionContentAssistTest extends AbstractXtendContentAssistB
       _builder.newLine();
       _builder.append("class Bar {}");
       _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("default", "default".length(), "defaultStaticMethod", "defaultStaticField");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticFavoriteImports_operation() {
+    try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.append("class Bar{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo(){");
+      _builder.newLine();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).applyProposal("staticMethod()");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Bar{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo(){");
+      _builder_1.newLine();
+      _builder_1.append("staticMethod()");
+      _applyProposal.expectContent(_builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticFavoriteImports_field() {
+    try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.append("class Bar{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo(){");
+      _builder.newLine();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).applyProposal("STATICFIELD");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Bar{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo(){");
+      _builder_1.newLine();
+      _builder_1.append("STATICFIELD");
+      _applyProposal.expectContent(_builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticFavoriteImports_no_constructor() {
+    try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.append("class Bar{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo(){");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<|>");
+      _newBuilder.append(_builder.toString()).assertNoProposalAtCursor("StaticClassExample");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticFavoriteImports_field_No_additional_import() {
+    try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.append("class Bar{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo(){");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("STATICFIELD");
+      _builder.newLine();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).applyProposal("STATICFIELD");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Bar{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo(){");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("STATICFIELD");
+      _builder_1.newLine();
+      _builder_1.append("STATICFIELD");
+      _applyProposal.expectContent(_builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticFavoriteImports_No_additional_import() {
+    try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      String _name = StaticClassExample.class.getName();
+      String _plus = (_name + ".*");
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, _plus);
+      ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.append("class Bar{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo(){");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("staticMethod()");
+      _builder.newLine();
+      ContentAssistProcessorTestBuilder _applyProposal = _newBuilder.append(_builder.toString()).applyProposal("staticMethod()");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Bar{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo(){");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("staticMethod()");
+      _builder_1.newLine();
+      _builder_1.append("staticMethod()");
+      _applyProposal.expectContent(_builder_1.toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
