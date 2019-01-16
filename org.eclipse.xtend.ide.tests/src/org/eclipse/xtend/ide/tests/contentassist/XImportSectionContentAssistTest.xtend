@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist
 
-import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest
+import org.eclipse.core.runtime.preferences.InstanceScope
+import org.eclipse.jdt.ui.JavaUI
+import org.eclipse.jdt.ui.PreferenceConstants
 import org.junit.Test
 
 /**
@@ -81,6 +83,108 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 			
 			class Bar {}''')
 		.assertTextAtCursorPosition("default", "default".length, "defaultStaticMethod", "defaultStaticField")
+	}
+	
+	@Test 
+	def void testStaticFavoriteImports_operation(){
+		
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		
+		newBuilder.append('''
+			package mypack
+			class Bar{
+				def void foo(){
+					''')
+		.applyProposal("staticMethod()")
+		.expectContent('''
+			package mypack
+			
+			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
+			
+			class Bar{
+				def void foo(){
+			staticMethod()''')
+	}
+	@Test 
+	def void testStaticFavoriteImports_field(){
+		
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		
+		newBuilder.append('''
+			package mypack
+			class Bar{
+				def void foo(){
+					''')
+		.applyProposal("STATICFIELD")
+		.expectContent('''
+			package mypack
+			
+			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
+			
+			class Bar{
+				def void foo(){
+			STATICFIELD''')
+	}
+	@Test 
+	def void testStaticFavoriteImports_no_constructor(){
+		
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		
+		newBuilder.append('''
+			package mypack
+			class Bar{
+				def void foo(){
+					<|>''')
+		.assertNoProposalAtCursor("StaticClassExample")
+	}
+	@Test 
+	def void testStaticFavoriteImports_field_No_additional_import(){
+		
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		
+		newBuilder.append('''
+			package mypack
+			class Bar{
+				def void foo(){
+					STATICFIELD
+					''')
+		.applyProposal("STATICFIELD")
+		.expectContent('''
+			package mypack
+			
+			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
+			
+			class Bar{
+				def void foo(){
+					STATICFIELD
+			STATICFIELD''')
+	}
+	@Test 
+	def void testStaticFavoriteImports_No_additional_import(){
+		
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.*")
+		
+		newBuilder.append('''
+			package mypack
+			class Bar{
+				def void foo(){
+					staticMethod()
+					''')
+		.applyProposal("staticMethod()")
+		.expectContent('''
+			package mypack
+			
+			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
+			
+			class Bar{
+				def void foo(){
+					staticMethod()
+			staticMethod()''')
 	}
 	
 }
