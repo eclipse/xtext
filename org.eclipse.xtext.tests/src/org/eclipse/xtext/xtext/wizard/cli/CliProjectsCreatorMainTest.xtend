@@ -48,7 +48,6 @@ class CliProjectsCreatorMainTest {
 			"org.xtext.example.mydsl.parent/gradlew",
 			"org.xtext.example.mydsl.parent/gradlew.bat",
 			"org.xtext.example.mydsl.parent/settings.gradle",
-			"org.xtext.example.mydsl.parent/gradle/maven-deployment.gradle",
 			"org.xtext.example.mydsl.parent/gradle/source-layout.gradle",
 			"org.xtext.example.mydsl.parent/gradle/wrapper/gradle-wrapper.jar",
 			"org.xtext.example.mydsl.parent/gradle/wrapper/gradle-wrapper.properties"

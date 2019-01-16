@@ -95,16 +95,14 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       files.add(_file);
       PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/source-layout.gradle", this.sourceLayoutGradle());
       files.add(_file_1);
-      PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradle/maven-deployment.gradle", this.mavenDeploymentGradle());
-      files.add(_file_2);
       boolean _isNeedsGradleWrapper = this.getConfig().isNeedsGradleWrapper();
       if (_isNeedsGradleWrapper) {
-        PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew", this.loadResource("gradlew/gradlew"), true);
+        PlainTextFile _file_2 = this.file(Outlet.ROOT, "gradlew", this.loadResource("gradlew/gradlew"), true);
+        files.add(_file_2);
+        PlainTextFile _file_3 = this.file(Outlet.ROOT, "gradlew.bat", this.loadResource("gradlew/gradlew.bat"));
         files.add(_file_3);
-        PlainTextFile _file_4 = this.file(Outlet.ROOT, "gradlew.bat", this.loadResource("gradlew/gradlew.bat"));
+        PlainTextFile _file_4 = this.file(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.properties", this.loadResource("gradlew/gradle-wrapper.properties"));
         files.add(_file_4);
-        PlainTextFile _file_5 = this.file(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.properties", this.loadResource("gradlew/gradle-wrapper.properties"));
-        files.add(_file_5);
         BinaryFile _binaryFile = this.binaryFile(Outlet.ROOT, "gradle/wrapper/gradle-wrapper.jar", this.getClass().getClassLoader().getResource("gradlew/gradle-wrapper.jar"));
         files.add(_binaryFile);
       }
@@ -153,9 +151,6 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append(_xtextGradlePluginVersion, "\t\t");
       _builder.append("\'");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("classpath \'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE\'");
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
@@ -200,34 +195,23 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("apply plugin: \'java\'");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("apply plugin: \'io.spring.dependency-management\'");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("dependencyManagement {");
+      _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("imports {");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("mavenBom \"org.eclipse.xtext:xtext-dev-bom:");
+      _builder.append("compile platform(\"org.eclipse.xtext:xtext-dev-bom:");
       XtextVersion _xtextVersion_1 = this.getConfig().getXtextVersion();
-      _builder.append(_xtextVersion_1, "\t\t\t");
-      _builder.append("\"");
+      _builder.append(_xtextVersion_1, "\t\t");
+      _builder.append("\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("}");
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("\t");
       _builder.append("apply plugin: \'org.xtext.xtend\'");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("apply from: \"${rootDir}/gradle/maven-deployment.gradle\"");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("apply plugin: \'eclipse\'");
@@ -538,36 +522,9 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     return _builder;
   }
   
+  @Deprecated
   public CharSequence mavenDeploymentGradle() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//see https://docs.gradle.org/current/userguide/maven_plugin.html");
-    _builder.newLine();
-    _builder.append("apply plugin: \'maven\'");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("uploadArchives {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("repositories {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("mavenDeployer {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("repository(url: \"file://${buildDir}/localRepo\")");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("snapshotRepository(url: \"file://${buildDir}/localRepo\")");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    throw new UnsupportedOperationException("Removed with 2.17");
   }
   
   @Override
