@@ -29,6 +29,7 @@ import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -108,19 +109,18 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					return;
 				}
 			}
-
+			String typeNameInScope = typeName;
+			// ReplacementString might have brackets if it's a JVMExecutable
+			int indexOfBracket = typeName.lastIndexOf("(");
+			if(indexOfBracket > -1) {
+				typeNameInScope = typeName.substring(0, indexOfBracket);
+			}
+			QualifiedName qualifiedNameInScope = qualifiedNameConverter.toQualifiedName(typeNameInScope);
 			// we could create an import statement if there is no conflict
 			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(typeName);
-			if (qualifiedName.getSegmentCount() == 1) {
-				// type resides in default package - no need to hassle with imports
-				proposal.setCursorPosition(proposalReplacementString.length());
-				document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
-						proposalReplacementString);
-				return;
-			}
-			IEObjectDescription description = scope.getSingleElement(qualifiedName.skipFirst(qualifiedName
+			IEObjectDescription description = scope.getSingleElement(qualifiedNameInScope.skipFirst(qualifiedNameInScope
 					.getSegmentCount() - 1));
-			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedName);
+			IEObjectDescription typeToImport = scope.getSingleElement(qualifiedNameInScope);
 			if (description != null) {
 				if (typeToImport != null && !description.getEObjectURI().equals(typeToImport.getEObjectURI())) {
 					// there exists a conflict - insert fully qualified name
@@ -151,9 +151,20 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				return;
 			}
 			EObject resolved = EcoreUtil.resolve(typeToImport.getEObjectOrProxy(), context);
-			Assert.isTrue(!resolved.eIsProxy() && resolved instanceof JvmDeclaredType);
-			importSection.addImport((JvmDeclaredType) resolved);
-			
+			// In case we want to import a static JvmFeature - https://github.com/eclipse/xtext-xtend/issues/677
+			if(resolved instanceof JvmFeature) {
+				JvmFeature operation = (JvmFeature) resolved;
+				if(operation.isStatic()) {
+					EObject container = operation.eContainer();
+					if(container instanceof JvmDeclaredType) {
+						JvmDeclaredType type = (JvmDeclaredType) container;
+						importSection.addStaticImport(type.getQualifiedName(), operation.getSimpleName());
+					}
+				}
+			} else {
+				Assert.isTrue(!resolved.eIsProxy() && resolved instanceof JvmDeclaredType);
+				importSection.addImport((JvmDeclaredType) resolved);
+			}
 			DocumentRewriteSession rewriteSession = null;
 			try {
 				if (document instanceof IDocumentExtension4) {
@@ -162,10 +173,18 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 				}
 				// apply short proposal
 				String escapedShortname = shortName;
-				if (valueConverter != null) {
-					escapedShortname = valueConverter.toString(shortName);
+				
+				if(indexOfBracket > -1) {
+					if (valueConverter != null) {
+						escapedShortname = valueConverter.toString(typeNameInScope) + shortName.substring(indexOfBracket);
+					}
+					proposal.setCursorPosition(escapedShortname.length()-1);
+				} else {
+					if (valueConverter != null) {
+						escapedShortname = valueConverter.toString(shortName);
+					}
+					proposal.setCursorPosition(escapedShortname.length());
 				}
-				proposal.setCursorPosition(escapedShortname.length());
 				int initialCursorLine = document.getLineOfOffset(proposal.getReplacementOffset());
 				ReplaceEdit replaceEdit = new ReplaceEdit(proposal.getReplacementOffset(), proposal.getReplacementLength(), escapedShortname);
 
@@ -181,10 +200,11 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					textEdit = replaceEdit;
 				}
 				textEdit.apply(document);
-				
-				int cursorPosition = proposal.getCursorPosition() + replaceConverter.getReplaceLengthDelta(importChanges, proposal.getReplacementOffset());
-				proposal.setCursorPosition(cursorPosition);
-				int newCursorLine = document.getLineOfOffset(cursorPosition);
+				// delta caused by the newly introduced imports
+				int deltaLength = replaceConverter.getReplaceLengthDelta(importChanges, proposal.getSelectionStart());
+				// shift offset by deltaLength
+				proposal.shiftOffset(deltaLength);
+				int newCursorLine = document.getLineOfOffset(proposal.getCursorPosition());
 
 				// set the pixel coordinates
 				if (widget != null) {

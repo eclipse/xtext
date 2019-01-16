@@ -42,13 +42,13 @@ public class ParameterContextInformation implements ISmartContextInformation {
 	private final String contextDisplayString;
 	private int parameterListOffset;
 	private int currentParameter = -1;
-	private int initialCarretOffset;
+	private int initialCaretOffset;
 
 	public ParameterContextInformation(ParameterData data, String contextDisplayString, int parameterListOffset, int initialCarretOffset) {
 		this.data = data;
 		this.contextDisplayString = contextDisplayString;
 		this.parameterListOffset = parameterListOffset;
-		this.initialCarretOffset = initialCarretOffset;
+		this.initialCaretOffset = initialCarretOffset;
 	}
 
 	@Override
@@ -91,7 +91,12 @@ public class ParameterContextInformation implements ISmartContextInformation {
 
 	@Override
 	public int getContextInformationPosition() {
-		return initialCarretOffset;
+		return initialCaretOffset;
+	}
+
+	@Override
+	public void setContextInformationPosition(int pos) {
+		this.initialCaretOffset = pos;
 	}
 
 	@Override

@@ -34,4 +34,9 @@ public interface ISmartContextInformation extends IContextInformation, IContextI
 	 */
 	boolean updatePresentation(ITextViewer viewer, int offset, TextPresentation presentation);
 	
+	/**
+	 * @since 2.17
+	 */
+	void setContextInformationPosition(int pos);
+	
 }

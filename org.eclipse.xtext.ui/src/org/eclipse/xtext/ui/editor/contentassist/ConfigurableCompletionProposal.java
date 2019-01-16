@@ -347,6 +347,15 @@ public class ConfigurableCompletionProposal implements
 		this.selectionStart = selectionStart;
 	}
 	
+	public void shiftOffset(int deltaLength) {
+		this.cursorPosition = this.cursorPosition + deltaLength;
+		this.selectionStart = this.selectionStart + deltaLength;
+		if (this.contextInformation instanceof ISmartContextInformation) {
+			ISmartContextInformation casted = (ISmartContextInformation) contextInformation;
+			casted.setContextInformationPosition(casted.getContextInformationPosition() + deltaLength);
+		}
+	}
+	
 	public void setSimpleLinkedMode(ITextViewer viewer, char... exitChars) {
 		this.linkedMode = true;
 		this.viewer = viewer;
