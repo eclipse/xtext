@@ -347,6 +347,9 @@ public class ConfigurableCompletionProposal implements
 		this.selectionStart = selectionStart;
 	}
 	
+	/**
+	 * @since 2.17
+	 */
 	public void shiftOffset(int deltaLength) {
 		this.cursorPosition = this.cursorPosition + deltaLength;
 		this.selectionStart = this.selectionStart + deltaLength;
