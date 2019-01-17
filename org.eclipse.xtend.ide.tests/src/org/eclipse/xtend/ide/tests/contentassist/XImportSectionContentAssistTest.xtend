@@ -88,104 +88,131 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 	
 	@Test 
 	def void testStaticFavoriteImports_operation(){
-		
+		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
-		
-		newBuilder.append('''
-			package mypack
-			class Bar{
-				def void foo(){
-					''')
-		.applyProposal("staticMethod()")
-		.expectContent('''
-			package mypack
+		try {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 			
-			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
-			
-			class Bar{
-				def void foo(){
-			staticMethod()''')
+			newBuilder.append('''
+				package mypack
+				class Bar{
+					def void foo(){
+						''')
+			.applyProposal("staticMethod()")
+			.expectContent('''
+				package mypack
+				
+				import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
+				
+				class Bar{
+					def void foo(){
+				staticMethod()''')
+				
+		} finally {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
+		}
 	}
 	@Test 
 	def void testStaticFavoriteImports_field(){
 		
+		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
-		
-		newBuilder.append('''
-			package mypack
-			class Bar{
-				def void foo(){
-					''')
-		.applyProposal("STATICFIELD")
-		.expectContent('''
-			package mypack
+		try {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
 			
-			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
-			
-			class Bar{
-				def void foo(){
-			STATICFIELD''')
+			newBuilder.append('''
+				package mypack
+				class Bar{
+					def void foo(){
+						''')
+			.applyProposal("STATICFIELD")
+			.expectContent('''
+				package mypack
+				
+				import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
+				
+				class Bar{
+					def void foo(){
+				STATICFIELD''')
+				
+		} finally {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
+		}
 	}
 	@Test 
 	def void testStaticFavoriteImports_no_constructor(){
 		
+		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
-		
-		newBuilder.append('''
-			package mypack
-			class Bar{
-				def void foo(){
-					<|>''')
-		.assertNoProposalAtCursor("StaticClassExample")
+		try {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
+			
+			newBuilder.append('''
+				package mypack
+				class Bar{
+					def void foo(){
+						<|>''')
+			.assertNoProposalAtCursor("StaticClassExample")
+		} finally {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
+		}
 	}
 	@Test 
 	def void testStaticFavoriteImports_field_No_additional_import(){
 		
+		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
-		
-		newBuilder.append('''
-			package mypack
-			class Bar{
-				def void foo(){
-					STATICFIELD
-					''')
-		.applyProposal("STATICFIELD")
-		.expectContent('''
-			package mypack
+		try {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 			
-			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
-			
-			class Bar{
-				def void foo(){
-					STATICFIELD
-			STATICFIELD''')
+			newBuilder.append('''
+				package mypack
+				class Bar{
+					def void foo(){
+						STATICFIELD
+						''')
+			.applyProposal("STATICFIELD")
+			.expectContent('''
+				package mypack
+				
+				import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.STATICFIELD
+				
+				class Bar{
+					def void foo(){
+						STATICFIELD
+				STATICFIELD''')
+		} finally {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
+		}
 	}
 	@Test 
 	def void testStaticFavoriteImports_No_additional_import(){
 		
+		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
-		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
-		
-		newBuilder.append('''
-			package mypack
-			class Bar{
-				def void foo(){
-					staticMethod()
-					''')
-		.applyProposal("staticMethod()")
-		.expectContent('''
-			package mypack
+		try {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 			
-			import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
-			
-			class Bar{
-				def void foo(){
-					staticMethod()
-			staticMethod()''')
+			newBuilder.append('''
+				package mypack
+				class Bar{
+					def void foo(){
+						staticMethod()
+						''')
+			.applyProposal("staticMethod()")
+			.expectContent('''
+				package mypack
+				
+				import static org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample.staticMethod
+				
+				class Bar{
+					def void foo(){
+						staticMethod()
+				staticMethod()''')
+				
+		} finally {
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
+		}
 	}
 	
 }
