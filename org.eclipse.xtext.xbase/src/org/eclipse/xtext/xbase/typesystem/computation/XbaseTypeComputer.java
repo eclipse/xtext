@@ -14,11 +14,13 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -929,7 +931,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		ITypeComputationState expressionState = state.withExpectation(state.getReferenceOwner().newReferenceToObject());
 		expressionState.computeTypes(object.getExpression());
 		JvmTypeReference type = object.getType();
-		if (type != null && type.getType() instanceof JvmTypeParameter) {
+		if (isReferenceToTypeParameter(type)) {
 			LightweightTypeReference lightweightReference = state.getReferenceOwner().toLightweightTypeReference(type);
 			LightweightTypeReference rawTypeRef = lightweightReference.getRawTypeReference();
 			state.addDiagnostic(new EObjectDiagnosticImpl(
@@ -944,6 +946,18 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		}
 		LightweightTypeReference bool = getRawTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
+	}
+
+	private boolean isReferenceToTypeParameter(JvmTypeReference type) {
+		if (type != null) {
+			if (type.getType() instanceof JvmTypeParameter) {
+				return true;
+			}
+			if (type instanceof JvmGenericArrayTypeReference) {
+				return isReferenceToTypeParameter(((JvmGenericArrayTypeReference) type).getComponentType());
+			}
+		}
+		return false;
 	}
 
 	protected void _computeTypes(XThrowExpression object, ITypeComputationState state) {

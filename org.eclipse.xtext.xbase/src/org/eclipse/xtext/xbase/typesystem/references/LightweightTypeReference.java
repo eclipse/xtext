@@ -279,15 +279,36 @@ public abstract class LightweightTypeReference {
 		return getServices().getRawTypeHelper().getRawTypeReference(this, getOwner().getContextResourceSet());
 	}
 	
+	/**
+	 * Returns the upper bound of this reference. The upper bound of a wildcard reference is its upper constraint,
+	 * e.g. <code>? extends CharSequence</code> has the upper bound <code>CharSequence</code>.
+	 */
 	public LightweightTypeReference getUpperBoundSubstitute() {
 		return this;
 	}
 	
+	/**
+	 * Returns the lower bound of this reference. The lower bound of a wildcard reference is its lower constraint,
+	 * e.g. <code>? super CharSequence</code> has the upper bound <code>CharSequence</code>.
+	 */
 	public LightweightTypeReference getLowerBoundSubstitute() {
 		return this;
 	}
 	
+	/**
+	 * Returns the invariant bound of this reference. The invariant bound of a wildcard reference is its lower constraint,
+	 * if any. Otherwise it's the upper bound.
+	 */
 	public LightweightTypeReference getInvariantBoundSubstitute() {
+		return this;
+	}
+	
+	/**
+	 * Returns the constraint type of this reference. The constraint of a type parameter is its declared super type.
+	 * <code>T extends CharSequence & Serializable</code> has a compound constraint substitute of the form
+	 * <code>CharSequence & Serializable</code>.
+	 */
+	public LightweightTypeReference getConstraintSubstitute() {
 		return this;
 	}
 	

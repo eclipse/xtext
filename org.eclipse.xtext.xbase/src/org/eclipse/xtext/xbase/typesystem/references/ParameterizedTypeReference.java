@@ -106,6 +106,23 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getConstraintSubstitute() {
+		if (type.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+			List<LightweightTypeReference> superTypes = getSuperTypes();
+			if (superTypes.size() == 1) {
+				return superTypes.get(0).getConstraintSubstitute();
+			} else {
+				CompoundTypeReference compoundTypeReference = getOwner().newCompoundTypeReference(false);
+				for(LightweightTypeReference superType: superTypes) {
+					compoundTypeReference.addComponent(superType.getConstraintSubstitute());	
+				}
+				return compoundTypeReference;
+			}
+		}
+		return this;
+	}
+	
+	@Override
 	public List<JvmType> getRawTypes() {
 		if (type.eClass() != TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 			return Collections.singletonList(type);

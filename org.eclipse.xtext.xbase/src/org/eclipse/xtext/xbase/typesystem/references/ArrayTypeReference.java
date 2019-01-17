@@ -184,6 +184,15 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getConstraintSubstitute() {
+		LightweightTypeReference rawComponent = component.getConstraintSubstitute();
+		if (rawComponent == component) {
+			return this;
+		}
+		return getOwner().newArrayTypeReference(rawComponent);
+	}
+	
+	@Override
 	public boolean isOwnedBy(ITypeReferenceOwner owner) {
 		return super.isOwnedBy(owner) && component.isOwnedBy(owner);
 	}

@@ -251,6 +251,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return super.getInvariantBoundSubstitute();
 	}
 	
+	@Override
+	public LightweightTypeReference getConstraintSubstitute() {
+		if (internalGetResolvedTo() != null)
+			return resolvedTo.getConstraintSubstitute();
+		return super.getConstraintSubstitute();
+	}
+	
 	/**
 	 * Force this reference to be resolved. If not hints are available,
 	 * the reference is resolved to the constraints of the type parameters.
