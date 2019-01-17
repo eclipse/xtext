@@ -91,7 +91,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 		val defaultprefs = PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
 		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
 		try {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,StaticClassExample.name + ".*")
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, StaticClassExample.name + ".*")
 			
 			newBuilder.append('''
 				package mypack
@@ -109,7 +109,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 				staticMethod()''')
 				
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	@Test 
@@ -136,7 +136,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 				STATICFIELD''')
 				
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	@Test 
@@ -154,7 +154,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 						<|>''')
 			.assertNoProposalAtCursor("StaticClassExample")
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	@Test 
@@ -182,7 +182,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 						STATICFIELD
 				STATICFIELD''')
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	@Test 
@@ -211,7 +211,7 @@ class XImportSectionContentAssistTest extends AbstractXtendContentAssistBugTest 
 				staticMethod()''')
 				
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	

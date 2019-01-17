@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.preferences.InstanceScope
 import org.eclipse.jdt.ui.JavaUI
 import org.eclipse.jdt.ui.PreferenceConstants
 import org.eclipse.jface.text.contentassist.ICompletionProposal
-import org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample
 import org.junit.Test
 
 /**
@@ -60,7 +59,7 @@ class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTest {
 			proposals.next.assertContains("aStaticMethod")
 		
 		} finally {
-			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,defaultprefs)
+			jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, defaultprefs)
 		}
 	}
 	
