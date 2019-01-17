@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist
 
-import org.junit.Test
+import org.eclipse.core.runtime.preferences.InstanceScope
+import org.eclipse.jdt.ui.JavaUI
+import org.eclipse.jdt.ui.PreferenceConstants
 import org.eclipse.jface.text.contentassist.ICompletionProposal
+import org.eclipse.xtend.ide.tests.data.contentassist.StaticClassExample
+import org.junit.Test
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -16,6 +20,9 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal
 class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTest {
 	
 	@Test def void testPriorities() {
+		// Switch of static favorites since they would appear here, too.
+		val jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN)
+		jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS,"")
 		val String text = '''
 			public class Example {
 				String aField;

@@ -9,6 +9,10 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -25,6 +29,8 @@ public class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTe
   @Test
   public void testPriorities() {
     try {
+      final IEclipsePreferences jdtPreference = InstanceScope.INSTANCE.getNode(JavaUI.ID_PLUGIN);
+      jdtPreference.put(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, "");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("public class Example {");
       _builder.newLine();
