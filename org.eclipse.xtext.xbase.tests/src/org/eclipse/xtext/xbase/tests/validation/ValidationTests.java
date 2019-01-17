@@ -11,11 +11,13 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -38,6 +41,12 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	@Test public void testLambdaIssuesEmittedOnce() throws Exception {
+		XExpression expr = expression("{ val list = #[] list.filter[it == null] }");
+		List<Issue> issues = helper.validate(expr);
+		Assert.assertEquals(1, issues.size());
+	}
 	
 	@Test public void testIncompatibleTypes() throws Exception {
 		XExpression expr = expression("{ val com.google.inject.Provider<String> x = [| 'foo'] as com.google.common.base.Supplier<String> }");
