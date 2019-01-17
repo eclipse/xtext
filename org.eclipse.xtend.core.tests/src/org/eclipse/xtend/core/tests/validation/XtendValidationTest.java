@@ -3104,4 +3104,90 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				);
 		helper.assertNoWarnings(file, XIMPORT_DECLARATION, DEPRECATED_MEMBER_REFERENCE);
 	}
+	
+	@Test public void testValidInstanceof_01() throws Exception {
+		XtendFile file = file("class C { def <T> boolean m(T x) { x instanceof String } }");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testValidInstanceof_02() throws Exception {
+		XtendFile file = file("class C<T> { def boolean m(T x) { x instanceof String } }");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testValidInstanceof_03() throws Exception {
+		XtendFile file = file("class C { def <S, T extends S> boolean m(T x) { x instanceof String } }");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testValidInstanceof_04() throws Exception {
+		XtendFile file = file("class C { def <S extends CharSequence, T extends S> boolean m(T x) { x instanceof String } }");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testValidInstanceof_05() throws Exception {
+		XtendFile file = file("class C { def <T> boolean m(T[] x) { x instanceof String[] } }");
+		helper.assertNoIssues(file);
+	}
+	
+	@Test public void testInvalidInstanceof_01() throws Exception {
+		XtendFile file = file("class C { def <T> boolean m(T x) { x instanceof T } }");
+		helper.assertError(file, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_USE_OF_TYPE_PARAMETER);
+	}
+	
+	@Test public void testInvalidInstanceof_02() throws Exception {
+		XtendFile file = file("class C { def <T extends Number> boolean m(T x) { x instanceof String } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_03() throws Exception {
+		XtendFile file = file("class C { def <T extends String> boolean m(T x) { x instanceof CharSequence } }");
+		helper.assertWarning(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.OBSOLETE_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_04() throws Exception {
+		XtendFile file = file("class C { def <T extends String> boolean m(T x) { x instanceof String } }");
+		helper.assertWarning(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.OBSOLETE_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_05() throws Exception {
+		XtendFile file = file("class C { def <T extends CharSequence & java.util.List<T>> boolean m(T x) { x instanceof String } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_06() throws Exception {
+		XtendFile file = file("class C { def <T extends Object & CharSequence & java.util.List<T>> boolean m(T x) { x instanceof String } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_07() throws Exception {
+		XtendFile file = file("class C { def <S extends Number, T extends S> boolean m(T x) { x instanceof String } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_08() throws Exception {
+		XtendFile file = file("class C { def <S extends String, T extends S> boolean m(T x) { x instanceof String } }");
+		helper.assertWarning(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.OBSOLETE_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_09() throws Exception {
+		XtendFile file = file("class C { def <T> boolean m(T[] x) { x instanceof T[] } }");
+		helper.assertError(file, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_USE_OF_TYPE_PARAMETER);
+	}
+	
+	@Test public void testInvalidInstanceof_10() throws Exception {
+		XtendFile file = file("class C { def <T extends Number> boolean m(T[] x) { x instanceof String[] } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_11() throws Exception {
+		XtendFile file = file("class C { def <S extends String, T extends S> boolean m(java.util.List<? extends T> x) { x.get(0) instanceof String } }");
+		helper.assertWarning(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.OBSOLETE_INSTANCEOF);
+	}
+	
+	@Test public void testInvalidInstanceof_12() throws Exception {
+		XtendFile file = file("class C { def <T extends Number> boolean m(java.util.List<? extends T> x) { x.head instanceof String } }");
+		helper.assertError(file, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_INSTANCEOF);
+	}
+	
 }
