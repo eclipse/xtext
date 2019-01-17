@@ -389,6 +389,13 @@
 			<organizationUrl>http://typefox.io</organizationUrl>
 		</developer>
 		<developer>
+			<id>tamas.miklossy</id>
+			<name>Tamas Miklossy</name>
+			<email>miklossy@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
 			<id>stefan.oehme</id>
 			<name>Stefan Oehme</name>
 		</developer>
@@ -414,7 +421,7 @@
 			<organizationUrl>http://typefox.io</organizationUrl>
 		</developer>
 		<developer>
-			<id>karston.thoms</id>
+			<id>karsten.thoms</id>
 			<name>Karsten Thoms</name>
 			<email>karsten.thoms@itemis.de</email>
 			<organization>itemis</organization>
