@@ -6,15 +6,15 @@
 	<title>Xtext-Web State Machine Example (Multiple Resources)</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="webjars/requirejs/2.3.2/require.min.js"></script>
+	<script src="webjars/requirejs/2.3.6/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
-				"jquery": "webjars/jquery/2.2.4/jquery.min",
-				"ace/ext/language_tools": "webjars/ace/1.2.3/src/ext-language_tools"
+				"jquery": "webjars/jquery/3.3.1-1/jquery.min",
+				"ace/ext/language_tools": "webjars/ace/1.3.3/src/ext-language_tools"
 			}
 		});
-		require(["webjars/ace/1.2.3/src/ace"], function() {
+		require(["webjars/ace/1.3.3/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
 				var editors = xtext.createEditor({
 					position: "absolute",
