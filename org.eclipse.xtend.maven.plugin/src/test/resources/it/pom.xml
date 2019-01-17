@@ -5,6 +5,36 @@
 	<artifactId>it-tests-parent</artifactId>
 	<version>IT-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<xtextVersion>2.17.0-SNAPSHOT</xtextVersion>
+		<!-- The BOM version can be rather fixed for the test projects -->
+		<xtextBOMVersion>2.17.0.M1</xtextBOMVersion>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>21.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<version>${xtextBOMVersion}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>${xtextVersion}</version>
+		</dependency>
+	</dependencies>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>central</id>
@@ -64,4 +94,23 @@
 			<url>file://${nonTestMavenRepo}</url>
 		</repository>
 	</repositories>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>IT-SNAPSHOT</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
 </project>

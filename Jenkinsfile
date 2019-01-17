@@ -56,7 +56,7 @@ node {
 	dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 	
 	stage('Maven Plugin Build') {
-		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -Dmaven.test.failure.ignore=true -Dit-archetype-tests-skip=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
+		sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -DJENKINS_URL=$JENKINS_URL -DWORKSPACE=$WORKSPACE -Dmaven.test.failure.ignore=true -Dit-archetype-tests-skip=true -Dmaven.repo.local=${WORKSPACE}/.m2/repository -DgradleMavenRepo=file:${WORKSPACE}/build/maven-repository/ -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean deploy"
 	}
 
 	stage('Maven Tycho Build') {

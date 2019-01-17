@@ -32,6 +32,7 @@ public class MavenVerifierUtil {
 		verifier.setSystemProperty("gradleMavenRepo", gradleMavenRepo);
 		
 		verifier.setSystemProperty("nonTestMavenRepo", System.getProperty("maven.repo.local"));
+		verifier.setSystemProperty("WORKSPACE", System.getProperty("WORKSPACE"));
 		
 		String testMavenRepo = System.getProperty("testMavenRepo");
 		Assert.assertNotNull("testMavenRepo is null", testMavenRepo);
