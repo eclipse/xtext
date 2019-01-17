@@ -46,11 +46,11 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 		ORION, ACE, CODEMIRROR
 	}
 	
-	static val REQUIREJS_VERSION = '2.3.2'
+	static val REQUIREJS_VERSION = '2.3.6'
 	static val REQUIREJS_TEXT_VERSION = '2.0.15'
-	static val JQUERY_VERSION = '2.2.4'
-	static val ACE_VERSION = '1.2.3'
-	static val CODEMIRROR_VERSION = '5.13.2'
+	static val JQUERY_VERSION = '3.3.1-1'
+	static val ACE_VERSION = '1.3.3'
+	static val CODEMIRROR_VERSION = '5.41.0'
 	
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
