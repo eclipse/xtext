@@ -868,13 +868,15 @@ public class XbaseValidator extends AbstractXbaseValidator {
 			return;
 		}
 		if (!isIgnored(OBSOLETE_INSTANCEOF) && rightType.isAssignableFrom(leftType, new TypeConformanceComputationArgument(false, false, true, true, false, false))) {
-			addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType)
-					+ " is already of type " + canonicalName(rightType), null);
+			// check that we do not have a type parameter usage on the rhs of the instanceof 
+			if (rightType.getConstraintSubstitute() == rightType) {
+				addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType) + " is already of type " + canonicalName(rightType), null);	
+			}
 		}
 	}
 
 	protected boolean memberOfTypeHierarchy(LightweightTypeReference type, LightweightTypeReference potentialMember) {
-		return potentialMember.isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, true, false, false));
+		return potentialMember.getConstraintSubstitute().isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, true, false, false));
 	}
 
 	protected boolean containsTypeArgs(LightweightTypeReference instanceOfType) {
