@@ -56,6 +56,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -797,6 +798,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		// Favorite proposals coming from JDT - https://github.com/eclipse/xtext-xtend/issues/677
 		String pref= PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
+		if (Strings.isEmpty(pref)) {
+			return;
+		}
 		String[] favourites= pref.split(";"); //$NON-NLS-1$
 		for(String fav : favourites) {
 			String typeName = fav.substring(0, fav.lastIndexOf("."));
