@@ -7,11 +7,11 @@ dependencies {
 	compile project(':org.eclipse.xtext.web.example.statemachine.ide')
 	compile project(':org.eclipse.xtext.xbase.web')
 	compile project(':org.eclipse.xtext.web.example.entities.ide')
-	compile group: 'org.webjars', name: 'requirejs', version: '2.3.2'
+	compile group: 'org.webjars', name: 'requirejs', version: '2.3.6'
 	compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.15'
-	compile group: 'org.webjars', name: 'jquery', version: '2.2.4'
-	compile group: 'org.webjars', name: 'ace', version: '1.2.3'
-	compile group: 'org.webjars', name: 'codemirror', version: '5.13.2'
+	compile group: 'org.webjars', name: 'jquery', version: '3.3.1-1'
+	compile group: 'org.webjars', name: 'ace', version: '1.3.3'
+	compile group: 'org.webjars', name: 'codemirror', version: '5.41.0'
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.4.+'
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
@@ -23,7 +23,11 @@ dependencies {
 
 def orionDir = file('src/main/webapp/orion')
 def orionZip = file("$buildDir/orion/built-codeEdit.zip")
-def orionUrl = 'http://download.eclipse.org/orion/drops/R-12.0-201606220105/built-codeEdit.zip'
+/*
+ * Since version 18 the ContentAssist ist broken. We issued bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=543541
+ * If this bug is resolved we could update orion.
+ */
+def orionUrl = 'http://www.eclipse.org/downloads/download.php?file=/orion/drops/R-17.0-201801111044/built-codeEdit.zip&r=1'
 
 task downloadOrion {
 	onlyIf {!orionZip.exists()}
