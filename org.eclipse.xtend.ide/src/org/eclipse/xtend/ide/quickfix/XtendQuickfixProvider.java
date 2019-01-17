@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -687,6 +688,20 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			ctx.setUpdateCrossReferences(false);
 			ctx.setUpdateRelatedFiles(false);
 			ctx.addModification(element, ele -> ele.setReturnType(typeReferences.getTypeForName(Void.TYPE, ele)));
+		});
+	}
+	
+	@Fix(IssueCodes.UNUSED_PRIVATE_MEMBER)
+	public void removeUnusedPrivateMember(final Issue issue, IssueResolutionAcceptor acceptor) {
+		// use the same label, description and image
+		// to be able to use the quickfixes (issue resolution) in batch mode
+		String label = "Remove member.";
+		String description = "Remove the unused private member.";
+		String image = "delete_edit.png";
+		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XtendMember>) (element, ctx) -> {
+			ctx.setUpdateCrossReferences(false);
+			ctx.setUpdateRelatedFiles(false);
+			ctx.addModification(element, ele -> EcoreUtil.remove(ele));
 		});
 	}
 	

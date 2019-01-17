@@ -4180,6 +4180,55 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void fixUnusedPrivateField() {
+		create('Foo.xtend', '''
+			class Foo {
+				val a| = 42
+			}
+		''')
+		.assertIssueCodes(UNUSED_PRIVATE_MEMBER)
+		.assertResolutionLabels("Remove member.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+			}
+		''')
+	}
+
+	@Test
+	def void fixUnusedPrivateMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				private def m|() {}
+			}
+		''')
+		.assertIssueCodes(UNUSED_PRIVATE_MEMBER)
+		.assertResolutionLabels("Remove member.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+			}
+		''')
+	}
+
+	@Test
+	def void fixUnusedLocalVariable() {
+		create('Foo.xtend', '''
+			class Foo {
+				private def m() {
+					val a| = 42
+				}
+			}
+		''')
+		.assertIssueCodes(UNUSED_LOCAL_VARIABLE)
+		.assertResolutionLabels("Remove local variable.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				private def m() {
+				}
+			}
+		''')
+	}
+
+	@Test
 	def void unnecessaryModifier_01(){
 		// Xtend class having a 'public' modifier
 		create('Foo.xtend', '''
