@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 Michael Clay and others.
+ * Copyright (c) 2010, 2019 Michael Clay and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,12 +10,15 @@ package org.eclipse.xtext.ui.editor.folding;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.projection.IProjectionListener;
@@ -27,6 +30,8 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -124,9 +129,49 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 		if (projectionAnnotationModel != null) {
 			// make a defensive copy as we modify the folded positions in subsequent operations
 			Collection<FoldedPosition> foldedPositions = Sets.newLinkedHashSet(foldingRegionProvider.getFoldingRegions(editor.getDocument()));
+			foldedPositions = filterFoldedPositions(foldedPositions);
 			Annotation[] newRegions = mergeFoldingRegions(foldedPositions, projectionAnnotationModel);
 			updateFoldingRegions(allowCollapse, projectionAnnotationModel, foldedPositions, newRegions);
 		}
+	}
+
+	/**
+	 * @since 2.17
+	 */
+	protected Collection<FoldedPosition> filterFoldedPositions(Collection<FoldedPosition> foldedPositions) {
+		Map<Pair<Integer, Integer>, FoldedPosition> acceptedPositions = new HashMap<>();
+		
+		for (FoldedPosition foldedPosition : foldedPositions) {
+			int startLineNumber = getLineNumber(foldedPosition.getOffset());
+			int endLineNumber = getLineNumber(foldedPosition.getOffset() + foldedPosition.getLength());
+			Pair<Integer, Integer> startAndEndLineNumbers = Tuples.create(startLineNumber, endLineNumber);
+			
+			if (!acceptedPositions.containsKey(startAndEndLineNumbers)) {
+				acceptedPositions.put(startAndEndLineNumbers, foldedPosition);
+			} else {
+				// if the folded position has already been accepted, keep the one with the smaller region
+				FoldedPosition alreadyAcceptedPosition = acceptedPositions.get(startAndEndLineNumbers);
+				if(foldedPosition.getLength() < alreadyAcceptedPosition.getLength()) {
+					acceptedPositions.put(startAndEndLineNumbers, foldedPosition);
+				}
+			}
+		}
+		
+		return acceptedPositions.values();
+	}
+
+	/**
+	 * @since 2.17
+	 */
+	protected int getLineNumber(int offset) {
+		IDocument document = viewer.getDocument();
+		int lineNumber = -1;
+		try {
+			lineNumber = document.getLineOfOffset(offset);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+		return lineNumber;
 	}
 
 	protected Annotation[] mergeFoldingRegions(Collection<FoldedPosition> foldedPositions,
