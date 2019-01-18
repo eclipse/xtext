@@ -6,6 +6,8 @@ pipeline {
       steps {
           sshagent(['29d79994-c415-4a38-9ab4-7463971ba682']) { // 
             sh '''
+              git config user.name "genie-xtext"
+              git config user.email "xtext-bot@eclipse.org"
               rm -rf deploy-xtext-git-repo
               rm -rf deploy-xtend-git-repo
               git clone -b master ssh://genie.xtext@git.eclipse.org:29418/www.eclipse.org/Xtext deploy-xtext-git-repo
