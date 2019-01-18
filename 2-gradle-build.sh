@@ -4,7 +4,7 @@ if [ -z "$JENKINS_URL" ]; then
 fi
 
 ./gradlew \
-  clean cleanGenerateXtext build publish \
+  clean cleanGenerateXtext build createLocalMavenRepo \
   -Dmaven.repo.local=$(pwd)/.m2/repository \
   -PcompileXtend=true \
   -PJENKINS_URL=$JENKINS_URL \
