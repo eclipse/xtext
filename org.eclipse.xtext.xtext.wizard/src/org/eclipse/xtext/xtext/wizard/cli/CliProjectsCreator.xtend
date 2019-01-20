@@ -38,7 +38,7 @@ class CliProjectsCreator implements ProjectsCreator {
 			switch(it) {
 				TextFile : {
 					val normalizedContent = content.replace(Strings.newLine, lineDelimiter)
-					Files.write(normalizedContent, file, project.config.encoding)
+					Files.asCharSink(file, project.config.encoding).write(normalizedContent)
 				}
 				BinaryFile: {
 					Files.write(Resources.toByteArray(content), file)

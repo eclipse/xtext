@@ -274,7 +274,7 @@ class CliWizardIntegrationTest {
 	}
 
 	private def toGeneratedFile(File file, String relativePath) {
-		new GeneratedFile(relativePath, if(file.isDirectory) "" else Files.toString(file, config.encoding))
+		new GeneratedFile(relativePath, if(file.isDirectory) "" else Files.asCharSource(file, config.encoding).read())
 	}
 
 	private def compareFileTrees(Set<GeneratedFile> expectedFiles, Set<GeneratedFile> actualFiles) {

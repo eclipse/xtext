@@ -52,7 +52,7 @@ public class CliProjectsCreator implements ProjectsCreator {
         if (it instanceof TextFile) {
           _matched=true;
           final String normalizedContent = ((TextFile)it).getContent().replace(Strings.newLine(), this.lineDelimiter);
-          Files.write(normalizedContent, file, project.getConfig().getEncoding());
+          Files.asCharSink(file, project.getConfig().getEncoding()).write(normalizedContent);
         }
         if (!_matched) {
           if (it instanceof BinaryFile) {
