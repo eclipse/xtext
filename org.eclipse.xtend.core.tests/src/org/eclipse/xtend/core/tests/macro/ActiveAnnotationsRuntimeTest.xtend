@@ -66,7 +66,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	protected def URI copyToDisk(String projectName, Pair<String,String> fileRepresentation) {
 		val file = new File(workspaceRoot, projectName+"/src/"+fileRepresentation.key)
 		file.parentFile.mkdirs
-		Files.write(fileRepresentation.value, file, Charset.defaultCharset)
+		Files.asCharSink(file, Charset.defaultCharset).write(fileRepresentation.value)
 		return URI.createFileURI(file.path)
 	}
 

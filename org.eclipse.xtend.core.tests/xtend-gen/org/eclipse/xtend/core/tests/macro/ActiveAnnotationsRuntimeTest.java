@@ -95,7 +95,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       String _plus = ((projectName + "/src/") + _key);
       final File file = new File(this.workspaceRoot, _plus);
       file.getParentFile().mkdirs();
-      Files.write(fileRepresentation.getValue(), file, Charset.defaultCharset());
+      Files.asCharSink(file, Charset.defaultCharset()).write(fileRepresentation.getValue());
       return URI.createFileURI(file.getPath());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

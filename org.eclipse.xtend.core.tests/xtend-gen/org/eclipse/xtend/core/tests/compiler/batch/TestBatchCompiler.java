@@ -693,7 +693,7 @@ public class TestBatchCompiler {
   private String getContents(final String fileName) {
     try {
       File _file = new File(fileName);
-      return com.google.common.io.Files.toString(_file, Charsets.UTF_8);
+      return com.google.common.io.Files.asCharSource(_file, Charsets.UTF_8).read();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
