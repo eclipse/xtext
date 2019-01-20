@@ -41,7 +41,7 @@ class AnnotationTestingTest extends AbstractXtendCompilerTest {
 			assertTrue(compiledClass.declaredFields.exists[name=='baz'])
 			val targetFileUri = sourceFileUri.trimSegments(2).appendSegment("xtend-gen").appendSegment("out.txt")
 			val targetFile = new File (targetFileUri.toFileString)
-			val result = Files.toString(targetFile, Charset.defaultCharset)
+			val result = Files.asCharSource(targetFile, Charset.defaultCharset).read()
 			assertEquals("foo|bar|baz",result.trim)
 		]
 	}

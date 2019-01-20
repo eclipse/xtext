@@ -464,7 +464,7 @@ class TestBatchCompiler {
 	}
 	
 	def private String getContents(String fileName) {
-		Files.toString(new File(fileName), Charsets.UTF_8)
+		Files.asCharSource(new File(fileName), Charsets.UTF_8).read()
 	}
 
 	@Test

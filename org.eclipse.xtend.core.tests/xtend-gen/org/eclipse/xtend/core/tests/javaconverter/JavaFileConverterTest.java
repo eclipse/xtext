@@ -102,7 +102,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           final String javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.getAbsolutePath(), "");
           InputOutput.<String>println(("Converting: " + javaFileProjRelPath));
           boolean compileError = false;
-          final String javaCode = Files.toString(file, Charset.defaultCharset());
+          final String javaCode = Files.asCharSource(file, Charset.defaultCharset()).read();
           final JavaConverter.ConversionResult xtendResult = this.converToXtend(file.getName(), javaCode);
           final int knownProblemsFound = IterableExtensions.size(xtendResult.getProblems());
           String xtendCode = xtendResult.getXtendCode();
@@ -203,7 +203,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
         Files.createParentDirs(targetFile);
         targetFile.createNewFile();
       }
-      Files.write(content, targetFile, Charset.defaultCharset());
+      Files.asCharSink(targetFile, Charset.defaultCharset()).write(content);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

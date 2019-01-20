@@ -68,7 +68,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           final URI targetFileUri = sourceFileUri.trimSegments(2).appendSegment("xtend-gen").appendSegment("out.txt");
           String _fileString = targetFileUri.toFileString();
           final File targetFile = new File(_fileString);
-          final String result = Files.toString(targetFile, Charset.defaultCharset());
+          final String result = Files.asCharSource(targetFile, Charset.defaultCharset()).read();
           Assert.assertEquals("foo|bar|baz", result.trim());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);

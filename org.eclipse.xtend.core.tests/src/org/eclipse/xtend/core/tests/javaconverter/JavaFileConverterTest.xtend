@@ -84,7 +84,7 @@ class JavaFileConverterTest extends AbstractXtendTestCase {
 			val javaFileProjRelPath = uri.toFileString().replace(srcProjectRoot.absolutePath, "")
 			println("Converting: " + javaFileProjRelPath);
 			var compileError = false
-			val String javaCode = Files.toString(file, Charset.defaultCharset());
+			val String javaCode = Files.asCharSource(file, Charset.defaultCharset()).read();
 
 			val xtendResult = converToXtend(file.name, javaCode)
 			val knownProblemsFound = xtendResult.problems.size
@@ -139,7 +139,7 @@ class JavaFileConverterTest extends AbstractXtendTestCase {
 			Files.createParentDirs(targetFile)
 			targetFile.createNewFile
 		}
-		Files.write(content, targetFile, Charset.defaultCharset)
+		Files.asCharSink(targetFile, Charset.defaultCharset).write(content)
 	}
 
 }
