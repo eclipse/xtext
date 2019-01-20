@@ -94,7 +94,7 @@ class ResourcePersistenceTest extends AbstractWebServerTest {
 		val save = getService(#{'serviceType' -> 'save', 'resource' -> file.name}, session)
 		assertTrue(save.hasSideEffects)
 		save.service.apply()
-		val resourceContent = Files.toString(file, Charsets.UTF_8)
+		val resourceContent = Files.asCharSource(file, Charsets.UTF_8).read()
 		assertEquals('state bar end', resourceContent)
 	}
 	
