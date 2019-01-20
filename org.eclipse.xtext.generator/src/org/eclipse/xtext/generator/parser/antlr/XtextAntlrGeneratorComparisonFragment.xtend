@@ -198,7 +198,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			postProcessReferenceLexerGrammar(absoluteLexerGrammarFileNameReference, outlet)
 			
 			val lexerGrammarFile = fsa.readTextFile(lexerGrammarFileName)
-			val lexerGrammarFileReference = Files.toString(new File(absoluteLexerGrammarFileNameReference), Charset.forName(ENCODING))
+			val lexerGrammarFileReference = Files.asCharSource(new File(absoluteLexerGrammarFileNameReference), Charset.forName(ENCODING)).read()
 			
 			try {
 				val resultLexer = comparator.compareGrammars(lexerGrammarFile, lexerGrammarFileReference,
@@ -221,7 +221,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		postProcessReferenceParserGrammar(absoluteParserGrammarFileNameReference, outlet)
 		
 		val grammarFile = fsa.readTextFile(parserGrammarFileName)
-		val grammarFileReference = Files.toString(new File(absoluteParserGrammarFileNameReference), Charset.forName(ENCODING))
+		val grammarFileReference = Files.asCharSource(new File(absoluteParserGrammarFileNameReference), Charset.forName(ENCODING)).read()
 		
 		try {
 			val result = comparator.compareGrammars(grammarFile, grammarFileReference,

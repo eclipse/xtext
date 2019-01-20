@@ -316,7 +316,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
         this.postProcessReferenceLexerGrammar(absoluteLexerGrammarFileNameReference, outlet);
         final CharSequence lexerGrammarFile = fsa.readTextFile(lexerGrammarFileName);
         File _file = new File(absoluteLexerGrammarFileNameReference);
-        final String lexerGrammarFileReference = Files.toString(_file, Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING));
+        final String lexerGrammarFileReference = Files.asCharSource(_file, Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING)).read();
         try {
           StringConcatenation _builder_2 = new StringConcatenation();
           String _path = this.getPath(fsa);
@@ -351,7 +351,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       this.postProcessReferenceParserGrammar(absoluteParserGrammarFileNameReference, outlet);
       final CharSequence grammarFile = fsa.readTextFile(parserGrammarFileName);
       File _file_1 = new File(absoluteParserGrammarFileNameReference);
-      final String grammarFileReference = Files.toString(_file_1, Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING));
+      final String grammarFileReference = Files.asCharSource(_file_1, Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING)).read();
       try {
         StringConcatenation _builder_4 = new StringConcatenation();
         String _path_1 = this.getPath(fsa);

@@ -83,7 +83,7 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 	 */
 	protected String readFileIntoString(String filename, Charset encoding) {
 		try {
-			String result = Files.toString(new File(filename), encoding);
+			String result = Files.asCharSource(new File(filename), encoding).read();
 			return result;
 		} catch (IOException e) {
 			throw new WrappedException(e);
@@ -95,7 +95,7 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 	 */
 	protected void writeStringIntoFile(String filename, String content, Charset encoding) {
 		try {
-			Files.write(content, new File(filename), encoding);
+			Files.asCharSink(new File(filename), encoding).write(content);;
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
