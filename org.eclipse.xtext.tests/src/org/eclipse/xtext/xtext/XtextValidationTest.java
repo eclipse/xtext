@@ -90,7 +90,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
 			File tempFile = File.createTempFile("XtextValidationTest", ".ecore");
 			tempFile.deleteOnExit();
-			Files.write("<?xml version='1.0' encoding='UTF-8'?>" +
+			Files.asCharSink(tempFile, StandardCharsets.UTF_8).write("<?xml version='1.0' encoding='UTF-8'?>" +
 					"<ecore:EPackage xmi:version='2.0' xmlns:xmi='http://www.omg.org/XMI'"+
 					"                xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'"+
 					"                xmlns:ecore='http://www.eclipse.org/emf/2002/Ecore'"+
@@ -100,8 +100,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 					"  <eClassifiers xsi:type='ecore:EClass' name='Bug322875'>"+
 					"    <eStructuralFeatures xsi:type='ecore:EReference' name='referencesETypeFromClasspathPackage' eType='ecore:EClass classpath:/org/eclipse/xtext/Xtext.ecore#//Grammar'/>"+
 					"  </eClassifiers>"+
-					"</ecore:EPackage>"
-					, tempFile, StandardCharsets.UTF_8);
+					"</ecore:EPackage>");
 			xtextValidationTest_ecore = tempFile.toURI().toURL();
 	}
 	

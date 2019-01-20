@@ -467,7 +467,7 @@ public class CliWizardIntegrationTest {
       if (_isDirectory) {
         _xifexpression = "";
       } else {
-        _xifexpression = com.google.common.io.Files.toString(file, this.config.getEncoding());
+        _xifexpression = com.google.common.io.Files.asCharSource(file, this.config.getEncoding()).read();
       }
       return new CliWizardIntegrationTest.GeneratedFile(relativePath, _xifexpression);
     } catch (Throwable _e) {
