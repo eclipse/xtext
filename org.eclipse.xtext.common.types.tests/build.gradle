@@ -13,6 +13,7 @@ dependencies {
 	compile 'com.google.errorprone:error_prone_annotations'
 	compile 'junit:junit'
 	compile 'javax.annotation:javax.annotation-api'
+	compile 'com.google.code.findbugs:jsr305'
 }
 
 sourceSets.test.java {
