@@ -219,6 +219,7 @@
 	</modules>
 
 	<build>
+		<defaultGoal>install</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
