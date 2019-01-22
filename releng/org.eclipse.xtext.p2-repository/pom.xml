@@ -45,7 +45,7 @@
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
-									file="${basedir}/target/org.eclipse.xtext.p2-repository-2.18.0-SNAPSHOT.zip"
+									file="${project.build.directory}/${project.artifactId}-${project.version}.zip"
 									toDir="${basedir}/../../build/" />
 							</tasks>
 						</configuration>
