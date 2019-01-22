@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.richstring;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -276,9 +277,11 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		XtextResourceSet set = resourceSetProvider.get();
+		Map<Object, Object> loadOptions = set.getLoadOptions();
+		loadOptions.put(XtextResource.OPTION_ENCODING, StandardCharsets.ISO_8859_1.name());
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
-		resource.load(new LazyStringInputStream(string, StandardCharsets.ISO_8859_1), null);
+		resource.load(new LazyStringInputStream(string, StandardCharsets.ISO_8859_1.name()), loadOptions);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		if (validate) {
 			List<Issue> issues = ((XtextResource) resource).getResourceServiceProvider().getResourceValidator()

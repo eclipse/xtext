@@ -31,5 +31,9 @@
 		<module>org.eclipse.xtend.doc</module>
 		<module>org.eclipse.xtend.examples</module>
 	</modules>
+	
+	<build>
+		<defaultGoal>verify</defaultGoal>
+	</build>
 
 </project>

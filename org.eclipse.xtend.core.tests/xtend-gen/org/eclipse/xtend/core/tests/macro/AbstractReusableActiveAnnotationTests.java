@@ -1771,7 +1771,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       Assert.assertEquals("foowuppa", anno.getValue("value"));
       Object _value_4 = annoRef.getValue("annotation2ArrayValue");
       final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_4);
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
       Object _value_5 = annoRef.getValue("enumValue");
       final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_5);
       Assert.assertEquals("YELLOW", enum1.getSimpleName());
@@ -2406,7 +2406,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       Assert.assertEquals("foowuppa", anno.getValue("value"));
       Object _value_5 = annoRef.getValue("annotation2ArrayValue");
       final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_5);
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
       Object _value_6 = annoRef.getValue("enumValue");
       final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_6);
       Assert.assertEquals("YELLOW", enum1.getSimpleName());
@@ -5401,6 +5401,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
+  @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testImportFromTypeReference_01() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.text.DateFormat\n\t\t\t\timport java.text.SimpleDateFormat\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.addField(\'myDateFormat\') [\n\t\t\t\t\t\t\ttype = DateFormat.newTypeReference\n\t\t\t\t\t\t\tinitializer = \'\'\'new «SimpleDateFormat.newTypeReference»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
@@ -5440,6 +5441,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_1.toString());
   }
   
+  @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testImportFromTypeReference_02() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.declaredFields.forEach [\n\t\t\t\t\t\t\tinitializer = \'\'\'new «type.type»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
@@ -5704,7 +5706,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final MutableClassDeclaration myClass = it.getTypeLookup().findClass("MyClass");
       Assert.assertEquals("field1_A_B_C", IterableExtensions.head(myClass.getDeclaredFields()).getSimpleName());
-      Assert.assertEquals("field2_A_B_C", ((MutableFieldDeclaration[])Conversions.unwrapArray(myClass.getDeclaredFields(), MutableFieldDeclaration.class))[1].getSimpleName());
+      Assert.assertEquals("field2_A_B_C", (((MutableFieldDeclaration[])Conversions.unwrapArray(myClass.getDeclaredFields(), MutableFieldDeclaration.class))[1]).getSimpleName());
     };
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);
@@ -5748,6 +5750,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(macroFile, clientFile, _function);
   }
   
+  @Ignore("FIXME: Issue 1311 - Make system encoding independent")
   @Test
   public void testFileSystemSupport_01() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/FileSystemSupportTest.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\t\n\t\t\t\t@Active(FileSystemUsingProcessor)\n\t\t\t\tannotation FileSystemSupportTest { }\n\t\t\t\t\n\t\t\t\tclass FileSystemUsingProcessor extends AbstractClassProcessor {\n\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tval path = annotatedClass.compilationUnit.filePath\n\t\t\t\t\t\tannotatedClass.docComment = \'\'\'\n\t\t\t\t\t\t\tPath \'«path.toString»\' {\n\t\t\t\t\t\t\t\texists: «path.exists»\n\t\t\t\t\t\t\t\tisFolder: «path.isFolder»\n\t\t\t\t\t\t\t\tisFile: «path.isFile»\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tsourceFolder : «path.sourceFolder»\n\t\t\t\t\t\t\ttargetFolder : «path.targetFolder»\n\t\t\t\t\t\t\tprojectFolder: «path.projectFolder»\n\t\t\t\t\t\t\'\'\'\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t}\n\t\t\t");

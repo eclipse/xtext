@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import static java.util.Collections.*;
+
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +30,12 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.ui.editor.IDirtyResource;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -115,7 +121,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResource result = (XtextResource) getResourceSet().createResource(URI.createURI("Test." + fileExtension));
-			result.load(stream, null);
+			result.load(stream, singletonMap(XtextResource.OPTION_ENCODING, StandardCharsets.ISO_8859_1.name()));
 			return result;
 		} catch(Exception e) {
 			throw new RuntimeException(e);
@@ -730,6 +736,12 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 					String cursorPosition, int offset, String... expectedText) throws Exception {
 				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, getPrefix().length()) + offset, expectedText);
 			}
+			
+			@Override
+			public String getEncoding() {
+				return StandardCharsets.ISO_8859_1.name();
+			}
+			
 		};
 		String prefix = getPrefix();
 		if (prefix.length() > 0) {

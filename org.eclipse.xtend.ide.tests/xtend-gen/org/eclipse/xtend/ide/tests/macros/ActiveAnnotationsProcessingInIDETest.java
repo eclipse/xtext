@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.nio.charset.StandardCharsets;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -256,7 +257,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     try {
       final IFile result = it.getProject().getFile(("src/" + fileName));
       this.createIfNotExistent(result.getParent());
-      StringInputStream _stringInputStream = new StringInputStream(contents);
+      String _name = StandardCharsets.ISO_8859_1.name();
+      StringInputStream _stringInputStream = new StringInputStream(contents, _name);
       result.create(_stringInputStream, true, null);
       return result;
     } catch (Throwable _e) {
