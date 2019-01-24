@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  * @since 2.4
  */
 public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
-		IResourceDescriptions.IContextAware {
+		IResourceDescriptions.IContextAware, IResourceDescriptions.IResourceSetAware {
 	
 	static class Descriptions extends AdapterImpl {
 		Map<URI, IResourceDescription> map = newHashMap();

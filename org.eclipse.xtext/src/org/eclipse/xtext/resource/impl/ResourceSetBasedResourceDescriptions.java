@@ -37,7 +37,7 @@ import com.google.inject.Inject;
  * @since 2.5
  */
 public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements
-		IResourceDescriptions.IContextAware {
+		IResourceDescriptions.IContextAware, IResourceDescriptions.IResourceSetAware {
 
 	private ResourceSet resourceSet;
 	private ResourceDescriptionsData data;

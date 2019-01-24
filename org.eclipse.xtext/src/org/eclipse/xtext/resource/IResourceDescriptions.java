@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
@@ -42,6 +43,16 @@ public interface IResourceDescriptions extends ISelectable {
 	interface IContextAware extends IResourceDescriptions {
 
 		void setContext(Notifier ctx);
+	}
+	
+	/**
+	 * A resource set aware instance {@link IResourceDescriptions}.
+	 * 
+	 * @since 2.17
+	 */
+	interface IResourceSetAware extends IResourceDescriptions {
+
+		ResourceSet getResourceSet();
 	}
 
 	class NullImpl implements IResourceDescriptions {
