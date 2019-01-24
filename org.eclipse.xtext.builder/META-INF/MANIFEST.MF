@@ -43,7 +43,7 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.trace;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",
  org.eclipse.xtext.builder.trace.impl;x-internal:=true,
  org.eclipse.xtext.builder.trace.util;x-internal:=true
-Require-Bundle: org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.17.0",
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.10.2";visibility:=reexport,
  com.google.guava;bundle-version="[14.0.0,22.0.0)",

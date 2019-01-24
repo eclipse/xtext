@@ -26,7 +26,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Thomas Wolf <thomas.wolf@paranor.ch> - Performance optimization and JavaDoc
  */
-public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions {
+public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions.IResourceSetAware {
 
 	/**
 	 * New index.
@@ -34,6 +34,8 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	private final ResourceDescriptionsData newData;
 	
 	private BuildData buildData;
+
+	private ResourceSet resourceSet;
 	
 	/**
 	 * @since 2.4
@@ -52,6 +54,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 */
 	public CurrentDescriptions(ResourceSet resourceSet, ResourceDescriptionsData newData) {
 		this.newData = newData;
+		this.resourceSet = resourceSet;
 		resourceSet.eAdapters().add(this);
 	}
 	
@@ -136,6 +139,14 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return CurrentDescriptions.class.equals(type);
+	}
+
+	/**
+	 * @since 2.17
+	 */
+	@Override
+	public ResourceSet getResourceSet() {
+		return resourceSet;
 	}
 
 	/**
