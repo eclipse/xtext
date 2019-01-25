@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -19,6 +20,8 @@ import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
 
@@ -134,6 +137,13 @@ public class TokenScanner extends AbstractTokenScanner {
 	}
 
 	protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
+		if (!(document instanceof XtextDocument)) {
+			// User might have selected a non-xtext document in e.g. a compare operation.
+			// Return an empty iterable, this will disable syntax highlighting
+			// for the "non-xtext editor".
+			Iterator<ILexerTokenRegion> iterator = Collections.<ILexerTokenRegion>emptyIterator();
+			return () -> iterator;
+		}
 		XtextDocument doc = (XtextDocument) document;
 		return doc.getTokens();
 	}
