@@ -27,6 +27,9 @@ subprojects {
 	repositories {
 		mavenLocal()
 		jcenter()
+		// TODO remove this once we switched back to java platform plugin
+		// https://github.com/eclipse/xtext/issues/1388
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	
 	apply plugin: 'java'
