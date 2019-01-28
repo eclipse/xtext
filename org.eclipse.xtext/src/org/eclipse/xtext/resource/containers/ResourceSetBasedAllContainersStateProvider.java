@@ -11,8 +11,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.impl.EagerResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptions.IResourceSetAware;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,10 +35,8 @@ public class ResourceSetBasedAllContainersStateProvider implements IAllContainer
 	 * @since 2.4
 	 */
 	protected ResourceSet getResourceSet(IResourceDescriptions context) {
-		if (context instanceof ResourceSetBasedResourceDescriptions) 
-			return ((ResourceSetBasedResourceDescriptions) context).getResourceSet();
-		else if (context instanceof EagerResourceSetBasedResourceDescriptions) 
-			return ((EagerResourceSetBasedResourceDescriptions) context).getResourceSet();
+		if (context instanceof IResourceSetAware)
+			return ((IResourceSetAware) context).getResourceSet();
 		String contextType = context == null ? "null" : context.getClass().getName();
 		throw new IllegalStateException("Passed " + contextType + " is not based on a resource set");
 	}
