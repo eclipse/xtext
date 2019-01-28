@@ -11,5 +11,5 @@ configurations {
 }
 
 test {
-	maxHeapSize = "768m"
+	maxHeapSize = "1G"
 }
