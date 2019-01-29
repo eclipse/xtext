@@ -145,13 +145,23 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           final Procedure1<ExternalDependency.MavenCoordinates> _function_3 = (ExternalDependency.MavenCoordinates it_1) -> {
             it_1.setGroupId("org.eclipse.emf");
             it_1.setArtifactId("org.eclipse.emf.mwe2.launch");
-            it_1.setVersion(this.getConfig().getXtextVersion().getMweVersion());
             it_1.setOptional(true);
           };
           it.maven(_function_3);
         };
         ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_2);
         deps.add(_doubleArrow_2);
+        ExternalDependency _externalDependency_2 = new ExternalDependency();
+        final Procedure1<ExternalDependency> _function_3 = (ExternalDependency it) -> {
+          final Procedure1<ExternalDependency.MavenCoordinates> _function_4 = (ExternalDependency.MavenCoordinates it_1) -> {
+            it_1.setGroupId("org.eclipse.xtext");
+            it_1.setArtifactId("xtext-antlr-generator");
+            it_1.setOptional(true);
+          };
+          it.maven(_function_4);
+        };
+        ExternalDependency _doubleArrow_3 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_2, _function_3);
+        deps.add(_doubleArrow_3);
       }
       _xblockexpression = deps;
     }
@@ -588,11 +598,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("dependencies {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
-      String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
-      _builder.append(_mweVersion, "\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
+      _builder.append("mwe2 \'org.eclipse.emf:org.eclipse.emf.mwe2.launch\'");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}\"");
       _builder.newLine();
@@ -600,11 +607,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("mwe2 \"org.eclipse.xtext:xtext-antlr-generator:");
-      String _antlrGeneratorVersion = this.getConfig().getXtextVersion().getAntlrGeneratorVersion();
-      _builder.append(_antlrGeneratorVersion, "\t");
-      _builder.append("\"");
-      _builder.newLineIfNotEmpty();
+      _builder.append("mwe2 \'org.eclipse.xtext:xtext-antlr-generator\'");
+      _builder.newLine();
       {
         boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
         if (_isFromExistingEcoreModels) {

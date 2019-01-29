@@ -89,7 +89,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				maven [
 					groupId = "org.eclipse.emf"
 					artifactId = "org.eclipse.emf.mwe2.launch"
-					version = config.xtextVersion.mweVersion
+					optional = true
+				]
+			]
+			deps += new ExternalDependency => [
+				maven [
+					groupId = "org.eclipse.xtext"
+					artifactId = "xtext-antlr-generator"
 					optional = true
 				]
 			]
@@ -280,10 +286,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
-					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
+					mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
-					mwe2 "org.eclipse.xtext:xtext-antlr-generator:«config.xtextVersion.antlrGeneratorVersion»"
+					mwe2 'org.eclipse.xtext:xtext-antlr-generator'
 					«IF fromExistingEcoreModels»
 						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
 						mwe2 "org.eclipse.xpand:org.eclipse.xpand:2.0.0"
