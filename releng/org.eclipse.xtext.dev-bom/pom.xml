@@ -107,6 +107,7 @@
 		<osgi-version>3.13.200</osgi-version>
 		<text-version>3.8.0</text-version>
 		<xpand-version>2.0.0</xpand-version>
+		<xtext-antlr-generator-version>2.1.1</xtext-antlr-generator-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -357,6 +358,11 @@
 				<groupId>org.eclipse.xpand</groupId>
 				<artifactId>org.eclipse.xtend.typesystem.emf</artifactId>
 				<version>${xpand-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-antlr-generator</artifactId>
+				<version>${xtext-antlr-generator-version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
