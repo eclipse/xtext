@@ -27,7 +27,11 @@ class GradleBuildFile extends TextFile {
 						compile project(':«p.name»')
 					«ENDFOR»
 					«FOR dep : mavenDependencies»
-						«dep.scope.gradleNotation» "«dep.groupId»:«dep.artifactId»:«dep.version»"
+						«IF dep.version !== null»
+							«dep.scope.gradleNotation» "«dep.groupId»:«dep.artifactId»:«dep.version»"
+						«ELSE»
+							«dep.scope.gradleNotation» '«dep.groupId»:«dep.artifactId»'
+						«ENDIF»
 					«ENDFOR»
 				}
 			«ENDIF»

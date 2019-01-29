@@ -1,5 +1,5 @@
 dependencies {
-	testCompile "junit:junit:4.12"
+	testCompile 'junit:junit'
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
@@ -12,10 +12,10 @@ configurations {
 }
 
 dependencies {
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:2.9.1.201705291010"
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
-	mwe2 "org.eclipse.xtext:xtext-antlr-generator:[2.1.1, 3)"
+	mwe2 'org.eclipse.xtext:xtext-antlr-generator'
 }
 
 task generateXtextLanguage(type: JavaExec) {

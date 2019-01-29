@@ -56,20 +56,38 @@ public class GradleBuildFile extends TextFile {
         {
           Iterable<ExternalDependency.MavenCoordinates> _mavenDependencies = this.getMavenDependencies();
           for(final ExternalDependency.MavenCoordinates dep : _mavenDependencies) {
-            _builder.append("\t");
-            String _gradleNotation = dep.getScope().getGradleNotation();
-            _builder.append(_gradleNotation, "\t");
-            _builder.append(" \"");
-            String _groupId = dep.getGroupId();
-            _builder.append(_groupId, "\t");
-            _builder.append(":");
-            String _artifactId = dep.getArtifactId();
-            _builder.append(_artifactId, "\t");
-            _builder.append(":");
-            String _version = dep.getVersion();
-            _builder.append(_version, "\t");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();
+            {
+              String _version = dep.getVersion();
+              boolean _tripleNotEquals = (_version != null);
+              if (_tripleNotEquals) {
+                _builder.append("\t");
+                String _gradleNotation = dep.getScope().getGradleNotation();
+                _builder.append(_gradleNotation, "\t");
+                _builder.append(" \"");
+                String _groupId = dep.getGroupId();
+                _builder.append(_groupId, "\t");
+                _builder.append(":");
+                String _artifactId = dep.getArtifactId();
+                _builder.append(_artifactId, "\t");
+                _builder.append(":");
+                String _version_1 = dep.getVersion();
+                _builder.append(_version_1, "\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("\t");
+                String _gradleNotation_1 = dep.getScope().getGradleNotation();
+                _builder.append(_gradleNotation_1, "\t");
+                _builder.append(" \'");
+                String _groupId_1 = dep.getGroupId();
+                _builder.append(_groupId_1, "\t");
+                _builder.append(":");
+                String _artifactId_1 = dep.getArtifactId();
+                _builder.append(_artifactId_1, "\t");
+                _builder.append("\'");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.append("}");
