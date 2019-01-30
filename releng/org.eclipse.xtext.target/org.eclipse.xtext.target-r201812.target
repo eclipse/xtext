@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="org.eclipse.xtext.r201812.target" sequenceNumber="6">
+<target name="org.eclipse.xtext.r201812.target" sequenceNumber="10">
 <locations>
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
@@ -66,35 +66,19 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/eclipse/updates/4.10"/>
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xpand" version="0.0.0"/>
 		<unit id="org.eclipse.xtend" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/2018-12"/>
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/modeling/emf/emf/builds/nightly/latest"/>
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/tools/gef/updates/legacy/releases"/>	
-	</location>
-
-	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1/"/>
+		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
+		<repository location="http://download.eclipse.org/releases/2018-12"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
