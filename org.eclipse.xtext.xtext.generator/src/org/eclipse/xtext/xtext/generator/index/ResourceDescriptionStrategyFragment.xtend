@@ -64,6 +64,10 @@ class ResourceDescriptionStrategyFragment extends AbstractInheritingFragment {
 		return getResourceDescriptionStrategyClass(grammar)
 	}
 
+    protected def needsToInvokeSuperResourceDescriptionStrategy(){
+		inheritImplementation && grammar.nonTerminalsSuperGrammar !== null
+    }
+
 	protected def getResourceDescriptionSuperClass(){
 		val superGrammar = grammar.nonTerminalsSuperGrammar
 		if (inheritImplementation && superGrammar !== null)
@@ -122,6 +126,9 @@ class ResourceDescriptionStrategyFragment extends AbstractInheritingFragment {
 						return createEObjectDescriptionsFor«exportedRule.type.classifier.name»(eObject, acceptor);
 					}
 				«ENDFOR»
+				«IF needsToInvokeSuperResourceDescriptionStrategy»
+				super.createEObjectDescriptions(eObject, acceptor);
+				«ENDIF»
 				return true;
 			}
 		

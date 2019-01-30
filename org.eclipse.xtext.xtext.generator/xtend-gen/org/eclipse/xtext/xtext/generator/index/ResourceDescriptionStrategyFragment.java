@@ -95,6 +95,10 @@ public class ResourceDescriptionStrategyFragment extends AbstractInheritingFragm
     return this.getResourceDescriptionStrategyClass(this.getGrammar());
   }
   
+  protected boolean needsToInvokeSuperResourceDescriptionStrategy() {
+    return (this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(this.getGrammar()) != null));
+  }
+  
   protected TypeReference getResourceDescriptionSuperClass() {
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(this.getGrammar());
     if ((this.isInheritImplementation() && (superGrammar != null))) {
@@ -199,6 +203,14 @@ public class ResourceDescriptionStrategyFragment extends AbstractInheritingFragm
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        {
+          boolean _needsToInvokeSuperResourceDescriptionStrategy = ResourceDescriptionStrategyFragment.this.needsToInvokeSuperResourceDescriptionStrategy();
+          if (_needsToInvokeSuperResourceDescriptionStrategy) {
+            _builder.append("\t\t");
+            _builder.append("super.createEObjectDescriptions(eObject, acceptor);");
             _builder.newLine();
           }
         }
