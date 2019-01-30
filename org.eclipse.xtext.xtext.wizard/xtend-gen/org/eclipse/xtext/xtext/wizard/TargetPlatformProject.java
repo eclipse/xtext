@@ -126,7 +126,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.1/\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
