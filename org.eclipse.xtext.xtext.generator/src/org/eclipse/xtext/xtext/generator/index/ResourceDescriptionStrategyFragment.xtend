@@ -17,14 +17,16 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xtext.AnnotationNames
-import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
+import org.eclipse.xtext.Grammar
 
 /**
  * By default the @link DefaultResourceDescriptionStrategy exposes all model element that have a name.
@@ -35,7 +37,7 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
  * 
  * @author Holger Schill - Initial contribution and API
  */
-class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
+class ResourceDescriptionStrategyFragment extends AbstractInheritingFragment {
 	
 	/**
 	 * if this flag is set to false nothing get's generated or bound
@@ -53,15 +55,23 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 	protected def getAbstractResourceDescriptionStrategyClass(){
 		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'AbstractResourceDescriptionStrategy')
 	}
-	
-	protected def getStubResourceDescriptionStrategyClass(){
+
+	protected def getResourceDescriptionStrategyClass(Grammar grammar){
 		return new TypeReference(grammar.runtimeBasePackage + '.resource.' + grammar.simpleName + 'ResourceDescriptionStrategy')
 	}
-	
-	protected def getResourceDescriptionSuperClass(){
-		return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy");
+
+	protected def getStubResourceDescriptionStrategyClass(){
+		return getResourceDescriptionStrategyClass(grammar)
 	}
-	
+
+	protected def getResourceDescriptionSuperClass(){
+		val superGrammar = grammar.nonTerminalsSuperGrammar
+		if (inheritImplementation && superGrammar !== null)
+			return getResourceDescriptionStrategyClass(superGrammar)
+		else
+			return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy")
+	}
+
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
 		if(isGenerateStub || isGenerateXtendStub){
@@ -81,8 +91,13 @@ class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment
 		val exportedRules = exportedRulesFromGrammar;
 		if(exportedRules.shouldGenerateArtefacts) {
 			contributeRuntimeGuiceBindings
+
 			generateResourceDescriptionStrategy(exportedRules).writeTo(projectConfig.runtime.srcGen)
 			generateResourceDescriptionStrategyStub(exportedRules)
+
+			if (projectConfig.runtime.manifest !== null) {
+				projectConfig.runtime.manifest.exportedPackages += grammar.resourceDescriptionStrategyClass.packageName
+			}
 		}
 	}
 	
