@@ -20,8 +20,6 @@ import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
 
@@ -141,8 +139,7 @@ public class TokenScanner extends AbstractTokenScanner {
 			// User might have selected a non-xtext document in e.g. a compare operation.
 			// Return an empty iterable, this will disable syntax highlighting
 			// for the "non-xtext editor".
-			Iterable<ILexerTokenRegion> iterable = Collections.<ILexerTokenRegion>emptyList();
-			return iterable;
+			return Collections.emptyList();
 		}
 		XtextDocument doc = (XtextDocument) document;
 		return doc.getTokens();
