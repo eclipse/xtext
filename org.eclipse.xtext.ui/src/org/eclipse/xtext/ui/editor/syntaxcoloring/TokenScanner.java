@@ -141,8 +141,8 @@ public class TokenScanner extends AbstractTokenScanner {
 			// User might have selected a non-xtext document in e.g. a compare operation.
 			// Return an empty iterable, this will disable syntax highlighting
 			// for the "non-xtext editor".
-			Iterator<ILexerTokenRegion> iterator = Collections.<ILexerTokenRegion>emptyIterator();
-			return () -> iterator;
+			Iterable<ILexerTokenRegion> iterable = Collections.<ILexerTokenRegion>emptyList();
+			return iterable;
 		}
 		XtextDocument doc = (XtextDocument) document;
 		return doc.getTokens();
