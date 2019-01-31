@@ -22,6 +22,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<maven.javadoc.opts>-html5</maven.javadoc.opts>
 		<upstreamBranch>master</upstreamBranch>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
@@ -113,7 +114,45 @@
 					</execution>
 				</executions>
 				<configuration>
-					<additionalparam>${javadoc.opts}</additionalparam>
+					<additionalOptions>${maven.javadoc.opts}</additionalOptions>
+					<!-- Maven tags used in XtextGenerator Javadoc -->
+					<tags>
+						<tag>
+							<name>goal</name>
+							<placement>a</placement>
+							<head>Goal:</head>
+						</tag>
+						<tag>
+							<name>phase</name>
+							<placement>a</placement>
+							<head>Phase:</head>
+						</tag>
+						<tag>
+							<name>threadSafe</name>
+							<placement>a</placement>
+							<head>Thread Safe:</head>
+						</tag>
+						<tag>
+							<name>parameter</name>
+							<placement>a</placement>
+							<head>Parameter:</head>
+						</tag>
+						<tag>
+							<name>required</name>
+							<placement>a</placement>
+							<head>Required:</head>
+						</tag>
+						<tag>
+							<name>requiresDependencyResolution</name>
+							<placement>a</placement>
+							<head>Requires Dependency Resolution:</head>
+						</tag>
+						<tag>
+							<name>readonly</name>
+							<placement>a</placement>
+							<head>Read Only:</head>
+						</tag>
+					</tags>
 				</configuration>
 			</plugin>
 			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may 
@@ -231,7 +270,7 @@
 				<jdk>[1.8,)</jdk>
 			</activation>
 			<properties>
-				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+				<javadoc.opts>-Xdoclint:none -html5</javadoc.opts>
 			</properties>
 		</profile>
 		<profile>
