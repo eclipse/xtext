@@ -64,6 +64,19 @@ class HyperlinkingTest extends AbstractHyperlinkingTest {
 		'''.hasHyperlinkTo("foopackage.Foo")
 	}
 
+	@Test def hyperlink_javadoc_link_to_java_type() {
+		'''
+			import java.util.Date
+			
+			/**
+			 * {@link «c»Date«c»}
+			 */
+			entity Foo {
+				date : Date
+			}
+		'''.hasHyperlinkTo("java.util.Date")
+	}
+
 	@Test def hyperlink_on_entity_member_type() {
 		'''
 			entity Foo {}
@@ -86,5 +99,18 @@ class HyperlinkingTest extends AbstractHyperlinkingTest {
 				foo : «c»foopackage.Foo«c»
 			}
 		'''.hasHyperlinkTo("foopackage.Foo")
+	}
+
+	@Test def hyperlink_javadoc_link_to_entity_type() {
+		'''
+			import java.util.Date
+			
+			/**
+			 * {@link «c»Foo«c»}
+			 */
+			entity Foo {
+				date : Date
+			}
+		'''.hasHyperlinkTo("Foo")
 	}
 }

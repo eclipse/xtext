@@ -100,6 +100,34 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
   }
   
   @Test
+  public void hyperlink_javadoc_link_to_java_type() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* {@link ");
+    _builder.append(this.c, " ");
+    _builder.append("Date");
+    _builder.append(this.c, " ");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("date : Date");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.hasHyperlinkTo(_builder, "java.util.Date");
+  }
+  
+  @Test
   public void hyperlink_on_entity_member_type() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entity Foo {}");
@@ -143,5 +171,33 @@ public class HyperlinkingTest extends AbstractHyperlinkingTest {
     _builder.append("}");
     _builder.newLine();
     this.hasHyperlinkTo(_builder, "foopackage.Foo");
+  }
+  
+  @Test
+  public void hyperlink_javadoc_link_to_entity_type() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* {@link ");
+    _builder.append(this.c, " ");
+    _builder.append("Foo");
+    _builder.append(this.c, " ");
+    _builder.append("}");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("entity Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("date : Date");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.hasHyperlinkTo(_builder, "Foo");
   }
 }

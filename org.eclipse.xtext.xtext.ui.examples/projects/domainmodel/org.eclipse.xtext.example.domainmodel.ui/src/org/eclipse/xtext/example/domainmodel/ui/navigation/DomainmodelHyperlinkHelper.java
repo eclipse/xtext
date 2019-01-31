@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
-import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.xbase.ui.navigation.XbaseHyperLinkHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -35,7 +35,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  */
-public class DomainmodelHyperlinkHelper extends TypeAwareHyperlinkHelper {
+public class DomainmodelHyperlinkHelper extends XbaseHyperLinkHelper {
 
 	private static final Logger logger = Logger.getLogger(DomainmodelHyperlinkHelper.class);
 
