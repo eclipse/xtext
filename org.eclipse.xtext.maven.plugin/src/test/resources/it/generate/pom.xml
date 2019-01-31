@@ -10,6 +10,9 @@
 	<properties>
 		<upstreamBranch>master</upstreamBranch>
 		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<xtext.version>2.17.0-SNAPSHOT</xtext.version>
 	</properties>
 
