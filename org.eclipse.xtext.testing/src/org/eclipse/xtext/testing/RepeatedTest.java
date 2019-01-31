@@ -17,7 +17,8 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * Annotation to mark a test that should be executed in a loop for {@link #times() n times}.
+ * Annotation to mark a test that should be executed in a loop for
+ * {@link #times() n times}.
  * 
  * @since 2.17
  */
@@ -29,17 +30,18 @@ public @interface RepeatedTest {
 	 * @return number of repetitions.
 	 */
 	int times() default 10;
-	
+
 	/**
-	 * Test rule used along with {@link RepeatTest} to let a test loop for a couple of rounds.
+	 * Test rule used along with {@link RepeatTest} to let a test loop for a couple
+	 * of rounds.
 	 */
 	public static class Rule implements TestRule {
 
 		private final boolean quiet;
 
 		/**
-		 * @param quiet
-		 *            set to true if log output is desired
+		 * @param quiet set to true if log output is not desired. Otherwise the current
+		 *              iteration is logged to <code>System.out</code>
 		 */
 		public Rule(boolean quiet) {
 			this.quiet = quiet;
@@ -63,7 +65,7 @@ public @interface RepeatedTest {
 			}
 			return statement;
 		}
-		
+
 		/**
 		 * Encapsulates the logic for tests that should be executed in a tight loop.
 		 */
