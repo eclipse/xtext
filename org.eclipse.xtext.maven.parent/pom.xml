@@ -15,7 +15,6 @@
 		<emf.version>2.12.0</emf.version>
 
 		<maven-install-version>2.5.1</maven-install-version>
-		<log4j.version>1.2.16</log4j.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
