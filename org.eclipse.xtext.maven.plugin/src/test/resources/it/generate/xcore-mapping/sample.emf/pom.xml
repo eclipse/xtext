@@ -37,17 +37,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
-				<version>${xtext-maven-version}</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
-
 					<languages>
 						<language>
 							<setup>org.eclipse.xtext.ecore.EcoreSupport</setup>
@@ -59,12 +49,9 @@
 							<setup>org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup</setup>
 							<outputConfigurations>
 								<outputConfiguration>
-
 									<outputDirectory>${project.basedir}/xcore-gen</outputDirectory>
-
 								</outputConfiguration>
 							</outputConfigurations>
-
 						</language>
 					</languages>
 					<!-- This should be in sync with build-helper-maven-plugin//sources, 
