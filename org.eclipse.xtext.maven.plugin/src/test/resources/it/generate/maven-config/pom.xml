@@ -6,14 +6,11 @@
 
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<version>1.0.0-SNAPSHOT</version>
 		<artifactId>xtext-maven-plugin-it</artifactId>
+		<version>IT-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.eclipse.xtext</groupId>
-	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>maven-config-test</artifactId>
-	<packaging>jar</packaging>
 	<properties>
 		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 		<xtend.version>2.17.0-SNAPSHOT</xtend.version>

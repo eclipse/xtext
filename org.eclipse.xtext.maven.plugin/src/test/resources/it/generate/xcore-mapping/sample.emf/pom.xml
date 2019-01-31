@@ -5,12 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>sample</groupId>
+		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>sample.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>IT-SNAPSHOT</version>
 	</parent>
 	<artifactId>sample.emf</artifactId>
-	<packaging>jar</packaging>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
