@@ -336,9 +336,9 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
-		<url>https://github.com/eclipse/xtext.git</url>
+		<connection>scm:git:https://github.com/eclipse/xtext-maven.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-maven.git</developerConnection>
+		<url>https://github.com/eclipse/xtext-maven.git</url>
 	</scm>
 	
 	<licenses>
