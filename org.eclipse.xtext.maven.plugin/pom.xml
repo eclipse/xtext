@@ -110,14 +110,12 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-plugin-plugin</artifactId>
-				<version>2.7</version>
 				<configuration>
 					<goalPrefix>xtext</goalPrefix>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
 				<executions>
 					<execution>
 						<id>creat-jar</id>
@@ -159,7 +157,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
-				<version>${maven-install-version}</version>
 				<executions>
 					<execution>
 						<id>self</id>
@@ -182,7 +179,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.10</version>
 				<executions>
 					<execution>
 						<phase>integration-test</phase>
