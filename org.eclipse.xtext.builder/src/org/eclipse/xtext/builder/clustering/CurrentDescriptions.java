@@ -22,11 +22,13 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Thomas Wolf <thomas.wolf@paranor.ch> - Performance optimization and JavaDoc
  */
-public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions {
+public class CurrentDescriptions extends AdapterImpl implements IResourceDescriptions.IResourceSetAware {
 
 	/**
 	 * New index.
@@ -139,9 +141,19 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	}
 
 	/**
+	 * @since 2.17
+	 */
+	@Override
+	public ResourceSet getResourceSet() {
+		Object target = getTarget();
+		ResourceSet resourceSet = (ResourceSet) checkNotNull(target);
+		return resourceSet;
+	}
+
+	/**
 	 * Context-aware instance of our index.
 	 */
-	public static class ResourceSetAware implements IResourceDescriptions.IContextAware {
+	public static class ResourceSetAware implements IResourceDescriptions.IContextAware, IResourceDescriptions.IResourceSetAware {
 
 		/** Base index. */
 		private IResourceDescriptions delegate;
@@ -209,5 +221,15 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 			return delegate.getExportedObjectsByObject(object);
 		}
 
+		/**
+		 * @since 2.17
+		 */
+		@Override
+		public ResourceSet getResourceSet() {
+			checkNotNull(delegate);
+			IResourceSetAware resourceSetAware = (IResourceSetAware) delegate;
+			ResourceSet resourceSet = resourceSetAware.getResourceSet();
+			return resourceSet;
+		}
 	}
 }
