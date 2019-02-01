@@ -14,7 +14,7 @@
       <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.4.0.M2"/>
       <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.10.0.M2"/>
       <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.10.0.M2"/>
-      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/"/>
+      <repository location="http://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>

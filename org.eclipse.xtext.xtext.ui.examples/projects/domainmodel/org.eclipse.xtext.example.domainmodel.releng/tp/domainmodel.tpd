@@ -20,7 +20,7 @@ location "http://download.eclipse.org/releases/2019-03" {
 	org.eclipse.emf.sdk.feature.group lazy
 }
 
-location "https://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/" {
+location "http://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/" {
 	org.eclipse.emf.mwe.sdk.feature.group
 	org.eclipse.emf.mwe2.runtime.sdk.feature.group
 	org.eclipse.emf.mwe2.language.sdk.feature.group
