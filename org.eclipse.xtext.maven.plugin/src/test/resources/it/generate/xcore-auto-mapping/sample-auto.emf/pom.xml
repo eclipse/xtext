@@ -1,18 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>sample-auto</groupId>
+		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>sample-auto.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>IT-SNAPSHOT</version>
 	</parent>
 	<artifactId>sample-auto.emf</artifactId>
-	<packaging>jar</packaging>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -37,17 +36,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
-				<version>${xtext-maven-version}</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
-
 					<languages>
 						<language>
 							<setup>org.eclipse.xtext.ecore.EcoreSupport</setup>
@@ -109,7 +98,7 @@
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
-						<version>${ecore-xtextVersion}</version>
+						<version>${ecore-xtext-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
@@ -146,13 +135,11 @@
 						<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
 						<version>${ecore-xcore-lib-version}</version>
 					</dependency>
-
 				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.9.1</version>
 				<executions>
 					<execution>
 						<id>add-source</id>
@@ -185,22 +172,18 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
-			<version>${ecore-xcore-lib-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
-			<version>${emf-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>
-			<version>${emf-common-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-			<version>${emf-version}</version>
 		</dependency>
 	</dependencies>
 

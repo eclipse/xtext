@@ -140,8 +140,6 @@ public class XtextGeneratorIT {
 			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
 		}
 		Verifier verifier = newVerifier(pathToTestProject);
-		String localRepo = new File(System.getProperty("testProjectDir")+"/../../.m2/repository/").getAbsoluteFile().getAbsolutePath();
-		verifier.setLocalRepo(localRepo);
 		
 		if(updateSnapshots) {
 			verifier.addCliOption("-U");
@@ -164,7 +162,7 @@ public class XtextGeneratorIT {
 //		verifier.addCliOption("-U");
 //		verifier.setForkJvm(!debug);
 		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
-		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g -XX:MaxPermSize=256m";
+		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g";
 		verifier.setEnvironmentVariable("MAVEN_OPTS", modMvnOpts);
 		if (debug) {
 			verifier.setMavenDebug(debug);
