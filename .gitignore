@@ -2,6 +2,7 @@
 /build/
 bin/
 target/
+src-gen/
 *._trace
 *.xtendbin
 .DS_Store
