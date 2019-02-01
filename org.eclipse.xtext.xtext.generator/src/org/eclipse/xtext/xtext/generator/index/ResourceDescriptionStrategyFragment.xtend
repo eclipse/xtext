@@ -127,9 +127,10 @@ class ResourceDescriptionStrategyFragment extends AbstractInheritingFragment {
 					}
 				«ENDFOR»
 				«IF needsToInvokeSuperResourceDescriptionStrategy»
-				super.createEObjectDescriptions(eObject, acceptor);
+					return super.createEObjectDescriptions(eObject, acceptor);
+				«ELSE»
+					return true;
 				«ENDIF»
-				return true;
 			}
 		
 			«FOR exportedRule : exportedRules»

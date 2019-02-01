@@ -210,13 +210,14 @@ public class ResourceDescriptionStrategyFragment extends AbstractInheritingFragm
           boolean _needsToInvokeSuperResourceDescriptionStrategy = ResourceDescriptionStrategyFragment.this.needsToInvokeSuperResourceDescriptionStrategy();
           if (_needsToInvokeSuperResourceDescriptionStrategy) {
             _builder.append("\t\t");
-            _builder.append("super.createEObjectDescriptions(eObject, acceptor);");
+            _builder.append("return super.createEObjectDescriptions(eObject, acceptor);");
+            _builder.newLine();
+          } else {
+            _builder.append("\t\t");
+            _builder.append("return true;");
             _builder.newLine();
           }
         }
-        _builder.append("\t\t");
-        _builder.append("return true;");
-        _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
