@@ -9,12 +9,11 @@ import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
-
-import junit.framework.Assert;
 
 public class XtextGeneratorIT {
 
