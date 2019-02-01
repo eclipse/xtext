@@ -8,7 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -49,6 +49,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
@@ -92,6 +93,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	
 	@Inject 
 	private OperationCanceledManager operationCanceledManager;
+	
+	@Inject
+	private ReflectExtensions reflector;
 	
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -269,17 +273,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			operationCanceledManager.propagateIfCancelException(t);
 		buildLogger.log("Build interrupted.");
 		queuedBuildData.rollback();
-		doRememberLastBuiltState();
-	}
-	
-	private void doRememberLastBuiltState() {
-		try {
-			Method method = getClass().getMethod("rememberLastBuiltState");
-			method.invoke(this);
-		} catch (Exception e) {
-			// not available prior to Eclipse 3.7. Sorry: full build next time
-			throw new OperationCanceledException();
-		}
+		rememberLastBuiltState();
 	}
 	
 	private String getKindAsString(int kind) {
@@ -312,29 +306,45 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		}
 
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
-		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
-			@Override
-			public boolean visit(IResourceDelta delta) throws CoreException {
-				if (progress.isCanceled())
-					throw new OperationCanceledException();
-				if (delta.getResource() instanceof IProject) {
-					return delta.getResource() == getProject();
-				}
-				if (delta.getResource() instanceof IStorage) {
-					if (delta.getKind() == IResourceDelta.REMOVED) {
-						return toBeBuiltComputer.removeStorage(null, toBeBuilt, (IStorage) delta.getResource());
-					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
-						return toBeBuiltComputer.updateStorage(null, toBeBuilt, (IStorage) delta.getResource());
-					}
-				}
-				return true;
-			}
-		};
+		IResourceDeltaVisitor visitor = createDeltaVisitor(toBeBuiltComputer, toBeBuilt, progress);
 		delta.accept(visitor);
+		processedAbsentReferencedProjects(visitor);
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
 		progress.worked(2);
 		doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
+	}
+	
+	/**
+	 * Obtain the deltas for the projects we were previously interested in and process them too, if they do no longer
+	 * have the xtext nature or if they are no longer accessible.
+	 *
+	 * @param visitor
+	 *            the processor.
+	 * @throws CoreException
+	 *             if something goes down the drain.
+	 * @since 2.17
+	 */
+	protected void processedAbsentReferencedProjects(IResourceDeltaVisitor visitor) throws CoreException {
+		final IProject[] interestingProjects = optimisticInvoke("getInterestingProjects");
+		for (IProject more : interestingProjects) {
+			if (!XtextProjectHelper.hasNature(more)) {
+				IResourceDelta interestingDelta = getDelta(more);
+				if (interestingDelta != null) {
+					interestingDelta.accept(visitor);
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> T optimisticInvoke(String methodName) {
+		try {
+			return (T) reflector.invoke(this, methodName);
+		} catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException
+				| NoSuchMethodException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -348,12 +358,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly).isEmpty())
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild).isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
@@ -389,10 +399,41 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			isRecoveryBuild
 				? toBeBuiltComputer.updateProjectNewResourcesOnly(project, progress.split(2)) 
 				: toBeBuiltComputer.updateProject(project, progress.split(2));
+				
+
+		IResourceDeltaVisitor visitor = createDeltaVisitor(toBeBuiltComputer, toBeBuilt, progress);
+		processedAbsentReferencedProjects(visitor);
 		doBuild(toBeBuilt, progress.split(8), 
 			isRecoveryBuild 
 				? BuildType.RECOVERY 
 				: BuildType.FULL);
+	}
+	
+	/**
+	 * Creates a visitor that is used to traverse the information that is obtained from {@link #getDelta(IProject)}. It
+	 * accumulates its findings in the given <code>toBeBuilt</code>.
+	 */
+	protected IResourceDeltaVisitor createDeltaVisitor(ToBeBuiltComputer toBeBuiltComputer, ToBeBuilt toBeBuilt,
+			final SubMonitor progress) {
+		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
+			@Override
+			public boolean visit(IResourceDelta delta) throws CoreException {
+				if (progress.isCanceled())
+					throw new OperationCanceledException();
+				if (delta.getResource() instanceof IProject) {
+					return true;
+				}
+				if (delta.getResource() instanceof IStorage) {
+					if (delta.getKind() == IResourceDelta.REMOVED) {
+						return toBeBuiltComputer.removeStorage(null, toBeBuilt, (IStorage) delta.getResource());
+					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
+						return toBeBuiltComputer.updateStorage(null, toBeBuilt, (IStorage) delta.getResource());
+					}
+				}
+				return true;
+			}
+		};
+		return visitor;
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {

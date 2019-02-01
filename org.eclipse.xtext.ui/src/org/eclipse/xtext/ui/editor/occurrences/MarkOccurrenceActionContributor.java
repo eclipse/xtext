@@ -34,37 +34,37 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 	@Inject
 	private Provider<OccurrenceMarker> occurrenceMarkerProvider;
 
-	private Map<XtextEditor, OccurrenceMarker> editor2marker = newHashMap();
-	
-	@Override
-	protected Action getAction() {
-		Action action = super.getAction();
-		return action;
-	}
+	private Map<XtextEditor, OccurrenceMarker> editor2marker = newConcurrentMap();
 	
 	@Override
 	public void contributeActions(XtextEditor editor) {
-		OccurrenceMarker occurrenceMarker = editor2marker.get(editor);
-		if(occurrenceMarker == null) {
-			editor.setAction(getAction().getId(), getAction());
+		editor2marker.computeIfAbsent(editor, (e)->{
+			Action action = getAction();
+			editor.setAction(action.getId(), action);
 			IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
-			if(toolBarManager.find(getAction().getId())==null) {
-				ActionContributionItem item = new ActionContributionItem(getAction());
+			if(toolBarManager.find(action.getId())==null) {
+				ActionContributionItem item = new ActionContributionItem(action);
 				item.setVisible(false);
 				toolBarManager.add(item);				
 			}
-			occurrenceMarker = occurrenceMarkerProvider.get();
+			OccurrenceMarker occurrenceMarker = occurrenceMarkerProvider.get();
 			occurrenceMarker.connect(editor, isPropertySet());
-			editor2marker.put(editor, occurrenceMarker);
-		}
+			return occurrenceMarker;
+		});
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public OccurrenceMarker findOccurrenceMarker(XtextEditor editor) {
+		return editor2marker.get(editor);
 	}
 
 	@Override
 	public void editorDisposed(XtextEditor editor) {
-		OccurrenceMarker occurrenceMarker = editor2marker.get(editor);
+		OccurrenceMarker occurrenceMarker = editor2marker.remove(editor);
 		if(occurrenceMarker != null) {
 			occurrenceMarker.disconnect(editor);
-			editor2marker.remove(editor);
 		}
 	}
 

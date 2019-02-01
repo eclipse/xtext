@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,16 +26,23 @@ import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
-import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.shared.internal.SharedModule;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -45,20 +55,28 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
+@RunWith(XtextRunner.class)
+public class PersistableResourceDescriptionsTest {
 	private static final String FILE_EXT = ".buildertestlanguage";
-	private Injector builderInjector;
+	private static Injector builderInjector;
 
 	private Map<String, String> fileSystem = Maps.newHashMap();
 	private ExtensibleURIConverterImpl uriConverter;
 	private ClusteringBuilderState builderState;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		with(new BuilderTestLanguageStandaloneSetup());
+	@BeforeClass
+	public static void createBuilderInjector() {
 		SharedModule module = new SharedModule(null);
 		builderInjector = Guice.createInjector(module);
+	}
+	@AfterClass
+	public static void discardBuilderInjector() {
+		builderInjector = null;
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+		fileSystem = Maps.newHashMap();
 		builderState = builderInjector.getInstance(ClusteringBuilderState.class);
 		uriConverter = new ExtensibleURIConverterImpl() {
 			@Override
@@ -98,11 +116,9 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		return resourceSetImpl;
 	}
 	
-	@Override
+	@After
 	public void tearDown() throws Exception {
-		super.tearDown();
-		builderInjector = null;
-		fileSystem = Maps.newHashMap();
+		fileSystem = null;
 		uriConverter = null;
 		builderState = null;
 	}
@@ -254,7 +270,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(builderState.getResourceDescription(uri3));
 	}
 	
-	public static class ListBasedPersister implements PersistedStateProvider {
+	private static class ListBasedPersister implements PersistedStateProvider {
 
 		public List<IResourceDescription> descriptions = Lists.newArrayList();
 		
@@ -304,6 +320,36 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		} finally {
 			resourceSet.getResources().clear();
 		}
+	}
+	
+	private static class URIBasedTestResourceDescription extends AbstractResourceDescription {
+
+		private URI uri;
+		
+		public URIBasedTestResourceDescription(URI uri) {
+			this.uri = uri;
+		}
+
+		@Override
+		protected List<IEObjectDescription> computeExportedObjects() {
+			return Collections.emptyList();
+		}
+		
+		@Override
+		public Iterable<QualifiedName> getImportedNames() {
+			return Collections.emptyList();
+		}
+
+		@Override
+		public Iterable<IReferenceDescription> getReferenceDescriptions() {
+			return Collections.emptyList();
+		}
+
+		@Override
+		public URI getURI() {
+			return uri;
+		}
+		
 	}
 
 }

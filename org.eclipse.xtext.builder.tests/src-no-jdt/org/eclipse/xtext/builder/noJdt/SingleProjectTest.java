@@ -8,13 +8,12 @@
 package org.eclipse.xtext.builder.noJdt;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourceAttributes;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -25,39 +24,32 @@ public class SingleProjectTest extends AbstractBuilderTest {
 
 	private IProject project;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		project = createEmptyProject("sample");
+	@Before
+	public void createProject() throws Exception {
+		project = createEmptyXtextProject("sample");
 	}
 	
-	@Override
-	public void tearDown() throws Exception {
+	@After
+	public void forgetProject() throws Exception {
 		project = null;
-		super.tearDown();
-	}
-	
-	private void waitForBuild() throws Exception {
-		Thread.sleep(10);
-		IResourcesSetupUtil.waitForBuild();
 	}
 	
 	@Test public void testValidSimpleModel() throws Exception {
 		IFile file = createFile("sample/file" + F_EXT, "Hello World (from World)!");
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(file));
 	}
 
 	@Test public void testSimpleModelWithSyntaxError() throws Exception {
 		IFile file = createFile("sample/sample" + F_EXT, "Hello World");
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(file));
 	}
 
 	@Test public void testTwoFilesInSameProject() throws Exception {
 		IFile file1 = createFile("sample/a" + F_EXT, "Hello A!");
 		IFile file2 = createFile("sample/b" + F_EXT, "Hello B (from A)!");
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(file1), 0, countMarkers(file1));
 		assertEquals(printMarkers(file2), 0, countMarkers(file2));
 		assertTrue(indexContainsElement(file1.getFullPath().toString(), "A"));
@@ -68,17 +60,17 @@ public class SingleProjectTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInSameProjectRemoveNature() throws Exception {
 		createFile("sample/a" + F_EXT, "Hello A!");
 		createFile("sample/b" + F_EXT, "Hello B (from A)!");
-		waitForBuild();
+		build();
 		assertEquals(2, countResourcesInIndex());
-		removeNature(project, XtextProjectHelper.NATURE_ID);
-		waitForBuild();
+		removeXtextNature(project);
+		build();
 		assertEquals(0, countResourcesInIndex());
 	}
 
 	@Test public void testTwoFilesInSameProjectWithLinkingError() throws Exception {
 		createFile("sample/a" + F_EXT, "Hello A!");
 		IFile file = createFile("sample/a" + F_EXT, "Hello B (from C)!");
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(file));
 	}
 
@@ -88,7 +80,7 @@ public class SingleProjectTest extends AbstractBuilderTest {
 		resourceAttributes.setReadOnly(true);
 		file.setResourceAttributes(resourceAttributes);
 		try {
-			waitForBuild();
+			build();
 			assertTrue(file.isReadOnly());
 			assertEquals(1, countMarkers(file));
 		} finally {

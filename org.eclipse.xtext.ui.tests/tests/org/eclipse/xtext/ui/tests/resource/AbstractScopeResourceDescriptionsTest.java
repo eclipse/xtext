@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.foo.Stuff;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Before;
@@ -107,7 +108,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 				}
 			}
 			if (!isResourceException)
-				throw Throwables.propagate(t);
+				Exceptions.throwUncheckedException(t);
 		} finally {
 			dirtyStateManager.discardDirtyState(mockDirtyResource);
 		}

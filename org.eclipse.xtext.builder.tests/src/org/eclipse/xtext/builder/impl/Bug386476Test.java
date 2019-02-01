@@ -7,17 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.Assert.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -26,24 +25,18 @@ import org.junit.Test;
 public class Bug386476Test extends AbstractParticipatingBuilderTest {
 	private IJavaProject javaProject;
 
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void createProjectUnderTest() throws Exception {
 		javaProject = createJavaProject("BuilderDisabled");
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForBuild();
-	}
-
-	@Override
-	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-		super.build(context, monitor);
+		build();
 	}
 
 	@Test
 	public void testBuildIsNotInvokedWhenBuilderIsDisabled() throws Exception {
 		IProject project = javaProject.getProject();
 		IFile file = createSomeBuilderRelatedFile(project);
-		waitForBuild();
+		build();
 		startLogging();
 
 		// With Xtext Builder activated builder is invoked
@@ -63,22 +56,16 @@ public class Bug386476Test extends AbstractParticipatingBuilderTest {
 
 	private void stimulateBuildSchedulerTrigger(IProject project) throws CoreException {
 		project.close(monitor());
-		reallyWaitForAutoBuild();
+		build();
 		project.open(monitor());
-		reallyWaitForAutoBuild();
+		build();
 	}
 
 	private IFile createSomeBuilderRelatedFile(IProject project) throws CoreException {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		return file;
-	}
-
-	@Override
-	public void tearDown() throws Exception {
-		javaProject.getProject().delete(true, true, null);
-		super.tearDown();
 	}
 }

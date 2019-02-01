@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Collections;
 
@@ -23,14 +23,19 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+
 /**
  * @author Holger Schill - Initial contribution and API
  */
 public class Bug355821Test extends AbstractParticipatingBuilderTest {
 	
+	@Inject
+	private PluginProjectFactory projectFactory;
+	
 	@Test public void testBuildIsInvokedOnlyOnceWhenManifestChanges() throws Exception {
 		IProject fooProject = createPluginProject("Foo");
-		waitForBuild();
+		build();
 		
 		IFile manifestFile = fooProject.getFile("META-INF/MANIFEST.MF");
 		String manifestContent = "Manifest-Version: 1.0\n";
@@ -47,18 +52,18 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 //		manifestContent += "Bundle-RequiredExecutionEnvironment: JavaSE-1.8\n";
 		reset();
 		manifestFile.setContents(new StringInputStream(manifestContent), true, true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1, getInvocationCount());
 	}
 	
 	@Override
-	public synchronized void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-		if (context.getBuildType() == BuildType.FULL)
+	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+		if (context.getBuildType() == BuildType.FULL) {
 			invocationCount++;
+		}
 	}
 
 	private IProject createPluginProject(String name) throws CoreException {
-		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
@@ -71,7 +76,4 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 		return result;
 	}
 	
-	protected void waitForBuild() {
-		reallyWaitForAutoBuild();
-	}
 }

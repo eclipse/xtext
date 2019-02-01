@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
@@ -34,11 +33,17 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 
+	@Inject
+	private Provider<DerivedResourceCleanerJob> derivedResourceCleanerJobProvider;
+	
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=345545
 	 */
@@ -49,7 +54,7 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("ob ject Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IMarker[] markers = project.getProject()
 				.findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
 		assertEquals(1, markers.length);
@@ -63,7 +68,7 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 				xtextNature.deconfigure();
 			}
 		}.run(monitor());
-		waitForBuild();
+		build();
 		markers = project.getProject().findMarkers(MarkerTypes.ANY_VALIDATION, true, IResource.DEPTH_INFINITE);
 		assertEquals(0, markers.length);
 	}
@@ -77,14 +82,14 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./Foo.txt");
 		assertTrue(generatedFile.exists());
 		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(),
 				".");
 		file = folder.getFile("Bar" + F_EXT);
 		file.create(new StringInputStream("object Bar"), true, monitor());
-		waitForBuild();
+		build();
 		generatedFile = project.getProject().getFile("./Bar.txt");
 		assertTrue(generatedFile.exists());
 	}
@@ -97,7 +102,7 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertEquals(getNonDefaultEncoding(), generatedFile.getCharset());
 	}
@@ -119,7 +124,7 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		file = folder.getFile("Bar" + F_EXT);
 		file.create(new StringInputStream("object Bar"), true, monitor());
 
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		generatedFile = project.getProject().getFile("other-gen/Bar.txt");
@@ -133,22 +138,21 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		preferenceStoreAccess.getWritablePreferenceStore(project.getProject()).setValue(getDefaultOutputDirectoryKey(),
 				"./src2-gen");
 
-		DerivedResourceCleanerJob derivedResourceCleanerJob = getInjector()
-				.getInstance(DerivedResourceCleanerJob.class);
+		DerivedResourceCleanerJob derivedResourceCleanerJob = derivedResourceCleanerJobProvider.get();
 		derivedResourceCleanerJob.setUser(true);
 		derivedResourceCleanerJob.initialize(project.getProject(), "src-gen");
 		derivedResourceCleanerJob.schedule();
-		waitForResourceCleanerJob();
+		derivedResourceCleanerJob.join();
 		generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertFalse(generatedFile.exists());
 		file.touch(monitor());
-		waitForBuild();
+		build();
 		generatedFile = project.getProject().getFile("./src2-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 	}
@@ -160,22 +164,22 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", fileToString(generatedFile).trim());
+		assertEquals("object Foo", readFile(generatedFile).trim());
 		file.setContents(new StringInputStream("object Bar"), true, true, monitor());
-		waitForBuild();
+		build();
 		assertFalse(generatedFile.exists());
 		generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Bar", fileToString(generatedFile).trim());
+		assertEquals("object Bar", readFile(generatedFile).trim());
 		file.delete(true, monitor());
-		waitForBuild();
+		build();
 		assertFalse(generatedFile.exists());
 	}
 
@@ -186,14 +190,16 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", fileToString(generatedFile).trim());
-		cleanBuild();
-		assertFalse(generatedFile.exists());
+		assertEquals("object Foo", readFile(generatedFile).trim());
+		disableAutobuild(()->{
+			cleanBuild();
+			assertFalse(generatedFile.exists());	
+		});
 	}
 
 	@Test
@@ -218,25 +224,27 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
-		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
-		assertTrue(generatedFile.exists());
-		assertFalse(generatedFile.isDerived());
-		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", fileToString(generatedFile).trim());
+		build();
+		IFile generatedFileFoo = project.getProject().getFile("./src-gen/Foo.txt");
+		assertTrue(generatedFileFoo.exists());
+		assertFalse(generatedFileFoo.isDerived());
+		assertTrue(generatedFileFoo.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+		assertEquals("object Foo", readFile(generatedFileFoo).trim());
 		file.setContents(new StringInputStream("object Bar"), true, true, monitor());
-		waitForBuild();
-		assertTrue(generatedFile.exists());
-		generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
-		assertTrue(generatedFile.exists());
-		assertFalse(generatedFile.isDerived());
-		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Bar", fileToString(generatedFile).trim());
+		build();
+		assertTrue(generatedFileFoo.exists());
+		IFile generatedFileBar = project.getProject().getFile("./src-gen/Bar.txt");
+		assertTrue(generatedFileBar.exists());
+		assertFalse(generatedFileBar.isDerived());
+		assertTrue(generatedFileBar.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+		assertEquals("object Bar", readFile(generatedFileBar).trim());
 		file.delete(true, monitor());
-		waitForBuild();
-		assertTrue(generatedFile.exists());
-		cleanBuild();
-		assertTrue(generatedFile.exists());
+		build();
+		assertTrue(generatedFileBar.exists());
+		disableAutobuild(()->{
+			cleanBuild();
+			assertTrue(generatedFileBar.exists());	
+		});
 	}
 
 	@Test
@@ -247,12 +255,12 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertFalse(generatedFile.exists());
 		participant.getBuilderPreferenceAccess().setAutoBuildEnabled(project, true);
 		file.touch(monitor());
-		waitForBuild();
+		build();
 		assertTrue(generatedFile.exists());
 	}
 
@@ -276,7 +284,7 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		final IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
 		assertFalse(generatedFile.exists());
 	}

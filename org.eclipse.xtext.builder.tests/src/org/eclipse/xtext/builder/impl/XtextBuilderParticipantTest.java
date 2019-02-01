@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 
@@ -19,10 +18,10 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -34,9 +33,8 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 
 	private Collection<IBuildContext> contexts;
 	
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void createContextList() throws Exception {
 		contexts = Lists.newArrayList();
 	}
 
@@ -70,13 +68,13 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		assertTrue(0 < getInvocationCount());
 		validateContexts();
 		reset();
 		
 		file.delete(true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
 		validateContexts();
@@ -84,7 +82,7 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
 		assertSame(BuildType.CLEAN, getContext().getBuildType());
-		waitForBuild();
+		build();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.CLEAN, getContext().getBuildType());
 		validateContexts();
@@ -106,10 +104,10 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		createTwoReferencedProjects();
 		IFile firstFile = createFile("first/src/first"+F_EXT, "object First ");
 		createFile("second/src/second"+F_EXT, "object Second references First");
-		waitForBuild();
+		build();
 		startLogging();
 		firstFile.setContents(new StringInputStream("object Modified "), true, true, monitor());
-		waitForBuild();
+		build();
 		validateContexts();
 		assertEquals(2, getInvocationCount());
 	}
@@ -124,10 +122,6 @@ public class XtextBuilderParticipantTest extends AbstractParticipatingBuilderTes
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
-	}
-	
-	protected void waitForBuild() {
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 	
 }

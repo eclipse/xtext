@@ -44,6 +44,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
+@Deprecated
 public class BuildScheduler {
 
 	private final static Logger log = Logger.getLogger(BuildScheduler.class);
@@ -54,8 +55,19 @@ public class BuildScheduler {
 
 	@Inject
 	private IWorkspace workspace;
+	
+	/*
+	 * We funnel the scheduling through the deprecated type in case a client did override this class.
+	 */
+	@Inject
+	private BuilderStateDiscarder builderStateDiscarder;
 
 	public void scheduleBuildIfNecessary(final Iterable<IProject> toUpdate, IBuildFlag... buildFlags) {
+		if (BuildScheduler.class.equals(getClass()) && buildFlags != null && buildFlags.length == 1) {
+			if (builderStateDiscarder.forgetLastBuildState(toUpdate, toBuilderArguments(buildFlags))) {
+				return;
+			}
+		}
 		// skip all projects that are actually not considered to be buildable
 		List<IProject> scheduleUs = Lists.newArrayList();
 		for (IProject project : toUpdate) {
@@ -71,13 +83,7 @@ public class BuildScheduler {
 			if (!scheduleUs.isEmpty()) {
 				projectsScheduledForBuild.addAll(scheduleUs);
 				for (IProject scheduled : scheduleUs) {
-					Map<String, String> builderArguments = Maps.newHashMap();
-					if (buildFlags != null && buildFlags.length > 0) {
-						builderArguments = Maps.newHashMap();
-						for (IBuildFlag buildFlag : buildFlags) {
-							buildFlag.addToMap(builderArguments);
-						}
-					}
+					Map<String, String> builderArguments = toBuilderArguments(buildFlags);
 					if (projectBuilderArguments.containsKey(scheduled)) {
 						Map<String, String> existingArguments = projectBuilderArguments.get(scheduled);
 						existingArguments.keySet().retainAll(builderArguments.keySet());
@@ -90,10 +96,21 @@ public class BuildScheduler {
 		}
 	}
 
+	private Map<String, String> toBuilderArguments(IBuildFlag... buildFlags) {
+		Map<String, String> builderArguments = Maps.newHashMap();
+		if (buildFlags != null && buildFlags.length > 0) {
+			for (IBuildFlag buildFlag : buildFlags) {
+				buildFlag.addToMap(builderArguments);
+			}
+		}
+		return builderArguments;
+	}
+
 	protected boolean isBuildable(IProject project) {
 		return XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project);
 	}
 
+	@Deprecated
 	protected class BuildJob extends Job {
 
 		public BuildJob(String name, List<IProject> projects) {

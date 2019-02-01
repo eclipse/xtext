@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.Collections;
 
 import org.eclipse.core.resources.IProject;
@@ -14,7 +16,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.clustering.CopiedResourceDescription;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -23,15 +24,20 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Bug334456Test extends AbstractBuilderTest {
 
+	@Inject
+	private Provider<PluginProjectFactory> projectFactoryProvider;
+	
 	@Test public void testNoCopiedResourceDescription() throws Exception {
 		createPluginProject("foo");
-		waitForBuild();
+		build();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();
 		assertFalse(Iterables.isEmpty(descriptions.getAllResourceDescriptions()));
 		for(IResourceDescription description: descriptions.getAllResourceDescriptions()) {
@@ -43,21 +49,21 @@ public class Bug334456Test extends AbstractBuilderTest {
 	
 	@Test public void testSameResourceCountForTwoProjects() throws Exception {
 		IProject fooProject = createPluginProject("foo");
-		waitForBuild();
+		build();
 		IResourceDescriptions descriptions = BuilderUtil.getBuilderState();
 		int firstSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		IProject barProject = createPluginProject("bar");
-		waitForBuild();
+		build();
 		descriptions = BuilderUtil.getBuilderState();
 		int secondSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		assertEquals(firstSize, secondSize);
 		barProject.close(null);
-		waitForBuild();
+		build();
 		descriptions = BuilderUtil.getBuilderState();
 		int thirdSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		assertEquals(firstSize, thirdSize);
 		fooProject.close(null);
-		waitForBuild();
+		build();
 		descriptions = BuilderUtil.getBuilderState();
 		int forthSize = Iterables.size(descriptions.getAllResourceDescriptions());
 		// no remaining references to archives - fewer entries in index
@@ -65,7 +71,7 @@ public class Bug334456Test extends AbstractBuilderTest {
 	}
 
 	private IProject createPluginProject(String name) throws CoreException {
-		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
+		PluginProjectFactory projectFactory = projectFactoryProvider.get();
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
@@ -78,10 +84,6 @@ public class Bug334456Test extends AbstractBuilderTest {
 		projectFactory.addRequiredBundles(Collections.singletonList("org.eclipse.xtext"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
-	}
-
-	protected void waitForBuild() {
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 
 }

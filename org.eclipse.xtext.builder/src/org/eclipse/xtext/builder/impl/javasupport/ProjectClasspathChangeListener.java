@@ -17,16 +17,13 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import com.google.common.collect.FluentIterable;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -41,8 +38,9 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	@Inject
 	private IWorkspace workspace;
 	
-	@Inject 
-	private BuildScheduler buildManager;
+	@Inject
+	@Deprecated
+	private org.eclipse.xtext.builder.impl.BuildScheduler buildManager;
 	
 	@Inject 
 	private IDirtyStateManager dirtyStateManager;
@@ -57,15 +55,11 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 				if (event.getDelta() != null) {
 					Set<IJavaProject> javaProjects = getJavaProjectsWithClasspathChange(event.getDelta());
 					if (!javaProjects.isEmpty()) {
-						Set<IProject> projects = Sets.newHashSet(Iterables.filter(Iterables.transform(javaProjects,
-								new Function<IJavaProject, IProject>() {
-									@Override
-									public IProject apply(IJavaProject from) {
-										return from.getProject();
-									}
-								}), Predicates.notNull()));
+						Set<IProject> projects = FluentIterable.from(javaProjects)
+								.filter(Predicates.notNull())
+								.transform(IJavaProject::getProject).toSet();
 						dirtyStateManager.notifyListeners(new CoarseGrainedChangeEvent());
-						buildManager.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
+						scheduleBuildIfNecessary(projects);
 					}
 				}
 			} catch (WrappedException e) {
@@ -74,6 +68,11 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 				log.error(e.getMessage(), e);
 			}
 		}
+	}
+
+	@Deprecated
+	private void scheduleBuildIfNecessary(Set<IProject> projects) {
+		buildManager.scheduleBuildIfNecessary(projects, IBuildFlag.FORGET_BUILD_STATE_ONLY);
 	}
 
 	protected Set<IJavaProject> getJavaProjectsWithClasspathChange(IJavaElementDelta delta) {

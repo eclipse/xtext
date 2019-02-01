@@ -16,25 +16,32 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.builder.TestedWorkspaceWithJDT;
+import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.IAcceptor;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("deprecation")
+@RunWith(XtextRunner.class)
+@InjectWith(BuilderTestLanguageInjectorProvider.class)
 public class EclipseResourceFileSystemAccessTest extends Assert {
 
-	@After
-	public void tearDown() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
-	}
+	@Inject
+	@Rule
+	public TestedWorkspaceWithJDT workspace;
 
 	@Test public void testDirsAreCreated() throws Exception {
-		IProject project = IResourcesSetupUtil.createProject("test");
+		IProject project = workspace.createProject("test");
 		EclipseResourceFileSystemAccess fileSystemAccess = new EclipseResourceFileSystemAccess();
 		fileSystemAccess.setRoot(ResourcesPlugin.getWorkspace().getRoot());
 		fileSystemAccess.setOutputPath("test");

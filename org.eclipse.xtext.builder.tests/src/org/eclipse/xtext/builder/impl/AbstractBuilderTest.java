@@ -7,66 +7,53 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-
 import java.util.List;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.intro.IIntroManager;
-import org.eclipse.xtext.builder.tests.internal.TestsActivator;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.builder.TestedWorkspaceWithJDT;
+import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
-	public final String F_EXT = ".buildertestlanguage";
-	private volatile List<Event> events = Lists.newArrayList();
+@RunWith(XtextRunner.class)
+@InjectWith(BuilderTestLanguageInjectorProvider.class)
+public abstract class AbstractBuilderTest implements IResourceDescription.Event.Listener {
+	
+	protected final String F_EXT = ".buildertestlanguage";
+	
+	/* Must be public because it's a Junit4 rule */
+	@Inject
+	@Rule
+	@Extension
+	public TestedWorkspaceWithJDT workspace;
 
 	@BeforeClass
 	public static void setupTargetPlatform() throws Exception {
 		TargetPlatformUtil.setTargetPlatform(AbstractBuilderTest.class);
 	}
-
-	@Before
-	public void setUp() throws Exception {
-		assertEquals(0, countResourcesInIndex());
-		assertEquals(0, root().getProjects().length);
-		if (PlatformUI.isWorkbenchRunning()) {
-			final IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
-			if (introManager.getIntro() != null) {
-				Display.getDefault().asyncExec(new Runnable() {
-					
-					@Override
-					public void run() {
-						introManager.closeIntro(introManager.getIntro());
-					}
-				});
-			}
-		}
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		cleanWorkspace();
-		reallyWaitForAutoBuild();
-		events.clear();
-		getBuilderState().removeListener(this);
-		assertEquals(0, countResourcesInIndex());
-		assertEquals(0, root().getProjects().length);
-	}
-
+	
+	private volatile List<Event> events = Lists.newArrayList();
+	
 	@Override
 	public void descriptionsChanged(Event event) {
 		this.events.add(event);
@@ -76,8 +63,113 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 		return events;
 	}
 	
-	public <T> T getInstance(Class<T> type) {
-		Injector injector = TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
-		return injector.getInstance(type);
+	protected void addToClasspath(IJavaProject project, IClasspathEntry newClassPathEntry) {
+		workspace.addToClasspath(project, newClassPathEntry);
 	}
+
+	protected void build() {
+		workspace.build();
+	}
+	
+	protected void assertEmptyIndex() {
+		workspace.assertEmptyIndex();
+	}
+
+	protected IJavaProject createJavaProject(String name) {
+		return workspace.createJavaProject(name);
+	}
+	
+	protected IWorkspaceRoot root() {
+		return workspace.root();
+	}
+
+	protected void cleanBuild() {
+		workspace.cleanBuild();
+	}
+
+	public IClasspathEntry addJarToClasspath(IJavaProject project, IFile jarFile) {
+		return workspace.addJarToClasspath(project, jarFile);
+	}
+
+	protected void fullBuild() {
+		workspace.fullBuild();
+	}
+
+	public IFile createFile(IPath wsRelativePath, String content) {
+		return workspace.createFile(wsRelativePath, content);
+	}
+
+	protected void addProjectReference(IJavaProject from, IJavaProject to) {
+		workspace.addProjectReference(from, to);
+	}
+
+	protected IFile createFile(String wsRelativePath, String content) {
+		return workspace.createFile(wsRelativePath, content);
+	}
+
+	protected void removeProjectReference(IJavaProject from, IJavaProject to) {
+		workspace.removeProjectReference(from, to);
+	}
+
+	public String readFile(IFile file) {
+		return workspace.readFile(file);
+	}
+
+	protected void addSourceFolder(IJavaProject project, String folder) {
+		workspace.addSourceFolder(project, folder);
+	}
+
+	public IFolder createSubFolder(IProject project, String name) {
+		return workspace.createSubFolder(project, name);
+	}
+
+	public IProject createProject() {
+		return workspace.createProject();
+	}
+
+	protected void deleteClasspathEntry(IJavaProject project, IPath entry) {
+		workspace.deleteClasspathEntry(project, entry);
+	}
+
+	public IProject createProject(String name) {
+		return workspace.createProject(name);
+	}
+
+	protected void addNature(IProject project, String natureId) {
+		workspace.addNature(project, natureId);
+	}
+
+	protected void addBuilder(IProject project, String builderId) {
+		workspace.addBuilder(project, builderId);
+	}
+
+	protected void setReference(IProject from, IProject to) {
+		workspace.setReference(from, to);
+	}
+
+	protected void removeReference(IProject from, IProject to) {
+		workspace.removeReference(from, to);
+	}
+
+	protected void removeNature(IProject project, String natureId) {
+		workspace.removeNature(project, natureId);
+	}
+
+	protected void removeBuilder(IProject project, String builderId) {
+		workspace.removeBuilder(project, builderId);
+	}
+
+	public IProgressMonitor monitor() {
+		return workspace.monitor();
+	}
+
+	protected void enableAutobuild(Runnable r) {
+		workspace.enableAutobuild(r);
+	}
+
+	protected void disableAutobuild(Runnable r) {
+		workspace.disableAutobuild(r);
+	}
+	
+	
 }

@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 
@@ -22,9 +21,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Before;
 import org.junit.Test;
 import org.osgi.framework.Version;
 
@@ -37,9 +36,9 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 	private boolean isExternalInterrupt;
 	
 	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		startLogging();
+	@Before
+	public void startLogging() {
+		super.startLogging();
 	}
 
 	/** see https://bugs.eclipse.org/bugs/show_bug.cgi?id=325814 */
@@ -50,7 +49,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		IFolder folder = project.getProject().getFolder("src");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		reset();
 		cancel(false);
 		try {
@@ -64,15 +63,10 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		reset();
 		ResourcesPlugin.getWorkspace().build(
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1, getInvocationCount());
 		assertSame(BuildType.FULL, getContext().getBuildType());
 		reset();
-	}
-	
-	private void waitForBuild() throws Exception {
-		Thread.sleep(10);
-		IResourcesSetupUtil.waitForBuild();
 	}
 	
 	/**
@@ -82,7 +76,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 	public void testInterruptionTriggersIncrementalBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForBuild();
+		build();
 		cancel(true);
 		IFolder folder = project.getProject().getFolder("src");
 		try {
@@ -97,7 +91,6 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 		reset();
 		ResourcesPlugin.getWorkspace().build(
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
-		waitForBuild();
 		assertEquals(1, getInvocationCount());
 		if (isCoreResources_3_7_orLater()) {
 			assertSame(BuildType.INCREMENTAL, getContext().getBuildType());

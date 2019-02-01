@@ -176,7 +176,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		this.host = host;
 	}
 	
-	private Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
+	private final Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
 	
 	/**
 	 * Rejects Java output folders when traversing a project.

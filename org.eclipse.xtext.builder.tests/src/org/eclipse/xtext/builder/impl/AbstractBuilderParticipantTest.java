@@ -8,68 +8,57 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.BuilderParticipant;
-import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
+import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
-import org.eclipse.xtext.builder.tests.internal.TestsActivator;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfigurationProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(BuilderTestLanguageInjectorProvider.class)
 public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest {
-	
+
+	@Inject
+	private IXtextBuilderParticipant delegatingParticipant;
 	private IXtextBuilderParticipant oldDelegate;
-
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		final Injector injector = getInjector();
-		IXtextBuilderParticipant instance = injector.getInstance(IXtextBuilderParticipant.class);
-		participant = injector.getInstance(BuilderParticipant.class);
-		preferenceStoreAccess = injector.getInstance(IPreferenceStoreAccess.class);
-		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
-		oldDelegate = delegatingParticipant.getDelegate();
-		delegatingParticipant.setDelegate(participant);
-	}
-
-	protected Injector getInjector() {
-		final Injector injector = TestsActivator.getInstance().getInjector(
-				TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
-		return injector;
-	}
-
+	
+	@Inject
 	protected BuilderParticipant participant;
+	@Inject
 	protected IPreferenceStoreAccess preferenceStoreAccess;
 
-	@Override
-	public void tearDown() throws Exception {
-		IXtextBuilderParticipant instance = getInjector().getInstance(IXtextBuilderParticipant.class);
-		DelegatingBuilderParticipant delegatingParticipant = (DelegatingBuilderParticipant) instance;
-		delegatingParticipant.setDelegate(oldDelegate);
-		super.tearDown();
-		participant = null;
+	@Before
+	public void redirectBuilderParticipnt() throws Exception {
+		oldDelegate = ((DelegatingBuilderParticipant) delegatingParticipant).getDelegate();
+		((DelegatingBuilderParticipant) delegatingParticipant).setDelegate(participant);
+	}
+	
+	@After
+	public void resetBuilderParticipant() throws Exception {
+		((DelegatingBuilderParticipant) delegatingParticipant).setDelegate(oldDelegate);
 	}
 
 	protected void createTwoReferencedProjects() throws CoreException {
@@ -82,20 +71,6 @@ public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest
 		IJavaProject project = createJavaProject(string);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
-	}
-
-	public static void waitForResourceCleanerJob() {
-		boolean wasInterrupted = false;
-		do {
-			try {
-				Job.getJobManager().join(DerivedResourceCleanerJob.DERIVED_RESOURCE_CLEANER_JOB_FAMILY, null);
-				wasInterrupted = false;
-			} catch (OperationCanceledException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				wasInterrupted = true;
-			}
-		} while (wasInterrupted);
 	}
 
 	protected String getDefaultOutputDirectoryKey() {
@@ -144,10 +119,6 @@ public abstract class AbstractBuilderParticipantTest extends AbstractBuilderTest
 			initializer.setOutputConfigurationProvider(new OutputConfigurationProvider());
 			initializer.initialize(preferenceStoreAccess);
 		}
-	}
-	
-	protected void waitForBuild() {
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
 	}
 
 }

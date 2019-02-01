@@ -11,7 +11,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
-import org.eclipse.xtext.builder.tests.internal.TestsActivator;
+import org.junit.After;
+import org.junit.Before;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,60 +22,55 @@ import org.eclipse.xtext.builder.tests.internal.TestsActivator;
  */
 public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTest implements IXtextBuilderParticipant {
 
-	private DelegatingBuilderParticipant participant;
+	@Inject
+	private IXtextBuilderParticipant participant;
 	
-	private boolean logging = false;
-	protected int invocationCount = 0;
-	private IBuildContext context;
+	private volatile boolean logging = false;
+	protected volatile int invocationCount = 0;
+	private volatile IBuildContext context;
 	
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		IXtextBuilderParticipant instance = TestsActivator.getInstance()
-				.getInjector("org.eclipse.xtext.builder.tests.BuilderTestLanguage")
-				.getInstance(IXtextBuilderParticipant.class);
-		participant = (DelegatingBuilderParticipant) instance;
-		participant.setDelegate(this);
+	@Before
+	public void configureBuilderParticipant() throws Exception {
+		((DelegatingBuilderParticipant) participant).setDelegate(this);
 	}
 	
-	@Override
-	public void tearDown() throws Exception {
-		participant.setDelegate(null);
+	@After
+	public void resetBuilderParticipant() throws Exception {
+		((DelegatingBuilderParticipant) participant).setDelegate(null);
 		participant = null;
 		reset();
-		super.tearDown();
 	}
 	
 	@Override
-	public synchronized void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (logging) {
 			invocationCount++;
 			this.context = context;
 		}
 	}
 	
-	public synchronized int getInvocationCount() {
+	public int getInvocationCount() {
 		return invocationCount;
 	}
 	
-	public synchronized IBuildContext getContext() {
+	public IBuildContext getContext() {
 		return context;
 	}
 	
-	public synchronized void startLogging() {
+	public void startLogging() {
 		logging = true;
 	}
 	
-	public synchronized void stopLogging() {
+	public void stopLogging() {
 		reset();
 		logging = false;
 	}
 	
-	public synchronized boolean isLogging() {
+	public boolean isLogging() {
 		return logging;
 	}
 	
-	public synchronized void reset() {
+	public void reset() {
 		invocationCount = 0;
 		context = null;
 	}

@@ -34,6 +34,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Inject;
 
 /**
@@ -60,6 +61,7 @@ public class OccurrenceMarker {
 	public void disconnect(XtextEditor editor) {
 		((IPostSelectionProvider) editor.getSelectionProvider())
 				.removePostSelectionChangedListener(getSelectionChangedListener());
+		this.editor = null;
 	}
 
 	public void setMarkOccurrences(boolean isMarkOccurrences) {
@@ -69,12 +71,15 @@ public class OccurrenceMarker {
 
 	protected void doMarkOccurrences(final ISelection selection) {
 		if (selection instanceof ITextSelection) {
-			markOccurrenceJob.cancel();
-			markOccurrenceJob.initialize(editor, (ITextSelection) selection, isMarkOccurrences);
-			if (!markOccurrenceJob.isSystem())
-				markOccurrenceJob.setSystem(true);
-			markOccurrenceJob.setPriority(Job.DECORATE);
-			markOccurrenceJob.schedule();
+			XtextEditor editor = this.editor;
+			if (editor != null) {
+				markOccurrenceJob.cancel();
+				markOccurrenceJob.initialize(editor, (ITextSelection) selection, isMarkOccurrences);
+				if (!markOccurrenceJob.isSystem())
+					markOccurrenceJob.setSystem(true);
+				markOccurrenceJob.setPriority(Job.DECORATE);
+				markOccurrenceJob.schedule();
+			}
 		}
 	}
 
@@ -93,6 +98,30 @@ public class OccurrenceMarker {
 			}
 		};
 	}
+	
+	/**
+	 * Public for testing purpose.
+	 * 
+	 * @since 2.17
+	 */
+	@VisibleForTesting
+	public void joinMarkOccurrenceJob() {
+		try {
+			doMarkOccurrences(editor.getSelectionProvider().getSelection());
+			this.markOccurrenceJob.join();
+			Display display = Display.getCurrent();
+			if (display != null) {
+				while(display.readAndDispatch()) {
+					synchronized (this) {
+						wait(1);
+					}		
+				}
+			}
+		} catch (InterruptedException e) {
+			// ignore
+			e.printStackTrace();
+		}	
+	}
 
 	public static class MarkOccurrenceJob extends Job {
 
@@ -100,7 +129,7 @@ public class OccurrenceMarker {
 		private IOccurrenceComputer occurrenceComputer;
 
 		private XtextEditor initialEditor;
-		private boolean initialIsMarkOccurrences;
+		private volatile boolean initialIsMarkOccurrences;
 		private ITextSelection initialSelection;
 
 		public MarkOccurrenceJob() {
@@ -137,9 +166,10 @@ public class OccurrenceMarker {
 							}
 						}
 					});
+					return Status.OK_STATUS;
 				}
 			}
-			return progress.isCanceled() ? Status.CANCEL_STATUS : Status.OK_STATUS;
+			return Status.CANCEL_STATUS;
 		}
 
 		protected IAnnotationModel getAnnotationModel(XtextEditor editor) {
@@ -154,7 +184,7 @@ public class OccurrenceMarker {
 			}
 			return null;
 		}
-
+		
 		protected Annotation[] getExistingOccurrenceAnnotations(IAnnotationModel annotationModel) {
 			Set<Annotation> removeSet = newHashSet();
 			for (Iterator<Annotation> annotationIter = annotationModel.getAnnotationIterator(); annotationIter

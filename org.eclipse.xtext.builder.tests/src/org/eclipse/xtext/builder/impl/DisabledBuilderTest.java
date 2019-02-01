@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.Collections;
 
 import org.eclipse.core.resources.IProject;
@@ -21,12 +23,18 @@ import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.junit.Test;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 /**
  * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=412501
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DisabledBuilderTest extends AbstractBuilderTest {
 
+	@Inject
+	private Provider<PluginProjectFactory> projectFactoryProvider;
+	
 	@Test
 	public void testDisabledProject() throws CoreException {
 		IBuilderState descriptions = BuilderUtil.getBuilderState();
@@ -44,7 +52,7 @@ public class DisabledBuilderTest extends AbstractBuilderTest {
 	
 	
 	private IProject createPluginProject(String name, boolean addBuilder, String dependency) throws CoreException {
-		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
+		PluginProjectFactory projectFactory = projectFactoryProvider.get();
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));

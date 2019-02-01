@@ -14,41 +14,45 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.builder.tests.internal.TestsActivator;
+import org.eclipse.xtext.builder.TestedWorkspaceWithJDT;
+import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.io.ByteStreams;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(BuilderTestLanguageInjectorProvider.class)
 public class EclipseResourceFileSystemAccess2Test extends Assert {
-	private IProject project;
+	
+	@Inject
+	@Rule
+	public TestedWorkspaceWithJDT workspace;
+	
+	@Inject
 	private EclipseResourceFileSystemAccess2 fsa;
+	
+	private IProject project;
 
 	@Before
 	public void setUp () throws Exception {
-		project = IResourcesSetupUtil.createProject("test");
-		Injector injector = TestsActivator.getInstance().getInjector(
-				TestsActivator.ORG_ECLIPSE_XTEXT_BUILDER_TESTS_BUILDERTESTLANGUAGE);
-		fsa = injector.getInstance(EclipseResourceFileSystemAccess2.class);
+		project = workspace.createProject();
 		fsa.setProject(project);
 		fsa.setOutputPath("src-gen");
 		fsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 		fsa.setMonitor(new NullProgressMonitor());
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
 	}
 
 	@Test

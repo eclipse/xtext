@@ -31,6 +31,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Encapsulates the decision about the resources that should be built.
@@ -41,6 +42,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
+@Singleton
 public class ToBeBuiltComputer {
 
 	@Inject

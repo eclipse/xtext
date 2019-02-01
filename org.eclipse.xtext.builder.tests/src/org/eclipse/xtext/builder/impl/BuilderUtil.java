@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.collect.ImmutableList;
@@ -86,7 +86,7 @@ public class BuilderUtil {
 
 	public static void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {
 		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, 1);
-		assertEquals(printMarker(markers),numberOfMarkers,markers.length);
+		assertEquals(IResourcesSetupUtil.printMarker(markers),numberOfMarkers,markers.length);
 	}
 
 	public static Set<IReferenceDescription> getIncomingReferences(URI uri) {

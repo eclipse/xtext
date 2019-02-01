@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.ecore,
  org.eclipse.ui.ide;bundle-version="3.13.1",
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.builder.standalone,
  org.eclipse.xtext.common.types,
  org.eclipse.xtend.lib,
@@ -37,9 +36,12 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.compare;bundle-version="3.7.101"
 Import-Package: org.apache.log4j;version="1.2.15",
+ org.eclipse.xtext.tests,
  org.hamcrest.core;version="1.1.0",
  org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0"
+ org.junit.rules;version="4.12.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners.model;version="4.12.0"
 Bundle-Activator: org.eclipse.xtext.builder.tests.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.builder.tests,
@@ -58,4 +60,3 @@ Export-Package: org.eclipse.xtext.builder.tests,
  org.eclipse.xtext.builder.tests.ide.contentassist.antlr.internal,
  org.eclipse.xtext.builder.tests.internal
 Automatic-Module-Name: org.eclipse.xtext.builder.tests
-

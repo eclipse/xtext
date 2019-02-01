@@ -12,13 +12,18 @@ import java.io.FileOutputStream
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IProject
+import org.eclipse.core.resources.WorkspaceJob
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IPath
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Path
+import org.eclipse.core.runtime.Status
 import org.eclipse.xtext.ui.XtextProjectHelper
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
-import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
+import static org.junit.Assert.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -29,16 +34,15 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 
 	IProject project
 
-	override setUp() throws Exception {
-		super.setUp()
+	@Before
+	def void createJavaProject() throws Exception {
 		project = PROJECT_NAME.createJavaProject.project
 		project.addNature(XtextProjectHelper.NATURE_ID)
-		reallyWaitForAutoBuild
 	}
 
-	override tearDown() throws Exception {
+	@After
+	def void forgetProject() throws Exception {
 		project = null
-		super.tearDown()
 	}
 
 	@Test
@@ -59,8 +63,8 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		output.getFile(new Path('Foo.txt')).location.createJavaIoFile('object Bar')
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
-		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).fileToString)
+		build
+		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).readFile)
 	}
 
 	@Test
@@ -81,8 +85,8 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		output.getFile(new Path('Foo.txt')).location.createJavaIoFile('object Foo')
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
-		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).fileToString)
+		build
+		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).readFile)
 	}
 
 	@Test
@@ -101,16 +105,16 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 
 	protected def void testCreateFile(IContainer output) {
 		val file = project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
-		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).fileToString)
+		build
+		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).readFile)
 
 		val javaIoFile = output.getFile(new Path('Foo.txt')).location.toFile
 		javaIoFile.delete
 		javaIoFile.parentFile.delete
 
 		file.touch(monitor)
-		reallyWaitForAutoBuild
-		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).fileToString)
+		build
+		assertEquals('object Foo', output.getFile(new Path('Foo.txt')).readFile)
 	}
 
 	@Test
@@ -131,7 +135,7 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val javaIoFile = output.getFile(new Path('.Foo.txt._trace')).location.createJavaIoFile
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertFalse(javaIoFile.exists)
 		assertFalse(output.getFile(new Path('.Foo.txt._trace')).exists)
 	}
@@ -146,7 +150,7 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 			assertFalse(srcGenDirectory.listFiles.empty)
 
 			project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-			reallyWaitForAutoBuild
+			build
 			assertFalse(srcGenDirectory.listFiles.empty)
 
 			cleanBuild
@@ -164,7 +168,7 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 			assertFalse(srcGenDirectory.exists)
 
 			project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-			reallyWaitForAutoBuild
+			build
 			assertTrue(srcGenDirectory.exists)
 			assertFalse(srcGenDirectory.listFiles.empty)
 
@@ -188,7 +192,7 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 			assertNotEquals(0, initialSize)
 
 			project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-			reallyWaitForAutoBuild
+			build
 			val expectedSize = projectDirectory.listFiles.size
 			assertNotEquals(initialSize, expectedSize)
 
@@ -258,17 +262,15 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val expectedSize = ouputDirectory.list.size
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertNotEquals(expectedSize, ouputDirectory.list.size)
 
-		val oldAutobuild = setAutobuild(false)
-		try {
+		
+		disableAutobuild [
 			cleanBuild
 			assertEquals(expectedSize, ouputDirectory.list.size)
 			assertTrue(ouputDirectory.list.contains('Lalala.txt'))
-		} finally {
-			setAutobuild(oldAutobuild)
-		}
+		]
 	}
 
 	protected def void testCleanUpDerivedResourcesWithCreateBetween(IContainer output) {
@@ -276,20 +278,17 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val initialSize = if(outputDirectory.exists) outputDirectory.list.size else 0
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
+		assertTrue(outputDirectory.exists)
 		assertNotEquals(initialSize, outputDirectory.list.size)
 		
-		val oldAutobuild = setAutobuild(false)
-		try {
+		disableAutobuild [
 			output.getFile(new Path('Lalala.txt')).location.createJavaIoFile
 			val expectedSize = initialSize + 1
-	
 			cleanBuild
 			assertEquals(expectedSize, outputDirectory.list.size)
 			assertTrue(outputDirectory.list.contains('Lalala.txt'))
-		} finally {
-			setAutobuild(oldAutobuild)
-		}
+		]
 	}
 
 	protected def void testCleanUpDerivedResourcesWithUpdateDerived(IContainer output) {
@@ -297,22 +296,23 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val expectedSize = if(outputDirectory.exists) outputDirectory.list.size else 0
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertNotEquals(expectedSize, outputDirectory.list.size)
 		
-		Thread.sleep(1000)
-
-		val oldAutobuild = setAutobuild(false)
-		try {
+		disableAutobuild [
 			val file = output.getFile(new Path('Foo.txt'))
-			file.location.toFile.content = 'Lalala'
-			assertFalse(file.synchronized)
-	
+			file.localTimeStamp = 1L
+			new WorkspaceJob('file.setContent') {
+				override runInWorkspace(IProgressMonitor monitor) throws CoreException {
+					file.location.toFile.content = 'Lalala'
+					assertFalse(file.synchronized)
+					return Status.OK_STATUS
+				}
+			}.run(monitor)
+			
 			cleanBuild
 			assertEquals(expectedSize, outputDirectory.list.size)
-		} finally {
-			setAutobuild(oldAutobuild)
-		}
+		]
 	}
 
 	protected def void testCleanUpDerivedResourcesWithDeleteDerived(IContainer output) {
@@ -320,22 +320,22 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val expectedSize = if(outputDirectory.exists) outputDirectory.list.size else 0
 
 		project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertNotEquals(expectedSize, outputDirectory.list.size)
 		
-		Thread.sleep(1000)
-
-		val oldAutobuild = setAutobuild(false)
-		try {
+		disableAutobuild [
 			val file = output.getFile(new Path('Foo.txt'))
-			assertTrue(file.location.toFile.delete)
-			assertFalse(file.synchronized)
+			new WorkspaceJob('file.delete') {
+				override runInWorkspace(IProgressMonitor monitor) throws CoreException {
+					assertTrue(file.location.toFile.delete)
+					assertFalse(file.synchronized)
+					return Status.OK_STATUS
+				}
+			}.run(monitor)
 	
 			cleanBuild
 			assertEquals(expectedSize, outputDirectory.list.size)
-		} finally {
-			setAutobuild(oldAutobuild)
-		}
+		]
 	}
 	
 	@Test
@@ -357,17 +357,21 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val expectedSize = if(outputDirectory.exists) outputDirectory.list.size else 0
 
 		val sourceFile = project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertNotEquals(expectedSize, outputDirectory.list.size)
 		
-		Thread.sleep(1000)
-
 		val file = output.getFile(new Path('Foo.txt'))
-		file.location.toFile.content = 'Lalala'
-		assertFalse(file.synchronized)
+		file.localTimeStamp = 1L
+		new WorkspaceJob('file.setContent') {
+			override runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				file.location.toFile.content = 'Lalala'
+				assertFalse(file.synchronized)
+				return Status.OK_STATUS
+			}
+		}.run(monitor)
 
 		sourceFile.delete(false, monitor)
-		reallyWaitForAutoBuild
+		build
 		assertEquals(expectedSize, outputDirectory.list.size)
 	}
 	
@@ -390,17 +394,22 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		val expectedSize = if(outputDirectory.exists) outputDirectory.list.size else 0
 
 		val sourceFile = project.getFile('src/Foo' + F_EXT).fullPath.createFile('object Foo')
-		reallyWaitForAutoBuild
+		build
 		assertNotEquals(expectedSize, outputDirectory.list.size)
 		
-		Thread.sleep(1000)
-
 		val file = output.getFile(new Path('Foo.txt'))
-		assertTrue(file.location.toFile.delete)
-		assertFalse(file.synchronized)
-
+		file.refreshLocal(0, null)
+		assertTrue(file.synchronized)
+		new WorkspaceJob('file.delete') {
+			override runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				assertTrue(file.location.toFile.delete)
+				assertFalse(file.synchronized)
+				return Status.OK_STATUS
+			}
+		}.run(monitor)
+		
 		sourceFile.delete(false, monitor)
-		reallyWaitForAutoBuild
+		build
 		assertEquals(expectedSize, outputDirectory.list.size)
 	}
 
@@ -423,10 +432,10 @@ abstract class AbstractFSSynchronizationTest extends AbstractBuilderParticipantT
 		fos.flush
 		fos.close
 	}
-
+	
 	protected def isSynchronized(IFile file) {
 		val target = file as org.eclipse.core.internal.resources.File
-		target.localManager.fastIsSynchronized(target)
+		return target.localManager.fastIsSynchronized(target)
 	}
 
 }

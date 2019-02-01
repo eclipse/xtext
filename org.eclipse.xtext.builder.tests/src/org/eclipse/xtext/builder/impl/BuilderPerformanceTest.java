@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,13 +20,14 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureCommand;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -79,7 +77,7 @@ Task 'Crosslink resolution' took 2017ms (809 measurements).
 Clean Xtext second - Took 1239ms
 Clean Xtext third - Took 1030ms
 Clean Xtext fourth - Took 983ms
-Clean Xtext fith - Took 937ms
+Clean Xtext fifth - Took 937ms
 
 -------------------------------------------------------------------------------------------------------------------------
 Task 'build' took 3104ms (4 measurements).
@@ -96,7 +94,7 @@ Clean Xtext first - Took 974ms
 Clean Xtext second - Took 976ms
 Clean Xtext third - Took 1079ms
 Clean Xtext fourth - Took 973ms
-Clean Xtext fith - Took 980ms
+Clean Xtext fifth - Took 980ms
 
 -------------------------------------------------------------------------------------------------------------------------
 Task 'build' took 7ms (6 measurements).
@@ -104,143 +102,153 @@ Task 'build' took 7ms (6 measurements).
 
  */
 public class BuilderPerformanceTest extends AbstractBuilderTest {
-	
-	@Override
+
+	private boolean doPrint = false;
+
+	@Inject
+	private PluginProjectFactory projectFactory;
+
 	@Before
-	public void setUp() throws Exception {
+	public void enableStopwatches() throws Exception {
 		Stopwatches.setEnabled(true);
-		super.setUp();
 	}
-	
-	@Override
+
 	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
+	public void disableStopwatches() throws Exception {
 		printAndClearStopwatchData();
 		Stopwatches.setEnabled(false);
 	}
-	
-	@Test public void testSecondBuildRunIsMuchFaster() throws Exception {
+
+	@Test
+	public void testSecondBuildRunIsMuchFaster() throws Exception {
 		final String project1name = "project1";
 		IJavaProject javaProject1 = createJavaProject(project1name);
 		addJarToClasspath(javaProject1, copyAndGetXtendExampleJar(javaProject1));
-		
-		System.out.println("Clean Java first - "+cleanBuildTakes());
-		System.out.println("Clean Java second - "+cleanBuildTakes());
-		
+
+		if (doPrint) {
+			System.out.println("Clean Java first - " + cleanBuildTakes());
+			System.out.println("Clean Java second - " + cleanBuildTakes());
+		}
 		toggleNature(javaProject1);
-		
-		System.out.println("Clean Xtext first - "+cleanBuildTakes());
+		if (doPrint) {
+			System.out.println("Clean Xtext first - " + cleanBuildTakes());
+//			final Controller controller = new Controller();
+//			controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
+			System.out.println("Clean Xtext second - " + cleanBuildTakes());
+			System.out.println("Clean Xtext third - " + cleanBuildTakes());
+//			controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//			controller.stopCPUProfiling();
+		}
+	}
+
+	@Test
+	public void testBuildWithJarsContainingIndexedResources() throws Exception {
+		final String project1name = "project1";
+		// create a project with a bunch of jars
+		IProject project1 = createPluginProject(
+				project1name, 
+				"org.eclipse.core.runtime", 
+				"org.eclipse.core.jobs",
+				"org.eclipse.core.variables", 
+				"org.eclipse.debug.core", 
+				"org.eclipse.debug.ui",
+				"org.eclipse.emf.edit",
+				"org.eclipse.emf.ecore",
+				"org.eclipse.emf.common",
+				"org.eclipse.emf.ecore.xmi", 
+				"org.antlr.generator",
+				"org.eclipse.jdt.ui",
+				"org.eclipse.emf.mwe.core",
+				"org.eclipse.jdt.core",
+				"org.eclipse.xtext.xbase.lib",
+				"org.eclipse.xtend.lib");
+		IJavaProject javaProject1 = JavaCore.create(project1);
+
+		IFile file = copyAndGetXtendExampleJar(javaProject1);
+		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
+		addToClasspath(javaProject1, libraryEntry);
+
+		if (doPrint) {
+			System.out.println("Clean Java first - " + cleanBuildTakes());
+			System.out.println("Clean Java second - " + cleanBuildTakes());
+		}
+
 //		final Controller controller = new Controller();
 //		controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
-		System.out.println("Clean Xtext second - "+cleanBuildTakes());
-		System.out.println("Clean Xtext third - "+cleanBuildTakes());
+
+		toggleNature(javaProject1);
+		printAndClearStopwatchData();
+
+//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//		controller.clearCPUData();
+		//		
+		if (doPrint) {
+			System.out.println("Clean Xtext first - " + cleanBuildTakes());
+		}
+		printAndClearStopwatchData();
+
+//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//		controller.clearCPUData();
+
+		if (doPrint) {
+			System.out.println("Clean Xtext second - " + cleanBuildTakes());
+		}
+
+//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//		controller.clearCPUData();
+		if (doPrint) {
+			System.out.println("Clean Xtext third - " + cleanBuildTakes());
+			System.out.println("Clean Xtext fourth - " + cleanBuildTakes());
+			System.out.println("Clean Xtext fifth - " + cleanBuildTakes());
+		}
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.stopCPUProfiling();
 	}
 
-	@Test public void testBuildWithJarsContainingIndexedResources() throws Exception {
+	@Test
+	public void testBuildWithManyNonXtextRelatedJars() throws Exception {
 		final String project1name = "project1";
 		// create a project with a bunch of jars
-		IProject project1 = createPluginProject(project1name, 
-				"org.eclipse.core.runtime", 
-				"org.eclipse.core.jobs", 
-				"org.eclipse.core.variables", 
-				"org.eclipse.debug.core", 
-				"org.eclipse.debug.ui", 
-				"org.eclipse.emf.edit", 
-				"org.eclipse.emf.ecore", 
-				"org.eclipse.emf.common", 
-				"org.eclipse.emf.ecore.xmi", 
-				"org.antlr.generator", 
-				"org.eclipse.jdt.ui", 
-				"org.eclipse.emf.mwe.core", 
-				"org.eclipse.jdt.core", 
-				"org.eclipse.xtext.xbase.lib", 
+		IProject project1 = createPluginProject(
+				project1name,
+				"org.eclipse.core.runtime",
+				"org.eclipse.core.jobs",
+				"org.eclipse.core.variables",
+				"org.eclipse.debug.core",
+				"org.eclipse.debug.ui",
+				"org.antlr.generator",
+				"org.eclipse.jdt.ui",
+				"org.eclipse.jdt.core",
+				"org.eclipse.xtext.xbase.lib",
 				"org.eclipse.xtend.lib");
 		IJavaProject javaProject1 = JavaCore.create(project1);
-		
-		IFile file = copyAndGetXtendExampleJar(javaProject1);
-		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
-		addToClasspath(javaProject1, libraryEntry);
-		
-		System.out.println("Clean Java first - "+cleanBuildTakes());
-		System.out.println("Clean Java second - "+cleanBuildTakes());
-		
-//		final Controller controller = new Controller();
-//		controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
-		
+
+		if (doPrint) {
+			System.out.println("Clean Java first - " + cleanBuildTakes());
+			System.out.println("Clean Java second - " + cleanBuildTakes());
+		}
 		toggleNature(javaProject1);
-		printAndClearStopwatchData();
-		
-//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//		controller.clearCPUData();
-//		
-		System.out.println("Clean Xtext first - "+cleanBuildTakes());
-		printAndClearStopwatchData();
-		
-//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//		controller.clearCPUData();
-		
-		System.out.println("Clean Xtext second - "+cleanBuildTakes());
-		
-//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//		controller.clearCPUData();
-		System.out.println("Clean Xtext third - "+cleanBuildTakes());
-		System.out.println("Clean Xtext fourth - "+cleanBuildTakes());
-		System.out.println("Clean Xtext fith - "+cleanBuildTakes());
-//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//		controller.stopCPUProfiling();
+
+		if (doPrint) {
+			System.out.println("Clean Xtext first - " + cleanBuildTakes());
+//			final Controller controller = new Controller();
+//			controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
+			System.out.println("Clean Xtext second - " + cleanBuildTakes());
+			System.out.println("Clean Xtext third - " + cleanBuildTakes());
+			System.out.println("Clean Xtext fourth - " + cleanBuildTakes());
+			System.out.println("Clean Xtext fifth - " + cleanBuildTakes());
+//			controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
+//			controller.stopCPUProfiling();
+		}
 	}
-	
-	@Test public void testBuildWithManyNonXtextRelatedJars() throws Exception {
-		final String project1name = "project1";
-		// create a project with a bunch of jars
-		IProject project1 = createPluginProject(project1name, 
-				"org.eclipse.core.runtime", 
-				"org.eclipse.core.jobs", 
-				"org.eclipse.core.variables", 
-				"org.eclipse.debug.core", 
-				"org.eclipse.debug.ui", 
-//				"org.eclipse.emf.edit", 
-//				"org.eclipse.emf.ecore", 
-//				"org.eclipse.emf.common", 
-//				"org.eclipse.emf.ecore.xmi", 
-				"org.antlr.generator", 
-				"org.eclipse.jdt.ui", 
-//				"org.eclipse.emf.mwe.core", 
-				"org.eclipse.jdt.core", 
-				"org.eclipse.xtext.xbase.lib", 
-				"org.eclipse.xtend.lib");
-		IJavaProject javaProject1 = JavaCore.create(project1);
-		
-//		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
-//		
-//		InputStream inputStream = CachedJarInfoTest.class.getResourceAsStream("XtendExample.jar");
-//		file.create(inputStream, IResource.FORCE, null);
-//		IClasspathEntry libraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null);
-//		addToClasspath(javaProject1, libraryEntry);
-		
-		System.out.println("Clean Java first - "+cleanBuildTakes());
-		System.out.println("Clean Java second - "+cleanBuildTakes());
-		
-		toggleNature(javaProject1);
-		System.out.println("Clean Xtext first - "+cleanBuildTakes());
-//		final Controller controller = new Controller();
-//		controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
-		System.out.println("Clean Xtext second - "+cleanBuildTakes());
-		System.out.println("Clean Xtext third - "+cleanBuildTakes());
-		System.out.println("Clean Xtext fourth - "+cleanBuildTakes());
-		System.out.println("Clean Xtext fith - "+cleanBuildTakes());
-//		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
-//		controller.stopCPUProfiling();
-	}
-	
+
 	private void printAndClearStopwatchData() {
-		System.out.println(Stopwatches.getPrintableStopwatchData());
+		if (doPrint) {
+			System.out.println(Stopwatches.getPrintableStopwatchData());
+		}
 		Stopwatches.resetAll();
 	}
-	
+
 	private IFile copyAndGetXtendExampleJar(IJavaProject javaProject1) throws CoreException {
 		IFile file = javaProject1.getProject().getFile("XtendExample.jar");
 		InputStream inputStream = BuilderPerformanceTest.class.getResourceAsStream("XtendExample.jar");
@@ -251,37 +259,31 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	private void toggleNature(IJavaProject javaProject1) {
 		long before = System.currentTimeMillis();
 		new ToggleXtextNatureCommand().toggleNature(javaProject1.getProject());
-		waitForBuild();
-		System.out.println("Toggle Nature - Took " + (System.currentTimeMillis() - before) +"ms");
+		build();
+		if (doPrint) {
+			System.out.println("Toggle Nature - Took " + (System.currentTimeMillis() - before) + "ms");
+		}
 	}
-	
+
 	private String cleanBuildTakes() throws Exception {
-		waitForBuild();
+		build();
 		long before = System.currentTimeMillis();
 		cleanBuild();
 		fullBuild();
-		waitForBuild();
+		build();
 		long after = System.currentTimeMillis();
-		return "Took " + (after -before) + "ms";
+		return "Took " + (after - before) + "ms";
 	}
-	
-	private IProject createPluginProject(String name, String ... bundleDependencies) throws CoreException {
-		PluginProjectFactory projectFactory = getInstance(PluginProjectFactory.class);
+
+	private IProject createPluginProject(String name, String... bundleDependencies) throws CoreException {
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.addFolders(Collections.singletonList("src"));
-		projectFactory.addBuilderIds(
-			JavaCore.BUILDER_ID, 
-			"org.eclipse.pde.ManifestBuilder",
-			"org.eclipse.pde.SchemaBuilder");
+		projectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder", "org.eclipse.pde.SchemaBuilder");
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature");
 		projectFactory.addRequiredBundles(Arrays.asList(bundleDependencies));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
 	}
-	
-	protected void waitForBuild() {
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
-	}
-	
+
 }

@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.eclipse.swt.widgets.Display;
+import org.junit.Assert;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -21,33 +22,37 @@ public class DisplaySafeSyncer {
 	private volatile CountDownLatch latch;
 
 	public void start() throws InterruptedException {
-		if (latch == null)
-			latch = new CountDownLatch(1);
+		Assert.assertNull(latch);
+		latch = new CountDownLatch(1);
 	}
 
 	public void awaitSignal(long timeout) throws TimeoutException, InterruptedException {
-		if (latch == null)
-			throw new IllegalStateException("Syncher must be initialized");
-		long waitTime = 0;
-		while (waitTime < timeout) {
-			if (latch.await(10, TimeUnit.MILLISECONDS)) {
-				latch = null;
-				return;
-			}
-			waitTime += 10;
-			if (Display.getCurrent() != null) {
-				while(Display.getCurrent().readAndDispatch()) {
-					// work the event loop
+		try {
+			Assert.assertNotNull("Syncer must have been started", latch);
+			long waitTime = 0;
+			while (waitTime < timeout) {
+				if (latch.await(10, TimeUnit.MILLISECONDS)) {
+					latch = null;
+					return;
 				}
-				
+				waitTime += 10;
+				if (Display.getCurrent() != null) {
+					while(Display.getCurrent().readAndDispatch()) {
+						// work the event loop
+					}
+					
+				}
 			}
+			throw new TimeoutException("Timeout in Syncer (timeout " + timeout + " ms)");
+		} finally {
+			latch = null;
 		}
-		throw new TimeoutException("Timeout in Syncer (timeout " + timeout + " ms)");
 	}
 	
 
 	public void signal() {
-		if (latch != null)
+		if (latch != null) {
 			latch.countDown();
+		}
 	}
 }

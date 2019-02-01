@@ -50,6 +50,7 @@ import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.osgi.service.prefs.BackingStoreException;
 
@@ -113,9 +114,16 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IJavaProject createJavaProject(String projectName) throws CoreException {
+		return createJavaProject(projectName, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static IJavaProject createJavaProject(String projectName, boolean build) throws CoreException {
 		IProject project = createSimpleProject(projectName);
 		JavaCore.initializeAfterLoad(monitor());
-		IJavaProject javaProject = makeJavaProject(project);
+		IJavaProject javaProject = makeJavaProject(project, build);
 		return javaProject;
 	}
 	
@@ -137,22 +145,28 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IFolder createExternalFolder(String folderName) throws CoreException {
-		IPath externalFolderPath = new Path(folderName);
-		IProject externalFoldersProject = JavaModelManager.getExternalManager().getExternalFoldersProject();
-		if (!externalFoldersProject.isAccessible()) {
-			if (!externalFoldersProject.exists())
-				externalFoldersProject.create(monitor());
-			externalFoldersProject.open(monitor());
-		}
-		IFolder result = externalFoldersProject.getFolder(externalFolderPath);
-		result.create(true, false, null);
-//		JavaModelManager.getExternalManager().addFolder(result.getFullPath());
-		return result;
+		final Wrapper<IFolder> wrapper = Wrapper.forType(IFolder.class);
+		ResourcesPlugin.getWorkspace().run((monitor)->{
+			IPath externalFolderPath = new Path(folderName);
+			IProject externalFoldersProject = JavaModelManager.getExternalManager().getExternalFoldersProject();
+			if (!externalFoldersProject.isAccessible()) {
+				if (!externalFoldersProject.exists())
+					externalFoldersProject.create(monitor());
+				externalFoldersProject.open(monitor());
+			}
+			IFolder result = externalFoldersProject.getFolder(externalFolderPath);
+			result.create(true, false, null);
+//				JavaModelManager.getExternalManager().addFolder(result.getFullPath());
+			wrapper.set(result);
+		}, monitor());
+		return wrapper.get();
 	}
 	
 	public static void deleteExternalFolder(IFolder folder) throws CoreException {
-		JavaModelManager.getExternalManager().removeFolder(folder.getFullPath());
-		folder.delete(true, null);
+		ResourcesPlugin.getWorkspace().run((monitor)->{
+			JavaModelManager.getExternalManager().removeFolder(folder.getFullPath());
+			folder.delete(true, null);
+		}, monitor());
 	}
 	
 	public static IFolder deleteSourceFolder(IJavaProject project, String folderPath) throws JavaModelException,
@@ -164,7 +178,14 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static void addProjectReference(IJavaProject from, IJavaProject to) throws CoreException {
-		addToClasspath(from, JavaCore.newProjectEntry(to.getPath()));
+		addProjectReference(from, to, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static void addProjectReference(IJavaProject from, IJavaProject to, boolean build) throws CoreException {
+		addToClasspath(from, JavaCore.newProjectEntry(to.getPath()), build);
 	}
 	
 	public static void removeProjectReference(IJavaProject from, IJavaProject to) throws CoreException {
@@ -200,30 +221,53 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IJavaProject makeJavaProject(IProject project) throws CoreException {
+		return makeJavaProject(project, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static IJavaProject makeJavaProject(IProject project, boolean build) throws CoreException {
 		IJavaProject javaProject = JavaCore.create(project);
 		javaProject.save(null, true);
 		addNature(project, JavaCore.NATURE_ID);
-		addSourceFolder(javaProject, "src");
-		addJreClasspathEntry(javaProject);
+		addSourceFolder(javaProject, "src", false);
+		addJreClasspathEntry(javaProject, build);
 		return javaProject;
 	}
 
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName) throws CoreException,
 			JavaModelException {
-		return addSourceFolder(javaProject, folderName, null, null);
+		return addSourceFolder(javaProject, folderName, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName, boolean build) throws CoreException,
+	JavaModelException {
+		return addSourceFolder(javaProject, folderName, null, null, build);
 	}
 
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName, String[] inclusionPatterns, String[] exclusionPatterns) throws CoreException,
 			JavaModelException {
+		return addSourceFolder(javaProject, folderName, inclusionPatterns, exclusionPatterns, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName, String[] inclusionPatterns, String[] exclusionPatterns, boolean build) throws CoreException,
+			JavaModelException {
 		
 		IProject project = javaProject.getProject();
 		IPath projectPath = project.getFullPath();
-
+		
 		deleteClasspathEntry(javaProject, projectPath);
-
+		
 		IFolder srcFolder = createSubFolder(project, folderName); //$NON-NLS-1$
 		IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(srcFolder.getFullPath(), getInclusionPatterns(inclusionPatterns), getExclusionPatterns(exclusionPatterns), null);
-		addToClasspath(javaProject, srcFolderClasspathEntry);
+		addToClasspath(javaProject, srcFolderClasspathEntry, build);
 		return srcFolder;
 	}
 
@@ -255,12 +299,19 @@ public class JavaProjectSetupUtil {
 				System.arraycopy(classpath, 0, newClasspath, 0, i);
 				System.arraycopy(classpath, i + 1, newClasspath, i, classpath.length - i - 1);
 				javaProject.setRawClasspath(newClasspath, null);
-
 			}
 		}
 	}
 
 	public static void addToClasspath(IJavaProject javaProject, IClasspathEntry newClassPathEntry)
+			throws JavaModelException {
+		addToClasspath(javaProject, newClassPathEntry, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static void addToClasspath(IJavaProject javaProject, IClasspathEntry newClassPathEntry, boolean build)
 			throws JavaModelException {
 		IClasspathEntry[] newClassPath;
 		IClasspathEntry[] classPath = javaProject.getRawClasspath();
@@ -273,7 +324,9 @@ public class JavaProjectSetupUtil {
 		System.arraycopy(classPath, 0, newClassPath, 1, classPath.length);
 		newClassPath[0] = newClassPathEntry;
 		javaProject.setRawClasspath(newClassPath, null);
-		reallyWaitForAutoBuild();
+		if (build) {
+			waitForBuild();
+		}
 	}
 
 	public static IFolder createSubFolder(IProject project, String folderName) throws CoreException {
@@ -282,7 +335,7 @@ public class JavaProjectSetupUtil {
 			folder.delete(true, null);
 		}
 		try {
-			return IResourcesSetupUtil.createFolder(folder.getFullPath());
+			return createFolder(folder.getFullPath());
 		} catch (Exception e) {
 			throw new RuntimeIOException(e);
 		}
@@ -300,17 +353,32 @@ public class JavaProjectSetupUtil {
 	}
 	
 	public static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
+		addJreClasspathEntry(javaProject, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static void addJreClasspathEntry(IJavaProject javaProject, boolean build) throws JavaModelException {
 		// init default mappings
 		makeJava7Default();
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
-			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry());
+			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry(), build);
 		}
 	}
 	
 	public static void addJreClasspathEntry(IJavaProject javaProject, String bree) throws JavaModelException {
 		IPath jreContainerPath = JavaRuntime.newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, bree);
 		addToClasspath(javaProject, JavaCore.newContainerEntry(jreContainerPath));
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static void addJreClasspathEntry(IJavaProject javaProject, String bree, boolean build) throws JavaModelException {
+		IPath jreContainerPath = JavaRuntime.newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, bree);
+		addToClasspath(javaProject, JavaCore.newContainerEntry(jreContainerPath), build);
 	}
 
 	private static boolean isJava7Default = false;
@@ -365,8 +433,15 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IClasspathEntry addJarToClasspath(IJavaProject javaProject, IFile jarFile) throws JavaModelException {
+		return addJarToClasspath(javaProject, jarFile, true);
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	public static IClasspathEntry addJarToClasspath(IJavaProject javaProject, IFile jarFile, boolean build) throws JavaModelException {
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(jarFile.getFullPath(), null, null);
-		addToClasspath(javaProject, newLibraryEntry);
+		addToClasspath(javaProject, newLibraryEntry, build);
 		return newLibraryEntry;
 	}
 	

@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import static org.junit.Assert.*;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class EObjectDescriptionImplTest extends AbstractXtextTests {
+public class EObjectDescriptionImplTest {
 
 	@Test public void testNoNPE() {
 		EObjectDescriptionImpl objectDescription = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE.createEObjectDescription();

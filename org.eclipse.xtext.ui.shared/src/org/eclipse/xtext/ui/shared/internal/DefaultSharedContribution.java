@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
+import org.eclipse.xtext.builder.impl.ClosedProjectsQueue;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.generator.IDerivedResourceMarkers;
@@ -28,6 +29,7 @@ public class DefaultSharedContribution implements Module {
 	@Override
 	public void configure(Binder binder) {
 		binder.bind(ProjectOpenedOrClosedListener.class);
+		binder.bind(ClosedProjectsQueue.class);
 		binder.bind(IEagerContribution.class).to(ListenerRegistrar.class);
 		binder.bind(WorkspaceProjectsState.class);
 		binder.bind(TraceBasedOpenerContributor.class);

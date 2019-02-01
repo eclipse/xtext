@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.jarInputStream;
 
 import java.util.List;
 
@@ -18,45 +17,51 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.builder.TestedWorkspaceWithJDT;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(BuilderTestLanguageInjectorProvider.class)
 public abstract class ProfilerAbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	private static final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();
 
-	@Before
-	public void setUp() throws Exception {
-		assertEquals(0, countResourcesInIndex());
-		assertEquals(0, root().getProjects().length);
-	}
-
+	@Inject
+	@Rule
+	@Extension
+	public TestedWorkspaceWithJDT workspace;
+	
 	@After
 	public void tearDown() throws Exception {
-		cleanWorkspace();
-		waitForBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 	}
 	
 	@Test public void testIncrementalBuildWithBigLibraryFile() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project = workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		int NUM_OBJECTS = 40000;
 		StopWatch timer = new StopWatch();
@@ -66,21 +71,21 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			contents += " object Foo" + i;
 		}
 		contents+="}";
-		file.create(new StringInputStream(contents), true, monitor());
+		file.create(new StringInputStream(contents), true, workspace.monitor());
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		for (int i =0;i<5;i++) {
 			IFile f = folder.getFile("Referencing_"+i+F_EXT);
 			logAndReset("Creating library file", timer);
 			f.create(new StringInputStream("object Bar"+i+" references x.Foo1"), true, null);
 			logAndReset("Auto build", timer);
-			waitForBuild();
+			workspace.build();
 		}
 	}
 	
 	@Test public void testFullBuildBigProject() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project = workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
@@ -91,20 +96,20 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			String contents = "object Foo" + i + " references Foo" + (i + 1);
 			if (i == NUM_FILES)
 				contents = "object Foo" + i;
-			file.create(new StringInputStream(contents), true, monitor());
+			file.create(new StringInputStream(contents), true, workspace.monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		logAndReset("Auto build", timer);
 	}
 	
 	@Test public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project = workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		IFile jarFile = project.getProject().getFile("my.jar");
-		jarFile.create(jarInputStream(new TextFile("my/element"+F_EXT,"object ReferenceMe")), true, monitor());
-		addJarToClasspath(project, jarFile);
+		jarFile.create(jarInputStream(new TextFile("my/element"+F_EXT,"object ReferenceMe")), true, workspace.monitor());
+		workspace.addJarToClasspath(project, jarFile);
 		
 		int NUM_FILES = 2000;
 		IFile[] files = new IFile[NUM_FILES];
@@ -113,10 +118,10 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
 			files[i] = file;
 			String contents = "object Foo" + i + " references ReferenceMe";
-			file.create(new StringInputStream(contents), true, monitor());
+			file.create(new StringInputStream(contents), true, workspace.monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		for (IMarker iMarker : iMarkers) {
@@ -126,8 +131,8 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 	}
 	
 	@Test public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project =  workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 200;
 		IFile[] files = new IFile[NUM_FILES];
@@ -138,18 +143,18 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			String contents = "object Foo" + i + " references Foo" + (i * 1000);
 			if (i == NUM_FILES)
 				contents = "object Foo" + i;
-			file.create(new StringInputStream(contents), true, monitor());
+			file.create(new StringInputStream(contents), true, workspace.monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		assertEquals(NUM_FILES-1,iMarkers.length);
 	}
 	
 	@Test public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project = workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 500;
 		IFile[] files = new IFile[NUM_FILES];
@@ -160,18 +165,18 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			String contents = "object Foo" + i + " references Foo" + (i * 1000);
 			if (i == NUM_FILES)
 				contents = "object Foo" + i;
-			file.create(new StringInputStream(contents), true, monitor());
+			file.create(new StringInputStream(contents), true, workspace.monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		logAndReset("Auto build", timer);
 		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
 		assertEquals(NUM_FILES-1,iMarkers.length);
 	}
 
 	@Test public void testLotsOfFiles() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IJavaProject project = workspace.createJavaProject("foo");
+		workspace.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = project.getProject().getFolder("src");
 		int NUM_FILES = 10;
 		IFile[] files = new IFile[NUM_FILES];
@@ -182,10 +187,10 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 			String contents = "object Foo" + i + " references Foo" + (i + 1);
 			if (i == NUM_FILES)
 				contents = "object Foo" + i;
-			file.create(new StringInputStream(contents), true, monitor());
+			file.create(new StringInputStream(contents), true, workspace.monitor());
 		}
 		logAndReset("Creating files", timer);
-		waitForBuild();
+		workspace.build();
 		logAndReset("Auto build", timer);
 		for (int x = 0; x < 20; x++) {
 			for (int i = 0; i < NUM_FILES; i++) {
@@ -193,8 +198,8 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 				String contents = "object Foo" + i + " references Foo" + (i + 1);
 				if (i == NUM_FILES)
 					contents = "object Foo" + i;
-				file.setContents(new StringInputStream(contents), true, true, monitor());
-				waitForBuild();
+				file.setContents(new StringInputStream(contents), true, true, workspace.monitor());
+				workspace.build();
 			}
 			logAndReset("updating all " + NUM_FILES + " files", timer);
 		}

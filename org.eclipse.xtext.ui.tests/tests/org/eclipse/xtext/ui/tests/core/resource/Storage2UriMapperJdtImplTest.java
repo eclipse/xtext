@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -28,18 +29,16 @@ import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.core.NonJavaResource;
-import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.testing.logging.LoggingTester;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.io.ByteStreams;
@@ -49,16 +48,12 @@ import com.google.common.io.ByteStreams;
  */
 public class Storage2UriMapperJdtImplTest extends Assert {
 	
-	@Rule
-	public Flaky.Rule flakyRule = new Flaky.Rule();
-	
 	@Before
 	@After
 	public void cleanWorkspace() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 	
-	@Flaky
 	@Test public void testBug463258_01() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
@@ -79,7 +74,6 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertEquals("//empty", new String(bytes));
 	}
 	
-	@Flaky
 	@Test public void testBug463258_02() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
@@ -96,7 +90,6 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertEquals("archive:platform:/resource/foo/foo.jar!/unknown/doesNotExist.notindexed", uri.toString());
 	}
 	
-	@Flaky
 	@Test public void testBug463258_03a() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
@@ -159,7 +152,6 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertNull(uri);
 	}
 	
-	@Flaky
 	@Test public void testBug463258_04() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
@@ -192,11 +184,13 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		}).assertNoLogEntries();
 	}
 	
-	@Flaky
 	@Test public void testResourceInJar() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
 		file.create(jarInputStream(new TextFile("foo/bar.indexed", "//empty"), new TextFile("foo/bar.notIndexed", "//empty")), true, monitor());
+		// we do cache per timestamp - test is to fast and tries to update the file content in the very same millisecond
+		// that's why we fake the timestamp here
+		file.setLocalTimeStamp(123L);
 		addJarToClasspath(project, file);
 		
 		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
@@ -210,7 +204,6 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertTrue(rootData.isEmpty());
 	}
 	
-	@Flaky
 	@Test public void testJaredBundle() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		IFile file = project.getProject().getFile("foo.jar");
@@ -219,6 +212,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 				new TextFile("foo/bar.notIndexed", "//empty"),
 				new TextFile("META-INF/MANIFEST.MF", "Manifest-Version: 1.0\nBundle-SymbolicName: hubba.bubba\n")
 				), true, monitor());
+		file.setLocalTimeStamp(678L);
 		addJarToClasspath(project, file);
 		
 		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
@@ -239,7 +233,6 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertEquals("platform:/resource/other.bundle.name/foo/bar.indexed", rootData.keySet().iterator().next().toString());
 	}
 	
-	@Flaky
 	@Test public void testResourceInExternalFolder() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
@@ -248,8 +241,9 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		file.create(new StringInputStream("content"), true, monitor());
 		IFile file2 = externalFolder.getFile("b.nonindexed");
 		file2.create(new StringInputStream("content"), true, monitor());
-		addExternalFolderToClasspath(project, externalFolder);
-		
+		IClasspathEntry classpathEntry = addExternalFolderToClasspath(project, externalFolder);
+		IPackageFragmentRoot packageFragmentRoot = project.findPackageFragmentRoots(classpathEntry)[0];
+		Assert.assertTrue(packageFragmentRoot.getPath().toFile().setLastModified(456L));
 		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
 		
 		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);

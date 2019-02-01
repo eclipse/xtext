@@ -8,8 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
@@ -27,10 +26,12 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -45,15 +46,21 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	private IFile foo_file;
 	private IFile bar_file;
 
+	@After
+	public void resetEvents() {
+		getEvents().clear();
+		getBuilderState().removeListener(this);
+	}
+	
 	@Test public void testValidSimpleModel() throws Exception {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file = createFile("foo/foo"+F_EXT, "object Foo ");
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(file));
 	}
 
 	private IProject createSimpleProjectWithXtextNature(String projectName) throws CoreException {
-		IProject project = createSimpleProject(projectName);
+		IProject project = createProject(projectName);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		return project;
 	}
@@ -61,7 +68,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testSimpleModelWithSyntaxError() throws Exception {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file = createFile("foo/foo"+F_EXT, "objekt Foo ");
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(file));
 	}
 
@@ -69,7 +76,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createSimpleProjectWithXtextNature("foo");
 		IFile file1 = createFile("foo/foo"+F_EXT, "object Foo ");
 		IFile file2 = createFile("foo/bar"+F_EXT, "object Bar references Foo");
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(file1), 0, countMarkers(file1));
 		assertEquals(printMarkers(file2), 0, countMarkers(file2));
 		assertTrue(indexContainsElement(file1.getFullPath().toString(),"Foo"));
@@ -81,10 +88,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		IProject project = createSimpleProjectWithXtextNature("foo");
 		createFile("foo/foo"+F_EXT, "object Foo ");
 		createFile("foo/bar"+F_EXT, "object Bar references Foo");
-		waitForBuild();
+		build();
 		assertEquals(2, countResourcesInIndex());
 		removeNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForBuild();
+		build();
 		assertEquals(0, countResourcesInIndex());
 	}
 	
@@ -105,7 +112,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createSimpleProjectWithXtextNature("foo");
 		createFile("foo/foo"+F_EXT, "object Foo ");
 		IFile file = createFile("foo/bar"+F_EXT, "object Bar references Fuu");
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(file));
 	}
 	
@@ -116,7 +123,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoReferencedProjectsRemoveNature() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(bar_file));
 	}
 	
@@ -126,15 +133,15 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		bar_project = createSimpleProjectWithXtextNature("bar");
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
 		bar_file = createFile("bar/bar"+F_EXT, "object Bar references Foo");
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 1, countMarkers(bar_file));
 		setReference(bar_project, foo_project);
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 1, countMarkers(bar_file));
 		addNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(foo_file), 0, countMarkers(foo_file));
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
@@ -144,9 +151,9 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		bar_project = createSimpleProjectWithXtextNature("bar");
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
 		bar_file = createFile("bar/bar"+F_EXT, "object Bar references Foo");
-		waitForBuild();
+		build();
 		setReference(bar_project, foo_project);
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
@@ -154,9 +161,9 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testTwoFilesInTwoInversedReferencedProjects() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 		removeReference(bar_project, foo_project);
-		waitForBuild();
+		build();
 		setReference(foo_project, bar_project);
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 	}
@@ -165,7 +172,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		removeReference(bar_project, foo_project);
 
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 	}
@@ -174,12 +181,12 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		
 		removeReference(bar_project, foo_project);
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(1, countMarkers(bar_file));
 		
 		setReference(bar_project, foo_project);
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
@@ -188,10 +195,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		createTwoFilesInTwoReferencedProjects();
 		// close project
 		foo_project.getProject().close(monitor());
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(bar_file));
 		foo_project.getProject().open(monitor());
-		waitForBuild();
+		build();
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
@@ -200,12 +207,12 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		
 		// change referenced file
 		foo_file.setContents(new StringInputStream("object Baz "),true,true,monitor());
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(bar_file));
 		
 		//change back to valid state
 		foo_file.setContents(new StringInputStream("object Foo "),true,true,monitor());
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(bar_file));
 	}
 	
@@ -214,84 +221,86 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		
 		// delete referenced file
 		foo_file.delete(true, new NullProgressMonitor());
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(bar_file));
 		
 		// create new
 		foo_file = createFile("foo/foo"+F_EXT, "object Foo ");
-		waitForBuild();
+		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
 	}
 	
 	@Test public void testUpdateOfReferencedFile() throws Exception {
-		IProject project = createSimpleProject("foo");
+		IProject project = createProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = createSubFolder(project, "subFolder");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
 		IFile fileB = folder.getFile("Boo" + F_EXT);
 		fileB.create(new StringInputStream("object Bar references Foo"), true, monitor());
-		waitForBuild();
+		build();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertTrue(indexContainsElement(fileB.getFullPath().toString(),"Bar"));
 		assertEquals(2, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1,getEvents().get(0).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 		assertEquals(1,getIncomingReferences(URI.createPlatformResourceURI("foo/subFolder/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(2,getEvents().get(1).getDeltas().size());
 		assertNumberOfMarkers(fileB, 1);
 		assertEquals(0,getIncomingReferences(URI.createPlatformResourceURI("foo/subFolder/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(2,getEvents().get(2).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1,getEvents().get(3).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
 	}
 	
 	@Test public void testDeleteFile() throws Exception {
-		IProject project = createSimpleProject("foo");
+		IProject project = createProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = createSubFolder(project, "subFolder");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertEquals(1, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
 		file.delete(true, monitor());
-		waitForBuild();
+		build();
 		assertEquals(1,getEvents().get(0).getDeltas().size());
 		assertNull(getEvents().get(0).getDeltas().get(0).getNew());
 		assertEquals(0, countResourcesInIndex());
 	}
 	
 	@Test public void testCleanBuild() throws Exception {
-		IProject project = createSimpleProject("foo");
+		IProject project = createProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		IFolder folder = createSubFolder(project, "subFolder");
 		IFile file = folder.getFile("Foo" + F_EXT);
 		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
+		build();
 		assertTrue(indexContainsElement(file.getFullPath().toString(),"Foo"));
 		assertEquals(1, countResourcesInIndex());
 		
 		getBuilderState().addListener(this);
+		
 		project.getProject().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor());
-		waitForBuild();
+		assertEquals(1, getEvents().size());
+		build();
 		// clean build should first remove the IResourceDescriptor and then add it again  
 		assertEquals(2, getEvents().size());
 		assertEquals(1, getEvents().get(0).getDeltas().size());
@@ -305,7 +314,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 	@Test public void testProjectNameWithSpace() throws Exception {
 		createSimpleProjectWithXtextNature("foo bar");
 		IFile file = createFile("foo bar/foo"+F_EXT, "objekt Foo ");
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(file));
 	}
 	
@@ -318,14 +327,14 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
 		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
 		IFile file = foo.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		file.create(JavaProjectSetupUtil.jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
 		addToClasspath(foo, newLibraryEntry);
 		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForBuild();
+		build();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
@@ -351,13 +360,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForBuild();
+		build();
 		assertEquals(1,countMarkers(bazFile));
 		IFile file = foo.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		file.create(JavaProjectSetupUtil.jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
 		addToClasspath(foo, newLibraryEntry);
-		waitForBuild();
+		build();
 		assertEquals(0,countMarkers(bazFile));
 	}
 	
@@ -372,17 +381,17 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
 		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
 		IFile file = foo.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		file.create(JavaProjectSetupUtil.jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
 		addToClasspath(foo, newLibraryEntry);
 		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForBuild();
+		build();
 		assertEquals(0,countMarkers(bazFile));
 		deleteClasspathEntry(foo, newLibraryEntry.getPath());
-		waitForBuild();
+		build();
 		assertEquals(1, countMarkers(bazFile));
 		assertEquals(1, countResourcesInIndex());
 		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
@@ -398,7 +407,7 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addNature(bar.getProject(), XtextProjectHelper.NATURE_ID);
 		addNature(baz.getProject(), XtextProjectHelper.NATURE_ID);
 		IFile file = foo.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		file.create(JavaProjectSetupUtil.jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
 		addToClasspath(foo, newLibraryEntry);
 		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
@@ -406,60 +415,51 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
 		addSourceFolder(baz, "src");
 		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
-		waitForBuild();
+		build();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 		deleteClasspathEntry(foo, newLibraryEntry.getPath());
-		waitForBuild();
+		build();
 		assertEquals(0,countMarkers(bazFile));
 		assertEquals(2, countResourcesInIndex());
 	}
 	
 	@Test
 	public void testFullBuild() throws Exception {
-		IProject project = createSimpleProject("foo");
+		IProject project = createProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		createProject("bar");
-		waitForBuild();
+		build();
 		assertEquals(0, countResourcesInIndex());
 		createFile("bar/bar"+F_EXT, "objekt Foo ");
-		waitForBuild();
+		build();
 		assertEquals(0, countResourcesInIndex());
 		createFile("foo/bar"+F_EXT, "objekt Foo ");
-		waitForBuild();
+		build();
 		assertEquals(1, countResourcesInIndex());
 
 		getBuilderState().addListener(this);
 		fullBuild();
 		assertEquals(1, countResourcesInIndex());
-//		System.out.println(print(getEvents().get(0).getDeltas()));
 		assertEquals(1,getEvents().size());
 	}
 
 	private int countMarkers(IFile file) throws CoreException {
 		return file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length;
 	}
-
 	
 	@Test
 	public void testEvents() throws Exception {
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IProject someProject = createProject("bar");
-		IFile file = someProject.getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
-		addJarToClasspath(project, file);
-		waitForBuild();
-//		JavaCore.addElementChangedListener(new IElementChangedListener() {
-//			
-//			public void elementChanged(ElementChangedEvent event) {
-//				System.out.println(event);
-//			}
-//		});
-		someProject.delete(true, monitor());
+		IJavaProject xtextProject = createJavaProject("xtextProject");
+		addNature(xtextProject.getProject(), XtextProjectHelper.NATURE_ID);
+		IProject projectWithJarFile = createProject("projectWithJar");
+		IFile jarFile = projectWithJarFile.getFile("jarFile.jar");
+		jarFile.create(JavaProjectSetupUtil.jarInputStream(new TextFile("inJar/Bar"+F_EXT, "object InJar")), true, monitor());
+		jarFile.setLocalTimeStamp(100L);
+		addJarToClasspath(xtextProject, jarFile);
+		projectWithJarFile.delete(true, monitor());
+		build();
+		assertEmptyIndex();
 	}
 	
-	protected void waitForBuild() {
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
-	}
 }
