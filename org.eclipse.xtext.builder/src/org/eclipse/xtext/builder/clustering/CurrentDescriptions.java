@@ -153,7 +153,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	/**
 	 * Context-aware instance of our index.
 	 */
-	public static class ResourceSetAware implements IResourceDescriptions.IContextAware {
+	public static class ResourceSetAware implements IResourceDescriptions.IContextAware, IResourceDescriptions.IResourceSetAware {
 
 		/** Base index. */
 		private IResourceDescriptions delegate;
@@ -221,5 +221,15 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 			return delegate.getExportedObjectsByObject(object);
 		}
 
+		/**
+		 * @since 2.17
+		 */
+		@Override
+		public ResourceSet getResourceSet() {
+			checkNotNull(delegate);
+			IResourceSetAware resourceSetAware = (IResourceSetAware) delegate;
+			ResourceSet resourceSet = resourceSetAware.getResourceSet();
+			return resourceSet;
+		}
 	}
 }
