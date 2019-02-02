@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,7 +23,10 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
+
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -35,7 +38,11 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;
 
-	protected abstract String getEditorId();
+	@Inject protected XtextEditorInfo editorInfo;
+
+	protected String getEditorId() {
+		return editorInfo.getEditorId();
+	}
 
 	protected XtextEditor openEditor(IFile file) throws Exception {
 		return getXtextEditor(

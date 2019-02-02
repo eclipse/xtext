@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,7 +19,6 @@ import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -29,13 +28,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 /**
+ * @author miklossy - Initial contribution and API
+ * 
  * @since 2.14
  */
 @SuppressWarnings("all")
 public abstract class AbstractEditorDoubleClickTextSelectionTest extends AbstractEditorTest {
-  @Inject
-  private XtextEditorInfo xtextEditorInfo;
-  
   @Inject
   @Extension
   private FileExtensionProvider _fileExtensionProvider;
@@ -136,10 +134,5 @@ public abstract class AbstractEditorDoubleClickTextSelectionTest extends Abstrac
     ISelection _selection = textEditor.getSelectionProvider().getSelection();
     final String actualSelectedText = ((ITextSelection) _selection).getText();
     Assert.assertEquals(expectedSelectedText, actualSelectedText);
-  }
-  
-  @Override
-  protected String getEditorId() {
-    return this.xtextEditorInfo.getEditorId();
   }
 }

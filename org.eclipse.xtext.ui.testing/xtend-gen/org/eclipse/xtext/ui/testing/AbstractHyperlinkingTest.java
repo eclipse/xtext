@@ -27,7 +27,6 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -67,9 +66,6 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
   protected SyncUtil _syncUtil;
   
   @Inject
-  protected XtextEditorInfo editorInfo;
-  
-  @Inject
   protected IResourceSetProvider resourceSetProvider;
   
   protected IProject project;
@@ -81,11 +77,6 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
       return _builder.toString();
     }
   }.apply();
-  
-  @Override
-  protected String getEditorId() {
-    return this.editorInfo.getEditorId();
-  }
   
   /**
    * Tests that the user can navigate to the target element in a DSL text when activating the hyperlink on a certain region.

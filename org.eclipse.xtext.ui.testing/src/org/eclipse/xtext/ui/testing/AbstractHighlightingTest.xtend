@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,7 +14,6 @@ import org.eclipse.swt.custom.StyledText
 import org.eclipse.swt.graphics.Color
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.XtextProjectHelper
-import org.eclipse.xtext.ui.editor.XtextEditorInfo
 import org.eclipse.xtext.ui.editor.utils.TextStyle
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
@@ -22,18 +21,14 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
 
 /**
+ * @author miklossy - Initial contribution and API
+ * 
  * @since 2.15
  */
 abstract class AbstractHighlightingTest extends AbstractEditorTest {
 
-	@Inject XtextEditorInfo editorInfo
-
 	@Inject extension SyncUtil
 	@Inject extension FileExtensionProvider
-
-	override protected getEditorId() {
-		editorInfo.getEditorId
-	}
 
 	/**
 	 * @param it The editor's input text. The input text must contain the given <code>text</code>.

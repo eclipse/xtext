@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
@@ -161,9 +160,6 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
   protected Injector injector;
   
   @Inject
-  protected XtextEditorInfo editorInfo;
-  
-  @Inject
   protected IResourceSetProvider resourceSetProvider;
   
   @Inject
@@ -183,11 +179,6 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
   protected IssueResolutionProvider _issueResolutionProvider;
   
   protected IProject project;
-  
-  @Override
-  protected String getEditorId() {
-    return this.editorInfo.getEditorId();
-  }
   
   /**
    * Test that the expected quickfixes are offered on a given validation issue in a given DSL text.
