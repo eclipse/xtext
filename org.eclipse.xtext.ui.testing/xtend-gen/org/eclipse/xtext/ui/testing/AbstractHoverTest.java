@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,7 +19,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
@@ -39,20 +38,12 @@ public abstract class AbstractHoverTest extends AbstractEditorTest {
   protected IEObjectHover eObjectHover;
   
   @Inject
-  protected XtextEditorInfo editorInfo;
-  
-  @Inject
   @Extension
   protected SyncUtil _syncUtil;
   
   @Inject
   @Extension
   protected FileExtensionProvider _fileExtensionProvider;
-  
-  @Override
-  protected String getEditorId() {
-    return this.editorInfo.getEditorId();
-  }
   
   /**
    * Test that the expected text appears in a popup window while hovering over a certain text in a given DSL text.

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.bug462047
 
-import com.google.inject.Inject
 import org.apache.log4j.Level
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -15,7 +14,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.logging.LoggingTester
-import org.eclipse.xtext.ui.editor.XtextEditorInfo
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
@@ -41,8 +39,6 @@ class Bug462047Test extends AbstractEditorTest {
 		TargetPlatformUtil.setTargetPlatform(Bug462047Test);
 	}
 	
-	@Inject XtextEditorInfo editorInfo
-	
 	@Before
 	def void createProjects() {
 		AbstractXbaseUITestCase.createPluginProject('bug462047')
@@ -51,10 +47,6 @@ class Bug462047Test extends AbstractEditorTest {
 	@After
 	def deleteProjects() {
 		IResourcesSetupUtil.cleanWorkspace();
-	}
-	
-	override protected getEditorId() {
-		editorInfo.editorId
 	}
 	
 	@Test

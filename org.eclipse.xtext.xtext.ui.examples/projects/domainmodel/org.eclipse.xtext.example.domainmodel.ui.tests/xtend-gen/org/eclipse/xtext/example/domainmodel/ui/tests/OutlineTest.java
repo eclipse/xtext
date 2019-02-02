@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.ui.tests;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator;
 import org.eclipse.xtext.example.domainmodel.ui.tests.DomainmodelUiInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -17,11 +16,6 @@ import org.junit.runner.RunWith;
 @InjectWith(DomainmodelUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class OutlineTest extends AbstractOutlineTest {
-  @Override
-  protected String getEditorId() {
-    return DomainmodelActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_DOMAINMODEL_DOMAINMODEL;
-  }
-  
   @Test
   public void testOutline() {
     try {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,14 +15,14 @@ import org.eclipse.ui.texteditor.AbstractTextEditor
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
-import org.eclipse.xtext.ui.editor.XtextEditorInfo
 
 /**
+ * @author miklossy - Initial contribution and API
+ * 
  * @since 2.14
  */
 abstract class AbstractEditorDoubleClickTextSelectionTest extends AbstractEditorTest {
 
-	@Inject XtextEditorInfo xtextEditorInfo
 	@Inject extension FileExtensionProvider
 
 	/**
@@ -95,9 +95,4 @@ abstract class AbstractEditorDoubleClickTextSelectionTest extends AbstractEditor
 		val actualSelectedText = (textEditor.selectionProvider.selection as ITextSelection).text
 		expectedSelectedText.assertEquals(actualSelectedText)
 	}
-
-	override protected getEditorId() {
-		xtextEditorInfo.editorId
-	}
-
 }
