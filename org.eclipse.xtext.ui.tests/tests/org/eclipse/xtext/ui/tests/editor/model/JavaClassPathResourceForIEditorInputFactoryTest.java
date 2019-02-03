@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,11 +29,8 @@ import org.eclipse.jdt.internal.core.NonJavaResource;
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -53,12 +50,6 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 	
 	protected Injector getInjector() {
 		return TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE);
-	}
-	
-	@Before
-	@After
-	public void cleanWorkspace() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
 	}
 	
 	@Test public void testBug463258_01() throws Exception {
