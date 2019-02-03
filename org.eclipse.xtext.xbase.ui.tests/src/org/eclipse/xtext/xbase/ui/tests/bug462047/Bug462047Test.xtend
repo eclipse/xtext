@@ -21,7 +21,6 @@ import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.tests.Bug462047LangUiInjectorProvider
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
-import org.junit.After
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -42,11 +41,6 @@ class Bug462047Test extends AbstractEditorTest {
 	@Before
 	def void createProjects() {
 		AbstractXbaseUITestCase.createPluginProject('bug462047')
-	}
-	 
-	@After
-	def deleteProjects() {
-		IResourcesSetupUtil.cleanWorkspace();
 	}
 	
 	@Test

@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.tests.Bug462047LangUiInjectorProvider;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -54,15 +53,6 @@ public class Bug462047Test extends AbstractEditorTest {
   public void createProjects() {
     try {
       AbstractXbaseUITestCase.createPluginProject("bug462047");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @After
-  public void deleteProjects() {
-    try {
-      IResourcesSetupUtil.cleanWorkspace();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
