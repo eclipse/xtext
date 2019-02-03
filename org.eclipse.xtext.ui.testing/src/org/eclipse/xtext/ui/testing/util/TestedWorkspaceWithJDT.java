@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder;
+package org.eclipse.xtext.ui.testing.util;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -20,8 +20,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.pde.internal.core.PluginModelManager;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.Exceptions;
 import org.junit.runner.Description;
 
