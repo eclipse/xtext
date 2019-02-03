@@ -42,6 +42,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>${maven.version}</version>
+			<scope>provided</scope>
+		</dependency>    
+		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
 			<version>${project.version}</version>
