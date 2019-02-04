@@ -14,6 +14,10 @@ import java.util.Set;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -32,14 +36,10 @@ import com.google.inject.Injector;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
- * 
- * @goal generate
- * @phase generate-sources
- * @requiresDependencyResolution compile
- * @threadSafe true
  */
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.COMPILE, threadSafe = true)
 public class XtextGenerator extends AbstractMojo {
-    
+
 	/**
 	 * Lock object to ensure thread-safety
 	 */
@@ -47,63 +47,50 @@ public class XtextGenerator extends AbstractMojo {
 
 	/**
 	 * Location of the generated source files.
-	 * 
-	 * @parameter expression="${project.build.directory}/xtext-temp"
 	 */
+	@Parameter(defaultValue = "${project.build.directory}/xtext-temp")
 	private String tmpClassDirectory;
 
 	/**
 	 * File encoding argument for the generator.
-	 * 
-	 * @parameter expression="${xtext.encoding}"
-	 *            default-value="${project.build.sourceEncoding}"
 	 */
+	@Parameter(property = "xtext.encoding", defaultValue = "${project.build.sourceEncoding}")
 	protected String encoding;
 
 	/**
 	 * The project itself. This parameter is set by maven.
-	 * 
-	 * @parameter expression="${project}"
-	 * @readonly
-	 * @required
 	 */
+	@Parameter(defaultValue = "${project}", readonly = true, required = true)
 	protected MavenProject project;
 
 	/**
 	 * Project classpath.
-	 * 
-	 * @parameter expression="${project.compileClasspathElements}"
-	 * @readonly
-	 * @required
 	 */
+	@Parameter(defaultValue = "${project.compileClasspathElements}", readonly = true, required = true)
 	private List<String> classpathElements;
 
 	/**
 	 * Project source roots. List of folders, where the source models are located.<br>
 	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
-	 * When adding a new entry the default value will be overwritten not extended. 
-	 * @parameter
+	 * When adding a new entry the default value will be overwritten not extended.
 	 */
+	@Parameter
 	private List<String> sourceRoots;
-	
+
 	/**
 	 * Java source roots. List of folders, where the java source files are located.<br>
 	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
 	 * When adding a new entry the default value will be overwritten not extended.<br>
 	 * Used when your language needs java.
-	 * 
-	 * @parameter
 	 */
+	@Parameter
 	private List<String> javaSourceRoots;
 
-	/**
-	 * @parameter
-	 * @required
-	 */
+	@Parameter(required = true)
 	private List<Language> languages;
-	
+
 	/**
-	 * you can specify a list of project mappings that is used to populate the EMF  Platform Resource Map.
+	 * you can specify a list of project mappings that is used to populate the EMF Platform Resource Map.
 	 * 
 	 * <pre>
 		&lt;projectMappings&gt;
@@ -117,51 +104,38 @@ public class XtextGenerator extends AbstractMojo {
 			&lt;/projectMapping&gt;
 		&lt;/projectMappings&gt;
 	 * </pre>
-	 * 
-	 * @parameter
 	 */
+	@Parameter
 	private List<ProjectMapping> projectMappings;
 
-	/**
-	 * @parameter expression="${xtext.generator.skip}" default-value="false"
-	 */
+	@Parameter(property = "xtext.generator.skip", defaultValue = "false")
 	private Boolean skip;
 
-	/**
-	 * @parameter default-value="true"
-	 */
+	@Parameter(defaultValue = "true")
 	private Boolean failOnValidationError;
 
-	/**
-	 * @parameter expression="${maven.compiler.source}" default-value="1.6"
-	 */
+	@Parameter(property = "maven.compiler.source", defaultValue = "1.6")
 	private String compilerSourceLevel;
 
-	/**
-	 * @parameter expression="${maven.compiler.target}" default-value="1.6"
-	 */
+	@Parameter(property = "maven.compiler.target", defaultValue = "1.6")
 	private String compilerTargetLevel;
 
 	/**
 	 * RegEx expression to filter class path during model files look up
-	 * 
-	 * @parameter
 	 */
+	@Parameter
 	private String classPathLookupFilter;
 
 	/**
 	 * Clustering configuration to avoid OOME
-	 *
-	 * @parameter
 	 */
+	@Parameter
 	private ClusteringConfig clusteringConfig;
 
 	/**
-	 * if enabled the plugin will scan the project and its siblings and add them to
-	 * the platform resource map automatically
-	 * 
-	 * @parameter default-value="false"
+	 * if enabled the plugin will scan the project and its siblings and add them to the platform resource map automatically
 	 */
+	@Parameter(defaultValue = "false")
 	private Boolean autoFillPlatformResourceMap = Boolean.FALSE;
 
 	/*
@@ -173,7 +147,7 @@ public class XtextGenerator extends AbstractMojo {
 		if (skip) {
 			getLog().info("skipped.");
 		} else {
-			synchronized(lock) {
+			synchronized (lock) {
 				new MavenLog4JConfigurator().configureLog4j(getLog());
 				configureDefaults();
 				autoAddToPlatformResourceMap(project);
@@ -184,8 +158,7 @@ public class XtextGenerator extends AbstractMojo {
 	}
 
 	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
-		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this
-				.getClass().getClassLoader());
+		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this.getClass().getClassLoader());
 		Injector injector = Guice.createInjector(new MavenStandaloneBuilderModule());
 		StandaloneBuilder builder = injector.getInstance(StandaloneBuilder.class);
 		builder.setBaseDir(project.getBasedir().getAbsolutePath());
@@ -198,7 +171,7 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
 		builder.setDebugLog(getLog().isDebugEnabled());
-		if(clusteringConfig != null)
+		if (clusteringConfig != null)
 			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
 		configureCompiler(builder.getCompiler());
 		logState();
@@ -277,30 +250,28 @@ public class XtextGenerator extends AbstractMojo {
 	}
 
 	/**
-	 * Adds the given project and its child modules ({@link MavenProject#getModules()})
-	 * to {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses
-	 * {@link MavenProject#getParent()} recursively, if set.
+	 * Adds the given project and its child modules ({@link MavenProject#getModules()}) to {@link EcorePlugin#getPlatformResourceMap()}. Furthermore, this traverses {@link MavenProject#getParent()} recursively, if set.
 	 *
-	 * @param project the project
+	 * @param project
+	 *            the project
 	 */
 	private void autoAddToPlatformResourceMap(final MavenProject project) {
 		if (autoFillPlatformResourceMap) {
 			addToPlatformResourceMap(project.getBasedir());
-			project.getModules().stream().map(module -> new File(project.getBasedir(), module))
-					.forEach(e -> addToPlatformResourceMap(e));
+			project.getModules().stream().map(module -> new File(project.getBasedir(), module)).forEach(e -> addToPlatformResourceMap(e));
 
 			if (project.getParent() != null)
 				autoAddToPlatformResourceMap(project.getParent());
 		}
 	}
-	
+
 	private void manuallyAddToPlatformResourceMap() {
 		if (projectMappings != null) {
 			for (ProjectMapping projectMapping : projectMappings) {
 				if (projectMapping.getPath() != null && projectMapping.getProjectName() != null) {
 					String path = projectMapping.getPath().toURI().toString();
 					String name = projectMapping.getProjectName();
-					getLog().info("Adding project '" + name + "' with path '" + path +"' to Platform Resource Map");
+					getLog().info("Adding project '" + name + "' with path '" + path + "' to Platform Resource Map");
 					final URI uri = URI.createURI(path);
 					EcorePlugin.getPlatformResourceMap().put(name, uri);
 				}
@@ -309,15 +280,15 @@ public class XtextGenerator extends AbstractMojo {
 	}
 
 	/**
-	 * Adds the given file to EcorePlugin's platform resource map.
-	 * The file's name will be used as the map entry's key.
+	 * Adds the given file to EcorePlugin's platform resource map. The file's name will be used as the map entry's key.
 	 *
-	 * @param file a file to register
+	 * @param file
+	 *            a file to register
 	 * @return the registered URI pointing to the given file
 	 * @see EcorePlugin#getPlatformResourceMap()
 	 */
 	private URI addToPlatformResourceMap(final File file) {
-		getLog().info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString()+"' to Platform Resource Map");
+		getLog().info("Adding project '" + file.getName() + "' with path '" + file.toURI().toString() + "' to Platform Resource Map");
 		final URI uri = URI.createURI(file.toURI().toString());
 		return EcorePlugin.getPlatformResourceMap().put(file.getName(), uri);
 	}

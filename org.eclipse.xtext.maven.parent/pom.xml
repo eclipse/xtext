@@ -104,44 +104,6 @@
 				</executions>
 				<configuration>
 					<additionalOptions>${maven.javadoc.opts}</additionalOptions>
-					<!-- Maven tags used in XtextGenerator Javadoc -->
-					<tags>
-						<tag>
-							<name>goal</name>
-							<placement>a</placement>
-							<head>Goal:</head>
-						</tag>
-						<tag>
-							<name>phase</name>
-							<placement>a</placement>
-							<head>Phase:</head>
-						</tag>
-						<tag>
-							<name>threadSafe</name>
-							<placement>a</placement>
-							<head>Thread Safe:</head>
-						</tag>
-						<tag>
-							<name>parameter</name>
-							<placement>a</placement>
-							<head>Parameter:</head>
-						</tag>
-						<tag>
-							<name>required</name>
-							<placement>a</placement>
-							<head>Required:</head>
-						</tag>
-						<tag>
-							<name>requiresDependencyResolution</name>
-							<placement>a</placement>
-							<head>Requires Dependency Resolution:</head>
-						</tag>
-						<tag>
-							<name>readonly</name>
-							<placement>a</placement>
-							<head>Read Only:</head>
-						</tag>
-					</tags>
 				</configuration>
 			</plugin>
 		</plugins>
