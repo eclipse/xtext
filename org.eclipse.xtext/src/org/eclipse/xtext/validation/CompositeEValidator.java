@@ -176,7 +176,10 @@ public class CompositeEValidator implements EValidator {
 		return result;
 	}
 
-	private Diagnostic createExceptionDiagnostic(String message, Object source, Throwable t) {
+	/**
+	 * @since 2.17
+	 */
+	protected Diagnostic createExceptionDiagnostic(String message, Object source, Throwable t) {
 		return new BasicDiagnostic(Diagnostic.ERROR, source.toString(), 0, message, new Object[] { t });
 
 	}
