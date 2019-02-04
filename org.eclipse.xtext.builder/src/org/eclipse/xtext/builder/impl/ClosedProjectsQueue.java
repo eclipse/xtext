@@ -59,7 +59,12 @@ public class ClosedProjectsQueue {
 		 * Add the tasks again to the top of the queue.
 		 */
 		public void reschedule() {
-			insert(projectNames, toBeBuilt);
+			Set<URI> toBeDeleted = toBeBuilt.getToBeDeleted();
+			if (toBeDeleted != null && !toBeDeleted.isEmpty()) {
+				ToBeBuilt scheduleMe = new ToBeBuilt();
+				scheduleMe.getToBeDeleted().addAll(toBeDeleted);
+				insert(projectNames, scheduleMe);
+			}
 		}
 		
 		public ImmutableSet<String> getProjectNames() {
@@ -111,8 +116,11 @@ public class ClosedProjectsQueue {
 		Set<URI> toBeDeleted = toBeBuilt.getToBeDeleted();
 		Task next = internalQueue.poll();
 		while (next != null) {
-			projectNames.addAll(next.projectNames);
-			toBeDeleted.addAll(next.toBeBuilt.getToBeDeleted());
+			Set<URI> nextToBeDeleted = next.toBeBuilt.getToBeDeleted();
+			if (nextToBeDeleted != null && !nextToBeDeleted.isEmpty()) {
+				projectNames.addAll(next.projectNames);
+				toBeDeleted.addAll(nextToBeDeleted);
+			}
 			next = internalQueue.poll();
 		}
 		return new Task(ImmutableSet.copyOf(projectNames), toBeBuilt);

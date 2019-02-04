@@ -86,7 +86,7 @@ public class BuilderUtil {
 
 	public static void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {
 		IMarker[] markers = file.findMarkers(EValidator.MARKER, true, 1);
-		assertEquals(IResourcesSetupUtil.printMarker(markers),numberOfMarkers,markers.length);
+		assertEquals(IResourcesSetupUtil.printMarker(markers), numberOfMarkers, markers.length);
 	}
 
 	public static Set<IReferenceDescription> getIncomingReferences(URI uri) {

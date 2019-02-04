@@ -5,10 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.noJdt;
+package org.eclipse.xtext.ui.testing.util;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.xtext.builder.TestedWorkspace;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;

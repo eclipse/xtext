@@ -23,6 +23,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
+import org.eclipse.xtext.ui.testing.util.TestedWorkspaceWithoutJdt;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.BeforeClass;

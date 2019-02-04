@@ -5,9 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder;
-
-import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
+package org.eclipse.xtext.ui.testing.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -26,10 +24,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.intro.IIntroManager;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.testing.RepeatedTest;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.Exceptions;
 import org.junit.Assert;
 import org.junit.rules.TestWatcher;
@@ -38,6 +36,7 @@ import org.junit.runners.model.Statement;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * A tested workspace encapsulates pairwise logic that is supposed to be executed around a
@@ -58,6 +57,9 @@ public abstract class TestedWorkspace extends TestWatcher {
 	private String name;
 
 	private final ProjectOpenedOrClosedListener closedProjectTaskProcessor;
+	
+	@Inject
+	private IBuilderState builderState;
 
 	protected TestedWorkspace(ProjectOpenedOrClosedListener closedProjectTaskProcessor) {
 		this.closedProjectTaskProcessor = closedProjectTaskProcessor;
@@ -110,7 +112,7 @@ public abstract class TestedWorkspace extends TestWatcher {
 	}
 
 	public void assertEmptyIndex() {
-		Collection<IResourceDescription> inIndex = Lists.newArrayList(getBuilderState().getAllResourceDescriptions());
+		Collection<IResourceDescription> inIndex = Lists.newArrayList(builderState.getAllResourceDescriptions());
 		if (!inIndex.isEmpty()) {
 			StringBuilder remaining = new StringBuilder();
 			inIndex.forEach(desc -> remaining.append(desc.getURI()).append("\n"));
