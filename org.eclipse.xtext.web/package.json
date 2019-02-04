@@ -3,6 +3,6 @@
 	"private": true,
 	"devDependencies": {
 		"mocha": "^5.2.0",
-		"requirejs": "2.1.18"
+		"requirejs": "2.3.6"
 	}
 }
