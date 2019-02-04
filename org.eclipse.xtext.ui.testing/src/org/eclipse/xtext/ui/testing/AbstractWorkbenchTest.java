@@ -15,10 +15,14 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.intro.IIntroManager;
+import org.eclipse.ui.intro.IIntroPart;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -30,10 +34,15 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public abstract class AbstractWorkbenchTest extends Assert {
 
-	@Before @BeforeEach
-	public void setUp() throws Exception {
+	@BeforeClass
+	@BeforeAll
+	public static void prepareWorkbench() throws Exception {
 		closeWelcomePage();
 		closeEditors();
+	}
+	
+	@Before @BeforeEach
+	public void setUp() throws Exception {
 		cleanWorkspace();
 		waitForBuild();
 	}
@@ -45,17 +54,19 @@ public abstract class AbstractWorkbenchTest extends Assert {
 		waitForBuild();
 	}
 	
-	protected void closeEditors() {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+	protected static void closeEditors() {
+		getActivePage().closeAllEditors(false);
 	}
 
-	protected void closeWelcomePage() throws InterruptedException {
-		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
-			PlatformUI.getWorkbench().getIntroManager().closeIntro(
-					PlatformUI.getWorkbench().getIntroManager().getIntro());
+	protected static void closeWelcomePage() throws InterruptedException {
+		IIntroManager introManager = getWorkbench().getIntroManager();
+		IIntroPart intro = introManager.getIntro();
+		if (intro != null) {
+			introManager.closeIntro(intro);
 		}
 	}
 
+	@Deprecated
 	protected void sleep(long i) throws InterruptedException {
 		Display displ = Display.getCurrent();
 		if (displ != null) {
@@ -72,15 +83,15 @@ public abstract class AbstractWorkbenchTest extends Assert {
 		}
 	}
 
-	protected IWorkbenchPage getActivePage() {
+	protected static IWorkbenchPage getActivePage() {
 		return getWorkbenchWindow().getActivePage();
 	}
 
-	protected IWorkbenchWindow getWorkbenchWindow() {
+	protected static IWorkbenchWindow getWorkbenchWindow() {
 		return getWorkbench().getActiveWorkbenchWindow();
 	}
 
-	protected IWorkbench getWorkbench() {
+	protected static IWorkbench getWorkbench() {
 		return PlatformUI.getWorkbench();
 	}
 

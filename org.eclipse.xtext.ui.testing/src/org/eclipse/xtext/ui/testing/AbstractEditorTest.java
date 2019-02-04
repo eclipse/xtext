@@ -18,6 +18,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.internal.ErrorEditorPart;
@@ -45,14 +47,14 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 	}
 
 	protected XtextEditor openEditor(IFile file) throws Exception {
-		return getXtextEditor(
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), getEditorId()));
+		IEditorPart editor = getActivePage().openEditor(new FileEditorInput(file), getEditorId());
+		return getXtextEditor(editor);
 	}
 
 	protected XtextEditor openEditorForExternalFile(File file) throws Exception {
 		IFileStore store = EFS.getLocalFileSystem().getStore(file.toURI());
-		return getXtextEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.openEditor(new FileStoreEditorInput(store), getEditorId()));
+		IEditorPart editor = getActivePage().openEditor(new FileStoreEditorInput(store), getEditorId());
+		return getXtextEditor(editor);
 	}
 
 	private XtextEditor getXtextEditor(IEditorPart openEditor) throws NoSuchFieldException, IllegalAccessException {
