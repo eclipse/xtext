@@ -853,36 +853,38 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		for(String fav : favourites) {
 			boolean isWildcard = fav.lastIndexOf("*") > 0; //$NON-NLS-1$
 			int indexOfLastDot = fav.lastIndexOf("."); //$NON-NLS-1$
-			String typeName = fav.substring(0, indexOfLastDot);
-			JvmType type = typeReferences.findDeclaredType(typeName, context);
-			final String membername = fav.substring(indexOfLastDot + 1,fav.length());
-			if(type != null) {
-				if(type instanceof JvmDeclaredType) {
-					JvmDeclaredType genericType = (JvmDeclaredType) type;
-					// All features but no Constructor
-					Iterable<JvmFeature> allFeaturesToImport = Iterables.filter(Iterables.filter(genericType.getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
-						@Override
-						public boolean apply(JvmFeature input) {
-							boolean isValid =  !(input instanceof JvmConstructor) && input.isStatic();
-							if(isWildcard) {
-								return isValid;
-							} else {
-								return isValid && input.getSimpleName().equals(membername);
-							}
-						}
-					});
-					Iterable<JvmFeature> featuresToImport = Iterables.filter(allFeaturesToImport,filter);
-					if(context != null) {
-						// Make sure that already imported static features are not proposed
-						RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context.eResource());
-						featuresToImport = Iterables.filter(featuresToImport, new Predicate<JvmFeature>() {
+			if(indexOfLastDot > 0) {
+				String typeName = fav.substring(0, indexOfLastDot);
+				JvmType type = typeReferences.findDeclaredType(typeName, context);
+				final String membername = fav.substring(indexOfLastDot + 1,fav.length());
+				if(type != null) {
+					if(type instanceof JvmDeclaredType) {
+						JvmDeclaredType genericType = (JvmDeclaredType) type;
+						// All features but no Constructor
+						Iterable<JvmFeature> allFeaturesToImport = Iterables.filter(Iterables.filter(genericType.getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
 							@Override
 							public boolean apply(JvmFeature input) {
-								return !importSection.hasStaticImport(input.getSimpleName(), false);
+								boolean isValid =  !(input instanceof JvmConstructor) && input.isStatic();
+								if(isWildcard) {
+									return isValid;
+								} else {
+									return isValid && input.getSimpleName().equals(membername);
+								}
 							}
 						});
+						Iterable<JvmFeature> featuresToImport = Iterables.filter(allFeaturesToImport,filter);
+						if(context != null) {
+							// Make sure that already imported static features are not proposed
+							RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context.eResource());
+							featuresToImport = Iterables.filter(featuresToImport, new Predicate<JvmFeature>() {
+								@Override
+								public boolean apply(JvmFeature input) {
+									return !importSection.hasStaticImport(input.getSimpleName(), false);
+								}
+							});
+						}
+						return featuresToImport;
 					}
-					return featuresToImport;
 				}
 			}
 		}
