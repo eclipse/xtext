@@ -54,7 +54,7 @@ public class AntlrLexerSplitter {
 		scanner = new Scanner(content);
 	}
 
-	boolean copyUntilMethod() {
+	private boolean copyUntilMethod() {
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			stringBuilder.append(line);
@@ -223,13 +223,13 @@ public class AntlrLexerSplitter {
 		return m.group(1);
 	}
 	
-	void copyTailAndRefactorDfaTransitionS() {
+	private void copyTailAndRefactorDfaTransitionS() {
 		copyAndBeginNestedClass();
 		copyFieldAndEndNestedClass();
 		copyTail();
 	}
 
-	protected void copyAndBeginNestedClass() {
+	private void copyAndBeginNestedClass() {
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			Matcher matcher = DFA_TRANSITIONS_PATTERN.matcher(line);
@@ -247,7 +247,7 @@ public class AntlrLexerSplitter {
 		}
 	}
 
-	protected void copyFieldAndEndNestedClass() {
+	private void copyFieldAndEndNestedClass() {
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			stringBuilder.append(INDENT).append(line).append("\n");
@@ -258,7 +258,7 @@ public class AntlrLexerSplitter {
 		}
 	}
 
-	void copyTail() {
+	private void copyTail() {
 		while(scanner.hasNextLine()) {
 			stringBuilder.append(scanner.nextLine());
 			if(scanner.hasNextLine())
