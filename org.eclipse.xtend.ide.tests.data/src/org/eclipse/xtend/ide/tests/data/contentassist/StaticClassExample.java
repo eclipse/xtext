@@ -4,5 +4,5 @@ public class StaticClassExample {
 	public static void staticMethod(String a) {}
 	public static void staticMethodWithoutParameter() {}
 	public static String STATICFIELD = "";
-
+	public void nonStaticMethod(String a) {};
 }
