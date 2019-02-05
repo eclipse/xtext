@@ -428,36 +428,39 @@ public class InternalBug406914TestLanguageLexer extends Lexer {
         "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\uffff\1\7\1\uffff\1\10\1\11\1\12\1\1\1\2\1\3\1\uffff\1\10\1\5\1\6\1\11\1\7\6\uffff\1\4";
     static final String DFA4_specialS =
         "\1\0\33\uffff}>";
-    static final String[] DFA4_transitionS = {
-            "\10\13\1\1\1\6\1\3\1\13\1\2\1\5\22\13\1\12\40\13\32\11\1\13\1\7\1\13\1\10\1\11\1\13\13\11\1\4\16\11\uff85\13",
-            "",
-            "",
-            "",
-            "\1\17",
-            "",
-            "\1\23\26\uffff\1\23",
-            "",
-            "\32\20\4\uffff\1\20\1\uffff\32\20",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\25",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\26",
-            "\1\27",
-            "\1\30",
-            "\1\31",
-            "\1\32",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            ""
-    };
+    static final String[] DFA4_transitionS = DFA4_transitionS_.DFA4_transitionS;
+    private static final class DFA4_transitionS_ {
+        static final String[] DFA4_transitionS = {
+                "\10\13\1\1\1\6\1\3\1\13\1\2\1\5\22\13\1\12\40\13\32\11\1\13\1\7\1\13\1\10\1\11\1\13\13\11\1\4\16\11\uff85\13",
+                "",
+                "",
+                "",
+                "\1\17",
+                "",
+                "\1\23\26\uffff\1\23",
+                "",
+                "\32\20\4\uffff\1\20\1\uffff\32\20",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\25",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\26",
+                "\1\27",
+                "\1\30",
+                "\1\31",
+                "\1\32",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                ""
+        };
+    }
 
     static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
     static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);

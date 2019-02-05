@@ -655,42 +655,45 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         "\3\uffff\1\3\1\uffff\1\6\1\7\5\uffff\1\17\1\20\2\uffff\1\3\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\15\1\16\1\17\3\uffff\1\2\1\14\1\1\1\4";
     static final String DFA6_specialS =
         "\1\0\41\uffff}>";
-    static final String[] DFA6_transitionS = {
-            "\11\15\2\14\2\15\1\14\22\15\1\14\7\15\1\5\1\6\5\15\1\13\13\15\1\3\47\15\1\7\1\11\3\15\1\2\1\10\5\15\1\4\2\15\1\12\4\15\1\1\uff88\15",
-            "\1\16",
-            "\1\17",
-            "",
-            "\1\21",
-            "",
-            "",
-            "\1\24",
-            "\1\25",
-            "\1\26",
-            "\1\27",
-            "\1\30\4\uffff\1\31",
-            "",
-            "",
-            "\1\33",
-            "\1\34",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\35",
-            "\1\36\4\uffff\1\37",
-            "\1\40",
-            "",
-            "",
-            "",
-            ""
-    };
+    static final String[] DFA6_transitionS = DFA6_transitionS_.DFA6_transitionS;
+    private static final class DFA6_transitionS_ {
+        static final String[] DFA6_transitionS = {
+                "\11\15\2\14\2\15\1\14\22\15\1\14\7\15\1\5\1\6\5\15\1\13\13\15\1\3\47\15\1\7\1\11\3\15\1\2\1\10\5\15\1\4\2\15\1\12\4\15\1\1\uff88\15",
+                "\1\16",
+                "\1\17",
+                "",
+                "\1\21",
+                "",
+                "",
+                "\1\24",
+                "\1\25",
+                "\1\26",
+                "\1\27",
+                "\1\30\4\uffff\1\31",
+                "",
+                "",
+                "\1\33",
+                "\1\34",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\35",
+                "\1\36\4\uffff\1\37",
+                "\1\40",
+                "",
+                "",
+                "",
+                ""
+        };
+    }
 
     static final short[] DFA6_eot = DFA.unpackEncodedString(DFA6_eotS);
     static final short[] DFA6_eof = DFA.unpackEncodedString(DFA6_eofS);

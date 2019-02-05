@@ -773,34 +773,37 @@ public class InternalSimpleExpressionsTestLanguageLexer extends Lexer {
         "\1\uffff\1\1\1\2\1\3\1\uffff\1\5\1\6\1\uffff\1\7\1\10\2\uffff\1\14\1\15\1\1\1\2\1\3\1\12\1\13\1\4\1\5\1\6\1\7\1\10\1\11\1\14";
     static final String DFA12_specialS =
         "\1\2\11\uffff\1\1\1\0\16\uffff}>";
-    static final String[] DFA12_transitionS = {
-            "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\12\4\15\1\13\1\5\1\6\1\3\1\1\1\15\1\2\1\15\1\4\12\11\7\15\32\10\3\15\1\7\1\10\1\15\32\10\uff85\15",
-            "",
-            "",
-            "",
-            "\1\21\4\uffff\1\22",
-            "",
-            "",
-            "\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "",
-            "\0\30",
-            "\0\30",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
+    static final String[] DFA12_transitionS = DFA12_transitionS_.DFA12_transitionS;
+    private static final class DFA12_transitionS_ {
+        static final String[] DFA12_transitionS = {
+                "\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\12\4\15\1\13\1\5\1\6\1\3\1\1\1\15\1\2\1\15\1\4\12\11\7\15\32\10\3\15\1\7\1\10\1\15\32\10\uff85\15",
+                "",
+                "",
+                "",
+                "\1\21\4\uffff\1\22",
+                "",
+                "",
+                "\32\26\4\uffff\1\26\1\uffff\32\26",
+                "",
+                "",
+                "\0\30",
+                "\0\30",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+        };
+    }
 
     static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
     static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);

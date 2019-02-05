@@ -634,29 +634,32 @@ public class InternalOptionalEmptyTestLanguageLexer extends Lexer {
         "\3\uffff\1\2\1\3\3\uffff\1\7\1\10\1\uffff\1\2\1\3\1\4\1\5\1\6\1\7\3\uffff\1\1";
     static final String DFA12_specialS =
         "\1\0\4\uffff\1\1\1\2\16\uffff}>";
-    static final String[] DFA12_transitionS = {
-            "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\4\7\11\32\3\3\11\1\2\1\3\1\11\7\3\1\1\22\3\uff85\11",
-            "\1\12",
-            "\32\13\4\uffff\1\13\1\uffff\32\13",
-            "",
-            "",
-            "\0\15",
-            "\0\15",
-            "\1\16\4\uffff\1\17",
-            "",
-            "",
-            "\1\21",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\22",
-            "\1\23",
-            "\12\13\7\uffff\32\13\4\uffff\1\13\1\uffff\32\13",
-            ""
-    };
+    static final String[] DFA12_transitionS = DFA12_transitionS_.DFA12_transitionS;
+    private static final class DFA12_transitionS_ {
+        static final String[] DFA12_transitionS = {
+                "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\4\7\11\32\3\3\11\1\2\1\3\1\11\7\3\1\1\22\3\uff85\11",
+                "\1\12",
+                "\32\13\4\uffff\1\13\1\uffff\32\13",
+                "",
+                "",
+                "\0\15",
+                "\0\15",
+                "\1\16\4\uffff\1\17",
+                "",
+                "",
+                "\1\21",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\22",
+                "\1\23",
+                "\12\13\7\uffff\32\13\4\uffff\1\13\1\uffff\32\13",
+                ""
+        };
+    }
 
     static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
     static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
