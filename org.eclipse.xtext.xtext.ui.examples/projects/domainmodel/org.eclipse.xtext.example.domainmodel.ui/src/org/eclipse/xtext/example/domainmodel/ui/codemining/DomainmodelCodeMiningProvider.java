@@ -38,6 +38,9 @@ public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvid
 	@Override
 	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
 			IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
+		if (resource.getContents().isEmpty()) {
+			return;
+		}
 		// get all operations to open document
 		List<Operation> allOperations = EcoreUtil2.eAllOfType(resource.getContents().get(0), Operation.class);
 		// get keyword for ')'
