@@ -67,8 +67,12 @@ public class AntlrLexerSplitterTest extends AbstractAntlrSplitterTest {
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 		String actual = splitter.transform();
 		assertNotNull(actual);
-		assertEquals(content.replaceAll(System.lineSeparator(), "\n"), 
+		assertNotEquals(content.replaceAll(System.lineSeparator(), "\n"), 
 		             actual.replaceAll(System.lineSeparator(), "\n"));
+		String actualDFA = actual.substring(actual.lastIndexOf("};") + 8).trim();
+		String contentDFA = content.substring(content.lastIndexOf("};") + 8).trim();
+		assertEquals(contentDFA.replaceAll(System.lineSeparator(), "\n"), 
+				actualDFA.replaceAll(System.lineSeparator(), "\n"));
 	}
 	
 	@Test public void testOuterBraceInIfCascadePattern() throws Exception {
