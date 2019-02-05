@@ -774,42 +774,45 @@ public class InternalMultiRuleEnumTestLanguageLexer extends Lexer {
         "\10\uffff\1\7\1\10\3\uffff\1\14\1\15\1\uffff\1\7\1\2\1\3\1\4\1\5\1\6\1\10\1\11\1\12\1\13\1\14\6\uffff\1\1";
     static final String DFA12_specialS =
         "\1\2\11\uffff\1\1\1\0\26\uffff}>";
-    static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\7\16\1\14\12\11\7\16\1\2\1\3\1\4\1\5\1\6\25\10\3\16\1\7\1\10\1\16\22\10\1\1\7\10\uff85\16",
-            "\1\17",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\32\20\4\uffff\1\20\1\uffff\32\20",
-            "",
-            "",
-            "\0\27",
-            "\0\27",
-            "\1\30\4\uffff\1\31",
-            "",
-            "",
-            "\1\33",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\34",
-            "\1\35",
-            "\1\36",
-            "\1\37",
-            "\1\40",
-            "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            ""
-    };
+    static final String[] DFA12_transitionS = DFA12_transitionS_.DFA12_transitionS;
+    private static final class DFA12_transitionS_ {
+        static final String[] DFA12_transitionS = {
+                "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\7\16\1\14\12\11\7\16\1\2\1\3\1\4\1\5\1\6\25\10\3\16\1\7\1\10\1\16\22\10\1\1\7\10\uff85\16",
+                "\1\17",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                "\32\20\4\uffff\1\20\1\uffff\32\20",
+                "",
+                "",
+                "\0\27",
+                "\0\27",
+                "\1\30\4\uffff\1\31",
+                "",
+                "",
+                "\1\33",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\34",
+                "\1\35",
+                "\1\36",
+                "\1\37",
+                "\1\40",
+                "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+                ""
+        };
+    }
 
     static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
     static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
