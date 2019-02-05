@@ -53,7 +53,6 @@
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>

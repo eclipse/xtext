@@ -3,6 +3,7 @@ package org.eclipse.xtend.maven;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import com.google.inject.Inject;
@@ -16,17 +17,14 @@ public abstract class AbstractXtendMojo extends AbstractMojo {
 
 	/**
 	 * The project itself. This parameter is set by maven.
-	 * 
-	 * @parameter expression="${project}"
-	 * @required
 	 */
+	@Parameter(property="project", required=true)
 	protected MavenProject project;
 
 	/**
 	 * Set this to true to skip compiling Xtend sources.
-	 * 
-	 * @parameter default-value="false" expression="${skipXtend}"
 	 */
+	@Parameter(property="skipXtend", defaultValue="false")
 	protected boolean skipXtend;
 
 	public AbstractXtendMojo() {

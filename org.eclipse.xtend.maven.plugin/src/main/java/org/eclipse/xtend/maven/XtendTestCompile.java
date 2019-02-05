@@ -10,6 +10,10 @@ import java.util.Set;
 
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -20,25 +24,18 @@ import com.google.common.collect.Sets;
  * Goal which compiles Xtend2 test sources.
  * 
  * @author Michael Clay - Initial contribution and API
- * @goal testCompile
- * @phase generate-test-sources
- * @requiresDependencyResolution test
- * @threadSafe true
  */
+@Mojo(name="testCompile", defaultPhase=LifecyclePhase.GENERATE_TEST_SOURCES, requiresDependencyResolution=ResolutionScope.TEST, threadSafe=true)
 public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	/**
 	 * Location of the generated test files.
-	 * 
-	 * @parameter default-value="${basedir}/src/test/generated-sources/xtend"
-	 * @required
 	 */
+	@Parameter(defaultValue="${basedir}/src/test/generated-sources/xtend", required=true)
 	private String testOutputDirectory;
 	/**
 	 * Location of the temporary compiler directory.
-	 * 
-	 * @parameter default-value="${project.build.directory}/xtend-test"
-	 * @required
 	 */
+	@Parameter(defaultValue="${project.build.directory}/xtend-test", required=true)
 	private String testTempDirectory;
 
 	@Override

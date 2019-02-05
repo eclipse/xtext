@@ -292,6 +292,10 @@
 			<id>useJenkinsSnapshots</id>
 			<repositories>
 				<repository>
+					<id>local-repo</id>
+					<url>${gradleMavenRepo}</url>
+				</repository>
+				<repository>
 					<id>lsp4j-from-jenkins</id>
 					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
@@ -330,16 +334,16 @@
 	<distributionManagement>
 		<repository>
 			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
+			<url>${gradleMavenRepo}</url>
 		</repository>
 		<snapshotRepository>
 			<id>local-repo</id>
-			<url>file:${root-dir}/build/maven-repository</url>
+			<url>${gradleMavenRepo}</url>
 		</snapshotRepository>
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:git://github.com/eclipse/xtext-xtend.git</connection>
+		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-xtend.git</developerConnection>
 		<url>https://github.com/eclipse/xtext-xtend.git</url>
 	</scm>
