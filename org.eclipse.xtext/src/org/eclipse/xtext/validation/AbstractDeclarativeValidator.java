@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -46,8 +46,14 @@ import com.google.inject.Injector;
  * }
  * </pre>
  * 
+ * <p>
+ * By default {@link NullPointerException NullPointerExceptions} occurring in the invocation of validation code are swallowed. 
+ * This behavior can be switched by overriding {@link #handleExceptionDuringValidation(Throwable)}.
+ * </p>
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Karsten Thoms
  */
 public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements
 		ValidationMessageAcceptor {
@@ -133,10 +139,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 		
 		protected void handleInvocationTargetException(Throwable targetException, State state) {
-			// ignore GuardException, check is just not evaluated if guard is false
-			// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
-			if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
-				Exceptions.throwUncheckedException(targetException);
+			instance.handleExceptionDuringValidation(targetException);
 		}
 
 		@Override
@@ -545,7 +548,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void checkDone() {
 		throw guardException;
 	}
-
+	
 	//////////////////////////////////////////////////////////
 	// Implementation of the Validation message acceptor below
 	//////////////////////////////////////////////////////////
@@ -652,4 +655,19 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		return messageAcceptor;
 	}
 
+	/**
+	 * Handles exceptions occuring during execution of validation code. 
+	 * By default this method will swallow {@link NullPointerException NullPointerExceptions} and {@link GuardException}s.
+	 * Clients may override this method to propagate {@link NullPointerException NullPointerExceptions} or more smarter
+	 * handling.
+	 * 
+	 * @since 2.17
+	 */
+	protected void handleExceptionDuringValidation(Throwable targetException) throws RuntimeException {
+		// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
+		// ignore GuardException, check is just not evaluated if guard is false
+		if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException)) {
+			Exceptions.throwUncheckedException(targetException);
+		}
+	}
 }
