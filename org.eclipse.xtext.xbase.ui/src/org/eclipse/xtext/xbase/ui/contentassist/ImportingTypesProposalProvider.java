@@ -42,6 +42,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.scoping.batch.StaticExtensionFeatureDescription;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -158,7 +159,11 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					EObject container = operation.eContainer();
 					if(container instanceof JvmDeclaredType) {
 						JvmDeclaredType type = (JvmDeclaredType) container;
-						importSection.addStaticImport(type.getQualifiedName(), operation.getSimpleName());
+						if(description instanceof StaticExtensionFeatureDescription) {
+							importSection.addStaticExtensionImport(type.getQualifiedName(), operation.getSimpleName());
+						} else {
+							importSection.addStaticImport(type.getQualifiedName(), operation.getSimpleName());
+						}
 					}
 				}
 			} else {

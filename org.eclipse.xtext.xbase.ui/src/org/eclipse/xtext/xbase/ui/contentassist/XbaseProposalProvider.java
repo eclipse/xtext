@@ -3,6 +3,7 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -71,6 +73,7 @@ import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.StaticExtensionFeatureDescriptionWithImplicitFirstArgument;
 import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -743,6 +746,37 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	public void completeXMemberFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XMemberFeatureCall) {
+			XExpression memberCallTarget = ((XMemberFeatureCall) model).getMemberCallTarget();
+			IResolvedTypes resolvedTypes = typeResolver.resolveTypes(memberCallTarget);
+			LightweightTypeReference memberCallTargetType = resolvedTypes.getActualType(memberCallTarget);
+			Iterable<JvmFeature> featuresToImport = getFavoriteStaticFeatures(model, new Predicate<JvmFeature>() {
+				@Override
+				public boolean apply(JvmFeature input) {
+					if(input instanceof JvmOperation && input.isStatic()) {
+						List<JvmFormalParameter> parameters = ((JvmOperation) input).getParameters();
+						if(parameters.size() > 0) {
+							JvmFormalParameter firstParam = parameters.get(0);
+							JvmTypeReference parameterType = firstParam.getParameterType();
+							if(parameterType != null) {
+								return memberCallTargetType.isAssignableFrom(parameterType.getType());
+							}
+						}
+					}
+					return false;
+				}
+			});
+			// Create StaticExtensionFeatureDescriptionWithImplicitFirstArgument instead of SimpleIdentifiableElementDescription since we want the Proposal to show parameters
+			Iterable<IEObjectDescription> scopedFeatures = Iterables.transform(featuresToImport, new Function<JvmFeature,IEObjectDescription>() {
+				@Override
+				public IEObjectDescription apply(JvmFeature feature) {
+					QualifiedName qualifiedName = QualifiedName.create(feature.getSimpleName());
+					return new StaticExtensionFeatureDescriptionWithImplicitFirstArgument(qualifiedName,feature,memberCallTarget,memberCallTargetType,0,true);
+				}
+			});
+			// Scope for all static features
+			IScope staticMemberScope = new SimpleScope(IScope.NULLSCOPE, scopedFeatures);
+			proposeFavoritStaticFeatures(model, context, acceptor, staticMemberScope);
+			// Regular proposals
 			createReceiverProposals(((XMemberFeatureCall) model).getMemberCallTarget(), (CrossReference) assignment.getTerminal(),
 					context, acceptor);
 		} else if (model instanceof XAssignment) {
@@ -786,73 +820,100 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		// TODO use the type name information
 		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
 //		System.out.printf("XbaseProposalProvider.proposeDeclaringTypeForStaticInvocation = %d\n", System.currentTimeMillis() - time);
-		createFavoriteStaticFeature(context, contentAssistContext, acceptor, proposalFactory);
+		if(!(context instanceof XMemberFeatureCall)) {
+			Iterable<JvmFeature> featuresToImport = getFavoriteStaticFeatures(context, new Predicate<JvmFeature>() {
+				@Override
+				public boolean apply(JvmFeature input) {
+					return true;
+				}
+			});
+			// Create StaticFeatureDescription instead of SimpleIdentifiableElementDescription since we want the Proposal to show parameters
+			Iterable<IEObjectDescription> scopedFeatures = Iterables.transform(featuresToImport, new Function<JvmFeature,IEObjectDescription>() {
+				@Override
+				public IEObjectDescription apply(JvmFeature feature) {
+					QualifiedName qualifiedName = QualifiedName.create(feature.getSimpleName());
+					return new StaticFeatureDescription(qualifiedName, feature, 0, true);	
+				}
+			});
+			// Scope for all static features
+			IScope staticMemberScope = new SimpleScope(IScope.NULLSCOPE, scopedFeatures);
+			proposeFavoritStaticFeatures(context, contentAssistContext, acceptor, staticMemberScope);
+		}
 	}
 	
 	/**
 	 * @since 2.17
 	 */
-	protected void createFavoriteStaticFeature(
-			EObject context,ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor, 
-			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		// Favorite proposals coming from JDT - https://github.com/eclipse/xtext-xtend/issues/677
+	protected Iterable<JvmFeature> getFavoriteStaticFeatures(EObject context, Predicate<JvmFeature> filter) {
 		String pref= PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
+		List<JvmFeature> result = newArrayList();
 		if (Strings.isEmpty(pref)) {
-			return;
+			return result;
 		}
 		String[] favourites= pref.split(";"); //$NON-NLS-1$
 		for(String fav : favourites) {
-			String typeName = fav.substring(0, fav.lastIndexOf("."));
-			JvmType type = typeReferences.findDeclaredType(typeName, context);
-			if(type != null) {
-				if(type instanceof JvmDeclaredType) {
-					JvmDeclaredType genericType = (JvmDeclaredType) type;
-					// All features but no Constructor
-					Iterable<JvmFeature> featuresToImport = Iterables.filter(Iterables.filter(genericType.getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
-						@Override
-						public boolean apply(JvmFeature input) {
-							return !(input instanceof JvmConstructor);
-						}
-					});
-					if(context != null) {
-						// Make sure that already imported static features are not proposed
-						RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context.eResource());
-						featuresToImport = Iterables.filter(featuresToImport, new Predicate<JvmFeature>() {
+			boolean isWildcard = fav.lastIndexOf("*") > 0; //$NON-NLS-1$
+			int indexOfLastDot = fav.lastIndexOf("."); //$NON-NLS-1$
+			if(indexOfLastDot > 0) {
+				String typeName = fav.substring(0, indexOfLastDot);
+				JvmType type = typeReferences.findDeclaredType(typeName, context);
+				final String membername = fav.substring(indexOfLastDot + 1,fav.length());
+				if(type != null) {
+					if(type instanceof JvmDeclaredType) {
+						JvmDeclaredType genericType = (JvmDeclaredType) type;
+						// All features but no Constructor
+						Iterable<JvmFeature> allFeaturesToImport = Iterables.filter(Iterables.filter(genericType.getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
 							@Override
 							public boolean apply(JvmFeature input) {
-								return !importSection.hasStaticImport(input.getSimpleName(), false);
+								boolean isValid =  !(input instanceof JvmConstructor) && input.isStatic();
+								if(isWildcard) {
+									return isValid;
+								} else {
+									return isValid && input.getSimpleName().equals(membername);
+								}
 							}
 						});
+						Iterable<JvmFeature> featuresToImport = Iterables.filter(allFeaturesToImport,filter);
+						if(context != null) {
+							// Make sure that already imported static features are not proposed
+							RewritableImportSection importSection = importSectionFactory.parse((XtextResource) context.eResource());
+							featuresToImport = Iterables.filter(featuresToImport, new Predicate<JvmFeature>() {
+								@Override
+								public boolean apply(JvmFeature input) {
+									return !importSection.hasStaticImport(input.getSimpleName(), false);
+								}
+							});
+						}
+						result.addAll(newArrayList(featuresToImport));
 					}
-					// Create StaticFeatureDescription instead of SimpleIdentifiableElementDescription since we want the Proposal to show parameters
-					Iterable<IEObjectDescription> scopedFeatures = Iterables.transform(featuresToImport, new Function<JvmFeature,IEObjectDescription>() {
-						@Override
-						public IEObjectDescription apply(JvmFeature feature) {
-							return new StaticFeatureDescription(QualifiedName.create(feature.getSimpleName()), feature, 0, true);
-						}
-					});
-					// Scope for all static features
-					IScope staticMemberScope = new SimpleScope(IScope.NULLSCOPE, scopedFeatures);
-					IReplacementTextApplier textApplier =  new FQNImporter(contentAssistContext.getResource(), contentAssistContext.getViewer(), staticMemberScope, qualifiedNameConverter,
-							qualifiedNameValueConverter, importSectionFactory, replaceConverter);
-					Function<IEObjectDescription, ICompletionProposal> importAddingProposalFactory = new Function<IEObjectDescription, ICompletionProposal>() {
-						@Override
-						public ICompletionProposal apply(IEObjectDescription input) {
-							ICompletionProposal proposal = proposalFactory.apply(input);
-							if(proposal instanceof ConfigurableCompletionProposal) {
-								ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
-								// Add textApplier to introduce imports if necessary
-								((ConfigurableCompletionProposal) proposal).setTextApplier(textApplier);
-								return castedProposal;
-							}
-							return proposal;
-						}
-					};
-					getCrossReferenceProposalCreator().lookupCrossReference(staticMemberScope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor,getFeatureDescriptionPredicate(contentAssistContext),importAddingProposalFactory);
 				}
 			}
 		}
+		return result;
+	}
+	
+	/**
+	 * @since 2.17
+	 */
+	protected void proposeFavoritStaticFeatures(EObject context,ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, IScope scopedFeatures) {
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
+		IReplacementTextApplier textApplier =  new FQNImporter(contentAssistContext.getResource(), contentAssistContext.getViewer(), scopedFeatures, qualifiedNameConverter,
+				qualifiedNameValueConverter, importSectionFactory, replaceConverter);
+		Function<IEObjectDescription, ICompletionProposal> importAddingProposalFactory = new Function<IEObjectDescription, ICompletionProposal>() {
+			@Override
+			public ICompletionProposal apply(IEObjectDescription input) {
+				ICompletionProposal proposal = proposalFactory.apply(input);
+				if(proposal instanceof ConfigurableCompletionProposal) {
+					ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
+					// Add textApplier to introduce imports if necessary
+					((ConfigurableCompletionProposal) proposal).setTextApplier(textApplier);
+					return castedProposal;
+				}
+				return proposal;
+			}
+		};
+		getCrossReferenceProposalCreator().lookupCrossReference(scopedFeatures, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor,getFeatureDescriptionPredicate(contentAssistContext),importAddingProposalFactory);
 	}
 
 	@Inject
