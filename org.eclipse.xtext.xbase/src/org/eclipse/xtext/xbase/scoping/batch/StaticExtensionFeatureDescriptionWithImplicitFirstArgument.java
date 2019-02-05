@@ -18,7 +18,10 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends StaticExtensionFeatureDescription {
 
-	protected StaticExtensionFeatureDescriptionWithImplicitFirstArgument(
+	/**
+	 * @since 2.17
+	 */
+	public StaticExtensionFeatureDescriptionWithImplicitFirstArgument(
 			QualifiedName qualifiedName,
 			JvmFeature feature, 
 			XExpression firstArgument,
