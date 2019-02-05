@@ -846,8 +846,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	 */
 	protected Iterable<JvmFeature> getFavoriteStaticFeatures(EObject context, Predicate<JvmFeature> filter) {
 		String pref= PreferenceConstants.getPreference(PreferenceConstants.CODEASSIST_FAVORITE_STATIC_MEMBERS, null);
+		List<JvmFeature> result = newArrayList();
 		if (Strings.isEmpty(pref)) {
-			return newArrayList();
+			return result;
 		}
 		String[] favourites= pref.split(";"); //$NON-NLS-1$
 		for(String fav : favourites) {
@@ -883,12 +884,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 								}
 							});
 						}
-						return featuresToImport;
+						result.addAll(newArrayList(featuresToImport));
 					}
 				}
 			}
 		}
-		return newArrayList();
+		return result;
 	}
 	
 	/**
