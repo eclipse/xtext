@@ -689,40 +689,43 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
         "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\1\2\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\6\uffff\1\1\2\uffff\1\4";
     static final String DFA11_specialS =
         "\1\1\6\uffff\1\2\1\0\27\uffff}>";
-    static final String[] DFA11_transitionS = {
-            "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\7\4\13\1\10\7\13\1\11\12\6\47\13\4\5\1\4\7\5\1\1\15\5\1\2\1\13\1\3\uff82\13",
-            "\1\14",
-            "",
-            "",
-            "\1\20",
-            "",
-            "",
-            "\0\22",
-            "\0\22",
-            "\1\23\4\uffff\1\24",
-            "",
-            "",
-            "\1\26",
-            "",
-            "",
-            "",
-            "\1\27",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\30",
-            "\1\31",
-            "\1\32",
-            "\1\33",
-            "\32\15",
-            "\1\35",
-            "",
-            "\1\36",
-            "\32\15",
-            ""
-    };
+    static final String[] DFA11_transitionS = DFA11_transitionS_.DFA11_transitionS;
+    private static final class DFA11_transitionS_ {
+        static final String[] DFA11_transitionS = {
+                "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\7\4\13\1\10\7\13\1\11\12\6\47\13\4\5\1\4\7\5\1\1\15\5\1\2\1\13\1\3\uff82\13",
+                "\1\14",
+                "",
+                "",
+                "\1\20",
+                "",
+                "",
+                "\0\22",
+                "\0\22",
+                "\1\23\4\uffff\1\24",
+                "",
+                "",
+                "\1\26",
+                "",
+                "",
+                "",
+                "\1\27",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\30",
+                "\1\31",
+                "\1\32",
+                "\1\33",
+                "\32\15",
+                "\1\35",
+                "",
+                "\1\36",
+                "\32\15",
+                ""
+        };
+    }
 
     static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
     static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);

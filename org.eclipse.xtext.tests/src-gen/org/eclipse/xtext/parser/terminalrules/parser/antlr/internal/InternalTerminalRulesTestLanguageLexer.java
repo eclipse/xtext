@@ -874,25 +874,28 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         "\2\uffff\1\1\1\2\3\uffff\1\7\1\10\1\1\1\2\1\3\1\uffff\1\5\1\6\1\7\1\4";
     static final String DFA17_specialS =
         "\1\2\3\uffff\1\0\1\1\13\uffff}>";
-    static final String[] DFA17_transitionS = {
-            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
-            "\32\11\4\uffff\1\11\1\uffff\32\11",
-            "",
-            "",
-            "\0\13",
-            "\47\13\1\14\uffd8\13",
-            "\1\15\4\uffff\1\16",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\20",
-            "",
-            "",
-            "",
-            ""
-    };
+    static final String[] DFA17_transitionS = DFA17_transitionS_.DFA17_transitionS;
+    private static final class DFA17_transitionS_ {
+        static final String[] DFA17_transitionS = {
+                "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\4\4\10\1\5\7\10\1\6\12\3\7\10\32\2\3\10\1\1\1\2\1\10\32\2\uff85\10",
+                "\32\11\4\uffff\1\11\1\uffff\32\11",
+                "",
+                "",
+                "\0\13",
+                "\47\13\1\14\uffd8\13",
+                "\1\15\4\uffff\1\16",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\20",
+                "",
+                "",
+                "",
+                ""
+        };
+    }
 
     static final short[] DFA17_eot = DFA.unpackEncodedString(DFA17_eotS);
     static final short[] DFA17_eof = DFA.unpackEncodedString(DFA17_eofS);

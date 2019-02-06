@@ -22,8 +22,8 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal.LexerSp
  */
 public class AntlrLexerSplitter {
 
-	public final static String INDENT = "    ";
-	public final static String INDENT2 = INDENT + INDENT;
+	public static final String INDENT = "    ";
+	public static final String INDENT2 = INDENT + INDENT;
 	public static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile("public void mTokens\\(\\) throws RecognitionException \\{", 0);
 	public static final Pattern METHOD_END_PATTERN = Pattern.compile("^\\s{4}}", 0);
 	public static final Pattern OUTER_BLOCK_END_PATTERN = Pattern.compile("^\\s{8}}", 0);
@@ -34,6 +34,8 @@ public class AntlrLexerSplitter {
 	public static final Pattern OUTER_SWITCH_PATTERN = Pattern.compile("^\\s{8}switch", 0);
 	public static final Pattern OUTER_IF_PATTERN = Pattern.compile("^\\s{8}if", 0);
 	public static final Pattern OUTER_BRACE_IN_IF_CASCADE_PATTERN = Pattern.compile("^(\\s{12}[^\\s]+.*)}\\s*$", 0);
+	public static final Pattern DFA_TRANSITIONS_PATTERN = Pattern.compile("(static final String\\[\\] (DFA\\d+_transitionS) = )\\{", 0);
+	public static final Pattern DFA_FIELD_END_PATTERN = Pattern.compile("^\\s{4}};", 0);
 
 	private List<ExtractedMethod> extractedMethods = new ArrayList<ExtractedMethod>();
 
@@ -52,7 +54,7 @@ public class AntlrLexerSplitter {
 		scanner = new Scanner(content);
 	}
 
-	boolean copyUntilMethod() {
+	private boolean copyUntilMethod() {
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			stringBuilder.append(line);
@@ -69,10 +71,10 @@ public class AntlrLexerSplitter {
 
 		stringBuilder = new StringBuilder();
 		if(copyUntilMethod()) {
-			refacatorAndExtract();
+			refactorAndExtract();
 			produceMethods();
 		}
-		copyTail();
+		copyTailAndRefactorDfaTransitionS();
 		String result = stringBuilder.toString();
 		LexerSpecialStateTransitionSplitter lexerSplitter;
 		lexerSplitter = new LexerSpecialStateTransitionSplitter(false);
@@ -89,7 +91,14 @@ public class AntlrLexerSplitter {
 		}
 	}
 
-
+	/**
+	 * @since 2.17
+	 */
+	public void refactorAndExtract() {
+		refacatorAndExtract();
+	}
+	
+	@Deprecated
 	public void refacatorAndExtract() {
 
 //      {0}  // ../org.xtext.example.mydsl.ui/src-gen/org/xtext/example/contentassist/antlr/internal/InternalMyDsl.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
@@ -213,8 +222,43 @@ public class AntlrLexerSplitter {
 			return null;
 		return m.group(1);
 	}
+	
+	private void copyTailAndRefactorDfaTransitionS() {
+		copyAndBeginNestedClass();
+		copyFieldAndEndNestedClass();
+		copyTail();
+	}
 
-	void copyTail() {
+	private void copyAndBeginNestedClass() {
+		while(scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			Matcher matcher = DFA_TRANSITIONS_PATTERN.matcher(line);
+			if (matcher.find()) {
+				String fieldDecl = matcher.group(1);
+				String fieldName = matcher.group(2);
+				stringBuilder.append(INDENT).append(fieldDecl).append(fieldName).append("_.").append(fieldName).append(";\n");
+				stringBuilder.append(INDENT).append("private static final class ").append(fieldName).append("_ {\n");
+				stringBuilder.append(INDENT).append(line).append('\n');
+				break;
+			}
+			stringBuilder.append(line);
+			if(scanner.hasNextLine())
+				stringBuilder.append("\n");
+		}
+	}
+
+	private void copyFieldAndEndNestedClass() {
+		while(scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			stringBuilder.append(INDENT).append(line).append("\n");
+			if (DFA_FIELD_END_PATTERN.matcher(line).matches()) {
+				stringBuilder.append(INDENT).append("}\n");
+				break;
+			}
+		}
+	}
+
+	private void copyTail() {
 		while(scanner.hasNextLine()) {
 			stringBuilder.append(scanner.nextLine());
 			if(scanner.hasNextLine())

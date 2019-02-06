@@ -287,19 +287,22 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         "\1\uffff\1\1\1\2\1\uffff\1\3\1\4\1\5\1\1\1\2\1\3\1\4";
     static final String DFA4_specialS =
         "\1\0\12\uffff}>";
-    static final String[] DFA4_transitionS = {
-            "\11\6\1\5\1\1\2\6\1\2\22\6\1\5\40\6\32\4\3\6\1\3\1\4\1\6\32\4\uff85\6",
-            "",
-            "",
-            "\32\11\4\uffff\1\11\1\uffff\32\11",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
+    static final String[] DFA4_transitionS = DFA4_transitionS_.DFA4_transitionS;
+    private static final class DFA4_transitionS_ {
+        static final String[] DFA4_transitionS = {
+                "\11\6\1\5\1\1\2\6\1\2\22\6\1\5\40\6\32\4\3\6\1\3\1\4\1\6\32\4\uff85\6",
+                "",
+                "",
+                "\32\11\4\uffff\1\11\1\uffff\32\11",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+        };
+    }
 
     static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
     static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);

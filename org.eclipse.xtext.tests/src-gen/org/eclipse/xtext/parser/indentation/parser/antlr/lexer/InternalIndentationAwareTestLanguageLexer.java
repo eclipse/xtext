@@ -599,23 +599,26 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         "\3\uffff\1\2\1\3\2\uffff\1\6\1\7\1\1\1\5\1\2\1\3\1\4\1\6";
     static final String DFA10_specialS =
         "\1\2\4\uffff\1\0\1\1\10\uffff}>";
-    static final String[] DFA10_transitionS = {
-            "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\5\4\10\1\6\7\10\1\1\12\4\7\10\32\3\3\10\1\2\1\3\1\10\32\3\uff85\10",
-            "\1\12\4\uffff\1\11",
-            "\32\13\4\uffff\1\13\1\uffff\32\13",
-            "",
-            "",
-            "\0\15",
-            "\0\15",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
+    static final String[] DFA10_transitionS = DFA10_transitionS_.DFA10_transitionS;
+    private static final class DFA10_transitionS_ {
+        static final String[] DFA10_transitionS = {
+                "\11\10\2\7\2\10\1\7\22\10\1\7\1\10\1\5\4\10\1\6\7\10\1\1\12\4\7\10\32\3\3\10\1\2\1\3\1\10\32\3\uff85\10",
+                "\1\12\4\uffff\1\11",
+                "\32\13\4\uffff\1\13\1\uffff\32\13",
+                "",
+                "",
+                "\0\15",
+                "\0\15",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+        };
+    }
 
     static final short[] DFA10_eot = DFA.unpackEncodedString(DFA10_eotS);
     static final short[] DFA10_eof = DFA.unpackEncodedString(DFA10_eofS);
