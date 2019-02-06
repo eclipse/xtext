@@ -22,7 +22,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
@@ -48,13 +47,10 @@ public class DomainmodelHyperlinkHelper extends XbaseHyperLinkHelper {
 	@Inject
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
 
-	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
-		EObject eObject = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
+		EObject eObject = getEObjectAtOffsetHelper().resolveElementAt(resource, offset);
 		if (eObject instanceof Entity) {
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
 			if (!nodes.isEmpty()) {
