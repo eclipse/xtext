@@ -134,10 +134,10 @@ public class MergeableManifest2Test {
 	}
 
 	@Test
-	public void manifest_LineWith513Chars_separatedOnTwoLines() throws Exception {
+	public void manifest_LineWith513Chars_separatedOnTwoLinesStaySeperated() throws Exception {
 		MergeableManifest2 manifest = newManifest("test: " + repeat("a", 506) + NL + " " + repeat("a", 7) + NL);
 
-		assertEquals(repeat("a", 513), getMainAttributeValue(manifest, "test"));
+		assertEquals(repeat("a", 506) + NL + " " + repeat("a", 7), getMainAttributeValue(manifest, "test"));
 	}
 
 	@Test(expected = IOException.class)
@@ -201,21 +201,21 @@ public class MergeableManifest2Test {
 	public void manifest_oneMainEntry_continuesOnSecondLine() throws Exception {
 		MergeableManifest2 manifest = newManifest("test: 123\n 456\n");
 
-		assertEquals("123456", getMainAttributeValue(manifest, "test"));
+		assertEquals("123" + NL + " 456", getMainAttributeValue(manifest, "test"));
 	}
 
 	@Test
 	public void manifest_oneMainEntry_continuesOnSecondLine_windowsStyle() throws Exception {
 		MergeableManifest2 manifest = newManifest("test: 123\r\n 456\r\n");
 
-		assertEquals("123456", getMainAttributeValue(manifest, "test"));
+		assertEquals("123" + NL + " 456", getMainAttributeValue(manifest, "test"));
 	}
 
 	@Test
 	public void manifest_oneMainEntry_continuesOnSecondAndThirdLine() throws Exception {
 		MergeableManifest2 manifest = newManifest("test: 123\n 456\n 789\n");
 
-		assertEquals("123456789", getMainAttributeValue(manifest, "test"));
+		assertEquals("123" + NL + " 456" + NL + " 789", getMainAttributeValue(manifest, "test"));
 	}
 
 	@Test
@@ -229,7 +229,7 @@ public class MergeableManifest2Test {
 	public void manifest_duplicateMainEntry_onTwoLines() throws Exception {
 		MergeableManifest2 manifest = newManifest("test: 1\n 2\ntest: 2\n 3\n");
 
-		assertEquals("23", getMainAttributeValue(manifest, "test"));
+		assertEquals("2" + NL + " 3", getMainAttributeValue(manifest, "test"));
 	}
 
 	@Test
@@ -649,7 +649,7 @@ public class MergeableManifest2Test {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
 		manifest.addRequiredBundles("\"a,b");
 
-		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a," + NL + " b" + NL, write(manifest));
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: \"a,b" + NL, write(manifest));
 	}
 
 	@Test
@@ -1158,6 +1158,149 @@ public class MergeableManifest2Test {
 		MergeableManifest2 manifest = newManifest(content);
 		manifest.addRequiredBundles("org.eclipse.xtext.common.types");
 		assertEquals(content, write(manifest));
+	}
+
+	@Test
+	public void readWrite_addRequiredBundles_realisticManifest_regression_multipleBundlesOnOneLine() throws Exception {
+		// @formatter:off
+        String content =
+            "Manifest-Version: 1.0" + NL + 
+            "Bundle-ManifestVersion: 2" + NL + 
+            "Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+            "Bundle-Vendor: Eclipse Xtext" + NL + 
+            "Bundle-Version: 2.16.0.qualifier" + NL + 
+            "Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+            "Bundle-ActivationPolicy: lazy" + NL + 
+            "Require-Bundle: org.eclipse.xtext,org.eclipse.xtext.xbase,org.eclipse.equinox.common;bundle-version=\"3.5.0\"" + NL + 
+            "Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+            "Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,org.eclipse.xtext.example.homeautomation.formatting2" + NL + 
+            "Import-Package: org.apache.log4j" + NL + 
+            "Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+        String expectedContent =
+    		"Manifest-Version: 1.0" + NL + 
+    		"Bundle-ManifestVersion: 2" + NL + 
+    		"Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+    		"Bundle-Vendor: Eclipse Xtext" + NL + 
+    		"Bundle-Version: 2.16.0.qualifier" + NL + 
+    		"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+    		"Bundle-ActivationPolicy: lazy" + NL + 
+    		"Require-Bundle: org.eclipse.xtext,org.eclipse.xtext.xbase,org.eclipse.equinox.common;bundle-version=\"3.5.0\"," + NL + 
+    		" org.eclipse.xtext.common.types" + NL +
+    		"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+    		"Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine.util,org.eclipse.xtext.example.homeautomation.formatting2" + NL + 
+    		"Import-Package: org.apache.log4j" + NL + 
+    		"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+        // @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addRequiredBundles("org.eclipse.xtext.common.types");
+		assertEquals(expectedContent, write(manifest));
+	}
+
+	@Test
+	public void readWrite_realisticManifest_regression_xtend() throws Exception {
+		// @formatter:off
+		String content =
+				"Manifest-Version: 1.0" + NL + 
+				"Bundle-ManifestVersion: 2" + NL + 
+				"Bundle-Name: %pluginName" + NL + 
+				"Bundle-SymbolicName: org.eclipse.xtend.core;singleton:=true" + NL + 
+				"Bundle-Version: 2.17.0.qualifier" + NL + 
+				"Bundle-ClassPath: ." + NL + 
+				"Bundle-Vendor: %providerName" + NL + 
+				"Bundle-Localization: plugin" + NL + 
+				"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler.batch," + NL + 
+				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"," + NL + 
+				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.formatting2;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.imports;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"" + NL + 
+				"Require-Bundle: org.eclipse.core.runtime;bundle-version=\"3.13.0\"," + NL + 
+				" org.eclipse.emf.ecore;bundle-version=\"2.10.2\";visibility:=reexport" + NL + 
+				"Bundle-ActivationPolicy: lazy" + NL + 
+				"Import-Package: org.apache.log4j;version=\"1.2.15\"" + NL;
+		// @formatter:on
+		assertEquals(content, write(newManifest(content)));
+	}
+
+	@Test
+	public void readWrite_addExportedPackage_realisticManifest_regression_xtend() throws Exception {
+		// @formatter:off
+		String content =
+				"Manifest-Version: 1.0" + NL + 
+				"Bundle-ManifestVersion: 2" + NL + 
+				"Bundle-Name: %pluginName" + NL + 
+				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler.batch," + NL + 
+				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"," + NL + 
+				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.formatting2;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.imports;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"" + NL + 
+				"Require-Bundle: org.eclipse.core.runtime;bundle-version=\"3.13.0\"," + NL + 
+				" org.eclipse.emf.ecore;bundle-version=\"2.10.2\";visibility:=reexport" + NL + 
+				"Bundle-ActivationPolicy: lazy" + NL + 
+				"Import-Package: org.apache.log4j;version=\"1.2.15\"" + NL;
+		String expectedNewContent =
+				"Manifest-Version: 1.0" + NL + 
+				"Bundle-ManifestVersion: 2" + NL + 
+				"Bundle-Name: %pluginName" + NL + 
+				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
+				"   org.eclipse.xtend.ide.tests\"," + NL + 
+				" org.eclipse.xtend.core.compiler.batch," + NL + 
+				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"," + NL + 
+				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.formatting2;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.imports;x-internal:=true," + NL + 
+				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
+				" org.eclipse.xtend.ide.common," + NL + 
+				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
+				"   org.eclipse.xtend.caliper.tests," + NL + 
+				"   org.eclipse.xtend.ide.tests," + NL + 
+				"   org.eclipse.xtend.ide.common\"," + NL + 
+				" test" + NL + 
+				"Require-Bundle: org.eclipse.core.runtime;bundle-version=\"3.13.0\"," + NL + 
+				" org.eclipse.emf.ecore;bundle-version=\"2.10.2\";visibility:=reexport" + NL + 
+				"Bundle-ActivationPolicy: lazy" + NL + 
+				"Import-Package: org.apache.log4j;version=\"1.2.15\"" + NL;
+		// @formatter:on
+		MergeableManifest2 newManifest = newManifest(content);
+		newManifest.addExportedPackages("test");
+		assertEquals(expectedNewContent, write(newManifest));
 	}
 
 	/**
