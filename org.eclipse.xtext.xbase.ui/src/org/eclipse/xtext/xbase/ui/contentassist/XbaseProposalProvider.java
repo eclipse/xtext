@@ -758,7 +758,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							JvmFormalParameter firstParam = parameters.get(0);
 							JvmTypeReference parameterType = firstParam.getParameterType();
 							if(parameterType != null) {
-								return memberCallTargetType.isAssignableFrom(parameterType.getType());
+								LightweightTypeReference lightweightTypeReference = memberCallTargetType.getOwner().toLightweightTypeReference(parameterType);
+								if(lightweightTypeReference != null) {
+									return memberCallTargetType.isAssignableFrom(lightweightTypeReference);
+								}
 							}
 						}
 					}
