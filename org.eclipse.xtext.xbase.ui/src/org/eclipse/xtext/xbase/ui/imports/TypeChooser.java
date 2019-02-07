@@ -62,7 +62,7 @@ public class TypeChooser {
 		IStructuredContentProvider contentProvider = new ContentProvider();
 		Dialog dialog = new Dialog(shell, new LabelProvider(labelProvider), contentProvider);
 		dialog.setInput(candidateTypes);
-		dialog.setInitialSelections(new JvmDeclaredType[] { candidateTypes.get(0) });
+		dialog.setInitialSelections((Object[])new JvmDeclaredType[] { candidateTypes.get(0) });
 		int result = dialog.open();
 		if(originalSelection != null)
 			activeXtextEditor.getSelectionProvider().setSelection(originalSelection);
