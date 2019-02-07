@@ -8,6 +8,9 @@
 		<requiredProperty key="platform_version">
 			<defaultValue>4.3</defaultValue>
 		</requiredProperty>
+		<requiredProperty key="javaVersion">
+			<defaultValue>1.8</defaultValue>
+		</requiredProperty>
 	</requiredProperties>
 	<fileSets>
 		<fileSet filtered="true" encoding="UTF-8">

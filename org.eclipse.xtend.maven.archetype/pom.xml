@@ -16,7 +16,6 @@
 
 	<properties>
 		<root-dir>${basedir}/..</root-dir>
-		<maven.archetype.version>2.3</maven.archetype.version>
 		<it-archetype-tests-skip>true</it-archetype-tests-skip>
 	</properties>
 
@@ -41,20 +40,12 @@
 			<extension>
 				<groupId>org.apache.maven.archetype</groupId>
 				<artifactId>archetype-packaging</artifactId>
-				<version>${maven.archetype.version}</version>
 			</extension>
 		</extensions>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-archetype-plugin</artifactId>
-					<version>${maven.archetype.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
 					<configuration>
 						<escapeString>\</escapeString>
 					</configuration>
@@ -63,7 +54,6 @@
 		</pluginManagement>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-archetype-plugin</artifactId>
 				<configuration>
 					<skip>${it-archetype-tests-skip}</skip>
@@ -85,7 +75,7 @@
 			<!-- IT Tests require xtend-maven-plugin is fully build -->
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>xtend-maven-plugin</artifactId>
-			<version>[${project.version}]</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -9,12 +9,25 @@
 	<name>\${artifactId} App With Xtend</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<android.plugin.version>3.6.1</android.plugin.version>
 		<xtend.version>${project.version}</xtend.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>${javaVersion}</maven.compiler.source>
+		<maven.compiler.target>${javaVersion}</maven.compiler.target>
+		<android.plugin.version>3.8.2</android.plugin.version>
 		<platform.version>\${platform_version}</platform.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>xtext-dev-bom</artifactId>
+				<version>${xtend.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<!--
 	Uncomment this (and the dependency below) to use support-v4.jar and friends.
 	You will need ANDROID_HOME set, and the 'android support repository' installed
