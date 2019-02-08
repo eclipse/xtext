@@ -560,7 +560,7 @@ public abstract class LightweightTypeReference {
 		if (type == null) {
 			throw new IllegalArgumentException("type may not be null");
 		}
-		ParameterizedTypeReference other = getOwner().newParameterizedTypeReference(type);
+		LightweightTypeReference other = getOwner().toPlainTypeReference(type);
 		boolean result = isAssignableFrom(other);
 		return result;
 	}
