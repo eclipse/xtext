@@ -17,7 +17,6 @@
 		<module>releng/org.eclipse.xtend.maven.parent</module>
 		<module>org.eclipse.xtend.maven.plugin</module>
 		<module>org.eclipse.xtend.maven.archetype</module>
-		<module>org.eclipse.xtend.maven.android.archetype</module>
 	</modules>
 
 	<build>
