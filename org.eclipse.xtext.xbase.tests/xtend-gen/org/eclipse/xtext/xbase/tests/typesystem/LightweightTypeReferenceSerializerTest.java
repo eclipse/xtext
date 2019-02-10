@@ -1,12 +1,9 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.inject.Inject;
 import java.io.Serializable;
 import java.nio.CharBuffer;
 import java.util.Iterator;
 import java.util.List;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function3;
@@ -14,28 +11,26 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTest;
 import org.eclipse.xtext.xbase.tests.typesystem.TestAppender;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
-  @Inject
-  private CommonTypeComputationServices services;
-  
-  @Inject
-  private XtextResourceSet resourceSet;
+public class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTest {
+  @Override
+  protected ParameterizedTypeReference typeRef(final Class<?> type) {
+    return this.getOwner().newParameterizedTypeReference(this.type(type));
+  }
   
   @Test
   public void testObject() {
@@ -156,7 +151,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   
   @Test
   public void testArrayGeneric() {
-    StandardTypeReferenceOwner _owner = this.getOwner();
+    ITypeReferenceOwner _owner = this.getOwner();
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = (ParameterizedTypeReference it) -> {
       WildcardTypeReference _newWildcardTypeReference = it.getOwner().newWildcardTypeReference();
@@ -326,25 +321,9 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     this.assertInXtendAndJava(this.getOwner().newUnknownTypeReference(), "Object");
   }
   
-  protected StandardTypeReferenceOwner getOwner() {
-    return new StandardTypeReferenceOwner(this.services, this.resourceSet);
-  }
-  
-  protected ParameterizedTypeReference typeRef(final Class<?> type) {
-    return this.getOwner().newParameterizedTypeReference(this.type(type));
-  }
-  
-  protected JvmType type(final Class<?> type) {
-    return this.services.getTypeReferences().findDeclaredType(type, this.resourceSet);
-  }
-  
-  protected LightweightTypeReference assertInXtendAndJava(final LightweightTypeReference ref, final String expectation) {
-    LightweightTypeReference _xblockexpression = null;
-    {
-      this.assertInXtend(ref, expectation);
-      _xblockexpression = this.assertInJava(ref, expectation);
-    }
-    return _xblockexpression;
+  protected void assertInXtendAndJava(final LightweightTypeReference ref, final String expectation) {
+    this.assertInXtend(ref, expectation);
+    this.assertInJava(ref, expectation);
   }
   
   protected LightweightTypeReference assertInXtend(final LightweightTypeReference ref, final String expectation) {
@@ -356,14 +335,10 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   }
   
   protected LightweightTypeReference assertIn(final LightweightTypeReference ref, final String expectation, final boolean isJava) {
-    LightweightTypeReference _xblockexpression = null;
-    {
-      final TestAppender appender = new TestAppender(isJava);
-      final LightweightTypeReferenceSerializer serializer = new LightweightTypeReferenceSerializer(appender);
-      ref.accept(serializer);
-      Assert.assertEquals(expectation, appender.toString());
-      _xblockexpression = ref;
-    }
-    return _xblockexpression;
+    final TestAppender appender = new TestAppender(isJava);
+    final LightweightTypeReferenceSerializer serializer = new LightweightTypeReferenceSerializer(appender);
+    ref.accept(serializer);
+    Assert.assertEquals(expectation, appender.toString());
+    return ref;
   }
 }

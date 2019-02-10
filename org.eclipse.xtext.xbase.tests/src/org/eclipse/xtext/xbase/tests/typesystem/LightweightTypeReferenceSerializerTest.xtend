@@ -1,27 +1,23 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import com.google.inject.Inject
 import java.io.Serializable
 import java.nio.CharBuffer
 import java.util.Iterator
 import java.util.List
 import org.eclipse.xtext.common.types.JvmType
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 
-class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
+class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTest {
 	
-	@Inject CommonTypeComputationServices services
-
-	@Inject XtextResourceSet resourceSet
+	protected override ParameterizedTypeReference typeRef(Class<?> type) {
+		return owner.newParameterizedTypeReference(type.type)
+	}
 	
 	@Test
 	def void testObject() {
@@ -268,38 +264,25 @@ class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCase {
 		owner.newUnknownTypeReference().assertInXtendAndJava('Object')
 	}
 
-
-	protected def getOwner() {
-		new StandardTypeReferenceOwner(services, resourceSet)
-	}	
-	
-	protected def typeRef(Class<?> type) {
-		owner.newParameterizedTypeReference(type.type)
-	}
-	
-	protected def type(Class<?> type) {
-		services.typeReferences.findDeclaredType(type, resourceSet)
-	}
-	
-	protected def assertInXtendAndJava(LightweightTypeReference ref, String expectation) {
+	protected def void assertInXtendAndJava(LightweightTypeReference ref, String expectation) {
 		assertInXtend(ref, expectation)
 		assertInJava(ref, expectation)
 	}
 	
-	protected def assertInXtend(LightweightTypeReference ref, String expectation) {
-		assertIn(ref, expectation, false)
+	protected def LightweightTypeReference assertInXtend(LightweightTypeReference ref, String expectation) {
+		return assertIn(ref, expectation, false)
 	}
 	
-	protected def assertInJava(LightweightTypeReference ref, String expectation) {
-		assertIn(ref, expectation, true)
+	protected def LightweightTypeReference assertInJava(LightweightTypeReference ref, String expectation) {
+		return assertIn(ref, expectation, true)
 	}
 	
-	protected def assertIn(LightweightTypeReference ref, String expectation, boolean isJava) {
+	protected def LightweightTypeReference assertIn(LightweightTypeReference ref, String expectation, boolean isJava) {
 		val appender = new TestAppender(isJava)
 		val serializer = new LightweightTypeReferenceSerializer(appender)
 		ref.accept(serializer)
 		assertEquals(expectation, appender.toString)
-		ref
+		return ref
 	}
 }
 
