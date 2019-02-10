@@ -177,7 +177,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * function and then applies the {@code after} function
 	 * @throws NullPointerException if {@code before} or {@code after} is <code>null</code>
 	 *
-	 * @see #andThen(Function1, Function1)
+	 * @see #andThen(Functions.Function1, Functions.Function1)
 	 * @since 2.9
 	 */
 	public static <V,T,R> Function1<V, R> compose(final Function1<? super T, ? extends R> after, final Function1<? super V, ? extends T> before) {
@@ -208,7 +208,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * function and then applies the {@code after} function
 	 * @throws NullPointerException if {@code before} or {@code after} is <code>null</code>
 	 *
-	 * @see #compose(Function1, Function1)
+	 * @see #compose(Functions.Function1, Functions.Function1)
 	 * @since 2.9
 	 */
 	public static <V,T,R> Function1<V, R> andThen(final Function1<? super V, ? extends T> before, final Function1<? super T, ? extends R> after) {
@@ -231,7 +231,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * function and then applies the {@code after} function
 	 * @throws NullPointerException if {@code before} or {@code after} is null
 	 *
-	 * @see #compose(Function1, Function1)
+	 * @see #compose(Functions.Function1, Functions.Function1)
 	 * @since 2.9
 	 */
 	public static <V1,V2,T,R> Function2<V1, V2, R> andThen(final Function2<? super V1,? super V2, ? extends T> before, final Function1<? super T, ? extends R> after) {
