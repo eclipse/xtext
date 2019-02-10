@@ -22,6 +22,10 @@ public class CompilerConfiguration {
   
   private boolean verbose;
   
+  private boolean skipAnnotationProcessing;
+  
+  private boolean preserveInformationAboutFormalParameters;
+  
   @Pure
   public String getSourceLevel() {
     return this.sourceLevel;
@@ -47,5 +51,23 @@ public class CompilerConfiguration {
   
   public void setVerbose(final boolean verbose) {
     this.verbose = verbose;
+  }
+  
+  @Pure
+  public boolean isSkipAnnotationProcessing() {
+    return this.skipAnnotationProcessing;
+  }
+  
+  public void setSkipAnnotationProcessing(final boolean skipAnnotationProcessing) {
+    this.skipAnnotationProcessing = skipAnnotationProcessing;
+  }
+  
+  @Pure
+  public boolean isPreserveInformationAboutFormalParameters() {
+    return this.preserveInformationAboutFormalParameters;
+  }
+  
+  public void setPreserveInformationAboutFormalParameters(final boolean preserveInformationAboutFormalParameters) {
+    this.preserveInformationAboutFormalParameters = preserveInformationAboutFormalParameters;
   }
 }
