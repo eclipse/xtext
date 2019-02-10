@@ -17,4 +17,6 @@ class CompilerConfiguration {
 	String sourceLevel = "1.5"
 	String targetLevel = "1.5"
 	boolean verbose
+	boolean skipAnnotationProcessing
+	boolean preserveInformationAboutFormalParameters
 }
