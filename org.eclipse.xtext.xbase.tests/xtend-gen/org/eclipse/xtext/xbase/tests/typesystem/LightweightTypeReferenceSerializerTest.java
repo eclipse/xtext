@@ -11,7 +11,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTest;
 import org.eclipse.xtext.xbase.tests.typesystem.TestAppender;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -26,7 +26,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTestCase {
+public class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTest {
   @Override
   protected ParameterizedTypeReference typeRef(final Class<?> type) {
     return this.getOwner().newParameterizedTypeReference(this.type(type));

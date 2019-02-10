@@ -13,7 +13,7 @@ import org.junit.Test
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class LightweightTypeReferenceTest extends AbstractLightweightTypeReferenceTestCase {
+class LightweightTypeReferenceTest extends AbstractLightweightTypeReferenceTest {
 
 	@Test
 	def void testIsAssignableFrom_01() {

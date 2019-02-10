@@ -13,7 +13,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 
-class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTestCase {
+class LightweightTypeReferenceSerializerTest extends AbstractLightweightTypeReferenceTest {
 	
 	protected override ParameterizedTypeReference typeRef(Class<?> type) {
 		return owner.newParameterizedTypeReference(type.type)

@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractLightweightTypeReferenceTestCase extends AbstractXbaseTestCase {
+public abstract class AbstractLightweightTypeReferenceTest extends AbstractXbaseTestCase {
   @Inject
   private CommonTypeComputationServices services;
   

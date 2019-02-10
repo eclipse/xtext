@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.io.Serializable;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTestCase;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractLightweightTypeReferenceTest;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class LightweightTypeReferenceTest extends AbstractLightweightTypeReferenceTestCase {
+public class LightweightTypeReferenceTest extends AbstractLightweightTypeReferenceTest {
   @Test
   public void testIsAssignableFrom_01() {
     final LightweightTypeReference serializableRef = this.typeRef(Serializable.class);

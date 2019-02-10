@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class AbstractLightweightTypeReferenceTestCase extends AbstractXbaseTestCase {
+abstract class AbstractLightweightTypeReferenceTest extends AbstractXbaseTestCase {
 	
 	@Inject CommonTypeComputationServices services
 
