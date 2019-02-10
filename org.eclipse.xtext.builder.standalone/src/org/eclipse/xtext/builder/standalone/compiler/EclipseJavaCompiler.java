@@ -48,6 +48,9 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		if (configuration.isVerbose()) {
 			commandLine.add("-verbose");
 		}
+		if (configuration.isSkipAnnotationProcessing()) {
+			commandLine.add("-proc:none");
+		}
 		if (classPath != null) {
 			Iterable<String> validClasspath = IterableExtensions.filter(classPath, new EmptyOrMissingFilter());
 			if (validClasspath.iterator().hasNext()) {
@@ -139,7 +142,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		});
 		return uris.values().size() > 0;
 	}
-
+	
 	/**
 	 * @author Dennis Huebner - Initial contribution and API
 	 */
