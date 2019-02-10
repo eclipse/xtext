@@ -1,5 +1,6 @@
 package org.eclipse.xtext.generator;
 
+import com.google.common.annotations.Beta;
 import java.util.concurrent.BlockingQueue;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -56,8 +57,8 @@ public class FileSystemAccessQueue extends AdapterImpl {
   
   /**
    * @since 2.14
-   * @beta
    */
+  @Beta
   public void waitForEmptyQueue() {
     while ((!this.requestQueue.isEmpty())) {
       Thread.yield();

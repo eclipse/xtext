@@ -226,7 +226,7 @@ public class GeneratorNodeProcessor {
     }
     
     /**
-     * @returns a copy of current indent nodes
+     * @return a copy of current indent nodes
      */
     public Deque<IndentNode> getCurrentIndents() {
       return new ArrayDeque<IndentNode>(this._currentIndents);
