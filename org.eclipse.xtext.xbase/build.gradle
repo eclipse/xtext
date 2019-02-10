@@ -10,6 +10,7 @@ dependencies {
 
 // Include the xtext files from the main source set when executing the workflow
 sourceSets.mwe2.runtimeClasspath += processResources.outputs.files
+sourceSets.mwe2.runtimeClasspath += sourceSets.main.output
 
 sourceSets.main.java.srcDir 'deprecated'
 sourceSets.mwe2.java.srcDir 'generator'
