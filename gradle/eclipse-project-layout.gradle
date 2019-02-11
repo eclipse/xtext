@@ -76,6 +76,9 @@ eclipse {
 				if (source.kind == 'src' && source.path.endsWith('-gen') && !source.path.equals('xtend-gen') ) {
 					source.entryAttributes['ignore_optional_problems'] = 'true'
 				}
+				if (source.kind == 'output') {
+					source.path = 'bin/main'
+				}
 			}
 		}
 	}
