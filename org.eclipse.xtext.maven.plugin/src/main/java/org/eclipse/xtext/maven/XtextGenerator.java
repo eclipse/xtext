@@ -120,6 +120,9 @@ public class XtextGenerator extends AbstractMojo {
 	@Parameter(property = "maven.compiler.target", defaultValue = "1.6")
 	private String compilerTargetLevel;
 
+	@Parameter(defaultValue = "false")
+	private Boolean compilerSkipAnnotationProcessing;
+
 	/**
 	 * RegEx expression to filter class path during model files look up
 	 */
@@ -186,6 +189,7 @@ public class XtextGenerator extends AbstractMojo {
 		conf.setSourceLevel(compilerSourceLevel);
 		conf.setTargetLevel(compilerTargetLevel);
 		conf.setVerbose(getLog().isDebugEnabled());
+		conf.setSkipAnnotationProcessing(compilerSkipAnnotationProcessing);
 	}
 
 	private void logState() {
