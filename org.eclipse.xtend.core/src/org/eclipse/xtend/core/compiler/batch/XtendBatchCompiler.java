@@ -236,7 +236,7 @@ public class XtendBatchCompiler {
 	/**
 	 * This option is only supported on JDK 8 and older and will be ignored when source level is 9 or newer.
 	 * @since 2.7
-	 * @see https://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html
+	 * @see <a href="https://www.oracle.com/technetwork/java/javase/9-relnote-issues-3704069.html">Java 9 Release Notes</a>
 	 */
 	public void setBootClassPath(String bootClassPath) {
 		JavaVersion version = JavaVersion.fromQualifier(getJavaSourceVersion());
