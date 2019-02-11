@@ -66,7 +66,9 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
@@ -662,18 +664,26 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if(issueData==null || issueData.length==0) {
 			return;
 		}
-		
-		String modifier = issueData[0];
-		
 		// use the same label, description and image
 		// to be able to use the quickfixes (issue resolution) in batch mode
 		String label = "Remove the unnecessary modifier.";
 		String description = "The modifier is unnecessary and could be removed.";
 		String image = "fix_indent.gif";
-		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XtendMember>) (element, ctx) -> {
-			ctx.setUpdateCrossReferences(false);
-			ctx.setUpdateRelatedFiles(false);
-			ctx.addModification(element, ele -> ele.getModifiers().remove(modifier));
+		
+		acceptor.accept(issue, label, description, image, new ITextualMultiModification() {
+			
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				if (context instanceof IssueModificationContext) {
+					Issue theIssue = ((IssueModificationContext) context).getIssue();
+					Integer offset = theIssue.getOffset();
+					IXtextDocument document = context.getXtextDocument();
+					document.replace(offset, theIssue.getLength(), "");
+					while (Character.isWhitespace(document.getChar(offset))) {
+						document.replace(offset, 1, "");
+					}
+				}
+			}
 		});
 	}
 	
