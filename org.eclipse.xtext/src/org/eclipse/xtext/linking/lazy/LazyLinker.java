@@ -218,10 +218,9 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	protected EClass findInstantiableCompatible(EClass eType) {
-		if (!isInstantiatableSubType(eType, eType)) {
+		if (eType.isAbstract() || eType.isInterface()) {
 			// check local Package
-			EPackage ePackage = eType.getEPackage();
-			EClass eClass = findSubTypeInEPackage(ePackage, eType);
+			EClass eClass = findSubTypeInEPackage(eType.getEPackage(), eType);
 			if (eClass != null)
 				return eClass;
 			return globalFindInstantiableCompatible(eType);
