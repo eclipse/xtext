@@ -58,16 +58,18 @@ public class BuildManagerAccess {
 	 */
 	public static XtextBuilder findBuilder(IProject project) {
 		try {
-			Project casted = (Project) project;
-			IBuildConfiguration activeBuildConfig = casted.getActiveBuildConfig();
-			for (ICommand command : casted.internalGetDescription().getBuildSpec(false)) {
-				if (XtextBuilder.BUILDER_ID.equals(command.getBuilderName())) {
-					IWorkspace workspace = ResourcesPlugin.getWorkspace();
-					if (workspace instanceof Workspace) {
-						BuildManager buildManager = ((Workspace) workspace).getBuildManager();
-						XtextBuilder result = (XtextBuilder) getBuilder.invoke(buildManager, activeBuildConfig, command, -1,
-								new MultiStatus(Activator.PLUGIN_ID, 0, null, null));
-						return result;
+			if (project.isAccessible()) {
+				Project casted = (Project) project;
+				IBuildConfiguration activeBuildConfig = casted.getActiveBuildConfig();
+				for (ICommand command : casted.internalGetDescription().getBuildSpec(false)) {
+					if (XtextBuilder.BUILDER_ID.equals(command.getBuilderName())) {
+						IWorkspace workspace = ResourcesPlugin.getWorkspace();
+						if (workspace instanceof Workspace) {
+							BuildManager buildManager = ((Workspace) workspace).getBuildManager();
+							XtextBuilder result = (XtextBuilder) getBuilder.invoke(buildManager, activeBuildConfig, command, -1,
+									new MultiStatus(Activator.PLUGIN_ID, 0, null, null));
+							return result;
+						}
 					}
 				}
 			}
