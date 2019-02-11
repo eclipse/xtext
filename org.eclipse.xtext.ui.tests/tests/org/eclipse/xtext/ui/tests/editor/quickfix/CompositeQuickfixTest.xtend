@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.tests.editor.quickfix
 
 import org.junit.Test
 import org.eclipse.core.resources.IMarker
+import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.ui.ide.IDE
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -175,6 +177,32 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			fixedName {	ref fixable_b }
 			fixable_b {	ref fixable_a }
 		'''.toString, editor.document.get)
+	}
+	
+	@Test
+	def void testTextualMultiModification() {
+		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+			lowercase_x {}
+			lowercase_y {}
+		''')
+		val XtextEditor xtextEditor = IDE.openEditor(getActivePage(), resource) as XtextEditor;
+		val markers = getMarkers(resource)
+		assertContentsAndMarkers(resource, markers, '''
+			<0<lowercase_x>0> {}
+			<1<lowercase_y>1> {}
+			--------------------
+			0: message=lowercase
+			1: message=lowercase
+		''')
+
+		applyQuickfixOnMultipleMarkers(markers)
+		xtextEditor.doSave(null)
+		assertContentsAndMarkers(resource, '''
+			LOWERCASE_X {}
+			LOWERCASE_Y {}
+			--------------
+			(no markers found)
+		''')
 	}
 
 }

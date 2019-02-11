@@ -25,6 +25,7 @@ import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -157,8 +158,8 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 		IMarker primaryMarker = markers[0];
 		IMarkerResolution[] resolutions = generator.getResolutions(primaryMarker);
 		Assert.assertEquals(1, resolutions.length);
-		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolutionAdapter);
-		WorkbenchMarkerResolutionAdapter resolution = (WorkbenchMarkerResolutionAdapter) resolutions[0];
+		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolution);
+		WorkbenchMarkerResolution resolution = (WorkbenchMarkerResolution) resolutions[0];
 		List<IMarker> others = Lists.newArrayList(resolution.findOtherMarkers(markers));
 		assertFalse(others.contains(primaryMarker));
 		assertEquals(markers.length - 1, others.size());

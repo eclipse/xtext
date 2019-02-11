@@ -153,7 +153,7 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 			markerCodeKey = marker.getAttribute(Issue.CODE_KEY);
 			if (markerCodeKey != null) {
 				for (IMarker candidate : markers) {
-					if (languageResourceHelper.isLanguageResource(marker.getResource())) {
+					if (languageResourceHelper.isLanguageResource(marker.getResource()) && candidate != marker) {
 						Object canidateCodeKey = candidate.getAttribute(Issue.CODE_KEY);
 						if (Objects.equal(markerCodeKey, canidateCodeKey)) {
 							result.add(candidate);

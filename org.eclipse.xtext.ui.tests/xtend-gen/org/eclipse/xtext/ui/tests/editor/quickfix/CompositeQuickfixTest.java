@@ -12,8 +12,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.tests.editor.quickfix.AbstractQuickfixTest;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -299,5 +302,47 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder_2.append("fixable_b {\tref fixable_a }");
     _builder_2.newLine();
     Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
+  }
+  
+  @Test
+  public void testTextualMultiModification() {
+    try {
+      IProject _createGeneralXtextProject = this.createGeneralXtextProject("myProject");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("lowercase_x {}");
+      _builder.newLine();
+      _builder.append("lowercase_y {}");
+      _builder.newLine();
+      final IFile resource = this.createFile(_createGeneralXtextProject, "test.quickfixcrossreftestlanguage", _builder.toString());
+      IEditorPart _openEditor = IDE.openEditor(AbstractWorkbenchTest.getActivePage(), resource);
+      final XtextEditor xtextEditor = ((XtextEditor) _openEditor);
+      final IMarker[] markers = this.getMarkers(resource);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<0<lowercase_x>0> {}");
+      _builder_1.newLine();
+      _builder_1.append("<1<lowercase_y>1> {}");
+      _builder_1.newLine();
+      _builder_1.append("--------------------");
+      _builder_1.newLine();
+      _builder_1.append("0: message=lowercase");
+      _builder_1.newLine();
+      _builder_1.append("1: message=lowercase");
+      _builder_1.newLine();
+      this.assertContentsAndMarkers(resource, markers, _builder_1);
+      this.applyQuickfixOnMultipleMarkers(markers);
+      xtextEditor.doSave(null);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("LOWERCASE_X {}");
+      _builder_2.newLine();
+      _builder_2.append("LOWERCASE_Y {}");
+      _builder_2.newLine();
+      _builder_2.append("--------------");
+      _builder_2.newLine();
+      _builder_2.append("(no markers found)");
+      _builder_2.newLine();
+      this.assertContentsAndMarkers(resource, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
