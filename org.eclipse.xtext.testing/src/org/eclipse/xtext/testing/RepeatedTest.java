@@ -32,7 +32,7 @@ public @interface RepeatedTest {
 	int times() default 10;
 
 	/**
-	 * Test rule used along with {@link RepeatTest} to let a test loop for a couple
+	 * Test rule used along with {@link RepeatedTest} to let a test loop for a couple
 	 * of rounds.
 	 */
 	public static class Rule implements TestRule {

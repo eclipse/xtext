@@ -1,10 +1,11 @@
 package org.eclipse.xtext.generator
 
+import com.google.common.annotations.Beta
 import java.util.concurrent.BlockingQueue
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
-import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
@@ -43,8 +44,8 @@ class FileSystemAccessQueue extends AdapterImpl {
 	
 	/**
 	 * @since 2.14
-	 * @beta
 	 */
+	@Beta
 	def void waitForEmptyQueue() {
 		while (!requestQueue.isEmpty) {
 			Thread.yield

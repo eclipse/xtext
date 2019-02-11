@@ -113,7 +113,7 @@ class SemanticHighlightingRegistry {
 
 	/**
 	 * Returns with the internal scope index for the argument. Returns {@code -1} if the scopes
-	 * argument is {@null}, the {@link SemanticHighlightingRegistry#UNKNOWN_SCOPES unknown scopes}
+	 * argument is <code>null</code>, the {@link SemanticHighlightingRegistry#UNKNOWN_SCOPES unknown scopes}
 	 * or is not registered to this manager.
 	 */
 	def int getIndex(List<String> scopes) {

@@ -29,6 +29,7 @@ import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
 import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
@@ -56,7 +57,7 @@ public class SequenceFeeder {
 		protected IValueSerializer valueSerializer;
 
 		/**
-		 * @deprecated {@link #create(ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+		 * @deprecated {@link #create(ISerializationContext, EObject, ISemanticNodeProvider.INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, ISerializationDiagnostic.Acceptor)}
 		 */
 		@Deprecated
 		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes, ISemanticSequencer masterSequencer,
@@ -85,7 +86,7 @@ public class SequenceFeeder {
 	protected final ISerializationContext context;
 	
 	/**
-	 * @deprecated {@link #SequenceFeeder(Provider, ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+	 * @deprecated {@link #SequenceFeeder(SequenceFeeder.Provider, ISerializationContext, EObject, ISemanticNodeProvider.INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, ISerializationDiagnostic.Acceptor)}
 	 */
 	@Deprecated
 	protected SequenceFeeder(Provider provider, EObject semanticObject, INodesForEObjectProvider nodes, ISemanticSequencer masterSequencer,

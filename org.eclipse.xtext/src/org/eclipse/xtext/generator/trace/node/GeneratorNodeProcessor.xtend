@@ -123,7 +123,7 @@ class GeneratorNodeProcessor {
 		}
 		
 		/**
-		 * @returns a copy of current indent nodes
+		 * @return a copy of current indent nodes
 		 */
 		def Deque<IndentNode> getCurrentIndents() {
 			new ArrayDeque(_currentIndents)
