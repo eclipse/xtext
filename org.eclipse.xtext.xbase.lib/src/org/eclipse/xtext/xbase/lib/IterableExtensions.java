@@ -349,10 +349,10 @@ public class IterableExtensions {
 	 * repeatedly apply the transformation.
 	 * <p>
 	 * The transformation maps each element to an iterable, and all resulting iterables are combined to a single iterable.
-	 * Effectively a combination of {@link #map(Iterable, Function1)} and {@link #flatten(Iterable)} is performed.
+	 * Effectively a combination of {@link #map(Iterable, Functions.Function1)} and {@link #flatten(Iterable)} is performed.
 	 * </p>
 	 * <p>
-	 * The returned iterable's iterator <i>does not support {@code remove()}</i> in contrast to {@link #map(Iterable, Function1)}.
+	 * The returned iterable's iterator <i>does not support {@code remove()}</i> in contrast to {@link #map(Iterable, Functions.Function1)}.
 	 * </p>
 	 * 
 	 * @param original
