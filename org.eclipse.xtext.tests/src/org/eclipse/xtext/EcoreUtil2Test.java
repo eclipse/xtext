@@ -301,7 +301,13 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		brokenShortExternalFrom = shortExternalForm.replace('A', 'a');
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
 	}
-	
+
+	private String makeInvalid(String externalForm) {
+		// this used to be Strings.toFirstUpper but the spec does not impose case sensitivity constraints on the scheme
+		// so Ed decided to change that. In that sense, we now use another scheme instead of http:// which is xhttp://
+		return 'x' + externalForm;
+	}
+
 	@Test public void testPathFragment() {
 		EClass foo = EcoreFactory.eINSTANCE.createEClass();
 		foo.setName("foo");
@@ -324,10 +330,26 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		assertEquals(resource.getEObject("//@eClassifiers.1"), bar);
 		assertEquals(resource.getEObject("/"), p);
 	}
+	
+	@Test public void testIsAssignableFrom() {
+		EClass superCls = EcoreFactory.eINSTANCE.createEClass();
+		superCls.setName("MySuper");
+		superCls.getESuperTypes().add(EcorePackage.eINSTANCE.getEObject());
 
-	protected String makeInvalid(String externalForm) {
-		// this used to be Strings.toFirstUpper but the spec does not impose case sensitivity constraints on the scheme
-		// so Ed decided to change that. In that sense, we now use another scheme instead of http:// which is xhttp://
-		return 'x' + externalForm;
+		EClass subCls = EcoreFactory.eINSTANCE.createEClass();
+		subCls.setName("MySub");
+		subCls.getESuperTypes().add(superCls);
+		
+		assertFalse(EcoreUtil2.isAssignableFrom(null, null));
+		assertFalse(EcoreUtil2.isAssignableFrom(superCls, null));
+		assertFalse(EcoreUtil2.isAssignableFrom(null, superCls));
+		
+		assertTrue(EcoreUtil2.isAssignableFrom(superCls, superCls));
+		assertTrue(EcoreUtil2.isAssignableFrom(superCls, subCls));
+		assertFalse(EcoreUtil2.isAssignableFrom(subCls, superCls));
+		
+		assertTrue(EcoreUtil2.isAssignableFrom(EcorePackage.eINSTANCE.getEObject(), superCls));
+		assertTrue(EcoreUtil2.isAssignableFrom(EcorePackage.eINSTANCE.getEObject(), subCls));
 	}
+
 }

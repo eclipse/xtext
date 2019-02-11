@@ -403,10 +403,14 @@ public class EcoreUtil2 extends EcoreUtil {
 	 * Returns whether the given super type is the same as, or a super type of, some other class.
 	 * @param superType the super type
 	 * @param candidate the subtype
-	 * @return whether the super type is the same as, or a super type of, some other class.
+	 * @return whether the super type is the same as, or a super type of, some other class. Yields <code>null</code>
+	 * when either argument is <code>null</code>.
 	 */
 	public static boolean isAssignableFrom(EClass superType, EClass candidate) {
-		return (candidate != null && (superType == EcorePackage.Literals.EOBJECT || superType.isSuperTypeOf(candidate)));
+		if (superType == null || candidate == null) {
+			return false;
+		}
+		return superType == candidate || superType == EcorePackage.Literals.EOBJECT || superType.isSuperTypeOf(candidate);
 	}
 
 	@SuppressWarnings("unchecked")
