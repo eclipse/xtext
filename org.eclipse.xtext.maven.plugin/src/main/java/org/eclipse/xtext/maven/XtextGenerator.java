@@ -123,6 +123,9 @@ public class XtextGenerator extends AbstractMojo {
 	@Parameter(defaultValue = "false")
 	private Boolean compilerSkipAnnotationProcessing;
 
+	@Parameter(defaultValue = "false")
+	private Boolean compilerPreserveInformationAboutFormalParameters;
+
 	/**
 	 * RegEx expression to filter class path during model files look up
 	 */
@@ -190,6 +193,7 @@ public class XtextGenerator extends AbstractMojo {
 		conf.setTargetLevel(compilerTargetLevel);
 		conf.setVerbose(getLog().isDebugEnabled());
 		conf.setSkipAnnotationProcessing(compilerSkipAnnotationProcessing);
+		conf.setPreserveInformationAboutFormalParameters(compilerPreserveInformationAboutFormalParameters);
 	}
 
 	private void logState() {
