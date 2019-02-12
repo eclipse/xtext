@@ -7687,7 +7687,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(" ");
     _builder_1.append("class Foo {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
@@ -7704,7 +7703,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package a");
     _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("class Foo {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
@@ -7725,7 +7723,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("class A {}");
     _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("class B {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
@@ -8115,7 +8112,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_17() {
     StringConcatenation _builder = new StringConcatenation();
@@ -8139,13 +8135,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("class Foo {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_18() {
     StringConcatenation _builder = new StringConcatenation();
@@ -8175,13 +8169,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("class Foo {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_19() {
     StringConcatenation _builder = new StringConcatenation();
@@ -8215,13 +8207,11 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("class B {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_20() {
     StringConcatenation _builder = new StringConcatenation();
@@ -8718,7 +8708,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_31() {
     StringConcatenation _builder = new StringConcatenation();
@@ -9113,7 +9102,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore("Javadoc will be not preserved after applying the quickfix")
   @Test
   public void unnecessaryModifier_37() {
     StringConcatenation _builder = new StringConcatenation();
@@ -9355,7 +9343,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(" ");
     _builder_1.append("interface Foo {}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
@@ -9373,7 +9360,10 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo { new(){}");
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new(){}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -9398,7 +9388,10 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo { interface Bar {");
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("interface Bar {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("def m() {}");
@@ -9448,7 +9441,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(" ");
     _builder_1.append("annotation Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -9465,7 +9457,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNNECESSARY_MODIFIER).assertResolutionLabels("Remove the unnecessary modifier.");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(" ");
     _builder_1.append("enum Foo {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -9526,7 +9517,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("\t\t\t\t");
     _builder_1.append("a");
     _builder_1.newLine();
-    _builder_1.append("\t\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t\t\t");
     _builder_1.append("b");

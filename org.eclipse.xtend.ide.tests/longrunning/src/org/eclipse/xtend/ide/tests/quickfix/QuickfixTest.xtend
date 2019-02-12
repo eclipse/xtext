@@ -4237,8 +4237,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix(
-			// TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			''' class Foo {}
+			'''class Foo {}
 		''')
 	}
 	
@@ -4253,8 +4252,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
 			package a
-«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 class Foo {}
+			class Foo {}
 		''')
 	}
 	
@@ -4271,8 +4269,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertModelAfterQuickfix('''
 			package a
 			class A {}
-«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 class B {}
+			class B {}
 		''')
 	}
 	
@@ -4540,7 +4537,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_17(){
 		// Xtend class with javadoc having a 'public' modifier
@@ -4556,12 +4552,10 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			/**
 			 * javadoc
 			 */
-«««TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 class Foo {}
+			class Foo {}
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_18(){
 		// Xtend class with javadoc having a 'public' modifier
@@ -4581,12 +4575,10 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			/**
 			 * javadoc
 			 */
-«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 class Foo {}
+			class Foo {}
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_19(){
 		// Xtend class with javadoc having a 'public' modifier
@@ -4608,12 +4600,10 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			/**
 			 * javadoc
 			 */
-«««			TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 class B {}
+			class B {}
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_20(){
 		// Xtend field with javadoc having a 'private' modifier
@@ -4891,7 +4881,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_31(){
 		// Xtend extension field without name with javadoc having a 'private' modifier
@@ -5089,7 +5078,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("Javadoc will be not preserved after applying the quickfix")
 	@Test
 	def void unnecessaryModifier_37(){
 		// Xtend field in anonymous class with javadoc having 'private' modifier
@@ -5210,8 +5198,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix(
-// TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-		''' interface Foo {}
+		'''interface Foo {}
 		''')
 	}
 	
@@ -5226,8 +5213,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
-««« TODO: improve formatting after Quickfix application
-			class Foo { new(){}
+			class Foo {
+				new(){}
 			}
 		''')
 	}
@@ -5245,8 +5232,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
-««« TODO: improve formatting after Quickfix application
-			class Foo { interface Bar {
+			class Foo {
+				interface Bar {
 					def m() {}
 				}
 			}
@@ -5282,8 +5269,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
-««« TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 annotation Foo {
+			annotation Foo {
 			}
 		''')
 	}
@@ -5298,8 +5284,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(UNNECESSARY_MODIFIER)
 		.assertResolutionLabels("Remove the unnecessary modifier.")
 		.assertModelAfterQuickfix('''
-««« TODO: check why the whitespace after the 'public' modifier will not be removed by the quickfix
-			 enum Foo {
+			enum Foo {
 			}
 		''')
 	}
@@ -5331,7 +5316,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					val e = «tripleQuotes»
 						«ifLiteral»
 							a
-						
+			
 							b
 						«endifLiteral»
 					«tripleQuotes»
