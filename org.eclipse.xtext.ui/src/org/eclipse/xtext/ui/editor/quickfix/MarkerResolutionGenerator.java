@@ -58,7 +58,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	private WorkbenchMarkerResolutionAdapter.Factory adapterFactory;
 	
 	@Inject
-	TextualMultiModificationWorkbenchMarkerResolutionAdapter.Factory xxxxxx;
+	private TextualMultiModificationWorkbenchMarkerResolutionAdapter.Factory textualMultiModificationAdapterFactory;
 
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
@@ -113,7 +113,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			if (resolution.getModification() instanceof IBatchableModification) {
 				result.add(adapterFactory.create(marker, resolution));
 			} else if (resolution.getModification() instanceof ITextualMultiModification) {
-				result.add(xxxxxx.create(marker, resolution));
+				result.add(textualMultiModificationAdapterFactory.create(marker, resolution));
 			} else {
 				remaining.add(resolution);
 			}

@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.model.edit;
 import com.google.common.annotations.Beta;
 
 /**
- * Specialization of {@link IModification} the Author claims to be executable as Multi-Quickfix.
+ * Specialization of {@link IModification textual modifications} that can be applied as multi quick-fixes.
  * 
  * @author Christian Dietrich - Initial contribution and API
  * 

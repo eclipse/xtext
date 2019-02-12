@@ -91,7 +91,8 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 					Issue theIssue = ((IssueModificationContext) context).getIssue();
 					IXtextDocument document = context.getXtextDocument();
 					String upperCase = document.get(theIssue.getOffset(), theIssue.getLength()).toUpperCase();
-					document.replace(theIssue.getOffset(), theIssue.getLength(), upperCase);
+					// uppercase + duplicate => allows offset change tests
+					document.replace(theIssue.getOffset(), theIssue.getLength(), upperCase + "_" +upperCase);
 				}
 			}
 		});

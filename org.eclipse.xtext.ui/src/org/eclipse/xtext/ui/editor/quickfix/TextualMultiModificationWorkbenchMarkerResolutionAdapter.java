@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -57,7 +57,7 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 	public static class Factory {
 
 		@Inject
-		Provider<TextualMultiModificationWorkbenchMarkerResolutionAdapter> provider;
+		protected Provider<TextualMultiModificationWorkbenchMarkerResolutionAdapter> provider;
 
 		public IMarkerResolution create(IMarker marker, IssueResolution resolution) {
 			TextualMultiModificationWorkbenchMarkerResolutionAdapter adapter = provider.get();
@@ -84,6 +84,8 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 	private String defaultImage = XtextPluginImages.OBJ_CORRECTION_CHANGE;
 
 	private IssueResolution resolution;
+	
+	private IMarker marker;
 
 	public IssueResolution getResolution() {
 		return resolution;
@@ -96,18 +98,12 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 		this.resolution = resolution;
 	}
 
-	private IMarker marker;
-
 	public IMarker getMarker() {
 		return marker;
 	}
 
 	public void setMarker(IMarker marker) {
 		this.marker = marker;
-	}
-
-
-	public TextualMultiModificationWorkbenchMarkerResolutionAdapter() {
 	}
 
 	@Override
@@ -186,14 +182,17 @@ public class TextualMultiModificationWorkbenchMarkerResolutionAdapter extends Wo
 	}
 
 	@Override
-	public void run(IMarker[] markers, IProgressMonitor monitor2) {
+	public void run(IMarker[] markers, IProgressMonitor parentMonitor) {
 		int count = markers.length;
 		Comparator<IMarker> c1 = Comparator.comparing(e -> e.getResource().toString());
 		Comparator<IMarker> c2 = Comparator.comparing(e -> Integer.valueOf(-e.getAttribute("charEnd", 0)));
 		Arrays.sort(markers, c1.thenComparing(c2));
-		SubMonitor monitor = SubMonitor.convert(monitor2, count);
+		SubMonitor monitor = SubMonitor.convert(parentMonitor, count);
 		int i = 1;
 		for (IMarker m : markers) {
+			if (parentMonitor.isCanceled()) {
+				return;
+			}
 			monitor.subTask("fixing (" + i + "/" + count + ") in " + m.getResource().getName() + " Line "
 					+ Util.getProperty(IMarker.LINE_NUMBER, m));
 			processUIEvents(0);
