@@ -1679,7 +1679,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     }
     boolean _equals = Objects.equal(this.lastPhase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
     if (_equals) {
-      Throwables.propagateIfPossible(t);
+      Throwables.throwIfUnchecked(t);
       String _messageWithoutStackTrace = this.getMessageWithoutStackTrace(t);
       throw new RuntimeException(_messageWithoutStackTrace, t);
     }

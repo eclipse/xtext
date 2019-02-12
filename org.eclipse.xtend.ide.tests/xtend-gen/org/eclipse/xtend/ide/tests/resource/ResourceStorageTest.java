@@ -264,7 +264,8 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       testShouldLoadFromStorageJob.join();
       final Throwable t = IterableExtensions.<Throwable>head(throwables);
       if ((t != null)) {
-        throw Throwables.propagate(t);
+        Throwables.throwIfUnchecked(t);
+        throw new RuntimeException(t);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
