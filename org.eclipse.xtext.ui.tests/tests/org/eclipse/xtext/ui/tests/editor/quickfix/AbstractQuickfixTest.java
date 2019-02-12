@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -25,6 +27,7 @@ import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -32,7 +35,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
-import org.eclipse.xtext.ui.editor.quickfix.WorkbenchMarkerResolutionAdapter;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.testing.util.AnnotatedTextToString;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
@@ -157,12 +159,16 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 		IMarker primaryMarker = markers[0];
 		IMarkerResolution[] resolutions = generator.getResolutions(primaryMarker);
 		Assert.assertEquals(1, resolutions.length);
-		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolutionAdapter);
-		WorkbenchMarkerResolutionAdapter resolution = (WorkbenchMarkerResolutionAdapter) resolutions[0];
+		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolution);
+		WorkbenchMarkerResolution resolution = (WorkbenchMarkerResolution) resolutions[0];
 		List<IMarker> others = Lists.newArrayList(resolution.findOtherMarkers(markers));
 		assertFalse(others.contains(primaryMarker));
 		assertEquals(markers.length - 1, others.size());
 		others.add(primaryMarker);
+		long seed = new Random().nextLong();
+		// System out is intended so that the seed used can be recovered on failures
+		System.out.println(seed);
+		Collections.shuffle(others, new Random(seed));
 		resolution.run(others.toArray(new IMarker[others.size()]), new NullProgressMonitor());
 	}
 

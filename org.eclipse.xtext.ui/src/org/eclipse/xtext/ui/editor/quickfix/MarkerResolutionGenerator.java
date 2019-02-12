@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.BatchModification.IBatchableModification;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
@@ -55,6 +56,9 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 
 	@Inject
 	private WorkbenchMarkerResolutionAdapter.Factory adapterFactory;
+	
+	@Inject
+	private TextualMultiModificationWorkbenchMarkerResolutionAdapter.Factory textualMultiModificationAdapterFactory;
 
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
@@ -108,6 +112,8 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		for (IssueResolution resolution : resolutions) {
 			if (resolution.getModification() instanceof IBatchableModification) {
 				result.add(adapterFactory.create(marker, resolution));
+			} else if (resolution.getModification() instanceof ITextualMultiModification) {
+				result.add(textualMultiModificationAdapterFactory.create(marker, resolution));
 			} else {
 				remaining.add(resolution);
 			}

@@ -4,9 +4,12 @@ package org.eclipse.xtext.ui.tests.quickfix.ui.quickfix;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
+import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
@@ -75,6 +78,23 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 			ctx.addModification(main, (obj) -> {
 				main.setName("fixedName");
 			});
+		});
+	}
+	
+	@Fix(QuickfixCrossrefTestLanguageValidator.LOWERCASE)
+	public void fixLowercase(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "fix lowercase", "fix lowercase", null, new ITextualMultiModification() {
+			
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				if (context instanceof IssueModificationContext) {
+					Issue theIssue = ((IssueModificationContext) context).getIssue();
+					IXtextDocument document = context.getXtextDocument();
+					String upperCase = document.get(theIssue.getOffset(), theIssue.getLength()).toUpperCase();
+					// uppercase + duplicate => allows offset change tests
+					document.replace(theIssue.getOffset(), theIssue.getLength(), upperCase + "_" +upperCase);
+				}
+			}
 		});
 	}
 }

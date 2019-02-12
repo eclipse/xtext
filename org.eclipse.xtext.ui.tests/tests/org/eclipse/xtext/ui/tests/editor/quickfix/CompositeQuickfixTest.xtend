@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.tests.editor.quickfix
 
 import org.junit.Test
 import org.eclipse.core.resources.IMarker
+import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.ui.ide.IDE
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -175,6 +177,51 @@ class CompositeQuickfixTest extends AbstractQuickfixTest {
 			fixedName {	ref fixable_b }
 			fixable_b {	ref fixable_a }
 		'''.toString, editor.document.get)
+	}
+	
+	@Test
+	def void testTextualMultiModification() {
+		// we test two things here:
+		// - TextualMultiModifications actually work
+		// - TextualMultiModificationWorkbenchMarkerResolutionAdapter sorts correctly
+		val resource = createGeneralXtextProject("myProject").createFile("test.quickfixcrossreftestlanguage", '''
+			lowercase_a {}
+			lowercase_b {}
+			lowercase_c {}
+			lowercase_d {}
+			lowercase_e {}
+			lowercase_f {}
+		''')
+		val XtextEditor xtextEditor = IDE.openEditor(getActivePage(), resource) as XtextEditor;
+		val markers = getMarkers(resource)
+		assertContentsAndMarkers(resource, markers, '''
+			<0<lowercase_a>0> {}
+			<1<lowercase_b>1> {}
+			<2<lowercase_c>2> {}
+			<3<lowercase_d>3> {}
+			<4<lowercase_e>4> {}
+			<5<lowercase_f>5> {}
+			--------------------
+			0: message=lowercase
+			1: message=lowercase
+			2: message=lowercase
+			3: message=lowercase
+			4: message=lowercase
+			5: message=lowercase
+		''')
+
+		applyQuickfixOnMultipleMarkers(markers)
+		xtextEditor.doSave(null)
+		assertContentsAndMarkers(resource, '''
+			LOWERCASE_A_LOWERCASE_A {}
+			LOWERCASE_B_LOWERCASE_B {}
+			LOWERCASE_C_LOWERCASE_C {}
+			LOWERCASE_D_LOWERCASE_D {}
+			LOWERCASE_E_LOWERCASE_E {}
+			LOWERCASE_F_LOWERCASE_F {}
+			--------------------------
+			(no markers found)
+		''')
 	}
 
 }
