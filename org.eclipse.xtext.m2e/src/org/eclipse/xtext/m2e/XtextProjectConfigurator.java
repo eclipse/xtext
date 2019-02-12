@@ -73,7 +73,7 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		try {
 			languagePreferences.flush();
 		} catch (BackingStoreException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 
