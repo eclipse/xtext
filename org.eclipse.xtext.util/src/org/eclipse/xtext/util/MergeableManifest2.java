@@ -113,7 +113,7 @@ public class MergeableManifest2 implements Cloneable {
 			}
 			lineIndex++;
 			while (lineIndex < lines.size() && lines.get(lineIndex).startsWith(" ")) {
-				line += lines.get(lineIndex).substring(1);
+				line += newline + lines.get(lineIndex);
 				lineIndex++;
 			}
 			if (line.isEmpty()) {
@@ -250,7 +250,8 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(REQUIRE_BUNDLE);
 		if (oldBundles == null)
 			oldBundles = "";
-		BundleList resultList = BundleList.fromInput(oldBundles);
+		BundleList oldResultList = BundleList.fromInput(oldBundles, newline);
+		BundleList resultList = BundleList.fromInput(oldBundles, newline);
 		for (String bundle : requiredBundles) {
 			Bundle newBundle = Bundle.fromInput(bundle);
 			if (name != null && name.equals(newBundle.getName()))
@@ -258,8 +259,9 @@ public class MergeableManifest2 implements Cloneable {
 			resultList.mergeInto(newBundle);
 		}
 		String result = resultList.toString();
-		modified |= !oldBundles.equals(result);
-		if (!oldBundles.equals(result))
+		boolean changed = !oldResultList.toString().equals(result);
+		modified |= changed;
+		if (changed)
 			mainAttributes.put(REQUIRE_BUNDLE, result);
 	}
 
@@ -281,12 +283,14 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(IMPORT_PACKAGE);
 		if (oldBundles == null)
 			oldBundles = "";
-		BundleList resultList = BundleList.fromInput(oldBundles);
+		BundleList oldResultList = BundleList.fromInput(oldBundles, newline);
+		BundleList resultList = BundleList.fromInput(oldBundles, newline);
 		for (String bundle : importedPackages)
 			resultList.mergeInto(Bundle.fromInput(bundle));
 		String result = resultList.toString();
-		modified |= !oldBundles.equals(result);
-		if (!oldBundles.equals(result))
+		boolean changed = !oldResultList.toString().equals(result);
+		modified |= changed;
+		if (changed)
 			mainAttributes.put(IMPORT_PACKAGE, result);
 	}
 
@@ -308,12 +312,14 @@ public class MergeableManifest2 implements Cloneable {
 		String oldBundles = mainAttributes.get(EXPORT_PACKAGE);
 		if (oldBundles == null)
 			oldBundles = "";
-		BundleList resultList = BundleList.fromInput(oldBundles);
+		BundleList oldResultList = BundleList.fromInput(oldBundles, newline);
+		BundleList resultList = BundleList.fromInput(oldBundles, newline);
 		for (String bundle : exportedPackages)
 			resultList.mergeInto(Bundle.fromInput(bundle));
 		String result = resultList.toString();
-		modified |= !oldBundles.equals(result);
-		if (!oldBundles.equals(result))
+		boolean changed = !oldResultList.toString().equals(result);
+		modified |= changed;
+		if (changed)
 			mainAttributes.put(EXPORT_PACKAGE, result);
 	}
 
@@ -400,8 +406,8 @@ public class MergeableManifest2 implements Cloneable {
 			String key = entry.getKey();
 			if (key.equals(MANIFEST_VERSION) || key.equals(SIGNATURE_VERSION))
 				continue;
-			String value = entry.getValue();
-			writer.append(make512Safe(new StringBuffer(key + ": " + separateCommas(value)), newline));
+			String value = mainAttributes.get(entry.getKey());
+			writer.append(make512Safe(new StringBuffer(key + ": " + value), newline));
 		}
 	}
 
@@ -414,19 +420,9 @@ public class MergeableManifest2 implements Cloneable {
 				String value = child.getValue();
 				if (value.isEmpty())
 					continue;
-				writer.append(make512Safe(new StringBuffer(key + ": " + separateCommas(value)), newline));
+				writer.append(make512Safe(new StringBuffer(key + ": " + value), newline));
 			}
 		}
-	}
-
-	private String separateCommas(String value) {
-		String result = "";
-		String separator = "";
-		for (String part : splitAtCharHonorQuoting(value, ',')) {
-			result += separator + part;
-			separator = "," + newline + " ";
-		}
-		return result;
 	}
 
 	private static List<String> splitAtCharHonorQuoting(String value, char c) {
@@ -648,16 +644,18 @@ public class MergeableManifest2 implements Cloneable {
 	private static class BundleList {
 
 		private final List<Bundle> list;
+		private final String newline;
 
-		public BundleList(List<Bundle> list) {
+		public BundleList(List<Bundle> list, String newline) {
 			this.list = list;
+			this.newline = newline;
 		}
 
-		private static BundleList fromInput(String input) {
+		private static BundleList fromInput(String input, String newline) {
 			if (input.isEmpty())
-				return new BundleList(new ArrayList<>());
+				return new BundleList(new ArrayList<>(), newline);
 			return new BundleList(splitAtCharHonorQuoting(input, ',').stream().map(s -> Bundle.fromInput(s))
-					.collect(Collectors.toList()));
+					.collect(Collectors.toList()), newline);
 		}
 
 		public void mergeInto(Bundle newBundle) {
@@ -688,8 +686,10 @@ public class MergeableManifest2 implements Cloneable {
 					}
 				}
 			}
+			// in case we add a new bundle and there are already other bundles
+			// we write it on a new line for better readability
 			if (!merged)
-				list.add(newBundle);
+				list.add(Bundle.fromBundleWithNewName(newBundle, newline + " " + newBundle.getName()));
 		}
 
 		// Output is used by algorithm ... do not change for debugging purposes!
@@ -714,6 +714,12 @@ public class MergeableManifest2 implements Cloneable {
 			return new Bundle(input);
 		}
 
+		public static Bundle fromBundleWithNewName(Bundle bundle, String newName) {
+			if (bundle.getSuffix() == null)
+				return new Bundle(newName);
+			return new Bundle(newName + ";" + bundle.getSuffix());
+		}
+
 		public static Bundle fromNameVersion(String name, String version) {
 			return new Bundle(name + ";bundle-version=\"" + version + "\"");
 		}
@@ -731,11 +737,13 @@ public class MergeableManifest2 implements Cloneable {
 		}
 
 		public boolean hasSameName(Bundle other) {
-			return Objects.equals(getName(), other.getName());
+			// trim because prefix (such as newline) is encoded in the name
+			return Objects.equals(getName().trim(), other.getName().trim());
 		}
 
 		public String getName() {
-			return split.get(0);
+			// trim because prefix (such as newline) is encoded in the name
+			return split.get(0).trim();
 		}
 
 		public String getSuffix() {
@@ -761,7 +769,7 @@ public class MergeableManifest2 implements Cloneable {
 		// Output is used by algorithm ... do not change for debugging purposes!
 		@Override
 		public String toString() {
-			String bundleName = getName();
+			String bundleName = split.get(0); // Do not trim to not lose prefix
 			String bundleVersion = getVersion();
 			String bundleSuffix = getSuffix();
 			if (bundleVersion == null && bundleSuffix == null)
