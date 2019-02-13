@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -126,7 +126,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/milestones/S201901281525/\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
