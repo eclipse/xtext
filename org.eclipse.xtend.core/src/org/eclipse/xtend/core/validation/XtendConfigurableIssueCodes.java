@@ -37,6 +37,7 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(create(IssueCodes.ORPHAN_ELEMENT, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.WRONG_FILE, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.UNNECESSARY_MODIFIER, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME, SeverityConverter.SEVERITY_WARNING));
 		// overwrite xbase default
 		iAcceptor.accept(create(org.eclipse.xtext.validation.IssueCodes.COPY_JAVA_PROBLEMS, SeverityConverter.SEVERITY_ERROR));
 	}

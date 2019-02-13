@@ -66,8 +66,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.ICompositeModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.ITextualMultiModification;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
@@ -687,6 +687,39 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 	
+	@Fix(IssueCodes.MODIFIER_DOES_NOT_MATCH_TYPENAME)
+	public void addModifierAccordingToTypename(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String label = "Add missing abstract modifier.";
+		String description = "Add the abstract modifier to match naming conventions for the "
+				+ "type name. Delete final modifier if necessary.";
+		String image = null;
+
+		acceptor.accept(issue, label, description, image, new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XtendClass) {
+					int index = 0;
+					List<String> modifiers = ((XtendClass) element).getModifiers();
+					boolean modExist = !modifiers.isEmpty();
+
+					//remove final modifier if present, as type cannot be both final and abstract
+					modifiers.remove("final");
+
+					//add abstract
+					if (modifiers.contains("public") || modifiers.contains("package")) {
+						index++;
+					}
+					if (modExist) {
+						modifiers.add(index, "abstract");
+					} else {
+						// workaround for bug 721 - fallback to textual modification
+						internalDoAddAbstractKeyword(element, context);
+					}
+				}
+			}
+		});
+	}
+	
 	@Fix(IssueCodes.INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION)
 	public void changeJUnitMethodReturnTypeToVoid(final Issue issue, IssueResolutionAcceptor acceptor) {
 		// use the same label, description and image
@@ -730,6 +763,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			for (ILeafNode leafNode : clazzNode.getLeafNodes()) {
 				if (leafNode.getText().equals("class")) {
 					offset = leafNode.getOffset();
+					break;
 				}
 			}
 			ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
