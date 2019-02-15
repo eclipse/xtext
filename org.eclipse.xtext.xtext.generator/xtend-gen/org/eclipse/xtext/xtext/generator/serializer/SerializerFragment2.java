@@ -73,6 +73,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -1386,7 +1387,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     return ((ass == null) || GrammarUtil.isBooleanAssignment(ass));
   }
   
-  private String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
+  private String defaultValue(final AbstractElement ele, final AbstractRule rule, final Set<AbstractElement> visited) {
     String _switchResult = null;
     boolean _matched = false;
     boolean _add = visited.add(ele);
@@ -1405,16 +1406,33 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     if (!_matched) {
       if (ele instanceof Alternatives) {
         _matched=true;
-        _switchResult = this.defaultValue(IterableExtensions.<AbstractElement>head(((Alternatives)ele).getElements()), visited);
+        _switchResult = this.defaultValue(IterableExtensions.<AbstractElement>head(((Alternatives)ele).getElements()), rule, visited);
       }
     }
     if (!_matched) {
       if (ele instanceof Group) {
         _matched=true;
-        final Function1<AbstractElement, String> _function = (AbstractElement it) -> {
-          return this.defaultValue(it, visited);
-        };
-        _switchResult = IterableExtensions.join(ListExtensions.<AbstractElement, String>map(((Group)ele).getElements(), _function));
+        String _xifexpression = null;
+        if ((rule instanceof TerminalRule)) {
+          final Function1<AbstractElement, String> _function = (AbstractElement it) -> {
+            return this.defaultValue(it, rule, visited);
+          };
+          final Function1<String, Boolean> _function_1 = (String it) -> {
+            boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
+            return Boolean.valueOf((!_isNullOrEmpty));
+          };
+          _xifexpression = IterableExtensions.join(IterableExtensions.<String>filter(ListExtensions.<AbstractElement, String>map(((Group)ele).getElements(), _function), _function_1));
+        } else {
+          final Function1<AbstractElement, String> _function_2 = (AbstractElement it) -> {
+            return this.defaultValue(it, rule, visited);
+          };
+          final Function1<String, Boolean> _function_3 = (String it) -> {
+            boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
+            return Boolean.valueOf((!_isNullOrEmpty));
+          };
+          _xifexpression = IterableExtensions.join(IterableExtensions.<String>filter(ListExtensions.<AbstractElement, String>map(((Group)ele).getElements(), _function_2), _function_3), " ");
+        }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {
@@ -1426,7 +1444,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     if (!_matched) {
       if (ele instanceof RuleCall) {
         _matched=true;
-        _switchResult = this.defaultValue(((RuleCall)ele).getRule().getAlternatives(), visited);
+        _switchResult = this.defaultValue(((RuleCall)ele).getRule().getAlternatives(), ((RuleCall)ele).getRule(), visited);
       }
     }
     if (!_matched) {
@@ -1593,7 +1611,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("return \"");
-        String _convertToJavaString = Strings.convertToJavaString(SerializerFragment2.this.defaultValue(rule.getAlternatives(), CollectionLiterals.<AbstractElement>newHashSet()));
+        String _convertToJavaString = Strings.convertToJavaString(SerializerFragment2.this.defaultValue(rule.getAlternatives(), rule, CollectionLiterals.<AbstractElement>newHashSet()));
         _builder.append(_convertToJavaString, "\t");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();

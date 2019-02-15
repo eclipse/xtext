@@ -38,7 +38,7 @@ public class HiddenTerminalsTestLanguageSyntacticSequencer extends AbstractSynta
 	protected String getDatatypeRuleToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "rule;";
+		return "rule ;";
 	}
 	
 	@Override

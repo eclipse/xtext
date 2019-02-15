@@ -1,5 +1,7 @@
 package org.eclipse.xtext.parsetree.unassignedtext;
 
+import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.Model;
+import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
@@ -73,6 +75,19 @@ public class UnassignedTextTest extends AbstractXtextTests {
 		final String in = "terminals xyz 789 'yo' X";
 		final String out = "terminals abc 123 'abc' X";
 		String s = serialize(getModel(in)).trim();
+		assertEquals(out, s);
+	}
+	
+	@Test public void testGroup() throws Exception {
+		final String in = "group this is a test";
+		final String out = "group this is a test";
+		String s = serialize(getModel(in)).trim();
+		assertEquals(out, s);
+	}
+	
+	@Test public void testGroup_02() throws Exception {
+		final String out = "group this is a test";
+		String s = serialize(UnassignedtextFactory.eINSTANCE.createGroupRule()).trim();
 		assertEquals(out, s);
 	}
 }

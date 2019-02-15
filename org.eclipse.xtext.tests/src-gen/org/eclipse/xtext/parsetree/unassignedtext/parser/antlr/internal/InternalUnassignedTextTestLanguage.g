@@ -120,6 +120,15 @@ ruleModel returns [EObject current=null]
 			$current = $this_CommonTerminalsRule_4.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getModelAccess().getGroupRuleParserRuleCall_5());
+		}
+		this_GroupRule_5=ruleGroupRule
+		{
+			$current = $this_GroupRule_5.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -427,6 +436,82 @@ ruleCommonTerminalsRule returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleGroupRule
+entryRuleGroupRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getGroupRuleRule()); }
+	iv_ruleGroupRule=ruleGroupRule
+	{ $current=$iv_ruleGroupRule.current; }
+	EOF;
+
+// Rule GroupRule
+ruleGroupRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getGroupRuleAccess().getGroupRuleAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='group'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getGroupRuleAccess().getGroupKeyword_1());
+		}
+		{
+			newCompositeNode(grammarAccess.getGroupRuleAccess().getGroupDataTypeRuleParserRuleCall_2());
+		}
+		ruleGroupDataTypeRule
+		{
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleGroupDataTypeRule
+entryRuleGroupDataTypeRule returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getGroupDataTypeRuleRule()); }
+	iv_ruleGroupDataTypeRule=ruleGroupDataTypeRule
+	{ $current=$iv_ruleGroupDataTypeRule.current.getText(); }
+	EOF;
+
+// Rule GroupDataTypeRule
+ruleGroupDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='this'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getGroupDataTypeRuleAccess().getThisKeyword_0());
+		}
+		kw='is'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getGroupDataTypeRuleAccess().getIsKeyword_1());
+		}
+		kw='a'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getGroupDataTypeRuleAccess().getAKeyword_2());
+		}
+		kw='test'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getGroupDataTypeRuleAccess().getTestKeyword_3());
+		}
 	)
 ;
 

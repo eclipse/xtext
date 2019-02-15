@@ -6,6 +6,7 @@ package org.eclipse.xtext.parsetree.unassignedtext.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
@@ -30,12 +31,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cMultiRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDatatypeRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cCommonTerminalsRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cGroupRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//Model:
-		//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
+		//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule | GroupRule;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule
+		//CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule | GroupRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//CaseInsensitiveKeywordRule
@@ -52,6 +54,9 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CommonTerminalsRule
 		public RuleCall getCommonTerminalsRuleParserRuleCall_4() { return cCommonTerminalsRuleParserRuleCall_4; }
+		
+		//GroupRule
+		public RuleCall getGroupRuleParserRuleCall_5() { return cGroupRuleParserRuleCall_5; }
 	}
 	public class CaseInsensitiveKeywordRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.CaseInsensitiveKeywordRule");
@@ -234,6 +239,56 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getValIDTerminalRuleCall_4_0() { return cValIDTerminalRuleCall_4_0; }
 	}
+	public class GroupRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.GroupRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cGroupRuleAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cGroupKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cGroupDataTypeRuleParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//GroupRule:
+		//	{GroupRule} 'group' GroupDataTypeRule;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{GroupRule} 'group' GroupDataTypeRule
+		public Group getGroup() { return cGroup; }
+		
+		//{GroupRule}
+		public Action getGroupRuleAction_0() { return cGroupRuleAction_0; }
+		
+		//'group'
+		public Keyword getGroupKeyword_1() { return cGroupKeyword_1; }
+		
+		//GroupDataTypeRule
+		public RuleCall getGroupDataTypeRuleParserRuleCall_2() { return cGroupDataTypeRuleParserRuleCall_2; }
+	}
+	public class GroupDataTypeRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.GroupDataTypeRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cThisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cIsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cAKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cTestKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//GroupDataTypeRule:
+		//	'this' 'is' 'a' 'test';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'this' 'is' 'a' 'test'
+		public Group getGroup() { return cGroup; }
+		
+		//'this'
+		public Keyword getThisKeyword_0() { return cThisKeyword_0; }
+		
+		//'is'
+		public Keyword getIsKeyword_1() { return cIsKeyword_1; }
+		
+		//'a'
+		public Keyword getAKeyword_2() { return cAKeyword_2; }
+		
+		//'test'
+		public Keyword getTestKeyword_3() { return cTestKeyword_3; }
+	}
 	
 	
 	private final ModelElements pModel;
@@ -248,6 +303,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	private final DatatypeElements pDatatype;
 	private final Datatype2Elements pDatatype2;
 	private final CommonTerminalsRuleElements pCommonTerminalsRule;
+	private final GroupRuleElements pGroupRule;
+	private final GroupDataTypeRuleElements pGroupDataTypeRule;
 	
 	private final Grammar grammar;
 	
@@ -270,6 +327,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		this.pDatatype = new DatatypeElements();
 		this.pDatatype2 = new Datatype2Elements();
 		this.pCommonTerminalsRule = new CommonTerminalsRuleElements();
+		this.pGroupRule = new GroupRuleElements();
+		this.pGroupDataTypeRule = new GroupDataTypeRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -300,7 +359,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
+	//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule | GroupRule;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -401,6 +460,26 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getCommonTerminalsRuleRule() {
 		return getCommonTerminalsRuleAccess().getRule();
+	}
+	
+	//GroupRule:
+	//	{GroupRule} 'group' GroupDataTypeRule;
+	public GroupRuleElements getGroupRuleAccess() {
+		return pGroupRule;
+	}
+	
+	public ParserRule getGroupRuleRule() {
+		return getGroupRuleAccess().getRule();
+	}
+	
+	//GroupDataTypeRule:
+	//	'this' 'is' 'a' 'test';
+	public GroupDataTypeRuleElements getGroupDataTypeRuleAccess() {
+		return pGroupDataTypeRule;
+	}
+	
+	public ParserRule getGroupDataTypeRuleRule() {
+		return getGroupDataTypeRuleAccess().getRule();
 	}
 	
 	//terminal ID:

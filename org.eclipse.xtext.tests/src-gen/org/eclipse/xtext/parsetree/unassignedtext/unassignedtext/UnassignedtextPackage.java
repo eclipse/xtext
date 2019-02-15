@@ -215,6 +215,25 @@ public interface UnassignedtextPackage extends EPackage
    */
   int COMMON_TERMINALS_RULE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.GroupRuleImpl <em>Group Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.GroupRuleImpl
+   * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.UnassignedtextPackageImpl#getGroupRule()
+   * @generated
+   */
+  int GROUP_RULE = 6;
+
+  /**
+   * The number of structural features of the '<em>Group Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_RULE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.Model <em>Model</em>}'.
@@ -330,6 +349,16 @@ public interface UnassignedtextPackage extends EPackage
    * @generated
    */
   EAttribute getCommonTerminalsRule_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.GroupRule <em>Group Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Group Rule</em>'.
+   * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.GroupRule
+   * @generated
+   */
+  EClass getGroupRule();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -453,6 +482,16 @@ public interface UnassignedtextPackage extends EPackage
      * @generated
      */
     EAttribute COMMON_TERMINALS_RULE__VAL = eINSTANCE.getCommonTerminalsRule_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.GroupRuleImpl <em>Group Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.GroupRuleImpl
+     * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.UnassignedtextPackageImpl#getGroupRule()
+     * @generated
+     */
+    EClass GROUP_RULE = eINSTANCE.getGroupRule();
 
   }
 

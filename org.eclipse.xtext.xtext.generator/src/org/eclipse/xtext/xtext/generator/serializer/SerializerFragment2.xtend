@@ -499,14 +499,20 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 		return ass === null || ass.isBooleanAssignment
 	}
 
-	private def String defaultValue(AbstractElement ele, Set<AbstractElement> visited) {
+	private def String defaultValue(AbstractElement ele, AbstractRule rule, Set<AbstractElement> visited) {
 		switch (ele) {
 			case !visited.add(ele): ""
 			case ele.isOptionalCardinality(): ""
-			Alternatives: ele.elements.head.defaultValue(visited)
-			Group: ele.elements.map[defaultValue(visited)].join
+			Alternatives: ele.elements.head.defaultValue(rule, visited)
+			Group: 
+				if (rule instanceof TerminalRule) {
+					ele.elements.map[defaultValue(rule, visited)].filter[!isNullOrEmpty].join()
+				} else {
+					ele.elements.map[defaultValue(rule, visited)].filter[!isNullOrEmpty].join(" ")
+				}
+			
 			Keyword: ele.value
-			RuleCall: ele.rule.alternatives.defaultValue(visited)
+			RuleCall: ele.rule.alternatives.defaultValue(ele.rule, visited)
 			default: ''
 		}
 	}
@@ -549,7 +555,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 			protected String «rule.unassignedCalledTokenRuleName»(«EObject» semanticObject, «RuleCall» ruleCall, «INode» node) {
 				if (node != null)
 					return getTokenText(node);
-				return "«Strings.convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
+				return "«Strings.convertToJavaString(rule.alternatives.defaultValue(rule, newHashSet))»";
 			}
 		'''
 	}
