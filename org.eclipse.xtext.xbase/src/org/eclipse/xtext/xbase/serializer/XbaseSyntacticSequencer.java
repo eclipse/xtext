@@ -89,4 +89,11 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 		} else
 			acceptNodes(transition, nodes);
 	}
+	
+	@Override
+	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "[]";
+	}
 }

@@ -7,5 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.serializer;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.INode;
+
 public class XtypeSyntacticSequencer extends AbstractXtypeSyntacticSequencer {
+	
+	@Override
+	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "[]";
+	}
+	
 }

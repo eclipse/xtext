@@ -56,7 +56,7 @@ public class ContentAssistFragmentTestLangSyntacticSequencer extends AbstractSyn
 	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "[]";
+		return "[ ]";
 	}
 	
 	/**
