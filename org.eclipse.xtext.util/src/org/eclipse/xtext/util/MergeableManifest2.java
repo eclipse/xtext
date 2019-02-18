@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -56,6 +58,8 @@ public class MergeableManifest2 implements Cloneable {
 	private Map<String, Attributes> entries = new LinkedHashMap<>();
 	private boolean modified;
 
+	private Pattern emptyEntryPattern = newEmptyLinePattern();
+
 	/**
 	 * Create a new manifest from the given stream and with the given name. As
 	 * the stream is created by the caller the caller is also responsible for
@@ -68,6 +72,10 @@ public class MergeableManifest2 implements Cloneable {
 		this.name = name;
 		read(stream);
 		this.modified = false;
+	}
+
+	private Pattern newEmptyLinePattern() {
+		return Pattern.compile("," + newline + " [ \t]*," + newline + " ");
 	}
 
 	/**
@@ -90,6 +98,7 @@ public class MergeableManifest2 implements Cloneable {
 		this.name = toCopy.name;
 		this.version = toCopy.version;
 		this.newline = toCopy.newline;
+		this.emptyEntryPattern = newEmptyLinePattern();
 		this.mainAttributes.putAll(toCopy.mainAttributes);
 		this.entries.putAll(toCopy.entries);
 		this.modified = false;
@@ -135,6 +144,12 @@ public class MergeableManifest2 implements Cloneable {
 					bree = value;
 				} else if (name.equals(BUNDLE_ACTIVATOR)) {
 					bundleActivator = value;
+				} else if (name.equals(REQUIRE_BUNDLE) || name.equals(EXPORT_PACKAGE) || name.equals(IMPORT_PACKAGE)) {
+					// filter all entries from "Require-Bundle",
+					// "Export-Package" and "Import-Package" entries
+					// that are empty to fix manifest files that are invalid in
+					// this regard
+					value = filterEmptyBundles(value);
 				}
 				mainAttributes.put(name, value);
 			} else {
@@ -142,7 +157,17 @@ public class MergeableManifest2 implements Cloneable {
 			}
 		}
 		return lineIndex;
+	}
 
+	private String filterEmptyBundles(String bundleString) {
+		String result = bundleString.trim();
+		if (result.startsWith("," + newline + " "))
+			result = result.substring(("," + newline + " ").length(), result.length());
+		Matcher matcher = emptyEntryPattern.matcher(result);
+		result = matcher.replaceAll("," + newline + " ");
+		if (result.endsWith(","))
+			result = result.substring(0, result.length() - 1);
+		return result;
 	}
 
 	private void readEntries(List<String> lines, int startIndex) throws IOException {
@@ -375,6 +400,7 @@ public class MergeableManifest2 implements Cloneable {
 	 */
 	public void setLineDelimiter(String lineDelimeter) {
 		newline = lineDelimeter;
+		this.emptyEntryPattern = newEmptyLinePattern();
 	}
 
 	/**
@@ -655,7 +681,7 @@ public class MergeableManifest2 implements Cloneable {
 			if (input.isEmpty())
 				return new BundleList(new ArrayList<>(), newline);
 			return new BundleList(splitAtCharHonorQuoting(input, ',').stream().map(s -> Bundle.fromInput(s))
-					.collect(Collectors.toList()), newline);
+					.filter(b -> !"".equals(b.getName())).collect(Collectors.toList()), newline);
 		}
 
 		public void mergeInto(Bundle newBundle) {
@@ -688,8 +714,11 @@ public class MergeableManifest2 implements Cloneable {
 			}
 			// in case we add a new bundle and there are already other bundles
 			// we write it on a new line for better readability
-			if (!merged)
-				list.add(Bundle.fromBundleWithNewName(newBundle, newline + " " + newBundle.getName()));
+			if (!merged) {
+				if (!"".equals(newBundle.getName())) {
+					list.add(Bundle.fromBundleWithNewName(newBundle, newline + " " + newBundle.getName()));
+				}
+			}
 		}
 
 		// Output is used by algorithm ... do not change for debugging purposes!

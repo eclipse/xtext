@@ -815,6 +815,15 @@ public class MergeableManifest2Test {
 	}
 
 	@Test
+	public void addRequiredBundles_emptyBundlesAreIgnored() throws Exception {
+		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL);
+		manifest.addRequiredBundles("");
+
+		assertFalse(manifest.isModified());
+		assertEquals("Manifest-Version: 1.0" + NL + "Require-Bundle: a" + NL, write(manifest));
+	}
+
+	@Test
 	public void addExportedPackages_oneEntry() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
 		manifest.addExportedPackages("a");
@@ -860,6 +869,15 @@ public class MergeableManifest2Test {
 	}
 
 	@Test
+	public void addExportedPackage_emptyBundlesAreIgnored() throws Exception {
+		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Export-Package: a" + NL);
+		manifest.addExportedPackages("");
+
+		assertFalse(manifest.isModified());
+		assertEquals("Manifest-Version: 1.0" + NL + "Export-Package: a" + NL, write(manifest));
+	}
+
+	@Test
 	public void addImportedPackages_oneEntry() throws Exception {
 		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL);
 		manifest.addImportedPackages("a");
@@ -902,6 +920,15 @@ public class MergeableManifest2Test {
 
 		assertEquals("Manifest-Version: 1.0" + NL + "Import-Package: a;1.0," + NL + " b," + NL + " c," + NL + " d;2.1,"
 				+ NL + " e" + NL, write(manifest));
+	}
+
+	@Test
+	public void addImportedPackage_emptyBundlesAreIgnored() throws Exception {
+		MergeableManifest2 manifest = newManifest("Manifest-Version: 1.0" + NL + "Import-Package: a" + NL);
+		manifest.addImportedPackages("");
+
+		assertFalse(manifest.isModified());
+		assertEquals("Manifest-Version: 1.0" + NL + "Import-Package: a" + NL, write(manifest));
 	}
 
 	@Test
@@ -1301,6 +1328,85 @@ public class MergeableManifest2Test {
 		MergeableManifest2 newManifest = newManifest(content);
 		newManifest.addExportedPackages("test");
 		assertEquals(expectedNewContent, write(newManifest));
+	}
+
+	@Test
+	public void readWrite_emptyBundleEntriesAreFiltered() throws Exception {
+		// @formatter:off
+		String content =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+			"Bundle-Vendor: Eclipse Xtext" + NL + 
+			"Bundle-Version: 2.16.0.qualifier" + NL + 
+			"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+			"Bundle-ActivationPolicy: lazy" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			"    ," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types," + NL + 
+			" " + NL + 
+			"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+			"Export-Package: ," + NL + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine," + NL + 
+			" \t," + NL + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine.impl," + NL + 
+			" " + NL + 
+			"Import-Package: org.apache.log4j" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		String expected =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Bundle-Name: Xtext Homeautomation Example - Runtime" + NL + 
+			"Bundle-Vendor: Eclipse Xtext" + NL + 
+			"Bundle-Version: 2.16.0.qualifier" + NL + 
+			"Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true" + NL + 
+			"Bundle-ActivationPolicy: lazy" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types" + NL + 
+			"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
+			"Export-Package: org.eclipse.xtext.example.homeautomation.ruleEngine," + NL + 
+			" org.eclipse.xtext.example.homeautomation.ruleEngine.impl" + NL + 
+			"Import-Package: org.apache.log4j" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		assertEquals(expected, write(manifest));
+	}
+
+	@Test
+	public void readWrite_addRequiredBundle_emptyInOriginal_filteredEvenWhenAddingEmpty() throws Exception {
+		// @formatter:off
+		String content =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			"    ," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types," + NL + 
+			" " + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		String expected =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addRequiredBundles("");
+		
+		assertEquals(expected, write(manifest));
 	}
 
 	/**
