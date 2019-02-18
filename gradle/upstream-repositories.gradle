@@ -24,6 +24,7 @@ def jenkinsPipelineRepo = { jobName, branch ->
 }
 
 repositories {
+  mavenCentral()
   jcenter()
   if (findProperty('useJenkinsSnapshots') == 'true') {
     maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/$MVN_REPOPATH" }
