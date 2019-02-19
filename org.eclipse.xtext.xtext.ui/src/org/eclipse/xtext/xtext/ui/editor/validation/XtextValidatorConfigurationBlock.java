@@ -40,6 +40,7 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 		addComboBox(DISCOURAGED_RULE_NAME, Messages.XtextValidatorConfigurationBlock_15, section, defaultIndent);
 		addComboBox(DUPLICATE_ENUM_LITERAL, Messages.XtextValidatorConfigurationBlock_3, section, defaultIndent);
 		addComboBox(USAGE_OF_DEPRECATED_RULE, Messages.XtextValidatorConfigurationBlock_17, section, defaultIndent);
+		addComboBox(INVALID_FRAGMENT_AS_FIRST_RULE, Messages.XtextValidatorConfigurationBlock_18, section, defaultIndent);
 	}
 
 	protected void fillEcoreModelSection(Composite section, int defaultIndent) {
@@ -51,6 +52,7 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 		addComboBox(BIDIRECTIONAL_REFERENCE, Messages.XtextValidatorConfigurationBlock_7, section, defaultIndent);
 	}
 
+	@Override
 	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
 				SeverityConverter.SEVERITY_INFO, SeverityConverter.SEVERITY_IGNORE };
