@@ -258,6 +258,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					firstRule,
 					XtextPackage.Literals.ABSTRACT_RULE__NAME, 
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+		} 
+		else if (((ParserRule) firstRule).isFragment()) {
+			addIssue(
+					"The first rule must not be a fragment",
+					firstRule,
+					XtextPackage.Literals.PARSER_RULE__FRAGMENT,
+					INVALID_FRAGMENT_AS_FIRST_RULE);
 		}
 	}
 

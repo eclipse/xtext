@@ -47,6 +47,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String INVALID_ANNOTAION = ISSUE_CODE_PREFIX + "InvalidAnnotation";
 	public static final String USAGE_OF_DEPRECATED_RULE = ISSUE_CODE_PREFIX + "UsageOfDeprecatedRule";
 	
+	public static final String INVALID_FRAGMENT_AS_FIRST_RULE = ISSUE_CODE_PREFIX + "InvalidFragmentFirstRule";
 
 	@Override
 	protected void initialize(IAcceptor<PreferenceKey> acceptor) {
@@ -67,6 +68,8 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(BIDIRECTIONAL_REFERENCE, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(DISCOURAGED_RULE_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(USAGE_OF_DEPRECATED_RULE, SeverityConverter.SEVERITY_WARNING));
+		
+		acceptor.accept(create(INVALID_FRAGMENT_AS_FIRST_RULE, SeverityConverter.SEVERITY_ERROR));
 	}
 	
 }
