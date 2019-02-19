@@ -41,14 +41,13 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String DUPLICATE_ENUM_LITERAL = ISSUE_CODE_PREFIX + "DuplicateEnumLiteral";
 	public static final String BIDIRECTIONAL_REFERENCE = ISSUE_CODE_PREFIX + "BidirectionalReference";
 	public static final String CROSS_REFERENCE_IN_ALTERNATIVES = ISSUE_CODE_PREFIX + "CrossReferenceInAlternatives";
+	public static final String INVALID_FRAGMENT_AS_FIRST_RULE = ISSUE_CODE_PREFIX + "InvalidFragmentFirstRule";
 	
 	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
 	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
 	public static final String INVALID_ANNOTAION = ISSUE_CODE_PREFIX + "InvalidAnnotation";
 	public static final String USAGE_OF_DEPRECATED_RULE = ISSUE_CODE_PREFIX + "UsageOfDeprecatedRule";
 	
-	public static final String INVALID_FRAGMENT_AS_FIRST_RULE = ISSUE_CODE_PREFIX + "InvalidFragmentFirstRule";
-
 	@Override
 	protected void initialize(IAcceptor<PreferenceKey> acceptor) {
 		acceptor.accept(create(INVALID_ACTION_USAGE, SeverityConverter.SEVERITY_ERROR));
@@ -59,6 +58,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(INVALID_HIDDEN_TOKEN_FRAGMENT, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_INHERITED, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(CROSS_REFERENCE_IN_ALTERNATIVES, SeverityConverter.SEVERITY_ERROR));
+		acceptor.accept(create(INVALID_FRAGMENT_AS_FIRST_RULE, SeverityConverter.SEVERITY_ERROR));
 		
 		acceptor.accept(create(INVALID_METAMODEL_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_EXTERNAL, SeverityConverter.SEVERITY_WARNING));
@@ -69,7 +69,6 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(DISCOURAGED_RULE_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(USAGE_OF_DEPRECATED_RULE, SeverityConverter.SEVERITY_WARNING));
 		
-		acceptor.accept(create(INVALID_FRAGMENT_AS_FIRST_RULE, SeverityConverter.SEVERITY_ERROR));
 	}
 	
 }

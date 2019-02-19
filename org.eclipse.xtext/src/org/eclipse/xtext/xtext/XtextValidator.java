@@ -249,8 +249,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					firstRule, 
 					XtextPackage.Literals.ABSTRACT_RULE__NAME,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-		}
-		else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
+		} else if (GrammarUtil.isDatatypeRule((ParserRule) firstRule)) {
 			if (!containsAnyParserRule(g, new HashSet<Grammar>()))
 				return;
 			error(
@@ -258,8 +257,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					firstRule,
 					XtextPackage.Literals.ABSTRACT_RULE__NAME, 
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-		} 
-		else if (((ParserRule) firstRule).isFragment()) {
+		} else if (((ParserRule) firstRule).isFragment()) {
 			addIssue(
 					"The first rule must not be a fragment",
 					firstRule,
