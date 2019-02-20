@@ -255,6 +255,51 @@ ruleModel returns [EObject current=null]
 				afterParserOrEnumRuleCall();
 			}
 		)
+		    |
+		(
+			otherlv_22='#22'
+			{
+				newLeafNode(otherlv_22, grammarAccess.getModelAccess().getNumberSignDigitTwoDigitTwoKeyword_11_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getTwoChildListsParserRuleCall_11_1());
+			}
+			this_TwoChildLists_23=ruleTwoChildLists
+			{
+				$current = $this_TwoChildLists_23.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
+		    |
+		(
+			otherlv_24='#23'
+			{
+				newLeafNode(otherlv_24, grammarAccess.getModelAccess().getNumberSignDigitTwoDigitThreeKeyword_12_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getChildWithSubChildsParserRuleCall_12_1());
+			}
+			this_ChildWithSubChilds_25=ruleChildWithSubChilds
+			{
+				$current = $this_ChildWithSubChilds_25.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
+		    |
+		(
+			otherlv_26='#24'
+			{
+				newLeafNode(otherlv_26, grammarAccess.getModelAccess().getNumberSignDigitTwoDigitFourKeyword_13_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getTwoChildsParserRuleCall_13_1());
+			}
+			this_TwoChilds_27=ruleTwoChilds
+			{
+				$current = $this_TwoChilds_27.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -506,6 +551,292 @@ ruleOptionalChild returns [EObject current=null]
 				}
 			)
 		)?
+	)
+;
+
+// Entry rule entryRuleTwoChildLists
+entryRuleTwoChildLists returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTwoChildListsRule()); }
+	iv_ruleTwoChildLists=ruleTwoChildLists
+	{ $current=$iv_ruleTwoChildLists.current; }
+	EOF;
+
+// Rule TwoChildLists
+ruleTwoChildLists returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='{'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getTwoChildListsAccess().getLeftCurlyBracketKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTwoChildListsAccess().getDirectChildrenMandatoryValueParserRuleCall_1_0());
+				}
+				lv_directChildren_1_0=ruleMandatoryValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTwoChildListsRule());
+					}
+					add(
+						$current,
+						"directChildren",
+						lv_directChildren_1_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+		otherlv_2='children1'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getTwoChildListsAccess().getChildren1Keyword_2());
+		}
+		otherlv_3='{'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getTwoChildListsAccess().getLeftCurlyBracketKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTwoChildListsAccess().getChildsListMandatoryChildListParserRuleCall_4_0());
+				}
+				lv_childsList_4_0=ruleMandatoryChildList
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTwoChildListsRule());
+					}
+					set(
+						$current,
+						"childsList",
+						lv_childsList_4_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryChildList");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getTwoChildListsAccess().getRightCurlyBracketKeyword_5());
+		}
+		otherlv_6='}'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getTwoChildListsAccess().getRightCurlyBracketKeyword_6());
+		}
+	)
+;
+
+// Entry rule entryRuleTwoChilds
+entryRuleTwoChilds returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTwoChildsRule()); }
+	iv_ruleTwoChilds=ruleTwoChilds
+	{ $current=$iv_ruleTwoChilds.current; }
+	EOF;
+
+// Rule TwoChilds
+ruleTwoChilds returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getTwoChildsAccess().getTwoChildsAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='direct'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getTwoChildsAccess().getDirectKeyword_1());
+		}
+		otherlv_2=':'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getTwoChildsAccess().getColonKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTwoChildsAccess().getDirectChildMandatoryValueParserRuleCall_3_0());
+				}
+				lv_directChild_3_0=ruleMandatoryValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTwoChildsRule());
+					}
+					set(
+						$current,
+						"directChild",
+						lv_directChild_3_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		otherlv_4='child'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getTwoChildsAccess().getChildKeyword_4());
+		}
+		otherlv_5=':'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getTwoChildsAccess().getColonKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTwoChildsAccess().getOptChildOptionalChildParserRuleCall_6_0());
+				}
+				lv_optChild_6_0=ruleOptionalChild
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTwoChildsRule());
+					}
+					set(
+						$current,
+						"optChild",
+						lv_optChild_6_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.OptionalChild");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleChildWithSubChilds
+entryRuleChildWithSubChilds returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getChildWithSubChildsRule()); }
+	iv_ruleChildWithSubChilds=ruleChildWithSubChilds
+	{ $current=$iv_ruleChildWithSubChilds.current; }
+	EOF;
+
+// Rule ChildWithSubChilds
+ruleChildWithSubChilds returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getChildWithSubChildsAccess().getChildWithSubChildsAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getChildWithSubChildsAccess().getChildrenChildWithSubChildParserRuleCall_1_0());
+				}
+				lv_children_1_0=ruleChildWithSubChild
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getChildWithSubChildsRule());
+					}
+					add(
+						$current,
+						"children",
+						lv_children_1_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.ChildWithSubChild");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleChildWithSubChild
+entryRuleChildWithSubChild returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getChildWithSubChildRule()); }
+	iv_ruleChildWithSubChild=ruleChildWithSubChild
+	{ $current=$iv_ruleChildWithSubChild.current; }
+	EOF;
+
+// Rule ChildWithSubChild
+ruleChildWithSubChild returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getChildWithSubChildAccess().getChildWithSubChildAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='subs'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getChildWithSubChildAccess().getSubsKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getChildWithSubChildAccess().getSubChildsSubChildParserRuleCall_2_0());
+				}
+				lv_subChilds_2_0=ruleSubChild
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getChildWithSubChildRule());
+					}
+					add(
+						$current,
+						"subChilds",
+						lv_subChilds_2_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.SubChild");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleSubChild
+entryRuleSubChild returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSubChildRule()); }
+	iv_ruleSubChild=ruleSubChild
+	{ $current=$iv_ruleSubChild.current; }
+	EOF;
+
+// Rule SubChild
+ruleSubChild returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_ID
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getSubChildAccess().getNameIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getSubChildRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
+			}
+		)
 	)
 ;
 

@@ -388,14 +388,18 @@ public class PartialSerializer {
 			for (ListChange lc : change.getListChanges()) {
 				children.addAll(lc.getReferenceValues());
 			}
-			for (Object obj : (List<?>) owner.getSemanticElement().eGet(feature)) {
-				children.add((EObject) obj);
-			}
 			List<IEObjectRegion> result = Lists.newArrayList();
 			for (EObject obj : children) {
 				IEObjectRegion region = access.regionForEObject(obj);
 				if (region != null) {
 					result.add(region);
+				}
+			}
+			for (IAstRegion astRegion : owner.getAstRegions()) {
+				if (astRegion instanceof IEObjectRegion) {
+					if (feature.equals(astRegion.getContainingFeature())) {
+						result.add((IEObjectRegion) astRegion);
+					}
 				}
 			}
 			Collections.sort(result, (a, b) -> a.getOffset() - b.getOffset());
@@ -413,9 +417,12 @@ public class PartialSerializer {
 			if (oldValue != null) {
 				return access.regionForEObject(oldValue);
 			}
-			EObject value = (EObject) owner.getSemanticElement().eGet(feature);
-			if (value != null) {
-				return access.regionForEObject(value);
+			for (IAstRegion astRegion : owner.getAstRegions()) {
+				if (astRegion instanceof IEObjectRegion) {
+					if (feature.equals(astRegion.getContainingFeature())) {
+						return  astRegion;
+					}
+				}
 			}
 			return null;
 		} else {

@@ -16,15 +16,23 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
     public static final int RULE_SL_COMMENT=8;
     public static final int T__19=19;
     public static final int T__15=15;
+    public static final int T__37=37;
     public static final int T__16=16;
+    public static final int T__38=38;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__11=11;
+    public static final int T__33=33;
     public static final int T__12=12;
+    public static final int T__34=34;
     public static final int T__13=13;
+    public static final int T__35=35;
     public static final int T__14=14;
+    public static final int T__36=36;
     public static final int EOF=-1;
     public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int RULE_ANY_OTHER=10;
@@ -310,10 +318,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:23:7: ( 'kw1' )
-            // InternalPartialSerializationTestLanguage.g:23:9: 'kw1'
+            // InternalPartialSerializationTestLanguage.g:23:7: ( '#22' )
+            // InternalPartialSerializationTestLanguage.g:23:9: '#22'
             {
-            match("kw1"); 
+            match("#22"); 
 
 
             }
@@ -331,10 +339,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:24:7: ( 'kw2' )
-            // InternalPartialSerializationTestLanguage.g:24:9: 'kw2'
+            // InternalPartialSerializationTestLanguage.g:24:7: ( '#23' )
+            // InternalPartialSerializationTestLanguage.g:24:9: '#23'
             {
-            match("kw2"); 
+            match("#23"); 
 
 
             }
@@ -352,10 +360,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:25:7: ( 'import' )
-            // InternalPartialSerializationTestLanguage.g:25:9: 'import'
+            // InternalPartialSerializationTestLanguage.g:25:7: ( '#24' )
+            // InternalPartialSerializationTestLanguage.g:25:9: '#24'
             {
-            match("import"); 
+            match("#24"); 
 
 
             }
@@ -373,10 +381,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:26:7: ( 'refs' )
-            // InternalPartialSerializationTestLanguage.g:26:9: 'refs'
+            // InternalPartialSerializationTestLanguage.g:26:7: ( 'kw1' )
+            // InternalPartialSerializationTestLanguage.g:26:9: 'kw1'
             {
-            match("refs"); 
+            match("kw1"); 
 
 
             }
@@ -394,10 +402,11 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:27:7: ( '{' )
-            // InternalPartialSerializationTestLanguage.g:27:9: '{'
+            // InternalPartialSerializationTestLanguage.g:27:7: ( 'kw2' )
+            // InternalPartialSerializationTestLanguage.g:27:9: 'kw2'
             {
-            match('{'); 
+            match("kw2"); 
+
 
             }
 
@@ -414,10 +423,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:28:7: ( '}' )
-            // InternalPartialSerializationTestLanguage.g:28:9: '}'
+            // InternalPartialSerializationTestLanguage.g:28:7: ( '{' )
+            // InternalPartialSerializationTestLanguage.g:28:9: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -434,10 +443,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:29:7: ( 'ref' )
-            // InternalPartialSerializationTestLanguage.g:29:9: 'ref'
+            // InternalPartialSerializationTestLanguage.g:29:7: ( 'children1' )
+            // InternalPartialSerializationTestLanguage.g:29:9: 'children1'
             {
-            match("ref"); 
+            match("children1"); 
 
 
             }
@@ -455,10 +464,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:30:7: ( '.' )
-            // InternalPartialSerializationTestLanguage.g:30:9: '.'
+            // InternalPartialSerializationTestLanguage.g:30:7: ( '}' )
+            // InternalPartialSerializationTestLanguage.g:30:9: '}'
             {
-            match('.'); 
+            match('}'); 
 
             }
 
@@ -470,15 +479,181 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
     }
     // $ANTLR end "T__30"
 
+    // $ANTLR start "T__31"
+    public final void mT__31() throws RecognitionException {
+        try {
+            int _type = T__31;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:31:7: ( 'direct' )
+            // InternalPartialSerializationTestLanguage.g:31:9: 'direct'
+            {
+            match("direct"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__31"
+
+    // $ANTLR start "T__32"
+    public final void mT__32() throws RecognitionException {
+        try {
+            int _type = T__32;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:32:7: ( ':' )
+            // InternalPartialSerializationTestLanguage.g:32:9: ':'
+            {
+            match(':'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__32"
+
+    // $ANTLR start "T__33"
+    public final void mT__33() throws RecognitionException {
+        try {
+            int _type = T__33;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:33:7: ( 'child' )
+            // InternalPartialSerializationTestLanguage.g:33:9: 'child'
+            {
+            match("child"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__33"
+
+    // $ANTLR start "T__34"
+    public final void mT__34() throws RecognitionException {
+        try {
+            int _type = T__34;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:34:7: ( 'subs' )
+            // InternalPartialSerializationTestLanguage.g:34:9: 'subs'
+            {
+            match("subs"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__34"
+
+    // $ANTLR start "T__35"
+    public final void mT__35() throws RecognitionException {
+        try {
+            int _type = T__35;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:35:7: ( 'import' )
+            // InternalPartialSerializationTestLanguage.g:35:9: 'import'
+            {
+            match("import"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__35"
+
+    // $ANTLR start "T__36"
+    public final void mT__36() throws RecognitionException {
+        try {
+            int _type = T__36;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:36:7: ( 'refs' )
+            // InternalPartialSerializationTestLanguage.g:36:9: 'refs'
+            {
+            match("refs"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__36"
+
+    // $ANTLR start "T__37"
+    public final void mT__37() throws RecognitionException {
+        try {
+            int _type = T__37;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:37:7: ( 'ref' )
+            // InternalPartialSerializationTestLanguage.g:37:9: 'ref'
+            {
+            match("ref"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__37"
+
+    // $ANTLR start "T__38"
+    public final void mT__38() throws RecognitionException {
+        try {
+            int _type = T__38;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPartialSerializationTestLanguage.g:38:7: ( '.' )
+            // InternalPartialSerializationTestLanguage.g:38:9: '.'
+            {
+            match('.'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__38"
+
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2167:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalPartialSerializationTestLanguage.g:2167:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPartialSerializationTestLanguage.g:3097:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalPartialSerializationTestLanguage.g:3097:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalPartialSerializationTestLanguage.g:2167:11: ( '^' )?
+            // InternalPartialSerializationTestLanguage.g:3097:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -487,7 +662,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:2167:11: '^'
+                    // InternalPartialSerializationTestLanguage.g:3097:11: '^'
                     {
                     match('^'); 
 
@@ -505,7 +680,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalPartialSerializationTestLanguage.g:2167:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPartialSerializationTestLanguage.g:3097:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -554,10 +729,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2169:10: ( ( '0' .. '9' )+ )
-            // InternalPartialSerializationTestLanguage.g:2169:12: ( '0' .. '9' )+
+            // InternalPartialSerializationTestLanguage.g:3099:10: ( ( '0' .. '9' )+ )
+            // InternalPartialSerializationTestLanguage.g:3099:12: ( '0' .. '9' )+
             {
-            // InternalPartialSerializationTestLanguage.g:2169:12: ( '0' .. '9' )+
+            // InternalPartialSerializationTestLanguage.g:3099:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -571,7 +746,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:2169:13: '0' .. '9'
+            	    // InternalPartialSerializationTestLanguage.g:3099:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -603,10 +778,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2171:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalPartialSerializationTestLanguage.g:2171:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPartialSerializationTestLanguage.g:3101:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalPartialSerializationTestLanguage.g:3101:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalPartialSerializationTestLanguage.g:2171:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPartialSerializationTestLanguage.g:3101:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -624,10 +799,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:2171:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalPartialSerializationTestLanguage.g:3101:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalPartialSerializationTestLanguage.g:2171:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalPartialSerializationTestLanguage.g:3101:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -643,7 +818,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:2171:21: '\\\\' .
+                    	    // InternalPartialSerializationTestLanguage.g:3101:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -651,7 +826,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPartialSerializationTestLanguage.g:2171:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalPartialSerializationTestLanguage.g:3101:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -676,10 +851,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPartialSerializationTestLanguage.g:2171:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalPartialSerializationTestLanguage.g:3101:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalPartialSerializationTestLanguage.g:2171:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalPartialSerializationTestLanguage.g:3101:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -695,7 +870,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:2171:54: '\\\\' .
+                    	    // InternalPartialSerializationTestLanguage.g:3101:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -703,7 +878,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPartialSerializationTestLanguage.g:2171:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalPartialSerializationTestLanguage.g:3101:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -746,12 +921,12 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2173:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalPartialSerializationTestLanguage.g:2173:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalPartialSerializationTestLanguage.g:3103:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalPartialSerializationTestLanguage.g:3103:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalPartialSerializationTestLanguage.g:2173:24: ( options {greedy=false; } : . )*
+            // InternalPartialSerializationTestLanguage.g:3103:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -776,7 +951,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:2173:52: .
+            	    // InternalPartialSerializationTestLanguage.g:3103:52: .
             	    {
             	    matchAny(); 
 
@@ -806,12 +981,12 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2175:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalPartialSerializationTestLanguage.g:2175:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalPartialSerializationTestLanguage.g:3105:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalPartialSerializationTestLanguage.g:3105:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalPartialSerializationTestLanguage.g:2175:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalPartialSerializationTestLanguage.g:3105:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -824,7 +999,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:2175:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalPartialSerializationTestLanguage.g:3105:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -844,7 +1019,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalPartialSerializationTestLanguage.g:2175:40: ( ( '\\r' )? '\\n' )?
+            // InternalPartialSerializationTestLanguage.g:3105:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -853,9 +1028,9 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:2175:41: ( '\\r' )? '\\n'
+                    // InternalPartialSerializationTestLanguage.g:3105:41: ( '\\r' )? '\\n'
                     {
-                    // InternalPartialSerializationTestLanguage.g:2175:41: ( '\\r' )?
+                    // InternalPartialSerializationTestLanguage.g:3105:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -864,7 +1039,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalPartialSerializationTestLanguage.g:2175:41: '\\r'
+                            // InternalPartialSerializationTestLanguage.g:3105:41: '\\r'
                             {
                             match('\r'); 
 
@@ -896,10 +1071,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2177:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalPartialSerializationTestLanguage.g:2177:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPartialSerializationTestLanguage.g:3107:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalPartialSerializationTestLanguage.g:3107:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalPartialSerializationTestLanguage.g:2177:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPartialSerializationTestLanguage.g:3107:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -953,8 +1128,8 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:2179:16: ( . )
-            // InternalPartialSerializationTestLanguage.g:2179:18: .
+            // InternalPartialSerializationTestLanguage.g:3109:16: ( . )
+            // InternalPartialSerializationTestLanguage.g:3109:18: .
             {
             matchAny(); 
 
@@ -969,8 +1144,8 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalPartialSerializationTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=27;
+        // InternalPartialSerializationTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=35;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -1114,49 +1289,105 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                 }
                 break;
             case 21 :
-                // InternalPartialSerializationTestLanguage.g:1:130: RULE_ID
+                // InternalPartialSerializationTestLanguage.g:1:130: T__31
+                {
+                mT__31(); 
+
+                }
+                break;
+            case 22 :
+                // InternalPartialSerializationTestLanguage.g:1:136: T__32
+                {
+                mT__32(); 
+
+                }
+                break;
+            case 23 :
+                // InternalPartialSerializationTestLanguage.g:1:142: T__33
+                {
+                mT__33(); 
+
+                }
+                break;
+            case 24 :
+                // InternalPartialSerializationTestLanguage.g:1:148: T__34
+                {
+                mT__34(); 
+
+                }
+                break;
+            case 25 :
+                // InternalPartialSerializationTestLanguage.g:1:154: T__35
+                {
+                mT__35(); 
+
+                }
+                break;
+            case 26 :
+                // InternalPartialSerializationTestLanguage.g:1:160: T__36
+                {
+                mT__36(); 
+
+                }
+                break;
+            case 27 :
+                // InternalPartialSerializationTestLanguage.g:1:166: T__37
+                {
+                mT__37(); 
+
+                }
+                break;
+            case 28 :
+                // InternalPartialSerializationTestLanguage.g:1:172: T__38
+                {
+                mT__38(); 
+
+                }
+                break;
+            case 29 :
+                // InternalPartialSerializationTestLanguage.g:1:178: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 22 :
-                // InternalPartialSerializationTestLanguage.g:1:138: RULE_INT
+            case 30 :
+                // InternalPartialSerializationTestLanguage.g:1:186: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 23 :
-                // InternalPartialSerializationTestLanguage.g:1:147: RULE_STRING
+            case 31 :
+                // InternalPartialSerializationTestLanguage.g:1:195: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 24 :
-                // InternalPartialSerializationTestLanguage.g:1:159: RULE_ML_COMMENT
+            case 32 :
+                // InternalPartialSerializationTestLanguage.g:1:207: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 25 :
-                // InternalPartialSerializationTestLanguage.g:1:175: RULE_SL_COMMENT
+            case 33 :
+                // InternalPartialSerializationTestLanguage.g:1:223: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 26 :
-                // InternalPartialSerializationTestLanguage.g:1:191: RULE_WS
+            case 34 :
+                // InternalPartialSerializationTestLanguage.g:1:239: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 27 :
-                // InternalPartialSerializationTestLanguage.g:1:199: RULE_ANY_OTHER
+            case 35 :
+                // InternalPartialSerializationTestLanguage.g:1:247: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1170,73 +1401,101 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\2\uffff\1\20\3\30\3\uffff\1\20\2\uffff\3\20\3\uffff\1\47\1\52\3\uffff\1\30\1\uffff\2\30\20\uffff\1\57\1\60\1\30\1\63\2\uffff\1\30\1\65\1\uffff\1\30\1\uffff\1\67\1\uffff";
+        "\2\uffff\1\24\1\34\1\uffff\1\34\1\uffff\1\34\1\uffff\3\34\1\uffff\1\24\2\uffff\3\24\3\uffff\1\57\1\65\3\uffff\1\34\2\uffff\1\34\1\uffff\1\34\1\uffff\3\34\21\uffff\1\75\1\76\4\34\1\104\2\uffff\2\34\1\107\1\34\1\111\1\uffff\1\113\1\34\1\uffff\1\34\1\uffff\1\34\1\uffff\1\117\1\120\1\34\2\uffff\1\34\1\123\1\uffff";
     static final String DFA12_eofS =
-        "\70\uffff";
+        "\124\uffff";
     static final String DFA12_minS =
-        "\1\0\1\uffff\1\61\1\167\1\155\1\145\3\uffff\1\101\2\uffff\2\0\1\52\3\uffff\2\60\3\uffff\1\61\1\uffff\1\160\1\146\20\uffff\2\60\1\157\1\60\2\uffff\1\162\1\60\1\uffff\1\164\1\uffff\1\60\1\uffff";
+        "\1\0\1\uffff\1\61\1\167\1\uffff\1\150\1\uffff\1\151\1\uffff\1\165\1\155\1\145\1\uffff\1\101\2\uffff\2\0\1\52\3\uffff\2\60\3\uffff\1\61\2\uffff\1\151\1\uffff\1\162\1\uffff\1\142\1\160\1\146\21\uffff\2\60\1\154\1\145\1\163\1\157\1\60\2\uffff\1\144\1\143\1\60\1\162\1\60\1\uffff\1\60\1\164\1\uffff\1\164\1\uffff\1\145\1\uffff\2\60\1\156\2\uffff\1\61\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\uffff\1\65\1\167\1\155\1\145\3\uffff\1\172\2\uffff\2\uffff\1\57\3\uffff\1\63\1\61\3\uffff\1\62\1\uffff\1\160\1\146\20\uffff\2\172\1\157\1\172\2\uffff\1\162\1\172\1\uffff\1\164\1\uffff\1\172\1\uffff";
+        "\1\uffff\1\uffff\1\65\1\167\1\uffff\1\150\1\uffff\1\151\1\uffff\1\165\1\155\1\145\1\uffff\1\172\2\uffff\2\uffff\1\57\3\uffff\1\63\1\64\3\uffff\1\62\2\uffff\1\151\1\uffff\1\162\1\uffff\1\142\1\160\1\146\21\uffff\2\172\1\154\1\145\1\163\1\157\1\172\2\uffff\1\144\1\143\1\172\1\162\1\172\1\uffff\1\172\1\164\1\uffff\1\164\1\uffff\1\145\1\uffff\2\172\1\156\2\uffff\1\61\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\4\uffff\1\21\1\22\1\24\1\uffff\1\25\1\26\3\uffff\1\32\1\33\1\1\2\uffff\1\4\1\5\1\6\1\uffff\1\25\2\uffff\1\21\1\22\1\24\1\26\1\27\1\30\1\31\1\32\1\7\1\10\1\11\1\12\1\2\1\13\1\14\1\3\4\uffff\1\15\1\16\2\uffff\1\23\1\uffff\1\20\1\uffff\1\17";
+        "\1\uffff\1\1\2\uffff\1\22\1\uffff\1\24\1\uffff\1\26\3\uffff\1\34\1\uffff\1\35\1\36\3\uffff\1\42\1\43\1\1\2\uffff\1\4\1\5\1\6\1\uffff\1\35\1\22\1\uffff\1\24\1\uffff\1\26\3\uffff\1\34\1\36\1\37\1\40\1\41\1\42\1\7\1\10\1\11\1\12\1\2\1\13\1\14\1\15\1\16\1\17\1\3\7\uffff\1\20\1\21\5\uffff\1\33\2\uffff\1\30\1\uffff\1\32\1\uffff\1\27\3\uffff\1\25\1\31\2\uffff\1\23";
     static final String DFA12_specialS =
-        "\1\1\13\uffff\1\0\1\2\52\uffff}>";
+        "\1\2\17\uffff\1\0\1\1\102\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\20\2\17\2\20\1\17\22\20\1\17\1\20\1\14\1\2\3\20\1\15\6\20\1\10\1\16\12\13\1\20\1\1\5\20\32\12\3\20\1\11\1\12\1\20\10\12\1\4\1\12\1\3\6\12\1\5\10\12\1\6\1\20\1\7\uff82\20",
+            "\11\24\2\23\2\24\1\23\22\24\1\23\1\24\1\20\1\2\3\24\1\21\6\24\1\14\1\22\12\17\1\10\1\1\5\24\32\16\3\24\1\15\1\16\1\24\2\16\1\5\1\7\4\16\1\12\1\16\1\3\6\16\1\13\1\11\7\16\1\4\1\24\1\6\uff82\24",
             "",
-            "\1\22\1\23\1\24\1\25\1\26",
-            "\1\27",
-            "\1\31",
-            "\1\32",
+            "\1\26\1\27\1\30\1\31\1\32",
+            "\1\33",
             "",
+            "\1\36",
             "",
+            "\1\40",
             "",
-            "\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\42",
+            "\1\43",
+            "\1\44",
             "",
-            "",
-            "\0\37",
-            "\0\37",
-            "\1\40\4\uffff\1\41",
-            "",
+            "\32\34\4\uffff\1\34\1\uffff\32\34",
             "",
             "",
-            "\1\43\1\44\1\45\1\46",
-            "\1\50\1\51",
-            "",
-            "",
-            "",
-            "\1\53\1\54",
-            "",
-            "\1\55",
-            "\1\56",
+            "\0\47",
+            "\0\47",
+            "\1\50\4\uffff\1\51",
             "",
             "",
             "",
+            "\1\53\1\54\1\55\1\56",
+            "\1\60\1\61\1\62\1\63\1\64",
             "",
             "",
             "",
+            "\1\66\1\67",
             "",
             "",
+            "\1\70",
             "",
+            "\1\71",
             "",
-            "",
-            "",
+            "\1\72",
+            "\1\73",
+            "\1\74",
             "",
             "",
             "",
             "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\61",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\22\30\1\62\7\30",
             "",
             "",
-            "\1\64",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
-            "\1\66",
             "",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\1\77",
+            "\1\100",
+            "\1\101",
+            "\1\102",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\22\34\1\103\7\34",
+            "",
+            "",
+            "\1\105",
+            "\1\106",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\1\110",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\21\34\1\112\10\34",
+            "\1\114",
+            "",
+            "\1\115",
+            "",
+            "\1\116",
+            "",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\1\121",
+            "",
+            "",
+            "\1\122",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             ""
     };
 
@@ -1270,23 +1529,33 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_12 = input.LA(1);
+                        int LA12_16 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFF')) ) {s = 31;}
+                        if ( ((LA12_16>='\u0000' && LA12_16<='\uFFFF')) ) {s = 39;}
 
-                        else s = 16;
+                        else s = 20;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA12_17 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_17>='\u0000' && LA12_17<='\uFFFF')) ) {s = 39;}
+
+                        else s = 20;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1296,41 +1565,39 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                         else if ( (LA12_0=='k') ) {s = 3;}
 
-                        else if ( (LA12_0=='i') ) {s = 4;}
+                        else if ( (LA12_0=='{') ) {s = 4;}
 
-                        else if ( (LA12_0=='r') ) {s = 5;}
+                        else if ( (LA12_0=='c') ) {s = 5;}
 
-                        else if ( (LA12_0=='{') ) {s = 6;}
+                        else if ( (LA12_0=='}') ) {s = 6;}
 
-                        else if ( (LA12_0=='}') ) {s = 7;}
+                        else if ( (LA12_0=='d') ) {s = 7;}
 
-                        else if ( (LA12_0=='.') ) {s = 8;}
+                        else if ( (LA12_0==':') ) {s = 8;}
 
-                        else if ( (LA12_0=='^') ) {s = 9;}
+                        else if ( (LA12_0=='s') ) {s = 9;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='h')||LA12_0=='j'||(LA12_0>='l' && LA12_0<='q')||(LA12_0>='s' && LA12_0<='z')) ) {s = 10;}
+                        else if ( (LA12_0=='i') ) {s = 10;}
 
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 11;}
+                        else if ( (LA12_0=='r') ) {s = 11;}
 
-                        else if ( (LA12_0=='\"') ) {s = 12;}
+                        else if ( (LA12_0=='.') ) {s = 12;}
 
-                        else if ( (LA12_0=='\'') ) {s = 13;}
+                        else if ( (LA12_0=='^') ) {s = 13;}
 
-                        else if ( (LA12_0=='/') ) {s = 14;}
+                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='b')||(LA12_0>='e' && LA12_0<='h')||LA12_0=='j'||(LA12_0>='l' && LA12_0<='q')||(LA12_0>='t' && LA12_0<='z')) ) {s = 14;}
 
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 15;}
+                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 15;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||LA12_0==':'||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 16;}
+                        else if ( (LA12_0=='\"') ) {s = 16;}
 
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_13 = input.LA(1);
+                        else if ( (LA12_0=='\'') ) {s = 17;}
 
-                        s = -1;
-                        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFF')) ) {s = 31;}
+                        else if ( (LA12_0=='/') ) {s = 18;}
 
-                        else s = 16;
+                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 19;}
+
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 20;}
 
                         if ( s>=0 ) return s;
                         break;

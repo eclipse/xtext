@@ -303,6 +303,191 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
   int OPTIONAL_CHILD_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildListsImpl <em>Two Child Lists</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildListsImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getTwoChildLists()
+   * @generated
+   */
+  int TWO_CHILD_LISTS = 7;
+
+  /**
+   * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILD_LISTS__CLAZZ = MODEL__CLAZZ;
+
+  /**
+   * The feature id for the '<em><b>Direct Children</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILD_LISTS__DIRECT_CHILDREN = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Childs List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILD_LISTS__CHILDS_LIST = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Two Child Lists</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILD_LISTS_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildsImpl <em>Two Childs</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildsImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getTwoChilds()
+   * @generated
+   */
+  int TWO_CHILDS = 8;
+
+  /**
+   * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILDS__CLAZZ = MODEL__CLAZZ;
+
+  /**
+   * The feature id for the '<em><b>Direct Child</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILDS__DIRECT_CHILD = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Opt Child</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILDS__OPT_CHILD = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Two Childs</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_CHILDS_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildsImpl <em>Child With Sub Childs</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildsImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getChildWithSubChilds()
+   * @generated
+   */
+  int CHILD_WITH_SUB_CHILDS = 9;
+
+  /**
+   * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHILD_WITH_SUB_CHILDS__CLAZZ = MODEL__CLAZZ;
+
+  /**
+   * The feature id for the '<em><b>Children</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHILD_WITH_SUB_CHILDS__CHILDREN = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Child With Sub Childs</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHILD_WITH_SUB_CHILDS_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildImpl <em>Child With Sub Child</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getChildWithSubChild()
+   * @generated
+   */
+  int CHILD_WITH_SUB_CHILD = 10;
+
+  /**
+   * The feature id for the '<em><b>Sub Childs</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHILD_WITH_SUB_CHILD__SUB_CHILDS = 0;
+
+  /**
+   * The number of structural features of the '<em>Child With Sub Child</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHILD_WITH_SUB_CHILD_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.SubChildImpl <em>Sub Child</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.SubChildImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getSubChild()
+   * @generated
+   */
+  int SUB_CHILD = 11;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_CHILD__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Sub Child</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_CHILD_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.MandatoryChildListImpl <em>Mandatory Child List</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -310,7 +495,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getMandatoryChildList()
    * @generated
    */
-  int MANDATORY_CHILD_LIST = 7;
+  int MANDATORY_CHILD_LIST = 12;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -347,7 +532,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getOptionalChildList()
    * @generated
    */
-  int OPTIONAL_CHILD_LIST = 8;
+  int OPTIONAL_CHILD_LIST = 13;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -384,7 +569,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 9;
+  int IMPORT = 14;
 
   /**
    * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -412,7 +597,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getNode()
    * @generated
    */
-  int NODE = 10;
+  int NODE = 15;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -485,7 +670,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getEClassRef()
    * @generated
    */
-  int ECLASS_REF = 11;
+  int ECLASS_REF = 16;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -522,7 +707,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getManyValues()
    * @generated
    */
-  int MANY_VALUES = 12;
+  int MANY_VALUES = 17;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -687,6 +872,133 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getOptionalChild_Child();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists <em>Two Child Lists</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Two Child Lists</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists
+   * @generated
+   */
+  EClass getTwoChildLists();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists#getDirectChildren <em>Direct Children</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Direct Children</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists#getDirectChildren()
+   * @see #getTwoChildLists()
+   * @generated
+   */
+  EReference getTwoChildLists_DirectChildren();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists#getChildsList <em>Childs List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Childs List</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists#getChildsList()
+   * @see #getTwoChildLists()
+   * @generated
+   */
+  EReference getTwoChildLists_ChildsList();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds <em>Two Childs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Two Childs</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds
+   * @generated
+   */
+  EClass getTwoChilds();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds#getDirectChild <em>Direct Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Direct Child</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds#getDirectChild()
+   * @see #getTwoChilds()
+   * @generated
+   */
+  EReference getTwoChilds_DirectChild();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds#getOptChild <em>Opt Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Opt Child</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds#getOptChild()
+   * @see #getTwoChilds()
+   * @generated
+   */
+  EReference getTwoChilds_OptChild();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds <em>Child With Sub Childs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Child With Sub Childs</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds
+   * @generated
+   */
+  EClass getChildWithSubChilds();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds#getChildren <em>Children</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Children</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds#getChildren()
+   * @see #getChildWithSubChilds()
+   * @generated
+   */
+  EReference getChildWithSubChilds_Children();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild <em>Child With Sub Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Child With Sub Child</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild
+   * @generated
+   */
+  EClass getChildWithSubChild();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild#getSubChilds <em>Sub Childs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Sub Childs</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild#getSubChilds()
+   * @see #getChildWithSubChild()
+   * @generated
+   */
+  EReference getChildWithSubChild_SubChilds();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild <em>Sub Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Sub Child</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild
+   * @generated
+   */
+  EClass getSubChild();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild#getName()
+   * @see #getSubChild()
+   * @generated
+   */
+  EAttribute getSubChild_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryChildList <em>Mandatory Child List</em>}'.
@@ -998,6 +1310,112 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
      * @generated
      */
     EReference OPTIONAL_CHILD__CHILD = eINSTANCE.getOptionalChild_Child();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildListsImpl <em>Two Child Lists</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildListsImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getTwoChildLists()
+     * @generated
+     */
+    EClass TWO_CHILD_LISTS = eINSTANCE.getTwoChildLists();
+
+    /**
+     * The meta object literal for the '<em><b>Direct Children</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TWO_CHILD_LISTS__DIRECT_CHILDREN = eINSTANCE.getTwoChildLists_DirectChildren();
+
+    /**
+     * The meta object literal for the '<em><b>Childs List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TWO_CHILD_LISTS__CHILDS_LIST = eINSTANCE.getTwoChildLists_ChildsList();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildsImpl <em>Two Childs</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.TwoChildsImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getTwoChilds()
+     * @generated
+     */
+    EClass TWO_CHILDS = eINSTANCE.getTwoChilds();
+
+    /**
+     * The meta object literal for the '<em><b>Direct Child</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TWO_CHILDS__DIRECT_CHILD = eINSTANCE.getTwoChilds_DirectChild();
+
+    /**
+     * The meta object literal for the '<em><b>Opt Child</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TWO_CHILDS__OPT_CHILD = eINSTANCE.getTwoChilds_OptChild();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildsImpl <em>Child With Sub Childs</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildsImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getChildWithSubChilds()
+     * @generated
+     */
+    EClass CHILD_WITH_SUB_CHILDS = eINSTANCE.getChildWithSubChilds();
+
+    /**
+     * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CHILD_WITH_SUB_CHILDS__CHILDREN = eINSTANCE.getChildWithSubChilds_Children();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildImpl <em>Child With Sub Child</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ChildWithSubChildImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getChildWithSubChild()
+     * @generated
+     */
+    EClass CHILD_WITH_SUB_CHILD = eINSTANCE.getChildWithSubChild();
+
+    /**
+     * The meta object literal for the '<em><b>Sub Childs</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CHILD_WITH_SUB_CHILD__SUB_CHILDS = eINSTANCE.getChildWithSubChild_SubChilds();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.SubChildImpl <em>Sub Child</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.SubChildImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getSubChild()
+     * @generated
+     */
+    EClass SUB_CHILD = eINSTANCE.getSubChild();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SUB_CHILD__NAME = eINSTANCE.getSubChild_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.MandatoryChildListImpl <em>Mandatory Child List</em>}' class.

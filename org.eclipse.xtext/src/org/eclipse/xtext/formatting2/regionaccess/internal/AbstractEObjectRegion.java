@@ -72,6 +72,9 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 
 	@Override
 	public EStructuralFeature getContainingFeature() {
+		if(semanticElement.eContainer() == null) {
+			return null;
+		}
 		String feature = null;
 		if (grammarElement instanceof Action) {
 			feature = ((Action) grammarElement).getFeature();
@@ -84,7 +87,7 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 		if (feature == null) {
 			return null;
 		}
-		return semanticElement.eClass().getEStructuralFeature(feature);
+		return semanticElement.eContainer().eClass().getEStructuralFeature(feature);
 	}
 
 	@Override

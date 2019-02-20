@@ -26,6 +26,29 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="#//MandatoryValue"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoChildLists" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directChildren" upperBound="-1"
+        eType="#//MandatoryValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childsList" eType="#//MandatoryChildList"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoChilds" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directChild" eType="#//MandatoryValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optChild" eType="#//OptionalChild"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildWithSubChilds" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//ChildWithSubChild" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChildWithSubChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subChilds" upperBound="-1"
+        eType="#//SubChild" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubChild">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryChildList" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//MandatoryValue" containment="true"/>

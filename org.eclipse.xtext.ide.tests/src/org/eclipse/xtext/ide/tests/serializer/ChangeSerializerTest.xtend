@@ -19,7 +19,9 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -322,5 +324,183 @@ class ChangeSerializerTest {
 			--------------------------------------------------------------------------------
 		'''
 	}
+	
+	@Test
+	def void testAddChildElement() {
 
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file-move.pstl" -> '''
+		#22 {
+			child1
+			children1 {
+				child2 child3
+			}
+		}'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file-move.pstl", TwoChildLists)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.directChildren.add(createMandatoryValue => [name = "newChild"])
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			--------------- inmemory:/file-move.pstl (syntax: <offset|text>) ---------------
+			#22 {
+				child1<13:0| newChild>
+				children1 {
+					child2 child3
+				}
+			}
+			--------------------------------------------------------------------------------
+			13 0 "" -> " newChild"
+			'''
+	}
+	
+	@Test
+	def void testMoveElement() {
+
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file-move1.pstl" -> '''
+		#22 {
+			child1
+			children1 {
+				child2 jumper
+			}
+		}'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file-move1.pstl", TwoChildLists)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.directChildren.add(model.childsList.children.findFirst[name == "jumper"])
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+		-------------- inmemory:/file-move1.pstl (syntax: <offset|text>) ---------------
+		#22 {
+			child1<13:0| jumper>
+			children1 {
+				child2 <36:6|>
+			}
+		}
+		--------------------------------------------------------------------------------
+		13 0 "" -> " jumper"
+		36 6 "jumper" -> ""
+		'''
+	}
+	
+	@Test
+	def void testMoveElement_2() {
+
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file-move.pstl" -> '''
+		#22 {
+			child1
+			children1 {
+				child2 jumper
+			}
+		}'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file-move.pstl", TwoChildLists)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.directChildren.add(0, model.childsList.children.findFirst[name == "jumper"])
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			--------------- inmemory:/file-move.pstl (syntax: <offset|text>) ---------------
+			#22 {<5:0| jumper>
+				child1
+				children1 {
+					child2 <36:6|>
+				}
+			}
+			--------------------------------------------------------------------------------
+			 5 0 "" -> " jumper"
+			36 6 "jumper" -> ""
+		'''
+	}
+	
+	@Test
+	def void testMoveElement_2a() {
+
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file-move2a.pstl" -> '''
+		#22 {
+			child1 child3
+			children1 {
+				child2 jumper
+			}
+		}'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file-move2a.pstl", TwoChildLists)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.directChildren.add(1, model.childsList.children.findFirst[name == "jumper"])
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			-------------- inmemory:/file-move2a.pstl (syntax: <offset|text>) --------------
+			#22 {
+				child1 <14:0|jumper >child3
+				children1 {
+					child2 <43:6|>
+				}
+			}
+			--------------------------------------------------------------------------------
+			14 0 "" -> "jumper "
+			43 6 "jumper" -> ""
+		'''
+	}
+	@Test
+	def void testMoveElement_3() {
+
+		val fs = new InMemoryURIHandler()
+		fs += "inmemory:/file-move3.pstl" -> '''
+		#24 direct:
+			child:jumper
+		'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents("inmemory:/file-move3.pstl", TwoChilds)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.directChild = model.optChild.child
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			-------------- inmemory:/file-move3.pstl (syntax: <offset|text>) ---------------
+			<0:26|#24 direct:
+				jumper
+			child :>
+			--------------------------------------------------------------------------------
+			0 26 "#24 direct:\n	chil..." -> "#24 direct:\n	jump..."
+		'''
+	}
+
+	@Test
+	def void testAddElements() {
+		val uri = "inmemory:/file-add.pstl"
+		val fs = new InMemoryURIHandler()
+		fs += uri -> '''
+		#23'''
+
+		val rs = fs.createResourceSet
+		val model = rs.contents(uri, ChildWithSubChilds)
+
+		val serializer = newChangeSerializer()
+		serializer.addModification(model.eResource) [
+			model.children += createChildWithSubChild => [subChilds += createSubChild => [name = "A"]]
+			model.children.head => [subChilds += createSubChild => [name = "A2"]]
+		]
+		serializer.endRecordChangesToTextDocuments === '''
+			--------------- inmemory:/file-add.pstl (syntax: <offset|text>) ----------------
+			<0:3|#23 subs A A2>
+			--------------------------------------------------------------------------------
+			0 3 "#23" -> "#23 subs A A2"
+		'''
+	}
 }

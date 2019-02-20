@@ -26,6 +26,23 @@
     <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//OptionalChild">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//OptionalChild/child"/>
     </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//TwoChildLists">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChildLists/directChildren"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChildLists/childsList"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//TwoChilds">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChilds/directChild"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//TwoChilds/optChild"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ChildWithSubChilds">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//ChildWithSubChilds/children"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//ChildWithSubChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//ChildWithSubChild/subChilds"/>
+    </genClasses>
+    <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//SubChild">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialSerializationTestLanguage.ecore#//SubChild/name"/>
+    </genClasses>
     <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//MandatoryChildList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialSerializationTestLanguage.ecore#//MandatoryChildList/children"/>
     </genClasses>

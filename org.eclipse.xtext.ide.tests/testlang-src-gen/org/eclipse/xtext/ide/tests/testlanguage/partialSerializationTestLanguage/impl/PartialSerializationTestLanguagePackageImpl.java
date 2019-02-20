@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.EClassRef;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Import;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryChild;
@@ -30,6 +32,9 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,6 +92,41 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * @generated
    */
   private EClass optionalChildEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass twoChildListsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass twoChildsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass childWithSubChildsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass childWithSubChildEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass subChildEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -331,6 +371,126 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTwoChildLists()
+  {
+    return twoChildListsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTwoChildLists_DirectChildren()
+  {
+    return (EReference)twoChildListsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTwoChildLists_ChildsList()
+  {
+    return (EReference)twoChildListsEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTwoChilds()
+  {
+    return twoChildsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTwoChilds_DirectChild()
+  {
+    return (EReference)twoChildsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTwoChilds_OptChild()
+  {
+    return (EReference)twoChildsEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getChildWithSubChilds()
+  {
+    return childWithSubChildsEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getChildWithSubChilds_Children()
+  {
+    return (EReference)childWithSubChildsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getChildWithSubChild()
+  {
+    return childWithSubChildEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getChildWithSubChild_SubChilds()
+  {
+    return (EReference)childWithSubChildEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSubChild()
+  {
+    return subChildEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSubChild_Name()
+  {
+    return (EAttribute)subChildEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMandatoryChildList()
   {
     return mandatoryChildListEClass;
@@ -536,6 +696,23 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     optionalChildEClass = createEClass(OPTIONAL_CHILD);
     createEReference(optionalChildEClass, OPTIONAL_CHILD__CHILD);
 
+    twoChildListsEClass = createEClass(TWO_CHILD_LISTS);
+    createEReference(twoChildListsEClass, TWO_CHILD_LISTS__DIRECT_CHILDREN);
+    createEReference(twoChildListsEClass, TWO_CHILD_LISTS__CHILDS_LIST);
+
+    twoChildsEClass = createEClass(TWO_CHILDS);
+    createEReference(twoChildsEClass, TWO_CHILDS__DIRECT_CHILD);
+    createEReference(twoChildsEClass, TWO_CHILDS__OPT_CHILD);
+
+    childWithSubChildsEClass = createEClass(CHILD_WITH_SUB_CHILDS);
+    createEReference(childWithSubChildsEClass, CHILD_WITH_SUB_CHILDS__CHILDREN);
+
+    childWithSubChildEClass = createEClass(CHILD_WITH_SUB_CHILD);
+    createEReference(childWithSubChildEClass, CHILD_WITH_SUB_CHILD__SUB_CHILDS);
+
+    subChildEClass = createEClass(SUB_CHILD);
+    createEAttribute(subChildEClass, SUB_CHILD__NAME);
+
     mandatoryChildListEClass = createEClass(MANDATORY_CHILD_LIST);
     createEReference(mandatoryChildListEClass, MANDATORY_CHILD_LIST__CHILDREN);
 
@@ -597,6 +774,9 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     manyMandatoryValuesEClass.getESuperTypes().add(this.getModel());
     mandatoryChildEClass.getESuperTypes().add(this.getModel());
     optionalChildEClass.getESuperTypes().add(this.getModel());
+    twoChildListsEClass.getESuperTypes().add(this.getModel());
+    twoChildsEClass.getESuperTypes().add(this.getModel());
+    childWithSubChildsEClass.getESuperTypes().add(this.getModel());
     mandatoryChildListEClass.getESuperTypes().add(this.getModel());
     optionalChildListEClass.getESuperTypes().add(this.getModel());
     nodeEClass.getESuperTypes().add(this.getModel());
@@ -623,6 +803,23 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
 
     initEClass(optionalChildEClass, OptionalChild.class, "OptionalChild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOptionalChild_Child(), this.getMandatoryValue(), null, "child", null, 0, 1, OptionalChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(twoChildListsEClass, TwoChildLists.class, "TwoChildLists", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTwoChildLists_DirectChildren(), this.getMandatoryValue(), null, "directChildren", null, 0, -1, TwoChildLists.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTwoChildLists_ChildsList(), this.getMandatoryChildList(), null, "childsList", null, 0, 1, TwoChildLists.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(twoChildsEClass, TwoChilds.class, "TwoChilds", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTwoChilds_DirectChild(), this.getMandatoryValue(), null, "directChild", null, 0, 1, TwoChilds.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTwoChilds_OptChild(), this.getOptionalChild(), null, "optChild", null, 0, 1, TwoChilds.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(childWithSubChildsEClass, ChildWithSubChilds.class, "ChildWithSubChilds", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getChildWithSubChilds_Children(), this.getChildWithSubChild(), null, "children", null, 0, -1, ChildWithSubChilds.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(childWithSubChildEClass, ChildWithSubChild.class, "ChildWithSubChild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getChildWithSubChild_SubChilds(), this.getSubChild(), null, "subChilds", null, 0, -1, ChildWithSubChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(subChildEClass, SubChild.class, "SubChild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSubChild_Name(), theEcorePackage.getEString(), "name", null, 0, 1, SubChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryChildListEClass, MandatoryChildList.class, "MandatoryChildList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMandatoryChildList_Children(), this.getMandatoryValue(), null, "children", null, 0, -1, MandatoryChildList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

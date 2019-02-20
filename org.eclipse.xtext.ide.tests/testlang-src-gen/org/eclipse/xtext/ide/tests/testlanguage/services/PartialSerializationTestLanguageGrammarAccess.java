@@ -65,6 +65,15 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		private final Group cGroup_10 = (Group)cAlternatives.eContents().get(10);
 		private final Keyword cNumberSignDigitTwoDigitOneKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
 		private final RuleCall cEClassRefParserRuleCall_10_1 = (RuleCall)cGroup_10.eContents().get(1);
+		private final Group cGroup_11 = (Group)cAlternatives.eContents().get(11);
+		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final RuleCall cTwoChildListsParserRuleCall_11_1 = (RuleCall)cGroup_11.eContents().get(1);
+		private final Group cGroup_12 = (Group)cAlternatives.eContents().get(12);
+		private final Keyword cNumberSignDigitTwoDigitThreeKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
+		private final RuleCall cChildWithSubChildsParserRuleCall_12_1 = (RuleCall)cGroup_12.eContents().get(1);
+		private final Group cGroup_13 = (Group)cAlternatives.eContents().get(13);
+		private final Keyword cNumberSignDigitTwoDigitFourKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
+		private final RuleCall cTwoChildsParserRuleCall_13_1 = (RuleCall)cGroup_13.eContents().get(1);
 		
 		//Model:
 		//	"#1" Node |
@@ -78,12 +87,15 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//	"#13" OptionalChildList |
 		//	//	"#14" Imports |
 		//	"#20" clazz+=EClassDecl+ |
-		//	"#21" EClassRef;
+		//	"#21" EClassRef |
+		//	"#22" TwoChildLists |
+		//	"#23" ChildWithSubChilds |
+		//	"#24" TwoChilds;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#1" Node | "#2" MandatoryValue | "#3" OptionalValue | "#4" MandatoryChild | "#5" OptionalChild | "#10"
 		//ManyOptionalValues | "#11" ManyMandatoryValues | "#12" MandatoryChildList | "#13" OptionalChildList | //	"#14" Imports |
-		//"#20" clazz+=EClassDecl+ | "#21" EClassRef
+		//"#20" clazz+=EClassDecl+ | "#21" EClassRef | "#22" TwoChildLists | "#23" ChildWithSubChilds | "#24" TwoChilds
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#1" Node
@@ -189,6 +201,33 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//EClassRef
 		public RuleCall getEClassRefParserRuleCall_10_1() { return cEClassRefParserRuleCall_10_1; }
+		
+		//"#22" TwoChildLists
+		public Group getGroup_11() { return cGroup_11; }
+		
+		//"#22"
+		public Keyword getNumberSignDigitTwoDigitTwoKeyword_11_0() { return cNumberSignDigitTwoDigitTwoKeyword_11_0; }
+		
+		//TwoChildLists
+		public RuleCall getTwoChildListsParserRuleCall_11_1() { return cTwoChildListsParserRuleCall_11_1; }
+		
+		//"#23" ChildWithSubChilds
+		public Group getGroup_12() { return cGroup_12; }
+		
+		//"#23"
+		public Keyword getNumberSignDigitTwoDigitThreeKeyword_12_0() { return cNumberSignDigitTwoDigitThreeKeyword_12_0; }
+		
+		//ChildWithSubChilds
+		public RuleCall getChildWithSubChildsParserRuleCall_12_1() { return cChildWithSubChildsParserRuleCall_12_1; }
+		
+		//"#24" TwoChilds
+		public Group getGroup_13() { return cGroup_13; }
+		
+		//"#24"
+		public Keyword getNumberSignDigitTwoDigitFourKeyword_13_0() { return cNumberSignDigitTwoDigitFourKeyword_13_0; }
+		
+		//TwoChilds
+		public RuleCall getTwoChildsParserRuleCall_13_1() { return cTwoChildsParserRuleCall_13_1; }
 	}
 	public class MandatoryValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryValue");
@@ -311,6 +350,173 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//MandatoryValue
 		public RuleCall getChildMandatoryValueParserRuleCall_1_0() { return cChildMandatoryValueParserRuleCall_1_0; }
+	}
+	public class TwoChildListsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.TwoChildLists");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDirectChildrenAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDirectChildrenMandatoryValueParserRuleCall_1_0 = (RuleCall)cDirectChildrenAssignment_1.eContents().get(0);
+		private final Keyword cChildren1Keyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cChildsListAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cChildsListMandatoryChildListParserRuleCall_4_0 = (RuleCall)cChildsListAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//TwoChildLists:
+		//	"{"
+		//	directChildren+=MandatoryValue+
+		//	"children1" "{"
+		//	childsList=MandatoryChildList
+		//	"}"
+		//	"}";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"{" directChildren+=MandatoryValue+ "children1" "{" childsList=MandatoryChildList "}" "}"
+		public Group getGroup() { return cGroup; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		
+		//directChildren+=MandatoryValue+
+		public Assignment getDirectChildrenAssignment_1() { return cDirectChildrenAssignment_1; }
+		
+		//MandatoryValue
+		public RuleCall getDirectChildrenMandatoryValueParserRuleCall_1_0() { return cDirectChildrenMandatoryValueParserRuleCall_1_0; }
+		
+		//"children1"
+		public Keyword getChildren1Keyword_2() { return cChildren1Keyword_2; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
+		//childsList=MandatoryChildList
+		public Assignment getChildsListAssignment_4() { return cChildsListAssignment_4; }
+		
+		//MandatoryChildList
+		public RuleCall getChildsListMandatoryChildListParserRuleCall_4_0() { return cChildsListMandatoryChildListParserRuleCall_4_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+	public class TwoChildsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.TwoChilds");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cTwoChildsAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cDirectKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cDirectChildAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDirectChildMandatoryValueParserRuleCall_3_0 = (RuleCall)cDirectChildAssignment_3.eContents().get(0);
+		private final Keyword cChildKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOptChildAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOptChildOptionalChildParserRuleCall_6_0 = (RuleCall)cOptChildAssignment_6.eContents().get(0);
+		
+		//TwoChilds:
+		//	{TwoChilds}
+		//	"direct" ":" directChild=MandatoryValue?
+		//	"child" ":" optChild=OptionalChild;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{TwoChilds} "direct" ":" directChild=MandatoryValue? "child" ":" optChild=OptionalChild
+		public Group getGroup() { return cGroup; }
+		
+		//{TwoChilds}
+		public Action getTwoChildsAction_0() { return cTwoChildsAction_0; }
+		
+		//"direct"
+		public Keyword getDirectKeyword_1() { return cDirectKeyword_1; }
+		
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
+		//directChild=MandatoryValue?
+		public Assignment getDirectChildAssignment_3() { return cDirectChildAssignment_3; }
+		
+		//MandatoryValue
+		public RuleCall getDirectChildMandatoryValueParserRuleCall_3_0() { return cDirectChildMandatoryValueParserRuleCall_3_0; }
+		
+		//"child"
+		public Keyword getChildKeyword_4() { return cChildKeyword_4; }
+		
+		//":"
+		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
+		
+		//optChild=OptionalChild
+		public Assignment getOptChildAssignment_6() { return cOptChildAssignment_6; }
+		
+		//OptionalChild
+		public RuleCall getOptChildOptionalChildParserRuleCall_6_0() { return cOptChildOptionalChildParserRuleCall_6_0; }
+	}
+	public class ChildWithSubChildsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.ChildWithSubChilds");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cChildWithSubChildsAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cChildrenAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cChildrenChildWithSubChildParserRuleCall_1_0 = (RuleCall)cChildrenAssignment_1.eContents().get(0);
+		
+		//ChildWithSubChilds:
+		//	{ChildWithSubChilds} children+=ChildWithSubChild*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ChildWithSubChilds} children+=ChildWithSubChild*
+		public Group getGroup() { return cGroup; }
+		
+		//{ChildWithSubChilds}
+		public Action getChildWithSubChildsAction_0() { return cChildWithSubChildsAction_0; }
+		
+		//children+=ChildWithSubChild*
+		public Assignment getChildrenAssignment_1() { return cChildrenAssignment_1; }
+		
+		//ChildWithSubChild
+		public RuleCall getChildrenChildWithSubChildParserRuleCall_1_0() { return cChildrenChildWithSubChildParserRuleCall_1_0; }
+	}
+	public class ChildWithSubChildElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.ChildWithSubChild");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cChildWithSubChildAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSubsKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cSubChildsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSubChildsSubChildParserRuleCall_2_0 = (RuleCall)cSubChildsAssignment_2.eContents().get(0);
+		
+		//ChildWithSubChild:
+		//	{ChildWithSubChild} "subs"
+		//	subChilds+=SubChild*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ChildWithSubChild} "subs" subChilds+=SubChild*
+		public Group getGroup() { return cGroup; }
+		
+		//{ChildWithSubChild}
+		public Action getChildWithSubChildAction_0() { return cChildWithSubChildAction_0; }
+		
+		//"subs"
+		public Keyword getSubsKeyword_1() { return cSubsKeyword_1; }
+		
+		//subChilds+=SubChild*
+		public Assignment getSubChildsAssignment_2() { return cSubChildsAssignment_2; }
+		
+		//SubChild
+		public RuleCall getSubChildsSubChildParserRuleCall_2_0() { return cSubChildsSubChildParserRuleCall_2_0; }
+	}
+	public class SubChildElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.SubChild");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//SubChild:
+		//	name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	public class MandatoryChildListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryChildList");
@@ -546,6 +752,11 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	private final ManyMandatoryValuesElements pManyMandatoryValues;
 	private final MandatoryChildElements pMandatoryChild;
 	private final OptionalChildElements pOptionalChild;
+	private final TwoChildListsElements pTwoChildLists;
+	private final TwoChildsElements pTwoChilds;
+	private final ChildWithSubChildsElements pChildWithSubChilds;
+	private final ChildWithSubChildElements pChildWithSubChild;
+	private final SubChildElements pSubChild;
 	private final MandatoryChildListElements pMandatoryChildList;
 	private final OptionalChildListElements pOptionalChildList;
 	private final ImportElements pImport;
@@ -570,6 +781,11 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		this.pManyMandatoryValues = new ManyMandatoryValuesElements();
 		this.pMandatoryChild = new MandatoryChildElements();
 		this.pOptionalChild = new OptionalChildElements();
+		this.pTwoChildLists = new TwoChildListsElements();
+		this.pTwoChilds = new TwoChildsElements();
+		this.pChildWithSubChilds = new ChildWithSubChildsElements();
+		this.pChildWithSubChild = new ChildWithSubChildElements();
+		this.pSubChild = new SubChildElements();
 		this.pMandatoryChildList = new MandatoryChildListElements();
 		this.pOptionalChildList = new OptionalChildListElements();
 		this.pImport = new ImportElements();
@@ -618,7 +834,10 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	//	"#13" OptionalChildList |
 	//	//	"#14" Imports |
 	//	"#20" clazz+=EClassDecl+ |
-	//	"#21" EClassRef;
+	//	"#21" EClassRef |
+	//	"#22" TwoChildLists |
+	//	"#23" ChildWithSubChilds |
+	//	"#24" TwoChilds;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -685,6 +904,64 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	
 	public ParserRule getOptionalChildRule() {
 		return getOptionalChildAccess().getRule();
+	}
+	
+	//TwoChildLists:
+	//	"{"
+	//	directChildren+=MandatoryValue+
+	//	"children1" "{"
+	//	childsList=MandatoryChildList
+	//	"}"
+	//	"}";
+	public TwoChildListsElements getTwoChildListsAccess() {
+		return pTwoChildLists;
+	}
+	
+	public ParserRule getTwoChildListsRule() {
+		return getTwoChildListsAccess().getRule();
+	}
+	
+	//TwoChilds:
+	//	{TwoChilds}
+	//	"direct" ":" directChild=MandatoryValue?
+	//	"child" ":" optChild=OptionalChild;
+	public TwoChildsElements getTwoChildsAccess() {
+		return pTwoChilds;
+	}
+	
+	public ParserRule getTwoChildsRule() {
+		return getTwoChildsAccess().getRule();
+	}
+	
+	//ChildWithSubChilds:
+	//	{ChildWithSubChilds} children+=ChildWithSubChild*;
+	public ChildWithSubChildsElements getChildWithSubChildsAccess() {
+		return pChildWithSubChilds;
+	}
+	
+	public ParserRule getChildWithSubChildsRule() {
+		return getChildWithSubChildsAccess().getRule();
+	}
+	
+	//ChildWithSubChild:
+	//	{ChildWithSubChild} "subs"
+	//	subChilds+=SubChild*;
+	public ChildWithSubChildElements getChildWithSubChildAccess() {
+		return pChildWithSubChild;
+	}
+	
+	public ParserRule getChildWithSubChildRule() {
+		return getChildWithSubChildAccess().getRule();
+	}
+	
+	//SubChild:
+	//	name=ID;
+	public SubChildElements getSubChildAccess() {
+		return pSubChild;
+	}
+	
+	public ParserRule getSubChildRule() {
+		return getSubChildAccess().getRule();
 	}
 	
 	//MandatoryChildList:

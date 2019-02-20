@@ -91,6 +91,51 @@ public interface PartialSerializationTestLanguageFactory extends EFactory
   OptionalChild createOptionalChild();
 
   /**
+   * Returns a new object of class '<em>Two Child Lists</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Two Child Lists</em>'.
+   * @generated
+   */
+  TwoChildLists createTwoChildLists();
+
+  /**
+   * Returns a new object of class '<em>Two Childs</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Two Childs</em>'.
+   * @generated
+   */
+  TwoChilds createTwoChilds();
+
+  /**
+   * Returns a new object of class '<em>Child With Sub Childs</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Child With Sub Childs</em>'.
+   * @generated
+   */
+  ChildWithSubChilds createChildWithSubChilds();
+
+  /**
+   * Returns a new object of class '<em>Child With Sub Child</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Child With Sub Child</em>'.
+   * @generated
+   */
+  ChildWithSubChild createChildWithSubChild();
+
+  /**
+   * Returns a new object of class '<em>Sub Child</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Sub Child</em>'.
+   * @generated
+   */
+  SubChild createSubChild();
+
+  /**
    * Returns a new object of class '<em>Mandatory Child List</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
