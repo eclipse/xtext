@@ -111,9 +111,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 
 		public void invoke(State state) {
-			if (instance.state.get() != null && instance.state.get() != state)
+			State instanceState = instance.state.get();
+			if (instanceState != null && instanceState != state)
 				throw new IllegalStateException("State is already assigned.");
-			boolean wasNull = instance.state.get() == null;
+			boolean wasNull = instanceState == null;
 			if (wasNull)
 				instance.state.set(state);
 			try {
@@ -134,7 +135,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 				}
 			} finally {
 				if (wasNull)
-					instance.state.set(null);
+					instance.state.remove();
 			}
 		}
 		
@@ -557,22 +558,24 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
-		this.state.get().hasErrors = true;
-		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, feature, index, code, issueData));
+		State currentState = this.state.get();
+		currentState.hasErrors = true;
+		currentState.chain.add(createDiagnostic(Severity.ERROR, message, object, feature, index, code, issueData));
 	}
 
 	/**
 	 * @since 2.4
 	 */
 	protected void checkIsFromCurrentlyCheckedResource(EObject object) {
-		if (object != null && this.state.get() != null && this.state.get().currentObject != null
-				&& object.eResource() != this.state.get().currentObject.eResource()) {
+		State currentState = this.state.get();
+		if (object != null && currentState != null && currentState.currentObject != null
+				&& object.eResource() != currentState.currentObject.eResource()) {
 			URI uriGiven = null;
 			if (object.eResource() != null)
 				uriGiven = object.eResource().getURI();
 			URI uri = null;
-			if (this.state.get().currentObject.eResource() != null)
-				uri = this.state.get().currentObject.eResource().getURI();
+			if (currentState.currentObject.eResource() != null)
+				uri = currentState.currentObject.eResource().getURI();
 			throw new IllegalArgumentException(
 					"You can only add issues for EObjects contained in the currently validated resource '" + uri
 							+ "'. But the given EObject was contained in '" + uriGiven + "'");
@@ -596,8 +599,9 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	@Override
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
-		this.state.get().hasErrors = true;
-		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
+		State currentState = this.state.get();
+		currentState.hasErrors = true;
+		currentState.chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
 	}
 
 	@Override
