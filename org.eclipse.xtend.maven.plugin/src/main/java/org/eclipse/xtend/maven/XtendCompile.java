@@ -10,6 +10,10 @@ import java.util.Set;
 
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -20,25 +24,18 @@ import com.google.common.collect.Sets;
  * Goal which compiles Xtend sources.
  * 
  * @author Michael Clay - Initial contribution and API
- * @goal compile
- * @phase generate-sources
- * @requiresDependencyResolution compile
- * @threadSafe true
  */
+@Mojo (name="compile", defaultPhase=LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution=ResolutionScope.COMPILE, threadSafe=true)
 public class XtendCompile extends AbstractXtendCompilerMojo {
 	/**
 	 * Location of the generated source files.
-	 * 
-	 * @parameter default-value="${basedir}/src/main/generated-sources/xtend"
-	 * @required
 	 */
+	@Parameter(defaultValue="${basedir}/src/main/generated-sources/xtend", required=true)
 	private String outputDirectory;
 	/**
 	 * Location of the temporary compiler directory.
-	 * 
-	 * @parameter default-value="${project.build.directory}/xtend"
-	 * @required
 	 */
+	@Parameter(defaultValue="${project.build.directory}/xtend", required=true)
 	private String tempDirectory;
 
 	@Override

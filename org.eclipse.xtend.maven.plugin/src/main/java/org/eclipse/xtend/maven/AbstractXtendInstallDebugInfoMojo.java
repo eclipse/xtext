@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.maven.plugins.annotations.Parameter;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
@@ -38,9 +39,8 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 	 * Set this to false to show synthetic variables in the debugger. This only has an effect if
 	 * {@link #traceAsPrimarySourceInstallerProvider} is set to true. Synthetic variables are variables which are
 	 * created by the Xtend compiler. Therefore they only exist in the compiled Java code but not in the Xtend code.
-	 * 
-	 * @parameter default-value="true" expression="${hideSyntheticVariables}"
 	 */
+	@Parameter(property="hideSyntheticVariables", defaultValue="true")
 	protected boolean hideSyntheticVariables;
 
 	@Inject
@@ -58,9 +58,8 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 	/**
 	 * Set this to true to use the Xtend sources as the primary debugging sources. This will completely hide the Java
 	 * sources in the debugger. You'll need to enable it if your JVM doesn't support JSR-045.
-	 * 
-	 * @parameter default-value="false" expression="${xtendAsPrimaryDebugSource}"
 	 */
+	@Parameter(property="xtendAsPrimaryDebugSource", defaultValue="false")
 	protected boolean xtendAsPrimaryDebugSource;
 
 	protected void collectJavaSourceFile2traceFile(String root, String subdir,

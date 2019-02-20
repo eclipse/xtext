@@ -24,6 +24,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.toolchain.Toolchain;
 import org.apache.maven.toolchain.ToolchainManager;
 import org.apache.maven.toolchain.java.DefaultJavaToolChain;
@@ -53,66 +55,53 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * Create Java Source Code that is compatible to this Java version.
 	 * 
 	 * Supported values: 1.5, 1.6, 1.7, 1.8, 9 and 10
-	 *
-	 * @parameter expression="${maven.compiler.source}" default-value="1.6"
 	 */
+	@Parameter(property="maven.compiler.source", defaultValue="1.6")
 	private String javaSourceVersion;
 
-	/**
-	 * @component
-	 */
+	@Component
 	private ToolchainManager toolchainManager;
 
 	/**
 	 * The current build session instance. This is used for toolchain manager API calls.
-	 *
-	 * @parameter expression="${session}"
-	 * @required
-	 * @readonly
 	 */
+	@Parameter(property="session", required=true, readonly=true)
 	private MavenSession session;
 
 	/**
 	 * Xtend-File encoding argument for the compiler.
-	 * 
-	 * @parameter expression="${encoding}" default-value="${project.build.sourceEncoding}"
 	 */
+	@Parameter(property="encoding", defaultValue="${project.build.sourceEncoding}")
 	private String encoding;
 
 	/**
 	 * Set this to false to suppress the creation of *._trace files.
-	 * 
-	 * @parameter default-value="true" expression="${writeTraceFiles}"
 	 */
+	@Parameter(property="writeTraceFiles", defaultValue="true")
 	private boolean writeTraceFiles;
 
 	/**
 	 * Location of the Xtend settings file.
-	 * 
-	 * @parameter default-value="${basedir}/.settings/org.eclipse.xtend.core.Xtend.prefs"
-	 * @readonly
 	 */
+	@Parameter(defaultValue="${basedir}/.settings/org.eclipse.xtend.core.Xtend.prefs", readonly=true)
 	private String propertiesFileLocation;
 
 	/**
 	 * Whether <code>@SuppressWarnings</code> shall be generated for non-nested types.
-	 * 
-	 * @parameter default-value="true"
 	 */
+	@Parameter(defaultValue="true")
 	private boolean generateSyntheticSuppressWarnings;
 
 	/**
 	 * Whether <code>@Generated</code> shall be generated for non-nested types.
-	 * 
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue="false")
 	private boolean generateGeneratedAnnotation;
 
 	/**
 	 * Whether the current time shall be added to <code>@Generated</code> annotations.
-	 * 
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue="false")
 	private boolean includeDateInGeneratedAnnotation;
 
 	/**
@@ -120,9 +109,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * <ul>
 	 * <li><code>${sourcefile}</code></li>
 	 * </ul>
-	 * 
-	 * @parameter
 	 */
+	@Parameter
 	private String generatedAnnotationComment;
 
 	@Inject
