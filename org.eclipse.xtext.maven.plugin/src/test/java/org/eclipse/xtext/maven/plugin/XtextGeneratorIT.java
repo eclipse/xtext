@@ -164,6 +164,10 @@ public class XtextGeneratorIT {
 		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
 		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g";
 		verifier.setEnvironmentVariable("MAVEN_OPTS", modMvnOpts);
+		String jenkinsURL = System.getProperty("JENKINS_URL");
+		if (jenkinsURL != null) {
+			verifier.setSystemProperty("JENKINS_URL", jenkinsURL);
+		}
 		if (debug) {
 			verifier.setMavenDebug(debug);
 			System.out.println("Modified Maven Opts: " + modMvnOpts);
