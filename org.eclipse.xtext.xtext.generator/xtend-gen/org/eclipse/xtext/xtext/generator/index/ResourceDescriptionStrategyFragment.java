@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.index;
 import com.google.inject.Inject;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -18,6 +19,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Annotation;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -29,12 +31,14 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.AnnotationNames;
-import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
 /**
  * By default the @link DefaultResourceDescriptionStrategy exposes all model element that have a name.
@@ -46,7 +50,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingFragment {
+public class ResourceDescriptionStrategyFragment extends AbstractInheritingFragment {
   /**
    * if this flag is set to false nothing get's generated or bound
    */
@@ -78,17 +82,30 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
     return new TypeReference(_plus_2);
   }
   
-  protected TypeReference getStubResourceDescriptionStrategyClass() {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(this.getGrammar());
+  protected TypeReference getResourceDescriptionStrategyClass(final Grammar grammar) {
+    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
     String _plus = (_runtimeBasePackage + ".resource.");
-    String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
     String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "ResourceDescriptionStrategy");
     return new TypeReference(_plus_2);
   }
   
+  protected TypeReference getStubResourceDescriptionStrategyClass() {
+    return this.getResourceDescriptionStrategyClass(this.getGrammar());
+  }
+  
+  protected boolean needsToInvokeSuperResourceDescriptionStrategy() {
+    return (this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(this.getGrammar()) != null));
+  }
+  
   protected TypeReference getResourceDescriptionSuperClass() {
-    return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy");
+    final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(this.getGrammar());
+    if ((this.isInheritImplementation() && (superGrammar != null))) {
+      return this.getResourceDescriptionStrategyClass(superGrammar);
+    } else {
+      return new TypeReference("org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy");
+    }
   }
   
   protected void contributeRuntimeGuiceBindings() {
@@ -121,6 +138,13 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
       this.contributeRuntimeGuiceBindings();
       this.generateResourceDescriptionStrategy(exportedRules).writeTo(this.getProjectConfig().getRuntime().getSrcGen());
       this.generateResourceDescriptionStrategyStub(exportedRules);
+      ManifestAccess _manifest = this.getProjectConfig().getRuntime().getManifest();
+      boolean _tripleNotEquals = (_manifest != null);
+      if (_tripleNotEquals) {
+        Set<String> _exportedPackages = this.getProjectConfig().getRuntime().getManifest().getExportedPackages();
+        String _packageName = this.getResourceDescriptionStrategyClass(this.getGrammar()).getPackageName();
+        _exportedPackages.add(_packageName);
+      }
     }
   }
   
@@ -182,9 +206,18 @@ public class ResourceDescriptionStrategyFragment extends AbstractStubGeneratingF
             _builder.newLine();
           }
         }
-        _builder.append("\t\t");
-        _builder.append("return true;");
-        _builder.newLine();
+        {
+          boolean _needsToInvokeSuperResourceDescriptionStrategy = ResourceDescriptionStrategyFragment.this.needsToInvokeSuperResourceDescriptionStrategy();
+          if (_needsToInvokeSuperResourceDescriptionStrategy) {
+            _builder.append("\t\t");
+            _builder.append("return super.createEObjectDescriptions(eObject, acceptor);");
+            _builder.newLine();
+          } else {
+            _builder.append("\t\t");
+            _builder.append("return true;");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
