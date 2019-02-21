@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.AbstractList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -171,7 +173,24 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					enumLiteralDeclaration.setLiteral(keyword);
 				});
 	}
-
+	
+	@Fix(SPACES_IN_KEYWORD)
+	public void fixKeywordNoSpaces(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Split keyword with spaces", "Split keyword with spaces", NULL_QUICKFIX_IMAGE,
+				(ISemanticModification) (EObject element, IModificationContext context) -> {
+					final Keyword keyword = (Keyword) element;
+					final String[] identifiers = keyword.getValue().trim().split("\\s+");
+					if (identifiers.length > 0) {
+						final IXtextDocument document = context.getXtextDocument();
+						final String quote = String.valueOf(document.getChar(issue.getOffset()));
+						document.replace(issue.getOffset(), issue.getLength(), Arrays.stream(identifiers)
+								.map(identifier -> String.format("%s%s%s", quote, identifier, quote)).collect(Collectors.joining(" ")));
+					} else {
+						keyword.setValue("");
+					}
+				});
+	}
+	
 	@Fix(INVALID_ACTION_USAGE)
 	public void fixInvalidActionUsage(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix invalid action usage", "Fix invalid action usage", NULL_QUICKFIX_IMAGE,

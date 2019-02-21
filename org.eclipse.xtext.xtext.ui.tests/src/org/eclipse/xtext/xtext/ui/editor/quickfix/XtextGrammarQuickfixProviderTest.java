@@ -100,6 +100,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		assertAndApplyAllResolutions(editorForGrammar("Model: a=ID;", "enum ABCD: A|B|C=''|D;", "enum B: B='';"), EMPTY_ENUM_LITERAL, 1, 2,
 				"Fix empty enum literal");
 	}
+	
+	@Test
+	public void testFixKeywordNoSpaces() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model: ' a b c d ' a=ID;"), SPACES_IN_KEYWORD, 0,
+				"Split keyword with spaces");
+	}
 
 	@Test
 	public void testFixInvalidAction() throws Exception {
