@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IOpenable;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
@@ -187,18 +189,35 @@ public class DeltaConverter {
 		
 		ICompilationUnit compilationUnit = (ICompilationUnit) delta.getElement();
 		try {
-			for (IType type : compilationUnit.getTypes()) {
+			doForeachCompilationType(compilationUnit, type -> {
 				if (isDerived(type))
 					return;
 				String typeName = type.getFullyQualifiedName();
 				URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
 				convertChangedTypeAndChildren(result, typeNames, type, topLevelURI);
-				
-			}
+			});
+			
 			convertRemovedTypes(typeNames, result);
 		} catch (JavaModelException e) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug(e, e);
+			}
+		}
+	}
+	
+	private void doForeachCompilationType(ICompilationUnit compilationUnit, Consumer<IType> consumer) throws JavaModelException {
+		IOpenable openableUnit = compilationUnit.getOpenable();
+		boolean wasOpen = openableUnit.isOpen();
+
+		try {
+			for (IType type : compilationUnit.getTypes()) {
+				consumer.accept(type);
+			}
+		} finally {
+			boolean isOpen = openableUnit.isOpen();
+			if (!wasOpen && isOpen) {
+				// getTypes has opened the compilationUnit. Close to avoid JavaModelCache.childrenCache leak
+				openableUnit.close();
 			}
 		}
 	}
@@ -254,13 +273,13 @@ public class DeltaConverter {
 	 */
 	protected void convertNewTypes(ICompilationUnit compilationUnit, List<IResourceDescription.Delta> result) {
 		try {
-			for (IType type : compilationUnit.getTypes()) {
+			doForeachCompilationType(compilationUnit, type -> {
 				if (isDerived(type))
 					return;
 				String typeName = type.getFullyQualifiedName();
 				URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
 				convertNewTypeAndChildren(topLevelURI, type, result);
-			}
+			});
 		} catch (JavaModelException e) {
 			if (LOGGER.isDebugEnabled())
 				LOGGER.debug(e, e);
