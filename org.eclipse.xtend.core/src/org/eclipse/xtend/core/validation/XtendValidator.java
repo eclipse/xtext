@@ -2168,7 +2168,18 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		}
 		return api;
 	}
-	
+
+	@Check
+	protected void checkModifierMatchesTypename(XtendClass xtendClass) {
+		String name = xtendClass.getName();
+		if (name != null) {
+			if (name.startsWith("Abstract") && !xtendClass.isAbstract()) {
+				addIssue("The class" + name + "is not declared abstract.", xtendClass, XTEND_TYPE_DECLARATION__NAME, -1,
+						MODIFIER_DOES_NOT_MATCH_TYPENAME);
+			}
+		}
+	}
+
 	@Check
 	protected void checkImplicitReturn(final XtendFunction method) {
 		if (isIgnored(IMPLICIT_RETURN)) 
