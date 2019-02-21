@@ -189,13 +189,15 @@ public class DeltaConverter {
 		
 		ICompilationUnit compilationUnit = (ICompilationUnit) delta.getElement();
 		try {
-			doForeachCompilationType(compilationUnit, type -> {
-				if (isDerived(type))
-					return;
+
+			boolean hasDerivedType = doForeachCompilationUnitChildType(compilationUnit, true, type -> {
 				String typeName = type.getFullyQualifiedName();
 				URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
 				convertChangedTypeAndChildren(result, typeNames, type, topLevelURI);
 			});
+			
+			if (hasDerivedType)
+				return;
 			
 			convertRemovedTypes(typeNames, result);
 		} catch (JavaModelException e) {
@@ -205,14 +207,19 @@ public class DeltaConverter {
 		}
 	}
 	
-	private void doForeachCompilationType(ICompilationUnit compilationUnit, Consumer<IType> consumer) throws JavaModelException {
+	private boolean doForeachCompilationUnitChildType(ICompilationUnit compilationUnit, boolean stopAtFirstDerivedType, Consumer<IType> consumer) throws JavaModelException {
 		IOpenable openableUnit = compilationUnit.getOpenable();
 		boolean wasOpen = openableUnit.isOpen();
 
 		try {
 			for (IType type : compilationUnit.getTypes()) {
-				consumer.accept(type);
+				if (stopAtFirstDerivedType && isDerived(type))
+					return true;
+				
+				consumer.accept(type); 
 			}
+			
+			return false;
 		} finally {
 			boolean isOpen = openableUnit.isOpen();
 			if (!wasOpen && isOpen) {
@@ -221,6 +228,7 @@ public class DeltaConverter {
 			}
 		}
 	}
+	
 	/**
 	 * @since 2.8
 	 */
@@ -273,9 +281,7 @@ public class DeltaConverter {
 	 */
 	protected void convertNewTypes(ICompilationUnit compilationUnit, List<IResourceDescription.Delta> result) {
 		try {
-			doForeachCompilationType(compilationUnit, type -> {
-				if (isDerived(type))
-					return;
+			doForeachCompilationUnitChildType(compilationUnit, true, type -> {
 				String typeName = type.getFullyQualifiedName();
 				URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
 				convertNewTypeAndChildren(topLevelURI, type, result);
