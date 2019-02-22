@@ -46,7 +46,9 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	@Override
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
-		ProjectConfigAdapter.install(set, projectConfigProvider.createProjectConfig(project));
+		if (project != null) {
+			ProjectConfigAdapter.install(set, projectConfigProvider.createProjectConfig(project));	
+		}
 		for(int i = 0; i < initializers.size(); i++) {
 			initializers.get(i).initialize(set, project);
 		}
