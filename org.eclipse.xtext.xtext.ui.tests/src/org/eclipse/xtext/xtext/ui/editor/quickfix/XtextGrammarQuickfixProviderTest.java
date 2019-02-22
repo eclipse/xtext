@@ -102,9 +102,15 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	}
 	
 	@Test
-	public void testFixKeywordNoSpaces() throws Exception {
+	public void testFixKeywordWithSpaces() throws Exception {
 		assertAndApplySingleResolution(editorForGrammar("Model: ' a b c d ' a=ID;"), SPACES_IN_KEYWORD, 0,
-				"Split keyword with spaces");
+				"Fix keyword with spaces");
+	}
+	
+	@Test
+	public void testFixEmptyKeywordWithSpaces() throws Exception {
+		assertAndApplySingleResolution(editorForGrammar("Model: '   ' a=ID;"), SPACES_IN_KEYWORD, 0,
+				"Fix keyword with spaces", false);
 	}
 
 	@Test

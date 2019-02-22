@@ -14,14 +14,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.AbstractList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -87,6 +85,7 @@ import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -176,19 +175,17 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Fix(SPACES_IN_KEYWORD)
 	public void fixKeywordNoSpaces(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Split keyword with spaces", "Split keyword with spaces", NULL_QUICKFIX_IMAGE,
-				(ISemanticModification) (EObject element, IModificationContext context) -> {
-					final Keyword keyword = (Keyword) element;
-					final String[] identifiers = keyword.getValue().trim().split("\\s+");
-					if (identifiers.length > 0) {
-						final IXtextDocument document = context.getXtextDocument();
-						final String quote = String.valueOf(document.getChar(issue.getOffset()));
-						document.replace(issue.getOffset(), issue.getLength(), Arrays.stream(identifiers)
-								.map(identifier -> String.format("%s%s%s", quote, identifier, quote)).collect(Collectors.joining(" ")));
-					} else {
-						keyword.setValue("");
-					}
-				});
+		acceptor.accept(issue, "Fix keyword with spaces", "Fix keyword with spaces", NULL_QUICKFIX_IMAGE, new IModification() {
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				final int offset = issue.getOffset();
+				final int length = issue.getLength();
+				final IXtextDocument document = context.getXtextDocument();
+				final String quote = String.valueOf(document.getChar(offset));
+				final String[] identifiers = document.get(offset, length).replaceAll("'|\"", "").trim().split("\\s+");
+				document.replace(issue.getOffset(), length, quote + Joiner.on(quote + " " + quote).join(identifiers) + quote);
+			}
+		});
 	}
 	
 	@Fix(INVALID_ACTION_USAGE)
