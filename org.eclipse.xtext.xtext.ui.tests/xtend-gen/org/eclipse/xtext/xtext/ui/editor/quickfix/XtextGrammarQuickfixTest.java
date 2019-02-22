@@ -7,21 +7,16 @@
  */
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest;
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
 import org.eclipse.xtext.xtext.ui.Activator;
-import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,12 +30,7 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
   public static class InjectorProvider implements IInjectorProvider {
     @Override
     public Injector getInjector() {
-      XtextRuntimeModule _xtextRuntimeModule = new XtextRuntimeModule();
-      Activator _default = Activator.getDefault();
-      XtextUIModuleInternal _xtextUIModuleInternal = new XtextUIModuleInternal(_default);
-      SharedStateModule _sharedStateModule = new SharedStateModule();
-      return Guice.createInjector(
-        Modules2.mixin(_xtextRuntimeModule, _xtextUIModuleInternal, _sharedStateModule));
+      return Activator.getDefault().getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT);
     }
   }
   

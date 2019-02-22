@@ -7,16 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix
 
-import com.google.inject.Guice
-import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.testing.IInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
-import org.eclipse.xtext.ui.shared.SharedStateModule
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest
-import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xtext.ui.Activator
-import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -50,9 +45,7 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 
 	static class InjectorProvider implements IInjectorProvider {
 		override getInjector() {
-			Guice.createInjector(
-				Modules2.mixin(new XtextRuntimeModule(), new XtextUIModuleInternal(Activator.getDefault()),
-					new SharedStateModule()));
+			Activator.getDefault().getInjector(Activator.ORG_ECLIPSE_XTEXT_XTEXT)
 		}
 	}
 
