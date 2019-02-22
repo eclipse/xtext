@@ -270,7 +270,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 		SubMonitor progress = SubMonitor.convert(monitor, 1);
 		try {
 			ResourceSet resourceSet = createResourceSet();
-			BuildData buildData = new BuildData(projectNames, resourceSet, task.getToBeBuilt(), queuedBuildData, false,
+			BuildData buildData = new BuildData(null, resourceSet, task.getToBeBuilt(), queuedBuildData, false,
 					BuildManagerAccess::requestBuild);
 			getBuilderState().update(buildData, progress.newChild(1));
 		} catch (Error | RuntimeException e) {
