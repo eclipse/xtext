@@ -78,8 +78,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
 /**
@@ -90,6 +92,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	@Accessors
 	protected val String fileExtension
+
+	protected static val TEST_PROJECT_PATH = "/test-data/test-project"
 
 	@Before @BeforeEach
 	def void setup() {
@@ -106,11 +110,14 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		languageServer.supportedMethods()
 
 		// create workingdir
-		root = new File(new File("").absoluteFile, "/test-data/test-project")
-		if (!root.mkdirs) {
-			Files.cleanFolder(root, null, true, false)
+		root = new File(new File("").absoluteFile, TEST_PROJECT_PATH)
+	}
+
+	@After @AfterEach
+	def void cleanup() {
+		if (root.exists) {
+			Files.cleanFolder(root, null, true, true)
 		}
-		root.deleteOnExit
 	}
 
 	protected def Module getServerModule() {
