@@ -85,6 +85,7 @@ import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -171,7 +172,22 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					enumLiteralDeclaration.setLiteral(keyword);
 				});
 	}
-
+	
+	@Fix(SPACES_IN_KEYWORD)
+	public void fixKeywordNoSpaces(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Fix keyword with spaces", "Fix keyword with spaces", NULL_QUICKFIX_IMAGE, new IModification() {
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				final int offset = issue.getOffset();
+				final int length = issue.getLength();
+				final IXtextDocument document = context.getXtextDocument();
+				final String quote = String.valueOf(document.getChar(offset));
+				final String[] identifiers = document.get(offset, length).replaceAll("'|\"", "").trim().split("\\s+");
+				document.replace(issue.getOffset(), length, quote + Joiner.on(quote + " " + quote).join(identifiers) + quote);
+			}
+		});
+	}
+	
 	@Fix(INVALID_ACTION_USAGE)
 	public void fixInvalidActionUsage(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix invalid action usage", "Fix invalid action usage", NULL_QUICKFIX_IMAGE,
