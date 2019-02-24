@@ -218,8 +218,22 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				final int length = issue.getLength();
 				final IXtextDocument document = context.getXtextDocument();
 				final String quote = String.valueOf(document.getChar(offset));
-				final String[] identifiers = document.get(offset, length).replaceAll("'|\"", "").trim().split("\\s+");
-				document.replace(issue.getOffset(), length, quote + Joiner.on(quote + " " + quote).join(identifiers) + quote);
+				final String identifiers = document.get(offset, length).replaceAll("'|\"", "").trim();
+				if (!Strings.isEmpty(identifiers)) {
+					document.replace(offset, length, quote + Joiner.on(quote + " " + quote).join(identifiers.split("\\s+")) + quote);
+				} else {
+					final String containingRuleName = document.tryPriorityReadOnly(new IUnitOfWork<String, XtextResource>() {
+						@Override
+						public String exec(XtextResource state) throws Exception {
+							return Optional.ofNullable(issue.getUriToProblem().fragment()).map(state::getEObject)
+									.map(GrammarUtil::containingRule).map(AbstractRule::getName).map(Strings::toFirstLower)
+									.orElse(null);
+						}
+					});
+					if (containingRuleName != null) {
+						document.replace(offset, length, quote + containingRuleName + quote);
+					}
+				}
 			}
 		});
 	}

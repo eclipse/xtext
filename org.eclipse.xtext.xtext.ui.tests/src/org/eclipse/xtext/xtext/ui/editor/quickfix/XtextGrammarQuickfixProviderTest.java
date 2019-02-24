@@ -112,7 +112,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 	@Test
 	public void testFixEmptyKeywordWithSpaces() throws Exception {
 		assertAndApplySingleResolution(editorForGrammar("Model: '   ' a=ID;"), SPACES_IN_KEYWORD, 0,
-				"Fix keyword with spaces", false);
+				"Fix keyword with spaces");
 	}
 
 	@Test

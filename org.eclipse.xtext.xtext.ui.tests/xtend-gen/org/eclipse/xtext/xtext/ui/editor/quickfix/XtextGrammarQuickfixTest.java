@@ -100,7 +100,7 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
     _builder_1.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("Model: \'\' a=ID;");
+    _builder_1.append("Model: \'model\' a=ID;");
     _builder_1.newLine();
     this.applyKeywordWithSpacesQuickfix(_builder, _builder_1.toString());
   }

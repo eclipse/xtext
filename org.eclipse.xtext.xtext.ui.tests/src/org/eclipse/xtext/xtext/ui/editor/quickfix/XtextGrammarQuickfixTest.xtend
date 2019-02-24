@@ -72,7 +72,7 @@ class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 			generate myDsl "http://www.xtext.org/mydsl/MyDsl"
 			
-			Model: '' a=ID;
+			Model: 'model' a=ID;
 		''')
 	}
 	
