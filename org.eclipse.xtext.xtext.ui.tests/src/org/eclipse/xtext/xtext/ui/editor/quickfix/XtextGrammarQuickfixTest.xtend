@@ -24,24 +24,41 @@ import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.SPACES_IN_KEYW
 @InjectWith(XtextGrammarQuickfixTest.InjectorProvider)
 class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
 
-	@Test
-	def testFixKeywordWithSpaces() {
-		grammarWithRules('''Model: ' a b c d ' a=ID;''').testQuickfixesOn(SPACES_IN_KEYWORD,
-			new Quickfix("Fix keyword with spaces", "Fix keyword with spaces",
-				grammarWithRules('''Model: 'a' 'b' 'c' 'd' a=ID;''')))
+	@Test def fix_keyword_with_spaces() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			generate myDsl "http://www.xtext.org/mydsl/MyDsl"
+
+			Model: ' a b c d ' a=ID;
+		'''.applyKeywordWithSpacesQuickfix('''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			generate myDsl "http://www.xtext.org/mydsl/MyDsl"
+			
+			Model: 'a' 'b' 'c' 'd' a=ID;
+		''')
 	}
 
-	@Test
-	def testFixEmptyKeywordWithSpaces() {
-		grammarWithRules('''Model: '    ' a=ID;''').testQuickfixesOn(SPACES_IN_KEYWORD,
-			new Quickfix("Fix keyword with spaces", "Fix keyword with spaces", grammarWithRules('''Model: '' a=ID;''')))
+	@Test def fix_empty_keyword_with_spaces() {
+		'''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			generate myDsl "http://www.xtext.org/mydsl/MyDsl"
+			
+			Model: '    ' a=ID;
+		'''.applyKeywordWithSpacesQuickfix('''
+			grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+			generate myDsl "http://www.xtext.org/mydsl/MyDsl"
+			
+			Model: '' a=ID;
+		''')
 	}
 
-	def private String grammarWithRules(CharSequence... rules) '''
-		grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
-		generate myDsl "http://www.xtext.org/mydsl/MyDsl"
-		«rules.join('\n')»
-	'''
+	private def applyKeywordWithSpacesQuickfix(CharSequence input, String result) {
+		val issueCode = SPACES_IN_KEYWORD
+		val label = "Fix keyword with spaces"
+		val description = "Fix keyword with spaces"
+
+		input.testQuickfixesOn(issueCode, new Quickfix(label, description, result))
+	}
 
 	static class InjectorProvider implements IInjectorProvider {
 		override getInjector() {
