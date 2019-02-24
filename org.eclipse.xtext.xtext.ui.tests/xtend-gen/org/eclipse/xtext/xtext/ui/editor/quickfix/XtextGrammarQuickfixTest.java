@@ -13,8 +13,6 @@ import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.testing.AbstractQuickfixTest;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.XtextConfigurableIssueCodes;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.junit.Test;
@@ -35,38 +33,52 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
   }
   
   @Test
-  public void testFixKeywordWithSpaces() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Model: \' a b c d \' a=ID;");
-    String _grammarWithRules = this.grammarWithRules(_builder);
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Model: \'a\' \'b\' \'c\' \'d\' a=ID;");
-    String _grammarWithRules_1 = this.grammarWithRules(_builder_1);
-    AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Fix keyword with spaces", "Fix keyword with spaces", _grammarWithRules_1);
-    this.testQuickfixesOn(_grammarWithRules, XtextConfigurableIssueCodes.SPACES_IN_KEYWORD, _quickfix);
-  }
-  
-  @Test
-  public void testFixEmptyKeywordWithSpaces() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Model: \'    \' a=ID;");
-    String _grammarWithRules = this.grammarWithRules(_builder);
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Model: \'\' a=ID;");
-    String _grammarWithRules_1 = this.grammarWithRules(_builder_1);
-    AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix("Fix keyword with spaces", "Fix keyword with spaces", _grammarWithRules_1);
-    this.testQuickfixesOn(_grammarWithRules, XtextConfigurableIssueCodes.SPACES_IN_KEYWORD, _quickfix);
-  }
-  
-  private String grammarWithRules(final CharSequence... rules) {
+  public void fix_keyword_with_spaces() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
     _builder.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
     _builder.newLine();
-    String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(rules)), "\n");
-    _builder.append(_join);
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
+    _builder.newLine();
+    _builder.append("Model: \' a b c d \' a=ID;");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder_1.newLine();
+    _builder_1.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("Model: \'a\' \'b\' \'c\' \'d\' a=ID;");
+    _builder_1.newLine();
+    this.applyKeywordWithSpacesQuickfix(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void fix_empty_keyword_with_spaces() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Model: \'    \' a=ID;");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder_1.newLine();
+    _builder_1.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("Model: \'\' a=ID;");
+    _builder_1.newLine();
+    this.applyKeywordWithSpacesQuickfix(_builder, _builder_1.toString());
+  }
+  
+  private void applyKeywordWithSpacesQuickfix(final CharSequence input, final String result) {
+    final String issueCode = XtextConfigurableIssueCodes.SPACES_IN_KEYWORD;
+    final String label = "Fix keyword with spaces";
+    final String description = "Fix keyword with spaces";
+    AbstractQuickfixTest.Quickfix _quickfix = new AbstractQuickfixTest.Quickfix(label, description, result);
+    this.testQuickfixesOn(input, issueCode, _quickfix);
   }
 }
