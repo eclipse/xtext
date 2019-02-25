@@ -18,8 +18,8 @@ import com.google.inject.Injector;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class RuntimeInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-	
-    protected GlobalStateMemento stateBeforeInjectorCreation;
+
+	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
@@ -28,29 +28,32 @@ public class RuntimeInjectorProvider implements IInjectorProvider, IRegistryConf
 	}
 
 	@Override
-	public Injector getInjector()
-	{
+	public Injector getInjector() {
 		if (injector == null) {
-			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = internalCreateInjector();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
 		return injector;
 	}
-	
+
 	protected Injector internalCreateInjector() {
-	    return new RuntimeTestSetup().createInjectorAndDoEMFRegistration();
+		return new RuntimeTestSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = null;
 	}
 
 	@Override
 	public void setupRegistry() {
-		getInjector();
-		stateAfterInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		if (injector == null) {
+			getInjector();
+		} else {
+			stateAfterInjectorCreation.restoreGlobalState();
+		}
 	}
-	
+
 }

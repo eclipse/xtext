@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.junit.AfterClass
 
-class AbstractBuilderTest extends AbstractXtendUITestCase {
+abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
 	
 	protected static val DEFAULT_BODY = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
 	

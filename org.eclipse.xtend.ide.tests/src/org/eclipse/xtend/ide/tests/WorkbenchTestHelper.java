@@ -269,7 +269,7 @@ public class WorkbenchTestHelper extends Assert {
 	}
 	
 	public static IProject createPluginProject(String name, JavaVersion javaVersion, String... requiredBundles) throws CoreException {
-		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
+		Injector injector = XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(getBree(javaVersion));

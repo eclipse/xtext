@@ -107,7 +107,7 @@ public class WorkspaceScenariosTest {
           return true;
         };
         project.accept(_function_1);
-        Assert.assertEquals(2, allXtendMarkers.size());
+        Assert.assertEquals(IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(allXtendMarkers, IMarker.class))), 2, allXtendMarkers.size());
         Assert.assertEquals(1, ((Object[])Conversions.unwrapArray(this.persistedResourceDescriptions.get().getAllResourceDescriptions(), Object.class)).length);
       } finally {
         project.delete(true, true, null);
