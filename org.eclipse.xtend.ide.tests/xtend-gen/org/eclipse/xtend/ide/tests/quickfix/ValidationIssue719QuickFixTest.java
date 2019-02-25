@@ -194,14 +194,14 @@ public class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
   @Test
   public void add_abstract_annotation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@Depreciated");
+    _builder.append("@Deprecated");
     _builder.newLine();
     _builder.append("class AbstractX{");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@Depreciated");
+    _builder_1.append("@Deprecated");
     _builder_1.newLine();
     _builder_1.append("abstract class AbstractX{");
     _builder_1.newLine();

@@ -2174,7 +2174,7 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 		String name = xtendClass.getName();
 		if (name != null) {
 			if (name.startsWith("Abstract") && !xtendClass.isAbstract()) {
-				addIssue("The class" + name + "is not declared abstract.", xtendClass, XTEND_TYPE_DECLARATION__NAME, -1,
+				addIssue("The class \"" + name + "\" is not declared abstract.", xtendClass, XTEND_TYPE_DECLARATION__NAME, -1,
 						MODIFIER_DOES_NOT_MATCH_TYPENAME);
 			}
 		}

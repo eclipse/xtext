@@ -135,11 +135,11 @@ class ValidationIssue719QuickFixTest extends AbstractQuickfixTest {
 	@Test
 	def void add_abstract_annotation() {
 		'''
-			@Depreciated
+			@Deprecated
 			class AbstractX{
 			}
 		'''.applyFix('''
-			@Depreciated
+			@Deprecated
 			abstract class AbstractX{
 			}
 		''')
