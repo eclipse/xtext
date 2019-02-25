@@ -118,8 +118,10 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 /**
@@ -181,27 +183,32 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   @Accessors
   protected final String fileExtension;
   
+  protected static final String TEST_PROJECT_PATH = "/test-data/test-project";
+  
   @Before
   @BeforeEach
   public void setup() {
+    final Injector injector = Guice.createInjector(this.getServerModule());
+    injector.injectMembers(this);
+    final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);
+    if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
+      this.languageInfo = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
+    }
+    this.languageServer.connect(ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class));
+    this.languageServer.supportedMethods();
+    File _absoluteFile = new File("").getAbsoluteFile();
+    File _file = new File(_absoluteFile, AbstractLanguageServerTest.TEST_PROJECT_PATH);
+    this.root = _file;
+  }
+  
+  @After
+  @AfterEach
+  public void cleanup() {
     try {
-      final Injector injector = Guice.createInjector(this.getServerModule());
-      injector.injectMembers(this);
-      final Object resourceServiceProvider = this.resourceServerProviderRegistry.getExtensionToFactoryMap().get(this.fileExtension);
-      if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
-        this.languageInfo = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
+      boolean _exists = this.root.exists();
+      if (_exists) {
+        Files.cleanFolder(this.root, null, true, true);
       }
-      this.languageServer.connect(ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class));
-      this.languageServer.supportedMethods();
-      File _absoluteFile = new File("").getAbsoluteFile();
-      File _file = new File(_absoluteFile, "/test-data/test-project");
-      this.root = _file;
-      boolean _mkdirs = this.root.mkdirs();
-      boolean _not = (!_mkdirs);
-      if (_not) {
-        Files.cleanFolder(this.root, null, true, false);
-      }
-      this.root.deleteOnExit();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
