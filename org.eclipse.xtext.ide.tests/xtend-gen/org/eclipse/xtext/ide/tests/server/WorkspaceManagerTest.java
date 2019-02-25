@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -94,6 +95,18 @@ public class WorkspaceManagerTest {
         this.diagnostics.put($0, IterableExtensions.<Issue>toList($1));
       };
       this.workspaceManger.initialize(this.uriExtensions.withEmptyAuthority(URI.createFileURI(this.root.getAbsolutePath())), _function, null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @After
+  public void cleanup() {
+    try {
+      boolean _exists = this.root.exists();
+      if (_exists) {
+        Files.cleanFolder(this.root, null, true, true);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

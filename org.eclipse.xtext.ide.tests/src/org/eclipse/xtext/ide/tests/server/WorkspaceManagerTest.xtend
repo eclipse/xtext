@@ -15,13 +15,14 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.validation.Issue
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.eclipse.xtext.ide.server.UriExtensions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -63,6 +64,13 @@ class WorkspaceManagerTest {
         }
         root.deleteOnExit
         workspaceManger.initialize(URI.createFileURI(root.absolutePath).withEmptyAuthority, [diagnostics.put($0, $1.toList)], null)
+    }
+    
+    @After
+    def void cleanup() {
+        if (root.exists) {
+            Files.cleanFolder(root, null, true, true)
+        }
     }
 
     protected Map<URI, List<Issue>> diagnostics = newHashMap()
