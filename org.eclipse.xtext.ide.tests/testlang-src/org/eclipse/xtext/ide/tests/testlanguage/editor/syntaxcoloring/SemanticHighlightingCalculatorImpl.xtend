@@ -80,7 +80,7 @@ class SemanticHighlightingCalculatorImpl extends DefaultSemanticHighlightingCalc
 	}
 
 	def dispatch boolean doHighlightElement(TypeDeclaration it, IHighlightedPositionAcceptor acceptor) {
-		return acceptor.doHighlightNode(it, TYPE_DECLARATION__NAME, TYPE_DECLARATION_STYLE);
+		return acceptor.doHighlightNode(it, ABSTRACT_ELEMENT__NAME, TYPE_DECLARATION_STYLE);
 	}
 
 	def dispatch boolean doHighlightElement(PrimitiveType it, IHighlightedPositionAcceptor acceptor) {

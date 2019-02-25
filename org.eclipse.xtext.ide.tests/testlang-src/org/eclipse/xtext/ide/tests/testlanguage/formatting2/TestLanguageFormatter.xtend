@@ -23,7 +23,7 @@ class TestLanguageFormatter extends AbstractFormatter2 {
 	@Inject extension TestLanguageGrammarAccess
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
-		for (type : model.types) {
+		for (type : model.elements) {
 			type.format
 		}	
 	}

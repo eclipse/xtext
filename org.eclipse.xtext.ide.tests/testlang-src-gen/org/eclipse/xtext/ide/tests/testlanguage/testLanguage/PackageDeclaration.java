@@ -9,25 +9,23 @@ package org.eclipse.xtext.ide.tests.testlanguage.testLanguage;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model</b></em>'.
+ * A representation of the model object '<em><b>Package Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration#getElements <em>Elements</em>}</li>
  * </ul>
  *
- * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getModel()
+ * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getPackageDeclaration()
  * @model
  * @generated
  */
-public interface Model extends EObject
+public interface PackageDeclaration extends AbstractElement
 {
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
@@ -39,10 +37,10 @@ public interface Model extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Elements</em>' containment reference list.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getModel_Elements()
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getPackageDeclaration_Elements()
    * @model containment="true"
    * @generated
    */
   EList<AbstractElement> getElements();
 
-} // Model
+} // PackageDeclaration

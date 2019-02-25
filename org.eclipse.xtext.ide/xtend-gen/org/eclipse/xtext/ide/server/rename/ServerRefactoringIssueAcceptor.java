@@ -72,7 +72,6 @@ public class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor 
     };
     ServerRefactoringIssueAcceptor.Issue _doubleArrow = ObjectExtensions.<ServerRefactoringIssueAcceptor.Issue>operator_doubleArrow(_issue, _function);
     this.issues.add(_doubleArrow);
-    this.checkSeverity();
   }
   
   protected boolean addIssue(final RefactoringIssueAcceptor.Severity severity, final String message) {

@@ -35,9 +35,11 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TestLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getAbstractElementAccess().getAlternatives(), "rule__AbstractElement__Alternatives");
 			builder.put(grammarAccess.getMemberAccess().getAlternatives(), "rule__Member__Alternatives");
 			builder.put(grammarAccess.getTypeAccess().getAlternatives_0(), "rule__Type__Alternatives_0");
 			builder.put(grammarAccess.getPrimitiveTypeAccess().getNameAlternatives_0(), "rule__PrimitiveType__NameAlternatives_0");
+			builder.put(grammarAccess.getPackageDeclarationAccess().getGroup(), "rule__PackageDeclaration__Group__0");
 			builder.put(grammarAccess.getTypeDeclarationAccess().getGroup(), "rule__TypeDeclaration__Group__0");
 			builder.put(grammarAccess.getTypeDeclarationAccess().getGroup_2(), "rule__TypeDeclaration__Group_2__0");
 			builder.put(grammarAccess.getPropertyAccess().getGroup(), "rule__Property__Group__0");
@@ -51,7 +53,11 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getOperationCallAccess().getGroup_2(), "rule__OperationCall__Group_2__0");
 			builder.put(grammarAccess.getOperationCallAccess().getGroup_2_1(), "rule__OperationCall__Group_2_1__0");
 			builder.put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
-			builder.put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
+			builder.put(grammarAccess.getModelAccess().getElementsAssignment(), "rule__Model__ElementsAssignment");
+			builder.put(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1(), "rule__PackageDeclaration__NameAssignment_1");
+			builder.put(grammarAccess.getPackageDeclarationAccess().getElementsAssignment_3(), "rule__PackageDeclaration__ElementsAssignment_3");
 			builder.put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
 			builder.put(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1(), "rule__TypeDeclaration__SuperTypeAssignment_2_1");
 			builder.put(grammarAccess.getTypeDeclarationAccess().getMembersAssignment_4(), "rule__TypeDeclaration__MembersAssignment_4");

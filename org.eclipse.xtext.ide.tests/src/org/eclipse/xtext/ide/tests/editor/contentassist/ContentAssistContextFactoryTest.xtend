@@ -79,8 +79,11 @@ class ContentAssistContextFactoryTest {
 		'''
 		'''
 			context0 {
-				Assignment: Model:types+= *
-				RuleCall: Model:types+=TypeDeclaration
+				Assignment: Model:elements+= *
+				RuleCall: Model:elements+=AbstractElement
+				RuleCall: AbstractElement:PackageDeclaration
+				Keyword: PackageDeclaration:'package'
+				RuleCall: AbstractElement:TypeDeclaration
 				Keyword: TypeDeclaration:'type'
 				RuleCall: <AbstractElement not contained in AbstractRule!>:Model
 			}

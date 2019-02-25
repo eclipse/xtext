@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.lsp4j.CodeAction;
@@ -103,8 +102,8 @@ public class CodeActionService implements ICodeActionService2 {
   private CodeAction fixUnsortedMembers(final Diagnostic d, final ICodeActionService2.Options options) {
     final IChangeSerializer.IModification<Resource> _function = (Resource copiedResource) -> {
       final Model model = IterableExtensions.<Model>head(Iterables.<Model>filter(copiedResource.getContents(), Model.class));
-      EList<TypeDeclaration> _types = model.getTypes();
-      for (final TypeDeclaration type : _types) {
+      Iterable<TypeDeclaration> _filter = Iterables.<TypeDeclaration>filter(model.getElements(), TypeDeclaration.class);
+      for (final TypeDeclaration type : _filter) {
         final Comparator<Member> _function_1 = (Member a, Member b) -> {
           String _name = a.getName();
           String _name_1 = b.getName();

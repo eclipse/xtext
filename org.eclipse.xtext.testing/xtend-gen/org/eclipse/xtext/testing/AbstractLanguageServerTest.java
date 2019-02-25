@@ -79,6 +79,7 @@ import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.util.Ranges;
 import org.eclipse.lsp4j.util.SemanticHighlightingTokens;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -547,7 +548,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("selectionRange must be contained in the range: ");
       _builder.append(it);
-      Assert.assertTrue(_builder.toString(), AbstractLanguageServerTest.contains(it.getRange(), it.getSelectionRange()));
+      Assert.assertTrue(_builder.toString(), Ranges.containsRange(it.getRange(), it.getSelectionRange()));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("symbol \"");
       String _name = it.getName();
@@ -995,11 +996,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setContext(_doubleArrow_1);
       };
       CodeActionParams _doubleArrow = ObjectExtensions.<CodeActionParams>operator_doubleArrow(_codeActionParams, _function);
-      final CompletableFuture<List<Either<Command, CodeAction>>> codeLenses = this.languageServer.codeAction(_doubleArrow);
+      final CompletableFuture<List<Either<Command, CodeAction>>> result = this.languageServer.codeAction(_doubleArrow);
       if ((configuration.assertCodeActions != null)) {
-        configuration.assertCodeActions.apply(codeLenses.get());
+        configuration.assertCodeActions.apply(result.get());
       } else {
-        this.assertEquals(configuration.expectedCodeActions, this.toExpectation(codeLenses.get()));
+        this.assertEquals(configuration.expectedCodeActions, this.toExpectation(result.get()));
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -1237,46 +1238,6 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  /**
-   * {@code true} if the {@code smaller} range is inside or equal to the {@code bigger} range.
-   * Otherwise, {@code false}.
-   */
-  private static boolean contains(final Range bigger, final Range smaller) {
-    return (AbstractLanguageServerTest.contains(bigger, smaller.getStart()) && AbstractLanguageServerTest.contains(bigger, smaller.getEnd()));
-  }
-  
-  /**
-   * {@code true} if the position is either inside or on the border of the range.
-   * Otherwise, {@code false}.
-   */
-  private static boolean contains(final Range range, final Position position) {
-    return ((Objects.equal(range.getStart(), position) || AbstractLanguageServerTest.isBefore(range.getStart(), position)) && (Objects.equal(range.getEnd(), position) || AbstractLanguageServerTest.isBefore(position, range.getEnd())));
-  }
-  
-  /**
-   * {@code true} if {@left} is strictly before than {@code right}.
-   * Otherwise, {@code false}.
-   * <p>
-   * If you want to allow equality, use {@link Position#equals}.
-   */
-  private static boolean isBefore(final Position left, final Position right) {
-    int _line = left.getLine();
-    int _line_1 = right.getLine();
-    boolean _lessThan = (_line < _line_1);
-    if (_lessThan) {
-      return true;
-    }
-    int _line_2 = left.getLine();
-    int _line_3 = right.getLine();
-    boolean _greaterThan = (_line_2 > _line_3);
-    if (_greaterThan) {
-      return false;
-    }
-    int _character = left.getCharacter();
-    int _character_1 = right.getCharacter();
-    return (_character < _character_1);
   }
   
   protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguration> configurator) {

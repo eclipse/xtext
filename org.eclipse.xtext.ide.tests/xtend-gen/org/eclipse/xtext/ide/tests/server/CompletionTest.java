@@ -54,6 +54,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
     final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
       it.setModel("");
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package -> package [[0, 0] .. [0, 0]]");
+      _builder.newLine();
       _builder.append("type -> type [[0, 0] .. [0, 0]]");
       _builder.newLine();
       _builder.append("Sample Snippet -> type ${1|A,B,C|} {");
@@ -202,6 +204,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       it.setLine(1);
       it.setColumn(0);
       StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("(Keyword) package -> package [[1, 0] .. [1, 0]]");
+      _builder_1.newLine();
       _builder_1.append("(Keyword) type -> type [[1, 0] .. [1, 0]]");
       _builder_1.newLine();
       _builder_1.append("(Snippet|Snippet) Sample Snippet -> type ${1|A,B,C|} {");

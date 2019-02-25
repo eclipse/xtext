@@ -14,6 +14,7 @@ import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.server.commands.IExecutableCommandService;
+import org.eclipse.xtext.ide.server.rename.IRenameService2;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageExecutableCommandService;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageIdeContentPropos
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageProposalCreator;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService;
+import org.eclipse.xtext.ide.tests.testlanguage.rename.TestLanguageRenameService;
 
 /**
  * Use this class to register ide components.
@@ -53,5 +55,10 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
   
   public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
     return TestLanguageIdeContentProposalProvider.class;
+  }
+  
+  @Override
+  public Class<? extends IRenameService2> bindIRenameService2() {
+    return TestLanguageRenameService.class;
   }
 }

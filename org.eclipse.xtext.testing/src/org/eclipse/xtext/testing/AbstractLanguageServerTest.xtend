@@ -86,6 +86,8 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.eclipse.lsp4j.services.LanguageClient
 
+import static extension org.eclipse.lsp4j.util.Ranges.containsRange
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -290,7 +292,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	 * @since 2.16
 	 */
 	protected def dispatch String toExpectation(DocumentSymbol it) {
-		Assert.assertTrue('''selectionRange must be contained in the range: «it»''', range.contains(selectionRange))
+		Assert.assertTrue('''selectionRange must be contained in the range: «it»''', range.containsRange(selectionRange))
 	'''
 		symbol "«name»" {
 		    kind: «kind.value»
@@ -448,7 +450,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		configuration.filePath = 'MyModel.' + fileExtension
 		configurator.apply(configuration)
 		val filePath = initializeContext(configuration).uri
-		val codeLenses = languageServer.codeAction(new CodeActionParams=>[
+		val result = languageServer.codeAction(new CodeActionParams=>[
 			textDocument = new TextDocumentIdentifier(filePath)
 			range = new Range => [
 				start = new Position(configuration.line, configuration.column)
@@ -460,9 +462,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 
 		if (configuration.assertCodeActions !== null) {
-			configuration.assertCodeActions.apply(codeLenses.get)
+			configuration.assertCodeActions.apply(result.get)
 		} else {
-			assertEquals(configuration.expectedCodeActions, codeLenses.get.toExpectation)
+			assertEquals(configuration.expectedCodeActions, result.get.toExpectation)
 		}
 	}
 
@@ -593,40 +595,6 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			val String actualSymbols = unwrappedSymbols.toExpectation
 			assertEquals(expectedSymbols, actualSymbols)
 		}
-	}
-
-	/**
-	 * {@code true} if the {@code smaller} range is inside or equal to the {@code bigger} range.
-	 * Otherwise, {@code false}.
-	 */
-	// `private` visibility because this should be in LSP4J: https://github.com/eclipse/lsp4j/issues/261
-	private static def boolean contains(Range bigger, Range smaller) {
-		return bigger.contains(smaller.start) && bigger.contains(smaller.end);
-	}
-
-	/**
-	 * {@code true} if the position is either inside or on the border of the range.
-	 * Otherwise, {@code false}.
-	 */
-	private static def boolean contains(Range range, Position position) {
-		return (range.start == position || range.start.isBefore(position))
-			&& (range.end == position || position.isBefore(range.end))
-	}
-
-	/**
-	 * {@code true} if {@left} is strictly before than {@code right}.
-	 * Otherwise, {@code false}.
-	 * <p>
-	 * If you want to allow equality, use {@link Position#equals}.
-	 */
-	private static def boolean isBefore(Position left, Position right) {
-		if (left.line < right.line) {
-			return true;
-		}
-		if (left.line > right.line) {
-			return false;
-		}
-		return left.character < right.character;
 	}
 
 	protected def void testSymbol((WorkspaceSymbolConfiguration)=>void configurator) {

@@ -16,29 +16,27 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement;
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Package Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ModelImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PackageDeclarationImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class PackageDeclarationImpl extends AbstractElementImpl implements PackageDeclaration
 {
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -55,7 +53,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected PackageDeclarationImpl()
   {
     super();
   }
@@ -68,7 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return TestLanguagePackage.Literals.MODEL;
+    return TestLanguagePackage.Literals.PACKAGE_DECLARATION;
   }
 
   /**
@@ -80,7 +78,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (elements == null)
     {
-      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, TestLanguagePackage.MODEL__ELEMENTS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS);
     }
     return elements;
   }
@@ -95,7 +93,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case TestLanguagePackage.MODEL__ELEMENTS:
+      case TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -111,7 +109,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case TestLanguagePackage.MODEL__ELEMENTS:
+      case TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS:
         return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -128,7 +126,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case TestLanguagePackage.MODEL__ELEMENTS:
+      case TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS:
         getElements().clear();
         getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
@@ -146,7 +144,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case TestLanguagePackage.MODEL__ELEMENTS:
+      case TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS:
         getElements().clear();
         return;
     }
@@ -163,10 +161,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case TestLanguagePackage.MODEL__ELEMENTS:
+      case TestLanguagePackage.PACKAGE_DECLARATION__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+} //PackageDeclarationImpl

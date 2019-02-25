@@ -25,7 +25,7 @@ class TestLanguageValidator extends AbstractTestLanguageValidator {
 	def checkGreetingStartsWithCapital(TypeDeclaration type) {
 		if (!Character.isUpperCase(type.name.charAt(0))) {
 			warning('Name should start with a capital', 
-					TestLanguagePackage.Literals.TYPE_DECLARATION__NAME,
+					TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME,
 					INVALID_NAME)
 		}
 	}
@@ -35,7 +35,7 @@ class TestLanguageValidator extends AbstractTestLanguageValidator {
 		if (type.members.sortBy[name] != type.members) {
 			warning(
 				'Members should be in alphabetic order.',
-				TestLanguagePackage.Literals.TYPE_DECLARATION__NAME,
+				TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME,
 				UNSORTED_MEMBERS
 			)
 		}

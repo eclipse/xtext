@@ -22,6 +22,7 @@ import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
 import org.eclipse.xtext.util.CollectionBasedAcceptor
 
 import static org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator.*
@@ -63,7 +64,7 @@ class CodeActionService implements ICodeActionService2 {
 	def private CodeAction fixUnsortedMembers(Diagnostic d, Options options) {
 		val wsEdit = recordWorkspaceEdit(options) [ copiedResource |
 			val model = copiedResource.contents.filter(Model).head
-			for (type : model.types) {
+			for (type : model.elements.filter(TypeDeclaration)) {
 				ECollections.sort(type.members, [a, b|a.name <=> b.name])
 			}
 		]

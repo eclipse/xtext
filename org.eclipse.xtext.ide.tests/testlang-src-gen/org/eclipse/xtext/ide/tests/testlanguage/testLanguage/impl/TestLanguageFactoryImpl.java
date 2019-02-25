@@ -70,6 +70,8 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
     switch (eClass.getClassifierID())
     {
       case TestLanguagePackage.MODEL: return createModel();
+      case TestLanguagePackage.PACKAGE_DECLARATION: return createPackageDeclaration();
+      case TestLanguagePackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case TestLanguagePackage.TYPE_DECLARATION: return createTypeDeclaration();
       case TestLanguagePackage.MEMBER: return createMember();
       case TestLanguagePackage.PROPERTY: return createProperty();
@@ -93,6 +95,28 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PackageDeclaration createPackageDeclaration()
+  {
+    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
+    return packageDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AbstractElement createAbstractElement()
+  {
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
   }
 
   /**

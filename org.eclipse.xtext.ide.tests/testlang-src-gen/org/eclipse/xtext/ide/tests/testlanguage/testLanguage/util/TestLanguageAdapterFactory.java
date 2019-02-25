@@ -85,6 +85,16 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
+      public Adapter casePackageDeclaration(PackageDeclaration object)
+      {
+        return createPackageDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseAbstractElement(AbstractElement object)
+      {
+        return createAbstractElementAdapter();
+      }
+      @Override
       public Adapter caseTypeDeclaration(TypeDeclaration object)
       {
         return createTypeDeclarationAdapter();
@@ -162,6 +172,36 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration <em>Package Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration
+   * @generated
+   */
+  public Adapter createPackageDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement <em>Abstract Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement
+   * @generated
+   */
+  public Adapter createAbstractElementAdapter()
   {
     return null;
   }

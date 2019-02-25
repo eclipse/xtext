@@ -57,7 +57,6 @@ class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor {
 			it.severity = severity
 			it.message = message
 		]
-		checkSeverity
 	}
 	
 	protected def boolean addIssue(Severity severity, String message) {

@@ -50,6 +50,7 @@ import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.RenameOptions
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities
 import org.eclipse.lsp4j.ServerCapabilities
@@ -90,6 +91,7 @@ import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.rename.IRenameService
 import org.eclipse.xtext.ide.server.rename.IRenameService2
+import org.eclipse.xtext.ide.server.rename.IRenameService2.PrepareRenameOptions
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -123,6 +125,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	// injected below
 	WorkspaceManager workspaceManager
 	InitializeParams params
+	InitializeResult initializeResult
 	CompletableFuture<InitializedParams>  initialized = new CompletableFuture
 	
 	@Inject
@@ -174,7 +177,14 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
-			renameProvider = allLanguages.exists[get(IRenameService) !== null || get(IRenameService2) !== null]
+			val clientPrepareSupport = Boolean.TRUE == params?.capabilities?.textDocument?.rename?.prepareSupport
+			renameProvider = if (clientPrepareSupport && allLanguages.exists[get(IRenameService2) !== null]) {
+				Either.forRight(new RenameOptions => [
+					prepareProvider = true
+				])
+			} else {
+				Either.forLeft(allLanguages.exists[get(IRenameService) !== null || get(IRenameService2) !== null])
+			}
 
 			val clientCapabilities = params.capabilities;
 			// register execute command capability
@@ -199,7 +209,10 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		return requestManager.runWrite([
 			workspaceManager.initialize(baseDir, [this.publishDiagnostics($0, $1)], CancelIndicator.NullImpl)
 			return null
-		], []).thenApply [result]
+		], []).thenApply [
+			this.initializeResult = result
+			return result
+		]
 	}
 	
 	override void initialized(InitializedParams params) {
@@ -638,7 +651,26 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			return new WorkspaceEdit
 		]
 	}
-	
+
+	/**
+	 * @since 2.18
+	 */
+	override prepareRename(TextDocumentPositionParams params) {
+		return requestManager.runRead [ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val renameService = resourceServiceProvider?.get(IRenameService2)
+			if (renameService === null) {
+				throw new UnsupportedOperationException()
+			}
+			renameService.prepareRename(new PrepareRenameOptions => [
+				it.languageServerAccess = access
+				it.params = params
+				it.cancelIndicator = cancelIndicator
+			])
+		]
+	}
+
 	override notify(String method, Object parameter) {
 		for (endpoint : extensionProviders.get(method)) {
 			try {
@@ -744,6 +776,10 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 				val ctx = new IndexContext(workspaceManager.index, cancelIndicator)
 				return function.apply(ctx)
 			]
+		}
+
+		override getInitializeResult() {
+			initializeResult
 		}
 
 	}

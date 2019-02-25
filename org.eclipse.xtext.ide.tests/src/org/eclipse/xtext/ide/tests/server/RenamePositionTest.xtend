@@ -7,14 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import com.google.common.base.Throwables
+import org.eclipse.lsp4j.ClientCapabilities
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.RenameCapabilities
 import org.eclipse.lsp4j.RenameParams
+import org.eclipse.lsp4j.TextDocumentClientCapabilities
 import org.eclipse.lsp4j.TextDocumentIdentifier
-import org.eclipse.xtext.testing.AbstractLanguageServerTest
-import static org.junit.Assert.*
-import org.junit.Test
-import java.util.concurrent.ExecutionException
+import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
+import org.eclipse.xtext.ide.server.Document
+import org.eclipse.xtext.testing.AbstractLanguageServerTest
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -70,23 +76,37 @@ class RenamePositionTest extends AbstractLanguageServerTest {
 	protected def void renameAndFail(String model, Position position, String messageFragment) {
 		val modelFile = 'MyType.testlang'.writeFile(model)
 		initialize
-		val params = new RenameParams(new TextDocumentIdentifier(modelFile), position, 'Tescht')
 		try {
-			languageServer.rename(params).get
+			val identifier = new TextDocumentIdentifier(modelFile)
+			val prepareRenameResult = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get
+			assertNull('''expected null result got «prepareRenameResult» instead''', prepareRenameResult)
+			val renameParams = new RenameParams(new TextDocumentIdentifier(modelFile), position, 'Tescht')
+			languageServer.rename(renameParams).get
 			fail('Rename should have failed')
 		} catch (Exception exc) {
-			assertTrue(exc instanceof ExecutionException)
-			assertTrue(exc.cause instanceof ExecutionException)
-			assertTrue(exc.cause.cause instanceof ResponseErrorException)
-			val error = (exc.cause.cause as ResponseErrorException).responseError
+			val rootCause = Throwables.getRootCause(exc)
+			assertTrue(rootCause instanceof ResponseErrorException)
+			val error = (rootCause as ResponseErrorException).responseError
 			assertTrue(error.data.toString.contains(messageFragment))
 		}
 	}
 
 	protected def renameWithSuccess(String model, Position position) {
 		val modelFile = 'MyType.testlang'.writeFile(model)
-		initialize
-		val params = new RenameParams(new TextDocumentIdentifier(modelFile), position, 'Tescht')
+		initialize [
+			capabilities = new ClientCapabilities => [
+				textDocument = new TextDocumentClientCapabilities => [
+					rename = new RenameCapabilities => [
+						prepareSupport = true
+					]
+				]
+			]
+		]
+		val identifier = new TextDocumentIdentifier(modelFile)
+		val range = languageServer.prepareRename(new TextDocumentPositionParams(identifier, position)).get.getLeft
+		assertNotNull(range)
+		assertEquals(new Document(0, model).getSubstring(range), 'Test')
+		val params = new RenameParams(identifier, position, 'Tescht')
 		val workspaceEdit = languageServer.rename(params).get
 		assertEquals('''
 			changes :
