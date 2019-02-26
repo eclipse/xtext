@@ -19,20 +19,16 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.IMarkerResolution;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
-import org.eclipse.xtext.XtextRuntimeModule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.internal.InternalBuilderTest;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.MarkerTypes;
@@ -44,10 +40,9 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.ui.testing.AbstractQuickfixTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -56,10 +51,11 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -67,11 +63,17 @@ import com.google.inject.Injector;
  * @author Arne Deutsch - New test cases for fixAddAction and some refactoring
  */
 @SuppressWarnings("restriction")
-public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
+public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "org.eclipse.xtext.ui.editor.quickfix";
 	private static final String MODEL_FILE = "XtextGrammarQuickfixProviderTest.xtext";
-
+	
+	@Before
+	public void assertEmptyWorkspace() {
+		IProject[] allProjects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		Assert.assertEquals(0, allProjects.length);
+	}
+	
 	@Test
 	public void testFixMissingRule() throws Exception {
 		assertAndApplySingleResolution(editorForGrammar("Model: elements+=AbstractElement;"),
@@ -207,7 +209,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
 		IXtextDocument document = xtextEditor.getDocument();
 		List<Issue> issues = getIssues(document);
-		assertFalse(issues.isEmpty());
+		assertFalse(issues.toString(), issues.isEmpty());
 		Issue issue = issues.iterator().next();
 		assertEquals(issueCode, issue.getCode());
 		assertNotNull(issue.getData());
@@ -329,20 +331,8 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		});
 	}
 
-	private Injector createInjector() {
-		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),
-				new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
+	private static Injector createInjector() {
+		return Activator.getDefault().getInjector(org.eclipse.xtext.xtext.ui.internal.Activator.ORG_ECLIPSE_XTEXT_XTEXT);
 	}
 
-	private IWorkbenchPage getActivePage() {
-		return getWorkbenchWindow().getActivePage();
-	}
-
-	private IWorkbenchWindow getWorkbenchWindow() {
-		return getWorkbench().getActiveWorkbenchWindow();
-	}
-
-	private IWorkbench getWorkbench() {
-		return PlatformUI.getWorkbench();
-	}
 }
