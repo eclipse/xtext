@@ -51,12 +51,12 @@ class ResourceRelocationProcessor {
 	@Inject ChangeConverter.Factory changeConverterFactory
 
 	List<ResourceRelocationChange> uriChanges = newArrayList()
-	
+
 	Set<IResource> excludedResources = newHashSet()
-	
+
 	IProject project // TODO: multi-project move
 
-	def createChange(String name, ChangeType type,  
+	def createChange(String name, ChangeType type,
 					IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		if (uriChanges.empty)
 			return null
@@ -65,7 +65,7 @@ class ResourceRelocationProcessor {
 		val context = new ResourceRelocationContext(type, uriChanges, issues, changeSerializer, resourceSet)
 		executeParticipants(context)
 		val changeConverter = changeConverterFactory.create(name, [
-			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange) 
+			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange)
 				|| !excludedResources.contains(modifiedElement))
 		], issues)
 		changeSerializer.applyModifications(changeConverter)
@@ -74,18 +74,19 @@ class ResourceRelocationProcessor {
 
 	protected def void executeParticipants(ResourceRelocationContext context) {
 		val strategies = strategyRegistry.strategies
-		if(context.changeType === ResourceRelocationContext.ChangeType.COPY)
+		if(context.changeType === ResourceRelocationContext.ChangeType.COPY) {
 			context.changeSerializer.updateRelatedFiles = false
-			strategies.forEach [
+		}
+		strategies.forEach [
 			try {
-				applyChange(context)			
+				applyChange(context)
 			} catch (Throwable t) {
 				issues.add(ERROR, 'Error applying resource changes', t)
 				LOG.error(t.message, t)
 			}
 		]
 	}
-	
+
 	def void addChangedResource(IResource resource, IPath fromPath, IPath toPath) {
 		if (project === null)
 			project = resource.project
