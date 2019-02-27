@@ -85,13 +85,13 @@ class TargetPlatformProject extends ProjectDescriptor {
 			<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 			<unit id="org.junit" version="4.12.0.v201504281640"/>
 			«IF config.junitVersion == JUnitVersion.JUNIT_5»
-			<unit id="org.junit.jupiter.api" version="5.3.1.v20181005-1442"/>
-			<unit id="org.junit.jupiter.engine" version="5.3.1.v20181005-1442"/>
-			<unit id="org.junit.platform.commons" version="1.3.1.v20181005-1442"/>
-			<unit id="org.junit.platform.engine" version="1.3.1.v20181005-1442"/>
-			<unit id="org.junit.platform.launcher" version="1.3.1.v20181005-1442"/>
-			<unit id="org.junit.platform.runner" version="1.3.1.v20181005-1442"/>
-			<unit id="org.opentest4j" version="1.1.1.v20181005-1442"/>
+			<unit id="org.junit.jupiter.api" version="5.4.0.v20190212-2109"/>
+			<unit id="org.junit.jupiter.engine" version="5.4.0.v20190212-2109"/>
+			<unit id="org.junit.platform.commons" version="1.4.0.v20190212-2109"/>
+			<unit id="org.junit.platform.engine" version="1.4.0.v20190212-2109"/>
+			<unit id="org.junit.platform.launcher" version="1.4.0.v20190212-2109"/>
+			<unit id="org.junit.platform.runner" version="1.4.0.v20190212-2109"/>
+			<unit id="org.opentest4j" version="1.1.1.v20190212-2109"/>
 			«ENDIF»
 			<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
 			<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>

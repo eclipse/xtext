@@ -171,25 +171,25 @@ public class TargetPlatformProject extends ProjectDescriptor {
       boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
       if (_equals) {
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.3.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("<unit id=\"org.opentest4j\" version=\"1.1.1.v20181005-1442\"/>");
+        _builder.append("<unit id=\"org.opentest4j\" version=\"1.1.1.v20190212-2109\"/>");
         _builder.newLine();
       }
     }
