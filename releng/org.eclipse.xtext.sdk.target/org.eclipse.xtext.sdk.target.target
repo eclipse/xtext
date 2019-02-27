@@ -140,22 +140,22 @@
 		<unit id="com.google.gson.source" version="2.7.0.v20170129-0911"/>
 		<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 		<unit id="org.antlr.runtime.source" version="3.2.0.v201101311130"/>
-		<unit id="org.junit" version="4.12.0.v201504281640"/>
-		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
-		<unit id="org.junit.jupiter.api" version="5.3.1.v20181005-1442"/>
-		<unit id="org.junit.jupiter.api.source" version="5.3.1.v20181005-1442"/>
-		<unit id="org.junit.jupiter.engine" version="5.3.1.v20181005-1442"/>
-		<unit id="org.junit.jupiter.engine.source" version="5.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.commons" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.commons.source" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.engine" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.engine.source" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.launcher" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.launcher.source" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.runner" version="1.3.1.v20181005-1442"/>
-		<unit id="org.junit.platform.runner.source" version="1.3.1.v20181005-1442"/>
-		<unit id="org.opentest4j" version="1.1.1.v20181005-1442"/>
-		<unit id="org.opentest4j.source" version="1.1.1.v20181005-1442"/>
+		<unit id="org.junit" version="0.0.0"/>
+		<unit id="org.junit.source" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api" version="0.0.0"/>
+		<unit id="org.junit.jupiter.api.source" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
+		<unit id="org.junit.jupiter.engine.source" version="0.0.0"/>
+		<unit id="org.junit.platform.commons" version="0.0.0"/>
+		<unit id="org.junit.platform.commons.source" version="0.0.0"/>
+		<unit id="org.junit.platform.engine" version="0.0.0"/>
+		<unit id="org.junit.platform.engine.source" version="0.0.0"/>
+		<unit id="org.junit.platform.launcher" version="0.0.0"/>
+		<unit id="org.junit.platform.launcher.source" version="0.0.0"/>
+		<unit id="org.junit.platform.runner" version="0.0.0"/>
+		<unit id="org.junit.platform.runner.source" version="0.0.0"/>
+		<unit id="org.opentest4j" version="0.0.0"/>
+		<unit id="org.opentest4j.source" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.source" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
