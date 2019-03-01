@@ -35,6 +35,8 @@ pipeline {
       steps {
         dir ('deploy-xtext-git-repo') {
           sh '''
+            git config user.name "genie-xtext"
+            git config user.email "xtext-bot@eclipse.org"
             cp -r $WORKSPACE/git-repo/xtext-website/_site/* .
             git diff
             git add --all :/ && git commit -m "Generated from commit: https://github.com/eclipse/xtext/commit/$GIT_COMMIT"
@@ -43,6 +45,8 @@ pipeline {
         }
         dir ('deploy-xtend-git-repo') {
           sh '''
+            git config user.name "genie-xtext"
+            git config user.email "xtext-bot@eclipse.org"
             cp -r $WORKSPACE/git-repo/xtend-website/_site/* .
             git diff
             git add --all :/ && git commit -m "Generated from commit: https://github.com/eclipse/xtext/commit/$GIT_COMMIT"
