@@ -12,6 +12,8 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 
+import com.google.common.base.Preconditions;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -23,6 +25,7 @@ public class XtextProjectHelper {
 	private static final Logger log = Logger.getLogger(XtextProjectHelper.class);
 
 	public static boolean hasNature(IProject project) {
+		Preconditions.checkNotNull(project);
 		try {
 			if (project.isAccessible()) {
 				return project.hasNature(NATURE_ID);
@@ -37,6 +40,7 @@ public class XtextProjectHelper {
 	 * @since 2.4
 	 */
 	public static boolean hasBuilder(IProject project) {
+		Preconditions.checkNotNull(project);
 		if (project.isAccessible()) {
 			try {
 				for (ICommand command : project.getDescription().getBuildSpec()) {
