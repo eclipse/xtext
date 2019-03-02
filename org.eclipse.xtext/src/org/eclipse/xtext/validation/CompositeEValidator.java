@@ -25,7 +25,6 @@ import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -33,7 +32,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeEValidator implements EValidator {
+public class CompositeEValidator implements EValidator, Cloneable {
 
 	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR";
 	
@@ -207,6 +206,15 @@ public class CompositeEValidator implements EValidator {
 	public Provider<EValidatorEqualitySupport> getEqualitySupportProvider() {
 		return equalitySupportProvider;
 	}
+	
+	@Override
+	protected CompositeEValidator clone() {
+		try {
+			return (CompositeEValidator) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * For testing purpose.
@@ -215,12 +223,12 @@ public class CompositeEValidator implements EValidator {
 	 * @since 2.4
 	 */
 	public CompositeEValidator getCopyAndClearContents() {
-		CompositeEValidator result = new CompositeEValidator();
+		CompositeEValidator result = clone();
 		result.equalitySupportProvider = this.equalitySupportProvider;
-		result.useEObjectValidator = this.useEObjectValidator;
 		result.operationCanceledManager = this.operationCanceledManager;
+		result.useEObjectValidator = this.useEObjectValidator;
 		if (this.contents != null) {
-			result.contents = Lists.newArrayList(this.contents);
+			result.contents = new ArrayList<>(this.contents);
 			this.contents = null;
 		}
 		return result;

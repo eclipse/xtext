@@ -52,7 +52,7 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 					}
 				}
 			};
-		}else{
+		} else {
 			return superMethodBlock(method);
 		}
 	}
