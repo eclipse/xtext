@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,7 +22,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
@@ -138,8 +137,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		IProject project = null;
 		IJavaProject javaProject = null;
 		try {
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			project = workspace.getRoot().getProject(projectName);
+			project = IResourcesSetupUtil.root().getProject(projectName);
 			deleteProject(project);
 
 			javaProject = JavaCore.create(project);
@@ -207,7 +205,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	 * Returns the Java Model this test suite is running on.
 	 */
 	public static IJavaModel getJavaModel() {
-		return JavaCore.create(ResourcesPlugin.getWorkspace().getRoot());
+		return JavaCore.create(IResourcesSetupUtil.root());
 	}
 	
 	public static void refresh(final IJavaProject javaProject) throws CoreException {
