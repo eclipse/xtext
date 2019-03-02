@@ -25,7 +25,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testing.InjectWith;
@@ -34,6 +33,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.testing.TemporaryFolder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
@@ -56,7 +56,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 	
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
-
+	
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
 	}

@@ -20,11 +20,11 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IResourceVisitor
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
-import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.Assert
 import org.junit.BeforeClass
@@ -79,7 +79,7 @@ class WorkspaceScenariosTest {
 				}
 				return true
 			]
-			Assert.assertEquals(2, allXtendMarkers.size)
+			Assert.assertEquals(printMarker(allXtendMarkers), 2, allXtendMarkers.size)
 			assertEquals(1, persistedResourceDescriptions.get.allResourceDescriptions.length)
 		} finally {
 			project.delete(true, true, null)

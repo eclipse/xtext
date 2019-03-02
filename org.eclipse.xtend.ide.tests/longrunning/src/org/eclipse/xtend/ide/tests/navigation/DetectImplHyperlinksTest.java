@@ -40,7 +40,7 @@ import com.google.inject.Injector;
 
 public class DetectImplHyperlinksTest extends AbstractEditorTest {
 
-	private static final String LANGUAGE_NAME = "org.eclipse.xtend.core.Xtend";
+	private static final String LANGUAGE_NAME = XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND;
 	private static Injector injector = XtendActivator.getInstance().getInjector(LANGUAGE_NAME);
 
 	@Inject

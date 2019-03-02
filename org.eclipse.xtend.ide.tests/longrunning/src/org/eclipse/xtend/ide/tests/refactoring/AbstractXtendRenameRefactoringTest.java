@@ -58,7 +58,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class AbstractXtendRenameRefactoringTest extends AbstractXtendUITestCase {
+public abstract class AbstractXtendRenameRefactoringTest extends AbstractXtendUITestCase {
 
 	@Inject
 	protected EObjectAtOffsetHelper eObjectAtOffsetHelper;
