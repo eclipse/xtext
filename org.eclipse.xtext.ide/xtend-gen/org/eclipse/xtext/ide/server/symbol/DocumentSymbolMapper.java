@@ -191,10 +191,22 @@ public class DocumentSymbolMapper {
   public DocumentSymbol toDocumentSymbol(final EObject object) {
     DocumentSymbol _documentSymbol = new DocumentSymbol();
     final Procedure1<DocumentSymbol> _function = (DocumentSymbol it) -> {
-      it.setName(this.nameProvider.getName(object));
-      it.setKind(this.kindProvider.getSymbolKind(object));
-      it.setRange(this.rangeProvider.getRange(object));
-      it.setSelectionRange(this.rangeProvider.getSelectionRange(object));
+      final String objectName = this.nameProvider.getName(object);
+      if ((objectName != null)) {
+        it.setName(objectName);
+      }
+      final SymbolKind objectKind = this.kindProvider.getSymbolKind(object);
+      if ((objectKind != null)) {
+        it.setKind(objectKind);
+      }
+      final Range objectRange = this.rangeProvider.getRange(object);
+      if ((objectRange != null)) {
+        it.setRange(objectRange);
+      }
+      final Range objectSelectionRange = this.rangeProvider.getSelectionRange(object);
+      if ((objectSelectionRange != null)) {
+        it.setSelectionRange(objectSelectionRange);
+      }
       it.setDetail(this.detailsProvider.getDetails(object));
       it.setDeprecated(Boolean.valueOf(this.deprecationInfoProvider.isDeprecated(object)));
       it.setChildren(CollectionLiterals.<DocumentSymbol>newArrayList());

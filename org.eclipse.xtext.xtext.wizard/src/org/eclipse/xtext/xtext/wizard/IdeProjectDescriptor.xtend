@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -55,7 +55,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 						<dependency>
 							<groupId>org.eclipse.lsp4j</groupId>
 							<artifactId>org.eclipse.lsp4j</artifactId>
-							<version>0.6.0</version>
+							<version>0.7.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>

@@ -319,7 +319,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 		Assert.assertNotNull('Active signature index must not be null when signatures are available.', activeSignature);
 		val param = if(activeParameter === null) '<empty>' else signatures.get(activeSignature).parameters.get(
-				activeParameter).label;
+				activeParameter).label.getLeft();
 		'''«signatures.map[label].join(' | ')» | «param»''';
 	}
 
@@ -498,7 +498,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		])
 		val definitions = definitionsFuture.get
 		if (configuration.assertDefinitions !== null) {
-			configuration.assertDefinitions.apply(definitions)
+			configuration.assertDefinitions.apply(definitions.getLeft())
 		} else {
 			val actualDefinitions = definitions.toExpectation
 			assertEquals(expectedDefinitions, actualDefinitions)

@@ -78,7 +78,7 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
       boolean _while = (i < size);
       while (_while) {
         {
-          result = left.getParameters().get(i).getLabel().compareTo(right.getParameters().get(i).getLabel());
+          result = left.getParameters().get(i).getLabel().getLeft().compareTo(right.getParameters().get(i).getLabel().getLeft());
           if ((result != 0)) {
             return result;
           }

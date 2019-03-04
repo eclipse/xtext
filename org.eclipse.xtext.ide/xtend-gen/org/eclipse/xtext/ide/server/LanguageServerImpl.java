@@ -65,6 +65,7 @@ import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.InitializedParams;
 import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -585,11 +586,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<List<? extends Location>> definition(final TextDocumentPositionParams params) {
-    final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-      return this.definition(cancelIndicator, params);
+  public CompletableFuture<Either<List<? extends Location>, List<? extends LocationLink>>> definition(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, Either<List<? extends Location>, List<? extends LocationLink>>> _function = (CancelIndicator cancelIndicator) -> {
+      return Either.<List<? extends Location>, List<? extends LocationLink>>forLeft(this.definition(cancelIndicator, params));
     };
-    return this.requestManager.<List<? extends Location>>runRead(_function);
+    return this.requestManager.<Either<List<? extends Location>, List<? extends LocationLink>>>runRead(_function);
   }
   
   protected List<? extends Location> definition(final CancelIndicator cancelIndicator, final TextDocumentPositionParams params) {
