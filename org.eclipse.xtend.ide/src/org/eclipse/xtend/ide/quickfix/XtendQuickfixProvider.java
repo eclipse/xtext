@@ -748,21 +748,21 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		acceptor.accept(issue, label, description, image, new ISemanticModification() {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
-				if (element instanceof XtendField) {
-					final JvmField field = associations.getJvmField((XtendField)element);
-					final IXtextDocument document = context.getXtextDocument();
-					document.modify(new IUnitOfWork.Void<XtextResource>() {
-						@Override
-						public void process(XtextResource resource) throws Exception {
-							EcoreUtil.remove(element);
+				final IXtextDocument document = context.getXtextDocument();
+				document.modify(new IUnitOfWork.Void<XtextResource>() {
+					@Override
+					public void process(XtextResource resource) throws Exception {
+						if (element instanceof XtendField) {
+							final JvmField field = associations.getJvmField((XtendField)element);
 							EcoreUtil.removeAll(EcoreUtil2.eAllContentsAsList(resource).stream()
 									.filter(XAssignment.class::isInstance).map(XAssignment.class::cast)
 									.filter(assignment -> field == assignment.getFeature())
 									.collect(Collectors.toList()));
 						}
-					});
-					organizeImportsHandler.doOrganizeImports(document);
-				}
+						EcoreUtil.remove(element);
+					}
+				});
+				organizeImportsHandler.doOrganizeImports(document);
 			}
 		});
 	}
