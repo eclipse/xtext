@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui;singleton:=true
-Bundle-Version: 2.17.0.qualifier
+Bundle-Version: 2.18.0.qualifier
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.13.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.12.0";visibility:=reexport,
