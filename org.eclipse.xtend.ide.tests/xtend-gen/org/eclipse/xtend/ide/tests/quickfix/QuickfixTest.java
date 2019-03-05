@@ -7614,16 +7614,37 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Test
   public void fixUnusedPrivateField() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import java.util.Date");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val a| = 42");
+    _builder.append("List<Date> |a");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("a = newArrayList");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _assertResolutionLabels = this.builder.create("Foo.xtend", _builder.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.UNUSED_PRIVATE_MEMBER).assertResolutionLabels("Remove member.");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new () {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

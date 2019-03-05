@@ -4182,14 +4182,23 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test
 	def void fixUnusedPrivateField() {
 		create('Foo.xtend', '''
+			import java.util.List
+			import java.util.Date
+			
 			class Foo {
-				val a| = 42
+				List<Date> |a
+				new () {
+					a = newArrayList
+				}
 			}
 		''')
 		.assertIssueCodes(UNUSED_PRIVATE_MEMBER)
 		.assertResolutionLabels("Remove member.")
 		.assertModelAfterQuickfix('''
 			class Foo {
+			
+				new () {
+				}
 			}
 		''')
 	}

@@ -14,6 +14,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -38,7 +39,6 @@ import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -48,6 +48,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -77,6 +78,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -88,6 +90,7 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
+import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
 import com.google.common.base.Objects;
@@ -129,8 +132,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Inject private ProjectUtil projectUtil; 
 	
-	@Inject
-	private TypeReferences typeReferences;
+	@Inject private TypeReferences typeReferences;
+	
+	@Inject private OrganizeImportsHandler organizeImportsHandler;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			Diagnostic.LINKING_DIAGNOSTIC,
@@ -741,10 +745,25 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		String label = "Remove member.";
 		String description = "Remove the unused private member.";
 		String image = "delete_edit.png";
-		acceptor.acceptMulti(issue, label, description, image, (ICompositeModification<XtendMember>) (element, ctx) -> {
-			ctx.setUpdateCrossReferences(false);
-			ctx.setUpdateRelatedFiles(false);
-			ctx.addModification(element, ele -> EcoreUtil.remove(ele));
+		acceptor.accept(issue, label, description, image, new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XtendField) {
+					final JvmField field = associations.getJvmField((XtendField)element);
+					final IXtextDocument document = context.getXtextDocument();
+					document.modify(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource resource) throws Exception {
+							EcoreUtil.remove(element);
+							EcoreUtil.removeAll(EcoreUtil2.eAllContentsAsList(resource).stream()
+									.filter(XAssignment.class::isInstance).map(XAssignment.class::cast)
+									.filter(assignment -> field == assignment.getFeature())
+									.collect(Collectors.toList()));
+						}
+					});
+					organizeImportsHandler.doOrganizeImports(document);
+				}
+			}
 		});
 	}
 	
