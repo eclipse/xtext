@@ -4182,6 +4182,22 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test
 	def void fixUnusedPrivateField() {
 		create('Foo.xtend', '''
+			class Foo {
+				val a| = 42
+			}
+		''')
+		.assertIssueCodes(UNUSED_PRIVATE_MEMBER)
+		.assertResolutionLabels("Remove member.")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+			}
+		''')
+	}
+	
+	@Test
+	def void fixUnusedPrivateFieldWithAssignmentsAndImports() {
+		create('Foo.xtend', '''
 			import java.util.List
 			import java.util.Date
 			
@@ -4196,8 +4212,41 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Remove member.")
 		.assertModelAfterQuickfix('''
 			class Foo {
-			
+				
 				new () {
+					
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void fixUnusedPrivateFieldWithSideEffectAssignmentAndImports() {
+		create('Foo.xtend', '''
+			import java.util.List
+			import java.util.Date
+			
+			class Foo {
+				List<Date> a
+				boolean |b
+				new () {
+					a = newArrayList
+					b = a.add(new Date)
+				}
+			}
+		''')
+		.assertIssueCodes(UNUSED_PRIVATE_MEMBER)
+		.assertResolutionLabels("Remove member.")
+		.assertModelAfterQuickfix('''
+			import java.util.Date
+			import java.util.List
+			
+			class Foo {
+				List<Date> a
+				
+				new () {
+					a = newArrayList
+					a.add(new Date)
 				}
 			}
 		''')
@@ -4214,6 +4263,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Remove member.")
 		.assertModelAfterQuickfix('''
 			class Foo {
+				
 			}
 		''')
 	}

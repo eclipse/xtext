@@ -28,11 +28,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Position;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendExecutable;
@@ -135,6 +136,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private TypeReferences typeReferences;
 	
 	@Inject private OrganizeImportsHandler organizeImportsHandler;
+	
+	@Inject private XtendExpressionHelper expressionHelper;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			Diagnostic.LINKING_DIAGNOSTIC,
@@ -745,21 +748,40 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		String label = "Remove member.";
 		String description = "Remove the unused private member.";
 		String image = "delete_edit.png";
-		acceptor.accept(issue, label, description, image, new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
+		acceptor.accept(issue, label, description, image, new IModification() {
+			@Override @SuppressWarnings("restriction")
+			public void apply(IModificationContext context) throws Exception {
 				final IXtextDocument document = context.getXtextDocument();
 				document.modify(new IUnitOfWork.Void<XtextResource>() {
 					@Override
-					public void process(XtextResource resource) throws Exception {
+					public void process(XtextResource state) throws Exception {
+						final EObject element = state.getEObject(issue.getUriToProblem().fragment());
+						final ICompositeNode elementNode = NodeModelUtils.findActualNodeFor(element);
+						final Position elementPosition = new Position(elementNode.getOffset(), elementNode.getLength());
+						document.addPosition(elementPosition);
 						if (element instanceof XtendField) {
 							final JvmField field = associations.getJvmField((XtendField)element);
-							EcoreUtil.removeAll(EcoreUtil2.eAllContentsAsList(resource).stream()
-									.filter(XAssignment.class::isInstance).map(XAssignment.class::cast)
-									.filter(assignment -> field == assignment.getFeature())
-									.collect(Collectors.toList()));
+							final List<Position> assignments = EcoreUtil2.eAllContentsAsList(element.eResource()).stream()
+								.filter(XAssignment.class::isInstance).map(XAssignment.class::cast)
+								.filter(assignment -> field == assignment.getFeature())
+								.map(assignment -> {
+									final ICompositeNode assignmentNode = NodeModelUtils.findActualNodeFor(assignment);
+									final int offset = assignmentNode.getOffset();
+									final XExpression assignmentValue = assignment.getValue();
+									int length = assignmentNode.getLength(); 
+									if (expressionHelper.hasSideEffects(assignmentValue)) {
+										length -= NodeModelUtils.findActualNodeFor(assignmentValue).getLength();
+									}
+									return new Position(offset, length);
+								}).collect(Collectors.toList());
+							for (final Position assignment : assignments) {
+								document.addPosition(assignment);
+							}
+							for (final Position assignment : assignments) {
+								document.replace(assignment.getOffset(), assignment.getLength(), "");
+							}
 						}
-						EcoreUtil.remove(element);
+						document.replace(elementPosition.getOffset(), elementPosition.getLength(), "");
 					}
 				});
 				organizeImportsHandler.doOrganizeImports(document);
