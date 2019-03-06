@@ -200,7 +200,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"7.0.0.v20181030-2244\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-03\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
