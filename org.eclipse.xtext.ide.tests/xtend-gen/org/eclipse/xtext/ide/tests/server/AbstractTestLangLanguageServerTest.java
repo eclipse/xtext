@@ -13,7 +13,7 @@ import org.eclipse.xtext.testing.AbstractLanguageServerTest;
  * @author akosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
+public abstract class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
   public AbstractTestLangLanguageServerTest() {
     super("testlang");
   }

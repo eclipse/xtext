@@ -52,7 +52,7 @@ public class FormattingTest extends AbstractTestLangLanguageServerTest {
     }
   }
   
-  public static class AbstractCustomFormattingService extends FormattingService {
+  public static abstract class AbstractCustomFormattingService extends FormattingService {
     @Override
     public List<TextEdit> format(final XtextResource resource, final Document document, final int offset, final int length) {
       throw new IllegalStateException("api maintenance layer broken");

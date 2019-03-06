@@ -12,7 +12,7 @@ import org.eclipse.xtext.testing.AbstractLanguageServerTest
 /**
  * @author akosyakov - Initial contribution and API
  */
-class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
+abstract class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
     
     new() {
         super("testlang")

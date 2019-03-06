@@ -148,7 +148,7 @@ class FormattingTest extends AbstractTestLangLanguageServerTest {
 		
 	}
 	
-	static class AbstractCustomFormattingService extends FormattingService {
+	static abstract class AbstractCustomFormattingService extends FormattingService {
 		
 		override format(XtextResource resource, Document document, int offset, int length) {
 			throw new IllegalStateException("api maintenance layer broken")
