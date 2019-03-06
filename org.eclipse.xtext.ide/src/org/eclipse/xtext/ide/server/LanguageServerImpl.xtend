@@ -376,7 +376,7 @@ import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 	// end completion stuff
 	// symbols
 	override definition(TextDocumentPositionParams params) {
-		return requestManager.runRead[cancelIndicator|definition(cancelIndicator, params)]
+		return requestManager.runRead[cancelIndicator|Either.forLeft(definition(cancelIndicator, params))]
 	}
 	
 	protected def List<? extends Location> definition(CancelIndicator cancelIndicator, TextDocumentPositionParams params) {

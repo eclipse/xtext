@@ -20,6 +20,8 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.Position
 
 class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
 
@@ -101,10 +103,10 @@ class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
 					  int a
 					  op foo(a: A): string {}
 					}'''
+					range = new Range(new Position(0, 0), new Position(4, 1))
 				]
 			];
 		]);
-
 		fileUri.assertInfos('''0 : [5:1:[typeDeclaration]]
 1 : [2:3:[primitiveType], 6:1:[identifier]]
 2 : [5:3:[identifier], 9:1:[parameterName], 12:1:[type], 16:6:[primitiveType]]
@@ -123,6 +125,7 @@ class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
 					type A {
 					  int a
 					}'''
+					range = new Range(new Position(0, 0), new Position(3, 1))
 				]
 			];
 		]);
@@ -145,6 +148,7 @@ class SemanticHighlightingTest extends AbstractTestLangLanguageServerTest {
 					  op foo() {}
 					  op foo(a: A): string {}
 					}'''
+					range = new Range(new Position(0, 0), new Position(2, 1))
 				]
 			];
 		]);

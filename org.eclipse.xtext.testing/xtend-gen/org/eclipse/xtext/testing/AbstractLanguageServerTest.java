@@ -55,6 +55,7 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -694,7 +695,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         _xifexpression = "<empty>";
       } else {
         _xifexpression = it.getSignatures().get((it.getActiveSignature()).intValue()).getParameters().get(
-          (it.getActiveParameter()).intValue()).getLabel();
+          (it.getActiveParameter()).intValue()).getLabel().getLeft();
       }
       final String param = _xifexpression;
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -1061,12 +1062,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it.setPosition(_position);
       };
       TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
-      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_doubleArrow);
-      final List<? extends Location> definitions = definitionsFuture.get();
+      final CompletableFuture<Either<List<? extends Location>, List<? extends LocationLink>>> definitionsFuture = this.languageServer.definition(_doubleArrow);
+      final Either<List<? extends Location>, List<? extends LocationLink>> definitions = definitionsFuture.get();
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
       boolean _tripleNotEquals = (_assertDefinitions != null);
       if (_tripleNotEquals) {
-        configuration.getAssertDefinitions().apply(definitions);
+        configuration.getAssertDefinitions().apply(definitions.getLeft());
       } else {
         final String actualDefinitions = this.toExpectation(definitions);
         this.assertEquals(configuration.getExpectedDefinitions(), actualDefinitions);

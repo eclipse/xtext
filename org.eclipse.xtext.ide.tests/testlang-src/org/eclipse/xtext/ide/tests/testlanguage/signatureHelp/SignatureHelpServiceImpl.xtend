@@ -54,7 +54,7 @@ class SignatureHelpServiceImpl implements ISignatureHelpService {
         var result = left.parameters.size - right.parameters.size;
         if (result === 0) {
             for (var i = 0, var size = left.parameters.size; i < size; i++) {
-                result = left.parameters.get(i).label.compareTo(right.parameters.get(i).label);
+                result = left.parameters.get(i).label.getLeft().compareTo(right.parameters.get(i).label.getLeft());
                 if (result != 0) {
                     return result;
                 }

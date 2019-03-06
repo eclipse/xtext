@@ -48,10 +48,22 @@ class DocumentSymbolMapper {
 	 */
 	def DocumentSymbol toDocumentSymbol(EObject object) {
 		return new DocumentSymbol => [
-			name = nameProvider.getName(object);
-			kind = kindProvider.getSymbolKind(object);
-			range = rangeProvider.getRange(object);
-			selectionRange = rangeProvider.getSelectionRange(object);
+			val objectName = nameProvider.getName(object)
+			if (objectName !== null) {
+				name = objectName;
+			}
+			val objectKind = kindProvider.getSymbolKind(object);
+			if (objectKind !== null) {
+				kind = objectKind
+			}
+			val objectRange = rangeProvider.getRange(object);
+			if (objectRange !== null) {
+				range = objectRange
+			}
+			val objectSelectionRange = rangeProvider.getSelectionRange(object);
+			if (objectSelectionRange !== null) {
+				selectionRange = objectSelectionRange
+			}
 			detail = detailsProvider.getDetails(object);
 			deprecated = deprecationInfoProvider.isDeprecated(object);
 			children = newArrayList;
