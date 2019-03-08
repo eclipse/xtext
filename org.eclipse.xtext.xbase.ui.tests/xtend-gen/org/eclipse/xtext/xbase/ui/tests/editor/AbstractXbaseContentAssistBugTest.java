@@ -30,7 +30,7 @@ import org.junit.BeforeClass;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
+public abstract class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
   private IProject demandCreateProject;
   
   private static IProject staticProject;

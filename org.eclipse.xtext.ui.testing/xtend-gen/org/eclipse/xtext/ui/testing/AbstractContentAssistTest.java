@@ -38,7 +38,7 @@ import org.junit.jupiter.api.BeforeAll;
  * @since 2.12
  */
 @SuppressWarnings("all")
-public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
+public abstract class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   

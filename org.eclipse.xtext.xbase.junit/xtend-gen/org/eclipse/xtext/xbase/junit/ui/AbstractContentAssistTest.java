@@ -37,7 +37,7 @@ import org.junit.BeforeClass;
  */
 @Deprecated
 @SuppressWarnings("all")
-public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
+public abstract class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   

@@ -28,7 +28,7 @@ import org.junit.BeforeClass
 /**
  * @author Holger Schill - Initial contribution and API
  */
-class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
+abstract class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
 
 
 	@Inject
