@@ -498,30 +498,33 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         "\2\uffff\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\7\uffff\1\1";
     static final String DFA3_specialS =
         "\26\uffff}>";
-    static final String[] DFA3_transitionS = {
-            "\1\14\1\15\2\uffff\1\15\22\uffff\1\14\7\uffff\1\4\1\6\2\uffff\1\5\1\uffff\1\12\14\uffff\1\11\5\uffff\32\13\1\2\1\uffff\1\3\3\uffff\5\13\1\1\24\13\1\7\1\uffff\1\10",
-            "\1\16",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\17",
-            "\1\20",
-            "\1\21",
-            "\1\22",
-            "\1\23",
-            "\1\24",
-            "\32\13\6\uffff\32\13",
-            ""
-    };
+    static final String[] DFA3_transitionS = DFA3_transitionS_.DFA3_transitionS;
+    private static final class DFA3_transitionS_ {
+        static final String[] DFA3_transitionS = {
+                "\1\14\1\15\2\uffff\1\15\22\uffff\1\14\7\uffff\1\4\1\6\2\uffff\1\5\1\uffff\1\12\14\uffff\1\11\5\uffff\32\13\1\2\1\uffff\1\3\3\uffff\5\13\1\1\24\13\1\7\1\uffff\1\10",
+                "\1\16",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\17",
+                "\1\20",
+                "\1\21",
+                "\1\22",
+                "\1\23",
+                "\1\24",
+                "\32\13\6\uffff\32\13",
+                ""
+        };
+    }
 
     static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
     static final short[] DFA3_eof = DFA.unpackEncodedString(DFA3_eofS);

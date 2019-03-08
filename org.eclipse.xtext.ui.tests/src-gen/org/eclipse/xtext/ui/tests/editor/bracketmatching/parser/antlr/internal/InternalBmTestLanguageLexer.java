@@ -775,41 +775,44 @@ public class InternalBmTestLanguageLexer extends Lexer {
         "\1\uffff\1\1\1\2\1\3\1\4\3\uffff\1\7\1\10\3\uffff\1\14\1\15\1\1\1\2\1\3\1\4\1\uffff\1\7\1\uffff\1\10\1\11\1\12\1\13\1\14\3\uffff\1\6\1\uffff\1\5";
     static final String DFA12_specialS =
         "\1\1\11\uffff\1\2\1\0\25\uffff}>";
-    static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\1\3\1\4\5\16\1\14\12\11\7\16\32\10\1\1\1\16\1\2\1\7\1\10\1\16\1\10\1\5\2\10\1\6\25\10\uff85\16",
-            "",
-            "",
-            "",
-            "",
-            "\1\23",
-            "\1\25",
-            "\32\24\4\uffff\1\24\1\uffff\32\24",
-            "",
-            "",
-            "\0\27",
-            "\0\27",
-            "\1\30\4\uffff\1\31",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\33",
-            "",
-            "\1\34",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\35",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\1\37",
-            "",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            ""
-    };
+    static final String[] DFA12_transitionS = DFA12_transitionS_.DFA12_transitionS;
+    private static final class DFA12_transitionS_ {
+        static final String[] DFA12_transitionS = {
+                "\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\12\4\16\1\13\1\3\1\4\5\16\1\14\12\11\7\16\32\10\1\1\1\16\1\2\1\7\1\10\1\16\1\10\1\5\2\10\1\6\25\10\uff85\16",
+                "",
+                "",
+                "",
+                "",
+                "\1\23",
+                "\1\25",
+                "\32\24\4\uffff\1\24\1\uffff\32\24",
+                "",
+                "",
+                "\0\27",
+                "\0\27",
+                "\1\30\4\uffff\1\31",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\33",
+                "",
+                "\1\34",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "\1\35",
+                "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+                "\1\37",
+                "",
+                "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+                ""
+        };
+    }
 
     static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
     static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
