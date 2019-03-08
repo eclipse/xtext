@@ -53,7 +53,7 @@ Workflow {
 			exclude = "AbstractEntitiesWebModule.java"
 		}
 		language = {
-			grammarUri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
+			grammarUri = "${rootPath}/org.eclipse.xtext.web.example.statemachine/src/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
 			fileExtensions = "statemachine"
 			
 			// Java API to access grammar elements (required by several other fragments)
