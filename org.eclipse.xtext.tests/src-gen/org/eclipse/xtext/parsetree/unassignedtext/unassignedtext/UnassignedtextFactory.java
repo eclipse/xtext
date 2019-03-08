@@ -78,6 +78,15 @@ public interface UnassignedtextFactory extends EFactory
   CommonTerminalsRule createCommonTerminalsRule();
 
   /**
+   * Returns a new object of class '<em>Group Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Group Rule</em>'.
+   * @generated
+   */
+  GroupRule createGroupRule();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -30,6 +30,8 @@ public abstract class AbstractUnassignedTextTestLanguageSyntacticSequencer exten
 			return getCaseInsensitiveKeywordToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getDatatypeRule())
 			return getDatatypeToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getGroupDataTypeRuleRule())
+			return getGroupDataTypeRuleToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getIDRule())
 			return getIDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getINTRule())
@@ -61,6 +63,17 @@ public abstract class AbstractUnassignedTextTestLanguageSyntacticSequencer exten
 		if (node != null)
 			return getTokenText(node);
 		return "str";
+	}
+	
+	/**
+	 * GroupDataTypeRule:
+	 * 	('this' 'is' 'a' 'test')
+	 * ;
+	 */
+	protected String getGroupDataTypeRuleToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "this is a test";
 	}
 	
 	/**

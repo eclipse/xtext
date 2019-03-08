@@ -23,5 +23,6 @@
     <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//CommonTerminalsRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnassignedTextTestLanguage.ecore#//CommonTerminalsRule/val"/>
     </genClasses>
+    <genClasses ecoreClass="UnassignedTextTestLanguage.ecore#//GroupRule"/>
   </genPackages>
 </genmodel:GenModel>

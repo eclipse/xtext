@@ -14,6 +14,7 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CaseInsensitiveKeywordRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CommonTerminalsRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.DatatypeRule;
+import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.GroupRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.MultiRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.PluralRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage;
@@ -44,6 +45,9 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 				return; 
 			case UnassignedtextPackage.DATATYPE_RULE:
 				sequence_DatatypeRule(context, (DatatypeRule) semanticObject); 
+				return; 
+			case UnassignedtextPackage.GROUP_RULE:
+				sequence_GroupRule(context, (GroupRule) semanticObject); 
 				return; 
 			case UnassignedtextPackage.MULTI_RULE:
 				sequence_MultiRule(context, (MultiRule) semanticObject); 
@@ -110,6 +114,19 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns GroupRule
+	 *     GroupRule returns GroupRule
+	 *
+	 * Constraint:
+	 *     {GroupRule}
+	 */
+	protected void sequence_GroupRule(ISerializationContext context, GroupRule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

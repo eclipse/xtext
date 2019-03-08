@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CaseInsensitiveKeywordRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CommonTerminalsRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.DatatypeRule;
+import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.GroupRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.Model;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.MultiRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.PluralRule;
@@ -68,6 +69,13 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * @generated
    */
   private EClass commonTerminalsRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass groupRuleEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -250,6 +258,16 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getGroupRule()
+  {
+    return groupRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public UnassignedtextFactory getUnassignedtextFactory()
   {
     return (UnassignedtextFactory)getEFactoryInstance();
@@ -291,6 +309,8 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
 
     commonTerminalsRuleEClass = createEClass(COMMON_TERMINALS_RULE);
     createEAttribute(commonTerminalsRuleEClass, COMMON_TERMINALS_RULE__VAL);
+
+    groupRuleEClass = createEClass(GROUP_RULE);
   }
 
   /**
@@ -330,6 +350,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     multiRuleEClass.getESuperTypes().add(this.getModel());
     datatypeRuleEClass.getESuperTypes().add(this.getModel());
     commonTerminalsRuleEClass.getESuperTypes().add(this.getModel());
+    groupRuleEClass.getESuperTypes().add(this.getModel());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -348,6 +369,8 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
 
     initEClass(commonTerminalsRuleEClass, CommonTerminalsRule.class, "CommonTerminalsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCommonTerminalsRule_Val(), theEcorePackage.getEString(), "val", null, 0, 1, CommonTerminalsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(groupRuleEClass, GroupRule.class, "GroupRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

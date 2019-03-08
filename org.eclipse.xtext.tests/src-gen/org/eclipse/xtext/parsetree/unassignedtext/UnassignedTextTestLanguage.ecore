@@ -17,4 +17,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="CommonTerminalsRule" eSuperTypes="#//Model">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupRule" eSuperTypes="#//Model"/>
 </ecore:EPackage>

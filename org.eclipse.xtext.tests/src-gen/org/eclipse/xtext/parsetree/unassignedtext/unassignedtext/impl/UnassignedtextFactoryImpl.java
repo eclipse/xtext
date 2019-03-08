@@ -71,6 +71,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
       case UnassignedtextPackage.MULTI_RULE: return createMultiRule();
       case UnassignedtextPackage.DATATYPE_RULE: return createDatatypeRule();
       case UnassignedtextPackage.COMMON_TERMINALS_RULE: return createCommonTerminalsRule();
+      case UnassignedtextPackage.GROUP_RULE: return createGroupRule();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -140,6 +141,17 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
   {
     CommonTerminalsRuleImpl commonTerminalsRule = new CommonTerminalsRuleImpl();
     return commonTerminalsRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GroupRule createGroupRule()
+  {
+    GroupRuleImpl groupRule = new GroupRuleImpl();
+    return groupRule;
   }
 
   /**
