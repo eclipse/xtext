@@ -22,7 +22,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.web.example.entities.services.EntitiesGrammarAccess;
 
 @SuppressWarnings("all")
-public class EntitiesSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractEntitiesSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected EntitiesGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_XBlockExpression_SemicolonKeyword_2_1_q;
@@ -60,7 +60,7 @@ public class EntitiesSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "[]";
+		return "[ ]";
 	}
 	
 	/**

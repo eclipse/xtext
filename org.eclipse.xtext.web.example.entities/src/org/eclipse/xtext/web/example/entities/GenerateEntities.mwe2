@@ -52,11 +52,11 @@ Workflow {
 		cleaner = {
 			exclude = "AbstractStatemachineWebModule.java"
 		}
-    	language = {
-    		grammarUri = "classpath:/org/eclipse/xtext/web/example/entities/Entities.xtext"
-    		fileExtensions = "entities"
-    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-    
+		language = {
+			grammarUri = "${rootPath}/org.eclipse.xtext.web.example.entities/src/org/eclipse/xtext/web/example/entities/Entities.xtext"
+			fileExtensions = "entities"
+			referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+	
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 {}
 
@@ -64,7 +64,7 @@ Workflow {
 			fragment = ecore.EMFGeneratorFragment2 {}
 
 			fragment = serializer.SerializerFragment2 {
-				generateStub = false
+				generateStub = true
 			}
 
 			// a custom ResourceFactory for use with EMF
@@ -112,7 +112,7 @@ Workflow {
 				framework = "CodeMirror"
 				highlightingPath = "xtext/cm-mode-entities.js"
 			}
-    	}
-    }
+		}
+	}
 }
 

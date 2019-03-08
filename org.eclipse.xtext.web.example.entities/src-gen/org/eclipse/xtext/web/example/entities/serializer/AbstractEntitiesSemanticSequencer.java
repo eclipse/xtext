@@ -72,7 +72,7 @@ import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class EntitiesSemanticSequencer extends XbaseSemanticSequencer {
+public abstract class AbstractEntitiesSemanticSequencer extends XbaseSemanticSequencer {
 
 	@Inject
 	private EntitiesGrammarAccess grammarAccess;
