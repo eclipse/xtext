@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -173,6 +175,40 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 	
+	@Fix(EMPTY_KEYWORD)
+	public void removeEmptyKeyword(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove empty keyword", "Remove empty keyword", NULL_QUICKFIX_IMAGE, new IModification() {
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), "");
+			}
+		});
+
+	}
+
+	@Fix(EMPTY_KEYWORD)
+	public void replaceEmptyKeywordWithRuleName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Replace empty keyword with rule name", "Replace empty keyword with rule name", NULL_QUICKFIX_IMAGE,
+				new IModification() {
+					@Override
+					public void apply(IModificationContext context) throws Exception {
+						final IXtextDocument document = context.getXtextDocument();
+						final String containingRuleName = document.tryPriorityReadOnly(new IUnitOfWork<String, XtextResource>() {
+							@Override
+							public String exec(XtextResource state) throws Exception {
+								return Optional.ofNullable(issue.getUriToProblem().fragment()).map(state::getEObject)
+										.map(GrammarUtil::containingRule).map(AbstractRule::getName).map(Strings::toFirstLower)
+										.orElse(null);
+							}
+						});
+						if (containingRuleName != null) {
+							final String quote = String.valueOf(document.getChar(issue.getOffset()));
+							document.replace(issue.getOffset(), issue.getLength(), quote + containingRuleName + quote);
+						}
+					}
+				});
+	}
+	
 	@Fix(SPACES_IN_KEYWORD)
 	public void fixKeywordNoSpaces(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix keyword with spaces", "Fix keyword with spaces", NULL_QUICKFIX_IMAGE, new IModification() {
@@ -182,8 +218,22 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				final int length = issue.getLength();
 				final IXtextDocument document = context.getXtextDocument();
 				final String quote = String.valueOf(document.getChar(offset));
-				final String[] identifiers = document.get(offset, length).replaceAll("'|\"", "").trim().split("\\s+");
-				document.replace(issue.getOffset(), length, quote + Joiner.on(quote + " " + quote).join(identifiers) + quote);
+				final String identifiers = document.get(offset, length).replaceAll("'|\"", "").trim();
+				if (!Strings.isEmpty(identifiers)) {
+					document.replace(offset, length, quote + Joiner.on(quote + " " + quote).join(identifiers.split("\\s+")) + quote);
+				} else {
+					final String containingRuleName = document.tryPriorityReadOnly(new IUnitOfWork<String, XtextResource>() {
+						@Override
+						public String exec(XtextResource state) throws Exception {
+							return Optional.ofNullable(issue.getUriToProblem().fragment()).map(state::getEObject)
+									.map(GrammarUtil::containingRule).map(AbstractRule::getName).map(Strings::toFirstLower)
+									.orElse(null);
+						}
+					});
+					if (containingRuleName != null) {
+						document.replace(offset, length, quote + containingRuleName + quote);
+					}
+				}
 			}
 		});
 	}

@@ -33,6 +33,37 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
   }
   
   @Test
+  public void test_fix_empty_keyword() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Model: \"\" a=ID;");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder_1.newLine();
+    _builder_1.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("Model:  a=ID;");
+    _builder_1.newLine();
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
+    _builder_2.newLine();
+    _builder_2.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("Model: \"model\" a=ID;");
+    _builder_2.newLine();
+    this.testQuickfixesOn(_builder, XtextConfigurableIssueCodes.EMPTY_KEYWORD, 
+      this.removeEmptyKeywordQuickfix(_builder_1.toString()), 
+      this.replaceEmptyKeywordWithRuleNameQuickfix(_builder_2.toString()));
+  }
+  
+  @Test
   public void fix_keyword_with_spaces() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals");
@@ -69,9 +100,17 @@ public class XtextGrammarQuickfixTest extends AbstractQuickfixTest {
     _builder_1.append("generate myDsl \"http://www.xtext.org/mydsl/MyDsl\"");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("Model: \'\' a=ID;");
+    _builder_1.append("Model: \'model\' a=ID;");
     _builder_1.newLine();
     this.applyKeywordWithSpacesQuickfix(_builder, _builder_1.toString());
+  }
+  
+  private AbstractQuickfixTest.Quickfix removeEmptyKeywordQuickfix(final String result) {
+    return new AbstractQuickfixTest.Quickfix("Remove empty keyword", "Remove empty keyword", result);
+  }
+  
+  private AbstractQuickfixTest.Quickfix replaceEmptyKeywordWithRuleNameQuickfix(final String result) {
+    return new AbstractQuickfixTest.Quickfix("Replace empty keyword with rule name", "Replace empty keyword with rule name", result);
   }
   
   private void applyKeywordWithSpacesQuickfix(final CharSequence input, final String result) {
