@@ -31,7 +31,7 @@ import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 /**
  * @since 2.12
  */
-class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
+abstract class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
 	
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	

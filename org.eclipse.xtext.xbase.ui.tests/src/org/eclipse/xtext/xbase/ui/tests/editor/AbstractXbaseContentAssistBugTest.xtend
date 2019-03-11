@@ -26,7 +26,7 @@ import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
+abstract class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
 
 	IProject demandCreateProject;
 	

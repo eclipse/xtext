@@ -32,7 +32,7 @@ import org.junit.BeforeClass;
  * @author Holger Schill - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
+public abstract class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
   @Inject
   private IHyperlinkHelper hyperlinkHelper;
   
