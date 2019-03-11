@@ -18,6 +18,7 @@ import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
@@ -35,11 +36,24 @@ interface ILanguageServerAccess {
 		CancelIndicator cancelChecker
 	}
 
+	@Data
+	static class IndexContext {
+		IResourceDescriptions index
+		CancelIndicator cancelChecker
+	}
+
 	/**
 	 * provides read access to a fully resolved resource and Document.
 	 */
 	def <T> CompletableFuture<T> doRead(String uri, Function<Context, T> function)
-	
+
+	/**
+	 * Provides read access to the Xtext index.
+	 * 
+	 * @since 2.18
+	 */
+	def <T> CompletableFuture<T> doReadIndex(Function<? super IndexContext, ? extends T> function)
+
 	static interface IBuildListener {
 		def void afterBuild(List<IResourceDescription.Delta> deltas)
 	}
@@ -62,9 +76,9 @@ interface ILanguageServerAccess {
 	 * In order not to mess up the originals, the resp. models should be loaded into a
 	 * new resource set which this method provides.
 	 * 
-	 * @param uri a file URI used to detect the project to configure the scoüpe of the resource set.
+	 * @param uri a file URI used to detect the project to configure the scope of the resource set.
 	 * @return a new empty resource set, configured with the project the <code>uri</code>
-	 *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
+	 *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
 	 *   reflect model changes immediately.
 	 * @since 2.18
 	 */

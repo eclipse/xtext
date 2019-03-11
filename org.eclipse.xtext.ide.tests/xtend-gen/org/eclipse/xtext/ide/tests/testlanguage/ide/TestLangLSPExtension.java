@@ -7,12 +7,15 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.ImplementedBy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
@@ -24,6 +27,8 @@ import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -121,8 +126,29 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
       result.putAll(ServiceEndpoints.getSupportedMethods(TestLangLSPExtension.CustomClient.class));
       return result;
     }
+    
+    @Override
+    public CompletableFuture<Set<String>> getAllOpNames() {
+      final Function<ILanguageServerAccess.IndexContext, Set<String>> _function = (ILanguageServerAccess.IndexContext context) -> {
+        final Function1<IResourceDescription, Iterable<IEObjectDescription>> _function_1 = (IResourceDescription it) -> {
+          return it.getExportedObjects();
+        };
+        final Function1<IEObjectDescription, Boolean> _function_2 = (IEObjectDescription it) -> {
+          EClass _eClass = it.getEClass();
+          return Boolean.valueOf((_eClass == TestLanguagePackage.Literals.OPERATION));
+        };
+        final Function1<IEObjectDescription, String> _function_3 = (IEObjectDescription it) -> {
+          return it.getName().getLastSegment();
+        };
+        return IterableExtensions.<String>toSet(IterableExtensions.<IEObjectDescription, String>map(IterableExtensions.<IEObjectDescription>filter(Iterables.<IEObjectDescription>concat(IterableExtensions.<IResourceDescription, Iterable<IEObjectDescription>>map(context.getIndex().getAllResourceDescriptions(), _function_1)), _function_2), _function_3));
+      };
+      return this.access.<Set<String>>doReadIndex(_function);
+    }
   }
   
   @JsonRequest
   public abstract CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param);
+  
+  @JsonRequest
+  public abstract CompletableFuture<Set<String>> getAllOpNames();
 }
