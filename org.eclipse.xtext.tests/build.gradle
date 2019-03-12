@@ -5,6 +5,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.xtext.generator')
 	compile project(':org.eclipse.xtext.xtext.wizard')
 	compile project(':org.eclipse.xtext.testlanguages')
+	mwe2Compile project(':org.eclipse.xtext.testlanguages')
 	compile 'junit:junit'
 	compile 'org.eclipse.emf:org.eclipse.emf.common'
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi'
