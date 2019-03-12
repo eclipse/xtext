@@ -15,6 +15,7 @@ import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.fileToString
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -353,11 +354,51 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Foo|1 {
 			}
 		'''
-		create('Foo.xtend', model).assertIssueCodes(WRONG_FILE).assertResolutionLabels("Rename file to 'Foo1.xtend'").
-			assertModelAfterQuickfix(model.replace('|', ''))
+		create('Foo.xtend', model).assertIssueCodes(WRONG_FILE).assertResolutionLabelsSubset("Rename file to 'Foo1.xtend'").
+			assertModelAfterQuickfix("Rename file to 'Foo1.xtend'", model.replace('|', ''))
 		assertNotNull(getFile("Foo1.xtend"))
 		assertTrue(getFile("Foo1.xtend").exists)
 		assertFalse(getFile("Foo.xtend").exists)
+	}
+	
+	@Test
+	def void fixWrongFile_renameClass() {
+		val className = 'Foo'
+		val fileName = className + '.xtend'
+		val wrongClassName = 'Bar'
+		
+		val otherClassFile = createFile('Other.xtend', '''
+			class Other {
+				val «wrongClassName» test = new «wrongClassName»
+			}
+		''')
+		
+		create(fileName, '''
+			class «wrongClassName»| {
+				static val «wrongClassName» INSTANCE = new «wrongClassName»
+			
+				def static «wrongClassName» getInstance() {
+					INSTANCE
+				}
+			}
+		''')
+		.assertIssueCodes(WRONG_FILE)
+		.assertResolutionLabelsSubset("Rename class to '" + className + "'")
+		.assertModelAfterQuickfix('''
+			class «className» {
+				static val «className» INSTANCE = new «className»
+			
+				def static «className» getInstance() {
+					INSTANCE
+				}
+			}
+		''')
+		
+		assertEquals('''
+			class Other {
+				val «className» test = new «className»
+			}
+		'''.toString, otherClassFile.fileToString)
 	}
 	
 	@Test
@@ -365,7 +406,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		create('Foo1.xtend', '''class Foo|2{} class Foo3{}''')
 		create('Foo.xtend', '''class Foo|1 {}''')
 			.assertIssueCodes(WRONG_FILE)
-			.assertResolutionLabels("")
 	}
 		
 	@Test 
