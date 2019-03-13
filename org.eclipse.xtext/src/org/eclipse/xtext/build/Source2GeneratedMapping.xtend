@@ -35,7 +35,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 	new() {
 		this(HashMultimap.create, HashMultimap.create, newHashMap)
 	}
-	  
+	
 	def copy() {
 		new Source2GeneratedMapping(HashMultimap.create(source2generated), HashMultimap.create(generated2source), new HashMap(generated2OutputConfigName))
 	}
@@ -109,6 +109,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 				out.writeUTF(toString)
 				out.writeUTF(generated2OutputConfigName.get(it)?:IFileSystemAccess.DEFAULT_OUTPUT)
 			]
-		]		
+		]
 	}
 }

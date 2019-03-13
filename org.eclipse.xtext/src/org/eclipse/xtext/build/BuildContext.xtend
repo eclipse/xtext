@@ -37,12 +37,12 @@ class BuildContext {
 	}
 	
 	protected def boolean canHandle(URI uri) {
-        val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
-        if (resourceServiceProvider === null)
-            return false
+		val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
+		if (resourceServiceProvider === null)
+			return false
 
-        return resourceServiceProvider.canHandle(uri)
-    }
+		return resourceServiceProvider.canHandle(uri)
+	}
 	
 	def getResourceServiceProvider(URI uri) {
 		val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
