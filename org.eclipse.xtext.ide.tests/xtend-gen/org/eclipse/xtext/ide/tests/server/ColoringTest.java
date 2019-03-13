@@ -12,6 +12,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.lsp4j.ColoringInformation;
+import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -128,5 +130,10 @@ public class ColoringTest extends AbstractTestLangLanguageServerTest {
     _builder_1.append(" ");
     _builder_1.append("* [[15, 4] .. [15, 8]] -> [1]");
     this.assertEquals(_builder_1.toString(), expectation);
+  }
+  
+  @Override
+  protected Class<? extends LanguageClient> getLanguageClientClass() {
+    return LanguageClientExtensions.class;
   }
 }

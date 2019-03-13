@@ -77,7 +77,7 @@ import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
-import org.eclipse.lsp4j.services.LanguageClientExtensions;
+import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.util.SemanticHighlightingTokens;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -195,7 +195,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
       this.languageInfo = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
     }
-    this.languageServer.connect(ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class));
+    this.languageServer.connect(ServiceEndpoints.toServiceObject(this, this.getLanguageClientClass()));
     this.languageServer.supportedMethods();
     File _absoluteFile = new File("").getAbsoluteFile();
     File _file = new File(_absoluteFile, AbstractLanguageServerTest.TEST_PROJECT_PATH);
@@ -213,6 +213,13 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  /**
+   * @since 2.18
+   */
+  protected Class<? extends LanguageClient> getLanguageClientClass() {
+    return LanguageClient.class;
   }
   
   protected com.google.inject.Module getServerModule() {

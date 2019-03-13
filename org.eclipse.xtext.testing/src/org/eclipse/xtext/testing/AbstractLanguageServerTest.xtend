@@ -83,6 +83,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.eclipse.lsp4j.services.LanguageClient
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -105,7 +106,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			languageInfo = resourceServiceProvider.get(LanguageInfo)
 
 		// register notification callbacks
-		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClientExtensions))
+		languageServer.connect(ServiceEndpoints.toServiceObject(this, languageClientClass))
 		// initialize
 		languageServer.supportedMethods()
 
@@ -118,6 +119,13 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		if (root.exists) {
 			Files.cleanFolder(root, null, true, true)
 		}
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected def Class<? extends LanguageClient> getLanguageClientClass() {
+		return LanguageClient;
 	}
 
 	protected def Module getServerModule() {
