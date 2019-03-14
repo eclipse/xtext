@@ -14,10 +14,14 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.XMLResource
 import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextDocumentEdit
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.eclipse.lsp4j.WorkspaceEdit
+import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
+import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -31,21 +35,35 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 
 	static class Factory {
 
-		@Inject IResourceServiceProvider.Registry registry
+		@Inject protected IResourceServiceProvider.Registry registry
 
+		/**
+		 * @deprecated use {@link #create(WorkspaceManager, WorkspaceEdit, boolean} instead.
+		 */
+		@Deprecated
 		def ChangeConverter create(WorkspaceManager workspaceManager, WorkspaceEdit edit) {
-			new ChangeConverter(workspaceManager, registry, edit)
+			new ChangeConverter(workspaceManager, registry, edit, null)
+		}
+
+		def ChangeConverter create(WorkspaceManager workspaceManager, WorkspaceEdit edit, IRenameServiceExtension.Options options) {
+			new ChangeConverter(workspaceManager, registry, edit, options)
 		}
 	}
 
 	val WorkspaceManager workspaceManager
 	val IResourceServiceProvider.Registry registry
 	val WorkspaceEdit edit
+	val IRenameServiceExtension.Options options
 	
-	protected new(WorkspaceManager workspaceManager, IResourceServiceProvider.Registry registry, WorkspaceEdit edit) {
+	protected new(WorkspaceManager workspaceManager, IResourceServiceProvider.Registry registry, WorkspaceEdit edit, IRenameServiceExtension.Options options) {
 		this.workspaceManager = workspaceManager
 		this.registry = registry
 		this.edit = edit
+		this.options = options
+		if (options?.clientSupportsVerisonedDocuments)
+			this.edit.documentChanges = newArrayList 
+		else
+			this.edit.changes = newLinkedHashMap
 	}
 
 	override accept(IEmfResourceChange change) {
@@ -61,7 +79,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 			workspaceManager.doRead(uri) [ document, resource |
 				val range = new Range(document.getPosition(0), document.getPosition(document.contents.length))
 				val textEdit = new TextEdit(range, newContent)
-				addTextEdit(uri, textEdit)
+				addTextEdit(uri, document, textEdit)
 			]
 		} finally {
 			outputStream.close
@@ -88,12 +106,24 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 					val range = new Range(start, end)
 					new TextEdit(range, replacement.replacementText)
 				]
-				addTextEdit(uri, textEdits)
+				addTextEdit(uri, document, textEdits)
 			]
 		}
 	}
 	
-	protected def addTextEdit(URI uri, TextEdit... textEdit) {
-		edit.changes.put(uri.toString, textEdit)
+	protected def addTextEdit(URI theUri, Document document, TextEdit... textEdits) {
+		if (options?.clientSupportsVerisonedDocuments) {
+			edit.documentChanges +=  
+				Either.forLeft(new TextDocumentEdit => [
+					textDocument = new VersionedTextDocumentIdentifier => [
+						uri = theUri.toString
+						version = document.version
+					]
+					edits = textEdits
+				])			
+		} else {
+			edit.changes.put(theUri.toString, textEdits)
+		}
 	}
+	
 }

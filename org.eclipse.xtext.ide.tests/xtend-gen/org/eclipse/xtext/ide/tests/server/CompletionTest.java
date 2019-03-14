@@ -28,7 +28,9 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.SemanticHighlightingInformation;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextDocumentEdit;
 import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -334,6 +336,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       return _toExpectation((DocumentHighlightKind)it);
     } else if (it instanceof String) {
       return _toExpectation((String)it);
+    } else if (it instanceof VersionedTextDocumentIdentifier) {
+      return _toExpectation((VersionedTextDocumentIdentifier)it);
     } else if (it instanceof Pair) {
       return _toExpectation((Pair<SemanticHighlightingInformation, List<List<String>>>)it);
     } else if (it == null) {
@@ -366,6 +370,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       return _toExpectation((SignatureHelp)it);
     } else if (it instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)it);
+    } else if (it instanceof TextDocumentEdit) {
+      return _toExpectation((TextDocumentEdit)it);
     } else if (it instanceof TextEdit) {
       return _toExpectation((TextEdit)it);
     } else if (it instanceof WorkspaceEdit) {

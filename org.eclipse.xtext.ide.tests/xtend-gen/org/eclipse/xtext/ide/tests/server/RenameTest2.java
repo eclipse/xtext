@@ -7,13 +7,20 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import org.eclipse.lsp4j.ClientCapabilities;
+import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceEditCapabilities;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.AbstractLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 /**
@@ -49,13 +56,13 @@ public class RenameTest2 extends AbstractLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("changes :");
       _builder_1.newLine();
+      _builder_1.append("documentChanges : ");
+      _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Foo.fileawaretestlanguage : Bar [[2, 8] .. [2, 11]]");
+      _builder_1.append("Foo.fileawaretestlanguage <1> : Bar [[2, 8] .. [2, 11]]");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("Bar [[3, 5] .. [3, 8]]");
-      _builder_1.newLine();
-      _builder_1.append("documentChanges : ");
       _builder_1.newLine();
       this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
     } catch (Throwable _e) {
@@ -99,8 +106,10 @@ public class RenameTest2 extends AbstractLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("changes :");
       _builder_1.newLine();
+      _builder_1.append("documentChanges : ");
+      _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("Foo.fileawaretestlanguage : Baz [[2, 8] .. [2, 11]]");
+      _builder_1.append("Foo.fileawaretestlanguage <1> : Baz [[2, 8] .. [2, 11]]");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("Bar [[5, 5] .. [5, 16]]");
@@ -108,11 +117,32 @@ public class RenameTest2 extends AbstractLanguageServerTest {
       _builder_1.append("    ");
       _builder_1.append("Bar [[6, 5] .. [6, 12]]");
       _builder_1.newLine();
-      _builder_1.append("documentChanges : ");
-      _builder_1.newLine();
       this.assertEquals(_builder_1.toString(), this.toExpectation(workspaceEdit));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Override
+  protected InitializeResult initialize() {
+    final Procedure1<InitializeParams> _function = (InitializeParams params) -> {
+      ClientCapabilities _clientCapabilities = new ClientCapabilities();
+      final Procedure1<ClientCapabilities> _function_1 = (ClientCapabilities it) -> {
+        WorkspaceClientCapabilities _workspaceClientCapabilities = new WorkspaceClientCapabilities();
+        final Procedure1<WorkspaceClientCapabilities> _function_2 = (WorkspaceClientCapabilities it_1) -> {
+          WorkspaceEditCapabilities _workspaceEditCapabilities = new WorkspaceEditCapabilities();
+          final Procedure1<WorkspaceEditCapabilities> _function_3 = (WorkspaceEditCapabilities it_2) -> {
+            it_2.setDocumentChanges(Boolean.valueOf(true));
+          };
+          WorkspaceEditCapabilities _doubleArrow = ObjectExtensions.<WorkspaceEditCapabilities>operator_doubleArrow(_workspaceEditCapabilities, _function_3);
+          it_1.setWorkspaceEdit(_doubleArrow);
+        };
+        WorkspaceClientCapabilities _doubleArrow = ObjectExtensions.<WorkspaceClientCapabilities>operator_doubleArrow(_workspaceClientCapabilities, _function_2);
+        it.setWorkspace(_doubleArrow);
+      };
+      ClientCapabilities _doubleArrow = ObjectExtensions.<ClientCapabilities>operator_doubleArrow(_clientCapabilities, _function_1);
+      params.setCapabilities(_doubleArrow);
+    };
+    return super.initialize(_function);
   }
 }

@@ -83,6 +83,7 @@ import org.eclipse.lsp4j.TextDocumentSyncKind;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceEditCapabilities;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
@@ -120,6 +121,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.rename.IRenameService;
+import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension;
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
@@ -925,11 +927,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<WorkspaceEdit> rename(final RenameParams params) {
+  public CompletableFuture<WorkspaceEdit> rename(final RenameParams renameParams) {
     final Function1<CancelIndicator, WorkspaceEdit> _function = (CancelIndicator cancelIndicator) -> {
       WorkspaceEdit _xblockexpression = null;
       {
-        final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+        final URI uri = this._uriExtensions.toUri(renameParams.getTextDocument().getUri());
         final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
         IRenameService _get = null;
         if (resourceServiceProvider!=null) {
@@ -939,7 +941,35 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         if ((renameService == null)) {
           return new WorkspaceEdit();
         }
-        _xblockexpression = renameService.rename(this.workspaceManager, params, cancelIndicator);
+        WorkspaceEdit _xifexpression = null;
+        if ((renameService instanceof IRenameServiceExtension)) {
+          WorkspaceEdit _xblockexpression_1 = null;
+          {
+            ClientCapabilities _capabilities = null;
+            if (this.params!=null) {
+              _capabilities=this.params.getCapabilities();
+            }
+            WorkspaceClientCapabilities _workspace = null;
+            if (_capabilities!=null) {
+              _workspace=_capabilities.getWorkspace();
+            }
+            WorkspaceEditCapabilities _workspaceEdit = null;
+            if (_workspace!=null) {
+              _workspaceEdit=_workspace.getWorkspaceEdit();
+            }
+            Boolean _documentChanges = null;
+            if (_workspaceEdit!=null) {
+              _documentChanges=_workspaceEdit.getDocumentChanges();
+            }
+            boolean _tripleEquals = (_documentChanges == Boolean.TRUE);
+            final IRenameServiceExtension.Options options = new IRenameServiceExtension.Options(_tripleEquals);
+            _xblockexpression_1 = ((IRenameServiceExtension)renameService).rename(this.workspaceManager, renameParams, options, cancelIndicator);
+          }
+          _xifexpression = _xblockexpression_1;
+        } else {
+          _xifexpression = renameService.rename(this.workspaceManager, renameParams, cancelIndicator);
+        }
+        _xblockexpression = _xifexpression;
       }
       return _xblockexpression;
     };

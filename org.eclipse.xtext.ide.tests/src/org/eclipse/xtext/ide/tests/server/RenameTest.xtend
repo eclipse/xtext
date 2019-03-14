@@ -39,13 +39,24 @@ class RenameTest extends AbstractTestLangLanguageServerTest {
 	}
 	
 	@Test
-	def void testRenameOnDeclaration() {
-		doTest(firstFile, new Position(0,5))
+	def void testRenameBeforeDeclaration() {
+		doTest(firstFile, new Position(0, 4))
 	}
 
 	@Test
+	def void testRenameOnDeclaration() {
+		doTest(firstFile, new Position(0, 5))
+	}
+
+	@Test
+	def void testRenameAfterDeclaration() {
+		doTest(firstFile, new Position(0, 8))
+	}
+
+
+	@Test
 	def void testRenameOnReference() {
-		doTest(firstFile, new Position(1,5))
+		doTest(firstFile, new Position(1, 5))
 	}
 	
 	@Test

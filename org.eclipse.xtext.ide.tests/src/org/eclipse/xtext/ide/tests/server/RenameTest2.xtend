@@ -12,6 +12,9 @@ import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.xtext.testing.AbstractLanguageServerTest
 import org.junit.Test
+import org.eclipse.lsp4j.ClientCapabilities
+import org.eclipse.lsp4j.WorkspaceClientCapabilities
+import org.eclipse.lsp4j.WorkspaceEditCapabilities
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -38,9 +41,9 @@ class RenameTest2 extends AbstractLanguageServerTest {
         val workspaceEdit = languageServer.rename(params).get
         assertEquals('''
 			changes :
-			    Foo.fileawaretestlanguage : Bar [[2, 8] .. [2, 11]]
-			    Bar [[3, 5] .. [3, 8]]
 			documentChanges : 
+			    Foo.fileawaretestlanguage <1> : Bar [[2, 8] .. [2, 11]]
+			    Bar [[3, 5] .. [3, 8]]
         '''.toString, toExpectation(workspaceEdit))
 	}
 	
@@ -64,11 +67,21 @@ class RenameTest2 extends AbstractLanguageServerTest {
         val workspaceEdit = languageServer.rename(params).get
         assertEquals('''
 			changes :
-			    Foo.fileawaretestlanguage : Baz [[2, 8] .. [2, 11]]
+			documentChanges : 
+			    Foo.fileawaretestlanguage <1> : Baz [[2, 8] .. [2, 11]]
 			    Bar [[5, 5] .. [5, 16]]
 			    Bar [[6, 5] .. [6, 12]]
-			documentChanges : 
         '''.toString, toExpectation(workspaceEdit))
 	}
 	
+	
+	override protected initialize() {
+		super.initialize([params | params.capabilities = new ClientCapabilities => [
+			workspace = new WorkspaceClientCapabilities => [
+				workspaceEdit = new WorkspaceEditCapabilities => [
+					documentChanges = true
+				]
+			]
+		]])
+ 	}
 }

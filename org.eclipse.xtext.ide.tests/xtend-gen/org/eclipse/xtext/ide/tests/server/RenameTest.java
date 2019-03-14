@@ -52,8 +52,20 @@ public class RenameTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
+  public void testRenameBeforeDeclaration() {
+    Position _position = new Position(0, 4);
+    this.doTest(this.firstFile, _position);
+  }
+  
+  @Test
   public void testRenameOnDeclaration() {
     Position _position = new Position(0, 5);
+    this.doTest(this.firstFile, _position);
+  }
+  
+  @Test
+  public void testRenameAfterDeclaration() {
+    Position _position = new Position(0, 8);
     this.doTest(this.firstFile, _position);
   }
   
