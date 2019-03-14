@@ -58,26 +58,26 @@ class IncrementalBuilder {
 		@Inject extension OperationCanceledManager
 		
 		protected def void unloadResource(URI uri) {
-		    val resource = request.resourceSet.getResource(uri, false)
-            if (resource !== null) {
-                request.resourceSet.resources.remove(resource)
-                resource.unload
-            }
+			val resource = request.resourceSet.getResource(uri, false)
+			if (resource !== null) {
+				request.resourceSet.resources.remove(resource)
+				resource.unload
+			}
 		}
 		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.state.fileMappings
 			val unloaded = newHashSet()
-		    for (deleted : request.deletedFiles) {
-                if (unloaded.add(deleted)) {
-                    unloadResource(deleted)
-                }
-            }
-            for (dirty : request.dirtyFiles) {
-                if (unloaded.add(dirty)) {
-                    unloadResource(dirty)
-                }
-            }
+			for (deleted : request.deletedFiles) {
+				if (unloaded.add(deleted)) {
+					unloadResource(deleted)
+				}
+			}
+			for (dirty : request.dirtyFiles) {
+				if (unloaded.add(dirty)) {
+					unloadResource(dirty)
+				}
+			}
 			request.deletedFiles.forEach [ source |
 				request.afterValidate.afterValidate(source, newArrayList)
 				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
@@ -93,11 +93,11 @@ class IncrementalBuilder {
 			]
 			val result = indexer.computeAndIndexAffected(request, context)
 			request.cancelIndicator.checkCanceled
-		    for (delta : result.resourceDeltas) {
-                if (unloaded.add(delta.uri)) {
-                    unloadResource(delta.uri)
-                }
-		    }
+			for (delta : result.resourceDeltas) {
+				if (unloaded.add(delta.uri)) {
+					unloadResource(delta.uri)
+				}
+			}
 			
 			val resolvedDeltas = newArrayList
 			// add deleted deltas
@@ -113,9 +113,9 @@ class IncrementalBuilder {
 					val serviceProvider = resource.resourceServiceProvider
 					val manager = serviceProvider.resourceDescriptionManager
 					val description = manager.getResourceDescription(resource);
-                    val copiedDescription = SerializableResourceDescription.createCopy(description);
-                    result.newIndex.addDescription(resource.getURI, copiedDescription)
-                    request.cancelIndicator.checkCanceled
+					val copiedDescription = SerializableResourceDescription.createCopy(description);
+					result.newIndex.addDescription(resource.getURI, copiedDescription)
+					request.cancelIndicator.checkCanceled
 					if (!request.indexOnly 
 						&& resource.validate 
 						&& serviceProvider.get(IShouldGenerate).shouldGenerate(resource, CancelIndicator.NullImpl)

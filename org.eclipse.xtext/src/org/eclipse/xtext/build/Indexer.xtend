@@ -143,9 +143,9 @@ class Indexer {
 			this.URI = original.getURI
 			this.exported = ImmutableList.copyOf(
 				original.exportedObjects.map [ IEObjectDescription from |
-				    if (from instanceof SerializableEObjectDescriptionProvider) {
-				        return from.toSerializableEObjectDescription()
-				    }
+					if (from instanceof SerializableEObjectDescriptionProvider) {
+						return from.toSerializableEObjectDescription()
+					}
 					if (from.getEObjectOrProxy.eIsProxy)
 						return from
 					var result = EcoreUtil.create(from.getEClass()) as InternalEObject
@@ -182,4 +182,4 @@ class Indexer {
 		}
 	}
 }
-				
+
