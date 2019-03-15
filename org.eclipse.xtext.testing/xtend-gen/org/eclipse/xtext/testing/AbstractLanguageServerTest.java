@@ -67,6 +67,7 @@ import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
+import org.eclipse.lsp4j.TextDocumentEdit;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
@@ -936,6 +937,28 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return _builder.toString();
   }
   
+  protected String _toExpectation(final TextDocumentEdit e) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _expectation = this.toExpectation(e.getTextDocument());
+    _builder.append(_expectation);
+    _builder.append(" : ");
+    String _expectation_1 = this.toExpectation(e.getEdits());
+    _builder.append(_expectation_1);
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final VersionedTextDocumentIdentifier v) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _lastSegment = org.eclipse.emf.common.util.URI.createURI(v.getUri()).lastSegment();
+    _builder.append(_lastSegment);
+    _builder.append(" <");
+    Integer _version = v.getVersion();
+    _builder.append(_version);
+    _builder.append(">");
+    return _builder.toString();
+  }
+  
   protected void testCodeAction(final Procedure1<? super AbstractLanguageServerTest.TestCodeActionConfiguration> configurator) {
     try {
       @Extension
@@ -1459,6 +1482,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((DocumentHighlightKind)it);
     } else if (it instanceof String) {
       return _toExpectation((String)it);
+    } else if (it instanceof VersionedTextDocumentIdentifier) {
+      return _toExpectation((VersionedTextDocumentIdentifier)it);
     } else if (it instanceof Pair) {
       return _toExpectation((Pair<SemanticHighlightingInformation, List<List<String>>>)it);
     } else if (it == null) {
@@ -1491,6 +1516,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((SignatureHelp)it);
     } else if (it instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)it);
+    } else if (it instanceof TextDocumentEdit) {
+      return _toExpectation((TextDocumentEdit)it);
     } else if (it instanceof TextEdit) {
       return _toExpectation((TextEdit)it);
     } else if (it instanceof WorkspaceEdit) {

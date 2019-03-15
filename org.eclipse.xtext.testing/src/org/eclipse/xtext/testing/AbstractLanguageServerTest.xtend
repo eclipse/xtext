@@ -54,10 +54,12 @@ import org.eclipse.lsp4j.SemanticHighlightingInformation
 import org.eclipse.lsp4j.SemanticHighlightingParams
 import org.eclipse.lsp4j.SignatureHelp
 import org.eclipse.lsp4j.SymbolInformation
+import org.eclipse.lsp4j.TextDocumentEdit
 import org.eclipse.lsp4j.TextDocumentIdentifier
 import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
@@ -418,6 +420,15 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		«IF !diagnostics.nullOrEmpty»codes : «diagnostics.map[code].join(',')»«ENDIF»
 		edit : «edit.toExpectation»
 	'''
+	
+	protected def dispatch String toExpectation(TextDocumentEdit e) '''
+		«e.textDocument.toExpectation» : «e.edits.toExpectation»
+	'''
+
+	protected def dispatch String toExpectation(VersionedTextDocumentIdentifier v) 
+		'''«org.eclipse.emf.common.util.URI.createURI(v.uri).lastSegment» <«v.version»>'''
+	
+	
 	
 	@Accessors static class TestCodeActionConfiguration extends TextDocumentPositionConfiguration {
 		String expectedCodeActions = ''

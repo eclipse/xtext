@@ -102,6 +102,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.ImmutableMap
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
+import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -607,14 +608,19 @@ import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
-	override rename(RenameParams params) {
+	override rename(RenameParams renameParams) {
 		return requestManager.runRead[ cancelIndicator |
-			val uri = params.textDocument.uri.toUri
+			val uri = renameParams.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val renameService = resourceServiceProvider?.get(IRenameService)
 			if (renameService === null)
 				return new WorkspaceEdit
-			renameService.rename(workspaceManager, params, cancelIndicator)
+			if (renameService instanceof IRenameServiceExtension) {
+				val options = new IRenameServiceExtension.Options(params?.capabilities?.workspace?.workspaceEdit?.documentChanges === Boolean.TRUE)
+				renameService.rename(workspaceManager, renameParams, options, cancelIndicator)
+			} else {
+				renameService.rename(workspaceManager, renameParams, cancelIndicator)
+			}
 		]
 	}
 	
