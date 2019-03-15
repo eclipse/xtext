@@ -22,23 +22,23 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * client supports versioned documents.
  * 
  * @author koehnlein - Initial contribution and API
- * @since 2.17
+ * @since 2.18
  */
 @SuppressWarnings("all")
 public interface IRenameServiceExtension {
   @Data
   public static class Options {
-    private final boolean clientSupportsVerisonedDocuments;
+    private final boolean clientSupportsVersionedDocuments;
     
-    public Options(final boolean clientSupportsVerisonedDocuments) {
+    public Options(final boolean clientSupportsVersionedDocuments) {
       super();
-      this.clientSupportsVerisonedDocuments = clientSupportsVerisonedDocuments;
+      this.clientSupportsVersionedDocuments = clientSupportsVersionedDocuments;
     }
     
     @Override
     @Pure
     public int hashCode() {
-      return 31 * 1 + (this.clientSupportsVerisonedDocuments ? 1231 : 1237);
+      return 31 * 1 + (this.clientSupportsVersionedDocuments ? 1231 : 1237);
     }
     
     @Override
@@ -51,7 +51,7 @@ public interface IRenameServiceExtension {
       if (getClass() != obj.getClass())
         return false;
       IRenameServiceExtension.Options other = (IRenameServiceExtension.Options) obj;
-      if (other.clientSupportsVerisonedDocuments != this.clientSupportsVerisonedDocuments)
+      if (other.clientSupportsVersionedDocuments != this.clientSupportsVersionedDocuments)
         return false;
       return true;
     }
@@ -60,13 +60,13 @@ public interface IRenameServiceExtension {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
-      b.add("clientSupportsVerisonedDocuments", this.clientSupportsVerisonedDocuments);
+      b.add("clientSupportsVersionedDocuments", this.clientSupportsVersionedDocuments);
       return b.toString();
     }
     
     @Pure
-    public boolean isClientSupportsVerisonedDocuments() {
-      return this.clientSupportsVerisonedDocuments;
+    public boolean isClientSupportsVersionedDocuments() {
+      return this.clientSupportsVersionedDocuments;
     }
   }
   

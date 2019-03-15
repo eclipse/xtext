@@ -101,7 +101,7 @@ class RenameService implements IRenameService, IRenameServiceExtension {
 	protected def EObject getElementAtOffset(XtextResource xtextResource, Document document, Position caretPosition) {
 		val caretOffset = document.getOffSet(caretPosition)
 		val leafNode = NodeModelUtils.findLeafNodeAtOffset(xtextResource.parseResult.rootNode, caretOffset)
-		val offset = if (caretOffset > 0 && leafNode.offset === caretOffset && !isIdentifier(leafNode)) 
+		val offset = if (caretOffset === xtextResource.parseResult.rootNode.endOffset && caretOffset > 0 && leafNode.offset === caretOffset && !isIdentifier(leafNode)) 
 				caretOffset - 1
 			else 
 				caretOffset

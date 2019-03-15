@@ -45,6 +45,9 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 			new ChangeConverter(workspaceManager, registry, edit, null)
 		}
 
+		/**
+		 * @since 2.18
+		 */
 		def ChangeConverter create(WorkspaceManager workspaceManager, WorkspaceEdit edit, IRenameServiceExtension.Options options) {
 			new ChangeConverter(workspaceManager, registry, edit, options)
 		}
@@ -60,7 +63,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 		this.registry = registry
 		this.edit = edit
 		this.options = options
-		if (options?.clientSupportsVerisonedDocuments)
+		if (options?.clientSupportsVersionedDocuments)
 			this.edit.documentChanges = newArrayList 
 		else
 			this.edit.changes = newLinkedHashMap
@@ -112,7 +115,7 @@ class ChangeConverter implements IAcceptor<IEmfResourceChange> {
 	}
 	
 	protected def addTextEdit(URI theUri, Document document, TextEdit... textEdits) {
-		if (options?.clientSupportsVerisonedDocuments) {
+		if (options?.clientSupportsVersionedDocuments) {
 			edit.documentChanges +=  
 				Either.forLeft(new TextDocumentEdit => [
 					textDocument = new VersionedTextDocumentIdentifier => [

@@ -60,6 +60,9 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
       return new ChangeConverter(workspaceManager, this.registry, edit, null);
     }
     
+    /**
+     * @since 2.18
+     */
     public ChangeConverter create(final WorkspaceManager workspaceManager, final WorkspaceEdit edit, final IRenameServiceExtension.Options options) {
       return new ChangeConverter(workspaceManager, this.registry, edit, options);
     }
@@ -78,11 +81,11 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     this.registry = registry;
     this.edit = edit;
     this.options = options;
-    boolean _isClientSupportsVerisonedDocuments = false;
+    boolean _isClientSupportsVersionedDocuments = false;
     if (options!=null) {
-      _isClientSupportsVerisonedDocuments=options.isClientSupportsVerisonedDocuments();
+      _isClientSupportsVersionedDocuments=options.isClientSupportsVersionedDocuments();
     }
-    if (_isClientSupportsVerisonedDocuments) {
+    if (_isClientSupportsVersionedDocuments) {
       this.edit.setDocumentChanges(CollectionLiterals.<Either<TextDocumentEdit, ResourceOperation>>newArrayList());
     } else {
       this.edit.setChanges(CollectionLiterals.<String, List<TextEdit>>newLinkedHashMap());
@@ -177,11 +180,11 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   
   protected Object addTextEdit(final URI theUri, final Document document, final TextEdit... textEdits) {
     Object _xifexpression = null;
-    boolean _isClientSupportsVerisonedDocuments = false;
+    boolean _isClientSupportsVersionedDocuments = false;
     if (this.options!=null) {
-      _isClientSupportsVerisonedDocuments=this.options.isClientSupportsVerisonedDocuments();
+      _isClientSupportsVersionedDocuments=this.options.isClientSupportsVersionedDocuments();
     }
-    if (_isClientSupportsVerisonedDocuments) {
+    if (_isClientSupportsVersionedDocuments) {
       List<Either<TextDocumentEdit, ResourceOperation>> _documentChanges = this.edit.getDocumentChanges();
       TextDocumentEdit _textDocumentEdit = new TextDocumentEdit();
       final Procedure1<TextDocumentEdit> _function = (TextDocumentEdit it) -> {
