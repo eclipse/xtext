@@ -1619,4 +1619,31 @@
          </adapter>
       </factory>
    </extension>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+         <commonWizard
+               type="new"
+               wizardId="org.eclipse.xtend.ide.wizards.NewXtendClassWizard"
+               menuGroupId="org.eclipse.jdt.ui.java">
+            <enablement></enablement>
+         </commonWizard>
+         <commonWizard
+               type="new"
+               wizardId="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard"
+               menuGroupId="org.eclipse.jdt.ui.java">
+            <enablement></enablement>
+         </commonWizard>
+         <commonWizard
+               type="new"
+               wizardId="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard"
+               menuGroupId="org.eclipse.jdt.ui.java">
+            <enablement></enablement>
+         </commonWizard>
+         <commonWizard
+               type="new"
+               wizardId="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard"
+               menuGroupId="org.eclipse.jdt.ui.java">
+            <enablement></enablement>
+         </commonWizard>
+   </extension>
 </plugin>
