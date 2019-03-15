@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.junit.Test
 
 /**
@@ -56,6 +57,10 @@ class ColoringTest extends AbstractTestLangLanguageServerTest {
 		 * [[11, 4] .. [11, 7]] -> [1]
 		 * [[14, 9] .. [14, 10]] -> [1]
 		 * [[15, 4] .. [15, 8]] -> [1]''', expectation);
+	}
+
+	override protected getLanguageClientClass() {
+		return LanguageClientExtensions;
 	}
 
 }
