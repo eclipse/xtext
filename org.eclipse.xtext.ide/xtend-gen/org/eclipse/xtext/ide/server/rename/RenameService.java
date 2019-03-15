@@ -143,7 +143,7 @@ public class RenameService implements IRenameService, IRenameServiceExtension {
     final int caretOffset = document.getOffSet(caretPosition);
     final ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(xtextResource.getParseResult().getRootNode(), caretOffset);
     int _xifexpression = (int) 0;
-    if ((((caretOffset > 0) && (leafNode.getOffset() == caretOffset)) && (!this.isIdentifier(leafNode)))) {
+    if (((((caretOffset == xtextResource.getParseResult().getRootNode().getEndOffset()) && (caretOffset > 0)) && (leafNode.getOffset() == caretOffset)) && (!this.isIdentifier(leafNode)))) {
       _xifexpression = (caretOffset - 1);
     } else {
       _xifexpression = caretOffset;

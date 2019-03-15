@@ -30,13 +30,13 @@ interface IRenameService {
  * client supports versioned documents.
  * 
  * @author koehnlein - Initial contribution and API
- * @since 2.17
+ * @since 2.18
  */
 interface IRenameServiceExtension {
 	def WorkspaceEdit rename(WorkspaceManager workspaceManager, RenameParams renameParams, Options options, CancelIndicator cancelIndicator)
 
 	@Data
 	class Options {
-		boolean clientSupportsVerisonedDocuments
+		boolean clientSupportsVersionedDocuments
 	}
 }
