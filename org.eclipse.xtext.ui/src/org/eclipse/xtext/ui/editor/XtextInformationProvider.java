@@ -39,8 +39,6 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 	@Inject
 	protected IEObjectHover hover;
 	@Inject
-	protected IEObjectHoverProvider hoverProvider;
-	@Inject
 	protected IGlobalServiceProvider serviceProvider;
 	@Inject
 	protected EObjectAtOffsetHelper eObjectAtOffsetHelper;
