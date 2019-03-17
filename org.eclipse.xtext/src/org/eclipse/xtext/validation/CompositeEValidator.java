@@ -207,6 +207,20 @@ public class CompositeEValidator implements EValidator, Cloneable {
 		return equalitySupportProvider;
 	}
 	
+	/**
+	 * @since 2.18
+	 */
+	public OperationCanceledManager getOperationCanceledManager() {
+		return operationCanceledManager;
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	public void setOperationCanceledManager(OperationCanceledManager operationCanceledManager) {
+		this.operationCanceledManager = operationCanceledManager;
+	}
+
 	@Override
 	protected CompositeEValidator clone() {
 		try {
