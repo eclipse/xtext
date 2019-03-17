@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="org.eclipse.xtend.oxygen.target" sequenceNumber="10">
+<target name="org.eclipse.xtend.r201903.target" sequenceNumber="10">
 <locations>
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="0.0.0"/>
@@ -97,7 +97,7 @@
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
+		<repository location="http://download.eclipse.org/releases/2019-03"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
