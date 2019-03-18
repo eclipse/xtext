@@ -796,4 +796,12 @@ public class TestBatchCompiler {
     Assert.assertTrue(generated.contains("@Override"));
     Assert.assertTrue(generated.contains("(Integer it) ->"));
   }
+  
+  @Test
+  public void testIssue750() {
+    this.batchCompiler.setJavaSourceVersion("1.8");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/issue750/src");
+    this.batchCompiler.setClassPath("./batch-compiler-data/issue750/lib/mydependency.jar");
+    Assert.assertTrue(this.batchCompiler.compile());
+  }
 }
