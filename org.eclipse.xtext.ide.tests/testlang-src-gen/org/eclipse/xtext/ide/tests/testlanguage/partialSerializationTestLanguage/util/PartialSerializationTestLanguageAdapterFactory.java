@@ -115,6 +115,31 @@ public class PartialSerializationTestLanguageAdapterFactory extends AdapterFacto
         return createOptionalChildAdapter();
       }
       @Override
+      public Adapter caseTwoChildLists(TwoChildLists object)
+      {
+        return createTwoChildListsAdapter();
+      }
+      @Override
+      public Adapter caseTwoChilds(TwoChilds object)
+      {
+        return createTwoChildsAdapter();
+      }
+      @Override
+      public Adapter caseChildWithSubChilds(ChildWithSubChilds object)
+      {
+        return createChildWithSubChildsAdapter();
+      }
+      @Override
+      public Adapter caseChildWithSubChild(ChildWithSubChild object)
+      {
+        return createChildWithSubChildAdapter();
+      }
+      @Override
+      public Adapter caseSubChild(SubChild object)
+      {
+        return createSubChildAdapter();
+      }
+      @Override
       public Adapter caseMandatoryChildList(MandatoryChildList object)
       {
         return createMandatoryChildListAdapter();
@@ -267,6 +292,81 @@ public class PartialSerializationTestLanguageAdapterFactory extends AdapterFacto
    * @generated
    */
   public Adapter createOptionalChildAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists <em>Two Child Lists</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists
+   * @generated
+   */
+  public Adapter createTwoChildListsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds <em>Two Childs</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds
+   * @generated
+   */
+  public Adapter createTwoChildsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds <em>Child With Sub Childs</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds
+   * @generated
+   */
+  public Adapter createChildWithSubChildsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild <em>Child With Sub Child</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild
+   * @generated
+   */
+  public Adapter createChildWithSubChildAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild <em>Sub Child</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild
+   * @generated
+   */
+  public Adapter createSubChildAdapter()
   {
     return null;
   }

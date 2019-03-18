@@ -25,7 +25,10 @@ Model:
 	"#13" OptionalChildList |
 //	"#14" Imports |
 	"#20" clazz+=EClassDecl+ |
-	"#21" EClassRef
+	"#21" EClassRef |
+	"#22" TwoChildLists |
+	"#23" ChildWithSubChilds |
+	"#24" TwoChilds
 ;
 
 MandatoryValue:
@@ -45,6 +48,35 @@ MandatoryChild:
 
 OptionalChild:
 	{OptionalChild} child=MandatoryValue?;
+
+TwoChildLists:
+	"{"
+		directChildren += MandatoryValue+
+		
+		"children1" "{"
+			childsList = MandatoryChildList
+		"}"
+	"}"
+	;
+	
+TwoChilds:
+	{TwoChilds}
+		"direct" ":" directChild = MandatoryValue?
+		
+		"child" ":" optChild = OptionalChild
+	;
+
+ChildWithSubChilds:
+	{ChildWithSubChilds}
+	children+=ChildWithSubChild*
+;
+
+ChildWithSubChild:
+	{ChildWithSubChild}"subs"
+	subChilds+=SubChild*
+;
+
+SubChild: name=ID;
 
 MandatoryChildList:
 	children+=MandatoryValue+;

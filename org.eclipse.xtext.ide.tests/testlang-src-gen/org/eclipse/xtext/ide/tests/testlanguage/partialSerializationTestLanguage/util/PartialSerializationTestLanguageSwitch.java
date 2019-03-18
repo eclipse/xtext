@@ -132,6 +132,44 @@ public class PartialSerializationTestLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case PartialSerializationTestLanguagePackage.TWO_CHILD_LISTS:
+      {
+        TwoChildLists twoChildLists = (TwoChildLists)theEObject;
+        T result = caseTwoChildLists(twoChildLists);
+        if (result == null) result = caseModel(twoChildLists);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PartialSerializationTestLanguagePackage.TWO_CHILDS:
+      {
+        TwoChilds twoChilds = (TwoChilds)theEObject;
+        T result = caseTwoChilds(twoChilds);
+        if (result == null) result = caseModel(twoChilds);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILDS:
+      {
+        ChildWithSubChilds childWithSubChilds = (ChildWithSubChilds)theEObject;
+        T result = caseChildWithSubChilds(childWithSubChilds);
+        if (result == null) result = caseModel(childWithSubChilds);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILD:
+      {
+        ChildWithSubChild childWithSubChild = (ChildWithSubChild)theEObject;
+        T result = caseChildWithSubChild(childWithSubChild);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case PartialSerializationTestLanguagePackage.SUB_CHILD:
+      {
+        SubChild subChild = (SubChild)theEObject;
+        T result = caseSubChild(subChild);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case PartialSerializationTestLanguagePackage.MANDATORY_CHILD_LIST:
       {
         MandatoryChildList mandatoryChildList = (MandatoryChildList)theEObject;
@@ -292,6 +330,86 @@ public class PartialSerializationTestLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOptionalChild(OptionalChild object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Two Child Lists</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Two Child Lists</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTwoChildLists(TwoChildLists object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Two Childs</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Two Childs</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTwoChilds(TwoChilds object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Child With Sub Childs</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Child With Sub Childs</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChildWithSubChilds(ChildWithSubChilds object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Child With Sub Child</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Child With Sub Child</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChildWithSubChild(ChildWithSubChild object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Sub Child</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Sub Child</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSubChild(SubChild object)
   {
     return null;
   }

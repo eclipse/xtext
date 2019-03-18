@@ -76,6 +76,11 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
       case PartialSerializationTestLanguagePackage.MANY_MANDATORY_VALUES: return createManyMandatoryValues();
       case PartialSerializationTestLanguagePackage.MANDATORY_CHILD: return createMandatoryChild();
       case PartialSerializationTestLanguagePackage.OPTIONAL_CHILD: return createOptionalChild();
+      case PartialSerializationTestLanguagePackage.TWO_CHILD_LISTS: return createTwoChildLists();
+      case PartialSerializationTestLanguagePackage.TWO_CHILDS: return createTwoChilds();
+      case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILDS: return createChildWithSubChilds();
+      case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILD: return createChildWithSubChild();
+      case PartialSerializationTestLanguagePackage.SUB_CHILD: return createSubChild();
       case PartialSerializationTestLanguagePackage.MANDATORY_CHILD_LIST: return createMandatoryChildList();
       case PartialSerializationTestLanguagePackage.OPTIONAL_CHILD_LIST: return createOptionalChildList();
       case PartialSerializationTestLanguagePackage.IMPORT: return createImport();
@@ -162,6 +167,61 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
   {
     OptionalChildImpl optionalChild = new OptionalChildImpl();
     return optionalChild;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TwoChildLists createTwoChildLists()
+  {
+    TwoChildListsImpl twoChildLists = new TwoChildListsImpl();
+    return twoChildLists;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TwoChilds createTwoChilds()
+  {
+    TwoChildsImpl twoChilds = new TwoChildsImpl();
+    return twoChilds;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ChildWithSubChilds createChildWithSubChilds()
+  {
+    ChildWithSubChildsImpl childWithSubChilds = new ChildWithSubChildsImpl();
+    return childWithSubChilds;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ChildWithSubChild createChildWithSubChild()
+  {
+    ChildWithSubChildImpl childWithSubChild = new ChildWithSubChildImpl();
+    return childWithSubChild;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubChild createSubChild()
+  {
+    SubChildImpl subChild = new SubChildImpl();
+    return subChild;
   }
 
   /**

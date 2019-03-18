@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChild;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ChildWithSubChilds;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.EClassRef;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.Import;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryChild;
@@ -29,6 +31,9 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChildList;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds;
 import org.eclipse.xtext.ide.tests.testlanguage.services.PartialSerializationTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
@@ -55,6 +60,12 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 			}
 		else if (epackage == PartialSerializationTestLanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILD:
+				sequence_ChildWithSubChild(context, (ChildWithSubChild) semanticObject); 
+				return; 
+			case PartialSerializationTestLanguagePackage.CHILD_WITH_SUB_CHILDS:
+				sequence_ChildWithSubChilds(context, (ChildWithSubChilds) semanticObject); 
+				return; 
 			case PartialSerializationTestLanguagePackage.ECLASS_REF:
 				sequence_EClassRef(context, (EClassRef) semanticObject); 
 				return; 
@@ -91,10 +102,44 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 			case PartialSerializationTestLanguagePackage.OPTIONAL_VALUE:
 				sequence_OptionalValue(context, (OptionalValue) semanticObject); 
 				return; 
+			case PartialSerializationTestLanguagePackage.SUB_CHILD:
+				sequence_SubChild(context, (SubChild) semanticObject); 
+				return; 
+			case PartialSerializationTestLanguagePackage.TWO_CHILD_LISTS:
+				sequence_TwoChildLists(context, (TwoChildLists) semanticObject); 
+				return; 
+			case PartialSerializationTestLanguagePackage.TWO_CHILDS:
+				sequence_TwoChilds(context, (TwoChilds) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     ChildWithSubChild returns ChildWithSubChild
+	 *
+	 * Constraint:
+	 *     subChilds+=SubChild*
+	 */
+	protected void sequence_ChildWithSubChild(ISerializationContext context, ChildWithSubChild semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns ChildWithSubChilds
+	 *     ChildWithSubChilds returns ChildWithSubChilds
+	 *
+	 * Constraint:
+	 *     children+=ChildWithSubChild*
+	 */
+	protected void sequence_ChildWithSubChilds(ISerializationContext context, ChildWithSubChilds semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -288,6 +333,50 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	 *     name=ID?
 	 */
 	protected void sequence_OptionalValue(ISerializationContext context, OptionalValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     SubChild returns SubChild
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_SubChild(ISerializationContext context, SubChild semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PartialSerializationTestLanguagePackage.Literals.SUB_CHILD__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PartialSerializationTestLanguagePackage.Literals.SUB_CHILD__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSubChildAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns TwoChildLists
+	 *     TwoChildLists returns TwoChildLists
+	 *
+	 * Constraint:
+	 *     (directChildren+=MandatoryValue+ childsList=MandatoryChildList)
+	 */
+	protected void sequence_TwoChildLists(ISerializationContext context, TwoChildLists semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns TwoChilds
+	 *     TwoChilds returns TwoChilds
+	 *
+	 * Constraint:
+	 *     (directChild=MandatoryValue? optChild=OptionalChild)
+	 */
+	protected void sequence_TwoChilds(ISerializationContext context, TwoChilds semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
