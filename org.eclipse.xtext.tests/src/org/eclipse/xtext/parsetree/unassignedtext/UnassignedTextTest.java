@@ -1,6 +1,5 @@
 package org.eclipse.xtext.parsetree.unassignedtext;
 
-import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.Model;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractXtextTests;
