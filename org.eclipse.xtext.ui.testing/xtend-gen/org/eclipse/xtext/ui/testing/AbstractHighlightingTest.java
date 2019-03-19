@@ -15,12 +15,12 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -36,10 +36,6 @@ import org.junit.Assert;
  */
 @SuppressWarnings("all")
 public abstract class AbstractHighlightingTest extends AbstractEditorTest {
-  @Inject
-  @Extension
-  private SyncUtil _syncUtil;
-  
   @Inject
   @Extension
   private FileExtensionProvider _fileExtensionProvider;
@@ -169,7 +165,7 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
       StyledText _xblockexpression = null;
       {
         final XtextEditor editor = this.openEditor(dslFile);
-        this._syncUtil.waitForReconciler(editor);
+        this.waitForEventProcessing();
         _xblockexpression = editor.getInternalSourceViewer().getTextWidget();
       }
       return _xblockexpression;
@@ -178,11 +174,19 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
     }
   }
   
+  /**
+   * @since 2.18
+   */
+  protected void waitForEventProcessing() {
+    while (Display.getDefault().readAndDispatch()) {
+    }
+  }
+  
   protected void testHighlighting(final StyledText styledText, final String text, final int fontStyle, final int foregroundR, final int foregroundG, final int foregroundB, final int backgroundR, final int backgroundG, final int backgroundB) {
     final Color expectedForegroundColor = new Color(null, foregroundR, foregroundG, foregroundB);
     final Color expectedBackgroundColor = new Color(null, backgroundR, backgroundG, backgroundB);
     final String content = styledText.getText();
-    final int offset = content.indexOf(text);
+    final int offset = this.getStartPosition(content, text);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Cannot locate \'");
     _builder.append(text);
@@ -205,6 +209,13 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
         }
       }
     }
+  }
+  
+  /**
+   * @since 2.18
+   */
+  protected int getStartPosition(final String content, final String text) {
+    return content.indexOf(text);
   }
   
   protected boolean isRelevant(final String character) {

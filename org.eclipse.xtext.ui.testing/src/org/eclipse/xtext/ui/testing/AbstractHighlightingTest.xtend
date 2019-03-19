@@ -12,10 +12,10 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.swt.custom.StyleRange
 import org.eclipse.swt.custom.StyledText
 import org.eclipse.swt.graphics.Color
+import org.eclipse.swt.widgets.Display
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.utils.TextStyle
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
@@ -27,7 +27,6 @@ import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.ad
  */
 abstract class AbstractHighlightingTest extends AbstractEditorTest {
 
-	@Inject extension SyncUtil
 	@Inject extension FileExtensionProvider
 
 	/**
@@ -109,9 +108,16 @@ abstract class AbstractHighlightingTest extends AbstractEditorTest {
 		 * wait for the Xtext framework HighlightingPresenter.updatePresentation()
 		 * to apply the semantic highlighting executed asynchronously
 		 */
-		editor.waitForReconciler
+		waitForEventProcessing
 	
 		editor.internalSourceViewer.textWidget
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected def void waitForEventProcessing() {
+		while(Display.^default.readAndDispatch) {}
 	}
 
 	protected def testHighlighting(StyledText styledText, String text, int fontStyle,
@@ -122,7 +128,7 @@ abstract class AbstractHighlightingTest extends AbstractEditorTest {
 		val expectedBackgroundColor = new Color(null, backgroundR, backgroundG, backgroundB)
 
 		val content = styledText.text
-		val offset = content.indexOf(text)
+		val offset = content.getStartPosition(text)
 		assertNotEquals('''Cannot locate '«text»' in «content»''', -1, offset)
 		
 		for (var i = 0; i < text.length; i++) {
@@ -137,6 +143,13 @@ abstract class AbstractHighlightingTest extends AbstractEditorTest {
 				]
 			}
 		}
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected def int getStartPosition(String content, String text) {
+		content.indexOf(text)
 	}
 
 	protected def isRelevant(String character) {

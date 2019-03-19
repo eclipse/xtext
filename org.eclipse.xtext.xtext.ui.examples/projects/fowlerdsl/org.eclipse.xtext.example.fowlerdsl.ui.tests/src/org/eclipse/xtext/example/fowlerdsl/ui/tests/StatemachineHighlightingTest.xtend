@@ -182,4 +182,22 @@ class StatemachineHighlightingTest extends AbstractHighlightingTest {
 			 */
 		''', SWT.NORMAL, 63, 127, 95)
 	}
+
+	@Test def fixme_task_in_comment() {
+		'''
+			// FIXME
+		'''.testHighlighting('FIXME', SWT.BOLD, 127, 159, 191)
+	}
+
+	@Test def todo_task_in_comment() {
+		'''
+			// TODO
+		'''.testHighlighting('TODO', SWT.BOLD, 127, 159, 191)
+	}
+
+	@Test def xxx_task_in_comment() {
+		'''
+			// XXX
+		'''.testHighlighting('XXX', SWT.BOLD, 127, 159, 191)
+	}
 }

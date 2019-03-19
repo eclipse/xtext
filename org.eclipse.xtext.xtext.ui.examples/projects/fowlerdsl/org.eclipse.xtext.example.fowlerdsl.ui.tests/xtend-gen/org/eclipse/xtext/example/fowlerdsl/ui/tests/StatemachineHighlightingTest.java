@@ -368,4 +368,28 @@ public class StatemachineHighlightingTest extends AbstractHighlightingTest {
     _builder_1.newLine();
     this.testHighlighting(_builder, _builder_1.toString(), SWT.NORMAL, 63, 127, 95);
   }
+  
+  @Test
+  public void fixme_task_in_comment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// FIXME");
+    _builder.newLine();
+    this.testHighlighting(_builder, "FIXME", SWT.BOLD, 127, 159, 191);
+  }
+  
+  @Test
+  public void todo_task_in_comment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// TODO");
+    _builder.newLine();
+    this.testHighlighting(_builder, "TODO", SWT.BOLD, 127, 159, 191);
+  }
+  
+  @Test
+  public void xxx_task_in_comment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// XXX");
+    _builder.newLine();
+    this.testHighlighting(_builder, "XXX", SWT.BOLD, 127, 159, 191);
+  }
 }
