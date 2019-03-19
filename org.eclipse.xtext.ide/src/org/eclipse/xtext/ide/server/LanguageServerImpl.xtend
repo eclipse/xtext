@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import com.google.common.collect.ImmutableMap
+import com.google.common.collect.ImmutableMultimap
 import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
@@ -71,6 +73,7 @@ import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
@@ -85,6 +88,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.IHoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.rename.IRenameService
+import org.eclipse.xtext.ide.server.rename.IRenameService2
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -94,15 +98,12 @@ import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 
 import static org.eclipse.xtext.diagnostics.Severity.*
-import com.google.common.collect.ImmutableMultimap
-import com.google.common.collect.ImmutableMap
-import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
-import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -172,7 +173,7 @@ import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
-			renameProvider = allLanguages.exists[get(IRenameService)!==null]
+			renameProvider = allLanguages.exists[get(IRenameService)!==null || get(IRenameService2) !== null]
 
 			val clientCapabilities = params.capabilities;
 			// register execute command capability
@@ -612,15 +613,13 @@ import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension
 		return requestManager.runRead[ cancelIndicator |
 			val uri = renameParams.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
-			val renameService = resourceServiceProvider?.get(IRenameService)
-			if (renameService === null)
-				return new WorkspaceEdit
-			if (renameService instanceof IRenameServiceExtension) {
-				val options = new IRenameServiceExtension.Options(params?.capabilities?.workspace?.workspaceEdit?.documentChanges === Boolean.TRUE)
-				renameService.rename(workspaceManager, renameParams, options, cancelIndicator)
-			} else {
-				renameService.rename(workspaceManager, renameParams, cancelIndicator)
-			}
+			val renameServiceOld = resourceServiceProvider?.get(IRenameService)
+			if (renameServiceOld !== null)
+				return renameServiceOld.rename(workspaceManager, renameParams, cancelIndicator)
+			val renameService2 = resourceServiceProvider?.get(IRenameService2)
+			if (renameService2 !== null)
+				return renameService2.rename(access, renameParams, cancelIndicator)
+			return new WorkspaceEdit
 		]
 	}
 	
@@ -713,6 +712,16 @@ import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension
 			client
 		}
 		
+		override newLiveScopeResourceSet(URI uri) {
+			val projectManager = workspaceManager.getProjectManager(uri)
+			val resourceSet = projectManager.createNewResourceSet(projectManager.indexState.resourceDescriptions)
+			resourceSet.loadOptions.put(ResourceDescriptionsProvider.LIVE_SCOPE, true)
+			resourceSet
+		}
+		
+		override getInitializeParams() {
+			params
+		}
 	}
 	
 	override afterBuild(List<Delta> deltas) {

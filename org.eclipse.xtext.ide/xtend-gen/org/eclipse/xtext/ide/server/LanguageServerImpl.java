@@ -27,6 +27,7 @@ import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionParams;
@@ -83,7 +84,6 @@ import org.eclipse.lsp4j.TextDocumentSyncKind;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceClientCapabilities;
 import org.eclipse.lsp4j.WorkspaceEdit;
-import org.eclipse.lsp4j.WorkspaceEditCapabilities;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
@@ -107,6 +107,7 @@ import org.eclipse.xtext.ide.server.ICapabilitiesContributor;
 import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.ILanguageServerShutdownAndExitHandler;
+import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
@@ -121,7 +122,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.IHoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.rename.IRenameService;
-import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension;
+import org.eclipse.xtext.ide.server.rename.IRenameService2;
 import org.eclipse.xtext.ide.server.semanticHighlight.SemanticHighlightingRegistry;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
@@ -132,6 +133,8 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
@@ -277,8 +280,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
       final Function1<IResourceServiceProvider, Boolean> _function_5 = (IResourceServiceProvider it_1) -> {
-        IRenameService _get = it_1.<IRenameService>get(IRenameService.class);
-        return Boolean.valueOf((_get != null));
+        return Boolean.valueOf(((it_1.<IRenameService>get(IRenameService.class) != null) || (it_1.<IRenameService2>get(IRenameService2.class) != null)));
       };
       it.setRenameProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_5)));
       final ClientCapabilities clientCapabilities = params.getCapabilities();
@@ -929,49 +931,25 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public CompletableFuture<WorkspaceEdit> rename(final RenameParams renameParams) {
     final Function1<CancelIndicator, WorkspaceEdit> _function = (CancelIndicator cancelIndicator) -> {
-      WorkspaceEdit _xblockexpression = null;
-      {
-        final URI uri = this._uriExtensions.toUri(renameParams.getTextDocument().getUri());
-        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-        IRenameService _get = null;
-        if (resourceServiceProvider!=null) {
-          _get=resourceServiceProvider.<IRenameService>get(IRenameService.class);
-        }
-        final IRenameService renameService = _get;
-        if ((renameService == null)) {
-          return new WorkspaceEdit();
-        }
-        WorkspaceEdit _xifexpression = null;
-        if ((renameService instanceof IRenameServiceExtension)) {
-          WorkspaceEdit _xblockexpression_1 = null;
-          {
-            ClientCapabilities _capabilities = null;
-            if (this.params!=null) {
-              _capabilities=this.params.getCapabilities();
-            }
-            WorkspaceClientCapabilities _workspace = null;
-            if (_capabilities!=null) {
-              _workspace=_capabilities.getWorkspace();
-            }
-            WorkspaceEditCapabilities _workspaceEdit = null;
-            if (_workspace!=null) {
-              _workspaceEdit=_workspace.getWorkspaceEdit();
-            }
-            Boolean _documentChanges = null;
-            if (_workspaceEdit!=null) {
-              _documentChanges=_workspaceEdit.getDocumentChanges();
-            }
-            boolean _tripleEquals = (_documentChanges == Boolean.TRUE);
-            final IRenameServiceExtension.Options options = new IRenameServiceExtension.Options(_tripleEquals);
-            _xblockexpression_1 = ((IRenameServiceExtension)renameService).rename(this.workspaceManager, renameParams, options, cancelIndicator);
-          }
-          _xifexpression = _xblockexpression_1;
-        } else {
-          _xifexpression = renameService.rename(this.workspaceManager, renameParams, cancelIndicator);
-        }
-        _xblockexpression = _xifexpression;
+      final URI uri = this._uriExtensions.toUri(renameParams.getTextDocument().getUri());
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      IRenameService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<IRenameService>get(IRenameService.class);
       }
-      return _xblockexpression;
+      final IRenameService renameServiceOld = _get;
+      if ((renameServiceOld != null)) {
+        return renameServiceOld.rename(this.workspaceManager, renameParams, cancelIndicator);
+      }
+      IRenameService2 _get_1 = null;
+      if (resourceServiceProvider!=null) {
+        _get_1=resourceServiceProvider.<IRenameService2>get(IRenameService2.class);
+      }
+      final IRenameService2 renameService2 = _get_1;
+      if ((renameService2 != null)) {
+        return renameService2.rename(this.access, renameParams, cancelIndicator);
+      }
+      return new WorkspaceEdit();
     };
     return this.requestManager.<WorkspaceEdit>runRead(_function);
   }
@@ -1103,6 +1081,23 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     @Override
     public LanguageClient getLanguageClient() {
       return LanguageServerImpl.this.client;
+    }
+    
+    @Override
+    public ResourceSet newLiveScopeResourceSet(final URI uri) {
+      XtextResourceSet _xblockexpression = null;
+      {
+        final ProjectManager projectManager = LanguageServerImpl.this.workspaceManager.getProjectManager(uri);
+        final XtextResourceSet resourceSet = projectManager.createNewResourceSet(projectManager.getIndexState().getResourceDescriptions());
+        resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.valueOf(true));
+        _xblockexpression = resourceSet;
+      }
+      return _xblockexpression;
+    }
+    
+    @Override
+    public InitializeParams getInitializeParams() {
+      return LanguageServerImpl.this.params;
     }
   };
   

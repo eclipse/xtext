@@ -10,14 +10,17 @@ package org.eclipse.xtext.ide.server
 import java.util.List
 import java.util.concurrent.CompletableFuture
 import java.util.function.Function
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.lsp4j.InitializeParams
+import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.lsp4j.services.LanguageClient
 
 /**
- * 
  * API for interacting with a running language server.
  * 
  * @author Sven Efftinge - Initial contribution and API
@@ -47,8 +50,31 @@ interface ILanguageServerAccess {
 	def void addBuildListener(IBuildListener listener)
 	
 	/**
-	 * returns the language client facade. It usually also implements Endpoint, which can be used to
+	 * @return the language client facade. It usually also implements Endpoint, which can be used to
 	 * call non-standard extensions to the LSP.
 	 */
 	def LanguageClient getLanguageClient();
+	
+	/**
+	 * Creates a new {@link ResourceSet} to be used with the {@link IChangeSerializer} API.
+	 * 
+	 * The {@link IChangeSerializer} allows to calculate text edits from model changes.
+	 * In order not to mess up the originals, the resp. models should be loaded into a
+	 * new resource set which this method provides.
+	 * 
+	 * @param uri a file URI used to detect the project to configure the scoüpe of the resource set.
+	 * @return a new empty resource set, configured with the project the <code>uri</code>
+	 *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
+	 *   reflect model changes immediately.
+	 * @since 2.18
+	 */
+	def ResourceSet newLiveScopeResourceSet(URI uri);
+	
+	/**
+	 * @return the parameters as negotiated during client and server on initialization.
+	 * @since 2.18
+	 */
+	def InitializeParams getInitializeParams();
+	
+	
 }

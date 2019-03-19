@@ -115,5 +115,19 @@ Workflow {
 				generateStub = true
 			}
 		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.ide.tests.testlanguage.RenameTestLanguage"
+			fileExtensions = "renametl"
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+			
+		}
 	}
 }

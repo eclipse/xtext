@@ -68,7 +68,10 @@ class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor {
 	}
 	
 	def Severity getMaximumSeverity() {
-		issues.minBy[severity]?.severity ?: Severity.OK
+		if (issues.size > 0 ) 
+			issues.minBy[severity]?.severity 
+		else 
+			Severity.OK
 	}	
 	
 	def ResponseError toResponseError() {

@@ -9,34 +9,29 @@ package org.eclipse.xtext.ide.server.rename
 
 import org.eclipse.lsp4j.RenameParams
 import org.eclipse.lsp4j.WorkspaceEdit
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.ide.server.ILanguageServerAccess
 import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
- * @deprectated implement IRenameService2 instead.
+ * @deprecated use {IRenameService2} instead.
  */
 @Deprecated
 interface IRenameService {
-	def WorkspaceEdit rename(WorkspaceManager workspaceManager, RenameParams renameParams, CancelIndicator cancelIndicator) 
+	
+    @Deprecated
+	def WorkspaceEdit rename(WorkspaceManager workspaceManager, RenameParams renameParams, CancelIndicator cancelIndicator)
 }
 
 /**
- * The implementation of rename refactoring for a language.
- * 
- * As opposed to {@link IRenameService} this returns {@link TextDocumentChanges} if the 
- * client supports versioned documents.
+ * Service called for rename refactoring. 
  * 
  * @author koehnlein - Initial contribution and API
  * @since 2.18
  */
-interface IRenameServiceExtension {
-	def WorkspaceEdit rename(WorkspaceManager workspaceManager, RenameParams renameParams, Options options, CancelIndicator cancelIndicator)
-
-	@Data
-	class Options {
-		boolean clientSupportsVersionedDocuments
-	}
+interface IRenameService2 {
+	
+	def WorkspaceEdit rename(ILanguageServerAccess access, RenameParams renameParams, CancelIndicator cancelIndicator)
 }
