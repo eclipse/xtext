@@ -562,4 +562,12 @@ class TestBatchCompiler {
 		assertTrue(generated.contains("@Override"))
 		assertTrue(generated.contains("(Integer it) ->"))
 	}
+	
+	@Test
+	def void testIssue750() {
+		batchCompiler.javaSourceVersion = "1.8"
+		batchCompiler.sourcePath = "./batch-compiler-data/issue750/src"
+		batchCompiler.classPath = "./batch-compiler-data/issue750/lib/mydependency.jar"
+		assertTrue(batchCompiler.compile)
+	}
 }

@@ -741,8 +741,7 @@ public class XtendBatchCompiler {
 	 * Performs the actual installation of the JvmTypeProvider.
 	 */
 	private void internalInstallJvmTypeProvider(ResourceSet resourceSet, File tmpClassDirectory, boolean skipIndexLookup) {
-		Iterable<String> classPathEntries = concat(getClassPathEntries(), getSourcePathDirectories(),
-				asList(tmpClassDirectory.toString()));
+		Iterable<String> classPathEntries = concat(asList(tmpClassDirectory.toString()), getClassPathEntries(), getSourcePathDirectories());
 		classPathEntries = filter(classPathEntries, new Predicate<String>() {
 			@Override
 			public boolean apply(String input) {
