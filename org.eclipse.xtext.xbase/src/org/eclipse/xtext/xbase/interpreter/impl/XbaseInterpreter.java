@@ -162,9 +162,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	public void setClassLoader(ClassLoader classLoader) {
-		this.classFinder = new ClassFinder(classLoader);
+		this.classFinder = createClassFinder(classLoader);
 		this.classLoader = classLoader;
 		this.javaReflectAccess.setClassLoader(classLoader);
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected ClassFinder createClassFinder(ClassLoader classLoader) {
+		return new ClassFinder(classLoader);
 	}
 	
 	protected Class<?> getClass(Class<?> class1) {
