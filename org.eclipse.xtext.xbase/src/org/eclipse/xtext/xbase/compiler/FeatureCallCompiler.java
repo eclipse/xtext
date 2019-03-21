@@ -1008,6 +1008,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		if (formatString == null)
 			throw new IllegalStateException();
+		boolean inlineCallNeedsParenthesis = inlineCallNeedsParenthesis(call, formatString);
+		if (inlineCallNeedsParenthesis) {
+			b.append("(");
+		}
+		
 		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(call);
 		List<XExpression> arguments = getActualArguments(call);
 		Matcher matcher = pattern.matcher(formatString);
@@ -1042,6 +1047,28 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (prevEnd != formatString.length()) {
 			b.append(formatString.substring(prevEnd));
 		}
+		if (inlineCallNeedsParenthesis) {
+			b.append(")");
+		}
+	}
+	
+	protected boolean inlineCallNeedsParenthesis(XAbstractFeatureCall call, String formatString) {
+		String trimmedFormatString = formatString.trim();
+		if (trimmedFormatString.startsWith("(")) {
+			return false;
+		}
+		if (call.eContainer() instanceof XMemberFeatureCall && call.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			XMemberFeatureCall mfc = (XMemberFeatureCall) call.eContainer();
+			JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(mfc);
+			if (inlineAnnotation != null) {
+				return true;
+			}
+			if (mfc.isExtension()) {
+				return false;
+			}
+			return !trimmedFormatString.endsWith(")");
+		}
+		return false;
 	}
 	
 	protected void appendArguments(List<? extends XExpression> arguments, ITreeAppendable b) {

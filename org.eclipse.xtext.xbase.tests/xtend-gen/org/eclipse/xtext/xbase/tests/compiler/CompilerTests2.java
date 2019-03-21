@@ -4808,4 +4808,85 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testExtrasIssue394() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("newArrayOfSize(1).get(0)");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _get = (new Object[1])[0];");
+      _builder_1.newLine();
+      _builder_1.append("return _get;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testExtrasIssue394_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("newArrayOfSize(1)");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object[] _newArrayOfSize = new Object[1];");
+      _builder_1.newLine();
+      _builder_1.append("return _newArrayOfSize;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testLibIssue60() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val a = <String>newArrayOfSize(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("a.set(0, \"\").length");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("a.set(0,\"hello\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final String[] a = new String[1];");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("(a[0] = \"\").length();");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("a[0] = \"hello\";");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
