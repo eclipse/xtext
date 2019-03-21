@@ -118,7 +118,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
       }
     }
-    _builder.append("<repository location=\"http://download.eclipse.org/releases/2019-03\"/>");
+    _builder.append("<repository location=\"http://download.eclipse.org/releases/2019-06\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
