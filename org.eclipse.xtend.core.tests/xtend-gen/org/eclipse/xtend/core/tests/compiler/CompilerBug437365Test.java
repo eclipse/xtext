@@ -74,10 +74,10 @@ public class CompilerBug437365Test extends AbstractXtendCompilerTest {
     _builder_1.append("String _string = new String();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("arrayOfList[0].add(_string);");
+    _builder_1.append("(arrayOfList[0]).add(_string);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final String a = arrayOfList[0].get(0);");
+    _builder_1.append("final String a = (arrayOfList[0]).get(0);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("InputOutput.<String>println(a);");
@@ -144,10 +144,10 @@ public class CompilerBug437365Test extends AbstractXtendCompilerTest {
     _builder_1.append("String _string = new String();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("arrayOfList[0].add(_string);");
+    _builder_1.append("(arrayOfList[0]).add(_string);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final String a = arrayOfList[0].get(0);");
+    _builder_1.append("final String a = (arrayOfList[0]).get(0);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("InputOutput.<String>println(a);");

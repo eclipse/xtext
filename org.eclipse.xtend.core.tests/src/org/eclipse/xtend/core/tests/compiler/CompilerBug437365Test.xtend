@@ -40,8 +40,8 @@ class CompilerBug437365Test extends AbstractXtendCompilerTest {
 			    LinkedList<String> _linkedList = new LinkedList<String>();
 			    arrayOfList[0] = _linkedList;
 			    String _string = new String();
-			    arrayOfList[0].add(_string);
-			    final String a = arrayOfList[0].get(0);
+			    (arrayOfList[0]).add(_string);
+			    final String a = (arrayOfList[0]).get(0);
 			    InputOutput.<String>println(a);
 			  }
 			}
@@ -71,8 +71,8 @@ class CompilerBug437365Test extends AbstractXtendCompilerTest {
 			    LinkedList<String> _linkedList = new LinkedList<String>();
 			    arrayOfList[0] = _linkedList;
 			    String _string = new String();
-			    arrayOfList[0].add(_string);
-			    final String a = arrayOfList[0].get(0);
+			    (arrayOfList[0]).add(_string);
+			    final String a = (arrayOfList[0]).get(0);
 			    InputOutput.<String>println(a);
 			  }
 			}
