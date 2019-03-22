@@ -581,7 +581,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.append("<systemProperties></systemProperties>");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("<tycho.testArgLine></tycho.testArgLine>");
+          _builder.append("<additionalTestArguments></additionalTestArguments>");
           _builder.newLine();
         }
       }
@@ -1599,7 +1599,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");
-          _builder.append("<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>");
+          _builder.append("<argLine>${platformSystemProperties} ${systemProperties} ${moduleProperties} ${additionalTestArguments}</argLine>");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");

@@ -213,7 +213,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						<platformSystemProperties></platformSystemProperties>
 						<moduleProperties></moduleProperties>
 						<systemProperties></systemProperties>
-						<tycho.testArgLine></tycho.testArgLine>
+						<additionalTestArguments></additionalTestArguments>
 					«ENDIF»
 				</properties>
 				<modules>
@@ -486,7 +486,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									<version>${tycho-version}</version>
 									<configuration>
 										<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
-										<argLine>${tycho.testArgLine} ${platformSystemProperties} ${systemProperties} ${moduleProperties}</argLine>
+										<argLine>${platformSystemProperties} ${systemProperties} ${moduleProperties} ${additionalTestArguments}</argLine>
 										<failIfNoTests>false</failIfNoTests>
 										<useUIHarness>false</useUIHarness>
 									</configuration>
