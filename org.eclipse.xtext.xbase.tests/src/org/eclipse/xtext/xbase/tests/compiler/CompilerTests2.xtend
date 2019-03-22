@@ -2240,4 +2240,42 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return new java.math.BigDecimal("1.23").multiply(java.math.BigDecimal.TEN.pow(45)).toBigInteger();
 		''')
 	}
+
+	@Test def void testExtrasIssue394() {
+		'''
+			newArrayOfSize(1).get(0)
+		'''.compilesTo ('''
+			Object _get = (new Object[1])[0];
+			return _get;
+		''')
+	}
+
+	@Test def void testExtrasIssue394_2() {
+		'''
+			newArrayOfSize(1)
+		'''.compilesTo ('''
+			Object[] _newArrayOfSize = new Object[1];
+			return _newArrayOfSize;
+		''')
+	}
+	
+	@Test def void testLibIssue60() {
+		'''
+			{
+				val a = <String>newArrayOfSize(1)
+				a.set(0, "").length
+				a.set(0,"hello")
+				1
+			}
+		'''.compilesTo ('''
+			int _xblockexpression = (int) 0;
+			{
+			  final String[] a = new String[1];
+			  (a[0] = "").length();
+			  a[0] = "hello";
+			  _xblockexpression = 1;
+			}
+			return _xblockexpression;
+		''')
+	}
 }
