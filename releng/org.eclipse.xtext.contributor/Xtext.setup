@@ -96,7 +96,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-03"/>
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"

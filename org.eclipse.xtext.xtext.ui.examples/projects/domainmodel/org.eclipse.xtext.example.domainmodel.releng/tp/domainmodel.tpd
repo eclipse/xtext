@@ -13,7 +13,7 @@ target "Xtext Domainmodel Example - Eclipse Photon"
 
 with source allEnvironments
 
-location "http://download.eclipse.org/releases/2019-03" {
+location "http://download.eclipse.org/releases/2019-06" {
 	org.eclipse.jdt.feature.group lazy
 	org.eclipse.platform.feature.group lazy
 	org.eclipse.pde.feature.group lazy
@@ -30,7 +30,7 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
 	org.eclipse.xtext.sdk.feature.group lazy
 }
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-03" {
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06" {
 	org.objectweb.asm [7.0.0,7.1.0)
 	org.objectweb.asm.tree [7.0.0,7.1.0)
 	com.google.inject [3.0.0,4.0.0)

@@ -56,7 +56,7 @@ public abstract class AbstractDomainmodelSyntacticSequencer extends AbstractSynt
 	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "[]";
+		return "[ ]";
 	}
 	
 	/**
