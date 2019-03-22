@@ -9,9 +9,6 @@
 	<artifactId>org.xtext.example.mavenTychoJ9.ui.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
-	<properties>
-		<tycho.testArgLine>--add-modules=ALL-SYSTEM</tycho.testArgLine>
-	</properties>
 	<build>
 		<plugins>
 			<plugin>

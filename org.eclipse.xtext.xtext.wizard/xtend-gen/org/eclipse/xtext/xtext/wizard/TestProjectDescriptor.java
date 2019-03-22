@@ -146,17 +146,6 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       }
       it.setPackaging(_xifexpression);
       StringConcatenation _builder = new StringConcatenation();
-      {
-        if (((this.isEclipsePluginProject() && this.needsUiHarness()) && this.isAtLeastJava9())) {
-          _builder.append("<properties>");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("<tycho.testArgLine>--add-modules=ALL-SYSTEM</tycho.testArgLine>");
-          _builder.newLine();
-          _builder.append("</properties>");
-          _builder.newLine();
-        }
-      }
       _builder.append("<build>");
       _builder.newLine();
       {
