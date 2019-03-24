@@ -238,11 +238,6 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t");
           _builder.append("</plugin>");
           _builder.newLine();
-        }
-      }
-      {
-        boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
-        if (_isEclipsePluginProject_1) {
           _builder.append("\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
@@ -320,8 +315,8 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         }
       }
       {
-        boolean _isEclipsePluginProject_2 = this.isEclipsePluginProject();
-        boolean _not = (!_isEclipsePluginProject_2);
+        boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
+        boolean _not = (!_isEclipsePluginProject_1);
         if (_not) {
           _builder.append("\t\t");
           _builder.append("<plugin>");
