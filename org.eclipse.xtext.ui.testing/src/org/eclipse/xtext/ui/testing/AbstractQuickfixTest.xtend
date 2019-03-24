@@ -112,15 +112,16 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 	}
 
 	protected def void quickfixesAreOffered(XtextEditor editor, String issueCode, Quickfix... expected) {
+		val expectedSorted = expected.sortBy[label]
 		val document = editor.document
 		val originalText = document.get
 		val issue = document.getValidationIssue(issueCode)
 
-		val actualIssueResolutions = issue.getResolutions
-		assertEquals("The number of quickfixes does not match!", expected.size, actualIssueResolutions.size)
+		val actualIssueResolutions = issue.getResolutions.sortBy[label]
+		assertEquals("The number of quickfixes does not match!", expectedSorted.size, actualIssueResolutions.size)
 		for (i : 0..< actualIssueResolutions.size) {
 			val actualIssueResolution = actualIssueResolutions.get(i)
-			val expectedIssueResolution = expected.get(i)
+			val expectedIssueResolution = expectedSorted.get(i)
 			expectedIssueResolution.label.assertEquals(actualIssueResolution.label)
 			expectedIssueResolution.description.assertEquals(actualIssueResolution.description)
 			expectedIssueResolution.result.assertIssueResolutionResult(actualIssueResolution, originalText)

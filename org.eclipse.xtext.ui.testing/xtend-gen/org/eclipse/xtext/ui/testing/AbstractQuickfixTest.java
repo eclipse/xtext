@@ -242,17 +242,24 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
   }
   
   protected void quickfixesAreOffered(final XtextEditor editor, final String issueCode, final AbstractQuickfixTest.Quickfix... expected) {
+    final Function1<AbstractQuickfixTest.Quickfix, String> _function = (AbstractQuickfixTest.Quickfix it) -> {
+      return it.label;
+    };
+    final List<AbstractQuickfixTest.Quickfix> expectedSorted = IterableExtensions.<AbstractQuickfixTest.Quickfix, String>sortBy(((Iterable<AbstractQuickfixTest.Quickfix>)Conversions.doWrapArray(expected)), _function);
     final IXtextDocument document = editor.getDocument();
     final String originalText = document.get();
     final Issue issue = this.getValidationIssue(document, issueCode);
-    final List<IssueResolution> actualIssueResolutions = this._issueResolutionProvider.getResolutions(issue);
-    Assert.assertEquals("The number of quickfixes does not match!", ((List<AbstractQuickfixTest.Quickfix>)Conversions.doWrapArray(expected)).size(), actualIssueResolutions.size());
+    final Function1<IssueResolution, String> _function_1 = (IssueResolution it) -> {
+      return it.getLabel();
+    };
+    final List<IssueResolution> actualIssueResolutions = IterableExtensions.<IssueResolution, String>sortBy(this._issueResolutionProvider.getResolutions(issue), _function_1);
+    Assert.assertEquals("The number of quickfixes does not match!", expectedSorted.size(), actualIssueResolutions.size());
     int _size = actualIssueResolutions.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
       {
         final IssueResolution actualIssueResolution = actualIssueResolutions.get((i).intValue());
-        final AbstractQuickfixTest.Quickfix expectedIssueResolution = expected[(i).intValue()];
+        final AbstractQuickfixTest.Quickfix expectedIssueResolution = expectedSorted.get((i).intValue());
         Assert.assertEquals(expectedIssueResolution.label, actualIssueResolution.getLabel());
         Assert.assertEquals(expectedIssueResolution.description, actualIssueResolution.getDescription());
         this.assertIssueResolutionResult(expectedIssueResolution.result, actualIssueResolution, originalText);
