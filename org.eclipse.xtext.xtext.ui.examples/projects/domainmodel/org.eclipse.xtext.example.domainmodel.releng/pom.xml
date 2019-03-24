@@ -142,10 +142,6 @@
 								<includes>
 									<include>**/*</include>
 								</includes>
-								<directory>${basedir}/xtend-gen</directory>
-								<includes>
-									<include>**/*</include>
-								</includes>
 							</fileset>
 						</filesets>
 					</configuration>
