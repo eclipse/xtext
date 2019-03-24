@@ -46,7 +46,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final XtextEditor activeXtextEditor = EditorUtils.getActiveXtextEditor(event);
-		if (activeXtextEditor == null) {
+		if (activeXtextEditor == null || !activeXtextEditor.isEditable()) {
 			return null;
 		}
 
