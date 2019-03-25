@@ -173,7 +173,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 			documentHighlightProvider = true
-			renameProvider = allLanguages.exists[get(IRenameService)!==null || get(IRenameService2) !== null]
+			renameProvider = allLanguages.exists[get(IRenameService) !== null || get(IRenameService2) !== null]
 
 			val clientCapabilities = params.capabilities;
 			// register execute command capability
@@ -270,7 +270,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
-	    // the document's content is in sync with the file system
+		// the document's content is in sync with the file system
 		// doesn't matter to us, so do nothing
 	}
 
@@ -298,14 +298,14 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
 		requestManager.runWrite([
-            workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
-            return null
-        ], [])
-    }
+			workspaceManager.refreshWorkspaceConfig(CancelIndicator.NullImpl)
+			return null
+		], [])
+	}
 
 	// end file/content change events
-    
-    WorkspaceResourceAccess resourceAccess
+	
+	WorkspaceResourceAccess resourceAccess
 	
 	LanguageClient client
 
@@ -329,9 +329,9 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 				default: DiagnosticSeverity.Hint
 			}
 			message = issue.message
-            val lineNumber = (issue.lineNumber ?: 1) - 1
-            val column = (issue.column ?: 1) - 1
-            val length = (issue.length ?: 0)
+			val lineNumber = (issue.lineNumber ?: 1) - 1
+			val column = (issue.column ?: 1) - 1
+			val length = (issue.length ?: 0)
 			range = new Range(
 				new Position(lineNumber, column),
 				new Position(lineNumber, column + length)
@@ -342,25 +342,26 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	
 	@FinalFieldsConstructor
 	static class BufferedCancelIndicator implements CancelIndicator {
-	    
-	    val CancelIndicator delegate;
-	    Long canceledSince
-    
-        override isCanceled() {
-            if (canceledSince === null && delegate.canceled) {
-                canceledSince = System.currentTimeMillis
-                return false
-            }
-            return canceledSince !== null && System.currentTimeMillis > canceledSince + 1000
-        }
-	    
+		
+		val CancelIndicator delegate;
+		Long canceledSince
+
+		override isCanceled() {
+			if (canceledSince === null && delegate.canceled) {
+				canceledSince = System.currentTimeMillis
+				return false
+			}
+			return canceledSince !== null && System.currentTimeMillis > canceledSince + 1000
+		}
+		
 	}
 	// completion stuff
 	override completion(CompletionParams params) {
 		return requestManager.runRead[cancelIndicator | completion(cancelIndicator, params)]
 	}
 	
-	protected def Either<List<CompletionItem>, CompletionList> completion(CancelIndicator originalCancelIndicator, CompletionParams params) {
+	protected def Either<List<CompletionItem>, CompletionList> completion(CancelIndicator originalCancelIndicator,
+		CompletionParams params) {
 		val cancelIndicator = new BufferedCancelIndicator(originalCancelIndicator)
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
@@ -368,11 +369,11 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		if (contentAssistService === null) {
 			return Either.forRight(new CompletionList())
 		}
-        
-        val completionList = workspaceManager.doRead(uri) [ document, resource |
-            return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
-        ]
-        return Either.forRight(completionList)
+
+		val completionList = workspaceManager.doRead(uri) [ document, resource |
+			return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
+		]
+		return Either.forRight(completionList)
 	}
 
 	// end completion stuff
@@ -474,16 +475,16 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 
 	override signatureHelp(TextDocumentPositionParams params) {
 		return requestManager.runRead [ cancelIndicator |
-            val uri = params.textDocument.uri.toUri;
-            val serviceProvider = uri.resourceServiceProvider;
-            val helper = serviceProvider?.get(ISignatureHelpService);
-            if (helper === null)
-                return ISignatureHelpService.EMPTY
-            
-            return workspaceManager.doRead(uri) [doc, resource |
-                helper.getSignatureHelp(doc, resource, params, cancelIndicator)
-            ]
-        ];
+			val uri = params.textDocument.uri.toUri;
+			val serviceProvider = uri.resourceServiceProvider;
+			val helper = serviceProvider?.get(ISignatureHelpService);
+			if (helper === null)
+				return ISignatureHelpService.EMPTY
+
+			return workspaceManager.doRead(uri) [ doc, resource |
+				helper.getSignatureHelp(doc, resource, params, cancelIndicator)
+			]
+		];
 	}
 
 	override documentHighlight(TextDocumentPositionParams params) {
