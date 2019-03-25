@@ -35,7 +35,7 @@ import org.eclipse.xtext.naming.QualifiedName
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
-class AbstractConstantExpressionsInterpreter {
+abstract class AbstractConstantExpressionsInterpreter {
 	
 	@Accessors(PROTECTED_GETTER)
 	@Inject ConstantOperators constantOperators

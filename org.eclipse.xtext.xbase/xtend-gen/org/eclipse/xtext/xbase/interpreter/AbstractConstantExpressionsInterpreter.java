@@ -43,7 +43,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractConstantExpressionsInterpreter {
+public abstract class AbstractConstantExpressionsInterpreter {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private ConstantOperators constantOperators;
