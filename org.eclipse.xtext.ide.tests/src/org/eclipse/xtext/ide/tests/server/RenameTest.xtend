@@ -40,12 +40,12 @@ class RenameTest extends AbstractTestLangLanguageServerTest {
 	
 	@Test
 	def void testRenameBeforeDeclaration() {
-		doTest(firstFile, new Position(0, 4))
+		doTest(firstFile, new Position(0, 5))
 	}
 
 	@Test
 	def void testRenameOnDeclaration() {
-		doTest(firstFile, new Position(0, 5))
+		doTest(firstFile, new Position(0, 6))
 	}
 
 	@Test
@@ -53,15 +53,24 @@ class RenameTest extends AbstractTestLangLanguageServerTest {
 		doTest(firstFile, new Position(0, 8))
 	}
 
-
 	@Test
 	def void testRenameOnReference() {
 		doTest(firstFile, new Position(1, 5))
 	}
 	
 	@Test
+	def void testRenameAfterReference() {
+		doTest(firstFile, new Position(1, 8))
+	}
+	
+	@Test
 	def void testRenameOnReferenceInOtherFile() {
 		doTest(secondFile, new Position(1, 5))
+	}
+
+	@Test
+	def void testRenameAfterReferenceInOtherFile() {
+		doTest(secondFile, new Position(1,8))
 	}
 	
 	protected def doTest(String fileName, Position position) {

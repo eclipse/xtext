@@ -86,21 +86,23 @@ public class ServerRefactoringIssueAcceptor implements RefactoringIssueAcceptor 
   }
   
   public RefactoringIssueAcceptor.Severity getMaximumSeverity() {
-    RefactoringIssueAcceptor.Severity _elvis = null;
-    final Function1<ServerRefactoringIssueAcceptor.Issue, RefactoringIssueAcceptor.Severity> _function = (ServerRefactoringIssueAcceptor.Issue it) -> {
-      return it.severity;
-    };
-    ServerRefactoringIssueAcceptor.Issue _minBy = IterableExtensions.<ServerRefactoringIssueAcceptor.Issue, RefactoringIssueAcceptor.Severity>minBy(this.issues, _function);
-    RefactoringIssueAcceptor.Severity _severity = null;
-    if (_minBy!=null) {
-      _severity=_minBy.severity;
-    }
-    if (_severity != null) {
-      _elvis = _severity;
+    RefactoringIssueAcceptor.Severity _xifexpression = null;
+    int _size = this.issues.size();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      final Function1<ServerRefactoringIssueAcceptor.Issue, RefactoringIssueAcceptor.Severity> _function = (ServerRefactoringIssueAcceptor.Issue it) -> {
+        return it.severity;
+      };
+      ServerRefactoringIssueAcceptor.Issue _minBy = IterableExtensions.<ServerRefactoringIssueAcceptor.Issue, RefactoringIssueAcceptor.Severity>minBy(this.issues, _function);
+      RefactoringIssueAcceptor.Severity _severity = null;
+      if (_minBy!=null) {
+        _severity=_minBy.severity;
+      }
+      _xifexpression = _severity;
     } else {
-      _elvis = RefactoringIssueAcceptor.Severity.OK;
+      _xifexpression = RefactoringIssueAcceptor.Severity.OK;
     }
-    return _elvis;
+    return _xifexpression;
   }
   
   public ResponseError toResponseError() {

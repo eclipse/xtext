@@ -53,13 +53,13 @@ public class RenameTest extends AbstractTestLangLanguageServerTest {
   
   @Test
   public void testRenameBeforeDeclaration() {
-    Position _position = new Position(0, 4);
+    Position _position = new Position(0, 5);
     this.doTest(this.firstFile, _position);
   }
   
   @Test
   public void testRenameOnDeclaration() {
-    Position _position = new Position(0, 5);
+    Position _position = new Position(0, 6);
     this.doTest(this.firstFile, _position);
   }
   
@@ -76,8 +76,20 @@ public class RenameTest extends AbstractTestLangLanguageServerTest {
   }
   
   @Test
+  public void testRenameAfterReference() {
+    Position _position = new Position(1, 8);
+    this.doTest(this.firstFile, _position);
+  }
+  
+  @Test
   public void testRenameOnReferenceInOtherFile() {
     Position _position = new Position(1, 5);
+    this.doTest(this.secondFile, _position);
+  }
+  
+  @Test
+  public void testRenameAfterReferenceInOtherFile() {
+    Position _position = new Position(1, 8);
     this.doTest(this.secondFile, _position);
   }
   

@@ -17,54 +17,37 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
-import org.eclipse.lsp4j.ResourceOperation;
-import org.eclipse.lsp4j.TextDocumentEdit;
 import org.eclipse.lsp4j.TextEdit;
-import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
-import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.rename.IRenameServiceExtension;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
+ * @deprecated use {@link ChangeConverter2} instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   public static class Factory {
     @Inject
-    protected IResourceServiceProvider.Registry registry;
+    private IResourceServiceProvider.Registry registry;
     
-    /**
-     * @deprecated use {@link #create(WorkspaceManager, WorkspaceEdit, boolean} instead.
-     */
-    @Deprecated
     public ChangeConverter create(final WorkspaceManager workspaceManager, final WorkspaceEdit edit) {
-      return new ChangeConverter(workspaceManager, this.registry, edit, null);
-    }
-    
-    /**
-     * @since 2.18
-     */
-    public ChangeConverter create(final WorkspaceManager workspaceManager, final WorkspaceEdit edit, final IRenameServiceExtension.Options options) {
-      return new ChangeConverter(workspaceManager, this.registry, edit, options);
+      return new ChangeConverter(workspaceManager, this.registry, edit);
     }
   }
   
@@ -74,22 +57,10 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
   
   private final WorkspaceEdit edit;
   
-  private final IRenameServiceExtension.Options options;
-  
-  protected ChangeConverter(final WorkspaceManager workspaceManager, final IResourceServiceProvider.Registry registry, final WorkspaceEdit edit, final IRenameServiceExtension.Options options) {
+  protected ChangeConverter(final WorkspaceManager workspaceManager, final IResourceServiceProvider.Registry registry, final WorkspaceEdit edit) {
     this.workspaceManager = workspaceManager;
     this.registry = registry;
     this.edit = edit;
-    this.options = options;
-    boolean _isClientSupportsVersionedDocuments = false;
-    if (options!=null) {
-      _isClientSupportsVersionedDocuments=options.isClientSupportsVersionedDocuments();
-    }
-    if (_isClientSupportsVersionedDocuments) {
-      this.edit.setDocumentChanges(CollectionLiterals.<Either<TextDocumentEdit, ResourceOperation>>newArrayList());
-    } else {
-      this.edit.setChanges(CollectionLiterals.<String, List<TextEdit>>newLinkedHashMap());
-    }
   }
   
   @Override
@@ -106,18 +77,18 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
         byte[] _byteArray = outputStream.toByteArray();
         String _charset = this.getCharset(change.getResource());
         final String newContent = new String(_byteArray, _charset);
-        final Function2<Document, XtextResource, Object> _function = (Document document, XtextResource resource) -> {
-          Object _xblockexpression = null;
+        final Function2<Document, XtextResource, List<TextEdit>> _function = (Document document, XtextResource resource) -> {
+          List<TextEdit> _xblockexpression = null;
           {
             Position _position = document.getPosition(0);
             Position _position_1 = document.getPosition(document.getContents().length());
             final Range range = new Range(_position, _position_1);
             final TextEdit textEdit = new TextEdit(range, newContent);
-            _xblockexpression = this.addTextEdit(uri, document, textEdit);
+            _xblockexpression = this.addTextEdit(uri, textEdit);
           }
           return _xblockexpression;
         };
-        this.workspaceManager.<Object>doRead(uri, _function);
+        this.workspaceManager.<List<TextEdit>>doRead(uri, _function);
       } finally {
         outputStream.close();
       }
@@ -152,8 +123,8 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
       final URI uri = change.getNewURI();
-      final Function2<Document, XtextResource, Object> _function = (Document document, XtextResource resource) -> {
-        Object _xblockexpression = null;
+      final Function2<Document, XtextResource, List<TextEdit>> _function = (Document document, XtextResource resource) -> {
+        List<TextEdit> _xblockexpression = null;
         {
           final Function1<ITextReplacement, TextEdit> _function_1 = (ITextReplacement replacement) -> {
             TextEdit _xblockexpression_1 = null;
@@ -170,40 +141,16 @@ public class ChangeConverter implements IAcceptor<IEmfResourceChange> {
             return _xblockexpression_1;
           };
           final List<TextEdit> textEdits = ListExtensions.<ITextReplacement, TextEdit>map(change.getReplacements(), _function_1);
-          _xblockexpression = this.addTextEdit(uri, document, ((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
+          _xblockexpression = this.addTextEdit(uri, ((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
         }
         return _xblockexpression;
       };
-      this.workspaceManager.<Object>doRead(uri, _function);
+      this.workspaceManager.<List<TextEdit>>doRead(uri, _function);
     }
   }
   
-  protected Object addTextEdit(final URI theUri, final Document document, final TextEdit... textEdits) {
-    Object _xifexpression = null;
-    boolean _isClientSupportsVersionedDocuments = false;
-    if (this.options!=null) {
-      _isClientSupportsVersionedDocuments=this.options.isClientSupportsVersionedDocuments();
-    }
-    if (_isClientSupportsVersionedDocuments) {
-      List<Either<TextDocumentEdit, ResourceOperation>> _documentChanges = this.edit.getDocumentChanges();
-      TextDocumentEdit _textDocumentEdit = new TextDocumentEdit();
-      final Procedure1<TextDocumentEdit> _function = (TextDocumentEdit it) -> {
-        VersionedTextDocumentIdentifier _versionedTextDocumentIdentifier = new VersionedTextDocumentIdentifier();
-        final Procedure1<VersionedTextDocumentIdentifier> _function_1 = (VersionedTextDocumentIdentifier it_1) -> {
-          it_1.setUri(theUri.toString());
-          it_1.setVersion(document.getVersion());
-        };
-        VersionedTextDocumentIdentifier _doubleArrow = ObjectExtensions.<VersionedTextDocumentIdentifier>operator_doubleArrow(_versionedTextDocumentIdentifier, _function_1);
-        it.setTextDocument(_doubleArrow);
-        it.setEdits(((List<TextEdit>)Conversions.doWrapArray(textEdits)));
-      };
-      TextDocumentEdit _doubleArrow = ObjectExtensions.<TextDocumentEdit>operator_doubleArrow(_textDocumentEdit, _function);
-      Either<TextDocumentEdit, ResourceOperation> _forLeft = Either.<TextDocumentEdit, ResourceOperation>forLeft(_doubleArrow);
-      _xifexpression = Boolean.valueOf(_documentChanges.add(_forLeft));
-    } else {
-      _xifexpression = this.edit.getChanges().put(theUri.toString(), ((List<TextEdit>)Conversions.doWrapArray(textEdits)));
-    }
-    return _xifexpression;
+  protected List<TextEdit> addTextEdit(final URI uri, final TextEdit... textEdit) {
+    return this.edit.getChanges().put(uri.toString(), ((List<TextEdit>)Conversions.doWrapArray(textEdit)));
   }
   
   protected void handleReplacements(final IEmfResourceChange change) {

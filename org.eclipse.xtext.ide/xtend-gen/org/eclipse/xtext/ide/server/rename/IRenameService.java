@@ -15,10 +15,11 @@ import org.eclipse.xtext.util.CancelIndicator;
 /**
  * @author koehnlein - Initial contribution and API
  * @since 2.13
- * @deprectated implement IRenameService2 instead.
+ * @deprecated use {IRenameService2} instead.
  */
 @Deprecated
 @SuppressWarnings("all")
 public interface IRenameService {
+  @Deprecated
   public abstract WorkspaceEdit rename(final WorkspaceManager workspaceManager, final RenameParams renameParams, final CancelIndicator cancelIndicator);
 }

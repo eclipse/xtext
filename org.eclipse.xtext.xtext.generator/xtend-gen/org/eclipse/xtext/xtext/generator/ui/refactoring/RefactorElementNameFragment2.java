@@ -315,8 +315,8 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
     if (_isEnabled) {
       final GuiceModuleAccess.BindingFactory ideBindings = new GuiceModuleAccess.BindingFactory();
       ideBindings.addTypeToType(
-        TypeReference.typeRef("org.eclipse.xtext.ide.server.rename.IRenameService"), 
-        TypeReference.typeRef("org.eclipse.xtext.ide.server.rename.RenameService"));
+        TypeReference.typeRef("org.eclipse.xtext.ide.server.rename.IRenameService2"), 
+        TypeReference.typeRef("org.eclipse.xtext.ide.server.rename.RenameService2"));
       TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.refactoring.IRenameStrategy2");
       TypeReference _typeReference_7 = new TypeReference("org.eclipse.xtext.ide.refactoring", "IRenameStrategy2.DefaultImpl");
       ideBindings.addTypeToType(_typeRef_1, _typeReference_7);

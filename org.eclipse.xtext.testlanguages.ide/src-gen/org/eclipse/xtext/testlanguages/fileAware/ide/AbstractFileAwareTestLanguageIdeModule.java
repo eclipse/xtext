@@ -14,8 +14,8 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHel
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.refactoring.IRenameStrategy2;
-import org.eclipse.xtext.ide.server.rename.IRenameService;
-import org.eclipse.xtext.ide.server.rename.RenameService;
+import org.eclipse.xtext.ide.server.rename.IRenameService2;
+import org.eclipse.xtext.ide.server.rename.RenameService2;
 import org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr.FileAwareTestLanguageParser;
 import org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr.internal.InternalFileAwareTestLanguageLexer;
 
@@ -48,8 +48,8 @@ public abstract class AbstractFileAwareTestLanguageIdeModule extends DefaultIdeM
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
-	public Class<? extends IRenameService> bindIRenameService() {
-		return RenameService.class;
+	public Class<? extends IRenameService2> bindIRenameService2() {
+		return RenameService2.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
