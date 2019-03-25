@@ -79,7 +79,7 @@ class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
 				val range = new Range(document.getPosition(0), document.getPosition(document.contents.length))
 				val textEdit = new TextEdit(range, newContent)
 				addTextEdit(uri, document, textEdit)
-			]
+			].get
 		} finally {
 			outputStream.close
 		}
@@ -107,7 +107,7 @@ class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
 					new TextEdit(range, replacement.replacementText)
 				]
 				addTextEdit(uri, document, textEdits)
-			]
+			].get
 		}
 	}
 	
