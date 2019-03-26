@@ -21,7 +21,7 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
 		<upstreamBranch>master</upstreamBranch>
-		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
+		<JENKINS_URL>https://services.typefox.io/open-source/jenkins</JENKINS_URL>
 	</properties>
 
 	<dependencyManagement>
@@ -287,7 +287,7 @@
 			<repositories>
 				<repository>
 					<id>lsp4j-from-jenkins</id>
-					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+					<url>https://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 				</repository>
 				<repository>
 					<id>xtext-lib-from-jenkins</id>
