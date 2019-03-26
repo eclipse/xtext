@@ -64,20 +64,20 @@ class TargetPlatformProject extends ProjectDescriptor {
 			<unit id="org.eclipse.xtend" version="0.0.0"/>
 			<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		«ENDIF»
-		<repository location="http://download.eclipse.org/releases/2019-06"/>
+		<repository location="https://download.eclipse.org/releases/2019-06"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/"/>
+		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 		«IF config.xtextVersion.isSnapshot»
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
 		«ELSEIF config.xtextVersion.isStable»
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
 		«ELSE»
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
 		«ENDIF»
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -95,7 +95,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 			«ENDIF»
 			<unit id="org.objectweb.asm" version="7.0.0.v20181030-2244"/>
 			<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
-			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
 		</location>
 		</locations>
 		</target>
