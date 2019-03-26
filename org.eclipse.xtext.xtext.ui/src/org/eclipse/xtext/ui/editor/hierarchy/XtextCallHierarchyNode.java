@@ -7,26 +7,21 @@
  */
 package org.eclipse.xtext.ui.editor.hierarchy;
 
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNode;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@SuppressWarnings("all")
 public class XtextCallHierarchyNode extends DefaultHierarchyNode {
-  @Accessors
-  private IEObjectDescription grammarDescription;
-  
-  @Pure
-  public IEObjectDescription getGrammarDescription() {
-    return this.grammarDescription;
-  }
-  
-  public void setGrammarDescription(final IEObjectDescription grammarDescription) {
-    this.grammarDescription = grammarDescription;
-  }
+	private IEObjectDescription grammarDescription;
+
+	public IEObjectDescription getGrammarDescription() {
+		return this.grammarDescription;
+	}
+
+	public void setGrammarDescription(final IEObjectDescription grammarDescription) {
+		this.grammarDescription = grammarDescription;
+	}
 }
