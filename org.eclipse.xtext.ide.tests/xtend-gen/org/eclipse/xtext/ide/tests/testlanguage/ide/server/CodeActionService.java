@@ -16,8 +16,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.lsp4j.CodeAction;
-import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.Diagnostic;
 import org.eclipse.lsp4j.Position;
@@ -30,19 +30,13 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange;
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange;
-import org.eclipse.xtext.ide.server.Document;
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.CollectionBasedAcceptor;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -54,24 +48,24 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class CodeActionService implements ICodeActionService {
+public class CodeActionService implements ICodeActionService2 {
   @Inject
   private IChangeSerializer serializer;
   
   @Override
-  public List<Either<Command, CodeAction>> getCodeActions(final Document document, final XtextResource resource, final CodeActionParams params, final CancelIndicator indicator) {
+  public List<Either<Command, CodeAction>> getCodeActions(final ICodeActionService2.Options options) {
     final ArrayList<Either<Command, CodeAction>> actions = CollectionLiterals.<Either<Command, CodeAction>>newArrayList();
-    List<Diagnostic> _diagnostics = params.getContext().getDiagnostics();
+    List<Diagnostic> _diagnostics = options.getCodeActionParams().getContext().getDiagnostics();
     for (final Diagnostic d : _diagnostics) {
       String _code = d.getCode();
       if (_code != null) {
         switch (_code) {
           case TestLanguageValidator.INVALID_NAME:
-            Either<Command, CodeAction> _forLeft = Either.<Command, CodeAction>forLeft(this.fixInvalidName(d, document, resource, params));
+            Either<Command, CodeAction> _forLeft = Either.<Command, CodeAction>forLeft(this.fixInvalidName(d, options));
             actions.add(_forLeft);
             break;
           case TestLanguageValidator.UNSORTED_MEMBERS:
-            Either<Command, CodeAction> _forRight = Either.<Command, CodeAction>forRight(this.fixUnsortedMembers(d, document, resource, params));
+            Either<Command, CodeAction> _forRight = Either.<Command, CodeAction>forRight(this.fixUnsortedMembers(d, options));
             actions.add(_forRight);
             break;
         }
@@ -80,8 +74,8 @@ public class CodeActionService implements ICodeActionService {
     return actions;
   }
   
-  private Command fixInvalidName(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
-    final String string = doc.getSubstring(d.getRange());
+  private Command fixInvalidName(final Diagnostic d, final ICodeActionService2.Options options) {
+    final String string = options.getDocument().getSubstring(d.getRange());
     Command _command = new Command();
     final Procedure1<Command> _function = (Command it) -> {
       it.setCommand("my.textedit.command");
@@ -98,7 +92,7 @@ public class CodeActionService implements ICodeActionService {
           it_2.setRange(d.getRange());
         };
         TextEdit _doubleArrow = ObjectExtensions.<TextEdit>operator_doubleArrow(_textEdit, _function_2);
-        it_1.getChanges().put(params.getTextDocument().getUri(), Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_doubleArrow)));
+        it_1.getChanges().put(options.getCodeActionParams().getTextDocument().getUri(), Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_doubleArrow)));
       };
       WorkspaceEdit _doubleArrow = ObjectExtensions.<WorkspaceEdit>operator_doubleArrow(_workspaceEdit, _function_1);
       it.setArguments(Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList(_doubleArrow)));
@@ -106,7 +100,7 @@ public class CodeActionService implements ICodeActionService {
     return ObjectExtensions.<Command>operator_doubleArrow(_command, _function);
   }
   
-  private CodeAction fixUnsortedMembers(final Diagnostic d, final Document doc, final XtextResource res, final CodeActionParams params) {
+  private CodeAction fixUnsortedMembers(final Diagnostic d, final ICodeActionService2.Options options) {
     final IChangeSerializer.IModification<Resource> _function = (Resource copiedResource) -> {
       final Model model = IterableExtensions.<Model>head(Iterables.<Model>filter(copiedResource.getContents(), Model.class));
       EList<TypeDeclaration> _types = model.getTypes();
@@ -119,7 +113,7 @@ public class CodeActionService implements ICodeActionService {
         ECollections.<Member>sort(type.getMembers(), _function_1);
       }
     };
-    final WorkspaceEdit wsEdit = this.recordWorkspaceEdit(doc, res, _function);
+    final WorkspaceEdit wsEdit = this.recordWorkspaceEdit(options, _function);
     CodeAction _codeAction = new CodeAction();
     final Procedure1<CodeAction> _function_1 = (CodeAction it) -> {
       StringConcatenation _builder = new StringConcatenation();
@@ -131,40 +125,33 @@ public class CodeActionService implements ICodeActionService {
     return ObjectExtensions.<CodeAction>operator_doubleArrow(_codeAction, _function_1);
   }
   
-  private WorkspaceEdit recordWorkspaceEdit(final Document doc, final XtextResource resource, final IChangeSerializer.IModification<Resource> mod) {
-    try {
-      final XtextResourceSet rs = new XtextResourceSet();
-      final Resource copy = rs.createResource(resource.getURI());
-      String _text = resource.getParseResult().getRootNode().getText();
-      StringInputStream _stringInputStream = new StringInputStream(_text);
-      copy.load(_stringInputStream, CollectionLiterals.<Object, Object>emptyMap());
-      this.serializer.<Resource>addModification(copy, mod);
-      final ArrayList<IEmfResourceChange> documentchanges = CollectionLiterals.<IEmfResourceChange>newArrayList();
-      this.serializer.applyModifications(CollectionBasedAcceptor.<IEmfResourceChange>of(documentchanges));
-      WorkspaceEdit _workspaceEdit = new WorkspaceEdit();
-      final Procedure1<WorkspaceEdit> _function = (WorkspaceEdit it) -> {
-        Iterable<ITextDocumentChange> _filter = Iterables.<ITextDocumentChange>filter(documentchanges, ITextDocumentChange.class);
-        for (final ITextDocumentChange documentchange : _filter) {
-          {
-            final Function1<ITextReplacement, TextEdit> _function_1 = (ITextReplacement replacement) -> {
-              TextEdit _textEdit = new TextEdit();
-              final Procedure1<TextEdit> _function_2 = (TextEdit it_1) -> {
-                it_1.setNewText(replacement.getReplacementText());
-                Position _position = doc.getPosition(replacement.getOffset());
-                Position _position_1 = doc.getPosition(replacement.getEndOffset());
-                Range _range = new Range(_position, _position_1);
-                it_1.setRange(_range);
-              };
-              return ObjectExtensions.<TextEdit>operator_doubleArrow(_textEdit, _function_2);
+  private WorkspaceEdit recordWorkspaceEdit(final ICodeActionService2.Options options, final IChangeSerializer.IModification<Resource> mod) {
+    final ResourceSet rs = options.getLanguageServerAccess().newLiveScopeResourceSet(options.getResource().getURI());
+    final Resource copy = rs.getResource(options.getResource().getURI(), true);
+    this.serializer.<Resource>addModification(copy, mod);
+    final ArrayList<IEmfResourceChange> documentchanges = CollectionLiterals.<IEmfResourceChange>newArrayList();
+    this.serializer.applyModifications(CollectionBasedAcceptor.<IEmfResourceChange>of(documentchanges));
+    WorkspaceEdit _workspaceEdit = new WorkspaceEdit();
+    final Procedure1<WorkspaceEdit> _function = (WorkspaceEdit it) -> {
+      Iterable<ITextDocumentChange> _filter = Iterables.<ITextDocumentChange>filter(documentchanges, ITextDocumentChange.class);
+      for (final ITextDocumentChange documentchange : _filter) {
+        {
+          final Function1<ITextReplacement, TextEdit> _function_1 = (ITextReplacement replacement) -> {
+            TextEdit _textEdit = new TextEdit();
+            final Procedure1<TextEdit> _function_2 = (TextEdit it_1) -> {
+              it_1.setNewText(replacement.getReplacementText());
+              Position _position = options.getDocument().getPosition(replacement.getOffset());
+              Position _position_1 = options.getDocument().getPosition(replacement.getEndOffset());
+              Range _range = new Range(_position, _position_1);
+              it_1.setRange(_range);
             };
-            final List<TextEdit> edits = ListExtensions.<ITextReplacement, TextEdit>map(documentchange.getReplacements(), _function_1);
-            it.getChanges().put(documentchange.getNewURI().toString(), edits);
-          }
+            return ObjectExtensions.<TextEdit>operator_doubleArrow(_textEdit, _function_2);
+          };
+          final List<TextEdit> edits = ListExtensions.<ITextReplacement, TextEdit>map(documentchange.getReplacements(), _function_1);
+          it.getChanges().put(documentchange.getNewURI().toString(), edits);
         }
-      };
-      return ObjectExtensions.<WorkspaceEdit>operator_doubleArrow(_workspaceEdit, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      }
+    };
+    return ObjectExtensions.<WorkspaceEdit>operator_doubleArrow(_workspaceEdit, _function);
   }
 }
