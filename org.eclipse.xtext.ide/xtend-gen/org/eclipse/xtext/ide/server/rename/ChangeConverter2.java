@@ -119,28 +119,24 @@ public class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
   protected void _handleReplacements(final IEmfResourceChange change) {
     try {
       final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      try {
-        final String uri = this.uriExtensions.toUriString(change.getResource().getURI());
-        change.getResource().save(outputStream, null);
-        byte[] _byteArray = outputStream.toByteArray();
-        String _charset = this.getCharset(change.getResource());
-        final String newContent = new String(_byteArray, _charset);
-        final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
-          Object _xblockexpression = null;
-          {
-            final Document document = context.getDocument();
-            Position _position = document.getPosition(0);
-            Position _position_1 = document.getPosition(document.getContents().length());
-            final Range range = new Range(_position, _position_1);
-            final TextEdit textEdit = new TextEdit(range, newContent);
-            _xblockexpression = this.addTextEdit(uri, document, textEdit);
-          }
-          return _xblockexpression;
-        };
-        this.access.<Object>doRead(uri, _function).get();
-      } finally {
-        outputStream.close();
-      }
+      final String uri = this.uriExtensions.toUriString(change.getResource().getURI());
+      change.getResource().save(outputStream, null);
+      byte[] _byteArray = outputStream.toByteArray();
+      String _charset = this.getCharset(change.getResource());
+      final String newContent = new String(_byteArray, _charset);
+      final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
+        Object _xblockexpression = null;
+        {
+          final Document document = context.getDocument();
+          Position _position = document.getPosition(0);
+          Position _position_1 = document.getPosition(document.getContents().length());
+          final Range range = new Range(_position, _position_1);
+          final TextEdit textEdit = new TextEdit(range, newContent);
+          _xblockexpression = this.addTextEdit(uri, document, textEdit);
+        }
+        return _xblockexpression;
+      };
+      this.access.<Object>doRead(uri, _function).get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -70,19 +70,15 @@ class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
 
 	protected def dispatch void handleReplacements(IEmfResourceChange change) {
 		val outputStream = new ByteArrayOutputStream
-		try {
-			val uri = change.resource.URI.toUriString
-			change.resource.save(outputStream, null)
-			val newContent = new String(outputStream.toByteArray, change.resource.charset)
-			access.doRead(uri) [ context |
-				val document = context.document
-				val range = new Range(document.getPosition(0), document.getPosition(document.contents.length))
-				val textEdit = new TextEdit(range, newContent)
-				addTextEdit(uri, document, textEdit)
-			].get
-		} finally {
-			outputStream.close
-		}
+		val uri = change.resource.URI.toUriString
+		change.resource.save(outputStream, null)
+		val newContent = new String(outputStream.toByteArray, change.resource.charset)
+		access.doRead(uri) [ context |
+			val document = context.document
+			val range = new Range(document.getPosition(0), document.getPosition(document.contents.length))
+			val textEdit = new TextEdit(range, newContent)
+			addTextEdit(uri, document, textEdit)
+		].get
 	}
 
 	protected def String getCharset(Resource resource) {

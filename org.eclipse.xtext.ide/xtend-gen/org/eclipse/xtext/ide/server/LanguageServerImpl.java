@@ -947,7 +947,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       final IRenameService2 renameService2 = _get_1;
       if ((renameService2 != null)) {
-        return renameService2.rename(this.access, renameParams, cancelIndicator);
+        IRenameService2.Options _options = new IRenameService2.Options();
+        final Procedure1<IRenameService2.Options> _function_1 = (IRenameService2.Options o) -> {
+          o.setLanguageServerAccess(this.access);
+          o.setRenameParams(renameParams);
+          o.setCancelIndicator(cancelIndicator);
+        };
+        IRenameService2.Options _doubleArrow = ObjectExtensions.<IRenameService2.Options>operator_doubleArrow(_options, _function_1);
+        return renameService2.rename(_doubleArrow);
       }
       return new WorkspaceEdit();
     };
