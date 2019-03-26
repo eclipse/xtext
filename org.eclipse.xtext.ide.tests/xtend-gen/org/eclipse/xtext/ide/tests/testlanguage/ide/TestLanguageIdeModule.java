@@ -10,7 +10,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService;
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver;
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService;
 import org.eclipse.xtext.ide.server.commands.IExecutableCommandService;
@@ -39,7 +39,7 @@ public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
     return CodeLensService.class;
   }
   
-  public Class<? extends ICodeActionService> bindICodeActionService() {
+  public Class<? extends ICodeActionService2> bindICodeActionService2() {
     return CodeActionService.class;
   }
   

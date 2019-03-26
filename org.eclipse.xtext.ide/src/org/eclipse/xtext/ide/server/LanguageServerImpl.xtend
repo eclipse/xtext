@@ -77,6 +77,7 @@ import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.coloring.IColoringService
@@ -162,7 +163,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			}
 			
 			// check if a language with code actions capability exists
-			codeActionProvider = allLanguages.exists[get(ICodeActionService)!==null] 
+			codeActionProvider = allLanguages.exists[get(ICodeActionService) !== null || get(ICodeActionService2) !== null] 
 			
 			signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
@@ -506,11 +507,21 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 			val uri = params.textDocument.uri.toUri;
 			val serviceProvider = uri.resourceServiceProvider;
 			val service = serviceProvider?.get(ICodeActionService);
-			if (service === null)
+			val service2 = serviceProvider?.get(ICodeActionService2);
+			if (service === null && service2 === null)
 				return emptyList
 			
 			return workspaceManager.doRead(uri) [doc, resource |
-				service.getCodeActions(doc, resource, params, cancelIndicator)
+				val result = newArrayList
+				result += service?.getCodeActions(doc, resource, params, cancelIndicator) ?: emptyList
+				result += service2?.getCodeActions(new ICodeActionService2.Options() => [ o |
+					o.document = doc
+				   	o.resource = resource
+				   	o.languageServerAccess= access
+				   	o.codeActionParams = params
+				   	o.cancelIndicator = cancelIndicator
+			   	]) ?: emptyList
+				return result
 			]
 		]
 	}

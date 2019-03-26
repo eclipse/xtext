@@ -8,14 +8,14 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.server.ILanguageServerExtension
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 import org.eclipse.xtext.ide.server.codelens.ICodeLensResolver
 import org.eclipse.xtext.ide.server.codelens.ICodeLensService
 import org.eclipse.xtext.ide.server.commands.IExecutableCommandService
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeActionService
 import org.eclipse.xtext.ide.tests.testlanguage.ide.server.CodeLensService
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 
 /**
  * Use this class to register ide components.
@@ -34,7 +34,7 @@ class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
 		CodeLensService
 	}
 	
-	def Class<? extends ICodeActionService> bindICodeActionService() {
+	def Class<? extends ICodeActionService2> bindICodeActionService2() {
 		CodeActionService
 	}
 	

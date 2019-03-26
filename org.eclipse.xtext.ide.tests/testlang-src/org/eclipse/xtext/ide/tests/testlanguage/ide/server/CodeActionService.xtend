@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import org.eclipse.emf.common.util.ECollections
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.lsp4j.CodeAction
-import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.Range
@@ -21,44 +20,38 @@ import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.serializer.IEmfResourceChange
 import org.eclipse.xtext.ide.serializer.ITextDocumentChange
-import org.eclipse.xtext.ide.server.Document
-import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
+import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.CollectionBasedAcceptor
-import org.eclipse.xtext.util.StringInputStream
 
 import static org.eclipse.xtext.ide.tests.testlanguage.validation.TestLanguageValidator.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class CodeActionService implements ICodeActionService {
+class CodeActionService implements ICodeActionService2 {
 
 	@Inject IChangeSerializer serializer
 
-	override getCodeActions(Document document, XtextResource resource, CodeActionParams params,
-		CancelIndicator indicator) {
+	override getCodeActions(Options options) {
 		val actions = newArrayList
-		for (d : params.context.diagnostics) {
+		for (d : options.codeActionParams.context.diagnostics) {
 			switch d.code {
-				case INVALID_NAME: actions += Either.forLeft(d.fixInvalidName(document, resource, params))
-				case UNSORTED_MEMBERS: actions += Either.forRight(d.fixUnsortedMembers(document, resource, params))
+				case INVALID_NAME: actions += Either.forLeft(d.fixInvalidName(options))
+				case UNSORTED_MEMBERS: actions += Either.forRight(d.fixUnsortedMembers(options))
 			}
 		}
 		return actions
 	}
 
-	def private Command fixInvalidName(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {
-		val string = doc.getSubstring(d.range)
+	def private Command fixInvalidName(Diagnostic d, Options options) {
+		val string = options.document.getSubstring(d.range)
 		return new Command => [
 			command = 'my.textedit.command'
 			title = '''Make '«string»' upper case'''
 			arguments = #[
 				new WorkspaceEdit => [
-					changes.put(params.textDocument.uri, #[new TextEdit => [
+					changes.put(options.codeActionParams.textDocument.uri, #[new TextEdit => [
 						newText = string.toFirstUpper
 						range = d.range
 					]])
@@ -67,8 +60,8 @@ class CodeActionService implements ICodeActionService {
 		]
 	}
 
-	def private CodeAction fixUnsortedMembers(Diagnostic d, Document doc, XtextResource res, CodeActionParams params) {
-		val wsEdit = recordWorkspaceEdit(doc, res) [ copiedResource |
+	def private CodeAction fixUnsortedMembers(Diagnostic d, Options options) {
+		val wsEdit = recordWorkspaceEdit(options) [ copiedResource |
 			val model = copiedResource.contents.filter(Model).head
 			for (type : model.types) {
 				ECollections.sort(type.members, [a, b|a.name <=> b.name])
@@ -81,10 +74,9 @@ class CodeActionService implements ICodeActionService {
 		]
 	}
 
-	def private WorkspaceEdit recordWorkspaceEdit(Document doc, XtextResource resource, IChangeSerializer.IModification<Resource> mod) {
-		val rs = new XtextResourceSet()
-		val copy = rs.createResource(resource.URI)
-		copy.load(new StringInputStream(resource.parseResult.rootNode.text), emptyMap)
+	def private WorkspaceEdit recordWorkspaceEdit(Options options, IChangeSerializer.IModification<Resource> mod) {
+		val rs = options.languageServerAccess.newLiveScopeResourceSet(options.resource.URI)
+		val copy = rs.getResource(options.resource.URI, true)
 		serializer.addModification(copy, mod)
 		val documentchanges = <IEmfResourceChange>newArrayList()
 		serializer.applyModifications(CollectionBasedAcceptor.of(documentchanges))
@@ -93,7 +85,7 @@ class CodeActionService implements ICodeActionService {
 				val edits = documentchange.replacements.map [ replacement |
 					new TextEdit => [
 						newText = replacement.replacementText
-						range = new Range(doc.getPosition(replacement.offset), doc.getPosition(replacement.endOffset))
+						range = new Range(options.document.getPosition(replacement.offset), options.document.getPosition(replacement.endOffset))
 					]
 				]
 				changes.put(documentchange.newURI.toString, edits)

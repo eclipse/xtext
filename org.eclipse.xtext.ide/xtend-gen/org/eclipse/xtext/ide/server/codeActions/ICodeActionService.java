@@ -18,7 +18,9 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated use {@link ICodeActionService2} instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public interface ICodeActionService {
   public abstract List<Either<Command, CodeAction>> getCodeActions(final Document document, final XtextResource resource, final CodeActionParams params, final CancelIndicator indicator);
