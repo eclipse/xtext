@@ -2,7 +2,7 @@
  * Root project configuration that is reused by subprojects to apply the Xtend compiler.
  */
 if (!hasProperty('JENKINS_URL')) {
-	ext.JENKINS_URL = 'http://services.typefox.io/open-source/jenkins'
+	ext.JENKINS_URL = 'https://services.typefox.io/open-source/jenkins'
 }
 
 // The repositories to query when constructing the Xtend compiler classpath
