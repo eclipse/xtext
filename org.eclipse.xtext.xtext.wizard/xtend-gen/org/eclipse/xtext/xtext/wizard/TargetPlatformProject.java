@@ -118,7 +118,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.newLine();
       }
     }
-    _builder.append("<repository location=\"http://download.eclipse.org/releases/2019-06\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/releases/2019-06\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
@@ -126,7 +126,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
@@ -137,15 +137,15 @@ public class TargetPlatformProject extends ProjectDescriptor {
     {
       boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
       if (_isSnapshot) {
-        _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
+        _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
         _builder.newLine();
       } else {
         boolean _isStable = this.getConfig().getXtextVersion().isStable();
         if (_isStable) {
-          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
+          _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
           _builder.newLine();
         } else {
-          _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
+          _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
           XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
           _builder.append(_xtextVersion);
           _builder.append("/\"/>");
@@ -200,7 +200,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"7.0.0.v20181030-2244\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06\"/>");
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
