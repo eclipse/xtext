@@ -9,7 +9,7 @@
 		<unit id="org.eclipse.xtend.lib.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -33,7 +33,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -61,7 +61,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -116,7 +116,7 @@
 		<unit id="org.eclipse.xtext.xtext.ui.graph.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui.testing" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui.testing.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -132,7 +132,7 @@
 		<unit id="org.eclipse.xtend.m2e.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.standalone" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.standalone.source" version="0.0.0"/>
-		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -160,7 +160,7 @@
 		<unit id="org.objectweb.asm.source" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.tree" version="7.0.0.v20181030-2244"/>
 		<unit id="org.objectweb.asm.tree.source" version="7.0.0.v20181030-2244"/>
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+		<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
@@ -176,12 +176,12 @@
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/oxygen/201804111000"/>
+		<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 		<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
-		<repository location="http://download.eclipse.org/cbi/updates/license/"/>
+		<repository location="https://download.eclipse.org/cbi/updates/license/"/>
 	</location>
 </locations>
 </target>
