@@ -12,6 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -25,6 +26,7 @@ public class XtextSerializationTokensTest extends AbstractXtextTests {
 		this.with(new XtextStandaloneSetup());
 	}
 
+	@Ignore
 	@Test
 	public void testParserRuleReturnsToken() throws Exception {
 		this.serializeAndCheckTokens(
@@ -37,6 +39,7 @@ public class XtextSerializationTokensTest extends AbstractXtextTests {
 		);
 	}
 
+	@Ignore
 	@Test
 	public void testParserRuleGreaterSignToken() throws Exception {
 		this.serializeAndCheckTokens(
