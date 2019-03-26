@@ -119,28 +119,24 @@ public class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
   protected void _handleReplacements(final IEmfResourceChange change) {
     try {
       final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      try {
-        final String uri = this.uriExtensions.toUriString(change.getResource().getURI());
-        change.getResource().save(outputStream, null);
-        byte[] _byteArray = outputStream.toByteArray();
-        String _charset = this.getCharset(change.getResource());
-        final String newContent = new String(_byteArray, _charset);
-        final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
-          Object _xblockexpression = null;
-          {
-            final Document document = context.getDocument();
-            Position _position = document.getPosition(0);
-            Position _position_1 = document.getPosition(document.getContents().length());
-            final Range range = new Range(_position, _position_1);
-            final TextEdit textEdit = new TextEdit(range, newContent);
-            _xblockexpression = this.addTextEdit(uri, document, textEdit);
-          }
-          return _xblockexpression;
-        };
-        this.access.<Object>doRead(uri, _function);
-      } finally {
-        outputStream.close();
-      }
+      final String uri = this.uriExtensions.toUriString(change.getResource().getURI());
+      change.getResource().save(outputStream, null);
+      byte[] _byteArray = outputStream.toByteArray();
+      String _charset = this.getCharset(change.getResource());
+      final String newContent = new String(_byteArray, _charset);
+      final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
+        Object _xblockexpression = null;
+        {
+          final Document document = context.getDocument();
+          Position _position = document.getPosition(0);
+          Position _position_1 = document.getPosition(document.getContents().length());
+          final Range range = new Range(_position, _position_1);
+          final TextEdit textEdit = new TextEdit(range, newContent);
+          _xblockexpression = this.addTextEdit(uri, document, textEdit);
+        }
+        return _xblockexpression;
+      };
+      this.access.<Object>doRead(uri, _function).get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -168,34 +164,38 @@ public class ChangeConverter2 implements IAcceptor<IEmfResourceChange> {
   }
   
   protected void _handleReplacements(final ITextDocumentChange change) {
-    int _size = change.getReplacements().size();
-    boolean _greaterThan = (_size > 0);
-    if (_greaterThan) {
-      final String uri = this.uriExtensions.toUriString(change.getNewURI());
-      final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
-        Object _xblockexpression = null;
-        {
-          final Document document = context.getDocument();
-          final Function1<ITextReplacement, TextEdit> _function_1 = (ITextReplacement replacement) -> {
-            TextEdit _xblockexpression_1 = null;
-            {
-              final Position start = document.getPosition(replacement.getOffset());
-              int _offset = replacement.getOffset();
-              int _length = replacement.getLength();
-              int _plus = (_offset + _length);
-              final Position end = document.getPosition(_plus);
-              final Range range = new Range(start, end);
-              String _replacementText = replacement.getReplacementText();
-              _xblockexpression_1 = new TextEdit(range, _replacementText);
-            }
-            return _xblockexpression_1;
-          };
-          final List<TextEdit> textEdits = ListExtensions.<ITextReplacement, TextEdit>map(change.getReplacements(), _function_1);
-          _xblockexpression = this.addTextEdit(uri, document, ((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
-        }
-        return _xblockexpression;
-      };
-      this.access.<Object>doRead(uri, _function);
+    try {
+      int _size = change.getReplacements().size();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        final String uri = this.uriExtensions.toUriString(change.getNewURI());
+        final Function<ILanguageServerAccess.Context, Object> _function = (ILanguageServerAccess.Context context) -> {
+          Object _xblockexpression = null;
+          {
+            final Document document = context.getDocument();
+            final Function1<ITextReplacement, TextEdit> _function_1 = (ITextReplacement replacement) -> {
+              TextEdit _xblockexpression_1 = null;
+              {
+                final Position start = document.getPosition(replacement.getOffset());
+                int _offset = replacement.getOffset();
+                int _length = replacement.getLength();
+                int _plus = (_offset + _length);
+                final Position end = document.getPosition(_plus);
+                final Range range = new Range(start, end);
+                String _replacementText = replacement.getReplacementText();
+                _xblockexpression_1 = new TextEdit(range, _replacementText);
+              }
+              return _xblockexpression_1;
+            };
+            final List<TextEdit> textEdits = ListExtensions.<ITextReplacement, TextEdit>map(change.getReplacements(), _function_1);
+            _xblockexpression = this.addTextEdit(uri, document, ((TextEdit[])Conversions.unwrapArray(textEdits, TextEdit.class)));
+          }
+          return _xblockexpression;
+        };
+        this.access.<Object>doRead(uri, _function).get();
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   

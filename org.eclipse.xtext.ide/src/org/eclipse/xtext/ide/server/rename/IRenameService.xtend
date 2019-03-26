@@ -12,6 +12,7 @@ import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.xtext.ide.server.ILanguageServerAccess
 import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -33,5 +34,12 @@ interface IRenameService {
  */
 interface IRenameService2 {
 	
-	def WorkspaceEdit rename(ILanguageServerAccess access, RenameParams renameParams, CancelIndicator cancelIndicator)
+	def WorkspaceEdit rename(Options options)
+	
+	@Accessors
+	class Options {
+		ILanguageServerAccess languageServerAccess
+		RenameParams renameParams
+		CancelIndicator cancelIndicator
+	}
 }

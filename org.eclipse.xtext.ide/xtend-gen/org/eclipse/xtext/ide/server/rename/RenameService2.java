@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.Position;
-import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -69,27 +67,27 @@ public class RenameService2 implements IRenameService2 {
   private TokenUtil tokenUtil;
   
   @Override
-  public WorkspaceEdit rename(final ILanguageServerAccess access, final RenameParams renameParams, final CancelIndicator cancelIndicator) {
+  public WorkspaceEdit rename(final IRenameService2.Options options) {
     try {
       WorkspaceEdit _xblockexpression = null;
       {
         final ServerRefactoringIssueAcceptor issueAcceptor = this.issueProvider.get();
         final Function<ILanguageServerAccess.Context, WorkspaceEdit> _function = (ILanguageServerAccess.Context context) -> {
           final WorkspaceEdit workspaceEdit = new WorkspaceEdit();
-          final ResourceSet resourceSet = access.newLiveScopeResourceSet(context.getResource().getURI());
+          final ResourceSet resourceSet = options.getLanguageServerAccess().newLiveScopeResourceSet(context.getResource().getURI());
           final Resource xtextResource = resourceSet.getResource(context.getResource().getURI(), true);
           if ((xtextResource instanceof XtextResource)) {
             EObject element = null;
             try {
-              element = this.getElementAtOffset(((XtextResource)xtextResource), context.getDocument(), renameParams.getPosition());
+              element = this.getElementAtOffset(((XtextResource)xtextResource), context.getDocument(), options.getRenameParams().getPosition());
             } catch (final Throwable _t) {
               if (_t instanceof IndexOutOfBoundsException) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("Invalid document position line:");
-                int _line = renameParams.getPosition().getLine();
+                int _line = options.getRenameParams().getPosition().getLine();
                 _builder.append(_line);
                 _builder.append(" column:");
-                int _character = renameParams.getPosition().getCharacter();
+                int _character = options.getRenameParams().getPosition().getCharacter();
                 _builder.append(_character);
                 issueAcceptor.add(
                   RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
@@ -100,24 +98,24 @@ public class RenameService2 implements IRenameService2 {
             if ((((issueAcceptor.getMaximumSeverity() != RefactoringIssueAcceptor.Severity.FATAL) && (element == null)) || element.eIsProxy())) {
               StringConcatenation _builder_1 = new StringConcatenation();
               _builder_1.append("No element found at position line:");
-              int _line_1 = renameParams.getPosition().getLine();
+              int _line_1 = options.getRenameParams().getPosition().getLine();
               _builder_1.append(_line_1);
               _builder_1.append(" column:");
-              int _character_1 = renameParams.getPosition().getCharacter();
+              int _character_1 = options.getRenameParams().getPosition().getCharacter();
               _builder_1.append(_character_1);
               issueAcceptor.add(
                 RefactoringIssueAcceptor.Severity.FATAL, _builder_1.toString());
             } else {
               final IResourceServiceProvider services = this.serviceProviderRegistry.getResourceServiceProvider(element.eResource().getURI());
               final IChangeSerializer changeSerializer = services.<IChangeSerializer>get(IChangeSerializer.class);
-              String _newName = renameParams.getNewName();
+              String _newName = options.getRenameParams().getNewName();
               URI _uRI = EcoreUtil.getURI(element);
               final RenameChange change = new RenameChange(_newName, _uRI);
               final RenameContext renameContext = new RenameContext(Collections.<RenameChange>unmodifiableList(CollectionLiterals.<RenameChange>newArrayList(change)), resourceSet, changeSerializer, issueAcceptor);
               final IRenameStrategy2 renameStrategy = services.<IRenameStrategy2>get(IRenameStrategy2.class);
               renameStrategy.applyRename(renameContext);
               final ChangeConverter2.Factory converterFactory = services.<ChangeConverter2.Factory>get(ChangeConverter2.Factory.class);
-              final ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit, access);
+              final ChangeConverter2 changeConverter = converterFactory.create(workspaceEdit, options.getLanguageServerAccess());
               changeSerializer.applyModifications(changeConverter);
             }
           } else {
@@ -125,7 +123,7 @@ public class RenameService2 implements IRenameService2 {
           }
           return workspaceEdit;
         };
-        _xblockexpression = access.<WorkspaceEdit>doRead(renameParams.getTextDocument().getUri(), _function).get();
+        _xblockexpression = options.getLanguageServerAccess().<WorkspaceEdit>doRead(options.getRenameParams().getTextDocument().getUri(), _function).get();
       }
       return _xblockexpression;
     } catch (Throwable _e) {

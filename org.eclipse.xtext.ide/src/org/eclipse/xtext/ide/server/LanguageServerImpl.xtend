@@ -619,7 +619,11 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 				return renameServiceOld.rename(workspaceManager, renameParams, cancelIndicator)
 			val renameService2 = resourceServiceProvider?.get(IRenameService2)
 			if (renameService2 !== null)
-				return renameService2.rename(access, renameParams, cancelIndicator)
+				return renameService2.rename(new IRenameService2.Options => [ o |
+					o.languageServerAccess = access
+					o.renameParams = renameParams
+					o.cancelIndicator = cancelIndicator
+				])
 			return new WorkspaceEdit
 		]
 	}
