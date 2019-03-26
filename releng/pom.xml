@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>	
 		<tycho-version>1.3.0</tycho-version>
 		<root-dir>${basedir}/..</root-dir>
-		<JENKINS_URL>http://services.typefox.io/open-source/jenkins</JENKINS_URL>
+		<JENKINS_URL>https://services.typefox.io/open-source/jenkins</JENKINS_URL>
 		<upstreamBranch>master</upstreamBranch>
 	</properties>
 
@@ -29,7 +29,7 @@
 		</repository>
 		<repository>
 			<id>maven</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
+			<url>https://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
 		</repository>
 		<repository>
 			<id>maven2</id>
