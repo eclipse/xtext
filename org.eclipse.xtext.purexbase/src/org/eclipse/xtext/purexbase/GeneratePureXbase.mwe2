@@ -21,10 +21,6 @@ Workflow {
 				runtimeTest = {
 					enabled = true
 				}
-				ideaPlugin = {
-					enabled = true
-					root = "../../xtext-idea/org.eclipse.xtext.purexbase.idea"
-				}
 				eclipsePlugin = {
 					enabled = true
 					root = "../../xtext-eclipse/org.eclipse.xtext.purexbase.ui"
