@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 buildscript {
 	apply from: "${rootDir}/gradle/versions.gradle"
-	repositories.jcenter()
+	repositories.mavenCentral()
 	dependencies {
 		classpath "org.xtext:xtext-gradle-plugin:$versions.xtext_gradle_plugin"
 		classpath "io.spring.gradle:dependency-management-plugin:$versions.dependency_management_plugin"
@@ -26,7 +26,7 @@ subprojects {
 	
 	repositories {
 		mavenLocal()
-		jcenter()
+		mavenCentral()
 		// TODO remove this once we switched back to java platform plugin
 		// https://github.com/eclipse/xtext/issues/1388
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
