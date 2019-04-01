@@ -80,7 +80,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			additionalContent = '''
 				buildscript {
 					repositories {
-						jcenter()
+						mavenCentral()
 					}
 					dependencies {
 						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
@@ -90,7 +90,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				subprojects {
 					ext.xtextVersion = '«config.xtextVersion»'
 					repositories {
-						jcenter()
+						mavenCentral()
 						«IF config.xtextVersion.isSnapshot»
 							maven {
 								url 'https://oss.sonatype.org/content/repositories/snapshots'
