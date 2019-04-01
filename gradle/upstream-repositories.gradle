@@ -10,7 +10,7 @@
  */
 
 if (!hasProperty('JENKINS_URL')) {
-  ext.JENKINS_URL = 'http://services.typefox.io/open-source/jenkins'
+  ext.JENKINS_URL = 'https://services.typefox.io/open-source/jenkins'
 }
 
 ext.MVN_REPOPATH = 'lastStableBuild/artifact/build/maven-repository/'
@@ -26,7 +26,7 @@ def jenkinsPipelineRepo = { jobName, branch ->
 repositories {
   jcenter()
   if (findProperty('useJenkinsSnapshots') == 'true') {
-    maven { url "http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/$MVN_REPOPATH" }
+    maven { url "https://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/$MVN_REPOPATH" }
     maven { url jenkinsPipelineRepo('xtext-lib','autodetect') }
     maven { url jenkinsPipelineRepo('xtext-core','autodetect') }
     maven { url jenkinsPipelineRepo('xtext-extras','autodetect') }
