@@ -50,7 +50,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Oxygen"
+      defaultValue="2019-06"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
@@ -900,8 +900,6 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.10"/>
-          <repository
               url="${p2.xpand}"/>
           <repository
               url="${p2.buildship}"/>
@@ -932,8 +930,6 @@
               url="${p2.emf}"/>
           <repository
               url="${p2.draw2d}"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/4.11"/>
           <repository
               url="${p2.xpand}"/>
           <repository
