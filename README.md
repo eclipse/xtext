@@ -8,7 +8,7 @@ This repository contains all Eclipse related code for Xtext, including
 
 Checkout and run `mvn clean install`.
 
-Note: The [target platform](releng/org.eclipse.xtext.target/org.eclipse.xtext.target-luna.target) used for the Tycho build loads the required Xtext dependencies ([xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), [xtext-extras](https://github.com/eclipse/xtext-extras)) from their respective p2 repositories on the [Jenkins server](http://services.typefox.io/open-source/jenkins/).
+Note: The [target platform](releng/org.eclipse.xtext.target/org.eclipse.xtext.target-luna.target) used for the Tycho build loads the required Xtext dependencies ([xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), [xtext-extras](https://github.com/eclipse/xtext-extras)) from their respective p2 repositories on the [Jenkins server](https://services.typefox.io/open-source/jenkins/).
 
 ## How to Work with the Source Code
 
@@ -21,4 +21,4 @@ see [xtext/CONTRIBUTING.md](https://github.com/eclipse/xtext/blob/master/CONTRIB
 
 ## Continuous Integration
 
-This project is built by the [xtext-eclipse multi-branch job on Jenkins](http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/).
+This project is built by the [xtext-eclipse multi-branch job on Jenkins](https://services.typefox.io/open-source/jenkins/job/xtext-eclipse/).
