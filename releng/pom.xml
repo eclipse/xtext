@@ -21,22 +21,15 @@
 			<url>file:${root-dir}/build/maven-repository</url>
 		</repository>
 		<repository>
-			<id>BintrayJCenter</id>
-			<url>https://jcenter.bintray.com/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>maven</id>
+			<id>lsp4j</id>
 			<url>https://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
 		</repository>
 		<repository>
-			<id>maven2</id>
+			<id>lib</id>
 			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
-			<id>maven3</id>
+			<id>core</id>
 			<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastSuccessfulBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
