@@ -19,7 +19,6 @@ jar.manifest {
 	instruction 'Import-Package', 'org.eclipse.core.runtime.*;version=!;common=!'
 	instruction 'Import-Package', "org.eclipse.xtext.xbase.lib.*;version=\"${version}\""
 	instruction 'Import-Package', '!org.eclipse.xtext.web.example.*'
-	instruction 'Import-Package', '!org.eclipse.xtext.idea.example.*'
 	instruction 'Import-Package', '!org.eclipse.xtend2.lib.*'
 	instruction 'Import-Package', '!org.eclipse.xtext.junit4.*'
 	instruction 'Import-Package', '!org.hamcrest.*'
