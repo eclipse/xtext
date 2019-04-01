@@ -41,7 +41,6 @@
 		<module>org.eclipse.xtext.purexbase.ui</module>
 		<module>org.eclipse.xtext.doc</module>
 		<module>org.eclipse.xtext.xtext.ui.examples</module>
-		<module>org.eclipse.xtext.idea.generator</module>
 		<module>org.eclipse.xtext.builder.tests</module>
 		<module>org.eclipse.xtext.junit4.tests</module>
 		<module>org.eclipse.xtext.ui.codetemplates.tests</module>

@@ -13,8 +13,6 @@
    <bundle id="org.eclipse.xtext.common.types.ui" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.common.types.ui.source" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.doc" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
-   <bundle id="org.eclipse.xtext.idea.generator" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
-   <bundle id="org.eclipse.xtext.idea.generator.source" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.junit4" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.junit4.source" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtext.ui.testing" version="2.18.0.qualifier"><category name="Xtext"/></bundle>
