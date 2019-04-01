@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -30,6 +33,7 @@ import org.eclipse.xtext.util.Pair;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -154,6 +158,15 @@ public class ToBeBuiltComputer {
 			return false;
 		}
 		
+		/**
+		 * @since 2.19
+		 */
+		@Override
+		public void addInterestingProjects(IProject thisProject, Set<IProject> result) {
+			for (int i = 0; i < contributions.size(); i++) {
+				contributions.get(i).addInterestingProjects(thisProject, result);
+			}
+		}
 	}
 
 	@Inject
@@ -358,4 +371,10 @@ public class ToBeBuiltComputer {
 		return uriValidator.canBuild(uri, storage);
 	}
 
+	protected Set<IProject> getInterestingProjects(IProject project) throws CoreException {
+		Set<IProject> result = new LinkedHashSet<>(Arrays.asList(project.getReferencedProjects()));
+		contribution.addInterestingProjects(project, result);
+		return result;
+	}
+	
 }

@@ -30,6 +30,7 @@ import org.osgi.framework.Version;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 
 	private OperationCanceledException cancelException;

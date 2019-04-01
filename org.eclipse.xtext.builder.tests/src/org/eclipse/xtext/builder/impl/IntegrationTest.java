@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -22,6 +23,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourceAttributes;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -36,6 +38,7 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePa
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
@@ -209,8 +212,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(1, countMarkers(bar_file));
 	}
 
-	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
-	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testTwoFilesInTwoReferencedProjectsAddNature() throws Exception {
 		foo_project = createJavaProjectWithRootSrc("foo");
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
@@ -285,8 +286,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(printMarkers(bar_file), 0, countMarkers(bar_file));
 	}
 
-	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
-	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testChangeReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
@@ -301,8 +300,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(0, countMarkers(bar_file));
 	}
 
-	// TODO fix https://github.com/eclipse/xtext-eclipse/issues/400
-	@Ignore("TODO fix https://github.com/eclipse/xtext-eclipse/issues/400")
 	@Test public void testDeleteReferencedFile() throws Exception {
 		createTwoFilesInTwoReferencedProjects();
 
@@ -316,6 +313,86 @@ public class IntegrationTest extends AbstractBuilderTest {
 		build();
 		assertEquals(0, countMarkers(foo_file));
 		assertEquals(0, countMarkers(bar_file));
+	}
+	
+	@SuppressWarnings("restriction")
+	@Test public void testBuildOrderIsCorrect() throws Exception {
+		foo_project = createJavaProjectWithRootSrc("foo");
+		bar_project = createJavaProjectWithRootSrc("bar");
+
+		org.eclipse.core.internal.resources.Workspace workspace =
+				(org.eclipse.core.internal.resources.Workspace) ResourcesPlugin.getWorkspace();
+		IBuildConfiguration[] buildOrder = workspace.getBuildOrder();
+		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
+		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
+		// add a classpath entry and a project reference
+		addProjectReference(bar_project, foo_project);
+		
+		buildOrder = workspace.getBuildOrder();
+		assertEquals(foo_project.getProject(), buildOrder[0].getProject());
+		assertEquals(bar_project.getProject(), buildOrder[1].getProject());
+	}
+	
+	@SuppressWarnings("restriction")
+	@Test public void testBuildOrderIsWrong() throws Exception {
+		foo_project = createJavaProjectWithRootSrc("foo");
+		bar_project = createJavaProjectWithRootSrc("bar");
+
+		org.eclipse.core.internal.resources.Workspace workspace =
+				(org.eclipse.core.internal.resources.Workspace) ResourcesPlugin.getWorkspace();
+		IBuildConfiguration[] buildOrder = workspace.getBuildOrder();
+		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
+		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
+		// here we do only add a classpath entry and no core.resources project reference
+		JavaProjectSetupUtil.addProjectReference(bar_project, foo_project);
+		
+		buildOrder = workspace.getBuildOrder();
+		assertEquals(bar_project.getProject(), buildOrder[0].getProject());
+		assertEquals(foo_project.getProject(), buildOrder[1].getProject());
+	}
+	
+	@Test
+	public void testJavaChangeTriggersBuild() throws Exception {
+		foo_project = createJavaProject("foo");
+		IJavaProject zonkProject = createJavaProject("zonk");
+		bar_project = createJavaProjectWithRootSrc("bar");
+
+		addProjectReference(bar_project, zonkProject);
+		IClasspathEntry classpathEntry = JavaCore.newProjectEntry(foo_project.getPath(), true);
+		workspace.addToClasspath(zonkProject, classpathEntry);
+
+		IFolder javaPackage = foo_project.getProject().getFolder("src").getFolder("pack");
+		javaPackage.create(true, true, null);
+		IFile javaFile = javaPackage.getFile("Type.java");
+		javaFile.create(new StringInputStream("package pack; public class Type {}"), true, monitor());
+
+		IFolder dslFolder = bar_project.getProject().getFolder("src");
+		IFile dslFile = dslFolder.getFile("Dsl.typesAssistTest");
+		dslFile.create(new StringInputStream("default pack.Type"), true, monitor());
+
+		build();
+		assertEquals(printMarkers(dslFile), 0, countMarkers(dslFile));
+
+		javaFile.setContents(new StringInputStream("package pack; class X {}"), true, true, null);
+
+		build();
+		// Xtext proxy validation and EObjectValidator proxy validation
+		assertEquals(2, countMarkers(dslFile));
+
+		javaFile.setContents(new StringInputStream("package pack; public class Type {}"), true, true, null);
+
+		build();
+		assertEquals(0, countMarkers(dslFile));
+
+		workspace.removeClasspathEntry(zonkProject, classpathEntry);
+
+		build();
+		// Xtext proxy validation and EObjectValidator proxy validation
+		assertEquals(2, countMarkers(dslFile));
+
+		workspace.addToClasspath(zonkProject, classpathEntry);
+		build();
+		assertEquals(0, countMarkers(dslFile));
 	}
 
 	@Test public void testUpdateOfReferencedFile() throws Exception {

@@ -7,9 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
@@ -158,7 +165,7 @@ public class TestedWorkspaceWithJDT extends TestedWorkspace {
 
 	public void addToClasspath(IJavaProject project, IClasspathEntry newClassPathEntry) {
 		try {
-			JavaProjectSetupUtil.addToClasspath(project, newClassPathEntry, true);
+			JavaProjectSetupUtil.addToClasspath(project, newClassPathEntry, false);
 			build();
 		} catch(Exception e) {
 			Exceptions.throwUncheckedException(e);
@@ -187,20 +194,57 @@ public class TestedWorkspaceWithJDT extends TestedWorkspace {
 
 	public void addProjectReference(IJavaProject from, IJavaProject to) {
 		try {
-			JavaProjectSetupUtil.addProjectReference(from, to);
+			JavaProjectSetupUtil.addProjectReference(from, to, false);
+			addDynamicProjectReference(from.getProject(), to.getProject());
+			build();
+		} catch(Exception e) {
+			Exceptions.throwUncheckedException(e);
+		}
+	}
+
+	/*
+	 * This is a poor workaround since the build order is not properly updated when a 
+	 * Java project reference is added.
+	 */
+	@Deprecated
+	private void addDynamicProjectReference(IProject from, IProject to) throws CoreException {
+		IProjectDescription description = from.getDescription();
+		List<IProject> dynamicReferences = new ArrayList<>(Arrays.asList(description.getDynamicReferences()));
+		dynamicReferences.add(to);
+		description.setDynamicReferences(dynamicReferences.toArray(new IProject[0]));
+		from.setDescription(description, null);
+	}
+
+	public void removeProjectReference(IJavaProject from, IJavaProject to) {
+		try {
+			JavaProjectSetupUtil.removeProjectReference(from, to);
+			removeDynamicProjectReference(from.getProject(), to.getProject());
 			build();
 		} catch(Exception e) {
 			Exceptions.throwUncheckedException(e);
 		}
 	}
 	
-	public void removeProjectReference(IJavaProject from, IJavaProject to) {
+	public void removeClasspathEntry(IJavaProject from, IClasspathEntry entry) {
 		try {
-			JavaProjectSetupUtil.removeProjectReference(from, to);
+			JavaProjectSetupUtil.removeFromClasspath(from, entry.getEntryKind(), entry.getPath());
 			build();
 		} catch(Exception e) {
 			Exceptions.throwUncheckedException(e);
 		}
+	}
+	
+	/*
+	 * This is a poor workaround since the build order is not properly updated when a 
+	 * Java project reference is added.
+	 */
+	@Deprecated
+	private void removeDynamicProjectReference(IProject from, IProject to) throws CoreException {
+		IProjectDescription description = from.getDescription();
+		List<IProject> dynamicReferences = new ArrayList<>(Arrays.asList(description.getDynamicReferences()));
+		dynamicReferences.removeAll(Collections.singleton(to));
+		description.setDynamicReferences(dynamicReferences.toArray(new IProject[0]));
+		from.setDescription(description, null);
 	}
 
 	public void addSourceFolder(IJavaProject project, String folder) {

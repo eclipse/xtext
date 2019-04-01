@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -47,6 +48,12 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	
 	@Inject 
 	private JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private SimpleProjectDependencyGraph projectDependencyGraph;
 
 	@Override
 	public void elementChanged(ElementChangedEvent event) {
@@ -59,7 +66,11 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 								.filter(Predicates.notNull())
 								.transform(IJavaProject::getProject).toSet();
 						dirtyStateManager.notifyListeners(new CoarseGrainedChangeEvent());
-						scheduleBuildIfNecessary(projects);
+						Set<IProject> mutableProjects = Sets.newLinkedHashSet(projects);
+						for(IProject project: projects) {
+							mutableProjects.addAll(projectDependencyGraph.getDependentXtextProjects(project));
+						}
+						scheduleBuildIfNecessary(mutableProjects);
 					}
 				}
 			} catch (WrappedException e) {
@@ -77,6 +88,13 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 
 	protected Set<IJavaProject> getJavaProjectsWithClasspathChange(IJavaElementDelta delta) {
 		return javaProjectClasspathChangeAnalyzer.getJavaProjectsWithClasspathChange(delta);
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	protected SimpleProjectDependencyGraph getProjectDependencyGraph() {
+		return projectDependencyGraph;
 	}
 
 }

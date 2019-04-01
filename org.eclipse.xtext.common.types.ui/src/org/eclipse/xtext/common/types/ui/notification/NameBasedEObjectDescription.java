@@ -24,7 +24,10 @@ public class NameBasedEObjectDescription implements IEObjectDescription {
 
 	private final QualifiedName name;
 
-	protected NameBasedEObjectDescription(QualifiedName name) {
+	/**
+	 * @since 2.19
+	 */
+	public NameBasedEObjectDescription(QualifiedName name) {
 		this.name = name;
 	}
 	
