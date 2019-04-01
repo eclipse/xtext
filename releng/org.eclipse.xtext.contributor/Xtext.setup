@@ -50,11 +50,14 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Oxygen"
+      defaultValue="2019-06"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+    <choice
+        value="2019-06"
+        label="Eclipse 2019-06 - 4.12"/>
     <choice
         value="2019-03"
         label="Eclipse 2019-03 - 4.11"/>
@@ -897,8 +900,6 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.10"/>
-          <repository
               url="${p2.xpand}"/>
           <repository
               url="${p2.buildship}"/>
@@ -930,7 +931,38 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.11-I-builds"/>
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
+        </repositoryList>
+        <repositoryList
+            name="2019-06">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.12-I-builds"/>
           <repository
               url="${p2.xpand}"/>
           <repository
