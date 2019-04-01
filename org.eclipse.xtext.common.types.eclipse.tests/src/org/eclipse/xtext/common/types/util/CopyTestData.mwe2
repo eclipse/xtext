@@ -8,7 +8,6 @@
 module org.eclipse.xtext.common.types.util.CopyTestData
 
 var eclipsePath
-var ideaPath
 var xbasePath
 var commonPath
 var javaPath
@@ -29,10 +28,6 @@ Workflow {
 		targetDir = srcPath
 	}
 	component = CopyDirectory {
-		sourcePath = "${eclipsePath}/testdata"
-		targetPath = "${ideaPath}/testdata"
-	}
-	component = CopyDirectory {
 		sourcePath = "${eclipsePath}/testdata/${testDataJar}"
 		targetPath = "${commonPath}/tests/${testDataJar}"
 	}
@@ -43,10 +38,6 @@ Workflow {
 	component = CopyDirectory {
 		sourcePath = "${eclipsePath}/tests/${typeProvider}"
 		targetPath = "${javaPath}/src/${typeProvider}"
-	}
-	component = CopyDirectory {
-		sourcePath = "${eclipsePath}/testdata"
-		targetPath = "${ideaPath}/testdata"
 	}
 	component = CopyDirectory {
 		sourcePath = "${eclipsePath}/testdata/org/eclipse/xtext/common/types/testSetups"
