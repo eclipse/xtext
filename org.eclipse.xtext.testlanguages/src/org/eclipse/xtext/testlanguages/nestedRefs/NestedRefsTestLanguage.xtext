@@ -1,0 +1,16 @@
+/**
+ * A language that has rules that can refer to themselves
+ */
+
+grammar org.eclipse.xtext.testlanguages.nestedRefs.NestedRefsTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate nestedRefs "http://www.eclipse.org/xtext/testlanguage/NestedRefs"
+
+Doc:
+	(declarations += SelfReferingDecl)*;
+
+SelfReferingDecl:
+	'decl' name=QualifiedName 'end' selfRef=[SelfReferingDecl|QualifiedName] ';';
+
+QualifiedName:
+	ID ('.' ID)*;

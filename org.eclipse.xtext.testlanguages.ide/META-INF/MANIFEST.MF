@@ -18,7 +18,9 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.a
  org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr.internal,
  org.eclipse.xtext.testlanguages.xtextgrammar.ide;x-friends:="org.eclipse.xtext.ide.tests",
  org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr,
- org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal
+ org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr
 Require-Bundle: org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testing,

@@ -43,5 +43,6 @@ Workflow {
 		language = @noJdt.NoJdtTestLanguage {}
 		language = @xtextgrammar.XtextGrammarTestLanguage {}
 		language = @fileAware.FileAwareTestLanguage {}
+		language = @nestedRefs.NestedRefsTestLanguage {}
 	}
 }

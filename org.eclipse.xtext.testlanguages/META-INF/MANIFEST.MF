@@ -75,5 +75,17 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.fileAware.scoping,
  org.eclipse.xtext.testlanguages.fileAware,
  org.eclipse.xtext.testlanguages.fileAware.generator,
- org.eclipse.xtext.testlanguages.fileAware.tests;x-internal=true
+ org.eclipse.xtext.testlanguages.fileAware.tests;x-internal=true,
+ org.eclipse.xtext.testlanguages.nestedRefs,
+ org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs,
+ org.eclipse.xtext.testlanguages.nestedRefs.scoping,
+ org.eclipse.xtext.testlanguages.nestedRefs.generator,
+ org.eclipse.xtext.testlanguages.nestedRefs.services,
+ org.eclipse.xtext.testlanguages.nestedRefs.parser.antlr,
+ org.eclipse.xtext.testlanguages.nestedRefs.parser.antlr.internal,
+ org.eclipse.xtext.testlanguages.nestedRefs.validation,
+ org.eclipse.xtext.testlanguages.nestedRefs.serializer,
+ org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.util,
+ org.eclipse.xtext.testlanguages.nestedRefs.formatting2,
+ org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.impl
 Automatic-Module-Name: org.eclipse.xtext.testlanguages

@@ -26,6 +26,7 @@ import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.util.DocumentHighlightComparator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -187,10 +189,29 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 			return false;
 		}
 
+		// This code handles the special case where your language has constructs that can refer to
+		// themselves. For example "function MyFunction begin ... end MyFunction" defines the function "MyFunction" and
+		// terminates its implementation block with an additional repetition of the word "MyFunction". Normally, when
+		// you are positioned on a selected element, you only want to highlight that selected element when you are
+		// positioned directly on top of the name of the selected element. However, when the selected element can refer
+		// to itself then there are references inside the element that must trigger highlighting.  In the example,
+		// we also want to highlight "MyFunction" when we are positioned on the "end MyFunction".
+		
+		INode crossReferenceNode = offsetHelper.getCrossReferenceNode(resource, new TextRegion(offset, 0));
+		
+		if (crossReferenceNode != null) {
+			EObject crossReferencedElement = offsetHelper.getCrossReferencedElement(crossReferenceNode);
+
+			if (crossReferencedElement != null && crossReferencedElement == selectedElement) {
+				return true;
+			}
+		}
+
 		final EObject containedElement = offsetHelper.resolveContainedElementAt(resource, offset);
-		// Special handling to avoid such cases when the selection is not
-		// exactly on the desired element.
-		if (selectedElement == containedElement) {
+		// When the cursor is positioned in the selected element, then we only want to highlight the selected element
+		// when we are directly on top of the name (the significant text region) of that element.
+		
+ 		if (selectedElement == containedElement) {
 			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(containedElement);
 			return !isNullOrEmpty(region)
 					// Region is comparable to a selection in an editor,

@@ -1,0 +1,75 @@
+module org.eclipse.xtext.testlanguages.nestedRefs.NestedRefsTestLanguage
+
+import org.eclipse.xtext.xtext.generator.*
+
+var grammarURI = "classpath:/org/eclipse/xtext/testlanguages/nestedRefs/NestedRefsTestLanguage.xtext"
+var fileExtensions = "nestedRefs"
+
+XtextGeneratorLanguage {
+	grammarUri = grammarURI
+	fileExtensions = fileExtensions
+
+	// Java API to access grammar elements (required by several other fragments)
+	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
+
+	// generates Java API for the generated EPackages
+	fragment = ecore.EMFGeneratorFragment2 auto-inject {
+		emfRuntimeVersion = "2.9"
+	}
+
+	// serializer 2.0
+	fragment = serializer.SerializerFragment2 auto-inject {
+		generateStub = false
+	}
+
+	// a custom ResourceFactory for use with EMF
+	fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}
+
+	// The antlr parser generator fragment.
+	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+	//  options = {
+	//      backtrack = true
+	//  }
+	}
+	
+	// Xtend-based API for validation
+	fragment = validation.ValidatorFragment2 auto-inject {
+	//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+	//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+	}
+
+	// old scoping and exporting API
+	// fragment = scoping.ImportURIScopingFragment auto-inject {}
+	// fragment = exporting.SimpleNamesFragment auto-inject {}
+
+	// scoping and exporting API
+	fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+	fragment = exporting.QualifiedNamesFragment2 auto-inject {}
+	fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+
+	// generator API
+	fragment = generator.GeneratorFragment2 auto-inject {}
+
+	// labeling API
+	fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
+
+	// outline API
+	fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
+	fragment = ui.outline.QuickOutlineFragment2 auto-inject {}
+
+	// quickfix API
+	fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}
+
+	// content assist API
+	fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}
+
+	// rename refactoring
+	fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {}
+
+	// provides a preference page for template proposals
+	fragment = ui.templates.CodetemplatesGeneratorFragment2 auto-inject {}
+
+	// provides a compare view
+	fragment = ui.compare.CompareFragment2 auto-inject {}
+}	
+

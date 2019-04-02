@@ -25,4 +25,10 @@
 			class = "org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage"
 			genModel = "model/generated/FileAwareTestLanguage.genmodel" />
 	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/xtext/testlanguage/NestedRefs"
+			class = "org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.NestedRefsPackage"
+			genModel = "model/generated/NestedRefsTestLanguage.genmodel" />
+	</extension>
 </plugin>
