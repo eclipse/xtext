@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>	
 		<tycho-version>1.3.0</tycho-version>
 		<root-dir>${basedir}/..</root-dir>
-		<JENKINS_URL>https://services.typefox.io/open-source/jenkins</JENKINS_URL>
+		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 		<upstreamBranch>master</upstreamBranch>
 	</properties>
 
@@ -22,7 +22,7 @@
 		</repository>
 		<repository>
 			<id>lsp4j</id>
-			<url>https://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
+			<url>https://ci.eclipse.org/xtext/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
 		</repository>
 		<repository>
 			<id>lib</id>
