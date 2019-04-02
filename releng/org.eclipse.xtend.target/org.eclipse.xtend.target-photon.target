@@ -8,7 +8,7 @@
 		<unit id="org.eclipse.xtend.lib.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro.source" version="0.0.0"/>
-		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -30,7 +30,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -56,7 +56,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -81,7 +81,7 @@
 		<unit id="org.eclipse.xtext.xbase.junit.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui.source" version="0.0.0"/>
-		<repository location="https://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">

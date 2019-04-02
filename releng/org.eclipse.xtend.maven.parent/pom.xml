@@ -27,7 +27,7 @@
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
 		<upstreamBranch>master</upstreamBranch>
-		<JENKINS_URL>https://services.typefox.io/open-source/jenkins</JENKINS_URL>
+		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
 	<dependencyManagement>
