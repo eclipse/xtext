@@ -130,7 +130,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private XtextAntlrIDEAGeneratorFragment ideaParser;
   
-  private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
+  private IdeaPluginGenerator ideaPlugin;
   
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
   

@@ -120,7 +120,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	 
 	XtextAntlrIDEAGeneratorFragment ideaParser
 	
-	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
+	IdeaPluginGenerator ideaPlugin
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
