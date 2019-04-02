@@ -26,10 +26,6 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/unorderedGroups"
 	}
 	
-	component = DirectoryCleaner {
-		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea"
-	}
-	
 	component = XtextGenerator {
 		cleaner = {
 			enabled = false

@@ -1,9 +1,8 @@
 /*
  * Bootstrap project for the Xtext language. It contains an MWE2 generator workflow with
- * dedicated configuration code. The workflow generates into the core and generic ide projects
- * as well as the Eclipse and IDEA integration projects, which are defined in different
- * source repositories. The path to these other repositories is assumed to be ../xtext-eclipse
- * and ../xtext-idea, respectively.
+ * dedicated configuration code. The workflow generates into the core and generic ide projects,
+ * which are defined in different source repositories. The path to these other repositories is
+ * assumed to be ../xtext-eclipse, respectively.
  */
 
 apply from: "${rootDir}/gradle/mwe2-workflows.gradle"

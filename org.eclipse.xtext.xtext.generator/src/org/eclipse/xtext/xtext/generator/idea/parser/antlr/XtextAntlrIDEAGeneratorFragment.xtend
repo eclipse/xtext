@@ -7,33 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.idea.parser.antlr
 
-import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment2
 
+@Deprecated
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragment2 {
 
-	@Inject
-	PsiAntlrGrammarGenerator generator
-
-	@Inject extension PsiGrammarNaming
 
 	override protected doGenerate() {
 		if (!projectConfig.ideaPlugin.enabled)
 			return;
-		val fsa = projectConfig.ideaPlugin.srcGen
-		generator.generate(grammar, options, fsa)
-
-		val encoding = codeConfig.encoding
-		val grammarFileName = grammar.parserGrammar.grammarFileName
-		val absoluteGrammarFileName = '''«fsa.path»/«grammarFileName»'''
-		addAntlrParam('-fo')
-		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')))
-		antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, antlrParams)
-
-		simplifyUnorderedGroupPredicatesIfRequired(grammar, fsa, grammar.internalParserClass)
-		splitParserAndLexerIfEnabled(fsa, grammar.internalParserClass, grammar.lexerClass)
-		normalizeTokens(fsa, grammar.lexerGrammar.tokensFileName)
-		suppressWarnings(fsa, grammar.internalParserClass, grammar.lexerClass)
-		normalizeLineDelimiters(fsa, grammar.internalParserClass, grammar.lexerClass)
+		System.err.println("The support for Idea has been removed!")
 	}
 }

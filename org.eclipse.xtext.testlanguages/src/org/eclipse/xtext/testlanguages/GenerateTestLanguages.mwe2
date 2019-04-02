@@ -27,9 +27,6 @@ Workflow {
 					enabled = true
 					root = eclipsePath	
 				}
-				ideaPlugin = {
-					enabled = false
-				}
 				
 				createEclipseMetaData = true
 			}

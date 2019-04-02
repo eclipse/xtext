@@ -37,9 +37,6 @@ Workflow {
 	component = DirectoryCleaner {
 		directory="${runtimeProject}/src-gen/org/eclipse/xtext/grammarinheritance"
 	}
-	component = DirectoryCleaner {
-		directory="${runtimeProject}/../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea"
-	}
 	
 	component = XtextGenerator {
 		cleaner = {
