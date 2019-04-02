@@ -11,12 +11,12 @@ dependencies {
 	testCompile project(':org.eclipse.xtext.web.example.entities.ide')
 }
 
-jar.manifest {
-	name 'Xbase Web Integration'
-	vendor 'Eclipse Xtext'
-	instruction 'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\""
-	instruction 'Import-Package', '!org.eclipse.xtext.xbase.web.*'
-	instruction 'Import-Package', '*'
-	instruction 'Export-Package', '!org.eclipse.xtext.xbase.web.test.*'
-	instruction 'Export-Package', "org.eclipse.xtext.xbase.web.*;version=\"${version}\""
-}
+jar.bnd(
+	'Bundle-Name', 'Xbase Web Integration',
+	'Bundle-Vendor', 'Eclipse Xtext',
+	'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\"",
+	'Import-Package', '!org.eclipse.xtext.xbase.web.*',
+	'Import-Package', '*',
+	'Export-Package', '!org.eclipse.xtext.xbase.web.test.*',
+	'Export-Package', "org.eclipse.xtext.xbase.web.*;version=\"${version}\""
+)

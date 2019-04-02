@@ -14,11 +14,11 @@ dependencies {
 	providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 }
 
-jar.manifest {
-	name 'Xtext Servlet'
-	vendor 'Eclipse Xtext'
-	instruction 'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\""
-	instruction 'Import-Package', '!org.eclipse.xtext.web.servlet.*'
-	instruction 'Import-Package', '*'
-	instruction 'Export-Package', "org.eclipse.xtext.web.servlet.*;version=\"${version}\""
-}
+jar.bnd(
+	'Bundle-Name', 'Xtext Servlet',
+	'Bundle-Vendor', 'Eclipse Xtext',
+	'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\"",
+	'Import-Package', '!org.eclipse.xtext.web.servlet.*',
+	'Import-Package', '*',
+	'Export-Package', "org.eclipse.xtext.web.servlet.*;version=\"${version}\""
+)

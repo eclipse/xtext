@@ -3,7 +3,7 @@
  * plugin, while for source bundles we generate the content ourselves.
  */
 
-apply plugin: 'osgi'
+apply plugin: 'biz.aQute.bnd.builder'
 
 def baseVersion = project.version
 if (baseVersion.endsWith('-SNAPSHOT'))
@@ -12,18 +12,19 @@ else if (baseVersion.split('\\.').length == 4)
 	baseVersion = baseVersion.substring(0, baseVersion.lastIndexOf('.'))
 def qualifiedVersion = baseVersion + '.v' + buildTime
 
-jar.manifest {
-	version qualifiedVersion
-	instruction 'Import-Package', 'org.apache.log4j.*;version="1.2.15"'
-	instruction 'Import-Package', 'com.google.common.*;version="[14.0,22.0)"'
-	instruction 'Import-Package', 'org.eclipse.core.runtime.*;version=!;common=!'
-	instruction 'Import-Package', "org.eclipse.xtext.xbase.lib.*;version=\"${version}\""
-	instruction 'Import-Package', '!org.eclipse.xtext.web.example.*'
-	instruction 'Import-Package', '!org.eclipse.xtend2.lib.*'
-	instruction 'Import-Package', '!org.eclipse.xtext.junit4.*'
-	instruction 'Import-Package', '!org.hamcrest.*'
-	instruction 'Import-Package', '!org.junit.*'
-}
+jar.bnd (
+	'Bundle-Version', qualifiedVersion,
+	'Import-Package', 'org.apache.log4j.*;version="1.2.15"',
+	'Import-Package', 'com.google.common.*;version="[14.0,22.0)"',
+	'Import-Package', 'org.eclipse.core.runtime.*;version=!;common=!',
+	'Import-Package', "org.eclipse.xtext.xbase.lib.*;version=\"${version}\"",
+	'Import-Package', '!org.eclipse.xtext.web.example.*',
+	'Import-Package', '!org.eclipse.xtext.idea.example.*',
+	'Import-Package', '!org.eclipse.xtend2.lib.*',
+	'Import-Package', '!org.eclipse.xtext.junit4.*',
+	'Import-Package', '!org.hamcrest.*',
+	'Import-Package', '!org.junit.*'
+)
 
 //------------------------------------------------------
 // Generate a manifest for the source bundle

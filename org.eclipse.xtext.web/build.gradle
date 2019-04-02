@@ -15,14 +15,14 @@ dependencies {
 	testCompile project(':org.eclipse.xtext.web.example.statemachine.ide')
 }
 
-jar.manifest {
-	name = 'Xtext Web Integration'
-	vendor = 'Eclipse Xtext'
-	instruction 'Import-Package', '!org.eclipse.xtext.web.*'
-	instruction 'Import-Package', '*'
-	instruction 'Export-Package', '!org.eclipse.xtext.web.server.test.*'
-	instruction 'Export-Package', "org.eclipse.xtext.web.*;version=\"${version}\""
-}
+jar.bnd (
+	'Bundle-Name', 'Xtext Web Integration',
+	'Bundle-vendor','Eclipse Xtext',
+	'Import-Package', '!org.eclipse.xtext.web.*',
+	'Import-Package', '*',
+	'Export-Package', '!org.eclipse.xtext.web.server.test.*',
+	'Export-Package', "org.eclipse.xtext.web.*;version=\"${version}\""
+)
 
 node {
 	version = '8.11.1'
