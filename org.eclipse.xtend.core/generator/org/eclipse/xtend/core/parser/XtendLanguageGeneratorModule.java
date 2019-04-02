@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.parser;
 
-import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrContentAssistGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenerator;
 
@@ -19,6 +18,5 @@ public class XtendLanguageGeneratorModule extends AbstractModule {
 	protected void configure() {
 		bind(AntlrGrammarGenerator.class).to(XtendAntlrGrammarGenerator.class);
 		bind(AntlrContentAssistGrammarGenerator.class).to(XtendContentAssistAntlrGrammarGenerator.class);
-		bind(PsiAntlrGrammarGenerator.class).to(XtendPsiAntlrGrammarGenerator.class);
 	}
 }
