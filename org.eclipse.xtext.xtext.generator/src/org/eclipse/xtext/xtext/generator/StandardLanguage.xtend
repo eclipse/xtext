@@ -118,7 +118,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	CompareFragment2 compareEditor = new CompareFragment2
 	 
-	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
+	XtextAntlrIDEAGeneratorFragment ideaParser
 	
 	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
 	
@@ -182,8 +182,12 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		fragments += xtypeSupport
 		fragments += codeTemplates
 		fragments += compareEditor
-		fragments += ideaParser
-		fragments += ideaPlugin
+		if(ideaParser !== null) {
+			fragments += ideaParser	
+		}
+		if(ideaPlugin !== null) {
+			fragments += ideaPlugin
+		}
 		fragments += webSupport
 		fragments += newProjectWizardForEclipse
 		fragments += projectWizard

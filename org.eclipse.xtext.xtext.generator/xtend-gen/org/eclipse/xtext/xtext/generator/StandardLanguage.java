@@ -128,7 +128,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private CompareFragment2 compareEditor = new CompareFragment2();
   
-  private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
+  private XtextAntlrIDEAGeneratorFragment ideaParser;
   
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
@@ -220,8 +220,12 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.xtypeSupport);
       this.operator_add(fragments, this.codeTemplates);
       this.operator_add(fragments, this.compareEditor);
-      this.operator_add(fragments, this.ideaParser);
-      this.operator_add(fragments, this.ideaPlugin);
+      if ((this.ideaParser != null)) {
+        this.operator_add(fragments, this.ideaParser);
+      }
+      if ((this.ideaPlugin != null)) {
+        this.operator_add(fragments, this.ideaPlugin);
+      }
       this.operator_add(fragments, this.webSupport);
       this.operator_add(fragments, this.newProjectWizardForEclipse);
       this.operator_add(fragments, this.projectWizard);
