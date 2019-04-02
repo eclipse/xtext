@@ -91,9 +91,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t");
           _builder.append("<artifactId>log4j</artifactId>");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("<version>1.2.16</version>");
-          _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
           _builder.newLine();
@@ -105,9 +102,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("<artifactId>org.eclipse.lsp4j</artifactId>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("<version>0.7.0</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
@@ -121,9 +115,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t");
           _builder.append("<artifactId>asm</artifactId>");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("<version>7.0</version>");
-          _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
           _builder.newLine();
@@ -136,9 +127,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.append("\t\t");
           _builder.append("<artifactId>asm-commons</artifactId>");
           _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("<version>7.0</version>");
-          _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");
           _builder.newLine();
@@ -150,9 +138,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("<artifactId>asm-tree</artifactId>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("<version>7.0</version>");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("</dependency>");

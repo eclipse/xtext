@@ -50,27 +50,22 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 						<dependency>
 							<groupId>log4j</groupId>
 							<artifactId>log4j</artifactId>
-							<version>1.2.16</version>
 						</dependency>
 						<dependency>
 							<groupId>org.eclipse.lsp4j</groupId>
 							<artifactId>org.eclipse.lsp4j</artifactId>
-							<version>0.7.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm</artifactId>
-							<version>7.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm-commons</artifactId>
-							<version>7.0</version>
 						</dependency>
 						<dependency>
 							<groupId>org.ow2.asm</groupId>
 							<artifactId>asm-tree</artifactId>
-							<version>7.0</version>
 						</dependency>
 					</dependencies>
 				«ENDIF»
