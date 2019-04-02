@@ -67,17 +67,7 @@ XtextGeneratorLanguage {
 	// content assist API  
 	fragment = ui.contentAssist.ContentAssistFragment2 {}
 
-    fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
-    	options = auto-inject {
-  			fieldsPerClass = "100"
-  			methodsPerClass = "100"
-  		}
-    }
 //    fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {
 //    	options = auto-inject {}
 //    }
-    
-	fragment = idea.IdeaPluginGenerator auto-inject {
-		generateXtendStub = true
-	}
 }

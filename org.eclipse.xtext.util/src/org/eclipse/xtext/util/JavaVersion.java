@@ -70,7 +70,6 @@ public enum JavaVersion {
 	//	 if you introduce a new JavaVersion don't forget to adapt
 	//	 - JavaVersionTest
 	//	 - JavaVersionExtendedTest
-	//	 - org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider.getTargetJavaVersion(XbaseGeneratorConfigurationState, Module)
 
 	private final String label;
 	private final String[] qualifiers;

@@ -9,7 +9,7 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="src/org/eclipse/xtext/xtext/bootstrap/GenerateXtext.mwe2 -p eclipseProjectPath=${project_loc:/org.eclipse.xtext.xtext.ui} -p ideaProjectPath=${project_loc:/org.eclipse.xtext.xtext.idea}"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="src/org/eclipse/xtext/xtext/bootstrap/GenerateXtext.mwe2 -p eclipseProjectPath=${project_loc:/org.eclipse.xtext.xtext.ui}"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtext.xtext.bootstrap"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m"/>
 </launchConfiguration>

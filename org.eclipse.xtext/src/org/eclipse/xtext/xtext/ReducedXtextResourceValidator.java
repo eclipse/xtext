@@ -13,8 +13,6 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl;
 
 /**
  * This resource validator for xtext grammars only reports syntactic errors and broken references to rule calls and super grammars.
- * It's used in IDEA's Xtext editor until we fully support ecore linking and indexing.
- * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=477683 
  * 
  * @noreference This class is not intended to be referenced by clients.
  * @noextend This class is not intended to be subclassed by clients.
