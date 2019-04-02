@@ -137,7 +137,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("repositories {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("jcenter()");
+      _builder.append("mavenCentral()");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -169,7 +169,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("repositories {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("jcenter()");
+      _builder.append("mavenCentral()");
       _builder.newLine();
       {
         boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
