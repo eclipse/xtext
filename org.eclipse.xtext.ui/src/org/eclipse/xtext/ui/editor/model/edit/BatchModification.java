@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -100,24 +101,28 @@ public class BatchModification {
 			LOG.error("No project configured.");
 			return;
 		}
+		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		ResourceSet resourceSet = resourceSetProvider.get(proj);
 		liveScopeResourceSetInitializer.initialize(resourceSet);
 		List<ResolvedModification> resolved = Lists.newArrayList();
 		for (IBatchableModification modification : modifications) {
 			EObject obj = resourceSet.getEObject(modification.getEObjectURI(), true);
 			if (obj == null || obj.eIsProxy()) {
-				LOG.error("Invlid EObject URI " + modification.getEObjectURI());
+				LOG.error("Invalid EObject URI " + modification.getEObjectURI());
 				continue;
 			}
 			resolved.add(new ResolvedModification(obj, modification));
 		}
+		progress.worked(5);
 		IChangeSerializer serializer = serializerProvider.get();
-		serializer.setProgressMonitor(monitor);
+		SubMonitor subProgress = SubMonitor.convert(progress.split(80), resolved.size());
 		for (ResolvedModification mod : resolved) {
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
+			serializer.setProgressMonitor(subProgress.split(1));
 			mod.modification.apply(mod.object, serializer);
+			subProgress.worked(1);
 		}
 		boolean first = true;
 		for (ResolvedModification mod : resolved) {
@@ -148,6 +153,7 @@ public class BatchModification {
 			change.initializeValidationData(monitor);
 			new PerformChangeOperation(change).run(monitor);
 		}
+		progress.done(); // remaining 15 ticks
 	}
 
 	public IXtextDocument getDocument() {
