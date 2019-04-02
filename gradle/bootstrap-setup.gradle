@@ -7,7 +7,7 @@ if (!hasProperty('JENKINS_URL')) {
 
 // The repositories to query when constructing the Xtend compiler classpath
 repositories {
-	jcenter()
+	mavenCentral()
 	maven {
 		name 'xtend-bootstrap'
 		url "$JENKINS_URL/job/xtend-bootstrap/lastStableBuild/artifact/build-result/maven-repository/"
