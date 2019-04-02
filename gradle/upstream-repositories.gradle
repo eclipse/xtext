@@ -10,7 +10,7 @@
  */
 
 if (!hasProperty('JENKINS_URL')) {
-  ext.JENKINS_URL = 'https://services.typefox.io/open-source/jenkins'
+  ext.JENKINS_URL = 'https://ci.eclipse.org/xtext'
 }
 
 ext.MVN_REPOPATH = 'lastStableBuild/artifact/build/maven-repository/'
