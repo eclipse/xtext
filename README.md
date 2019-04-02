@@ -19,13 +19,13 @@ First run `./gradlew createLocalMavenRepo` to compile and install the Xtend core
 mvn -f maven-pom.xml clean install -PuseSonatypeSnapshots
 ```
 
-With the above configuration, [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots) are used for upstream Xtext dependencies. The alternative profile `-PuseJenkinsSnapshots` activates the Maven repositories generated on the [Jenkins server](http://services.typefox.io/open-source/jenkins/) for [xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), and [xtext-extras](https://github.com/eclipse/xtext-extras) instead.
+With the above configuration, [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots) are used for upstream Xtext dependencies. The alternative profile `-PuseJenkinsSnapshots` activates the Maven repositories generated on the [Jenkins server](https://services.typefox.io/open-source/jenkins/) for [xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), and [xtext-extras](https://github.com/eclipse/xtext-extras) instead.
 
 ### Eclipse Support
 
 Run `mvn -f tycho-pom.xml clean install`.
 
-Note: The [target platform](releng/org.eclipse.xtend.target/org.eclipse.xtend.target-luna.target) used for the Tycho build loads the required Xtext dependencies ([xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), [xtext-extras](https://github.com/eclipse/xtext-extras)) from their respective p2 repositories on the [Jenkins server](http://services.typefox.io/open-source/jenkins/).
+Note: The [target platform](releng/org.eclipse.xtend.target/org.eclipse.xtend.target-luna.target) used for the Tycho build loads the required Xtext dependencies ([xtext-lib](https://github.com/eclipse/xtext-lib), [xtext-core](https://github.com/eclipse/xtext-core), [xtext-extras](https://github.com/eclipse/xtext-extras)) from their respective p2 repositories on the [Jenkins server](https://services.typefox.io/open-source/jenkins/).
 
 ## How to Work with the Source Code
 
@@ -38,4 +38,4 @@ see [xtext/CONTRIBUTING.md](https://github.com/eclipse/xtext/blob/master/CONTRIB
 
 ## Continuous Integration
 
-This project is built by the [xtext-xtend multi-branch job on Jenkins](http://services.typefox.io/open-source/jenkins/job/xtext-xtend/).
+This project is built by the [xtext-xtend multi-branch job on Jenkins](https://services.typefox.io/open-source/jenkins/job/xtext-xtend/).
