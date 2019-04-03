@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -21,138 +22,151 @@ import org.junit.Test;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactoringTest {
-	
+
+	private String[] filesToDelete = new String[0];
+	private boolean waitForBuild = false;
+
+	@After
+	public void deleteFilesCreatedByTestAndEventuallyWaitForBuild() throws Exception {
+		for (String file : filesToDelete) {
+			try {
+				testHelper.getProject().getFile(file).delete(true, new NullProgressMonitor());
+			} catch (Exception e) {
+				// expected file can't be deleted ... delete all other files, but test case should be failed by assertion already
+				e.printStackTrace();
+			}
+		}
+		if (waitForBuild) {
+			syncUtil.waitForBuild(null);
+		}
+		filesToDelete = new String[0];
+		waitForBuild = false;
+	}
+
+	/**
+	 * Call only once at start of test case to remember files to be deleted after the test case has been finished.
+	 */
+	private void afterTestDeleteFiles(String... files) {
+		filesToDelete = files;
+		waitForBuild = false;
+	}
+
+	/**
+	 * Call only once at start of test case to remember files to be deleted after the test case has been finished. In addition to
+	 * "afterTestDeleteFiles" the test case will wait for the build after all files are deleted.
+	 */
+	private void afterTestDeleteFilesAndWaitForBuild(String... files) {
+		filesToDelete = files;
+		waitForBuild = true;
+	}
+
 	@Test
 	public void testRenameJavaClass() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { }");
-			String xtendModel = "class XtendClass extends JavaClass {  }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass { }");
+		String xtendModel = "class XtendClass extends JavaClass {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
 	}
 
 	@Test
 	public void testRenameJavaClassReferenceToStaticField() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { public static int staticField; }");
-			String xtendModel = "class XtendClass { int foo = JavaClass::staticField }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "int foo = NewJavaClass::staticField");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass { public static int staticField; }");
+		String xtendModel = "class XtendClass { int foo = JavaClass::staticField }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "int foo = NewJavaClass::staticField");
 	}
 
 	@Test
 	public void testRenameJavaClassAndImport() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
-			String xtendModel = "import java.util.List\n"
-					+ "import test.JavaClass\n"
-					+ "\n"
-					+ "class XtendClass { List<JavaClass> x }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("test.JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+		String xtendModel = "import java.util.List\n"
+				+ "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass { List<JavaClass> x }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
 	}
 	
 	@Test
 	public void testUseSameLineDelimiterAsRestOfFile() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
-			String xtendModel = "import java.util.List\r\n"
-					+ "import test.JavaClass\r\n"
-					+ "\r\n"
-					+ "class XtendClass { List<JavaClass> x }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("test.JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+		String xtendModel = "import java.util.List\r\n"
+				+ "import test.JavaClass\r\n"
+				+ "\r\n"
+				+ "class XtendClass { List<JavaClass> x }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
 	}
 
 	@Test
 	public void testRenameJavaClassAndImportReferenceToStaticField() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {  public static int staticField; }");
-			String xtendModel = "import java.util.List\n"
-					+ "import test.JavaClass\n"
-					+ "\n"
-					+ "class XtendClass { int foo = JavaClass::staticField }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("test.JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {  public static int staticField; }");
+		String xtendModel = "import java.util.List\n"
+				+ "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass { int foo = JavaClass::staticField }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
 	}
 
 	@Test
 	public void testRenameRefToJavaClass() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
-			String xtendModel = "class XtendClass extends JavaClass {}";
-			XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
-			renameXtendElement(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
-			fileAsserts.assertFileExists("src/NewJavaClass.java");
-			assertDocumentContains(editor, "NewJavaClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+		String xtendModel = "class XtendClass extends JavaClass {}";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.indexOf("JavaClass"), "NewJavaClass");
+		fileAsserts.assertFileExists("src/NewJavaClass.java");
+		assertDocumentContains(editor, "NewJavaClass");
 	}
 
 	@Test
 	public void testRenameRefToJavaClassAndImport() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
-			String xtendModel = "import java.util.List import test.JavaClass class XtendClass { List<JavaClass> x }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
-			fileAsserts.assertFileExists("src/test/NewJavaClass.java");
-			assertDocumentContainsIgnoreWhitespace(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+		String xtendModel = "import java.util.List import test.JavaClass class XtendClass { List<JavaClass> x }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+		fileAsserts.assertFileExists("src/test/NewJavaClass.java");
+		assertDocumentContainsIgnoreWhitespace(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
 	}
 	
 	@Test
 	public void testRenameOuterJavaClass() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
-			String xtendModel = "import test.JavaClass\n"
-					+ "\n"
-					+ "class XtendClass extends JavaClass$Inner {  }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaClass = findJavaType("test.JavaClass");
-			assertNotNull(javaClass);
-			renameJavaElement(javaClass, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass").replace('$', '.'));
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+		String xtendModel = "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass extends JavaClass$Inner {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass").replace('$', '.'));
 	}
 
 	@Test
@@ -196,90 +210,72 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 
 	@Test
 	public void testRenameJavaTypeInferred() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
-			String xtendModel = "class XtendClass { val foo = new JavaClass() }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			XtextEditor editor = openEditorSafely(xtendClass);
-			renameJavaElement(findJavaType("JavaClass"), "NewJavaClass");
-			assertDocumentContains(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+		String xtendModel = "class XtendClass { val foo = new JavaClass() }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		XtextEditor editor = openEditorSafely(xtendClass);
+		renameJavaElement(findJavaType("JavaClass"), "NewJavaClass");
+		assertDocumentContains(editor, xtendModel.replace("JavaClass", "NewJavaClass"));
 	}
 
 	@Test
 	public void testRenameJavaConstructor() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass { public JavaClass() {} }");
-			String xtendModel = "class XtendClass extends JavaClass {  }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			// JDT automatically switches from the constructor to the type
-			IType javaType = findJavaType("JavaClass");
-			assertNotNull(javaType);
-			renameJavaElement(javaType, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass { public JavaClass() {} }");
+		String xtendModel = "class XtendClass extends JavaClass {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		// JDT automatically switches from the constructor to the type
+		IType javaType = findJavaType("JavaClass");
+		assertNotNull(javaType);
+		renameJavaElement(javaType, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
 	}
-		
+
 	@Test
 	public void testRenameRefToJavaConstructor() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
-			String xtendModel = "import test.JavaClass class XtendClass { JavaClass x = new JavaClass() }";
-			XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
-			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
-			fileAsserts.assertFileExists("src/test/NewJavaClass.java");
-			assertDocumentContains(editor, "{ NewJavaClass x = new NewJavaClass() }");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
+		String xtendModel = "import test.JavaClass class XtendClass { JavaClass x = new JavaClass() }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+		fileAsserts.assertFileExists("src/test/NewJavaClass.java");
+		assertDocumentContains(editor, "{ NewJavaClass x = new NewJavaClass() }");
 	}
-	
+
 	@Test
 	public void testRenameRefToJavaConstructorSamePackage() throws Exception {
-		try {
-			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
-			String xtendModel = "package test class XtendClass { JavaClass x = new JavaClass() }";
-			XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
-			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
-			fileAsserts.assertFileExists("src/test/NewJavaClass.java");
-			assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/test/NewJavaClass.java");
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public JavaClass() {} }");
+		String xtendModel = "package test class XtendClass { JavaClass x = new JavaClass() }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+		fileAsserts.assertFileExists("src/test/NewJavaClass.java");
+		assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
 	}
-	
+
 	@Test
 	public void testRenameJavaImplicitConstructor() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
-			String xtendModel = "class XtendClass extends JavaClass {  }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			// JDT automatically switches from the constructor to the type
-			IType javaType = findJavaType("JavaClass");
-			assertNotNull(javaType);
-			renameJavaElement(javaType, "NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+		String xtendModel = "class XtendClass extends JavaClass {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		// JDT automatically switches from the constructor to the type
+		IType javaType = findJavaType("JavaClass");
+		assertNotNull(javaType);
+		renameJavaElement(javaType, "NewJavaClass");
+		fileAsserts.assertFileContains(xtendClass, "extends NewJavaClass");
 	}
-		
+
 	@Test
 	public void testRenameRefToJavaImplicitConstructor() throws Exception {
-		try {
-			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
-			String xtendModel = "class XtendClass { JavaClass x = new JavaClass() }";
-			XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
-			renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
-			fileAsserts.assertFileExists("src/NewJavaClass.java");
-			assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaClass.java");
+		testHelper.createFile("JavaClass.java", "public class JavaClass {}");
+		String xtendModel = "class XtendClass { JavaClass x = new JavaClass() }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.lastIndexOf("JavaClass"), "NewJavaClass");
+		fileAsserts.assertFileExists("src/NewJavaClass.java");
+		assertDocumentContains(editor, "NewJavaClass x = new NewJavaClass()");
 	}
 	
 	@Test
@@ -292,7 +288,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 		IType javaType = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaType);
 		renameJavaElement(javaType, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner").replace('$', '.'));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner").replace('$', '.'));
 	}
 		
 	@Test
@@ -305,7 +301,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 		IType javaType = findJavaType("test.JavaClass.Inner");
 		assertNotNull(javaType);
 		renameJavaElement(javaType, "NewInner");
-		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner").replace('$', '.'));
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner").replace('$', '.'));
 	}
 		
 	@Test
@@ -341,31 +337,25 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 
 	@Test
 	public void testRenameJavaEnum() throws Exception {
-		try {
-			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
-			String xtendModel = "class XtendClass { JavaEnum fooBar }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IType javaEnum = findJavaType("JavaEnum");
-			assertNotNull(javaEnum);
-			renameJavaElement(javaEnum, "NewJavaEnum");
-			fileAsserts.assertFileContains(xtendClass, "NewJavaEnum fooBar");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaEnum.java");
+		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+		String xtendModel = "class XtendClass { JavaEnum fooBar }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaEnum = findJavaType("JavaEnum");
+		assertNotNull(javaEnum);
+		renameJavaElement(javaEnum, "NewJavaEnum");
+		fileAsserts.assertFileContains(xtendClass, "NewJavaEnum fooBar");
 	}
 
 	@Test
 	public void testRenameRefToJavaEnum() throws Exception {
-		try {
-			testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
-			String xtendModel = "class XtendClass { JavaEnum fooBar }";
-			XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
-			renameXtendElement(editor, xtendModel.indexOf("JavaEnum"), "NewJavaEnum");
-			fileAsserts.assertFileExists("src/NewJavaEnum.java");
-			assertDocumentContains(editor, "NewJavaEnum fooBar");
-		} finally {
-			testHelper.getProject().getFile("src/NewJavaEnum.java").delete(true, new NullProgressMonitor());
-		}
+		afterTestDeleteFiles("src/NewJavaEnum.java");
+		testHelper.createFile("JavaEnum.java", "public enum JavaEnum { FOO, BAR }");
+		String xtendModel = "class XtendClass { JavaEnum fooBar }";
+		XtextEditor editor = openEditorSafely("XtendClass.xtend", xtendModel);
+		renameXtendElement(editor, xtendModel.indexOf("JavaEnum"), "NewJavaEnum");
+		fileAsserts.assertFileExists("src/NewJavaEnum.java");
+		assertDocumentContains(editor, "NewJavaEnum fooBar");
 	}
 
 	@Test
@@ -680,7 +670,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 		renameXtendElement(editor, offset, "-");
 		assertDocumentContains(editor, xtendModel.replace("+", "-"));
 	}
-	
+
 	@Test
 	public void testRenameOperatorDef_03() throws Exception {
 		String xtendModel = "class XtendClass { def +(int i, int j) {} def bar() { 1 + 2 } }";
@@ -832,248 +822,188 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 
 	@Test
 	public void testRenameXtendClass() throws Exception {
-		try {
-			String xtendModel = "class XtendClass { }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(javaClass, "JavaClass extends NewXtendClass");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		String xtendModel = "class XtendClass { }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass extends XtendClass { }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(javaClass, "JavaClass extends NewXtendClass");
 	}
 
 	@Test
 	public void testRenameXtendClassStaticImport() throws Exception {
-		try {
-			String xtendModel = "package test; class XtendClass { static def foo() {} }";
-			IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
-			IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend", 
-					"package test; import static test.XtendClass.* class XtendClass2 { def bar() { foo } }");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(xtendClass2, "import static test.NewXtendClass.*");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		String xtendModel = "package test; class XtendClass { static def foo() {} }";
+		IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
+		IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend",
+				"package test; import static test.XtendClass.* class XtendClass2 { def bar() { foo } }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(xtendClass2, "import static test.NewXtendClass.*");
 	}
 
 	@Test
 	public void testRenameXtendClassStaticExtensionImport() throws Exception {
-		try {
-			String xtendModel = "package test; class XtendClass { static def foo(String s) {} }";
-			IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
-			IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend", 
-					"package test; import static extension test.XtendClass.* class XtendClass2 { def bar() { ''.foo } }");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(xtendClass2, "import static extension test.NewXtendClass.*");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/NewXtendClass.xtend");
+		String xtendModel = "package test; class XtendClass { static def foo(String s) {} }";
+		IFile xtendClass = testHelper.createFile("test/XtendClass.xtend", xtendModel);
+		IFile xtendClass2 = testHelper.createFile("test/XtendClass2.xtend",
+				"package test; import static extension test.XtendClass.* class XtendClass2 { def bar() { ''.foo } }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		fileAsserts.assertFileExists("src/test/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(xtendClass2, "import static extension test.NewXtendClass.*");
 	}
 
 	@Test
 	public void testRenameXtendClassWithDelegateConstructorCall_1() throws Exception {
-		try {
-			String xtendModel = "class XtendClass { new() { this(1) } new(int foo) {} }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		String xtendModel = "class XtendClass { new() { this(1) } new(int foo) {} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		fileAsserts.assertFileExists("src/NewXtendClass.xtend");
 	}
 
 	@Test
 	public void testRenameXtendClassWithDelegateConstructorCall_2() throws Exception {
-		try {
-			String xtendModel = "class XtendClass { } class SubClass { new() { super() } }";
-			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		String xtendModel = "class XtendClass { } class SubClass { new() { super() } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		fileAsserts.assertFileExists("src/NewXtendClass.xtend");
 	}
 
 	@Test
 	public void testRenameRefToXtendClass() throws Exception {
-		try {
-			testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
-			String xtendModel = "class XtendRef { XtendClass foo }";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
-			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
+		String xtendModel = "class XtendRef { XtendClass foo }";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+		IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
 	}
 
 	@Test
 	public void testRenameRefToXtendDefaultConstructor() throws Exception {
-		try {
-			testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
-			String xtendModel = "class XtendRef { def foo() { val bar = new XtendClass } }";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
-			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
+		String xtendModel = "class XtendRef { def foo() { val bar = new XtendClass } }";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+		IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {}");
 	}
 
 	@Test
 	public void testRenameRefToXtendDefinedConstructor() throws Exception {
-		try {
-			testHelper.createFile("XtendClass.xtend", "class XtendClass { new() {} }");
-			String xtendModel = "class XtendRef { def foo() { val bar = new XtendClass } }";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
-			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
-			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		testHelper.createFile("XtendClass.xtend", "class XtendClass { new() {} }");
+		String xtendModel = "class XtendRef { def foo() { val bar = new XtendClass } }";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+		assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+		IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
 	}
 
 	@Test
 	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402916
 	public void testRenameRefToXtendDefinedConstructorSameFile() throws Exception {
-		try {
-			String xtendModel = "class XtendClass { new() {} def foo() { new XtendClass } }";
-			IFile xtendRef = testHelper.createFile("XtendClass.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.lastIndexOf("XtendClass"), "NewXtendClass");
-			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
-			editor.doSave(new NullProgressMonitor());
-			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
-			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendClass.xtend");
+		String xtendModel = "class XtendClass { new() {} def foo() { new XtendClass } }";
+		IFile xtendRef = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.lastIndexOf("XtendClass"), "NewXtendClass");
+		assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+		editor.doSave(new NullProgressMonitor());
+		IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
 	}
 
 	@Test
 	public void testRenameXtendInterface() throws Exception {
-		try {
-			String xtendModel = "interface XtendInterface { }";
-			IFile xtendClass = testHelper.createFile("XtendInterface.xtend", xtendModel);
-			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass implements XtendInterface { }");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
-			fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
-			fileAsserts.assertFileContains(javaClass, "JavaClass implements NewXtendInterface");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendInterface.xtend");
+		String xtendModel = "interface XtendInterface { }";
+		IFile xtendClass = testHelper.createFile("XtendInterface.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass implements XtendInterface { }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
+		fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
+		fileAsserts.assertFileContains(javaClass, "JavaClass implements NewXtendInterface");
 	}
 
 	@Test
 	public void testRenameRefToXtendInterface() throws Exception {
-		try {
-			testHelper.createFile("XtendInterface.xtend", "interface XtendInterface {}");
-			String xtendModel = "class XtendRef { XtendInterface foo }";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
-			assertDocumentContains(editor, xtendModel.replace("XtendInterface", "NewXtendInterface"));
-			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
-			fileAsserts.assertFileContains(newXtendInterface, "interface NewXtendInterface {}");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendInterface.xtend");
+		testHelper.createFile("XtendInterface.xtend", "interface XtendInterface {}");
+		String xtendModel = "class XtendRef { XtendInterface foo }";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
+		assertDocumentContains(editor, xtendModel.replace("XtendInterface", "NewXtendInterface"));
+		IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
+		fileAsserts.assertFileContains(newXtendInterface, "interface NewXtendInterface {}");
 	}
 
 	@Test
 	public void testRenameXtendEnum() throws Exception {
-		try {
-			String xtendModel = "enum XtendEnum { FOO, BAR }";
-			IFile xtendClass = testHelper.createFile("XtendEnum.xtend", xtendModel);
-			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass { XtendEnum e; }");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
-			fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
-			fileAsserts.assertFileContains(javaClass, "{ NewXtendEnum e; }");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendEnum.xtend");
+		String xtendModel = "enum XtendEnum { FOO, BAR }";
+		IFile xtendClass = testHelper.createFile("XtendEnum.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass { XtendEnum e; }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
+		fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
+		fileAsserts.assertFileContains(javaClass, "{ NewXtendEnum e; }");
 	}
 
 	@Test
 	public void testRenameRefToXtendEnum() throws Exception {
-		try {
-			testHelper.createFile("XtendEnum.xtend", "enum XtendEnum { FOO, BAR }");
-			String xtendModel = "class XtendRef { XtendEnum foo }";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
-			assertDocumentContains(editor, xtendModel.replace("XtendEnum", "NewXtendEnum"));
-			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
-			fileAsserts.assertFileContains(newXtendInterface, "enum NewXtendEnum { FOO, BAR }");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendEnum.xtend");
+		testHelper.createFile("XtendEnum.xtend", "enum XtendEnum { FOO, BAR }");
+		String xtendModel = "class XtendRef { XtendEnum foo }";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
+		assertDocumentContains(editor, xtendModel.replace("XtendEnum", "NewXtendEnum"));
+		IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
+		fileAsserts.assertFileContains(newXtendInterface, "enum NewXtendEnum { FOO, BAR }");
 	}
 
 	@Test
 	public void testRenameXtendAnnotationType() throws Exception {
-		try {
-			String xtendModel = "annotation XtendAnnotation {}";
-			IFile xtendClass = testHelper.createFile("XtendAnnotation.xtend", xtendModel);
-			IFile javaClass = testHelper.createFile("JavaClass.java", "@XtendAnnotation public class JavaClass {}");
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
-			fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
-			fileAsserts.assertFileContains(javaClass, "@NewXtendAnnotation public class JavaClass {}");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendAnnotation.xtend");
+		String xtendModel = "annotation XtendAnnotation {}";
+		IFile xtendClass = testHelper.createFile("XtendAnnotation.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java", "@XtendAnnotation public class JavaClass {}");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
+		fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
+		fileAsserts.assertFileContains(javaClass, "@NewXtendAnnotation public class JavaClass {}");
 	}
 
 	@Test
 	public void testRenameRefToXtendAnnotation() throws Exception {
-		try {
-			testHelper.createFile("XtendAnnotation.xtend", "annotation XtendAnnotation {}");
-			String xtendModel = "@XtendAnnotation class XtendRef {}";
-			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendRef);
-			renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
-			assertDocumentContains(editor, xtendModel.replace("XtendAnnotation", "NewXtendAnnotation"));
-			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
-			fileAsserts.assertFileContains(newXtendInterface, "annotation NewXtendAnnotation {}");
-		} finally {
-			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/NewXtendAnnotation.xtend");
+		testHelper.createFile("XtendAnnotation.xtend", "annotation XtendAnnotation {}");
+		String xtendModel = "@XtendAnnotation class XtendRef {}";
+		IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendRef);
+		renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
+		assertDocumentContains(editor, xtendModel.replace("XtendAnnotation", "NewXtendAnnotation"));
+		IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
+		fileAsserts.assertFileContains(newXtendInterface, "annotation NewXtendAnnotation {}");
 	}
 
 	@Test
@@ -1146,68 +1076,52 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 
 	@Test
 	public void testRenameJavaClassStaticImport() throws Exception {
-		try {
-			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
-			testHelper.createFile("test/Extension.java", extensionModel);
-			String refModel = "import static test.Extension.* class XtendRef { def bar() { foo('') } }";
-			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
-			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/NewExtension.java");
+		String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+		testHelper.createFile("test/Extension.java", extensionModel);
+		String refModel = "import static test.Extension.* class XtendRef { def bar() { foo('') } }";
+		IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
+		renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+		fileAsserts.assertFileExists("src/test/NewExtension.java");
+		fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension");
 	}
-	
+
 	@Test
 	public void testRenameJavaClassStaticExtensionImport() throws Exception {
-		try {
-			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
-			testHelper.createFile("test/Extension.java", extensionModel);
-			String refModel = "import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
-			IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
-			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/NewExtension.java");
+		String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+		testHelper.createFile("test/Extension.java", extensionModel);
+		String refModel = "import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
+		IFile refXtendClass = testHelper.createFile("XtendRef.xtend", refModel);
+		renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+		fileAsserts.assertFileExists("src/test/NewExtension.java");
+		fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 	}
-	
+
 	@Test
 	public void testRenameJavaClassStaticImportSamePackage() throws Exception {
-		try {
-			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
-			testHelper.createFile("test/Extension.java", extensionModel);
-			String refModel = "package test import static test.Extension.* class XtendRef { def bar() { foo('') } }";
-			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
-			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension.*",  "class XtendRef { def bar() { foo('') } }");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/NewExtension.java");
+		String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+		testHelper.createFile("test/Extension.java", extensionModel);
+		String refModel = "package test import static test.Extension.* class XtendRef { def bar() { foo('') } }";
+		IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
+		renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+		fileAsserts.assertFileExists("src/test/NewExtension.java");
+		fileAsserts.assertFileContains(refXtendClass, "import static test.NewExtension.*", "class XtendRef { def bar() { foo('') } }");
 	}
-	
+
 	@Test
 	public void testRenameJavaClassStaticExtensionImportSamePackage() throws Exception {
-		try {
-			String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
-			testHelper.createFile("test/Extension.java", extensionModel);
-			String refModel = "package test import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
-			IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
-			renameJavaElement(findJavaType("test.Extension"), "NewExtension");
-			fileAsserts.assertFileExists("src/test/NewExtension.java");
-			fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
-		} finally {
-			testHelper.getProject().getFile("src/test/NewExtension.java").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/NewExtension.java");
+		String extensionModel = "package test; public class Extension { public static void foo(String it) {} }";
+		testHelper.createFile("test/Extension.java", extensionModel);
+		String refModel = "package test import static extension test.Extension.* class XtendRef { def bar() { ''.foo } }";
+		IFile refXtendClass = testHelper.createFile("test/XtendRef.xtend", refModel);
+		renameJavaElement(findJavaType("test.Extension"), "NewExtension");
+		fileAsserts.assertFileExists("src/test/NewExtension.java");
+		fileAsserts.assertFileContains(refXtendClass, "import static extension test.NewExtension.*");
 	}
-	
+
 	@Test
 	public void testRenameXtendProperty() throws Exception {
 		String xtendModel = "import org.eclipse.xtend.lib.Property class XtendClass { @Property int foo }";
@@ -1273,49 +1187,40 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactori
 		renameXtendElement(editor, xtendModel.indexOf("bar"), "baz");
 		assertDocumentContains(editor, "import static extension java.util.Collections.*");
 	}
-	
+
 	@Test
 	public void testBug489208_1() throws Exception {
-		try {
-			testHelper.getProject().close(null);
-			testHelper.getProject().open(null);
-			syncUtil.waitForBuild(null);
-			String xtendModel = "class FooBug489208 {new(BarBug489208 bar) {}}\n" +
-					"class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {} def void foo4() {new Foot(this) {}}}";
-			IFile xtendClass = testHelper.createFile("Foo.xtend", xtendModel);
-			final XtextEditor editor = openEditorSafely(xtendClass);
-			renameXtendElement(editor, xtendModel.indexOf("BarBug489208", 20), "BazBug489208");
-			assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
-		} finally {
-			testHelper.getProject().getFile("src/test/Foo.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/Foo.xtend");
+		testHelper.getProject().close(null);
+		testHelper.getProject().open(null);
+		syncUtil.waitForBuild(null);
+		String xtendModel = "class FooBug489208 {new(BarBug489208 bar) {}}\n"
+				+ "class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {} def void foo4() {new Foot(this) {}}}";
+		IFile xtendClass = testHelper.createFile("Foo.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("BarBug489208", 20), "BazBug489208");
+		assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
 	}
-	
+
 	@Test
 	public void testBug489208_2() throws Exception {
-		try {
-			testHelper.getProject().close(null);
-			testHelper.getProject().open(null);
-			syncUtil.waitForBuild(null);
-			String fooModel = "class FooBug489208 {new(BarBug489208 bar) {}}";
-			testHelper.createFile("FooBug489208.xtend", fooModel);
-			String barModel = "class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {}} def void foo4() {new Foot(this) {}}";
-			IFile barClass = testHelper.createFile("Bar.xtend", barModel);
-			final XtextEditor editor = openEditorSafely(barClass);
-			renameXtendElement(editor, barModel.indexOf("BarBug489208"), "BazBug489208");
-			assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
-			assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
-		} finally {
-			testHelper.getProject().getFile("src/test/FooBug489208.xtend").delete(true, new NullProgressMonitor());
-			testHelper.getProject().getFile("src/test/bar.xtend").delete(true, new NullProgressMonitor());
-			syncUtil.waitForBuild(null);
-		}
+		afterTestDeleteFilesAndWaitForBuild("src/test/FooBug489208.xtend", "src/test/bar.xtend");
+		testHelper.getProject().close(null);
+		testHelper.getProject().open(null);
+		syncUtil.waitForBuild(null);
+		String fooModel = "class FooBug489208 {new(BarBug489208 bar) {}}";
+		testHelper.createFile("FooBug489208.xtend", fooModel);
+		String barModel = "class BarBug489208 { public val f1 = new FooBug489208(this) {} public val f2 = new FooBug489208(this) {} public val f3 = new FooBug489208(this) {}} def void foo4() {new Foot(this) {}}";
+		IFile barClass = testHelper.createFile("Bar.xtend", barModel);
+		final XtextEditor editor = openEditorSafely(barClass);
+		renameXtendElement(editor, barModel.indexOf("BarBug489208"), "BazBug489208");
+		assertDocumentContains(editor, "public val f1 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f2 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "public val f3 = new FooBug489208(this) {}");
+		assertDocumentContains(editor, "def void foo4() {new Foot(this) {}}");
 	}
 	
 	@Test 
