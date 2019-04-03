@@ -15,10 +15,8 @@ dependencies {
 }
 
 jar.bnd(
-	'Bundle-Name', 'Xtext Servlet',
-	'Bundle-Vendor', 'Eclipse Xtext',
-	'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\"",
-	'Import-Package', '!org.eclipse.xtext.web.servlet.*',
-	'Import-Package', '*',
-	'Export-Package', "org.eclipse.xtext.web.servlet.*;version=\"${version}\""
+	'Bundle-Name': 'Xtext Servlet',
+	'Bundle-Vendor': 'Eclipse Xtext',
+	'Import-Package': "org.eclipse.xtext.web.server.*;version=\"${version}\",!org.eclipse.xtext.web.servlet.*,*",
+	'Export-Package': "org.eclipse.xtext.web.servlet.*;version=\"${version}\""
 )

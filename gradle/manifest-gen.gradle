@@ -13,17 +13,8 @@ else if (baseVersion.split('\\.').length == 4)
 def qualifiedVersion = baseVersion + '.v' + buildTime
 
 jar.bnd (
-	'Bundle-Version', qualifiedVersion,
-	'Import-Package', 'org.apache.log4j.*;version="1.2.15"',
-	'Import-Package', 'com.google.common.*;version="[14.0,22.0)"',
-	'Import-Package', 'org.eclipse.core.runtime.*;version=!;common=!',
-	'Import-Package', "org.eclipse.xtext.xbase.lib.*;version=\"${version}\"",
-	'Import-Package', '!org.eclipse.xtext.web.example.*',
-	'Import-Package', '!org.eclipse.xtext.idea.example.*',
-	'Import-Package', '!org.eclipse.xtend2.lib.*',
-	'Import-Package', '!org.eclipse.xtext.junit4.*',
-	'Import-Package', '!org.hamcrest.*',
-	'Import-Package', '!org.junit.*'
+	'Bundle-Version': qualifiedVersion,
+	'Import-Package': "org.apache.log4j.*;version='1.2.15',com.google.common.*;version='[14.0,22.0)',org.eclipse.core.runtime.*;version=!;common=!,org.eclipse.xtext.xbase.lib.*;version=\"${version}\",!org.eclipse.xtext.web.example.*,!org.eclipse.xtext.idea.example.*,!org.eclipse.xtend2.lib.*,!org.eclipse.xtext.junit4.*,!org.hamcrest.*,!org.junit.*"
 )
 
 //------------------------------------------------------

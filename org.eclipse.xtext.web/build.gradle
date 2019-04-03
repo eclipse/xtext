@@ -16,12 +16,10 @@ dependencies {
 }
 
 jar.bnd (
-	'Bundle-Name', 'Xtext Web Integration',
-	'Bundle-vendor','Eclipse Xtext',
-	'Import-Package', '!org.eclipse.xtext.web.*',
-	'Import-Package', '*',
-	'Export-Package', '!org.eclipse.xtext.web.server.test.*',
-	'Export-Package', "org.eclipse.xtext.web.*;version=\"${version}\""
+	'Bundle-Name': 'Xtext Web Integration',
+	'Bundle-vendor':'Eclipse Xtext',
+	'Import-Package': '!org.eclipse.xtext.web.*,*',
+	'Export-Package': "!org.eclipse.xtext.web.server.test.*',org.eclipse.xtext.web.*;version=\"${version}\""
 )
 
 node {

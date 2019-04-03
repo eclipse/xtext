@@ -12,11 +12,8 @@ dependencies {
 }
 
 jar.bnd(
-	'Bundle-Name', 'Xbase Web Integration',
-	'Bundle-Vendor', 'Eclipse Xtext',
-	'Import-Package', "org.eclipse.xtext.web.server.*;version=\"${version}\"",
-	'Import-Package', '!org.eclipse.xtext.xbase.web.*',
-	'Import-Package', '*',
-	'Export-Package', '!org.eclipse.xtext.xbase.web.test.*',
-	'Export-Package', "org.eclipse.xtext.xbase.web.*;version=\"${version}\""
+	'Bundle-Name': 'Xbase Web Integration',
+	'Bundle-Vendor': 'Eclipse Xtext',
+	'Import-Package': "org.eclipse.xtext.web.server.*;version=\"${version}\",!org.eclipse.xtext.xbase.web.*,*",
+	'Export-Package': "!org.eclipse.xtext.xbase.web.test.*,org.eclipse.xtext.xbase.web.*;version=\"${version}\""
 )
