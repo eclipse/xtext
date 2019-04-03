@@ -28,11 +28,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class ClosedProjectsQueue {
 
+	/**
+	 * @since 2.18
+	 */
 	private static final Logger log = Logger.getLogger(ClosedProjectsQueue.class);
 
 	/**
 	 * The system property {@code org.eclipse.xtext.builder.impl.ClosedProjectsQueue.MAX_ATTEMPTS} can be used to change the maximum number
 	 * of attempts. Defaults to {@code 100}.
+	 * 
+	 * @since 2.18
 	 */
 	private static final int MAX_ATTEMPTS = Integer.getInteger("org.eclipse.xtext.builder.impl.ClosedProjectsQueue.MAX_ATTEMPTS", 100);
 
@@ -52,9 +57,14 @@ public class ClosedProjectsQueue {
 		 * A counter of the number of attempted reschedules so far.
 		 * 
 		 * If a task was rescheduled more than {@link #MAX_ATTEMPTS} times, it won't be rescheduled again.
+		 * 
+		 * @since 2.18
 		 */
 		private final int attempt;
 
+		/**
+		 * @since 2.18
+		 */
 		protected Task(ImmutableSet<String> projectNames, ToBeBuilt toBeBuilt, int attempt) {
 			this.projectNames = projectNames;
 			this.toBeBuilt = toBeBuilt;
@@ -98,6 +108,9 @@ public class ClosedProjectsQueue {
 			return toBeBuilt;
 		}
 
+		/**
+		 * @since 2.18
+		 */
 		public int getAttempt() {
 			return attempt;
 		}
@@ -130,6 +143,7 @@ public class ClosedProjectsQueue {
 	 * @param attempt
 	 *            the counter for the number of attempts.
 	 * 
+	 * @since 2.18
 	 */
 	protected void insert(Set<String> projectNames, ToBeBuilt toBeBuilt, int attempt) {
 		internalQueue.addFirst(new Task(ImmutableSet.copyOf(projectNames), toBeBuilt, attempt));
