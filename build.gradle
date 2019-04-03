@@ -11,7 +11,7 @@ buildscript {
 	dependencies {
 		classpath "org.xtext:xtext-gradle-plugin:$versions.xtext_gradle_plugin"
 		classpath "io.spring.gradle:dependency-management-plugin:$versions.dependency_management_plugin"
-		classpath 'biz.aQute.bnd:biz.aQute.bnd.gradle:4.2.0'
+		classpath "biz.aQute.bnd:biz.aQute.bnd.gradle:$versions.bnd"
 	}
 }
 
