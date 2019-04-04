@@ -265,15 +265,17 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
               final Function1<OutputConfiguration.SourceMapping, Boolean> _function = (OutputConfiguration.SourceMapping it) -> {
                 return Boolean.valueOf(it.getSourceFolder().endsWith(dir));
               };
-              final OutputConfiguration.SourceMapping sourceMappingForOutput = IterableExtensions.<OutputConfiguration.SourceMapping>head(IterableExtensions.<OutputConfiguration.SourceMapping>filter(outputConfiguration.getSourceMappings(), _function));
-              String _xifexpression = null;
-              if ((sourceMappingForOutput != null)) {
-                _xifexpression = sourceMappingForOutput.getSourceFolder();
-              } else {
-                _xifexpression = dir;
+              final Iterable<OutputConfiguration.SourceMapping> sourceMappingsThatMatchTheCurrentOutputDirectory = IterableExtensions.<OutputConfiguration.SourceMapping>filter(outputConfiguration.getSourceMappings(), _function);
+              for (final OutputConfiguration.SourceMapping sourceMapping : sourceMappingsThatMatchTheCurrentOutputDirectory) {
+                {
+                  final String sourceFolder = sourceMapping.getSourceFolder();
+                  boolean _isPrefixOf = new Path(sourceFolder).isPrefixOf(projectRelativePath);
+                  if (_isPrefixOf) {
+                    return true;
+                  }
+                }
               }
-              Path outputPath = new Path(_xifexpression);
-              boolean _isPrefixOf = outputPath.isPrefixOf(projectRelativePath);
+              boolean _isPrefixOf = new Path(dir).isPrefixOf(projectRelativePath);
               if (_isPrefixOf) {
                 return true;
               }

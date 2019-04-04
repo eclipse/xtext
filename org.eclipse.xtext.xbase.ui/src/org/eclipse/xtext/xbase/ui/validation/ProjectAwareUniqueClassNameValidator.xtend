@@ -174,6 +174,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 
 	def protected isDerived(IResource resource) {
 		try {
+			// Nullcheck for test org.eclipse.xtext.xbase.ui.tests.validation.ProjectAwareUniqueClassNameValidatorTest
 			if (derivedResourceMarkers !== null && derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
 				return true
 			}
@@ -182,9 +183,17 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				val projectRelativePath = resource.projectRelativePath
 				for(outputConfiguration: outputConfigurations) {
 					for(dir: outputConfiguration.outputDirectories) {
-						val sourceMappingForOutput = outputConfiguration.sourceMappings.filter[it.sourceFolder.endsWith(dir)].head
-						var outputPath = new Path(if(sourceMappingForOutput !== null) sourceMappingForOutput.sourceFolder else dir)
-						if (outputPath.isPrefixOf(projectRelativePath)) {
+						// Check if there is a sourceFolder that ends with the path of the current output dir
+						val sourceMappingsThatMatchTheCurrentOutputDirectory = outputConfiguration.sourceMappings.filter[it.sourceFolder.endsWith(dir)]
+						for(sourceMapping: sourceMappingsThatMatchTheCurrentOutputDirectory){
+							val sourceFolder = sourceMapping.sourceFolder
+							// Check if there is a sourceMapping that matches the current output dir and is a prefix of the projectRelativePath
+							if(new Path(sourceFolder).isPrefixOf(projectRelativePath)){
+								return true
+							}
+						}
+						// In case no sourceMapping matches
+						if (new Path(dir).isPrefixOf(projectRelativePath)) {
 							return true
 						}
 					}
