@@ -693,21 +693,17 @@ public class MergeableManifest2 implements Cloneable {
 			for (int i = 0; i < list.size(); i++) {
 				Bundle oldBundle = list.get(i);
 				if (oldBundle.hasSameName(newBundle)) {
-					String oldBundleName = oldBundle.getName();
+					String oldBundleNameIncludingWhitespacePrefix = oldBundle.getNameIncludingWhitespacePrefix();
 					String oldBundleVersion = oldBundle.getVersion();
 					String oldBundleSuffix = oldBundle.getSuffix();
 					String bundleVersion = oldBundleVersion == null ? newBundle.getVersion() : oldBundleVersion;
 					merged = true;
-					if (oldBundleSuffix == null) {
-						if (bundleVersion != null) {
-							list.set(i, Bundle.fromNameVersion(oldBundleName, bundleVersion));
-						}
-					} else {
-						if (bundleVersion != null) {
-							if (oldBundleVersion == null) {
-								list.set(i,
-										Bundle.fromNameVersionSuffix(oldBundleName, bundleVersion, oldBundleSuffix));
-							}
+					if (bundleVersion != null) {
+						if (oldBundleSuffix == null) {
+							list.set(i, Bundle.fromNameVersion(oldBundleNameIncludingWhitespacePrefix, bundleVersion));
+						} else if (oldBundleVersion == null) {
+							list.set(i, Bundle.fromNameVersionSuffix(oldBundleNameIncludingWhitespacePrefix,
+									bundleVersion, oldBundleSuffix));
 						}
 					}
 				}
@@ -775,6 +771,10 @@ public class MergeableManifest2 implements Cloneable {
 			return split.get(0).trim();
 		}
 
+		public String getNameIncludingWhitespacePrefix() {
+			return split.get(0);
+		}
+		
 		public String getSuffix() {
 			return split.size() > 1 ? split.subList(1, split.size()).stream().reduce((a, b) -> a + ";" + b).get()
 					: null;
