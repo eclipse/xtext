@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -113,16 +112,13 @@ public class BatchModification {
 			}
 			resolved.add(new ResolvedModification(obj, modification));
 		}
-		progress.worked(5);
+		progress.split(5);
 		IChangeSerializer serializer = serializerProvider.get();
 		SubMonitor subProgress = SubMonitor.convert(progress.split(80), resolved.size());
 		for (ResolvedModification mod : resolved) {
-			if (monitor.isCanceled()) {
-				throw new OperationCanceledException();
-			}
 			serializer.setProgressMonitor(subProgress.split(1));
 			mod.modification.apply(mod.object, serializer);
-			subProgress.worked(1);
+			subProgress.split(1);
 		}
 		boolean first = true;
 		for (ResolvedModification mod : resolved) {
@@ -140,20 +136,16 @@ public class BatchModification {
 				}
 			}
 		}
-		if (monitor.isCanceled()) {
-			throw new OperationCanceledException();
-		}
+		progress.split(1); // 15 ticks yet available
 		ChangeConverter converter = changeConverterFactory.create("Resolving Issues", null, issueAcceptor);
 		serializer.applyModifications(converter);
-		if (monitor.isCanceled()) {
-			throw new OperationCanceledException();
-		}
+		progress.split(1);
 		Change change = converter.getChange();
 		if (change != null) {
-			change.initializeValidationData(monitor);
-			new PerformChangeOperation(change).run(monitor);
+			change.initializeValidationData(progress.split(3));
+			new PerformChangeOperation(change).run(progress.split(10));
 		}
-		progress.done(); // remaining 15 ticks
+		progress.done();
 	}
 
 	public IXtextDocument getDocument() {
