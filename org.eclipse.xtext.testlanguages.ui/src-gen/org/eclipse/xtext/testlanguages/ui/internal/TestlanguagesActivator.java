@@ -18,6 +18,8 @@ import org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiMo
 import org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.fileAware.ui.FileAwareTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.nestedRefs.NestedRefsTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.nestedRefs.ui.NestedRefsTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageRuntimeModule;
@@ -39,6 +41,7 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE = "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE = "org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE = "org.eclipse.xtext.testlanguages.fileAware.FileAwareTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NESTEDREFS_NESTEDREFSTESTLANGUAGE = "org.eclipse.xtext.testlanguages.nestedRefs.NestedRefsTestLanguage";
 	
 	private static final Logger logger = Logger.getLogger(TestlanguagesActivator.class);
 	
@@ -106,6 +109,9 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE.equals(grammar)) {
 			return new FileAwareTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NESTEDREFS_NESTEDREFSTESTLANGUAGE.equals(grammar)) {
+			return new NestedRefsTestLanguageRuntimeModule();
+		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
@@ -127,6 +133,9 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_FILEAWARE_FILEAWARETESTLANGUAGE.equals(grammar)) {
 			return new FileAwareTestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NESTEDREFS_NESTEDREFSTESTLANGUAGE.equals(grammar)) {
+			return new NestedRefsTestLanguageUiModule(this);
 		}
 		throw new IllegalArgumentException(grammar);
 	}

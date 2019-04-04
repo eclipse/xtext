@@ -25,7 +25,6 @@ public class FoldingTestLanguageInjectorProvider implements IInjectorProvider, I
 	@Override
 	public Injector getInjector() {
 		if (injector == null) {
-			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = internalCreateInjector();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
@@ -60,7 +59,11 @@ public class FoldingTestLanguageInjectorProvider implements IInjectorProvider, I
 
 	@Override
 	public void setupRegistry() {
-		getInjector();
-		stateAfterInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		if (injector == null) {
+			getInjector();
+		} else {
+			stateAfterInjectorCreation.restoreGlobalState();
+		}
 	}
 }
