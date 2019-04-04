@@ -55,6 +55,7 @@ public class FoldingTestLanguageInjectorProvider implements IInjectorProvider, I
 	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = null;
 	}
 
 	@Override

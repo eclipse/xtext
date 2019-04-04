@@ -22,6 +22,7 @@ var lineDelimiter = '\n'
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
+		scanClassPath = true
 		platformUri = "${runtimeProject}/../.."
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 	} 
