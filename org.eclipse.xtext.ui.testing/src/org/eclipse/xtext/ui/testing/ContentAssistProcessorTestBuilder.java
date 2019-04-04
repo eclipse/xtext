@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.testing;
 
 import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -379,7 +381,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse));
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(currentModelToParse, getEncoding()));
 		final IXtextDocument xtextDocument = getDocument(xtextResource, currentModelToParse);
 		XtextSourceViewerConfiguration configuration = get(XtextSourceViewerConfiguration.class);
 		Shell shell = new Shell();
@@ -401,6 +403,13 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		} finally {
 			shell.dispose();
 		}
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	public String getEncoding() {
+		return Charset.defaultCharset().name();
 	}
 
 	public ContentAssistProcessorTestBuilder assertCursorIsAfter(String text) {
@@ -519,7 +528,13 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	protected IXtextDocument getDocument(final String currentModelToParse) {
-		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(currentModelToParse)));
+		StringInputStream in;
+		try {
+			in = new StringInputStream(Strings.emptyIfNull(currentModelToParse), getEncoding());
+		} catch (UnsupportedEncodingException e) {
+			in = new StringInputStream(Strings.emptyIfNull(currentModelToParse));
+		}
+		final XtextResource xtextResource = loadHelper.getResourceFor(in);
 		if (announceDirtyState) {
 			dirtyResource = new IDirtyResource() {
 				@Override

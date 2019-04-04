@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.tests.refactoring;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
+import java.nio.charset.StandardCharsets;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -66,6 +68,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		super.setUp();
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		project.getProject().setDefaultCharset(StandardCharsets.ISO_8859_1.name(), new NullProgressMonitor());
 		Injector injector = TestsActivator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 		testFile = IResourcesSetupUtil.createFile(TEST_FILE_PATH, TEST_FILE_CONTENT);

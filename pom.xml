@@ -54,4 +54,7 @@
 		<module>org.eclipse.xtext.xtext.ui.tests</module>
 	</modules>
 
+	<build>
+		<defaultGoal>install</defaultGoal>
+	</build>
 </project>
