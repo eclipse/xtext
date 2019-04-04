@@ -58,6 +58,20 @@ public class ProjectAwareUniqueClassNameValidatorTest {
   }
   
   @Test
+  public void testIfDerived_MavenPath_4() {
+    final OutputConfiguration output = new OutputConfiguration("TEST");
+    output.setOutputDirectory("xtend_gen");
+    final OutputConfiguration.SourceMapping sourceMapping = new OutputConfiguration.SourceMapping("src/main/xtend_gen");
+    output.getSourceMappings().add(sourceMapping);
+    final OutputConfiguration.SourceMapping sourceMapping2 = new OutputConfiguration.SourceMapping("src/test/xtend_gen");
+    output.getSourceMappings().add(sourceMapping2);
+    this.classNameValidator.getContext().put("ProjectAwareUniqueClassNameValidator.outputConfigs", Collections.<OutputConfiguration>unmodifiableList(CollectionLiterals.<OutputConfiguration>newArrayList(output)));
+    Path _path = new Path("foo/src/test/xtend_gen/org/eclipse/test/foo.bar");
+    final MockedFile file = new MockedFile(_path, null);
+    Assert.assertTrue(this.classNameValidator.isDerived(file));
+  }
+  
+  @Test
   public void testIfDerived_Plain() {
     final OutputConfiguration output = new OutputConfiguration("TEST");
     output.setOutputDirectory("xtend_gen");

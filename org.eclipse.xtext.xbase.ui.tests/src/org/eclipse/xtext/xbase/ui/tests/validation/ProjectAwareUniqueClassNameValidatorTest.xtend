@@ -59,6 +59,19 @@ class ProjectAwareUniqueClassNameValidatorTest {
 	}
 	
 	@Test
+	def void testIfDerived_MavenPath_4() {
+		val output = new OutputConfiguration("TEST")
+		output.outputDirectory = "xtend_gen"
+		val sourceMapping = new SourceMapping("src/main/xtend_gen")
+		output.sourceMappings.add(sourceMapping)
+		val sourceMapping2 = new SourceMapping("src/test/xtend_gen")
+		output.sourceMappings.add(sourceMapping2)
+		classNameValidator.context.put("ProjectAwareUniqueClassNameValidator.outputConfigs", #[output])
+		val file = new MockedFile(new Path("foo/src/test/xtend_gen/org/eclipse/test/foo.bar"), null)
+		assertTrue(classNameValidator.isDerived(file))
+	}
+	
+	@Test
 	def void testIfDerived_Plain() {
 		val output = new OutputConfiguration("TEST")
 		output.outputDirectory = "xtend_gen"
