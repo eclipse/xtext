@@ -66,9 +66,8 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 
 	public static class XbaseTestStandaloneSetup extends XbaseStandaloneSetup {
