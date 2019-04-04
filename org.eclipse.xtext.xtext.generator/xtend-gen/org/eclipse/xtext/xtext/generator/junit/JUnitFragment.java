@@ -513,13 +513,10 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
           _builder.append("getInjector();");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("} else {");
-          _builder.newLine();
-          _builder.append("\t\t\t");
-          _builder.append("stateAfterInjectorCreation.restoreGlobalState();");
+          _builder.append("}");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("}");
+          _builder.append("stateAfterInjectorCreation.restoreGlobalState();");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("}");
