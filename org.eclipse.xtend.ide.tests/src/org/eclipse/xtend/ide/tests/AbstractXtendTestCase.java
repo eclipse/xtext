@@ -8,8 +8,11 @@
 package org.eclipse.xtend.ide.tests;
 
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,7 +76,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
-		resource.load(new StringInputStream(string), null);
+		resource.load(new StringInputStream(string, StandardCharsets.ISO_8859_1.name()), Collections.singletonMap(XtextResource.OPTION_ENCODING, StandardCharsets.ISO_8859_1.name()));
 		if (shouldBeSyntacticallyValid) {
 			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		}

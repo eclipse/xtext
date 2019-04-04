@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -447,6 +448,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);
+		projectFactory.setProjectDefaultCharset(StandardCharsets.ISO_8859_1.name());
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(
 			JavaCore.BUILDER_ID, 

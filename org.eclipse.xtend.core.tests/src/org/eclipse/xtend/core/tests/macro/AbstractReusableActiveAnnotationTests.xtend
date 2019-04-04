@@ -2922,6 +2922,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Ignore("FIXME: Issue 1311 - Make system encoding independent")
 	@Test def void testImportFromTypeReference_01() {
 		assertGeneratedCode(
 			'myannotation/AnnotationImportFromTypeReference.xtend' -> "
@@ -2971,6 +2972,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		)
 	}
 	
+	@Ignore("FIXME: Issue 1311 - Make system encoding independent")
 	@Test def void testImportFromTypeReference_02() {
 		assertGeneratedCode(
 			'myannotation/AnnotationImportFromTypeReference.xtend' -> "
@@ -3166,7 +3168,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 			}
 		]
 	}
-		
+	
+	@Ignore("FIXME: Issue 1311 - Make system encoding independent")
 	@Test def void testFileSystemSupport_01() {
 
 		assertProcessing(

@@ -9,6 +9,8 @@ package org.eclipse.xtend.ide.tests.autoedit;
 
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
@@ -76,6 +78,7 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 				projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 				projectFactory.setProjectName(name);
+				projectFactory.setProjectDefaultCharset(StandardCharsets.ISO_8859_1.name());
 				projectFactory.addFolders(Collections.singletonList("src"));
 				projectFactory.addBuilderIds(
 					JavaCore.BUILDER_ID, 

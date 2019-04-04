@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests;
 
 import static com.google.common.collect.Lists.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,6 +17,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.tests.util.TemporaryFolder;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -25,12 +27,12 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtend.core.tests.util.TemporaryFolder;
-import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -73,7 +75,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
-		resource.load(new StringInputStream(string), null);
+		resource.load(new LazyStringInputStream(string, StandardCharsets.ISO_8859_1.name()), null);
 		if (shouldBeSyntacticallyValid) {
 			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		}

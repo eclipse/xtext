@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -272,6 +273,7 @@ public class WorkbenchTestHelper extends Assert {
 		Injector injector = XtendActivator.getInstance().getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
+		projectFactory.setProjectDefaultCharset(StandardCharsets.ISO_8859_1.name());
 		projectFactory.setBreeToUse(getBree(javaVersion));
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",

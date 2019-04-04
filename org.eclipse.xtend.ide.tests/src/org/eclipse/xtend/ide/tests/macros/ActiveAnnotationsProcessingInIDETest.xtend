@@ -36,6 +36,7 @@ import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
+import java.nio.charset.StandardCharsets
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -169,7 +170,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	def IFile newSource(IJavaProject it, String fileName, String contents) {
 		val result = it.project.getFile("src/" + fileName)
 		createIfNotExistent(result.parent)
-		result.create(new StringInputStream(contents), true, null)
+		result.create(new StringInputStream(contents, StandardCharsets.ISO_8859_1.name), true, null)
 		return result
 	}
 	

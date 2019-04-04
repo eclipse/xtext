@@ -5,11 +5,8 @@ if [ -z "$JENKINS_URL" ]; then
 fi
 
 ./gradlew \
-  clean cleanGenerateXtext build createLocalMavenRepo \
+  longrunningTest \
   -PuseJenkinsSnapshots=true \
   -PJENKINS_URL=$JENKINS_URL \
-  -PcompileXtend=true \
   -PignoreTestFailures=true \
-  --refresh-dependencies \
-  --continue \
   $@
