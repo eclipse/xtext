@@ -174,7 +174,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 
 	def protected isDerived(IResource resource) {
 		try {
-			if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
+			if (derivedResourceMarkers !== null && derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
 				return true
 			}
 			val outputConfigurations = context.get(OUTPUT_CONFIGS) as Collection<OutputConfiguration>
@@ -182,7 +182,9 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				val projectRelativePath = resource.projectRelativePath
 				for(outputConfiguration: outputConfigurations) {
 					for(dir: outputConfiguration.outputDirectories) {
-						if (new Path(dir).isPrefixOf(projectRelativePath)) {
+						val sourceMappingForOutput = outputConfiguration.sourceMappings.filter[it.sourceFolder.endsWith(dir)].head
+						var outputPath = new Path(if(sourceMappingForOutput !== null) sourceMappingForOutput.sourceFolder else dir)
+						if (outputPath.isPrefixOf(projectRelativePath)) {
 							return true
 						}
 					}
