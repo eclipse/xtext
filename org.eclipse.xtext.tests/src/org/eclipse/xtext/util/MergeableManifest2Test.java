@@ -1409,6 +1409,62 @@ public class MergeableManifest2Test {
 		assertEquals(expected, write(manifest));
 	}
 
+	@Test
+	public void readWrite_addRequiredBundle_newVersion() throws Exception {
+		// @formatter:off
+		String content =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types," + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		String expected =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util;bundle-version=\"1.0\"," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addRequiredBundles("org.eclipse.xtext.util;bundle-version=\"1.0\"");
+		
+		assertEquals(expected, write(manifest));
+	}
+
+	@Test
+	public void readWrite_addRequiredBundle_newVersion_firstEntry() throws Exception {
+		// @formatter:off
+		String content =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types," + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		String expected =
+			"Manifest-Version: 1.0" + NL + 
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Require-Bundle: org.eclipse.xtext;bundle-version=\"1.0\"," + NL + 
+			" org.eclipse.xtext.xbase," + NL + 
+			" org.eclipse.xtext.util," + NL + 
+			" org.antlr.runtime;bundle-version=\"[3.2.0,3.2.1)\"," + NL + 
+			" org.eclipse.xtext.common.types" + NL + 
+			"Automatic-Module-Name: org.eclipse.xtext.example.homeautomation" + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addRequiredBundles("org.eclipse.xtext;bundle-version=\"1.0\"");
+		
+		assertEquals(expected, write(manifest));
+	}
+
 	/**
 	 * In this final test we read all "META-INF/MANIFEST.MF" files from
 	 * classpath. We the:
