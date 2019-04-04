@@ -57,7 +57,7 @@ public class InjectorProviderTest {
 		runtime.setupRegistry();
 		runtime.restoreRegistry();
 		
-		// run next ui test and check that we see the correct resource description manager
+		// run next ui test and check that we see the correct validator configuration
 		
 		CompositeEValidator newValidator = (CompositeEValidator) uiValidatorRegistry.getEValidator(FoldingPackage.eINSTANCE);
 		Assert.assertEquals(validators, newValidator.getContents());
