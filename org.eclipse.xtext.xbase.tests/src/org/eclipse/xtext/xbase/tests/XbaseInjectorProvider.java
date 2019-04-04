@@ -66,9 +66,8 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 
 	public static class XbaseTestStandaloneSetup extends XbaseStandaloneSetup {
@@ -84,7 +83,7 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		public ClassLoader bindClassLoaderToInstance() {
 			return XbaseTestRuntimeModule.class.getClassLoader();
 		}
-		
+
 		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
 			return CachingClasspathTypeProviderFactory.class;
 		}
@@ -92,17 +91,17 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
 			return SynchronizedXtextResourceSetProvider.class;
 		}
-		
+
 		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
 			return SingletonPreferenceValuesProvider.class;
 		}
-		
+
 		@Override
 		public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
 			return SuspiciousOverloadIsErrorInTests.class;
 		}
 	}
-	
+
 	@Singleton
 	public static class SuspiciousOverloadIsErrorInTests extends XbaseConfigurableIssueCodes {
 		@Override
