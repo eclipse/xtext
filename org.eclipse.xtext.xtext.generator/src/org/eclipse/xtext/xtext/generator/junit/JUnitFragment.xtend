@@ -172,7 +172,6 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 				@Override
 				public «Injector» getInjector() {
 					if (injector == null) {
-						stateBeforeInjectorCreation = «globalRegistries».makeCopyOfGlobalState();
 						this.injector = internalCreateInjector();
 						stateAfterInjectorCreation = «globalRegistries».makeCopyOfGlobalState();
 					}
@@ -203,12 +202,17 @@ class JUnitFragment extends AbstractStubGeneratingFragment {
 				@Override
 				public void restoreRegistry() {
 					stateBeforeInjectorCreation.restoreGlobalState();
+					stateBeforeInjectorCreation = null;
 				}
 			
 				@Override
 				public void setupRegistry() {
-					getInjector();
-					stateAfterInjectorCreation.restoreGlobalState();
+					stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+					if (injector == null) {
+						getInjector();
+					} else {
+						stateAfterInjectorCreation.restoreGlobalState();
+					}
 				}
 			}
 		'''
