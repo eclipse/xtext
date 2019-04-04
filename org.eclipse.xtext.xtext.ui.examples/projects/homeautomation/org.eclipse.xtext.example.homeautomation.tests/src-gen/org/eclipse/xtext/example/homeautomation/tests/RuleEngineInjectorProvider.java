@@ -24,7 +24,6 @@ public class RuleEngineInjectorProvider implements IInjectorProvider, IRegistryC
 	@Override
 	public Injector getInjector() {
 		if (injector == null) {
-			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = internalCreateInjector();
 			stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		}
@@ -55,11 +54,16 @@ public class RuleEngineInjectorProvider implements IInjectorProvider, IRegistryC
 	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = null;
 	}
 
 	@Override
 	public void setupRegistry() {
-		getInjector();
-		stateAfterInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		if (injector == null) {
+			getInjector();
+		} else {
+			stateAfterInjectorCreation.restoreGlobalState();
+		}
 	}
 }

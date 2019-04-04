@@ -31,8 +31,8 @@ public class XtextOutlineTreeProviderTest extends AbstractXtextTests {
 
 	@Override
 	public void setUp() throws Exception {
-		super.setUp();
 		final Injector injector = Activator.getDefault().getInjector("org.eclipse.xtext.Xtext");
+		super.setUp();
 		with(new ISetup() {
 			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
