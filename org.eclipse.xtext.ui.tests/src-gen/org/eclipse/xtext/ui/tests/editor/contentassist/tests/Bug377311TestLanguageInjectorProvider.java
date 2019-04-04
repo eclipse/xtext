@@ -63,8 +63,7 @@ public class Bug377311TestLanguageInjectorProvider implements IInjectorProvider,
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 }

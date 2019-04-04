@@ -63,8 +63,7 @@ public class EnumRulesUiTestLanguageInjectorProvider implements IInjectorProvide
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 }

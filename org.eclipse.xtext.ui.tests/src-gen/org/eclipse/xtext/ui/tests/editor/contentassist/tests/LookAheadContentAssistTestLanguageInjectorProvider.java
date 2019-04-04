@@ -63,8 +63,7 @@ public class LookAheadContentAssistTestLanguageInjectorProvider implements IInje
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 }

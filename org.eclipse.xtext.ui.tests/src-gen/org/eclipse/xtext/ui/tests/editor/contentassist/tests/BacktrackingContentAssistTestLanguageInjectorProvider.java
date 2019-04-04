@@ -63,8 +63,7 @@ public class BacktrackingContentAssistTestLanguageInjectorProvider implements II
 		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		if (injector == null) {
 			getInjector();
-		} else {
-			stateAfterInjectorCreation.restoreGlobalState();
 		}
+		stateAfterInjectorCreation.restoreGlobalState();
 	}
 }
