@@ -39,6 +39,7 @@ subprojects {
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	
+	apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
