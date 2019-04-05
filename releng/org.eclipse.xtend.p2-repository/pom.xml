@@ -19,8 +19,8 @@
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-                    <repositoryName>Xtend Repository</repositoryName>
-                </configuration>
+					<repositoryName>Xtend Repository</repositoryName>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
