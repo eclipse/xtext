@@ -61,7 +61,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		}
 		try {
 			IXtextDocument doc = (IXtextDocument) document;
-			String result = doc.readOnly(new IUnitOfWork<String, XtextResource>() {
+			String result = doc.tryReadOnly(new IUnitOfWork<String, XtextResource>() {
 				@Override
 				public String exec(XtextResource resource) throws Exception {
 					return computeResultText(document, command, resource);

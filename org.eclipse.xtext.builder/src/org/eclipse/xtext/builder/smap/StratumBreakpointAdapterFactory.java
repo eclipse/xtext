@@ -109,7 +109,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final int offset = ((ITextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 			
-			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
+			Data data = xtextEditor.getDocument().tryReadOnly(new IUnitOfWork<Data, XtextResource>() {
 				@Override
 				public Data exec(XtextResource state) throws Exception {
 					IResourceServiceProvider provider = state.getResourceServiceProvider();
@@ -126,6 +126,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					return result;
 				}
 			});
+
+			if (data == null) return;
 
 			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(breakpointResource, breakpointUri, line);
 

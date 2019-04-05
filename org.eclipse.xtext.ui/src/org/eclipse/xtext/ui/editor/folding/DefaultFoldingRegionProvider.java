@@ -70,12 +70,10 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	
 	@Override
 	public Collection<FoldedPosition> getFoldingRegions(final IXtextDocument xtextDocument) {
-		return xtextDocument.readOnly(new CancelableUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
+		return xtextDocument.tryReadOnly(new CancelableUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
 			@Override
 			public Collection<FoldedPosition> exec(XtextResource xtextResource, CancelIndicator cancelIndicator)
 					throws Exception {
-				if (xtextResource == null)
-					return Collections.emptyList();
 				try {
 					DefaultFoldingRegionProvider.this.cancelIndicator = cancelIndicator;
 					return doGetFoldingRegions(xtextDocument, xtextResource);
@@ -83,7 +81,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 					DefaultFoldingRegionProvider.this.cancelIndicator = null;
 				}
 			}
-		});
+		}, () -> Collections.emptyList());
 	}
 
 	/**

@@ -39,13 +39,11 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		if (this.document != null)
 			throw new IllegalStateException("Dirty resource was already connected to another document");
 		this.document = document;
-		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+		document.tryReadOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) {
-				if (resource != null) {
-					DocumentBasedDirtyResource.this.normalizedUri = EcoreUtil2.getNormalizedURI(resource);
-					initiallyProcessResource(resource);
-				}
+				DocumentBasedDirtyResource.this.normalizedUri = EcoreUtil2.getNormalizedURI(resource);
+				initiallyProcessResource(resource);
 			}
 		});
 	}
@@ -80,16 +78,14 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	 */
 	@Override
 	public IResourceDescription get() {
-		IResourceDescription result = document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>() {
+		IResourceDescription result = document.tryReadOnly(new IUnitOfWork<IResourceDescription, XtextResource>() {
 			@Override
 			public IResourceDescription exec(XtextResource resource) {
-				if (resource != null) {
-					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
-					if (serviceProvider != null) {
-						IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
-						if (manager != null) {
-							return manager.getResourceDescription(resource);
-						}
+				IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
+				if (serviceProvider != null) {
+					IResourceDescription.Manager manager = serviceProvider.getResourceDescriptionManager();
+					if (manager != null) {
+						return manager.getResourceDescription(resource);
 					}
 				}
 				return null;

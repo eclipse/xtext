@@ -143,12 +143,12 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 				int coarseGrainedChangesSeen = coarseGrainedChanges.get();
 				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChangesSeen > 0 };
 				final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
-				Collection<Resource> affectedResources = document.readOnly(
+				Collection<Resource> affectedResources = document.tryReadOnly(
 						new IUnitOfWork<Collection<Resource>, XtextResource>() {
 					
 							@Override
 							public Collection<Resource> exec(XtextResource resource) throws Exception {
-								if (resource == null || resource.getResourceSet() == null) {
+								if (resource.getResourceSet() == null) {
 									return null;
 								}
 								Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());

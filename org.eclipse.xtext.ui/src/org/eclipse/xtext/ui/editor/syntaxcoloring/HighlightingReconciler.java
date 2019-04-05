@@ -333,7 +333,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 					if (mySourceViewer != null) {
 						IXtextDocument document = (IXtextDocument) mySourceViewer.getDocument();
 						if (document != null) {
-							document.readOnly(new CancelableUnitOfWork<Void,XtextResource>() {
+							document.tryReadOnly(new CancelableUnitOfWork<Void,XtextResource>() {
 								@Override
 								public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator)
 										throws Exception {

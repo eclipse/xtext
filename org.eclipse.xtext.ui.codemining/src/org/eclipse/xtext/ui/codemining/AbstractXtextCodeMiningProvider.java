@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.codemining;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
@@ -77,7 +78,7 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 				}
 
 			};
-			return XtextDocumentUtil.get(viewer).readOnly(uow);
+			return XtextDocumentUtil.get(viewer).tryReadOnly(uow, () -> Collections.emptyList());
 		});
 		return future;
 	}
