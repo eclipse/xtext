@@ -79,6 +79,15 @@ public class WorkspaceManager {
     this.buildListeners.add(listener);
   }
   
+  /**
+   * Removes a build listener if it was previously registered
+   * 
+   * @since 2.18
+   */
+  public void removeBuildListener(final ILanguageServerAccess.IBuildListener listener) {
+    this.buildListeners.remove(listener);
+  }
+  
   private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
   
   private Map<URI, Document> openDocuments = CollectionLiterals.<URI, Document>newHashMap();

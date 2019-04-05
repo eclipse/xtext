@@ -56,6 +56,15 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		this.buildListeners += listener
 	}
 
+	/**
+	 * Removes a build listener if it was previously registered
+	 * 
+	 * @since 2.18
+	 */
+	def void removeBuildListener(IBuildListener listener) {
+		buildListeners.remove(listener)
+	}
+
 	Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
 
 	Map<URI, Document> openDocuments = newHashMap()
