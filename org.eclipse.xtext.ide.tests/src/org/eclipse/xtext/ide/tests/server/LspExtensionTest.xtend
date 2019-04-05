@@ -42,5 +42,23 @@ class LspExtensionTest extends AbstractTestLangLanguageServerTest {
 		Assert.assertEquals("baz test", result.text)
 		Assert.assertEquals(2, notifications.map[value].filter(BuildNotification).size)
 	}
-	
+
+	@Test def void testExtension_readIndex() {
+		'model.testlang'.writeFile('''
+			type C {
+			  op baz() { }
+			}
+			type A {
+			  op foo() { }
+			}
+			type B {
+			  op bar() { }
+			}
+		''')
+		initialize
+		val ext = ServiceEndpoints.toServiceObject(languageServer, TestLangLSPExtension)
+		val actual = ext.allOpNames.get.toList.sort
+		Assert.assertEquals(#['bar', 'baz', 'foo'], actual)
+	}
+
 }

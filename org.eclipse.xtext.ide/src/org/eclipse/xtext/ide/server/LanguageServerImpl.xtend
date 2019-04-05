@@ -712,12 +712,12 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 	ILanguageServerAccess access = new ILanguageServerAccess () {
 		
 		override <T> doRead(String uri, Function<Context, T> function) {
-				requestManager.runRead [ cancelIndicator |
-					workspaceManager.doRead(uri.toUri) [ document, resource |
-						val ctx = new Context(resource, document, workspaceManager.isDocumentOpen(resource.URI), cancelIndicator)
-						return function.apply(ctx)
-					]
+			requestManager.runRead [ cancelIndicator |
+				workspaceManager.doRead(uri.toUri) [ document, resource |
+					val ctx = new Context(resource, document, workspaceManager.isDocumentOpen(resource.URI), cancelIndicator)
+					return function.apply(ctx)
 				]
+			]
 		}
 		
 		override addBuildListener(IBuildListener listener) {
@@ -738,6 +738,14 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		override getInitializeParams() {
 			params
 		}
+
+		override <T> doReadIndex(Function<? super IndexContext, ? extends T> function) {
+			requestManager.runRead[ cancelIndicator |
+				val ctx = new IndexContext(workspaceManager.index, cancelIndicator)
+				return function.apply(ctx)
+			]
+		}
+
 	}
 	
 	override afterBuild(List<Delta> deltas) {

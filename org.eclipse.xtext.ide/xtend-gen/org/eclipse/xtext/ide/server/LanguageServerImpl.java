@@ -1145,6 +1145,16 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     public InitializeParams getInitializeParams() {
       return LanguageServerImpl.this.params;
     }
+    
+    @Override
+    public <T extends Object> CompletableFuture<T> doReadIndex(final Function<? super ILanguageServerAccess.IndexContext, ? extends T> function) {
+      final Function1<CancelIndicator, T> _function = (CancelIndicator cancelIndicator) -> {
+        IResourceDescriptions _index = LanguageServerImpl.this.workspaceManager.getIndex();
+        final ILanguageServerAccess.IndexContext ctx = new ILanguageServerAccess.IndexContext(_index, cancelIndicator);
+        return function.apply(ctx);
+      };
+      return LanguageServerImpl.this.requestManager.<T>runRead(_function);
+    }
   };
   
   @Override

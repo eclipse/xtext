@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide
 
 import com.google.inject.ImplementedBy
 import java.util.List
+import java.util.Set
 import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.jsonrpc.Endpoint
@@ -16,11 +17,12 @@ import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
 import org.eclipse.lsp4j.jsonrpc.services.JsonNotification
 import org.eclipse.lsp4j.jsonrpc.services.JsonRequest
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.ide.server.ILanguageServerAccess
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.ide.server.ILanguageServerExtension
 import org.eclipse.xtext.resource.IResourceDescription.Delta
-import org.eclipse.xtend.lib.annotations.ToString
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage
 
 /**
  * @author efftinge - Initial contribution and API
@@ -30,6 +32,9 @@ interface TestLangLSPExtension extends ILanguageServerExtension {
 	
 	@JsonRequest
 	def CompletableFuture<TextOfLineResult> getTextOfLine(TextOfLineParam param)
+
+	@JsonRequest
+	def CompletableFuture<Set<String>> getAllOpNames()
 
 	static class TextOfLineResult {
 		public String text
@@ -84,6 +89,14 @@ interface TestLangLSPExtension extends ILanguageServerExtension {
 			result.putAll(ServiceEndpoints.getSupportedMethods(CustomClient))
 			return result
 		}
-		
+
+		override getAllOpNames() {
+			return access.doReadIndex([ context |
+				context.index.allResourceDescriptions.map[exportedObjects].flatten.filter [
+					EClass === TestLanguagePackage.Literals.OPERATION
+				].map[name.lastSegment].toSet
+			])
+		}
+
 	}
 }

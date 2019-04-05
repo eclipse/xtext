@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -121,6 +122,70 @@ public interface ILanguageServerAccess {
     }
   }
   
+  @Data
+  public static class IndexContext {
+    private final IResourceDescriptions index;
+    
+    private final CancelIndicator cancelChecker;
+    
+    public IndexContext(final IResourceDescriptions index, final CancelIndicator cancelChecker) {
+      super();
+      this.index = index;
+      this.cancelChecker = cancelChecker;
+    }
+    
+    @Override
+    @Pure
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((this.index== null) ? 0 : this.index.hashCode());
+      return prime * result + ((this.cancelChecker== null) ? 0 : this.cancelChecker.hashCode());
+    }
+    
+    @Override
+    @Pure
+    public boolean equals(final Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (getClass() != obj.getClass())
+        return false;
+      ILanguageServerAccess.IndexContext other = (ILanguageServerAccess.IndexContext) obj;
+      if (this.index == null) {
+        if (other.index != null)
+          return false;
+      } else if (!this.index.equals(other.index))
+        return false;
+      if (this.cancelChecker == null) {
+        if (other.cancelChecker != null)
+          return false;
+      } else if (!this.cancelChecker.equals(other.cancelChecker))
+        return false;
+      return true;
+    }
+    
+    @Override
+    @Pure
+    public String toString() {
+      ToStringBuilder b = new ToStringBuilder(this);
+      b.add("index", this.index);
+      b.add("cancelChecker", this.cancelChecker);
+      return b.toString();
+    }
+    
+    @Pure
+    public IResourceDescriptions getIndex() {
+      return this.index;
+    }
+    
+    @Pure
+    public CancelIndicator getCancelChecker() {
+      return this.cancelChecker;
+    }
+  }
+  
   public interface IBuildListener {
     public abstract void afterBuild(final List<IResourceDescription.Delta> deltas);
   }
@@ -129,6 +194,13 @@ public interface ILanguageServerAccess {
    * provides read access to a fully resolved resource and Document.
    */
   public abstract <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function);
+  
+  /**
+   * Provides read access to the Xtext index.
+   * 
+   * @since 2.18
+   */
+  public abstract <T extends Object> CompletableFuture<T> doReadIndex(final Function<? super ILanguageServerAccess.IndexContext, ? extends T> function);
   
   /**
    * registers a build listener on the this language server
@@ -148,9 +220,9 @@ public interface ILanguageServerAccess {
    * In order not to mess up the originals, the resp. models should be loaded into a
    * new resource set which this method provides.
    * 
-   * @param uri a file URI used to detect the project to configure the scoüpe of the resource set.
+   * @param uri a file URI used to detect the project to configure the scope of the resource set.
    * @return a new empty resource set, configured with the project the <code>uri</code>
-   *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
+   *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
    *   reflect model changes immediately.
    * @since 2.18
    */

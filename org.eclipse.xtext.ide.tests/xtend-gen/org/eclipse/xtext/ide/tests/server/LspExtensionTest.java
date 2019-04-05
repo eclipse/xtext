@@ -8,12 +8,15 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.collect.Iterables;
+import java.util.Collections;
+import java.util.List;
 import org.eclipse.lsp4j.DidOpenTextDocumentParams;
 import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -67,6 +70,41 @@ public class LspExtensionTest extends AbstractTestLangLanguageServerTest {
         return it.getValue();
       };
       Assert.assertEquals(2, IterableExtensions.size(Iterables.<TestLangLSPExtension.BuildNotification>filter(ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_2), TestLangLSPExtension.BuildNotification.class)));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testExtension_readIndex() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type C {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("op baz() { }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("type A {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("op foo() { }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("type B {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("op bar() { }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.writeFile("model.testlang", _builder);
+      this.initialize();
+      final TestLangLSPExtension ext = ServiceEndpoints.<TestLangLSPExtension>toServiceObject(this.languageServer, TestLangLSPExtension.class);
+      final List<String> actual = IterableExtensions.<String>sort(IterableExtensions.<String>toList(ext.getAllOpNames().get()));
+      Assert.assertEquals(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("bar", "baz", "foo")), actual);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
