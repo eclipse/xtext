@@ -30,7 +30,8 @@ ENTRYPOINT "/bin/bash"
 
 USER 0
 RUN dnf --assumeyes install \
-  java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk-src.x86_64 \
+  java-1.8.0-openjdk.x86_64 \
+  java-1.8.0-openjdk-src.x86_64 \
   groovy \
   maven \
   hub
@@ -38,4 +39,5 @@ USER default
 
 # needed for Xtend MOJO IT tests
 ENV M2_HOME=/usr/share/maven
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 
