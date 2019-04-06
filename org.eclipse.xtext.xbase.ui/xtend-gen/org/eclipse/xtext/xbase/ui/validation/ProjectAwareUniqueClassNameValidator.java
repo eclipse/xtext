@@ -251,9 +251,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   
   protected boolean isDerived(final IResource resource) {
     try {
-      int _length = this.derivedResourceMarkers.findDerivedResourceMarkers(resource).length;
-      boolean _greaterEqualsThan = (_length >= 1);
-      if (_greaterEqualsThan) {
+      if (((this.derivedResourceMarkers != null) && (this.derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1))) {
         return true;
       }
       Object _get = this.getContext().get(ProjectAwareUniqueClassNameValidator.OUTPUT_CONFIGS);
@@ -263,9 +261,24 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         for (final OutputConfiguration outputConfiguration : outputConfigurations) {
           Set<String> _outputDirectories = outputConfiguration.getOutputDirectories();
           for (final String dir : _outputDirectories) {
-            boolean _isPrefixOf = new Path(dir).isPrefixOf(projectRelativePath);
-            if (_isPrefixOf) {
-              return true;
+            {
+              final Function1<OutputConfiguration.SourceMapping, Boolean> _function = (OutputConfiguration.SourceMapping it) -> {
+                return Boolean.valueOf(it.getSourceFolder().endsWith(dir));
+              };
+              final Iterable<OutputConfiguration.SourceMapping> sourceMappingsThatMatchTheCurrentOutputDirectory = IterableExtensions.<OutputConfiguration.SourceMapping>filter(outputConfiguration.getSourceMappings(), _function);
+              for (final OutputConfiguration.SourceMapping sourceMapping : sourceMappingsThatMatchTheCurrentOutputDirectory) {
+                {
+                  final String sourceFolder = sourceMapping.getSourceFolder();
+                  boolean _isPrefixOf = new Path(sourceFolder).isPrefixOf(projectRelativePath);
+                  if (_isPrefixOf) {
+                    return true;
+                  }
+                }
+              }
+              boolean _isPrefixOf = new Path(dir).isPrefixOf(projectRelativePath);
+              if (_isPrefixOf) {
+                return true;
+              }
             }
           }
         }
