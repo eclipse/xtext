@@ -86,6 +86,5 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.nestedRefs.validation,
  org.eclipse.xtext.testlanguages.nestedRefs.serializer,
  org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.util,
- org.eclipse.xtext.testlanguages.nestedRefs.formatting2,
  org.eclipse.xtext.testlanguages.nestedRefs.nestedRefs.impl
 Automatic-Module-Name: org.eclipse.xtext.testlanguages
