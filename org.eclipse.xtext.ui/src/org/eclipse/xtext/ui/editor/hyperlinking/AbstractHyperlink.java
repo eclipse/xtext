@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.hyperlinking;
 
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 
@@ -17,7 +18,7 @@ public abstract class AbstractHyperlink implements IHyperlink {
 
 	private String hyperlinkText;
 	private String typeLabel;
-	private Region hyperlinkRegion;
+	private IRegion hyperlinkRegion;
 
 	@Override
 	public String getHyperlinkText() {
@@ -38,10 +39,21 @@ public abstract class AbstractHyperlink implements IHyperlink {
 	}
 
 	@Override
-	public Region getHyperlinkRegion() {
+	public IRegion getHyperlinkRegion() {
 		return hyperlinkRegion;
 	}
 
+	/**
+	 * since 2.18
+	 */
+	public void setHyperlinkRegion(IRegion hyperlinkRegion) {
+		this.hyperlinkRegion = hyperlinkRegion;
+	}
+
+	/**
+	 * @deprecated use {@link #setHyperlinkRegion(IRegion)} instead.
+	 */
+	@Deprecated
 	public void setHyperlinkRegion(Region hyperlinkRegion) {
 		this.hyperlinkRegion = hyperlinkRegion;
 	}
