@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring2.participant;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -68,7 +69,7 @@ public class ResourceRelocationProcessor {
   private ResourceURIConverter _resourceURIConverter;
   
   @Inject
-  private IChangeSerializer changeSerializer;
+  private Provider<IChangeSerializer> changeSerializerProvider;
   
   @Inject
   private ResourceRelocationStrategyRegistry strategyRegistry;
@@ -87,15 +88,16 @@ public class ResourceRelocationProcessor {
     if (_isEmpty) {
       return null;
     }
+    final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
     final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
     this.liveScopeResourceSetInitializer.initialize(resourceSet);
-    final ResourceRelocationContext context = new ResourceRelocationContext(type, this.uriChanges, this.issues, this.changeSerializer, resourceSet);
+    final ResourceRelocationContext context = new ResourceRelocationContext(type, this.uriChanges, this.issues, changeSerializer, resourceSet);
     this.executeParticipants(context);
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
     };
     final ChangeConverter changeConverter = this.changeConverterFactory.create(name, _function, this.issues);
-    this.changeSerializer.applyModifications(changeConverter);
+    changeSerializer.applyModifications(changeConverter);
     return changeConverter.getChange();
   }
   

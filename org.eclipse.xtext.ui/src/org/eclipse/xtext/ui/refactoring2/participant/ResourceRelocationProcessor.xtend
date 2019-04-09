@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring2.participant
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.util.List
 import java.util.Set
 import org.apache.log4j.Logger
@@ -46,7 +47,12 @@ class ResourceRelocationProcessor {
 	@Inject LiveScopeResourceSetInitializer liveScopeResourceSetInitializer
 	@Accessors(PACKAGE_GETTER) @Inject LtkIssueAcceptor issues
 	@Inject extension ResourceURIConverter
-	@Inject IChangeSerializer changeSerializer
+	
+	// don't hold an instance of IChangeSerializer in a field,
+	//  as that will get blown up with temporary data (loaded resources, etc.)
+	// which may yield a memory leak as reported in #1048;
+	// hence request an instance on demand and dispose it properly
+	@Inject Provider<IChangeSerializer> changeSerializerProvider
 	@Inject ResourceRelocationStrategyRegistry strategyRegistry
 	@Inject ChangeConverter.Factory changeConverterFactory
 
@@ -60,6 +66,7 @@ class ResourceRelocationProcessor {
 					IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		if (uriChanges.empty)
 			return null
+		val changeSerializer = changeSerializerProvider.get();
 		val resourceSet = resourceSetProvider.get(project)
 		liveScopeResourceSetInitializer.initialize(resourceSet)
 		val context = new ResourceRelocationContext(type, uriChanges, issues, changeSerializer, resourceSet)
