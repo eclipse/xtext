@@ -37,6 +37,24 @@ public interface TestLanguageFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Package Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Package Declaration</em>'.
+   * @generated
+   */
+  PackageDeclaration createPackageDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Abstract Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Element</em>'.
+   * @generated
+   */
+  AbstractElement createAbstractElement();
+
+  /**
    * Returns a new object of class '<em>Type Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

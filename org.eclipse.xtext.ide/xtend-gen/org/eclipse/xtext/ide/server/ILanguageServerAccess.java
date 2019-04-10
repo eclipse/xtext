@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
@@ -233,4 +234,11 @@ public interface ILanguageServerAccess {
    * @since 2.18
    */
   public abstract InitializeParams getInitializeParams();
+  
+  /**
+   * Returns with the {@link InitializeResult} of the LS.
+   * 
+   * @since 2.18
+   */
+  public abstract InitializeResult getInitializeResult();
 }

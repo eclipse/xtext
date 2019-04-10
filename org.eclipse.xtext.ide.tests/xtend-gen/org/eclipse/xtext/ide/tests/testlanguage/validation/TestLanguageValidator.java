@@ -35,7 +35,7 @@ public class TestLanguageValidator extends AbstractTestLanguageValidator {
     boolean _not = (!_isUpperCase);
     if (_not) {
       this.warning("Name should start with a capital", 
-        TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, 
+        TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME, 
         TestLanguageValidator.INVALID_NAME);
     }
   }
@@ -51,7 +51,7 @@ public class TestLanguageValidator extends AbstractTestLanguageValidator {
     if (_notEquals) {
       this.warning(
         "Members should be in alphabetic order.", 
-        TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, 
+        TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME, 
         TestLanguageValidator.UNSORTED_MEMBERS);
     }
   }

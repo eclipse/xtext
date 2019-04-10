@@ -105,7 +105,7 @@ public class SemanticHighlightingCalculatorImpl extends DefaultSemanticHighlight
   }
   
   protected boolean _doHighlightElement(final TypeDeclaration it, final IHighlightedPositionAcceptor acceptor) {
-    return this.doHighlightNode(acceptor, it, TestLanguagePackage.Literals.TYPE_DECLARATION__NAME, SemanticHighlightingCalculatorImpl.TYPE_DECLARATION_STYLE);
+    return this.doHighlightNode(acceptor, it, TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME, SemanticHighlightingCalculatorImpl.TYPE_DECLARATION_STYLE);
   }
   
   protected boolean _doHighlightElement(final PrimitiveType it, final IHighlightedPositionAcceptor acceptor) {
@@ -135,12 +135,12 @@ public class SemanticHighlightingCalculatorImpl extends DefaultSemanticHighlight
       return _doHighlightElement((PrimitiveType)it, acceptor);
     } else if (it instanceof Property) {
       return _doHighlightElement((Property)it, acceptor);
+    } else if (it instanceof TypeDeclaration) {
+      return _doHighlightElement((TypeDeclaration)it, acceptor);
     } else if (it instanceof TypeReference) {
       return _doHighlightElement((TypeReference)it, acceptor);
     } else if (it instanceof Parameter) {
       return _doHighlightElement((Parameter)it, acceptor);
-    } else if (it instanceof TypeDeclaration) {
-      return _doHighlightElement((TypeDeclaration)it, acceptor);
     } else if (it != null) {
       return _doHighlightElement(it, acceptor);
     } else {

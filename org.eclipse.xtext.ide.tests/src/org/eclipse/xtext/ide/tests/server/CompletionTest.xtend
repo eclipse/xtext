@@ -20,6 +20,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 		testCompletion [
 			model = ''
 			expectedCompletionItems = '''
+				package -> package [[0, 0] .. [0, 0]]
 				type -> type [[0, 0] .. [0, 0]]
 				Sample Snippet -> type ${1|A,B,C|} {
 				                
@@ -119,6 +120,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
             line = 1
             column = 0
             expectedCompletionItems = '''
+               (Keyword) package -> package [[1, 0] .. [1, 0]]
                (Keyword) type -> type [[1, 0] .. [1, 0]]
                (Snippet|Snippet) Sample Snippet -> type ${1|A,B,C|} {
                                

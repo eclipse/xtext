@@ -17,6 +17,7 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
@@ -34,9 +35,9 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
   private TestLanguageGrammarAccess _testLanguageGrammarAccess;
   
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
-    EList<TypeDeclaration> _types = model.getTypes();
-    for (final TypeDeclaration type : _types) {
-      document.<TypeDeclaration>format(type);
+    EList<AbstractElement> _elements = model.getElements();
+    for (final AbstractElement type : _elements) {
+      document.<AbstractElement>format(type);
     }
   }
   
@@ -78,11 +79,11 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
     } else if (property instanceof Property) {
       _format((Property)property, document);
       return;
-    } else if (property instanceof Model) {
-      _format((Model)property, document);
-      return;
     } else if (property instanceof TypeDeclaration) {
       _format((TypeDeclaration)property, document);
+      return;
+    } else if (property instanceof Model) {
+      _format((Model)property, document);
       return;
     } else if (property instanceof EObject) {
       _format((EObject)property, document);

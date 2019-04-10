@@ -15,10 +15,12 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
@@ -42,6 +44,20 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass packageDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -187,9 +203,49 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Types()
+  public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPackageDeclaration()
+  {
+    return packageDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPackageDeclaration_Elements()
+  {
+    return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAbstractElement()
+  {
+    return abstractElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractElement_Name()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -207,19 +263,9 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeDeclaration_Name()
-  {
-    return (EAttribute)typeDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getTypeDeclaration_SuperType()
   {
-    return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -229,7 +275,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    */
   public EReference getTypeDeclaration_Members()
   {
-    return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(2);
+    return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -463,10 +509,15 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__TYPES);
+    createEReference(modelEClass, MODEL__ELEMENTS);
+
+    packageDeclarationEClass = createEClass(PACKAGE_DECLARATION);
+    createEReference(packageDeclarationEClass, PACKAGE_DECLARATION__ELEMENTS);
+
+    abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__NAME);
 
     typeDeclarationEClass = createEClass(TYPE_DECLARATION);
-    createEAttribute(typeDeclarationEClass, TYPE_DECLARATION__NAME);
     createEReference(typeDeclarationEClass, TYPE_DECLARATION__SUPER_TYPE);
     createEReference(typeDeclarationEClass, TYPE_DECLARATION__MEMBERS);
 
@@ -531,6 +582,8 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    packageDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
+    typeDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
     propertyEClass.getESuperTypes().add(this.getMember());
     operationEClass.getESuperTypes().add(this.getMember());
     typeReferenceEClass.getESuperTypes().add(this.getType());
@@ -538,10 +591,15 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Types(), this.getTypeDeclaration(), null, "types", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(packageDeclarationEClass, PackageDeclaration.class, "PackageDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPackageDeclaration_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, PackageDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractElement_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeDeclarationEClass, TypeDeclaration.class, "TypeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeDeclaration_Name(), theEcorePackage.getEString(), "name", null, 0, 1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTypeDeclaration_SuperType(), this.getTypeDeclaration(), null, "superType", null, 0, 1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTypeDeclaration_Members(), this.getMember(), null, "members", null, 0, -1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

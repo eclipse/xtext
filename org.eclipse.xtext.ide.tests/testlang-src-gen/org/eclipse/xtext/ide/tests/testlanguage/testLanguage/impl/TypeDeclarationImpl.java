@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -35,35 +34,14 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getMembers <em>Members</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements TypeDeclaration
+public class TypeDeclarationImpl extends AbstractElementImpl implements TypeDeclaration
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
    * <!-- begin-user-doc -->
@@ -103,29 +81,6 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   protected EClass eStaticClass()
   {
     return TestLanguagePackage.Literals.TYPE_DECLARATION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.TYPE_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -211,8 +166,6 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case TestLanguagePackage.TYPE_DECLARATION__NAME:
-        return getName();
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         if (resolve) return getSuperType();
         return basicGetSuperType();
@@ -233,9 +186,6 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case TestLanguagePackage.TYPE_DECLARATION__NAME:
-        setName((String)newValue);
-        return;
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         setSuperType((TypeDeclaration)newValue);
         return;
@@ -257,9 +207,6 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case TestLanguagePackage.TYPE_DECLARATION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         setSuperType((TypeDeclaration)null);
         return;
@@ -280,31 +227,12 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case TestLanguagePackage.TYPE_DECLARATION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         return superType != null;
       case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
         return members != null && !members.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //TypeDeclarationImpl

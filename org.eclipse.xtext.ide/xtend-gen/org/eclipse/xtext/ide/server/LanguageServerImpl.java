@@ -68,9 +68,12 @@ import org.eclipse.lsp4j.InitializedParams;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.LocationLink;
 import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PrepareRenameResult;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.RenameCapabilities;
+import org.eclipse.lsp4j.RenameOptions;
 import org.eclipse.lsp4j.RenameParams;
 import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities;
 import org.eclipse.lsp4j.ServerCapabilities;
@@ -209,6 +212,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   private InitializeParams params;
   
+  private InitializeResult initializeResult;
+  
   private CompletableFuture<InitializedParams> initialized = new CompletableFuture<InitializedParams>();
   
   @Inject
@@ -279,10 +284,41 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
-      final Function1<IResourceServiceProvider, Boolean> _function_5 = (IResourceServiceProvider it_1) -> {
-        return Boolean.valueOf(((it_1.<IRenameService>get(IRenameService.class) != null) || (it_1.<IRenameService2>get(IRenameService2.class) != null)));
-      };
-      it.setRenameProvider(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_5)));
+      ClientCapabilities _capabilities = null;
+      if (params!=null) {
+        _capabilities=params.getCapabilities();
+      }
+      TextDocumentClientCapabilities _textDocument = null;
+      if (_capabilities!=null) {
+        _textDocument=_capabilities.getTextDocument();
+      }
+      RenameCapabilities _rename = null;
+      if (_textDocument!=null) {
+        _rename=_textDocument.getRename();
+      }
+      Boolean _prepareSupport = null;
+      if (_rename!=null) {
+        _prepareSupport=_rename.getPrepareSupport();
+      }
+      final boolean clientPrepareSupport = Objects.equal(Boolean.TRUE, _prepareSupport);
+      Either<Boolean, RenameOptions> _xifexpression = null;
+      if ((clientPrepareSupport && IterableExtensions.exists(this.getAllLanguages(), ((Function1<IResourceServiceProvider, Boolean>) (IResourceServiceProvider it_1) -> {
+        IRenameService2 _get = it_1.<IRenameService2>get(IRenameService2.class);
+        return Boolean.valueOf((_get != null));
+      })))) {
+        RenameOptions _renameOptions = new RenameOptions();
+        final Procedure1<RenameOptions> _function_5 = (RenameOptions it_1) -> {
+          it_1.setPrepareProvider(Boolean.valueOf(true));
+        };
+        RenameOptions _doubleArrow_2 = ObjectExtensions.<RenameOptions>operator_doubleArrow(_renameOptions, _function_5);
+        _xifexpression = Either.<Boolean, RenameOptions>forRight(_doubleArrow_2);
+      } else {
+        final Function1<IResourceServiceProvider, Boolean> _function_6 = (IResourceServiceProvider it_1) -> {
+          return Boolean.valueOf(((it_1.<IRenameService>get(IRenameService.class) != null) || (it_1.<IRenameService2>get(IRenameService2.class) != null)));
+        };
+        _xifexpression = Either.<Boolean, RenameOptions>forLeft(Boolean.valueOf(IterableExtensions.exists(this.getAllLanguages(), _function_6)));
+      }
+      it.setRenameProvider(_xifexpression);
       final ClientCapabilities clientCapabilities = params.getCapabilities();
       WorkspaceClientCapabilities _workspace = null;
       if (clientCapabilities!=null) {
@@ -296,11 +332,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       if (_tripleNotEquals) {
         this.commandRegistry.initialize(this.getAllLanguages(), clientCapabilities, this.client);
         ExecuteCommandOptions _executeCommandOptions = new ExecuteCommandOptions();
-        final Procedure1<ExecuteCommandOptions> _function_6 = (ExecuteCommandOptions it_1) -> {
+        final Procedure1<ExecuteCommandOptions> _function_7 = (ExecuteCommandOptions it_1) -> {
           it_1.setCommands(this.commandRegistry.getCommands());
         };
-        ExecuteCommandOptions _doubleArrow_2 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_6);
-        it.setExecuteCommandProvider(_doubleArrow_2);
+        ExecuteCommandOptions _doubleArrow_3 = ObjectExtensions.<ExecuteCommandOptions>operator_doubleArrow(_executeCommandOptions, _function_7);
+        it.setExecuteCommandProvider(_doubleArrow_3);
       }
       this.semanticHighlightingRegistry.initialize(this.getAllLanguages(), clientCapabilities, this.client);
       List<List<String>> _allScopes = this.semanticHighlightingRegistry.getAllScopes();
@@ -328,6 +364,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return null;
     };
     final Function<Object, InitializeResult> _function_3 = (Object it) -> {
+      this.initializeResult = result;
       return result;
     };
     return this.requestManager.<Object, Object>runWrite(_function_1, _function_2).<InitializeResult>thenApply(_function_3);
@@ -1000,6 +1037,38 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     return this.requestManager.<WorkspaceEdit>runRead(_function);
   }
   
+  /**
+   * @since 2.18
+   */
+  @Override
+  public CompletableFuture<Either<Range, PrepareRenameResult>> prepareRename(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, Either<Range, PrepareRenameResult>> _function = (CancelIndicator cancelIndicator) -> {
+      Either<Range, PrepareRenameResult> _xblockexpression = null;
+      {
+        final URI uri = this._uriExtensions.toUri(params.getTextDocument().getUri());
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        IRenameService2 _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<IRenameService2>get(IRenameService2.class);
+        }
+        final IRenameService2 renameService = _get;
+        if ((renameService == null)) {
+          throw new UnsupportedOperationException();
+        }
+        IRenameService2.PrepareRenameOptions _prepareRenameOptions = new IRenameService2.PrepareRenameOptions();
+        final Procedure1<IRenameService2.PrepareRenameOptions> _function_1 = (IRenameService2.PrepareRenameOptions it) -> {
+          it.setLanguageServerAccess(this.access);
+          it.setParams(params);
+          it.setCancelIndicator(cancelIndicator);
+        };
+        IRenameService2.PrepareRenameOptions _doubleArrow = ObjectExtensions.<IRenameService2.PrepareRenameOptions>operator_doubleArrow(_prepareRenameOptions, _function_1);
+        _xblockexpression = renameService.prepareRename(_doubleArrow);
+      }
+      return _xblockexpression;
+    };
+    return this.requestManager.<Either<Range, PrepareRenameResult>>runRead(_function);
+  }
+  
   @Override
   public void notify(final String method, final Object parameter) {
     Collection<Endpoint> _get = this.extensionProviders.get(method);
@@ -1154,6 +1223,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         return function.apply(ctx);
       };
       return LanguageServerImpl.this.requestManager.<T>runRead(_function);
+    }
+    
+    @Override
+    public InitializeResult getInitializeResult() {
+      return LanguageServerImpl.this.initializeResult;
     }
   };
   

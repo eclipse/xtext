@@ -72,13 +72,13 @@ public interface TestLanguagePackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Types</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__TYPES = 0;
+  int MODEL__ELEMENTS = 0;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -90,14 +90,14 @@ public interface TestLanguagePackage extends EPackage
   int MODEL_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl <em>Type Declaration</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getTypeDeclaration()
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.AbstractElementImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getAbstractElement()
    * @generated
    */
-  int TYPE_DECLARATION = 1;
+  int ABSTRACT_ELEMENT = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -106,7 +106,72 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION__NAME = 0;
+  int ABSTRACT_ELEMENT__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Abstract Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PackageDeclarationImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getPackageDeclaration()
+   * @generated
+   */
+  int PACKAGE_DECLARATION = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PACKAGE_DECLARATION__NAME = ABSTRACT_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PACKAGE_DECLARATION__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Package Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PACKAGE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl <em>Type Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getTypeDeclaration()
+   * @generated
+   */
+  int TYPE_DECLARATION = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_DECLARATION__NAME = ABSTRACT_ELEMENT__NAME;
 
   /**
    * The feature id for the '<em><b>Super Type</b></em>' reference.
@@ -115,7 +180,7 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION__SUPER_TYPE = 1;
+  int TYPE_DECLARATION__SUPER_TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -124,7 +189,7 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION__MEMBERS = 2;
+  int TYPE_DECLARATION__MEMBERS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Type Declaration</em>' class.
@@ -133,7 +198,7 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION_FEATURE_COUNT = 3;
+  int TYPE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.MemberImpl <em>Member</em>}' class.
@@ -143,7 +208,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getMember()
    * @generated
    */
-  int MEMBER = 2;
+  int MEMBER = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -171,7 +236,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getProperty()
    * @generated
    */
-  int PROPERTY = 3;
+  int PROPERTY = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -208,7 +273,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getType()
    * @generated
    */
-  int TYPE = 4;
+  int TYPE = 6;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -236,7 +301,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 5;
+  int OPERATION = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -291,7 +356,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperationCall()
    * @generated
    */
-  int OPERATION_CALL = 6;
+  int OPERATION_CALL = 8;
 
   /**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -328,7 +393,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 7;
+  int PARAMETER = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -365,7 +430,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getTypeReference()
    * @generated
    */
-  int TYPE_REFERENCE = 8;
+  int TYPE_REFERENCE = 10;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -402,7 +467,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getPrimitiveType()
    * @generated
    */
-  int PRIMITIVE_TYPE = 9;
+  int PRIMITIVE_TYPE = 11;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -443,15 +508,57 @@ public interface TestLanguagePackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model#getTypes <em>Types</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Types</em>'.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model#getTypes()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model#getElements()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_Types();
+  EReference getModel_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration <em>Package Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Package Declaration</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration
+   * @generated
+   */
+  EClass getPackageDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PackageDeclaration#getElements()
+   * @see #getPackageDeclaration()
+   * @generated
+   */
+  EReference getPackageDeclaration_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement <em>Abstract Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Element</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement
+   * @generated
+   */
+  EClass getAbstractElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.AbstractElement#getName()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration <em>Type Declaration</em>}'.
@@ -462,17 +569,6 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    */
   EClass getTypeDeclaration();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getName()
-   * @see #getTypeDeclaration()
-   * @generated
-   */
-  EAttribute getTypeDeclaration_Name();
 
   /**
    * Returns the meta object for the reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType <em>Super Type</em>}'.
@@ -742,12 +838,48 @@ public interface TestLanguagePackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__TYPES = eINSTANCE.getModel_Types();
+    EReference MODEL__ELEMENTS = eINSTANCE.getModel_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PackageDeclarationImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getPackageDeclaration()
+     * @generated
+     */
+    EClass PACKAGE_DECLARATION = eINSTANCE.getPackageDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.AbstractElementImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getAbstractElement()
+     * @generated
+     */
+    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__NAME = eINSTANCE.getAbstractElement_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl <em>Type Declaration</em>}' class.
@@ -758,14 +890,6 @@ public interface TestLanguagePackage extends EPackage
      * @generated
      */
     EClass TYPE_DECLARATION = eINSTANCE.getTypeDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_DECLARATION__NAME = eINSTANCE.getTypeDeclaration_Name();
 
     /**
      * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.

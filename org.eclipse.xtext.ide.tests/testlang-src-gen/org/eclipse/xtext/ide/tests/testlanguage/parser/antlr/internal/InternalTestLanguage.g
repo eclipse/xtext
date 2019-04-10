@@ -82,22 +82,127 @@ ruleModel returns [EObject current=null]
 	(
 		(
 			{
-				newCompositeNode(grammarAccess.getModelAccess().getTypesTypeDeclarationParserRuleCall_0());
+				newCompositeNode(grammarAccess.getModelAccess().getElementsAbstractElementParserRuleCall_0());
 			}
-			lv_types_0_0=ruleTypeDeclaration
+			lv_elements_0_0=ruleAbstractElement
 			{
 				if ($current==null) {
 					$current = createModelElementForParent(grammarAccess.getModelRule());
 				}
 				add(
 					$current,
-					"types",
-					lv_types_0_0,
-					"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.TypeDeclaration");
+					"elements",
+					lv_elements_0_0,
+					"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.AbstractElement");
 				afterParserOrEnumRuleCall();
 			}
 		)
 	)*
+;
+
+// Entry rule entryRulePackageDeclaration
+entryRulePackageDeclaration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPackageDeclarationRule()); }
+	iv_rulePackageDeclaration=rulePackageDeclaration
+	{ $current=$iv_rulePackageDeclaration.current; }
+	EOF;
+
+// Rule PackageDeclaration
+rulePackageDeclaration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='package'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getPackageDeclarationAccess().getNameQualifiedNameParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleQualifiedName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPackageDeclarationRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.QualifiedName");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_2='{'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getPackageDeclarationAccess().getLeftCurlyBracketKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getPackageDeclarationAccess().getElementsAbstractElementParserRuleCall_3_0());
+				}
+				lv_elements_3_0=ruleAbstractElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPackageDeclarationRule());
+					}
+					add(
+						$current,
+						"elements",
+						lv_elements_3_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.AbstractElement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_4='}'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getPackageDeclarationAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleAbstractElement
+entryRuleAbstractElement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAbstractElementRule()); }
+	iv_ruleAbstractElement=ruleAbstractElement
+	{ $current=$iv_ruleAbstractElement.current; }
+	EOF;
+
+// Rule AbstractElement
+ruleAbstractElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getPackageDeclarationParserRuleCall_0());
+		}
+		this_PackageDeclaration_0=rulePackageDeclaration
+		{
+			$current = $this_PackageDeclaration_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getTypeDeclarationParserRuleCall_1());
+		}
+		this_TypeDeclaration_1=ruleTypeDeclaration
+		{
+			$current = $this_TypeDeclaration_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
 
 // Entry rule entryRuleTypeDeclaration
@@ -150,9 +255,12 @@ ruleTypeDeclaration returns [EObject current=null]
 							$current = createModelElement(grammarAccess.getTypeDeclarationRule());
 						}
 					}
-					otherlv_3=RULE_ID
 					{
-						newLeafNode(otherlv_3, grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationCrossReference_2_1_0());
+						newCompositeNode(grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationCrossReference_2_1_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -664,9 +772,12 @@ ruleTypeReference returns [EObject current=null]
 					$current = createModelElement(grammarAccess.getTypeReferenceRule());
 				}
 			}
-			otherlv_0=RULE_ID
 			{
-				newLeafNode(otherlv_0, grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0());
+				newCompositeNode(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0());
+			}
+			ruleQualifiedName
+			{
+				afterParserOrEnumRuleCall();
 			}
 		)
 	)
@@ -735,6 +846,46 @@ rulePrimitiveType returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleQualifiedName
+entryRuleQualifiedName returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getQualifiedNameRule()); }
+	iv_ruleQualifiedName=ruleQualifiedName
+	{ $current=$iv_ruleQualifiedName.current.getText(); }
+	EOF;
+
+// Rule QualifiedName
+ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_ID_0=RULE_ID
+		{
+			$current.merge(this_ID_0);
+		}
+		{
+			newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0());
+		}
+		(
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
+			}
+			this_ID_2=RULE_ID
+			{
+				$current.merge(this_ID_2);
+			}
+			{
+				newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1());
+			}
+		)*
 	)
 ;
 

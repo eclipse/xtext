@@ -7,10 +7,15 @@
   <genPackages prefix="TestLanguage" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
       disposableProviderFactory="true" fileExtensions="testlang,testlangext" ecorePackage="TestLanguage.ecore#/">
     <genClasses ecoreClass="TestLanguage.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Model/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Model/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//PackageDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//PackageDeclaration/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//AbstractElement/name"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//TypeDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//TypeDeclaration/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/superType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/members"/>
     </genClasses>
