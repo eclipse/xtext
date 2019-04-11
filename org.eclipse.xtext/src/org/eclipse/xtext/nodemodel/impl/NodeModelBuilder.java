@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.AbstractList;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.RandomAccess;
+import java.util.Objects;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
@@ -21,8 +19,8 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
-import com.google.common.collect.Interner;
 import com.google.common.collect.Maps;
+import com.google.common.collect.ObjectArrays;
 
 /**
  * A stateful (!) builder that provides call back methods for clients who
@@ -32,54 +30,58 @@ import com.google.common.collect.Maps;
  */
 public class NodeModelBuilder {
 
-	private static class ArrayInterner<T> implements Interner<T[]> {
+	private static class ArrayInterner {
 
-		private static class ArrayAsList<T> extends AbstractList<T> implements RandomAccess {
-			final T[] array;
-			private int hashCode = -1;
+		private static class InternKey {
+			final EObject myGrammarElement;
+			final Object childGrammarElement;
+			
+			int hashCode = -1;
 
-			ArrayAsList(/* @Nullable */ T[] array) {
-				this.array = array;
+			InternKey(EObject myGrammarElement, Object childGrammarElement) {
+				this.myGrammarElement = myGrammarElement;
+				this.childGrammarElement = childGrammarElement;
+			}
+			
+			EObject[] joinElements() {
+				if(childGrammarElement instanceof EObject) {
+					return new EObject[] {myGrammarElement, (EObject) childGrammarElement};
+				} else {
+					return ObjectArrays.concat(myGrammarElement, (EObject[]) childGrammarElement);
+				}
 			}
 
-			@Override public int size() {
-				return array.length;
-			}
-
-			@Override /* @Nullable */ public T get(int index) {
-				return array[index];
-			}
-
-			@Override public int hashCode() {
+			@Override
+			public int hashCode() {
 				if (hashCode == -1)
-					hashCode = Arrays.hashCode(array);
+					hashCode = Objects.hash(myGrammarElement, childGrammarElement);
 				return hashCode;
 			}
 
-			@Override public boolean equals(/* @Nullable */ Object o) {
-				if (this == o)
-					return true;
-				return o instanceof ArrayAsList<?> && Arrays.equals(array, ((ArrayAsList<?>) o).array);
+			@Override
+			public boolean equals(Object o) {
+				if(o instanceof InternKey) {
+					InternKey interned = (InternKey) o;
+					return Objects.equals(this.myGrammarElement, interned.myGrammarElement) 
+							&& Objects.equals(this.childGrammarElement, interned.childGrammarElement);
+				}
+				
+				return false;
 			}
 		}
 
-		private Map<ArrayAsList<T>, T[]> map = Maps.newHashMap();
-
-		@Override
-		public /* @Nullable */ T[] intern(/* @Nullable */ T[] sample) {
-			ArrayAsList<T> key = new ArrayAsList<T>(sample);
-			T[] canonical = map.get(key);
-			if (canonical == null) {
-				canonical = sample;
-				map.put(key, canonical);
-			}
-	        return canonical;
+		Map<InternKey, EObject[]> interningMap = Maps.newHashMap();
+		
+		EObject[] joinAndIntern(EObject myGrammarElement, Object childGrammarElement) {
+			InternKey internKey = new InternKey(myGrammarElement, childGrammarElement);
+			return interningMap.computeIfAbsent(internKey, key -> key.joinElements());
 		}
+		
 	}
 
 	private EObject forcedGrammarElement;
 
-	private ArrayInterner<EObject> cachedFoldedGrammarElements = new ArrayInterner<EObject>();
+	private ArrayInterner cachedFoldedGrammarElements = new ArrayInterner();
 
 	private boolean compressRoot = true;
 	
@@ -203,13 +205,8 @@ public class NodeModelBuilder {
 				// if it refers not to a syntax error or a semantic object
 				EObject myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
-				EObject[] list = null;
-				if (childGrammarElement instanceof EObject) {
-					list = new EObject[] {myGrammarElement, (EObject) childGrammarElement};
-				} else {
-					list = newEObjectArray(myGrammarElement, (EObject[]) childGrammarElement);
-				}
-				casted.basicSetGrammarElement(cachedFoldedGrammarElements.intern(list));
+				EObject[] grammarElements = cachedFoldedGrammarElements.joinAndIntern(myGrammarElement, childGrammarElement);
+				casted.basicSetGrammarElement(grammarElements);
 				replaceChildren(firstChild, casted);
 			}
 		}
@@ -269,13 +266,6 @@ public class NodeModelBuilder {
 		}
 	}
 	
-	private /* @Nullable */ EObject[] newEObjectArray(/* @Nullable */ EObject first, EObject[] rest) {
-		EObject[] array = new EObject[rest.length + 1];
-		array[0] = first;
-		System.arraycopy(rest, 0, array, 1, rest.length);
-		return array;
-	}
-
 	public INode setSyntaxError(INode node, SyntaxErrorMessage errorMessage) {
 		if (node instanceof LeafNode) {
 			LeafNode oldNode = (LeafNode) node;
