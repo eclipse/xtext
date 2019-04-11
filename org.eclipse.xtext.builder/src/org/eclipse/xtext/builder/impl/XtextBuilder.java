@@ -8,7 +8,6 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +38,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.debug.IBuildLogger;
+import org.eclipse.xtext.builder.impl.ClosedProjectsQueue.Task;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -47,9 +47,9 @@ import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
@@ -94,8 +94,12 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Inject 
 	private OperationCanceledManager operationCanceledManager;
 	
+	private ClosedProjectsQueue closedProjectsQueue;
+	
 	@Inject
-	private ReflectExtensions reflector;
+	private void injectClosedProjectsQueue(ISharedStateContributionRegistry sharedState) {
+		this.closedProjectsQueue = sharedState.getSingleContributedInstance(ClosedProjectsQueue.class);
+	}
 	
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -308,45 +312,26 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = createDeltaVisitor(toBeBuiltComputer, toBeBuilt, progress);
 		delta.accept(visitor);
-		processedAbsentReferencedProjects(visitor);
-		if (progress.isCanceled())
+
+		if (progress.isCanceled()) {
 			throw new OperationCanceledException();
-		progress.worked(2);
-		doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
-	}
-	
-	/**
-	 * Obtain the deltas for the projects we were previously interested in and process them too, if they do no longer
-	 * have the xtext nature or if they are no longer accessible.
-	 *
-	 * @param visitor
-	 *            the processor.
-	 * @throws CoreException
-	 *             if something goes down the drain.
-	 * @since 2.17
-	 */
-	protected void processedAbsentReferencedProjects(IResourceDeltaVisitor visitor) throws CoreException {
-		final IProject[] interestingProjects = optimisticInvoke("getInterestingProjects");
-		for (IProject more : interestingProjects) {
-			if (!XtextProjectHelper.hasNature(more)) {
-				IResourceDelta interestingDelta = getDelta(more);
-				if (interestingDelta != null) {
-					interestingDelta.accept(visitor);
-				}
-			}
 		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	private <T> T optimisticInvoke(String methodName) {
+		progress.worked(2);
+		Task task = closedProjectsQueue.exhaust();
 		try {
-			return (T) reflector.invoke(this, methodName);
-		} catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException
-				| NoSuchMethodException e) {
-			throw new RuntimeException(e);
+			addInfosFromTask(task, toBeBuilt);
+			doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
+		} catch(Exception e) {
+			task.reschedule();
+			throw e;
 		}
 	}
 
+	private void addInfosFromTask(Task task, final ToBeBuilt toBeBuilt) {
+		toBeBuilt.getToBeDeleted().addAll(task.getToBeBuilt().getToBeDeleted());
+		toBeBuilt.getToBeUpdated().addAll(task.getToBeBuilt().getToBeUpdated());
+	}
+	
 	/**
 	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
@@ -401,12 +386,17 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				: toBeBuiltComputer.updateProject(project, progress.split(2));
 				
 
-		IResourceDeltaVisitor visitor = createDeltaVisitor(toBeBuiltComputer, toBeBuilt, progress);
-		processedAbsentReferencedProjects(visitor);
-		doBuild(toBeBuilt, progress.split(8), 
-			isRecoveryBuild 
-				? BuildType.RECOVERY 
-				: BuildType.FULL);
+		Task task = closedProjectsQueue.exhaust();
+		try {
+			addInfosFromTask(task, toBeBuilt);
+			doBuild(toBeBuilt, progress.split(8), 
+				isRecoveryBuild 
+					? BuildType.RECOVERY 
+					: BuildType.FULL);
+		} catch(Exception e) {
+			task.reschedule();
+			throw e;
+		}
 	}
 	
 	/**
@@ -455,7 +445,14 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
-			doClean(toBeBuilt, progress.split(8));
+			Task task = closedProjectsQueue.exhaust();
+			try {
+				addInfosFromTask(task, toBeBuilt);
+				doClean(toBeBuilt, progress.split(8));
+			} catch(Exception e) {
+				task.reschedule();
+				throw e;
+			}
 		} finally {
 			if (monitor != null)
 				monitor.done();

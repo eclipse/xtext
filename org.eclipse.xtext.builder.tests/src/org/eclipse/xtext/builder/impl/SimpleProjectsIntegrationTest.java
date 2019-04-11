@@ -125,6 +125,10 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		removeNature(foo_project.getProject(), XtextProjectHelper.NATURE_ID);
 		build();
 		assertEquals(1, countMarkers(bar_file));
+		
+		foo_file.setContents(new StringInputStream("error"), true, true, monitor());
+		build();
+		assertEquals(0, countMarkers(foo_file));
 	}
 	
 	@Test public void testTwoFilesInTwoReferencedProjectsAddNature() throws Exception {
