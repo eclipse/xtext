@@ -21,13 +21,14 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
 class BuildManager {
-    
+
     public static val CYCLIC_PROJECT_DEPENDENCIES = BuildManager.canonicalName + '.cyclicProjectDependencies'
 
     @Accessors(PUBLIC_SETTER)
@@ -36,17 +37,22 @@ class BuildManager {
 
     val dirtyFiles = <URI>newLinkedHashSet
     val deletedFiles = <URI>newLinkedHashSet
-    
+    List<IResourceDescription.Delta> unreportedDeltas = newArrayList 
+
     def Buildable submit(List<URI> dirtyFiles, List<URI> deletedFiles) {
-    	queue(this.dirtyFiles, deletedFiles, dirtyFiles)
+        queue(this.dirtyFiles, deletedFiles, dirtyFiles)
         queue(this.deletedFiles, dirtyFiles, deletedFiles)
         return [cancelIndicator|internalBuild(cancelIndicator)]
     }
 
+    /** 
+     * @deprecated this method is no longer used
+     */
+    @Deprecated
     def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-    		return submit(dirtyFiles, deletedFiles).build(cancelIndicator)
+            return submit(dirtyFiles, deletedFiles).build(cancelIndicator)
     }
-    
+
     protected def void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {
         files -= toRemove
         files += toAdd
@@ -75,26 +81,49 @@ class BuildManager {
             project2deleted.put(projectManager, deleted)
         }
         val sortedDescriptions = sortByDependencies(project2dirty.keySet + project2deleted.keySet)
-        val result = newArrayList()
         for(ProjectDescription it: sortedDescriptions) {
             val projectManager = workspaceManager.getProjectManager(name)
             val projectDirty = project2dirty.get(it).toList
             val projectDeleted = project2deleted.get(it).toList
-            val partialResult = projectManager.doBuild(projectDirty, projectDeleted, result, cancelIndicator)
+            val partialResult = projectManager.doBuild(projectDirty, projectDeleted, unreportedDeltas, cancelIndicator)
             allDirty.addAll(partialResult.affectedResources.map[uri])
             this.dirtyFiles -= projectDirty
             this.deletedFiles -= projectDeleted
-            result.addAll(partialResult.affectedResources)
+            // prior builds could have been canceled, so their result has not been returned,
+            // but the projectManager already has updated its state
+            mergeWithUnreportedDeltas(partialResult.affectedResources)
         }
+        val result = unreportedDeltas
+        unreportedDeltas = newArrayList
         return result
     }
-    
+
+    /**
+     * @since 2.18
+     */
+    protected def mergeWithUnreportedDeltas(List<IResourceDescription.Delta> newDeltas) {
+        if (unreportedDeltas.empty) {
+            unreportedDeltas += newDeltas
+        } else {
+            val unreportedByUri = unreportedDeltas.toMap[uri]
+            newDeltas.forEach [ newDelta |
+                val unreportedDelta = unreportedByUri.get(newDelta.uri)
+                if (unreportedDelta === null) {
+                    unreportedDeltas.add(newDelta)
+                } else {
+                    unreportedDeltas -= unreportedDelta
+                    unreportedDeltas += new DefaultResourceDescriptionDelta(unreportedDelta.old, newDelta.^new)
+                }
+            ]
+        }
+    }
+
     protected def sortByDependencies(Iterable<ProjectDescription> projectDescriptions) {
         sorterProvider.get.sortByDependencies(projectDescriptions.toList) [
             workspaceManager.getProjectManager(name).reportDependencyCycle
         ]
     }
-    
+
     protected def reportDependencyCycle(ProjectManager manager) {
         manager.reportProjectIssue('Project has cyclic dependencies', CYCLIC_PROJECT_DEPENDENCIES, Severity.ERROR)
     }
@@ -104,8 +133,8 @@ class BuildManager {
         List<URI> dirtyFiles
         List<URI> deletedFiles
     }
-    
+
     static interface Buildable {
-    	def List<IResourceDescription.Delta> build(CancelIndicator cancelIndicator)
+        def List<IResourceDescription.Delta> build(CancelIndicator cancelIndicator)
     }
 }
