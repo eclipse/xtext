@@ -66,16 +66,19 @@ public class ProjectManager {
   @Inject
   protected IExternalContentSupport externalContentSupport;
   
-  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Accessors({ AccessorType.PUBLIC_GETTER, AccessorType.PROTECTED_SETTER })
   private IndexState indexState = new IndexState();
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private URI baseDir;
   
+  @Accessors(AccessorType.PROTECTED_GETTER)
   private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
   
+  @Accessors(AccessorType.PROTECTED_GETTER)
   private Provider<Map<String, ResourceDescriptionsData>> indexProvider;
   
+  @Accessors(AccessorType.PROTECTED_GETTER)
   private IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -84,6 +87,7 @@ public class ProjectManager {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private ProjectDescription projectDescription;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private IProjectConfig projectConfig;
   
   public void initialize(final ProjectDescription description, final IProjectConfig projectConfig, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider, final CancelIndicator cancelIndicator) {
@@ -191,9 +195,28 @@ public class ProjectManager {
     return this.indexState;
   }
   
+  protected void setIndexState(final IndexState indexState) {
+    this.indexState = indexState;
+  }
+  
   @Pure
   public URI getBaseDir() {
     return this.baseDir;
+  }
+  
+  @Pure
+  protected Procedure2<? super URI, ? super Iterable<Issue>> getIssueAcceptor() {
+    return this.issueAcceptor;
+  }
+  
+  @Pure
+  protected Provider<Map<String, ResourceDescriptionsData>> getIndexProvider() {
+    return this.indexProvider;
+  }
+  
+  @Pure
+  protected IExternalContentSupport.IExternalContentProvider getOpenedDocumentsContentProvider() {
+    return this.openedDocumentsContentProvider;
   }
   
   @Pure
@@ -204,5 +227,10 @@ public class ProjectManager {
   @Pure
   public ProjectDescription getProjectDescription() {
     return this.projectDescription;
+  }
+  
+  @Pure
+  public IProjectConfig getProjectConfig() {
+    return this.projectConfig;
   }
 }

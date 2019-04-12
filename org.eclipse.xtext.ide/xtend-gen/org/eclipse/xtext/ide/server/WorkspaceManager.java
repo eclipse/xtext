@@ -251,6 +251,10 @@ public class WorkspaceManager {
     return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   
+  /**
+   * @deprecated this method is no longer called
+   */
+  @Deprecated
   public List<IResourceDescription.Delta> didClose(final URI uri, final CancelIndicator cancelIndicator) {
     return this.didClose(uri).build(cancelIndicator);
   }
