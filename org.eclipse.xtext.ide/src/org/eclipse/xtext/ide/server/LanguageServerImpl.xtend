@@ -75,7 +75,6 @@ import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
-import org.eclipse.xtext.ide.server.BuildManager.Buildable
 import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2
@@ -301,10 +300,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 					dirtyFiles += key
 				}
 			]
-			var Buildable buildable = []
-			if (!deletedFiles.isEmpty || !dirtyFiles.isEmpty)
-				buildable = workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
-			return buildable
+			return workspaceManager.didChangeFiles(dirtyFiles, deletedFiles)
 		], [ cancelIndicator, buildable |
 			buildable.build(cancelIndicator)
 		])

@@ -489,14 +489,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         }
       };
       IterableExtensions.<Pair<URI, FileChangeType>>filter(ListExtensions.<FileEvent, Pair<URI, FileChangeType>>map(params.getChanges(), _function_1), _function_2).forEach(_function_3);
-      final BuildManager.Buildable _function_4 = (CancelIndicator it) -> {
-        return null;
-      };
-      BuildManager.Buildable buildable = _function_4;
-      if (((!deletedFiles.isEmpty()) || (!dirtyFiles.isEmpty()))) {
-        buildable = this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
-      }
-      return buildable;
+      return this.workspaceManager.didChangeFiles(dirtyFiles, deletedFiles);
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);
