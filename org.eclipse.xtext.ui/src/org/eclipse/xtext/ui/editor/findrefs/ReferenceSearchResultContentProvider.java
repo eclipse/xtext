@@ -255,4 +255,21 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			}
 		});
 	}
+	
+	public void remove (ReferenceSearchViewTreeNode... nodes) {
+		for (ReferenceSearchViewTreeNode node : nodes) {
+			if (!rootNodes.remove(node)) { // if not top-level node then recurse into children
+				rootNodes.forEach(n -> remove(node, n));
+			}
+		}
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	protected void remove (ReferenceSearchViewTreeNode toRemove, ReferenceSearchViewTreeNode from) {
+		from.removeChild(toRemove);
+		from.getChildren().forEach(childNode -> remove(toRemove, childNode));
+	}
+	
 }

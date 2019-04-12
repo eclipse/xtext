@@ -23,13 +23,11 @@ public class Messages extends NLS {
 	public static String ReferenceSearchResultLabelProvider_invalid;
 	public static String ReferenceSearchViewPage_busyLabel;
 	public static String ReferenceSearchViewPageActions_collapseAll;
-	public static String ReferenceSearchViewPageActions_collapseAll_tooltip;
 	public static String ReferenceSearchViewPageActions_expandAll;
-	public static String ReferenceSearchViewPageActions_expandAll_tooltip;
 	public static String ReferenceSearchViewPageActions_showNextMatch;
-	public static String ReferenceSearchViewPageActions_showNextMatch_tooltip;
 	public static String ReferenceSearchViewPageActions_showPreviousMatch;
-	public static String ReferenceSearchViewPageActions_showPreviousMatch_tooltip;
+	public static String ReferenceSearchViewPageActions_copy;
+	public static String ReferenceSearchViewPageActions_removeSelectedMatches;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
