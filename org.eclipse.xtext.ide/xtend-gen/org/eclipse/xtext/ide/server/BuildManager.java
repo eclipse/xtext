@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.ide.server.TopologicalSorter;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -122,6 +125,8 @@ public class BuildManager {
   
   private final LinkedHashSet<URI> deletedFiles = CollectionLiterals.<URI>newLinkedHashSet();
   
+  private List<IResourceDescription.Delta> unreportedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
+  
   public BuildManager.Buildable submit(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
     this.queue(this.dirtyFiles, deletedFiles, dirtyFiles);
     this.queue(this.deletedFiles, dirtyFiles, deletedFiles);
@@ -131,6 +136,10 @@ public class BuildManager {
     return _function;
   }
   
+  /**
+   * @deprecated this method is no longer used
+   */
+  @Deprecated
   public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
     return this.submit(dirtyFiles, deletedFiles).build(cancelIndicator);
   }
@@ -172,23 +181,54 @@ public class BuildManager {
     Set<ProjectDescription> _keySet_1 = project2deleted.keySet();
     Iterable<ProjectDescription> _plus = Iterables.<ProjectDescription>concat(_keySet, _keySet_1);
     final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(_plus);
-    final ArrayList<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     for (final ProjectDescription it : sortedDescriptions) {
       {
         final ProjectManager projectManager = this.workspaceManager.getProjectManager(it.getName());
         final List<URI> projectDirty = IterableExtensions.<URI>toList(project2dirty.get(it));
         final List<URI> projectDeleted = IterableExtensions.<URI>toList(project2deleted.get(it));
-        final IncrementalBuilder.Result partialResult = projectManager.doBuild(projectDirty, projectDeleted, result, cancelIndicator);
+        final IncrementalBuilder.Result partialResult = projectManager.doBuild(projectDirty, projectDeleted, this.unreportedDeltas, cancelIndicator);
         final Function1<IResourceDescription.Delta, URI> _function = (IResourceDescription.Delta it_1) -> {
           return it_1.getUri();
         };
         allDirty.addAll(ListExtensions.<IResourceDescription.Delta, URI>map(partialResult.getAffectedResources(), _function));
         Iterables.removeAll(this.dirtyFiles, projectDirty);
         Iterables.removeAll(this.deletedFiles, projectDeleted);
-        result.addAll(partialResult.getAffectedResources());
+        this.mergeWithUnreportedDeltas(partialResult.getAffectedResources());
       }
     }
+    final List<IResourceDescription.Delta> result = this.unreportedDeltas;
+    this.unreportedDeltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     return result;
+  }
+  
+  /**
+   * @since 2.18
+   */
+  protected Boolean mergeWithUnreportedDeltas(final List<IResourceDescription.Delta> newDeltas) {
+    boolean _xifexpression = false;
+    boolean _isEmpty = this.unreportedDeltas.isEmpty();
+    if (_isEmpty) {
+      _xifexpression = Iterables.<IResourceDescription.Delta>addAll(this.unreportedDeltas, newDeltas);
+    } else {
+      final Function1<IResourceDescription.Delta, URI> _function = (IResourceDescription.Delta it) -> {
+        return it.getUri();
+      };
+      final Map<URI, IResourceDescription.Delta> unreportedByUri = IterableExtensions.<URI, IResourceDescription.Delta>toMap(this.unreportedDeltas, _function);
+      final Consumer<IResourceDescription.Delta> _function_1 = (IResourceDescription.Delta newDelta) -> {
+        final IResourceDescription.Delta unreportedDelta = unreportedByUri.get(newDelta.getUri());
+        if ((unreportedDelta == null)) {
+          this.unreportedDeltas.add(newDelta);
+        } else {
+          this.unreportedDeltas.remove(unreportedDelta);
+          IResourceDescription _old = unreportedDelta.getOld();
+          IResourceDescription _new = newDelta.getNew();
+          DefaultResourceDescriptionDelta _defaultResourceDescriptionDelta = new DefaultResourceDescriptionDelta(_old, _new);
+          this.unreportedDeltas.add(_defaultResourceDescriptionDelta);
+        }
+      };
+      newDeltas.forEach(_function_1);
+    }
+    return Boolean.valueOf(_xifexpression);
   }
   
   protected List<ProjectDescription> sortByDependencies(final Iterable<ProjectDescription> projectDescriptions) {
