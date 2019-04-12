@@ -45,21 +45,23 @@ class ProjectManager {
     @Inject protected IFileSystemScanner fileSystemScanner
     @Inject protected IExternalContentSupport externalContentSupport
     
-    @Accessors(PUBLIC_GETTER)
+    @Accessors(PUBLIC_GETTER, PROTECTED_SETTER)
     IndexState indexState = new IndexState
 
     @Accessors(PUBLIC_GETTER)
     URI baseDir
     
-    (URI, Iterable<Issue>)=>void issueAcceptor
-    Provider<Map<String, ResourceDescriptionsData>> indexProvider
-    IExternalContentProvider openedDocumentsContentProvider
+    @Accessors(PROTECTED_GETTER) (URI, Iterable<Issue>)=>void issueAcceptor
+    @Accessors(PROTECTED_GETTER) Provider<Map<String, ResourceDescriptionsData>> indexProvider
+    @Accessors(PROTECTED_GETTER) IExternalContentProvider openedDocumentsContentProvider
     
     @Accessors(PUBLIC_GETTER)
     XtextResourceSet resourceSet
     
     @Accessors(PUBLIC_GETTER)
     ProjectDescription projectDescription
+
+    @Accessors(PUBLIC_GETTER)
     IProjectConfig projectConfig
     
     def void initialize(ProjectDescription description, IProjectConfig projectConfig, (URI, Iterable<Issue>)=>void acceptor, IExternalContentProvider openedDocumentsContentProvider, Provider<Map<String, ResourceDescriptionsData>> indexProvider, CancelIndicator cancelIndicator) {

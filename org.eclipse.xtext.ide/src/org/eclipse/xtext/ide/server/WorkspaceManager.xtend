@@ -198,6 +198,10 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		return didChangeFiles(#[uri], newArrayList)
 	}
 
+	/**
+	 * @deprecated this method is no longer called
+	 */
+	@Deprecated
 	def didClose(URI uri, CancelIndicator cancelIndicator) {
 		didClose(uri).build(cancelIndicator)
 	}
