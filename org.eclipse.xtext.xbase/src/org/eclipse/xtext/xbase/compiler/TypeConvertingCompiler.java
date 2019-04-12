@@ -38,6 +38,7 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Stephane Galland - Change visibilities of convertion functions.
  */
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
@@ -422,10 +423,14 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 	}
 
-	/**
-	 * @param primitive unused in this context but useful for inheritors 
+	/** Convert a primitive expression (number, char, boolean) to its wrapper equivalent.
+	 *
+	 * @param primitive unused in this context but useful for inheritors.
+	 * @param wrapper the wrapper type to convert to.
+	 * @param appendable the receiver of the convertion.
+	 * @param expression the expression to convert.
 	 */
-	private void convertPrimitiveToWrapper(
+	protected void convertPrimitiveToWrapper(
 			final LightweightTypeReference primitive, 
 			final LightweightTypeReference wrapper, 
 			final ITreeAppendable appendable,
@@ -454,10 +459,15 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 
 
-	/**
-	 * @param wrapper unused in this context but useful for inheritors 
+	/** Convert a wrapper expression (number, char, boolean) to its primitive equivalent.
+	 *
+	 * @param wrapper unused in this context but useful for inheritors.
+	 * @param primitive the primitive type to convert to.
+	 * @param context the context of the convertion, i.e. the containing expression.
+	 * @param appendable the receiver of the convertion.
+	 * @param expression the expression to convert.
 	 */
-	private void convertWrapperToPrimitive(
+	protected void convertWrapperToPrimitive(
 			final LightweightTypeReference wrapper, 
 			final LightweightTypeReference primitive, 
 			XExpression context, 
