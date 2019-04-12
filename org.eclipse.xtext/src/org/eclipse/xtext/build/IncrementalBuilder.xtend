@@ -94,7 +94,7 @@ class IncrementalBuilder {
 			val result = indexer.computeAndIndexAffected(request, context)
 			request.cancelIndicator.checkCanceled
 			for (delta : result.resourceDeltas) {
-				if (unloaded.add(delta.uri)) {
+				if (delta.old !== null && unloaded.add(delta.uri)) {
 					unloadResource(delta.uri)
 				}
 			}

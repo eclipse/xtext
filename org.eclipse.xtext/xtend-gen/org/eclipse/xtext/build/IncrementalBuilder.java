@@ -259,8 +259,7 @@ public class IncrementalBuilder {
       this._operationCanceledManager.checkCanceled(this.request.getCancelIndicator());
       List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
       for (final IResourceDescription.Delta delta : _resourceDeltas) {
-        boolean _add_2 = unloaded.add(delta.getUri());
-        if (_add_2) {
+        if (((delta.getOld() != null) && unloaded.add(delta.getUri()))) {
           this.unloadResource(delta.getUri());
         }
       }
