@@ -15,7 +15,7 @@ spec:
     - mountPath: /home/jenkins/.ssh
       name: volume-known-hosts
   - name: xtext-buildenv
-    image: docker.io/smoht/xtext-buildenv:0.6
+    image: docker.io/smoht/xtext-buildenv:0.7
     tty: true
     volumeMounts:
     - name: settings-xml
