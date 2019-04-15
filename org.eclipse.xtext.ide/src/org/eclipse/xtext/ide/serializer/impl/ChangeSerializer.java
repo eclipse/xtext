@@ -67,9 +67,11 @@ public class ChangeSerializer implements IChangeSerializer {
 		modifications.add(Tuples.create(context, modification));
 	}
 
+	/** some additional effort required in 'endRecordChanges(IAcceptor, SubMonitor)' */
+	private static final int additionalEffortInEndRecordChanges = 5; 
+
 	@Override
 	public void applyModifications(IAcceptor<IEmfResourceChange> changeAcceptor) {
-		SubMonitor progress = SubMonitor.convert(monitor, "Preparing Text Changes...", modifications.size()*2);
 		Set<Resource> resources = Sets.newLinkedHashSet();
 		for (Pair<Notifier, IModification<? extends Notifier>> p : modifications) {
 			Notifier context = p.getFirst();
@@ -80,17 +82,34 @@ public class ChangeSerializer implements IChangeSerializer {
 			else if (context instanceof ResourceSet) {
 				throw new IllegalStateException("Not supported");
 			}
-			progress.split(1);
 		}
+		
+		// in the following effort calculation, the amount of resources is doubled for the sake of reflecting
+		//  the usually higher effort of indexing the contents of a resource compared to applying a modification
+		final int weightedPrepareAndApplyEffort = 2 * resources.size() + modifications.size();
+		
+		// here, the amount of resources is doubled for the sake of reflecting the still unknown amount of
+		//  related resources to be updated later on, too; the additional effort is a rough approximation of
+		//  the effort required to determine the (affected) related resources
+		final int weightedCreateTextChangesEffort = 2 * resources.size() + additionalEffortInEndRecordChanges;
+		
+		final SubMonitor monitorInAll = SubMonitor.convert(this.monitor,
+				weightedPrepareAndApplyEffort + weightedCreateTextChangesEffort);
+		final SubMonitor monitorPrepareAndApply = monitorInAll.split(weightedPrepareAndApplyEffort, SubMonitor.SUPPRESS_NONE);
+		monitorPrepareAndApply.beginTask("Preparing and applying file changes...", weightedPrepareAndApplyEffort);
+		
 		for (Resource res : resources) {
+			monitorPrepareAndApply.split(2);
 			// TODO: use the exact context
 			beginRecordChanges(res);
 		}
 		for (Pair<Notifier, IModification<? extends Notifier>> entry : modifications) {
+			monitorPrepareAndApply.split(1);
 			apply(entry.getFirst(), entry.getSecond());
-			progress.split(1);
 		}
-		endRecordChanges(changeAcceptor);
+		final SubMonitor monitorCreateTextChanges = monitorInAll.split(weightedCreateTextChangesEffort, SubMonitor.SUPPRESS_NONE);
+		monitorCreateTextChanges.setWorkRemaining(weightedCreateTextChangesEffort);
+		endRecordChanges(changeAcceptor, monitorCreateTextChanges);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -140,9 +159,18 @@ public class ChangeSerializer implements IChangeSerializer {
 	}
 
 	protected void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor) {
+		endRecordChanges(changeAcceptor, null);
+	}
+
+	protected void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor, SubMonitor monitor) {
 		if (updaters.isEmpty()) {
 			return;
 		}
+		if (monitor == null) {
+			monitor = SubMonitor.convert(this.monitor, additionalEffortInEndRecordChanges + 2 * this.updaters.size());
+		}
+		
+		monitor.split(additionalEffortInEndRecordChanges);
 		List<IResourceSnapshot> snapshots = getSnapshots();
 		Deltas deltas = deltaProvider.getDelta(this, snapshots);
 		List<ResourceUpdater> updaters = Lists.newArrayList(this.updaters.values());
@@ -153,14 +181,16 @@ public class ChangeSerializer implements IChangeSerializer {
 				updaters.add(updater);
 			}
 		}
-		SubMonitor progress = SubMonitor.convert(monitor, "Creating Text Changes...", updaters.size());
+		
+		monitor.beginTask("Creating text changes...", updaters.size());
 		for (ResourceUpdater updater : updaters) {
+			monitor.split(1);
 			updater.applyChange(deltas, changeAcceptor);
-			progress.split(1);
 		}
 		for (ResourceUpdater updater : updaters) {
 			updater.unload();
 		}
+		monitor.done();
 	}
 
 	protected void resetState() {
