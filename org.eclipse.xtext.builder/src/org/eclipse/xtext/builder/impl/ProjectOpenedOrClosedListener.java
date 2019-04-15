@@ -96,7 +96,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 		@Override
 		public boolean belongsTo(Object family) {
-			return family == ResourcesPlugin.FAMILY_AUTO_BUILD;
+			return family == ResourcesPlugin.FAMILY_AUTO_BUILD || family == ResourcesPlugin.FAMILY_MANUAL_BUILD;
 		}
 
 		@Override
