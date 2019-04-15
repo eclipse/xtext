@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IncrementalProjectBuilder
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
@@ -73,14 +74,18 @@ abstract class AbstractResourceRelocationTest {
 	}
 	
 	protected def performRefactoring(RefactoringDescriptor descriptor) {
+		performRefactoring(descriptor, new NullProgressMonitor)
+	}
+	
+	protected def performRefactoring(RefactoringDescriptor descriptor, IProgressMonitor monitor) {
 		project.refreshLocal(IResource.DEPTH_INFINITE, null)
 		project.build(IncrementalProjectBuilder.FULL_BUILD, null)
 		val status = new RefactoringStatus
 		val refactoring = descriptor.createRefactoring(status)
-		refactoring.checkAllConditions(new NullProgressMonitor)
+		refactoring.checkAllConditions(monitor)
 		assertTrue(status.OK)
-		val change = refactoring.createChange(new NullProgressMonitor)
-		change.perform(new NullProgressMonitor)
+		val change = refactoring.createChange(monitor)
+		change.perform(monitor)
 		project.refreshLocal(IResource.DEPTH_INFINITE, null)
 		project.build(IncrementalProjectBuilder.FULL_BUILD, null)
 	}

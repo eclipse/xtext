@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.OperationCanceledException
+import org.eclipse.core.runtime.SubMonitor
 import org.eclipse.ltk.core.refactoring.resource.MoveResourceChange
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -66,26 +67,40 @@ class ResourceRelocationProcessor {
 					IProgressMonitor pm) throws CoreException, OperationCanceledException {
 		if (uriChanges.empty)
 			return null
+
+		val subMonitor = SubMonitor.convert(pm)
+		// declaring the task and its effort in 'SubMonitor.convert(...)' doesn't yield the expected UI updates
+		//  so let's do it separately; the total effort of '5' is chosen for weighting the subseqent efforts
+		subMonitor.beginTask('Preparing the refactoring...', 5)
+		
 		val changeSerializer = changeSerializerProvider.get();
 		val resourceSet = resourceSetProvider.get(project)
 		liveScopeResourceSetInitializer.initialize(resourceSet)
 		val context = new ResourceRelocationContext(type, uriChanges, issues, changeSerializer, resourceSet)
-		executeParticipants(context)
+		executeParticipants(context, subMonitor.split(1)) // requires effort of loading affected resources
+		
 		val changeConverter = changeConverterFactory.create(name, [
 			(!(it instanceof MoveResourceChange || it instanceof RenameResourceChange)
 				|| !excludedResources.contains(modifiedElement))
 		], issues)
+		
+		val modificationApplicationMonitor = subMonitor.split(4) // remaining effort is assigned to 'changeSerializer's work
+		changeSerializer.progressMonitor = modificationApplicationMonitor
 		changeSerializer.applyModifications(changeConverter)
+		modificationApplicationMonitor.done
 		return changeConverter.change
 	}
 
-	protected def void executeParticipants(ResourceRelocationContext context) {
+	protected def void executeParticipants(ResourceRelocationContext context, SubMonitor monitor) {
 		val strategies = strategyRegistry.strategies
 		if(context.changeType === ResourceRelocationContext.ChangeType.COPY) {
 			context.changeSerializer.updateRelatedFiles = false
 		}
+		monitor.workRemaining = strategies.size
 		strategies.forEach [
 			try {
+				// applying a strategy maybe "long running", as it involves loading of resources  
+				monitor.split(1)
 				applyChange(context)
 			} catch (Throwable t) {
 				issues.add(ERROR, 'Error applying resource changes', t)
