@@ -1,17 +1,51 @@
 pipeline {
-  agent any
-
+  agent {
+    kubernetes {
+      label 'xtext-build-pod'
+      defaultContainer 'xtext-buildenv'
+      yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: 'eclipsecbi/jenkins-jnlp-agent'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    volumeMounts:
+    - mountPath: /home/jenkins/.ssh
+      name: volume-known-hosts
+  - name: xtext-buildenv
+    image: docker.io/smoht/xtext-buildenv:0.7
+    tty: true
+    volumeMounts:
+    - name: settings-xml
+      mountPath: /home/jenkins/.m2/settings.xml
+      subPath: settings.xml
+      readOnly: true
+    - name: m2-repo
+      mountPath: /home/jenkins/.m2/repository
+    - name: volume-known-hosts
+      mountPath: /home/jenkins/.ssh
+  volumes:
+  - name: volume-known-hosts
+    configMap:
+      name: known-hosts
+  - name: settings-xml
+    configMap: 
+      name: m2-dir
+      items:
+      - key: settings.xml
+        path: settings.xml
+  - name: m2-repo
+    emptyDir: {}
+    '''
+    }
+  }
+  
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
     disableConcurrentBuilds()
   }
-
-  tools {
-    // see https://wiki.eclipse.org/Jenkins#Jenkins_configuration_and_tools_.28clustered_infra.29
-    maven 'apache-maven-latest'
-    jdk 'oracle-jdk8-latest'
-  }
-  
   
   // https://jenkins.io/doc/book/pipeline/syntax/#triggers
   triggers {
