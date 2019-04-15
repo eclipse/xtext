@@ -10,11 +10,15 @@ package org.eclipse.xtext.ui.tests.core.resource;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -22,8 +26,19 @@ import org.junit.Test;
  */
 public class Storage2UriMapperTest extends Assert {
 	
+	private IProject project;
+
+	@Before
+	public void createProjectFoo() throws Exception {
+		project = createProject("foo");
+	}
+	
+	@After
+	public void deleteProjectFoo() throws Exception {
+		project.delete(true, new NullProgressMonitor());
+	}
+	
 	@Test public void testSimpleFileInProject() throws Exception {
-		createProject("foo");
 		IFile file = createFile("foo/bar/baz.txt", "");
 		
 		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
