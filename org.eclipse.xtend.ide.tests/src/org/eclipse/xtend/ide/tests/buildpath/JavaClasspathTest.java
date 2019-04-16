@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 import com.google.inject.Inject;
 
@@ -43,6 +44,10 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 
 	@Test
 	public void testNoJavaInClasspath() throws Exception {
+		Version version = JavaCore.getJavaCore().getBundle().getVersion();
+		Version v3_18 = Version.parseVersion("3.18.0");
+		boolean isSilent = version.compareTo(v3_18) >= 0;
+		
 		LogCapture capturedLogging = LoggingTester.captureLogging(Level.ERROR, AbstractClassMirror.class, new Runnable() {
 
 			@Override
@@ -74,10 +79,10 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 						}
 					}
 				});
-				assertFalse(capturedLogging.getLogEntries().isEmpty());
+				assertEquals(isSilent, capturedLogging.getLogEntries().isEmpty());
 			}
 		});
-		assertFalse(capturedLogging.getLogEntries().isEmpty());
+		assertEquals(isSilent, capturedLogging.getLogEntries().isEmpty());
 	}
 
 	@Test
