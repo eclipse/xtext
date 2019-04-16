@@ -1237,13 +1237,11 @@ public class MergeableManifest2Test {
 				"Bundle-Localization: plugin" + NL + 
 				"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL + 
 				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler.batch," + NL + 
 				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"," + NL + 
 				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
 				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
@@ -1253,7 +1251,6 @@ public class MergeableManifest2Test {
 				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
 				" org.eclipse.xtend.ide.common," + NL + 
 				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"" + NL + 
 				"Require-Bundle: org.eclipse.core.runtime;bundle-version=\"3.13.0\"," + NL + 
@@ -1272,13 +1269,11 @@ public class MergeableManifest2Test {
 				"Bundle-ManifestVersion: 2" + NL + 
 				"Bundle-Name: %pluginName" + NL + 
 				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler.batch," + NL + 
 				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"," + NL + 
 				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
 				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
@@ -1288,7 +1283,6 @@ public class MergeableManifest2Test {
 				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
 				" org.eclipse.xtend.ide.common," + NL + 
 				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"" + NL + 
 				"Require-Bundle: org.eclipse.core.runtime;bundle-version=\"3.13.0\"," + NL + 
@@ -1300,13 +1294,11 @@ public class MergeableManifest2Test {
 				"Bundle-ManifestVersion: 2" + NL + 
 				"Bundle-Name: %pluginName" + NL + 
 				"Export-Package: org.eclipse.xtend.core;x-friends:=\"org.eclipse.xtend.ide.common," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler;x-friends:=\"org.eclipse.xtend.m2e," + NL + 
 				"   org.eclipse.xtend.ide.tests\"," + NL + 
 				" org.eclipse.xtend.core.compiler.batch," + NL + 
 				" org.eclipse.xtend.core.conversion;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"," + NL + 
 				" org.eclipse.xtend.core.documentation;x-internal:=true," + NL + 
 				" org.eclipse.xtend.core.findReferences;x-internal:=true," + NL + 
@@ -1316,7 +1308,6 @@ public class MergeableManifest2Test {
 				" org.eclipse.xtend.core.javaconverter;x-friends:=\"org.eclipse.xtend.ide,\"" + NL + 
 				" org.eclipse.xtend.ide.common," + NL + 
 				" org.eclipse.xtend.core.jvmmodel;x-friends:=\"org.eclipse.xtend.ide," + NL + 
-				"   org.eclipse.xtend.caliper.tests," + NL + 
 				"   org.eclipse.xtend.ide.tests," + NL + 
 				"   org.eclipse.xtend.ide.common\"," + NL + 
 				" test" + NL + 

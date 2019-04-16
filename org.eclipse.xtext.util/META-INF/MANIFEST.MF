@@ -23,7 +23,6 @@ Export-Package: org.eclipse.xtext.util;
    org.eclipse.xtext.tests",
  org.eclipse.xtext.util.internal;x-friends:="org.eclipse.xtext.xtext.generator,
    org.eclipse.xtend.core,
-   org.eclipse.xtend.caliper.tests,
    org.eclipse.xtend.ide,
    org.eclipse.xtend.performance.tests,
    org.eclipse.xtend.ide.tests,
