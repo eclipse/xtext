@@ -25,7 +25,6 @@
 		<module>org.eclipse.xtend.m2e</module>
 		<module>org.eclipse.xtend.standalone</module>
 		<module>org.eclipse.xtend.performance.tests</module>
-		<module>org.eclipse.xtend.caliper.tests</module>
 		<module>org.eclipse.xtend.swtbot</module>
 		<module>org.eclipse.xtend.ide.swtbot.tests</module>
 		<module>org.eclipse.xtend.doc</module>
