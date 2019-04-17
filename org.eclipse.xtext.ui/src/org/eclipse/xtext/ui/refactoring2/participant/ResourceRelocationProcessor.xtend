@@ -28,6 +28,7 @@ import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext.ChangeType
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.ui.refactoring2.ChangeConverter
 import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor
 import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter
@@ -75,8 +76,13 @@ class ResourceRelocationProcessor {
 		
 		val changeSerializer = changeSerializerProvider.get();
 		val resourceSet = resourceSetProvider.get(project)
-		liveScopeResourceSetInitializer.initialize(resourceSet)
+
 		val context = new ResourceRelocationContext(type, uriChanges, issues, changeSerializer, resourceSet)
+		val persistedIndexUsageRequested = context.isPersistedIndexUsageRequested()
+		
+		// TODO check preconditions like all editors being saved if 'persistedIndexUsageRequested' == true
+		
+		initializeResourceSet(persistedIndexUsageRequested, context)
 		executeParticipants(context, subMonitor.split(1)) // requires effort of loading affected resources
 		
 		val changeConverter = changeConverterFactory.create(name, [
@@ -89,6 +95,30 @@ class ResourceRelocationProcessor {
 		changeSerializer.applyModifications(changeConverter)
 		modificationApplicationMonitor.done
 		return changeConverter.change
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	protected def boolean isPersistedIndexUsageRequested(ResourceRelocationContext context) {
+		val strategies = strategyRegistry.strategies
+		val persistedIndexUsageRequested = strategies.exists[
+			requiresUsageOfPersistedIndex(context)
+		]
+		return persistedIndexUsageRequested
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected def void initializeResourceSet(boolean persistedIndexUsageRequested, ResourceRelocationContext context) {
+		if (persistedIndexUsageRequested) {
+			context.resourceSet.getLoadOptions().put(
+				ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS, Boolean.TRUE
+			)
+		} else {
+			liveScopeResourceSetInitializer.initialize(context.resourceSet)
+		}
 	}
 
 	protected def void executeParticipants(ResourceRelocationContext context, SubMonitor monitor) {
