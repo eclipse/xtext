@@ -95,8 +95,9 @@ public class ChangeSerializer implements IChangeSerializer {
 		
 		final SubMonitor monitorInAll = SubMonitor.convert(this.monitor,
 				weightedPrepareAndApplyEffort + weightedCreateTextChangesEffort);
-		final SubMonitor monitorPrepareAndApply = monitorInAll.split(weightedPrepareAndApplyEffort, SubMonitor.SUPPRESS_NONE);
-		monitorPrepareAndApply.beginTask("Preparing and applying file changes...", weightedPrepareAndApplyEffort);
+		final SubMonitor monitorPrepareAndApply = SubMonitor.convert(
+				monitorInAll.split(weightedPrepareAndApplyEffort, SubMonitor.SUPPRESS_NONE),
+				"Preparing and applying file changes...", weightedPrepareAndApplyEffort);
 		
 		for (Resource res : resources) {
 			monitorPrepareAndApply.split(2);
@@ -162,15 +163,17 @@ public class ChangeSerializer implements IChangeSerializer {
 		endRecordChanges(changeAcceptor, null);
 	}
 
-	protected void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor, SubMonitor monitor) {
+	protected void endRecordChanges(IAcceptor<IEmfResourceChange> changeAcceptor, IProgressMonitor monitor) {
 		if (updaters.isEmpty()) {
 			return;
 		}
-		if (monitor == null) {
-			monitor = SubMonitor.convert(this.monitor, additionalEffortInEndRecordChanges + 2 * this.updaters.size());
-		}
+		SubMonitor subMonitor = SubMonitor.convert(monitor != null ? monitor : this.monitor,
+				/* don't change task name to "", so */
+				null,
+				/* see comment on 'weightedCreateTextChangesEffort' in 'applyModifications(...)' */
+				additionalEffortInEndRecordChanges + 2 * this.updaters.size());
 		
-		monitor.split(additionalEffortInEndRecordChanges);
+		subMonitor.split(additionalEffortInEndRecordChanges);
 		List<IResourceSnapshot> snapshots = getSnapshots();
 		Deltas deltas = deltaProvider.getDelta(this, snapshots);
 		List<ResourceUpdater> updaters = Lists.newArrayList(this.updaters.values());
@@ -182,15 +185,15 @@ public class ChangeSerializer implements IChangeSerializer {
 			}
 		}
 		
-		monitor.beginTask("Creating text changes...", updaters.size());
+		subMonitor = SubMonitor.convert(subMonitor, "Creating text changes...", updaters.size());
 		for (ResourceUpdater updater : updaters) {
-			monitor.split(1);
+			subMonitor.split(1);
 			updater.applyChange(deltas, changeAcceptor);
 		}
 		for (ResourceUpdater updater : updaters) {
 			updater.unload();
 		}
-		monitor.done();
+		subMonitor.done();
 	}
 
 	protected void resetState() {
