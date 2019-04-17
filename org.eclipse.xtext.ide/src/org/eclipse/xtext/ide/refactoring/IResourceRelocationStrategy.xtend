@@ -29,6 +29,29 @@ interface IResourceRelocationStrategy {
 
 	def void applyChange(ResourceRelocationContext context)
 
+	/**
+	 * By overriding this method client implementations may explicitly demand for relying
+	 * on the persisted index during a refactoring. 
+	 * 
+	 * Refactoring operations usually rely on a lively created resource index. However,
+	 * in case of refactorings affecting a large amounts of files live resource indexing
+	 * may lead to heap pollution and resultant performance decreases.
+	 * 
+	 * If a persisted index is supported by the runtime environment and if at least one of the
+	 * registered implementations of {@link IResourceRelocationStrategy} demands for relying
+	 * on the persisted index and if, furthermore, required preconditions are satisfied,
+	 * like no open editor is dirty and the persisted index is up-to-date, the refactoring
+	 * operation will rely entirely on the persisted index for, e.g., determining incoming
+	 * references of affected objects, and skip the creation of a live resource index.
+	 * 
+	 * If some of the additional required preconditions are not met the runtime may execute
+	 * actions to make the conditions satisfied or reject the refactoring.
+	 * 
+	 * @since 2.18
+	 */
+	def boolean requiresUsageOfPersistedIndex(ResourceRelocationContext context) {
+		return false;
+	}
 }
 
 
