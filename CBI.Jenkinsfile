@@ -1,4 +1,9 @@
 pipeline {
+  environment {
+    npm_config_cache="/home/jenkins/.npm"
+    NPM_CONFIG_USERCONFIG="/home/jenkins/.config"
+    NO_UPDATE_NOTIFIER="true"
+  }
   agent {
     kubernetes {
       label 'xtext-build-pod'
