@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -88,20 +89,25 @@ public class ResourceRelocationProcessor {
     if (_isEmpty) {
       return null;
     }
+    final SubMonitor subMonitor = SubMonitor.convert(pm);
+    subMonitor.beginTask("Preparing the refactoring...", 5);
     final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
     final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
     this.liveScopeResourceSetInitializer.initialize(resourceSet);
     final ResourceRelocationContext context = new ResourceRelocationContext(type, this.uriChanges, this.issues, changeSerializer, resourceSet);
-    this.executeParticipants(context);
+    this.executeParticipants(context, subMonitor.split(1));
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
     };
     final ChangeConverter changeConverter = this.changeConverterFactory.create(name, _function, this.issues);
+    final SubMonitor modificationApplicationMonitor = subMonitor.split(4);
+    changeSerializer.setProgressMonitor(modificationApplicationMonitor);
     changeSerializer.applyModifications(changeConverter);
+    modificationApplicationMonitor.done();
     return changeConverter.getChange();
   }
   
-  protected void executeParticipants(final ResourceRelocationContext context) {
+  protected void executeParticipants(final ResourceRelocationContext context, final SubMonitor monitor) {
     final List<? extends IResourceRelocationStrategy> strategies = this.strategyRegistry.getStrategies();
     ResourceRelocationContext.ChangeType _changeType = context.getChangeType();
     boolean _tripleEquals = (_changeType == ResourceRelocationContext.ChangeType.COPY);
@@ -109,8 +115,10 @@ public class ResourceRelocationProcessor {
       IChangeSerializer _changeSerializer = context.getChangeSerializer();
       _changeSerializer.setUpdateRelatedFiles(false);
     }
+    monitor.setWorkRemaining(strategies.size());
     final Consumer<IResourceRelocationStrategy> _function = (IResourceRelocationStrategy it) -> {
       try {
+        monitor.split(1);
         it.applyChange(context);
       } catch (final Throwable _t) {
         if (_t instanceof Throwable) {

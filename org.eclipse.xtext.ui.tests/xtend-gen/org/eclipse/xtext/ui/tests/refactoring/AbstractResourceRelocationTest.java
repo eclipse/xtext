@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.Refactoring;
@@ -107,18 +108,20 @@ public abstract class AbstractResourceRelocationTest {
   }
   
   protected void performRefactoring(final RefactoringDescriptor descriptor) {
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    this.performRefactoring(descriptor, _nullProgressMonitor);
+  }
+  
+  protected void performRefactoring(final RefactoringDescriptor descriptor, final IProgressMonitor monitor) {
     try {
       this.project.refreshLocal(IResource.DEPTH_INFINITE, null);
       this.project.build(IncrementalProjectBuilder.FULL_BUILD, null);
       final RefactoringStatus status = new RefactoringStatus();
       final Refactoring refactoring = descriptor.createRefactoring(status);
-      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      refactoring.checkAllConditions(_nullProgressMonitor);
+      refactoring.checkAllConditions(monitor);
       Assert.assertTrue(status.isOK());
-      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-      final Change change = refactoring.createChange(_nullProgressMonitor_1);
-      NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-      change.perform(_nullProgressMonitor_2);
+      final Change change = refactoring.createChange(monitor);
+      change.perform(monitor);
       this.project.refreshLocal(IResource.DEPTH_INFINITE, null);
       this.project.build(IncrementalProjectBuilder.FULL_BUILD, null);
     } catch (Throwable _e) {
