@@ -35,6 +35,7 @@ import org.eclipse.xtext.ide.refactoring.RefactoringIssueAcceptor;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationChange;
 import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
 import org.eclipse.xtext.ide.serializer.IChangeSerializer;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.refactoring2.ChangeConverter;
 import org.eclipse.xtext.ui.refactoring2.LtkIssueAcceptor;
 import org.eclipse.xtext.ui.refactoring2.ResourceURIConverter;
@@ -45,6 +46,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -93,8 +96,9 @@ public class ResourceRelocationProcessor {
     subMonitor.beginTask("Preparing the refactoring...", 5);
     final IChangeSerializer changeSerializer = this.changeSerializerProvider.get();
     final ResourceSet resourceSet = this.resourceSetProvider.get(this.project);
-    this.liveScopeResourceSetInitializer.initialize(resourceSet);
     final ResourceRelocationContext context = new ResourceRelocationContext(type, this.uriChanges, this.issues, changeSerializer, resourceSet);
+    final boolean persistedIndexUsageRequested = this.isPersistedIndexUsageRequested(context);
+    this.initializeResourceSet(persistedIndexUsageRequested, context);
     this.executeParticipants(context, subMonitor.split(1));
     final Predicate<Change> _function = (Change it) -> {
       return ((!((it instanceof MoveResourceChange) || (it instanceof RenameResourceChange))) || (!this.excludedResources.contains(it.getModifiedElement())));
@@ -105,6 +109,30 @@ public class ResourceRelocationProcessor {
     changeSerializer.applyModifications(changeConverter);
     modificationApplicationMonitor.done();
     return changeConverter.getChange();
+  }
+  
+  /**
+   * @since 2.18
+   */
+  protected boolean isPersistedIndexUsageRequested(final ResourceRelocationContext context) {
+    final List<? extends IResourceRelocationStrategy> strategies = this.strategyRegistry.getStrategies();
+    final Function1<IResourceRelocationStrategy, Boolean> _function = (IResourceRelocationStrategy it) -> {
+      return Boolean.valueOf(it.requiresUsageOfPersistedIndex(context));
+    };
+    final boolean persistedIndexUsageRequested = IterableExtensions.exists(strategies, _function);
+    return persistedIndexUsageRequested;
+  }
+  
+  /**
+   * @since 2.18
+   */
+  protected void initializeResourceSet(final boolean persistedIndexUsageRequested, final ResourceRelocationContext context) {
+    if (persistedIndexUsageRequested) {
+      context.getResourceSet().getLoadOptions().put(
+        ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS, Boolean.TRUE);
+    } else {
+      this.liveScopeResourceSetInitializer.initialize(context.getResourceSet());
+    }
   }
   
   protected void executeParticipants(final ResourceRelocationContext context, final SubMonitor monitor) {
