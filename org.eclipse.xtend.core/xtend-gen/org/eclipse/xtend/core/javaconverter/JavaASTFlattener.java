@@ -158,6 +158,11 @@ public class JavaASTFlattener extends ASTVisitor {
   private String targetApiLevel;
   
   /**
+   * Sets whether conditional expressions like cond? a : b are allowed (true) or not
+   */
+  private boolean conditionalExpressionsAllowed;
+  
+  /**
    * Creates a new AST printer.
    */
   public JavaASTFlattener() {
@@ -790,12 +795,27 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ConditionalExpression node) {
-    this.appendToBuffer("if (");
-    node.getExpression().accept(this);
-    this.appendToBuffer(") ");
-    node.getThenExpression().accept(this);
-    this.appendToBuffer(" else ");
-    node.getElseExpression().accept(this);
+    if (this.conditionalExpressionsAllowed) {
+      String _string = null;
+      if (node!=null) {
+        _string=node.toString();
+      }
+      this.appendToBuffer(_string);
+    } else {
+      this.appendToBuffer("if ");
+      boolean _startsWith = node.getExpression().toString().startsWith("(");
+      if (_startsWith) {
+        node.getExpression().accept(this);
+        this.appendToBuffer(" ");
+      } else {
+        this.appendToBuffer("(");
+        node.getExpression().accept(this);
+        this.appendToBuffer(") ");
+      }
+      node.getThenExpression().accept(this);
+      this.appendToBuffer(" else ");
+      node.getElseExpression().accept(this);
+    }
     this.appendSpaceToBuffer();
     return false;
   }
@@ -2549,5 +2569,9 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public String setTargetlevel(final String targetApiLevel) {
     return this.targetApiLevel = targetApiLevel;
+  }
+  
+  public boolean allowConditionalExpressions(final boolean allow) {
+    return this.conditionalExpressionsAllowed = allow;
   }
 }

@@ -270,6 +270,16 @@ public class CompilerTest extends AbstractXtendTestCase {
 		invokeAndExpect2(expectation, code, "getField");
 	}
 	
+	@Test public void testFieldInitialization_01b() throws Exception {
+		String code =
+				"String field = true ? newArrayList('a', 'b').join(',') : ''\n" +
+				"def getField() {\n" + 
+				"  field" + 
+				"}";
+		String expectation = "a,b";
+		invokeAndExpect2(expectation, code, "getField");
+	}
+	
 	@Test public void testFieldInitialization_02() throws Exception {
 		String code =
 				"String field = return 123.toString\n" +
@@ -572,6 +582,30 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"\n" + 
 				"  def ifExpression_01(String param) {\n" + 
 				"    ifExpression(if (param=='foo') 'bar' else 'baz') \n" + 
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		Class<?> class1 = compileToClass("x.Z", javaCode);
+		Object object = class1.newInstance();
+		assertEquals(3, class1.getDeclaredMethod("ifExpression_01", String.class).invoke(object, "foo"));
+	}
+	
+	@Test public void testSimpleExtensionMethodCall_b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def create result : <String>newArrayList() copyNet(String append) {\n" +
+				"    result += append\n" + 
+				"  }" +
+				"  def ifExpression(String param) {\n" + 
+				"    param!=null ? {\n" + 
+				"      param.length\n" + 
+				"    } : {\n" + 
+				"      0\n" + 
+				"    } \n" + 
+				"  }\n" + 
+				"\n" + 
+				"  def ifExpression_01(String param) {\n" + 
+				"    ifExpression(param=='foo' ? 'bar' : 'baz') \n" + 
 				"  }\n" +
 				"}\n";
 		String javaCode = compileToJavaCode(code);
@@ -981,6 +1015,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 		compileToClass("x.Z", javaCode);
 	}
 	
+	@Test public void testBug_350932_03b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    true ? return false : false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		compileToClass("x.Z", javaCode);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
 	 */
@@ -1006,6 +1054,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"package x class Z {" +
 				"  def bug(){\n" + 
 				"    if (true) return false else return false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_350932_05b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    true ? return false : return false\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1066,6 +1128,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 		compileToClass("x.Z", javaCode);
 	}
 	
+	@Test public void testBug_350932_08b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|true ? return false : false].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		compileToClass("x.Z", javaCode);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
 	 */
@@ -1091,6 +1167,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"package x class Z {" +
 				"  def bug(){\n" + 
 				"    [|if (true) return false else return false].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_350932_10b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [| true ? return false : return false].apply\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1157,6 +1247,20 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"package x class Z {" +
 				"  def bug(){\n" + 
 				"    val x = if (true) return Boolean::FALSE else null x\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		compileToClass("x.Z", javaCode);
+	}
+	
+	@Test public void testBug_350932_14b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    val x = true ? return Boolean::FALSE : null x\n" + 
 				"  }\n" +
 				"  def invoke() {\n" +
 				"    val boolean b = bug\n" +
@@ -1853,6 +1957,22 @@ public class CompilerTest extends AbstractXtendTestCase {
 		assertTrue(instance.equals("foo"));
 	}
 	
+	@Test public void testSuperCall_b() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x class Y extends Object {" +
+				"  override boolean equals(Object p){\n" +
+				"    'foo' == p ? " +
+				"       return true" +
+				"    : " +
+				"       super.equals(p)" + 
+				"  }\n" + 
+				"}");
+		Object instance = clazz.newInstance();
+		assertFalse(instance.equals(clazz.newInstance()));
+		assertTrue(instance.equals(instance));
+		assertTrue(instance.equals("foo"));
+	}
+	
 	@Test public void testSuperCall_00() throws Exception {
 		String code = 
 				"package x class Z {" +
@@ -1860,6 +1980,24 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"    if ('foo' == p) " +
 				"       return true" +
 				"    else " +
+				"       return super.equals(p)" + 
+				"  }\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> clazz = compileToClass("x.Z", javaCode);
+		Object instance = clazz.newInstance();
+		assertFalse(instance.equals(clazz.newInstance()));
+		assertTrue(instance.equals(instance));
+		assertTrue(instance.equals("foo"));
+	}
+	
+	@Test public void testSuperCall_00b() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  override boolean equals(Object p){\n" +
+				"    'foo' == p ? " +
+				"       return true" +
+				"    : " +
 				"       return super.equals(p)" + 
 				"  }\n" + 
 				"}";
@@ -2337,9 +2475,17 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testTwoArgFunction() throws Exception {
 		invokeAndExpect("foo", "if (p2) 'foo' else p1 ","bar",true);
 	}
+	
+	@Test public void testTwoArgFunction_b() throws Exception {
+		invokeAndExpect("foo", "(p2) ? 'foo' : p1 ","bar",true);
+	}
 
 	@Test public void testTwoArgFunction_01() throws Exception {
 		invokeAndExpect("bar", "if (p2) 'foo' else p1 ","bar",false);
+	}
+	
+	@Test public void testTwoArgFunction_01b() throws Exception {
+		invokeAndExpect("bar", "(p2) ? 'foo' : p1 ","bar",false);
 	}
 	
 	@Test public void testDispatchFunction_00() throws Exception {
@@ -2590,6 +2736,17 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  if (elements == null)\n" + 
 				"    newArrayList\n" + 
 				"  else\n" + 
+				"    elements\n" + 
+				"}","nullSafe", new Class[] { Iterable.class },  new Object[] { null });
+	}
+	
+	@Test public void testBug358418_01b() throws Exception {
+		invokeAndExpect3(
+				Lists.<Object>newArrayList(), 
+				"def <T> Iterable<T> nullSafe(Iterable<T> elements) {\n" + 
+				"  elements == null ?\n" + 
+				"    newArrayList\n" + 
+				"  :\n" + 
 				"    elements\n" + 
 				"}","nullSafe", new Class[] { Iterable.class },  new Object[] { null });
 	}

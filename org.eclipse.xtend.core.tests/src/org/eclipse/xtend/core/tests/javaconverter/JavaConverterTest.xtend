@@ -604,8 +604,27 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			c = Boolean.class;
 		}'''.toXtendStatement)
 	}
+	
+	@Test
+	def void testConditionalExpressionKeep() {
+		val input = 'c = bool? 1 : 2'.toXtendExpression(true)
+		val result = 'c=bool ? 1 : 2'
+		assertEquals(result, input)
+	}
 
-
+	@Test
+	def void testConditionalExpressionChange() {
+		val input = 'c = bool? 1 : 2'.toXtendExpression(false)
+		val result = 'c=if (bool) 1 else 2'
+		assertEquals(result, input)
+	}
+	
+	@Test
+	def void testConditionalExpressionChangeNested() {
+		val input = 'c = bool? !bool? 3 : 4 : 2'.toXtendExpression(false)
+		val result = 'c=if (bool) if (!bool) 3 else 4  else 2'
+		assertEquals(result, input)
+	}
 
 	@Test def void testStaticImportCase() throws Exception {
 
@@ -1848,6 +1867,12 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	def protected toXtendStatement(CharSequence string) {
 		val xtendCode = j2x.statementToXtend(string.toString,null ).getXtendCode().trim()
+		dump(xtendCode)
+		return xtendCode
+	}
+	
+	def protected toXtendExpression(CharSequence string, boolean conditionalExpressionAllowed) {
+		val xtendCode = j2x.expressionToXtend(string.toString, null, conditionalExpressionAllowed).xtendCode.trim
 		dump(xtendCode)
 		return xtendCode
 	}

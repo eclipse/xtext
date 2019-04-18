@@ -72,7 +72,8 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields:")
 				.addComboBox(IMPLICIT_RETURN, "Implicit return:")
 				.addComboBox(WRONG_FILE, "File name doesn't match type name:")
-				.addComboBox(MODIFIER_DOES_NOT_MATCH_TYPENAME, "Modifier does not match type name:");
+				.addComboBox(MODIFIER_DOES_NOT_MATCH_TYPENAME, "Modifier does not match type name:")
+				.addComboBox(TERNARY_EXPRESSION_NOT_ALLOWED, "Ternary expression (cond ? a : b) is used:");
 	}
 
 	@Override

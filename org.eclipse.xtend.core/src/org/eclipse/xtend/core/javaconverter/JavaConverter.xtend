@@ -36,7 +36,7 @@ class JavaConverter {
 	def ConversionResult toXtend(ICompilationUnit cu) {
 		val parser = astParserFactory.createJavaParser(cu)
 		val root = parser.createAST()
-		return executeAstFlattener(cu.source, root, parser.targetLevel, false)
+		return executeAstFlattener(cu.source, root, parser.targetLevel, false, false)
 	}
 	
 
@@ -49,7 +49,7 @@ class JavaConverter {
 	def ConversionResult toXtend(String unitName, String javaSrc) {
 		if (unitName === null)
 			throw new IllegalArgumentException()
-		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(null))
+		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(null), false)
 	}
 
 	/**
@@ -62,7 +62,7 @@ class JavaConverter {
 	def ConversionResult toXtend(String unitName, String javaSrc, Object classPathContext) {
 		if (unitName === null)
 			throw new IllegalArgumentException()
-		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(classPathContext))
+		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(classPathContext), false)
 	}
 
 	/**
@@ -70,8 +70,9 @@ class JavaConverter {
 	 * @param javaImports imports to use 
 	 * @param targetElement Used to determinate javaCode conversion type
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+	 * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
 	 */
-	def String toXtend(String javaSrc, String[] javaImports, EObject targetElement, Object classPathContext) {
+	def String toXtend(String javaSrc, String[] javaImports, EObject targetElement, Object classPathContext, boolean conditionalExpressionsAllowed) {
 		var boolean forceStatement = shouldForceStatementMode(targetElement)
 		var JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaSrc)
 		if (parseResult === null) {
@@ -80,7 +81,7 @@ class JavaConverter {
 		var ConversionResult conversionResult
 		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
 			if (parseResult.getType() === ASTParser.K_EXPRESSION) {
-				conversionResult = expressionToXtend(javaSrc, classPathContext)
+				conversionResult = expressionToXtend(javaSrc, classPathContext, conditionalExpressionsAllowed)
 			} else {
 				conversionResult = statementToXtend(javaSrc, classPathContext)
 			}
@@ -97,7 +98,7 @@ class JavaConverter {
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
 	 */
 	def ConversionResult bodyDeclarationToXtend(String javaSrc, String[] imports, Object classPathContext) {
-		internalToXtend(null, javaSrc, imports, astParserFactory.createJavaParser(classPathContext))
+		internalToXtend(null, javaSrc, imports, astParserFactory.createJavaParser(classPathContext), false)
 	}
 
 	/**
@@ -110,21 +111,22 @@ class JavaConverter {
 		parser.kind = ASTParser.K_STATEMENTS
 		val root = parser.createAST()
 		if (root instanceof Block) {
-			return executeAstFlattener(javaSrc, root, parser.targetLevel, true)
+			return executeAstFlattener(javaSrc, root, parser.targetLevel, true, false)
 		}
-		return executeAstFlattener(javaSrc, root, parser.targetLevel, false)
+		return executeAstFlattener(javaSrc, root, parser.targetLevel, false, false)
 	}
 
 	/**
 	 * @param javaSrc Java class source code as String
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+	 * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
 	 */
-	def ConversionResult expressionToXtend(String javaSrc, Object classPathContext) {
+	def ConversionResult expressionToXtend(String javaSrc, Object classPathContext, boolean conditionalExpressionsAllowed) {
 		val parser = astParserFactory.createJavaParser(classPathContext)
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_EXPRESSION
 		val root = parser.createAST()
-		return executeAstFlattener(javaSrc, root, parser.targetLevel, false)
+		return executeAstFlattener(javaSrc, root, parser.targetLevel, false, conditionalExpressionsAllowed)
 	}
 
 	/**
@@ -133,9 +135,10 @@ class JavaConverter {
 	 * @param javaSrc Java source code as String
 	 * @param imports Additional imports to add
 	 * @param parser ASTParser to use
+	 * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
 	 */
 	def private ConversionResult internalToXtend(String unitName, String javaSrc, String[] imports,
-		ASTParserWrapper parser) {
+		ASTParserWrapper parser,boolean conditionalExpressionsAllowed) {
 		val javaSrcBuilder = new StringBuilder()
 		if (imports !== null) {
 			imports.forEach[javaSrcBuilder.append("import " + it + ";")]
@@ -151,18 +154,20 @@ class JavaConverter {
 		val preparedJavaSrc = javaSrcBuilder.toString
 		parser.source = preparedJavaSrc.toCharArray
 		val result = parser.createAST()
-		return executeAstFlattener(preparedJavaSrc, result, parser.targetLevel, false)
+		return executeAstFlattener(preparedJavaSrc, result, parser.targetLevel, false, conditionalExpressionsAllowed)
 	}
 
 	/**
 	 * @param  preparedJavaSource used to collect javadoc and comments
+	 * @param  conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
 	 */
 	private def executeAstFlattener(String preparedJavaSource, ASTNode parseResult, String targetLevel,
-		boolean synteticBlock) {
+		boolean synteticBlock, boolean conditionalExpressionsAllowed) {
 		val astFlattener = astFlattenerProvider.get
 		astFlattener.targetlevel = targetLevel
 		astFlattener.useFallBackStrategy = fallbackConversionStartegy
 		astFlattener.setJavaSources(preparedJavaSource)
+		astFlattener.allowConditionalExpressions(conditionalExpressionsAllowed);
 		if (synteticBlock && parseResult instanceof Block) {
 			astFlattener.acceptSyntaticBlock(parseResult as Block)
 		} else {

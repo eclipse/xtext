@@ -14,12 +14,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
+import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -40,8 +43,9 @@ import com.google.inject.Provider;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class PasteJavaCodeHandler extends AbstractHandler {
-	private @Inject Provider<JavaConverter> javaConverterProvider;
-	private @Inject ImportsUtil importsUtil;
+	@Inject private Provider<JavaConverter> javaConverterProvider;
+	@Inject private ImportsUtil importsUtil;
+	@Inject private XtendPreferenceStoreAccess prefStoreAccess;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -63,9 +67,10 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
 		final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
 		IJavaProject project = null;
+		IProject iProject = null;
 		IEditorInput editorInput = activeXtextEditor.getEditorInput();
 		if (editorInput instanceof IFileEditorInput) {
-			IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
+			iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
 		final int selectionOffset = sourceViewer.getSelectedRange().x - 1;
@@ -83,7 +88,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		});
 		JavaConverter javaConverter = javaConverterProvider.get();
 		final String xtendCode = javaConverter.toXtend(javaCode, javaImports != null ? javaImports.getImports() : null,
-				targetElement, project);
+				targetElement, project, conditionalExpressionsAllowed(iProject));
 		if (!Strings.isEmpty(xtendCode)) {
 			if (javaImports != null) {
 				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {}, xtextDocument);
@@ -111,6 +116,17 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		sourceViewer.getTextOperationTarget().doOperation(ISourceViewer.FORMAT);
 		int restoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
 		sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
+	}
+	
+	/**
+	 * Checks if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
+	 */
+	private boolean conditionalExpressionsAllowed(IProject project) {
+		IPreferenceStore prefStore = prefStoreAccess.getContextPreferenceStore(project);
+		if (prefStore.getString(IssueCodes.TERNARY_EXPRESSION_NOT_ALLOWED).contentEquals("ignore"))
+			return true;
+		else
+			return false;
 	}
 
 }

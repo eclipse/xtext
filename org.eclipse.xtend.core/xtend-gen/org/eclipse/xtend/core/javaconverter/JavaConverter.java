@@ -87,7 +87,7 @@ public class JavaConverter {
     try {
       final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
       final ASTNode root = parser.createAST();
-      return this.executeAstFlattener(cu.getSource(), root, parser.getTargetLevel(), false);
+      return this.executeAstFlattener(cu.getSource(), root, parser.getTargetLevel(), false, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -105,7 +105,7 @@ public class JavaConverter {
       if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(null));
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(null), false);
     }
     return _xblockexpression;
   }
@@ -123,7 +123,7 @@ public class JavaConverter {
       if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
-      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(classPathContext));
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null, this.astParserFactory.createJavaParser(classPathContext), false);
     }
     return _xblockexpression;
   }
@@ -133,8 +133,9 @@ public class JavaConverter {
    * @param javaImports imports to use
    * @param targetElement Used to determinate javaCode conversion type
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+   * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
    */
-  public String toXtend(final String javaSrc, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
+  public String toXtend(final String javaSrc, final String[] javaImports, final EObject targetElement, final Object classPathContext, final boolean conditionalExpressionsAllowed) {
     boolean forceStatement = this.shouldForceStatementMode(targetElement);
     JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaSrc);
     if ((parseResult == null)) {
@@ -145,7 +146,7 @@ public class JavaConverter {
       int _type = parseResult.getType();
       boolean _tripleEquals = (_type == ASTParser.K_EXPRESSION);
       if (_tripleEquals) {
-        conversionResult = this.expressionToXtend(javaSrc, classPathContext);
+        conversionResult = this.expressionToXtend(javaSrc, classPathContext, conditionalExpressionsAllowed);
       } else {
         conversionResult = this.statementToXtend(javaSrc, classPathContext);
       }
@@ -167,7 +168,7 @@ public class JavaConverter {
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final String[] imports, final Object classPathContext) {
-    return this.internalToXtend(null, javaSrc, imports, this.astParserFactory.createJavaParser(classPathContext));
+    return this.internalToXtend(null, javaSrc, imports, this.astParserFactory.createJavaParser(classPathContext), false);
   }
   
   /**
@@ -180,21 +181,22 @@ public class JavaConverter {
     parser.setKind(ASTParser.K_STATEMENTS);
     final ASTNode root = parser.createAST();
     if ((root instanceof Block)) {
-      return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), true);
+      return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), true, false);
     }
-    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false, false);
   }
   
   /**
    * @param javaSrc Java class source code as String
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+   * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
    */
-  public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext) {
+  public JavaConverter.ConversionResult expressionToXtend(final String javaSrc, final Object classPathContext, final boolean conditionalExpressionsAllowed) {
     final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(classPathContext);
     parser.setSource(javaSrc.toCharArray());
     parser.setKind(ASTParser.K_EXPRESSION);
     final ASTNode root = parser.createAST();
-    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false);
+    return this.executeAstFlattener(javaSrc, root, parser.getTargetLevel(), false, conditionalExpressionsAllowed);
   }
   
   /**
@@ -203,8 +205,9 @@ public class JavaConverter {
    * @param javaSrc Java source code as String
    * @param imports Additional imports to add
    * @param parser ASTParser to use
+   * @param conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
    */
-  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParserFactory.ASTParserWrapper parser) {
+  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParserFactory.ASTParserWrapper parser, final boolean conditionalExpressionsAllowed) {
     final StringBuilder javaSrcBuilder = new StringBuilder();
     if ((imports != null)) {
       final Consumer<String> _function = (String it) -> {
@@ -227,17 +230,19 @@ public class JavaConverter {
     final String preparedJavaSrc = javaSrcBuilder.toString();
     parser.setSource(preparedJavaSrc.toCharArray());
     final ASTNode result = parser.createAST();
-    return this.executeAstFlattener(preparedJavaSrc, result, parser.getTargetLevel(), false);
+    return this.executeAstFlattener(preparedJavaSrc, result, parser.getTargetLevel(), false, conditionalExpressionsAllowed);
   }
   
   /**
    * @param  preparedJavaSource used to collect javadoc and comments
+   * @param  conditionalExpressionsAllowed informs, if conditional aka ternary expressions like "cond? a : b" are allowed (by preference setting)
    */
-  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final ASTNode parseResult, final String targetLevel, final boolean synteticBlock) {
+  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final ASTNode parseResult, final String targetLevel, final boolean synteticBlock, final boolean conditionalExpressionsAllowed) {
     final JavaASTFlattener astFlattener = this.astFlattenerProvider.get();
     astFlattener.setTargetlevel(targetLevel);
     astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
     astFlattener.setJavaSources(preparedJavaSource);
+    astFlattener.allowConditionalExpressions(conditionalExpressionsAllowed);
     if ((synteticBlock && (parseResult instanceof Block))) {
       astFlattener.acceptSyntaticBlock(((Block) parseResult));
     } else {

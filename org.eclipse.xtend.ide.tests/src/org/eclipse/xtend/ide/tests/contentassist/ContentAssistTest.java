@@ -207,6 +207,14 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, getKeywordsAndStatics(), getExpressionTemplates()));
 	}
 	
+	@Test public void testTryResource_01() throws Exception {
+		newBuilder().append("try (val a = new StringReader(\"Test\"); val b =  ").assertText(expect(new String[]{"a"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
+	@Test public void testTryResource_02() throws Exception {
+		newBuilder().append("try (val a = new StringReader(\"Test\")) { val b = ").assertText(expect(new String[]{"a"}, getKeywordsAndStatics(), getExpressionTemplates()));
+	}
+	
 	@Override
 	@Test public void testSwitchOnEnum_01() throws Exception {
 		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics(), getExpressionTemplates()));

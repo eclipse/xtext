@@ -83,6 +83,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
@@ -719,7 +720,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					if (modExist) {
 						modifiers.add(index, "abstract");
 					} else {
-						// workaround for bug 721 - fallback to textual modification
+						//use existent method to add abstract modifier, if modifier list is empty, to prevent wrong insertion
 						internalDoAddAbstractKeyword(element, context);
 					}
 				}
@@ -789,6 +790,115 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		});
 	}
 	
+	@Fix(IssueCodes.TERNARY_EXPRESSION_NOT_ALLOWED)
+	public void refactorTernaryOperatorIntoNormalIf(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String label = "Refactor into inline if-expression.";
+		String description = "Refactor ternary expression (cond? a : b) \ninto an inline if-expression (if cond a else b).";
+		String image = "delete_edit.png";
+
+		//stop before NullpointerExceptions are thrown
+		if (issue == null)
+			return;
+		//Fix
+		acceptor.accept(issue, label, description, image, new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				
+				//Collect basic elements				
+				IXtextDocument xtextDocument = context.getXtextDocument();
+				if (xtextDocument == null || element == null || !(element instanceof XExpression))
+					return;
+				XIfExpression exp = (XIfExpression) element;
+				
+				//Collect original ternary expression information
+				ICompositeNode expNode = NodeModelUtils.findActualNodeFor(exp);
+				if (expNode == null)
+					throw new IllegalStateException("Node to refactor may not be null");
+				int expOffset = expNode.getTextRegion().getOffset();
+				int expLength = expNode.getTextRegion().getLength();
+				
+				String ifExpr = this.buildIfExpression(exp, xtextDocument);
+				xtextDocument.replace(expOffset, expLength, ifExpr);
+				
+			}
+			
+			/**
+			 * Build an inline if expression from the given ternary expression
+			 * Also apply this fix to nested elements in then or else part
+			 */
+			private String buildIfExpression(XIfExpression expression, IXtextDocument document) throws Exception {
+				//Basic elements
+				XExpression thenPart = expression.getThen();
+				XExpression elsePart = expression.getElse();
+				boolean outerBracketsSet = false;
+				
+				//Collect String representations
+				String ternExpStr = this.getString(NodeModelUtils.findActualNodeFor(expression), document);
+				if (ternExpStr.endsWith(")")) outerBracketsSet = true;
+				
+				String condStr = this.getString(NodeModelUtils.findActualNodeFor(expression.getIf()), document);
+				if (!condStr.contains("(")) {
+					condStr = "("+condStr+")";
+				}
+				
+				//Check if then or else part is a ternary expression, too,
+				//and apply the fix to the inner elements 
+				String thenStr = "", elseStr = "";
+				if (thenPart instanceof XIfExpression) {
+					if (((XIfExpression) thenPart).isConditionalExpression()) {
+						thenStr = buildIfExpression((XIfExpression) thenPart, document);
+					}
+				}
+				if (elsePart != null && elsePart instanceof XIfExpression) {
+					if (((XIfExpression) elsePart).isConditionalExpression()) {
+						elseStr = buildIfExpression((XIfExpression) elsePart, document);
+					}
+				}
+				//if then/else part does not contain nested ternary expressions
+				if (thenStr.isEmpty()) {
+					thenStr  = this.getString(NodeModelUtils.findActualNodeFor(thenPart), document);
+				}
+				if (elsePart != null && elseStr.isEmpty()) {
+					elseStr = this.getString(NodeModelUtils.findActualNodeFor(elsePart), document);
+				}
+				
+				//Combine
+				String ifExpStr = this.combineIfExpParts(condStr, thenStr, elseStr, outerBracketsSet);
+				
+				return ifExpStr;
+			}
+			
+			/**
+			 * Stitch together the inline if statement
+			 */
+			private String combineIfExpParts(String condStr, String thenStr, String elseStr, boolean outerBracketsSet) {
+				String ifExpr = "if " + condStr + " " + thenStr;
+				if (!elseStr.isEmpty())
+					ifExpr += " else " + elseStr;
+				if (outerBracketsSet)
+					ifExpr = "("+ifExpr+")";
+				return ifExpr;
+			}
+			
+			/**
+			 * Get the String from a document Node
+			 * Attention! The Document will not be updated in the meantime, so offsets and thus
+			 * the outputString might get messed up, if the document is changed and the String
+			 * is fetched after that.
+			 */
+			private String getString(ICompositeNode partNode, IXtextDocument doc) throws Exception {
+				if (partNode == null)
+					throw new IllegalStateException("Node to refactor may not be null");
+				ITextRegion partRegion = partNode.getTextRegion();
+				int partOffset = partRegion.getOffset();
+				int partLength = partRegion.getLength();
+				String partString = doc.get(partOffset, partLength);
+				
+				return partString;
+			}
+		});
+	}
+
 	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
 			throws BadLocationException {
 		if (element instanceof XtendFunction) {

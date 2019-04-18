@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsForma
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.xbase.XIfExpression
 
 /**
  * @author Moritz Eysholdt - Initial implementation and API
@@ -243,6 +244,36 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		expr.regionFor.keyword("extension").append[oneSpace]
 		super._format(expr,format)
 	}
+	
+	override dispatch void format(XIfExpression expr, extension IFormattableDocument format) {
+		if (!expr.conditionalExpression) {
+			super._format(expr, format)
+		} else {
+			if (expr.eContainer instanceof XVariableDeclaration) {
+				expr.surround[indent]
+			}
+			val multiline = expr.then.multilineOrInNewLine || expr.^else.multilineOrInNewLine
+			if (expr.then instanceof XBlockExpression || multiline)
+				expr.regionFor.keyword("?").prepend[newLine].surround[indent].append[oneSpace]
+			else
+				expr.regionFor.keyword("?").surround[oneSpace]
+			expr.^if.format
+			// missing paranthesis around the condition cannot be added
+			if (expr.^else === null) {
+				expr.then.formatBody(multiline, format)
+			} else {
+				expr.then.formatBodyInline(multiline, format)
+				
+				if (expr.^else instanceof XIfExpression || !multiline) {
+					expr.^else.prepend[oneSpace]
+					expr.^else.format
+				} else {
+					expr.regionFor.keyword(":").prepend[newLine].surround[indent].append[oneSpace]
+					expr.^else.formatBody(multiline, format)
+				}
+			}
+		}
+	}
 
 	override dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("extension").append[oneSpace]
@@ -280,7 +311,8 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
 			expr.prepend(bracesInNewLine).append(bracesInNewLine)
 		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
-			expr.prepend[newLine].surround[indent].append[newLine]
+			if (!(expr.eContainer instanceof XIfExpression && (expr.eContainer as XIfExpression).conditionalExpression))
+				expr.prepend[newLine].surround[indent].append[newLine]
 		} else {
 			expr.surround[oneSpace]
 		}
@@ -293,7 +325,8 @@ class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		if (expr instanceof XBlockExpression && (!(expr instanceof RichString) || !forceMultiline)) {
 			expr.prepend(bracesInNewLine)
 		} else if (forceMultiline || expr.previousHiddenRegion.isMultiline) {
-			expr.prepend[newLine].surround[indent]
+			if (!(expr.eContainer instanceof XIfExpression && (expr.eContainer as XIfExpression).conditionalExpression))
+				expr.prepend[newLine].surround[indent]
 		} else {
 			expr.prepend[oneSpace]
 		}

@@ -500,6 +500,68 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   }
   
   @Override
+  protected void _format(final XIfExpression expr, @Extension final IFormattableDocument format) {
+    boolean _isConditionalExpression = expr.isConditionalExpression();
+    boolean _not = (!_isConditionalExpression);
+    if (_not) {
+      super._format(expr, format);
+    } else {
+      EObject _eContainer = expr.eContainer();
+      if ((_eContainer instanceof XVariableDeclaration)) {
+        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+          it.indent();
+        };
+        format.<XIfExpression>surround(expr, _function);
+      }
+      final boolean multiline = (this.isMultilineOrInNewLine(expr.getThen()) || this.isMultilineOrInNewLine(expr.getElse()));
+      if (((expr.getThen() instanceof XBlockExpression) || multiline)) {
+        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.indent();
+        };
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.oneSpace();
+        };
+        format.append(format.surround(format.prepend(this.textRegionExtensions.regionFor(expr).keyword("?"), _function_1), _function_2), _function_3);
+      } else {
+        final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+          it.oneSpace();
+        };
+        format.surround(this.textRegionExtensions.regionFor(expr).keyword("?"), _function_4);
+      }
+      format.<XExpression>format(expr.getIf());
+      XExpression _else = expr.getElse();
+      boolean _tripleEquals = (_else == null);
+      if (_tripleEquals) {
+        this.formatBody(expr.getThen(), multiline, format);
+      } else {
+        this.formatBodyInline(expr.getThen(), multiline, format);
+        if (((expr.getElse() instanceof XIfExpression) || (!multiline))) {
+          final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+            it.oneSpace();
+          };
+          format.<XExpression>prepend(expr.getElse(), _function_5);
+          format.<XExpression>format(expr.getElse());
+        } else {
+          final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
+            it.indent();
+          };
+          final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
+            it.oneSpace();
+          };
+          format.append(format.surround(format.prepend(this.textRegionExtensions.regionFor(expr).keyword(":"), _function_6), _function_7), _function_8);
+          this.formatBody(expr.getElse(), multiline, format);
+        }
+      }
+    }
+  }
+  
+  @Override
   protected void _format(final JvmFormalParameter expr, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.oneSpace();
@@ -547,16 +609,19 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       doc.<XExpression>append(doc.<XExpression>prepend(expr, XbaseFormatterPreferenceKeys.bracesInNewLine), XbaseFormatterPreferenceKeys.bracesInNewLine);
     } else {
       if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
-        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-          it.newLine();
-        };
-        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-          it.indent();
-        };
-        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-          it.newLine();
-        };
-        doc.<XExpression>append(doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1), _function_2);
+        boolean _not = (!((expr.eContainer() instanceof XIfExpression) && ((XIfExpression) expr.eContainer()).isConditionalExpression()));
+        if (_not) {
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+            it.indent();
+          };
+          final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          doc.<XExpression>append(doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1), _function_2);
+        }
       } else {
         final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();
@@ -576,13 +641,16 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       doc.<XExpression>prepend(expr, XbaseFormatterPreferenceKeys.bracesInNewLine);
     } else {
       if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
-        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-          it.newLine();
-        };
-        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-          it.indent();
-        };
-        doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1);
+        boolean _not = (!((expr.eContainer() instanceof XIfExpression) && ((XIfExpression) expr.eContainer()).isConditionalExpression()));
+        if (_not) {
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+            it.newLine();
+          };
+          final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+            it.indent();
+          };
+          doc.<XExpression>surround(doc.<XExpression>prepend(expr, _function), _function_1);
+        }
       } else {
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();

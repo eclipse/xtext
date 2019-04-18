@@ -116,4 +116,8 @@ public final class IssueCodes {
 	 */
 	public static final String INVALID_RETURN_TYPE_IN_CASE_OF_JUNIT_ANNOTATION = ISSUE_CODE_PREFIX +  "invalid_return_type_in_case_of_junit_annotation";
 	
+	/**
+	 * @since 2.18
+	 */
+	public static final String TERNARY_EXPRESSION_NOT_ALLOWED = ISSUE_CODE_PREFIX + "ternary_if_operator_is_not_allowed";
 }

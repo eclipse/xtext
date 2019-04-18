@@ -526,6 +526,24 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 	
 	@Override
+	public void completeInitializedVariableDeclaration_Name(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeXVariableDeclaration_Name(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeInitializedVariableDeclaration_Type(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeXVariableDeclaration_Type(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeInitializedVariableDeclaration_Right(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeXVariableDeclaration_Right(model, assignment, context, acceptor);
+	}
+	
+	@Override
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {

@@ -291,4 +291,21 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(file);
 	}
 	
+	@Test public void testAutoClosable_01() throws Exception {
+		XtendFile file = file("class C { def void m() { try(val res = []) {return res} } }");
+		helper.assertError(file, XbasePackage.Literals.XVARIABLE_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION, 
+				"Unhandled exception type Exception thrown by automatic close() invocation on res");
+	}
+	
+	@Test public void testAutoClosable_02() throws Exception {
+		XtendFile file = file("class C { def void m() { try(val res = []) {} catch(Exception e) {} } }");
+		helper.assertNoErrors(file);
+	}
+	
+	@Test public void testAutoClosable_03() throws Exception {
+		XtendFile file = file("class C { def void m() { try(val buffy = new java.io.BufferedReader(null)) {return buffy} } }");
+		helper.assertError(file, XbasePackage.Literals.XVARIABLE_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION, 
+				"Unhandled exception type IOException thrown by automatic close() invocation on buffy");
+	}
+	
 }

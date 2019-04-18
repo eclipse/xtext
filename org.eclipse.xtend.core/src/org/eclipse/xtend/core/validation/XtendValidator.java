@@ -106,6 +106,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
@@ -2222,6 +2223,19 @@ public class XtendValidator extends XbaseWithAnnotationsValidator {
 			}
 		}
 		super.checkDeprecated(decl);
+	}
+	
+	@Check
+	public void checkTernaryExpressionUsed(XIfExpression exp) {
+		if (exp.isConditionalExpression()) {
+			//Check if this expression is nested in another already marked ternary expression
+			EObject container = exp.eContainer();
+			if (container instanceof XIfExpression && ((XIfExpression) container).isConditionalExpression()) {
+				return;
+			}
+			//Raise issue
+			addIssue("The ternary operator is not allowed. Use a normal if-expression.", exp, TERNARY_EXPRESSION_NOT_ALLOWED);
+		}
 	}
 
 	// makes it possible to create issues with configurable severity from delegates e.g. ModifierValidator

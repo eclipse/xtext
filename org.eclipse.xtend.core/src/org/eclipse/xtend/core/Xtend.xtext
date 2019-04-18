@@ -259,11 +259,56 @@ Parameter returns XtendParameter:
 	annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)?
 	parameterType=JvmTypeReference varArg?='...'? name=ValidID;
 
+@Override 
+XAssignment returns xbase::XExpression :
+	{xbase::XAssignment} feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |
+	XConditionalExpression (
+		=>({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
+	)?;
+
+XConditionalExpression returns xbase::XExpression :
+	XOrExpression (
+		// The java grammar does only allow other XConditionalExpression after the colon, but we can be more relaxed
+		->({xbase::XIfExpression.if=current} conditionalExpression?='?') then=XExpression (->':' else=XExpression)?
+	)?
+;
+	
+@Override 
+XTryCatchFinallyExpression returns xbase::XExpression:
+	{xbase::XTryCatchFinallyExpression}
+	'try' (
+		'(' resources+=InitializedVariableDeclaration (';' resources+=InitializedVariableDeclaration)* ';'? ')'
+		expression=XExpression
+		->(
+			catchClauses+=XCatchClause+
+			(=>'finally' finallyExpression=XExpression)?
+		|	'finally' finallyExpression=XExpression
+		)?
+	|
+		expression=XExpression
+		(
+			catchClauses+=XCatchClause+
+			(=>'finally' finallyExpression=XExpression)?
+		|	'finally' finallyExpression=XExpression
+		)
+	)
+;
+
 @Override
 XVariableDeclaration returns xbase::XExpression:
-	=>({XtendVariableDeclaration}
-	(((writeable?='var'|'val') extension?='extension'?) | (extension?='extension' (writeable?='var'|'val'))))
+	=>({XtendVariableDeclaration} VariableModifier)
 	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
+
+InitializedVariableDeclaration returns XtendVariableDeclaration:
+	{XtendVariableDeclaration}
+	VariableModifier
+	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) '=' right=XExpression
+;
+
+fragment VariableModifier *:
+	  (writeable?='var'|'val') extension?='extension'? 
+	| extension?='extension' (writeable?='var'|'val')	
+;
 
 @Override
 XConstructorCall returns xbase::XExpression:

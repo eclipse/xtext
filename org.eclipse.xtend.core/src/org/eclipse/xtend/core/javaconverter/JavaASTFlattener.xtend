@@ -132,7 +132,10 @@ class JavaASTFlattener extends ASTVisitor {
 	boolean fallBackStrategy = false
 
 	String targetApiLevel
-
+	
+	/** Sets whether conditional expressions like cond? a : b are allowed (true) or not */
+	boolean conditionalExpressionsAllowed
+		
 	/**
 	 * Creates a new AST printer.
 	 */
@@ -590,16 +593,29 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(ConditionalExpression node) {
-		appendToBuffer("if (")
-		node.getExpression().accept(this)
-		appendToBuffer(") ")
-		node.getThenExpression().accept(this)
-		appendToBuffer(" else ")
-		node.getElseExpression().accept(this)
+		// Check if ternary expresseion is wanted or not
+		if (this.conditionalExpressionsAllowed) {
+			// insert ternary
+			appendToBuffer(node?.toString);
+		} else {
+			// insert converted if
+			appendToBuffer("if ")
+			if (node.expression.toString.startsWith("(")) {
+				node.getExpression().accept(this)
+				appendToBuffer(" ")
+			} else {
+				appendToBuffer("(")
+				node.getExpression().accept(this)
+				appendToBuffer(") ")
+			}
+			node.getThenExpression().accept(this)
+			appendToBuffer(" else ")
+			node.getElseExpression().accept(this)
+		}
 		appendSpaceToBuffer
 		return false
 	}
-
+	
 	def private appendExtraDimensions(int extraDimensions) {
 		appendToBuffer("[]" * extraDimensions)
 	}
@@ -1886,5 +1902,8 @@ class JavaASTFlattener extends ASTVisitor {
 	def setTargetlevel(String targetApiLevel) {
 		this.targetApiLevel = targetApiLevel
 	}
-
+	
+	def allowConditionalExpressions(boolean allow) {
+		this.conditionalExpressionsAllowed = allow
+	}
 }

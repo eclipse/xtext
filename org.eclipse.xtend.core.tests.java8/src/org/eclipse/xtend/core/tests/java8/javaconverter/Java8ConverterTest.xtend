@@ -79,7 +79,6 @@ class Java8ConverterTest extends JavaConverterTest {
 	}
 
 	@Test def void testDefaultMethod() throws Exception {
-		DUMP = true
 		val clazz = toValidXtendInterface('''
 		public interface XtendInterfaze {
 		  public default String foo() {

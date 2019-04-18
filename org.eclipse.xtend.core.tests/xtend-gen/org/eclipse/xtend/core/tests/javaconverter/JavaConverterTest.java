@@ -974,6 +974,27 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testConditionalExpressionKeep() {
+    final String input = this.toXtendExpression("c = bool? 1 : 2", true);
+    final String result = "c=bool ? 1 : 2";
+    Assert.assertEquals(result, input);
+  }
+  
+  @Test
+  public void testConditionalExpressionChange() {
+    final String input = this.toXtendExpression("c = bool? 1 : 2", false);
+    final String result = "c=if (bool) 1 else 2";
+    Assert.assertEquals(result, input);
+  }
+  
+  @Test
+  public void testConditionalExpressionChangeNested() {
+    final String input = this.toXtendExpression("c = bool? !bool? 3 : 4 : 2", false);
+    final String result = "c=if (bool) if (!bool) 3 else 4  else 2";
+    Assert.assertEquals(result, input);
+  }
+  
+  @Test
   public void testStaticImportCase() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
       "import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}");
@@ -3365,6 +3386,12 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   protected String toXtendStatement(final CharSequence string) {
     final String xtendCode = this.j2x.statementToXtend(string.toString(), null).getXtendCode().trim();
+    this.dump(xtendCode);
+    return xtendCode;
+  }
+  
+  protected String toXtendExpression(final CharSequence string, final boolean conditionalExpressionAllowed) {
+    final String xtendCode = this.j2x.expressionToXtend(string.toString(), null, conditionalExpressionAllowed).getXtendCode().trim();
     this.dump(xtendCode);
     return xtendCode;
   }
