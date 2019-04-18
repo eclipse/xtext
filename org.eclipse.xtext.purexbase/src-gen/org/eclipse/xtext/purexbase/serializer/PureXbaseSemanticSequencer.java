@@ -155,9 +155,11 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 					sequence_SpecialBlockExpression(context, (XBlockExpression) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getXExpressionRule()
-						|| rule == grammarAccess.getXAssignmentRule()
+				else if (rule == grammarAccess.getXAssignmentRule()
 						|| action == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| rule == grammarAccess.getXConditionalExpressionRule()
+						|| action == grammarAccess.getXConditionalExpressionAccess().getXIfExpressionIfAction_1_0_0_0()
+						|| rule == grammarAccess.getXExpressionRule()
 						|| rule == grammarAccess.getXOrExpressionRule()
 						|| action == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
 						|| rule == grammarAccess.getXAndExpressionRule()
@@ -206,9 +208,11 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 				sequence_XCatchClause(context, (XCatchClause) semanticObject); 
 				return; 
 			case XbasePackage.XCLOSURE:
-				if (rule == grammarAccess.getXExpressionRule()
-						|| rule == grammarAccess.getXAssignmentRule()
+				if (rule == grammarAccess.getXAssignmentRule()
 						|| action == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| rule == grammarAccess.getXConditionalExpressionRule()
+						|| action == grammarAccess.getXConditionalExpressionAccess().getXIfExpressionIfAction_1_0_0_0()
+						|| rule == grammarAccess.getXExpressionRule()
 						|| rule == grammarAccess.getXOrExpressionRule()
 						|| action == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
 						|| rule == grammarAccess.getXAndExpressionRule()
@@ -258,8 +262,45 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 				sequence_XForLoopExpression(context, (XForLoopExpression) semanticObject); 
 				return; 
 			case XbasePackage.XIF_EXPRESSION:
-				sequence_XIfExpression(context, (XIfExpression) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getXAssignmentRule()
+						|| action == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| rule == grammarAccess.getXConditionalExpressionRule()
+						|| action == grammarAccess.getXConditionalExpressionAccess().getXIfExpressionIfAction_1_0_0_0()
+						|| rule == grammarAccess.getXExpressionRule()
+						|| rule == grammarAccess.getXOrExpressionRule()
+						|| action == grammarAccess.getXOrExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXAndExpressionRule()
+						|| action == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXEqualityExpressionRule()
+						|| action == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXRelationalExpressionRule()
+						|| action == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0()
+						|| action == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0()
+						|| rule == grammarAccess.getXOtherOperatorExpressionRule()
+						|| action == grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXAdditiveExpressionRule()
+						|| action == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXMultiplicativeExpressionRule()
+						|| action == grammarAccess.getXMultiplicativeExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0()
+						|| rule == grammarAccess.getXUnaryOperationRule()
+						|| rule == grammarAccess.getXCastedExpressionRule()
+						|| action == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0()
+						|| rule == grammarAccess.getXPostfixOperationRule()
+						|| action == grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0()
+						|| rule == grammarAccess.getXMemberFeatureCallRule()
+						|| action == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0()
+						|| action == grammarAccess.getXMemberFeatureCallAccess().getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0()
+						|| rule == grammarAccess.getXPrimaryExpressionRule()
+						|| rule == grammarAccess.getXParenthesizedExpressionRule()
+						|| rule == grammarAccess.getXExpressionOrVarDeclarationRule()) {
+					sequence_XConditionalExpression_XIfExpression(context, (XIfExpression) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getXIfExpressionRule()) {
+					sequence_XIfExpression(context, (XIfExpression) semanticObject); 
+					return; 
+				}
+				else break;
 			case XbasePackage.XINSTANCE_OF_EXPRESSION:
 				sequence_XRelationalExpression(context, (XInstanceOfExpression) semanticObject); 
 				return; 
@@ -306,8 +347,16 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 				sequence_XUnaryOperation(context, (XUnaryOperation) semanticObject); 
 				return; 
 			case XbasePackage.XVARIABLE_DECLARATION:
-				sequence_XVariableDeclaration(context, (XVariableDeclaration) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getInitialisedVariableDeclarationRule()) {
+					sequence_InitialisedVariableDeclaration(context, (XVariableDeclaration) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getXExpressionOrVarDeclarationRule()
+						|| rule == grammarAccess.getXVariableDeclarationRule()) {
+					sequence_XVariableDeclaration(context, (XVariableDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
 			case XbasePackage.XWHILE_EXPRESSION:
 				sequence_XWhileExpression(context, (XWhileExpression) semanticObject); 
 				return; 
@@ -327,6 +376,18 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     InitialisedVariableDeclaration returns XVariableDeclaration
+	 *
+	 * Constraint:
+	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression)
+	 */
+	protected void sequence_InitialisedVariableDeclaration(ISerializationContext context, XVariableDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -518,6 +579,147 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     XAssignment returns XBinaryOperation
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
+	 *     XConditionalExpression returns XBinaryOperation
+	 *     XConditionalExpression.XIfExpression_1_0_0_0 returns XBinaryOperation
+	 *     XExpression returns XBinaryOperation
+	 *     XOrExpression returns XBinaryOperation
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XAndExpression returns XBinaryOperation
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XEqualityExpression returns XBinaryOperation
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XRelationalExpression returns XBinaryOperation
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XBinaryOperation
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XBinaryOperation
+	 *     XOtherOperatorExpression returns XBinaryOperation
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XAdditiveExpression returns XBinaryOperation
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XMultiplicativeExpression returns XBinaryOperation
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XBinaryOperation
+	 *     XUnaryOperation returns XBinaryOperation
+	 *     XCastedExpression returns XBinaryOperation
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XBinaryOperation
+	 *     XPostfixOperation returns XBinaryOperation
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XBinaryOperation
+	 *     XMemberFeatureCall returns XBinaryOperation
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XBinaryOperation
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XBinaryOperation
+	 *     XPrimaryExpression returns XBinaryOperation
+	 *     XParenthesizedExpression returns XBinaryOperation
+	 *     XExpressionOrVarDeclaration returns XBinaryOperation
+	 *
+	 * Constraint:
+	 *     (
+	 *         (leftOperand=XAssignment_XBinaryOperation_1_1_0_0_0 feature=[JvmIdentifiableElement|OpMultiAssign] rightOperand=XAssignment) | 
+	 *         (leftOperand=XOrExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpOr] rightOperand=XAndExpression) | 
+	 *         (leftOperand=XAndExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpAnd] rightOperand=XEqualityExpression) | 
+	 *         (leftOperand=XEqualityExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpEquality] rightOperand=XRelationalExpression) | 
+	 *         (leftOperand=XRelationalExpression_XBinaryOperation_1_1_0_0_0 feature=[JvmIdentifiableElement|OpCompare] rightOperand=XOtherOperatorExpression) | 
+	 *         (leftOperand=XOtherOperatorExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpOther] rightOperand=XAdditiveExpression) | 
+	 *         (leftOperand=XAdditiveExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpAdd] rightOperand=XMultiplicativeExpression) | 
+	 *         (leftOperand=XMultiplicativeExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpMulti] rightOperand=XUnaryOperation)
+	 *     )
+	 */
+	protected void sequence_XAdditiveExpression_XAndExpression_XAssignment_XEqualityExpression_XMultiplicativeExpression_XOrExpression_XOtherOperatorExpression_XRelationalExpression(ISerializationContext context, XBinaryOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XAssignment returns XAssignment
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XAssignment
+	 *     XConditionalExpression returns XAssignment
+	 *     XConditionalExpression.XIfExpression_1_0_0_0 returns XAssignment
+	 *     XExpression returns XAssignment
+	 *     XOrExpression returns XAssignment
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XAndExpression returns XAssignment
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XEqualityExpression returns XAssignment
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XRelationalExpression returns XAssignment
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XAssignment
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XAssignment
+	 *     XOtherOperatorExpression returns XAssignment
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XAdditiveExpression returns XAssignment
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XMultiplicativeExpression returns XAssignment
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XAssignment
+	 *     XUnaryOperation returns XAssignment
+	 *     XCastedExpression returns XAssignment
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XAssignment
+	 *     XPostfixOperation returns XAssignment
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XAssignment
+	 *     XMemberFeatureCall returns XAssignment
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XAssignment
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XAssignment
+	 *     XPrimaryExpression returns XAssignment
+	 *     XParenthesizedExpression returns XAssignment
+	 *     XExpressionOrVarDeclaration returns XAssignment
+	 *
+	 * Constraint:
+	 *     (
+	 *         (feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment) | 
+	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 explicitStatic?='::'? feature=[JvmIdentifiableElement|FeatureCallID] value=XAssignment)
+	 *     )
+	 */
+	protected void sequence_XAssignment_XMemberFeatureCall(ISerializationContext context, XAssignment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XAssignment returns XIfExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XIfExpression
+	 *     XConditionalExpression returns XIfExpression
+	 *     XConditionalExpression.XIfExpression_1_0_0_0 returns XIfExpression
+	 *     XExpression returns XIfExpression
+	 *     XOrExpression returns XIfExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XAndExpression returns XIfExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XEqualityExpression returns XIfExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XRelationalExpression returns XIfExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XIfExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XIfExpression
+	 *     XOtherOperatorExpression returns XIfExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XAdditiveExpression returns XIfExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XMultiplicativeExpression returns XIfExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XIfExpression
+	 *     XUnaryOperation returns XIfExpression
+	 *     XCastedExpression returns XIfExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XIfExpression
+	 *     XPostfixOperation returns XIfExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XIfExpression
+	 *     XMemberFeatureCall returns XIfExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XIfExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XIfExpression
+	 *     XPrimaryExpression returns XIfExpression
+	 *     XParenthesizedExpression returns XIfExpression
+	 *     XExpressionOrVarDeclaration returns XIfExpression
+	 *
+	 * Constraint:
+	 *     (
+	 *         (if=XConditionalExpression_XIfExpression_1_0_0_0 conditionalExpression?='?' then=XExpression else=XExpression?) | 
+	 *         (if=XExpression then=XExpression else=XExpression?)
+	 *     )
+	 */
+	protected void sequence_XConditionalExpression_XIfExpression(ISerializationContext context, XIfExpression semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     JvmTypeReference returns XFunctionTypeRef
 	 *     XFunctionTypeRef returns XFunctionTypeRef
 	 *     JvmArgumentTypeReference returns XFunctionTypeRef
@@ -554,6 +756,57 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	 *     importDeclarations+=XImportDeclaration+
 	 */
 	protected void sequence_XImportSection(ISerializationContext context, XImportSection semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XTryCatchFinallyExpression returns XTryCatchFinallyExpression
+	 *     XAssignment returns XTryCatchFinallyExpression
+	 *     XAssignment.XBinaryOperation_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XConditionalExpression returns XTryCatchFinallyExpression
+	 *     XConditionalExpression.XIfExpression_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XExpression returns XTryCatchFinallyExpression
+	 *     XOrExpression returns XTryCatchFinallyExpression
+	 *     XOrExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XAndExpression returns XTryCatchFinallyExpression
+	 *     XAndExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XEqualityExpression returns XTryCatchFinallyExpression
+	 *     XEqualityExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XRelationalExpression returns XTryCatchFinallyExpression
+	 *     XRelationalExpression.XInstanceOfExpression_1_0_0_0_0 returns XTryCatchFinallyExpression
+	 *     XRelationalExpression.XBinaryOperation_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XOtherOperatorExpression returns XTryCatchFinallyExpression
+	 *     XOtherOperatorExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XAdditiveExpression returns XTryCatchFinallyExpression
+	 *     XAdditiveExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XMultiplicativeExpression returns XTryCatchFinallyExpression
+	 *     XMultiplicativeExpression.XBinaryOperation_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XUnaryOperation returns XTryCatchFinallyExpression
+	 *     XCastedExpression returns XTryCatchFinallyExpression
+	 *     XCastedExpression.XCastedExpression_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XPostfixOperation returns XTryCatchFinallyExpression
+	 *     XPostfixOperation.XPostfixOperation_1_0_0 returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall.XAssignment_1_0_0_0_0 returns XTryCatchFinallyExpression
+	 *     XMemberFeatureCall.XMemberFeatureCall_1_1_0_0_0 returns XTryCatchFinallyExpression
+	 *     XPrimaryExpression returns XTryCatchFinallyExpression
+	 *     XParenthesizedExpression returns XTryCatchFinallyExpression
+	 *     XExpressionOrVarDeclaration returns XTryCatchFinallyExpression
+	 *
+	 * Constraint:
+	 *     (
+	 *         (
+	 *             resources+=InitialisedVariableDeclaration 
+	 *             resources+=InitialisedVariableDeclaration* 
+	 *             expression=XExpression 
+	 *             ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression)?
+	 *         ) | 
+	 *         (expression=XExpression ((catchClauses+=XCatchClause+ finallyExpression=XExpression?) | finallyExpression=XExpression))
+	 *     )
+	 */
+	protected void sequence_XTryCatchFinallyExpression(ISerializationContext context, XTryCatchFinallyExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

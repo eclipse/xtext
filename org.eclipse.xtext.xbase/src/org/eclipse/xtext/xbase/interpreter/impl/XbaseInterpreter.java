@@ -23,13 +23,16 @@ import java.lang.reflect.Proxy;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -106,6 +109,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @author Eva Poell - support for try with resources
  */
 public class XbaseInterpreter implements IExpressionInterpreter {
 	
@@ -626,13 +630,32 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return false;
 	}
 	
-	protected Object _doEvaluate(XTryCatchFinallyExpression tryCatchFinally,
-			IEvaluationContext context, CancelIndicator indicator) {
+	protected Object _doEvaluate(XTryCatchFinallyExpression tryCatchFinally, 
+			IEvaluationContext context,
+			CancelIndicator indicator) {
 		Object result = null;
+		ReturnValue returnValue = null;
+		Map<String, Boolean> resIsInit = new HashMap<String, Boolean>();
+		List<XVariableDeclaration> resources = tryCatchFinally.getResources();
+
+		// Resources
 		try {
+			for (XVariableDeclaration res : resources) {
+				resIsInit.put(res.getName(), false);
+				result = internalEvaluate(res, context, indicator);
+				// Remember for automatic close which resources are initialised
+				resIsInit.put(res.getName(), true);
+			}
+			// Expression Body
 			result = internalEvaluate(tryCatchFinally.getExpression(), context, indicator);
+
+		} catch (ReturnValue value) {
+			// Keep thrown return value in mind until resources are closed
+			returnValue = value;
 		} catch (EvaluationException evaluationException) {
 			Throwable cause = evaluationException.getCause();
+			boolean caught = false;
+			// Catch Clauses
 			for (XCatchClause catchClause : tryCatchFinally.getCatchClauses()) {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
 				JvmTypeReference catchParameterType = exception.getParameterType();
@@ -642,10 +665,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				IEvaluationContext forked = context.fork();
 				forked.newValue(QualifiedName.create(exception.getName()), cause);
 				result = internalEvaluate(catchClause.getExpression(), forked, indicator);
+				caught = true;
 				break;
 			}
+			// Throw uncaught exception
+			if (!caught)
+					throw evaluationException;
 		}
 
+		// finally expressions ...
+		// ... given
 		if (tryCatchFinally.getFinallyExpression() != null) {
 			try {
 				internalEvaluate(tryCatchFinally.getFinallyExpression(), context, indicator);
@@ -653,7 +682,52 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				throw new EvaluationException(new FinallyDidNotCompleteException(e));
 			}
 		}
+		// ... prompted by try with resources (automatic close)
+		if (!resources.isEmpty()) {
+			try {
+				for (int i = resources.size() - 1; i >= 0; i--) {
+					XVariableDeclaration resource = resources.get(i);
+					// Only close resources that are instantiated (= avoid
+					// NullPOinterException)
+					if (resIsInit.get(resource.getName())) {
+						// Find close method for resource
+						JvmOperation close = findCloseMethod(resource);
+						// Invoke close on resource
+						if (close != null)
+							invokeOperation(close, context.getValue(QualifiedName.create(resource.getSimpleName())),
+									Collections.emptyList());
+					}
+				}
+			} catch (EvaluationException e) {
+				throw e;
+			}
+		}
+		// throw return value from expression block after resources are closed
+		if (returnValue != null)
+			throw returnValue;
+
 		return result;
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected JvmOperation findCloseMethod(XVariableDeclaration resource) {
+		LightweightTypeReference resourceType = typeResolver.resolveTypes(resource)
+				.getActualType((JvmIdentifiableElement) resource);
+		for (JvmType rawType : resourceType.getRawTypes()) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> closeCandidates = ((JvmDeclaredType) rawType)
+						.findAllFeaturesByName("close");
+				for (JvmFeature candidate : closeCandidates) {
+					if (candidate instanceof JvmOperation
+							&& ((JvmOperation) candidate).getParameters().isEmpty()) {
+						return (JvmOperation) candidate;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	protected boolean eq(Object a, Object b) {

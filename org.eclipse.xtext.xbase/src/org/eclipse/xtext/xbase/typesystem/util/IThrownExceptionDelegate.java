@@ -9,8 +9,11 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -26,6 +29,16 @@ public interface IThrownExceptionDelegate {
 	void accept(LightweightTypeReference type);
 
 	LightweightTypeReference getActualType(XExpression expr);
+	
+	/**
+	 * @since 2.18
+	 */
+	LightweightTypeReference getActualType(JvmIdentifiableElement identifiable);
+	
+	/**
+	 * @since 2.18
+	 */
+	IResolvedExecutable getResolvedFeature(JvmExecutable executable, LightweightTypeReference contextType);
 
 	void collectThrownExceptions(XExpression expression);
 

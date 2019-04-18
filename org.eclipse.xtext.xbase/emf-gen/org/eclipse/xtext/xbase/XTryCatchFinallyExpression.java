@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getFinallyExpression <em>Finally Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getCatchClauses <em>Catch Clauses</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getResources <em>Resources</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXTryCatchFinallyExpression()
@@ -102,5 +103,20 @@ public interface XTryCatchFinallyExpression extends XExpression
 	 * @generated
 	 */
 	EList<XCatchClause> getCatchClauses();
+
+	/**
+	 * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.xbase.XVariableDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @since 2.18
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Resources</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXTryCatchFinallyExpression_Resources()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<XVariableDeclaration> getResources();
 
 } // XTryCatchFinallyExpression

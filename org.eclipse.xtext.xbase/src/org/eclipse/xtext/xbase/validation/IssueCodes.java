@@ -168,6 +168,11 @@ public class IssueCodes extends org.eclipse.xtext.validation.IssueCodes {
 	 */
 	public static final String INVALID_MULTITYPE_PART = ISSUE_CODE_PREFIX + "invalid_multitype_part";
 	
+	/**
+	 * @since 2.18
+	 */
+	public static final String INVALID_TRY_RESOURCE_TYPE = ISSUE_CODE_PREFIX + "invalid_try_resource_type";
+	
 	private IssueCodes() {
 	}
 

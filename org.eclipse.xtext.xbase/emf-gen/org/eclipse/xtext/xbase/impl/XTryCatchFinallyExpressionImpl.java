@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl#getFinallyExpression <em>Finally Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl#getCatchClauses <em>Catch Clauses</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl#getResources <em>Resources</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,6 +75,16 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * @ordered
 	 */
 	protected EList<XCatchClause> catchClauses;
+
+	/**
+	 * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<XVariableDeclaration> resources;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +222,20 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<XVariableDeclaration> getResources()
+	{
+		if (resources == null)
+		{
+			resources = new EObjectContainmentEList<XVariableDeclaration>(XVariableDeclaration.class, this, XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES);
+		}
+		return resources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -221,6 +247,8 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 				return basicSetFinallyExpression(null, msgs);
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES:
 				return ((InternalEList<?>)getCatchClauses()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES:
+				return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -241,6 +269,8 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 				return getFinallyExpression();
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES:
 				return getCatchClauses();
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES:
+				return getResources();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -266,6 +296,10 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 				getCatchClauses().clear();
 				getCatchClauses().addAll((Collection<? extends XCatchClause>)newValue);
 				return;
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES:
+				getResources().clear();
+				getResources().addAll((Collection<? extends XVariableDeclaration>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -289,6 +323,9 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES:
 				getCatchClauses().clear();
 				return;
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES:
+				getResources().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -309,6 +346,8 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 				return finallyExpression != null;
 			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES:
 				return catchClauses != null && !catchClauses.isEmpty();
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES:
+				return resources != null && !resources.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

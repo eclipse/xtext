@@ -123,13 +123,24 @@ public interface XbasePackage extends EPackage
 	int XIF_EXPRESSION__ELSE = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>XIf Expression</em>' class.
+	 * The feature id for the '<em><b>Conditional Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XIF_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XIF_EXPRESSION__CONDITIONAL_EXPRESSION = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>XIf Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * @since 2.18
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl <em>XSwitch Expression</em>}' class.
@@ -1628,13 +1639,24 @@ public interface XbasePackage extends EPackage
 	int XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>XTry Catch Finally Expression</em>' class.
+	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
+	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTRY_CATCH_FINALLY_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>XTry Catch Finally Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * @since 2.18
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl <em>XCatch Clause</em>}' class.
@@ -1900,6 +1922,18 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXIfExpression_Else();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression <em>Conditional Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.18
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Conditional Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression()
+	 * @see #getXIfExpression()
+	 * @generated
+	 */
+	EAttribute getXIfExpression_ConditionalExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSwitchExpression <em>XSwitch Expression</em>}'.
@@ -2962,6 +2996,18 @@ public interface XbasePackage extends EPackage
 	EReference getXTryCatchFinallyExpression_CatchClauses();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getResources <em>Resources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.18
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Resources</em>'.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getResources()
+	 * @see #getXTryCatchFinallyExpression()
+	 * @generated
+	 */
+	EReference getXTryCatchFinallyExpression_Resources();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCatchClause <em>XCatch Clause</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3166,6 +3212,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XIF_EXPRESSION__ELSE = eINSTANCE.getXIfExpression_Else();
+
+		/**
+		 * The meta object literal for the '<em><b>Conditional Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XIF_EXPRESSION__CONDITIONAL_EXPRESSION = eINSTANCE.getXIfExpression_ConditionalExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl <em>XSwitch Expression</em>}' class.
@@ -4016,6 +4070,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES = eINSTANCE.getXTryCatchFinallyExpression_CatchClauses();
+
+		/**
+		 * The meta object literal for the '<em><b>Resources</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES = eINSTANCE.getXTryCatchFinallyExpression_Resources();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl <em>XCatch Clause</em>}' class.

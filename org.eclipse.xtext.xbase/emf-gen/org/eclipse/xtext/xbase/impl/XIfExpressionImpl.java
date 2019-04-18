@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getElse <em>Else</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#isConditionalExpression <em>Conditional Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,6 +66,26 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * @ordered
 	 */
 	protected XExpression else_;
+
+	/**
+	 * The default value of the '{@link #isConditionalExpression() <em>Conditional Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isConditionalExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean CONDITIONAL_EXPRESSION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isConditionalExpression() <em>Conditional Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isConditionalExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean conditionalExpression = CONDITIONAL_EXPRESSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -236,6 +257,29 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isConditionalExpression()
+	{
+		return conditionalExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConditionalExpression(boolean newConditionalExpression)
+	{
+		boolean oldConditionalExpression = conditionalExpression;
+		conditionalExpression = newConditionalExpression;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XIF_EXPRESSION__CONDITIONAL_EXPRESSION, oldConditionalExpression, conditionalExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -267,6 +311,8 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 				return getThen();
 			case XbasePackage.XIF_EXPRESSION__ELSE:
 				return getElse();
+			case XbasePackage.XIF_EXPRESSION__CONDITIONAL_EXPRESSION:
+				return isConditionalExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +335,9 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 				return;
 			case XbasePackage.XIF_EXPRESSION__ELSE:
 				setElse((XExpression)newValue);
+				return;
+			case XbasePackage.XIF_EXPRESSION__CONDITIONAL_EXPRESSION:
+				setConditionalExpression((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -313,6 +362,9 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 			case XbasePackage.XIF_EXPRESSION__ELSE:
 				setElse((XExpression)null);
 				return;
+			case XbasePackage.XIF_EXPRESSION__CONDITIONAL_EXPRESSION:
+				setConditionalExpression(CONDITIONAL_EXPRESSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -333,8 +385,27 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 				return then != null;
 			case XbasePackage.XIF_EXPRESSION__ELSE:
 				return else_ != null;
+			case XbasePackage.XIF_EXPRESSION__CONDITIONAL_EXPRESSION:
+				return conditionalExpression != CONDITIONAL_EXPRESSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (conditionalExpression: ");
+		result.append(conditionalExpression);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XIfExpressionImpl

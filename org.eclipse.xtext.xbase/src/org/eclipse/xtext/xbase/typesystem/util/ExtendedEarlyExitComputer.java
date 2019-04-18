@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -30,16 +34,24 @@ import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ExtendedEarlyExitComputer {
+	
+	@Inject
+	private OverrideTester overrideTester;
 	
 	// TODO discuss / improve
 	/**
@@ -171,6 +183,17 @@ public class ExtendedEarlyExitComputer {
 		public void collectWith(Switch<Boolean> collector) {
 			this.collector = collector;
 		}
+		
+		@Override
+		public IResolvedExecutable getResolvedFeature(JvmExecutable executable, LightweightTypeReference contextType) {
+			if (executable instanceof JvmOperation) {
+				return new BottomResolvedOperation((JvmOperation) executable, contextType, overrideTester);
+			}
+			if (executable instanceof JvmConstructor) {
+				return new ResolvedConstructor((JvmConstructor) executable, contextType);
+			}
+			throw new IllegalArgumentException(String.valueOf(executable));
+		}
 
 	}
 	
@@ -204,7 +227,12 @@ public class ExtendedEarlyExitComputer {
 		public LightweightTypeReference getActualType(XExpression expr) {
 			return types.getActualType(expr);
 		}
-
+		
+		@Override
+		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
+			return types.getActualType(identifiable);
+		}
+		
 	}
 	
 	protected class FilteringThrownExceptionDelegate extends AbstractThrownExceptionDelegate {
@@ -237,9 +265,14 @@ public class ExtendedEarlyExitComputer {
 		public LightweightTypeReference getActualType(XExpression expr) {
 			return delegate.getActualType(expr);
 		}
+		
+		@Override
+		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
+			return delegate.getActualType(identifiable);
+		}
 
 	}
-
+	
 	public List<LightweightTypeReference> getThrownExceptions(XExpression obj, IResolvedTypes types, ITypeReferenceOwner owner) {
 		if (obj == null) {
 			return Collections.emptyList();

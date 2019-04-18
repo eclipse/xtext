@@ -1,6 +1,12 @@
 package org.eclipse.xtext.xbase;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe.core.WorkflowContext;
+import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
+import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
@@ -114,6 +120,8 @@ final class GenerateXbase {
 				ValidatorFragment2 validator = new ValidatorFragment2();
 				validator.setInheritImplementation(false);
 				validator.setGenerateXtendStub(false);
+				validator.setGeneratePropertyPage(false);
+				validator.setGenerateDeprecationValidation(false);
 				addFragment(validator);
 				ImportNamespacesScopingFragment2 scoping = new ImportNamespacesScopingFragment2();
 				scoping.setGenerateXtendStub(false);
@@ -160,6 +168,8 @@ final class GenerateXbase {
 				addFragment(antlr);
 				ValidatorFragment2 validator = new ValidatorFragment2();
 				validator.setGenerateXtendStub(false);
+				validator.setGeneratePropertyPage(false);
+				validator.setGenerateDeprecationValidation(false);
 				addFragment(validator);
 				ImportNamespacesScopingFragment2 scoping = new ImportNamespacesScopingFragment2();
 				scoping.setGenerateXtendStub(false);
@@ -205,6 +215,12 @@ final class GenerateXbase {
 		
 		generator.invoke(null);
 		generator.postInvoke();
+		new AbstractWorkflowComponent2() {
+			@Override
+			protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
+				new File(runtimeProject, "plugin.properties").delete();
+			}
+		}.invoke(null);
 		Logger.getLogger(GenerateXbase.class).info("Done."); 
 	}
 

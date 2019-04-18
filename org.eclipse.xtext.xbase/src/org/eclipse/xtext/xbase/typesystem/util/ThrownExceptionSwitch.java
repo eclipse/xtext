@@ -11,8 +11,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -22,6 +26,8 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
 
@@ -79,21 +85,31 @@ public class ThrownExceptionSwitch extends XbaseSwitch<Boolean> {
 	
 	@Override
 	public Boolean caseXTryCatchFinallyExpression(XTryCatchFinallyExpression object) {
+		List<XVariableDeclaration> resources = object.getResources();
 		List<XCatchClause> clauses = object.getCatchClauses();
+
 		if (clauses.isEmpty()) {
+			// collect exceptions thrown by automatic close method
+			// of given resources
+			processExceptionsFromAutoclosable(resources, delegate);
+			// let procedure traverse child elements, to check if they throw
+			// exceptions
 			return Boolean.TRUE;
 		}
+
+		// traverse child elements explicitly, to filter for caught exceptions
 		final List<LightweightTypeReference> caughtExceptions = Lists.newArrayList();
 		boolean wasThrowable = false;
-		for(XCatchClause clause: clauses) {
+		for (XCatchClause clause : clauses) {
 			JvmTypeReference caught = clause.getDeclaredParam().getParameterType();
 			if (caught != null) {
-				LightweightTypeReference caughtException = delegate.toLightweightReference(caught).getRawTypeReference();
+				LightweightTypeReference caughtException = delegate.toLightweightReference(caught)
+						.getRawTypeReference();
 				if (caughtException.isType(Throwable.class)) {
 					wasThrowable = true;
 				}
 				if (caughtException.isSynonym()) {
-					caughtExceptions.addAll(caughtException.getMultiTypeComponents());	
+					caughtExceptions.addAll(caughtException.getMultiTypeComponents());
 				} else {
 					caughtExceptions.add(caughtException);
 				}
@@ -102,10 +118,71 @@ public class ThrownExceptionSwitch extends XbaseSwitch<Boolean> {
 		}
 		delegate.collectThrownExceptions(object.getFinallyExpression());
 		if (wasThrowable) {
+			// Stop child traversing of procedure
 			return Boolean.FALSE;
 		}
-		delegate.catchExceptions(caughtExceptions).collectThrownExceptions(object.getExpression());
+
+		// Filter caught exceptions from all thrown excpetions
+		// (thrown by resource constructor/automatic close, try expressions)
+		IThrownExceptionDelegate filteredDelegate = delegate.catchExceptions(caughtExceptions);
+		processExceptionsFromAutoclosable(resources, filteredDelegate);
+		filteredDelegate.collectThrownExceptions(object.getExpression());
+		// Stop child traversing of procedure
 		return Boolean.FALSE;
+	}
+	
+	/**
+	 * Checks if the automatically called close method of resources in
+	 * try block (implementing AutoCloseable) throws exceptions.
+	 * Add those those exceptions to the list of the thrownExceptionDelegate.
+	 * 
+	 * @param resources the resources of the try statement
+	 * @param thrownExceptionDelegate the (filtered) delegate holding the utilities
+	 * 
+	 * @since 2.18
+	 */
+	protected void processExceptionsFromAutoclosable(List<XVariableDeclaration> resources,
+			IThrownExceptionDelegate thrownExceptionDelegate) {
+		
+		// If no resources are give, no exceptions are thrown
+		if (resources.isEmpty()) {
+			return;
+		}
+		
+		// Check for each resource which exceptions are thrown
+		for (XVariableDeclaration resource : resources) {
+			LightweightTypeReference autoClosableType = thrownExceptionDelegate.getActualType((JvmIdentifiableElement) resource);
+			JvmOperation closeMethod = findCloseMethod(autoClosableType);
+			// Collect all exceptions
+			if (autoClosableType != null && closeMethod != null) {
+				IResolvedExecutable resolvedCloseMethod = thrownExceptionDelegate.getResolvedFeature(closeMethod, autoClosableType);
+				List<LightweightTypeReference> declaredExceptions = resolvedCloseMethod.getResolvedExceptions();
+				for(LightweightTypeReference exception: declaredExceptions) {
+					thrownExceptionDelegate.accept(exception);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected JvmOperation findCloseMethod(LightweightTypeReference resourceType) {
+		// Find the real close method,
+		// which is an operation without arguments.
+		// There can only be one real close method.
+		for(JvmType rawType: resourceType.getRawTypes()) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).findAllFeaturesByName("close");
+				for(JvmFeature candidate: candidates) {
+					if (candidate instanceof JvmOperation
+							&& ((JvmOperation) candidate).getParameters().isEmpty()) {
+						return (JvmOperation) candidate;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	@Override

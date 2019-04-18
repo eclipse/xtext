@@ -444,6 +444,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXIfExpression_ConditionalExpression()
+	{
+		return (EAttribute)xIfExpressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXSwitchExpression()
 	{
 		return xSwitchExpressionEClass;
@@ -1434,6 +1444,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXTryCatchFinallyExpression_Resources()
+	{
+		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXCatchClause()
 	{
 		return xCatchClauseEClass;
@@ -1595,6 +1615,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xIfExpressionEClass, XIF_EXPRESSION__IF);
 		createEReference(xIfExpressionEClass, XIF_EXPRESSION__THEN);
 		createEReference(xIfExpressionEClass, XIF_EXPRESSION__ELSE);
+		createEAttribute(xIfExpressionEClass, XIF_EXPRESSION__CONDITIONAL_EXPRESSION);
 
 		xSwitchExpressionEClass = createEClass(XSWITCH_EXPRESSION);
 		createEReference(xSwitchExpressionEClass, XSWITCH_EXPRESSION__SWITCH);
@@ -1723,6 +1744,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION);
 		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION);
 		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES);
+		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES);
 
 		xCatchClauseEClass = createEClass(XCATCH_CLAUSE);
 		createEReference(xCatchClauseEClass, XCATCH_CLAUSE__EXPRESSION);
@@ -1815,6 +1837,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXIfExpression_If(), this.getXExpression(), null, "if", null, 0, 1, XIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXIfExpression_Then(), this.getXExpression(), null, "then", null, 0, 1, XIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXIfExpression_Else(), this.getXExpression(), null, "else", null, 0, 1, XIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXIfExpression_ConditionalExpression(), ecorePackage.getEBoolean(), "conditionalExpression", null, 0, 1, XIfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xSwitchExpressionEClass, XSwitchExpression.class, "XSwitchExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXSwitchExpression_Switch(), this.getXExpression(), null, "switch", null, 0, 1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1965,6 +1988,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXTryCatchFinallyExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXTryCatchFinallyExpression_FinallyExpression(), this.getXExpression(), null, "finallyExpression", null, 0, 1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXTryCatchFinallyExpression_CatchClauses(), this.getXCatchClause(), null, "catchClauses", null, 0, -1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXTryCatchFinallyExpression_Resources(), this.getXVariableDeclaration(), null, "resources", null, 0, -1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xCatchClauseEClass, XCatchClause.class, "XCatchClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXCatchClause_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XCatchClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

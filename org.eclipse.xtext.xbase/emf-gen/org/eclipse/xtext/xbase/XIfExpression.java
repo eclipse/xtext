@@ -26,6 +26,7 @@ package org.eclipse.xtext.xbase;
  *   <li>{@link org.eclipse.xtext.xbase.XIfExpression#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XIfExpression#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XIfExpression#getElse <em>Else</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression <em>Conditional Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXIfExpression()
@@ -111,5 +112,31 @@ public interface XIfExpression extends XExpression
 	 * @generated
 	 */
 	void setElse(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Conditional Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * @since 2.18
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Conditional Expression</em>' attribute.
+	 * @see #setConditionalExpression(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXIfExpression_ConditionalExpression()
+	 * @model
+	 * @generated
+	 */
+	boolean isConditionalExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression <em>Conditional Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.18
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Conditional Expression</em>' attribute.
+	 * @see #isConditionalExpression()
+	 * @generated
+	 */
+	void setConditionalExpression(boolean value);
 
 } // XIfExpression

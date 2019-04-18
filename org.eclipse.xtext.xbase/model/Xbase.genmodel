@@ -53,6 +53,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/if"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/then"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XIfExpression/else"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XIfExpression/conditionalExpression"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XSwitchExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XSwitchExpression/switch"/>
@@ -187,6 +188,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/finallyExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/catchClauses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XTryCatchFinallyExpression/resources"/>
     </genClasses>
     <genClasses ecoreClass="Xbase.ecore#//XCatchClause">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCatchClause/expression"/>

@@ -345,7 +345,7 @@ public abstract class AbstractXbaseCompiler {
 	protected boolean needsSneakyThrow(XExpression obj, Collection<JvmTypeReference> declaredExceptions) {
 		IResolvedTypes resolvedTypes = getResolvedTypes(obj);
 		List<LightweightTypeReference> thrownExceptions = resolvedTypes.getThrownExceptions(obj);
-		return hasUnhandledException(thrownExceptions, declaredExceptions);
+		return (hasUnhandledException(thrownExceptions, declaredExceptions));
 	}
 	
 	protected boolean hasUnhandledException(List<LightweightTypeReference> thrownExceptions, Collection<JvmTypeReference> declaredExceptions) {

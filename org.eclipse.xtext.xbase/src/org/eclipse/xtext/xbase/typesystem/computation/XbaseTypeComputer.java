@@ -10,18 +10,22 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -62,6 +66,9 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -84,6 +91,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Moritz Eysholdt - Support for checked exceptions
+ * @author Eva Poell - support for try with resources
  */
 public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComputer {
 
@@ -92,6 +100,9 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	
 	@Inject
 	private CollectionLiteralsTypeComputer collectionLiterals;
+	
+	@Inject
+	private OverrideTester overrideTester;
 	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
@@ -511,6 +522,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
 		JvmTypeReference declaredType = object.getType();
 		LightweightTypeReference lightweightTypeReference = declaredType != null ? state.getReferenceOwner().toLightweightTypeReference(declaredType) : null;
+		boolean isTryWithResources = (object.eContainingFeature() == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__RESOURCES);
 		/*
 		 * Allow recursive closure bodies, e.g.
 		 * 
@@ -544,7 +556,17 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			ITypeComputationState initializerState = state.assignType(object, lightweightTypeReference).withExpectation(lightweightTypeReference);
 			initializerState.computeTypes(object.getRight());
 		} else {
-			ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
+			ITypeComputationState initializerState;
+			if (isTryWithResources) {
+				initializerState = (lightweightTypeReference != null)
+						? state.withExpectation(lightweightTypeReference)
+						: state.withExpectation(getRawTypeForName(AutoCloseable.class, state));
+			}
+			else
+				initializerState = (lightweightTypeReference != null)
+						? state.withExpectation(lightweightTypeReference)
+						: state.withNonVoidExpectation();
+		
 			initializerState.withinScope(object);
 			ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
 			/* 
@@ -576,12 +598,64 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 								null);
 						state.addDiagnostic(diagnostic);
 					}
+					if (isTryWithResources) {
+						// Check if resource implements AutoCloseable
+						if (!variableType.isSubtypeOf(AutoCloseable.class)) {
+							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+									IssueCodes.INVALID_TRY_RESOURCE_TYPE,
+									"The resource \'" + object.getSimpleName() + "\' of type "
+											+ variableType.getSimpleName() + " does not implement java.lang.AutoCloseable.",
+									object,
+									XbasePackage.Literals.XVARIABLE_DECLARATION__TYPE,
+									-1,
+									null);
+							state.addDiagnostic(diagnostic);
+						} else {
+						// Check if resource throws exception in close method
+						// and if user (instead of compiler) should handle it
+							if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION)) {
+								JvmOperation closeMethod = findCloseMethod(variableType);
+								// Process all exceptions
+								if (closeMethod != null) {
+									IResolvedExecutable resolvedCloseMethod = new BottomResolvedOperation(closeMethod, variableType, overrideTester);
+									List<LightweightTypeReference> thrownExceptions = resolvedCloseMethod.getResolvedExceptions();
+									for(LightweightTypeReference exception: thrownExceptions) {
+										// check against expected exceptions
+										validateUnhandledException(exception, object, 
+												XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, state,
+												(type)->"Unhandled exception type " + type.getSimpleName() + " thrown by automatic close() invocation on " + object.getSimpleName());
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 			state.assignType(object, variableType, false);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected JvmOperation findCloseMethod(LightweightTypeReference resourceType) {
+		// Find the real close method,
+		// which is an operation without arguments.
+		// There can only be one close method with that signature.
+		for(JvmType rawType: resourceType.getRawTypes()) {
+			if (rawType instanceof JvmDeclaredType) {
+				Iterable<JvmFeature> candidates = ((JvmDeclaredType) rawType).findAllFeaturesByName("close");
+				for(JvmFeature candidate: candidates) {
+					if (candidate instanceof JvmOperation
+							&& ((JvmOperation) candidate).getParameters().isEmpty()) {
+						return (JvmOperation) candidate;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
@@ -963,32 +1037,54 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		LightweightTypeReference throwable = getRawTypeForName(Throwable.class, state);
 		ITypeComputationState expressionState = state.withExpectation(throwable);
 		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
-		LightweightTypeReference thrownException = types.getActualExpressionType();
+		
 		state.acceptActualType(getPrimitiveVoid(state), ConformanceFlags.NO_IMPLICIT_RETURN | ConformanceFlags.THROWN_EXCEPTION);
 		
+		LightweightTypeReference thrownException = types.getActualExpressionType();
 		if (thrownException != null && !thrownException.isUnknown()) {
-			if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
-					&& !thrownException.isSubtypeOf(RuntimeException.class) && !thrownException.isSubtypeOf(Error.class)) {
-				boolean declarationFound = false;
-				for (LightweightTypeReference declaredException : state.getExpectedExceptions())
-					if (declaredException.isAssignableFrom(thrownException)) {
-						declarationFound = true;
-						break;
-					}
-				if (!declarationFound) {
-					JvmType exceptionType = thrownException.getNamedType().getType();
-					state.addDiagnostic(new EObjectDiagnosticImpl(
-							expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION),
-							IssueCodes.UNHANDLED_EXCEPTION,
-							"Unhandled exception type " + exceptionType.getSimpleName(),
-							object,
-							XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
-							-1,
-							new String[] { 
-								EcoreUtil.getURI(exceptionType).toString(),
-								EcoreUtil.getURI(object).toString()
-							}));
+			validateUnhandledException(thrownException, object, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, state, 
+					(type)->"Unhandled exception type " + type.getSimpleName());
+		}
+	}
+
+	/**
+	 * Checks if the given thrownexcpetion is handled (as in "taken care of by compiler").
+	 * 
+	 * @param thrownException the exception to validate
+	 * @param object the object in which context the exception should be validated
+	 * @param feature which causes the exception
+	 * @param state bearing the expected exceptions
+	 * @param message function to specify the exception message
+	 * 
+	 * @since 2.18
+	 */
+	protected void validateUnhandledException(
+			LightweightTypeReference thrownException,
+			XExpression object,
+			EStructuralFeature feature,
+			ITypeComputationState state,
+			Function<? super JvmType, ? extends String> message) {
+		if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
+				&& !thrownException.isSubtypeOf(RuntimeException.class) && !thrownException.isSubtypeOf(Error.class)) {
+			boolean declarationFound = false;
+			for (LightweightTypeReference declaredException : state.getExpectedExceptions())
+				if (declaredException.isAssignableFrom(thrownException)) {
+					declarationFound = true;
+					break;
 				}
+			if (!declarationFound) {
+				JvmType exceptionType = thrownException.getNamedType().getType();
+				state.addDiagnostic(new EObjectDiagnosticImpl(
+						state.getSeverity(IssueCodes.UNHANDLED_EXCEPTION),
+						IssueCodes.UNHANDLED_EXCEPTION,
+						message.apply(exceptionType),
+						object,
+						feature,
+						-1,
+						new String[] { 
+							EcoreUtil.getURI(exceptionType).toString(),
+							EcoreUtil.getURI(object).toString()
+						}));
 			}
 		}
 	}
@@ -1063,10 +1159,26 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	protected void _computeTypes(XTryCatchFinallyExpression object, ITypeComputationState state) {
 		List<LightweightTypeReference> caughtExceptions = Lists.newArrayList();
 		ITypeReferenceOwner referenceOwner = state.getReferenceOwner();
-		for (XCatchClause catchClause : object.getCatchClauses())
+		
+		// Caught Exceptions
+		for (XCatchClause catchClause : object.getCatchClauses()) {
 			if (catchClause.getDeclaredParam() != null && catchClause.getDeclaredParam().getParameterType() != null)
 				caughtExceptions.add(referenceOwner.toLightweightTypeReference(catchClause.getDeclaredParam().getParameterType()));
+		}
+		
+		// Resources
+		List <XVariableDeclaration> resources = object.getResources();
+		for (XVariableDeclaration resDecl : resources) {
+			ITypeComputationState resourceState = state.withExpectedExceptions(caughtExceptions).withoutExpectation(); // no expectation
+			resourceState.computeTypes(resDecl);
+			addLocalToCurrentScope(resDecl, state);
+		}
+		state.withinScope(object);
+		
+		// Body of TryCatchExpression
 		state.withExpectedExceptions(caughtExceptions).computeTypes(object.getExpression());
+
+		// CatchClause
 		for (XCatchClause catchClause : object.getCatchClauses()) {
 			JvmFormalParameter catchClauseParam = catchClause.getDeclaredParam();
 			JvmTypeReference parameterType = catchClauseParam.getParameterType();
@@ -1080,6 +1192,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			catchClauseState.withinScope(catchClause);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
+		// FinallyClause
 		// TODO validate / handle return / throw in finally block
 		state.withoutExpectation().computeTypes(object.getFinallyExpression());
 	}
