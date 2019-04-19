@@ -103,7 +103,7 @@ public class AntlrToolFacade {
 					}
 				}
 			}
-			log.info("downloading file from '"+downloadURL+"' ...");
+			log.info("Downloading file from '"+downloadURL+"' ...");
 			BufferedInputStream in = new BufferedInputStream(new URL(downloadURL).openStream());
 			try {
 				FileOutputStream out = new FileOutputStream(file());
@@ -119,7 +119,7 @@ public class AntlrToolFacade {
 			} finally {
 				in.close();
 			}
-			log.info("finished downloading.");
+			log.info("Finished downloading.");
 		} catch (IOException e) {
 			System.err.println("Downloading ANTLR parser generator failed: " + e.getMessage());
 			System.err.println("Please install the feature 'Xtext Antlr SDK' manually using the external updatesite:");
