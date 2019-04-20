@@ -10,18 +10,20 @@ import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.After
 import org.junit.Assume
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.fileToString
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Inject extension QuickfixTestBuilder builder
 	
-	@Inject extension WorkbenchTestHelper
+	@Inject extension WorkbenchTestHelper workbenchTestHelper
 
 	@Inject extension SyncUtil
 
@@ -30,6 +32,13 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@After
 	override tearDown() {
 		builder.tearDown
+		workbenchTestHelper.tearDown
+	}
+	
+	@Before
+	override setUp() throws Exception {
+		super.setUp()
+		workbenchTestHelper.closeWelcomePage
 	}
 
 	@Test
@@ -384,7 +393,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertIssueCodes(WRONG_FILE)
 		.assertResolutionLabelsSubset("Rename class to '" + className + "'")
-		.assertModelAfterQuickfix('''
+		.assertModelAfterQuickfix("Rename class to '" + className + "'", '''
 			class «className» {
 				static val «className» INSTANCE = new «className»
 			
