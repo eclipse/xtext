@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -31,6 +32,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.TextSelection;
+import org.eclipse.ltk.core.refactoring.Change;
+import org.eclipse.ltk.core.refactoring.PerformChangeOperation;
+import org.eclipse.ltk.core.refactoring.RefactoringCore;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
@@ -74,7 +81,11 @@ import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
+import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -104,6 +115,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein - Quickfixes for inconsistent indentation
  * @author Sebastian Zarnekow - Quickfixes for misspelled types and constructors
  * @author Holger Schill - Quickfixes for missing methods / fields / localVars
+ * @author Vivien Jovet - Quickfix for rename class
  */
 @Singleton
 public class XtendQuickfixProvider extends XbaseQuickfixProvider {
@@ -139,6 +151,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private OrganizeImportsHandler organizeImportsHandler;
 	
 	@Inject private XtendExpressionHelper expressionHelper;
+
+	@Inject private IRenameRefactoringProvider renameRefactoringProvider;
+	
+	@Inject private IRenameContextFactory renameContextFactory;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			Diagnostic.LINKING_DIAGNOSTIC,
@@ -184,6 +200,36 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		javaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createMemberQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
+	}
+	
+	@Fix(IssueCodes.WRONG_FILE)
+	public void fixWrongFileRenameClass(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		URI uri = issue.getUriToProblem();
+		String className = uri.trimFileExtension().lastSegment();
+		String label = String.format("Rename class to '%s'", className);
+		acceptor.accept(issue, label, label, null, (element, context) -> {
+			context.getXtextDocument().modify(resource -> {
+				IRenameElementContext renameContext = renameContextFactory.createRenameElementContext(element, null,
+						new TextSelection(context.getXtextDocument(), issue.getOffset(), issue.getLength()), resource);
+				final ProcessorBasedRefactoring refactoring = renameRefactoringProvider.getRenameRefactoring(renameContext);
+				((RenameElementProcessor) refactoring.getProcessor()).setNewName(className);
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().run(true, true, monitor -> {
+					try {
+						if (!refactoring.checkFinalConditions(monitor).isOK())
+							return;
+						Change change = refactoring.createChange(monitor);
+						change.initializeValidationData(monitor);
+						PerformChangeOperation performChangeOperation = new PerformChangeOperation(change);
+						performChangeOperation.setUndoManager(RefactoringCore.getUndoManager(), refactoring.getName());
+						performChangeOperation.setSchedulingRule(ResourcesPlugin.getWorkspace().getRoot());
+						performChangeOperation.run(monitor);
+					} catch (CoreException e) {
+						logger.error(e);
+					}
+				});
+				return null;
+			});
+		});
 	}
 
 	@Fix(IssueCodes.INCONSISTENT_INDENTATION)

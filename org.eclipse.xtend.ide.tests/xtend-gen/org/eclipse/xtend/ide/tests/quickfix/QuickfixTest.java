@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.quickfix;
 
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -9,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -16,6 +18,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -27,7 +30,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   @Inject
   @Extension
-  private WorkbenchTestHelper _workbenchTestHelper;
+  private WorkbenchTestHelper workbenchTestHelper;
   
   @Inject
   @Extension
@@ -38,7 +41,19 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @After
   @Override
   public void tearDown() {
-    this.builder.tearDown();
+    try {
+      this.builder.tearDown();
+      this.workbenchTestHelper.tearDown();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Before
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    this.workbenchTestHelper.closeWelcomePage();
   }
   
   @Test
@@ -54,7 +69,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._workbenchTestHelper.createFile("bar/Foo.xtend", _builder.toString());
+      this.workbenchTestHelper.createFile("bar/Foo.xtend", _builder.toString());
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this._syncUtil.waitForBuild(_nullProgressMonitor);
       StringConcatenation _builder_1 = new StringConcatenation();
@@ -604,10 +619,97 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    this.builder.create("Foo.xtend", model).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE).assertResolutionLabels("Rename file to \'Foo1.xtend\'").assertModelAfterQuickfix(model.replace("|", ""));
-    Assert.assertNotNull(this._workbenchTestHelper.getFile("Foo1.xtend"));
-    Assert.assertTrue(this._workbenchTestHelper.getFile("Foo1.xtend").exists());
-    Assert.assertFalse(this._workbenchTestHelper.getFile("Foo.xtend").exists());
+    this.builder.create("Foo.xtend", model).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE).assertResolutionLabelsSubset("Rename file to \'Foo1.xtend\'").assertModelAfterQuickfix("Rename file to \'Foo1.xtend\'", model.replace("|", ""));
+    Assert.assertNotNull(this.workbenchTestHelper.getFile("Foo1.xtend"));
+    Assert.assertTrue(this.workbenchTestHelper.getFile("Foo1.xtend").exists());
+    Assert.assertFalse(this.workbenchTestHelper.getFile("Foo.xtend").exists());
+  }
+  
+  @Test
+  public void fixWrongFile_renameClass() {
+    try {
+      final String className = "Foo";
+      final String fileName = (className + ".xtend");
+      final String wrongClassName = "Bar";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Other {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val ");
+      _builder.append(wrongClassName, "\t");
+      _builder.append(" test = new ");
+      _builder.append(wrongClassName, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      final IFile otherClassFile = this.workbenchTestHelper.createFile("Other.xtend", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class ");
+      _builder_1.append(wrongClassName);
+      _builder_1.append("| {");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("\t");
+      _builder_1.append("static val ");
+      _builder_1.append(wrongClassName, "\t");
+      _builder_1.append(" INSTANCE = new ");
+      _builder_1.append(wrongClassName, "\t");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def static ");
+      _builder_1.append(wrongClassName, "\t");
+      _builder_1.append(" getInstance() {");
+      _builder_1.newLineIfNotEmpty();
+      _builder_1.append("\t\t");
+      _builder_1.append("INSTANCE");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      QuickfixTestBuilder _assertResolutionLabelsSubset = this.builder.create(fileName, _builder_1.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE).assertResolutionLabelsSubset((("Rename class to \'" + className) + "\'"));
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("class ");
+      _builder_2.append(className);
+      _builder_2.append(" {");
+      _builder_2.newLineIfNotEmpty();
+      _builder_2.append("\t");
+      _builder_2.append("static val ");
+      _builder_2.append(className, "\t");
+      _builder_2.append(" INSTANCE = new ");
+      _builder_2.append(className, "\t");
+      _builder_2.newLineIfNotEmpty();
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def static ");
+      _builder_2.append(className, "\t");
+      _builder_2.append(" getInstance() {");
+      _builder_2.newLineIfNotEmpty();
+      _builder_2.append("\t\t");
+      _builder_2.append("INSTANCE");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _assertResolutionLabelsSubset.assertModelAfterQuickfix((("Rename class to \'" + className) + "\'"), _builder_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("class Other {");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("val ");
+      _builder_3.append(className, "\t");
+      _builder_3.append(" test = new ");
+      _builder_3.append(className, "\t");
+      _builder_3.newLineIfNotEmpty();
+      _builder_3.append("}");
+      _builder_3.newLine();
+      Assert.assertEquals(_builder_3.toString(), IResourcesSetupUtil.fileToString(otherClassFile));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -617,7 +719,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     this.builder.create("Foo1.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo|1 {}");
-    this.builder.create("Foo.xtend", _builder_1.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE).assertResolutionLabels("");
+    this.builder.create("Foo.xtend", _builder_1.toString()).assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE);
   }
   
   @Test
