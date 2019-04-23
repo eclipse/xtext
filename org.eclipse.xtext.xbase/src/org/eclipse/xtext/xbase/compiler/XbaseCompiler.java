@@ -581,7 +581,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (finallyExp != null)
 				internalToJavaStatement(finallyExp, b, false);
 			if (!nativeTryWithResources && isTryWithResources)
-				appendFinallyWithResources(expr.getResources(), b);
+				appendFinallyWithResources(expr, expr.getResources(), b);
 			b.decreaseIndentation().newLine().append("}");
 		}
 	}
@@ -644,11 +644,40 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	/**
 	 * @since 2.18
 	 */
-	protected void appendFinallyWithResources(List<XVariableDeclaration> resources, ITreeAppendable b) {
-		for (int i = resources.size() - 1; i >= 0; i--) {
-			XVariableDeclaration res = resources.get(i);
-			String resName = getVarName(res, b);
-			b.newLine().append("if (" + resName + " != null) ").append(resName + ".close();");
+	protected void appendFinallyWithResources(XTryCatchFinallyExpression expr, List<XVariableDeclaration> resources,
+			ITreeAppendable b) {
+		if (expr != null && !resources.isEmpty()) {
+			// Invoking the close method might throw. Hence, we collect those
+			// Throwables and propagate them later on.
+			String throwablesStore = b.declareSyntheticVariable(Tuples.pair(expr, "_catchedThrowables"), "_ts");
+			b.newLine().append("java.util.List<Throwable> ");
+			b.append(throwablesStore);
+			b.append(" = new java.util.ArrayList<Throwable>();");
+			for (int i = resources.size() - 1; i >= 0; i--) {
+				XVariableDeclaration res = resources.get(i);
+				String resName = getVarName(res, b);
+				b.newLine().append("if (" + resName + " != null) {");
+				b.increaseIndentation();
+				b.newLine().append("try {");
+				b.increaseIndentation();
+				b.newLine().append(resName + ".close();");
+				// close inner try
+				closeBlock(b);
+				String throwable = b.declareSyntheticVariable(Tuples.pair(res, "_catchedThrowable"), "_t");
+				b.append(" catch (Throwable " + throwable + ") {");
+				b.increaseIndentation();
+				b.newLine().append(throwablesStore);
+				b.append(".add("+ throwable + ");");
+				// close inner catch
+				closeBlock(b);
+				// close if != null check
+				closeBlock(b);
+			}
+			b.newLine().append("if(!");
+			b.append(throwablesStore);
+			b.append(".isEmpty()) throw ");
+			b.append(throwablesStore);
+			b.append(".get(0);");
 		}
 	}
 
@@ -657,10 +686,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 */
 	protected boolean isAtLeast(ITreeAppendable b, JavaVersion version) {
 		GeneratorConfig config = b.getGeneratorConfig();
-		if (config != null && config.getJavaSourceVersion().isAtLeast(version))
-			return true;
-		else
-			return false;
+		return config != null && config.getJavaSourceVersion().isAtLeast(version);
 	}
 
 	protected void _toJavaExpression(XTryCatchFinallyExpression expr, ITreeAppendable b) {

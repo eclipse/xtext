@@ -256,6 +256,36 @@ public class PureXbaseInterpreterTest extends AbstractXbaseEvaluationTest {
   
   @Test
   @Override
+  public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1() {
+    try {
+      super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Override
+  public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2() {
+    try {
+      super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Override
+  public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3() {
+    try {
+      super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Override
   public void testTryWithResources_finally() {
     try {
       super.testTryWithResources_finally();

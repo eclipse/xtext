@@ -2848,6 +2848,69 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	/**
 	 * @since 2.18
 	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosable closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var a = new testdata.IntrospectableClosableExceptionsClose;\n" + 
+				"		var b = new testdata.IntrospectableClosable) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosable closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var b = new testdata.IntrospectableClosable;\n" + 
+				"		var a = new testdata.IntrospectableClosableExceptionsClose) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	@Test @Ignore public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3() throws Exception {
+		assertEvaluatesTo("exceptionWasThrown: true;a closed: true;b closed: true",
+				"var testdata.IntrospectableClosableExceptionsClose closableA\n" +
+				"var testdata.IntrospectableClosableExceptionsClose closableB\n" +
+				"var exceptionWasThrown = false\n" +
+				"try {\n" + 
+				"  try(var a = new testdata.IntrospectableClosableExceptionsClose;\n" + 
+				"		var b = new testdata.IntrospectableClosableExceptionsClose) {\n" + 
+				"    closableA = a\n" +
+				"    closableB = b\n" +
+				"  }\n" +
+				"} catch(Exception e) {\n" +
+				"    exceptionWasThrown = true\n"+
+				"}\n" +
+				"return \"exceptionWasThrown: \" + exceptionWasThrown + \";a closed: \" + !closableA.isOpen() + \";b closed: \" + !closableB.isOpen()"
+				);
+	}
+	
+	/**
+	 * @since 2.18
+	 */
 	@Test @Ignore public void testTryWithResources_finally() throws Exception {
 		assertEvaluatesTo("[new, body, finally, close]",
 				"var testdata.ClosableWithList result\n" + 

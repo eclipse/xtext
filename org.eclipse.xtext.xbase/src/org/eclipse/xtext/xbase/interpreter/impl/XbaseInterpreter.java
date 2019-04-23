@@ -684,22 +684,32 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		// ... prompted by try with resources (automatic close)
 		if (!resources.isEmpty()) {
-			try {
-				for (int i = resources.size() - 1; i >= 0; i--) {
-					XVariableDeclaration resource = resources.get(i);
-					// Only close resources that are instantiated (= avoid
-					// NullPOinterException)
-					if (resIsInit.get(resource.getName())) {
-						// Find close method for resource
-						JvmOperation close = findCloseMethod(resource);
-						// Invoke close on resource
-						if (close != null)
-							invokeOperation(close, context.getValue(QualifiedName.create(resource.getSimpleName())),
+			List<EvaluationException> exceptionsDuringClose = newArrayList();
+			for (int i = resources.size() - 1; i >= 0; i--) {
+				XVariableDeclaration resource = resources.get(i);
+				// Only close resources that are instantiated (= avoid
+				// NullPointerException)
+				if (resIsInit.get(resource.getName())) {
+					// Find close method for resource
+					JvmOperation close = findCloseMethod(resource);
+					// Invoke close on resource
+					if (close != null) {
+						// Invoking the close method might throw
+						// a EvaluationException. Hence, we collect those thrown
+						// EvaluationExceptions and propagate them later on.
+						try {
+							invokeOperation(close,
+									context.getValue(QualifiedName.create(resource.getSimpleName())),
 									Collections.emptyList());
+						} catch (EvaluationException t) {
+							exceptionsDuringClose.add(t);
+						}
 					}
 				}
-			} catch (EvaluationException e) {
-				throw e;
+			}
+			// throw collected EvaluationException from close method, if there was any
+			if(!exceptionsDuringClose.isEmpty()) {
+				throw exceptionsDuringClose.get(0);
 			}
 		}
 		// throw return value from expression block after resources are closed

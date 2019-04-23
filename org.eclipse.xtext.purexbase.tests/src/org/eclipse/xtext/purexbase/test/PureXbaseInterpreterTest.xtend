@@ -165,6 +165,21 @@ class PureXbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 	override void testTryWithResources_userClassExceptionOnClose() {
 		super.testTryWithResources_userClassExceptionOnClose
 	}
+	
+	@Test
+	override void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1() {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1
+	}
+	
+	@Test
+	override void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2() {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2
+	}
+	
+	@Test
+	override void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3() {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3
+	}
 
 	@Test
 	override void testTryWithResources_finally() {
