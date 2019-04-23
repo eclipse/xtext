@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -545,7 +546,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		
 		// Catch
 		if (!catchClauses.isEmpty()) {
-			String variable = b.declareSyntheticVariable(Tuples.pair(expr, "_catchedThrowable"), "_t");
+			String variable = b.declareSyntheticVariable(Tuples.pair(expr, "_caughtThrowable"), "_t");
 			b.append(" catch (final Throwable ").append(variable).append(") ");
 			b.append("{").increaseIndentation();
 			b.newLine();
@@ -649,11 +650,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr != null && !resources.isEmpty()) {
 			// Invoking the close method might throw. Hence, we collect those
 			// Throwables and propagate them later on.
-			String throwablesStore = b.declareSyntheticVariable(Tuples.pair(expr, "_catchedThrowables"), "_ts");
-			b.newLine().append("java.util.List<Throwable> ");
+			String throwablesStore = b.declareSyntheticVariable(Tuples.pair(expr, "_caughtThrowables"), "_ts");
+			b.newLine().append(List.class);
+			b.append("<").append(Throwable.class).append("> ");
 			b.append(throwablesStore);
-			b.append(" = new java.util.ArrayList<Throwable>();");
+			b.append(" = new ");
+			b.append(ArrayList.class);
+			b.append("<").append(Throwable.class).append(">();");
 			for (int i = resources.size() - 1; i >= 0; i--) {
+				b.openPseudoScope();
 				XVariableDeclaration res = resources.get(i);
 				String resName = getVarName(res, b);
 				b.newLine().append("if (" + resName + " != null) {");
@@ -663,15 +668,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.newLine().append(resName + ".close();");
 				// close inner try
 				closeBlock(b);
-				String throwable = b.declareSyntheticVariable(Tuples.pair(res, "_catchedThrowable"), "_t");
-				b.append(" catch (Throwable " + throwable + ") {");
+				String throwable = b.declareSyntheticVariable(Tuples.pair(res, "_caughtThrowable"), "_t");
+				b.append(" catch (").append(Throwable.class).append(" " + throwable + ") {");
 				b.increaseIndentation();
 				b.newLine().append(throwablesStore);
-				b.append(".add("+ throwable + ");");
+				b.append(".add(" + throwable + ");");
 				// close inner catch
 				closeBlock(b);
 				// close if != null check
 				closeBlock(b);
+				b.closeScope();
 			}
 			b.newLine().append("if(!");
 			b.append(throwablesStore);
