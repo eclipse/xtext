@@ -31,7 +31,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (val a = new StringReader(s); 
 			) 
 				a.read
-		'''.buildXtendInput(true, false).parse.assertNoIssues
+		'''.buildXtendInput(true, false, false).parse.assertNoIssues
 	}
 
 	@Test
@@ -41,7 +41,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 				val b = ""
 			) 
 				a.read
-		'''.buildXtendInput(true, false).parse.assertError(XbasePackage.Literals.XVARIABLE_DECLARATION,
+		'''.buildXtendInput(true, false, false).parse.assertError(XbasePackage.Literals.XVARIABLE_DECLARATION,
 			IssueCodes.INVALID_TRY_RESOURCE_TYPE, "implement java.lang.AutoCloseable")
 	}
 
@@ -49,7 +49,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 	def void test_Error_NotAutoClosable() {
 		'''
 			try (val a = #[1,2,3]) {}
-		'''.buildXtendInput(true, false).parse.assertError(XbasePackage.Literals.XVARIABLE_DECLARATION,
+		'''.buildXtendInput(true, false, false).parse.assertError(XbasePackage.Literals.XVARIABLE_DECLARATION,
 			IssueCodes.INVALID_TRY_RESOURCE_TYPE, "implement java.lang.AutoCloseable")
 	}
 
@@ -65,7 +65,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			finally
 				if(br !== null)
 					br.close()
-		'''.test2('''
+		'''.buildXtendInput(true, true, false).assertCompilesTo('''
 			StringReader _stringReader = new StringReader(this.s);
 			final BufferedReader br = new BufferedReader(_stringReader);
 			try {
@@ -75,21 +75,63 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			    br.close();
 			  }
 			}
-		''')
+		'''.buildJavaOutput(true, true, false, false))
 	}
 
 	@Test
 	def void test_easyResource() {
 		'''
-			try (val a = new StringReader(s))
-			a.read
-		'''.test1('''
-			StringReader a = null;
-			try {
-			  a = new StringReader(this.s);
-			  a.read();
-			} finally {
-			  if (a != null) a.close();
+			package sample
+			
+			import java.io.StringReader
+			import java.io.IOException
+			
+			class FooClass {
+				val s = "line1\nline2\nline3"
+				def void fooMethod() {
+					try (val a = new StringReader(s))
+					  a.read
+					catch(IOException e)
+					  e.fillInStackTrace
+				}
+			}
+		'''.assertCompilesTo('''
+			package sample;
+			
+			import java.io.IOException;
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    StringReader a = null;
+			    try {
+			      a = new StringReader(this.s);
+			      a.read();
+			    } catch (final Throwable _t) {
+			      if (_t instanceof IOException) {
+			        final IOException e = (IOException)_t;
+			        e.fillInStackTrace();
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }
+			    } finally {
+			      List<Throwable> _ts = new ArrayList<Throwable>();
+			      if (a != null) {
+			        try {
+			          a.close();
+			        } catch (Throwable _t_1) {
+			          _ts.add(_t_1);
+			        }
+			      }
+			      if(!_ts.isEmpty()) throw _ts.get(0);
+			    }
+			  }
 			}
 		''')
 	}
@@ -99,18 +141,26 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			val array = newArrayOfSize(2)
 			try(val someCloseable = array.get(0)) {
-				someCloseable.close
+			  someCloseable.close
 			}
-		'''.test0('''
+		'''.buildXtendInput(false, false, false).assertCompilesTo('''
 			final AutoCloseable[] array = new AutoCloseable[2];
 			AutoCloseable someCloseable = null;
 			try {
 			  someCloseable = array[0];
 			  someCloseable.close();
 			} finally {
-			  if (someCloseable != null) someCloseable.close();
+			  List<Throwable> _ts = new ArrayList<Throwable>();
+			  if (someCloseable != null) {
+			    try {
+			      someCloseable.close();
+			    } catch (Throwable _t) {
+			      _ts.add(_t);
+			    }
+			  }
+			  if(!_ts.isEmpty()) throw _ts.get(0);
 			}
-		''')
+		'''.buildJavaOutput(false, false, false, true))
 	}
 
 		@Test
@@ -121,10 +171,11 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			val array = #[reader1,reader2]
 			
 			try (val AutoCloseable closable = array.get(0)){}
-		'''.buildXtendInput(true, false).assertCompilesTo('''
+		'''.buildXtendInput(true, false, false).assertCompilesTo('''
 			package sample;
 			
 			import java.io.StringReader;
+			import java.util.ArrayList;
 			import java.util.Collections;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -143,7 +194,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			      try {
 			        closable = array.get(0);
 			      } finally {
-			        if (closable != null) closable.close();
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (closable != null) {
+			          try {
+			            closable.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -164,21 +223,55 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try(val x = new StringReader(s)) {
 				x.close
 			}
-		'''.test1('''
-			StringReader a = null;
-			try {
-			  a = new StringReader(this.s);
-			  final int x = (1 + 1);
-			  a.read();
-			} finally {
-			  if (a != null) a.close();
-			}
-			StringReader x = null;
-			try {
-			  x = new StringReader(this.s);
-			  x.close();
-			} finally {
-			  if (x != null) x.close();
+		'''.buildXtendInput(true, false, false).assertCompilesTo('''
+			package sample;
+			
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    try {
+			      StringReader a = null;
+			      try {
+			        a = new StringReader(this.s);
+			        final int x = (1 + 1);
+			        a.read();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (a != null) {
+			          try {
+			            a.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
+			      }
+			      StringReader x = null;
+			      try {
+			        x = new StringReader(this.s);
+			        x.close();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (x != null) {
+			          try {
+			            x.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
+			      }
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
 			}
 		''')
 	}
@@ -189,16 +282,49 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (val sr = new StringReader(s); val buffy = new BufferedReader(sr)) {
 				buffy.read
 			}
-		'''.test2('''
-			StringReader sr = null;
-			BufferedReader buffy = null;
-			try {
-			  sr = new StringReader(this.s);
-			  buffy = new BufferedReader(sr);
-			  buffy.read();
-			} finally {
-			  if (buffy != null) buffy.close();
-			  if (sr != null) sr.close();
+		'''.buildXtendInput(true, true, false).assertCompilesTo('''
+			package sample;
+			
+			import java.io.BufferedReader;
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    try {
+			      StringReader sr = null;
+			      BufferedReader buffy = null;
+			      try {
+			        sr = new StringReader(this.s);
+			        buffy = new BufferedReader(sr);
+			        buffy.read();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (buffy != null) {
+			          try {
+			            buffy.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if (sr != null) {
+			          try {
+			            sr.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
+			      }
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
 			}
 		''')
 	}
@@ -208,13 +334,40 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			try (val br = new BufferedReader(new StringReader(s));) 
 				br.readLine()
-		'''.test2('''
-			BufferedReader br = null;
-			try {
-			  br = new BufferedReader(new StringReader(this.s));
-			  br.readLine();
-			} finally {
-			  if (br != null) br.close();
+		'''.buildXtendInput(true, true, false).assertCompilesTo('''
+			package sample;
+			
+			import java.io.BufferedReader;
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    try {
+			      BufferedReader br = null;
+			      try {
+			        br = new BufferedReader(new StringReader(this.s));
+			        br.readLine();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (br != null) {
+			          try {
+			            br.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
+			      }
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
 			}
 		''')
 	}
@@ -225,14 +378,41 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			val sr = new StringReader(s)
 			try (val br = new BufferedReader(sr);) 
 				br.readLine()
-		'''.test2('''
-			final StringReader sr = new StringReader(this.s);
-			BufferedReader br = null;
-			try {
-			  br = new BufferedReader(sr);
-			  br.readLine();
-			} finally {
-			  if (br != null) br.close();
+		'''.buildXtendInput(true, true, true).assertCompilesTo('''
+			package sample;
+			
+			import java.io.BufferedReader;
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    try {
+			      final StringReader sr = new StringReader(this.s);
+			      BufferedReader br = null;
+			      try {
+			        br = new BufferedReader(sr);
+			        br.readLine();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (br != null) {
+			          try {
+			            br.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
+			      }
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
 			}
 		''')
 	}
@@ -243,26 +423,60 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (val fr = new StringReader(if (true) s+"1" else s+"2"); val br = new BufferedReader(fr)) {
 				br.read
 			}
-		'''.test3('''
-			StringReader fr = null;
-			BufferedReader br = null;
-			try {
-			  fr = new Function0<StringReader>() {
-			    public StringReader apply() {
-			      String _xifexpression = null;
-			      if (true) {
-			        _xifexpression = (FooClass.this.s + "1");
-			      } else {
-			        _xifexpression = (FooClass.this.s + "2");
+		'''.buildXtendInput(true, true, false).assertCompilesTo('''
+			package sample;
+			
+			import java.io.BufferedReader;
+			import java.io.StringReader;
+			import java.util.ArrayList;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class FooClass {
+			  private final String s = "line1\nline2\nline3";
+			  
+			  public void fooMethod() {
+			    try {
+			      StringReader fr = null;
+			      BufferedReader br = null;
+			      try {
+			        fr = new Function0<StringReader>() {
+			          public StringReader apply() {
+			            String _xifexpression = null;
+			            if (true) {
+			              _xifexpression = (FooClass.this.s + "1");
+			            } else {
+			              _xifexpression = (FooClass.this.s + "2");
+			            }
+			            return new StringReader(_xifexpression);
+			          }
+			        }.apply();
+			        br = new BufferedReader(fr);
+			        br.read();
+			      } finally {
+			        List<Throwable> _ts = new ArrayList<Throwable>();
+			        if (br != null) {
+			          try {
+			            br.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if (fr != null) {
+			          try {
+			            fr.close();
+			          } catch (Throwable _t) {
+			            _ts.add(_t);
+			          }
+			        }
+			        if(!_ts.isEmpty()) throw _ts.get(0);
 			      }
-			      return new StringReader(_xifexpression);
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
 			    }
-			  }.apply();
-			  br = new BufferedReader(fr);
-			  br.read();
-			} finally {
-			  if (br != null) br.close();
-			  if (fr != null) fr.close();
+			  }
 			}
 		''')
 	}
@@ -292,6 +506,8 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			import java.io.File;
 			import java.io.FileReader;
 			import java.io.IOException;
+			import java.util.ArrayList;
+			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
@@ -319,7 +535,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_t);
 			      }
 			    } finally {
-			      if (a != null) a.close();
+			      List<Throwable> _ts = new ArrayList<Throwable>();
+			      if (a != null) {
+			        try {
+			          a.close();
+			        } catch (Throwable _t_1) {
+			          _ts.add(_t_1);
+			        }
+			      }
+			      if(!_ts.isEmpty()) throw _ts.get(0);
 			    }
 			  }
 			}
@@ -331,7 +555,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 			try (var r = [System.out.println("Closing")]) {
 			}
-		'''.test0('''
+		'''.buildXtendInput(false, false, false).assertCompilesTo('''
 			AutoCloseable r = null;
 			try {
 			  r = new AutoCloseable() {
@@ -340,9 +564,17 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			    }
 			  };
 			} finally {
-			  if (r != null) r.close();
+			  List<Throwable> _ts = new ArrayList<Throwable>();
+			  if (r != null) {
+			    try {
+			      r.close();
+			    } catch (Throwable _t) {
+			      _ts.add(_t);
+			    }
+			  }
+			  if(!_ts.isEmpty()) throw _ts.get(0);
 			}
-		''')
+		'''.buildJavaOutput(false, false, false, true))
 	}
 	
 	@Test
@@ -350,13 +582,14 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		'''
 		val myList = newArrayList;
 		try (val someCloseable = [ myList.add('close') ]) {
-			myList.add('body')
+		  myList.add('body')
 		}
-		'''.buildXtendInput(false, false).assertCompilesTo(
+		'''.buildXtendInput(false, false, false).assertCompilesTo(
 		'''
 		package sample;
 		
 		import java.util.ArrayList;
+		import java.util.List;
 		import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 		import org.eclipse.xtext.xbase.lib.Exceptions;
 		
@@ -376,7 +609,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		        };
 		        myList.add("body");
 		      } finally {
-		        if (someCloseable != null) someCloseable.close();
+		        List<Throwable> _ts = new ArrayList<Throwable>();
+		        if (someCloseable != null) {
+		          try {
+		            someCloseable.close();
+		          } catch (Throwable _t) {
+		            _ts.add(_t);
+		          }
+		        }
+		        if(!_ts.isEmpty()) throw _ts.get(0);
 		      }
 		    } catch (Throwable _e) {
 		      throw Exceptions.sneakyThrow(_e);
@@ -390,31 +631,15 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 
 	// Helpers
 	// ---------
-	/** Test does not need any imports besides 'Exceptions'*/
-	def private void test0(CharSequence input, CharSequence expected) {
-		(input.buildXtendInput(false, false)).assertCompilesTo(expected.buildJavaOutput(false, false, false))
-	}
-	
-	/** Test needs 'StringReader'*/
-	def private void test1(CharSequence input, CharSequence expected) {
-		(input.buildXtendInput(true, false)).assertCompilesTo(expected.buildJavaOutput(true, false, false))
-	}
-
-	/** Test needs 'StringReader' and 'BufferedReader'*/
-	def private void test2(CharSequence input, CharSequence expected) {
-		(input.buildXtendInput(true, true)).assertCompilesTo(expected.buildJavaOutput(true, true, false))
-	}
-
-	/** Test needs 'StringReader', 'BufferedReader' and 'Functions.Function0' */
-	def private void test3(CharSequence input, CharSequence expected) {
-		(input.buildXtendInput(true, true)).assertCompilesTo(expected.buildJavaOutput(true, true, true))
-	}
-
 	def private CharSequence buildXtendInput(CharSequence input, boolean needsStringReader,
-		boolean needsBufferedReader) {
+		boolean needsBufferedReader, boolean needsLists) {
 		return '''
 			package sample
-							
+			
+			«IF needsLists»
+			import java.util.ArrayList;
+			import java.util.List;
+			«ENDIF»
 			«IF needsBufferedReader»import java.io.BufferedReader«ENDIF»
 			«IF needsStringReader»import java.io.StringReader«ENDIF»
 			
@@ -428,10 +653,14 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 	}
 
 	def private CharSequence buildJavaOutput(CharSequence expected, boolean needsStringReader,
-		boolean needsBufferedReader, boolean needsFunc0) {
+		boolean needsBufferedReader, boolean needsFunc0, boolean needsLists) {
 		return '''
 			package sample;
 			
+			«IF needsLists»
+			import java.util.ArrayList;
+			import java.util.List;
+			«ENDIF»
 			«IF needsBufferedReader»import java.io.BufferedReader;«ENDIF»
 			«IF needsStringReader»import java.io.StringReader;«ENDIF»
 			import org.eclipse.xtext.xbase.lib.Exceptions;
