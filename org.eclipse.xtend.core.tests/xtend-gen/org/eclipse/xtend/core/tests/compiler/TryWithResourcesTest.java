@@ -191,6 +191,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void fooMethod() {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("StringReader a = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
@@ -218,6 +221,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("        ");
+    _builder_1.append("_ts.add(_t);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
     _builder_1.append("throw Exceptions.sneakyThrow(_t);");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -225,9 +231,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (a != null) {");
@@ -251,7 +254,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -279,6 +282,8 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("final AutoCloseable[] array = new AutoCloseable[2];");
     _builder_1.newLine();
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
     _builder_1.append("AutoCloseable someCloseable = null;");
     _builder_1.newLine();
     _builder_1.append("try {");
@@ -290,9 +295,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("someCloseable.close();");
     _builder_1.newLine();
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("if (someCloseable != null) {");
@@ -316,7 +318,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -378,6 +380,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("final List<StringReader> array = Collections.<StringReader>unmodifiableList(CollectionLiterals.<StringReader>newArrayList(reader1, reader2));");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("AutoCloseable closable = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -388,9 +393,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("if (closable != null) {");
@@ -414,7 +416,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -487,6 +489,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("StringReader a = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -503,9 +508,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("if (a != null) {");
@@ -529,10 +531,13 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts_1 = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("StringReader x = null;");
@@ -550,9 +555,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} finally {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("if (x != null) {");
     _builder_1.newLine();
     _builder_1.append("          ");
@@ -565,7 +567,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} catch (Throwable _t) {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("_ts.add(_t);");
+    _builder_1.append("_ts_1.add(_t);");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");
@@ -574,7 +576,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts_1.isEmpty()) throw Exceptions.sneakyThrow(_ts_1.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -638,6 +640,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("StringReader sr = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -657,9 +662,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("if (buffy != null) {");
@@ -704,7 +706,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -766,6 +768,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("BufferedReader br = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -779,9 +784,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("if (br != null) {");
@@ -805,7 +807,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -872,6 +874,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("final StringReader sr = new StringReader(this.s);");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("BufferedReader br = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -885,9 +890,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("if (br != null) {");
@@ -911,7 +913,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -977,6 +979,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("StringReader fr = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1028,9 +1033,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} finally {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("if (br != null) {");
     _builder_1.newLine();
     _builder_1.append("          ");
@@ -1073,7 +1075,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -1158,6 +1160,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void fooMethod() {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("FileReader a = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
@@ -1212,6 +1217,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("        ");
+    _builder_1.append("_ts.add(_t);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
     _builder_1.append("throw Exceptions.sneakyThrow(_t);");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1219,9 +1227,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (a != null) {");
@@ -1245,7 +1250,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1266,6 +1271,8 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
     _builder_1.append("AutoCloseable r = null;");
     _builder_1.newLine();
     _builder_1.append("try {");
@@ -1286,9 +1293,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("} finally {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("if (r != null) {");
@@ -1312,7 +1316,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -1364,6 +1368,9 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("final ArrayList<String> myList = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("AutoCloseable someCloseable = null;");
     _builder_1.newLine();
     _builder_1.append("      ");
@@ -1391,9 +1398,6 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("} finally {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("List<Throwable> _ts = new ArrayList<Throwable>();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
     _builder_1.append("if (someCloseable != null) {");
     _builder_1.newLine();
     _builder_1.append("          ");
@@ -1415,7 +1419,7 @@ public class TryWithResourcesTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("if(!_ts.isEmpty()) throw _ts.get(0);");
+    _builder_1.append("if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

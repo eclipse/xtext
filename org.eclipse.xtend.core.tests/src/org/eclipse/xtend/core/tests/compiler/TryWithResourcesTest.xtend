@@ -109,6 +109,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  private final String s = "line1\nline2\nline3";
 			  
 			  public void fooMethod() {
+			    List<Throwable> _ts = new ArrayList<Throwable>();
 			    StringReader a = null;
 			    try {
 			      a = new StringReader(this.s);
@@ -118,10 +119,10 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        final IOException e = (IOException)_t;
 			        e.fillInStackTrace();
 			      } else {
+			        _ts.add(_t);
 			        throw Exceptions.sneakyThrow(_t);
 			      }
 			    } finally {
-			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      if (a != null) {
 			        try {
 			          a.close();
@@ -129,7 +130,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			          _ts.add(_t_1);
 			        }
 			      }
-			      if(!_ts.isEmpty()) throw _ts.get(0);
+			      if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			    }
 			  }
 			}
@@ -145,12 +146,12 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			}
 		'''.buildXtendInput(false, false, false).assertCompilesTo('''
 			final AutoCloseable[] array = new AutoCloseable[2];
+			List<Throwable> _ts = new ArrayList<Throwable>();
 			AutoCloseable someCloseable = null;
 			try {
 			  someCloseable = array[0];
 			  someCloseable.close();
 			} finally {
-			  List<Throwable> _ts = new ArrayList<Throwable>();
 			  if (someCloseable != null) {
 			    try {
 			      someCloseable.close();
@@ -158,7 +159,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			      _ts.add(_t);
 			    }
 			  }
-			  if(!_ts.isEmpty()) throw _ts.get(0);
+			  if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			}
 		'''.buildJavaOutput(false, false, false, true))
 	}
@@ -190,11 +191,11 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			      final StringReader reader1 = new StringReader(this.s);
 			      final StringReader reader2 = new StringReader(this.s);
 			      final List<StringReader> array = Collections.<StringReader>unmodifiableList(CollectionLiterals.<StringReader>newArrayList(reader1, reader2));
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      AutoCloseable closable = null;
 			      try {
 			        closable = array.get(0);
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (closable != null) {
 			          try {
 			            closable.close();
@@ -202,7 +203,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -237,13 +238,13 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  
 			  public void fooMethod() {
 			    try {
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      StringReader a = null;
 			      try {
 			        a = new StringReader(this.s);
 			        final int x = (1 + 1);
 			        a.read();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (a != null) {
 			          try {
 			            a.close();
@@ -251,22 +252,22 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
+			      List<Throwable> _ts_1 = new ArrayList<Throwable>();
 			      StringReader x = null;
 			      try {
 			        x = new StringReader(this.s);
 			        x.close();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (x != null) {
 			          try {
 			            x.close();
 			          } catch (Throwable _t) {
-			            _ts.add(_t);
+			            _ts_1.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts_1.isEmpty()) throw Exceptions.sneakyThrow(_ts_1.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -297,6 +298,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  
 			  public void fooMethod() {
 			    try {
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      StringReader sr = null;
 			      BufferedReader buffy = null;
 			      try {
@@ -304,7 +306,6 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        buffy = new BufferedReader(sr);
 			        buffy.read();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (buffy != null) {
 			          try {
 			            buffy.close();
@@ -319,7 +320,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -349,12 +350,12 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  
 			  public void fooMethod() {
 			    try {
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      BufferedReader br = null;
 			      try {
 			        br = new BufferedReader(new StringReader(this.s));
 			        br.readLine();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (br != null) {
 			          try {
 			            br.close();
@@ -362,7 +363,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -394,12 +395,12 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  public void fooMethod() {
 			    try {
 			      final StringReader sr = new StringReader(this.s);
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      BufferedReader br = null;
 			      try {
 			        br = new BufferedReader(sr);
 			        br.readLine();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (br != null) {
 			          try {
 			            br.close();
@@ -407,7 +408,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -439,6 +440,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			  
 			  public void fooMethod() {
 			    try {
+			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      StringReader fr = null;
 			      BufferedReader br = null;
 			      try {
@@ -456,7 +458,6 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        br = new BufferedReader(fr);
 			        br.read();
 			      } finally {
-			        List<Throwable> _ts = new ArrayList<Throwable>();
 			        if (br != null) {
 			          try {
 			            br.close();
@@ -471,7 +472,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			            _ts.add(_t);
 			          }
 			        }
-			        if(!_ts.isEmpty()) throw _ts.get(0);
+			        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
@@ -514,6 +515,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class FooClass {
 			  public void fooMethod() {
+			    List<Throwable> _ts = new ArrayList<Throwable>();
 			    FileReader a = null;
 			    try {
 			      a = new Function0<FileReader>() {
@@ -532,10 +534,10 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			        final IOException e = (IOException)_t;
 			        e.fillInStackTrace();
 			      } else {
+			        _ts.add(_t);
 			        throw Exceptions.sneakyThrow(_t);
 			      }
 			    } finally {
-			      List<Throwable> _ts = new ArrayList<Throwable>();
 			      if (a != null) {
 			        try {
 			          a.close();
@@ -543,7 +545,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			          _ts.add(_t_1);
 			        }
 			      }
-			      if(!_ts.isEmpty()) throw _ts.get(0);
+			      if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			    }
 			  }
 			}
@@ -556,6 +558,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			try (var r = [System.out.println("Closing")]) {
 			}
 		'''.buildXtendInput(false, false, false).assertCompilesTo('''
+			List<Throwable> _ts = new ArrayList<Throwable>();
 			AutoCloseable r = null;
 			try {
 			  r = new AutoCloseable() {
@@ -564,7 +567,6 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			    }
 			  };
 			} finally {
-			  List<Throwable> _ts = new ArrayList<Throwable>();
 			  if (r != null) {
 			    try {
 			      r.close();
@@ -572,7 +574,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 			      _ts.add(_t);
 			    }
 			  }
-			  if(!_ts.isEmpty()) throw _ts.get(0);
+			  if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 			}
 		'''.buildJavaOutput(false, false, false, true))
 	}
@@ -600,6 +602,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		  public void fooMethod() {
 		    try {
 		      final ArrayList<String> myList = CollectionLiterals.<String>newArrayList();
+		      List<Throwable> _ts = new ArrayList<Throwable>();
 		      AutoCloseable someCloseable = null;
 		      try {
 		        someCloseable = new AutoCloseable() {
@@ -609,7 +612,6 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		        };
 		        myList.add("body");
 		      } finally {
-		        List<Throwable> _ts = new ArrayList<Throwable>();
 		        if (someCloseable != null) {
 		          try {
 		            someCloseable.close();
@@ -617,7 +619,7 @@ class TryWithResourcesTest extends AbstractXtendCompilerTest {
 		            _ts.add(_t);
 		          }
 		        }
-		        if(!_ts.isEmpty()) throw _ts.get(0);
+		        if(!_ts.isEmpty()) throw Exceptions.sneakyThrow(_ts.get(0));
 		      }
 		    } catch (Throwable _e) {
 		      throw Exceptions.sneakyThrow(_e);
