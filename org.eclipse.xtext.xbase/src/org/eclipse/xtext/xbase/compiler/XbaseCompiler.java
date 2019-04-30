@@ -476,7 +476,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		
 		String throwablesStore = null;
-		if (isTryWithResources) {
+		if (isTryWithResources && !nativeTryWithResources) {
 			// The try block and/or invoking the close method later on might throw.
 			// Hence, we collect those Throwables and propagate them later on.
 			throwablesStore = b.declareSyntheticVariable(Tuples.pair(expr, "_caughtThrowables"), "_ts");
@@ -493,7 +493,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (isTryWithResources && !nativeTryWithResources) {
 			for (XVariableDeclaration res : resources) {
 				b.newLine();
-				// resource has to be declared and initialised with null before try
+				// resource has to be declared and initialized with null before try
 				// and with real AutoClosable implementation within try
 				// has to be var not val (final)
 				res.setWriteable(true);
@@ -556,6 +556,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		final EList<XCatchClause> catchClauses = expr.getCatchClauses();
 		final XExpression finallyExp = expr.getFinallyExpression();
 		boolean isTryWithResources = !expr.getResources().isEmpty();
+		boolean nativeTryWithResources = isAtLeast(b, JAVA7); // If Java 7 or better: use Java's try with resources
 		
 		// Catch
 		if (!catchClauses.isEmpty()) {
@@ -573,7 +574,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(" else {");
 			b.increaseIndentation().newLine();
-			if(isTryWithResources) {
+			if(isTryWithResources && !nativeTryWithResources) {
 				b.append(throwablesStore + ".add(" + variable + ");").newLine();
 			}			
 			appendSneakyThrow(expr, b, variable);
@@ -582,7 +583,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 
 		// Finally
-		boolean nativeTryWithResources = isAtLeast(b, JAVA7);
 		if (finallyExp != null || (!nativeTryWithResources && isTryWithResources)) {
 			b.append(" finally {").increaseIndentation();
 			if (finallyExp != null)
