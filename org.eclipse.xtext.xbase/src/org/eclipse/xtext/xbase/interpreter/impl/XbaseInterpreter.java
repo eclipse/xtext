@@ -637,13 +637,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		ReturnValue returnValue = null;
 		Map<String, Boolean> resIsInit = new HashMap<String, Boolean>();
 		List<XVariableDeclaration> resources = tryCatchFinally.getResources();
-
+		List<EvaluationException> caughtExceptions = newArrayList();
 		// Resources
 		try {
 			for (XVariableDeclaration res : resources) {
 				resIsInit.put(res.getName(), false);
 				result = internalEvaluate(res, context, indicator);
-				// Remember for automatic close which resources are initialised
+				// Remember for automatic close which resources are initialized
 				resIsInit.put(res.getName(), true);
 			}
 			// Expression Body
@@ -668,9 +668,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				caught = true;
 				break;
 			}
-			// Throw uncaught exception
-			if (!caught)
-					throw evaluationException;
+			// Save uncaught exception
+			if(!caught) caughtExceptions.add(evaluationException);
 		}
 
 		// finally expressions ...
@@ -684,7 +683,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		// ... prompted by try with resources (automatic close)
 		if (!resources.isEmpty()) {
-			List<EvaluationException> exceptionsDuringClose = newArrayList();
 			for (int i = resources.size() - 1; i >= 0; i--) {
 				XVariableDeclaration resource = resources.get(i);
 				// Only close resources that are instantiated (= avoid
@@ -702,16 +700,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 									context.getValue(QualifiedName.create(resource.getSimpleName())),
 									Collections.emptyList());
 						} catch (EvaluationException t) {
-							exceptionsDuringClose.add(t);
+							caughtExceptions.add(t);
 						}
 					}
 				}
 			}
-			// throw collected EvaluationException from close method, if there was any
-			if(!exceptionsDuringClose.isEmpty()) {
-				throw exceptionsDuringClose.get(0);
-			}
 		}
+		
+		// Throw caught exceptions if there are any
+		if (!caughtExceptions.isEmpty()) throw caughtExceptions.get(0);
+					
 		// throw return value from expression block after resources are closed
 		if (returnValue != null)
 			throw returnValue;
