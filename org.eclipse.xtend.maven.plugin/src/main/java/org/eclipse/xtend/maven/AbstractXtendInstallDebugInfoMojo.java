@@ -42,6 +42,12 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 	 */
 	@Parameter(property="hideSyntheticVariables", defaultValue="true")
 	protected boolean hideSyntheticVariables;
+	
+	/**
+	 * Set this to false to hide warnings like "Directory {@code srcDir} is empty. Can't process."
+	 */
+	@Parameter(property="showEmptyDirWarning", defaultValue="true")
+	protected boolean showEmptyDirWarning;
 
 	@Inject
 	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
@@ -67,7 +73,9 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 		File file = new File(root + "/" + subdir);
 		File[] listFiles = file.listFiles();
 		if (listFiles == null) {
-			getLog().warn("Directory "+ file.getPath() +" is empty. Can't process.");
+			if (showEmptyDirWarning) {
+				getLog().warn("Directory "+ file.getPath() +" is empty. Can't process.");
+			}
 			return;
 		}
 		for (File child : listFiles) {
