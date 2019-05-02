@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<feature id="org.eclipse.xtext.sdk" version="2.18.0.qualifier">
-		<category name="Xtext"/>
-	</feature>
-	<feature id="org.eclipse.xtend.sdk" version="2.18.0.qualifier">
-		<category name="Xtext"/>
-	</feature>
-	<bundle id="org.junit" version="4.12.0.qualifier"></bundle>
-	<bundle id="org.junit.source" version="4.12.0.qualifier"></bundle>
-	<bundle id="org.objectweb.asm" version="7.0.0.qualifier"></bundle>
-	<bundle id="org.objectweb.asm.source" version="7.0.0.qualifier"></bundle>
-	<bundle id="org.objectweb.asm.tree" version="7.0.0.qualifier"></bundle>
-	<bundle id="org.objectweb.asm.tree.source" version="7.0.0.qualifier"></bundle>
-	<category-def name="Xtext" label="Xtext"/>
+   <feature id="org.eclipse.xtext.sdk" version="2.18.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature id="org.eclipse.xtend.sdk" version="2.18.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <bundle id="org.junit" version="4.12.0.qualifier"/>
+   <bundle id="org.junit.source" version="4.12.0.qualifier"/>
+   <bundle id="org.objectweb.asm" version="7.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.source" version="7.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.tree" version="7.1.0.qualifier"/>
+   <bundle id="org.objectweb.asm.tree.source" version="7.1.0.qualifier"/>
+   <category-def name="Xtext" label="Xtext"/>
 </site>
