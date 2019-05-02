@@ -62,7 +62,7 @@
 		<!-- 3rd party -->
 		<antlr-runtime-version>3.2</antlr-runtime-version>
 		<args4j-version>2.33</args4j-version>
-		<asm-version>7.0</asm-version>
+		<asm-version>7.1</asm-version>
 		
 		<error_prone_annotations-version>2.0.15</error_prone_annotations-version>
 		<guava-version>21.0</guava-version>
