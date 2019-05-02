@@ -805,10 +805,10 @@
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
             name="org.objectweb.asm"
-            versionRange="[7.0.0,7.1.0)"/>
+            versionRange="[7.1.0,7.2.0)"/>
         <requirement
             name="org.objectweb.asm.tree"
-            versionRange="[7.0.0,7.1.0)"/>
+            versionRange="[7.1.0,7.2.0)"/>
         <requirement
             name="org.eclipse.cbi.p2repo.analyzers"
             optional="true"/>
