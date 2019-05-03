@@ -31,8 +31,8 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
 }
 
 location "http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06" {
-	org.objectweb.asm [7.0.0,7.1.0)
-	org.objectweb.asm.tree [7.0.0,7.1.0)
+	org.objectweb.asm [7.1.0,7.2.0)
+	org.objectweb.asm.tree [7.1.0,7.2.0)
 	com.google.inject [3.0.0,4.0.0)
 	org.apache.commons.cli
 	com.google.guava [21.0.0,22.0.0)
