@@ -300,13 +300,17 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         boolean _isObjectMethod = this.isObjectMethod(it);
         return Boolean.valueOf((!_isObjectMethod));
       };
-      final Function1<ResolvedMethod, String> _function_3 = (ResolvedMethod it) -> {
+      final Function1<ResolvedMethod, Boolean> _function_3 = (ResolvedMethod it) -> {
+        boolean _isStatic = this.isStatic(it);
+        return Boolean.valueOf((!_isStatic));
+      };
+      final Function1<ResolvedMethod, String> _function_4 = (ResolvedMethod it) -> {
         return it.getSimpleSignature();
       };
-      final Function1<List<ResolvedMethod>, ResolvedMethod> _function_4 = (List<ResolvedMethod> it) -> {
+      final Function1<List<ResolvedMethod>, ResolvedMethod> _function_5 = (List<ResolvedMethod> it) -> {
         return IterableExtensions.<ResolvedMethod>head(it);
       };
-      return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3).values(), _function_4));
+      return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3), _function_4).values(), _function_5));
     }
     
     public boolean isObjectMethod(final ResolvedMethod it) {
@@ -320,6 +324,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         _xblockexpression = (((((Objects.equal(name, "hashCode") && parameterTypes.isEmpty()) || (Objects.equal(name, "toString") && parameterTypes.isEmpty())) || (Objects.equal(name, "equals") && Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(this.context.getObject()))))) || (Objects.equal(name, "finalize") && parameterTypes.isEmpty())) || (Objects.equal(name, "clone") && parameterTypes.isEmpty()));
       }
       return _xblockexpression;
+    }
+    
+    public boolean isStatic(final ResolvedMethod it) {
+      return it.getDeclaration().isStatic();
     }
     
     public MutableMethodDeclaration implementMethod(final MutableMemberDeclaration delegate, final ResolvedMethod resolvedMethod) {

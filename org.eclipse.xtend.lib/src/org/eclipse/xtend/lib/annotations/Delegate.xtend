@@ -218,6 +218,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			delegate.delegatedInterfaces.map[declaredResolvedMethods].flatten
 				.filter[delegate.declaringType.findDeclaredMethod(declaration.simpleName, resolvedParameters.map[resolvedType]) === null]
 				.filter[!isObjectMethod]
+				.filter[!isStatic]
 				.groupBy[simpleSignature].values.map[head]
 				.toSet
 		}
@@ -231,6 +232,10 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			|| name == "equals" && parameterTypes == #[object]
 			|| name == "finalize" && parameterTypes.empty
 			|| name == "clone" && parameterTypes.empty
+		}
+
+		def isStatic(ResolvedMethod it) {
+			declaration.isStatic
 		}
 
 		def implementMethod(MutableMemberDeclaration delegate, ResolvedMethod resolvedMethod) {
