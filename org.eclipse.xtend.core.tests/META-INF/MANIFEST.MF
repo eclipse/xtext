@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.emf.ecore,
  org.eclipse.xtext.builder,
  org.eclipse.xtend.lib,
- org.objectweb.asm;bundle-version="[7.0.0,7.1.0)",
+ org.objectweb.asm;bundle-version="[7.1.0,7.2.0)",
  org.eclipse.jdt.core;bundle-version="3.13.102",
  org.eclipse.xtext.builder.standalone,
  org.eclipse.xtext.java
