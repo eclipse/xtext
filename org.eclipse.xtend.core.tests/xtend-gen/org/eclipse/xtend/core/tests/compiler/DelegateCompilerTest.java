@@ -1012,6 +1012,28 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testStaticMethodsInInterfaces() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("import testdata.InterfaceWithStaticMethod");
+      _builder.newLine();
+      _builder.append("class Bar implements InterfaceWithStaticMethod {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate InterfaceWithStaticMethod delegate");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      this._validationTestHelper.assertNoIssues(this.file(text));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void genericsWithLowerBound() {
     try {
       StringConcatenation _builder = new StringConcatenation();

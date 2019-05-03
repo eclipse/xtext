@@ -497,6 +497,18 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testStaticMethodsInInterfaces() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			import testdata.InterfaceWithStaticMethod
+			class Bar implements InterfaceWithStaticMethod {
+				@Delegate InterfaceWithStaticMethod delegate
+			}
+		'''
+		text.file.assertNoIssues
+	}
+	
+	@Test
 	def void genericsWithLowerBound() {
 		val text = ''' 
 			import org.eclipse.xtend.lib.annotations.Delegate
