@@ -67,7 +67,7 @@ spec:
     }
     
     stage('Maven Build & Test') {
-      parallel {
+      stages {
         stage('Maven Build') {
           steps {
             sh './2-maven-build.sh'
