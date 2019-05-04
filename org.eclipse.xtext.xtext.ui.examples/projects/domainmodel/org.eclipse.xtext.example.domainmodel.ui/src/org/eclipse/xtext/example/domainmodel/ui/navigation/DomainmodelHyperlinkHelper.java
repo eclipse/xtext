@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
@@ -69,7 +70,7 @@ public class DomainmodelHyperlinkHelper extends XbaseHyperLinkHelper {
 									hyperlink.setJavaElement(type);
 									hyperlink.setTypeLabel("Navigate to generated source code.");
 									hyperlink.setHyperlinkText("Go to type " + qualifiedJavaName);
-									hyperlink.setHyperlinkRegion(new Region(node.getOffset(), node.getLength()));
+									hyperlink.setHyperlinkRegion((IRegion) new Region(node.getOffset(), node.getLength()));
 									acceptor.accept(hyperlink);
 								}
 							} catch(JavaModelException e) {

@@ -66,6 +66,7 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
    org.eclipse.xtend.ide.tests",
  org.eclipse.xtext.xbase.ui.internal;x-friends:="org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.jvmmodel.findrefs;x-friends:="org.eclipse.xtext.xbase.junit,
+   org.eclipse.xtext.xbase.ui.testing,
    org.eclipse.xtend.ide.tests",
  org.eclipse.xtext.xbase.ui.jvmmodel.navigation;x-internal:=true,
  org.eclipse.xtext.xbase.ui.jvmmodel.occurrence;x-internal:=true,
@@ -87,7 +88,8 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
    org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.ui.syntaxcoloring;x-internal:=true,
  org.eclipse.xtext.xbase.ui.templates;x-friends:="org.eclipse.xtend.ide",
- org.eclipse.xtext.xbase.ui.validation;x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtext.xbase.ui.validation;x-friends:="org.eclipse.xtend.ide,
+   org.eclipse.xtext.xbase.ui.tests",
  org.eclipse.xtext.xbase.annotations.ui.editor
 Bundle-Localization: plugin
 Automatic-Module-Name: org.eclipse.xtext.xbase.ui
