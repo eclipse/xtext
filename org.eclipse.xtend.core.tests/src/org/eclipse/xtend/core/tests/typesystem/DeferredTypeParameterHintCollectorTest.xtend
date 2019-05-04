@@ -165,11 +165,8 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
  */
 class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeParameter>> {
 	
-	val PublicResolvedTypes resolvedTypes
-	
 	new(ITypeReferenceOwner owner, PublicResolvedTypes resolvedTypes) {
 		super(<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), owner)
-		this.resolvedTypes = resolvedTypes
 	}
 	
 	override getTypeParameterMapping() {

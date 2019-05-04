@@ -27,11 +27,8 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
  */
 @SuppressWarnings("all")
 public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeParameter>> {
-  private final PublicResolvedTypes resolvedTypes;
-  
   public MockTypeParameterSubstitutor(final ITypeReferenceOwner owner, final PublicResolvedTypes resolvedTypes) {
     super(CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), owner);
-    this.resolvedTypes = resolvedTypes;
   }
   
   @Override

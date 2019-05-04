@@ -796,7 +796,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		String description = "Remove the unused private member.";
 		String image = "delete_edit.png";
 		acceptor.accept(issue, label, description, image, new IModification() {
-			@Override @SuppressWarnings("restriction")
+			@Override
 			public void apply(IModificationContext context) throws Exception {
 				final IXtextDocument document = context.getXtextDocument();
 				document.modify(new IUnitOfWork.Void<XtextResource>() {

@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.tests;
 
 import static com.google.common.collect.Lists.*;
-import static java.util.Collections.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
