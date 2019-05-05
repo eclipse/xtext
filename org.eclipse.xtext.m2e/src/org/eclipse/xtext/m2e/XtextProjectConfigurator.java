@@ -36,7 +36,6 @@ import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
-import com.google.common.base.Throwables;
 
 public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 
