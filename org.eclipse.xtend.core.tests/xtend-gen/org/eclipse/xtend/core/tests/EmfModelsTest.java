@@ -131,13 +131,13 @@ public class EmfModelsTest {
                 throw Exceptions.sneakyThrow(_t);
               }
             }
-          } catch (final Throwable _t_1) {
-            if (_t_1 instanceof Exception) {
-              final Exception e = (Exception)_t_1;
+          } catch (final Throwable _t) {
+            if (_t instanceof Exception) {
+              final Exception e = (Exception)_t;
               e.printStackTrace();
               Assert.fail(e.getMessage());
             } else {
-              throw Exceptions.sneakyThrow(_t_1);
+              throw Exceptions.sneakyThrow(_t);
             }
           }
         }

@@ -141,7 +141,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       _builder.newLine();
       final XtendFile file = this.file(_builder.toString());
       final XtendField stringField = IterableExtensions.<XtendField>head(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class));
-      final XtendField intField = ((XtendField[])Conversions.unwrapArray(Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class), XtendField.class))[1];
+      final XtendField intField = ((XtendField[])Conversions.unwrapArray((Iterables.<XtendField>filter(IterableExtensions.<XtendTypeDeclaration>head(file.getXtendTypes()).getMembers(), XtendField.class)), XtendField.class))[1];
       Assert.assertEquals(Constants1.STRING_CONSTANT, this.interpreter.evaluate(stringField.getInitialValue(), null));
       Assert.assertEquals(Integer.valueOf(Constants1.INT_CONSTANT), this.interpreter.evaluate(intField.getInitialValue(), null));
     } catch (Throwable _e) {
@@ -372,7 +372,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesTo("test.Enum1.YELLOW", _function);
     final Procedure1<Object> _function_1 = (Object it) -> {
-      Assert.assertEquals("YELLOW", ((JvmEnumerationLiteral[]) it)[0].getSimpleName());
+      Assert.assertEquals("YELLOW", (((JvmEnumerationLiteral[]) it)[0]).getSimpleName());
     };
     this.evaluatesTo("#[test.Enum1.YELLOW,test.Enum1.RED]", _function_1);
   }
@@ -440,8 +440,8 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   public void testClassLiteralArray() {
     final Procedure1<Object> _function = (Object it) -> {
       Assert.assertTrue((it instanceof JvmTypeReference[]));
-      Assert.assertEquals("java.lang.String", ((JvmTypeReference[]) it)[0].getIdentifier());
-      Assert.assertEquals("java.lang.Class", ((JvmTypeReference[]) it)[1].getIdentifier());
+      Assert.assertEquals("java.lang.String", (((JvmTypeReference[]) it)[0]).getIdentifier());
+      Assert.assertEquals("java.lang.Class", (((JvmTypeReference[]) it)[1]).getIdentifier());
     };
     final Procedure1<Object> assertion = _function;
     this.evaluatesTo("#[typeof(String), typeof(Class)]", assertion);

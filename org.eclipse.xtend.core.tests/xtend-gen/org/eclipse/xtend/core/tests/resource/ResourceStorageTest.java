@@ -120,9 +120,9 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       resource.loadFromStorage(in);
       EObject _get = resource.getContents().get(1);
       final JvmGenericType jvmClass = ((JvmGenericType) _get);
-      Assert.assertEquals("java.lang.CharSequence", IterableExtensions.<JvmFormalParameter>head(((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[2].getParameters()).getParameterType().getQualifiedName());
-      Assert.assertEquals("java.lang.Object", ((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[2].getReturnType().getQualifiedName());
-      Assert.assertEquals("Hello myMethod", IterableExtensions.<DocumentationAdapter>head(Iterables.<DocumentationAdapter>filter(((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[1].eAdapters(), DocumentationAdapter.class)).getDocumentation());
+      Assert.assertEquals("java.lang.CharSequence", IterableExtensions.<JvmFormalParameter>head((((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[2]).getParameters()).getParameterType().getQualifiedName());
+      Assert.assertEquals("java.lang.Object", (((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[2]).getReturnType().getQualifiedName());
+      Assert.assertEquals("Hello myMethod", IterableExtensions.<DocumentationAdapter>head(Iterables.<DocumentationAdapter>filter((((JvmOperation[])Conversions.unwrapArray(jvmClass.getDeclaredOperations(), JvmOperation.class))[1]).eAdapters(), DocumentationAdapter.class)).getDocumentation());
       Assert.assertEquals(resource.getURI(), resource.getResourceDescription().getURI());
       Assert.assertEquals(2, IterableExtensions.size(resource.getResourceDescription().getExportedObjects()));
       Assert.assertEquals("foo.Bar", IterableExtensions.<IEObjectDescription>head(resource.getResourceDescription().getExportedObjects()).getQualifiedName().toString());

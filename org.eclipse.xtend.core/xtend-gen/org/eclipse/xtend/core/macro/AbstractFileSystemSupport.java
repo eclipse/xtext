@@ -94,13 +94,13 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
         throw new AssertionError("threw cannot be null here");
       }
       throw threw;
-    } catch (final Throwable _t_2) {
-      if (_t_2 instanceof IOException) {
-        final IOException exc = (IOException)_t_2;
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException exc = (IOException)_t;
         String _message = exc.getMessage();
         throw new IllegalArgumentException(_message, exc);
       } else {
-        throw Exceptions.sneakyThrow(_t_2);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
