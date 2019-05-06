@@ -119,6 +119,8 @@ When major or minor releases are done, there should be a time period of at least
 
 ### Preparing Milestones and Releases
 
+To initiate a release build start the build job [release-prepare-branches](https://ci.eclipse.org/xtext/job/releng/job/release-prepare-branches/). This job automates the process mentioned below until step 15 exclusive (triggering the `xtext-release` job). Once the job successfully finished, continue with step 15.
+
 Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
 
 The Xtend compiler version used in the build should be the current snapshot or the last milestone for milestones, and it should always be the last milestone for releases (this is important for making release builds reproducible).
@@ -153,6 +155,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 			)
 		])
 	```
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-lib' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
+	```
 1. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the release version.
    * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
@@ -165,6 +173,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 			)
 		])
 	```
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-core' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
+	```
 1. xtext-eclipse
    * `Jenkinsfile`: Add upstream trigger into `properties` section:
    ```
@@ -175,16 +189,11 @@ Build jobs for releases must be executed in proper order on the build server, i.
 			)
 		])
 	```
-1. xtext-idea
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-xtend/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-web
    * `gradle/versions.gradle`: Set `version` property to the release version.
@@ -197,6 +206,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 			)
 		])
 	```
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
+	```
 1. xtext-maven
    * Replace all occurrences of the -SNAPSHOT version with the release version.
    * `Jenkinsfile`: Add upstream trigger into `properties` section:
@@ -207,6 +222,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
 			)
 		])
+	```
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-xtend
    * `gradle/versions.gradle`: Set `version` property to the release version.
@@ -223,6 +244,12 @@ Build jobs for releases must be executed in proper order on the build server, i.
 				upstreamProjects: 'xtext-eclipse/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
 			)
 		])
+	```
+	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
+	```
+	triggers {
+	  upstream(upstreamProjects: 'xtext-eclipse' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
+, threshold: hudson.model.Result.SUCCESS)
 	```
 1. Switch back to xtext-umbrella
    * `./gitAll commit -a -m "[release] version $XTEXT_VERSION"`
@@ -254,13 +281,17 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
 1. Update Marketplace entries
-   * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext)
-   * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend)
-   * Update Version Number and Supported Eclipse Release(s)
+   * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext/edit)
+   * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend/edit)
+   * For each update the properties:
+     * Version Number
+     * Update Site URL
+     * Supported Eclipse Release(s)
 
 Check that everything was promoted correctly:
 1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
    * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
+   * (To be fixed) Manually rename the zipped repository in the download location. By default the get a build timestamp, but the artifacts need to be named like the release
 
 
 ### Lifting the Version Number
