@@ -366,8 +366,8 @@ public class ConstantConditionsInterpreter {
             _matched=true;
             Object _rawValue = arg.getRawValue();
             boolean _not = (!(((Boolean) _rawValue)).booleanValue());
-            boolean _isCompileTimeConstant_1 = arg.isCompileTimeConstant();
-            _switchResult = new EvaluationResult(Boolean.valueOf(_not), _isCompileTimeConstant_1);
+            boolean _isCompileTimeConstant = arg.isCompileTimeConstant();
+            _switchResult = new EvaluationResult(Boolean.valueOf(_not), _isCompileTimeConstant);
           }
         }
         if (!_matched) {
