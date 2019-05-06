@@ -89,7 +89,7 @@ class JavaSourceLanguagePerformanceTest {
 		doTestPerformance(25600)
 	}
 	
-	@Test(timeout=40000)
+	@Test(timeout=50000)
 	def void testPerf51200() {
 		doTestPerformance(51200)
 	}
