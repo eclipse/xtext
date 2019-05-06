@@ -804,6 +804,14 @@ def isMale(String salutation) {
 }
 ```
 
+## Ternary Expression {#ternary-expression}
+
+Additionally to the [if expression](203_xtend_expressions.html#if-expression) you can use the ternary operator as you are used to from Java.
+
+```xtend
+val x = flag?"Hello":"Goodbye"
+```
+
 ## For Loop {#for-loop}
 
 The for loop 
@@ -942,6 +950,15 @@ def readFile (String path) {
     logException
   }
 }
+```
+
+## Try With Resources {#xtend-expressions-try-with-resources}
+
+Like in Java you can use the try-with-resources expression to automatically close resources.
+
+```xtend
+  try (val resource = new StringReader("This \n is a text!"))
+    return resource.read
 ```
 
 ## Synchronized {#xtend-expressions-synchronized}
