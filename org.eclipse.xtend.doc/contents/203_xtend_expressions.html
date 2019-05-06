@@ -900,6 +900,13 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 }
 </code></pre>
 
+<h2 id="ternary-expression">Ternary Expression</h2>
+
+<p>Additionally to the <a href="203_xtend_expressions.html#if-expression">if expression</a> you can use the ternary operator as you are used to from Java.</p>
+
+<pre><code class="language-xtend">val x = flag?"Hello":"Goodbye"
+</code></pre>
+
 <h2 id="for-loop">For Loop</h2>
 
 <p>The for loop</p>
@@ -1025,6 +1032,14 @@ if (myList.isEmpty)
     logException
   }
 }
+</code></pre>
+
+<h2 id="xtend-expressions-try-with-resources">Try With Resources</h2>
+
+<p>Like in Java you can use the try-with-resources expression to automatically close resources.</p>
+
+<pre><code class="language-xtend">  try (val resource = new StringReader("This \n is a text!"))
+    return resource.read
 </code></pre>
 
 <h2 id="xtend-expressions-synchronized">Synchronized</h2>
