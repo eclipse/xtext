@@ -132,11 +132,11 @@ public class RenameService2 implements IRenameService2 {
             }
           }
           if (((element == null) || element.eIsProxy())) {
-            StringConcatenation _builder_1 = new StringConcatenation();
-            _builder_1.append("No element found at ");
-            String _positionFragment_1 = this.toPositionFragment(position_1, uri);
-            _builder_1.append(_positionFragment_1);
-            issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, _builder_1.toString());
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("No element found at ");
+            String _positionFragment = this.toPositionFragment(position_1, uri);
+            _builder.append(_positionFragment);
+            issueAcceptor.add(RefactoringIssueAcceptor.Severity.FATAL, _builder.toString());
           } else {
             final IResourceServiceProvider services = this.serviceProviderRegistry.getResourceServiceProvider(element.eResource().getURI());
             final IChangeSerializer changeSerializer = services.<IChangeSerializer>get(IChangeSerializer.class);
@@ -306,17 +306,17 @@ public class RenameService2 implements IRenameService2 {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("No element found at ");
-      String _positionFragment_1 = this.toPositionFragment(caretPosition, uri);
-      _builder_2.append(_positionFragment_1);
-      RenameService2.LOG.trace(_builder_2);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("No element found at ");
+      String _positionFragment = this.toPositionFragment(caretPosition, uri);
+      _builder_1.append(_positionFragment);
+      RenameService2.LOG.trace(_builder_1);
     } else {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("Loaded resource is not an XtextResource. URI: ");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("Loaded resource is not an XtextResource. URI: ");
       URI _uRI = resource.getURI();
-      _builder_3.append(_uRI);
-      RenameService2.LOG.trace(_builder_3);
+      _builder_2.append(_uRI);
+      RenameService2.LOG.trace(_builder_2);
     }
     return null;
   }

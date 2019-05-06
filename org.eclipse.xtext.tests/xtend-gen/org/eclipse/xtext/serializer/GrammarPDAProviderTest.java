@@ -984,7 +984,7 @@ public class GrammarPDAProviderTest {
   
   protected void toDot(final Pda<ISerState, RuleCall> pda, final String name) {
     try {
-      final String test = Thread.currentThread().getStackTrace()[6].getMethodName();
+      final String test = (Thread.currentThread().getStackTrace()[6]).getMethodName();
       new PdaToDot<Object, Object>().draw(pda, (((("dot2/" + test) + "_") + name) + ".pdf"), "-T pdf");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

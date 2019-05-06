@@ -81,16 +81,16 @@ public class XtextGeneratorResourceSetInitializer {
             try {
               final Class<?> ecore = Class.forName("org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup");
               ecore.getDeclaredMethod("setup", new Class[] {}).invoke(null);
-            } catch (final Throwable _t_1) {
-              if (_t_1 instanceof ClassNotFoundException) {
-                final ClassNotFoundException e_2 = (ClassNotFoundException)_t_1;
+            } catch (final Throwable _t) {
+              if (_t instanceof ClassNotFoundException) {
+                final ClassNotFoundException e = (ClassNotFoundException)_t;
                 XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Ecore support. Is \'org.eclipse.xtext.ecore\' on the classpath?");
-                XtextGeneratorResourceSetInitializer.LOG.debug(e_2.getMessage(), e_2);
-              } else if (_t_1 instanceof Exception) {
-                final Exception e_3 = (Exception)_t_1;
-                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Ecore support.", e_3);
+                XtextGeneratorResourceSetInitializer.LOG.debug(e.getMessage(), e);
+              } else if (_t instanceof Exception) {
+                final Exception e_1 = (Exception)_t;
+                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Ecore support.", e_1);
               } else {
-                throw Exceptions.sneakyThrow(_t_1);
+                throw Exceptions.sneakyThrow(_t);
               }
             }
           }
@@ -101,30 +101,30 @@ public class XtextGeneratorResourceSetInitializer {
             try {
               final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
               xcore.getDeclaredMethod("doSetup", new Class[] {}).invoke(null);
-            } catch (final Throwable _t_2) {
-              if (_t_2 instanceof ClassNotFoundException) {
-                final ClassNotFoundException e_4 = (ClassNotFoundException)_t_2;
+            } catch (final Throwable _t) {
+              if (_t instanceof ClassNotFoundException) {
+                final ClassNotFoundException e = (ClassNotFoundException)_t;
                 XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
-                XtextGeneratorResourceSetInitializer.LOG.debug(e_4.getMessage(), e_4);
-              } else if (_t_2 instanceof Exception) {
-                final Exception e_5 = (Exception)_t_2;
-                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_5);
+                XtextGeneratorResourceSetInitializer.LOG.debug(e.getMessage(), e);
+              } else if (_t instanceof Exception) {
+                final Exception e_1 = (Exception)_t;
+                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_1);
               } else {
-                throw Exceptions.sneakyThrow(_t_2);
+                throw Exceptions.sneakyThrow(_t);
               }
             }
           }
           final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
           try {
             resourceSet.getResource(xcoreLangURI, true);
-          } catch (final Throwable _t_3) {
-            if (_t_3 instanceof WrappedException) {
-              final WrappedException e_6 = (WrappedException)_t_3;
-              XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_6);
+          } catch (final Throwable _t) {
+            if (_t instanceof WrappedException) {
+              final WrappedException e = (WrappedException)_t;
+              XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e);
               final Resource brokenResource = resourceSet.getResource(xcoreLangURI, false);
               resourceSet.getResources().remove(brokenResource);
             } else {
-              throw Exceptions.sneakyThrow(_t_3);
+              throw Exceptions.sneakyThrow(_t);
             }
           }
           break;

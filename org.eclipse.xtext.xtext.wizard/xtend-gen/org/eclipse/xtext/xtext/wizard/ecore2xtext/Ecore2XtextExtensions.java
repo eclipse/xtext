@@ -80,7 +80,7 @@ public class Ecore2XtextExtensions {
         };
         return IterableExtensions.<EReference, EClassifier>map(IterableExtensions.<EReference>filter(c.getEAllReferences(), _function_3), _function_4);
       };
-      _xifexpression = IterableExtensions.<EClass>toSet(Iterables.<EClass>filter(Iterables.<EClassifier>concat(IterableExtensions.<EClass, Iterable<EClassifier>>map(Iterables.<EClass>filter(Ecore2XtextExtensions.allConcreteRuleClassifiers(it), EClass.class), _function_2)), EClass.class));
+      _xifexpression = IterableExtensions.<EClass>toSet(Iterables.<EClass>filter((Iterables.<EClassifier>concat(IterableExtensions.<EClass, Iterable<EClassifier>>map(Iterables.<EClass>filter(Ecore2XtextExtensions.allConcreteRuleClassifiers(it), EClass.class), _function_2))), EClass.class));
     }
     return _xifexpression;
   }
