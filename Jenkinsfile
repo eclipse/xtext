@@ -37,7 +37,7 @@ node {
 	stage('Maven Build') {
 		def workspace = pwd()
 		def mvnHome = tool 'M3'
-		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -fae -Dmaven.repo.local=${workspace}/.m2/repository clean install"
+		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -fae -Dtycho.disableP2Mirrors=true -Dmaven.repo.local=${workspace}/.m2/repository clean install"
 	}
 	
 	archive 'build/**'

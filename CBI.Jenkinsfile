@@ -109,6 +109,7 @@ spec:
               --update-snapshots \
               -fae \
               -Dmaven.repo.local=$WORKSPACE/.m2/repository \
+              -Dtycho.disableP2Mirrors=true \
               clean install
           '''
         }
