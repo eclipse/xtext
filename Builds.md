@@ -288,6 +288,8 @@ Build jobs for releases must be executed in proper order on the build server, i.
      * Version Number
      * Update Site URL
      * Supported Eclipse Release(s)
+1. As soon as maven central is updated - send notifications
+1. Add / Update xtext-reference-projects
 
 Check that everything was promoted correctly:
 1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
