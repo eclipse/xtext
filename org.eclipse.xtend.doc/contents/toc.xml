@@ -138,6 +138,8 @@
 				<topic href="contents/203_xtend_expressions.html#fall-through" label="Fall Through">
 				</topic>
 			</topic>
+			<topic href="contents/203_xtend_expressions.html#ternary-expression" label="Ternary Expression">
+			</topic>
 			<topic href="contents/203_xtend_expressions.html#for-loop" label="For Loop">
 			</topic>
 			<topic href="contents/203_xtend_expressions.html#traditional-for-loop" label="Basic For Loop">
@@ -151,6 +153,8 @@
 			<topic href="contents/203_xtend_expressions.html#xtend-expressions-throw" label="Throwing Exceptions">
 			</topic>
 			<topic href="contents/203_xtend_expressions.html#xtend-expressions-try-catch" label="Try, Catch, Finally">
+			</topic>
+			<topic href="contents/203_xtend_expressions.html#xtend-expressions-try-with-resources" label="Try With Resources">
 			</topic>
 			<topic href="contents/203_xtend_expressions.html#xtend-expressions-synchronized" label="Synchronized">
 			</topic>
