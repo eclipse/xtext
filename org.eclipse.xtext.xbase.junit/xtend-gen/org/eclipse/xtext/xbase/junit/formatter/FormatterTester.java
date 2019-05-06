@@ -138,14 +138,14 @@ public class FormatterTester {
       final String newDocument2 = this.applyEdits(parsed2Doc, edits2);
       try {
         Assert.assertEquals(parsed2Doc, newDocument2.toString());
-      } catch (final Throwable _t_1) {
-        if (_t_1 instanceof AssertionError) {
-          final AssertionError e_1 = (AssertionError)_t_1;
+      } catch (final Throwable _t) {
+        if (_t instanceof AssertionError) {
+          final AssertionError e = (AssertionError)_t;
           InputOutput.<String>println(this.applyDebugEdits(newDocument, edits2));
           InputOutput.println();
-          throw e_1;
+          throw e;
         } else {
-          throw Exceptions.sneakyThrow(_t_1);
+          throw Exceptions.sneakyThrow(_t);
         }
       }
     } catch (Throwable _e) {

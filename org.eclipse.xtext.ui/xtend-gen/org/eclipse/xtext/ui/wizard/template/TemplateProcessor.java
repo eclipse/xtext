@@ -127,7 +127,7 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("\t");
         _builder_1.append("public static String ");
-        String _trim = parts[0].trim();
+        String _trim = (parts[0]).trim();
         _builder_1.append(_trim, "\t");
         _builder_1.append(";");
         _builder_1.newLineIfNotEmpty();
