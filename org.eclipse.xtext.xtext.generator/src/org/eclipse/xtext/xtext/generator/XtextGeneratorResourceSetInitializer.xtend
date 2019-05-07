@@ -52,7 +52,7 @@ class XtextGeneratorResourceSetInitializer {
 				if (resourceServiceProvider === null) {
 					try {
 						val genModelSupport = Class.forName('org.eclipse.emf.codegen.ecore.xtext.GenModelSupport')
-						val instance = genModelSupport.newInstance()
+						val instance = genModelSupport.getDeclaredConstructor().newInstance()
 						genModelSupport.getDeclaredMethod('createInjectorAndDoEMFRegistration').invoke(instance)
 					} catch (ClassNotFoundException e) {
 						LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed")

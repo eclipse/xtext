@@ -61,7 +61,7 @@ public class XtextGeneratorResourceSetInitializer {
           if ((resourceServiceProvider == null)) {
             try {
               final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-              final Object instance = genModelSupport.newInstance();
+              final Object instance = genModelSupport.getDeclaredConstructor().newInstance();
               genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration").invoke(instance);
             } catch (final Throwable _t) {
               if (_t instanceof ClassNotFoundException) {

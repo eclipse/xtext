@@ -72,7 +72,7 @@ public class InjectionExtension implements BeforeEachCallback, AfterEachCallback
 			IInjectorProvider injectorProvider = injectorProviderClassCache.get(klass);
 			if (injectorProvider == null) {
 				try {
-					injectorProvider = klass.newInstance();
+					injectorProvider = klass.getDeclaredConstructor().newInstance();
 					injectorProviderClassCache.put(klass, injectorProvider);
 				} catch (Exception e) {
 					throwUncheckedException(e);

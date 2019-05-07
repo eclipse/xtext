@@ -73,7 +73,7 @@ public class ValidationTestHelper {
 		@Override
 		protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
 			try {
-				return clazz.newInstance();
+				return clazz.getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -96,7 +96,7 @@ public class ValidationTestHelper {
 		@Override
 		protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
 			try {
-				return clazz.newInstance();
+				return clazz.getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
