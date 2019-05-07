@@ -402,7 +402,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 		text.file.assertNoIssues
 		text.compile[
 			assertTrue(getGeneratedCode("C"), getGeneratedCode("C").contains("<V extends CharSequence> CharSequence foo(final String foo, final V bar) throws Exception"))
-			val instance = getCompiledClass("C").newInstance
+			val instance = getCompiledClass("C").getDeclaredConstructor().newInstance
 			val method = getCompiledClass("C").getDeclaredMethod("foo", String, CharSequence)
 			assertEquals("bar", method.invoke(instance, "bar", "bar"))
 			assertEquals(Exception, method.exceptionTypes.head)
@@ -429,7 +429,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 		text.file.assertNoIssues
 		text.compile[
 			assertTrue(getGeneratedCode("C").contains("Y foo(final Y foo)"))
-			val instance = getCompiledClass("C").newInstance
+			val instance = getCompiledClass("C").getDeclaredConstructor().newInstance
 			val method = getCompiledClass("C").getDeclaredMethod("foo", CharSequence)
 			assertEquals("bar", method.invoke(instance, "bar"))
 		]

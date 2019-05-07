@@ -79,8 +79,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object first = it.getCompiledClass().newInstance();
-          final Object second = it.getCompiledClass().newInstance();
+          final Object first = it.getCompiledClass().getDeclaredConstructor().newInstance();
+          final Object second = it.getCompiledClass().getDeclaredConstructor().newInstance();
           Field _declaredField = it.getCompiledClass().getDeclaredField("ignoreMe");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
             try {
@@ -101,7 +101,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             }
           };
           ObjectExtensions.<Field>operator_doubleArrow(_declaredField_1, _function_2);
-          final Object third = it.getCompiledClass().newInstance();
+          final Object third = it.getCompiledClass().getDeclaredConstructor().newInstance();
           Field _declaredField_2 = it.getCompiledClass().getDeclaredField("i");
           final Procedure1<Field> _function_3 = (Field it_1) -> {
             try {
@@ -153,9 +153,9 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
         try {
           final Class<?> foo = it.getCompiledClass("Foo");
           final Class<?> bar = it.getCompiledClass("Bar");
-          final Object first = bar.newInstance();
-          final Object second = bar.newInstance();
-          final Object third = bar.newInstance();
+          final Object first = bar.getDeclaredConstructor().newInstance();
+          final Object second = bar.getDeclaredConstructor().newInstance();
+          final Object third = bar.getDeclaredConstructor().newInstance();
           Field _declaredField = bar.getDeclaredField("bar");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
             try {
@@ -166,7 +166,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             }
           };
           ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
-          final Object fourth = foo.newInstance();
+          final Object fourth = foo.getDeclaredConstructor().newInstance();
           Assert.assertEquals(first, second);
           Assert.assertFalse(first.equals(third));
           Assert.assertFalse(first.equals(fourth));
@@ -234,7 +234,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       this._validationTestHelper.assertWarning(this.clazz(text), XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           Assert.assertEquals(instance, "foo");
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -272,7 +272,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       this._validationTestHelper.assertWarning(this.clazz(text), XtendPackage.Literals.XTEND_CLASS, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           Assert.assertEquals(0, instance.hashCode());
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
@@ -323,8 +323,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       final String text = _builder.toString();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
-          final Object instance2 = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
+          final Object instance2 = it.getCompiledClass().getDeclaredConstructor().newInstance();
           Assert.assertEquals(instance, instance2);
           Assert.assertEquals(instance.hashCode(), instance2.hashCode());
         } catch (Throwable _e) {

@@ -68,7 +68,7 @@ class ProcessorInstanceForJvmTypeProvider {
 	def Object getProcessorInstance(JvmType type) {
 		try {
 			val loadClass = type.classLoader?.loadClass(type.identifier)
-			return loadClass?.newInstance
+			return loadClass?.getDeclaredConstructor()?.newInstance
 		} catch (Exception e) {
 			throw new IllegalStateException("Problem during instantiation of "+type.identifier+" : "+e.getMessage, e);
 		}

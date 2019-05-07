@@ -411,7 +411,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
 		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
@@ -440,7 +440,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
 		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
@@ -460,7 +460,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		Object closure = class1.getDeclaredMethod("returnClosure").invoke(object);
 		@SuppressWarnings("unchecked")
 		Functions.Function1<Object, Object> castedClosure = (Function1<Object, Object>) closure;
@@ -479,7 +479,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 						"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		Object list = class1.getDeclaredMethod("returnListOfClosures").invoke(object);
 		@SuppressWarnings("unchecked")
 		Functions.Function1<String, Integer> castedClosure =  (Function1<String, Integer>)((List<?>)list).get(0);
@@ -502,7 +502,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertTrue((Boolean)class1.getDeclaredMethod("methodOne").invoke(object));
 	}
 	
@@ -515,7 +515,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		try {
 			class1.getDeclaredMethod("test").invoke(object);
 		} catch (Exception e) {
@@ -533,7 +533,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertTrue((Boolean)class1.getDeclaredMethod("test").invoke(object));
 	}
 	
@@ -548,7 +548,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertEquals(RetentionPolicy.RUNTIME, class1.getDeclaredMethod("test").invoke(object));
 	}
 	
@@ -562,7 +562,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertEquals(Collections.EMPTY_SET, class1.getDeclaredMethod("test").invoke(object));
 	}
 	
@@ -586,7 +586,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("x.Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertEquals(3, class1.getDeclaredMethod("ifExpression_01", String.class).invoke(object, "foo"));
 	}
 	
@@ -610,7 +610,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("x.Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertEquals(3, class1.getDeclaredMethod("ifExpression_01", String.class).invoke(object, "foo"));
 	}
 	
@@ -626,7 +626,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> class1 = compileToClass("x.Z", javaCode);
-		Object object = class1.newInstance();
+		Object object = class1.getDeclaredConstructor().newInstance();
 		assertFalse((Boolean) class1.getDeclaredMethod("test").invoke(object));
 	}
 	
@@ -674,7 +674,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
 		assertNotNull(method);
-		List<?> list = (List<?>) method.invoke(class1.newInstance(), "foo");
+		List<?> list = (List<?>) method.invoke(class1.getDeclaredConstructor().newInstance(), "foo");
 		assertEquals(0, list.size());
 	}
 	
@@ -691,9 +691,9 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Class<?> class1 = compileToClass("x.Z", javaCode);
 		Method method = class1.getMethod("foo", new Class<?>[]{Object.class});
 		assertNotNull(method);
-		StringBuilder sb = (StringBuilder) method.invoke(class1.newInstance(), "foo");
+		StringBuilder sb = (StringBuilder) method.invoke(class1.getDeclaredConstructor().newInstance(), "foo");
 		assertEquals("2", sb.toString());
-		sb = (StringBuilder) method.invoke(class1.newInstance(), 23);
+		sb = (StringBuilder) method.invoke(class1.getDeclaredConstructor().newInstance(), 23);
 		assertEquals("12", sb.toString());
 	}
 	
@@ -846,7 +846,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"}\n";
 		String javaCode = compileToJavaCode(code);
 		Class<?> compiledClazz = compileToClass("x.Z", javaCode);
-		Object instance = compiledClazz.newInstance();
+		Object instance = compiledClazz.getDeclaredConstructor().newInstance();
 		Method method = compiledClazz.getDeclaredMethod("toString", Iterable.class, Functions.Function1.class, String.class);
 		List<String> list = Lists.newArrayList("a", "b");
 		Function1<String, String> function = new Functions.Function1<String, String>() {
@@ -1951,8 +1951,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"       super.equals(p)" + 
 				"  }\n" + 
 				"}");
-		Object instance = clazz.newInstance();
-		assertFalse(instance.equals(clazz.newInstance()));
+		Object instance = clazz.getDeclaredConstructor().newInstance();
+		assertFalse(instance.equals(clazz.getDeclaredConstructor().newInstance()));
 		assertTrue(instance.equals(instance));
 		assertTrue(instance.equals("foo"));
 	}
@@ -1967,8 +1967,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"       super.equals(p)" + 
 				"  }\n" + 
 				"}");
-		Object instance = clazz.newInstance();
-		assertFalse(instance.equals(clazz.newInstance()));
+		Object instance = clazz.getDeclaredConstructor().newInstance();
+		assertFalse(instance.equals(clazz.getDeclaredConstructor().newInstance()));
 		assertTrue(instance.equals(instance));
 		assertTrue(instance.equals("foo"));
 	}
@@ -1985,8 +1985,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> clazz = compileToClass("x.Z", javaCode);
-		Object instance = clazz.newInstance();
-		assertFalse(instance.equals(clazz.newInstance()));
+		Object instance = clazz.getDeclaredConstructor().newInstance();
+		assertFalse(instance.equals(clazz.getDeclaredConstructor().newInstance()));
 		assertTrue(instance.equals(instance));
 		assertTrue(instance.equals("foo"));
 	}
@@ -2003,8 +2003,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"}";
 		String javaCode = compileToJavaCode(code);
 		Class<?> clazz = compileToClass("x.Z", javaCode);
-		Object instance = clazz.newInstance();
-		assertFalse(instance.equals(clazz.newInstance()));
+		Object instance = clazz.getDeclaredConstructor().newInstance();
+		assertFalse(instance.equals(clazz.getDeclaredConstructor().newInstance()));
 		assertTrue(instance.equals(instance));
 		assertTrue(instance.equals("foo"));
 	}
@@ -2017,7 +2017,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"   result.append(x)" +
 				"  }" +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method method = clazz.getDeclaredMethod("aBuilder", String.class);
 		StringBuilder sb = (StringBuilder) method.invoke(instance, "Foo");
 		assertSame(sb, method.invoke(instance, "Foo"));
@@ -2038,7 +2038,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"   result.add(s)" +
 				"  }" +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method method = clazz.getDeclaredMethod("listWith", String.class);
 		@SuppressWarnings("unchecked")
 		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
@@ -2054,7 +2054,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def create result: '' transform(String x) {} " +
 				"  def create result: new Object() transform(Object x) {} " +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method stringMethod = clazz.getDeclaredMethod("transform", String.class);
 		Object stringResult = stringMethod.invoke(instance, "");
 		assertTrue(stringResult instanceof String);
@@ -2073,7 +2073,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"   add(s)\n" +
 				"  }" +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method method = clazz.getDeclaredMethod("listWith", String.class);
 		@SuppressWarnings("unchecked")
 		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
@@ -2099,7 +2099,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"   add(s)\n" +
 				"  }" +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method method = clazz.getDeclaredMethod("listWith", String.class);
 		@SuppressWarnings("unchecked")
 		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
@@ -2116,7 +2116,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 				"  def Iterable<String> create list listWith(List<String> list) {" +
 				"  }" +
 				"}");
-		Object instance = clazz.newInstance();
+		Object instance = clazz.getDeclaredConstructor().newInstance();
 		Method method = clazz.getDeclaredMethod("listWith", List.class);
 		@SuppressWarnings("unchecked")
 		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, newArrayList("Foo"));
@@ -2135,7 +2135,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 			"  }" +
 			"}";
 		Class<?> clazz = compileJavaCode("x.Y", xtendCode);
-		final Object instance = clazz.newInstance();
+		final Object instance = clazz.getDeclaredConstructor().newInstance();
 		final Method method = clazz.getDeclaredMethod("aBuilder", String.class);
 		final Set<Object> elements = Collections.synchronizedSet(Sets.newHashSet());
 		Runnable runnable = new Runnable() {
@@ -3457,7 +3457,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Class<?> code = compileJavaCode("foo.Bar", "package foo class Bar { @Property val String myField = 'hello'}");
 		final Method declaredMethod = code.getDeclaredMethod("getMyField");
 		assertNotNull(declaredMethod);
-		assertEquals("hello", declaredMethod.invoke(code.newInstance()));
+		assertEquals("hello", declaredMethod.invoke(code.getDeclaredConstructor().newInstance()));
 		try {
 			code.getDeclaredMethod("setMyField", new Class<?>[]{ String.class});
 		} catch (NoSuchMethodException e ) {
@@ -3468,7 +3468,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testProperty_01() throws Exception {
 		Class<?> code = compileJavaCode("foo.Bar", "package foo class Bar { @Property var String myField = 'hello' def String getMyField() { _myField.toUpperCase } }");
 		Method getter = code.getDeclaredMethod("getMyField");
-		Object newInstance = code.newInstance();
+		Object newInstance = code.getDeclaredConstructor().newInstance();
 		assertEquals("HELLO", getter.invoke(newInstance));
 		Method setter = code.getDeclaredMethod("setMyField", new Class<?>[]{ String.class});
 		setter.invoke(newInstance, "setterCalled");
@@ -3527,7 +3527,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 	
 	@Test public void testPackageScope() throws Exception {
 		Class<?> code = compileJavaCode("test.Bar", "package test class Bar extends SuperClass {}");
-		SuperClass sc = (SuperClass) code.newInstance();
+		SuperClass sc = (SuperClass) code.getDeclaredConstructor().newInstance();
 		assertNotNull(sc);
 	}
 

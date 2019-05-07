@@ -37,8 +37,8 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 				Object i = "Foo"
 			}
 		'''.compile [
-			val first = compiledClass.newInstance
-			val second = compiledClass.newInstance
+			val first = compiledClass.getDeclaredConstructor().newInstance
+			val second = compiledClass.getDeclaredConstructor().newInstance
 			compiledClass.getDeclaredField("ignoreMe") => [
 				accessible = true
 				set(null, "Bar")
@@ -47,7 +47,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 				accessible = true
 				set(second, "Bar")
 			]
-			val third = compiledClass.newInstance
+			val third = compiledClass.getDeclaredConstructor().newInstance
 			compiledClass.getDeclaredField("i") => [
 				accessible = true
 				set(third, "Bar")
@@ -74,14 +74,14 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 			val foo = getCompiledClass("Foo")
 			val bar = getCompiledClass("Bar")
 			
-			val first = bar.newInstance 
-			val second = bar.newInstance
-			val third = bar.newInstance
+			val first = bar.getDeclaredConstructor().newInstance 
+			val second = bar.getDeclaredConstructor().newInstance
+			val third = bar.getDeclaredConstructor().newInstance
 			bar.getDeclaredField("bar") => [
 				accessible = true
 				set(third, "Bar")
 			]
-			val fourth = foo.newInstance
+			val fourth = foo.getDeclaredConstructor().newInstance
 			
 			assertEquals(first, second)
 			assertFalse(first.equals(third))
@@ -117,7 +117,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION,"user.issue", "no effect")
 		text.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			assertEquals(instance, "foo")
 		]
 	}
@@ -135,7 +135,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
 		text.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			assertEquals(0, instance.hashCode)
 		]
 	}
@@ -162,8 +162,8 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''
 		text.compile [
-			val instance = compiledClass.newInstance
-			val instance2 = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
+			val instance2 = compiledClass.getDeclaredConstructor().newInstance
 			assertEquals(instance, instance2)
 			assertEquals(instance.hashCode, instance2.hashCode)
 		]

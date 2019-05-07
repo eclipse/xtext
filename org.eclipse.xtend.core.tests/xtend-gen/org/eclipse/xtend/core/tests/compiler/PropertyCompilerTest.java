@@ -485,7 +485,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
           Assert.assertEquals(Integer.valueOf(5), getFoo.invoke(instance));
         } catch (Throwable _e) {
@@ -520,7 +520,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
           setFoo.invoke(instance, Integer.valueOf(1));
           final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");

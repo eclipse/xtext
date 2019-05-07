@@ -829,7 +829,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
           Assert.assertTrue(it.getGeneratedCode("C"), it.getGeneratedCode("C").contains("<V extends CharSequence> CharSequence foo(final String foo, final V bar) throws Exception"));
-          final Object instance = it.getCompiledClass("C").newInstance();
+          final Object instance = it.getCompiledClass("C").getDeclaredConstructor().newInstance();
           final Method method = it.getCompiledClass("C").getDeclaredMethod("foo", String.class, CharSequence.class);
           Assert.assertEquals("bar", method.invoke(instance, "bar", "bar"));
           Assert.assertEquals(Exception.class, IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(method.getExceptionTypes()))));
@@ -878,7 +878,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
           Assert.assertTrue(it.getGeneratedCode("C").contains("Y foo(final Y foo)"));
-          final Object instance = it.getCompiledClass("C").newInstance();
+          final Object instance = it.getCompiledClass("C").getDeclaredConstructor().newInstance();
           final Method method = it.getCompiledClass("C").getDeclaredMethod("foo", CharSequence.class);
           Assert.assertEquals("bar", method.invoke(instance, "bar"));
         } catch (Throwable _e) {
