@@ -35,11 +35,11 @@ public class ClosedProjectsQueue {
 
 	/**
 	 * The system property {@code org.eclipse.xtext.builder.impl.ClosedProjectsQueue.MAX_ATTEMPTS} can be used to change the maximum number
-	 * of attempts. Defaults to {@code 100}.
+	 * of attempts. Defaults to {@code 10}.
 	 * 
 	 * @since 2.18
 	 */
-	private static final int MAX_ATTEMPTS = Integer.getInteger("org.eclipse.xtext.builder.impl.ClosedProjectsQueue.MAX_ATTEMPTS", 100);
+	private static final int MAX_ATTEMPTS = Integer.getInteger("org.eclipse.xtext.builder.impl.ClosedProjectsQueue.MAX_ATTEMPTS", 10);
 
 	/**
 	 * Encapsulates the changes that need to be performed after one or more projects have been removed / closed.
