@@ -211,6 +211,8 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 						values.addUnique(annotationValue);
 						annotationValue.setOperation(createMethodProxy(method));
 					}
+				} catch (IllegalAccessException e) {
+					log.debug(e.getMessage(), e);
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				}
