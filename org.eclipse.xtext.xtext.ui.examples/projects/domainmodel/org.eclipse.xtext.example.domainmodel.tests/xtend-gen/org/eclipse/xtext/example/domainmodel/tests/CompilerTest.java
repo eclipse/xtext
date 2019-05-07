@@ -56,7 +56,7 @@ public class CompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object obj = it.getCompiledClass().newInstance();
+          final Object obj = it.getCompiledClass().getDeclaredConstructor().newInstance();
           this._reflectExtensions.invoke(obj, "setName", "Foo");
           Assert.assertEquals("Hello Foo", this._reflectExtensions.invoke(obj, "doStuff", "Hello"));
         } catch (Throwable _e) {
@@ -99,9 +99,9 @@ public class CompilerTest {
       _builder_1.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object barObj = it.getCompiledClass("Bar").newInstance();
+          final Object barObj = it.getCompiledClass("Bar").getDeclaredConstructor().newInstance();
           this._reflectExtensions.invoke(barObj, "setName", "Bar");
-          final Object fooObj = it.getCompiledClass("Foo").newInstance();
+          final Object fooObj = it.getCompiledClass("Foo").getDeclaredConstructor().newInstance();
           this._reflectExtensions.invoke(fooObj, "setBar", barObj);
           Assert.assertEquals("Hello Bar", this._reflectExtensions.invoke(fooObj, "doStuff", "Hello"));
         } catch (Throwable _e) {

@@ -41,7 +41,7 @@ class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		generator.doGenerate(parse.eResource(), fsa)
 		val concatenation = fsa.getTextFiles().values().iterator().next()
 		val clazz = javaCompiler.compileToClass("Foo", concatenation.toString())
-		val foo = clazz.newInstance()
+		val foo = clazz.getDeclaredConstructor().newInstance()
 		val method = clazz.getDeclaredMethod("doStuff")
 		method.invoke(foo)
 	}
