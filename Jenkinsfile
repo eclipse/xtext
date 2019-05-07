@@ -1,28 +1,73 @@
-node {
-	properties([
-		[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]
-	])
-	
-	stage('Checkout') {
-		checkout scm
-	}
-	
-	stage('Gradle Build') {
-		sh "./gradlew clean cleanGenerateXtext build createLocalMavenRepo -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PcompileXtend=true -PignoreTestFailures=true --refresh-dependencies --continue"
-		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
-	}
-	
-	stage('Gradle Longrunning Tests') {
-		sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --continue"
-		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
-	}
-	
-	stage('Maven Build') {
-		def mvnHome = tool 'M3'
-		env.M2_HOME = "${mvnHome}"
-		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
-		sh "${mvnHome}/bin/mvn -f releng --batch-mode --update-snapshots -Dmaven.repo.local=.m2/repository -DJENKINS_URL=$JENKINS_URL -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean install"
-	}
-	
-	archive 'build/**'
+pipeline {
+  agent any
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+  }
+
+  tools { 
+    maven 'M3'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Gradle Build') {
+      steps {
+        sh './1-gradle-build.sh'
+        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
+      }
+    }
+
+    stage('Maven Build & Test') {
+      parallel {
+        stage('Maven Build') {
+          steps {
+            sh './2-maven-build.sh'
+          }
+        }
+
+        stage('Long Running Tests') {
+          steps {
+            sh './3-gradle-longrunning-tests.sh'
+            step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/**'
+    }
+    changed {
+      script {
+        def envName = ''
+        if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
+          envName = ' (JIPP)'
+        } else if (env.JENKINS_URL.contains('jenkins.eclipse.org/xtext')) {
+          envName = ' (CBI)'
+        } else if (env.JENKINS_URL.contains('typefox.io')) {
+          envName = ' (TF)'
+        }
+        
+        def curResult = currentBuild.currentResult
+        def color = '#00FF00'
+        if (curResult == 'SUCCESS' && currentBuild.previousBuild != null) {
+          curResult = 'FIXED'
+        } else if (curResult == 'UNSTABLE') {
+          color = '#FFFF00'
+        } else if (curResult == 'FAILURE') {
+          color = '#FF0000'
+        }
+        
+        slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+      }
+    }
+  }
 }
