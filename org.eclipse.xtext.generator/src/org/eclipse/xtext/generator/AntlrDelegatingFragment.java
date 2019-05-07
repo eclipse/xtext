@@ -72,7 +72,7 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 			return null;
 		}
 		try {
-			return (IGeneratorFragment) class1.newInstance();
+			return (IGeneratorFragment) class1.getDeclaredConstructor().newInstance();
 		}
 		catch (Exception e) {
 			throw new WrappedException(e);

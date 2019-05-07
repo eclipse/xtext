@@ -14,8 +14,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.annotation.Generated;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -58,6 +56,8 @@ import com.google.inject.Inject;
  */
 public class JvmModelCompleter {
 	
+	private static final String JAVAX_ANNOTATION_GENERATED = "javax.annotation.Generated";
+
 	protected static final String GENERATED_COMMENT_VAR_SOURCE_FILE = "${sourcefile}";
 	
 	@Inject 
@@ -220,7 +220,7 @@ public class JvmModelCompleter {
 					&& generatorConfig.isGenerateSyntheticSuppressWarnings()
 					&& annotationLookup.findAnnotation(jvmType, SuppressWarnings.class) == null
 					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType;
-			JvmType generatedJvmType = references.findDeclaredType("javax.annotation.Generated", jvmType);
+			JvmType generatedJvmType = references.findDeclaredType(JAVAX_ANNOTATION_GENERATED, jvmType);
 			boolean generateGenerated = generatorConfig.isGenerateGeneratedAnnotation()
 					&& generatedJvmType instanceof JvmAnnotationType;
 			if (generateSuppressWarnings || generateGenerated) {
@@ -232,7 +232,7 @@ public class JvmModelCompleter {
 				}
 				if (generateGenerated) {
 					JvmAnnotationType generatedAnnotationType = (JvmAnnotationType) generatedJvmType;
-					JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(Generated.class);
+					JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(JAVAX_ANNOTATION_GENERATED);
 					JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
 					annotationValue.getValues().add(generator.getClass().getName());
 					annotationRef.getExplicitValues().add(annotationValue);
@@ -254,7 +254,7 @@ public class JvmModelCompleter {
 						annotationRef.getExplicitValues().add(annotationValue);
 					}
 					typeExtensions.setSynthetic(annotationRef, true);
-					annotationLookup.removeAnnotation(jvmType, Generated.class);
+					annotationLookup.removeAnnotation(jvmType, JAVAX_ANNOTATION_GENERATED);
 					jvmType.getAnnotations().add(annotationRef);
 				}
 			}

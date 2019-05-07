@@ -35,7 +35,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment implem
 	public void setDelegate(String className) {
 		try {
 			Class<?> delegateClass = ResourceLoaderFactory.createResourceLoader().loadClass(className);
-			delegate = (IGeneratorFragment) delegateClass.newInstance();
+			delegate = (IGeneratorFragment) delegateClass.getDeclaredConstructor().newInstance();
 			return;
 		} catch (Exception e) {
 			// ignore

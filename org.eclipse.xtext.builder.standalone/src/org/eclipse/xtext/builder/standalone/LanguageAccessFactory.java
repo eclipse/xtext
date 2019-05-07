@@ -29,7 +29,7 @@ public class LanguageAccessFactory {
 					throw new IllegalArgumentException("Language setup class " + languageGenConf.getSetup()
 							+ " must implement " + ISetup.class.getName());
 				}
-				setup = (ISetup) loadClass.newInstance();
+				setup = (ISetup) loadClass.getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				throw new IllegalStateException("Failed to load language setup for class '"+languageGenConf.getSetup()+"'.", e);
 			}
