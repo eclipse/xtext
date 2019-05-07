@@ -96,7 +96,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 
 	protected void with(Class<? extends ISetup> setupClazz) throws Exception {
 		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
-		ISetup instance = setupClazz.newInstance();
+		ISetup instance = setupClazz.getDeclaredConstructor().newInstance();
 		setInjector(instance.createInjectorAndDoEMFRegistration());
 	}
 

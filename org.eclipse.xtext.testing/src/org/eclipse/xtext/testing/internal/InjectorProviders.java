@@ -35,7 +35,7 @@ public class InjectorProviders {
 			IInjectorProvider injectorProvider = injectorProviderClassCache.get(klass);
 			if (injectorProvider == null) {
 				try {
-					injectorProvider = klass.newInstance();
+					injectorProvider = klass.getDeclaredConstructor().newInstance();
 					injectorProviderClassCache.put(klass, injectorProvider);
 				} catch (Exception e) {
 					throwUncheckedException(e);
@@ -58,7 +58,7 @@ public class InjectorProviders {
 		InjectWith injectWith = testClass.getJavaClass().getAnnotation(InjectWith.class);
 		if (injectWith != null) {
 			try {
-				return injectWith.value().newInstance();
+				return injectWith.value().getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				throwUncheckedException(e);
 			}
