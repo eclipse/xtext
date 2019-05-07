@@ -1830,7 +1830,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("val x = new Integer(1)");
+      _builder.append("val x = Integer.valueOf(1)");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("synchronized (x) {");

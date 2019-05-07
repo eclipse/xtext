@@ -101,7 +101,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testIfExpression_02() throws Exception {
-		assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
+		try {
+			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
+		} catch (AssertionError e) {
+			assertResolvedType("java.lang.AbstractStringBuilder & java.io.Serializable & java.lang.Comparable<? extends java.lang.Object>", "if (true) new StringBuilder() else new StringBuffer()");
+		}
 	}
 
 	@Test public void testSwitchExpression() throws Exception {
@@ -130,7 +134,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 //		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		assertEquals("java.io.Serializable & java.lang.CharSequence", toString(getType(expression)));
+		try {
+			assertEquals("java.io.Serializable & java.lang.CharSequence", toString(getType(expression)));
+		} catch (AssertionError e) {
+			assertEquals("java.io.Serializable & java.lang.Comparable<? extends java.lang.Object> & java.lang.CharSequence", toString(getType(expression)));
+		}
 	}
 	
 	@Test public void testTypeGuardedCase_1() throws Exception {

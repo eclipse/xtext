@@ -93,7 +93,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		]
 		
 		val compiledClass = compile(expression.eResource, clazz)
-		val instance = compiledClass.newInstance
+		val instance = compiledClass.getDeclaredConstructor().newInstance
 		assertEquals("FOO", compiledClass.getMethod("doStuff",typeof(String)).invoke(instance,"foo"))
 	}
 	@Test
@@ -159,7 +159,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		]
 		val compiled = compile(expression.eResource, clazz)
 		
-		val inst = compiled.newInstance
+		val inst = compiled.getDeclaredConstructor().newInstance
 		val getter = compiled.getMethod("getX")
 		val setter = compiled.getMethod("setX", typeof(String))
 		setter.invoke(inst, "FOO")
@@ -338,7 +338,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	assertNotNull(compiledEnclosingClass)
 	val compiledInnerClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerClass"]
 	assertNotNull(compiledInnerClass)
-	val enclosingClassInstance = compiledEnclosingClass.newInstance
+	val enclosingClassInstance = compiledEnclosingClass.getDeclaredConstructor().newInstance
 	assertNotNull(enclosingClassInstance)
 	val innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
 	assertNotNull(innerClassConstructor)
@@ -371,7 +371,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	assertNotNull(compiledEnclosingClass)
 	val compiledInnerClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerClass"]
 	assertNotNull(compiledInnerClass)
-	val enclosingClassInstance = compiledEnclosingClass.newInstance
+	val enclosingClassInstance = compiledEnclosingClass.getDeclaredConstructor().newInstance
 	assertNotNull(enclosingClassInstance)
 	val innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
 	assertNotNull(innerClassConstructor)
@@ -406,7 +406,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	assertNotNull(compiledEnclosingClass)
 	val compiledInnerStaticClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerStaticClass"]
 	assertNotNull(compiledInnerStaticClass)
-	val innerStaticClassInstance = compiledInnerStaticClass.newInstance
+	val innerStaticClassInstance = compiledInnerStaticClass.getDeclaredConstructor().newInstance
 	assertNotNull(innerStaticClassInstance)
 	val enclosingClassMethodCallMethod = compiledInnerStaticClass.getMethod("innerStaticClassMethodCall")
 	assertNotNull(enclosingClassMethodCallMethod)

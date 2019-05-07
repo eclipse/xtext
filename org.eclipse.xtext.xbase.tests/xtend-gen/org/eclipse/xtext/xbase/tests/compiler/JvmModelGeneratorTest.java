@@ -163,7 +163,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       final Class<?> compiledClass = this.compile(expression.eResource(), clazz);
-      final Object instance = compiledClass.newInstance();
+      final Object instance = compiledClass.getDeclaredConstructor().newInstance();
       Assert.assertEquals("FOO", compiledClass.getMethod("doStuff", String.class).invoke(instance, "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -282,7 +282,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       final Class<?> compiled = this.compile(expression.eResource(), clazz);
-      final Object inst = compiled.newInstance();
+      final Object inst = compiled.getDeclaredConstructor().newInstance();
       final Method getter = compiled.getMethod("getX");
       final Method setter = compiled.getMethod("setX", String.class);
       setter.invoke(inst, "FOO");
@@ -582,7 +582,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final Class<?> compiledInnerClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(compiledEnclosingClass.getDeclaredClasses())), _function_1);
       Assert.assertNotNull(compiledInnerClass);
-      final Object enclosingClassInstance = compiledEnclosingClass.newInstance();
+      final Object enclosingClassInstance = compiledEnclosingClass.getDeclaredConstructor().newInstance();
       Assert.assertNotNull(enclosingClassInstance);
       final Constructor<?> innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
       Assert.assertNotNull(innerClassConstructor);
@@ -637,7 +637,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final Class<?> compiledInnerClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(compiledEnclosingClass.getDeclaredClasses())), _function_1);
       Assert.assertNotNull(compiledInnerClass);
-      final Object enclosingClassInstance = compiledEnclosingClass.newInstance();
+      final Object enclosingClassInstance = compiledEnclosingClass.getDeclaredConstructor().newInstance();
       Assert.assertNotNull(enclosingClassInstance);
       final Constructor<?> innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
       Assert.assertNotNull(innerClassConstructor);
@@ -693,7 +693,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final Class<?> compiledInnerStaticClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(compiledEnclosingClass.getDeclaredClasses())), _function_1);
       Assert.assertNotNull(compiledInnerStaticClass);
-      final Object innerStaticClassInstance = compiledInnerStaticClass.newInstance();
+      final Object innerStaticClassInstance = compiledInnerStaticClass.getDeclaredConstructor().newInstance();
       Assert.assertNotNull(innerStaticClassInstance);
       final Method enclosingClassMethodCallMethod = compiledInnerStaticClass.getMethod("innerStaticClassMethodCall");
       Assert.assertNotNull(enclosingClassMethodCallMethod);

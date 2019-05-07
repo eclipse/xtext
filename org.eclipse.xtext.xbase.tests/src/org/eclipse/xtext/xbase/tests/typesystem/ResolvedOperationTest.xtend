@@ -106,10 +106,16 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	def void testListToArrayHasTwoCandidates() {
+	def void testListToArrayHasTwoOrThreeCandidates() {
 		val operation = '(null as java.util.List<String>).toArray(null)'.toOperation
 		val candidates = operation.overriddenAndImplementedMethodCandidates
-		assertEquals(2, candidates.size)
+		val message = candidates.map[identifier].join(", ")
+		try {
+			assertEquals(message, 2, candidates.size)
+		} catch (AssertionError e) {
+			// Since Java11 we do have toArray(IntFunction)
+			assertEquals(message, 3, candidates.size)
+		}
 	}
 	
 	@Test
