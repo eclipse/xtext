@@ -315,8 +315,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Assert.assertEquals("BAR", values[0].toString());
-      Assert.assertEquals("BAZ", values[1].toString());
+      Assert.assertEquals("BAR", (values[0]).toString());
+      Assert.assertEquals("BAZ", (values[1]).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -346,8 +346,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Assert.assertEquals("BAR", values[0].toString());
-      Assert.assertEquals("BAZ", values[1].toString());
+      Assert.assertEquals("BAR", (values[0]).toString());
+      Assert.assertEquals("BAZ", (values[1]).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -372,8 +372,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Assert.assertEquals("BAR", values[0].toString());
-      Assert.assertEquals("BAZ", values[1].toString());
+      Assert.assertEquals("BAR", (values[0]).toString());
+      Assert.assertEquals("BAZ", (values[1]).toString());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

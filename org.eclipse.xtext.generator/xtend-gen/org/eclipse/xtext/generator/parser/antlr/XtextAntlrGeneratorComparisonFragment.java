@@ -353,33 +353,33 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       File _file_1 = new File(absoluteParserGrammarFileNameReference);
       final String grammarFileReference = Files.asCharSource(_file_1, Charset.forName(XtextAntlrGeneratorComparisonFragment.ENCODING)).read();
       try {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        String _path_1 = this.getPath(fsa);
-        _builder_4.append(_path_1);
-        _builder_4.append("/");
-        _builder_4.append(parserGrammarFileName);
-        final AntlrGrammarComparator.ErrorContext result = this.comparator.compareGrammars(grammarFile, grammarFileReference, _builder_4.toString(), absoluteParserGrammarFileNameReference, errorHandler);
-        StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append("Generated ");
-        _builder_5.append(type);
-        _builder_5.append(" parser grammar of ");
-        int _lineNumber_2 = result.getTestedGrammar().getLineNumber();
-        _builder_5.append(_lineNumber_2);
-        _builder_5.append(" lines matches expected one of ");
-        int _lineNumber_3 = result.getReferenceGrammar().getLineNumber();
-        _builder_5.append(_lineNumber_3);
-        _builder_5.append(" (");
+        StringConcatenation _builder_2 = new StringConcatenation();
+        String _path = this.getPath(fsa);
+        _builder_2.append(_path);
+        _builder_2.append("/");
+        _builder_2.append(parserGrammarFileName);
+        final AntlrGrammarComparator.ErrorContext result = this.comparator.compareGrammars(grammarFile, grammarFileReference, _builder_2.toString(), absoluteParserGrammarFileNameReference, errorHandler);
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("Generated ");
+        _builder_3.append(type);
+        _builder_3.append(" parser grammar of ");
+        int _lineNumber = result.getTestedGrammar().getLineNumber();
+        _builder_3.append(_lineNumber);
+        _builder_3.append(" lines matches expected one of ");
+        int _lineNumber_1 = result.getReferenceGrammar().getLineNumber();
+        _builder_3.append(_lineNumber_1);
+        _builder_3.append(" (");
         long _reset = stopWatch.reset();
-        _builder_5.append(_reset);
-        _builder_5.append(" ms).");
-        XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_5);
-      } catch (final Throwable _t_1) {
-        if (_t_1 instanceof RuntimeException) {
-          final RuntimeException e_1 = (RuntimeException)_t_1;
-          XtextAntlrGeneratorComparisonFragment.LOG.error(e_1.getMessage());
-          exception = e_1;
+        _builder_3.append(_reset);
+        _builder_3.append(" ms).");
+        XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_3);
+      } catch (final Throwable _t) {
+        if (_t instanceof RuntimeException) {
+          final RuntimeException e = (RuntimeException)_t;
+          XtextAntlrGeneratorComparisonFragment.LOG.error(e.getMessage());
+          exception = e;
         } else {
-          throw Exceptions.sneakyThrow(_t_1);
+          throw Exceptions.sneakyThrow(_t);
         }
       }
       if (this.failOnError) {

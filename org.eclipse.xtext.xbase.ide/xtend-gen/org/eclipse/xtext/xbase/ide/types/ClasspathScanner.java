@@ -238,11 +238,11 @@ public class ClasspathScanner {
           descriptorCollections.add(descriptors);
           return Iterables.<ITypeDescriptor>concat(descriptorCollections);
         }
-      } catch (final Throwable _t_1) {
-        if (_t_1 instanceof IOException) {
+      } catch (final Throwable _t) {
+        if (_t instanceof IOException) {
           return Collections.<ITypeDescriptor>emptyList();
         } else {
-          throw Exceptions.sneakyThrow(_t_1);
+          throw Exceptions.sneakyThrow(_t);
         }
       } finally {
         if ((jarFile != null)) {
