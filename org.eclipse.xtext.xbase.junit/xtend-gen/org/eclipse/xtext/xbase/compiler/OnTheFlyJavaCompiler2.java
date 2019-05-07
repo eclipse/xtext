@@ -197,7 +197,7 @@ public class OnTheFlyJavaCompiler2 {
       _builder.append("}");
       _builder.newLine();
       final Class<?> clazz = this.compileToClass("__Generated", _builder.toString());
-      Object _newInstance = clazz.newInstance();
+      Object _newInstance = clazz.getDeclaredConstructor().newInstance();
       return ((Function0<RT>) _newInstance);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

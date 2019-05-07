@@ -52,7 +52,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         this.generator.doGenerate(parse.eResource(), fsa);
         final CharSequence concatenation = fsa.getTextFiles().values().iterator().next();
         final Class<?> clazz = this.javaCompiler.compileToClass("Foo", concatenation.toString());
-        final Object foo = clazz.newInstance();
+        final Object foo = clazz.getDeclaredConstructor().newInstance();
         final Method method = clazz.getDeclaredMethod("doStuff");
         _xblockexpression = method.invoke(foo);
       }
