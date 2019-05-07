@@ -893,7 +893,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
         return Boolean.valueOf(seenElements.add(AntlrGrammarGenUtil.<AbstractElement>getOriginalElement(it_1)));
       };
-      final List<AbstractElement> elements = IterableExtensions.<AbstractElement>toList(IterableExtensions.<AbstractElement>filter(Iterables.<AbstractElement>filter(Iterables.<AbstractElement>concat(_plus_1, _allUnorderedGroups), AbstractElement.class), _function));
+      final List<AbstractElement> elements = IterableExtensions.<AbstractElement>toList(IterableExtensions.<AbstractElement>filter(Iterables.<AbstractElement>filter((Iterables.<AbstractElement>concat(_plus_1, _allUnorderedGroups)), AbstractElement.class), _function));
       final List<List<AbstractElement>> partitions = Lists.<AbstractElement>partition(elements, 2500);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override

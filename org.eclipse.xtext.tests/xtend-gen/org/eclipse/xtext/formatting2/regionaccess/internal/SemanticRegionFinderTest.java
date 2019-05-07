@@ -104,10 +104,10 @@ public class SemanticRegionFinderTest {
     try {
       finder.features(RegionaccesstestlanguagePackage.Literals.ASSIGNED_ACTION__CHILD);
       Assert.fail();
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IllegalStateException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalStateException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
@@ -240,10 +240,10 @@ public class SemanticRegionFinderTest {
     try {
       finder.ruleCalls(this._regionAccessTestLanguageGrammarAccess.getMixedAccess().getEobjMixedParserRuleCall_2_2_1_1_0());
       Assert.fail();
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IllegalStateException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalStateException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
@@ -266,10 +266,10 @@ public class SemanticRegionFinderTest {
     try {
       finder.ruleCallsTo(this._regionAccessTestLanguageGrammarAccess.getMixedRule());
       Assert.fail();
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IllegalStateException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalStateException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }

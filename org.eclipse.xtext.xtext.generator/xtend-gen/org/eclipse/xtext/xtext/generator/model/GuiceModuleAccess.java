@@ -270,7 +270,7 @@ public class GuiceModuleAccess {
     private final Set<GuiceModuleAccess.Binding> bindings = CollectionLiterals.<GuiceModuleAccess.Binding>newLinkedHashSet();
     
     public BindingFactory() {
-      this.contributedBy = new Exception().getStackTrace()[1].getClassName();
+      this.contributedBy = (new Exception().getStackTrace()[1]).getClassName();
     }
     
     public BindingFactory(final String contributedBy) {

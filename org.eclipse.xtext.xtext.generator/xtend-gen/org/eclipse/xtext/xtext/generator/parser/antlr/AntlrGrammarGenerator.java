@@ -83,9 +83,9 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), ((Function1<ParserRule, List<EObject>>) (ParserRule it_1) -> {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter((Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), ((Function1<ParserRule, List<EObject>>) (ParserRule it_1) -> {
         return EcoreUtil2.eAllContentsAsList(it_1);
-      }))), UnorderedGroup.class))) && options.isBacktrack())) {
+      })))), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }

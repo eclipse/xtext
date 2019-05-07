@@ -245,12 +245,12 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       this.generateManifests();
       this.generateActivator();
       this.generateServices();
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof Exception) {
-        final Exception e_1 = (Exception)_t_1;
-        this.handleException(e_1, issues);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        this.handleException(e, issues);
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }

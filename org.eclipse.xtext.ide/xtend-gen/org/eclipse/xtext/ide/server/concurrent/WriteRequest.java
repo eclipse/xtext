@@ -38,12 +38,12 @@ public class WriteRequest<U extends Object, V extends Object> extends AbstractRe
       final U intermediateResult = this.nonCancellable.apply();
       this.cancelIndicator.checkCanceled();
       this.result.complete(this.cancellable.apply(this.cancelIndicator, intermediateResult));
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof Throwable) {
-        final Throwable e_1 = (Throwable)_t_1;
-        this.result.completeExceptionally(e_1);
+    } catch (final Throwable _t) {
+      if (_t instanceof Throwable) {
+        final Throwable e = (Throwable)_t;
+        this.result.completeExceptionally(e);
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
