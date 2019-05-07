@@ -40,16 +40,7 @@ public class AnnotationLookup {
 	
 	/* @Nullable */
 	public JvmAnnotationReference findAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ Class<? extends Annotation> lookupType) {
-		// avoid creating an empty list for all given targets but check for #eIsSet first
-		if (annotationTarget.eIsSet(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS)) {
-			for(JvmAnnotationReference annotation: annotationTarget.getAnnotations()) {
-				JvmAnnotationType annotationType = annotation.getAnnotation();
-				if (annotationType != null && lookupType.getCanonicalName().equals(annotationType.getQualifiedName())) {
-					return annotation;
-				}
-			}
-		}
-		return null;
+		return findAnnotation(annotationTarget, lookupType.getCanonicalName());
 	}
 	
 	public JvmAnnotationReference findAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ String lookupType) {

@@ -390,7 +390,7 @@ public class OnTheFlyJavaCompiler {
 		Class<?> class1 = compileToClass(fullCode.getFirst(),
 				fullCode.getSecond());
 		try {
-			return class1.newInstance();
+			return class1.getDeclaredConstructor().newInstance();
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

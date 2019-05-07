@@ -114,7 +114,7 @@ class OnTheFlyJavaCompiler2 {
 				}
 			}
 		''')
-		return clazz.newInstance as Functions.Function0<RT>
+		return clazz.getDeclaredConstructor().newInstance as Functions.Function0<RT>
 	}
 	
 }
