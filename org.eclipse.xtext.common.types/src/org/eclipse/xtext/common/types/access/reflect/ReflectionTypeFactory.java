@@ -63,6 +63,7 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
@@ -133,8 +134,12 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 			setVisibility(clazz, result);
 			result.internalSetIdentifier(clazz.getName());
 			result.setSimpleName(clazz.getSimpleName());
-			if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
-				result.setPackageName(clazz.getPackage().getName());
+			if (clazz.getDeclaringClass() == null && clazz.getPackage() != null) {
+				String pack = clazz.getPackage().getName();
+				if (!Strings.isEmpty(pack)) {
+					result.setPackageName(pack);
+				}
+			}
 
 			createNestedTypes(clazz, result);
 			createMethods(clazz, result);
