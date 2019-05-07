@@ -806,7 +806,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Test def void testSynchronizedExpression_3() {
 		'''
 			{
-				val x = new Integer(1)
+				val x = Integer.valueOf(1)
 				synchronized (x) {
 				}
 			}

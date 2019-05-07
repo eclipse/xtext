@@ -21,7 +21,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -125,10 +127,22 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testListToArrayHasTwoCandidates() {
+  public void testListToArrayHasTwoOrThreeCandidates() {
     final IResolvedOperation operation = this.toOperation("(null as java.util.List<String>).toArray(null)");
     final List<JvmOperation> candidates = operation.getOverriddenAndImplementedMethodCandidates();
-    Assert.assertEquals(2, candidates.size());
+    final Function1<JvmOperation, String> _function = (JvmOperation it) -> {
+      return it.getIdentifier();
+    };
+    final String message = IterableExtensions.join(ListExtensions.<JvmOperation, String>map(candidates, _function), ", ");
+    try {
+      Assert.assertEquals(message, 2, candidates.size());
+    } catch (final Throwable _t) {
+      if (_t instanceof AssertionError) {
+        Assert.assertEquals(message, 3, candidates.size());
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   @Test

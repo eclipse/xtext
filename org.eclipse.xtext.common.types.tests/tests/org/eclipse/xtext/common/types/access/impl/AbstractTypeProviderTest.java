@@ -84,8 +84,8 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSu
 import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.Bug428340;
 import org.eclipse.xtext.common.types.testSetups.Bug456328;
-import org.eclipse.xtext.common.types.testSetups.CallableThrowsExceptions;
 import org.eclipse.xtext.common.types.testSetups.Bug470767;
+import org.eclipse.xtext.common.types.testSetups.CallableThrowsExceptions;
 import org.eclipse.xtext.common.types.testSetups.ClassContainingEnum;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;

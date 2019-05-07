@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -28,11 +29,12 @@ public class ClasspathScannerTest {
   @Test
   public void testBootClasspathScanning() {
     final Iterable<ITypeDescriptor> javaUtil = this.scanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java.util")));
+    Assume.assumeFalse("Should be possible to find descriptors", IterableExtensions.isEmpty(javaUtil));
     final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "BitSet"));
     };
-    Assert.assertTrue(IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function));
+    Assert.assertTrue(IterableExtensions.join(javaUtil, ", "), IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function));
   }
   
   @Test
