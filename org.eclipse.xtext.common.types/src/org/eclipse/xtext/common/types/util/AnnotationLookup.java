@@ -52,9 +52,31 @@ public class AnnotationLookup {
 		return null;
 	}
 	
+	public JvmAnnotationReference findAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ String lookupType) {
+		// avoid creating an empty list for all given targets but check for #eIsSet first
+		if (annotationTarget.eIsSet(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS)) {
+			for(JvmAnnotationReference annotation: annotationTarget.getAnnotations()) {
+				JvmAnnotationType annotationType = annotation.getAnnotation();
+				if (annotationType != null && lookupType.equals(annotationType.getQualifiedName())) {
+					return annotation;
+				}
+			}
+		}
+		return null;
+	}
+	
 
 	/* @Nullable */
 	public JvmAnnotationReference removeAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ Class<? extends Annotation> type) {
+		JvmAnnotationReference result = findAnnotation(annotationTarget, type);
+		if (result != null) {
+			annotationTarget.getAnnotations().remove(result);
+			return result;
+		}
+		return null;
+	}
+	
+	public JvmAnnotationReference removeAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ String type) {
 		JvmAnnotationReference result = findAnnotation(annotationTarget, type);
 		if (result != null) {
 			annotationTarget.getAnnotations().remove(result);
