@@ -50,7 +50,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
           Assert.assertEquals(Integer.valueOf(1), getFoo.invoke(instance));
         } catch (Throwable _e) {
@@ -79,7 +79,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
           Assert.assertTrue(it.getSingleGeneratedCode().contains("T getFoo"));
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method getFoo = it.getCompiledClass().getDeclaredMethod("getFoo");
           Assert.assertEquals(null, getFoo.invoke(instance));
         } catch (Throwable _e) {
@@ -215,7 +215,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", int.class);
           Field _declaredField = it.getCompiledClass().getDeclaredField("foo");
           final Procedure1<Field> _function_1 = (Field it_1) -> {
@@ -250,7 +250,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
         try {
           Assert.assertTrue(it.getSingleGeneratedCode().contains("setFoo(final T foo)"));
-          final Object instance = it.getCompiledClass().newInstance();
+          final Object instance = it.getCompiledClass().getDeclaredConstructor().newInstance();
           final Method setFoo = it.getCompiledClass().getDeclaredMethod("setFoo", CharSequence.class);
           Field _declaredField = it.getCompiledClass().getDeclaredField("foo");
           final Procedure1<Field> _function_1 = (Field it_1) -> {

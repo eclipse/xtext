@@ -251,7 +251,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.compile[
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(5, getFoo.invoke(instance))
 		]
@@ -267,7 +267,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.compile[
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
 			setFoo.invoke(instance, 1)
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")

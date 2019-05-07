@@ -35,7 +35,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		try {
 			val classLoader = getClassLoader(type)
 			val result = classLoader.loadClass(type.identifier)
-			return result.newInstance
+			return result.getDeclaredConstructor().newInstance
 		} catch (Exception e) {
 			throw new IllegalStateException("Problem during instantiation of " + type.identifier + " : " + e.getMessage,
 				e);

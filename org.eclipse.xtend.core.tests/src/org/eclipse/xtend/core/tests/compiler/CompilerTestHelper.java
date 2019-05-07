@@ -106,7 +106,7 @@ public class CompilerTestHelper {
 	}
 	
 	protected Object apply(Class<?> compile) throws Exception {
-		Object instance = compile.newInstance();
+		Object instance = compile.getDeclaredConstructor().newInstance();
 		Method method = compile.getDeclaredMethod("foo");
 		return method.invoke(instance);
 	}

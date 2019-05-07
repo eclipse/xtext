@@ -26,7 +26,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 				@Accessors int foo = 1
 			}
 		'''.compile[
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(1, getFoo.invoke(instance))
 		]
@@ -41,7 +41,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.compile[
 			assertTrue(singleGeneratedCode.contains("T getFoo"))
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(null, getFoo.invoke(instance))
 		]
@@ -109,7 +109,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 				@Accessors int foo
 			}
 		'''.compile[
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
 			val fooField = compiledClass.getDeclaredField("foo") => [
 				accessible = true
@@ -128,7 +128,7 @@ class AccessorsCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.compile[
 			assertTrue(singleGeneratedCode.contains("setFoo(final T foo)"))
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			val setFoo = compiledClass.getDeclaredMethod("setFoo", CharSequence)
 			val fooField = compiledClass.getDeclaredField("foo") => [
 				accessible = true

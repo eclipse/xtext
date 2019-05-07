@@ -29,7 +29,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				int a = 1
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertEquals(toUnixLineSeparator('''
 				Foo [
@@ -49,7 +49,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				int a = 1
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertEquals(toUnixLineSeparator('''Foo [a = 1]'''), instance.toString)
 		]
@@ -66,7 +66,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				int a = 1
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertEquals(toUnixLineSeparator('''Foo [1]'''), instance.toString)
 		]
@@ -79,7 +79,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				int[] a = #[1, 2, 3]
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertTrue(instance.toString.contains('[I@'))
 		]
@@ -96,7 +96,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				Integer b = null
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertEquals(toUnixLineSeparator('''
 				Foo [
@@ -115,7 +115,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				String b = "Bar"
 			}
 		'''.compile [
-			val instance = getCompiledClass("Bar").newInstance
+			val instance = getCompiledClass("Bar").getDeclaredConstructor().newInstance
 			
 			assertEquals('Bar [\n'+'  b = "Bar"\n' +'  a = 1\n' + ']', instance.toString)
 		]
@@ -134,7 +134,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''
 		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION,"user.issue", "no effect")
 		text.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			assertEquals("foo", instance.toString)
 		]
 	}
@@ -148,7 +148,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				String b = "Bar"
 			}
 		'''.compile [
-			val instance = compiledClass.newInstance
+			val instance = compiledClass.getDeclaredConstructor().newInstance
 			
 			assertEquals('Foo [\n'+'  "Bar"\n' +']', instance.toString)
 		]

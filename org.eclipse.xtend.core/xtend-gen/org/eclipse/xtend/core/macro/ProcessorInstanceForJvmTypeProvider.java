@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.io.Closeable;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -110,9 +111,13 @@ public class ProcessorInstanceForJvmTypeProvider {
         _loadClass=_classLoader.loadClass(type.getIdentifier());
       }
       final Class<?> loadClass = _loadClass;
-      Object _newInstance = null;
+      Constructor<?> _declaredConstructor = null;
       if (loadClass!=null) {
-        _newInstance=loadClass.newInstance();
+        _declaredConstructor=loadClass.getDeclaredConstructor();
+      }
+      Object _newInstance = null;
+      if (_declaredConstructor!=null) {
+        _newInstance=_declaredConstructor.newInstance();
       }
       return _newInstance;
     } catch (final Throwable _t) {
