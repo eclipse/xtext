@@ -164,10 +164,10 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       final AnnotationReference anno = IterableExtensions.head(IterableExtensions.head(it.getTypeLookup().findClass("MyClass").getDeclaredFields()).getAnnotations());
       final AnnotationReference copied = it.getAnnotationReferenceProvider().newAnnotationReference(anno);
       Assert.assertTrue(((JvmAnnotationReferenceImpl) copied).getDelegate().getExplicitValues().isEmpty());
-      final AnnotationReference anno2 = IterableExtensions.head(((MutableFieldDeclaration[])Conversions.unwrapArray(it.getTypeLookup().findClass("MyClass").getDeclaredFields(), MutableFieldDeclaration.class))[1].getAnnotations());
+      final AnnotationReference anno2 = IterableExtensions.head((((MutableFieldDeclaration[])Conversions.unwrapArray(it.getTypeLookup().findClass("MyClass").getDeclaredFields(), MutableFieldDeclaration.class))[1]).getAnnotations());
       final AnnotationReference copied2 = it.getAnnotationReferenceProvider().newAnnotationReference(anno2);
       Assert.assertEquals(1, ((JvmAnnotationReferenceImpl) copied2).getDelegate().getExplicitValues().size());
-      final AnnotationReference anno3 = IterableExtensions.head(((MutableFieldDeclaration[])Conversions.unwrapArray(it.getTypeLookup().findClass("MyClass").getDeclaredFields(), MutableFieldDeclaration.class))[2].getAnnotations());
+      final AnnotationReference anno3 = IterableExtensions.head((((MutableFieldDeclaration[])Conversions.unwrapArray(it.getTypeLookup().findClass("MyClass").getDeclaredFields(), MutableFieldDeclaration.class))[2]).getAnnotations());
       final AnnotationReference copied3 = it.getAnnotationReferenceProvider().newAnnotationReference(anno3);
       Assert.assertEquals(1, ((JvmAnnotationReferenceImpl) copied3).getDelegate().getExplicitValues().size());
     };
@@ -320,8 +320,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       Assert.assertEquals("a", IterableExtensions.head(method.getParameters()).getSimpleName());
       Assert.assertEquals("T2", IterableExtensions.head(method.getParameters()).getType().toString());
       Assert.assertSame(IterableExtensions.head(genMethod.getTypeParameters()), IterableExtensions.head(method.getParameters()).getType().getType());
-      Assert.assertEquals("T", ((ParameterDeclaration[])Conversions.unwrapArray(method.getParameters(), ParameterDeclaration.class))[1].getType().toString());
-      Assert.assertSame(IterableExtensions.head(genClazz.getTypeParameters()), ((ParameterDeclaration[])Conversions.unwrapArray(method.getParameters(), ParameterDeclaration.class))[1].getType().getType());
+      Assert.assertEquals("T", (((ParameterDeclaration[])Conversions.unwrapArray(method.getParameters(), ParameterDeclaration.class))[1]).getType().toString());
+      Assert.assertSame(IterableExtensions.head(genClazz.getTypeParameters()), (((ParameterDeclaration[])Conversions.unwrapArray(method.getParameters(), ParameterDeclaration.class))[1]).getType().getType());
       Assert.assertSame(genClazz, method.getReturnType().getType());
       Assert.assertEquals("T2", IterableExtensions.head(method.getTypeParameters()).getSimpleName());
       Assert.assertEquals("CharSequence", IterableExtensions.head(IterableExtensions.head(method.getTypeParameters()).getUpperBounds()).toString());
@@ -601,7 +601,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       Assert.assertEquals("foowuppa", anno.getValue("value"));
       Object _value_4 = annoRef.getValue("annotation2ArrayValue");
       final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_4);
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }
@@ -666,7 +666,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       final AnnotationReference anno = annoRef.getAnnotationValue("annotation2Value");
       Assert.assertEquals("foowuppa", anno.getStringValue("value"));
       final AnnotationReference[] annoArray = annoRef.getAnnotationArrayValue("annotation2ArrayValue");
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
     };
     this.asCompilationUnit(this.validFile(_builder), _function);
   }

@@ -171,10 +171,10 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     try {
       arguments.getDeclaredTypeForLambda(3);
       Assert.fail("Expected exception");
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IndexOutOfBoundsException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }
@@ -202,10 +202,10 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
     try {
       arguments.getDeclaredTypeForLambda(2);
       Assert.fail("Expected exception");
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IndexOutOfBoundsException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
   }

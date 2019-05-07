@@ -1771,7 +1771,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       Assert.assertEquals("foowuppa", anno.getValue("value"));
       Object _value_4 = annoRef.getValue("annotation2ArrayValue");
       final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_4);
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
       Object _value_5 = annoRef.getValue("enumValue");
       final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_5);
       Assert.assertEquals("YELLOW", enum1.getSimpleName());
@@ -2406,7 +2406,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       Assert.assertEquals("foowuppa", anno.getValue("value"));
       Object _value_5 = annoRef.getValue("annotation2ArrayValue");
       final AnnotationReference[] annoArray = ((AnnotationReference[]) _value_5);
-      Assert.assertEquals("HUBBA BUBBA!", annoArray[0].getValue("value"));
+      Assert.assertEquals("HUBBA BUBBA!", (annoArray[0]).getValue("value"));
       Object _value_6 = annoRef.getValue("enumValue");
       final EnumerationValueDeclaration enum1 = ((EnumerationValueDeclaration) _value_6);
       Assert.assertEquals("YELLOW", enum1.getSimpleName());
@@ -5679,7 +5679,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
       final MutableClassDeclaration myClass = it.getTypeLookup().findClass("MyClass");
       Assert.assertEquals("field1_A_B_C", IterableExtensions.head(myClass.getDeclaredFields()).getSimpleName());
-      Assert.assertEquals("field2_A_B_C", ((MutableFieldDeclaration[])Conversions.unwrapArray(myClass.getDeclaredFields(), MutableFieldDeclaration.class))[1].getSimpleName());
+      Assert.assertEquals("field2_A_B_C", (((MutableFieldDeclaration[])Conversions.unwrapArray(myClass.getDeclaredFields(), MutableFieldDeclaration.class))[1]).getSimpleName());
     };
     this.assertProcessing(
       this.THREE_ANNOTATIONS, _mappedTo, _function);

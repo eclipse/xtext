@@ -1963,7 +1963,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     JavaConverter.ConversionResult result = this.j2x.toXtend("Clazz", _builder.toString());
     Assert.assertEquals(IterableExtensions.size(result.getProblems()), 1);
-    Assert.assertTrue(((String[])Conversions.unwrapArray(result.getProblems(), String.class))[0].startsWith("Initializer is not supported in AnonymousClassDeclaration"));
+    Assert.assertTrue((((String[])Conversions.unwrapArray(result.getProblems(), String.class))[0]).startsWith("Initializer is not supported in AnonymousClassDeclaration"));
   }
   
   @Test

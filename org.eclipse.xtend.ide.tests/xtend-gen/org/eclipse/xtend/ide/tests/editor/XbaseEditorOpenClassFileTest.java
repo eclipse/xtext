@@ -536,7 +536,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         throw Exceptions.sneakyThrow(_t);
       }
     }
-    String _methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+    String _methodName = (Thread.currentThread().getStackTrace()[1]).getMethodName();
     String _plus = ("Ignoring " + _methodName);
     String _plus_1 = (_plus + " , since editor everride is not supported.");
     XbaseEditorOpenClassFileTest.LOG.warn(_plus_1);

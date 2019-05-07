@@ -2126,7 +2126,7 @@ public class JavaASTFlattener extends ASTVisitor {
       _builder_1.append("ArrayOfSize(");
       this.appendToBuffer(_builder_1.toString());
       List _dimensions = node.dimensions();
-      ((Expression[])Conversions.unwrapArray(((Iterable<Expression>) _dimensions), Expression.class))[0].accept(this);
+      (((Expression[])Conversions.unwrapArray(((Iterable<Expression>) _dimensions), Expression.class))[0]).accept(this);
       this.appendToBuffer(")");
     }
     return false;

@@ -123,7 +123,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     final Resource resource = resAndObj.getKey();
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
-    final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(Iterables.<Resource.Diagnostic>concat(_errors, _warnings), EObjectDiagnosticImpl.class);
+    final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter((Iterables.<Resource.Diagnostic>concat(_errors, _warnings)), EObjectDiagnosticImpl.class);
     final Function1<EObjectDiagnosticImpl, Boolean> _function = (EObjectDiagnosticImpl diag) -> {
       EObject _problematicObject = diag.getProblematicObject();
       EObject _value = resAndObj.getValue();

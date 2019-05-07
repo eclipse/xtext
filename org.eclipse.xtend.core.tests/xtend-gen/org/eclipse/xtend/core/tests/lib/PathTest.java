@@ -104,10 +104,10 @@ public class PathTest {
     }
     try {
       new Path("/hubba/bubba/foo").relativize("hubba/bubba");
-    } catch (final Throwable _t_1) {
-      if (_t_1 instanceof IllegalArgumentException) {
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
       } else {
-        throw Exceptions.sneakyThrow(_t_1);
+        throw Exceptions.sneakyThrow(_t);
       }
     }
     Assert.assertNull(new Path("/foo").relativize("/bar"));
