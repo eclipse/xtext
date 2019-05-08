@@ -101,7 +101,7 @@
 		  `/org.eclipse.xtext.ide/META-INF/MANIFEST.MF` and 
 		  `/org.eclipse.xtext.ide.tests/META-INF/MANIFEST.MF` files.
 		-->
-		<lsp4j-version>0.7.0</lsp4j-version>
+		<lsp4j-version>0.7.1</lsp4j-version>
 		<jdt.core-version>3.16.0</jdt.core-version>
 		<jdt.compiler.apt-version>1.3.400</jdt.compiler.apt-version>
 		<jdt.compiler.tool-version>1.2.400</jdt.compiler.tool-version>
