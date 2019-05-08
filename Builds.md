@@ -159,7 +159,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-lib' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-extras
    * `gradle/versions.gradle`: Set `version` property to the release version.
@@ -177,7 +177,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-core' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-eclipse
    * `Jenkinsfile`: Add upstream trigger into `properties` section:
@@ -193,7 +193,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-web
    * `gradle/versions.gradle`: Set `version` property to the release version.
@@ -210,7 +210,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-maven
    * Replace all occurrences of the -SNAPSHOT version with the release version.
@@ -227,7 +227,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. xtext-xtend
    * `gradle/versions.gradle`: Set `version` property to the release version.
@@ -249,7 +249,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
 	```
 	triggers {
 	  upstream(upstreamProjects: 'xtext-eclipse' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-, threshold: hudson.model.Result.SUCCESS)
+		, threshold: hudson.model.Result.SUCCESS)
 	```
 1. Switch back to xtext-umbrella
    * `./gitAll commit -a -m "[release] version $XTEXT_VERSION"`
@@ -277,6 +277,7 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Change `location` property of the Mapped Repository to the release / milestone repository URL
    * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
    * (Likely) Disable EMF Parsley contribution for M1 builds
+   * Validate the configuration (Context menu on root node: Validate Aggregation)
 1. Publish websites
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
@@ -287,6 +288,15 @@ Build jobs for releases must be executed in proper order on the build server, i.
      * Version Number
      * Update Site URL
      * Supported Eclipse Release(s)
+1. As soon as maven central is updated - send notifications
+   * Newsgroup / Forum
+   * Mailing list
+   * Gitter
+   * Twitter
+   * Blog (for releases)
+1. Add / Update xtext-reference-projects
+   * Only applicable for releases or the first milestone of a new release phase.
+1. Adjust the bootstrap version to use the newly produced milestone / release
 
 Check that everything was promoted correctly:
 1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
