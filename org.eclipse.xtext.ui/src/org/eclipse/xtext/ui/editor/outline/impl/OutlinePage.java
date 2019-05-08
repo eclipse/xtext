@@ -27,7 +27,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeNode;
 import org.eclipse.jface.viewers.TreeNodeContentProvider;
@@ -313,8 +312,6 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
 						treeViewer.setSelection(new StructuredSelection(Iterables.toArray(selectedNodes,
 								IOutlineNode.class)));
-						ISelectionProvider selectionProvider = sourceViewer.getSelectionProvider();
-						selectionProvider.setSelection(selectionProvider.getSelection());
 						treeUpdated();
 					}
 				} catch (Throwable t) {
