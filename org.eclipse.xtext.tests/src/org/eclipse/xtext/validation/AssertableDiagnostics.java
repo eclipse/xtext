@@ -38,9 +38,11 @@ public class AssertableDiagnostics {
 	protected class DiagnosticTreeIterator implements Iterable<Diagnostic>, Iterator<Diagnostic> {
 
 		private ArrayList<Iterator<Diagnostic>> iteratorStack = new ArrayList<Iterator<Diagnostic>>();
+		private final Diagnostic root;
 
 		public DiagnosticTreeIterator(Diagnostic root) {
 			super();
+			this.root = root;
 			iteratorStack.add(root.getChildren().iterator());
 		}
 
@@ -53,7 +55,7 @@ public class AssertableDiagnostics {
 
 		@Override
 		public Iterator<Diagnostic> iterator() {
-			return this;
+			return new DiagnosticTreeIterator(root);
 		}
 
 		@Override
