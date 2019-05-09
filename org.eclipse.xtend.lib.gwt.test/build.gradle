@@ -1,13 +1,6 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.wisepersist:gwt-gradle-plugin:1.0.6'
-	}
+plugins {
+    id "de.esoco.gwt" version "1.0.7"
 }
-
-apply plugin: 'gwt'
 
 group = 'org.eclipse.xtend'
 
@@ -17,20 +10,21 @@ dependencies {
 }
 
 gwt {
-	minHeapSize = "512M";
-	maxHeapSize = "1024M";
 	gwtVersion = versions.gwt
-	modules 'org.eclipse.xtend.lib.test.Test'
-	compiler {
+	module 'org.eclipse.xtend.lib.test.Test'
+	compile {
+		minHeapSize = "512M";
+		maxHeapSize = "1024M";
 		strict = true
-		// enableClosureCompiler = true
-		disableClassMetadata = true
-		disableCastChecking = true
 	}
 }
 
+jar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 test {
-	dependsOn compileGwt
+	dependsOn gwtCompile
 }
 
 tasks.withType(Javadoc) {
