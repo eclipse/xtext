@@ -1820,22 +1820,42 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosureWithReturnExpression_01() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else return new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    }
   }
   
   @Test
   public void testClosureWithReturnExpression_02() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else return new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else return new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    }
   }
   
   @Test
   public void testClosureWithReturnExpression_03() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) return \'\' else new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    }
   }
   
   @Test
   public void testClosureWithReturnExpression_04() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else new StringBuilder ]", "()=>Serializable & Comparable<?> & CharSequence"), "Function0<Serializable & Comparable<?> & CharSequence>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("[ | if (true) \'\' else new StringBuilder ]", "()=>Serializable & CharSequence"), "Function0<Serializable & CharSequence>");
+    }
   }
   
   @Test

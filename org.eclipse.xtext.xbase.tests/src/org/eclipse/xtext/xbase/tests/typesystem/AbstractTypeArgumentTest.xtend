@@ -291,8 +291,13 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testOverloadedOperators_20() throws Exception {
-		"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)"
-			.bindTypeArgumentsTo("AbstractStringBuilder & Serializable").and("Serializable & CharSequence").done
+		if (isJava11OrLater) {
+			"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)"
+				.bindTypeArgumentsTo("AbstractStringBuilder & Serializable & Comparable<?>").and("Serializable & Comparable<?> & CharSequence").done
+		} else {
+			"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)"
+				.bindTypeArgumentsTo("AbstractStringBuilder & Serializable").and("Serializable & CharSequence").done
+		}
 	}
 
 	@Test def void testForExpression_01() throws Exception {

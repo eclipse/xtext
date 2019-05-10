@@ -66,7 +66,11 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	}
 	
 	@Test override testIfExpression_04() throws Exception {
-		"if (true) return '' else new StringBuilder".resolvesTo("Serializable & CharSequence")
+		if (isJava11OrLater) {
+			"if (true) return '' else new StringBuilder".resolvesTo("Serializable & Comparable<?> & CharSequence")
+		} else {
+			"if (true) return '' else new StringBuilder".resolvesTo("Serializable & CharSequence")
+		}
 	}
 	
 	@Test override testIfExpression_17() throws Exception {

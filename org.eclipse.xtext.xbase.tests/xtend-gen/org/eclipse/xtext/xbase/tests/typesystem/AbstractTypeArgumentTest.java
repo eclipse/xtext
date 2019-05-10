@@ -370,7 +370,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testOverloadedOperators_20() throws Exception {
-    this.done(this.and(this.bindTypeArgumentsTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)", "AbstractStringBuilder & Serializable"), "Serializable & CharSequence"));
+    boolean _isJava11OrLater = AbstractXbaseTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.done(this.and(this.bindTypeArgumentsTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)", "AbstractStringBuilder & Serializable & Comparable<?>"), "Serializable & Comparable<?> & CharSequence"));
+    } else {
+      this.done(this.and(this.bindTypeArgumentsTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)", "AbstractStringBuilder & Serializable"), "Serializable & CharSequence"));
+    }
   }
   
   @Test

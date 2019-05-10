@@ -633,7 +633,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testOverloadedOperators_20() throws Exception {
-		"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)".resolvesTo("Iterable<Serializable & CharSequence>")
+		if (isJava11OrLater) {
+			"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)".resolvesTo("Iterable<Serializable & Comparable<?> & CharSequence>")
+		} else {
+			"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)".resolvesTo("Iterable<Serializable & CharSequence>")
+		}
 	}
 
 	@Test def void testCastExpression() throws Exception {
@@ -1299,7 +1303,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_02() throws Exception {
-		"if (true) new StringBuilder() else new StringBuffer()".resolvesTo("AbstractStringBuilder & Serializable")
+		if (isJava11OrLater) {
+			"if (true) new StringBuilder() else new StringBuffer()".resolvesTo("AbstractStringBuilder & Serializable & Comparable<?>")
+		} else {
+			"if (true) new StringBuilder() else new StringBuffer()".resolvesTo("AbstractStringBuilder & Serializable")
+		}
 	}
 	
 	@Test def void testIfExpression_03() throws Exception {
@@ -1327,7 +1335,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_09() throws Exception {
-		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesTo("(Object)=>AbstractStringBuilder & Serializable").isFunctionAndEquivalentTo("Function1<Object, ? extends AbstractStringBuilder & Serializable>")
+		if (isJava11OrLater) {
+			"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesTo("(Object)=>AbstractStringBuilder & Serializable & Comparable<?>").isFunctionAndEquivalentTo("Function1<Object, ? extends AbstractStringBuilder & Serializable & Comparable<?>>")
+		} else {
+			"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesTo("(Object)=>AbstractStringBuilder & Serializable").isFunctionAndEquivalentTo("Function1<Object, ? extends AbstractStringBuilder & Serializable>")
+		}
 	}
 	
 	@Test def void testIfExpression_10() throws Exception {
@@ -1335,7 +1347,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_11() throws Exception {
-		"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesTo("AbstractStringBuilder & Serializable")
+		if (isJava11OrLater) {
+			"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesTo("AbstractStringBuilder & Serializable & Comparable<?>")
+		} else {
+			"(if (true) [new StringBuilder()] else [new StringBuffer()]).apply('')".resolvesTo("AbstractStringBuilder & Serializable")
+		}
 	}
 
 	@Test def void testIfExpression_12() throws Exception {
@@ -1343,7 +1359,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_13() throws Exception {
-		"if (true) <StringBuffer>newArrayList else <String>newHashSet".resolvesTo("AbstractCollection<? extends Serializable & CharSequence> & Serializable & Cloneable")
+		if (isJava11OrLater) {
+			"if (true) <StringBuffer>newArrayList else <String>newHashSet".resolvesTo("AbstractCollection<? extends Serializable & Comparable<?> & CharSequence> & Serializable & Cloneable")
+		} else {
+			"if (true) <StringBuffer>newArrayList else <String>newHashSet".resolvesTo("AbstractCollection<? extends Serializable & CharSequence> & Serializable & Cloneable")
+		}
 	}
 	
 	@Test def void testIfExpression_14() throws Exception {
@@ -1553,7 +1573,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testTypeGuardedCase_0() throws Exception {
-		"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & CharSequence")
+		if (isJava11OrLater) {
+			"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & Comparable<?> & CharSequence")
+		} else {
+			"switch s: new Object() { String: s StringBuffer: s}".resolvesTo("Serializable & CharSequence")
+		}
 //		assertEquals("Object", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
@@ -1576,7 +1600,11 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testTypeGuardedCase_3() throws Exception {
-		"switch s: new Object() { String, StringBuffer: s}".resolvesTo("Serializable & CharSequence")
+		if (isJava11OrLater) {
+			"switch s: new Object() { String, StringBuffer: s}".resolvesTo("Serializable & Comparable<?> & CharSequence")
+		} else {
+			"switch s: new Object() { String, StringBuffer: s}".resolvesTo("Serializable & CharSequence")
+		}
 	}
 	
 	@Test def void testTypeGuardedCase_4() throws Exception {

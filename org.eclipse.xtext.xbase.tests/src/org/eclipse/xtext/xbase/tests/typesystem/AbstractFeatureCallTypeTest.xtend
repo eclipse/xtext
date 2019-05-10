@@ -818,9 +818,15 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testBug_406425_01() throws Exception {
-		"(null as StringBuilder) => [
-            newArrayList(it, new Long(0))
-        ]".resolvesFeatureCallsTo("StringBuilder", "ArrayList<Serializable>", "StringBuilder")
+		if (isJava11OrLater) {
+			"(null as StringBuilder) => [
+				newArrayList(it, new Long(0))
+			]".resolvesFeatureCallsTo("StringBuilder", "ArrayList<Comparable<?> & Serializable>", "StringBuilder")
+		} else {
+			"(null as StringBuilder) => [
+				newArrayList(it, new Long(0))
+			]".resolvesFeatureCallsTo("StringBuilder", "ArrayList<Serializable>", "StringBuilder")
+		}
 	}
 	
 	@Test def void testBounds_01() throws Exception {
