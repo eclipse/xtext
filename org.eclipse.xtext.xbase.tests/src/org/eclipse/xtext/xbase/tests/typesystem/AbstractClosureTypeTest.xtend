@@ -2239,27 +2239,51 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 
 	@Test def void testClosureWithReturnExpression_01() throws Exception {
-		"[ | if (true) return '' else return new StringBuilder ]"
-			.resolvesClosuresTo("()=>Serializable & CharSequence")
-			.withEquivalents("Function0<Serializable & CharSequence>")
+		if (isJava11OrLater) {
+			"[ | if (true) return '' else return new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & Comparable<?> & CharSequence")
+				.withEquivalents("Function0<Serializable & Comparable<?> & CharSequence>")
+		} else {
+			"[ | if (true) return '' else return new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & CharSequence")
+				.withEquivalents("Function0<Serializable & CharSequence>")
+		}
 	}
 	
 	@Test def void testClosureWithReturnExpression_02() throws Exception {
-		"[ | if (true) '' else return new StringBuilder ]"
-			.resolvesClosuresTo("()=>Serializable & CharSequence")
-			.withEquivalents("Function0<Serializable & CharSequence>")
+		if (isJava11OrLater) {
+			"[ | if (true) '' else return new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & Comparable<?> & CharSequence")
+				.withEquivalents("Function0<Serializable & Comparable<?> & CharSequence>")
+		} else {
+			"[ | if (true) '' else return new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & CharSequence")
+				.withEquivalents("Function0<Serializable & CharSequence>")
+		}
 	}
 	
 	@Test def void testClosureWithReturnExpression_03() throws Exception {
-		"[ | if (true) return '' else new StringBuilder ]"
-			.resolvesClosuresTo("()=>Serializable & CharSequence")
-			.withEquivalents("Function0<Serializable & CharSequence>")
+		if (isJava11OrLater) {
+			"[ | if (true) return '' else new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & Comparable<?> & CharSequence")
+				.withEquivalents("Function0<Serializable & Comparable<?> & CharSequence>")
+		} else {
+			"[ | if (true) return '' else new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & CharSequence")
+				.withEquivalents("Function0<Serializable & CharSequence>")
+		}
 	}
 	
 	@Test def void testClosureWithReturnExpression_04() throws Exception {
-		"[ | if (true) '' else new StringBuilder ]"
-			.resolvesClosuresTo("()=>Serializable & CharSequence")
-			.withEquivalents("Function0<Serializable & CharSequence>")
+		if (isJava11OrLater) {
+			"[ | if (true) '' else new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & Comparable<?> & CharSequence")
+				.withEquivalents("Function0<Serializable & Comparable<?> & CharSequence>")
+		} else {
+			"[ | if (true) '' else new StringBuilder ]"
+				.resolvesClosuresTo("()=>Serializable & CharSequence")
+				.withEquivalents("Function0<Serializable & CharSequence>")
+		}
 	}
 
 	@Test def void testClosureWithReturnExpression_05() throws Exception {
