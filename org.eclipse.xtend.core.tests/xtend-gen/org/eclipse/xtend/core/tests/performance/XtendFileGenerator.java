@@ -971,6 +971,8 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("import java.math.BigDecimal;");
     _builder.newLine();
+    _builder.append("import java.math.RoundingMode;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("class Amount {");
     _builder.newLine();
@@ -1006,7 +1008,7 @@ public class XtendFileGenerator {
     _builder.append("override toString() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return value.setScale(2, BigDecimal::ROUND_HALF_UP).toString();");
+    _builder.append("return value.setScale(2, RoundingMode::HALF_UP).toString();");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

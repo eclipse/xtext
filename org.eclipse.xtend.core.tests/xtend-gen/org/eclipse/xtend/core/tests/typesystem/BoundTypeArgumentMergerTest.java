@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -948,33 +949,64 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testMergeMultiType_01() {
-    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
-    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    this.to(this.merge(_mappedTo_1, _mappedTo_3), "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+      this.to(this.merge(_mappedTo_1, _mappedTo_3), "AbstractStringBuilder & Serializable & Comparable<?>", VarianceInfo.INVARIANT);
+    } else {
+      Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_6 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_7 = this.operator_mappedTo(_mappedTo_6, VarianceInfo.OUT);
+      this.to(this.merge(_mappedTo_5, _mappedTo_7), "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+    }
   }
   
   @Test
   public void testMergeMultiType_02() {
-    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
-    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
-    Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.OUT);
-    this.to(this.mergeSuccessive(_mappedTo_1, _mappedTo_3, _mappedTo_5), "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.OUT);
+      this.to(this.mergeSuccessive(_mappedTo_1, _mappedTo_3, _mappedTo_5), "AbstractStringBuilder & Serializable & Comparable<?>", VarianceInfo.INVARIANT);
+    } else {
+      Pair<String, VarianceInfo> _mappedTo_6 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_7 = this.operator_mappedTo(_mappedTo_6, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_8 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_9 = this.operator_mappedTo(_mappedTo_8, VarianceInfo.OUT);
+      Pair<String, VarianceInfo> _mappedTo_10 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_11 = this.operator_mappedTo(_mappedTo_10, VarianceInfo.OUT);
+      this.to(this.mergeSuccessive(_mappedTo_7, _mappedTo_9, _mappedTo_11), "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+    }
   }
   
   @Test
   public void testMergeMultiType_03() {
-    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
-    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
-    this.to(this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5), "Serializable & CharSequence", VarianceInfo.INVARIANT);
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
+      this.to(this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5), "Serializable & Comparable<?> & CharSequence", VarianceInfo.INVARIANT);
+    } else {
+      Pair<String, VarianceInfo> _mappedTo_6 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_7 = this.operator_mappedTo(_mappedTo_6, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_8 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_9 = this.operator_mappedTo(_mappedTo_8, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_10 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_11 = this.operator_mappedTo(_mappedTo_10, VarianceInfo.INVARIANT);
+      this.to(this.merge(_mappedTo_7, _mappedTo_9, _mappedTo_11), "Serializable & CharSequence", VarianceInfo.INVARIANT);
+    }
   }
   
   @Test

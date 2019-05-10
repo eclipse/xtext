@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Level;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -729,6 +731,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotation() {
+    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
     Assert.assertTrue(this.batchCompiler.compile());
@@ -737,6 +740,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotationComment() {
+    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setGeneratedAnnotationComment("FooComment");
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
@@ -748,6 +752,7 @@ public class TestBatchCompiler {
   
   @Test
   public void testGeneratedAnnotationDate1() {
+    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
     this.batchCompiler.setGenerateGeneratedAnnotation(true);
     this.batchCompiler.setIncludeDateInGeneratedAnnotation(true);
     this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");

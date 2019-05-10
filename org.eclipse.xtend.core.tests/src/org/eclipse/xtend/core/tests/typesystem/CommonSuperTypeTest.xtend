@@ -90,7 +90,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_01() {
-		"Serializable & CharSequence".isSuperTypeOf("String", "StringBuilder")
+		if (isJava11OrLater) {
+			"Serializable & Comparable<?> & CharSequence".isSuperTypeOf("String", "StringBuilder")
+		} else {
+			"Serializable & CharSequence".isSuperTypeOf("String", "StringBuilder")
+		}
 	}
 	
 	@Test
@@ -120,7 +124,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_07() {
-		"Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
+		if (isJava11OrLater) {
+			"Comparable<?> & Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
+		} else {
+			"Appendable & CharSequence".isSuperTypeOf("StringBuilder", "java.nio.CharBuffer")
+		}
 	}
 	
 	@Test
@@ -150,7 +158,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_13() {
-		"AbstractStringBuilder & Serializable".isSuperTypeOf("StringBuilder", "StringBuffer")
+		if (isJava11OrLater) {
+			"AbstractStringBuilder & Serializable & Comparable<?>".isSuperTypeOf("StringBuilder", "StringBuffer")
+		} else {
+			"AbstractStringBuilder & Serializable".isSuperTypeOf("StringBuilder", "StringBuffer")
+		}
 	}
 	
 	@Test
@@ -209,7 +221,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_24() {
-		"Collection<? extends AbstractStringBuilder & Serializable>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
+		if (isJava11OrLater) {
+			"Collection<? extends AbstractStringBuilder & Serializable & Comparable<?>>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
+		} else {
+			"Collection<? extends AbstractStringBuilder & Serializable>".isSuperTypeOf("java.util.List<StringBuilder>", "java.util.Set<StringBuffer>")
+		}
 	}
 	
 	@Test

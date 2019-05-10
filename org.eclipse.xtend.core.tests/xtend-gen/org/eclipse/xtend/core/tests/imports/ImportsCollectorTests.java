@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -466,6 +467,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   
   @Test
   public void testEnum_01() {
+    Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import javax.annotation.Resource");
     _builder.newLine();
