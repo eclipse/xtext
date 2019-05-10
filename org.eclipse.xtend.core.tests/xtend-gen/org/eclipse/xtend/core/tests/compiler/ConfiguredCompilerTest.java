@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -268,11 +269,17 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import javax.annotation.Generated;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@Generated(\"org.eclipse.xtend.core.compiler.XtendGenerator\")");
-    _builder_1.newLine();
+    {
+      boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+      boolean _not = (!_isJava11OrLater);
+      if (_not) {
+        _builder_1.append("import javax.annotation.Generated;");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("@Generated(\"org.eclipse.xtend.core.compiler.XtendGenerator\")");
+        _builder_1.newLine();
+      }
+    }
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -298,11 +305,17 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import javax.annotation.Generated;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@Generated(value = \"org.eclipse.xtend.core.compiler.XtendGenerator\", comments = \"Source: Bar.xtend\")");
-    _builder_1.newLine();
+    {
+      boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+      boolean _not = (!_isJava11OrLater);
+      if (_not) {
+        _builder_1.append("import javax.annotation.Generated;");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("@Generated(value = \"org.eclipse.xtend.core.compiler.XtendGenerator\", comments = \"Source: Bar.xtend\")");
+        _builder_1.newLine();
+      }
+    }
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");

@@ -15,6 +15,7 @@ import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor.DefaultImportsAcceptor
 import org.eclipse.xtext.xbase.imports.ImportsCollector
 import org.junit.Test
+import org.junit.Assume
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -304,6 +305,7 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 
 	@Test
 	def void testEnum_01() {
+		Assume.assumeFalse(isJava11OrLater)
 		'''
 			import javax.annotation.Resource
 			import static javax.annotation.Resource.AuthenticationType.*

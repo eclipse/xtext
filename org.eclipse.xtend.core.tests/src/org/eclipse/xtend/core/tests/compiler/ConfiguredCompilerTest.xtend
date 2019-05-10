@@ -167,9 +167,11 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			'''
 				package foo;
 				
+				«IF !isJava11OrLater»
 				import javax.annotation.Generated;
 				
 				@Generated("org.eclipse.xtend.core.compiler.XtendGenerator")
+				«ENDIF»
 				public class Bar {
 				}
 			''')
@@ -191,9 +193,11 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			'''
 				package foo;
 				
+				«IF !isJava11OrLater»
 				import javax.annotation.Generated;
 				
 				@Generated(value = "org.eclipse.xtend.core.compiler.XtendGenerator", comments = "Source: Bar.xtend")
+				«ENDIF»
 				public class Bar {
 				}
 			''')

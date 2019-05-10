@@ -272,6 +272,7 @@ class XtendFileGenerator {
 			package xtend.tutorial.util;
 			
 			import java.math.BigDecimal;
+			import java.math.RoundingMode;
 			
 			class Amount {
 				
@@ -286,7 +287,7 @@ class XtendFileGenerator {
 				}
 				
 				override toString() {
-					return value.setScale(2, BigDecimal::ROUND_HALF_UP).toString();
+					return value.setScale(2, RoundingMode::HALF_UP).toString();
 				}
 				
 				def Amount operator_plus(Amount other) {

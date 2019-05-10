@@ -29,6 +29,8 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.junit.Assume
 
 /**
  * Batch compiler tests.
@@ -495,6 +497,7 @@ class TestBatchCompiler {
 	
 	@Test
 	def void testGeneratedAnnotation() {
+		Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater)
 		batchCompiler.generateGeneratedAnnotation = true
 		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
 		assertTrue(batchCompiler.compile)
@@ -503,6 +506,7 @@ class TestBatchCompiler {
 	
 	@Test
 	def void testGeneratedAnnotationComment() {
+		Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater)
 		batchCompiler.generateGeneratedAnnotation = true
 		batchCompiler.generatedAnnotationComment = "FooComment"
 		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
@@ -514,6 +518,7 @@ class TestBatchCompiler {
 	
 	@Test
 	def void testGeneratedAnnotationDate1() {
+		Assume.assumeFalse(AbstractXtendTestCase.isJava11OrLater)
 		batchCompiler.generateGeneratedAnnotation = true
 		batchCompiler.includeDateInGeneratedAnnotation = true
 		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"

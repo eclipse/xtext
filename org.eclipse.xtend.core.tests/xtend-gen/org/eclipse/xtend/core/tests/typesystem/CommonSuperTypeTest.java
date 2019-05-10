@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -213,7 +214,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_01() {
-    this.isSuperTypeOf("Serializable & CharSequence", "String", "StringBuilder");
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.isSuperTypeOf("Serializable & Comparable<?> & CharSequence", "String", "StringBuilder");
+    } else {
+      this.isSuperTypeOf("Serializable & CharSequence", "String", "StringBuilder");
+    }
   }
   
   @Test
@@ -243,7 +249,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_07() {
-    this.isSuperTypeOf("Appendable & CharSequence", "StringBuilder", "java.nio.CharBuffer");
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.isSuperTypeOf("Comparable<?> & Appendable & CharSequence", "StringBuilder", "java.nio.CharBuffer");
+    } else {
+      this.isSuperTypeOf("Appendable & CharSequence", "StringBuilder", "java.nio.CharBuffer");
+    }
   }
   
   @Test
@@ -273,7 +284,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_13() {
-    this.isSuperTypeOf("AbstractStringBuilder & Serializable", "StringBuilder", "StringBuffer");
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.isSuperTypeOf("AbstractStringBuilder & Serializable & Comparable<?>", "StringBuilder", "StringBuffer");
+    } else {
+      this.isSuperTypeOf("AbstractStringBuilder & Serializable", "StringBuilder", "StringBuffer");
+    }
   }
   
   @Test
@@ -339,7 +355,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_24() {
-    this.isSuperTypeOf("Collection<? extends AbstractStringBuilder & Serializable>", "java.util.List<StringBuilder>", "java.util.Set<StringBuffer>");
+    boolean _isJava11OrLater = AbstractXtendTestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.isSuperTypeOf("Collection<? extends AbstractStringBuilder & Serializable & Comparable<?>>", "java.util.List<StringBuilder>", "java.util.Set<StringBuffer>");
+    } else {
+      this.isSuperTypeOf("Collection<? extends AbstractStringBuilder & Serializable>", "java.util.List<StringBuilder>", "java.util.Set<StringBuffer>");
+    }
   }
   
   @Test

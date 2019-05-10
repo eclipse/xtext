@@ -439,15 +439,27 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 
 	@Test def void testMergeMultiType_01() {
-		merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+		if (isJava11OrLater) {
+			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
+		} else {
+			merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+		}
 	}
 
 	@Test def void testMergeMultiType_02() {
-		mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+		if (isJava11OrLater) {
+			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable & Comparable<?>', INVARIANT)
+		} else {
+			mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+		}
 	}
 	
 	@Test def void testMergeMultiType_03() {
-		merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & CharSequence', INVARIANT)
+		if (isJava11OrLater) {
+			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & Comparable<?> & CharSequence', INVARIANT)
+		} else {
+			merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & CharSequence', INVARIANT)
+		}
 	}
 	
 	@Test def void testMergeMultiType_04() {
