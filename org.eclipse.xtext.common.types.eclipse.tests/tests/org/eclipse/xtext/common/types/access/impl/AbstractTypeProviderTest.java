@@ -318,8 +318,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testFindTypeByName_javaLangCharSequence_02() {
 		String typeName = CharSequence.class.getName();
-		Set<String> memberNames = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString");
-		assertMembers(typeName, memberNames);
+		try {
+			Set<String> memberNames = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString");
+			assertMembers(typeName, memberNames);
+		} catch(AssertionError e) {
+			Set<String> memberNamesJ11 = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString", "compare");
+			assertMembers(typeName, memberNamesJ11);
+		}
 	}
 
 	@Test
