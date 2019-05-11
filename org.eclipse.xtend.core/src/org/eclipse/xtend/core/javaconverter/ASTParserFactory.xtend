@@ -7,16 +7,19 @@
  */
 package org.eclipse.xtend.core.javaconverter
 
-import java.io.File
-import java.net.URLClassLoader
+import com.google.inject.Inject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner
 
 /** 
  * @author dhuebner - Initial contribution and API
  */
 class ASTParserFactory {
+
+	@Inject
+	ClasspathScanner classpathScanner = new ClasspathScanner()
 
 	protected final String minParserApiLevel = "1.6"
 
@@ -43,6 +46,7 @@ class ASTParserFactory {
 		switch (javaVersion) {
 			case "1.7": 4
 			case "1.8": 8
+			case "11": 11
 			default: 3
 		}
 	}
@@ -65,9 +69,7 @@ class ASTParserFactory {
 	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
 	 */
 	protected def provideCustomEnvironment(ASTParser parser) {
-		val sysClassLoader = ClassLoader.getSystemClassLoader()
-		// filter not existing CP entries, otherwise ASTParser will fail on getClasspath() call
-		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file].filter[new File(it).exists]
+		val String[] cpEntries = classpathScanner.getSystemClasspath()
 		parser.setEnvironment(cpEntries, null, null, true)
 	}
 
