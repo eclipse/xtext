@@ -97,7 +97,16 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	}
 
 	private IPath binFolderPath(Bundle bundle) {
-		URL binFolderURL = FileLocator.find(bundle, new Path("bin"), null);
+		URL binFolderURL = FileLocator.find(bundle, new Path("bin/main"), null); //$NON-NLS-1$
+		if (binFolderURL != null) {
+			try {
+				URL binFolderFileURL = FileLocator.toFileURL(binFolderURL);
+				return new Path(binFolderFileURL.getPath()).makeAbsolute();
+			} catch (IOException e) {
+				LOG.error("Can't resolve path '" + bundle.getSymbolicName() + "'", e); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
+		binFolderURL = FileLocator.find(bundle, new Path("bin"), null);
 		if (binFolderURL != null) {
 			try {
 				URL binFolderFileURL = FileLocator.toFileURL(binFolderURL);
@@ -143,7 +152,11 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 				if (potentialSourceJar.toFile().exists())
 					sourcesPath = potentialSourceJar;
 			} else {
-				sourcesPath = binFolderPath.removeLastSegments(1);
+				if (binFolderPath.toString().endsWith("bin/main/")) { //$NON-NLS-1$
+					sourcesPath = binFolderPath.removeLastSegments(2);
+				} else {
+					sourcesPath = binFolderPath.removeLastSegments(1);
+				}
 			}
 		} catch (Throwable t) {
 			LOG.debug("Exception during source bundle inverstigation.", t);
