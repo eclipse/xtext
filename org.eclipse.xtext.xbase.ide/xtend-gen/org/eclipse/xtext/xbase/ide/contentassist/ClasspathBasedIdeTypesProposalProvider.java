@@ -11,11 +11,14 @@ import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner;
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
@@ -27,8 +30,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPriorities;
-import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
-import org.objectweb.asm.Opcodes;
 
 @SuppressWarnings("all")
 public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvider {
@@ -64,7 +64,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   private ImportSectionRegionUtil importSectionRegionUtil;
   
   @Override
-  public void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor) {
+  public void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor) {
     ITextRegion importSectionRegion = null;
     XImportSection importSection = null;
     boolean _isImportDeclaration = this.isImportDeclaration(reference, context);
@@ -114,12 +114,12 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
     return this.classLoader;
   }
   
-  protected boolean canPropose(final ITypeDescriptor typeDesc, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter) {
+  protected boolean canPropose(final ITypeDescriptor typeDesc, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter) {
     return (this.isVisible(typeDesc, context) && filter.apply(typeDesc));
   }
   
   protected boolean isVisible(final ITypeDescriptor typeDesc, final ContentAssistContext context) {
-    return ((typeDesc.getAccessFlags() & Opcodes.ACC_PUBLIC) != 0);
+    return Modifier.isPublic(typeDesc.getModifiers());
   }
   
   protected ContentAssistEntry createProposal(final EReference reference, final ITypeDescriptor typeDesc, final ContentAssistContext context, final XImportSection importSection, final ITextRegion importSectionRegion) {

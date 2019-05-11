@@ -12,14 +12,13 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Collections;
-import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner;
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -29,12 +28,31 @@ public class ClasspathScannerTest {
   @Test
   public void testBootClasspathScanning() {
     final Iterable<ITypeDescriptor> javaUtil = this.scanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java.util")));
-    Assume.assumeFalse("Should be possible to find descriptors", IterableExtensions.isEmpty(javaUtil));
     final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
       String _simpleName = it.getSimpleName();
       return Boolean.valueOf(Objects.equal(_simpleName, "BitSet"));
     };
     Assert.assertTrue(IterableExtensions.join(javaUtil, ", "), IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function));
+    final Function1<ITypeDescriptor, Boolean> _function_1 = (ITypeDescriptor it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "String"));
+    };
+    Assert.assertFalse(IterableExtensions.join(javaUtil, ", "), IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function_1));
+  }
+  
+  @Test
+  public void testArrayDeque() {
+    final Iterable<ITypeDescriptor> javaUtil = this.scanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
+    final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "ArrayDeque"));
+    };
+    Assert.assertTrue(IterableExtensions.join(javaUtil, ", "), IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function));
+    final Function1<ITypeDescriptor, Boolean> _function_1 = (ITypeDescriptor it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "ArrayDeque"));
+    };
+    Assert.assertEquals(IterableExtensions.join(javaUtil, ", "), 1, IterableExtensions.size(IterableExtensions.<ITypeDescriptor>filter(javaUtil, _function_1)));
   }
   
   @Test
@@ -49,6 +67,41 @@ public class ClasspathScannerTest {
         return Boolean.valueOf(Objects.equal(_name, "sample.Sample"));
       };
       Assert.assertTrue(IterableExtensions.<ITypeDescriptor>exists(utilPackage, _function));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoSystemClassesInUserClassLoader() {
+    try {
+      final File bootstrapJar = new File("./somelib/sample.jar");
+      URL _uRL = bootstrapJar.toURI().toURL();
+      final URLClassLoader classloader = new URLClassLoader(new URL[] { _uRL });
+      final Iterable<ITypeDescriptor> fromJar = this.scanner.getDescriptors(classloader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
+      final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
+        String _simpleName = it.getSimpleName();
+        return Boolean.valueOf(Objects.equal(_simpleName, "ArrayList"));
+      };
+      Assert.assertFalse(IterableExtensions.join(fromJar, ", "), IterableExtensions.<ITypeDescriptor>exists(fromJar, _function));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFoundInParent() {
+    try {
+      final File bootstrapJar = new File("./somelib/sample.jar");
+      URL _uRL = bootstrapJar.toURI().toURL();
+      final URLClassLoader parentLoader = new URLClassLoader(new URL[] { _uRL });
+      final URLClassLoader classloader = new URLClassLoader(new URL[] {}, parentLoader);
+      final Iterable<ITypeDescriptor> fromJar = this.scanner.getDescriptors(classloader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
+      final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "sample.Sample"));
+      };
+      Assert.assertTrue(IterableExtensions.<ITypeDescriptor>exists(fromJar, _function));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

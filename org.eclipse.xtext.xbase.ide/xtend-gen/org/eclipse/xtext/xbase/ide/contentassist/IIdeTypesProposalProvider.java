@@ -9,11 +9,11 @@ package org.eclipse.xtext.xbase.ide.contentassist;
 
 import com.google.common.base.Predicate;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 
 @SuppressWarnings("all")
 public interface IIdeTypesProposalProvider {
-  public abstract void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor);
+  public abstract void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor);
 }

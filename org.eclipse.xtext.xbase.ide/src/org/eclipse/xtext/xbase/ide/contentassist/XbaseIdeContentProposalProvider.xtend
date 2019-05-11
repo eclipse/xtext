@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
@@ -43,6 +42,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.eclipse.xtext.xtype.XtypePackage
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor
 
 class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 
@@ -189,7 +189,7 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 	}
 
 	protected def void completeJavaTypes(EReference reference, ContentAssistContext context,
-			Predicate<ITypeDescriptor> filter, IIdeContentProposalAcceptor acceptor) {
+			Predicate<? super ITypeDescriptor> filter, IIdeContentProposalAcceptor acceptor) {
 		typesProposalProvider.createTypeProposals(reference, context, filter, acceptor)
 	}
 

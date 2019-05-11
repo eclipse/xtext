@@ -8,16 +8,12 @@
 package org.eclipse.xtext.xbase.ide.contentassist;
 
 import com.google.common.base.Predicate;
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
-import org.objectweb.asm.Opcodes;
+import java.lang.reflect.Modifier;
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor;
 
 @SuppressWarnings("all")
 final class TypeFilters {
   public static final Predicate<ITypeDescriptor> NON_ABSTRACT = ((Predicate<ITypeDescriptor>) (ITypeDescriptor typeDesc) -> {
-    return ((!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_ABSTRACT)) && (!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_INTERFACE)));
+    return ((!Modifier.isAbstract(typeDesc.getModifiers())) && (!Modifier.isInterface(typeDesc.getModifiers())));
   });
-  
-  private static boolean contains(final int flags, final int code) {
-    return ((flags & code) != 0);
-  }
 }
