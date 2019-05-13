@@ -54,14 +54,14 @@ public interface TypeReferenceProvider {
 	 * Returns a new self type reference for the given typeDeclaration, e.g. if you have a class like
 	 * 
 	 * <pre>
-	 *  class Foo&ltT&gt {}
+	 *  class Foo&lt;T&gt; {}
 	 * </pre>
 	 * 
 	 * And you want to add a method that returns the instance itself, you would use the self type as the method's return type.
 	 * 
 	 * <pre>
-	 * class Foo&ltT&gt {
-	 *  def Foo&ltT&gt mySelf() {
+	 * class Foo&lt;T&gt; {
+	 *  def Foo&lt;T&gt; mySelf() {
 	 *   this
 	 *  }
 	 * }
@@ -69,7 +69,7 @@ public interface TypeReferenceProvider {
 	 * 
 	 * In contrast, {@link #newTypeReference(Type, TypeReference...)} without any arguments would return the raw type only and would result in code with warnings:
 	 * <pre>
-	 * class Foo&ltT&gt {
+	 * class Foo&lt;T&gt; {
 	 *  def Foo mySelf() {
 	 *   this
 	 *  }

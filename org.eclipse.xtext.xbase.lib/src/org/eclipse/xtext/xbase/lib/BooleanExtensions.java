@@ -19,13 +19,13 @@ import com.google.common.primitives.Booleans;
 @GwtCompatible public class BooleanExtensions {
 
 	/**
-	 * The logical <code>and</code> (conjunction). This is the equivalent to the java <code>&&</code> operator.
+	 * The logical <code>and</code> (conjunction). This is the equivalent to the java <code>&amp;&amp;</code> operator.
 	 * 
 	 * @param a
 	 *            a boolean value.
 	 * @param b
 	 *            another boolean value.
-	 * @return <code>a && b</code>
+	 * @return <code>a &amp;&amp; b</code>
 	 */
 	@Pure
 	@Inline(value="($1 && $2)", constantExpression=true)

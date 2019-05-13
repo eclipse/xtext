@@ -23,8 +23,8 @@ public interface TypeReference extends Element {
 	 * 
 	 * I.e. for 
 	 * 
-	 *   'java.util.List<? extends java.math.BigDecimal>' this method returns
-	 *   'List<? extends BigDecimal>'
+	 *   'java.util.List&lt;? extends java.math.BigDecimal&gt;' this method returns
+	 *   'List&lt;? extends BigDecimal&gt;'
 	 * 
 	 * @return the simple name of this type reference
 	 */

@@ -39,7 +39,7 @@ import com.google.common.annotations.GwtCompatible;
 
 	/**
 	 * Constructs a new IntegerRange object.
-	 * The step will be set to -1 if end<start or to 1 otherwise.
+	 * The step will be set to -1 if end&lt;start or to 1 otherwise.
 	 * 
 	 * @param start
 	 *            the start value (inclusive)

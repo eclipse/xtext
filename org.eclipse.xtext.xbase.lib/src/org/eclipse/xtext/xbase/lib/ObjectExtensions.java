@@ -122,7 +122,7 @@ import com.google.common.base.Objects;
 	 * 
 	 * Example:
 	 * <code>
-	 *   new Person => [
+	 *   new Person =&gt; [
 	 *     firstName = 'Han'
 	 *     lastName = 'Solo'
 	 *   ]
