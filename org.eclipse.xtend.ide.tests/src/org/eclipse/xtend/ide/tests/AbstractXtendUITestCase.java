@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
@@ -45,8 +48,13 @@ public abstract class AbstractXtendUITestCase extends Assert {
 	private static boolean determineJava11OrLater() {
 		String javaVersion = System.getProperty("java.version");
 		try {
-			int version = Integer.parseInt(javaVersion);
-			return version >= 11;
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 11;
+			}
 		} catch (NumberFormatException e) {
 			// ok
 		}
