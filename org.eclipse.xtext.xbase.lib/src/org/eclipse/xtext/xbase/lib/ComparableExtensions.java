@@ -24,7 +24,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            a comparable
 	 * @param right
 	 *            the value to compare with
-	 * @return <code>left.compareTo(right) < 0</code>
+	 * @return <code>left.compareTo(right) &lt; 0</code>
 	 */
 	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) < 0)")
@@ -39,7 +39,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            a comparable
 	 * @param right
 	 *            the value to compare with
-	 * @return <code>left.compareTo(right) > 0</code>
+	 * @return <code>left.compareTo(right) &gt; 0</code>
 	 */
 	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) > 0)")
@@ -54,7 +54,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            a comparable
 	 * @param right
 	 *            the value to compare with
-	 * @return <code>left.compareTo(right) <= 0</code>
+	 * @return <code>left.compareTo(right) &lt;= 0</code>
 	 */
 	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) <= 0)")
@@ -69,7 +69,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            a comparable
 	 * @param right
 	 *            the value to compare with
-	 * @return <code>left.compareTo(right) >= 0</code>
+	 * @return <code>left.compareTo(right) &gt;= 0</code>
 	 */
 	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) >= 0)")

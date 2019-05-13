@@ -95,13 +95,13 @@ import com.google.common.annotations.GwtCompatible;
 	}
 
 	/**
-	 * The bitwise <code>and</code> operation. This is the equivalent to the java <code>&</code> operator.
+	 * The bitwise <code>and</code> operation. This is the equivalent to the java <code>&amp;</code> operator.
 	 * 
 	 * @param a
 	 *            an integer.
 	 * @param b
 	 *            an integer.
-	 * @return <code>a&b</code>
+	 * @return <code>a&amp;b</code>
 	 */
 	@Pure
 	@Inline(value="($1 & $2)", constantExpression=true)

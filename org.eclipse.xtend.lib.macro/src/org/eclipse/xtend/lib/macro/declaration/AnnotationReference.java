@@ -40,7 +40,7 @@ public interface AnnotationReference extends Element {
 	 * 	<li>Float or float[]</li>
 	 * 	<li>Double or double[]</li>
 	 * 	<li>Boolean or boolean[]</li>
-	 * 	<li>TypeReference or TypeReference[] - for elements of type Class<?></li>
+	 * 	<li>TypeReference or TypeReference[] - for elements of type Class&lt;?&gt;</li>
 	 * 	<li>AnnotationReference or AnnotationReference[] - for elements of an annotation type</li>
 	 * 	<li>EnumerationValueDeclaration or EnumerationValueDeclaration[] - for elements of an enum type</li>
 	 *  <li> <code>null</code> if no value is set and no default value on the original annotation type element is declared.</li>

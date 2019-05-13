@@ -35,7 +35,7 @@ public interface AnnotationReferenceBuildContext {
 	 * <li>Float or float[]</li>
 	 * <li>Double or double[]</li>
 	 * <li>Boolean or boolean[]</li>
-	 * <li>TypeReference or TypeReference[] - for elements of type Class<?></li>
+	 * <li>TypeReference or TypeReference[] - for elements of type Class&lt;?&gt;</li>
 	 * <li>AnnotationReference or AnnotationReference[] - for elements of an annotation type</li>
 	 * <li>EnumerationValueDeclaration or EnumerationValueDeclaration[] - for elements of an enum type</li>
 	 * <li>Expression - for any element type that matches the given expression's type</li>
