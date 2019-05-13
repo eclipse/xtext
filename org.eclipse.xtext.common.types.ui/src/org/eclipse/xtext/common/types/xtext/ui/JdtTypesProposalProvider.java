@@ -59,6 +59,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IDirtyStateManagerExtension;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -71,6 +72,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.CharMatcher;
@@ -115,6 +117,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	
 	@Inject
 	private RawSuperTypes superTypeCollector;
+	
+	@Inject
+	private OperationCanceledManager operationCancelManager;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		protected final IScope scope;
@@ -536,7 +541,17 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				theProposal.setAdditionalProposalInfo(new Provider<EObject>(){
 					@Override
 					public EObject get() {
-						return jvmTypeProvider.findTypeByName(typeName);
+						try {
+							return jvmTypeProvider.findTypeByName(typeName);
+						} catch(Throwable e) {
+							if (operationCancelManager.isOperationCanceledException(e)) {
+								// cancel exception will be raised if the editor was changed in between
+								// this is likely to happen during CA, since the user continues to type and the additional proposal info
+								// is queried with some delay
+								return null;
+							}
+							return Exceptions.throwUncheckedException(e);
+						}
 					}});
 				theProposal.setHover(hover);
 				priorities.adjustCrossReferencePriority(theProposal, context.getPrefix());
