@@ -37,6 +37,7 @@ import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import java.nio.charset.StandardCharsets
+import org.eclipse.xtext.util.JavaVersion
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -117,9 +118,9 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	@BeforeClass
 	static def void createProjects() {
 		TargetPlatformUtil.setTargetPlatform(ActiveAnnotationsProcessingInIDETest)
-		macroProject = JavaCore.create(createPluginProject("macroProject"))
+		macroProject = JavaCore.create(createPluginProject("macroProject", JavaVersion.JAVA8))
 		userProject = JavaCore::create(
-			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+			createPluginProject("userProject", JavaVersion.JAVA8, "com.google.inject", "org.eclipse.xtend.lib",
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
 		macroProject.project.addExportedPackages("myannotation")
 	}

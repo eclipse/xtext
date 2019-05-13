@@ -18,6 +18,7 @@ import org.junit.Test
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.xbase.ui.hover.JvmAnnotationReferencePrinter
+import org.junit.Assume
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,15 +62,19 @@ class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
 		assertPrinted('@!Retention!(!RetentionPolicy!.!SOURCE!)', '@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE)')
 	}
 	@Test def void testPrintedAnnotationValue_08() {
+		Assume.assumeFalse(isJava11OrLater)
 		assertPrinted('@!Generated!(!value!="foo", !date!="bar", !comments!="baz")', '@javax.annotation.Generated(value="foo", date="bar", comments="baz")')
 	}
 	@Test def void testPrintedAnnotationValue_09() {
+		Assume.assumeFalse(isJava11OrLater)
 		assertPrinted('@!XmlElements!(#[@!XmlElement!])', '@javax.xml.bind.annotation.XmlElements(#[@javax.xml.bind.annotation.XmlElement()])')
 	}
 	@Test def void testPrintedAnnotationValue_10() {
+		Assume.assumeFalse(isJava11OrLater)
 		assertPrinted('@!XmlElements!(@!XmlElement!)', '@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement())')
 	}
 	@Test def void testPrintedAnnotationValue_11() {
+		Assume.assumeFalse(isJava11OrLater)
 		assertPrinted('@!XmlElements!(#[@!XmlElement!(!nillable!=true), @!XmlElement!(!type!=!String![][])])', '@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement(nillable=true), @javax.xml.bind.annotation.XmlElement(type=typeof(String[][])))')
 	}
 	

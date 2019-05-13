@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.ui.hover.JvmAnnotationReferencePrinter;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -81,21 +82,25 @@ public class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
   
   @Test
   public void testPrintedAnnotationValue_08() {
+    Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
     this.assertPrinted("@!Generated!(!value!=\"foo\", !date!=\"bar\", !comments!=\"baz\")", "@javax.annotation.Generated(value=\"foo\", date=\"bar\", comments=\"baz\")");
   }
   
   @Test
   public void testPrintedAnnotationValue_09() {
+    Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(#[@!XmlElement!])", "@javax.xml.bind.annotation.XmlElements(#[@javax.xml.bind.annotation.XmlElement()])");
   }
   
   @Test
   public void testPrintedAnnotationValue_10() {
+    Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(@!XmlElement!)", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement())");
   }
   
   @Test
   public void testPrintedAnnotationValue_11() {
+    Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
     this.assertPrinted("@!XmlElements!(#[@!XmlElement!(!nillable!=true), @!XmlElement!(!type!=!String![][])])", "@javax.xml.bind.annotation.XmlElements(@javax.xml.bind.annotation.XmlElement(nillable=true), @javax.xml.bind.annotation.XmlElement(type=typeof(String[][])))");
   }
   

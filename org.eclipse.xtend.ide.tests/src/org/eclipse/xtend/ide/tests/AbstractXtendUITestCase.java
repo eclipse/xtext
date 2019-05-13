@@ -36,6 +36,23 @@ import com.google.inject.Injector;
 @RunWith(XtextRunner.class)
 public abstract class AbstractXtendUITestCase extends Assert {
 
+	private static final boolean isJava11OrLater = determineJava11OrLater();
+
+	public static boolean isJava11OrLater() {
+		return isJava11OrLater;
+	}
+
+	private static boolean determineJava11OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			int version = Integer.parseInt(javaVersion);
+			return version >= 11;
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+
 	@Inject
 	private Injector injector;
 	
