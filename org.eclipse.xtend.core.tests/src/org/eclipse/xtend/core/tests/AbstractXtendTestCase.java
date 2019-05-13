@@ -62,8 +62,13 @@ public abstract class AbstractXtendTestCase extends Assert {
 	private static boolean determineJava11OrLater() {
 		String javaVersion = System.getProperty("java.version");
 		try {
-			int version = Integer.parseInt(javaVersion);
-			return version >= 11;
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 11;
+			}
 		} catch (NumberFormatException e) {
 			// ok
 		}
