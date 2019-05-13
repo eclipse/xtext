@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.tests;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,8 +43,13 @@ public abstract class AbstractXbaseTestCase extends Assert {
 	private static boolean determineJava11OrLater() {
 		String javaVersion = System.getProperty("java.version");
 		try {
-			int version = Integer.parseInt(javaVersion);
-			return version >= 11;
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 11;
+			}
 		} catch (NumberFormatException e) {
 			// ok
 		}
