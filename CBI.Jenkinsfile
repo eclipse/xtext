@@ -80,8 +80,8 @@ spec:
                 if [[ "$OSTYPE" == "darwin"* ]]; then
                     sed -i '' "$@"
                 else
-                    sed -i "$@" 
-                fi    
+                    sed -i "$@"
+                fi
             }
             
             targetfiles="$(find releng -type f -iname '*.target')"
