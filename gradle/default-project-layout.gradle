@@ -24,3 +24,24 @@ if (name.contains('example')) {
 } else {
 	artifacts.archives javadocJar
 }
+
+// Configuration of meta data required by the Eclipse IDE
+eclipse {
+	classpath {
+		plusConfigurations += [configurations.mwe2Runtime]
+		file.whenMerged {
+			entries.each { source ->
+				if (source.kind == 'src' && source.path.endsWith('-gen') && !source.path.equals('xtend-gen') ) {
+					source.entryAttributes['ignore_optional_problems'] = 'true'
+				}
+				if (source.kind == 'output') {
+					source.path = 'bin/main'
+				}
+			}
+		}
+	}
+	project {
+		natures 'org.eclipse.xtext.ui.shared.xtextNature'
+		buildCommands.add(0,new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.xtext.ui.shared.xtextBuilder'))
+	}
+}
