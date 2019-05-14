@@ -30,7 +30,7 @@ class RenameContext {
 	
 	def void addModification(RenameChange change, IChangeSerializer.IModification<EObject> modification) {
 		val target = resourceSet.getEObject(change.targetURI, true)
-		if (target instanceof EObject) {
+		if (target !== null) {
 			EcoreUtil.resolveAll(target.eResource)
 			changeSerializer.addModification(target, modification)
 		} else {
