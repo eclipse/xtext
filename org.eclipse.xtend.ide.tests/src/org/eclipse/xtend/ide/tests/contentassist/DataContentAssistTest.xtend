@@ -18,10 +18,19 @@ class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
 	
 	@Flaky
 	@Test def void testDataAnnotation() throws Exception {
-		newBuilder().append("@Data").assertText(
-			"org.eclipse.xtend.lib.annotations.Data",
-			"org.junit.experimental.theories.DataPoint",
-			"org.junit.experimental.theories.DataPoints"
-		);
+		if (isJava11OrLater) {
+			newBuilder().append("@Data").assertText(
+				"jdk.jfr.DataAmount",
+				"org.eclipse.xtend.lib.annotations.Data",
+				"org.junit.experimental.theories.DataPoint",
+				"org.junit.experimental.theories.DataPoints"
+			);
+		} else {
+			newBuilder().append("@Data").assertText(
+				"org.eclipse.xtend.lib.annotations.Data",
+				"org.junit.experimental.theories.DataPoint",
+				"org.junit.experimental.theories.DataPoints"
+			);
+		}
 	}
 }

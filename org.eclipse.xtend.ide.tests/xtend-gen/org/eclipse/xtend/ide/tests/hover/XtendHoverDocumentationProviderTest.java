@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -1030,6 +1031,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   @Test
   public void bug380551_TestLinkToNativeJavaType() {
     try {
+      Assume.assumeFalse(AbstractXtendUITestCase.isJava11OrLater());
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testpackage");
       _builder.newLine();
