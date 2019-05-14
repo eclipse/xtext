@@ -15,6 +15,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.junit.Test;
 
 import com.google.common.collect.Iterators;
@@ -42,7 +43,7 @@ public class KeywordInspectorTest extends AbstractXtextInspectorTest {
 	public void validateRule(AbstractRule rule) {
 		assertNotNull("rule", rule);
 		warnings.clear();
-		KeywordInspector inspector = new KeywordInspector(this);
+		KeywordInspector inspector = new KeywordInspector(this, new OnChangeEvictingCache());
 		Iterator<Keyword> keywords = Iterators.filter(EcoreUtil.getAllContents(rule, true), Keyword.class);
 		while(keywords.hasNext())
 			inspector.inspectKeywordHidesTerminalRule(keywords.next());
