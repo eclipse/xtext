@@ -52,7 +52,7 @@ public class CheckMutableMethodDeclarationProcessor extends AbstractMethodProces
     };
     MutableAssert.assertValidJavaIdentifier("name", _function_6);
     final Procedure0 _function_7 = () -> {
-      annotatedMethod.setExceptions(null);
+      annotatedMethod.setExceptions(((TypeReference[]) null));
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "exceptions cannot be null", _function_7);
     final Procedure0 _function_8 = () -> {
