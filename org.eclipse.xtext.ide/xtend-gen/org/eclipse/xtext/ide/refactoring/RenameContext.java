@@ -37,7 +37,7 @@ public class RenameContext {
   
   public void addModification(final RenameChange change, final IChangeSerializer.IModification<EObject> modification) {
     final EObject target = this.resourceSet.getEObject(change.getTargetURI(), true);
-    if ((target instanceof EObject)) {
+    if ((target != null)) {
       EcoreUtil.resolveAll(target.eResource());
       this.changeSerializer.<EObject>addModification(target, modification);
     } else {

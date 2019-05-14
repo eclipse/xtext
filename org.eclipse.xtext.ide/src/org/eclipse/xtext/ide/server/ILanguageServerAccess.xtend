@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
@@ -79,7 +80,7 @@ interface ILanguageServerAccess {
 	 * 
 	 * @param uri a file URI used to detect the project to configure the scope of the resource set.
 	 * @return a new empty resource set, configured with the project the <code>uri</code>
-	 *   belongs to and the {@link ResourceDescriptionsProvider.LIVE_SCOPE} in order to
+	 *   belongs to and the {@link ResourceDescriptionsProvider#LIVE_SCOPE} in order to
 	 *   reflect model changes immediately.
 	 * @since 2.18
 	 */
