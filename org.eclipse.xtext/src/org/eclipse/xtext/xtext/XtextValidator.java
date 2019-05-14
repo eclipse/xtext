@@ -74,6 +74,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -107,6 +108,9 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	
+	@Inject
+	private IResourceScopeCache cache;
 	
 	private KeywordInspector keywordHidesTerminalInspector;
 	
@@ -1101,7 +1105,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkKeywordHidesTerminalRule(final Keyword keyword) {
 		if (keywordHidesTerminalInspector == null)
-			keywordHidesTerminalInspector = new KeywordInspector(this);
+			keywordHidesTerminalInspector = new KeywordInspector(this, cache);
 		keywordHidesTerminalInspector.inspectKeywordHidesTerminalRule(keyword);
 	}
 
