@@ -80,9 +80,11 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 			STATIC_CLASS_FEATURES = null;
 			STATIC_STRING_FEATURES = null;
 			STATIC_BIGDECIMAL_FEATURES = null;
+			STATIC_MAP_FEATURES = null;
 			CLASS_FEATURES = null;
 			STRING_FEATURES = null;
 			BIGDECIMAL_FEATURES = null;
+			MAP_FEATURES = null;
 			demandFeatureComputation = false;
 		}
 	}
