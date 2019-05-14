@@ -784,13 +784,15 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
   @Override
   public void test_09() {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike");
+    _builder.newLine();
     _builder.append("class C {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def m()\t{");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("newIterable(new StringBuilder).forEach2 [");
+    _builder.append("newIterable(new StringBuilderLike).forEach2 [");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("m(it, new Long(0))");
@@ -824,6 +826,8 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.io.Serializable;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;");
+    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
@@ -848,10 +852,10 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("public void m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("StringBuilder _stringBuilder = new StringBuilder();");
+    _builder_1.append("StringBuilderLike _stringBuilderLike = new StringBuilderLike();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<StringBuilder> _function = (StringBuilder it) -> {");
+    _builder_1.append("final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("Long _long = new Long(0);");
@@ -866,7 +870,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.<StringBuilder>newIterable(_stringBuilder).forEach2(_function);");
+    _builder_1.append("C.<StringBuilderLike>newIterable(_stringBuilderLike).forEach2(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

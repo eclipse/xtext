@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtext.testing.Flaky;
 import org.junit.Test;
@@ -19,9 +20,18 @@ public class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
   @Flaky
   @Test
   public void testDataAnnotation() throws Exception {
-    this.newBuilder().append("@Data").assertText(
-      "org.eclipse.xtend.lib.annotations.Data", 
-      "org.junit.experimental.theories.DataPoint", 
-      "org.junit.experimental.theories.DataPoints");
+    boolean _isJava11OrLater = AbstractXtendUITestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      this.newBuilder().append("@Data").assertText(
+        "jdk.jfr.DataAmount", 
+        "org.eclipse.xtend.lib.annotations.Data", 
+        "org.junit.experimental.theories.DataPoint", 
+        "org.junit.experimental.theories.DataPoints");
+    } else {
+      this.newBuilder().append("@Data").assertText(
+        "org.eclipse.xtend.lib.annotations.Data", 
+        "org.junit.experimental.theories.DataPoint", 
+        "org.junit.experimental.theories.DataPoints");
+    }
   }
 }

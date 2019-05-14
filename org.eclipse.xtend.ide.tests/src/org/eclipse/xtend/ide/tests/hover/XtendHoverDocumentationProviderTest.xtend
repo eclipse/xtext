@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider
 import org.junit.After
 import org.junit.Test
 import org.eclipse.xtext.common.types.JvmAnnotationTarget
+import org.junit.Assume
 
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
@@ -529,6 +530,7 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
     // The necessary change was in org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider.isValidationDisabled(EObject)
     @Test
     def bug380551_TestLinkToNativeJavaType(){
+    	Assume.assumeFalse(isJava11OrLater)
         val xtendFile = parseHelper.parse('''
         package testpackage
         import javax.annotation.Resource

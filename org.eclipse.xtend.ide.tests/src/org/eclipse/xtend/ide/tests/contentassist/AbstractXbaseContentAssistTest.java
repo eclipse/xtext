@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IWorkspace;
@@ -26,6 +27,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
@@ -79,9 +81,11 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 			STATIC_CLASS_FEATURES = null;
 			STATIC_STRING_FEATURES = null;
 			STATIC_BIGDECIMAL_FEATURES = null;
+			STATIC_MAP_FEATURES = null;
 			CLASS_FEATURES = null;
 			STRING_FEATURES = null;
 			BIGDECIMAL_FEATURES = null;
+			MAP_FEATURES = null;
 			demandFeatureComputation = false;
 		}
 	}
@@ -214,6 +218,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	protected static String[] STATIC_BIGDECIMAL_FEATURES;
 	protected static String[] CLASS_FEATURES;
 	protected static String[] STATIC_CLASS_FEATURES;
+	protected static String[] MAP_FEATURES;
+	protected static String[] STATIC_MAP_FEATURES;
 	
 	protected void initFeatures() {
 		if (STRING_FEATURES != null) {
@@ -228,6 +234,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 			doInitStringFeatures(javaProject);
 			doInitClassFeatures(javaProject);
 			doInitBigDecimalFeatures(javaProject);
+			doInitMapFeatures(javaProject);
 		} catch (JavaModelException e) {
 			throw new RuntimeException(e);
 		}
@@ -271,6 +278,24 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		features.add("identityEquals()");
 		BIGDECIMAL_FEATURES = features.toArray(new String[features.size()]);
 		STATIC_BIGDECIMAL_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
+	}
+	
+	protected static void doInitMapFeatures(IJavaProject javaProject) throws JavaModelException {
+		IType bigDecimalType = javaProject.findType(Map.class.getName());
+		Set<String> featuresOrTypes = Sets.newHashSet();
+		List<String> features = Lists.newArrayList();
+		List<String> staticFeatures = Lists.newArrayList();
+		addMethods(bigDecimalType, features, staticFeatures, featuresOrTypes);
+		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
+		features.remove("compareTo()");
+		Set<String> featuresAsSet = Sets.newHashSet(features);
+		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
+		Set<String> types = Sets.newHashSet();
+		addFields(bigDecimalType, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
+		// Object extensions
+		features.add("identityEquals()");
+		MAP_FEATURES = features.toArray(new String[features.size()]);
+		STATIC_MAP_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 	
 	protected static void doInitClassFeatures(IJavaProject javaProject) throws JavaModelException {
@@ -396,6 +421,14 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	public String[] getStaticBigDecimalFeatures() {
 		return STATIC_BIGDECIMAL_FEATURES;
+	}
+	
+	public String[] getMapFeatures() {
+		return MAP_FEATURES;
+	}
+	
+	public String[] getStaticMapFeatures() {
+		return STATIC_MAP_FEATURES;
 	}
 	
 	public String[] getClassFeatures() {
@@ -653,7 +686,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testForLoop_02() throws Exception {
-		newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string");
+			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string");
 	}
 	
 	@Test public void testForLoop_03() throws Exception {

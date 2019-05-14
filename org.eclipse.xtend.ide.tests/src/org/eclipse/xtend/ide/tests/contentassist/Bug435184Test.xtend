@@ -15,7 +15,7 @@ import org.junit.Test
 class Bug435184Test extends AbstractXtendContentAssistBugTest {
 	
 	@Test def void test_01() throws Exception {
-		newBuilder.append('''
+		val b = newBuilder.append('''
 			import java.io.*
 			
 			class C {
@@ -29,7 +29,10 @@ class Bug435184Test extends AbstractXtendContentAssistBugTest {
 			  }
 			}
 		''')
-			.assertTextAtCursorPosition('|', 'read', "read()", "read()")
+		if (isJava11OrLater)
+			b.assertTextAtCursorPosition('|', 'read', "read()", "read()", "readAllBytes", "readNBytes()", "readNBytes()")
+		else
+			b.assertTextAtCursorPosition('|', 'read', "read()", "read()")
 	}
 	
 	@Test def void test_02() throws Exception {

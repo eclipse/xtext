@@ -328,9 +328,10 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 	
 	@Test override test_09() {
 		'''
+			import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike
 			class C {
 				def m()	{
-					newIterable(new StringBuilder).forEach2 [
+					newIterable(new StringBuilderLike).forEach2 [
 						m(it, new Long(0))
 						println(length)
 					]
@@ -343,6 +344,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			}
 		'''.assertCompilesTo('''
 			import java.io.Serializable;
+			import org.eclipse.xtend.core.tests.java8.compiler.StringBuilderLike;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
@@ -353,13 +355,13 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			  }
 			  
 			  public void m() {
-			    StringBuilder _stringBuilder = new StringBuilder();
-			    final Procedure1<StringBuilder> _function = (StringBuilder it) -> {
+			    StringBuilderLike _stringBuilderLike = new StringBuilderLike();
+			    final Procedure1<StringBuilderLike> _function = (StringBuilderLike it) -> {
 			      Long _long = new Long(0);
 			      this.<Serializable>m(it, _long);
 			      InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			    };
-			    C.<StringBuilder>newIterable(_stringBuilder).forEach2(_function);
+			    C.<StringBuilderLike>newIterable(_stringBuilderLike).forEach2(_function);
 			  }
 			  
 			  public <T extends Object> Object m(final T a, final T b) {

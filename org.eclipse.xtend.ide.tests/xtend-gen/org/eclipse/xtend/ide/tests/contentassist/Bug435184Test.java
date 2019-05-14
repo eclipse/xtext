@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
@@ -52,7 +53,13 @@ public class Bug435184Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _newBuilder.append(_builder.toString()).assertTextAtCursorPosition("|", "read", "read()", "read()");
+    final ContentAssistProcessorTestBuilder b = _newBuilder.append(_builder.toString());
+    boolean _isJava11OrLater = AbstractXtendUITestCase.isJava11OrLater();
+    if (_isJava11OrLater) {
+      b.assertTextAtCursorPosition("|", "read", "read()", "read()", "readAllBytes", "readNBytes()", "readNBytes()");
+    } else {
+      b.assertTextAtCursorPosition("|", "read", "read()", "read()");
+    }
   }
   
   @Test
