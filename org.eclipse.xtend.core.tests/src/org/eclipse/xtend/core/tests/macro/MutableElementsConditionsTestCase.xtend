@@ -287,7 +287,7 @@ class CheckMutableMethodDeclarationProcessor extends AbstractMethodProcessor {
 			annotatedMethod.simpleName = identifier
 		]
 		assertThrowable(IllegalArgumentException, "exceptions cannot be null") [ |
-			annotatedMethod.exceptions = null
+			annotatedMethod.exceptions = null as TypeReference[]
 		]
 		assertThrowable(IllegalArgumentException, "exceptions cannot contain null") [ |
 			annotatedMethod.exceptions = #[null]
