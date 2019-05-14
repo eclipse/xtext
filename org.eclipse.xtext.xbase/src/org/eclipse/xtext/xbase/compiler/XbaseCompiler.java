@@ -187,26 +187,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (literalType instanceof CompoundTypeReference) {
 					for (LightweightTypeReference c : literalType.getMultiTypeComponents()) {
 						if (c.isArray()) {
-							b.append("new ").append(c.getType()) // append raw
-																	// type
-																	// since we
-																	// cannot
-																	// create
-																	// generic
-																	// arrays
-									.append(" ");
+							// append raw type since we cannot create generic arrays
+							b.append("new ").append(c.getType()).append(" ");
 							break;
 						}
 					}
 				} else {
-					b.append("new ").append(literalType.getType()) // append raw
-																	// type
-																	// since we
-																	// cannot
-																	// create
-																	// generic
-																	// arrays
-							.append(" ");
+					// append raw type since we cannot create generic arrays
+					b.append("new ").append(literalType.getType()).append(" ");
 				}
 			}
 			if (literal.getElements().isEmpty()) {
@@ -731,8 +719,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XThrowExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
@@ -750,16 +737,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XInstanceOfExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XVariableDeclaration varDeclaration, ITreeAppendable b, boolean isReferenced) {
 		if (varDeclaration.getRight() != null) {
@@ -798,8 +783,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
@@ -832,8 +816,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XDoWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
@@ -897,8 +880,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void toJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		ITreeAppendable loopAppendable = b.trace(expr);
@@ -1025,8 +1007,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
@@ -1193,8 +1174,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature
 	 */
 	protected void _toJavaStatement(XReturnExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (expr.getExpression() != null) {
