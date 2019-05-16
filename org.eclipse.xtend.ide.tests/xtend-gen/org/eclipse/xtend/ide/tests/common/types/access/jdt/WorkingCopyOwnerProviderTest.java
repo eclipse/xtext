@@ -18,6 +18,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.access.jdt.WorkingCopyOwnerProvider;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.After;
 import org.junit.Assert;
@@ -100,7 +101,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       _builder_1.append("public class MyClass{");
       _builder_1.newLine();
       _builder_1.append("}");
-      Assert.assertEquals(_builder_1.toString(), this.newWorkingCopyOwner().findSource("MyClass", "foo"));
+      Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1).toString(), this.newWorkingCopyOwner().findSource("MyClass", "foo"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
