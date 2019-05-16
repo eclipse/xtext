@@ -6,6 +6,6 @@ Bundle-Version: 2.19.0.qualifier
 Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: com.google.guava;bundle-version="[21.0.0,22.0.0)"
+Require-Bundle: com.google.guava;bundle-version="[27.1.0,28.0.0)"
 Bundle-Vendor: %Vendor-Name
 Automatic-Module-Name: org.eclipse.xtext.xbase.lib.gwt
