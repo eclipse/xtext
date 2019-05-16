@@ -126,7 +126,7 @@
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.junit" version="0.0.0"/>
 		<unit id="com.google.inject" version="0.0.0"/>
-		<unit id="com.google.guava" version="21.0.0.v20170206-1425"/>
+		<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 		<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
