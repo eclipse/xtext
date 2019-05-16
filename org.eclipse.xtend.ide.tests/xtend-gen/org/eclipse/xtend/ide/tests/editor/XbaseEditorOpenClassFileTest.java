@@ -429,7 +429,11 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         final IResourceVisitor _function = (IResource it) -> {
           if ((it instanceof IFile)) {
             final String path = ((IFile)it).getProjectRelativePath().removeFirstSegments(1).toString();
-            listOfContents.put(path, ((IFile)it).getContents());
+            boolean _containsKey = listOfContents.containsKey(path);
+            boolean _not = (!_containsKey);
+            if (_not) {
+              listOfContents.put(path, ((IFile)it).getContents());
+            }
           }
           return true;
         };

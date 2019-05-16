@@ -259,7 +259,8 @@ import org.junit.Before
 			val IResourceVisitor visitor = [
 				if (it instanceof IFile) {
 					val path = it.projectRelativePath.removeFirstSegments(1).toString
-					listOfContents.put(path , contents)
+					if (!listOfContents.containsKey(path))
+						listOfContents.put(path , contents)
 				}
 				return true
 			]
