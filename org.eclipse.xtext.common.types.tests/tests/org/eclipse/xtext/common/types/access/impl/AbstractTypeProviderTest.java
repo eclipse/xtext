@@ -3544,10 +3544,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 				.getOnlyElement(type.findAllFeaturesByName("containsValue"));
 		assertNotNull(containsValue);
 		JvmFormalParameter firstParam = containsValue.getParameters().get(0);
-		assertEquals(1, firstParam.getAnnotations().size());
-		JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
-		JvmAnnotationType annotationType = annotationReference.getAnnotation();
-		assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());
+		assertEquals(0, firstParam.getAnnotations().size());
 	}
 
 	@Test
