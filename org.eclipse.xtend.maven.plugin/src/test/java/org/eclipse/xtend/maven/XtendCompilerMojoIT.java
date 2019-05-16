@@ -116,9 +116,26 @@ public class XtendCompilerMojoIT {
 	}
 
 	@Test
-	public void suppressEmptyDirWarning() throws Exception {
+	public void emptyDirWarningDefault() throws Exception {
 		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/emptydir-warning");
-		System.out.println(verifier.getLogFileName());
+		verifier.setDebug(true);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		verifier.verifyTextInLog("is empty. Can't process.");
+	}
+	
+	@Test
+	public void emptyDirWarningTrue() throws Exception {
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/emptydir-warning-true");
+		verifier.setDebug(true);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		verifier.verifyTextInLog("is empty. Can't process.");
+	}
+	
+	@Test
+	public void emptyDirWarningFalse() throws Exception {
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/emptydir-warning-false");
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
