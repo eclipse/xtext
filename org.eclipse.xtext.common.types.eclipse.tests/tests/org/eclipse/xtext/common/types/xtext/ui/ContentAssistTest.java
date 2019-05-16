@@ -111,6 +111,7 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 			newBuilder().append("custom ArrayLis").assertText(
 				"java.util.ArrayList",
 				"com.google.common.collect.MultimapBuilder.ArrayListSupplier", 
+				"com.google.common.collect.ArrayListMultimapGwtSerializationDependencies", 
 				"java.util.ArrayList.ArrayListSpliterator",
 				"java.util.Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap");
@@ -130,7 +131,9 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 				"ArrayList.ArrayListSpliterator",
 				"Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap",
-				"com.google.common.collect.MultimapBuilder.ArrayListSupplier");
+				"com.google.common.collect.MultimapBuilder.ArrayListSupplier",
+				"com.google.common.collect.ArrayListMultimapGwtSerializationDependencies"
+			);
 		}
 	}
 	

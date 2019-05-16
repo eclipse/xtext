@@ -35,7 +35,7 @@ location "https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"
 	org.objectweb.asm.tree [7.1.0,7.2.0)
 	com.google.inject [3.0.0,4.0.0)
 	org.apache.commons.cli
-	com.google.guava [21.0.0,22.0.0)
+	com.google.guava [27.1.0,28.0.0)
 }
 
 location "https://download.eclipse.org/tools/gef/updates/legacy/releases" {
