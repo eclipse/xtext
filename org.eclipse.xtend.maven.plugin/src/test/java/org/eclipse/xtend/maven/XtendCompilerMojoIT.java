@@ -117,7 +117,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void emptyDirWarningDefault() throws Exception {
-		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/emptydir-warning");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/emptydir-warning-default");
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
