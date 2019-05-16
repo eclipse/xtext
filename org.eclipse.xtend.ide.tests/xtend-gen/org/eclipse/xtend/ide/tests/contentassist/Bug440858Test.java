@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.util.Strings;
 import org.junit.Test;
 
 /**
@@ -34,7 +35,7 @@ public class Bug440858Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _newBuilder.append(_builder.toString()).assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor(Strings.toPlatformLineSeparator("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t"));
   }
   
   @Test
@@ -54,6 +55,6 @@ public class Bug440858Test extends AbstractXtendContentAssistBugTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _newBuilder.append(_builder.toString()).assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t");
+    _newBuilder.append(_builder.toString()).assertProposalAtCursor(Strings.toPlatformLineSeparator("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t"));
   }
 }
