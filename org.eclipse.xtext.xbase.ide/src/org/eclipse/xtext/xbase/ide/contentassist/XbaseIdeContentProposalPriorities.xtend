@@ -12,10 +12,10 @@ import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities
 import org.eclipse.xtext.resource.IEObjectDescription
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLiteralReceiver
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor
 
 class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorities {
 	

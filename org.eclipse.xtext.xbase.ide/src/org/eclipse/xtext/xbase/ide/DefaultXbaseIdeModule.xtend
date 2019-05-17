@@ -19,19 +19,17 @@ import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPrioriti
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalProvider
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeCrossrefProposalProvider
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator
-import org.eclipse.xtext.xbase.ide.types.ClasspathScanner
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner
 
 /**
  * Default Guice bindings for the generic IDE contributions of the Xbase languages.
  */
 class DefaultXbaseIdeModule extends DefaultIdeModule {
 	
-	protected static val classpathScanner = new ClasspathScanner
-	
 	def void configureClasspathScanner(Binder binder) {
-		binder.bind(ClasspathScanner).toInstance(classpathScanner)
+		binder.bind(ClasspathScanner)
 	}
 	
 	def Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {

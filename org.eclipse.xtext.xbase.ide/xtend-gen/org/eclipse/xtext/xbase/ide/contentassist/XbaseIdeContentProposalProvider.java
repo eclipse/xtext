@@ -26,6 +26,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.descriptions.ITypeDescriptor;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
@@ -47,7 +48,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.ide.contentassist.IIdeTypesProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.TypeFilters;
-import org.eclipse.xtext.xbase.ide.types.ITypeDescriptor;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
@@ -407,7 +407,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     this.completeJavaTypes(reference, context, Predicates.<ITypeDescriptor>alwaysTrue(), acceptor);
   }
   
-  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor) {
+  protected void completeJavaTypes(final EReference reference, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor) {
     this.typesProposalProvider.createTypeProposals(reference, context, filter, acceptor);
   }
   

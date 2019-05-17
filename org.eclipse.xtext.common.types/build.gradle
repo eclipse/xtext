@@ -4,6 +4,7 @@ description = 'JVM type model used by Xbase and other languages.'
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 	compile 'org.ow2.asm:asm-commons'
+	compile 'io.github.classgraph:classgraph'
 	optional 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
 	optional 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
 	optional 'org.eclipse.emf:org.eclipse.emf.codegen'

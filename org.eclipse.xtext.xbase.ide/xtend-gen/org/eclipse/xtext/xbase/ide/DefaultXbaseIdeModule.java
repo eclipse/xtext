@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ide;
 
 import com.google.inject.Binder;
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner;
 import org.eclipse.xtext.ide.DefaultIdeModule;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalPrioriti
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeContentProposalProvider;
 import org.eclipse.xtext.xbase.ide.contentassist.XbaseIdeCrossrefProposalProvider;
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingCalculator;
-import org.eclipse.xtext.xbase.ide.types.ClasspathScanner;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 
@@ -28,10 +28,8 @@ import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTracker
  */
 @SuppressWarnings("all")
 public class DefaultXbaseIdeModule extends DefaultIdeModule {
-  protected static final ClasspathScanner classpathScanner = new ClasspathScanner();
-  
   public void configureClasspathScanner(final Binder binder) {
-    binder.<ClasspathScanner>bind(ClasspathScanner.class).toInstance(DefaultXbaseIdeModule.classpathScanner);
+    binder.<ClasspathScanner>bind(ClasspathScanner.class);
   }
   
   public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
