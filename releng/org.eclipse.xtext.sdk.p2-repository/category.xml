@@ -6,6 +6,8 @@
    <feature id="org.eclipse.xtend.sdk" version="2.19.0.qualifier">
       <category name="Xtext"/>
    </feature>
+   <bundle id="com.google.guava" version="27.1.0.qualifier"/>
+   <bundle id="com.google.guava.source" version="27.1.0.qualifier"/>
    <bundle id="org.junit" version="4.12.0.qualifier"/>
    <bundle id="org.junit.source" version="4.12.0.qualifier"/>
    <bundle id="org.objectweb.asm" version="7.1.0.qualifier"/>
