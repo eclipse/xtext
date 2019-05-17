@@ -63,6 +63,7 @@
 		<antlr-runtime-version>3.2</antlr-runtime-version>
 		<args4j-version>2.33</args4j-version>
 		<asm-version>7.1</asm-version>
+		<classgraph-version>4.8.35</classgraph-version>
 		
 		<error_prone_annotations-version>2.0.15</error_prone_annotations-version>
 		<guava-version>21.0</guava-version>
@@ -153,6 +154,11 @@
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
 				<version>${icu4j-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.classgraph</groupId>
+				<artifactId>classgraph</artifactId>
+				<version>${classgraph-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.annotation</groupId>
