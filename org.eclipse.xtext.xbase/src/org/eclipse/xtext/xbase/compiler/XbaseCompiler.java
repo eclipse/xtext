@@ -116,31 +116,29 @@ import com.google.inject.Inject;
  * @author Eva Poell - support for try with resources
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-
+	
 	@Inject
 	private XSwitchExpressions switchExpressions;
-
+	
 	@Inject
 	private FeatureLinkHelper featureLinkHelper;
-
+	
 	@Inject
 	private OverrideTester overrideTester;
-
+	
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XListLiteral literal, ITreeAppendable b, boolean isReferenced) {
-		for (XExpression element : literal.getElements())
+		for(XExpression element: literal.getElements()) 
 			internalToJavaStatement(element, b, true);
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch
-	 * signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(final XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
-		for (XExpression element : literal.getElements())
+		for(XExpression element: literal.getElements()) 
 			internalToJavaStatement(element, b, true);
 	}
 
@@ -153,17 +151,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		LightweightTypeReference elementType = batchTypeResolver.resolveTypes(element).getActualType(element);
 		return elementType != null && elementType.isType(clazz) ? elementType : null;
 	}
-
+	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
 		LightweightTypeReference type = getLightweightType(literal);
 		if (type == null)
 			throw new IllegalStateException();
-		if (type.isArray()) {
+		if(type.isArray()) {
 			LightweightTypeReference result = type.getComponentType();
 			if (result == null)
 				throw new IllegalStateException();
 			return result;
-		} else if (type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) {
+		}
+		else if(type.isSubtypeOf(Collection.class) && type.hasTypeArguments()) {
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
 		}
 		return type.getOwner().newReferenceToObject();
@@ -172,9 +171,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
 		if (literalType == null) {
-			b.append("error - couldn't compute type for literal : " + literal);
+			b.append("error - couldn't compute type for literal : "+literal);
 			return;
-		}
+		} 
 		if (literalType.isArray()) {
 			LightweightTypeReference expectedType = batchTypeResolver.resolveTypes(literal).getExpectedType(literal);
 			boolean skipTypeName = false;
@@ -187,14 +186,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (literalType instanceof CompoundTypeReference) {
 					for (LightweightTypeReference c : literalType.getMultiTypeComponents()) {
 						if (c.isArray()) {
-							// append raw type since we cannot create generic arrays
-							b.append("new ").append(c.getType()).append(" ");
+							b.append("new ")
+							.append(c.getType()) // append raw type since we cannot create generic arrays
+							.append(" ");
 							break;
 						}
 					}
 				} else {
-					// append raw type since we cannot create generic arrays
-					b.append("new ").append(literalType.getType()).append(" ");
+					b.append("new ")
+ 					.append(literalType.getType()) // append raw type since we cannot create generic arrays
+ 					.append(" ");
 				}
 			}
 			if (literal.getElements().isEmpty()) {
@@ -202,8 +203,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			} else {
 				b.append("{ ");
 				boolean isFirst = true;
-				for (XExpression element : literal.getElements()) {
-					if (!isFirst)
+				for(XExpression element: literal.getElements())  {
+					if(!isFirst)
 						b.append(", ");
 					isFirst = false;
 					internalToJavaExpression(element, b);
@@ -212,26 +213,25 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			return;
 		} else {
-			appendImmutableCollectionExpression(literal, b, "unmodifiableList", CollectionLiterals.class,
-					"newArrayList");
+			appendImmutableCollectionExpression(literal, b, "unmodifiableList", CollectionLiterals.class, "newArrayList");
 		}
 	}
 
 	protected void _toJavaExpression(XSetLiteral literal, ITreeAppendable b) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
 		if (literalType == null) {
-			b.append("error - couldn't compute type for literal : " + literal);
+			b.append("error - couldn't compute type for literal : "+literal);
 			return;
-		}
+		} 
 		if (literalType.isType(Map.class)) {
 			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
 			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
-			b.append(Collections.class).append(".<").append(keyType).append(", ").append(valueType)
-					.append(">unmodifiableMap(");
-			b.append(CollectionLiterals.class).append(".<").append(keyType).append(", ").append(valueType)
-					.append(">newHashMap(");
+			b.append(Collections.class)
+				.append(".<").append(keyType).append(", ").append(valueType)
+				.append(">unmodifiableMap(");
+			b.append(CollectionLiterals.class).append(".<").append(keyType).append(", ").append(valueType).append(">newHashMap(");
 			Iterator<XExpression> elements = literal.getElements().iterator();
-			while (elements.hasNext()) {
+			while(elements.hasNext())  {
 				XExpression element = elements.next();
 				internalToJavaExpression(element, b);
 				if (elements.hasNext()) {
@@ -243,20 +243,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			appendImmutableCollectionExpression(literal, b, "unmodifiableSet", CollectionLiterals.class, "newHashSet");
 		}
 	}
-
-	protected void appendImmutableCollectionExpression(XCollectionLiteral literal, ITreeAppendable b,
-			String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
+	
+	protected void appendImmutableCollectionExpression(XCollectionLiteral literal,
+			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
 		b.append(Collections.class);
 		b.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(");
-		b.append(guavaHelper).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod)
-				.append("(");
+		b.append(guavaHelper).append(".<").append(collectionElementType).append(">").append(guavaHelperMethod).append("(");
 		boolean isFirst = true;
-		for (XExpression element : literal.getElements()) {
-			if (!isFirst)
+		for(XExpression element: literal.getElements())  {
+			if(!isFirst)
 				b.append(", ");
 			isFirst = false;
-			if (element instanceof XNullLiteral) {
+			if(element instanceof XNullLiteral) {
 				b.append("(").append(collectionElementType).append(")");
 			}
 			internalToJavaExpression(element, b);
@@ -264,18 +263,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("))");
 		return;
 	}
-
+	
 	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
 		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT
-				|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE
-				|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION__VALUE) {
+			|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE
+			|| literal.eContainingFeature() == XAnnotationsPackage.Literals.XANNOTATION__VALUE
+			) {
 			return canUseArrayInitializerImpl(literal, appendable);
 		}
 		return false;
 	}
-
+	
 	protected boolean canUseArrayInitializerImpl(XListLiteral literal, ITreeAppendable appendable) {
-		for (XExpression element : literal.getElements()) {
+		for(XExpression element: literal.getElements()) {
 			if (isVariableDeclarationRequired(element, appendable, true))
 				return false;
 		}
@@ -288,20 +288,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		List<XExpression> normalizedArguments = normalizeBlockExpression(actualArguments);
 		return normalizedArguments;
 	}
-
+	
 	@Override
 	protected ITreeAppendable appendTypeArguments(XAbstractFeatureCall call, ITreeAppendable original) {
 		if (!call.getTypeArguments().isEmpty()) {
 			return super.appendTypeArguments(call, original);
 		}
 		ILocationData completeLocationData = getLocationWithTypeArguments(call);
-		ITreeAppendable completeFeatureCallAppendable = completeLocationData != null
-				? original.trace(completeLocationData)
-				: original;
+		ITreeAppendable completeFeatureCallAppendable = completeLocationData != null ? original.trace(completeLocationData) : original;
 		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(call);
 		List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(call);
 		if (!typeArguments.isEmpty()) {
-			for (LightweightTypeReference typeArgument : typeArguments) {
+			for(LightweightTypeReference typeArgument: typeArguments) {
 				if (typeArgument.isWildcard()) {
 					return completeFeatureCallAppendable;
 				}
@@ -317,7 +315,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return completeFeatureCallAppendable;
 	}
-
+	
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XBlockExpression) {
@@ -352,7 +350,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			super.internalToConvertedExpression(obj, appendable);
 		}
 	}
-
+	
 	@Override
 	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
 		if (obj instanceof XBlockExpression) {
@@ -395,12 +393,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			super.doInternalToJavaStatement(obj, appendable, isReferenced);
 		}
 	}
-
+	
 	protected void _toJavaStatement(XBlockExpression expr, ITreeAppendable b, boolean isReferenced) {
 		b = b.trace(expr, false);
 		if (expr.getExpressions().isEmpty())
 			return;
-		if (expr.getExpressions().size() == 1) {
+		if (expr.getExpressions().size()==1) {
 			internalToJavaStatement(expr.getExpressions().get(0), b, isReferenced);
 			return;
 		}
@@ -430,11 +428,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.decreaseIndentation().newLine().append("}");
 		}
 	}
-
+	
 	protected boolean bracesAreAddedByOuterStructure(XExpression expression) {
 		EObject container = expression.eContainer();
-		if (container instanceof XTryCatchFinallyExpression || container instanceof XIfExpression
-				|| container instanceof XClosure || container instanceof XSynchronizedExpression) {
+		if (container instanceof XTryCatchFinallyExpression 
+				|| container instanceof XIfExpression
+				|| container instanceof XClosure
+				|| container instanceof XSynchronizedExpression) {
 			return true;
 		}
 		if (container instanceof XBlockExpression) {
@@ -455,7 +455,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("null");
 			return;
 		}
-		if (expr.getExpressions().size() == 1) {
+		if (expr.getExpressions().size()==1) {
 			// conversion was already performed for single expression blocks
 			internalToConvertedExpression(expr.getExpressions().get(0), b, null);
 			return;
@@ -464,8 +464,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(getVarName(expr, b));
 	}
 
-	protected void _toJavaStatement(XTryCatchFinallyExpression expr, ITreeAppendable outerAppendable,
-			boolean isReferenced) {
+	protected void _toJavaStatement(XTryCatchFinallyExpression expr, ITreeAppendable outerAppendable, boolean isReferenced) {
 		ITreeAppendable b = outerAppendable.trace(expr, false);
 		// If Java 7 or better: use Java's try-with-resources
 		boolean nativeTryWithResources = isAtLeast(b, JAVA7);
@@ -621,7 +620,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (type instanceof JvmSynonymTypeReference) {
 			List<JvmTypeReference> references = ((JvmSynonymTypeReference) type).getReferences();
 			Iterator<JvmTypeReference> iter = references.iterator();
-			while (iter.hasNext()) {
+			while(iter.hasNext()) {
 				appendable.append(parentVariable).append(" instanceof ");
 				serialize(iter.next(), catchClause, appendable);
 				if (iter.hasNext()) {
@@ -631,7 +630,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			typeToUse = resolveSynonymType((JvmSynonymTypeReference) type, catchClause);
 		} else {
 			appendable.append(parentVariable).append(" instanceof ");
-			serialize(type, catchClause, appendable);
+			serialize(type, catchClause, appendable);			
 		}
 		appendable.append(") ").append("{");
 		appendable.increaseIndentation();
@@ -643,33 +642,29 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			serialize(typeToUse, catchClause, withDebugging);
 			withDebugging.append(")").append(parentVariable).append(";");
 		}
-		final boolean canBeReferenced = parentIsReferenced && !isPrimitiveVoid(catchClause.getExpression());
+		final boolean canBeReferenced = parentIsReferenced && ! isPrimitiveVoid(catchClause.getExpression());
 		internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
 		if (canBeReferenced) {
 			appendable.newLine().append(getVarName(catchClause.eContainer(), appendable)).append(" = ");
-			internalToConvertedExpression(catchClause.getExpression(), appendable,
-					getLightweightType((XExpression) catchClause.eContainer()));
+			internalToConvertedExpression(catchClause.getExpression(), appendable, getLightweightType((XExpression) catchClause.eContainer()));
 			appendable.append(";");
 		}
 		closeBlock(appendable);
 	}
 
-	protected void appendCatchClauseParameter(XCatchClause catchClause, JvmTypeReference parameterType,
-			final String parameterName, ITreeAppendable appendable) {
+	protected void appendCatchClauseParameter(XCatchClause catchClause, JvmTypeReference parameterType, final String parameterName, ITreeAppendable appendable) {
 		appendable.append("final ");
 		serialize(parameterType, catchClause, appendable);
 		appendable.append(" ");
-		appendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0)
-				.append(parameterName);
+		appendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(parameterName);
 	}
-
+	
 	protected JvmTypeReference resolveSynonymType(JvmSynonymTypeReference reference, EObject context) {
 		LightweightTypeReference lightweight = toLightweight(reference, context);
-		LightweightTypeReference superType = lightweight.getOwner().getServices().getTypeConformanceComputer()
-				.getCommonSuperType(lightweight.getMultiTypeComponents(), lightweight.getOwner());
+		LightweightTypeReference superType = lightweight.getOwner().getServices().getTypeConformanceComputer().getCommonSuperType(lightweight.getMultiTypeComponents(), lightweight.getOwner());
 		return superType.toJavaCompliantTypeReference();
 	}
-
+	
 	/**
 	 * @since 2.18
 	 */
@@ -719,7 +714,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XThrowExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
@@ -737,14 +732,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XInstanceOfExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getExpression(), b, true);
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XVariableDeclaration varDeclaration, ITreeAppendable b, boolean isReferenced) {
 		if (varDeclaration.getRight() != null) {
@@ -761,8 +756,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
-	protected LightweightTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration,
-			ITreeAppendable appendable) {
+	protected LightweightTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
 		if (!varDeclaration.isWriteable()) {
 			appendable.append("final ");
 		}
@@ -783,7 +777,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
@@ -816,7 +810,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature  
 	 */
 	protected void _toJavaStatement(XDoWhileExpression expr, ITreeAppendable b, boolean isReferenced) {
 		boolean needsStatement = !canCompileToJavaExpression(expr.getPredicate(), b);
@@ -842,7 +836,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		b.append(");");
 	}
-
+	
 	protected void _toJavaStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		if (canCompileToJavaBasicForStatement(expr, b)) {
 			toJavaBasicForStatement(expr, b, isReferenced);
@@ -880,13 +874,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void toJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		ITreeAppendable loopAppendable = b.trace(expr);
 		loopAppendable.openPseudoScope();
 		loopAppendable.newLine().append("for (");
-
+		
 		EList<XExpression> initExpressions = expr.getInitExpressions();
 		XExpression firstInitExpression = IterableExtensions.head(initExpressions);
 		if (firstInitExpression instanceof XVariableDeclaration) {
@@ -907,16 +901,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				compileAsJavaExpression(initExpression, loopAppendable, getLightweightType(initExpression));
 			}
 		}
-
+		
 		loopAppendable.append(";");
-
+		
 		XExpression expression = expr.getExpression();
 		if (expression != null) {
 			loopAppendable.append(" ");
 			internalToJavaExpression(expression, loopAppendable);
 		}
 		loopAppendable.append(";");
-
+		
 		EList<XExpression> updateExpressions = expr.getUpdateExpressions();
 		for (int i = 0; i < updateExpressions.size(); i++) {
 			if (i != 0) {
@@ -927,23 +921,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaExpression(updateExpression, loopAppendable);
 		}
 		loopAppendable.append(") {").increaseIndentation();
-
+		
 		XExpression eachExpression = expr.getEachExpression();
 		internalToJavaStatement(eachExpression, loopAppendable, false);
-
+		
 		loopAppendable.decreaseIndentation().newLine().append("}");
 		loopAppendable.closeScope();
 	}
 
 	protected void toJavaWhileStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		ITreeAppendable loopAppendable = b.trace(expr);
-
+		
 		boolean needBraces = !bracesAreAddedByOuterStructure(expr);
 		if (needBraces) {
 			loopAppendable.newLine().increaseIndentation().append("{");
 			loopAppendable.openPseudoScope();
 		}
-
+		
 		EList<XExpression> initExpressions = expr.getInitExpressions();
 		for (int i = 0; i < initExpressions.size(); i++) {
 			XExpression initExpression = initExpressions.get(i);
@@ -960,7 +954,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 
 		final String varName = loopAppendable.declareSyntheticVariable(expr, "_while");
-
+		
 		XExpression expression = expr.getExpression();
 		if (expression != null) {
 			internalToJavaStatement(expression, loopAppendable, true);
@@ -975,17 +969,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		loopAppendable.append(varName);
 		loopAppendable.append(") {").increaseIndentation();
 		loopAppendable.openPseudoScope();
-
+		
 		XExpression eachExpression = expr.getEachExpression();
 		internalToJavaStatement(eachExpression, loopAppendable, false);
-
+		
 		EList<XExpression> updateExpressions = expr.getUpdateExpressions();
 		if (!updateExpressions.isEmpty()) {
 			for (XExpression updateExpression : updateExpressions) {
 				internalToJavaStatement(updateExpression, loopAppendable, false);
 			}
 		}
-
+		
 		if (!isEarlyExit(eachExpression)) {
 			if (expression != null) {
 				internalToJavaStatement(expression, loopAppendable, true);
@@ -996,10 +990,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				loopAppendable.newLine().append(varName).append(" = true;");
 			}
 		}
-
+		
 		loopAppendable.closeScope();
 		loopAppendable.decreaseIndentation().newLine().append("}");
-
+		
 		if (needBraces) {
 			loopAppendable.closeScope();
 			loopAppendable.decreaseIndentation().newLine().append("}");
@@ -1007,7 +1001,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
@@ -1050,7 +1044,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XExpression arg : expr.getArguments()) {
 			prepareExpression(arg, b);
 		}
-
+		
 		if (!isReferenced) {
 			b.newLine();
 			constructorCallToJavaExpression(expr, b);
@@ -1065,7 +1059,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			declareFreshLocalVariable(expr, b, later);
 		}
 	}
-
+	
 	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
@@ -1074,27 +1068,24 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(expr);
 		JvmConstructor constructor = expr.getConstructor();
 		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
-		boolean hasTypeArguments = !typeArguments.isEmpty()
-				&& (featureLinkHelper.getDeclaredTypeParameters(constructor).size() == typeArguments.size());
+		boolean hasTypeArguments = !typeArguments.isEmpty() && (featureLinkHelper.getDeclaredTypeParameters(constructor).size() == typeArguments.size());
 		List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
 		List<LightweightTypeReference> constructorTypeArguments = Collections.emptyList();
 		if (hasTypeArguments) {
 			constructorTypeArguments = typeArguments.subList(0, constructorTypeParameters.size());
 			typeArguments = typeArguments.subList(constructorTypeParameters.size(), typeArguments.size());
 			hasTypeArguments = !typeArguments.isEmpty();
-			for (LightweightTypeReference typeArgument : typeArguments) {
+			for(LightweightTypeReference typeArgument: typeArguments) {
 				if (typeArgument.isWildcard()) {
-					// cannot serialize wildcard as constructor type argument in
-					// Java5 as explicit type argument, skip all
+					// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
 					hasTypeArguments = false;
 					break;
 					// diamond operator would work in later versions
 				}
 			}
-			for (LightweightTypeReference typeArgument : constructorTypeArguments) {
+			for(LightweightTypeReference typeArgument: constructorTypeArguments) {
 				if (typeArgument.isWildcard()) {
-					// cannot serialize wildcard as constructor type argument in
-					// Java5 as explicit type argument, skip all
+					// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
 					constructorTypeArguments = Collections.emptyList();
 					break;
 					// diamond operator would work in later versions
@@ -1103,7 +1094,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		if (!constructorTypeArguments.isEmpty()) {
 			appendableWithNewKeyword.append("<");
-			for (int i = 0; i < constructorTypeArguments.size(); i++) {
+			for(int i = 0; i < constructorTypeArguments.size(); i++) {
 				if (i != 0) {
 					appendableWithNewKeyword.append(", ");
 				}
@@ -1111,18 +1102,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			appendableWithNewKeyword.append(">");
 		}
-		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr,
-				XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
+		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
 		appendConstructedTypeName(expr, typeAppendable);
-		if (hasTypeArguments || (expr.isAnonymousClassConstructorCall() && !explicitTypeArguments.isEmpty()
-				&& ((JvmGenericType) constructor.getDeclaringType()).isAnonymous())) {
+		if (hasTypeArguments || (expr.isAnonymousClassConstructorCall() && !explicitTypeArguments.isEmpty() && ((JvmGenericType) constructor.getDeclaringType()).isAnonymous())) {
 			if (typeArguments.isEmpty()) {
 				LightweightTypeReference createdType = resolvedTypes.getActualType(expr);
 				typeArguments = createdType.getNamedType().getTypeArguments();
 			}
 			if (!typeArguments.isEmpty()) {
 				typeAppendable.append("<");
-				for (int i = 0; i < typeArguments.size(); i++) {
+				for(int i = 0; i < typeArguments.size(); i++) {
 					if (i != 0) {
 						typeAppendable.append(", ");
 					}
@@ -1148,7 +1137,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
 		}
 	}
-
+	
 	/* @Nullable */
 	protected ILocationData getLocationWithNewKeyword(XConstructorCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
@@ -1172,12 +1161,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			constructorCallToJavaExpression(expr, b);
 		}
 	}
-
+	
 	/**
-	 * @param isReferenced unused in this context but necessary for dispatch signature
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
 	 */
 	protected void _toJavaStatement(XReturnExpression expr, ITreeAppendable b, boolean isReferenced) {
-		if (expr.getExpression() != null) {
+		if (expr.getExpression()!=null) {
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
 			LightweightTypeReference returnTypeToCompile = findRealReturnType(expr);
@@ -1187,7 +1176,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine().append("return;");
 		}
 	}
-
+	
 	private LightweightTypeReference findRealReturnType(XExpression expression) {
 		if (expression == null)
 			return null;
@@ -1217,7 +1206,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return findRealReturnType(containerExpression);
 	}
-
+	
 	protected void _toJavaExpression(XCastedExpression expr, ITreeAppendable b) {
 		b.append("((");
 		serialize(expr.getType(), expr, b);
@@ -1282,15 +1271,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaSwitchStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
-		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr)
-				.getActualType(expr.getSwitch());
+		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getSwitch());
 		final boolean enumeration = switchType.isSubtypeOf(Enum.class);
 		final boolean needNullCheck = !switchType.isPrimitive();
-
+		
 		final String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
 		internalToJavaStatement(expr.getSwitch(), b, true);
 		final String variableName = declareLocalVariable(expr, b);
-
+		
 		if (needNullCheck) {
 			b.newLine().append("if (").append(variableName).append(" != null) {").increaseIndentation();
 		}
@@ -1298,7 +1286,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCasePart casePart : expr.getCases()) {
 			ITreeAppendable caseAppendable = b.trace(casePart, true);
 			caseAppendable.newLine().increaseIndentation().append("case ");
-
+			
 			ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
 			if (!enumeration) {
 				internalToJavaExpression(casePart.getCase(), conditionAppendable);
@@ -1307,12 +1295,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				JvmEnumerationLiteral enumerationLiteral = (JvmEnumerationLiteral) featureCall.getFeature();
 				conditionAppendable.append(enumerationLiteral.getSimpleName());
 			}
-
+			
 			caseAppendable.append(":");
 			XExpression then = casePart.getThen();
 			if (then != null) {
 				executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
-
+			
 				if (!isEarlyExit(then)) {
 					caseAppendable.newLine().append("break;");
 				}
@@ -1322,7 +1310,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getDefault() != null || enumeration) {
 			ILocationData location = getLocationOfDefault(expr);
 			ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
-
+			
 			defaultAppendable.newLine().increaseIndentation().append("default:");
 
 			if (expr.getDefault() != null) {
@@ -1330,7 +1318,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
 				defaultAppendable.closeScope();
 			}
-
+			
 			if (!isEarlyExit(expr.getDefault())) {
 				defaultAppendable.newLine().append("break;");
 			}
@@ -1345,7 +1333,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ILocationData location = getLocationOfDefault(expr);
 				ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
 				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
-
+				
 				b.decreaseIndentation().newLine().append("}");
 			}
 		}
@@ -1353,7 +1341,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
 		// declare local var for the switch expression
-		String variableName = getSwitchLocalVariableName(expr, b);
+		String variableName = getSwitchLocalVariableName(expr, b); 
 		if (variableName != null) {
 			return variableName;
 		}
@@ -1380,7 +1368,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		XExpression switchExpression = expr.getSwitch();
 		if (b.hasName(switchExpression)) {
 			return b.getName(switchExpression);
-		}
+		} 
 		if (switchExpression instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) switchExpression;
 			JvmIdentifiableElement feature = featureCall.getFeature();
@@ -1391,8 +1379,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return null;
 	}
 
-	protected String declareAndAppendSwitchSyntheticLocalVariable(XSwitchExpression expr, String name,
-			ITreeAppendable b) {
+	protected String declareAndAppendSwitchSyntheticLocalVariable(XSwitchExpression expr, String name, ITreeAppendable b) {
 		JvmFormalParameter declaredParam = expr.getDeclaredParam();
 		if (declaredParam == null) {
 			String declareSyntheticVariable = b.declareSyntheticVariable(expr, name);
@@ -1406,7 +1393,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected String createSwitchLocalVariableName(XSwitchExpression expr) {
 		String name = getSwitchLocalVariableSimpleName(expr);
-		if (name != null) {
+		if (name != null) { 
 			return makeJavaIdentifier(name);
 		}
 		// define synthetic name
@@ -1432,7 +1419,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmFormalParameter declaredParam = expr.getDeclaredParam();
 		if (declaredParam == null) {
 			return getType(expr.getSwitch());
-		}
+		} 
 		return getParameterType(declaredParam);
 	}
 
@@ -1449,8 +1436,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return switchResultName;
 	}
 
-	protected void executeThenPart(XSwitchExpression expr, String switchResultName, XExpression then, ITreeAppendable b,
-			boolean isReferenced) {
+	protected void executeThenPart(XSwitchExpression expr, String switchResultName, XExpression then,
+			ITreeAppendable b, boolean isReferenced) {
 		final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(then);
 		internalToJavaStatement(then, b, canBeReferenced);
 		if (canBeReferenced) {
@@ -1463,10 +1450,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaIfElseStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
 		internalToJavaStatement(expr.getSwitch(), b, true);
-
+		
 		// declare the matched variable outside the pseudo scope
 		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "_matched");
-
+		
 		String variableName = declareLocalVariable(expr, b);
 
 		// declare 'boolean matched' to check whether a case has matched already
@@ -1480,42 +1467,47 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				fallThroughCases.add(casePart);
 				continue;
 			}
-			_toJavaIfStatement(casePart, fallThroughCases, expr, then, b, isReferenced, switchResultName,
-					matchedVariable, variableName, state);
+			_toJavaIfStatement(casePart, fallThroughCases, expr, then, b, isReferenced, switchResultName, matchedVariable, variableName, state);
 		}
 		XExpression then = expr.getDefault();
 		if (then != null) {
 			if (!fallThroughCases.isEmpty()) {
 				XCasePart casePart = fallThroughCases.remove(fallThroughCases.size() - 1);
-				_toJavaIfStatement(casePart, fallThroughCases, expr, then, b, isReferenced, switchResultName,
-						matchedVariable, variableName, state);
+				_toJavaIfStatement(casePart, fallThroughCases, expr, then, b, isReferenced, switchResultName, matchedVariable, variableName, state);
 			}
 			ILocationData location = getLocationOfDefault(expr);
 			ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
 			boolean needsMatcherIf = isReferenced || !allCasesAreExitedEarly(expr);
-			if (needsMatcherIf) {
+			if(needsMatcherIf) {
 				defaultAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
 				defaultAppendable.increaseIndentation();
 			}
 			executeThenPart(expr, switchResultName, then, defaultAppendable, isReferenced);
-			if (needsMatcherIf) {
+			if(needsMatcherIf) {
 				closeBlock(defaultAppendable);
 			}
 		}
 	}
 
-	protected void _toJavaIfStatement(XCasePart casePart, List<XCasePart> fallThroughCases, XSwitchExpression expr,
-			XExpression then, ITreeAppendable b, boolean isReferenced, String switchResultName, String matchedVariable,
-			String variableName, XSwitchExpressionCompilationState state) {
+	protected void _toJavaIfStatement(
+			XCasePart casePart,
+			List<XCasePart> fallThroughCases,
+			XSwitchExpression expr,
+			XExpression then,
+			ITreeAppendable b,
+			boolean isReferenced,
+			String switchResultName,
+			String matchedVariable,
+			String variableName,
+			XSwitchExpressionCompilationState state) {
 		ITreeAppendable caseAppendable = b;
 		if (!fallThroughCases.isEmpty()) {
 			boolean first = true;
 			Iterator<XCasePart> i = fallThroughCases.iterator();
 			boolean caseNeedsIfNotMatchedCheck = state.caseNeedsIfNotMatchedCheck();
-			while (i.hasNext()) {
+			while(i.hasNext()) {
 				XCasePart fallThroughCase = i.next();
-				caseAppendable = appendOpenIfStatement(fallThroughCase, caseAppendable, matchedVariable, variableName,
-						state);
+				caseAppendable = appendOpenIfStatement(fallThroughCase, caseAppendable, matchedVariable, variableName, state);
 				if (first) {
 					first = false;
 					if (!caseNeedsIfNotMatchedCheck) {
@@ -1530,7 +1522,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName, state);
 			appendCloseIfStatement(casePart, caseAppendable, state);
 			closeBlock(caseAppendable);
-
+			
 			caseAppendable.newLine().append("if (").append(matchedVariable).append(") {").increaseIndentation();
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
 			closeBlock(caseAppendable);
@@ -1555,8 +1547,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.newLine().append("}");
 	}
 
-	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable,
-			String variableName, XSwitchExpressionCompilationState state) {
+	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName, XSwitchExpressionCompilationState state) {
 		ITreeAppendable caseAppendable = b.trace(casePart, true);
 		if (state.caseNeedsIfNotMatchedCheck()) {
 			caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
@@ -1568,7 +1559,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			typeGuardAppendable.newLine().append("if (");
 			if (typeGuard instanceof JvmSynonymTypeReference) {
 				Iterator<JvmTypeReference> iter = ((JvmSynonymTypeReference) typeGuard).getReferences().iterator();
-				while (iter.hasNext()) {
+				while(iter.hasNext()) {
 					typeGuardAppendable.append(variableName);
 					typeGuardAppendable.append(" instanceof ");
 					typeGuardAppendable.trace(typeGuard).append(iter.next().getType());
@@ -1600,10 +1591,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 					internalToJavaExpression(casePart.getCase(), conditionAppendable);
 					conditionAppendable.append(")");
 				} else {
-					// use ObjectExtensions rather than a == b || a != null &&
-					// a.equals(b) since
-					// that won't work with primitive types and other
-					// incompatible conditional operands
+					// use ObjectExtensions rather than a == b || a != null && a.equals(b) since
+					// that won't work with primitive types and other incompatible conditional operands
 					conditionAppendable.append(ObjectExtensions.class);
 					conditionAppendable.append(".operator_equals(").append(variableName).append(", ");
 					internalToJavaExpression(casePart.getCase(), conditionAppendable);
@@ -1617,15 +1606,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		// set matched to true
 		return caseAppendable.newLine().append(matchedVariable).append("=true;");
 	}
-
-	protected ITreeAppendable appendCloseIfStatement(XCasePart casePart, ITreeAppendable caseAppendable,
-			XSwitchExpressionCompilationState state) {
+	
+	protected ITreeAppendable appendCloseIfStatement(XCasePart casePart, ITreeAppendable caseAppendable, XSwitchExpressionCompilationState state) {
 		// close surrounding if statements
 		if (state.caseNeedsIfNotMatchedCheck()) {
 			if (casePart.getCase() != null) {
 				caseAppendable.decreaseIndentation().newLine().append("}");
 			}
-
+			
 			if (casePart.getTypeGuard() != null) {
 				caseAppendable.decreaseIndentation().newLine().append("}");
 				caseAppendable.closeScope();
@@ -1639,10 +1627,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		state.finishProcessingCase();
 		return caseAppendable;
 	}
-
+	
 	/**
-	 * Determine whether the given switch expression should be compiled to a
-	 * Java switch for Java version 6 or lower.
+	 * Determine whether the given switch expression should be compiled to a Java switch for Java version 6 or lower. 
 	 */
 	protected boolean isCompiledToJavaSwitch(XSwitchExpression expr) {
 		if (!switchExpressions.isJavaSwitchExpression(expr)) {
@@ -1658,14 +1645,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return true;
 	}
-
+	
 	/**
-	 * Determine whether the given switch expression should be compiled to a
-	 * Java switch for Java version 7 or higher.
+	 * Determine whether the given switch expression should be compiled to a Java switch for Java version 7 or higher.
 	 */
 	protected boolean isCompiledToJava7Switch(XSwitchExpression expr) {
-		// NOTE: This method could be merged with
-		// #isCompiledToJavaSwitch(XSwitchExpression)
+		// NOTE: This method could be merged with #isCompiledToJavaSwitch(XSwitchExpression)
 		if (!switchExpressions.isJava7SwitchExpression(expr)) {
 			return false;
 		}
@@ -1681,16 +1666,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected boolean allCasesAreExitedEarly(XSwitchExpression expr) {
-		for (XCasePart casePart : expr.getCases()) {
-			if (casePart.getThen() != null && !isEarlyExit(casePart.getThen())) {
+		for(XCasePart casePart: expr.getCases()) {
+			if(casePart.getThen() != null && !isEarlyExit(casePart.getThen())) {
 				return false;
 			}
 		}
 		return true;
 	}
-
+	
 	protected boolean isSimpleFeatureCall(XExpression switch1) {
-		if (switch1 instanceof XFeatureCall) {
+		if (switch1 instanceof XFeatureCall)  {
 			XFeatureCall featureCall = (XFeatureCall) switch1;
 			return !(featureCall.getFeature() instanceof JvmOperation);
 		}
@@ -1700,7 +1685,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected Object getSwitchExpressionKey(XSwitchExpression expr) {
 		return new Pair<XSwitchExpression, String>(expr, "key");
 	}
-
+	
 	@Override
 	/* @Nullable */
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
@@ -1742,8 +1727,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalStateException("Switch expression wasn't translated to Java statements before.");
 	}
 
-	protected void _toJavaStatement(final XSynchronizedExpression synchronizedExpression, final ITreeAppendable b,
-			boolean isReferenced) {
+	protected void _toJavaStatement(final XSynchronizedExpression synchronizedExpression, final ITreeAppendable b, boolean isReferenced) {
 		if (isReferenced) {
 			declareSyntheticVariable(synchronizedExpression, b);
 		}
@@ -1751,12 +1735,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		XExpression param = synchronizedExpression.getParam();
 		if (!canCompileToJavaExpression(param, b))
 			internalToJavaStatement(param, synchronizedAppendable, isReferenced);
-
+		
 		synchronizedAppendable.newLine().append("synchronized (");
 		internalToJavaExpression(param, synchronizedAppendable);
 		synchronizedAppendable.append(") {").increaseIndentation();
 		synchronizedAppendable.openPseudoScope();
-
+		
 		XExpression expression = synchronizedExpression.getExpression();
 		internalToJavaStatement(expression, b, isReferenced);
 		if (isReferenced) {
@@ -1764,7 +1748,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToConvertedExpression(expression, b, getLightweightType(synchronizedExpression));
 			b.append(";");
 		}
-
+		
 		synchronizedAppendable.closeScope();
 		synchronizedAppendable.decreaseIndentation().newLine().append("}");
 	}
@@ -1793,8 +1777,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			String variableName = b.declareSyntheticVariable(closure, "_function");
 			b.append(variableName).append(" = ");
 			GeneratorConfig config = b.getGeneratorConfig();
-			if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8)
-					&& canCompileToJavaLambda(closure, type, operation)) {
+			if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 				toLambda(closure, b, type, operation, false);
 			} else {
 				toAnonymousClass(closure, b, type, operation);
@@ -1803,8 +1786,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
-	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b,
-			LightweightTypeReference type, JvmOperation operation) {
+	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type,
+			JvmOperation operation) {
 		b.append("new ");
 		b.append(type);
 		b.append("() {");
@@ -1832,20 +1815,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				if (isVarArgs && i == closureParams.size() - 1 && parameterType.isArray()) {
+				if (isVarArgs && i == closureParams.size()-1 && parameterType.isArray()) {
 					appendClosureParameterVarArgs(closureParam, parameterType.getComponentType(), b);
-				} else {
+				} else {					
 					appendClosureParameter(closureParam, parameterType, b);
 				}
 				if (i != closureParams.size() - 1)
 					b.append(", ");
 			}
 			b.append(")");
-			if (!operation.getExceptions().isEmpty()) {
+			if(!operation.getExceptions().isEmpty()) {
 				b.append(" throws ");
 				for (int i = 0; i < operation.getExceptions().size(); ++i) {
 					serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
-					if (i != operation.getExceptions().size() - 1)
+					if(i != operation.getExceptions().size() -1)
 						b.append(", ");
 				}
 			}
@@ -1854,8 +1837,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (selfVariable == null) {
 				reassignThisInClosure(b, type.getType());
 			} else {
-				// We have already assigned the closure type to _self, so don't
-				// assign it again
+				// We have already assigned the closure type to _self, so don't assign it again
 				reassignThisInClosure(b, null);
 			}
 			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
@@ -1865,11 +1847,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return b.decreaseIndentation().newLine().append("}");
 	}
-
+	
 	protected boolean needSyntheticSelfVariable(XClosure closure, LightweightTypeReference typeRef) {
 		return false;
 	}
-
+	
 	/**
 	 * Append the type parameters of the given operation.
 	 *
@@ -1877,14 +1859,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 * @param operation the source operation.
 	 * @param instantiatedType the type of the operation container.
 	 */
-	protected void appendTypeParameters(ITreeAppendable appendable, JvmOperation operation,
-			LightweightTypeReference instantiatedType) {
+	protected void appendTypeParameters(ITreeAppendable appendable, JvmOperation operation, LightweightTypeReference instantiatedType) {
 		Preconditions.checkArgument(!operation.getTypeParameters().isEmpty(), "the operation is not generic");
-		BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, instantiatedType,
-				overrideTester);
+		BottomResolvedOperation resolvedOperation = new BottomResolvedOperation(operation, instantiatedType, overrideTester);
 		List<JvmTypeParameter> typeParameters = resolvedOperation.getResolvedTypeParameters();
 		appendable.append("<");
-		for (int i = 0; i < typeParameters.size(); i++) {
+		for(int i = 0; i < typeParameters.size(); i++) {
 			if (i != 0) {
 				appendable.append(", ");
 			}
@@ -1893,7 +1873,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			List<LightweightTypeReference> constraints = resolvedOperation.getResolvedTypeParameterConstraints(i);
 			if (!constraints.isEmpty()) {
 				appendable.append(" extends ");
-				for (int j = 0; j < constraints.size(); j++) {
+				for(int j = 0; j < constraints.size(); j++) {
 					if (j != 0) {
 						appendable.append(" & ");
 					}
@@ -1904,8 +1884,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.append("> ");
 	}
 
-	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType,
-			ITreeAppendable appendable) {
+	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {
 		appendable.append("final ");
 		appendable.append(parameterType);
 		appendable.append(" ");
@@ -1913,9 +1892,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String name = appendable.declareVariable(closureParam, proposedParamName);
 		appendable.append(name);
 	}
-
-	protected void appendClosureParameterVarArgs(JvmFormalParameter closureParam,
-			LightweightTypeReference parameterType, ITreeAppendable appendable) {
+	
+	protected void appendClosureParameterVarArgs(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {
 		appendable.append("final ");
 		appendable.append(parameterType);
 		appendable.append("... ");
@@ -1932,40 +1910,28 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				|| declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
 			b.append("@").append(Override.class).newLine();
 		}
-		switch (operation.getVisibility()) {
-		case DEFAULT:
-			break;
-		case PUBLIC:
-			b.append("public ");
-			return;
-		case PROTECTED:
-			b.append("protected ");
-			return;
-		case PRIVATE:
-			b.append("private ");
-			return;
+		switch(operation.getVisibility()) {
+			case DEFAULT: break;
+			case PUBLIC: b.append("public "); return;
+			case PROTECTED: b.append("protected "); return;
+			case PRIVATE: b.append("private "); return;
 		}
 	}
 
-	protected LightweightTypeReference getClosureOperationParameterType(LightweightTypeReference closureType,
-			JvmOperation operation, int i) {
+	protected LightweightTypeReference getClosureOperationParameterType(LightweightTypeReference closureType, JvmOperation operation, int i) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector()
-				.getTypeParameterMapping(closureType);
-		LightweightTypeReference parameterType = owner
-				.toLightweightTypeReference(operation.getParameters().get(i).getParameterType());
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
+		LightweightTypeReference parameterType = owner.toLightweightTypeReference(operation.getParameters().get(i).getParameterType());
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 
-	protected LightweightTypeReference getClosureOperationReturnType(LightweightTypeReference closureType,
-			JvmOperation operation) {
+	protected LightweightTypeReference getClosureOperationReturnType(LightweightTypeReference closureType, JvmOperation operation) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector()
-				.getTypeParameterMapping(closureType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
 		LightweightTypeReference parameterType = owner.toLightweightTypeReference(operation.getReturnType());
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
-
+	
 	protected ITreeAppendable toLambda(XClosure closure, ITreeAppendable b, LightweightTypeReference type,
 			JvmOperation operation, boolean writeExplicitTargetType) {
 		if (writeExplicitTargetType) {
@@ -1981,16 +1947,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				if (isVarArgs && i == closureParams.size() - 1 && parameterType.isArray()) {
+				if (isVarArgs && i == closureParams.size()-1 && parameterType.isArray()) {
 					b.append(parameterType.getComponentType());
 					b.append("...");
 				} else {
 					b.append(parameterType);
 				}
 				b.append(" ");
-				String proposedParamName = makeJavaIdentifier(closureParam.getName());
-				// Usually a normal variable would suffice here. The 'unique
-				// name' variable is a workaround for
+				String proposedParamName = makeJavaIdentifier(closureParam.getName());	
+				// Usually a normal variable would suffice here. The 'unique name' variable is a workaround for
 				// https://bugs.eclipse.org/bugs/show_bug.cgi?id=445949
 				String name = b.declareUniqueNameVariable(closureParam, proposedParamName);
 				b.append(name);
@@ -2010,7 +1975,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return b;
 	}
-
+	
 	protected void _toJavaExpression(final XClosure closure, final ITreeAppendable b) {
 		if (b.hasName(closure)) {
 			b.trace(closure, false).append(getVarName(closure, b));
@@ -2019,8 +1984,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmOperation operation = findImplementingOperation(type);
 			if (operation != null) {
 				GeneratorConfig config = b.getGeneratorConfig();
-				if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8)
-						&& canCompileToJavaLambda(closure, type, operation)) {
+				if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 					toLambda(closure, b.trace(closure, false), type, operation, true);
 				} else {
 					toAnonymousClass(closure, b.trace(closure, false), type, operation);
@@ -2028,15 +1992,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 		}
 	}
-
-	protected boolean canCompileToJavaLambda(XClosure closure, LightweightTypeReference typeRef,
-			JvmOperation operation) {
+	
+	protected boolean canCompileToJavaLambda(XClosure closure, LightweightTypeReference typeRef, JvmOperation operation) {
 		if (!typeRef.isInterfaceType())
 			return false;
-
+		
 		if (!operation.getTypeParameters().isEmpty())
 			return false;
-
+		
 		TreeIterator<EObject> iterator = closure.eAllContents();
 		JvmType jvmType = typeRef.getType();
 		while (iterator.hasNext()) {
@@ -2049,7 +2012,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return true;
 	}
-
+	
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		if (expression instanceof XListLiteral) {
@@ -2116,7 +2079,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
-
+	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b, boolean recursive) {
 		if (expr instanceof XAnnotation) {
@@ -2137,8 +2100,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) expr, b))
 			return true;
 		EObject container = expr.eContainer();
-		if ((container instanceof XVariableDeclaration) || (container instanceof XReturnExpression)
-				|| (container instanceof XThrowExpression)) {
+		if ((container instanceof XVariableDeclaration)
+			|| (container instanceof XReturnExpression) 
+			|| (container instanceof XThrowExpression)) {
 			return false;
 		}
 		if (container instanceof XIfExpression) {
@@ -2180,7 +2144,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		return super.isVariableDeclarationRequired(expr, b, recursive);
 	}
-
+	
 	protected void _toJavaExpression(final XAnnotation annotation, final ITreeAppendable b) {
 		b.append("@");
 		b.append(annotation.getAnnotationType());
@@ -2199,12 +2163,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(pair.getElement().getSimpleName());
 				b.append(" = ");
 				internalToJavaExpression(pair.getValue(), b);
-				if (i < valuePairs.size() - 1) {
+				if (i < valuePairs.size()-1) {
 					b.append(", ");
 				}
 			}
 			b.append(")");
 		}
 	}
-
+	
 }
