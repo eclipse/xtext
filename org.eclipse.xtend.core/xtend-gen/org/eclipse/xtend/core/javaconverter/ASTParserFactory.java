@@ -7,20 +7,14 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
+import com.google.inject.Inject;
 import java.util.Hashtable;
-import java.util.List;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.common.types.descriptions.ClasspathScanner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -109,6 +103,9 @@ public class ASTParserFactory {
     }
   }
   
+  @Inject
+  private ClasspathScanner classpathScanner = new ClasspathScanner();
+  
   protected final String minParserApiLevel = "1.6";
   
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
@@ -143,6 +140,9 @@ public class ASTParserFactory {
         case "1.8":
           _switchResult = 8;
           break;
+        case "11":
+          _switchResult = 11;
+          break;
         default:
           _switchResult = 3;
           break;
@@ -171,14 +171,7 @@ public class ASTParserFactory {
    * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
    */
   protected void provideCustomEnvironment(final ASTParser parser) {
-    final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
-    final Function1<URL, String> _function = (URL it) -> {
-      return it.getFile();
-    };
-    final Function1<String, Boolean> _function_1 = (String it) -> {
-      return Boolean.valueOf(new File(it).exists());
-    };
-    final Iterable<String> cpEntries = IterableExtensions.<String>filter(ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(((URLClassLoader) sysClassLoader).getURLs())), _function), _function_1);
-    parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
+    final String[] cpEntries = this.classpathScanner.getSystemClasspath();
+    parser.setEnvironment(cpEntries, null, null, true);
   }
 }

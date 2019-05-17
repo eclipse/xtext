@@ -14,6 +14,7 @@
 	</classpathentry>
 	<classpathentry kind="src" output="bin/test" path="testdata">
 		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test,longrunning,suites"/>
 		</attributes>
