@@ -17,6 +17,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.findJavaProject
+import static extension org.eclipse.xtext.util.Strings.*
 
 /**
  * Tests for <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=462915">Bug 462915</a>
@@ -56,7 +57,7 @@ class Bug462915Test extends AbstractXtendContentAssistBugTest {
 		@Test
 		def void testName() {
 			
-		}'''.toString, proposal.additionalProposalInfo)
+		}'''.toUnixLineSeparator.toString, proposal.additionalProposalInfo)
 	}
 
 	/**

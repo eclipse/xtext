@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -119,6 +120,6 @@ public abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
     Assert.assertTrue(builder.isValid());
     final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
     builder.build(appendable);
-    Assert.assertEquals(expectedCode, appendable.toString());
+    Assert.assertEquals(Strings.toUnixLineSeparator(expectedCode), appendable.toString());
   }
 }

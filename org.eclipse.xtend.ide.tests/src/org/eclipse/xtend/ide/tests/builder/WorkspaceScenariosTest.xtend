@@ -190,7 +190,7 @@ class WorkspaceScenariosTest {
 			val IResourceVisitor visitor = [
 				if (it instanceof IFile) {
 					val path = it.projectRelativePath.removeFirstSegments(1).toString
-					if (!filter.apply(path))
+					if (!filter.apply(path) && !listOfContents.containsKey(path))
 						listOfContents.put(path , contents)
 				}
 				return true

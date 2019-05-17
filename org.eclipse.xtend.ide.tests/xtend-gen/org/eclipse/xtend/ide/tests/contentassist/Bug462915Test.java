@@ -19,6 +19,7 @@ import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTe
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -76,7 +77,7 @@ public class Bug462915Test extends AbstractXtendContentAssistBugTest {
       _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("}");
-      Assert.assertEquals(_builder_1.toString(), proposal.getAdditionalProposalInfo());
+      Assert.assertEquals(Strings.toUnixLineSeparator(_builder_1).toString(), proposal.getAdditionalProposalInfo());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

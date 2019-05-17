@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
+import static extension org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.junit.AfterClass
 
@@ -76,6 +77,6 @@ abstract class AbstractBuilderTest extends AbstractXtendUITestCase {
 		assertTrue(builder.valid)
 		val appendable = new StringBuilderBasedAppendable
 		builder.build(appendable)
-		assertEquals(expectedCode, appendable.toString)
+		assertEquals(expectedCode.toUnixLineSeparator, appendable.toString)
 	}
 }

@@ -9,6 +9,8 @@ package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
 
+import static extension org.eclipse.xtext.util.Strings.toPlatformLineSeparator;
+
 /**
  * @author Christian Dietrich - Initial contribution and API
  */
@@ -22,7 +24,7 @@ class Bug440858Test extends AbstractXtendContentAssistBugTest {
 				}
 			}
 		''')
-			.assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t")
+			.assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t".toPlatformLineSeparator)
 	}
 	
 	@Test def void test_02() throws Exception {
@@ -33,7 +35,7 @@ class Bug440858Test extends AbstractXtendContentAssistBugTest {
 				}
 			}
 		''')
-			.assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t")
+			.assertProposalAtCursor("\n\t\toverride toString() {\n\t\t\tsuper.toString()\n\t\t}\n\t\t".toPlatformLineSeparator)
 	}
 	
 }

@@ -18,7 +18,7 @@ import org.eclipse.core.resources.IProject
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import org.eclipse.jdt.core.JavaCore
-
+import static extension org.eclipse.xtext.util.Strings.*;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -62,7 +62,7 @@ class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
 		assertEquals('''
 			package foo;
 			public class MyClass{
-			}'''.toString,newWorkingCopyOwner.findSource('MyClass','foo'))
+			}'''.toUnixLineSeparator.toString,newWorkingCopyOwner.findSource('MyClass','foo'))
 	}
 	
 	protected def newWorkingCopyOwner() {

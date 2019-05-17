@@ -286,9 +286,7 @@ public class WorkspaceScenariosTest {
         final IResourceVisitor _function = (IResource it) -> {
           if ((it instanceof IFile)) {
             final String path = ((IFile)it).getProjectRelativePath().removeFirstSegments(1).toString();
-            Boolean _apply = filter.apply(path);
-            boolean _not = (!(_apply).booleanValue());
-            if (_not) {
+            if (((!(filter.apply(path)).booleanValue()) && (!listOfContents.containsKey(path)))) {
               listOfContents.put(path, ((IFile)it).getContents());
             }
           }
