@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.inject.Inject;
 import java.util.Hashtable;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -103,9 +102,6 @@ public class ASTParserFactory {
     }
   }
   
-  @Inject
-  private ClasspathScanner classpathScanner = new ClasspathScanner();
-  
   protected final String minParserApiLevel = "1.6";
   
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
@@ -171,7 +167,8 @@ public class ASTParserFactory {
    * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
    */
   protected void provideCustomEnvironment(final ASTParser parser) {
-    final String[] cpEntries = this.classpathScanner.getSystemClasspath();
+    final ClasspathScanner classpathScanner = new ClasspathScanner();
+    final String[] cpEntries = classpathScanner.getSystemClasspath();
     parser.setEnvironment(cpEntries, null, null, true);
   }
 }

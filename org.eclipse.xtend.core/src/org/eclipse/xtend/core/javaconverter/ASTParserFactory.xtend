@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.javaconverter
 
-import com.google.inject.Inject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.lib.annotations.Data
@@ -17,9 +16,6 @@ import org.eclipse.xtext.common.types.descriptions.ClasspathScanner
  * @author dhuebner - Initial contribution and API
  */
 class ASTParserFactory {
-
-	@Inject
-	ClasspathScanner classpathScanner = new ClasspathScanner()
 
 	protected final String minParserApiLevel = "1.6"
 
@@ -69,6 +65,7 @@ class ASTParserFactory {
 	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
 	 */
 	protected def provideCustomEnvironment(ASTParser parser) {
+		val ClasspathScanner classpathScanner = new ClasspathScanner()
 		val String[] cpEntries = classpathScanner.getSystemClasspath()
 		parser.setEnvironment(cpEntries, null, null, true)
 	}
