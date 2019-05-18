@@ -637,13 +637,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		ReturnValue returnValue = null;
 		Map<String, Boolean> resIsInit = new HashMap<String, Boolean>();
 		List<XVariableDeclaration> resources = tryCatchFinally.getResources();
-
+		List<EvaluationException> caughtExceptions = newArrayList();
 		// Resources
 		try {
 			for (XVariableDeclaration res : resources) {
 				resIsInit.put(res.getName(), false);
 				result = internalEvaluate(res, context, indicator);
-				// Remember for automatic close which resources are initialised
+				// Remember for automatic close which resources are initialized
 				resIsInit.put(res.getName(), true);
 			}
 			// Expression Body
@@ -668,9 +668,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				caught = true;
 				break;
 			}
-			// Throw uncaught exception
-			if (!caught)
-					throw evaluationException;
+			// Save uncaught exception
+			if(!caught) caughtExceptions.add(evaluationException);
 		}
 
 		// finally expressions ...
@@ -684,24 +683,33 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 		// ... prompted by try with resources (automatic close)
 		if (!resources.isEmpty()) {
-			try {
-				for (int i = resources.size() - 1; i >= 0; i--) {
-					XVariableDeclaration resource = resources.get(i);
-					// Only close resources that are instantiated (= avoid
-					// NullPOinterException)
-					if (resIsInit.get(resource.getName())) {
-						// Find close method for resource
-						JvmOperation close = findCloseMethod(resource);
-						// Invoke close on resource
-						if (close != null)
-							invokeOperation(close, context.getValue(QualifiedName.create(resource.getSimpleName())),
+			for (int i = resources.size() - 1; i >= 0; i--) {
+				XVariableDeclaration resource = resources.get(i);
+				// Only close resources that are instantiated (= avoid
+				// NullPointerException)
+				if (resIsInit.get(resource.getName())) {
+					// Find close method for resource
+					JvmOperation close = findCloseMethod(resource);
+					// Invoke close on resource
+					if (close != null) {
+						// Invoking the close method might throw
+						// a EvaluationException. Hence, we collect those thrown
+						// EvaluationExceptions and propagate them later on.
+						try {
+							invokeOperation(close,
+									context.getValue(QualifiedName.create(resource.getSimpleName())),
 									Collections.emptyList());
+						} catch (EvaluationException t) {
+							caughtExceptions.add(t);
+						}
 					}
 				}
-			} catch (EvaluationException e) {
-				throw e;
 			}
 		}
+		
+		// Throw caught exceptions if there are any
+		if (!caughtExceptions.isEmpty()) throw caughtExceptions.get(0);
+					
 		// throw return value from expression block after resources are closed
 		if (returnValue != null)
 			throw returnValue;

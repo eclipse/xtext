@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.JavaVersion.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -465,7 +466,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XTryCatchFinallyExpression expr, ITreeAppendable outerAppendable, boolean isReferenced) {
 		ITreeAppendable b = outerAppendable.trace(expr, false);
-		boolean nativeTryWithResources = isAtLeast(b, JAVA7); // If Java 7 or better: use Java's try with resources
+		// If Java 7 or better: use Java's try-with-resources
+		boolean nativeTryWithResources = isAtLeast(b, JAVA7);
 		List<XVariableDeclaration> resources = expr.getResources();
 		Map<String, LightweightTypeReference> resourceMap = new HashMap<String, LightweightTypeReference>();
 		boolean isTryWithResources = !resources.isEmpty();
@@ -473,14 +475,27 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (isReferenced && !isPrimitiveVoid(expr)) {
 			declareSyntheticVariable(expr, b);
 		}
-		
+
+		String throwablesStore = b.declareSyntheticVariable(Tuples.pair(expr, "_caughtThrowables"), "_ts");
+		if (isTryWithResources && !nativeTryWithResources) {
+			// The try block and/or invoking the close method later on might
+			// throw. Hence, we collect those Throwables and propagate them
+			// later on.
+			b.newLine().append(List.class);
+			b.append("<").append(Throwable.class).append("> ");
+			b.append(throwablesStore);
+			b.append(" = new ");
+			b.append(ArrayList.class);
+			b.append("<").append(Throwable.class).append(">();");
+		}
+
 		b.openPseudoScope();
-		// Resources    declared before the try-statement, for java versions < 7
+		// Resources declared before the try-statement, for java versions < 7
 		if (isTryWithResources && !nativeTryWithResources) {
 			for (XVariableDeclaration res : resources) {
 				b.newLine();
-				// resource has to be declared and initialised with null before try
-				// and with real AutoClosable implementation within try
+				// resource has to be declared and initialized with null before
+				// try and with real AutoClosable implementation within try
 				// has to be var not val (final)
 				res.setWriteable(true);
 				LightweightTypeReference type = appendVariableTypeAndName(res, b);
@@ -491,8 +506,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 		// Try
 		b.newLine().append("try ");
-		
-		// Resources    for java versions >= 7
+
+		// Resources for java versions >= 7
 		// constructed with Java's try with resources
 		if (isTryWithResources && nativeTryWithResources) {
 			int isLast = resources.size();
@@ -510,7 +525,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 		b.append("{").increaseIndentation();
 
-		// Resources    for java versions < 7
+		// Resources for java versions < 7
 		// constructed at the beginning of try-statement
 		if (isTryWithResources && !nativeTryWithResources) {
 			for (XVariableDeclaration res : resources) {
@@ -542,13 +557,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		final EList<XCatchClause> catchClauses = expr.getCatchClauses();
 		final XExpression finallyExp = expr.getFinallyExpression();
 		boolean isTryWithResources = !expr.getResources().isEmpty();
-		
+		// If Java 7 or better: use Java's try-with-resources
+		boolean nativeTryWithResources = isAtLeast(b, JAVA7);
+		final String throwablesStore = b.getName(Tuples.pair(expr, "_caughtThrowables"));
+
 		// Catch
 		if (!catchClauses.isEmpty()) {
-			String variable = b.declareSyntheticVariable(Tuples.pair(expr, "_catchedThrowable"), "_t");
+			String variable = b.declareSyntheticVariable(Tuples.pair(expr, "_caughtThrowable"), "_t");
 			b.append(" catch (final Throwable ").append(variable).append(") ");
-			b.append("{").increaseIndentation();
-			b.newLine();
+			b.append("{").increaseIndentation().newLine();
 			Iterator<XCatchClause> iterator = catchClauses.iterator();
 			while (iterator.hasNext()) {
 				XCatchClause catchClause = iterator.next();
@@ -559,30 +576,37 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 			b.append(" else {");
-			b.increaseIndentation();
-			final JvmType sneakyThrowType = findKnownTopLevelType(Exceptions.class, expr);
-			if (sneakyThrowType == null) {
-				b.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
-			} else {
-				b.newLine().append("throw ");
-				b.append(sneakyThrowType);
-				b.append(".sneakyThrow(");
-				b.append(variable);
-				b.append(");");
+			b.increaseIndentation().newLine();
+			if (isTryWithResources && !nativeTryWithResources) {
+				b.append(throwablesStore + ".add(" + variable + ");").newLine();
 			}
+			appendSneakyThrow(expr, b, variable);
 			closeBlock(b);
 			closeBlock(b);
 		}
 
 		// Finally
-		boolean nativeTryWithResources = isAtLeast(b, JAVA7);
 		if (finallyExp != null || (!nativeTryWithResources && isTryWithResources)) {
 			b.append(" finally {").increaseIndentation();
 			if (finallyExp != null)
 				internalToJavaStatement(finallyExp, b, false);
 			if (!nativeTryWithResources && isTryWithResources)
-				appendFinallyWithResources(expr.getResources(), b);
+				appendFinallyWithResources(expr, b);
 			b.decreaseIndentation().newLine().append("}");
+		}
+	}
+
+	protected void appendSneakyThrow(XTryCatchFinallyExpression expr, ITreeAppendable b, String variable) {
+		final JvmType sneakyThrowType = findKnownTopLevelType(Exceptions.class, expr);
+		if (sneakyThrowType == null) {
+			b.append("COMPILE ERROR : '" + Exceptions.class.getCanonicalName()
+					+ "' could not be found on the classpath!");
+		} else {
+			b.append("throw ");
+			b.append(sneakyThrowType);
+			b.append(".sneakyThrow(");
+			b.append(variable);
+			b.append(");");
 		}
 	}
 
@@ -644,11 +668,36 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	/**
 	 * @since 2.18
 	 */
-	protected void appendFinallyWithResources(List<XVariableDeclaration> resources, ITreeAppendable b) {
-		for (int i = resources.size() - 1; i >= 0; i--) {
-			XVariableDeclaration res = resources.get(i);
-			String resName = getVarName(res, b);
-			b.newLine().append("if (" + resName + " != null) ").append(resName + ".close();");
+	protected void appendFinallyWithResources(XTryCatchFinallyExpression expr, ITreeAppendable b) {
+		final String throwablesStore = b.getName(Tuples.pair(expr, "_caughtThrowables"));
+		List<XVariableDeclaration> resources = expr.getResources();
+		if (!resources.isEmpty()) {
+			for (int i = resources.size() - 1; i >= 0; i--) {
+				b.openPseudoScope();
+				XVariableDeclaration res = resources.get(i);
+				String resName = getVarName(res, b);
+				b.newLine().append("if (" + resName + " != null) {");
+				b.increaseIndentation();
+				b.newLine().append("try {");
+				b.increaseIndentation();
+				b.newLine().append(resName + ".close();");
+				// close inner try
+				closeBlock(b);
+				String throwable = b.declareSyntheticVariable(Tuples.pair(res, "_caughtThrowable"), "_t");
+				b.append(" catch (").append(Throwable.class).append(" " + throwable + ") {");
+				b.increaseIndentation();
+				b.newLine().append(throwablesStore);
+				b.append(".add(" + throwable + ");");
+				// close inner catch
+				closeBlock(b);
+				// close if != null check
+				closeBlock(b);
+				b.closeScope();
+			}
+			b.newLine().append("if(!");
+			b.append(throwablesStore);
+			b.append(".isEmpty()) ");
+			appendSneakyThrow(expr, b, throwablesStore + ".get(0)");
 		}
 	}
 
@@ -657,10 +706,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 */
 	protected boolean isAtLeast(ITreeAppendable b, JavaVersion version) {
 		GeneratorConfig config = b.getGeneratorConfig();
-		if (config != null && config.getJavaSourceVersion().isAtLeast(version))
-			return true;
-		else
-			return false;
+		return config != null && config.getJavaSourceVersion().isAtLeast(version);
 	}
 
 	protected void _toJavaExpression(XTryCatchFinallyExpression expr, ITreeAppendable b) {

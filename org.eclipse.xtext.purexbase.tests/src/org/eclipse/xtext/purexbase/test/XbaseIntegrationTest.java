@@ -172,6 +172,24 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	public void testTryWithResources_userClassExceptionOnClose() throws Exception {
 		super.testTryWithResources_userClassExceptionOnClose();
 	}
+	
+	@Test
+	@Override
+	public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1() throws Exception {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose1();	
+	}
+	
+	@Test
+	@Override
+	public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2() throws Exception {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose2();	
+	}
+	
+	@Test
+	@Override
+	public void testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3() throws Exception {
+		super.testTryWithResources_userClassExceptionOnCloseStillCallEveryClose3();
+	}
 
 	@Test
 	@Override
