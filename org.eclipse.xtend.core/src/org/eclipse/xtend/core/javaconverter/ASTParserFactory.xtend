@@ -7,21 +7,27 @@
  */
 package org.eclipse.xtend.core.javaconverter
 
-import com.google.inject.Inject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.descriptions.ClasspathScanner
+import com.google.inject.Inject
+import com.google.inject.Injector
+import com.google.inject.Guice
 
 /** 
  * @author dhuebner - Initial contribution and API
  */
 class ASTParserFactory {
 
-	@Inject
-	ClasspathScanner classpathScanner = new ClasspathScanner()
-
 	protected final String minParserApiLevel = "1.6"
+	
+	/*
+	 * Implementation note: We want to be able to specialize the used
+	 * ClasspathScanner but cannot easily put it on method signatures 
+	 * here because of the build path configuration
+	 */
+	@Inject Injector injector = Guice.createInjector()
 
 	def final protected createDefaultJavaParser(String javaVersion) {
 		var ASTParser parser
@@ -69,6 +75,7 @@ class ASTParserFactory {
 	 * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
 	 */
 	protected def provideCustomEnvironment(ASTParser parser) {
+		val ClasspathScanner classpathScanner = injector.getInstance(ClasspathScanner)
 		val String[] cpEntries = classpathScanner.getSystemClasspath()
 		parser.setEnvironment(cpEntries, null, null, true)
 	}
