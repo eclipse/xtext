@@ -11,6 +11,7 @@ dependencies {
 	compile "org.eclipse.jdt:org.eclipse.jdt.compiler.tool"
 	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
 	optional "org.apache.ant:ant:$versions.ant"
+	optional 'io.github.classgraph:classgraph'
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
