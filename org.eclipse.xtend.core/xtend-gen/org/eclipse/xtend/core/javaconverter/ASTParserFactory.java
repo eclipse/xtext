@@ -7,6 +7,9 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.Hashtable;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -104,6 +107,14 @@ public class ASTParserFactory {
   
   protected final String minParserApiLevel = "1.6";
   
+  /**
+   * Implementation note: We want to be able to specialize the used
+   * ClasspathScanner but cannot easily put it on method signatures
+   * here because of the build path configuration
+   */
+  @Inject
+  private Injector injector = Guice.createInjector();
+  
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
     ASTParser parser = null;
     final Hashtable<String, String> options = JavaCore.getOptions();
@@ -167,7 +178,7 @@ public class ASTParserFactory {
    * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
    */
   protected void provideCustomEnvironment(final ASTParser parser) {
-    final ClasspathScanner classpathScanner = new ClasspathScanner();
+    final ClasspathScanner classpathScanner = this.injector.<ClasspathScanner>getInstance(ClasspathScanner.class);
     final String[] cpEntries = classpathScanner.getSystemClasspath();
     parser.setEnvironment(cpEntries, null, null, true);
   }
