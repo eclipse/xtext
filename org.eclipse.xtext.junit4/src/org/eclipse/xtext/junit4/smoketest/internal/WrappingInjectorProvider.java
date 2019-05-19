@@ -37,7 +37,7 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 
 	private final IInjectorProvider delegate;
 	private final Injector injector;
-	private final GlobalStateMemento stateBeforeInjectorCreation;
+	private GlobalStateMemento stateBeforeInjectorCreation;
 	private final GlobalStateMemento stateAfterInjectorCreation;
 
 	public WrappingInjectorProvider(IInjectorProvider delegate) {
@@ -46,6 +46,7 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 		this.injector = createInjector();
 		registerFactory(injector);
 		stateAfterInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
+		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 	
 	private void registerFactory(Injector injector) {
@@ -87,10 +88,12 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
+		stateBeforeInjectorCreation = null;
 	}
 
 	@Override
 	public void setupRegistry() {
+		stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 		stateAfterInjectorCreation.restoreGlobalState();
 	}
 
