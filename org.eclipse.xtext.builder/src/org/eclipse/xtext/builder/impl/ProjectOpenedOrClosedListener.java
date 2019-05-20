@@ -263,14 +263,20 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 		if (task.isEmpty()) {
 			return;
 		}
-		String projectNames = Joiner.on(", ").join(task.getProjectNames());
+		ImmutableSet<String> participatingProjectNames = task.getProjectNames();
+		String projectNames = Joiner.on(", ").join(participatingProjectNames);
 		String taskName = Messages.ProjectOpenedOrClosedListener_RemovingProject + projectNames
 				+ Messages.ProjectOpenedOrClosedListener_FromIndex;
 		monitor.setTaskName(taskName);
 		SubMonitor progress = SubMonitor.convert(monitor, 1);
 		try {
 			ResourceSet resourceSet = createResourceSet();
-			BuildData buildData = new BuildData(null, resourceSet, task.getToBeBuilt(), queuedBuildData, false,
+			BuildData buildData = new BuildData(
+					participatingProjectNames,
+					resourceSet,
+					task.getToBeBuilt(),
+					queuedBuildData,
+					false,
 					BuildManagerAccess::requestBuild);
 			getBuilderState().update(buildData, progress.newChild(1));
 		} catch (Error | RuntimeException e) {

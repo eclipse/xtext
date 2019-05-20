@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -319,15 +320,62 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		progress.worked(2);
 		Task task = closedProjectsQueue.exhaust();
 		try {
-			addInfosFromTask(task, toBeBuilt);
-			doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
+			addInfosFromTaskAndBuild(task, toBeBuilt, BuildType.INCREMENTAL, progress.split(8));
 		} catch(Exception e) {
 			task.reschedule();
 			throw e;
 		}
 	}
 
-	private void addInfosFromTask(Task task, final ToBeBuilt toBeBuilt) {
+	private static Boolean mustCallDeprecatedDoBuild = null;
+	private static boolean wasDeprecationWarningLogged = false;
+	
+	/**
+	 * @since 2.18
+	 */
+	protected void addInfosFromTaskAndBuild(Task task, final ToBeBuilt toBeBuilt, BuildType buildType, IProgressMonitor monitor)
+			throws CoreException {
+		addInfosFromTask(task, toBeBuilt);
+		if (XtextBuilder.class.equals(getClass())) {
+			doBuild(toBeBuilt, task.getProjectNames(), monitor, buildType);	
+		} else {
+			if (mustCallDeprecatedDoBuild == null) {
+				mustCallDeprecatedDoBuild = isDoBuildSpecialized(getClass());
+				if (mustCallDeprecatedDoBuild.booleanValue() && !wasDeprecationWarningLogged) {
+					log.warn("XtextBuilder is specialized and overrides deprecated method doBuild(..). The implementation should be adjusted.");
+					wasDeprecationWarningLogged = true;
+				}
+			}
+			if (mustCallDeprecatedDoBuild.booleanValue()) {
+				doBuild(toBeBuilt, monitor, buildType);
+			} else {
+				doBuild(toBeBuilt, task.getProjectNames(), monitor, buildType);
+			}
+		}
+		
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected boolean isDoBuildSpecialized(Class<?> c) {
+		try {
+			// if the method is not present, we'll go into the catch clause
+			c.getDeclaredMethod("doBuild", ToBeBuilt.class, IProgressMonitor.class, BuildType.class);
+			return !XtextBuilder.class.equals(c);
+		} catch (Exception e) {
+			Class<?> superclass = c.getSuperclass();
+			if (superclass == null) {
+				return false;
+			}
+			return isDoBuildSpecialized(superclass);
+		}
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected void addInfosFromTask(Task task, final ToBeBuilt toBeBuilt) {
 		toBeBuilt.getToBeDeleted().addAll(task.getToBeBuilt().getToBeDeleted());
 		toBeBuilt.getToBeUpdated().addAll(task.getToBeBuilt().getToBeUpdated());
 	}
@@ -336,19 +384,32 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
 	 *        reported and that the operation cannot be cancelled.
+	 * @deprecated call {@link #doBuild(ToBeBuilt, Set, IProgressMonitor, BuildType)} instead.
 	 */
+	@Deprecated
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		doBuild(toBeBuilt, Collections.emptySet(), monitor, type);
+	}
+	
+	/**
+	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
+	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
+	 *        reported and that the operation cannot be cancelled.
+	 *        
+	 * @since 2.18
+	 */
+	protected void doBuild(ToBeBuilt toBeBuilt, Set<String> participatingProjects, IProgressMonitor monitor, BuildType type) throws CoreException {
 		buildLogger.log("Building " + getProject().getName());
 		// return early if there's nothing to do.
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild).isEmpty())
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, participatingProjects).isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, participatingProjects);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
@@ -388,11 +449,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 		Task task = closedProjectsQueue.exhaust();
 		try {
-			addInfosFromTask(task, toBeBuilt);
-			doBuild(toBeBuilt, progress.split(8), 
-				isRecoveryBuild 
+			addInfosFromTaskAndBuild(task, toBeBuilt, isRecoveryBuild
 					? BuildType.RECOVERY 
-					: BuildType.FULL);
+					: BuildType.FULL, progress.split(8));
 		} catch(Exception e) {
 			task.reschedule();
 			throw e;

@@ -14,6 +14,9 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,6 +26,15 @@ public class BuildData {
 	private final ToBeBuilt toBeBuilt;
 	private final QueuedBuildData queuedBuildData;
 	private final String projectName;
+	/**
+	 * If projects are deleted from the workspace, they are not participating in a
+	 * dedicated build but may be processed along with other project builds.
+	 * 
+	 * The participating projects may be obtained via {@link #getParticipatingProjectNames()}
+	 * 
+	 * @since 2.18
+	 */
+	private final ImmutableSet<String> participatingProjectNames;
 	private final ResourceSet resourceSet;
 	private final boolean indexingOnly;
 	private final SourceLevelURICache sourceLevelURICache;
@@ -45,7 +57,26 @@ public class BuildData {
 	 * @since 2.17
 	 */
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor) {
+		this(projectName, resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, projectName == null ? ImmutableSet.of() : ImmutableSet.of(projectName));
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	public BuildData(Set<String> participatingProjectNames, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor) {
+		this(participatingProjectNames.iterator().next(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, participatingProjectNames);
+	}
+	
+	/**
+	 * @since 2.18
+	 */
+	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor, Set<String> participatingProjectNames) {
 		this.projectName = projectName;
+		if (participatingProjectNames.contains(projectName) || projectName == null) {
+			this.participatingProjectNames = ImmutableSet.copyOf(participatingProjectNames);
+		} else {
+			this.participatingProjectNames = ImmutableSet.<String>builder().add(projectName).addAll(participatingProjectNames).build();
+		}
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
@@ -97,6 +128,18 @@ public class BuildData {
 	
 	public String getProjectName() {
 		return projectName;
+	}
+	
+	/**
+	 * If projects are deleted from the workspace, they are not participating in a
+	 * dedicated build but may be processed along with other project builds.
+	 * 
+	 * The set contains all the participating projects.
+	 * 
+	 * @since 2.18
+	 */
+	public ImmutableSet<String> getParticipatingProjectNames() {
+		return participatingProjectNames;
 	}
 
 	public SourceLevelURICache getSourceLevelURICache() {
