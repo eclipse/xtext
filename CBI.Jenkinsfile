@@ -17,6 +17,13 @@ spec:
   - name: xtext-buildenv
     image: docker.io/smoht/xtext-buildenv:0.7
     tty: true
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1"
+      requests:
+        memory: "2Gi"
+        cpu: "1"
     volumeMounts:
     - name: settings-xml
       mountPath: /home/jenkins/.m2/settings.xml
@@ -45,6 +52,7 @@ spec:
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
     disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
   }
 
   // https://jenkins.io/doc/book/pipeline/syntax/#triggers
@@ -63,7 +71,6 @@ spec:
     stage('Gradle Build') {
       steps {
         sh './1-gradle-build.sh'
-        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
       }
     }
     
@@ -75,6 +82,9 @@ spec:
   }
 
   post {
+    always {
+      junit testResults: '**/build/test-results/test/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
@@ -83,6 +93,8 @@ spec:
         def envName = ''
         if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
           envName = ' (JIPP)'
+        } else if (env.JENKINS_URL.contains('ci-staging.eclipse.org/xtext')) {
+          envName = ' (JIRO)'
         } else if (env.JENKINS_URL.contains('jenkins.eclipse.org/xtext')) {
           envName = ' (CBI)'
         } else if (env.JENKINS_URL.contains('typefox.io')) {
