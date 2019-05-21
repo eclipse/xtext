@@ -3,6 +3,7 @@ pipeline {
 
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
+    timeout(time: 45, unit: 'MINUTES')
   }
 
   tools { 
@@ -19,7 +20,6 @@ pipeline {
     stage('Gradle Build') {
       steps {
         sh './1-gradle-build.sh'
-        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
       }
     }
 
@@ -34,7 +34,6 @@ pipeline {
         stage('Long Running Tests') {
           steps {
             sh './3-gradle-longrunning-tests.sh'
-            step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
           }
         }
       }
@@ -42,6 +41,9 @@ pipeline {
   }
 
   post {
+    always {
+      junit testResults: '**/build/test-results/test/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
