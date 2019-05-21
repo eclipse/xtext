@@ -3,6 +3,8 @@ pipeline {
 
   options {
     buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
   }
 
   tools { 
@@ -19,7 +21,6 @@ pipeline {
     stage('Gradle Build') {
       steps {
         sh './1-gradle-build.sh'
-        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
       }
     }
     
@@ -31,6 +32,9 @@ pipeline {
   }
 
   post {
+    always {
+      junit testResults: '**/build/test-results/test/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
