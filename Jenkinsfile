@@ -2,8 +2,9 @@ pipeline {
   agent any
 
   options {
-    buildDiscarder(logRotator(numToKeepStr:'15'))
+    buildDiscarder(logRotator(numToKeepStr:'5'))
     disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
   }
   
   stages {
@@ -16,12 +17,14 @@ pipeline {
     stage('Gradle Build') {
       steps {
         sh './1-gradle-build.sh'
-        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
       }
     }
   }
 
   post {
+    always {
+      junit testResults: '**/build/test-results/test/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/maven-repository/**'
     }
