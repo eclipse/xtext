@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -20,6 +22,7 @@ import org.eclipse.search.ui.ISearchResultPage;
 import org.eclipse.search.ui.ISearchResultViewPart;
 import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -55,6 +58,8 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	private ISearchResultViewPart part;
 
+	private MenuManager menu;
+
 	private IAction showNextAction;
 
 	private IAction showPreviousAction;
@@ -62,6 +67,10 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private IAction expandAllAction;
 
 	private IAction collapseAllAction;
+
+	private IAction copyAction;
+
+	private IAction removeSelectedMatchesAction;
 
 	@Inject
 	private ReferenceSearchResultContentProvider contentProvider;
@@ -71,7 +80,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	@Inject
 	private ReferenceSearchViewSorter sorter;
-	
+
 	@Inject
 	private NavigationService navigationService;
 
@@ -84,6 +93,8 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		showNextAction = new ReferenceSearchViewPageActions.ShowNext(this);
 		expandAllAction = new ReferenceSearchViewPageActions.ExpandAll(this);
 		collapseAllAction = new ReferenceSearchViewPageActions.CollapseAll(this);
+		copyAction = new ReferenceSearchViewPageActions.Copy(this);
+		removeSelectedMatchesAction = new ReferenceSearchViewPageActions.RemoveSelectedMatchesAction(this);
 	}
 
 	@Override
@@ -162,6 +173,23 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		isBusyShowing = false;
 		queryListener = createQueryListener();
 		NewSearchUI.addQueryListener(queryListener);
+
+		menu = new MenuManager("#PopUp"); //$NON-NLS-1$
+		menu.setRemoveAllWhenShown(true);
+		menu.setParent(getSite().getActionBars().getMenuManager());
+		menu.addMenuListener(mgr -> {
+			fillContextMenu(mgr);
+			part.fillContextMenu(mgr);
+		});
+
+		viewer.getControl().setMenu(menu.createContextMenu(viewer.getControl()));
+		viewer.getControl().addKeyListener(KeyListener.keyPressedAdapter(e -> {
+			if (e.keyCode == SWT.DEL) {
+				removeSelectedMatchesAction.run();
+			} else if ((e.stateMask | SWT.COMMAND) != 0 && e.keyCode == 'c') {
+				copyAction.run();
+			}
+		}));
 	}
 
 	protected OpenAndLinkWithEditorHelper createOpenAndLinkWithEditorHandler() {
@@ -171,7 +199,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 			public void apply(OpenEvent openEvent) {
 				handleOpen(openEvent);
 			}
-			
+
 		});
 	}
 
@@ -233,6 +261,14 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		tbm.appendToGroup(IContextMenuConstants.GROUP_VIEWER_SETUP, collapseAllAction);
 	}
 
+	/**
+	 * @since 2.18
+	 */
+	protected void fillContextMenu(IMenuManager mgr) {
+		mgr.add(copyAction);
+		mgr.add(removeSelectedMatchesAction);
+	}
+
 	protected void handleOpen(OpenEvent openEvent) {
 		navigationService.open(openEvent);
 	}
@@ -251,6 +287,20 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	public TreeViewer getViewer() {
 		return viewer;
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected ReferenceSearchResultContentProvider getContentProvider() {
+		return contentProvider;
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected ReferenceSearchResultLabelProvider getLabelProvider() {
+		return labelProvider;
 	}
 
 }
