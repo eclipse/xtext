@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -30,11 +31,11 @@ public class BuildData {
 	 * If projects are deleted from the workspace, they are not participating in a
 	 * dedicated build but may be processed along with other project builds.
 	 * 
-	 * The participating projects may be obtained via {@link #getParticipatingProjectNames()}
+	 * The removed projects may be obtained via {@link #getRemovedProjects()}
 	 * 
 	 * @since 2.18
 	 */
-	private final ImmutableSet<String> participatingProjectNames;
+	private final ImmutableSet<String> removedProjects;
 	private final ResourceSet resourceSet;
 	private final boolean indexingOnly;
 	private final SourceLevelURICache sourceLevelURICache;
@@ -57,26 +58,15 @@ public class BuildData {
 	 * @since 2.17
 	 */
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor) {
-		this(projectName, resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, projectName == null ? ImmutableSet.of() : ImmutableSet.of(projectName));
+		this(projectName, resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, ImmutableSet.of());
 	}
 
 	/**
 	 * @since 2.18
 	 */
-	public BuildData(Set<String> participatingProjectNames, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor) {
-		this(participatingProjectNames.iterator().next(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, participatingProjectNames);
-	}
-	
-	/**
-	 * @since 2.18
-	 */
-	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor, Set<String> participatingProjectNames) {
+	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor, Set<String> removedProjects) {
 		this.projectName = projectName;
-		if (participatingProjectNames.contains(projectName) || projectName == null) {
-			this.participatingProjectNames = ImmutableSet.copyOf(participatingProjectNames);
-		} else {
-			this.participatingProjectNames = ImmutableSet.<String>builder().add(projectName).addAll(participatingProjectNames).build();
-		}
+		this.removedProjects = ImmutableSet.copyOf(removedProjects);
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
@@ -131,15 +121,36 @@ public class BuildData {
 	}
 	
 	/**
-	 * If projects are deleted from the workspace, they are not participating in a
-	 * dedicated build but may be processed along with other project builds.
+	 * Returns all the projects that are processed by the current build run.
 	 * 
-	 * The set contains all the participating projects.
+	 * The set may contain a single regularly build project along with all projects
+	 * that are no longer available and need to be removed from the builder state.
+	 * 
+	 * @see #getRemovedProjects()
 	 * 
 	 * @since 2.18
 	 */
-	public ImmutableSet<String> getParticipatingProjectNames() {
-		return participatingProjectNames;
+	public ImmutableSet<String> getParticipatingProjects() {
+		if (Strings.isEmpty(projectName)) {
+			return removedProjects;
+		}
+		return ImmutableSet.<String>builder().add(projectName).addAll(removedProjects).build();
+	}
+	
+	/**
+	 * Returns the processed deleted projects.
+	 * 
+	 * If projects are deleted from the workspace, they are not participating in a
+	 * regular build but may be processed along with other project builds or as part
+	 * of a normal job.
+	 * 
+	 * Note: There is a slight chance, that the removed projects do contain the currently build project
+	 * if the project was recreated before a job has removed its contents beforehand.
+	 * 
+	 * @since 2.18
+	 */
+	public ImmutableSet<String> getRemovedProjects() {
+		return removedProjects;
 	}
 
 	public SourceLevelURICache getSourceLevelURICache() {
