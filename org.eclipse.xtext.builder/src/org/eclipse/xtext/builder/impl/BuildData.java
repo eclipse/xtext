@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -65,7 +64,7 @@ public class BuildData {
 	 * @since 2.18
 	 */
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor, Set<String> removedProjects) {
-		this.projectName = projectName;
+		this.projectName = Strings.emptyIfNull(projectName);
 		this.removedProjects = ImmutableSet.copyOf(removedProjects);
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
@@ -116,6 +115,13 @@ public class BuildData {
 		return queuedBuildData.getAllRemainingURIs();
 	}
 	
+	/**
+	 * Returns the name of the currently build project if this is a regular build.
+	 * If it is a cleanup-build where only removed projects are processed, returns the 
+	 * empty string.
+	 * 
+	 * @see #getRemovedProjects()
+	 */
 	public String getProjectName() {
 		return projectName;
 	}
