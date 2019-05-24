@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Contribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Distro Common">
-  <repositories location="http://download.eclipse.org/modeling/emf/emf/builds/release/latest">
-    <features name="org.eclipse.emf.sdk.feature.group"/>
-    <features name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
-  </repositories>
-</aggregator:Contribution>
