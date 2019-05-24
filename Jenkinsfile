@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'latest', 'r201903', 'r201812', 'r201809','r201903', 'photon'], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201903', 'r201812', 'r201809','r201903', 'photon'], description: 'Which Target Platform should be used?')
   }
 
   options {
@@ -20,15 +20,15 @@ pipeline {
         checkout scm
         
         script {
-          if ("latest" == params.TARGET_PLATFORM) {
+          if ("latest" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
           } else if ("r201903" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
-          } else if ("r201812" == params.TARGET_PLATFORM) {
+          } else if ("r201812" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.10)"
-          } else if ("r201809" == params.TARGET_PLATFORM) {
+          } else if ("r201809" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.9)"
-          } else if ("photon" == params.TARGET_PLATFORM) {
+          } else if ("photon" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.8)"
           } else {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.7)"
@@ -60,7 +60,7 @@ pipeline {
     stage('Build') {
       steps {
         wrap([$class:'Xvnc', useXauthority: true]) {
-          sh "./1-maven-build.sh --tp=${params.TARGET_PLATFORM}"
+          sh "./1-maven-build.sh --tp=${params.target_platform}"
         }
         step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
       }
