@@ -93,13 +93,13 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.xtext"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/${xtext.version}"
+      value="https://download.eclipse.org/modeling/tmf/xtext/updates/composite/${xtext.version}"
       defaultValue=""
       label="Xtext p2 Respository URL"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.orbit"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+      value="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.mwe2"
@@ -108,16 +108,16 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.emf"
-      value="http://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
+      value="https://download.eclipse.org/modeling/emf/emf/builds/release/latest"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.lsp4j"
-      value="http://download.eclipse.org/lsp4j/updates/releases/"/>
+      value="https://download.eclipse.org/lsp4j/updates/releases/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.gef"
-      value="http://download.eclipse.org/tools/gef/updates/releases"/>
+      value="https://download.eclipse.org/tools/gef/updates/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
@@ -126,45 +126,45 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.antlr-gen"
-      value="http://download.itemis.com/updates/releases/2.1.1"/>
+      value="https://download.itemis.com/updates/releases/2.1.1"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.draw2d"
-      value="http://download.eclipse.org/tools/gef/updates/legacy/releases"/>
+      value="https://download.eclipse.org/tools/gef/updates/legacy/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.buildship"
-      value="http://download.eclipse.org/buildship/updates/e47/releases/2.x"/>
+      value="https://download.eclipse.org/buildship/updates/e47/releases/2.x"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e"
-      value="http://download.eclipse.org/technology/m2e/releases"/>
+      value="https://download.eclipse.org/technology/m2e/releases"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e.connector.jdt"
-      value="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler"/>
+      value="https://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e.connector.tycho"
-      value="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
+      value="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.webtools"
-      value="http://download.eclipse.org/webtools/repository/oxygen/">
+      value="https://download.eclipse.org/webtools/repository/oxygen/">
     <description>required by m2e</description>
   </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.swtbot"
-      value="http://download.eclipse.org/technology/swtbot/releases/latest"/>
+      value="https://download.eclipse.org/technology/swtbot/releases/latest"/>
   <setupTask
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.cbi.analyzer"
-      value="http://download.eclipse.org/cbi/updates/analyzers/4.7"/>
+      value="https://download.eclipse.org/cbi/updates/analyzers/4.7"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="github.user.password"
@@ -962,7 +962,7 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.12-I-builds"/>
+              url="https://download.eclipse.org/eclipse/updates/4.12-I-builds"/>
           <repository
               url="${p2.xpand}"/>
           <repository
@@ -1399,7 +1399,7 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/staging/photon/"/>
+              url="https://download.eclipse.org/staging/photon/"/>
           <repository
               url="${p2.xpand}"/>
           <repository
@@ -1455,7 +1455,7 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="http://download.eclipse.org/staging/oxygen/"/>
+              url="https://download.eclipse.org/staging/oxygen/"/>
           <repository
               url="${p2.xpand}"/>
           <repository
@@ -1516,9 +1516,9 @@
       <requirement
           name="org.eclipse.egit.mylyn.feature.group"/>
       <repository
-          url="http://download.eclipse.org/egit/github/updates"/>
+          url="https://download.eclipse.org/egit/github/updates"/>
       <repository
-          url="http://download.eclipse.org/mylyn/releases/latest"/>
+          url="https://download.eclipse.org/mylyn/releases/latest"/>
       <description>Task and build connector</description>
     </setupTask>
     <stream
