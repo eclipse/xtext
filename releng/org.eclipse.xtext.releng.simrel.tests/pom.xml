@@ -45,12 +45,12 @@
 		<repository>
 			<id>cbi-analyzer</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/cbi/updates/analyzers/4.7</url>
+			<url>https://download.eclipse.org/cbi/updates/analyzers/4.7</url>
 		</repository>
 		<repository>
 			<id>eclipse-updates</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/4.7/R-4.7.3-201803010715</url>
+			<url>https://download.eclipse.org/eclipse/updates/4.7/R-4.7.3-201803010715</url>
 		</repository>
 	</repositories>
 
