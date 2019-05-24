@@ -13,24 +13,24 @@ target "Xtext Domainmodel Example - Eclipse Photon"
 
 with source allEnvironments
 
-location "http://download.eclipse.org/releases/2019-06" {
+location "https://download.eclipse.org/releases/2019-06" {
 	org.eclipse.jdt.feature.group lazy
 	org.eclipse.platform.feature.group lazy
 	org.eclipse.pde.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
 }
 
-location "http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/" {
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.10.0/" {
 	org.eclipse.emf.mwe.sdk.feature.group
 	org.eclipse.emf.mwe2.runtime.sdk.feature.group
 	org.eclipse.emf.mwe2.language.sdk.feature.group
 }
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
+location "https://download.eclipse.org/modeling/tmf/xtext/updates/nightly" {
 	org.eclipse.xtext.sdk.feature.group lazy
 }
 
-location "http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06" {
+location "https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06" {
 	org.objectweb.asm [7.1.0,7.2.0)
 	org.objectweb.asm.tree [7.1.0,7.2.0)
 	com.google.inject [3.0.0,4.0.0)
@@ -38,6 +38,6 @@ location "http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06" 
 	com.google.guava [21.0.0,22.0.0)
 }
 
-location "http://download.eclipse.org/tools/gef/updates/legacy/releases" {
+location "https://download.eclipse.org/tools/gef/updates/legacy/releases" {
 	org.eclipse.draw2d.feature.group	
 }
