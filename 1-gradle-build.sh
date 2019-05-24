@@ -4,6 +4,10 @@ if [ -z "$JENKINS_URL" ]; then
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
 
+if [ -f "/.dockerenv" ]; then
+  export GRADLE_OPTS="-Dorg.gradle.daemon=false"
+fi
+
 ./gradlew \
   clean build createLocalMavenRepo \
   -PuseJenkinsSnapshots=true \
