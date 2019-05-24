@@ -53,6 +53,7 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -319,36 +320,91 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		progress.worked(2);
 		Task task = closedProjectsQueue.exhaust();
 		try {
-			addInfosFromTask(task, toBeBuilt);
-			doBuild(toBeBuilt, progress.split(8), BuildType.INCREMENTAL);
+			addInfosFromTaskAndBuild(task, toBeBuilt, BuildType.INCREMENTAL, progress.split(8));
 		} catch(Exception e) {
 			task.reschedule();
 			throw e;
 		}
 	}
 
-	private void addInfosFromTask(Task task, final ToBeBuilt toBeBuilt) {
+	@Deprecated
+	private static Boolean mustCallDeprecatedDoBuild = null;
+	@Deprecated
+	private static boolean wasDeprecationWarningLoggedForBuild = false;
+	
+	/**
+	 * @since 2.18
+	 */
+	protected void addInfosFromTaskAndBuild(Task task, ToBeBuilt toBeBuilt, BuildType buildType, IProgressMonitor monitor)
+			throws CoreException {
+		addInfosFromTask(task, toBeBuilt);
+		if (XtextBuilder.class.equals(getClass())) {
+			doBuild(toBeBuilt, task.getProjectNames(), monitor, buildType);	
+		} else {
+			if (mustCallDeprecatedDoBuild == null) {
+				mustCallDeprecatedDoBuild = isDoBuildSpecialized(getClass());
+				if (mustCallDeprecatedDoBuild.booleanValue() && !wasDeprecationWarningLoggedForBuild) {
+					log.warn("XtextBuilder is specialized and overrides the deprecated method doBuild(..). The implementation should be adjusted.");
+					wasDeprecationWarningLoggedForBuild = true;
+				}
+			}
+			if (mustCallDeprecatedDoBuild.booleanValue()) {
+				doBuild(toBeBuilt, monitor, buildType);
+			} else {
+				doBuild(toBeBuilt, task.getProjectNames(), monitor, buildType);
+			}
+		}
+	}
+
+	/**
+	 * @since 2.18
+	 * @deprecated This method is present for backwards compatibility reasons and will be removed in a future release.
+	 */
+	@Deprecated
+	protected boolean isDoBuildSpecialized(Class<?> c) {
+		return isMethodSpecialized(c, "doBuild", ToBeBuilt.class, IProgressMonitor.class, BuildType.class);
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	protected void addInfosFromTask(Task task, final ToBeBuilt toBeBuilt) {
 		toBeBuilt.getToBeDeleted().addAll(task.getToBeBuilt().getToBeDeleted());
 		toBeBuilt.getToBeUpdated().addAll(task.getToBeBuilt().getToBeUpdated());
 	}
 	
 	/**
-	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
-	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
-	 *        reported and that the operation cannot be cancelled.
+	 * @deprecated call {@link #doBuild(ToBeBuilt, Set, IProgressMonitor, BuildType)} instead.
 	 */
+	@Deprecated
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		doBuild(toBeBuilt, ImmutableSet.of(), monitor, type);
+	}
+	
+	/**
+	 * @param toBeBuilt
+	 *            the URIs that will be processed in this build run.
+	 * @param removedProjects
+	 *            the projects that are no longer considered by XtextBuilders but are yet to be removed from the index.
+	 * @param monitor
+	 *            the progress monitor for the build.
+	 * @param type
+	 *            indicates the kind of build that is running.
+	 * 
+	 * @since 2.18
+	 */
+	protected void doBuild(ToBeBuilt toBeBuilt, Set<String> removedProjects, IProgressMonitor monitor, BuildType type) throws CoreException {
 		buildLogger.log("Building " + getProject().getName());
 		// return early if there's nothing to do.
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
-		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild).isEmpty())
+		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects).isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild);
+		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData, indexingOnly, this::needRebuild, removedProjects);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.split(1));
 		if (participant != null && !indexingOnly) {
 			SourceLevelURICache sourceLevelURIs = buildData.getSourceLevelURICache();
@@ -388,11 +444,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 		Task task = closedProjectsQueue.exhaust();
 		try {
-			addInfosFromTask(task, toBeBuilt);
-			doBuild(toBeBuilt, progress.split(8), 
-				isRecoveryBuild 
+			addInfosFromTaskAndBuild(task, toBeBuilt, isRecoveryBuild
 					? BuildType.RECOVERY 
-					: BuildType.FULL);
+					: BuildType.FULL, progress.split(8));
 		} catch(Exception e) {
 			task.reschedule();
 			throw e;
@@ -447,8 +501,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 			Task task = closedProjectsQueue.exhaust();
 			try {
-				addInfosFromTask(task, toBeBuilt);
-				doClean(toBeBuilt, progress.split(8));
+				addInfosFromTaskAndClean(toBeBuilt, task, progress.split(8));
 			} catch(Exception e) {
 				task.reschedule();
 				throw e;
@@ -459,14 +512,66 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		}
 	}
 
+	@Deprecated
+	private static Boolean mustCallDeprecatedDoClean = null;
+	@Deprecated
+	private static boolean wasDeprecationWarningLoggedForClean = false;
+	
+	protected void addInfosFromTaskAndClean(ToBeBuilt toBeBuilt, Task task, IProgressMonitor monitor) throws CoreException {
+		addInfosFromTask(task, toBeBuilt);
+		if (XtextBuilder.class.equals(getClass())) {
+			doClean(toBeBuilt, task.getProjectNames(), monitor);
+		} else {
+			if (mustCallDeprecatedDoClean == null) {
+				mustCallDeprecatedDoClean = isDoCleanSpecialized(getClass());
+				if (mustCallDeprecatedDoClean.booleanValue() && !wasDeprecationWarningLoggedForClean) {
+					log.warn("XtextBuilder is specialized and overrides the deprecated method doClean(..). The implementation should be adjusted.");
+					wasDeprecationWarningLoggedForClean = true;
+				}
+			}
+			if (mustCallDeprecatedDoClean.booleanValue()) {
+				doClean(toBeBuilt, monitor);
+			} else {
+				doClean(toBeBuilt, task.getProjectNames(), monitor);
+			}
+		}
+	}
+	
 	/**
-	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
-	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
-	 *        reported and that the operation cannot be cancelled.
+	 * @since 2.18
+	 * @deprecated This method is present for backwards compatibility reasons and will be removed in a future release.
 	 */
+	@Deprecated
+	protected boolean isDoCleanSpecialized(Class<?> c) {
+		return isMethodSpecialized(c, "doClean", ToBeBuilt.class, IProgressMonitor.class);
+	}
+
+	private boolean isMethodSpecialized(Class<?> subclassOfBuilder, String name, Class<?>... parameterTypes) {
+		try {
+			// if the method is not present, we'll go into the catch clause
+			subclassOfBuilder.getDeclaredMethod(name, parameterTypes);
+			return !XtextBuilder.class.equals(subclassOfBuilder);
+		} catch (Exception e) {
+			Class<?> superclass = subclassOfBuilder.getSuperclass();
+			if (superclass == null) {
+				return false;
+			}
+			return isDoCleanSpecialized(superclass);
+		}
+	}
+
+	/**
+	 * @deprecated call {@link #doClean(ToBeBuilt, Set, IProgressMonitor)} instead.
+	 */
+	@Deprecated
 	protected void doClean(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
+		doClean(toBeBuilt, ImmutableSet.of(), monitor);
+	}
+	
+	protected void doClean(ToBeBuilt toBeBuilt, Set<String> removedProjects, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.split(1));
+		SetWithProjectNames toBeDeletedAndProjects = new SetWithProjectNames(toBeBuilt.getToBeDeleted(), getProject().getName(), removedProjects);
+		ImmutableList<Delta> deltas = builderState.clean(toBeDeletedAndProjects, progress.split(1));
 		if (participant != null) {
 			Set<URI> sourceURIs = new SourceLevelURICache().getSourcesFrom(toBeBuilt.getToBeDeleted(), resourceServiceProvideRegistry);
 			

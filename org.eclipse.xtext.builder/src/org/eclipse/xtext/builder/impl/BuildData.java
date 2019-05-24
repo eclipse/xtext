@@ -14,6 +14,9 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,6 +26,15 @@ public class BuildData {
 	private final ToBeBuilt toBeBuilt;
 	private final QueuedBuildData queuedBuildData;
 	private final String projectName;
+	/**
+	 * If projects are deleted from the workspace, they are not participating in a
+	 * dedicated build but may be processed along with other project builds.
+	 * 
+	 * The removed projects may be obtained via {@link #getRemovedProjects()}
+	 * 
+	 * @since 2.18
+	 */
+	private final ImmutableSet<String> removedProjects;
 	private final ResourceSet resourceSet;
 	private final boolean indexingOnly;
 	private final SourceLevelURICache sourceLevelURICache;
@@ -45,7 +57,15 @@ public class BuildData {
 	 * @since 2.17
 	 */
 	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor) {
-		this.projectName = projectName;
+		this(projectName, resourceSet, toBeBuilt, queuedBuildData, indexingOnly, buildRequestor, ImmutableSet.of());
+	}
+
+	/**
+	 * @since 2.18
+	 */
+	public BuildData(String projectName, ResourceSet resourceSet, ToBeBuilt toBeBuilt, QueuedBuildData queuedBuildData, boolean indexingOnly, Runnable buildRequestor, Set<String> removedProjects) {
+		this.projectName = Strings.emptyIfNull(projectName);
+		this.removedProjects = ImmutableSet.copyOf(removedProjects);
 		this.resourceSet = resourceSet;
 		this.toBeBuilt = toBeBuilt;
 		this.queuedBuildData = queuedBuildData;
@@ -95,8 +115,48 @@ public class BuildData {
 		return queuedBuildData.getAllRemainingURIs();
 	}
 	
+	/**
+	 * Returns the name of the currently build project if this is a regular build.
+	 * If it is a cleanup-build where only removed projects are processed, returns the 
+	 * empty string.
+	 * 
+	 * @see #getRemovedProjects()
+	 */
 	public String getProjectName() {
 		return projectName;
+	}
+	
+	/**
+	 * Returns all the projects that are processed by the current build run.
+	 * 
+	 * The set may contain a single regularly build project along with all projects
+	 * that are no longer available and need to be removed from the builder state.
+	 * 
+	 * @see #getRemovedProjects()
+	 * 
+	 * @since 2.18
+	 */
+	public ImmutableSet<String> getParticipatingProjects() {
+		if (Strings.isEmpty(projectName)) {
+			return removedProjects;
+		}
+		return ImmutableSet.<String>builder().add(projectName).addAll(removedProjects).build();
+	}
+	
+	/**
+	 * Returns the processed deleted projects.
+	 * 
+	 * If projects are deleted from the workspace, they are not participating in a
+	 * regular build but may be processed along with other project builds or as part
+	 * of a normal job.
+	 * 
+	 * Note: There is a slight chance, that the removed projects do contain the currently build project
+	 * if the project was recreated before a job has removed its contents beforehand.
+	 * 
+	 * @since 2.18
+	 */
+	public ImmutableSet<String> getRemovedProjects() {
+		return removedProjects;
 	}
 
 	public SourceLevelURICache getSourceLevelURICache() {
