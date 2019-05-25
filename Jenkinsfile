@@ -16,17 +16,17 @@ node {
 
 		checkout scm
 		if ("latest" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(x)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
 		} else if ("r201903" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(s)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
 		} else if ("r201812" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(r)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.10)"
 		} else if ("r201809" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(q)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.9)"
 		} else if ("photon" == params.target_platform) {
-			currentBuild.displayName = "#${BUILD_NUMBER}(p)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.8)"
 		} else {
-			currentBuild.displayName = "#${BUILD_NUMBER}(o)"
+			currentBuild.displayName = "#${BUILD_NUMBER}(4.7)"
 		}
 
 		sh '''
