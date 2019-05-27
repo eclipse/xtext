@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperExtension;
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -61,6 +62,9 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	
 	@Inject
 	private IWorkspace workspace;
+	
+	@Inject
+	private WorkspaceLockAccess workspaceLockAccess;
 
 	private volatile boolean isLoaded = false;
 
@@ -78,10 +82,19 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 				}
 			};
 			try {
-				if (isWorkspaceLocked()) {
-					runnable.run(null);
-				} else {
-					workspace.run(runnable, null, IWorkspace.AVOID_UPDATE, null);
+				switch(workspaceLockAccess.isWorkspaceLockedByCurrentThread(workspace)) {
+					case YES: {
+						runnable.run(null);
+						break;
+					}
+					case NO: {
+						workspace.run(runnable, null, IWorkspace.AVOID_UPDATE, null);
+						break;
+					}
+					case SHUTDOWN: {
+						// do not initialize anything if we are about to shutdown.
+						return;
+					}
 				}
 			} catch(CoreException e) {
 				log.error(e.getMessage(), e);
@@ -89,15 +102,6 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		}
 	}
 	
-	@SuppressWarnings("restriction")
-	private boolean isWorkspaceLocked() {
-		try {
-			return ((org.eclipse.core.internal.resources.Workspace) workspace).getWorkManager().isLockAlreadyAcquired();
-		} catch (CoreException e) {
-			return false;
-		}
-	}
-
 	protected void ensureLoaded() {
 		load();
 	}

@@ -47,6 +47,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -119,8 +120,9 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Inject private IJdtHelper jdtHelper;
 	@Inject private UriValidator uriValidator;
 	@Inject private JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
-
+	@Inject private IWorkspace workspace;
 	@Inject private IStorage2UriMapper host;
+	@Inject private WorkspaceLockAccess workspaceLockAccess;
 	
 	/**
 	 * Public for testing purpose
@@ -172,6 +174,17 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 */
 	public void setHost(IStorage2UriMapper host) {
 		this.host = host;
+	}
+	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @since 2.18
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setWorkspaceLockAccess(WorkspaceLockAccess workspaceLockAccess) {
+		this.workspaceLockAccess = workspaceLockAccess;
 	}
 	
 	private final Map<String, PackageFragmentRootData> cachedPackageFragmentRootData = newLinkedHashMap();
@@ -415,7 +428,9 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	
 	@Override
 	public void elementChanged(ElementChangedEvent event) {
-		initializeCache(true);
+		if (!initializeCache(true)) {
+			return;
+		}
 		Set<IJavaProject> javaProjectsWithClasspathChange = javaProjectClasspathChangeAnalyzer.getJavaProjectsWithClasspathChange(event.getDelta());
 		if(!javaProjectsWithClasspathChange.isEmpty()) {
 			for(IJavaProject project: javaProjectsWithClasspathChange) {
@@ -438,9 +453,6 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 
-	@Inject
-	private IWorkspace workspace;
-	
 	/**
 	 * @since 2.9
 	 */
@@ -544,16 +556,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 
-	@SuppressWarnings("restriction")
-	private boolean isWorkspaceLockedByCurrentThread() {
-		try {
-			return ((org.eclipse.core.internal.resources.Workspace) workspace).getWorkManager().isLockAlreadyAcquired();
-		} catch(CoreException e) {
-			return false;
-		}
-	}
-	
-	private void initializeCache(boolean wait) {
+	private boolean initializeCache(boolean wait) {
 		if(!isInitialized) {
 			/*
 			 * IWorkspace.run(IWorkspaceRunnable, ISchedulingRule, int, IProgressMonitor)
@@ -566,26 +569,34 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			 */
 			// basically two scenarios: the current thread has the build rule or ws-root rule
 			// that is, we can init directly
-			if (isWorkspaceLockedByCurrentThread()) {
-				// perform initialization from the current thread and everything should be fine
-				// since we already have the WS lock
-				try {
-					doInitializeCache();
-				} catch (CoreException e) {
-					log.error(e.getMessage(), e);
+			switch(workspaceLockAccess.isWorkspaceLockedByCurrentThread(workspace)) {
+				case YES: {
+					// perform initialization from the current thread and everything should be fine
+					// since we already have the WS lock
+					try {
+						doInitializeCache();
+					} catch (CoreException e) {
+						log.error(e.getMessage(), e);
+					}
+					// this may have happend while another thread is already waiting to aquire the WS root
+					// release the guard to let potentially waiting threads continue as early as possible 
+					CountDownLatch guard = initializerGuard.get();
+					if (guard != null) {
+						// notify waiting threads
+						guard.countDown();
+					}
+					return true;
 				}
-				// this may have happend while another thread is already waiting to aquire the WS root
-				// release the guard to let potentially waiting threads continue as early as possible 
-				CountDownLatch guard = initializerGuard.get();
-				if (guard != null) {
-					// notify waiting threads
-					guard.countDown();
+				case NO: {
+					// or we need to defer the initialization
+					useNewThreadToInitialize(wait);
+					return true;
 				}
-			} else {
-				// or we need to defer the initialization
-				useNewThreadToInitialize(wait);
+				case SHUTDOWN:
+					return false;
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -593,7 +604,12 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * Optionally waits for the cache initialization to be performed in a another thread.
 	 */
 	private void useNewThreadToInitialize(boolean wait) {
-		if (wait && isWorkspaceLockedByCurrentThread()) {
+		WorkspaceLockAccess.Result workspaceLockedByCurrentThread = workspaceLockAccess.isWorkspaceLockedByCurrentThread(workspace);
+		if (workspaceLockedByCurrentThread == WorkspaceLockAccess.Result.SHUTDOWN) {
+			// do nothing
+			return;
+		}
+		if (wait && workspaceLockedByCurrentThread == WorkspaceLockAccess.Result.YES) {
 			// may not wait if we currently hold a conflicting rule
 			throw new IllegalStateException("Cannot wait for the thread to finish if we currently hold the WS lock");
 		}
