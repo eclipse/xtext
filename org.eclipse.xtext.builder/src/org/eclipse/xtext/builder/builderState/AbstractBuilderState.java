@@ -13,6 +13,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
@@ -44,6 +48,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	private volatile ResourceDescriptionsData resourceDescriptionData = new ResourceDescriptionsData(
 			Collections.<IResourceDescription> emptyList());
 
+	private static final Logger log = Logger.getLogger(AbstractBuilderState.class);
+	
 	@Inject
 	private IMarkerUpdater markerUpdater;
 
@@ -52,22 +58,48 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
+	
+	@Inject
+	private IWorkspace workspace;
 
 	private volatile boolean isLoaded = false;
 
-	public synchronized void load() {
+	public void load() {
 		if (!isLoaded) {
-			resourceDescriptionData = new ResourceDescriptionsData(persister.load());
-			if(storage2UriMapper instanceof IStorage2UriMapperExtension)
-				((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
-			isLoaded = true;
+			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+				@Override
+				public void run(IProgressMonitor monitor) throws CoreException {
+					if (!isLoaded) {
+						resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+						if(storage2UriMapper instanceof IStorage2UriMapperExtension)
+							((IStorage2UriMapperExtension) storage2UriMapper).initializeCache();
+						isLoaded = true;
+					}
+				}
+			};
+			try {
+				if (isWorkspaceLocked()) {
+					runnable.run(null);
+				} else {
+					workspace.run(runnable, null, IWorkspace.AVOID_UPDATE, null);
+				}
+			} catch(CoreException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	@SuppressWarnings("restriction")
+	private boolean isWorkspaceLocked() {
+		try {
+			return ((org.eclipse.core.internal.resources.Workspace) workspace).getWorkManager().isLockAlreadyAcquired();
+		} catch (CoreException e) {
+			return false;
 		}
 	}
 
 	protected void ensureLoaded() {
-		if (!isLoaded) {
-			load();
-		}
+		load();
 	}
 
 	protected Set<URI> ensureNotNull(Set<URI> uris) {

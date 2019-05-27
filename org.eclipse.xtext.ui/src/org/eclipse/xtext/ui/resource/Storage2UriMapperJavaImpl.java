@@ -22,8 +22,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.internal.resources.WorkManager;
-import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -546,10 +544,10 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		}
 	}
 
+	@SuppressWarnings("restriction")
 	private boolean isWorkspaceLockedByCurrentThread() {
 		try {
-			WorkManager workManager = ((Workspace) workspace).getWorkManager();
-			return workManager.isLockAlreadyAcquired();
+			return ((org.eclipse.core.internal.resources.Workspace) workspace).getWorkManager().isLockAlreadyAcquired();
 		} catch(CoreException e) {
 			return false;
 		}
@@ -564,7 +562,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			 * but the main lock during the run is the one of the Workmanager.
 			 * Even if the there is no current rule on the manager, the workspace may be currently
 			 * locked by this thread. If that is already the case, initialize the cache
-			 * immedidatly, otherwise postpone the initialization to another thread.  
+			 * immediately, otherwise postpone the initialization to another thread.  
 			 */
 			// basically two scenarios: the current thread has the build rule or ws-root rule
 			// that is, we can init directly
