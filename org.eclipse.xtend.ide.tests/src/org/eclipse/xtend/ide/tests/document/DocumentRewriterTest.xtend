@@ -24,6 +24,8 @@ import org.junit.Test
 import org.eclipse.xtext.resource.OutdatedStateManager
 import org.eclipse.xtext.service.OperationCanceledManager
 
+import static extension org.eclipse.xtext.util.Strings.*
+
 class DocumentRewriterTest extends AbstractXtendUITestCase {
 
 	@Inject extension WorkbenchTestHelper
@@ -241,7 +243,7 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 				def bar() {
 				}
 			}
-		'''
+		'''.toUnixLineSeparator
 		model
 			.rewrite [ DocumentRewriter it, XtextResource r |
 				newSection(model.indexOf('{}') + 3, 0, true).append('val x = 42')
@@ -263,7 +265,7 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 					val z = 44
 					
 				}
-			''')
+			'''.toUnixLineSeparator)
 	}
 
 	protected def rewrite(CharSequence model, (DocumentRewriter, XtextResource)=>void test) {
