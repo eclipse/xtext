@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -75,6 +76,7 @@ public abstract class AbstractJavaProjectsStateTest extends AbstractAllContainer
 		Storage2UriMapperJavaImpl contribution = new Storage2UriMapperJavaImpl();
 		contribution.setUriValidator(uriValidator);
 		contribution.setJdtHelper(new JdtHelper());
+		contribution.setWorkspaceLockAccess(new WorkspaceLockAccess());
 		contribution.setLocator(new JarEntryLocator());
 		contribution.setHost(mapper);
 		mapper.setContribution(contribution);

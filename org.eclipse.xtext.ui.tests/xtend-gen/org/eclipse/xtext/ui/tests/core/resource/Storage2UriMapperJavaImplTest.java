@@ -27,6 +27,7 @@ import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -78,6 +79,8 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       JarEntryLocator _jarEntryLocator = new JarEntryLocator();
       it.setLocator(_jarEntryLocator);
       it.setWorkspace(ResourcesPlugin.getWorkspace());
+      WorkspaceLockAccess _workspaceLockAccess = new WorkspaceLockAccess();
+      it.setWorkspaceLockAccess(_workspaceLockAccess);
       JavaProjectClasspathChangeAnalyzer _javaProjectClasspathChangeAnalyzer = new JavaProjectClasspathChangeAnalyzer();
       it.setJavaProjectClasspathChangeAnalyzer(_javaProjectClasspathChangeAnalyzer);
     };

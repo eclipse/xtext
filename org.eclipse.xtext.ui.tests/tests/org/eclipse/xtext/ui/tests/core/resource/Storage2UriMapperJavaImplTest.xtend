@@ -30,6 +30,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -62,6 +63,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 			}
 			locator = new JarEntryLocator()
 			workspace = ResourcesPlugin.workspace
+			workspaceLockAccess = new WorkspaceLockAccess
 			javaProjectClasspathChangeAnalyzer = new JavaProjectClasspathChangeAnalyzer
 		]
 	}

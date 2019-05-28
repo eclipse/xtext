@@ -64,6 +64,7 @@ import org.eclipse.xtext.ui.shared.JdtHelper;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.AbstractModule;
@@ -203,6 +204,7 @@ public class SharedModule extends AbstractModule {
 				expose(ReferenceSearchViewPage.class);
 			}
 		});
+		bind(WorkspaceLockAccess.class);
 	}
 
 }
