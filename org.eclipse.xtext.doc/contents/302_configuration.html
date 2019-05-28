@@ -159,7 +159,6 @@ Workflow {
   <li><code>genericIde</code> – Platform-independent IDE features such as services for content assist</li>
   <li><code>eclipsePlugin</code> – Integration plug-in for Eclipse</li>
   <li><code>eclipsePluginTest</code> – Unit tests for <code>eclipsePlugin</code></li>
-  <li><code>ideaPlugin</code> – Integration plug-in for IntelliJ IDEA</li>
   <li><code>web</code> – Integration into web applications</li>
 </ul>
 
@@ -270,8 +269,6 @@ Workflow {
     fragment = xbase.XbaseGeneratorFragment2 {}
     fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
     fragment = ui.compare.CompareFragment2 {}
-    fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment {}
-    fragment = idea.IdeaPluginGenerator {}
     fragment = web.WebIntegrationFragment {
         framework = "Ace"
     }
@@ -343,7 +340,7 @@ Workflow {
 
 <h3 id="guicemodules">The Module API</h3>
 
-<p>After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named <em>Domainmodel</em> we would have a <em>DomainmodelRuntimeModule</em>, a <em>DomainmodelUiModule</em> (for the Eclipse integration), a <em>DomainmodelIdeaModule</em> (for the IntelliJ IDEA integration), and a <em>DomainmodelWebModule</em>. The bindings from the runtime module are shared by all integration projects.</p>
+<p>After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named <em>Domainmodel</em> we would have a <em>DomainmodelRuntimeModule</em>, a <em>DomainmodelUiModule</em> (for the Eclipse integration), a <em>DomainmodelIdeModule</em> (IDE independent UI services), and a <em>DomainmodelWebModule</em>. The bindings from the runtime module are shared by all integration projects.</p>
 
 <p>Xtext comes with a slightly enhanced module API. The abstract base class <a href="https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java">AbstractGenericModule</a> looks reflectively for certain methods in order to find declared bindings. The most common kind of method is</p>
 
