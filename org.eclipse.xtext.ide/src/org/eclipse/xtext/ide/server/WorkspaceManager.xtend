@@ -15,6 +15,8 @@ import java.util.List
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
+import org.eclipse.lsp4j.DidChangeTextDocumentParams
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseError
@@ -42,6 +44,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 	@Inject Provider<ProjectManager> projectManagerProvider
 	@Inject IWorkspaceConfigFactory workspaceConfigFactory
 	@Inject IProjectDescriptionFactory projectDescriptionFactory
+
 	BuildManager buildManager
 
 	Map<String, ProjectManager> projectName2ProjectManager = newHashMap
@@ -175,10 +178,20 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		new ArrayList(projectName2ProjectManager.values)
 	}
 
+	/**
+	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
+	 *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+	 */
+	@Deprecated
 	def didChange(URI uri, Integer version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
 		didChange(uri, version, changes).build(cancelIndicator)
 	}
 
+	/**
+	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
+	 *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+	 */
+	@Deprecated
 	def Buildable didChange(URI uri, Integer version, Iterable<TextEdit> changes) {
 		if (!openDocuments.containsKey(uri)) {
 			LOG.error("The document " + uri + " has not been opened.")
@@ -186,6 +199,27 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 		}
 		val contents = openDocuments.get(uri)
 		openDocuments.put(uri, contents.applyChanges(changes))
+		return didChangeFiles(#[uri], newArrayList)
+	}
+
+	/**
+	 * As opposed to {@link TextEdit}[] the positions in the edits of a 
+	 * {@link DidChangeTextDocumentParams} refer to the state after applying the preceding edits. See 
+	 * https://microsoft.github.io/language-server-protocol/specification#textedit-1 and 
+	 * https://github.com/microsoft/vscode/issues/23173#issuecomment-289378160 for details.
+	 * 
+	 * In particular, this has to be taken into account when undoing the deletion of multiple characters 
+	 * at the end of a line.
+	 * 
+	 * @since 2.18
+	 */
+	def Buildable didChangeTextDocumentContent(URI uri, Integer version, Iterable<TextDocumentContentChangeEvent> changes) {
+		if (!openDocuments.containsKey(uri)) {
+			LOG.error("The document " + uri + " has not been opened.")
+			return [];
+		}
+		val contents = openDocuments.get(uri)
+		openDocuments.put(uri, contents.applyTextDocumentChanges(changes))
 		return didChangeFiles(#[uri], newArrayList)
 	}
 

@@ -20,6 +20,8 @@ import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.lsp4j.DidChangeTextDocumentParams;
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.jsonrpc.ResponseErrorException;
 import org.eclipse.lsp4j.jsonrpc.messages.ResponseError;
@@ -222,10 +224,20 @@ public class WorkspaceManager {
     return new ArrayList<ProjectManager>(_values);
   }
   
+  /**
+   * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
+   *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+   */
+  @Deprecated
   public List<IResourceDescription.Delta> didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
     return this.didChange(uri, version, changes).build(cancelIndicator);
   }
   
+  /**
+   * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
+   *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+   */
+  @Deprecated
   public BuildManager.Buildable didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes) {
     boolean _containsKey = this.openDocuments.containsKey(uri);
     boolean _not = (!_containsKey);
@@ -238,6 +250,32 @@ public class WorkspaceManager {
     }
     final Document contents = this.openDocuments.get(uri);
     this.openDocuments.put(uri, contents.applyChanges(changes));
+    return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
+  }
+  
+  /**
+   * As opposed to {@link TextEdit}[] the positions in the edits of a
+   * {@link DidChangeTextDocumentParams} refer to the state after applying the preceding edits. See
+   * https://microsoft.github.io/language-server-protocol/specification#textedit-1 and
+   * https://github.com/microsoft/vscode/issues/23173#issuecomment-289378160 for details.
+   * 
+   * In particular, this has to be taken into account when undoing the deletion of multiple characters
+   * at the end of a line.
+   * 
+   * @since 2.18
+   */
+  public BuildManager.Buildable didChangeTextDocumentContent(final URI uri, final Integer version, final Iterable<TextDocumentContentChangeEvent> changes) {
+    boolean _containsKey = this.openDocuments.containsKey(uri);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      WorkspaceManager.LOG.error((("The document " + uri) + " has not been opened."));
+      final BuildManager.Buildable _function = (CancelIndicator it) -> {
+        return null;
+      };
+      return _function;
+    }
+    final Document contents = this.openDocuments.get(uri);
+    this.openDocuments.put(uri, contents.applyTextDocumentChanges(changes));
     return this.didChangeFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), CollectionLiterals.<URI>newArrayList());
   }
   

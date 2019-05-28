@@ -14,6 +14,7 @@ import org.eclipse.xtext.ide.server.Document
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent
 
 /**
  * @author efftinge - Initial contribution and API
@@ -63,7 +64,7 @@ class DocumentTest {
             assertEquals('''
                 hello world
                 bar
-            '''.normalize, applyChanges(#[
+            '''.normalize, applyTextDocumentChanges(#[
                 change(position(1,0), position(2,0), "")
             ]).contents)
         ]
@@ -79,7 +80,7 @@ class DocumentTest {
                 hello world
                 future
                 bar
-            '''.normalize, applyChanges(#[
+            '''.normalize, applyTextDocumentChanges(#[
                 change(position(1,1), position(1,3), "uture")
             ]).contents)
         ]
@@ -90,9 +91,27 @@ class DocumentTest {
             hello world
             foo
             bar'''.normalize) => [
-            assertEquals('', applyChanges(#[
+            assertEquals('', applyTextDocumentChanges(#[
                 change(position(0,0), position(2,3), "")
             ]).contents)
+        ]
+    }
+    
+    @Test def void testApplyTextDocumentChanges_04() {
+        new Document(1, '''
+            foo
+            bar
+        '''.normalize).applyTextDocumentChanges(#[
+                change(position(0,3), position(0,3), "b"),
+                change(position(0,4), position(0,4), "a"),
+                change(position(0,5), position(0,5), "r")
+            ])
+        => [
+            assertEquals('''
+                foobar
+                bar
+            '''.normalize, contents)
+            assertEquals(2, version)
         ]
     }
     
@@ -102,7 +121,7 @@ class DocumentTest {
             foo
             bar'''.normalize) => [
             assertEquals(' foo ', applyChanges(#[
-                change(null, null, " foo ")
+                textEdit(null, null, " foo ")
             ]).contents)
         ]
     }
@@ -145,6 +164,18 @@ class DocumentTest {
     }
 
     private def change(Position startPos, Position endPos, String newText) {
+        new TextDocumentContentChangeEvent => [
+              if (startPos !== null) {
+                  range = new Range => [
+                      start = startPos
+                      end = endPos
+                  ]
+              }
+              it.text = newText
+            ]
+    }
+    
+    private def textEdit(Position startPos, Position endPos, String newText) {
         new TextEdit => [
               if (startPos !== null) {
                   range = new Range => [

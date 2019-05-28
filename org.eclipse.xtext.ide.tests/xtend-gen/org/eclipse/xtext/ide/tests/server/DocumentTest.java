@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.tests.server;
 import java.util.Collections;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
@@ -92,9 +93,9 @@ public class DocumentTest {
       _builder_1.newLine();
       _builder_1.append("bar");
       _builder_1.newLine();
-      TextEdit _change = this.change(this.position(1, 0), this.position(2, 0), "");
-      Assert.assertEquals(this.normalize(_builder_1), it.applyChanges(
-        Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change))).getContents());
+      TextDocumentContentChangeEvent _change = this.change(this.position(1, 0), this.position(2, 0), "");
+      Assert.assertEquals(this.normalize(_builder_1), it.applyTextDocumentChanges(
+        Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change))).getContents());
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
@@ -118,9 +119,9 @@ public class DocumentTest {
       _builder_1.newLine();
       _builder_1.append("bar");
       _builder_1.newLine();
-      TextEdit _change = this.change(this.position(1, 1), this.position(1, 3), "uture");
-      Assert.assertEquals(this.normalize(_builder_1), it.applyChanges(
-        Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change))).getContents());
+      TextDocumentContentChangeEvent _change = this.change(this.position(1, 1), this.position(1, 3), "uture");
+      Assert.assertEquals(this.normalize(_builder_1), it.applyTextDocumentChanges(
+        Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change))).getContents());
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
@@ -136,11 +137,36 @@ public class DocumentTest {
     String _normalize = this.normalize(_builder);
     Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
-      TextEdit _change = this.change(this.position(0, 0), this.position(2, 3), "");
-      Assert.assertEquals("", it.applyChanges(
-        Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change))).getContents());
+      TextDocumentContentChangeEvent _change = this.change(this.position(0, 0), this.position(2, 3), "");
+      Assert.assertEquals("", it.applyTextDocumentChanges(
+        Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change))).getContents());
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
+  }
+  
+  @Test
+  public void testApplyTextDocumentChanges_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("bar");
+    _builder.newLine();
+    String _normalize = this.normalize(_builder);
+    TextDocumentContentChangeEvent _change = this.change(this.position(0, 3), this.position(0, 3), "b");
+    TextDocumentContentChangeEvent _change_1 = this.change(this.position(0, 4), this.position(0, 4), "a");
+    TextDocumentContentChangeEvent _change_2 = this.change(this.position(0, 5), this.position(0, 5), "r");
+    Document _applyTextDocumentChanges = new Document(Integer.valueOf(1), _normalize).applyTextDocumentChanges(
+      Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change, _change_1, _change_2)));
+    final Procedure1<Document> _function = (Document it) -> {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("foobar");
+      _builder_1.newLine();
+      _builder_1.append("bar");
+      _builder_1.newLine();
+      Assert.assertEquals(this.normalize(_builder_1), it.getContents());
+      Assert.assertEquals(2, (it.getVersion()).intValue());
+    };
+    ObjectExtensions.<Document>operator_doubleArrow(_applyTextDocumentChanges, _function);
   }
   
   @Test
@@ -154,9 +180,9 @@ public class DocumentTest {
     String _normalize = this.normalize(_builder);
     Document _document = new Document(Integer.valueOf(1), _normalize);
     final Procedure1<Document> _function = (Document it) -> {
-      TextEdit _change = this.change(null, null, " foo ");
+      TextEdit _textEdit = this.textEdit(null, null, " foo ");
       Assert.assertEquals(" foo ", it.applyChanges(
-        Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change))).getContents());
+        Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_textEdit))).getContents());
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
@@ -214,7 +240,24 @@ public class DocumentTest {
     Assert.assertEquals(3, new Document(Integer.valueOf(1), _builder.toString()).getLineCount());
   }
   
-  private TextEdit change(final Position startPos, final Position endPos, final String newText) {
+  private TextDocumentContentChangeEvent change(final Position startPos, final Position endPos, final String newText) {
+    TextDocumentContentChangeEvent _textDocumentContentChangeEvent = new TextDocumentContentChangeEvent();
+    final Procedure1<TextDocumentContentChangeEvent> _function = (TextDocumentContentChangeEvent it) -> {
+      if ((startPos != null)) {
+        Range _range = new Range();
+        final Procedure1<Range> _function_1 = (Range it_1) -> {
+          it_1.setStart(startPos);
+          it_1.setEnd(endPos);
+        };
+        Range _doubleArrow = ObjectExtensions.<Range>operator_doubleArrow(_range, _function_1);
+        it.setRange(_doubleArrow);
+      }
+      it.setText(newText);
+    };
+    return ObjectExtensions.<TextDocumentContentChangeEvent>operator_doubleArrow(_textDocumentContentChangeEvent, _function);
+  }
+  
+  private TextEdit textEdit(final Position startPos, final Position endPos, final String newText) {
     TextEdit _textEdit = new TextEdit();
     final Procedure1<TextEdit> _function = (TextEdit it) -> {
       if ((startPos != null)) {
