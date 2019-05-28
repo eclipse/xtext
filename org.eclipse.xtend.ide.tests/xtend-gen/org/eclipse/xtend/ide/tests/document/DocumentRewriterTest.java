@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -402,7 +403,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final String model = _builder.toString();
+    final String model = Strings.toUnixLineSeparator(_builder);
     final Procedure2<DocumentRewriter, XtextResource> _function = (DocumentRewriter it, XtextResource r) -> {
       int _indexOf = model.indexOf("{}");
       int _plus = (_indexOf + 3);
@@ -414,7 +415,6 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       int _plus_2 = (_indexOf_1 + 2);
       it.newSection(_plus_2, 0, true).append("val z = 44");
     };
-    String _rewrite = this.rewrite(model, _function);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -449,7 +449,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.andExpect(_rewrite, _builder_1);
+    this.andExpect(this.rewrite(model, _function), Strings.toUnixLineSeparator(_builder_1));
   }
   
   protected String rewrite(final CharSequence model, final Procedure2<? super DocumentRewriter, ? super XtextResource> test) {
