@@ -315,8 +315,6 @@
 			<topic href="contents/310_eclipse_support.html#code-mining" label="Code Mining">
 			</topic>
 		</topic>
-		<topic href="contents/320_idea_support.html" label="IntelliJ IDEA Support">
-		</topic>
 		<topic href="contents/330_web_support.html" label="Web Editor Support">
 			<topic href="contents/330_web_support.html#client" label="The Client">
 				<topic href="contents/330_web_support.html#javascript-api" label="JavaScript API">
