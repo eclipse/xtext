@@ -81,7 +81,6 @@ import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
-import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextDocumentSyncKind;
 import org.eclipse.lsp4j.TextEdit;
@@ -435,12 +434,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
     final Function0<BuildManager.Buildable> _function = () -> {
-      final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
-        Range _range = event.getRange();
-        String _text = event.getText();
-        return new TextEdit(_range, _text);
-      };
-      return this.workspaceManager.didChange(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(params.getContentChanges(), _function_1));
+      return this.workspaceManager.didChangeTextDocumentContent(this._uriExtensions.toUri(params.getTextDocument().getUri()), params.getTextDocument().getVersion(), params.getContentChanges());
     };
     final Function2<CancelIndicator, BuildManager.Buildable, List<IResourceDescription.Delta>> _function_1 = (CancelIndicator cancelIndicator, BuildManager.Buildable buildable) -> {
       return buildable.build(cancelIndicator);

@@ -58,7 +58,6 @@ import org.eclipse.lsp4j.SignatureHelpOptions
 import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextDocumentSyncKind
-import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
@@ -266,9 +265,7 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 
 	override didChange(DidChangeTextDocumentParams params) {
 		requestManager.runWrite([ 
-			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-				new TextEdit(event.range, event.text)
-			])
+			workspaceManager.didChangeTextDocumentContent(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges)
 		], [cancelIndicator , buildable | 
 			buildable.build(cancelIndicator)
 		])

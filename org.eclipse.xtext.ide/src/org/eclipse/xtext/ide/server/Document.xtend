@@ -11,6 +11,7 @@ import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -124,6 +125,39 @@ import org.eclipse.lsp4j.Range
     		return this.contents.substring(start, end)
     }
 
+    /**
+     * As opposed to {@link TextEdit}[] the positions in the edits of a 
+     * {@link DidChangeTextDocumentParams} refer to the state after applying the preceding edits. See 
+     * https://microsoft.github.io/language-server-protocol/specification#textedit-1 and 
+     * https://github.com/microsoft/vscode/issues/23173#issuecomment-289378160 for details.
+     * 
+     * @return a new document with an incremented version and the text document changes applied.
+     * @since 2.18
+     */
+    def Document applyTextDocumentChanges(Iterable<? extends TextDocumentContentChangeEvent> changes) {
+        var currentDocument = this
+        val newVersion = if (currentDocument.version !== null)
+                currentDocument.version + 1
+            else
+                null
+        for (change : changes) {
+            val newContent = if (change.range === null) {
+                    change.text
+                } else {
+                    val start = currentDocument.getOffSet(change.range.start)
+                    val end = currentDocument.getOffSet(change.range.end)
+                    currentDocument.contents.substring(0, start) + change.text + currentDocument.contents.substring(end)
+                }
+            currentDocument = new Document(newVersion, newContent, printSourceOnError)
+        }
+        return currentDocument
+    }
+
+    /**
+     * Only use for testing.
+     * 
+     * All positions in the {@link TextEdit}s refer to the same original document (this).
+     */
     def Document applyChanges(Iterable<? extends TextEdit> changes) {
         var newContent = contents
         for (change : changes) {
@@ -137,7 +171,7 @@ import org.eclipse.lsp4j.Range
         }
         return new Document(if (version !== null) version + 1 else null, newContent)
     }
-    
+
     /**
      * @since 2.15
      */

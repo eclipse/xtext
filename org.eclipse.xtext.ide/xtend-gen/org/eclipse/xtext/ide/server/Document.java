@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.server;
 
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -165,6 +166,57 @@ public class Document {
     return this.contents.substring(start, end);
   }
   
+  /**
+   * As opposed to {@link TextEdit}[] the positions in the edits of a
+   * {@link DidChangeTextDocumentParams} refer to the state after applying the preceding edits. See
+   * https://microsoft.github.io/language-server-protocol/specification#textedit-1 and
+   * https://github.com/microsoft/vscode/issues/23173#issuecomment-289378160 for details.
+   * 
+   * @return a new document with an incremented version and the text document changes applied.
+   * @since 2.18
+   */
+  public Document applyTextDocumentChanges(final Iterable<? extends TextDocumentContentChangeEvent> changes) {
+    Document currentDocument = this;
+    Integer _xifexpression = null;
+    if ((currentDocument.version != null)) {
+      _xifexpression = Integer.valueOf(((currentDocument.version).intValue() + 1));
+    } else {
+      _xifexpression = null;
+    }
+    final Integer newVersion = _xifexpression;
+    for (final TextDocumentContentChangeEvent change : changes) {
+      {
+        String _xifexpression_1 = null;
+        Range _range = change.getRange();
+        boolean _tripleEquals = (_range == null);
+        if (_tripleEquals) {
+          _xifexpression_1 = change.getText();
+        } else {
+          String _xblockexpression = null;
+          {
+            final int start = currentDocument.getOffSet(change.getRange().getStart());
+            final int end = currentDocument.getOffSet(change.getRange().getEnd());
+            String _substring = currentDocument.contents.substring(0, start);
+            String _text = change.getText();
+            String _plus = (_substring + _text);
+            String _substring_1 = currentDocument.contents.substring(end);
+            _xblockexpression = (_plus + _substring_1);
+          }
+          _xifexpression_1 = _xblockexpression;
+        }
+        final String newContent = _xifexpression_1;
+        Document _document = new Document(newVersion, newContent, this.printSourceOnError);
+        currentDocument = _document;
+      }
+    }
+    return currentDocument;
+  }
+  
+  /**
+   * Only use for testing.
+   * 
+   * All positions in the {@link TextEdit}s refer to the same original document (this).
+   */
   public Document applyChanges(final Iterable<? extends TextEdit> changes) {
     String newContent = this.contents;
     for (final TextEdit change : changes) {
