@@ -8,7 +8,7 @@
 	<properties>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<xtextVersion>2.18.0-SNAPSHOT</xtextVersion>
+		<xtextVersion>2.19.0-SNAPSHOT</xtextVersion>
 		<!-- The BOM version can be rather fixed for the test projects -->
 		<xtextBOMVersion>2.18.0.M2</xtextBOMVersion>
 	</properties>
