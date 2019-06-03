@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Core Tests
 Bundle-SymbolicName: org.eclipse.xtend.core.tests
-Bundle-Version: 2.18.0.qualifier
+Bundle-Version: 2.19.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtend.core,
@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
- org.eclipse.xtext.xbase.lib;bundle-version="2.18.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.19.0",
  org.eclipse.xtext.xbase.ui,
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.core.runtime;bundle-version="3.13.0",
