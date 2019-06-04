@@ -158,7 +158,7 @@
 		<unit id="org.objectweb.asm.source" version="7.1.0.v20190412-2143"/>
 		<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
 		<unit id="org.objectweb.asm.tree.source" version="7.1.0.v20190412-2143"/>
-		<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+		<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
