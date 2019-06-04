@@ -247,6 +247,7 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 
 | Xtext         | EMF           | MWE2/MWE    | Xpand       | Eclipse     | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
+| [2.18.0]({{page.upsite.xtext}}releases/2.18.0/)           | [2.17.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.17) (2.12.0)     | [2.10.0]({{page.upsite.mwe}}releases/2.10.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.12.0]({{page.upsite.eclipse}}releases/2019-06) (4.7.3) | [2019-06]({{page.upsite.eclipse}}releases/2019-06)|
 | [2.17.0]({{page.upsite.xtext}}releases/2.17.0/)           | [2.17.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.17) (2.12.0)     | [2.10.0]({{page.upsite.mwe}}releases/2.10.0/) (2.9.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.11.0]({{page.upsite.eclipse}}releases/2019-03) (4.7.3) | [2019-03]({{page.upsite.eclipse}}releases/2019-03)|
 | [2.16.0]({{page.upsite.xtext}}releases/2.16.0/)           | [2.16.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.16) (2.12.0)     | [2.9.0]({{page.upsite.mwe}}releases/2.9.0/) (2.7.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.10.0]({{page.upsite.eclipse}}releases/2018-12/201812191000) (4.7.3) | [2018-12]({{page.upsite.eclipse}}releases/2018-12/201812191000)|
 | [2.15.0]({{page.upsite.xtext}}releases/2.15.0/)           | [2.15.0]({{page.upsite.eclipse}}modeling/emf/emf/builds/release/2.15) (2.12.0)     | [2.9.0]({{page.upsite.mwe}}releases/2.9.0/) (2.7.1) | [2.2.0]({{page.upsite.xpand}}releases/R201605260315) (1.4)  | [4.9.0]({{page.upsite.eclipse}}releases/2018-09/201809191002) (4.7.3) | [2018-09]({{page.upsite.eclipse}}releases/2018-09/201809191002)|
@@ -260,7 +261,7 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 | [2.8.3]({{page.upsite.xtext}}releases/2.8.3/), [2.8.2]({{page.upsite.xtext}}releases/2.8.2/), [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) | [2.11.0]({{page.upsite.emf}}2.11/core/R201506010402/) (2.10.2)  	 | [2.8.0]({{page.upsite.mwe}}releases/2.8.0/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars R]({{page.upsite.eclipse}}releases/mars/201506241002/)|
 | [2.7.3]({{page.upsite.xtext}}releases/maintenance/R201411190455/) | [2.10.2]({{page.upsite.emf}}2.10.x/core/S201501230452/) (2.10) | [2.7.0]({{page.upsite.mwe}}releases/R201409021051/mwe2lang/) [1.3.4]({{page.upsite.mwe}}releases/R201409021027/mwe) (2.7.0/1.2)  | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4) | [4.4.2]({{page.upsite.eclipse}}eclipse/updates/4.4/R-4.4.2-201502041700) (3.6) |[Luna SR2]({{page.upsite.eclipse}}releases/luna/201502271000/)|
 
-The following is an example target platform definition for Xtext 2.17.0 and Eclipse 4.11 alias 2019-03.
+The following is an example target platform definition for Xtext 2.18.0 and Eclipse 4.12 alias 2019-06.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -269,7 +270,7 @@ The following is an example target platform definition for Xtext 2.17.0 and Ecli
 <locations>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.17.0/"/>
+    <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.18.0/"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
     <unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
@@ -281,7 +282,7 @@ The following is an example target platform definition for Xtext 2.17.0 and Ecli
     <unit id="org.eclipse.xtend" version="0.0.0"/>
     <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
     <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/releases/2019-03/"/>
+    <repository location="http://download.eclipse.org/releases/2019-06/"/>
   </location>
 </locations>
 </target>

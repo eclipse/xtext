@@ -154,7 +154,6 @@ The Xtext generator needs to know the structure of your project in order to gene
 * `genericIde` &ndash; Platform-independent IDE features such as services for content assist
 * `eclipsePlugin` &ndash; Integration plug-in for Eclipse
 * `eclipsePluginTest` &ndash; Unit tests for `eclipsePlugin`
-* `ideaPlugin` &ndash; Integration plug-in for IntelliJ IDEA
 * `web` &ndash; Integration into web applications
 
 These subprojects are of type [SubProjectConfig]({{site.src.xtext_core}}/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/SubProjectConfig.xtend) and offer important parameters:
@@ -262,8 +261,6 @@ language = XtextGeneratorLanguage {
     fragment = xbase.XbaseGeneratorFragment2 {}
     fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
     fragment = ui.compare.CompareFragment2 {}
-    fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment {}
-    fragment = idea.IdeaPluginGenerator {}
     fragment = web.WebIntegrationFragment {
         framework = "Ace"
     }
@@ -339,7 +336,7 @@ With plain Guice modules one implements a method called configure and gets a [Bi
 
 ### The Module API {#guicemodules}
 
-After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named *Domainmodel* we would have a *DomainmodelRuntimeModule*, a *DomainmodelUiModule* (for the Eclipse integration), a *DomainmodelIdeaModule* (for the IntelliJ IDEA integration), and a *DomainmodelWebModule*. The bindings from the runtime module are shared by all integration projects.
+After running the Xtext generator you get several different modules for your language: one for the base project and one for each platform integration project. For instance, for a language named *Domainmodel* we would have a *DomainmodelRuntimeModule*, a *DomainmodelUiModule* (for the Eclipse integration), a *DomainmodelIdeModule* (IDE independent UI services), and a *DomainmodelWebModule*. The bindings from the runtime module are shared by all integration projects.
 
 Xtext comes with a slightly enhanced module API. The abstract base class [AbstractGenericModule]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/service/AbstractGenericModule.java) looks reflectively for certain methods in order to find declared bindings. The most common kind of method is
 
