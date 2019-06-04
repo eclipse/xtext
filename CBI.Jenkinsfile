@@ -145,6 +145,8 @@ spec:
         def envName = ''
         if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
           envName = ' (JIPP)'
+        } else if (env.JENKINS_URL.contains('ci-staging.eclipse.org/xtext')) {
+          envName = ' (JIRO)'
         } else if (env.JENKINS_URL.contains('jenkins.eclipse.org/xtext')) {
           envName = ' (CBI)'
         } else if (env.JENKINS_URL.contains('typefox.io')) {
