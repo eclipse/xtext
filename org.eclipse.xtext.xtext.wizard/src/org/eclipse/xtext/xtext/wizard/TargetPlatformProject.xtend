@@ -95,7 +95,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 			«ENDIF»
 			<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 			<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-06"/>
+			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
 		</location>
 		</locations>
 		</target>
