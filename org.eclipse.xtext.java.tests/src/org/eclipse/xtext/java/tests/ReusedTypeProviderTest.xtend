@@ -105,9 +105,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 		var JvmGenericType type=getTypeProvider().findTypeByName(typeName) as JvmGenericType 
 		var JvmOperation containsValue=Iterables.getOnlyElement(type.findAllFeaturesByName("containsValue")) as JvmOperation 
 		assertNotNull(containsValue) var JvmFormalParameter firstParam=containsValue.getParameters().get(0) 
-		assertEquals(1, firstParam.getAnnotations().size()) var JvmAnnotationReference annotationReference=firstParam.getAnnotations().get(0) 
-		var JvmAnnotationType annotationType=annotationReference.getAnnotation() 
-		assertTrue(annotationType.eIsProxy()) assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString()) 
+		assertEquals(0, firstParam.getAnnotations().size())
 	}
 	
 	@Test

@@ -12,13 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -151,11 +148,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
     JvmOperation containsValue = ((JvmOperation) _onlyElement);
     Assert.assertNotNull(containsValue);
     JvmFormalParameter firstParam = containsValue.getParameters().get(0);
-    Assert.assertEquals(1, firstParam.getAnnotations().size());
-    JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
-    JvmAnnotationType annotationType = annotationReference.getAnnotation();
-    Assert.assertTrue(annotationType.eIsProxy());
-    Assert.assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());
+    Assert.assertEquals(0, firstParam.getAnnotations().size());
   }
   
   @Test
