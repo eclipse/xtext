@@ -9,13 +9,10 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.List
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IndexState
 import org.eclipse.xtext.build.Source2GeneratedMapping
-import org.eclipse.xtext.common.types.JvmAnnotationReference
-import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
