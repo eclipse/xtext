@@ -1,5 +1,5 @@
 node {
-	timeout(180) {
+	timeout(240) {
 		timestamps {
 			properties([
 				[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
