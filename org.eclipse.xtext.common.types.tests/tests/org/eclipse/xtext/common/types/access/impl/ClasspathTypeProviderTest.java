@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
