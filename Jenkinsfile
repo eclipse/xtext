@@ -15,6 +15,8 @@ pipeline {
     stage('Checkout') {
       steps {
         checkout scm
+        dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
+        dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
       }
     }
 
