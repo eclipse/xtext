@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
@@ -306,7 +305,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		autoEditTestProject = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
+		autoEditTestProject = root().getProject(TESTPROJECT_NAME);
 		if (!autoEditTestProject.exists())
 			createPluginProject(TESTPROJECT_NAME);
 	}

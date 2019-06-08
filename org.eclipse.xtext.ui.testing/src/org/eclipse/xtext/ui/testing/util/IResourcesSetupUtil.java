@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -67,7 +67,7 @@ public class IResourcesSetupUtil {
 	}
 	
 	public static void assertNoErrorsInWorkspace() throws CoreException {
-		IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+		IMarker[] findMarkers = root().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 		String msg = "";
 		for (IMarker iMarker : findMarkers) {
 			if (MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR)

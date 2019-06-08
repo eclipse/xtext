@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,11 +14,11 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TestedWorkspaceWithJDT;
 import org.eclipse.xtext.util.IAcceptor;
 import org.junit.Assert;
@@ -43,7 +43,7 @@ public class EclipseResourceFileSystemAccessTest extends Assert {
 	@Test public void testDirsAreCreated() throws Exception {
 		IProject project = workspace.createProject("test");
 		EclipseResourceFileSystemAccess fileSystemAccess = new EclipseResourceFileSystemAccess();
-		fileSystemAccess.setRoot(ResourcesPlugin.getWorkspace().getRoot());
+		fileSystemAccess.setRoot(IResourcesSetupUtil.root());
 		fileSystemAccess.setOutputPath("test");
 		final List<String> newFiles = newArrayList();
 		fileSystemAccess.setNewFileAcceptor(new IAcceptor<String>() {
