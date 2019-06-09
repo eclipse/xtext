@@ -41,7 +41,7 @@ spec:
   }
   
   parameters {
-    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201812', 'r201809', 'r201903', 'photon'], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201812', 'r201809', 'r201903', 'r201906', 'photon'], description: 'Which Target Platform should be used?')
   }
 
   options {
@@ -63,6 +63,8 @@ spec:
         
         script {
           if (params.target_platform == 'latest') {
+            currentBuild.displayName = "#${BUILD_NUMBER}(4.13)"
+          } else if (params.target_platform == 'r201906') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
           } else if (params.target_platform == 'r201903') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
