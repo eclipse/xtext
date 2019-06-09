@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -43,7 +43,7 @@ public class IssueResolutionAcceptor {
 	}
 
 	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification) {
-		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);
+		IModification modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				modificationWrapper));
 	}
@@ -60,7 +60,7 @@ public class IssueResolutionAcceptor {
 	 * @since 2.4
 	 */
 	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification, int relevance) {
-		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);
+		IModification modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification);
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				modificationWrapper, relevance));
 	}
@@ -88,7 +88,7 @@ public class IssueResolutionAcceptor {
 	 */
 	public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image,
 			IMultiModification<T> modification, int relevance) {
-		MultiModificationWrapper wrapper = new MultiModificationWrapper(issue, modification);
+		IModification wrapper = new MultiModificationWrapper(issue, modification);
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue), wrapper, relevance));
 	}
 
@@ -114,7 +114,7 @@ public class IssueResolutionAcceptor {
 	 */
 	public <T extends EObject> void acceptMulti(Issue issue, String label, String description, String image, ICompositeModification<T> modification,
 			int relevance) {
-		CompositeModificationWrapper wrapper = new CompositeModificationWrapper(issue, modification);
+		IModification wrapper = new CompositeModificationWrapper(issue, modification);
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue), wrapper, relevance));
 	}
 
