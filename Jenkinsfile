@@ -5,7 +5,7 @@ node {
 				[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
 				disableConcurrentBuilds(),
 				parameters([
-					choice(choices: 'oxygen\nphoton\nr201809\nr201812\nr201903\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
+					choice(choices: 'oxygen\nphoton\nr201809\nr201812\nr201903\nr201906\nlatest', description: 'Which Target Platform should be used?', name: 'target_platform')
 				])
 			])
 			
@@ -18,6 +18,8 @@ node {
 		
 				checkout scm
 				if ("latest" == params.target_platform) {
+					currentBuild.displayName = "#${BUILD_NUMBER}(4.13)"
+				} else if ("r201906" == params.target_platform) {
 					currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
 				} else if ("r201903" == params.target_platform) {
 					currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
@@ -67,6 +69,8 @@ node {
 				def targetProfile = "-Poxygen"
 				if ("latest" == params.target_platform) {
 					targetProfile = "-Platest"
+				} else if ("r201906" == params.target_platform) {
+					targetProfile = "-Pr201906"
 				} else if ("r201903" == params.target_platform) {
 					targetProfile = "-Pr201903"
 				} else if ("r201812" == params.target_platform) {
