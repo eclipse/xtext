@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,25 +36,28 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 
 	@Test public void testNoFoldingIfOnlyOneImport() throws Exception {
 		String content = "package test\nimport java.util.List\nclass Bar{}";
-		IFile iFile = testHelper.createFile("test/Bar",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Bar", content);
+		
 		assertTrue(foldingRegions.isEmpty());
 	}
-	
+
 	@Test public void testFoldingOfMoreThanOneImports() throws Exception {
 		String content = "package test\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
-		IFile iFile = testHelper.createFile("test/Bar",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Bar", content);
+
 		assertEquals(1, foldingRegions.size());
 		FoldedPosition first = foldingRegions.iterator().next();
 		assertEquals(13, first.getOffset());
 		assertEquals(43, first.length);
 	}
-	
+
 	@Test public void testFoldCopyrightHeader() throws Exception {
 		String content = "/**\n * \n * Hello Copyright\n * \n */\npackage test\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
-		IFile iFile = testHelper.createFile("test/Bar",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Bar", content);
+
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition first = iterator.next();
@@ -66,11 +69,12 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(35, second.length);
 		assertTrue(((DefaultFoldedPosition)second).isInitiallyFolded());
 	}
-	
+
 	@Test public void testFoldCopyrightHeader2() throws Exception {
 		String content = "package test\n/**\n * \n * Hello Copyright\n * \n */\nimport java.util.List\nimport java.util.Set\nclass Bar{}";
-		IFile iFile = testHelper.createFile("test/Bar",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Bar", content);
+
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition first = iterator.next();
@@ -82,7 +86,7 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(35, second.length);
 		assertFalse(((DefaultFoldedPosition)second).isInitiallyFolded());
 	}
-	
+
 	@Test public void testFoldAnonymousClass() throws Exception {
 		String content = "class Foo {\n"
 				+ " val foo = new Runnable() {\n"
@@ -90,8 +94,9 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 				+ "   }\n"
 				+ " }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Bar",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Bar", content);
+
 		assertEquals(3, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -104,7 +109,7 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(40, next.offset);
 		assertEquals(25, next.length);
 	}
-	
+
 	@Test public void testFoldClosure_01() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def void xxx() {\n"
@@ -114,8 +119,9 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 				+ "    ]\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo",content);
+
 		assertEquals(3, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -128,15 +134,16 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(31, next.offset);
 		assertEquals(60, next.length);
 	}
-	
+
 	@Test public void testFoldClosure_02() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def void xxx() {\n"
 				+ "    #[1,2,3].filter [ i % 2 == 0 ]\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -146,7 +153,7 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(12, next.offset);
 		assertEquals(58, next.length);
 	}
-	
+
 	@Test public void testFoldRichString_01() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def void xxx() {\n"
@@ -156,8 +163,9 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 				+ "    ''')\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(3, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -170,15 +178,16 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(31, next.offset);
 		assertEquals(41, next.length);
 	}
-	
+
 	@Test public void testRichString_02() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def void xxx() {\n"
 				+ "    println('''x y''')\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -188,7 +197,7 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(12, next.offset);
 		assertEquals(46, next.length);
 	}
-	
+
 	@Test public void testFoldListLiteral_01() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def xxx() {\n"
@@ -198,8 +207,9 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 				+ "    ]\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(3, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -212,15 +222,16 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(26, next.offset);
 		assertEquals(30, next.length);
 	}
-	
+
 	@Test public void testFoldListLiteral_02() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def xxx() {\n"
 				+ "    #[1,2]\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -230,6 +241,7 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(12, next.offset);
 		assertEquals(29, next.length);
 	}
+
 	@Test public void testFoldSetLiteral_01() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def xxx() {\n"
@@ -239,8 +251,9 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 				+ "    }\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
+
 		assertEquals(3, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -253,15 +266,15 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(26, next.offset);
 		assertEquals(30, next.length);
 	}
-	
+
 	@Test public void testFoldSetLiteral_02() throws Exception {
 		String content = "class Foo {\n"
 				+ "  def xxx() {\n"
 				+ "    #{1,2}\n"
 				+ "  }\n"
 				+ "}";
-		IFile iFile = testHelper.createFile("test/Foo",content);
-		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+
+		Collection<FoldedPosition> foldingRegions = calculateFoldingRegions("test/Foo", content);
 		assertEquals(2, foldingRegions.size());
 		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
 		FoldedPosition next = iterator.next();
@@ -271,13 +284,14 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		assertEquals(12, next.offset);
 		assertEquals(29, next.length);
 	}
-	
-	protected IXtextDocument openFileAndReturnDocument(IFile iFile) throws Exception {
+
+	private Collection<FoldedPosition> calculateFoldingRegions(String fileName, String content) throws Exception {
+		IFile iFile = testHelper.createFile(fileName, content);
 		XtextEditor editor = testHelper.openEditor(iFile);
 		IXtextDocument document = editor.getDocument();
-		return document;
+		return foldingRegionProvider.getFoldingRegions(document);
 	}
-	
+
 	@Override
 	public void tearDown() throws Exception {
 		testHelper.tearDown();
