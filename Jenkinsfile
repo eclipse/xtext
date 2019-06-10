@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   parameters {
-    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201903', 'r201812', 'r201809','r201903', 'photon'], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201906', 'r201903', 'r201812', 'r201809', 'photon'], description: 'Which Target Platform should be used?')
   }
 
   options {
@@ -23,6 +23,8 @@ pipeline {
         
         script {
           if ("latest" == params.target_platform) {
+            currentBuild.displayName = "#${BUILD_NUMBER}(4.13)"
+          } else if ("r201906" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
           } else if ("r201903" == params.target_platform) {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
