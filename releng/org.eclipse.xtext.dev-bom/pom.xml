@@ -88,8 +88,8 @@
 		<emf.ecore-version>2.12.0</emf.ecore-version>
 		<emf.ecore.change-version>2.11.0</emf.ecore.change-version>
 		<emf.codegen-version>2.11.0</emf.codegen-version>
-		<emf.mwe-version>1.4.0</emf.mwe-version>
-		<emf.mwe2-version>2.10.0</emf.mwe2-version>
+		<emf.mwe-version>1.5.0</emf.mwe-version>
+		<emf.mwe2-version>2.11.0</emf.mwe2-version>
 		<equinox.app-version>1.4.0</equinox.app-version>
 		<equinox.common-version>3.10.200</equinox.common-version>
 		<equinox.preferences-version>3.7.200</equinox.preferences-version>
