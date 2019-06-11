@@ -7,10 +7,9 @@
  */
 package org.eclipse.xtext.ide.server.symbol;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.TreeTraverser;
+import com.google.common.graph.SuccessorsFunction;
+import com.google.common.graph.Traverser;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -185,10 +184,10 @@ public class DocumentSymbolService implements IDocumentSymbolService {
     };
     final List<DocumentSymbol> rootSymbols = ListExtensions.<Either<SymbolInformation, DocumentSymbol>, DocumentSymbol>map(this.hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator), _function);
     final Consumer<DocumentSymbol> _function_1 = (DocumentSymbol rootSymbol) -> {
-      final Function<DocumentSymbol, Iterable<DocumentSymbol>> _function_2 = (DocumentSymbol it) -> {
+      final SuccessorsFunction<DocumentSymbol> _function_2 = (DocumentSymbol it) -> {
         return it.getChildren();
       };
-      final FluentIterable<DocumentSymbol> symbols = TreeTraverser.<DocumentSymbol>using(_function_2).preOrderTraversal(rootSymbol);
+      final Iterable<DocumentSymbol> symbols = Traverser.<DocumentSymbol>forTree(_function_2).depthFirstPreOrder(rootSymbol);
       final Function1<DocumentSymbol, String> _function_3 = (DocumentSymbol symbol) -> {
         final Function1<DocumentSymbol, Boolean> _function_4 = (DocumentSymbol it) -> {
           return Boolean.valueOf((((it != symbol) && (!IterableExtensions.isNullOrEmpty(it.getChildren()))) && it.getChildren().contains(symbol)));

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.symbol
 
-import com.google.common.collect.TreeTraverser
+import com.google.common.graph.Traverser
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
@@ -184,7 +184,7 @@ class DocumentSymbolService implements IDocumentSymbolService {
 		val infos = newArrayList
 		val rootSymbols = hierarchicalDocumentSymbolService.getSymbols(resource, cancelIndicator).map[getRight]
 		rootSymbols.forEach[ rootSymbol |
-			val symbols = TreeTraverser.<DocumentSymbol>using([children]).preOrderTraversal(rootSymbol)
+			val symbols = Traverser.<DocumentSymbol>forTree([children]).depthFirstPreOrder(rootSymbol)
 			val (DocumentSymbol)=>String containerNameProvider = [ symbol |
 				return symbols.findFirst [
 					it !== symbol && !children.nullOrEmpty && children.contains(symbol)
