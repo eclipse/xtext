@@ -17,12 +17,13 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.ui.actions.WorkspaceModifyOperation
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.resource.JarEntryLocator
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
 import org.eclipse.xtext.ui.resource.UriValidator
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer
+import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -30,7 +31,6 @@ import org.junit.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
-import org.eclipse.xtext.ui.workspace.WorkspaceLockAccess
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -49,6 +49,19 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	def void tearDown() {
 		JavaCore.removeElementChangedListener(storage2UriMapperJava)
 		cleanWorkspace
+	}
+	
+	private def isExpectedJRESize(int size) {
+		return switch(size) {
+			case 1: /* java8 */ true
+			case 63: /* java9 */ true
+			case 49: /* java10 + java11 */ true
+			default: false
+		}
+	}
+	
+	private def isExpectedJRESize(int size, int multiplier) {
+		return (size / multiplier).isExpectedJRESize && size / multiplier * multiplier == size
 	}
 	
 	def protected Storage2UriMapperJavaImpl createFreshStorage2UriMapper() {
@@ -87,7 +100,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 1, value.associatedRoots.size)
+			assertTrue(value.associatedRoots.size + ' / ' + key, value.associatedRoots.size.isExpectedJRESize)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/'))
 		]
@@ -99,11 +112,10 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
-			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-			val head2 = value.associatedRoots.keySet.tail.head
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(value.associatedRoots.size + ' / ' + key, value.associatedRoots.size.isExpectedJRESize(2))
+			val msg = value.associatedRoots.keySet.join('\n')
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject/')])
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject2/')])
 		]
 
 		removeJarFromClasspath(project, file);
@@ -117,36 +129,34 @@ class Storage2UriMapperJavaImplTest extends Assert {
 				val head = value.associatedRoots.keySet.head
 				assertTrue(head, head.startsWith('=testProject2/'))
 			} else {
-				assertEquals(key, 2, value.associatedRoots.size)
-				val head = value.associatedRoots.keySet.head
-				assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-				val head2 = value.associatedRoots.keySet.tail.head
-				assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+				assertTrue(value.associatedRoots.size + "/" + key, value.associatedRoots.size.isExpectedJRESize(2))
+				val msg = value.associatedRoots.keySet.join('\n')
+				assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject/')])
+				assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject2/')])
 			}
 		]
 
 		removeJarFromClasspath(project2, file);
 		
-		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore, cachedPackageFragmentRootData.size)
 		assertNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
-			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-			val head2 = value.associatedRoots.keySet.tail.head
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(value.associatedRoots.size + "/" + key, value.associatedRoots.size.isExpectedJRESize(2))
+			val msg = value.associatedRoots.keySet.join('\n')
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject/')])
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject2/')])
 		]
 	}
 
 	@Test
 	def void testOnCloseOpenRemoveProject() {
+		assertEquals(0, cachedPackageFragmentRootData.size)
+		
 		val project = createJavaProject("testProject")
 		val project2 = createJavaProject("testProject2")
 		
 		val sizeBefore = cachedPackageFragmentRootData.size
-
 		val file = project.createJar
 		addJarToClasspath(project, file)
 		addJarToClasspath(project2, file)
@@ -171,11 +181,12 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	
 	@Test
 	def void testOnRemoveTwoProjects() {
+		assertEquals(0, cachedPackageFragmentRootData.size)
+		
 		val project = createJavaProject("testProject")
 		val project2 = createJavaProject("testProject2")
 		
 		val sizeBefore = cachedPackageFragmentRootData.size
-
 		val file = project.createJar
 		addJarToClasspath(project, file)
 		addJarToClasspath(project2, file)
@@ -201,7 +212,12 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 1, value.associatedRoots.size)
+			val java9OrNewer = value.associatedRoots.values.exists[ it.class.simpleName == 'JrtPackageFragmentRoot' ]
+			if (java9OrNewer) {
+				assertTrue(value.associatedRoots.size + ' / ' + key, #[44 /* java11 */, 49, 63 /* java9 */].contains(value.associatedRoots.size))
+			} else {
+				assertEquals(key, 1, value.associatedRoots.size)
+			}
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/'))
 		]
@@ -212,11 +228,10 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
-			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-			val head2 = value.associatedRoots.keySet.last
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(value.associatedRoots.size + "/" + key, value.associatedRoots.size.isExpectedJRESize(2))
+			val msg = value.associatedRoots.keySet.join('\n')
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject/')])
+			assertTrue(msg, value.associatedRoots.keySet.exists[ it.startsWith('=testProject2/')])
 		]
 	}
 

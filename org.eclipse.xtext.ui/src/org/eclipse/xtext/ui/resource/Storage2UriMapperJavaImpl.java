@@ -103,6 +103,10 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 
 		public void addRoot(IPackageFragmentRoot root) {
 			if (root != null) {
+				// Do not cache intermediate bridge objects 
+				if ("JImageModuleFragmentBridge".equals(root.getClass().getSimpleName())) {
+					return;
+				}
 				String handleIdentifier = root.getHandleIdentifier();
 				Map<String, IPackageFragmentRoot> roots = associatedRoots;
 				if (!root.equals(roots.get(handleIdentifier))) {
