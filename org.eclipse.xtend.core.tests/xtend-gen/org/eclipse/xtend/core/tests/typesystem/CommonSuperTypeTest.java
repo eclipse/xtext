@@ -274,12 +274,22 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_11() {
-    this.isSuperTypeOf("Comparable<?> & Serializable", "String", "Integer");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Comparable<?> & Constable & ConstantDesc & Serializable", "String", "Integer");
+    } else {
+      this.isSuperTypeOf("Comparable<?> & Serializable", "String", "Integer");
+    }
   }
   
   @Test
   public void testCommonSuperType_12() {
-    this.isSuperTypeOf("Number & Comparable<?>", "Double", "Integer");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Number & Comparable<?> & Constable & ConstantDesc", "Double", "Integer");
+    } else {
+      this.isSuperTypeOf("Number & Comparable<?>", "Double", "Integer");
+    }
   }
   
   @Test
@@ -380,7 +390,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_28() {
-    this.isSuperTypeOf("Number[] & Comparable<?>[]", "Integer[]", "Double[]");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Number[] & Comparable<?>[] & Constable[] & ConstantDesc[]", "Integer[]", "Double[]");
+    } else {
+      this.isSuperTypeOf("Number[] & Comparable<?>[]", "Integer[]", "Double[]");
+    }
   }
   
   @Test
@@ -435,7 +450,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_39() {
-    this.isSuperTypeOf("Number[][][] & Comparable<?>[][][]", "Integer[][][]", "Double[][][]");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Number[][][] & Comparable<?>[][][] & Constable[][][] & ConstantDesc[][][]", "Integer[][][]", "Double[][][]");
+    } else {
+      this.isSuperTypeOf("Number[][][] & Comparable<?>[][][]", "Integer[][][]", "Double[][][]");
+    }
   }
   
   @Test
@@ -445,7 +465,12 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_41() {
-    this.isSuperTypeOf("Comparable<?> & Serializable", "String", "int");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Comparable<?> & Constable & ConstantDesc & Serializable", "String", "int");
+    } else {
+      this.isSuperTypeOf("Comparable<?> & Serializable", "String", "int");
+    }
   }
   
   @Test
@@ -495,12 +520,22 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_51() {
-    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>int", "()=>long"), "Function0<? extends Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?> & Constable & ConstantDesc", "()=>int", "()=>long"), "Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>int", "()=>long"), "Function0<? extends Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testCommonSuperType_52() {
-    this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>Integer", "()=>Long"), "Function0<? extends Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?> & Constable & ConstantDesc", "()=>Integer", "()=>Long"), "Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.isFunctionAndEquivalentTo(this.isSuperTypeOf("()=>Number & Comparable<?>", "()=>Integer", "()=>Long"), "Function0<? extends Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -575,12 +610,22 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testCommonSuperType_67() {
-    this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Comparable<?> & Constable & ConstantDesc & Serializable", "Integer", "String");
+    } else {
+      this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String");
+    }
   }
   
   @Test
   public void testCommonSuperType_68() {
-    this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String", "String");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.isSuperTypeOf("Comparable<?> & Constable & ConstantDesc & Serializable", "Integer", "String", "String");
+    } else {
+      this.isSuperTypeOf("Comparable<?> & Serializable", "Integer", "String", "String");
+    }
   }
   
   @Test

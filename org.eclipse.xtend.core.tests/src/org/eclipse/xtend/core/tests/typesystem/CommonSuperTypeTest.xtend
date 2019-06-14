@@ -148,12 +148,20 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_11() {
-		"Comparable<?> & Serializable".isSuperTypeOf("String", "Integer")
+		if (isJava12OrLater) {
+			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("String", "Integer")
+		} else {
+			"Comparable<?> & Serializable".isSuperTypeOf("String", "Integer")
+		}
 	}
 	
 	@Test
 	def void testCommonSuperType_12() {
-		"Number & Comparable<?>".isSuperTypeOf("Double", "Integer")
+		if (isJava12OrLater) {
+			"Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("Double", "Integer")
+		} else {
+			"Number & Comparable<?>".isSuperTypeOf("Double", "Integer")
+		}
 	}
 	
 	@Test
@@ -245,7 +253,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_28() {
-		"Number[] & Comparable<?>[]".isSuperTypeOf("Integer[]", "Double[]")
+		if (isJava12OrLater) {
+			"Number[] & Comparable<?>[] & Constable[] & ConstantDesc[]".isSuperTypeOf("Integer[]", "Double[]")
+		} else {
+			"Number[] & Comparable<?>[]".isSuperTypeOf("Integer[]", "Double[]")
+		}
 	}
 	
 	@Test
@@ -300,7 +312,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_39() {
-		"Number[][][] & Comparable<?>[][][]".isSuperTypeOf("Integer[][][]", "Double[][][]")
+		if (isJava12OrLater) {
+			"Number[][][] & Comparable<?>[][][] & Constable[][][] & ConstantDesc[][][]".isSuperTypeOf("Integer[][][]", "Double[][][]")
+		} else {
+			"Number[][][] & Comparable<?>[][][]".isSuperTypeOf("Integer[][][]", "Double[][][]")
+		}
 	}
 	
 	@Test
@@ -310,7 +326,11 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_41() {
-		"Comparable<?> & Serializable".isSuperTypeOf("String", "int")
+		if (isJava12OrLater) {
+			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("String", "int")
+		} else {
+			"Comparable<?> & Serializable".isSuperTypeOf("String", "int")
+		}
 	}
 	
 	@Test
@@ -360,12 +380,20 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_51() {
-		"()=>Number & Comparable<?>".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+		if (isJava12OrLater) {
+			"()=>Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>")
+		} else {
+			"()=>Number & Comparable<?>".isSuperTypeOf("()=>int", "()=>long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+		}
 	}
 	
 	@Test
 	def void testCommonSuperType_52() {
-		"()=>Number & Comparable<?>".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+		if (isJava12OrLater) {
+			"()=>Number & Comparable<?> & Constable & ConstantDesc".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?> & Constable & ConstantDesc>")
+		} else {
+			"()=>Number & Comparable<?>".isSuperTypeOf("()=>Integer", "()=>Long").isFunctionAndEquivalentTo("Function0<? extends Number & Comparable<?>>")
+		}
 	}
 	
 	@Test
@@ -440,12 +468,20 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Test
 	def void testCommonSuperType_67() {
-		"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String")
+		if (isJava12OrLater) {
+			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("Integer", "String")
+		} else {
+			"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String")
+		}
 	}
 	
 	@Test
 	def void testCommonSuperType_68() {
-		"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String", "String")
+		if (isJava12OrLater) {
+			"Comparable<?> & Constable & ConstantDesc & Serializable".isSuperTypeOf("Integer", "String", "String")
+		} else {
+			"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String", "String")
+		}
 	}
 	
 	@Test
