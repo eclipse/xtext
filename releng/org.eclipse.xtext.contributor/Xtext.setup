@@ -965,8 +965,6 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="https://download.eclipse.org/eclipse/updates/4.12-I-builds"/>
-          <repository
               url="${p2.xpand}"/>
           <repository
               url="${p2.buildship}"/>
