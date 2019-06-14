@@ -836,7 +836,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testConstructorTypeInference_08() throws Exception {
-    this.done(this.bindTypeArgumentsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?>"));
+    }
   }
   
   @Test
@@ -856,27 +861,52 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testVarArgs_01() throws Exception {
-    this.done(this.bindTypeArgumentsTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "Number & Comparable<?>"));
+    }
   }
   
   @Test
   public void testVarArgs_02() throws Exception {
-    this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "Number & Comparable<?>"));
+    }
   }
   
   @Test
   public void testVarArgs_03() throws Exception {
-    this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "Number & Comparable<?>"));
+    }
   }
   
   @Test
   public void testVarArgs_04() throws Exception {
-    this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "Number & Comparable<?>"));
+    }
   }
   
   @Test
   public void testVarArgs_05() throws Exception {
-    this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "Number & Comparable<?>"));
+    }
   }
   
   @Test
@@ -911,7 +941,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_07() throws Exception {
-    this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "Comparable<?> & Serializable"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "Comparable<?> & Constable & ConstantDesc & Serializable"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "Comparable<?> & Serializable"));
+    }
   }
   
   @Test
@@ -931,7 +966,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_11() throws Exception {
-    this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "Number & Comparable<?>"));
+    }
   }
   
   @Test
@@ -1202,22 +1242,42 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_64() throws Exception {
-    this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Number & Comparable<?> & Constable & ConstantDesc", "Integer"), "Integer"));
+    } else {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"));
+    }
   }
   
   @Test
   public void testFeatureCall_65() throws Exception {
-    this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"), "Integer"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Number & Comparable<?> & Constable & ConstantDesc", "Integer"), "Integer"), "Integer"));
+    } else {
+      this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"), "Integer"));
+    }
   }
   
   @Test
   public void testFeatureCall_66() throws Exception {
-    this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.compareTo(null))\n           val Object o = list.head \n           list.head\n        }", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"), "Integer"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.compareTo(null))\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Number & Comparable<?> & Constable & ConstantDesc", "Integer"), "Integer"), "Integer"));
+    } else {
+      this.done(this.and(this.and(this.and(this.bindTypeArgumentsTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.compareTo(null))\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "Number & Comparable<?>"), "Number & Comparable<?>", "Integer"), "Integer"), "Integer"));
+    }
   }
   
   @Test
   public void testFeatureCall_67() throws Exception {
-    this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "Number & Comparable<?>", "Integer"), "Number & Comparable<?>"), "Integer"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc", "Integer"), "Number & Comparable<?> & Constable & ConstantDesc"), "Integer"));
+    } else {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "Number & Comparable<?>", "Integer"), "Number & Comparable<?>"), "Integer"));
+    }
   }
   
   @Test
@@ -1673,7 +1733,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_018() throws Exception {
-    this.done(this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?>"));
+    }
   }
   
   @Test
@@ -1858,7 +1923,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_064() throws Exception {
-    this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "Number & Comparable<?>"), "Integer"), "Double"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Integer"), "Double"));
+    } else {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?>"), "Integer"), "Double"));
+    }
   }
   
   @Test
@@ -1953,7 +2023,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_084() throws Exception {
-    this.done(this.bindTypeArgumentsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "Number & Comparable<?>"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"));
+    } else {
+      this.done(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?>"));
+    }
   }
   
   @Test
@@ -2143,7 +2218,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_130() throws Exception {
-    this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "Number & Comparable<?>"), "Integer"), "Double"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Integer"), "Double"));
+    } else {
+      this.done(this.and(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "Number & Comparable<?>"), "Integer"), "Double"));
+    }
   }
   
   @Test
@@ -2253,7 +2333,12 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_161() throws Exception {
-    this.done(this.and(this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(null as Integer)\n\t\t\tlist.get(0)\n\t\t\tlist.add(println(null as Double))\n\t\t}", "Number & Comparable<?>"), "Double"));
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.done(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(null as Integer)\n\t\t\t\tlist.get(0)\n\t\t\t\tlist.add(println(null as Double))\n\t\t\t}", "Number & Comparable<?> & Constable & ConstantDesc"), "Double"));
+    } else {
+      this.done(this.and(this.bindTypeArgumentsTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(null as Integer)\n\t\t\t\tlist.get(0)\n\t\t\t\tlist.add(println(null as Double))\n\t\t\t}", "Number & Comparable<?>"), "Double"));
+    }
   }
   
   @Test

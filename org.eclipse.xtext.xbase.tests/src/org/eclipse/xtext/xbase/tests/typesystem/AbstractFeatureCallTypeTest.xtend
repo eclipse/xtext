@@ -1337,10 +1337,17 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCallWithOperatorOverloading_6() throws Exception {
-		"newHashMap( 5 -> '', '' -> 5 )".resolvesFeatureCallsTo(
-			"HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
-			"Pair<Integer, String>", 
-			"Pair<String, Integer>")
+		if (isJava12OrLater) {
+			"newHashMap( 5 -> '', '' -> 5 )".resolvesFeatureCallsTo(
+				"HashMap<Comparable<?> & Constable & ConstantDesc & Serializable, Comparable<?> & Constable & ConstantDesc & Serializable>", 
+				"Pair<Integer, String>", 
+				"Pair<String, Integer>")
+		} else {
+			"newHashMap( 5 -> '', '' -> 5 )".resolvesFeatureCallsTo(
+				"HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
+				"Pair<Integer, String>", 
+				"Pair<String, Integer>")
+		}
 	}
 	
 	@Test def void testFeatureCallOnIt() throws Exception {

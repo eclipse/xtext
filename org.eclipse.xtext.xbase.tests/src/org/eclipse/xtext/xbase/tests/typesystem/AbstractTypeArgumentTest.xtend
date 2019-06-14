@@ -782,7 +782,11 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testConstructorTypeInference_08() throws Exception {
-		"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testConstructorTypeInference_09() throws Exception {
@@ -798,23 +802,43 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testVarArgs_01() throws Exception {
-		"newArrayList(new Double('-20'), new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"newArrayList(new Double('-20'), new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"newArrayList(new Double('-20'), new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testVarArgs_02() throws Exception {
-		"newArrayList(if (true) new Double('-20') else new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testVarArgs_03() throws Exception {
-		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testVarArgs_04() throws Exception {
-		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testVarArgs_05() throws Exception {
-		"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"newArrayList(if (true) new Double('-20') else new Integer('20'), new Integer('29'), new Double('29'))".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 
 	@Test def void testFeatureCall_01() throws Exception {
@@ -842,7 +866,11 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_07() throws Exception {
-		"new testdata.ClassWithVarArgs().toList('', 1)".bindTypeArgumentsTo("Comparable<?> & Serializable").done
+		if (isJava12OrLater) {
+			"new testdata.ClassWithVarArgs().toList('', 1)".bindTypeArgumentsTo("Comparable<?> & Constable & ConstantDesc & Serializable").done
+		} else {
+			"new testdata.ClassWithVarArgs().toList('', 1)".bindTypeArgumentsTo("Comparable<?> & Serializable").done
+		}
 	}
 	
 	@Test def void testFeatureCall_08() throws Exception {
@@ -858,7 +886,11 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_11() throws Exception {
-		"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testFeatureCall_12() throws Exception {
@@ -1068,31 +1100,59 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_64() throws Exception {
-		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
-           val Object o = list.head 
-           list
-        }".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").done
+		if (isJava12OrLater) {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Number & Comparable<?> & Constable & ConstantDesc", "Integer").and("Integer").done
+		} else {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").done
+		}
 	}
 	
 	@Test def void testFeatureCall_65() throws Exception {
-		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
-           val Object o = list.head 
-           list.head
-        }".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").and("Integer").done
+		if (isJava12OrLater) {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list.head
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Number & Comparable<?> & Constable & ConstantDesc", "Integer").and("Integer").and("Integer").done
+		} else {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list.head
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").and("Integer").done
+		}
 	}
 	
 	@Test def void testFeatureCall_66() throws Exception {
-		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.compareTo(null))
-           val Object o = list.head 
-           list.head
-        }".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").and("Integer").done
+		if (isJava12OrLater) {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.compareTo(null))
+			   val Object o = list.head 
+			   list.head
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Number & Comparable<?> & Constable & ConstantDesc", "Integer").and("Integer").and("Integer").done
+		} else {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.compareTo(null))
+			   val Object o = list.head 
+			   list.head
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Number & Comparable<?>", "Integer").and("Integer").and("Integer").done
+		}
 	}
 	
 	@Test def void testFeatureCall_67() throws Exception {
-		"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
-           val Object o = list.head 
-           list
-        }".bindTypeArgumentsTo("Number & Comparable<?>", "Integer").and("Number & Comparable<?>").and("Integer").done
+		if (isJava12OrLater) {
+			"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
+			   val Object o = list.head 
+			   list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc", "Integer").and("Number & Comparable<?> & Constable & ConstantDesc").and("Integer").done
+		} else {
+			"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
+			   val Object o = list.head 
+			   list
+			}".bindTypeArgumentsTo("Number & Comparable<?>", "Integer").and("Number & Comparable<?>").and("Integer").done
+		}
 	}
 	
 	@Test def void testFeatureCall_68() throws Exception {
@@ -1579,12 +1639,21 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_018() throws Exception {
-		"{
-			val list = newArrayList
-			list.add(new Integer(0))
-			list.add(new Integer(0).doubleValue)
-			list
-		}".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"{
+				val list = newArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"{
+				val list = newArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_019() throws Exception {
@@ -1914,12 +1983,21 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_064() throws Exception {
-		"{
-			val list = newArrayList
-			list.add(println(new Integer(0)))
-			list.add(println(new Integer(0).doubleValue))
-			list
-		}".bindTypeArgumentsTo("Number & Comparable<?>").and("Integer").and("Double").done
+		if (isJava12OrLater) {
+			"{
+				val list = newArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Integer").and("Double").done
+		} else {
+			"{
+				val list = newArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Integer").and("Double").done
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_065() throws Exception {
@@ -2069,12 +2147,21 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_084() throws Exception {
-		"{
-			val list = new java.util.ArrayList
-			list.add(new Integer(0))
-			list.add(new Integer(0).doubleValue)
-			list
-		}".bindTypeArgumentsTo("Number & Comparable<?>").done
+		if (isJava12OrLater) {
+			"{
+				val list = new java.util.ArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").done
+		} else {
+			"{
+				val list = new java.util.ArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?>").done
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_085() throws Exception {
@@ -2414,12 +2501,21 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
-		"{
-			val list = new java.util.ArrayList
-			list.add(println(new Integer(0)))
-			list.add(println(new Integer(0).doubleValue))
-			list
-		}".bindTypeArgumentsTo("Number & Comparable<?>").and("Integer").and("Double").done
+		if (isJava12OrLater) {
+			"{
+				val list = new java.util.ArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Integer").and("Double").done
+		} else {
+			"{
+				val list = new java.util.ArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Integer").and("Double").done
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_131() throws Exception {
@@ -2605,12 +2701,21 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_161() throws Exception {
-		"{
-			val list = newArrayList
-			list.add(null as Integer)
-			list.get(0)
-			list.add(println(null as Double))
-		}".bindTypeArgumentsTo("Number & Comparable<?>").and("Double").done
+		if (isJava12OrLater) {
+			"{
+				val list = newArrayList
+				list.add(null as Integer)
+				list.get(0)
+				list.add(println(null as Double))
+			}".bindTypeArgumentsTo("Number & Comparable<?> & Constable & ConstantDesc").and("Double").done
+		} else {
+			"{
+				val list = newArrayList
+				list.add(null as Integer)
+				list.get(0)
+				list.add(println(null as Double))
+			}".bindTypeArgumentsTo("Number & Comparable<?>").and("Double").done
+		}
 	}
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {

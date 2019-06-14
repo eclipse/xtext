@@ -114,12 +114,22 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testTypeArguments_02() {
     final InvokedResolvedOperation operation = this.toOperation("newArrayList(1, 1d)");
-    Assert.assertEquals("ArrayList<Number & Comparable<?>>", operation.getResolvedReturnType().getSimpleName());
-    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
-      return it.getSimpleName();
-    };
-    Assert.assertEquals("Number & Comparable<?>", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function));
-    Assert.assertEquals("newArrayList(Number & Comparable<?>[])", operation.getSimpleSignature());
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      Assert.assertEquals("ArrayList<Number & Comparable<?> & Constable & ConstantDesc>", operation.getResolvedReturnType().getSimpleName());
+      final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
+        return it.getSimpleName();
+      };
+      Assert.assertEquals("Number & Comparable<?> & Constable & ConstantDesc", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function));
+      Assert.assertEquals("newArrayList(Number & Comparable<?> & Constable & ConstantDesc[])", operation.getSimpleSignature());
+    } else {
+      Assert.assertEquals("ArrayList<Number & Comparable<?>>", operation.getResolvedReturnType().getSimpleName());
+      final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
+        return it.getSimpleName();
+      };
+      Assert.assertEquals("Number & Comparable<?>", IterableExtensions.<LightweightTypeReference>join(operation.getResolvedTypeArguments(), ", ", _function_1));
+      Assert.assertEquals("newArrayList(Number & Comparable<?>[])", operation.getSimpleSignature());
+    }
   }
   
   @Test

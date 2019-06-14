@@ -114,7 +114,12 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   @Test
   @Override
   public void testIfExpression_28() throws Exception {
-    this.resolvesTo("if (true) return \'\' else 1", "Comparable<?> & Serializable");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("if (true) return \'\' else 1", "Comparable<?> & Constable & ConstantDesc & Serializable");
+    } else {
+      this.resolvesTo("if (true) return \'\' else 1", "Comparable<?> & Serializable");
+    }
   }
   
   @Test
