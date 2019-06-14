@@ -6,7 +6,7 @@ import testdata.TryBodyException;
 @SuppressWarnings("all")
 public class ClosableWithListExceptionOnAdd extends ClosableWithList {
   public void addExc() throws TryBodyException {
-    this.getList().add("exception");
+    this.list.add("exception");
     throw new TryBodyException();
   }
 }

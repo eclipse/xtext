@@ -2918,7 +2918,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"	a.add(\"body\")\n" + 
 				"	result = a\n" + 
 				"} finally {\n" + 
-				"	a.add(\"finally\")\n" + 
+				"	result.add(\"finally\")\n" + 
 				"}\n" + 
 				"return result.printList");
 	}
@@ -2928,13 +2928,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test @Ignore public void testTryWithResources_catch() throws Exception {
 		assertEvaluatesTo("[new, catch, close]",
-				"var java.util.List<String> result\n" + 
-				"try (var a = new testdata.ClosableWithList;\n" + 
+				"val java.util.List<String> result = newArrayList\n" + 
+				"try (val a = new testdata.ClosableWithList(result);\n" + 
 				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
-				"	a.add(\"body\")\n" + 
+				"	result.add(\"body\")\n" + 
 				"} catch (java.lang.InstantiationException e) {\n" + 
-				"	a.add(\"catch\")\n" + 
-				"	result = a.list\n" + 
+				"	result.add(\"catch\")\n" + 
 				"}\n" + 
 				"return result.toString");
 	}
@@ -2951,9 +2950,9 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"	result = a\n" + 
 				"	b.addExc\n" + 
 				"} catch (testdata.TryBodyException e) {\n" + 
-				"	a.add(\"catch b\")\n" + 
+				"	result.add(\"catch b\")\n" + 
 				"} finally {\n" + 
-				"	a.add(\"finally\")\n" + 
+				"	result.add(\"finally\")\n" + 
 				"}\n" + 
 				"return result.printList");
 	}
@@ -3001,15 +3000,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test @Ignore public void testTryWithResources_2ResourcesCatch_01() throws Exception {
 		assertEvaluatesTo("[new, catch, close]", //b.add would invoke NullPointerExcpt, but InstExc came first and is caught
-				"var java.util.List<String> result\n" + 
-				"try (var a = new testdata.ClosableWithList;\n" + 
+				"var java.util.List<String> result = newArrayList\n" + 
+				"try (var a = new testdata.ClosableWithList(result);\n" + 
 				"		var b = new testdata.ClosableWithListExceptionOnConstr) {\n" + 
 				"	a.add(\"body\")\n" + 
 				"	b.add(\"body\")\n" + 
 				"}\n" + 
 				"catch (java.lang.InstantiationException e) {\n" + 
-				"	a.add(\"catch\")\n" + 
-				"	result = a.list\n" + 
+				"	result.add(\"catch\")\n" + 
 				"}\n" + 
 				"return result.toString");
 	}

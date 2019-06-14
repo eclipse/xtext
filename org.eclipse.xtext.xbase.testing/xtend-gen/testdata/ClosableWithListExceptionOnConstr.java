@@ -5,7 +5,7 @@ import testdata.ClosableWithList;
 @SuppressWarnings("all")
 public class ClosableWithListExceptionOnConstr extends ClosableWithList {
   public ClosableWithListExceptionOnConstr() throws InstantiationException {
-    this.getList().add("new");
+    this.list.add("new");
     throw new InstantiationException();
   }
 }

@@ -1166,17 +1166,18 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				caughtExceptions.add(referenceOwner.toLightweightTypeReference(catchClause.getDeclaredParam().getParameterType()));
 		}
 		
+		ITypeComputationState withExpectedExceptions = state.withExpectedExceptions(caughtExceptions);
 		// Resources
 		List <XVariableDeclaration> resources = object.getResources();
 		for (XVariableDeclaration resDecl : resources) {
-			ITypeComputationState resourceState = state.withExpectedExceptions(caughtExceptions).withoutExpectation(); // no expectation
+			ITypeComputationState resourceState = withExpectedExceptions.withoutExpectation();
 			resourceState.computeTypes(resDecl);
-			addLocalToCurrentScope(resDecl, state);
+			addLocalToCurrentScope(resDecl, withExpectedExceptions);
 		}
-		state.withinScope(object);
+		withExpectedExceptions.withinScope(object);
 		
 		// Body of TryCatchExpression
-		state.withExpectedExceptions(caughtExceptions).computeTypes(object.getExpression());
+		withExpectedExceptions.computeTypes(object.getExpression());
 
 		// CatchClause
 		for (XCatchClause catchClause : object.getCatchClauses()) {

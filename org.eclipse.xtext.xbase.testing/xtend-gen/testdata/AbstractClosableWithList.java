@@ -5,7 +5,7 @@ import java.util.List;
 
 @SuppressWarnings("all")
 public abstract class AbstractClosableWithList implements AutoCloseable {
-  private List<String> list;
+  List<String> list;
   
   public AbstractClosableWithList() {
     ArrayList<String> _arrayList = new ArrayList<String>();

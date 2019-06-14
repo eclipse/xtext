@@ -4,7 +4,7 @@ import java.util.List
 import java.util.ArrayList
 
 abstract class AbstractClosableWithList implements AutoCloseable {
-	List<String> list;
+	package List<String> list;
 
 	new() {
 		list = new ArrayList
@@ -25,6 +25,14 @@ abstract class AbstractClosableWithList implements AutoCloseable {
 }
 
 class ClosableWithList extends AbstractClosableWithList {
+
+	new() {
+	}
+	
+	new(List<String> collector) {
+		collector.addAll(list)
+		this.list = collector
+	}
 
 	override close() {
 		list.add("close")
