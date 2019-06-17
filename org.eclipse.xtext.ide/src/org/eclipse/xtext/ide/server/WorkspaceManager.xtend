@@ -180,7 +180,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 
 	/**
 	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
-	 *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+	 *   Use {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
 	 */
 	@Deprecated
 	def didChange(URI uri, Integer version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
@@ -189,7 +189,7 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 
 	/**
 	 * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
-	 *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+	 *   Use {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
 	 */
 	@Deprecated
 	def Buildable didChange(URI uri, Integer version, Iterable<TextEdit> changes) {
