@@ -226,7 +226,7 @@ public class WorkspaceManager {
   
   /**
    * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
-   *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+   *   Use {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
    */
   @Deprecated
   public List<IResourceDescription.Delta> didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
@@ -235,7 +235,7 @@ public class WorkspaceManager {
   
   /**
    * @deprecated the server should not apply {@link TextEdit}s but {@link TextDocumentContentChangeEvent}s.
-   *   Use {@link didChangeTextDocumentContent(URI, Integer, Iterable<TextDocumentContentChangeEvent>)} instead.
+   *   Use {@link #didChangeTextDocumentContent(URI, Integer, Iterable)} instead.
    */
   @Deprecated
   public BuildManager.Buildable didChange(final URI uri, final Integer version, final Iterable<TextEdit> changes) {

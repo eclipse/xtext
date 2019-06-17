@@ -56,7 +56,7 @@ public class XtextSerializationTokensTest extends AbstractXtextTests {
 		XtextResource resource = this.getResourceFromString(grammarString);
 		Grammar grammarCopy = (Grammar) EcoreUtil.copy(resource.getContents().get(0));
 		resource.getContents().add(0, grammarCopy);
-		this.assertEquals(grammarString, this.serialize(grammarCopy));
+		assertEquals(grammarString, this.serialize(grammarCopy));
 	}
 
 }
