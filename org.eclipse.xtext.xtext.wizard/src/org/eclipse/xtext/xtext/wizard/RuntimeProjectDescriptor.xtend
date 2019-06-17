@@ -670,7 +670,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			<stringAttribute key="bad_container_name" value="/«config.runtimeProject.name»/.launch/"/>
 			<stringAttribute key="bootstrap" value=""/>
 			<stringAttribute key="checked" value="[NONE]"/>
-			<booleanAttribute key="clearConfig" value="false"/>
+			<booleanAttribute key="clearConfig" value="true"/>
 			<booleanAttribute key="clearws" value="false"/>
 			<booleanAttribute key="clearwslog" value="false"/>
 			<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Launch Runtime Eclipse"/>
