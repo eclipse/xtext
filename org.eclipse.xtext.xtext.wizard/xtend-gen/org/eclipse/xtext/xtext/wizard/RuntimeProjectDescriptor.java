@@ -1813,7 +1813,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.newLine();
     _builder.append("<stringAttribute key=\"checked\" value=\"[NONE]\"/>");
     _builder.newLine();
-    _builder.append("<booleanAttribute key=\"clearConfig\" value=\"false\"/>");
+    _builder.append("<booleanAttribute key=\"clearConfig\" value=\"true\"/>");
     _builder.newLine();
     _builder.append("<booleanAttribute key=\"clearws\" value=\"false\"/>");
     _builder.newLine();
