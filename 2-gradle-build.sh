@@ -3,6 +3,10 @@ if [ -z "$JENKINS_URL" ]; then
   JENKINS_URL=https://ci.eclipse.org/xtext/
 fi
 
+if [ -f "/.dockerenv" ]; then
+  export GRADLE_OPTS="-Dorg.gradle.daemon=false"
+fi
+
 ./gradlew \
   clean cleanGenerateXtext build createLocalMavenRepo \
   -Dmaven.repo.local=$(pwd)/.m2/repository \
@@ -10,4 +14,5 @@ fi
   -PJENKINS_URL=$JENKINS_URL \
   -PignoreTestFailures=true \
   --refresh-dependencies \
-  --continue
+  --continue \
+  $@

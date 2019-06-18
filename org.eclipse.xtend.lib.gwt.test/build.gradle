@@ -13,8 +13,6 @@ gwt {
 	gwtVersion = versions.gwt
 	module 'org.eclipse.xtend.lib.test.Test'
 	compile {
-		minHeapSize = "512M";
-		maxHeapSize = "1024M";
 		strict = true
 	}
 }

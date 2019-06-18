@@ -20,10 +20,8 @@ spec:
     resources:
       limits:
         memory: "2Gi"
-        cpu: "1"
       requests:
         memory: "2Gi"
-        cpu: "1"
     volumeMounts:
     - name: settings-xml
       mountPath: /home/jenkins/.m2/settings.xml
@@ -74,8 +72,6 @@ spec:
 
     stage('Build Xtext BOM') {
       steps {
-        dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
-        dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
         sh './1-install-bom.sh'
       }
     }
