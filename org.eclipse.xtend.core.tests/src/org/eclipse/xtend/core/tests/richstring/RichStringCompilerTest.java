@@ -7,17 +7,67 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
+import java.util.List;
+
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtend.core.tests.RuntimeTestSetup;
+import org.eclipse.xtend.core.tests.richstring.RichStringCompilerTest.FewerImportsRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.util.TemporaryFolder;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedFeatures;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.google.common.collect.Lists;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(FewerImportsRuntimeInjectorProvider.class)
 public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
+	
+	@Singleton
+	public static class FewerImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
+		@Override
+		protected List<Class<?>> getExtensionClasses() {
+			return Lists.newArrayList(IterableExtensions.class, ObjectExtensions.class, IntegerExtensions.class);
+		}
+		
+		@Override
+		protected List<Class<?>> getStaticImportClasses() {
+			return Lists.newArrayList();
+		}
+	}
+	
+	public static class FewerImportsRuntimeInjectorProvider extends RuntimeInjectorProvider {
+		@Override
+		protected Injector internalCreateInjector() {
+			
+			return new RuntimeTestSetup() {
+				@Override
+				public Injector createInjector() {
+					return Guice.createInjector(new XtendRuntimeTestModule() {
+						public Class<? extends ImplicitlyImportedFeatures> bindImplicitlyImportedFeatures() {
+							return FewerImplicitlyImportedFeatures.class;
+						}
+					});
+					
+				}
+			}.createInjectorAndDoEMFRegistration();
+		}
+	}	
+	
 	
 	@Inject
 	private RichStringCompilerTestHelper testHelper;
@@ -51,14 +101,14 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	@Test public void testForLoop_27() throws Exception {
 		assertOutput(
 				"foo\n",
-				"'''«FOR a: newArrayList(new testdata.OuterClass$InnerClass())»\n" +
+				"'''«FOR a: com.google.common.collect.Lists.newArrayList(new testdata.OuterClass$InnerClass())»\n" +
 				"   foo\n" +
 				"«ENDFOR»'''");
 	}
 	
 	@Test public void testBug343148() throws Exception {
 		assertOutput(" zonk a\n\n zonk b\n\n zonk c",
-				"'''«newArrayList('a','b','c').join('\n\n',[e|''' zonk «e»'''])»'''");
+				"'''«com.google.common.collect.Lists.newArrayList('a','b','c').join('\n\n',[e|''' zonk «e»'''])»'''");
 	}
 	
 	@Test public void testBug349762() throws Exception {
