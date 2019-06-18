@@ -37,6 +37,7 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -52,6 +53,36 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
+	
+	@Test public void testResourceVisibleInTry() throws Exception {
+		XtendFunction function = function("def tryCatch() {\n" + 
+				"	    try(val a = []) a" + 
+				"	}");
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) ((XBlockExpression) function.getExpression()).getExpressions().get(0);
+		XFeatureCall call = (XFeatureCall) tryCatch.getExpression();
+		JvmIdentifiableElement feature = call.getFeature();
+		assertFalse(feature.eIsProxy());
+	}
+	
+	@Test public void testResourceNotVisibleInCatch() throws Exception {
+		XtendFunction function = function("def tryCatch() {\n" + 
+				"	    try(val a = []) {} catch(Exception e) a" + 
+				"	}");
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) ((XBlockExpression) function.getExpression()).getExpressions().get(0);
+		XFeatureCall call = (XFeatureCall) tryCatch.getCatchClauses().get(0).getExpression();
+		JvmIdentifiableElement feature = call.getFeature();
+		assertTrue(feature.eIsProxy());
+	}
+	
+	@Test public void testResourceNotVisibleInFinally() throws Exception {
+		XtendFunction function = function("def tryCatch() {\n" + 
+				"	    try(val a = []) {} finally a" + 
+				"	}");
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) ((XBlockExpression) function.getExpression()).getExpressions().get(0);
+		XFeatureCall call = (XFeatureCall) tryCatch.getFinallyExpression();
+		JvmIdentifiableElement feature = call.getFeature();
+		assertTrue(feature.eIsProxy());
+	}
 	
 	@Test public void testFieldsAreNotSugared() throws Exception {
 		XtendClass clazz = clazz("class A {\n"
