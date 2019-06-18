@@ -5,6 +5,8 @@ package org.eclipse.xtext.example.fowlerdsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.fowlerdsl.ui.AbstractStatemachineUiModule;
+import org.eclipse.xtext.example.fowlerdsl.ui.folding.StatemachineFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -13,5 +15,9 @@ import org.eclipse.xtext.example.fowlerdsl.ui.AbstractStatemachineUiModule;
 public class StatemachineUiModule extends AbstractStatemachineUiModule {
   public StatemachineUiModule(final AbstractUIPlugin plugin) {
     super(plugin);
+  }
+  
+  public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+    return StatemachineFoldingRegionProvider.class;
   }
 }

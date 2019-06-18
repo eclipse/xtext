@@ -20,6 +20,38 @@ import org.junit.runner.RunWith
 @InjectWith(StatemachineUiInjectorProvider)
 class StatemachineFoldingTest extends AbstractFoldingTest {
 
+	@Test def events() {
+		'''
+			[>events
+				doorClosed   D1CL
+				drawerOpened D2OP
+				lightOn      L1ON
+				doorOpened   D1OP
+				panelClosed  PNCL
+			end<]
+		'''.testFoldingRegions
+	}
+
+	@Test def resetEvents() {
+		'''
+			[>resetEvents
+				doorOpened
+				doorClosed
+			end<]
+		'''.testFoldingRegions
+	}
+
+	@Test def commands() {
+		'''
+			[>commands
+				unlockPanel PNUL
+				lockPanel   NLK
+				lockDoor    D1LK
+				unlockDoor  D1UL
+			end<]
+		'''.testFoldingRegions
+	}
+
 	@Test def state001() {
 		'''
 			[>state idle
@@ -39,25 +71,25 @@ class StatemachineFoldingTest extends AbstractFoldingTest {
 
 	@Test def complex() {
 		'''
-			events
+			[>events
 				doorClosed   D1CL
 				drawerOpened D2OP
 				lightOn      L1ON
 				doorOpened   D1OP
 				panelClosed  PNCL
-			end
+			end<]
 			
-			resetEvents
+			[>resetEvents
 				doorOpened
 				doorClosed
-			end
+			end<]
 			
-			commands
+			[>commands
 				unlockPanel PNUL
 				lockPanel   NLK
 				lockDoor    D1LK
 				unlockDoor  D1UL
-			end
+			end<]
 			
 			[>state idle
 				actions {unlockDoor lockPanel}

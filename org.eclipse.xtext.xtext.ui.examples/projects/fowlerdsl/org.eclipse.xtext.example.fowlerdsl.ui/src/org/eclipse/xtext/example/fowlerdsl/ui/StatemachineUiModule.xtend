@@ -4,12 +4,18 @@
 package org.eclipse.xtext.example.fowlerdsl.ui
 
 import org.eclipse.ui.plugin.AbstractUIPlugin
+import org.eclipse.xtext.example.fowlerdsl.ui.folding.StatemachineFoldingRegionProvider
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-class StatemachineUiModule extends org.eclipse.xtext.example.fowlerdsl.ui.AbstractStatemachineUiModule {
+class StatemachineUiModule extends AbstractStatemachineUiModule {
 	new(AbstractUIPlugin plugin) {
 		super(plugin)
+	}
+
+	def Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+		StatemachineFoldingRegionProvider
 	}
 }

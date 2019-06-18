@@ -23,6 +23,69 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class StatemachineFoldingTest extends AbstractFoldingTest {
   @Test
+  public void events() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[>events");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorClosed   D1CL");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("drawerOpened D2OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lightOn      L1ON");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorOpened   D1OP");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("panelClosed  PNCL");
+    _builder.newLine();
+    _builder.append("end<]");
+    _builder.newLine();
+    this.testFoldingRegions(_builder);
+  }
+  
+  @Test
+  public void resetEvents() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[>resetEvents");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorOpened");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("doorClosed");
+    _builder.newLine();
+    _builder.append("end<]");
+    _builder.newLine();
+    this.testFoldingRegions(_builder);
+  }
+  
+  @Test
+  public void commands() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[>commands");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("unlockPanel PNUL");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lockPanel   NLK");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("lockDoor    D1LK");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("unlockDoor  D1UL");
+    _builder.newLine();
+    _builder.append("end<]");
+    _builder.newLine();
+    this.testFoldingRegions(_builder);
+  }
+  
+  @Test
   public void state001() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[>state idle");
@@ -51,7 +114,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
   @Test
   public void complex() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("events");
+    _builder.append("[>events");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("doorClosed   D1CL");
@@ -68,10 +131,10 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.append("\t");
     _builder.append("panelClosed  PNCL");
     _builder.newLine();
-    _builder.append("end");
+    _builder.append("end<]");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("resetEvents");
+    _builder.append("[>resetEvents");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("doorOpened");
@@ -79,10 +142,10 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.append("\t");
     _builder.append("doorClosed");
     _builder.newLine();
-    _builder.append("end");
+    _builder.append("end<]");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("commands");
+    _builder.append("[>commands");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("unlockPanel PNUL");
@@ -96,7 +159,7 @@ public class StatemachineFoldingTest extends AbstractFoldingTest {
     _builder.append("\t");
     _builder.append("unlockDoor  D1UL");
     _builder.newLine();
-    _builder.append("end");
+    _builder.append("end<]");
     _builder.newLine();
     _builder.newLine();
     _builder.append("[>state idle");
