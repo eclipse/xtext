@@ -52,16 +52,22 @@ class ClasspathScanner {
 		return ClassLoader.systemClassLoader.getDescriptors(true, packagePrefixes)
 	}
 	
+	var String[] systemClasspath = null
+	
 	def String[] getSystemClasspath() {
+		if (systemClasspath !== null) {
+			return systemClasspath;
+		}
 		try (val ScanResult scanResult = new ClassGraph()
 				.enableSystemJarsAndModules()
 				.addClassLoader(ClassLoader.getSystemClassLoader())
 				.scan()) {
 			val classpathURIs = scanResult.classpathURIs
-			return classpathURIs.map[path].filterNull
+			systemClasspath = classpathURIs.map[path].filterNull
+			return systemClasspath;
 		}
 	}
-
+	
 	protected def Iterable<ITypeDescriptor> loadDescriptors(ClassLoader classLoader, boolean bootstrap,
 		Collection<String> packagePrefixes) {
 		val classGraph = new ClassGraph()

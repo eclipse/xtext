@@ -137,13 +137,19 @@ public class ClasspathScanner {
     return this.getDescriptors(ClassLoader.getSystemClassLoader(), true, packagePrefixes);
   }
   
+  private String[] systemClasspath = null;
+  
   public String[] getSystemClasspath() {
+    if ((this.systemClasspath != null)) {
+      return this.systemClasspath;
+    }
     try (final ScanResult scanResult = new ClassGraph().enableSystemJarsAndModules().addClassLoader(ClassLoader.getSystemClassLoader()).scan()) {
       final List<URI> classpathURIs = scanResult.getClasspathURIs();
       final Function1<URI, String> _function = (URI it) -> {
         return it.getPath();
       };
-      return ((String[])Conversions.unwrapArray(IterableExtensions.<String>filterNull(ListExtensions.<URI, String>map(classpathURIs, _function)), String.class));
+      this.systemClasspath = ((String[])Conversions.unwrapArray(IterableExtensions.<String>filterNull(ListExtensions.<URI, String>map(classpathURIs, _function)), String.class));
+      return this.systemClasspath;
     }
   }
   
