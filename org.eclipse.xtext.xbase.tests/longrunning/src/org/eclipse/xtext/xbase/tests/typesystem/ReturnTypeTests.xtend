@@ -94,7 +94,11 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	}
 	
 	@Test override void testIfExpression_28() throws Exception {
-		"if (true) return '' else 1".resolvesTo("Comparable<?> & Serializable")
+		if (isJava12OrLater) {
+			"if (true) return '' else 1".resolvesTo("Comparable<?> & Constable & ConstantDesc & Serializable")
+		} else {
+			"if (true) return '' else 1".resolvesTo("Comparable<?> & Serializable")
+		}
 	}
 	
 	@Test override testSwitchExpression_1() throws Exception {

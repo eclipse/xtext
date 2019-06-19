@@ -257,7 +257,12 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testConstructorTypeInference_08() throws Exception {
-    this.resolvesConstructorCallsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?>>", "Integer", "Integer");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesConstructorCallsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer");
+    } else {
+      this.resolvesConstructorCallsTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?>>", "Integer", "Integer");
+    }
   }
   
   @Test
@@ -497,7 +502,12 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testDeferredTypeArgumentResolution_084() throws Exception {
-    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>", "Integer", "Integer");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesConstructorCallsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer");
+    } else {
+      this.resolvesConstructorCallsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>", "Integer", "Integer");
+    }
   }
   
   @Test
@@ -727,7 +737,12 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   
   @Test
   public void testDeferredTypeArgumentResolution_130() throws Exception {
-    this.resolvesConstructorCallsTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>", "Integer", "Integer");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesConstructorCallsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer");
+    } else {
+      this.resolvesConstructorCallsTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>", "Integer", "Integer");
+    }
   }
   
   @Test

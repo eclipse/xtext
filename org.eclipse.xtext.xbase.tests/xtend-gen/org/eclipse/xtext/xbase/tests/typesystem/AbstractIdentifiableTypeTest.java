@@ -626,12 +626,22 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testFeatureCall_26() throws Exception {
-    this.resolvesIdentifiablesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "List<Integer>", "Number & Comparable<?>", "Object");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesIdentifiablesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "List<Integer>", "Number & Comparable<?> & Constable & ConstantDesc", "Object");
+    } else {
+      this.resolvesIdentifiablesTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "List<Integer>", "Number & Comparable<?>", "Object");
+    }
   }
   
   @Test
   public void testFeatureCall_27() throws Exception {
-    this.resolvesIdentifiablesTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "List<Integer>", "Number & Comparable<?>", "Object");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesIdentifiablesTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "List<Integer>", "Number & Comparable<?> & Constable & ConstantDesc", "Object");
+    } else {
+      this.resolvesIdentifiablesTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "List<Integer>", "Number & Comparable<?>", "Object");
+    }
   }
   
   @Test

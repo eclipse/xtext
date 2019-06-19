@@ -1274,17 +1274,32 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_056() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_057() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_058() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
@@ -1329,22 +1344,42 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_067() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_068() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v|v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_069() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v|v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v|v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_070() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v| return v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(new Double(\'-20\'), new Integer(\'20\'))) [ v| return v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
@@ -1630,17 +1665,32 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_126() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_127() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_128() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v| return v.intValue ]\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v| return v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = $$ListExtensions::map(newArrayList(if (false) new Double(\'-20\') else new Integer(\'20\'))) [ v| return v.intValue ]\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
@@ -1685,12 +1735,22 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_137() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test
   public void testFeatureCall_138() throws Exception {
-    this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n           val Object o = list.head \n           list.head\n        }", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?> & Constable & ConstantDesc)=>int"), "Function1<Number & Comparable<?> & Constable & ConstantDesc, Integer>");
+    } else {
+      this.withEquivalents(this.resolvesClosuresTo("{ val list = newArrayList(new Double(\'-20\'), new Integer(\'20\')).map(v| return v.intValue)\n\t\t\t   val Object o = list.head \n\t\t\t   list.head\n\t\t\t}", "(Number & Comparable<?>)=>int"), "Function1<Number & Comparable<?>, Integer>");
+    }
   }
   
   @Test

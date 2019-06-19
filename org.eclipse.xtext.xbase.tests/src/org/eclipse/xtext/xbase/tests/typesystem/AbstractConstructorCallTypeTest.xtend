@@ -209,7 +209,11 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testConstructorTypeInference_08() throws Exception {
-		"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".resolvesConstructorCallsTo("GenericType2<Number & Comparable<?>>", "Integer", "Integer")
+		if (isJava12OrLater) {
+			"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".resolvesConstructorCallsTo("GenericType2<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer")
+		} else {
+			"new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)".resolvesConstructorCallsTo("GenericType2<Number & Comparable<?>>", "Integer", "Integer")
+		}
 	}
 	
 	@Test def void testConstructorTypeInference_09() throws Exception {
@@ -516,12 +520,21 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_084() throws Exception {
-		"{
-			val list = new java.util.ArrayList
-			list.add(new Integer(0))
-			list.add(new Integer(0).doubleValue)
-			list
-		}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?>>", "Integer", "Integer")
+		if (isJava12OrLater) {
+			"{
+				val list = new java.util.ArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer")
+		} else {
+			"{
+				val list = new java.util.ArrayList
+				list.add(new Integer(0))
+				list.add(new Integer(0).doubleValue)
+				list
+			}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?>>", "Integer", "Integer")
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_085() throws Exception {
@@ -934,12 +947,21 @@ abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_130() throws Exception {
-		"{
-			val list = new java.util.ArrayList
-			list.add(println(new Integer(0)))
-			list.add(println(new Integer(0).doubleValue))
-			list
-		}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?>>", "Integer", "Integer")
+		if (isJava12OrLater) {
+			"{
+				val list = new java.util.ArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?> & Constable & ConstantDesc>", "Integer", "Integer")
+		} else {
+			"{
+				val list = new java.util.ArrayList
+				list.add(println(new Integer(0)))
+				list.add(println(new Integer(0).doubleValue))
+				list
+			}".resolvesConstructorCallsTo("ArrayList<Number & Comparable<?>>", "Integer", "Integer")
+		}
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_131() throws Exception {

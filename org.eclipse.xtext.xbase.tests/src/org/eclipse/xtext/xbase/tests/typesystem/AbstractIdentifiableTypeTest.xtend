@@ -581,17 +581,31 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_26() throws Exception {
-		"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
-           val Object o = list.head 
-           list
-        }".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?>", "Object")
+		if (isJava12OrLater) {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list
+			}".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?> & Constable & ConstantDesc", "Object")
+		} else {
+			"{ val list = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue)
+			   val Object o = list.head 
+			   list
+			}".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?>", "Object")
+		}
 	}
 	
 	@Test def void testFeatureCall_27() throws Exception {
-		"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
-           val Object o = list.head 
-           list
-        }".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?>", "Object")
+		if (isJava12OrLater) {
+			"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
+			   val Object o = list.head 
+			   list
+			}".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?> & Constable & ConstantDesc", "Object")
+		} else {
+			"{ val list = $$ListExtensions::map(newArrayList(if (false) new Double('-20') else new Integer('20'))) [ v|v.intValue ]
+			   val Object o = list.head 
+			   list
+			}".resolvesIdentifiablesTo("List<Integer>", "Number & Comparable<?>", "Object")
+		}
 	}
 	
 	@Test def void testFeatureCall_28() throws Exception {

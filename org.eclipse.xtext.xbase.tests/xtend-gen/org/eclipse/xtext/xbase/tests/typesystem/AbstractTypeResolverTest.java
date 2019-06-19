@@ -391,7 +391,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testListLiteral_05() throws Exception {
-    this.resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -466,7 +471,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSetLiteral_05() throws Exception {
-    this.resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -1899,7 +1909,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testConstructorTypeInference_08() throws Exception {
-    this.resolvesTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("new testdata.GenericType2(new Integer(0), new Integer(0).doubleValue)", "GenericType2<Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -1944,32 +1959,62 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testVarArgs_01() throws Exception {
-    this.resolvesTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testVarArgs_02() throws Exception {
-    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testVarArgs_03() throws Exception {
-    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testVarArgs_04() throws Exception {
-    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testVarArgs_05() throws Exception {
-    this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("newArrayList(if (true) new Double(\'-20\') else new Integer(\'20\'), new Integer(\'29\'), new Double(\'29\'))", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
   public void testVarArgs_06() throws Exception {
-    this.resolvesTo("java::util::Arrays::asList(1, 3d, \'4\')", "List<Comparable<?> & Serializable>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("java::util::Arrays::asList(1, 3d, \'4\')", "List<Comparable<?> & Constable & ConstantDesc & Serializable>");
+    } else {
+      this.resolvesTo("java::util::Arrays::asList(1, 3d, \'4\')", "List<Comparable<?> & Serializable>");
+    }
   }
   
   @Test
@@ -2033,20 +2078,37 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testMemberFeatureCall_05() throws Exception {
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+    } else {
+    }
     this.resolvesTo("\'\'.^class.superclass", "Class<?>");
   }
   
   @Test
   public void testFeatureCall_04() throws Exception {
-    this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "List<Comparable<?> & Serializable>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "List<Comparable<?> & Constable & ConstantDesc & Serializable>");
+    } else {
+      this.resolvesTo("new testdata.ClassWithVarArgs().toList(\'\', 1)", "List<Comparable<?> & Serializable>");
+    }
   }
   
   @Test
   public void testFeatureCall_05() throws Exception {
-    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList()", "List<Number>");
-    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
-    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
-    this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList()", "List<Number>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList()", "List<Number>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0)", "List<Integer>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(0, 1)", "List<Integer>");
+      this.resolvesTo("new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)", "List<Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -3019,7 +3081,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_018() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -3249,7 +3316,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_064() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("{\n\t\t\t\tval list = newArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -3349,7 +3421,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_084() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(new Integer(0))\n\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(new Integer(0))\n\t\t\t\tlist.add(new Integer(0).doubleValue)\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test
@@ -3579,7 +3656,12 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_130() throws Exception {
-    this.resolvesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.add(println(new Integer(0)))\n\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?> & Constable & ConstantDesc>");
+    } else {
+      this.resolvesTo("{\n\t\t\t\tval list = new java.util.ArrayList\n\t\t\t\tlist.add(println(new Integer(0)))\n\t\t\t\tlist.add(println(new Integer(0).doubleValue))\n\t\t\t\tlist\n\t\t\t}", "ArrayList<Number & Comparable<?>>");
+    }
   }
   
   @Test

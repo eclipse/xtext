@@ -1220,10 +1220,18 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   @Test
   public void testFeatureCallWithOperatorOverloading_6() throws Exception {
-    this.resolvesFeatureCallsTo("newHashMap( 5 -> \'\', \'\' -> 5 )", 
-      "HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
-      "Pair<Integer, String>", 
-      "Pair<String, Integer>");
+    boolean _isJava12OrLater = AbstractXbaseTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.resolvesFeatureCallsTo("newHashMap( 5 -> \'\', \'\' -> 5 )", 
+        "HashMap<Comparable<?> & Constable & ConstantDesc & Serializable, Comparable<?> & Constable & ConstantDesc & Serializable>", 
+        "Pair<Integer, String>", 
+        "Pair<String, Integer>");
+    } else {
+      this.resolvesFeatureCallsTo("newHashMap( 5 -> \'\', \'\' -> 5 )", 
+        "HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
+        "Pair<Integer, String>", 
+        "Pair<String, Integer>");
+    }
   }
   
   @Test
