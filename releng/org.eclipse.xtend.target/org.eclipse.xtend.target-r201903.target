@@ -8,7 +8,7 @@
 		<unit id="org.eclipse.xtend.lib.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/sz_issue818/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -30,7 +30,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/sz_issue818/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -56,7 +56,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/sz_issue818/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -81,7 +81,7 @@
 		<unit id="org.eclipse.xtext.xbase.junit.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-eclipse/job/sz_issue818/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
@@ -118,7 +118,6 @@
 		<unit id="org.apache.commons.cli" version="0.0.0"/>
 		<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 		<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
-		<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
 		<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
 	</location>
 </locations>
