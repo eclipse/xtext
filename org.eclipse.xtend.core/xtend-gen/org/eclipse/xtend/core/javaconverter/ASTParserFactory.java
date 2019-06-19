@@ -106,7 +106,7 @@ public class ASTParserFactory {
   protected final String minParserApiLevel = "1.6";
   
   @Inject
-  private ClasspathScanner classpathScanner = new ClasspathScanner();
+  private ClasspathScanner classpathScanner;
   
   protected final ASTParser createDefaultJavaParser(final String javaVersion) {
     ASTParser parser = null;

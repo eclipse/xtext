@@ -20,7 +20,7 @@ class ASTParserFactory {
 
 	protected final String minParserApiLevel = "1.6"
 	
-	@Inject ClasspathScanner classpathScanner = new ClasspathScanner
+	@Inject ClasspathScanner classpathScanner
 
 	def final protected createDefaultJavaParser(String javaVersion) {
 		var ASTParser parser
