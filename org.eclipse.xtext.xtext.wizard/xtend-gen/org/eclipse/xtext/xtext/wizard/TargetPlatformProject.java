@@ -129,7 +129,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
       }
     }
     _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/releases/2019-06\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/releases/2019-09\"/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</location>");
