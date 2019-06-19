@@ -73,7 +73,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
-		final int selectionOffset = sourceViewer.getSelectedRange().x - 1;
+		final int selectionOffset = Math.max(0, sourceViewer.getSelectedRange().x - 1);
 		EObject targetElement = xtextDocument.readOnly(new IUnitOfWork<EObject, XtextResource>() {
 
 			@Override
@@ -83,6 +83,9 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 					return null;
 				}
 				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), selectionOffset);
+				if (leafNode == null) {
+					return parseResult.getRootASTElement();
+				}
 				return leafNode.getSemanticElement();
 			}
 		});
