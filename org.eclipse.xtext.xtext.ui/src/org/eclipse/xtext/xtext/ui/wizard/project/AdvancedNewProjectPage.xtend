@@ -336,10 +336,12 @@ class AdvancedNewProjectPage extends WizardPage {
 		statusWidget.setStatus(severity, text, fix, [
 			validate(null)
 		])
+		(control as Composite).layout()
 	}
 
 	def protected <T extends Control> addIssue(int severity, String text) {
 		statusWidget.addStatus(severity, text)
+		(control as Composite).layout()
 	}
 
 	def protected boolean isBundleResolved(String bundleId) {

@@ -337,158 +337,148 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.setPageComplete(_tripleNotEquals);
   }
   
-  public Procedure0 checkWidgets(final SelectionEvent e) {
-    Procedure0 _xblockexpression = null;
-    {
-      final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createWebProject));
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN) && (!this.isBundleResolved("org.eclipse.m2e.maven.runtime")))) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noM2e);
-      }
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE) && (!this.isBundleResolved("org.eclipse.buildship.core")))) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noBuildship);
-      }
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE) && this.createUiProject.getSelection())) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, 
-          Messages.AdvancedNewProjectPage_eclipseAndGradleWarn);
-      }
-      if (((this.createUiProject.getSelection() && this.createP2Project.getSelection()) && (!this.createSDKProject.getSelection()))) {
-        this.<Control>addIssue(IMessageProvider.INFORMATION, 
-          Messages.AdvancedNewProjectPage_p2AndSdkInfo);
-      }
-      Object _source = null;
-      if (e!=null) {
-        _source=e.getSource();
-      }
-      final Object source = _source;
-      if ((this.createUiProject.getSelection() && (!this.isSelected(this.sourceLayout, SourceLayout.PLAIN)))) {
-        if ((this.createUiProject == source)) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("\'");
-          String _text = this.createUiProject.getText();
-          _builder.append(_text);
-          _builder.append("\' requires ");
-          _builder.append(SourceLayout.PLAIN);
-          _builder.append(" source layout.");
-          _builder.newLineIfNotEmpty();
-          _builder.append("Please <a>select \'");
-          _builder.append(SourceLayout.PLAIN);
-          _builder.append("\'</a> source layout.");
-          final Procedure0 _function = () -> {
-            this.select(this.sourceLayout, SourceLayout.PLAIN);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder.toString(), _function);
-        } else {
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append(SourceLayout.MAVEN);
-          _builder_1.append(" source layout is not supported by the \'");
-          String _text_1 = this.createUiProject.getText();
-          _builder_1.append(_text_1);
-          _builder_1.append("\' project.");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("Please <a>deselect \'");
-          String _text_2 = this.createUiProject.getText();
-          _builder_1.append(_text_2);
-          _builder_1.append("\'</a>.");
-          final Procedure0 _function_1 = () -> {
-            this.createUiProject.setSelection(false);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_1.toString(), _function_1);
-        }
-      }
-      if ((this.isSelected(this.preferredBuildSystem, BuildSystem.NONE) && this.isSelected(this.sourceLayout, SourceLayout.MAVEN))) {
-        if ((this.preferredBuildSystem == source)) {
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("Maven/Gradle source layout is not supported without a build system.");
-          _builder_2.newLine();
-          _builder_2.append("Please <a>select \'");
-          _builder_2.append(SourceLayout.PLAIN);
-          _builder_2.append("\'</a> source layout.");
-          final Procedure0 _function_2 = () -> {
-            this.select(this.sourceLayout, SourceLayout.PLAIN);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_2.toString(), _function_2);
-        } else {
-          StringConcatenation _builder_3 = new StringConcatenation();
-          _builder_3.append("Maven/Gradle source layout is only supported when using Maven or Gradle build system.");
-          _builder_3.newLine();
-          _builder_3.append("You need to choose Maven or Gradle build system.");
-          _builder_3.newLine();
-          _builder_3.append("Select <a>Gradle</a> build.");
-          final Procedure0 _function_3 = () -> {
-            this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_3.toString(), _function_3);
-        }
-      }
-      if ((this.createWebProject.getSelection() && this.isSelected(this.preferredBuildSystem, BuildSystem.NONE))) {
-        if ((this.preferredBuildSystem == source)) {
-          StringConcatenation _builder_4 = new StringConcatenation();
-          _builder_4.append("The \'");
-          String _text_3 = this.createWebProject.getText();
-          _builder_4.append(_text_3);
-          _builder_4.append("\' project can not be build without a build system.");
-          _builder_4.newLineIfNotEmpty();
-          _builder_4.append("Please <a>deselect \'");
-          String _text_4 = this.createWebProject.getText();
-          _builder_4.append(_text_4);
-          _builder_4.append("\'</a>.");
-          final Procedure0 _function_4 = () -> {
-            this.createWebProject.setSelection(false);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_4.toString(), _function_4);
-        } else {
-          StringConcatenation _builder_5 = new StringConcatenation();
-          _builder_5.append("To build the \'");
-          String _text_5 = this.createWebProject.getText();
-          _builder_5.append(_text_5);
-          _builder_5.append("\' project, you need to choose Maven or Gradle build system.");
-          _builder_5.newLineIfNotEmpty();
-          _builder_5.append("Select <a>Gradle</a> build.");
-          final Procedure0 _function_5 = () -> {
-            this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
-          };
-          this.<Control>reportIssue(IMessageProvider.ERROR, _builder_5.toString(), _function_5);
-        }
-      }
-      final Function1<Button, Boolean> _function_6 = (Button it) -> {
-        return Boolean.valueOf(it.getSelection());
-      };
-      boolean _exists = IterableExtensions.<Button>exists(uiButtons, _function_6);
-      if (_exists) {
-        this.createIdeProject.setEnabled(false);
-      }
-      if (this.autoSelectIdeProject) {
-        this.autoSelectIdeProject = false;
-        StringConcatenation _builder_6 = new StringConcatenation();
-        _builder_6.append("\'");
-        String _text_6 = this.createIdeProject.getText();
-        _builder_6.append(_text_6);
-        _builder_6.append("\' project was automatically selected as option \'");
-        String _text_7 = ((Button) source).getText();
-        _builder_6.append(_text_7);
-        _builder_6.append("\' requires it.");
-        this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_6.toString());
-      }
-      Procedure0 _xifexpression = null;
-      if (this.autoSelectSDKProject) {
-        Procedure0 _xblockexpression_1 = null;
-        {
-          this.autoSelectSDKProject = false;
-          StringConcatenation _builder_7 = new StringConcatenation();
-          _builder_7.append("\'");
-          String _text_8 = this.createSDKProject.getText();
-          _builder_7.append(_text_8);
-          _builder_7.append("\' was automatically selected as option \'");
-          String _text_9 = ((Button) source).getText();
-          _builder_7.append(_text_9);
-          _builder_7.append("\' requires it.");
-          _xblockexpression_1 = this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_7.toString());
-        }
-        _xifexpression = _xblockexpression_1;
-      }
-      _xblockexpression = _xifexpression;
+  public void checkWidgets(final SelectionEvent e) {
+    final List<Button> uiButtons = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createWebProject));
+    if ((this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN) && (!this.isBundleResolved("org.eclipse.m2e.maven.runtime")))) {
+      this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noM2e);
     }
-    return _xblockexpression;
+    if ((this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE) && (!this.isBundleResolved("org.eclipse.buildship.core")))) {
+      this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noBuildship);
+    }
+    if ((this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE) && this.createUiProject.getSelection())) {
+      this.<Control>reportIssue(IMessageProvider.WARNING, 
+        Messages.AdvancedNewProjectPage_eclipseAndGradleWarn);
+    }
+    if (((this.createUiProject.getSelection() && this.createP2Project.getSelection()) && (!this.createSDKProject.getSelection()))) {
+      this.<Control>addIssue(IMessageProvider.INFORMATION, 
+        Messages.AdvancedNewProjectPage_p2AndSdkInfo);
+    }
+    Object _source = null;
+    if (e!=null) {
+      _source=e.getSource();
+    }
+    final Object source = _source;
+    if ((this.createUiProject.getSelection() && (!this.isSelected(this.sourceLayout, SourceLayout.PLAIN)))) {
+      if ((this.createUiProject == source)) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\'");
+        String _text = this.createUiProject.getText();
+        _builder.append(_text);
+        _builder.append("\' requires ");
+        _builder.append(SourceLayout.PLAIN);
+        _builder.append(" source layout.");
+        _builder.newLineIfNotEmpty();
+        _builder.append("Please <a>select \'");
+        _builder.append(SourceLayout.PLAIN);
+        _builder.append("\'</a> source layout.");
+        final Procedure0 _function = () -> {
+          this.select(this.sourceLayout, SourceLayout.PLAIN);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder.toString(), _function);
+      } else {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append(SourceLayout.MAVEN);
+        _builder_1.append(" source layout is not supported by the \'");
+        String _text_1 = this.createUiProject.getText();
+        _builder_1.append(_text_1);
+        _builder_1.append("\' project.");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("Please <a>deselect \'");
+        String _text_2 = this.createUiProject.getText();
+        _builder_1.append(_text_2);
+        _builder_1.append("\'</a>.");
+        final Procedure0 _function_1 = () -> {
+          this.createUiProject.setSelection(false);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder_1.toString(), _function_1);
+      }
+    }
+    if ((this.isSelected(this.preferredBuildSystem, BuildSystem.NONE) && this.isSelected(this.sourceLayout, SourceLayout.MAVEN))) {
+      if ((this.preferredBuildSystem == source)) {
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("Maven/Gradle source layout is not supported without a build system.");
+        _builder_2.newLine();
+        _builder_2.append("Please <a>select \'");
+        _builder_2.append(SourceLayout.PLAIN);
+        _builder_2.append("\'</a> source layout.");
+        final Procedure0 _function_2 = () -> {
+          this.select(this.sourceLayout, SourceLayout.PLAIN);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder_2.toString(), _function_2);
+      } else {
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("Maven/Gradle source layout is only supported when using Maven or Gradle build system.");
+        _builder_3.newLine();
+        _builder_3.append("You need to choose Maven or Gradle build system.");
+        _builder_3.newLine();
+        _builder_3.append("Select <a>Gradle</a> build.");
+        final Procedure0 _function_3 = () -> {
+          this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder_3.toString(), _function_3);
+      }
+    }
+    if ((this.createWebProject.getSelection() && this.isSelected(this.preferredBuildSystem, BuildSystem.NONE))) {
+      if ((this.preferredBuildSystem == source)) {
+        StringConcatenation _builder_4 = new StringConcatenation();
+        _builder_4.append("The \'");
+        String _text_3 = this.createWebProject.getText();
+        _builder_4.append(_text_3);
+        _builder_4.append("\' project can not be build without a build system.");
+        _builder_4.newLineIfNotEmpty();
+        _builder_4.append("Please <a>deselect \'");
+        String _text_4 = this.createWebProject.getText();
+        _builder_4.append(_text_4);
+        _builder_4.append("\'</a>.");
+        final Procedure0 _function_4 = () -> {
+          this.createWebProject.setSelection(false);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder_4.toString(), _function_4);
+      } else {
+        StringConcatenation _builder_5 = new StringConcatenation();
+        _builder_5.append("To build the \'");
+        String _text_5 = this.createWebProject.getText();
+        _builder_5.append(_text_5);
+        _builder_5.append("\' project, you need to choose Maven or Gradle build system.");
+        _builder_5.newLineIfNotEmpty();
+        _builder_5.append("Select <a>Gradle</a> build.");
+        final Procedure0 _function_5 = () -> {
+          this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
+        };
+        this.<Control>reportIssue(IMessageProvider.ERROR, _builder_5.toString(), _function_5);
+      }
+    }
+    final Function1<Button, Boolean> _function_6 = (Button it) -> {
+      return Boolean.valueOf(it.getSelection());
+    };
+    boolean _exists = IterableExtensions.<Button>exists(uiButtons, _function_6);
+    if (_exists) {
+      this.createIdeProject.setEnabled(false);
+    }
+    if (this.autoSelectIdeProject) {
+      this.autoSelectIdeProject = false;
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("\'");
+      String _text_6 = this.createIdeProject.getText();
+      _builder_6.append(_text_6);
+      _builder_6.append("\' project was automatically selected as option \'");
+      String _text_7 = ((Button) source).getText();
+      _builder_6.append(_text_7);
+      _builder_6.append("\' requires it.");
+      this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_6.toString());
+    }
+    if (this.autoSelectSDKProject) {
+      this.autoSelectSDKProject = false;
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("\'");
+      String _text_8 = this.createSDKProject.getText();
+      _builder_7.append(_text_8);
+      _builder_7.append("\' was automatically selected as option \'");
+      String _text_9 = ((Button) source).getText();
+      _builder_7.append(_text_9);
+      _builder_7.append("\' requires it.");
+      this.<Control>reportIssue(IMessageProvider.INFORMATION, _builder_7.toString());
+    }
   }
   
   protected void select(final Combo combo, final Enum<?> enu) {
@@ -506,21 +496,25 @@ public class AdvancedNewProjectPage extends WizardPage {
     return Objects.equal(_string, _text);
   }
   
-  protected <T extends Control> Procedure0 reportIssue(final int severity, final String text) {
+  protected <T extends Control> void reportIssue(final int severity, final String text) {
     final Procedure0 _function = () -> {
     };
-    return this.<Control>reportIssue(severity, text, _function);
+    this.<Control>reportIssue(severity, text, _function);
   }
   
-  protected <T extends Control> Procedure0 reportIssue(final int severity, final String text, final Procedure0 fix) {
+  protected <T extends Control> void reportIssue(final int severity, final String text, final Procedure0 fix) {
     final Procedure0 _function = () -> {
       this.validate(null);
     };
-    return this.statusWidget.setStatus(severity, text, fix, _function);
+    this.statusWidget.setStatus(severity, text, fix, _function);
+    Control _control = this.getControl();
+    ((Composite) _control).layout();
   }
   
-  protected <T extends Control> Procedure0 addIssue(final int severity, final String text) {
-    return this.statusWidget.addStatus(severity, text);
+  protected <T extends Control> void addIssue(final int severity, final String text) {
+    this.statusWidget.addStatus(severity, text);
+    Control _control = this.getControl();
+    ((Composite) _control).layout();
   }
   
   protected boolean isBundleResolved(final String bundleId) {
