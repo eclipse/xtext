@@ -163,9 +163,6 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("\t");
     _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
-    _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
       boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
@@ -191,6 +188,10 @@ public class TargetPlatformProject extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("<unit id=\"org.opentest4j\" version=\"1.1.1.v20190212-2109\"/>");
         _builder.newLine();
+      } else {
+        _builder.append("\t");
+        _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
+        _builder.newLine();
       }
     }
     _builder.append("\t");
@@ -198,6 +199,9 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"7.1.0.v20190412-2143\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.35.v20190528-1517\"/>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09\"/>");

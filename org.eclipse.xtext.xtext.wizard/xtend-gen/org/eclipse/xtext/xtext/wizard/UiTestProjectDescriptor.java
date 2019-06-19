@@ -7,10 +7,12 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.util.JUnitVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -43,13 +45,17 @@ public class UiTestProjectDescriptor extends TestProjectDescriptor {
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_1, _function_1);
       deps.add(_doubleArrow_1);
-      ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
-      final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
-        ExternalDependency.MavenCoordinates _maven = it.getMaven();
-        _maven.setScope(Scope.TESTCOMPILE);
-      };
-      ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_2, _function_2);
-      deps.add(_doubleArrow_2);
+      JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
+      boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_4);
+      if (_equals) {
+        ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
+        final Procedure1<ExternalDependency> _function_2 = (ExternalDependency it) -> {
+          ExternalDependency.MavenCoordinates _maven = it.getMaven();
+          _maven.setScope(Scope.TESTCOMPILE);
+        };
+        ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_2, _function_2);
+        deps.add(_doubleArrow_2);
+      }
       ExternalDependency _createXtextDependency_3 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.junit");
       final Procedure1<ExternalDependency> _function_3 = (ExternalDependency it) -> {
         ExternalDependency.MavenCoordinates _maven = it.getMaven();

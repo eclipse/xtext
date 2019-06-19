@@ -83,18 +83,20 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="com.google.gson" version="2.8.2.v20180104-1110"/>
 			<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
-			<unit id="org.junit" version="4.12.0.v201504281640"/>
 			«IF config.junitVersion == JUnitVersion.JUNIT_5»
-			<unit id="org.junit.jupiter.api" version="5.4.0.v20190212-2109"/>
-			<unit id="org.junit.jupiter.engine" version="5.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.commons" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.engine" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.launcher" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.runner" version="1.4.0.v20190212-2109"/>
-			<unit id="org.opentest4j" version="1.1.1.v20190212-2109"/>
+				<unit id="org.junit.jupiter.api" version="5.4.0.v20190212-2109"/>
+				<unit id="org.junit.jupiter.engine" version="5.4.0.v20190212-2109"/>
+				<unit id="org.junit.platform.commons" version="1.4.0.v20190212-2109"/>
+				<unit id="org.junit.platform.engine" version="1.4.0.v20190212-2109"/>
+				<unit id="org.junit.platform.launcher" version="1.4.0.v20190212-2109"/>
+				<unit id="org.junit.platform.runner" version="1.4.0.v20190212-2109"/>
+				<unit id="org.opentest4j" version="1.1.1.v20190212-2109"/>
+			«ELSE»
+				<unit id="org.junit" version="4.12.0.v201504281640"/>
 			«ENDIF»
 			<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 			<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
+			<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
 			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
 		</location>
 		</locations>
