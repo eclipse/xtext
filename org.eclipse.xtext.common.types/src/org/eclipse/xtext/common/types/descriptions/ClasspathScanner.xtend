@@ -16,6 +16,8 @@ import java.util.Collection
 import java.util.concurrent.TimeUnit
 import org.eclipse.xtend.lib.annotations.Data
 import com.google.inject.Singleton
+import com.google.inject.Provider
+import com.google.inject.Inject
 
 @Singleton
 class ClasspathScanner {
@@ -26,6 +28,9 @@ class ClasspathScanner {
 		val boolean bootstrap
 		val Collection<String> packagePrefixes
 	}
+	
+	@Inject
+	Provider<ClassGraph> classGraphProvider = [ new ClassGraph ]
 	
 	Cache<ClassLoaderPackageConfig, Iterable<ITypeDescriptor>> classLoaderDescriptors = createClassLoaderCache()
 	
@@ -58,7 +63,7 @@ class ClasspathScanner {
 		if (systemClasspath !== null) {
 			return systemClasspath;
 		}
-		try (val ScanResult scanResult = new ClassGraph()
+		try (val ScanResult scanResult = classGraphProvider.get()
 				.enableSystemJarsAndModules()
 				.addClassLoader(ClassLoader.getSystemClassLoader())
 				.scan()) {
@@ -70,7 +75,7 @@ class ClasspathScanner {
 	
 	protected def Iterable<ITypeDescriptor> loadDescriptors(ClassLoader classLoader, boolean bootstrap,
 		Collection<String> packagePrefixes) {
-		val classGraph = new ClassGraph()
+		val classGraph = classGraphProvider.get()
 			.ignoreClassVisibility()
 			.enableClassInfo()
 			.whitelistPackages(packagePrefixes.toArray(#[]))

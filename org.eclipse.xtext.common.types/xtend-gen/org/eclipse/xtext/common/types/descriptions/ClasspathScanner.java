@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.descriptions;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
@@ -111,6 +113,11 @@ public class ClasspathScanner {
     }
   }
   
+  @Inject
+  private Provider<ClassGraph> classGraphProvider = ((Provider<ClassGraph>) () -> {
+    return new ClassGraph();
+  });
+  
   private Cache<ClasspathScanner.ClassLoaderPackageConfig, Iterable<ITypeDescriptor>> classLoaderDescriptors = this.createClassLoaderCache();
   
   protected Cache<ClasspathScanner.ClassLoaderPackageConfig, Iterable<ITypeDescriptor>> createClassLoaderCache() {
@@ -143,7 +150,7 @@ public class ClasspathScanner {
     if ((this.systemClasspath != null)) {
       return this.systemClasspath;
     }
-    try (final ScanResult scanResult = new ClassGraph().enableSystemJarsAndModules().addClassLoader(ClassLoader.getSystemClassLoader()).scan()) {
+    try (final ScanResult scanResult = this.classGraphProvider.get().enableSystemJarsAndModules().addClassLoader(ClassLoader.getSystemClassLoader()).scan()) {
       final List<URI> classpathURIs = scanResult.getClasspathURIs();
       final Function1<URI, String> _function = (URI it) -> {
         return it.getPath();
@@ -154,7 +161,7 @@ public class ClasspathScanner {
   }
   
   protected Iterable<ITypeDescriptor> loadDescriptors(final ClassLoader classLoader, final boolean bootstrap, final Collection<String> packagePrefixes) {
-    final ClassGraph classGraph = new ClassGraph().ignoreClassVisibility().enableClassInfo().whitelistPackages(packagePrefixes.<String>toArray(new String[] {})).addClassLoader(classLoader);
+    final ClassGraph classGraph = this.classGraphProvider.get().ignoreClassVisibility().enableClassInfo().whitelistPackages(packagePrefixes.<String>toArray(new String[] {})).addClassLoader(classLoader);
     if (bootstrap) {
       classGraph.enableSystemJarsAndModules();
     }
