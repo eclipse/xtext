@@ -33,6 +33,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import plugin="org.eclipse.xtend.lib.source" version="2.19.0" match="equivalent"/>
       <import plugin="org.eclipse.xtend.lib.macro.source" version="2.19.0" match="equivalent"/>
       <import plugin="com.google.guava" version="27.1.0" match="compatible"/>
+      <import plugin="io.github.classgraph" version="4.8.35" match="compatible"/>
       <import plugin="org.apache.commons.lang"/>
    </requires>
 

@@ -30,6 +30,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="org.objectweb.asm" version="7.1.0" match="compatible"/>
+      <import plugin="io.github.classgraph" version="4.8.35" match="compatible"/>
    </requires>
 
    <plugin
