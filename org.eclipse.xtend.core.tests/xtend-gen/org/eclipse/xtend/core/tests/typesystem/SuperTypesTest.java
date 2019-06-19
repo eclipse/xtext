@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import java.util.Collection;
 import java.util.List;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.typesystem.AbstractSuperTypesTest;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -28,7 +29,12 @@ public class SuperTypesTest extends AbstractSuperTypesTest {
   @Test
   @Override
   public void testString() {
-    this.assertSuperTypes(String.class, "Serializable", "Comparable<String>", "CharSequence");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.assertSuperTypes(String.class, "Serializable", "Comparable<String>", "CharSequence", "Constable", "ConstantDesc");
+    } else {
+      this.assertSuperTypes(String.class, "Serializable", "Comparable<String>", "CharSequence");
+    }
   }
   
   @Test
@@ -46,7 +52,12 @@ public class SuperTypesTest extends AbstractSuperTypesTest {
   @Test
   @Override
   public void testStringArray() {
-    this.assertSuperTypes("String[]", "Serializable[]", "Comparable<String>[]", "CharSequence[]");
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.assertSuperTypes("String[]", "Serializable[]", "Comparable<String>[]", "CharSequence[]", "Constable[]", "ConstantDesc[]");
+    } else {
+      this.assertSuperTypes("String[]", "Serializable[]", "Comparable<String>[]", "CharSequence[]");
+    }
   }
   
   @Test

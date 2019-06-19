@@ -467,7 +467,11 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testBug470766_01() {
-		merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?>', INVARIANT)
+		if (isJava12OrLater) {
+			merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?> & Constable & ConstantDesc', INVARIANT)
+		} else {
+			merge('void'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT, 'Long'->OUT->INVARIANT).to('Number & Comparable<?>', INVARIANT)
+		}
 	}
 	
 	@Test def void testBug470766_02() {

@@ -1022,13 +1022,24 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testBug470766_01() {
-    Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
-    Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
-    Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("Long", VarianceInfo.OUT);
-    Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
-    this.to(this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5), "Number & Comparable<?>", VarianceInfo.INVARIANT);
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      Pair<String, VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("Long", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
+      this.to(this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5), "Number & Comparable<?> & Constable & ConstantDesc", VarianceInfo.INVARIANT);
+    } else {
+      Pair<String, VarianceInfo> _mappedTo_6 = Pair.<String, VarianceInfo>of("void", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_7 = this.operator_mappedTo(_mappedTo_6, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_8 = Pair.<String, VarianceInfo>of("Integer", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_9 = this.operator_mappedTo(_mappedTo_8, VarianceInfo.INVARIANT);
+      Pair<String, VarianceInfo> _mappedTo_10 = Pair.<String, VarianceInfo>of("Long", VarianceInfo.OUT);
+      Triple<String, VarianceInfo, VarianceInfo> _mappedTo_11 = this.operator_mappedTo(_mappedTo_10, VarianceInfo.INVARIANT);
+      this.to(this.merge(_mappedTo_7, _mappedTo_9, _mappedTo_11), "Number & Comparable<?>", VarianceInfo.INVARIANT);
+    }
   }
   
   @Test

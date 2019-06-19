@@ -127,7 +127,11 @@ class SuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testString() {
-		typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence")
+		if (isJava12OrLater) {
+			typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence", "Constable", "ConstantDesc")
+		} else {
+			typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence")
+		}
 	}
 	
 	@Test
@@ -142,7 +146,11 @@ class SuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testStringArray() {
-		"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]")
+		if (isJava12OrLater) {
+			"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]", "Constable[]", "ConstantDesc[]")
+		} else {
+			"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]")
+		}
 	}
 	
 	@Test
@@ -229,7 +237,11 @@ class AllSuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testString() {
-		typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence", "Object")
+		if (isJava12OrLater) {
+			typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence", "Constable", "ConstantDesc", "Object")
+		} else {
+			typeof(String).assertSuperTypes("Serializable", "Comparable<String>", "CharSequence", "Object")
+		}
 	}
 	
 	@Test
@@ -244,7 +256,11 @@ class AllSuperTypesTest extends AbstractSuperTypesTest {
 	
 	@Test
 	override void testStringArray() {
-		"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]", "Object[]", "Cloneable", "Serializable", "Object")
+		if (isJava12OrLater) {
+			"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]", "Constable[]", "ConstantDesc[]", "Object[]", "Cloneable", "Serializable", "Object")
+		} else {
+			"String[]".assertSuperTypes("Serializable[]", "Comparable<String>[]", "CharSequence[]", "Object[]", "Cloneable", "Serializable", "Object")
+		}
 	}
 	
 	@Test

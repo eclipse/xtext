@@ -309,8 +309,13 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	@Test def void testUpperBound_11() {
-		'T'.mappedBy('java.util.Map<? extends T, ? extends T>', 'java.util.Map<String, Integer>')
-			.merge('T').to('Comparable<?> & Serializable', INVARIANT)
+		if (isJava12OrLater) {
+			'T'.mappedBy('java.util.Map<? extends T, ? extends T>', 'java.util.Map<String, Integer>')
+				.merge('T').to('Comparable<?> & Constable & ConstantDesc & Serializable', INVARIANT)
+		} else {
+			'T'.mappedBy('java.util.Map<? extends T, ? extends T>', 'java.util.Map<String, Integer>')
+				.merge('T').to('Comparable<?> & Serializable', INVARIANT)
+		}
 	}
 	
 	@Test def void testLowerBound_01() {

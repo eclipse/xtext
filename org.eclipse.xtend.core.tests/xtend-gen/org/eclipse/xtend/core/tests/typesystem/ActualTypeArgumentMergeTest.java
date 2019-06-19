@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -362,7 +363,12 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
   
   @Test
   public void testUpperBound_11() {
-    this.to(this.merge(this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>"), "T"), "Comparable<?> & Serializable", VarianceInfo.INVARIANT);
+    boolean _isJava12OrLater = AbstractXtendTestCase.isJava12OrLater();
+    if (_isJava12OrLater) {
+      this.to(this.merge(this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>"), "T"), "Comparable<?> & Constable & ConstantDesc & Serializable", VarianceInfo.INVARIANT);
+    } else {
+      this.to(this.merge(this.mappedBy("T", "java.util.Map<? extends T, ? extends T>", "java.util.Map<String, Integer>"), "T"), "Comparable<?> & Serializable", VarianceInfo.INVARIANT);
+    }
   }
   
   @Test
