@@ -18,6 +18,7 @@
 			<unit id="org.junit" version="0.0.0"/>
 			<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 			<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
+			<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
 		</location>
 	</locations>
 </target>
