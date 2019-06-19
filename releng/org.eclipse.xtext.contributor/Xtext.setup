@@ -813,6 +813,9 @@
             name="org.objectweb.asm.tree"
             versionRange="[7.1.0,7.2.0)"/>
         <requirement
+            name="io.github.classgraph"
+            versionRange="[4.8.35,4.9.0)"/>
+        <requirement
             name="org.eclipse.cbi.p2repo.analyzers"
             optional="true"/>
         <requirement
