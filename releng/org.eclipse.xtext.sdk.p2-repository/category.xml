@@ -14,5 +14,7 @@
    <bundle id="org.objectweb.asm.source" version="7.1.0.qualifier"/>
    <bundle id="org.objectweb.asm.tree" version="7.1.0.qualifier"/>
    <bundle id="org.objectweb.asm.tree.source" version="7.1.0.qualifier"/>
+   <bundle id="io.github.classgraph" version="4.8.35.qualifier"/>
+   <bundle id="io.github.classgraph.source" version="4.8.35.qualifier"/>
    <category-def name="Xtext" label="Xtext"/>
 </site>
