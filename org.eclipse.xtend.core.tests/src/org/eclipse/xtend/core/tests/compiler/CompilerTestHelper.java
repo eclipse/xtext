@@ -55,7 +55,7 @@ public class CompilerTestHelper {
 	public void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
 		try {
-			Object actual = apply(compile(string));
+			Object actual = apply(compileToClass(compileToJavaCode));
 			Assert.assertEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, object, actual);
 		} catch (Exception e) {
 			e.printStackTrace();
