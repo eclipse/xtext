@@ -46,17 +46,22 @@ public class CompilerTestHelper {
 
 	@Inject
 	private IXtendJvmAssociations associations;
-	
+
 	@Inject
 	private void createInMemoryJavaCompiler(ClassLoader classLoader) {
 		javaCompiler = new InMemoryJavaCompiler(classLoader, configprovider.get(null).getJavaSourceVersion());
 	}
-	
+
 	public void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
 		assertEvaluatesTo(object, string, compileToJavaCode);
 	}
-	
+
+	public void assertEvaluatesTo(String imports, Object object, String string) {
+		final String compileToJavaCode = compileToJavaCode(imports, string);
+		assertEvaluatesTo(object, string, compileToJavaCode);
+	}
+
 	public void assertEvaluatesTo(Object object, String xtendCode, String javaCode) {
 		try {
 			Object actual = apply(compileToClass(javaCode));
@@ -98,7 +103,7 @@ public class CompilerTestHelper {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	protected Object apply(Class<?> compile) throws Exception {
 		Object instance = compile.getDeclaredConstructor().newInstance();
 		Method method = compile.getDeclaredMethod("foo");
@@ -124,6 +129,12 @@ public class CompilerTestHelper {
 		final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
 		return toJavaCode(text);
 	}
+
+	protected String compileToJavaCode(String imports, String xtendCode) {
+		final String text = "package foo " + imports + " class Test { def Object foo() throws Exception {" + xtendCode + "} }";
+		return toJavaCode(text);
+	}
+
 	protected String toJavaCode(String xtendCode) {
 		try {
 			final XtendFile file = parseHelper.parse(xtendCode);

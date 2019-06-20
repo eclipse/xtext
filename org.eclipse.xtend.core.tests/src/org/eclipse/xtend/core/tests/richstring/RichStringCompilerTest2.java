@@ -24,6 +24,16 @@ public class RichStringCompilerTest2 extends RichStringCompilerTest {
 		super.assertOutput(expectedOutput, completeCode);
 	}
 	
+	@Override
+	public void assertOutput(String expectedOutput, String imports, String richString) throws Exception {
+		String completeCode = "val result = new org.eclipse.xtend2.lib.StringConcatenation\n" +
+			"result.append(client)\n" + 
+			"return result.toString();\n" +
+			"}\n" +
+			"def org.eclipse.xtend2.lib.StringConcatenationClient getClient() {\n" + richString;
+		super.assertOutput(expectedOutput, imports, completeCode);
+	}
+	
 	@Test public void testIndentedSCClient() throws Exception {
 		assertOutput("{\n\tfoo\n\tbar\n}",
 				"val org.eclipse.xtend2.lib.StringConcatenationClient scc = '''\n" +
