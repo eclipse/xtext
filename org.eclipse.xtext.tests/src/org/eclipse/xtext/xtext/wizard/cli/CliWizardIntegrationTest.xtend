@@ -16,9 +16,12 @@ import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.tests.LineDelimiters
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
+import org.eclipse.xtext.xtext.wizard.LanguageServer
+import org.eclipse.xtext.xtext.wizard.LineDelimiter
 import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
@@ -26,12 +29,13 @@ import org.junit.ComparisonFailure
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import org.junit.runners.Parameterized.Parameters
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xtext.wizard.LanguageServer
-import org.eclipse.xtext.util.JavaVersion
-import org.eclipse.xtext.xtext.wizard.LineDelimiter
 
+@RunWith(Parameterized)
 class CliWizardIntegrationTest {
 
 	/**
@@ -211,7 +215,12 @@ class CliWizardIntegrationTest {
 	]
 
 	private static def newProjectConfig() {
-		new WizardConfiguration => [
+		new WizardConfiguration() {
+			override toString() {
+				return '''«preferredBuildSystem»|«sourceLayout»|«projectLayout»|«languageServer»'''
+			}
+			
+		} => [
 			xtextVersion = new XtextVersion("unspecified")
 			encoding = Charsets.UTF_8
 			lineDelimiter = LineDelimiter.UNIX.value
@@ -228,18 +237,24 @@ class CliWizardIntegrationTest {
 		]
 	}
 
+	@Parameters(name="{index}: {0}")
+	def static data() {
+		return projectConfigs
+	}
+
 	@Rule public TemporaryFolder temp = new TemporaryFolder
 
 	WizardConfiguration config
 	CliProjectsCreator creator
+	
+	new(WizardConfiguration config) {
+		this.config = config
+		this.creator = newProjectCreator
+	}
 
 	@Test
 	def testProjectCreation() {
-		creator = newProjectCreator
-		projectConfigs.forEach[config|
-			this.config = config
-			validateCreatedProjects
-		]
+		validateCreatedProjects
 	}
 
 	private def void validateCreatedProjects() {

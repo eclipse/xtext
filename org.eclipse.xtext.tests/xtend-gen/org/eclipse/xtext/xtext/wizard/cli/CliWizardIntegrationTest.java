@@ -53,7 +53,10 @@ import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+@RunWith(Parameterized.class)
 @SuppressWarnings("all")
 public class CliWizardIntegrationTest {
   @Data
@@ -371,7 +374,6 @@ public class CliWizardIntegrationTest {
   }))));
   
   private static WizardConfiguration newProjectConfig() {
-    WizardConfiguration _wizardConfiguration = new WizardConfiguration();
     final Procedure1<WizardConfiguration> _function = (WizardConfiguration it) -> {
       XtextVersion _xtextVersion = new XtextVersion("unspecified");
       it.setXtextVersion(_xtextVersion);
@@ -384,7 +386,25 @@ public class CliWizardIntegrationTest {
       };
       ObjectExtensions.<LanguageDescriptor>operator_doubleArrow(_language, _function_1);
     };
-    return ObjectExtensions.<WizardConfiguration>operator_doubleArrow(_wizardConfiguration, _function);
+    return ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+      new WizardConfiguration() {
+        @Override
+        public String toString() {
+          StringConcatenation _builder = new StringConcatenation();
+          BuildSystem _preferredBuildSystem = this.getPreferredBuildSystem();
+          _builder.append(_preferredBuildSystem);
+          _builder.append("|");
+          SourceLayout _sourceLayout = this.getSourceLayout();
+          _builder.append(_sourceLayout);
+          _builder.append("|");
+          ProjectLayout _projectLayout = this.getProjectLayout();
+          _builder.append(_projectLayout);
+          _builder.append("|");
+          LanguageServer _languageServer = this.getLanguageServer();
+          _builder.append(_languageServer);
+          return _builder.toString();
+        }
+      }, _function);
   }
   
   private static CliProjectsCreator newProjectCreator() {
@@ -395,6 +415,11 @@ public class CliWizardIntegrationTest {
     return ObjectExtensions.<CliProjectsCreator>operator_doubleArrow(_cliProjectsCreator, _function);
   }
   
+  @Parameterized.Parameters(name = "{index}: {0}")
+  public static List<WizardConfiguration> data() {
+    return CliWizardIntegrationTest.projectConfigs;
+  }
+  
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
   
@@ -402,14 +427,14 @@ public class CliWizardIntegrationTest {
   
   private CliProjectsCreator creator;
   
+  public CliWizardIntegrationTest(final WizardConfiguration config) {
+    this.config = config;
+    this.creator = CliWizardIntegrationTest.newProjectCreator();
+  }
+  
   @Test
   public void testProjectCreation() {
-    this.creator = CliWizardIntegrationTest.newProjectCreator();
-    final Consumer<WizardConfiguration> _function = (WizardConfiguration config) -> {
-      this.config = config;
-      this.validateCreatedProjects();
-    };
-    CliWizardIntegrationTest.projectConfigs.forEach(_function);
+    this.validateCreatedProjects();
   }
   
   private void validateCreatedProjects() {
