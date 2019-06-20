@@ -125,14 +125,6 @@ spec:
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
           }// END steps
         } // END stage
-        
-        stage('Gradle Longrunning Tests') {
-          steps {
-            sh "echo 'Gradle Longrunning Tests'"
-            sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --continue"
-            step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
-          }
-        } // END stage
       } // END parallel
     } // END stage
   } // END stages

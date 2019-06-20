@@ -87,11 +87,6 @@ node {
 				}
 				step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 			}
-			
-			stage('Gradle Longrunning Tests') {
-				sh "./gradlew longrunningTest -PuseJenkinsSnapshots=true -PJENKINS_URL=$JENKINS_URL -PignoreTestFailures=true --continue"
-				step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/longrunningTest/*.xml'])
-			}
 		
 			archive 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
 		}
