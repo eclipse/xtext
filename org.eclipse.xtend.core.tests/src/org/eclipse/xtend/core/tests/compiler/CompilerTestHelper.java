@@ -54,13 +54,7 @@ public class CompilerTestHelper {
 	
 	public void assertEvaluatesTo(Object object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
-		try {
-			Object actual = apply(compileToClass(compileToJavaCode));
-			Assert.assertEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, object, actual);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail("Exception thrown " + e + ".Java code was " + compileToJavaCode);
-		}
+		assertEvaluatesTo(object, string, compileToJavaCode);
 	}
 	
 	public void assertEvaluatesTo(Object object, String xtendCode, String javaCode) {
@@ -76,7 +70,7 @@ public class CompilerTestHelper {
 	public void assertEvaluatesToArray(Object[] object, String string) {
 		final String compileToJavaCode = compileToJavaCode(string);
 		try {
-			Object actual = apply(compile(string));
+			Object actual = apply(compileToClass(compileToJavaCode));
 			Assert.assertTrue(actual.getClass().isArray());
 			Assert.assertArrayEquals("String was:\n" + string + "\nJava code was " + compileToJavaCode, object, (Object[]) actual); 
 		} catch (Exception e) {
