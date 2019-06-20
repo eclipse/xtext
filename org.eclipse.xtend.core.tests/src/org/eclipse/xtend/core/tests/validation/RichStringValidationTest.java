@@ -7,28 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation;
 
-import java.util.List;
-
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.RuntimeTestSetup;
-import org.eclipse.xtend.core.tests.RuntimeTestSetup.XtendRuntimeTestModule;
 import org.eclipse.xtend.core.tests.richstring.AbstractRichStringTest;
-import org.eclipse.xtend.core.tests.validation.RichStringValidationTest.NoImplicitImportsRuntimeInjectorProvider;
+import org.eclipse.xtend.core.tests.richstring.NoImplicitImportsRuntimeInjectorProvider;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedFeatures;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,37 +26,6 @@ import com.google.inject.Singleton;
 @RunWith(XtextRunner.class)
 @InjectWith(NoImplicitImportsRuntimeInjectorProvider.class)
 public class RichStringValidationTest extends AbstractRichStringTest {
-	
-	@Singleton
-	public static class NoImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
-		@Override
-		protected List<Class<?>> getExtensionClasses() {
-			return Lists.newArrayList();
-		}
-		
-		@Override
-		protected List<Class<?>> getStaticImportClasses() {
-			return Lists.newArrayList();
-		}
-	}
-	
-	public static class NoImplicitImportsRuntimeInjectorProvider extends RuntimeInjectorProvider {
-		@Override
-		protected Injector internalCreateInjector() {
-			
-			return new RuntimeTestSetup() {
-				@Override
-				public Injector createInjector() {
-					return Guice.createInjector(new XtendRuntimeTestModule() {
-						public Class<? extends ImplicitlyImportedFeatures> bindImplicitlyImportedFeatures() {
-							return NoImplicitlyImportedFeatures.class;
-						}
-					});
-					
-				}
-			}.createInjectorAndDoEMFRegistration();
-		}
-	}
 
 	@Inject
 	private ValidationTestHelper validationTestHelper;

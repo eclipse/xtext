@@ -32,6 +32,13 @@ public class RichStringWithCommentCompilerTest extends RichStringCompilerTest {
 	}
 	
 	@Override
+	public void assertOutput(String expectedOutput, String imports, String richString) throws Exception {
+		List<String> allCandidates = commentInserter.getRichStringWithComments(richString);
+		for(String richStringWithComment: allCandidates)
+			super.assertOutput(expectedOutput, imports, richStringWithComment);
+	}
+	
+	@Override
 	@Ignore
 	@Test 
 	public void testBug343148() throws Exception {
