@@ -93,117 +93,145 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append(_name);
     _builder.append("\" sequenceNumber=\"1\">");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     _builder.append("<locations>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.jdt.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.platform.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.pde.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.draw2d.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
     {
       boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
       if (_isFromExistingEcoreModels) {
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.eclipse.xpand\" version=\"0.0.0\"/>");
         _builder.newLine();
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.eclipse.xtend\" version=\"0.0.0\"/>");
         _builder.newLine();
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
         _builder.newLine();
       }
     }
+    _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/releases/2019-06\"/>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0/\"/>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
     {
       boolean _isSnapshot = this.getConfig().getXtextVersion().isSnapshot();
       if (_isSnapshot) {
+        _builder.append("\t\t\t");
         _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
         _builder.newLine();
       } else {
         boolean _isStable = this.getConfig().getXtextVersion().isStable();
         if (_isStable) {
+          _builder.append("\t\t\t");
           _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
           _builder.newLine();
         } else {
+          _builder.append("\t\t\t");
           _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
           XtextVersion _xtextVersion = this.getConfig().getXtextVersion();
-          _builder.append(_xtextVersion);
+          _builder.append(_xtextVersion, "\t\t\t");
           _builder.append("/\"/>");
           _builder.newLineIfNotEmpty();
         }
       }
     }
+    _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"com.google.gson\" version=\"2.8.2.v20180104-1110\"/>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.antlr.runtime\" version=\"3.2.0.v201101311130\"/>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.junit\" version=\"4.12.0.v201504281640\"/>");
     _builder.newLine();
     {
       JUnitVersion _junitVersion = this.getConfig().getJunitVersion();
       boolean _equals = Objects.equal(_junitVersion, JUnitVersion.JUNIT_5);
       if (_equals) {
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.jupiter.api\" version=\"5.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.jupiter.engine\" version=\"5.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.platform.commons\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.platform.engine\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.platform.launcher\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.junit.platform.runner\" version=\"1.4.0.v20190212-2109\"/>");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("\t\t\t");
         _builder.append("<unit id=\"org.opentest4j\" version=\"1.1.1.v20190212-2109\"/>");
         _builder.newLine();
       }
     }
-    _builder.append("\t");
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.objectweb.asm\" version=\"7.1.0.v20190412-2143\"/>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.objectweb.asm.tree\" version=\"7.1.0.v20190412-2143\"/>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t\t");
+    _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.35.v20190528-1517\"/>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09\"/>");
     _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</locations>");
     _builder.newLine();
     _builder.append("</target>");

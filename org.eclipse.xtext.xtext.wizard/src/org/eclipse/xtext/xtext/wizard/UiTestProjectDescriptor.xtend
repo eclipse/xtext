@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.wizard
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
+import org.eclipse.xtext.util.JUnitVersion
 
 @FinalFieldsConstructor
 class UiTestProjectDescriptor extends TestProjectDescriptor {
@@ -19,7 +20,9 @@ class UiTestProjectDescriptor extends TestProjectDescriptor {
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.testing") => [maven.scope = Scope.TESTCOMPILE]
 		deps += createXtextDependency("org.eclipse.xtext.xbase.testing") => [maven.scope = Scope.TESTCOMPILE]
-		deps += createXtextDependency("org.eclipse.xtext.junit4") => [maven.scope = Scope.TESTCOMPILE]
+		if (config.junitVersion == JUnitVersion.JUNIT_4) {
+			deps += createXtextDependency("org.eclipse.xtext.junit4") => [maven.scope = Scope.TESTCOMPILE]
+		}
 		deps += createXtextDependency("org.eclipse.xtext.xbase.junit") => [maven.scope = Scope.TESTCOMPILE]
 		deps
 	}

@@ -67,7 +67,7 @@ public class JUnitFragment extends AbstractStubGeneratingFragment {
   }
   
   protected String getUiTestingPackage() {
-    return "org.eclipse.xtext.junit4";
+    return "org.eclipse.xtext.ui.testing";
   }
   
   protected String getXbaseTestingPackage() {

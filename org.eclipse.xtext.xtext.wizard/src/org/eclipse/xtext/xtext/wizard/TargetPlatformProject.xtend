@@ -52,52 +52,53 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<?pde version="3.8"?>
 		<target name="«name»" sequenceNumber="1">
-		<locations>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
-		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
-		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
-		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-		«IF isFromExistingEcoreModels»
-			<unit id="org.eclipse.xpand" version="0.0.0"/>
-			<unit id="org.eclipse.xtend" version="0.0.0"/>
-			<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-		«ENDIF»
-		<repository location="https://download.eclipse.org/releases/2019-06"/>
-		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-		<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0/"/>
-		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-		«IF config.xtextVersion.isSnapshot»
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
-		«ELSEIF config.xtextVersion.isStable»
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
-		«ELSE»
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
-		«ENDIF»
-		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<unit id="com.google.gson" version="2.8.2.v20180104-1110"/>
-			<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
-			<unit id="org.junit" version="4.12.0.v201504281640"/>
-			«IF config.junitVersion == JUnitVersion.JUNIT_5»
-			<unit id="org.junit.jupiter.api" version="5.4.0.v20190212-2109"/>
-			<unit id="org.junit.jupiter.engine" version="5.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.commons" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.engine" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.launcher" version="1.4.0.v20190212-2109"/>
-			<unit id="org.junit.platform.runner" version="1.4.0.v20190212-2109"/>
-			<unit id="org.opentest4j" version="1.1.1.v20190212-2109"/>
-			«ENDIF»
-			<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
-			<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
-		</location>
-		</locations>
+			<locations>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
+					<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
+					<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
+					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
+					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
+					«IF isFromExistingEcoreModels»
+						<unit id="org.eclipse.xpand" version="0.0.0"/>
+						<unit id="org.eclipse.xtend" version="0.0.0"/>
+						<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
+					«ENDIF»
+					<repository location="https://download.eclipse.org/releases/2019-06"/>
+				</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
+					<repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0/"/>
+				</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
+					«IF config.xtextVersion.isSnapshot»
+						<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
+					«ELSEIF config.xtextVersion.isStable»
+						<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
+					«ELSE»
+						<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
+					«ENDIF»
+				</location>
+				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+					<unit id="com.google.gson" version="2.8.2.v20180104-1110"/>
+					<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
+					<unit id="org.junit" version="4.12.0.v201504281640"/>
+					«IF config.junitVersion == JUnitVersion.JUNIT_5»
+						<unit id="org.junit.jupiter.api" version="5.4.0.v20190212-2109"/>
+						<unit id="org.junit.jupiter.engine" version="5.4.0.v20190212-2109"/>
+						<unit id="org.junit.platform.commons" version="1.4.0.v20190212-2109"/>
+						<unit id="org.junit.platform.engine" version="1.4.0.v20190212-2109"/>
+						<unit id="org.junit.platform.launcher" version="1.4.0.v20190212-2109"/>
+						<unit id="org.junit.platform.runner" version="1.4.0.v20190212-2109"/>
+						<unit id="org.opentest4j" version="1.1.1.v20190212-2109"/>
+					«ENDIF»
+					<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
+					<unit id="org.objectweb.asm.tree" version="7.1.0.v20190412-2143"/>
+					<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
+					<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/orbit/2019-09"/>
+				</location>
+			</locations>
 		</target>
 	'''
 
