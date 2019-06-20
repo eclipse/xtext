@@ -43,7 +43,7 @@ spec:
   }
   
   parameters {
-    choice(name: 'TARGET_PLATFORM', choices: ['oxygen', 'latest', 'r201812', 'r201809', 'r201903', 'r201906', 'photon'], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201812', 'r201809', 'r201903', 'r201906', 'photon'], description: 'Which Target Platform should be used?')
   }
 
   options {
@@ -64,17 +64,17 @@ spec:
         checkout scm
         
         script {
-          if (params.TARGET_PLATFORM == 'latest') {
+          if (params.target_platform == 'latest') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.13)"
-          } else if (params.TARGET_PLATFORM == 'r201906') {
+          } else if (params.target_platform == 'r201906') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.12)"
-          } else if (params.TARGET_PLATFORM == 'r201903') {
+          } else if (params.target_platform == 'r201903') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.11)"
-          } else if (params.TARGET_PLATFORM == 'r201812') {
+          } else if (params.target_platform == 'r201812') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.10)"
-          } else if (params.TARGET_PLATFORM == 'r201809') {
+          } else if (params.target_platform == 'r201809') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.9)"
-          } else if (params.TARGET_PLATFORM == 'photon') {
+          } else if (params.target_platform == 'photon') {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.8)"
           } else {
             currentBuild.displayName = "#${BUILD_NUMBER}(4.7)"
@@ -120,7 +120,7 @@ spec:
           steps {
             sh """
               /home/vnc/.vnc/xstartup.sh
-              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.TARGET_PLATFORM} --local-repository=/home/jenkins/.m2/repository
+              ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.target_platform} --local-repository=/home/jenkins/.m2/repository
             """
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
           }// END steps
