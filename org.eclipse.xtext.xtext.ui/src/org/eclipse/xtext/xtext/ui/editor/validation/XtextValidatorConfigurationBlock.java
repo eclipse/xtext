@@ -41,6 +41,7 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 		addComboBox(DUPLICATE_ENUM_LITERAL, Messages.XtextValidatorConfigurationBlock_3, section, defaultIndent);
 		addComboBox(USAGE_OF_DEPRECATED_RULE, Messages.XtextValidatorConfigurationBlock_17, section, defaultIndent);
 		addComboBox(INVALID_FRAGMENT_AS_FIRST_RULE, Messages.XtextValidatorConfigurationBlock_18, section, defaultIndent);
+		addComboBox(INVALID_JAVAPACKAGE_NAME, Messages.XtextValidatorConfigurationBlock_19, section, defaultIndent);
 	}
 
 	protected void fillEcoreModelSection(Composite section, int defaultIndent) {
