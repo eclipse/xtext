@@ -43,7 +43,7 @@ spec:
   }
   
   parameters {
-    choice(name: 'target_platform', choices: ['oxygen', 'latest', 'r201812', 'r201809', 'r201903', 'r201906', 'photon'], description: 'Which Target Platform should be used?')
+    choice(name: 'target_platform', choices: ['oxygen', 'photon', 'r201812', 'r201809', 'r201903', 'r201906', 'latest'], description: 'Which Target Platform should be used?')
   }
 
   options {
