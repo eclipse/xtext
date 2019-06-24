@@ -17,6 +17,11 @@ spec:
   - name: xtext-buildenv
     image: docker.io/smoht/xtext-buildenv:0.7
     tty: true
+    resources:
+      limits:
+        cpu: "1"
+      requests:
+        cpu: "1"
     volumeMounts:
     - name: settings-xml
       mountPath: /home/jenkins/.m2/settings.xml
