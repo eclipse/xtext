@@ -6,7 +6,7 @@ pipeline {
   }
   agent {
     kubernetes {
-      label 'xtext-build-pod'
+      label 'xtext-web-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
       defaultContainer 'xtext-buildenv'
       yaml '''
 apiVersion: v1
