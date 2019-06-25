@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.common.types.xtext.ui.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.Model");
@@ -26,14 +30,13 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//Model:
 		//	referenceHolder+=ReferenceHolder*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//referenceHolder+=ReferenceHolder*
 		public Assignment getReferenceHolderAssignment() { return cReferenceHolderAssignment; }
-
+		
 		//ReferenceHolder
 		public RuleCall getReferenceHolderReferenceHolderParserRuleCall_0() { return cReferenceHolderReferenceHolderParserRuleCall_0; }
 	}
-
 	public class ReferenceHolderElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.ReferenceHolder");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -46,26 +49,25 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ReferenceHolder:
 		//	name=ID defaultReference=[types::JvmType|FQN];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID defaultReference=[types::JvmType|FQN]
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//defaultReference=[types::JvmType|FQN]
 		public Assignment getDefaultReferenceAssignment_1() { return cDefaultReferenceAssignment_1; }
-
+		
 		//[types::JvmType|FQN]
 		public CrossReference getDefaultReferenceJvmTypeCrossReference_1_0() { return cDefaultReferenceJvmTypeCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1() { return cDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1; }
 	}
-
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -80,28 +82,28 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//FQN:
 		//	ID ('.' ID)* ('$' ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('.' ID)* ('$' ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
-
+		
 		//('$' ID)*
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'$'
 		public Keyword getDollarSignKeyword_2_0() { return cDollarSignKeyword_2_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_2_1() { return cIDTerminalRuleCall_2_1; }
 	}
@@ -112,12 +114,12 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	private final FQNElements pFQN;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public RefactoringTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -146,7 +148,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -161,7 +163,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//ReferenceHolder:
 	//	name=ID defaultReference=[types::JvmType|FQN];
 	public ReferenceHolderElements getReferenceHolderAccess() {
@@ -171,7 +173,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getReferenceHolderRule() {
 		return getReferenceHolderAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	ID ('.' ID)* ('$' ID)*;
 	public FQNElements getFQNAccess() {
@@ -181,47 +183,47 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

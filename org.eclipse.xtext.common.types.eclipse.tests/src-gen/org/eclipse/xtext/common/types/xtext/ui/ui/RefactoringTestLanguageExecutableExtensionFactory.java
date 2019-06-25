@@ -3,12 +3,11 @@
  */
 package org.eclipse.xtext.common.types.xtext.ui.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.common.types.tests.AbstractActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +17,13 @@ public class RefactoringTestLanguageExecutableExtensionFactory extends AbstractG
 
 	@Override
 	protected Bundle getBundle() {
-		return AbstractActivator.getInstance().getBundle();
+		return Platform.getBundle(TestsActivator.PLUGIN_ID);
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return AbstractActivator.getInstance().getInjector(AbstractActivator.ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE);
+		TestsActivator activator = TestsActivator.getInstance();
+		return activator != null ? activator.getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_COMMON_TYPES_XTEXT_UI_REFACTORINGTESTLANGUAGE) : null;
 	}
-	
+
 }

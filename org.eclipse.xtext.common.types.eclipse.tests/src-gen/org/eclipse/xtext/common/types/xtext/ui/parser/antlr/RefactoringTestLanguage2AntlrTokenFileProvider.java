@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class RefactoringTestLanguage2AntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalRefactoringTestLanguage2.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalRefactoringTestLanguage2.tokens");
 	}
 }

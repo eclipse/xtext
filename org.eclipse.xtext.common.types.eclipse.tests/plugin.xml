@@ -3,13 +3,18 @@
 
 <plugin>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist2" 
-       class = "org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage"
-       genModel = "org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.genmodel" /> 
-	
-  </extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist2"
+			class = "org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage"
+			genModel = "model/generated/ContentAssistTestLanguage.genmodel" />
+	</extension>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring2"
+			class = "org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage"
+			genModel = "model/generated/RefactoringTestLanguage.genmodel" />
+	</extension>
 
 
     <extension
@@ -165,14 +170,6 @@
             <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_ContentAssistTestLanguage"/>
         </page>
     </extension>
-    <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring2" 
-       class = "org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.RefactoringTestLanguagePackage"
-       genModel = "org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage.genmodel" /> 
-	
-  </extension>
-
 
     <extension
             point="org.eclipse.ui.editors">

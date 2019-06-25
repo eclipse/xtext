@@ -33,7 +33,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.PreferenceConstants;
-import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
+import org.eclipse.xtext.common.types.tests.Activator;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.PluginUtil;
@@ -77,7 +78,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		);
 		String path = "/org/eclipse/xtext/common/types/testSetups";
 		String jarFileName = "/testData.jar";
-		IFile jarFile = PluginUtil.copyFileToWorkspace(AbstractActivator.getInstance(), path + jarFileName, javaProject.getProject(), 
+		IFile jarFile = PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), path + jarFileName, javaProject.getProject(), 
 				jarFileName);
 		JavaProjectSetupUtil.addJarToClasspath(javaProject, jarFile);
 		
