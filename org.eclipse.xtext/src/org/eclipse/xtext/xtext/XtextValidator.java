@@ -1220,6 +1220,20 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 	
 	@Check
+	public void checkJavaPackageNamingConventions(GeneratedMetamodel metamodel){
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(INVALID_JAVAPACKAGE_NAME);
+		if (severity == null || severity == Severity.IGNORE) {
+			// Don't perform any check if the result is ignored
+			return;
+		}
+		final String metamodelName = Strings.emptyIfNull(metamodel.getName());
+		if (!Strings.equal(metamodelName, metamodelName.toLowerCase())) {
+			addIssue("The generated metamodel name must not contain uppercase characters", metamodel, XtextPackage.eINSTANCE.getGeneratedMetamodel_Name(),
+				INVALID_JAVAPACKAGE_NAME, metamodel.getName());
+		}
+	}
+
+	@Check
 	public void checkTerminalRuleNamingConventions(TerminalRule terminalRule){
 		if(!terminalRule.getName().equals(terminalRule.getName().toUpperCase()))
 			addIssue("TerminalRule must be written in uppercase.", terminalRule, XtextPackage.eINSTANCE.getAbstractRule_Name(),
