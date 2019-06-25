@@ -29,19 +29,28 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.ecore.editor,
  org.eclipse.xtext.tests,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.ui.testing
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.compare,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.ui.codetemplates.ui
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
  org.junit;version="4.12.0",
  org.junit.runner;version="4.12.0",
  org.junit.runners;version="4.12.0"
-Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.Activator
+Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.internal.TestsActivator
 Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.services,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal,
- org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist,
- org.eclipse.xtext.xtext.ui.ecore2xtext.serializer
+ org.eclipse.xtext.xtext.ui.ecore2xtext.serializer,
+ org.eclipse.xtext.xtext.ui.ecore2xtext.scoping,
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ui.quickfix,
+ org.eclipse.xtext.xtext.ui.tests.internal,
+ org.eclipse.xtext.xtext.ui.ecore2xtext.validation,
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ide.contentassist.antlr
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: org.eclipse.xtext.xtext.ui.tests
