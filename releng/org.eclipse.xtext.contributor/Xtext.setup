@@ -139,7 +139,7 @@
       xsi:type="setup:VariableTask"
       type="URI"
       name="p2.buildship"
-      value="https://download.eclipse.org/buildship/updates/e47/releases/2.x"/>
+      value="https://download.eclipse.org/buildship/updates/e411/releases/3.x"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="p2.m2e"
