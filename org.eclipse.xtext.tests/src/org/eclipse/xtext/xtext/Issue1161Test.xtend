@@ -126,7 +126,7 @@ class Issue1161Test extends AbstractXtextTests {
 
 	private def grammarWithGeneratedMetamodelName(String generatedMetamodelName) '''
 		grammar test.Issue1161 with org.eclipse.xtext.common.Terminals
-		generate ï¿½generatedMetamodelNameï¿½ "http://issue1161"
+		generate «generatedMetamodelName» "http://issue1161"
 		A : {A};
 	'''
 
