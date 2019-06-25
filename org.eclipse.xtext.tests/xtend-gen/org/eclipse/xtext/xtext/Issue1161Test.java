@@ -173,8 +173,10 @@ public class Issue1161Test extends AbstractXtextTests {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar test.Issue1161 with org.eclipse.xtext.common.Terminals");
     _builder.newLine();
-    _builder.append("generate �generatedMetamodelName� \"http://issue1161\"");
-    _builder.newLine();
+    _builder.append("generate ");
+    _builder.append(generatedMetamodelName);
+    _builder.append(" \"http://issue1161\"");
+    _builder.newLineIfNotEmpty();
     _builder.append("A : {A};");
     _builder.newLine();
     return _builder;
