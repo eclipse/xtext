@@ -11,6 +11,13 @@ spec:
   - name: jnlp
     image: 'eclipsecbi/jenkins-jnlp-agent'
     args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    resources:
+      limits:
+        memory: "0.4Gi"
+        cpu: "0.2"
+      requests:
+        memory: "0.4Gi"
+        cpu: "0.2"
     volumeMounts:
     - mountPath: /home/jenkins/.ssh
       name: volume-known-hosts
@@ -19,9 +26,11 @@ spec:
     tty: true
     resources:
       limits:
-        cpu: "1"
+        memory: "3.6Gi"
+        cpu: "1.0"
       requests:
-        cpu: "1"
+        memory: "3.6Gi"
+        cpu: "1.0"
     volumeMounts:
     - name: settings-xml
       mountPath: /home/jenkins/.m2/settings.xml
