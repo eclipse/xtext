@@ -115,20 +115,16 @@ spec:
 
     stage('Maven Build') {
       steps {
-        configFileProvider(
-          [configFile(fileId: '7a78c736-d3f8-45e0-8e69-bf07c27b97ff', variable: 'MAVEN_SETTINGS')]) {
-          sh '''
-            mvn \
-              -s $MAVEN_SETTINGS \
-              -f releng \
-              --batch-mode \
-              --update-snapshots \
-              -fae \
-              -Dmaven.repo.local=$WORKSPACE/.m2/repository \
-              -Dtycho.disableP2Mirrors=true \
-              clean install
-          '''
-        }
+        sh '''
+          mvn \
+            -f releng \
+            --batch-mode \
+            --update-snapshots \
+            -fae \
+            -Dmaven.repo.local=$WORKSPACE/.m2/repository \
+            -Dtycho.disableP2Mirrors=true \
+            clean install
+        '''
       }
     }
   }
