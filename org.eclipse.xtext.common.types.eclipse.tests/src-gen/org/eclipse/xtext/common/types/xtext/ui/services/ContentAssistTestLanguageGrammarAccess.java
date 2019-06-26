@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.common.types.xtext.ui.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.Model");
@@ -33,29 +38,28 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//	generateDirective=GenerateDirective?
 		//	referenceHolder=ReferenceHolder?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?
 		public Group getGroup() { return cGroup; }
-
+		
 		//imports+=Import*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
-
+		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
-
+		
 		//generateDirective=GenerateDirective?
 		public Assignment getGenerateDirectiveAssignment_1() { return cGenerateDirectiveAssignment_1; }
-
+		
 		//GenerateDirective
 		public RuleCall getGenerateDirectiveGenerateDirectiveParserRuleCall_1_0() { return cGenerateDirectiveGenerateDirectiveParserRuleCall_1_0; }
-
+		
 		//referenceHolder=ReferenceHolder?
 		public Assignment getReferenceHolderAssignment_2() { return cReferenceHolderAssignment_2; }
-
+		
 		//ReferenceHolder
 		public RuleCall getReferenceHolderReferenceHolderParserRuleCall_2_0() { return cReferenceHolderReferenceHolderParserRuleCall_2_0; }
 	}
-
 	public class ReferenceHolderElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.ReferenceHolder");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -79,57 +83,56 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//	'default' defaultReference=[types::JvmType|FQN] | 'custom' customizedReference=[types::JvmType|FQN] | 'subtype'
 		//	subtypeReference=[types::JvmType|FQN];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'default' defaultReference=[types::JvmType|FQN] | 'custom' customizedReference=[types::JvmType|FQN] | 'subtype'
 		//subtypeReference=[types::JvmType|FQN]
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'default' defaultReference=[types::JvmType|FQN]
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'default'
 		public Keyword getDefaultKeyword_0_0() { return cDefaultKeyword_0_0; }
-
+		
 		//defaultReference=[types::JvmType|FQN]
 		public Assignment getDefaultReferenceAssignment_0_1() { return cDefaultReferenceAssignment_0_1; }
-
+		
 		//[types::JvmType|FQN]
 		public CrossReference getDefaultReferenceJvmTypeCrossReference_0_1_0() { return cDefaultReferenceJvmTypeCrossReference_0_1_0; }
-
+		
 		//FQN
 		public RuleCall getDefaultReferenceJvmTypeFQNParserRuleCall_0_1_0_1() { return cDefaultReferenceJvmTypeFQNParserRuleCall_0_1_0_1; }
-
+		
 		//'custom' customizedReference=[types::JvmType|FQN]
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'custom'
 		public Keyword getCustomKeyword_1_0() { return cCustomKeyword_1_0; }
-
+		
 		//customizedReference=[types::JvmType|FQN]
 		public Assignment getCustomizedReferenceAssignment_1_1() { return cCustomizedReferenceAssignment_1_1; }
-
+		
 		//[types::JvmType|FQN]
 		public CrossReference getCustomizedReferenceJvmTypeCrossReference_1_1_0() { return cCustomizedReferenceJvmTypeCrossReference_1_1_0; }
-
+		
 		//FQN
 		public RuleCall getCustomizedReferenceJvmTypeFQNParserRuleCall_1_1_0_1() { return cCustomizedReferenceJvmTypeFQNParserRuleCall_1_1_0_1; }
-
+		
 		//'subtype' subtypeReference=[types::JvmType|FQN]
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'subtype'
 		public Keyword getSubtypeKeyword_2_0() { return cSubtypeKeyword_2_0; }
-
+		
 		//subtypeReference=[types::JvmType|FQN]
 		public Assignment getSubtypeReferenceAssignment_2_1() { return cSubtypeReferenceAssignment_2_1; }
-
+		
 		//[types::JvmType|FQN]
 		public CrossReference getSubtypeReferenceJvmTypeCrossReference_2_1_0() { return cSubtypeReferenceJvmTypeCrossReference_2_1_0; }
-
+		
 		//FQN
 		public RuleCall getSubtypeReferenceJvmTypeFQNParserRuleCall_2_1_0_1() { return cSubtypeReferenceJvmTypeFQNParserRuleCall_2_1_0_1; }
 	}
-
 	public class GenerateDirectiveElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.GenerateDirective");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -140,20 +143,19 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//GenerateDirective:
 		//	'generate' typeName=QN;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'generate' typeName=QN
 		public Group getGroup() { return cGroup; }
-
+		
 		//'generate'
 		public Keyword getGenerateKeyword_0() { return cGenerateKeyword_0; }
-
+		
 		//typeName=QN
 		public Assignment getTypeNameAssignment_1() { return cTypeNameAssignment_1; }
-
+		
 		//QN
 		public RuleCall getTypeNameQNParserRuleCall_1_0() { return cTypeNameQNParserRuleCall_1_0; }
 	}
-
 	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -164,20 +166,19 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Import:
 		//	'import' importedNamespace=ImportedFQN;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'import' importedNamespace=ImportedFQN
 		public Group getGroup() { return cGroup; }
-
+		
 		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-
+		
 		//importedNamespace=ImportedFQN
 		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
-
+		
 		//ImportedFQN
 		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0; }
 	}
-
 	public class ImportedFQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.ImportedFQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -187,17 +188,16 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ImportedFQN:
 		//	FQN '.*'?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//FQN '.*'?
 		public Group getGroup() { return cGroup; }
-
+		
 		//FQN
 		public RuleCall getFQNParserRuleCall_0() { return cFQNParserRuleCall_0; }
-
+		
 		//'.*'?
 		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
 	}
-
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -209,23 +209,22 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//FQN:
 		//	QN ('$' ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//QN ('$' ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//QN
 		public RuleCall getQNParserRuleCall_0() { return cQNParserRuleCall_0; }
-
+		
 		//('$' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'$'
 		public Keyword getDollarSignKeyword_1_0() { return cDollarSignKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
-
 	public class QNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.QN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -237,19 +236,19 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//QN:
 		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
@@ -264,12 +263,12 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private final QNElements pQN;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContentAssistTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -302,7 +301,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -319,7 +318,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//ReferenceHolder:
 	//	'default' defaultReference=[types::JvmType|FQN] | 'custom' customizedReference=[types::JvmType|FQN] | 'subtype'
 	//	subtypeReference=[types::JvmType|FQN];
@@ -330,7 +329,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getReferenceHolderRule() {
 		return getReferenceHolderAccess().getRule();
 	}
-
+	
 	//GenerateDirective:
 	//	'generate' typeName=QN;
 	public GenerateDirectiveElements getGenerateDirectiveAccess() {
@@ -340,7 +339,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getGenerateDirectiveRule() {
 		return getGenerateDirectiveAccess().getRule();
 	}
-
+	
 	//Import:
 	//	'import' importedNamespace=ImportedFQN;
 	public ImportElements getImportAccess() {
@@ -350,7 +349,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
 	}
-
+	
 	//ImportedFQN:
 	//	FQN '.*'?;
 	public ImportedFQNElements getImportedFQNAccess() {
@@ -360,7 +359,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getImportedFQNRule() {
 		return getImportedFQNAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	QN ('$' ID)*;
 	public FQNElements getFQNAccess() {
@@ -370,7 +369,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//QN:
 	//	ID ('.' ID)*;
 	public QNElements getQNAccess() {
@@ -380,47 +379,47 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getQNRule() {
 		return getQNAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

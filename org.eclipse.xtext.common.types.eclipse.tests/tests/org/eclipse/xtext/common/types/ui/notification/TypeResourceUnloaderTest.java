@@ -27,7 +27,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
+import org.eclipse.xtext.common.types.tests.Activator;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
@@ -73,7 +74,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	
 	@Before
 	public void setUp() throws Exception {
-		eventBroker = AbstractActivator.getInstance().getInjector(DUMMY_LANG_NAME).getInstance(IStateChangeEventBroker.class);
+		eventBroker = TestsActivator.getInstance().getInjector(DUMMY_LANG_NAME).getInstance(IStateChangeEventBroker.class);
 		projectProvider = new MockJavaProjectProvider();
 		projectProvider.setUseSource(true);
 		project = projectProvider.getJavaProject(null);

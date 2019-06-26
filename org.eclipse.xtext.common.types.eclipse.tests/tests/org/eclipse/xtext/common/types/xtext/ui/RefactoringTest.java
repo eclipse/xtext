@@ -18,7 +18,7 @@ import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.Model;
 import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.ReferenceHolder;
 import org.eclipse.xtext.resource.XtextResource;
@@ -84,7 +84,7 @@ public class RefactoringTest extends AbstractEditorTest {
 			languageNameSuffix = "1";
 		javaFile = createFile("RefactoringTest/src/test/JavaClass.java", "package test; public class JavaClass {}");
 		xtextFile = createFile("RefactoringTest/src/test/test.typesRefactoring" + languageNameSuffix, "testName test.JavaClass");
-		languageServices = AbstractActivator.getInstance().getInjector(getEditorId()).getInstance(LanguageServices.class);
+		languageServices = TestsActivator.getInstance().getInjector(getEditorId()).getInstance(LanguageServices.class);
 		editor = openEditor(xtextFile);
 		waitForBuild();
 	}

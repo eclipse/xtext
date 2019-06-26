@@ -12,7 +12,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
 import org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -52,7 +52,7 @@ public class ContentAssistTest extends AbstractXtextTests implements ResourceLoa
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new ContentAssistTestLanguageRuntimeModule(),
-						new ContentAssistTestLanguageUiModule(AbstractActivator.getInstance()) {
+						new ContentAssistTestLanguageUiModule(TestsActivator.getInstance()) {
 							@Override
 							public Class<? extends IJavaProjectProvider> bindIJavaProjectProvider() {
 								return MockJavaProjectProvider.class;
