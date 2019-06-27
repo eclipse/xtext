@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Root");
@@ -49,72 +54,71 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//	'{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0' concrete0=Concrete0)?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Root} 'Root' name=INT0 '{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0'
 		//concrete0=Concrete0)? '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Root}
 		public Action getRootAction_0() { return cRootAction_0; }
-
+		
 		//'Root'
 		public Keyword getRootKeyword_1() { return cRootKeyword_1; }
-
+		
 		//name=INT0
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//INT0
 		public RuleCall getNameINT0ParserRuleCall_2_0() { return cNameINT0ParserRuleCall_2_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
+		
 		//('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')?
 		public Group getGroup_4() { return cGroup_4; }
-
+		
 		//'classes'
 		public Keyword getClassesKeyword_4_0() { return cClassesKeyword_4_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4_1() { return cLeftCurlyBracketKeyword_4_1; }
-
+		
 		//classes+=Abstract
 		public Assignment getClassesAssignment_4_2() { return cClassesAssignment_4_2; }
-
+		
 		//Abstract
 		public RuleCall getClassesAbstractParserRuleCall_4_2_0() { return cClassesAbstractParserRuleCall_4_2_0; }
-
+		
 		//("," classes+=Abstract)*
 		public Group getGroup_4_3() { return cGroup_4_3; }
-
+		
 		//","
 		public Keyword getCommaKeyword_4_3_0() { return cCommaKeyword_4_3_0; }
-
+		
 		//classes+=Abstract
 		public Assignment getClassesAssignment_4_3_1() { return cClassesAssignment_4_3_1; }
-
+		
 		//Abstract
 		public RuleCall getClassesAbstractParserRuleCall_4_3_1_0() { return cClassesAbstractParserRuleCall_4_3_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4_4() { return cRightCurlyBracketKeyword_4_4; }
-
+		
 		//('concrete0' concrete0=Concrete0)?
 		public Group getGroup_5() { return cGroup_5; }
-
+		
 		//'concrete0'
 		public Keyword getConcrete0Keyword_5_0() { return cConcrete0Keyword_5_0; }
-
+		
 		//concrete0=Concrete0
 		public Assignment getConcrete0Assignment_5_1() { return cConcrete0Assignment_5_1; }
-
+		
 		//Concrete0
 		public RuleCall getConcrete0Concrete0ParserRuleCall_5_1_0() { return cConcrete0Concrete0ParserRuleCall_5_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
-
 	public class AbstractElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Abstract");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -125,20 +129,19 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//Abstract:
 		//	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Concrete0_Impl | Concrete1_Impl | DiamondInheritance
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Concrete0_Impl
 		public RuleCall getConcrete0_ImplParserRuleCall_0() { return cConcrete0_ImplParserRuleCall_0; }
-
+		
 		//Concrete1_Impl
 		public RuleCall getConcrete1_ImplParserRuleCall_1() { return cConcrete1_ImplParserRuleCall_1; }
-
+		
 		//DiamondInheritance
 		public RuleCall getDiamondInheritanceParserRuleCall_2() { return cDiamondInheritanceParserRuleCall_2; }
 	}
-
 	public class Concrete0Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Concrete0");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -148,17 +151,16 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//Concrete0:
 		//	Concrete0_Impl | DiamondInheritance;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Concrete0_Impl | DiamondInheritance
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Concrete0_Impl
 		public RuleCall getConcrete0_ImplParserRuleCall_0() { return cConcrete0_ImplParserRuleCall_0; }
-
+		
 		//DiamondInheritance
 		public RuleCall getDiamondInheritanceParserRuleCall_1() { return cDiamondInheritanceParserRuleCall_1; }
 	}
-
 	public class INT0Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.INT0");
 		private final Keyword cINTKeyword = (Keyword)rule.eContents().get(1);
@@ -166,11 +168,10 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//INT0 INT:
 		//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'INT'
 		public Keyword getINTKeyword() { return cINTKeyword; }
 	}
-
 	public class Concrete0_ImplElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Concrete0_Impl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -184,23 +185,22 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//	'Concrete0'
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Concrete0} 'Concrete0' name=EString
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Concrete0}
 		public Action getConcrete0Action_0() { return cConcrete0Action_0; }
-
+		
 		//'Concrete0'
 		public Keyword getConcrete0Keyword_1() { return cConcrete0Keyword_1; }
-
+		
 		//name=EString
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//EString
 		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
 	}
-
 	public class EStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -210,17 +210,16 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//EString:
 		//	STRING | ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//STRING | ID
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
-
 	public class Concrete1_ImplElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Concrete1_Impl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -234,23 +233,22 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//	'Concrete1'
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Concrete1} 'Concrete1' name=EString
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Concrete1}
 		public Action getConcrete1Action_0() { return cConcrete1Action_0; }
-
+		
 		//'Concrete1'
 		public Keyword getConcrete1Keyword_1() { return cConcrete1Keyword_1; }
-
+		
 		//name=EString
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//EString
 		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
 	}
-
 	public class DiamondInheritanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.DiamondInheritance");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -264,19 +262,19 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//	'DiamondInheritance'
 		//	name=EString;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{DiamondInheritance} 'DiamondInheritance' name=EString
 		public Group getGroup() { return cGroup; }
-
+		
 		//{DiamondInheritance}
 		public Action getDiamondInheritanceAction_0() { return cDiamondInheritanceAction_0; }
-
+		
 		//'DiamondInheritance'
 		public Keyword getDiamondInheritanceKeyword_1() { return cDiamondInheritanceKeyword_1; }
-
+		
 		//name=EString
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//EString
 		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
 	}
@@ -292,12 +290,12 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	private final DiamondInheritanceElements pDiamondInheritance;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Ecore2XtextTestGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pRoot = new RootElements();
@@ -331,7 +329,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -350,7 +348,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getRootRule() {
 		return getRootAccess().getRule();
 	}
-
+	
 	//Abstract:
 	//	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
 	public AbstractElements getAbstractAccess() {
@@ -360,7 +358,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAbstractRule() {
 		return getAbstractAccess().getRule();
 	}
-
+	
 	//Concrete0:
 	//	Concrete0_Impl | DiamondInheritance;
 	public Concrete0Elements getConcrete0Access() {
@@ -370,7 +368,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConcrete0Rule() {
 		return getConcrete0Access().getRule();
 	}
-
+	
 	//INT0 INT:
 	//	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 	public INT0Elements getINT0Access() {
@@ -380,7 +378,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getINT0Rule() {
 		return getINT0Access().getRule();
 	}
-
+	
 	//Concrete0_Impl Concrete0:
 	//	{Concrete0}
 	//	'Concrete0'
@@ -392,7 +390,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConcrete0_ImplRule() {
 		return getConcrete0_ImplAccess().getRule();
 	}
-
+	
 	//EString:
 	//	STRING | ID;
 	public EStringElements getEStringAccess() {
@@ -402,7 +400,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getEStringRule() {
 		return getEStringAccess().getRule();
 	}
-
+	
 	//Concrete1_Impl Concrete1:
 	//	{Concrete1}
 	//	'Concrete1'
@@ -414,7 +412,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getConcrete1_ImplRule() {
 		return getConcrete1_ImplAccess().getRule();
 	}
-
+	
 	//DiamondInheritance:
 	//	{DiamondInheritance}
 	//	'DiamondInheritance'
@@ -426,47 +424,47 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDiamondInheritanceRule() {
 		return getDiamondInheritanceAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
