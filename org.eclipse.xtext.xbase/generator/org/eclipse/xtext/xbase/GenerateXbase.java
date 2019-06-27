@@ -10,7 +10,6 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
@@ -97,9 +96,6 @@ final class GenerateXbase {
 				addFragment(contentAssistFragment2);
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
-				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
-				comparison.setOptions(antlrOptions);
-				addFragment(comparison);
 			}});
 			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbase";
@@ -146,9 +142,6 @@ final class GenerateXbase {
 				ContentAssistFragment2 contentAssistFragment2 = new ContentAssistFragment2();
 				contentAssistFragment2.setGenerateXtendStub(false);
 				addFragment(contentAssistFragment2);
-				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
-				comparison.setOptions(antlrOptions);
-				addFragment(comparison);
 			}});
 			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbasewithannotations";
@@ -194,9 +187,6 @@ final class GenerateXbase {
 				ContentAssistFragment2 contentAssistFragment2 = new ContentAssistFragment2();
 				contentAssistFragment2.setGenerateXtendStub(false);
 				addFragment(contentAssistFragment2);
-				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
-				comparison.setOptions(antlrOptions);
-				addFragment(comparison);
 			}});
 		}};
 		
