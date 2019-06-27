@@ -45,5 +45,9 @@ Workflow {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage2.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 	}
 }
