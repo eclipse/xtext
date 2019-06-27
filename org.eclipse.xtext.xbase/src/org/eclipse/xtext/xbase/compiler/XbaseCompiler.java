@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -1770,6 +1771,27 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
 		LightweightTypeReference type = getLightweightType(closure);
 		JvmOperation operation = findImplementingOperation(type);
+		// @formatter:off
+		/* 
+		 * See https://github.com/eclipse/xtext-xtend/issues/779
+		 * 
+		 * While the build is running, we may see a control / data flow like this:
+		 * 
+		 * - Resource A and B have a cirular dependency.
+		 * - A is changed and a build is triggered
+		 * - A is parsed, validated, all good - during validation B is loaded from storage
+		 * - isAffected decides that B must be validated, too so it must be loaded from source
+		 * - B is proxified and parsed
+		 * - A keeps resolved types in its cache - including proxified instances
+		 * - The compiler for A will access the cached types and observe a now-proxified type
+		 * 
+		 * So this is in fact a workaround. A holistic fix would be more involving and require invalidation
+		 * of caches in a controlled fashion.
+		 */
+		// @formatter:on
+		if (operation.eIsProxy()) {
+			operation = (JvmOperation) EcoreUtil.resolve(operation, closure);
+		}
 		if (operation != null) {
 			b.newLine().append("final ");
 			b.append(type);
