@@ -64,8 +64,11 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
  * 
  * @author Christian Schneider - Initial contribution and API
  * @noreference
+ * 
+ * @deprecated This class should be no longer used. We are confident in the new ANTLR generator.
  */
 @Log
+@Deprecated
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   public static class ErrorHandler implements AntlrGrammarComparator.IErrorHandler {
