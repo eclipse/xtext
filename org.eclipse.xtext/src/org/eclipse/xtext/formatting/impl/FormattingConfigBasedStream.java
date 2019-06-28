@@ -425,7 +425,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 		if (left != null)
 			result.addAll(cfg.getLocatorsForCommentTokensAfter(left));
 		if (right != null) {
-			List<ElementLocator> leadingElementLocators = cfg.getLocatorsForCommentTokensBefore(right);
+			List<ElementLocator> leadingElementLocators = Lists.newArrayList(cfg.getLocatorsForCommentTokensBefore(right));
 			for (Iterator<ElementLocator> i = result.iterator(); i.hasNext();) {
 				ElementLocator locator = i.next();
 				if (locator.getType() == LocatorType.BETWEEN && !leadingElementLocators.contains(locator))
