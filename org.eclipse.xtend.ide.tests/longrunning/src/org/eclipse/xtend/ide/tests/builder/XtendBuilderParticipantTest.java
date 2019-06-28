@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.junit.Test;
 
@@ -39,6 +40,60 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 	public void tearDown() throws Exception {
 		testHelper.tearDown();
 		super.tearDown();
+	}
+	
+	@Test
+	public void testIncrementalBuild() throws Exception {
+		IFile first = testHelper.createFile("incrementalBuild/First", "package incrementalBuild\n" + 
+				"import incrementalBuild.Second.I\n" + 
+				"class First {\n" + 
+				"	def m() {}   \n" + 
+				"	def I i() {\n" + 
+				"		return [ cancelIndicator |\n" + 
+				"		]\n" + 
+				"	}\n" + 
+				"	def Second get() {}\n" + 
+				"}");
+		assertTrue(first.exists());
+		IFile second = testHelper.createFile("incrementalBuild/Second", "package incrementalBuild\n" + 
+				"import java.util.List\n" + 
+				"class Second {\n" + 
+				"    public First first\n" + 
+				"    static interface I {\n" + 
+				"        def List<?> m(Object o)\n" + 
+				"    }\n" + 
+				"}");
+		assertTrue(second.exists());
+		waitForBuild();
+		assertNoErrorsInWorkspace();
+
+		IFile firstTarget = testHelper.getProject().getFile("/xtend-gen/incrementalBuild/First.java");
+		assertTrue(firstTarget.exists());
+		assertFalse(fileIsEmpty(firstTarget));
+		
+		IFile secondTarget = testHelper.getProject().getFile("/xtend-gen/incrementalBuild/Second.java");
+		assertTrue(secondTarget.exists());
+		assertFalse(fileIsEmpty(secondTarget));
+		
+		first.setContents(new LazyStringInputStream("package incrementalBuild\n" + 
+				"import incrementalBuild.Second.I\n" + 
+				"class First {\n" + 
+				"	// removed def m() {}   \n" + 
+				"	def I i() {\n" + 
+				"		return [ cancelIndicator |\n" + 
+				"		]\n" + 
+				"	}\n" + 
+				"	def Second get() {}\n" + 
+				"}"), true, true, null);
+		waitForBuild();
+		
+		assertTrue(firstTarget.exists());
+		assertFalse(fileIsEmpty(firstTarget));
+		
+		assertTrue(secondTarget.exists());
+		assertFalse(fileIsEmpty(secondTarget));
+		
+		assertNoErrorsInWorkspace();
 	}
 
 	@Test
@@ -69,7 +124,6 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		assertFalse(targetFile.exists());
 		assertFalse(traceFile.exists());
 		assertFalse(classFile.exists());
-
 	}
 
 	/**
