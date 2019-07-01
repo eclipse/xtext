@@ -12,19 +12,31 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JavaRefactoringIntegrationTest extends AbstractXtendRenameRefactoringTest {
+
+	@Before
+	public void doNotRunOnOxygen() {
+		//FIXME workaround for https://github.com/eclipse/xtext-xtend/issues/767
+		Version version = Platform.getBundle("org.eclipse.core.runtime").getVersion();
+		// in case it was not obvious: 3.13 == Oxygen
+		Assume.assumeFalse(version.getMajor() == 3 && version.getMinor() == 13);
+	}
 
 	@After
 	public void deleteFilesCreatedByTest() throws Exception {
