@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.util.JavaVersion.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +23,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -194,6 +197,10 @@ public abstract class AbstractXbaseCompiler {
 					appendable.append("Object");
 				}
 				appendable.append("() {").increaseIndentation();
+				GeneratorConfig config = appendable.getGeneratorConfig();
+				if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA6)) {
+					appendable.newLine().append("@").append(Override.class);
+				}
 				appendable.newLine().append("public ");
 				appendable.append(expectedType.getWrapperTypeIfPrimitive());
 				appendable.append(" apply() {").increaseIndentation();
