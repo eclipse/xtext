@@ -66,12 +66,14 @@ pipeline {
         wrap([$class:'Xvnc', useXauthority: true]) {
           sh "./1-maven-build.sh --tp=${params.target_platform}"
         }
-        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
       }
     }
   }
 
   post {
+    always {
+      junit testResults: '**/target/surefire-reports/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }

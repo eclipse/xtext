@@ -118,12 +118,14 @@ spec:
             /home/vnc/.vnc/xstartup.sh
             ./1-maven-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.target_platform} --local-repository=/home/jenkins/.m2/repository
           """
-          step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
       }
     }
   }
 
   post {
+    always {
+      junit testResults: '**/target/surefire-reports/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
