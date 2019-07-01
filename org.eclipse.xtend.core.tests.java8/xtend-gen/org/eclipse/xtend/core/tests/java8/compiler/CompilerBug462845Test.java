@@ -649,6 +649,9 @@ public class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("private final Iterator<String> iterator = new Function0<Iterator<String>>() {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("public Iterator<String> apply() {");
     _builder_1.newLine();
     _builder_1.append("      ");

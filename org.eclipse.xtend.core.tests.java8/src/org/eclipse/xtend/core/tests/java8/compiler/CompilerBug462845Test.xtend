@@ -260,6 +260,7 @@ class CompilerBug462845Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			@SuppressWarnings("all")
 			public class C {
 			  private final Iterator<String> iterator = new Function0<Iterator<String>>() {
+			    @Override
 			    public Iterator<String> apply() {
 			      abstract class __C_1 implements Iterator<String> {
 			        Iterator<String> delegate;
