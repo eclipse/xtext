@@ -116,7 +116,6 @@ spec:
     stage('Gradle Build') {
       steps {
         sh "./1-gradle-build.sh"
-        step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
       }
     }
 
@@ -127,7 +126,6 @@ spec:
             sh """
               ./2-maven-plugin-build.sh -s /home/jenkins/.m2/settings.xml --local-repository=/home/jenkins/.m2/repository
             """
-            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
           } // END steps
         } // END stage
         stage('Maven Tycho Build') {
@@ -136,7 +134,6 @@ spec:
               /home/vnc/.vnc/xstartup.sh
               ./3-maven-tycho-build.sh -s /home/jenkins/.m2/settings.xml --tp=${params.target_platform} --local-repository=/home/jenkins/.m2/repository
             """
-            step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
           }// END steps
         } // END stage
       } // END parallel
@@ -144,6 +141,9 @@ spec:
   } // END stages
 
   post {
+    always {
+      junit testResults: '**/target/surefire-reports/*.xml, **/build/test-results/test/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
