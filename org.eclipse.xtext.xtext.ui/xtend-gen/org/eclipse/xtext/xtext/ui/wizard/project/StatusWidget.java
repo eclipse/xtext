@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,7 +21,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -49,11 +51,19 @@ public class StatusWidget extends Composite {
     this.imageLabel = _label;
     this.imageLabel.setText("   ");
     GridData _gridData = new GridData(GridData.VERTICAL_ALIGN_BEGINNING);
-    this.imageLabel.setLayoutData(_gridData);
+    final Procedure1<GridData> _function = (GridData it) -> {
+      it.widthHint = 15;
+    };
+    GridData _doubleArrow = ObjectExtensions.<GridData>operator_doubleArrow(_gridData, _function);
+    this.imageLabel.setLayoutData(_doubleArrow);
     Link _link = new Link(this, SWT.NONE);
     this.link = _link;
     GridData _gridData_1 = new GridData(GridData.FILL_HORIZONTAL);
-    this.link.setLayoutData(_gridData_1);
+    final Procedure1<GridData> _function_1 = (GridData it) -> {
+      it.heightHint = 30;
+    };
+    GridData _doubleArrow_1 = ObjectExtensions.<GridData>operator_doubleArrow(_gridData_1, _function_1);
+    this.link.setLayoutData(_doubleArrow_1);
     this.link.setFont(this.getFont());
     this.link.setText("\n\n\n");
     this.link.addSelectionListener(new SelectionAdapter() {

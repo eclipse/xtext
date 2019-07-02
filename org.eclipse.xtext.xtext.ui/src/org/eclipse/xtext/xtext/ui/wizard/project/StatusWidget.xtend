@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -41,9 +41,9 @@ class StatusWidget extends Composite {
 		layout = new GridLayout(2, false)
 		imageLabel = new Label(this, SWT.NONE)
 		imageLabel.text = "   "
-		imageLabel.layoutData = new GridData(GridData.VERTICAL_ALIGN_BEGINNING)
+		imageLabel.layoutData = new GridData(GridData.VERTICAL_ALIGN_BEGINNING) => [widthHint = 15]
 		link = new Link(this, SWT.NONE)
-		link.layoutData = new GridData(GridData.FILL_HORIZONTAL)
+		link.layoutData = new GridData(GridData.FILL_HORIZONTAL) => [heightHint = 30]
 		link.setFont(this.getFont())
 		link.text = '\n\n\n'
 		link.addSelectionListener(new SelectionAdapter() {
