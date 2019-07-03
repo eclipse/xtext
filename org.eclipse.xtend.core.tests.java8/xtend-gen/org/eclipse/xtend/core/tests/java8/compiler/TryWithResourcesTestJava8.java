@@ -410,6 +410,9 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.append("try (final StringReader fr = new Function0<StringReader>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("        ");
     _builder_1.append("public StringReader apply() {");
     _builder_1.newLine();
     _builder_1.append("          ");
@@ -461,6 +464,9 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("      ");
     _builder_1.append("try (final StringReader sr = new Function0<StringReader>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public StringReader apply() {");
@@ -582,6 +588,9 @@ public class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("try (final FileReader a = new Function0<FileReader>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public FileReader apply() {");

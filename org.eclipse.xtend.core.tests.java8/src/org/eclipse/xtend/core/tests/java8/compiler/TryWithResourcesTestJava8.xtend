@@ -224,6 +224,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			}
 		'''.test_f2(
 		'''      try (final StringReader fr = new Function0<StringReader>() {
+        @Override
         public StringReader apply() {
           String _xifexpression = null;
           if (true) {
@@ -247,6 +248,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			}
 		'''.test_f1(
 		'''      try (final StringReader sr = new Function0<StringReader>() {
+        @Override
         public StringReader apply() {
           StringReader _xifexpression = null;
           if (true) {
@@ -306,6 +308,7 @@ class TryWithResourcesTestJava8 extends AbstractXtendCompilerTest {
 			public class FooClass {
 			  public void fooMethod() {
 			    try (final FileReader a = new Function0<FileReader>() {
+			      @Override
 			      public FileReader apply() {
 			        try {
 			          File _file = new File("\\home/docs/text.txt");
