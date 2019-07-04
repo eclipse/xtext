@@ -55,19 +55,19 @@ pipeline {
         def envName = ''
         if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
           envName = ' (JIPP)'
-        } else if (env.JENKINS_URL.contains('jenkins.eclipse.org/xtext')) {
-          envName = ' (CBI)'
         } else if (env.JENKINS_URL.contains('typefox.io')) {
           envName = ' (TF)'
         }
         
         def curResult = currentBuild.currentResult
         def color = '#00FF00'
-        if (curResult == 'SUCCESS' && currentBuild.previousBuild != null) {
-          curResult = 'FIXED'
+        if (curResult == 'SUCCESS') {
+           if (currentBuild.previousBuild != null && currentBuild.previousBuild.result != 'SUCCESS') {
+             curResult = 'FIXED'
+           }
         } else if (curResult == 'UNSTABLE') {
           color = '#FFFF00'
-        } else if (curResult == 'FAILURE') {
+        } else { // FAILURE, ABORTED, NOT_BUILD
           color = '#FF0000'
         }
         
