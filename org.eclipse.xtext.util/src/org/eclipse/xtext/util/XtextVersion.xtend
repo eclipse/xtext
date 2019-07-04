@@ -27,7 +27,7 @@ class XtextVersion {
 	}
 
 	def getXtextGradlePluginVersion() {
-		'2.0.5'
+		'2.0.7'
 	}
 
 	/**

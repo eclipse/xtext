@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:2.0.5'
+		classpath 'org.xtext:xtext-gradle-plugin:2.0.7'
 	}
 }
 
