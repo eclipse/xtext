@@ -1,0 +1,272 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'sign-and-deploy-' + env.BUILD_NUMBER
+      defaultContainer 'jnlp'
+      yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: 'eclipsecbi/jenkins-jnlp-agent'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    volumeMounts:
+    - mountPath: /home/jenkins/.ssh
+      name: volume-known-hosts
+    resources:
+      limits:
+        memory: "0.5Gi"
+        cpu: "0.2"
+      requests:
+        memory: "0.5Gi"
+        cpu: "0.2"
+  - name: xtext-buildenv
+    image: docker.io/smoht/xtext-buildenv:0.9
+    tty: true
+    resources:
+      limits:
+        memory: "3.5Gi"
+        cpu: "1.0"
+      requests:
+        memory: "3.5Gi"
+        cpu: "1.0"
+    volumeMounts:
+    - name: settings-xml
+      mountPath: /home/jenkins/.m2/settings.xml
+      subPath: settings.xml
+      readOnly: true
+    - name: toolchains-xml
+      mountPath: /home/jenkins/.m2/toolchains.xml
+      subPath: toolchains.xml
+      readOnly: true
+    - name: settings-security-xml
+      mountPath: /home/jenkins/.m2/settings-security.xml
+      subPath: settings-security.xml
+      readOnly: true
+    - name: m2-repo
+      mountPath: /home/jenkins/.m2/repository
+  volumes:
+  - name: volume-known-hosts
+    configMap:
+      name: known-hosts
+  - name: settings-xml
+    secret:
+      secretName: m2-secret-dir
+      items:
+      - key: settings.xml
+        path: settings.xml
+  - name: toolchains-xml
+    configMap:
+      name: m2-dir
+      items:
+      - key: toolchains.xml
+        path: toolchains.xml
+  - name: settings-security-xml
+    secret:
+      secretName: m2-secret-dir
+      items:
+      - key: settings-security.xml
+        path: settings-security.xml
+  - name: m2-repo
+    emptyDir: {}
+    '''
+    }
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'15'))
+    disableConcurrentBuilds()
+    timeout(time: 45, unit: 'MINUTES')
+    timestamps()
+  }
+
+  // https://jenkins.io/doc/book/pipeline/syntax/#triggers
+  triggers {
+    cron('50 21 * * *') // nightly at 21:50
+  }
+  
+  parameters {
+    string      (name: 'BRANCH_TO_DEPLOY', defaultValue: 'master', description: 'From which Git branch should the release be created (master for snapshot deployments)?')
+    booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS', defaultValue: true, description: 'Whether to sign jars using the Eclipse web service')
+    booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS', defaultValue: true, description: 'Whether to pack jars using pack200')
+  }
+  
+  environment {
+    DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
+    KEYRING = credentials('252495d7-34e5-49de-8db4-bce7afae2da4')
+  }
+
+  stages {
+    stage('Prepare') {
+      steps {
+        git branch: 'master', changelog: false, poll: false, url: 'https://github.com/xtext/publishing.git'
+      }
+    }
+    
+    stage('Sign & Upload to OSSRH') {
+      steps {
+        container ('xtext-buildenv') {
+        // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
+        sh '''
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-umbrella/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.sdk.parent/pom.xml | grep -m1 -Po "<version>\\K[^<]*")
+          echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
+          gpg --batch --import "${KEYRING}"
+          for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
+          do
+            echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
+          done
+
+          ./gradlew \
+            --refresh-dependencies \
+            -PJENKINS_URL=$JENKINS_URL \
+            -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
+            -Posspub.mavenSecurityFile=/home/jenkins/.m2/settings-security.xml \
+            -Posspub.version=$XTEXT_VERSION \
+            -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+            -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+            -Psigning.secretKeyRingFile=/home/default/.gnupg/secring.gpg \
+            -Psigning.keyId=D1AE0CFD \
+            clean publishMavenXtext publishEclipseXtext
+        '''
+        } // END container
+      }
+    }
+    
+    stage('Deploy to Eclipse project storage') {
+      steps {
+        // this has to run in the xtext-devenv container, since jnlp container does not have a 'zip' command installed
+        container ('xtext-buildenv') {
+        sh '''
+          # TODO move function to external shell script
+          # $1 path to .properties file
+          # $2 property name
+          # @return property value
+          get_property () {
+            if [ ! -f "$1" ]; then
+              echo "File not found: $1" >&2
+              return -1
+            fi
+            VALUE=$(grep "^$2" $1 |awk -F= '{print $2}')
+            if [ -z "$VALUE" ]; then
+              echo "Could not get property value" >&2
+              return -2
+            fi
+            echo $VALUE
+          }
+          
+
+          #
+          # STEP 1: Get property values from publisher.properties/promote.properties
+          #
+          VERSION=$(get_property build-result/publisher.properties version)
+          BUILD_ID=$(get_property build-result/promote.properties build.id)
+          # BUILD_TYPE: N=Nightly, S=Stable, R=Release
+          BUILD_TYPE=$(echo $BUILD_ID |cut -c 1)
+          case "$BUILD_TYPE" in
+            N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
+            S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+          esac
+          
+          #
+          # STEP 2: Zip the repository
+          #
+          cd build-result/p2.repository
+            zip -r $WORKSPACE/build-result/downloads/$ZIP_NAME .
+            md5sum --binary $WORKSPACE/build-result/downloads/$ZIP_NAME > $WORKSPACE/build-result/downloads/$ZIP_NAME.md5
+          cd $WORKSPACE
+          
+        '''
+        } // END container
+        
+        // remote commands require the jnlp container
+        sshagent(['projects-storage.eclipse.org-bot-ssh']) {
+        container ('jnlp') {
+          sh '''
+          # TODO move function to external shell script
+          # $1 path to .properties file
+          # $2 property name
+          # @return property value
+          get_property () {
+            if [ ! -f "$1" ]; then
+              echo "File not found: $1" >&2
+              return -1
+            fi
+            VALUE=$(grep "^$2" $1 |awk -F= '{print $2}')
+            if [ -z "$VALUE" ]; then
+              echo "Could not get property value" >&2
+              return -2
+            fi
+            echo $VALUE
+          }
+          VERSION=$(get_property build-result/publisher.properties version)
+          BUILD_ID=$(get_property build-result/promote.properties build.id)
+          # BUILD_TYPE: N=Nightly, S=Stable, R=Release
+          BUILD_TYPE=$(echo $BUILD_ID |cut -c 1)
+          case "$BUILD_TYPE" in
+            N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
+            S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+          esac
+          
+          #
+          # STEP 3: Upload zip und .md5
+          #
+          TARGET_DROP_PATH=$DOWNLOAD_AREA/$VERSION/$BUILD_ID
+          # ensure target directory exists
+          ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $TARGET_DROP_PATH"
+          # TODO: For stable/release builds fail when target location already exists
+          scp $WORKSPACE/build-result/downloads/$ZIP_NAME $WORKSPACE/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:/$TARGET_DROP_PATH
+          
+          #
+          # STEP 4: Unpack zip to p2 repository location
+          #
+          case "$BUILD_TYPE" in
+            N) # Nightly site => clear content
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/nightly"
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH/** && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+            S) # Stable
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/$BUILD_ID"
+              ssh genie.xtext@projects-storage.eclipse.org "mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+            R) # Release
+              REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/releases/$VERSION"
+              ssh genie.xtext@projects-storage.eclipse.org "mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+          esac
+          '''
+        } // END container
+        } // END sshagent
+      }
+    }
+    
+  } // END stages
+  
+  post {
+    always {
+      archiveArtifacts artifacts: 'build-result/**'
+    }
+    changed {
+      script {
+        def envName = ''
+        if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
+          envName = ' (JIRO)'
+        } else if (env.JENKINS_URL.contains('ci-staging.eclipse.org/xtext')) {
+          envName = ' (JIRO)'
+        }
+        
+        def curResult = currentBuild.currentResult
+        def color = '#00FF00'
+        if (curResult == 'SUCCESS') {
+           if (currentBuild.previousBuild != null && currentBuild.previousBuild.result != 'SUCCESS') {
+             curResult = 'FIXED'
+           }
+        } else if (curResult == 'UNSTABLE') {
+          color = '#FFFF00'
+        } else { // FAILURE, ABORTED, NOT_BUILD
+          color = '#FF0000'
+        }
+        
+        slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+      }
+    }
+  }
+
+}
