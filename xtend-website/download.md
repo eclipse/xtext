@@ -84,7 +84,7 @@ Here is a minimal Gradle build script using Xtend:
 
 ```groovy
 plugins {
-  id "org.xtext.xtend" version "2.0.5"
+  id "org.xtext.xtend" version "2.0.7"
 }
 
 repositories.jcenter()
