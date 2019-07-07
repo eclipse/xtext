@@ -90,7 +90,7 @@ public class TemporaryFolder extends ExternalResource {
 	 * Same signature as {@link java.io.File#createTempFile(String, String)}.
 	 */
 	public File createTempFile(String prefix, String suffix) throws IOException {
-		return File.createTempFile(prefix, prefix, getRoot());
+		return File.createTempFile(prefix, suffix, getRoot());
 	}
 
 	/**
