@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,6 +36,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -135,6 +136,17 @@ public class EmbeddedEditorFactory {
 		protected IEditedResourceProvider resourceProvider;
 		protected String[] annotationTypes;
 		protected Boolean lineNumbers;
+
+		/**
+		 * @since 2.19
+		 */
+		protected Color lineNumbersForegroundColor;
+
+		/**
+		 * @since 2.19
+		 */
+		protected Color lineNumbersBackgroundColor;
+
 //		protected Boolean folding;
 		protected Boolean readonly;
 		protected boolean editorBuild;
@@ -169,6 +181,20 @@ public class EmbeddedEditorFactory {
 			this.lineNumbers = true;
 			return this;
 		}
+
+		/**
+		 * Enables the line number column in the embedded editor with customized foreground/background color.
+		 * Use null for the default color. 
+		 * 
+		 * @since 2.19
+		 */
+		public Builder showLineNumbers(Color foregroundColor, Color backgroundColor) {
+			showLineNumbers();
+			this.lineNumbersForegroundColor = foregroundColor;
+			this.lineNumbersBackgroundColor = backgroundColor;
+			return this;
+		}
+
 		public Builder processIssuesBy(IValidationIssueProcessor issueProcessor) {
 			if (this.issueProcessor != null)
 				throw new IllegalStateException();
@@ -380,6 +406,12 @@ public class EmbeddedEditorFactory {
 			}
 			if (verticalRuler != null && Boolean.TRUE.equals(lineNumbers)) {
 				LineNumberRulerColumn lineNumberRulerColumn = new LineNumberRulerColumn();
+				if (lineNumbersForegroundColor != null) {
+					lineNumberRulerColumn.setForeground(lineNumbersForegroundColor);
+				}
+				if (lineNumbersBackgroundColor != null) {
+					lineNumberRulerColumn.setBackground(lineNumbersBackgroundColor);
+				}
 				verticalRuler.addDecorator(rulerColumnCounter++, lineNumberRulerColumn);
 			}
 
