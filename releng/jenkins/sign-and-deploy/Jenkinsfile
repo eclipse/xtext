@@ -95,6 +95,7 @@ spec:
   environment {
     DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
     KEYRING = credentials('252495d7-34e5-49de-8db4-bce7afae2da4')
+    SCRIPTS = "$WORKSPACE/releng/jenkins/sign-and-deploy/scripts"
   }
 
   stages {
@@ -138,31 +139,12 @@ spec:
         // this has to run in the xtext-devenv container, since jnlp container does not have a 'zip' command installed
         container ('xtext-buildenv') {
         sh '''
-          # TODO move function to external shell script
-          # $1 path to .properties file
-          # $2 property name
-          # @return property value
-          get_property () {
-            if [ ! -f "$1" ]; then
-              echo "File not found: $1" >&2
-              return -1
-            fi
-            VALUE=$(grep "^$2" $1 |awk -F= '{print $2}')
-            if [ -z "$VALUE" ]; then
-              echo "Could not get property value" >&2
-              return -2
-            fi
-            echo $VALUE
-          }
-          
-
           #
           # STEP 1: Get property values from publisher.properties/promote.properties
           #
-          VERSION=$(get_property build-result/publisher.properties version)
-          BUILD_ID=$(get_property build-result/promote.properties build.id)
-          # BUILD_TYPE: N=Nightly, S=Stable, R=Release
-          BUILD_TYPE=$(echo $BUILD_ID |cut -c 1)
+          VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
+          BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
+          BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
           case "$BUILD_TYPE" in
             N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
             S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
@@ -183,26 +165,9 @@ spec:
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
         container ('jnlp') {
           sh '''
-          # TODO move function to external shell script
-          # $1 path to .properties file
-          # $2 property name
-          # @return property value
-          get_property () {
-            if [ ! -f "$1" ]; then
-              echo "File not found: $1" >&2
-              return -1
-            fi
-            VALUE=$(grep "^$2" $1 |awk -F= '{print $2}')
-            if [ -z "$VALUE" ]; then
-              echo "Could not get property value" >&2
-              return -2
-            fi
-            echo $VALUE
-          }
-          VERSION=$(get_property build-result/publisher.properties version)
-          BUILD_ID=$(get_property build-result/promote.properties build.id)
-          # BUILD_TYPE: N=Nightly, S=Stable, R=Release
-          BUILD_TYPE=$(echo $BUILD_ID |cut -c 1)
+          VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
+          BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
+          BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
           case "$BUILD_TYPE" in
             N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
             S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
@@ -230,6 +195,16 @@ spec:
             R) # Release
               REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/releases/$VERSION"
               ssh genie.xtext@projects-storage.eclipse.org "mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+          esac
+
+          #
+          # STEP 5: Recreate compositeArtifacts.xml & compositeContent.xml
+          #
+          case "$BUILD_TYPE" in
+            S) # Stable
+              ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "milestones" < $SCRIPTS/create_composite_update_site.sh ;;
+            R) # Release
+              ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "releases" < $SCRIPTS/create_composite_update_site.sh ;;
           esac
           '''
         } // END container
