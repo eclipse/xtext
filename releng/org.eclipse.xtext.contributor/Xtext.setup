@@ -170,6 +170,10 @@
       value="https://download.eclipse.org/cbi/updates/analyzers/4.7"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      name="p2.egit"
+      value="https://download.eclipse.org/egit/updates"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       id="github.user.password"
       type="PASSWORD"
       name="github.user.password"
@@ -537,7 +541,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -616,7 +620,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -693,7 +697,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -819,6 +823,8 @@
             name="io.github.classgraph"
             versionRange="[4.8.35,4.9.0)"/>
         <requirement
+            name="org.eclipse.egit.feature.group"/>
+        <requirement
             name="org.eclipse.cbi.p2repo.analyzers"
             optional="true"/>
         <requirement
@@ -856,6 +862,8 @@
               url="${p2.webtools}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="2018-09">
@@ -887,6 +895,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="2018-12">
@@ -918,6 +928,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="2019-03">
@@ -949,6 +961,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="2019-06">
@@ -980,6 +994,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="2019-09">
@@ -1013,6 +1029,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
             name="Oxygen">
@@ -1044,6 +1062,8 @@
               url="${p2.lsp4j}"/>
           <repository
               url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
         </repositoryList>
       </targlet>
       <description>Target platform</description>
@@ -1066,7 +1086,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -1078,7 +1098,7 @@
               project="xtext-umbrella"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -1093,7 +1113,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -1180,7 +1200,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1243,7 +1263,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1338,7 +1358,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.27/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.28/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
