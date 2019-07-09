@@ -31,7 +31,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class WebProjectDescriptor extends ProjectDescriptor {
   private static final String REQUIREJS_VERSION = "2.3.6";
   
-  private static final String JQUERY_VERSION = "3.3.1-1";
+  private static final String JQUERY_VERSION = "3.4.1";
   
   private static final String JETTY_VERSION = "9.4.14.v20181114";
   

@@ -65,7 +65,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   private static final String REQUIREJS_TEXT_VERSION = "2.0.15";
   
-  private static final String JQUERY_VERSION = "3.3.1-1";
+  private static final String JQUERY_VERSION = "3.4.1";
   
   private static final String ACE_VERSION = "1.3.3";
   
