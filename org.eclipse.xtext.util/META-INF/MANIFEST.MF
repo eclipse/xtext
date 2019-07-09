@@ -39,6 +39,7 @@ Export-Package: org.eclipse.xtext.util;
    org.eclipse.xtext.junit4,
    org.eclipse.xtext.tests,
    org.eclipse.xtext.ui,
+   org.eclipse.xtext.xtext.ui,
    org.eclipse.xtext.xbase"
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
  com.google.guava;bundle-version="[27.1.0,28.0.0)";visibility:=reexport,
