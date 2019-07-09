@@ -131,6 +131,7 @@ public class AntlrGrammarComparator {
   private static final String QUOTED_TOKENS = IterableExtensions.join(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\'(\\\\\')+\'", "(\'[^\']*\')", "(\"[^\"]*\")")), "|");
   
   private static final String TOKEN = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       String _join = IterableExtensions.join(AntlrGrammarComparator.SINGLE_CHAR_TOKENS, "|");
@@ -152,6 +153,7 @@ public class AntlrGrammarComparator {
   private static final String SL_COMMENT = "//[^\\r\\n]*";
   
   private static final String ML_COMMENT = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/\\*(\\*[^/]|[^\\*])*\\*/");
@@ -170,6 +172,7 @@ public class AntlrGrammarComparator {
   private final Pattern p_ws = Pattern.compile(AntlrGrammarComparator.WS);
   
   private final Pattern compoundPattern = new Function0<Pattern>() {
+    @Override
     public Pattern apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("(");
