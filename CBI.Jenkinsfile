@@ -56,8 +56,17 @@ spec:
     }
   }
   
+  environment {
+    DOWNSTREAM_JOBS = 'xtext-umbrella'
+  }
+
   parameters {
     choice(name: 'target_platform', choices: ['oxygen', 'photon', 'r201812', 'r201809', 'r201903', 'r201906', 'latest'], description: 'Which Target Platform should be used?')
+    booleanParam(
+      name: 'TRIGGER_DOWNSTREAM_BUILD', 
+      defaultValue: (env.BRANCH_NAME.startsWith('milestone')||env.BRANCH_NAME.startsWith('release')), 
+      description: 'Should downstream jobs for the same branch be triggered on successful build?'
+    )
   }
 
   options {
@@ -141,6 +150,17 @@ spec:
     }
     success {
       archiveArtifacts artifacts: 'build/**'
+      script {
+        if (TRIGGER_DOWNSTREAM_BUILD=='true') {
+          DOWNSTREAM_JOBS.split(',').each {
+            def downstreamUrl = new URL("${env.JENKINS_URL}/job/$it/job/${env.BRANCH_NAME}")
+            def boolean downstreamJobExists = sh(script: "curl -L -s -o /dev/null -I -w '%{http_code}' ${downstreamUrl}", returnStdout: true) == "200"
+            if (downstreamJobExists) {
+              build job: "$it/${env.BRANCH_NAME}", wait: false, parameters: [booleanParam(name: 'TRIGGER_DOWNSTREAM_BUILD', value: "$TRIGGER_DOWNSTREAM_BUILD")]
+            }
+          }
+        }
+      }
     }
     failure {
       archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
