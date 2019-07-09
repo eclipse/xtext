@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 public class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
   public StackedConstantExpressionEvaluationException(final XExpression expression, final JvmField field, final ConstantExpressionEvaluationException cause) {
     super(new Function0<String>() {
+      @Override
       public String apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Error during call to ");
