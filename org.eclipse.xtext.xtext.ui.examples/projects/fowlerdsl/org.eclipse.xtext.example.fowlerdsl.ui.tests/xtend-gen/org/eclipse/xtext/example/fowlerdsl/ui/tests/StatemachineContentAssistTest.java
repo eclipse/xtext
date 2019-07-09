@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class StatemachineContentAssistTest extends AbstractContentAssistTest {
   private final String c = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<|>");

@@ -71,6 +71,7 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
   protected IProject project;
   
   protected final String c = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<|>");
