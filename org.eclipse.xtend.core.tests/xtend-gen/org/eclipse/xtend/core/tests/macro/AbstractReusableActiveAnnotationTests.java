@@ -5584,6 +5584,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   private final Pair<String, String> THREE_ANNOTATIONS = new Function0<Pair<String, String>>() {
+    @Override
     public Pair<String, String> apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package myannotation");

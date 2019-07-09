@@ -16,6 +16,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest {
   private final String c = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<|>");
