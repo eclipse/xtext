@@ -127,7 +127,7 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>
-								<version>1.9.1</version>
+								<version>3.0.0</version>
 								<executions>
 									<execution>
 										<id>add-test-source</id>

@@ -101,7 +101,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 						</plugin>
 						<plugin>
 							<artifactId>maven-war-plugin</artifactId>
-							<version>3.2.0</version>
+							<version>3.2.3</version>
 							<configuration>
 								<warSourceDirectory>«Outlet.WEBAPP.sourceFolder»</warSourceDirectory>
 								<failOnMissingWebXml>false</failOnMissingWebXml>
@@ -118,7 +118,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>build-helper-maven-plugin</artifactId>
-							<version>1.9.1</version>
+							<version>3.0.0</version>
 							<executions>
 								<execution>
 									<id>add-source</id>

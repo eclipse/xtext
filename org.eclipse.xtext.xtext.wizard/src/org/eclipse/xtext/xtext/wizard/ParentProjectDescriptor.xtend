@@ -341,7 +341,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-clean-plugin</artifactId>
-								<version>2.5</version>
+								<version>3.1.0</version>
 								<configuration>
 									<filesets>
 										«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].map[sourceFolder].toSet»

@@ -778,7 +778,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("<artifactId>exec-maven-plugin</artifactId>");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("<version>1.4.0</version>");
+      _builder.append("<version>1.6.0</version>");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("<executions>");
@@ -1112,7 +1112,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          _builder.append("<version>1.9.1</version>");
+          _builder.append("<version>3.0.0</version>");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
@@ -1345,7 +1345,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.1.0</version>");
+              _builder.append("<version>3.1.1</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");

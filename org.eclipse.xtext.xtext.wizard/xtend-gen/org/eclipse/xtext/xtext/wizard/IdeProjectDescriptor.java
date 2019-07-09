@@ -227,7 +227,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          _builder.append("<version>1.9.1</version>");
+          _builder.append("<version>3.0.0</version>");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
@@ -382,7 +382,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.0.1</version>");
+              _builder.append("<version>3.1.1</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -668,7 +668,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
-              _builder.append("<version>3.0.0</version>");
+              _builder.append("<version>3.2.1</version>");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t");
@@ -973,7 +973,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          _builder.append("<version>1.10</version>");
+          _builder.append("<version>2.1.0</version>");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");

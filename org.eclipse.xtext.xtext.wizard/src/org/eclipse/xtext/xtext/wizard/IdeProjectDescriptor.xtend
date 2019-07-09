@@ -91,7 +91,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>build-helper-maven-plugin</artifactId>
-								<version>1.9.1</version>
+								<version>3.0.0</version>
 								<executions>
 									<execution>
 										<id>add-source</id>
@@ -130,7 +130,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-dependency-plugin</artifactId>
-									<version>3.0.1</version>
+									<version>3.1.1</version>
 									<executions>
 										<execution>
 											<id>copy-dependencies</id>
@@ -203,7 +203,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-shade-plugin</artifactId>
-									<version>3.0.0</version>
+									<version>3.2.1</version>
 									<configuration>
 										<transformers>
 											<transformer
@@ -273,7 +273,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							<plugin>
 								<groupId>org.codehaus.mojo</groupId>
 								<artifactId>appassembler-maven-plugin</artifactId>
-								<version>1.10</version>
+								<version>2.1.0</version>
 								<executions>
 									<execution>
 										<phase>package</phase>
