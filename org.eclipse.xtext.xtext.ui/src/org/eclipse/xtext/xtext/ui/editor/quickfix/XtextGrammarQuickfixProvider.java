@@ -82,6 +82,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.internal.Nullable;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.RuleWithoutInstantiationInspector;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
@@ -126,7 +127,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
-	@Inject(optional=true)
+	@Inject(optional=true) @Nullable
 	private IWorkbench workbench;
 	
 	@Inject
