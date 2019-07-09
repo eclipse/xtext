@@ -74,6 +74,7 @@ public class Movies {
   }
   
   private final List<Movie> movies = new Function0<List<Movie>>() {
+    @Override
     public List<Movie> apply() {
       try {
         final Function1<String, Movie> _function = (String line) -> {
