@@ -65,11 +65,6 @@ spec:
     timestamps()
   }
 
-  // https://jenkins.io/doc/book/pipeline/syntax/#triggers
-  triggers {
-    pollSCM('H/5 * * * *')
-  }
-
   stages {
     stage('Checkout') {
       steps {
