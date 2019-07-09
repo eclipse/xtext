@@ -317,6 +317,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }
   
   private static final String DELIMITERS_PATTERN = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("[\\\\s.:;,!?+\\\\-*/&|<>()[\\\\]{}]");
