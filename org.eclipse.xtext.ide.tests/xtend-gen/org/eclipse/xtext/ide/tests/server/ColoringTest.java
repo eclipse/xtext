@@ -29,6 +29,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ColoringTest extends AbstractTestLangLanguageServerTest {
   private static final String MODEL = new Function0<String>() {
+    @Override
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type A {");
