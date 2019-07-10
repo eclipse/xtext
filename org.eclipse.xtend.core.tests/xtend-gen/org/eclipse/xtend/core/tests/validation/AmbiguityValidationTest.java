@@ -24,6 +24,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -32,8 +33,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Assert;
 
@@ -78,9 +80,26 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     final XtendFunction firstMember = ((XtendFunction) _head_1);
     XExpression _expression = firstMember.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
+    final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(file);
+    ILinkingCandidate _switchResult = null;
     XExpression _last = IterableExtensions.<XExpression>last(block.getExpressions());
-    final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
-    final IFeatureLinkingCandidate linkingCandidate = this._iBatchTypeResolver.resolveTypes(file).getLinkingCandidate(featureCall);
+    final XExpression featureOrConstructorCall = _last;
+    boolean _matched = false;
+    if (featureOrConstructorCall instanceof XAbstractFeatureCall) {
+      _matched=true;
+      _switchResult = resolvedTypes.getLinkingCandidate(((XAbstractFeatureCall)featureOrConstructorCall));
+    }
+    if (!_matched) {
+      if (featureOrConstructorCall instanceof XConstructorCall) {
+        _matched=true;
+        _switchResult = resolvedTypes.getLinkingCandidate(((XConstructorCall)featureOrConstructorCall));
+      }
+    }
+    if (!_matched) {
+      String _valueOf = String.valueOf(featureOrConstructorCall.eClass().getName());
+      throw new IllegalArgumentException(_valueOf);
+    }
+    final ILinkingCandidate linkingCandidate = _switchResult;
     Assert.assertTrue((linkingCandidate instanceof IAmbiguousLinkingCandidate));
   }
   
