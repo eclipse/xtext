@@ -24,7 +24,7 @@ jar.bnd (
 )
 
 node {
-	version = '8.11.1'
+	version = '10.16.0'
 	download = true
 }
 

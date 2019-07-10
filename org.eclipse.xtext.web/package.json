@@ -2,7 +2,7 @@
 	"name": "xtext",
 	"private": true,
 	"devDependencies": {
-		"mocha": "^5.2.0",
+		"mocha": "6.1.4",
 		"requirejs": "2.3.6"
 	}
 }
