@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -69,6 +70,14 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	protected List<XExpression> getArguments() {
 		return getConstructorCall().getArguments();
+	}
+	
+	@Override
+	protected int getConformanceFlags(int idx, boolean recompute) {
+		if (idx == -1) {
+			return ConformanceFlags.CHECKED_SUCCESS;
+		}
+		return super.getConformanceFlags(idx, recompute);
 	}
 	
 	@Override
