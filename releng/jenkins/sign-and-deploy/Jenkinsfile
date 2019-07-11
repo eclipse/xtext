@@ -95,13 +95,17 @@ spec:
   environment {
     DOWNLOAD_AREA = '/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/downloads/drops'
     KEYRING = credentials('252495d7-34e5-49de-8db4-bce7afae2da4')
-    SCRIPTS = "$WORKSPACE/releng/jenkins/sign-and-deploy/scripts"
+    SCRIPTS = "$WORKSPACE/umbrella/releng/jenkins/sign-and-deploy/scripts"
   }
 
   stages {
     stage('Prepare') {
       steps {
-        git branch: 'master', changelog: false, poll: false, url: 'https://github.com/xtext/publishing.git'
+        sh "pwd && ls -la"
+        dir('publishing') {
+          git branch: 'master', changelog: false, poll: false, url: 'https://github.com/xtext/publishing.git'
+        }
+        sh "pwd && ls -la"
       }
     }
     
@@ -109,8 +113,9 @@ spec:
       steps {
         container ('xtext-buildenv') {
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
-        sh '''
-          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-umbrella/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.sdk.parent/pom.xml | grep -m1 -Po "<version>\\K[^<]*")
+        dir('publishing') {
+        sh ''' 
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
           echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
           gpg --batch --import "${KEYRING}"
           for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
@@ -118,7 +123,7 @@ spec:
             echo -e "5\ny\n" | gpg --batch --command-fd 0 --expert --edit-key $fpr trust;
           done
 
-          ./gradlew \
+          ./gradlew -info \
             --refresh-dependencies \
             -PJENKINS_URL=$JENKINS_URL \
             -Posspub.userMavenSettings=/home/jenkins/.m2/settings.xml \
@@ -126,10 +131,12 @@ spec:
             -Posspub.version=$XTEXT_VERSION \
             -Posspub.signJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
             -Posspub.packJars=$ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS \
+            -Posspub.branch=$BRANCH_TO_DEPLOY \
             -Psigning.secretKeyRingFile=/home/default/.gnupg/secring.gpg \
             -Psigning.keyId=D1AE0CFD \
             clean publishMavenXtext publishEclipseXtext
         '''
+        } // END dir
         } // END container
       }
     }
@@ -138,39 +145,46 @@ spec:
       steps {
         // this has to run in the xtext-devenv container, since jnlp container does not have a 'zip' command installed
         container ('xtext-buildenv') {
+        dir('publishing') {
         sh '''
           #
           # STEP 1: Get property values from publisher.properties/promote.properties
           #
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
           case "$BUILD_TYPE" in
             N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
-            S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+            S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
+            R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
           esac
           
           #
           # STEP 2: Zip the repository
           #
           cd build-result/p2.repository
-            zip -r $WORKSPACE/build-result/downloads/$ZIP_NAME .
-            md5sum --binary $WORKSPACE/build-result/downloads/$ZIP_NAME > $WORKSPACE/build-result/downloads/$ZIP_NAME.md5
-          cd $WORKSPACE
+            zip -r $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME .
+            md5sum --binary $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME > $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5
+          cd $WORKSPACE/publishing
           
         '''
+        } // END dir
         } // END container
         
         // remote commands require the jnlp container
         sshagent(['projects-storage.eclipse.org-bot-ssh']) {
         container ('jnlp') {
+        dir('publishing') {
           sh '''
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
           case "$BUILD_TYPE" in
             N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
-            S|R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
+            S) ZIP_NAME=tmf-xtext-Update-$XTEXT_VERSION.zip ;;
+            R) ZIP_NAME=tmf-xtext-Update-$VERSION.zip ;;
           esac
           
           #
@@ -180,7 +194,7 @@ spec:
           # ensure target directory exists
           ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $TARGET_DROP_PATH"
           # TODO: For stable/release builds fail when target location already exists
-          scp $WORKSPACE/build-result/downloads/$ZIP_NAME $WORKSPACE/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:/$TARGET_DROP_PATH
+          scp $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:/$TARGET_DROP_PATH
           
           #
           # STEP 4: Unpack zip to p2 repository location
@@ -207,6 +221,7 @@ spec:
               ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "releases" < $SCRIPTS/create_composite_update_site.sh ;;
           esac
           '''
+        } // END dir
         } // END container
         } // END sshagent
       }
@@ -216,7 +231,7 @@ spec:
   
   post {
     always {
-      archiveArtifacts artifacts: 'build-result/**'
+      archiveArtifacts artifacts: 'publishing/build-result/**'
     }
     changed {
       script {
