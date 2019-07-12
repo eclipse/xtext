@@ -26,11 +26,11 @@
 		</repository>
 		<repository>
 			<id>lib</id>
-			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/xtext-lib/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>core</id>
-			<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastSuccessfulBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/xtext-core/job/${upstreamBranch}/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
