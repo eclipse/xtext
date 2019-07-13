@@ -18,6 +18,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
 import org.eclipse.xtext.xbase.validation.IssueCodes
@@ -47,9 +48,13 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		val firstType = file.xtendTypes.head
 		val firstMember = firstType.members.head as XtendFunction
 		val block = firstMember.expression as XBlockExpression
-		val featureCall = block.expressions.last as XAbstractFeatureCall
-		val linkingCandidate = file.resolveTypes.getLinkingCandidate(featureCall)
-		assertTrue(linkingCandidate instanceof IAmbiguousLinkingCandidate) 
+		val resolvedTypes = file.resolveTypes
+		val linkingCandidate = switch featureOrConstructorCall : block.expressions.last {
+			XAbstractFeatureCall: resolvedTypes.getLinkingCandidate(featureOrConstructorCall)
+			XConstructorCall: resolvedTypes.getLinkingCandidate(featureOrConstructorCall)
+			default: throw new IllegalArgumentException(String.valueOf(featureOrConstructorCall.eClass.name))
+		}
+		assertTrue(linkingCandidate instanceof IAmbiguousLinkingCandidate)
 	}
 	
 	protected def void assertUnambiguous(CharSequence contents) {
