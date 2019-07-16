@@ -1,0 +1,40 @@
+grammar org.eclipse.xtext.ui.tests.xmleditor.Xml
+
+generate simplexml "http://www.eclipse.org/xtext/ui/tests/xmleditor/Xml"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+/*
+ * This grammar definition is based on the following tutorial:
+ * https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687107/Parsing+XML 
+ */
+XmlDocument:
+{XmlDocument}
+	contents += Content*;
+
+Content:
+	tag=Tag | text=PCDATA
+;
+
+Tag hidden(WS):
+	TAG_START_OPEN name=ID attributes+=Attribute*
+	(
+		TAG_EMPTY_CLOSE |
+		TAG_CLOSE contents+=Content* TAG_END_OPEN closeName=ID TAG_CLOSE
+	)
+;
+
+Attribute: name=ID ATTR_EQ value=STRING;
+
+terminal TAG_START_OPEN : '<' ;
+terminal TAG_END_OPEN: '</';
+terminal TAG_CLOSE : '>' ;
+terminal TAG_EMPTY_CLOSE: '/>';
+terminal ATTR_EQ: '=';
+terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal STRING:
+			'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+			"'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+		;
+terminal WS: (' '|'\r'|'\t'|'\u000C'|'\n')+;
+terminal PCDATA : (!'<')+ ;

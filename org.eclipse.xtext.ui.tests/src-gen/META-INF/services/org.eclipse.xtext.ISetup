@@ -43,3 +43,4 @@ org.eclipse.xtext.ui.tests.quickfix.ide.QuickfixCrossrefTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.refactoring.ide.RefactoringTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.refactoring.ide.ReferringTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug377311TestLanguageIdeSetup
+org.eclipse.xtext.ui.tests.xmleditor.ide.XmlIdeSetup

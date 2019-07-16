@@ -101,6 +101,8 @@ import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiMo
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.xmleditor.XmlRuntimeModule;
+import org.eclipse.xtext.ui.tests.xmleditor.ui.XmlUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
 
@@ -156,6 +158,7 @@ public class TestsActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_REFACTORING_REFACTORINGTESTLANGUAGE = "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_REFACTORING_REFERRINGTESTLANGUAGE = "org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG377311TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_XMLEDITOR_XML = "org.eclipse.xtext.ui.tests.xmleditor.Xml";
 	
 	private static final Logger logger = Logger.getLogger(TestsActivator.class);
 	
@@ -340,6 +343,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG377311TESTLANGUAGE.equals(grammar)) {
 			return new Bug377311TestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_XMLEDITOR_XML.equals(grammar)) {
+			return new XmlRuntimeModule();
+		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
@@ -478,6 +484,9 @@ public class TestsActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG377311TESTLANGUAGE.equals(grammar)) {
 			return new Bug377311TestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_UI_TESTS_XMLEDITOR_XML.equals(grammar)) {
+			return new XmlUiModule(this);
 		}
 		throw new IllegalArgumentException(grammar);
 	}
