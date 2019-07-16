@@ -147,7 +147,7 @@ public class JavaSourceLanguagePerformanceTest {
     this.doTestPerformance(25600);
   }
   
-  @Test(timeout = 50000)
+  @Test(timeout = 60000)
   public void testPerf51200() {
     this.doTestPerformance(51200);
   }
