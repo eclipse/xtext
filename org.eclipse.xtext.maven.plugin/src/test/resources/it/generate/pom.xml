@@ -112,7 +112,7 @@
 	<repositories>
 		<repository>
 			<id>lsp4j-from-jenkins</id>
-			<url>${JENKINS_URL}/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-lib-from-jenkins</id>
@@ -144,7 +144,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>lsp4j-from-jenkins</id>
-			<url>${JENKINS_URL}/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-lib-from-jenkins</id>
