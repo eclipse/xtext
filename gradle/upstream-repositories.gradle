@@ -26,7 +26,7 @@ def jenkinsPipelineRepo = { jobName, branch ->
 repositories {
   mavenCentral()
   if (findProperty('useJenkinsSnapshots') == 'true') {
-    maven { url "https://ci.eclipse.org/xtext/job/lsp4j/job/master/$MVN_REPOPATH" }
+    maven { url "$JENKINS_URL/job/lsp4j/$MVN_REPOPATH" }
     maven { url jenkinsPipelineRepo('xtext-lib','autodetect') }
   } else {
     mavenLocal()
