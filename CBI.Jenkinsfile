@@ -165,7 +165,7 @@ spec:
     failure {
       archiveArtifacts artifacts: 'org.eclipse.xtend.ide.swtbot.tests/screenshots/**, build/**, **/target/work/data/.metadata/.log, **/hs_err_pid*.log'
     }
-    changed {
+    cleanup {
       script {
         def envName = ''
         if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
@@ -174,19 +174,29 @@ spec:
           envName = ' (JIRO)'
         }
         
-        def curResult = currentBuild.currentResult
+        def sendNotification = true
         def color = '#00FF00'
-        if (curResult == 'SUCCESS') {
-           if (currentBuild.previousBuild != null && currentBuild.previousBuild.result != 'SUCCESS') {
-             curResult = 'FIXED'
-           }
+        def curResult = currentBuild.currentResult
+        def lastResult = 'NONE'
+        if (currentBuild.previousBuild != null) {
+          lastResult = currentBuild.previousBuild.result
+        }
+        if (lastResult == 'NONE') {
+          curResult = "NEW: ${curResult}"
+        } else if (curResult == 'SUCCESS' && lastResult == 'SUCCESS') {
+          sendNotification = false
+        } else if (curResult == 'SUCCESS' && lastResult != 'SUCCESS') {
+          curResult = 'FIXED'
         } else if (curResult == 'UNSTABLE') {
+          curResult = 'STILL FAILING (UNSTABLE)'
           color = '#FFFF00'
         } else { // FAILURE, ABORTED, NOT_BUILD
+          curResult = 'STILL FAILING'
           color = '#FF0000'
         }
-        
-        slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+        if (sendNotification) {
+          slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+        }
       }
     }
   }
