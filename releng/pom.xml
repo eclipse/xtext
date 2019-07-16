@@ -22,7 +22,7 @@
 		</repository>
 		<repository>
 			<id>lsp4j</id>
-			<url>https://ci.eclipse.org/xtext/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository</url>
+			<url>${JENKINS_URL}/job/lsp4j/lastStableBuild/artifact/build/maven-repository</url>
 		</repository>
 		<repository>
 			<id>lib</id>
