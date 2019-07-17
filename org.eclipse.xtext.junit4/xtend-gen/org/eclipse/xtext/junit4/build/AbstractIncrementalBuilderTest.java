@@ -56,8 +56,11 @@ import org.junit.Before;
  * 
  * @noreference
  * @noimplement
+ * 
+ * @deprecated Use org.eclipse.xtext.testing.builder.AbstractIncrementalBuilderTest instead.
  */
 @Beta
+@Deprecated
 @SuppressWarnings("all")
 public abstract class AbstractIncrementalBuilderTest {
   @Inject
