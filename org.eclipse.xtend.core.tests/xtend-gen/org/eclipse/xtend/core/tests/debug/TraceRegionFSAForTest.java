@@ -6,7 +6,7 @@ import org.eclipse.xtext.generator.IFileSystemAccessExtension;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension2;
 
 @SuppressWarnings("all")
-public class AbstractTraceRegionFSA implements IFileSystemAccessExtension2, IFileSystemAccessExtension, IFileSystemAccess {
+public class TraceRegionFSAForTest implements IFileSystemAccessExtension2, IFileSystemAccessExtension, IFileSystemAccess {
   @Override
   public URI getURI(final String fileName, final String outputConfiguration) {
     throw new UnsupportedOperationException("Auto-generated function stub");
