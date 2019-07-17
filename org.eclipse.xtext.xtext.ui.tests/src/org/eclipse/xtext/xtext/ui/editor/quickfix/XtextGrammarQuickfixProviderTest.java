@@ -61,7 +61,6 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * @author Arne Deutsch - New test cases for fixAddAction and some refactoring
  */
-@SuppressWarnings("restriction")
 public class XtextGrammarQuickfixProviderTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "org.eclipse.xtext.ui.editor.quickfix";

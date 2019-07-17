@@ -81,7 +81,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 		createXtextProjectInfo(issues);
 		CharSequence grammar = xtextProjectInfo.getRuntimeProject().grammar();
 		try {
-			Files.write(grammar, new File(genPath, xtextProjectInfo.getRuntimeProject().getGrammarFilePath()), Charsets.ISO_8859_1);
+			Files.asCharSink(new File(genPath, xtextProjectInfo.getRuntimeProject().getGrammarFilePath()), Charsets.ISO_8859_1).write(grammar);
 		} catch (IOException e) {
 			String message = "Can't create grammar file";
 			log.error(message, e);

@@ -34,7 +34,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.xtext.common.types.eclipse.tests.internal.TestsActivator;
-import org.eclipse.xtext.common.types.tests.Activator;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.PluginUtil;
