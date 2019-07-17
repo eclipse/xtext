@@ -45,7 +45,10 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.gu
 
 /**
  * @since 2.9
+ * 
+ * @deprecated please rewrite your fragment with the new generator infrastructure.
  */
+@Deprecated
 class FragmentAdapter extends AbstractXtextGeneratorFragment {
 	
 	@Inject CodeConfig codeConfig
