@@ -3,7 +3,7 @@ package org.eclipse.xtend.core.tests.debug;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.debug.AbstractTraceRegionFSA;
+import org.eclipse.xtend.core.tests.debug.TraceRegionFSAForTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IGenerator;
@@ -382,7 +382,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
   public AbstractTraceRegion getTraceRegion(final CharSequence xtendCode) {
     try {
       final XtendClass clazz = super.clazz(xtendCode.toString());
-      final AbstractTraceRegionFSA fsa = new AbstractTraceRegionFSA();
+      final TraceRegionFSAForTest fsa = new TraceRegionFSAForTest();
       this.generator.doGenerate(clazz.eResource(), fsa);
       final AbstractTraceRegion result = ((ITraceRegionProvider) fsa.charSequence).getTraceRegion();
       this.print(result, fsa.charSequence.toString());

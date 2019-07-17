@@ -207,7 +207,7 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 	
 	def AbstractTraceRegion getTraceRegion(CharSequence xtendCode) {
 		val clazz = super.clazz(xtendCode.toString)
-		val fsa = new AbstractTraceRegionFSA()
+		val fsa = new TraceRegionFSAForTest()
 		// test without issues attached on purpose
 		generator.doGenerate(clazz.eResource, fsa)
 		val result = (fsa.charSequence as ITraceRegionProvider).traceRegion
