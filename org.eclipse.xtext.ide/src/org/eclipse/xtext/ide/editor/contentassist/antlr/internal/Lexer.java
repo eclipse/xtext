@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,11 @@
 package org.eclipse.xtext.ide.editor.contentassist.antlr.internal;
 
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.FailedPredicateException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
+import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 
 /**
@@ -25,11 +29,47 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 	protected Lexer() {
 		super();
 	}
-	
+
 	protected Lexer(CharStream input, RecognizerSharedState state) {
 		super(input, state);
 	}
-	
+
+	@Override
+	public Token nextToken() {
+		while (true) {
+			state.token = null;
+			state.channel = Token.DEFAULT_CHANNEL;
+			state.tokenStartCharIndex = input.index();
+			state.tokenStartCharPositionInLine = input.getCharPositionInLine();
+			state.tokenStartLine = input.getLine();
+			state.text = null;
+			if ( input.LA(1)==CharStream.EOF ) {
+				return Token.EOF_TOKEN;
+			}
+			try {
+				mTokens();
+				if ( state.token==null ) {
+					emit();
+				}
+				else if ( state.token==Token.SKIP_TOKEN ) {
+					continue;
+				}
+				return state.token;
+			}
+			/*
+			 * Avoid infinite loop (editor freeze) on {@link FailedPredicateException}
+			 */
+			catch (NoViableAltException | FailedPredicateException e) {
+				reportError(e);
+				recover(e); // throw out current char and try again
+			}
+			catch (RecognitionException re) {
+				reportError(re);
+				// match() routine has already called recover()
+			}
+		}
+	}
+
 	@Override
 	public void emitErrorMessage(String msg) {
 		// don't call super, since it would do a plain vanilla
@@ -37,5 +77,5 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 		if (logger.isTraceEnabled())
 			logger.trace(msg);
 	}
-	
+
 }
