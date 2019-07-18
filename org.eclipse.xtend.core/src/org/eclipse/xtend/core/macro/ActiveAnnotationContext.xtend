@@ -133,12 +133,13 @@ class ActiveAnnotationContextProvider {
 						throw e
 					} catch (Throwable e) {
 						operationCanceledManager.propagateAsErrorIfCancelException(e)
-						val msg = switch e {
+						val String msg = '''Problem while loading annotation processor: «switch e {
 							ExceptionInInitializerError : e.exception.message
 							default : e.message
-						}
+						}»'''
+						logger.error(msg, e)
 						file.eResource.errors.add(new EObjectDiagnosticImpl(Severity.ERROR, 
-							IssueCodes.PROCESSING_ERROR, '''Problem while loading annotation processor: «msg»''', value,
+							IssueCodes.PROCESSING_ERROR, msg, value,
 							XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, -1, null))
 					}
 					result.contexts.put(key, fa)
