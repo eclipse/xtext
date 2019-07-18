@@ -101,6 +101,8 @@ public class ActiveAnnotationContextProvider {
             } else if (_t instanceof Throwable) {
               final Throwable e_1 = (Throwable)_t;
               this.operationCanceledManager.propagateAsErrorIfCancelException(e_1);
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Problem while loading annotation processor: ");
               String _switchResult = null;
               boolean _matched = false;
               if (e_1 instanceof ExceptionInInitializerError) {
@@ -110,14 +112,13 @@ public class ActiveAnnotationContextProvider {
               if (!_matched) {
                 _switchResult = e_1.getMessage();
               }
-              final String msg = _switchResult;
+              _builder.append(_switchResult);
+              final String msg = _builder.toString();
+              ActiveAnnotationContextProvider.logger.error(msg, e_1);
               EList<Resource.Diagnostic> _errors = file.eResource().getErrors();
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Problem while loading annotation processor: ");
-              _builder.append(msg);
               XAnnotation _value = it.getValue();
               EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
-                IssueCodes.PROCESSING_ERROR, _builder.toString(), _value, 
+                IssueCodes.PROCESSING_ERROR, msg, _value, 
                 XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, (-1), null);
               _errors.add(_eObjectDiagnosticImpl);
             } else {
