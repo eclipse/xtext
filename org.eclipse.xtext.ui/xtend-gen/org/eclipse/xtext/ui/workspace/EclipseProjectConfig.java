@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfig;
-import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
@@ -50,8 +49,8 @@ public class EclipseProjectConfig implements IProjectConfig {
   
   @Override
   public ISourceFolder findSourceFolderContaining(final URI member) {
-    final Function1<ISourceFolder, Boolean> _function = (ISourceFolder folder) -> {
-      return Boolean.valueOf(UriUtil.isPrefixOf(folder.getPath(), member));
+    final Function1<ISourceFolder, Boolean> _function = (ISourceFolder sourceFolder) -> {
+      return Boolean.valueOf(sourceFolder.contains(member));
     };
     return IterableExtensions.findFirst(this.getSourceFolders(), _function);
   }
