@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,25 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.hyperlinking
 
-import com.google.inject.Inject
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
+import org.eclipse.jface.text.hyperlink.IHyperlink
+import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.ui.testing.AbstractHyperlinkingTest
+import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+
+import static extension org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.createJavaProject
 
 /**
  * @author miklossy - Initial contribution and API
  */
-class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
+@RunWith(XtextRunner)
+@InjectWith(XtendIDEInjectorProvider)
+class JavaDocHyperlinkingTest extends AbstractHyperlinkingTest {
 
-	// position marker
-	val c = '''<|>'''
-
-	@Inject extension IHyperlinkHelper
-
-	@Inject extension WorkbenchTestHelper
+	@Before def void setup() {
+		/*
+		 * Xbase-based languages require java project
+		 */
+		projectName.createJavaProject
+	}
 
 	@Test def import_statement() {
 		'''
@@ -34,7 +39,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				Date date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def member_type() {
@@ -47,7 +52,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				«c»Date«c» date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def multi_line_comment_link() {
@@ -59,7 +64,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def multi_line_comment_see() {
@@ -71,7 +76,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link_no_hyperlink_if_the_type_cannot_be_resolved() {
@@ -81,7 +86,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsNoHyperlinks
+		'''.hasNoHyperlink
 	}
 
 	@Test def javadoc_see_no_hyperlink_if_the_type_cannot_be_resolved() {
@@ -91,7 +96,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsNoHyperlinks
+		'''.hasNoHyperlink
 	}
 
 	@Test def javadoc_link01() {
@@ -104,7 +109,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				Date date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link02() {
@@ -115,7 +120,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link03() {
@@ -126,7 +131,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link04() {
@@ -139,7 +144,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				Date date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link05() {
@@ -153,7 +158,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 				 */
 				val a = 1
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link06() {
@@ -167,7 +172,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			/**
 			 * {@link «c»Date«c»}
 			 */
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_link07() {
@@ -176,7 +181,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			/**
 			 * {@link «c»Date«c»}
 			 */
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see01() {
@@ -189,7 +194,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				Date date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see02() {
@@ -200,7 +205,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see03() {
@@ -211,7 +216,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			 */
 			class Foo {
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see04() {
@@ -224,7 +229,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			class Foo {
 				Date date
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see05() {
@@ -238,7 +243,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 				 */
 				val a = 1
 			}
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see06() {
@@ -252,7 +257,7 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			/**
 			 * @see «c»Date«c»
 			 */
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
 	@Test def javadoc_see07() {
@@ -261,58 +266,23 @@ class JavaDocHyperlinkingTest extends AbstractXtendUITestCase {
 			/**
 			 * @see «c»Date«c»
 			 */
-		'''.containsHyperlinkToJavaDate
+		'''.hasHyperlinkToJavaDate
 	}
 
-	private def containsNoHyperlinks(CharSequence it) {
-		determineHyperlinks(expectedPositionInformation.head).assertNull
+	private def hasHyperlinkToJavaDate(CharSequence it) {
+		hasHyperlinkTo("java.util.Date")
 	}
 
-	private def containsHyperlinkToJavaDate(CharSequence it) {
-		val expected = expectedPositionInformation
-		val expectedOffset = expected.head
-		val expectedLength = expected.last
-		
-		val hyperlinks = determineHyperlinks(expectedOffset)
-		assertNotNull("No hyperlinks found!", hyperlinks)
-		1.assertEquals(hyperlinks.length)
-		val hyperlink = hyperlinks.head
-		
-		"Date".assertEquals(hyperlink.hyperlinkText)
-		expectedOffset.assertEquals(hyperlink.hyperlinkRegion.offset)
-		expectedLength.assertEquals(hyperlink.hyperlinkRegion.length)
-		
-		assertTrue(hyperlink instanceof JdtHyperlink)
-		val jdtHyperlink = hyperlink as JdtHyperlink
-		
-		val javaElement = jdtHyperlink.javaElement
-		"Date".assertEquals(javaElement.elementName)
+	private def hasNoHyperlink(CharSequence it) {
+		// given
+		dslFile.
+		// when
+		hyperlinkingOn(hyperlinkRegion.offset).
+		// then
+		noHyperlinkIsOffered
 	}
 
-	private def getExpectedPositionInformation(CharSequence input) {
-		val text = input.toString
-
-		val first = text.indexOf(c)
-		if(first == -1) {
-			fail('''Can't locate first position symbols '«c»' in the input text.''')
-		}
-
-		val second = text.lastIndexOf(c)
-		if(first == second) {
-			fail('''Can't locate second position symbols '«c»' in the input text.''')
-		}
-
-		val offset = first
-		val length = second - first - c.length
-
-		#[offset, length]
-	}
-
-	private def determineHyperlinks(CharSequence text, int offset) {
-		val content = text.toString.replace(c, "")
-
-		val xtendFile = "Foo".xtendFile(content)
-		val resource = xtendFile.eResource as XtextResource
-		resource.createHyperlinksByOffset(offset, true)
+	private def noHyperlinkIsOffered(IHyperlink[] hyperlinks) {
+		hyperlinks.assertNull
 	}
 }
