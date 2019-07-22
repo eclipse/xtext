@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IFileSystemScanner;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -102,10 +102,8 @@ public class ProjectManager {
   public IncrementalBuilder.Result doInitialBuild(final CancelIndicator cancelIndicator) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
     final Consumer<ISourceFolder> _function = (ISourceFolder it) -> {
-      final IAcceptor<URI> _function_1 = (URI it_1) -> {
-        uris.add(it_1);
-      };
-      this.fileSystemScanner.scan(it.getPath(), _function_1);
+      List<URI> _allResources = it.getAllResources(this.fileSystemScanner);
+      Iterables.<URI>addAll(uris, _allResources);
     };
     this.projectConfig.getSourceFolders().forEach(_function);
     return this.doBuild(uris, CollectionLiterals.<URI>emptyList(), CollectionLiterals.<IResourceDescription.Delta>emptyList(), cancelIndicator);

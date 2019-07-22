@@ -76,8 +76,8 @@ class ProjectManager {
     def Result doInitialBuild(CancelIndicator cancelIndicator) {
         val uris = newArrayList
         projectConfig.sourceFolders.forEach [
-            fileSystemScanner.scan(path) [uris += it]
-        ] 
+        	uris += it.getAllResources(fileSystemScanner)
+        ]
         return doBuild(uris, emptyList, emptyList, cancelIndicator)        
     } 
 
