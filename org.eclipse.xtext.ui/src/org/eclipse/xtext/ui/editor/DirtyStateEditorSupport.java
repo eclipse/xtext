@@ -479,10 +479,15 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	
 	@Override
 	public void descriptionsChanged(final IResourceDescription.Event event) {
-		if (!getDirtyResource().isInitialized())
-			return;
+		DocumentBasedDirtyResource resource = getDirtyResource();
+		IResourceDescription description;
+		synchronized(resource) {
+			if (!resource.isInitialized())
+				return;
+			description = resource.getDescription();
+		}
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			if (delta.getOld() == getDirtyResource().getDescription() || delta.getNew() == getDirtyResource().getDescription())
+			if (delta.getOld() == description || delta.getNew() == description)
 				return;
 		}
 		scheduleUpdateEditorJob(event);

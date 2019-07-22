@@ -31,7 +31,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	private URI normalizedUri;
 	private Provider<ResourceStorageLoadable> storageAwareResourceInputStreamProvider;
 	
-	public void connect(IXtextDocument document) {
+	public synchronized void connect(IXtextDocument document) {
 		if (document == null)
 			throw new IllegalArgumentException("document may not be null");
 		if (this.document == document)
@@ -60,7 +60,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		}
 	}
 	
-	public void disconnect(IXtextDocument document) {
+	public synchronized void disconnect(IXtextDocument document) {
 		if (document == null)
 			throw new IllegalArgumentException("document may not be null");
 		if (this.document != document)
