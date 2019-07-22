@@ -366,7 +366,7 @@ Note that the Xtend compiler cannot be set to use snapshot versions from the beg
      * `releng/org.eclipse.xtext.sdk.target/pom.xml`
 10. xtext-apidiff
     * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
-    * adapt Jenkins Configuration for the xtext-xtend-api-diff job.
+    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/CBI.Jenkinsfile
 ### GitHub Milestones
 
 We use GitHub milestones to communicate when bug fixes and new features will be available and to generate a list of resolved issues for the release notes. When a major or minor release is done, the corresponding GitHub milestone should be closed. If there are open issues left in that milestone, they should be removed from it or assigned to another milestone.
