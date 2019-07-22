@@ -14,8 +14,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.UriUtil
 
-import static extension org.eclipse.xtext.util.UriUtil.*
-
 @Accessors
 class FileProjectConfig implements IProjectConfig {
 	val URI path
@@ -64,7 +62,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 
 	override FileSourceFolder findSourceFolderContaining(URI member) {
-		sourceFolders.findFirst[source|source.path.isPrefixOf(member)]
+		sourceFolders.findFirst[sourceFolder|sourceFolder.contains(member)]
 	}
 
 	override equals(Object obj) {

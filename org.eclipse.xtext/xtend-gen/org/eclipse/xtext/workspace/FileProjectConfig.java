@@ -87,8 +87,8 @@ public class FileProjectConfig implements IProjectConfig {
   
   @Override
   public FileSourceFolder findSourceFolderContaining(final URI member) {
-    final Function1<FileSourceFolder, Boolean> _function = (FileSourceFolder source) -> {
-      return Boolean.valueOf(UriUtil.isPrefixOf(source.getPath(), member));
+    final Function1<FileSourceFolder, Boolean> _function = (FileSourceFolder sourceFolder) -> {
+      return Boolean.valueOf(sourceFolder.contains(member));
     };
     return IterableExtensions.<FileSourceFolder>findFirst(this.sourceFolders, _function);
   }

@@ -25,6 +25,7 @@ public interface IProjectConfig {
 	 */
 	URI getPath();
 
+	/** @return a set of all source folders */
 	Set<? extends ISourceFolder> getSourceFolders();
 
 	/**
