@@ -38,7 +38,7 @@ We ship the Gradle Wrapper with our code. Thus a CQ needs to be filed. Here is a
 
 All our gradle based builds needs to be adapted and tested.
 
-1. Run `./gradlew wrapper --gradle-version <version>` twice in all our gradle projects (`xtext-lib`,`xtext-core`,`xtext-extras`,`xtext-xtend`,`xtext-web`,`xtext-idea`,`xtext-umbrella/releng/gradle-composite`).
+1. Run `./gradlew wrapper --gradle-version <version>` twice in all our gradle projects (`xtext-lib`,`xtext-core`,`xtext-extras`,`xtext-xtend`,`xtext-web`,`xtext-umbrella/releng/gradle-composite`).
 1. Test if it works locally and on Jenkins. Run the build with `--warning-mode all` to see if there are new deprecations and if yes make sure a issue exists for them.
 
 ## Wizard
