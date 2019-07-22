@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.workspace
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import java.util.Set
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRoot
@@ -20,9 +21,6 @@ import org.eclipse.xtext.workspace.IProjectConfigProvider
 import org.eclipse.xtext.workspace.ISourceFolder
 import org.eclipse.xtext.workspace.IWorkspaceConfig
 import org.eclipse.xtext.workspace.ProjectConfigAdapter
-
-import static extension org.eclipse.xtext.util.UriUtil.*
-import com.google.inject.Singleton
 
 @Singleton
 class EclipseProjectConfigProvider implements IProjectConfigProvider {
@@ -67,7 +65,7 @@ class EclipseProjectConfig implements IProjectConfig {
 	}
 
 	override findSourceFolderContaining(URI member) {
-		sourceFolders.findFirst[folder|folder.path.isPrefixOf(member)]
+		sourceFolders.findFirst[sourceFolder|sourceFolder.contains(member)]
 	}
 	
 	override getWorkspaceConfig() {
