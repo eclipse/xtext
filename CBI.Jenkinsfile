@@ -75,11 +75,6 @@ spec:
           properties([
             [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/eclipse/xtext-core/'],
             [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
-            parameters([
-              choice(choices: ['oxygen', 'photon', 'r201809', 'latest'], 
-              description: 'Which Target Platform should be used?', 
-              name: 'target_platform')
-            ]),
             pipelineTriggers([githubPush()])
           ])
         }
