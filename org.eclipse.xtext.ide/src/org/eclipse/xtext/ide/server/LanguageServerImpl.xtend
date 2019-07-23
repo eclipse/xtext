@@ -46,7 +46,6 @@ import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.InitializedParams
 import org.eclipse.lsp4j.Location
-import org.eclipse.lsp4j.Position
 import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceParams
@@ -320,13 +319,19 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 		initialized.thenAccept([
 			val diagnostics = new PublishDiagnosticsParams => [
 				it.uri = toUriString(uri)
-				it.diagnostics = issues.filter[severity !== IGNORE].map[toDiagnostic].toList
+				if (issues.isEmpty) {
+					diagnostics = #[]
+				} else {
+					diagnostics = workspaceManager.doRead(uri) [document, resource|
+						issues.filter[severity !== IGNORE].map[toDiagnostic(document, it)].toList
+					]
+				}
 			]
 			client.publishDiagnostics(diagnostics)
 		])
 	}
 
-	private def Diagnostic toDiagnostic(Issue issue) {
+	private def Diagnostic toDiagnostic(Document document, Issue issue) {
 		new Diagnostic => [
 			code = issue.code
 			severity = switch issue.severity {
@@ -336,12 +341,11 @@ import static org.eclipse.xtext.diagnostics.Severity.*
 				default: DiagnosticSeverity.Hint
 			}
 			message = issue.message
-			val lineNumber = (issue.lineNumber ?: 1) - 1
-			val column = (issue.column ?: 1) - 1
-			val length = (issue.length ?: 0)
+			val start = document.getPosition(issue.offset)
+			val end = document.getPosition(issue.offset+issue.length)
 			range = new Range(
-				new Position(lineNumber, column),
-				new Position(lineNumber, column + length)
+				start,
+				end
 			)
 		]
 	}

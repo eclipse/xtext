@@ -29,6 +29,8 @@ public class TestLanguageValidator extends AbstractTestLanguageValidator {
   
   public static final String UNSORTED_MEMBERS = "unsorted_members";
   
+  public static final String MULTILINE_PROBLEM = "multiline_problem";
+  
   @Check
   public void checkGreetingStartsWithCapital(final TypeDeclaration type) {
     boolean _isUpperCase = Character.isUpperCase(type.getName().charAt(0));
@@ -53,6 +55,14 @@ public class TestLanguageValidator extends AbstractTestLanguageValidator {
         "Members should be in alphabetic order.", 
         TestLanguagePackage.Literals.ABSTRACT_ELEMENT__NAME, 
         TestLanguageValidator.UNSORTED_MEMBERS);
+    }
+  }
+  
+  @Check
+  public void checkWithMultilineError(final TypeDeclaration type) {
+    boolean _startsWith = type.getName().startsWith("Multiline");
+    if (_startsWith) {
+      this.warning("Test Validation to mark the whole type", null, TestLanguageValidator.MULTILINE_PROBLEM);
     }
   }
 }

@@ -512,14 +512,22 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
       final Procedure1<PublishDiagnosticsParams> _function_1 = (PublishDiagnosticsParams it_1) -> {
         it_1.setUri(this._uriExtensions.toUriString(uri));
-        final Function1<Issue, Boolean> _function_2 = (Issue it_2) -> {
-          Severity _severity = it_2.getSeverity();
-          return Boolean.valueOf((_severity != Severity.IGNORE));
-        };
-        final Function1<Issue, Diagnostic> _function_3 = (Issue it_2) -> {
-          return this.toDiagnostic(it_2);
-        };
-        it_1.setDiagnostics(IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_2), _function_3)));
+        boolean _isEmpty = IterableExtensions.isEmpty(issues);
+        if (_isEmpty) {
+          it_1.setDiagnostics(Collections.<Diagnostic>unmodifiableList(CollectionLiterals.<Diagnostic>newArrayList()));
+        } else {
+          final Function2<Document, XtextResource, List<Diagnostic>> _function_2 = (Document document, XtextResource resource) -> {
+            final Function1<Issue, Boolean> _function_3 = (Issue it_2) -> {
+              Severity _severity = it_2.getSeverity();
+              return Boolean.valueOf((_severity != Severity.IGNORE));
+            };
+            final Function1<Issue, Diagnostic> _function_4 = (Issue it_2) -> {
+              return this.toDiagnostic(document, it_2);
+            };
+            return IterableExtensions.<Diagnostic>toList(IterableExtensions.map(IterableExtensions.filter(issues, _function_3), _function_4));
+          };
+          it_1.setDiagnostics(this.workspaceManager.<List<Diagnostic>>doRead(uri, _function_2));
+        }
       };
       final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function_1);
       this.client.publishDiagnostics(diagnostics);
@@ -527,7 +535,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     this.initialized.thenAccept(_function);
   }
   
-  private Diagnostic toDiagnostic(final Issue issue) {
+  private Diagnostic toDiagnostic(final Document document, final Issue issue) {
     Diagnostic _diagnostic = new Diagnostic();
     final Procedure1<Diagnostic> _function = (Diagnostic it) -> {
       it.setCode(issue.getCode());
@@ -553,33 +561,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       }
       it.setSeverity(_switchResult);
       it.setMessage(issue.getMessage());
-      Integer _elvis = null;
-      Integer _lineNumber = issue.getLineNumber();
-      if (_lineNumber != null) {
-        _elvis = _lineNumber;
-      } else {
-        _elvis = Integer.valueOf(1);
-      }
-      final int lineNumber = ((_elvis).intValue() - 1);
-      Integer _elvis_1 = null;
-      Integer _column = issue.getColumn();
-      if (_column != null) {
-        _elvis_1 = _column;
-      } else {
-        _elvis_1 = Integer.valueOf(1);
-      }
-      final int column = ((_elvis_1).intValue() - 1);
-      Integer _elvis_2 = null;
+      final Position start = document.getPosition((issue.getOffset()).intValue());
+      Integer _offset = issue.getOffset();
       Integer _length = issue.getLength();
-      if (_length != null) {
-        _elvis_2 = _length;
-      } else {
-        _elvis_2 = Integer.valueOf(0);
-      }
-      final Integer length = _elvis_2;
-      Position _position = new Position(lineNumber, column);
-      Position _position_1 = new Position(lineNumber, (column + (length).intValue()));
-      Range _range = new Range(_position, _position_1);
+      int _plus = ((_offset).intValue() + (_length).intValue());
+      final Position end = document.getPosition(_plus);
+      Range _range = new Range(start, end);
       it.setRange(_range);
     };
     return ObjectExtensions.<Diagnostic>operator_doubleArrow(_diagnostic, _function);
