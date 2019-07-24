@@ -132,7 +132,7 @@ spec:
           lastResult = currentBuild.previousBuild.result
         }
 
-        if (curResult != 'SUCCESS' && lastResult != 'SUCCESS') {
+        if (curResult != 'SUCCESS' || lastResult != 'SUCCESS') {
           def color = ''
           switch (curResult) {
             case 'SUCCESS':
