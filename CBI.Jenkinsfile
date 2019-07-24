@@ -126,35 +126,34 @@ spec:
     }
     cleanup {
       script {
-        def envName = ''
-        if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
-          envName = ' (JIRO)'
-        } else if (env.JENKINS_URL.contains('ci-staging.eclipse.org/xtext')) {
-          envName = ' (JIRO)'
-        }
-        
-        def sendNotification = true
-        def color = '#00FF00'
         def curResult = currentBuild.currentResult
-        def lastResult = 'NONE'
+        def lastResult = 'NEW'
         if (currentBuild.previousBuild != null) {
           lastResult = currentBuild.previousBuild.result
         }
-        if (lastResult == 'NONE') {
-          curResult = "NEW: ${curResult}"
-        } else if (curResult == 'SUCCESS' && lastResult == 'SUCCESS') {
-          sendNotification = false
-        } else if (curResult == 'SUCCESS' && lastResult != 'SUCCESS') {
-          curResult = 'FIXED'
-        } else if (curResult == 'UNSTABLE') {
-          curResult = 'STILL FAILING (UNSTABLE)'
-          color = '#FFFF00'
-        } else { // FAILURE, ABORTED, NOT_BUILD
-          curResult = 'STILL FAILING'
-          color = '#FF0000'
-        }
-        if (sendNotification) {
-          slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+
+        if (curResult != 'SUCCESS' && lastResult != 'SUCCESS') {
+          def color = ''
+          switch (curResult) {
+            case 'SUCCESS':
+              color = '#00FF00'
+              break
+            case 'UNSTABLE':
+              color = '#FFFF00'
+              break
+            case 'FAILURE':
+              color = '#FF0000'
+              break
+            default: // e.g. ABORTED
+              color = '#666666'
+          }
+
+          slackSend (
+            message: "${lastResult} => ${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}>",
+            botUser: true,
+            channel: 'xtext-builds',
+            color: "${color}"
+          )
         }
       }
     }
