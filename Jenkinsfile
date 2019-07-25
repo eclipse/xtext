@@ -1,8 +1,63 @@
 pipeline {
-  agent any
+  agent {
+    kubernetes {
+      label 'xtext-umbrella-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
+      defaultContainer 'xtext-buildenv'
+      yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jnlp
+    image: 'eclipsecbi/jenkins-jnlp-agent'
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    resources:
+      limits:
+        memory: "0.4Gi"
+        cpu: "0.2"
+      requests:
+        memory: "0.4Gi"
+        cpu: "0.2"
+    volumeMounts:
+    - mountPath: /home/jenkins/.ssh
+      name: volume-known-hosts
+  - name: xtext-buildenv
+    image: docker.io/smoht/xtext-buildenv:0.7
+    tty: true
+    resources:
+      limits:
+        memory: "3.6Gi"
+        cpu: "1.0"
+      requests:
+        memory: "3.6Gi"
+        cpu: "1.0"
+    volumeMounts:
+    - name: settings-xml
+      mountPath: /home/jenkins/.m2/settings.xml
+      subPath: settings.xml
+      readOnly: true
+    - name: m2-repo
+      mountPath: /home/jenkins/.m2/repository
+    - name: volume-known-hosts
+      mountPath: /home/jenkins/.ssh
+  volumes:
+  - name: volume-known-hosts
+    configMap:
+      name: known-hosts
+  - name: settings-xml
+    configMap: 
+      name: m2-dir
+      items:
+      - key: settings.xml
+        path: settings.xml
+  - name: m2-repo
+    emptyDir: {}
+    '''
+    }
+  }
 
   options {
-    buildDiscarder(logRotator(numToKeepStr:'5'))
+    buildDiscarder(logRotator(numToKeepStr:'15'))
     disableConcurrentBuilds()
     timeout(time: 60, unit: 'MINUTES')
     timestamps()
@@ -10,39 +65,44 @@ pipeline {
 
   // https://jenkins.io/doc/book/pipeline/syntax/#triggers
   triggers {
-    pollSCM('H 2 * * *')
+    cron('H 2 * * *')
   }
-
-  tools { 
-    maven 'M3'
-  }
-
+  
   stages {
-    stage('Prepare') {
+    stage('Checkout') {
       steps {
+        script {
+          properties([
+            [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/eclipse/xtext-core/'],
+            [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
+            pipelineTriggers([githubPush()])
+          ])
+        }
+
         sh '''
           if [ -d ".git" ]; then
-          	git reset --hard
+            git reset --hard
           fi
         '''
-        checkout scm
+        
         dir('build') { deleteDir() }
         dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
         dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
+
         sh '''
           sed_inplace() {
-            if [[ "$OSTYPE" == "darwin"* ]]; then
-              sed -i '' "$@"
-            else
-              sed -i "$@" 
-            fi  
+              if [[ "$OSTYPE" == "darwin"* ]]; then
+                  sed -i '' "$@"
+              else
+                  sed -i "$@" 
+              fi    
           }
           
           targetfiles="$(find releng -type f -iname '*.target')"
           for targetfile in $targetfiles
           do
-            echo "Redirecting target platforms in $targetfile to $JENKINS_URL"
-            sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/\\([^/]*\\)/?<repository location=\\"$JENKINS_URL/job/\\1/job/\\2/?" $targetfile
+              echo "Redirecting target platforms in $targetfile to $JENKINS_URL"
+              sed_inplace "s?<repository location=\\".*/job/\\([^/]*\\)/job/\\([^/]*\\)/?<repository location=\\"$JENKINS_URL/job/\\1/job/\\2/?" $targetfile
           done
         '''
       }
@@ -51,7 +111,14 @@ pipeline {
     stage('Maven Build') {
       steps {
         sh '''
-          mvn -f releng --batch-mode --update-snapshots -fae -Dtycho.disableP2Mirrors=true -Dmaven.repo.local=.m2/repository clean install
+          mvn \
+            -f releng \
+            --batch-mode \
+            --update-snapshots \
+            -fae \
+            -Dmaven.repo.local=$WORKSPACE/.m2/repository \
+            -Dtycho.disableP2Mirrors=true \
+            clean install
         '''
       }
     }
@@ -61,28 +128,40 @@ pipeline {
     success {
       archiveArtifacts artifacts: 'build/**'
     }
-    changed {
+    failure {
+      archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
+    }
+    cleanup {
       script {
-        def envName = ''
-        if (env.JENKINS_URL.contains('ci.eclipse.org/xtext')) {
-          envName = ' (JIPP)'
-        } else if (env.JENKINS_URL.contains('typefox.io')) {
-          envName = ' (TF)'
-        }
-        
         def curResult = currentBuild.currentResult
-        def color = '#00FF00'
-        if (curResult == 'SUCCESS') {
-           if (currentBuild.previousBuild != null && currentBuild.previousBuild.result != 'SUCCESS') {
-             curResult = 'FIXED'
-           }
-        } else if (curResult == 'UNSTABLE') {
-          color = '#FFFF00'
-        } else { // FAILURE, ABORTED, NOT_BUILD
-          color = '#FF0000'
+        def lastResult = 'NEW'
+        if (currentBuild.previousBuild != null) {
+          lastResult = currentBuild.previousBuild.result
         }
-        
-        slackSend message: "${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}${envName}>", botUser: true, channel: 'xtext-builds', color: "${color}"
+
+        if (curResult != 'SUCCESS' || lastResult != 'SUCCESS') {
+          def color = ''
+          switch (curResult) {
+            case 'SUCCESS':
+              color = '#00FF00'
+              break
+            case 'UNSTABLE':
+              color = '#FFFF00'
+              break
+            case 'FAILURE':
+              color = '#FF0000'
+              break
+            default: // e.g. ABORTED
+              color = '#666666'
+          }
+
+          slackSend (
+            message: "${lastResult} => ${curResult}: <${env.BUILD_URL}|${env.JOB_NAME}#${env.BUILD_NUMBER}>",
+            botUser: true,
+            channel: 'xtext-builds',
+            color: "${color}"
+          )
+        }
       }
     }
   }
