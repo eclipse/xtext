@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -19,6 +21,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 
 import com.google.common.collect.Lists;
 
@@ -71,11 +74,15 @@ public class NestedTypesScope extends AbstractScope {
 		Iterator<JvmDeclaredType> iterator = nestedTypeDeclarators.iterator();
 		String simpleName = name.getFirstSegment();
 		List<IEObjectDescription> result = null;
-		while(iterator.hasNext()) {
-			JvmDeclaredType declarator = iterator.next();
-			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(simpleName);
-			if (name.getSegmentCount() == 1 && nestedTypes.iterator().hasNext()) {
-				result = addDescriptions(name, 0, nestedTypes, result);
+		if (name.getSegmentCount() == 1) {
+			Set<JvmDeclaredType> nestedTypesSet = new LinkedHashSet<>();
+			while(iterator.hasNext()) {
+				JvmDeclaredType declarator = iterator.next();
+				Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(simpleName);
+				CollectionExtensions.addAll(nestedTypesSet, nestedTypes);
+			}
+			if (!nestedTypesSet.isEmpty()) {
+				result = addDescriptions(name, 0, nestedTypesSet, result);
 			}
 		}
 		if (result == null && name.getSegmentCount() == 1 && simpleName.indexOf('$') > 0) {
