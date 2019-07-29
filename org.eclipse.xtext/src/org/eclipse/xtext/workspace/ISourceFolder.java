@@ -41,7 +41,7 @@ public interface ISourceFolder {
 		return UriUtil.isPrefixOf(path, uri);
 	}
 
-	/** @return a list of all URIs that are passed to the acceptor of {@link #scan(URI, IAcceptor)} */
+	/** @return a list of all URIs that are passed to the acceptor of {@link IFileSystemScanner#scan(URI, IAcceptor)} */
 	default List<URI> getAllResources(IFileSystemScanner scanner) {
 		List<URI> uris = new ArrayList<>();
 		scanner.scan(getPath(), uri -> uris.add(uri));
