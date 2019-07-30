@@ -69,6 +69,10 @@ spec:
     )
   }
 
+  triggers {
+    parameterizedCron(env.BRANCH_NAME == 'master' ? 'H H(0-1) * * * %target_platform=latest' : '')
+  }
+
   options {
     buildDiscarder(logRotator(numToKeepStr:'5'))
     disableConcurrentBuilds()
