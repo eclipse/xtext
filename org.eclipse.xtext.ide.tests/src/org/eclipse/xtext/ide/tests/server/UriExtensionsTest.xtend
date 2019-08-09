@@ -51,7 +51,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri03() {
 		assertEquals(
-			createURI('file://path with whitespaces/to/resource'),
+			createURI('file://path%20with%20whitespaces/to/resource'),
 			'file://path%20with%20whitespaces/to/resource'.toUri
 		);
 	}
@@ -59,7 +59,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_04() {
 		assertEquals(
-			createURI('file:///path with whitespaces/to/resource'),
+			createURI('file:///path%20with%20whitespaces/to/resource'),
 			'file:///path%20with%20whitespaces/to/resource'.toUri
 		);
 	}
@@ -67,7 +67,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_05() {
 		assertEquals(
-			createURI('file:///dir/\u0424\u0443 \u0411\u0430\u0440'),
+			createURI('file:///dir/\u0424\u0443%20\u0411\u0430\u0440'),
 			'file:///dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80'.toUri
 		);
 	}
@@ -75,7 +75,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_06() {
 		assertEquals(
-			createURI('file://dir/\u0424\u0443 \u0411\u0430\u0440'),
+			createURI('file://dir/\u0424\u0443%20\u0411\u0430\u0440'),
 			'file://dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80'.toUri
 		);
 	}
@@ -99,7 +99,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_09() {
 		assertEquals(
-			createURI('something:/dir/\u0424\u0443 \u0411\u0430\u0440'),
+			createURI('something:/dir/\u0424\u0443%20\u0411\u0430\u0440'),
 			'something:/dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80'.toUri
 		);
 	}
@@ -107,7 +107,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_10() {
 		assertEquals(
-			createURI('something://dir/\u0424\u0443 \u0411\u0430\u0440'),
+			createURI('something://dir/\u0424\u0443%20\u0411\u0430\u0440'),
 			'something://dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80'.toUri
 		);
 	}
@@ -115,7 +115,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_11() {
 		assertEquals(
-			createURI('something:/path with whitespaces/to/resource'),
+			createURI('something:/path%20with%20whitespaces/to/resource'),
 			'something:/path%20with%20whitespaces/to/resource'.toUri
 		);
 	}
@@ -123,7 +123,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_12() {
 		assertEquals(
-			createURI('something://path with whitespaces/to/resource'),
+			createURI('something://path%20with%20whitespaces/to/resource'),
 			'something://path%20with%20whitespaces/to/resource'.toUri
 		);
 	}
@@ -139,7 +139,7 @@ class UriExtensionsTest {
 	@Test
 	def void test_toUri_14() {
 		assertEquals(
-			createURI('file:///c:/Users/dietrich/\u0424\u0443 \u0411\u0430\u0440.mydsl'), 
+			createURI('file:///c:/Users/dietrich/\u0424\u0443%20\u0411\u0430\u0440.mydsl'), 
 			"file:///c%3A/Users/dietrich/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80.mydsl".toUri
 		);
 	}
@@ -246,12 +246,14 @@ class UriExtensionsTest {
 
 	@Test
 	def void testFilesWithSpaces() {
-		assertEquals("file:///dir/Foo Bar.testlang", "file:///dir/Foo%20Bar.testlang".toUri.toUriString)
+		val x = "file:///dir/Foo%20Bar.testlang".toUri
+		val y = x.toUriString
+		assertEquals("file:///dir/Foo%20Bar.testlang", y)
 	}
 
 	@Test
 	def void testFilesWithCyrillicSymbols() {
-		assertEquals("file:///dir/\u0424\u0443 \u0411\u0430\u0440.testlang",
+		assertEquals("file:///dir/\u0424\u0443%20\u0411\u0430\u0440.testlang",
 			"file:///dir/%D0%A4%D1%83%20%D0%91%D0%B0%D1%80.testlang".toUri.toUriString)
 	}
 

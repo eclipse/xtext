@@ -28,7 +28,7 @@ class UriExtensions {
 	 */
 	def URI toEmfUri(java.net.URI netUri) {
 		val decoded = netUri.toDecodedString
-		val uri = URI.createURI(decoded);
+		val uri = URI.createURI(decoded, false);
 		val result = uri.withEmptyAuthority
 		result
 	}
