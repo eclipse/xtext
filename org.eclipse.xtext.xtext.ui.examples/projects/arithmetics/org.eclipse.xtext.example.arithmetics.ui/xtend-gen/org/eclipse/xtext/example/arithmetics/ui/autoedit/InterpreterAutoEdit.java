@@ -19,7 +19,7 @@ import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -64,7 +64,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
       }
       return this.evaluate(stmt);
     };
-    return ((IXtextDocument) document).<BigDecimal>tryReadOnly(_function);
+    return XtextDocumentUtil.get(document).<BigDecimal>tryReadOnly(_function);
   }
   
   protected BigDecimal evaluate(final Evaluation stmt) {

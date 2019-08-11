@@ -96,6 +96,7 @@ import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
 import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -104,6 +105,7 @@ import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
+import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.util.DisplayRunnable;
 
@@ -365,6 +367,10 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	public <T> T getAdapter(Class<T> adapter) {
 		if (IContentOutlinePage.class.isAssignableFrom(adapter)) {
 			return adapter.cast(getContentOutlinePage());
+		}
+		if (ValidationJob.class.equals(adapter)) {
+			IXtextDocument document = getDocument();
+			return document.getAdapter(adapter);
 		}
 		return super.getAdapter(adapter);
 	}

@@ -28,6 +28,7 @@ import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -60,7 +61,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 			return;
 		}
 		try {
-			IXtextDocument doc = (IXtextDocument) document;
+			IXtextDocument doc = XtextDocumentUtil.get(document);
 			String result = doc.tryReadOnly(new IUnitOfWork<String, XtextResource>() {
 				@Override
 				public String exec(XtextResource resource) throws Exception {

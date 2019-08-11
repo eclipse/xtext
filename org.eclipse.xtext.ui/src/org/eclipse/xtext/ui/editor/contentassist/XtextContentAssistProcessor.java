@@ -15,6 +15,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -65,7 +66,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		if (contentProposalProvider == null)
 			return null;
 		
-		IXtextDocument document = (IXtextDocument) viewer.getDocument();
+		IXtextDocument document = XtextDocumentUtil.get(viewer);
 		ICompletionProposal[] result = document.priorityReadOnly(createCompletionProposalComputer(viewer, offset));
 		Arrays.sort(result, completionProposalComparator);
 		result = completionProposalPostProcessor.postProcess(result);
@@ -81,7 +82,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		if (contextInformationProvider == null)
 			return null;
 		
-		IXtextDocument document = (IXtextDocument) viewer.getDocument();
+		IXtextDocument document = XtextDocumentUtil.get(viewer);
 		return document.priorityReadOnly(createContextInformationComputer(viewer, offset));
 	}
 

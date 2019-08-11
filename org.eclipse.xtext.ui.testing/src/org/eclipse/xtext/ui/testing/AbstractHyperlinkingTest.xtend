@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
 
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 
 /**
  * @author miklossy - Initial contribution and API
@@ -97,7 +98,7 @@ abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
 
 	protected def IHyperlink[] hyperlinkingOn(IFile dslFile, int offset) {
 		val editor = dslFile.openInEditor
-		val document = editor.internalSourceViewer.document as IXtextDocument
+		val document = XtextDocumentUtil.get(editor.internalSourceViewer)
 		val resource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
 
 			override exec(XtextResource state) {

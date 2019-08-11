@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Maps;
@@ -163,8 +164,8 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		SourceViewerConfiguration sourceViewerConfiguration = createSourceViewerConfiguration(sourceViewer, editorInput);
 		sourceViewer.unconfigure();
 		sourceViewer.configure(sourceViewerConfiguration);
-		if (sourceViewer.getDocument() instanceof IXtextDocument) {
-			IXtextDocument xtextDocument = (IXtextDocument) sourceViewer.getDocument();
+		IXtextDocument xtextDocument = XtextDocumentUtil.get(sourceViewer);
+		if (xtextDocument != null) {
 			if (!xtextDocument.readOnly(TEST_EXISTING_XTEXT_RESOURCE)) {
 				String[] configuredContentTypes = sourceViewerConfiguration.getConfiguredContentTypes(sourceViewer);
 				for (String contentType : configuredContentTypes) {

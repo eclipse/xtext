@@ -32,6 +32,7 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
@@ -99,7 +100,7 @@ public class ContentFormatter implements IContentFormatter {
 
 	@Override
 	public void format(IDocument document, IRegion region) {
-		IXtextDocument doc = (IXtextDocument) document;
+		IXtextDocument doc = XtextDocumentUtil.get(document);
 		TextEdit r = doc.priorityReadOnly(new FormattingUnitOfWork(doc, region));
 		try {
 			if (r != null)

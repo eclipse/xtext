@@ -16,12 +16,13 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSourceAccess;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -32,19 +33,18 @@ import com.google.common.collect.Iterables;
  */
 public class PresentationDamager implements IPresentationDamager {
 
+	@Inject
+	protected DocumentTokenSourceAccess tokenSourceAccess;
+	
 	@Override
 	public void setDocument(IDocument document) {}
 
 	@Override
 	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent e, boolean documentPartitioningChanged) {
-		if (!(e.getDocument() instanceof IXtextDocument)) {
-			return new Region(0, 0);
-		}
-		XtextDocument document = (XtextDocument) e.getDocument();
-		IRegion lastDamage = document.getLastDamage();
+		IRegion lastDamage = tokenSourceAccess.getLastDamage(e.getDocument());
 		// check whether this is just a presentation invalidation not based on a real document change
 		if (lastDamage == null || !isEventMatchingLastDamage(e, lastDamage)) {
-			IRegion result = computeInterSection(partition, e, document);
+			IRegion result = computeInterSection(partition, e, e.getDocument());
 			return result;
 		}
 		
@@ -60,12 +60,30 @@ public class PresentationDamager implements IPresentationDamager {
 		IRegion result = new Region(offset,endOffset-offset);
 		return result;
 	}
+	
+	/**
+	 * @return the common region of the given partition and the changed region in the DocumentEvent based on the underlying tokens.
+	 * @since 2.19
+	 */
+	protected IRegion computeInterSection(ITypedRegion partition, DocumentEvent e, IDocument document) {
+		if (document instanceof XtextDocument) {
+			// for backwards compatiblity
+			return computeInterSection(partition, e, (XtextDocument) document);
+		}
+		return doComputeInterSection(partition, e, document);
+	}
 
 	/**
 	 * @return the common region of the given partition and the changed region in the DocumentEvent based on the underlying tokens.
+	 * @deprecated use {@link #computeInterSection(ITypedRegion, DocumentEvent, IDocument)} instead.
 	 */
+	@Deprecated
 	protected IRegion computeInterSection(ITypedRegion partition, DocumentEvent e, XtextDocument document) {
-		Iterable<ILexerTokenRegion> tokensInPartition = Iterables.filter(document.getTokens(),Regions.overlaps(partition.getOffset(), partition.getLength()));
+		return doComputeInterSection(partition, e, document);
+	}
+	
+	private IRegion doComputeInterSection(ITypedRegion partition, DocumentEvent e, IDocument document) {
+		Iterable<ILexerTokenRegion> tokensInPartition = Iterables.filter(tokenSourceAccess.getTokens(document, false), Regions.overlaps(partition.getOffset(), partition.getLength()));
 		Iterator<ILexerTokenRegion> tokens = Iterables.filter(tokensInPartition, Regions.overlaps(e.getOffset(), e.getLength())).iterator();
 		if (tokens.hasNext()) {
 			ILexerTokenRegion first = tokens.next();

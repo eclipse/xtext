@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.ImmutableList;
@@ -266,7 +267,7 @@ public class ContentAssistContext {
 	 * The actual document.
 	 */
 	public IXtextDocument getDocument() {
-		return (IXtextDocument) viewer.getDocument();
+		return XtextDocumentUtil.get(viewer);
 	}
 	
 	/**

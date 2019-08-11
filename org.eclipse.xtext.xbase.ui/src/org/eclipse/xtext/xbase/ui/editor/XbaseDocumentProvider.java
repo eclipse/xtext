@@ -64,7 +64,7 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 
 	@Override
 	protected boolean setDocumentContent(IDocument document, IEditorInput input, String encoding) throws CoreException {
-		if (input instanceof IClassFileEditorInput) {
+		if (input instanceof IClassFileEditorInput && document instanceof XtextDocument) {
 			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
 			ILocationInEclipseResource source = getClassFileSourceStorage(classFile);
 			if (source == null) {

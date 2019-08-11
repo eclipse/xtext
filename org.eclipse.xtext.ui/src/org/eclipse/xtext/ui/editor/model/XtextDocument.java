@@ -19,13 +19,9 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -49,6 +45,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork.ReconcilingUnitOfWorkProvider;
+import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.util.DisplayRunnable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
@@ -636,6 +633,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @return the resource uri if available.
 	 * @since 2.1
 	 */
+	@Override
 	public URI getResourceURI() {
 		XtextResource resource = this.resource;
 		if (resource != null)
@@ -644,16 +642,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Class<T> adapterType) {
-		XtextResource resource = this.resource;
-		if (resource == null)
-			return null;
-		URI uri = resource.getURI();
-		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
-			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+		if (ValidationJob.class.equals(adapterType)) {
+			return adapterType.cast(validationJob);
 		}
-		return null;
+		return IXtextDocument.super.getAdapter(adapterType);
 	}
 
 	/*

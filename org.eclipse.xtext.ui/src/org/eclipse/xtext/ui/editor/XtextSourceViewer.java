@@ -27,6 +27,8 @@ import org.eclipse.jface.text.source.IOverviewRuler;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.ImplementedBy;
 
@@ -131,13 +133,25 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	}
 
 	/**
+	 * Supported adapter types are {@link IReconciler} and {@link IXtextDocument}.
+	 * 
 	 * @since 2.3
 	 */
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
-		if (IReconciler.class.isAssignableFrom(adapter)) {
+		if (IReconciler.class.isAssignableFrom(adapter) && adapter.isInstance(fReconciler)) {
 			return adapter.cast(fReconciler);
 		}
+		if (IXtextDocument.class.equals(adapter)) {
+			return adapter.cast(getXtextDocument());
+		}
 		return Platform.getAdapterManager().getAdapter(this, adapter);
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	public IXtextDocument getXtextDocument() {
+		return XtextDocumentUtil.get(getDocument());
 	}
 }

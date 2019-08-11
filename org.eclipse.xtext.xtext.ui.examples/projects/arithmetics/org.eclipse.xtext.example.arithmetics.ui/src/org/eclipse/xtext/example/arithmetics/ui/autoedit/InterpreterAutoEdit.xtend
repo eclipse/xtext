@@ -17,7 +17,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Module
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.ui.editor.model.IXtextDocument
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 
 /** 
  * An interactive interpreter as an {@link IAutoEditStrategy}
@@ -43,7 +43,7 @@ class InterpreterAutoEdit implements IAutoEditStrategy {
 	}
 
 	def private BigDecimal computeResult(IDocument document, DocumentCommand command) {
-		return ((document as IXtextDocument)).tryReadOnly([ resource |
+		return XtextDocumentUtil.get(document).tryReadOnly([ resource |
 			val stmt = findEvaluation(command, resource)
 			if(stmt === null) 
 				return null

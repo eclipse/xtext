@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
@@ -71,9 +70,9 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 	@Override
 	public IRegion getSubject(ITextViewer textViewer, final int offset) {
 		if(textViewer instanceof XtextSourceViewer){
-			IDocument document = ((XtextSourceViewer) textViewer).getDocument();
-			if(document instanceof IXtextDocument){
-				Object resolvedObject = ((IXtextDocument) document).priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
+			IXtextDocument document = ((XtextSourceViewer) textViewer).getXtextDocument();
+			if (document != null) {
+				Object resolvedObject = document.priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
 					@Override
 					public Object exec(XtextResource state) throws Exception {
 						return eObjectAtOffsetHelper.resolveElementAt(state, offset);
