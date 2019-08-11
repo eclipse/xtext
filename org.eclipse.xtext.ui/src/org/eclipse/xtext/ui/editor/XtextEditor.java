@@ -96,7 +96,6 @@ import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
 import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -189,6 +188,12 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	 */
 	@Inject
 	private DirtyStateEditorSupport dirtyStateEditorSupport;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	private String keyBindingScope;
 
@@ -213,7 +218,11 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 
 	@Override
 	public IXtextDocument getDocument() {
-		return XtextDocumentUtil.get(getSourceViewer());
+		ISourceViewer sourceViewer = getSourceViewer();
+		if (sourceViewer != null) {
+			return xtextDocumentUtil.getXtextDocument(sourceViewer);
+		}
+		return null;
 	}
 
 	@Inject

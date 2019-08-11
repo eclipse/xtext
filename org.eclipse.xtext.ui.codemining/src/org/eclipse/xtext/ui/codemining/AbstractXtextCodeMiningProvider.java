@@ -32,6 +32,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import com.google.common.annotations.Beta;
+import com.google.inject.Inject;
 
 /**
  * Xtext integration for Code Mining support. Clients have to subclass and
@@ -43,6 +44,13 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMiningProvider {
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	/*
 	 * This indicator checks if monitor is canceled or if
 	 * CancelableUnitOfWork-cancelIndicator is canceled.
@@ -78,7 +86,7 @@ public abstract class AbstractXtextCodeMiningProvider extends AbstractCodeMining
 				}
 
 			};
-			return XtextDocumentUtil.get(viewer).tryReadOnly(uow, () -> Collections.emptyList());
+			return xtextDocumentUtil.getXtextDocument(viewer).tryReadOnly(uow, () -> Collections.emptyList());
 		});
 		return future;
 	}

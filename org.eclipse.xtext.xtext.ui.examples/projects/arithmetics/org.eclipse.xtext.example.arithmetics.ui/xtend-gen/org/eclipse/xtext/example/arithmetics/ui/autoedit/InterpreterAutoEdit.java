@@ -9,6 +9,7 @@ package org.eclipse.xtext.example.arithmetics.ui.autoedit;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.math.BigDecimal;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -29,6 +31,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class InterpreterAutoEdit implements IAutoEditStrategy {
+  @Inject
+  @Extension
+  private XtextDocumentUtil _xtextDocumentUtil;
+  
   @Override
   public void customizeDocumentCommand(final IDocument document, final DocumentCommand command) {
     String[] _legalLineDelimiters = document.getLegalLineDelimiters();
@@ -64,7 +70,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
       }
       return this.evaluate(stmt);
     };
-    return XtextDocumentUtil.get(document).<BigDecimal>tryReadOnly(_function);
+    return this._xtextDocumentUtil.getXtextDocument(document).<BigDecimal>tryReadOnly(_function);
   }
   
   protected BigDecimal evaluate(final Evaluation stmt) {

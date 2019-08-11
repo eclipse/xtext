@@ -31,6 +31,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,13 +49,27 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	
 	public static class DefaultFactory implements Factory {
 
+		/**
+		 * @since 2.19
+		 */
+		@Inject
+		private MembersInjector<XtextSourceViewer> membersInjector;
+		
 		@Override
 		public XtextSourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler,
 				IOverviewRuler overviewRuler, boolean showsAnnotationOverview, int styles) {
-			return new XtextSourceViewer(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
+			XtextSourceViewer result = new XtextSourceViewer(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
+			membersInjector.injectMembers(result);
+			return result;
 		}
 		
 	}
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil = new XtextDocumentUtil();
 	
 	public XtextSourceViewer(Composite parent, IVerticalRuler ruler, IOverviewRuler overviewRuler,
 			boolean showsAnnotationOverview, int styles) {
@@ -152,6 +168,6 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	 * @since 2.19
 	 */
 	public IXtextDocument getXtextDocument() {
-		return XtextDocumentUtil.get(getDocument());
+		return xtextDocumentUtil.getXtextDocument(getDocument());
 	}
 }

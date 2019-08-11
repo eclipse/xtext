@@ -23,7 +23,6 @@ import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.testing.AbstractAutoEditTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
@@ -78,7 +77,7 @@ public class Bug369087Test extends AbstractAutoEditTest {
 				"    'package' name=ID '{'\n" +
 				"'}';";
 		XtextEditor editor = openEditor(model);
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(editor);
+		IXtextDocument xtextDocument = editor.getDocument();
 		String category = getContentTypeCategory(xtextDocument).toString();
 		Position[] positions = xtextDocument.getPositions(category);
 		for(int i=1; i<xtextDocument.getLength(); ++i) {

@@ -73,6 +73,12 @@ public class ContentFormatter implements IContentFormatter {
 
 	@Inject
 	private Provider<FormatterRequest> requestProvider;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject 
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	protected TextEdit createTextEdit(List<ITextReplacement> replacements) {
 		final MultiTextEdit mte = new MultiTextEdit();
@@ -100,7 +106,7 @@ public class ContentFormatter implements IContentFormatter {
 
 	@Override
 	public void format(IDocument document, IRegion region) {
-		IXtextDocument doc = XtextDocumentUtil.get(document);
+		IXtextDocument doc = xtextDocumentUtil.getXtextDocument(document);
 		TextEdit r = doc.priorityReadOnly(new FormattingUnitOfWork(doc, region));
 		try {
 			if (r != null)

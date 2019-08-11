@@ -71,6 +71,10 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	protected IDocumentProvider documentProvider;
 	protected Map<ISourceViewer, DefaultMergeEditor> sourceViewerEditorMap;
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
+	/**
+	 * @since 2.19
+	 */
+	protected XtextDocumentUtil xtextDocumentUtil;
 
 	private Map<Object, IStreamContentAccessor> inputObjectStreamContentAccessorMap = Maps.newHashMap();
 
@@ -164,7 +168,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		SourceViewerConfiguration sourceViewerConfiguration = createSourceViewerConfiguration(sourceViewer, editorInput);
 		sourceViewer.unconfigure();
 		sourceViewer.configure(sourceViewerConfiguration);
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(sourceViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(sourceViewer);
 		if (xtextDocument != null) {
 			if (!xtextDocument.readOnly(TEST_EXISTING_XTEXT_RESOURCE)) {
 				String[] configuredContentTypes = sourceViewerConfiguration.getConfiguredContentTypes(sourceViewer);
@@ -279,6 +283,13 @@ public class DefaultMergeViewer extends TextMergeViewer {
 			mergeEditor = sourceViewerEditorMap.get(sourceViewer);
 		}
 		return mergeEditor;
+	}
+
+	/**
+	 * @since 2.19
+	 */
+	protected void setXtextDocumentUtil(XtextDocumentUtil xtextDocumentUtil) {
+		this.xtextDocumentUtil = xtextDocumentUtil;
 	}
 
 }

@@ -50,6 +50,12 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	@Inject
 	private ICompletionProposalComparator comparator;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	private String errorMessage;
 
 	@Override
@@ -132,7 +138,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
     	List<ICompletionProposal> result = Lists.newArrayList();
     	ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(sourceViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(sourceViewer);
     	for(Annotation annotation : applicableAnnotations) {
 			if (annotation instanceof SpellingAnnotation) {
 				SpellingProblem spellingProblem = ((SpellingAnnotation) annotation).getSpellingProblem();

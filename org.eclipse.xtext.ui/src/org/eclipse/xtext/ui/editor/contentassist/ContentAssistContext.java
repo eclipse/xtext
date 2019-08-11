@@ -200,6 +200,12 @@ public class ContentAssistContext {
 	private Provider<Builder> builderProvider;
 	
 	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
+	/**
 	 * Protected contructor to allow subclassing.
 	 */
 	protected ContentAssistContext() {
@@ -267,7 +273,7 @@ public class ContentAssistContext {
 	 * The actual document.
 	 */
 	public IXtextDocument getDocument() {
-		return XtextDocumentUtil.get(viewer);
+		return xtextDocumentUtil.getXtextDocument(viewer);
 	}
 	
 	/**

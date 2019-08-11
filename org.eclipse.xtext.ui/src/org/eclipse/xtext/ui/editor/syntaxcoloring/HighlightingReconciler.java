@@ -32,7 +32,6 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListenerExtension;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
@@ -56,6 +55,12 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	
 	@Inject
 	private ITextAttributeProvider attributeProvider;
+
+	/**
+	 * @since 2.19
+	 */
+	@Inject 
+	private XtextDocumentUtil xtextDocumentUtil;
 	
 	/** The Xtext editor this highlighting reconciler is installed on */
 	private XtextEditor editor;
@@ -292,8 +297,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 
 		if (sourceViewer.getDocument() != null) {
 			if (oldCalculator != null || newCalculator != null) {
-				IXtextDocument document = XtextDocumentUtil.get(sourceViewer);
-				document.removeModelListener(this);
+				IXtextDocument document = xtextDocumentUtil.getXtextDocument(sourceViewer);
+				if (document != null) {
+					document.removeModelListener(this);
+				}
 				sourceViewer.removeTextInputListener(this);
 			}
 		}
@@ -307,8 +314,12 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 */
 	@Override
 	public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
-		if (oldInput != null)
-			XtextDocumentUtil.get(oldInput).removeModelListener(this);
+		if (oldInput != null) {
+			IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(oldInput);
+			if (xtextDocument != null) {
+				xtextDocument.removeModelListener(this);
+			}
+		}
 	}
 
 	/*
@@ -318,7 +329,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 		if (newInput != null) {
 			refresh();
-			XtextDocumentUtil.get(newInput).addModelListener(this);
+			IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(newInput);
+			if (xtextDocument != null) {
+				xtextDocument.addModelListener(this);
+			}
 		}
 	}
 

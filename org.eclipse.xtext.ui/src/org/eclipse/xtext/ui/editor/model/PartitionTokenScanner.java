@@ -64,7 +64,7 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 	@Inject
 	private ITokenTypeToPartitionTypeMapper mapper;
 	@Inject
-	private DocumentTokenSourceAccess tokenSourceAccess;
+	private DocumentTokenSourceAccess tokenSourceAccess = new DocumentTokenSourceAccess();
 	private int currentPartitionLength;
 	
 	public void setMapper(ITokenTypeToPartitionTypeMapper mapper) {

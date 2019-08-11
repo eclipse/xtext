@@ -108,7 +108,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Override
 	public void setDocument(IDocument document) {
 		if (!(document instanceof XtextDocument)) {
-			throw new IllegalArgumentException("Document must be an " + XtextDocument.class.getSimpleName());
+			throw new IllegalArgumentException("Document must be an " + XtextDocument.class + " but was " + document.getClass().getName());
 		}
 		for (IReconcilingStrategy strategy: strategies) {
 			strategy.setDocument(document);

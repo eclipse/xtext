@@ -68,6 +68,13 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
   @Inject
   protected IResourceSetProvider resourceSetProvider;
   
+  /**
+   * @since 2.19
+   */
+  @Inject
+  @Extension
+  protected XtextDocumentUtil _xtextDocumentUtil;
+  
   protected IProject project;
   
   protected final String c = new Function0<String>() {
@@ -127,7 +134,7 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
     IHyperlink[] _xblockexpression = null;
     {
       final XtextEditor editor = this.openInEditor(dslFile);
-      final IXtextDocument document = XtextDocumentUtil.get(editor.getInternalSourceViewer());
+      final IXtextDocument document = this._xtextDocumentUtil.getXtextDocument(editor.getInternalSourceViewer());
       final XtextResource resource = document.<XtextResource>readOnly(new IUnitOfWork<XtextResource, XtextResource>() {
         @Override
         public XtextResource exec(final XtextResource state) {

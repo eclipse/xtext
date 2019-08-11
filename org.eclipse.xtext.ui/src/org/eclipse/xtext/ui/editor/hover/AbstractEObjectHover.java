@@ -45,10 +45,16 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public IRegion getHoverRegion(final ITextViewer textViewer, final int offset) {
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(textViewer);
 		if(xtextDocument == null) 
 			return null;
 		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
@@ -76,7 +82,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 	public Object getHoverInfo2(final ITextViewer textViewer, final IRegion hoverRegion) {
 		if (hoverRegion == null)
 			return null;
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(textViewer);
 		if(xtextDocument == null) 
 			return null;
 		try {

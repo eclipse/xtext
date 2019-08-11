@@ -50,6 +50,12 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	@Override
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
 		IInformationControlCreatorProvider creatorProvider = javaDebugHoverProvider
@@ -63,7 +69,7 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(textViewer);
 		if(xtextDocument == null || offset<0 || xtextDocument.getLength() < offset) 
 			return null;
 		@SuppressWarnings("restriction")

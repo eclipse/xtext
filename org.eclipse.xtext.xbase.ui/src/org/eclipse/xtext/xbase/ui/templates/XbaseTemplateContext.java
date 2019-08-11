@@ -27,7 +27,8 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContext;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -62,6 +63,12 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 
 	@Inject
 	private ReplaceConverter replaceConverter;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	private List<String> imports = new ArrayList<String>();
 
@@ -79,7 +86,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 
 	@Override
 	public TemplateBuffer evaluate(Template template) throws BadLocationException, TemplateException {
-		XtextDocument xDocument = (XtextDocument) getDocument();
+		IXtextDocument xDocument = xtextDocumentUtil.getXtextDocument(getDocument());
 		// Ensure clean state before evaluation starts
 		imports.clear();
 		TemplateBuffer resolvedContent = super.evaluate(template);
@@ -113,7 +120,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 		return resolvedContent;
 	}
 
-	private List<ReplaceRegion> createImports(final List<String> types, XtextDocument document) {
+	private List<ReplaceRegion> createImports(final List<String> types, IXtextDocument document) {
 		return document.priorityReadOnly(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
 			@Override
 			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
@@ -129,7 +136,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 		});
 	}
 
-	private boolean checkImports(final List<String> types, XtextDocument document) {
+	private boolean checkImports(final List<String> types, IXtextDocument document) {
 		return document.priorityReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
 			@Override
 			public Boolean exec(XtextResource state) throws Exception {
@@ -156,7 +163,7 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 	public boolean canEvaluate(Template template) {
 		boolean canEvaluate = super.canEvaluate(template);
 		if (canEvaluate && !imports.isEmpty()) {
-			XtextDocument xDocument = (XtextDocument) getDocument();
+			IXtextDocument xDocument = xtextDocumentUtil.getXtextDocument(getDocument());
 			return checkImports(imports, xDocument);
 		}
 		return canEvaluate;

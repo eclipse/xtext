@@ -42,6 +42,11 @@ public class EmbeddedEditorModelAccess {
 	private final boolean insertLineBreaks;
 
 	private final IEditedResourceProvider resourceProvider;
+	
+	/**
+	 * @since 2.19
+	 */
+	private XtextDocumentUtil xtextDocumentUtil = new XtextDocumentUtil();
 
 	public EmbeddedEditorModelAccess(SourceViewer viewer, IEditedResourceProvider resourceProvider,
 			boolean insertLineBreaks) {
@@ -125,7 +130,7 @@ public class EmbeddedEditorModelAccess {
 	}
 	
 	public void updateModel(String model, final IUnitOfWork<ITextRegion, XtextResource> editablePartSelector) {
-		IXtextDocument document = XtextDocumentUtil.get(this.viewer);
+		IXtextDocument document = xtextDocumentUtil.getXtextDocument(this.viewer);
 		this.viewer.setRedraw(false);
 		this.viewer.getUndoManager().disconnect();
 		document.set(model);
@@ -177,4 +182,10 @@ public class EmbeddedEditorModelAccess {
 		return this.viewer.getDocument().get();
 	}
 
+	/**
+	 * @since 2.19
+	 */
+	protected void setXtextDocumentUtil(XtextDocumentUtil xtextDocumentUtil) {
+		this.xtextDocumentUtil = xtextDocumentUtil;
+	}
 }

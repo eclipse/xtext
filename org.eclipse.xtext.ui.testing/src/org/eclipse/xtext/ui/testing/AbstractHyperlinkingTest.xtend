@@ -23,14 +23,13 @@ import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink
-import org.eclipse.xtext.ui.editor.model.IXtextDocument
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
 
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 
 /**
  * @author miklossy - Initial contribution and API
@@ -45,6 +44,11 @@ abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
 	@Inject protected extension SyncUtil
 
 	@Inject protected IResourceSetProvider resourceSetProvider
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject	protected extension XtextDocumentUtil
 
 	protected IProject project
 
@@ -98,7 +102,7 @@ abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
 
 	protected def IHyperlink[] hyperlinkingOn(IFile dslFile, int offset) {
 		val editor = dslFile.openInEditor
-		val document = XtextDocumentUtil.get(editor.internalSourceViewer)
+		val document = editor.internalSourceViewer.xtextDocument
 		val resource = document.readOnly(new IUnitOfWork<XtextResource, XtextResource>(){
 
 			override exec(XtextResource state) {

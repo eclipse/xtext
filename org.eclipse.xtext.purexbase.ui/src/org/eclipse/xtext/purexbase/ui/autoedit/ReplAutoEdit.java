@@ -54,6 +54,12 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 
 	@Inject
 	private IResourceValidator validator;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public void customizeDocumentCommand(final IDocument document, final DocumentCommand command) {
@@ -61,7 +67,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 			return;
 		}
 		try {
-			IXtextDocument doc = XtextDocumentUtil.get(document);
+			IXtextDocument doc = xtextDocumentUtil.getXtextDocument(document);
 			String result = doc.tryReadOnly(new IUnitOfWork<String, XtextResource>() {
 				@Override
 				public String exec(XtextResource resource) throws Exception {

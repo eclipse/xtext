@@ -32,7 +32,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	public class ContentFormatter implements IContentFormatter {
 		@Override
 		public void format(IDocument document, IRegion region) {
-			IXtextDocument doc = XtextDocumentUtil.get(document);
+			IXtextDocument doc = xtextDocumentUtil.getXtextDocument(document);
 			ReplaceRegion r = doc.priorityReadOnly(new FormattingUnitOfWork(region));
 			try {
 				if (r != null) {
@@ -78,6 +78,12 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 
 	@Inject
 	protected INodeModelFormatter formatter;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject 
+	protected XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public IContentFormatter createConfiguredFormatter(

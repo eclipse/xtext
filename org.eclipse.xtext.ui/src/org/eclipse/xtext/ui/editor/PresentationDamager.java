@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 public class PresentationDamager implements IPresentationDamager {
 
 	@Inject
-	protected DocumentTokenSourceAccess tokenSourceAccess;
+	protected DocumentTokenSourceAccess tokenSourceAccess = new DocumentTokenSourceAccess();
 	
 	@Override
 	public void setDocument(IDocument document) {}
@@ -44,7 +44,7 @@ public class PresentationDamager implements IPresentationDamager {
 		IRegion lastDamage = tokenSourceAccess.getLastDamage(e.getDocument());
 		// check whether this is just a presentation invalidation not based on a real document change
 		if (lastDamage == null || !isEventMatchingLastDamage(e, lastDamage)) {
-			IRegion result = computeInterSection(partition, e, e.getDocument());
+			IRegion result = computeIntersection(partition, e, e.getDocument());
 			return result;
 		}
 		
@@ -65,24 +65,24 @@ public class PresentationDamager implements IPresentationDamager {
 	 * @return the common region of the given partition and the changed region in the DocumentEvent based on the underlying tokens.
 	 * @since 2.19
 	 */
-	protected IRegion computeInterSection(ITypedRegion partition, DocumentEvent e, IDocument document) {
+	protected IRegion computeIntersection(ITypedRegion partition, DocumentEvent e, IDocument document) {
 		if (document instanceof XtextDocument) {
 			// for backwards compatiblity
 			return computeInterSection(partition, e, (XtextDocument) document);
 		}
-		return doComputeInterSection(partition, e, document);
+		return doComputeIntersection(partition, e, document);
 	}
 
 	/**
 	 * @return the common region of the given partition and the changed region in the DocumentEvent based on the underlying tokens.
-	 * @deprecated use {@link #computeInterSection(ITypedRegion, DocumentEvent, IDocument)} instead.
+	 * @deprecated use {@link #computeIntersection(ITypedRegion, DocumentEvent, IDocument)} instead.
 	 */
 	@Deprecated
 	protected IRegion computeInterSection(ITypedRegion partition, DocumentEvent e, XtextDocument document) {
-		return doComputeInterSection(partition, e, document);
+		return doComputeIntersection(partition, e, document);
 	}
 	
-	private IRegion doComputeInterSection(ITypedRegion partition, DocumentEvent e, IDocument document) {
+	private IRegion doComputeIntersection(ITypedRegion partition, DocumentEvent e, IDocument document) {
 		Iterable<ILexerTokenRegion> tokensInPartition = Iterables.filter(tokenSourceAccess.getTokens(document, false), Regions.overlaps(partition.getOffset(), partition.getLength()));
 		Iterator<ILexerTokenRegion> tokens = Iterables.filter(tokensInPartition, Regions.overlaps(e.getOffset(), e.getLength())).iterator();
 		if (tokens.hasNext()) {

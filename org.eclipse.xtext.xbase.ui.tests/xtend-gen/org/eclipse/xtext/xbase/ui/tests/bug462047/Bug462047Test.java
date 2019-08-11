@@ -18,7 +18,6 @@ import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil;
@@ -69,7 +68,7 @@ public class Bug462047Test extends AbstractEditorTest {
       final Runnable _function = () -> {
         try {
           final XtextEditor editor = this.openEditor(file);
-          final IXtextDocument document = XtextDocumentUtil.get(editor);
+          final IXtextDocument document = editor.getDocument();
           final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource res) -> {
             EcoreUtil.resolveAll(res);
             final ResourceSet resourceSet = res.getResourceSet();

@@ -20,7 +20,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -82,7 +81,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
-		XtextDocument document = (XtextDocument) openEditor.getDocument();
+		IXtextDocument document = openEditor.getDocument();
 
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
@@ -116,7 +115,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		IFile file = createFile("foo/z.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
-		XtextDocument document = (XtextDocument) openEditor.getDocument();
+		IXtextDocument document = openEditor.getDocument();
 
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {

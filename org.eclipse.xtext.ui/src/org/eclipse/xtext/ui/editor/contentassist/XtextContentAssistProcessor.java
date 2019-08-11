@@ -61,12 +61,18 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	@Named(value=ERROR_MESSAGE)
 	private String errorMessage = null;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if (contentProposalProvider == null)
 			return null;
 		
-		IXtextDocument document = XtextDocumentUtil.get(viewer);
+		IXtextDocument document = xtextDocumentUtil.getXtextDocument(viewer);
 		ICompletionProposal[] result = document.priorityReadOnly(createCompletionProposalComputer(viewer, offset));
 		Arrays.sort(result, completionProposalComparator);
 		result = completionProposalPostProcessor.postProcess(result);
@@ -82,7 +88,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		if (contextInformationProvider == null)
 			return null;
 		
-		IXtextDocument document = XtextDocumentUtil.get(viewer);
+		IXtextDocument document = xtextDocumentUtil.getXtextDocument(viewer);
 		return document.priorityReadOnly(createContextInformationComputer(viewer, offset));
 	}
 
