@@ -104,6 +104,10 @@ public class DeferredHierarchyBuilder implements IHierarchyBuilder {
       return this.delegate.getElement();
     }
     
+    public Object getNavigationElement() {
+      return this.delegate.getNavigationElement();
+    }
+    
     public IHierarchyNode getParent() {
       return this.delegate.getParent();
     }
@@ -118,10 +122,6 @@ public class DeferredHierarchyBuilder implements IHierarchyBuilder {
     
     public boolean mayHaveChildren() {
       return this.delegate.mayHaveChildren();
-    }
-    
-    public Object getNavigationElement() {
-      return this.delegate.getNavigationElement();
     }
   }
   
