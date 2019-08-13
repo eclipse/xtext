@@ -35,7 +35,7 @@ public class UriExtensions {
     URI _xblockexpression = null;
     {
       final String decoded = this.toDecodedString(netUri);
-      final URI uri = URI.createURI(decoded);
+      final URI uri = URI.createURI(decoded, false);
       final URI result = this.withEmptyAuthority(uri);
       _xblockexpression = result;
     }
