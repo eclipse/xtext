@@ -80,18 +80,6 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
     this.getFileSystemSupport().delete(path);
   }
   
-  public void mkdir(final Path path) {
-    this.getFileSystemSupport().mkdir(path);
-  }
-  
-  public void setContents(final Path path, final CharSequence contents) {
-    this.getFileSystemSupport().setContents(path, contents);
-  }
-  
-  public void setContentsAsStream(final Path path, final InputStream source) {
-    this.getFileSystemSupport().setContentsAsStream(path, source);
-  }
-  
   public boolean exists(final Path path) {
     return this.getFileSystemSupport().exists(path);
   }
@@ -122,6 +110,18 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
   
   public boolean isFolder(final Path path) {
     return this.getFileSystemSupport().isFolder(path);
+  }
+  
+  public void mkdir(final Path path) {
+    this.getFileSystemSupport().mkdir(path);
+  }
+  
+  public void setContents(final Path path, final CharSequence contents) {
+    this.getFileSystemSupport().setContents(path, contents);
+  }
+  
+  public void setContentsAsStream(final Path path, final InputStream source) {
+    this.getFileSystemSupport().setContentsAsStream(path, source);
   }
   
   public URI toURI(final Path path) {

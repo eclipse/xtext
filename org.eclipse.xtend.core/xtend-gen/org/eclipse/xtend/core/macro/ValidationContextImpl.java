@@ -190,16 +190,16 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getTypeReferenceProvider().newSelfTypeReference(typeDeclaration);
   }
   
+  public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
+    return this.getTypeReferenceProvider().newTypeReference(clazz, typeArguments);
+  }
+  
   public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
     return this.getTypeReferenceProvider().newTypeReference(typeName, typeArguments);
   }
   
   public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
     return this.getTypeReferenceProvider().newTypeReference(typeDeclaration, typeArguments);
-  }
-  
-  public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
-    return this.getTypeReferenceProvider().newTypeReference(clazz, typeArguments);
   }
   
   public TypeReference newWildcardTypeReference() {
@@ -214,36 +214,36 @@ public class ValidationContextImpl implements ValidationContext {
     return this.getTypeReferenceProvider().newWildcardTypeReferenceWithLowerBound(lowerBound);
   }
   
-  public AnnotationReference newAnnotationReference(final String annotationTypeName) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeName);
+  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference);
   }
   
-  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeDelcaration);
+  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference, initializer);
   }
   
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass) {
     return this.getAnnotationReferenceProvider().newAnnotationReference(annotationClass);
   }
   
-  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference);
+  public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationClass, initializer);
+  }
+  
+  public AnnotationReference newAnnotationReference(final String annotationTypeName) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeName);
   }
   
   public AnnotationReference newAnnotationReference(final String annotationTypeName, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeName, initializer);
   }
   
+  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
+    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeDelcaration);
+  }
+  
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     return this.getAnnotationReferenceProvider().newAnnotationReference(annotationTypeDelcaration, initializer);
-  }
-  
-  public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationClass, initializer);
-  }
-  
-  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    return this.getAnnotationReferenceProvider().newAnnotationReference(annotationReference, initializer);
   }
   
   public boolean exists(final Path path) {
