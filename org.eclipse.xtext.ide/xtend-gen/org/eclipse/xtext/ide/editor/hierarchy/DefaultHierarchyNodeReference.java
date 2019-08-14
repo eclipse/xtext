@@ -52,18 +52,6 @@ public class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
     return this.navigationElement;
   }
   
-  public int getEndLineNumber() {
-    return this.textRegion.getEndLineNumber();
-  }
-  
-  public int getLineNumber() {
-    return this.textRegion.getLineNumber();
-  }
-  
-  public ITextRegionWithLineInformation merge(final ITextRegionWithLineInformation other) {
-    return this.textRegion.merge(other);
-  }
-  
   public boolean contains(final ITextRegion other) {
     return this.textRegion.contains(other);
   }
@@ -72,8 +60,16 @@ public class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
     return this.textRegion.contains(offset);
   }
   
+  public int getEndLineNumber() {
+    return this.textRegion.getEndLineNumber();
+  }
+  
   public int getLength() {
     return this.textRegion.getLength();
+  }
+  
+  public int getLineNumber() {
+    return this.textRegion.getLineNumber();
   }
   
   public int getOffset() {
@@ -82,5 +78,9 @@ public class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
   
   public ITextRegion merge(final ITextRegion region) {
     return this.textRegion.merge(region);
+  }
+  
+  public ITextRegionWithLineInformation merge(final ITextRegionWithLineInformation other) {
+    return this.textRegion.merge(other);
   }
 }
