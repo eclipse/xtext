@@ -1089,4 +1089,90 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void methodOrder() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
+      _builder.append("interface A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void c()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void a()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void b()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C implements A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate A a");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      this._validationTestHelper.assertNoIssues(this.file(text));
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("import org.eclipse.xtend.lib.annotations.Delegate;");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("@SuppressWarnings(\"all\")");
+        _builder_1.newLine();
+        _builder_1.append("public class C implements A {");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("@Delegate");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("private A a;");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("public void a() {");
+        _builder_1.newLine();
+        _builder_1.append("    ");
+        _builder_1.append("this.a.a();");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("public void b() {");
+        _builder_1.newLine();
+        _builder_1.append("    ");
+        _builder_1.append("this.a.b();");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("public void c() {");
+        _builder_1.newLine();
+        _builder_1.append("    ");
+        _builder_1.append("this.a.c();");
+        _builder_1.newLine();
+        _builder_1.append("  ");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        Assert.assertEquals(_builder_1.toString(), it.getGeneratedCode("C"));
+      };
+      this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

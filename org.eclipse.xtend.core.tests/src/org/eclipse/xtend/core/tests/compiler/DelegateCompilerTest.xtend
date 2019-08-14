@@ -539,5 +539,44 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 		text.file
 	}
 	
+	@Test
+	def void methodOrder() {
+		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
+			interface A {
+				def void c()
+				def void a()
+				def void b()
+			}
+			class C implements A {
+				@Delegate A a
+			}
+		'''
+		text.file.assertNoIssues
+		text.compile [
+			assertEquals('''
+				import org.eclipse.xtend.lib.annotations.Delegate;
+				
+				@SuppressWarnings("all")
+				public class C implements A {
+				  @Delegate
+				  private A a;
+				  
+				  public void a() {
+				    this.a.a();
+				  }
+				  
+				  public void b() {
+				    this.a.b();
+				  }
+				  
+				  public void c() {
+				    this.a.c();
+				  }
+				}
+			'''.toString, it.getGeneratedCode("C"))
+		]
+	}
+	
 
 }
