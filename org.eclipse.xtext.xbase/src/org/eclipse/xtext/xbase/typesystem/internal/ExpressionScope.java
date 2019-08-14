@@ -407,6 +407,9 @@ public class ExpressionScope implements IExpressionScope {
 		
 		protected LightweightTypeReference getParameterType(JvmFormalParameter p) {
 			JvmTypeReference parameterType = p.getParameterType();
+			if (parameterType == null) {
+				return null;
+			}
 			JvmType type = parameterType.getType();
 			if (type == null)
 				return null;
