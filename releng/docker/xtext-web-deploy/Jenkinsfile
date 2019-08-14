@@ -1,0 +1,39 @@
+pipeline {
+  agent {
+    label "external"
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'25'))
+    disableConcurrentBuilds()
+    timeout(time: 15, unit: 'MINUTES')
+    timestamps()
+  }
+
+  stages {
+    stage('Copy WAR') {
+      steps {
+        script {
+          step ([$class: 'CopyArtifact',
+            projectName: 'xtext-web/master',
+            filter: "build/maven-repository/org/eclipse/xtext/org.eclipse.xtext.web.example.jetty/*/org.eclipse.xtext.web.example.jetty-*.war",
+            target: 'releng/docker/xtext-web-deploy/xtext-web',
+            flatten: true
+          ]);
+        }
+        sh "ls -lah releng/docker/xtext-web-deploy/xtext-web"
+      }
+    }
+
+    stage('Build Docker') {
+      steps {
+        dir("releng/docker/xtext-web-deploy/xtext-web") {
+          sh """
+            docker build --no-cache -t xtext/xtext-web:latest .
+            docker push xtext/xtext-web:latest
+          """
+        }
+      }
+    }
+  }
+}
