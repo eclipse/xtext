@@ -220,6 +220,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 				.filter[!isObjectMethod]
 				.filter[!isStatic]
 				.groupBy[simpleSignature].values.map[head]
+				.sortBy[simpleSignature]
 				.toSet
 		}
 	

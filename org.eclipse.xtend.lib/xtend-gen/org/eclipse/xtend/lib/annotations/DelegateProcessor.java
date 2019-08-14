@@ -310,7 +310,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       final Function1<List<ResolvedMethod>, ResolvedMethod> _function_5 = (List<ResolvedMethod> it) -> {
         return IterableExtensions.<ResolvedMethod>head(it);
       };
-      return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3), _function_4).values(), _function_5));
+      final Function1<ResolvedMethod, String> _function_6 = (ResolvedMethod it) -> {
+        return it.getSimpleSignature();
+      };
+      return IterableExtensions.<ResolvedMethod>toSet(IterableExtensions.<ResolvedMethod, String>sortBy(IterableExtensions.<List<ResolvedMethod>, ResolvedMethod>map(IterableExtensions.<String, ResolvedMethod>groupBy(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(IterableExtensions.<ResolvedMethod>filter(Iterables.<ResolvedMethod>concat(IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(this.getDelegatedInterfaces(delegate), _function)), _function_1), _function_2), _function_3), _function_4).values(), _function_5), _function_6));
     }
     
     public boolean isObjectMethod(final ResolvedMethod it) {
