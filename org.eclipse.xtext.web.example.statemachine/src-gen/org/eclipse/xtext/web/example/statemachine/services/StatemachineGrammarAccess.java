@@ -77,7 +77,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//(InputSignal | OutputSignal) 'signal' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//InputSignal | OutputSignal
+		//(InputSignal | OutputSignal)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//InputSignal
