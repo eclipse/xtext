@@ -125,6 +125,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
 		splitLexerIfEnabled(javaFile, charset);
 		suppressWarningsImpl(javaFile, charset);
+		normalizeLineDelimiters(javaFile, charset);
 		normalizeTokens(javaFile, charset);
 	}
 	
@@ -149,6 +150,23 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 		Collections.sort(splitted);
 		content = Strings.concat(getLineDelimiter(), splitted) + getLineDelimiter();
 		writeStringIntoFile(tokenFile, content, encoding);
+	}
+	
+	private void normalizeLineDelimiters(String textFile, Charset encoding) {
+		String content = readFileIntoString(textFile, encoding);
+		content = new NewlineNormalizer(getLineDelimiter()) {
+			// Antlr tries to outsmart us by using a line length that depends on the system
+			// line delimiter when it splits a very long String (encoded DFA) into a
+			// string concatenation
+			// Here we join these lines again.
+			@Override
+			public String normalizeLineDelimiters(CharSequence content) {
+				String result = super.normalizeLineDelimiters(content);
+				result = result.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
+				return result;
+			}
+		}.normalizeLineDelimiters(content);
+		writeStringIntoFile(textFile, content, encoding);
 	}
 	
 	private String toTokenFileName(String grammarFileName) {
