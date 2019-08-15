@@ -312,7 +312,7 @@ Workflow {
 					contentAssist = true
 					antlrParam = "-lib"
 					// This is the folder where the lexer will be created
-					antlrParam = "${runtimeProject}.ide/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/contentassist/antlr/lexer"
+					antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/contentassist/antlr/lexer"
 				}
 			}
 
@@ -324,7 +324,7 @@ Workflow {
 					highlighting = true
 					antlrParam = "-lib"
 					// This is the folder where the lexer will be created
-					antlrParam = "${runtimeProject}.ide/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/highlighting/antlr/lexer"
+					antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
 				}
 			}
 

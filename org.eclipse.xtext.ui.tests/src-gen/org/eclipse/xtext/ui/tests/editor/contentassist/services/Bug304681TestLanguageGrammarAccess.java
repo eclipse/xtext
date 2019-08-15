@@ -220,9 +220,9 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 		
-		//("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID"
+		//(("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID"
 		//serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature*
-		//"after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?
+		//"after")? & ("optionalLoop" features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?)
 		public UnorderedGroup getUnorderedGroup_5() { return cUnorderedGroup_5; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
@@ -446,7 +446,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 		
-		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}" | ";"
+		//("{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}" | ";")
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"
@@ -455,7 +455,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4_0_0() { return cLeftCurlyBracketKeyword_4_0_0; }
 		
-		//("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//(("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?)
 		public UnorderedGroup getUnorderedGroup_4_0_1() { return cUnorderedGroup_4_0_1; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
@@ -630,8 +630,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 		
-		//("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID"
-		//serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*
+		//(("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID"
+		//serialVersionUID=INT ";")? & (cloneable?="cloneable" ";")? & features+=Feature2*)
 		public UnorderedGroup getUnorderedGroup_5() { return cUnorderedGroup_5; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
@@ -781,8 +781,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? &
-		//constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?) "}" | ";"
+		//("{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? &
+		//constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?) "}" | ";")
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? &
@@ -792,8 +792,8 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3_0_0() { return cLeftCurlyBracketKeyword_3_0_0; }
 		
-		//("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? &
-		//constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?
+		//(("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? &
+		//constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? & (technical?="technical" ";")?)
 		public UnorderedGroup getUnorderedGroup_3_0_1() { return cUnorderedGroup_3_0_1; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
@@ -924,7 +924,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 		
-		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}" | ";"
+		//("{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}" | ";")
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//"{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?) "}"
@@ -933,7 +933,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4_0_0() { return cLeftCurlyBracketKeyword_4_0_0; }
 		
-		//("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?
+		//(("shortDescription" shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")?)
 		public UnorderedGroup getUnorderedGroup_4_0_1() { return cUnorderedGroup_4_0_1; }
 		
 		//("shortDescription" shortDescription=STRING ";")?
@@ -1013,7 +1013,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//"parameters" parameters+=STRING* ";" & "message" message=STRING ";"
+		//("parameters" parameters+=STRING* ";" & "message" message=STRING ";")
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//"parameters" parameters+=STRING* ";"

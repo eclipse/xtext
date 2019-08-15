@@ -578,36 +578,25 @@ public class CustomInternalXmlContentAssistLexer extends Lexer {
 
     protected DFA8 dfa8 = new DFA8(this);
     static final String DFA8_eotS =
-        "\1\uffff\1\14\1\15\1\12\1\17\1\12\1\20\2\12\1\31\4\uffff\1\33\2"+
-        "\uffff\1\20\2\12\1\37\1\uffff\2\12\1\37\5\uffff\1\12\1\uffff\1\12"+
-        "\2\uffff";
+        "\1\uffff\1\14\1\15\1\12\1\17\1\12\1\20\2\12\1\31\4\uffff\1\33\2\uffff\1\20\2\12\1\37\1\uffff\2\12\1\37\5\uffff\1\12\1\uffff\1\12\2\uffff";
     static final String DFA8_eofS =
         "\43\uffff";
     static final String DFA8_minS =
-        "\1\0\1\57\1\0\1\76\1\0\1\101\4\0\3\uffff\10\0\1\uffff\4\0\1\uffff"+
-        "\1\0\2\uffff\3\0\2\uffff";
+        "\1\0\1\57\1\0\1\76\1\0\1\101\4\0\3\uffff\10\0\1\uffff\4\0\1\uffff\1\0\2\uffff\3\0\2\uffff";
     static final String DFA8_maxS =
-        "\1\uffff\1\57\1\uffff\1\76\1\uffff\1\172\4\uffff\3\uffff\1\0\1"+
-        "\uffff\2\0\4\uffff\1\uffff\3\uffff\1\0\1\uffff\1\0\2\uffff\1\uffff"+
-        "\1\0\1\uffff\2\uffff";
+        "\1\uffff\1\57\1\uffff\1\76\1\uffff\1\172\4\uffff\3\uffff\1\0\1\uffff\2\0\4\uffff\1\uffff\3\uffff\1\0\1\uffff\1\0\2\uffff\1\uffff\1\0\1\uffff\2\uffff";
     static final String DFA8_acceptS =
-        "\12\uffff\1\11\1\2\1\1\10\uffff\1\7\4\uffff\1\3\1\uffff\1\5\1\6"+
-        "\3\uffff\1\10\1\4";
+        "\12\uffff\1\11\1\2\1\1\10\uffff\1\7\4\uffff\1\3\1\uffff\1\5\1\6\3\uffff\1\10\1\4";
     static final String DFA8_specialS =
-        "\1\6\1\uffff\1\10\1\27\1\4\1\3\1\0\1\2\1\17\1\20\3\uffff\1\7\1"+
-        "\24\1\12\1\13\1\25\1\14\1\22\1\1\1\uffff\1\23\1\30\1\5\1\16\1\uffff"+
-        "\1\11\2\uffff\1\21\1\15\1\26\2\uffff}>";
+        "\1\6\1\uffff\1\10\1\27\1\4\1\3\1\0\1\2\1\17\1\20\3\uffff\1\7\1\24\1\12\1\13\1\25\1\14\1\22\1\1\1\uffff\1\23\1\30\1\5\1\16\1\uffff\1\11\2\uffff\1\21\1\15\1\26\2\uffff}>";
     static final String[] DFA8_transitionS = {
-            "\11\12\2\11\1\12\2\11\22\12\1\11\1\12\1\7\4\12\1\10\7\12\1"+
-            "\3\14\12\1\1\1\4\1\2\2\12\32\6\3\12\1\5\1\6\1\12\32\6\uff85"+
-            "\12",
+            "\11\12\2\11\1\12\2\11\22\12\1\11\1\12\1\7\4\12\1\10\7\12\1\3\14\12\1\1\1\4\1\2\2\12\32\6\3\12\1\5\1\6\1\12\32\6\uff85\12",
             "\1\13",
             "\74\12\1\uffff\uffc3\12",
             "\1\16",
             "\74\12\1\uffff\uffc3\12",
             "\32\6\4\uffff\1\6\1\uffff\32\6",
-            "\60\12\12\21\2\12\1\uffff\4\12\32\21\4\12\1\21\1\12\32\21"+
-            "\uff85\12",
+            "\60\12\12\21\2\12\1\uffff\4\12\32\21\4\12\1\21\1\12\32\21\uff85\12",
             "\42\23\1\24\31\23\1\25\37\23\1\22\uffa3\23",
             "\47\27\1\30\24\27\1\25\37\27\1\26\uffa3\27",
             "\11\12\2\11\1\12\2\11\22\12\1\11\33\12\1\uffff\uffc3\12",
@@ -618,8 +607,7 @@ public class CustomInternalXmlContentAssistLexer extends Lexer {
             "\74\12\1\uffff\uffc3\12",
             "\1\uffff",
             "\1\uffff",
-            "\60\12\12\21\2\12\1\uffff\4\12\32\21\4\12\1\21\1\12\32\21"+
-            "\uff85\12",
+            "\60\12\12\21\2\12\1\uffff\4\12\32\21\4\12\1\21\1\12\32\21\uff85\12",
             "\74\36\1\25\uffc3\36",
             "\42\23\1\24\31\23\1\25\37\23\1\22\uffa3\23",
             "\74\12\1\uffff\uffc3\12",
