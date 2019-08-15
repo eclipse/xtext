@@ -8,20 +8,26 @@
 package org.eclipse.xtext.builder.impl.javasupport;
 
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspace.ProjectOrder;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
@@ -29,12 +35,18 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
+import org.eclipse.jdt.internal.core.ExternalFoldersManager;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.ui.notification.NameBasedEObjectDescription;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
@@ -42,11 +54,13 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+@SuppressWarnings("restriction")
 public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	private final static Logger log = Logger.getLogger(JdtToBeBuiltComputer.class);
@@ -68,6 +82,12 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	@Inject
 	private IStorage2UriMapperJdtExtensions jdtUriMapperExtension;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private SimpleProjectDependencyGraph projectDependencyGraph;
 	
 	@Singleton
 	public static class ModificationStampCache {
@@ -174,7 +194,9 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	protected void queueJavaChange(String typeName) {
 		URI typeURI = URIHelperConstants.OBJECTS_URI.appendSegment(typeName);
-		TypeResourceDescription oldDescription = new TypeResourceDescription(typeURI, Collections.<IEObjectDescription>emptyList());
+		QualifiedName qualifiedName = QualifiedName.create(Strings.split(typeName, '.'));
+		NameBasedEObjectDescription nameBasedEObjectDescription = new NameBasedEObjectDescription(qualifiedName);
+		TypeResourceDescription oldDescription = new TypeResourceDescription(typeURI, Collections.<IEObjectDescription>singletonList(nameBasedEObjectDescription));
 		Delta delta = new ChangedResourceDescriptionDelta(oldDescription, null);
 		queuedBuildData.queueChange(delta);
 	}
@@ -191,6 +213,64 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	@Override
 	public boolean isRejected(IFolder folder) {
 		boolean result = jdtHelper.isFromOutputPath(folder);
+		return result;
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	@Override
+	public void addInterestingProjects(IProject thisProject, Set<IProject> result) {
+		IJavaProject javaProject = JavaCore.create(thisProject);
+		if (javaProject instanceof JavaProject) {
+			Set<IProject> requiredProjects = getRequiredProjects((JavaProject) javaProject, thisProject.getWorkspace().getRoot());
+			projectDependencyGraph.putDependency(thisProject, requiredProjects);
+			result.addAll(requiredProjects);
+		}
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	protected SimpleProjectDependencyGraph getProjectDependencyGraph() {
+		return projectDependencyGraph;
+	}
+	
+	// JavaBuilder#build
+	protected Set<IProject> getRequiredProjects(JavaProject javaProject, IWorkspaceRoot workspaceRoot) {
+		LinkedHashSet<IProject> result = new LinkedHashSet<>();
+		ExternalFoldersManager externalFoldersManager = JavaModelManager.getExternalManager();
+		try {
+			IClasspathEntry[] entries = javaProject.getExpandedClasspath();
+			for (int i = 0, l = entries.length; i < l; i++) {
+				IClasspathEntry entry = entries[i];
+				IPath path = entry.getPath();
+				IProject p = null;
+				switch (entry.getEntryKind()) {
+					case IClasspathEntry.CPE_PROJECT :
+						p = workspaceRoot.getProject(path.lastSegment()); // missing projects are considered too
+						if (((ClasspathEntry) entry).isOptional() && !JavaProject.hasJavaNature(p)) // except if entry is optional
+							p = null;
+						break;
+					case IClasspathEntry.CPE_LIBRARY :
+						if (path.segmentCount() > 0) {
+							// some binary resources on the class path can come from projects that are not included in the project references
+							IResource resource = workspaceRoot.findMember(path.segment(0));
+							if (resource instanceof IProject) {
+								p = (IProject) resource;
+							} else {
+								resource = externalFoldersManager.getFolder(path);
+								if (resource != null)
+									p = resource.getProject();
+							}
+						}
+				}
+				if (p != null)
+					result.add(p);
+			}
+		} catch(JavaModelException e) {
+			return result;
+		}
 		return result;
 	}
 }

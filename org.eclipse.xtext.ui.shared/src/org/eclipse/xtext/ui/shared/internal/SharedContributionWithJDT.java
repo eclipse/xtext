@@ -13,6 +13,7 @@ import org.eclipse.xtext.builder.impl.javasupport.JdtQueuedBuildData;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer.ModificationStampCache;
 import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
+import org.eclipse.xtext.builder.impl.javasupport.SimpleProjectDependencyGraph;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.ui.trace.JarEntryAwareTrace;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
@@ -52,6 +53,7 @@ public class SharedContributionWithJDT implements Module {
 			
 			binder.bind(JavaProjectClasspathChangeAnalyzer.class);
 			binder.bind(ProjectClasspathChangeListener.class);
+			binder.bind(SimpleProjectDependencyGraph.class);
 			
 			binder.bind(JavaProjectsStateHelper.class);
 			binder.bind(JavaProjectsState.class);

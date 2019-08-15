@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Set;
+
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -59,4 +62,17 @@ public interface IToBeBuiltComputerContribution {
 	 * should not be processed by the Xtext builder.
 	 */
 	boolean isRejected(IFolder folder);
+	
+	/**
+	 * Add all the projects to the result, that may affect the resources in this projects.
+	 * The XtextBuilder will return the collected set of projects as the interesting projects after
+	 * each build round.
+	 * 
+	 * @see IncrementalProjectBuilder#build
+	 * 
+	 * @since 2.19
+	 */
+	default void addInterestingProjects(IProject thisProject, Set<IProject> result) {
+		// per default nothing to do
+	}
 }
