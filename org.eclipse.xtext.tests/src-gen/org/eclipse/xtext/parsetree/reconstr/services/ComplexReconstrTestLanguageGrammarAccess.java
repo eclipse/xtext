@@ -454,7 +454,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//INT
 		public RuleCall getTypeINTTerminalRuleCall_1_1_0() { return cTypeINTTerminalRuleCall_1_1_0; }
 		
-		//name+=ID | type+=INT
+		//(name+=ID | type+=INT)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//name+=ID

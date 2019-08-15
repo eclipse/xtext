@@ -330,7 +330,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//"left"
 		public Keyword getLeftKeyword_3() { return cLeftKeyword_3; }
 		
-		//"uri" leftUri=STRING | leftRoot=CreatedObject
+		//("uri" leftUri=STRING | leftRoot=CreatedObject)
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//"uri" leftUri=STRING
@@ -357,7 +357,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//"right"
 		public Keyword getRightKeyword_6() { return cRightKeyword_6; }
 		
-		//"uri" rightUri=STRING | rightRoot=CreatedObject
+		//("uri" rightUri=STRING | rightRoot=CreatedObject)
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 		
 		//"uri" rightUri=STRING
@@ -467,8 +467,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
-		//rightRes=[NamedResource] rightFrag=FRAGMENT
+		//(leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
+		//rightRes=[NamedResource] rightFrag=FRAGMENT)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//leftRes=[NamedResource] leftFrag=FRAGMENT
@@ -1005,8 +1005,8 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 		
-		//"[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
-		//newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT
+		//("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
+		//newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//"[" refIndex=INT "]"
@@ -1235,7 +1235,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//leftMig=Migration? "}")?
 		public Group getGroup() { return cGroup; }
 		
-		//ObjectNew | ObjectCopy
+		//(ObjectNew | ObjectCopy)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//ObjectNew

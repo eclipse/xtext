@@ -696,7 +696,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//{BooleanAlternativeLiteral}
 		public Action getBooleanAlternativeLiteralAction_0() { return cBooleanAlternativeLiteralAction_0; }
 		
-		//"kw1" | isTrue?="kw2"
+		//("kw1" | isTrue?="kw2")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1"
@@ -863,7 +863,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"#11"
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 		
-		//KW1 | "kw2"
+		//(KW1 | "kw2")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//KW1
