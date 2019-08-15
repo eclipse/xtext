@@ -193,14 +193,14 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 		
-		//'1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'? &
+		//('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'? &
 		//second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ &
 		//secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') |
 		//'9' (firstAsList+='a' & secondAsList+='b')+ | '10' (firstAsList+='a' & secondAsList+='b')* | '11' (first?='a' &
 		//second?='b')? | '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13'
 		//(firstAsList+='a' & secondAsList+='b')? firstAsList+='a' secondAsList+='b' | '14' ((firstAsList+='a' &
 		//secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+ | 'datatypes' value=UnorderedDatatype | 'serialization'
-		//serialized=UnorderedSerialization | 'bug302585' nestedModel+=NestedModel*
+		//serialized=UnorderedSerialization | 'bug302585' nestedModel+=NestedModel*)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'1' (first?='a' & second?='b')
@@ -209,7 +209,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'1'
 		public Keyword getDigitOneKeyword_1_0_0() { return cDigitOneKeyword_1_0_0; }
 		
-		//first?='a' & second?='b'
+		//(first?='a' & second?='b')
 		public UnorderedGroup getUnorderedGroup_1_0_1() { return cUnorderedGroup_1_0_1; }
 		
 		//first?='a'
@@ -230,7 +230,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'2'
 		public Keyword getDigitTwoKeyword_1_1_0() { return cDigitTwoKeyword_1_1_0; }
 		
-		//first?='a' & second?='b' & third?='c' & forth?='d'
+		//(first?='a' & second?='b' & third?='c' & forth?='d')
 		public UnorderedGroup getUnorderedGroup_1_1_1() { return cUnorderedGroup_1_1_1; }
 		
 		//first?='a'
@@ -263,7 +263,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'3'
 		public Keyword getDigitThreeKeyword_1_2_0() { return cDigitThreeKeyword_1_2_0; }
 		
-		//first?='a'? & second?='b'?
+		//(first?='a'? & second?='b'?)
 		public UnorderedGroup getUnorderedGroup_1_2_1() { return cUnorderedGroup_1_2_1; }
 		
 		//first?='a'?
@@ -284,7 +284,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'4'
 		public Keyword getDigitFourKeyword_1_3_0() { return cDigitFourKeyword_1_3_0; }
 		
-		//first?='a' & second?='b'?
+		//(first?='a' & second?='b'?)
 		public UnorderedGroup getUnorderedGroup_1_3_1() { return cUnorderedGroup_1_3_1; }
 		
 		//first?='a'
@@ -305,7 +305,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'5'
 		public Keyword getDigitFiveKeyword_1_4_0() { return cDigitFiveKeyword_1_4_0; }
 		
-		//first?='a'? & second?='b'
+		//(first?='a'? & second?='b')
 		public UnorderedGroup getUnorderedGroup_1_4_1() { return cUnorderedGroup_1_4_1; }
 		
 		//first?='a'?
@@ -326,7 +326,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'6'
 		public Keyword getDigitSixKeyword_1_5_0() { return cDigitSixKeyword_1_5_0; }
 		
-		//firstAsList+='a'+ & secondAsList+='b'*
+		//(firstAsList+='a'+ & secondAsList+='b'*)
 		public UnorderedGroup getUnorderedGroup_1_5_1() { return cUnorderedGroup_1_5_1; }
 		
 		//firstAsList+='a'+
@@ -347,7 +347,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'7'
 		public Keyword getDigitSevenKeyword_1_6_0() { return cDigitSevenKeyword_1_6_0; }
 		
-		//firstAsList+='a'* & secondAsList+='b'+
+		//(firstAsList+='a'* & secondAsList+='b'+)
 		public UnorderedGroup getUnorderedGroup_1_6_1() { return cUnorderedGroup_1_6_1; }
 		
 		//firstAsList+='a'*
@@ -368,7 +368,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'8'
 		public Keyword getDigitEightKeyword_1_7_0() { return cDigitEightKeyword_1_7_0; }
 		
-		//'a' 'b' first?='c' & 'a' 'b' second?='d'
+		//('a' 'b' first?='c' & 'a' 'b' second?='d')
 		public UnorderedGroup getUnorderedGroup_1_7_1() { return cUnorderedGroup_1_7_1; }
 		
 		//'a' 'b' first?='c'
@@ -470,7 +470,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'12'
 		public Keyword getDigitOneDigitTwoKeyword_1_11_0() { return cDigitOneDigitTwoKeyword_1_11_0; }
 		
-		//firstAsList+='a' & secondAsList+='b'
+		//(firstAsList+='a' & secondAsList+='b')
 		public UnorderedGroup getUnorderedGroup_1_11_1() { return cUnorderedGroup_1_11_1; }
 		
 		//firstAsList+='a'
@@ -485,7 +485,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'b'
 		public Keyword getSecondAsListBKeyword_1_11_1_1_0() { return cSecondAsListBKeyword_1_11_1_1_0; }
 		
-		//firstAsList+='a' & secondAsList+='b'
+		//(firstAsList+='a' & secondAsList+='b')
 		public UnorderedGroup getUnorderedGroup_1_11_2() { return cUnorderedGroup_1_11_2; }
 		
 		//firstAsList+='a'
@@ -759,7 +759,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'1'
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 		
-		//'a' & 'b'
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_0_1() { return cUnorderedGroup_0_1; }
 		
 		//'a'
@@ -774,7 +774,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'2'
 		public Keyword getDigitTwoKeyword_1_0() { return cDigitTwoKeyword_1_0; }
 		
-		//'a' & 'b' & 'c' & 'd'
+		//('a' & 'b' & 'c' & 'd')
 		public UnorderedGroup getUnorderedGroup_1_1() { return cUnorderedGroup_1_1; }
 		
 		//'a'
@@ -795,7 +795,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'3'
 		public Keyword getDigitThreeKeyword_2_0() { return cDigitThreeKeyword_2_0; }
 		
-		//'a'? & 'b'?
+		//('a'? & 'b'?)
 		public UnorderedGroup getUnorderedGroup_2_1() { return cUnorderedGroup_2_1; }
 		
 		//'a'?
@@ -810,7 +810,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'4'
 		public Keyword getDigitFourKeyword_3_0() { return cDigitFourKeyword_3_0; }
 		
-		//'a' & 'b'?
+		//('a' & 'b'?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 		
 		//'a'
@@ -825,7 +825,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'5'
 		public Keyword getDigitFiveKeyword_4_0() { return cDigitFiveKeyword_4_0; }
 		
-		//'a'? & 'b'
+		//('a'? & 'b')
 		public UnorderedGroup getUnorderedGroup_4_1() { return cUnorderedGroup_4_1; }
 		
 		//'a'?
@@ -840,7 +840,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'6'
 		public Keyword getDigitSixKeyword_5_0() { return cDigitSixKeyword_5_0; }
 		
-		//'a'+ & 'b'*
+		//('a'+ & 'b'*)
 		public UnorderedGroup getUnorderedGroup_5_1() { return cUnorderedGroup_5_1; }
 		
 		//'a'+
@@ -855,7 +855,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'7'
 		public Keyword getDigitSevenKeyword_6_0() { return cDigitSevenKeyword_6_0; }
 		
-		//'a'* & 'b'+
+		//('a'* & 'b'+)
 		public UnorderedGroup getUnorderedGroup_6_1() { return cUnorderedGroup_6_1; }
 		
 		//'a'*
@@ -870,7 +870,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'8'
 		public Keyword getDigitEightKeyword_7_0() { return cDigitEightKeyword_7_0; }
 		
-		//'a' 'b' 'c' & 'a' 'b' 'd'
+		//('a' 'b' 'c' & 'a' 'b' 'd')
 		public UnorderedGroup getUnorderedGroup_7_1() { return cUnorderedGroup_7_1; }
 		
 		//'a' 'b' 'c'
@@ -948,7 +948,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'12'
 		public Keyword getDigitOneDigitTwoKeyword_11_0() { return cDigitOneDigitTwoKeyword_11_0; }
 		
-		//'a' & 'b'
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_11_1() { return cUnorderedGroup_11_1; }
 		
 		//'a'
@@ -957,7 +957,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'b'
 		public Keyword getBKeyword_11_1_1() { return cBKeyword_11_1_1; }
 		
-		//'a' & 'b'
+		//('a' & 'b')
 		public UnorderedGroup getUnorderedGroup_11_2() { return cUnorderedGroup_11_2; }
 		
 		//'a'
@@ -1058,8 +1058,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//{UnorderedSerialization}
 		public Action getUnorderedSerializationAction_0() { return cUnorderedSerializationAction_0; }
 		
-		//'1' first?='a'? & second?='b'? & third?='c'? & forth?='d'? | '2' (firstAsList+='a' & secondAsList+='b')* | '3'
-		//(firstAsList+='a'+ & second?='b')*
+		//('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'? | '2' (firstAsList+='a' & secondAsList+='b')* | '3'
+		//(firstAsList+='a'+ & second?='b')*)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?

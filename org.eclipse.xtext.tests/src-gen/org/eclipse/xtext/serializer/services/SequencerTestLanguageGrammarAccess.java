@@ -387,7 +387,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 		
-		//"kw1" val1=ID | "kw2" val2=ID
+		//("kw1" val1=ID | "kw2" val2=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1" val1=ID
@@ -794,7 +794,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#8"
 		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
 		
-		//val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
+		//(val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//val1=ID val2=ID
@@ -879,7 +879,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#9"
 		public Keyword getNumberSignDigitNineKeyword_0() { return cNumberSignDigitNineKeyword_0; }
 		
-		//val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
+		//(val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//val1+=ID val2=ID
@@ -1114,7 +1114,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID3
 		public RuleCall getNameID3TerminalRuleCall_1_0_2() { return cNameID3TerminalRuleCall_1_0_2; }
 		
-		//ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3]
+		//(ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3])
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//ref=[SingleCrossReference|ID1]
@@ -1352,7 +1352,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 		
-		//val=ID | val=ID flag?="kw1"
+		//(val=ID | val=ID flag?="kw1")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//val=ID
@@ -1402,7 +1402,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
 		
-		//val+=ID val+=ID+ | val+=ID+ flag?="kw1"
+		//(val+=ID val+=ID+ | val+=ID+ flag?="kw1")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//val+=ID val+=ID+
@@ -1639,7 +1639,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#24"
 		public Keyword getNumberSignDigitTwoDigitFourKeyword_0() { return cNumberSignDigitTwoDigitFourKeyword_0; }
 		
-		//val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate
+		//(val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//val1=ID
@@ -1755,7 +1755,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{UnorderedGroupOptional}
 		public Action getUnorderedGroupOptionalAction_1() { return cUnorderedGroupOptionalAction_1; }
 		
-		//("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?
+		//(("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//("kw1" val1=ID)?
@@ -1820,7 +1820,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{UnorderedGroupBoolean}
 		public Action getUnorderedGroupBooleanAction_1() { return cUnorderedGroupBooleanAction_1; }
 		
-		//val1?='kw1'? & val2?='kw2'? & val3?='kw3'?
+		//(val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 		
 		//val1?='kw1'?
@@ -2242,8 +2242,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#34"
 		public Keyword getNumberSignDigitThreeDigitFourKeyword_0() { return cNumberSignDigitThreeDigitFourKeyword_0; }
 		
-		//"kw1" p=Parameterized<true,true> | "kw2" p=Parameterized<true,false> | "kw3" p=Parameterized<false,true> | "kw4"
-		//p=Parameterized<false,false>
+		//("kw1" p=Parameterized<true,true> | "kw2" p=Parameterized<true,false> | "kw3" p=Parameterized<false,true> | "kw4"
+		//p=Parameterized<false,false>)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1" p=Parameterized<true,true>
@@ -2377,7 +2377,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#35"
 		public Keyword getNumberSignDigitThreeDigitFiveKeyword_0() { return cNumberSignDigitThreeDigitFiveKeyword_0; }
 		
-		//"kw1" p=Delegation<true,true> | "kw2" p=Delegation<true,false>
+		//("kw1" p=Delegation<true,true> | "kw2" p=Delegation<true,false>)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"kw1" p=Delegation<true,true>
@@ -2433,7 +2433,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//<!D> (<P> p=ID | <!P> np=INT)
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//<P> p=ID | <!P> np=INT
+		//(<P> p=ID | <!P> np=INT)
 		public Alternatives getAlternatives_0_0() { return cAlternatives_0_0; }
 		
 		//<P> p=ID

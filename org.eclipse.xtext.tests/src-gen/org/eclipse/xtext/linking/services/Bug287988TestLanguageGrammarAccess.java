@@ -160,7 +160,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//Attribute | Master
+		//(Attribute | Master)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//Attribute
@@ -169,7 +169,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Master
 		public RuleCall getMasterParserRuleCall_0_1() { return cMasterParserRuleCall_0_1; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute] | type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -269,7 +269,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//{Attribute} "attribute" | {Master} "master"
+		//({Attribute} "attribute" | {Master} "master")
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//{Attribute} "attribute"
@@ -290,7 +290,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"master"
 		public Keyword getMasterKeyword_0_1_1() { return cMasterKeyword_0_1_1; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute] | type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -345,7 +345,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute] | type=ID)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -468,7 +468,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CallMe2
 		public RuleCall getCallMe2ParserRuleCall_0() { return cCallMe2ParserRuleCall_0; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute] | type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]
@@ -534,7 +534,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CallMe3
 		public RuleCall getCallMe3ParserRuleCall_0() { return cCallMe3ParserRuleCall_0; }
 		
-		//"ref" typeRef=[BaseAttribute] | type=ID
+		//("ref" typeRef=[BaseAttribute] | type=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//"ref" typeRef=[BaseAttribute]

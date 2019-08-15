@@ -391,7 +391,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"unassigned"
 		public Keyword getUnassignedKeyword_1_0() { return cUnassignedKeyword_1_0; }
 		
-		//ID | Datatype
+		//(ID | Datatype)
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//ID
@@ -400,8 +400,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Datatype
 		public RuleCall getDatatypeParserRuleCall_1_1_1() { return cDatatypeParserRuleCall_1_1_1; }
 		
-		//{Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] |
-		//lit=Enum)
+		//({Action} ("fragment" Fragment)? | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] |
+		//lit=Enum))
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//{Action} ("fragment" Fragment)?
@@ -512,7 +512,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"datatype"
 		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
 		
-		//Datatype | ID
+		//(Datatype | ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//Datatype
