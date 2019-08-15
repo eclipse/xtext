@@ -76,7 +76,7 @@ Workflow {
 
 			// Xtend-based API for validation
 			fragment = validation.ValidatorFragment2 {
-			    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			    //composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 
 			// scoping and exporting API
