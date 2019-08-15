@@ -27,8 +27,12 @@ import org.eclipse.jface.text.source.IOverviewRuler;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,13 +49,27 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	
 	public static class DefaultFactory implements Factory {
 
+		/**
+		 * @since 2.19
+		 */
+		@Inject
+		private MembersInjector<XtextSourceViewer> membersInjector;
+		
 		@Override
 		public XtextSourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler,
 				IOverviewRuler overviewRuler, boolean showsAnnotationOverview, int styles) {
-			return new XtextSourceViewer(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
+			XtextSourceViewer result = new XtextSourceViewer(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
+			membersInjector.injectMembers(result);
+			return result;
 		}
 		
 	}
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil = new XtextDocumentUtil();
 	
 	public XtextSourceViewer(Composite parent, IVerticalRuler ruler, IOverviewRuler overviewRuler,
 			boolean showsAnnotationOverview, int styles) {
@@ -131,13 +149,25 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	}
 
 	/**
+	 * Supported adapter types are {@link IReconciler} and {@link IXtextDocument}.
+	 * 
 	 * @since 2.3
 	 */
 	@Override
 	public <T> T getAdapter(Class<T> adapter) {
-		if (IReconciler.class.isAssignableFrom(adapter)) {
+		if (IReconciler.class.isAssignableFrom(adapter) && adapter.isInstance(fReconciler)) {
 			return adapter.cast(fReconciler);
 		}
+		if (IXtextDocument.class.equals(adapter)) {
+			return adapter.cast(getXtextDocument());
+		}
 		return Platform.getAdapterManager().getAdapter(this, adapter);
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	public IXtextDocument getXtextDocument() {
+		return xtextDocumentUtil.getXtextDocument(getDocument());
 	}
 }

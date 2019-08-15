@@ -59,6 +59,12 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	
 	@Inject
 	private TextualMultiModificationWorkbenchMarkerResolutionAdapter.Factory textualMultiModificationAdapterFactory;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
@@ -145,18 +151,19 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)
 	@Deprecated
 	public IXtextDocument getXtextDocument(IResource resource) {
-		IXtextDocument result = XtextDocumentUtil.get(resource);
+		IXtextDocument result = xtextDocumentUtil.getXtextDocument(resource);
 		if(result == null) {
 			IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
-				page.openEditor(input, getEditorId());
+				IEditorPart newEditor = page.openEditor(input, getEditorId());
+				return xtextDocumentUtil.getXtextDocument(newEditor);
 			} catch (PartInitException e) {
 				return null;
 			}
 		}
-		return XtextDocumentUtil.get(resource);
+		return result;
 	}
 	
 	// handled by org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext.getXtextDocument(URI)

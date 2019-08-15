@@ -15,7 +15,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -33,10 +33,16 @@ public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 
 	@Inject
 	private IHyperlinkHelper helper;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public IHyperlink[] detectHyperlinks(final ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
-		return ((IXtextDocument)textViewer.getDocument()).tryReadOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
+		return xtextDocumentUtil.getXtextDocument(textViewer).tryReadOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			@Override
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
 				if (helper instanceof ISourceViewerAware && textViewer instanceof ISourceViewer) {

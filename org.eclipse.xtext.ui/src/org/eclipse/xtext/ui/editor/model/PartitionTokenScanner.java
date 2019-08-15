@@ -63,6 +63,8 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 
 	@Inject
 	private ITokenTypeToPartitionTypeMapper mapper;
+	@Inject
+	private DocumentTokenSourceAccess tokenSourceAccess = new DocumentTokenSourceAccess();
 	private int currentPartitionLength;
 	
 	public void setMapper(ITokenTypeToPartitionTypeMapper mapper) {
@@ -85,7 +87,7 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 	}
 
 	protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
-		return ((XtextDocument) document).getTokens();
+		return tokenSourceAccess.getTokens(document, false);
 	}
 
 	@Override

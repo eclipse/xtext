@@ -91,6 +91,12 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	@Inject
 	private OutlineRefreshJob refreshJob;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -223,7 +229,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		this.sourceViewer = sourceViewer;
 		IDocument document = sourceViewer.getDocument();
-		xtextDocument = XtextDocumentUtil.get(document);
+		xtextDocument = xtextDocumentUtil.getXtextDocument(document);
 		Assert.isNotNull(xtextDocument);
 		configureTextInputListener();
 	}
@@ -238,7 +244,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 				try {
 					if (xtextDocument != null && modelListener != null)
 						xtextDocument.removeModelListener(modelListener);
-					xtextDocument = XtextDocumentUtil.get(newInput);
+					xtextDocument = xtextDocumentUtil.getXtextDocument(newInput);
 					if (xtextDocument != null && modelListener != null) {
 						xtextDocument.addModelListener(modelListener);
 						scheduleRefresh();
@@ -309,7 +315,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 						}
 						treeViewer.setInput(rootNode);
 						treeViewer.expandToLevel(1);
-						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
+						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, Object.class));
 						treeViewer.setSelection(new StructuredSelection(Iterables.toArray(selectedNodes,
 								IOutlineNode.class)));
 						treeUpdated();

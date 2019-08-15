@@ -56,6 +56,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -132,6 +133,12 @@ public class EmbeddedEditorFactory {
 		
 		@Inject
 		protected HighlightingHelper highlightingHelper;
+		
+		/**
+		 * @since 2.19
+		 */
+		@Inject
+		protected XtextDocumentUtil xtextDocumentUtil;
 
 		protected IEditedResourceProvider resourceProvider;
 		protected String[] annotationTypes;
@@ -286,6 +293,7 @@ public class EmbeddedEditorFactory {
 							highlightingHelper.install(viewerConfiguration, viewer);
 						}
 					});
+			result.setXtextDocumentUtil(xtextDocumentUtil);
 			viewer.setEditable(!Boolean.TRUE.equals(readonly));
 			viewer.getContentAssistantFacade().addCompletionListener(new ICompletionListener() {
 				

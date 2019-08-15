@@ -14,7 +14,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.logging.LoggingTester
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.testing.util.TargetPlatformUtil
@@ -52,7 +51,7 @@ class Bug462047Test extends AbstractEditorTest {
 		IResourcesSetupUtil.assertNoErrorsInWorkspace
 		LoggingTester.captureLogging(Level.ERROR, BatchLinkableResource) [
 			val editor = openEditor(file)
-			val document = XtextDocumentUtil.get(editor)
+			val document = editor.document
 			document.readOnly [ XtextResource res |
 				EcoreUtil.resolveAll(res)
 				val resourceSet = res.resourceSet

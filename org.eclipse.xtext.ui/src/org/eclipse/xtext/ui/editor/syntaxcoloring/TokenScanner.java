@@ -15,6 +15,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSourceAccess;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -123,6 +124,8 @@ public class TokenScanner extends AbstractTokenScanner {
 
 	@Inject
 	private AbstractAntlrTokenToAttributeIdMapper tokenIdMapper;
+	@Inject
+	private DocumentTokenSourceAccess tokenSourceAccess;
 
 	public void setTokenIdMapper(AbstractAntlrTokenToAttributeIdMapper tokenIdMapper) {
 		this.tokenIdMapper = tokenIdMapper;
@@ -135,14 +138,14 @@ public class TokenScanner extends AbstractTokenScanner {
 	}
 
 	protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
-		if (!(document instanceof XtextDocument)) {
+		Iterable<ILexerTokenRegion> result = tokenSourceAccess.getTokens(document, true);
+		if (result == null) {
 			// User might have selected a non-xtext document in e.g. a compare operation.
 			// Return an empty iterable, this will disable syntax highlighting
 			// for the "non-xtext editor".
 			return Collections.emptyList();
 		}
-		XtextDocument doc = (XtextDocument) document;
-		return doc.getTokens();
+		return result;
 	}
 
 	@Override

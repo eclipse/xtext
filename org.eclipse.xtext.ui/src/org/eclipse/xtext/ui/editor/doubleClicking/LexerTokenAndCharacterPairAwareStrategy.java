@@ -14,6 +14,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSourceAccess;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
@@ -33,32 +34,37 @@ public class LexerTokenAndCharacterPairAwareStrategy extends AbstractWordAwareDo
 	@Inject
 	private ICharacterPairMatcher characterPairMatcher;
 	
+	@Inject
+	private DocumentTokenSourceAccess tokenSourceAccess;
+	
 	@Override
 	protected IRegion findWord(IDocument document, int offset) {
-		if (document instanceof XtextDocument) {
-			Iterator<ILexerTokenRegion> tokenIterator = ((XtextDocument) document).getTokens().iterator();
-			ILexerTokenRegion leadingToken = null;
-			ILexerTokenRegion trailingToken = null;
-			while(tokenIterator.hasNext()) {
-				ILexerTokenRegion token = tokenIterator.next();
-				if (token.getOffset() <= offset && token.getOffset() + token.getLength() >= offset) {
-					if (leadingToken != null)
-						trailingToken = token;
-					else
-						leadingToken = token;
+		Iterable<ILexerTokenRegion> tokenIterable = tokenSourceAccess.getTokens(document, true);
+		if (tokenIterable == null) {
+			return super.findWord(document, offset);
+		}
+		Iterator<ILexerTokenRegion> tokenIterator = tokenIterable.iterator();
+		ILexerTokenRegion leadingToken = null;
+		ILexerTokenRegion trailingToken = null;
+		while(tokenIterator.hasNext()) {
+			ILexerTokenRegion token = tokenIterator.next();
+			if (token.getOffset() <= offset && token.getOffset() + token.getLength() >= offset) {
+				if (leadingToken != null)
+					trailingToken = token;
+				else
+					leadingToken = token;
+			}
+			if (token.getOffset() > offset)
+				break;
+		}
+		if (leadingToken != null) {
+			try {
+				if (leadingToken.getLength() > 1 && (trailingToken == null || !Character.isLetter(document.getChar(trailingToken.getOffset())))) {
+					return new Region(leadingToken.getOffset(), leadingToken.getLength());
+				} else if (trailingToken != null) {
+					return new Region(trailingToken.getOffset(), trailingToken.getLength());
 				}
-				if (token.getOffset() > offset)
-					break;
-			}
-			if (leadingToken != null) {
-				try {
-					if (leadingToken.getLength() > 1 && (trailingToken == null || !Character.isLetter(document.getChar(trailingToken.getOffset())))) {
-						return new Region(leadingToken.getOffset(), leadingToken.getLength());
-					} else if (trailingToken != null) {
-						return new Region(trailingToken.getOffset(), trailingToken.getLength());
-					}
-				} catch(BadLocationException ignore) {}
-			}
+			} catch(BadLocationException ignore) {}
 		}
 		return super.findWord(document, offset);
 	}

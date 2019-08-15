@@ -50,6 +50,12 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	@Inject
 	private ICompletionProposalComparator comparator;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	private String errorMessage;
 
 	@Override
@@ -110,13 +116,10 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			}
 		}
 		final IDocument document = sourceViewer.getDocument();
-		if (!(document instanceof IXtextDocument))
-			return new ICompletionProposal[0];
-		final IXtextDocument xtextDocument = (IXtextDocument) document;
 		final IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
 		List<ICompletionProposal> result = Lists.newArrayList();
 		try {
-			Set<Annotation> applicableAnnotations = getApplicableAnnotations(xtextDocument, annotationModel, invocationContext.getOffset());
+			Set<Annotation> applicableAnnotations = getApplicableAnnotations(document, annotationModel, invocationContext.getOffset());
 			result = createQuickfixes(invocationContext, applicableAnnotations);
             selectAndRevealQuickfix(invocationContext, applicableAnnotations, result);
 		} catch (BadLocationException e) {
@@ -135,7 +138,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
     	List<ICompletionProposal> result = Lists.newArrayList();
     	ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		IAnnotationModel annotationModel = sourceViewer.getAnnotationModel();
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(sourceViewer);
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(sourceViewer);
     	for(Annotation annotation : applicableAnnotations) {
 			if (annotation instanceof SpellingAnnotation) {
 				SpellingProblem spellingProblem = ((SpellingAnnotation) annotation).getSpellingProblem();
@@ -147,6 +150,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
 				Position pos = annotationModel.getPosition(annotation);
 				if (issue != null && pos != null) {
+					@SuppressWarnings("deprecation")
 					Iterable<IssueResolution> resolutions = getResolutions(issue, xtextDocument);
 					if (resolutions.iterator().hasNext()) {
 						for (IssueResolution resolution : resolutions) {
@@ -188,9 +192,20 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	protected void sortQuickfixes(List<ICompletionProposal> quickFixes) {
 		Collections.sort(quickFixes, comparator);
 	}
-
-	protected Set<Annotation> getApplicableAnnotations(final IXtextDocument document, final IAnnotationModel annotationModel,
+	
+	/**
+	 * @since 2.19
+	 */
+	protected Set<Annotation> getApplicableAnnotations(final IDocument document, final IAnnotationModel annotationModel,
 			final int offset) throws BadLocationException {
+		if (document instanceof IXtextDocument) {
+			return getApplicableAnnotations((IXtextDocument)document, annotationModel, offset);
+		}
+		return doGetApplicableAnnotations(document, annotationModel, offset);
+	}
+
+	private Set<Annotation> doGetApplicableAnnotations(final IDocument document, final IAnnotationModel annotationModel, final int offset)
+			throws BadLocationException {
 		final int line = document.getLineOfOffset(offset);
 		final String delim = document.getLineDelimiter(line);
 		final int delimLength = delim != null ? delim.length() : 0;
@@ -262,6 +277,15 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				nearestAnnotations.add(entry.getKey());
 		}
 		return nearestAnnotations;
+	}
+
+	/**
+	 * Use {@link #getApplicableAnnotations(IDocument, IAnnotationModel, int)} instead.
+	 */
+	@Deprecated
+	protected Set<Annotation> getApplicableAnnotations(final IXtextDocument document, final IAnnotationModel annotationModel,
+			final int offset) throws BadLocationException {
+		return doGetApplicableAnnotations(document, annotationModel, offset);
 	}
 	
 	public IssueUtil getIssueUtil() {

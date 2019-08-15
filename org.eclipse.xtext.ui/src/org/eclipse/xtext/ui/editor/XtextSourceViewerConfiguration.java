@@ -299,6 +299,5 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		presenter.setSizeConstraints(100, 12, true, true);
 		return presenter;
 	}
-
 	
 }

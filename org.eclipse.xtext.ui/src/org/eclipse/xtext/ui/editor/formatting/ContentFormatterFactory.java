@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -31,7 +32,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	public class ContentFormatter implements IContentFormatter {
 		@Override
 		public void format(IDocument document, IRegion region) {
-			IXtextDocument doc = (IXtextDocument) document;
+			IXtextDocument doc = xtextDocumentUtil.getXtextDocument(document);
 			ReplaceRegion r = doc.priorityReadOnly(new FormattingUnitOfWork(region));
 			try {
 				if (r != null) {
@@ -77,6 +78,12 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 
 	@Inject
 	protected INodeModelFormatter formatter;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject 
+	protected XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public IContentFormatter createConfiguredFormatter(

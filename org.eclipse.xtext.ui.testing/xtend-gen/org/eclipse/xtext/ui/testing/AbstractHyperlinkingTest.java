@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
@@ -67,6 +67,13 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
   
   @Inject
   protected IResourceSetProvider resourceSetProvider;
+  
+  /**
+   * @since 2.19
+   */
+  @Inject
+  @Extension
+  protected XtextDocumentUtil _xtextDocumentUtil;
   
   protected IProject project;
   
@@ -127,8 +134,7 @@ public abstract class AbstractHyperlinkingTest extends AbstractEditorTest {
     IHyperlink[] _xblockexpression = null;
     {
       final XtextEditor editor = this.openInEditor(dslFile);
-      IDocument _document = editor.getInternalSourceViewer().getDocument();
-      final IXtextDocument document = ((IXtextDocument) _document);
+      final IXtextDocument document = this._xtextDocumentUtil.getXtextDocument(editor.getInternalSourceViewer());
       final XtextResource resource = document.<XtextResource>readOnly(new IUnitOfWork<XtextResource, XtextResource>() {
         @Override
         public XtextResource exec(final XtextResource state) {

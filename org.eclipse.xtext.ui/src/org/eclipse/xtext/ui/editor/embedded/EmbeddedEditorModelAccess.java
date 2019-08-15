@@ -20,7 +20,9 @@ import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.TextRegion;
@@ -40,6 +42,11 @@ public class EmbeddedEditorModelAccess {
 	private final boolean insertLineBreaks;
 
 	private final IEditedResourceProvider resourceProvider;
+	
+	/**
+	 * @since 2.19
+	 */
+	private XtextDocumentUtil xtextDocumentUtil = new XtextDocumentUtil();
 
 	public EmbeddedEditorModelAccess(SourceViewer viewer, IEditedResourceProvider resourceProvider,
 			boolean insertLineBreaks) {
@@ -123,7 +130,7 @@ public class EmbeddedEditorModelAccess {
 	}
 	
 	public void updateModel(String model, final IUnitOfWork<ITextRegion, XtextResource> editablePartSelector) {
-		XtextDocument document = (XtextDocument) this.viewer.getDocument();
+		IXtextDocument document = xtextDocumentUtil.getXtextDocument(this.viewer);
 		this.viewer.setRedraw(false);
 		this.viewer.getUndoManager().disconnect();
 		document.set(model);
@@ -175,4 +182,10 @@ public class EmbeddedEditorModelAccess {
 		return this.viewer.getDocument().get();
 	}
 
+	/**
+	 * @since 2.19
+	 */
+	protected void setXtextDocumentUtil(XtextDocumentUtil xtextDocumentUtil) {
+		this.xtextDocumentUtil = xtextDocumentUtil;
+	}
 }

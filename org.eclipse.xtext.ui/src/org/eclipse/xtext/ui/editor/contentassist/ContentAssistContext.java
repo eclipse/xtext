@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.ImmutableList;
@@ -199,6 +200,12 @@ public class ContentAssistContext {
 	private Provider<Builder> builderProvider;
 	
 	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
+	/**
 	 * Protected contructor to allow subclassing.
 	 */
 	protected ContentAssistContext() {
@@ -266,7 +273,7 @@ public class ContentAssistContext {
 	 * The actual document.
 	 */
 	public IXtextDocument getDocument() {
-		return (IXtextDocument) viewer.getDocument();
+		return xtextDocumentUtil.getXtextDocument(viewer);
 	}
 	
 	/**

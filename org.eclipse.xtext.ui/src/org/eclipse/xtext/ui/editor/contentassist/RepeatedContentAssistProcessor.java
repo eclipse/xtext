@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.keys.IBindingService;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.Inject;
 
@@ -57,8 +58,13 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	}
 	
 	@Inject(optional = true)
-	/* @Nullable */
 	private IWorkbench workbench;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 	
 	private IContentAssistantExtension2 currentAssistant;
 	
@@ -77,7 +83,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 			proposalProvider.nextMode();
 			if (currentAssistant != null)
 				currentAssistant.setStatusMessage(getStatusMessage());
-			ICompletionProposal[] result = computeCompletionProposals((IXtextDocument) viewer.getDocument(), proposalComputer);
+			ICompletionProposal[] result = computeCompletionProposals(xtextDocumentUtil.getXtextDocument(viewer), proposalComputer);
 			if (result != null && result.length > 0)
 				return result;
 			if (proposalProvider.isLastMode()) {

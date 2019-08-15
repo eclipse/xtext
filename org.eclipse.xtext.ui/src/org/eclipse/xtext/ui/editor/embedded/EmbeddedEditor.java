@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.embedded;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 /**
  * Handle for an embedded Xtext editor. It allows to initialize the edited model
@@ -30,7 +31,12 @@ public class EmbeddedEditor {
 	private final XtextSourceViewerConfiguration configuration;
 
 	private final Runnable afterSetDocument;
-
+	
+	/**
+	 * @since 2.19
+	 */
+	private XtextDocumentUtil xtextDocumentUtil = new XtextDocumentUtil();
+	
 	public EmbeddedEditor(XtextDocument document, XtextSourceViewer viewer, XtextSourceViewerConfiguration configuration, IEditedResourceProvider resourceProvider, Runnable afterSetDocumet) {
 		this.document = document;
 		this.viewer = viewer;
@@ -52,6 +58,20 @@ public class EmbeddedEditor {
 	}
 	
 	/**
+	 * @since 2.19
+	 */
+	public void setXtextDocumentUtil(XtextDocumentUtil xtextDocumentUtil) {
+		this.xtextDocumentUtil = xtextDocumentUtil;
+	}
+	
+	/**
+	 * @since 2.19
+	 */
+	public XtextDocumentUtil getXtextDocumentUtil() {
+		return xtextDocumentUtil;
+	}
+	
+	/**
 	 * Obtain the {@link EmbeddedEditorModelAccess model access} for this editor instance. 
  	 * It can be used to query the currently edited text or update it externally.
  	 * The prefix and the suffix will not be visible in the editor. It is possible to 
@@ -60,6 +80,7 @@ public class EmbeddedEditor {
 	 */
 	public EmbeddedEditorModelAccess createPartialEditor(String prefix, String editablePart, String suffix, boolean insertLineBreaks) {
 		EmbeddedEditorModelAccess result = new EmbeddedEditorModelAccess(this.viewer, this.resourceProvider, insertLineBreaks);
+		result.setXtextDocumentUtil(xtextDocumentUtil);
 		result.setModel(getDocument(), prefix, editablePart, suffix);
 		afterSetDocument.run();
 		return result;

@@ -81,6 +81,12 @@ public class XtextReconciler extends Job implements IReconciler {
 	@Inject 
 	private OperationCanceledManager canceledManager;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	private LinkedBlockingQueue<DocumentEvent> pendingChanges = new LinkedBlockingQueue<DocumentEvent>();
 
 	/**
@@ -276,7 +282,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 			if (newInput instanceof IXtextDocument) {
 				((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
-				final IXtextDocument document = XtextDocumentUtil.get(textViewer);
+				final IXtextDocument document = xtextDocumentUtil.getXtextDocument(textViewer);
 				strategy.setDocument(document);
 				if (!initalProcessDone && strategy instanceof IReconcilingStrategyExtension) {
 					initalProcessDone = true;
@@ -356,7 +362,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			return Status.OK_STATUS;
 		}
 		long start = System.currentTimeMillis();
-		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
+		final IXtextDocument document = xtextDocumentUtil.getXtextDocument(textViewer);
 		if (document instanceof XtextDocument) {
 			((XtextDocument) document).internalModify(new IUnitOfWork.Void<XtextResource>() {
 				@Override

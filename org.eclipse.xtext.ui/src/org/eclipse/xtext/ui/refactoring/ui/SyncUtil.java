@@ -28,7 +28,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -133,7 +133,7 @@ public class SyncUtil {
 				}
 			});
 			// reconciling schedules both, validation and dirty state
-			Job validationJob = ((XtextDocument)editor.getDocument()).getValidationJob();
+			Job validationJob = editor.getAdapter(ValidationJob.class);
 			if (validationJob != null) {
 				validationJob.join();
 			}

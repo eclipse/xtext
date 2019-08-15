@@ -59,6 +59,12 @@ public class ImportURINavigationTest {
 	@Inject
 	private IWorkbench workbench;
 	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
+	
 	@Test
 	public void testNavigateToFileURI() throws Exception {
 		doTestNavigation(new IUnitOfWork<URI, IFile>() {
@@ -111,7 +117,7 @@ public class ImportURINavigationTest {
 			hyperlinks[0].open();
 			IEditorPart editor = activePage.getActiveEditor();
 			Assert.assertNotNull(editor);
-			IXtextDocument document = XtextDocumentUtil.get(editor);
+			IXtextDocument document = xtextDocumentUtil.getXtextDocument(editor);
 			document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource state) throws Exception {

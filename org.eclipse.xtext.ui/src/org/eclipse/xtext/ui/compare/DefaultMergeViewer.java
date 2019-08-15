@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Maps;
@@ -70,6 +71,10 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	protected IDocumentProvider documentProvider;
 	protected Map<ISourceViewer, DefaultMergeEditor> sourceViewerEditorMap;
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
+	/**
+	 * @since 2.19
+	 */
+	protected XtextDocumentUtil xtextDocumentUtil;
 
 	private Map<Object, IStreamContentAccessor> inputObjectStreamContentAccessorMap = Maps.newHashMap();
 
@@ -163,8 +168,8 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		SourceViewerConfiguration sourceViewerConfiguration = createSourceViewerConfiguration(sourceViewer, editorInput);
 		sourceViewer.unconfigure();
 		sourceViewer.configure(sourceViewerConfiguration);
-		if (sourceViewer.getDocument() instanceof IXtextDocument) {
-			IXtextDocument xtextDocument = (IXtextDocument) sourceViewer.getDocument();
+		IXtextDocument xtextDocument = xtextDocumentUtil.getXtextDocument(sourceViewer);
+		if (xtextDocument != null) {
 			if (!xtextDocument.readOnly(TEST_EXISTING_XTEXT_RESOURCE)) {
 				String[] configuredContentTypes = sourceViewerConfiguration.getConfiguredContentTypes(sourceViewer);
 				for (String contentType : configuredContentTypes) {
@@ -278,6 +283,13 @@ public class DefaultMergeViewer extends TextMergeViewer {
 			mergeEditor = sourceViewerEditorMap.get(sourceViewer);
 		}
 		return mergeEditor;
+	}
+
+	/**
+	 * @since 2.19
+	 */
+	protected void setXtextDocumentUtil(XtextDocumentUtil xtextDocumentUtil) {
+		this.xtextDocumentUtil = xtextDocumentUtil;
 	}
 
 }
