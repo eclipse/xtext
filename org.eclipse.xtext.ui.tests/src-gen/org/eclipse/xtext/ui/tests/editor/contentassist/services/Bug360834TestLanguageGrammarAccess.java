@@ -210,7 +210,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Modifiers}
 		public Action getModifiersAction_0() { return cModifiersAction_0; }
 		
-		//final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?
+		//(final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//final?='final'
@@ -384,7 +384,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Modifiers}
 		public Action getModifiersAction_0() { return cModifiersAction_0; }
 		
-		//final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?
+		//(final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//final?='final'?

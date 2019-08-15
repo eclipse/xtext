@@ -70,7 +70,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> ({FunctionDeclaration} -> FunctionImpl <Yield,Yield,Expression=false>)
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//{FunctionDeclaration} -> FunctionImpl <Yield,Yield,Expression=false>
+		//({FunctionDeclaration} -> FunctionImpl <Yield,Yield,Expression=false>)
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{FunctionDeclaration}
@@ -108,8 +108,8 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//'function'
 		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
 		
-		//generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression> |
-		//FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>
+		//(generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression> |
+		//FunctionHeader<Yield,Generator=false> FunctionBody<Yield=false,Expression>)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//generator?='*' FunctionHeader<YieldIfGenerator,Generator=true> FunctionBody<Yield=true,Expression>
@@ -220,7 +220,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> ({Block} '{')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//{Block} '{'
+		//({Block} '{')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//{Block}
@@ -301,7 +301,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> (name=Identifier<Yield> ':')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//name=Identifier<Yield> ':'
+		//(name=Identifier<Yield> ':')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//name=Identifier<Yield>
@@ -468,7 +468,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> ({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>
+		//({ShiftExpression.lhs=current} op=('>>' | '<<') rhs=MemberExpression<Yield>)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//{ShiftExpression.lhs=current}
@@ -518,7 +518,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> ({RelationalExpression.lhs=current} op=RelationalOperator<In> -> rhs=ShiftExpression<Yield>)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{RelationalExpression.lhs=current} op=RelationalOperator<In> -> rhs=ShiftExpression<Yield>
+		//({RelationalExpression.lhs=current} op=RelationalOperator<In> -> rhs=ShiftExpression<Yield>)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
 		//{RelationalExpression.lhs=current}
@@ -618,7 +618,7 @@ public class ParameterizedExpressionsTestLanguageGrammarAccess extends AbstractG
 		//=> ({AssignmentExpression.lhs=current} op='=')
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 		
-		//{AssignmentExpression.lhs=current} op='='
+		//({AssignmentExpression.lhs=current} op='=')
 		public Group getGroup_1_1_0_0() { return cGroup_1_1_0_0; }
 		
 		//{AssignmentExpression.lhs=current}

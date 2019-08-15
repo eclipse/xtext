@@ -327,9 +327,9 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'timeperiod'
 		public Keyword getTimeperiodKeyword_2() { return cTimeperiodKeyword_2; }
 		
-		//'1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & (NL+ 'otherelement' alias+=ID (NL+
-		//time+=TimeDef3)*)?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* |
-		//(NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?) NL+ '}' | '3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
+		//('1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & (NL+ 'otherelement' alias+=ID
+		//(NL+ time+=TimeDef3)*)?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
+		//| (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?) NL+ '}' | '3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
 		//name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)+ NL+ '}' | '4' '{' (NL+
 		//time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
 		//time+=TimeDef3)*)* NL+ '}' | '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* &
@@ -337,7 +337,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//name+=ID NL+ (time+=TimeDef2 NL+)* | ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)?) '}' | '7' '{' NL+
 		//(time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
 		//(time+=TimeDef3 NL+)*)+ '}' | '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* |
-		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}'
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//'1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & (NL+ 'otherelement' alias+=ID (NL+
@@ -362,7 +362,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_0_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_0_2_1_0; }
 		
-		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?)
 		public UnorderedGroup getUnorderedGroup_3_0_3() { return cUnorderedGroup_3_0_3; }
 		
 		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
@@ -447,7 +447,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_1_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_1_2_1_0; }
 		
-		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?)
 		public Alternatives getAlternatives_3_1_3() { return cAlternatives_3_1_3; }
 		
 		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
@@ -705,7 +705,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_4_3_1() { return cNLTerminalRuleCall_3_4_3_1; }
 		
-		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)?)
 		public UnorderedGroup getUnorderedGroup_3_4_4() { return cUnorderedGroup_3_4_4; }
 		
 		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
@@ -790,7 +790,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_5_3_1() { return cNLTerminalRuleCall_3_5_3_1; }
 		
-		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)?)
 		public Alternatives getAlternatives_3_5_4() { return cAlternatives_3_5_4; }
 		
 		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*

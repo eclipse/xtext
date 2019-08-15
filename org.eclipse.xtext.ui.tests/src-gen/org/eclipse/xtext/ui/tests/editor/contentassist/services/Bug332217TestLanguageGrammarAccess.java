@@ -557,7 +557,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?
+		//(('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('title:' title=ScalarExpression)?
@@ -745,8 +745,8 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
-		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?
+		//(('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
+		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 		
 		//('text:' text=ScalarExpression)?

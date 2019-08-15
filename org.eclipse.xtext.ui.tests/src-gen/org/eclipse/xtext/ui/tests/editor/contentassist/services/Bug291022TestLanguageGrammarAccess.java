@@ -140,7 +140,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSecondReferenceModelElementIDTerminalRuleCall_2_0_1() { return cSecondReferenceModelElementIDTerminalRuleCall_2_0_1; }
 		
-		//';' | '{' elements+=ModelAttribute* '}'
+		//(';' | '{' elements+=ModelAttribute* '}')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
 		//';'

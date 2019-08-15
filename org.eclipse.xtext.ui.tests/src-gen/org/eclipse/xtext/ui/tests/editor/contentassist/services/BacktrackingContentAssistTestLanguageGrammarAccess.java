@@ -712,7 +712,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_3_0() { return cTypeTypeExpParserRuleCall_3_0; }
 		
-		//(init=Init der=Der?)? | der=Der init=Init?
+		//((init=Init der=Der?)? | der=Der init=Init?)
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//(init=Init der=Der?)?
@@ -1286,7 +1286,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//(('e' | 'E') ('+' | '-')? INT)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//'e' | 'E'
+		//('e' | 'E')
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 		
 		//'e'
@@ -1921,7 +1921,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//{BooleanLiteralExp}
 		public Action getBooleanLiteralExpAction_0() { return cBooleanLiteralExpAction_0; }
 		
-		//isTrue?='true' | 'false'
+		//(isTrue?='true' | 'false')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//isTrue?='true'

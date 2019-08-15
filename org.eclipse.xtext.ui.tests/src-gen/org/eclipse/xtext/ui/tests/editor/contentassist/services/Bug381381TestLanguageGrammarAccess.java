@@ -77,7 +77,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'FIELD-NAME-TO-VARIABLE'
 		public Keyword getFIELDNAMETOVARIABLEKeyword_0() { return cFIELDNAMETOVARIABLEKeyword_0; }
 		
-		//',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '=' 'REPLACE')?
+		//(',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & (',' 'TYPE' '=' 'REPLACE')?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 		
 		//',' 'SCREEN' '=' '(' line=INT ',' column=INT ')'
