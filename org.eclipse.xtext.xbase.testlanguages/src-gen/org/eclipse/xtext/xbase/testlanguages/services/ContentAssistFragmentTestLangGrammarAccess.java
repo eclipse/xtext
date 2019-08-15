@@ -74,7 +74,7 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		//{XVariableDeclaration}
 		public Action getXVariableDeclarationAction_0() { return cXVariableDeclarationAction_0; }
 		
-		//writeable?='var' | 'val'
+		//(writeable?='var' | 'val')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//writeable?='var'
@@ -86,13 +86,13 @@ public class ContentAssistFragmentTestLangGrammarAccess extends AbstractGrammarE
 		//'val'
 		public Keyword getValKeyword_1_1() { return cValKeyword_1_1; }
 		
-		//=> (type=JvmTypeReference name=ValidID) | name=ValidID
+		//(=> (type=JvmTypeReference name=ValidID) | name=ValidID)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//=> (type=JvmTypeReference name=ValidID)
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
-		//type=JvmTypeReference name=ValidID
+		//(type=JvmTypeReference name=ValidID)
 		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 		
 		//type=JvmTypeReference
