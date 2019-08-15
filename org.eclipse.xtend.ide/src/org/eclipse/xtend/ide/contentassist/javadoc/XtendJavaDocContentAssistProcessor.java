@@ -11,9 +11,9 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 
 import com.google.inject.Inject;
 
@@ -33,11 +33,17 @@ public class XtendJavaDocContentAssistProcessor extends AbstractJavaDocContentAs
 
 	@Inject
 	private XtendJavaDocProposalFactory proposalFactory;
+	
+	/**
+	 * @since 2.19
+	 */
+	@Inject
+	private XtextDocumentUtil xtextDocumentUtil;
 
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-		if(viewer instanceof XtextSourceViewer){
-			IXtextDocument document = (IXtextDocument) viewer.getDocument();
+		IXtextDocument document = xtextDocumentUtil.getXtextDocument(viewer);
+		if (document != null) {
 			return document.priorityReadOnly(createCompletionProposalComputer(viewer, offset));
 		}
 		return new ICompletionProposal[0];

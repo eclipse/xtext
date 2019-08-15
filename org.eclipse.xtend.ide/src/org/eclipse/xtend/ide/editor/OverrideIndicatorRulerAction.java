@@ -26,7 +26,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextMarkerRulerAction;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
@@ -141,7 +140,7 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 	}
 
 	protected IXtextDocument getDocument() {
-		IXtextDocument xtextDocument = XtextDocumentUtil.get(editor);
+		IXtextDocument xtextDocument = editor.getDocument();
 		return xtextDocument;
 	}
 
