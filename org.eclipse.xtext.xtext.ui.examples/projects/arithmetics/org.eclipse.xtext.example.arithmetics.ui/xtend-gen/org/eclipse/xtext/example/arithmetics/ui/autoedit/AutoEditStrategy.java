@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.example.arithmetics.ui.autoedit;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.example.arithmetics.ui.autoedit.InterpreterAutoEdit;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -14,10 +16,12 @@ import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 
 @SuppressWarnings("all")
 public class AutoEditStrategy extends DefaultAutoEditStrategyProvider {
+  @Inject
+  private Provider<InterpreterAutoEdit> interpreterAutoEdit;
+  
   @Override
   protected void configure(final AbstractEditStrategyProvider.IEditStrategyAcceptor acceptor) {
     super.configure(acceptor);
-    InterpreterAutoEdit _interpreterAutoEdit = new InterpreterAutoEdit();
-    acceptor.accept(_interpreterAutoEdit, IDocument.DEFAULT_CONTENT_TYPE);
+    acceptor.accept(this.interpreterAutoEdit.get(), IDocument.DEFAULT_CONTENT_TYPE);
   }
 }
