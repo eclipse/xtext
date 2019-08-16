@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.ide.editor.navigation.INavigatable;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.Lists;
 
@@ -73,5 +75,17 @@ public class ReferenceSearchViewTreeNode implements INavigatable {
 	public Object getNavigationElement() {
 		return getDescription();
 	}
-
+	
+	/**
+	 * recursively collects the node's description into the given {@link IAcceptor} including the node's children.
+	 * Only IReferenceDescriptions are collected
+	 */
+	public void collectReferenceDescriptions(IAcceptor<IReferenceDescription> descriptionsAcceptor) {
+		if(description instanceof IReferenceDescription) {
+			descriptionsAcceptor.accept((IReferenceDescription) description);
+		}
+		for (ReferenceSearchViewTreeNode child : getChildren()) {
+			child.collectReferenceDescriptions(descriptionsAcceptor);
+		}
+	}
 }

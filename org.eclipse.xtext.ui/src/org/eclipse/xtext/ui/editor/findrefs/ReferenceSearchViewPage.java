@@ -18,9 +18,11 @@ import org.eclipse.search.ui.IContextMenuConstants;
 import org.eclipse.search.ui.IQueryListener;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
+import org.eclipse.search.ui.ISearchResultListener;
 import org.eclipse.search.ui.ISearchResultPage;
 import org.eclipse.search.ui.ISearchResultViewPart;
 import org.eclipse.search.ui.NewSearchUI;
+import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -28,6 +30,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IActionBars;
@@ -37,6 +40,7 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.part.PageBook;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPageActions.RemoveSelectedMatchesAction;
 import org.eclipse.xtext.ui.editor.navigation.NavigationService;
 import org.eclipse.xtext.xbase.lib.Procedures;
 
@@ -70,7 +74,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	private IAction copyAction;
 
-	private IAction removeSelectedMatchesAction;
+	private RemoveSelectedMatchesAction removeSelectedMatchesAction;
 
 	@Inject
 	private ReferenceSearchResultContentProvider contentProvider;
@@ -87,6 +91,13 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private boolean isBusyShowing;
 
 	private IQueryListener queryListener;
+
+	private final ISearchResultListener labelUpdater = (e) -> {
+		if (viewer != null && !viewer.getControl().isDisposed()
+				&& (e instanceof ReferenceSearchResultEvents.Finish || e instanceof ReferenceSearchResultEvents.Removed)) {
+			Display.getDefault().asyncExec(() -> part.updateLabel());
+		}
+	};
 
 	public ReferenceSearchViewPage() {
 		showPreviousAction = new ReferenceSearchViewPageActions.ShowPrevious(this);
@@ -133,12 +144,18 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	@Override
 	public void setInput(ISearchResult newSearchResult, Object uiState) {
 		synchronized (viewer) {
+			if (this.searchResult != null) {
+				this.searchResult.removeListener(labelUpdater);
+			}
+
 			this.searchResult = newSearchResult;
 			if (searchResult != null) {
+				searchResult.addListener(labelUpdater);
 				viewer.setInput(newSearchResult);
 				if (uiState instanceof ISelection) {
 					viewer.setSelection((ISelection) uiState);
 				}
+				removeSelectedMatchesAction.setSearchResult(searchResult);
 			}
 			part.updateLabel();
 		}
