@@ -5,19 +5,25 @@
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Xtext-Web Entities Example</title>
 	<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css" />
-	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
+	<link rel="stylesheet" type="text/css" href="xtext/@xtext-version-placeholder@/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.3.6/require.min.js"></script>
 	<script type="text/javascript">
+		var baseUrl = window.location.pathname;
+		var fileIndex = baseUrl.indexOf("orion-entities-static.html");
+		if (fileIndex > 0)
+			baseUrl = baseUrl.slice(0, fileIndex)
 		require.config({
+			baseUrl: baseUrl,
 			paths: {
 				"text": "webjars/requirejs-text/2.0.15/text",
-				"jquery": "webjars/jquery/3.4.1/jquery.min"
+				"jquery": "webjars/jquery/3.4.1/jquery.min",
+				"xtext/xtext-orion": "xtext/@xtext-version-placeholder@/xtext-orion",
 			}
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(["xtext/xtext-orion"], function(xtext) {
-				xtext.createEditor({syntaxDefinition: "xtext/entities-syntax"});
+				xtext.createEditor({syntaxDefinition: "xtext/entities-syntax", baseUrl: baseUrl,});
 			});
 		});
 	</script>

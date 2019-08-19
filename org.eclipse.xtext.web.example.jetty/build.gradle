@@ -13,7 +13,9 @@ dependencies {
 	compile group: 'org.webjars', name: 'ace', version: '1.3.3'
 	compile group: 'org.webjars', name: 'codemirror', version: '5.41.0'
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.4.+'
-	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
+	providedCompile group: 'org.eclipse.jetty', name: 'jetty-rewrite', version: '9.4.+'
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
+	compile group: 'log4j', name: 'log4j'
 }
 
 /* 
@@ -53,5 +55,23 @@ task jettyRun(type:JavaExec) {
 }
 
 tasks.eclipse.dependsOn(unpackOrion)
+tasks.war.dependsOn(unpackOrion)
 
 uploadArchives.enabled = false
+
+task zipTestFiles(type: Zip) {
+	from('test-files') {
+		include '**/*'
+		into 'test-files'
+	}
+	destinationDir = new File( project.buildDir,'libs')
+	archiveName 'test-files.zip'
+}
+
+tasks.war.dependsOn(zipTestFiles)
+
+war {
+	filesMatching('**/*.html') {
+       filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: ["xtext-version-placeholder": project.version])
+    }
+}

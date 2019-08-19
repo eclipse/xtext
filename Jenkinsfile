@@ -88,7 +88,7 @@ spec:
       junit testResults: '**/build/test-results/test/*.xml'
     }
     success {
-      archiveArtifacts artifacts: 'build/maven-repository/**'
+      archiveArtifacts artifacts: 'build/maven-repository/**, org.eclipse.xtext.web.example.jetty/build/libs/test-files.zip'
     }
     cleanup {
       script {
