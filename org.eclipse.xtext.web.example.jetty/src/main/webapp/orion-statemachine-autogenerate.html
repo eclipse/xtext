@@ -5,19 +5,25 @@
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Xtext-Web State Machine Example (Auto-Generator)</title>
 	<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css" />
-	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
+	<link rel="stylesheet" type="text/css" href="xtext/@xtext-version-placeholder@/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.3.6/require.min.js"></script>
 	<script type="text/javascript">
+		var baseUrl = window.location.pathname;
+		var fileIndex = baseUrl.indexOf("orion-statemachine-autogenerate.html");
+		if (fileIndex > 0)
+			baseUrl = baseUrl.slice(0, fileIndex)
 		require.config({
+			baseUrl: baseUrl,
 			paths: {
 				'text': 'webjars/requirejs-text/2.0.15/text',
-				'jquery': 'webjars/jquery/3.4.1/jquery.min'
+				'jquery': 'webjars/jquery/3.4.1/jquery.min',
+				"xtext/xtext-orion": "xtext/@xtext-version-placeholder@/xtext-orion",
 			}
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(['xtext/xtext-orion'], function(xtext) {
-				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax"}).done(function(editorViewer) {
+				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax", baseUrl: baseUrl,}).done(function(editorViewer) {
 					var xtextServices = editorViewer.xtextServices;
 					$('#save-button').click(function() {
 						xtextServices.saveResource();
@@ -28,7 +34,7 @@
 					xtextServices.successListeners.push(function(serviceType, result) {
 						if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
 							// Option 1: use a simple GET request
-							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example1.statemachine"></iframe>');
+							$('#generator-result').html('<iframe src="http://' + location.host + baseUrl + 'xtext-service/generate?resource=example1.statemachine"></iframe>');
 							// Option 2: use the 'generate' function
 							xtextServices.generate({artifactId: '/hidden.txt'}).done(function(result) {
 								console.log(result);
