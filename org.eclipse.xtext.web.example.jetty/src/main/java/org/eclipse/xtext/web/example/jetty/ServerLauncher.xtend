@@ -10,7 +10,6 @@ package org.eclipse.xtext.web.example.jetty
 import java.net.InetSocketAddress
 import org.eclipse.jetty.annotations.AnnotationConfiguration
 import org.eclipse.jetty.rewrite.handler.RewriteHandler
-import org.eclipse.jetty.rewrite.handler.RewritePatternRule
 import org.eclipse.jetty.rewrite.handler.RewriteRegexRule
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.HandlerList
