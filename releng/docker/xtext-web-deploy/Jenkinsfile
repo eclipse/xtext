@@ -15,7 +15,7 @@ pipeline {
       steps {
         script {
           step ([$class: 'CopyArtifact',
-            projectName: 'xtext-web/master',
+            projectName: 'xtext-web/cd_issue165experiments',
             filter: "build/maven-repository/org/eclipse/xtext/org.eclipse.xtext.web.example.jetty/*/org.eclipse.xtext.web.example.jetty-*.war",
             target: 'releng/docker/xtext-web-deploy/xtext-web',
             flatten: true
