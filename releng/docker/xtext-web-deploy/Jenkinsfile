@@ -20,6 +20,15 @@ pipeline {
             target: 'releng/docker/xtext-web-deploy/xtext-web',
             flatten: true
           ]);
+          step ([$class: 'CopyArtifact',
+            projectName: 'xtext-web/master',
+            filter: "org.eclipse.xtext.web.example.jetty/build/libs/test-files.zip",
+            target: 'releng/docker/xtext-web-deploy/xtext-web',
+            flatten: true
+          ]);
+        }
+        dir("releng/docker/xtext-web-deploy/xtext-web") {
+          sh "unzip test-files.zip"
         }
         sh "ls -lah releng/docker/xtext-web-deploy/xtext-web"
       }
