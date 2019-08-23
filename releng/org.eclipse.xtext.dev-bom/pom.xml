@@ -270,6 +270,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.lsp4j</groupId>
+				<artifactId>org.eclipse.lsp4j.websocket</artifactId>
+				<version>${lsp4j-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.lsp4j</groupId>
 				<artifactId>org.eclipse.lsp4j.jsonrpc</artifactId>
 				<version>${lsp4j-version}</version>
 			</dependency>
