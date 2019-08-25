@@ -15,7 +15,7 @@ import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder.CallHi
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.junit4.ide.AbstractHierarchyBuilderTest
-import org.eclipse.xtext.tests.XtextInjectorProvider
+import org.eclipse.xtext.xtext.ui.XtextInjectorProvider
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyBuilder
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNode
 import org.junit.Test

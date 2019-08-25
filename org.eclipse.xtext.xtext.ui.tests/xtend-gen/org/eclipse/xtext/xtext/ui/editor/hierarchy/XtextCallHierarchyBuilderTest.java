@@ -19,7 +19,6 @@ import org.eclipse.xtext.junit4.ide.AbstractHierarchyBuilderTest;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.tests.XtextInjectorProvider;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyBuilder;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNode;
 import org.eclipse.xtext.ui.testing.util.LineDelimiters;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.ui.XtextInjectorProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
