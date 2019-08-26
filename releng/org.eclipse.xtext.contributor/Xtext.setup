@@ -774,25 +774,25 @@
             versionRange="[4.12.0,4.13.0)"/>
         <requirement
             name="org.junit.jupiter.api"
-            versionRange="[5.1.0,5.5.0)"/>
+            versionRange="[5.1.0,5.6.0)"/>
         <requirement
             name="org.junit.jupiter.engine"
-            versionRange="[5.1.0,5.5.0)"/>
+            versionRange="[5.1.0,5.6.0)"/>
         <requirement
             name="org.junit.platform.commons"
-            versionRange="[1.1.0,1.5.0)"/>
+            versionRange="[1.1.0,1.6.0)"/>
         <requirement
             name="org.junit.platform.engine"
-            versionRange="[1.1.0,1.5.0)"/>
+            versionRange="[1.1.0,1.6.0)"/>
         <requirement
             name="org.junit.platform.launcher"
-            versionRange="[1.1.0,1.5.0)"/>
+            versionRange="[1.1.0,1.6.0)"/>
         <requirement
             name="org.junit.platform.runner"
-            versionRange="[1.1.0,1.5.0)"/>
+            versionRange="[1.1.0,1.6.0)"/>
         <requirement
             name="org.opentest4j"
-            versionRange="[1.0.0,1.2.0)"/>
+            versionRange="[1.0.0,1.3.0)"/>
         <requirement
             name="com.google.guava"
             versionRange="[27.1.0,28.0.0)"/>
