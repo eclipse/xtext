@@ -10,7 +10,7 @@
 	<properties>
 		<tycho-version>1.4.0</tycho-version>
 		<!-- version of the "bootstrap" plugin; used to compile xtend sources in xtend -->
-		<xtend-maven-plugin-version>2.19.0.M1</xtend-maven-plugin-version>
+		<xtend-maven-plugin-version>2.19.0.M3</xtend-maven-plugin-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
