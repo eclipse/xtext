@@ -79,6 +79,15 @@ eclipse {
 				if (source.kind == 'output') {
 					source.path = 'bin/main'
 				}
+				if (source.kind == 'src' && (
+					source.path.endsWith('longrunning/src')
+					|| source.path.endsWith('longrunning/xtend-gen')
+					||source.path.endsWith('suites')
+					||source.path.endsWith('smoke-suites')
+					)
+				) {
+					source.entryAttributes['test'] = 'true'
+				}
 			}
 		}
 	}
