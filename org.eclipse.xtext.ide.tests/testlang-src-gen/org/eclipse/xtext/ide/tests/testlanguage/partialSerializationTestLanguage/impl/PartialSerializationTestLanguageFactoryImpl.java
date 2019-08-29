@@ -86,6 +86,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
       case PartialSerializationTestLanguagePackage.IMPORT: return createImport();
       case PartialSerializationTestLanguagePackage.NODE: return createNode();
       case PartialSerializationTestLanguagePackage.ECLASS_REF: return createEClassRef();
+      case PartialSerializationTestLanguagePackage.WITH_TRANSIENT_CONTAINER: return createWithTransientContainer();
       case PartialSerializationTestLanguagePackage.MANY_VALUES: return createManyValues();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -277,6 +278,17 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
   {
     EClassRefImpl eClassRef = new EClassRefImpl();
     return eClassRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public WithTransientContainer createWithTransientContainer()
+  {
+    WithTransientContainerImpl withTransientContainer = new WithTransientContainerImpl();
+    return withTransientContainer;
   }
 
   /**

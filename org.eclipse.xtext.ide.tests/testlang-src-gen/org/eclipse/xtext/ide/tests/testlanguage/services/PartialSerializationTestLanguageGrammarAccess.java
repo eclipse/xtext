@@ -74,6 +74,9 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		private final Group cGroup_13 = (Group)cAlternatives.eContents().get(13);
 		private final Keyword cNumberSignDigitTwoDigitFourKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
 		private final RuleCall cTwoChildsParserRuleCall_13_1 = (RuleCall)cGroup_13.eContents().get(1);
+		private final Group cGroup_14 = (Group)cAlternatives.eContents().get(14);
+		private final Keyword cNumberSignDigitThreeDigitZeroKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
+		private final RuleCall cWithTransientContainerParserRuleCall_14_1 = (RuleCall)cGroup_14.eContents().get(1);
 		
 		//Model:
 		//	"#1" Node |
@@ -90,12 +93,14 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//	"#21" EClassRef |
 		//	"#22" TwoChildLists |
 		//	"#23" ChildWithSubChilds |
-		//	"#24" TwoChilds;
+		//	"#24" TwoChilds |
+		//	"#30" WithTransientContainer;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#1" Node | "#2" MandatoryValue | "#3" OptionalValue | "#4" MandatoryChild | "#5" OptionalChild | "#10"
 		//ManyOptionalValues | "#11" ManyMandatoryValues | "#12" MandatoryChildList | "#13" OptionalChildList | //	"#14" Imports |
-		//"#20" clazz+=EClassDecl+ | "#21" EClassRef | "#22" TwoChildLists | "#23" ChildWithSubChilds | "#24" TwoChilds
+		//"#20" clazz+=EClassDecl+ | "#21" EClassRef | "#22" TwoChildLists | "#23" ChildWithSubChilds | "#24" TwoChilds | "#30"
+		//WithTransientContainer
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//"#1" Node
@@ -228,6 +233,15 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//TwoChilds
 		public RuleCall getTwoChildsParserRuleCall_13_1() { return cTwoChildsParserRuleCall_13_1; }
+		
+		//"#30" WithTransientContainer
+		public Group getGroup_14() { return cGroup_14; }
+		
+		//"#30"
+		public Keyword getNumberSignDigitThreeDigitZeroKeyword_14_0() { return cNumberSignDigitThreeDigitZeroKeyword_14_0; }
+		
+		//WithTransientContainer
+		public RuleCall getWithTransientContainerParserRuleCall_14_1() { return cWithTransientContainerParserRuleCall_14_1; }
 	}
 	public class MandatoryValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.MandatoryValue");
@@ -646,7 +660,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//QualifiedName
 		public RuleCall getRefsNodeQualifiedNameParserRuleCall_3_1_0_1() { return cRefsNodeQualifiedNameParserRuleCall_3_1_0_1; }
 		
-		//"{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";"
+		//("{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}" | ";")
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//"{" children+=Node* ("ref" ref=[Node|QualifiedName])? "}"
@@ -743,6 +757,36 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//QualifiedName
 		public RuleCall getRefEClassQualifiedNameParserRuleCall_0_1() { return cRefEClassQualifiedNameParserRuleCall_0_1; }
 	}
+	public class WithTransientContainerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.WithTransientContainer");
+		private final Assignment cChildAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cChildWithTransientParserRuleCall_0 = (RuleCall)cChildAssignment.eContents().get(0);
+		
+		//WithTransientContainer:
+		//	child=WithTransient;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//child=WithTransient
+		public Assignment getChildAssignment() { return cChildAssignment; }
+		
+		//WithTransient
+		public RuleCall getChildWithTransientParserRuleCall_0() { return cChildWithTransientParserRuleCall_0; }
+	}
+	public class WithTransientElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.WithTransient");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//WithTransient withtransient::WithTransient:
+		//	name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+	}
 	
 	
 	private final ModelElements pModel;
@@ -764,6 +808,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	private final QualifiedNameElements pQualifiedName;
 	private final EClassDeclElements pEClassDecl;
 	private final EClassRefElements pEClassRef;
+	private final WithTransientContainerElements pWithTransientContainer;
+	private final WithTransientElements pWithTransient;
 	
 	private final Grammar grammar;
 	
@@ -793,6 +839,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pEClassDecl = new EClassDeclElements();
 		this.pEClassRef = new EClassRefElements();
+		this.pWithTransientContainer = new WithTransientContainerElements();
+		this.pWithTransient = new WithTransientElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -837,7 +885,8 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	//	"#21" EClassRef |
 	//	"#22" TwoChildLists |
 	//	"#23" ChildWithSubChilds |
-	//	"#24" TwoChilds;
+	//	"#24" TwoChilds |
+	//	"#30" WithTransientContainer;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1035,6 +1084,26 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	
 	public ParserRule getEClassRefRule() {
 		return getEClassRefAccess().getRule();
+	}
+	
+	//WithTransientContainer:
+	//	child=WithTransient;
+	public WithTransientContainerElements getWithTransientContainerAccess() {
+		return pWithTransientContainer;
+	}
+	
+	public ParserRule getWithTransientContainerRule() {
+		return getWithTransientContainerAccess().getRule();
+	}
+	
+	//WithTransient withtransient::WithTransient:
+	//	name=ID;
+	public WithTransientElements getWithTransientAccess() {
+		return pWithTransient;
+	}
+	
+	public ParserRule getWithTransientRule() {
+		return getWithTransientAccess().getRule();
 	}
 	
 	//terminal ID:

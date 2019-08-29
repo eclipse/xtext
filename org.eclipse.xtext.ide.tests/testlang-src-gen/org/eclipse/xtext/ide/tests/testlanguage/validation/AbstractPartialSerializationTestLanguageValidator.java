@@ -19,6 +19,7 @@ public abstract class AbstractPartialSerializationTestLanguageValidator extends 
 		List<EPackage> result = new ArrayList<EPackage>();
 		result.add(org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage.eINSTANCE);
 		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/emf/2002/Ecore"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/ide/tests/testlanguage/mm/withtransient"));
 		return result;
 	}
 }

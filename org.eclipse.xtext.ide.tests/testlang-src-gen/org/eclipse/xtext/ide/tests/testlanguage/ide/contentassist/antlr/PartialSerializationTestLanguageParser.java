@@ -51,6 +51,7 @@ public class PartialSerializationTestLanguageParser extends AbstractPartialConte
 			builder.put(grammarAccess.getModelAccess().getGroup_11(), "rule__Model__Group_11__0");
 			builder.put(grammarAccess.getModelAccess().getGroup_12(), "rule__Model__Group_12__0");
 			builder.put(grammarAccess.getModelAccess().getGroup_13(), "rule__Model__Group_13__0");
+			builder.put(grammarAccess.getModelAccess().getGroup_14(), "rule__Model__Group_14__0");
 			builder.put(grammarAccess.getOptionalValueAccess().getGroup(), "rule__OptionalValue__Group__0");
 			builder.put(grammarAccess.getManyOptionalValuesAccess().getGroup(), "rule__ManyOptionalValues__Group__0");
 			builder.put(grammarAccess.getOptionalChildAccess().getGroup(), "rule__OptionalChild__Group__0");
@@ -90,6 +91,8 @@ public class PartialSerializationTestLanguageParser extends AbstractPartialConte
 			builder.put(grammarAccess.getNodeAccess().getRefAssignment_4_0_2_1(), "rule__Node__RefAssignment_4_0_2_1");
 			builder.put(grammarAccess.getEClassDeclAccess().getNameAssignment(), "rule__EClassDecl__NameAssignment");
 			builder.put(grammarAccess.getEClassRefAccess().getRefAssignment(), "rule__EClassRef__RefAssignment");
+			builder.put(grammarAccess.getWithTransientContainerAccess().getChildAssignment(), "rule__WithTransientContainer__ChildAssignment");
+			builder.put(grammarAccess.getWithTransientAccess().getNameAssignment(), "rule__WithTransient__NameAssignment");
 		}
 	}
 	

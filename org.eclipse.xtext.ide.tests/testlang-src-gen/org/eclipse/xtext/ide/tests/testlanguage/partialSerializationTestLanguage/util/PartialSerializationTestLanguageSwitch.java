@@ -209,6 +209,14 @@ public class PartialSerializationTestLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case PartialSerializationTestLanguagePackage.WITH_TRANSIENT_CONTAINER:
+      {
+        WithTransientContainer withTransientContainer = (WithTransientContainer)theEObject;
+        T result = caseWithTransientContainer(withTransientContainer);
+        if (result == null) result = caseModel(withTransientContainer);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case PartialSerializationTestLanguagePackage.MANY_VALUES:
       {
         ManyValues manyValues = (ManyValues)theEObject;
@@ -490,6 +498,22 @@ public class PartialSerializationTestLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEClassRef(EClassRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>With Transient Container</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>With Transient Container</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWithTransientContainer(WithTransientContainer object)
   {
     return null;
   }

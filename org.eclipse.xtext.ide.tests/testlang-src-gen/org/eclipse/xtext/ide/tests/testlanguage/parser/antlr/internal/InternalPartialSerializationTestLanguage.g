@@ -300,6 +300,21 @@ ruleModel returns [EObject current=null]
 				afterParserOrEnumRuleCall();
 			}
 		)
+		    |
+		(
+			otherlv_28='#30'
+			{
+				newLeafNode(otherlv_28, grammarAccess.getModelAccess().getNumberSignDigitThreeDigitZeroKeyword_14_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getWithTransientContainerParserRuleCall_14_1());
+			}
+			this_WithTransientContainer_29=ruleWithTransientContainer
+			{
+				$current = $this_WithTransientContainer_29.current;
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -1209,6 +1224,77 @@ ruleEClassRef returns [EObject current=null]
 			ruleQualifiedName
 			{
 				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleWithTransientContainer
+entryRuleWithTransientContainer returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getWithTransientContainerRule()); }
+	iv_ruleWithTransientContainer=ruleWithTransientContainer
+	{ $current=$iv_ruleWithTransientContainer.current; }
+	EOF;
+
+// Rule WithTransientContainer
+ruleWithTransientContainer returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getWithTransientContainerAccess().getChildWithTransientParserRuleCall_0());
+			}
+			lv_child_0_0=ruleWithTransient
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getWithTransientContainerRule());
+				}
+				set(
+					$current,
+					"child",
+					lv_child_0_0,
+					"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.WithTransient");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleWithTransient
+entryRuleWithTransient returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getWithTransientRule()); }
+	iv_ruleWithTransient=ruleWithTransient
+	{ $current=$iv_ruleWithTransient.current; }
+	EOF;
+
+// Rule WithTransient
+ruleWithTransient returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_ID
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getWithTransientAccess().getNameIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getWithTransientRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
 			}
 		)
 	)

@@ -97,6 +97,7 @@ Workflow {
 		}
 		language = StandardLanguage {
 			referencedResource = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			referencedResource = "platform:/resource/org.eclipse.xtext.ide.tests/testlang-src/org/eclipse/xtext/ide/tests/testlanguage/WithTransient.genmodel"
 			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage"
 			fileExtensions = "pstl"
 			serializer = {
@@ -129,5 +130,10 @@ Workflow {
 			}
 			
 		}
+	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		genModel = "platform:/resource/org.eclipse.xtext.ide.tests/testlang-src/org/eclipse/xtext/ide/tests/testlanguage/WithTransient.genmodel"
+		srcPath = "platform./resource/${baseName}/testlang-src-gen" 
 	}
 }

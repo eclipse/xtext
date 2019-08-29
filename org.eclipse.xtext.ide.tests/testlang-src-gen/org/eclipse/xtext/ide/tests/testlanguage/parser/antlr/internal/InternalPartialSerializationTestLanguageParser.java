@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalPartialSerializationTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'#3'", "'#4'", "'#5'", "'#10'", "'#11'", "'#12'", "'#13'", "'#20'", "'#21'", "'#22'", "'#23'", "'#24'", "'kw1'", "'kw2'", "'{'", "'children1'", "'}'", "'direct'", "':'", "'child'", "'subs'", "'import'", "'refs'", "'ref'", "';'", "'.'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'#1'", "'#2'", "'#3'", "'#4'", "'#5'", "'#10'", "'#11'", "'#12'", "'#13'", "'#20'", "'#21'", "'#22'", "'#23'", "'#24'", "'#30'", "'kw1'", "'kw2'", "'{'", "'children1'", "'}'", "'direct'", "':'", "'child'", "'subs'", "'import'", "'refs'", "'ref'", "';'", "'.'"
     };
     public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=8;
@@ -31,6 +31,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
     public static final int T__16=16;
     public static final int T__38=38;
     public static final int T__17=17;
+    public static final int T__39=39;
     public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__33=33;
@@ -136,7 +137,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleModel"
-    // InternalPartialSerializationTestLanguage.g:75:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) ) ;
+    // InternalPartialSerializationTestLanguage.g:75:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) | (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -154,6 +155,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         Token otherlv_22=null;
         Token otherlv_24=null;
         Token otherlv_26=null;
+        Token otherlv_28=null;
         EObject this_Node_1 = null;
 
         EObject this_MandatoryValue_3 = null;
@@ -182,16 +184,18 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
         EObject this_TwoChilds_27 = null;
 
+        EObject this_WithTransientContainer_29 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:81:2: ( ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) ) )
-            // InternalPartialSerializationTestLanguage.g:82:2: ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) )
+            // InternalPartialSerializationTestLanguage.g:81:2: ( ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) | (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer ) ) )
+            // InternalPartialSerializationTestLanguage.g:82:2: ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) | (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer ) )
             {
-            // InternalPartialSerializationTestLanguage.g:82:2: ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) )
-            int alt2=14;
+            // InternalPartialSerializationTestLanguage.g:82:2: ( (otherlv_0= '#1' this_Node_1= ruleNode ) | (otherlv_2= '#2' this_MandatoryValue_3= ruleMandatoryValue ) | (otherlv_4= '#3' this_OptionalValue_5= ruleOptionalValue ) | (otherlv_6= '#4' this_MandatoryChild_7= ruleMandatoryChild ) | (otherlv_8= '#5' this_OptionalChild_9= ruleOptionalChild ) | (otherlv_10= '#10' this_ManyOptionalValues_11= ruleManyOptionalValues ) | (otherlv_12= '#11' this_ManyMandatoryValues_13= ruleManyMandatoryValues ) | (otherlv_14= '#12' this_MandatoryChildList_15= ruleMandatoryChildList ) | (otherlv_16= '#13' this_OptionalChildList_17= ruleOptionalChildList ) | (otherlv_18= '#20' ( (lv_clazz_19_0= ruleEClassDecl ) )+ ) | (otherlv_20= '#21' this_EClassRef_21= ruleEClassRef ) | (otherlv_22= '#22' this_TwoChildLists_23= ruleTwoChildLists ) | (otherlv_24= '#23' this_ChildWithSubChilds_25= ruleChildWithSubChilds ) | (otherlv_26= '#24' this_TwoChilds_27= ruleTwoChilds ) | (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer ) )
+            int alt2=15;
             switch ( input.LA(1) ) {
             case 11:
                 {
@@ -261,6 +265,11 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             case 24:
                 {
                 alt2=14;
+                }
+                break;
+            case 25:
+                {
+                alt2=15;
                 }
                 break;
             default:
@@ -705,6 +714,34 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                     }
                     break;
+                case 15 :
+                    // InternalPartialSerializationTestLanguage.g:304:3: (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer )
+                    {
+                    // InternalPartialSerializationTestLanguage.g:304:3: (otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer )
+                    // InternalPartialSerializationTestLanguage.g:305:4: otherlv_28= '#30' this_WithTransientContainer_29= ruleWithTransientContainer
+                    {
+                    otherlv_28=(Token)match(input,25,FOLLOW_4); 
+
+                    				newLeafNode(otherlv_28, grammarAccess.getModelAccess().getNumberSignDigitThreeDigitZeroKeyword_14_0());
+                    			
+
+                    				newCompositeNode(grammarAccess.getModelAccess().getWithTransientContainerParserRuleCall_14_1());
+                    			
+                    pushFollow(FOLLOW_2);
+                    this_WithTransientContainer_29=ruleWithTransientContainer();
+
+                    state._fsp--;
+
+
+                    				current = this_WithTransientContainer_29;
+                    				afterParserOrEnumRuleCall();
+                    			
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -728,7 +765,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleMandatoryValue"
-    // InternalPartialSerializationTestLanguage.g:307:1: entryRuleMandatoryValue returns [EObject current=null] : iv_ruleMandatoryValue= ruleMandatoryValue EOF ;
+    // InternalPartialSerializationTestLanguage.g:322:1: entryRuleMandatoryValue returns [EObject current=null] : iv_ruleMandatoryValue= ruleMandatoryValue EOF ;
     public final EObject entryRuleMandatoryValue() throws RecognitionException {
         EObject current = null;
 
@@ -736,8 +773,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:307:55: (iv_ruleMandatoryValue= ruleMandatoryValue EOF )
-            // InternalPartialSerializationTestLanguage.g:308:2: iv_ruleMandatoryValue= ruleMandatoryValue EOF
+            // InternalPartialSerializationTestLanguage.g:322:55: (iv_ruleMandatoryValue= ruleMandatoryValue EOF )
+            // InternalPartialSerializationTestLanguage.g:323:2: iv_ruleMandatoryValue= ruleMandatoryValue EOF
             {
              newCompositeNode(grammarAccess.getMandatoryValueRule()); 
             pushFollow(FOLLOW_1);
@@ -764,7 +801,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleMandatoryValue"
-    // InternalPartialSerializationTestLanguage.g:314:1: ruleMandatoryValue returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalPartialSerializationTestLanguage.g:329:1: ruleMandatoryValue returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleMandatoryValue() throws RecognitionException {
         EObject current = null;
 
@@ -774,14 +811,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:320:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalPartialSerializationTestLanguage.g:321:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:335:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalPartialSerializationTestLanguage.g:336:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalPartialSerializationTestLanguage.g:321:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalPartialSerializationTestLanguage.g:322:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:336:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:337:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalPartialSerializationTestLanguage.g:322:3: (lv_name_0_0= RULE_ID )
-            // InternalPartialSerializationTestLanguage.g:323:4: lv_name_0_0= RULE_ID
+            // InternalPartialSerializationTestLanguage.g:337:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:338:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -823,7 +860,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleOptionalValue"
-    // InternalPartialSerializationTestLanguage.g:342:1: entryRuleOptionalValue returns [EObject current=null] : iv_ruleOptionalValue= ruleOptionalValue EOF ;
+    // InternalPartialSerializationTestLanguage.g:357:1: entryRuleOptionalValue returns [EObject current=null] : iv_ruleOptionalValue= ruleOptionalValue EOF ;
     public final EObject entryRuleOptionalValue() throws RecognitionException {
         EObject current = null;
 
@@ -831,8 +868,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:342:54: (iv_ruleOptionalValue= ruleOptionalValue EOF )
-            // InternalPartialSerializationTestLanguage.g:343:2: iv_ruleOptionalValue= ruleOptionalValue EOF
+            // InternalPartialSerializationTestLanguage.g:357:54: (iv_ruleOptionalValue= ruleOptionalValue EOF )
+            // InternalPartialSerializationTestLanguage.g:358:2: iv_ruleOptionalValue= ruleOptionalValue EOF
             {
              newCompositeNode(grammarAccess.getOptionalValueRule()); 
             pushFollow(FOLLOW_1);
@@ -859,7 +896,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleOptionalValue"
-    // InternalPartialSerializationTestLanguage.g:349:1: ruleOptionalValue returns [EObject current=null] : ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? ) ;
+    // InternalPartialSerializationTestLanguage.g:364:1: ruleOptionalValue returns [EObject current=null] : ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? ) ;
     public final EObject ruleOptionalValue() throws RecognitionException {
         EObject current = null;
 
@@ -871,14 +908,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:355:2: ( ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? ) )
-            // InternalPartialSerializationTestLanguage.g:356:2: ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? )
+            // InternalPartialSerializationTestLanguage.g:370:2: ( ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? ) )
+            // InternalPartialSerializationTestLanguage.g:371:2: ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? )
             {
-            // InternalPartialSerializationTestLanguage.g:356:2: ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? )
-            // InternalPartialSerializationTestLanguage.g:357:3: () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )?
+            // InternalPartialSerializationTestLanguage.g:371:2: ( () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )? )
+            // InternalPartialSerializationTestLanguage.g:372:3: () (otherlv_1= 'kw1' )? ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'kw2' )?
             {
-            // InternalPartialSerializationTestLanguage.g:357:3: ()
-            // InternalPartialSerializationTestLanguage.g:358:4: 
+            // InternalPartialSerializationTestLanguage.g:372:3: ()
+            // InternalPartialSerializationTestLanguage.g:373:4: 
             {
 
             				current = forceCreateModelElement(
@@ -888,18 +925,18 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:364:3: (otherlv_1= 'kw1' )?
+            // InternalPartialSerializationTestLanguage.g:379:3: (otherlv_1= 'kw1' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==25) ) {
+            if ( (LA3_0==26) ) {
                 alt3=1;
             }
             switch (alt3) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:365:4: otherlv_1= 'kw1'
+                    // InternalPartialSerializationTestLanguage.g:380:4: otherlv_1= 'kw1'
                     {
-                    otherlv_1=(Token)match(input,25,FOLLOW_10); 
+                    otherlv_1=(Token)match(input,26,FOLLOW_10); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getOptionalValueAccess().getKw1Keyword_1());
                     			
@@ -909,7 +946,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:370:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalPartialSerializationTestLanguage.g:385:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -918,10 +955,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt4) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:371:4: (lv_name_2_0= RULE_ID )
+                    // InternalPartialSerializationTestLanguage.g:386:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalPartialSerializationTestLanguage.g:371:4: (lv_name_2_0= RULE_ID )
-                    // InternalPartialSerializationTestLanguage.g:372:5: lv_name_2_0= RULE_ID
+                    // InternalPartialSerializationTestLanguage.g:386:4: (lv_name_2_0= RULE_ID )
+                    // InternalPartialSerializationTestLanguage.g:387:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_11); 
 
@@ -946,18 +983,18 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:388:3: (otherlv_3= 'kw2' )?
+            // InternalPartialSerializationTestLanguage.g:403:3: (otherlv_3= 'kw2' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==26) ) {
+            if ( (LA5_0==27) ) {
                 alt5=1;
             }
             switch (alt5) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:389:4: otherlv_3= 'kw2'
+                    // InternalPartialSerializationTestLanguage.g:404:4: otherlv_3= 'kw2'
                     {
-                    otherlv_3=(Token)match(input,26,FOLLOW_2); 
+                    otherlv_3=(Token)match(input,27,FOLLOW_2); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getOptionalValueAccess().getKw2Keyword_3());
                     			
@@ -990,7 +1027,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleManyOptionalValues"
-    // InternalPartialSerializationTestLanguage.g:398:1: entryRuleManyOptionalValues returns [EObject current=null] : iv_ruleManyOptionalValues= ruleManyOptionalValues EOF ;
+    // InternalPartialSerializationTestLanguage.g:413:1: entryRuleManyOptionalValues returns [EObject current=null] : iv_ruleManyOptionalValues= ruleManyOptionalValues EOF ;
     public final EObject entryRuleManyOptionalValues() throws RecognitionException {
         EObject current = null;
 
@@ -998,8 +1035,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:398:59: (iv_ruleManyOptionalValues= ruleManyOptionalValues EOF )
-            // InternalPartialSerializationTestLanguage.g:399:2: iv_ruleManyOptionalValues= ruleManyOptionalValues EOF
+            // InternalPartialSerializationTestLanguage.g:413:59: (iv_ruleManyOptionalValues= ruleManyOptionalValues EOF )
+            // InternalPartialSerializationTestLanguage.g:414:2: iv_ruleManyOptionalValues= ruleManyOptionalValues EOF
             {
              newCompositeNode(grammarAccess.getManyOptionalValuesRule()); 
             pushFollow(FOLLOW_1);
@@ -1026,7 +1063,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleManyOptionalValues"
-    // InternalPartialSerializationTestLanguage.g:405:1: ruleManyOptionalValues returns [EObject current=null] : ( () ( (lv_name_1_0= RULE_ID ) )* ) ;
+    // InternalPartialSerializationTestLanguage.g:420:1: ruleManyOptionalValues returns [EObject current=null] : ( () ( (lv_name_1_0= RULE_ID ) )* ) ;
     public final EObject ruleManyOptionalValues() throws RecognitionException {
         EObject current = null;
 
@@ -1036,14 +1073,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:411:2: ( ( () ( (lv_name_1_0= RULE_ID ) )* ) )
-            // InternalPartialSerializationTestLanguage.g:412:2: ( () ( (lv_name_1_0= RULE_ID ) )* )
+            // InternalPartialSerializationTestLanguage.g:426:2: ( ( () ( (lv_name_1_0= RULE_ID ) )* ) )
+            // InternalPartialSerializationTestLanguage.g:427:2: ( () ( (lv_name_1_0= RULE_ID ) )* )
             {
-            // InternalPartialSerializationTestLanguage.g:412:2: ( () ( (lv_name_1_0= RULE_ID ) )* )
-            // InternalPartialSerializationTestLanguage.g:413:3: () ( (lv_name_1_0= RULE_ID ) )*
+            // InternalPartialSerializationTestLanguage.g:427:2: ( () ( (lv_name_1_0= RULE_ID ) )* )
+            // InternalPartialSerializationTestLanguage.g:428:3: () ( (lv_name_1_0= RULE_ID ) )*
             {
-            // InternalPartialSerializationTestLanguage.g:413:3: ()
-            // InternalPartialSerializationTestLanguage.g:414:4: 
+            // InternalPartialSerializationTestLanguage.g:428:3: ()
+            // InternalPartialSerializationTestLanguage.g:429:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1053,7 +1090,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:420:3: ( (lv_name_1_0= RULE_ID ) )*
+            // InternalPartialSerializationTestLanguage.g:435:3: ( (lv_name_1_0= RULE_ID ) )*
             loop6:
             do {
                 int alt6=2;
@@ -1066,10 +1103,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:421:4: (lv_name_1_0= RULE_ID )
+            	    // InternalPartialSerializationTestLanguage.g:436:4: (lv_name_1_0= RULE_ID )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:421:4: (lv_name_1_0= RULE_ID )
-            	    // InternalPartialSerializationTestLanguage.g:422:5: lv_name_1_0= RULE_ID
+            	    // InternalPartialSerializationTestLanguage.g:436:4: (lv_name_1_0= RULE_ID )
+            	    // InternalPartialSerializationTestLanguage.g:437:5: lv_name_1_0= RULE_ID
             	    {
             	    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_6); 
 
@@ -1120,7 +1157,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleManyMandatoryValues"
-    // InternalPartialSerializationTestLanguage.g:442:1: entryRuleManyMandatoryValues returns [EObject current=null] : iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF ;
+    // InternalPartialSerializationTestLanguage.g:457:1: entryRuleManyMandatoryValues returns [EObject current=null] : iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF ;
     public final EObject entryRuleManyMandatoryValues() throws RecognitionException {
         EObject current = null;
 
@@ -1128,8 +1165,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:442:60: (iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF )
-            // InternalPartialSerializationTestLanguage.g:443:2: iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF
+            // InternalPartialSerializationTestLanguage.g:457:60: (iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF )
+            // InternalPartialSerializationTestLanguage.g:458:2: iv_ruleManyMandatoryValues= ruleManyMandatoryValues EOF
             {
              newCompositeNode(grammarAccess.getManyMandatoryValuesRule()); 
             pushFollow(FOLLOW_1);
@@ -1156,7 +1193,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleManyMandatoryValues"
-    // InternalPartialSerializationTestLanguage.g:449:1: ruleManyMandatoryValues returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) )+ ;
+    // InternalPartialSerializationTestLanguage.g:464:1: ruleManyMandatoryValues returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) )+ ;
     public final EObject ruleManyMandatoryValues() throws RecognitionException {
         EObject current = null;
 
@@ -1166,10 +1203,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:455:2: ( ( (lv_name_0_0= RULE_ID ) )+ )
-            // InternalPartialSerializationTestLanguage.g:456:2: ( (lv_name_0_0= RULE_ID ) )+
+            // InternalPartialSerializationTestLanguage.g:470:2: ( ( (lv_name_0_0= RULE_ID ) )+ )
+            // InternalPartialSerializationTestLanguage.g:471:2: ( (lv_name_0_0= RULE_ID ) )+
             {
-            // InternalPartialSerializationTestLanguage.g:456:2: ( (lv_name_0_0= RULE_ID ) )+
+            // InternalPartialSerializationTestLanguage.g:471:2: ( (lv_name_0_0= RULE_ID ) )+
             int cnt7=0;
             loop7:
             do {
@@ -1183,10 +1220,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:457:3: (lv_name_0_0= RULE_ID )
+            	    // InternalPartialSerializationTestLanguage.g:472:3: (lv_name_0_0= RULE_ID )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:457:3: (lv_name_0_0= RULE_ID )
-            	    // InternalPartialSerializationTestLanguage.g:458:4: lv_name_0_0= RULE_ID
+            	    // InternalPartialSerializationTestLanguage.g:472:3: (lv_name_0_0= RULE_ID )
+            	    // InternalPartialSerializationTestLanguage.g:473:4: lv_name_0_0= RULE_ID
             	    {
             	    lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_6); 
 
@@ -1238,7 +1275,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleMandatoryChild"
-    // InternalPartialSerializationTestLanguage.g:477:1: entryRuleMandatoryChild returns [EObject current=null] : iv_ruleMandatoryChild= ruleMandatoryChild EOF ;
+    // InternalPartialSerializationTestLanguage.g:492:1: entryRuleMandatoryChild returns [EObject current=null] : iv_ruleMandatoryChild= ruleMandatoryChild EOF ;
     public final EObject entryRuleMandatoryChild() throws RecognitionException {
         EObject current = null;
 
@@ -1246,8 +1283,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:477:55: (iv_ruleMandatoryChild= ruleMandatoryChild EOF )
-            // InternalPartialSerializationTestLanguage.g:478:2: iv_ruleMandatoryChild= ruleMandatoryChild EOF
+            // InternalPartialSerializationTestLanguage.g:492:55: (iv_ruleMandatoryChild= ruleMandatoryChild EOF )
+            // InternalPartialSerializationTestLanguage.g:493:2: iv_ruleMandatoryChild= ruleMandatoryChild EOF
             {
              newCompositeNode(grammarAccess.getMandatoryChildRule()); 
             pushFollow(FOLLOW_1);
@@ -1274,7 +1311,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleMandatoryChild"
-    // InternalPartialSerializationTestLanguage.g:484:1: ruleMandatoryChild returns [EObject current=null] : ( (lv_child_0_0= ruleMandatoryValue ) ) ;
+    // InternalPartialSerializationTestLanguage.g:499:1: ruleMandatoryChild returns [EObject current=null] : ( (lv_child_0_0= ruleMandatoryValue ) ) ;
     public final EObject ruleMandatoryChild() throws RecognitionException {
         EObject current = null;
 
@@ -1285,14 +1322,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:490:2: ( ( (lv_child_0_0= ruleMandatoryValue ) ) )
-            // InternalPartialSerializationTestLanguage.g:491:2: ( (lv_child_0_0= ruleMandatoryValue ) )
+            // InternalPartialSerializationTestLanguage.g:505:2: ( ( (lv_child_0_0= ruleMandatoryValue ) ) )
+            // InternalPartialSerializationTestLanguage.g:506:2: ( (lv_child_0_0= ruleMandatoryValue ) )
             {
-            // InternalPartialSerializationTestLanguage.g:491:2: ( (lv_child_0_0= ruleMandatoryValue ) )
-            // InternalPartialSerializationTestLanguage.g:492:3: (lv_child_0_0= ruleMandatoryValue )
+            // InternalPartialSerializationTestLanguage.g:506:2: ( (lv_child_0_0= ruleMandatoryValue ) )
+            // InternalPartialSerializationTestLanguage.g:507:3: (lv_child_0_0= ruleMandatoryValue )
             {
-            // InternalPartialSerializationTestLanguage.g:492:3: (lv_child_0_0= ruleMandatoryValue )
-            // InternalPartialSerializationTestLanguage.g:493:4: lv_child_0_0= ruleMandatoryValue
+            // InternalPartialSerializationTestLanguage.g:507:3: (lv_child_0_0= ruleMandatoryValue )
+            // InternalPartialSerializationTestLanguage.g:508:4: lv_child_0_0= ruleMandatoryValue
             {
 
             				newCompositeNode(grammarAccess.getMandatoryChildAccess().getChildMandatoryValueParserRuleCall_0());
@@ -1339,7 +1376,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleOptionalChild"
-    // InternalPartialSerializationTestLanguage.g:513:1: entryRuleOptionalChild returns [EObject current=null] : iv_ruleOptionalChild= ruleOptionalChild EOF ;
+    // InternalPartialSerializationTestLanguage.g:528:1: entryRuleOptionalChild returns [EObject current=null] : iv_ruleOptionalChild= ruleOptionalChild EOF ;
     public final EObject entryRuleOptionalChild() throws RecognitionException {
         EObject current = null;
 
@@ -1347,8 +1384,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:513:54: (iv_ruleOptionalChild= ruleOptionalChild EOF )
-            // InternalPartialSerializationTestLanguage.g:514:2: iv_ruleOptionalChild= ruleOptionalChild EOF
+            // InternalPartialSerializationTestLanguage.g:528:54: (iv_ruleOptionalChild= ruleOptionalChild EOF )
+            // InternalPartialSerializationTestLanguage.g:529:2: iv_ruleOptionalChild= ruleOptionalChild EOF
             {
              newCompositeNode(grammarAccess.getOptionalChildRule()); 
             pushFollow(FOLLOW_1);
@@ -1375,7 +1412,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleOptionalChild"
-    // InternalPartialSerializationTestLanguage.g:520:1: ruleOptionalChild returns [EObject current=null] : ( () ( (lv_child_1_0= ruleMandatoryValue ) )? ) ;
+    // InternalPartialSerializationTestLanguage.g:535:1: ruleOptionalChild returns [EObject current=null] : ( () ( (lv_child_1_0= ruleMandatoryValue ) )? ) ;
     public final EObject ruleOptionalChild() throws RecognitionException {
         EObject current = null;
 
@@ -1386,14 +1423,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:526:2: ( ( () ( (lv_child_1_0= ruleMandatoryValue ) )? ) )
-            // InternalPartialSerializationTestLanguage.g:527:2: ( () ( (lv_child_1_0= ruleMandatoryValue ) )? )
+            // InternalPartialSerializationTestLanguage.g:541:2: ( ( () ( (lv_child_1_0= ruleMandatoryValue ) )? ) )
+            // InternalPartialSerializationTestLanguage.g:542:2: ( () ( (lv_child_1_0= ruleMandatoryValue ) )? )
             {
-            // InternalPartialSerializationTestLanguage.g:527:2: ( () ( (lv_child_1_0= ruleMandatoryValue ) )? )
-            // InternalPartialSerializationTestLanguage.g:528:3: () ( (lv_child_1_0= ruleMandatoryValue ) )?
+            // InternalPartialSerializationTestLanguage.g:542:2: ( () ( (lv_child_1_0= ruleMandatoryValue ) )? )
+            // InternalPartialSerializationTestLanguage.g:543:3: () ( (lv_child_1_0= ruleMandatoryValue ) )?
             {
-            // InternalPartialSerializationTestLanguage.g:528:3: ()
-            // InternalPartialSerializationTestLanguage.g:529:4: 
+            // InternalPartialSerializationTestLanguage.g:543:3: ()
+            // InternalPartialSerializationTestLanguage.g:544:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1403,7 +1440,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:535:3: ( (lv_child_1_0= ruleMandatoryValue ) )?
+            // InternalPartialSerializationTestLanguage.g:550:3: ( (lv_child_1_0= ruleMandatoryValue ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1412,10 +1449,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt8) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:536:4: (lv_child_1_0= ruleMandatoryValue )
+                    // InternalPartialSerializationTestLanguage.g:551:4: (lv_child_1_0= ruleMandatoryValue )
                     {
-                    // InternalPartialSerializationTestLanguage.g:536:4: (lv_child_1_0= ruleMandatoryValue )
-                    // InternalPartialSerializationTestLanguage.g:537:5: lv_child_1_0= ruleMandatoryValue
+                    // InternalPartialSerializationTestLanguage.g:551:4: (lv_child_1_0= ruleMandatoryValue )
+                    // InternalPartialSerializationTestLanguage.g:552:5: lv_child_1_0= ruleMandatoryValue
                     {
 
                     					newCompositeNode(grammarAccess.getOptionalChildAccess().getChildMandatoryValueParserRuleCall_1_0());
@@ -1468,7 +1505,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleTwoChildLists"
-    // InternalPartialSerializationTestLanguage.g:558:1: entryRuleTwoChildLists returns [EObject current=null] : iv_ruleTwoChildLists= ruleTwoChildLists EOF ;
+    // InternalPartialSerializationTestLanguage.g:573:1: entryRuleTwoChildLists returns [EObject current=null] : iv_ruleTwoChildLists= ruleTwoChildLists EOF ;
     public final EObject entryRuleTwoChildLists() throws RecognitionException {
         EObject current = null;
 
@@ -1476,8 +1513,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:558:54: (iv_ruleTwoChildLists= ruleTwoChildLists EOF )
-            // InternalPartialSerializationTestLanguage.g:559:2: iv_ruleTwoChildLists= ruleTwoChildLists EOF
+            // InternalPartialSerializationTestLanguage.g:573:54: (iv_ruleTwoChildLists= ruleTwoChildLists EOF )
+            // InternalPartialSerializationTestLanguage.g:574:2: iv_ruleTwoChildLists= ruleTwoChildLists EOF
             {
              newCompositeNode(grammarAccess.getTwoChildListsRule()); 
             pushFollow(FOLLOW_1);
@@ -1504,7 +1541,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleTwoChildLists"
-    // InternalPartialSerializationTestLanguage.g:565:1: ruleTwoChildLists returns [EObject current=null] : (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' ) ;
+    // InternalPartialSerializationTestLanguage.g:580:1: ruleTwoChildLists returns [EObject current=null] : (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' ) ;
     public final EObject ruleTwoChildLists() throws RecognitionException {
         EObject current = null;
 
@@ -1522,17 +1559,17 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:571:2: ( (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' ) )
-            // InternalPartialSerializationTestLanguage.g:572:2: (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' )
+            // InternalPartialSerializationTestLanguage.g:586:2: ( (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' ) )
+            // InternalPartialSerializationTestLanguage.g:587:2: (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' )
             {
-            // InternalPartialSerializationTestLanguage.g:572:2: (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' )
-            // InternalPartialSerializationTestLanguage.g:573:3: otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}'
+            // InternalPartialSerializationTestLanguage.g:587:2: (otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}' )
+            // InternalPartialSerializationTestLanguage.g:588:3: otherlv_0= '{' ( (lv_directChildren_1_0= ruleMandatoryValue ) )+ otherlv_2= 'children1' otherlv_3= '{' ( (lv_childsList_4_0= ruleMandatoryChildList ) ) otherlv_5= '}' otherlv_6= '}'
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_4); 
+            otherlv_0=(Token)match(input,28,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTwoChildListsAccess().getLeftCurlyBracketKeyword_0());
             		
-            // InternalPartialSerializationTestLanguage.g:577:3: ( (lv_directChildren_1_0= ruleMandatoryValue ) )+
+            // InternalPartialSerializationTestLanguage.g:592:3: ( (lv_directChildren_1_0= ruleMandatoryValue ) )+
             int cnt9=0;
             loop9:
             do {
@@ -1546,10 +1583,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:578:4: (lv_directChildren_1_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:593:4: (lv_directChildren_1_0= ruleMandatoryValue )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:578:4: (lv_directChildren_1_0= ruleMandatoryValue )
-            	    // InternalPartialSerializationTestLanguage.g:579:5: lv_directChildren_1_0= ruleMandatoryValue
+            	    // InternalPartialSerializationTestLanguage.g:593:4: (lv_directChildren_1_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:594:5: lv_directChildren_1_0= ruleMandatoryValue
             	    {
 
             	    					newCompositeNode(grammarAccess.getTwoChildListsAccess().getDirectChildrenMandatoryValueParserRuleCall_1_0());
@@ -1586,19 +1623,19 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
                 cnt9++;
             } while (true);
 
-            otherlv_2=(Token)match(input,28,FOLLOW_7); 
+            otherlv_2=(Token)match(input,29,FOLLOW_7); 
 
             			newLeafNode(otherlv_2, grammarAccess.getTwoChildListsAccess().getChildren1Keyword_2());
             		
-            otherlv_3=(Token)match(input,27,FOLLOW_4); 
+            otherlv_3=(Token)match(input,28,FOLLOW_4); 
 
             			newLeafNode(otherlv_3, grammarAccess.getTwoChildListsAccess().getLeftCurlyBracketKeyword_3());
             		
-            // InternalPartialSerializationTestLanguage.g:604:3: ( (lv_childsList_4_0= ruleMandatoryChildList ) )
-            // InternalPartialSerializationTestLanguage.g:605:4: (lv_childsList_4_0= ruleMandatoryChildList )
+            // InternalPartialSerializationTestLanguage.g:619:3: ( (lv_childsList_4_0= ruleMandatoryChildList ) )
+            // InternalPartialSerializationTestLanguage.g:620:4: (lv_childsList_4_0= ruleMandatoryChildList )
             {
-            // InternalPartialSerializationTestLanguage.g:605:4: (lv_childsList_4_0= ruleMandatoryChildList )
-            // InternalPartialSerializationTestLanguage.g:606:5: lv_childsList_4_0= ruleMandatoryChildList
+            // InternalPartialSerializationTestLanguage.g:620:4: (lv_childsList_4_0= ruleMandatoryChildList )
+            // InternalPartialSerializationTestLanguage.g:621:5: lv_childsList_4_0= ruleMandatoryChildList
             {
 
             					newCompositeNode(grammarAccess.getTwoChildListsAccess().getChildsListMandatoryChildListParserRuleCall_4_0());
@@ -1625,11 +1662,11 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            otherlv_5=(Token)match(input,29,FOLLOW_13); 
+            otherlv_5=(Token)match(input,30,FOLLOW_13); 
 
             			newLeafNode(otherlv_5, grammarAccess.getTwoChildListsAccess().getRightCurlyBracketKeyword_5());
             		
-            otherlv_6=(Token)match(input,29,FOLLOW_2); 
+            otherlv_6=(Token)match(input,30,FOLLOW_2); 
 
             			newLeafNode(otherlv_6, grammarAccess.getTwoChildListsAccess().getRightCurlyBracketKeyword_6());
             		
@@ -1656,7 +1693,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleTwoChilds"
-    // InternalPartialSerializationTestLanguage.g:635:1: entryRuleTwoChilds returns [EObject current=null] : iv_ruleTwoChilds= ruleTwoChilds EOF ;
+    // InternalPartialSerializationTestLanguage.g:650:1: entryRuleTwoChilds returns [EObject current=null] : iv_ruleTwoChilds= ruleTwoChilds EOF ;
     public final EObject entryRuleTwoChilds() throws RecognitionException {
         EObject current = null;
 
@@ -1664,8 +1701,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:635:50: (iv_ruleTwoChilds= ruleTwoChilds EOF )
-            // InternalPartialSerializationTestLanguage.g:636:2: iv_ruleTwoChilds= ruleTwoChilds EOF
+            // InternalPartialSerializationTestLanguage.g:650:50: (iv_ruleTwoChilds= ruleTwoChilds EOF )
+            // InternalPartialSerializationTestLanguage.g:651:2: iv_ruleTwoChilds= ruleTwoChilds EOF
             {
              newCompositeNode(grammarAccess.getTwoChildsRule()); 
             pushFollow(FOLLOW_1);
@@ -1692,7 +1729,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleTwoChilds"
-    // InternalPartialSerializationTestLanguage.g:642:1: ruleTwoChilds returns [EObject current=null] : ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) ) ;
+    // InternalPartialSerializationTestLanguage.g:657:1: ruleTwoChilds returns [EObject current=null] : ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) ) ;
     public final EObject ruleTwoChilds() throws RecognitionException {
         EObject current = null;
 
@@ -1709,14 +1746,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:648:2: ( ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) ) )
-            // InternalPartialSerializationTestLanguage.g:649:2: ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) )
+            // InternalPartialSerializationTestLanguage.g:663:2: ( ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) ) )
+            // InternalPartialSerializationTestLanguage.g:664:2: ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) )
             {
-            // InternalPartialSerializationTestLanguage.g:649:2: ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) )
-            // InternalPartialSerializationTestLanguage.g:650:3: () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) )
+            // InternalPartialSerializationTestLanguage.g:664:2: ( () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) ) )
+            // InternalPartialSerializationTestLanguage.g:665:3: () otherlv_1= 'direct' otherlv_2= ':' ( (lv_directChild_3_0= ruleMandatoryValue ) )? otherlv_4= 'child' otherlv_5= ':' ( (lv_optChild_6_0= ruleOptionalChild ) )
             {
-            // InternalPartialSerializationTestLanguage.g:650:3: ()
-            // InternalPartialSerializationTestLanguage.g:651:4: 
+            // InternalPartialSerializationTestLanguage.g:665:3: ()
+            // InternalPartialSerializationTestLanguage.g:666:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1726,15 +1763,15 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            otherlv_1=(Token)match(input,30,FOLLOW_14); 
+            otherlv_1=(Token)match(input,31,FOLLOW_14); 
 
             			newLeafNode(otherlv_1, grammarAccess.getTwoChildsAccess().getDirectKeyword_1());
             		
-            otherlv_2=(Token)match(input,31,FOLLOW_15); 
+            otherlv_2=(Token)match(input,32,FOLLOW_15); 
 
             			newLeafNode(otherlv_2, grammarAccess.getTwoChildsAccess().getColonKeyword_2());
             		
-            // InternalPartialSerializationTestLanguage.g:665:3: ( (lv_directChild_3_0= ruleMandatoryValue ) )?
+            // InternalPartialSerializationTestLanguage.g:680:3: ( (lv_directChild_3_0= ruleMandatoryValue ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1743,10 +1780,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt10) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:666:4: (lv_directChild_3_0= ruleMandatoryValue )
+                    // InternalPartialSerializationTestLanguage.g:681:4: (lv_directChild_3_0= ruleMandatoryValue )
                     {
-                    // InternalPartialSerializationTestLanguage.g:666:4: (lv_directChild_3_0= ruleMandatoryValue )
-                    // InternalPartialSerializationTestLanguage.g:667:5: lv_directChild_3_0= ruleMandatoryValue
+                    // InternalPartialSerializationTestLanguage.g:681:4: (lv_directChild_3_0= ruleMandatoryValue )
+                    // InternalPartialSerializationTestLanguage.g:682:5: lv_directChild_3_0= ruleMandatoryValue
                     {
 
                     					newCompositeNode(grammarAccess.getTwoChildsAccess().getDirectChildMandatoryValueParserRuleCall_3_0());
@@ -1776,19 +1813,19 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            otherlv_4=(Token)match(input,32,FOLLOW_14); 
+            otherlv_4=(Token)match(input,33,FOLLOW_14); 
 
             			newLeafNode(otherlv_4, grammarAccess.getTwoChildsAccess().getChildKeyword_4());
             		
-            otherlv_5=(Token)match(input,31,FOLLOW_4); 
+            otherlv_5=(Token)match(input,32,FOLLOW_4); 
 
             			newLeafNode(otherlv_5, grammarAccess.getTwoChildsAccess().getColonKeyword_5());
             		
-            // InternalPartialSerializationTestLanguage.g:692:3: ( (lv_optChild_6_0= ruleOptionalChild ) )
-            // InternalPartialSerializationTestLanguage.g:693:4: (lv_optChild_6_0= ruleOptionalChild )
+            // InternalPartialSerializationTestLanguage.g:707:3: ( (lv_optChild_6_0= ruleOptionalChild ) )
+            // InternalPartialSerializationTestLanguage.g:708:4: (lv_optChild_6_0= ruleOptionalChild )
             {
-            // InternalPartialSerializationTestLanguage.g:693:4: (lv_optChild_6_0= ruleOptionalChild )
-            // InternalPartialSerializationTestLanguage.g:694:5: lv_optChild_6_0= ruleOptionalChild
+            // InternalPartialSerializationTestLanguage.g:708:4: (lv_optChild_6_0= ruleOptionalChild )
+            // InternalPartialSerializationTestLanguage.g:709:5: lv_optChild_6_0= ruleOptionalChild
             {
 
             					newCompositeNode(grammarAccess.getTwoChildsAccess().getOptChildOptionalChildParserRuleCall_6_0());
@@ -1838,7 +1875,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleChildWithSubChilds"
-    // InternalPartialSerializationTestLanguage.g:715:1: entryRuleChildWithSubChilds returns [EObject current=null] : iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF ;
+    // InternalPartialSerializationTestLanguage.g:730:1: entryRuleChildWithSubChilds returns [EObject current=null] : iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF ;
     public final EObject entryRuleChildWithSubChilds() throws RecognitionException {
         EObject current = null;
 
@@ -1846,8 +1883,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:715:59: (iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF )
-            // InternalPartialSerializationTestLanguage.g:716:2: iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF
+            // InternalPartialSerializationTestLanguage.g:730:59: (iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF )
+            // InternalPartialSerializationTestLanguage.g:731:2: iv_ruleChildWithSubChilds= ruleChildWithSubChilds EOF
             {
              newCompositeNode(grammarAccess.getChildWithSubChildsRule()); 
             pushFollow(FOLLOW_1);
@@ -1874,7 +1911,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleChildWithSubChilds"
-    // InternalPartialSerializationTestLanguage.g:722:1: ruleChildWithSubChilds returns [EObject current=null] : ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* ) ;
+    // InternalPartialSerializationTestLanguage.g:737:1: ruleChildWithSubChilds returns [EObject current=null] : ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* ) ;
     public final EObject ruleChildWithSubChilds() throws RecognitionException {
         EObject current = null;
 
@@ -1885,14 +1922,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:728:2: ( ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* ) )
-            // InternalPartialSerializationTestLanguage.g:729:2: ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* )
+            // InternalPartialSerializationTestLanguage.g:743:2: ( ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* ) )
+            // InternalPartialSerializationTestLanguage.g:744:2: ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* )
             {
-            // InternalPartialSerializationTestLanguage.g:729:2: ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* )
-            // InternalPartialSerializationTestLanguage.g:730:3: () ( (lv_children_1_0= ruleChildWithSubChild ) )*
+            // InternalPartialSerializationTestLanguage.g:744:2: ( () ( (lv_children_1_0= ruleChildWithSubChild ) )* )
+            // InternalPartialSerializationTestLanguage.g:745:3: () ( (lv_children_1_0= ruleChildWithSubChild ) )*
             {
-            // InternalPartialSerializationTestLanguage.g:730:3: ()
-            // InternalPartialSerializationTestLanguage.g:731:4: 
+            // InternalPartialSerializationTestLanguage.g:745:3: ()
+            // InternalPartialSerializationTestLanguage.g:746:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1902,23 +1939,23 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:737:3: ( (lv_children_1_0= ruleChildWithSubChild ) )*
+            // InternalPartialSerializationTestLanguage.g:752:3: ( (lv_children_1_0= ruleChildWithSubChild ) )*
             loop11:
             do {
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( (LA11_0==33) ) {
+                if ( (LA11_0==34) ) {
                     alt11=1;
                 }
 
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:738:4: (lv_children_1_0= ruleChildWithSubChild )
+            	    // InternalPartialSerializationTestLanguage.g:753:4: (lv_children_1_0= ruleChildWithSubChild )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:738:4: (lv_children_1_0= ruleChildWithSubChild )
-            	    // InternalPartialSerializationTestLanguage.g:739:5: lv_children_1_0= ruleChildWithSubChild
+            	    // InternalPartialSerializationTestLanguage.g:753:4: (lv_children_1_0= ruleChildWithSubChild )
+            	    // InternalPartialSerializationTestLanguage.g:754:5: lv_children_1_0= ruleChildWithSubChild
             	    {
 
             	    					newCompositeNode(grammarAccess.getChildWithSubChildsAccess().getChildrenChildWithSubChildParserRuleCall_1_0());
@@ -1974,7 +2011,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleChildWithSubChild"
-    // InternalPartialSerializationTestLanguage.g:760:1: entryRuleChildWithSubChild returns [EObject current=null] : iv_ruleChildWithSubChild= ruleChildWithSubChild EOF ;
+    // InternalPartialSerializationTestLanguage.g:775:1: entryRuleChildWithSubChild returns [EObject current=null] : iv_ruleChildWithSubChild= ruleChildWithSubChild EOF ;
     public final EObject entryRuleChildWithSubChild() throws RecognitionException {
         EObject current = null;
 
@@ -1982,8 +2019,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:760:58: (iv_ruleChildWithSubChild= ruleChildWithSubChild EOF )
-            // InternalPartialSerializationTestLanguage.g:761:2: iv_ruleChildWithSubChild= ruleChildWithSubChild EOF
+            // InternalPartialSerializationTestLanguage.g:775:58: (iv_ruleChildWithSubChild= ruleChildWithSubChild EOF )
+            // InternalPartialSerializationTestLanguage.g:776:2: iv_ruleChildWithSubChild= ruleChildWithSubChild EOF
             {
              newCompositeNode(grammarAccess.getChildWithSubChildRule()); 
             pushFollow(FOLLOW_1);
@@ -2010,7 +2047,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleChildWithSubChild"
-    // InternalPartialSerializationTestLanguage.g:767:1: ruleChildWithSubChild returns [EObject current=null] : ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* ) ;
+    // InternalPartialSerializationTestLanguage.g:782:1: ruleChildWithSubChild returns [EObject current=null] : ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* ) ;
     public final EObject ruleChildWithSubChild() throws RecognitionException {
         EObject current = null;
 
@@ -2022,14 +2059,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:773:2: ( ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* ) )
-            // InternalPartialSerializationTestLanguage.g:774:2: ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* )
+            // InternalPartialSerializationTestLanguage.g:788:2: ( ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* ) )
+            // InternalPartialSerializationTestLanguage.g:789:2: ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* )
             {
-            // InternalPartialSerializationTestLanguage.g:774:2: ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* )
-            // InternalPartialSerializationTestLanguage.g:775:3: () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )*
+            // InternalPartialSerializationTestLanguage.g:789:2: ( () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )* )
+            // InternalPartialSerializationTestLanguage.g:790:3: () otherlv_1= 'subs' ( (lv_subChilds_2_0= ruleSubChild ) )*
             {
-            // InternalPartialSerializationTestLanguage.g:775:3: ()
-            // InternalPartialSerializationTestLanguage.g:776:4: 
+            // InternalPartialSerializationTestLanguage.g:790:3: ()
+            // InternalPartialSerializationTestLanguage.g:791:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2039,11 +2076,11 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            otherlv_1=(Token)match(input,33,FOLLOW_6); 
+            otherlv_1=(Token)match(input,34,FOLLOW_6); 
 
             			newLeafNode(otherlv_1, grammarAccess.getChildWithSubChildAccess().getSubsKeyword_1());
             		
-            // InternalPartialSerializationTestLanguage.g:786:3: ( (lv_subChilds_2_0= ruleSubChild ) )*
+            // InternalPartialSerializationTestLanguage.g:801:3: ( (lv_subChilds_2_0= ruleSubChild ) )*
             loop12:
             do {
                 int alt12=2;
@@ -2056,10 +2093,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:787:4: (lv_subChilds_2_0= ruleSubChild )
+            	    // InternalPartialSerializationTestLanguage.g:802:4: (lv_subChilds_2_0= ruleSubChild )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:787:4: (lv_subChilds_2_0= ruleSubChild )
-            	    // InternalPartialSerializationTestLanguage.g:788:5: lv_subChilds_2_0= ruleSubChild
+            	    // InternalPartialSerializationTestLanguage.g:802:4: (lv_subChilds_2_0= ruleSubChild )
+            	    // InternalPartialSerializationTestLanguage.g:803:5: lv_subChilds_2_0= ruleSubChild
             	    {
 
             	    					newCompositeNode(grammarAccess.getChildWithSubChildAccess().getSubChildsSubChildParserRuleCall_2_0());
@@ -2115,7 +2152,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleSubChild"
-    // InternalPartialSerializationTestLanguage.g:809:1: entryRuleSubChild returns [EObject current=null] : iv_ruleSubChild= ruleSubChild EOF ;
+    // InternalPartialSerializationTestLanguage.g:824:1: entryRuleSubChild returns [EObject current=null] : iv_ruleSubChild= ruleSubChild EOF ;
     public final EObject entryRuleSubChild() throws RecognitionException {
         EObject current = null;
 
@@ -2123,8 +2160,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:809:49: (iv_ruleSubChild= ruleSubChild EOF )
-            // InternalPartialSerializationTestLanguage.g:810:2: iv_ruleSubChild= ruleSubChild EOF
+            // InternalPartialSerializationTestLanguage.g:824:49: (iv_ruleSubChild= ruleSubChild EOF )
+            // InternalPartialSerializationTestLanguage.g:825:2: iv_ruleSubChild= ruleSubChild EOF
             {
              newCompositeNode(grammarAccess.getSubChildRule()); 
             pushFollow(FOLLOW_1);
@@ -2151,7 +2188,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleSubChild"
-    // InternalPartialSerializationTestLanguage.g:816:1: ruleSubChild returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalPartialSerializationTestLanguage.g:831:1: ruleSubChild returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleSubChild() throws RecognitionException {
         EObject current = null;
 
@@ -2161,14 +2198,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:822:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalPartialSerializationTestLanguage.g:823:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:837:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalPartialSerializationTestLanguage.g:838:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalPartialSerializationTestLanguage.g:823:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalPartialSerializationTestLanguage.g:824:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:838:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:839:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalPartialSerializationTestLanguage.g:824:3: (lv_name_0_0= RULE_ID )
-            // InternalPartialSerializationTestLanguage.g:825:4: lv_name_0_0= RULE_ID
+            // InternalPartialSerializationTestLanguage.g:839:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:840:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -2210,7 +2247,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleMandatoryChildList"
-    // InternalPartialSerializationTestLanguage.g:844:1: entryRuleMandatoryChildList returns [EObject current=null] : iv_ruleMandatoryChildList= ruleMandatoryChildList EOF ;
+    // InternalPartialSerializationTestLanguage.g:859:1: entryRuleMandatoryChildList returns [EObject current=null] : iv_ruleMandatoryChildList= ruleMandatoryChildList EOF ;
     public final EObject entryRuleMandatoryChildList() throws RecognitionException {
         EObject current = null;
 
@@ -2218,8 +2255,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:844:59: (iv_ruleMandatoryChildList= ruleMandatoryChildList EOF )
-            // InternalPartialSerializationTestLanguage.g:845:2: iv_ruleMandatoryChildList= ruleMandatoryChildList EOF
+            // InternalPartialSerializationTestLanguage.g:859:59: (iv_ruleMandatoryChildList= ruleMandatoryChildList EOF )
+            // InternalPartialSerializationTestLanguage.g:860:2: iv_ruleMandatoryChildList= ruleMandatoryChildList EOF
             {
              newCompositeNode(grammarAccess.getMandatoryChildListRule()); 
             pushFollow(FOLLOW_1);
@@ -2246,7 +2283,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleMandatoryChildList"
-    // InternalPartialSerializationTestLanguage.g:851:1: ruleMandatoryChildList returns [EObject current=null] : ( (lv_children_0_0= ruleMandatoryValue ) )+ ;
+    // InternalPartialSerializationTestLanguage.g:866:1: ruleMandatoryChildList returns [EObject current=null] : ( (lv_children_0_0= ruleMandatoryValue ) )+ ;
     public final EObject ruleMandatoryChildList() throws RecognitionException {
         EObject current = null;
 
@@ -2257,10 +2294,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:857:2: ( ( (lv_children_0_0= ruleMandatoryValue ) )+ )
-            // InternalPartialSerializationTestLanguage.g:858:2: ( (lv_children_0_0= ruleMandatoryValue ) )+
+            // InternalPartialSerializationTestLanguage.g:872:2: ( ( (lv_children_0_0= ruleMandatoryValue ) )+ )
+            // InternalPartialSerializationTestLanguage.g:873:2: ( (lv_children_0_0= ruleMandatoryValue ) )+
             {
-            // InternalPartialSerializationTestLanguage.g:858:2: ( (lv_children_0_0= ruleMandatoryValue ) )+
+            // InternalPartialSerializationTestLanguage.g:873:2: ( (lv_children_0_0= ruleMandatoryValue ) )+
             int cnt13=0;
             loop13:
             do {
@@ -2274,10 +2311,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:859:3: (lv_children_0_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:874:3: (lv_children_0_0= ruleMandatoryValue )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:859:3: (lv_children_0_0= ruleMandatoryValue )
-            	    // InternalPartialSerializationTestLanguage.g:860:4: lv_children_0_0= ruleMandatoryValue
+            	    // InternalPartialSerializationTestLanguage.g:874:3: (lv_children_0_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:875:4: lv_children_0_0= ruleMandatoryValue
             	    {
 
             	    				newCompositeNode(grammarAccess.getMandatoryChildListAccess().getChildrenMandatoryValueParserRuleCall_0());
@@ -2334,7 +2371,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleOptionalChildList"
-    // InternalPartialSerializationTestLanguage.g:880:1: entryRuleOptionalChildList returns [EObject current=null] : iv_ruleOptionalChildList= ruleOptionalChildList EOF ;
+    // InternalPartialSerializationTestLanguage.g:895:1: entryRuleOptionalChildList returns [EObject current=null] : iv_ruleOptionalChildList= ruleOptionalChildList EOF ;
     public final EObject entryRuleOptionalChildList() throws RecognitionException {
         EObject current = null;
 
@@ -2342,8 +2379,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:880:58: (iv_ruleOptionalChildList= ruleOptionalChildList EOF )
-            // InternalPartialSerializationTestLanguage.g:881:2: iv_ruleOptionalChildList= ruleOptionalChildList EOF
+            // InternalPartialSerializationTestLanguage.g:895:58: (iv_ruleOptionalChildList= ruleOptionalChildList EOF )
+            // InternalPartialSerializationTestLanguage.g:896:2: iv_ruleOptionalChildList= ruleOptionalChildList EOF
             {
              newCompositeNode(grammarAccess.getOptionalChildListRule()); 
             pushFollow(FOLLOW_1);
@@ -2370,7 +2407,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleOptionalChildList"
-    // InternalPartialSerializationTestLanguage.g:887:1: ruleOptionalChildList returns [EObject current=null] : ( () ( (lv_children_1_0= ruleMandatoryValue ) )* ) ;
+    // InternalPartialSerializationTestLanguage.g:902:1: ruleOptionalChildList returns [EObject current=null] : ( () ( (lv_children_1_0= ruleMandatoryValue ) )* ) ;
     public final EObject ruleOptionalChildList() throws RecognitionException {
         EObject current = null;
 
@@ -2381,14 +2418,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:893:2: ( ( () ( (lv_children_1_0= ruleMandatoryValue ) )* ) )
-            // InternalPartialSerializationTestLanguage.g:894:2: ( () ( (lv_children_1_0= ruleMandatoryValue ) )* )
+            // InternalPartialSerializationTestLanguage.g:908:2: ( ( () ( (lv_children_1_0= ruleMandatoryValue ) )* ) )
+            // InternalPartialSerializationTestLanguage.g:909:2: ( () ( (lv_children_1_0= ruleMandatoryValue ) )* )
             {
-            // InternalPartialSerializationTestLanguage.g:894:2: ( () ( (lv_children_1_0= ruleMandatoryValue ) )* )
-            // InternalPartialSerializationTestLanguage.g:895:3: () ( (lv_children_1_0= ruleMandatoryValue ) )*
+            // InternalPartialSerializationTestLanguage.g:909:2: ( () ( (lv_children_1_0= ruleMandatoryValue ) )* )
+            // InternalPartialSerializationTestLanguage.g:910:3: () ( (lv_children_1_0= ruleMandatoryValue ) )*
             {
-            // InternalPartialSerializationTestLanguage.g:895:3: ()
-            // InternalPartialSerializationTestLanguage.g:896:4: 
+            // InternalPartialSerializationTestLanguage.g:910:3: ()
+            // InternalPartialSerializationTestLanguage.g:911:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2398,7 +2435,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:902:3: ( (lv_children_1_0= ruleMandatoryValue ) )*
+            // InternalPartialSerializationTestLanguage.g:917:3: ( (lv_children_1_0= ruleMandatoryValue ) )*
             loop14:
             do {
                 int alt14=2;
@@ -2411,10 +2448,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:903:4: (lv_children_1_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:918:4: (lv_children_1_0= ruleMandatoryValue )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:903:4: (lv_children_1_0= ruleMandatoryValue )
-            	    // InternalPartialSerializationTestLanguage.g:904:5: lv_children_1_0= ruleMandatoryValue
+            	    // InternalPartialSerializationTestLanguage.g:918:4: (lv_children_1_0= ruleMandatoryValue )
+            	    // InternalPartialSerializationTestLanguage.g:919:5: lv_children_1_0= ruleMandatoryValue
             	    {
 
             	    					newCompositeNode(grammarAccess.getOptionalChildListAccess().getChildrenMandatoryValueParserRuleCall_1_0());
@@ -2470,7 +2507,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalPartialSerializationTestLanguage.g:925:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalPartialSerializationTestLanguage.g:940:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -2478,8 +2515,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:925:47: (iv_ruleImport= ruleImport EOF )
-            // InternalPartialSerializationTestLanguage.g:926:2: iv_ruleImport= ruleImport EOF
+            // InternalPartialSerializationTestLanguage.g:940:47: (iv_ruleImport= ruleImport EOF )
+            // InternalPartialSerializationTestLanguage.g:941:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FOLLOW_1);
@@ -2506,7 +2543,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleImport"
-    // InternalPartialSerializationTestLanguage.g:932:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) ;
+    // InternalPartialSerializationTestLanguage.g:947:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -2518,21 +2555,21 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:938:2: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) )
-            // InternalPartialSerializationTestLanguage.g:939:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
+            // InternalPartialSerializationTestLanguage.g:953:2: ( (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) )
+            // InternalPartialSerializationTestLanguage.g:954:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
             {
-            // InternalPartialSerializationTestLanguage.g:939:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
-            // InternalPartialSerializationTestLanguage.g:940:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
+            // InternalPartialSerializationTestLanguage.g:954:2: (otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
+            // InternalPartialSerializationTestLanguage.g:955:3: otherlv_0= 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
             {
-            otherlv_0=(Token)match(input,34,FOLLOW_4); 
+            otherlv_0=(Token)match(input,35,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
             		
-            // InternalPartialSerializationTestLanguage.g:944:3: ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
-            // InternalPartialSerializationTestLanguage.g:945:4: (lv_importedNamespace_1_0= ruleQualifiedName )
+            // InternalPartialSerializationTestLanguage.g:959:3: ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
+            // InternalPartialSerializationTestLanguage.g:960:4: (lv_importedNamespace_1_0= ruleQualifiedName )
             {
-            // InternalPartialSerializationTestLanguage.g:945:4: (lv_importedNamespace_1_0= ruleQualifiedName )
-            // InternalPartialSerializationTestLanguage.g:946:5: lv_importedNamespace_1_0= ruleQualifiedName
+            // InternalPartialSerializationTestLanguage.g:960:4: (lv_importedNamespace_1_0= ruleQualifiedName )
+            // InternalPartialSerializationTestLanguage.g:961:5: lv_importedNamespace_1_0= ruleQualifiedName
             {
 
             					newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0());
@@ -2582,7 +2619,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleNode"
-    // InternalPartialSerializationTestLanguage.g:967:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // InternalPartialSerializationTestLanguage.g:982:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -2590,8 +2627,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:967:45: (iv_ruleNode= ruleNode EOF )
-            // InternalPartialSerializationTestLanguage.g:968:2: iv_ruleNode= ruleNode EOF
+            // InternalPartialSerializationTestLanguage.g:982:45: (iv_ruleNode= ruleNode EOF )
+            // InternalPartialSerializationTestLanguage.g:983:2: iv_ruleNode= ruleNode EOF
             {
              newCompositeNode(grammarAccess.getNodeRule()); 
             pushFollow(FOLLOW_1);
@@ -2618,7 +2655,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleNode"
-    // InternalPartialSerializationTestLanguage.g:974:1: ruleNode returns [EObject current=null] : ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) ) ;
+    // InternalPartialSerializationTestLanguage.g:989:1: ruleNode returns [EObject current=null] : ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -2637,14 +2674,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:980:2: ( ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) ) )
-            // InternalPartialSerializationTestLanguage.g:981:2: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) )
+            // InternalPartialSerializationTestLanguage.g:995:2: ( ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) ) )
+            // InternalPartialSerializationTestLanguage.g:996:2: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) )
             {
-            // InternalPartialSerializationTestLanguage.g:981:2: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) )
-            // InternalPartialSerializationTestLanguage.g:982:3: () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' )
+            // InternalPartialSerializationTestLanguage.g:996:2: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' ) )
+            // InternalPartialSerializationTestLanguage.g:997:3: () ( (lv_imports_1_0= ruleImport ) )* ( (lv_name_2_0= RULE_ID ) )? (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )? ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' )
             {
-            // InternalPartialSerializationTestLanguage.g:982:3: ()
-            // InternalPartialSerializationTestLanguage.g:983:4: 
+            // InternalPartialSerializationTestLanguage.g:997:3: ()
+            // InternalPartialSerializationTestLanguage.g:998:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2654,23 +2691,23 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:989:3: ( (lv_imports_1_0= ruleImport ) )*
+            // InternalPartialSerializationTestLanguage.g:1004:3: ( (lv_imports_1_0= ruleImport ) )*
             loop15:
             do {
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( (LA15_0==34) ) {
+                if ( (LA15_0==35) ) {
                     alt15=1;
                 }
 
 
                 switch (alt15) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:990:4: (lv_imports_1_0= ruleImport )
+            	    // InternalPartialSerializationTestLanguage.g:1005:4: (lv_imports_1_0= ruleImport )
             	    {
-            	    // InternalPartialSerializationTestLanguage.g:990:4: (lv_imports_1_0= ruleImport )
-            	    // InternalPartialSerializationTestLanguage.g:991:5: lv_imports_1_0= ruleImport
+            	    // InternalPartialSerializationTestLanguage.g:1005:4: (lv_imports_1_0= ruleImport )
+            	    // InternalPartialSerializationTestLanguage.g:1006:5: lv_imports_1_0= ruleImport
             	    {
 
             	    					newCompositeNode(grammarAccess.getNodeAccess().getImportsImportParserRuleCall_1_0());
@@ -2703,7 +2740,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
                 }
             } while (true);
 
-            // InternalPartialSerializationTestLanguage.g:1008:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalPartialSerializationTestLanguage.g:1023:3: ( (lv_name_2_0= RULE_ID ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2712,10 +2749,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt16) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:1009:4: (lv_name_2_0= RULE_ID )
+                    // InternalPartialSerializationTestLanguage.g:1024:4: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalPartialSerializationTestLanguage.g:1009:4: (lv_name_2_0= RULE_ID )
-                    // InternalPartialSerializationTestLanguage.g:1010:5: lv_name_2_0= RULE_ID
+                    // InternalPartialSerializationTestLanguage.g:1024:4: (lv_name_2_0= RULE_ID )
+                    // InternalPartialSerializationTestLanguage.g:1025:5: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_18); 
 
@@ -2740,22 +2777,22 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:1026:3: (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )?
+            // InternalPartialSerializationTestLanguage.g:1041:3: (otherlv_3= 'refs' ( ( ruleQualifiedName ) )* )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==35) ) {
+            if ( (LA18_0==36) ) {
                 alt18=1;
             }
             switch (alt18) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:1027:4: otherlv_3= 'refs' ( ( ruleQualifiedName ) )*
+                    // InternalPartialSerializationTestLanguage.g:1042:4: otherlv_3= 'refs' ( ( ruleQualifiedName ) )*
                     {
-                    otherlv_3=(Token)match(input,35,FOLLOW_19); 
+                    otherlv_3=(Token)match(input,36,FOLLOW_19); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getNodeAccess().getRefsKeyword_3_0());
                     			
-                    // InternalPartialSerializationTestLanguage.g:1031:4: ( ( ruleQualifiedName ) )*
+                    // InternalPartialSerializationTestLanguage.g:1046:4: ( ( ruleQualifiedName ) )*
                     loop17:
                     do {
                         int alt17=2;
@@ -2768,10 +2805,10 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                         switch (alt17) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:1032:5: ( ruleQualifiedName )
+                    	    // InternalPartialSerializationTestLanguage.g:1047:5: ( ruleQualifiedName )
                     	    {
-                    	    // InternalPartialSerializationTestLanguage.g:1032:5: ( ruleQualifiedName )
-                    	    // InternalPartialSerializationTestLanguage.g:1033:6: ruleQualifiedName
+                    	    // InternalPartialSerializationTestLanguage.g:1047:5: ( ruleQualifiedName )
+                    	    // InternalPartialSerializationTestLanguage.g:1048:6: ruleQualifiedName
                     	    {
 
                     	    						if (current==null) {
@@ -2807,14 +2844,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialSerializationTestLanguage.g:1048:3: ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' )
+            // InternalPartialSerializationTestLanguage.g:1063:3: ( (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' ) | otherlv_10= ';' )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==27) ) {
+            if ( (LA21_0==28) ) {
                 alt21=1;
             }
-            else if ( (LA21_0==37) ) {
+            else if ( (LA21_0==38) ) {
                 alt21=2;
             }
             else {
@@ -2825,32 +2862,32 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt21) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:1049:4: (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' )
+                    // InternalPartialSerializationTestLanguage.g:1064:4: (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' )
                     {
-                    // InternalPartialSerializationTestLanguage.g:1049:4: (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' )
-                    // InternalPartialSerializationTestLanguage.g:1050:5: otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}'
+                    // InternalPartialSerializationTestLanguage.g:1064:4: (otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}' )
+                    // InternalPartialSerializationTestLanguage.g:1065:5: otherlv_5= '{' ( (lv_children_6_0= ruleNode ) )* (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )? otherlv_9= '}'
                     {
-                    otherlv_5=(Token)match(input,27,FOLLOW_20); 
+                    otherlv_5=(Token)match(input,28,FOLLOW_20); 
 
                     					newLeafNode(otherlv_5, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4_0_0());
                     				
-                    // InternalPartialSerializationTestLanguage.g:1054:5: ( (lv_children_6_0= ruleNode ) )*
+                    // InternalPartialSerializationTestLanguage.g:1069:5: ( (lv_children_6_0= ruleNode ) )*
                     loop19:
                     do {
                         int alt19=2;
                         int LA19_0 = input.LA(1);
 
-                        if ( (LA19_0==RULE_ID||LA19_0==27||(LA19_0>=34 && LA19_0<=35)||LA19_0==37) ) {
+                        if ( (LA19_0==RULE_ID||LA19_0==28||(LA19_0>=35 && LA19_0<=36)||LA19_0==38) ) {
                             alt19=1;
                         }
 
 
                         switch (alt19) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:1055:6: (lv_children_6_0= ruleNode )
+                    	    // InternalPartialSerializationTestLanguage.g:1070:6: (lv_children_6_0= ruleNode )
                     	    {
-                    	    // InternalPartialSerializationTestLanguage.g:1055:6: (lv_children_6_0= ruleNode )
-                    	    // InternalPartialSerializationTestLanguage.g:1056:7: lv_children_6_0= ruleNode
+                    	    // InternalPartialSerializationTestLanguage.g:1070:6: (lv_children_6_0= ruleNode )
+                    	    // InternalPartialSerializationTestLanguage.g:1071:7: lv_children_6_0= ruleNode
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_4_0_1_0());
@@ -2883,26 +2920,26 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
                         }
                     } while (true);
 
-                    // InternalPartialSerializationTestLanguage.g:1073:5: (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )?
+                    // InternalPartialSerializationTestLanguage.g:1088:5: (otherlv_7= 'ref' ( ( ruleQualifiedName ) ) )?
                     int alt20=2;
                     int LA20_0 = input.LA(1);
 
-                    if ( (LA20_0==36) ) {
+                    if ( (LA20_0==37) ) {
                         alt20=1;
                     }
                     switch (alt20) {
                         case 1 :
-                            // InternalPartialSerializationTestLanguage.g:1074:6: otherlv_7= 'ref' ( ( ruleQualifiedName ) )
+                            // InternalPartialSerializationTestLanguage.g:1089:6: otherlv_7= 'ref' ( ( ruleQualifiedName ) )
                             {
-                            otherlv_7=(Token)match(input,36,FOLLOW_4); 
+                            otherlv_7=(Token)match(input,37,FOLLOW_4); 
 
                             						newLeafNode(otherlv_7, grammarAccess.getNodeAccess().getRefKeyword_4_0_2_0());
                             					
-                            // InternalPartialSerializationTestLanguage.g:1078:6: ( ( ruleQualifiedName ) )
-                            // InternalPartialSerializationTestLanguage.g:1079:7: ( ruleQualifiedName )
+                            // InternalPartialSerializationTestLanguage.g:1093:6: ( ( ruleQualifiedName ) )
+                            // InternalPartialSerializationTestLanguage.g:1094:7: ( ruleQualifiedName )
                             {
-                            // InternalPartialSerializationTestLanguage.g:1079:7: ( ruleQualifiedName )
-                            // InternalPartialSerializationTestLanguage.g:1080:8: ruleQualifiedName
+                            // InternalPartialSerializationTestLanguage.g:1094:7: ( ruleQualifiedName )
+                            // InternalPartialSerializationTestLanguage.g:1095:8: ruleQualifiedName
                             {
 
                             								if (current==null) {
@@ -2932,7 +2969,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                     }
 
-                    otherlv_9=(Token)match(input,29,FOLLOW_2); 
+                    otherlv_9=(Token)match(input,30,FOLLOW_2); 
 
                     					newLeafNode(otherlv_9, grammarAccess.getNodeAccess().getRightCurlyBracketKeyword_4_0_3());
                     				
@@ -2943,9 +2980,9 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
                     }
                     break;
                 case 2 :
-                    // InternalPartialSerializationTestLanguage.g:1101:4: otherlv_10= ';'
+                    // InternalPartialSerializationTestLanguage.g:1116:4: otherlv_10= ';'
                     {
-                    otherlv_10=(Token)match(input,37,FOLLOW_2); 
+                    otherlv_10=(Token)match(input,38,FOLLOW_2); 
 
                     				newLeafNode(otherlv_10, grammarAccess.getNodeAccess().getSemicolonKeyword_4_1());
                     			
@@ -2978,7 +3015,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalPartialSerializationTestLanguage.g:1110:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalPartialSerializationTestLanguage.g:1125:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -2986,8 +3023,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1110:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalPartialSerializationTestLanguage.g:1111:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalPartialSerializationTestLanguage.g:1125:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalPartialSerializationTestLanguage.g:1126:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             pushFollow(FOLLOW_1);
@@ -3014,7 +3051,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalPartialSerializationTestLanguage.g:1117:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalPartialSerializationTestLanguage.g:1132:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3026,11 +3063,11 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1123:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalPartialSerializationTestLanguage.g:1124:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalPartialSerializationTestLanguage.g:1138:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalPartialSerializationTestLanguage.g:1139:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalPartialSerializationTestLanguage.g:1124:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalPartialSerializationTestLanguage.g:1125:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalPartialSerializationTestLanguage.g:1139:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalPartialSerializationTestLanguage.g:1140:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_21); 
 
@@ -3039,22 +3076,22 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             			newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0());
             		
-            // InternalPartialSerializationTestLanguage.g:1132:3: (kw= '.' this_ID_2= RULE_ID )*
+            // InternalPartialSerializationTestLanguage.g:1147:3: (kw= '.' this_ID_2= RULE_ID )*
             loop22:
             do {
                 int alt22=2;
                 int LA22_0 = input.LA(1);
 
-                if ( (LA22_0==38) ) {
+                if ( (LA22_0==39) ) {
                     alt22=1;
                 }
 
 
                 switch (alt22) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:1133:4: kw= '.' this_ID_2= RULE_ID
+            	    // InternalPartialSerializationTestLanguage.g:1148:4: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,38,FOLLOW_4); 
+            	    kw=(Token)match(input,39,FOLLOW_4); 
 
             	    				current.merge(kw);
             	    				newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
@@ -3098,7 +3135,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleEClassDecl"
-    // InternalPartialSerializationTestLanguage.g:1150:1: entryRuleEClassDecl returns [EObject current=null] : iv_ruleEClassDecl= ruleEClassDecl EOF ;
+    // InternalPartialSerializationTestLanguage.g:1165:1: entryRuleEClassDecl returns [EObject current=null] : iv_ruleEClassDecl= ruleEClassDecl EOF ;
     public final EObject entryRuleEClassDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3106,8 +3143,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1150:51: (iv_ruleEClassDecl= ruleEClassDecl EOF )
-            // InternalPartialSerializationTestLanguage.g:1151:2: iv_ruleEClassDecl= ruleEClassDecl EOF
+            // InternalPartialSerializationTestLanguage.g:1165:51: (iv_ruleEClassDecl= ruleEClassDecl EOF )
+            // InternalPartialSerializationTestLanguage.g:1166:2: iv_ruleEClassDecl= ruleEClassDecl EOF
             {
              newCompositeNode(grammarAccess.getEClassDeclRule()); 
             pushFollow(FOLLOW_1);
@@ -3134,7 +3171,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleEClassDecl"
-    // InternalPartialSerializationTestLanguage.g:1157:1: ruleEClassDecl returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalPartialSerializationTestLanguage.g:1172:1: ruleEClassDecl returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleEClassDecl() throws RecognitionException {
         EObject current = null;
 
@@ -3144,14 +3181,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1163:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalPartialSerializationTestLanguage.g:1164:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:1178:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalPartialSerializationTestLanguage.g:1179:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalPartialSerializationTestLanguage.g:1164:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalPartialSerializationTestLanguage.g:1165:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:1179:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:1180:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalPartialSerializationTestLanguage.g:1165:3: (lv_name_0_0= RULE_ID )
-            // InternalPartialSerializationTestLanguage.g:1166:4: lv_name_0_0= RULE_ID
+            // InternalPartialSerializationTestLanguage.g:1180:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:1181:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -3193,7 +3230,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleEClassRef"
-    // InternalPartialSerializationTestLanguage.g:1185:1: entryRuleEClassRef returns [EObject current=null] : iv_ruleEClassRef= ruleEClassRef EOF ;
+    // InternalPartialSerializationTestLanguage.g:1200:1: entryRuleEClassRef returns [EObject current=null] : iv_ruleEClassRef= ruleEClassRef EOF ;
     public final EObject entryRuleEClassRef() throws RecognitionException {
         EObject current = null;
 
@@ -3201,8 +3238,8 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1185:50: (iv_ruleEClassRef= ruleEClassRef EOF )
-            // InternalPartialSerializationTestLanguage.g:1186:2: iv_ruleEClassRef= ruleEClassRef EOF
+            // InternalPartialSerializationTestLanguage.g:1200:50: (iv_ruleEClassRef= ruleEClassRef EOF )
+            // InternalPartialSerializationTestLanguage.g:1201:2: iv_ruleEClassRef= ruleEClassRef EOF
             {
              newCompositeNode(grammarAccess.getEClassRefRule()); 
             pushFollow(FOLLOW_1);
@@ -3229,7 +3266,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleEClassRef"
-    // InternalPartialSerializationTestLanguage.g:1192:1: ruleEClassRef returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
+    // InternalPartialSerializationTestLanguage.g:1207:1: ruleEClassRef returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
     public final EObject ruleEClassRef() throws RecognitionException {
         EObject current = null;
 
@@ -3237,14 +3274,14 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialSerializationTestLanguage.g:1198:2: ( ( ( ruleQualifiedName ) ) )
-            // InternalPartialSerializationTestLanguage.g:1199:2: ( ( ruleQualifiedName ) )
+            // InternalPartialSerializationTestLanguage.g:1213:2: ( ( ( ruleQualifiedName ) ) )
+            // InternalPartialSerializationTestLanguage.g:1214:2: ( ( ruleQualifiedName ) )
             {
-            // InternalPartialSerializationTestLanguage.g:1199:2: ( ( ruleQualifiedName ) )
-            // InternalPartialSerializationTestLanguage.g:1200:3: ( ruleQualifiedName )
+            // InternalPartialSerializationTestLanguage.g:1214:2: ( ( ruleQualifiedName ) )
+            // InternalPartialSerializationTestLanguage.g:1215:3: ( ruleQualifiedName )
             {
-            // InternalPartialSerializationTestLanguage.g:1200:3: ( ruleQualifiedName )
-            // InternalPartialSerializationTestLanguage.g:1201:4: ruleQualifiedName
+            // InternalPartialSerializationTestLanguage.g:1215:3: ( ruleQualifiedName )
+            // InternalPartialSerializationTestLanguage.g:1216:4: ruleQualifiedName
             {
 
             				if (current==null) {
@@ -3286,6 +3323,202 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
     }
     // $ANTLR end "ruleEClassRef"
 
+
+    // $ANTLR start "entryRuleWithTransientContainer"
+    // InternalPartialSerializationTestLanguage.g:1233:1: entryRuleWithTransientContainer returns [EObject current=null] : iv_ruleWithTransientContainer= ruleWithTransientContainer EOF ;
+    public final EObject entryRuleWithTransientContainer() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleWithTransientContainer = null;
+
+
+        try {
+            // InternalPartialSerializationTestLanguage.g:1233:63: (iv_ruleWithTransientContainer= ruleWithTransientContainer EOF )
+            // InternalPartialSerializationTestLanguage.g:1234:2: iv_ruleWithTransientContainer= ruleWithTransientContainer EOF
+            {
+             newCompositeNode(grammarAccess.getWithTransientContainerRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleWithTransientContainer=ruleWithTransientContainer();
+
+            state._fsp--;
+
+             current =iv_ruleWithTransientContainer; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleWithTransientContainer"
+
+
+    // $ANTLR start "ruleWithTransientContainer"
+    // InternalPartialSerializationTestLanguage.g:1240:1: ruleWithTransientContainer returns [EObject current=null] : ( (lv_child_0_0= ruleWithTransient ) ) ;
+    public final EObject ruleWithTransientContainer() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_child_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalPartialSerializationTestLanguage.g:1246:2: ( ( (lv_child_0_0= ruleWithTransient ) ) )
+            // InternalPartialSerializationTestLanguage.g:1247:2: ( (lv_child_0_0= ruleWithTransient ) )
+            {
+            // InternalPartialSerializationTestLanguage.g:1247:2: ( (lv_child_0_0= ruleWithTransient ) )
+            // InternalPartialSerializationTestLanguage.g:1248:3: (lv_child_0_0= ruleWithTransient )
+            {
+            // InternalPartialSerializationTestLanguage.g:1248:3: (lv_child_0_0= ruleWithTransient )
+            // InternalPartialSerializationTestLanguage.g:1249:4: lv_child_0_0= ruleWithTransient
+            {
+
+            				newCompositeNode(grammarAccess.getWithTransientContainerAccess().getChildWithTransientParserRuleCall_0());
+            			
+            pushFollow(FOLLOW_2);
+            lv_child_0_0=ruleWithTransient();
+
+            state._fsp--;
+
+
+            				if (current==null) {
+            					current = createModelElementForParent(grammarAccess.getWithTransientContainerRule());
+            				}
+            				set(
+            					current,
+            					"child",
+            					lv_child_0_0,
+            					"org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage.WithTransient");
+            				afterParserOrEnumRuleCall();
+            			
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleWithTransientContainer"
+
+
+    // $ANTLR start "entryRuleWithTransient"
+    // InternalPartialSerializationTestLanguage.g:1269:1: entryRuleWithTransient returns [EObject current=null] : iv_ruleWithTransient= ruleWithTransient EOF ;
+    public final EObject entryRuleWithTransient() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleWithTransient = null;
+
+
+        try {
+            // InternalPartialSerializationTestLanguage.g:1269:54: (iv_ruleWithTransient= ruleWithTransient EOF )
+            // InternalPartialSerializationTestLanguage.g:1270:2: iv_ruleWithTransient= ruleWithTransient EOF
+            {
+             newCompositeNode(grammarAccess.getWithTransientRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleWithTransient=ruleWithTransient();
+
+            state._fsp--;
+
+             current =iv_ruleWithTransient; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleWithTransient"
+
+
+    // $ANTLR start "ruleWithTransient"
+    // InternalPartialSerializationTestLanguage.g:1276:1: ruleWithTransient returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final EObject ruleWithTransient() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name_0_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalPartialSerializationTestLanguage.g:1282:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalPartialSerializationTestLanguage.g:1283:2: ( (lv_name_0_0= RULE_ID ) )
+            {
+            // InternalPartialSerializationTestLanguage.g:1283:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:1284:3: (lv_name_0_0= RULE_ID )
+            {
+            // InternalPartialSerializationTestLanguage.g:1284:3: (lv_name_0_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:1285:4: lv_name_0_0= RULE_ID
+            {
+            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
+
+            				newLeafNode(lv_name_0_0, grammarAccess.getWithTransientAccess().getNameIDTerminalRuleCall_0());
+            			
+
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getWithTransientRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleWithTransient"
+
     // Delegated rules
 
 
@@ -3293,24 +3526,24 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000002C08000010L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000005810000010L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000006000010L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x000000000C000010L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000004000012L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000010000010L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000100000010L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000002808000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000002008000010L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000003C28000010L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000004000000002L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000008000012L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020000010L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000200000010L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000005010000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000004010000010L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000007850000010L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000008000000002L});
 
 }

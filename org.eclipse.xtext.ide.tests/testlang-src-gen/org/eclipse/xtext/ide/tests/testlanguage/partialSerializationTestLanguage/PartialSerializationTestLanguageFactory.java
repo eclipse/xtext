@@ -181,6 +181,15 @@ public interface PartialSerializationTestLanguageFactory extends EFactory
   EClassRef createEClassRef();
 
   /**
+   * Returns a new object of class '<em>With Transient Container</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>With Transient Container</em>'.
+   * @generated
+   */
+  WithTransientContainer createWithTransientContainer();
+
+  /**
    * Returns a new object of class '<em>Many Values</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
