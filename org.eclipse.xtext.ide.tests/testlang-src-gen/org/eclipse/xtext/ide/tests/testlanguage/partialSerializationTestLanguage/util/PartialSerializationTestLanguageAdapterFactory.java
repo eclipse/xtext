@@ -165,6 +165,11 @@ public class PartialSerializationTestLanguageAdapterFactory extends AdapterFacto
         return createEClassRefAdapter();
       }
       @Override
+      public Adapter caseWithTransientContainer(WithTransientContainer object)
+      {
+        return createWithTransientContainerAdapter();
+      }
+      @Override
       public Adapter caseManyValues(ManyValues object)
       {
         return createManyValuesAdapter();
@@ -442,6 +447,21 @@ public class PartialSerializationTestLanguageAdapterFactory extends AdapterFacto
    * @generated
    */
   public Adapter createEClassRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer <em>With Transient Container</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer
+   * @generated
+   */
+  public Adapter createWithTransientContainerAdapter()
   {
     return null;
   }

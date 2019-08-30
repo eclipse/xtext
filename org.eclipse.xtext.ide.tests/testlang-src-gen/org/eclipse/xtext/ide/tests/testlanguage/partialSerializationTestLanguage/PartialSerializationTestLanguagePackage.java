@@ -700,6 +700,43 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
   int ECLASS_REF_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.WithTransientContainerImpl <em>With Transient Container</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.WithTransientContainerImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getWithTransientContainer()
+   * @generated
+   */
+  int WITH_TRANSIENT_CONTAINER = 17;
+
+  /**
+   * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_TRANSIENT_CONTAINER__CLAZZ = MODEL__CLAZZ;
+
+  /**
+   * The feature id for the '<em><b>Child</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_TRANSIENT_CONTAINER__CHILD = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>With Transient Container</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WITH_TRANSIENT_CONTAINER_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ManyValuesImpl <em>Many Values</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -707,7 +744,7 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getManyValues()
    * @generated
    */
-  int MANY_VALUES = 17;
+  int MANY_VALUES = 18;
 
   /**
    * The feature id for the '<em><b>Clazz</b></em>' containment reference list.
@@ -1150,6 +1187,27 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
   EReference getEClassRef_Ref();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer <em>With Transient Container</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>With Transient Container</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer
+   * @generated
+   */
+  EClass getWithTransientContainer();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer#getChild <em>Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Child</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer#getChild()
+   * @see #getWithTransientContainer()
+   * @generated
+   */
+  EReference getWithTransientContainer_Child();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.ManyValues <em>Many Values</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1538,6 +1596,24 @@ public interface PartialSerializationTestLanguagePackage extends EPackage
      * @generated
      */
     EReference ECLASS_REF__REF = eINSTANCE.getEClassRef_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.WithTransientContainerImpl <em>With Transient Container</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.WithTransientContainerImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.PartialSerializationTestLanguagePackageImpl#getWithTransientContainer()
+     * @generated
+     */
+    EClass WITH_TRANSIENT_CONTAINER = eINSTANCE.getWithTransientContainer();
+
+    /**
+     * The meta object literal for the '<em><b>Child</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WITH_TRANSIENT_CONTAINER__CHILD = eINSTANCE.getWithTransientContainer_Child();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.impl.ManyValuesImpl <em>Many Values</em>}' class.

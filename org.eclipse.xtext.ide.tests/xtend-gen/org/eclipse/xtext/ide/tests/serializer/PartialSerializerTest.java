@@ -25,7 +25,9 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChildList;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer;
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider;
+import org.eclipse.xtext.ide.tests.testlanguage.withtransient.WithTransient;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.InMemoryURIHandler;
@@ -1117,6 +1119,39 @@ public class PartialSerializerTest {
     _builder.append("8 1 S \"c\"                  MandatoryValue:name=ID");
     _builder.newLine();
     _builder.append("9 1 H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
+  }
+  
+  @Test
+  public void testTransientValueChange() {
+    final IChangeSerializer.IModification<WithTransientContainer> _function = (WithTransientContainer it) -> {
+      WithTransient _child = it.getChild();
+      _child.setPackageName("bar");
+    };
+    ITextRegionAccess _recordDiff = this.<WithTransientContainer>recordDiff(WithTransientContainer.class, "#30 foo", _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("0 0 H");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("B WithTransientContainer Model");
+    _builder.newLine();
+    _builder.append("0 3  S \"#30\"                Model:\'#30\'");
+    _builder.newLine();
+    _builder.append("3 1  H \" \"                  Whitespace:TerminalRule\'WS\'");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("B WithTransient\'foo\'   WithTransientContainer:child=WithTransient path:WithTransientContainer/child");
+    _builder.newLine();
+    _builder.append("4 3   S \"foo\"                WithTransient:name=ID");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("E WithTransient\'foo\'   WithTransientContainer:child=WithTransient path:WithTransientContainer/child");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("E WithTransientContainer Model");
+    _builder.newLine();
+    _builder.append("7 0 H");
     _builder.newLine();
     this._changeSerializerTestHelper.operator_tripleEquals(_recordDiff, _builder);
   }

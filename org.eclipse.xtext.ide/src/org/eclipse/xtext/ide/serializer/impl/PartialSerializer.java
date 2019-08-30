@@ -335,7 +335,13 @@ public class PartialSerializer {
 		EStructuralFeature feature = change.getFeature();
 		IFeatureInfo featureInfo = constraint.getFeatures()[owner.eClass().getFeatureID(feature)];
 		List<IConstraintElement> assignments = featureInfo.getAssignments();
-		if (assignments.size() != 1) {
+		if (assignments.isEmpty()) {
+			ValueTransient valueTransient = transientValues.isValueTransient(owner, feature);
+			if (valueTransient == ValueTransient.YES) {
+				return result;
+			}
+			return null;
+		} else if (assignments.size() != 1) {
 			return null;
 		}
 		boolean optional = assignments.get(0).isOptional();

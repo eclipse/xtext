@@ -35,6 +35,9 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer;
+
+import org.eclipse.xtext.ide.tests.testlanguage.withtransient.WithtransientPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -168,6 +171,13 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass withTransientContainerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass manyValuesEClass = null;
 
   /**
@@ -220,6 +230,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
 
     // Initialize simple dependencies
     EcorePackage.eINSTANCE.eClass();
+    WithtransientPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     thePartialSerializationTestLanguagePackage.createPackageContents();
@@ -631,6 +642,26 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getWithTransientContainer()
+  {
+    return withTransientContainerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWithTransientContainer_Child()
+  {
+    return (EReference)withTransientContainerEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getManyValues()
   {
     return manyValuesEClass;
@@ -732,6 +763,9 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     eClassRefEClass = createEClass(ECLASS_REF);
     createEReference(eClassRefEClass, ECLASS_REF__REF);
 
+    withTransientContainerEClass = createEClass(WITH_TRANSIENT_CONTAINER);
+    createEReference(withTransientContainerEClass, WITH_TRANSIENT_CONTAINER__CHILD);
+
     manyValuesEClass = createEClass(MANY_VALUES);
     createEAttribute(manyValuesEClass, MANY_VALUES__NAME);
   }
@@ -762,6 +796,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
 
     // Obtain other dependent packages
     EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+    WithtransientPackage theWithtransientPackage = (WithtransientPackage)EPackage.Registry.INSTANCE.getEPackage(WithtransientPackage.eNS_URI);
 
     // Create type parameters
 
@@ -781,6 +816,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     optionalChildListEClass.getESuperTypes().add(this.getModel());
     nodeEClass.getESuperTypes().add(this.getModel());
     eClassRefEClass.getESuperTypes().add(this.getModel());
+    withTransientContainerEClass.getESuperTypes().add(this.getModel());
     manyValuesEClass.getESuperTypes().add(this.getManyOptionalValues());
 
     // Initialize classes and features; add operations and parameters
@@ -839,6 +875,9 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
 
     initEClass(eClassRefEClass, EClassRef.class, "EClassRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEClassRef_Ref(), theEcorePackage.getEClass(), null, "ref", null, 0, 1, EClassRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(withTransientContainerEClass, WithTransientContainer.class, "WithTransientContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getWithTransientContainer_Child(), theWithtransientPackage.getWithTransient(), null, "child", null, 0, 1, WithTransientContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(manyValuesEClass, ManyValues.class, "ManyValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getManyValues_Name(), theEcorePackage.getEString(), "name", null, 0, -1, ManyValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

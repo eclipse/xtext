@@ -34,7 +34,10 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChildLists;
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.TwoChilds;
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer;
 import org.eclipse.xtext.ide.tests.testlanguage.services.PartialSerializationTestLanguageGrammarAccess;
+import org.eclipse.xtext.ide.tests.testlanguage.withtransient.WithTransient;
+import org.eclipse.xtext.ide.tests.testlanguage.withtransient.WithtransientPackage;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
@@ -110,6 +113,15 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 				return; 
 			case PartialSerializationTestLanguagePackage.TWO_CHILDS:
 				sequence_TwoChilds(context, (TwoChilds) semanticObject); 
+				return; 
+			case PartialSerializationTestLanguagePackage.WITH_TRANSIENT_CONTAINER:
+				sequence_WithTransientContainer(context, (WithTransientContainer) semanticObject); 
+				return; 
+			}
+		else if (epackage == WithtransientPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case WithtransientPackage.WITH_TRANSIENT:
+				sequence_WithTransient(context, (WithTransient) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -378,6 +390,43 @@ public class PartialSerializationTestLanguageSemanticSequencer extends AbstractD
 	 */
 	protected void sequence_TwoChilds(ISerializationContext context, TwoChilds semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns WithTransientContainer
+	 *     WithTransientContainer returns WithTransientContainer
+	 *
+	 * Constraint:
+	 *     child=WithTransient
+	 */
+	protected void sequence_WithTransientContainer(ISerializationContext context, WithTransientContainer semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PartialSerializationTestLanguagePackage.Literals.WITH_TRANSIENT_CONTAINER__CHILD) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PartialSerializationTestLanguagePackage.Literals.WITH_TRANSIENT_CONTAINER__CHILD));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getWithTransientContainerAccess().getChildWithTransientParserRuleCall_0(), semanticObject.getChild());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WithTransient returns WithTransient
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_WithTransient(ISerializationContext context, WithTransient semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, WithtransientPackage.Literals.WITH_TRANSIENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, WithtransientPackage.Literals.WITH_TRANSIENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getWithTransientAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

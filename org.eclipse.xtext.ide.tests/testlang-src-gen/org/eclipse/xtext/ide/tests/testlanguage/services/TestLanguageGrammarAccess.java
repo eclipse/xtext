@@ -228,7 +228,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//(TypeReference | PrimitiveType) (arrayDiemensions+='[' ']')*
 		public Group getGroup() { return cGroup; }
 		
-		//TypeReference | PrimitiveType
+		//(TypeReference | PrimitiveType)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//TypeReference

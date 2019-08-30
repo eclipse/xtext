@@ -10,7 +10,9 @@ package org.eclipse.xtext.ide.tests.serializer
 import com.google.inject.Inject
 import javax.inject.Provider
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
+import org.eclipse.xtext.ide.serializer.IChangeSerializer
 import org.eclipse.xtext.ide.serializer.impl.ChangeSerializer
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryChild
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue
@@ -19,14 +21,13 @@ import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalChildList
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.OptionalValue
 import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguageFactory
+import org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.WithTransientContainer
 import org.eclipse.xtext.ide.tests.testlanguage.tests.PartialSerializationTestLanguageInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.ide.serializer.IChangeSerializer
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -538,6 +539,23 @@ class PartialSerializerTest {
 			7 1 H " "                  Whitespace:TerminalRule'WS'
 			8 1 S "c"                  MandatoryValue:name=ID
 			9 1 H " "                  Whitespace:TerminalRule'WS'
+		'''
+	}
+	
+	@Test
+	def void testTransientValueChange() {
+		recordDiff(WithTransientContainer, "#30 foo") [
+			child.packageName = "bar"
+		] === '''
+			0 0 H
+			    B WithTransientContainer Model
+			0 3  S "#30"                Model:'#30'
+			3 1  H " "                  Whitespace:TerminalRule'WS'
+			     B WithTransient'foo'   WithTransientContainer:child=WithTransient path:WithTransientContainer/child
+			4 3   S "foo"                WithTransient:name=ID
+			     E WithTransient'foo'   WithTransientContainer:child=WithTransient path:WithTransientContainer/child
+			    E WithTransientContainer Model
+			7 0 H
 		'''
 	}
 	
