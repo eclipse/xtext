@@ -977,4 +977,23 @@ public class IterableExtensions {
 	public static <T> T max(final Iterable<T> iterable, Comparator<? super T> comparator) {
 		return IteratorExtensions.max(iterable.iterator(), comparator);
 	}
+
+    /**
+     * Returns <tt>true</tt> if this Iterable contains the specified element.
+     * More formally, returns <tt>true</tt> if and only if this Iterable contains
+     * at least one element <tt>e</tt> such that
+     * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
+     *
+     * @param iterable 
+     * 			the elements to test
+     * @param o 
+     * 			element whose presence in the Iterable is to be tested
+     * @return <tt>true</tt> if this Iterable contains the specified element
+     */
+	public static boolean contains(Iterable<?> iterable, Object o) {
+		if (iterable instanceof Collection<?>) {
+			return ((Collection<?>) iterable).contains(o);
+		}
+		return IteratorExtensions.contains(iterable.iterator(), o);
+	}
 }

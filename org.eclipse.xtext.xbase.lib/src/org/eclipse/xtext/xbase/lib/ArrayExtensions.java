@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Objects;
+
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 /**
@@ -110,6 +112,29 @@ public class ArrayExtensions {
 	}
 	
 	/**
+	 * Returns whether the array contains the given element.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param o 
+	 * 			element whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static <T> boolean contains(Object[] array, Object o) {
+		for (int i = 0; i < array.length; i++) {
+			if (Objects.equals(array[i], o)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * @param array
 	 *            the array
 	 * @param index
@@ -193,6 +218,27 @@ public class ArrayExtensions {
 	@GwtIncompatible("clone")
 	public static boolean[] clone(boolean[] array) {
 		return array.clone();
+	}
+	
+	/**
+	 * Returns whether the array contains the given value. More formally,
+	 * returns <tt>true</tt> if and only if this array contains at least one
+	 * element <tt>e</tt> such that <tt>value==e</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(boolean[] array, boolean value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -282,6 +328,29 @@ public class ArrayExtensions {
 	}
 	
 	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>java.lang.Double.compare(o,&nbsp;e)&nbsp;==&nbsp;0)</tt>.
+	 * 
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(double[] array, double value) {
+		for (int i = 0; i < array.length; i++) {
+			if (Double.compare(array[i], value) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * @param array
 	 *            the array
 	 * @param index
@@ -365,6 +434,29 @@ public class ArrayExtensions {
 	@GwtIncompatible("clone")
 	public static float[] clone(float[] array) {
 		return array.clone();
+	}
+	
+	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>java.lang.Float.compare(o,&nbsp;e)&nbsp;==&nbsp;0)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(float[] array, float value) {
+		for (int i = 0; i < array.length; i++) {
+			if (Float.compare(array[i], value) == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -454,6 +546,29 @@ public class ArrayExtensions {
 	}
 	
 	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(value&nbsp;==&nbsp;e)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param o 
+	 * 			element whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(long[] array, long value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * @param array
 	 *            the array
 	 * @param index
@@ -537,6 +652,29 @@ public class ArrayExtensions {
 	@GwtIncompatible("clone")
 	public static int[] clone(int[] array) {
 		return array.clone();
+	}
+	
+	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(value&nbsp;==&nbsp;e)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(int[] array, int value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -626,6 +764,29 @@ public class ArrayExtensions {
 	}
 	
 	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(value&nbsp;==&nbsp;e)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(char[] array, char value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * @param array
 	 *            the array
 	 * @param index
@@ -712,6 +873,29 @@ public class ArrayExtensions {
 	}
 	
 	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(value&nbsp;==&nbsp;e)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(short[] array, short value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * @param array
 	 *            the array
 	 * @param index
@@ -795,6 +979,29 @@ public class ArrayExtensions {
 	@GwtIncompatible("clone")
 	public static byte[] clone(byte[] array) {
 		return array.clone();
+	}
+	
+	/**
+	 * Returns whether the array contains the given value.
+	 * 
+	 * More formally, returns <tt>true</tt> if and only if this array contains
+	 * at least one element <tt>e</tt> such that
+	 * <tt>(value&nbsp;==&nbsp;e)</tt>.
+	 *
+	 * @param array 
+	 * 			the array to test
+	 * @param value 
+	 * 			value whose presence in this array is to be tested
+	 * @return <tt>true</tt> if this array contains the specified element
+	 */
+	@Pure
+	public static boolean contains(byte[] array, byte value) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 // END generated code
 
