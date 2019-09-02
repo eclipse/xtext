@@ -45,17 +45,17 @@
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.common.types</artifactId>
-						<version>${project.version}</version>
+						<version>${xtextVersion}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-						<version>${project.version}</version>
+						<version>${xtextVersion}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.xbase</artifactId>
-						<version>${project.version}</version>
+						<version>${xtextVersion}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
