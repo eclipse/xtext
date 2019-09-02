@@ -22,6 +22,7 @@ import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -37,10 +38,6 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   @Override
   public boolean isFinal() {
     return this.getDelegate().isFinal();
-  }
-  
-  public boolean isOverride() {
-    return this.getDelegate().isOverride();
   }
   
   @Override
@@ -123,5 +120,10 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
       return this.getCompilationUnit().toXtendParameterDeclaration(it);
     };
     return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(this.getDelegate().getParameters(), _function);
+  }
+  
+  @Override
+  public Iterable<? extends MethodDeclaration> getOverriddenOrImplementedMethods() {
+    return CollectionLiterals.<MethodDeclaration>emptyList();
   }
 }
