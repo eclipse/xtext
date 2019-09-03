@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI Codemining Support
 Bundle-SymbolicName: org.eclipse.xtext.ui.codemining;singleton:=true
-Bundle-Version: 2.19.0.qualifier
+Bundle-Version: 2.20.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.ui.codemining
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
