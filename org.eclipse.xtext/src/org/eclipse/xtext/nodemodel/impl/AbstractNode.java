@@ -368,26 +368,24 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	void readData(DataInputStream in, DeserializationConversionContext context) throws IOException {
 		int length = SerializationUtil.readInt(in, true);
 
-		if (length == 1) {
+		if (length > 0) {
+			GrammarElementsInterner arrayInterner = context.getArrayInterner();
 			int grammarId = SerializationUtil.readInt(in, true);
-			grammarElementOrArray = context.getGrammarElement(grammarId);
-		} else {
-			if (length > 0) {
-				EObject[] grammarElements = new EObject[length];
-				for (int i = 0; i < length; ++i) {
-					int grammarId = SerializationUtil.readInt(in, true);
-					EObject grammarElement = context.getGrammarElement(grammarId);
-					grammarElements[i] = grammarElement;
-				}
-				grammarElementOrArray = grammarElements;
-			} else {
-				if (length != -1) {
-					throw new IllegalStateException("Read unexpected length of grammar element array from stream: "
-							+ length);
-				}
+			EObject grammarElement = context.getGrammarElement(grammarId);
+			grammarElementOrArray = grammarElement;
 
-				grammarElementOrArray = null;
+			for (int i = 1; i < length; ++i) {
+				grammarId = SerializationUtil.readInt(in, true);
+				grammarElement = context.getGrammarElement(grammarId);
+				grammarElementOrArray = arrayInterner.appendAndIntern(grammarElementOrArray, grammarElement);
 			}
+		} else {
+			if (length != -1) {
+				throw new IllegalStateException(
+						"Read unexpected length of grammar element array from stream: " + length);
+			}
+
+			grammarElementOrArray = null;
 		}
 	}
 

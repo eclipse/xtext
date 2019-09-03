@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
-import java.util.Map;
-import java.util.Objects;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
@@ -19,9 +16,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.ObjectArrays;
-
 /**
  * A stateful (!) builder that provides call back methods for clients who
  * want to create a node model and maintain its invariants. 
@@ -30,58 +24,9 @@ import com.google.common.collect.ObjectArrays;
  */
 public class NodeModelBuilder {
 
-	private static class ArrayInterner {
-
-		private static class InternKey {
-			final EObject myGrammarElement;
-			final Object childGrammarElement;
-			
-			int hashCode = -1;
-
-			InternKey(EObject myGrammarElement, Object childGrammarElement) {
-				this.myGrammarElement = myGrammarElement;
-				this.childGrammarElement = childGrammarElement;
-			}
-			
-			EObject[] joinElements() {
-				if(childGrammarElement instanceof EObject) {
-					return new EObject[] {myGrammarElement, (EObject) childGrammarElement};
-				} else {
-					return ObjectArrays.concat(myGrammarElement, (EObject[]) childGrammarElement);
-				}
-			}
-
-			@Override
-			public int hashCode() {
-				if (hashCode == -1)
-					hashCode = Objects.hash(myGrammarElement, childGrammarElement);
-				return hashCode;
-			}
-
-			@Override
-			public boolean equals(Object o) {
-				if(o instanceof InternKey) {
-					InternKey interned = (InternKey) o;
-					return Objects.equals(this.myGrammarElement, interned.myGrammarElement) 
-							&& Objects.equals(this.childGrammarElement, interned.childGrammarElement);
-				}
-				
-				return false;
-			}
-		}
-
-		Map<InternKey, EObject[]> interningMap = Maps.newHashMap();
-		
-		EObject[] joinAndIntern(EObject myGrammarElement, Object childGrammarElement) {
-			InternKey internKey = new InternKey(myGrammarElement, childGrammarElement);
-			return interningMap.computeIfAbsent(internKey, key -> key.joinElements());
-		}
-		
-	}
-
 	private EObject forcedGrammarElement;
 
-	private ArrayInterner cachedFoldedGrammarElements = new ArrayInterner();
+	private GrammarElementsInterner cachedFoldedGrammarElements = new GrammarElementsInterner();
 
 	private boolean compressRoot = true;
 	
@@ -205,7 +150,7 @@ public class NodeModelBuilder {
 				// if it refers not to a syntax error or a semantic object
 				EObject myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
-				EObject[] grammarElements = cachedFoldedGrammarElements.joinAndIntern(myGrammarElement, childGrammarElement);
+				EObject[] grammarElements = cachedFoldedGrammarElements.prependAndIntern(myGrammarElement, childGrammarElement);
 				casted.basicSetGrammarElement(grammarElements);
 				replaceChildren(firstChild, casted);
 			}
