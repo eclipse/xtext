@@ -7,7 +7,10 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage;
 
+import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguageStandaloneSetupGenerated;
+import org.eclipse.xtext.ide.tests.testlanguage.withtransient.WithtransientPackage;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
@@ -16,5 +19,17 @@ import org.eclipse.xtext.ide.tests.testlanguage.PartialSerializationTestLanguage
 public class PartialSerializationTestLanguageStandaloneSetup extends PartialSerializationTestLanguageStandaloneSetupGenerated {
   public static void doSetup() {
     new PartialSerializationTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+  }
+  
+  @Override
+  public void register(final Injector injector) {
+    super.register(injector);
+    boolean _containsKey = EPackage.Registry.INSTANCE.containsKey(
+      "http://www.eclipse.org/xtext/ide/tests/testlanguage/mm/withtransient");
+    boolean _not = (!_containsKey);
+    if (_not) {
+      EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/ide/tests/testlanguage/mm/withtransient", 
+        WithtransientPackage.eINSTANCE);
+    }
   }
 }
