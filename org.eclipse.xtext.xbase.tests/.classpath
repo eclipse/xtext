@@ -4,18 +4,21 @@
 		<attributes>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test,longrunning,suites"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry including="**/*.java|**/*.xtend" kind="src" output="bin/test" path="xtend-gen">
 		<attributes>
 			<attribute name="gradle_scope" value="test"/>
 			<attribute name="gradle_used_by_scope" value="test,longrunning,suites"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/longrunning" path="longrunning/src">
 		<attributes>
 			<attribute name="gradle_scope" value="longrunning"/>
 			<attribute name="gradle_used_by_scope" value="longrunning,suites"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/longrunning" path="longrunning/xtend-gen">
@@ -23,18 +26,21 @@
 			<attribute name="gradle_scope" value="longrunning"/>
 			<attribute name="gradle_used_by_scope" value="longrunning,suites"/>
 			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/suites" path="suites">
 		<attributes>
 			<attribute name="gradle_scope" value="suites"/>
 			<attribute name="gradle_used_by_scope" value="suites"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="bin/suites" path="smoke-suites">
 		<attributes>
 			<attribute name="gradle_scope" value="suites"/>
 			<attribute name="gradle_used_by_scope" value="suites"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
