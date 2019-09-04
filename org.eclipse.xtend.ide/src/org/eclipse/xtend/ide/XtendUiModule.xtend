@@ -85,6 +85,8 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory
 import org.eclipse.xtend.ide.refactoring.XtendRenameElementProcessor
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategy
 import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider
+import org.eclipse.xtend.ide.refactoring.importer.StaticExtensionMethodImporter
+import org.eclipse.xtend.ide.refactoring.importer.StaticMethodImporter
 import org.eclipse.xtend.ide.validator.XtendResourceValidator
 import org.eclipse.xtend.ide.validator.XtendUIValidator
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock
@@ -526,6 +528,14 @@ class XtendUiModule extends AbstractXtendUiModule {
 
 	def Class<? extends SyntaxColoringPreferencePage> bindSyntaxColoringPreferencePage() {
 		return XtendSyntaxColoringPreferencePage
+	}
+	
+	def Class<? extends StaticMethodImporter> bindStaticMethodImporter() {
+	    return StaticMethodImporter
+	}
+	
+	def Class<? extends StaticExtensionMethodImporter> bindStaticExtensionMethodImporter() {
+	    return StaticExtensionMethodImporter
 	}
 
 	override bindIShouldGenerate() {
