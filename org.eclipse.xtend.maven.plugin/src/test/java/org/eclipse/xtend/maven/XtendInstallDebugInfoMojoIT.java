@@ -69,22 +69,14 @@ public class XtendInstallDebugInfoMojoIT {
 		// please note that here we have source information only for Xtend
 		String xpt = 
 				"// test {\n" + 
-				"  package test; // XtendA$1.class\n" + 
-				"  class XtendA$1 {\n" + 
-				"    void <init>() { // XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"    }\n" + 
-				"    void apply() { // XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"      void it;\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"  \n" + 
 				"  package test; // XtendA.class\n" + 
 				"  class XtendA {\n" + 
 				"    void <init>() { // XtendA.xtend:5\n" + 
 				"      void this;\n" + 
 				"      void myvar;\n" + 
+				"    }\n" + 
+				"    void lambda$new$0() { // XtendA.xtend:6\n" + 
+				"      void it;\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  \n" + 
@@ -107,23 +99,15 @@ public class XtendInstallDebugInfoMojoIT {
 		// please note that here we have source information only for Xtend
 		String xpt = 
 				"// test {\n" + 
-				"  package test; // XtendA$1.class\n" + 
-				"  class XtendA$1 {\n" + 
-				"    void <init>() { // XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"    }\n" + 
-				"    void apply() { // XtendA.xtend:6\n" + 
-				"      void this;\n" + 
-				"      void it;\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"  \n" + 
 				"  package test; // XtendA.class\n" + 
 				"  class XtendA {\n" + 
 				"    void <init>() { // XtendA.xtend:5\n" + 
 				"      void this;\n" + 
 				"      void _function;\n" + 
 				"      void myvar;\n" + 
+				"    }\n" + 
+				"    void lambda$new$0() { // XtendA.xtend:6\n" + 
+				"      void it;\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  \n" + 
