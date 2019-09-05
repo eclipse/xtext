@@ -6,8 +6,8 @@
 	<version>IT-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<properties>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<xtextVersion>2.20.0-SNAPSHOT</xtextVersion>
 		<!-- The BOM version can be rather fixed for the test projects -->
 		<xtextBOMVersion>2.19.0</xtextBOMVersion>
