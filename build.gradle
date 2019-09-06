@@ -31,7 +31,7 @@ subprojects {
 		// https://github.com/eclipse/xtext/issues/1388
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
-	
+	apply plugin: 'maven-publish'
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
 	dependencyManagement {
@@ -43,7 +43,6 @@ subprojects {
 		apply plugin: 'org.xtext.xtend'
 	}
 	apply plugin: 'eclipse'
-	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
