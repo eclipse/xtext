@@ -33,24 +33,9 @@
 									<classifier>${project.artifactId}-oxygen</classifier>
 								</artifact>
 								<artifact>
-									<file>${project.artifactId}-r201909.target</file>
+									<file>${project.artifactId}-photon.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-r201809</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201906.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201806</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201903.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201803</classifier>
-								</artifact>
-								<artifact>
-									<file>${project.artifactId}-r201812.target</file>
-									<type>target</type>
-									<classifier>${project.artifactId}-r201812</classifier>
+									<classifier>${project.artifactId}-photon</classifier>
 								</artifact>
 								<artifact>
 									<file>${project.artifactId}-r201809.target</file>
@@ -58,9 +43,24 @@
 									<classifier>${project.artifactId}-r201809</classifier>
 								</artifact>
 								<artifact>
-									<file>${project.artifactId}-photon.target</file>
+									<file>${project.artifactId}-r201812.target</file>
 									<type>target</type>
-									<classifier>${project.artifactId}-photon</classifier>
+									<classifier>${project.artifactId}-r201812</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.artifactId}-r201903.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-r201903</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.artifactId}-r201906.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-r201906</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.artifactId}-r201909.target</file>
+									<type>target</type>
+									<classifier>${project.artifactId}-r201909</classifier>
 								</artifact>
 								<artifact>
 									<file>${project.artifactId}-latest.target</file>
