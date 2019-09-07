@@ -68,6 +68,7 @@ import org.eclipse.xtend.ide.hyperlinking.HyperLinkingLabelProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.javaconverter.EclipseASTParserFactory;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
+import org.eclipse.xtend.ide.launching.XtendJavaElementDelegateJunitLaunch;
 import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
@@ -171,6 +172,7 @@ import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
 import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
+import org.eclipse.xtext.xbase.ui.launching.JavaElementDelegateJunitLaunch;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
@@ -591,5 +593,9 @@ public class XtendUiModule extends AbstractXtendUiModule {
   public void configureXtextEditorErrorTickUpdater(final Binder binder) {
     binder.<IXtextEditorCallback>bind(IXtextEditorCallback.class).annotatedWith(Names.named("IXtextEditorCallBack")).to(
       XtendEditorErrorTickUpdater.class);
+  }
+  
+  public Class<? extends JavaElementDelegateJunitLaunch> bindJavaElementDelegateJunitLaunch() {
+    return XtendJavaElementDelegateJunitLaunch.class;
   }
 }
