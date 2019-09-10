@@ -9,7 +9,7 @@ if [ -f "/.dockerenv" ]; then
 fi
 
 ./gradlew \
-  clean build createLocalMavenRepo \
+  clean build publish \
   -PuseJenkinsSnapshots=true \
   -PJENKINS_URL=$JENKINS_URL \
   -PcompileXtend=true \

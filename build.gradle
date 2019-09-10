@@ -27,7 +27,7 @@ ext.buildTime = DateTimeFormatter.ofPattern('yyyyMMdd-HHmm').format(LocalDateTim
 subprojects {
 	group = 'org.eclipse.xtext'
 	version = rootProject.version
-	
+	apply plugin: 'maven-publish'	
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
 	dependencyManagement {
@@ -37,7 +37,6 @@ subprojects {
 	}
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
-	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/mwe2-workflows.gradle"
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
