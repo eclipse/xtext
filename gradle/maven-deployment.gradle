@@ -3,10 +3,13 @@
  */
 
 def noJavaDoc = name.endsWith('tests') || name.contains('testlanguage') || name.contains('example')
+def isWar = name.equals('org.eclipse.xtext.web.example.jetty')
 publishing {
     publications {
         LocalMavenRepo(MavenPublication) {
-            from components.java
+            if (!isWar) {
+                from components.java
+            }
             artifact sourcesJar
             if (!noJavaDoc) {
                 artifact javadocJar
@@ -30,6 +33,9 @@ publishing {
                     if (project.hasProperty('title')) {
                         name = project.title
                         description = project.description
+                    }
+                    if (isWar) {
+                        from components.web
                     }
                 }
             }
