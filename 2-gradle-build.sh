@@ -8,7 +8,7 @@ if [ -f "/.dockerenv" ]; then
 fi
 
 ./gradlew \
-  clean cleanGenerateXtext build createLocalMavenRepo \
+  clean cleanGenerateXtext build publish \
   -Dmaven.repo.local=$(pwd)/.m2/repository \
   -PcompileXtend=true \
   -PJENKINS_URL=$JENKINS_URL \
