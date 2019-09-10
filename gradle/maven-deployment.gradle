@@ -3,10 +3,13 @@
  */
 
 def noJavaDoc = name.endsWith('tests') || name.contains('testlanguage')
+def isWar = name.equals('org.eclipse.xtend.lib.gwt.test')
 publishing {
     publications {
         LocalMavenRepo(MavenPublication) {
-            from components.java
+            if (!isWar) {
+               from components.java 
+            }
             artifact sourcesJar
             if (!noJavaDoc) {
                 artifact javadocJar
@@ -31,6 +34,9 @@ publishing {
                         name = project.title
                         description = project.description
                     }
+                    if (isWar) {
+                        from components.web
+                    } 
                 }
             }
             apply from: "${rootDir}/gradle/developers.gradle", to: pom
