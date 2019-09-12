@@ -1288,12 +1288,23 @@
       </renameParticipant>
    </extension>
    
-   <!-- extract method refactoring -->
    <extension point="org.eclipse.ui.commands">
+       <!-- extract method refactoring -->
       <command
               id="org.eclipse.xtend.ide.refactoring.ExtractMethod"
               name="%ExtractMethodRefactoring_name"
               description="%ExtractMethodRefactoring_description">
+      </command>
+       <!-- import static method -->
+      <command
+              id="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+              name="%ImportStaticMethod_name"
+              description="%ImportStaticMethod_description">
+      </command>
+      <command
+              id="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
+              name="%ImportStaticExtensionMethod_name"
+              description="%ImportStaticExtensionMethod_description">
       </command>
    </extension>
     
@@ -1345,11 +1356,41 @@
               schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
               sequence="M1+M2+V">
         </key>
+        <key
+              commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+              contextId="org.eclipse.xtend.ide.XtendEditorScope"
+              schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+              sequence="M1+M2+M">
+        </key>
+        <key
+              commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
+              contextId="org.eclipse.xtend.ide.XtendEditorScope"
+              schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+              sequence="M1+M2+M3+M">
+        </key>
     </extension>
     <extension point="org.eclipse.ui.handlers">
 		<handler 
 			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.ExtractMethodHandler"
 			commandId="org.eclipse.xtend.ide.refactoring.ExtractMethod">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler 
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethodHandler"
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler 
+			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethodHandler"
+			commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod">
 			<activeWhen>
 				<reference
 					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
@@ -1390,6 +1431,26 @@
             </command>
             <command
                   commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticMethod"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.xtend.ide.refactoring.importer.ImportStaticExtensionMethod"
                   style="push">
                <visibleWhen
                      checkEnabled="false">
