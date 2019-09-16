@@ -420,8 +420,6 @@ public class MergeableManifest2 implements Cloneable {
 	}
 
 	private void writeHeader(BufferedWriter writer) throws IOException {
-		if (version == null)
-			return;
 		String manifestVersion = mainAttributes.get(MANIFEST_VERSION);
 		if (manifestVersion != null)
 			writer.append(MANIFEST_VERSION).append(": ").append(manifestVersion).append(newline);
@@ -762,19 +760,20 @@ public class MergeableManifest2 implements Cloneable {
 		}
 
 		public boolean hasSameName(Bundle other) {
-			// trim because prefix (such as newline) is encoded in the name
-			return Objects.equals(getName().trim(), other.getName().trim());
+			return Objects.equals(getName(), other.getName());
 		}
 
 		public String getName() {
-			// trim because prefix (such as newline) is encoded in the name
-			return split.get(0).trim();
+			// trim because prefix (such as newline) is encoded in the name,
+			// also remove all newlines to ensure linebreaks in name does not
+			// cause issues
+			return split.get(0).trim().replaceAll("\r?\n ", "");
 		}
 
 		public String getNameIncludingWhitespacePrefix() {
 			return split.get(0);
 		}
-		
+
 		public String getSuffix() {
 			return split.size() > 1 ? split.subList(1, split.size()).stream().reduce((a, b) -> a + ";" + b).get()
 					: null;
@@ -782,13 +781,14 @@ public class MergeableManifest2 implements Cloneable {
 
 		public String getVersion() {
 			for (int n = 1; n < split.size(); n++) {
-				String part = split.get(n);
+				String part = split.get(n).trim().replaceAll("\r?\n ", "");
 				if (part.contains("bundle-version=")) {
 					int startIndex = part.indexOf("bundle-version=") + "bundle-version=".length();
 					if (part.charAt(startIndex) == '"') {
-						return part.substring(startIndex + 1, part.indexOf("\"", startIndex + 1));
+						return part.substring(startIndex + 1, part.indexOf("\"", startIndex + 1)).trim()
+								.replaceAll("\r?\n ", "");
 					} else {
-						return part.substring(startIndex);
+						return part.substring(startIndex).trim().replaceAll("\r?\n ", "");
 					}
 				}
 			}

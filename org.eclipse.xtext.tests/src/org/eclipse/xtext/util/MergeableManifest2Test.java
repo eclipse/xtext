@@ -390,11 +390,6 @@ public class MergeableManifest2Test {
 	}
 
 	@Test
-	public void write_oneMainEntry_missingVersion() throws Exception {
-		assertEquals("", write("test: 0\n"));
-	}
-
-	@Test
 	public void write_oneMainEntry_afterVersion() throws Exception {
 		assertEquals("Manifest-Version: 1.0" + NL + "test: 0" + NL,
 				write("Manifest-Version: 1.0" + NL + "test: 0" + NL));
@@ -1396,7 +1391,7 @@ public class MergeableManifest2Test {
 		// @formatter:on
 		MergeableManifest2 manifest = newManifest(content);
 		manifest.addRequiredBundles("");
-		
+
 		assertEquals(expected, write(manifest));
 	}
 
@@ -1424,7 +1419,7 @@ public class MergeableManifest2Test {
 		// @formatter:on
 		MergeableManifest2 manifest = newManifest(content);
 		manifest.addRequiredBundles("org.eclipse.xtext.util;bundle-version=\"1.0\"");
-		
+
 		assertEquals(expected, write(manifest));
 	}
 
@@ -1452,7 +1447,94 @@ public class MergeableManifest2Test {
 		// @formatter:on
 		MergeableManifest2 manifest = newManifest(content);
 		manifest.addRequiredBundles("org.eclipse.xtext;bundle-version=\"1.0\"");
-		
+
+		assertEquals(expected, write(manifest));
+	}
+
+	@Test
+	public void readWrite_BundleManifestVersion() throws Exception {
+		// @formatter:off
+		String content =
+			"Bundle-ManifestVersion: 2" + NL + 
+			"Bundle-Name: org.mealy.ui" + NL + 
+			"Bundle-Vendor: My Company" + NL + 
+			"Bundle-Version: 1.0.0.qualifier" + NL + 
+			"Bundle-SymbolicName: org.mealy.ui; singleton:=true" + NL + 
+			"Bundle-ActivationPolicy: lazy" + NL + 
+			"Require-Bundle: org.mealy,org.mealy.ide,org.eclipse.xtext.ui,org.eclipse" + NL + 
+			" .xtext.ui.shared,org.eclipse.xtext.ui.codetemplates.ui,org.eclipse.ui.e" + NL + 
+			" ditors;bundle-version=\"3.5.0\",org.eclipse.ui.ide;bundle-version=\"3.5.0\"" + NL + 
+			" ,org.eclipse.ui,org.eclipse.compare,org.eclipse.xtext.builder,org.eclip" + NL + 
+			" se.xtext.xbase.lib;bundle-version=\"2.14.0\",org.eclipse.xtend.lib;bundle" + NL + 
+			" -version=\"2.14.0\";resolution:=optional,org.eclipse.ui.console;bundle-ve" + NL + 
+			" rsion=\"3.8.100\"" + NL + 
+			"Import-Package: org.apache.log4j" + NL + 
+			"Bundle-RequiredExecutionEnvironment: JavaSE-11" + NL + 
+			"Automatic-Module-Name: org.mealy.ui" + NL + 
+			"Export-Package: org.mealy.ui.internal,org.mealy.ui.quickfix,org.mealy.ui" + NL + 
+			" .contentassist" + NL + 
+			"Bundle-Activator: org.mealy.ui.internal.MealyActivator" + NL + 
+			"Bundle-ClassPath: lib/mealyMachine-1.0-SNAPSHOT.jar," + NL + 
+			" ." + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+
+		assertEquals(content, write(manifest));
+	}
+
+	@Test
+	public void replicate_issue_1120_linebreaks_inside_bundle_version_or_name() throws Exception {
+		// @formatter:off
+		String content =
+				"Manifest-Version: 1.0" + NL +
+				"Automatic-Module-Name: org.hello.ui" + NL +
+				"Bundle-ManifestVersion: 2" + NL +
+				"Bundle-Name: org.hello.ui" + NL +
+				"Bundle-Vendor: My Company" + NL +
+				"Bundle-Version: 1.0.0.qualifier" + NL +
+				"Bundle-SymbolicName: org.hello.ui; singleton:=true" + NL +
+				"Bundle-ActivationPolicy: lazy" + NL +
+				"Require-Bundle: org.hello,org.hello.ide,org.eclipse.xtext.ui,org.eclipse" + NL +
+				" .xtext.ui.shared,org.eclipse.xtext.ui.codetemplates.ui,org.eclipse.ui.e" + NL +
+				" ditors;bundle-version=\"3.5.0\",org.eclipse.ui.ide;bundle-version=\"3.5.0\"" + NL +
+				" ,org.eclipse.ui,org.eclipse.compare,org.eclipse.xtext.builder,org.eclip" + NL +
+				" se.xtext.xbase.lib;bundle-version=\"2.14.0\",org.eclipse.xtend.lib;bundle" + NL +
+				" -version=\"2.14.0\";resolution:=optional,org.eclipse.ui.console;bundle-ve" + NL +
+				" rsion=\"3.8.100\"" + NL +
+				"Import-Package: org.apache.log4j" + NL +
+				"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL +
+				"Export-Package: org.hello.ui.internal,org.hello.ui.contentassist,org.hel" + NL +
+				" lo.ui.quickfix" + NL +
+				"Bundle-Activator: org.hello.ui.internal.HelloActivator"+ NL;
+		String expected =
+				"Manifest-Version: 1.0" + NL +
+				"Automatic-Module-Name: org.hello.ui" + NL +
+				"Bundle-ManifestVersion: 2" + NL +
+				"Bundle-Name: org.hello.ui" + NL +
+				"Bundle-Vendor: My Company" + NL +
+				"Bundle-Version: 1.0.0.qualifier" + NL +
+				"Bundle-SymbolicName: org.hello.ui; singleton:=true" + NL +
+				"Bundle-ActivationPolicy: lazy" + NL +
+				"Require-Bundle: org.hello,org.hello.ide,org.eclipse.xtext.ui,org.eclipse" + NL +
+				" .xtext.ui.shared,org.eclipse.xtext.ui.codetemplates.ui,org.eclipse.ui.e" + NL +
+				" ditors;bundle-version=\"3.5.0\",org.eclipse.ui.ide;bundle-version=\"3.5.0\"" + NL +
+				" ,org.eclipse.ui,org.eclipse.compare,org.eclipse.xtext.builder,org.eclip" + NL +
+				" se.xtext.xbase.lib;bundle-version=\"2.14.0\",org.eclipse.xtend.lib;bundle" + NL +
+				" -version=\"2.14.0\";resolution:=optional,org.eclipse.ui.console;bundle-ve" + NL +
+				" rsion=\"3.8.100\"" + NL +
+				"Import-Package: org.apache.log4j" + NL +
+				"Bundle-RequiredExecutionEnvironment: JavaSE-1.8" + NL +
+				"Export-Package: org.hello.ui.internal,org.hello.ui.contentassist,org.hel" + NL +
+				" lo.ui.quickfix" + NL +
+				"Bundle-Activator: org.hello.ui.internal.HelloActivator" + NL;
+		// @formatter:on
+		MergeableManifest2 manifest = newManifest(content);
+		manifest.addExportedPackages(manifest.getMainAttributes().get(MergeableManifest2.EXPORT_PACKAGE).replaceAll("\r\n ", "").split(","));
+		manifest.addImportedPackages(manifest.getMainAttributes().get(MergeableManifest2.IMPORT_PACKAGE).replaceAll("\r\n ", "").split(","));
+		manifest.addRequiredBundles(manifest.getMainAttributes().get(MergeableManifest2.REQUIRE_BUNDLE).replaceAll("\r\n ", "").split(","));
+		manifest.addRequiredBundles("org.eclipse.ui.editors", "org.eclipse.xtext.xbase.lib;bundle-version=\"2.14.0\"",
+				"org.eclipse.xtext.ui.shared");
+
 		assertEquals(expected, write(manifest));
 	}
 
