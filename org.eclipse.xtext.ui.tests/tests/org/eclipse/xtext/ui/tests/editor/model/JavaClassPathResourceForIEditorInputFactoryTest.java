@@ -31,6 +31,7 @@ import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.util.JarPackageFragmentRootTestUtil;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -120,7 +121,7 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 		IFile file = project.getProject().getFile("foo.jar");
 		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
 		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragmentRoot root = JarPackageFragmentRootTestUtil.getJarPackageFragmentRoot(file, (JavaProject) project);
 		IPackageFragment foo = root.getPackageFragment("foo");
 		JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
 		fileInJar.setParent(foo);
@@ -143,7 +144,7 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
 		addJarToClasspath(project, file);
 		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragmentRoot root = JarPackageFragmentRootTestUtil.getJarPackageFragmentRoot(file, (JavaProject) project);
 		IPackageFragment foo = root.getPackageFragment("foo");
 		JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
 		fileInJar.setParent(foo);

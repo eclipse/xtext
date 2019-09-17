@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.ui.tests.util.JarPackageFragmentRootTestUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.After;
 import org.junit.Assert;
@@ -116,8 +117,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		file.create(jarInputStream(new TextFile("foo/bar.notindexed", "//empty")), true, monitor());
 		
 		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
-		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragmentRoot root = JarPackageFragmentRootTestUtil.getJarPackageFragmentRoot(file, (JavaProject) project);
 		IPackageFragment foo = root.getPackageFragment("foo");
 		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
 		fileInJar.setParent(foo);
@@ -138,7 +138,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		
 		Storage2UriMapperJavaImpl impl = getStorage2UriMapper();
 		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
+		IPackageFragmentRoot root = JarPackageFragmentRootTestUtil.getJarPackageFragmentRoot(file, (JavaProject) project);
 		IPackageFragment foo = root.getPackageFragment("foo");
 		JarEntryFile fileInJar = new JarEntryFile("bar.notindexed");
 		fileInJar.setParent(foo);
