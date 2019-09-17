@@ -242,12 +242,12 @@ One of the main advantages of DSLs is the possibility to statically validate dom
 
 Locate the class *DomainmodelValidator* in the package *org.example.domainmodel.validation* of the language project. Defining the constraint itself is only a matter of a few lines of code:
 
-```xtend
+```java
 @Check
-def void checkNameStartsWithCapital(Entity entity) {
-    if (!Character.isUpperCase(entity.name.charAt(0))) {
+public void checkNameStartsWithCapital(Entity entity) {
+    if (!Character.isUpperCase(entity.getName().charAt(0))) {
         warning("Name should start with a capital", 
-            DomainmodelPackage.Literals.TYPE__NAME)
+            DomainmodelPackage.Literals.TYPE__NAME);
     }
 }
 ```
@@ -256,16 +256,15 @@ Any name for the method will do. The important thing is the [Check]({{site.src.x
 
 The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the *Entity* and look for features with equal names.
 
-```xtend
+```java
 @Check
-def void checkFeatureNameIsUnique(Feature f) {
-    var superEntity = (f.eContainer as Entity).superType
-    while (superEntity !== null) {
-        for (other : superEntity.features) {
-            if (f.name == other.name) {
-                error("Feature names have to be unique",
-                    DomainmodelPackage.Literals.FEATURE__NAME)
-                return
+public void checkFeatureNameIsUnique(Feature f) {
+    Entity superEntity = ((Entity) f.eContainer()).getSuperType();
+    while (superEntity != null) {
+        for (Feature other : superEntity.getFeatures()) {
+            if (Objects.equal(f.getName(), other.getName())) {
+                error("Feature names have to be unique", DomainmodelPackage.Literals.FEATURE__NAME);
+                return;
             }
         }
         superEntity = superEntity.getSuperType();
