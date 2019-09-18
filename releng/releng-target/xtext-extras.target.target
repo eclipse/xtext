@@ -14,7 +14,7 @@
 			<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2019-09"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2019-12"/>
 			<unit id="org.junit" version="0.0.0"/>
 			<unit id="org.objectweb.asm" version="7.1.0.v20190412-2143"/>
 			<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
