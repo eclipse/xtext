@@ -56,7 +56,9 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	
 	@Override
 	@Test public void testForLoop_02() throws Exception {
-		if (AbstractXtendUITestCase.isJava11OrLater()) {
+		if (AbstractXtendUITestCase.isJava13OrLater()) {
+			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string", "strip", "stripIndent", "stripLeading", "stripTrailing");
+		} else if (AbstractXtendUITestCase.isJava11OrLater()) {
 			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string", "strip", "stripLeading", "stripTrailing");
 		} else {
 			newBuilder().append("for (String string: null) string").assertTextAtCursorPosition(") string", 6, "string");

@@ -64,6 +64,12 @@ public abstract class AbstractXtendTestCase extends Assert {
 	public static boolean isJava12OrLater() {
 		return isJava12OrLater;
 	}
+	
+	private static final boolean isJava13OrLater = determineJava13OrLater();
+	
+	public static boolean isJava13OrLater() {
+		return isJava13OrLater;
+	}
 
 	private static boolean determineJava11OrLater() {
 		String javaVersion = System.getProperty("java.version");
@@ -90,6 +96,22 @@ public abstract class AbstractXtendTestCase extends Assert {
 				String first = matcher.group(1);
 				int version = Integer.parseInt(first);
 				return version >= 12;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+	
+	private static boolean determineJava13OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 13;
 			}
 		} catch (NumberFormatException e) {
 			// ok
