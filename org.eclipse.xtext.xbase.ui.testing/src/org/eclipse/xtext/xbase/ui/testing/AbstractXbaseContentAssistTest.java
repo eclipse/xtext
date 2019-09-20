@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
@@ -52,6 +54,82 @@ import com.google.inject.name.Named;
  * @since 2.12
  */
 public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper, IJavaProjectProvider {
+
+	private static final boolean isJava11OrLater = determineJava11OrLater();
+
+	/**
+	 * @since 2.20
+	 */
+	public static boolean isJava11OrLater() {
+		return isJava11OrLater;
+	}
+
+	private static final boolean isJava12OrLater = determineJava12OrLater();
+
+	/**
+	 * @since 2.20
+	 */
+	public static boolean isJava12OrLater() {
+		return isJava12OrLater;
+	}
+
+	private static final boolean isJava13OrLater = determineJava13OrLater();
+
+	/**
+	 * @since 2.20
+	 */
+	public static boolean isJava13OrLater() {
+		return isJava13OrLater;
+	}
+
+	private static boolean determineJava11OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 11;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+
+	private static boolean determineJava12OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 12;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+
+	private static boolean determineJava13OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 13;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
+
 
 	@Inject
 	protected IWorkspace workspace;
@@ -247,6 +325,9 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		addMethods(stringType, features, staticFeatures, featuresOrTypes);
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
 		features.remove("compareTo()");
+		if (isJava13OrLater()) {
+			features.remove("resolveConstantDesc()");
+		}
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
 		Set<String> types = Sets.newHashSet();
@@ -303,6 +384,11 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
 		addMethods(classType, features, staticFeatures, featuresOrTypes);
+		if (isJava13OrLater()) {
+			features.remove("componentType");
+			features.remove("arrayType");
+			features.add("getComponentType");
+		}
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
 		Set<String> types = Sets.newHashSet();
