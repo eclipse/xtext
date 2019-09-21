@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
@@ -22,7 +22,7 @@ class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabelProvide
 	@Inject ILabelProvider labelProvider
 
 	override getImage(Object element) {
-		if (element instanceof IEObjectDescription) 
+		if (element instanceof IEObjectDescription)
 			labelProvider.getImage(element.EObjectOrProxy)
 		else
 			super.getImage(element)

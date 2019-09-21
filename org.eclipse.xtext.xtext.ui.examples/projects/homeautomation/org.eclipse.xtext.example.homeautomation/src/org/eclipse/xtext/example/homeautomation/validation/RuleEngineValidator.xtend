@@ -19,7 +19,7 @@ import static org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEnginePack
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */

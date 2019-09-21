@@ -43,7 +43,7 @@ class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProvider {
 	}
 
 	override protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
-		if(element instanceof DeclaredParameter) 
+		if(element instanceof DeclaredParameter)
 			return shortName
 		return super.getDisplayString(element, qualifiedNameAsString, shortName)
 	}

@@ -28,7 +28,7 @@ public class RuleEngineTokenSource extends AbstractIndentationTokenSource {
 	protected int getEndTokenType() {
 		return InternalRuleEngineParser.RULE_END;
 	}
-	
+
 	@Override
 	protected boolean shouldEmitPendingEndTokens() {
 		return false;

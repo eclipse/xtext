@@ -22,7 +22,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Multi
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus
 
-/** 
+/**
  * an interpreter for instances of EClasses of the {@link ArithmeticsPackage}.
  * It internally uses a polymorphic dispatcher to dispatch between the implementations for the different EClasses.
  */
@@ -40,8 +40,8 @@ class Calculator {
 		e.value
 	}
 
-	/** 
-	 * @param values the currently known values by name 
+	/**
+	 * @param values the currently known values by name
 	 */
 	def dispatch protected BigDecimal internalEvaluate(FunctionCall e, ImmutableMap<String, BigDecimal> values) {
 		if (e.func instanceof DeclaredParameter) {

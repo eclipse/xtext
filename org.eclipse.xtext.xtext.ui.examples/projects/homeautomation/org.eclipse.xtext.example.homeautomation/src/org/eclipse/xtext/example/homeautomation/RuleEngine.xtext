@@ -29,14 +29,14 @@ Rule:
 		'then' thenPart=XBlockExpression;
 
 // We modify the concrete syntax of two Xbase expressions and make them indentation-aware
-@Override 
-XBlockExpression returns xbase::XExpression: 
+@Override
+XBlockExpression returns xbase::XExpression:
 	{xbase::XBlockExpression}
 	BEGIN
 		(expressions+=XExpressionOrVarDeclaration ';'?)*
 	END;
 
-@Override 
+@Override
 XSwitchExpression returns xbase::XExpression:
 	{xbase::XSwitchExpression}
 	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'

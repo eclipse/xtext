@@ -10,5 +10,5 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
  */
 @FinalFieldsConstructor
 class RuleEngineUiModule extends AbstractRuleEngineUiModule {
-	
+
 }

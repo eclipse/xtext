@@ -45,7 +45,7 @@ class AutoEditTest extends AbstractAutoEditTest {
 				|
 			''')
 		]
-		
+
 	}
 
 	@Inject FileExtensionProvider extensionProvider
@@ -64,14 +64,14 @@ class AutoEditTest extends AbstractAutoEditTest {
 	}
 
 	def protected IProject createPluginProject(String name) throws CoreException {
-		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE) 
-		projectFactory.setProjectName(name) 
-		projectFactory.addFolders(Collections.singletonList("src")) 
-		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID) 
-		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID) 
+		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE)
+		projectFactory.setProjectName(name)
+		projectFactory.addFolders(Collections.singletonList("src"))
+		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID)
+		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID)
 		var IProject result=projectFactory.createProject(new NullProgressMonitor(), null)
-		JavaProjectSetupUtil.setUnixLineEndings(result) 
-		return result 
+		JavaProjectSetupUtil.setUnixLineEndings(result)
+		return result
 	}
 
 }

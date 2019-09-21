@@ -27,14 +27,14 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import com.google.inject.Inject;
 
 /**
- * Provide minings for inferred return types of operations. 
+ * Provide minings for inferred return types of operations.
  */
 public class DomainmodelCodeMiningProvider extends AbstractXtextCodeMiningProvider {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
 	@Inject
 	private DomainmodelGrammarAccess grammar;
-	
+
 	@Override
 	protected void createCodeMinings(IDocument document, XtextResource resource, CancelIndicator indicator,
 			IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {

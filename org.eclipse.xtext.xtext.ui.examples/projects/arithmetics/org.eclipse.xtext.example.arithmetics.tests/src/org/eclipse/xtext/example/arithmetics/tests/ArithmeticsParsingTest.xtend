@@ -26,7 +26,7 @@ class ArithmeticsParsingTest{
 	@Inject
 	extension ValidationTestHelper validationTestHelper
 
-	@Test 
+	@Test
 	def void loadModel() {
 		'''
 			module test

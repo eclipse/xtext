@@ -29,20 +29,20 @@ class SerializerTest extends Assert {
 
 	@Test
 	def test() {
-		
+
 		val model = createModel
 		val rs = rsProvider.get
-		
+
 		model.declarations += createDevice => [
 			name = "Window"
 			states += #["open","closed"].map[s|createState => [name=s]]
 		]
-		
+
 		model.declarations += createDevice => [
 			name = "Heater"
 			states += #["on","off"].map[s|createState => [name=s]]
 		]
-		
+
 		model.declarations += createRule => [
 			description = "Save energy"
 			deviceState = (model.declarations.head as Device).states.head
@@ -57,10 +57,10 @@ class SerializerTest extends Assert {
 				]
 			]
 		]
-		
+
 		val resource = rs.createResource(URI.createURI("heater." + primaryFileExtension))
 		resource.contents += model
-		
+
 		val sw = new StringWriter
 		serializer.serialize(model, sw, SaveOptions.newBuilder.format.options)
 		assertEquals('''

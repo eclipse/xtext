@@ -21,9 +21,9 @@ public class FantasticEditStrategyProvider extends DefaultAutoEditStrategyProvid
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	private final class Surprise implements IAutoEditStrategy {
-		
+
 		private String contents;
-		
+
 		@Override
 		public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 			try {
@@ -41,7 +41,7 @@ public class FantasticEditStrategyProvider extends DefaultAutoEditStrategyProvid
 			}
 		}
 		private String getText() {
-			return 
+			return
 			"\n\n\n"+
 			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM  MMMMMMMMM\n"+
 			"\t\t\tMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM      MMMMMMMM\n"+

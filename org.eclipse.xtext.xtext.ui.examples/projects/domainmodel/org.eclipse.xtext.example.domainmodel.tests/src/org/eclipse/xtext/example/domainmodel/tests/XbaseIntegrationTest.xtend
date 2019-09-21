@@ -14,12 +14,12 @@ import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest
 
 /**
  * Xbase integration test.
- * 
+ *
  * runs all Xbase tests from {@link AbstractXbaseEvaluationTest} in the context of an
  * entity operation.
- * 
+ *
  * Unsupported features can be disabled by overriding the respective test method.
- * 
+ *
  * @author Sven Efftinge
  */
 @RunWith(XtextRunner)
@@ -31,7 +31,7 @@ class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	@Inject ParseHelper<DomainModel> parseHelper
 
 	@Inject ValidationTestHelper validationHelper
-	
+
 	@Inject JvmModelGenerator generator
 
 	protected override invokeXbaseExpression(String expression) {

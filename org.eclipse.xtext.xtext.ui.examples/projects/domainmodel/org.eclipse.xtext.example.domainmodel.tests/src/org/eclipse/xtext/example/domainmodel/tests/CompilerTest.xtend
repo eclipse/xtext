@@ -17,7 +17,7 @@ import static org.junit.Assert.*
 class CompilerTest {
 
 	@Rule
-	@Inject public TemporaryFolder temporaryFolder 
+	@Inject public TemporaryFolder temporaryFolder
 	@Inject extension CompilationTestHelper
 	@Inject extension ReflectExtensions
 

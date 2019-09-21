@@ -18,7 +18,7 @@ class StatemachineValidator extends AbstractStatemachineValidator {
 	@Check
 	def checkStateNameStartsWithLowerCase(org.eclipse.xtext.example.fowlerdsl.statemachine.State state) {
 		if (Character.isUpperCase(state.name.charAt(0))) {
-			warning('Name should start with a lower case letter', 
+			warning('Name should start with a lower case letter',
 					StatemachinePackage.Literals.STATE__NAME,
 					INVALID_NAME, state.name)
 		}

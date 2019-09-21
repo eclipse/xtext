@@ -20,11 +20,11 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
 import com.google.inject.Inject
 
-/** 
+/**
  * An interactive interpreter as an {@link IAutoEditStrategy}
  */
 class InterpreterAutoEdit implements IAutoEditStrategy {
-	
+
 	@Inject extension XtextDocumentUtil
 
 	override void customizeDocumentCommand(IDocument document, DocumentCommand command) {
@@ -48,7 +48,7 @@ class InterpreterAutoEdit implements IAutoEditStrategy {
 	def private BigDecimal computeResult(IDocument document, DocumentCommand command) {
 		return document.xtextDocument.tryReadOnly([ resource |
 			val stmt = findEvaluation(command, resource)
-			if(stmt === null) 
+			if(stmt === null)
 				return null
 			return evaluate(stmt)
 		])

@@ -4,14 +4,14 @@ generate statemachine "http://www.eclipse.org/xtext/example/fowlerdsl/Statemachi
 
 Statemachine :
 	{Statemachine}
-	('events' 
-		events+=Event+ 
+	('events'
+		events+=Event+
 	'end')?
-	('resetEvents' 
-		resetEvents+=[Event]+ 
+	('resetEvents'
+		resetEvents+=[Event]+
 	'end')?
-	('commands' 
-		commands+=Command+ 
+	('commands'
+		commands+=Command+
 	'end')?
 	states+=State*
 ;

@@ -23,13 +23,13 @@ class StatemachineFormatter extends AbstractFormatter2 {
 	@Inject extension StatemachineGrammarAccess
 
 	def dispatch void format(Statemachine it, extension IFormattableDocument document) {
-		
+
 		formatEvents(document)
-		
+
 		formatResetEvents(document)
-		
+
 		formatCommands(document)
-		
+
 		formatStates(document)
 	}
 
@@ -37,12 +37,12 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// indent the event definitions between the 'events' keyword and the 'end' keyword
 		val begin = regionFor.keyword("events")
 		val end = regionFor.keyword(statemachineAccess.getEndKeyword_1_2)
-		
+
 		begin.append[newLine]
 		interior(begin, end)[indent]
-		
+
 		events.forEach[format]
-		
+
 		if(hasResetEvents || hasCommands || hasStates) {
 			end.append[setNewLines(2)]
 		}
@@ -52,15 +52,15 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// indent the event references between the 'resetEvents' keyword and the 'end' keyword
 		val begin = regionFor.keyword("resetEvents")
 		val end = regionFor.keyword(statemachineAccess.endKeyword_2_2)
-		
+
 		begin.append[newLine]
 		interior(begin, end)[indent]
-		
+
 		// format each event reference
 		regionFor.assignment(statemachineAccess.resetEventsAssignment_2_1).append[newLine]
-		
+
 		end.prepend[newLine]
-		
+
 		if(hasCommands || hasStates) {
 			end.append[setNewLines(2)]
 		}
@@ -70,12 +70,12 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// indent the command definitions between the 'commands' keyword and the 'end' keyword
 		val begin = regionFor.keyword("commands")
 		var end = regionFor.keyword(statemachineAccess.endKeyword_3_2)
-		
+
 		begin.append[newLine]
 		interior(begin, end)[indent]
-		
+
 		commands.forEach[format]
-		
+
 		if(hasStates) {
 			end.append[setNewLines(2)]
 		}
@@ -89,7 +89,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// align the event name and the event code in columns based on the longest event name
 		event.regionFor.feature(EVENT__NAME).
 		append[space = event.additionalSpaces]
-		
+
 		// line break after each event definition
 		event.append[newLine]
 	}
@@ -98,7 +98,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// align the command name and the command code in columns based on the longest command name
 		command.regionFor.feature(COMMAND__NAME).
 		append[space = command.additionalSpaces]
-		
+
 		// line break after each command definition
 		command.append[newLine]
 	}
@@ -107,14 +107,14 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// indent the state elements between the name of the state and the 'end' keyword
 		val begin = regionFor.feature(STATE__NAME)
 		var end = regionFor.keyword(stateAccess.endKeyword_4)
-		
+
 		begin.append[newLine]
 		interior(begin, end)[indent]
-		
+
 		formatActions(document)
-		
+
 		transitions.forEach[format]
-		
+
 		if(isLastState) {
 			append[newLine]
 		} else {
@@ -131,7 +131,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		// align the event name and the transition's state in columns based on the longest event name
 		transition.regionFor.assignment(transitionAccess.eventAssignment_0).
 		append[space = transition.additionalSpaces]
-		
+
 		// line break after each transition
 		transition.append[newLine]
 	}

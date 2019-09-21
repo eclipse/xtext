@@ -38,13 +38,13 @@ class DomainmodelParsingTest{
 			  }
 			}
 		'''.parse
-		
+
 		val pack = model.getElements().get(0) as PackageDeclaration
 		Assert.assertEquals("example", pack.getName())
-		
+
 		val entity = pack.getElements().get(0) as Entity
 		Assert.assertEquals("MyEntity", entity.getName())
-		
+
 		val property = entity.getFeatures().get(0) as Property
 		Assert.assertEquals("property", property.getName());
 		Assert.assertEquals("java.lang.String", property.getType().getIdentifier());

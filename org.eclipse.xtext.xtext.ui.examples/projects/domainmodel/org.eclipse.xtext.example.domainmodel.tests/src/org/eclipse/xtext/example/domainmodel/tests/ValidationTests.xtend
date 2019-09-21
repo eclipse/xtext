@@ -14,7 +14,7 @@ import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
-/** 
+/**
  * @author Jan Koehnlein - copied and adapted from Xtend
  */
 class ValidationTests {

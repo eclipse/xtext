@@ -14,7 +14,7 @@ import org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
 var rootPath = ".."
 
 Workflow {
-	
+
 	component = XtextGenerator {
 		configuration = {
 			project = StandardProjectConfig {

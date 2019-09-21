@@ -16,5 +16,5 @@ class StatemachineIdeSetup extends StatemachineStandaloneSetup {
 	override createInjector() {
 		Guice.createInjector(Modules2.mixin(new StatemachineRuntimeModule, new StatemachineIdeModule))
 	}
-	
+
 }

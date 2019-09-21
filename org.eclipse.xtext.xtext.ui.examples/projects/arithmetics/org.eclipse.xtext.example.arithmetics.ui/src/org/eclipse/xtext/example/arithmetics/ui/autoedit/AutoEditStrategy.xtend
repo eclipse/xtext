@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 class AutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	@Inject Provider<InterpreterAutoEdit> interpreterAutoEdit
-	
+
 	override protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor)
 		acceptor.accept(interpreterAutoEdit.get, IDocument.DEFAULT_CONTENT_TYPE)

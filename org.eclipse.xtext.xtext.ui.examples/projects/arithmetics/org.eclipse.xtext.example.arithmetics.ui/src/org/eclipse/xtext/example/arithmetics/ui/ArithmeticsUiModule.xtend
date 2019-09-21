@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory
 import org.eclipse.xtext.ui.shared.Access
 
-/** 
+/**
  * Use this class to register components to be used within the IDE.
  */
 class ArithmeticsUiModule extends AbstractArithmeticsUiModule {

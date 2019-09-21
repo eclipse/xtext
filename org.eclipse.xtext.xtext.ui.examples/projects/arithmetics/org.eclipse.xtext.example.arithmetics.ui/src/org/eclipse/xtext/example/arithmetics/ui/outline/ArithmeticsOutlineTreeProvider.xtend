@@ -27,5 +27,5 @@ class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	def _isLeaf(Definition definition) {
 		true
 	}
-	
+
 }

@@ -18,7 +18,7 @@ class RuleEngineParsingTest{
 	@Inject
 	ParseHelper<Model> parseHelper
 
-	@Test 
+	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
 			Device Window can be open, closed

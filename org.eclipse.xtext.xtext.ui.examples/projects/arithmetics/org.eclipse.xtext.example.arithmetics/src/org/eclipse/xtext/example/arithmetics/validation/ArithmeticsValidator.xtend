@@ -32,7 +32,7 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 	@Check
 	def checkDivByZero(Div div) {
 		val bigDecimal = calculator.evaluate(div.right)
-		if (bigDecimal.doubleValue()==0.0) 
+		if (bigDecimal.doubleValue()==0.0)
 			error("Division by zero detected.", DIV__RIGHT)
 	}
 
@@ -46,7 +46,7 @@ class ArithmeticsValidator extends AbstractArithmeticsValidator {
 		// ignore evaluations
 		if (EcoreUtil2.getContainerOfType(expr, Evaluation)!==null)
 			return;
-		
+
 		val contents = expr.eAllContents
 		while(contents.hasNext()) {
 			val next = contents.next()

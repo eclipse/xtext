@@ -12,7 +12,7 @@ generate domainmodel "http://www.xtext.org/example/Domainmodel"
 DomainModel:
 	importSection=XImportSection?
 	elements+=AbstractElement*;
-	
+
 AbstractElement:
 	PackageDeclaration | Entity;
 
@@ -33,5 +33,5 @@ Property:
 	name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)? 
+	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)?
 		body=XBlockExpression;

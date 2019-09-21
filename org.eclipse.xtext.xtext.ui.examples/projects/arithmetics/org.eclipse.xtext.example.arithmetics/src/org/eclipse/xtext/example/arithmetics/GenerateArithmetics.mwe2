@@ -13,7 +13,7 @@ import org.eclipse.xtext.xtext.generator.model.project.*
 var rootPath = ".."
 
 Workflow {
-	
+
 	component = XtextGenerator {
 		configuration = {
 			project = StandardProjectConfig {
@@ -32,7 +32,7 @@ Workflow {
 			}
 			code = {
 				encoding = "UTF-8"
-				fileHeader = 
+				fileHeader =
 "/*******************************************************************************
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
