@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.ide
 
-
 /**
  * Use this class to register ide components.
  */

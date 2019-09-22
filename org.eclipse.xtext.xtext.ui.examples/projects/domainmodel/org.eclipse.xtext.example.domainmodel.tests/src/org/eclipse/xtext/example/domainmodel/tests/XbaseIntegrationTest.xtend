@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
@@ -9,8 +16,8 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2
-import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest
+import org.junit.runner.RunWith
 
 /**
  * Xbase integration test.

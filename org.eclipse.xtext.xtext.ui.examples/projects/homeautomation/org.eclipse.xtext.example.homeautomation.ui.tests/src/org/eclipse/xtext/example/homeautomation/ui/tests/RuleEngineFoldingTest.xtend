@@ -9,9 +9,9 @@ package org.eclipse.xtext.example.homeautomation.ui.tests
 
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.ui.testing.AbstractFoldingTest
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.ui.testing.AbstractFoldingTest
 
 /**
  * @author miklossy - Initial contribution and API

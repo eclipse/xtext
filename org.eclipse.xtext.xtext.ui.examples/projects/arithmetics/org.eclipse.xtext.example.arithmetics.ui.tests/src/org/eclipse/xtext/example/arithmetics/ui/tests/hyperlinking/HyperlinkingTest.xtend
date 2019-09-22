@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.ui.tests.hyperlinking
 
+import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractHyperlinkingTest
-import org.junit.runner.RunWith
-import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider
 import org.junit.Test
+import org.junit.runner.RunWith
 
 /**
  * @author miklossy - Initial contribution and API
