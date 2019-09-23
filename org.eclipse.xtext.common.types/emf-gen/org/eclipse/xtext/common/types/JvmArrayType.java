@@ -15,15 +15,14 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmArrayType()
  * @model
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmArrayType extends JvmComponentType
 {
@@ -35,7 +34,6 @@ public interface JvmArrayType extends JvmComponentType
 	 * If the meaning of the '<em>Component Type</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Component Type</em>' container reference.
 	 * @see #setComponentType(JvmComponentType)
@@ -49,7 +47,6 @@ public interface JvmArrayType extends JvmComponentType
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}' container reference.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Component Type</em>' container reference.
 	 * @see #getComponentType()

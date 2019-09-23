@@ -22,8 +22,6 @@ import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Jvm Type Reference</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

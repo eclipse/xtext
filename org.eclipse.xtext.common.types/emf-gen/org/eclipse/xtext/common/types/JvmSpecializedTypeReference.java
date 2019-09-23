@@ -15,14 +15,13 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmSpecializedTypeReference#getEquivalent <em>Equivalent</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmSpecializedTypeReference()
  * @model abstract="true"
- * @since 2.1
  * @generated
  */
 public interface JvmSpecializedTypeReference extends JvmTypeReference

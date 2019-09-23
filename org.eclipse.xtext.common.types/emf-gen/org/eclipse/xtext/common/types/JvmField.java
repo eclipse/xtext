@@ -15,6 +15,7 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isFinal <em>Final</em>}</li>
@@ -24,13 +25,10 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#getConstantValue <em>Constant Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField()
  * @model
  * @generated
- * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmField extends JvmFeature
 {
@@ -125,7 +123,6 @@ public interface JvmField extends JvmFeature
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Volatile()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isVolatile();
 
@@ -136,7 +133,6 @@ public interface JvmField extends JvmFeature
 	 * @param value the new value of the '<em>Volatile</em>' attribute.
 	 * @see #isVolatile()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setVolatile(boolean value);
 
@@ -153,7 +149,6 @@ public interface JvmField extends JvmFeature
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Transient()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isTransient();
 
@@ -164,7 +159,6 @@ public interface JvmField extends JvmFeature
 	 * @param value the new value of the '<em>Transient</em>' attribute.
 	 * @see #isTransient()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setTransient(boolean value);
 
@@ -183,7 +177,6 @@ public interface JvmField extends JvmFeature
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Constant()
 	 * @model unsettable="true"
 	 * @generated
-	 * @since 2.5
 	 */
 	boolean isConstant();
 
@@ -196,7 +189,6 @@ public interface JvmField extends JvmFeature
 	 * @see #unsetConstant()
 	 * @see #isConstant()
 	 * @generated
-	 * @since 2.5
 	 */
 	void setConstant(boolean value);
 
@@ -208,7 +200,6 @@ public interface JvmField extends JvmFeature
 	 * @see #isConstant()
 	 * @see #setConstant(boolean)
 	 * @generated
-	 * @since 2.5
 	 */
 	void unsetConstant();
 
@@ -221,7 +212,6 @@ public interface JvmField extends JvmFeature
 	 * @see #isConstant()
 	 * @see #setConstant(boolean)
 	 * @generated
-	 * @since 2.5
 	 */
 	boolean isSetConstant();
 
@@ -238,7 +228,6 @@ public interface JvmField extends JvmFeature
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_ConstantValue()
 	 * @model
 	 * @generated
-	 * @since 2.5
 	 */
 	Object getConstantValue();
 
@@ -249,7 +238,6 @@ public interface JvmField extends JvmFeature
 	 * @param value the new value of the '<em>Constant Value</em>' attribute.
 	 * @see #getConstantValue()
 	 * @generated
-	 * @since 2.5
 	 */
 	void setConstantValue(Object value);
 
@@ -258,7 +246,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	long getConstantValueAsLong();
 
@@ -267,7 +254,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	int getConstantValueAsInt();
 
@@ -276,7 +262,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	short getConstantValueAsShort();
 
@@ -285,7 +270,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	byte getConstantValueAsByte();
 
@@ -294,7 +278,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	double getConstantValueAsDouble();
 
@@ -303,7 +286,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	float getConstantValueAsFloat();
 
@@ -312,7 +294,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	char getConstantValueAsChar();
 
@@ -321,7 +302,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	boolean getConstantValueAsBoolean();
 
@@ -330,7 +310,6 @@ public interface JvmField extends JvmFeature
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.5
 	 */
 	String getConstantValueAsString();
 

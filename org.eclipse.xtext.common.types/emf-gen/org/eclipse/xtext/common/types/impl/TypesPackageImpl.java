@@ -2572,7 +2572,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   source, 
 		   new String[] 
 		   {
-			 "documentation", "<p>Returns all annotation values. That is, default values are not included if not explicitely given.</p>"
+			 "documentation", "<p>Returns all annotation values. That is, default values are included if not explicitly given.</p>"
 		   });	
 		addAnnotation
 		  (getJvmAnnotationReference_ExplicitValues(), 

@@ -18,17 +18,15 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getAnnotation <em>Annotation</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getExplicitValues <em>Explicit Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference()
  * @model
  * @generated
- * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmAnnotationReference extends EObject
 {
@@ -72,7 +70,6 @@ public interface JvmAnnotationReference extends EObject
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference_ExplicitValues()
 	 * @model containment="true"
 	 * @generated
-	 * @since 2.5
 	 */
 	EList<JvmAnnotationValue> getExplicitValues();
 

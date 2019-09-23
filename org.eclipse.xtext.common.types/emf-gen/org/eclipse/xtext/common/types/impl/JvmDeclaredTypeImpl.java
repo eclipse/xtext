@@ -43,6 +43,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getArrayType <em>Array Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getSuperTypes <em>Super Types</em>}</li>
@@ -52,7 +53,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getPackageName <em>Package Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

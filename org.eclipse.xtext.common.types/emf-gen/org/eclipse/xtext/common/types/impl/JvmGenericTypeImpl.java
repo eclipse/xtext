@@ -33,13 +33,13 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

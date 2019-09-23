@@ -16,15 +16,14 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmFeature#getLocalClasses <em>Local Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmFeature()
  * @model abstract="true"
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmFeature extends JvmMember
 {
@@ -41,7 +40,6 @@ public interface JvmFeature extends JvmMember
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmFeature_LocalClasses()
 	 * @model containment="true"
 	 * @generated
-	 * @since 2.6
 	 */
 	EList<JvmGenericType> getLocalClasses();
 

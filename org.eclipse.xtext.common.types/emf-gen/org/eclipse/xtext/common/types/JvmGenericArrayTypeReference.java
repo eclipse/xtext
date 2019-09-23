@@ -15,15 +15,14 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType <em>Component Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericArrayTypeReference()
  * @model
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmGenericArrayTypeReference extends JvmTypeReference
 {
@@ -46,7 +45,6 @@ public interface JvmGenericArrayTypeReference extends JvmTypeReference
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType <em>Component Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Component Type</em>' containment reference.
 	 * @see #getComponentType()

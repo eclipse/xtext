@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.common.types;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Jvm Generic Type</b></em>'.
@@ -14,17 +15,16 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType()
  * @model
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator
 {
@@ -67,7 +67,6 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_StrictFloatingPoint()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isStrictFloatingPoint();
 
@@ -78,7 +77,6 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @param value the new value of the '<em>Strict Floating Point</em>' attribute.
 	 * @see #isStrictFloatingPoint()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setStrictFloatingPoint(boolean value);
 
@@ -95,7 +93,6 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_Anonymous()
 	 * @model
 	 * @generated
-	 * @since 2.6
 	 */
 	boolean isAnonymous();
 
@@ -106,7 +103,6 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @param value the new value of the '<em>Anonymous</em>' attribute.
 	 * @see #isAnonymous()
 	 * @generated
-	 * @since 2.6
 	 */
 	void setAnonymous(boolean value);
 

@@ -165,10 +165,10 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'try'
 		public Keyword getTryKeyword_1() { return cTryKeyword_1; }
 		
-		//'(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
+		//('(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
 		//expression=XExpression -> (catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally'
 		//finallyExpression=XExpression)? | expression=XExpression (catchClauses+=XCatchClause+ (=> 'finally'
-		//finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)
+		//finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression))
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'(' resources+=InitialisedVariableDeclaration (';' resources+=InitialisedVariableDeclaration)* ';'? ')'
@@ -213,7 +213,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//finallyExpression=XExpression)?
 		public Group getGroup_2_0_6() { return cGroup_2_0_6; }
 		
-		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression
+		//(catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)
 		public Alternatives getAlternatives_2_0_6_0() { return cAlternatives_2_0_6_0; }
 		
 		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
@@ -259,7 +259,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XExpression
 		public RuleCall getExpressionXExpressionParserRuleCall_2_1_0_0() { return cExpressionXExpressionParserRuleCall_2_1_0_0; }
 		
-		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression
+		//(catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)? | 'finally' finallyExpression=XExpression)
 		public Alternatives getAlternatives_2_1_1() { return cAlternatives_2_1_1; }
 		
 		//catchClauses+=XCatchClause+ (=> 'finally' finallyExpression=XExpression)?
@@ -328,7 +328,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//{xbase::XVariableDeclaration}
 		public Action getXVariableDeclarationAction_0() { return cXVariableDeclarationAction_0; }
 		
-		//writeable?='var' | 'val'
+		//(writeable?='var' | 'val')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//writeable?='var'
@@ -340,13 +340,13 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'val'
 		public Keyword getValKeyword_1_1() { return cValKeyword_1_1; }
 		
-		//=> (type=JvmTypeReference name=ValidID) | name=ValidID
+		//(=> (type=JvmTypeReference name=ValidID) | name=ValidID)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//=> (type=JvmTypeReference name=ValidID)
 		public Group getGroup_2_0() { return cGroup_2_0; }
 		
-		//type=JvmTypeReference name=ValidID
+		//(type=JvmTypeReference name=ValidID)
 		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 		
 		//type=JvmTypeReference
@@ -449,7 +449,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 		
-		//{xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]
+		//({xbase::XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
 		public Group getGroup_1_1_0_0() { return cGroup_1_1_0_0; }
 		
 		//{xbase::XBinaryOperation.leftOperand=current}
@@ -508,7 +508,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//-> ({xbase::XIfExpression.if=current} conditionalExpression?='?')
 		public Group getGroup_1_0() { return cGroup_1_0; }
 		
-		//{xbase::XIfExpression.if=current} conditionalExpression?='?'
+		//({xbase::XIfExpression.if=current} conditionalExpression?='?')
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 		
 		//{xbase::XIfExpression.if=current}

@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmTypeConstraint#getTypeReference <em>Type Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmTypeConstraint#getOwner <em>Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeConstraint()
  * @model abstract="true"

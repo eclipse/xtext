@@ -144,7 +144,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean suppressLoadInitialization = false;
 	
-	private GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL;
+	private GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL;
 	
 	private boolean bindEPackageAndEFactory = false;
 	

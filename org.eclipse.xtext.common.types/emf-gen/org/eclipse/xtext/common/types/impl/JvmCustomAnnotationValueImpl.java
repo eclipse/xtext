@@ -24,7 +24,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * An implementation of the model object '<em><b>Jvm Custom Annotation Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

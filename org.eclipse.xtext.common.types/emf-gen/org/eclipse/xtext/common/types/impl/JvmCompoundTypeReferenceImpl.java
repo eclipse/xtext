@@ -33,11 +33,11 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl#getReferences <em>References</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -89,7 +89,6 @@ public abstract class JvmCompoundTypeReferenceImpl extends JvmTypeReferenceImplC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())

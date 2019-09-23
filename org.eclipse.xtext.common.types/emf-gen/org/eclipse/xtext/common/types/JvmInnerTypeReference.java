@@ -15,16 +15,14 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmInnerTypeReference#getOuter <em>Outer</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmInnerTypeReference()
  * @model
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
- * @since 2.7
  */
 public interface JvmInnerTypeReference extends JvmParameterizedTypeReference
 {

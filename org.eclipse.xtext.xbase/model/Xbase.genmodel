@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.xbase/emf-gen" editDirectory="" editorDirectory=""
     modelPluginID="org.eclipse.xtext.xbase" forceOverwrite="true" modelName="Xbase"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.xbase.edit" editorPluginID="org.eclipse.xtext.xbase.edit"
     runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <foreignModel>XAnnotations.ecore</foreignModel>
