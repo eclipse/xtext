@@ -1083,6 +1083,105 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("\t\t\t");
       _builder.append("</plugin>");
       _builder.newLine();
+      {
+        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_2) {
+          _builder.append("\t\t\t");
+          _builder.append("<plugin>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<groupId>org.eclipse.tycho</groupId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<artifactId>target-platform-configuration</artifactId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<version>${tycho-version}</version>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<configuration>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<dependency-resolution>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t");
+          _builder.append("<extraRequirements>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("<requirement>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<type>eclipse-plugin</type>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<id>org.eclipse.xtext.logging</id>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<versionRange>1.2.15</versionRange>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("</requirement>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target ");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("platform is Luna or later. (backward compatible with kepler and previous ");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("versions) see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("<requirement>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<type>eclipse-feature</type>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<id>org.eclipse.rcp</id>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t\t");
+          _builder.append("<versionRange>0.0.0</versionRange>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t\t");
+          _builder.append("</requirement>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t\t");
+          _builder.append("</extraRequirements>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("</dependency-resolution>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("</configuration>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("</plugin>");
+          _builder.newLine();
+        }
+      }
       _builder.append("\t\t\t");
       _builder.append("<plugin>");
       _builder.newLine();
@@ -1143,8 +1242,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
-        boolean _not = (!_needsTychoBuild_2);
+        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
+        boolean _not = (!_needsTychoBuild_3);
         if (_not) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
@@ -1330,8 +1429,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginExecution>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_3) {
+        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_4) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<pluginExecution>");
           _builder.newLine();
@@ -1507,8 +1606,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_4) {
+        boolean _needsTychoBuild_5 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_5) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
           _builder.newLine();

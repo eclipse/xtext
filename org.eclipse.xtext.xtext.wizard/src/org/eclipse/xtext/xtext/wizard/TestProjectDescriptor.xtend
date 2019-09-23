@@ -95,40 +95,12 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 							<groupId>org.eclipse.xtend</groupId>
 							<artifactId>xtend-maven-plugin</artifactId>
 						</plugin>
-						«IF isEclipsePluginProject»
-							«IF needsUiHarness»
+						«IF isEclipsePluginProject && needsUiHarness»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>tycho-surefire-plugin</artifactId>
 								<configuration>
 									<useUIHarness>true</useUIHarness>
-								</configuration>
-							</plugin>
-							«ENDIF»
-							<plugin>
-								<groupId>org.eclipse.tycho</groupId>
-								<artifactId>target-platform-configuration</artifactId>
-								<configuration>
-									<dependency-resolution>
-										<extraRequirements>
-											«IF needsUiHarness»
-											<!-- to get the org.eclipse.osgi.compatibility.state plugin
-											if the target platform is Luna or later.
-											(backward compatible with kepler and previous versions)
-											see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->
-											<requirement>
-												<type>eclipse-feature</type>
-												<id>org.eclipse.rcp</id>
-												<versionRange>0.0.0</versionRange>
-											</requirement>
-											«ENDIF»
-											<requirement>
-												<type>eclipse-plugin</type>
-												<id>org.eclipse.xtext.logging</id>
-												<versionRange>1.2.15</versionRange>
-											</requirement>
-										</extraRequirements>
-									</dependency-resolution>
 								</configuration>
 							</plugin>
 						«ENDIF»

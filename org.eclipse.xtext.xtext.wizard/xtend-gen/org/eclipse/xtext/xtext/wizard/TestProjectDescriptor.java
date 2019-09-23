@@ -211,39 +211,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
-        if (_isEclipsePluginProject_1) {
-          {
-            boolean _needsUiHarness = this.needsUiHarness();
-            if (_needsUiHarness) {
-              _builder.append("\t\t");
-              _builder.append("<plugin>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append("<groupId>org.eclipse.tycho</groupId>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append("<artifactId>tycho-surefire-plugin</artifactId>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append("<configuration>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t");
-              _builder.append("<useUIHarness>true</useUIHarness>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t");
-              _builder.append("</configuration>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("</plugin>");
-              _builder.newLine();
-            }
-          }
+        if ((this.isEclipsePluginProject() && this.needsUiHarness())) {
           _builder.append("\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
@@ -253,7 +221,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
-          _builder.append("<artifactId>target-platform-configuration</artifactId>");
+          _builder.append("<artifactId>tycho-surefire-plugin</artifactId>");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
@@ -261,83 +229,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t");
-          _builder.append("<dependency-resolution>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("<extraRequirements>");
-          _builder.newLine();
-          {
-            boolean _needsUiHarness_1 = this.needsUiHarness();
-            if (_needsUiHarness_1) {
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("<!-- to get the org.eclipse.osgi.compatibility.state plugin");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("if the target platform is Luna or later.");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("(backward compatible with kepler and previous versions)");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("<requirement>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("\t");
-              _builder.append("<type>eclipse-feature</type>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("\t");
-              _builder.append("<id>org.eclipse.rcp</id>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("\t");
-              _builder.append("<versionRange>0.0.0</versionRange>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t");
-              _builder.append("</requirement>");
-              _builder.newLine();
-            }
-          }
-          _builder.append("\t\t");
-          _builder.append("\t\t\t\t");
-          _builder.append("<requirement>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t\t\t");
-          _builder.append("<type>eclipse-plugin</type>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t\t\t");
-          _builder.append("<id>org.eclipse.xtext.logging</id>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t\t\t");
-          _builder.append("<versionRange>1.2.15</versionRange>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t\t");
-          _builder.append("</requirement>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t\t");
-          _builder.append("</extraRequirements>");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t\t");
-          _builder.append("</dependency-resolution>");
+          _builder.append("<useUIHarness>true</useUIHarness>");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t");
@@ -349,8 +241,8 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         }
       }
       {
-        boolean _isEclipsePluginProject_2 = this.isEclipsePluginProject();
-        boolean _not = (!_isEclipsePluginProject_2);
+        boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
+        boolean _not = (!_isEclipsePluginProject_1);
         if (_not) {
           _builder.append("\t\t");
           _builder.append("<plugin>");
