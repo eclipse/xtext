@@ -171,7 +171,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	boolean suppressLoadInitialization = false
 
 	GenRuntimeVersion emfRuntimeVersion
-	GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL
+	GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL
 	String rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
 	
 	/**
