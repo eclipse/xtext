@@ -14,6 +14,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelFactory
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.IImageHelper
+import org.eclipse.xtext.xtype.XtypeFactory
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,9 +31,18 @@ class LabelProviderTest {
 	@Inject IImageHelper imageHelper
 
 	val extension DomainmodelFactory = DomainmodelFactory.eINSTANCE
+	val extension XtypeFactory = XtypeFactory.eINSTANCE
 
 	@Test def package_image() {
 		createPackageDeclaration.hasImage("PackageDeclaration.gif")
+	}
+	
+	@Test def import_section_image() {
+		createXImportSection.hasImage("XImportSection.gif")
+	}
+
+	@Test def import_declaration_image() {
+		createXImportDeclaration.hasImage("XImportDeclaration.gif")
 	}
 
 	@Test def entity_image() {

@@ -17,6 +17,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xtype.XtypeFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,9 +38,22 @@ public class LabelProviderTest {
   @Extension
   private final DomainmodelFactory _domainmodelFactory = DomainmodelFactory.eINSTANCE;
   
+  @Extension
+  private final XtypeFactory _xtypeFactory = XtypeFactory.eINSTANCE;
+  
   @Test
   public void package_image() {
     this.hasImage(this._domainmodelFactory.createPackageDeclaration(), "PackageDeclaration.gif");
+  }
+  
+  @Test
+  public void import_section_image() {
+    this.hasImage(this._xtypeFactory.createXImportSection(), "XImportSection.gif");
+  }
+  
+  @Test
+  public void import_declaration_image() {
+    this.hasImage(this._xtypeFactory.createXImportDeclaration(), "XImportDeclaration.gif");
   }
   
   @Test
