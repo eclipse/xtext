@@ -16,8 +16,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Jvm Constructor</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

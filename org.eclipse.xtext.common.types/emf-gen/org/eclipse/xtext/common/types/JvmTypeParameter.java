@@ -15,11 +15,11 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmTypeParameter#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmTypeParameter#getDeclarator <em>Declarator</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeParameter()
  * @model

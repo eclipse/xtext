@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}</li>
@@ -26,12 +27,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getPackageName <em>Package Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmDeclaredType()
  * @model abstract="true"
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmDeclaredType extends JvmMember, JvmComponentType
 {
@@ -198,7 +197,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-model-doc -->
 	 * @model dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmFeature>" required="true"
 	 * @generated
-	 * @since 2.1
 	 */
 	Iterable<JvmFeature> findAllFeaturesByName(String simpleName);
 
@@ -211,7 +209,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmFeature>" required="true"
 	 * @generated
-	 * @since 2.1
 	 */
 	Iterable<JvmFeature> getAllFeatures();
 
@@ -220,7 +217,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmTypeReference>"
 	 * @generated
-	 * @since 2.6
 	 */
 	Iterable<JvmTypeReference> getExtendedInterfaces();
 
@@ -229,7 +225,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.6
 	 */
 	JvmTypeReference getExtendedClass();
 
@@ -238,7 +233,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.6
 	 */
 	boolean isInstantiateable();
 
@@ -251,7 +245,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-model-doc -->
 	 * @model dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmDeclaredType>"
 	 * @generated
-	 * @since 2.6
 	 */
 	Iterable<JvmDeclaredType> findAllNestedTypesByName(String simpleName);
 
@@ -260,7 +253,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
-	 * @since 2.6
 	 */
 	boolean isLocal();
 
@@ -269,7 +261,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmConstructor>" required="true"
 	 * @generated
-	 * @since 2.6
 	 */
 	Iterable<JvmConstructor> getDeclaredConstructors();
 
@@ -282,7 +273,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmDeclaredType>" required="true"
 	 * @generated
-	 * @since 2.6
 	 */
 	Iterable<JvmDeclaredType> getAllNestedTypes();
 

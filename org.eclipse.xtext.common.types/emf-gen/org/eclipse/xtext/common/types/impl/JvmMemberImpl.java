@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getVisibility <em>Visibility</em>}</li>
@@ -35,7 +36,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

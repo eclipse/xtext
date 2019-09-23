@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmExecutable#isVarArgs <em>Var Args</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmExecutable()
  * @model abstract="true"

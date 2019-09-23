@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -142,7 +142,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> (element=[types::JvmOperation|ValidID] '=')
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//element=[types::JvmOperation|ValidID] '='
+		//(element=[types::JvmOperation|ValidID] '=')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
 		//element=[types::JvmOperation|ValidID]
@@ -204,7 +204,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> ({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
-		//{xbase::XListLiteral} '#' '['
+		//({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0_0() { return cGroup_0_0_0; }
 		
 		//{xbase::XListLiteral}
@@ -298,7 +298,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//=> ({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
-		//{xbase::XListLiteral} '#' '['
+		//({xbase::XListLiteral} '#' '[')
 		public Group getGroup_0_0_0() { return cGroup_0_0_0; }
 		
 		//{xbase::XListLiteral}

@@ -15,6 +15,7 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}</li>
@@ -22,11 +23,9 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#isDeprecated <em>Deprecated</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember()
  * @model abstract="true"
- * @noimplement This interface is not intended to be implemented by clients.
  * @generated
  */
 public interface JvmMember extends JvmAnnotationTarget
@@ -144,7 +143,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Deprecated()
 	 * @model unsettable="true"
 	 * @generated
-	 * @since 2.7
 	 */
 	boolean isDeprecated();
 
@@ -157,7 +155,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * @see #unsetDeprecated()
 	 * @see #isDeprecated()
 	 * @generated
-	 * @since 2.7
 	 */
 	void setDeprecated(boolean value);
 
@@ -169,7 +166,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * @see #isDeprecated()
 	 * @see #setDeprecated(boolean)
 	 * @generated
-	 * @since 2.7
 	 */
 	void unsetDeprecated();
 
@@ -182,7 +178,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * @see #isDeprecated()
 	 * @see #setDeprecated(boolean)
 	 * @generated
-	 * @since 2.7
 	 */
 	boolean isSetDeprecated();
 

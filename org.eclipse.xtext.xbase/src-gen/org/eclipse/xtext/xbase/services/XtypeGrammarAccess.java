@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -56,7 +56,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 		public Group getGroup_0_1() { return cGroup_0_1; }
 		
-		//{JvmGenericArrayTypeReference.componentType=current} ArrayBrackets
+		//({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
 		public Group getGroup_0_1_0() { return cGroup_0_1_0; }
 		
 		//{JvmGenericArrayTypeReference.componentType=current}
@@ -239,7 +239,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ({JvmInnerTypeReference.outer=current} '.')
 		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
 		
-		//{JvmInnerTypeReference.outer=current} '.'
+		//({JvmInnerTypeReference.outer=current} '.')
 		public Group getGroup_1_4_0_0() { return cGroup_1_4_0_0; }
 		
 		//{JvmInnerTypeReference.outer=current}
@@ -615,8 +615,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 		
-		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
-		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard
+		//(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
+		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
@@ -644,7 +644,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedNameInStaticImport
 		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1; }
 		
-		//wildcard?='*' | memberName=ValidID
+		//(wildcard?='*' | memberName=ValidID)
 		public Alternatives getAlternatives_1_0_3() { return cAlternatives_1_0_3; }
 		
 		//wildcard?='*'

@@ -17,7 +17,6 @@ package org.eclipse.xtext.common.types;
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmSynonymTypeReference()
  * @model
  * @generated
- * @since 2.1
  */
 public interface JvmSynonymTypeReference extends JvmCompoundTypeReference
 {

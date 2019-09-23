@@ -25,10 +25,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl#getOperation <em>Operation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

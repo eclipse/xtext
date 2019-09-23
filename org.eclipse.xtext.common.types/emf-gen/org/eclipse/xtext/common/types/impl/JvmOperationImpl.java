@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isFinal <em>Final</em>}</li>
@@ -37,7 +38,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isNative <em>Native</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

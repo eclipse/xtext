@@ -24,10 +24,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmByteAnnotationValueImpl#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

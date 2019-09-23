@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmParameterizedTypeReference()
  * @model

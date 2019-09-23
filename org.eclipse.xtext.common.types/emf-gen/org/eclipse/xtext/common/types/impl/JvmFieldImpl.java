@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isFinal <em>Final</em>}</li>
@@ -34,7 +35,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#getConstantValue <em>Constant Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

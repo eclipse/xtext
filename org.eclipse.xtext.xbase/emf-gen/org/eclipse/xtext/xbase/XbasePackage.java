@@ -125,7 +125,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * The feature id for the '<em><b>Conditional Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -135,7 +134,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * The number of structural features of the '<em>XIf Expression</em>' class.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -1641,7 +1639,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -1651,7 +1648,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * The number of structural features of the '<em>XTry Catch Finally Expression</em>' class.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -1926,7 +1922,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression <em>Conditional Expression</em>}'.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Conditional Expression</em>'.
 	 * @see org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression()
@@ -2998,7 +2993,6 @@ public interface XbasePackage extends EPackage
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getResources <em>Resources</em>}'.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Resources</em>'.
 	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getResources()

@@ -22,12 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}</li>
  * </ul>
- * 
+ *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmCustomAnnotationValue()
  * @model
  * @generated
- * @since 2.1
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmCustomAnnotationValue extends JvmAnnotationValue
 {

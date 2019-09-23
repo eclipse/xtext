@@ -15,10 +15,10 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnyTypeReference#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnyTypeReference()
  * @model

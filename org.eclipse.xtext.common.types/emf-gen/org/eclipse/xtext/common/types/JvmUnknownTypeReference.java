@@ -15,17 +15,14 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName <em>Qualified Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmUnknownTypeReference()
  * @model
  * @generated
- * @since 2.1
- * @noimplement This interface is not intended to be implemented by clients.
- * @noextend This interface is not intended to be extended by clients.
  */
 public interface JvmUnknownTypeReference extends JvmTypeReference
 {
@@ -53,7 +50,6 @@ public interface JvmUnknownTypeReference extends JvmTypeReference
 	 * @param value the new value of the '<em>Qualified Name</em>' attribute.
 	 * @see #getQualifiedName()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setQualifiedName(String value);
 

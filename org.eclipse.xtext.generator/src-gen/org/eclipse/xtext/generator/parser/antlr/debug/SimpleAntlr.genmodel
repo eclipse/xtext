@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator/src-gen" editDirectory="/org.eclipse.xtext.generator.edit/src"
     editorDirectory="/org.eclipse.xtext.generator.editor/src" modelPluginID="org.eclipse.xtext.generator"
     forceOverwrite="true" modelName="SimpleAntlr" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.edit"
+    complianceLevel="8.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.edit"
     editorPluginID="org.eclipse.xtext.generator.editor" runtimeVersion="2.9">
   <genPackages prefix="SimpleAntlr" basePackage="org.eclipse.xtext.generator.parser.antlr.debug"
       disposableProviderFactory="true" ecorePackage="SimpleAntlr.ecore#/">

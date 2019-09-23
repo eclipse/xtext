@@ -33,11 +33,11 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

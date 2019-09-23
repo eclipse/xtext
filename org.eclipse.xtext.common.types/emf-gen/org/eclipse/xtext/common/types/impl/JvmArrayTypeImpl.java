@@ -27,10 +27,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl#getComponentType <em>Component Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

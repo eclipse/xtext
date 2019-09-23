@@ -25,11 +25,11 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl#getParameterType <em>Parameter Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -24,10 +24,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -69,7 +69,6 @@ public class JvmAnyTypeReferenceImpl extends JvmTypeReferenceImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())

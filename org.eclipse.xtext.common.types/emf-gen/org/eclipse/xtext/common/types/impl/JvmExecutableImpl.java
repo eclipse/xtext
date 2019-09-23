@@ -36,13 +36,13 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl#isVarArgs <em>Var Args</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

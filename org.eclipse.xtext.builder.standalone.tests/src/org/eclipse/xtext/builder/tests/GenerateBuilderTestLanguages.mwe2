@@ -32,7 +32,7 @@ Workflow {
 			
 			fragment = ecore.EMFGeneratorFragment2 {
 				emfRuntimeVersion = "2.9"
-				jdkLevel = "JDK60"
+				jdkLevel = "JDK80"
 			}
 			fragment = grammarAccess.GrammarAccessFragment2 {}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}

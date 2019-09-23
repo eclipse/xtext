@@ -35,12 +35,12 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl#getDeclarator <em>Declarator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

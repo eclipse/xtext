@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeReference()
  * @model abstract="true"
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmTypeReference extends EObject
 {
@@ -81,7 +80,6 @@ public interface JvmTypeReference extends EObject
 	 * <!-- end-user-doc -->
 	 * @model visitorDataType="org.eclipse.xtext.common.types.ITypeReferenceVisitor<Result>"
 	 * @generated
-	 * @since 2.1
 	 */
 	<Result> Result accept(ITypeReferenceVisitor<Result> visitor);
 
@@ -90,7 +88,6 @@ public interface JvmTypeReference extends EObject
 	 * <!-- end-user-doc -->
 	 * @model visitorDataType="org.eclipse.xtext.common.types.ITypeReferenceVisitorWithParameter<Parameter, Result>"
 	 * @generated
-	 * @since 2.1
 	 */
 	<Parameter, Result> Result accept(ITypeReferenceVisitorWithParameter<Parameter, Result> visitor, Parameter parameter);
 

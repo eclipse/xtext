@@ -131,7 +131,6 @@ public interface XIfExpression extends XExpression
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XIfExpression#isConditionalExpression <em>Conditional Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * @since 2.18
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Conditional Expression</em>' attribute.
 	 * @see #isConditionalExpression()

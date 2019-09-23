@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.EReference;
  * @see org.eclipse.xtext.common.types.TypesFactory
  * @model kind="package"
  * @generated
- * @noimplement This interface is not intended to be implemented by clients.
- * @noextend This interface is not intended to be extended by clients.
  */
 public interface TypesPackage extends EPackage
 {
@@ -313,7 +311,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_MEMBER__DEPRECATED = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
 
@@ -387,7 +384,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_DECLARED_TYPE__DEPRECATED = JVM_MEMBER__DEPRECATED;
 
@@ -1036,7 +1032,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_FEATURE__LOCAL_CLASSES = JVM_MEMBER_FEATURE_COUNT + 0;
 
@@ -1119,7 +1114,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_FIELD__LOCAL_CLASSES = JVM_FEATURE__LOCAL_CLASSES;
 
@@ -1156,7 +1150,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_FIELD__VOLATILE = JVM_FEATURE_FEATURE_COUNT + 3;
 
@@ -1166,7 +1159,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_FIELD__TRANSIENT = JVM_FEATURE_FEATURE_COUNT + 4;
 
@@ -1176,7 +1168,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.5
 	 */
 	int JVM_FIELD__CONSTANT = JVM_FEATURE_FEATURE_COUNT + 5;
 
@@ -1186,7 +1177,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.5
 	 */
 	int JVM_FIELD__CONSTANT_VALUE = JVM_FEATURE_FEATURE_COUNT + 6;
 
@@ -1269,7 +1259,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_ENUMERATION_LITERAL__LOCAL_CLASSES = JVM_FIELD__LOCAL_CLASSES;
 
@@ -1306,7 +1295,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_ENUMERATION_LITERAL__VOLATILE = JVM_FIELD__VOLATILE;
 
@@ -1325,7 +1313,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.5
 	 */
 	int JVM_ENUMERATION_LITERAL__CONSTANT = JVM_FIELD__CONSTANT;
 
@@ -1335,7 +1322,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.5
 	 */
 	int JVM_ENUMERATION_LITERAL__CONSTANT_VALUE = JVM_FIELD__CONSTANT_VALUE;
 
@@ -1499,7 +1485,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_GENERIC_TYPE__STRICT_FLOATING_POINT = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
 
@@ -1509,7 +1494,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_GENERIC_TYPE__ANONYMOUS = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
 
@@ -1591,7 +1575,6 @@ public interface TypesPackage extends EPackage
 	/**
 	 * The feature id for the '<em><b>Component Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
@@ -1670,8 +1653,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCompoundTypeReference()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_COMPOUND_TYPE_REFERENCE = 49;
 
@@ -1681,8 +1662,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_COMPOUND_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -1701,8 +1680,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_COMPOUND_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
@@ -1722,8 +1699,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_MULTI_TYPE_REFERENCE__TYPE = JVM_COMPOUND_TYPE_REFERENCE__TYPE;
 
@@ -1733,8 +1708,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_MULTI_TYPE_REFERENCE__REFERENCES = JVM_COMPOUND_TYPE_REFERENCE__REFERENCES;
 
@@ -1817,7 +1790,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_EXECUTABLE__LOCAL_CLASSES = JVM_FEATURE__LOCAL_CLASSES;
 
@@ -1936,7 +1908,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_CONSTRUCTOR__LOCAL_CLASSES = JVM_EXECUTABLE__LOCAL_CLASSES;
 
@@ -2055,7 +2026,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.6
 	 */
 	int JVM_OPERATION__LOCAL_CLASSES = JVM_EXECUTABLE__LOCAL_CLASSES;
 
@@ -2146,7 +2116,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_OPERATION__SYNCHRONIZED = JVM_EXECUTABLE_FEATURE_COUNT + 5;
 
@@ -2156,7 +2125,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_OPERATION__DEFAULT = JVM_EXECUTABLE_FEATURE_COUNT + 6;
 
@@ -2166,7 +2134,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_OPERATION__NATIVE = JVM_EXECUTABLE_FEATURE_COUNT + 7;
 
@@ -2176,7 +2143,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_OPERATION__STRICT_FLOATING_POINT = JVM_EXECUTABLE_FEATURE_COUNT + 8;
 
@@ -2260,7 +2226,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.5
 	 */
 	int JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES = 1;
 
@@ -2752,8 +2717,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE = 45;
 
@@ -2763,8 +2726,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2774,8 +2735,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_DELEGATE_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
@@ -2786,8 +2745,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SPECIALIZED_TYPE_REFERENCE = 46;
 
@@ -2797,8 +2754,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2808,8 +2763,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SPECIALIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
@@ -2820,8 +2773,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSynonymTypeReference()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SYNONYM_TYPE_REFERENCE = 47;
 
@@ -2831,8 +2782,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SYNONYM_TYPE_REFERENCE__TYPE = JVM_COMPOUND_TYPE_REFERENCE__TYPE;
 
@@ -2842,8 +2791,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SYNONYM_TYPE_REFERENCE__REFERENCES = JVM_COMPOUND_TYPE_REFERENCE__REFERENCES;
 
@@ -2853,8 +2800,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_SYNONYM_TYPE_REFERENCE_FEATURE_COUNT = JVM_COMPOUND_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2865,8 +2810,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUnknownTypeReference()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_UNKNOWN_TYPE_REFERENCE = 48;
 
@@ -2876,7 +2819,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2886,8 +2828,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_UNKNOWN_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
@@ -2898,8 +2838,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCustomAnnotationValue()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_CUSTOM_ANNOTATION_VALUE = 50;
 
@@ -2909,19 +2847,15 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_CUSTOM_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
 
 	/**
-	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_CUSTOM_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
 
@@ -2931,8 +2865,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_CUSTOM_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
 
@@ -2943,7 +2875,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmInnerTypeReference()
 	 * @generated
-	 * @since 2.7
 	 */
 	int JVM_INNER_TYPE_REFERENCE = 51;
 
@@ -2953,7 +2884,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_INNER_TYPE_REFERENCE__ARGUMENTS = JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS;
 
@@ -2963,7 +2893,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_INNER_TYPE_REFERENCE__TYPE = JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE;
 
@@ -2973,7 +2902,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_INNER_TYPE_REFERENCE__OUTER = JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
@@ -2983,7 +2911,6 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.7
 	 */
 	int JVM_INNER_TYPE_REFERENCE_FEATURE_COUNT = JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
@@ -2994,8 +2921,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmVisibility
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int JVM_VISIBILITY = 52;
 
@@ -3006,8 +2931,6 @@ public interface TypesPackage extends EPackage
 	 * @see java.lang.Iterable
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ITERABLE = 53;
 
@@ -3018,8 +2941,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitor()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ITYPE_REFERENCE_VISITOR = 54;
 
@@ -3030,8 +2951,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitorWithParameter()
 	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 55;
 
@@ -3401,7 +3320,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint()
 	 * @see #getJvmGenericType()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmGenericType_StrictFloatingPoint();
 
@@ -3413,7 +3331,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmGenericType#isAnonymous()
 	 * @see #getJvmGenericType()
 	 * @generated
-	 * @since 2.6
 	 */
 	EAttribute getJvmGenericType_Anonymous();
 
@@ -3472,7 +3389,6 @@ public interface TypesPackage extends EPackage
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
-	 * @since 2.1
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Component Type</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getComponentType()
@@ -3584,7 +3500,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmMember#isDeprecated()
 	 * @see #getJvmMember()
 	 * @generated
-	 * @since 2.7
 	 */
 	EAttribute getJvmMember_Deprecated();
 
@@ -3606,7 +3521,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmFeature#getLocalClasses()
 	 * @see #getJvmFeature()
 	 * @generated
-	 * @since 2.6
 	 */
 	EReference getJvmFeature_LocalClasses();
 
@@ -3661,7 +3575,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmField#isVolatile()
 	 * @see #getJvmField()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmField_Volatile();
 
@@ -3673,7 +3586,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmField#isTransient()
 	 * @see #getJvmField()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmField_Transient();
 
@@ -3685,7 +3597,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmField#isConstant()
 	 * @see #getJvmField()
 	 * @generated
-	 * @since 2.5
 	 */
 	EAttribute getJvmField_Constant();
 
@@ -3697,7 +3608,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmField#getConstantValue()
 	 * @see #getJvmField()
 	 * @generated
-	 * @since 2.5
 	 */
 	EAttribute getJvmField_ConstantValue();
 
@@ -3827,7 +3737,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmOperation#isSynchronized()
 	 * @see #getJvmOperation()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmOperation_Synchronized();
 
@@ -3839,7 +3748,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmOperation#isDefault()
 	 * @see #getJvmOperation()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmOperation_Default();
 
@@ -3851,7 +3759,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmOperation#isNative()
 	 * @see #getJvmOperation()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmOperation_Native();
 
@@ -3863,7 +3770,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmOperation#isStrictFloatingPoint()
 	 * @see #getJvmOperation()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmOperation_StrictFloatingPoint();
 
@@ -3949,7 +3855,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getExplicitValues()
 	 * @see #getJvmAnnotationReference()
 	 * @generated
-	 * @since 2.5
 	 */
 	EReference getJvmAnnotationReference_ExplicitValues();
 
@@ -4233,7 +4138,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Delegate Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmDelegateTypeReference();
 
@@ -4245,7 +4149,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmDelegateTypeReference#getDelegate()
 	 * @see #getJvmDelegateTypeReference()
 	 * @generated
-	 * @since 2.1
 	 */
 	EReference getJvmDelegateTypeReference_Delegate();
 
@@ -4256,7 +4159,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Specialized Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmSpecializedTypeReference();
 
@@ -4268,7 +4170,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmSpecializedTypeReference#getEquivalent()
 	 * @see #getJvmSpecializedTypeReference()
 	 * @generated
-	 * @since 2.1
 	 */
 	EReference getJvmSpecializedTypeReference_Equivalent();
 
@@ -4279,7 +4180,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Synonym Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmSynonymTypeReference
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmSynonymTypeReference();
 
@@ -4290,7 +4190,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Unknown Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmUnknownTypeReference();
 
@@ -4302,7 +4201,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName()
 	 * @see #getJvmUnknownTypeReference()
 	 * @generated
-	 * @since 2.4
 	 */
 	EAttribute getJvmUnknownTypeReference_QualifiedName();
 
@@ -4313,7 +4211,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Compound Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmCompoundTypeReference();
 
@@ -4325,7 +4222,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference#getType()
 	 * @see #getJvmCompoundTypeReference()
 	 * @generated
-	 * @since 2.1
 	 */
 	EReference getJvmCompoundTypeReference_Type();
 
@@ -4337,7 +4233,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmCompoundTypeReference#getReferences()
 	 * @see #getJvmCompoundTypeReference()
 	 * @generated
-	 * @since 2.1
 	 */
 	EReference getJvmCompoundTypeReference_References();
 
@@ -4348,7 +4243,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Custom Annotation Value</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 	 * @generated
-	 * @since 2.1
 	 */
 	EClass getJvmCustomAnnotationValue();
 
@@ -4356,11 +4250,10 @@ public interface TypesPackage extends EPackage
 	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @return the meta object for the reference list '<em>Values</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues()
 	 * @see #getJvmCustomAnnotationValue()
 	 * @generated
-	 * @since 2.8
 	 */
 	EReference getJvmCustomAnnotationValue_Values();
 
@@ -4371,7 +4264,6 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for class '<em>Jvm Inner Type Reference</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmInnerTypeReference
 	 * @generated
-	 * @since 2.7
 	 */
 	EClass getJvmInnerTypeReference();
 
@@ -4383,7 +4275,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.JvmInnerTypeReference#getOuter()
 	 * @see #getJvmInnerTypeReference()
 	 * @generated
-	 * @since 2.7
 	 */
 	EReference getJvmInnerTypeReference_Outer();
 
@@ -4416,7 +4307,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
 	 * @model instanceClass="org.eclipse.xtext.common.types.util.ITypeReferenceVisitor" serializeable="false" typeParameters="Result"
 	 * @generated
-	 * @since 2.1
 	 */
 	EDataType getITypeReferenceVisitor();
 
@@ -4428,7 +4318,6 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
 	 * @model instanceClass="org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter" serializeable="false" typeParameters="Parameter Result"
 	 * @generated
-	 * @since 2.1
 	 */
 	EDataType getITypeReferenceVisitorWithParameter();
 
@@ -4452,8 +4341,6 @@ public interface TypesPackage extends EPackage
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @noimplement This interface is not intended to be implemented by clients.
-	 * @noextend 
 	 */
 	interface Literals
 	{
@@ -4768,7 +4655,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_GENERIC_TYPE__STRICT_FLOATING_POINT = eINSTANCE.getJvmGenericType_StrictFloatingPoint();
 
@@ -4777,7 +4663,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.6
 		 */
 		EAttribute JVM_GENERIC_TYPE__ANONYMOUS = eINSTANCE.getJvmGenericType_Anonymous();
 
@@ -4830,7 +4715,6 @@ public interface TypesPackage extends EPackage
 		/**
 		 * The meta object literal for the '<em><b>Component Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
-		 * @since 2.1
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
@@ -4939,7 +4823,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.6
 		 */
 		EReference JVM_FEATURE__LOCAL_CLASSES = eINSTANCE.getJvmFeature_LocalClasses();
 
@@ -4982,7 +4865,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_FIELD__VOLATILE = eINSTANCE.getJvmField_Volatile();
 
@@ -4991,7 +4873,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_FIELD__TRANSIENT = eINSTANCE.getJvmField_Transient();
 
@@ -5000,7 +4881,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.5
 		 */
 		EAttribute JVM_FIELD__CONSTANT = eINSTANCE.getJvmField_Constant();
 
@@ -5009,7 +4889,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.5
 		 */
 		EAttribute JVM_FIELD__CONSTANT_VALUE = eINSTANCE.getJvmField_ConstantValue();
 
@@ -5112,7 +4991,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_OPERATION__SYNCHRONIZED = eINSTANCE.getJvmOperation_Synchronized();
 
@@ -5121,7 +4999,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_OPERATION__DEFAULT = eINSTANCE.getJvmOperation_Default();
 
@@ -5130,7 +5007,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_OPERATION__NATIVE = eINSTANCE.getJvmOperation_Native();
 
@@ -5139,7 +5015,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_OPERATION__STRICT_FLOATING_POINT = eINSTANCE.getJvmOperation_StrictFloatingPoint();
 
@@ -5210,7 +5085,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.5
 		 */
 		EReference JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES = eINSTANCE.getJvmAnnotationReference_ExplicitValues();
 
@@ -5455,7 +5329,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmDelegateTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDelegateTypeReference()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_DELEGATE_TYPE_REFERENCE = eINSTANCE.getJvmDelegateTypeReference();
 
@@ -5464,7 +5337,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
 		 */
 		EReference JVM_DELEGATE_TYPE_REFERENCE__DELEGATE = eINSTANCE.getJvmDelegateTypeReference_Delegate();
 
@@ -5475,7 +5347,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmSpecializedTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSpecializedTypeReference()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_SPECIALIZED_TYPE_REFERENCE = eINSTANCE.getJvmSpecializedTypeReference();
 
@@ -5484,7 +5355,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
 		 */
 		EReference JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT = eINSTANCE.getJvmSpecializedTypeReference_Equivalent();
 
@@ -5495,7 +5365,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmSynonymTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmSynonymTypeReference()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_SYNONYM_TYPE_REFERENCE = eINSTANCE.getJvmSynonymTypeReference();
 
@@ -5506,7 +5375,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmUnknownTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUnknownTypeReference()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_UNKNOWN_TYPE_REFERENCE = eINSTANCE.getJvmUnknownTypeReference();
 
@@ -5515,7 +5383,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.4
 		 */
 		EAttribute JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME = eINSTANCE.getJvmUnknownTypeReference_QualifiedName();
 
@@ -5526,7 +5393,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCompoundTypeReference()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_COMPOUND_TYPE_REFERENCE = eINSTANCE.getJvmCompoundTypeReference();
 
@@ -5535,7 +5401,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
 		 */
 		EReference JVM_COMPOUND_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmCompoundTypeReference_Type();
 
@@ -5544,7 +5409,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
 		 */
 		EReference JVM_COMPOUND_TYPE_REFERENCE__REFERENCES = eINSTANCE.getJvmCompoundTypeReference_References();
 
@@ -5555,16 +5419,14 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmCustomAnnotationValueImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCustomAnnotationValue()
 		 * @generated
-		 * @since 2.1
 		 */
 		EClass JVM_CUSTOM_ANNOTATION_VALUE = eINSTANCE.getJvmCustomAnnotationValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
 		 */
 		EReference JVM_CUSTOM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCustomAnnotationValue_Values();
 
@@ -5575,7 +5437,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmInnerTypeReference()
 		 * @generated
-		 * @since 2.7
 		 */
 		EClass JVM_INNER_TYPE_REFERENCE = eINSTANCE.getJvmInnerTypeReference();
 
@@ -5584,7 +5445,6 @@ public interface TypesPackage extends EPackage
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.7
 		 */
 		EReference JVM_INNER_TYPE_REFERENCE__OUTER = eINSTANCE.getJvmInnerTypeReference_Outer();
 
@@ -5615,7 +5475,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitor
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitor()
 		 * @generated
-		 * @since 2.1
 		 */
 		EDataType ITYPE_REFERENCE_VISITOR = eINSTANCE.getITypeReferenceVisitor();
 
@@ -5626,7 +5485,6 @@ public interface TypesPackage extends EPackage
 		 * @see org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter
 		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getITypeReferenceVisitorWithParameter()
 		 * @generated
-		 * @since 2.1
 		 */
 		EDataType ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = eINSTANCE.getITypeReferenceVisitorWithParameter();
 

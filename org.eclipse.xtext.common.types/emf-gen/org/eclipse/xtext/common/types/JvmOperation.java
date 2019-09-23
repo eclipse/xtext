@@ -15,6 +15,7 @@ package org.eclipse.xtext.common.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isFinal <em>Final</em>}</li>
@@ -26,7 +27,6 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isNative <em>Native</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmOperation#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation()
  * @model
@@ -177,7 +177,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Synchronized()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isSynchronized();
 
@@ -188,7 +187,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @param value the new value of the '<em>Synchronized</em>' attribute.
 	 * @see #isSynchronized()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setSynchronized(boolean value);
 
@@ -205,7 +203,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Default()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isDefault();
 
@@ -216,7 +213,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @param value the new value of the '<em>Default</em>' attribute.
 	 * @see #isDefault()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setDefault(boolean value);
 
@@ -233,7 +229,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_Native()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isNative();
 
@@ -244,7 +239,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @param value the new value of the '<em>Native</em>' attribute.
 	 * @see #isNative()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setNative(boolean value);
 
@@ -261,7 +255,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_StrictFloatingPoint()
 	 * @model
 	 * @generated
-	 * @since 2.4
 	 */
 	boolean isStrictFloatingPoint();
 
@@ -272,7 +265,6 @@ public interface JvmOperation extends JvmExecutable
 	 * @param value the new value of the '<em>Strict Floating Point</em>' attribute.
 	 * @see #isStrictFloatingPoint()
 	 * @generated
-	 * @since 2.4
 	 */
 	void setStrictFloatingPoint(boolean value);
 
