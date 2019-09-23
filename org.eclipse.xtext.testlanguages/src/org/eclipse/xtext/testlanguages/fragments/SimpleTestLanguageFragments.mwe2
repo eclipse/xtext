@@ -7,7 +7,7 @@ var backtrack = false
 var memoize = false
 var classSplitting = true
 
-var jdkLevel = "JDK60"
+var jdkLevel = "JDK80"
 
 var parser = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
   	options = auto-inject {

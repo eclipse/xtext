@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtext.generator/src-gen" editDirectory="/org.eclipse.xtext.xtext.generator.edit/src"
     editorDirectory="/org.eclipse.xtext.xtext.generator.editor/src" modelPluginID="org.eclipse.xtext.xtext.generator"
     forceOverwrite="true" modelName="SimpleExpressions" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtext.generator.edit"
+    complianceLevel="8.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xtext.generator.edit"
     editorPluginID="org.eclipse.xtext.xtext.generator.editor" runtimeVersion="2.9">
   <genPackages prefix="SimpleExpressions" basePackage="org.eclipse.xtext.xtext.generator.parser.antlr.splitting"
       disposableProviderFactory="true" ecorePackage="SimpleExpressions.ecore#/">

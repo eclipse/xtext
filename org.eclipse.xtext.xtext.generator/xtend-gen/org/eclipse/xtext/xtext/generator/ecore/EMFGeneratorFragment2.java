@@ -192,7 +192,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   private GenRuntimeVersion emfRuntimeVersion;
   
-  private GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL;
+  private GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL;
   
   private String rootExtendsClass = "org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container";
   

@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.xtext.ide;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 import org.eclipse.xtext.ide.DefaultIdeModule;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper;
@@ -14,9 +16,6 @@ import org.eclipse.xtext.ide.server.rename.IRenameService2;
 import org.eclipse.xtext.ide.server.rename.RenameService2;
 import org.eclipse.xtext.xtext.ide.contentassist.antlr.XtextParser;
 import org.eclipse.xtext.xtext.ide.contentassist.antlr.internal.InternalXtextLexer;
-
-import com.google.inject.Binder;
-import com.google.inject.name.Names;
 
 /**
  * Manual modifications go to {@link XtextIdeModule}.
