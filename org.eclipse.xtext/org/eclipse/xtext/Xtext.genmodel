@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext/emf-gen" editDirectory="/org.eclipse.xtext.edit/src"
     editorDirectory="/org.eclipse.xtext.editor/src" modelPluginID="org.eclipse.xtext"
     forceOverwrite="true" modelName="Xtext" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.edit" editorPluginID="org.eclipse.xtext.editor"
     usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>Xtext.ecore</foreignModel>
