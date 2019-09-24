@@ -3,15 +3,15 @@
     <template name="Package" description="template for a Package"
         id="org.eclipse.xtext.example.domainmodel.Domainmodel.PackageDeclaration"
         context="org.eclipse.xtext.example.domainmodel.Domainmodel.PackageDeclaration"
-        enabled="true">package ${name} { 
-    ${cursor}   
+        enabled="true">package ${name} {
+	${cursor}
 }</template>
     <template name="Entity" description="template for an Entity"
         id="org.eclipse.xtext.example.domainmodel.Domainmodel.Entity"
         context="org.eclipse.xtext.example.domainmodel.Domainmodel.Entity"
         enabled="true"
 >entity ${name} {
-	${cursor} 
+	${cursor}
 }</template>
     <template name="Property" description="template for a Property"
         id="org.eclipse.xtext.example.domainmodel.Domainmodel.Property"

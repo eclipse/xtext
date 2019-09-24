@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -58,7 +58,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("entity name {");
       _builder.newLine();
-      _builder.append("\t ");
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("}");
       _applyProposal.expectContent(_builder.toString());
@@ -72,9 +72,9 @@ public class ContentAssistTest extends AbstractContentAssistTest {
     try {
       ContentAssistProcessorTestBuilder _applyProposal = this.newBuilder().applyProposal("Package - template for a Package");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package name { ");
+      _builder.append("package name {");
       _builder.newLine();
-      _builder.append("       ");
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("}");
       _applyProposal.expectContent(_builder.toString());

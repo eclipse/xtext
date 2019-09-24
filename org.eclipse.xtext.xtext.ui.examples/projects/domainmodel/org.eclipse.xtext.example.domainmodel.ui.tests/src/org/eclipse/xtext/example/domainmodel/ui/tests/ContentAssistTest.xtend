@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -35,14 +35,14 @@ class ContentAssistTest extends AbstractContentAssistTest {
 	@Test def void testEntityTemplateProposal() {
 		newBuilder.applyProposal("Entity - template for an Entity").expectContent('''
 		entity name {
-			 
+			
 		}''')
 	}
 
 	@Test def void testPackageTemplateProposal() {
 		newBuilder.applyProposal("Package - template for a Package").expectContent('''
-		package name { 
-		       
+		package name {
+			
 		}''')
 	}
 }
