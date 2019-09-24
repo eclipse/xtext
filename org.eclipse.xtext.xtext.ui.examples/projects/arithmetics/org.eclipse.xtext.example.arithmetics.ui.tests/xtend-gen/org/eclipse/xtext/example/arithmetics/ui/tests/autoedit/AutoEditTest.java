@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator;
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.testing.InjectWith;
@@ -87,11 +86,6 @@ public class AutoEditTest extends AbstractAutoEditTest {
   @Override
   protected String getFileExtension() {
     return this.extensionProvider.getPrimaryFileExtension();
-  }
-  
-  @Override
-  protected String getEditorId() {
-    return ArithmeticsActivator.ORG_ECLIPSE_XTEXT_EXAMPLE_ARITHMETICS_ARITHMETICS;
   }
   
   protected IProject createPluginProject(final String name) throws CoreException {
