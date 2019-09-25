@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.ui.tests
 
+import java.util.List
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest
@@ -19,6 +20,9 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelUiInjectorProvider)
 class ContentAssistTest extends AbstractContentAssistTest {
+
+	// cursor position marker
+	val c = '''<|>'''
 
 	@Test def void testImportCompletion() {
 		newBuilder.append('import java.util.Da').assertText('java.util.Date')
@@ -44,5 +48,50 @@ class ContentAssistTest extends AbstractContentAssistTest {
 		package name {
 			
 		}''')
+	}
+
+	@Test def testPropertyTemplateProposal() {
+		'''
+			entity E {
+				«c»
+			}
+		'''.testContentAssistant(#[
+			'Operation - template for an Operation',
+			'Property - template for a Property',
+			'op'
+		], 'Property - template for a Property', '''
+			entity E {
+				propertyName : typeName
+			}
+		''')
+	}
+
+	@Test def testOperationTemplateProposal() {
+		'''
+			entity E {
+				«c»
+			}
+		'''.testContentAssistant(#[
+			'Operation - template for an Operation',
+			'Property - template for a Property',
+			'op'
+		], 'Operation - template for an Operation', '''
+			entity E {
+				op name (paramType1 paramName1) : returnType {
+					
+				}
+			}
+		''')
+	}
+
+	private def void testContentAssistant(CharSequence text, List<String> expectedProposals, String proposalToApply, String expectedContent) {
+
+		val cursorPosition = text.toString.indexOf(c)
+		val content = text.toString.replace(c, "")
+
+		newBuilder.append(content).
+		assertTextAtCursorPosition(cursorPosition, expectedProposals).
+		applyProposal(cursorPosition, proposalToApply).
+		expectContent(expectedContent)
 	}
 }
