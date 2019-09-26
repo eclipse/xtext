@@ -26,6 +26,6 @@ sourceSets.main {
 
 jar {
 	from('.') {
-		include 'org/**', 'modeling32.png'
+		include 'org/**', 'modeling32.png', 'xtext32.png'
 	}
 }
