@@ -60,6 +60,27 @@ public abstract class AbstractXtendUITestCase extends Assert {
 		}
 		return false;
 	}
+	private static final boolean isJava13OrLater = determineJava13OrLater();
+	
+	public static boolean isJava13OrLater() {
+		return isJava13OrLater;
+	}
+	
+	private static boolean determineJava13OrLater() {
+		String javaVersion = System.getProperty("java.version");
+		try {
+			Pattern p = Pattern.compile("(\\d+)(.)*");
+			Matcher matcher = p.matcher(javaVersion);
+			if (matcher.matches()) {
+				String first = matcher.group(1);
+				int version = Integer.parseInt(first);
+				return version >= 13;
+			}
+		} catch (NumberFormatException e) {
+			// ok
+		}
+		return false;
+	}
 
 	@Inject
 	private Injector injector;

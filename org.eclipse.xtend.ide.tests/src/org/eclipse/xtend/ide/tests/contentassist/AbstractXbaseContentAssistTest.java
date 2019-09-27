@@ -27,6 +27,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
@@ -247,6 +248,10 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		addMethods(stringType, features, staticFeatures, featuresOrTypes);
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
 		features.remove("compareTo()");
+		if (AbstractXtendUITestCase.isJava13OrLater()) {
+			// resolveConstantDesc(MethodHandles.Lookup) is there twice too
+			features.remove("resolveConstantDesc()");
+		}
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
 		Set<String> types = Sets.newHashSet();
@@ -303,6 +308,11 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
 		addMethods(classType, features, staticFeatures, featuresOrTypes);
+		if (AbstractXtendUITestCase.isJava13OrLater()) {
+			features.remove("componentType");
+			features.remove("arrayType");
+			features.add("getComponentType");
+		}
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
 		Set<String> types = Sets.newHashSet();
