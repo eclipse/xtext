@@ -244,7 +244,6 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 													<exclude>about.*</exclude>
 													<exclude>about_files/*</exclude>
 													<exclude>plugin.xml</exclude>
-													<exclude>modeling32.png</exclude>
 													<exclude>systembundle.properties</exclude>
 													<exclude>profile.list</exclude>
 													<exclude>**/*._trace</exclude>
@@ -337,7 +336,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 							configurations = [project.configurations.runtime]
 							exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
 								'.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
-								'plugin.xml', 'modeling32.png', 'systembundle.properties', 'profile.list')
+								'plugin.xml', 'systembundle.properties', 'profile.list')
 							classifier = 'ls'
 							append('plugin.properties')
 						}

@@ -84,7 +84,6 @@
 								<exclude>about.*</exclude>
 								<exclude>about_files/*</exclude>
 								<exclude>plugin.xml</exclude>
-								<exclude>modeling32.png</exclude>
 								<exclude>systembundle.properties</exclude>
 								<exclude>profile.list</exclude>
 								<exclude>**/*._trace</exclude>

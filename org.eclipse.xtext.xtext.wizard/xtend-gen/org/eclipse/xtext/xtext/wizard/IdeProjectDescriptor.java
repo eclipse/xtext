@@ -863,10 +863,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t\t");
-              _builder.append("<exclude>modeling32.png</exclude>");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t\t");
               _builder.append("<exclude>systembundle.properties</exclude>");
               _builder.newLine();
               _builder.append("\t\t");
@@ -1172,7 +1168,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder_1.append("\'.options\', \'.api_description\', \'*.profile\', \'*.html\', \'about.*\', \'about_files/*\',");
               _builder_1.newLine();
               _builder_1.append("\t\t");
-              _builder_1.append("\'plugin.xml\', \'modeling32.png\', \'systembundle.properties\', \'profile.list\')");
+              _builder_1.append("\'plugin.xml\', \'systembundle.properties\', \'profile.list\')");
               _builder_1.newLine();
               _builder_1.append("\t");
               _builder_1.append("classifier = \'ls\'");
