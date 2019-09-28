@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    npm_config_cache="/home/jenkins/.npm"
-    NPM_CONFIG_USERCONFIG="/home/jenkins/.config"
+    npm_config_cache=".npm"
+    NPM_CONFIG_USERCONFIG=".config"
     NO_UPDATE_NOTIFIER="true"
   }
   agent {
@@ -50,8 +50,8 @@ spec:
     configMap:
       name: known-hosts
   - name: settings-xml
-    configMap: 
-      name: m2-dir
+    secret:
+      secretName: m2-secret-dir
       items:
       - key: settings.xml
         path: settings.xml
