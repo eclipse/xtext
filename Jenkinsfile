@@ -45,8 +45,8 @@ spec:
     configMap:
       name: known-hosts
   - name: settings-xml
-    configMap: 
-      name: m2-dir
+    secret:
+      secretName: m2-secret-dir
       items:
       - key: settings.xml
         path: settings.xml
