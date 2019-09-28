@@ -18,6 +18,7 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.testing.OnTheFlyJavaCompiler2;
 import org.eclipse.xtext.xbase.testing.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.runner.RunWith;
@@ -40,10 +41,12 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   private OnTheFlyJavaCompiler2 javaCompiler;
   
   @Inject
-  private ParseHelper<DomainModel> parseHelper;
+  @Extension
+  private ParseHelper<DomainModel> _parseHelper;
   
   @Inject
-  private ValidationTestHelper validationHelper;
+  @Extension
+  private ValidationTestHelper _validationTestHelper;
   
   @Inject
   private JvmModelGenerator generator;
@@ -53,10 +56,10 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
     try {
       Object _xblockexpression = null;
       {
-        final DomainModel parse = this.parseHelper.parse((("entity Foo { op doStuff() : Object { " + expression) + " } } "));
-        this.validationHelper.assertNoErrors(parse);
+        final DomainModel model = this._parseHelper.parse((("entity Foo { op doStuff() : Object { " + expression) + " } } "));
+        this._validationTestHelper.assertNoErrors(model);
         final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
-        this.generator.doGenerate(parse.eResource(), fsa);
+        this.generator.doGenerate(model.eResource(), fsa);
         final CharSequence concatenation = fsa.getTextFiles().values().iterator().next();
         final Class<?> clazz = this.javaCompiler.compileToClass("Foo", concatenation.toString());
         final Object foo = clazz.getDeclaredConstructor().newInstance();

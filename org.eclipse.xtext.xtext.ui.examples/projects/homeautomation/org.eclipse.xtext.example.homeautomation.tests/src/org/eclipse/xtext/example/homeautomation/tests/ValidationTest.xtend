@@ -20,6 +20,9 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEnginePackage.Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 
+/**
+ * @author miklossy - Initial contribution and API
+ */
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineInjectorProvider)
 class ValidationTest {

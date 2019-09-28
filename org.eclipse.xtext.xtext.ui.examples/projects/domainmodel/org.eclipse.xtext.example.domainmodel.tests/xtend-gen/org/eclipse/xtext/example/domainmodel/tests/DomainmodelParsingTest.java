@@ -67,14 +67,14 @@ public class DomainmodelParsingTest {
       _builder.append("}");
       _builder.newLine();
       final DomainModel model = this._parseHelper.parse(_builder);
-      AbstractElement _get = model.getElements().get(0);
-      final PackageDeclaration pack = ((PackageDeclaration) _get);
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(model.getElements());
+      final PackageDeclaration pack = ((PackageDeclaration) _head);
       Assert.assertEquals("example", pack.getName());
-      AbstractElement _get_1 = pack.getElements().get(0);
-      final Entity entity = ((Entity) _get_1);
+      AbstractElement _head_1 = IterableExtensions.<AbstractElement>head(pack.getElements());
+      final Entity entity = ((Entity) _head_1);
       Assert.assertEquals("MyEntity", entity.getName());
-      Feature _get_2 = entity.getFeatures().get(0);
-      final Property property = ((Property) _get_2);
+      Feature _head_2 = IterableExtensions.<Feature>head(entity.getFeatures());
+      final Property property = ((Property) _head_2);
       Assert.assertEquals("property", property.getName());
       Assert.assertEquals("java.lang.String", property.getType().getIdentifier());
     } catch (Throwable _e) {

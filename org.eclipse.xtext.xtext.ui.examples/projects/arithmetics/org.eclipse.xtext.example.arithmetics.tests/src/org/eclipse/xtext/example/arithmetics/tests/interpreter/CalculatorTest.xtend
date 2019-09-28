@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,30 +24,28 @@ import static org.junit.Assert.*
 @InjectWith(ArithmeticsInjectorProvider)
 class CalculatorTest {
 
-	@Inject
-	ParseHelper<Module> parseHelper
+	@Inject extension ParseHelper<Module>
+	@Inject extension Calculator
 
-	@Inject
-	Calculator calculator
-
-	@Test def void testSimple() throws Exception {
-		check(6, "1 + 2 + 3")
-		check(0, "1 + 2 - 3")
-		check(5, "1 * 2 + 3")
-		check(-4, "1 - 2 - 3")
-		check(1.5, "1 / 2 * 3")
+	@Test def void testSimple() {
+		"1 + 2 + 3".evaluatesTo(6)
+		"1 + 2 - 3".evaluatesTo(0)
+		"1 * 2 + 3".evaluatesTo(5)
+		"1 - 2 - 3".evaluatesTo(-4)
+		"1 / 2 * 3".evaluatesTo(1.5)
 	}
 
 	@Test def void testFunction() {
-		check(12.0, '''
+		'''
 			multiply(2,multiply(2, 3));
 			def multiply(a, b) : a * b;
-		''')
+		'''.evaluatesTo(12.0)
 	}
 
-	def protected void check(double expected, String expression) throws Exception {
-		val module = parseHelper.parse('''module test «expression»''')
-		var result = calculator.evaluate(module.statements.head.eContents.filter(Expression).head)
+	private def evaluatesTo(CharSequence content, double expected) {
+		val module = '''module test «content»'''.parse
+		val expression = module.statements.head.eContents.filter(Expression).head
+		val result = expression.evaluate
 		assertEquals(expected, result.doubleValue, 0.0001)
 	}
 

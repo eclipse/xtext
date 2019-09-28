@@ -34,8 +34,7 @@ class SerializerTest extends Assert {
 	@Inject extension FileExtensionProvider
 	@Inject Provider<XtextResourceSet> rsProvider
 
-	@Test
-	def test() {
+	@Test def test() {
 
 		val model = createModel
 		val rs = rsProvider.get

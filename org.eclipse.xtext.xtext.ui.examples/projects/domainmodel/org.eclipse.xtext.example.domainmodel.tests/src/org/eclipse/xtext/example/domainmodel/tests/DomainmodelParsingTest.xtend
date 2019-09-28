@@ -33,8 +33,7 @@ class DomainmodelParsingTest{
 	@Inject extension ValidationTestHelper
 	@Inject extension IJvmModelAssociations
 
-	@Test
-	def void testParsing() {
+	@Test def void testParsing() {
 		val model = '''
 			package example {
 			  entity MyEntity {
@@ -43,19 +42,18 @@ class DomainmodelParsingTest{
 			}
 		'''.parse
 
-		val pack = model.getElements().get(0) as PackageDeclaration
-		Assert.assertEquals("example", pack.getName())
+		val pack = model.elements.head as PackageDeclaration
+		Assert.assertEquals("example", pack.name)
 
-		val entity = pack.getElements().get(0) as Entity
-		Assert.assertEquals("MyEntity", entity.getName())
+		val entity = pack.elements.head as Entity
+		Assert.assertEquals("MyEntity", entity.name)
 
-		val property = entity.getFeatures().get(0) as Property
-		Assert.assertEquals("property", property.getName());
-		Assert.assertEquals("java.lang.String", property.getType().getIdentifier());
+		val property = entity.features.head as Property
+		Assert.assertEquals("property", property.name)
+		Assert.assertEquals("java.lang.String", property.type.identifier)
 	}
 
-	@Test
-	def void testJvmTypeReferencesValidator() {
+	@Test def void testJvmTypeReferencesValidator() {
 		'''
 			import java.util.List
 			package example {
@@ -70,8 +68,7 @@ class DomainmodelParsingTest{
 		)
 	}
 
-	@Test
-	def void testParsingAndLinking() {
+	@Test def void testParsingAndLinking() {
 		'''
 			package example {
 			  entity MyEntity {
@@ -85,8 +82,7 @@ class DomainmodelParsingTest{
 		'''.parse.assertNoErrors
 	}
 
-	@Test
-	def void testParsingAndLinkingWithImports() {
+	@Test def void testParsingAndLinkingWithImports() {
 		'''
 			import java.util.List
 			package example {
@@ -97,8 +93,7 @@ class DomainmodelParsingTest{
 		'''.parse.assertNoErrors
 	}
 
-	@Test
-	def void testReturnTypeInference() {
+	@Test def void testReturnTypeInference() {
 		val model = '''
 			package example {
 			  entity MyEntity {

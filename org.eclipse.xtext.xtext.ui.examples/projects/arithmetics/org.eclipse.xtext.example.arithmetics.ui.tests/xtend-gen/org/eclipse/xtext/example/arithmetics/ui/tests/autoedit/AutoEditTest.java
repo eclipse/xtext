@@ -10,7 +10,6 @@ package org.eclipse.xtext.example.arithmetics.ui.tests.autoedit;
 import com.google.inject.Inject;
 import java.util.Collections;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider;
@@ -76,11 +75,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
   
   @Before
   public void doSetup() {
-    try {
-      this.createPluginProject("foo");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    this.createPluginProject("foo");
   }
   
   @Override
@@ -88,14 +83,14 @@ public class AutoEditTest extends AbstractAutoEditTest {
     return this.extensionProvider.getPrimaryFileExtension();
   }
   
-  protected IProject createPluginProject(final String name) throws CoreException {
+  private IProject createPluginProject(final String name) {
     this.projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
     this.projectFactory.setProjectName(name);
     this.projectFactory.addFolders(Collections.<String>singletonList("src"));
     this.projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
     this.projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-    IProject result = this.projectFactory.createProject(_nullProgressMonitor, null);
+    final IProject result = this.projectFactory.createProject(_nullProgressMonitor, null);
     JavaProjectSetupUtil.setUnixLineEndings(result);
     return result;
   }

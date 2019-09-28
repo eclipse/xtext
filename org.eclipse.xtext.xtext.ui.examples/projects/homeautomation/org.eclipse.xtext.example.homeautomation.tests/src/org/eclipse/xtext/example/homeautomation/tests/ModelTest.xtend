@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,8 +24,7 @@ class ModelTest {
 
 	@Inject extension ParseHelper<Model>
 
-	@Test
-	def void testParsing() {
+	@Test def void testParsing() {
 		val model = '''
 			Device Window can be open, closed
 			Device Heater can be on, off
@@ -35,10 +34,10 @@ class ModelTest {
 		'''.parse
 
 		val device = model.declarations.get(0) as Device
-		Assert::assertEquals("Window", device.name)
+		Assert.assertEquals("Window", device.name)
 
 		val rule = model.declarations.get(2) as Rule
-		Assert::assertEquals("Save energy", rule.description)
-		Assert::assertEquals("open", rule.deviceState.name);
+		Assert.assertEquals("Save energy", rule.description)
+		Assert.assertEquals("open", rule.deviceState.name)
 	}
 }

@@ -28,8 +28,7 @@ class CompilerTest {
 	@Inject extension CompilationTestHelper
 	@Inject extension ReflectExtensions
 
-	@Test
-	def void testGeneratedJava() {
+	@Test def void testGeneratedJava() {
 		'''
 			entity Foo {
 				name : String
@@ -44,8 +43,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test
-	def void testGeneratedJavaFromSeveralInputs() {
+	@Test def void testGeneratedJavaFromSeveralInputs() {
 		#[
 		'''
 			entity Foo {
@@ -69,8 +67,7 @@ class CompilerTest {
 		]
 	}
 
-	@Test
-	def void compareGeneratedJava() {
+	@Test def void compareGeneratedJava() {
 		'''
 			entity Foo {
 				name : String

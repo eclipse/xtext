@@ -9,8 +9,6 @@ package org.eclipse.xtext.example.arithmetics.ui.tests.autoedit
 
 import com.google.inject.Inject
 import java.util.Collections
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.xtext.example.arithmetics.ui.tests.ArithmeticsUiInjectorProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
@@ -44,7 +42,6 @@ class AutoEditTest extends AbstractAutoEditTest {
 				|
 			''')
 		]
-
 	}
 
 	@Inject FileExtensionProvider extensionProvider
@@ -58,13 +55,13 @@ class AutoEditTest extends AbstractAutoEditTest {
 		extensionProvider.primaryFileExtension
 	}
 
-	def protected IProject createPluginProject(String name) throws CoreException {
+	private def createPluginProject(String name) {
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE)
 		projectFactory.setProjectName(name)
 		projectFactory.addFolders(Collections.singletonList("src"))
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID)
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID)
-		var IProject result=projectFactory.createProject(new NullProgressMonitor(), null)
+		val result=projectFactory.createProject(new NullProgressMonitor(), null)
 		JavaProjectSetupUtil.setUnixLineEndings(result)
 		return result
 	}

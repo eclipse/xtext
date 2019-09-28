@@ -35,20 +35,20 @@ class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	@Inject OnTheFlyJavaCompiler2 javaCompiler
 
-	@Inject ParseHelper<DomainModel> parseHelper
+	@Inject extension ParseHelper<DomainModel>
 
-	@Inject ValidationTestHelper validationHelper
+	@Inject extension ValidationTestHelper
 
 	@Inject JvmModelGenerator generator
 
 	protected override invokeXbaseExpression(String expression) {
-		val parse = parseHelper.parse("entity Foo { op doStuff() : Object { "+expression+" } } ")
-		validationHelper.assertNoErrors(parse)
-		val fsa = new InMemoryFileSystemAccess()
-		generator.doGenerate(parse.eResource(), fsa)
-		val concatenation = fsa.getTextFiles().values().iterator().next()
-		val clazz = javaCompiler.compileToClass("Foo", concatenation.toString())
-		val foo = clazz.getDeclaredConstructor().newInstance()
+		val model = ("entity Foo { op doStuff() : Object { "+expression+" } } ").parse
+		model.assertNoErrors
+		val fsa = new InMemoryFileSystemAccess
+		generator.doGenerate(model.eResource, fsa)
+		val concatenation = fsa.textFiles.values.iterator.next
+		val clazz = javaCompiler.compileToClass("Foo", concatenation.toString)
+		val foo = clazz.declaredConstructor.newInstance
 		val method = clazz.getDeclaredMethod("doStuff")
 		method.invoke(foo)
 	}

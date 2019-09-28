@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,11 +25,11 @@ import org.junit.runner.RunWith;
 public class ArithmeticsParsingTest {
   @Inject
   @Extension
-  private ParseHelper<org.eclipse.xtext.example.arithmetics.arithmetics.Module> parseHelper;
+  private ParseHelper<org.eclipse.xtext.example.arithmetics.arithmetics.Module> _parseHelper;
   
   @Inject
   @Extension
-  private ValidationTestHelper validationTestHelper;
+  private ValidationTestHelper _validationTestHelper;
   
   @Test
   public void loadModel() {
@@ -41,7 +41,7 @@ public class ArithmeticsParsingTest {
       _builder.newLine();
       _builder.append("fun(2, fun(3,4));");
       _builder.newLine();
-      this.validationTestHelper.assertNoErrors(this.parseHelper.parse(_builder));
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -12,20 +12,19 @@ import org.eclipse.xtext.example.homeautomation.ruleEngine.Model
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import static extension org.junit.Assert.assertNotNull
 
 @RunWith(XtextRunner)
 @InjectWith(RuleEngineInjectorProvider)
 class RuleEngineParsingTest{
 
-	@Inject
-	ParseHelper<Model> parseHelper
+	@Inject extension ParseHelper<Model>
 
-	@Test
-	def void loadModel() {
-		val result = parseHelper.parse('''
+	@Test def void loadModel() {
+		'''
 			Device Window can be open, closed
 			
 			Device Heater can be on, off, error
@@ -33,8 +32,7 @@ class RuleEngineParsingTest{
 			Rule 'Save energy' when Window.open then
 				fire(Heater.off)
 				println('Another penny to the piggy bank!')
-		''')
-		Assert.assertNotNull(result)
+		'''.parse.assertNotNull
 	}
 
 }

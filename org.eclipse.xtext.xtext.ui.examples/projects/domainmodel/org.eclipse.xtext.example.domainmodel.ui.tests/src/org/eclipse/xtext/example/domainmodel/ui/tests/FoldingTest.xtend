@@ -110,7 +110,7 @@ class FoldingTest extends AbstractFoldingTest {
 			}<]
 		'''.testFoldingRegions
 	}
-	
+
 	@Test def multi_line_comment() {
 		'''
 		[>/*
@@ -119,7 +119,7 @@ class FoldingTest extends AbstractFoldingTest {
 		entity E {}
 		'''.testFoldingRegions
 	}
-	
+
 	@Test def java_doc() {
 		'''
 		[>/**

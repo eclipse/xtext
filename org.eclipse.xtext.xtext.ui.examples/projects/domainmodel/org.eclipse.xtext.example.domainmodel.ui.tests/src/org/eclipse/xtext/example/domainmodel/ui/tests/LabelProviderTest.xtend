@@ -36,7 +36,7 @@ class LabelProviderTest {
 	@Test def package_image() {
 		createPackageDeclaration.hasImage("PackageDeclaration.gif")
 	}
-	
+
 	@Test def import_section_image() {
 		createXImportSection.hasImage("XImportSection.gif")
 	}

@@ -15,6 +15,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,8 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class RuleEngineParsingTest {
   @Inject
-  private ParseHelper<Model> parseHelper;
+  @Extension
+  private ParseHelper<Model> _parseHelper;
   
   @Test
   public void loadModel() {
@@ -44,8 +46,7 @@ public class RuleEngineParsingTest {
       _builder.append("\t");
       _builder.append("println(\'Another penny to the piggy bank!\')");
       _builder.newLine();
-      final Model result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
+      Assert.assertNotNull(this._parseHelper.parse(_builder));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
