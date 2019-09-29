@@ -22,8 +22,8 @@ Require-Bundle: org.eclipse.xtext.example.homeautomation,
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.homeautomation.ui.contentassist,
- org.eclipse.xtext.example.homeautomation.ui.quickfix,
+ org.eclipse.xtext.example.homeautomation.ui.editor,
  org.eclipse.xtext.example.homeautomation.ui.internal,
- org.eclipse.xtext.example.homeautomation.ui.editor
+ org.eclipse.xtext.example.homeautomation.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.example.homeautomation.ui.internal.HomeautomationActivator
 Automatic-Module-Name: org.eclipse.xtext.example.homeautomation.ui

@@ -23,15 +23,15 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.ui.codemining;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.domainmodel.ui.contentassist,
- org.eclipse.xtext.example.domainmodel.ui.autoedit,
+Export-Package: org.eclipse.xtext.example.domainmodel.ui.autoedit,
+ org.eclipse.xtext.example.domainmodel.ui.contentassist,
+ org.eclipse.xtext.example.domainmodel.ui.editor,
  org.eclipse.xtext.example.domainmodel.ui.internal,
  org.eclipse.xtext.example.domainmodel.ui.labeling,
  org.eclipse.xtext.example.domainmodel.ui.linking,
  org.eclipse.xtext.example.domainmodel.ui.navigation,
  org.eclipse.xtext.example.domainmodel.ui.outline,
  org.eclipse.xtext.example.domainmodel.ui.quickfix,
- org.eclipse.xtext.example.domainmodel.ui.search,
- org.eclipse.xtext.example.domainmodel.ui.editor
+ org.eclipse.xtext.example.domainmodel.ui.search
 Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
 Automatic-Module-Name: org.eclipse.xtext.example.domainmodel.ui

@@ -17,17 +17,17 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.common.types,
  org.objectweb.asm;bundle-version="[7.1.0,7.2.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.domainmodel.serializer,
- org.eclipse.xtext.example.domainmodel.parser.antlr.internal,
- org.eclipse.xtext.example.domainmodel.services,
- org.eclipse.xtext.example.domainmodel.parser.antlr,
- org.eclipse.xtext.example.domainmodel.validation,
- org.eclipse.xtext.example.domainmodel.domainmodel.impl,
- org.eclipse.xtext.example.domainmodel.scoping,
- org.eclipse.xtext.example.domainmodel.domainmodel.util,
- org.eclipse.xtext.example.domainmodel,
+Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel,
+ org.eclipse.xtext.example.domainmodel.domainmodel.impl,
+ org.eclipse.xtext.example.domainmodel.domainmodel.util,
+ org.eclipse.xtext.example.domainmodel.formatting2,
  org.eclipse.xtext.example.domainmodel.jvmmodel,
- org.eclipse.xtext.example.domainmodel.formatting2
+ org.eclipse.xtext.example.domainmodel.parser.antlr,
+ org.eclipse.xtext.example.domainmodel.parser.antlr.internal,
+ org.eclipse.xtext.example.domainmodel.scoping,
+ org.eclipse.xtext.example.domainmodel.serializer,
+ org.eclipse.xtext.example.domainmodel.services,
+ org.eclipse.xtext.example.domainmodel.validation
 Import-Package: org.apache.log4j
 Automatic-Module-Name: org.eclipse.xtext.example.domainmodel

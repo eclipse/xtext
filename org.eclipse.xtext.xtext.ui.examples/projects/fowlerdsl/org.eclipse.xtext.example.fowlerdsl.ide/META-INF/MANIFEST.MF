@@ -11,6 +11,6 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.fowlerdsl.ide.contentassist.antlr.internal,
- org.eclipse.xtext.example.fowlerdsl.ide.contentassist.antlr
+Export-Package: org.eclipse.xtext.example.fowlerdsl.ide.contentassist.antlr,
+ org.eclipse.xtext.example.fowlerdsl.ide.contentassist.antlr.internal
 Automatic-Module-Name: org.eclipse.xtext.example.fowlerdsl.ide
