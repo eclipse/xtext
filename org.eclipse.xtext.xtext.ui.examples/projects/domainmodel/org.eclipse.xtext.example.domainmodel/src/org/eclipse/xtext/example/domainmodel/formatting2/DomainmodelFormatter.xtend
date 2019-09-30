@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.example.domainmodel.formatting2;
+package org.eclipse.xtext.example.domainmodel.formatting2
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
@@ -26,9 +26,9 @@ class DomainmodelFormatter extends XbaseFormatter {
 
 	def dispatch void format(DomainModel domainmodel, extension IFormattableDocument document) {
 		domainmodel.prepend[setNewLines(0, 0, 1); noSpace].append[newLine]
-		format(domainmodel.getImportSection(), document);
-		for (AbstractElement element : domainmodel.getElements()) {
-			format(element, document);
+		format(domainmodel.importSection, document)
+		for (AbstractElement element : domainmodel.elements) {
+			format(element, document)
 		}
 	}
 
@@ -51,7 +51,7 @@ class DomainmodelFormatter extends XbaseFormatter {
 		entity.superType.surround[oneSpace]
 		open.append[newLine]
 		interior(open, close)[indent]
-		format(entity.getSuperType(), document);
+		format(entity.superType, document)
 		for (Feature feature : entity.features) {
 			feature.format
 			feature.append[setNewLines(1, 1, 2)]

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
@@ -50,7 +51,8 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
     if (_isEmpty) {
       this.error("Name cannot be empty", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     }
-    boolean _equals = packages.getName().equals("java");
+    String _name = packages.getName();
+    boolean _equals = Objects.equal(_name, "java");
     if (_equals) {
       this.error("Invalid package name", DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     }
