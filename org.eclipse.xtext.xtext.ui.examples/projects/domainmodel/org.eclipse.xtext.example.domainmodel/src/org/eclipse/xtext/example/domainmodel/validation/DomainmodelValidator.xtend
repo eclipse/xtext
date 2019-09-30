@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.validation
 
+import com.google.common.collect.HashMultimap
+import com.google.common.collect.Multimap
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
+import org.eclipse.xtext.example.domainmodel.domainmodel.Property
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
@@ -50,4 +53,19 @@ class DomainmodelValidator extends AbstractDomainmodelValidator {
 		}
 	}
 
+	@Check def void checkPropertyNamesAreUnique(Entity entity) {
+		val Multimap<String, Property> name2properties = HashMultimap.create
+
+		entity.features.filter(Property).filter[!name.nullOrEmpty].forEach[
+			name2properties.put(name, it)
+		]
+
+		name2properties.asMap.values.forEach[properties|
+			if (properties.size > 1) {
+				properties.forEach[
+					error("Duplicate property " + name, it, FEATURE__NAME, DUPLICATE_PROPERTY)
+				]
+			}
+		]
+	}
 }

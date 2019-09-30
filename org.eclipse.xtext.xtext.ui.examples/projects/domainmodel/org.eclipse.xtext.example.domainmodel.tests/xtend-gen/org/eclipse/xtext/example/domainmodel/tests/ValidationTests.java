@@ -10,6 +10,7 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
+import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -17,8 +18,11 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XtypePackage;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -333,5 +337,36 @@ public class ValidationTests {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testDuplicatedProperty() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("p : String");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("p : String");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String model = _builder.toString();
+      DomainModel _parse = this._parseHelper.parse(model);
+      final Procedure1<DomainModel> _function = (DomainModel it) -> {
+        this.assertNumberOfIssues(it, 2);
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY, model.indexOf("p"), 1, "Duplicate property p");
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.PROPERTY, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY, model.lastIndexOf("p"), 1, "Duplicate property p");
+      };
+      ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertNumberOfIssues(final DomainModel domainModel, final int expectedNumberOfIssues) {
+    Assert.assertEquals(expectedNumberOfIssues, this._validationTestHelper.validate(domainModel).size());
   }
 }
