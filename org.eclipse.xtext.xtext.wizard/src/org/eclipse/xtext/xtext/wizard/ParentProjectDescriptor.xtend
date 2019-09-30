@@ -338,6 +338,32 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									<testOutputDirectory>${basedir}/«Outlet.TEST_XTEND_GEN.sourceFolder»</testOutputDirectory>
 								</configuration>
 							</plugin>
+							«IF config.needsTychoBuild»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>target-platform-configuration</artifactId>
+								<version>${tycho-version}</version>
+								<configuration>
+									<dependency-resolution>
+										<extraRequirements>
+											<requirement>
+												<type>eclipse-plugin</type>
+												<id>org.eclipse.xtext.logging</id>
+												<versionRange>1.2.15</versionRange>
+											</requirement>
+											<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target 
+												platform is Luna or later. (backward compatible with kepler and previous 
+												versions) see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->
+											<requirement>
+												<type>eclipse-feature</type>
+												<id>org.eclipse.rcp</id>
+												<versionRange>0.0.0</versionRange>
+											</requirement>
+										</extraRequirements>
+									</dependency-resolution>
+								</configuration>
+							</plugin>
+							«ENDIF»
 							<plugin>
 								<groupId>org.apache.maven.plugins</groupId>
 								<artifactId>maven-clean-plugin</artifactId>
