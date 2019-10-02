@@ -15,6 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -25,6 +28,7 @@ import com.google.common.io.ByteStreams;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Stephane Galland - fixing cleanFolder behavior
  */
 public class Files {
 	private static Logger log = Logger.getLogger(Files.class);
@@ -74,39 +78,54 @@ public class Files {
 		}
 	}
 
+	/** Clean the content of the the given folder.
+	 *
+	 * @param parentFolder the folder to be cleaned. It must not be {@code null}.
+	 * @param filter a filter for selecting the files to be removed. If it is {@code null}, all the files are removed.
+	 * @param continueOnError indicates if the cleaning should continue after an error occurs.
+	 * @param deleteParentFolder indicates if {@code parentFolder} should be also deleted if it becomes empty.
+	 * @return {@code true} if the cleaning process goes through all the folders and files. {@code false} if the process
+	 *     has been stopped before its termination. The value {@code false} could be replied only if the value of
+	 *     {@code continueOnError} is {@code false}.
+	 * @throws FileNotFoundException if the given {@code parentFolder} does not exists.
+	 */
 	public static boolean cleanFolder(final File parentFolder, final FileFilter filter, boolean continueOnError,
 			boolean deleteParentFolder) throws FileNotFoundException {
 		if (!parentFolder.exists()) {
 			throw new FileNotFoundException(parentFolder.getAbsolutePath());
 		}
-		FileFilter myFilter = filter;
-		if (myFilter == null)
-			myFilter = new FileFilter() {
-				@Override
-				public boolean accept(File pathname) {
-					return true;
-				}
-			};
+		final FileFilter myFilter = filter == null ? it -> true : filter;
 		log.debug("Cleaning folder " + parentFolder.toString());
 		final File[] contents = parentFolder.listFiles(myFilter);
-		if (contents == null) {
-			return true;
-		}
-		for (int j = 0; j < contents.length; j++) {
-			final File file = contents[j];
-			if (file.isDirectory()) {
-				if (!cleanFolder(file, myFilter, continueOnError, true) && !continueOnError)
-					return false;
-			} else {
-				if (!file.delete()) {
+		if (contents != null) {
+			final Deque<File> filesToRemove = new LinkedList<>(Arrays.asList(contents));
+			while (!filesToRemove.isEmpty()) {
+				final File file = filesToRemove.pop();
+				if (file.isDirectory()) {
+					final File[] children = file.listFiles(myFilter);
+					if (children != null && children.length > 0) {
+						// Push back the folder in order to be removed after all its children.
+						filesToRemove.push(file);
+						// Push the children in order to be removed before the parent folder.
+						for (int i = 0; i < children.length; ++i) {
+							filesToRemove.push(children[i]);
+						}
+					} else if (!file.delete()) {
+						log.error("Couldn't delete " + file.getAbsolutePath());
+						if (!continueOnError) {
+							return false;
+						}
+					}
+				} else if (!file.delete()) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
-					if (!continueOnError)
+					if (!continueOnError) {
 						return false;
+					}
 				}
 			}
 		}
 		if (deleteParentFolder) {
-			String[] children = parentFolder.list();
+			final String[] children = parentFolder.list();
 			if (children != null && children.length == 0 && !parentFolder.delete()) {
 				log.error("Couldn't delete " + parentFolder.getAbsolutePath());
 				return false;
@@ -124,12 +143,7 @@ public class Files {
 	 * @throws FileNotFoundException if folder does not exists
 	 */
 	public static boolean sweepFolder(File folder) throws FileNotFoundException {
-		return Files.cleanFolder(folder, new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return true;
-			}
-		}, true, false);
+		return cleanFolder(folder, null, true, false);
 	}
 
 	/**
