@@ -12,6 +12,7 @@ import static java.util.Collections.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -44,19 +46,24 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	
 	@Override
 	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
-		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+		Predicate<IEObjectDescription> predicate = getStateContainsPredicate(input -> input.getEObjectURI().trimFragment());
+		return Iterables.filter(unfiltered, predicate);
+	}
+	
+	protected <T> Predicate<T> getStateContainsPredicate(Function<T, URI> uriProvider) {
+		return new Predicate<T>() {
 			private Collection<URI> contents = null;
 
 			@Override
-			public boolean apply(IEObjectDescription input) {
+			public boolean apply(T input) {
 				if(contents == null) {
 					contents = state.getContents();
 				}
-				URI resourceURI = input.getEObjectURI().trimFragment();
+				URI resourceURI = uriProvider.apply(input);
 				final boolean contains = contents.contains(resourceURI);
 				return contains;
 			}
-		});
+		};
 	}
 
 	@Override
@@ -110,7 +117,10 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		if (isEmpty())
 			return emptyList();
-		return super.getExportedObjectsByType(type);
+
+		Predicate<IResourceDescription> isResourceDescritptionInState = getStateContainsPredicate(input -> input.getURI());
+		Iterable<IResourceDescription> resourceDescriptionsInState = Iterables.filter(getDescriptions().getAllResourceDescriptions(), isResourceDescritptionInState);
+		return IterableExtensions.flatMap(resourceDescriptionsInState, desc -> desc.getExportedObjectsByType(type));
 	}
 	
 	@Override
