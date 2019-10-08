@@ -3,7 +3,7 @@
 <target name="org.eclipse.xtext.helios.target" sequenceNumber="0">
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2019-09"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2019-12"/>
 			<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
