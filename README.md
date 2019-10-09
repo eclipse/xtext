@@ -14,7 +14,7 @@ Additional command line arguments:
 
 ### Maven Support
 
-First run `./gradlew createLocalMavenRepo` to compile and install the Xtend core module, then run
+First run `./gradlew publish publishToMavenLocal` to compile and install the Xtend core module, then run
 ```
 mvn -f maven-pom.xml clean install -PuseSonatypeSnapshots
 ```
