@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2016 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -91,7 +91,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 				import «genProposalProviderName»
 				
 				/**
-				 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
+				 * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
 				 * on how to customize the content assistant.
 				 */
 				class «grammar.proposalProviderName.toSimpleName» extends «genProposalProviderName.toSimpleName» {
