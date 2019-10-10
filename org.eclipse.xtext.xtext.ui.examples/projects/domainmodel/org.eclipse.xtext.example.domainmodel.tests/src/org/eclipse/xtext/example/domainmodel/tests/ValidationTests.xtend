@@ -16,8 +16,12 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
+import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.PROPERTY
+import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
+
+import static extension org.junit.Assert.assertEquals
 
 @RunWith(XtextRunner)
 @InjectWith(DomainmodelInjectorProvider)
@@ -164,5 +168,23 @@ class ValidationTests {
 			entity List2 {
 			}
 		'''.parse.assertNoErrors
+	}
+
+	@Test def void testDuplicatedProperty() {
+		val model = '''
+			entity E {
+				p : String
+				p : String
+			}
+		'''
+		model.parse => [
+			assertNumberOfIssues(2)
+			assertError(PROPERTY, DUPLICATE_PROPERTY, model.indexOf("p"), 1, "Duplicate property p")
+			assertError(PROPERTY, DUPLICATE_PROPERTY, model.lastIndexOf("p"), 1, "Duplicate property p")
+		]
+	}
+
+	private def assertNumberOfIssues(DomainModel domainModel, int expectedNumberOfIssues) {
+		expectedNumberOfIssues.assertEquals(domainModel.validate.size)
 	}
 }
