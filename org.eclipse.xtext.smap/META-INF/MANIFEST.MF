@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: JSR-45 SMAP installer
+Bundle-Name: Xtext JSR-45 SMAP installer
 Bundle-SymbolicName: org.eclipse.xtext.smap
 Bundle-Version: 2.20.0.qualifier
 Bundle-Vendor: Eclipse Xtext
