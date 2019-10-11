@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 /**
  * Provides labels for a EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 @SuppressWarnings("all")
 public class XImportSectionTestLangLabelProvider extends XbaseLabelProvider {

@@ -44,7 +44,7 @@ import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConf
 /**
  * Provides labels for EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 	private static final String UNKNOWN = "<unknown>";

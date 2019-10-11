@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 /**
  * Provides labels for a EObjects.
  * 
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 public class ExBeeLangTestLanguageLabelProvider extends DefaultEObjectLabelProvider {
 

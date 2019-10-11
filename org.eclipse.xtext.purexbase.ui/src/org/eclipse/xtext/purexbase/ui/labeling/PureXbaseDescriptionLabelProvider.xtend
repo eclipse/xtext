@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
  * 
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 class PureXbaseDescriptionLabelProvider extends XbaseDescriptionLabelProvider {
 
