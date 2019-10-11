@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@ generate domainmodel "http://www.xtext.org/example/Entities"
 Entities:
 	importSection=XImportSection?
 	elements+=AbstractElement*;
-	
+
 AbstractElement:
 	PackageDeclaration | Entity;
 
@@ -33,5 +33,5 @@ Property:
 	name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)? 
+	'op' name=ValidID '(' (params+=FullJvmFormalParameter (',' params+=FullJvmFormalParameter)*)? ')' (':' type=JvmTypeReference)?
 		body=XBlockExpression;

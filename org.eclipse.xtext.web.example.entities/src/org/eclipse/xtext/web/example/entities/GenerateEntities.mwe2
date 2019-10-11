@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,8 +14,8 @@ var rootPath = ".."
 var baseName = "org.eclipse.xtext.web.example.entities"
 
 Workflow {
-    
-    component = XtextGenerator {
+
+	component = XtextGenerator {
 		configuration = EntitiesGeneratorModule {
 			project = StandardProjectConfig {
 				rootPath = rootPath
@@ -56,7 +56,7 @@ Workflow {
 			grammarUri = "${rootPath}/org.eclipse.xtext.web.example.entities/src/org/eclipse/xtext/web/example/entities/Entities.xtext"
 			fileExtensions = "entities"
 			referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-	
+
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 {}
 
@@ -76,7 +76,7 @@ Workflow {
 
 			// Xtend-based API for validation
 			fragment = validation.ValidatorFragment2 {
-			    //composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				//composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 
 			// scoping and exporting API
@@ -88,17 +88,17 @@ Workflow {
 
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 {}
-			
+
 			// testing API
 			fragment = junit.Junit4Fragment2 {
 				generateStub = false
 			}
-			
+
 			// Xbase support
 			fragment = types.TypesGeneratorFragment2 {}
 			fragment = xbase.XbaseGeneratorFragment2 {}
 			fragment = xbase.XtypeGeneratorFragment2 {}
-			
+
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment {
 				framework = "Orion"
@@ -115,4 +115,3 @@ Workflow {
 		}
 	}
 }
-
