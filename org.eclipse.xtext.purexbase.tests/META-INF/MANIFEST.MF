@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Pure Xbase Tests
+Bundle-Name: Xtext Pure Xbase Tests
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.20.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.tests;singleton:=true
