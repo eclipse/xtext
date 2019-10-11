@@ -9,13 +9,19 @@ package org.eclipse.xtext.web.example.entities.validation
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
+import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import org.eclipse.xtext.web.example.entities.domainmodel.Entity
 import org.eclipse.xtext.web.example.entities.domainmodel.Feature
+import org.eclipse.xtext.web.example.entities.domainmodel.Operation
 import org.eclipse.xtext.web.example.entities.domainmodel.PackageDeclaration
 import org.eclipse.xtext.web.example.entities.domainmodel.Property
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 
 import static org.eclipse.xtext.web.example.entities.domainmodel.DomainmodelPackage.Literals.*
 import static org.eclipse.xtext.web.example.entities.validation.IssueCodes.*
@@ -29,6 +35,9 @@ import static extension java.lang.Character.isUpperCase
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class EntitiesValidator extends AbstractEntitiesValidator {
+
+	@Inject extension IJvmModelAssociations
+	@Inject extension OverrideHelper
 
 	@Check def void checkTypeNameStartsWithCapital(Entity entity) {
 		if (!entity.name.charAt(0).isUpperCase) {
@@ -64,6 +73,26 @@ class EntitiesValidator extends AbstractEntitiesValidator {
 			if (properties.size > 1) {
 				properties.forEach[
 					error("Duplicate property " + name, it, FEATURE__NAME, DUPLICATE_PROPERTY)
+				]
+			}
+		]
+	}
+
+	@Check def void checkOperationNamesAreUnique(Entity entity) {
+		// takes into consideration overloading and type erasure
+		val inferredJavaClass = entity.jvmElements.filter(JvmGenericType).head
+		val methods = inferredJavaClass.getResolvedFeatures.declaredOperations
+		val Multimap<String, JvmOperation> signature2Declarations = HashMultimap.create
+
+		methods.forEach[
+			signature2Declarations.put(resolvedErasureSignature, declaration)
+		]
+
+		signature2Declarations.asMap.values.forEach[jvmOperations|
+			if (jvmOperations.size > 1) {
+				val operations = jvmOperations.map[primarySourceElement].filter(Operation)
+				operations.forEach[
+					error("Duplicate operation " + name, it, FEATURE__NAME, DUPLICATE_OPERATION)
 				]
 			}
 		]
