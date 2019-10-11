@@ -22,4 +22,6 @@ public interface IssueCodes {
 
 	String DUPLICATE_PROPERTY = PREFIX + "DuplicateProperty";
 
+	String DUPLICATE_OPERATION = PREFIX + "DuplicateOperation";
+
 }

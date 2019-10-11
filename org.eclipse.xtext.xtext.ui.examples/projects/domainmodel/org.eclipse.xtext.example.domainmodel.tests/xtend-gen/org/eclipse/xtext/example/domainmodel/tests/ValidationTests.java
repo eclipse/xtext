@@ -366,6 +366,100 @@ public class ValidationTests {
     }
   }
   
+  @Test
+  public void testDuplicatedOperation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op foo() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op foo() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String model = _builder.toString();
+      DomainModel _parse = this._parseHelper.parse(model);
+      final Procedure1<DomainModel> _function = (DomainModel it) -> {
+        this.assertNumberOfIssues(it, 2);
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.indexOf("foo"), 3, "Duplicate operation foo");
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.lastIndexOf("foo"), 3, "Duplicate operation foo");
+      };
+      ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicatedOperationWithDifferentSignatureIsAllowed() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op m(int i) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op m() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFeatureAndOperationWithSameNameIsAllowed() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("m : String");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op m() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op m(java.util.List<String> l1) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op m(java.util.List<Integer> l2) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String model = _builder.toString();
+      DomainModel _parse = this._parseHelper.parse(model);
+      final Procedure1<DomainModel> _function = (DomainModel it) -> {
+        this.assertNumberOfIssues(it, 2);
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.indexOf("m"), 1, "Duplicate operation m");
+        this._validationTestHelper.assertError(it, DomainmodelPackage.Literals.OPERATION, org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION, model.lastIndexOf("m"), 1, "Duplicate operation m");
+      };
+      ObjectExtensions.<DomainModel>operator_doubleArrow(_parse, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private void assertNumberOfIssues(final DomainModel domainModel, final int expectedNumberOfIssues) {
     Assert.assertEquals(expectedNumberOfIssues, this._validationTestHelper.validate(domainModel).size());
   }

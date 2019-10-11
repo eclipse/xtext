@@ -104,4 +104,21 @@ class CompilerTest {
 		'''.toString, getSingleGeneratedCode)
 		]
 	}
+
+	@Test def void testGeneratedJavaWithOverloadedMethods() {
+		'''
+			entity Foo {
+				op doStuff(String x) : String {
+					return x
+				}
+				op doStuff(int i) : String {
+					return "int "+i
+				}
+			}
+		'''.compile [
+			val obj = it.compiledClass.getDeclaredConstructor().newInstance
+			assertEquals("Hello", obj.invoke('doStuff','Hello'))
+			assertEquals("int 10", obj.invoke('doStuff',10))
+		]
+	}
 }

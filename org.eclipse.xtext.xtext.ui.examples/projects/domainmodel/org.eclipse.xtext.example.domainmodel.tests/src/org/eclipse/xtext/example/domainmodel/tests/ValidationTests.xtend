@@ -17,7 +17,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.PROPERTY
+import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.OPERATION
 import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_PROPERTY
+import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.DUPLICATE_OPERATION
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 
@@ -181,6 +183,52 @@ class ValidationTests {
 			assertNumberOfIssues(2)
 			assertError(PROPERTY, DUPLICATE_PROPERTY, model.indexOf("p"), 1, "Duplicate property p")
 			assertError(PROPERTY, DUPLICATE_PROPERTY, model.lastIndexOf("p"), 1, "Duplicate property p")
+		]
+	}
+
+	@Test def void testDuplicatedOperation() {
+		val model = '''
+			entity E {
+				op foo() {}
+				op foo() {}
+			}
+		'''
+		model.parse => [
+			assertNumberOfIssues(2)
+			assertError(OPERATION, DUPLICATE_OPERATION, model.indexOf("foo"), 3, "Duplicate operation foo")
+			assertError(OPERATION, DUPLICATE_OPERATION, model.lastIndexOf("foo"), 3, "Duplicate operation foo")
+		]
+	}
+
+	@Test def void testDuplicatedOperationWithDifferentSignatureIsAllowed() {
+		'''
+			entity E {
+				op m(int i) {}
+				op m() {}
+			}
+		'''.parse.assertNoErrors
+	}
+
+	@Test def void testFeatureAndOperationWithSameNameIsAllowed() {
+		'''
+			entity E {
+				m : String
+				op m() {}
+			}
+		'''.parse.assertNoErrors
+	}
+
+	@Test def void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() {
+		val model = '''
+			entity E {
+				op m(java.util.List<String> l1) {}
+				op m(java.util.List<Integer> l2) {}
+			}
+		'''
+		model.parse => [
+			assertNumberOfIssues(2)
+			assertError(OPERATION, DUPLICATE_OPERATION, model.indexOf("m"), 1, "Duplicate operation m")
+			assertError(OPERATION, DUPLICATE_OPERATION, model.lastIndexOf("m"), 1, "Duplicate operation m")
 		]
 	}
 

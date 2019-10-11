@@ -213,4 +213,45 @@ public class CompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testGeneratedJavaWithOverloadedMethods() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op doStuff(String x) : String {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return x");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op doStuff(int i) : String {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \"int \"+i");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          final Object obj = it.getCompiledClass().getDeclaredConstructor().newInstance();
+          Assert.assertEquals("Hello", this._reflectExtensions.invoke(obj, "doStuff", "Hello"));
+          Assert.assertEquals("int 10", this._reflectExtensions.invoke(obj, "doStuff", Integer.valueOf(10)));
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      };
+      this._compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
