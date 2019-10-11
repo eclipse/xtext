@@ -10,7 +10,7 @@
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-dev-bom</artifactId>
-				<version>${project.version}</version>
+				<version>${xtextVersion}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -31,6 +31,7 @@
 		<moduleProperties></moduleProperties>
 		<systemProperties></systemProperties>
 		<tycho.testArgLine></tycho.testArgLine>
+		<xtextVersion>${project.version}</xtextVersion>
 	</properties>
 	<modules>
 		<module>tp</module>
@@ -139,7 +140,7 @@
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>${project.version}</version>
+					<version>${xtextVersion}</version>
 					<executions>
 						<execution>
 							<goals>
