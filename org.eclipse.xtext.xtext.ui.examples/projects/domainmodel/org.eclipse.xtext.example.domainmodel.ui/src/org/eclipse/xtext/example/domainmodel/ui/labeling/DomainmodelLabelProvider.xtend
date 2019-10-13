@@ -25,6 +25,8 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
+import org.eclipse.xtext.xtype.XImportDeclaration
+import org.eclipse.xtext.xtype.XImportSection
 
 import static org.eclipse.xtext.util.Strings.*
 
@@ -38,8 +40,15 @@ class DomainmodelLabelProvider extends XbaseLabelProvider {
 	}
 
 	override protected Object doGetImage(Object element) {
-		if (element instanceof EObject && !(element instanceof JvmIdentifiableElement)) {
-			return '''«((element as EObject)).eClass().getName()».gif'''.toString
+		if (element instanceof EObject) {
+			switch element {
+				JvmIdentifiableElement, XImportSection, XImportDeclaration: {
+					return super.doGetImage(element)
+				}
+				default: {
+					return '''«element.eClass.name».gif'''.toString
+				}
+			}
 		}
 		return super.doGetImage(element)
 	}

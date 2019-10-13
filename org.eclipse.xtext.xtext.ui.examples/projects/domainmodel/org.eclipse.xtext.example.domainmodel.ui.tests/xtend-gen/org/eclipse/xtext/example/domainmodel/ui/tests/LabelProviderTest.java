@@ -9,6 +9,7 @@ package org.eclipse.xtext.example.domainmodel.ui.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelFactory;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +37,9 @@ public class LabelProviderTest {
   @Inject
   private IImageHelper imageHelper;
   
+  @Inject
+  private XbaseImages2 xbaseImages;
+  
   @Extension
   private final DomainmodelFactory _domainmodelFactory = DomainmodelFactory.eINSTANCE;
   
@@ -48,12 +53,12 @@ public class LabelProviderTest {
   
   @Test
   public void import_section_image() {
-    this.hasImage(this._xtypeFactory.createXImportSection(), "XImportSection.gif");
+    this.hasImage(this._xtypeFactory.createXImportSection(), this.xbaseImages.forImportContainer());
   }
   
   @Test
   public void import_declaration_image() {
-    this.hasImage(this._xtypeFactory.createXImportDeclaration(), "XImportDeclaration.gif");
+    this.hasImage(this._xtypeFactory.createXImportDeclaration(), this.xbaseImages.forImport());
   }
   
   @Test
@@ -74,6 +79,12 @@ public class LabelProviderTest {
   private void hasImage(final EObject eObject, final String image) {
     final Image actual = this.labelProvider.getImage(eObject);
     final Image expected = this.imageHelper.getImage(image);
+    Assert.assertEquals(expected, actual);
+  }
+  
+  private void hasImage(final EObject eObject, final ImageDescriptor descriptor) {
+    final Image actual = this.labelProvider.getImage(eObject);
+    final Image expected = this.imageHelper.getImage(descriptor);
     Assert.assertEquals(expected, actual);
   }
 }

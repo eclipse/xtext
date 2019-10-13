@@ -9,11 +9,13 @@ package org.eclipse.xtext.example.domainmodel.ui.tests
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.resource.ImageDescriptor
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelFactory
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.IImageHelper
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2
 import org.eclipse.xtext.xtype.XtypeFactory
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +31,7 @@ class LabelProviderTest {
 
 	@Inject ILabelProvider labelProvider
 	@Inject IImageHelper imageHelper
+	@Inject XbaseImages2 xbaseImages
 
 	val extension DomainmodelFactory = DomainmodelFactory.eINSTANCE
 	val extension XtypeFactory = XtypeFactory.eINSTANCE
@@ -38,11 +41,11 @@ class LabelProviderTest {
 	}
 
 	@Test def import_section_image() {
-		createXImportSection.hasImage("XImportSection.gif")
+		createXImportSection.hasImage(xbaseImages.forImportContainer)
 	}
 
 	@Test def import_declaration_image() {
-		createXImportDeclaration.hasImage("XImportDeclaration.gif")
+		createXImportDeclaration.hasImage(xbaseImages.forImport)
 	}
 
 	@Test def entity_image() {
@@ -63,4 +66,9 @@ class LabelProviderTest {
 		expected.assertEquals(actual)
 	}
 
+	private def hasImage(EObject eObject, ImageDescriptor descriptor) {
+		val actual = labelProvider.getImage(eObject)
+		val expected = imageHelper.getImage(descriptor)
+		expected.assertEquals(actual)
+	}
 }

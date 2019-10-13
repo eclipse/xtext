@@ -27,6 +27,8 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * Provides labels for a EObjects.
@@ -41,9 +43,26 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
   
   @Override
   protected Object doGetImage(final Object element) {
-    if (((element instanceof EObject) && (!(element instanceof JvmIdentifiableElement)))) {
+    if ((element instanceof EObject)) {
+      boolean _matched = false;
+      if (element instanceof JvmIdentifiableElement) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (element instanceof XImportSection) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        if (element instanceof XImportDeclaration) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
+        return super.doGetImage(element);
+      }
       StringConcatenation _builder = new StringConcatenation();
-      String _name = ((EObject) element).eClass().getName();
+      String _name = ((EObject)element).eClass().getName();
       _builder.append(_name);
       _builder.append(".gif");
       return _builder.toString();
