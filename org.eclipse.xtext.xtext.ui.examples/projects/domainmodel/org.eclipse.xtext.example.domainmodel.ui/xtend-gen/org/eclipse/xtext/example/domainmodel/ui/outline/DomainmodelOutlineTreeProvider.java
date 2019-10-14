@@ -9,7 +9,10 @@ package org.eclipse.xtext.example.domainmodel.ui.outline;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 
@@ -26,6 +29,13 @@ public class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
     for (final EObject content : _eContents) {
       this.createNode(parentNode, content);
     }
+  }
+  
+  protected void _createNode(final IOutlineNode parent, final JvmParameterizedTypeReference modelElement) {
+  }
+  
+  protected boolean _isLeaf(final Entity entity) {
+    return entity.getFeatures().isEmpty();
   }
   
   protected boolean _isLeaf(final Feature feature) {

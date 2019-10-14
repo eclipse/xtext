@@ -101,4 +101,23 @@ public class OutlineTest extends AbstractOutlineTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testOutlineWithInheritance() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity A {}");
+      _builder.newLine();
+      _builder.append("entity B extends A {}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("A");
+      _builder_1.newLine();
+      _builder_1.append("B extends A");
+      _builder_1.newLine();
+      this.assertAllLabels(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

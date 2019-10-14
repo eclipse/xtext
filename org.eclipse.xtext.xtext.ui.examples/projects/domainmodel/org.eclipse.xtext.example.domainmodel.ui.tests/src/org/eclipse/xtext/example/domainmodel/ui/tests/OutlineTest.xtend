@@ -56,4 +56,14 @@ class OutlineTest extends AbstractOutlineTest {
 			'''
 		)
 	}
+
+	@Test def void testOutlineWithInheritance() {
+		'''
+			entity A {}
+			entity B extends A {}
+		'''.assertAllLabels('''
+			A
+			B extends A
+		''')
+	}
 }

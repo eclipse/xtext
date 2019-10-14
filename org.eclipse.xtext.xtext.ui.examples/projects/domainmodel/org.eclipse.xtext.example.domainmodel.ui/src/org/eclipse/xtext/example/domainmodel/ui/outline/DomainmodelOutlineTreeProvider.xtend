@@ -8,7 +8,10 @@
 package org.eclipse.xtext.example.domainmodel.ui.outline
 
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
 
@@ -18,10 +21,19 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
  */
 class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
+
 	override protected void _createChildren(DocumentRootNode parentNode, EObject rootElement) {
 		for (EObject content : rootElement.eContents()) {
 			createNode(parentNode, content)
 		}
+	}
+
+	protected def void _createNode(IOutlineNode parent, JvmParameterizedTypeReference modelElement) {
+		// prevent creating outline nodes for JvmParameterizedTypeReference model elements
+	}
+
+	def protected boolean _isLeaf(Entity entity) {
+		entity.features.isEmpty
 	}
 
 	def protected boolean _isLeaf(Feature feature) {

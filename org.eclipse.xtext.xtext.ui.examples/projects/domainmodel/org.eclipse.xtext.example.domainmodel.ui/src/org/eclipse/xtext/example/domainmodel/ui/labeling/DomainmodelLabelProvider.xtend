@@ -12,6 +12,7 @@ import java.util.Iterator
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
+import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.common.types.JvmArrayType
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
@@ -22,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
@@ -53,15 +55,27 @@ class DomainmodelLabelProvider extends XbaseLabelProvider {
 		return super.doGetImage(element)
 	}
 
-	def String text(Property property) {
+	def Object text(Entity entity) {
+		var StringBuilder builder = new StringBuilder()
+		builder.append(notNull(entity.getName()))
+		val superType = entity.superType
+		if (superType !== null) {
+			builder.append(" extends ")
+			builder.append(notNull(superType.simpleName))
+			return builder.toString.style
+		}
+		return builder.toString()
+	}
+
+	def Object text(Property property) {
 		var StringBuilder builder = new StringBuilder()
 		builder.append(notNull(property.getName()))
 		builder.append(" : ")
 		append(builder, property.getType())
-		return builder.toString()
+		return builder.toString().style
 	}
 
-	def String text(Operation operation) {
+	def Object text(Operation operation) {
 		var StringBuilder builder = new StringBuilder()
 		builder.append(notNull(operation.getName()))
 		builder.append("(")
@@ -73,7 +87,7 @@ class DomainmodelLabelProvider extends XbaseLabelProvider {
 		}
 		builder.append(") : ")
 		append(builder, operation.getType())
-		return builder.toString()
+		return builder.toString().style
 	}
 
 	def protected void append(StringBuilder builder, JvmTypeReference typeRef) {
@@ -117,5 +131,17 @@ class DomainmodelLabelProvider extends XbaseLabelProvider {
 		} else {
 			builder.append(notNull(type.getSimpleName()))
 		}
+	}
+
+	private def style(String text) {
+		val styled = new StyledString(text)
+		var offset = text.indexOf(':')
+		if (offset == -1) {
+			offset = text.indexOf('extends')
+		}
+		if (offset != -1) {
+			styled.setStyle(offset, text.length - offset, StyledString.DECORATIONS_STYLER)
+		}
+		styled
 	}
 }

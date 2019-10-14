@@ -12,6 +12,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.util.Strings;
@@ -70,15 +72,27 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
     return super.doGetImage(element);
   }
   
-  public String text(final Property property) {
+  public Object text(final Entity entity) {
+    StringBuilder builder = new StringBuilder();
+    builder.append(Strings.notNull(entity.getName()));
+    final JvmParameterizedTypeReference superType = entity.getSuperType();
+    if ((superType != null)) {
+      builder.append(" extends ");
+      builder.append(Strings.notNull(superType.getSimpleName()));
+      return this.style(builder.toString());
+    }
+    return builder.toString();
+  }
+  
+  public Object text(final Property property) {
     StringBuilder builder = new StringBuilder();
     builder.append(Strings.notNull(property.getName()));
     builder.append(" : ");
     this.append(builder, property.getType());
-    return builder.toString();
+    return this.style(builder.toString());
   }
   
-  public String text(final Operation operation) {
+  public Object text(final Operation operation) {
     StringBuilder builder = new StringBuilder();
     builder.append(Strings.notNull(operation.getName()));
     builder.append("(");
@@ -95,7 +109,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
     }
     builder.append(") : ");
     this.append(builder, operation.getType());
-    return builder.toString();
+    return this.style(builder.toString());
   }
   
   protected void append(final StringBuilder builder, final JvmTypeReference typeRef) {
@@ -154,5 +168,23 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
     } else {
       builder.append(Strings.notNull(type.getSimpleName()));
     }
+  }
+  
+  private StyledString style(final String text) {
+    StyledString _xblockexpression = null;
+    {
+      final StyledString styled = new StyledString(text);
+      int offset = text.indexOf(":");
+      if ((offset == (-1))) {
+        offset = text.indexOf("extends");
+      }
+      if ((offset != (-1))) {
+        int _length = text.length();
+        int _minus = (_length - offset);
+        styled.setStyle(offset, _minus, StyledString.DECORATIONS_STYLER);
+      }
+      _xblockexpression = styled;
+    }
+    return _xblockexpression;
   }
 }
