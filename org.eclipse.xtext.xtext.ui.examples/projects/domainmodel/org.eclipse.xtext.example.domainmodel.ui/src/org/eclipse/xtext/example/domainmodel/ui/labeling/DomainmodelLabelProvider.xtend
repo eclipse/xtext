@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtype.XImportSection
 import static org.eclipse.xtext.util.Strings.*
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 class DomainmodelLabelProvider extends XbaseLabelProvider {

@@ -14,7 +14,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Module
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */

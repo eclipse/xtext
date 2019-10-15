@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */

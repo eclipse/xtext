@@ -8,7 +8,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */

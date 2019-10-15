@@ -6,7 +6,7 @@ package org.eclipse.xtext.xbase.testlanguages.ui.labeling
 import com.google.inject.Inject
 
 /**
- * Provides labels for a EObjects.
+ * Provides labels for EObjects.
  * 
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */

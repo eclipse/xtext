@@ -13,7 +13,7 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider
 
 /**
- * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
