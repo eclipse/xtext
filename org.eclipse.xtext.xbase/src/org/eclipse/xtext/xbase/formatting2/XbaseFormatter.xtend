@@ -111,7 +111,9 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def dispatch void format(JvmGenericArrayTypeReference array, extension IFormattableDocument document) {
-		addReplacer(new ArrayBracketsFormattingReplacer(array.regionFor.ruleCallTo(arrayBracketsRule)))
+		for (region : array.regionFor.ruleCallsTo(arrayBracketsRule)) {
+			addReplacer(new ArrayBracketsFormattingReplacer(region))
+		}
 		array.componentType.format
 	}
 

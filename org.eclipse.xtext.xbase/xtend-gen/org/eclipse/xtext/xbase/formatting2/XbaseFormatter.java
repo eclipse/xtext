@@ -217,9 +217,11 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void _format(final JvmGenericArrayTypeReference array, @Extension final IFormattableDocument document) {
-    ISemanticRegion _ruleCallTo = this.textRegionExtensions.regionFor(array).ruleCallTo(this.grammar.getArrayBracketsRule());
-    ArrayBracketsFormattingReplacer _arrayBracketsFormattingReplacer = new ArrayBracketsFormattingReplacer(_ruleCallTo);
-    document.addReplacer(_arrayBracketsFormattingReplacer);
+    List<ISemanticRegion> _ruleCallsTo = this.textRegionExtensions.regionFor(array).ruleCallsTo(this.grammar.getArrayBracketsRule());
+    for (final ISemanticRegion region : _ruleCallsTo) {
+      ArrayBracketsFormattingReplacer _arrayBracketsFormattingReplacer = new ArrayBracketsFormattingReplacer(region);
+      document.addReplacer(_arrayBracketsFormattingReplacer);
+    }
     document.<JvmTypeReference>format(array.getComponentType());
   }
   
