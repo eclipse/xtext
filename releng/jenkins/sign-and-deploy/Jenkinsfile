@@ -78,7 +78,6 @@ spec:
     buildDiscarder(logRotator(numToKeepStr:'15'))
     disableConcurrentBuilds()
     timeout(time: 45, unit: 'MINUTES')
-    timestamps()
   }
 
   // https://jenkins.io/doc/book/pipeline/syntax/#triggers
