@@ -5,8 +5,8 @@ Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.20.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j
