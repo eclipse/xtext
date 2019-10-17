@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,10 +32,6 @@ import com.google.inject.Inject;
  * &#64;InjectWith(MyLanguageUiInjectorProvider) 
  * class OutlineTest extends AbstractOutlineTest {
  * 
- *	override protected getEditorId() {
- *		MyDslActivator.ORG_XTEXT_EXAMPLE_MYDSL
- *	}
- *	
  *	&#64;Test def void myTest() {
  *	  '''
  *	  	// DSL code
@@ -68,7 +64,7 @@ public abstract class AbstractOutlineTest extends AbstractEditorTest {
 	protected IXtextDocument document;
 
 	public String fileExtension;
-	
+
 	@Inject
 	protected IOutlineTreeProvider treeProvider;
 
