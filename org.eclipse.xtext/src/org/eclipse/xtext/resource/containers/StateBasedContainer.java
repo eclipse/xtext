@@ -12,7 +12,6 @@ import static java.util.Collections.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-import java.util.function.Function;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -46,24 +45,19 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	
 	@Override
 	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
-		Predicate<IEObjectDescription> predicate = getStateContainsPredicate(input -> input.getEObjectURI().trimFragment());
-		return Iterables.filter(unfiltered, predicate);
-	}
-	
-	protected <T> Predicate<T> getStateContainsPredicate(Function<T, URI> uriProvider) {
-		return new Predicate<T>() {
+		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
 			private Collection<URI> contents = null;
 
 			@Override
-			public boolean apply(T input) {
+			public boolean apply(IEObjectDescription input) {
 				if(contents == null) {
 					contents = state.getContents();
 				}
-				URI resourceURI = uriProvider.apply(input);
+				URI resourceURI = input.getEObjectURI().trimFragment();
 				final boolean contains = contents.contains(resourceURI);
 				return contains;
 			}
-		};
+		});
 	}
 
 	@Override
@@ -118,9 +112,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		if (isEmpty())
 			return emptyList();
 
-		Predicate<IResourceDescription> isResourceDescritptionInState = getStateContainsPredicate(input -> input.getURI());
-		Iterable<IResourceDescription> resourceDescriptionsInState = Iterables.filter(getDescriptions().getAllResourceDescriptions(), isResourceDescritptionInState);
-		return IterableExtensions.flatMap(resourceDescriptionsInState, desc -> desc.getExportedObjectsByType(type));
+		return IterableExtensions.flatMap(getResourceDescriptions(), desc -> desc.getExportedObjectsByType(type));
 	}
 	
 	@Override
