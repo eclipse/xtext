@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -38,7 +38,7 @@ public @interface FileTemplate {
    */
   public String icon();
   /**
-   * Description of the file template presented to the user in a a text field in the new file wizard when hovering
+   * Description of the file template presented to the user in a text field in the new file wizard when hovering
    * over the combo box of available templates. If only one template is available used as text for the wizard page.
    * 
    * The description is written to a file "messages.properties" and read from there at runtime. This way it is

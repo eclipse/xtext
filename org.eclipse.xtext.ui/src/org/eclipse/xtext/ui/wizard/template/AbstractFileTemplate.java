@@ -24,11 +24,11 @@ public abstract class AbstractFileTemplate extends AbstractTemplate {
 	private TemplateFileInfo info;
 
 	abstract public void generateFiles(IFileGenerator generator);
-	
+
 	protected TemplateFileInfo getTemplateInfo() {
 		return info;
 	}
-	
+
 	protected String getFolder() {
 		return info.getFolder();
 	}
@@ -36,7 +36,7 @@ public abstract class AbstractFileTemplate extends AbstractTemplate {
 	protected String getName() {
 		return info.getName();
 	}
-	
+
 	void setTemplateInfo(TemplateFileInfo info) {
 		this.info = info;
 	}

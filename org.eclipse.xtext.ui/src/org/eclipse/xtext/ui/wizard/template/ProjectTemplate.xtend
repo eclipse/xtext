@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,7 +13,7 @@ import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.Active
 
 /**
- * Annotation to define a project templates that is selected by the user in the new project wizard and declared in a
+ * Annotation to define a project template that is selected by the user in the new project wizard and declared in a
  * language specific ProjectTemplateProvider.
  * 
  * @author Arne Deutsch - Initial contribution and API
@@ -34,12 +34,12 @@ annotation ProjectTemplate {
 	 */
 	String icon
 	/**
-	 * Description of the project template presented to the user in a a text field in the new project wizard. is
+	 * Description of the project template presented to the user in a text field in the new project wizard. It is
 	 * rendered inside a FormText widget and has to conform to a simplified HTML format. Example:
 	 * 
 	 * <pre>
 	 * &lt;p&gt;&lt;b&gt;Hello World&lt;/b&gt;&lt;/p&gt;
-	 * &lt;p>This is a parameterized hello world for com.daimler.pas.PAS. You can set a parameter to modify the content
+	 * &lt;p>This is a parameterized hello world for MyDsl. You can set a parameter to modify the content
 	 * in the generated file and a parameter to set the package the file is created in.&lt;/p&gt;
 	 * </pre>
 	 * 

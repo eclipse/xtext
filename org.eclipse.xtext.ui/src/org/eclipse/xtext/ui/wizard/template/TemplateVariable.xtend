@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -51,7 +51,7 @@ abstract class TemplateVariable {
 	/**
 	 * Subclasses should override to refresh the UI widget with data set to the variable in the meantime.
 	 */
-	def void refresh();
+	def void refresh()
 
 	def Control getWidget()
 
@@ -65,7 +65,7 @@ abstract class ContainerTemplateVariable extends TemplateVariable {
 		super(label, description, container)
 	}
 
-	override Composite getWidget();
+	override Composite getWidget()
 
 }
 
