@@ -64,8 +64,8 @@ task zipTestFiles(type: Zip) {
 		include '**/*'
 		into 'test-files'
 	}
-	destinationDir = new File( project.buildDir,'libs')
-	archiveName 'test-files.zip'
+	destinationDirectory = new File( project.buildDir,'libs')
+	archiveFileName = 'test-files.zip'
 }
 
 tasks.war.dependsOn(zipTestFiles)
