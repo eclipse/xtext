@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Arithmetics Example - IDE Features
+Bundle-Name: Xtext Arithmetics Example - Generic IDE
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.20.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.ide; singleton:=true
