@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -35,27 +35,21 @@ public abstract class AbstractTemplate {
 	 * Create a new text variable with associated text field and add it to the "variables" list.
 	 */
 	protected StringTemplateVariable text(String name, String defaultValue) {
-		StringTemplateVariable variable = new StringTemplateVariable(name, defaultValue, null, null);
-		variables.add(variable);
-		return variable;
+		return text(name, defaultValue, null, null);
 	}
 
 	/**
 	 * Create a new text variable with associated text field and add it to the "variables" list.
 	 */
 	protected StringTemplateVariable text(String name, String defaultValue, ContainerTemplateVariable container) {
-		StringTemplateVariable variable = new StringTemplateVariable(name, defaultValue, null, container);
-		variables.add(variable);
-		return variable;
+		return text(name, defaultValue, null, container);
 	}
 
 	/**
 	 * Create a new text variable with associated text field and add it to the "variables" list.
 	 */
 	protected StringTemplateVariable text(String name, String defaultValue, String description) {
-		StringTemplateVariable variable = new StringTemplateVariable(name, defaultValue, description, null);
-		variables.add(variable);
-		return variable;
+		return text(name, defaultValue, description, null);
 	}
 
 	/**
@@ -71,27 +65,21 @@ public abstract class AbstractTemplate {
 	 * Create a new boolean variable with associated check box and add it to the "variables" list.
 	 */
 	protected BooleanTemplateVariable check(String name, boolean defaultValue) {
-		BooleanTemplateVariable variable = new BooleanTemplateVariable(name, defaultValue, null, null);
-		variables.add(variable);
-		return variable;
+		return check(name, defaultValue, null, null);
 	}
 
 	/**
 	 * Create a new boolean variable with associated check box and add it to the "variables" list.
 	 */
 	protected BooleanTemplateVariable check(String name, boolean defaultValue, ContainerTemplateVariable container) {
-		BooleanTemplateVariable variable = new BooleanTemplateVariable(name, defaultValue, null, container);
-		variables.add(variable);
-		return variable;
+		return check(name, defaultValue, null, container);
 	}
 
 	/**
 	 * Create a new boolean variable with associated check box and add it to the "variables" list.
 	 */
 	protected BooleanTemplateVariable check(String name, boolean defaultValue, String description) {
-		BooleanTemplateVariable variable = new BooleanTemplateVariable(name, defaultValue, description, null);
-		variables.add(variable);
-		return variable;
+		return check(name, defaultValue, description, null);
 	}
 
 	/**
@@ -107,27 +95,21 @@ public abstract class AbstractTemplate {
 	 * Create a new text variable with associated combo box and add it to the "variables" list.
 	 */
 	protected StringSelectionTemplateVariable combo(String name, String[] possibleValues) {
-		StringSelectionTemplateVariable variable = new StringSelectionTemplateVariable(name, possibleValues, null, null);
-		variables.add(variable);
-		return variable;
+		return combo(name, possibleValues, null, null);
 	}
 
 	/**
 	 * Create a new text variable with associated combo box and add it to the "variables" list.
 	 */
 	protected StringSelectionTemplateVariable combo(String name, String[] possibleValues, ContainerTemplateVariable container) {
-		StringSelectionTemplateVariable variable = new StringSelectionTemplateVariable(name, possibleValues, null, container);
-		variables.add(variable);
-		return variable;
+		return combo(name, possibleValues, null, container);
 	}
 
 	/**
 	 * Create a new text variable with associated combo box and add it to the "variables" list.
 	 */
 	protected StringSelectionTemplateVariable combo(String name, String[] possibleValues, String description) {
-		StringSelectionTemplateVariable variable = new StringSelectionTemplateVariable(name, possibleValues, description, null);
-		variables.add(variable);
-		return variable;
+		return combo(name, possibleValues, description, null);
 	}
 
 	/**
@@ -144,27 +126,21 @@ public abstract class AbstractTemplate {
 	 * Create a new group to group other values with a label.
 	 */
 	protected GroupTemplateVariable group(String name) {
-		GroupTemplateVariable variable = new GroupTemplateVariable(name, null, null);
-		variables.add(variable);
-		return variable;
+		return group(name, null, null);
 	}
 
 	/**
 	 * Create a new group to group other values with a label.
 	 */
 	protected GroupTemplateVariable group(String name, ContainerTemplateVariable container) {
-		GroupTemplateVariable variable = new GroupTemplateVariable(name, null, container);
-		variables.add(variable);
-		return variable;
+		return group(name, null, container);
 	}
 
 	/**
 	 * Create a new group to group other values with a label.
 	 */
 	protected GroupTemplateVariable group(String name, String description) {
-		GroupTemplateVariable variable = new GroupTemplateVariable(name, description, null);
-		variables.add(variable);
-		return variable;
+		return group(name, description, null);
 	}
 
 	/**
