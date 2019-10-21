@@ -14,7 +14,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<xtext-version>2.20.0-SNAPSHOT</xtext-version>
-		<tycho-version>1.4.0</tycho-version>
+		<tycho-version>1.5.0</tycho-version>
 		<eclipse-text-version>3.6.100</eclipse-text-version>
 		<core-resources-version>3.12.0</core-resources-version>
 		<core-runtime-version>3.13.0</core-runtime-version>
