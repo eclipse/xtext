@@ -9,10 +9,13 @@ package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -24,11 +27,15 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
+import org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelHelper;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -40,6 +47,14 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   @Inject
   @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
+  
+  @Inject
+  @Extension
+  private DomainmodelJvmModelHelper _domainmodelJvmModelHelper;
+  
+  @Inject
+  @Extension
+  private IJvmModelAssociations _iJvmModelAssociations;
   
   protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
@@ -116,11 +131,26 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           }
         }
       }
+      this.removeDuplicateGettersSetters(it);
       EList<JvmMember> _members_2 = it.getMembers();
       JvmOperation _toStringMethod = this._jvmTypesBuilder.toToStringMethod(entity, it);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _toStringMethod);
     };
     acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(entity, this._iQualifiedNameProvider.getFullyQualifiedName(entity)), _function);
+  }
+  
+  private void removeDuplicateGettersSetters(final JvmDeclaredType inferredType) {
+    final Consumer<Collection<JvmOperation>> _function = (Collection<JvmOperation> jvmOperations) -> {
+      final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
+        EObject _primarySourceElement = this._iJvmModelAssociations.getPrimarySourceElement(it);
+        return Boolean.valueOf((_primarySourceElement instanceof Property));
+      };
+      final JvmOperation getterOrSetter = IterableExtensions.<JvmOperation>head(IterableExtensions.<JvmOperation>filter(jvmOperations, _function_1));
+      if ((getterOrSetter != null)) {
+        inferredType.getMembers().remove(getterOrSetter);
+      }
+    };
+    this._domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredType, _function);
   }
   
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
