@@ -218,6 +218,29 @@ class ValidationTests {
 		'''.parse.assertNoErrors
 	}
 
+	@Test def void testExplicitGetterReplacesTheGeneratedOne() {
+		'''
+			entity E {
+				name : String
+				op getName() {
+					return name
+				}
+			}
+		'''.parse.assertNoErrors
+	}
+
+	@Test def void testExplicitSetterReplacesTheGeneratedOne() {
+		'''
+			entity E {
+				name : String
+				// even if it's not void
+				op setName(String n) : String {
+					this.name = n
+				}
+			}
+		'''.parse.assertNoErrors
+	}
+
 	@Test def void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() {
 		val model = '''
 			entity E {
