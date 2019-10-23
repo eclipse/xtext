@@ -11,17 +11,16 @@ import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
+import org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelHelper
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 
 import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.Literals.*
 import static org.eclipse.xtext.example.domainmodel.validation.IssueCodes.*
@@ -37,7 +36,7 @@ import static extension java.lang.Character.isUpperCase
 class DomainmodelValidator extends AbstractDomainmodelValidator {
 
 	@Inject extension IJvmModelAssociations
-	@Inject extension OverrideHelper
+	@Inject extension DomainmodelJvmModelHelper
 
 	@Check def void checkTypeNameStartsWithCapital(Entity entity) {
 		if (!entity.name.charAt(0).isUpperCase) {
@@ -79,22 +78,13 @@ class DomainmodelValidator extends AbstractDomainmodelValidator {
 	}
 
 	@Check def void checkOperationNamesAreUnique(Entity entity) {
-		// takes into consideration overloading and type erasure
+		// taking into consideration overloading and type erasure
 		val inferredJavaClass = entity.jvmElements.filter(JvmGenericType).head
-		val methods = inferredJavaClass.getResolvedFeatures.declaredOperations
-		val Multimap<String, JvmOperation> signature2Declarations = HashMultimap.create
-
-		methods.forEach[
-			signature2Declarations.put(resolvedErasureSignature, declaration)
-		]
-
-		signature2Declarations.asMap.values.forEach[jvmOperations|
-			if (jvmOperations.size > 1) {
-				val operations = jvmOperations.map[primarySourceElement].filter(Operation)
-				operations.forEach[
-					error("Duplicate operation " + name, it, FEATURE__NAME, DUPLICATE_OPERATION)
-				]
-			}
+		inferredJavaClass.handleDuplicateJvmOperations [ jvmOperations |
+			val operations = jvmOperations.map[primarySourceElement].filter(Operation)
+			operations.forEach [
+				error("Duplicate operation " + name, it, FEATURE__NAME, DUPLICATE_OPERATION)
+			]
 		]
 	}
 }
