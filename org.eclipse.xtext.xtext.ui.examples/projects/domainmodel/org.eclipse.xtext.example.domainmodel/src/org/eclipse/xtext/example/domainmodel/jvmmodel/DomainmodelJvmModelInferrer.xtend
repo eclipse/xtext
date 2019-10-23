@@ -8,16 +8,16 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 

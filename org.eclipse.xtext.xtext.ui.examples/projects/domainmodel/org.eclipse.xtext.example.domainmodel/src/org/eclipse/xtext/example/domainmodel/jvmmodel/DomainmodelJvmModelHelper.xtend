@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
-import com.google.inject.Inject
-import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import com.google.common.collect.Multimap
-import org.eclipse.xtext.common.types.JvmOperation
 import com.google.common.collect.HashMultimap
+import com.google.common.collect.Multimap
+import com.google.inject.Inject
 import java.util.Collection
 import java.util.function.Consumer
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 
 /**
  * @author Lorenzo Bettini - Initial contribution and API, https://github.com/eclipse/xtext-eclipse/issues/1205
