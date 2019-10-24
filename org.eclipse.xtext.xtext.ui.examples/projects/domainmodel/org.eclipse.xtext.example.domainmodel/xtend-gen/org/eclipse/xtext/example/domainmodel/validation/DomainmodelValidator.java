@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
+import org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelHelper;
 import org.eclipse.xtext.example.domainmodel.validation.AbstractDomainmodelValidator;
 import org.eclipse.xtext.example.domainmodel.validation.IssueCodes;
 import org.eclipse.xtext.util.Strings;
@@ -34,8 +34,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
-import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
 /**
  * This class contains custom validation rules.
@@ -50,7 +48,7 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
   
   @Inject
   @Extension
-  private OverrideHelper _overrideHelper;
+  private DomainmodelJvmModelHelper _domainmodelJvmModelHelper;
   
   @Check
   public void checkTypeNameStartsWithCapital(final Entity entity) {
@@ -114,28 +112,18 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
   @Check
   public void checkOperationNamesAreUnique(final Entity entity) {
     final JvmGenericType inferredJavaClass = IterableExtensions.<JvmGenericType>head(Iterables.<JvmGenericType>filter(this._iJvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-    final List<IResolvedOperation> methods = this._overrideHelper.getResolvedFeatures(inferredJavaClass).getDeclaredOperations();
-    final Multimap<String, JvmOperation> signature2Declarations = HashMultimap.<String, JvmOperation>create();
-    final Consumer<IResolvedOperation> _function = (IResolvedOperation it) -> {
-      signature2Declarations.put(it.getResolvedErasureSignature(), it.getDeclaration());
+    final Consumer<Collection<JvmOperation>> _function = (Collection<JvmOperation> jvmOperations) -> {
+      final Function1<JvmOperation, EObject> _function_1 = (JvmOperation it) -> {
+        return this._iJvmModelAssociations.getPrimarySourceElement(it);
+      };
+      final Iterable<Operation> operations = Iterables.<Operation>filter(IterableExtensions.<JvmOperation, EObject>map(jvmOperations, _function_1), Operation.class);
+      final Consumer<Operation> _function_2 = (Operation it) -> {
+        String _name = it.getName();
+        String _plus = ("Duplicate operation " + _name);
+        this.error(_plus, it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
+      };
+      operations.forEach(_function_2);
     };
-    methods.forEach(_function);
-    final Consumer<Collection<JvmOperation>> _function_1 = (Collection<JvmOperation> jvmOperations) -> {
-      int _size = jvmOperations.size();
-      boolean _greaterThan = (_size > 1);
-      if (_greaterThan) {
-        final Function1<JvmOperation, EObject> _function_2 = (JvmOperation it) -> {
-          return this._iJvmModelAssociations.getPrimarySourceElement(it);
-        };
-        final Iterable<Operation> operations = Iterables.<Operation>filter(IterableExtensions.<JvmOperation, EObject>map(jvmOperations, _function_2), Operation.class);
-        final Consumer<Operation> _function_3 = (Operation it) -> {
-          String _name = it.getName();
-          String _plus = ("Duplicate operation " + _name);
-          this.error(_plus, it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
-        };
-        operations.forEach(_function_3);
-      }
-    };
-    signature2Declarations.asMap().values().forEach(_function_1);
+    this._domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, _function);
   }
 }

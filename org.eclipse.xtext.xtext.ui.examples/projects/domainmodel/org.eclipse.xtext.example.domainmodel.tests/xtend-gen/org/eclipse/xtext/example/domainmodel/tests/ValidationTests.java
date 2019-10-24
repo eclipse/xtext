@@ -434,6 +434,61 @@ public class ValidationTests {
   }
   
   @Test
+  public void testExplicitGetterReplacesTheGeneratedOne() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("name : String");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op getName() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return name");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testExplicitSetterReplacesTheGeneratedOne() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("entity E {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("name : String");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// even if it\'s not void");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("op setName(String n) : String {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this.name = n");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testDuplicatedOperationWithDifferentSignatureWithSameTypeErasure() {
     try {
       StringConcatenation _builder = new StringConcatenation();

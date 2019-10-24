@@ -121,4 +121,171 @@ class CompilerTest {
 			assertEquals("int 10", obj.invoke('doStuff',10))
 		]
 	}
+
+	@Test def void testExplicitGetterReplacesGeneratedOne() {
+		'''
+			entity Foo {
+				name : String
+				/** explicit getter will replace the generated one */
+				op getName() {
+					name.toFirstUpper
+				}
+			}
+		'''.compile[
+			assertEquals('''
+				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+				import org.eclipse.xtext.xbase.lib.StringExtensions;
+				import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public Foo() {
+				  }
+				  
+				  public Foo(final Procedure1<Foo> initializer) {
+				    initializer.apply(this);
+				  }
+				  
+				  private String name;
+				  
+				  public void setName(final String name) {
+				    this.name = name;
+				  }
+				  
+				  /**
+				   * explicit getter will replace the generated one
+				   */
+				  public String getName() {
+				    return StringExtensions.toFirstUpper(this.name);
+				  }
+				  
+				  @Override
+				  public String toString() {
+				    String result = new ToStringBuilder(this).addAllFields().toString();
+				    return result;
+				  }
+				}
+			'''.toString, getSingleGeneratedCode
+			)
+			// make sure it compiles in Java
+			val obj = it.compiledClass.getDeclaredConstructor().newInstance
+			obj.invoke('setName', "hello")
+			assertEquals("Hello", obj.invoke('getName'))
+		]
+	}
+
+	@Test def void testExplicitSetterReplacesGeneratedOne() {
+		'''
+			entity Foo {
+				name : String
+				/** explicit setter will replace the generated one,
+					even if it's not void */
+				op setName(String name) : String {
+					this.name = name.toFirstUpper
+				}
+			}
+		'''.compile[
+			assertEquals('''
+				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+				import org.eclipse.xtext.xbase.lib.StringExtensions;
+				import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public Foo() {
+				  }
+				  
+				  public Foo(final Procedure1<Foo> initializer) {
+				    initializer.apply(this);
+				  }
+				  
+				  private String name;
+				  
+				  public String getName() {
+				    return this.name;
+				  }
+				  
+				  /**
+				   * explicit setter will replace the generated one,
+				   * even if it's not void
+				   */
+				  public String setName(final String name) {
+				    return this.name = StringExtensions.toFirstUpper(name);
+				  }
+				  
+				  @Override
+				  public String toString() {
+				    String result = new ToStringBuilder(this).addAllFields().toString();
+				    return result;
+				  }
+				}
+			'''.toString, getSingleGeneratedCode
+			)
+			// make sure it compiles in Java
+			val obj = it.compiledClass.getDeclaredConstructor().newInstance
+			assertEquals("Hello", obj.invoke('setName', "hello"))
+			assertEquals("Hello", obj.invoke('getName'))
+		]
+	}
+
+	@Test def void testExplicitGetterSetterReplaceGeneratedOnes() {
+		'''
+			entity Foo {
+				name : String
+				/** explicit getter will replace the generated one */
+				op getName() {
+					name.toUpperCase
+				}
+				/** explicit setter will replace the generated one,
+					even if it's not void */
+				op setName(String name) : String {
+					this.name = name.toFirstUpper
+				}
+			}
+		'''.compile[
+			assertEquals('''
+				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+				import org.eclipse.xtext.xbase.lib.StringExtensions;
+				import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public Foo() {
+				  }
+				  
+				  public Foo(final Procedure1<Foo> initializer) {
+				    initializer.apply(this);
+				  }
+				  
+				  private String name;
+				  
+				  /**
+				   * explicit getter will replace the generated one
+				   */
+				  public String getName() {
+				    return this.name.toUpperCase();
+				  }
+				  
+				  /**
+				   * explicit setter will replace the generated one,
+				   * even if it's not void
+				   */
+				  public String setName(final String name) {
+				    return this.name = StringExtensions.toFirstUpper(name);
+				  }
+				  
+				  @Override
+				  public String toString() {
+				    String result = new ToStringBuilder(this).addAllFields().toString();
+				    return result;
+				  }
+				}
+			'''.toString, getSingleGeneratedCode
+			)
+			// make sure it compiles in Java
+			val obj = it.compiledClass.getDeclaredConstructor().newInstance
+			assertEquals("Hello", obj.invoke('setName', "hello"))
+			assertEquals("HELLO", obj.invoke('getName'))
+		]
+	}
 }
