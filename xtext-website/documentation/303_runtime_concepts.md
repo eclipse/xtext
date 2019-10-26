@@ -233,26 +233,8 @@ Element:
 
 ```
 
-If you want to define the scope for the *superElement* cross-reference, the following Xtend code is one way to go.
+If you want to define the scope for the *superElement* cross-reference, the following Java code is one way to go.
 
-```xtend
-override getScope(EObject context, EReference reference) {
-    // We want to define the Scope for the Element's superElement cross-reference
-    if (context instanceof Element
-            && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
-        // Collect a list of candidates by going through the model
-        // EcoreUtil2 provides useful functionality to do that
-        // For example searching for all elements within the root Object's tree
-        val rootElement = EcoreUtil2.getRootContainer(context)
-        val candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element)
-        // Create IEObjectDescriptions and puts them into an IScope instance
-        return Scopes.scopeFor(candidates)
-    }
-    return super.getScope(context, reference);
-}
-```
-
-or implemented in Java
 
 ```java
 @Override
@@ -278,30 +260,17 @@ The [MapBasedScope]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xt
 
 Coming back to our example, one possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a super-element of itself.
 
-```xtend
-override getScope(EObject context, EReference reference) {
-    if (context instanceof Element
-            && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
-        val rootElement = EcoreUtil2.getRootContainer(context)
-        val candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element)
-        val existingScope = Scopes.scopeFor(candidates)
-        // Scope that filters out the context element from the candidates list
-        return new FilteringScope(existingScope, [getEObjectOrProxy != context])
-    }
-    return super.getScope(context, reference);
-}
-```
 
 ```java
     @Override
-    public IScope getScope(final EObject context, final EReference reference) {
+    public IScope getScope(EObject context, EReference reference) {
         if (context instanceof Element
                 && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
             EObject rootElement = EcoreUtil2.getRootContainer(context);
             List<Element> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
             IScope existingScope = Scopes.scopeFor(candidates);
             // Scope that filters out the context element from the candidates list
-            return new FilteringScope(existingScope, (e) -> e.getEObjectOrProxy() != context);
+            return new FilteringScope(existingScope, (e) -> !Objects.equal(e.getEObjectOrProxy(), context));
         }
         return super.getScope(context, reference);
     }
@@ -739,8 +708,8 @@ Unless you want to enforce a uniform encoding for all models of your language, w
 @Override
 public void configureRuntimeEncodingProvider(Binder binder) {
     binder.bind(IEncodingProvider.class)
-    .annotatedWith(DispatchingProvider.Runtime.class)
-    .to(MyEncodingProvider.class);
+        .annotatedWith(DispatchingProvider.Runtime.class)
+        .to(MyEncodingProvider.class);
 }
 ```
 
@@ -863,9 +832,9 @@ public class MyLanguageWithDependenciesInjectorProvider extends MyLanguageInject
     }
 }
 
-// @RunWith(XtextRunner) // JUnit 4
-@ExtendWith(InjectionExtension) // JUnit 5
-@InjectWith(MyLanguageWithDependenciesInjectorProvider)
+// @RunWith(XtextRunner.class) // JUnit 4
+@ExtendWith(InjectionExtension.class) // JUnit 5
+@InjectWith(MyLanguageWithDependenciesInjectorProvider.class)
 public class YourTest {
     ...
 }

@@ -126,7 +126,7 @@ public void completeEvent_Code(
   super.completeEvent_Code(model, assignment, context, acceptor);
 
   // compute the plain proposal
-  final String proposal = event.getName() + "ID"
+  String proposal = event.getName() + "ID"
 
   // Create and register the completion proposal:
   // The proposal may be null as the createCompletionProposal(..) 
