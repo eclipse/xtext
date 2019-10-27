@@ -48,13 +48,13 @@ class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest.requiredBundles.addAll(
 				'org.eclipse.xtext.common.types',
-				'org.objectweb.asm;bundle-version="[7.1.0,7.2.0)";resolution:=optional'
+				'org.objectweb.asm;bundle-version="[7.2.0,7.3.0)";resolution:=optional'
 			)
 		}
 		
 		if (projectConfig.runtimeTest.manifest !== null) {
 			projectConfig.runtimeTest.manifest.requiredBundles.add(
-				'org.objectweb.asm;bundle-version="[7.1.0,7.2.0)";resolution:=optional'
+				'org.objectweb.asm;bundle-version="[7.2.0,7.3.0)";resolution:=optional'
 			)
 		}
 		
