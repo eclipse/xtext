@@ -9,7 +9,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;bundle-version="2.20.0",
- org.objectweb.asm;bundle-version="[7.1.0,7.2.0)",
+ org.objectweb.asm;bundle-version="[7.2.0,7.3.0)",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Automatic-Module-Name: org.eclipse.xtext.xbase.ide
 Export-Package: closures,
