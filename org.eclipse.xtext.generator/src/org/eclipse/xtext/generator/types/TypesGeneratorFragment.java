@@ -44,12 +44,12 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment implements 
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return new String[] { "org.eclipse.xtext.common.types","org.objectweb.asm;bundle-version=\"[7.1.0,7.2.0)\";resolution:=optional" };
+		return new String[] { "org.eclipse.xtext.common.types","org.objectweb.asm;bundle-version=\"[7.2.0,7.3.0)\";resolution:=optional" };
 	}
 	
 	@Override
 	public String[] getRequiredBundlesTests(Grammar grammar) {
-		return new String[] { "org.objectweb.asm;bundle-version=\"[7.1.0,7.2.0)\";resolution:=optional" };
+		return new String[] { "org.objectweb.asm;bundle-version=\"[7.2.0,7.3.0)\";resolution:=optional" };
 	}
 
 	@Override
