@@ -1,5 +1,5 @@
 plugins {
-    id "de.esoco.gwt" version "1.0.9"
+    id "de.esoco.gwt" version "1.0.10"
 }
 
 group = 'org.eclipse.xtend'
