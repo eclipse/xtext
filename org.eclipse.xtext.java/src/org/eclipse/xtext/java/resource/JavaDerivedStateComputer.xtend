@@ -50,7 +50,7 @@ class JavaDerivedStateComputer {
 		if (resource.compilationUnit !== null) {
 			val classFileCache = resource.resourceSet.findOrCreateClassFileCache
 			classFileCache.addResourceToCompile(resource)
-		} 
+		}
 	}
 	
 	def void installStubs(Resource resource) {
