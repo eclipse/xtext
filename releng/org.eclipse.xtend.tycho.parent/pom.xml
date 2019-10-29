@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>1.5.0</tycho-version>
+		<tycho-version>1.5.1</tycho-version>
 		<!-- version of the "bootstrap" plugin; used to compile xtend sources in xtend -->
 		<xtend-maven-plugin-version>2.20.0.M1</xtend-maven-plugin-version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
