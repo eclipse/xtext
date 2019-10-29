@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.cbi.p2repo.analyzers;bundle-version="2.0.0",
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.eclipse.xtext.releng.simrel.tests
+Export-Package: org.eclipse.xtext.releng.simrel.tests;x-internal:=true
