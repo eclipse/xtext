@@ -30,6 +30,8 @@ import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.internal.Log
+import java.util.Map
+import java.util.HashSet
 
 @Log
 class JavaDerivedStateComputer {
@@ -43,7 +45,12 @@ class JavaDerivedStateComputer {
 		for (eObject : resourcesContentsList) {
 			unloader.unloadRoot(eObject) 
 		}
-		resource.getContents().clear 
+		resource.getContents().clear
+		
+		if (resource.compilationUnit !== null) {
+			val classFileCache = resource.resourceSet.findOrCreateClassFileCache
+			classFileCache.addResourceToCompile(resource)
+		} 
 	}
 	
 	def void installStubs(Resource resource) {
@@ -124,14 +131,34 @@ class JavaDerivedStateComputer {
 		val data = resourceDescriptionsProvider.getResourceDescriptions(resource.resourceSet)
 		if (data === null)
 			throw new IllegalStateException("no index installed")
-		// TODO use container manager
-		val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator, classFileCache)
-		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
-			for (cls : it.classFiles) {
-				val key = QualifiedName.create(CharOperation.toStrings(cls.compoundName))
-				classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes, cls.fileName)])
+		
+		val (List<String>, Map<String, byte[]>)=>void initializer = [ topLevelTypes, classMap |
+			val inMemClassLoader = new InMemoryClassLoader(classMap, classLoader)
+			for (topLevel : topLevelTypes) {
+				try {
+					val builder = new JvmDeclaredTypeBuilder(new BinaryClass(topLevel, inMemClassLoader),
+						new ClassFileBytesAccess(), inMemClassLoader)
+					val type = builder.buildType
+					resource.contents += type
+				} catch (Throwable t) {
+					throw new IllegalStateException("could not load type '" + topLevel + "'", t)
+				}
 			}
-			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
+		] 	
+		val wasCached = classFileCache.popCompileResult(compilationUnit.fileName, initializer)
+		
+		if (!wasCached) {
+			// TODO use container manager
+			
+			val unitsToCompile = new HashSet(classFileCache.drainResourcesToCompile.map[ it.compilationUnit ].toList)
+			unitsToCompile.add(compilationUnit)
+			
+			val nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, stubGenerator, classFileCache)
+			val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
+				for (cls : it.classFiles) {
+					val key = QualifiedName.create(CharOperation.toStrings(cls.compoundName))
+					classFileCache.computeIfAbsent(key, [name|new ClassFileReader(cls.bytes, cls.fileName)])
+				}
 				val map = newHashMap
 				var List<String> topLevelTypes = newArrayList
 				for (cf : it.getClassFiles()) {
@@ -141,20 +168,14 @@ class JavaDerivedStateComputer {
 						topLevelTypes += className
 					}
 				}
-				val inMemClassLoader = new InMemoryClassLoader(map, classLoader)
-				for (topLevel : topLevelTypes) {
-					try {
-                        val builder = new JvmDeclaredTypeBuilder(new BinaryClass(topLevel, inMemClassLoader),
-                            new ClassFileBytesAccess(), inMemClassLoader)
-                        val type = builder.buildType
-                        resource.contents += type
-                    } catch (Throwable t) {
-                        throw new IllegalStateException("could not load type '" + topLevel + "'", t)
-                    }
+				if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
+					initializer.apply(topLevelTypes, map)
+				} else {
+					classFileCache.addCompileResult(it.fileName, topLevelTypes, map)
 				}
-			}
-		], new DefaultProblemFactory())
-		compiler.compile(#[compilationUnit])
+			], new DefaultProblemFactory())
+			compiler.compile(unitsToCompile)
+		}
 	}
 	
 	protected def isInfoFile(Resource resource) {
@@ -163,40 +184,41 @@ class JavaDerivedStateComputer {
 	}
 	
 	protected def CompilerOptions getCompilerOptions() {
-        getCompilerOptions(null as JavaConfig)
-    }
+		getCompilerOptions(null as JavaConfig)
+	}
 
-    protected def CompilerOptions getCompilerOptions(Resource resource) {
-        resource?.resourceSet.compilerOptions
-    }
+	protected def CompilerOptions getCompilerOptions(Resource resource) {
+		resource?.resourceSet.compilerOptions
+	}
 
-    protected def CompilerOptions getCompilerOptions(ResourceSet resourceSet) {
-        JavaConfig?.findInEmfObject(resourceSet).compilerOptions
-    }
+	protected def CompilerOptions getCompilerOptions(ResourceSet resourceSet) {
+		JavaConfig?.findInEmfObject(resourceSet).compilerOptions
+	}
 
-    protected def CompilerOptions getCompilerOptions(JavaConfig javaConfig) {
-        val sourceVersion = javaConfig?.javaSourceLevel ?: JavaVersion.JAVA8
-        val targetVersion = javaConfig?.javaTargetLevel ?: JavaVersion.JAVA8
-        if (sourceVersion == JavaVersion.JAVA7) {
-            LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.")
-        }
-        val sourceLevel = sourceVersion.toJdtVersion
-        val targetLevel = targetVersion.toJdtVersion
-        val compilerOptions = new CompilerOptions
-        compilerOptions.targetJDK = targetLevel
-        compilerOptions.inlineJsrBytecode = true
-        compilerOptions.sourceLevel = sourceLevel
-        compilerOptions.produceMethodParameters = true
-        compilerOptions.produceReferenceInfo = true
-        compilerOptions.originalSourceLevel = targetLevel
-        compilerOptions.complianceLevel = sourceLevel
-        compilerOptions.originalComplianceLevel = targetLevel
-        return compilerOptions
-    }
+	protected def CompilerOptions getCompilerOptions(JavaConfig javaConfig) {
+		val sourceVersion = javaConfig?.javaSourceLevel ?: JavaVersion.JAVA8
+		val targetVersion = javaConfig?.javaTargetLevel ?: JavaVersion.JAVA8
+		if (sourceVersion == JavaVersion.JAVA7) {
+			LOG.warn(
+				"The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.")
+		}
+		val sourceLevel = sourceVersion.toJdtVersion
+		val targetLevel = targetVersion.toJdtVersion
+		val compilerOptions = new CompilerOptions
+		compilerOptions.targetJDK = targetLevel
+		compilerOptions.inlineJsrBytecode = true
+		compilerOptions.sourceLevel = sourceLevel
+		compilerOptions.produceMethodParameters = true
+		compilerOptions.produceReferenceInfo = true
+		compilerOptions.originalSourceLevel = targetLevel
+		compilerOptions.complianceLevel = sourceLevel
+		compilerOptions.originalComplianceLevel = targetLevel
+		return compilerOptions
+	}
 
-    protected def long toJdtVersion(JavaVersion version) {
-        version.toJdtClassFileConstant
-    }
+	protected def long toJdtVersion(JavaVersion version) {
+		version.toJdtClassFileConstant
+	}
 	
 	protected def ClassLoader getClassLoader(Resource it) {
 		(resourceSet as XtextResourceSet).classpathURIContext as ClassLoader 

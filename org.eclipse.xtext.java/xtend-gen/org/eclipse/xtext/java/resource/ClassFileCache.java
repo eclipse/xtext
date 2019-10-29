@@ -7,16 +7,21 @@
  */
 package org.eclipse.xtext.java.resource;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * A cache for parsed class or java source file content. It is bound to the
@@ -48,6 +53,12 @@ public class ClassFileCache {
   private static final Object NULL = new Object();
   
   private final Map<QualifiedName, Object> cache = new ConcurrentHashMap<QualifiedName, Object>();
+  
+  private final Set<Resource> resourcesToCompile = Collections.<Resource>newSetFromMap(new ConcurrentHashMap<Resource, Boolean>());
+  
+  private final Map<char[], List<String>> allTopLevelTypes = new ConcurrentHashMap<char[], List<String>>();
+  
+  private final Map<char[], Map<String, byte[]>> allClassMaps = new ConcurrentHashMap<char[], Map<String, byte[]>>();
   
   public boolean containsKey(final QualifiedName qualifiedName) {
     return this.cache.containsKey(qualifiedName);
@@ -89,6 +100,31 @@ public class ClassFileCache {
   
   public void clear() {
     this.cache.clear();
+    this.resourcesToCompile.clear();
+  }
+  
+  public void addResourceToCompile(final Resource resource) {
+    this.resourcesToCompile.add(resource);
+  }
+  
+  public Set<Resource> drainResourcesToCompile() {
+    final HashSet<Resource> result = new HashSet<Resource>(this.resourcesToCompile);
+    this.resourcesToCompile.clear();
+    return result;
+  }
+  
+  public boolean popCompileResult(final char[] fileName, final Procedure2<? super List<String>, ? super Map<String, byte[]>> consumer) {
+    boolean _containsKey = this.allTopLevelTypes.containsKey(fileName);
+    if (_containsKey) {
+      consumer.apply(this.allTopLevelTypes.remove(fileName), this.allClassMaps.remove(fileName));
+      return true;
+    }
+    return false;
+  }
+  
+  public void addCompileResult(final char[] fileName, final List<String> topLevelTypes, final Map<String, byte[]> classMap) {
+    this.allTopLevelTypes.put(fileName, topLevelTypes);
+    this.allClassMaps.put(fileName, classMap);
   }
   
   public static ClassFileCache findInEmfObject(final Notifier emfObject) {
