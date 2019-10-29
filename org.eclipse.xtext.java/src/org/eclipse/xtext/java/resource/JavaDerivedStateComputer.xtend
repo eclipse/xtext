@@ -148,7 +148,12 @@ class JavaDerivedStateComputer {
 		val wasCached = classFileCache.popCompileResult(compilationUnit.fileName, initializer)
 		
 		if (!wasCached) {
-			// TODO use container manager
+			/*
+			 * TODO use container manager to respect the exact class visibility semantics
+			 * 
+			 * E.g. we could create a proper classloader hierarchy according to the results of the container manager
+			 * rather than flattening everything into a single classloader / name env.
+			 */
 			
 			val unitsToCompile = new HashSet(classFileCache.drainResourcesToCompile.map[ it.compilationUnit ].toList)
 			unitsToCompile.add(compilationUnit)
