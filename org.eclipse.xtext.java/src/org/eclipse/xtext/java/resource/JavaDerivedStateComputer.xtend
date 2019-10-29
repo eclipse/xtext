@@ -144,7 +144,7 @@ class JavaDerivedStateComputer {
 					throw new IllegalStateException("could not load type '" + topLevel + "'", t)
 				}
 			}
-		] 	
+		]
 		val wasCached = classFileCache.popCompileResult(compilationUnit.fileName, initializer)
 		
 		if (!wasCached) {
