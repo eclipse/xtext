@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.xbase.testing,
  org.junit;bundle-version="4.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.arithmetics.tests;x-internal=true
+Export-Package: org.eclipse.xtext.example.arithmetics.tests;x-internal=true,
+ org.eclipse.xtext.example.arithmetics.tests.interpreter;x-internal:=true
 Import-Package: org.hamcrest.core,
  org.junit;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
