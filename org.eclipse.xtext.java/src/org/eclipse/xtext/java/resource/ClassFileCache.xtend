@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.java.resource
 
+import java.util.Collections
+import java.util.HashSet
+import java.util.List
 import java.util.Map
+import java.util.Set
 import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Function
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.jdt.internal.compiler.env.IBinaryType
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.util.internal.EmfAdaptable
@@ -27,6 +32,9 @@ class ClassFileCache {
 	static val NULL = new Object();
 	
 	val Map<QualifiedName, Object> cache = new ConcurrentHashMap()
+	val Set<Resource> resourcesToCompile = Collections.newSetFromMap(new ConcurrentHashMap())
+	val Map<char[], List<String>> allTopLevelTypes = new ConcurrentHashMap()
+	val Map<char[], Map<String, byte[]>> allClassMaps = new ConcurrentHashMap()
 	
 	def boolean containsKey(QualifiedName qualifiedName) {
 		return cache.containsKey(qualifiedName)
@@ -60,6 +68,30 @@ class ClassFileCache {
 	
 	def void clear() {
 		cache.clear()
+		resourcesToCompile.clear()
+	}
+	
+	def void addResourceToCompile(Resource resource) {
+		resourcesToCompile.add(resource)
+	}
+	
+	def Set<Resource> drainResourcesToCompile() {
+		val result = new HashSet(resourcesToCompile)
+		resourcesToCompile.clear
+		return result;
+	}
+	
+	def boolean popCompileResult(char[] fileName, (List<String>, Map<String, byte[]>)=>void consumer) {
+		if (allTopLevelTypes.containsKey(fileName)) {
+			consumer.apply(allTopLevelTypes.remove(fileName), allClassMaps.remove(fileName))
+			return true;
+		}
+		return false;
+	}
+	
+	def void addCompileResult(char[] fileName, List<String> topLevelTypes, Map<String, byte[]> classMap) {
+		allTopLevelTypes.put(fileName, topLevelTypes)
+		allClassMaps.put(fileName, classMap)
 	}
 	
 }

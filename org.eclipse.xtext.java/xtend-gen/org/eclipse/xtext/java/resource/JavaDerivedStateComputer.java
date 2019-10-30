@@ -4,7 +4,9 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -58,6 +60,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 @Log
 @SuppressWarnings("all")
@@ -77,6 +80,12 @@ public class JavaDerivedStateComputer {
       this.unloader.unloadRoot(eObject);
     }
     resource.getContents().clear();
+    CompilationUnit _compilationUnit = this.getCompilationUnit(resource);
+    boolean _tripleNotEquals = (_compilationUnit != null);
+    if (_tripleNotEquals) {
+      final ClassFileCache classFileCache = this.findOrCreateClassFileCache(resource.getResourceSet());
+      classFileCache.addResourceToCompile(resource);
+    }
   }
   
   public void installStubs(final Resource resource) {
@@ -176,17 +185,13 @@ public class JavaDerivedStateComputer {
   }
   
   protected ClassFileCache findOrCreateClassFileCache(final ResourceSet rs) {
-    ClassFileCache _xblockexpression = null;
-    {
-      ClassFileCache cache = ClassFileCache.findInEmfObject(rs);
-      if ((cache == null)) {
-        ClassFileCache _classFileCache = new ClassFileCache();
-        cache = _classFileCache;
-        cache.attachToEmfObject(rs);
-      }
-      _xblockexpression = cache;
+    ClassFileCache cache = ClassFileCache.findInEmfObject(rs);
+    if ((cache == null)) {
+      ClassFileCache _classFileCache = new ClassFileCache();
+      cache = _classFileCache;
+      cache.attachToEmfObject(rs);
     }
-    return _xblockexpression;
+    return cache;
   }
   
   public void installFull(final Resource resource) {
@@ -199,30 +204,57 @@ public class JavaDerivedStateComputer {
     final ClassLoader classLoader = this.getClassLoader(resource);
     final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(resource.getResourceSet());
     if ((data == null)) {
-      throw new IllegalStateException("no index installed");
+      throw new IllegalStateException("No index installed");
     }
-    final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, this.stubGenerator, classFileCache);
-    IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
-    CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
-    final ICompilerRequestor _function = (CompilationResult it) -> {
-      ClassFile[] _classFiles = it.getClassFiles();
-      for (final ClassFile cls : _classFiles) {
-        {
-          final QualifiedName key = QualifiedName.create(CharOperation.toStrings(cls.getCompoundName()));
-          final Function<QualifiedName, IBinaryType> _function_1 = (QualifiedName name) -> {
-            try {
-              byte[] _bytes = cls.getBytes();
-              char[] _fileName = cls.fileName();
-              return new ClassFileReader(_bytes, _fileName);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
-          };
-          classFileCache.computeIfAbsent(key, _function_1);
+    final Procedure2<List<String>, Map<String, byte[]>> _function = (List<String> topLevelTypes, Map<String, byte[]> classMap) -> {
+      final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(classMap, classLoader);
+      for (final String topLevel : topLevelTypes) {
+        try {
+          BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
+          ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
+          final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
+          final JvmDeclaredType type = builder.buildType();
+          EList<EObject> _contents = resource.getContents();
+          _contents.add(type);
+        } catch (final Throwable _t) {
+          if (_t instanceof Throwable) {
+            final Throwable t = (Throwable)_t;
+            throw new IllegalStateException((("Could not load type \'" + topLevel) + "\'"), t);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         }
       }
-      boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
-      if (_equals) {
+    };
+    final Procedure2<? super List<String>, ? super Map<String, byte[]>> initializer = _function;
+    final boolean wasCached = classFileCache.popCompileResult(compilationUnit.fileName, initializer);
+    if ((!wasCached)) {
+      final Function1<Resource, CompilationUnit> _function_1 = (Resource it) -> {
+        return this.getCompilationUnit(it);
+      };
+      List<CompilationUnit> _list = IterableExtensions.<CompilationUnit>toList(IterableExtensions.<Resource, CompilationUnit>map(classFileCache.drainResourcesToCompile(), _function_1));
+      final HashSet<CompilationUnit> unitsToCompile = new HashSet<CompilationUnit>(_list);
+      unitsToCompile.add(compilationUnit);
+      final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(resource, classLoader, data, this.stubGenerator, classFileCache);
+      IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
+      CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
+      final ICompilerRequestor _function_2 = (CompilationResult it) -> {
+        ClassFile[] _classFiles = it.getClassFiles();
+        for (final ClassFile cls : _classFiles) {
+          {
+            final QualifiedName key = QualifiedName.create(CharOperation.toStrings(cls.getCompoundName()));
+            final Function<QualifiedName, IBinaryType> _function_3 = (QualifiedName name) -> {
+              try {
+                byte[] _bytes = cls.getBytes();
+                char[] _fileName = cls.fileName();
+                return new ClassFileReader(_bytes, _fileName);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
+            };
+            classFileCache.computeIfAbsent(key, _function_3);
+          }
+        }
         final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
         List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
         ClassFile[] _classFiles_1 = it.getClassFiles();
@@ -235,38 +267,22 @@ public class JavaDerivedStateComputer {
             }
           }
         }
-        final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
-        for (final String topLevel : topLevelTypes) {
-          try {
-            BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
-            ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
-            final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
-            final JvmDeclaredType type = builder.buildType();
-            EList<EObject> _contents = resource.getContents();
-            _contents.add(type);
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable t = (Throwable)_t;
-              throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          }
+        boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
+        if (_equals) {
+          initializer.apply(topLevelTypes, map);
+        } else {
+          classFileCache.addCompileResult(it.fileName, topLevelTypes, map);
         }
-      }
-    };
-    DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();
-    final org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(nameEnv, _proceedWithAllProblems, _compilerOptions, _function, _defaultProblemFactory);
-    compiler.compile(new ICompilationUnit[] { compilationUnit });
+      };
+      DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();
+      final org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(nameEnv, _proceedWithAllProblems, _compilerOptions, _function_2, _defaultProblemFactory);
+      compiler.compile(((ICompilationUnit[])Conversions.unwrapArray(unitsToCompile, ICompilationUnit.class)));
+    }
   }
   
   protected boolean isInfoFile(final Resource resource) {
-    boolean _xblockexpression = false;
-    {
-      final String name = resource.getURI().trimFileExtension().lastSegment();
-      _xblockexpression = (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
-    }
-    return _xblockexpression;
+    final String name = resource.getURI().trimFileExtension().lastSegment();
+    return (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
   }
   
   protected CompilerOptions getCompilerOptions() {
@@ -278,15 +294,15 @@ public class JavaDerivedStateComputer {
     if (resource!=null) {
       _resourceSet=resource.getResourceSet();
     }
-    return this.getCompilerOptions(_resourceSet);
+    CompilerOptions _compilerOptions = null;
+    if (_resourceSet!=null) {
+      _compilerOptions=this.getCompilerOptions(_resourceSet);
+    }
+    return _compilerOptions;
   }
   
   protected CompilerOptions getCompilerOptions(final ResourceSet resourceSet) {
-    JavaConfig _findInEmfObject = null;
-    if (JavaConfig.class!=null) {
-      _findInEmfObject=JavaConfig.findInEmfObject(resourceSet);
-    }
-    return this.getCompilerOptions(_findInEmfObject);
+    return this.getCompilerOptions(JavaConfig.findInEmfObject(resourceSet));
   }
   
   protected CompilerOptions getCompilerOptions(final JavaConfig javaConfig) {
@@ -314,7 +330,8 @@ public class JavaDerivedStateComputer {
     final JavaVersion targetVersion = _elvis_1;
     boolean _equals = Objects.equal(sourceVersion, JavaVersion.JAVA7);
     if (_equals) {
-      JavaDerivedStateComputer.LOG.warn("The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.");
+      JavaDerivedStateComputer.LOG.warn(
+        "The java source language has been configured with Java 7. JDT will not produce signature information for generic @Override methods in this version, which might lead to follow up issues.");
     }
     final long sourceLevel = this.toJdtVersion(sourceVersion);
     final long targetLevel = this.toJdtVersion(targetVersion);
