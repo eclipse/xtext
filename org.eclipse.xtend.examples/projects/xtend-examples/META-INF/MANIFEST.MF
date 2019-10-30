@@ -9,3 +9,9 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.20.0",
  org.junit;bundle-version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: xtend-examples
+Export-Package: example1;x-internal:=true,
+ example2;x-internal:=true,
+ example3;x-internal:=true,
+ example4;x-internal:=true,
+ example5;x-internal:=true,
+ example6;x-internal:=true

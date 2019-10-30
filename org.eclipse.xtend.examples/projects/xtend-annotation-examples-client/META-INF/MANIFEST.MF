@@ -10,4 +10,8 @@ Require-Bundle: org.eclipse.xtend.lib,
  xtend-annotation-examples;bundle-version="2.4.3"
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: xtend-annotation-examples-client
+Export-Package: extract;x-internal:=true,
+ i18n;x-internal:=true,
+ lazy;x-internal:=true,
+ observables;x-internal:=true
 
