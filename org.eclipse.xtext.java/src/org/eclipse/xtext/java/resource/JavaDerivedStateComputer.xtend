@@ -109,7 +109,7 @@ class JavaDerivedStateComputer {
 	}
 	
 	def getCompilationUnit(Resource resource) {
-		(resource as JavaResource).getCompilationUnit()
+		return (resource as JavaResource).getCompilationUnit()
 	}
 	
 	protected def ClassFileCache findOrCreateClassFileCache(ResourceSet rs) {
@@ -118,7 +118,7 @@ class JavaDerivedStateComputer {
 			cache = new ClassFileCache
 			cache.attachToEmfObject(rs)
 		}
-		cache
+		return cache
 	}
 	
 	def void installFull(Resource resource) {
@@ -130,7 +130,7 @@ class JavaDerivedStateComputer {
 		
 		val data = resourceDescriptionsProvider.getResourceDescriptions(resource.resourceSet)
 		if (data === null)
-			throw new IllegalStateException("no index installed")
+			throw new IllegalStateException("No index installed")
 		
 		val (List<String>, Map<String, byte[]>)=>void initializer = [ topLevelTypes, classMap |
 			val inMemClassLoader = new InMemoryClassLoader(classMap, classLoader)
@@ -141,7 +141,7 @@ class JavaDerivedStateComputer {
 					val type = builder.buildType
 					resource.contents += type
 				} catch (Throwable t) {
-					throw new IllegalStateException("could not load type '" + topLevel + "'", t)
+					throw new IllegalStateException("Could not load type '" + topLevel + "'", t)
 				}
 			}
 		]
@@ -185,19 +185,19 @@ class JavaDerivedStateComputer {
 	
 	protected def isInfoFile(Resource resource) {
 		val name = resource.URI.trimFileExtension.lastSegment
-		name == "package-info" || name == "module-info"
+		return name == "package-info" || name == "module-info"
 	}
 	
 	protected def CompilerOptions getCompilerOptions() {
-		getCompilerOptions(null as JavaConfig)
+		return getCompilerOptions(null as JavaConfig)
 	}
 
 	protected def CompilerOptions getCompilerOptions(Resource resource) {
-		resource?.resourceSet.compilerOptions
+		return resource?.resourceSet?.compilerOptions
 	}
 
 	protected def CompilerOptions getCompilerOptions(ResourceSet resourceSet) {
-		JavaConfig?.findInEmfObject(resourceSet).compilerOptions
+		return JavaConfig.findInEmfObject(resourceSet).compilerOptions
 	}
 
 	protected def CompilerOptions getCompilerOptions(JavaConfig javaConfig) {
@@ -222,11 +222,11 @@ class JavaDerivedStateComputer {
 	}
 
 	protected def long toJdtVersion(JavaVersion version) {
-		version.toJdtClassFileConstant
+		return version.toJdtClassFileConstant
 	}
 	
 	protected def ClassLoader getClassLoader(Resource it) {
-		(resourceSet as XtextResourceSet).classpathURIContext as ClassLoader 
+		return (resourceSet as XtextResourceSet).classpathURIContext as ClassLoader 
 	}
 	
 }

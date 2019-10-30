@@ -185,17 +185,13 @@ public class JavaDerivedStateComputer {
   }
   
   protected ClassFileCache findOrCreateClassFileCache(final ResourceSet rs) {
-    ClassFileCache _xblockexpression = null;
-    {
-      ClassFileCache cache = ClassFileCache.findInEmfObject(rs);
-      if ((cache == null)) {
-        ClassFileCache _classFileCache = new ClassFileCache();
-        cache = _classFileCache;
-        cache.attachToEmfObject(rs);
-      }
-      _xblockexpression = cache;
+    ClassFileCache cache = ClassFileCache.findInEmfObject(rs);
+    if ((cache == null)) {
+      ClassFileCache _classFileCache = new ClassFileCache();
+      cache = _classFileCache;
+      cache.attachToEmfObject(rs);
     }
-    return _xblockexpression;
+    return cache;
   }
   
   public void installFull(final Resource resource) {
@@ -208,7 +204,7 @@ public class JavaDerivedStateComputer {
     final ClassLoader classLoader = this.getClassLoader(resource);
     final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(resource.getResourceSet());
     if ((data == null)) {
-      throw new IllegalStateException("no index installed");
+      throw new IllegalStateException("No index installed");
     }
     final Procedure2<List<String>, Map<String, byte[]>> _function = (List<String> topLevelTypes, Map<String, byte[]> classMap) -> {
       final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(classMap, classLoader);
@@ -223,7 +219,7 @@ public class JavaDerivedStateComputer {
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {
             final Throwable t = (Throwable)_t;
-            throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
+            throw new IllegalStateException((("Could not load type \'" + topLevel) + "\'"), t);
           } else {
             throw Exceptions.sneakyThrow(_t);
           }
@@ -285,12 +281,8 @@ public class JavaDerivedStateComputer {
   }
   
   protected boolean isInfoFile(final Resource resource) {
-    boolean _xblockexpression = false;
-    {
-      final String name = resource.getURI().trimFileExtension().lastSegment();
-      _xblockexpression = (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
-    }
-    return _xblockexpression;
+    final String name = resource.getURI().trimFileExtension().lastSegment();
+    return (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
   }
   
   protected CompilerOptions getCompilerOptions() {
@@ -302,15 +294,15 @@ public class JavaDerivedStateComputer {
     if (resource!=null) {
       _resourceSet=resource.getResourceSet();
     }
-    return this.getCompilerOptions(_resourceSet);
+    CompilerOptions _compilerOptions = null;
+    if (_resourceSet!=null) {
+      _compilerOptions=this.getCompilerOptions(_resourceSet);
+    }
+    return _compilerOptions;
   }
   
   protected CompilerOptions getCompilerOptions(final ResourceSet resourceSet) {
-    JavaConfig _findInEmfObject = null;
-    if (JavaConfig.class!=null) {
-      _findInEmfObject=JavaConfig.findInEmfObject(resourceSet);
-    }
-    return this.getCompilerOptions(_findInEmfObject);
+    return this.getCompilerOptions(JavaConfig.findInEmfObject(resourceSet));
   }
   
   protected CompilerOptions getCompilerOptions(final JavaConfig javaConfig) {
