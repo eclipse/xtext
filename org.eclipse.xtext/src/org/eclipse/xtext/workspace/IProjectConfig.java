@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 
 /**
  * A project is both a container for source folders as well as a physical location that outputs can be generated to.
- * 
+ *
  * In Eclipse, Maven and Gradle the concept is called a "Project". In IntelliJ it is called a "Module"
  */
 public interface IProjectConfig {
@@ -32,7 +32,7 @@ public interface IProjectConfig {
 	 * Finds the source folder that physically contains this member or null if none was found.
 	 */
 	ISourceFolder findSourceFolderContaining(URI member);
-	
+
 	/**
 	 * @return the workspace config
 	 */
