@@ -15,20 +15,7 @@ import org.eclipse.lsp4j.WorkspaceEdit
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.server.ILanguageServerAccess
-import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.util.CancelIndicator
-
-/**
- * @author koehnlein - Initial contribution and API
- * @since 2.13
- * @deprecated use {IRenameService2} instead.
- */
-@Deprecated
-interface IRenameService {
-
-	@Deprecated
-	def WorkspaceEdit rename(WorkspaceManager workspaceManager, RenameParams renameParams, CancelIndicator cancelIndicator)
-}
 
 /**
  * Service called for rename refactoring.

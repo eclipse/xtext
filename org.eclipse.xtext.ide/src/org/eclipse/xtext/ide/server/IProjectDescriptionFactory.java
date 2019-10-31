@@ -5,25 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.server
+package org.eclipse.xtext.ide.server;
 
-import org.eclipse.xtext.resource.impl.ProjectDescription
-import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.resource.impl.ProjectDescription;
+import org.eclipse.xtext.workspace.IProjectConfig;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
-interface IProjectDescriptionFactory {
-    def ProjectDescription getProjectDescription(IProjectConfig config)
-}
-
-class DefaultProjectDescriptionFactory implements IProjectDescriptionFactory {
-    
-    override getProjectDescription(IProjectConfig config) {
-        new ProjectDescription => [
-            name = config.getName()
-        ]
-    }
-    
+public interface IProjectDescriptionFactory {
+	/**
+	 * Create the description for the given project.
+	 *
+	 * @param project
+	 *            the project configuration
+	 * @return the description for the project.
+	 */
+	ProjectDescription getProjectDescription(IProjectConfig project);
 }

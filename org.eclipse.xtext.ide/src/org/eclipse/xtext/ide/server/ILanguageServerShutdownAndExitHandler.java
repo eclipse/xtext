@@ -21,12 +21,12 @@ public interface ILanguageServerShutdownAndExitHandler {
 	 * Callback that is called when Language Servers <code>exit</code> is called.
 	 */
 	void exit();
-	
+
 	/**
 	 * Callback that is called when Language Servers <code>shutdown</code> is called.
 	 */
 	void shutdown();
-	
+
 	/**
 	 * Implementation for {@link ILanguageServerShutdownAndExitHandler} that does nothing.
 	 */
@@ -41,14 +41,14 @@ public interface ILanguageServerShutdownAndExitHandler {
 		public void shutdown() {
 			// do nothing
 		}
-		
+
 	}
-	
+
 	/**
 	 * Default Implementation for {@link ILanguageServerShutdownAndExitHandler}. Calls <code>System.exit</code>.
 	 */
 	public static class DefaultImpl implements ILanguageServerShutdownAndExitHandler {
-		
+
 		private boolean hasShutdownBeenCalled = false;
 
 		@Override
@@ -64,7 +64,7 @@ public interface ILanguageServerShutdownAndExitHandler {
 		public void shutdown() {
 			hasShutdownBeenCalled = true;
 		}
-		
+
 	}
-	
+
 }
