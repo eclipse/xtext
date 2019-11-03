@@ -86,6 +86,15 @@ spec:
   }
   
   parameters {
+    choice(name: 'RELEASE_TYPE', choices: ['Integration', 'Beta', 'M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
+      '''
+        Kind of release to build. The chosen value is dependent on the parameter BUILD_TYPE. Use value:
+          <ul>
+            <li><tt>Integration</tt>: Continuous Build</li>
+            <li><tt>GA</tt>: Release Build</li>
+            <li>Any other: Stable/Milestone Build</tt></li>  
+          </ul>
+      ''')
     string      (name: 'BRANCH_TO_DEPLOY', defaultValue: 'master', description: 'From which Git branch should the release be created (master for snapshot deployments)?')
     booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_SIGN_JARS', defaultValue: true, description: 'Whether to sign jars using the Eclipse web service')
     booleanParam(name: 'ORG_GRADLE_PROJECT_OSSPUB_PACK_JARS', defaultValue: true, description: 'Whether to pack jars using pack200')
@@ -179,6 +188,11 @@ spec:
           XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
+          if [ -z "$BUILD_ID" ]
+          then
+            echo "ERROR: \$BUILD_ID is empty."
+            exit 1
+          fi
           BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
           case "$BUILD_TYPE" in
             N) ZIP_NAME=tmf-xtext-Update-$BUILD_ID.zip ;;
@@ -192,8 +206,7 @@ spec:
           TARGET_DROP_PATH=$DOWNLOAD_AREA/$VERSION/$BUILD_ID
           # ensure target directory exists
           ssh genie.xtext@projects-storage.eclipse.org "mkdir -p $TARGET_DROP_PATH"
-          # TODO: For stable/release builds fail when target location already exists
-          scp $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:/$TARGET_DROP_PATH
+          scp $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME $WORKSPACE/publishing/build-result/downloads/$ZIP_NAME.md5 genie.xtext@projects-storage.eclipse.org:$TARGET_DROP_PATH
           
           #
           # STEP 4: Unpack zip to p2 repository location
@@ -204,10 +217,10 @@ spec:
               ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH/** && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
             S) # Stable
               REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/milestones/$BUILD_ID"
-              ssh genie.xtext@projects-storage.eclipse.org "mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH && mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
             R) # Release
               REPOSITORY_PATH="/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/releases/$VERSION"
-              ssh genie.xtext@projects-storage.eclipse.org "mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
+              ssh genie.xtext@projects-storage.eclipse.org "rm -rf $REPOSITORY_PATH && mkdir $REPOSITORY_PATH && unzip -d $REPOSITORY_PATH $TARGET_DROP_PATH/$ZIP_NAME" ;;
           esac
 
           #
@@ -219,15 +232,48 @@ spec:
             R) # Release
               ssh genie.xtext@projects-storage.eclipse.org 'cat | /bin/bash /dev/stdin' "releases" < $SCRIPTS/create_composite_update_site.sh ;;
           esac
+
+          #
+          # STEP 6: Store additional info into promote.properties
+          #
+          REPOSITORY_URL="$(echo $REPOSITORY_PATH | sed -e 's?/home/data/httpd/?https://?')"
+          echo "repository.url=$REPOSITORY_URL" >> build-result/promote.properties
           '''
         } // END dir
         } // END container
         } // END sshagent
       }
     }
-    
+
+    stage('Update SimRel') {
+      when {
+        anyOf {
+          environment name: 'RELEASE_TYPE', value: 'M1'
+          environment name: 'RELEASE_TYPE', value: 'M2'
+          environment name: 'RELEASE_TYPE', value: 'M3'
+          environment name: 'RELEASE_TYPE', value: 'RC1'
+          environment name: 'RELEASE_TYPE', value: 'RC2'
+          environment name: 'RELEASE_TYPE', value: 'GA'
+        }
+      }
+      steps {
+        script {
+          sh "cat publishing/build-result/promote.properties" // debug
+          env.REPOSITORY_URL=sh returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/promote.properties repository.url'
+          env.XTEXT_FEATURE_VERSION=sh returnStdout: true, script: "ls publishing/build-result/p2.repository/features/org.eclipse.xtext.sdk_*.jar | sed -e 's|.*_\\(.*\\)\\.jar|\\1|'"
+          echo "Triggering SimRel-Update with: RELEASE_TYPE=${env.RELEASE_TYPE}; XTEXT_REPOSITORY_URL=${env.REPOSITORY_URL}; XTEXT_VERSION=${env.XTEXT_FEATURE_VERSION}"
+          build job: 'releng/release-simrel-update',
+            parameters: [
+              string(name: 'RELEASE_TYPE', value: "${env.RELEASE_TYPE}"),
+              string(name: 'XTEXT_REPOSITORY_URL', value: "${env.REPOSITORY_URL}"),
+              string(name: 'XTEXT_VERSION', value: "${env.XTEXT_FEATURE_VERSION}")
+            ],
+          wait: false // Do not fail if releng/release-simrel-update fails, so we only need to rebuild downstream
+        } // script
+      } // steps
+    } // stage
   } // END stages
-  
+
   post {
     always {
       archiveArtifacts artifacts: 'publishing/build-result/**'
