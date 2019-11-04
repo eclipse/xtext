@@ -21,8 +21,12 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.example.fowlerdsl.ui.contentassist,
- org.eclipse.xtext.example.fowlerdsl.ui.internal,
- org.eclipse.xtext.example.fowlerdsl.ui.quickfix
+Export-Package: org.eclipse.xtext.example.fowlerdsl.ui;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.contentassist;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.folding;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.internal;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.labeling;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.outline;x-internal:=true,
+ org.eclipse.xtext.example.fowlerdsl.ui.quickfix;x-internal:=true
 Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.ui.internal.FowlerdslActivator
 Automatic-Module-Name: org.eclipse.xtext.example.fowlerdsl.ui
