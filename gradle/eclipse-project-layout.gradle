@@ -5,6 +5,7 @@ import org.apache.tools.ant.filters.*
  */
 
 def isTestProject = name.endsWith('tests') || name.endsWith('tests.java8')
+def isPlugin = new File("$projectDir/META-INF/MANIFEST.MF").exists()
 def sourceDirs = ['src', 'src-gen', 'emf-gen']
 
 sourceSets {
@@ -110,5 +111,10 @@ eclipse {
 	project {
 		natures 'org.eclipse.xtext.ui.shared.xtextNature'
 		buildCommands.add(0,new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.xtext.ui.shared.xtextBuilder'))
+		if (isPlugin) {
+			natures 'org.eclipse.pde.PluginNature'
+			buildCommands.add(new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.pde.ManifestBuilder'))
+			buildCommands.add(new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.pde.SchemaBuilder'))
+		}
 	}
 }
