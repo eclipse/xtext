@@ -101,6 +101,8 @@ public class ClassFileCache {
   public void clear() {
     this.cache.clear();
     this.resourcesToCompile.clear();
+    this.allTopLevelTypes.clear();
+    this.allClassMaps.clear();
   }
   
   public void addResourceToCompile(final Resource resource) {

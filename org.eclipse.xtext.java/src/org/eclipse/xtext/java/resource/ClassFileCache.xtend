@@ -69,6 +69,8 @@ class ClassFileCache {
 	def void clear() {
 		cache.clear()
 		resourcesToCompile.clear()
+		allTopLevelTypes.clear()
+		allClassMaps.clear()
 	}
 	
 	def void addResourceToCompile(Resource resource) {
