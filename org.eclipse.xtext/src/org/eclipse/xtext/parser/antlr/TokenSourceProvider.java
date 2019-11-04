@@ -7,22 +7,22 @@
  */
 package org.eclipse.xtext.parser.antlr;
 
-import com.google.inject.ImplementedBy;
 import java.io.Reader;
+
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.parser.antlr.AbstractAntlrParserBasedTokenSourceProvider;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.8
  */
 @ImplementedBy(AbstractAntlrParserBasedTokenSourceProvider.class)
-@SuppressWarnings("all")
 public interface TokenSourceProvider {
-  public abstract TokenSource createTokenSource(final CharSequence text);
-  
-  public abstract TokenSource createTokenSource(final Reader reader);
-  
-  public abstract TokenSource createTokenSource(final CharStream stream);
+	TokenSource createTokenSource(CharSequence text);
+
+	TokenSource createTokenSource(Reader reader);
+
+	TokenSource createTokenSource(CharStream stream);
 }
