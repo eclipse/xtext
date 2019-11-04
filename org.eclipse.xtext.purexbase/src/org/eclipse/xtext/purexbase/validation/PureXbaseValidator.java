@@ -3,14 +3,17 @@
  */
 package org.eclipse.xtext.purexbase.validation;
 
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+ * See
+ * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class PureXbaseValidator extends AbstractPureXbaseValidator {
-	
+
 //	public static final INVALID_NAME = 'invalidName'
 //
 //	@Check
@@ -21,5 +24,11 @@ public class PureXbaseValidator extends AbstractPureXbaseValidator {
 //					INVALID_NAME);
 //		}
 //	}
-	
+
+	@Check
+	@Override
+	public void checkInnerExpressions(XExpression expr) {
+		// disabled since pure xbase is meant to be a playground
+	}
+
 }
