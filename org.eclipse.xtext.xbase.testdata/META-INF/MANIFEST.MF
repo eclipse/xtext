@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.xtext.ide,
  org.objectweb.asm;bundle-version="[7.2.0,7.3.0)",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Automatic-Module-Name: org.eclipse.xtext.xbase.ide
-Export-Package: closures,
+Export-Package: .,
+ closures,
  constructorTypeParameters,
  foo,
  foo.bar,
