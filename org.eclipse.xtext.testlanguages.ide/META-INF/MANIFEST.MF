@@ -6,7 +6,8 @@ Bundle-Version: 2.20.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr,
+Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide;x-internal:=true,
+ org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr,
  org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal,
  org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.lexer,
  org.eclipse.xtext.testlanguages.fileAware.ide,
@@ -14,13 +15,15 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.a
  org.eclipse.xtext.testlanguages.fileAware.ide.contentassist.antlr.internal,
  org.eclipse.xtext.testlanguages.fileAware.ide.refactoring,
  org.eclipse.xtext.testlanguages.fileAware.ide.tests,
+ org.eclipse.xtext.testlanguages.nestedRefs.ide;x-internal:=true,
+ org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr,
+ org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr.internal,
+ org.eclipse.xtext.testlanguages.noJdt.ide;x-internal:=true,
  org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr,
  org.eclipse.xtext.testlanguages.noJdt.ide.contentassist.antlr.internal,
  org.eclipse.xtext.testlanguages.xtextgrammar.ide;x-friends:="org.eclipse.xtext.ide.tests",
  org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr,
- org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal,
- org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr.internal,
- org.eclipse.xtext.testlanguages.nestedRefs.ide.contentassist.antlr
+ org.eclipse.xtext.testlanguages.xtextgrammar.ide.contentassist.antlr.internal
 Require-Bundle: org.eclipse.xtext.ide;visibility:=reexport,
  org.eclipse.xtext.testlanguages,
  org.eclipse.xtext.testing,
