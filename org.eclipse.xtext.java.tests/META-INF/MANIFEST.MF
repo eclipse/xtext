@@ -26,3 +26,5 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.12.0"
 Bundle-Vendor: Eclipse Xtext
 Automatic-Module-Name: org.eclipse.xtext.extras.tests
+Export-Package: org.eclipse.xtext.common.types.access.impl,
+ org.eclipse.xtext.java.tests
