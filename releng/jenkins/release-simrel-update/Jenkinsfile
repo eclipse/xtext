@@ -1,0 +1,116 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'migration'
+    }
+  }
+
+  parameters {
+    choice(name: 'RELEASE_TYPE', choices: ['M1', 'M2', 'M3', 'RC1', 'RC2', 'GA'], description:
+'''Kind of release to build. The chosen value is dependent on the parameter BUILD_TYPE. Use value:
+<ul>
+  <li><tt>Integration</tt>: Continuous Build</li>
+  <li><tt>GA</tt>: Release Build</li>
+  <li>Any other: Stable/Milestone Build</tt></li>
+</ul>''')
+    string(
+      name: 'XTEXT_REPOSITORY_URL',
+      description: 'The location of the Xtext p2 repository for the release'
+    )
+    string(
+      name: 'XTEXT_VERSION',
+      description: 'The Xtext version including build qualifier'
+    )
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'5'))
+    disableConcurrentBuilds()
+    timeout(time: 30, unit: 'MINUTES')
+  }
+
+  environment {
+    GENIE_XTEXT_CREDENTIALS = '29d79994-c415-4a38-9ab4-7463971ba682'
+    RELEASE_TYPE="$params.RELEASE_TYPE"
+    XTEXT_REPOSITORY_URL="$params.XTEXT_REPOSITORY_URL"
+    XTEXT_VERSION="$params.XTEXT_VERSION"
+    GIT_USER_NAME="xtext-bot"
+    GIT_USER_EMAIL="xtext-bot@eclipse.org"
+  }
+
+  stages {
+    stage('Prepare') {
+      steps {
+        dir('simrel') {
+          sshagent(["${GENIE_XTEXT_CREDENTIALS}"]) {
+            sh '''
+              git clone ssh://genie.xtext@git.eclipse.org:29418/simrel/org.eclipse.simrel.build .
+              git config user.name $GIT_USER_NAME
+              git config user.email $GIT_USER_EMAIL
+              # For auto-adding Change-Id
+              gitdir=$(git rev-parse --git-dir); scp -p -P 29418 genie.xtext@git.eclipse.org:hooks/commit-msg ${gitdir}/hooks/
+            '''
+          } //sshagent
+        } //dir
+      } // steps
+    } // stage
+
+    stage ('Modify') {
+      steps {
+        dir('simrel') {
+          sh '''
+            # get the value of the first 'label' attribute in simrel.aggr
+            SIMREL_LABEL=$(grep -m 1 -Pio 'label="\\K[^"]*' simrel.aggr)
+            XTEXT_REPOSITORY_URL=$(echo $XTEXT_REPOSITORY_URL | tr -d '\n')
+            sed -i -e "s|<repositories location=\\"\\([^\\"]*\\)|<repositories location=\\"$XTEXT_REPOSITORY_URL|" tmf-xtext.aggrcon
+            sed -i -e "s|versionRange=\\"\\([^\\"]*\\)|versionRange=\\"[$XTEXT_VERSION]|" tmf-xtext.aggrcon
+            git add tmf-xtext.aggrcon
+            
+            # disable EMF parsley for M1
+            if [ "$RELEASE_TYPE" == "M1" ]; then
+              # add xml attribute 'enabled="false"' to aggregator line
+              sed -i -e 's|<aggregator\\([^>]*\\)|<aggregator\\1 enabled="false"|' emf-parsley.aggrcon
+              git add emf-parsley.aggrcon
+            fi
+            
+            case "$RELEASE_TYPE" in
+              GA)
+                XTEXT_VERSION_LABEL=$(echo $XTEXT_VERSION | sed "s|\\(.*\\)\\.v.*|\\1|");;
+              *)
+                XTEXT_VERSION_LABEL=$(echo $XTEXT_VERSION | sed "s|\\(.*\\)\\.v.*|\\1.$RELEASE_TYPE|");;
+            esac
+            git diff
+            git commit --signoff -m "Xtext $XTEXT_VERSION_LABEL contribution to SimRel $SIMREL_LABEL"
+          '''
+          withMaven(maven: 'apache-maven-latest') {
+            sh '''
+              mvn -Pvalidate clean test -B
+            '''
+          }
+        } // dir
+      } // steps
+    } // stage
+    
+    stage ('Publish') {
+      steps {
+        dir('simrel') {
+          sshagent(["${GENIE_XTEXT_CREDENTIALS}"]) {
+            sh '''
+              git push origin HEAD:refs/for/master
+            '''
+          } // sshagent
+        } // dir
+      } // steps
+      post {
+        success {
+          slackSend (
+            message: "SimRel Update has been pushed to [Gerrit](https://git.eclipse.org/r/#/q/owner:xtext-bot%2540eclipse.org+status:open).",
+            botUser: true,
+            channel: 'xtext-builds',
+            color: '#00FF00'
+          )
+        }
+      }
+    }
+  } // stages
+}
