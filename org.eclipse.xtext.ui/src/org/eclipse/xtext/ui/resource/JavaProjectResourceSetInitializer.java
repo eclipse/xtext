@@ -56,10 +56,12 @@ public class JavaProjectResourceSetInitializer implements IResourceSetInitialize
 
 	protected Map<URI, URI> computePlatformURIMap(IJavaProject javaProject) {
 		HashMap<URI, URI> hashMap = newHashMap();
-		try {
-			hashMap.putAll(EcorePlugin.computePlatformURIMap(false));
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+		if (isUseLegacyPlatformUriMap()) {
+			try {
+				hashMap.putAll(EcorePlugin.computePlatformURIMap(false));
+			} catch (Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
 		}
 		if (!javaProject.exists())
 			return hashMap;
@@ -96,6 +98,13 @@ public class JavaProjectResourceSetInitializer implements IResourceSetInitialize
 			LOG.error(e.getMessage(), e);
 		}
 		return hashMap;
+	}
+
+	/**
+	 * @since 2.20
+	 */
+	protected boolean isUseLegacyPlatformUriMap() {
+		return true;
 	}
 
 }
