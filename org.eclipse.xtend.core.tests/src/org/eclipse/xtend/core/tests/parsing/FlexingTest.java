@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.Pair;
  */
 public class FlexingTest extends LexingTest {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void assertLexing(String input, Pair<String,String>... expectedTokens) {
 		FlexTokenSource tokenSource = new FlexerFactory().createTokenSource(new StringReader(input));

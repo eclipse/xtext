@@ -80,3 +80,4 @@ Export-Package: .;x-internal:=true,
  testclazzes;x-internal:=true,
  types;x-internal:=true,
  types.override;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtend.core.tests
