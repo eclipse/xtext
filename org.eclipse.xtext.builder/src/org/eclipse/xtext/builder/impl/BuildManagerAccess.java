@@ -28,6 +28,7 @@ import com.google.common.annotations.Beta;
 /**
  * Utility that allows to access the build managers internals.
  */
+@SuppressWarnings("restriction")
 @Beta
 public class BuildManagerAccess {
 
