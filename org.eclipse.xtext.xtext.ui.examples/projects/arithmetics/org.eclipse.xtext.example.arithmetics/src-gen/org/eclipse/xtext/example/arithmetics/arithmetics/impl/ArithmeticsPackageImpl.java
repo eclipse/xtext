@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
@@ -167,7 +168,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   *
+   * 
    * <p>This method is used to initialize {@link ArithmeticsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -182,8 +183,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     if (isInited) return (ArithmeticsPackage)EPackage.Registry.INSTANCE.getEPackage(ArithmeticsPackage.eNS_URI);
 
     // Obtain or create and register package
-    Object registeredArithmeticsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-    ArithmeticsPackageImpl theArithmeticsPackage = registeredArithmeticsPackage instanceof ArithmeticsPackageImpl ? (ArithmeticsPackageImpl)registeredArithmeticsPackage : new ArithmeticsPackageImpl();
+    ArithmeticsPackageImpl theArithmeticsPackage = (ArithmeticsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ArithmeticsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ArithmeticsPackageImpl());
 
     isInited = true;
 
@@ -196,6 +196,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     // Mark meta-data to indicate it can't be changed
     theArithmeticsPackage.freeze();
 
+  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ArithmeticsPackage.eNS_URI, theArithmeticsPackage);
     return theArithmeticsPackage;
@@ -650,10 +651,10 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     functionCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(moduleEClass, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModule_Name(), ecorePackage.getEString(), "name", null, 0, 1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModule_Imports(), this.getImport(), null, "imports", null, 0, -1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(moduleEClass, Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getModule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModule_Imports(), this.getImport(), null, "imports", null, 0, -1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImport_Module(), this.getModule(), null, "module", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

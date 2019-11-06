@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,20 +16,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
-import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
-import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
-import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
+import org.eclipse.xtext.example.arithmetics.arithmetics.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,7 +82,7 @@ public class ArithmeticsAdapterFactory extends AdapterFactoryImpl
     new ArithmeticsSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module object)
+      public Adapter caseModule(Module object)
       {
         return createModuleAdapter();
       }

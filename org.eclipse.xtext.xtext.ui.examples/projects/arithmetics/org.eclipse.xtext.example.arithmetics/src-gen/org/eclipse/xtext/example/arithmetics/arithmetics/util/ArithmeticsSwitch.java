@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,20 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
-import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
-import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
-import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
+import org.eclipse.xtext.example.arithmetics.arithmetics.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,7 +81,7 @@ public class ArithmeticsSwitch<T> extends Switch<T>
     {
       case ArithmeticsPackage.MODULE:
       {
-        org.eclipse.xtext.example.arithmetics.arithmetics.Module module = (org.eclipse.xtext.example.arithmetics.arithmetics.Module)theEObject;
+        Module module = (Module)theEObject;
         T result = caseModule(module);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -215,7 +202,7 @@ public class ArithmeticsSwitch<T> extends Switch<T>
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module object)
+  public T caseModule(Module object)
   {
     return null;
   }
