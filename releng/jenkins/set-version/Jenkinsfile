@@ -1,0 +1,319 @@
+pipeline {
+  agent {
+    kubernetes {
+      label 'migration'
+    }
+  }
+  
+  parameters {
+    string(name: 'SOURCE_BRANCH', defaultValue: 'master', description: 'Source Git Branch')
+    string(name: 'TARGET_BRANCH', defaultValue: 'bot_update', description: 'Target Git Branch')
+    string(name: 'NEW_XTEXT_VERSION', description: 'New Xtext version to set (major.minor.micro, without SNAPSHOT)')
+    string(name: 'XTEXT_BOOTSTRAP_VERSION', description: 'The  (major.minor.micro.qualifier; qualifier: M1,M2,M3)')
+    string(name: 'GRADLE_WRAPPER_VERSION', description: 'The Gradle Wrapper version to use in all projects')
+    string(name: 'GRADLE_EXT_VERSION_NAME', description: 'Name of an external dependency managed in <code>versions.gradle</code> files, e.g. &quot;<code>xtext_gradle_plugin</code>&quot;')
+    string(name: 'GRADLE_EXT_VERSION_VALUE', description: 'The version value')
+    string(name: 'GIT_USER_NAME', defaultValue: 'xtext-bot', description: 'The Git user on whose behalf the changes are committed and signed off.')
+    string(name: 'GIT_USER_EMAIL', defaultValue: 'xtext-bot@eclipse.org', description: 'The Git user email address.')
+    string(name: 'GITHUB_PR_REVIEWERS', defaultValue: '"kthoms","cdietrich"', description: 'Comma seperated list of GitHub users to assign as reviewers for the PR. Each value must be double-quoted.')
+    booleanParam(name: 'ADJUST_PIPELINES', defaultValue: false, description: 'If set modify .target and pom.xml files to work against the upstream branches.')
+    booleanParam(name: 'DRY_RUN', defaultValue: false, description: 'Dry run mode')
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr:'5'))
+    disableConcurrentBuilds()
+  }
+
+  environment {
+    REPOSITORY_NAMES = 'xtext-lib,xtext-core,xtext-extras,xtext-eclipse,xtext-xtend,xtext-maven,xtext-web,xtext-umbrella'
+    // For debugging purpose limit to single repositories
+    // REPOSITORY_NAMES = 'xtext-lib'
+    SCRIPTS = "$WORKSPACE/build-tools/releng/jenkins/set-version"
+    GENIE_XTEXT_CREDENTIALS = 'a7dd6ae8-486e-4175-b0ef-b7bc82dc14a8'
+    GITHUB_API_CREDENTIALS_ID = '542a1af6-afef-4452-8612-73771238a0bc'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+        script {
+          // Check preconditions
+          if (TARGET_BRANCH == 'master') {
+            currentBuild.result = 'ABORTED'
+            error('TARGET_BRANCH \'master\' is disallowed...')
+          }
+
+          // checkout source branch for each repository and create the target branch
+          sshagent([GENIE_XTEXT_CREDENTIALS]) {
+            REPOSITORY_NAMES.split(',').each {
+              sh """
+                git clone --branch ${params.SOURCE_BRANCH} --depth 1 git@github.com:eclipse/${it}.git ${it}
+                cd ${it}
+                git config user.name "${params.GIT_USER_NAME}"
+                git config user.email "${params.GIT_USER_EMAIL}"
+
+                # create target branch
+                git checkout -b ${params.TARGET_BRANCH}
+              """
+            } // for each repo
+          } // sshagent
+
+          // read versions.gradle and grep the Xtext version without qualifier
+          // grep: select first line containing 'version ='
+          // cut#1: split text amongst single quotes, get content of version attribute
+          // cut#2: strip off '-SNAPSHOT' when present
+          // remove trailing newline from result
+          env.SOURCE_XTEXT_VERSION = sh (returnStdout: true, script: """curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/${params.SOURCE_BRANCH}/gradle/versions.gradle | grep -m 1 "version =" | cut -d "'" -f 2 | cut -d '-' -f 1""").trim()
+          // It is expected that a milestone with label 'Release_<MAJOR>.<MINOR>' exists. Compute the name.
+          env.MILESTONE_NAME = "Release_"+env.SOURCE_XTEXT_VERSION.substring(0,env.SOURCE_XTEXT_VERSION.lastIndexOf('.'))
+        } // script
+      } // steps
+    } // stage
+
+    // Do the modifications to the checked out sources
+    stage('Update Xtext version') {
+      when {
+        expression { params.NEW_XTEXT_VERSION?.trim() }
+      }
+      steps {
+        script {
+          if (!NEW_XTEXT_VERSION?.matches('\\d\\.\\d+\\.\\d+')) {
+            currentBuild.result = 'ABORTED'
+            error("NEW_XTEXT_VERSION '${params.NEW_XTEXT_VERSION}' Invalid...")
+          }
+          
+          // We have the source version now, so display the update in the build's label
+          script {
+            currentBuild.displayName = "#${env.BUILD_NUMBER} (${env.SOURCE_XTEXT_VERSION}->${params.NEW_XTEXT_VERSION})";
+          }
+
+          // set pull request title message
+          env.PR_TITLE="[releng] Update Xtext version to ${params.NEW_XTEXT_VERSION}"
+          // This change is for the new version, update the env var
+          env.MILESTONE_NAME = "Release_"+params.NEW_XTEXT_VERSION.substring(0,params.NEW_XTEXT_VERSION.lastIndexOf('.'))
+
+          // adjust Xtext version on all repositories
+          REPOSITORY_NAMES.split(',').each {
+            dir(it) {
+              sh """
+                # Perform version updates by external script
+                $SCRIPTS/fixVersions.sh -f ${env.SOURCE_XTEXT_VERSION} -t $NEW_XTEXT_VERSION -b StoS
+
+                # Avoid commit when no change has happened. This would make the pipeline fail.
+                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
+
+                # show diff of last commit VERBOSE
+                # git diff HEAD^ HEAD
+              """
+            } // dir
+          } // for each repo
+        } // script
+      } // steps
+    } // stage
+
+    stage('Update Xtext bootstrap version') {
+      when {
+        expression { params.XTEXT_BOOTSTRAP_VERSION?.trim() }
+      }
+      steps {
+        script {
+          // set pull request title message
+          env.PR_TITLE="[releng] Bootstrap against ${params.XTEXT_BOOTSTRAP_VERSION}"
+
+          script {
+            currentBuild.displayName = "#${env.BUILD_NUMBER} (Bootstrap ${params.XTEXT_BOOTSTRAP_VERSION})";
+          }
+
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh """
+                if [ -f "gradle/versions.gradle" ]; then
+                  sed -i -e "s|'xtext_bootstrap': '[^']*'|'xtext_bootstrap': '${params.XTEXT_BOOTSTRAP_VERSION}'|" gradle/versions.gradle
+                fi
+              """
+            } // dir
+          } // for each repository
+          if (fileExists('xtext-eclipse')) { // for the case that we test without xtext-eclipse repo; would fail otherwise
+          dir ('xtext-eclipse') {
+            sh """
+              sed -i -e "s|<xtend-maven-plugin-version>.*</xtend-maven-plugin-version>|<xtend-maven-plugin-version>${params.XTEXT_BOOTSTRAP_VERSION}</xtend-maven-plugin-version>|" releng/org.eclipse.xtext.tycho.parent/pom.xml
+            """
+          }}
+          if (fileExists('xtext-xtend')) {
+          dir ('xtext-xtend') {
+            sh """
+              sed -i -e "s|<xtend-maven-plugin-version>.*</xtend-maven-plugin-version>|<xtend-maven-plugin-version>${params.XTEXT_BOOTSTRAP_VERSION}</xtend-maven-plugin-version>|" releng/org.eclipse.xtend.tycho.parent/pom.xml
+              sed -i -e "s|<xtextBOMVersion>.*</xtextBOMVersion>|<xtextBOMVersion>${params.XTEXT_BOOTSTRAP_VERSION}</xtextBOMVersion>|"  org.eclipse.xtend.maven.plugin/src/test/resources/it/pom.xml
+            """
+          }}
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh """
+                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
+              """
+            }
+          }
+        } // script
+      } // steps
+    } // stage 'Update Xtext bootstrap version'
+
+    stage('Update Gradle Wrapper') {
+      when {
+        expression { params.GRADLE_WRAPPER_VERSION?.trim() }
+      }
+      steps {
+        script {
+          // set pull request title message
+          env.PR_TITLE="[releng] Update Gradle Wrapper to ${params.GRADLE_WRAPPER_VERSION}"
+
+          script {
+            currentBuild.displayName = "#${env.BUILD_NUMBER} (Gradle Wrapper ${params.GRADLE_WRAPPER_VERSION})";
+          }
+
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh """
+                for f in \$(find . -name gradlew -type f); 
+                do
+                  pushd .
+                  cd \$(dirname "\$f")
+                  # skip xtext-core/org.eclipse.xtext.xtext.wizard/resources/gradlew; this has to handled afterwards
+                  if [ "\$( basename \$PWD)" != "gradlew" ]; then
+                    ./gradlew wrapper --gradle-version ${params.GRADLE_WRAPPER_VERSION}
+                  fi
+                  popd
+                done
+
+                if [ -f 'org.eclipse.xtext.xtext.wizard/resources/gradlew' ]; then
+                  cp -f ./gradlew* gradle/wrapper/* org.eclipse.xtext.xtext.wizard/resources/gradlew/
+                fi
+
+                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
+              """
+            } // dir
+          } // for each repository
+        } // script
+      } // steps
+    } // stage 'Update Gradle Wrapper'
+    
+    stage('Bump versions.gradle value') {
+      when {
+        expression { params.GRADLE_EXT_VERSION_NAME?.trim() && params.GRADLE_EXT_VERSION_VALUE?.trim() }
+      }
+      steps {
+        script {
+          // set pull request title message
+          env.PR_TITLE="[releng] Bump ${params.GRADLE_EXT_VERSION_NAME} to ${params.GRADLE_EXT_VERSION_VALUE}"
+
+          script {
+            currentBuild.displayName = "#${env.BUILD_NUMBER} (Bump ${params.GRADLE_EXT_VERSION_VALUE})";
+          }
+
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh """
+                if [ -f "gradle/versions.gradle" ]; then
+                  sed -i -e "s|'${params.GRADLE_EXT_VERSION_NAME}': '[^']*'|'${params.GRADLE_EXT_VERSION_NAME}': '${params.GRADLE_EXT_VERSION_VALUE}'|" gradle/versions.gradle
+                fi
+
+                git diff-index --quiet HEAD || git commit --signoff -a -m "${env.PR_TITLE}"
+              """
+            } // dir
+          } // for each repository
+        } // script
+      } // steps
+    } // stage 'Bump versions.gradle value'
+
+
+
+    stage('Adjust Pipelines') {
+      when {
+        expression { params.ADJUST_PIPELINES }
+      }
+      steps {
+        script {
+          // create 'locations.properties' file in xtext-umbrella and call adjustPipelines.sh then
+          println ("Adjusting upstream pipeline for target and parent pom.xml")
+          // adjustPipelines has to be invoked within xtext-umbrella
+          dir ('xtext-umbrella') {
+            REPOSITORY_NAMES.split(',').each {
+              sh "echo git.clone.xtext.${it}=$WORKSPACE/${it} >> locations.properties"
+            }
+            // call script
+            sh "bash ./adjustPipelines.sh ${params.TARGET_BRANCH}"
+            REPOSITORY_NAMES.split(',').each {
+              sh """
+                git diff-index --quiet HEAD || git commit --signoff -a -m "[releng] Adjust pipelines to branch ${params.TARGET_BRANCH}"
+              """
+            }
+          }
+        } // script
+      } // steps
+    } // stage
+
+    stage('Publish') {
+      when {
+        expression { !params.DRY_RUN }
+      }
+      steps {
+        script {
+        withCredentials([string(credentialsId: "${GITHUB_API_CREDENTIALS_ID}", variable: 'GITHUB_API_TOKEN')]) {
+        sshagent([GENIE_XTEXT_CREDENTIALS]) {
+          // common headers to use for REST requests
+          env.GITHUB_API_REQUEST_HEADERS="-H 'Cookie: logged_in=no' -H 'Authorization: token ${GITHUB_API_TOKEN}' -H 'Content-Type: text/plain; charset=utf-8'"
+
+          // publish for each repo
+          REPOSITORY_NAMES.split(',').each {
+            dir (it) {
+              sh label: "Push changes for ${it}", script: """
+                git push --force origin ${params.TARGET_BRANCH}
+              """
+              
+              // Create a pull request, but only when there were changes made on the target branch
+              env.HAS_CHANGES = sh label: "Evaluate if changes have been made to ${it}", returnStatus: true, script: "git diff ${params.TARGET_BRANCH}..${params.SOURCE_BRANCH} --quiet"
+              if ("${env.HAS_CHANGES}" == "0") {
+                
+                // see https://developer.github.com/v3/pulls/#create-a-pull-request
+                env.CREATE_PR_RESULT = sh label: "Open Pull Request", returnStdout: true, script: """
+                  curl -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls" ${env.GITHUB_API_REQUEST_HEADERS} \
+                    -d '{ \
+                      "title": "${env.PR_TITLE}", \
+                      "body": "This change was brought to you by your friendly Xtext Genie.", \
+                      "maintainer_can_modify": false, \
+                      "head": "${params.TARGET_BRANCH}", \
+                      "base": "${params.SOURCE_BRANCH}" \
+                    }'
+                """
+
+                // Update PR with reviewers, labels, milestone
+                // get the first line containing 'number' and from there the value
+                env.PR_NUMBER = sh (label: "Get PR number", returnStdout: true, script: """echo "${env.CREATE_PR_RESULT}" | grep -m 1 number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
+                
+                // see https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
+                // TODO: Use team_reviewers?
+                env.ADD_REVIEWERS_RESULT = sh label: "Request reviewers", returnStdout: true, script: """
+                  curl -X "POST" -s "https://api.github.com/repos/eclipse/${it}/pulls/${env.PR_NUMBER}/requested_reviewers" ${env.GITHUB_API_REQUEST_HEADERS} \
+                      -d '{ "reviewers": [ ${params.GITHUB_PR_REVIEWERS} ] }'
+                """
+
+                // get the open milestones for the repository
+                // grep for the expected milestone name 'Release_<MAJOR>.<MINOR>' and get attributes around that line
+                // grep for the number attribute value
+                env.MILESTONE_NUMBER = sh (label: "Get number of milestone ${env.MILESTONE_NAME}", returnStdout: true, script: """curl -s https://api.github.com/repos/eclipse/${it}/milestones | grep -b4 -a4 ${env.MILESTONE_NAME} | grep number | sed -e 's|.*: \\(.*\\),|\\1|'""").trim()
+                
+                env.UPDATE_PR_RESULT = sh label: "Set labels, milestone ${env.MILESTONE_NUMBER} and assign to bot", returnStdout: true, script: """
+                  curl -X "PATCH" -s "https://api.github.com/repos/eclipse/${it}/issues/${env.PR_NUMBER}" ${env.GITHUB_API_REQUEST_HEADERS} \
+                      -d '{ "labels": [ "bot", "releng"], "assignees": [ "genie-xtext"], "milestone": ${env.MILESTONE_NUMBER} }'
+                """
+              } // if has changes
+            } // dir
+          } // for each repository
+        } // sshagent
+        } // with credentials
+        } // script
+      } // steps
+    } // stage
+  } // stages
+} // pipeline
