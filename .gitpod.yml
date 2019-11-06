@@ -1,0 +1,2 @@
+tasks:
+- init: ./1-gradle-build.sh
