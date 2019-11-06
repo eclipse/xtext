@@ -26,6 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ListenerRegistrar implements IEagerContribution {
 	
 	@Inject

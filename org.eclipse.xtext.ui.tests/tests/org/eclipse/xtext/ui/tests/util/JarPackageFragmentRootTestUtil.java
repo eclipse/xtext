@@ -15,8 +15,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jdt.internal.core.JavaProject;
-import org.eclipse.xtext.builder.JavaProjectBasedBuilderParticipant;
-import org.junit.Assert;
 
 /**
  * @author Christian Dietrich - Initial contribution and API

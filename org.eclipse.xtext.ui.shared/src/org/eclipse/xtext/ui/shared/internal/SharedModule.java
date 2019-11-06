@@ -18,7 +18,6 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.IMarkerUpdater;
 import org.eclipse.xtext.builder.builderState.PersistedStateProvider;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
-import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.RegistryBuilderParticipant;
@@ -105,7 +104,7 @@ public class SharedModule extends AbstractModule {
 		});
 		
 		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
-		bind(BuildScheduler.class);
+		bind(org.eclipse.xtext.builder.impl.BuildScheduler.class);
 		bind(ToBeBuiltComputer.class);
 
 		bind(IExternalContentSupport.IExternalContentProvider.class).to(IDirtyStateManager.class).in(Scopes.SINGLETON);

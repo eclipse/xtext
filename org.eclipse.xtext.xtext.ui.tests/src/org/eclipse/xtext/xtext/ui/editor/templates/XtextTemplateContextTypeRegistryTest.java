@@ -39,6 +39,7 @@ public class XtextTemplateContextTypeRegistryTest extends AbstractXtextTests imp
 		return new XtextTemplateContextType();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testTypesAreSorted() {
 		XtextTemplateContextTypeRegistry registry = new XtextTemplateContextTypeRegistry(grammarAccess, this, new ContextTypeIdHelper());
 		String prevName = "";
