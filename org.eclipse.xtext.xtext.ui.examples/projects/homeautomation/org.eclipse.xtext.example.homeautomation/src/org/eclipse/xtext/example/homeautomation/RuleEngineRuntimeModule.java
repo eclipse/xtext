@@ -5,14 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.example.homeautomation.scoping
+package org.eclipse.xtext.example.homeautomation;
+
 
 /**
- * This class contains custom scoping description.
- *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
- * on how and when to use it.
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-class RuleEngineScopeProvider extends AbstractRuleEngineScopeProvider {
-
+public class RuleEngineRuntimeModule extends AbstractRuleEngineRuntimeModule {
 }
