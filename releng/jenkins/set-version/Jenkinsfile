@@ -267,11 +267,13 @@ pipeline {
           // publish for each repo
           REPOSITORY_NAMES.split(',').each {
             dir (it) {
-              env.HAS_CHANGES = sh label: "Evaluate if changes have been made to ${it}", returnStatus: true, script: 'git diff-index --quiet HEAD'
-              if (env.HAS_CHANGES) {
-                sh label: "Push changes for ${it}", script: """
-                  git push --force origin ${params.TARGET_BRANCH}
-                """
+              sh label: "Push changes for ${it}", script: """
+                git push --force origin ${params.TARGET_BRANCH}
+              """
+              
+              // Create a pull request, but only when there were changes made on the target branch
+              env.HAS_CHANGES = sh label: "Evaluate if changes have been made to ${it}", returnStatus: true, script: "git diff ${params.TARGET_BRANCH}..${params.SOURCE_BRANCH} --quiet"
+              if ("${env.HAS_CHANGES}" == "0") {
                 
                 // see https://developer.github.com/v3/pulls/#create-a-pull-request
                 env.CREATE_PR_RESULT = sh label: "Open Pull Request", returnStdout: true, script: """
