@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -77,13 +76,18 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 				URI uri = uriConverter.normalize(EcoreUtil.getURI(overwritten));
 
 				XtextHyperlink result = getHyperlinkProvider().get();
-				result.setHyperlinkRegion((IRegion)toRegion(nameLocation));
+				deprecatedSetRegion(result, toRegion(nameLocation));
 				result.setURI(uri);
 				result.setHyperlinkText(hyperlinkText);
 				result.setTypeLabel("Go To Base");
 				acceptor.accept(result);
 			}
 		}
+	}
+
+	@Deprecated
+	private void deprecatedSetRegion(XtextHyperlink link, Region region) {
+		link.setHyperlinkRegion(region);
 	}
 	
 	protected Region toRegion(ITextRegion location) {
