@@ -1,3 +1,14 @@
 dependencies {
 	compile project(':org.eclipse.xtend.core.tests')
 }
+
+sourceSets.test {
+	java.srcDir 'testdata'
+	java.srcDir 'suites'
+	resources.srcDir 'testdata'
+}
+
+test {
+	maxHeapSize = "2G"
+	exclude '**/*Suite.class'
+}
