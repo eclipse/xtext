@@ -2,7 +2,6 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.SearchResultEvent;
-import org.eclipse.xtext.ide.serializer.hooks.IReferenceSnapshot;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
