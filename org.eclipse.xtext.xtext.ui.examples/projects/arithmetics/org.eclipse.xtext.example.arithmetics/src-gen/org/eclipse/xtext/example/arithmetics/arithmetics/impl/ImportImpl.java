@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +44,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * @generated
    * @ordered
    */
-  protected org.eclipse.xtext.example.arithmetics.arithmetics.Module module;
+  protected Module module;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,12 +72,12 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.example.arithmetics.arithmetics.Module getModule()
+  public Module getModule()
   {
     if (module != null && module.eIsProxy())
     {
       InternalEObject oldModule = (InternalEObject)module;
-      module = (org.eclipse.xtext.example.arithmetics.arithmetics.Module)eResolveProxy(oldModule);
+      module = (Module)eResolveProxy(oldModule);
       if (module != oldModule)
       {
         if (eNotificationRequired())
@@ -91,7 +92,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.example.arithmetics.arithmetics.Module basicGetModule()
+  public Module basicGetModule()
   {
     return module;
   }
@@ -101,9 +102,9 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module newModule)
+  public void setModule(Module newModule)
   {
-    org.eclipse.xtext.example.arithmetics.arithmetics.Module oldModule = module;
+    Module oldModule = module;
     module = newModule;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ArithmeticsPackage.IMPORT__MODULE, oldModule, module));
@@ -137,7 +138,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
     switch (featureID)
     {
       case ArithmeticsPackage.IMPORT__MODULE:
-        setModule((org.eclipse.xtext.example.arithmetics.arithmetics.Module)newValue);
+        setModule((Module)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -154,7 +155,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
     switch (featureID)
     {
       case ArithmeticsPackage.IMPORT__MODULE:
-        setModule((org.eclipse.xtext.example.arithmetics.arithmetics.Module)null);
+        setModule((Module)null);
         return;
     }
     super.eUnset(featureID);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -287,7 +287,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//(({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Plus.left=current} '+' | {Minus.left=current} '-'
+		//({Plus.left=current} '+' | {Minus.left=current} '-')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 		
 		//{Plus.left=current} '+'
@@ -342,7 +342,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//(({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{Multi.left=current} '*' | {Div.left=current} '/'
+		//({Multi.left=current} '*' | {Div.left=current} '/')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 		
 		//{Multi.left=current} '*'
