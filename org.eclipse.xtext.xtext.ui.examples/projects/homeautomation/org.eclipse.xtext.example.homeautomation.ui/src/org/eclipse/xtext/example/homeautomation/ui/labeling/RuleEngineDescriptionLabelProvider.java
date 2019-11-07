@@ -5,24 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.example.homeautomation.ui.labeling
+package org.eclipse.xtext.example.homeautomation.ui.labeling;
 
-import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
- *
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
+ * 
+ * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
-class RuleEngineDescriptionLabelProvider extends XbaseDescriptionLabelProvider {
+public class RuleEngineDescriptionLabelProvider extends XbaseDescriptionLabelProvider {
 
 	// Labels and icons can be computed like this:
-
-//	override text(IEObjectDescription ele) {
-//		ele.name.toString
+	
+//	String text(IEObjectDescription ele) {
+//		return ele.getName().toString();
 //	}
-//
-//	override image(IEObjectDescription ele) {
-//		ele.EClass.name + '.gif'
+//	 
+//	String image(IEObjectDescription ele) {
+//		return ele.getEClass().getName() + ".gif";
 //	}
 }
