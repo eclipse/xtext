@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,27 +18,25 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 
 /**
  * Customization of the default outline structure.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
  */
-@SuppressWarnings("all")
 public class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
-  @Override
-  protected void _createChildren(final DocumentRootNode parentNode, final EObject rootElement) {
-    EList<EObject> _eContents = rootElement.eContents();
-    for (final EObject content : _eContents) {
-      this.createNode(parentNode, content);
-    }
-  }
-  
-  protected void _createNode(final IOutlineNode parent, final JvmParameterizedTypeReference modelElement) {
-  }
-  
-  protected boolean _isLeaf(final Entity entity) {
-    return entity.getFeatures().isEmpty();
-  }
-  
-  protected boolean _isLeaf(final Feature feature) {
-    return true;
-  }
+	@Override
+	protected void _createChildren(DocumentRootNode parentNode, EObject rootElement) {
+		for (EObject content : rootElement.eContents()) {
+			createNode(parentNode, content);
+		}
+	}
+
+	protected void _createNode(IOutlineNode parent, JvmParameterizedTypeReference modelElement) {
+	}
+
+	protected boolean _isLeaf(Entity entity) {
+		return entity.getFeatures().isEmpty();
+	}
+
+	protected boolean _isLeaf(Feature feature) {
+		return true;
+	}
 }
