@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui.labeling;
 
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 

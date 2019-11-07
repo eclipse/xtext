@@ -7,11 +7,9 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
-import java.util.Collection;
 import java.util.function.Consumer;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
