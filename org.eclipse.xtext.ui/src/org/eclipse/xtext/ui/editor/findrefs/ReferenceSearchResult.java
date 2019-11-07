@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
@@ -18,6 +21,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,11 +33,14 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 	private List<IReferenceDescription> matchingReferences;
 
 	private List<ISearchResultListener> listeners;
+	
+	private Set<URI> removedURIs;
 
 	protected ReferenceSearchResult(ReferenceQuery query) {
 		this.query = query;
 		matchingReferences = Lists.newArrayList();
 		listeners = Lists.newArrayList();
+		removedURIs = Sets.newHashSet();
 	}
 
 	@Override
@@ -65,7 +72,8 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 
 	@Override
 	public String getLabel() {
-		return query.getLabel();
+		return String.format("%s - (%s %s)", //$NON-NLS-1$
+				query.getLabel(), matchingReferences.size(), Messages.ReferenceSearchResult_Matches);
 	}
 
 	@Override
@@ -80,9 +88,18 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 
 	@Override
 	public void accept(IReferenceDescription referenceDescription) {
-		if(query.getFilter().apply(referenceDescription)) {
+		if (query.getFilter().apply(referenceDescription) && !removedURIs.contains(referenceDescription.getSourceEObjectUri())) {
 			matchingReferences.add(referenceDescription);
 			fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
+		}
+	}
+
+	public void remove(IReferenceDescription[] referenceDescriptions) {
+		if (matchingReferences.removeAll(Arrays.asList(referenceDescriptions))) {
+			//remember all URIs that have been removed by the user so when re-running
+			//this search from history we don't show them again
+			Arrays.stream(referenceDescriptions).map(d -> d.getSourceEObjectUri()).forEach(uri -> removedURIs.add(uri));
+			fireEvent(new ReferenceSearchResultEvents.Removed(this, referenceDescriptions));
 		}
 	}
 
@@ -98,5 +115,5 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 	public void finish() {
 		fireEvent(new ReferenceSearchResultEvents.Finish(this));
 	}
-	
+
 }

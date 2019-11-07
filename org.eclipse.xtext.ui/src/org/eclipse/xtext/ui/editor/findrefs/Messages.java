@@ -19,6 +19,7 @@ public class Messages extends NLS {
 	public static String FindReferencesHandler_3;
 	public static String FindReferencesHandler_labelPrefix;
 	public static String ReferenceQuery_monitor;
+	public static String ReferenceSearchResult_Matches;
 	public static String ReferenceSearchResultContentProvider_label;
 	public static String ReferenceSearchResultLabelProvider_invalid;
 	public static String ReferenceSearchViewPage_busyLabel;

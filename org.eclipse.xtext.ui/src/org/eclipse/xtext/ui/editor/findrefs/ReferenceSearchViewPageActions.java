@@ -9,19 +9,26 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import static java.util.stream.Collectors.*;
 
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
+import org.eclipse.xtext.util.CollectionBasedAcceptor;
+import org.eclipse.xtext.util.IAcceptor;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -118,6 +125,7 @@ public interface ReferenceSearchViewPageActions {
 
 	public static class RemoveSelectedMatchesAction extends Action {
 		private ReferenceSearchViewPage page;
+		private ISearchResult searchResult;
 
 		public RemoveSelectedMatchesAction(ReferenceSearchViewPage page) {
 			super(Messages.ReferenceSearchViewPageActions_removeSelectedMatches);
@@ -126,16 +134,29 @@ public interface ReferenceSearchViewPageActions {
 			setAccelerator(SWT.DEL);
 			this.page = page;
 		}
+		
+		public void setSearchResult(ISearchResult searchResult) {
+			this.searchResult = searchResult;
+		}
 
 		@Override
 		public void run() {
 			TreeViewer viewer = page.getViewer();
 			ITreeSelection selection = viewer.getStructuredSelection();
-			@SuppressWarnings("unchecked")
-			Stream<ReferenceSearchViewTreeNode> nodeStream = selection.toList().stream()
-					.filter(ReferenceSearchViewTreeNode.class::isInstance)
-					.map(ReferenceSearchViewTreeNode.class::cast);
-			page.getContentProvider().remove(nodeStream.toArray(ReferenceSearchViewTreeNode[]::new)); 
+			ReferenceSearchViewTreeNode[] removedNodes = Iterables.toArray(
+					Iterables.filter(selection.toList(), ReferenceSearchViewTreeNode.class),
+					ReferenceSearchViewTreeNode.class);
+			page.getContentProvider().remove(removedNodes);
+			
+			if (searchResult instanceof ReferenceSearchResult) {
+				List<IReferenceDescription> descriptions = new ArrayList<IReferenceDescription>();
+				IAcceptor<IReferenceDescription> acceptor = CollectionBasedAcceptor.of(descriptions);
+				for (ReferenceSearchViewTreeNode removedNode : removedNodes) {
+					removedNode.collectReferenceDescriptions(acceptor);
+				}
+				IReferenceDescription[] descriptionsArray = descriptions.toArray(new IReferenceDescription[descriptions.size()]);
+				((ReferenceSearchResult) searchResult).remove(descriptionsArray);
+			}
 			viewer.refresh();
 		}
 	}

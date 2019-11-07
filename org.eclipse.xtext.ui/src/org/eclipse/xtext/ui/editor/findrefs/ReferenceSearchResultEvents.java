@@ -2,6 +2,7 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.SearchResultEvent;
+import org.eclipse.xtext.ide.serializer.hooks.IReferenceSnapshot;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
@@ -20,6 +21,20 @@ public interface ReferenceSearchResultEvents {
 
 		public IReferenceDescription getReferenceDescription() {
 			return referenceDescription;
+		}
+	}
+	
+	public static class Removed extends SearchResultEvent {
+		private static final long serialVersionUID = 1L;
+		private final IReferenceDescription[] removedDescriptions;
+		
+		public Removed(ISearchResult searchResult, IReferenceDescription[] removedDescriptions) {
+			super(searchResult);
+			this.removedDescriptions = removedDescriptions;
+		}
+		
+		public IReferenceDescription[] getRemovedDescriptions() {
+			return removedDescriptions;
 		}
 	}
 
