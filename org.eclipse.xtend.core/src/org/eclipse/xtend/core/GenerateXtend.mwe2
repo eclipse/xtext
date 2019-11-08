@@ -84,10 +84,6 @@ Workflow {
 				debugGrammar = true
 				options = auto-inject {}
 			}
-			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
-				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
-				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
-			}
 			fragment = validation.ValidatorFragment2 {
 				generateXtendStub = false
 				generatePropertyPage = false
@@ -131,19 +127,17 @@ Workflow {
 
 			fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.JFlexGeneratorFragment auto-inject {
-					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
-					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
-				}
+			fragment = parser.JFlexGeneratorFragment2 auto-inject {
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.JFlexGeneratorFragment auto-inject {
-					ui = true
-					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
-					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
-				}
+	
+			fragment = parser.JFlexGeneratorFragment2 auto-inject {
+				ui = true
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
+			
 		}
 	}
 	

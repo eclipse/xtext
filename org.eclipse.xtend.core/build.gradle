@@ -13,9 +13,6 @@ dependencies {
 	optional "org.apache.ant:ant:$versions.ant"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand"
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend"
 	mwe2Compile "de.jflex:jflex:$versions.jflex"
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
 }
@@ -34,4 +31,6 @@ sourceSets.main.java.srcDir 'deprecated'
 task generateXtend(type: XtextGeneratorTask) {
 	workflow = file('src/org/eclipse/xtend/core/GenerateXtend.mwe2')
 	outputs.dir 'src-gen'
+	jvmArgs '-Xmx2G'
+	jvmArgs '-Dfile.encoding=ISO-8859-1'
 }
