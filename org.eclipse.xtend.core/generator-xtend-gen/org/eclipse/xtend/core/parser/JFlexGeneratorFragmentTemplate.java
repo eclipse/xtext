@@ -30,7 +30,7 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 
 /**
- * @author dietrich - Initial contribution and API
+ * @author Christian Dietrich - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class JFlexGeneratorFragmentTemplate {

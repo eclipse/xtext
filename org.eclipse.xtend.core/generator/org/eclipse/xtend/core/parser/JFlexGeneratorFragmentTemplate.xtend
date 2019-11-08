@@ -20,7 +20,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 /** 
- * @author dietrich - Initial contribution and API
+ * @author Christian Dietrich - Initial contribution and API
  */
 class JFlexGeneratorFragmentTemplate {
 
