@@ -8,12 +8,15 @@
 package org.eclipse.xtext.xbase.tests.lib;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -22,6 +25,8 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.Test;
 
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -307,5 +312,53 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 			}
 		};
 		assertEquals(newArrayList("Hello", "foo", "Hello", "bar"), newArrayList(IterableExtensions.flatMap(list, function)));
+	}
+	
+	@Test public void testContains() {
+		ArrayList<String> list = newArrayList("element1", "element2", "element3", null);
+		
+		assertTrue(IterableExtensions.contains(list, "element3"));
+		assertTrue(IterableExtensions.contains(list, new String("element3")));
+		assertTrue(IterableExtensions.contains(list, null));
+		
+		assertFalse(IterableExtensions.contains(list, "element4"));
+		assertFalse(IterableExtensions.contains(list, new String("element4")));
+	}
+	
+	private static class TestableCollection<T> extends ForwardingCollection<T> {
+
+		private Collection<T> original;
+		boolean containsWasCalled;
+		Object containsParameter;
+		
+		public TestableCollection(Collection<T> original) {
+			super();
+			this.original = original;
+		}
+
+		@Override
+		protected Collection<T> delegate() {
+			return original;
+		}
+		
+		@Override
+		public boolean contains(Object object) {
+			containsWasCalled = true;
+			containsParameter = object;
+			return super.contains(object);
+		}
+	}
+	
+	@Test public void testContainsOnCollection() {
+		//GIVEN a collection, declared as an iterable
+		TestableCollection collection = new TestableCollection(newHashSet("element1", "element2", "element3"));
+		
+		//WHEN we call the contains method via the IterableExtensions
+		IterableExtensions.contains(collection, "element1");
+		
+		//THEN we expect that the collection's native contains method was used
+		assertTrue("IterableExtensions.contains didn't use the collection's native contains method",
+					collection.containsWasCalled);
+		assertEquals("element1", collection.containsParameter);
 	}
 }

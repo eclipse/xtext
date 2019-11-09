@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -249,6 +250,8 @@ import com.google.common.collect.Sets;
 
 	/**
 	 * Returns {@code true} if one or more elements in {@code iterator} satisfy the predicate.
+	 * 
+     * <p>Note that this will advance or even exhaust the given iterator.</p>
 	 * 
 	 * @param iterator
 	 *            the iterator. May not be <code>null</code>.
@@ -553,6 +556,8 @@ import com.google.common.collect.Sets;
 	 * {@code true} if {@code iterator} and {@code other} contain the same number of elements and every element of
 	 * {@code iterator} is equal to the corresponding element of {@code other}.
 	 * 
+	 * <p>Note that this will advance or even exhaust the given iterators.</p>
+	 * 
 	 * @param iterator
 	 *            an iterator. May not be <code>null</code>.
 	 * @param other
@@ -567,6 +572,8 @@ import com.google.common.collect.Sets;
 	 * Determines whether two iterators contain equal elements in the same order. More specifically, this method returns
 	 * {@code true} if {@code iterator} and {@code iterable} contain the same number of elements and every element of
 	 * {@code iterator} is equal to the corresponding element of {@code iterable}.
+	 * 
+	 * <p>Note that this will advance or even exhaust the given iterators.</p>
 	 * 
 	 * @param iterator
 	 *            an iterator. May not be <code>null</code>.
@@ -932,6 +939,8 @@ import com.google.common.collect.Sets;
 	 * Finds the minimum of the given elements according to their natural ordering. If there are several mimina, the
 	 * first one will be returned.
 	 * 
+	 * <p>Note that this will advance or even exhaust the given iterator.</p>
+	 * 
 	 * @param iterator
 	 *            the mutually comparable elements. May not be <code>null</code>.
 	 * @return the minimum
@@ -946,6 +955,8 @@ import com.google.common.collect.Sets;
 	/**
 	 * Finds the element that yields the minimum value when passed to <code>compareBy</code>. If there are several
 	 * maxima, the first one will be returned.
+	 * 
+	 * <p>Note that this will advance or even exhaust the given iterator.</p>
 	 * 
 	 * @param iterator
 	 *            the elements to find the minimum of. May not be <code>null</code>.
@@ -965,6 +976,8 @@ import com.google.common.collect.Sets;
 	/**
 	 * Finds the mininmum element according to <code>comparator</code>. If there are several minima, the first one will
 	 * be returned.
+	 * 
+	 * <p>Note that this will advance or even exhaust the given iterator.</p>
 	 * 
 	 * @param iterator
 	 *            the elements to find the minimum of. May not be <code>null</code>.
@@ -990,6 +1003,8 @@ import com.google.common.collect.Sets;
 	 * Finds the maximum of the elements according to their natural ordering. If there are several maxima, the first one
 	 * will be returned.
 	 * 
+     * <p>Note that this will advance or even exhaust the given iterator.</p>
+     * 
 	 * @param iterator
 	 *            the mutually comparable elements. May not be <code>null</code>.
 	 * @return the maximum
@@ -1004,6 +1019,8 @@ import com.google.common.collect.Sets;
 	/**
 	 * Finds the element that yields the maximum value when passed to <code>compareBy</code> If there are several
 	 * maxima, the first one will be returned.
+	 * 
+	 * <p>Note that this will advance or even exhaust the given iterator.</p>
 	 * 
 	 * @param iterator
 	 *            the elements to find the maximum of. May not be <code>null</code>.
@@ -1024,6 +1041,8 @@ import com.google.common.collect.Sets;
 	 * Finds the maximum element according to <code>comparator</code>. If there are several maxima, the first one will
 	 * be returned.
 	 * 
+	 * <p>Note that this will advance or even exhaust the given iterator.</p>
+	 * 
 	 * @param iterator
 	 *            the elements to find the maximum of. May not be <code>null</code>.
 	 * @param comparator
@@ -1042,5 +1061,30 @@ import com.google.common.collect.Sets;
 			max = comparator.compare(max, element) >= 0 ? max : element;
 		}
 		return max;
+	}
+
+	/**
+	 * Returns <tt>true</tt> if this Iterator contains the specified element.
+	 * More formally, returns <tt>true</tt> if and only if this Iterator
+	 * contains at least one element <tt>e</tt> such that
+	 * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
+	 * 
+	 * <p>
+	 * Note that this will advance or even exhaust the given iterator.
+	 * </p>
+	 *
+	 * @param iterable 
+	 * 			the elements to test
+	 * @param o 
+	 * 			element whose presence in this Iterator is to be tested
+	 * @return <tt>true</tt> if this Iterator contains the specified element
+	 */
+	public static boolean contains(Iterator<?> iterator, Object o) {
+		while (iterator.hasNext()) {
+			if (Objects.equals(o, iterator.next())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -400,5 +401,17 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 			}
 		};
 		assertEquals(newArrayList("Hello", "foo", "Hello", "bar"), newArrayList(IteratorExtensions.flatMap(list.iterator(), function)));
+	}
+	
+	@Test public void testContains() {
+		ArrayList<String> list = newArrayList("element1", "element2", "element3", null);
+		
+		assertTrue(IteratorExtensions.contains(list.iterator(), "element3"));
+		assertTrue(IteratorExtensions.contains(list.iterator(), new String("element3")));
+		
+		assertTrue(IteratorExtensions.contains(list.iterator(), null));
+		
+		assertFalse(IteratorExtensions.contains(list.iterator(), "element4"));
+		assertFalse(IteratorExtensions.contains(list.iterator(), new String("element4")));
 	}
 }
