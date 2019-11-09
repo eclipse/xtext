@@ -187,7 +187,6 @@
 								<plugin id="org.eclipse.xtext.xbase.lib" />
 								<plugin id="org.eclipse.xtext.xbase.lib.gwt" />
 								<plugin id="org.eclipse.xtext" />
-								<plugin id="org.eclipse.xtext.generator" />
 								<plugin id="org.eclipse.xtext.xtext.generator" />
 								<plugin id="org.eclipse.xtext.util" />
 								<plugin id="org.eclipse.xtext.logging" />
