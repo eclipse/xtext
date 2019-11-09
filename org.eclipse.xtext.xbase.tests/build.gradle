@@ -1,7 +1,6 @@
 apply from: "${rootDir}/gradle/longrunning-tests.gradle"
 
 dependencies {
-	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase.testing')
 	compile project(':org.eclipse.xtext.xbase.testlanguages')
@@ -15,4 +14,6 @@ dependencies {
 	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.apt'
 	compile 'org.eclipse.jdt:org.eclipse.jdt.compiler.tool'
 	compile 'junit:junit'
+	compile 'org.eclipse.emf:org.eclipse.emf.codegen'
+	compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
 }
