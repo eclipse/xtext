@@ -176,7 +176,7 @@ public abstract class AbstractXmlRuntimeModule extends DefaultRuntimeModule {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
 	public void configureRuntimeLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlRuntimeLexer.class);
 	}

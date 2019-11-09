@@ -570,27 +570,19 @@ public class CodetemplatesHighlightingLexer extends Lexer {
 
     protected DFA7 dfa7 = new DFA7(this);
     static final String DFA7_eotS =
-        "\1\uffff\2\15\3\uffff\2\13\1\uffff\1\13\2\uffff\1\15\1\uffff\1\15"+
-        "\6\uffff\1\15\1\30\1\15\1\uffff\4\15\1\36\1\uffff";
+        "\1\uffff\2\15\3\uffff\2\13\1\uffff\1\13\2\uffff\1\15\1\uffff\1\15\6\uffff\1\15\1\30\1\15\1\uffff\4\15\1\36\1\uffff";
     static final String DFA7_eofS =
         "\37\uffff";
     static final String DFA7_minS =
-        "\1\0\1\145\1\157\3\uffff\1\76\1\101\1\uffff\1\0\2\uffff\1\155\1"+
-        "\uffff\1\162\6\uffff\1\160\1\60\1\154\1\uffff\1\141\1\164\1\145"+
-        "\1\163\1\60\1\uffff";
+        "\1\0\1\145\1\157\3\uffff\1\76\1\101\1\uffff\1\0\2\uffff\1\155\1\uffff\1\162\6\uffff\1\160\1\60\1\154\1\uffff\1\141\1\164\1\145\1\163\1\60\1\uffff";
     static final String DFA7_maxS =
-        "\1\uffff\1\145\1\157\3\uffff\1\76\1\172\1\uffff\1\uffff\2\uffff"+
-        "\1\155\1\uffff\1\162\6\uffff\1\160\1\172\1\154\1\uffff\1\141\1\164"+
-        "\1\145\1\163\1\172\1\uffff";
+        "\1\uffff\1\145\1\157\3\uffff\1\76\1\172\1\uffff\1\uffff\2\uffff\1\155\1\uffff\1\162\6\uffff\1\160\1\172\1\154\1\uffff\1\141\1\164\1\145\1\163\1\172\1\uffff";
     static final String DFA7_acceptS =
-        "\3\uffff\1\3\1\4\1\5\2\uffff\1\7\1\uffff\1\11\1\12\1\uffff\1\7\1"+
-        "\uffff\1\3\1\4\1\5\1\6\1\10\1\11\3\uffff\1\2\5\uffff\1\1";
+        "\3\uffff\1\3\1\4\1\5\2\uffff\1\7\1\uffff\1\11\1\12\1\uffff\1\7\1\uffff\1\3\1\4\1\5\1\6\1\10\1\11\3\uffff\1\2\5\uffff\1\1";
     static final String DFA7_specialS =
         "\1\0\10\uffff\1\1\25\uffff}>";
     static final String[] DFA7_transitionS = {
-            "\11\13\2\12\2\13\1\12\22\13\1\12\6\13\1\11\1\3\1\4\4\13\1\5"+
-            "\17\13\1\6\2\13\32\10\3\13\1\7\1\10\1\13\5\10\1\2\15\10\1\1"+
-            "\6\10\uff85\13",
+            "\11\13\2\12\2\13\1\12\22\13\1\12\6\13\1\11\1\3\1\4\4\13\1\5\17\13\1\6\2\13\32\10\3\13\1\7\1\10\1\13\5\10\1\2\15\10\1\1\6\10\uff85\13",
             "\1\14",
             "\1\16",
             "",

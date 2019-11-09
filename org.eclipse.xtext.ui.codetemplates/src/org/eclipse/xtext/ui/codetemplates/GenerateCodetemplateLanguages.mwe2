@@ -51,27 +51,21 @@ Workflow {
 				}
 			}
 			
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.CodetemplatesLexer"
-					runtime = true
-					antlrParam = "-lib"
-					antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.CodetemplatesLexer"
+				runtime = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
 			}
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.CodetemplatesHighlightingLexer"
-					highlighting = true
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.CodetemplatesHighlightingLexer"
+				highlighting = true
 			}
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesContentAssistLexer"
-					contentAssist = true
-					antlrParam = "-lib"
-					antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates.ide/src-gen/org/eclipse/xtext/ui/codetemplates/ide/contentassist/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesContentAssistLexer"
+				contentAssist = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates.ide/src-gen/org/eclipse/xtext/ui/codetemplates/ide/contentassist/antlr/lexer"
 			}
 			
 			generator = {
@@ -104,29 +98,23 @@ Workflow {
 				}
 			}
 			
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.SingleCodetemplateLexer"
-					runtime = true
-					antlrParam = "-lib"
-					antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.lexer.SingleCodetemplateLexer"
+				runtime = true
+				antlrParam = "-lib"
+				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/parser/antlr/lexer"
 			}
 			
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-						lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer"
-						highlighting = true
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer"
+					highlighting = true
 			}
 			
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
-					lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateContentAssistLexer"
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment auto-inject {
+				lexerGrammar = "org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateContentAssistLexer"
 				contentAssist = true
 				antlrParam = "-lib"
 				antlrParam = "${rootPath}/org.eclipse.xtext.ui.codetemplates.ide/src-gen/org/eclipse/xtext/ui/codetemplates/ide/contentassist/antlr/lexer"
-				}
 			}
 			
 			generator = {
