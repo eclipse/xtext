@@ -8,18 +8,18 @@
 package org.eclipse.xtext.common.types.descriptions;
 
 import java.lang.reflect.Modifier;
+
 import org.eclipse.xtext.naming.QualifiedName;
 
-@SuppressWarnings("all")
 public interface ITypeDescriptor {
-  public abstract String getName();
-  
-  public abstract String getSimpleName();
-  
-  public abstract QualifiedName getQualifiedName();
-  
-  /**
-   * @see Modifier
-   */
-  public abstract int getModifiers();
+	String getName();
+
+	String getSimpleName();
+
+	QualifiedName getQualifiedName();
+
+	/**
+	 * @see Modifier
+	 */
+	int getModifiers();
 }
