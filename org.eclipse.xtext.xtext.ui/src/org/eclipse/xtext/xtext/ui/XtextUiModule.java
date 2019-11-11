@@ -10,6 +10,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
@@ -132,8 +132,12 @@ public class XtextUiModule extends AbstractXtextUiModule {
 				.to(FilterTerminalRulesContribution.class);
 	}
 
-	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
-		return ProjectAwareXtendXtext2EcorePostProcessor.class;
+	public void configureIXtext2EcorePostProcessor(Binder binder) {
+		try {
+			Class.forName("org.eclipse.xtend.expression.ExecutionContext");
+			binder.bind(IXtext2EcorePostProcessor.class).to(ProjectAwareXtendXtext2EcorePostProcessor.class);
+		} catch (ClassNotFoundException e) {
+		}
 	}
 
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
