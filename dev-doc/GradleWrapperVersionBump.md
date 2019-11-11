@@ -32,6 +32,7 @@ We ship the Gradle Wrapper with our code. Thus a CQ needs to be filed. Here is a
    1. Attach it to the IPZilla.
    1. Go to a location where you have already a gradle project with wrapper and run `./gradlew wrapper --gradle-version <version>` twice.
    1. Create a second zip containing `gradlew`, `gradlew.bat` and `gradle/wrapper/gradle-wrapper.properties`.
+   1. There is also an experimental script to create both zips automatically at https://github.com/xtext/gradle-wrapper-cq-helper.
    1. Attach the second zip to the IPZilla.
 
 ## Builds
