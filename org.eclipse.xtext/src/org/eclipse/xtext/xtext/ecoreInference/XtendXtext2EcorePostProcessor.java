@@ -49,6 +49,7 @@ public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor 
 	public void process(GeneratedMetamodel metamodel) {
 		Resource xtendFile = loadXtendFile(metamodel);
 		if (xtendFile != null) {
+			logger.warn("You are using an old xtend(1)-based IXtext2EcorePostProcessor. This features is deprecated and will be dropped in a future release of Xtext.");
 			ExecutionContext ctx = getExecutionContext(metamodel);
 			ctx = ctx.cloneWithResource(xtendFile);
 			ResourceLoader currentThreadResourceLoader = null;
