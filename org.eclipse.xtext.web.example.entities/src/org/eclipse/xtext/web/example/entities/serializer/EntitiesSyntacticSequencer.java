@@ -5,18 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.example.entities.serializer
+package org.eclipse.xtext.web.example.entities.serializer;
 
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.INode;
 
-class EntitiesSyntacticSequencer extends AbstractEntitiesSyntacticSequencer {
-
-	override protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node !== null)
-			return getTokenText(node);
+public class EntitiesSyntacticSequencer extends AbstractEntitiesSyntacticSequencer {
+	@Override
+	protected String getArrayBracketsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null) {
+			return this.getTokenText(node);
+		}
 		return "[]";
 	}
-
 }
