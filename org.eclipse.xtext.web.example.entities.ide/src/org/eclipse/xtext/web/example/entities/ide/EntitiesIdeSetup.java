@@ -5,20 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.example.entities.ide
+package org.eclipse.xtext.web.example.entities.ide;
 
-import com.google.inject.Guice
-import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule
-import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
+import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
-class EntitiesIdeSetup extends EntitiesStandaloneSetup {
+public class EntitiesIdeSetup extends EntitiesStandaloneSetup {
 
-	override createInjector() {
-		Guice.createInjector(Modules2.mixin(new EntitiesRuntimeModule, new EntitiesIdeModule))
+	@Override
+	public Injector createInjector() {
+		return Guice.createInjector(Modules2.mixin(new EntitiesRuntimeModule(), new EntitiesIdeModule()));
 	}
-
+	
 }
