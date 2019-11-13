@@ -1,24 +1,26 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
-package org.eclipse.xtext.web.example.jetty;
+ */
+package org.eclipse.xtext.xbase.web.test.languages;
 
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
 import com.google.inject.Binder;
 
-/**
- * Use this class to register additional components to be used within the web
- * application.
- */
-public class EntitiesWebModule extends AbstractEntitiesWebModule {
+public class EntitiesWebModule extends DefaultXbaseWebModule {
 	private IResourceBaseProvider resourceBaseProvider;
+
+	public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
+		return FileResourceHandler.class;
+	}
 
 	public void configureResourceBaseProvider(Binder binder) {
 		if (resourceBaseProvider != null) {
@@ -26,11 +28,11 @@ public class EntitiesWebModule extends AbstractEntitiesWebModule {
 		}
 	}
 
-	public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
-		return FileResourceHandler.class;
+	public IResourceBaseProvider getResourceBaseProvider() {
+		return resourceBaseProvider;
 	}
 
-	public EntitiesWebModule(IResourceBaseProvider resourceBaseProvider) {
+	public void setResourceBaseProvider(IResourceBaseProvider resourceBaseProvider) {
 		this.resourceBaseProvider = resourceBaseProvider;
 	}
 }
