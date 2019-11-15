@@ -63,4 +63,4 @@ Export-Package: org.eclipse.xtend.ide;x-internal:=true,
  org.eclipse.xtend.ide.view;x-internal:=true,
  org.eclipse.xtend.ide.wizards;x-internal:=true
 Automatic-Module-Name: org.eclipse.xtend.ide
-
+Eclipse-SourceReferences: eclipseSourceReferences

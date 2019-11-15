@@ -17,7 +17,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<sign.skip>true</sign.skip>
-
+		<tycho.scmUrl>scm:git:https://github.com/eclipse/xtext-xtend.git</tycho.scmUrl>
 		<target-platform-classifier></target-platform-classifier>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
@@ -141,8 +141,20 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
+				<dependencies>
+					<!-- Use jgit to resolve source references for git: type SCM -->
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-sourceref-jgit</artifactId>
+						<version>${tycho-version}</version>
+					</dependency>
+				</dependencies>
 				<configuration>
 					<format>'v'yyyyMMdd-HHmm</format>
+					<sourceReferences>
+						<!-- Generate the source reference in the MANIFEST.MF -->
+						<generate>true</generate>
+					</sourceReferences>
 				</configuration>
 			</plugin>
 			<plugin>
