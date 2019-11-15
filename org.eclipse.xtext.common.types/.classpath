@@ -19,6 +19,12 @@
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" output="bin/mwe2" path="generator">
+		<attributes>
+			<attribute name="gradle_scope" value="mwe2"/>
+			<attribute name="gradle_used_by_scope" value="mwe2"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry including="**/*.java|**/*.xtend" kind="src" output="bin/main" path="deprecated">
 		<attributes>
 			<attribute name="gradle_scope" value="main"/>
