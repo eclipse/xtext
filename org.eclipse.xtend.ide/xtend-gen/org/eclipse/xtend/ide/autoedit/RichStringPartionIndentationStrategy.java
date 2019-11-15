@@ -9,6 +9,7 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextUtilities;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -19,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStrategy {
   @Override
   public void customizeDocumentCommand(final IDocument d, final DocumentCommand c) {
-    if (((c.text.length() > 1) && (!((List<String>)Conversions.doWrapArray(d.getLegalLineDelimiters())).contains(c.text)))) {
+    if (((c.text.length() > 1) && (!ArrayExtensions.contains(d.getLegalLineDelimiters(), c.text)))) {
       try {
         final String lineIndentation = this.getLineIndentation(d, c.offset);
         final Function1<String, Integer> _function = (String s) -> {

@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.resource;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
-import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.resource.XtendResourceDescription;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
@@ -14,7 +13,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -41,7 +40,7 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   
   private boolean containsActiveAnnotation(final IResourceDescription description) {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      return Boolean.valueOf(((List<String>)Conversions.doWrapArray(it.getUserDataKeys())).contains(XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
+      return Boolean.valueOf(ArrayExtensions.contains(it.getUserDataKeys(), XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
     };
     return IterableExtensions.<IEObjectDescription>exists(description.getExportedObjects(), _function);
   }
