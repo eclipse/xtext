@@ -22,7 +22,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -628,7 +628,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
     final List<Issue> allIssues = this._validationTestHelper.validate(resource);
     final Function1<Issue, Boolean> _function = (Issue it) -> {
       EObject object = resource.getResourceSet().getEObject(it.getUriToProblem(), true);
-      final boolean featureCall = ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
+      final boolean featureCall = ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
       return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
         objectType.isInstance(object)) && featureCall));
     };

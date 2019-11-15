@@ -28,6 +28,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -141,7 +142,7 @@ public class QuickfixTestBuilder {
     {
       final Function1<Issue, Boolean> _function = (Issue it) -> {
         return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
-          ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL)));
+          ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL)));
       };
       Assert.assertTrue(IterableExtensions.<Issue>exists(this.getIssuesAtCaret(), _function));
       _xblockexpression = this;
@@ -154,7 +155,7 @@ public class QuickfixTestBuilder {
     {
       final Function1<Issue, Boolean> _function = (Issue it) -> {
         return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
-          ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL)));
+          ArrayExtensions.contains(it.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL)));
       };
       Assert.assertTrue(IterableExtensions.<Issue>exists(this.getIssuesAtCaret(), _function));
       _xblockexpression = this;
