@@ -18,14 +18,13 @@ import java.net.SocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.Channels;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.lsp4j.jsonrpc.Launcher;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.util.internal.Log;
-import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -95,7 +94,7 @@ public class SocketServerLauncher {
   
   protected PrintWriter getTrace(final String... args) {
     PrintWriter _xifexpression = null;
-    boolean _contains = ((List<String>)Conversions.doWrapArray(args)).contains(SocketServerLauncher.TRACE);
+    boolean _contains = ArrayExtensions.contains(args, SocketServerLauncher.TRACE);
     if (_contains) {
       _xifexpression = new PrintWriter(System.out);
     }
@@ -103,7 +102,7 @@ public class SocketServerLauncher {
   }
   
   protected boolean shouldValidate(final String... args) {
-    boolean _contains = ((List<String>)Conversions.doWrapArray(args)).contains(SocketServerLauncher.NO_VALIDATE);
+    boolean _contains = ArrayExtensions.contains(args, SocketServerLauncher.NO_VALIDATE);
     return (!_contains);
   }
   

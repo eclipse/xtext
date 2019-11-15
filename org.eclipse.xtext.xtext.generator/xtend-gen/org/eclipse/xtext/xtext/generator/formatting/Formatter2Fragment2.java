@@ -32,8 +32,8 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -318,7 +318,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       if (_contains) {
         name = ("_" + name);
       }
-      boolean _contains_1 = ((List<String>)Conversions.doWrapArray(reservedNames)).contains(name);
+      boolean _contains_1 = ArrayExtensions.contains(reservedNames, name);
       if (_contains_1) {
         name = ("_" + name);
       }
