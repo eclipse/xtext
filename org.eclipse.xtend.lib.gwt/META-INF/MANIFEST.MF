@@ -8,3 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtend.lib
 Require-Bundle: org.eclipse.xtend.lib
 Automatic-Module-Name: org.eclipse.xtend.lib.gwt
+Eclipse-SourceReferences: eclipseSourceReferences
