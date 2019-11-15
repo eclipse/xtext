@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.web.test.languages;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
 import com.google.inject.Binder;
