@@ -125,7 +125,7 @@ public class ArrayExtensions {
 	 * @return <tt>true</tt> if this array contains the specified element
 	 */
 	@Pure
-	public static <T> boolean contains(Object[] array, Object o) {
+	public static boolean contains(Object[] array, Object o) {
 		for (int i = 0; i < array.length; i++) {
 			if (Objects.equals(array[i], o)) {
 				return true;
