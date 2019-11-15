@@ -248,3 +248,4 @@ Import-Package: org.apache.log4j;version="1.2.15",org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.internal.Activator
 Automatic-Module-Name: org.eclipse.xtext
+Eclipse-SourceReferences: eclipseSourceReferences

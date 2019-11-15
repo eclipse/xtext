@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.20.0",
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.10.2"
 Automatic-Module-Name: org.eclipse.xtext.xtext.wizard
+Eclipse-SourceReferences: eclipseSourceReferences

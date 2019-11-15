@@ -83,3 +83,4 @@ Export-Package: org.eclipse.xtext.xtext.generator,
    org.eclipse.xtext.extras.tests,
    org.eclipse.xtext.xbase"
 Automatic-Module-Name: org.eclipse.xtext.xtext.generator
+Eclipse-SourceReferences: eclipseSourceReferences
