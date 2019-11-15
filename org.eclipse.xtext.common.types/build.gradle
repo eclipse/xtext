@@ -1,3 +1,8 @@
+sourceSets {
+	mwe2 {}
+}
+eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
+
 ext.title = 'Common Types Runtime Library'
 description = 'JVM type model used by Xbase and other languages.'
 
@@ -5,10 +10,11 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 	compile 'org.ow2.asm:asm-commons'
 	compile 'io.github.classgraph:classgraph'
-	optional 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
-	optional 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
-	optional 'org.eclipse.emf:org.eclipse.emf.codegen'
-	optional 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen'
+	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
 }
 
 sourceSets.main.java.srcDir 'deprecated'
+sourceSets.mwe2.java.srcDir 'generator'
