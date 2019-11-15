@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.annotations.Beta;
 
@@ -213,6 +215,20 @@ public abstract class AbstractTemplate {
 			throw new RuntimeException("Template class '" + projectTemplateClass.getName() + "' does not declare a '" //$NON-NLS-1$ //$NON-NLS-2$
 					+ ProjectTemplate.class.getName() + "' annotation"); //$NON-NLS-1$
 		return projectTemplateAnnotation;
+	}
+
+	/**
+	 * Subclasses should override. The method is called after the {@link org.eclipse.ui.forms.widgets.FormText} widget is created
+	 * to register template images that can be used in the template descriptions within the href attribute of the &lt;img&gt; tags.
+	 *
+	 * @return each image is defined by a pair of an id and the image itself.
+	 * 
+	 * See also {@link org.eclipse.ui.forms.widgets.FormText#setImage(String, Image)}
+	 * 
+	 * @since 2.20
+	 */
+	protected List<Pair<String, Image>> getImages() {
+		return new ArrayList<Pair<String, Image>>();
 	}
 
 }

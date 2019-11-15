@@ -78,6 +78,8 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.wizard.IProjectCreator;
+import org.eclipse.xtext.ui.wizard.template.DefaultTemplateProjectCreator;
 
 /**
  * Manual modifications go to {@link StatemachineUiModule}.
@@ -288,6 +290,11 @@ public abstract class AbstractStatemachineUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public void configureCompareViewerTitle(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(UIBindings.COMPARE_VIEWER_TITLE)).toInstance("Statemachine Compare");
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.projectWizard.TemplateProjectWizardFragment
+	public Class<? extends IProjectCreator> bindIProjectCreator() {
+		return DefaultTemplateProjectCreator.class;
 	}
 	
 }

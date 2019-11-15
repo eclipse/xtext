@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 itemis AG (http://www.itemis.de) and others.
+ * Copyright (c) 2017, 2019 itemis AG (http://www.itemis.de) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -25,11 +25,13 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormText;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.common.annotations.Beta;
 
@@ -78,11 +80,19 @@ public class NewProjectWizardTemplateSelectionPage extends WizardPage {
 		TableViewer templateTable = new TableViewer(sash, SWT.BORDER);
 		templateTable.setContentProvider(new ArrayContentProvider());
 		templateTable.setLabelProvider(labelProvider);
-		templateTable.setInput(loadTemplatesFromExtensionPoint());
+		AbstractProjectTemplate[] templates = loadTemplatesFromExtensionPoint();
+		templateTable.setInput(templates);
 
 		FormText text = new FormText(sash, SWT.BORDER);
 		text.setText("", false, false); //$NON-NLS-1$
 		text.setBackground(templateTable.getTable().getBackground());
+
+		// register images
+		for (AbstractProjectTemplate template : templates) {
+			for (Pair<String, Image> image : template.getImages()) {
+				text.setImage(image.getKey(), image.getValue());
+			}
+		}
 
 		templateTable.addSelectionChangedListener(new ISelectionChangedListener() {
 			@Override

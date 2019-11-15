@@ -422,4 +422,55 @@
 			type="text">
 		</fileTypes>
 	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtext.example.fowlerdsl.ui.category" name="Statemachine">
+		</category>
+		<wizard
+			category="org.eclipse.xtext.example.fowlerdsl.ui.category"
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewProjectWizard"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard"
+			name="Statemachine Project"
+			icon="icons/new_Statemachine_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineProjectTemplateProvider"
+			grammarName="org.eclipse.xtext.example.fowlerdsl.Statemachine">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			allPopups="false"
+			locationURI="toolbar:org.eclipse.ui.main.toolbar">
+			<toolbar
+				id="org.eclipse.xtext.example.fowlerdsl.ui.toolbar">
+				<!--
+					For some reason the tooltip is not shown when hovering over the toolbar button
+					See also https://www.eclipse.org/forums/index.php/t/1079111/
+				-->
+				<command
+					commandId="org.eclipse.ui.newWizard"
+					tooltip="Create a statemachine project">
+					<parameter
+						name="newWizardId"
+						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard">
+					</parameter>
+				</command>
+			</toolbar>
+		</menuContribution>
+	</extension>
 </plugin>
