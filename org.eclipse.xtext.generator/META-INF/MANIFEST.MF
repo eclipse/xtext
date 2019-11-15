@@ -74,3 +74,4 @@ Import-Package: com.ibm.icu.text;version="4.0.0",
  org.apache.commons.logging;version="1.0.4";resolution:=optional;x-installation:=greedy,
  org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.generator
+Eclipse-SourceReferences: eclipseSourceReferences

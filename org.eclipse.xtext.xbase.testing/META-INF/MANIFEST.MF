@@ -21,3 +21,4 @@ Export-Package: org.eclipse.xtext.xbase.testing,
  testdata.b;x-internal:=true
 Import-Package: org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.xbase.testing
+Eclipse-SourceReferences: eclipseSourceReferences

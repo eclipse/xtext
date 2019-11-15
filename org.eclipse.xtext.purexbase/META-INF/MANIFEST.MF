@@ -32,3 +32,4 @@ Export-Package: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.purexbase.scoping,
  org.eclipse.xtext.purexbase.formatting2
 Automatic-Module-Name: org.eclipse.xtext.purexbase
+Eclipse-SourceReferences: eclipseSourceReferences

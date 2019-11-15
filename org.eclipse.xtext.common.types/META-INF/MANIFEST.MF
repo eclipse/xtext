@@ -81,3 +81,4 @@ Export-Package: org.eclipse.xtext.common.types,
    org.eclipse.xtext.xbase,
    org.eclipse.xtend.core"
 Automatic-Module-Name: org.eclipse.xtext.common.types
+Eclipse-SourceReferences: eclipseSourceReferences
