@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.builder.impl.AbstractBuilderParticipantTest;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
@@ -297,7 +298,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
     final Runnable _function = () -> {
       this.cleanBuild();
       Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(ouputDirectory.list())).size());
-      Assert.assertTrue(((List<String>)Conversions.doWrapArray(ouputDirectory.list())).contains("Lalala.txt"));
+      Assert.assertTrue(ArrayExtensions.contains(ouputDirectory.list(), "Lalala.txt"));
     };
     this.disableAutobuild(_function);
   }
@@ -322,7 +323,7 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
       final int expectedSize = (initialSize + 1);
       this.cleanBuild();
       Assert.assertEquals(expectedSize, ((List<String>)Conversions.doWrapArray(outputDirectory.list())).size());
-      Assert.assertTrue(((List<String>)Conversions.doWrapArray(outputDirectory.list())).contains("Lalala.txt"));
+      Assert.assertTrue(ArrayExtensions.contains(outputDirectory.list(), "Lalala.txt"));
     };
     this.disableAutobuild(_function);
   }
