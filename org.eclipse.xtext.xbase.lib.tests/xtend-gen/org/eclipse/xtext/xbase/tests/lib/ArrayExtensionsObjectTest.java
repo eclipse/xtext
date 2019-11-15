@@ -76,10 +76,10 @@ public class ArrayExtensionsObjectTest {
   
   @Test
   public void testContains__Object() {
-    Assert.assertTrue(ArrayExtensions.<Object>contains(this.data, Integer.valueOf(0)));
-    Assert.assertTrue(ArrayExtensions.<Object>contains(this.data, Integer.valueOf(1)));
-    Assert.assertTrue(ArrayExtensions.<Object>contains(this.data, null));
-    Assert.assertFalse(ArrayExtensions.<Object>contains(this.data, Integer.valueOf(3)));
-    Assert.assertFalse(ArrayExtensions.<Object>contains(this.data, Integer.valueOf(4)));
+    Assert.assertTrue(ArrayExtensions.contains(this.data, Integer.valueOf(0)));
+    Assert.assertTrue(ArrayExtensions.contains(this.data, Integer.valueOf(1)));
+    Assert.assertTrue(ArrayExtensions.contains(this.data, null));
+    Assert.assertFalse(ArrayExtensions.contains(this.data, Integer.valueOf(3)));
+    Assert.assertFalse(ArrayExtensions.contains(this.data, Integer.valueOf(4)));
   }
 }
