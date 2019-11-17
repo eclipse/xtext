@@ -349,7 +349,7 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 	
 	@Test public void testContainsOnCollection() {
 		//GIVEN a collection, declared as an iterable
-		TestableCollection collection = new TestableCollection(newHashSet("element1", "element2", "element3"));
+		TestableCollection<String> collection = new TestableCollection<String>(newHashSet("element1", "element2", "element3"));
 		
 		//WHEN we call the contains method via the IterableExtensions
 		IterableExtensions.contains(collection, "element1");
