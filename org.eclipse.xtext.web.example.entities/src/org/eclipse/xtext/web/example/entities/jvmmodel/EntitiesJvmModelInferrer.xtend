@@ -8,12 +8,14 @@
 package org.eclipse.xtext.web.example.entities.jvmmodel
 
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.web.example.entities.domainmodel.Entity
 import org.eclipse.xtext.web.example.entities.domainmodel.Operation
 import org.eclipse.xtext.web.example.entities.domainmodel.Property
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
@@ -21,6 +23,8 @@ class EntitiesJvmModelInferrer extends AbstractModelInferrer {
 
 	@Inject extension JvmTypesBuilder
 	@Inject extension IQualifiedNameProvider
+	@Inject extension EntitiesJvmModelHelper
+	@Inject extension IJvmModelAssociations
 
 	def dispatch infer(Entity entity, extension IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		accept(entity.toClass( entity.fullyQualifiedName )) [
@@ -69,9 +73,22 @@ class EntitiesJvmModelInferrer extends AbstractModelInferrer {
 				}
 			}
 
+			// remove created getters/setters in case they
+			// are explicit in the source code
+			removeDuplicateGettersSetters
+
 			// finally we want to have a nice toString methods.
 			members += entity.toToStringMethod(it)
 		]
 	}
 
+	def private removeDuplicateGettersSetters(JvmDeclaredType inferredType) {
+		inferredType.handleDuplicateJvmOperations[jvmOperations|
+			// we only remove getters/setters we created automatically
+			val getterOrSetter = jvmOperations.filter[primarySourceElement instanceof Property].head
+			if (getterOrSetter !== null)
+				inferredType.members.remove(getterOrSetter)
+			// other duplicated methods will be reported by the validator
+		]
+	}
 }
