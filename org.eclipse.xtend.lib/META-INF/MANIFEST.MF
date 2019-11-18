@@ -10,3 +10,4 @@ Export-Package: org.eclipse.xtend.lib;version="2.20.0";uses:="org.eclipse.xtend.
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.20.0";visibility:=reexport,
  org.eclipse.xtend.lib.macro;visibility:=reexport
 Automatic-Module-Name: org.eclipse.xtend.lib
+Eclipse-SourceReferences: eclipseSourceReferences

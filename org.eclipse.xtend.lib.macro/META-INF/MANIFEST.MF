@@ -12,3 +12,4 @@ Export-Package: org.eclipse.xtend.lib.macro;version="2.20.0";uses:="org.eclipse.
  org.eclipse.xtend.lib.macro.services;version="2.20.0";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtext.xbase.lib"
 Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport
 Automatic-Module-Name: org.eclipse.xtend.lib.macro
+Eclipse-SourceReferences: eclipseSourceReferences
