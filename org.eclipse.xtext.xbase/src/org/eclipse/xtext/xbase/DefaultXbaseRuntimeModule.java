@@ -61,7 +61,6 @@ import org.eclipse.xtext.xbase.util.XbaseJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator;
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
-import org.eclipse.xtext.xbase.validation.XbaseDiagnostician;
 import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -185,8 +184,9 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 		return BrokenConstructorCallAwareEObjectAtOffsetHelper.class;
 	}
 
+	@SuppressWarnings("deprecation")
 	public Class<? extends CancelableDiagnostician> bindCancelableDiagnostician() {
-		return XbaseDiagnostician.class;
+		return org.eclipse.xtext.xbase.validation.XbaseDiagnostician.class;
 	}
 
 	@SuppressWarnings("deprecation")
