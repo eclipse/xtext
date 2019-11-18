@@ -7,7 +7,6 @@ Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates;singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
@@ -21,7 +20,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ide,org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.conversion;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.formatting;x-internal:=true,
- org.eclipse.xtext.ui.codetemplates.generator;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.lexer;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.serializer;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.parser;x-internal:=true,
