@@ -17,6 +17,7 @@ public class ClosureClient2 {
 
 	private String value;
 
+	@SuppressWarnings("unchecked")
 	public ClosureClient2(Functions.Function0<String>... functions) {
 		StringBuilder builder = new StringBuilder("varArgs:");
 		for(Functions.Function0<String> function: functions) {

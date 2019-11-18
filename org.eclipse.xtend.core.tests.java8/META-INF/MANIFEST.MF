@@ -35,3 +35,4 @@ Import-Package: javax.inject;version="1.0.0",
 Bundle-ClassPath: .
 Export-Package: org.eclipse.xtend.core.tests.java8;x-internal:=true,
  org.eclipse.xtend.core.tests.java8.compiler;x-internal:=true
+Automatic-Module-Name: org.eclipse.xtend.core.tests.java8

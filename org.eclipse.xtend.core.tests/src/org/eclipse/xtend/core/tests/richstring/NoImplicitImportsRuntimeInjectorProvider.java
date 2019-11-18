@@ -43,6 +43,7 @@ public class NoImplicitImportsRuntimeInjectorProvider extends RuntimeInjectorPro
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new XtendRuntimeTestModule() {
+					@SuppressWarnings("unused")
 					public Class<? extends ImplicitlyImportedFeatures> bindImplicitlyImportedFeatures() {
 						return NoImplicitlyImportedFeatures.class;
 					}
