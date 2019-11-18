@@ -20,4 +20,5 @@ Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;x-friends:="org
    org.eclipse.xtend.ide.tests",
  org.eclipse.xtend.ide.common.outline;x-friends:="org.eclipse.xtend.ide"
 Import-Package: org.apache.log4j;version="1.2.15"
-
+Automatic-Module-Name: org.eclipse.xtend.ide.common
+Eclipse-SourceReferences: eclipseSourceReferences
