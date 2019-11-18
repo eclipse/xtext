@@ -146,7 +146,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.validation,
  org.eclipse.xtext.ui.views,
  org.eclipse.xtext.ui.wizard,
- org.eclipse.xtext.ui.wizard.template;x-internal:=true,
+ org.eclipse.xtext.ui.wizard.template;x-friends:="org.eclipse.xtext.example.fowlerdsl.ui",
  org.eclipse.xtext.ui.workspace;
   x-friends:="org.eclipse.xtext.ui.tests,
    org.eclipse.xtext.xbase.ui,
