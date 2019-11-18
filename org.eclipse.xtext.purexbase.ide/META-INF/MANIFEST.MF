@@ -14,3 +14,4 @@ Export-Package: org.eclipse.xtext.purexbase.ide;x-internal:=true,
  org.eclipse.xtext.purexbase.ide.contentassist.antlr,
  org.eclipse.xtext.purexbase.ide.contentassist.antlr.internal
 Automatic-Module-Name: org.eclipse.xtext.purexbase.ide
+Eclipse-SourceReferences: eclipseSourceReferences

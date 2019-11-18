@@ -15,3 +15,4 @@ Export-Package: org.eclipse.xtext.java,
  org.eclipse.xtext.java.resource
 Import-Package: org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.java
+Eclipse-SourceReferences: eclipseSourceReferences

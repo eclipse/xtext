@@ -9,3 +9,4 @@ Export-Package: org.eclipse.xtext.smap;x-friends:="org.eclipse.xtext.builder"
 Require-Bundle: org.eclipse.xtext
 Import-Package: org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.smap
+Eclipse-SourceReferences: eclipseSourceReferences

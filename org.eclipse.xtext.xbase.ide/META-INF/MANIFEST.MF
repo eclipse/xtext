@@ -22,3 +22,4 @@ Export-Package: org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;x-fr
    org.eclipse.xtend.ide.common,
    org.eclipse.xtend.ide.tests"
 Automatic-Module-Name: org.eclipse.xtext.xbase.ide
+Eclipse-SourceReferences: eclipseSourceReferences
