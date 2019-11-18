@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.ide;singleton:=true
 Bundle-Version: 2.20.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
 Bundle-Vendor: Eclipse Xtext
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib,
