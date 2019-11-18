@@ -48,3 +48,4 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.util
+Eclipse-SourceReferences: eclipseSourceReferences

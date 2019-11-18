@@ -17,6 +17,18 @@ def qualifiedVersion = baseVersion + '.v' + buildTime
 
 ext.manifestReplacements = new HashMap()
 manifestReplacements.put(baseVersion + '.qualifier', qualifiedVersion)
+
+def eclipseSourceReferences() {
+	def rootPath = java.nio.file.Paths.get(project.rootProject.projectDir.canonicalPath)
+	def projectPath = java.nio.file.Paths.get(project.projectDir.canonicalPath)
+	def relativePath = rootPath.relativize(projectPath)
+	def url = grgit.remote.list().findAll{ it.name == "origin" }.first().url
+	def commitId = grgit.head().id
+	return "scm:git:${url};path=\"${relativePath}\"" + (commitId ? ";commitId=${commitId}" : "")
+}
+
+manifestReplacements.put("eclipseSourceReferences", eclipseSourceReferences())
+
 File manifestFile = project.file("$buildDir/tmp/genManifest/MANIFEST.MF")
 
 task genManifest(type: Copy) {

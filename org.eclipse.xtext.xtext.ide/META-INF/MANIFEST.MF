@@ -12,3 +12,4 @@ Export-Package: org.eclipse.xtext.xtext.ide;x-friends:="org.eclipse.xtext.xtext.
  org.eclipse.xtext.xtext.ide.contentassist.antlr;x-friends:="org.eclipse.xtext.xtext.ui",
  org.eclipse.xtext.xtext.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xtext.ui"
 Automatic-Module-Name: org.eclipse.xtext.xtext.ide
+Eclipse-SourceReferences: eclipseSourceReferences
