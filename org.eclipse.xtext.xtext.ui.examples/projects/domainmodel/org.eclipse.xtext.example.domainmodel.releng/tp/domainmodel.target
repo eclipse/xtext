@@ -11,10 +11,10 @@
       <repository location="https://download.eclipse.org/releases/2019-12"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.5.0.201906111547"/>
-      <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.11.0.201906111547"/>
-      <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.11.0.201906111547"/>
-      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.0"/>
+      <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.1"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
