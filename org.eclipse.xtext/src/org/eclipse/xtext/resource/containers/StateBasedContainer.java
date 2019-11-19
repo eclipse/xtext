@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -41,6 +42,13 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		super(descriptions);
 		this.state = state;
 	}
+
+	/**
+	 * @since 2.20
+	 */
+	protected final IContainerState getState() {
+		return state;
+	}
 	
 	@Override
 	protected Iterable<IEObjectDescription> filterByURI(Iterable<IEObjectDescription> unfiltered) {
@@ -50,7 +58,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				if(contents == null) {
-					contents = state.getContents();
+					contents = getState().getContents();
 				}
 				URI resourceURI = input.getEObjectURI().trimFragment();
 				final boolean contains = contents.contains(resourceURI);
@@ -61,22 +69,22 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 
 	@Override
 	public boolean hasResourceDescription(URI uri) {
-		return state.contains(uri);
+		return getState().contains(uri);
 	}
 	
 	@Override
 	public int getResourceDescriptionCount() {
-		return state.getContents().size();
+		return getState().getContents().size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return state.isEmpty();
+		return getState().isEmpty();
 	}
 	
 	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
-		if (state.contains(uri))
+		if (getState().contains(uri))
 			return getDescriptions().getResourceDescription(uri);
 		return null;
 	}
@@ -91,7 +99,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	@Override
 	protected Map<URI, IResourceDescription> doGetUriToDescription() {
 		Map<URI, IResourceDescription> result = Maps.newLinkedHashMap();
-		for(URI uri: state.getContents()) {
+		for(URI uri: getState().getContents()) {
 			IResourceDescription description = getDescriptions().getResourceDescription(uri);
 			if (description != null)
 				result.put(uri, description);
