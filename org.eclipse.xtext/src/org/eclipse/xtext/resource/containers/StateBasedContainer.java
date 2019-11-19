@@ -43,6 +43,9 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		this.state = state;
 	}
 
+	/**
+	 * @since 2.20
+	 */
 	protected final IContainerState getState() {
 		return state;
 	}

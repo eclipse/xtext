@@ -88,6 +88,9 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return createContainer(resourceDescriptions, state, containerState);
 	}
 
+	/**
+	 * @since 2.20
+	 */
 	protected IContainer createContainer(IResourceDescriptions resourceDescriptions, IAllContainersState allContainerState, IContainerState containerState) {
 		StateBasedContainer result = new StateBasedContainer(resourceDescriptions, containerState);
 		
