@@ -90,8 +90,8 @@
 		<emf.ecore.xmi-version>2.12.0</emf.ecore.xmi-version>
 		<emf.codegen-ecore-version>2.12.0</emf.codegen-ecore-version>
 		<emf.codegen-version>2.11.0</emf.codegen-version>
-		<emf.mwe-version>1.5.0</emf.mwe-version>
-		<emf.mwe2-version>2.11.0</emf.mwe2-version>
+		<emf.mwe-version>1.5.1</emf.mwe-version>
+		<emf.mwe2-version>2.11.1</emf.mwe2-version>
 		<equinox.app-version>1.4.300</equinox.app-version>
 		<equinox.common-version>3.10.500</equinox.common-version>
 		<equinox.preferences-version>3.7.500</equinox.preferences-version>
