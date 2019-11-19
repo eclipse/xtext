@@ -270,6 +270,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<showEmptyDirWarning>false</showEmptyDirWarning>
 					<outputDirectory>${basedir}/xtend-gen</outputDirectory>
 				</configuration>
 			</plugin>
