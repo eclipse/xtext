@@ -452,6 +452,34 @@
 		</perspectiveExtension>
 	</extension>
 	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtext.example.fowlerdsl.ui.category" name="Statemachine">
+		</category>
+		<wizard
+			category="org.eclipse.xtext.example.fowlerdsl.ui.category"
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.wizard.template.TemplateNewFileWizard"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewFileWizard"
+			name="Statemachine File"
+			icon="icons/new_Statemachine_file.png">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.fileTemplate">
+		<fileTemplateProvider
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineFileTemplateProvider"
+			grammarName="org.eclipse.xtext.example.fowlerdsl.Statemachine">
+		</fileTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewFileWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewFileWizard"/>
+		</perspectiveExtension>
+	</extension>
+	<extension
 		point="org.eclipse.ui.menus">
 		<menuContribution
 			allPopups="false"
@@ -468,6 +496,28 @@
 					<parameter
 						name="newWizardId"
 						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard">
+					</parameter>
+				</command>
+			</toolbar>
+		</menuContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			allPopups="false"
+			locationURI="toolbar:org.eclipse.ui.main.toolbar">
+			<toolbar
+				id="org.eclipse.xtext.example.fowlerdsl.ui.toolbar">
+				<!--
+					For some reason the tooltip is not shown when hovering over the toolbar button
+					See also https://www.eclipse.org/forums/index.php/t/1079111/
+				-->
+				<command
+					commandId="org.eclipse.ui.newWizard"
+					tooltip="Create a statemachine file">
+					<parameter
+						name="newWizardId"
+						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewFileWizard">
 					</parameter>
 				</command>
 			</toolbar>
