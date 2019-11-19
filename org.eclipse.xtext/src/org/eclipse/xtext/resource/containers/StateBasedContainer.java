@@ -43,7 +43,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		this.state = state;
 	}
 
-	protected IContainerState getState() {
+	protected final IContainerState getState() {
 		return state;
 	}
 	
@@ -115,8 +115,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		if (isEmpty())
 			return emptyList();
-
-		return IterableExtensions.flatMap(getResourceDescriptions(), desc -> desc.getExportedObjectsByType(type));
+		return super.getExportedObjectsByType(type);
 	}
 	
 	@Override

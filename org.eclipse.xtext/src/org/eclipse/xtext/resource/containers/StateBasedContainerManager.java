@@ -85,15 +85,16 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		IAllContainersState state = getState(resourceDescriptions);
 		IContainerState containerState = new ContainerState(handle, state);
 		
-		StateBasedContainer result = createStateBasedContainer(resourceDescriptions, containerState);
-		if (state instanceof FlatResourceSetBasedAllContainersState)
+		return createContainer(resourceDescriptions, state, containerState);
+	}
+
+	protected IContainer createContainer(IResourceDescriptions resourceDescriptions, IAllContainersState allContainerState, IContainerState containerState) {
+		StateBasedContainer result = new StateBasedContainer(resourceDescriptions, containerState);
+		
+		if (allContainerState instanceof FlatResourceSetBasedAllContainersState)
 			result.setUriToDescriptionCacheEnabled(false);
 		
 		return result;
-	}
-
-	protected StateBasedContainer createStateBasedContainer(IResourceDescriptions resourceDescriptions, IContainerState containerState) {
-		return new StateBasedContainer(resourceDescriptions, containerState);
 	}
 
 	protected List<IContainer> getVisibleContainers(List<String> handles, IResourceDescriptions resourceDescriptions) {
