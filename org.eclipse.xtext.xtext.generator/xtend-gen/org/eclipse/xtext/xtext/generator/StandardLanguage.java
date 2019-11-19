@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -253,7 +253,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   /**
    * Create a wizard able to create new projects with initial content based on template definitions.
-   * Supported options: 'generate', 'pluginProject'.
+   * Supported options: 'generate', 'generateToolbarButton', 'pluginProject'.
    */
   public TemplateProjectWizardFragment setProjectWizard(final TemplateProjectWizardFragment fragment) {
     return this.projectWizard = fragment;
@@ -261,7 +261,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   /**
    * Create a wizard able to create new files with initial content based on template definitions.
-   * Supported options: 'generate'.
+   * Supported options: 'generate', 'generateToolbarButton'.
    */
   public TemplateFileWizardFragment setFileWizard(final TemplateFileWizardFragment fragment) {
     return this.fileWizard = fragment;

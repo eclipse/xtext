@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -62,6 +62,9 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
   
   @Accessors
   private boolean generate = false;
+  
+  @Accessors
+  private boolean generateToolbarButton = false;
   
   @Override
   public void generate() {
@@ -206,6 +209,84 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
       _builder.append("</extension>");
       _builder.newLine();
       _entries.add(_builder.toString());
+      if (this.generateToolbarButton) {
+        List<CharSequence> _entries_1 = this.getProjectConfig().getEclipsePlugin().getPluginXml().getEntries();
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("<extension");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("point=\"org.eclipse.ui.menus\">");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("<menuContribution");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("allPopups=\"false\"");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("locationURI=\"toolbar:org.eclipse.ui.main.toolbar\">");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("<toolbar");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("id=\"");
+        String _eclipsePluginBasePackage_3 = this._xtextGeneratorNaming.getEclipsePluginBasePackage(this.getGrammar());
+        _builder_1.append(_eclipsePluginBasePackage_3, "\t\t\t");
+        _builder_1.append(".toolbar\">");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("<!--");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("For some reason the tooltip is not shown when hovering over the toolbar button");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("See also https://www.eclipse.org/forums/index.php/t/1079111/");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("-->");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("<command");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("commandId=\"org.eclipse.ui.newWizard\"");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("tooltip=\"Create a new ");
+        String _simpleName_3 = GrammarUtil.getSimpleName(this.getGrammar());
+        _builder_1.append(_simpleName_3, "\t\t\t\t");
+        _builder_1.append(" file\">");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("<parameter");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t\t");
+        _builder_1.append("name=\"newWizardId\"");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t\t\t");
+        _builder_1.append("value=\"");
+        String _fileWizardClassName_3 = this.getFileWizardClassName();
+        _builder_1.append(_fileWizardClassName_3, "\t\t\t\t\t");
+        _builder_1.append("\">");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("\t\t\t\t");
+        _builder_1.append("</parameter>");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("</command>");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("</toolbar>");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("</menuContribution>");
+        _builder_1.newLine();
+        _builder_1.append("</extension>");
+        _builder_1.newLine();
+        _entries_1.add(_builder_1.toString());
+      }
     }
     this.generateProjectTemplateProvider();
     this.generateDefaultIcons();
@@ -371,8 +452,22 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
     return this.generate = value;
   }
   
+  /**
+   * Generate a new file wizard toolbar button. Set to 'false' by default. Change to 'true' to add the new file wizard button to the toolbar.
+   * 
+   * @since 2.20
+   */
+  public boolean setGenerateToolbarButton(final boolean value) {
+    return this.generateToolbarButton = value;
+  }
+  
   @Pure
   public boolean isGenerate() {
     return this.generate;
+  }
+  
+  @Pure
+  public boolean isGenerateToolbarButton() {
+    return this.generateToolbarButton;
   }
 }

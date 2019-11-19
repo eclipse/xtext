@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2018, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -45,6 +45,7 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 	FileAccessFactory fileAccessFactory
 
 	@Accessors boolean generate = false;
+	@Accessors boolean generateToolbarButton = false;
 
 	override generate() {
 		if (!generate)
@@ -94,6 +95,33 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 					</perspectiveExtension>
 				</extension>
 			'''
+		
+			if (generateToolbarButton) {
+				projectConfig.eclipsePlugin.pluginXml.entries += '''
+					<extension
+						point="org.eclipse.ui.menus">
+						<menuContribution
+							allPopups="false"
+							locationURI="toolbar:org.eclipse.ui.main.toolbar">
+							<toolbar
+								id="«grammar.eclipsePluginBasePackage».toolbar">
+								<!--
+									For some reason the tooltip is not shown when hovering over the toolbar button
+									See also https://www.eclipse.org/forums/index.php/t/1079111/
+								-->
+								<command
+									commandId="org.eclipse.ui.newWizard"
+									tooltip="Create a new «grammar.simpleName» file">
+									<parameter
+										name="newWizardId"
+										value="«fileWizardClassName»">
+									</parameter>
+								</command>
+							</toolbar>
+						</menuContribution>
+					</extension>
+				'''
+			}
 		}
 
 		generateProjectTemplateProvider
@@ -177,6 +205,15 @@ class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
 	 */
 	def setGenerate(boolean value) {
 		generate = value
+	}
+
+	/**
+	 * Generate a new file wizard toolbar button. Set to 'false' by default. Change to 'true' to add the new file wizard button to the toolbar.
+	 * 
+	 * @since 2.20
+	 */
+	def setGenerateToolbarButton(boolean value) {
+		generateToolbarButton = value
 	}
 
 }

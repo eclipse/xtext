@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -211,7 +211,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	/**
 	 * Create a wizard able to create new projects with initial content based on template definitions.
-	 * Supported options: 'generate', 'pluginProject'.
+	 * Supported options: 'generate', 'generateToolbarButton', 'pluginProject'.
 	 */
 	def setProjectWizard(TemplateProjectWizardFragment fragment) {
 		this.projectWizard = fragment
@@ -219,7 +219,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	/**
 	 * Create a wizard able to create new files with initial content based on template definitions.
-	 * Supported options: 'generate'.
+	 * Supported options: 'generate', 'generateToolbarButton'.
 	 */
 	def setFileWizard(TemplateFileWizardFragment fragment) {
 		this.fileWizard = fragment
