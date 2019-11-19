@@ -1,6 +1,7 @@
 /.m2/
 /build/
 bin/
+bin-test/
 target/
 src-gen/
 *._trace
