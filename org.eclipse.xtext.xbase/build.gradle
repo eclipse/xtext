@@ -5,7 +5,6 @@ description = 'Reusable expression language that interoperates with Java.'
 
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
-	mwe2Compile project(':org.eclipse.xtext.generator')
 }
 
 // Include the xtext files from the main source set when executing the workflow
