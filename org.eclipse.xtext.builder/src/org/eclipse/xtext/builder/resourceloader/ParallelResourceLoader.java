@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.annotations.Beta;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
@@ -129,7 +130,8 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 		return super.loadResource(uri, localResourceSet, parentResourceSet);
 	}
 
-	private class ParallelLoadOperation implements LoadOperation {
+	@Beta
+	public class ParallelLoadOperation implements LoadOperation {
 
 		private final BlockingQueue<Triple<URI, Resource, Throwable>> resourceQueue;
 		private final ThreadLocal<ResourceSet> resourceSetProvider;

@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
+import com.google.common.annotations.Beta;
+
 /**
  * @author Lieven Lemiengre - Initial contribution and API
  * @author Sebastian Zarnekow - Use IProject aware IResourceSetProvider instead of Provider<XtextResourceSet>
@@ -44,7 +46,8 @@ public abstract class AbstractResourceLoader implements IResourceLoader {
 		return localResourceSet.getResource(uri, true);
 	}
 
-	protected class CheckedLoadOperation implements LoadOperation {
+	@Beta
+	public class CheckedLoadOperation implements LoadOperation {
 
 		private final LoadOperation parent;
 		private boolean isLoading = false;
