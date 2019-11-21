@@ -40,6 +40,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
+@SuppressWarnings("deprecation")
 public class EMFBasedPersister implements PersistedStateProvider {
 
 	private final static Logger log = Logger.getLogger(EMFBasedPersister.class);

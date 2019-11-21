@@ -31,7 +31,8 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
-@ProjectTemplate(label = "Mrs Grant\'s Secret Compartments", icon = "project_template.png", description = "<p><b>Mrs Grant\'s Secret Compartments</b></p>\r\n<p>A Fowler Statemachine representing Mrs Grant\'s Secret Compartments.</p><p><img href=\"mrsgrantssecretcompartment.png\"/></p>")
+@ProjectTemplate(label = "Mrs Grant\'s Secret Compartments", icon = "project_template.png", description = ("<p><b>Mrs Grant\'s Secret Compartments</b></p>" + 
+  "<p>A Fowler Statemachine representing Mrs Grant\'s Secret Compartments.</p><p><img href=\"mrsgrantssecretcompartment.png\"/></p>"))
 @SuppressWarnings("all")
 public final class MrsGrantsSecretCompartmentsProject extends AbstractProjectTemplate {
   private final BooleanTemplateVariable advanced = this.check("Advanced:", false);

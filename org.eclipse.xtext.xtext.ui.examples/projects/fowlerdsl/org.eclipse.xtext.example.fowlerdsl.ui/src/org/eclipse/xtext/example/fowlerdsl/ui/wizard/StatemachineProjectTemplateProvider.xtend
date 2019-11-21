@@ -35,8 +35,8 @@ class StatemachineProjectTemplateProvider implements IProjectTemplateProvider {
 	}
 }
 
-@ProjectTemplate(label="Mrs Grant's Secret Compartments", icon="project_template.png", description="<p><b>Mrs Grant's Secret Compartments</b></p>
-<p>A Fowler Statemachine representing Mrs Grant's Secret Compartments.</p><p><img href=\"mrsgrantssecretcompartment.png\"/></p>")
+@ProjectTemplate(label="Mrs Grant's Secret Compartments", icon="project_template.png", description="<p><b>Mrs Grant's Secret Compartments</b></p>" +
+"<p>A Fowler Statemachine representing Mrs Grant's Secret Compartments.</p><p><img href=\"mrsgrantssecretcompartment.png\"/></p>")
 final class MrsGrantsSecretCompartmentsProject {
 
 	val advanced = check("Advanced:", false)

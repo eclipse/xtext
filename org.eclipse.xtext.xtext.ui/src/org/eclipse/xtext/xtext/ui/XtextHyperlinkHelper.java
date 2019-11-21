@@ -76,13 +76,18 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 				URI uri = uriConverter.normalize(EcoreUtil.getURI(overwritten));
 
 				XtextHyperlink result = getHyperlinkProvider().get();
-				result.setHyperlinkRegion(toRegion(nameLocation));
+				deprecatedSetRegion(result, toRegion(nameLocation));
 				result.setURI(uri);
 				result.setHyperlinkText(hyperlinkText);
 				result.setTypeLabel("Go To Base");
 				acceptor.accept(result);
 			}
 		}
+	}
+
+	@Deprecated
+	private void deprecatedSetRegion(XtextHyperlink link, Region region) {
+		link.setHyperlinkRegion(region);
 	}
 	
 	protected Region toRegion(ITextRegion location) {
