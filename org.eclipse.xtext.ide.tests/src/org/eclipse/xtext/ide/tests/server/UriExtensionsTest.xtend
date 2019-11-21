@@ -276,6 +276,20 @@ class UriExtensionsTest {
 		var uri = createFileURI(directory.absolutePath + "/").toUriString.toUri
 		assertTrue(uri.isPrefix)
 	}
+	
+	@Test
+	def void test_withEmptyAuthority () {
+		val uriWithoutAuthority = org.eclipse.emf.common.util.URI.createURI("file:/path/to/resource/")
+		assertNull(uriWithoutAuthority.authority)
+		val uriWithEmptyAuthority = uriWithoutAuthority.withEmptyAuthority
+		assertNotSame(uriWithoutAuthority, uriWithEmptyAuthority)
+		assertEquals("Returned URI is expected to have an empty instead of null authority", "", uriWithEmptyAuthority.authority)
+		
+		val uriWithAuthority = org.eclipse.emf.common.util.URI.createURI("https://xtext.org/path/to/resource/")
+		assertNotNull(uriWithAuthority.authority)
+		assertEquals("xtext.org", uriWithAuthority.authority)
+		assertSame(uriWithAuthority, uriWithAuthority.withEmptyAuthority)
+	}
 
 	private def createTempDir(String prefix) {
 		return Files.createTempDirectory(tempDirPath, prefix);

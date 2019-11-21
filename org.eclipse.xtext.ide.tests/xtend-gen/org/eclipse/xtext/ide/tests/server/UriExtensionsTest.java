@@ -260,6 +260,19 @@ public class UriExtensionsTest {
     Assert.assertTrue(uri.isPrefix());
   }
   
+  @Test
+  public void test_withEmptyAuthority() {
+    final URI uriWithoutAuthority = URI.createURI("file:/path/to/resource/");
+    Assert.assertNull(uriWithoutAuthority.authority());
+    final URI uriWithEmptyAuthority = this._uriExtensions.withEmptyAuthority(uriWithoutAuthority);
+    Assert.assertNotSame(uriWithoutAuthority, uriWithEmptyAuthority);
+    Assert.assertEquals("Returned URI is expected to have an empty instead of null authority", "", uriWithEmptyAuthority.authority());
+    final URI uriWithAuthority = URI.createURI("https://xtext.org/path/to/resource/");
+    Assert.assertNotNull(uriWithAuthority.authority());
+    Assert.assertEquals("xtext.org", uriWithAuthority.authority());
+    Assert.assertSame(uriWithAuthority, this._uriExtensions.withEmptyAuthority(uriWithAuthority));
+  }
+  
   private Path createTempDir(final String prefix) {
     try {
       return Files.createTempDirectory(this.getTempDirPath(), prefix);
