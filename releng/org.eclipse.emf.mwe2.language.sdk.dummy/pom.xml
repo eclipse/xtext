@@ -10,5 +10,5 @@
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.eclipse.emf</groupId>
 	<artifactId>org.eclipse.emf.mwe2.language.sdk</artifactId>
-	<version>2.11.0.201906111547</version>
+	<version>2.11.1.v20191121-1148</version>
 </project>
