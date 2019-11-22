@@ -23,6 +23,11 @@ public class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
   
   private String genModel;
   
+  public TestsEMFGeneratorFragment() {
+    super();
+    this.setUpdateBuildProperties(false);
+  }
+  
   @Override
   public void setGenModel(final String genModel) {
     this.genModel = genModel;
