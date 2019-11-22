@@ -562,13 +562,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Provide the core grammar infrastructure, core framework and Language Server support</description>
   </project>
   <project name="lib"
@@ -641,13 +634,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Libraries for Xbase and Xtend</description>
   </project>
   <project name="extras"
@@ -718,13 +704,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Additional editor-independent features, mostly Java support</description>
   </project>
   <project name="eclipse"
@@ -1175,13 +1154,6 @@
         vm="true"/>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Plug-ins for Eclipse</description>
   </project>
   <project name="web"
@@ -1254,13 +1226,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Support for Orion, Ace and CodeMirror</description>
   </project>
   <project name="maven"
@@ -1317,13 +1282,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>Support for Maven</description>
   </project>
   <project name="xtend"
@@ -1517,13 +1475,6 @@
     </setupTask>
     <stream
         name="master"/>
-    <stream
-        name="maintenance_2.11">
-      <setupTask
-          xsi:type="setup:VariableTask"
-          name="p2.xtext"
-          value="${p2.xtext.releases}/2.11.0"/>
-    </stream>
     <description>The Xtend language</description>
   </project>
   <project name="issues"
