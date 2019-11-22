@@ -21,6 +21,11 @@ class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
 	
 	String genModel
 	
+	new() {
+		super()
+		updateBuildProperties = false
+	}
+	
 	override setGenModel(String genModel) {
 		this.genModel = genModel
 		super.setGenModel(genModel)
