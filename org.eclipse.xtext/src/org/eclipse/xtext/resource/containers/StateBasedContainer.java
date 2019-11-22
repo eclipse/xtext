@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
