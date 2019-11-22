@@ -94,7 +94,7 @@ Workflow {
 			}
 			
 			// testing API
-			fragment = junit.Junit4Fragment2 {
+			fragment = junit.JUnitFragment {
 				generateStub = false
 			}
 			
