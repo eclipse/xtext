@@ -52,7 +52,7 @@ Workflow {
 			fragment = @TestLanguagesFragments auto-inject {
 				generateStub = true
 			}
-			fragment = junit.Junit4Fragment2 {
+			fragment = junit.JUnitFragment {
 				generateStub = false
 			}
 		}

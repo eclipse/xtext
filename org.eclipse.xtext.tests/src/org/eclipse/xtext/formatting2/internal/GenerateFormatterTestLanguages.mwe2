@@ -50,14 +50,14 @@ Workflow {
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {
+			fragment = junit.JUnitFragment {
 				generateStub = false
 			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {
+			fragment = junit.JUnitFragment {
 				generateStub = false
 			}
 		}
