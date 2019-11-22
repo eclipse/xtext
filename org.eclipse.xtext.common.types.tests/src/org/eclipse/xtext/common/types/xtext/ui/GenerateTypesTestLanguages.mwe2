@@ -51,7 +51,7 @@ Workflow {
     		referencedResource = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
     		
 			fragment = @CommonTestLanguagesFragments {}
-			fragment = junit.Junit4Fragment2 {
+			fragment = junit.JUnitFragment {
 				useDeprecatedClasses = false
 				generateStub = false
 			}

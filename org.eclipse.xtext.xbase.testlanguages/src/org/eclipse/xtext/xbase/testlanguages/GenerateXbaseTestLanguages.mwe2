@@ -73,7 +73,7 @@ Workflow {
     		fragment = formatting.Formatter2Fragment2 {
     			generateStub = false
 			}
-    		fragment = junit.Junit4Fragment2 {
+    		fragment = junit.JUnitFragment {
     			generateStub = false
     			useDeprecatedClasses = false
     		}
@@ -110,7 +110,7 @@ Workflow {
 			}
     		fragment = exporting.QualifiedNamesFragment2 {}
     		fragment = builder.BuilderIntegrationFragment2 {}
-    		fragment = junit.Junit4Fragment2 {
+    		fragment = junit.JUnitFragment {
     			generateStub = false
     			useDeprecatedClasses = false
     		}
@@ -149,7 +149,7 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment2 {}
     		fragment = builder.BuilderIntegrationFragment2 {}
     		fragment = generator.GeneratorFragment2 {}
-    		fragment = junit.Junit4Fragment2 {
+    		fragment = junit.JUnitFragment {
     			generateStub = false
     			useDeprecatedClasses = false
     		}
