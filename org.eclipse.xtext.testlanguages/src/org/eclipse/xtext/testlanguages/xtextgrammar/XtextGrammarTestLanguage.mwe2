@@ -62,7 +62,7 @@ XtextGeneratorLanguage {
 	// provides a compare view
 	fragment = ui.compare.CompareFragment2 auto-inject {}
 	
-	fragment = junit.Junit4Fragment2 auto-inject {
+	fragment = junit.JUnitFragment auto-inject {
 		skipXbaseTestingPackage = true
 	}
 }	
