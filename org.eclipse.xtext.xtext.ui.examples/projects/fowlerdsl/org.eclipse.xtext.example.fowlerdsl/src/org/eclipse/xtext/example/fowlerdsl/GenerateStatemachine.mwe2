@@ -42,9 +42,6 @@ Workflow {
 			name = "org.eclipse.xtext.example.fowlerdsl.Statemachine"
 			fileExtensions = "statemachine"
 
-			fileWizard = {
-				generate = true
-			}
 			formatter = {
 				generateStub = true
 				generateXtendStub = true
@@ -52,15 +49,20 @@ Workflow {
 			generator = {
 				generateXtendStub = true
 			}
-			projectWizard = {
-				generate = true
-			}
 			serializer = {
 				generateStub = false
 			}
 			validator = {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 				generateDeprecationValidation = false
+			}
+			projectWizard = {
+				generate = true
+				generateToolbarButton = true
+			}
+			fileWizard = {
+				generate = true
+				generateToolbarButton = true
 			}
 		}
 	}

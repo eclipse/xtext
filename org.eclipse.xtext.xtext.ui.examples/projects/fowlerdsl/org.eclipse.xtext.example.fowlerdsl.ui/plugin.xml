@@ -452,6 +452,28 @@
 		</perspectiveExtension>
 	</extension>
 	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			allPopups="false"
+			locationURI="toolbar:org.eclipse.ui.main.toolbar">
+			<toolbar
+				id="org.eclipse.xtext.example.fowlerdsl.ui.toolbar">
+				<!--
+					For some reason the tooltip is not shown when hovering over the toolbar button
+					See also https://www.eclipse.org/forums/index.php/t/1079111/
+				-->
+				<command
+					commandId="org.eclipse.ui.newWizard"
+					tooltip="Create a new Statemachine project">
+					<parameter
+						name="newWizardId"
+						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard">
+					</parameter>
+				</command>
+			</toolbar>
+		</menuContribution>
+	</extension>
+	<extension
 		point="org.eclipse.ui.newWizards">
 		<category id="org.eclipse.xtext.example.fowlerdsl.ui.category" name="Statemachine">
 		</category>
@@ -492,29 +514,7 @@
 				-->
 				<command
 					commandId="org.eclipse.ui.newWizard"
-					tooltip="Create a statemachine project">
-					<parameter
-						name="newWizardId"
-						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewProjectWizard">
-					</parameter>
-				</command>
-			</toolbar>
-		</menuContribution>
-	</extension>
-	<extension
-		point="org.eclipse.ui.menus">
-		<menuContribution
-			allPopups="false"
-			locationURI="toolbar:org.eclipse.ui.main.toolbar">
-			<toolbar
-				id="org.eclipse.xtext.example.fowlerdsl.ui.toolbar">
-				<!--
-					For some reason the tooltip is not shown when hovering over the toolbar button
-					See also https://www.eclipse.org/forums/index.php/t/1079111/
-				-->
-				<command
-					commandId="org.eclipse.ui.newWizard"
-					tooltip="Create a statemachine file">
+					tooltip="Create a new Statemachine file">
 					<parameter
 						name="newWizardId"
 						value="org.eclipse.xtext.example.fowlerdsl.ui.wizard.StatemachineNewFileWizard">
