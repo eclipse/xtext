@@ -22,6 +22,7 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
@@ -31,11 +32,10 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQuality
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter
-import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	@Inject @Accessors(PROTECTED_GETTER) AntlrToolFacade antlrTool
@@ -169,16 +169,23 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFra
 		}
 	}
 
-	def protected improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
-		var lexerContent = fsa.readTextFile(lexer.javaPath).toString
-		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, options)
-		fsa.generateFile(lexer.javaPath, lexerContent)
-
+	def protected void improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer, TypeReference parser) {
+		improveLexerCodeQuality(fsa, lexer)
+		improveParserCodeQuality(fsa, parser)
+	}
+	
+	def protected void improveParserCodeQuality(IXtextGeneratorFileSystemAccess fsa, TypeReference parser) {
 		var parserContent = fsa.readTextFile(parser.javaPath).toString
 		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
 		parserContent = codeQualityHelper.removeDuplicateDFAs(parserContent, options)
 		fsa.generateFile(parser.javaPath, parserContent)
+	}
+	
+	def protected void improveLexerCodeQuality(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer) {
+		var lexerContent = fsa.readTextFile(lexer.javaPath).toString
+		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, options)
+		fsa.generateFile(lexer.javaPath, lexerContent)
 	}
 	
 	def protected void cleanupLexerTokensFile(AntlrGrammar lexerGrammar, KeywordHelper helper, IXtextGeneratorFileSystemAccess fsa) {
