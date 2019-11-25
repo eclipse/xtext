@@ -272,6 +272,25 @@ spec:
         } // script
       } // steps
     } // stage
+
+    stage('Prepare Next Xtext Version') {
+      when {
+        expression { params.RELEASE_TYPE == 'GA' }
+      }
+      steps {
+        script {
+          env.XTEXT_VERSION=sh returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/publisher.properties version'
+          env.NEW_XTEXT_VERSION = getNewXtextVersion(env.XTEXT_VERSION, "minor")
+          echo "Triggering Xtext version update ${env.XTEXT_VERSION} -> ${env.NEW_XTEXT_VERSION}"
+          build job: 'releng/bot-updates',
+            parameters: [
+              string(name: 'UPDATE_TYPE', value: "XTEXT_VERSION"),
+              string(name: 'UPDATE_VALUE', value: "${env.NEW_XTEXT_VERSION}"),
+            ],
+          wait: false // Do not fail if releng/release-simrel-update fails, so we only need to rebuild downstream
+        } // script
+      } // steps
+    } // stage
   } // END stages
 
   post {
@@ -313,4 +332,24 @@ spec:
     }
   }
 
+}
+
+/**
+ * Takes a version string and increments a segment of it by 1
+ * @param version Version in format MAJOR.MINOR.MICRO
+ * @param segmentToIncrement One of 'major','minor','micro'
+ */
+def getNewXtextVersion (String version, String segmentToIncrement) {
+    String[] segments = version.split("\\.")
+    int major = Integer.parseInt(segments[0])
+    int minor = Integer.parseInt(segments[1])
+    int micro = Integer.parseInt(segments[2])
+    if ("major".equals(segmentToIncrement)) {
+        major++
+    } else if ("minor".equals(segmentToIncrement)) {
+        minor++
+    } else if ("micro".equals(segmentToIncrement)) {
+        micro++
+    }
+    return major + "." + minor + "." + micro
 }
