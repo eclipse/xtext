@@ -5432,4 +5432,5 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
 }

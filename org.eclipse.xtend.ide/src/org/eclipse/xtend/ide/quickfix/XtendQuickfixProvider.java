@@ -49,6 +49,8 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.ide.buildpath.Junit4LibClasspathAdder;
+import org.eclipse.xtend.ide.buildpath.Junit5LibClasspathAdder;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
@@ -134,6 +136,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Inject	private XtendLibClasspathAdder xtendLibAdder;
 	
+	@Inject private Junit4LibClasspathAdder junit4LibAdder;
+	
+	@Inject private Junit5LibClasspathAdder junit5LibAdder;
+	
 	@Inject private IJavaProjectProvider projectProvider;
 
 	@Inject private CreateXtendTypeQuickfixes createTypeQuickfixes;
@@ -174,9 +180,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			if(LINKING_ISSUE_CODES.contains(issue.getCode())){
 				List<IssueResolution> result = new ArrayList<IssueResolution>();
 				result.addAll(getResolutionsForLinkingIssue(issue));
-				return result;
-			} else
-				return super.getResolutions(issue);
+				if(!result.isEmpty())
+					return result;
+			}
+			
+			return super.getResolutions(issue);
 		} finally {
 			stopWatch.resetAndLog("#getResolutions");
 		}
@@ -200,6 +208,35 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		javaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createMemberQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
+	}
+	
+	@Fix(Diagnostic.LINKING_DIAGNOSTIC)
+	public void fixJunitNotOnClasspath(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		if (issue.getData().length != 0 && issue.getData()[0] != null) {
+			String type = issue.getData()[0];
+			
+			if (type.startsWith("org.junit.jupiter.")) {
+				acceptor.accept(issue, "Add JUnit 5 lib to classpath", "Add JUnit 5 lib to classpath", "julaunch.gif",
+						new ISemanticModification() {
+							@Override
+							public void apply(EObject element, IModificationContext context) throws Exception {
+								ResourceSet resourceSet = element.eResource().getResourceSet();
+								IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
+								junit5LibAdder.addLibsToClasspath(javaProject, new NullProgressMonitor());
+							}
+						});
+			} else if (type.startsWith("org.junit.")) {
+				acceptor.accept(issue, "Add JUnit 4 lib to classpath", "Add JUnit 4 lib to classpath", "julaunch.gif",
+						new ISemanticModification() {
+							@Override
+							public void apply(EObject element, IModificationContext context) throws Exception {
+								ResourceSet resourceSet = element.eResource().getResourceSet();
+								IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
+								junit4LibAdder.addLibsToClasspath(javaProject, new NullProgressMonitor());
+							}
+						});
+			}
+		}
 	}
 	
 	@Fix(IssueCodes.WRONG_FILE)
