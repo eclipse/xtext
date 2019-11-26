@@ -538,12 +538,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append(_xtextVersion, "\t");
       _builder.append("</xtextVersion>");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("<mwe2Version>");
-      String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
-      _builder.append(_mweVersion, "\t");
-      _builder.append("</mwe2Version>");
-      _builder.newLineIfNotEmpty();
+      {
+        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild) {
+          _builder.append("\t");
+          _builder.append("<mwe2Version>");
+          String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
+          _builder.append(_mweVersion, "\t");
+          _builder.append("</mwe2Version>");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("\t");
       _builder.append("<project.build.sourceEncoding>");
       Charset _encoding = this.getConfig().getEncoding();
@@ -563,8 +568,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</maven.compiler.target>");
       _builder.newLineIfNotEmpty();
       {
-        boolean _needsTychoBuild = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild) {
+        boolean _needsTychoBuild_1 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_1) {
           _builder.append("\t");
           _builder.append("<!-- Tycho settings -->");
           _builder.newLine();
@@ -652,8 +657,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("<build>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_1 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_1) {
+        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_2) {
           _builder.append("\t");
           _builder.append("<plugins>");
           _builder.newLine();
@@ -1217,8 +1222,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_2 = this.getConfig().needsTychoBuild();
-        boolean _not = (!_needsTychoBuild_2);
+        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
+        boolean _not = (!_needsTychoBuild_3);
         if (_not) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
@@ -1404,8 +1409,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</pluginExecution>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_3 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_3) {
+        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_4) {
           _builder.append("\t\t\t\t\t\t\t");
           _builder.append("<pluginExecution>");
           _builder.newLine();
@@ -1581,8 +1586,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</plugin>");
       _builder.newLine();
       {
-        boolean _needsTychoBuild_4 = this.getConfig().needsTychoBuild();
-        if (_needsTychoBuild_4) {
+        boolean _needsTychoBuild_5 = this.getConfig().needsTychoBuild();
+        if (_needsTychoBuild_5) {
           _builder.append("\t\t\t");
           _builder.append("<plugin>");
           _builder.newLine();
