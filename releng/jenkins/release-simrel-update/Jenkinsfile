@@ -32,8 +32,8 @@ pipeline {
   environment {
     GENIE_XTEXT_CREDENTIALS = '29d79994-c415-4a38-9ab4-7463971ba682'
     RELEASE_TYPE="$params.RELEASE_TYPE"
-    XTEXT_REPOSITORY_URL="$params.XTEXT_REPOSITORY_URL"
-    XTEXT_VERSION="$params.XTEXT_VERSION"
+    XTEXT_REPOSITORY_URL="${params.XTEXT_REPOSITORY_URL.trim()}"
+    XTEXT_VERSION="${params.XTEXT_VERSION.trim()}"
     GIT_USER_NAME="xtext-bot"
     GIT_USER_EMAIL="xtext-bot@eclipse.org"
   }
