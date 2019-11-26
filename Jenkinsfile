@@ -126,6 +126,18 @@ spec:
   post {
     success {
       archiveArtifacts artifacts: 'build/**'
+      script {
+        // For release builds trigger releng/sign-and-deploy
+        def RELEASE_TYPE = getReleaseType ()
+        if (RELEASE_TYPE != "Integration" ) {
+          build job: 'releng/sign-and-deploy',
+            parameters: [
+              string(name: 'RELEASE_TYPE', value: "${RELEASE_TYPE}"),
+              string(name: 'BRANCH_TO_DEPLOY', value: "${env.BRANCH_NAME}")
+            ],
+          wait: false
+        }
+      }
     }
     failure {
       archiveArtifacts artifacts: '**/target/work/data/.metadata/.log, **/hs_err_pid*.log'
@@ -163,5 +175,18 @@ spec:
         }
       }
     }
+  }
+}
+
+/**
+ * Determine the RELEASE_TYPE argument for downstream job releng/sign-and-deploy depending on current branch.
+ */
+def getReleaseType () {
+  if (env.BRANCH_NAME.startsWith("release_")) {
+    return "GA"
+  } else if (env.BRANCH_NAME.startsWith("milestone_")) {
+    return env.BRANCH_NAME.substring(env.BRANCH_NAME.lastIndexOf('.')+1)
+  } else {
+    return "Integration"
   }
 }
