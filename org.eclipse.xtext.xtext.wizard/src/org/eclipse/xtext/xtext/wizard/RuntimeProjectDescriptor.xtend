@@ -371,7 +371,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									<dependency>
 										<groupId>org.eclipse.emf</groupId>
 										<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-										<version>«config.xtextVersion.mweVersion»</version>
+										<version>${mwe2Version}</version>
 									</dependency>
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>

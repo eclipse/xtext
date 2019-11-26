@@ -141,8 +141,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.11.1/\"/>");
-    _builder.newLine();
+    _builder.append("<repository location=\"https://download.eclipse.org/modeling/emft/mwe/updates/releases/");
+    String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
+    _builder.append(_mweVersion, "\t\t\t");
+    _builder.append("/\"/>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("</location>");
     _builder.newLine();

@@ -203,6 +203,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			buildSection = '''
 				<properties>
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
+					<mwe2Version>«config.xtextVersion.mweVersion»</mwe2Version>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
 					<maven.compiler.source>«javaVersion»</maven.compiler.source>
 					<maven.compiler.target>«javaVersion»</maven.compiler.target>
