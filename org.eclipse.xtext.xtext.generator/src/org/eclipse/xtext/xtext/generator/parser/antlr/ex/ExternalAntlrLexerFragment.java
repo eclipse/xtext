@@ -18,6 +18,8 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AbstractAntlrGeneratorFrag
 import com.google.common.annotations.Beta;
 
 /**
+ * Use this fragment if you want to use an external lexer , e.g: in case the generated lexer has to be customized.
+ *
  * @since 2.20
  * @author dietrich - Initial contribution and API
  */
@@ -34,7 +36,6 @@ public class ExternalAntlrLexerFragment extends AbstractAntlrGeneratorFragment2 
 	
 	@Override
 	protected void doGenerate() {
-		// i am not sure when to generate what
 		if (runtime) {
 			StringConcatenationClient binding = new StringConcatenationClient() {
 				@Override
