@@ -878,11 +878,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t\t");
-          _builder.append("<version>");
-          String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
-          _builder.append(_mweVersion, "\t\t\t\t\t");
-          _builder.append("</version>");
-          _builder.newLineIfNotEmpty();
+          _builder.append("<version>${mwe2Version}</version>");
+          _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("</dependency>");

@@ -539,6 +539,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       _builder.append("</xtextVersion>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
+      _builder.append("<mwe2Version>");
+      String _mweVersion = this.getConfig().getXtextVersion().getMweVersion();
+      _builder.append(_mweVersion, "\t");
+      _builder.append("</mwe2Version>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
       _builder.append("<project.build.sourceEncoding>");
       Charset _encoding = this.getConfig().getEncoding();
       _builder.append(_encoding, "\t");
