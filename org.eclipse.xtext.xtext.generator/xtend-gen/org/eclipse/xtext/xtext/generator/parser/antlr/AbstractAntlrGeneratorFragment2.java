@@ -219,14 +219,22 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   }
   
   protected void improveCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer, final TypeReference parser) {
-    String lexerContent = fsa.readTextFile(lexer.getJavaPath()).toString();
-    lexerContent = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
-    fsa.generateFile(lexer.getJavaPath(), lexerContent);
+    this.improveLexerCodeQuality(fsa, lexer);
+    this.improveParserCodeQuality(fsa, parser);
+  }
+  
+  protected void improveParserCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser) {
     String parserContent = fsa.readTextFile(parser.getJavaPath()).toString();
     parserContent = this.codeQualityHelper.stripUnnecessaryComments(parserContent, this.options);
     parserContent = this.codeQualityHelper.removeDuplicateBitsets(parserContent, this.options);
     parserContent = this.codeQualityHelper.removeDuplicateDFAs(parserContent, this.options);
     fsa.generateFile(parser.getJavaPath(), parserContent);
+  }
+  
+  protected void improveLexerCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer) {
+    String lexerContent = fsa.readTextFile(lexer.getJavaPath()).toString();
+    lexerContent = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
+    fsa.generateFile(lexer.getJavaPath(), lexerContent);
   }
   
   protected void cleanupLexerTokensFile(final AntlrGrammar lexerGrammar, final KeywordHelper helper, final IXtextGeneratorFileSystemAccess fsa) {
