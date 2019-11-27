@@ -103,6 +103,7 @@
 		- Update the versions in the 
 		  `/org.eclipse.xtext.ide/META-INF/MANIFEST.MF` and 
 		  `/org.eclipse.xtext.ide.tests/META-INF/MANIFEST.MF` files.
+		- Update Oomph releng/org.eclipse.xtext.contributor/Xtext.setup
 		-->
 		<lsp4j-version>0.8.1</lsp4j-version>
 		<jdt.core-version>3.19.0</jdt.core-version>
