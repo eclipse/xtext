@@ -102,14 +102,14 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
   }
   
   private DiagnosticMessage handleUnresolvedFeatureCall(final ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context, final XAbstractFeatureCall featureCall, final String linkText) {
-    LightweightTypeReference recieverType = null;
+    LightweightTypeReference receiverType = null;
     String args = "";
     if ((context instanceof TypeAwareLinkingDiagnosticContext)) {
       final IResolvedTypes types = ((TypeAwareLinkingDiagnosticContext)context).getResolvedTypes();
       XExpression _syntacticReceiver = this._featureLinkHelper.getSyntacticReceiver(featureCall);
       boolean _tripleNotEquals = (_syntacticReceiver != null);
       if (_tripleNotEquals) {
-        recieverType = types.getActualType(this._featureLinkHelper.getSyntacticReceiver(featureCall));
+        receiverType = types.getActualType(this._featureLinkHelper.getSyntacticReceiver(featureCall));
       }
       final Function1<XExpression, LightweightTypeReference> _function = (XExpression it) -> {
         return types.getActualType(it);
@@ -142,12 +142,12 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     }
     _builder.append(" is undefined");
     String msg = _builder.toString();
-    if ((recieverType != null)) {
+    if ((receiverType != null)) {
       String _msg = msg;
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(" ");
       _builder_1.append("for the type ");
-      String _humanReadableName = recieverType.getHumanReadableName();
+      String _humanReadableName = receiverType.getHumanReadableName();
       _builder_1.append(_humanReadableName, " ");
       msg = (_msg + _builder_1);
     }

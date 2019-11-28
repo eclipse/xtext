@@ -70,12 +70,12 @@ class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagnosticMes
 
 	def private DiagnosticMessage handleUnresolvedFeatureCall(ILinkingDiagnosticContext context,
 		XAbstractFeatureCall featureCall, String linkText) {
-		var LightweightTypeReference recieverType = null
+		var LightweightTypeReference receiverType = null
 		var args = ""
 		if (context instanceof TypeAwareLinkingDiagnosticContext) {
 			val types = context.resolvedTypes
 			if (featureCall.syntacticReceiver !== null) {
-				recieverType = types.getActualType(featureCall.syntacticReceiver)
+				receiverType = types.getActualType(featureCall.syntacticReceiver)
 			}
 			args = featureCall.syntacticArguments.map[types.getActualType(it)].join(", ", [
 				if(it === null || any) "Object" else humanReadableName
@@ -85,8 +85,8 @@ class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagnosticMes
 		val orField = !featureCall.isExplicitOperationCallOrBuilderSyntax()
 
 		var msg = '''The method «IF (orField)»or field «linkText»«ELSE»«linkText»(«args»)«ENDIF» is undefined'''
-		if (recieverType !== null) {
-			msg += ''' for the type «recieverType.humanReadableName»'''
+		if (receiverType !== null) {
+			msg += ''' for the type «receiverType.humanReadableName»'''
 		}
 		if (featureCall instanceof XFeatureCall && linkText.length() > 0 && Character.isUpperCase(linkText.charAt(0)) &&
 			typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
