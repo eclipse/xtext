@@ -93,7 +93,12 @@ public class XtextVersion {
 	}
 
 	private static String readVersionFromManifest() {
-		URL baseURL = XtextVersion.Plugin.INSTANCE.getBaseURL();
+		URL baseURL = null;
+		try {
+			baseURL = XtextVersion.Plugin.INSTANCE.getBaseURL();
+		} catch (Exception e) {
+			return null;
+		}
 		try (InputStream is = new URL (baseURL + "META-INF/MANIFEST.MF").openStream()) {
 			Manifest manifest = new Manifest(is);
 			String version = manifest.getMainAttributes().getValue("Maven-Version");
