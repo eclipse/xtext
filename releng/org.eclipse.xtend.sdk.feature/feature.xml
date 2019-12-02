@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtend.sdk"
       label="%featureName"
-      version="2.20.0.qualifier"
+      version="2.21.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtend.ide"
       license-feature="org.eclipse.license"
@@ -26,12 +26,12 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.ui" version="2.20.0" match="equivalent"/>
-      <import feature="org.eclipse.xtext.xbase.lib" version="2.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib" version="2.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro" version="2.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.source" version="2.20.0" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.20.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="2.21.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.xbase.lib" version="2.21.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib" version="2.21.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro" version="2.21.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.source" version="2.21.0" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.21.0" match="equivalent"/>
       <import plugin="com.google.guava" version="27.1.0" match="compatible"/>
       <import plugin="io.github.classgraph" version="4.8.35" match="compatible"/>
       <import plugin="org.apache.commons.lang"/>

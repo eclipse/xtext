@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature id="org.eclipse.xtext.sdk" version="2.20.0.qualifier">
+   <feature id="org.eclipse.xtext.sdk" version="2.21.0.qualifier">
       <category name="Xtext"/>
    </feature>
-   <feature id="org.eclipse.xtend.sdk" version="2.20.0.qualifier">
+   <feature id="org.eclipse.xtend.sdk" version="2.21.0.qualifier">
       <category name="Xtext"/>
    </feature>
    <bundle id="com.google.guava" version="27.1.0.qualifier"/>
