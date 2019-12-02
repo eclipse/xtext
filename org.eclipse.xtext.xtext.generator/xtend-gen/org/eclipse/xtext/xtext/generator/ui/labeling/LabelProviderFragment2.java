@@ -384,7 +384,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("//\tString text(IEObjectDescription ele) {");
+        _builder.append("//\tpublic String text(IEObjectDescription ele) {");
         _builder.newLine();
         _builder.append("//\t\treturn ele.getName().toString();");
         _builder.newLine();
@@ -392,7 +392,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("//\t ");
         _builder.newLine();
-        _builder.append("//\tString image(IEObjectDescription ele) {");
+        _builder.append("//\tpublic String image(IEObjectDescription ele) {");
         _builder.newLine();
         _builder.append("//\t\treturn ele.getEClass().getName() + \".gif\";");
         _builder.newLine();

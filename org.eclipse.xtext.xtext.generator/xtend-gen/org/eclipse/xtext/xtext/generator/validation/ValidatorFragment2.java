@@ -306,7 +306,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("//\tpublic static final INVALID_NAME = \'invalidName\'");
+        _builder.append("//\tpublic static final String INVALID_NAME = \"invalidName\";");
         _builder.newLine();
         _builder.append("//");
         _builder.newLine();

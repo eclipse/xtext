@@ -194,7 +194,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			 */
 			public class «grammar.validatorClass.simpleName» extends «grammar.abstractValidatorClass» {
 				
-			//	public static final INVALID_NAME = 'invalidName'
+			//	public static final String INVALID_NAME = "invalidName";
 			//
 			//	@Check
 			//	public void checkGreetingStartsWithCapital(Greeting greeting) {
