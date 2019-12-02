@@ -35,6 +35,12 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>r201912</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-r201912</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
 			<id>r201909</id>
 			<properties>
 				<target-platform-classifier>org.eclipse.xtext.target-r201909</target-platform-classifier>
