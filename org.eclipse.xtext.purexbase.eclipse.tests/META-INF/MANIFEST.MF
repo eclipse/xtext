@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pure Xbase Plugin Tests
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.20.0.qualifier
+Bundle-Version: 2.21.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.eclipse.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,
