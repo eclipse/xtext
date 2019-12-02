@@ -279,7 +279,7 @@ spec:
       }
       steps {
         script {
-          env.XTEXT_VERSION=sh returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/publisher.properties version'
+          env.XTEXT_VERSION=sh (returnStdout: true, script: '$SCRIPTS/get_property.sh publishing/build-result/publisher.properties version').trim()
           env.NEW_XTEXT_VERSION = getNewXtextVersion(env.XTEXT_VERSION, "minor")
           echo "Triggering Xtext version update ${env.XTEXT_VERSION} -> ${env.NEW_XTEXT_VERSION}"
           build job: 'releng/bot-updates',
