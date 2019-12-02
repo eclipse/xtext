@@ -52,7 +52,7 @@ If you already have a project, you need to add the Xtend library:
 <dependency>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.lib</artifactId>
-  <version>2.20.0</version>
+  <version>2.21.0</version>
 </dependency>
 ```
 
@@ -62,7 +62,7 @@ and the Xtend compiler plugin:
 <plugin>
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>xtend-maven-plugin</artifactId>
-  <version>2.20.0</version>
+  <version>2.21.0</version>
   <executions>
     <execution>
       <goals>
@@ -90,7 +90,7 @@ plugins {
 repositories.jcenter()
 
 dependencies {
-  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.20.0'
+  compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.21.0'
 }
 ```
 
