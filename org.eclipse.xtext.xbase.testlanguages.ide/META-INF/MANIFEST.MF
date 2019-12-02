@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Xtext Testlanguages for UI and Runtime - Generic Ide
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.20.0.qualifier
+Bundle-Version: 2.21.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase.testlanguages.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.xbase.testlanguages,
