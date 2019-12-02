@@ -94,10 +94,10 @@ There are some limitations to the concrete syntax validator which result from th
 
 To use concrete syntax validation you can let Guice inject an instance of [IConcreteSyntaxValidator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java) and use it directly. Furthermore, there is an [adapter]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java) which allows to use the concrete syntax validator as an [EValidator]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java). You can, for example, enable it in your runtime module, by adding:
 
-```xtend
+```java
 @SingletonBinding(eager = true)
-def Class<? extends ConcreteSyntaxEValidator> bindConcreteSyntaxEValidator() {
-    return ConcreteSyntaxEValidator
+public Class<? extends ConcreteSyntaxEValidator> bindConcreteSyntaxEValidator() {
+    return ConcreteSyntaxEValidator.class;
 }
 ```
 
@@ -113,14 +113,14 @@ The Check annotation has a parameter that can be used to declare when a check sh
 
 All in all this is very similar to how JUnit works. Here is an example written in Xtend:
 
-```xtend
-class DomainmodelValidator extends AbstractDomainmodelValidator {
+```java
+public class DomainmodelValidator extends AbstractDomainmodelValidator {
     
     @Check
-    def void checkNameStartsWithCapital(Entity entity) {
-        if (!Character.isUpperCase(entity.name.charAt(0))) {
+    public void checkNameStartsWithCapital(Entity entity) {
+        if (!Character.isUpperCase(entity.getName().charAt(0))) {
             warning("Name should start with a capital", 
-                DomainmodelPackage.Literals.TYPE__NAME)
+                DomainmodelPackage.Literals.TYPE__NAME);
         }
     }
 }
@@ -128,18 +128,21 @@ class DomainmodelValidator extends AbstractDomainmodelValidator {
 
 You can use the [IResourceValidator]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/validation/IResourceValidator.java) to validate a given resource programmatically. Example:
 
-```xtend
-@Inject IResourceValidator resourceValidator
+```java
+@Inject IResourceValidator resourceValidator;
 
-def void checkResource(Resource resource) {
-    val issues = resourceValidator.validate(resource,
-            CheckMode.ALL, CancelIndicator.NullImpl)
-    for (issue: issues) {
-        switch issue.severity {
+public void checkResource(Resource resource) {
+    List<Issue> issues = resourceValidator.validate(resource,
+            CheckMode.ALL, CancelIndicator.NullImpl);
+    for (Issue issue: issues) {
+        switch (issue.getSeverity()) {
             case ERROR:
-                println("ERROR: " + issue.message)
+                System.out.println("ERROR: " + issue.getMessage());
+                break;
             case WARNING:
-                println("WARNING: " + issue.message)
+                System.out.println("WARNING: " + issue.getMessage());
+                break;
+            default: // do nothing
         }
     }
 }
@@ -230,20 +233,22 @@ Element:
 
 ```
 
-If you want to define the scope for the *superElement* cross-reference, the following Xtend code is one way to go.
+If you want to define the scope for the *superElement* cross-reference, the following Java code is one way to go.
 
-```xtend
-override getScope(EObject context, EReference reference) {
+
+```java
+@Override
+public IScope getScope(EObject context, EReference reference) {
     // We want to define the Scope for the Element's superElement cross-reference
     if (context instanceof Element
             && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
         // Collect a list of candidates by going through the model
         // EcoreUtil2 provides useful functionality to do that
         // For example searching for all elements within the root Object's tree
-        val rootElement = EcoreUtil2.getRootContainer(context)
-        val candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element)
+        EObject rootElement = EcoreUtil2.getRootContainer(context);
+        List<Element> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
         // Create IEObjectDescriptions and puts them into an IScope instance
-        return Scopes.scopeFor(candidates)
+        return Scopes.scopeFor(candidates);
     }
     return super.getScope(context, reference);
 }
@@ -255,18 +260,20 @@ The [MapBasedScope]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xt
 
 Coming back to our example, one possible scenario for the FilteringScope could be to exclude the context element from the list of candidates as it should not be a super-element of itself.
 
-```xtend
-override getScope(EObject context, EReference reference) {
-    if (context instanceof Element
-            && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
-        val rootElement = EcoreUtil2.getRootContainer(context)
-        val candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element)
-        val existingScope = Scopes.scopeFor(candidates)
-        // Scope that filters out the context element from the candidates list
-        return new FilteringScope(existingScope, [getEObjectOrProxy != context])
+
+```java
+    @Override
+    public IScope getScope(EObject context, EReference reference) {
+        if (context instanceof Element
+                && reference == MyDslPackage.Literals.ELEMENT__SUPER_ELEMENT) {
+            EObject rootElement = EcoreUtil2.getRootContainer(context);
+            List<Element> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element.class);
+            IScope existingScope = Scopes.scopeFor(candidates);
+            // Scope that filters out the context element from the candidates list
+            return new FilteringScope(existingScope, (e) -> !Objects.equal(e.getEObjectOrProxy(), context));
+        }
+        return super.getScope(context, reference);
     }
-    return super.getScope(context, reference);
-}
 ```
 
 ### Global Scopes and Resource Descriptions {#global-scopes}
@@ -363,17 +370,17 @@ So for an element to be referable, its resource must be on the class path of the
 
 As this strategy allows to reuse a lot of nice Java things like jars, OSGi, maven, etc. it is part of the default: You should not have to reconfigure anything to make it work. Nevertheless, if you messed something up, make sure you bind
 
-```xtend
-def Class<? extends IContainer.Manager> bindIContainer$Manager() {
-    return StateBasedContainerManager
+```java
+public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+    return StateBasedContainerManager.class;
 }
 ```
 
 in the runtime module and
 
-```xtend
-def Provider<IAllContainersState> provideIAllContainersState() {
-    return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState()
+```java
+public Provider<IAllContainersState> provideIAllContainersState() {
+    return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
 }
 ```
 
@@ -385,9 +392,9 @@ If the class path based mechanism doesn't work for your case, Xtext offers an al
 
 In this case, your runtime module should use the StateBasedContainerManager as shown above and the Eclipse UI module should bind
 
-```xtend
-def Provider<IAllContainersState> provideIAllContainersState() {
-    return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState()
+```java
+public Provider<IAllContainersState> provideIAllContainersState() {
+    return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 }
 ```
 
@@ -494,18 +501,18 @@ package bar {
 
 Value converters are registered to convert the parsed text into a data type instance and vice versa. The primary hook is the [IValueConverterService]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java) and the concrete implementation can be registered via the runtime [Guice module](302_configuration.html#guicemodules). Simply override the corresponding binding in your runtime module like shown in this example:
 
-```xtend
-override Class<? extends IValueConverterService> bindIValueConverterService() {
-    return MySpecialValueConverterService
+```java
+public Class<? extends IValueConverterService> bindIValueConverterService() {
+    return MySpecialValueConverterService.class;
 }
 ```
 
 The easiest way to register additional value converters is to make use of [AbstractDeclarativeValueConverterService]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/conversion/impl/AbstractDeclarativeValueConverterService.java), which allows to declaratively register an [IValueConverter]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverter.java) by means of an annotated method.
 
-```xtend
+```java
 @ValueConverter(rule = "MyRuleName")
-def IValueConverter<MyDataType> getMyRuleNameConverter() {
-    return new MyValueConverterImplementation()
+public IValueConverter<MyDataType> getMyRuleNameConverter() {
+    return new MyValueConverterImplementation();
 }
 ```
 
@@ -697,11 +704,12 @@ In the Eclipse UI scenario, when there is a workspace, users will expect the enc
 
 Unless you want to enforce a uniform encoding for all models of your language, we advise to override the runtime service only. It is bound in the runtime module using the binding annotation [@Runtime]({{site.src.xtext_core}}/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java):
 
-```xtend
-override configureRuntimeEncodingProvider(Binder binder) {
-    binder.bind(IEncodingProvider)
-          .annotatedWith(DispatchingProvider.Runtime)
-          .to(MyEncodingProvider)
+```java
+@Override
+public void configureRuntimeEncodingProvider(Binder binder) {
+    binder.bind(IEncodingProvider.class)
+        .annotatedWith(DispatchingProvider.Runtime.class)
+        .to(MyEncodingProvider.class);
 }
 ```
 
@@ -815,18 +823,19 @@ If in addition to the main language your tests require using other languages for
 
 As the default generated [IInjectorProvider]({{site.src.xtext_core}}/org.eclipse.xtext.testing/src/org/eclipse/xtext/testing/IInjectorProvider.java) of your main language (e.g. DomainmodelInjectorProvider) does not know about any other dependent languages, they must be initialized explicitly. The recommended pattern for this is to create a new subclass of the generated *MyLanguageInjectorProvider* in your *\*.test* project and make sure the dependent language is intizialized properly. Then you can use this new injector provider instead of the original one in your test's *@InjectWith*:
 
-```xtend
-class MyLanguageWithDependenciesInjectorProvider extends MyLanguageInjectorProvider {
-    override internalCreateInjector() {
-        MyOtherLangLanguageStandaloneSetup.doSetup
-        return super.internalCreateInjector
+```java
+public class MyLanguageWithDependenciesInjectorProvider extends MyLanguageInjectorProvider {
+    @Override
+    protected Injector internalCreateInjector() {
+        MyOtherLangLanguageStandaloneSetup.doSetup();
+        return super.internalCreateInjector();
     }
 }
 
-// @RunWith(XtextRunner) // JUnit 4
-@ExtendWith(InjectionExtension) // JUnit 5
-@InjectWith(MyLanguageWithDependenciesInjectorProvider)
-class YourTest {
+// @RunWith(XtextRunner.class) // JUnit 4
+@ExtendWith(InjectionExtension.class) // JUnit 5
+@InjectWith(MyLanguageWithDependenciesInjectorProvider.class)
+public class YourTest {
     ...
 }
 ```
@@ -835,13 +844,13 @@ You should not put injector creation for referenced languages in your standalone
 
 You may also need to initialize imported ecore models that are not generated by your Xtext language. This should be done by using an explicit *MyModelPackage.eINSTANCE.getName();* in the *doSetup()* method of your respective language's StandaloneSetup class. Note that it is strongly recommended to follow this pattern instead of just using *@Before* methods in your \*Test class, as due to internal technical reasons that won't work anymore as soon as you have more than just one *@Test*.
 
-```xtend
-class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerated {
+```java
+public class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerated {
 
-    def static void doSetup() {
+    public static void doSetup() {
         if (!EPackage.Registry.INSTANCE.containsKey(MyPackage.eNS_URI))
             EPackage.Registry.INSTANCE.put(MyPackage.eNS_URI, MyPackage.eINSTANCE);
-        new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
+        new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
     }
 
 }
