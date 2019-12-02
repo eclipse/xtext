@@ -1,5 +1,7 @@
 # Maintenance Tasks
 
+This document describes things that need to be done during a simrel.
+
 ## Bump versions
 
 TODO
