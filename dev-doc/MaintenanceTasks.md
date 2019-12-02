@@ -33,7 +33,12 @@ We offer for our `xtext-eclipse` and `xtext-xtend` the possibility to build agai
 
 ## Update latest target platform
 
-TODO
+We build `xtext-eclipse` and `xtext-xtend` against the latest i-builds of platform and the latest milestone of the rest of the simrel. Thus with every version we have to adapt the target platforms.
+
+* In [xtext-eclipse](https://github.com/eclipse/xtext-eclipse)
+  * In `releng/org.eclipse.xtext.target/org.eclipse.xtext.target-latest.target` use the latest i-build `https://download.eclipse.org/eclipse/updates/<number>-I-builds` and simrel `https://download.eclipse.org/releases/<version>`
+* In [xtext-xtend](https://github.com/eclipse/xtext-xtend)
+  * In  `releng/org.eclipse.xtend.target/org.eclipse.xtend.target-latest.target` use the latest i-build `https://download.eclipse.org/eclipse/updates/<number>-I-builds` and simrel `https://download.eclipse.org/releases/<version>`
 
 ## Update Orbit
 
