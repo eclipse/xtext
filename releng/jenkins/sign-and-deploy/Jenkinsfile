@@ -291,6 +291,30 @@ spec:
         } // script
       } // steps
     } // stage
+
+    stage('Remove Release Branches') {
+      when {
+        allOf {
+          expression { params.RELEASE_TYPE != 'Integration' }
+          expression { params.BRANCH_TO_DEPLOY != 'master' }
+        }
+      }
+      steps {
+        // Need to be in any git dir for this to work
+        dir('umbrella') {
+          sh '''
+            git push git@github.com:eclipse/xtext-lib.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-core.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-extras.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-eclipse.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-web.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-maven.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-xtend.git --delete $BRANCH_TO_DEPLOY
+            git push git@github.com:eclipse/xtext-umbrella.git --delete $BRANCH_TO_DEPLOY
+          '''
+        }
+      }
+    }
   } // END stages
 
   post {
