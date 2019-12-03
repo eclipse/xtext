@@ -6,13 +6,14 @@ This document describes things that need to be done during a simrel.
 
 TODO
 
-## Xtext Bootstrapping
+## Xtend/Xtext Bootstrapping
 
-TODO update
+Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build) with parameters:
 
-1. `versions.gradle` files: Change `xtext_bootstrap` property
-1. In xtext-eclipse: `releng/org.eclipse.xtext.tycho.parent/pom.xml` Change `xtend-maven-plugin-version`
-1. In xtext-xtend: `releng/org.eclipse.xtend.tycho.parent/pom.xml`: Change `xtend-maven-plugin-version`
+* UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION
+* UPDATE_VALUE=Version to Bootstrap against
+
+Wait for the builds of the branches, review and merge PRs.
 
 ## Prepare final simrel target platform
 
