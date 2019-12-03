@@ -24,9 +24,9 @@ Export-Package: org.eclipse.xtext.example.arithmetics.ui.tests;x-internal=true,
  org.eclipse.xtext.example.arithmetics.ui.tests.quickfix;x-internal:=true
 Import-Package: org.hamcrest.core,
  org.junit;version="4.5.0",
- org.junit.runners.model;version="4.5.0",
  org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0"
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0"
 Automatic-Module-Name: org.eclipse.xtext.example.arithmetics.ui.tests
