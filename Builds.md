@@ -119,149 +119,14 @@ When major or minor releases are done, there should be a time period of at least
 
 ### Preparing Milestones and Releases
 
-To initiate a release build start the build job [release-prepare-branches](https://ci.eclipse.org/xtext/job/releng/job/release-prepare-branches/). This job automates the process mentioned below until step 15 exclusive (triggering the `xtext-release` job). Once the job successfully finished, continue with step 15.
+To initiate a release build start the build job [release-prepare-branches](https://ci.eclipse.org/xtext/job/releng/job/release-prepare-branches/). This job automates the process to a large degree. Once it is triggered it takes about 4-5 hours to complete. If you are interested in the details, read the section "What happens when the _release-prepare-branches_ job is executed".
 
-Branch names should be `milestone_«version»` for milestones, and `release_«version»` for releases. Tag names should be `v«version»`. When updating branch names for upstream dependencies, care must be taken to select the correct versions for additional libraries that are included in the Xtext build infrastructure (LSP4J).
+After everything above has run smoothly, it is finally time for some manual steps again. We will try to integrate some of them into the automated release pipeline from time to time.
 
-The Xtend compiler version used in the build should be the current snapshot or the last milestone for milestones, and it should always be the last milestone for releases (this is important for making release builds reproducible).
-
-Build jobs for releases must be executed in proper order on the build server, i.e. from upstream to downstream jobs. For every upstream change, the downstream jobs must be retriggered manually.
-
-1. Make sure all repositories are on branch `master`.
-1. Disable auto-build in Eclipse (avoid Xtend compilation)
-1. Make sure the docs plugins in `xtext-eclipse` and `xtext-xtend` are up to date (run ant scripts `xtext-eclipse/org.eclipse.xtext.doc/gen_eclipse_help_xtext.launch` and `xtext-xtend/org.eclipse.xtend.doc/gen_eclipse_help_xtend.launch` in the plugins that copy over the docs from `xtext`)
-1. xtext-umbrella
-   * `export XTEXT_VERSION=<VERSION>`
-   * `export BRANCHNAME=milestone_$XTEXT_VERSION`
-   * `export TAGNAME=v$XTEXT_VERSION`
-   * `./gitAll reset --hard`. Make sure before that no relevant change gets lost.
-   * `./gitAll pull`
-   * `./gitAll checkout -b $BRANCHNAME`
-   * `./adjustPipelines.sh $BRANCHNAME`
-   * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`: Update the name of the zipped p2 repository according to the release version (`tofile` property).
-1. xtext-lib
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
-   * `releng/org.eclipse.xtext.dev-bom/pom.xml`: Set `version` property to the release version.
-1. xtext-core
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-lib/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-lib' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. xtext-extras
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `releng/pom.xml`: ONLY dependencies section: Set `version` property to the release version. Keep `-SNAPSHOT` in the pom version and target platform configuration.
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-core/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-core' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. xtext-eclipse
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. xtext-web
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. xtext-maven
-   * Replace all occurrences of the -SNAPSHOT version with the release version.
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-extras/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-extras' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. xtext-xtend
-   * `gradle/versions.gradle`: Set `version` property to the release version.
-   * Replace all occurrences of the previous version with the release version in the Maven plugin related pom.xml files
-     * `maven-pom.xml`
-     * `org.eclipse.xtend.maven.*/pom.xml`
-     * `releng/org.eclipse.xtend.maven.parent/pom.xml`
-   * `Jenkinsfile`: Add `-Dit-archetype-tests-skip=true ` to `Maven Plugin Build` shell command
-   * `Jenkinsfile`: Add upstream trigger into `properties` section:
-   ```
-		, pipelineTriggers([
-			upstream(
-				threshold: 'SUCCESS',
-				upstreamProjects: 'xtext-eclipse/' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-			)
-		])
-	```
-	* `CBI.Jenkinsfile`: Add upstream trigger into `triggers` section:
-	```
-	triggers {
-	  upstream(upstreamProjects: 'xtext-eclipse' + URLEncoder.encode("$BRANCH_NAME", "UTF-8")
-		, threshold: hudson.model.Result.SUCCESS)
-	```
-1. Switch back to xtext-umbrella
-   * `./gitAll commit -a -m "[release] version $XTEXT_VERSION"`
-1. Create release tags on all repositories. Name `$TAGNAME` and commit message `release $TAGNAME`.
-   * `./gitAll tag -a $TAGNAME -m "release $TAGNAME"`
-1. Push changes to origin
-   * `./gitAll push --tags origin $BRANCHNAME`
-1. Once all previous builds are successful, trigger the ['xtext-release' build job](https://ci.eclipse.org/xtext/job/xtext-release/) with the release version and branch name as parameters.
-1. Delete the release branches
-   * `./gitAll branch -D $BRANCHNAME`
-   * `./gitAll push --delete origin $BRANCHNAME`
-1. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @dhuebner)
+1. Check that everything was promoted correctly:
+   * [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
+   * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
+2. Promote staged release on [oss.sonatype.org](https://oss.sonatype.org). Can only be done by Xtext release engineer (@kthoms, @spoenemann, @Hejado)
    * Log in with user 'xtext.team'.
    * Select _Staging Repositories_
    * Search for _orgeclipsextext-NNNN_ and _orgeclipsextend-NNNN_ with status _open_
@@ -269,101 +134,67 @@ Build jobs for releases must be executed in proper order on the build server, i.
    * Wait until the checks have run successfully
    * Select both repositories again the perform the _Release_ toolbar action
    * It will take some hours until the artifacts are mirrored to Maven Central.
-1. (Should be done by promote script) Manually edit the composite repository
-   * `/home/data/httpd/download.eclipse.org/modeling/tmf/xtext/updates/[milestones|releases]/[compositeArtifacts.xml|compositeContent.xml]`
-1. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
-   * Edit `simrel.aggr` from [org.eclipse.simrel.build repository](https://git.eclipse.org/c/simrel/org.eclipse.simrel.build.git/)
-   * Edit Contribution `Xtext, Xtend`
-   * Change `location` property of the Mapped Repository to the release / milestone repository URL
-   * For both features select the `Version Range` property, open the version selection dialog, and click on the only _Available version_ to match exactly the new release version
-   * (Likely) Disable EMF Parsley contribution for M1 builds
-   * Validate the configuration (Context menu on root node: Validate Aggregation)
-1. Publish websites
+3. Contribute release to [Simrel Aggregation Build](https://wiki.eclipse.org/Simrel/Contributing_to_Simrel_Aggregation_Build)
+   * Merge the [open Gerrit change](https://git.eclipse.org/r/#/q/project:simrel/org.eclipse.simrel.build+owner:xtext-bot%2540eclipse.org+status:open) for the `simrel/org.eclipse.simrel.build` repository
+4. Publish websites (Only on final release)
    * Remove `published: false` from release post
    * [Create PR](https://github.com/eclipse/xtext/compare/website-published...website-master?expand=1) to merge branch `website-master` into `website-published`
-1. Update Marketplace entries
+5. Update Marketplace entries (Only on final release)
    * Market place entry for [Xtext](https://marketplace.eclipse.org/content/eclipse-xtext/edit)
    * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend/edit)
    * For each update the properties:
      * Version Number
      * Update Site URL
      * Supported Eclipse Release(s)
-1. As soon as maven central is updated - send notifications
+6. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
    * Gitter
    * Twitter
    * Blog (for releases)
-1. Add / Update xtext-reference-projects
-   * Only applicable for releases or the first milestone of a new release phase.
-1. Adjust the bootstrap version to use the newly produced milestone / release
+7. Add / Update xtext-reference-projects (Only on final release)
+8. Adjust the bootstrap version to use the newly produced milestone / release
+    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
+    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
+9.  xtext-apidiff (Only on final release)
+    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
+    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
-Check that everything was promoted correctly:
-1. [Xtext Downloads Page](https://www.eclipse.org/modeling/tmf/downloads/) should list the new release
-   * Milestone / Release Candidate Builds will be listed in _Stable Builds_, Release Builds below _Latest Releases_ (might need to expand other releases)
-   * (To be fixed) Manually rename the zipped repository in the download location. By default the get a build timestamp, but the artifacts need to be named like the release
+
+#### What happens when the _release-prepare-branches_ job is executed
+
+Read this section when you are interested in some details about the steps that are performed when triggering the [release-prepare-branches job](https://ci.eclipse.org/xtext/job/releng/job/release-prepare-branches/). The job will perform the following:
+
+1. Check out a clean copy of all Xtext repositories
+2. Create branches for the release on all repositories (`milestone_«version»` for milestones, and `release_«version»` for releases)
+3. Adjust target platforms and pom.xml files to fetch from upstream job builds
+4. Set the Xtext version into `gradle/versions.gradle` files
+5. Set the Xtext version into `version` property of `pom.xml` files where needed
+6. Commit all changes
+7. Tag the commit with the tag name `v«version»`
+8. Push the release branches
+
+When the job finishes, all release branches are prepared. Now Jenkins will pick up the new branches and initiate builds for all repositories. Note that the first build for all jobs except for `xtext-lib` will fail then, since the downstream jobs won't find the required artifacts from a successful upstream build at that time. But the jobs will trigger their downstream jobs automatically. So when `xtext-lib` was successful, it will trigger `xtext-core`, which triggers `xtext-extras` on success and so on. It will take some hours until the last build, `xtext-umbrella` is triggered for the release build. Usually this is just a matter of waiting, but keep an eye on the builds. A build might fail due to a flaky test, or a missed performance goal in a test. Then just re-trigger the build.
+
+Finally, when `xtext-umbrella` was build successfully, all release artifacts were build and they are ready for publishing. The `xtext-umbrella` job will now trigger the [sign-and-deploy job](https://ci.eclipse.org/xtext/job/releng/job/sign-and-deploy/) with the appropriate parameters. This will do:
+
+1. Sign all artifacts with Eclipse Signing Service (for p2 artifacts) and with GPG (for Maven artifacts)
+2. Upload all artifacts to [OSSRH](https://oss.sonatype.org/)
+3. Deploy the p2 repository to the [Xtext Downloads](https://www.eclipse.org/modeling/tmf/downloads/) location on the project storage
+4. Unzip the repository to its location on the p2 update site location (directory below the composite site location)
+5. Update the p2 composite site descriptors
+6. Trigger an update of the SimRel repository contribution with the [release-simrel-update job](https://ci.eclipse.org/xtext/job/releng/job/release-simrel-update/)
+7. For the final release: Trigger lifting of the Xtext version to the next minor release version in the projects and raise Pull Requests for the update. This is done with the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/).
 
 
 ### Lifting the Version Number
 
-Once the release branch for a major or minor release has been created, the master branch should be lifted to the next version.
+Lifting the version number is performed with the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/). Choose the option `XTEXT_VERSION` for parameter `UPDATE_TYPE` and enter the version in for parameter `UPDATE_VALUE`.
 
-Note that the Xtend compiler cannot be set to use snapshot versions from the beginning, since the new snapshots do not exist yet. It should be set to the latest published version (a release candidate or the actual release), and changed to the new snapshot version when it's available.
+When performing a release this will be automatically triggered by the [sign-and-deploy job](https://ci.eclipse.org/xtext/job/releng/job/sign-and-deploy/) and increment the current version from the `master` branch to the next minor version.
 
-1. xtext-lib
-   * `gradle/versions.gradle`: Set `version` property to the next version.
-   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in files:
-     * `MANIFEST.MF`
-     * `feature.xml`
-     * `category.xml`
-   * `./gradlew generateP2Build`
-2. xtext-core
-   * `gradle/versions.gradle`: Set `version` property to the next version.
-   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in files:
-     * `MANIFEST.MF`
-     * `releng/pom.xml`
-     * `releng/p2/pom.xml`
-     * `releng/releng-target/pom.xml`
-     * `releng/p2/category.xml`
-   * `releng/releng-target/xtext-core.target.target`: Set p2 URL to latest Xtext release version
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
-3. xtext-extras
-   * `gradle/versions.gradle`: Set `version` property to the next version.
-   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Replace occurrences of the previous version in files:
-     * `MANIFEST.MF`
-     * `releng/pom.xml`
-     * `releng/p2/pom.xml`
-     * `releng/releng-target/pom.xml`
-     * `releng/p2/category.xml`
-   * `./gradlew generateP2Build -PuseJenkinsSnapshots=true`
-4. xtext-eclipse
-   * Replace occurrences of the previous version in files:
-     * `MANIFEST.MF`
-     * `pom.xml`
-     * `releng/org.eclipse.xtext.p2-repository/category.xml`
-   * `releng/org.eclipse.xtext.tycho.parent/pom.xml`: Set `xtend-maven-plugin-version` property to the used Xtend compiler version.
-6. xtext-web
-   * `gradle/versions.gradle`: Set `version` property to the next version.
-   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-7. xtext-maven
-   * Replace occurrences of the previous version in files:
-     * `pom.xml`
-8. xtext-xtend
-   * Replace all occurrences of the previous version with the next version.
-   * `gradle/bootstrap-setup.gradle`: Set `bootstrapXtendVersion` property to the used Xtend compiler version.
-   * Set `xtend-maven-plugin-version` property in `releng/org.eclipse.xtend.tycho.parent/pom.xml` to the used Xtend compiler version.
-9. xtext-umbrella
-   * Replace occurrences of the previous version in files:
-     * `releng/org.eclipse.xtext.sdk.p2-repository/category.xml`
-     * `releng/org.eclipse.xtext.sdk.parent/pom.xml`
-     * `releng/org.eclipse.xtext.sdk.p2-repository/pom.xml`
-     * `releng/org.eclipse.xtext.sdk.target/pom.xml`
-10. xtext-apidiff
-    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
-    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/CBI.Jenkinsfile
+For bugfix or major releases the job has to be triggered manually.
+
 ### GitHub Milestones
 
 We use GitHub milestones to communicate when bug fixes and new features will be available and to generate a list of resolved issues for the release notes. When a major or minor release is done, the corresponding GitHub milestone should be closed. If there are open issues left in that milestone, they should be removed from it or assigned to another milestone.
