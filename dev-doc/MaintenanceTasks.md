@@ -12,6 +12,8 @@ Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.e
 
 * UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION
 * UPDATE_VALUE=Version to Bootstrap against
+* GIT_USER_NAME=
+* GIT_USER_EMAIL=
 
 Wait for the builds of the branches, review and merge PRs.
 
