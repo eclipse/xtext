@@ -7,13 +7,11 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
- org.eclipse.xtext.generator,
- org.eclipse.emf.mwe.utils;bundle-version="1.3.21",
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
+ org.eclipse.emf.mwe2.runtime,
  org.eclipse.xtext.ecore,
- org.eclipse.emf.mwe2.launch;bundle-version="2.9.1";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.testlanguages,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.hamcrest.core;bundle-version="1.1.0",
@@ -22,8 +20,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.ui.workbench;bundle-version="3.110.1";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.xtext.generator,
- org.eclipse.xtext.xtext.wizard,
- org.eclipse.emf.mwe.core;bundle-version="1.3.21"
+ org.eclipse.xtext.xtext.wizard
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Import-Package: com.ibm.icu.text;version="4.0.0",
