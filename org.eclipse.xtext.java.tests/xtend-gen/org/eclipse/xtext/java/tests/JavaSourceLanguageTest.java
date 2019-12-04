@@ -88,6 +88,33 @@ public class JavaSourceLanguageTest {
   }
   
   @Test
+  public void testPackageInfo() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package a;");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("a/package-info.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package a;");
+    _builder_1.newLine();
+    _builder_1.append("public class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("a/MyClass.java", _builder_1.toString());
+    final XtextResourceSet rs = this.resourceSet(_mappedTo, _mappedTo_1);
+    final Function1<Resource, Boolean> _function = (Resource it) -> {
+      return Boolean.valueOf(it.getURI().toString().endsWith("package-info.java"));
+    };
+    final Resource r1 = IterableExtensions.<Resource>findFirst(rs.getResources(), _function);
+    Assert.assertEquals(0, r1.getContents().size());
+    final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
+      return Boolean.valueOf(it.getURI().toString().endsWith("MyClass.java"));
+    };
+    final Resource r2 = IterableExtensions.<Resource>findFirst(rs.getResources(), _function_1);
+    Assert.assertEquals(1, r2.getContents().size());
+  }
+  
+  @Test
   public void testOverridenInterfaceMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public interface MySuperClass {");

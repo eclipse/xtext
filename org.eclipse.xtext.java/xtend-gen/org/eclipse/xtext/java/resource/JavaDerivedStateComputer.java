@@ -80,6 +80,10 @@ public class JavaDerivedStateComputer {
       this.unloader.unloadRoot(eObject);
     }
     resource.getContents().clear();
+    boolean _isInfoFile = this.isInfoFile(resource);
+    if (_isInfoFile) {
+      return;
+    }
     CompilationUnit _compilationUnit = this.getCompilationUnit(resource);
     boolean _tripleNotEquals = (_compilationUnit != null);
     if (_tripleNotEquals) {

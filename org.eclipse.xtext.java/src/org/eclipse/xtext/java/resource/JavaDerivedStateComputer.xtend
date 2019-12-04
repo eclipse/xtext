@@ -46,7 +46,8 @@ class JavaDerivedStateComputer {
 			unloader.unloadRoot(eObject) 
 		}
 		resource.getContents().clear
-		
+		if (resource.isInfoFile)
+			return;
 		if (resource.compilationUnit !== null) {
 			val classFileCache = resource.resourceSet.findOrCreateClassFileCache
 			classFileCache.addResourceToCompile(resource)
