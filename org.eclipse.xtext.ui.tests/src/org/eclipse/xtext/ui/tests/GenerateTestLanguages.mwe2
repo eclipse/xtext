@@ -293,39 +293,33 @@ Workflow {
 			}
 
 			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the runtime module to use the runtime lexer
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
-					// A grammar file with .g will be expected in this package (should be stored in src folder)
-					lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlRuntimeLexer"
-					runtime = true
-					antlrParam = "-lib"
-					// This is the folder where the lexer will be created
-					antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlRuntimeLexer"
+				runtime = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
 			}
 
 			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the ui module to use the content assistant lexer
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
-					// A grammar file with .g will be expected in this package (should be stored in src folder)
-					lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlContentAssistLexer"
-					contentAssist = true
-					antlrParam = "-lib"
-					// This is the folder where the lexer will be created
-					antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/contentassist/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlContentAssistLexer"
+				contentAssist = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/ide/contentassist/antlr/lexer"
 			}
 
 			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the ui module to use the hightlighting lexer
-			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
-					// A grammar file with .g will be expected in this package (should be stored in src folder)
-					lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlHighlightingLexer"
-					highlighting = true
-					antlrParam = "-lib"
-					// This is the folder where the lexer will be created
-					antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
-				}
+			fragment = org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment {
+				// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "org.eclipse.xtext.ui.tests.xmleditor.CustomInternalXmlHighlightingLexer"
+				highlighting = true
+				antlrParam = "-lib"
+				// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xtext/ui/tests/xmleditor/parser/antlr/lexer"
 			}
 
 			generator = { generateStub = false }

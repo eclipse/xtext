@@ -226,12 +226,12 @@ public abstract class AbstractSingleCodetemplateUiModule extends DefaultUiModule
 		binder.bind(String.class).annotatedWith(Names.named(UIBindings.COMPARE_VIEWER_TITLE)).toInstance("SingleCodetemplate Compare");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.codetemplates.ui.highlighting.SingleCodetemplateHighlightingLexer.class);
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
 	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.codetemplates.ui.contentassist.SingleCodetemplateContentAssistLexer.class);
 	}
