@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.List
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
@@ -17,7 +18,6 @@ import org.eclipse.xtext.testing.util.InMemoryURIHandler
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -43,7 +43,21 @@ class JavaSourceLanguageTest {
         val referenced = returnType.type
         Assert.assertSame(nestedType, referenced)
     }
-    
+
+    @Test def void testPackageInfo() {
+        val rs = resourceSet( 'a/package-info.java' -> '''
+            package a;
+        ''', 'a/MyClass.java' -> '''
+            package a;
+            public class MyClass {
+            }
+        ''')
+        val r1 = rs.resources.findFirst[URI.toString.endsWith('package-info.java')]
+        Assert.assertEquals(0, r1.contents.size)
+        val r2 = rs.resources.findFirst[URI.toString.endsWith('MyClass.java')]
+        Assert.assertEquals(1, r2.contents.size)
+    }
+
     @Test def void testOverridenInterfaceMethod() {
         val rs = resourceSet('MySuperClass.java' -> '''
             public interface MySuperClass {
@@ -60,7 +74,7 @@ class JavaSourceLanguageTest {
         val referenced = clazz.declaredOperations.head.returnType
         Assert.assertNotNull((referenced as JvmParameterizedTypeReference).arguments.head)
     }
-    
+
     @Test def void testAnnotation() {
         val rs = resourceSet('MyAnnotation.java' -> '''
             public @interface MyAnnotation {
