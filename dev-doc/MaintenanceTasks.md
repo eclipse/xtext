@@ -56,4 +56,8 @@ TODO
 
 ## Adap API-Diff jobs
 
-TODO
+* Adapt the jobs [Jenkinsfile](https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile) and change the choices for old and new version.
+* Adapt the jobs [script](https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh)
+  * Introduce a new section for the current release.
+  * Adapt the nightly section to the current in-development release.
+  * Adapt the "Downloading Eclipse" section to pick the current release.
