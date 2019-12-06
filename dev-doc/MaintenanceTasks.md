@@ -49,6 +49,7 @@ Once Eclipse Orbit provides us with a new simrel orbit alias update site (e.g. `
 
 * For the target platforms search and replace in all `.target` files in all repositories e.g. `find . -name "*.target" -type f  | xargs sed -i "s?/tools/orbit/downloads/2019-12?/tools/orbit/downloads/2020-03?g"`.
 * For the wizard adapt `TargetPlatformProject` in `xtext-core` and run/fix `CliWizardIntegrationTest`.
+* Adapt oomph `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
 
 ## Update Oomph to new simrel
 
