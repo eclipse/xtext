@@ -51,9 +51,17 @@ We build `xtext-eclipse` and `xtext-xtend` against the latest i-builds of platfo
 
 Once Eclipse Orbit provides us with a new simrel orbit alias update site (e.g. `https://download.eclipse.org/tools/orbit/downloads/2019-12`) then we need to adapt our target platforms and the wizard to use it.
 
-* For the target platforms search and replace in all `.target` files in all repositories e.g. `find . -name "*.target" -type f  | xargs sed -i "s?/tools/orbit/downloads/2019-12?/tools/orbit/downloads/2020-03?g"`.
-* For the wizard adapt `TargetPlatformProject` in `xtext-core` and run/fix `CliWizardIntegrationTest`.
-* Adapt oomph `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
+Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build) with parameters:
+
+* `UPDATE_TYPE=ORBIT_URL`
+* `UPDATE_VALUE=<New Orbit URL>`
+* `GIT_USER_NAME=<Your Full Name>`
+* `GIT_USER_EMAIL=<Your GitHub/Eclipse Email Address>`
+
+Wait for the builds of the branches, review and merge PRs.
+
+Additional manual step:
+* Adapt Oomph Setup `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
 
 ## Update Oomph to new simrel
 
