@@ -4,16 +4,20 @@ This document describes things that need to be done during a simrel.
 
 ## Bump versions
 
-TODO
+With a final release the Xtext version has to be incremented. This is triggered automatically by the [sign-and-deploy job](https://ci.eclipse.org/xtext/job/releng/job/sign-and-deploy/) when a GA release is deployed. This triggers the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/) with `UPDATE_TYPE=XTEXT-VERSION` and `UPDATE_VALUE=<NEW_MINOR_VERSION>`.
+
+Wait for the builds of the branches, review and merge PRs.
+
+For version updates in the micro or major version the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/) has to be run manually. Please take care that the `SOURCE_BRANCH` parameter may be different than '`master`'.
 
 ## Xtend/Xtext Bootstrapping
 
 Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build) with parameters:
 
-* UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION
-* UPDATE_VALUE=Version to Bootstrap against
-* GIT_USER_NAME=
-* GIT_USER_EMAIL=
+* `UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION`
+* `UPDATE_VALUE=<Version to Bootstrap against>`
+* `GIT_USER_NAME=<Your Full Name>`
+* `GIT_USER_EMAIL=<Your GitHub/Eclipse Email Address>`
 
 Wait for the builds of the branches, review and merge PRs.
 
@@ -47,13 +51,26 @@ We build `xtext-eclipse` and `xtext-xtend` against the latest i-builds of platfo
 
 Once Eclipse Orbit provides us with a new simrel orbit alias update site (e.g. `https://download.eclipse.org/tools/orbit/downloads/2019-12`) then we need to adapt our target platforms and the wizard to use it.
 
-* For the target platforms search and replace in all `.target` files in all repositories e.g. `find . -name "*.target" -type f  | xargs sed -i "s?/tools/orbit/downloads/2019-12?/tools/orbit/downloads/2020-03?g"`.
-* For the wizard adapt `TargetPlatformProject` in `xtext-core` and run/fix `CliWizardIntegrationTest`.
-* Adapt oomph `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
+Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build) with parameters:
 
-## Update Oomph to new simrel
+* `UPDATE_TYPE=ORBIT_URL`
+* `UPDATE_VALUE=<New Orbit URL>`
+* `GIT_USER_NAME=<Your Full Name>`
+* `GIT_USER_EMAIL=<Your GitHub/Eclipse Email Address>`
 
-TODO
+Wait for the builds of the branches, review and merge PRs.
+
+Additional manual step:
+* Adapt Oomph Setup `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`.
+
+## Update Oomph Setup for new SimRel
+
+* Open `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`
+* Modify variable `p2.orbit` with the new Orbit URL for the release to `https://download.eclipse.org/tools/orbit/downloads/YYYY-MM`
+* Open _Eclipse Support / Modular Target / Xtext Target Platform_
+* Copy the _Repository List_ entry of the latest release and paste it. Rename it to the new SimRel name.
+* From the previously copied _Repository List_ remove the `I-builds` repository entry
+* In the new _Repository List_ update the `I-builds` repository entry to the next Eclipse Platform version
 
 ## Adap API-Diff jobs
 
@@ -62,3 +79,9 @@ TODO
   * Introduce a new section for the current release.
   * Adapt the nightly section to the current in-development release.
   * Adapt the "Downloading Eclipse" section to pick the current release.
+
+## Update Xtext Reference Projects
+
+The repository [xtext-reference-projects](https://github.com/itemis/xtext-reference-projects) contains a set of projects that are created by the project wizard, and the Domainmodel example. These projects are built by TravisCI.
+
+After each release a new set of projects should be added. Follow the instructions in the repository's [README](https://github.com/itemis/xtext-reference-projects/blob/master/README.md).
