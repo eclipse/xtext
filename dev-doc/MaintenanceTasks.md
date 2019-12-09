@@ -4,16 +4,20 @@ This document describes things that need to be done during a simrel.
 
 ## Bump versions
 
-TODO
+With a final release the Xtext version has to be incremented. This is triggered automatically by the [sign-and-deploy job](https://ci.eclipse.org/xtext/job/releng/job/sign-and-deploy/) when a GA release is deployed. This triggers the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/) with `UPDATE_TYPE=XTEXT-VERSION` and `UPDATE_VALUE=<NEW_MINOR_VERSION>`.
+
+Wait for the builds of the branches, review and merge PRs.
+
+For version updates in the micro or major version the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/) has to be run manually. Please take care that the `SOURCE_BRANCH` parameter may be different than '`master`'.
 
 ## Xtend/Xtext Bootstrapping
 
 Run [https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/build) with parameters:
 
-* UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION
-* UPDATE_VALUE=Version to Bootstrap against
-* GIT_USER_NAME=
-* GIT_USER_EMAIL=
+* `UPDATE_TYPE=XTEXT_BOOTSTRAP_VERSION`
+* `UPDATE_VALUE=<Version to Bootstrap against>`
+* `GIT_USER_NAME=<Your Full Name>`
+* `GIT_USER_EMAIL=<Your GitHub/Eclipse Email Address>`
 
 Wait for the builds of the branches, review and merge PRs.
 
