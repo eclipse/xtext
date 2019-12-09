@@ -83,7 +83,7 @@ public class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragmen
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
       Set<String> _requiredBundles = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
-      Iterables.<String>addAll(_requiredBundles, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.core.runtime", "org.eclipse.core.resources", "org.eclipse.ui", "org.eclipse.ui.ide", "org.eclipse.ui.forms")));
+      Iterables.<String>addAll(_requiredBundles, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.core.runtime", "org.eclipse.core.resources", "org.eclipse.ui", "org.eclipse.ui.ide", "org.eclipse.ui.forms", "org.eclipse.xtend.lib")));
       if (this.pluginProject) {
         Set<String> _requiredBundles_1 = this.getProjectConfig().getEclipsePlugin().getManifest().getRequiredBundles();
         Iterables.<String>addAll(_requiredBundles_1, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.jdt.core", "org.eclipse.pde.core")));
