@@ -79,3 +79,9 @@ Additional manual step:
   * Introduce a new section for the current release.
   * Adapt the nightly section to the current in-development release.
   * Adapt the "Downloading Eclipse" section to pick the current release.
+
+## Update Xtext Reference Projects
+
+The repository [xtext-reference-projects](https://github.com/itemis/xtext-reference-projects) contains a set of projects that are created by the project wizard, and the Domainmodel example. These projects are built by TravisCI.
+
+After each release a new set of projects should be added. Follow the instructions in the repository's [README](https://github.com/itemis/xtext-reference-projects/blob/master/README.md).
