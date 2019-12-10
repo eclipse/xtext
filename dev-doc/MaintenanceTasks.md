@@ -67,6 +67,9 @@ Additional manual step:
 
 * Open `xtext-eclipse/releng/org.eclipse.xtext.contributor/Xtext.setup`
 * Modify variable `p2.orbit` with the new Orbit URL for the release to `https://download.eclipse.org/tools/orbit/downloads/YYYY-MM`
+* Modify variable `eclipse.target.platform`
+  * Add Choice entry for the new release (`value=YYYY-MM, label='Eclipse YYYY-MM - 4.NN'`)
+  * Set default value to new `YYYY-MM` value
 * Open _Eclipse Support / Modular Target / Xtext Target Platform_
 * Copy the _Repository List_ entry of the latest release and paste it. Rename it to the new SimRel name.
 * From the previously copied _Repository List_ remove the `I-builds` repository entry
