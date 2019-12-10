@@ -45,7 +45,7 @@ class Bug456868Test extends AbstractXtendUITestCase {
 	@Test def void testProjectWithWhitespaceInNameWorks() {
 		// use names with whitespaces
 		project = createJavaProject("my project")
-		makeJava5Compliant(project)
+		makeJava8Compliant(project)
 		libAdder.addLibsToClasspath(project, new NullProgressMonitor());
 		natureAdder.toggleNature(project.project)
 		createFile("my project/src/MyClass.xtend", '''

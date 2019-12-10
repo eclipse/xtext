@@ -58,6 +58,7 @@ public class UnicodeEscapeTest extends AbstractXtendUITestCase {
 				"@SuppressWarnings(\"all\")\n" + 
 				"public class C {\n" + 
 				"  private String \u03b1\u03c1\u03b5\u03c4\u03b7 = new Function0<String>() {\n" + 
+				"    @Override\n" + 
 				"    public String apply() {\n" + 
 				"      StringConcatenation _builder = new StringConcatenation();\n" + 
 				"      _builder.append(\"\u03c1\u03b5\u03c4\u03b7\");\n" + 
@@ -88,6 +89,7 @@ public class UnicodeEscapeTest extends AbstractXtendUITestCase {
 				"@SuppressWarnings(\"all\")\n" + 
 				"public class C {\n" + 
 				"  private String \\u03b1\\u03c1\\u03b5\\u03c4\\u03b7 = new Function0<String>() {\n" + 
+				"    @Override\n" + 
 				"    public String apply() {\n" + 
 				"      StringConcatenation _builder = new StringConcatenation();\n" + 
 				"      _builder.append(\"\\\\u03c1\\\\u03b5\\\\u03c4\\\\u03b7\");\n" + 
@@ -121,6 +123,7 @@ public class UnicodeEscapeTest extends AbstractXtendUITestCase {
 				"   * comment \\u03b1\\u03c1\\u03b5\\u03c4\\u03b7\n" + 
 				"   */\n" +
 				"  private String \\u03b1\\u03c1\\u03b5\\u03c4\\u03b7 = new Function0<String>() {\n" + 
+				"    @Override\n" + 
 				"    public String apply() {\n" + 
 				"      StringConcatenation _builder = new StringConcatenation();\n" + 
 				"      _builder.append(\"\\u03c1\\u03b5\\u03c4\\u03b7\");\n" + 
@@ -151,6 +154,7 @@ public class UnicodeEscapeTest extends AbstractXtendUITestCase {
 				"@SuppressWarnings(\"all\")\n" + 
 				"public class C {\n" + 
 				"  private String \u03b1\u03c1\u03b5\u03c4\u03b7 = new Function0<String>() {\n" + 
+				"    @Override\n" + 
 				"    public String apply() {\n" + 
 				"      StringConcatenation _builder = new StringConcatenation();\n" + 
 				"      _builder.append(\"\\\\u03c1\\\\u03b5\\\\u03c4\\\\u03b7\");\n" + 
