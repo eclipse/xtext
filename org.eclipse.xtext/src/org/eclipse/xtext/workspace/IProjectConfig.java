@@ -43,6 +43,8 @@ public interface IProjectConfig {
 	 * project is validated and compiled or not.
 	 * 
 	 * @return true iff this project is indexed only
+	 * 
+	 * @since 2.21
 	 */
 	default boolean isIndexOnly() {
 		return false;
