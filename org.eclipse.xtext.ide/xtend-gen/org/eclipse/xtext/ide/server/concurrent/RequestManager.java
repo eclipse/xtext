@@ -14,6 +14,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.BiConsumer;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.ide.server.concurrent.AbstractRequest;
 import org.eclipse.xtext.ide.server.concurrent.ReadRequest;
 import org.eclipse.xtext.ide.server.concurrent.WriteRequest;
@@ -31,6 +33,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
  */
 @SuppressWarnings("all")
 public class RequestManager {
+  private static final Logger LOG = Logger.getLogger(RequestManager.class);
+  
   @Inject
   private ExecutorService parallel;
   
@@ -62,7 +66,13 @@ public class RequestManager {
   protected <V extends Object> CompletableFuture<V> submit(final AbstractRequest<V> request) {
     this.requests.add(request);
     this.queue.submit(request);
-    return request.get();
+    final BiConsumer<V, Throwable> _function = (V v, Throwable throwable) -> {
+      if (((throwable != null) && (!this.isCancelException(throwable)))) {
+        RequestManager.LOG.error("Error during request: ", throwable);
+      }
+    };
+    final CompletableFuture<V> result = request.get().whenComplete(_function);
+    return result;
   }
   
   protected CompletableFuture<Void> cancel() {

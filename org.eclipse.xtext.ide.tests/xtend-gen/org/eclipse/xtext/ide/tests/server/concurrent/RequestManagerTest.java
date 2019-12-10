@@ -10,10 +10,13 @@ package org.eclipse.xtext.ide.tests.server.concurrent;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.apache.log4j.Level;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -47,6 +50,49 @@ public class RequestManagerTest {
   public void tearDown() {
     this.requestManager.shutdown();
     this.sharedState = null;
+  }
+  
+  @Test(timeout = 1000)
+  public void testLogException() {
+    final Runnable _function = () -> {
+      final Function0<Object> _function_1 = () -> {
+        throw new RuntimeException();
+      };
+      final Function2<CancelIndicator, Object, Object> _function_2 = (CancelIndicator $0, Object $1) -> {
+        return null;
+      };
+      final CompletableFuture<Object> future = this.requestManager.<Object, Object>runWrite(_function_1, _function_2);
+      try {
+        future.get();
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    };
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    logResult.assertLogEntry("Error during request:");
+  }
+  
+  @Test(timeout = 1000, expected = ExecutionException.class)
+  public void testCatchException() {
+    final Runnable _function = () -> {
+      try {
+        final Function0<Object> _function_1 = () -> {
+          throw new RuntimeException();
+        };
+        final Function2<CancelIndicator, Object, Object> _function_2 = (CancelIndicator $0, Object $1) -> {
+          return null;
+        };
+        final CompletableFuture<Object> future = this.requestManager.<Object, Object>runWrite(_function_1, _function_2);
+        Assert.assertEquals("Foo", future.get());
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    Assert.fail();
   }
   
   @Test(timeout = 1000)

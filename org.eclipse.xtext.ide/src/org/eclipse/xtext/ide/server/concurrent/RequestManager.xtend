@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
@@ -23,6 +24,7 @@ import org.eclipse.xtext.util.CancelIndicator
  * @since 2.11
  */
 class RequestManager {
+	static final Logger LOG = Logger.getLogger(RequestManager);
 
 	@Inject ExecutorService parallel
 
@@ -56,7 +58,12 @@ class RequestManager {
 	protected def <V> CompletableFuture<V> submit(AbstractRequest<V> request) {
 		requests += request
 		queue.submit(request)
-		return request.get
+		val result = request.get.whenComplete[v, throwable|
+			if (throwable !== null && !isCancelException(throwable)) {
+				LOG.error("Error during request: ", throwable);
+			}
+		]
+		return result
 	}
 
 	protected def CompletableFuture<Void> cancel() {
