@@ -17,6 +17,7 @@ import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import java.util.concurrent.CancellationException
 
 /**
  * 
@@ -58,12 +59,13 @@ class RequestManager {
 	protected def <V> CompletableFuture<V> submit(AbstractRequest<V> request) {
 		requests += request
 		queue.submit(request)
-		val result = request.get.whenComplete[v, throwable|
-			if (throwable !== null && !isCancelException(throwable)) {
-				LOG.error("Error during request: ", throwable);
+		val future = request.get;
+		future.whenComplete[v, thr|
+			if (thr !== null && !isCancelException(thr) && !(thr instanceof CancellationException)) {
+				LOG.error("Error during request: ", thr);
 			}
 		]
-		return result
+		return future
 	}
 
 	protected def CompletableFuture<Void> cancel() {

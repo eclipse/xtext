@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.server.concurrent;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
@@ -66,13 +67,14 @@ public class RequestManager {
   protected <V extends Object> CompletableFuture<V> submit(final AbstractRequest<V> request) {
     this.requests.add(request);
     this.queue.submit(request);
-    final BiConsumer<V, Throwable> _function = (V v, Throwable throwable) -> {
-      if (((throwable != null) && (!this.isCancelException(throwable)))) {
-        RequestManager.LOG.error("Error during request: ", throwable);
+    final CompletableFuture<V> future = request.get();
+    final BiConsumer<V, Throwable> _function = (V v, Throwable thr) -> {
+      if ((((thr != null) && (!this.isCancelException(thr))) && (!(thr instanceof CancellationException)))) {
+        RequestManager.LOG.error("Error during request: ", thr);
       }
     };
-    final CompletableFuture<V> result = request.get().whenComplete(_function);
-    return result;
+    future.whenComplete(_function);
+    return future;
   }
   
   protected CompletableFuture<Void> cancel() {
