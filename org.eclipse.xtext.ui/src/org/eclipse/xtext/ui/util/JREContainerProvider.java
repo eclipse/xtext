@@ -42,7 +42,7 @@ public class JREContainerProvider {
 	/**
 	 * @since 2.7
 	 */
-	public static final String PREFERRED_BREE = "JavaSE-1.6";
+	public static final String PREFERRED_BREE = "JavaSE-1.8";
 	private static IVMInstall defaultVMInstall = null;
 	private static boolean defaultVMinitialized = false;
 

@@ -109,7 +109,7 @@ public abstract class AbstractXbaseUITestCase extends Assert implements Resource
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(Collections.singletonList("org.eclipse.xtext.xbase.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
-		JavaProjectSetupUtil.makeJava5Compliant(JavaCore.create(result));
+		JavaProjectSetupUtil.makeJava8Compliant(JavaCore.create(result));
 		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
 	}

@@ -167,7 +167,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 					null);
 			JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
 			
-			makeJava5Compliant(javaProject);
+			makeJava8Compliant(javaProject);
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, project);
@@ -181,11 +181,11 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		return javaProject ;
 	}
 
-	public static void makeJava5Compliant(IJavaProject javaProject) {
+	public static void makeJava8Compliant(IJavaProject javaProject) {
 		Map<String, String> options= javaProject.getOptions(false);
-		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
-		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
-		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_8);
+		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
+		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_8);
 		options.put(JavaCore.COMPILER_PB_ASSERT_IDENTIFIER, JavaCore.ERROR);
 		options.put(JavaCore.COMPILER_PB_ENUM_IDENTIFIER, JavaCore.ERROR);
 		options.put(JavaCore.COMPILER_CODEGEN_INLINE_JSR_BYTECODE, JavaCore.ENABLED);
