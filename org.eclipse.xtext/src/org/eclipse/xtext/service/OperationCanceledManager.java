@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.service;
 
+import java.util.concurrent.CancellationException;
+
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.util.CancelIndicator;
 
@@ -19,6 +21,9 @@ import org.eclipse.xtext.util.CancelIndicator;
  */
 public class OperationCanceledManager {
 	protected RuntimeException getPlatformOperationCanceledException(Throwable t) {
+		if (t instanceof CancellationException) {
+			return (RuntimeException) t;
+		}
 		if (t instanceof OperationCanceledException) {
 			return (RuntimeException) t;
 		}
