@@ -13,7 +13,6 @@ import com.google.inject.name.Names;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.example.arithmetics.generator.ArithmeticsGenerator;
 import org.eclipse.xtext.example.arithmetics.parser.antlr.ArithmeticsAntlrTokenFileProvider;
 import org.eclipse.xtext.example.arithmetics.parser.antlr.ArithmeticsParser;
 import org.eclipse.xtext.example.arithmetics.parser.antlr.internal.InternalArithmeticsLexer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.example.arithmetics.serializer.ArithmeticsSemanticSeque
 import org.eclipse.xtext.example.arithmetics.serializer.ArithmeticsSyntacticSequencer;
 import org.eclipse.xtext.example.arithmetics.services.ArithmeticsGrammarAccess;
 import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator;
-import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
@@ -188,11 +186,6 @@ public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 	public void configureIResourceDescriptionsPersisted(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public Class<? extends IGenerator2> bindIGenerator2() {
-		return ArithmeticsGenerator.class;
 	}
 	
 }
