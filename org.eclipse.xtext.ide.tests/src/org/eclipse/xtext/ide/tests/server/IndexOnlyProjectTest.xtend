@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2019 NumberFour AG (http://www.enfore.com) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,19 +29,19 @@ import java.io.File
  * @author Marcus Mews - Initial contribution and API
  */
 class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
-    
+
 	override Module getServerModule() {
 		Modules2.mixin(new ServerModule, [
 			bind(IWorkspaceConfigFactory).toInstance(new ProjectWorkspaceConfigFactory() {
 
 				override findProjects(WorkspaceConfig workspaceConfig, URI location) {
 					if (location !== null) {
-						val FileProjectConfig project = new FileProjectConfig(location, workspaceConfig){
+						val FileProjectConfig project = new FileProjectConfig(location, workspaceConfig) {
 							override boolean isIndexOnly() {
 								return true;
 							}
 						};
-						
+
 						project.addSourceFolder(".");
 						workspaceConfig.addProject(project);
 					}
@@ -49,7 +49,7 @@ class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
 			})
 		])
 	}
-	
+
 	/** Shows that the resource is indexed */
 	@Test
 	def void testIndexByUsingReferences() {
@@ -66,53 +66,53 @@ class IndexOnlyProjectTest extends AbstractTestLangLanguageServerTest {
 			'''
 		]
 	}
-	
+
 	/** Shows that the resource is not validated during initial build */
-    @Test
-    def void testInitializeBuildNoValidation() {
-        'MyType1.testlang'.writeFile( '''
-            type Test {
-                NonExisting foo
-            }
-        ''')
-    	initialize
-    	assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
-    }
-	
+	@Test
+	def void testInitializeBuildNoValidation() {
+		'MyType1.testlang'.writeFile( '''
+			type Test {
+			    NonExisting foo
+			}
+		''')
+		initialize
+		assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
+	}
+
 	/** Shows that the error-free resource is not generated during initial build */
-    @Test
-    def void testInitializeBuildNoGeneration() {
-        'MyType1.testlang'.writeFile( '''
-            type TestType {
-                int foo
-            }
-        ''')
-    	initialize
-    	
-    	val outputFile = new File(root, "src-gen/TestType.java");
-    	assertFalse(diagnostics.entrySet.join(','), outputFile.isFile)
-    }
-    
+	@Test
+	def void testInitializeBuildNoGeneration() {
+		'MyType1.testlang'.writeFile( '''
+			type TestType {
+			    int foo
+			}
+		''')
+		initialize
+
+		val outputFile = new File(root, "src-gen/TestType.java");
+		assertFalse(diagnostics.entrySet.join(','), outputFile.isFile)
+	}
+
 	/** Shows that the resource is not validated during incremental build */
-    @Test
-    def void testIncrementalBuildNoValidation() {
-        'MyType1.testlang'.writeFile( '''
-            type Test {
-                NonExisting foo
-            }
-        ''')
-    	initialize
-    	assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
-    	
-        val path = 'MyType2.testlang'.writeFile('''
-            type NonExisting {
-            }
-        ''')
-        
-    	languageServer.getWorkspaceService.didChangeWatchedFiles(
-    		new DidChangeWatchedFilesParams(#[new FileEvent(path, FileChangeType.Created)])
-    	)
-    	assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
-    }
+	@Test
+	def void testIncrementalBuildNoValidation() {
+		'MyType1.testlang'.writeFile( '''
+			type Test {
+			    NonExisting foo
+			}
+		''')
+		initialize
+		assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
+
+		val path = 'MyType2.testlang'.writeFile('''
+			type NonExisting {
+			}
+		''')
+
+		languageServer.getWorkspaceService.didChangeWatchedFiles(
+			new DidChangeWatchedFilesParams(#[new FileEvent(path, FileChangeType.Created)])
+		)
+		assertTrue(diagnostics.entrySet.join(','), diagnostics.empty)
+	}
 
 }

@@ -42,7 +42,7 @@ public interface IProjectConfig {
 	 * During the build, projects are indexed, validated and compiled. The return of this method configures whether this
 	 * project is validated and compiled or not.
 	 * 
-	 * @return true iff this project is indexed only
+	 * @return true if this project is indexed only
 	 * 
 	 * @since 2.21
 	 */
