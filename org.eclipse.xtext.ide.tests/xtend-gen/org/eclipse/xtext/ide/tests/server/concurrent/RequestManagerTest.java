@@ -53,7 +53,30 @@ public class RequestManagerTest {
   }
   
   @Test(timeout = 1000)
-  public void testLogException() {
+  public void testRunWriteLogExceptionNonCancellable() {
+    final Runnable _function = () -> {
+      final Function0<Object> _function_1 = () -> {
+        return null;
+      };
+      final Function2<CancelIndicator, Object, Object> _function_2 = (CancelIndicator $0, Object $1) -> {
+        throw new RuntimeException();
+      };
+      final CompletableFuture<Object> future = this.requestManager.<Object, Object>runWrite(_function_1, _function_2);
+      try {
+        future.join();
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    };
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    logResult.assertLogEntry("Error during request:");
+  }
+  
+  @Test(timeout = 1000)
+  public void testRunWriteLogExceptionCancellable() {
     final Runnable _function = () -> {
       final Function0<Object> _function_1 = () -> {
         throw new RuntimeException();
@@ -63,7 +86,7 @@ public class RequestManagerTest {
       };
       final CompletableFuture<Object> future = this.requestManager.<Object, Object>runWrite(_function_1, _function_2);
       try {
-        future.get();
+        future.join();
       } catch (final Throwable _t) {
         if (_t instanceof Exception) {
         } else {
@@ -76,7 +99,7 @@ public class RequestManagerTest {
   }
   
   @Test(timeout = 1000, expected = ExecutionException.class)
-  public void testCatchException() {
+  public void testRunWriteCatchException() {
     final Runnable _function = () -> {
       try {
         final Function0<Object> _function_1 = () -> {
@@ -86,6 +109,43 @@ public class RequestManagerTest {
           return null;
         };
         final CompletableFuture<Object> future = this.requestManager.<Object, Object>runWrite(_function_1, _function_2);
+        Assert.assertEquals("Foo", future.get());
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    Assert.fail();
+  }
+  
+  @Test(timeout = 1000)
+  public void testRunReadLogException() {
+    final Runnable _function = () -> {
+      final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator it) -> {
+        throw new RuntimeException();
+      };
+      final CompletableFuture<Object> future = this.requestManager.<Object>runRead(_function_1);
+      try {
+        future.join();
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    };
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    logResult.assertLogEntry("Error during request:");
+  }
+  
+  @Test(timeout = 1000, expected = ExecutionException.class)
+  public void testRunReadCatchException() {
+    final Runnable _function = () -> {
+      try {
+        final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator it) -> {
+          throw new RuntimeException();
+        };
+        final CompletableFuture<Object> future = this.requestManager.<Object>runRead(_function_1);
         Assert.assertEquals("Foo", future.get());
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
