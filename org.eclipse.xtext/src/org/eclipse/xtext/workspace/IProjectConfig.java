@@ -37,4 +37,16 @@ public interface IProjectConfig {
 	 * @return the workspace config
 	 */
 	IWorkspaceConfig getWorkspaceConfig();
+
+	/**
+	 * During the build, projects are indexed, validated and compiled. The return of this method configures whether this
+	 * project is validated and compiled or not.
+	 * 
+	 * @return true if this project is indexed only
+	 * 
+	 * @since 2.21
+	 */
+	default boolean isIndexOnly() {
+		return false;
+	}
 }

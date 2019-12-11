@@ -128,6 +128,7 @@ public class ProjectManager {
 			return true;
 		});
 		result.setCancelIndicator(cancelIndicator);
+		result.setIndexOnly(projectConfig.isIndexOnly());
 		return result;
 	}
 
