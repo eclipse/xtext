@@ -14,12 +14,14 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter
 import org.junit.After
-import org.junit.Test
 import org.junit.Before
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/880")
 class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 	
 	static val VALIDATION_TIMEOUT = 10000L
