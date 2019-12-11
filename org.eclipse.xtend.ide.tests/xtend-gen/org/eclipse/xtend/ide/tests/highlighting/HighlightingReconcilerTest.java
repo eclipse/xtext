@@ -30,11 +30,13 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/880")
 @SuppressWarnings("all")
 public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
   private static final long VALIDATION_TIMEOUT = 10000L;
