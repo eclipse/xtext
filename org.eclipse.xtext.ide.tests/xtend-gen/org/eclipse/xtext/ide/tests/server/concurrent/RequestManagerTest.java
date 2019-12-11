@@ -15,7 +15,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Level;
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.ide.server.concurrent.ReadRequest;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
+import org.eclipse.xtext.ide.server.concurrent.WriteRequest;
 import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -71,7 +73,7 @@ public class RequestManagerTest {
         }
       }
     };
-    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest.class, _function);
     logResult.assertLogEntry("Error during request:");
   }
   
@@ -94,7 +96,7 @@ public class RequestManagerTest {
         }
       }
     };
-    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest.class, _function);
     logResult.assertLogEntry("Error during request:");
   }
   
@@ -114,8 +116,8 @@ public class RequestManagerTest {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
-    Assert.fail();
+    LoggingTester.captureLogging(Level.ALL, WriteRequest.class, _function);
+    Assert.fail("unreachable");
   }
   
   @Test(timeout = 1000)
@@ -134,7 +136,7 @@ public class RequestManagerTest {
         }
       }
     };
-    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    final LoggingTester.LogCapture logResult = LoggingTester.captureLogging(Level.ALL, ReadRequest.class, _function);
     logResult.assertLogEntry("Error during request:");
   }
   
@@ -151,7 +153,7 @@ public class RequestManagerTest {
         throw Exceptions.sneakyThrow(_e);
       }
     };
-    LoggingTester.captureLogging(Level.ALL, RequestManager.class, _function);
+    LoggingTester.captureLogging(Level.ALL, ReadRequest.class, _function);
     Assert.fail();
   }
   

@@ -23,6 +23,8 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import org.junit.Assert
+import org.eclipse.xtext.ide.server.concurrent.WriteRequest
+import org.eclipse.xtext.ide.server.concurrent.ReadRequest
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -48,7 +50,7 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000)
 	def void testRunWriteLogExceptionNonCancellable() {
-		val logResult = LoggingTester.captureLogging(Level.ALL, RequestManager, [
+		val logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest, [
 			val future = requestManager.runWrite([], [
 				throw new RuntimeException();
 			])
@@ -64,7 +66,7 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000)
 	def void testRunWriteLogExceptionCancellable() {
-		val logResult = LoggingTester.captureLogging(Level.ALL, RequestManager, [
+		val logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest, [
 			val future = requestManager.runWrite([
 				throw new RuntimeException();
 			], [])
@@ -80,7 +82,7 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000, expected = ExecutionException)
 	def void testRunWriteCatchException() {
-		LoggingTester.captureLogging(Level.ALL, RequestManager, [
+		LoggingTester.captureLogging(Level.ALL, WriteRequest, [
 			val future = requestManager.runWrite([
 				throw new RuntimeException()
 			], [])
@@ -88,12 +90,12 @@ class RequestManagerTest {
 			assertEquals('Foo', future.get)
 		])
 		
-		Assert.fail
+		Assert.fail("unreachable")
 	}
 
 	@Test(timeout = 1000)
 	def void testRunReadLogException() {
-		val logResult = LoggingTester.captureLogging(Level.ALL, RequestManager, [
+		val logResult = LoggingTester.captureLogging(Level.ALL, ReadRequest, [
 			val future = requestManager.runRead([
 				throw new RuntimeException();
 			])
@@ -109,7 +111,7 @@ class RequestManagerTest {
 
 	@Test(timeout = 1000, expected = ExecutionException)
 	def void testRunReadCatchException() {
-		LoggingTester.captureLogging(Level.ALL, RequestManager, [
+		LoggingTester.captureLogging(Level.ALL, ReadRequest, [
 			val future = requestManager.runRead([
 				throw new RuntimeException()
 			])

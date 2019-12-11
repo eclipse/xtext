@@ -10,12 +10,19 @@ package org.eclipse.xtext.ide.server.concurrent;
 import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtext.ide.server.concurrent.Cancellable;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
+import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 
 @SuppressWarnings("all")
 public abstract class AbstractRequest<V extends Object> implements Runnable, Cancellable {
   protected final CompletableFuture<V> result = new CompletableFuture<V>();
   
   protected final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(this.result);
+  
+  protected final RequestManager requestManager;
+  
+  public AbstractRequest(final RequestManager requestManager) {
+    this.requestManager = requestManager;
+  }
   
   @Override
   public void cancel() {

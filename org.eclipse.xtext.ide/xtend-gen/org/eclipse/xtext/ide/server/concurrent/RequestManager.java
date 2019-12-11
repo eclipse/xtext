@@ -14,8 +14,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.BiConsumer;
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.ide.server.concurrent.AbstractRequest;
 import org.eclipse.xtext.ide.server.concurrent.ReadRequest;
 import org.eclipse.xtext.ide.server.concurrent.WriteRequest;
@@ -33,8 +31,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
  */
 @SuppressWarnings("all")
 public class RequestManager {
-  private static final Logger LOG = Logger.getLogger(RequestManager.class);
-  
   @Inject
   private ExecutorService parallel;
   
@@ -53,27 +49,20 @@ public class RequestManager {
   }
   
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> cancellable) {
-    ReadRequest<V> _readRequest = new ReadRequest<V>(cancellable, this.parallel);
+    ReadRequest<V> _readRequest = new ReadRequest<V>(this, cancellable, this.parallel);
     return this.<V>submit(_readRequest);
   }
   
   public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> cancellable) {
     final CompletableFuture<Void> cancelFuture = this.cancel();
-    WriteRequest<U, V> _writeRequest = new WriteRequest<U, V>(nonCancellable, cancellable, cancelFuture);
+    WriteRequest<U, V> _writeRequest = new WriteRequest<U, V>(this, nonCancellable, cancellable, cancelFuture);
     return this.<V>submit(_writeRequest);
   }
   
   protected <V extends Object> CompletableFuture<V> submit(final AbstractRequest<V> request) {
     this.requests.add(request);
     this.queue.submit(request);
-    final CompletableFuture<V> future = request.get();
-    final BiConsumer<V, Throwable> _function = (V v, Throwable thr) -> {
-      if (((thr != null) && (!this.isCancelException(thr)))) {
-        RequestManager.LOG.error("Error during request: ", thr);
-      }
-    };
-    future.whenComplete(_function);
-    return future;
+    return request.get();
   }
   
   protected CompletableFuture<Void> cancel() {
