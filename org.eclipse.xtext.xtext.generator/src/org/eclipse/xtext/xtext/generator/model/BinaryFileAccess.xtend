@@ -35,5 +35,12 @@ class BinaryFileAccess {
 			fileSystemAccess.generateFile(path, new ByteArrayInputStream(internalContents))
 		}
 	}
+	
+	def existIn(IXtextGeneratorFileSystemAccess fileSystemAccess) {
+		if (fileSystemAccess === null) {
+			return false
+		}
+		return fileSystemAccess.isFile(path)
+	}
 
 }
