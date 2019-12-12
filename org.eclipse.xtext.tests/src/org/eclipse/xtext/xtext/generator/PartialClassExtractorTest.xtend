@@ -71,6 +71,12 @@ class PartialClassExtractorTest {
 		    }
 		    // $ANTLR end "ruleMySuperDuperEnum"
 		    
+		    // $ANTLR start "ruleSuperDuperFragment"
+		    // InternalMyDsl.g:17296:1: ruleSuperDuperFragment[EObject in_current] returns [EObject current=in_current] : (otherlv_0= '{' ( ( (lv_parameters_1_0= ruleCallParameter ) ) otherlv_2= ';' )* otherlv_3= '}' ) ;
+		    public final EObject ruleSuperDuperFragment(EObject in_current) throws RecognitionException {
+		        return null;
+		    }
+		    // $ANTLR end "ruleSuperDuperFragment"
 		    // Delegated rules
 		}
 		''', 
@@ -95,6 +101,7 @@ class PartialClassExtractorTest {
 		interface InternalMyDslParserSignatures {
 		     EObject ruleMySuperDuperObject() throws RecognitionException;
 		     Enumerator ruleMySuperDuperEnum() throws RecognitionException;
+		     EObject ruleSuperDuperFragment(EObject in_current) throws RecognitionException;
 		}
 		
 		@SuppressWarnings("all")
@@ -157,7 +164,27 @@ class PartialClassExtractorTest {
 		
 		}
 		
-		public class InternalMyDslParser extends InternalMyDslParser3 {
+		@SuppressWarnings("all")
+		abstract class InternalMyDslParser4 extends InternalMyDslParser3 {
+		
+		        InternalMyDslParser4(TokenStream input) {
+		            this(input, new RecognizerSharedState());
+		        }
+		
+		        InternalMyDslParser4(TokenStream input, RecognizerSharedState state) {
+		            super(input, state);
+		        }
+		
+		    // $ANTLR start "ruleSuperDuperFragment"
+		    // InternalMyDsl.g:17296:1: ruleSuperDuperFragment[EObject in_current] returns [EObject current=in_current] : (otherlv_0= '{' ( ( (lv_parameters_1_0= ruleCallParameter ) ) otherlv_2= ';' )* otherlv_3= '}' ) ;
+		    public final EObject ruleSuperDuperFragment(EObject in_current) throws RecognitionException {
+		        return null;
+		    }
+		    // $ANTLR end "ruleSuperDuperFragment"
+		
+		}
+		
+		public class InternalMyDslParser extends InternalMyDslParser4 {
 		
 		    
 		    public InternalMyDslParser(TokenStream input) {
