@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
@@ -42,14 +43,14 @@ class RequestManager {
 
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V cancellable) {
 		return submit(
-			new ReadRequest(cancellable, parallel)
+			new ReadRequest(this, cancellable, parallel)
 		)
 	}
 
 	def <U, V> CompletableFuture<V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V cancellable) {
 		val cancelFuture = cancel()
 		return submit(
-			new WriteRequest(nonCancellable, cancellable, cancelFuture)
+			new WriteRequest(this, nonCancellable, cancellable, cancelFuture)
 		)
 	}
 
@@ -81,6 +82,7 @@ class RequestManager {
 
 @FinalFieldsConstructor
 class ReadRequest<V> extends AbstractRequest<V> {
+	static final Logger LOG = Logger.getLogger(ReadRequest);
 
 	val (CancelIndicator)=>V cancellable
 	val ExecutorService executor
@@ -92,6 +94,9 @@ class ReadRequest<V> extends AbstractRequest<V> {
 				cancelIndicator.checkCanceled
 				result.complete(cancellable.apply(cancelIndicator))
 			} catch(Throwable e) {
+				if (e !== null && !requestManager.isCancelException(e)) {
+					LOG.error("Error during request: ", e);
+				}
 				result.completeExceptionally(e)
 			}
 		]
@@ -101,6 +106,7 @@ class ReadRequest<V> extends AbstractRequest<V> {
 
 @FinalFieldsConstructor
 class WriteRequest<U, V> extends AbstractRequest<V> {
+	static final Logger LOG = Logger.getLogger(WriteRequest);
 
 	val ()=>U nonCancellable
 	val (CancelIndicator, U)=>V cancellable
@@ -118,6 +124,9 @@ class WriteRequest<U, V> extends AbstractRequest<V> {
 			cancelIndicator.checkCanceled
 			result.complete(cancellable.apply(cancelIndicator, intermediateResult))
 		} catch(Throwable e) {
+			if (e !== null && !requestManager.isCancelException(e)) {
+				LOG.error("Error during request: ", e);
+			}
 			result.completeExceptionally(e)
 		}
 	}
@@ -128,6 +137,11 @@ abstract class AbstractRequest<V> implements Runnable, Cancellable {
 
 	protected val result = new CompletableFuture<V>()
 	protected val cancelIndicator = new RequestCancelIndicator(result)
+	protected val RequestManager requestManager;
+
+	new (RequestManager requestManager) {
+		this.requestManager = requestManager;
+	}
 
 	override cancel() {
 		cancelIndicator.cancel

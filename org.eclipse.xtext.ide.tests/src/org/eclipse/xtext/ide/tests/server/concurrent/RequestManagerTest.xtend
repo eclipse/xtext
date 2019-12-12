@@ -9,16 +9,22 @@ package org.eclipse.xtext.ide.tests.server.concurrent
 
 import com.google.inject.Guice
 import com.google.inject.Inject
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import org.apache.log4j.Level
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
+import org.eclipse.xtext.testing.logging.LoggingTester
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.Assert
+import org.eclipse.xtext.ide.server.concurrent.WriteRequest
+import org.eclipse.xtext.ide.server.concurrent.ReadRequest
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -40,6 +46,80 @@ class RequestManagerTest {
 	def void tearDown() {
 		requestManager.shutdown
 		sharedState = null
+	}
+
+	@Test(timeout = 1000)
+	def void testRunWriteLogExceptionNonCancellable() {
+		val logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest, [
+			val future = requestManager.runWrite([], [
+				throw new RuntimeException();
+			])
+			
+			// join future to assert log later
+			try {
+				future.join
+			} catch (Exception e) {}
+		])
+		
+		logResult.assertLogEntry("Error during request:")
+	}
+
+	@Test(timeout = 1000)
+	def void testRunWriteLogExceptionCancellable() {
+		val logResult = LoggingTester.captureLogging(Level.ALL, WriteRequest, [
+			val future = requestManager.runWrite([
+				throw new RuntimeException();
+			], [])
+			
+			// join future to assert log later
+			try {
+				future.join
+			} catch (Exception e) {}
+		])
+		
+		logResult.assertLogEntry("Error during request:")
+	}
+
+	@Test(timeout = 1000, expected = ExecutionException)
+	def void testRunWriteCatchException() {
+		LoggingTester.captureLogging(Level.ALL, WriteRequest, [
+			val future = requestManager.runWrite([
+				throw new RuntimeException()
+			], [])
+
+			assertEquals('Foo', future.get)
+		])
+		
+		Assert.fail("unreachable")
+	}
+
+	@Test(timeout = 1000)
+	def void testRunReadLogException() {
+		val logResult = LoggingTester.captureLogging(Level.ALL, ReadRequest, [
+			val future = requestManager.runRead([
+				throw new RuntimeException();
+			])
+			
+			// join future to assert log later
+			try {
+				future.join
+			} catch (Exception e) {}
+		])
+		
+		logResult.assertLogEntry("Error during request:")
+	}
+
+	@Test(timeout = 1000, expected = ExecutionException)
+	def void testRunReadCatchException() {
+		LoggingTester.captureLogging(Level.ALL, ReadRequest, [
+			val future = requestManager.runRead([
+				throw new RuntimeException()
+			])
+
+			assertEquals('Foo', future.get)
+		])
+		
+		Assert.fail
 	}
 
 	@Test(timeout = 1000)
@@ -132,5 +212,4 @@ class RequestManagerTest {
 			Thread.sleep(10)
 		}
 	}
-
 }

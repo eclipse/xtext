@@ -49,13 +49,13 @@ public class RequestManager {
   }
   
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> cancellable) {
-    ReadRequest<V> _readRequest = new ReadRequest<V>(cancellable, this.parallel);
+    ReadRequest<V> _readRequest = new ReadRequest<V>(this, cancellable, this.parallel);
     return this.<V>submit(_readRequest);
   }
   
   public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> cancellable) {
     final CompletableFuture<Void> cancelFuture = this.cancel();
-    WriteRequest<U, V> _writeRequest = new WriteRequest<U, V>(nonCancellable, cancellable, cancelFuture);
+    WriteRequest<U, V> _writeRequest = new WriteRequest<U, V>(this, nonCancellable, cancellable, cancelFuture);
     return this.<V>submit(_writeRequest);
   }
   
