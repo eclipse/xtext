@@ -403,14 +403,22 @@ public class TemplateFileWizardFragment extends AbstractXtextGeneratorFragment {
   
   public void generateDefaultIcons() {
     final BinaryFileAccess projectTemplate = this.fileAccessFactory.createBinaryFile("file_template.png");
-    projectTemplate.setContent(this.readBinaryFileFromPackage("file_template.png"));
-    projectTemplate.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
+    boolean _existIn = projectTemplate.existIn(this.getProjectConfig().getEclipsePlugin().getIcons());
+    boolean _not = (!_existIn);
+    if (_not) {
+      projectTemplate.setContent(this.readBinaryFileFromPackage("file_template.png"));
+      projectTemplate.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
+    }
     String _simpleName = GrammarUtil.getSimpleName(this.getGrammar());
     String _plus = ("new_" + _simpleName);
     String _plus_1 = (_plus + "_file.png");
     final BinaryFileAccess newProject = this.fileAccessFactory.createBinaryFile(_plus_1);
-    newProject.setContent(this.readBinaryFileFromPackage("new_xfile.png"));
-    newProject.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
+    boolean _existIn_1 = newProject.existIn(this.getProjectConfig().getEclipsePlugin().getIcons());
+    boolean _not_1 = (!_existIn_1);
+    if (_not_1) {
+      newProject.setContent(this.readBinaryFileFromPackage("new_xfile.png"));
+      newProject.writeTo(this.getProjectConfig().getEclipsePlugin().getIcons());
+    }
   }
   
   private byte[] readBinaryFileFromPackage(final String fileName) {

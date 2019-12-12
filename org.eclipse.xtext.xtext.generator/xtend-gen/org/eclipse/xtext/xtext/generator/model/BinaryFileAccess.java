@@ -12,6 +12,7 @@ import java.util.Arrays;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 /**
  * A utility class for generating binary files.
@@ -36,6 +37,13 @@ public class BinaryFileAccess {
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(this.internalContents);
       fileSystemAccess.generateFile(this.path, _byteArrayInputStream);
     }
+  }
+  
+  public boolean existIn(final IXtextGeneratorFileSystemAccess fileSystemAccess) {
+    if ((fileSystemAccess == null)) {
+      return false;
+    }
+    return fileSystemAccess.isFile(this.path);
   }
   
   @Pure

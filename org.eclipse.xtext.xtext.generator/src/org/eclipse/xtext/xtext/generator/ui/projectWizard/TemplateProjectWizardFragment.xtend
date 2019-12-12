@@ -111,7 +111,7 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 					</perspectiveExtension>
 				</extension>
 			'''
-		
+
 			if (generateToolbarButton) {
 				projectConfig.eclipsePlugin.pluginXml.entries += '''
 					<extension
@@ -244,12 +244,15 @@ class TemplateProjectWizardFragment extends AbstractXtextGeneratorFragment {
 
 	def generateDefaultIcons() {
 		val projectTemplate = fileAccessFactory.createBinaryFile("project_template.png")
-		projectTemplate.content = readBinaryFileFromPackage("project_template.png")
-		projectTemplate.writeTo(projectConfig.eclipsePlugin.icons)
-
+		if (!projectTemplate.existIn(projectConfig.eclipsePlugin.icons)) {
+			projectTemplate.content = readBinaryFileFromPackage("project_template.png")
+			projectTemplate.writeTo(projectConfig.eclipsePlugin.icons)
+		}
 		val newProject = fileAccessFactory.createBinaryFile("new_" + grammar.simpleName + "_proj.gif")
-		newProject.content = readBinaryFileFromPackage("new_xproj.gif")
-		newProject.writeTo(projectConfig.eclipsePlugin.icons)
+		if (!newProject.existIn(projectConfig.eclipsePlugin.icons)) {
+			newProject.content = readBinaryFileFromPackage("new_xproj.gif")
+			newProject.writeTo(projectConfig.eclipsePlugin.icons)
+		}
 	}
 
 	private def byte[] readBinaryFileFromPackage(String fileName) {
