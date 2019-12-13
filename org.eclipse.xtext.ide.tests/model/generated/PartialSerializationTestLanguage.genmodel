@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ide.tests/testlang-src-gen" modelPluginID="org.eclipse.xtext.ide.tests"
     forceOverwrite="true" modelName="PartialSerializationTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="8.0"
-    copyrightFields="false" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../testlang-src/org/eclipse/xtext/ide/tests/testlanguage/WithTransient.genmodel#//withtransient">
+    copyrightFields="false" runtimeVersion="2.20" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../testlang-src/org/eclipse/xtext/ide/tests/testlanguage/WithTransient.genmodel#//withtransient">
   <genPackages prefix="PartialSerializationTestLanguage" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
       disposableProviderFactory="true" fileExtensions="pstl" ecorePackage="PartialSerializationTestLanguage.ecore#/">
     <genClasses ecoreClass="PartialSerializationTestLanguage.ecore#//Model">

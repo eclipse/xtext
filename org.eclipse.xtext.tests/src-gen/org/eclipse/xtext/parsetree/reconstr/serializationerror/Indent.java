@@ -28,10 +28,6 @@ public interface Indent extends Test
   /**
    * Returns the value of the '<em><b>Req</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Req</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Req</em>' containment reference.
    * @see #setReq(TwoRequired)
@@ -54,10 +50,6 @@ public interface Indent extends Test
   /**
    * Returns the value of the '<em><b>Opt</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Opt</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Opt</em>' containment reference.
    * @see #setOpt(TwoOptions)
@@ -81,10 +73,6 @@ public interface Indent extends Test
    * Returns the value of the '<em><b>Indent</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Indent</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Indent</em>' containment reference list.
    * @see org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage#getIndent_Indent()

@@ -77,6 +77,7 @@ public class Add0Impl extends Exp0Impl implements Add0
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp0 getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class Add0Impl extends Exp0Impl implements Add0
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Exp0 newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class Add0Impl extends Exp0Impl implements Add0
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp0 getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class Add0Impl extends Exp0Impl implements Add0
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Exp0 newRight)
   {
     if (newRight != right)

@@ -183,6 +183,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model getModel()
   {
     return model;
@@ -210,6 +211,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setModel(Model newModel)
   {
     if (newModel != model)
@@ -231,6 +233,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AttributeExclusionTest getAttributeExclusion()
   {
     return attributeExclusion;
@@ -258,6 +261,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAttributeExclusion(AttributeExclusionTest newAttributeExclusion)
   {
     if (newAttributeExclusion != attributeExclusion)
@@ -279,6 +283,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedTypeTest getNestedType()
   {
     return nestedType;
@@ -306,6 +311,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNestedType(NestedTypeTest newNestedType)
   {
     if (newNestedType != nestedType)
@@ -327,6 +333,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedTypeRecursiveTest getNestedTypeRecursiveTest2()
   {
     return nestedTypeRecursiveTest2;
@@ -354,6 +361,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNestedTypeRecursiveTest2(NestedTypeRecursiveTest newNestedTypeRecursiveTest2)
   {
     if (newNestedTypeRecursiveTest2 != nestedTypeRecursiveTest2)
@@ -375,6 +383,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getParentRef()
   {
     return parentRef;
@@ -402,6 +411,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParentRef(EObject newParentRef)
   {
     if (newParentRef != parentRef)
@@ -423,6 +433,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public QuantityExclusionTest getQuantityExclusion()
   {
     return quantityExclusion;
@@ -450,6 +461,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setQuantityExclusion(QuantityExclusionTest newQuantityExclusion)
   {
     if (newQuantityExclusion != quantityExclusion)
@@ -471,6 +483,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ValueExclusionTest getValueExclusion()
   {
     return valueExclusion;
@@ -498,6 +511,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValueExclusion(ValueExclusionTest newValueExclusion)
   {
     if (newValueExclusion != valueExclusion)
@@ -519,6 +533,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -529,6 +544,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -542,6 +558,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NodeExclusion getNodeExclusion()
   {
     return nodeExclusion;
@@ -569,6 +586,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNodeExclusion(NodeExclusion newNodeExclusion)
   {
     if (newNodeExclusion != nodeExclusion)
@@ -590,6 +608,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NodeExclusionList getNodeExclusionList()
   {
     return nodeExclusionList;
@@ -617,6 +636,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNodeExclusionList(NodeExclusionList newNodeExclusionList)
   {
     if (newNodeExclusionList != nodeExclusionList)
@@ -831,7 +851,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -36,10 +36,6 @@ public interface LongAlternative extends EObject
   /**
    * Returns the value of the '<em><b>Foo</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Foo</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Foo</em>' attribute.
    * @see #setFoo(String)
@@ -63,10 +59,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val1</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val1()
@@ -79,10 +71,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val2</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val2()
@@ -95,10 +83,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val3</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val3()
@@ -111,10 +95,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val4</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val4</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val4</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val4()
@@ -127,10 +107,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val5</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val5</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val5</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val5()
@@ -143,10 +119,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val6</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val6</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val6</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val6()
@@ -159,10 +131,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val7</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val7</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val7</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val7()
@@ -175,10 +143,6 @@ public interface LongAlternative extends EObject
    * Returns the value of the '<em><b>Val8</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val8</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val8</em>' attribute list.
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative_Val8()

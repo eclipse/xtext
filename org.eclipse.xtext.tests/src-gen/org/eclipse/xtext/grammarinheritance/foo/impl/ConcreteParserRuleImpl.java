@@ -95,6 +95,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public double getMagicNumber()
   {
     return magicNumber;
@@ -105,6 +106,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMagicNumber(double newMagicNumber)
   {
     double oldMagicNumber = magicNumber;
@@ -118,6 +120,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AType> getElements()
   {
     if (elements == null)
@@ -231,7 +234,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (magicNumber: ");
     result.append(magicNumber);
     result.append(')');

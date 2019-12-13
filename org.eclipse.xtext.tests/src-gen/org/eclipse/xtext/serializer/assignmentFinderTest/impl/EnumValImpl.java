@@ -75,6 +75,7 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestEnum getEn()
   {
     return en;
@@ -85,6 +86,7 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEn(TestEnum newEn)
   {
     TestEnum oldEn = en;
@@ -169,7 +171,7 @@ public class EnumValImpl extends MinimalEObjectImpl.Container implements EnumVal
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (en: ");
     result.append(en);
     result.append(')');

@@ -66,6 +66,7 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead4 getZ()
   {
     return z;
@@ -93,6 +94,7 @@ public class LookAhead3Impl extends AltsImpl implements LookAhead3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setZ(LookAhead4 newZ)
   {
     if (newZ != z)

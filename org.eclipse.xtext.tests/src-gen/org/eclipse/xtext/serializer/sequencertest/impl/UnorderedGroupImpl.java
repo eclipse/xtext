@@ -121,6 +121,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -131,6 +132,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -144,6 +146,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getVal2()
   {
     return val2;
@@ -154,6 +157,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(int newVal2)
   {
     int oldVal2 = val2;
@@ -167,6 +171,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupVal getVal3()
   {
     return val3;
@@ -194,6 +199,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(UnorderedGroupVal newVal3)
   {
     if (newVal3 != val3)
@@ -215,6 +221,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupValDelegate getVal4()
   {
     return val4;
@@ -242,6 +249,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal4(UnorderedGroupValDelegate newVal4)
   {
     if (newVal4 != val4)
@@ -382,7 +390,7 @@ public class UnorderedGroupImpl extends MinimalEObjectImpl.Container implements 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

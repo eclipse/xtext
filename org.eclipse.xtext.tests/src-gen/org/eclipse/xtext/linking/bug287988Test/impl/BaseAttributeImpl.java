@@ -107,6 +107,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BaseAttribute getTypeRef()
   {
     if (typeRef != null && typeRef.eIsProxy())
@@ -137,6 +138,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTypeRef(BaseAttribute newTypeRef)
   {
     BaseAttribute oldTypeRef = typeRef;
@@ -150,6 +152,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getType()
   {
     return type;
@@ -160,6 +163,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(String newType)
   {
     String oldType = type;
@@ -173,6 +177,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -183,6 +188,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -288,7 +294,7 @@ public class BaseAttributeImpl extends MinimalEObjectImpl.Container implements B
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(", name: ");

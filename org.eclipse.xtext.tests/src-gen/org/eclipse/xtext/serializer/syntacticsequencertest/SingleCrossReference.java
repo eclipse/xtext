@@ -30,10 +30,6 @@ public interface SingleCrossReference extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -56,10 +52,6 @@ public interface SingleCrossReference extends EObject
   /**
    * Returns the value of the '<em><b>Ref1</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref1</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref1</em>' reference.
    * @see #setRef1(SingleCrossReference)
@@ -82,10 +74,6 @@ public interface SingleCrossReference extends EObject
   /**
    * Returns the value of the '<em><b>Ref2</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref2</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref2</em>' reference.
    * @see #setRef2(SingleCrossReference)
@@ -108,10 +96,6 @@ public interface SingleCrossReference extends EObject
   /**
    * Returns the value of the '<em><b>Ref3</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref3</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref3</em>' reference.
    * @see #setRef3(SingleCrossReference)
@@ -134,10 +118,6 @@ public interface SingleCrossReference extends EObject
   /**
    * Returns the value of the '<em><b>Ref4</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref4</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref4</em>' reference.
    * @see #setRef4(SingleCrossReference)

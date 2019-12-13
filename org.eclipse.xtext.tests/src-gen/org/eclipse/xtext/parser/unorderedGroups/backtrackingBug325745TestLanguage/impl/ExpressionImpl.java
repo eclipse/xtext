@@ -116,6 +116,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPrefix()
   {
     return prefix;
@@ -126,6 +127,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPrefix(String newPrefix)
   {
     String oldPrefix = prefix;
@@ -139,6 +141,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SimpleTerm> getTerms()
   {
     if (terms == null)
@@ -153,6 +156,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPostfix()
   {
     return postfix;
@@ -163,6 +167,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPostfix(String newPostfix)
   {
     String oldPostfix = postfix;
@@ -285,7 +290,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (prefix: ");
     result.append(prefix);
     result.append(", postfix: ");

@@ -28,10 +28,6 @@ public interface AssignedAction extends EObject
   /**
    * Returns the value of the '<em><b>Val1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute.
    * @see #setVal1(String)
@@ -54,10 +50,6 @@ public interface AssignedAction extends EObject
   /**
    * Returns the value of the '<em><b>Child</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Child</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Child</em>' containment reference.
    * @see #setChild(AssignedAction)
@@ -80,10 +72,6 @@ public interface AssignedAction extends EObject
   /**
    * Returns the value of the '<em><b>Val2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute.
    * @see #setVal2(String)

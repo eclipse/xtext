@@ -6,6 +6,7 @@ package org.eclipse.xtext.generator.ecore.subPackage.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -67,7 +68,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SubPackagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,12 +83,14 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
     if (isInited) return (SubPackagePackage)EPackage.Registry.INSTANCE.getEPackage(SubPackagePackage.eNS_URI);
 
     // Obtain or create and register package
-    SubPackagePackageImpl theSubPackagePackage = (SubPackagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SubPackagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SubPackagePackageImpl());
+    Object registeredSubPackagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SubPackagePackageImpl theSubPackagePackage = registeredSubPackagePackage instanceof SubPackagePackageImpl ? (SubPackagePackageImpl)registeredSubPackagePackage : new SubPackagePackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
     SuperPackagePackage.eINSTANCE.eClass();
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSubPackagePackage.createPackageContents();
@@ -98,7 +101,6 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
     // Mark meta-data to indicate it can't be changed
     theSubPackagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SubPackagePackage.eNS_URI, theSubPackagePackage);
     return theSubPackagePackage;
@@ -109,6 +111,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubMain()
   {
     return subMainEClass;
@@ -119,6 +122,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubMain_SuperMains()
   {
     return (EReference)subMainEClass.getEStructuralFeatures().get(0);
@@ -129,6 +133,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubMain_Another()
   {
     return (EReference)subMainEClass.getEStructuralFeatures().get(1);
@@ -139,6 +144,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnotherSuperMain()
   {
     return anotherSuperMainEClass;
@@ -149,6 +155,7 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubPackageFactory getSubPackageFactory()
   {
     return (SubPackageFactory)getEFactoryInstance();

@@ -76,6 +76,7 @@ public class EcoreTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class EcoreTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EcoreTerminalsTestLanguagePackage getEcoreTerminalsTestLanguagePackage()
   {
     return (EcoreTerminalsTestLanguagePackage)getEPackage();

@@ -66,6 +66,7 @@ public class NestedTypeRecursiveTestImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedTypeRecursiveTest getLeft()
   {
     return left;
@@ -93,6 +94,7 @@ public class NestedTypeRecursiveTestImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(NestedTypeRecursiveTest newLeft)
   {
     if (newLeft != left)

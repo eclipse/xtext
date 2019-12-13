@@ -32,10 +32,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Strings</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Strings</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Strings</em>' attribute list.
    * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package#getModel_Strings()
@@ -48,10 +44,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Keys</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Keys</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Keys</em>' attribute list.
    * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package#getModel_Keys()
@@ -64,10 +56,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Values</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Values</em>' attribute list.
    * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package#getModel_Values()
@@ -79,10 +67,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Sub Model</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub Model</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub Model</em>' containment reference.
    * @see #setSubModel(SubModel)

@@ -236,6 +236,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFirst()
   {
     return first;
@@ -246,6 +247,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(boolean newFirst)
   {
     boolean oldFirst = first;
@@ -259,6 +261,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSecond()
   {
     return second;
@@ -269,6 +272,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(boolean newSecond)
   {
     boolean oldSecond = second;
@@ -282,6 +286,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isThird()
   {
     return third;
@@ -292,6 +297,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThird(boolean newThird)
   {
     boolean oldThird = third;
@@ -305,6 +311,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isForth()
   {
     return forth;
@@ -315,6 +322,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setForth(boolean newForth)
   {
     boolean oldForth = forth;
@@ -328,6 +336,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getFirstAsList()
   {
     if (firstAsList == null)
@@ -342,6 +351,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getSecondAsList()
   {
     if (secondAsList == null)
@@ -356,6 +366,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getThirdAsList()
   {
     if (thirdAsList == null)
@@ -370,6 +381,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getForthAsList()
   {
     if (forthAsList == null)
@@ -384,6 +396,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getValue()
   {
     return value;
@@ -394,6 +407,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(String newValue)
   {
     String oldValue = value;
@@ -407,6 +421,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedSerialization getSerialized()
   {
     return serialized;
@@ -434,6 +449,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSerialized(UnorderedSerialization newSerialized)
   {
     if (newSerialized != serialized)
@@ -455,6 +471,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<NestedModel> getNestedModel()
   {
     if (nestedModel == null)
@@ -664,7 +681,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (first: ");
     result.append(first);
     result.append(", second: ");

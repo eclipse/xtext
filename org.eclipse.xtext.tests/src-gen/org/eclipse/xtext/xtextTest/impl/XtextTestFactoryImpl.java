@@ -103,6 +103,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Grammar createGrammar()
   {
     GrammarImpl grammar = new GrammarImpl();
@@ -114,6 +115,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
@@ -125,6 +127,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
   {
     AbstractMetamodelDeclarationImpl abstractMetamodelDeclaration = new AbstractMetamodelDeclarationImpl();
@@ -136,6 +139,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GeneratedMetamodel createGeneratedMetamodel()
   {
     GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
@@ -147,6 +151,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReferencedMetamodel createReferencedMetamodel()
   {
     ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
@@ -158,6 +163,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParserRule createParserRule()
   {
     ParserRuleImpl parserRule = new ParserRuleImpl();
@@ -169,6 +175,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
@@ -180,6 +187,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
@@ -191,6 +199,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -202,6 +211,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Action createAction()
   {
     ActionImpl action = new ActionImpl();
@@ -213,6 +223,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Keyword createKeyword()
   {
     KeywordImpl keyword = new KeywordImpl();
@@ -224,6 +235,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RuleCall createRuleCall()
   {
     RuleCallImpl ruleCall = new RuleCallImpl();
@@ -235,6 +247,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedArgument createNamedArgument()
   {
     NamedArgumentImpl namedArgument = new NamedArgumentImpl();
@@ -246,6 +259,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -257,6 +271,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CrossReference createCrossReference()
   {
     CrossReferenceImpl crossReference = new CrossReferenceImpl();
@@ -268,6 +283,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Group createGroup()
   {
     GroupImpl group = new GroupImpl();
@@ -279,6 +295,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalRule createTerminalRule()
   {
     TerminalRuleImpl terminalRule = new TerminalRuleImpl();
@@ -290,6 +307,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractNegatedToken createAbstractNegatedToken()
   {
     AbstractNegatedTokenImpl abstractNegatedToken = new AbstractNegatedTokenImpl();
@@ -301,6 +319,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NegatedToken createNegatedToken()
   {
     NegatedTokenImpl negatedToken = new NegatedTokenImpl();
@@ -312,6 +331,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UntilToken createUntilToken()
   {
     UntilTokenImpl untilToken = new UntilTokenImpl();
@@ -323,6 +343,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Wildcard createWildcard()
   {
     WildcardImpl wildcard = new WildcardImpl();
@@ -334,6 +355,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EOF createEOF()
   {
     EOFImpl eof = new EOFImpl();
@@ -345,6 +367,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumRule createEnumRule()
   {
     EnumRuleImpl enumRule = new EnumRuleImpl();
@@ -356,6 +379,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumLiteralDeclaration createEnumLiteralDeclaration()
   {
     EnumLiteralDeclarationImpl enumLiteralDeclaration = new EnumLiteralDeclarationImpl();
@@ -367,6 +391,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Alternatives createAlternatives()
   {
     AlternativesImpl alternatives = new AlternativesImpl();
@@ -378,6 +403,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConditionalBranch createConditionalBranch()
   {
     ConditionalBranchImpl conditionalBranch = new ConditionalBranchImpl();
@@ -389,6 +415,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroup createUnorderedGroup()
   {
     UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
@@ -400,6 +427,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CharacterRange createCharacterRange()
   {
     CharacterRangeImpl characterRange = new CharacterRangeImpl();
@@ -411,6 +439,7 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XtextTestPackage getXtextTestPackage()
   {
     return (XtextTestPackage)getEPackage();

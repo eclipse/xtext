@@ -82,6 +82,7 @@ public class TwoChildsImpl extends ModelImpl implements TwoChilds
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryValue getDirectChild()
   {
     return directChild;
@@ -109,6 +110,7 @@ public class TwoChildsImpl extends ModelImpl implements TwoChilds
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDirectChild(MandatoryValue newDirectChild)
   {
     if (newDirectChild != directChild)
@@ -130,6 +132,7 @@ public class TwoChildsImpl extends ModelImpl implements TwoChilds
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalChild getOptChild()
   {
     return optChild;
@@ -157,6 +160,7 @@ public class TwoChildsImpl extends ModelImpl implements TwoChilds
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOptChild(OptionalChild newOptChild)
   {
     if (newOptChild != optChild)

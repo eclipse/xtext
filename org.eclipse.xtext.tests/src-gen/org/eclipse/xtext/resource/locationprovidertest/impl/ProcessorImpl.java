@@ -70,6 +70,7 @@ public class ProcessorImpl extends ComponentImpl implements Processor
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Data> getData()
   {
     if (data == null)

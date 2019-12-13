@@ -58,7 +58,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EcoreTerminalsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     if (isInited) return (EcoreTerminalsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EcoreTerminalsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EcoreTerminalsTestLanguagePackageImpl theEcoreTerminalsTestLanguagePackage = (EcoreTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EcoreTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EcoreTerminalsTestLanguagePackageImpl());
+    Object registeredEcoreTerminalsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EcoreTerminalsTestLanguagePackageImpl theEcoreTerminalsTestLanguagePackage = registeredEcoreTerminalsTestLanguagePackage instanceof EcoreTerminalsTestLanguagePackageImpl ? (EcoreTerminalsTestLanguagePackageImpl)registeredEcoreTerminalsTestLanguagePackage : new EcoreTerminalsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     // Mark meta-data to indicate it can't be changed
     theEcoreTerminalsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EcoreTerminalsTestLanguagePackage.eNS_URI, theEcoreTerminalsTestLanguagePackage);
     return theEcoreTerminalsTestLanguagePackage;
@@ -100,6 +100,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_IntValues()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_DoubleValues()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_DateValues()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -140,6 +144,7 @@ public class EcoreTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EcoreTerminalsTestLanguageFactory getEcoreTerminalsTestLanguageFactory()
   {
     return (EcoreTerminalsTestLanguageFactory)getEFactoryInstance();

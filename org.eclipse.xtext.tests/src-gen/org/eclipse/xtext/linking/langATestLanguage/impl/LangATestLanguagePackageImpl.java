@@ -75,7 +75,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LangATestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
     if (isInited) return (LangATestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LangATestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    LangATestLanguagePackageImpl theLangATestLanguagePackage = (LangATestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LangATestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LangATestLanguagePackageImpl());
+    Object registeredLangATestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LangATestLanguagePackageImpl theLangATestLanguagePackage = registeredLangATestLanguagePackage instanceof LangATestLanguagePackageImpl ? (LangATestLanguagePackageImpl)registeredLangATestLanguagePackage : new LangATestLanguagePackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
     // Mark meta-data to indicate it can't be changed
     theLangATestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LangATestLanguagePackage.eNS_URI, theLangATestLanguagePackage);
     return theLangATestLanguagePackage;
@@ -117,6 +117,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -127,6 +128,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Imports()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Types()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -157,6 +161,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_Uri()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -167,6 +172,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -177,6 +183,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -187,6 +194,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getType_Extends()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
@@ -197,6 +205,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getType_Implements()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(2);
@@ -207,6 +216,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LangATestLanguageFactory getLangATestLanguageFactory()
   {
     return (LangATestLanguageFactory)getEFactoryInstance();

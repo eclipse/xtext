@@ -73,6 +73,7 @@ public class WrappingDataTypeTestImpl extends RootImpl implements WrappingDataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDatatype()
   {
     return datatype;
@@ -83,6 +84,7 @@ public class WrappingDataTypeTestImpl extends RootImpl implements WrappingDataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDatatype(String newDatatype)
   {
     String oldDatatype = datatype;
@@ -167,7 +169,7 @@ public class WrappingDataTypeTestImpl extends RootImpl implements WrappingDataTy
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (datatype: ");
     result.append(datatype);
     result.append(')');

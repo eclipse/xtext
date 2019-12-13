@@ -72,6 +72,7 @@ public class NodeListImpl extends MinimalEObjectImpl.Container implements NodeLi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Node> getChildren()
   {
     if (children == null)

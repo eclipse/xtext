@@ -160,6 +160,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -170,6 +171,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -183,6 +185,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mixed getEobj()
   {
     return eobj;
@@ -210,6 +213,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEobj(Mixed newEobj)
   {
     if (newEobj != eobj)
@@ -231,6 +235,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDatatype()
   {
     return datatype;
@@ -241,6 +246,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDatatype(String newDatatype)
   {
     String oldDatatype = datatype;
@@ -254,6 +260,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mixed getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -284,6 +291,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(Mixed newRef)
   {
     Mixed oldRef = ref;
@@ -297,6 +305,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum getLit()
   {
     return lit;
@@ -307,6 +316,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLit(org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum newLit)
   {
     org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum oldLit = lit;
@@ -320,6 +330,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFragName()
   {
     return fragName;
@@ -330,6 +341,7 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFragName(String newFragName)
   {
     String oldFragName = fragName;
@@ -481,7 +493,7 @@ public class MixedImpl extends RootImpl implements Mixed
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", datatype: ");

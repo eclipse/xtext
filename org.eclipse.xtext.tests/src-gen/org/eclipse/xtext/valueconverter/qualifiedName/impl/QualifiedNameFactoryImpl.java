@@ -76,6 +76,7 @@ public class QualifiedNameFactoryImpl extends EFactoryImpl implements QualifiedN
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -87,6 +88,7 @@ public class QualifiedNameFactoryImpl extends EFactoryImpl implements QualifiedN
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public QualifiedNamePackage getQualifiedNamePackage()
   {
     return (QualifiedNamePackage)getEPackage();

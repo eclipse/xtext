@@ -33,10 +33,6 @@ public interface OperationCall extends EObject
   /**
    * Returns the value of the '<em><b>Operation</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operation</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operation</em>' reference.
    * @see #setOperation(Operation)
@@ -60,10 +56,6 @@ public interface OperationCall extends EObject
    * Returns the value of the '<em><b>Params</b></em>' attribute list.
    * The list contents are of type {@link java.lang.Integer}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Params</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Params</em>' attribute list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getOperationCall_Params()

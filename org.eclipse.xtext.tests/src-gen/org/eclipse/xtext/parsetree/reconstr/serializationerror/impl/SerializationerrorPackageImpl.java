@@ -91,7 +91,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SerializationerrorPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
     if (isInited) return (SerializationerrorPackage)EPackage.Registry.INSTANCE.getEPackage(SerializationerrorPackage.eNS_URI);
 
     // Obtain or create and register package
-    SerializationerrorPackageImpl theSerializationerrorPackage = (SerializationerrorPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SerializationerrorPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SerializationerrorPackageImpl());
+    Object registeredSerializationerrorPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SerializationerrorPackageImpl theSerializationerrorPackage = registeredSerializationerrorPackage instanceof SerializationerrorPackageImpl ? (SerializationerrorPackageImpl)registeredSerializationerrorPackage : new SerializationerrorPackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
     // Mark meta-data to indicate it can't be changed
     theSerializationerrorPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SerializationerrorPackage.eNS_URI, theSerializationerrorPackage);
     return theSerializationerrorPackage;
@@ -133,6 +133,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Test()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTest()
   {
     return testEClass;
@@ -163,6 +166,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTwoRequired()
   {
     return twoRequiredEClass;
@@ -173,6 +177,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTwoRequired_One()
   {
     return (EAttribute)twoRequiredEClass.getEStructuralFeatures().get(0);
@@ -183,6 +188,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTwoRequired_Two()
   {
     return (EAttribute)twoRequiredEClass.getEStructuralFeatures().get(1);
@@ -193,6 +199,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTwoOptions()
   {
     return twoOptionsEClass;
@@ -203,6 +210,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTwoOptions_One()
   {
     return (EAttribute)twoOptionsEClass.getEStructuralFeatures().get(0);
@@ -213,6 +221,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTwoOptions_Two()
   {
     return (EAttribute)twoOptionsEClass.getEStructuralFeatures().get(1);
@@ -223,6 +232,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIndent()
   {
     return indentEClass;
@@ -233,6 +243,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getIndent_Req()
   {
     return (EReference)indentEClass.getEStructuralFeatures().get(0);
@@ -243,6 +254,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getIndent_Opt()
   {
     return (EReference)indentEClass.getEStructuralFeatures().get(1);
@@ -253,6 +265,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getIndent_Indent()
   {
     return (EReference)indentEClass.getEStructuralFeatures().get(2);
@@ -263,6 +276,7 @@ public class SerializationerrorPackageImpl extends EPackageImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SerializationerrorFactory getSerializationerrorFactory()
   {
     return (SerializationerrorFactory)getEFactoryInstance();

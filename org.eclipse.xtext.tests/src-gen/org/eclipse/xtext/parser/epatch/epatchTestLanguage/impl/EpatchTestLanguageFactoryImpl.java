@@ -96,6 +96,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EPatch createEPatch()
   {
     EPatchImpl ePatch = new EPatchImpl();
@@ -107,6 +108,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -118,6 +120,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelImport createModelImport()
   {
     ModelImportImpl modelImport = new ModelImportImpl();
@@ -129,6 +132,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ResourceImport createResourceImport()
   {
     ResourceImportImpl resourceImport = new ResourceImportImpl();
@@ -140,6 +144,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EPackageImport createEPackageImport()
   {
     EPackageImportImpl ePackageImport = new EPackageImportImpl();
@@ -151,6 +156,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JavaImport createJavaImport()
   {
     JavaImportImpl javaImport = new JavaImportImpl();
@@ -162,6 +168,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExtensionImport createExtensionImport()
   {
     ExtensionImportImpl extensionImport = new ExtensionImportImpl();
@@ -173,6 +180,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedResource createNamedResource()
   {
     NamedResourceImpl namedResource = new NamedResourceImpl();
@@ -184,6 +192,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedObject createNamedObject()
   {
     NamedObjectImpl namedObject = new NamedObjectImpl();
@@ -195,6 +204,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ObjectRef createObjectRef()
   {
     ObjectRefImpl objectRef = new ObjectRefImpl();
@@ -206,6 +216,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -217,6 +228,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleAssignment createSingleAssignment()
   {
     SingleAssignmentImpl singleAssignment = new SingleAssignmentImpl();
@@ -228,6 +240,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ListAssignment createListAssignment()
   {
     ListAssignmentImpl listAssignment = new ListAssignmentImpl();
@@ -239,6 +252,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentValue createAssignmentValue()
   {
     AssignmentValueImpl assignmentValue = new AssignmentValueImpl();
@@ -250,6 +264,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CreatedObject createCreatedObject()
   {
     CreatedObjectImpl createdObject = new CreatedObjectImpl();
@@ -261,6 +276,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ObjectNew createObjectNew()
   {
     ObjectNewImpl objectNew = new ObjectNewImpl();
@@ -272,6 +288,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ObjectCopy createObjectCopy()
   {
     ObjectCopyImpl objectCopy = new ObjectCopyImpl();
@@ -283,6 +300,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Migration createMigration()
   {
     MigrationImpl migration = new MigrationImpl();
@@ -294,6 +312,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Executable createExecutable()
   {
     ExecutableImpl executable = new ExecutableImpl();
@@ -305,6 +324,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JavaExecutable createJavaExecutable()
   {
     JavaExecutableImpl javaExecutable = new JavaExecutableImpl();
@@ -316,6 +336,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExpressionExecutable createExpressionExecutable()
   {
     ExpressionExecutableImpl expressionExecutable = new ExpressionExecutableImpl();
@@ -327,6 +348,7 @@ public class EpatchTestLanguageFactoryImpl extends EFactoryImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EpatchTestLanguagePackage getEpatchTestLanguagePackage()
   {
     return (EpatchTestLanguagePackage)getEPackage();

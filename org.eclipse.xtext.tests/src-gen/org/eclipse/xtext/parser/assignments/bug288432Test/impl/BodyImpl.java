@@ -98,6 +98,7 @@ public class BodyImpl extends MinimalEObjectImpl.Container implements Body
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Parameter> getParameter()
   {
     if (parameter == null)
@@ -112,6 +113,7 @@ public class BodyImpl extends MinimalEObjectImpl.Container implements Body
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterObject getContent()
   {
     return content;
@@ -139,6 +141,7 @@ public class BodyImpl extends MinimalEObjectImpl.Container implements Body
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContent(ParameterObject newContent)
   {
     if (newContent != content)
@@ -160,6 +163,7 @@ public class BodyImpl extends MinimalEObjectImpl.Container implements Body
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Foo> getFoo()
   {
     if (foo == null)

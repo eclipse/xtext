@@ -74,6 +74,7 @@ public class EnumBoolImpl extends MinimalEObjectImpl.Container implements EnumBo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEn()
   {
     return en;
@@ -84,6 +85,7 @@ public class EnumBoolImpl extends MinimalEObjectImpl.Container implements EnumBo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEn(boolean newEn)
   {
     boolean oldEn = en;
@@ -168,7 +170,7 @@ public class EnumBoolImpl extends MinimalEObjectImpl.Container implements EnumBo
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (en: ");
     result.append(en);
     result.append(')');

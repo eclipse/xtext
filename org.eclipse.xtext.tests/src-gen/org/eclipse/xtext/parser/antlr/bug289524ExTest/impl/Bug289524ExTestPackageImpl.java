@@ -75,7 +75,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug289524ExTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     if (isInited) return (Bug289524ExTestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug289524ExTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug289524ExTestPackageImpl theBug289524ExTestPackage = (Bug289524ExTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug289524ExTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug289524ExTestPackageImpl());
+    Object registeredBug289524ExTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug289524ExTestPackageImpl theBug289524ExTestPackage = registeredBug289524ExTestPackage instanceof Bug289524ExTestPackageImpl ? (Bug289524ExTestPackageImpl)registeredBug289524ExTestPackage : new Bug289524ExTestPackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     // Mark meta-data to indicate it can't be changed
     theBug289524ExTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug289524ExTestPackage.eNS_URI, theBug289524ExTestPackage);
     return theBug289524ExTestPackage;
@@ -117,6 +117,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -127,6 +128,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Refs()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModelElement()
   {
     return modelElementEClass;
@@ -147,6 +150,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModelElement_Containments()
   {
     return (EReference)modelElementEClass.getEStructuralFeatures().get(0);
@@ -157,6 +161,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModelElement_Refs()
   {
     return (EReference)modelElementEClass.getEStructuralFeatures().get(1);
@@ -167,6 +172,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContained()
   {
     return containedEClass;
@@ -177,6 +183,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getContained_Name()
   {
     return (EAttribute)containedEClass.getEStructuralFeatures().get(0);
@@ -187,6 +194,7 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug289524ExTestFactory getBug289524ExTestFactory()
   {
     return (Bug289524ExTestFactory)getEFactoryInstance();

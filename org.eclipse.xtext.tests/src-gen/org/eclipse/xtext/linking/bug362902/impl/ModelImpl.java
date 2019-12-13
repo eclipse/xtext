@@ -85,6 +85,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Greeting> getGreetings()
   {
     if (greetings == null)
@@ -99,6 +100,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Greeting getFavourite()
   {
     if (favourite != null && favourite.eIsProxy())
@@ -129,6 +131,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFavourite(Greeting newFavourite)
   {
     Greeting oldFavourite = favourite;

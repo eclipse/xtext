@@ -25,10 +25,6 @@ public interface TerminalElement extends ReducibleElement
   /**
    * Returns the value of the '<em><b>String Feature</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>String Feature</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>String Feature</em>' attribute.
    * @see #setStringFeature(String)

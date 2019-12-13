@@ -87,6 +87,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -97,6 +98,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -110,6 +112,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Definition getLink()
   {
     if (link != null && link.eIsProxy())
@@ -140,6 +143,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLink(Definition newLink)
   {
     Definition oldLink = link;
@@ -235,7 +239,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

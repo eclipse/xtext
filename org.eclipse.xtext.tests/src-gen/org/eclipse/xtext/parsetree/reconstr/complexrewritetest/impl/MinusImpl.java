@@ -70,6 +70,7 @@ public class MinusImpl extends ExpressionImpl implements Minus
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getMinusOperands()
   {
     if (minusOperands == null)

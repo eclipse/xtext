@@ -32,10 +32,6 @@ public interface SubMain extends EObject
    * Returns the value of the '<em><b>Super Mains</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.generator.ecore.superPackage.SuperMain}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Super Mains</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Mains</em>' containment reference list.
    * @see org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage#getSubMain_SuperMains()
@@ -47,10 +43,6 @@ public interface SubMain extends EObject
   /**
    * Returns the value of the '<em><b>Another</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Another</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Another</em>' containment reference.
    * @see #setAnother(AnotherSuperMain)

@@ -78,6 +78,7 @@ public class AssignmentsTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -89,6 +90,7 @@ public class AssignmentsTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleValue createSingleValue()
   {
     SingleValueImpl singleValue = new SingleValueImpl();
@@ -100,6 +102,7 @@ public class AssignmentsTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiValue createMultiValue()
   {
     MultiValueImpl multiValue = new MultiValueImpl();
@@ -111,6 +114,7 @@ public class AssignmentsTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentsTestLanguagePackage getAssignmentsTestLanguagePackage()
   {
     return (AssignmentsTestLanguagePackage)getEPackage();

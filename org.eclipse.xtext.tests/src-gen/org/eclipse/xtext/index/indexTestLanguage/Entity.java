@@ -27,10 +27,6 @@ public interface Entity extends Type
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.index.indexTestLanguage.Property}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' containment reference list.
    * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getEntity_Properties()

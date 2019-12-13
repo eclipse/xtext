@@ -85,6 +85,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SomeContainer createSomeContainer()
   {
     SomeContainerImpl someContainer = new SomeContainerImpl();
@@ -96,6 +97,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Nested createNested()
   {
     NestedImpl nested = new NestedImpl();
@@ -107,6 +109,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Content createContent()
   {
     ContentImpl content = new ContentImpl();
@@ -118,6 +121,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Children createChildren()
   {
     ChildrenImpl children = new ChildrenImpl();
@@ -129,6 +133,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child createChild()
   {
     ChildImpl child = new ChildImpl();
@@ -140,6 +145,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractChildren createAbstractChildren()
   {
     AbstractChildrenImpl abstractChildren = new AbstractChildrenImpl();
@@ -151,6 +157,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractChild createAbstractChild()
   {
     AbstractChildImpl abstractChild = new AbstractChildImpl();
@@ -162,6 +169,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FirstConcrete createFirstConcrete()
   {
     FirstConcreteImpl firstConcrete = new FirstConcreteImpl();
@@ -173,6 +181,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SecondConcrete createSecondConcrete()
   {
     SecondConcreteImpl secondConcrete = new SecondConcreteImpl();
@@ -184,6 +193,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Named createNamed()
   {
     NamedImpl named = new NamedImpl();
@@ -195,6 +205,7 @@ public class PartialParserTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialParserTestLanguagePackage getPartialParserTestLanguagePackage()
   {
     return (PartialParserTestLanguagePackage)getEPackage();

@@ -77,6 +77,7 @@ public class AssignedActionImpl extends MixedImpl implements AssignedAction
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mixed getChild()
   {
     return child;
@@ -104,6 +105,7 @@ public class AssignedActionImpl extends MixedImpl implements AssignedAction
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(Mixed newChild)
   {
     if (newChild != child)
@@ -125,6 +127,7 @@ public class AssignedActionImpl extends MixedImpl implements AssignedAction
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mixed getBody()
   {
     return body;
@@ -152,6 +155,7 @@ public class AssignedActionImpl extends MixedImpl implements AssignedAction
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(Mixed newBody)
   {
     if (newBody != body)

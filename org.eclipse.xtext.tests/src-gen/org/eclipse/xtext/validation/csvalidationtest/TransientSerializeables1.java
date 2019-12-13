@@ -29,10 +29,6 @@ public interface TransientSerializeables1 extends EObject
   /**
    * Returns the value of the '<em><b>Val1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute.
    * @see #setVal1(String)
@@ -56,10 +52,6 @@ public interface TransientSerializeables1 extends EObject
    * Returns the value of the '<em><b>Enum1</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enum1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enum1</em>' attribute.
    * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum
@@ -84,10 +76,6 @@ public interface TransientSerializeables1 extends EObject
   /**
    * Returns the value of the '<em><b>Val2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute.
    * @see #setVal2(String)
@@ -110,10 +98,6 @@ public interface TransientSerializeables1 extends EObject
   /**
    * Returns the value of the '<em><b>Int1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int1</em>' attribute.
    * @see #setInt1(int)

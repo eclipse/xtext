@@ -26,10 +26,6 @@ public interface ObjectCopy extends CreatedObject
   /**
    * Returns the value of the '<em><b>Resource</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Resource</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Resource</em>' reference.
    * @see #setResource(NamedResource)
@@ -52,10 +48,6 @@ public interface ObjectCopy extends CreatedObject
   /**
    * Returns the value of the '<em><b>Fragment</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Fragment</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fragment</em>' attribute.
    * @see #setFragment(String)

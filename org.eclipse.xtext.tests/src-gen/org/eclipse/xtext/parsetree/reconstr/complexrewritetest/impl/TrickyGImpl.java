@@ -66,6 +66,7 @@ public class TrickyGImpl extends RootImpl implements TrickyG
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrickyG1 getTree()
   {
     return tree;
@@ -93,6 +94,7 @@ public class TrickyGImpl extends RootImpl implements TrickyG
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTree(TrickyG1 newTree)
   {
     if (newTree != tree)

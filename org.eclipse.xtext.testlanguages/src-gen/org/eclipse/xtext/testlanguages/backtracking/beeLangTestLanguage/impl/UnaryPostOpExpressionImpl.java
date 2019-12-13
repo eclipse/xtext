@@ -87,6 +87,7 @@ public class UnaryPostOpExpressionImpl extends ExpressionImpl implements UnaryPo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpr()
   {
     return expr;
@@ -114,6 +115,7 @@ public class UnaryPostOpExpressionImpl extends ExpressionImpl implements UnaryPo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
@@ -135,6 +137,7 @@ public class UnaryPostOpExpressionImpl extends ExpressionImpl implements UnaryPo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFunctionName()
   {
     return functionName;
@@ -145,6 +148,7 @@ public class UnaryPostOpExpressionImpl extends ExpressionImpl implements UnaryPo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFunctionName(String newFunctionName)
   {
     String oldFunctionName = functionName;
@@ -255,7 +259,7 @@ public class UnaryPostOpExpressionImpl extends ExpressionImpl implements UnaryPo
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (functionName: ");
     result.append(functionName);
     result.append(')');

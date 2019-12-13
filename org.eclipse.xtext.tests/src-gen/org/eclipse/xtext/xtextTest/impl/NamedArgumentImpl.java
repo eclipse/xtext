@@ -98,6 +98,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isLiteralValue()
   {
     return literalValue;
@@ -108,6 +109,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLiteralValue(boolean newLiteralValue)
   {
     boolean oldLiteralValue = literalValue;
@@ -121,6 +123,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter getParameter()
   {
     if (parameter != null && parameter.eIsProxy())
@@ -151,6 +154,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParameter(Parameter newParameter)
   {
     Parameter oldParameter = parameter;
@@ -164,6 +168,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter getValue()
   {
     if (value != null && value.eIsProxy())
@@ -194,6 +199,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(Parameter newValue)
   {
     Parameter oldValue = value;
@@ -300,7 +306,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (literalValue: ");
     result.append(literalValue);
     result.append(')');

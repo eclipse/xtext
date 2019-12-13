@@ -81,6 +81,7 @@ public class RenameTestLanguageFactoryImpl extends EFactoryImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -92,6 +93,7 @@ public class RenameTestLanguageFactoryImpl extends EFactoryImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration createTypeDeclaration()
   {
     TypeDeclarationImpl typeDeclaration = new TypeDeclarationImpl();
@@ -103,6 +105,7 @@ public class RenameTestLanguageFactoryImpl extends EFactoryImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RenameTestLanguagePackage getRenameTestLanguagePackage()
   {
     return (RenameTestLanguagePackage)getEPackage();

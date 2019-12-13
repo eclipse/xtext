@@ -175,6 +175,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordVal getKeywordVal()
   {
     return keywordVal;
@@ -202,6 +203,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKeywordVal(KeywordVal newKeywordVal)
   {
     if (newKeywordVal != keywordVal)
@@ -223,6 +225,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalVal getTerminalVal()
   {
     return terminalVal;
@@ -250,6 +253,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTerminalVal(TerminalVal newTerminalVal)
   {
     if (newTerminalVal != terminalVal)
@@ -271,6 +275,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumVal getEnumVal()
   {
     return enumVal;
@@ -298,6 +303,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEnumVal(EnumVal newEnumVal)
   {
     if (newEnumVal != enumVal)
@@ -319,6 +325,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordBool getKeywordBool()
   {
     return keywordBool;
@@ -346,6 +353,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKeywordBool(KeywordBool newKeywordBool)
   {
     if (newKeywordBool != keywordBool)
@@ -367,6 +375,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalBool getTerminalBool()
   {
     return terminalBool;
@@ -394,6 +403,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTerminalBool(TerminalBool newTerminalBool)
   {
     if (newTerminalBool != terminalBool)
@@ -415,6 +425,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumBool getEnumBool()
   {
     return enumBool;
@@ -442,6 +453,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEnumBool(EnumBool newEnumBool)
   {
     if (newEnumBool != enumBool)
@@ -463,6 +475,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MixedBool getMixedBool()
   {
     return mixedBool;
@@ -490,6 +503,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMixedBool(MixedBool newMixedBool)
   {
     if (newMixedBool != mixedBool)
@@ -511,6 +525,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MixedValue getMixedValue()
   {
     return mixedValue;
@@ -538,6 +553,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMixedValue(MixedValue newMixedValue)
   {
     if (newMixedValue != mixedValue)
@@ -559,6 +575,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContainmentRef getContainmentRef()
   {
     return containmentRef;
@@ -586,6 +603,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContainmentRef(ContainmentRef newContainmentRef)
   {
     if (newContainmentRef != containmentRef)
@@ -607,6 +625,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CrossRef getCrossRef()
   {
     return crossRef;
@@ -634,6 +653,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCrossRef(CrossRef newCrossRef)
   {
     if (newCrossRef != crossRef)

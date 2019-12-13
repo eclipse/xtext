@@ -73,6 +73,7 @@ public class MultiRuleImpl extends ModelImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getVal()
   {
     return val;
@@ -83,6 +84,7 @@ public class MultiRuleImpl extends ModelImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(int newVal)
   {
     int oldVal = val;
@@ -167,7 +169,7 @@ public class MultiRuleImpl extends ModelImpl implements MultiRule
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

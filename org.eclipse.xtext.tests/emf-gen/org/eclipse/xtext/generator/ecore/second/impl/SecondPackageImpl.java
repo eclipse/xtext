@@ -62,7 +62,7 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SecondPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -77,7 +77,8 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
     if (isInited) return (SecondPackage)EPackage.Registry.INSTANCE.getEPackage(SecondPackage.eNS_URI);
 
     // Obtain or create and register package
-    SecondPackageImpl theSecondPackage = (SecondPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SecondPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SecondPackageImpl());
+    Object registeredSecondPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SecondPackageImpl theSecondPackage = registeredSecondPackage instanceof SecondPackageImpl ? (SecondPackageImpl)registeredSecondPackage : new SecondPackageImpl();
 
     isInited = true;
 
@@ -85,7 +86,8 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
     EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
-    FirstPackageImpl theFirstPackage = (FirstPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FirstPackage.eNS_URI) instanceof FirstPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FirstPackage.eNS_URI) : FirstPackage.eINSTANCE);
+    Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FirstPackage.eNS_URI);
+    FirstPackageImpl theFirstPackage = (FirstPackageImpl)(registeredPackage instanceof FirstPackageImpl ? registeredPackage : FirstPackage.eINSTANCE);
 
     // Create package meta-data objects
     theSecondPackage.createPackageContents();
@@ -98,7 +100,6 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
     // Mark meta-data to indicate it can't be changed
     theSecondPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SecondPackage.eNS_URI, theSecondPackage);
     return theSecondPackage;
@@ -109,6 +110,7 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSecond()
   {
     return secondEClass;
@@ -119,6 +121,7 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSecond_Name()
   {
     return (EAttribute)secondEClass.getEStructuralFeatures().get(0);
@@ -129,6 +132,7 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecond_First()
   {
     return (EReference)secondEClass.getEStructuralFeatures().get(1);
@@ -139,6 +143,7 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SecondFactory getSecondFactory()
   {
     return (SecondFactory)getEFactoryInstance();

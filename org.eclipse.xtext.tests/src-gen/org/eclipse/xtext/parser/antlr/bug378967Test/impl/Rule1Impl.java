@@ -118,6 +118,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FirstEnum getType()
   {
     return type;
@@ -128,6 +129,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(FirstEnum newType)
   {
     FirstEnum oldType = type;
@@ -141,6 +143,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -151,6 +154,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(int newValue)
   {
     int oldValue = value;
@@ -164,6 +168,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SecondEnum getUnit()
   {
     return unit;
@@ -174,6 +179,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUnit(SecondEnum newUnit)
   {
     SecondEnum oldUnit = unit;
@@ -278,7 +284,7 @@ public class Rule1Impl extends MinimalEObjectImpl.Container implements Rule1
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(", value: ");

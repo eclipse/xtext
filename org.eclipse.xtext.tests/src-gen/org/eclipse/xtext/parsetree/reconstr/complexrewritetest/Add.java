@@ -27,10 +27,6 @@ public interface Add extends Expression
    * Returns the value of the '<em><b>Add Operands</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Expression}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Add Operands</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Add Operands</em>' containment reference list.
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getAdd_AddOperands()

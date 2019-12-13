@@ -72,6 +72,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements Entry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Alts> getContents()
   {
     if (contents == null)

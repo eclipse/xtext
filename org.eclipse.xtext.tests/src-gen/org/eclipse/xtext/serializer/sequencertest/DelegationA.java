@@ -26,10 +26,6 @@ public interface DelegationA extends Delegation
   /**
    * Returns the value of the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left</em>' containment reference.
    * @see #setLeft(Delegation)
@@ -52,10 +48,6 @@ public interface DelegationA extends Delegation
   /**
    * Returns the value of the '<em><b>Rc2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Rc2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rc2</em>' containment reference.
    * @see #setRc2(Delegation)

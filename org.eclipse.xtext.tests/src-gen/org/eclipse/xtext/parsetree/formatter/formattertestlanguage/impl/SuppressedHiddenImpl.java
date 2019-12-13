@@ -70,6 +70,7 @@ public class SuppressedHiddenImpl extends LineImpl implements SuppressedHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SuppressedHiddenSub> getVals()
   {
     if (vals == null)

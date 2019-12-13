@@ -83,6 +83,7 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getReferencedAdvice()
   {
     if (referencedAdvice == null)
@@ -97,6 +98,7 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getFuncExpr()
   {
     return funcExpr;
@@ -124,6 +126,7 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
@@ -244,7 +247,7 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (referencedAdvice: ");
     result.append(referencedAdvice);
     result.append(')');

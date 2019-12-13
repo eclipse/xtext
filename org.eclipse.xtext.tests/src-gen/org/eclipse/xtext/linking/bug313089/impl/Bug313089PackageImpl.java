@@ -75,7 +75,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug313089Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
     if (isInited) return (Bug313089Package)EPackage.Registry.INSTANCE.getEPackage(Bug313089Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug313089PackageImpl theBug313089Package = (Bug313089PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug313089PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug313089PackageImpl());
+    Object registeredBug313089Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug313089PackageImpl theBug313089Package = registeredBug313089Package instanceof Bug313089PackageImpl ? (Bug313089PackageImpl)registeredBug313089Package : new Bug313089PackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
     // Mark meta-data to indicate it can't be changed
     theBug313089Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug313089Package.eNS_URI, theBug313089Package);
     return theBug313089Package;
@@ -117,6 +117,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoo()
   {
     return fooEClass;
@@ -127,6 +128,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFoo_Name()
   {
     return (EAttribute)fooEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoo_Bar()
   {
     return (EReference)fooEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoo_Baz()
   {
     return (EReference)fooEClass.getEStructuralFeatures().get(2);
@@ -157,6 +161,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoo_Ref()
   {
     return (EReference)fooEClass.getEStructuralFeatures().get(3);
@@ -167,6 +172,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBar()
   {
     return barEClass;
@@ -177,6 +183,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBar_Name()
   {
     return (EAttribute)barEClass.getEStructuralFeatures().get(0);
@@ -187,6 +194,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBaz()
   {
     return bazEClass;
@@ -197,6 +205,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBaz_Name()
   {
     return (EAttribute)bazEClass.getEStructuralFeatures().get(0);
@@ -207,6 +216,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBaz_Child()
   {
     return (EReference)bazEClass.getEStructuralFeatures().get(1);
@@ -217,6 +227,7 @@ public class Bug313089PackageImpl extends EPackageImpl implements Bug313089Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug313089Factory getBug313089Factory()
   {
     return (Bug313089Factory)getEFactoryInstance();

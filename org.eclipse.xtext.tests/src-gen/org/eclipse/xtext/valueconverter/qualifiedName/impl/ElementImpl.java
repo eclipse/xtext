@@ -74,6 +74,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getQualifiedName()
   {
     return qualifiedName;
@@ -84,6 +85,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setQualifiedName(String newQualifiedName)
   {
     String oldQualifiedName = qualifiedName;
@@ -168,7 +170,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (qualifiedName: ");
     result.append(qualifiedName);
     result.append(')');

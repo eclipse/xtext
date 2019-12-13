@@ -115,7 +115,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug288432TestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -130,7 +130,8 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
     if (isInited) return (Bug288432TestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug288432TestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug288432TestPackageImpl theBug288432TestPackage = (Bug288432TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug288432TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug288432TestPackageImpl());
+    Object registeredBug288432TestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug288432TestPackageImpl theBug288432TestPackage = registeredBug288432TestPackage instanceof Bug288432TestPackageImpl ? (Bug288432TestPackageImpl)registeredBug288432TestPackage : new Bug288432TestPackageImpl();
 
     isInited = true;
 
@@ -146,7 +147,6 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
     // Mark meta-data to indicate it can't be changed
     theBug288432TestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug288432TestPackage.eNS_URI, theBug288432TestPackage);
     return theBug288432TestPackage;
@@ -157,6 +157,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBody()
   {
     return bodyEClass;
@@ -167,6 +168,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBody_Parameter()
   {
     return (EReference)bodyEClass.getEStructuralFeatures().get(0);
@@ -177,6 +179,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBody_Content()
   {
     return (EReference)bodyEClass.getEStructuralFeatures().get(1);
@@ -187,6 +190,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBody_Foo()
   {
     return (EReference)bodyEClass.getEStructuralFeatures().get(2);
@@ -197,6 +201,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoo()
   {
     return fooEClass;
@@ -207,6 +212,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFoo_FooValue()
   {
     return (EAttribute)fooEClass.getEStructuralFeatures().get(0);
@@ -217,6 +223,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContent()
   {
     return contentEClass;
@@ -227,6 +234,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyElement()
   {
     return myElementEClass;
@@ -237,6 +245,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyElement_Bar()
   {
     return (EReference)myElementEClass.getEStructuralFeatures().get(0);
@@ -247,6 +256,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterObject()
   {
     return parameterObjectEClass;
@@ -257,6 +267,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameter()
   {
     return parameterEClass;
@@ -267,6 +278,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameter_Name()
   {
     return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
@@ -277,6 +289,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameter_Value()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(1);
@@ -287,6 +300,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterRef()
   {
     return parameterRefEClass;
@@ -297,6 +311,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameterRef_Parameter()
   {
     return (EReference)parameterRefEClass.getEStructuralFeatures().get(0);
@@ -307,6 +322,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyInt()
   {
     return myIntEClass;
@@ -317,6 +333,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyInt_Int()
   {
     return (EAttribute)myIntEClass.getEStructuralFeatures().get(0);
@@ -327,6 +344,7 @@ public class Bug288432TestPackageImpl extends EPackageImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug288432TestFactory getBug288432TestFactory()
   {
     return (Bug288432TestFactory)getEFactoryInstance();

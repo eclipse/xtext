@@ -77,6 +77,7 @@ public class Bug305397FactoryImpl extends EFactoryImpl implements Bug305397Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class Bug305397FactoryImpl extends EFactoryImpl implements Bug305397Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -99,6 +101,7 @@ public class Bug305397FactoryImpl extends EFactoryImpl implements Bug305397Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug305397Package getBug305397Package()
   {
     return (Bug305397Package)getEPackage();

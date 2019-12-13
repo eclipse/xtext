@@ -96,6 +96,7 @@ public class IndentImpl extends TestImpl implements Indent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoRequired getReq()
   {
     return req;
@@ -123,6 +124,7 @@ public class IndentImpl extends TestImpl implements Indent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReq(TwoRequired newReq)
   {
     if (newReq != req)
@@ -144,6 +146,7 @@ public class IndentImpl extends TestImpl implements Indent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoOptions getOpt()
   {
     return opt;
@@ -171,6 +174,7 @@ public class IndentImpl extends TestImpl implements Indent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOpt(TwoOptions newOpt)
   {
     if (newOpt != opt)
@@ -192,6 +196,7 @@ public class IndentImpl extends TestImpl implements Indent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Indent> getIndent()
   {
     if (indent == null)

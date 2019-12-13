@@ -76,6 +76,7 @@ public class Bug292245TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class Bug292245TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug292245TestLanguagePackage getBug292245TestLanguagePackage()
   {
     return (Bug292245TestLanguagePackage)getEPackage();

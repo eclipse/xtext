@@ -116,6 +116,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getInt0()
   {
     return int0;
@@ -126,6 +127,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInt0(int newInt0)
   {
     int oldInt0 = int0;
@@ -139,6 +141,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getInt1()
   {
     return int1;
@@ -149,6 +152,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInt1(int newInt1)
   {
     int oldInt1 = int1;
@@ -162,6 +166,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getInt2()
   {
     return int2;
@@ -172,6 +177,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInt2(int newInt2)
   {
     int oldInt2 = int2;
@@ -276,7 +282,7 @@ public class OptionalImpl extends MinimalEObjectImpl.Container implements Option
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (int0: ");
     result.append(int0);
     result.append(", int1: ");

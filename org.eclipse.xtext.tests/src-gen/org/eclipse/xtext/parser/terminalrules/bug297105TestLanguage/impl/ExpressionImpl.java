@@ -78,6 +78,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal getLeft()
   {
     return left;
@@ -105,6 +106,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Literal newLeft)
   {
     if (newLeft != left)
@@ -126,6 +128,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal getRight()
   {
     return right;
@@ -153,6 +156,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Literal newRight)
   {
     if (newRight != right)

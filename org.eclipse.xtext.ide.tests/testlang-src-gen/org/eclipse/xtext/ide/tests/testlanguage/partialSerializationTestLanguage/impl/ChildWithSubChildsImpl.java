@@ -74,6 +74,7 @@ public class ChildWithSubChildsImpl extends ModelImpl implements ChildWithSubChi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ChildWithSubChild> getChildren()
   {
     if (children == null)

@@ -87,6 +87,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getObjExpr()
   {
     return objExpr;
@@ -114,6 +115,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setObjExpr(Expression newObjExpr)
   {
     if (newObjExpr != objExpr)
@@ -135,6 +137,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFeatureName()
   {
     return featureName;
@@ -145,6 +148,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFeatureName(String newFeatureName)
   {
     String oldFeatureName = featureName;
@@ -255,7 +259,7 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (featureName: ");
     result.append(featureName);
     result.append(')');

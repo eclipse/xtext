@@ -30,10 +30,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Foos</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Foos</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Foos</em>' containment reference list.
    * @see org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTestLanguagePackage#getModel_Foos()
@@ -46,10 +42,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Bars</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.AbstractBar}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Bars</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Bars</em>' containment reference list.
    * @see org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTestLanguagePackage#getModel_Bars()

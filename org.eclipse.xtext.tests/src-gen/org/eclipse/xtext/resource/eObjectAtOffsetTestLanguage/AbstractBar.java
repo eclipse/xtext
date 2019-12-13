@@ -29,10 +29,6 @@ public interface AbstractBar extends EObject
    * Returns the value of the '<em><b>Foo</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Foo</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Foo</em>' reference list.
    * @see org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTestLanguagePackage#getAbstractBar_Foo()

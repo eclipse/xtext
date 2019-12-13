@@ -80,6 +80,7 @@ public class WithtransientFactoryImpl extends EFactoryImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WithTransient createWithTransient()
 	{
 		WithTransientImpl withTransient = new WithTransientImpl();
@@ -91,6 +92,7 @@ public class WithtransientFactoryImpl extends EFactoryImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WithtransientPackage getWithtransientPackage()
 	{
 		return (WithtransientPackage)getEPackage();

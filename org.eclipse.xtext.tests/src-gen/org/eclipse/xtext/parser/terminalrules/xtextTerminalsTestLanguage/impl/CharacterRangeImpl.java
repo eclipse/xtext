@@ -77,6 +77,7 @@ public class CharacterRangeImpl extends AbstractElementImpl implements Character
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Keyword getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class CharacterRangeImpl extends AbstractElementImpl implements Character
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Keyword newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class CharacterRangeImpl extends AbstractElementImpl implements Character
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Keyword getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class CharacterRangeImpl extends AbstractElementImpl implements Character
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Keyword newRight)
   {
     if (newRight != right)

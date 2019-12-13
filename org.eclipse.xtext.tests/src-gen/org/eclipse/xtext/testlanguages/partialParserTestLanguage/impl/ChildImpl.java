@@ -67,6 +67,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Named getValue()
   {
     return value;
@@ -94,6 +95,7 @@ public class ChildImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(Named newValue)
   {
     if (newValue != value)

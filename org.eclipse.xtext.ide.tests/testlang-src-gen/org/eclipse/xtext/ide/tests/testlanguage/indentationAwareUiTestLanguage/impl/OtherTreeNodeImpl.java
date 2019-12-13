@@ -92,6 +92,7 @@ public class OtherTreeNodeImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -102,6 +103,7 @@ public class OtherTreeNodeImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -115,6 +117,7 @@ public class OtherTreeNodeImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChildList getChildList()
   {
     return childList;
@@ -142,6 +145,7 @@ public class OtherTreeNodeImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChildList(ChildList newChildList)
   {
     if (newChildList != childList)
@@ -260,7 +264,7 @@ public class OtherTreeNodeImpl extends MinimalEObjectImpl.Container implements O
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -78,6 +78,7 @@ public class Bug317840TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -89,6 +90,7 @@ public class Bug317840TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -100,6 +102,7 @@ public class Bug317840TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Named createNamed()
   {
     NamedImpl named = new NamedImpl();
@@ -111,6 +114,7 @@ public class Bug317840TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug317840TestLanguagePackage getBug317840TestLanguagePackage()
   {
     return (Bug317840TestLanguagePackage)getEPackage();

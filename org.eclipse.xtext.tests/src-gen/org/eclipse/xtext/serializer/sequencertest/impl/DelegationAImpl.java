@@ -77,6 +77,7 @@ public class DelegationAImpl extends DelegationImpl implements DelegationA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Delegation getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class DelegationAImpl extends DelegationImpl implements DelegationA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Delegation newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class DelegationAImpl extends DelegationImpl implements DelegationA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Delegation getRc2()
   {
     return rc2;
@@ -152,6 +155,7 @@ public class DelegationAImpl extends DelegationImpl implements DelegationA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRc2(Delegation newRc2)
   {
     if (newRc2 != rc2)

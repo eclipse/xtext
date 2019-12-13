@@ -219,7 +219,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EpatchTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -234,7 +234,8 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
     if (isInited) return (EpatchTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EpatchTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EpatchTestLanguagePackageImpl theEpatchTestLanguagePackage = (EpatchTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EpatchTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EpatchTestLanguagePackageImpl());
+    Object registeredEpatchTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EpatchTestLanguagePackageImpl theEpatchTestLanguagePackage = registeredEpatchTestLanguagePackage instanceof EpatchTestLanguagePackageImpl ? (EpatchTestLanguagePackageImpl)registeredEpatchTestLanguagePackage : new EpatchTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -250,7 +251,6 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
     // Mark meta-data to indicate it can't be changed
     theEpatchTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EpatchTestLanguagePackage.eNS_URI, theEpatchTestLanguagePackage);
     return theEpatchTestLanguagePackage;
@@ -261,6 +261,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEPatch()
   {
     return ePatchEClass;
@@ -271,6 +272,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEPatch_Name()
   {
     return (EAttribute)ePatchEClass.getEStructuralFeatures().get(0);
@@ -281,6 +283,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEPatch_Imports()
   {
     return (EReference)ePatchEClass.getEStructuralFeatures().get(1);
@@ -291,6 +294,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEPatch_Resources()
   {
     return (EReference)ePatchEClass.getEStructuralFeatures().get(2);
@@ -301,6 +305,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEPatch_Objects()
   {
     return (EReference)ePatchEClass.getEStructuralFeatures().get(3);
@@ -311,6 +316,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -321,6 +327,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModelImport()
   {
     return modelImportEClass;
@@ -331,6 +338,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModelImport_Name()
   {
     return (EAttribute)modelImportEClass.getEStructuralFeatures().get(0);
@@ -341,6 +349,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getResourceImport()
   {
     return resourceImportEClass;
@@ -351,6 +360,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getResourceImport_Uri()
   {
     return (EAttribute)resourceImportEClass.getEStructuralFeatures().get(0);
@@ -361,6 +371,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEPackageImport()
   {
     return ePackageImportEClass;
@@ -371,6 +382,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEPackageImport_NsURI()
   {
     return (EAttribute)ePackageImportEClass.getEStructuralFeatures().get(0);
@@ -381,6 +393,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getJavaImport()
   {
     return javaImportEClass;
@@ -391,6 +404,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getJavaImport_Path()
   {
     return (EAttribute)javaImportEClass.getEStructuralFeatures().get(0);
@@ -401,6 +415,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExtensionImport()
   {
     return extensionImportEClass;
@@ -411,6 +426,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExtensionImport_Path()
   {
     return (EAttribute)extensionImportEClass.getEStructuralFeatures().get(0);
@@ -421,6 +437,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamedResource()
   {
     return namedResourceEClass;
@@ -431,6 +448,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamedResource_Name()
   {
     return (EAttribute)namedResourceEClass.getEStructuralFeatures().get(0);
@@ -441,6 +459,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamedResource_LeftUri()
   {
     return (EAttribute)namedResourceEClass.getEStructuralFeatures().get(1);
@@ -451,6 +470,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamedResource_LeftRoot()
   {
     return (EReference)namedResourceEClass.getEStructuralFeatures().get(2);
@@ -461,6 +481,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamedResource_RightUri()
   {
     return (EAttribute)namedResourceEClass.getEStructuralFeatures().get(3);
@@ -471,6 +492,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamedResource_RightRoot()
   {
     return (EReference)namedResourceEClass.getEStructuralFeatures().get(4);
@@ -481,6 +503,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamedObject()
   {
     return namedObjectEClass;
@@ -491,6 +514,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamedObject_Name()
   {
     return (EAttribute)namedObjectEClass.getEStructuralFeatures().get(0);
@@ -501,6 +525,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamedObject_Assignments()
   {
     return (EReference)namedObjectEClass.getEStructuralFeatures().get(1);
@@ -511,6 +536,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamedObject_LeftMig()
   {
     return (EReference)namedObjectEClass.getEStructuralFeatures().get(2);
@@ -521,6 +547,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getObjectRef()
   {
     return objectRefEClass;
@@ -531,6 +558,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getObjectRef_LeftRes()
   {
     return (EReference)objectRefEClass.getEStructuralFeatures().get(0);
@@ -541,6 +569,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getObjectRef_LeftFrag()
   {
     return (EAttribute)objectRefEClass.getEStructuralFeatures().get(1);
@@ -551,6 +580,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getObjectRef_RightRes()
   {
     return (EReference)objectRefEClass.getEStructuralFeatures().get(2);
@@ -561,6 +591,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getObjectRef_RightFrag()
   {
     return (EAttribute)objectRefEClass.getEStructuralFeatures().get(3);
@@ -571,6 +602,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getObjectRef_RightMig()
   {
     return (EReference)objectRefEClass.getEStructuralFeatures().get(4);
@@ -581,6 +613,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssignment()
   {
     return assignmentEClass;
@@ -591,6 +624,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignment_Feature()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
@@ -601,6 +635,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleAssignment()
   {
     return singleAssignmentEClass;
@@ -611,6 +646,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleAssignment_LeftValue()
   {
     return (EReference)singleAssignmentEClass.getEStructuralFeatures().get(0);
@@ -621,6 +657,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleAssignment_RightValue()
   {
     return (EReference)singleAssignmentEClass.getEStructuralFeatures().get(1);
@@ -631,6 +668,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getListAssignment()
   {
     return listAssignmentEClass;
@@ -641,6 +679,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getListAssignment_LeftValues()
   {
     return (EReference)listAssignmentEClass.getEStructuralFeatures().get(0);
@@ -651,6 +690,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getListAssignment_RightValues()
   {
     return (EReference)listAssignmentEClass.getEStructuralFeatures().get(1);
@@ -661,6 +701,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssignmentValue()
   {
     return assignmentValueEClass;
@@ -671,6 +712,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_Value()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(0);
@@ -681,6 +723,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignmentValue_RefObject()
   {
     return (EReference)assignmentValueEClass.getEStructuralFeatures().get(1);
@@ -691,6 +734,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_RefFeature()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(2);
@@ -701,6 +745,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_RefIndex()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(3);
@@ -711,6 +756,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignmentValue_NewObject()
   {
     return (EReference)assignmentValueEClass.getEStructuralFeatures().get(4);
@@ -721,6 +767,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignmentValue_Import()
   {
     return (EReference)assignmentValueEClass.getEStructuralFeatures().get(5);
@@ -731,6 +778,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_ImpFrag()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(6);
@@ -741,6 +789,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_Index()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(7);
@@ -751,6 +800,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentValue_Keyword()
   {
     return (EAttribute)assignmentValueEClass.getEStructuralFeatures().get(8);
@@ -761,6 +811,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCreatedObject()
   {
     return createdObjectEClass;
@@ -771,6 +822,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getObjectNew()
   {
     return objectNewEClass;
@@ -781,6 +833,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getObjectNew_Import()
   {
     return (EReference)objectNewEClass.getEStructuralFeatures().get(0);
@@ -791,6 +844,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getObjectNew_ImpFrag()
   {
     return (EAttribute)objectNewEClass.getEStructuralFeatures().get(1);
@@ -801,6 +855,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getObjectCopy()
   {
     return objectCopyEClass;
@@ -811,6 +866,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getObjectCopy_Resource()
   {
     return (EReference)objectCopyEClass.getEStructuralFeatures().get(0);
@@ -821,6 +877,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getObjectCopy_Fragment()
   {
     return (EAttribute)objectCopyEClass.getEStructuralFeatures().get(1);
@@ -831,6 +888,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMigration()
   {
     return migrationEClass;
@@ -841,6 +899,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMigration_First()
   {
     return (EReference)migrationEClass.getEStructuralFeatures().get(0);
@@ -851,6 +910,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMigration_AsOp()
   {
     return (EReference)migrationEClass.getEStructuralFeatures().get(1);
@@ -861,6 +921,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMigration_EachOp()
   {
     return (EReference)migrationEClass.getEStructuralFeatures().get(2);
@@ -871,6 +932,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExecutable()
   {
     return executableEClass;
@@ -881,6 +943,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getJavaExecutable()
   {
     return javaExecutableEClass;
@@ -891,6 +954,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getJavaExecutable_Method()
   {
     return (EAttribute)javaExecutableEClass.getEStructuralFeatures().get(0);
@@ -901,6 +965,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpressionExecutable()
   {
     return expressionExecutableEClass;
@@ -911,6 +976,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExpressionExecutable_Exprstr()
   {
     return (EAttribute)expressionExecutableEClass.getEStructuralFeatures().get(0);
@@ -921,6 +987,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EpatchTestLanguageFactory getEpatchTestLanguageFactory()
   {
     return (EpatchTestLanguageFactory)getEFactoryInstance();

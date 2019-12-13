@@ -27,10 +27,6 @@ public interface SimpleTypeRef extends TypeRef
   /**
    * Returns the value of the '<em><b>Raw Type</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Raw Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Raw Type</em>' attribute.
    * @see #setRawType(String)
@@ -54,10 +50,6 @@ public interface SimpleTypeRef extends TypeRef
    * Returns the value of the '<em><b>Actual Arguments List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Actual Arguments List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Actual Arguments List</em>' attribute list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getSimpleTypeRef_ActualArgumentsList()

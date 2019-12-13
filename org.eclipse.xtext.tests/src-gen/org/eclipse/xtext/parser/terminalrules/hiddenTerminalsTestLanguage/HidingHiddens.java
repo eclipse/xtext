@@ -27,10 +27,6 @@ public interface HidingHiddens extends EObject
   /**
    * Returns the value of the '<em><b>Space</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Space</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Space</em>' attribute.
    * @see #setSpace(String)
@@ -53,10 +49,6 @@ public interface HidingHiddens extends EObject
   /**
    * Returns the value of the '<em><b>Called</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Called</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Called</em>' containment reference.
    * @see #setCalled(InheritingHiddensCall)

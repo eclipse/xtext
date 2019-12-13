@@ -35,10 +35,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Shared1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Shared1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Shared1</em>' attribute.
    * @see #setShared1(String)
@@ -61,10 +57,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Shared2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Shared2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Shared2</em>' attribute.
    * @see #setShared2(String)
@@ -88,10 +80,6 @@ public interface TwoVersion extends EObject
    * Returns the value of the '<em><b>Shared3</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Shared3</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Shared3</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getTwoVersion_Shared3()
@@ -103,10 +91,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Version1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Version1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Version1</em>' attribute.
    * @see #setVersion1(String)
@@ -129,10 +113,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Extra1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Extra1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extra1</em>' attribute.
    * @see #setExtra1(String)
@@ -155,10 +135,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Extra2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Extra2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extra2</em>' attribute.
    * @see #setExtra2(String)
@@ -181,10 +157,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Extra3</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Extra3</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extra3</em>' attribute.
    * @see #setExtra3(String)
@@ -207,10 +179,6 @@ public interface TwoVersion extends EObject
   /**
    * Returns the value of the '<em><b>Extra4</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Extra4</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extra4</em>' attribute.
    * @see #setExtra4(String)

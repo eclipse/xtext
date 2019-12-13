@@ -94,6 +94,7 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EObject> getItems()
   {
     if (items == null)
@@ -108,6 +109,7 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSemi()
   {
     return semi;
@@ -118,6 +120,7 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSemi(boolean newSemi)
   {
     boolean oldSemi = semi;
@@ -230,7 +233,7 @@ public class TestIndentationImpl extends RootImpl implements TestIndentation
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (semi: ");
     result.append(semi);
     result.append(')');

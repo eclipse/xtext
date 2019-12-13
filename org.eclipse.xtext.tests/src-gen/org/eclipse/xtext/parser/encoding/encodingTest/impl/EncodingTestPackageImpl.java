@@ -67,7 +67,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EncodingTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
     if (isInited) return (EncodingTestPackage)EPackage.Registry.INSTANCE.getEPackage(EncodingTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    EncodingTestPackageImpl theEncodingTestPackage = (EncodingTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EncodingTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EncodingTestPackageImpl());
+    Object registeredEncodingTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EncodingTestPackageImpl theEncodingTestPackage = registeredEncodingTestPackage instanceof EncodingTestPackageImpl ? (EncodingTestPackageImpl)registeredEncodingTestPackage : new EncodingTestPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
     // Mark meta-data to indicate it can't be changed
     theEncodingTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EncodingTestPackage.eNS_URI, theEncodingTestPackage);
     return theEncodingTestPackage;
@@ -109,6 +109,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Words()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWord()
   {
     return wordEClass;
@@ -139,6 +142,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getWord_Value()
   {
     return (EAttribute)wordEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EncodingTestFactory getEncodingTestFactory()
   {
     return (EncodingTestFactory)getEFactoryInstance();

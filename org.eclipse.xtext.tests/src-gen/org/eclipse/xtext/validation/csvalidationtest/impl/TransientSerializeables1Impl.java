@@ -138,6 +138,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -148,6 +149,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -161,6 +163,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransientSerializeables1Enum getEnum1()
   {
     return enum1;
@@ -171,6 +174,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEnum1(TransientSerializeables1Enum newEnum1)
   {
     TransientSerializeables1Enum oldEnum1 = enum1;
@@ -184,6 +188,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -194,6 +199,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -207,6 +213,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getInt1()
   {
     return int1;
@@ -217,6 +224,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInt1(int newInt1)
   {
     int oldInt1 = int1;
@@ -331,7 +339,7 @@ public class TransientSerializeables1Impl extends MinimalEObjectImpl.Container i
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", enum1: ");

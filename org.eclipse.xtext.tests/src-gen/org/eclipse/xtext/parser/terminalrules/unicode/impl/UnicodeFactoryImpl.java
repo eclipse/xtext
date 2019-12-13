@@ -79,6 +79,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -90,6 +91,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractString createAbstractString()
   {
     AbstractStringImpl abstractString = new AbstractStringImpl();
@@ -101,6 +103,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GString createGString()
   {
     GStringImpl gString = new GStringImpl();
@@ -112,6 +115,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public QuotedString createQuotedString()
   {
     QuotedStringImpl quotedString = new QuotedStringImpl();
@@ -123,6 +127,7 @@ public class UnicodeFactoryImpl extends EFactoryImpl implements UnicodeFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnicodePackage getUnicodePackage()
   {
     return (UnicodePackage)getEPackage();

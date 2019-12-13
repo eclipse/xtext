@@ -27,10 +27,6 @@ public interface TrickyG1 extends TrickyG2
    * Returns the value of the '<em><b>Vals</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG2}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Vals</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Vals</em>' containment reference list.
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getTrickyG1_Vals()

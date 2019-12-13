@@ -122,6 +122,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -133,6 +134,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordVal createKeywordVal()
   {
     KeywordValImpl keywordVal = new KeywordValImpl();
@@ -144,6 +146,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalVal createTerminalVal()
   {
     TerminalValImpl terminalVal = new TerminalValImpl();
@@ -155,6 +158,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumVal createEnumVal()
   {
     EnumValImpl enumVal = new EnumValImpl();
@@ -166,6 +170,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordBool createKeywordBool()
   {
     KeywordBoolImpl keywordBool = new KeywordBoolImpl();
@@ -177,6 +182,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalBool createTerminalBool()
   {
     TerminalBoolImpl terminalBool = new TerminalBoolImpl();
@@ -188,6 +194,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumBool createEnumBool()
   {
     EnumBoolImpl enumBool = new EnumBoolImpl();
@@ -199,6 +206,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MixedBool createMixedBool()
   {
     MixedBoolImpl mixedBool = new MixedBoolImpl();
@@ -210,6 +218,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MixedValue createMixedValue()
   {
     MixedValueImpl mixedValue = new MixedValueImpl();
@@ -221,6 +230,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContainmentRef createContainmentRef()
   {
     ContainmentRefImpl containmentRef = new ContainmentRefImpl();
@@ -232,6 +242,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContainmentRefN createContainmentRefN()
   {
     ContainmentRefNImpl containmentRefN = new ContainmentRefNImpl();
@@ -243,6 +254,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CrossRef createCrossRef()
   {
     CrossRefImpl crossRef = new CrossRefImpl();
@@ -276,6 +288,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentFinderTestPackage getAssignmentFinderTestPackage()
   {
     return (AssignmentFinderTestPackage)getEPackage();

@@ -67,6 +67,7 @@ public class ParameterCallerImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameterized getP()
   {
     return p;
@@ -94,6 +95,7 @@ public class ParameterCallerImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setP(Parameterized newP)
   {
     if (newP != p)

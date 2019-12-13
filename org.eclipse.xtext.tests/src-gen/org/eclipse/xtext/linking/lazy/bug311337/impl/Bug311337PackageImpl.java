@@ -91,7 +91,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug311337Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
     if (isInited) return (Bug311337Package)EPackage.Registry.INSTANCE.getEPackage(Bug311337Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug311337PackageImpl theBug311337Package = (Bug311337PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug311337PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug311337PackageImpl());
+    Object registeredBug311337Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug311337PackageImpl theBug311337Package = registeredBug311337Package instanceof Bug311337PackageImpl ? (Bug311337PackageImpl)registeredBug311337Package : new Bug311337PackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
     // Mark meta-data to indicate it can't be changed
     theBug311337Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug311337Package.eNS_URI, theBug311337Package);
     return theBug311337Package;
@@ -133,6 +133,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Def()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDefinition()
   {
     return definitionEClass;
@@ -163,6 +166,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDefinition_Name()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
@@ -173,6 +177,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDefinition_Child()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(1);
@@ -183,6 +188,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDefinition_Ref()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(2);
@@ -193,6 +199,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild()
   {
     return childEClass;
@@ -203,6 +210,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild_Name()
   {
     return (EAttribute)childEClass.getEStructuralFeatures().get(0);
@@ -213,6 +221,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChild_Link()
   {
     return (EReference)childEClass.getEStructuralFeatures().get(1);
@@ -223,6 +232,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReference()
   {
     return referenceEClass;
@@ -233,6 +243,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReference_RefChild()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
@@ -243,6 +254,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedRef()
   {
     return nestedRefEClass;
@@ -253,6 +265,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNestedRef_Left()
   {
     return (EReference)nestedRefEClass.getEStructuralFeatures().get(0);
@@ -263,6 +276,7 @@ public class Bug311337PackageImpl extends EPackageImpl implements Bug311337Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug311337Factory getBug311337Factory()
   {
     return (Bug311337Factory)getEFactoryInstance();

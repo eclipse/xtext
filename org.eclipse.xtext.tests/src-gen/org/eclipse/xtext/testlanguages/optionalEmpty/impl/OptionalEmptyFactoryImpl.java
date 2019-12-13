@@ -77,6 +77,7 @@ public class OptionalEmptyFactoryImpl extends EFactoryImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class OptionalEmptyFactoryImpl extends EFactoryImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Greeting createGreeting()
   {
     GreetingImpl greeting = new GreetingImpl();
@@ -99,6 +101,7 @@ public class OptionalEmptyFactoryImpl extends EFactoryImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalEmptyPackage getOptionalEmptyPackage()
   {
     return (OptionalEmptyPackage)getEPackage();

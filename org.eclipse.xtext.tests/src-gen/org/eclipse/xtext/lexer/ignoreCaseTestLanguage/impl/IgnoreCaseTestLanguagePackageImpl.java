@@ -58,7 +58,7 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IgnoreCaseTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
     if (isInited) return (IgnoreCaseTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(IgnoreCaseTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    IgnoreCaseTestLanguagePackageImpl theIgnoreCaseTestLanguagePackage = (IgnoreCaseTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IgnoreCaseTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IgnoreCaseTestLanguagePackageImpl());
+    Object registeredIgnoreCaseTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IgnoreCaseTestLanguagePackageImpl theIgnoreCaseTestLanguagePackage = registeredIgnoreCaseTestLanguagePackage instanceof IgnoreCaseTestLanguagePackageImpl ? (IgnoreCaseTestLanguagePackageImpl)registeredIgnoreCaseTestLanguagePackage : new IgnoreCaseTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
     // Mark meta-data to indicate it can't be changed
     theIgnoreCaseTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IgnoreCaseTestLanguagePackage.eNS_URI, theIgnoreCaseTestLanguagePackage);
     return theIgnoreCaseTestLanguagePackage;
@@ -100,6 +100,7 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Value()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class IgnoreCaseTestLanguagePackageImpl extends EPackageImpl implements I
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseTestLanguageFactory getIgnoreCaseTestLanguageFactory()
   {
     return (IgnoreCaseTestLanguageFactory)getEFactoryInstance();

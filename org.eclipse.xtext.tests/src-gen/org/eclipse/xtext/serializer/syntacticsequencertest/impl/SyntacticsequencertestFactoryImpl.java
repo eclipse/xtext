@@ -100,6 +100,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -111,6 +112,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryKeywords createMandatoryKeywords()
   {
     MandatoryKeywordsImpl mandatoryKeywords = new MandatoryKeywordsImpl();
@@ -122,6 +124,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp0 createExp0()
   {
     Exp0Impl exp0 = new Exp0Impl();
@@ -133,6 +136,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp1 createExp1()
   {
     Exp1Impl exp1 = new Exp1Impl();
@@ -144,6 +148,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp2 createExp2()
   {
     Exp2Impl exp2 = new Exp2Impl();
@@ -155,6 +160,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference createSingleCrossReference()
   {
     SingleCrossReferenceImpl singleCrossReference = new SingleCrossReferenceImpl();
@@ -166,6 +172,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanAlternative createBooleanAlternative()
   {
     BooleanAlternativeImpl booleanAlternative = new BooleanAlternativeImpl();
@@ -177,6 +184,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanAlternativeLiteral createBooleanAlternativeLiteral()
   {
     BooleanAlternativeLiteralImpl booleanAlternativeLiteral = new BooleanAlternativeLiteralImpl();
@@ -188,6 +196,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnassignedDatatype createUnassignedDatatype()
   {
     UnassignedDatatypeImpl unassignedDatatype = new UnassignedDatatypeImpl();
@@ -199,6 +208,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalSingleTransition createOptionalSingleTransition()
   {
     OptionalSingleTransitionImpl optionalSingleTransition = new OptionalSingleTransitionImpl();
@@ -210,6 +220,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalManyTransition createOptionalManyTransition()
   {
     OptionalManyTransitionImpl optionalManyTransition = new OptionalManyTransitionImpl();
@@ -221,6 +232,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryManyTransition createMandatoryManyTransition()
   {
     MandatoryManyTransitionImpl mandatoryManyTransition = new MandatoryManyTransitionImpl();
@@ -232,6 +244,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AlternativeTransition createAlternativeTransition()
   {
     AlternativeTransitionImpl alternativeTransition = new AlternativeTransitionImpl();
@@ -243,6 +256,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanValues createBooleanValues()
   {
     BooleanValuesImpl booleanValues = new BooleanValuesImpl();
@@ -254,6 +268,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LongAlternative createLongAlternative()
   {
     LongAlternativeImpl longAlternative = new LongAlternativeImpl();
@@ -265,6 +280,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActionOnly createActionOnly()
   {
     ActionOnlyImpl actionOnly = new ActionOnlyImpl();
@@ -276,6 +292,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FragmentCallerType createFragmentCallerType()
   {
     FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
@@ -287,6 +304,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug398890 createBug398890()
   {
     Bug398890Impl bug398890 = new Bug398890Impl();
@@ -298,6 +316,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Add0 createAdd0()
   {
     Add0Impl add0 = new Add0Impl();
@@ -309,6 +328,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Val0 createVal0()
   {
     Val0Impl val0 = new Val0Impl();
@@ -320,6 +340,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Add1 createAdd1()
   {
     Add1Impl add1 = new Add1Impl();
@@ -331,6 +352,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Val1 createVal1()
   {
     Val1Impl val1 = new Val1Impl();
@@ -342,6 +364,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Add2 createAdd2()
   {
     Add2Impl add2 = new Add2Impl();
@@ -353,6 +376,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mult2 createMult2()
   {
     Mult2Impl mult2 = new Mult2Impl();
@@ -364,6 +388,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Val2 createVal2()
   {
     Val2Impl val2 = new Val2Impl();
@@ -375,6 +400,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SyntacticsequencertestPackage getSyntacticsequencertestPackage()
   {
     return (SyntacticsequencertestPackage)getEPackage();

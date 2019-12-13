@@ -65,6 +65,7 @@ public class ParameterRefImpl extends ParameterObjectImpl implements ParameterRe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter getParameter()
   {
     if (parameter != null && parameter.eIsProxy())
@@ -95,6 +96,7 @@ public class ParameterRefImpl extends ParameterObjectImpl implements ParameterRe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParameter(Parameter newParameter)
   {
     Parameter oldParameter = parameter;

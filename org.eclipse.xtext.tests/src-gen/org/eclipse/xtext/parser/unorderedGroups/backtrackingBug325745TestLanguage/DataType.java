@@ -27,10 +27,6 @@ public interface DataType extends EObject
   /**
    * Returns the value of the '<em><b>Base Type</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Base Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Base Type</em>' attribute.
    * @see #setBaseType(String)
@@ -53,10 +49,6 @@ public interface DataType extends EObject
   /**
    * Returns the value of the '<em><b>Default Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Default Value</em>' attribute.
    * @see #setDefaultValue(String)

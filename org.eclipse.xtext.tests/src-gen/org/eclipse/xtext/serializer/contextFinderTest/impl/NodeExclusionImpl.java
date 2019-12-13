@@ -66,6 +66,7 @@ public class NodeExclusionImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -96,6 +97,7 @@ public class NodeExclusionImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(Model newRef)
   {
     Model oldRef = ref;

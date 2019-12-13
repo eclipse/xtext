@@ -76,6 +76,7 @@ public class Formattertestlanguage2FactoryImpl extends EFactoryImpl implements F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Root createRoot()
   {
     RootImpl root = new RootImpl();
@@ -87,6 +88,7 @@ public class Formattertestlanguage2FactoryImpl extends EFactoryImpl implements F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Formattertestlanguage2Package getFormattertestlanguage2Package()
   {
     return (Formattertestlanguage2Package)getEPackage();

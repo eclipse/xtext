@@ -75,6 +75,7 @@ public class SingleEnumImpl extends MinimalEObjectImpl.Container implements Sing
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DefEnum getVal()
   {
     return val;
@@ -85,6 +86,7 @@ public class SingleEnumImpl extends MinimalEObjectImpl.Container implements Sing
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(DefEnum newVal)
   {
     DefEnum oldVal = val;
@@ -169,7 +171,7 @@ public class SingleEnumImpl extends MinimalEObjectImpl.Container implements Sing
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

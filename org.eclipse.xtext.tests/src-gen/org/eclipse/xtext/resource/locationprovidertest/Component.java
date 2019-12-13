@@ -31,10 +31,6 @@ public interface Component extends EObject
    * Returns the value of the '<em><b>Mode</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.locationprovidertest.Mode}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Mode</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Mode</em>' containment reference list.
    * @see org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage#getComponent_Mode()
@@ -47,10 +43,6 @@ public interface Component extends EObject
    * Returns the value of the '<em><b>Transition</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.locationprovidertest.Transition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Transition</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transition</em>' containment reference list.
    * @see org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage#getComponent_Transition()
@@ -62,10 +54,6 @@ public interface Component extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)

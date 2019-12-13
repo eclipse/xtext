@@ -74,6 +74,7 @@ public class KeywordValImpl extends MinimalEObjectImpl.Container implements Keyw
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getKw()
   {
     return kw;
@@ -84,6 +85,7 @@ public class KeywordValImpl extends MinimalEObjectImpl.Container implements Keyw
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw(String newKw)
   {
     String oldKw = kw;
@@ -168,7 +170,7 @@ public class KeywordValImpl extends MinimalEObjectImpl.Container implements Keyw
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (kw: ");
     result.append(kw);
     result.append(')');

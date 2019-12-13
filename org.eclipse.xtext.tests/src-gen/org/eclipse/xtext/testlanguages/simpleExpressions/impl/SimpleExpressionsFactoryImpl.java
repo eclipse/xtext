@@ -79,6 +79,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Sequence createSequence()
   {
     SequenceImpl sequence = new SequenceImpl();
@@ -90,6 +91,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
@@ -101,6 +103,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Atom createAtom()
   {
     AtomImpl atom = new AtomImpl();
@@ -112,6 +115,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Op createOp()
   {
     OpImpl op = new OpImpl();
@@ -123,6 +127,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleExpressionsPackage getSimpleExpressionsPackage()
   {
     return (SimpleExpressionsPackage)getEPackage();

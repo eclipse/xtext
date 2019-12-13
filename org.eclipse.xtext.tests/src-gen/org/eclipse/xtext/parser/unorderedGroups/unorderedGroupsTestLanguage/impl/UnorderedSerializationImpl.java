@@ -165,6 +165,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFirst()
   {
     return first;
@@ -175,6 +176,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(boolean newFirst)
   {
     boolean oldFirst = first;
@@ -188,6 +190,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSecond()
   {
     return second;
@@ -198,6 +201,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(boolean newSecond)
   {
     boolean oldSecond = second;
@@ -211,6 +215,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isThird()
   {
     return third;
@@ -221,6 +226,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThird(boolean newThird)
   {
     boolean oldThird = third;
@@ -234,6 +240,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isForth()
   {
     return forth;
@@ -244,6 +251,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setForth(boolean newForth)
   {
     boolean oldForth = forth;
@@ -257,6 +265,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getFirstAsList()
   {
     if (firstAsList == null)
@@ -271,6 +280,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getSecondAsList()
   {
     if (secondAsList == null)
@@ -409,7 +419,7 @@ public class UnorderedSerializationImpl extends MinimalEObjectImpl.Container imp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (first: ");
     result.append(first);
     result.append(", second: ");

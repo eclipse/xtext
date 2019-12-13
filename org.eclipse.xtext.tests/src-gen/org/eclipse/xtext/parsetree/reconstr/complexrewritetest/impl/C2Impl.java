@@ -66,6 +66,7 @@ public class C2Impl extends TrickyCImpl implements C2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrickyC getY()
   {
     return y;
@@ -93,6 +94,7 @@ public class C2Impl extends TrickyCImpl implements C2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setY(TrickyC newY)
   {
     if (newY != y)

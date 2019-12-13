@@ -74,6 +74,7 @@ public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getX()
   {
     return x;
@@ -84,6 +85,7 @@ public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX(String newX)
   {
     String oldX = x;
@@ -168,7 +170,7 @@ public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (x: ");
     result.append(x);
     result.append(')');

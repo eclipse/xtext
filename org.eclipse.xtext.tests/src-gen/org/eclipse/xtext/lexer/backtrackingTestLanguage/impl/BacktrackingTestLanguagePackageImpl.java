@@ -84,7 +84,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BacktrackingTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -99,7 +99,8 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
     if (isInited) return (BacktrackingTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(BacktrackingTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    BacktrackingTestLanguagePackageImpl theBacktrackingTestLanguagePackage = (BacktrackingTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BacktrackingTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BacktrackingTestLanguagePackageImpl());
+    Object registeredBacktrackingTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BacktrackingTestLanguagePackageImpl theBacktrackingTestLanguagePackage = registeredBacktrackingTestLanguagePackage instanceof BacktrackingTestLanguagePackageImpl ? (BacktrackingTestLanguagePackageImpl)registeredBacktrackingTestLanguagePackage : new BacktrackingTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -115,7 +116,6 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
     // Mark meta-data to indicate it can't be changed
     theBacktrackingTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BacktrackingTestLanguagePackage.eNS_URI, theBacktrackingTestLanguagePackage);
     return theBacktrackingTestLanguagePackage;
@@ -126,6 +126,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -136,6 +137,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Enums()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -146,6 +148,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Ycs()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -156,6 +159,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Abs()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -166,6 +170,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Xbs()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -176,6 +181,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Ys()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -186,6 +192,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_As()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
@@ -196,6 +203,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAb()
   {
     return abEClass;
@@ -206,6 +214,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAb_X()
   {
     return (EAttribute)abEClass.getEStructuralFeatures().get(0);
@@ -216,6 +225,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAb_Y()
   {
     return (EAttribute)abEClass.getEStructuralFeatures().get(1);
@@ -226,6 +236,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getXb()
   {
     return xbEClass;
@@ -236,6 +247,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getXb_X()
   {
     return (EAttribute)xbEClass.getEStructuralFeatures().get(0);
@@ -246,6 +258,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getXb_Y()
   {
     return (EAttribute)xbEClass.getEStructuralFeatures().get(1);
@@ -256,6 +269,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getEnumName()
   {
     return enumNameEEnum;
@@ -266,6 +280,7 @@ public class BacktrackingTestLanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BacktrackingTestLanguageFactory getBacktrackingTestLanguageFactory()
   {
     return (BacktrackingTestLanguageFactory)getEFactoryInstance();

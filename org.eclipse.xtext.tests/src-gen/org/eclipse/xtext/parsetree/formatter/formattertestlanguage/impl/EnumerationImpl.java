@@ -66,6 +66,7 @@ public class EnumerationImpl extends LineImpl implements Enumeration
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Enum1> getVal()
   {
     if (val == null)
@@ -153,7 +154,7 @@ public class EnumerationImpl extends LineImpl implements Enumeration
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

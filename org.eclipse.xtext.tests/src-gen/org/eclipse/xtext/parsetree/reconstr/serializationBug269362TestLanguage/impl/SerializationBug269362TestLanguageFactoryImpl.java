@@ -76,6 +76,7 @@ public class SerializationBug269362TestLanguageFactoryImpl extends EFactoryImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class SerializationBug269362TestLanguageFactoryImpl extends EFactoryImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SerializationBug269362TestLanguagePackage getSerializationBug269362TestLanguagePackage()
   {
     return (SerializationBug269362TestLanguagePackage)getEPackage();

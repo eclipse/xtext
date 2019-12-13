@@ -88,6 +88,7 @@ public class TypeDeclarationImpl extends AbstractElementImpl implements TypeDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -118,6 +119,7 @@ public class TypeDeclarationImpl extends AbstractElementImpl implements TypeDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperType(TypeDeclaration newSuperType)
   {
     TypeDeclaration oldSuperType = superType;
@@ -131,6 +133,7 @@ public class TypeDeclarationImpl extends AbstractElementImpl implements TypeDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Member> getMembers()
   {
     if (members == null)

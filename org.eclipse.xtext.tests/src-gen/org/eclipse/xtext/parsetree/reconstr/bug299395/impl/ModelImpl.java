@@ -106,6 +106,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getStrings()
   {
     if (strings == null)
@@ -120,6 +121,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getKeys()
   {
     if (keys == null)
@@ -134,6 +136,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getValues()
   {
     if (values == null)
@@ -148,6 +151,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubModel getSubModel()
   {
     return subModel;
@@ -175,6 +179,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubModel(SubModel newSubModel)
   {
     if (newSubModel != subModel)
@@ -317,7 +322,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (strings: ");
     result.append(strings);
     result.append(", keys: ");

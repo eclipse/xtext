@@ -27,10 +27,6 @@ public interface Datatypes extends Line
   /**
    * Returns the value of the '<em><b>Val1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute.
    * @see #setVal1(String)
@@ -53,10 +49,6 @@ public interface Datatypes extends Line
   /**
    * Returns the value of the '<em><b>Val2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute.
    * @see #setVal2(String)
@@ -79,10 +71,6 @@ public interface Datatypes extends Line
   /**
    * Returns the value of the '<em><b>Val3</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' attribute.
    * @see #setVal3(String)

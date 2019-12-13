@@ -100,6 +100,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AfterObj getAfter()
   {
     return after;
@@ -127,6 +128,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAfter(AfterObj newAfter)
   {
     if (newAfter != after)
@@ -148,6 +150,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -158,6 +161,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(int newValue)
   {
     int oldValue = value;
@@ -171,6 +175,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SObj getS()
   {
     return s;
@@ -198,6 +203,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setS(SObj newS)
   {
     if (newS != s)
@@ -328,7 +334,7 @@ public class Rule4Impl extends MinimalEObjectImpl.Container implements Rule4
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(')');

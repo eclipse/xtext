@@ -67,6 +67,7 @@ public class MultiKeywordsImpl extends MinimalEObjectImpl.Container implements M
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal()
   {
     if (val == null)
@@ -154,7 +155,7 @@ public class MultiKeywordsImpl extends MinimalEObjectImpl.Container implements M
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

@@ -58,7 +58,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug292245TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug292245TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug292245TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug292245TestLanguagePackageImpl theBug292245TestLanguagePackage = (Bug292245TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug292245TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug292245TestLanguagePackageImpl());
+    Object registeredBug292245TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug292245TestLanguagePackageImpl theBug292245TestLanguagePackage = registeredBug292245TestLanguagePackage instanceof Bug292245TestLanguagePackageImpl ? (Bug292245TestLanguagePackageImpl)registeredBug292245TestLanguagePackage : new Bug292245TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug292245TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug292245TestLanguagePackage.eNS_URI, theBug292245TestLanguagePackage);
     return theBug292245TestLanguagePackage;
@@ -100,6 +100,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Fix()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Error()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Tick()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -140,6 +144,7 @@ public class Bug292245TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug292245TestLanguageFactory getBug292245TestLanguageFactory()
   {
     return (Bug292245TestLanguageFactory)getEFactoryInstance();

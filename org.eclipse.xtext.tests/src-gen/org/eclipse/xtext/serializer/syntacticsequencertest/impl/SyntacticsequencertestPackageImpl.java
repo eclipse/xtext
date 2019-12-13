@@ -251,7 +251,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SyntacticsequencertestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -266,7 +266,8 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     if (isInited) return (SyntacticsequencertestPackage)EPackage.Registry.INSTANCE.getEPackage(SyntacticsequencertestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SyntacticsequencertestPackageImpl theSyntacticsequencertestPackage = (SyntacticsequencertestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SyntacticsequencertestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SyntacticsequencertestPackageImpl());
+    Object registeredSyntacticsequencertestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SyntacticsequencertestPackageImpl theSyntacticsequencertestPackage = registeredSyntacticsequencertestPackage instanceof SyntacticsequencertestPackageImpl ? (SyntacticsequencertestPackageImpl)registeredSyntacticsequencertestPackage : new SyntacticsequencertestPackageImpl();
 
     isInited = true;
 
@@ -282,7 +283,6 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     // Mark meta-data to indicate it can't be changed
     theSyntacticsequencertestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SyntacticsequencertestPackage.eNS_URI, theSyntacticsequencertestPackage);
     return theSyntacticsequencertestPackage;
@@ -293,6 +293,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -303,6 +304,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -313,6 +315,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -323,6 +326,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X3()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -333,6 +337,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X4()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -343,6 +348,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X5()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
@@ -353,6 +359,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X6()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
@@ -363,6 +370,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X7()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(6);
@@ -373,6 +381,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X8()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(7);
@@ -383,6 +392,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X9()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(8);
@@ -393,6 +403,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X10()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(9);
@@ -403,6 +414,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X11()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(10);
@@ -413,6 +425,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X12()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(11);
@@ -423,6 +436,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X13()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(12);
@@ -433,6 +447,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X14()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(13);
@@ -443,6 +458,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X15()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(14);
@@ -453,6 +469,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X16()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(15);
@@ -463,6 +480,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMandatoryKeywords()
   {
     return mandatoryKeywordsEClass;
@@ -473,6 +491,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMandatoryKeywords_Val1()
   {
     return (EAttribute)mandatoryKeywordsEClass.getEStructuralFeatures().get(0);
@@ -483,6 +502,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMandatoryKeywords_Val2()
   {
     return (EAttribute)mandatoryKeywordsEClass.getEStructuralFeatures().get(1);
@@ -493,6 +513,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMandatoryKeywords_Val3()
   {
     return (EAttribute)mandatoryKeywordsEClass.getEStructuralFeatures().get(2);
@@ -503,6 +524,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExp0()
   {
     return exp0EClass;
@@ -513,6 +535,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExp1()
   {
     return exp1EClass;
@@ -523,6 +546,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExp2()
   {
     return exp2EClass;
@@ -533,6 +557,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleCrossReference()
   {
     return singleCrossReferenceEClass;
@@ -543,6 +568,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleCrossReference_Name()
   {
     return (EAttribute)singleCrossReferenceEClass.getEStructuralFeatures().get(0);
@@ -553,6 +579,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleCrossReference_Ref1()
   {
     return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(1);
@@ -563,6 +590,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleCrossReference_Ref2()
   {
     return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(2);
@@ -573,6 +601,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleCrossReference_Ref3()
   {
     return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(3);
@@ -583,6 +612,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleCrossReference_Ref4()
   {
     return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(4);
@@ -593,6 +623,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBooleanAlternative()
   {
     return booleanAlternativeEClass;
@@ -603,6 +634,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBooleanAlternative_Bool()
   {
     return (EReference)booleanAlternativeEClass.getEStructuralFeatures().get(0);
@@ -613,6 +645,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBooleanAlternativeLiteral()
   {
     return booleanAlternativeLiteralEClass;
@@ -623,6 +656,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanAlternativeLiteral_IsTrue()
   {
     return (EAttribute)booleanAlternativeLiteralEClass.getEStructuralFeatures().get(0);
@@ -633,6 +667,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnassignedDatatype()
   {
     return unassignedDatatypeEClass;
@@ -643,6 +678,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnassignedDatatype_Val()
   {
     return (EAttribute)unassignedDatatypeEClass.getEStructuralFeatures().get(0);
@@ -653,6 +689,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalSingleTransition()
   {
     return optionalSingleTransitionEClass;
@@ -663,6 +700,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalSingleTransition_Val()
   {
     return (EAttribute)optionalSingleTransitionEClass.getEStructuralFeatures().get(0);
@@ -673,6 +711,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalManyTransition()
   {
     return optionalManyTransitionEClass;
@@ -683,6 +722,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalManyTransition_Val()
   {
     return (EAttribute)optionalManyTransitionEClass.getEStructuralFeatures().get(0);
@@ -693,6 +733,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMandatoryManyTransition()
   {
     return mandatoryManyTransitionEClass;
@@ -703,6 +744,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMandatoryManyTransition_Val()
   {
     return (EAttribute)mandatoryManyTransitionEClass.getEStructuralFeatures().get(0);
@@ -713,6 +755,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAlternativeTransition()
   {
     return alternativeTransitionEClass;
@@ -723,6 +766,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeTransition_Val()
   {
     return (EAttribute)alternativeTransitionEClass.getEStructuralFeatures().get(0);
@@ -733,6 +777,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBooleanValues()
   {
     return booleanValuesEClass;
@@ -743,6 +788,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanValues_Val1()
   {
     return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(0);
@@ -753,6 +799,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanValues_Val2()
   {
     return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(1);
@@ -763,6 +810,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanValues_Val3()
   {
     return (EAttribute)booleanValuesEClass.getEStructuralFeatures().get(2);
@@ -773,6 +821,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLongAlternative()
   {
     return longAlternativeEClass;
@@ -783,6 +832,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Foo()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(0);
@@ -793,6 +843,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val1()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(1);
@@ -803,6 +854,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val2()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(2);
@@ -813,6 +865,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val3()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(3);
@@ -823,6 +876,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val4()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(4);
@@ -833,6 +887,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val5()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(5);
@@ -843,6 +898,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val6()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(6);
@@ -853,6 +909,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val7()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(7);
@@ -863,6 +920,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongAlternative_Val8()
   {
     return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(8);
@@ -873,6 +931,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActionOnly()
   {
     return actionOnlyEClass;
@@ -883,6 +942,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFragmentCallerType()
   {
     return fragmentCallerTypeEClass;
@@ -893,6 +953,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_Val1()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(0);
@@ -903,6 +964,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_Val()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(1);
@@ -913,6 +975,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_FragVal()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(2);
@@ -923,6 +986,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBug398890()
   {
     return bug398890EClass;
@@ -933,6 +997,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBug398890_Name()
   {
     return (EAttribute)bug398890EClass.getEStructuralFeatures().get(0);
@@ -943,6 +1008,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAdd0()
   {
     return add0EClass;
@@ -953,6 +1019,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd0_Left()
   {
     return (EReference)add0EClass.getEStructuralFeatures().get(0);
@@ -963,6 +1030,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd0_Right()
   {
     return (EReference)add0EClass.getEStructuralFeatures().get(1);
@@ -973,6 +1041,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVal0()
   {
     return val0EClass;
@@ -983,6 +1052,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVal0_Name()
   {
     return (EAttribute)val0EClass.getEStructuralFeatures().get(0);
@@ -993,6 +1063,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAdd1()
   {
     return add1EClass;
@@ -1003,6 +1074,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd1_Left()
   {
     return (EReference)add1EClass.getEStructuralFeatures().get(0);
@@ -1013,6 +1085,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd1_Right()
   {
     return (EReference)add1EClass.getEStructuralFeatures().get(1);
@@ -1023,6 +1096,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVal1()
   {
     return val1EClass;
@@ -1033,6 +1107,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVal1_Name()
   {
     return (EAttribute)val1EClass.getEStructuralFeatures().get(0);
@@ -1043,6 +1118,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAdd2()
   {
     return add2EClass;
@@ -1053,6 +1129,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd2_Left()
   {
     return (EReference)add2EClass.getEStructuralFeatures().get(0);
@@ -1063,6 +1140,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd2_Right()
   {
     return (EReference)add2EClass.getEStructuralFeatures().get(1);
@@ -1073,6 +1151,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMult2()
   {
     return mult2EClass;
@@ -1083,6 +1162,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMult2_Left()
   {
     return (EReference)mult2EClass.getEStructuralFeatures().get(0);
@@ -1093,6 +1173,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMult2_Right()
   {
     return (EReference)mult2EClass.getEStructuralFeatures().get(1);
@@ -1103,6 +1184,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVal2()
   {
     return val2EClass;
@@ -1113,6 +1195,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVal2_Name()
   {
     return (EAttribute)val2EClass.getEStructuralFeatures().get(0);
@@ -1123,6 +1206,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SyntacticsequencertestFactory getSyntacticsequencertestFactory()
   {
     return (SyntacticsequencertestFactory)getEFactoryInstance();

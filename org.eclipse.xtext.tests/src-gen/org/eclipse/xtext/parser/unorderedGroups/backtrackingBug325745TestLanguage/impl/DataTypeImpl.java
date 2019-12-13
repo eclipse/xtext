@@ -95,6 +95,7 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getBaseType()
   {
     return baseType;
@@ -105,6 +106,7 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBaseType(String newBaseType)
   {
     String oldBaseType = baseType;
@@ -118,6 +120,7 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDefaultValue()
   {
     return defaultValue;
@@ -128,6 +131,7 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefaultValue(String newDefaultValue)
   {
     String oldDefaultValue = defaultValue;
@@ -222,7 +226,7 @@ public class DataTypeImpl extends MinimalEObjectImpl.Container implements DataTy
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (baseType: ");
     result.append(baseType);
     result.append(", defaultValue: ");

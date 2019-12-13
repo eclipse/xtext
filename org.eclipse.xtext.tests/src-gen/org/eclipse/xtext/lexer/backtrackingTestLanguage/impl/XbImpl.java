@@ -95,6 +95,7 @@ public class XbImpl extends MinimalEObjectImpl.Container implements Xb
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getX()
   {
     return x;
@@ -105,6 +106,7 @@ public class XbImpl extends MinimalEObjectImpl.Container implements Xb
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX(String newX)
   {
     String oldX = x;
@@ -118,6 +120,7 @@ public class XbImpl extends MinimalEObjectImpl.Container implements Xb
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getY()
   {
     return y;
@@ -128,6 +131,7 @@ public class XbImpl extends MinimalEObjectImpl.Container implements Xb
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setY(String newY)
   {
     String oldY = y;
@@ -222,7 +226,7 @@ public class XbImpl extends MinimalEObjectImpl.Container implements Xb
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (x: ");
     result.append(x);
     result.append(", y: ");

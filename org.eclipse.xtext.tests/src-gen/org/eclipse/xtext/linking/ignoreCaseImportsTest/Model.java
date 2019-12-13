@@ -27,10 +27,6 @@ public interface Model extends org.eclipse.xtext.linking.ignoreCaseLinkingTest.M
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.linking.ignoreCaseImportsTest.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage#getModel_Imports()

@@ -78,6 +78,7 @@ public class Bug313089FactoryImpl extends EFactoryImpl implements Bug313089Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo createFoo()
   {
     FooImpl foo = new FooImpl();
@@ -89,6 +90,7 @@ public class Bug313089FactoryImpl extends EFactoryImpl implements Bug313089Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bar createBar()
   {
     BarImpl bar = new BarImpl();
@@ -100,6 +102,7 @@ public class Bug313089FactoryImpl extends EFactoryImpl implements Bug313089Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Baz createBaz()
   {
     BazImpl baz = new BazImpl();
@@ -111,6 +114,7 @@ public class Bug313089FactoryImpl extends EFactoryImpl implements Bug313089Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug313089Package getBug313089Package()
   {
     return (Bug313089Package)getEPackage();

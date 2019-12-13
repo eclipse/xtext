@@ -87,6 +87,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EPackage getEPackage()
   {
     if (ePackage != null && ePackage.eIsProxy())
@@ -117,6 +118,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEPackage(EPackage newEPackage)
   {
     EPackage oldEPackage = ePackage;
@@ -130,6 +132,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAlias()
   {
     return alias;
@@ -140,6 +143,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(String newAlias)
   {
     String oldAlias = alias;
@@ -235,7 +239,7 @@ public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Contain
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (alias: ");
     result.append(alias);
     result.append(')');

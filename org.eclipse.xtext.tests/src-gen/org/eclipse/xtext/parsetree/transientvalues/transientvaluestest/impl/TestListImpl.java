@@ -65,6 +65,7 @@ public class TestListImpl extends RootImpl implements TestList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getItem()
   {
     if (item == null)
@@ -152,7 +153,7 @@ public class TestListImpl extends RootImpl implements TestList
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (item: ");
     result.append(item);
     result.append(')');

@@ -28,10 +28,6 @@ public interface CreateExpression extends Expression
   /**
    * Returns the value of the '<em><b>Type Expr</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Expr</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type Expr</em>' attribute.
    * @see #setTypeExpr(String)
@@ -54,10 +50,6 @@ public interface CreateExpression extends Expression
   /**
    * Returns the value of the '<em><b>Parameter List</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parameter List</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter List</em>' containment reference.
    * @see #setParameterList(ParameterList)
@@ -80,10 +72,6 @@ public interface CreateExpression extends Expression
   /**
    * Returns the value of the '<em><b>Alias</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' attribute.
    * @see #setAlias(String)
@@ -106,10 +94,6 @@ public interface CreateExpression extends Expression
   /**
    * Returns the value of the '<em><b>Context Block</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Context Block</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Context Block</em>' containment reference.
    * @see #setContextBlock(Expression)

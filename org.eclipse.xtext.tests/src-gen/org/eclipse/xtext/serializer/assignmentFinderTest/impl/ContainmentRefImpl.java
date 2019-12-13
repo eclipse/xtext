@@ -67,6 +67,7 @@ public class ContainmentRefImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContainmentRefN getCtx()
   {
     return ctx;
@@ -94,6 +95,7 @@ public class ContainmentRefImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCtx(ContainmentRefN newCtx)
   {
     if (newCtx != ctx)

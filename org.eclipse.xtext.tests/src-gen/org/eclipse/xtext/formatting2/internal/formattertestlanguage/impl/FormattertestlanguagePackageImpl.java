@@ -74,7 +74,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FormattertestlanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -89,7 +89,8 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     if (isInited) return (FormattertestlanguagePackage)EPackage.Registry.INSTANCE.getEPackage(FormattertestlanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = (FormattertestlanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FormattertestlanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FormattertestlanguagePackageImpl());
+    Object registeredFormattertestlanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = registeredFormattertestlanguagePackage instanceof FormattertestlanguagePackageImpl ? (FormattertestlanguagePackageImpl)registeredFormattertestlanguagePackage : new FormattertestlanguagePackageImpl();
 
     isInited = true;
 
@@ -105,7 +106,6 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     // Mark meta-data to indicate it can't be changed
     theFormattertestlanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FormattertestlanguagePackage.eNS_URI, theFormattertestlanguagePackage);
     return theFormattertestlanguagePackage;
@@ -116,6 +116,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -126,6 +127,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIDList()
   {
     return idListEClass;
@@ -136,6 +138,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getIDList_Ids()
   {
     return (EAttribute)idListEClass.getEStructuralFeatures().get(0);
@@ -146,6 +149,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKWList()
   {
     return kwListEClass;
@@ -156,6 +160,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKWList_Kw1()
   {
     return (EAttribute)kwListEClass.getEStructuralFeatures().get(0);
@@ -166,6 +171,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKWList_Kw2()
   {
     return (EAttribute)kwListEClass.getEStructuralFeatures().get(1);
@@ -176,6 +182,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKWList_Kw3()
   {
     return (EAttribute)kwListEClass.getEStructuralFeatures().get(2);
@@ -186,6 +193,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKWList_Kw4()
   {
     return (EAttribute)kwListEClass.getEStructuralFeatures().get(3);
@@ -196,6 +204,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKWList_Kw5()
   {
     return (EAttribute)kwListEClass.getEStructuralFeatures().get(4);
@@ -206,6 +215,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FormattertestlanguageFactory getFormattertestlanguageFactory()
   {
     return (FormattertestlanguageFactory)getEFactoryInstance();

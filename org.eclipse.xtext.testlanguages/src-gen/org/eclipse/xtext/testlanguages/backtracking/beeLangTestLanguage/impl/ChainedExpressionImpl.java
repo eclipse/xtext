@@ -70,6 +70,7 @@ public class ChainedExpressionImpl extends ExpressionImpl implements ChainedExpr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getExpressions()
   {
     if (expressions == null)

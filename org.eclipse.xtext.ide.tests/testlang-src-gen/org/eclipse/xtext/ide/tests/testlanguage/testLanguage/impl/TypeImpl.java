@@ -71,6 +71,7 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getArrayDiemensions()
   {
     if (arrayDiemensions == null)
@@ -158,7 +159,7 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (arrayDiemensions: ");
     result.append(arrayDiemensions);
     result.append(')');

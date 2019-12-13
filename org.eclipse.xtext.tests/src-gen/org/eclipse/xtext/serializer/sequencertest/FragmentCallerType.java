@@ -28,10 +28,6 @@ public interface FragmentCallerType extends EObject
   /**
    * Returns the value of the '<em><b>Val1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute.
    * @see #setVal1(String)
@@ -54,10 +50,6 @@ public interface FragmentCallerType extends EObject
   /**
    * Returns the value of the '<em><b>Val</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute.
    * @see #setVal(String)
@@ -80,10 +72,6 @@ public interface FragmentCallerType extends EObject
   /**
    * Returns the value of the '<em><b>Frag Val</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Frag Val</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Frag Val</em>' attribute.
    * @see #setFragVal(String)

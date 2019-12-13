@@ -123,7 +123,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LocationprovidertestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -138,7 +138,8 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
     if (isInited) return (LocationprovidertestPackage)EPackage.Registry.INSTANCE.getEPackage(LocationprovidertestPackage.eNS_URI);
 
     // Obtain or create and register package
-    LocationprovidertestPackageImpl theLocationprovidertestPackage = (LocationprovidertestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LocationprovidertestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LocationprovidertestPackageImpl());
+    Object registeredLocationprovidertestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LocationprovidertestPackageImpl theLocationprovidertestPackage = registeredLocationprovidertestPackage instanceof LocationprovidertestPackageImpl ? (LocationprovidertestPackageImpl)registeredLocationprovidertestPackage : new LocationprovidertestPackageImpl();
 
     isInited = true;
 
@@ -154,7 +155,6 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
     // Mark meta-data to indicate it can't be changed
     theLocationprovidertestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LocationprovidertestPackage.eNS_URI, theLocationprovidertestPackage);
     return theLocationprovidertestPackage;
@@ -165,6 +165,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -175,6 +176,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -185,6 +187,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Components()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -195,6 +198,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -205,6 +209,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -215,6 +220,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Singleref()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -225,6 +231,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Multirefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -235,6 +242,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getComponent()
   {
     return componentEClass;
@@ -245,6 +253,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getComponent_Mode()
   {
     return (EReference)componentEClass.getEStructuralFeatures().get(0);
@@ -255,6 +264,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getComponent_Transition()
   {
     return (EReference)componentEClass.getEStructuralFeatures().get(1);
@@ -265,6 +275,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComponent_Name()
   {
     return (EAttribute)componentEClass.getEStructuralFeatures().get(2);
@@ -275,6 +286,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBus()
   {
     return busEClass;
@@ -285,6 +297,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBus_Port()
   {
     return (EReference)busEClass.getEStructuralFeatures().get(0);
@@ -295,6 +308,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProcessor()
   {
     return processorEClass;
@@ -305,6 +319,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProcessor_Data()
   {
     return (EReference)processorEClass.getEStructuralFeatures().get(0);
@@ -315,6 +330,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMode()
   {
     return modeEClass;
@@ -325,6 +341,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMode_Name()
   {
     return (EAttribute)modeEClass.getEStructuralFeatures().get(0);
@@ -335,6 +352,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTransition()
   {
     return transitionEClass;
@@ -345,6 +363,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTransition_Name()
   {
     return (EAttribute)transitionEClass.getEStructuralFeatures().get(0);
@@ -355,6 +374,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransition_Source()
   {
     return (EReference)transitionEClass.getEStructuralFeatures().get(1);
@@ -365,6 +385,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTransition_Destination()
   {
     return (EReference)transitionEClass.getEStructuralFeatures().get(2);
@@ -375,6 +396,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPort()
   {
     return portEClass;
@@ -385,6 +407,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPort_Name()
   {
     return (EAttribute)portEClass.getEStructuralFeatures().get(0);
@@ -395,6 +418,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getData()
   {
     return dataEClass;
@@ -405,6 +429,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getData_Name()
   {
     return (EAttribute)dataEClass.getEStructuralFeatures().get(0);
@@ -415,6 +440,7 @@ public class LocationprovidertestPackageImpl extends EPackageImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LocationprovidertestFactory getLocationprovidertestFactory()
   {
     return (LocationprovidertestFactory)getEFactoryInstance();

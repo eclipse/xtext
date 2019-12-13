@@ -27,10 +27,6 @@ public interface MixedValue extends EObject
    * Returns the value of the '<em><b>Val</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute.
    * @see org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum

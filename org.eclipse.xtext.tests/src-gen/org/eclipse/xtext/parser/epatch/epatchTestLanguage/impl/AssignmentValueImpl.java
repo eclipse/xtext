@@ -217,6 +217,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getValue()
   {
     return value;
@@ -227,6 +228,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(String newValue)
   {
     String oldValue = value;
@@ -240,6 +242,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedObject getRefObject()
   {
     if (refObject != null && refObject.eIsProxy())
@@ -270,6 +273,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefObject(NamedObject newRefObject)
   {
     NamedObject oldRefObject = refObject;
@@ -283,6 +287,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRefFeature()
   {
     return refFeature;
@@ -293,6 +298,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefFeature(String newRefFeature)
   {
     String oldRefFeature = refFeature;
@@ -306,6 +312,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getRefIndex()
   {
     return refIndex;
@@ -316,6 +323,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefIndex(int newRefIndex)
   {
     int oldRefIndex = refIndex;
@@ -329,6 +337,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CreatedObject getNewObject()
   {
     return newObject;
@@ -356,6 +365,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNewObject(CreatedObject newNewObject)
   {
     if (newNewObject != newObject)
@@ -377,6 +387,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import getImport()
   {
     if (import_ != null && import_.eIsProxy())
@@ -407,6 +418,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImport(Import newImport)
   {
     Import oldImport = import_;
@@ -420,6 +432,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getImpFrag()
   {
     return impFrag;
@@ -430,6 +443,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImpFrag(String newImpFrag)
   {
     String oldImpFrag = impFrag;
@@ -443,6 +457,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getIndex()
   {
     return index;
@@ -453,6 +468,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIndex(int newIndex)
   {
     int oldIndex = index;
@@ -466,6 +482,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getKeyword()
   {
     return keyword;
@@ -476,6 +493,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKeyword(String newKeyword)
   {
     String oldKeyword = keyword;
@@ -658,7 +676,7 @@ public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(", refFeature: ");

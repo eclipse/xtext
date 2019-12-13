@@ -94,6 +94,7 @@ public class UnassignedAction2SubImpl extends UnassignedAction2Impl implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -104,6 +105,7 @@ public class UnassignedAction2SubImpl extends UnassignedAction2Impl implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -117,6 +119,7 @@ public class UnassignedAction2SubImpl extends UnassignedAction2Impl implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -127,6 +130,7 @@ public class UnassignedAction2SubImpl extends UnassignedAction2Impl implements U
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -221,7 +225,7 @@ public class UnassignedAction2SubImpl extends UnassignedAction2Impl implements U
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

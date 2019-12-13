@@ -37,10 +37,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Documentation</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Documentation</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Documentation</em>' attribute.
    * @see #setDocumentation(String)
@@ -63,10 +59,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -89,10 +81,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Version</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Version</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Version</em>' attribute.
    * @see #setVersion(String)
@@ -116,10 +104,6 @@ public interface Unit extends EObject
    * Returns the value of the '<em><b>Implements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.SimpleTypeRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Implements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Implements</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getUnit_Implements()
@@ -131,10 +115,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Source Location</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Source Location</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source Location</em>' attribute.
    * @see #setSourceLocation(String)
@@ -157,10 +137,6 @@ public interface Unit extends EObject
   /**
    * Returns the value of the '<em><b>Output Location</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Output Location</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Output Location</em>' attribute.
    * @see #setOutputLocation(String)
@@ -184,10 +160,6 @@ public interface Unit extends EObject
    * Returns the value of the '<em><b>Provided Capabilities</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ProvidedCapability}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Provided Capabilities</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Provided Capabilities</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getUnit_ProvidedCapabilities()
@@ -200,10 +172,6 @@ public interface Unit extends EObject
    * Returns the value of the '<em><b>Required Capabilities</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AliasedRequiredCapability}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Required Capabilities</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Required Capabilities</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getUnit_RequiredCapabilities()
@@ -216,10 +184,6 @@ public interface Unit extends EObject
    * Returns the value of the '<em><b>Meta Required Capabilities</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.RequiredCapability}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Meta Required Capabilities</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Meta Required Capabilities</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getUnit_MetaRequiredCapabilities()
@@ -232,10 +196,6 @@ public interface Unit extends EObject
    * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Function}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Functions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Functions</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getUnit_Functions()

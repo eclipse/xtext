@@ -70,6 +70,7 @@ public class AbstractChildrenImpl extends ContentImpl implements AbstractChildre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractChild> getAbstractChildren()
   {
     if (abstractChildren == null)

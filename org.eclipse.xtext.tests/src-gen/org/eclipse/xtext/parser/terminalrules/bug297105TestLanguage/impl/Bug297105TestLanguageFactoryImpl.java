@@ -80,6 +80,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
@@ -102,6 +104,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -113,6 +116,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IntLiteral createIntLiteral()
   {
     IntLiteralImpl intLiteral = new IntLiteralImpl();
@@ -124,6 +128,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RealLiteral createRealLiteral()
   {
     RealLiteralImpl realLiteral = new RealLiteralImpl();
@@ -135,6 +140,7 @@ public class Bug297105TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug297105TestLanguagePackage getBug297105TestLanguagePackage()
   {
     return (Bug297105TestLanguagePackage)getEPackage();

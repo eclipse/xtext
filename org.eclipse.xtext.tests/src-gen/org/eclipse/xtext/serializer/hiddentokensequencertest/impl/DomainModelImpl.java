@@ -72,6 +72,7 @@ public class DomainModelImpl extends MinimalEObjectImpl.Container implements Dom
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Entity> getEntities()
   {
     if (entities == null)

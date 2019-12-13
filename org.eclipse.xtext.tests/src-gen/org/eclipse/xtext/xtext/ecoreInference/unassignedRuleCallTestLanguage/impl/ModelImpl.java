@@ -67,6 +67,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelFeatures getModelFeatures()
   {
     return modelFeatures;
@@ -94,6 +95,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setModelFeatures(ModelFeatures newModelFeatures)
   {
     if (newModelFeatures != modelFeatures)

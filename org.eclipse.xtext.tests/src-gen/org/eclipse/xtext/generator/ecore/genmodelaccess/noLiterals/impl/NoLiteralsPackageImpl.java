@@ -82,7 +82,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link NoLiteralsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -97,13 +97,16 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 		if (isInited) return (NoLiteralsPackage)EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		NoLiteralsPackageImpl theNoLiteralsPackage = (NoLiteralsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof NoLiteralsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new NoLiteralsPackageImpl());
+		Object registeredNoLiteralsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		NoLiteralsPackageImpl theNoLiteralsPackage = registeredNoLiteralsPackage instanceof NoLiteralsPackageImpl ? (NoLiteralsPackageImpl)registeredNoLiteralsPackage : new NoLiteralsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		RootPackageImpl theRootPackage = (RootPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI) instanceof RootPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI) : RootPackage.eINSTANCE);
-		NestedPackage1PackageImpl theNestedPackage1Package = (NestedPackage1PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI) instanceof NestedPackage1PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI) : NestedPackage1Package.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI);
+		RootPackageImpl theRootPackage = (RootPackageImpl)(registeredPackage instanceof RootPackageImpl ? registeredPackage : RootPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI);
+		NestedPackage1PackageImpl theNestedPackage1Package = (NestedPackage1PackageImpl)(registeredPackage instanceof NestedPackage1PackageImpl ? registeredPackage : NestedPackage1Package.eINSTANCE);
 
 		// Create package meta-data objects
 		theNoLiteralsPackage.createPackageContents();
@@ -118,7 +121,6 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 		// Mark meta-data to indicate it can't be changed
 		theNoLiteralsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(NoLiteralsPackage.eNS_URI, theNoLiteralsPackage);
 		return theNoLiteralsPackage;
@@ -129,6 +131,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNoLitClass()
 	{
 		return noLitClassEClass;
@@ -139,6 +142,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNoLitClass_Attribute2()
 	{
 		return (EAttribute)noLitClassEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNoLitClass_Reference2()
 	{
 		return (EReference)noLitClassEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getNoLitEnum()
 	{
 		return noLitEnumEEnum;
@@ -169,6 +175,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getNoLitDataType()
 	{
 		return noLitDataTypeEDataType;
@@ -179,6 +186,7 @@ public class NoLiteralsPackageImpl extends EPackageImpl implements NoLiteralsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NoLiteralsFactory getNoLiteralsFactory()
 	{
 		return (NoLiteralsFactory)getEFactoryInstance();

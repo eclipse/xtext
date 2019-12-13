@@ -111,6 +111,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getParameterTypes()
   {
     if (parameterTypes == null)
@@ -125,6 +126,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVarArgs()
   {
     return varArgs;
@@ -135,6 +137,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
@@ -148,6 +151,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getReturnType()
   {
     return returnType;
@@ -158,6 +162,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReturnType(String newReturnType)
   {
     String oldReturnType = returnType;
@@ -264,7 +269,7 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (parameterTypes: ");
     result.append(parameterTypes);
     result.append(", varArgs: ");

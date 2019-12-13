@@ -78,6 +78,7 @@ public class EnumLiteralDeclarationImpl extends AbstractElementImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnumLiteral getEnumLiteral()
   {
     if (enumLiteral != null && enumLiteral.eIsProxy())
@@ -108,6 +109,7 @@ public class EnumLiteralDeclarationImpl extends AbstractElementImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEnumLiteral(EEnumLiteral newEnumLiteral)
   {
     EEnumLiteral oldEnumLiteral = enumLiteral;
@@ -121,6 +123,7 @@ public class EnumLiteralDeclarationImpl extends AbstractElementImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Keyword getLiteral()
   {
     return literal;
@@ -148,6 +151,7 @@ public class EnumLiteralDeclarationImpl extends AbstractElementImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLiteral(Keyword newLiteral)
   {
     if (newLiteral != literal)

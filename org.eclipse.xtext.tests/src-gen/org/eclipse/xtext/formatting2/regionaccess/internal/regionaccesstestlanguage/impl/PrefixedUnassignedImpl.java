@@ -66,6 +66,7 @@ public class PrefixedUnassignedImpl extends RootImpl implements PrefixedUnassign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PrefixedDelegate getDelegate()
   {
     return delegate;
@@ -93,6 +94,7 @@ public class PrefixedUnassignedImpl extends RootImpl implements PrefixedUnassign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDelegate(PrefixedDelegate newDelegate)
   {
     if (newDelegate != delegate)

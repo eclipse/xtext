@@ -90,6 +90,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getIntValues()
   {
     if (intValues == null)
@@ -104,6 +105,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Double> getDoubleValues()
   {
     if (doubleValues == null)
@@ -118,6 +120,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Date> getDateValues()
   {
     if (dateValues == null)
@@ -227,7 +230,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (intValues: ");
     result.append(intValues);
     result.append(", doubleValues: ");

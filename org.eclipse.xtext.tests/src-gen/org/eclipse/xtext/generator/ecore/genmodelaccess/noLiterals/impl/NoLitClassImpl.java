@@ -87,6 +87,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAttribute2()
 	{
 		return attribute2;
@@ -97,6 +98,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttribute2(String newAttribute2)
 	{
 		String oldAttribute2 = attribute2;
@@ -110,6 +112,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NestedClass1 getReference2()
 	{
 		if (reference2 != null && reference2.eIsProxy())
@@ -140,6 +143,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReference2(NestedClass1 newReference2)
 	{
 		NestedClass1 oldReference2 = reference2;
@@ -235,7 +239,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (attribute2: ");
 		result.append(attribute2);
 		result.append(')');

@@ -209,7 +209,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link PartialSerializationTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -224,7 +224,8 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     if (isInited) return (PartialSerializationTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PartialSerializationTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    PartialSerializationTestLanguagePackageImpl thePartialSerializationTestLanguagePackage = (PartialSerializationTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PartialSerializationTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PartialSerializationTestLanguagePackageImpl());
+    Object registeredPartialSerializationTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    PartialSerializationTestLanguagePackageImpl thePartialSerializationTestLanguagePackage = registeredPartialSerializationTestLanguagePackage instanceof PartialSerializationTestLanguagePackageImpl ? (PartialSerializationTestLanguagePackageImpl)registeredPartialSerializationTestLanguagePackage : new PartialSerializationTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -241,7 +242,6 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
     // Mark meta-data to indicate it can't be changed
     thePartialSerializationTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(PartialSerializationTestLanguagePackage.eNS_URI, thePartialSerializationTestLanguagePackage);
     return thePartialSerializationTestLanguagePackage;
@@ -252,6 +252,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -262,6 +263,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Clazz()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -272,6 +274,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMandatoryValue()
   {
     return mandatoryValueEClass;
@@ -282,6 +285,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMandatoryValue_Name()
   {
     return (EAttribute)mandatoryValueEClass.getEStructuralFeatures().get(0);
@@ -292,6 +296,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalValue()
   {
     return optionalValueEClass;
@@ -302,6 +307,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalValue_Name()
   {
     return (EAttribute)optionalValueEClass.getEStructuralFeatures().get(0);
@@ -312,6 +318,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getManyOptionalValues()
   {
     return manyOptionalValuesEClass;
@@ -322,6 +329,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getManyMandatoryValues()
   {
     return manyMandatoryValuesEClass;
@@ -332,6 +340,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getManyMandatoryValues_Name()
   {
     return (EAttribute)manyMandatoryValuesEClass.getEStructuralFeatures().get(0);
@@ -342,6 +351,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMandatoryChild()
   {
     return mandatoryChildEClass;
@@ -352,6 +362,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMandatoryChild_Child()
   {
     return (EReference)mandatoryChildEClass.getEStructuralFeatures().get(0);
@@ -362,6 +373,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalChild()
   {
     return optionalChildEClass;
@@ -372,6 +384,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOptionalChild_Child()
   {
     return (EReference)optionalChildEClass.getEStructuralFeatures().get(0);
@@ -382,6 +395,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTwoChildLists()
   {
     return twoChildListsEClass;
@@ -392,6 +406,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTwoChildLists_DirectChildren()
   {
     return (EReference)twoChildListsEClass.getEStructuralFeatures().get(0);
@@ -402,6 +417,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTwoChildLists_ChildsList()
   {
     return (EReference)twoChildListsEClass.getEStructuralFeatures().get(1);
@@ -412,6 +428,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTwoChilds()
   {
     return twoChildsEClass;
@@ -422,6 +439,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTwoChilds_DirectChild()
   {
     return (EReference)twoChildsEClass.getEStructuralFeatures().get(0);
@@ -432,6 +450,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTwoChilds_OptChild()
   {
     return (EReference)twoChildsEClass.getEStructuralFeatures().get(1);
@@ -442,6 +461,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChildWithSubChilds()
   {
     return childWithSubChildsEClass;
@@ -452,6 +472,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChildWithSubChilds_Children()
   {
     return (EReference)childWithSubChildsEClass.getEStructuralFeatures().get(0);
@@ -462,6 +483,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChildWithSubChild()
   {
     return childWithSubChildEClass;
@@ -472,6 +494,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChildWithSubChild_SubChilds()
   {
     return (EReference)childWithSubChildEClass.getEStructuralFeatures().get(0);
@@ -482,6 +505,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubChild()
   {
     return subChildEClass;
@@ -492,6 +516,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSubChild_Name()
   {
     return (EAttribute)subChildEClass.getEStructuralFeatures().get(0);
@@ -502,6 +527,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMandatoryChildList()
   {
     return mandatoryChildListEClass;
@@ -512,6 +538,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMandatoryChildList_Children()
   {
     return (EReference)mandatoryChildListEClass.getEStructuralFeatures().get(0);
@@ -522,6 +549,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalChildList()
   {
     return optionalChildListEClass;
@@ -532,6 +560,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOptionalChildList_Children()
   {
     return (EReference)optionalChildListEClass.getEStructuralFeatures().get(0);
@@ -542,6 +571,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -552,6 +582,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -562,6 +593,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNode()
   {
     return nodeEClass;
@@ -572,6 +604,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Imports()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(0);
@@ -582,6 +615,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNode_Name()
   {
     return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
@@ -592,6 +626,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Refs()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(2);
@@ -602,6 +637,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Children()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(3);
@@ -612,6 +648,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Ref()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(4);
@@ -622,6 +659,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEClassRef()
   {
     return eClassRefEClass;
@@ -632,6 +670,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEClassRef_Ref()
   {
     return (EReference)eClassRefEClass.getEStructuralFeatures().get(0);
@@ -642,6 +681,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWithTransientContainer()
   {
     return withTransientContainerEClass;
@@ -652,6 +692,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getWithTransientContainer_Child()
   {
     return (EReference)withTransientContainerEClass.getEStructuralFeatures().get(0);
@@ -662,6 +703,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getManyValues()
   {
     return manyValuesEClass;
@@ -672,6 +714,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getManyValues_Name()
   {
     return (EAttribute)manyValuesEClass.getEStructuralFeatures().get(0);
@@ -682,6 +725,7 @@ public class PartialSerializationTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialSerializationTestLanguageFactory getPartialSerializationTestLanguageFactory()
   {
     return (PartialSerializationTestLanguageFactory)getEFactoryInstance();

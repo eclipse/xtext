@@ -77,6 +77,7 @@ public class Bug362902FactoryImpl extends EFactoryImpl implements Bug362902Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class Bug362902FactoryImpl extends EFactoryImpl implements Bug362902Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Greeting createGreeting()
   {
     GreetingImpl greeting = new GreetingImpl();
@@ -99,6 +101,7 @@ public class Bug362902FactoryImpl extends EFactoryImpl implements Bug362902Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug362902Package getBug362902Package()
   {
     return (Bug362902Package)getEPackage();

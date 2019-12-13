@@ -43,10 +43,6 @@ public enum TransientSerializeables1Enum implements Enumerator
   /**
    * The '<em><b>Lit1</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Lit1</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIT1
    * @model name="lit1"
@@ -58,10 +54,6 @@ public enum TransientSerializeables1Enum implements Enumerator
   /**
    * The '<em><b>Lit2</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Lit2</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIT2
    * @model name="lit2"
@@ -190,6 +182,7 @@ public enum TransientSerializeables1Enum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum TransientSerializeables1Enum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum TransientSerializeables1Enum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

@@ -58,7 +58,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link MultiValueFeatureTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     if (isInited) return (MultiValueFeatureTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(MultiValueFeatureTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = (MultiValueFeatureTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MultiValueFeatureTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MultiValueFeatureTestLanguagePackageImpl());
+    Object registeredMultiValueFeatureTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = registeredMultiValueFeatureTestLanguagePackage instanceof MultiValueFeatureTestLanguagePackageImpl ? (MultiValueFeatureTestLanguagePackageImpl)registeredMultiValueFeatureTestLanguagePackage : new MultiValueFeatureTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     // Mark meta-data to indicate it can't be changed
     theMultiValueFeatureTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(MultiValueFeatureTestLanguagePackage.eNS_URI, theMultiValueFeatureTestLanguagePackage);
     return theMultiValueFeatureTestLanguagePackage;
@@ -100,6 +100,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStart()
   {
     return startEClass;
@@ -110,6 +111,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getStart_FeatureA()
   {
     return (EAttribute)startEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiValueFeatureTestLanguageFactory getMultiValueFeatureTestLanguageFactory()
   {
     return (MultiValueFeatureTestLanguageFactory)getEFactoryInstance();

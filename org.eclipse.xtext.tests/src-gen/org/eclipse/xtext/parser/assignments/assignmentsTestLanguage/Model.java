@@ -28,10 +28,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Single</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Single</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Single</em>' containment reference.
    * @see #setSingle(SingleValue)
@@ -54,10 +50,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Multi</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Multi</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Multi</em>' containment reference.
    * @see #setMulti(MultiValue)
@@ -80,10 +72,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Object</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Object</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Object</em>' containment reference.
    * @see #setObject(EObject)

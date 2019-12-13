@@ -29,10 +29,6 @@ public interface Program extends EObject
   /**
    * Returns the value of the '<em><b>Define</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Define</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Define</em>' containment reference.
    * @see #setDefine(DefineVariables)
@@ -56,10 +52,6 @@ public interface Program extends EObject
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.resource.bug385636.Expression}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
    * @see org.eclipse.xtext.resource.bug385636.Bug385636Package#getProgram_Statements()

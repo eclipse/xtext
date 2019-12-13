@@ -33,10 +33,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Int Values</b></em>' attribute list.
    * The list contents are of type {@link java.lang.Integer}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int Values</em>' attribute list.
    * @see org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage#getModel_IntValues()
@@ -49,10 +45,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Double Values</b></em>' attribute list.
    * The list contents are of type {@link java.lang.Double}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Double Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Double Values</em>' attribute list.
    * @see org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage#getModel_DoubleValues()
@@ -65,10 +57,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Date Values</b></em>' attribute list.
    * The list contents are of type {@link java.util.Date}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Date Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Date Values</em>' attribute list.
    * @see org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguagePackage#getModel_DateValues()

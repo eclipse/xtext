@@ -149,6 +149,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFragment()
   {
     return fragment;
@@ -159,6 +160,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFragment(boolean newFragment)
   {
     boolean oldFragment = fragment;
@@ -172,6 +174,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isWildcard()
   {
     return wildcard;
@@ -182,6 +185,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWildcard(boolean newWildcard)
   {
     boolean oldWildcard = wildcard;
@@ -195,6 +199,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isDefinesHiddenTokens()
   {
     return definesHiddenTokens;
@@ -205,6 +210,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
   {
     boolean oldDefinesHiddenTokens = definesHiddenTokens;
@@ -218,6 +224,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractRule> getHiddenTokens()
   {
     if (hiddenTokens == null)
@@ -232,6 +239,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Parameter> getParameters()
   {
     if (parameters == null)
@@ -376,7 +384,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (fragment: ");
     result.append(fragment);
     result.append(", wildcard: ");

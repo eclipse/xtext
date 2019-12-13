@@ -120,6 +120,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTypeExpr()
   {
     return typeExpr;
@@ -130,6 +131,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTypeExpr(String newTypeExpr)
   {
     String oldTypeExpr = typeExpr;
@@ -143,6 +145,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterList getParameterList()
   {
     return parameterList;
@@ -170,6 +173,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
@@ -191,6 +195,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAlias()
   {
     return alias;
@@ -201,6 +206,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(String newAlias)
   {
     String oldAlias = alias;
@@ -214,6 +220,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getContextBlock()
   {
     return contextBlock;
@@ -241,6 +248,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContextBlock(Expression newContextBlock)
   {
     if (newContextBlock != contextBlock)
@@ -381,7 +389,7 @@ public class CreateExpressionImpl extends ExpressionImpl implements CreateExpres
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (typeExpr: ");
     result.append(typeExpr);
     result.append(", alias: ");

@@ -227,6 +227,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDocumentation()
   {
     return documentation;
@@ -237,6 +238,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
@@ -250,6 +252,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -260,6 +263,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -273,6 +277,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVersion()
   {
     return version;
@@ -283,6 +288,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVersion(String newVersion)
   {
     String oldVersion = version;
@@ -296,6 +302,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SimpleTypeRef> getImplements()
   {
     if (implements_ == null)
@@ -310,6 +317,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSourceLocation()
   {
     return sourceLocation;
@@ -320,6 +328,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSourceLocation(String newSourceLocation)
   {
     String oldSourceLocation = sourceLocation;
@@ -333,6 +342,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOutputLocation()
   {
     return outputLocation;
@@ -343,6 +353,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOutputLocation(String newOutputLocation)
   {
     String oldOutputLocation = outputLocation;
@@ -356,6 +367,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ProvidedCapability> getProvidedCapabilities()
   {
     if (providedCapabilities == null)
@@ -370,6 +382,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AliasedRequiredCapability> getRequiredCapabilities()
   {
     if (requiredCapabilities == null)
@@ -384,6 +397,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<RequiredCapability> getMetaRequiredCapabilities()
   {
     if (metaRequiredCapabilities == null)
@@ -398,6 +412,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Function> getFunctions()
   {
     if (functions == null)
@@ -603,7 +618,7 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (documentation: ");
     result.append(documentation);
     result.append(", name: ");

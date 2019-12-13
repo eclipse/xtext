@@ -76,6 +76,7 @@ public class IgnoreCaseTestLanguageFactoryImpl extends EFactoryImpl implements I
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class IgnoreCaseTestLanguageFactoryImpl extends EFactoryImpl implements I
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseTestLanguagePackage getIgnoreCaseTestLanguagePackage()
   {
     return (IgnoreCaseTestLanguagePackage)getEPackage();

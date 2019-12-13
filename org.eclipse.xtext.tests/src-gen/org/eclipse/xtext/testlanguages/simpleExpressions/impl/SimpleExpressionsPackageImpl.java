@@ -83,7 +83,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SimpleExpressionsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
     if (isInited) return (SimpleExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(SimpleExpressionsPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimpleExpressionsPackageImpl theSimpleExpressionsPackage = (SimpleExpressionsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleExpressionsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleExpressionsPackageImpl());
+    Object registeredSimpleExpressionsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SimpleExpressionsPackageImpl theSimpleExpressionsPackage = registeredSimpleExpressionsPackage instanceof SimpleExpressionsPackageImpl ? (SimpleExpressionsPackageImpl)registeredSimpleExpressionsPackage : new SimpleExpressionsPackageImpl();
 
     isInited = true;
 
@@ -114,7 +115,6 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
     // Mark meta-data to indicate it can't be changed
     theSimpleExpressionsPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimpleExpressionsPackage.eNS_URI, theSimpleExpressionsPackage);
     return theSimpleExpressionsPackage;
@@ -125,6 +125,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSequence()
   {
     return sequenceEClass;
@@ -135,6 +136,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSequence_Expressions()
   {
     return (EReference)sequenceEClass.getEStructuralFeatures().get(0);
@@ -145,6 +147,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -155,6 +158,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAtom()
   {
     return atomEClass;
@@ -165,6 +169,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAtom_Name()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
@@ -175,6 +180,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOp()
   {
     return opEClass;
@@ -185,6 +191,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOp_Values()
   {
     return (EReference)opEClass.getEStructuralFeatures().get(0);
@@ -195,6 +202,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOp_Operator()
   {
     return (EAttribute)opEClass.getEStructuralFeatures().get(1);
@@ -205,6 +213,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleExpressionsFactory getSimpleExpressionsFactory()
   {
     return (SimpleExpressionsFactory)getEFactoryInstance();

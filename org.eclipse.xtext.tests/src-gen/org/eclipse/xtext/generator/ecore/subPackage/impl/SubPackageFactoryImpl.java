@@ -77,6 +77,7 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubMain createSubMain()
   {
     SubMainImpl subMain = new SubMainImpl();
@@ -88,6 +89,7 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnotherSuperMain createAnotherSuperMain()
   {
     AnotherSuperMainImpl anotherSuperMain = new AnotherSuperMainImpl();
@@ -99,6 +101,7 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubPackagePackage getSubPackagePackage()
   {
     return (SubPackagePackage)getEPackage();

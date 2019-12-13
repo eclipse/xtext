@@ -74,6 +74,7 @@ public class OptionalChildListImpl extends ModelImpl implements OptionalChildLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MandatoryValue> getChildren()
   {
     if (children == null)

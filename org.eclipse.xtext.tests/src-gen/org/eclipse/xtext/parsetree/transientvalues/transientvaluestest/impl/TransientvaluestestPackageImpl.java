@@ -82,7 +82,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TransientvaluestestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     if (isInited) return (TransientvaluestestPackage)EPackage.Registry.INSTANCE.getEPackage(TransientvaluestestPackage.eNS_URI);
 
     // Obtain or create and register package
-    TransientvaluestestPackageImpl theTransientvaluestestPackage = (TransientvaluestestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TransientvaluestestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TransientvaluestestPackageImpl());
+    Object registeredTransientvaluestestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TransientvaluestestPackageImpl theTransientvaluestestPackage = registeredTransientvaluestestPackage instanceof TransientvaluestestPackageImpl ? (TransientvaluestestPackageImpl)registeredTransientvaluestestPackage : new TransientvaluestestPackageImpl();
 
     isInited = true;
 
@@ -113,7 +114,6 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     // Mark meta-data to indicate it can't be changed
     theTransientvaluestestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TransientvaluestestPackage.eNS_URI, theTransientvaluestestPackage);
     return theTransientvaluestestPackage;
@@ -124,6 +124,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -134,6 +135,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestRequired()
   {
     return testRequiredEClass;
@@ -144,6 +146,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestRequired_Required1()
   {
     return (EAttribute)testRequiredEClass.getEStructuralFeatures().get(0);
@@ -154,6 +157,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestRequired_Required2()
   {
     return (EAttribute)testRequiredEClass.getEStructuralFeatures().get(1);
@@ -164,6 +168,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestOptional()
   {
     return testOptionalEClass;
@@ -174,6 +179,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestOptional_Opt1()
   {
     return (EAttribute)testOptionalEClass.getEStructuralFeatures().get(0);
@@ -184,6 +190,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestOptional_Opt2()
   {
     return (EAttribute)testOptionalEClass.getEStructuralFeatures().get(1);
@@ -194,6 +201,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestList()
   {
     return testListEClass;
@@ -204,6 +212,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestList_Item()
   {
     return (EAttribute)testListEClass.getEStructuralFeatures().get(0);
@@ -214,6 +223,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransientvaluestestFactory getTransientvaluestestFactory()
   {
     return (TransientvaluestestFactory)getEFactoryInstance();

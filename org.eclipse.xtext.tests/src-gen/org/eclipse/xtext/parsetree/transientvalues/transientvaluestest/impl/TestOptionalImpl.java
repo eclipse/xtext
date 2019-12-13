@@ -94,6 +94,7 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getOpt1()
   {
     return opt1;
@@ -104,6 +105,7 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOpt1(int newOpt1)
   {
     int oldOpt1 = opt1;
@@ -117,6 +119,7 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getOpt2()
   {
     return opt2;
@@ -127,6 +130,7 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOpt2(int newOpt2)
   {
     int oldOpt2 = opt2;
@@ -221,7 +225,7 @@ public class TestOptionalImpl extends RootImpl implements TestOptional
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (opt1: ");
     result.append(opt1);
     result.append(", opt2: ");

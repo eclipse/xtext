@@ -166,6 +166,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -176,6 +177,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -189,6 +191,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -199,6 +202,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -212,6 +216,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal3()
   {
     return val3;
@@ -222,6 +227,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(String newVal3)
   {
     String oldVal3 = val3;
@@ -235,6 +241,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal4()
   {
     if (val4 == null)
@@ -249,6 +256,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal5()
   {
     if (val5 == null)
@@ -263,6 +271,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal6()
   {
     if (val6 == null)
@@ -277,6 +286,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal7()
   {
     if (val7 == null)
@@ -427,7 +437,7 @@ public class GroupMultiplicitiesImpl extends MinimalEObjectImpl.Container implem
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

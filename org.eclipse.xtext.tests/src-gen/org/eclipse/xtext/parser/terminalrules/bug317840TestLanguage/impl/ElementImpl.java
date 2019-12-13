@@ -107,6 +107,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Named getFirst()
   {
     return first;
@@ -134,6 +135,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(Named newFirst)
   {
     if (newFirst != first)
@@ -155,6 +157,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Named getSecond()
   {
     return second;
@@ -182,6 +185,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(Named newSecond)
   {
     if (newSecond != second)
@@ -203,6 +207,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Named> getThird()
   {
     if (third == null)
@@ -217,6 +222,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Named> getForth()
   {
     if (forth == null)

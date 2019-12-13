@@ -32,10 +32,6 @@ public interface TwoChildLists extends Model
    * Returns the value of the '<em><b>Direct Children</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.MandatoryValue}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Direct Children</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Direct Children</em>' containment reference list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage#getTwoChildLists_DirectChildren()
@@ -47,10 +43,6 @@ public interface TwoChildLists extends Model
   /**
    * Returns the value of the '<em><b>Childs List</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Childs List</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Childs List</em>' containment reference.
    * @see #setChildsList(MandatoryChildList)

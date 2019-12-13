@@ -77,6 +77,7 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SuperMain createSuperMain()
   {
     SuperMainImpl superMain = new SuperMainImpl();
@@ -88,6 +89,7 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnotherSuperMain createAnotherSuperMain()
   {
     AnotherSuperMainImpl anotherSuperMain = new AnotherSuperMainImpl();
@@ -99,6 +101,7 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SuperPackagePackage getSuperPackagePackage()
   {
     return (SuperPackagePackage)getEPackage();

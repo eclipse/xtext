@@ -79,6 +79,7 @@ public class Bug287988TestFactoryImpl extends EFactoryImpl implements Bug287988T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -90,6 +91,7 @@ public class Bug287988TestFactoryImpl extends EFactoryImpl implements Bug287988T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BaseAttribute createBaseAttribute()
   {
     BaseAttributeImpl baseAttribute = new BaseAttributeImpl();
@@ -101,6 +103,7 @@ public class Bug287988TestFactoryImpl extends EFactoryImpl implements Bug287988T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
@@ -112,6 +115,7 @@ public class Bug287988TestFactoryImpl extends EFactoryImpl implements Bug287988T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Master createMaster()
   {
     MasterImpl master = new MasterImpl();
@@ -123,6 +127,7 @@ public class Bug287988TestFactoryImpl extends EFactoryImpl implements Bug287988T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug287988TestPackage getBug287988TestPackage()
   {
     return (Bug287988TestPackage)getEPackage();

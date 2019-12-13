@@ -68,7 +68,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EnumRulesTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -83,7 +83,8 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
     if (isInited) return (EnumRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EnumRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EnumRulesTestLanguagePackageImpl theEnumRulesTestLanguagePackage = (EnumRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EnumRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EnumRulesTestLanguagePackageImpl());
+    Object registeredEnumRulesTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EnumRulesTestLanguagePackageImpl theEnumRulesTestLanguagePackage = registeredEnumRulesTestLanguagePackage instanceof EnumRulesTestLanguagePackageImpl ? (EnumRulesTestLanguagePackageImpl)registeredEnumRulesTestLanguagePackage : new EnumRulesTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -99,7 +100,6 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
     // Mark meta-data to indicate it can't be changed
     theEnumRulesTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EnumRulesTestLanguagePackage.eNS_URI, theEnumRulesTestLanguagePackage);
     return theEnumRulesTestLanguagePackage;
@@ -110,6 +110,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -120,6 +121,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Existing()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -130,6 +132,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Generated()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -140,6 +143,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getGeneratedEnum()
   {
     return generatedEnumEEnum;
@@ -150,6 +154,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumRulesTestLanguageFactory getEnumRulesTestLanguageFactory()
   {
     return (EnumRulesTestLanguageFactory)getEFactoryInstance();

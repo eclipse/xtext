@@ -27,10 +27,6 @@ public interface DependentAlternative1 extends EObject
   /**
    * Returns the value of the '<em><b>Val</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute.
    * @see #setVal(String)
@@ -53,10 +49,6 @@ public interface DependentAlternative1 extends EObject
   /**
    * Returns the value of the '<em><b>Flag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Flag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Flag</em>' attribute.
    * @see #setFlag(boolean)

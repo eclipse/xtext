@@ -26,10 +26,6 @@ public interface ObjectNew extends CreatedObject
   /**
    * Returns the value of the '<em><b>Import</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Import</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Import</em>' reference.
    * @see #setImport(Import)
@@ -52,10 +48,6 @@ public interface ObjectNew extends CreatedObject
   /**
    * Returns the value of the '<em><b>Imp Frag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imp Frag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imp Frag</em>' attribute.
    * @see #setImpFrag(String)

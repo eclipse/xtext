@@ -53,10 +53,6 @@ public enum ValueExclusionTestEn implements Enumerator
   /**
    * The '<em><b>Lit0</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Lit0</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIT0
    * @model name="lit0"
@@ -68,10 +64,6 @@ public enum ValueExclusionTestEn implements Enumerator
   /**
    * The '<em><b>Lit1</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Lit1</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIT1
    * @model name="lit1"
@@ -83,10 +75,6 @@ public enum ValueExclusionTestEn implements Enumerator
   /**
    * The '<em><b>Lit2</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Lit2</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIT2
    * @model name="lit2"
@@ -217,6 +205,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -227,6 +216,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -237,6 +227,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

@@ -114,6 +114,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NoLitClass createNoLitClass()
 	{
 		NoLitClassImpl noLitClass = new NoLitClassImpl();
@@ -167,6 +168,7 @@ public class NoLiteralsFactoryImpl extends EFactoryImpl implements NoLiteralsFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NoLiteralsPackage getNoLiteralsPackage()
 	{
 		return (NoLiteralsPackage)getEPackage();

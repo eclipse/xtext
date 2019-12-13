@@ -137,6 +137,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getLineCount()
   {
     return lineCount;
@@ -147,6 +148,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLineCount(int newLineCount)
   {
     int oldLineCount = lineCount;
@@ -160,6 +162,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getCharCount()
   {
     return charCount;
@@ -170,6 +173,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCharCount(int newCharCount)
   {
     int oldCharCount = charCount;
@@ -183,6 +187,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getCharSet()
   {
     return charSet;
@@ -193,6 +198,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCharSet(String newCharSet)
   {
     String oldCharSet = charSet;
@@ -206,6 +212,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRefChar()
   {
     return refChar;
@@ -216,6 +223,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefChar(String newRefChar)
   {
     String oldRefChar = refChar;
@@ -330,7 +338,7 @@ public class SimpleTermImpl extends MinimalEObjectImpl.Container implements Simp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (lineCount: ");
     result.append(lineCount);
     result.append(", charCount: ");

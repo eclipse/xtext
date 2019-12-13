@@ -71,7 +71,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link PartialContentAssistTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -86,7 +86,8 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
     if (isInited) return (PartialContentAssistTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PartialContentAssistTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    PartialContentAssistTestLanguagePackageImpl thePartialContentAssistTestLanguagePackage = (PartialContentAssistTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PartialContentAssistTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PartialContentAssistTestLanguagePackageImpl());
+    Object registeredPartialContentAssistTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    PartialContentAssistTestLanguagePackageImpl thePartialContentAssistTestLanguagePackage = registeredPartialContentAssistTestLanguagePackage instanceof PartialContentAssistTestLanguagePackageImpl ? (PartialContentAssistTestLanguagePackageImpl)registeredPartialContentAssistTestLanguagePackage : new PartialContentAssistTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
     // Mark meta-data to indicate it can't be changed
     thePartialContentAssistTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(PartialContentAssistTestLanguagePackage.eNS_URI, thePartialContentAssistTestLanguagePackage);
     return thePartialContentAssistTestLanguagePackage;
@@ -113,6 +113,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeDeclaration()
   {
     return typeDeclarationEClass;
@@ -123,6 +124,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTypeDeclaration_Name()
   {
     return (EAttribute)typeDeclarationEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeDeclaration_SuperType()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
@@ -143,6 +146,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeDeclaration_Properties()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(2);
@@ -153,6 +157,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProperty()
   {
     return propertyEClass;
@@ -163,6 +168,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getProperty_Type()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
@@ -173,6 +179,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getProperty_Name()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
@@ -183,6 +190,7 @@ public class PartialContentAssistTestLanguagePackageImpl extends EPackageImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialContentAssistTestLanguageFactory getPartialContentAssistTestLanguageFactory()
   {
     return (PartialContentAssistTestLanguageFactory)getEFactoryInstance();

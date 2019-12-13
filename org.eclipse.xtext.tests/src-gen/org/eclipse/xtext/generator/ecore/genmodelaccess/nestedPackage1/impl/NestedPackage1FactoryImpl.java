@@ -75,6 +75,7 @@ public class NestedPackage1FactoryImpl extends EFactoryImpl implements NestedPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NestedClass1 createNestedClass1()
 	{
 		NestedClass1Impl nestedClass1 = new NestedClass1Impl();
@@ -86,6 +87,7 @@ public class NestedPackage1FactoryImpl extends EFactoryImpl implements NestedPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NestedPackage1Package getNestedPackage1Package()
 	{
 		return (NestedPackage1Package)getEPackage();

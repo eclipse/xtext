@@ -188,7 +188,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ContextFinderTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -203,7 +203,8 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     if (isInited) return (ContextFinderTestPackage)EPackage.Registry.INSTANCE.getEPackage(ContextFinderTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    ContextFinderTestPackageImpl theContextFinderTestPackage = (ContextFinderTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContextFinderTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContextFinderTestPackageImpl());
+    Object registeredContextFinderTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ContextFinderTestPackageImpl theContextFinderTestPackage = registeredContextFinderTestPackage instanceof ContextFinderTestPackageImpl ? (ContextFinderTestPackageImpl)registeredContextFinderTestPackage : new ContextFinderTestPackageImpl();
 
     isInited = true;
 
@@ -219,7 +220,6 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     // Mark meta-data to indicate it can't be changed
     theContextFinderTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ContextFinderTestPackage.eNS_URI, theContextFinderTestPackage);
     return theContextFinderTestPackage;
@@ -230,6 +230,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -240,6 +241,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Model()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -250,6 +252,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_AttributeExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -260,6 +263,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_NestedType()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -270,6 +274,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_NestedTypeRecursiveTest2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -280,6 +285,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ParentRef()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
@@ -290,6 +296,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_QuantityExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
@@ -300,6 +307,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ValueExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(6);
@@ -310,6 +318,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
@@ -320,6 +329,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_NodeExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(8);
@@ -330,6 +340,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_NodeExclusionList()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(9);
@@ -340,6 +351,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttributeExclusionTest()
   {
     return attributeExclusionTestEClass;
@@ -350,6 +362,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttributeExclusionTest_Attr1()
   {
     return (EAttribute)attributeExclusionTestEClass.getEStructuralFeatures().get(0);
@@ -360,6 +373,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttributeExclusionTest_Attr2()
   {
     return (EAttribute)attributeExclusionTestEClass.getEStructuralFeatures().get(1);
@@ -370,6 +384,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeTest()
   {
     return nestedTypeTestEClass;
@@ -380,6 +395,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNestedTypeTest_Nested()
   {
     return (EReference)nestedTypeTestEClass.getEStructuralFeatures().get(0);
@@ -390,6 +406,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeChild()
   {
     return nestedTypeChildEClass;
@@ -400,6 +417,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNestedTypeChild_Val()
   {
     return (EAttribute)nestedTypeChildEClass.getEStructuralFeatures().get(0);
@@ -410,6 +428,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeChild1()
   {
     return nestedTypeChild1EClass;
@@ -420,6 +439,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeChild2()
   {
     return nestedTypeChild2EClass;
@@ -430,6 +450,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeRecursiveTest()
   {
     return nestedTypeRecursiveTestEClass;
@@ -440,6 +461,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNestedTypeRecursiveTest_Left()
   {
     return (EReference)nestedTypeRecursiveTestEClass.getEStructuralFeatures().get(0);
@@ -450,6 +472,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParentRefTest1()
   {
     return parentRefTest1EClass;
@@ -460,6 +483,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParentRefTest1_Child1()
   {
     return (EReference)parentRefTest1EClass.getEStructuralFeatures().get(0);
@@ -470,6 +494,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParentRefTest2()
   {
     return parentRefTest2EClass;
@@ -480,6 +505,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParentRefTest2_Child2()
   {
     return (EReference)parentRefTest2EClass.getEStructuralFeatures().get(0);
@@ -490,6 +516,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParentRefTestChild()
   {
     return parentRefTestChildEClass;
@@ -500,6 +527,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParentRefTestChild_Child()
   {
     return (EReference)parentRefTestChildEClass.getEStructuralFeatures().get(0);
@@ -510,6 +538,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getQuantityExclusionTest()
   {
     return quantityExclusionTestEClass;
@@ -520,6 +549,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getQuantityExclusionTest_Attr1()
   {
     return (EAttribute)quantityExclusionTestEClass.getEStructuralFeatures().get(0);
@@ -530,6 +560,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getQuantityExclusionTest_Attr2()
   {
     return (EAttribute)quantityExclusionTestEClass.getEStructuralFeatures().get(1);
@@ -540,6 +571,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getValueExclusionTest()
   {
     return valueExclusionTestEClass;
@@ -550,6 +582,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getValueExclusionTest_Val()
   {
     return (EAttribute)valueExclusionTestEClass.getEStructuralFeatures().get(0);
@@ -560,6 +593,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNodeExclusion()
   {
     return nodeExclusionEClass;
@@ -570,6 +604,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeExclusion_Ref()
   {
     return (EReference)nodeExclusionEClass.getEStructuralFeatures().get(0);
@@ -580,6 +615,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNodeExclusionList()
   {
     return nodeExclusionListEClass;
@@ -590,6 +626,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeExclusionList_Ref()
   {
     return (EReference)nodeExclusionListEClass.getEStructuralFeatures().get(0);
@@ -600,6 +637,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeRecursiveTest1()
   {
     return nestedTypeRecursiveTest1EClass;
@@ -610,6 +648,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedTypeRecursiveTest2()
   {
     return nestedTypeRecursiveTest2EClass;
@@ -620,6 +659,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getValueExclusionTestEn()
   {
     return valueExclusionTestEnEEnum;
@@ -630,6 +670,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContextFinderTestFactory getContextFinderTestFactory()
   {
     return (ContextFinderTestFactory)getEFactoryInstance();

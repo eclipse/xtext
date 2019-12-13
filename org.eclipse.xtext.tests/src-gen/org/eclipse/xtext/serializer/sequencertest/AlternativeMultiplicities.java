@@ -33,10 +33,6 @@ public interface AlternativeMultiplicities extends EObject
   /**
    * Returns the value of the '<em><b>Val2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute.
    * @see #setVal2(String)
@@ -59,10 +55,6 @@ public interface AlternativeMultiplicities extends EObject
   /**
    * Returns the value of the '<em><b>Val3</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' attribute.
    * @see #setVal3(String)
@@ -86,10 +78,6 @@ public interface AlternativeMultiplicities extends EObject
    * Returns the value of the '<em><b>Val4</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val4</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val4</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getAlternativeMultiplicities_Val4()
@@ -102,10 +90,6 @@ public interface AlternativeMultiplicities extends EObject
    * Returns the value of the '<em><b>Val5</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val5</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val5</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getAlternativeMultiplicities_Val5()
@@ -118,10 +102,6 @@ public interface AlternativeMultiplicities extends EObject
    * Returns the value of the '<em><b>Val6</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val6</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val6</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getAlternativeMultiplicities_Val6()
@@ -134,10 +114,6 @@ public interface AlternativeMultiplicities extends EObject
    * Returns the value of the '<em><b>Val7</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val7</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val7</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getAlternativeMultiplicities_Val7()

@@ -28,10 +28,6 @@ public interface NoLitClass extends EObject
 	/**
 	 * Returns the value of the '<em><b>Attribute2</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Attribute2</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attribute2</em>' attribute.
 	 * @see #setAttribute2(String)
@@ -54,10 +50,6 @@ public interface NoLitClass extends EObject
 	/**
 	 * Returns the value of the '<em><b>Reference2</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reference2</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference2</em>' reference.
 	 * @see #setReference2(NestedClass1)

@@ -30,10 +30,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Units</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Units</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getModel_Units()
@@ -46,10 +42,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Function}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Functions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Functions</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getModel_Functions()

@@ -76,6 +76,7 @@ public class SimpleTestFactoryImpl extends EFactoryImpl implements SimpleTestFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo createFoo()
   {
     FooImpl foo = new FooImpl();
@@ -87,6 +88,7 @@ public class SimpleTestFactoryImpl extends EFactoryImpl implements SimpleTestFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleTestPackage getSimpleTestPackage()
   {
     return (SimpleTestPackage)getEPackage();

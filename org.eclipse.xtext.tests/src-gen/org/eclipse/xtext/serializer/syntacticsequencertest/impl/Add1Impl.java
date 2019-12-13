@@ -77,6 +77,7 @@ public class Add1Impl extends Exp1Impl implements Add1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp1 getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class Add1Impl extends Exp1Impl implements Add1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Exp1 newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class Add1Impl extends Exp1Impl implements Add1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp1 getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class Add1Impl extends Exp1Impl implements Add1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Exp1 newRight)
   {
     if (newRight != right)

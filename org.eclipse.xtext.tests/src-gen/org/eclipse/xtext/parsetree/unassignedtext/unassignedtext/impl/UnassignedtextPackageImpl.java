@@ -106,7 +106,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link UnassignedtextPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -121,7 +121,8 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     if (isInited) return (UnassignedtextPackage)EPackage.Registry.INSTANCE.getEPackage(UnassignedtextPackage.eNS_URI);
 
     // Obtain or create and register package
-    UnassignedtextPackageImpl theUnassignedtextPackage = (UnassignedtextPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnassignedtextPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnassignedtextPackageImpl());
+    Object registeredUnassignedtextPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    UnassignedtextPackageImpl theUnassignedtextPackage = registeredUnassignedtextPackage instanceof UnassignedtextPackageImpl ? (UnassignedtextPackageImpl)registeredUnassignedtextPackage : new UnassignedtextPackageImpl();
 
     isInited = true;
 
@@ -137,7 +138,6 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
     // Mark meta-data to indicate it can't be changed
     theUnassignedtextPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(UnassignedtextPackage.eNS_URI, theUnassignedtextPackage);
     return theUnassignedtextPackage;
@@ -148,6 +148,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -158,6 +159,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCaseInsensitiveKeywordRule()
   {
     return caseInsensitiveKeywordRuleEClass;
@@ -168,6 +170,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCaseInsensitiveKeywordRule_Val()
   {
     return (EAttribute)caseInsensitiveKeywordRuleEClass.getEStructuralFeatures().get(0);
@@ -178,6 +181,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPluralRule()
   {
     return pluralRuleEClass;
@@ -188,6 +192,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPluralRule_Count()
   {
     return (EAttribute)pluralRuleEClass.getEStructuralFeatures().get(0);
@@ -198,6 +203,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMultiRule()
   {
     return multiRuleEClass;
@@ -208,6 +214,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMultiRule_Val()
   {
     return (EAttribute)multiRuleEClass.getEStructuralFeatures().get(0);
@@ -218,6 +225,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDatatypeRule()
   {
     return datatypeRuleEClass;
@@ -228,6 +236,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDatatypeRule_Val()
   {
     return (EAttribute)datatypeRuleEClass.getEStructuralFeatures().get(0);
@@ -238,6 +247,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCommonTerminalsRule()
   {
     return commonTerminalsRuleEClass;
@@ -248,6 +258,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCommonTerminalsRule_Val()
   {
     return (EAttribute)commonTerminalsRuleEClass.getEStructuralFeatures().get(0);
@@ -258,6 +269,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGroupRule()
   {
     return groupRuleEClass;
@@ -268,6 +280,7 @@ public class UnassignedtextPackageImpl extends EPackageImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnassignedtextFactory getUnassignedtextFactory()
   {
     return (UnassignedtextFactory)getEFactoryInstance();

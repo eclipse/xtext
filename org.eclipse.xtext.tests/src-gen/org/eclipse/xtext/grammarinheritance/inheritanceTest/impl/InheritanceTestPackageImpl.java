@@ -69,7 +69,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link InheritanceTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -84,11 +84,13 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
     if (isInited) return (InheritanceTestPackage)EPackage.Registry.INSTANCE.getEPackage(InheritanceTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    InheritanceTestPackageImpl theInheritanceTestPackage = (InheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof InheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new InheritanceTestPackageImpl());
+    Object registeredInheritanceTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    InheritanceTestPackageImpl theInheritanceTestPackage = registeredInheritanceTestPackage instanceof InheritanceTestPackageImpl ? (InheritanceTestPackageImpl)registeredInheritanceTestPackage : new InheritanceTestPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     BaseInheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -100,7 +102,6 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
     // Mark meta-data to indicate it can't be changed
     theInheritanceTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(InheritanceTestPackage.eNS_URI, theInheritanceTestPackage);
     return theInheritanceTestPackage;
@@ -111,6 +112,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -121,6 +123,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -131,6 +134,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -141,6 +145,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -151,6 +156,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritanceTestFactory getInheritanceTestFactory()
   {
     return (InheritanceTestFactory)getEFactoryInstance();

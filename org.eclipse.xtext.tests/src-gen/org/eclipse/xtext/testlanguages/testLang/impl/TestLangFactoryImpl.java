@@ -81,6 +81,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -92,6 +93,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -103,6 +105,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChoiceElement createChoiceElement()
   {
     ChoiceElementImpl choiceElement = new ChoiceElementImpl();
@@ -114,6 +117,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReducibleElement createReducibleElement()
   {
     ReducibleElementImpl reducibleElement = new ReducibleElementImpl();
@@ -125,6 +129,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalElement createTerminalElement()
   {
     TerminalElementImpl terminalElement = new TerminalElementImpl();
@@ -136,6 +141,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReducibleComposite createReducibleComposite()
   {
     ReducibleCompositeImpl reducibleComposite = new ReducibleCompositeImpl();
@@ -147,6 +153,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestLangPackage getTestLangPackage()
   {
     return (TestLangPackage)getEPackage();

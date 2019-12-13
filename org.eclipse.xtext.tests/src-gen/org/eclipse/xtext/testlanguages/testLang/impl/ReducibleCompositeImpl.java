@@ -70,6 +70,7 @@ public class ReducibleCompositeImpl extends ReducibleElementImpl implements Redu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TerminalElement> getActionFeature()
   {
     if (actionFeature == null)

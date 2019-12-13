@@ -131,6 +131,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedResource getLeftRes()
   {
     if (leftRes != null && leftRes.eIsProxy())
@@ -161,6 +162,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftRes(NamedResource newLeftRes)
   {
     NamedResource oldLeftRes = leftRes;
@@ -174,6 +176,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLeftFrag()
   {
     return leftFrag;
@@ -184,6 +187,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftFrag(String newLeftFrag)
   {
     String oldLeftFrag = leftFrag;
@@ -197,6 +201,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedResource getRightRes()
   {
     if (rightRes != null && rightRes.eIsProxy())
@@ -227,6 +232,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightRes(NamedResource newRightRes)
   {
     NamedResource oldRightRes = rightRes;
@@ -240,6 +246,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRightFrag()
   {
     return rightFrag;
@@ -250,6 +257,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightFrag(String newRightFrag)
   {
     String oldRightFrag = rightFrag;
@@ -263,6 +271,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Migration getRightMig()
   {
     return rightMig;
@@ -290,6 +299,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightMig(Migration newRightMig)
   {
     if (newRightMig != rightMig)
@@ -440,7 +450,7 @@ public class ObjectRefImpl extends NamedObjectImpl implements ObjectRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (leftFrag: ");
     result.append(leftFrag);
     result.append(", rightFrag: ");

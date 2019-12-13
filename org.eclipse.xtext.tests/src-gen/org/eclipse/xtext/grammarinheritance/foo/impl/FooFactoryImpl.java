@@ -83,6 +83,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RootRule createRootRule()
   {
     RootRuleImpl rootRule = new RootRuleImpl();
@@ -94,6 +95,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ConcreteParserRule createConcreteParserRule()
   {
     ConcreteParserRuleImpl concreteParserRule = new ConcreteParserRuleImpl();
@@ -105,6 +107,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CallOverridenParserRule createCallOverridenParserRule()
   {
     CallOverridenParserRuleImpl callOverridenParserRule = new CallOverridenParserRuleImpl();
@@ -116,6 +119,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AType2 createAType2()
   {
     AType2Impl aType2 = new AType2Impl();
@@ -127,6 +131,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Subrule1 createSubrule1()
   {
     Subrule1Impl subrule1 = new Subrule1Impl();
@@ -138,6 +143,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Subrule2 createSubrule2()
   {
     Subrule2Impl subrule2 = new Subrule2Impl();
@@ -149,6 +155,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Subrule3 createSubrule3()
   {
     Subrule3Impl subrule3 = new Subrule3Impl();
@@ -160,6 +167,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CallExtendedParserRule createCallExtendedParserRule()
   {
     CallExtendedParserRuleImpl callExtendedParserRule = new CallExtendedParserRuleImpl();
@@ -171,6 +179,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FooPackage getFooPackage()
   {
     return (FooPackage)getEPackage();

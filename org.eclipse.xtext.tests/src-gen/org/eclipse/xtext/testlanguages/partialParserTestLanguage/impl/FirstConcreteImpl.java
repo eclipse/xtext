@@ -65,6 +65,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SomeContainer getReferencedContainer()
   {
     if (referencedContainer != null && referencedContainer.eIsProxy())
@@ -95,6 +96,7 @@ public class FirstConcreteImpl extends AbstractChildImpl implements FirstConcret
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReferencedContainer(SomeContainer newReferencedContainer)
   {
     SomeContainer oldReferencedContainer = referencedContainer;

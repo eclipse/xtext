@@ -58,7 +58,7 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LiveContainerBuilderIntegerationTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
     if (isInited) return (LiveContainerBuilderIntegerationTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LiveContainerBuilderIntegerationTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    LiveContainerBuilderIntegerationTestLanguagePackageImpl theLiveContainerBuilderIntegerationTestLanguagePackage = (LiveContainerBuilderIntegerationTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LiveContainerBuilderIntegerationTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LiveContainerBuilderIntegerationTestLanguagePackageImpl());
+    Object registeredLiveContainerBuilderIntegerationTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LiveContainerBuilderIntegerationTestLanguagePackageImpl theLiveContainerBuilderIntegerationTestLanguagePackage = registeredLiveContainerBuilderIntegerationTestLanguagePackage instanceof LiveContainerBuilderIntegerationTestLanguagePackageImpl ? (LiveContainerBuilderIntegerationTestLanguagePackageImpl)registeredLiveContainerBuilderIntegerationTestLanguagePackage : new LiveContainerBuilderIntegerationTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
     // Mark meta-data to indicate it can't be changed
     theLiveContainerBuilderIntegerationTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LiveContainerBuilderIntegerationTestLanguagePackage.eNS_URI, theLiveContainerBuilderIntegerationTestLanguagePackage);
     return theLiveContainerBuilderIntegerationTestLanguagePackage;
@@ -100,6 +100,7 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class LiveContainerBuilderIntegerationTestLanguagePackageImpl extends EPa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LiveContainerBuilderIntegerationTestLanguageFactory getLiveContainerBuilderIntegerationTestLanguageFactory()
   {
     return (LiveContainerBuilderIntegerationTestLanguageFactory)getEFactoryInstance();

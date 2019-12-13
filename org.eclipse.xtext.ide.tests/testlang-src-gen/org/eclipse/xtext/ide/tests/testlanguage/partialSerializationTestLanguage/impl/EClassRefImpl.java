@@ -68,6 +68,7 @@ public class EClassRefImpl extends ModelImpl implements EClassRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -98,6 +99,7 @@ public class EClassRefImpl extends ModelImpl implements EClassRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(EClass newRef)
   {
     EClass oldRef = ref;

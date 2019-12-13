@@ -30,10 +30,6 @@ public interface ModelElement extends EObject
    * Returns the value of the '<em><b>Containments</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.antlr.bug289524ExTest.Contained}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Containments</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Containments</em>' containment reference list.
    * @see org.eclipse.xtext.parser.antlr.bug289524ExTest.Bug289524ExTestPackage#getModelElement_Containments()
@@ -46,10 +42,6 @@ public interface ModelElement extends EObject
    * Returns the value of the '<em><b>Refs</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.antlr.bug289524ExTest.Contained}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Refs</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Refs</em>' reference list.
    * @see org.eclipse.xtext.parser.antlr.bug289524ExTest.Bug289524ExTestPackage#getModelElement_Refs()

@@ -26,10 +26,6 @@ public interface TwoOptions extends Test
   /**
    * Returns the value of the '<em><b>One</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>One</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>One</em>' attribute.
    * @see #setOne(String)
@@ -52,10 +48,6 @@ public interface TwoOptions extends Test
   /**
    * Returns the value of the '<em><b>Two</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Two</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Two</em>' attribute.
    * @see #setTwo(String)

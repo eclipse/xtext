@@ -94,6 +94,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isOptionalKeyword()
   {
     return optionalKeyword;
@@ -104,6 +105,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOptionalKeyword(boolean newOptionalKeyword)
   {
     boolean oldOptionalKeyword = optionalKeyword;
@@ -117,6 +119,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -127,6 +130,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -221,7 +225,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (optionalKeyword: ");
     result.append(optionalKeyword);
     result.append(", name: ");

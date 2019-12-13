@@ -77,6 +77,7 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubModel createSubModel()
   {
     SubModelImpl subModel = new SubModelImpl();
@@ -99,6 +101,7 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug299395Package getBug299395Package()
   {
     return (Bug299395Package)getEPackage();

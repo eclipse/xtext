@@ -91,6 +91,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleValue getSingle()
   {
     return single;
@@ -118,6 +119,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSingle(SingleValue newSingle)
   {
     if (newSingle != single)
@@ -139,6 +141,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiValue getMulti()
   {
     return multi;
@@ -166,6 +169,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMulti(MultiValue newMulti)
   {
     if (newMulti != multi)
@@ -187,6 +191,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getObject()
   {
     return object;
@@ -214,6 +219,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setObject(EObject newObject)
   {
     if (newObject != object)

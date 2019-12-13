@@ -35,10 +35,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Keyword Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Keyword Val</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Keyword Val</em>' containment reference.
    * @see #setKeywordVal(KeywordVal)
@@ -61,10 +57,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Terminal Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Terminal Val</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Terminal Val</em>' containment reference.
    * @see #setTerminalVal(TerminalVal)
@@ -87,10 +79,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Enum Val</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enum Val</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enum Val</em>' containment reference.
    * @see #setEnumVal(EnumVal)
@@ -113,10 +101,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Keyword Bool</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Keyword Bool</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Keyword Bool</em>' containment reference.
    * @see #setKeywordBool(KeywordBool)
@@ -139,10 +123,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Terminal Bool</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Terminal Bool</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Terminal Bool</em>' containment reference.
    * @see #setTerminalBool(TerminalBool)
@@ -165,10 +145,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Enum Bool</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enum Bool</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enum Bool</em>' containment reference.
    * @see #setEnumBool(EnumBool)
@@ -191,10 +167,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Mixed Bool</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Mixed Bool</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Mixed Bool</em>' containment reference.
    * @see #setMixedBool(MixedBool)
@@ -217,10 +189,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Mixed Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Mixed Value</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Mixed Value</em>' containment reference.
    * @see #setMixedValue(MixedValue)
@@ -243,10 +211,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Containment Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Containment Ref</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Containment Ref</em>' containment reference.
    * @see #setContainmentRef(ContainmentRef)
@@ -269,10 +233,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Cross Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Cross Ref</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Cross Ref</em>' containment reference.
    * @see #setCrossRef(CrossRef)

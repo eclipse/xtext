@@ -66,7 +66,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SuperPackagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     if (isInited) return (SuperPackagePackage)EPackage.Registry.INSTANCE.getEPackage(SuperPackagePackage.eNS_URI);
 
     // Obtain or create and register package
-    SuperPackagePackageImpl theSuperPackagePackage = (SuperPackagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SuperPackagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SuperPackagePackageImpl());
+    Object registeredSuperPackagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SuperPackagePackageImpl theSuperPackagePackage = registeredSuperPackagePackage instanceof SuperPackagePackageImpl ? (SuperPackagePackageImpl)registeredSuperPackagePackage : new SuperPackagePackageImpl();
 
     isInited = true;
 
@@ -97,7 +98,6 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     // Mark meta-data to indicate it can't be changed
     theSuperPackagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SuperPackagePackage.eNS_URI, theSuperPackagePackage);
     return theSuperPackagePackage;
@@ -108,6 +108,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSuperMain()
   {
     return superMainEClass;
@@ -118,6 +119,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSuperMain_Name()
   {
     return (EAttribute)superMainEClass.getEStructuralFeatures().get(0);
@@ -128,6 +130,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnotherSuperMain()
   {
     return anotherSuperMainEClass;
@@ -138,6 +141,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnotherSuperMain_Name()
   {
     return (EAttribute)anotherSuperMainEClass.getEStructuralFeatures().get(0);
@@ -148,6 +152,7 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SuperPackageFactory getSuperPackageFactory()
   {
     return (SuperPackageFactory)getEFactoryInstance();

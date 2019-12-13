@@ -76,6 +76,7 @@ public class AnotherSimpleTestFactoryImpl extends EFactoryImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo createFoo()
   {
     FooImpl foo = new FooImpl();
@@ -87,6 +88,7 @@ public class AnotherSimpleTestFactoryImpl extends EFactoryImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnotherSimpleTestPackage getAnotherSimpleTestPackage()
   {
     return (AnotherSimpleTestPackage)getEPackage();

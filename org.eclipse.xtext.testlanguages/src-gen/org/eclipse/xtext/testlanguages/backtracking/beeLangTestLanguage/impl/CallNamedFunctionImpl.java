@@ -87,6 +87,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -97,6 +98,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -110,6 +112,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterList getParameterList()
   {
     return parameterList;
@@ -137,6 +140,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
@@ -255,7 +259,7 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

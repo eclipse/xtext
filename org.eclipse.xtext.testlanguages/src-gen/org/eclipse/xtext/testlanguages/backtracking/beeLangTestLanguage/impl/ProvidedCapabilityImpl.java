@@ -130,6 +130,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getNameSpace()
   {
     return nameSpace;
@@ -140,6 +141,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
@@ -153,6 +155,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getCondExpr()
   {
     return condExpr;
@@ -180,6 +183,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
@@ -201,6 +205,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -211,6 +216,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -224,6 +230,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVersion()
   {
     return version;
@@ -234,6 +241,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVersion(String newVersion)
   {
     String oldVersion = version;
@@ -364,7 +372,7 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (nameSpace: ");
     result.append(nameSpace);
     result.append(", name: ");

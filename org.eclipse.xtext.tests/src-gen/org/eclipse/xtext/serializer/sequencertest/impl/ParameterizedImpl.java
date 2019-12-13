@@ -116,6 +116,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getV1()
   {
     return v1;
@@ -126,6 +127,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setV1(String newV1)
   {
     String oldV1 = v1;
@@ -139,6 +141,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getV2()
   {
     return v2;
@@ -149,6 +152,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setV2(String newV2)
   {
     String oldV2 = v2;
@@ -162,6 +166,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getV3()
   {
     return v3;
@@ -172,6 +177,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setV3(String newV3)
   {
     String oldV3 = v3;
@@ -276,7 +282,7 @@ public class ParameterizedImpl extends MinimalEObjectImpl.Container implements P
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (v1: ");
     result.append(v1);
     result.append(", v2: ");

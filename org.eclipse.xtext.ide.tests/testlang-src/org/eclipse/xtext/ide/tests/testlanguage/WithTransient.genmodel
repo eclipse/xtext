@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtext.ide.tests/testlang-src-gen" modelPluginID="org.eclipse.xtext.ide.tests"
     forceOverwrite="true" modelName="WithTransient" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="8.0"
-    copyrightFields="false" runtimeVersion="2.12" >
+    copyrightFields="false" runtimeVersion="2.20" >
   <foreignModel>WithTransient.ecore</foreignModel>
   <genPackages prefix="Withtransient" basePackage="org.eclipse.xtext.ide.tests.testlanguage"
       disposableProviderFactory="true" ecorePackage="WithTransient.ecore#/">

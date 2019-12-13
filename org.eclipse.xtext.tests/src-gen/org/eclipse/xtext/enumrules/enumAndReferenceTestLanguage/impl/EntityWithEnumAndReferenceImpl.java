@@ -108,6 +108,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KindOfKeyword getType()
   {
     return type;
@@ -118,6 +119,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(KindOfKeyword newType)
   {
     KindOfKeyword oldType = type;
@@ -131,6 +133,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -141,6 +144,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -154,6 +158,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EntityWithEnumAndReference getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -184,6 +189,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(EntityWithEnumAndReference newRef)
   {
     EntityWithEnumAndReference oldRef = ref;
@@ -289,7 +295,7 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(", name: ");

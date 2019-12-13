@@ -58,7 +58,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TerminalRulesTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (TerminalRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(TerminalRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    TerminalRulesTestLanguagePackageImpl theTerminalRulesTestLanguagePackage = (TerminalRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TerminalRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TerminalRulesTestLanguagePackageImpl());
+    Object registeredTerminalRulesTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TerminalRulesTestLanguagePackageImpl theTerminalRulesTestLanguagePackage = registeredTerminalRulesTestLanguagePackage instanceof TerminalRulesTestLanguagePackageImpl ? (TerminalRulesTestLanguagePackageImpl)registeredTerminalRulesTestLanguagePackage : new TerminalRulesTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     // Mark meta-data to indicate it can't be changed
     theTerminalRulesTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TerminalRulesTestLanguagePackage.eNS_URI, theTerminalRulesTestLanguagePackage);
     return theTerminalRulesTestLanguagePackage;
@@ -100,6 +100,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_IdValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_IntValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_StringValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -140,6 +144,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_RichStringValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
@@ -150,6 +155,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_MlCommentValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -160,6 +166,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_SlCommentValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
@@ -170,6 +177,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_WsValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
@@ -180,6 +188,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_AnyValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
@@ -190,6 +199,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalRulesTestLanguageFactory getTerminalRulesTestLanguageFactory()
   {
     return (TerminalRulesTestLanguageFactory)getEFactoryInstance();

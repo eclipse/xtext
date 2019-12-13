@@ -67,7 +67,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link UnassignedRuleCallTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     if (isInited) return (UnassignedRuleCallTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(UnassignedRuleCallTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    UnassignedRuleCallTestLanguagePackageImpl theUnassignedRuleCallTestLanguagePackage = (UnassignedRuleCallTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnassignedRuleCallTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnassignedRuleCallTestLanguagePackageImpl());
+    Object registeredUnassignedRuleCallTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    UnassignedRuleCallTestLanguagePackageImpl theUnassignedRuleCallTestLanguagePackage = registeredUnassignedRuleCallTestLanguagePackage instanceof UnassignedRuleCallTestLanguagePackageImpl ? (UnassignedRuleCallTestLanguagePackageImpl)registeredUnassignedRuleCallTestLanguagePackage : new UnassignedRuleCallTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     // Mark meta-data to indicate it can't be changed
     theUnassignedRuleCallTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(UnassignedRuleCallTestLanguagePackage.eNS_URI, theUnassignedRuleCallTestLanguagePackage);
     return theUnassignedRuleCallTestLanguagePackage;
@@ -109,6 +109,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ModelFeatures()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModelFeatures()
   {
     return modelFeaturesEClass;
@@ -139,6 +142,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModelFeatures_Name()
   {
     return (EAttribute)modelFeaturesEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnassignedRuleCallTestLanguageFactory getUnassignedRuleCallTestLanguageFactory()
   {
     return (UnassignedRuleCallTestLanguageFactory)getEFactoryInstance();

@@ -65,6 +65,7 @@ public class FqnRefImpl extends LineImpl implements FqnRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FqnObj getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -95,6 +96,7 @@ public class FqnRefImpl extends LineImpl implements FqnRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(FqnObj newRef)
   {
     FqnObj oldRef = ref;

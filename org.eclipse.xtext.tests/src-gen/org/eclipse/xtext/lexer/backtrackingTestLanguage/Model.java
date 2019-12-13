@@ -35,10 +35,6 @@ public interface Model extends EObject
    * The list contents are of type {@link org.eclipse.xtext.lexer.backtrackingTestLanguage.EnumName}.
    * The literals are from the enumeration {@link org.eclipse.xtext.lexer.backtrackingTestLanguage.EnumName}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enums</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enums</em>' attribute list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.EnumName
@@ -52,10 +48,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Ycs</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ycs</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ycs</em>' attribute list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Ycs()
@@ -68,10 +60,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Abs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Ab}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abs</em>' containment reference list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Abs()
@@ -84,10 +72,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Xbs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Xb}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Xbs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Xbs</em>' containment reference list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Xbs()
@@ -100,10 +84,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Ys</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ys</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ys</em>' attribute list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_Ys()
@@ -116,10 +96,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>As</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>As</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>As</em>' attribute list.
    * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getModel_As()

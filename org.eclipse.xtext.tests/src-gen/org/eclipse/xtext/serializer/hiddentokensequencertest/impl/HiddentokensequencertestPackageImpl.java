@@ -75,7 +75,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link HiddentokensequencertestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
     if (isInited) return (HiddentokensequencertestPackage)EPackage.Registry.INSTANCE.getEPackage(HiddentokensequencertestPackage.eNS_URI);
 
     // Obtain or create and register package
-    HiddentokensequencertestPackageImpl theHiddentokensequencertestPackage = (HiddentokensequencertestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HiddentokensequencertestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HiddentokensequencertestPackageImpl());
+    Object registeredHiddentokensequencertestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    HiddentokensequencertestPackageImpl theHiddentokensequencertestPackage = registeredHiddentokensequencertestPackage instanceof HiddentokensequencertestPackageImpl ? (HiddentokensequencertestPackageImpl)registeredHiddentokensequencertestPackage : new HiddentokensequencertestPackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
     // Mark meta-data to indicate it can't be changed
     theHiddentokensequencertestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(HiddentokensequencertestPackage.eNS_URI, theHiddentokensequencertestPackage);
     return theHiddentokensequencertestPackage;
@@ -117,6 +117,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -127,6 +128,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_DomainModel()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDomainModel()
   {
     return domainModelEClass;
@@ -147,6 +150,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDomainModel_Entities()
   {
     return (EReference)domainModelEClass.getEStructuralFeatures().get(0);
@@ -157,6 +161,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntity()
   {
     return entityEClass;
@@ -167,6 +172,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEntity_Name()
   {
     return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
@@ -177,6 +183,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEntity_Description()
   {
     return (EAttribute)entityEClass.getEStructuralFeatures().get(1);
@@ -187,6 +194,7 @@ public class HiddentokensequencertestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HiddentokensequencertestFactory getHiddentokensequencertestFactory()
   {
     return (HiddentokensequencertestFactory)getEFactoryInstance();

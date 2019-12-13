@@ -66,6 +66,7 @@ public class NestedRefImpl extends ReferenceImpl implements NestedRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Reference getLeft()
   {
     return left;
@@ -93,6 +94,7 @@ public class NestedRefImpl extends ReferenceImpl implements NestedRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Reference newLeft)
   {
     if (newLeft != left)

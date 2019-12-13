@@ -33,10 +33,6 @@ public interface Grammar extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -60,10 +56,6 @@ public interface Grammar extends EObject
    * Returns the value of the '<em><b>Used Grammars</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Grammar}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Used Grammars</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Used Grammars</em>' reference list.
    * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getGrammar_UsedGrammars()
@@ -75,10 +67,6 @@ public interface Grammar extends EObject
   /**
    * Returns the value of the '<em><b>Defines Hidden Tokens</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Defines Hidden Tokens</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Defines Hidden Tokens</em>' attribute.
    * @see #setDefinesHiddenTokens(boolean)
@@ -102,10 +90,6 @@ public interface Grammar extends EObject
    * Returns the value of the '<em><b>Hidden Tokens</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Hidden Tokens</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Hidden Tokens</em>' reference list.
    * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getGrammar_HiddenTokens()
@@ -118,10 +102,6 @@ public interface Grammar extends EObject
    * Returns the value of the '<em><b>Metamodel Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractMetamodelDeclaration}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Metamodel Declarations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Metamodel Declarations</em>' containment reference list.
    * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getGrammar_MetamodelDeclarations()
@@ -134,10 +114,6 @@ public interface Grammar extends EObject
    * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rules</em>' containment reference list.
    * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getGrammar_Rules()

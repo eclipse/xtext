@@ -27,10 +27,6 @@ public interface EnumLiteralDeclaration extends AbstractElement
   /**
    * Returns the value of the '<em><b>Enum Literal</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enum Literal</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enum Literal</em>' reference.
    * @see #setEnumLiteral(EEnumLiteral)
@@ -53,10 +49,6 @@ public interface EnumLiteralDeclaration extends AbstractElement
   /**
    * Returns the value of the '<em><b>Literal</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Literal</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Literal</em>' containment reference.
    * @see #setLiteral(Keyword)

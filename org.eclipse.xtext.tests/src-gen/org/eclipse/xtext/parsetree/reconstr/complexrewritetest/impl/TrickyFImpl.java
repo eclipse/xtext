@@ -78,6 +78,7 @@ public class TrickyFImpl extends MinimalEObjectImpl.Container implements TrickyF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getName()
   {
     if (name == null)
@@ -92,6 +93,7 @@ public class TrickyFImpl extends MinimalEObjectImpl.Container implements TrickyF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getType()
   {
     if (type == null)
@@ -190,7 +192,7 @@ public class TrickyFImpl extends MinimalEObjectImpl.Container implements TrickyF
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", type: ");

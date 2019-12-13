@@ -28,10 +28,6 @@ public interface OptionalDouble extends EObject
   /**
    * Returns the value of the '<em><b>Double0</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Double0</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Double0</em>' attribute.
    * @see #setDouble0(double)
@@ -54,10 +50,6 @@ public interface OptionalDouble extends EObject
   /**
    * Returns the value of the '<em><b>Double1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Double1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Double1</em>' attribute.
    * @see #setDouble1(double)
@@ -80,10 +72,6 @@ public interface OptionalDouble extends EObject
   /**
    * Returns the value of the '<em><b>Double2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Double2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Double2</em>' attribute.
    * @see #setDouble2(double)

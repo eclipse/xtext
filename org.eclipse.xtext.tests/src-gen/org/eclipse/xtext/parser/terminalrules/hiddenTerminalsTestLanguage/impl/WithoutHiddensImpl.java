@@ -65,6 +65,7 @@ public class WithoutHiddensImpl extends ModelImpl implements WithoutHiddens
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getSpaces()
   {
     if (spaces == null)
@@ -152,7 +153,7 @@ public class WithoutHiddensImpl extends ModelImpl implements WithoutHiddens
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (spaces: ");
     result.append(spaces);
     result.append(')');

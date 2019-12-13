@@ -119,6 +119,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -129,6 +130,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -142,6 +144,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference getRef1()
   {
     if (ref1 != null && ref1.eIsProxy())
@@ -172,6 +175,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef1(SingleCrossReference newRef1)
   {
     SingleCrossReference oldRef1 = ref1;
@@ -185,6 +189,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference getRef2()
   {
     if (ref2 != null && ref2.eIsProxy())
@@ -215,6 +220,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef2(SingleCrossReference newRef2)
   {
     SingleCrossReference oldRef2 = ref2;
@@ -228,6 +234,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference getRef3()
   {
     if (ref3 != null && ref3.eIsProxy())
@@ -258,6 +265,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef3(SingleCrossReference newRef3)
   {
     SingleCrossReference oldRef3 = ref3;
@@ -271,6 +279,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference getRef4()
   {
     if (ref4 != null && ref4.eIsProxy())
@@ -301,6 +310,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef4(SingleCrossReference newRef4)
   {
     SingleCrossReference oldRef4 = ref4;
@@ -429,7 +439,7 @@ public class SingleCrossReferenceImpl extends MinimalEObjectImpl.Container imple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

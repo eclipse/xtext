@@ -66,6 +66,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element getElement()
   {
     if (element != null && element.eIsProxy())
@@ -96,6 +97,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setElement(Element newElement)
   {
     Element oldElement = element;

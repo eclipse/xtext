@@ -116,6 +116,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -126,6 +127,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -139,6 +141,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getVal2()
   {
     return val2;
@@ -149,6 +152,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(int newVal2)
   {
     int oldVal2 = val2;
@@ -162,6 +166,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal3()
   {
     return val3;
@@ -172,6 +177,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(String newVal3)
   {
     String oldVal3 = val3;
@@ -276,7 +282,7 @@ public class Combination3Impl extends MinimalEObjectImpl.Container implements Co
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

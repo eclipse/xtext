@@ -176,7 +176,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ComplexrewritetestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -191,7 +191,8 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     if (isInited) return (ComplexrewritetestPackage)EPackage.Registry.INSTANCE.getEPackage(ComplexrewritetestPackage.eNS_URI);
 
     // Obtain or create and register package
-    ComplexrewritetestPackageImpl theComplexrewritetestPackage = (ComplexrewritetestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ComplexrewritetestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ComplexrewritetestPackageImpl());
+    Object registeredComplexrewritetestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ComplexrewritetestPackageImpl theComplexrewritetestPackage = registeredComplexrewritetestPackage instanceof ComplexrewritetestPackageImpl ? (ComplexrewritetestPackageImpl)registeredComplexrewritetestPackage : new ComplexrewritetestPackageImpl();
 
     isInited = true;
 
@@ -207,7 +208,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     // Mark meta-data to indicate it can't be changed
     theComplexrewritetestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ComplexrewritetestPackage.eNS_URI, theComplexrewritetestPackage);
     return theComplexrewritetestPackage;
@@ -218,6 +218,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -228,6 +229,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -238,6 +240,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExpression_Em()
   {
     return (EAttribute)expressionEClass.getEStructuralFeatures().get(0);
@@ -248,6 +251,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAtom()
   {
     return atomEClass;
@@ -258,6 +262,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAtom_Name()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
@@ -268,6 +273,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyB()
   {
     return trickyBEClass;
@@ -278,6 +284,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyB_Name()
   {
     return (EAttribute)trickyBEClass.getEStructuralFeatures().get(0);
@@ -288,6 +295,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyB_Type()
   {
     return (EAttribute)trickyBEClass.getEStructuralFeatures().get(1);
@@ -298,6 +306,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyC()
   {
     return trickyCEClass;
@@ -308,6 +317,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyC_Name()
   {
     return (EAttribute)trickyCEClass.getEStructuralFeatures().get(0);
@@ -318,6 +328,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyD()
   {
     return trickyDEClass;
@@ -328,6 +339,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyD_Name()
   {
     return (EAttribute)trickyDEClass.getEStructuralFeatures().get(0);
@@ -338,6 +350,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyD_Foo()
   {
     return (EAttribute)trickyDEClass.getEStructuralFeatures().get(1);
@@ -348,6 +361,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyD_Type()
   {
     return (EAttribute)trickyDEClass.getEStructuralFeatures().get(2);
@@ -358,6 +372,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyE()
   {
     return trickyEEClass;
@@ -368,6 +383,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyE_Name()
   {
     return (EAttribute)trickyEEClass.getEStructuralFeatures().get(0);
@@ -378,6 +394,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyE_Foo()
   {
     return (EAttribute)trickyEEClass.getEStructuralFeatures().get(1);
@@ -388,6 +405,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyE_Type()
   {
     return (EAttribute)trickyEEClass.getEStructuralFeatures().get(2);
@@ -398,6 +416,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyF()
   {
     return trickyFEClass;
@@ -408,6 +427,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyF_Name()
   {
     return (EAttribute)trickyFEClass.getEStructuralFeatures().get(0);
@@ -418,6 +438,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyF_Type()
   {
     return (EAttribute)trickyFEClass.getEStructuralFeatures().get(1);
@@ -428,6 +449,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyG()
   {
     return trickyGEClass;
@@ -438,6 +460,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrickyG_Tree()
   {
     return (EReference)trickyGEClass.getEStructuralFeatures().get(0);
@@ -448,6 +471,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyG1()
   {
     return trickyG1EClass;
@@ -458,6 +482,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTrickyG1_Vals()
   {
     return (EReference)trickyG1EClass.getEStructuralFeatures().get(0);
@@ -468,6 +493,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTrickyG2()
   {
     return trickyG2EClass;
@@ -478,6 +504,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTrickyG2_Val()
   {
     return (EAttribute)trickyG2EClass.getEStructuralFeatures().get(0);
@@ -488,6 +515,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAdd()
   {
     return addEClass;
@@ -498,6 +526,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd_AddOperands()
   {
     return (EReference)addEClass.getEStructuralFeatures().get(0);
@@ -508,6 +537,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMinus()
   {
     return minusEClass;
@@ -518,6 +548,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMinus_MinusOperands()
   {
     return (EReference)minusEClass.getEStructuralFeatures().get(0);
@@ -528,6 +559,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getC1()
   {
     return c1EClass;
@@ -538,6 +570,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getC1_X()
   {
     return (EReference)c1EClass.getEStructuralFeatures().get(0);
@@ -548,6 +581,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getC2()
   {
     return c2EClass;
@@ -558,6 +592,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getC2_Y()
   {
     return (EReference)c2EClass.getEStructuralFeatures().get(0);
@@ -568,6 +603,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getC3()
   {
     return c3EClass;
@@ -578,6 +614,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getC3_Z()
   {
     return (EReference)c3EClass.getEStructuralFeatures().get(0);
@@ -588,6 +625,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ComplexrewritetestFactory getComplexrewritetestFactory()
   {
     return (ComplexrewritetestFactory)getEFactoryInstance();

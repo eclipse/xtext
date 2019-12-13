@@ -108,6 +108,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeRef getType()
   {
     return type;
@@ -135,6 +136,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(TypeRef newType)
   {
     if (newType != type)
@@ -156,6 +158,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFeature()
   {
     return feature;
@@ -166,6 +169,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFeature(String newFeature)
   {
     String oldFeature = feature;
@@ -179,6 +183,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOperator()
   {
     return operator;
@@ -189,6 +194,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(String newOperator)
   {
     String oldOperator = operator;
@@ -309,7 +315,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (feature: ");
     result.append(feature);
     result.append(", operator: ");

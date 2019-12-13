@@ -94,6 +94,7 @@ public class TwoRequiredImpl extends TestImpl implements TwoRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOne()
   {
     return one;
@@ -104,6 +105,7 @@ public class TwoRequiredImpl extends TestImpl implements TwoRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOne(String newOne)
   {
     String oldOne = one;
@@ -117,6 +119,7 @@ public class TwoRequiredImpl extends TestImpl implements TwoRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTwo()
   {
     return two;
@@ -127,6 +130,7 @@ public class TwoRequiredImpl extends TestImpl implements TwoRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTwo(String newTwo)
   {
     String oldTwo = two;
@@ -221,7 +225,7 @@ public class TwoRequiredImpl extends TestImpl implements TwoRequired
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (one: ");
     result.append(one);
     result.append(", two: ");

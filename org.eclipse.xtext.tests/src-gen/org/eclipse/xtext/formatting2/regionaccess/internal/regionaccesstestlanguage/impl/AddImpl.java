@@ -77,6 +77,7 @@ public class AddImpl extends ExpressionImpl implements Add
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class AddImpl extends ExpressionImpl implements Add
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class AddImpl extends ExpressionImpl implements Add
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class AddImpl extends ExpressionImpl implements Add
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Expression newRight)
   {
     if (newRight != right)

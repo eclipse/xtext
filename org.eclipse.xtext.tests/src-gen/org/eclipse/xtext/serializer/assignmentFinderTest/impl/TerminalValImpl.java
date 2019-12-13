@@ -74,6 +74,7 @@ public class TerminalValImpl extends MinimalEObjectImpl.Container implements Ter
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTerm()
   {
     return term;
@@ -84,6 +85,7 @@ public class TerminalValImpl extends MinimalEObjectImpl.Container implements Ter
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTerm(String newTerm)
   {
     String oldTerm = term;
@@ -168,7 +170,7 @@ public class TerminalValImpl extends MinimalEObjectImpl.Container implements Ter
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (term: ");
     result.append(term);
     result.append(')');

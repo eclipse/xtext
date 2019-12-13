@@ -77,6 +77,7 @@ public class ActionLang2FactoryImpl extends EFactoryImpl implements ActionLang2F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ORing createORing()
   {
     ORingImpl oRing = new ORingImpl();
@@ -88,6 +89,7 @@ public class ActionLang2FactoryImpl extends EFactoryImpl implements ActionLang2F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Value createValue()
   {
     ValueImpl value = new ValueImpl();
@@ -99,6 +101,7 @@ public class ActionLang2FactoryImpl extends EFactoryImpl implements ActionLang2F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActionLang2Package getActionLang2Package()
   {
     return (ActionLang2Package)getEPackage();

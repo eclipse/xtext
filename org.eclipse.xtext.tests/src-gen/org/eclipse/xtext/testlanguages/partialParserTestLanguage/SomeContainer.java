@@ -30,10 +30,6 @@ public interface SomeContainer extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -57,10 +53,6 @@ public interface SomeContainer extends EObject
    * Returns the value of the '<em><b>Nested</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Nested}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Nested</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer_Nested()
@@ -73,10 +65,6 @@ public interface SomeContainer extends EObject
    * Returns the value of the '<em><b>Content</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.Content}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Content</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Content</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getSomeContainer_Content()

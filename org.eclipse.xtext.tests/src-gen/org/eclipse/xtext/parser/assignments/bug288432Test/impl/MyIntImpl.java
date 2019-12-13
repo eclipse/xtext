@@ -73,6 +73,7 @@ public class MyIntImpl extends ParameterObjectImpl implements MyInt
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getInt()
   {
     return int_;
@@ -83,6 +84,7 @@ public class MyIntImpl extends ParameterObjectImpl implements MyInt
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInt(int newInt)
   {
     int oldInt = int_;
@@ -167,7 +169,7 @@ public class MyIntImpl extends ParameterObjectImpl implements MyInt
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (int: ");
     result.append(int_);
     result.append(')');

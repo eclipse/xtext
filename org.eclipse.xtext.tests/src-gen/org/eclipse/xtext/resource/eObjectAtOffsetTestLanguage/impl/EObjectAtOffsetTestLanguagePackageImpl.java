@@ -91,7 +91,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EObjectAtOffsetTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
     if (isInited) return (EObjectAtOffsetTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EObjectAtOffsetTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EObjectAtOffsetTestLanguagePackageImpl theEObjectAtOffsetTestLanguagePackage = (EObjectAtOffsetTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EObjectAtOffsetTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EObjectAtOffsetTestLanguagePackageImpl());
+    Object registeredEObjectAtOffsetTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EObjectAtOffsetTestLanguagePackageImpl theEObjectAtOffsetTestLanguagePackage = registeredEObjectAtOffsetTestLanguagePackage instanceof EObjectAtOffsetTestLanguagePackageImpl ? (EObjectAtOffsetTestLanguagePackageImpl)registeredEObjectAtOffsetTestLanguagePackage : new EObjectAtOffsetTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
     // Mark meta-data to indicate it can't be changed
     theEObjectAtOffsetTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EObjectAtOffsetTestLanguagePackage.eNS_URI, theEObjectAtOffsetTestLanguagePackage);
     return theEObjectAtOffsetTestLanguagePackage;
@@ -133,6 +133,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Foos()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Bars()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -163,6 +166,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractBar()
   {
     return abstractBarEClass;
@@ -173,6 +177,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractBar_Foo()
   {
     return (EReference)abstractBarEClass.getEStructuralFeatures().get(0);
@@ -183,6 +188,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBar()
   {
     return barEClass;
@@ -193,6 +199,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBar_Name()
   {
     return (EAttribute)barEClass.getEStructuralFeatures().get(0);
@@ -203,6 +210,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoo()
   {
     return fooEClass;
@@ -213,6 +221,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFoo_Name()
   {
     return (EAttribute)fooEClass.getEStructuralFeatures().get(0);
@@ -223,6 +232,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFooBar()
   {
     return fooBarEClass;
@@ -233,6 +243,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFooBar_Bar()
   {
     return (EReference)fooBarEClass.getEStructuralFeatures().get(0);
@@ -243,6 +254,7 @@ public class EObjectAtOffsetTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObjectAtOffsetTestLanguageFactory getEObjectAtOffsetTestLanguageFactory()
   {
     return (EObjectAtOffsetTestLanguageFactory)getEFactoryInstance();

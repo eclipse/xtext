@@ -83,7 +83,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IndentationAwareTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
     if (isInited) return (IndentationAwareTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(IndentationAwareTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    IndentationAwareTestLanguagePackageImpl theIndentationAwareTestLanguagePackage = (IndentationAwareTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IndentationAwareTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IndentationAwareTestLanguagePackageImpl());
+    Object registeredIndentationAwareTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IndentationAwareTestLanguagePackageImpl theIndentationAwareTestLanguagePackage = registeredIndentationAwareTestLanguagePackage instanceof IndentationAwareTestLanguagePackageImpl ? (IndentationAwareTestLanguagePackageImpl)registeredIndentationAwareTestLanguagePackage : new IndentationAwareTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -114,7 +115,6 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
     // Mark meta-data to indicate it can't be changed
     theIndentationAwareTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IndentationAwareTestLanguagePackage.eNS_URI, theIndentationAwareTestLanguagePackage);
     return theIndentationAwareTestLanguagePackage;
@@ -125,6 +125,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTree()
   {
     return treeEClass;
@@ -135,6 +136,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTree_Nodes()
   {
     return (EReference)treeEClass.getEStructuralFeatures().get(0);
@@ -145,6 +147,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTree_MoreNodes()
   {
     return (EReference)treeEClass.getEStructuralFeatures().get(1);
@@ -155,6 +158,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTreeNode()
   {
     return treeNodeEClass;
@@ -165,6 +169,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTreeNode_Name()
   {
     return (EAttribute)treeNodeEClass.getEStructuralFeatures().get(0);
@@ -175,6 +180,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTreeNode_Children()
   {
     return (EReference)treeNodeEClass.getEStructuralFeatures().get(1);
@@ -185,6 +191,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOtherTreeNode()
   {
     return otherTreeNodeEClass;
@@ -195,6 +202,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOtherTreeNode_Name()
   {
     return (EAttribute)otherTreeNodeEClass.getEStructuralFeatures().get(0);
@@ -205,6 +213,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOtherTreeNode_ChildList()
   {
     return (EReference)otherTreeNodeEClass.getEStructuralFeatures().get(1);
@@ -215,6 +224,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChildList()
   {
     return childListEClass;
@@ -225,6 +235,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChildList_Children()
   {
     return (EReference)childListEClass.getEStructuralFeatures().get(0);
@@ -235,6 +246,7 @@ public class IndentationAwareTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IndentationAwareTestLanguageFactory getIndentationAwareTestLanguageFactory()
   {
     return (IndentationAwareTestLanguageFactory)getEFactoryInstance();

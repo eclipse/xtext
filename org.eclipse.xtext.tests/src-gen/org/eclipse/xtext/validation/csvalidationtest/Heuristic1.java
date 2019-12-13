@@ -31,10 +31,6 @@ public interface Heuristic1 extends EObject
    * Returns the value of the '<em><b>A</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>A</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>A</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getHeuristic1_A()
@@ -47,10 +43,6 @@ public interface Heuristic1 extends EObject
    * Returns the value of the '<em><b>B</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>B</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>B</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getHeuristic1_B()
@@ -63,10 +55,6 @@ public interface Heuristic1 extends EObject
    * Returns the value of the '<em><b>C</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>C</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>C</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getHeuristic1_C()

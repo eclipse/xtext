@@ -152,6 +152,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getGroesse()
   {
     return groesse;
@@ -162,6 +163,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGroesse(int newGroesse)
   {
     int oldGroesse = groesse;
@@ -175,6 +177,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getBeschreibung()
   {
     return beschreibung;
@@ -185,6 +188,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBeschreibung(String newBeschreibung)
   {
     String oldBeschreibung = beschreibung;
@@ -198,6 +202,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Kind> getKinder()
   {
     if (kinder == null)
@@ -212,6 +217,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Erwachsener> getErzieher()
   {
     if (erzieher == null)
@@ -226,6 +232,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Spielzeug> getSpielzeuge()
   {
     if (spielzeuge == null)
@@ -240,6 +247,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Familie> getFamilie()
   {
     if (familie == null)
@@ -402,7 +410,7 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (groesse: ");
     result.append(groesse);
     result.append(", beschreibung: ");

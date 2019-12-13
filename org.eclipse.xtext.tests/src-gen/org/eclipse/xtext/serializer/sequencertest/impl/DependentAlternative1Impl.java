@@ -95,6 +95,7 @@ public class DependentAlternative1Impl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal()
   {
     return val;
@@ -105,6 +106,7 @@ public class DependentAlternative1Impl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(String newVal)
   {
     String oldVal = val;
@@ -118,6 +120,7 @@ public class DependentAlternative1Impl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFlag()
   {
     return flag;
@@ -128,6 +131,7 @@ public class DependentAlternative1Impl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFlag(boolean newFlag)
   {
     boolean oldFlag = flag;
@@ -222,7 +226,7 @@ public class DependentAlternative1Impl extends MinimalEObjectImpl.Container impl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(", flag: ");

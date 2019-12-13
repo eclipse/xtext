@@ -67,6 +67,7 @@ public class NestedTypeTestImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedTypeChild getNested()
   {
     return nested;
@@ -94,6 +95,7 @@ public class NestedTypeTestImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNested(NestedTypeChild newNested)
   {
     if (newNested != nested)

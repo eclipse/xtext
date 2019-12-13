@@ -84,6 +84,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -95,6 +96,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -106,6 +108,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Component createComponent()
   {
     ComponentImpl component = new ComponentImpl();
@@ -117,6 +120,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bus createBus()
   {
     BusImpl bus = new BusImpl();
@@ -128,6 +132,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Processor createProcessor()
   {
     ProcessorImpl processor = new ProcessorImpl();
@@ -139,6 +144,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mode createMode()
   {
     ModeImpl mode = new ModeImpl();
@@ -150,6 +156,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Transition createTransition()
   {
     TransitionImpl transition = new TransitionImpl();
@@ -161,6 +168,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Port createPort()
   {
     PortImpl port = new PortImpl();
@@ -172,6 +180,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Data createData()
   {
     DataImpl data = new DataImpl();
@@ -183,6 +192,7 @@ public class LocationprovidertestFactoryImpl extends EFactoryImpl implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LocationprovidertestPackage getLocationprovidertestPackage()
   {
     return (LocationprovidertestPackage)getEPackage();

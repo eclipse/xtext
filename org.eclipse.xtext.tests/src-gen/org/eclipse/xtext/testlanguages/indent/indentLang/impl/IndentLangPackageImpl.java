@@ -67,7 +67,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IndentLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
     if (isInited) return (IndentLangPackage)EPackage.Registry.INSTANCE.getEPackage(IndentLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    IndentLangPackageImpl theIndentLangPackage = (IndentLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IndentLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IndentLangPackageImpl());
+    Object registeredIndentLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IndentLangPackageImpl theIndentLangPackage = registeredIndentLangPackage instanceof IndentLangPackageImpl ? (IndentLangPackageImpl)registeredIndentLangPackage : new IndentLangPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
     // Mark meta-data to indicate it can't be changed
     theIndentLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IndentLangPackage.eNS_URI, theIndentLangPackage);
     return theIndentLangPackage;
@@ -109,6 +109,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNodeList()
   {
     return nodeListEClass;
@@ -119,6 +120,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNodeList_Children()
   {
     return (EReference)nodeListEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNode()
   {
     return nodeEClass;
@@ -139,6 +142,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNode_Name()
   {
     return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Children()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class IndentLangPackageImpl extends EPackageImpl implements IndentLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IndentLangFactory getIndentLangFactory()
   {
     return (IndentLangFactory)getEFactoryInstance();

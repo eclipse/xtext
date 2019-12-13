@@ -29,10 +29,6 @@ public interface Rule1 extends EObject
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.parser.antlr.bug378967Test.FirstEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' attribute.
    * @see org.eclipse.xtext.parser.antlr.bug378967Test.FirstEnum
@@ -57,10 +53,6 @@ public interface Rule1 extends EObject
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
    * @see #setValue(int)
@@ -84,10 +76,6 @@ public interface Rule1 extends EObject
    * Returns the value of the '<em><b>Unit</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.parser.antlr.bug378967Test.SecondEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Unit</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Unit</em>' attribute.
    * @see org.eclipse.xtext.parser.antlr.bug378967Test.SecondEnum

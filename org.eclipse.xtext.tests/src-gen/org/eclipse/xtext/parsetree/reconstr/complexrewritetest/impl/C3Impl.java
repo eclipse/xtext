@@ -66,6 +66,7 @@ public class C3Impl extends TrickyCImpl implements C3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrickyC getZ()
   {
     return z;
@@ -93,6 +94,7 @@ public class C3Impl extends TrickyCImpl implements C3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setZ(TrickyC newZ)
   {
     if (newZ != z)

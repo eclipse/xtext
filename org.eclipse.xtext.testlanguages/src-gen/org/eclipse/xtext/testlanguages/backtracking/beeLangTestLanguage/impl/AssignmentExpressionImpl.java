@@ -98,6 +98,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getLeftExpr()
   {
     return leftExpr;
@@ -125,6 +126,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftExpr(Expression newLeftExpr)
   {
     if (newLeftExpr != leftExpr)
@@ -146,6 +148,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFunctionName()
   {
     return functionName;
@@ -156,6 +159,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFunctionName(String newFunctionName)
   {
     String oldFunctionName = functionName;
@@ -169,6 +173,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getRightExpr()
   {
     return rightExpr;
@@ -196,6 +201,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightExpr(Expression newRightExpr)
   {
     if (newRightExpr != rightExpr)
@@ -326,7 +332,7 @@ public class AssignmentExpressionImpl extends ExpressionImpl implements Assignme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (functionName: ");
     result.append(functionName);
     result.append(')');

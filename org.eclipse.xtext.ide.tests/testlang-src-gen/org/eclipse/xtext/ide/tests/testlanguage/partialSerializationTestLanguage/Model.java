@@ -34,10 +34,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Clazz</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.emf.ecore.EClass}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Clazz</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Clazz</em>' containment reference list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage#getModel_Clazz()

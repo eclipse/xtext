@@ -80,6 +80,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Definition createDefinition()
   {
     DefinitionImpl definition = new DefinitionImpl();
@@ -102,6 +104,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child createChild()
   {
     ChildImpl child = new ChildImpl();
@@ -113,6 +116,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
@@ -124,6 +128,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedRef createNestedRef()
   {
     NestedRefImpl nestedRef = new NestedRefImpl();
@@ -135,6 +140,7 @@ public class Bug311337FactoryImpl extends EFactoryImpl implements Bug311337Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug311337Package getBug311337Package()
   {
     return (Bug311337Package)getEPackage();

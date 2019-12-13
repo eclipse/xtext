@@ -30,10 +30,6 @@ public interface TwoChilds extends Model
   /**
    * Returns the value of the '<em><b>Direct Child</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Direct Child</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Direct Child</em>' containment reference.
    * @see #setDirectChild(MandatoryValue)
@@ -56,10 +52,6 @@ public interface TwoChilds extends Model
   /**
    * Returns the value of the '<em><b>Opt Child</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Opt Child</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Opt Child</em>' containment reference.
    * @see #setOptChild(OptionalChild)

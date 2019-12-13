@@ -66,6 +66,7 @@ public class SecondConcreteImpl extends AbstractChildImpl implements SecondConcr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Child> getReferencedChildren()
   {
     if (referencedChildren == null)

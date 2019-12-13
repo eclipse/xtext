@@ -70,6 +70,7 @@ public class ModelImpl extends org.eclipse.xtext.grammarinheritance.baseInherita
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Element> getElements()
   {
     if (elements == null)

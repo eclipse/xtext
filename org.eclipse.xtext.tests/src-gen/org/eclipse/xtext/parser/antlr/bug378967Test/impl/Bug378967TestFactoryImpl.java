@@ -121,6 +121,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Root createRoot()
   {
     RootImpl root = new RootImpl();
@@ -132,6 +133,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Rule1 createRule1()
   {
     Rule1Impl rule1 = new Rule1Impl();
@@ -143,6 +145,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Rule2 createRule2()
   {
     Rule2Impl rule2 = new Rule2Impl();
@@ -154,6 +157,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Rule3 createRule3()
   {
     Rule3Impl rule3 = new Rule3Impl();
@@ -165,6 +169,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Rule4 createRule4()
   {
     Rule4Impl rule4 = new Rule4Impl();
@@ -176,6 +181,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AfterObj createAfterObj()
   {
     AfterObjImpl afterObj = new AfterObjImpl();
@@ -187,6 +193,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SObj createSObj()
   {
     SObjImpl sObj = new SObjImpl();
@@ -242,6 +249,7 @@ public class Bug378967TestFactoryImpl extends EFactoryImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug378967TestPackage getBug378967TestPackage()
   {
     return (Bug378967TestPackage)getEPackage();

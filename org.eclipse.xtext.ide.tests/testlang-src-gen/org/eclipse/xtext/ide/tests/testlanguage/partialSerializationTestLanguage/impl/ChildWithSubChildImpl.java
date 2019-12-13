@@ -76,6 +76,7 @@ public class ChildWithSubChildImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SubChild> getSubChilds()
   {
     if (subChilds == null)

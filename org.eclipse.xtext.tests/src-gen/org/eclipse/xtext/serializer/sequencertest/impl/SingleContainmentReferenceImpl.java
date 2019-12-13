@@ -67,6 +67,7 @@ public class SingleContainmentReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getChild()
   {
     return child;
@@ -94,6 +95,7 @@ public class SingleContainmentReferenceImpl extends MinimalEObjectImpl.Container
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(EObject newChild)
   {
     if (newChild != child)

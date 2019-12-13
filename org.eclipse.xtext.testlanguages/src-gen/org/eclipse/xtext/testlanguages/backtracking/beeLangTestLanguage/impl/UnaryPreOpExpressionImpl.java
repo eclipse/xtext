@@ -87,6 +87,7 @@ public class UnaryPreOpExpressionImpl extends ExpressionImpl implements UnaryPre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFunctionName()
   {
     return functionName;
@@ -97,6 +98,7 @@ public class UnaryPreOpExpressionImpl extends ExpressionImpl implements UnaryPre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFunctionName(String newFunctionName)
   {
     String oldFunctionName = functionName;
@@ -110,6 +112,7 @@ public class UnaryPreOpExpressionImpl extends ExpressionImpl implements UnaryPre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpr()
   {
     return expr;
@@ -137,6 +140,7 @@ public class UnaryPreOpExpressionImpl extends ExpressionImpl implements UnaryPre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
@@ -255,7 +259,7 @@ public class UnaryPreOpExpressionImpl extends ExpressionImpl implements UnaryPre
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (functionName: ");
     result.append(functionName);
     result.append(')');

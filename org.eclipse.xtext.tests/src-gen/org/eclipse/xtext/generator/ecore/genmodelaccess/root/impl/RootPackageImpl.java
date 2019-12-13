@@ -82,7 +82,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link RootPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -97,13 +97,16 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 		if (isInited) return (RootPackage)EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI);
 
 		// Obtain or create and register package
-		RootPackageImpl theRootPackage = (RootPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RootPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RootPackageImpl());
+		Object registeredRootPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		RootPackageImpl theRootPackage = registeredRootPackage instanceof RootPackageImpl ? (RootPackageImpl)registeredRootPackage : new RootPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		NestedPackage1PackageImpl theNestedPackage1Package = (NestedPackage1PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI) instanceof NestedPackage1PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI) : NestedPackage1Package.eINSTANCE);
-		NoLiteralsPackageImpl theNoLiteralsPackage = (NoLiteralsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI) instanceof NoLiteralsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI) : NoLiteralsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI);
+		NestedPackage1PackageImpl theNestedPackage1Package = (NestedPackage1PackageImpl)(registeredPackage instanceof NestedPackage1PackageImpl ? registeredPackage : NestedPackage1Package.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI);
+		NoLiteralsPackageImpl theNoLiteralsPackage = (NoLiteralsPackageImpl)(registeredPackage instanceof NoLiteralsPackageImpl ? registeredPackage : NoLiteralsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theRootPackage.createPackageContents();
@@ -118,7 +121,6 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 		// Mark meta-data to indicate it can't be changed
 		theRootPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(RootPackage.eNS_URI, theRootPackage);
 		return theRootPackage;
@@ -129,6 +131,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRootClass()
 	{
 		return rootClassEClass;
@@ -139,6 +142,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRootClass_Attribute1()
 	{
 		return (EAttribute)rootClassEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRootClass_Reference1()
 	{
 		return (EReference)rootClassEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getRootEnum()
 	{
 		return rootEnumEEnum;
@@ -169,6 +175,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getRootDataType()
 	{
 		return rootDataTypeEDataType;
@@ -179,6 +186,7 @@ public class RootPackageImpl extends EPackageImpl implements RootPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootFactory getRootFactory()
 	{
 		return (RootFactory)getEFactoryInstance();

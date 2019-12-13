@@ -77,6 +77,7 @@ public class ParentImpl extends ModelImpl implements Parent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class ParentImpl extends ModelImpl implements Parent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Child newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class ParentImpl extends ModelImpl implements Parent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class ParentImpl extends ModelImpl implements Parent
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Child newRight)
   {
     if (newRight != right)

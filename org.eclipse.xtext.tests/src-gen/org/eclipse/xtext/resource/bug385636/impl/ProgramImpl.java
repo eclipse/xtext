@@ -86,6 +86,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DefineVariables getDefine()
   {
     return define;
@@ -113,6 +114,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefine(DefineVariables newDefine)
   {
     if (newDefine != define)
@@ -134,6 +136,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getStatements()
   {
     if (statements == null)

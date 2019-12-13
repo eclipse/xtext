@@ -203,6 +203,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -214,6 +215,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleGroup createSimpleGroup()
   {
     SimpleGroupImpl simpleGroup = new SimpleGroupImpl();
@@ -225,6 +227,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleAlternative createSimpleAlternative()
   {
     SimpleAlternativeImpl simpleAlternative = new SimpleAlternativeImpl();
@@ -236,6 +239,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleMultiplicities createSimpleMultiplicities()
   {
     SimpleMultiplicitiesImpl simpleMultiplicities = new SimpleMultiplicitiesImpl();
@@ -247,6 +251,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GroupMultiplicities createGroupMultiplicities()
   {
     GroupMultiplicitiesImpl groupMultiplicities = new GroupMultiplicitiesImpl();
@@ -258,6 +263,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AlternativeMultiplicities createAlternativeMultiplicities()
   {
     AlternativeMultiplicitiesImpl alternativeMultiplicities = new AlternativeMultiplicitiesImpl();
@@ -269,6 +275,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public List1 createList1()
   {
     List1Impl list1 = new List1Impl();
@@ -280,6 +287,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public List2 createList2()
   {
     List2Impl list2 = new List2Impl();
@@ -291,6 +299,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AltList1 createAltList1()
   {
     AltList1Impl altList1 = new AltList1Impl();
@@ -302,6 +311,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AltList2 createAltList2()
   {
     AltList2Impl altList2 = new AltList2Impl();
@@ -313,6 +323,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleKeywords createSingleKeywords()
   {
     SingleKeywordsImpl singleKeywords = new SingleKeywordsImpl();
@@ -324,6 +335,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleKeywordsOrID createSingleKeywordsOrID()
   {
     SingleKeywordsOrIDImpl singleKeywordsOrID = new SingleKeywordsOrIDImpl();
@@ -335,6 +347,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleTerminals createSingleTerminals()
   {
     SingleTerminalsImpl singleTerminals = new SingleTerminalsImpl();
@@ -346,6 +359,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleEnum createSingleEnum()
   {
     SingleEnumImpl singleEnum = new SingleEnumImpl();
@@ -357,6 +371,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference createSingleCrossReference()
   {
     SingleCrossReferenceImpl singleCrossReference = new SingleCrossReferenceImpl();
@@ -368,6 +383,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleContainmentReference createSingleContainmentReference()
   {
     SingleContainmentReferenceImpl singleContainmentReference = new SingleContainmentReferenceImpl();
@@ -379,6 +395,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleContainmentReferenceChild1 createSingleContainmentReferenceChild1()
   {
     SingleContainmentReferenceChild1Impl singleContainmentReferenceChild1 = new SingleContainmentReferenceChild1Impl();
@@ -390,6 +407,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleContainmentReferenceChild2 createSingleContainmentReferenceChild2()
   {
     SingleContainmentReferenceChild2Impl singleContainmentReferenceChild2 = new SingleContainmentReferenceChild2Impl();
@@ -401,6 +419,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleContainmentReferenceChild3 createSingleContainmentReferenceChild3()
   {
     SingleContainmentReferenceChild3Impl singleContainmentReferenceChild3 = new SingleContainmentReferenceChild3Impl();
@@ -412,6 +431,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiKeywords createMultiKeywords()
   {
     MultiKeywordsImpl multiKeywords = new MultiKeywordsImpl();
@@ -423,6 +443,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiKeywordsOrID createMultiKeywordsOrID()
   {
     MultiKeywordsOrIDImpl multiKeywordsOrID = new MultiKeywordsOrIDImpl();
@@ -434,6 +455,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiTerminals createMultiTerminals()
   {
     MultiTerminalsImpl multiTerminals = new MultiTerminalsImpl();
@@ -445,6 +467,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DependentAlternative1 createDependentAlternative1()
   {
     DependentAlternative1Impl dependentAlternative1 = new DependentAlternative1Impl();
@@ -456,6 +479,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DependentAlternative2 createDependentAlternative2()
   {
     DependentAlternative2Impl dependentAlternative2 = new DependentAlternative2Impl();
@@ -467,6 +491,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Optional createOptional()
   {
     OptionalImpl optional = new OptionalImpl();
@@ -478,6 +503,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.serializer.sequencertest.Float createFloat()
   {
     FloatImpl float_ = new FloatImpl();
@@ -489,6 +515,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedAlternative createUnorderedAlternative()
   {
     UnorderedAlternativeImpl unorderedAlternative = new UnorderedAlternativeImpl();
@@ -500,6 +527,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedAlternativeVal createUnorderedAlternativeVal()
   {
     UnorderedAlternativeValImpl unorderedAlternativeVal = new UnorderedAlternativeValImpl();
@@ -511,6 +539,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedAlternativeValDelegate createUnorderedAlternativeValDelegate()
   {
     UnorderedAlternativeValDelegateImpl unorderedAlternativeValDelegate = new UnorderedAlternativeValDelegateImpl();
@@ -522,6 +551,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedAlternativeVal2 createUnorderedAlternativeVal2()
   {
     UnorderedAlternativeVal2Impl unorderedAlternativeVal2 = new UnorderedAlternativeVal2Impl();
@@ -533,6 +563,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroup createUnorderedGroup()
   {
     UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
@@ -544,6 +575,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupVal createUnorderedGroupVal()
   {
     UnorderedGroupValImpl unorderedGroupVal = new UnorderedGroupValImpl();
@@ -555,6 +587,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupValDelegate createUnorderedGroupValDelegate()
   {
     UnorderedGroupValDelegateImpl unorderedGroupValDelegate = new UnorderedGroupValDelegateImpl();
@@ -566,6 +599,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupVal2 createUnorderedGroupVal2()
   {
     UnorderedGroupVal2Impl unorderedGroupVal2 = new UnorderedGroupVal2Impl();
@@ -577,6 +611,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupOptional createUnorderedGroupOptional()
   {
     UnorderedGroupOptionalImpl unorderedGroupOptional = new UnorderedGroupOptionalImpl();
@@ -588,6 +623,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupBoolean createUnorderedGroupBoolean()
   {
     UnorderedGroupBooleanImpl unorderedGroupBoolean = new UnorderedGroupBooleanImpl();
@@ -599,6 +635,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Complex1 createComplex1()
   {
     Complex1Impl complex1 = new Complex1Impl();
@@ -610,6 +647,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalDouble createOptionalDouble()
   {
     OptionalDoubleImpl optionalDouble = new OptionalDoubleImpl();
@@ -621,6 +659,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullValue createNullValue()
   {
     NullValueImpl nullValue = new NullValueImpl();
@@ -632,6 +671,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullCrossRef createNullCrossRef()
   {
     NullCrossRefImpl nullCrossRef = new NullCrossRefImpl();
@@ -643,6 +683,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FragmentCallerType createFragmentCallerType()
   {
     FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
@@ -654,6 +695,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterCaller createParameterCaller()
   {
     ParameterCallerImpl parameterCaller = new ParameterCallerImpl();
@@ -665,6 +707,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameterized createParameterized()
   {
     ParameterizedImpl parameterized = new ParameterizedImpl();
@@ -676,6 +719,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterDelegation createParameterDelegation()
   {
     ParameterDelegationImpl parameterDelegation = new ParameterDelegationImpl();
@@ -687,6 +731,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Delegation createDelegation()
   {
     DelegationImpl delegation = new DelegationImpl();
@@ -698,6 +743,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DelegationA createDelegationA()
   {
     DelegationAImpl delegationA = new DelegationAImpl();
@@ -731,6 +777,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SequencertestPackage getSequencertestPackage()
   {
     return (SequencertestPackage)getEPackage();

@@ -157,6 +157,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw1()
   {
     return kw1;
@@ -167,6 +168,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw1(boolean newKw1)
   {
     boolean oldKw1 = kw1;
@@ -180,6 +182,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw2()
   {
     return kw2;
@@ -190,6 +193,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw2(boolean newKw2)
   {
     boolean oldKw2 = kw2;
@@ -203,6 +207,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw3()
   {
     return kw3;
@@ -213,6 +218,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw3(boolean newKw3)
   {
     boolean oldKw3 = kw3;
@@ -226,6 +232,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw4()
   {
     return kw4;
@@ -236,6 +243,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw4(boolean newKw4)
   {
     boolean oldKw4 = kw4;
@@ -249,6 +257,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw5()
   {
     return kw5;
@@ -259,6 +268,7 @@ public class KWListImpl extends RootImpl implements KWList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw5(boolean newKw5)
   {
     boolean oldKw5 = kw5;
@@ -383,7 +393,7 @@ public class KWListImpl extends RootImpl implements KWList
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (kw1: ");
     result.append(kw1);
     result.append(", kw2: ");

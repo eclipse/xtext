@@ -95,6 +95,7 @@ public class TransientObjectSubImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -105,6 +106,7 @@ public class TransientObjectSubImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -118,6 +120,7 @@ public class TransientObjectSubImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal3()
   {
     return val3;
@@ -128,6 +131,7 @@ public class TransientObjectSubImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(String newVal3)
   {
     String oldVal3 = val3;
@@ -222,7 +226,7 @@ public class TransientObjectSubImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val2: ");
     result.append(val2);
     result.append(", val3: ");

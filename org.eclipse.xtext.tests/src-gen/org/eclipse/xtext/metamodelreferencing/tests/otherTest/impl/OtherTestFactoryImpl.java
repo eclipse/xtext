@@ -76,6 +76,7 @@ public class OtherTestFactoryImpl extends EFactoryImpl implements OtherTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FooBar createFooBar()
   {
     FooBarImpl fooBar = new FooBarImpl();
@@ -87,6 +88,7 @@ public class OtherTestFactoryImpl extends EFactoryImpl implements OtherTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OtherTestPackage getOtherTestPackage()
   {
     return (OtherTestPackage)getEPackage();

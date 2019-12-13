@@ -66,6 +66,7 @@ public class MyElementImpl extends ContentImpl implements MyElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterObject getBar()
   {
     return bar;
@@ -93,6 +94,7 @@ public class MyElementImpl extends ContentImpl implements MyElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBar(ParameterObject newBar)
   {
     if (newBar != bar)

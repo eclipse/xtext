@@ -26,10 +26,6 @@ public interface PRFNamedWithAction extends PRFNamed
   /**
    * Returns the value of the '<em><b>Prev</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Prev</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Prev</em>' containment reference.
    * @see #setPrev(PRFNamed)
@@ -52,10 +48,6 @@ public interface PRFNamedWithAction extends PRFNamed
   /**
    * Returns the value of the '<em><b>Ref2</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref2</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref2</em>' reference.
    * @see #setRef2(PRFNamed)

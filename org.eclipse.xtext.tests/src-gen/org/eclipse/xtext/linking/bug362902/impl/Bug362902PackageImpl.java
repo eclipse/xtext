@@ -67,7 +67,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug362902Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
     if (isInited) return (Bug362902Package)EPackage.Registry.INSTANCE.getEPackage(Bug362902Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug362902PackageImpl theBug362902Package = (Bug362902PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug362902PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug362902PackageImpl());
+    Object registeredBug362902Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug362902PackageImpl theBug362902Package = registeredBug362902Package instanceof Bug362902PackageImpl ? (Bug362902PackageImpl)registeredBug362902Package : new Bug362902PackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
     // Mark meta-data to indicate it can't be changed
     theBug362902Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug362902Package.eNS_URI, theBug362902Package);
     return theBug362902Package;
@@ -109,6 +109,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Greetings()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Favourite()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -139,6 +142,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGreeting()
   {
     return greetingEClass;
@@ -149,6 +153,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGreeting_Name()
   {
     return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
@@ -159,6 +164,7 @@ public class Bug362902PackageImpl extends EPackageImpl implements Bug362902Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug362902Factory getBug362902Factory()
   {
     return (Bug362902Factory)getEFactoryInstance();

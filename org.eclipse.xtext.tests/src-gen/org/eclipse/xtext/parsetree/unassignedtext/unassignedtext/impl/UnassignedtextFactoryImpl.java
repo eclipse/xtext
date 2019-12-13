@@ -82,6 +82,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -93,6 +94,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CaseInsensitiveKeywordRule createCaseInsensitiveKeywordRule()
   {
     CaseInsensitiveKeywordRuleImpl caseInsensitiveKeywordRule = new CaseInsensitiveKeywordRuleImpl();
@@ -104,6 +106,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PluralRule createPluralRule()
   {
     PluralRuleImpl pluralRule = new PluralRuleImpl();
@@ -115,6 +118,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiRule createMultiRule()
   {
     MultiRuleImpl multiRule = new MultiRuleImpl();
@@ -126,6 +130,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeRule createDatatypeRule()
   {
     DatatypeRuleImpl datatypeRule = new DatatypeRuleImpl();
@@ -137,6 +142,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CommonTerminalsRule createCommonTerminalsRule()
   {
     CommonTerminalsRuleImpl commonTerminalsRule = new CommonTerminalsRuleImpl();
@@ -148,6 +154,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GroupRule createGroupRule()
   {
     GroupRuleImpl groupRule = new GroupRuleImpl();
@@ -159,6 +166,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnassignedtextPackage getUnassignedtextPackage()
   {
     return (UnassignedtextPackage)getEPackage();

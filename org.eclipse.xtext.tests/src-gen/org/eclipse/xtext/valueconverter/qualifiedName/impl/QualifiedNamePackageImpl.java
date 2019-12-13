@@ -58,7 +58,7 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link QualifiedNamePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
     if (isInited) return (QualifiedNamePackage)EPackage.Registry.INSTANCE.getEPackage(QualifiedNamePackage.eNS_URI);
 
     // Obtain or create and register package
-    QualifiedNamePackageImpl theQualifiedNamePackage = (QualifiedNamePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QualifiedNamePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QualifiedNamePackageImpl());
+    Object registeredQualifiedNamePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    QualifiedNamePackageImpl theQualifiedNamePackage = registeredQualifiedNamePackage instanceof QualifiedNamePackageImpl ? (QualifiedNamePackageImpl)registeredQualifiedNamePackage : new QualifiedNamePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
     // Mark meta-data to indicate it can't be changed
     theQualifiedNamePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(QualifiedNamePackage.eNS_URI, theQualifiedNamePackage);
     return theQualifiedNamePackage;
@@ -100,6 +100,7 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -110,6 +111,7 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_QualifiedName()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class QualifiedNamePackageImpl extends EPackageImpl implements QualifiedN
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public QualifiedNameFactory getQualifiedNameFactory()
   {
     return (QualifiedNameFactory)getEFactoryInstance();

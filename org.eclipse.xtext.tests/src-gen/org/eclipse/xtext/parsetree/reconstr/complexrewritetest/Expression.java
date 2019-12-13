@@ -25,10 +25,6 @@ public interface Expression extends Root
   /**
    * Returns the value of the '<em><b>Em</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Em</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Em</em>' attribute.
    * @see #setEm(String)

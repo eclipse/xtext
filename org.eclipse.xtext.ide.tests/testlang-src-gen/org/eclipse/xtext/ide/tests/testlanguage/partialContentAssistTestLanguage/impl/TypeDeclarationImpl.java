@@ -110,6 +110,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -120,6 +121,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -133,6 +135,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration getSuperType()
   {
     if (superType != null && superType.eIsProxy())
@@ -163,6 +166,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperType(TypeDeclaration newSuperType)
   {
     TypeDeclaration oldSuperType = superType;
@@ -176,6 +180,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Property> getProperties()
   {
     if (properties == null)
@@ -300,7 +305,7 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

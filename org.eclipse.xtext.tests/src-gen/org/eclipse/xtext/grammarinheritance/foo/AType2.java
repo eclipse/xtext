@@ -26,10 +26,6 @@ public interface AType2 extends RootRule, AType
   /**
    * Returns the value of the '<em><b>Age</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Age</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Age</em>' attribute.
    * @see #setAge(int)

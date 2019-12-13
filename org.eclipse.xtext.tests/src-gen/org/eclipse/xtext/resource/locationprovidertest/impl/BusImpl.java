@@ -70,6 +70,7 @@ public class BusImpl extends ComponentImpl implements Bus
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Port> getPort()
   {
     if (port == null)

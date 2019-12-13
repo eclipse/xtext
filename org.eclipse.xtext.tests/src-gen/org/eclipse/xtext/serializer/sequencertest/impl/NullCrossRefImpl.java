@@ -87,6 +87,7 @@ public class NullCrossRefImpl extends MinimalEObjectImpl.Container implements Nu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -117,6 +118,7 @@ public class NullCrossRefImpl extends MinimalEObjectImpl.Container implements Nu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(EObject newRef)
   {
     EObject oldRef = ref;
@@ -130,6 +132,7 @@ public class NullCrossRefImpl extends MinimalEObjectImpl.Container implements Nu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFoo()
   {
     return foo;
@@ -140,6 +143,7 @@ public class NullCrossRefImpl extends MinimalEObjectImpl.Container implements Nu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFoo(String newFoo)
   {
     String oldFoo = foo;
@@ -235,7 +239,7 @@ public class NullCrossRefImpl extends MinimalEObjectImpl.Container implements Nu
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (foo: ");
     result.append(foo);
     result.append(')');

@@ -88,6 +88,7 @@ public class TransientObjectImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -98,6 +99,7 @@ public class TransientObjectImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -111,6 +113,7 @@ public class TransientObjectImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TransientObjectSub getNested()
   {
     return nested;
@@ -138,6 +141,7 @@ public class TransientObjectImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNested(TransientObjectSub newNested)
   {
     if (newNested != nested)
@@ -256,7 +260,7 @@ public class TransientObjectImpl extends MinimalEObjectImpl.Container implements
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(')');

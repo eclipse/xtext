@@ -112,6 +112,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -126,6 +127,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -136,6 +138,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -149,6 +152,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal3()
   {
     return val3;
@@ -159,6 +163,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(String newVal3)
   {
     String oldVal3 = val3;
@@ -265,7 +270,7 @@ public class AltList2Impl extends MinimalEObjectImpl.Container implements AltLis
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

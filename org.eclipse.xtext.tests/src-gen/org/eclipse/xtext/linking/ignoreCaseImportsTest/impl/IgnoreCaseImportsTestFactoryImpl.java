@@ -77,6 +77,7 @@ public class IgnoreCaseImportsTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class IgnoreCaseImportsTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -99,6 +101,7 @@ public class IgnoreCaseImportsTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseImportsTestPackage getIgnoreCaseImportsTestPackage()
   {
     return (IgnoreCaseImportsTestPackage)getEPackage();

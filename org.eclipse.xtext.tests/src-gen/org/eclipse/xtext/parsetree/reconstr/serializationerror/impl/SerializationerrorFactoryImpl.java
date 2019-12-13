@@ -80,6 +80,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Test createTest()
   {
     TestImpl test = new TestImpl();
@@ -102,6 +104,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoRequired createTwoRequired()
   {
     TwoRequiredImpl twoRequired = new TwoRequiredImpl();
@@ -113,6 +116,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoOptions createTwoOptions()
   {
     TwoOptionsImpl twoOptions = new TwoOptionsImpl();
@@ -124,6 +128,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Indent createIndent()
   {
     IndentImpl indent = new IndentImpl();
@@ -135,6 +140,7 @@ public class SerializationerrorFactoryImpl extends EFactoryImpl implements Seria
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SerializationerrorPackage getSerializationerrorPackage()
   {
     return (SerializationerrorPackage)getEPackage();

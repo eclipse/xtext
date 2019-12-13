@@ -67,7 +67,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link DatatypeRulesTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (DatatypeRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(DatatypeRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    DatatypeRulesTestLanguagePackageImpl theDatatypeRulesTestLanguagePackage = (DatatypeRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DatatypeRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DatatypeRulesTestLanguagePackageImpl());
+    Object registeredDatatypeRulesTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    DatatypeRulesTestLanguagePackageImpl theDatatypeRulesTestLanguagePackage = registeredDatatypeRulesTestLanguagePackage instanceof DatatypeRulesTestLanguagePackageImpl ? (DatatypeRulesTestLanguagePackageImpl)registeredDatatypeRulesTestLanguagePackage : new DatatypeRulesTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
     // Mark meta-data to indicate it can't be changed
     theDatatypeRulesTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(DatatypeRulesTestLanguagePackage.eNS_URI, theDatatypeRulesTestLanguagePackage);
     return theDatatypeRulesTestLanguagePackage;
@@ -109,6 +109,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCompositeModel()
   {
     return compositeModelEClass;
@@ -119,6 +120,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCompositeModel_Model()
   {
     return (EReference)compositeModelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -139,6 +142,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Id()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Value()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Vector()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -169,6 +175,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Dots()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
@@ -179,6 +186,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Double()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -189,6 +197,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeRulesTestLanguageFactory getDatatypeRulesTestLanguageFactory()
   {
     return (DatatypeRulesTestLanguageFactory)getEFactoryInstance();

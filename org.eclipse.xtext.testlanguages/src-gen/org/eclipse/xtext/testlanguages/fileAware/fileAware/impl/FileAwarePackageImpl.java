@@ -74,7 +74,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FileAwarePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -89,7 +89,8 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
     if (isInited) return (FileAwarePackage)EPackage.Registry.INSTANCE.getEPackage(FileAwarePackage.eNS_URI);
 
     // Obtain or create and register package
-    FileAwarePackageImpl theFileAwarePackage = (FileAwarePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FileAwarePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FileAwarePackageImpl());
+    Object registeredFileAwarePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FileAwarePackageImpl theFileAwarePackage = registeredFileAwarePackage instanceof FileAwarePackageImpl ? (FileAwarePackageImpl)registeredFileAwarePackage : new FileAwarePackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
     // Mark meta-data to indicate it can't be changed
     theFileAwarePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FileAwarePackage.eNS_URI, theFileAwarePackage);
     return theFileAwarePackage;
@@ -113,6 +113,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPackageDeclaration()
   {
     return packageDeclarationEClass;
@@ -123,6 +124,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPackageDeclaration_Name()
   {
     return (EAttribute)packageDeclarationEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPackageDeclaration_Imports()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(1);
@@ -143,6 +146,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPackageDeclaration_Contents()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(2);
@@ -153,6 +157,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -163,6 +168,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getImport_Element()
   {
     return (EReference)importEClass.getEStructuralFeatures().get(0);
@@ -173,6 +179,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -183,6 +190,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -193,6 +201,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Contents()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -203,6 +212,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Ref()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -213,6 +223,7 @@ public class FileAwarePackageImpl extends EPackageImpl implements FileAwarePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FileAwareFactory getFileAwareFactory()
   {
     return (FileAwareFactory)getEFactoryInstance();

@@ -25,10 +25,6 @@ public interface C1 extends TrickyC
   /**
    * Returns the value of the '<em><b>X</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X</em>' containment reference.
    * @see #setX(TrickyC)

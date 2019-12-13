@@ -72,6 +72,7 @@ public class NestedImpl extends MinimalEObjectImpl.Container implements Nested
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SomeContainer> getNested()
   {
     if (nested == null)

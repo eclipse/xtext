@@ -76,6 +76,7 @@ public class MultiValueFeatureTestLanguageFactoryImpl extends EFactoryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Start createStart()
   {
     StartImpl start = new StartImpl();
@@ -87,6 +88,7 @@ public class MultiValueFeatureTestLanguageFactoryImpl extends EFactoryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiValueFeatureTestLanguagePackage getMultiValueFeatureTestLanguagePackage()
   {
     return (MultiValueFeatureTestLanguagePackage)getEPackage();

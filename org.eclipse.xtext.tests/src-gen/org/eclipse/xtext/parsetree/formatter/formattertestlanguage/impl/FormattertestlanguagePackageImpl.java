@@ -212,7 +212,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FormattertestlanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -227,7 +227,8 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     if (isInited) return (FormattertestlanguagePackage)EPackage.Registry.INSTANCE.getEPackage(FormattertestlanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = (FormattertestlanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FormattertestlanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FormattertestlanguagePackageImpl());
+    Object registeredFormattertestlanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = registeredFormattertestlanguagePackage instanceof FormattertestlanguagePackageImpl ? (FormattertestlanguagePackageImpl)registeredFormattertestlanguagePackage : new FormattertestlanguagePackageImpl();
 
     isInited = true;
 
@@ -243,7 +244,6 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     // Mark meta-data to indicate it can't be changed
     theFormattertestlanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FormattertestlanguagePackage.eNS_URI, theFormattertestlanguagePackage);
     return theFormattertestlanguagePackage;
@@ -254,6 +254,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -264,6 +265,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLine()
   {
     return lineEClass;
@@ -274,6 +276,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDecl()
   {
     return declEClass;
@@ -284,6 +287,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDecl_Type()
   {
     return (EAttribute)declEClass.getEStructuralFeatures().get(0);
@@ -294,6 +298,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDecl_Name()
   {
     return (EAttribute)declEClass.getEStructuralFeatures().get(1);
@@ -304,6 +309,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssign()
   {
     return assignEClass;
@@ -314,6 +320,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssign_Var()
   {
     return (EAttribute)assignEClass.getEStructuralFeatures().get(0);
@@ -324,6 +331,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssign_Op()
   {
     return (EAttribute)assignEClass.getEStructuralFeatures().get(1);
@@ -334,6 +342,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssign_Val()
   {
     return (EAttribute)assignEClass.getEStructuralFeatures().get(2);
@@ -344,6 +353,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMeth()
   {
     return methEClass;
@@ -354,6 +364,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMeth_Name()
   {
     return (EAttribute)methEClass.getEStructuralFeatures().get(0);
@@ -364,6 +375,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMeth_Param()
   {
     return (EReference)methEClass.getEStructuralFeatures().get(1);
@@ -374,6 +386,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParam()
   {
     return paramEClass;
@@ -384,6 +397,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParam_Name()
   {
     return (EAttribute)paramEClass.getEStructuralFeatures().get(0);
@@ -394,6 +408,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParam_Type()
   {
     return (EAttribute)paramEClass.getEStructuralFeatures().get(1);
@@ -404,6 +419,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSpace()
   {
     return spaceEClass;
@@ -414,6 +430,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSpace_Val()
   {
     return (EAttribute)spaceEClass.getEStructuralFeatures().get(0);
@@ -424,6 +441,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestLinewrap()
   {
     return testLinewrapEClass;
@@ -434,6 +452,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTestLinewrap_Items()
   {
     return (EReference)testLinewrapEClass.getEStructuralFeatures().get(0);
@@ -444,6 +463,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestLinewrapMinMax()
   {
     return testLinewrapMinMaxEClass;
@@ -454,6 +474,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTestLinewrapMinMax_Items()
   {
     return (EReference)testLinewrapMinMaxEClass.getEStructuralFeatures().get(0);
@@ -464,6 +485,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTestIndentation()
   {
     return testIndentationEClass;
@@ -474,6 +496,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTestIndentation_Items()
   {
     return (EReference)testIndentationEClass.getEStructuralFeatures().get(0);
@@ -484,6 +507,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTestIndentation_Semi()
   {
     return (EAttribute)testIndentationEClass.getEStructuralFeatures().get(1);
@@ -494,6 +518,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFqnObj()
   {
     return fqnObjEClass;
@@ -504,6 +529,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFqnObj_Name()
   {
     return (EAttribute)fqnObjEClass.getEStructuralFeatures().get(0);
@@ -514,6 +540,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFqnRef()
   {
     return fqnRefEClass;
@@ -524,6 +551,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFqnRef_Ref()
   {
     return (EReference)fqnRefEClass.getEStructuralFeatures().get(0);
@@ -534,6 +562,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumeration()
   {
     return enumerationEClass;
@@ -544,6 +573,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEnumeration_Val()
   {
     return (EAttribute)enumerationEClass.getEStructuralFeatures().get(0);
@@ -554,6 +584,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSuppressedHidden()
   {
     return suppressedHiddenEClass;
@@ -564,6 +595,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSuppressedHidden_Vals()
   {
     return (EReference)suppressedHiddenEClass.getEStructuralFeatures().get(0);
@@ -574,6 +606,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSuppressedHiddenSub()
   {
     return suppressedHiddenSubEClass;
@@ -584,6 +617,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSuppressedHiddenSub_Idval()
   {
     return (EAttribute)suppressedHiddenSubEClass.getEStructuralFeatures().get(0);
@@ -594,6 +628,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSuppressedHiddenSubSub()
   {
     return suppressedHiddenSubSubEClass;
@@ -604,6 +639,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSuppressedHiddenSubID()
   {
     return suppressedHiddenSubIDEClass;
@@ -614,6 +650,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDatatypes()
   {
     return datatypesEClass;
@@ -624,6 +661,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDatatypes_Val1()
   {
     return (EAttribute)datatypesEClass.getEStructuralFeatures().get(0);
@@ -634,6 +672,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDatatypes_Val2()
   {
     return (EAttribute)datatypesEClass.getEStructuralFeatures().get(1);
@@ -644,6 +683,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDatatypes_Val3()
   {
     return (EAttribute)datatypesEClass.getEStructuralFeatures().get(2);
@@ -654,6 +694,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWrappingDataTypeTest()
   {
     return wrappingDataTypeTestEClass;
@@ -664,6 +705,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getWrappingDataTypeTest_Datatype()
   {
     return (EAttribute)wrappingDataTypeTestEClass.getEStructuralFeatures().get(0);
@@ -674,6 +716,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getEnum1()
   {
     return enum1EEnum;
@@ -684,6 +727,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FormattertestlanguageFactory getFormattertestlanguageFactory()
   {
     return (FormattertestlanguageFactory)getEFactoryInstance();
