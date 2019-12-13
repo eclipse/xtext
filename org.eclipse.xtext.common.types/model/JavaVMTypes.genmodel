@@ -7,7 +7,7 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" rootImplementsInterface=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" suppressGenModelAnnotations="false"
     copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit" editorPluginID="org.eclipse.xtext.types.editor"
-    runtimeVersion="2.9" interfaceNamePattern="" classNamePattern="">
+    runtimeVersion="2.20" interfaceNamePattern="" classNamePattern="">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.eclipse.xtext.common" disposableProviderFactory="true"
       ecorePackage="JavaVMTypes.ecore#/">
