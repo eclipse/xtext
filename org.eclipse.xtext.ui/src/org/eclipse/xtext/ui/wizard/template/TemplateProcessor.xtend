@@ -86,7 +86,17 @@ abstract class TemplateProcessor extends AbstractClassProcessor {
 	private def generateMessagesClass(String propertyContents, ClassDeclaration annotatedClass,
 		extension CodeGenerationContext context) {
 		val classFile = annotatedClass.compilationUnit.filePath.parent.append("Messages.java")
-		var contents = '''
+		var contents = ""
+		if (classFile.exists) {
+			val oldContents = classFile.contents.toString
+			if (oldContents.trim.startsWith("/*") && oldContents.contains("*/") &&
+				oldContents.length > oldContents.indexOf("*/") + 2) {
+				contents += oldContents.substring(0, oldContents.indexOf("*/") + 2) + System.lineSeparator
+			}
+		} else {
+			contents += annotatedClass.compilationUnit.docComment + System.lineSeparator
+		}
+		contents += '''
 			package «annotatedClass.compilationUnit.packageName»;
 			
 			import org.eclipse.osgi.util.NLS;
