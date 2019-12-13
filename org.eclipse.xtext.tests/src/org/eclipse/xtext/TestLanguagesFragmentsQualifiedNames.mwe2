@@ -13,7 +13,7 @@ var genModel = ""
 var classSplitting = true
 var skipGenerate = false
 var backtrack = false
-var emfRuntimeVersion = "2.9"
+var emfRuntimeVersion = "2.20"
 
 CompositeGeneratorFragment2 {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
