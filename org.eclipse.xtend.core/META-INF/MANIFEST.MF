@@ -63,7 +63,7 @@ Export-Package: org.eclipse.xtend.core;x-friends:="org.eclipse.xtend.ide.common,
  org.eclipse.xtend.core.xtend.impl;x-internal:=true,
  org.eclipse.xtend.core.xtend.util;x-internal:=true
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.13.0",
- org.eclipse.emf.ecore;bundle-version="2.10.2";visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="2.20.0";visibility:=reexport,
  org.eclipse.xtext.common.types;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext,
