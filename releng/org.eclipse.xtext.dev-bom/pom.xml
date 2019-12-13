@@ -90,12 +90,12 @@
 		<core.jobs-version>3.10.600</core.jobs-version>
 		<core.resources-version>3.13.600</core.resources-version>
 		<core.runtime-version>3.17.0</core.runtime-version>
-		<emf.common-version>2.12.0</emf.common-version>
-		<emf.ecore-version>2.12.0</emf.ecore-version>
-		<emf.ecore.change-version>2.11.0</emf.ecore.change-version>
-		<emf.ecore.xmi-version>2.12.0</emf.ecore.xmi-version>
-		<emf.codegen-ecore-version>2.12.0</emf.codegen-ecore-version>
-		<emf.codegen-version>2.11.0</emf.codegen-version>
+		<emf.common-version>2.17.0</emf.common-version>
+		<emf.ecore-version>2.20.0</emf.ecore-version>
+		<emf.ecore.change-version>2.14.0</emf.ecore.change-version>
+		<emf.ecore.xmi-version>2.16.0</emf.ecore.xmi-version>
+		<emf.codegen-ecore-version>2.20.0</emf.codegen-ecore-version>
+		<emf.codegen-version>2.19.0</emf.codegen-version>
 		<emf.mwe-version>1.5.1</emf.mwe-version>
 		<emf.mwe2-version>2.11.1</emf.mwe2-version>
 		<equinox.app-version>1.4.300</equinox.app-version>
