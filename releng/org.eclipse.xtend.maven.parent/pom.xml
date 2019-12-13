@@ -26,7 +26,7 @@
 		  and also to deploy the artifacts produced in this build.
 		 -->
 		<gradleMavenRepo>file:${root-dir}/build/maven-repository</gradleMavenRepo>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>emf220Update</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
