@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.builder/emf-gen" modelPluginID="org.eclipse.xtext.builder"
     modelName="Trace" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.10">
+    runtimeVersion="2.20">
   <foreignModel>Trace.ecore</foreignModel>
   <genPackages prefix="Trace" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
       ecorePackage="Trace.ecore#/">

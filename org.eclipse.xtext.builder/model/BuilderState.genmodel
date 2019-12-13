@@ -4,7 +4,7 @@
     editorDirectory="" modelPluginID="org.eclipse.xtext.builder" modelName="BuilderState"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container" testsDirectory=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.10">
+    runtimeVersion="2.20">
   <foreignModel>BuilderState.ecore</foreignModel>
   <genPackages prefix="BuilderState" basePackage="org.eclipse.xtext.builder" disposableProviderFactory="true"
       ecorePackage="BuilderState.ecore#/">
