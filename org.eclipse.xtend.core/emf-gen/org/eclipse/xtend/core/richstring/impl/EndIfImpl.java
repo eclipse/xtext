@@ -69,6 +69,7 @@ public class EndIfImpl extends LinePartImpl implements EndIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IfConditionStart getIfConditionStart()
 	{
 		if (ifConditionStart != null && ifConditionStart.eIsProxy())
@@ -99,6 +100,7 @@ public class EndIfImpl extends LinePartImpl implements EndIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfConditionStart(IfConditionStart newIfConditionStart)
 	{
 		IfConditionStart oldIfConditionStart = ifConditionStart;

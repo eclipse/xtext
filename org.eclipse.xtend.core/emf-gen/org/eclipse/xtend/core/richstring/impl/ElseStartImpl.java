@@ -70,6 +70,7 @@ public class ElseStartImpl extends LinePartImpl implements ElseStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IfConditionStart getIfConditionStart()
 	{
 		if (ifConditionStart != null && ifConditionStart.eIsProxy())
@@ -117,6 +118,7 @@ public class ElseStartImpl extends LinePartImpl implements ElseStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfConditionStart(IfConditionStart newIfConditionStart)
 	{
 		if (newIfConditionStart != ifConditionStart)

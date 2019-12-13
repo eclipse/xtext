@@ -33,10 +33,6 @@ public interface XtendParameter extends XtendAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -59,10 +55,6 @@ public interface XtendParameter extends XtendAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Parameter Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parameter Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #setParameterType(JvmTypeReference)
@@ -85,10 +77,6 @@ public interface XtendParameter extends XtendAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Var Arg</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Var Arg</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Var Arg</em>' attribute.
 	 * @see #setVarArg(boolean)
@@ -111,10 +99,6 @@ public interface XtendParameter extends XtendAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Extension</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Extension</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension</em>' attribute.
 	 * @see #setExtension(boolean)

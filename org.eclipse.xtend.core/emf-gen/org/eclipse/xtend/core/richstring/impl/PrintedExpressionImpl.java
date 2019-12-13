@@ -70,6 +70,7 @@ public class PrintedExpressionImpl extends LinePartImpl implements PrintedExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		if (expression != null && expression.eIsProxy())
@@ -100,6 +101,7 @@ public class PrintedExpressionImpl extends LinePartImpl implements PrintedExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		XExpression oldExpression = expression;

@@ -246,7 +246,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link XtendPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -261,11 +261,13 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		if (isInited) return (XtendPackage)EPackage.Registry.INSTANCE.getEPackage(XtendPackage.eNS_URI);
 
 		// Obtain or create and register package
-		XtendPackageImpl theXtendPackage = (XtendPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XtendPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XtendPackageImpl());
+		Object registeredXtendPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		XtendPackageImpl theXtendPackage = registeredXtendPackage instanceof XtendPackageImpl ? (XtendPackageImpl)registeredXtendPackage : new XtendPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
+		TypesPackage.eINSTANCE.eClass();
 		XAnnotationsPackage.eINSTANCE.eClass();
 		XbasePackage.eINSTANCE.eClass();
 		XtypePackage.eINSTANCE.eClass();
@@ -279,7 +281,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		// Mark meta-data to indicate it can't be changed
 		theXtendPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(XtendPackage.eNS_URI, theXtendPackage);
 		return theXtendPackage;
@@ -290,6 +291,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendFile()
 	{
 		return xtendFileEClass;
@@ -300,6 +302,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendFile_ImportSection()
 	{
 		return (EReference)xtendFileEClass.getEStructuralFeatures().get(0);
@@ -310,6 +313,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendFile_XtendTypes()
 	{
 		return (EReference)xtendFileEClass.getEStructuralFeatures().get(1);
@@ -320,6 +324,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendFile_Package()
 	{
 		return (EAttribute)xtendFileEClass.getEStructuralFeatures().get(2);
@@ -330,6 +335,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendClass()
 	{
 		return xtendClassEClass;
@@ -340,6 +346,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendClass_Extends()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(0);
@@ -350,6 +357,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendClass_Implements()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(1);
@@ -360,6 +368,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendClass_TypeParameters()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(2);
@@ -370,6 +379,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendAnnotationTarget()
 	{
 		return xtendAnnotationTargetEClass;
@@ -380,6 +390,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendAnnotationTarget_Annotations()
 	{
 		return (EReference)xtendAnnotationTargetEClass.getEStructuralFeatures().get(0);
@@ -390,6 +401,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendMember()
 	{
 		return xtendMemberEClass;
@@ -400,6 +412,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendMember_AnnotationInfo()
 	{
 		return (EReference)xtendMemberEClass.getEStructuralFeatures().get(0);
@@ -410,6 +423,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendMember_Modifiers()
 	{
 		return (EAttribute)xtendMemberEClass.getEStructuralFeatures().get(1);
@@ -420,6 +434,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendMember_DeclaringType()
 	{
 		return (EReference)xtendMemberEClass.getEStructuralFeatures().get(2);
@@ -430,6 +445,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendFunction()
 	{
 		return xtendFunctionEClass;
@@ -440,6 +456,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendFunction_Name()
 	{
 		return (EAttribute)xtendFunctionEClass.getEStructuralFeatures().get(0);
@@ -450,6 +467,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendFunction_ReturnType()
 	{
 		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(1);
@@ -460,6 +478,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendFunction_CreateExtensionInfo()
 	{
 		return (EReference)xtendFunctionEClass.getEStructuralFeatures().get(2);
@@ -470,6 +489,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendField()
 	{
 		return xtendFieldEClass;
@@ -480,6 +500,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendField_Name()
 	{
 		return (EAttribute)xtendFieldEClass.getEStructuralFeatures().get(0);
@@ -490,6 +511,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendField_Type()
 	{
 		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(1);
@@ -500,6 +522,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendField_InitialValue()
 	{
 		return (EReference)xtendFieldEClass.getEStructuralFeatures().get(2);
@@ -510,6 +533,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendParameter()
 	{
 		return xtendParameterEClass;
@@ -520,6 +544,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendParameter_Name()
 	{
 		return (EAttribute)xtendParameterEClass.getEStructuralFeatures().get(0);
@@ -530,6 +555,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendParameter_ParameterType()
 	{
 		return (EReference)xtendParameterEClass.getEStructuralFeatures().get(1);
@@ -540,6 +566,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendParameter_VarArg()
 	{
 		return (EAttribute)xtendParameterEClass.getEStructuralFeatures().get(2);
@@ -550,6 +577,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendParameter_Extension()
 	{
 		return (EAttribute)xtendParameterEClass.getEStructuralFeatures().get(3);
@@ -560,6 +588,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRichString()
 	{
 		return richStringEClass;
@@ -570,6 +599,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRichStringLiteral()
 	{
 		return richStringLiteralEClass;
@@ -580,6 +610,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRichStringForLoop()
 	{
 		return richStringForLoopEClass;
@@ -590,6 +621,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringForLoop_Separator()
 	{
 		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(0);
@@ -600,6 +632,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringForLoop_Before()
 	{
 		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(1);
@@ -610,6 +643,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringForLoop_After()
 	{
 		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(2);
@@ -620,6 +654,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRichStringIf()
 	{
 		return richStringIfEClass;
@@ -630,6 +665,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringIf_If()
 	{
 		return (EReference)richStringIfEClass.getEStructuralFeatures().get(0);
@@ -640,6 +676,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringIf_Then()
 	{
 		return (EReference)richStringIfEClass.getEStructuralFeatures().get(1);
@@ -650,6 +687,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringIf_ElseIfs()
 	{
 		return (EReference)richStringIfEClass.getEStructuralFeatures().get(2);
@@ -660,6 +698,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringIf_Else()
 	{
 		return (EReference)richStringIfEClass.getEStructuralFeatures().get(3);
@@ -670,6 +709,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRichStringElseIf()
 	{
 		return richStringElseIfEClass;
@@ -680,6 +720,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringElseIf_If()
 	{
 		return (EReference)richStringElseIfEClass.getEStructuralFeatures().get(0);
@@ -690,6 +731,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRichStringElseIf_Then()
 	{
 		return (EReference)richStringElseIfEClass.getEStructuralFeatures().get(1);
@@ -700,6 +742,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCreateExtensionInfo()
 	{
 		return createExtensionInfoEClass;
@@ -710,6 +753,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCreateExtensionInfo_CreateExpression()
 	{
 		return (EReference)createExtensionInfoEClass.getEStructuralFeatures().get(0);
@@ -720,6 +764,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCreateExtensionInfo_Name()
 	{
 		return (EAttribute)createExtensionInfoEClass.getEStructuralFeatures().get(1);
@@ -730,6 +775,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendConstructor()
 	{
 		return xtendConstructorEClass;
@@ -740,6 +786,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendTypeDeclaration()
 	{
 		return xtendTypeDeclarationEClass;
@@ -750,6 +797,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendTypeDeclaration_Name()
 	{
 		return (EAttribute)xtendTypeDeclarationEClass.getEStructuralFeatures().get(0);
@@ -760,6 +808,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendTypeDeclaration_Members()
 	{
 		return (EReference)xtendTypeDeclarationEClass.getEStructuralFeatures().get(1);
@@ -770,6 +819,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendAnnotationType()
 	{
 		return xtendAnnotationTypeEClass;
@@ -780,6 +830,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendInterface()
 	{
 		return xtendInterfaceEClass;
@@ -790,6 +841,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendInterface_Extends()
 	{
 		return (EReference)xtendInterfaceEClass.getEStructuralFeatures().get(0);
@@ -800,6 +852,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendInterface_TypeParameters()
 	{
 		return (EReference)xtendInterfaceEClass.getEStructuralFeatures().get(1);
@@ -810,6 +863,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendEnum()
 	{
 		return xtendEnumEClass;
@@ -820,6 +874,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendEnumLiteral()
 	{
 		return xtendEnumLiteralEClass;
@@ -830,6 +885,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendEnumLiteral_Name()
 	{
 		return (EAttribute)xtendEnumLiteralEClass.getEStructuralFeatures().get(0);
@@ -840,6 +896,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendVariableDeclaration()
 	{
 		return xtendVariableDeclarationEClass;
@@ -850,6 +907,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendVariableDeclaration_Extension()
 	{
 		return (EAttribute)xtendVariableDeclarationEClass.getEStructuralFeatures().get(0);
@@ -860,6 +918,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendFormalParameter()
 	{
 		return xtendFormalParameterEClass;
@@ -870,6 +929,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXtendFormalParameter_Extension()
 	{
 		return (EAttribute)xtendFormalParameterEClass.getEStructuralFeatures().get(0);
@@ -880,6 +940,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getXtendExecutable()
 	{
 		return xtendExecutableEClass;
@@ -890,6 +951,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendExecutable_Exceptions()
 	{
 		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(0);
@@ -900,6 +962,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendExecutable_TypeParameters()
 	{
 		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(1);
@@ -910,6 +973,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendExecutable_Expression()
 	{
 		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(2);
@@ -920,6 +984,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getXtendExecutable_Parameters()
 	{
 		return (EReference)xtendExecutableEClass.getEStructuralFeatures().get(3);
@@ -930,6 +995,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnonymousClass()
 	{
 		return anonymousClassEClass;
@@ -940,6 +1006,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnonymousClass_ConstructorCall()
 	{
 		return (EReference)anonymousClassEClass.getEStructuralFeatures().get(0);
@@ -950,6 +1017,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendFactory getXtendFactory()
 	{
 		return (XtendFactory)getEFactoryInstance();

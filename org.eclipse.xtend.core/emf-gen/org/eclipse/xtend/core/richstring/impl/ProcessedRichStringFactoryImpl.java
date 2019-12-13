@@ -91,6 +91,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessedRichString createProcessedRichString()
 	{
 		ProcessedRichStringImpl processedRichString = new ProcessedRichStringImpl();
@@ -102,6 +103,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Line createLine()
 	{
 		LineImpl line = new LineImpl();
@@ -113,6 +115,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LinePart createLinePart()
 	{
 		LinePartImpl linePart = new LinePartImpl();
@@ -124,6 +127,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Literal createLiteral()
 	{
 		LiteralImpl literal = new LiteralImpl();
@@ -135,6 +139,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LineBreak createLineBreak()
 	{
 		LineBreakImpl lineBreak = new LineBreakImpl();
@@ -146,6 +151,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForLoopStart createForLoopStart()
 	{
 		ForLoopStartImpl forLoopStart = new ForLoopStartImpl();
@@ -157,6 +163,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForLoopEnd createForLoopEnd()
 	{
 		ForLoopEndImpl forLoopEnd = new ForLoopEndImpl();
@@ -168,6 +175,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrintedExpression createPrintedExpression()
 	{
 		PrintedExpressionImpl printedExpression = new PrintedExpressionImpl();
@@ -179,6 +187,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IfConditionStart createIfConditionStart()
 	{
 		IfConditionStartImpl ifConditionStart = new IfConditionStartImpl();
@@ -190,6 +199,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ElseIfCondition createElseIfCondition()
 	{
 		ElseIfConditionImpl elseIfCondition = new ElseIfConditionImpl();
@@ -201,6 +211,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ElseStart createElseStart()
 	{
 		ElseStartImpl elseStart = new ElseStartImpl();
@@ -212,6 +223,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EndIf createEndIf()
 	{
 		EndIfImpl endIf = new EndIfImpl();
@@ -223,6 +235,7 @@ public class ProcessedRichStringFactoryImpl extends EFactoryImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessedRichStringPackage getProcessedRichStringPackage()
 	{
 		return (ProcessedRichStringPackage)getEPackage();

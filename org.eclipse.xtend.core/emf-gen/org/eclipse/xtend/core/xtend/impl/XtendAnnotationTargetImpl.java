@@ -77,6 +77,7 @@ public abstract class XtendAnnotationTargetImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XAnnotation> getAnnotations()
 	{
 		if (annotations == null)

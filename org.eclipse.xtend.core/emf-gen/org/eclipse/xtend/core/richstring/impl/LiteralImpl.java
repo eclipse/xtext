@@ -112,6 +112,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringLiteral getLiteral()
 	{
 		if (literal != null && literal.eIsProxy())
@@ -142,6 +143,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLiteral(RichStringLiteral newLiteral)
 	{
 		RichStringLiteral oldLiteral = literal;
@@ -155,6 +157,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getOffset()
 	{
 		return offset;
@@ -165,6 +168,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOffset(int newOffset)
 	{
 		int oldOffset = offset;
@@ -178,6 +182,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getLength()
 	{
 		return length;
@@ -188,6 +193,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLength(int newLength)
 	{
 		int oldLength = length;
@@ -293,7 +299,7 @@ public class LiteralImpl extends LinePartImpl implements Literal
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (offset: ");
 		result.append(offset);
 		result.append(", length: ");

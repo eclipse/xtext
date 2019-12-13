@@ -35,10 +35,6 @@ public interface ProcessedRichString extends EObject
 	/**
 	 * Returns the value of the '<em><b>Rich String</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rich String</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rich String</em>' reference.
 	 * @see #setRichString(RichString)
@@ -63,10 +59,6 @@ public interface ProcessedRichString extends EObject
 	 * The list contents are of type {@link org.eclipse.xtend.core.richstring.Line}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.Line#getRichString <em>Rich String</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Lines</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lines</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getProcessedRichString_Lines()

@@ -83,6 +83,7 @@ public class ElseIfConditionImpl extends LinePartImpl implements ElseIfCondition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringElseIf getRichStringElseIf()
 	{
 		if (richStringElseIf != null && richStringElseIf.eIsProxy())
@@ -113,6 +114,7 @@ public class ElseIfConditionImpl extends LinePartImpl implements ElseIfCondition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRichStringElseIf(RichStringElseIf newRichStringElseIf)
 	{
 		RichStringElseIf oldRichStringElseIf = richStringElseIf;
@@ -126,6 +128,7 @@ public class ElseIfConditionImpl extends LinePartImpl implements ElseIfCondition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IfConditionStart getIfConditionStart()
 	{
 		if (ifConditionStart != null && ifConditionStart.eIsProxy())
@@ -173,6 +176,7 @@ public class ElseIfConditionImpl extends LinePartImpl implements ElseIfCondition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfConditionStart(IfConditionStart newIfConditionStart)
 	{
 		if (newIfConditionStart != ifConditionStart)

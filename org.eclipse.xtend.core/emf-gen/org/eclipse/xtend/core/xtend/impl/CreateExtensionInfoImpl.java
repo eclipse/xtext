@@ -93,6 +93,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getCreateExpression()
 	{
 		return createExpression;
@@ -120,6 +121,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreateExpression(XExpression newCreateExpression)
 	{
 		if (newCreateExpression != createExpression)
@@ -141,6 +143,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -151,6 +154,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -261,7 +265,7 @@ public class CreateExtensionInfoImpl extends MinimalEObjectImpl.Container implem
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

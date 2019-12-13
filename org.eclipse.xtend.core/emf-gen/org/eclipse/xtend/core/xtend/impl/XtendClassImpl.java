@@ -101,6 +101,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getExtends()
 	{
 		return extends_;
@@ -128,6 +129,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtends(JvmTypeReference newExtends)
 	{
 		if (newExtends != extends_)
@@ -149,6 +151,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getImplements()
 	{
 		if (implements_ == null)
@@ -163,6 +166,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeParameter> getTypeParameters()
 	{
 		if (typeParameters == null)
@@ -177,6 +181,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAbstract()
 	{
 		// TODO: implement this method
@@ -189,6 +194,7 @@ public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements Xt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStrictFloatingPoint()
 	{
 		// TODO: implement this method

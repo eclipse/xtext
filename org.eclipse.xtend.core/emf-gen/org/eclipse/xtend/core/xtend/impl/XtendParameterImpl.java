@@ -134,6 +134,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -144,6 +145,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -157,6 +159,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getParameterType()
 	{
 		return parameterType;
@@ -184,6 +187,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParameterType(JvmTypeReference newParameterType)
 	{
 		if (newParameterType != parameterType)
@@ -205,6 +209,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVarArg()
 	{
 		return varArg;
@@ -215,6 +220,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVarArg(boolean newVarArg)
 	{
 		boolean oldVarArg = varArg;
@@ -228,6 +234,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExtension()
 	{
 		return extension;
@@ -238,6 +245,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(boolean newExtension)
 	{
 		boolean oldExtension = extension;
@@ -368,7 +376,7 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", varArg: ");

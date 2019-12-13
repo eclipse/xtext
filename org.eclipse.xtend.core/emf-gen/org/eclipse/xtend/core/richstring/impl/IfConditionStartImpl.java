@@ -114,6 +114,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringIf getRichStringIf()
 	{
 		if (richStringIf != null && richStringIf.eIsProxy())
@@ -144,6 +145,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRichStringIf(RichStringIf newRichStringIf)
 	{
 		RichStringIf oldRichStringIf = richStringIf;
@@ -157,6 +159,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ElseStart getElseStart()
 	{
 		if (elseStart != null && elseStart.eIsProxy())
@@ -204,6 +207,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElseStart(ElseStart newElseStart)
 	{
 		if (newElseStart != elseStart)
@@ -225,6 +229,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ElseIfCondition> getElseIfConditions()
 	{
 		if (elseIfConditions == null)
@@ -239,6 +244,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EndIf getEndIf()
 	{
 		if (endIf != null && endIf.eIsProxy())
@@ -269,6 +275,7 @@ public class IfConditionStartImpl extends LinePartImpl implements IfConditionSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEndIf(EndIf newEndIf)
 	{
 		EndIf oldEndIf = endIf;

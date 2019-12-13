@@ -83,6 +83,7 @@ public class RichStringElseIfImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getIf()
 	{
 		return if_;
@@ -110,6 +111,7 @@ public class RichStringElseIfImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIf(XExpression newIf)
 	{
 		if (newIf != if_)
@@ -131,6 +133,7 @@ public class RichStringElseIfImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getThen()
 	{
 		return then;
@@ -158,6 +161,7 @@ public class RichStringElseIfImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThen(XExpression newThen)
 	{
 		if (newThen != then)

@@ -31,10 +31,6 @@ public interface ForLoopStart extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Loop</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Loop</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Loop</em>' reference.
 	 * @see #setLoop(RichStringForLoop)
@@ -58,10 +54,6 @@ public interface ForLoopStart extends LinePart
 	 * Returns the value of the '<em><b>End</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.ForLoopEnd#getStart <em>Start</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End</em>' reference.
 	 * @see #setEnd(ForLoopEnd)

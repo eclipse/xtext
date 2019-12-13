@@ -104,6 +104,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -114,6 +115,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -127,6 +129,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getReturnType()
 	{
 		return returnType;
@@ -154,6 +157,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReturnType(JvmTypeReference newReturnType)
 	{
 		if (newReturnType != returnType)
@@ -175,6 +179,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CreateExtensionInfo getCreateExtensionInfo()
 	{
 		return createExtensionInfo;
@@ -202,6 +207,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreateExtensionInfo(CreateExtensionInfo newCreateExtensionInfo)
 	{
 		if (newCreateExtensionInfo != createExtensionInfo)
@@ -223,6 +229,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAbstract()
 	{
 		// TODO: implement this method
@@ -235,6 +242,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isOverride()
 	{
 		// TODO: implement this method
@@ -247,6 +255,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isDispatch()
 	{
 		// TODO: implement this method
@@ -259,6 +268,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStrictFloatingPoint()
 	{
 		// TODO: implement this method
@@ -271,6 +281,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isNative()
 	{
 		// TODO: implement this method
@@ -283,6 +294,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSynchonized()
 	{
 		// TODO: implement this method
@@ -404,7 +416,7 @@ public class XtendFunctionImpl extends XtendExecutableImpl implements XtendFunct
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

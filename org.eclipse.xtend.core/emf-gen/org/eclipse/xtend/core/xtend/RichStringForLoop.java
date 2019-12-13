@@ -33,10 +33,6 @@ public interface RichStringForLoop extends XForLoopExpression
 	/**
 	 * Returns the value of the '<em><b>Separator</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Separator</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Separator</em>' containment reference.
 	 * @see #setSeparator(XExpression)
@@ -59,10 +55,6 @@ public interface RichStringForLoop extends XForLoopExpression
 	/**
 	 * Returns the value of the '<em><b>Before</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Before</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Before</em>' containment reference.
 	 * @see #setBefore(XExpression)
@@ -85,10 +77,6 @@ public interface RichStringForLoop extends XForLoopExpression
 	/**
 	 * Returns the value of the '<em><b>After</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>After</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>After</em>' containment reference.
 	 * @see #setAfter(XExpression)
