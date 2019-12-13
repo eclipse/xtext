@@ -8,7 +8,7 @@
 		<unit id="org.eclipse.xtend.lib.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.lib.macro.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-lib/job/emf220Update/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -32,7 +32,7 @@
 		<unit id="org.eclipse.xtext.testlanguages.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.tests.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-core/job/emf220Update/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -62,7 +62,7 @@
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.ide" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.ide.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/emf220Update/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
@@ -71,7 +71,6 @@
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.api.tools.ee.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
-		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.xpand" version="0.0.0"/>
 		<unit id="org.eclipse.xtend" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
@@ -80,6 +79,11 @@
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/2019-03"/>
+	</location>
+
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
+		<repository location="https://download.eclipse.org/modeling/emf/emf/builds/release/2.20"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
