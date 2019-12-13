@@ -67,6 +67,7 @@ public class ParametersImpl extends MinimalEObjectImpl.Container implements Para
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getParams()
   {
     if (params == null)
@@ -154,7 +155,7 @@ public class ParametersImpl extends MinimalEObjectImpl.Container implements Para
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (params: ");
     result.append(params);
     result.append(')');

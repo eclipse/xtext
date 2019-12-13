@@ -137,6 +137,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFinal()
   {
     return final_;
@@ -147,6 +148,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
@@ -160,6 +162,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -170,6 +173,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -183,6 +187,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isExtern()
   {
     return extern;
@@ -193,6 +198,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExtern(boolean newExtern)
   {
     boolean oldExtern = extern;
@@ -206,6 +212,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Visibility getVisibility()
   {
     return visibility;
@@ -216,6 +223,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVisibility(Visibility newVisibility)
   {
     Visibility oldVisibility = visibility;
@@ -330,7 +338,7 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (final: ");
     result.append(final_);
     result.append(", abstract: ");

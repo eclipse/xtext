@@ -66,6 +66,7 @@ public class ParameterImpl extends PropertyPathPartImpl implements Parameter
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDescription getDescription()
   {
     return description;
@@ -93,6 +94,7 @@ public class ParameterImpl extends PropertyPathPartImpl implements Parameter
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDescription(TypeDescription newDescription)
   {
     if (newDescription != description)

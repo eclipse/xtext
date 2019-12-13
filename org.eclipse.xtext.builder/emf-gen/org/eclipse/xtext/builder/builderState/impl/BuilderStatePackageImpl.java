@@ -119,7 +119,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link BuilderStatePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -133,7 +133,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		if (isInited) return (BuilderStatePackage)EPackage.Registry.INSTANCE.getEPackage(BuilderStatePackage.eNS_URI);
 
 		// Obtain or create and register package
-		BuilderStatePackageImpl theBuilderStatePackage = (BuilderStatePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BuilderStatePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BuilderStatePackageImpl());
+		Object registeredBuilderStatePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		BuilderStatePackageImpl theBuilderStatePackage = registeredBuilderStatePackage instanceof BuilderStatePackageImpl ? (BuilderStatePackageImpl)registeredBuilderStatePackage : new BuilderStatePackageImpl();
 
 		isInited = true;
 
@@ -146,7 +147,6 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		// Mark meta-data to indicate it can't be changed
 		theBuilderStatePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(BuilderStatePackage.eNS_URI, theBuilderStatePackage);
 		return theBuilderStatePackage;
@@ -157,6 +157,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResourceDescription() {
 		return resourceDescriptionEClass;
 	}
@@ -166,6 +167,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResourceDescription_URI() {
 		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -175,6 +177,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceDescription_ExportedObjects() {
 		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(1);
 	}
@@ -184,6 +187,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getResourceDescription_ReferenceDescriptions() {
 		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(2);
 	}
@@ -193,6 +197,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getResourceDescription_ImportedNames() {
 		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(3);
 	}
@@ -202,6 +207,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEObjectDescription() {
 		return eObjectDescriptionEClass;
 	}
@@ -211,6 +217,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEObjectDescription_Fragment() {
 		return (EAttribute)eObjectDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -220,6 +227,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEObjectDescription_UserData() {
 		return (EReference)eObjectDescriptionEClass.getEStructuralFeatures().get(1);
 	}
@@ -229,6 +237,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUserDataEntry() {
 		return userDataEntryEClass;
 	}
@@ -238,6 +247,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUserDataEntry_Key() {
 		return (EAttribute)userDataEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -247,6 +257,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUserDataEntry_Value() {
 		return (EAttribute)userDataEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -256,6 +267,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReferenceDescription() {
 		return referenceDescriptionEClass;
 	}
@@ -265,6 +277,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getReferenceDescription_ExternalFormOfEReference() {
 		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -274,6 +287,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIEObjectDescription() {
 		return ieObjectDescriptionEClass;
 	}
@@ -283,6 +297,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIEObjectDescription_EClass() {
 		return (EReference)ieObjectDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -292,6 +307,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIEObjectDescription_Name() {
 		return (EAttribute)ieObjectDescriptionEClass.getEStructuralFeatures().get(1);
 	}
@@ -301,6 +317,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIReferenceDescription() {
 		return iReferenceDescriptionEClass;
 	}
@@ -310,6 +327,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIReferenceDescription_SourceEObjectUri() {
 		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(0);
 	}
@@ -319,6 +337,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIReferenceDescription_TargetEObjectUri() {
 		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(1);
 	}
@@ -328,6 +347,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIReferenceDescription_IndexInList() {
 		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(2);
 	}
@@ -337,6 +357,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIReferenceDescription_ContainerEObjectURI() {
 		return (EAttribute)iReferenceDescriptionEClass.getEStructuralFeatures().get(3);
 	}
@@ -346,6 +367,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEURI() {
 		return euriEDataType;
 	}
@@ -355,6 +377,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEStringArray() {
 		return eStringArrayEDataType;
 	}
@@ -364,6 +387,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getQualifiedName() {
 		return qualifiedNameEDataType;
 	}
@@ -373,6 +397,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BuilderStateFactory getBuilderStateFactory() {
 		return (BuilderStateFactory)getEFactoryInstance();
 	}

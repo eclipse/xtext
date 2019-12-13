@@ -77,6 +77,7 @@ public class ParametersTestLanguageFactoryImpl extends EFactoryImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParserRuleParameters createParserRuleParameters()
   {
     ParserRuleParametersImpl parserRuleParameters = new ParserRuleParametersImpl();
@@ -88,6 +89,7 @@ public class ParametersTestLanguageFactoryImpl extends EFactoryImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Scenario createScenario()
   {
     ScenarioImpl scenario = new ScenarioImpl();
@@ -99,6 +101,7 @@ public class ParametersTestLanguageFactoryImpl extends EFactoryImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParametersTestLanguagePackage getParametersTestLanguagePackage()
   {
     return (ParametersTestLanguagePackage)getEPackage();

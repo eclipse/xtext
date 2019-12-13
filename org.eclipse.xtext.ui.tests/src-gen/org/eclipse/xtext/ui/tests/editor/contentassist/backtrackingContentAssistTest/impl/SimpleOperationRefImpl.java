@@ -73,6 +73,7 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOperation()
   {
     return operation;
@@ -83,6 +84,7 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperation(String newOperation)
   {
     String oldOperation = operation;
@@ -167,7 +169,7 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operation: ");
     result.append(operation);
     result.append(')');

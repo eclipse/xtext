@@ -77,6 +77,7 @@ public class ObjectReferenceImpl extends ExpressionImpl implements ObjectReferen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PropertyPathPart getObject()
   {
     if (object != null && object.eIsProxy())
@@ -107,6 +108,7 @@ public class ObjectReferenceImpl extends ExpressionImpl implements ObjectReferen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setObject(PropertyPathPart newObject)
   {
     PropertyPathPart oldObject = object;
@@ -120,6 +122,7 @@ public class ObjectReferenceImpl extends ExpressionImpl implements ObjectReferen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ObjectReference getTail()
   {
     return tail;
@@ -147,6 +150,7 @@ public class ObjectReferenceImpl extends ExpressionImpl implements ObjectReferen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTail(ObjectReference newTail)
   {
     if (newTail != tail)

@@ -115,6 +115,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -126,6 +127,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Scenario1 createScenario1()
   {
     Scenario1Impl scenario1 = new Scenario1Impl();
@@ -137,6 +139,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child1 createChild1()
   {
     Child1Impl child1 = new Child1Impl();
@@ -148,6 +151,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Scenario2 createScenario2()
   {
     Scenario2Impl scenario2 = new Scenario2Impl();
@@ -159,6 +163,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child2 createChild2()
   {
     Child2Impl child2 = new Child2Impl();
@@ -192,6 +197,7 @@ public class Bug348427TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug348427TestLanguagePackage getBug348427TestLanguagePackage()
   {
     return (Bug348427TestLanguagePackage)getEPackage();

@@ -74,6 +74,7 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumericOperator getOperator()
   {
     return operator;
@@ -84,6 +85,7 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
@@ -168,7 +170,7 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(')');

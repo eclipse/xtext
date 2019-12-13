@@ -27,7 +27,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
@@ -168,7 +167,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ArithmeticsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -183,7 +182,8 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     if (isInited) return (ArithmeticsPackage)EPackage.Registry.INSTANCE.getEPackage(ArithmeticsPackage.eNS_URI);
 
     // Obtain or create and register package
-    ArithmeticsPackageImpl theArithmeticsPackage = (ArithmeticsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ArithmeticsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ArithmeticsPackageImpl());
+    Object registeredArithmeticsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ArithmeticsPackageImpl theArithmeticsPackage = registeredArithmeticsPackage instanceof ArithmeticsPackageImpl ? (ArithmeticsPackageImpl)registeredArithmeticsPackage : new ArithmeticsPackageImpl();
 
     isInited = true;
 
@@ -196,7 +196,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     // Mark meta-data to indicate it can't be changed
     theArithmeticsPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ArithmeticsPackage.eNS_URI, theArithmeticsPackage);
     return theArithmeticsPackage;
@@ -207,6 +206,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModule()
   {
     return moduleEClass;
@@ -217,6 +217,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModule_Name()
   {
     return (EAttribute)moduleEClass.getEStructuralFeatures().get(0);
@@ -227,6 +228,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModule_Imports()
   {
     return (EReference)moduleEClass.getEStructuralFeatures().get(1);
@@ -237,6 +239,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModule_Statements()
   {
     return (EReference)moduleEClass.getEStructuralFeatures().get(2);
@@ -247,6 +250,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -257,6 +261,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getImport_Module()
   {
     return (EReference)importEClass.getEStructuralFeatures().get(0);
@@ -267,6 +272,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStatement()
   {
     return statementEClass;
@@ -277,6 +283,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDefinition()
   {
     return definitionEClass;
@@ -287,6 +294,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDefinition_Args()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(0);
@@ -297,6 +305,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDefinition_Expr()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(1);
@@ -307,6 +316,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDeclaredParameter()
   {
     return declaredParameterEClass;
@@ -317,6 +327,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractDefinition()
   {
     return abstractDefinitionEClass;
@@ -327,6 +338,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractDefinition_Name()
   {
     return (EAttribute)abstractDefinitionEClass.getEStructuralFeatures().get(0);
@@ -337,6 +349,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEvaluation()
   {
     return evaluationEClass;
@@ -347,6 +360,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEvaluation_Expression()
   {
     return (EReference)evaluationEClass.getEStructuralFeatures().get(0);
@@ -357,6 +371,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -367,6 +382,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPlus()
   {
     return plusEClass;
@@ -377,6 +393,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPlus_Left()
   {
     return (EReference)plusEClass.getEStructuralFeatures().get(0);
@@ -387,6 +404,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPlus_Right()
   {
     return (EReference)plusEClass.getEStructuralFeatures().get(1);
@@ -397,6 +415,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMinus()
   {
     return minusEClass;
@@ -407,6 +426,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMinus_Left()
   {
     return (EReference)minusEClass.getEStructuralFeatures().get(0);
@@ -417,6 +437,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMinus_Right()
   {
     return (EReference)minusEClass.getEStructuralFeatures().get(1);
@@ -427,6 +448,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMulti()
   {
     return multiEClass;
@@ -437,6 +459,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMulti_Left()
   {
     return (EReference)multiEClass.getEStructuralFeatures().get(0);
@@ -447,6 +470,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMulti_Right()
   {
     return (EReference)multiEClass.getEStructuralFeatures().get(1);
@@ -457,6 +481,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDiv()
   {
     return divEClass;
@@ -467,6 +492,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDiv_Left()
   {
     return (EReference)divEClass.getEStructuralFeatures().get(0);
@@ -477,6 +503,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDiv_Right()
   {
     return (EReference)divEClass.getEStructuralFeatures().get(1);
@@ -487,6 +514,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
@@ -497,6 +525,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNumberLiteral_Value()
   {
     return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(0);
@@ -507,6 +536,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFunctionCall()
   {
     return functionCallEClass;
@@ -517,6 +547,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFunctionCall_Func()
   {
     return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
@@ -527,6 +558,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFunctionCall_Args()
   {
     return (EReference)functionCallEClass.getEStructuralFeatures().get(1);
@@ -537,6 +569,7 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ArithmeticsFactory getArithmeticsFactory()
   {
     return (ArithmeticsFactory)getEFactoryInstance();
@@ -651,10 +684,10 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     functionCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(moduleEClass, Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModule_Imports(), this.getImport(), null, "imports", null, 0, -1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(moduleEClass, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getModule_Name(), ecorePackage.getEString(), "name", null, 0, 1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModule_Imports(), this.getImport(), null, "imports", null, 0, -1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, org.eclipse.xtext.example.arithmetics.arithmetics.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImport_Module(), this.getModule(), null, "module", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

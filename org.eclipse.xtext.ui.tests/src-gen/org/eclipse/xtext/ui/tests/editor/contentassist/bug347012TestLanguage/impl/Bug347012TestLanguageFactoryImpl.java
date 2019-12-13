@@ -85,6 +85,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyProgram createMyProgram()
   {
     MyProgramImpl myProgram = new MyProgramImpl();
@@ -96,6 +97,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Identifier createIdentifier()
   {
     IdentifierImpl identifier = new IdentifierImpl();
@@ -107,6 +109,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -118,6 +121,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyPrimary createMyPrimary()
   {
     MyPrimaryImpl myPrimary = new MyPrimaryImpl();
@@ -129,6 +133,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyPackage createMyPackage()
   {
     MyPackageImpl myPackage = new MyPackageImpl();
@@ -140,6 +145,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyClass createMyClass()
   {
     MyClassImpl myClass = new MyClassImpl();
@@ -151,6 +157,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyAttribute createMyAttribute()
   {
     MyAttributeImpl myAttribute = new MyAttributeImpl();
@@ -162,6 +169,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyAttributes createMyAttributes()
   {
     MyAttributesImpl myAttributes = new MyAttributesImpl();
@@ -173,6 +181,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyField createMyField()
   {
     MyFieldImpl myField = new MyFieldImpl();
@@ -184,6 +193,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyBinding createMyBinding()
   {
     MyBindingImpl myBinding = new MyBindingImpl();
@@ -195,6 +205,7 @@ public class Bug347012TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug347012TestLanguagePackage getBug347012TestLanguagePackage()
   {
     return (Bug347012TestLanguagePackage)getEPackage();

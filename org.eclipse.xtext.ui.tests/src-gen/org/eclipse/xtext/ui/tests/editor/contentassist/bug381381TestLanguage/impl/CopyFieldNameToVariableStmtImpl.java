@@ -116,6 +116,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getLine()
   {
     return line;
@@ -126,6 +127,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLine(int newLine)
   {
     int oldLine = line;
@@ -139,6 +141,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getColumn()
   {
     return column;
@@ -149,6 +152,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setColumn(int newColumn)
   {
     int oldColumn = column;
@@ -162,6 +166,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -172,6 +177,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -276,7 +282,7 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (line: ");
     result.append(line);
     result.append(", column: ");

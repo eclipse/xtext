@@ -82,7 +82,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BracketmatchingPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
     if (isInited) return (BracketmatchingPackage)EPackage.Registry.INSTANCE.getEPackage(BracketmatchingPackage.eNS_URI);
 
     // Obtain or create and register package
-    BracketmatchingPackageImpl theBracketmatchingPackage = (BracketmatchingPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BracketmatchingPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BracketmatchingPackageImpl());
+    Object registeredBracketmatchingPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BracketmatchingPackageImpl theBracketmatchingPackage = registeredBracketmatchingPackage instanceof BracketmatchingPackageImpl ? (BracketmatchingPackageImpl)registeredBracketmatchingPackage : new BracketmatchingPackageImpl();
 
     isInited = true;
 
@@ -110,7 +111,6 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
     // Mark meta-data to indicate it can't be changed
     theBracketmatchingPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BracketmatchingPackage.eNS_URI, theBracketmatchingPackage);
     return theBracketmatchingPackage;
@@ -121,6 +121,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFile()
   {
     return fileEClass;
@@ -131,6 +132,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFile_Expression()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
@@ -141,6 +143,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -151,6 +154,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSExpression()
   {
     return sExpressionEClass;
@@ -161,6 +165,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSExpression_Element()
   {
     return (EReference)sExpressionEClass.getEStructuralFeatures().get(0);
@@ -171,6 +176,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAtom()
   {
     return atomEClass;
@@ -181,6 +187,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAtom_Value()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
@@ -191,6 +198,7 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BracketmatchingFactory getBracketmatchingFactory()
   {
     return (BracketmatchingFactory)getEFactoryInstance();

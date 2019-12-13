@@ -87,6 +87,7 @@ public class PathNameExpImpl extends NameExpImpl implements PathNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getNamespace()
   {
     return namespace;
@@ -97,6 +98,7 @@ public class PathNameExpImpl extends NameExpImpl implements PathNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
@@ -110,6 +112,7 @@ public class PathNameExpImpl extends NameExpImpl implements PathNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NameExp getElement()
   {
     return element;
@@ -137,6 +140,7 @@ public class PathNameExpImpl extends NameExpImpl implements PathNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setElement(NameExp newElement)
   {
     if (newElement != element)
@@ -255,7 +259,7 @@ public class PathNameExpImpl extends NameExpImpl implements PathNameExp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (namespace: ");
     result.append(namespace);
     result.append(')');

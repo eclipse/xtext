@@ -120,6 +120,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     if (type != null && type.eIsProxy())
@@ -150,6 +151,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(EClass newType)
   {
     EClass oldType = type;
@@ -163,6 +165,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isWithoutsubtypes()
   {
     return withoutsubtypes;
@@ -173,6 +176,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWithoutsubtypes(boolean newWithoutsubtypes)
   {
     boolean oldWithoutsubtypes = withoutsubtypes;
@@ -186,6 +190,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAlias()
   {
     return alias;
@@ -196,6 +201,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(String newAlias)
   {
     String oldAlias = alias;
@@ -209,6 +215,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ScopeClause getScopeClause()
   {
     return scopeClause;
@@ -236,6 +243,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setScopeClause(ScopeClause newScopeClause)
   {
     if (newScopeClause != scopeClause)
@@ -375,7 +383,7 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (withoutsubtypes: ");
     result.append(withoutsubtypes);
     result.append(", alias: ");

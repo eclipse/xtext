@@ -82,6 +82,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Codetemplates createCodetemplates()
   {
     CodetemplatesImpl codetemplates = new CodetemplatesImpl();
@@ -93,6 +94,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Codetemplate createCodetemplate()
   {
     CodetemplateImpl codetemplate = new CodetemplateImpl();
@@ -104,6 +106,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TemplateBody createTemplateBody()
   {
     TemplateBodyImpl templateBody = new TemplateBodyImpl();
@@ -115,6 +118,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TemplatePart createTemplatePart()
   {
     TemplatePartImpl templatePart = new TemplatePartImpl();
@@ -126,6 +130,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Variable createVariable()
   {
     VariableImpl variable = new VariableImpl();
@@ -137,6 +142,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -148,6 +154,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Dollar createDollar()
   {
     DollarImpl dollar = new DollarImpl();
@@ -159,6 +166,7 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TemplatesPackage getTemplatesPackage()
   {
     return (TemplatesPackage)getEPackage();

@@ -66,7 +66,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug377311Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
     if (isInited) return (Bug377311Package)EPackage.Registry.INSTANCE.getEPackage(Bug377311Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug377311PackageImpl theBug377311Package = (Bug377311PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug377311PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug377311PackageImpl());
+    Object registeredBug377311Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug377311PackageImpl theBug377311Package = registeredBug377311Package instanceof Bug377311PackageImpl ? (Bug377311PackageImpl)registeredBug377311Package : new Bug377311PackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
     // Mark meta-data to indicate it can't be changed
     theBug377311Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug377311Package.eNS_URI, theBug377311Package);
     return theBug377311Package;
@@ -105,6 +105,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -115,6 +116,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRoot_Childs()
   {
     return (EReference)rootEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild()
   {
     return childEClass;
@@ -135,6 +138,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild_Name()
   {
     return (EAttribute)childEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug377311Factory getBug377311Factory()
   {
     return (Bug377311Factory)getEFactoryInstance();

@@ -74,6 +74,7 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getWert()
   {
     return wert;
@@ -84,6 +85,7 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWert(String newWert)
   {
     String oldWert = wert;
@@ -168,7 +170,7 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (wert: ");
     result.append(wert);
     result.append(')');

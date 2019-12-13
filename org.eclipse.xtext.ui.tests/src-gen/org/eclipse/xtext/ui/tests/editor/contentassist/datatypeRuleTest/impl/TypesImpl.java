@@ -70,6 +70,7 @@ public class TypesImpl extends ModelImpl implements Types
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Type> getTypes()
   {
     if (types == null)

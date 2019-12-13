@@ -71,6 +71,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class> getElements()
   {
     if (elements == null)

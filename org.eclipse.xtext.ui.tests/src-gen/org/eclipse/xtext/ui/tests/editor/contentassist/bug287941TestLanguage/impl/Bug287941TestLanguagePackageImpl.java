@@ -259,7 +259,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug287941TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -274,7 +274,8 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug287941TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug287941TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug287941TestLanguagePackageImpl theBug287941TestLanguagePackage = (Bug287941TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug287941TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug287941TestLanguagePackageImpl());
+    Object registeredBug287941TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug287941TestLanguagePackageImpl theBug287941TestLanguagePackage = registeredBug287941TestLanguagePackage instanceof Bug287941TestLanguagePackageImpl ? (Bug287941TestLanguagePackageImpl)registeredBug287941TestLanguagePackage : new Bug287941TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -287,7 +288,6 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug287941TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug287941TestLanguagePackage.eNS_URI, theBug287941TestLanguagePackage);
     return theBug287941TestLanguagePackage;
@@ -298,6 +298,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -308,6 +309,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -318,6 +320,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Query()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -328,6 +331,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -338,6 +342,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -348,6 +353,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMQLquery()
   {
     return mqLqueryEClass;
@@ -358,6 +364,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMQLquery_SelectEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(0);
@@ -368,6 +375,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMQLquery_FromEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(1);
@@ -378,6 +386,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMQLquery_WhereEntries()
   {
     return (EReference)mqLqueryEClass.getEStructuralFeatures().get(2);
@@ -388,6 +397,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSelectEntry()
   {
     return selectEntryEClass;
@@ -398,6 +408,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSelectEntry_Select()
   {
     return (EReference)selectEntryEClass.getEStructuralFeatures().get(0);
@@ -408,6 +419,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSelectEntry_Attribute()
   {
     return (EReference)selectEntryEClass.getEStructuralFeatures().get(1);
@@ -418,6 +430,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFromEntry()
   {
     return fromEntryEClass;
@@ -428,6 +441,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFromEntry_Type()
   {
     return (EReference)fromEntryEClass.getEStructuralFeatures().get(0);
@@ -438,6 +452,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFromEntry_Withoutsubtypes()
   {
     return (EAttribute)fromEntryEClass.getEStructuralFeatures().get(1);
@@ -448,6 +463,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFromEntry_Alias()
   {
     return (EAttribute)fromEntryEClass.getEStructuralFeatures().get(2);
@@ -458,6 +474,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFromEntry_ScopeClause()
   {
     return (EReference)fromEntryEClass.getEStructuralFeatures().get(3);
@@ -468,6 +485,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getScopeClause()
   {
     return scopeClauseEClass;
@@ -478,6 +496,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getScopeClause_NotIn()
   {
     return (EAttribute)scopeClauseEClass.getEStructuralFeatures().get(0);
@@ -488,6 +507,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getScopeClause_Scope()
   {
     return (EReference)scopeClauseEClass.getEStructuralFeatures().get(1);
@@ -498,6 +518,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getScope()
   {
     return scopeEClass;
@@ -508,6 +529,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getScope_Uris()
   {
     return (EAttribute)scopeEClass.getEStructuralFeatures().get(0);
@@ -518,6 +540,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getResourceScope()
   {
     return resourceScopeEClass;
@@ -528,6 +551,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElementScope()
   {
     return elementScopeEClass;
@@ -538,6 +562,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWhereEntry()
   {
     return whereEntryEClass;
@@ -548,6 +573,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttributeWhereEntry()
   {
     return attributeWhereEntryEClass;
@@ -558,6 +584,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAttributeWhereEntry_Alias()
   {
     return (EReference)attributeWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -568,6 +595,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAttributeWhereEntry_Attribute()
   {
     return (EReference)attributeWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -578,6 +606,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNumericAttributeWhereEntry()
   {
     return numericAttributeWhereEntryEClass;
@@ -588,6 +617,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNumericAttributeWhereEntry_Operator()
   {
     return (EAttribute)numericAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -598,6 +628,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDoubleWhereEntry()
   {
     return doubleWhereEntryEClass;
@@ -608,6 +639,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDoubleWhereEntry_Value()
   {
     return (EAttribute)doubleWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -618,6 +650,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLongWhereEntry()
   {
     return longWhereEntryEClass;
@@ -628,6 +661,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLongWhereEntry_Value()
   {
     return (EAttribute)longWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -638,6 +672,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVariableWhereEntry()
   {
     return variableWhereEntryEClass;
@@ -648,6 +683,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariableWhereEntry_Operator()
   {
     return (EAttribute)variableWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -658,6 +694,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getVariableWhereEntry_RightAlias()
   {
     return (EReference)variableWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -668,6 +705,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getVariableWhereEntry_RightAttribute()
   {
     return (EReference)variableWhereEntryEClass.getEStructuralFeatures().get(2);
@@ -678,6 +716,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStringAttributeWhereEntry()
   {
     return stringAttributeWhereEntryEClass;
@@ -688,6 +727,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getStringAttributeWhereEntry_Operator()
   {
     return (EAttribute)stringAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -698,6 +738,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getStringAttributeWhereEntry_Pattern()
   {
     return (EAttribute)stringAttributeWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -708,6 +749,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBooleanAttributeWhereEntry()
   {
     return booleanAttributeWhereEntryEClass;
@@ -718,6 +760,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanAttributeWhereEntry_Operator()
   {
     return (EAttribute)booleanAttributeWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -728,6 +771,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBooleanAttributeWhereEntry_IsTrue()
   {
     return (EAttribute)booleanAttributeWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -738,6 +782,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNullWhereEntry()
   {
     return nullWhereEntryEClass;
@@ -748,6 +793,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNullWhereEntry_Alias()
   {
     return (EReference)nullWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -758,6 +804,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNullWhereEntry_Feature()
   {
     return (EReference)nullWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -768,6 +815,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNullWhereEntry_Operator()
   {
     return (EAttribute)nullWhereEntryEClass.getEStructuralFeatures().get(2);
@@ -778,6 +826,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReferenceAliasWhereEntry()
   {
     return referenceAliasWhereEntryEClass;
@@ -788,6 +837,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceAliasWhereEntry_Alias()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -798,6 +848,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceAliasWhereEntry_Reference()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -808,6 +859,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceAliasWhereEntry_RightAlias()
   {
     return (EReference)referenceAliasWhereEntryEClass.getEStructuralFeatures().get(2);
@@ -818,6 +870,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubselectWhereEntry()
   {
     return subselectWhereEntryEClass;
@@ -828,6 +881,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubselectWhereEntry_Alias()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -838,6 +892,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubselectWhereEntry_Reference()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -848,6 +903,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSubselectWhereEntry_NotIn()
   {
     return (EAttribute)subselectWhereEntryEClass.getEStructuralFeatures().get(2);
@@ -858,6 +914,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubselectWhereEntry_SubQuery()
   {
     return (EReference)subselectWhereEntryEClass.getEStructuralFeatures().get(3);
@@ -868,6 +925,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAliasWhereEntry()
   {
     return aliasWhereEntryEClass;
@@ -878,6 +936,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAliasWhereEntry_Alias()
   {
     return (EReference)aliasWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -888,6 +947,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAliasWhereEntry_RightAlias()
   {
     return (EReference)aliasWhereEntryEClass.getEStructuralFeatures().get(1);
@@ -898,6 +958,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOrWhereEntry()
   {
     return orWhereEntryEClass;
@@ -908,6 +969,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOrWhereEntry_Entries()
   {
     return (EReference)orWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -918,6 +980,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAndWhereEntry()
   {
     return andWhereEntryEClass;
@@ -928,6 +991,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAndWhereEntry_Entries()
   {
     return (EReference)andWhereEntryEClass.getEStructuralFeatures().get(0);
@@ -938,6 +1002,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getNumericOperator()
   {
     return numericOperatorEEnum;
@@ -948,6 +1013,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getStringOperator()
   {
     return stringOperatorEEnum;
@@ -958,6 +1024,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getBooleanOperator()
   {
     return booleanOperatorEEnum;
@@ -968,6 +1035,7 @@ public class Bug287941TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug287941TestLanguageFactory getBug287941TestLanguageFactory()
   {
     return (Bug287941TestLanguageFactory)getEFactoryInstance();

@@ -65,6 +65,7 @@ public class RootModelImpl extends ModelElementImpl implements RootModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelElement getType()
   {
     if (type != null && type.eIsProxy())
@@ -95,6 +96,7 @@ public class RootModelImpl extends ModelElementImpl implements RootModel
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(ModelElement newType)
   {
     ModelElement oldType = type;

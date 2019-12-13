@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Declaration;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device;
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Model;
@@ -92,7 +94,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RuleEnginePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -107,12 +109,14 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
     if (isInited) return (RuleEnginePackage)EPackage.Registry.INSTANCE.getEPackage(RuleEnginePackage.eNS_URI);
 
     // Obtain or create and register package
-    RuleEnginePackageImpl theRuleEnginePackage = (RuleEnginePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RuleEnginePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RuleEnginePackageImpl());
+    Object registeredRuleEnginePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RuleEnginePackageImpl theRuleEnginePackage = registeredRuleEnginePackage instanceof RuleEnginePackageImpl ? (RuleEnginePackageImpl)registeredRuleEnginePackage : new RuleEnginePackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
     XbasePackage.eINSTANCE.eClass();
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theRuleEnginePackage.createPackageContents();
@@ -123,7 +127,6 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
     // Mark meta-data to indicate it can't be changed
     theRuleEnginePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RuleEnginePackage.eNS_URI, theRuleEnginePackage);
     return theRuleEnginePackage;
@@ -134,6 +137,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -144,6 +148,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Declarations()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -154,6 +159,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDeclaration()
   {
     return declarationEClass;
@@ -164,6 +170,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDevice()
   {
     return deviceEClass;
@@ -174,6 +181,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDevice_Name()
   {
     return (EAttribute)deviceEClass.getEStructuralFeatures().get(0);
@@ -184,6 +192,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDevice_States()
   {
     return (EReference)deviceEClass.getEStructuralFeatures().get(1);
@@ -194,6 +203,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getState()
   {
     return stateEClass;
@@ -204,6 +214,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_Name()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
@@ -214,6 +225,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRule()
   {
     return ruleEClass;
@@ -224,6 +236,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule_Description()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
@@ -234,6 +247,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRule_DeviceState()
   {
     return (EReference)ruleEClass.getEStructuralFeatures().get(1);
@@ -244,6 +258,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRule_ThenPart()
   {
     return (EReference)ruleEClass.getEStructuralFeatures().get(2);
@@ -254,6 +269,7 @@ public class RuleEnginePackageImpl extends EPackageImpl implements RuleEnginePac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RuleEngineFactory getRuleEngineFactory()
   {
     return (RuleEngineFactory)getEFactoryInstance();

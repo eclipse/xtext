@@ -95,6 +95,7 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TimeDef> getTime()
   {
     if (time == null)
@@ -109,6 +110,7 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getName()
   {
     if (name == null)
@@ -123,6 +125,7 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getAlias()
   {
     if (alias == null)
@@ -248,7 +251,7 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", alias: ");

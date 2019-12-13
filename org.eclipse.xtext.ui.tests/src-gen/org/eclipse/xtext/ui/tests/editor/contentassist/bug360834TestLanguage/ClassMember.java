@@ -27,10 +27,6 @@ public interface ClassMember extends EObject
   /**
    * Returns the value of the '<em><b>Modifiers</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Modifiers</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Modifiers</em>' containment reference.
    * @see #setModifiers(UnorderedModifiers)
@@ -53,10 +49,6 @@ public interface ClassMember extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)

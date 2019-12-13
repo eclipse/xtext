@@ -91,6 +91,7 @@ public class EntityImpl extends AbstractElementImpl implements Entity
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JvmParameterizedTypeReference getSuperType()
   {
     return superType;
@@ -118,6 +119,7 @@ public class EntityImpl extends AbstractElementImpl implements Entity
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperType(JvmParameterizedTypeReference newSuperType)
   {
     if (newSuperType != superType)
@@ -139,6 +141,7 @@ public class EntityImpl extends AbstractElementImpl implements Entity
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Feature> getFeatures()
   {
     if (features == null)

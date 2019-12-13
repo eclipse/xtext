@@ -31,10 +31,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage#getModel_Imports()
@@ -46,10 +42,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Generate Directive</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Generate Directive</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Generate Directive</em>' containment reference.
    * @see #setGenerateDirective(GenerateDirective)
@@ -72,10 +64,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Reference Holder</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Reference Holder</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Reference Holder</em>' containment reference.
    * @see #setReferenceHolder(ReferenceHolder)

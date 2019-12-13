@@ -29,10 +29,6 @@ public interface SubselectWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Alias</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' reference.
    * @see #setAlias(FromEntry)
@@ -55,10 +51,6 @@ public interface SubselectWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Reference</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Reference</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Reference</em>' reference.
    * @see #setReference(EReference)
@@ -81,10 +73,6 @@ public interface SubselectWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Not In</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Not In</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Not In</em>' attribute.
    * @see #setNotIn(boolean)
@@ -107,10 +95,6 @@ public interface SubselectWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Sub Query</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub Query</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub Query</em>' containment reference.
    * @see #setSubQuery(MQLquery)

@@ -115,6 +115,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public double getNum()
   {
     return num;
@@ -125,6 +126,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNum(double newNum)
   {
     double oldNum = num;
@@ -138,6 +140,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getStr()
   {
     return str;
@@ -148,6 +151,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStr(String newStr)
   {
     String oldStr = str;
@@ -161,6 +165,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getBool()
   {
     return bool;
@@ -171,6 +176,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBool(String newBool)
   {
     String oldBool = bool;
@@ -275,7 +281,7 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (num: ");
     result.append(num);
     result.append(", str: ");

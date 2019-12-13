@@ -66,7 +66,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ParametersTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
     if (isInited) return (ParametersTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(ParametersTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    ParametersTestLanguagePackageImpl theParametersTestLanguagePackage = (ParametersTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ParametersTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ParametersTestLanguagePackageImpl());
+    Object registeredParametersTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ParametersTestLanguagePackageImpl theParametersTestLanguagePackage = registeredParametersTestLanguagePackage instanceof ParametersTestLanguagePackageImpl ? (ParametersTestLanguagePackageImpl)registeredParametersTestLanguagePackage : new ParametersTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
     // Mark meta-data to indicate it can't be changed
     theParametersTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ParametersTestLanguagePackage.eNS_URI, theParametersTestLanguagePackage);
     return theParametersTestLanguagePackage;
@@ -105,6 +105,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParserRuleParameters()
   {
     return parserRuleParametersEClass;
@@ -115,6 +116,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParserRuleParameters_Scenario()
   {
     return (EReference)parserRuleParametersEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getScenario()
   {
     return scenarioEClass;
@@ -135,6 +138,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getScenario_First()
   {
     return (EAttribute)scenarioEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getScenario_Second()
   {
     return (EAttribute)scenarioEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class ParametersTestLanguagePackageImpl extends EPackageImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParametersTestLanguageFactory getParametersTestLanguageFactory()
   {
     return (ParametersTestLanguageFactory)getEFactoryInstance();

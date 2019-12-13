@@ -37,10 +37,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Abstract</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abstract</em>' attribute.
    * @see #setAbstract(boolean)
@@ -63,10 +59,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Transient</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Transient</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transient</em>' attribute.
    * @see #setTransient(boolean)
@@ -89,10 +81,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -115,10 +103,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Super Class</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Super Class</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Class</em>' reference.
    * @see #setSuperClass(Class)
@@ -142,10 +126,6 @@ public interface Class extends EObject
    * Returns the value of the '<em><b>Implemented Interfaces</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Implemented Interfaces</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Implemented Interfaces</em>' reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Bug289187TestLanguagePackage#getClass_ImplementedInterfaces()
@@ -157,10 +137,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Class Number</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Class Number</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Class Number</em>' attribute.
    * @see #setClassNumber(int)
@@ -183,10 +159,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Quid</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Quid</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Quid</em>' attribute.
    * @see #setQuid(int)
@@ -209,10 +181,6 @@ public interface Class extends EObject
   /**
    * Returns the value of the '<em><b>Documentation</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Documentation</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Documentation</em>' attribute.
    * @see #setDocumentation(String)
@@ -236,10 +204,6 @@ public interface Class extends EObject
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Attribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Bug289187TestLanguagePackage#getClass_Attributes()
@@ -252,10 +216,6 @@ public interface Class extends EObject
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Operation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operations</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Bug289187TestLanguagePackage#getClass_Operations()

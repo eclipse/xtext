@@ -128,6 +128,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -138,6 +139,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -151,6 +153,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)
@@ -165,6 +168,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Content> getContents()
   {
     if (contents == null)
@@ -179,6 +183,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getCloseName()
   {
     return closeName;
@@ -189,6 +194,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCloseName(String newCloseName)
   {
     String oldCloseName = closeName;
@@ -324,7 +330,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", closeName: ");

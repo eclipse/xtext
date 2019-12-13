@@ -29,10 +29,6 @@ public interface ModelElement extends ModelAttribute
   /**
    * Returns the value of the '<em><b>First Reference</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First Reference</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First Reference</em>' reference.
    * @see #setFirstReference(ModelElement)
@@ -55,10 +51,6 @@ public interface ModelElement extends ModelAttribute
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -81,10 +73,6 @@ public interface ModelElement extends ModelAttribute
   /**
    * Returns the value of the '<em><b>Second Reference</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second Reference</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second Reference</em>' reference.
    * @see #setSecondReference(ModelElement)
@@ -108,10 +96,6 @@ public interface ModelElement extends ModelAttribute
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.ModelAttribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Elements</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Bug291022TestLanguagePackage#getModelElement_Elements()

@@ -31,10 +31,6 @@ public interface Timeperiod extends EObject
    * Returns the value of the '<em><b>Time</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.TimeDef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Time</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Time</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Bug348199TestLanguagePackage#getTimeperiod_Time()
@@ -47,10 +43,6 @@ public interface Timeperiod extends EObject
    * Returns the value of the '<em><b>Name</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Bug348199TestLanguagePackage#getTimeperiod_Name()
@@ -63,10 +55,6 @@ public interface Timeperiod extends EObject
    * Returns the value of the '<em><b>Alias</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' attribute list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Bug348199TestLanguagePackage#getTimeperiod_Alias()

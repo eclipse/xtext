@@ -80,6 +80,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Start createStart()
   {
     StartImpl start = new StartImpl();
@@ -91,6 +92,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
@@ -102,6 +104,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FirstAbstractRuleChild createFirstAbstractRuleChild()
   {
     FirstAbstractRuleChildImpl firstAbstractRuleChild = new FirstAbstractRuleChildImpl();
@@ -113,6 +116,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SecondAbstractRuleChild createSecondAbstractRuleChild()
   {
     SecondAbstractRuleChildImpl secondAbstractRuleChild = new SecondAbstractRuleChildImpl();
@@ -124,6 +128,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractRuleCall createAbstractRuleCall()
   {
     AbstractRuleCallImpl abstractRuleCall = new AbstractRuleCallImpl();
@@ -135,6 +140,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
   {
     return (ContentAssistTestLanguagePackage)getEPackage();

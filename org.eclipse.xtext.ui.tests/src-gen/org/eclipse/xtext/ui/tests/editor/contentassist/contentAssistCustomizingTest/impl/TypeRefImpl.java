@@ -66,6 +66,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type getType()
   {
     if (type != null && type.eIsProxy())
@@ -96,6 +97,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(Type newType)
   {
     Type oldType = type;

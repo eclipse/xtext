@@ -28,10 +28,6 @@ public interface CopyFieldNameToVariableStmt extends EObject
   /**
    * Returns the value of the '<em><b>Line</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Line</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Line</em>' attribute.
    * @see #setLine(int)
@@ -54,10 +50,6 @@ public interface CopyFieldNameToVariableStmt extends EObject
   /**
    * Returns the value of the '<em><b>Column</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Column</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Column</em>' attribute.
    * @see #setColumn(int)
@@ -80,10 +72,6 @@ public interface CopyFieldNameToVariableStmt extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)

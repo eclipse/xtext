@@ -57,7 +57,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link KeywordsUiTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -72,7 +72,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
     if (isInited) return (KeywordsUiTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(KeywordsUiTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    KeywordsUiTestLanguagePackageImpl theKeywordsUiTestLanguagePackage = (KeywordsUiTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KeywordsUiTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KeywordsUiTestLanguagePackageImpl());
+    Object registeredKeywordsUiTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    KeywordsUiTestLanguagePackageImpl theKeywordsUiTestLanguagePackage = registeredKeywordsUiTestLanguagePackage instanceof KeywordsUiTestLanguagePackageImpl ? (KeywordsUiTestLanguagePackageImpl)registeredKeywordsUiTestLanguagePackage : new KeywordsUiTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -85,7 +86,6 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
     // Mark meta-data to indicate it can't be changed
     theKeywordsUiTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(KeywordsUiTestLanguagePackage.eNS_URI, theKeywordsUiTestLanguagePackage);
     return theKeywordsUiTestLanguagePackage;
@@ -96,6 +96,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -106,6 +107,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_First()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -116,6 +118,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Second()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -126,6 +129,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Third()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -136,6 +140,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Forth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
@@ -146,6 +151,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Fifth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -156,6 +162,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Sixth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
@@ -166,6 +173,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Seventh()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
@@ -176,6 +184,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Eighth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
@@ -186,6 +195,7 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordsUiTestLanguageFactory getKeywordsUiTestLanguageFactory()
   {
     return (KeywordsUiTestLanguageFactory)getEFactoryInstance();

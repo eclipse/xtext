@@ -231,6 +231,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEnabled()
   {
     return enabled;
@@ -241,6 +242,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEnabled(boolean newEnabled)
   {
     boolean oldEnabled = enabled;
@@ -254,6 +256,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -264,6 +267,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -277,6 +281,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -287,6 +292,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -300,6 +306,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getParent()
   {
     if (parent != null && parent.eIsProxy())
@@ -330,6 +337,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParent(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newParent)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object oldParent = parent;
@@ -343,6 +351,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShortDescription()
   {
     return shortDescription;
@@ -353,6 +362,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
@@ -366,6 +376,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLongDescription()
   {
     return longDescription;
@@ -376,6 +387,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
@@ -389,6 +401,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getSerialVersionUID()
   {
     return serialVersionUID;
@@ -399,6 +412,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSerialVersionUID(int newSerialVersionUID)
   {
     int oldSerialVersionUID = serialVersionUID;
@@ -412,6 +426,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isCloneable()
   {
     return cloneable;
@@ -422,6 +437,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCloneable(boolean newCloneable)
   {
     boolean oldCloneable = cloneable;
@@ -435,6 +451,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Feature> getFeatures()
   {
     if (features == null)
@@ -619,7 +636,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements org.ecli
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (enabled: ");
     result.append(enabled);
     result.append(", abstract: ");

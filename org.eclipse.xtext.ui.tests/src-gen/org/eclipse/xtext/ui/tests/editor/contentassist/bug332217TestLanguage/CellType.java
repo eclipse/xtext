@@ -63,10 +63,6 @@ public enum CellType implements Enumerator
   /**
    * The '<em><b>Default</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Default</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #DEFAULT
    * @model name="default" literal="Default"
@@ -78,10 +74,6 @@ public enum CellType implements Enumerator
   /**
    * The '<em><b>Value1</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Value1</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #VALUE1
    * @model name="value1" literal="Value1"
@@ -93,10 +85,6 @@ public enum CellType implements Enumerator
   /**
    * The '<em><b>Value2</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Value2</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #VALUE2
    * @model name="value2" literal="Value2"
@@ -108,10 +96,6 @@ public enum CellType implements Enumerator
   /**
    * The '<em><b>Subtitle</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Subtitle</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #SUBTITLE
    * @model name="subtitle" literal="Subtitle"
@@ -244,6 +228,7 @@ public enum CellType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -254,6 +239,7 @@ public enum CellType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -264,6 +250,7 @@ public enum CellType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

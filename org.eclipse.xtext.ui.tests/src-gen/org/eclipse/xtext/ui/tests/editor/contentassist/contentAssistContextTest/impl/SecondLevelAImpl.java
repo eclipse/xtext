@@ -84,6 +84,7 @@ public class SecondLevelAImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ThirdLevelA1> getThirdLevelA1()
   {
     if (thirdLevelA1 == null)
@@ -98,6 +99,7 @@ public class SecondLevelAImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ThirdLevelA2> getThirdLevelA2()
   {
     if (thirdLevelA2 == null)

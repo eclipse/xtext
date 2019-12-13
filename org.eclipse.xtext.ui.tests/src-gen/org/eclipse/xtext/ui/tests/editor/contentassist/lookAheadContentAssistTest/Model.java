@@ -29,10 +29,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Attribute</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attribute</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.LookAheadContentAssistTestPackage#getModel_Attribute()

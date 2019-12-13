@@ -92,6 +92,7 @@ public class DomainModelImpl extends MinimalEObjectImpl.Container implements Dom
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSection getImportSection()
   {
     return importSection;
@@ -119,6 +120,7 @@ public class DomainModelImpl extends MinimalEObjectImpl.Container implements Dom
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImportSection(XImportSection newImportSection)
   {
     if (newImportSection != importSection)
@@ -140,6 +142,7 @@ public class DomainModelImpl extends MinimalEObjectImpl.Container implements Dom
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractElement> getElements()
   {
     if (elements == null)

@@ -98,6 +98,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getLhs()
   {
     return lhs;
@@ -125,6 +126,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLhs(Expression newLhs)
   {
     if (newLhs != lhs)
@@ -146,6 +148,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOp()
   {
     return op;
@@ -156,6 +159,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOp(String newOp)
   {
     String oldOp = op;
@@ -169,6 +173,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getRhs()
   {
     return rhs;
@@ -196,6 +201,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRhs(Expression newRhs)
   {
     if (newRhs != rhs)
@@ -326,7 +332,7 @@ public class ShiftExpressionImpl extends ExpressionImpl implements ShiftExpressi
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (op: ");
     result.append(op);
     result.append(')');

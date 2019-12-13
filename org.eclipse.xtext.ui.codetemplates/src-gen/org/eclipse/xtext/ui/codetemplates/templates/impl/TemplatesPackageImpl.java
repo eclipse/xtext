@@ -109,7 +109,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TemplatesPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -124,11 +124,13 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
     if (isInited) return (TemplatesPackage)EPackage.Registry.INSTANCE.getEPackage(TemplatesPackage.eNS_URI);
 
     // Obtain or create and register package
-    TemplatesPackageImpl theTemplatesPackage = (TemplatesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TemplatesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TemplatesPackageImpl());
+    Object registeredTemplatesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TemplatesPackageImpl theTemplatesPackage = registeredTemplatesPackage instanceof TemplatesPackageImpl ? (TemplatesPackageImpl)registeredTemplatesPackage : new TemplatesPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     XtextPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -140,7 +142,6 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
     // Mark meta-data to indicate it can't be changed
     theTemplatesPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TemplatesPackage.eNS_URI, theTemplatesPackage);
     return theTemplatesPackage;
@@ -151,6 +152,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCodetemplates()
   {
     return codetemplatesEClass;
@@ -161,6 +163,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCodetemplates_Language()
   {
     return (EReference)codetemplatesEClass.getEStructuralFeatures().get(0);
@@ -171,6 +174,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCodetemplates_Templates()
   {
     return (EReference)codetemplatesEClass.getEStructuralFeatures().get(1);
@@ -181,6 +185,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCodetemplate()
   {
     return codetemplateEClass;
@@ -191,6 +196,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCodetemplate_Name()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(0);
@@ -201,6 +207,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCodetemplate_Id()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(1);
@@ -211,6 +218,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCodetemplate_Description()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(2);
@@ -221,6 +229,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCodetemplate_Context()
   {
     return (EReference)codetemplateEClass.getEStructuralFeatures().get(3);
@@ -231,6 +240,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCodetemplate_KeywordContext()
   {
     return (EAttribute)codetemplateEClass.getEStructuralFeatures().get(4);
@@ -241,6 +251,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCodetemplate_Body()
   {
     return (EReference)codetemplateEClass.getEStructuralFeatures().get(5);
@@ -251,6 +262,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTemplateBody()
   {
     return templateBodyEClass;
@@ -261,6 +273,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTemplateBody_Parts()
   {
     return (EReference)templateBodyEClass.getEStructuralFeatures().get(0);
@@ -271,6 +284,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTemplatePart()
   {
     return templatePartEClass;
@@ -281,6 +295,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVariable()
   {
     return variableEClass;
@@ -291,6 +306,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariable_Name()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
@@ -301,6 +317,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariable_Type()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(1);
@@ -311,6 +328,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariable_ExpectingParameters()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(2);
@@ -321,6 +339,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariable_Parameters()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(3);
@@ -331,6 +350,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLiteral()
   {
     return literalEClass;
@@ -341,6 +361,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLiteral_Value()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(0);
@@ -351,6 +372,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDollar()
   {
     return dollarEClass;
@@ -361,6 +383,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDollar_Escaped()
   {
     return (EAttribute)dollarEClass.getEStructuralFeatures().get(0);
@@ -371,6 +394,7 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TemplatesFactory getTemplatesFactory()
   {
     return (TemplatesFactory)getEFactoryInstance();

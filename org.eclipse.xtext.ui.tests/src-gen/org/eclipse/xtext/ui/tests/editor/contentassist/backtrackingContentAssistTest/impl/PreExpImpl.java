@@ -66,6 +66,7 @@ public class PreExpImpl extends ExpressionImpl implements PreExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NameExp getName()
   {
     return name;
@@ -93,6 +94,7 @@ public class PreExpImpl extends ExpressionImpl implements PreExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(NameExp newName)
   {
     if (newName != name)

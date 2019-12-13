@@ -84,6 +84,7 @@ public class FirstLevelImpl extends MinimalEObjectImpl.Container implements Firs
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SecondLevelA> getSecondLevelA()
   {
     if (secondLevelA == null)
@@ -98,6 +99,7 @@ public class FirstLevelImpl extends MinimalEObjectImpl.Container implements Firs
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SecondLevelB> getSecondLevelB()
   {
     if (secondLevelB == null)

@@ -37,10 +37,6 @@ public interface Operation extends Feature
    * Returns the value of the '<em><b>Params</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Params</em>' containment reference list.
    * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getOperation_Params()
@@ -52,10 +48,6 @@ public interface Operation extends Feature
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Body</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
    * @see #setBody(XExpression)

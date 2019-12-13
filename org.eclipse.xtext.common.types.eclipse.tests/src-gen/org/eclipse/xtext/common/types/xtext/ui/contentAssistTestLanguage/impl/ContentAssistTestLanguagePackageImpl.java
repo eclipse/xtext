@@ -84,7 +84,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ContentAssistTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -99,7 +99,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (ContentAssistTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(ContentAssistTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    ContentAssistTestLanguagePackageImpl theContentAssistTestLanguagePackage = (ContentAssistTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistTestLanguagePackageImpl());
+    Object registeredContentAssistTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ContentAssistTestLanguagePackageImpl theContentAssistTestLanguagePackage = registeredContentAssistTestLanguagePackage instanceof ContentAssistTestLanguagePackageImpl ? (ContentAssistTestLanguagePackageImpl)registeredContentAssistTestLanguagePackage : new ContentAssistTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -115,7 +116,6 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
     // Mark meta-data to indicate it can't be changed
     theContentAssistTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ContentAssistTestLanguagePackage.eNS_URI, theContentAssistTestLanguagePackage);
     return theContentAssistTestLanguagePackage;
@@ -126,6 +126,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -136,6 +137,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -146,6 +148,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_GenerateDirective()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -156,6 +159,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ReferenceHolder()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -166,6 +170,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReferenceHolder()
   {
     return referenceHolderEClass;
@@ -176,6 +181,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceHolder_DefaultReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(0);
@@ -186,6 +192,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceHolder_CustomizedReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(1);
@@ -196,6 +203,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceHolder_SubtypeReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(2);
@@ -206,6 +214,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGenerateDirective()
   {
     return generateDirectiveEClass;
@@ -216,6 +225,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGenerateDirective_TypeName()
   {
     return (EAttribute)generateDirectiveEClass.getEStructuralFeatures().get(0);
@@ -226,6 +236,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -236,6 +247,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -246,6 +258,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
   {
     return (ContentAssistTestLanguageFactory)getEFactoryInstance();

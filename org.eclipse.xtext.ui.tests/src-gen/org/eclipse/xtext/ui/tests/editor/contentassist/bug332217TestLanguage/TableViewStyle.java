@@ -43,10 +43,6 @@ public enum TableViewStyle implements Enumerator
   /**
    * The '<em><b>Plain</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Plain</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PLAIN
    * @model name="Plain"
@@ -58,10 +54,6 @@ public enum TableViewStyle implements Enumerator
   /**
    * The '<em><b>Grouped</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Grouped</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #GROUPED
    * @model name="Grouped"
@@ -190,6 +182,7 @@ public enum TableViewStyle implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum TableViewStyle implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum TableViewStyle implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

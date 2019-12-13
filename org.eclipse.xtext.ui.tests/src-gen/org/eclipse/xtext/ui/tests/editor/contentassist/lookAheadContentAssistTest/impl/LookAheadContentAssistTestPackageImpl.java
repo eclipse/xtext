@@ -74,7 +74,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LookAheadContentAssistTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -89,7 +89,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
     if (isInited) return (LookAheadContentAssistTestPackage)EPackage.Registry.INSTANCE.getEPackage(LookAheadContentAssistTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    LookAheadContentAssistTestPackageImpl theLookAheadContentAssistTestPackage = (LookAheadContentAssistTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LookAheadContentAssistTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LookAheadContentAssistTestPackageImpl());
+    Object registeredLookAheadContentAssistTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LookAheadContentAssistTestPackageImpl theLookAheadContentAssistTestPackage = registeredLookAheadContentAssistTestPackage instanceof LookAheadContentAssistTestPackageImpl ? (LookAheadContentAssistTestPackageImpl)registeredLookAheadContentAssistTestPackage : new LookAheadContentAssistTestPackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
     // Mark meta-data to indicate it can't be changed
     theLookAheadContentAssistTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LookAheadContentAssistTestPackage.eNS_URI, theLookAheadContentAssistTestPackage);
     return theLookAheadContentAssistTestPackage;
@@ -113,6 +113,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -123,6 +124,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Attribute()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttribute()
   {
     return attributeEClass;
@@ -143,6 +146,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
@@ -153,6 +157,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPair()
   {
     return pairEClass;
@@ -163,6 +168,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPair_Name()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(0);
@@ -173,6 +179,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPair_Value()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(1);
@@ -183,6 +190,7 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAheadContentAssistTestFactory getLookAheadContentAssistTestFactory()
   {
     return (LookAheadContentAssistTestFactory)getEFactoryInstance();

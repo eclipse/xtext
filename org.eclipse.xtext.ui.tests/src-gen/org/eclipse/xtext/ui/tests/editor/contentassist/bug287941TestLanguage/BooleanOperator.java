@@ -43,10 +43,6 @@ public enum BooleanOperator implements Enumerator
   /**
    * The '<em><b>Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #EQUAL
    * @model name="equal" literal="="
@@ -58,10 +54,6 @@ public enum BooleanOperator implements Enumerator
   /**
    * The '<em><b>Not Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NOT_EQUAL
    * @model name="notEqual" literal="!="
@@ -190,6 +182,7 @@ public enum BooleanOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum BooleanOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum BooleanOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

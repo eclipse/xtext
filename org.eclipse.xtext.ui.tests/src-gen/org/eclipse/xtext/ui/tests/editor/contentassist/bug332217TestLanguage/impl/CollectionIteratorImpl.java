@@ -66,6 +66,7 @@ public class CollectionIteratorImpl extends PropertyPathPartImpl implements Coll
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CollectionExpression getCollection()
   {
     return collection;
@@ -93,6 +94,7 @@ public class CollectionIteratorImpl extends PropertyPathPartImpl implements Coll
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCollection(CollectionExpression newCollection)
   {
     if (newCollection != collection)

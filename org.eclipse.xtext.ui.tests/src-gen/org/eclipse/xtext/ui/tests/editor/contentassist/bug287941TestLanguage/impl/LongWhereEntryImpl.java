@@ -73,6 +73,7 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getValue()
   {
     return value;
@@ -83,6 +84,7 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(long newValue)
   {
     long oldValue = value;
@@ -167,7 +169,7 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(')');

@@ -67,6 +67,7 @@ public class OclMessageArgImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeExp getType()
   {
     return type;
@@ -94,6 +95,7 @@ public class OclMessageArgImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(TypeExp newType)
   {
     if (newType != type)

@@ -99,6 +99,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumericOperator getOperator()
   {
     return operator;
@@ -109,6 +110,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
@@ -122,6 +124,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
@@ -152,6 +155,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;
@@ -165,6 +169,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRightAttribute()
   {
     if (rightAttribute != null && rightAttribute.eIsProxy())
@@ -195,6 +200,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightAttribute(EAttribute newRightAttribute)
   {
     EAttribute oldRightAttribute = rightAttribute;
@@ -301,7 +307,7 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(')');

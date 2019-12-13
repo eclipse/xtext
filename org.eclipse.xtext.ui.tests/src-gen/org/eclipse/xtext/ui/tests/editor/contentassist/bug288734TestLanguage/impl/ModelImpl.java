@@ -72,6 +72,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TConstant> getConstants()
   {
     if (constants == null)

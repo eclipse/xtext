@@ -70,6 +70,7 @@ public class CollectionLiteralImpl extends ExpressionImpl implements CollectionL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ScalarExpression> getItems()
   {
     if (items == null)

@@ -65,7 +65,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link CrossReferenceProposalTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -80,7 +80,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
     if (isInited) return (CrossReferenceProposalTestPackage)EPackage.Registry.INSTANCE.getEPackage(CrossReferenceProposalTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    CrossReferenceProposalTestPackageImpl theCrossReferenceProposalTestPackage = (CrossReferenceProposalTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CrossReferenceProposalTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CrossReferenceProposalTestPackageImpl());
+    Object registeredCrossReferenceProposalTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    CrossReferenceProposalTestPackageImpl theCrossReferenceProposalTestPackage = registeredCrossReferenceProposalTestPackage instanceof CrossReferenceProposalTestPackageImpl ? (CrossReferenceProposalTestPackageImpl)registeredCrossReferenceProposalTestPackage : new CrossReferenceProposalTestPackageImpl();
 
     isInited = true;
 
@@ -93,7 +94,6 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
     // Mark meta-data to indicate it can't be changed
     theCrossReferenceProposalTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(CrossReferenceProposalTestPackage.eNS_URI, theCrossReferenceProposalTestPackage);
     return theCrossReferenceProposalTestPackage;
@@ -104,6 +104,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -114,6 +115,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -124,6 +126,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getClass_()
   {
     return classEClass;
@@ -134,6 +137,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(0);
@@ -144,6 +148,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getClass_Name()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(1);
@@ -154,6 +159,7 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CrossReferenceProposalTestFactory getCrossReferenceProposalTestFactory()
   {
     return (CrossReferenceProposalTestFactory)getEFactoryInstance();

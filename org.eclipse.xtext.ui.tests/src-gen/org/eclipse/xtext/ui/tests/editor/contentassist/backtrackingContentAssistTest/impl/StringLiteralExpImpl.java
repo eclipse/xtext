@@ -65,6 +65,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getValues()
   {
     if (values == null)
@@ -152,7 +153,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (values: ");
     result.append(values);
     result.append(')');

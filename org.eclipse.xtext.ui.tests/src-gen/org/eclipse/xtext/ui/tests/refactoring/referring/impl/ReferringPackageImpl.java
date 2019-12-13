@@ -90,7 +90,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ReferringPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -105,7 +105,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     if (isInited) return (ReferringPackage)EPackage.Registry.INSTANCE.getEPackage(ReferringPackage.eNS_URI);
 
     // Obtain or create and register package
-    ReferringPackageImpl theReferringPackage = (ReferringPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ReferringPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ReferringPackageImpl());
+    Object registeredReferringPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ReferringPackageImpl theReferringPackage = registeredReferringPackage instanceof ReferringPackageImpl ? (ReferringPackageImpl)registeredReferringPackage : new ReferringPackageImpl();
 
     isInited = true;
 
@@ -118,7 +119,6 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
     // Mark meta-data to indicate it can't be changed
     theReferringPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ReferringPackage.eNS_URI, theReferringPackage);
     return theReferringPackage;
@@ -129,6 +129,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -139,6 +140,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Referenced()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -149,6 +151,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractReference()
   {
     return abstractReferenceEClass;
@@ -159,6 +162,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReference()
   {
     return referenceEClass;
@@ -169,6 +173,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReference_Referenced()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
@@ -179,6 +184,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReference2()
   {
     return reference2EClass;
@@ -189,6 +195,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamed()
   {
     return namedEClass;
@@ -199,6 +206,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamed_Referenced()
   {
     return (EReference)namedEClass.getEStructuralFeatures().get(0);
@@ -209,6 +217,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamed_Name()
   {
     return (EAttribute)namedEClass.getEStructuralFeatures().get(1);
@@ -219,6 +228,7 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReferringFactory getReferringFactory()
   {
     return (ReferringFactory)getEFactoryInstance();

@@ -127,6 +127,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDoc()
   {
     return doc;
@@ -137,6 +138,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDoc(String newDoc)
   {
     String oldDoc = doc;
@@ -150,6 +152,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -160,6 +163,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -173,6 +177,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Element> getContained()
   {
     if (contained == null)
@@ -187,6 +192,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Element> getReferenced()
   {
     if (referenced == null)
@@ -321,7 +327,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (doc: ");
     result.append(doc);
     result.append(", name: ");

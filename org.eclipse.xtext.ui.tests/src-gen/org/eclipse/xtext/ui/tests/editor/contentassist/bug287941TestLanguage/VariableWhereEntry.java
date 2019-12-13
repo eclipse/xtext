@@ -29,10 +29,6 @@ public interface VariableWhereEntry extends AttributeWhereEntry
    * Returns the value of the '<em><b>Operator</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.NumericOperator}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operator</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.NumericOperator
@@ -57,10 +53,6 @@ public interface VariableWhereEntry extends AttributeWhereEntry
   /**
    * Returns the value of the '<em><b>Right Alias</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Alias</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Alias</em>' reference.
    * @see #setRightAlias(FromEntry)
@@ -83,10 +75,6 @@ public interface VariableWhereEntry extends AttributeWhereEntry
   /**
    * Returns the value of the '<em><b>Right Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Attribute</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Attribute</em>' reference.
    * @see #setRightAttribute(EAttribute)

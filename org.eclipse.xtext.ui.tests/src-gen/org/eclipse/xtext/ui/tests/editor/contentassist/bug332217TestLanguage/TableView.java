@@ -33,10 +33,6 @@ public interface TableView extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -59,10 +55,6 @@ public interface TableView extends EObject
   /**
    * Returns the value of the '<em><b>Content</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Content</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Content</em>' containment reference.
    * @see #setContent(Parameter)
@@ -85,10 +77,6 @@ public interface TableView extends EObject
   /**
    * Returns the value of the '<em><b>Title</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Title</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Title</em>' containment reference.
    * @see #setTitle(ScalarExpression)
@@ -111,10 +99,6 @@ public interface TableView extends EObject
   /**
    * Returns the value of the '<em><b>Title Image</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Title Image</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Title Image</em>' containment reference.
    * @see #setTitleImage(ScalarExpression)
@@ -138,10 +122,6 @@ public interface TableView extends EObject
    * Returns the value of the '<em><b>Style</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.TableViewStyle}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Style</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Style</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.TableViewStyle
@@ -167,10 +147,6 @@ public interface TableView extends EObject
    * Returns the value of the '<em><b>Sections</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Section}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sections</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sections</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Bug332217TestLanguagePackage#getTableView_Sections()

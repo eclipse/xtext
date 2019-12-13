@@ -223,10 +223,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Octagon</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Octagon</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #OCTAGON
    * @model name="octagon"
@@ -238,10 +234,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Oval</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Oval</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #OVAL
    * @model name="oval"
@@ -253,10 +245,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Parallelogram</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Parallelogram</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PARALLELOGRAM
    * @model name="parallelogram"
@@ -268,10 +256,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Pentagon</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Pentagon</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PENTAGON
    * @model name="pentagon"
@@ -283,10 +267,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Plain</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Plain</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PLAIN
    * @model name="plain"
@@ -298,10 +278,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Plaintext</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Plaintext</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PLAINTEXT
    * @model name="plaintext"
@@ -313,10 +289,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Point</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Point</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #POINT
    * @model name="point"
@@ -328,10 +300,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Polygon</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Polygon</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #POLYGON
    * @model name="polygon"
@@ -343,10 +311,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Primersite</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Primersite</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PRIMERSITE
    * @model name="primersite"
@@ -358,10 +322,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Promoter</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Promoter</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PROMOTER
    * @model name="promoter"
@@ -373,10 +333,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Proteasesite</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Proteasesite</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PROTEASESITE
    * @model name="proteasesite"
@@ -388,10 +344,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Proteinstab</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Proteinstab</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PROTEINSTAB
    * @model name="proteinstab"
@@ -403,10 +355,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Rarrow</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Rarrow</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RARROW
    * @model name="rarrow"
@@ -418,10 +366,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Record</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Record</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RECORD
    * @model name="record"
@@ -433,10 +377,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Rect</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Rect</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RECT
    * @model name="rect"
@@ -448,10 +388,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Rectangle</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Rectangle</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RECTANGLE
    * @model name="rectangle"
@@ -463,10 +399,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Restrictionsite</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Restrictionsite</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RESTRICTIONSITE
    * @model name="restrictionsite"
@@ -478,10 +410,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Ribosite</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Ribosite</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RIBOSITE
    * @model name="ribosite"
@@ -493,10 +421,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Rnastab</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Rnastab</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RNASTAB
    * @model name="rnastab"
@@ -508,10 +432,6 @@ public enum PolygonBasedNodeShape implements Enumerator
   /**
    * The '<em><b>Rpromoter</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Rpromoter</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #RPROMOTER
    * @model name="rpromoter"
@@ -676,6 +596,7 @@ public enum PolygonBasedNodeShape implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -686,6 +607,7 @@ public enum PolygonBasedNodeShape implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -696,6 +618,7 @@ public enum PolygonBasedNodeShape implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

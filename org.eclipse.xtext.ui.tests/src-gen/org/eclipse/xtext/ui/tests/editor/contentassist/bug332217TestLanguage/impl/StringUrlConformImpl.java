@@ -66,6 +66,7 @@ public class StringUrlConformImpl extends StringFunctionImpl implements StringUr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ScalarExpression getValue()
   {
     return value;
@@ -93,6 +94,7 @@ public class StringUrlConformImpl extends StringFunctionImpl implements StringUr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)

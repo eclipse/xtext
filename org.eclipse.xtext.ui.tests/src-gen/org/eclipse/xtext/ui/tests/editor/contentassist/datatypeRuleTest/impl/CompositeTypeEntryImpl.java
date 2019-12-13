@@ -66,6 +66,7 @@ public class CompositeTypeEntryImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type getDataType()
   {
     if (dataType != null && dataType.eIsProxy())
@@ -96,6 +97,7 @@ public class CompositeTypeEntryImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDataType(Type newDataType)
   {
     Type oldDataType = dataType;

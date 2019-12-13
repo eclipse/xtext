@@ -106,6 +106,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NameExp getName()
   {
     return name;
@@ -133,6 +134,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(NameExp newName)
   {
     if (newName != name)
@@ -154,6 +156,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getArguments()
   {
     if (arguments == null)
@@ -168,6 +171,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isPre()
   {
     return pre;
@@ -178,6 +182,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPre(boolean newPre)
   {
     boolean oldPre = pre;
@@ -302,7 +307,7 @@ public class SquareBracketExpImpl extends ExpressionImpl implements SquareBracke
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (pre: ");
     result.append(pre);
     result.append(')');

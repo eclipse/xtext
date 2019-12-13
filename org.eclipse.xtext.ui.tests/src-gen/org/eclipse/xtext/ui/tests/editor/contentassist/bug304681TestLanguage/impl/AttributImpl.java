@@ -178,6 +178,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getType()
   {
     return type;
@@ -188,6 +189,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(String newType)
   {
     String oldType = type;
@@ -201,6 +203,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShortDescription()
   {
     return shortDescription;
@@ -211,6 +214,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
@@ -224,6 +228,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLongDescription()
   {
     return longDescription;
@@ -234,6 +239,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
@@ -247,6 +253,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ConstraintDefinition> getConstraintDefinitions()
   {
     if (constraintDefinitions == null)
@@ -261,6 +268,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isRequired()
   {
     return required;
@@ -271,6 +279,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRequired(boolean newRequired)
   {
     boolean oldRequired = required;
@@ -284,6 +293,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isTechnical()
   {
     return technical;
@@ -294,6 +304,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTechnical(boolean newTechnical)
   {
     boolean oldTechnical = technical;
@@ -446,7 +457,7 @@ public class AttributImpl extends FeatureImpl implements Attribut
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(", shortDescription: ");

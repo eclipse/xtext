@@ -73,6 +73,7 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEscaped()
   {
     return escaped;
@@ -83,6 +84,7 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEscaped(boolean newEscaped)
   {
     boolean oldEscaped = escaped;
@@ -167,7 +169,7 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (escaped: ");
     result.append(escaped);
     result.append(')');

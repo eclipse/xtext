@@ -108,6 +108,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isGenerator()
   {
     return generator;
@@ -118,6 +119,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGenerator(boolean newGenerator)
   {
     boolean oldGenerator = generator;
@@ -131,6 +133,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -141,6 +144,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -154,6 +158,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Block getBody()
   {
     return body;
@@ -181,6 +186,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(Block newBody)
   {
     if (newBody != body)
@@ -309,7 +315,7 @@ public class FunctionDeclarationImpl extends StatementImpl implements FunctionDe
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (generator: ");
     result.append(generator);
     result.append(", name: ");

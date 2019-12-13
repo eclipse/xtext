@@ -31,10 +31,6 @@ public interface MQLquery extends EObject
    * Returns the value of the '<em><b>Select Entries</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.SelectEntry}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Select Entries</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Select Entries</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug287941TestLanguagePackage#getMQLquery_SelectEntries()
@@ -47,10 +43,6 @@ public interface MQLquery extends EObject
    * Returns the value of the '<em><b>From Entries</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.FromEntry}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>From Entries</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>From Entries</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug287941TestLanguagePackage#getMQLquery_FromEntries()
@@ -63,10 +55,6 @@ public interface MQLquery extends EObject
    * Returns the value of the '<em><b>Where Entries</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.WhereEntry}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Where Entries</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Where Entries</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug287941TestLanguagePackage#getMQLquery_WhereEntries()

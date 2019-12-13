@@ -127,6 +127,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleModel getFirst()
   {
     return first;
@@ -154,6 +155,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(SimpleModel newFirst)
   {
     if (newFirst != first)
@@ -175,6 +177,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryModel getSecond()
   {
     return second;
@@ -202,6 +205,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(MandatoryModel newSecond)
   {
     if (newSecond != second)
@@ -223,6 +227,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LoopedModel getThrird()
   {
     return thrird;
@@ -250,6 +255,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThrird(LoopedModel newThrird)
   {
     if (newThrird != thrird)
@@ -271,6 +277,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GroupLoopedModel getForth()
   {
     return forth;
@@ -298,6 +305,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setForth(GroupLoopedModel newForth)
   {
     if (newForth != forth)
@@ -319,6 +327,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LoopedAlternativeModel getFifth()
   {
     return fifth;
@@ -346,6 +355,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFifth(LoopedAlternativeModel newFifth)
   {
     if (newFifth != fifth)
@@ -367,6 +377,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug304681Model getModel()
   {
     return model;
@@ -394,6 +405,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setModel(Bug304681Model newModel)
   {
     if (newModel != model)

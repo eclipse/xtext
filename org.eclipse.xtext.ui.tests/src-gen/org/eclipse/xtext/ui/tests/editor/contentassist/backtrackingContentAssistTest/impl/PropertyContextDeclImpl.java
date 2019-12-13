@@ -102,6 +102,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PropertyRef getProperty()
   {
     return property;
@@ -129,6 +130,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setProperty(PropertyRef newProperty)
   {
     if (newProperty != property)
@@ -150,6 +152,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeExp getType()
   {
     return type;
@@ -177,6 +180,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(TypeExp newType)
   {
     if (newType != type)
@@ -198,6 +202,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Init getInit()
   {
     return init;
@@ -225,6 +230,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setInit(Init newInit)
   {
     if (newInit != init)
@@ -246,6 +252,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Der getDer()
   {
     return der;
@@ -273,6 +280,7 @@ public class PropertyContextDeclImpl extends ContextDeclImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDer(Der newDer)
   {
     if (newDer != der)

@@ -30,10 +30,6 @@ public interface SimpleClassDeclaration extends EObject
   /**
    * Returns the value of the '<em><b>Modifiers</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Modifiers</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Modifiers</em>' containment reference.
    * @see #setModifiers(UnorderedModifiers)
@@ -56,10 +52,6 @@ public interface SimpleClassDeclaration extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -83,10 +75,6 @@ public interface SimpleClassDeclaration extends EObject
    * Returns the value of the '<em><b>Members</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.ClassMember}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Members</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Bug360834TestLanguagePackage#getSimpleClassDeclaration_Members()

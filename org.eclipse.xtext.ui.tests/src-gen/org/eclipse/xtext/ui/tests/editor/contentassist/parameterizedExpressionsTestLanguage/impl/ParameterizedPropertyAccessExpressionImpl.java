@@ -87,6 +87,7 @@ public class ParameterizedPropertyAccessExpressionImpl extends ExpressionImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getTarget()
   {
     return target;
@@ -114,6 +115,7 @@ public class ParameterizedPropertyAccessExpressionImpl extends ExpressionImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTarget(Expression newTarget)
   {
     if (newTarget != target)
@@ -135,6 +137,7 @@ public class ParameterizedPropertyAccessExpressionImpl extends ExpressionImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getProperty()
   {
     return property;
@@ -145,6 +148,7 @@ public class ParameterizedPropertyAccessExpressionImpl extends ExpressionImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setProperty(String newProperty)
   {
     String oldProperty = property;
@@ -255,7 +259,7 @@ public class ParameterizedPropertyAccessExpressionImpl extends ExpressionImpl im
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (property: ");
     result.append(property);
     result.append(')');

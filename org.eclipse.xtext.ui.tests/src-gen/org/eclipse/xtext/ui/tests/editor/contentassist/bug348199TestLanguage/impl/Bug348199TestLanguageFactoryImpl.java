@@ -77,6 +77,7 @@ public class Bug348199TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Timeperiod createTimeperiod()
   {
     TimeperiodImpl timeperiod = new TimeperiodImpl();
@@ -88,6 +89,7 @@ public class Bug348199TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TimeDef createTimeDef()
   {
     TimeDefImpl timeDef = new TimeDefImpl();
@@ -99,6 +101,7 @@ public class Bug348199TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug348199TestLanguagePackage getBug348199TestLanguagePackage()
   {
     return (Bug348199TestLanguagePackage)getEPackage();

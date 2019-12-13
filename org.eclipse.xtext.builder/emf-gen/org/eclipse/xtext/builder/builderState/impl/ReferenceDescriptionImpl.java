@@ -20,7 +20,6 @@ import org.eclipse.xtext.builder.builderState.ReferenceDescription;
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Reference Description</b></em>'. <!--
  * end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -156,6 +155,7 @@ public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.Minimal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URI getSourceEObjectUri() {
 		return sourceEObjectUri;
 	}
@@ -177,6 +177,7 @@ public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.Minimal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URI getTargetEObjectUri() {
 		return targetEObjectUri;
 	}
@@ -198,6 +199,7 @@ public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.Minimal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getIndexInList() {
 		return indexInList;
 	}
@@ -219,6 +221,7 @@ public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.Minimal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URI getContainerEObjectURI() {
 		return containerEObjectURI;
 	}
@@ -364,7 +367,7 @@ public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.Minimal
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (sourceEObjectUri: ");
 		result.append(sourceEObjectUri);
 		result.append(", targetEObjectUri: ");

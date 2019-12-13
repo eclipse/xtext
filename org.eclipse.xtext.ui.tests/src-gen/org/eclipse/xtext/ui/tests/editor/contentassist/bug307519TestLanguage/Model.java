@@ -30,10 +30,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>E1</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Elem1}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>E1</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>E1</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Bug307519TestLanguagePackage#getModel_E1()
@@ -46,10 +42,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>E2</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Elem2}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>E2</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>E2</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Bug307519TestLanguagePackage#getModel_E2()

@@ -26,10 +26,6 @@ public interface TimeDef extends EObject
   /**
    * Returns the value of the '<em><b>Day</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Day</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Day</em>' attribute.
    * @see #setDay(int)

@@ -28,10 +28,6 @@ public interface LetExp extends Expression
    * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.LetVariable}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variable</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.BacktrackingContentAssistTestPackage#getLetExp_Variable()
@@ -43,10 +39,6 @@ public interface LetExp extends Expression
   /**
    * Returns the value of the '<em><b>In</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>In</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>In</em>' containment reference.
    * @see #setIn(Expression)

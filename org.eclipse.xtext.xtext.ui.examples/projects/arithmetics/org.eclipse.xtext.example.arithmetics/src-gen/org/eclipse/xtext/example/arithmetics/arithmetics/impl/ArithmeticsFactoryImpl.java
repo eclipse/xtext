@@ -17,7 +17,21 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.example.arithmetics.arithmetics.*;
+import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsFactory;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
+import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
+import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
+import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,7 +109,8 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Module createModule()
+  @Override
+  public org.eclipse.xtext.example.arithmetics.arithmetics.Module createModule()
   {
     ModuleImpl module = new ModuleImpl();
     return module;
@@ -106,6 +121,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -117,6 +133,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Statement createStatement()
   {
     StatementImpl statement = new StatementImpl();
@@ -128,6 +145,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Definition createDefinition()
   {
     DefinitionImpl definition = new DefinitionImpl();
@@ -139,6 +157,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DeclaredParameter createDeclaredParameter()
   {
     DeclaredParameterImpl declaredParameter = new DeclaredParameterImpl();
@@ -150,6 +169,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractDefinition createAbstractDefinition()
   {
     AbstractDefinitionImpl abstractDefinition = new AbstractDefinitionImpl();
@@ -161,6 +181,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Evaluation createEvaluation()
   {
     EvaluationImpl evaluation = new EvaluationImpl();
@@ -172,6 +193,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
@@ -183,6 +205,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Plus createPlus()
   {
     PlusImpl plus = new PlusImpl();
@@ -194,6 +217,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Minus createMinus()
   {
     MinusImpl minus = new MinusImpl();
@@ -205,6 +229,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Multi createMulti()
   {
     MultiImpl multi = new MultiImpl();
@@ -216,6 +241,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Div createDiv()
   {
     DivImpl div = new DivImpl();
@@ -227,6 +253,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NumberLiteral createNumberLiteral()
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
@@ -238,6 +265,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FunctionCall createFunctionCall()
   {
     FunctionCallImpl functionCall = new FunctionCallImpl();
@@ -249,6 +277,7 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ArithmeticsPackage getArithmeticsPackage()
   {
     return (ArithmeticsPackage)getEPackage();

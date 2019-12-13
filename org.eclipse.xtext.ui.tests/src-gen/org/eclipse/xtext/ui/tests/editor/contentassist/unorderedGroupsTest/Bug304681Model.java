@@ -32,10 +32,6 @@ public interface Bug304681Model extends EObject
   /**
    * Returns the value of the '<em><b>Short Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Short Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Short Description</em>' attribute.
    * @see #setShortDescription(String)
@@ -58,10 +54,6 @@ public interface Bug304681Model extends EObject
   /**
    * Returns the value of the '<em><b>Long Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Long Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Long Description</em>' attribute.
    * @see #setLongDescription(String)
@@ -84,10 +76,6 @@ public interface Bug304681Model extends EObject
   /**
    * Returns the value of the '<em><b>Uid</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Uid</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Uid</em>' attribute.
    * @see #setUid(String)
@@ -110,10 +98,6 @@ public interface Bug304681Model extends EObject
   /**
    * Returns the value of the '<em><b>Flag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Flag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Flag</em>' attribute.
    * @see #setFlag(boolean)
@@ -137,10 +121,6 @@ public interface Bug304681Model extends EObject
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Features</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Features</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getBug304681Model_Features()

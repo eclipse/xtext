@@ -88,6 +88,7 @@ public class ContentImpl extends MinimalEObjectImpl.Container implements Content
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Tag getTag()
   {
     return tag;
@@ -115,6 +116,7 @@ public class ContentImpl extends MinimalEObjectImpl.Container implements Content
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTag(Tag newTag)
   {
     if (newTag != tag)
@@ -136,6 +138,7 @@ public class ContentImpl extends MinimalEObjectImpl.Container implements Content
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getText()
   {
     return text;
@@ -146,6 +149,7 @@ public class ContentImpl extends MinimalEObjectImpl.Container implements Content
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setText(String newText)
   {
     String oldText = text;
@@ -256,7 +260,7 @@ public class ContentImpl extends MinimalEObjectImpl.Container implements Content
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (text: ");
     result.append(text);
     result.append(')');

@@ -70,6 +70,7 @@ public class BlockImpl extends StatementImpl implements Block
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Statement> getDirectives()
   {
     if (directives == null)

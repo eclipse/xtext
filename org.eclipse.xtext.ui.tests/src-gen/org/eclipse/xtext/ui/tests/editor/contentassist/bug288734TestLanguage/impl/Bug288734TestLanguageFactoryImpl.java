@@ -81,6 +81,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -92,6 +93,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TConstant createTConstant()
   {
     TConstantImpl tConstant = new TConstantImpl();
@@ -103,6 +105,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TStringConstant createTStringConstant()
   {
     TStringConstantImpl tStringConstant = new TStringConstantImpl();
@@ -114,6 +117,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TIntegerConstant createTIntegerConstant()
   {
     TIntegerConstantImpl tIntegerConstant = new TIntegerConstantImpl();
@@ -125,6 +129,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TBooleanConstant createTBooleanConstant()
   {
     TBooleanConstantImpl tBooleanConstant = new TBooleanConstantImpl();
@@ -136,6 +141,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TAnnotation createTAnnotation()
   {
     TAnnotationImpl tAnnotation = new TAnnotationImpl();
@@ -147,6 +153,7 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug288734TestLanguagePackage getBug288734TestLanguagePackage()
   {
     return (Bug288734TestLanguagePackage)getEPackage();

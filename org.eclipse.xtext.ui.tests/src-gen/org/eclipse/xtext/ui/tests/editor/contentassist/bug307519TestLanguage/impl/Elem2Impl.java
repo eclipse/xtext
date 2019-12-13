@@ -75,6 +75,7 @@ public class Elem2Impl extends MinimalEObjectImpl.Container implements Elem2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumT getValue()
   {
     return value;
@@ -85,6 +86,7 @@ public class Elem2Impl extends MinimalEObjectImpl.Container implements Elem2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(EnumT newValue)
   {
     EnumT oldValue = value;
@@ -169,7 +171,7 @@ public class Elem2Impl extends MinimalEObjectImpl.Container implements Elem2
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(')');

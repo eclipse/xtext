@@ -113,7 +113,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link DomainModelTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -128,7 +128,8 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
     if (isInited) return (DomainModelTestPackage)EPackage.Registry.INSTANCE.getEPackage(DomainModelTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    DomainModelTestPackageImpl theDomainModelTestPackage = (DomainModelTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DomainModelTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DomainModelTestPackageImpl());
+    Object registeredDomainModelTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    DomainModelTestPackageImpl theDomainModelTestPackage = registeredDomainModelTestPackage instanceof DomainModelTestPackageImpl ? (DomainModelTestPackageImpl)registeredDomainModelTestPackage : new DomainModelTestPackageImpl();
 
     isInited = true;
 
@@ -141,7 +142,6 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
     // Mark meta-data to indicate it can't be changed
     theDomainModelTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(DomainModelTestPackage.eNS_URI, theDomainModelTestPackage);
     return theDomainModelTestPackage;
@@ -152,6 +152,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -162,6 +163,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -172,6 +174,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -182,6 +185,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -192,6 +196,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -202,6 +207,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -212,6 +218,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -222,6 +229,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDataType()
   {
     return dataTypeEClass;
@@ -232,6 +240,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getClass_()
   {
     return classEClass;
@@ -242,6 +251,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(0);
@@ -252,6 +262,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getClass_Properties()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(1);
@@ -262,6 +273,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getClass_SubClasses()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(2);
@@ -272,6 +284,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProperty()
   {
     return propertyEClass;
@@ -282,6 +295,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getProperty_Name()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
@@ -292,6 +306,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttribute()
   {
     return attributeEClass;
@@ -302,6 +317,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAttribute_Type()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(0);
@@ -312,6 +328,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReference()
   {
     return referenceEClass;
@@ -322,6 +339,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReference_Type()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
@@ -332,6 +350,7 @@ public class DomainModelTestPackageImpl extends EPackageImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainModelTestFactory getDomainModelTestFactory()
   {
     return (DomainModelTestFactory)getEFactoryInstance();

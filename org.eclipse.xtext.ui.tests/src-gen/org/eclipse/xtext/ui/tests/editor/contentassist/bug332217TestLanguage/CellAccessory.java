@@ -63,10 +63,6 @@ public enum CellAccessory implements Enumerator
   /**
    * The '<em><b>None</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>None</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NONE
    * @model name="None"
@@ -78,10 +74,6 @@ public enum CellAccessory implements Enumerator
   /**
    * The '<em><b>Link</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Link</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LINK
    * @model name="Link"
@@ -93,10 +85,6 @@ public enum CellAccessory implements Enumerator
   /**
    * The '<em><b>Detail</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Detail</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #DETAIL
    * @model name="Detail"
@@ -108,10 +96,6 @@ public enum CellAccessory implements Enumerator
   /**
    * The '<em><b>Check</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Check</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #CHECK
    * @model name="Check"
@@ -244,6 +228,7 @@ public enum CellAccessory implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -254,6 +239,7 @@ public enum CellAccessory implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -264,6 +250,7 @@ public enum CellAccessory implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

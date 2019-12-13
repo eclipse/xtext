@@ -28,10 +28,6 @@ public interface Class extends Type
   /**
    * Returns the value of the '<em><b>Super Class</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Super Class</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Class</em>' reference.
    * @see #setSuperClass(Class)
@@ -55,10 +51,6 @@ public interface Class extends Type
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Property}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage#getClass_Properties()
@@ -71,10 +63,6 @@ public interface Class extends Type
    * Returns the value of the '<em><b>Sub Classes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub Classes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub Classes</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage#getClass_SubClasses()

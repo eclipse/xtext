@@ -72,6 +72,7 @@ public class XmlDocumentImpl extends MinimalEObjectImpl.Container implements Xml
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Content> getContents()
   {
     if (contents == null)

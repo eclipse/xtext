@@ -113,6 +113,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -123,6 +124,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -136,6 +138,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<DeclaredParameter> getArgs()
   {
     if (args == null)
@@ -150,6 +153,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpr()
   {
     return expr;
@@ -177,6 +181,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
@@ -347,7 +352,7 @@ public class DefinitionImpl extends StatementImpl implements Definition
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -88,6 +88,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isNotIn()
   {
     return notIn;
@@ -98,6 +99,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
@@ -111,6 +113,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Scope getScope()
   {
     return scope;
@@ -138,6 +141,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setScope(Scope newScope)
   {
     if (newScope != scope)
@@ -256,7 +260,7 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (notIn: ");
     result.append(notIn);
     result.append(')');

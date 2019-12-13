@@ -31,10 +31,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' containment reference.
    * @see #setFirst(SimpleModel)
@@ -57,10 +53,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Second</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second</em>' containment reference.
    * @see #setSecond(MandatoryModel)
@@ -83,10 +75,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Thrird</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Thrird</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Thrird</em>' containment reference.
    * @see #setThrird(LoopedModel)
@@ -109,10 +97,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Forth</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth</em>' containment reference.
    * @see #setForth(GroupLoopedModel)
@@ -135,10 +119,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Fifth</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Fifth</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fifth</em>' containment reference.
    * @see #setFifth(LoopedAlternativeModel)
@@ -161,10 +141,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Model</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Model</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Model</em>' containment reference.
    * @see #setModel(Bug304681Model)

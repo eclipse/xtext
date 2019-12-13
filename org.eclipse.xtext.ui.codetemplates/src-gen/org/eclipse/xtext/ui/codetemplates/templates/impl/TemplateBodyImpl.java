@@ -72,6 +72,7 @@ public class TemplateBodyImpl extends MinimalEObjectImpl.Container implements Te
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TemplatePart> getParts()
   {
     if (parts == null)

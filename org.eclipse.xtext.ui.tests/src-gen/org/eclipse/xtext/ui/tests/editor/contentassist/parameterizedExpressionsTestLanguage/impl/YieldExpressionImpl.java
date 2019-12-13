@@ -87,6 +87,7 @@ public class YieldExpressionImpl extends ExpressionImpl implements YieldExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isMany()
   {
     return many;
@@ -97,6 +98,7 @@ public class YieldExpressionImpl extends ExpressionImpl implements YieldExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMany(boolean newMany)
   {
     boolean oldMany = many;
@@ -110,6 +112,7 @@ public class YieldExpressionImpl extends ExpressionImpl implements YieldExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpression()
   {
     return expression;
@@ -137,6 +140,7 @@ public class YieldExpressionImpl extends ExpressionImpl implements YieldExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
@@ -255,7 +259,7 @@ public class YieldExpressionImpl extends ExpressionImpl implements YieldExpressi
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (many: ");
     result.append(many);
     result.append(')');

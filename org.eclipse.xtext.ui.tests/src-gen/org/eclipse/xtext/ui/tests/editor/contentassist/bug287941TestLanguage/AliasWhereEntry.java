@@ -26,10 +26,6 @@ public interface AliasWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Alias</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' reference.
    * @see #setAlias(FromEntry)
@@ -52,10 +48,6 @@ public interface AliasWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Right Alias</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Alias</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Alias</em>' reference.
    * @see #setRightAlias(FromEntry)

@@ -99,6 +99,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getSource()
   {
     return source;
@@ -126,6 +127,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(Expression newSource)
   {
     if (newSource != source)
@@ -147,6 +149,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOp()
   {
     return op;
@@ -157,6 +160,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOp(String newOp)
   {
     String oldOp = op;
@@ -170,6 +174,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NavigatingExp getArgument()
   {
     return argument;
@@ -197,6 +202,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setArgument(NavigatingExp newArgument)
   {
     if (newArgument != argument)
@@ -327,7 +333,7 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (op: ");
     result.append(op);
     result.append(')');

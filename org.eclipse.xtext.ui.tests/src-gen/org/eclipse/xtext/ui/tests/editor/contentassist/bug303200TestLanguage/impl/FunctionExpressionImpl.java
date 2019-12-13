@@ -78,6 +78,7 @@ public class FunctionExpressionImpl extends PrimaryExpressionImpl implements Fun
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameters getParams()
   {
     return params;
@@ -105,6 +106,7 @@ public class FunctionExpressionImpl extends PrimaryExpressionImpl implements Fun
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParams(Parameters newParams)
   {
     if (newParams != params)
@@ -126,6 +128,7 @@ public class FunctionExpressionImpl extends PrimaryExpressionImpl implements Fun
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Block getBody()
   {
     return body;
@@ -153,6 +156,7 @@ public class FunctionExpressionImpl extends PrimaryExpressionImpl implements Fun
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(Block newBody)
   {
     if (newBody != body)

@@ -88,6 +88,7 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getConstraintName()
   {
     return constraintName;
@@ -98,6 +99,7 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setConstraintName(String newConstraintName)
   {
     String oldConstraintName = constraintName;
@@ -111,6 +113,7 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpression()
   {
     return expression;
@@ -138,6 +141,7 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
@@ -256,7 +260,7 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (constraintName: ");
     result.append(constraintName);
     result.append(')');

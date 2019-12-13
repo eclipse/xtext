@@ -27,10 +27,6 @@ public interface AttributeWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Alias</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' reference.
    * @see #setAlias(FromEntry)
@@ -53,10 +49,6 @@ public interface AttributeWhereEntry extends WhereEntry
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attribute</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' reference.
    * @see #setAttribute(EAttribute)

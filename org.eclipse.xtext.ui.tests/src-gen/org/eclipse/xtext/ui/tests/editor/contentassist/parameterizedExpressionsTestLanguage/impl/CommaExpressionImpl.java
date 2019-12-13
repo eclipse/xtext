@@ -70,6 +70,7 @@ public class CommaExpressionImpl extends ExpressionImpl implements CommaExpressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getExprs()
   {
     if (exprs == null)

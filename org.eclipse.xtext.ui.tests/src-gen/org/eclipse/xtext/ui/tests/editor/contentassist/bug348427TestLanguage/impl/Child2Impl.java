@@ -116,6 +116,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -126,6 +127,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -139,6 +141,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isBool()
   {
     return bool;
@@ -149,6 +152,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBool(boolean newBool)
   {
     boolean oldBool = bool;
@@ -162,6 +166,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getString()
   {
     return string;
@@ -172,6 +177,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setString(String newString)
   {
     String oldString = string;
@@ -276,7 +282,7 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", bool: ");

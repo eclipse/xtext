@@ -118,6 +118,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)
@@ -132,6 +133,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -142,6 +144,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -155,6 +158,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameters getParams()
   {
     return params;
@@ -182,6 +186,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParams(Parameters newParams)
   {
     if (newParams != params)
@@ -203,6 +208,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Block getBody()
   {
     return body;
@@ -230,6 +236,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(Block newBody)
   {
     if (newBody != body)
@@ -374,7 +381,7 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

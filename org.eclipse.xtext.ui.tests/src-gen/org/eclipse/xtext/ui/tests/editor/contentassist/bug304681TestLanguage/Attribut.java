@@ -31,10 +31,6 @@ public interface Attribut extends Feature
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' attribute.
    * @see #setType(String)
@@ -57,10 +53,6 @@ public interface Attribut extends Feature
   /**
    * Returns the value of the '<em><b>Short Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Short Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Short Description</em>' attribute.
    * @see #setShortDescription(String)
@@ -83,10 +75,6 @@ public interface Attribut extends Feature
   /**
    * Returns the value of the '<em><b>Long Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Long Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Long Description</em>' attribute.
    * @see #setLongDescription(String)
@@ -110,10 +98,6 @@ public interface Attribut extends Feature
    * Returns the value of the '<em><b>Constraint Definitions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Constraint Definitions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Constraint Definitions</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage#getAttribut_ConstraintDefinitions()
@@ -125,10 +109,6 @@ public interface Attribut extends Feature
   /**
    * Returns the value of the '<em><b>Required</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Required</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Required</em>' attribute.
    * @see #setRequired(boolean)
@@ -151,10 +131,6 @@ public interface Attribut extends Feature
   /**
    * Returns the value of the '<em><b>Technical</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Technical</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Technical</em>' attribute.
    * @see #setTechnical(boolean)

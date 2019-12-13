@@ -77,6 +77,7 @@ public class BrokenImpl extends ElementImpl implements Broken
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getIds()
   {
     if (ids == null)
@@ -91,6 +92,7 @@ public class BrokenImpl extends ElementImpl implements Broken
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Broken> getRefs()
   {
     if (refs == null)
@@ -189,7 +191,7 @@ public class BrokenImpl extends ElementImpl implements Broken
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (ids: ");
     result.append(ids);
     result.append(')');

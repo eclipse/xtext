@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.DataConverter;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
+import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.EObjectDescription;
@@ -123,6 +124,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IResourceDescription createResourceDescription() {
 		ResourceDescriptionImpl resourceDescription = new ResourceDescriptionImpl();
 		return resourceDescription;
@@ -133,6 +135,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObjectDescription createEObjectDescription() {
 		EObjectDescriptionImpl eObjectDescription = new EObjectDescriptionImpl();
 		return eObjectDescription;
@@ -153,6 +156,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReferenceDescription createReferenceDescription() {
 		ReferenceDescriptionImpl referenceDescription = new ReferenceDescriptionImpl();
 		return referenceDescription;
@@ -260,6 +264,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BuilderStatePackage getBuilderStatePackage() {
 		return (BuilderStatePackage)getEPackage();
 	}

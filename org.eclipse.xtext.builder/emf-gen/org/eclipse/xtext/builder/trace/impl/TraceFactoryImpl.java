@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.xtext.builder.trace.*;
 import org.eclipse.xtext.builder.trace.DebugLocationData;
 import org.eclipse.xtext.builder.trace.DebugTraceRegion;
 import org.eclipse.xtext.builder.trace.TraceFactory;
@@ -100,6 +101,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DebugTraceRegion createDebugTraceRegion() {
 		DebugTraceRegionImpl debugTraceRegion = new DebugTraceRegionImpl();
 		return debugTraceRegion;
@@ -110,6 +112,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DebugLocationData createDebugLocationData() {
 		DebugLocationDataImpl debugLocationData = new DebugLocationDataImpl();
 		return debugLocationData;
@@ -138,6 +141,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TracePackage getTracePackage() {
 		return (TracePackage)getEPackage();
 	}

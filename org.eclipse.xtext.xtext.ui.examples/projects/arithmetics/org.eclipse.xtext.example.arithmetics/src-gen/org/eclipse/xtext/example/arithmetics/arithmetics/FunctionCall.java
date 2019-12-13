@@ -33,10 +33,6 @@ public interface FunctionCall extends Expression
   /**
    * Returns the value of the '<em><b>Func</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Func</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Func</em>' reference.
    * @see #setFunc(AbstractDefinition)
@@ -60,10 +56,6 @@ public interface FunctionCall extends Expression
    * Returns the value of the '<em><b>Args</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.example.arithmetics.arithmetics.Expression}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Args</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Args</em>' containment reference list.
    * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getFunctionCall_Args()

@@ -132,6 +132,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -142,6 +143,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -155,6 +157,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getType()
   {
     return type;
@@ -165,6 +168,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(String newType)
   {
     String oldType = type;
@@ -178,6 +182,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isExpectingParameters()
   {
     return expectingParameters;
@@ -188,6 +193,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpectingParameters(boolean newExpectingParameters)
   {
     boolean oldExpectingParameters = expectingParameters;
@@ -201,6 +207,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getParameters()
   {
     if (parameters == null)
@@ -318,7 +325,7 @@ public class VariableImpl extends TemplatePartImpl implements Variable
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", type: ");

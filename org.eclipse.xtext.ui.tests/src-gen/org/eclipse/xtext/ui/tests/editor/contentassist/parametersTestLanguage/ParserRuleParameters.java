@@ -26,10 +26,6 @@ public interface ParserRuleParameters extends EObject
   /**
    * Returns the value of the '<em><b>Scenario</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Scenario</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Scenario</em>' containment reference.
    * @see #setScenario(Scenario)

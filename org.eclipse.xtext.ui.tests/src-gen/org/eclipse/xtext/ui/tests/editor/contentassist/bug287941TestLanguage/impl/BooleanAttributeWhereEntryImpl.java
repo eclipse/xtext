@@ -95,6 +95,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanOperator getOperator()
   {
     return operator;
@@ -105,6 +106,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
@@ -118,6 +120,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isIsTrue()
   {
     return isTrue;
@@ -128,6 +131,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
@@ -222,7 +226,7 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(", isTrue: ");

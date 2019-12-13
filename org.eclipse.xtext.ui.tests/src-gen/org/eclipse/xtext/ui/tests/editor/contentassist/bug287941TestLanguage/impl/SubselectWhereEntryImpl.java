@@ -111,6 +111,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
@@ -141,6 +142,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
@@ -154,6 +156,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReference()
   {
     if (reference != null && reference.eIsProxy())
@@ -184,6 +187,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReference(EReference newReference)
   {
     EReference oldReference = reference;
@@ -197,6 +201,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isNotIn()
   {
     return notIn;
@@ -207,6 +212,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
@@ -220,6 +226,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MQLquery getSubQuery()
   {
     return subQuery;
@@ -247,6 +254,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubQuery(MQLquery newSubQuery)
   {
     if (newSubQuery != subQuery)
@@ -387,7 +395,7 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (notIn: ");
     result.append(notIn);
     result.append(')');

@@ -95,6 +95,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StringOperator getOperator()
   {
     return operator;
@@ -105,6 +106,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(StringOperator newOperator)
   {
     StringOperator oldOperator = operator;
@@ -118,6 +120,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPattern()
   {
     return pattern;
@@ -128,6 +131,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPattern(String newPattern)
   {
     String oldPattern = pattern;
@@ -222,7 +226,7 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(", pattern: ");

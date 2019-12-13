@@ -74,6 +74,7 @@ public class ThirdLevelB1Impl extends MinimalEObjectImpl.Container implements Th
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -84,6 +85,7 @@ public class ThirdLevelB1Impl extends MinimalEObjectImpl.Container implements Th
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -168,7 +170,7 @@ public class ThirdLevelB1Impl extends MinimalEObjectImpl.Container implements Th
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

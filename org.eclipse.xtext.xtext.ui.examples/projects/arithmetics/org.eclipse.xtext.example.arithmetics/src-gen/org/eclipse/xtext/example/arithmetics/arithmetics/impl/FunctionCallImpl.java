@@ -91,6 +91,7 @@ public class FunctionCallImpl extends ExpressionImpl implements FunctionCall
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractDefinition getFunc()
   {
     if (func != null && func.eIsProxy())
@@ -121,6 +122,7 @@ public class FunctionCallImpl extends ExpressionImpl implements FunctionCall
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFunc(AbstractDefinition newFunc)
   {
     AbstractDefinition oldFunc = func;
@@ -134,6 +136,7 @@ public class FunctionCallImpl extends ExpressionImpl implements FunctionCall
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getArgs()
   {
     if (args == null)

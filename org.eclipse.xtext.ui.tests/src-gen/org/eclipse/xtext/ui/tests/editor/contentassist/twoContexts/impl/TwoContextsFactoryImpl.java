@@ -77,6 +77,7 @@ public class TwoContextsFactoryImpl extends EFactoryImpl implements TwoContextsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MainModel createMainModel()
   {
     MainModelImpl mainModel = new MainModelImpl();
@@ -88,6 +89,7 @@ public class TwoContextsFactoryImpl extends EFactoryImpl implements TwoContextsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnElement createAnElement()
   {
     AnElementImpl anElement = new AnElementImpl();
@@ -99,6 +101,7 @@ public class TwoContextsFactoryImpl extends EFactoryImpl implements TwoContextsF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoContextsPackage getTwoContextsPackage()
   {
     return (TwoContextsPackage)getEPackage();

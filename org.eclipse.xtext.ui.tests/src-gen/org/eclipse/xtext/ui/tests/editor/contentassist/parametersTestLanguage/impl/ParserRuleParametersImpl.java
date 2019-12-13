@@ -67,6 +67,7 @@ public class ParserRuleParametersImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Scenario getScenario()
   {
     return scenario;
@@ -94,6 +95,7 @@ public class ParserRuleParametersImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setScenario(Scenario newScenario)
   {
     if (newScenario != scenario)

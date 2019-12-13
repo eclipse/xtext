@@ -66,7 +66,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FoldingPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
     if (isInited) return (FoldingPackage)EPackage.Registry.INSTANCE.getEPackage(FoldingPackage.eNS_URI);
 
     // Obtain or create and register package
-    FoldingPackageImpl theFoldingPackage = (FoldingPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FoldingPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FoldingPackageImpl());
+    Object registeredFoldingPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FoldingPackageImpl theFoldingPackage = registeredFoldingPackage instanceof FoldingPackageImpl ? (FoldingPackageImpl)registeredFoldingPackage : new FoldingPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
     // Mark meta-data to indicate it can't be changed
     theFoldingPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FoldingPackage.eNS_URI, theFoldingPackage);
     return theFoldingPackage;
@@ -105,6 +105,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoldingModel()
   {
     return foldingModelEClass;
@@ -115,6 +116,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoldingModel_Elements()
   {
     return (EReference)foldingModelEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -135,6 +138,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Subelements()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FoldingFactory getFoldingFactory()
   {
     return (FoldingFactory)getEFactoryInstance();

@@ -111,6 +111,7 @@ public class Bug286935TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State createState()
   {
     StateImpl state = new StateImpl();
@@ -144,6 +145,7 @@ public class Bug286935TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug286935TestLanguagePackage getBug286935TestLanguagePackage()
   {
     return (Bug286935TestLanguagePackage)getEPackage();

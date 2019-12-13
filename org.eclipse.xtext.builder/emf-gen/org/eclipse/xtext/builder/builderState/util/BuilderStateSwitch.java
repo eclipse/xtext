@@ -11,6 +11,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.EObjectDescription;
 import org.eclipse.xtext.builder.builderState.ReferenceDescription;

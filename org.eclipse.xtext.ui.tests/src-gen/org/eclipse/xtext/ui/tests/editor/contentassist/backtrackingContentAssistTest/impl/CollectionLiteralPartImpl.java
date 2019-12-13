@@ -78,6 +78,7 @@ public class CollectionLiteralPartImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpression()
   {
     return expression;
@@ -105,6 +106,7 @@ public class CollectionLiteralPartImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
@@ -126,6 +128,7 @@ public class CollectionLiteralPartImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getLastExpression()
   {
     return lastExpression;
@@ -153,6 +156,7 @@ public class CollectionLiteralPartImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLastExpression(Expression newLastExpression)
   {
     if (newLastExpression != lastExpression)

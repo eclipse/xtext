@@ -74,6 +74,7 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTypeName()
   {
     return typeName;
@@ -84,6 +85,7 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTypeName(String newTypeName)
   {
     String oldTypeName = typeName;
@@ -168,7 +170,7 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (typeName: ");
     result.append(typeName);
     result.append(')');

@@ -67,6 +67,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getUris()
   {
     if (uris == null)
@@ -154,7 +155,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (uris: ");
     result.append(uris);
     result.append(')');

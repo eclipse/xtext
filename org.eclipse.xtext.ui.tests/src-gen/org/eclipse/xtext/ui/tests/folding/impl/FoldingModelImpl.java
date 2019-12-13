@@ -72,6 +72,7 @@ public class FoldingModelImpl extends MinimalEObjectImpl.Container implements Fo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Element> getElements()
   {
     if (elements == null)

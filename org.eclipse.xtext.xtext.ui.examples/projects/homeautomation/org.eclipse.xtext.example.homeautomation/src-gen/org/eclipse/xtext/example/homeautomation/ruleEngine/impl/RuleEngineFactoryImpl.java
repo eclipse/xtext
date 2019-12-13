@@ -80,6 +80,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Declaration createDeclaration()
   {
     DeclarationImpl declaration = new DeclarationImpl();
@@ -102,6 +104,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Device createDevice()
   {
     DeviceImpl device = new DeviceImpl();
@@ -113,6 +116,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State createState()
   {
     StateImpl state = new StateImpl();
@@ -124,6 +128,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Rule createRule()
   {
     RuleImpl rule = new RuleImpl();
@@ -135,6 +140,7 @@ public class RuleEngineFactoryImpl extends EFactoryImpl implements RuleEngineFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RuleEnginePackage getRuleEnginePackage()
   {
     return (RuleEnginePackage)getEPackage();

@@ -99,7 +99,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug348427TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -114,7 +114,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug348427TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug348427TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug348427TestLanguagePackageImpl theBug348427TestLanguagePackage = (Bug348427TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug348427TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug348427TestLanguagePackageImpl());
+    Object registeredBug348427TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug348427TestLanguagePackageImpl theBug348427TestLanguagePackage = registeredBug348427TestLanguagePackage instanceof Bug348427TestLanguagePackageImpl ? (Bug348427TestLanguagePackageImpl)registeredBug348427TestLanguagePackage : new Bug348427TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -127,7 +128,6 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug348427TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug348427TestLanguagePackage.eNS_URI, theBug348427TestLanguagePackage);
     return theBug348427TestLanguagePackage;
@@ -138,6 +138,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -148,6 +149,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Element1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -158,6 +160,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Element2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -168,6 +171,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getScenario1()
   {
     return scenario1EClass;
@@ -178,6 +182,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getScenario1_Child()
   {
     return (EReference)scenario1EClass.getEStructuralFeatures().get(0);
@@ -188,6 +193,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild1()
   {
     return child1EClass;
@@ -198,6 +204,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild1_Name()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(0);
@@ -208,6 +215,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild1_Bool()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(1);
@@ -218,6 +226,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild1_EnumType()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(2);
@@ -228,6 +237,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getScenario2()
   {
     return scenario2EClass;
@@ -238,6 +248,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getScenario2_Child()
   {
     return (EReference)scenario2EClass.getEStructuralFeatures().get(0);
@@ -248,6 +259,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild2()
   {
     return child2EClass;
@@ -258,6 +270,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild2_Name()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(0);
@@ -268,6 +281,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild2_Bool()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(1);
@@ -278,6 +292,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild2_String()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(2);
@@ -288,6 +303,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getEnumType()
   {
     return enumTypeEEnum;
@@ -298,6 +314,7 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug348427TestLanguageFactory getBug348427TestLanguageFactory()
   {
     return (Bug348427TestLanguageFactory)getEFactoryInstance();

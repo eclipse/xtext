@@ -30,10 +30,6 @@ public interface PolygonBasedShape extends EObject
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape}.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Shape</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Shape</em>' attribute list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.noTerminalExtension.PolygonBasedNodeShape
