@@ -37,10 +37,6 @@ public interface State extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -64,10 +60,6 @@ public interface State extends EObject
    * Returns the value of the '<em><b>Commands</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.Command}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Commands</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Commands</em>' containment reference list.
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getState_Commands()
@@ -80,10 +72,6 @@ public interface State extends EObject
    * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.Transition}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Transitions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transitions</em>' containment reference list.
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getState_Transitions()
@@ -96,10 +84,6 @@ public interface State extends EObject
    * Returns the value of the '<em><b>Nested States</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.State}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Nested States</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested States</em>' containment reference list.
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getState_NestedStates()

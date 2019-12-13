@@ -90,6 +90,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Signal> getSignals()
   {
     if (signals == null)
@@ -104,6 +105,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<State> getStates()
   {
     if (states == null)

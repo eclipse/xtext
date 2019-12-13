@@ -93,6 +93,7 @@ public class OperationImpl extends FeatureImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<JvmFormalParameter> getParams()
   {
     if (params == null)
@@ -107,6 +108,7 @@ public class OperationImpl extends FeatureImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XExpression getBody()
   {
     return body;
@@ -134,6 +136,7 @@ public class OperationImpl extends FeatureImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(XExpression newBody)
   {
     if (newBody != body)

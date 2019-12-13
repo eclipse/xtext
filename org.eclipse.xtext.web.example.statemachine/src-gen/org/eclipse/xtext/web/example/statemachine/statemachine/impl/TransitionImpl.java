@@ -85,6 +85,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Condition getCondition()
   {
     return condition;
@@ -112,6 +113,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCondition(Condition newCondition)
   {
     if (newCondition != condition)
@@ -133,6 +135,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getState()
   {
     if (state != null && state.eIsProxy())
@@ -163,6 +166,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setState(State newState)
   {
     State oldState = state;

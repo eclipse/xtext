@@ -33,10 +33,6 @@ public interface Command extends EObject
   /**
    * Returns the value of the '<em><b>Signal</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Signal</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Signal</em>' reference.
    * @see #setSignal(Signal)
@@ -59,10 +55,6 @@ public interface Command extends EObject
   /**
    * Returns the value of the '<em><b>New Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>New Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>New Value</em>' attribute.
    * @see #setNewValue(boolean)

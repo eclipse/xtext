@@ -36,10 +36,6 @@ public interface Statemachine extends EObject
    * Returns the value of the '<em><b>Signals</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.Signal}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Signals</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Signals</em>' containment reference list.
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getStatemachine_Signals()
@@ -52,10 +48,6 @@ public interface Statemachine extends EObject
    * Returns the value of the '<em><b>States</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.State}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>States</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>States</em>' containment reference list.
    * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getStatemachine_States()

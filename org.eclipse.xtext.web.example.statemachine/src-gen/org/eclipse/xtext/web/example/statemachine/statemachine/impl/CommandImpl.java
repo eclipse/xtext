@@ -93,6 +93,7 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Signal getSignal()
   {
     if (signal != null && signal.eIsProxy())
@@ -123,6 +124,7 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSignal(Signal newSignal)
   {
     Signal oldSignal = signal;
@@ -136,6 +138,7 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isNewValue()
   {
     return newValue;
@@ -146,6 +149,7 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNewValue(boolean newNewValue)
   {
     boolean oldNewValue = newValue;
@@ -241,7 +245,7 @@ public class CommandImpl extends MinimalEObjectImpl.Container implements Command
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (newValue: ");
     result.append(newValue);
     result.append(')');

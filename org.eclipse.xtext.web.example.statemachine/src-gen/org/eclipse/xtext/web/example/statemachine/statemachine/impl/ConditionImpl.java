@@ -78,6 +78,7 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Event> getEvents()
   {
     if (events == null)

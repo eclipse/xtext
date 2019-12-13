@@ -93,6 +93,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Signal getSignal()
   {
     if (signal != null && signal.eIsProxy())
@@ -123,6 +124,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSignal(Signal newSignal)
   {
     Signal oldSignal = signal;
@@ -136,6 +138,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isValue()
   {
     return value;
@@ -146,6 +149,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValue(boolean newValue)
   {
     boolean oldValue = value;
@@ -241,7 +245,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(')');

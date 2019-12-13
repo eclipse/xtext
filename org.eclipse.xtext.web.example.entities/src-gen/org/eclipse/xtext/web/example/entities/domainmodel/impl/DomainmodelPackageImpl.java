@@ -118,7 +118,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link DomainmodelPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -133,11 +133,13 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     if (isInited) return (DomainmodelPackage)EPackage.Registry.INSTANCE.getEPackage(DomainmodelPackage.eNS_URI);
 
     // Obtain or create and register package
-    DomainmodelPackageImpl theDomainmodelPackage = (DomainmodelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DomainmodelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DomainmodelPackageImpl());
+    Object registeredDomainmodelPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    DomainmodelPackageImpl theDomainmodelPackage = registeredDomainmodelPackage instanceof DomainmodelPackageImpl ? (DomainmodelPackageImpl)registeredDomainmodelPackage : new DomainmodelPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    TypesPackage.eINSTANCE.eClass();
     XbasePackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
 
@@ -150,7 +152,6 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     // Mark meta-data to indicate it can't be changed
     theDomainmodelPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(DomainmodelPackage.eNS_URI, theDomainmodelPackage);
     return theDomainmodelPackage;
@@ -161,6 +162,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntities()
   {
     return entitiesEClass;
@@ -171,6 +173,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntities_ImportSection()
   {
     return (EReference)entitiesEClass.getEStructuralFeatures().get(0);
@@ -181,6 +184,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntities_Elements()
   {
     return (EReference)entitiesEClass.getEStructuralFeatures().get(1);
@@ -191,6 +195,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractElement()
   {
     return abstractElementEClass;
@@ -201,6 +206,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractElement_Name()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
@@ -211,6 +217,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPackageDeclaration()
   {
     return packageDeclarationEClass;
@@ -221,6 +228,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPackageDeclaration_Elements()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(0);
@@ -231,6 +239,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntity()
   {
     return entityEClass;
@@ -241,6 +250,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntity_SuperType()
   {
     return (EReference)entityEClass.getEStructuralFeatures().get(0);
@@ -251,6 +261,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntity_Features()
   {
     return (EReference)entityEClass.getEStructuralFeatures().get(1);
@@ -261,6 +272,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFeature()
   {
     return featureEClass;
@@ -271,6 +283,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFeature_Name()
   {
     return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
@@ -281,6 +294,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFeature_Type()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(1);
@@ -291,6 +305,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProperty()
   {
     return propertyEClass;
@@ -301,6 +316,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOperation()
   {
     return operationEClass;
@@ -311,6 +327,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Params()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(0);
@@ -321,6 +338,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Body()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(1);
@@ -331,6 +349,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainmodelFactory getDomainmodelFactory()
   {
     return (DomainmodelFactory)getEFactoryInstance();
