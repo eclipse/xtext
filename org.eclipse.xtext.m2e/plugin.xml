@@ -12,5 +12,10 @@
            name="Xtext Project Configurator">
      </configurator>
   </extension>
-
+  <extension
+         point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+      <module
+            class="org.eclipse.xtext.m2e.IgnoreMavenTargetModule">
+      </module>
+   </extension>
 </plugin>
