@@ -10,7 +10,8 @@ package org.eclipse.xtext.diagnostics;
 /**
  * A specialized {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic} that knows 
  * about the region in the document, e.g. the {@link #getOffset()} and {@link #getLength()}
- * of the issue source.
+ * of the issue source. A region starts in a start line before a start column and ends in an end
+ * line before an end column.
  * 
  * Implementors should inherit from {@link AbstractDiagnostic} instead of implementing this 
  * interface directly.
@@ -53,5 +54,26 @@ public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diag
 	 * @return the length of this diagnostic.
 	 */
 	int getLength();
+
+	/**
+	 * Returns the end line location of the issue within the source.
+	 * Line <code>1</code> is the first line of a document.
+	 * 
+	 * @return the end line location of the issue.
+	 * 
+	 * @since 2.21
+	 */
+	int getLineEnd();
+
+	/**
+	 * Returns the end column location of the issue within the source.
+	 * The region does not include the end column character itself.
+	 * Column <code>1</code> is the first column of a line.
+	 * 
+	 * @return the end column location of the issue.
+	 * 
+	 * @since 2.21
+	 */
+	int getColumnEnd();
 
 }

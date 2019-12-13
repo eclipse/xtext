@@ -38,17 +38,25 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		/**
 		 * 1-based line number.
 		 */
-		public Integer lineNumber;
+		public Integer lineNumber = 0;
 		/**
 		 * 1-based column.
 		 * @since 2.9
 		 */
-		public Integer column;
+		public Integer column = 0;
+		/**
+		 * 1-based line number end.
+		 */
+		public Integer lineNumberEnd = 0;
+		/**
+		 * 1-based column end.
+		 */
+		public Integer columnEnd = 0;
 		/**
 		 * 0-based offset.
 		 */
-		public Integer offset;
-		public Integer length;
+		public Integer offset = 0;
+		public Integer length = 0;
 	}
 	
 	@Override
@@ -70,6 +78,8 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setUriToProblem(castedDiagnostic.getUriToProblem());
 			issue.setCode(castedDiagnostic.getCode());
 			issue.setData(castedDiagnostic.getData());
+			issue.setLineNumberEnd(castedDiagnostic.getLineEnd());
+			issue.setColumnEnd(castedDiagnostic.getColumnEnd());
 		}
 		issue.setType(CheckType.FAST);
 		acceptor.accept(issue);
@@ -90,6 +100,8 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setColumn(locationData.column);
 			issue.setOffset(locationData.offset);
 			issue.setLength(locationData.length);
+			issue.setLineNumberEnd(locationData.lineNumberEnd);
+			issue.setColumnEnd(locationData.columnEnd);
 		}
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
@@ -191,14 +203,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			if (diagnostic instanceof RangeBasedDiagnostic) {
 				RangeBasedDiagnostic castedDiagnostic = (RangeBasedDiagnostic) diagnostic;
 				INode parserNode = NodeModelUtils.getNode(causer);
-				IssueLocation result = new IssueLocation();
-				if (parserNode != null) {
-					LineAndColumn lineAndColumn = NodeModelUtils.getLineAndColumn(parserNode, castedDiagnostic.getOffset());
-					result.lineNumber = lineAndColumn.getLine();
-					result.column = lineAndColumn.getColumn();
-				}
-				result.offset = castedDiagnostic.getOffset();
-				result.length = castedDiagnostic.getLength();
+				IssueLocation result = getLocationForNode(parserNode, castedDiagnostic.getOffset(), castedDiagnostic.getLength());
 				return result;
 			} else if (diagnostic instanceof FeatureBasedDiagnostic) {
 				 FeatureBasedDiagnostic castedDiagnostic = (FeatureBasedDiagnostic) diagnostic;
@@ -239,21 +244,45 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 					containingFeature.isMany() ? ((EList<?>) container.eGet(containingFeature)).indexOf(obj)
 							: ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
-		IssueLocation result = new IssueLocation();
-		result.lineNumber = 1;
-		result.column = 1;
-		result.offset = 0;
-		result.length = 0;
-		return result;
+		
+		// place issue at start of document since we lack location information
+		IssueLocation startOfDocumentLocation = new IssueLocation();
+		startOfDocumentLocation.offset = 0;
+		startOfDocumentLocation.length = 0;
+		startOfDocumentLocation.lineNumber = 1;
+		startOfDocumentLocation.column = 1;
+		startOfDocumentLocation.lineNumberEnd = 1;
+		startOfDocumentLocation.columnEnd = 1;
+		return new IssueLocation();
 	}
 
+	/**
+	 * Computes {@link IssueLocation} for the given node.
+	 */
 	protected IssueLocation getLocationForNode(INode node) {
 		ITextRegionWithLineInformation nodeRegion = node.getTextRegionWithLineInformation();
+		int offset = nodeRegion.getOffset();
+		int length = nodeRegion.getLength();
+		return getLocationForNode(node, offset, length);
+	}
+
+	/**
+	 * Computes {@link IssueLocation} for the given offset and length in the given node.
+	 * 
+	 * @since 2.21
+	 */
+	protected IssueLocation getLocationForNode(INode node, int offset, int length) {
 		IssueLocation result = new IssueLocation();
-		result.lineNumber = nodeRegion.getLineNumber();
-		result.offset = nodeRegion.getOffset();
-		result.column = NodeModelUtils.getLineAndColumn(node, result.offset).getColumn();
-		result.length = nodeRegion.getLength();
+		result.offset = offset;
+		result.length = length;
+		
+		LineAndColumn lineAndColumnStart = NodeModelUtils.getLineAndColumn(node, offset);
+		result.lineNumber = lineAndColumnStart.getLine();
+		result.column = lineAndColumnStart.getColumn();
+		
+		LineAndColumn lineAndColumnEnd = NodeModelUtils.getLineAndColumn(node, offset + length);
+		result.lineNumberEnd = lineAndColumnEnd.getLine();
+		result.columnEnd = lineAndColumnEnd.getColumn();
 		return result;
 	}
 

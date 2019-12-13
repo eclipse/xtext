@@ -58,6 +58,25 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 			return node.getStartLine();
 		return -1;
 	}
+	
+
+	@Override
+	public int getLineEnd() {
+		INode node = getNode();
+		if (node != null)
+			return node.getEndLine();
+		return -1;
+	}
+
+	@Override
+	public int getColumnEnd() {
+		INode node = getNode();
+		if (node != null) {
+			LineAndColumn lineAndColumn = NodeModelUtils.getLineAndColumn(node, getOffset() + getLength());
+			return lineAndColumn.getColumn();
+		}
+		return 0;
+	}
 
 	@Override
 	public String getLocation() {
@@ -86,5 +105,4 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 		b.append(getMessage());
 		return b.toString();
 	}
-
 }

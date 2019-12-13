@@ -453,13 +453,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 		initialized.thenAccept((initParams) -> {
 			PublishDiagnosticsParams publishDiagnosticsParams = new PublishDiagnosticsParams();
 			publishDiagnosticsParams.setUri(uriExtensions.toUriString(uri));
-			// this is not a premature optimization but a trick to handle issues of deleted resources
-			if (!issues.iterator().hasNext()) {
-				publishDiagnosticsParams.setDiagnostics(Collections.emptyList());
-			} else {
-				publishDiagnosticsParams.setDiagnostics(
-						workspaceManager.doRead(uri, (document, resource) -> toDiagnostics(issues, document)));
-			}
+			publishDiagnosticsParams.setDiagnostics(toDiagnostics(issues));
 			client.publishDiagnostics(publishDiagnosticsParams);
 		});
 	}
@@ -468,11 +462,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Convert the given issues to diagnostics. Does not return any issue with severity {@link Severity#IGNORE ignore}
 	 * by default.
 	 */
-	protected List<Diagnostic> toDiagnostics(Iterable<? extends Issue> issues, Document document) {
+	protected List<Diagnostic> toDiagnostics(Iterable<? extends Issue> issues) {
 		List<Diagnostic> result = new ArrayList<>();
 		for (Issue issue : issues) {
 			if (issue.getSeverity() != Severity.IGNORE) {
-				result.add(toDiagnostic(issue, document));
+				result.add(toDiagnostic(issue));
 			}
 		}
 		return result;
@@ -481,19 +475,21 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	/**
 	 * Convert the given issue to a diagnostic.
 	 */
-	protected Diagnostic toDiagnostic(Issue issue, Document document) {
+	protected Diagnostic toDiagnostic(Issue issue) {
 		Diagnostic result = new Diagnostic();
 		result.setCode(issue.getCode());
 		result.setMessage(issue.getMessage());
 		result.setSeverity(toDiagnosticSeverity(issue.getSeverity()));
-		Position start = document.getPosition(issue.getOffset());
-		Position end = document.getPosition(issue.getOffset() + issue.getLength());
+
+		// line and column numbers in LSP are 0-based
+		Position start = new Position(issue.getLineNumber() - 1, issue.getColumn() - 1);
+		Position end = new Position(issue.getLineNumberEnd() - 1, issue.getColumnEnd() - 1);
 		result.setRange(new Range(start, end));
 		return result;
 	}
 
 	/**
-	 * Convert the serverity to a lsp {@link DiagnosticSeverity}.
+	 * Convert the severity to a lsp {@link DiagnosticSeverity}.
 	 *
 	 * Defaults to severity {@link DiagnosticSeverity#Hint hint}.
 	 */

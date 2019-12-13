@@ -39,6 +39,16 @@ public class ExceptionDiagnostic implements Diagnostic {
 	}
 
 	@Override
+	public int getColumnEnd() {
+		return 0;
+	}
+
+	@Override
+	public int getLineEnd() {
+		return 1;
+	}
+
+	@Override
 	public String getLocation() {
 		return null;
 	}
