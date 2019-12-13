@@ -12,7 +12,7 @@
 		<root-dir>${basedir}/..</root-dir>
 		<maven.version>3.6.0</maven.version>
 		<tycho-version>1.5.1</tycho-version>
-		<emf.version>2.12.0</emf.version>
+		<emf.version>2.20.0</emf.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -20,7 +20,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
-		<upstreamBranch>master</upstreamBranch>
+		<upstreamBranch>emf220Update</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
