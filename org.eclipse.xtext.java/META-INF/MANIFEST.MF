@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.lib,
  org.eclipse.jdt.core;bundle-version="3.13.102",
  org.eclipse.emf.common;bundle-version="2.17.0",
- org.eclipse.emf.ecore;bundle-version="2.10.0"
+ org.eclipse.emf.ecore;bundle-version="2.20.0"
 Export-Package: org.eclipse.xtext.java,
  org.eclipse.xtext.java.resource
 Import-Package: org.apache.log4j;version="1.2.15"
