@@ -174,6 +174,7 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.Strings;
@@ -233,7 +234,13 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Override
   public String getDocComment() {
-    throw new UnsupportedOperationException("Auto-generated function stub");
+    final List<INode> nodes = this.fileHeaderProvider.getFileHeaderNodes(this.xtendFile.eResource());
+    boolean _isEmpty = nodes.isEmpty();
+    if (_isEmpty) {
+      return "";
+    } else {
+      return nodes.get(0).getText();
+    }
   }
   
   @Override
@@ -1757,6 +1764,10 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     }
     return getMessage.apply(t);
+  }
+  
+  public String getFileHeader() {
+    return this.fileHeaderProvider.getFileHeader(this.xtendFile.eResource());
   }
   
   @Pure
