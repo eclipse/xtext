@@ -44,10 +44,6 @@ public interface XAbstractFeatureCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Feature</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Feature</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' reference.
 	 * @see #setFeature(JvmIdentifiableElement)
@@ -71,10 +67,6 @@ public interface XAbstractFeatureCall extends XExpression
 	 * Returns the value of the '<em><b>Type Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_TypeArguments()
@@ -122,6 +114,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @model transient="true"
 	 * @generated
 	 */
+	@Deprecated
 	String getInvalidFeatureIssueCode();
 
 	/**
@@ -130,8 +123,10 @@ public interface XAbstractFeatureCall extends XExpression
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Invalid Feature Issue Code</em>' attribute.
 	 * @see #getInvalidFeatureIssueCode()
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
 	void setInvalidFeatureIssueCode(String value);
 
 	/**
@@ -146,6 +141,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @model transient="true" changeable="false" derived="true"
 	 * @generated
 	 */
+	@Deprecated
 	boolean isValidFeature();
 
 	/**
@@ -191,6 +187,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @model kind="operation"
 	 * @generated
 	 */
+	@Deprecated
 	EList<XExpression> getExplicitArguments();
 
 	/**

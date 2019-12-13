@@ -76,6 +76,7 @@ public class ContentAssistFragmentTestLangFactoryImpl extends EFactoryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistFragmentTestLanguageRoot createContentAssistFragmentTestLanguageRoot()
   {
     ContentAssistFragmentTestLanguageRootImpl contentAssistFragmentTestLanguageRoot = new ContentAssistFragmentTestLanguageRootImpl();
@@ -87,6 +88,7 @@ public class ContentAssistFragmentTestLangFactoryImpl extends EFactoryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistFragmentTestLangPackage getContentAssistFragmentTestLangPackage()
   {
     return (ContentAssistFragmentTestLangPackage)getEPackage();

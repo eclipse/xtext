@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements XFeatureCall
@@ -140,6 +141,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getFeatureCallArguments()
 	{
 		if (featureCallArguments == null)
@@ -154,6 +156,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitOperationCall()
 	{
 		return explicitOperationCall;
@@ -164,6 +167,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitOperationCall(boolean newExplicitOperationCall)
 	{
 		boolean oldExplicitOperationCall = explicitOperationCall;
@@ -177,6 +181,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isTypeLiteral()
 	{
 		return typeLiteral;
@@ -187,6 +192,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeLiteral(boolean newTypeLiteral)
 	{
 		boolean oldTypeLiteral = typeLiteral;
@@ -200,6 +206,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPackageFragment()
 	{
 		return packageFragment;
@@ -210,6 +217,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPackageFragment(boolean newPackageFragment)
 	{
 		boolean oldPackageFragment = packageFragment;
@@ -342,7 +350,7 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (explicitOperationCall: ");
 		result.append(explicitOperationCall);
 		result.append(", typeLiteral: ");

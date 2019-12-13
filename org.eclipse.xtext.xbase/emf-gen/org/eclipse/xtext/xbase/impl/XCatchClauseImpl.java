@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XCatchClauseImpl extends MinimalEObjectImpl.Container implements XCatchClause
@@ -84,6 +85,7 @@ public class XCatchClauseImpl extends MinimalEObjectImpl.Container implements XC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -111,6 +113,7 @@ public class XCatchClauseImpl extends MinimalEObjectImpl.Container implements XC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)
@@ -132,6 +135,7 @@ public class XCatchClauseImpl extends MinimalEObjectImpl.Container implements XC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmFormalParameter getDeclaredParam()
 	{
 		return declaredParam;
@@ -159,6 +163,7 @@ public class XCatchClauseImpl extends MinimalEObjectImpl.Container implements XC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaredParam(JvmFormalParameter newDeclaredParam)
 	{
 		if (newDeclaredParam != declaredParam)

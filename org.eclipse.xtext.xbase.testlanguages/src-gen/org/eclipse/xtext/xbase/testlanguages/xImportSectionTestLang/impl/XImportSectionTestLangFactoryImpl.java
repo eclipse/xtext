@@ -76,6 +76,7 @@ public class XImportSectionTestLangFactoryImpl extends EFactoryImpl implements X
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ImportSectionTestLanguageRoot createImportSectionTestLanguageRoot()
   {
     ImportSectionTestLanguageRootImpl importSectionTestLanguageRoot = new ImportSectionTestLanguageRootImpl();
@@ -87,6 +88,7 @@ public class XImportSectionTestLangFactoryImpl extends EFactoryImpl implements X
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSectionTestLangPackage getXImportSectionTestLangPackage()
   {
     return (XImportSectionTestLangPackage)getEPackage();

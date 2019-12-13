@@ -68,6 +68,7 @@ public class ImportSectionTestLanguageRootImpl extends MinimalEObjectImpl.Contai
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSection getImportSection()
   {
     return importSection;
@@ -95,6 +96,7 @@ public class ImportSectionTestLanguageRootImpl extends MinimalEObjectImpl.Contai
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImportSection(XImportSection newImportSection)
   {
     if (newImportSection != importSection)

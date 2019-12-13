@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtype.*;
  * which is the result of the switch.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xtype.XtypePackage
+ * @since 2.7
  * @generated
  */
 public class XtypeSwitch<T> extends Switch<T>
@@ -125,6 +126,7 @@ public class XtypeSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XFunction Type Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXFunctionTypeRef(XFunctionTypeRef object)
@@ -141,6 +143,7 @@ public class XtypeSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XComputed Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXComputedTypeReference(XComputedTypeReference object)
@@ -157,6 +160,7 @@ public class XtypeSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XImport Section</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXImportSection(XImportSection object)
@@ -173,6 +177,7 @@ public class XtypeSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XImport Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXImportDeclaration(XImportDeclaration object)

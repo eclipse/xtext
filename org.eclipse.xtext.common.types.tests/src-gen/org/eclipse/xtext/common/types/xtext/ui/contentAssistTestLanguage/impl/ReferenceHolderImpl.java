@@ -89,6 +89,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JvmType getDefaultReference()
   {
     if (defaultReference != null && defaultReference.eIsProxy())
@@ -119,6 +120,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefaultReference(JvmType newDefaultReference)
   {
     JvmType oldDefaultReference = defaultReference;
@@ -132,6 +134,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JvmType getCustomizedReference()
   {
     if (customizedReference != null && customizedReference.eIsProxy())
@@ -162,6 +165,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCustomizedReference(JvmType newCustomizedReference)
   {
     JvmType oldCustomizedReference = customizedReference;
@@ -175,6 +179,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JvmType getSubtypeReference()
   {
     if (subtypeReference != null && subtypeReference.eIsProxy())
@@ -205,6 +210,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSubtypeReference(JvmType newSubtypeReference)
   {
     JvmType oldSubtypeReference = subtypeReference;

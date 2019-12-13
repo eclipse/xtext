@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
@@ -105,6 +106,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XAnnotationElementValuePair> getElementValuePairs()
 	{
 		if (elementValuePairs == null)
@@ -119,6 +121,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmType getAnnotationType()
 	{
 		if (annotationType != null && annotationType.eIsProxy())
@@ -149,6 +152,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationType(JvmType newAnnotationType)
 	{
 		JvmType oldAnnotationType = annotationType;
@@ -162,6 +166,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getValue()
 	{
 		return value;
@@ -189,6 +194,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(XExpression newValue)
 	{
 		if (newValue != value)

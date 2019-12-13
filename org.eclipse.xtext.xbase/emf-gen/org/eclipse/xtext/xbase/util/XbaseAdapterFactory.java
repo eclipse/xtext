@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.*;
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.XbasePackage
+ * @since 2.7
  * @generated
  */
 public class XbaseAdapterFactory extends AdapterFactoryImpl
@@ -291,6 +292,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXExpressionAdapter()
@@ -306,6 +308,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XIfExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXIfExpressionAdapter()
@@ -321,6 +324,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XSwitchExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXSwitchExpressionAdapter()
@@ -336,6 +340,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XCasePart
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXCasePartAdapter()
@@ -351,6 +356,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XBlockExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXBlockExpressionAdapter()
@@ -366,6 +372,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XVariableDeclaration
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXVariableDeclarationAdapter()
@@ -381,6 +388,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXAbstractFeatureCallAdapter()
@@ -396,6 +404,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXMemberFeatureCallAdapter()
@@ -411,6 +420,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XFeatureCall
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXFeatureCallAdapter()
@@ -426,6 +436,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XConstructorCall
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXConstructorCallAdapter()
@@ -441,6 +452,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XBooleanLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXBooleanLiteralAdapter()
@@ -456,6 +468,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XNullLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXNullLiteralAdapter()
@@ -471,6 +484,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XNumberLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXNumberLiteralAdapter()
@@ -486,6 +500,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XStringLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXStringLiteralAdapter()
@@ -501,6 +516,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XCollectionLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXCollectionLiteralAdapter()
@@ -516,6 +532,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XListLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXListLiteralAdapter()
@@ -531,6 +548,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XSetLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXSetLiteralAdapter()
@@ -546,6 +564,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XClosure
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXClosureAdapter()
@@ -561,6 +580,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XCastedExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXCastedExpressionAdapter()
@@ -576,6 +596,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XBinaryOperation
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXBinaryOperationAdapter()
@@ -591,6 +612,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XUnaryOperation
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXUnaryOperationAdapter()
@@ -606,6 +628,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XPostfixOperation
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXPostfixOperationAdapter()
@@ -621,6 +644,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XForLoopExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXForLoopExpressionAdapter()
@@ -636,6 +660,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXBasicForLoopExpressionAdapter()
@@ -651,6 +676,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XAbstractWhileExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXAbstractWhileExpressionAdapter()
@@ -666,6 +692,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XDoWhileExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXDoWhileExpressionAdapter()
@@ -681,6 +708,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XWhileExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXWhileExpressionAdapter()
@@ -696,6 +724,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XTypeLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXTypeLiteralAdapter()
@@ -711,6 +740,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXInstanceOfExpressionAdapter()
@@ -726,6 +756,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XThrowExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXThrowExpressionAdapter()
@@ -741,6 +772,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXTryCatchFinallyExpressionAdapter()
@@ -756,6 +788,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XCatchClause
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXCatchClauseAdapter()
@@ -771,6 +804,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XAssignment
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXAssignmentAdapter()
@@ -786,6 +820,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XReturnExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXReturnExpressionAdapter()
@@ -801,6 +836,7 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XSynchronizedExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXSynchronizedExpressionAdapter()

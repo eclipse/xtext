@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XWhile Expression</b></em>'.
  * <!-- end-user-doc -->
  *
+ * @since 2.7
  * @generated
  */
 public class XWhileExpressionImpl extends XAbstractWhileExpressionImpl implements XWhileExpression

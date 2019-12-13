@@ -43,10 +43,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Wildcard</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Wildcard</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Wildcard</em>' attribute.
 	 * @see #setWildcard(boolean)
@@ -69,10 +65,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Extension</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Extension</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension</em>' attribute.
 	 * @see #setExtension(boolean)
@@ -95,10 +87,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
@@ -121,10 +109,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Imported Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Imported Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Type</em>' reference.
 	 * @see #setImportedType(JvmDeclaredType)
@@ -147,10 +131,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Member Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Member Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Member Name</em>' attribute.
 	 * @see #setMemberName(String)
@@ -173,10 +153,6 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Imported Namespace</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Namespace</em>' attribute.
 	 * @see #setImportedNamespace(String)

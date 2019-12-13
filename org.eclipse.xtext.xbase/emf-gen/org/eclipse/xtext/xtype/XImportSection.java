@@ -39,10 +39,6 @@ public interface XImportSection extends EObject
 	 * Returns the value of the '<em><b>Import Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xtype.XImportDeclaration}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Import Declarations</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Import Declarations</em>' containment reference list.
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getXImportSection_ImportDeclarations()

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EFactory;
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.XbasePackage
+ * @since 2.7
  * @generated
  */
 public interface XbaseFactory extends EFactory
@@ -32,6 +33,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XIf Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XIfExpression createXIfExpression();
@@ -41,6 +43,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XSwitch Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XSwitchExpression createXSwitchExpression();
@@ -50,6 +53,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XCase Part</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XCasePart createXCasePart();
@@ -59,6 +63,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XBlock Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XBlockExpression createXBlockExpression();
@@ -68,6 +73,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XVariable Declaration</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XVariableDeclaration createXVariableDeclaration();
@@ -77,6 +83,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XMember Feature Call</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XMemberFeatureCall createXMemberFeatureCall();
@@ -86,6 +93,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XFeature Call</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XFeatureCall createXFeatureCall();
@@ -95,6 +103,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XConstructor Call</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XConstructorCall createXConstructorCall();
@@ -104,6 +113,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XBoolean Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XBooleanLiteral createXBooleanLiteral();
@@ -113,6 +123,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XNull Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XNullLiteral createXNullLiteral();
@@ -122,6 +133,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XNumber Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XNumberLiteral createXNumberLiteral();
@@ -131,6 +143,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XString Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XStringLiteral createXStringLiteral();
@@ -140,6 +153,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XList Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XListLiteral createXListLiteral();
@@ -149,6 +163,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XSet Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XSetLiteral createXSetLiteral();
@@ -158,6 +173,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XClosure</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XClosure createXClosure();
@@ -167,6 +183,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XCasted Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XCastedExpression createXCastedExpression();
@@ -176,6 +193,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XBinary Operation</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XBinaryOperation createXBinaryOperation();
@@ -185,6 +203,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XUnary Operation</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XUnaryOperation createXUnaryOperation();
@@ -194,6 +213,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XPostfix Operation</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XPostfixOperation createXPostfixOperation();
@@ -203,6 +223,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XFor Loop Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XForLoopExpression createXForLoopExpression();
@@ -212,6 +233,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XBasic For Loop Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XBasicForLoopExpression createXBasicForLoopExpression();
@@ -221,6 +243,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XDo While Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XDoWhileExpression createXDoWhileExpression();
@@ -230,6 +253,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XWhile Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XWhileExpression createXWhileExpression();
@@ -239,6 +263,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XType Literal</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XTypeLiteral createXTypeLiteral();
@@ -248,6 +273,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XInstance Of Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XInstanceOfExpression createXInstanceOfExpression();
@@ -257,6 +283,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XThrow Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XThrowExpression createXThrowExpression();
@@ -266,6 +293,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XTry Catch Finally Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XTryCatchFinallyExpression createXTryCatchFinallyExpression();
@@ -275,6 +303,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XCatch Clause</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XCatchClause createXCatchClause();
@@ -284,6 +313,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XAssignment</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XAssignment createXAssignment();
@@ -293,6 +323,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XReturn Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XReturnExpression createXReturnExpression();
@@ -302,6 +333,7 @@ public interface XbaseFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XSynchronized Expression</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XSynchronizedExpression createXSynchronizedExpression();

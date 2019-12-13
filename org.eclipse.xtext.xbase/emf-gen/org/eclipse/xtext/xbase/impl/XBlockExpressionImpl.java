@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XBlockExpressionImpl extends XExpressionImpl implements XBlockExpression
@@ -74,6 +75,7 @@ public class XBlockExpressionImpl extends XExpressionImpl implements XBlockExpre
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getExpressions()
 	{
 		if (expressions == null)

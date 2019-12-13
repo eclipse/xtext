@@ -72,6 +72,7 @@ public class Bug462047RootImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Bug462047Element> getElements()
   {
     if (elements == null)

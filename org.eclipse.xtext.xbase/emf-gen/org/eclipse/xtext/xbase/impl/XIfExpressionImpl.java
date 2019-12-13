@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#isConditionalExpression <em>Conditional Expression</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
@@ -72,6 +73,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isConditionalExpression()
+	 * @since 2.18
 	 * @generated
 	 * @ordered
 	 */
@@ -82,6 +84,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isConditionalExpression()
+	 * @since 2.18
 	 * @generated
 	 * @ordered
 	 */
@@ -113,6 +116,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getIf()
 	{
 		return if_;
@@ -140,6 +144,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIf(XExpression newIf)
 	{
 		if (newIf != if_)
@@ -161,6 +166,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getThen()
 	{
 		return then;
@@ -188,6 +194,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThen(XExpression newThen)
 	{
 		if (newThen != then)
@@ -209,6 +216,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getElse()
 	{
 		return else_;
@@ -236,6 +244,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElse(XExpression newElse)
 	{
 		if (newElse != else_)
@@ -255,8 +264,10 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.18
 	 * @generated
 	 */
+	@Override
 	public boolean isConditionalExpression()
 	{
 		return conditionalExpression;
@@ -265,8 +276,10 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.18
 	 * @generated
 	 */
+	@Override
 	public void setConditionalExpression(boolean newConditionalExpression)
 	{
 		boolean oldConditionalExpression = conditionalExpression;
@@ -401,7 +414,7 @@ public class XIfExpressionImpl extends XExpressionImpl implements XIfExpression
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (conditionalExpression: ");
 		result.append(conditionalExpression);
 		result.append(')');

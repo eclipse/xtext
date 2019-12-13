@@ -40,10 +40,6 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	 * Returns the value of the '<em><b>Feature Call Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Feature Call Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature Call Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_FeatureCallArguments()
@@ -55,10 +51,6 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Explicit Operation Call</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Operation Call</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Operation Call</em>' attribute.
 	 * @see #setExplicitOperationCall(boolean)
@@ -81,10 +73,6 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Literal</em>' attribute.
 	 * @see #setTypeLiteral(boolean)
@@ -107,10 +95,6 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Package Fragment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Package Fragment</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Package Fragment</em>' attribute.
 	 * @see #setPackageFragment(boolean)

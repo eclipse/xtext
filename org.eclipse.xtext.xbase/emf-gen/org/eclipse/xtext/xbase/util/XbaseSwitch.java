@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.*;
  * which is the result of the switch.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.XbasePackage
+ * @since 2.7
  * @generated
  */
 public class XbaseSwitch<T> extends Switch<T>
@@ -380,6 +381,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXExpression(XExpression object)
@@ -396,6 +398,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XIf Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXIfExpression(XIfExpression object)
@@ -412,6 +415,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XSwitch Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXSwitchExpression(XSwitchExpression object)
@@ -428,6 +432,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XCase Part</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXCasePart(XCasePart object)
@@ -444,6 +449,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXBlockExpression(XBlockExpression object)
@@ -460,6 +466,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XVariable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXVariableDeclaration(XVariableDeclaration object)
@@ -476,6 +483,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXAbstractFeatureCall(XAbstractFeatureCall object)
@@ -492,6 +500,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XMember Feature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXMemberFeatureCall(XMemberFeatureCall object)
@@ -508,6 +517,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXFeatureCall(XFeatureCall object)
@@ -524,6 +534,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXConstructorCall(XConstructorCall object)
@@ -540,6 +551,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XBoolean Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXBooleanLiteral(XBooleanLiteral object)
@@ -556,6 +568,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XNull Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXNullLiteral(XNullLiteral object)
@@ -572,6 +585,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XNumber Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXNumberLiteral(XNumberLiteral object)
@@ -588,6 +602,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XString Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXStringLiteral(XStringLiteral object)
@@ -604,6 +619,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XCollection Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXCollectionLiteral(XCollectionLiteral object)
@@ -620,6 +636,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XList Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXListLiteral(XListLiteral object)
@@ -636,6 +653,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XSet Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXSetLiteral(XSetLiteral object)
@@ -652,6 +670,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XClosure</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXClosure(XClosure object)
@@ -668,6 +687,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XCasted Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXCastedExpression(XCastedExpression object)
@@ -684,6 +704,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XBinary Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXBinaryOperation(XBinaryOperation object)
@@ -700,6 +721,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XUnary Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXUnaryOperation(XUnaryOperation object)
@@ -716,6 +738,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XPostfix Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXPostfixOperation(XPostfixOperation object)
@@ -732,6 +755,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XFor Loop Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXForLoopExpression(XForLoopExpression object)
@@ -748,6 +772,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XBasic For Loop Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXBasicForLoopExpression(XBasicForLoopExpression object)
@@ -764,6 +789,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XAbstract While Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXAbstractWhileExpression(XAbstractWhileExpression object)
@@ -780,6 +806,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XDo While Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXDoWhileExpression(XDoWhileExpression object)
@@ -796,6 +823,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XWhile Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXWhileExpression(XWhileExpression object)
@@ -812,6 +840,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XType Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXTypeLiteral(XTypeLiteral object)
@@ -828,6 +857,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XInstance Of Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXInstanceOfExpression(XInstanceOfExpression object)
@@ -844,6 +874,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XThrow Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXThrowExpression(XThrowExpression object)
@@ -860,6 +891,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XTry Catch Finally Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXTryCatchFinallyExpression(XTryCatchFinallyExpression object)
@@ -876,6 +908,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XCatch Clause</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXCatchClause(XCatchClause object)
@@ -892,6 +925,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XAssignment</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXAssignment(XAssignment object)
@@ -908,6 +942,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XReturn Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXReturnExpression(XReturnExpression object)
@@ -924,6 +959,7 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XSynchronized Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXSynchronizedExpression(XSynchronizedExpression object)

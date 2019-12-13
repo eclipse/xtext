@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XReturnExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XReturnExpressionImpl extends XExpressionImpl implements XReturnExpression
@@ -70,6 +71,7 @@ public class XReturnExpressionImpl extends XExpressionImpl implements XReturnExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -97,6 +99,7 @@ public class XReturnExpressionImpl extends XExpressionImpl implements XReturnExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)

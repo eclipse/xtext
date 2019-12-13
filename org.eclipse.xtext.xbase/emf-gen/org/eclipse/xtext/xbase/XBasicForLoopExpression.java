@@ -39,10 +39,6 @@ public interface XBasicForLoopExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(XExpression)
@@ -65,10 +61,6 @@ public interface XBasicForLoopExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Each Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Each Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Each Expression</em>' containment reference.
 	 * @see #setEachExpression(XExpression)
@@ -92,10 +84,6 @@ public interface XBasicForLoopExpression extends XExpression
 	 * Returns the value of the '<em><b>Init Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Init Expressions</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Init Expressions</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBasicForLoopExpression_InitExpressions()
@@ -108,10 +96,6 @@ public interface XBasicForLoopExpression extends XExpression
 	 * Returns the value of the '<em><b>Update Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Update Expressions</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Update Expressions</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBasicForLoopExpression_UpdateExpressions()

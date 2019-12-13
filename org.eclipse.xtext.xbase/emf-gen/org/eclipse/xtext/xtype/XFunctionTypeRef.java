@@ -44,10 +44,6 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	 * Returns the value of the '<em><b>Param Types</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Param Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Param Types</em>' containment reference list.
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ParamTypes()
@@ -59,10 +55,6 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
@@ -85,10 +77,6 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(JvmType)
@@ -111,10 +99,6 @@ public interface XFunctionTypeRef extends JvmSpecializedTypeReference
 	/**
 	 * Returns the value of the '<em><b>Instance Context</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instance Context</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instance Context</em>' attribute.
 	 * @see #setInstanceContext(boolean)

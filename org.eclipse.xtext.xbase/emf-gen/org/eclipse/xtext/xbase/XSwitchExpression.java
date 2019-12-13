@@ -41,10 +41,6 @@ public interface XSwitchExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Switch</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Switch</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Switch</em>' containment reference.
 	 * @see #setSwitch(XExpression)
@@ -68,10 +64,6 @@ public interface XSwitchExpression extends XExpression
 	 * Returns the value of the '<em><b>Cases</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XCasePart}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Cases</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Cases</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXSwitchExpression_Cases()
@@ -83,10 +75,6 @@ public interface XSwitchExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Default</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default</em>' containment reference.
 	 * @see #setDefault(XExpression)
@@ -109,10 +97,6 @@ public interface XSwitchExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Declared Param</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Declared Param</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declared Param</em>' containment reference.
 	 * @see #setDeclaredParam(JvmFormalParameter)

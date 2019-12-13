@@ -68,7 +68,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug462047Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -83,7 +83,8 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
     if (isInited) return (Bug462047Package)EPackage.Registry.INSTANCE.getEPackage(Bug462047Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug462047PackageImpl theBug462047Package = (Bug462047PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug462047PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug462047PackageImpl());
+    Object registeredBug462047Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug462047PackageImpl theBug462047Package = registeredBug462047Package instanceof Bug462047PackageImpl ? (Bug462047PackageImpl)registeredBug462047Package : new Bug462047PackageImpl();
 
     isInited = true;
 
@@ -99,7 +100,6 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
     // Mark meta-data to indicate it can't be changed
     theBug462047Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug462047Package.eNS_URI, theBug462047Package);
     return theBug462047Package;
@@ -110,6 +110,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBug462047Root()
   {
     return bug462047RootEClass;
@@ -120,6 +121,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBug462047Root_Elements()
   {
     return (EReference)bug462047RootEClass.getEStructuralFeatures().get(0);
@@ -130,6 +132,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBug462047Element()
   {
     return bug462047ElementEClass;
@@ -140,6 +143,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getBug462047Element_Name()
   {
     return (EAttribute)bug462047ElementEClass.getEStructuralFeatures().get(0);
@@ -150,6 +154,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBug462047Element_Ref()
   {
     return (EReference)bug462047ElementEClass.getEStructuralFeatures().get(1);
@@ -160,6 +165,7 @@ public class Bug462047PackageImpl extends EPackageImpl implements Bug462047Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug462047Factory getBug462047Factory()
   {
     return (Bug462047Factory)getEFactoryInstance();

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xtype.*;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
@@ -112,8 +113,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XFunctionTypeRef createXFunctionTypeRef()
 	{
 		XFunctionTypeRefImplCustom xFunctionTypeRef = new XFunctionTypeRefImplCustom();
@@ -123,8 +126,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XComputedTypeReference createXComputedTypeReference()
 	{
 		XComputedTypeReferenceImplCustom xComputedTypeReference = new XComputedTypeReferenceImplCustom();
@@ -134,8 +139,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XImportSection createXImportSection()
 	{
 		XImportSectionImpl xImportSection = new XImportSectionImpl();
@@ -145,8 +152,10 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XImportDeclaration createXImportDeclaration()
 	{
 		XImportDeclarationImplCustom xImportDeclaration = new XImportDeclarationImplCustom();
@@ -158,6 +167,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtypePackage getXtypePackage()
 	{
 		return (XtypePackage)getEPackage();

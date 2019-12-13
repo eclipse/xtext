@@ -66,6 +66,7 @@ import org.eclipse.xtext.xtype.impl.XtypePackageImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XbasePackageImpl extends EPackageImpl implements XbasePackage
@@ -73,6 +74,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xExpressionEClass = null;
@@ -80,6 +82,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xIfExpressionEClass = null;
@@ -87,6 +90,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xSwitchExpressionEClass = null;
@@ -94,6 +98,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xCasePartEClass = null;
@@ -101,6 +106,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xBlockExpressionEClass = null;
@@ -108,6 +114,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xVariableDeclarationEClass = null;
@@ -115,6 +122,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xAbstractFeatureCallEClass = null;
@@ -122,6 +130,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xMemberFeatureCallEClass = null;
@@ -129,6 +138,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xFeatureCallEClass = null;
@@ -136,6 +146,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xConstructorCallEClass = null;
@@ -143,6 +154,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xBooleanLiteralEClass = null;
@@ -150,6 +162,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xNullLiteralEClass = null;
@@ -157,6 +170,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xNumberLiteralEClass = null;
@@ -164,6 +178,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xStringLiteralEClass = null;
@@ -171,6 +186,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xCollectionLiteralEClass = null;
@@ -178,6 +194,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xListLiteralEClass = null;
@@ -185,6 +202,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xSetLiteralEClass = null;
@@ -192,6 +210,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xClosureEClass = null;
@@ -199,6 +218,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xCastedExpressionEClass = null;
@@ -206,6 +226,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xBinaryOperationEClass = null;
@@ -213,6 +234,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xUnaryOperationEClass = null;
@@ -220,6 +242,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xPostfixOperationEClass = null;
@@ -227,6 +250,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xForLoopExpressionEClass = null;
@@ -234,6 +258,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xBasicForLoopExpressionEClass = null;
@@ -241,6 +266,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xAbstractWhileExpressionEClass = null;
@@ -248,6 +274,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xDoWhileExpressionEClass = null;
@@ -255,6 +282,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xWhileExpressionEClass = null;
@@ -262,6 +290,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xTypeLiteralEClass = null;
@@ -269,6 +298,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xInstanceOfExpressionEClass = null;
@@ -276,6 +306,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xThrowExpressionEClass = null;
@@ -283,6 +314,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xTryCatchFinallyExpressionEClass = null;
@@ -290,6 +322,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xCatchClauseEClass = null;
@@ -297,6 +330,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xAssignmentEClass = null;
@@ -304,6 +338,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xReturnExpressionEClass = null;
@@ -311,6 +346,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xSynchronizedExpressionEClass = null;
@@ -344,7 +380,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link XbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -359,7 +395,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		if (isInited) return (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XbasePackageImpl());
+		Object registeredXbasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		XbasePackageImpl theXbasePackage = registeredXbasePackage instanceof XbasePackageImpl ? (XbasePackageImpl)registeredXbasePackage : new XbasePackageImpl();
 
 		isInited = true;
 
@@ -367,8 +404,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) instanceof XAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) : XAnnotationsPackage.eINSTANCE);
-		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) instanceof XtypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) : XtypePackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI);
+		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(registeredPackage instanceof XAnnotationsPackageImpl ? registeredPackage : XAnnotationsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
+		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(registeredPackage instanceof XtypePackageImpl ? registeredPackage : XtypePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXbasePackage.createPackageContents();
@@ -383,7 +422,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		// Mark meta-data to indicate it can't be changed
 		theXbasePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, theXbasePackage);
 		return theXbasePackage;
@@ -392,8 +430,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXExpression()
 	{
 		return xExpressionEClass;
@@ -402,8 +442,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXIfExpression()
 	{
 		return xIfExpressionEClass;
@@ -412,8 +454,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXIfExpression_If()
 	{
 		return (EReference)xIfExpressionEClass.getEStructuralFeatures().get(0);
@@ -422,8 +466,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXIfExpression_Then()
 	{
 		return (EReference)xIfExpressionEClass.getEStructuralFeatures().get(1);
@@ -432,8 +478,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXIfExpression_Else()
 	{
 		return (EReference)xIfExpressionEClass.getEStructuralFeatures().get(2);
@@ -442,8 +490,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.18
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXIfExpression_ConditionalExpression()
 	{
 		return (EAttribute)xIfExpressionEClass.getEStructuralFeatures().get(3);
@@ -452,8 +502,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXSwitchExpression()
 	{
 		return xSwitchExpressionEClass;
@@ -462,8 +514,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSwitchExpression_Switch()
 	{
 		return (EReference)xSwitchExpressionEClass.getEStructuralFeatures().get(0);
@@ -472,8 +526,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSwitchExpression_Cases()
 	{
 		return (EReference)xSwitchExpressionEClass.getEStructuralFeatures().get(1);
@@ -482,8 +538,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSwitchExpression_Default()
 	{
 		return (EReference)xSwitchExpressionEClass.getEStructuralFeatures().get(2);
@@ -492,8 +550,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSwitchExpression_DeclaredParam()
 	{
 		return (EReference)xSwitchExpressionEClass.getEStructuralFeatures().get(3);
@@ -502,8 +562,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXCasePart()
 	{
 		return xCasePartEClass;
@@ -512,8 +574,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCasePart_Case()
 	{
 		return (EReference)xCasePartEClass.getEStructuralFeatures().get(0);
@@ -522,8 +586,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCasePart_Then()
 	{
 		return (EReference)xCasePartEClass.getEStructuralFeatures().get(1);
@@ -532,8 +598,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCasePart_TypeGuard()
 	{
 		return (EReference)xCasePartEClass.getEStructuralFeatures().get(2);
@@ -542,8 +610,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXCasePart_FallThrough()
 	{
 		return (EAttribute)xCasePartEClass.getEStructuralFeatures().get(3);
@@ -552,8 +622,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXBlockExpression()
 	{
 		return xBlockExpressionEClass;
@@ -562,8 +634,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBlockExpression_Expressions()
 	{
 		return (EReference)xBlockExpressionEClass.getEStructuralFeatures().get(0);
@@ -572,8 +646,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXVariableDeclaration()
 	{
 		return xVariableDeclarationEClass;
@@ -582,8 +658,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXVariableDeclaration_Type()
 	{
 		return (EReference)xVariableDeclarationEClass.getEStructuralFeatures().get(0);
@@ -592,8 +670,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXVariableDeclaration_Name()
 	{
 		return (EAttribute)xVariableDeclarationEClass.getEStructuralFeatures().get(1);
@@ -602,8 +682,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXVariableDeclaration_Right()
 	{
 		return (EReference)xVariableDeclarationEClass.getEStructuralFeatures().get(2);
@@ -612,8 +694,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXVariableDeclaration_Writeable()
 	{
 		return (EAttribute)xVariableDeclarationEClass.getEStructuralFeatures().get(3);
@@ -622,8 +706,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXAbstractFeatureCall()
 	{
 		return xAbstractFeatureCallEClass;
@@ -632,8 +718,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractFeatureCall_Feature()
 	{
 		return (EReference)xAbstractFeatureCallEClass.getEStructuralFeatures().get(0);
@@ -642,8 +730,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractFeatureCall_TypeArguments()
 	{
 		return (EReference)xAbstractFeatureCallEClass.getEStructuralFeatures().get(1);
@@ -652,8 +742,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractFeatureCall_ImplicitReceiver()
 	{
 		return (EReference)xAbstractFeatureCallEClass.getEStructuralFeatures().get(2);
@@ -662,8 +754,12 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public EAttribute getXAbstractFeatureCall_InvalidFeatureIssueCode()
 	{
 		return (EAttribute)xAbstractFeatureCallEClass.getEStructuralFeatures().get(3);
@@ -672,8 +768,12 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public EAttribute getXAbstractFeatureCall_ValidFeature()
 	{
 		return (EAttribute)xAbstractFeatureCallEClass.getEStructuralFeatures().get(4);
@@ -682,8 +782,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractFeatureCall_ImplicitFirstArgument()
 	{
 		return (EReference)xAbstractFeatureCallEClass.getEStructuralFeatures().get(5);
@@ -692,8 +794,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXMemberFeatureCall()
 	{
 		return xMemberFeatureCallEClass;
@@ -702,8 +806,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXMemberFeatureCall_MemberCallTarget()
 	{
 		return (EReference)xMemberFeatureCallEClass.getEStructuralFeatures().get(0);
@@ -712,8 +818,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXMemberFeatureCall_MemberCallArguments()
 	{
 		return (EReference)xMemberFeatureCallEClass.getEStructuralFeatures().get(1);
@@ -722,8 +830,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_ExplicitOperationCall()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(2);
@@ -732,8 +842,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_ExplicitStatic()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(3);
@@ -742,8 +854,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_NullSafe()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(4);
@@ -752,8 +866,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_TypeLiteral()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(5);
@@ -762,8 +878,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_StaticWithDeclaringType()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(6);
@@ -772,8 +890,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXMemberFeatureCall_PackageFragment()
 	{
 		return (EAttribute)xMemberFeatureCallEClass.getEStructuralFeatures().get(7);
@@ -782,8 +902,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXFeatureCall()
 	{
 		return xFeatureCallEClass;
@@ -792,8 +914,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXFeatureCall_FeatureCallArguments()
 	{
 		return (EReference)xFeatureCallEClass.getEStructuralFeatures().get(0);
@@ -802,8 +926,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXFeatureCall_ExplicitOperationCall()
 	{
 		return (EAttribute)xFeatureCallEClass.getEStructuralFeatures().get(1);
@@ -812,8 +938,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXFeatureCall_TypeLiteral()
 	{
 		return (EAttribute)xFeatureCallEClass.getEStructuralFeatures().get(2);
@@ -822,8 +950,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXFeatureCall_PackageFragment()
 	{
 		return (EAttribute)xFeatureCallEClass.getEStructuralFeatures().get(3);
@@ -832,8 +962,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXConstructorCall()
 	{
 		return xConstructorCallEClass;
@@ -842,8 +974,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXConstructorCall_Constructor()
 	{
 		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(0);
@@ -852,8 +986,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXConstructorCall_Arguments()
 	{
 		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(1);
@@ -862,8 +998,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXConstructorCall_TypeArguments()
 	{
 		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(2);
@@ -872,8 +1010,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXConstructorCall_InvalidFeatureIssueCode()
 	{
 		return (EAttribute)xConstructorCallEClass.getEStructuralFeatures().get(3);
@@ -882,8 +1022,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXConstructorCall_ValidFeature()
 	{
 		return (EAttribute)xConstructorCallEClass.getEStructuralFeatures().get(4);
@@ -892,8 +1034,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXConstructorCall_ExplicitConstructorCall()
 	{
 		return (EAttribute)xConstructorCallEClass.getEStructuralFeatures().get(5);
@@ -902,8 +1046,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXConstructorCall_AnonymousClassConstructorCall()
 	{
 		return (EAttribute)xConstructorCallEClass.getEStructuralFeatures().get(6);
@@ -912,8 +1058,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXBooleanLiteral()
 	{
 		return xBooleanLiteralEClass;
@@ -922,8 +1070,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXBooleanLiteral_IsTrue()
 	{
 		return (EAttribute)xBooleanLiteralEClass.getEStructuralFeatures().get(0);
@@ -932,8 +1082,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXNullLiteral()
 	{
 		return xNullLiteralEClass;
@@ -942,8 +1094,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXNumberLiteral()
 	{
 		return xNumberLiteralEClass;
@@ -952,8 +1106,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXNumberLiteral_Value()
 	{
 		return (EAttribute)xNumberLiteralEClass.getEStructuralFeatures().get(0);
@@ -962,8 +1118,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXStringLiteral()
 	{
 		return xStringLiteralEClass;
@@ -972,8 +1130,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXStringLiteral_Value()
 	{
 		return (EAttribute)xStringLiteralEClass.getEStructuralFeatures().get(0);
@@ -982,8 +1142,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXCollectionLiteral()
 	{
 		return xCollectionLiteralEClass;
@@ -992,8 +1154,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCollectionLiteral_Elements()
 	{
 		return (EReference)xCollectionLiteralEClass.getEStructuralFeatures().get(0);
@@ -1002,8 +1166,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXListLiteral()
 	{
 		return xListLiteralEClass;
@@ -1012,8 +1178,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXSetLiteral()
 	{
 		return xSetLiteralEClass;
@@ -1022,8 +1190,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXClosure()
 	{
 		return xClosureEClass;
@@ -1032,8 +1202,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXClosure_DeclaredFormalParameters()
 	{
 		return (EReference)xClosureEClass.getEStructuralFeatures().get(0);
@@ -1042,8 +1214,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXClosure_Expression()
 	{
 		return (EReference)xClosureEClass.getEStructuralFeatures().get(1);
@@ -1052,8 +1226,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXClosure_ExplicitSyntax()
 	{
 		return (EAttribute)xClosureEClass.getEStructuralFeatures().get(2);
@@ -1062,8 +1238,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXClosure_ImplicitFormalParameters()
 	{
 		return (EReference)xClosureEClass.getEStructuralFeatures().get(3);
@@ -1072,8 +1250,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXCastedExpression()
 	{
 		return xCastedExpressionEClass;
@@ -1082,8 +1262,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCastedExpression_Type()
 	{
 		return (EReference)xCastedExpressionEClass.getEStructuralFeatures().get(0);
@@ -1092,8 +1274,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCastedExpression_Target()
 	{
 		return (EReference)xCastedExpressionEClass.getEStructuralFeatures().get(1);
@@ -1102,8 +1286,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXBinaryOperation()
 	{
 		return xBinaryOperationEClass;
@@ -1112,8 +1298,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBinaryOperation_LeftOperand()
 	{
 		return (EReference)xBinaryOperationEClass.getEStructuralFeatures().get(0);
@@ -1122,8 +1310,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBinaryOperation_RightOperand()
 	{
 		return (EReference)xBinaryOperationEClass.getEStructuralFeatures().get(1);
@@ -1132,8 +1322,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXBinaryOperation_ReassignFirstArgument()
 	{
 		return (EAttribute)xBinaryOperationEClass.getEStructuralFeatures().get(2);
@@ -1142,8 +1334,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXUnaryOperation()
 	{
 		return xUnaryOperationEClass;
@@ -1152,8 +1346,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXUnaryOperation_Operand()
 	{
 		return (EReference)xUnaryOperationEClass.getEStructuralFeatures().get(0);
@@ -1162,8 +1358,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXPostfixOperation()
 	{
 		return xPostfixOperationEClass;
@@ -1172,8 +1370,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXPostfixOperation_Operand()
 	{
 		return (EReference)xPostfixOperationEClass.getEStructuralFeatures().get(0);
@@ -1182,8 +1382,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXForLoopExpression()
 	{
 		return xForLoopExpressionEClass;
@@ -1192,8 +1394,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXForLoopExpression_ForExpression()
 	{
 		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(0);
@@ -1202,8 +1406,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXForLoopExpression_EachExpression()
 	{
 		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(1);
@@ -1212,8 +1418,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXForLoopExpression_DeclaredParam()
 	{
 		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(2);
@@ -1222,8 +1430,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXBasicForLoopExpression()
 	{
 		return xBasicForLoopExpressionEClass;
@@ -1232,8 +1442,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBasicForLoopExpression_Expression()
 	{
 		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(0);
@@ -1242,8 +1454,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBasicForLoopExpression_EachExpression()
 	{
 		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(1);
@@ -1252,8 +1466,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBasicForLoopExpression_InitExpressions()
 	{
 		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(2);
@@ -1262,8 +1478,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXBasicForLoopExpression_UpdateExpressions()
 	{
 		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(3);
@@ -1272,8 +1490,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXAbstractWhileExpression()
 	{
 		return xAbstractWhileExpressionEClass;
@@ -1282,8 +1502,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractWhileExpression_Predicate()
 	{
 		return (EReference)xAbstractWhileExpressionEClass.getEStructuralFeatures().get(0);
@@ -1292,8 +1514,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAbstractWhileExpression_Body()
 	{
 		return (EReference)xAbstractWhileExpressionEClass.getEStructuralFeatures().get(1);
@@ -1302,8 +1526,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXDoWhileExpression()
 	{
 		return xDoWhileExpressionEClass;
@@ -1312,8 +1538,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXWhileExpression()
 	{
 		return xWhileExpressionEClass;
@@ -1322,8 +1550,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXTypeLiteral()
 	{
 		return xTypeLiteralEClass;
@@ -1332,8 +1562,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXTypeLiteral_Type()
 	{
 		return (EReference)xTypeLiteralEClass.getEStructuralFeatures().get(0);
@@ -1342,8 +1574,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXTypeLiteral_ArrayDimensions()
 	{
 		return (EAttribute)xTypeLiteralEClass.getEStructuralFeatures().get(1);
@@ -1352,8 +1586,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXInstanceOfExpression()
 	{
 		return xInstanceOfExpressionEClass;
@@ -1362,8 +1598,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXInstanceOfExpression_Type()
 	{
 		return (EReference)xInstanceOfExpressionEClass.getEStructuralFeatures().get(0);
@@ -1372,8 +1610,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXInstanceOfExpression_Expression()
 	{
 		return (EReference)xInstanceOfExpressionEClass.getEStructuralFeatures().get(1);
@@ -1382,8 +1622,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXThrowExpression()
 	{
 		return xThrowExpressionEClass;
@@ -1392,8 +1634,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXThrowExpression_Expression()
 	{
 		return (EReference)xThrowExpressionEClass.getEStructuralFeatures().get(0);
@@ -1402,8 +1646,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXTryCatchFinallyExpression()
 	{
 		return xTryCatchFinallyExpressionEClass;
@@ -1412,8 +1658,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXTryCatchFinallyExpression_Expression()
 	{
 		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(0);
@@ -1422,8 +1670,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXTryCatchFinallyExpression_FinallyExpression()
 	{
 		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(1);
@@ -1432,8 +1682,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXTryCatchFinallyExpression_CatchClauses()
 	{
 		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(2);
@@ -1442,8 +1694,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.18
 	 * @generated
 	 */
+	@Override
 	public EReference getXTryCatchFinallyExpression_Resources()
 	{
 		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(3);
@@ -1452,8 +1706,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXCatchClause()
 	{
 		return xCatchClauseEClass;
@@ -1462,8 +1718,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCatchClause_Expression()
 	{
 		return (EReference)xCatchClauseEClass.getEStructuralFeatures().get(0);
@@ -1472,8 +1730,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXCatchClause_DeclaredParam()
 	{
 		return (EReference)xCatchClauseEClass.getEStructuralFeatures().get(1);
@@ -1482,8 +1742,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXAssignment()
 	{
 		return xAssignmentEClass;
@@ -1492,8 +1754,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAssignment_Assignable()
 	{
 		return (EReference)xAssignmentEClass.getEStructuralFeatures().get(0);
@@ -1502,8 +1766,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAssignment_Value()
 	{
 		return (EReference)xAssignmentEClass.getEStructuralFeatures().get(1);
@@ -1512,8 +1778,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXAssignment_ExplicitStatic()
 	{
 		return (EAttribute)xAssignmentEClass.getEStructuralFeatures().get(2);
@@ -1522,8 +1790,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXAssignment_StaticWithDeclaringType()
 	{
 		return (EAttribute)xAssignmentEClass.getEStructuralFeatures().get(3);
@@ -1532,8 +1802,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXReturnExpression()
 	{
 		return xReturnExpressionEClass;
@@ -1542,8 +1814,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXReturnExpression_Expression()
 	{
 		return (EReference)xReturnExpressionEClass.getEStructuralFeatures().get(0);
@@ -1552,8 +1826,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXSynchronizedExpression()
 	{
 		return xSynchronizedExpressionEClass;
@@ -1562,8 +1838,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSynchronizedExpression_Param()
 	{
 		return (EReference)xSynchronizedExpressionEClass.getEStructuralFeatures().get(0);
@@ -1572,8 +1850,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXSynchronizedExpression_Expression()
 	{
 		return (EReference)xSynchronizedExpressionEClass.getEStructuralFeatures().get(1);
@@ -1584,6 +1864,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -1603,6 +1884,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("deprecation")
 	public void createPackageContents()
 	{
 		if (isCreated) return;

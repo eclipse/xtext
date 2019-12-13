@@ -111,6 +111,7 @@ public class MultiRuleenumsFactoryImpl extends EFactoryImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -144,6 +145,7 @@ public class MultiRuleenumsFactoryImpl extends EFactoryImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiRuleenumsPackage getMultiRuleenumsPackage()
   {
     return (MultiRuleenumsPackage)getEPackage();

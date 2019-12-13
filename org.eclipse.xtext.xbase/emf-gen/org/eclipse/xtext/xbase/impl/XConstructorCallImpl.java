@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XConstructorCallImpl extends XExpressionImpl implements XConstructorCall
@@ -186,6 +187,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmConstructor getConstructor()
 	{
 		if (constructor != null && constructor.eIsProxy())
@@ -216,6 +218,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstructor(JvmConstructor newConstructor)
 	{
 		JvmConstructor oldConstructor = constructor;
@@ -229,6 +232,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getArguments()
 	{
 		if (arguments == null)
@@ -243,6 +247,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getTypeArguments()
 	{
 		if (typeArguments == null)
@@ -257,6 +262,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getInvalidFeatureIssueCode()
 	{
 		return invalidFeatureIssueCode;
@@ -267,6 +273,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInvalidFeatureIssueCode(String newInvalidFeatureIssueCode)
 	{
 		String oldInvalidFeatureIssueCode = invalidFeatureIssueCode;
@@ -280,6 +287,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isValidFeature()
 	{
 		return validFeature;
@@ -290,6 +298,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitConstructorCall()
 	{
 		return explicitConstructorCall;
@@ -300,6 +309,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitConstructorCall(boolean newExplicitConstructorCall)
 	{
 		boolean oldExplicitConstructorCall = explicitConstructorCall;
@@ -313,6 +323,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAnonymousClassConstructorCall()
 	{
 		return anonymousClassConstructorCall;
@@ -323,6 +334,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnonymousClassConstructorCall(boolean newAnonymousClassConstructorCall)
 	{
 		boolean oldAnonymousClassConstructorCall = anonymousClassConstructorCall;
@@ -483,7 +495,7 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (invalidFeatureIssueCode: ");
 		result.append(invalidFeatureIssueCode);
 		result.append(", validFeature: ");

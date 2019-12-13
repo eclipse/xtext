@@ -43,10 +43,6 @@ public interface XAnnotation extends XExpression
 	 * Returns the value of the '<em><b>Element Value Pairs</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Element Value Pairs</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Element Value Pairs</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation_ElementValuePairs()
@@ -58,10 +54,6 @@ public interface XAnnotation extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Annotation Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Annotation Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotation Type</em>' reference.
 	 * @see #setAnnotationType(JvmType)
@@ -84,10 +76,6 @@ public interface XAnnotation extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(XExpression)

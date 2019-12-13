@@ -76,6 +76,7 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PureXbasePackage getPureXbasePackage()
   {
     return (PureXbasePackage)getEPackage();

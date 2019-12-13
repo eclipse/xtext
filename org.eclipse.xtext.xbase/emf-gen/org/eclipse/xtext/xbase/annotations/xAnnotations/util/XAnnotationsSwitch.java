@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.*;
  * which is the result of the switch.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+ * @since 2.7
  * @generated
  */
 public class XAnnotationsSwitch<T> extends Switch<T>
@@ -107,6 +108,7 @@ public class XAnnotationsSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XAnnotation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXAnnotation(XAnnotation object)
@@ -123,6 +125,7 @@ public class XAnnotationsSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XAnnotation Element Value Pair</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXAnnotationElementValuePair(XAnnotationElementValuePair object)
@@ -139,6 +142,7 @@ public class XAnnotationsSwitch<T> extends Switch<T>
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @since 2.7
 	 * @generated
 	 */
 	public T caseXExpression(XExpression object)

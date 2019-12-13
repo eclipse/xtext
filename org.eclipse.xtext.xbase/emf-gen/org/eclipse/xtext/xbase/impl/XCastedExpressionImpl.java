@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExpression
@@ -83,6 +84,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getType()
 	{
 		return type;
@@ -110,6 +112,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmTypeReference newType)
 	{
 		if (newType != type)
@@ -131,6 +134,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getTarget()
 	{
 		return target;
@@ -158,6 +162,7 @@ public class XCastedExpressionImpl extends XExpressionImpl implements XCastedExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(XExpression newTarget)
 	{
 		if (newTarget != target)

@@ -32,6 +32,7 @@ import org.eclipse.xtext.xtype.impl.XtypePackageImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotationsPackage
@@ -39,6 +40,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xAnnotationEClass = null;
@@ -46,6 +48,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xAnnotationElementValuePairEClass = null;
@@ -79,7 +82,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link XAnnotationsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -94,7 +97,8 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		if (isInited) return (XAnnotationsPackage)EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XAnnotationsPackageImpl());
+		Object registeredXAnnotationsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		XAnnotationsPackageImpl theXAnnotationsPackage = registeredXAnnotationsPackage instanceof XAnnotationsPackageImpl ? (XAnnotationsPackageImpl)registeredXAnnotationsPackage : new XAnnotationsPackageImpl();
 
 		isInited = true;
 
@@ -102,8 +106,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) instanceof XtypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) : XtypePackage.eINSTANCE);
-		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
+		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(registeredPackage instanceof XtypePackageImpl ? registeredPackage : XtypePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
+		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(registeredPackage instanceof XbasePackageImpl ? registeredPackage : XbasePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXAnnotationsPackage.createPackageContents();
@@ -118,7 +124,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		// Mark meta-data to indicate it can't be changed
 		theXAnnotationsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(XAnnotationsPackage.eNS_URI, theXAnnotationsPackage);
 		return theXAnnotationsPackage;
@@ -127,8 +132,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXAnnotation()
 	{
 		return xAnnotationEClass;
@@ -137,8 +144,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAnnotation_ElementValuePairs()
 	{
 		return (EReference)xAnnotationEClass.getEStructuralFeatures().get(0);
@@ -147,8 +156,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAnnotation_AnnotationType()
 	{
 		return (EReference)xAnnotationEClass.getEStructuralFeatures().get(1);
@@ -157,8 +168,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAnnotation_Value()
 	{
 		return (EReference)xAnnotationEClass.getEStructuralFeatures().get(2);
@@ -167,8 +180,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXAnnotationElementValuePair()
 	{
 		return xAnnotationElementValuePairEClass;
@@ -177,8 +192,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAnnotationElementValuePair_Value()
 	{
 		return (EReference)xAnnotationElementValuePairEClass.getEStructuralFeatures().get(0);
@@ -187,8 +204,10 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXAnnotationElementValuePair_Element()
 	{
 		return (EReference)xAnnotationElementValuePairEClass.getEStructuralFeatures().get(1);
@@ -199,6 +218,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XAnnotationsFactory getXAnnotationsFactory()
 	{
 		return (XAnnotationsFactory)getEFactoryInstance();

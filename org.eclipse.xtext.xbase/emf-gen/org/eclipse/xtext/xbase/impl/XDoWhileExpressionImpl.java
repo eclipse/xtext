@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XDo While Expression</b></em>'.
  * <!-- end-user-doc -->
  *
+ * @since 2.7
  * @generated
  */
 public class XDoWhileExpressionImpl extends XAbstractWhileExpressionImpl implements XDoWhileExpression

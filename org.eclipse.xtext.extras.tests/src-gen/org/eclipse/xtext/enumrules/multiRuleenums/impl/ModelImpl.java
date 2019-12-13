@@ -117,6 +117,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyEnum getA()
   {
     return a;
@@ -127,6 +128,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setA(MyEnum newA)
   {
     MyEnum oldA = a;
@@ -140,6 +142,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyEnum getB()
   {
     return b;
@@ -150,6 +153,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setB(MyEnum newB)
   {
     MyEnum oldB = b;
@@ -163,6 +167,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyEnum getC()
   {
     return c;
@@ -173,6 +178,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setC(MyEnum newC)
   {
     MyEnum oldC = c;
@@ -277,7 +283,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (a: ");
     result.append(a);
     result.append(", b: ");

@@ -38,10 +38,6 @@ public interface XComputedTypeReference extends JvmSpecializedTypeReference
 	/**
 	 * Returns the value of the '<em><b>Type Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Provider</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Provider</em>' attribute.
 	 * @see #setTypeProvider(IJvmTypeReferenceProvider)

@@ -39,10 +39,6 @@ public interface XTryCatchFinallyExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(XExpression)
@@ -65,10 +61,6 @@ public interface XTryCatchFinallyExpression extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Finally Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Finally Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Finally Expression</em>' containment reference.
 	 * @see #setFinallyExpression(XExpression)
@@ -92,10 +84,6 @@ public interface XTryCatchFinallyExpression extends XExpression
 	 * Returns the value of the '<em><b>Catch Clauses</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XCatchClause}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Catch Clauses</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Catch Clauses</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXTryCatchFinallyExpression_CatchClauses()

@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.XbasePackage;
 
 import org.eclipse.xtext.xbase.testlanguages.contentAssistFragmentTestLang.ContentAssistFragmentTestLangFactory;
@@ -59,7 +61,7 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ContentAssistFragmentTestLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -74,12 +76,14 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
     if (isInited) return (ContentAssistFragmentTestLangPackage)EPackage.Registry.INSTANCE.getEPackage(ContentAssistFragmentTestLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    ContentAssistFragmentTestLangPackageImpl theContentAssistFragmentTestLangPackage = (ContentAssistFragmentTestLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistFragmentTestLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistFragmentTestLangPackageImpl());
+    Object registeredContentAssistFragmentTestLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ContentAssistFragmentTestLangPackageImpl theContentAssistFragmentTestLangPackage = registeredContentAssistFragmentTestLangPackage instanceof ContentAssistFragmentTestLangPackageImpl ? (ContentAssistFragmentTestLangPackageImpl)registeredContentAssistFragmentTestLangPackage : new ContentAssistFragmentTestLangPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
     XbasePackage.eINSTANCE.eClass();
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theContentAssistFragmentTestLangPackage.createPackageContents();
@@ -90,7 +94,6 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
     // Mark meta-data to indicate it can't be changed
     theContentAssistFragmentTestLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ContentAssistFragmentTestLangPackage.eNS_URI, theContentAssistFragmentTestLangPackage);
     return theContentAssistFragmentTestLangPackage;
@@ -101,6 +104,7 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContentAssistFragmentTestLanguageRoot()
   {
     return contentAssistFragmentTestLanguageRootEClass;
@@ -111,6 +115,7 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getContentAssistFragmentTestLanguageRoot_Expression()
   {
     return (EReference)contentAssistFragmentTestLanguageRootEClass.getEStructuralFeatures().get(0);
@@ -121,6 +126,7 @@ public class ContentAssistFragmentTestLangPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistFragmentTestLangFactory getContentAssistFragmentTestLangFactory()
   {
     return (ContentAssistFragmentTestLangFactory)getEFactoryInstance();

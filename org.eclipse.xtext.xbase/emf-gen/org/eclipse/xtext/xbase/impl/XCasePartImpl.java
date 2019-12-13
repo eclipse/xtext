@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCasePartImpl#isFallThrough <em>Fall Through</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCasePart
@@ -116,6 +117,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getCase()
 	{
 		return case_;
@@ -143,6 +145,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCase(XExpression newCase)
 	{
 		if (newCase != case_)
@@ -164,6 +167,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getThen()
 	{
 		return then;
@@ -191,6 +195,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThen(XExpression newThen)
 	{
 		if (newThen != then)
@@ -212,6 +217,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getTypeGuard()
 	{
 		return typeGuard;
@@ -239,6 +245,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeGuard(JvmTypeReference newTypeGuard)
 	{
 		if (newTypeGuard != typeGuard)
@@ -260,6 +267,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFallThrough()
 	{
 		return fallThrough;
@@ -270,6 +278,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFallThrough(boolean newFallThrough)
 	{
 		boolean oldFallThrough = fallThrough;
@@ -404,7 +413,7 @@ public class XCasePartImpl extends MinimalEObjectImpl.Container implements XCase
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (fallThrough: ");
 		result.append(fallThrough);
 		result.append(')');

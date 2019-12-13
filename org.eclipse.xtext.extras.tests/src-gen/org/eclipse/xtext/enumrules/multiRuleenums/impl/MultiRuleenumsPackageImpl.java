@@ -66,7 +66,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link MultiRuleenumsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
     if (isInited) return (MultiRuleenumsPackage)EPackage.Registry.INSTANCE.getEPackage(MultiRuleenumsPackage.eNS_URI);
 
     // Obtain or create and register package
-    MultiRuleenumsPackageImpl theMultiRuleenumsPackage = (MultiRuleenumsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MultiRuleenumsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MultiRuleenumsPackageImpl());
+    Object registeredMultiRuleenumsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    MultiRuleenumsPackageImpl theMultiRuleenumsPackage = registeredMultiRuleenumsPackage instanceof MultiRuleenumsPackageImpl ? (MultiRuleenumsPackageImpl)registeredMultiRuleenumsPackage : new MultiRuleenumsPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
     // Mark meta-data to indicate it can't be changed
     theMultiRuleenumsPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(MultiRuleenumsPackage.eNS_URI, theMultiRuleenumsPackage);
     return theMultiRuleenumsPackage;
@@ -105,6 +105,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -115,6 +116,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_A()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_B()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -135,6 +138,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_C()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -145,6 +149,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getMyEnum()
   {
     return myEnumEEnum;
@@ -155,6 +160,7 @@ public class MultiRuleenumsPackageImpl extends EPackageImpl implements MultiRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MultiRuleenumsFactory getMultiRuleenumsFactory()
   {
     return (MultiRuleenumsFactory)getEFactoryInstance();

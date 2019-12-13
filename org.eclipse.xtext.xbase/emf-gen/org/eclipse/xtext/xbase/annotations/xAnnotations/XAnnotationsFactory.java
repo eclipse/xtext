@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EFactory;
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+ * @since 2.7
  * @generated
  */
 public interface XAnnotationsFactory extends EFactory
@@ -32,6 +33,7 @@ public interface XAnnotationsFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XAnnotation</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XAnnotation createXAnnotation();
@@ -41,6 +43,7 @@ public interface XAnnotationsFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XAnnotation Element Value Pair</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XAnnotationElementValuePair createXAnnotationElementValuePair();

@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl#isWriteable <em>Writeable</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XVariableDeclarationImpl extends XExpressionImpl implements XVariableDeclaration
@@ -125,6 +126,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getType()
 	{
 		return type;
@@ -152,6 +154,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmTypeReference newType)
 	{
 		if (newType != type)
@@ -173,6 +176,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -183,6 +187,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -196,6 +201,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getRight()
 	{
 		return right;
@@ -223,6 +229,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRight(XExpression newRight)
 	{
 		if (newRight != right)
@@ -244,6 +251,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isWriteable()
 	{
 		return writeable;
@@ -254,6 +262,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWriteable(boolean newWriteable)
 	{
 		boolean oldWriteable = writeable;
@@ -267,6 +276,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier()
 	{
 		// TODO: implement this method
@@ -279,6 +289,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSimpleName()
 	{
 		// TODO: implement this method
@@ -291,6 +302,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getQualifiedName()
 	{
 		// TODO: implement this method
@@ -303,6 +315,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getQualifiedName(char innerClassDelimiter)
 	{
 		// TODO: implement this method
@@ -434,7 +447,7 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", writeable: ");

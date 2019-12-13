@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XtypePackageImpl extends EPackageImpl implements XtypePackage
@@ -45,6 +46,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xFunctionTypeRefEClass = null;
@@ -52,6 +54,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xComputedTypeReferenceEClass = null;
@@ -59,6 +62,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xImportSectionEClass = null;
@@ -66,6 +70,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EClass xImportDeclarationEClass = null;
@@ -73,6 +78,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
 	private EDataType iJvmTypeReferenceProviderEDataType = null;
@@ -106,7 +112,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link XtypePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -121,7 +127,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		if (isInited) return (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
 
 		// Obtain or create and register package
-		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XtypePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XtypePackageImpl());
+		Object registeredXtypePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		XtypePackageImpl theXtypePackage = registeredXtypePackage instanceof XtypePackageImpl ? (XtypePackageImpl)registeredXtypePackage : new XtypePackageImpl();
 
 		isInited = true;
 
@@ -129,8 +136,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) instanceof XAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) : XAnnotationsPackage.eINSTANCE);
-		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI);
+		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(registeredPackage instanceof XAnnotationsPackageImpl ? registeredPackage : XAnnotationsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
+		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(registeredPackage instanceof XbasePackageImpl ? registeredPackage : XbasePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXtypePackage.createPackageContents();
@@ -145,7 +154,6 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		// Mark meta-data to indicate it can't be changed
 		theXtypePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(XtypePackage.eNS_URI, theXtypePackage);
 		return theXtypePackage;
@@ -154,8 +162,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXFunctionTypeRef()
 	{
 		return xFunctionTypeRefEClass;
@@ -164,8 +174,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXFunctionTypeRef_ParamTypes()
 	{
 		return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(0);
@@ -174,8 +186,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXFunctionTypeRef_ReturnType()
 	{
 		return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(1);
@@ -184,8 +198,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXFunctionTypeRef_Type()
 	{
 		return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(2);
@@ -194,8 +210,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXFunctionTypeRef_InstanceContext()
 	{
 		return (EAttribute)xFunctionTypeRefEClass.getEStructuralFeatures().get(3);
@@ -204,8 +222,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXComputedTypeReference()
 	{
 		return xComputedTypeReferenceEClass;
@@ -214,8 +234,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXComputedTypeReference_TypeProvider()
 	{
 		return (EAttribute)xComputedTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -224,8 +246,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXImportSection()
 	{
 		return xImportSectionEClass;
@@ -234,8 +258,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXImportSection_ImportDeclarations()
 	{
 		return (EReference)xImportSectionEClass.getEStructuralFeatures().get(0);
@@ -244,8 +270,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EClass getXImportDeclaration()
 	{
 		return xImportDeclarationEClass;
@@ -254,8 +282,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXImportDeclaration_Wildcard()
 	{
 		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(0);
@@ -264,8 +294,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXImportDeclaration_Extension()
 	{
 		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(1);
@@ -274,8 +306,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXImportDeclaration_Static()
 	{
 		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(2);
@@ -284,8 +318,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EReference getXImportDeclaration_ImportedType()
 	{
 		return (EReference)xImportDeclarationEClass.getEStructuralFeatures().get(3);
@@ -294,8 +330,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXImportDeclaration_MemberName()
 	{
 		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(4);
@@ -304,8 +342,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EAttribute getXImportDeclaration_ImportedNamespace()
 	{
 		return (EAttribute)xImportDeclarationEClass.getEStructuralFeatures().get(5);
@@ -314,8 +354,10 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public EDataType getIJvmTypeReferenceProvider()
 	{
 		return iJvmTypeReferenceProviderEDataType;
@@ -326,6 +368,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtypeFactory getXtypeFactory()
 	{
 		return (XtypeFactory)getEFactoryInstance();

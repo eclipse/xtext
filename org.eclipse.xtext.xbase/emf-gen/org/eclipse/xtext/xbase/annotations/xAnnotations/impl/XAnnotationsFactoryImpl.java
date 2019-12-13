@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.*;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotationsFactory
@@ -79,8 +80,10 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XAnnotation createXAnnotation()
 	{
 		XAnnotationImpl xAnnotation = new XAnnotationImpl();
@@ -90,8 +93,10 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XAnnotationElementValuePair createXAnnotationElementValuePair()
 	{
 		XAnnotationElementValuePairImpl xAnnotationElementValuePair = new XAnnotationElementValuePairImpl();
@@ -103,6 +108,7 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XAnnotationsPackage getXAnnotationsPackage()
 	{
 		return (XAnnotationsPackage)getEPackage();

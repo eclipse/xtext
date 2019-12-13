@@ -68,7 +68,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EnumAndReferenceTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -83,7 +83,8 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     if (isInited) return (EnumAndReferenceTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EnumAndReferenceTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EnumAndReferenceTestLanguagePackageImpl theEnumAndReferenceTestLanguagePackage = (EnumAndReferenceTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EnumAndReferenceTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EnumAndReferenceTestLanguagePackageImpl());
+    Object registeredEnumAndReferenceTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EnumAndReferenceTestLanguagePackageImpl theEnumAndReferenceTestLanguagePackage = registeredEnumAndReferenceTestLanguagePackage instanceof EnumAndReferenceTestLanguagePackageImpl ? (EnumAndReferenceTestLanguagePackageImpl)registeredEnumAndReferenceTestLanguagePackage : new EnumAndReferenceTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -99,7 +100,6 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     // Mark meta-data to indicate it can't be changed
     theEnumAndReferenceTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EnumAndReferenceTestLanguagePackage.eNS_URI, theEnumAndReferenceTestLanguagePackage);
     return theEnumAndReferenceTestLanguagePackage;
@@ -110,6 +110,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntityWithEnumAndReference()
   {
     return entityWithEnumAndReferenceEClass;
@@ -120,6 +121,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEntityWithEnumAndReference_Type()
   {
     return (EAttribute)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(0);
@@ -130,6 +132,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEntityWithEnumAndReference_Name()
   {
     return (EAttribute)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(1);
@@ -140,6 +143,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntityWithEnumAndReference_Ref()
   {
     return (EReference)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(2);
@@ -150,6 +154,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getKindOfKeyword()
   {
     return kindOfKeywordEEnum;
@@ -160,6 +165,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumAndReferenceTestLanguageFactory getEnumAndReferenceTestLanguageFactory()
   {
     return (EnumAndReferenceTestLanguageFactory)getEFactoryInstance();

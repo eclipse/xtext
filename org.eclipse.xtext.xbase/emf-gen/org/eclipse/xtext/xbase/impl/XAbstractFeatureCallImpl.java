@@ -45,8 +45,10 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
+@SuppressWarnings("deprecation")
 public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implements XAbstractFeatureCall
 {
 	/**
@@ -84,9 +86,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInvalidFeatureIssueCode()
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected static final String INVALID_FEATURE_ISSUE_CODE_EDEFAULT = null;
 
 	/**
@@ -94,9 +98,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInvalidFeatureIssueCode()
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected String invalidFeatureIssueCode = INVALID_FEATURE_ISSUE_CODE_EDEFAULT;
 
 	/**
@@ -104,9 +110,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isValidFeature()
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature() model documentation} for details.
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected static final boolean VALID_FEATURE_EDEFAULT = false;
 
 	/**
@@ -114,9 +122,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isValidFeature()
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature() model documentation} for details.
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	protected boolean validFeature = VALID_FEATURE_EDEFAULT;
 
 	/**
@@ -155,6 +165,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmIdentifiableElement getFeature()
 	{
 		if (feature != null && feature.eIsProxy())
@@ -185,6 +196,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFeature(JvmIdentifiableElement newFeature)
 	{
 		JvmIdentifiableElement oldFeature = feature;
@@ -198,6 +210,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getTypeArguments()
 	{
 		if (typeArguments == null)
@@ -212,6 +225,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getImplicitReceiver()
 	{
 		return implicitReceiver;
@@ -239,6 +253,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImplicitReceiver(XExpression newImplicitReceiver)
 	{
 		if (newImplicitReceiver != implicitReceiver)
@@ -258,8 +273,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public String getInvalidFeatureIssueCode()
 	{
 		return invalidFeatureIssueCode;
@@ -268,8 +286,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getInvalidFeatureIssueCode() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public void setInvalidFeatureIssueCode(String newInvalidFeatureIssueCode)
 	{
 		String oldInvalidFeatureIssueCode = invalidFeatureIssueCode;
@@ -281,8 +302,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#isValidFeature() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public boolean isValidFeature()
 	{
 		return validFeature;
@@ -293,6 +317,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getImplicitFirstArgument()
 	{
 		return implicitFirstArgument;
@@ -320,6 +345,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImplicitFirstArgument(XExpression newImplicitFirstArgument)
 	{
 		if (newImplicitFirstArgument != implicitFirstArgument)
@@ -341,6 +367,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getConcreteSyntaxFeatureName()
 	{
 		// TODO: implement this method
@@ -351,8 +378,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated See {@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getExplicitArguments() model documentation} for details.
 	 * @generated
 	 */
+	@Deprecated
+	@Override
 	public EList<XExpression> getExplicitArguments()
 	{
 		// TODO: implement this method
@@ -365,6 +395,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitOperationCallOrBuilderSyntax()
 	{
 		// TODO: implement this method
@@ -377,6 +408,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getActualReceiver()
 	{
 		// TODO: implement this method
@@ -389,6 +421,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getActualArguments()
 	{
 		// TODO: implement this method
@@ -401,6 +434,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		// TODO: implement this method
@@ -413,6 +447,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExtension()
 	{
 		// TODO: implement this method
@@ -425,6 +460,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPackageFragment()
 	{
 		// TODO: implement this method
@@ -437,6 +473,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isTypeLiteral()
 	{
 		// TODO: implement this method
@@ -449,6 +486,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isOperation()
 	{
 		// TODO: implement this method
@@ -599,7 +637,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (invalidFeatureIssueCode: ");
 		result.append(invalidFeatureIssueCode);
 		result.append(", validFeature: ");

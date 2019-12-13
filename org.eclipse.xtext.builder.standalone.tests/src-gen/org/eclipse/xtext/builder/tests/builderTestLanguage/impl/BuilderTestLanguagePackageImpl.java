@@ -82,7 +82,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BuilderTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
     if (isInited) return (BuilderTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(BuilderTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    BuilderTestLanguagePackageImpl theBuilderTestLanguagePackage = (BuilderTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BuilderTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BuilderTestLanguagePackageImpl());
+    Object registeredBuilderTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BuilderTestLanguagePackageImpl theBuilderTestLanguagePackage = registeredBuilderTestLanguagePackage instanceof BuilderTestLanguagePackageImpl ? (BuilderTestLanguagePackageImpl)registeredBuilderTestLanguagePackage : new BuilderTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -110,7 +111,6 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
     // Mark meta-data to indicate it can't be changed
     theBuilderTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BuilderTestLanguagePackage.eNS_URI, theBuilderTestLanguagePackage);
     return theBuilderTestLanguagePackage;
@@ -121,6 +121,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamedElement()
   {
     return namedElementEClass;
@@ -131,6 +132,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamedElement_Name()
   {
     return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
@@ -141,6 +143,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamespace()
   {
     return namespaceEClass;
@@ -151,6 +154,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamespace_Imports()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(0);
@@ -161,6 +165,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamespace_Elements()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
@@ -171,6 +176,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -181,6 +187,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -191,6 +198,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -201,6 +209,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_References()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(0);
@@ -211,6 +220,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_OtherRefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -221,6 +231,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
   {
     return (BuilderTestLanguageFactory)getEFactoryInstance();

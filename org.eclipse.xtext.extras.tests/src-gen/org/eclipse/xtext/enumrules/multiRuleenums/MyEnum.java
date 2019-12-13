@@ -73,10 +73,6 @@ public enum MyEnum implements Enumerator
   /**
    * The '<em><b>A</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>A</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #A
    * @model
@@ -88,10 +84,6 @@ public enum MyEnum implements Enumerator
   /**
    * The '<em><b>B</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>B</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #B
    * @model
@@ -103,10 +95,6 @@ public enum MyEnum implements Enumerator
   /**
    * The '<em><b>C</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>C</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #C
    * @model
@@ -118,10 +106,6 @@ public enum MyEnum implements Enumerator
   /**
    * The '<em><b>D</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>D</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #D
    * @model
@@ -133,10 +117,6 @@ public enum MyEnum implements Enumerator
   /**
    * The '<em><b>E</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>E</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #E
    * @model
@@ -271,6 +251,7 @@ public enum MyEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -281,6 +262,7 @@ public enum MyEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -291,6 +273,7 @@ public enum MyEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;
