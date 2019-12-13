@@ -43,6 +43,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase.lib;resolution:=optional,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.builder.standalone,
- org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.20.0";resolution:=optional,
  org.eclipse.pde.core;bundle-version="3.11.100";resolution:=optional
 Automatic-Module-Name: org.eclipse.xtext.junit4
