@@ -150,7 +150,7 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 			/**
 			 * Provides labels for IEObjectDescriptions and IResourceDescriptions.
 			 * 
-			 * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+			 * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
 			 */
 			class «grammar.descriptionLabelProviderClass.simpleName» extends «grammar.descriptionLabelProviderSuperClass» {
 			
@@ -201,7 +201,7 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 			/**
 			 * Provides labels for IEObjectDescriptions and IResourceDescriptions.
 			 * 
-			 * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
+			 * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
 			 */
 			public class «grammar.descriptionLabelProviderClass.simpleName» extends «grammar.descriptionLabelProviderSuperClass» {
 			

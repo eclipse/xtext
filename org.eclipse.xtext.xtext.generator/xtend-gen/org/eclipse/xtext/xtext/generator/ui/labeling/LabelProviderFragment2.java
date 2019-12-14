@@ -237,7 +237,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("* ");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*/");
@@ -365,7 +365,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("* ");
         _builder.newLine();
         _builder.append(" ");
-        _builder.append("* https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider");
+        _builder.append("* See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider");
         _builder.newLine();
         _builder.append(" ");
         _builder.append("*/");
