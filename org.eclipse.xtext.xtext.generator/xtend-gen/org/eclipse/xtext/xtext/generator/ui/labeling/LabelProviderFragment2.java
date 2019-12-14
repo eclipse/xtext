@@ -382,7 +382,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("\t");
         _builder.append("// Labels and icons can be computed like this:");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("//\t@Override");
         _builder.newLine();
         _builder.append("//\tpublic String text(IEObjectDescription ele) {");
         _builder.newLine();
@@ -390,7 +390,9 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("//\t}");
         _builder.newLine();
-        _builder.append("//\t ");
+        _builder.append("//\t");
+        _builder.newLine();
+        _builder.append("//\t@Override");
         _builder.newLine();
         _builder.append("//\tpublic String image(IEObjectDescription ele) {");
         _builder.newLine();
