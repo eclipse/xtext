@@ -22,10 +22,11 @@ public class IgnoreBuildDirModule extends AbstractModule {
 	protected void configure() {
 		try {
 			/*
-			 * Even though this bundle does not make any sense without buildship being available,
-			 * the bundle dependencies are declared optional to simplify the deployment process.
-			 * Here we decouple the registration of the target folder filter from the contributing
-			 * module extension point to avoid NoClassDefFounds at runtime if buildship is not available. 
+			 * Even though this bundle does not make any sense without buildship being
+			 * available, the bundle dependencies are declared optional to simplify the
+			 * deployment process. Here we decouple the registration of the target folder
+			 * filter from the contributing module extension point to avoid NoClassDefFounds
+			 * at runtime if buildship is not available.
 			 */
 			if (Class.forName("org.eclipse.buildship.core.internal.CorePlugin") != null) {
 				install(new Internal());
@@ -34,7 +35,7 @@ public class IgnoreBuildDirModule extends AbstractModule {
 			// ignore
 		}
 	}
-	
+
 	private static class Internal extends AbstractModule {
 
 		@Override
@@ -43,7 +44,7 @@ public class IgnoreBuildDirModule extends AbstractModule {
 			bind(IToBeBuiltComputerContribution.class).to(IgnoreBuildDirContribution.class);
 			bind(IgnoreBuildDirContribution.class).in(Scopes.SINGLETON);
 		}
-		
+
 	}
 
 }

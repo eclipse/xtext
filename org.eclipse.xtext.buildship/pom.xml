@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -10,4 +11,47 @@
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtext.buildship</artifactId>
 
+	<!-- This bundle can only be build with Eclipse Buildship 3.0 (or later) -->
+	<!-- Activate 2018-12 (or later) target only for this bundle, other plugins might use older profiles -->
+	<profiles>
+		<profile>
+			<id>oxygen</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>photon</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r201809</id>
+			<properties>
+				<target-platform-classifier>org.eclipse.xtext.target-r201812</target-platform-classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>r201812</id>
+		</profile>
+		<profile>
+			<id>r201903</id>
+		</profile>
+		<profile>
+			<id>r201906</id>
+		</profile>
+		<profile>
+			<id>r201909</id>
+		</profile>
+		<profile>
+			<id>r201912</id>
+		</profile>
+		<profile>
+			<id>latest</id>
+		</profile>
+	</profiles>
 </project>

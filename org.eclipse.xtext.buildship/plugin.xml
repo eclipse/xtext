@@ -7,4 +7,12 @@
             class="org.eclipse.xtext.buildship.IgnoreBuildDirModule">
       </module>
    </extension>
+  <extension
+        id="org.eclipse.xtext.buildship"
+        point="org.eclipse.buildship.core.projectconfigurators">
+     <configurator
+           class="org.eclipse.xtext.buildship.IgnoreBuildDirExecutableExtensionFactory:org.eclipse.xtext.buildship.IgnoreBuildDirContribution"
+           id="org.eclipse.xtext.buildship.ignoreBuildDirContribution">
+     </configurator>
+  </extension>
 </plugin>
