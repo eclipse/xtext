@@ -7,35 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.buildship;
 
+import java.io.File;
 import java.util.Collections;
+import java.util.Optional;
 
-import org.eclipse.buildship.core.internal.CorePlugin;
-import org.eclipse.buildship.core.internal.preferences.PersistentModel;
+import org.eclipse.buildship.core.GradleBuild;
+import org.eclipse.buildship.core.GradleCore;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperContribution;
 import org.eclipse.xtext.util.Pair;
+import org.gradle.tooling.model.GradleProject;
 
 /**
  * Filter Gradle output folders from the builder.
  */
-@SuppressWarnings("restriction")
 public class IgnoreBuildDirContribution implements IToBeBuiltComputerContribution, IStorage2UriMapperContribution {
 
 	@Override
 	public boolean isRejected(IFolder folder) {
-		PersistentModel gradleModel = CorePlugin.modelPersistence().loadModel(folder.getProject());
-		if(gradleModel.isPresent()) {
-			IPath buildDir = gradleModel.getBuildDir();
-			if (folder.getFullPath().equals(buildDir)) {
-				return true;
+		IProject project = folder.getProject();
+		Optional<GradleBuild> gradleBuild = GradleCore.getWorkspace().getBuild(project);
+		if (gradleBuild.isPresent()) {
+			try {
+				GradleProject gradleProject = gradleBuild.get().withConnection(connection->connection.getModel(GradleProject.class), new NullProgressMonitor());
+				File buildDirectory = gradleProject.getBuildDirectory();
+				File folderAsFile = folder.getFullPath().toFile();
+				if (folderAsFile.equals(buildDirectory)) {
+					return true;
+				}
+			} catch (Exception e) {
+				return false;
 			}
 		}
 		return false;
