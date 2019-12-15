@@ -19,6 +19,7 @@
 		<module>org.eclipse.xtext.logging</module>
 		<module>org.eclipse.xtext.activities</module>
 		<module>org.eclipse.xtext.builder</module>
+		<module>org.eclipse.xtext.buildship</module>
 		<module>org.eclipse.xtext.ui</module>
 		<module>org.eclipse.xtext.ui.codemining</module>
 		<module>org.eclipse.xtext.common.types.eclipse.tests</module>
