@@ -14,7 +14,10 @@ import java.io.OutputStream;
 /**
  * Filters any line, that contains the given pattern right from the beginning.
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated this class is obsolete and will be removed in a future release of Xtext.
  */
+@Deprecated
 public class LineFilterOutputStream extends FilterOutputStream {
 
 	private final byte[] pattern;
