@@ -317,6 +317,10 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 					return result
 				}
 			}
+		} else if (visibility == JvmVisibility.PUBLIC) {
+			if (declaringType instanceof JvmGenericType && (declaringType as JvmGenericType).isInterface) {
+				return result
+			}
 		}
 		super.generateVisibilityModifier(it, result)
 	}
