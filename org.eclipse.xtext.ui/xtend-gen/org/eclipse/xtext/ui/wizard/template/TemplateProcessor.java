@@ -97,6 +97,28 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
   
   private void generateMessagesClass(final String propertyContents, final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     final Path classFile = annotatedClass.getCompilationUnit().getFilePath().getParent().append("Messages.java");
+    String contents = "";
+    boolean _exists = context.exists(classFile);
+    if (_exists) {
+      final String oldContents = context.getContents(classFile).toString();
+      if (((oldContents.trim().startsWith("/*") && oldContents.contains("*/")) && 
+        (oldContents.length() > (oldContents.indexOf("*/") + 2)))) {
+        String _contents = contents;
+        int _indexOf = oldContents.indexOf("*/");
+        int _plus = (_indexOf + 2);
+        String _substring = oldContents.substring(0, _plus);
+        String _lineSeparator = System.lineSeparator();
+        String _plus_1 = (_substring + _lineSeparator);
+        contents = (_contents + _plus_1);
+      }
+    } else {
+      String _contents_1 = contents;
+      String _docComment = annotatedClass.getCompilationUnit().getDocComment();
+      String _lineSeparator_1 = System.lineSeparator();
+      String _plus_2 = (_docComment + _lineSeparator_1);
+      contents = (_contents_1 + _plus_2);
+    }
+    String _contents_2 = contents;
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _packageName = annotatedClass.getCompilationUnit().getPackageName();
@@ -117,13 +139,13 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
-    String contents = _builder.toString();
+    contents = (_contents_2 + _builder);
     String[] _split = propertyContents.split("(\r?\n)+");
     for (final String line : _split) {
       boolean _contains = line.contains("=");
       if (_contains) {
         final String[] parts = line.split("=");
-        String _contents = contents;
+        String _contents_3 = contents;
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("\t");
         _builder_1.append("public static String ");
@@ -131,10 +153,10 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
         _builder_1.append(_trim, "\t");
         _builder_1.append(";");
         _builder_1.newLineIfNotEmpty();
-        contents = (_contents + _builder_1);
+        contents = (_contents_3 + _builder_1);
       }
     }
-    String _contents_1 = contents;
+    String _contents_4 = contents;
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("\t");
     _builder_2.newLine();
@@ -159,7 +181,7 @@ public abstract class TemplateProcessor extends AbstractClassProcessor {
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();
-    contents = (_contents_1 + _builder_2);
+    contents = (_contents_4 + _builder_2);
     context.setContents(classFile, contents);
   }
   
