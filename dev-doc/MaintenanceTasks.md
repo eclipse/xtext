@@ -75,7 +75,7 @@ Additional manual step:
 * From the previously copied _Repository List_ remove the `I-builds` repository entry
 * In the new _Repository List_ update the `I-builds` repository entry to the next Eclipse Platform version
 
-## Adap API-Diff jobs
+## Adapt API-Diff jobs
 
 * Adapt the jobs [Jenkinsfile](https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile) and change the choices for old and new version.
 * Adapt the jobs [script](https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh)
@@ -88,3 +88,7 @@ Additional manual step:
 The repository [xtext-reference-projects](https://github.com/itemis/xtext-reference-projects) contains a set of projects that are created by the project wizard, and the Domainmodel example. These projects are built by TravisCI.
 
 After each release a new set of projects should be added. Follow the instructions in the repository's [README](https://github.com/itemis/xtext-reference-projects/blob/master/README.md).
+
+## Marketplace
+
+With each release the Marketplace composite site descriptors have to be adjusted. The update steps are described in https://github.com/eclipse/xtext/blob/master/Builds.md#preparing-milestones-and-releases.
