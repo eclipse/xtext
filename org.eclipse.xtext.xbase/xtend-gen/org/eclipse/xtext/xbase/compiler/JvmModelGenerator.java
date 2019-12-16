@@ -512,8 +512,7 @@ public class JvmModelGenerator implements IGenerator {
       boolean _isInterface = it.isInterface();
       boolean _not = (!_isInterface);
       if (_not) {
-        boolean _isStatic = it.isStatic();
-        if (_isStatic) {
+        if ((it.isStatic() && (!this.isDeclaredWithinInterface(it)))) {
           appendable.append("static ");
         }
         boolean _isAbstract = it.isAbstract();
@@ -533,6 +532,10 @@ public class JvmModelGenerator implements IGenerator {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  private boolean isDeclaredWithinInterface(final JvmMember it) {
+    return ((it.getDeclaringType() instanceof JvmGenericType) && ((JvmGenericType) it.getDeclaringType()).isInterface());
   }
   
   protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -569,15 +572,14 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       this.generateVisibilityModifier(it, appendable);
-      boolean _isAbstract = it.isAbstract();
-      if (_isAbstract) {
+      if ((it.isAbstract() && (!this.isDeclaredWithinInterface(it)))) {
         appendable.append("abstract ");
       }
       boolean _isStatic = it.isStatic();
       if (_isStatic) {
         appendable.append("static ");
       }
-      if ((((((!it.isAbstract()) && (!it.isStatic())) && config.getJavaSourceVersion().isAtLeast(JavaVersion.JAVA8)) && (it.eContainer() instanceof JvmGenericType)) && ((JvmGenericType) it.eContainer()).isInterface())) {
+      if (((((!it.isAbstract()) && (!it.isStatic())) && config.getJavaSourceVersion().isAtLeast(JavaVersion.JAVA8)) && this.isDeclaredWithinInterface(it))) {
         appendable.append("default ");
       }
       boolean _isFinal = it.isFinal();
