@@ -155,7 +155,11 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 
 	override getDocComment() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		val nodes = fileHeaderProvider.getFileHeaderNodes(xtendFile.eResource)
+		if (nodes.empty)
+			return ""
+		else
+			return nodes.get(0).text
 	}
 
 	override getPackageName() {
@@ -949,6 +953,10 @@ class CompilationUnitImpl implements CompilationUnit {
 			reducedStackTrace.add(it)
 		}
 		return getMessage.apply(t)
+	}
+	
+	def getFileHeader() {
+		fileHeaderProvider.getFileHeader(xtendFile.eResource)
 	}
 	
 }
