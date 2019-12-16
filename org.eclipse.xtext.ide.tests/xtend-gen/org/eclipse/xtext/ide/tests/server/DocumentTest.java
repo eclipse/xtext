@@ -220,6 +220,11 @@ public class DocumentTest {
   }
   
   @Test
+  public void testGetLineContent_windows_line_endings() {
+    Assert.assertEquals("bbb", new Document(Integer.valueOf(1), "aaa\r\nbbb\r\nccc").getLineContent(1));
+  }
+  
+  @Test
   public void testGetLineCount_empty() {
     Assert.assertEquals(1, new Document(Integer.valueOf(1), "").getLineCount());
   }
