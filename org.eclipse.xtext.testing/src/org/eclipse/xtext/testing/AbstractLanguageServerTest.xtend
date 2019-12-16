@@ -12,12 +12,12 @@ import com.google.inject.Inject
 import com.google.inject.Module
 import java.io.File
 import java.io.FileWriter
-import java.net.URI
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeAction
 import org.eclipse.lsp4j.CodeActionContext
 import org.eclipse.lsp4j.CodeActionParams
@@ -65,6 +65,7 @@ import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
+import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.util.SemanticHighlightingTokens
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
@@ -84,9 +85,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.eclipse.lsp4j.services.LanguageClient
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
+import static extension org.eclipse.xtext.util.Strings.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -174,7 +175,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 
 	protected def Path relativize(String uri) {
-		val path = Paths.get(new URI(uri))
+		val path = Paths.get(new java.net.URI(uri))
 		testRootPath.relativize(path)
 	}
 
@@ -210,7 +211,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 				uri = fileUri
 				languageId = langaugeId
 				version = 1
-				text = model
+				text = model.toUnixLineSeparator
 			]
 		])
 	}
@@ -416,7 +417,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected dispatch def String toExpectation(WorkspaceEdit it) '''
 		changes :
 			«FOR entry : changes.entrySet»
-				«org.eclipse.emf.common.util.URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
+				«URI.createURI(entry.key).lastSegment» : «entry.value.toExpectation»
 			«ENDFOR» 
 		documentChanges : 
 			«documentChanges.toExpectation»
@@ -435,7 +436,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	'''
 
 	protected def dispatch String toExpectation(VersionedTextDocumentIdentifier v) 
-		'''«org.eclipse.emf.common.util.URI.createURI(v.uri).lastSegment» <«v.version»>'''
+		'''«URI.createURI(v.uri).lastSegment» <«v.version»>'''
 	
 	
 	
