@@ -88,7 +88,10 @@ public class IgnoreBuildDirContribution
 	@Override
 	public void unconfigure(ProjectContext context, IProgressMonitor monitor) {
 		IFolder buildDir = buildDirsPerProject.remove(context.getProject());
-		buildDirs.remove(buildDir);
+		// paranoid: if this project was never configured, avoid NPE
+		if (buildDir != null) {
+			buildDirs.remove(buildDir);	
+		}
 	}
 
 	@Override
