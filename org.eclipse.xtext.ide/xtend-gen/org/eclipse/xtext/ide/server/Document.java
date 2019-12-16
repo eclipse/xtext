@@ -108,7 +108,7 @@ public class Document {
   }
   
   /**
-   * Returns with the text for a certain line without the trailing LF. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
+   * Returns with the text for a certain line without the trailing end line marker. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
    * argument is negative or exceeds the number of lines in the document.
    */
   public String getLineContent(final int lineNumber) throws IndexOutOfBoundsException {
@@ -123,6 +123,7 @@ public class Document {
       throw new IndexOutOfBoundsException(_plus);
     }
     final char NL = '\n';
+    final char LF = '\r';
     final int l = this.contents.length();
     final StringBuilder lineContent = new StringBuilder();
     int line = 0;
@@ -132,7 +133,7 @@ public class Document {
           return lineContent.toString();
         }
         final char ch = this.contents.charAt(i);
-        if (((line == lineNumber) && (ch != NL))) {
+        if ((((line == lineNumber) && (ch != NL)) && (ch != LF))) {
           lineContent.append(ch);
         }
         if ((ch == NL)) {

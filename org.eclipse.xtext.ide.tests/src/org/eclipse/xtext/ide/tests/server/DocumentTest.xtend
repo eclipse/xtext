@@ -148,6 +148,10 @@ class DocumentTest {
         ccc''').getLineContent(1));
     }
 
+    @Test def void testGetLineContent_windows_line_endings() {
+        assertEquals('bbb', new Document(1, "aaa\r\nbbb\r\nccc").getLineContent(1));
+    }
+
     @Test def void testGetLineCount_empty() {
         assertEquals(1, new Document(1, '').lineCount);
     }

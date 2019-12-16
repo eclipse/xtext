@@ -107,6 +107,7 @@ import org.eclipse.xtext.testing.WorkspaceSymbolConfiguration;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -368,7 +369,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         it_1.setUri(fileUri);
         it_1.setLanguageId(langaugeId);
         it_1.setVersion(1);
-        it_1.setText(model);
+        it_1.setText(Strings.toUnixLineSeparator(model));
       };
       TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
       it.setTextDocument(_doubleArrow);

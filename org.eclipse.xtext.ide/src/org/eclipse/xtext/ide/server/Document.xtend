@@ -84,7 +84,7 @@ import org.eclipse.lsp4j.TextDocumentContentChangeEvent
     }
 
     /**
-     * Returns with the text for a certain line without the trailing LF. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
+     * Returns with the text for a certain line without the trailing end line marker. Throws an {@link IndexOutOfBoundsException} if the zero-based {@code lineNumber}
      * argument is negative or exceeds the number of lines in the document.
      */
     def String getLineContent(int lineNumber) throws IndexOutOfBoundsException {
@@ -92,6 +92,7 @@ import org.eclipse.lsp4j.TextDocumentContentChangeEvent
             throw new IndexOutOfBoundsException(lineNumber + if (printSourceOnError) "" else (" text was : " + contents));
         }
         val char NL = '\n';
+        val char LF = '\r';
         val l = contents.length;
         val lineContent = new StringBuilder;
         var line = 0;
@@ -100,7 +101,7 @@ import org.eclipse.lsp4j.TextDocumentContentChangeEvent
                 return lineContent.toString;
             }
             val ch = contents.charAt(i);
-            if (line === lineNumber && ch !== NL) {
+            if (line === lineNumber && ch !== NL && ch !== LF) {
                 lineContent.append(ch);
             }
             if (ch === NL) {
