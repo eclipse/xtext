@@ -346,7 +346,7 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void bind(final Runnable r);");
+    _builder_1.append("void bind(final Runnable r);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -427,7 +427,7 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void bind(final Runnable r);");
+    _builder_1.append("void bind(final Runnable r);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -508,7 +508,7 @@ public class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void bind(final Runnable r);");
+    _builder_1.append("void bind(final Runnable r);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -67,7 +67,7 @@ public class CompilerBug410555Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface SAMInterface {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void test();");
+    _builder_1.append("void test();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

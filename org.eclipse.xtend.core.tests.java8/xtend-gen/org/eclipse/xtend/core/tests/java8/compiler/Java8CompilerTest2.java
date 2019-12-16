@@ -41,7 +41,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public interface Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public static String bar() {");
+    _builder_1.append("static String bar() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return \"bar!\";");
@@ -131,7 +131,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -295,7 +295,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -433,7 +433,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1007,7 +1007,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public default void foo() {");
+    _builder_1.append("default void foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("A.super.foo();");
@@ -2846,7 +2846,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply();");
+    _builder_1.append("void apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -2912,7 +2912,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final String value);");
+    _builder_1.append("void apply(final String value);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -2978,7 +2978,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final Procedure1<? super String> procedure);");
+    _builder_1.append("void apply(final Procedure1<? super String> procedure);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -3047,7 +3047,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract String apply();");
+    _builder_1.append("String apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -3120,7 +3120,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract Procedure1<? super String> apply();");
+    _builder_1.append("Procedure1<? super String> apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

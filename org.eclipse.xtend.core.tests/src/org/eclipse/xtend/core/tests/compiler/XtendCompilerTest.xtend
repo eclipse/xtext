@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.generator.IFilePostProcessor
+import org.eclipse.xtext.util.JavaVersion
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
@@ -88,7 +89,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Foo {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements Foo.E {
@@ -1319,9 +1320,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public interface Foo {
-			  public abstract int foo();
+			  int foo();
 			  
-			  public static final int bar = 42;
+			  static final int bar = 42;
 			}
 		''')
 	}
@@ -1636,7 +1637,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements C.E {
@@ -1686,7 +1687,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements C.E {
@@ -5678,7 +5679,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure0 {
-			  public abstract void apply();
+			  void apply();
 			}
 		''')
 	}
@@ -5715,7 +5716,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure1<String> {
-			  public abstract void apply(final String value);
+			  void apply(final String value);
 			}
 		''')
 	}
@@ -5752,7 +5753,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure1<Procedure1<? super String>> {
-			  public abstract void apply(final Procedure1<? super String> procedure);
+			  void apply(final Procedure1<? super String> procedure);
 			}
 		''')
 	}
@@ -5790,7 +5791,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 			@SuppressWarnings("all")
 			public interface Foo extends Function0<String> {
-			  public abstract String apply();
+			  String apply();
 			}
 		''')
 	}
@@ -5830,7 +5831,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 			@SuppressWarnings("all")
 			public interface Foo extends Function0<Procedure1<? super String>> {
-			  public abstract Procedure1<? super String> apply();
+			  Procedure1<? super String> apply();
 			}
 		''')
 	}
@@ -5972,6 +5973,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test // see https://github.com/eclipse/xtext-xtend/issues/942
 	def testSuppressUnnecessaryModifiersInInterfaces() {
+		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo('''
 			interface FooItf {
 			   def void bar ()
@@ -5983,6 +5985,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface FooItf {
 			  class FooItfImpl implements FooItf {
+			    «IF generatorConfig.javaSourceVersion.isAtLeast(JavaVersion.JAVA6)»
+			    @Override
+			    «ENDIF»
 			    public void bar() {
 			    }
 			  }

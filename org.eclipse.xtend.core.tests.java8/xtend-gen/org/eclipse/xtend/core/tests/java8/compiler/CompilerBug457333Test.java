@@ -119,7 +119,7 @@ public class CompilerBug457333Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Action<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void exec(final T t);");
+    _builder_1.append("void exec(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

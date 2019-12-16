@@ -28,7 +28,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public interface Foo {
-			  public static String bar() {
+			  static String bar() {
 			    return "bar!";
 			  }
 			}
@@ -65,7 +65,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class Foo {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements Foo.E {
@@ -126,7 +126,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements C.E {
@@ -178,7 +178,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface E {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  public static class E1 extends Exception implements C.E {
@@ -439,7 +439,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Test extends A {
 			  @Override
-			  public default void foo() {
+			  default void foo() {
 			    A.super.foo();
 			  }
 			}
@@ -1230,7 +1230,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure0 {
 			  @Override
-			  public abstract void apply();
+			  void apply();
 			}
 		''')
 	} 
@@ -1264,7 +1264,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure1<String> {
 			  @Override
-			  public abstract void apply(final String value);
+			  void apply(final String value);
 			}
 		''')
 	} 
@@ -1298,7 +1298,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo extends Procedure1<Procedure1<? super String>> {
 			  @Override
-			  public abstract void apply(final Procedure1<? super String> procedure);
+			  void apply(final Procedure1<? super String> procedure);
 			}
 		''')
 	} 
@@ -1333,7 +1333,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo extends Function0<String> {
 			  @Override
-			  public abstract String apply();
+			  String apply();
 			}
 		''')
 	} 
@@ -1370,7 +1370,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public interface Foo extends Function0<Procedure1<? super String>> {
 			  @Override
-			  public abstract Procedure1<? super String> apply();
+			  Procedure1<? super String> apply();
 			}
 		''')
 	}

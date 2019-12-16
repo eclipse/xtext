@@ -141,7 +141,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Sortable<T extends Object> extends Iterable<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void sort(final Comparator<? super T> c);");
+    _builder_1.append("void sort(final Comparator<? super T> c);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -256,7 +256,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Sortable<T extends Object> extends Iterable<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void sort(final Comparator<? super T> c);");
+    _builder_1.append("void sort(final Comparator<? super T> c);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -295,7 +295,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface ToIntFunction<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract int apply(final T t);");
+    _builder_1.append("int apply(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -410,7 +410,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Sortable<T extends Object> extends Iterable<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void sort(final Comparator<? super T> c);");
+    _builder_1.append("void sort(final Comparator<? super T> c);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -449,7 +449,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface ToIntFunction<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract int apply(final T t);");
+    _builder_1.append("int apply(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -564,7 +564,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Sortable<T extends Object> extends Iterable<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void sort(final Comparator<? super T> c);");
+    _builder_1.append("void sort(final Comparator<? super T> c);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -603,7 +603,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface ToIntFunction<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract int apply(final T t);");
+    _builder_1.append("int apply(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -758,7 +758,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface ToIntFunction<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract int apply(final T t);");
+    _builder_1.append("int apply(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -769,7 +769,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Function<T extends Object, R extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract R apply(final T t);");
+    _builder_1.append("R apply(final T t);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

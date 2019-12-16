@@ -61,7 +61,7 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class XtendPlugin implements Procedure1<String> {
 			  public interface Action<T extends Object> {
-			    public abstract void exec(final T t);
+			    void exec(final T t);
 			  }
 			  
 			  @Override

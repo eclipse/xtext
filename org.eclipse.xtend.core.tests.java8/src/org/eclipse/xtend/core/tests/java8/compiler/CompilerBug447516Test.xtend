@@ -66,7 +66,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I<P extends Object> {
-			    public abstract <T extends P> T exec(final Function1<? super P, ? extends T> arg);
+			    <T extends P> T exec(final Function1<? super P, ? extends T> arg);
 			  }
 			  
 			  private final C.I<CharSequence> readAccess = new C.I<CharSequence>() {
@@ -97,7 +97,7 @@ class CompilerBug447516Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I<P extends Object, W extends P> {
-			    public abstract <T extends P, V extends T> T exec(final W w, final Function1<? super P, ? extends T> arg);
+			    <T extends P, V extends T> T exec(final W w, final Function1<? super P, ? extends T> arg);
 			  }
 			  
 			  private final C.I<CharSequence, String> i = new C.I<CharSequence, String>() {

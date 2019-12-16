@@ -43,7 +43,7 @@ class CompilerBug441096Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I {
-			    public abstract void m();
+			    void m();
 			  }
 			  
 			  @Accessors(AccessorType.PUBLIC_GETTER)

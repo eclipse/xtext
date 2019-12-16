@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.generator.IFilePostProcessor;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -205,7 +206,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3058,12 +3059,12 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract int foo();");
+    _builder_1.append("int foo();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public static final int bar = 42;");
+    _builder_1.append("static final int bar = 42;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -3767,7 +3768,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3898,7 +3899,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -12576,7 +12577,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure0 {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply();");
+    _builder_1.append("void apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12640,7 +12641,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure1<String> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final String value);");
+    _builder_1.append("void apply(final String value);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12704,7 +12705,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure1<Procedure1<? super String>> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final Procedure1<? super String> procedure);");
+    _builder_1.append("void apply(final Procedure1<? super String> procedure);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12771,7 +12772,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Function0<String> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract String apply();");
+    _builder_1.append("String apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12842,7 +12843,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Function0<Procedure1<? super String>> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract Procedure1<? super String> apply();");
+    _builder_1.append("Procedure1<? super String> apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -13191,6 +13192,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void testSuppressUnnecessaryModifiersInInterfaces() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface FooItf {");
     _builder.newLine();
@@ -13216,6 +13218,14 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.append("class FooItfImpl implements FooItf {");
     _builder_1.newLine();
+    {
+      boolean _isAtLeast = generatorConfig.getJavaSourceVersion().isAtLeast(JavaVersion.JAVA6);
+      if (_isAtLeast) {
+        _builder_1.append("    ");
+        _builder_1.append("@Override");
+        _builder_1.newLine();
+      }
+    }
     _builder_1.append("    ");
     _builder_1.append("public void bar() {");
     _builder_1.newLine();

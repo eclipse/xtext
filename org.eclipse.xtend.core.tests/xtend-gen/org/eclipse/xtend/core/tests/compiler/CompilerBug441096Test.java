@@ -85,7 +85,7 @@ public class CompilerBug441096Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
