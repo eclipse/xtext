@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -5970,6 +5970,27 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test // see https://github.com/eclipse/xtext-xtend/issues/942
+	def testSuppressUnnecessaryModifiersInInterfaces() {
+		assertCompilesTo('''
+			interface FooItf {
+			   def void bar ()
+			   static class FooItfImpl implements FooItf {
+			     override void bar () {}
+			   }
+			}
+		''','''
+			@SuppressWarnings("all")
+			public interface FooItf {
+			  class FooItfImpl implements FooItf {
+			    public void bar() {
+			    }
+			  }
+			  
+			  void bar();
+			}
+		''')
+	}
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {

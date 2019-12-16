@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13183,6 +13183,52 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSuppressUnnecessaryModifiersInInterfaces() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface FooItf {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def void bar ()");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("static class FooItfImpl implements FooItf {");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("override void bar () {}");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface FooItf {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("class FooItfImpl implements FooItf {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("void bar();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
