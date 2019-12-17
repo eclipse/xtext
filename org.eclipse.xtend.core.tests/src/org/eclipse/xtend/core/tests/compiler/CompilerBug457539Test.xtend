@@ -72,11 +72,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -120,11 +120,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -165,11 +165,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -212,11 +212,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends CharSequence> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -260,11 +260,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -309,11 +309,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -357,11 +357,11 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			    
-			    public abstract void add(final T t);
+			    void add(final T t);
 			    
-			    public abstract T get();
+			    T get();
 			  }
 			  
 			  public void m() {
@@ -408,7 +408,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			  }
 			  
 			  public void m() {
@@ -450,7 +450,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface MyIterable<T extends Object> extends Iterable<T> {
-			    public abstract void forEach2(final Procedure1<? super T> f);
+			    void forEach2(final Procedure1<? super T> f);
 			  }
 			  
 			  public <V extends Object> void m(final C.MyIterable<? super V> list) {

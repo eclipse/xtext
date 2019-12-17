@@ -168,7 +168,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public interface I {
-			    public abstract void bind(final Runnable r);
+			    void bind(final Runnable r);
 			  }
 			  
 			  public void m(final Bug.I... i) {
@@ -202,7 +202,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public interface I {
-			    public abstract void bind(final Runnable r);
+			    void bind(final Runnable r);
 			  }
 			  
 			  public void m(final Bug.I i) {
@@ -236,7 +236,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public interface I {
-			    public abstract void bind(final Runnable r);
+			    void bind(final Runnable r);
 			  }
 			  
 			  public void m(final Bug.I... i) {

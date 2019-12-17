@@ -35,7 +35,7 @@ class CompilerBug464264Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I {
-			    public abstract List<String> getStrings();
+			    List<String> getStrings();
 			  }
 			  
 			  public List<CharSequence> m(final C.I i, final List<CharSequence> list) {

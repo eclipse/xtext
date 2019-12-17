@@ -126,7 +126,7 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I<P extends Object> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract <T extends P> T exec(final Function1<? super P, ? extends T> arg);");
+    _builder_1.append("<T extends P> T exec(final Function1<? super P, ? extends T> arg);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -197,7 +197,7 @@ public class CompilerBug447516Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I<P extends Object, W extends P> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract <T extends P, V extends T> T exec(final W w, final Function1<? super P, ? extends T> arg);");
+    _builder_1.append("<T extends P, V extends T> T exec(final W w, final Function1<? super P, ? extends T> arg);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

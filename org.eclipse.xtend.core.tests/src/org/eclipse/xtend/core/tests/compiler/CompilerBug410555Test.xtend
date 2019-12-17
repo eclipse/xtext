@@ -36,7 +36,7 @@ class CompilerBug410555Test extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public interface SAMInterface {
-			  public abstract void test();
+			  void test();
 			}
 		''')
 	}

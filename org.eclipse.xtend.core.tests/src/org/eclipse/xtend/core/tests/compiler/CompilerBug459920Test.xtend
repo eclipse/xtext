@@ -116,21 +116,21 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Main {
 			  public interface Named {
-			    public abstract String getName();
+			    String getName();
 			    
-			    public abstract void setName(final String name);
+			    void setName(final String name);
 			  }
 			  
 			  public interface A extends Main.Named {
-			    public abstract int getNumber();
+			    int getNumber();
 			    
-			    public abstract void setNumber(final int n);
+			    void setNumber(final int n);
 			  }
 			  
 			  public interface B extends Main.Named {
-			    public abstract int getCount();
+			    int getCount();
 			    
-			    public abstract void setCount(final int c);
+			    void setCount(final int c);
 			  }
 			  
 			  public interface C extends Main.A, Main.B {
@@ -217,21 +217,21 @@ class CompilerBug459920Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Main {
 			  public interface Named {
-			    public abstract String getName();
+			    String getName();
 			    
-			    public abstract void setName(final String name);
+			    void setName(final String name);
 			  }
 			  
 			  public interface A extends Main.Named {
-			    public abstract int getNumber();
+			    int getNumber();
 			    
-			    public abstract void setNumber(final int n);
+			    void setNumber(final int n);
 			  }
 			  
 			  public interface B extends Main.Named {
-			    public abstract int getCount();
+			    int getCount();
 			    
-			    public abstract void setCount(final int c);
+			    void setCount(final int c);
 			  }
 			  
 			  public interface C extends Main.A, Main.B {

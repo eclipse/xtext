@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.generator.IFilePostProcessor;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -205,7 +206,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3058,12 +3059,12 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract int foo();");
+    _builder_1.append("int foo();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public static final int bar = 42;");
+    _builder_1.append("static final int bar = 42;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -3767,7 +3768,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -3898,7 +3899,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface E {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m();");
+    _builder_1.append("void m();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -12576,7 +12577,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure0 {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply();");
+    _builder_1.append("void apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12640,7 +12641,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure1<String> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final String value);");
+    _builder_1.append("void apply(final String value);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12704,7 +12705,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Procedure1<Procedure1<? super String>> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract void apply(final Procedure1<? super String> procedure);");
+    _builder_1.append("void apply(final Procedure1<? super String> procedure);");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12771,7 +12772,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Function0<String> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract String apply();");
+    _builder_1.append("String apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -12842,7 +12843,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Foo extends Function0<Procedure1<? super String>> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public abstract Procedure1<? super String> apply();");
+    _builder_1.append("Procedure1<? super String> apply();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -13183,6 +13184,61 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testSuppressUnnecessaryModifiersInInterfaces() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface FooItf {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def void bar ()");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("static class FooItfImpl implements FooItf {");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("override void bar () {}");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface FooItf {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("class FooItfImpl implements FooItf {");
+    _builder_1.newLine();
+    {
+      boolean _isAtLeast = generatorConfig.getJavaSourceVersion().isAtLeast(JavaVersion.JAVA6);
+      if (_isAtLeast) {
+        _builder_1.append("    ");
+        _builder_1.append("@Override");
+        _builder_1.newLine();
+      }
+    }
+    _builder_1.append("    ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("void bar();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

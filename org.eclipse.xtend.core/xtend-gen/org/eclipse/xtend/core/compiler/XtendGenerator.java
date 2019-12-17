@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -476,6 +476,14 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           boolean _isAnonymous = declarator.isAnonymous();
           boolean _not = (!_isAnonymous);
           if (_not) {
+            return result;
+          }
+        }
+      } else {
+        JvmVisibility _visibility_1 = it.getVisibility();
+        boolean _equals_1 = Objects.equal(_visibility_1, JvmVisibility.PUBLIC);
+        if (_equals_1) {
+          if (((it.getDeclaringType() instanceof JvmGenericType) && ((JvmGenericType) it.getDeclaringType()).isInterface())) {
             return result;
           }
         }

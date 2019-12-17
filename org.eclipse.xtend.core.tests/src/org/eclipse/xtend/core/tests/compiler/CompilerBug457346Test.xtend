@@ -71,7 +71,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
-			    public abstract void sort(final Comparator<? super T> c);
+			    void sort(final Comparator<? super T> c);
 			  }
 			  
 			  public void m(final C.Sortable<String> sortMe) {
@@ -118,7 +118,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
-			    public abstract void sort(final Comparator<? super T> c);
+			    void sort(final Comparator<? super T> c);
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
@@ -132,7 +132,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public interface ToIntFunction<T extends Object> {
-			    public abstract int apply(final T t);
+			    int apply(final T t);
 			  }
 			  
 			  public void m(final C.Sortable<String> sortMe) {
@@ -179,7 +179,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
-			    public abstract void sort(final Comparator<? super T> c);
+			    void sort(final Comparator<? super T> c);
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
@@ -193,7 +193,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public interface ToIntFunction<T extends Object> {
-			    public abstract int apply(final T t);
+			    int apply(final T t);
 			  }
 			  
 			  public void m(final C.Sortable<String> sortMe) {
@@ -240,7 +240,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface Sortable<T extends Object> extends Iterable<T> {
-			    public abstract void sort(final Comparator<? super T> c);
+			    void sort(final Comparator<? super T> c);
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
@@ -254,7 +254,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public interface ToIntFunction<T extends Object> {
-			    public abstract int apply(final T t);
+			    int apply(final T t);
 			  }
 			  
 			  public void m(final C.Sortable<String> sortMe) {
@@ -314,11 +314,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public interface ToIntFunction<T extends Object> {
-			    public abstract int apply(final T t);
+			    int apply(final T t);
 			  }
 			  
 			  public interface Function<T extends Object, R extends Object> {
-			    public abstract R apply(final T t);
+			    R apply(final T t);
 			  }
 			  
 			  public C.MyComparator<String> m() {

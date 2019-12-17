@@ -43,7 +43,7 @@ class Bug467063Test extends AbstractActiveAnnotationTest {
 			
 			@SuppressWarnings("all")
 			public interface Test {
-			  public default void sayHello() {
+			  default void sayHello() {
 			    System.out.println("Hello World");
 			  }
 			}

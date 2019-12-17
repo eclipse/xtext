@@ -52,7 +52,7 @@ public class Bug467063Test extends AbstractActiveAnnotationTest {
     _builder_1.append("public interface Test {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public default void sayHello() {");
+    _builder_1.append("default void sayHello() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("System.out.println(\"Hello World\");");

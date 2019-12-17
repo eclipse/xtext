@@ -166,7 +166,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class A {
 			  public interface B {
-			    public static class C {
+			    class C {
 			      public static class D {
 			        private A a;
 			        
@@ -227,7 +227,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class A {
 			  public interface B {
-			    public static class C {
+			    class C {
 			      public static class D {
 			        private A a;
 			        
@@ -470,7 +470,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I {
-			    public abstract void m1(final int i);
+			    void m1(final int i);
 			  }
 			  
 			  public void m1(final String s) {
@@ -531,7 +531,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I {
-			    public abstract void m1();
+			    void m1();
 			  }
 			  
 			  public void m1(final String s) {
@@ -599,7 +599,7 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public interface I {
-			    public abstract void m1(final int i);
+			    void m1(final int i);
 			  }
 			  
 			  public static class D {

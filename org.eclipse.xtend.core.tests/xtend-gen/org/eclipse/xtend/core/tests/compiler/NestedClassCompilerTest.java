@@ -359,7 +359,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface B {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public static class C {");
+    _builder_1.append("class C {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public static class D {");
@@ -515,7 +515,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface B {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public static class C {");
+    _builder_1.append("class C {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public static class D {");
@@ -1099,7 +1099,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m1(final int i);");
+    _builder_1.append("void m1(final int i);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1257,7 +1257,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m1();");
+    _builder_1.append("void m1();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1434,7 +1434,7 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract void m1(final int i);");
+    _builder_1.append("void m1(final int i);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

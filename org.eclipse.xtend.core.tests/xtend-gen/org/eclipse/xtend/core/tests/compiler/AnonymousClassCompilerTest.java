@@ -5335,7 +5335,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public interface Bar<V extends Foo<V>> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract V bar();");
+    _builder_1.append("V bar();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

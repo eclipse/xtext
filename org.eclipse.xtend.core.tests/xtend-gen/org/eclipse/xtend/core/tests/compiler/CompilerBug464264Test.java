@@ -64,7 +64,7 @@ public class CompilerBug464264Test extends AbstractXtendCompilerTest {
     _builder_1.append("public interface I {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public abstract List<String> getStrings();");
+    _builder_1.append("List<String> getStrings();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

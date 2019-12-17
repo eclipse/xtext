@@ -2256,7 +2256,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo<T extends Object> {
 			  public interface Bar<V extends Foo<V>> {
-			    public abstract V bar();
+			    V bar();
 			  }
 			  
 			  public <W extends Foo<W>> void foo() {
