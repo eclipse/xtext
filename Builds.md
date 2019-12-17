@@ -144,8 +144,10 @@ After everything above has run smoothly, it is finally time for some manual step
    * Market place entry for [Xtend](https://marketplace.eclipse.org/content/eclipse-xtend/edit)
    * For each update the properties:
      * Version Number
-     * Update Site URL
      * Supported Eclipse Release(s)
+   * Update Composite Repository for Eclipse Marketplace
+     * Edit repository composite site descriptors at path `updates/composite/marketplace` from https://github.com/xtext/xtext-p2-orbit
+     * Run https://ci.eclipse.org/xtext/job/releng/job/update-composite-sites/
 6. As soon as Maven Central is updated - send notifications
    * Newsgroup / Forum
    * Mailing list
@@ -154,11 +156,11 @@ After everything above has run smoothly, it is finally time for some manual step
    * Blog (for releases)
 7. Add / Update xtext-reference-projects (Only on final release)
 8. Adjust the bootstrap version to use the newly produced milestone / release
-    * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
-    * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
+   * Run the [bot-updates job](https://ci.eclipse.org/xtext/job/releng/job/bot-updates/)
+   * Use `XTEXT_BOOTSTRAP_VERSION` for the `UPDATE_TYPE` parameter
 9.  xtext-apidiff (Only on final release)
-    * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
-    * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
+   * adapt https://github.com/xtext/xtext-apidiff/blob/master/create-api-diff.sh
+   * adapt Jenkins Configuration https://github.com/xtext/xtext-apidiff/blob/master/Jenkinsfile
 
 
 #### What happens when the _release-prepare-branches_ job is executed
