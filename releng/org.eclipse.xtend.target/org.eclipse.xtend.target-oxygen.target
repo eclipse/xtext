@@ -54,7 +54,7 @@
 		<unit id="org.eclipse.xtext.xbase.testing.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.testlanguages.source" version="0.0.0"/>
-		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/kt_xtend_issue942_suppress_modifiers/lastStableBuild/artifact/build/p2-repository/"/>
+		<repository location="https://ci.eclipse.org/xtext/job/xtext-extras/job/master/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
