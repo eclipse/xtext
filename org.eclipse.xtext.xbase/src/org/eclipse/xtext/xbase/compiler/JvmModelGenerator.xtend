@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2012, 2019 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -327,7 +327,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateModifier(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateVisibilityModifier(it, appendable)
 		if (!interface) {
-			if (isStatic)
+			if (isStatic && !isDeclaredWithinInterface)
 				appendable.append("static ")
 			if (isAbstract)
 				appendable.append("abstract ")
@@ -336,6 +336,10 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("final ")
 		if (isStrictFloatingPoint)
 			appendable.append("strictfp ")
+	}
+	
+	def private boolean isDeclaredWithinInterface (JvmMember it) {
+		return declaringType instanceof JvmGenericType && (declaringType as JvmGenericType).isInterface
 	}
 	
 	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -356,12 +360,12 @@ class JvmModelGenerator implements IGenerator {
 		
 	def dispatch generateModifier(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateVisibilityModifier(it, appendable)
-		if (isAbstract)
+		if (isAbstract && !isDeclaredWithinInterface)
 			appendable.append("abstract ")
 		if (isStatic)
 			appendable.append("static ")
 		if (!isAbstract && !isStatic && config.getJavaSourceVersion.isAtLeast(JAVA8)
-				&& eContainer instanceof JvmGenericType && (eContainer as JvmGenericType).isInterface)
+				&& isDeclaredWithinInterface)
 			appendable.append("default ")
 		if (isFinal)
 			appendable.append("final ")
@@ -405,7 +409,7 @@ class JvmModelGenerator implements IGenerator {
 		if (it instanceof JvmAnnotationType || (it instanceof JvmGenericType && (it as JvmGenericType).isInterface)) {
 			val withoutObject = superTypes.filter [ typeRef | typeRef.identifier != implicitSuperType ]
 			appendable.forEachSafely(withoutObject, [
-					prefix = 'extends '	separator =  ', ' suffix =  ' '
+					prefix = 'extends ' separator =  ', ' suffix = ' '
 				], [
 					it, app | serializeSafely(app)
 				])
