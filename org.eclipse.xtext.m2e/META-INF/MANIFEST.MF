@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.m2e.core;bundle-version="1.8.0";resolution:=optional
  org.eclipse.xtend.lib,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.ui,
- org.eclipse.m2e.maven.runtime;bundle-version="[1.0.0,2.0.0)";resolution:=optional
+ org.eclipse.m2e.maven.runtime;bundle-version="[1.0.0,2.0.0)";resolution:=optional,
+ org.eclipse.jdt.core;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.m2e;x-internal:=true
 Import-Package: org.apache.maven.plugin;provider=m2e;resolution:=optional,
