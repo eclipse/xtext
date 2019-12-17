@@ -89,6 +89,7 @@ public class JavaProjectSetupUtil {
 				byte[] bytes = textFile.content.getBytes();
 				jo.write(bytes, 0, bytes.length);
 			}
+			jo.close();
 			return new ByteArrayInputStream(out2.toByteArray());
 		} catch (IOException e) {
 			throw new WrappedException(e);
@@ -102,6 +103,7 @@ public class JavaProjectSetupUtil {
 				jo.putNextEntry(je);
 				ByteStreams.copy(entry.getValue(), jo);
 			}
+			jo.close();
 			return new ByteArrayInputStream(out2.toByteArray());
 		} catch (IOException e) {
 			throw new WrappedException(e);
