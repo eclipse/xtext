@@ -5,10 +5,17 @@ Bundle-SymbolicName: org.eclipse.xtext.ecore;singleton:=true
 Bundle-Version: 2.21.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.13.0",
- org.eclipse.xtext
+ org.eclipse.xtext;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.ecore
+Export-Package: org.eclipse.xtext.ecore;
+  uses:="org.eclipse.emf.ecore,
+   com.google.inject,
+   org.eclipse.xtext.resource.generic,
+   org.eclipse.xtext.resource.impl,
+   org.eclipse.xtext.naming,
+   org.eclipse.xtext.util,
+   org.eclipse.xtext"
 Import-Package: org.apache.log4j;version="1.2.15"
 Automatic-Module-Name: org.eclipse.xtext.ecore
 Eclipse-SourceReferences: eclipseSourceReferences
