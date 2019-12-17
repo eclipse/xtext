@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.ICommand;
@@ -237,9 +236,9 @@ public class IResourcesSetupUtil {
 					InterruptedException {
 				create(file.getParent());
 				file.delete(true, monitor());
-				try {
-					file.create(new StringInputStream(s, file.getCharset(true)), true, monitor());
-				} catch (UnsupportedEncodingException exc) {
+				try (InputStream stream = new StringInputStream(s, file.getCharset(true))) {
+					file.create(stream, true, monitor());
+				} catch (IOException exc) {
 					throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.xtext.ui.testing", exc.getMessage(), exc));
 				}
 			}
@@ -251,11 +250,8 @@ public class IResourcesSetupUtil {
 	public static File createTempFile(String fileName, String suffix, String content)
 			throws Exception {
 		File file = File.createTempFile(fileName, suffix);
-		FileWriter writer = new FileWriter(file);
-		try {
+		try (FileWriter writer = new FileWriter(file)) {
 			writer.write(content);
-		} finally {
-			writer.close();
 		}
 		return file;
 	}
@@ -265,13 +261,8 @@ public class IResourcesSetupUtil {
 	}
 	
 	public static byte[] fileToByteArray(IFile file) throws CoreException, IOException {
-		InputStream contents = null;
-		try {
-			contents = file.getContents();
+		try (InputStream contents = file.getContents()) {
 			return ByteStreams.toByteArray(contents);
-		} finally {
-			if (contents != null)
-				contents.close();
 		}
 	}
 
