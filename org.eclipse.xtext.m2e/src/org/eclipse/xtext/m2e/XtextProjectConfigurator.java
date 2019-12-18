@@ -37,6 +37,11 @@ import org.osgi.service.prefs.BackingStoreException;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 
+/**
+ * The project configurator is applied if maven the build for a project has the xtext maven plugin configured.
+ * 
+ * It copies the configuration from the pom.xml into the Eclipse settings.
+ */
 public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 
 	@Override

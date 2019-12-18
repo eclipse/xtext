@@ -78,6 +78,7 @@
 		<unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/2019-03"/>
 	</location>
 	
