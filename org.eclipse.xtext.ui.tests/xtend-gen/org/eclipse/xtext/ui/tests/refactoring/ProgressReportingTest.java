@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceDescriptor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.tests.refactoring.AbstractResourceRelocationTest;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -86,10 +87,11 @@ public class ProgressReportingTest extends AbstractResourceRelocationTest {
     
     public void assertLogged(final String expectation) {
       final String eventsDump = IterableExtensions.join(this.events, "\n");
-      boolean _startsWith = eventsDump.startsWith(expectation);
+      boolean _startsWith = eventsDump.startsWith(Strings.toUnixLineSeparator(expectation));
       boolean _not = (!_startsWith);
       if (_not) {
-        throw new ComparisonFailure("", expectation, eventsDump);
+        String _unixLineSeparator = Strings.toUnixLineSeparator(expectation);
+        throw new ComparisonFailure("", _unixLineSeparator, eventsDump);
       }
     }
   }

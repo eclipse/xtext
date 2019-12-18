@@ -16,6 +16,8 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
+import static extension org.eclipse.xtext.util.Strings.*
+
 /**
  * @author Christian Schneider - Initial contribution and API
  */
@@ -111,8 +113,8 @@ class ProgressReportingTest extends AbstractResourceRelocationTest {
 		
 		def assertLogged(String expectation) {
 			val eventsDump = events.join('\n')
-			if (!eventsDump.startsWith(expectation))
-				throw new ComparisonFailure('', expectation, eventsDump)
+			if (!eventsDump.startsWith(expectation.toUnixLineSeparator))
+				throw new ComparisonFailure('', expectation.toUnixLineSeparator, eventsDump)
 		}
 	}
 }
