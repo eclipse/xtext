@@ -50,11 +50,14 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="2019-12"
+      defaultValue="2020-03"
       storageURI="scope://Workspace"
       label="Target Platform">
     <annotation
         source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+    <choice
+        value="2020-03"
+        label="Eclipse 2020-03 - 4.15"/>
     <choice
         value="2019-12"
         label="Eclipse 2019-12 - 4.14"/>
@@ -827,6 +830,39 @@
         <requirement
             name="*"/>
         <repositoryList
+            name="Oxygen">
+          <repository
+              url="${p2.xtext}"/>
+          <repository
+              url="${p2.mwe2}"/>
+          <repository
+              url="${p2.antlr-gen}"/>
+          <repository
+              url="${p2.gef}"/>
+          <repository
+              url="${p2.m2e}/1.8"/>
+          <repository
+              url="${p2.swtbot}"/>
+          <repository
+              url="${p2.orbit}"/>
+          <repository
+              url="${p2.emf}"/>
+          <repository
+              url="${p2.draw2d}"/>
+          <repository
+              url="${p2.xpand}"/>
+          <repository
+              url="${p2.buildship}"/>
+          <repository
+              url="${p2.webtools}"/>
+          <repository
+              url="${p2.lsp4j}"/>
+          <repository
+              url="${p2.cbi.analyzer}"/>
+          <repository
+              url="${p2.egit}"/>
+        </repositoryList>
+        <repositoryList
             name="Photon">
           <repository
               url="${p2.xtext}"/>
@@ -1045,8 +1081,6 @@
           <repository
               url="${p2.draw2d}"/>
           <repository
-              url="https://download.eclipse.org/eclipse/updates/4.14-I-builds"/>
-          <repository
               url="${p2.xpand}"/>
           <repository
               url="${p2.buildship}"/>
@@ -1060,7 +1094,7 @@
               url="${p2.egit}"/>
         </repositoryList>
         <repositoryList
-            name="Oxygen">
+            name="2020-03">
           <repository
               url="${p2.xtext}"/>
           <repository
@@ -1070,7 +1104,7 @@
           <repository
               url="${p2.gef}"/>
           <repository
-              url="${p2.m2e}/1.8"/>
+              url="${p2.m2e}/1.12"/>
           <repository
               url="${p2.swtbot}"/>
           <repository
@@ -1079,6 +1113,8 @@
               url="${p2.emf}"/>
           <repository
               url="${p2.draw2d}"/>
+          <repository
+              url="https://download.eclipse.org/eclipse/updates/4.15-I-builds"/>
           <repository
               url="${p2.xpand}"/>
           <repository
