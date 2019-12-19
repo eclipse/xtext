@@ -70,6 +70,8 @@
 		<unit id="org.eclipse.xtext.activities.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.builder" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.builder.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.buildship" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.buildship.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.edit" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.edit.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared" version="0.0.0"/>
@@ -177,6 +179,7 @@
 		<unit id="org.eclipse.xtend" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		<unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
+		<unit id="org.eclipse.buildship.feature.group" version="0.0.0"/>
 		<repository location="https://download.eclipse.org/releases/oxygen/201804111000"/>
 	</location>
 
