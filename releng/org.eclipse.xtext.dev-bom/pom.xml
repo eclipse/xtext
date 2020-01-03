@@ -83,13 +83,13 @@
 		<!-- Eclipse Platform bundle versions -->
 		<!-- Variable naming scheme:          -->
 		<!--   skip 'org.eclipse' prefix      -->
-		<core.commands-version>3.9.500</core.commands-version>
-		<core.contenttype-version>3.7.400</core.contenttype-version>
-		<core.expressions-version>3.6.500</core.expressions-version>
-		<core.filesystem-version>1.7.500</core.filesystem-version>
-		<core.jobs-version>3.10.500</core.jobs-version>
-		<core.resources-version>3.13.500</core.resources-version>
-		<core.runtime-version>3.16.0</core.runtime-version>
+		<core.commands-version>3.9.600</core.commands-version>
+		<core.contenttype-version>3.7.500</core.contenttype-version>
+		<core.expressions-version>3.6.600</core.expressions-version>
+		<core.filesystem-version>1.7.600</core.filesystem-version>
+		<core.jobs-version>3.10.600</core.jobs-version>
+		<core.resources-version>3.13.600</core.resources-version>
+		<core.runtime-version>3.17.0</core.runtime-version>
 		<emf.common-version>2.12.0</emf.common-version>
 		<emf.ecore-version>2.12.0</emf.ecore-version>
 		<emf.ecore.change-version>2.11.0</emf.ecore.change-version>
@@ -99,9 +99,9 @@
 		<emf.mwe-version>1.5.1</emf.mwe-version>
 		<emf.mwe2-version>2.11.1</emf.mwe2-version>
 		<equinox.app-version>1.4.300</equinox.app-version>
-		<equinox.common-version>3.10.500</equinox.common-version>
-		<equinox.preferences-version>3.7.500</equinox.preferences-version>
-		<equinox.registry-version>3.8.500</equinox.registry-version>
+		<equinox.common-version>3.10.600</equinox.common-version>
+		<equinox.preferences-version>3.7.600</equinox.preferences-version>
+		<equinox.registry-version>3.8.600</equinox.registry-version>
 		<!--
 		When adjusting the `lsp4j` version here, do not forget to do the following: 
 		- Update the version in `IdeProjectDescriptor#pom`.
@@ -112,11 +112,11 @@
 		- Update Oomph releng/org.eclipse.xtext.contributor/Xtext.setup
 		-->
 		<lsp4j-version>0.8.1</lsp4j-version>
-		<jdt.core-version>3.19.0</jdt.core-version>
-		<jdt.compiler.apt-version>1.3.700</jdt.compiler.apt-version>
-		<jdt.compiler.tool-version>1.2.600</jdt.compiler.tool-version>
-		<osgi-version>3.15.0</osgi-version>
-		<text-version>3.9.0</text-version>
+		<jdt.core-version>3.20.0</jdt.core-version>
+		<jdt.compiler.apt-version>1.3.800</jdt.compiler.apt-version>
+		<jdt.compiler.tool-version>1.2.700</jdt.compiler.tool-version>
+		<osgi-version>3.15.100</osgi-version>
+		<text-version>3.10.0</text-version>
 		<xpand-version>2.0.0</xpand-version>
 		<xtext-antlr-generator-version>2.1.1</xtext-antlr-generator-version>
 	</properties>
