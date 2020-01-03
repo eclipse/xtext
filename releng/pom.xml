@@ -12,7 +12,7 @@
 		<tycho-version>1.5.1</tycho-version>
 		<root-dir>${basedir}/..</root-dir>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
-		<upstreamBranch>emf220Update</upstreamBranch>
+		<upstreamBranch>master</upstreamBranch>
 	</properties>
 
 	<repositories>

@@ -140,7 +140,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean longFileNames = false;
 
-	private GenRuntimeVersion emfRuntimeVerison;
+	/* Default to 2.20 if available, otherwise #get will return null */
+	private GenRuntimeVersion emfRuntimeVerison = GenRuntimeVersion.get(GenRuntimeVersion.EMF220_VALUE);
 	
 	private boolean suppressLoadInitialization = false;
 	
@@ -822,6 +823,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Sets the target EMF runtime version to generate for to the specified value.
+	 * Default is 2.20
+	 * 
 	 * @param emfRuntimeVersion the EMF runtime version.
 	 * @since 2.3
 	 */
@@ -1009,7 +1012,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 *   <li>"JDK70"</li>
 	 *   <li>"JDK80"</li>
 	 * </ul>
-	 * The default level is "JDK60".
+	 * The default level is "JDK80".
 	 * 
 	 * @since 2.8
 	 */
