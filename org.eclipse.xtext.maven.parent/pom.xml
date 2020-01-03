@@ -20,7 +20,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.opts></maven.javadoc.opts>
-		<upstreamBranch>emf220Update</upstreamBranch>
+		<upstreamBranch>master</upstreamBranch>
 		<JENKINS_URL>https://ci.eclipse.org/xtext</JENKINS_URL>
 	</properties>
 
