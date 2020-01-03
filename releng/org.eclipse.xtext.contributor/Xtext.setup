@@ -1591,6 +1591,81 @@
         option="-Doomph.redirection.xtext"
         value="=https://raw.githubusercontent.com/eclipse/xtext-eclipse/master/releng/org.eclipse.xtext.contributor/Xtext.setup->${git.clone.xtext.eclipse.location|uri}/releng/org.eclipse.xtext.contributor/Xtext.setup"
         vm="true"/>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.builder.classpath"
+        url="platform:/resource/org.eclipse.xtext.builder/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="&lt;classpathentry kind=&quot;src&quot; path=&quot;(emf-gen/)&quot;(/>)">
+        <substitution>emf-gen</substitution>
+        <substitution>>
+		&lt;attributes>
+			&lt;attribute name=&quot;ignore_optional_problems&quot; value=&quot;true&quot;/>
+		&lt;/attributes>
+	&lt;/classpathentry></substitution>
+      </modification>
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.builder</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.builder.tests.classpath"
+        url="platform:/resource/org.eclipse.xtext.builder.tests/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.builder.tests</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.ui.testing.classpath"
+        url="platform:/resource/org.eclipse.xtext.ui.testing/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.ui.testing</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.junit4.classpath"
+        url="platform:/resource/org.eclipse.xtext.junit4/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.junit4</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.xbase.junit.classpath"
+        url="platform:/resource/org.eclipse.xtext.xbase.junit/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.xbase.junit</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:TextModifyTask"
+        id="xtext.xbase.ui.testing.classpath"
+        url="platform:/resource/org.eclipse.xtext.xbase.ui.testing/.classpath"
+        encoding="UTF-8">
+      <modification
+          pattern="path=&quot;(target/classes)&quot;">
+        <substitution>bin</substitution>
+      </modification>
+      <description>Update the classpath for xtext.xbase.ui.testing</description>
+    </setupTask>
     <stream
         name="master"/>
     <description>Plug-ins for Eclipse</description>
