@@ -47,6 +47,12 @@
 			<organization>itemis</organization>
 			<organizationUrl>http://www.itemis.com</organizationUrl>
 		</developer>
+		<developer>
+			<id>lorenzo.bettini</id>
+			<name>Lorenzo Bettini</name>
+			<email>lorenzo.bettini@gmail.com</email>
+			<organization>DISIA, University Firenze</organization>
+		</developer>
 	</developers>
 	<scm>
 		<connection>scm:git:git@github.com:eclipse/xtext-lib.git</connection>
@@ -242,6 +248,11 @@
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.mwe.utils</artifactId>
+				<version>${emf.mwe-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.mwe.core</artifactId>
 				<version>${emf.mwe-version}</version>
 			</dependency>
 			<dependency>
