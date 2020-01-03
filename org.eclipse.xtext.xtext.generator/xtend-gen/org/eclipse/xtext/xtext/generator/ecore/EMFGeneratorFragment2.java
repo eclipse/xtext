@@ -190,7 +190,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean suppressLoadInitialization = false;
   
-  private GenRuntimeVersion emfRuntimeVersion;
+  /**
+   * Default to 2.20 if available, otherwise #get will return null
+   */
+  private GenRuntimeVersion emfRuntimeVersion = GenRuntimeVersion.get(GenRuntimeVersion.EMF220_VALUE);
   
   private GenJDKLevel jdkLevel = GenJDKLevel.JDK80_LITERAL;
   
@@ -198,6 +201,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   /**
    * Sets the target EMF runtime version to generate for to the specified value.
+   * Defaults to 2.20.
    */
   public void setEmfRuntimeVersion(final String emfRuntimeVersion) {
     this.emfRuntimeVersion = GenRuntimeVersion.get(emfRuntimeVersion);
@@ -215,7 +219,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
    *   <li>"JDK70"</li>
    *   <li>"JDK80"</li>
    * </ul>
-   * The default level is "JDK60".
+   * The default level is "JDK80".
    */
   public void setJdkLevel(final String jdkLevel) {
     this.jdkLevel = GenJDKLevel.getByName(jdkLevel);
