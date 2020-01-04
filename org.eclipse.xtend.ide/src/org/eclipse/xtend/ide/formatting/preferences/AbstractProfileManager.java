@@ -213,7 +213,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	@Override
 	protected void notifyObservers(int message) {
 		setChanged();
-		notifyObservers(new Integer(message));
+		notifyObservers(Integer.valueOf(message));
 	}
 
 	public static boolean hasProjectSpecificSettings(IScopeContext context, KeySet[] keySets) {
