@@ -69,9 +69,10 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		URI uri = impl.getUri(fileInJar);
 		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/bar.notindexed", uri.toString());
 		
-		InputStream stream = new ResourceSetImpl().getURIConverter().createInputStream(uri);
-		byte[] bytes = ByteStreams.toByteArray(stream);
-		assertEquals("//empty", new String(bytes));
+		try (InputStream stream = new ResourceSetImpl().getURIConverter().createInputStream(uri)) {
+			byte[] bytes = ByteStreams.toByteArray(stream);
+			assertEquals("//empty", new String(bytes));
+		}
 	}
 	
 	@Test public void testBug463258_02() throws Exception {
