@@ -46,6 +46,7 @@ We build `xtext-eclipse` and `xtext-xtend` against the latest i-builds of platfo
   * In `releng/org.eclipse.xtext.target/org.eclipse.xtext.target-latest.target` use the latest i-build `https://download.eclipse.org/eclipse/updates/<number>-I-builds` and simrel `https://download.eclipse.org/releases/<version>`
 * In [xtext-xtend](https://github.com/eclipse/xtext-xtend)
   * In  `releng/org.eclipse.xtend.target/org.eclipse.xtend.target-latest.target` use the latest i-build `https://download.eclipse.org/eclipse/updates/<number>-I-builds` and simrel `https://download.eclipse.org/releases/<version>`
+* The simrel `https://download.eclipse.org/releases/<version>` needs also to be used in `xtext-core` in `TargetPlatformProject` +  tests adapted (`CliWizardIntegrationTest`)
 
 ## Update Orbit
 
