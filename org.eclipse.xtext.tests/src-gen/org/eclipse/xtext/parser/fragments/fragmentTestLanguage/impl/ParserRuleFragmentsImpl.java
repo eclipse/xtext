@@ -78,6 +78,7 @@ public class ParserRuleFragmentsImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamed getElement()
   {
     return element;
@@ -105,6 +106,7 @@ public class ParserRuleFragmentsImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setElement(PRFNamed newElement)
   {
     if (newElement != element)
@@ -126,6 +128,7 @@ public class ParserRuleFragmentsImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamed getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -156,6 +159,7 @@ public class ParserRuleFragmentsImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(PRFNamed newRef)
   {
     PRFNamed oldRef = ref;

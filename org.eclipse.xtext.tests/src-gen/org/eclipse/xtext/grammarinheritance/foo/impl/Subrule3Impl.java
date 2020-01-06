@@ -75,6 +75,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getSub1()
   {
     return sub1;
@@ -85,6 +86,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSub1(int newSub1)
   {
     int oldSub1 = sub1;
@@ -169,7 +171,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (sub1: ");
     result.append(sub1);
     result.append(')');

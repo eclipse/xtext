@@ -90,6 +90,7 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRawType()
   {
     return rawType;
@@ -100,6 +101,7 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRawType(String newRawType)
   {
     String oldRawType = rawType;
@@ -113,6 +115,7 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getActualArgumentsList()
   {
     if (actualArgumentsList == null)
@@ -210,7 +213,7 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (rawType: ");
     result.append(rawType);
     result.append(", actualArgumentsList: ");

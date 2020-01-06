@@ -74,6 +74,7 @@ public class MandatoryChildListImpl extends ModelImpl implements MandatoryChildL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MandatoryValue> getChildren()
   {
     if (children == null)

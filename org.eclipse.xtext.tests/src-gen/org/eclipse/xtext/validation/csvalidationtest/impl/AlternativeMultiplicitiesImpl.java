@@ -145,6 +145,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -155,6 +156,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -168,6 +170,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal3()
   {
     return val3;
@@ -178,6 +181,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(String newVal3)
   {
     String oldVal3 = val3;
@@ -191,6 +195,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal4()
   {
     if (val4 == null)
@@ -205,6 +210,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal5()
   {
     if (val5 == null)
@@ -219,6 +225,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal6()
   {
     if (val6 == null)
@@ -233,6 +240,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal7()
   {
     if (val7 == null)
@@ -373,7 +381,7 @@ public class AlternativeMultiplicitiesImpl extends MinimalEObjectImpl.Container 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val2: ");
     result.append(val2);
     result.append(", val3: ");

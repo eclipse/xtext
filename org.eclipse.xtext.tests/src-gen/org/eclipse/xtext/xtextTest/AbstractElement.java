@@ -28,10 +28,6 @@ public interface AbstractElement extends EObject
   /**
    * Returns the value of the '<em><b>Cardinality</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Cardinality</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Cardinality</em>' attribute.
    * @see #setCardinality(String)
@@ -54,10 +50,6 @@ public interface AbstractElement extends EObject
   /**
    * Returns the value of the '<em><b>Predicated</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Predicated</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Predicated</em>' attribute.
    * @see #setPredicated(boolean)
@@ -80,10 +72,6 @@ public interface AbstractElement extends EObject
   /**
    * Returns the value of the '<em><b>First Set Predicated</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First Set Predicated</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First Set Predicated</em>' attribute.
    * @see #setFirstSetPredicated(boolean)

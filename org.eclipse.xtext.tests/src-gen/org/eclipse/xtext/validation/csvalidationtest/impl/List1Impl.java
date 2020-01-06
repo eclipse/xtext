@@ -67,6 +67,7 @@ public class List1Impl extends MinimalEObjectImpl.Container implements List1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -154,7 +155,7 @@ public class List1Impl extends MinimalEObjectImpl.Container implements List1
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(')');

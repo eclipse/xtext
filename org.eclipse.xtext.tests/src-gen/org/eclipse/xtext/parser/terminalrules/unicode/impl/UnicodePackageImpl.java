@@ -83,7 +83,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link UnicodePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
     if (isInited) return (UnicodePackage)EPackage.Registry.INSTANCE.getEPackage(UnicodePackage.eNS_URI);
 
     // Obtain or create and register package
-    UnicodePackageImpl theUnicodePackage = (UnicodePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnicodePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnicodePackageImpl());
+    Object registeredUnicodePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    UnicodePackageImpl theUnicodePackage = registeredUnicodePackage instanceof UnicodePackageImpl ? (UnicodePackageImpl)registeredUnicodePackage : new UnicodePackageImpl();
 
     isInited = true;
 
@@ -114,7 +115,6 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
     // Mark meta-data to indicate it can't be changed
     theUnicodePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(UnicodePackage.eNS_URI, theUnicodePackage);
     return theUnicodePackage;
@@ -125,6 +125,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -135,6 +136,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Strings()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -145,6 +147,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractString()
   {
     return abstractStringEClass;
@@ -155,6 +158,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractString_Name()
   {
     return (EAttribute)abstractStringEClass.getEStructuralFeatures().get(0);
@@ -165,6 +169,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGString()
   {
     return gStringEClass;
@@ -175,6 +180,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getQuotedString()
   {
     return quotedStringEClass;
@@ -185,6 +191,7 @@ public class UnicodePackageImpl extends EPackageImpl implements UnicodePackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnicodeFactory getUnicodeFactory()
   {
     return (UnicodeFactory)getEFactoryInstance();

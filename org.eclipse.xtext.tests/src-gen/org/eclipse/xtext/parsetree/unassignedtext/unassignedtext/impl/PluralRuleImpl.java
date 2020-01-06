@@ -73,6 +73,7 @@ public class PluralRuleImpl extends ModelImpl implements PluralRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getCount()
   {
     return count;
@@ -83,6 +84,7 @@ public class PluralRuleImpl extends ModelImpl implements PluralRule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCount(int newCount)
   {
     int oldCount = count;
@@ -167,7 +169,7 @@ public class PluralRuleImpl extends ModelImpl implements PluralRule
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (count: ");
     result.append(count);
     result.append(')');

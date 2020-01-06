@@ -30,10 +30,6 @@ public interface Expression extends EObject
   /**
    * Returns the value of the '<em><b>Prefix</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Prefix</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Prefix</em>' attribute.
    * @see #setPrefix(String)
@@ -57,10 +53,6 @@ public interface Expression extends EObject
    * Returns the value of the '<em><b>Terms</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.SimpleTerm}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Terms</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Terms</em>' containment reference list.
    * @see org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.BacktrackingBug325745TestLanguagePackage#getExpression_Terms()
@@ -72,10 +64,6 @@ public interface Expression extends EObject
   /**
    * Returns the value of the '<em><b>Postfix</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Postfix</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Postfix</em>' attribute.
    * @see #setPostfix(String)

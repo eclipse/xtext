@@ -33,10 +33,6 @@ public enum FirstEnum implements Enumerator
   /**
    * The '<em><b>Value</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Value</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #VALUE
    * @model name="value" literal="after"
@@ -163,6 +159,7 @@ public enum FirstEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -173,6 +170,7 @@ public enum FirstEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -183,6 +181,7 @@ public enum FirstEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

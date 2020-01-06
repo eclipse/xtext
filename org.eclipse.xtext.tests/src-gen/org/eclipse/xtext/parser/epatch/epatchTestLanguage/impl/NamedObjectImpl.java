@@ -107,6 +107,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -117,6 +118,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -130,6 +132,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Assignment> getAssignments()
   {
     if (assignments == null)
@@ -144,6 +147,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Migration getLeftMig()
   {
     return leftMig;
@@ -171,6 +175,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftMig(Migration newLeftMig)
   {
     if (newLeftMig != leftMig)
@@ -303,7 +308,7 @@ public class NamedObjectImpl extends MinimalEObjectImpl.Container implements Nam
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

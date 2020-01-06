@@ -26,10 +26,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Domain Model</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Domain Model</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Domain Model</em>' containment reference.
    * @see #setDomainModel(DomainModel)

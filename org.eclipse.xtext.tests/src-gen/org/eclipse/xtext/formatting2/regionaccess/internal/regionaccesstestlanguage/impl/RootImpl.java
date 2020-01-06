@@ -67,6 +67,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mixed getMixed()
   {
     return mixed;
@@ -94,6 +95,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMixed(Mixed newMixed)
   {
     if (newMixed != mixed)

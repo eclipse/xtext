@@ -67,6 +67,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Greeting getChild()
   {
     return child;
@@ -94,6 +95,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(Greeting newChild)
   {
     if (newChild != child)

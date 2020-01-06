@@ -27,10 +27,6 @@ public interface Group extends AbstractElement
    * Returns the value of the '<em><b>Tokens</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractElement}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Tokens</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tokens</em>' containment reference list.
    * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getGroup_Tokens()

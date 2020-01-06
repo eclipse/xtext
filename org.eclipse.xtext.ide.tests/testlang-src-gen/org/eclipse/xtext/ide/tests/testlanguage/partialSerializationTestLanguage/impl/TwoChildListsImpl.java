@@ -89,6 +89,7 @@ public class TwoChildListsImpl extends ModelImpl implements TwoChildLists
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MandatoryValue> getDirectChildren()
   {
     if (directChildren == null)
@@ -103,6 +104,7 @@ public class TwoChildListsImpl extends ModelImpl implements TwoChildLists
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryChildList getChildsList()
   {
     return childsList;
@@ -130,6 +132,7 @@ public class TwoChildListsImpl extends ModelImpl implements TwoChildLists
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChildsList(MandatoryChildList newChildsList)
   {
     if (newChildsList != childsList)

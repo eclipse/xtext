@@ -67,6 +67,7 @@ public class CallExtendedParserRuleImpl extends RootRuleImpl implements CallExte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AModel getCall()
   {
     return call;
@@ -94,6 +95,7 @@ public class CallExtendedParserRuleImpl extends RootRuleImpl implements CallExte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCall(AModel newCall)
   {
     if (newCall != call)

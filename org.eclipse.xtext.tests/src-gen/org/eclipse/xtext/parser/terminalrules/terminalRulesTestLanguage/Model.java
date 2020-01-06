@@ -33,10 +33,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Id Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Id Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Id Value</em>' attribute.
    * @see #setIdValue(String)
@@ -59,10 +55,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Int Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int Value</em>' attribute.
    * @see #setIntValue(String)
@@ -85,10 +77,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>String Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>String Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>String Value</em>' attribute.
    * @see #setStringValue(String)
@@ -111,10 +99,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Rich String Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Rich String Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rich String Value</em>' attribute.
    * @see #setRichStringValue(String)
@@ -137,10 +121,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Ml Comment Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ml Comment Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ml Comment Value</em>' attribute.
    * @see #setMlCommentValue(String)
@@ -163,10 +143,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Sl Comment Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sl Comment Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sl Comment Value</em>' attribute.
    * @see #setSlCommentValue(String)
@@ -189,10 +165,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Ws Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ws Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ws Value</em>' attribute.
    * @see #setWsValue(String)
@@ -215,10 +187,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Any Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Any Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Any Value</em>' attribute.
    * @see #setAnyValue(String)

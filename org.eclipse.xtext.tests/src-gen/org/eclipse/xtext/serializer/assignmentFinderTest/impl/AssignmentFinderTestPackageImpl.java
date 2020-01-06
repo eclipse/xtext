@@ -156,7 +156,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link AssignmentFinderTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -171,7 +171,8 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     if (isInited) return (AssignmentFinderTestPackage)EPackage.Registry.INSTANCE.getEPackage(AssignmentFinderTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    AssignmentFinderTestPackageImpl theAssignmentFinderTestPackage = (AssignmentFinderTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AssignmentFinderTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AssignmentFinderTestPackageImpl());
+    Object registeredAssignmentFinderTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    AssignmentFinderTestPackageImpl theAssignmentFinderTestPackage = registeredAssignmentFinderTestPackage instanceof AssignmentFinderTestPackageImpl ? (AssignmentFinderTestPackageImpl)registeredAssignmentFinderTestPackage : new AssignmentFinderTestPackageImpl();
 
     isInited = true;
 
@@ -187,7 +188,6 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
     // Mark meta-data to indicate it can't be changed
     theAssignmentFinderTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(AssignmentFinderTestPackage.eNS_URI, theAssignmentFinderTestPackage);
     return theAssignmentFinderTestPackage;
@@ -198,6 +198,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -208,6 +209,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_KeywordVal()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -218,6 +220,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_TerminalVal()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -228,6 +231,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_EnumVal()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -238,6 +242,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_KeywordBool()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -248,6 +253,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_TerminalBool()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
@@ -258,6 +264,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_EnumBool()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
@@ -268,6 +275,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_MixedBool()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(6);
@@ -278,6 +286,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_MixedValue()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(7);
@@ -288,6 +297,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ContainmentRef()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(8);
@@ -298,6 +308,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_CrossRef()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(9);
@@ -308,6 +319,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKeywordVal()
   {
     return keywordValEClass;
@@ -318,6 +330,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKeywordVal_Kw()
   {
     return (EAttribute)keywordValEClass.getEStructuralFeatures().get(0);
@@ -328,6 +341,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTerminalVal()
   {
     return terminalValEClass;
@@ -338,6 +352,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTerminalVal_Term()
   {
     return (EAttribute)terminalValEClass.getEStructuralFeatures().get(0);
@@ -348,6 +363,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumVal()
   {
     return enumValEClass;
@@ -358,6 +374,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEnumVal_En()
   {
     return (EAttribute)enumValEClass.getEStructuralFeatures().get(0);
@@ -368,6 +385,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKeywordBool()
   {
     return keywordBoolEClass;
@@ -378,6 +396,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKeywordBool_Kw()
   {
     return (EAttribute)keywordBoolEClass.getEStructuralFeatures().get(0);
@@ -388,6 +407,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTerminalBool()
   {
     return terminalBoolEClass;
@@ -398,6 +418,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTerminalBool_Term()
   {
     return (EAttribute)terminalBoolEClass.getEStructuralFeatures().get(0);
@@ -408,6 +429,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumBool()
   {
     return enumBoolEClass;
@@ -418,6 +440,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEnumBool_En()
   {
     return (EAttribute)enumBoolEClass.getEStructuralFeatures().get(0);
@@ -428,6 +451,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMixedBool()
   {
     return mixedBoolEClass;
@@ -438,6 +462,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixedBool_Val()
   {
     return (EAttribute)mixedBoolEClass.getEStructuralFeatures().get(0);
@@ -448,6 +473,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMixedValue()
   {
     return mixedValueEClass;
@@ -458,6 +484,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixedValue_Val()
   {
     return (EAttribute)mixedValueEClass.getEStructuralFeatures().get(0);
@@ -468,6 +495,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContainmentRef()
   {
     return containmentRefEClass;
@@ -478,6 +506,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getContainmentRef_Ctx()
   {
     return (EReference)containmentRefEClass.getEStructuralFeatures().get(0);
@@ -488,6 +517,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContainmentRefN()
   {
     return containmentRefNEClass;
@@ -498,6 +528,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getContainmentRefN_Val1()
   {
     return (EAttribute)containmentRefNEClass.getEStructuralFeatures().get(0);
@@ -508,6 +539,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getContainmentRefN_Val2()
   {
     return (EAttribute)containmentRefNEClass.getEStructuralFeatures().get(1);
@@ -518,6 +550,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCrossRef()
   {
     return crossRefEClass;
@@ -528,6 +561,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getCrossRef_Name()
   {
     return (EAttribute)crossRefEClass.getEStructuralFeatures().get(0);
@@ -538,6 +572,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCrossRef_CrossRef()
   {
     return (EReference)crossRefEClass.getEStructuralFeatures().get(1);
@@ -548,6 +583,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getTestEnum()
   {
     return testEnumEEnum;
@@ -558,6 +594,7 @@ public class AssignmentFinderTestPackageImpl extends EPackageImpl implements Ass
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentFinderTestFactory getAssignmentFinderTestFactory()
   {
     return (AssignmentFinderTestFactory)getEFactoryInstance();

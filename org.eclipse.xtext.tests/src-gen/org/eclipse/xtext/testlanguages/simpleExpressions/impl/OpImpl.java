@@ -94,6 +94,7 @@ public class OpImpl extends ExpressionImpl implements Op
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getValues()
   {
     if (values == null)
@@ -108,6 +109,7 @@ public class OpImpl extends ExpressionImpl implements Op
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOperator()
   {
     return operator;
@@ -118,6 +120,7 @@ public class OpImpl extends ExpressionImpl implements Op
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(String newOperator)
   {
     String oldOperator = operator;
@@ -230,7 +233,7 @@ public class OpImpl extends ExpressionImpl implements Op
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(')');

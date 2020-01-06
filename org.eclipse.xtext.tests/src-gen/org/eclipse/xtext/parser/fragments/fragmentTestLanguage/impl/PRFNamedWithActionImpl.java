@@ -77,6 +77,7 @@ public class PRFNamedWithActionImpl extends PRFNamedImpl implements PRFNamedWith
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamed getPrev()
   {
     return prev;
@@ -104,6 +105,7 @@ public class PRFNamedWithActionImpl extends PRFNamedImpl implements PRFNamedWith
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPrev(PRFNamed newPrev)
   {
     if (newPrev != prev)
@@ -125,6 +127,7 @@ public class PRFNamedWithActionImpl extends PRFNamedImpl implements PRFNamedWith
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamed getRef2()
   {
     if (ref2 != null && ref2.eIsProxy())
@@ -155,6 +158,7 @@ public class PRFNamedWithActionImpl extends PRFNamedImpl implements PRFNamedWith
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef2(PRFNamed newRef2)
   {
     PRFNamed oldRef2 = ref2;

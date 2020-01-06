@@ -72,6 +72,7 @@ public class CompositeModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Model> getModel()
   {
     if (model == null)

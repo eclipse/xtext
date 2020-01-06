@@ -69,7 +69,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IgnoreCaseImportsTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -84,11 +84,13 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
     if (isInited) return (IgnoreCaseImportsTestPackage)EPackage.Registry.INSTANCE.getEPackage(IgnoreCaseImportsTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    IgnoreCaseImportsTestPackageImpl theIgnoreCaseImportsTestPackage = (IgnoreCaseImportsTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IgnoreCaseImportsTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IgnoreCaseImportsTestPackageImpl());
+    Object registeredIgnoreCaseImportsTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IgnoreCaseImportsTestPackageImpl theIgnoreCaseImportsTestPackage = registeredIgnoreCaseImportsTestPackage instanceof IgnoreCaseImportsTestPackageImpl ? (IgnoreCaseImportsTestPackageImpl)registeredIgnoreCaseImportsTestPackage : new IgnoreCaseImportsTestPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     IgnoreCaseLinkingTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -100,7 +102,6 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
     // Mark meta-data to indicate it can't be changed
     theIgnoreCaseImportsTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IgnoreCaseImportsTestPackage.eNS_URI, theIgnoreCaseImportsTestPackage);
     return theIgnoreCaseImportsTestPackage;
@@ -111,6 +112,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -121,6 +123,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -131,6 +134,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -141,6 +145,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -151,6 +156,7 @@ public class IgnoreCaseImportsTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseImportsTestFactory getIgnoreCaseImportsTestFactory()
   {
     return (IgnoreCaseImportsTestFactory)getEFactoryInstance();

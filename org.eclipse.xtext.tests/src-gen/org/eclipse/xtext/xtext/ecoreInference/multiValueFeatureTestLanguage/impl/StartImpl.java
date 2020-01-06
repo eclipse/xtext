@@ -67,6 +67,7 @@ public class StartImpl extends MinimalEObjectImpl.Container implements Start
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getFeatureA()
   {
     if (featureA == null)
@@ -154,7 +155,7 @@ public class StartImpl extends MinimalEObjectImpl.Container implements Start
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (featureA: ");
     result.append(featureA);
     result.append(')');

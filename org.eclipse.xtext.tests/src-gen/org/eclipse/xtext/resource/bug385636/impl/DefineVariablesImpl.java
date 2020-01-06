@@ -72,6 +72,7 @@ public class DefineVariablesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<DefineVariable> getVariables()
   {
     if (variables == null)

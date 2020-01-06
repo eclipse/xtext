@@ -214,6 +214,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDocumentation()
   {
     return documentation;
@@ -224,6 +225,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
@@ -237,6 +239,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVisibility()
   {
     return visibility;
@@ -247,6 +250,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
@@ -260,6 +264,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFinal()
   {
     return final_;
@@ -270,6 +275,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
@@ -283,6 +289,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeRef getReturnType()
   {
     return returnType;
@@ -310,6 +317,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReturnType(TypeRef newReturnType)
   {
     if (newReturnType != returnType)
@@ -331,6 +339,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -341,6 +350,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -354,6 +364,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ParameterDeclaration> getParameters()
   {
     if (parameters == null)
@@ -368,6 +379,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVarArgs()
   {
     return varArgs;
@@ -378,6 +390,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
@@ -391,6 +404,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GuardExpression getGuard()
   {
     return guard;
@@ -418,6 +432,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGuard(GuardExpression newGuard)
   {
     if (newGuard != guard)
@@ -439,6 +454,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getFuncExpr()
   {
     return funcExpr;
@@ -466,6 +482,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
@@ -662,7 +679,7 @@ public class FunctionImpl extends ExpressionImpl implements Function
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (documentation: ");
     result.append(documentation);
     result.append(", visibility: ");

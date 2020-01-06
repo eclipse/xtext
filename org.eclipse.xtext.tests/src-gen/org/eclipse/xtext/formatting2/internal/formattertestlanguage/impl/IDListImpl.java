@@ -65,6 +65,7 @@ public class IDListImpl extends RootImpl implements IDList
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getIds()
   {
     if (ids == null)
@@ -152,7 +153,7 @@ public class IDListImpl extends RootImpl implements IDList
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (ids: ");
     result.append(ids);
     result.append(')');

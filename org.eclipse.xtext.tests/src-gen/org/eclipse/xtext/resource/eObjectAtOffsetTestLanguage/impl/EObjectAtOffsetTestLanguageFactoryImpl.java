@@ -80,6 +80,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractBar createAbstractBar()
   {
     AbstractBarImpl abstractBar = new AbstractBarImpl();
@@ -102,6 +104,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bar createBar()
   {
     BarImpl bar = new BarImpl();
@@ -113,6 +116,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo createFoo()
   {
     FooImpl foo = new FooImpl();
@@ -124,6 +128,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FooBar createFooBar()
   {
     FooBarImpl fooBar = new FooBarImpl();
@@ -135,6 +140,7 @@ public class EObjectAtOffsetTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObjectAtOffsetTestLanguagePackage getEObjectAtOffsetTestLanguagePackage()
   {
     return (EObjectAtOffsetTestLanguagePackage)getEPackage();

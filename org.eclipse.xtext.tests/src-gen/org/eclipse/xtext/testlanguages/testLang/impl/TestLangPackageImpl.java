@@ -99,7 +99,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TestLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -114,7 +114,8 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
     if (isInited) return (TestLangPackage)EPackage.Registry.INSTANCE.getEPackage(TestLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    TestLangPackageImpl theTestLangPackage = (TestLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TestLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TestLangPackageImpl());
+    Object registeredTestLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TestLangPackageImpl theTestLangPackage = registeredTestLangPackage instanceof TestLangPackageImpl ? (TestLangPackageImpl)registeredTestLangPackage : new TestLangPackageImpl();
 
     isInited = true;
 
@@ -130,7 +131,6 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
     // Mark meta-data to indicate it can't be changed
     theTestLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TestLangPackage.eNS_URI, theTestLangPackage);
     return theTestLangPackage;
@@ -141,6 +141,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -151,6 +152,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_MultiFeature()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -161,6 +163,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractElement()
   {
     return abstractElementEClass;
@@ -171,6 +174,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChoiceElement()
   {
     return choiceElementEClass;
@@ -181,6 +185,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChoiceElement_OptionalKeyword()
   {
     return (EAttribute)choiceElementEClass.getEStructuralFeatures().get(0);
@@ -191,6 +196,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChoiceElement_Name()
   {
     return (EAttribute)choiceElementEClass.getEStructuralFeatures().get(1);
@@ -201,6 +207,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReducibleElement()
   {
     return reducibleElementEClass;
@@ -211,6 +218,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTerminalElement()
   {
     return terminalElementEClass;
@@ -221,6 +229,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTerminalElement_StringFeature()
   {
     return (EAttribute)terminalElementEClass.getEStructuralFeatures().get(0);
@@ -231,6 +240,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReducibleComposite()
   {
     return reducibleCompositeEClass;
@@ -241,6 +251,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReducibleComposite_ActionFeature()
   {
     return (EReference)reducibleCompositeEClass.getEStructuralFeatures().get(0);
@@ -251,6 +262,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestLangFactory getTestLangFactory()
   {
     return (TestLangFactory)getEFactoryInstance();

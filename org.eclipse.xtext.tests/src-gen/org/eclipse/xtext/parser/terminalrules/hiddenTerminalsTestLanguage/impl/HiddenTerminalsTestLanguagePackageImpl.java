@@ -123,7 +123,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link HiddenTerminalsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -138,7 +138,8 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     if (isInited) return (HiddenTerminalsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(HiddenTerminalsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = (HiddenTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HiddenTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HiddenTerminalsTestLanguagePackageImpl());
+    Object registeredHiddenTerminalsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = registeredHiddenTerminalsTestLanguagePackage instanceof HiddenTerminalsTestLanguagePackageImpl ? (HiddenTerminalsTestLanguagePackageImpl)registeredHiddenTerminalsTestLanguagePackage : new HiddenTerminalsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -154,7 +155,6 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     // Mark meta-data to indicate it can't be changed
     theHiddenTerminalsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(HiddenTerminalsTestLanguagePackage.eNS_URI, theHiddenTerminalsTestLanguagePackage);
     return theHiddenTerminalsTestLanguagePackage;
@@ -165,6 +165,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -175,6 +176,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Valid()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -185,6 +187,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWithoutHiddens()
   {
     return withoutHiddensEClass;
@@ -195,6 +198,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getWithoutHiddens_Spaces()
   {
     return (EAttribute)withoutHiddensEClass.getEStructuralFeatures().get(0);
@@ -205,6 +209,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWithHiddens()
   {
     return withHiddensEClass;
@@ -215,6 +220,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOverridingHiddens()
   {
     return overridingHiddensEClass;
@@ -225,6 +231,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOverridingHiddens_Called()
   {
     return (EReference)overridingHiddensEClass.getEStructuralFeatures().get(0);
@@ -235,6 +242,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOverridingHiddensCall()
   {
     return overridingHiddensCallEClass;
@@ -245,6 +253,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOverridingHiddensCall_Spaces()
   {
     return (EAttribute)overridingHiddensCallEClass.getEStructuralFeatures().get(0);
@@ -255,6 +264,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOverridingHiddensCall_Valid()
   {
     return (EAttribute)overridingHiddensCallEClass.getEStructuralFeatures().get(1);
@@ -265,6 +275,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInheritingHiddens()
   {
     return inheritingHiddensEClass;
@@ -275,6 +286,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getInheritingHiddens_Called()
   {
     return (EReference)inheritingHiddensEClass.getEStructuralFeatures().get(0);
@@ -285,6 +297,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getInheritingHiddens_HidingCalled()
   {
     return (EReference)inheritingHiddensEClass.getEStructuralFeatures().get(1);
@@ -295,6 +308,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDatatypeHiddens()
   {
     return datatypeHiddensEClass;
@@ -305,6 +319,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getHidingHiddens()
   {
     return hidingHiddensEClass;
@@ -315,6 +330,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getHidingHiddens_Space()
   {
     return (EAttribute)hidingHiddensEClass.getEStructuralFeatures().get(0);
@@ -325,6 +341,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getHidingHiddens_Called()
   {
     return (EReference)hidingHiddensEClass.getEStructuralFeatures().get(1);
@@ -335,6 +352,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInheritingHiddensCall()
   {
     return inheritingHiddensCallEClass;
@@ -345,6 +363,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getInheritingHiddensCall_Valid()
   {
     return (EAttribute)inheritingHiddensCallEClass.getEStructuralFeatures().get(0);
@@ -355,6 +374,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HiddenTerminalsTestLanguageFactory getHiddenTerminalsTestLanguageFactory()
   {
     return (HiddenTerminalsTestLanguageFactory)getEFactoryInstance();

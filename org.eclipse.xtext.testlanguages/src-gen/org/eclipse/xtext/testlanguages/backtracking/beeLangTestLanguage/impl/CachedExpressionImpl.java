@@ -66,6 +66,7 @@ public class CachedExpressionImpl extends ExpressionImpl implements CachedExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpr()
   {
     return expr;
@@ -93,6 +94,7 @@ public class CachedExpressionImpl extends ExpressionImpl implements CachedExpres
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)

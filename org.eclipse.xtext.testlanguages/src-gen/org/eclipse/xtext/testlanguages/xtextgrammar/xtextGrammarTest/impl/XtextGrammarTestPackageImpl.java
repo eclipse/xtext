@@ -234,7 +234,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link XtextGrammarTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -249,7 +249,8 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
     if (isInited) return (XtextGrammarTestPackage)EPackage.Registry.INSTANCE.getEPackage(XtextGrammarTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    XtextGrammarTestPackageImpl theXtextGrammarTestPackage = (XtextGrammarTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XtextGrammarTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XtextGrammarTestPackageImpl());
+    Object registeredXtextGrammarTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    XtextGrammarTestPackageImpl theXtextGrammarTestPackage = registeredXtextGrammarTestPackage instanceof XtextGrammarTestPackageImpl ? (XtextGrammarTestPackageImpl)registeredXtextGrammarTestPackage : new XtextGrammarTestPackageImpl();
 
     isInited = true;
 
@@ -262,7 +263,6 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
     // Mark meta-data to indicate it can't be changed
     theXtextGrammarTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(XtextGrammarTestPackage.eNS_URI, theXtextGrammarTestPackage);
     return theXtextGrammarTestPackage;
@@ -273,6 +273,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGrammar()
   {
     return grammarEClass;
@@ -283,6 +284,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGrammar_Name()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(0);
@@ -293,6 +295,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGrammar_UsedGrammars()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(1);
@@ -303,6 +306,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGrammar_DefinesHiddenTokens()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
@@ -313,6 +317,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGrammar_HiddenTokens()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(3);
@@ -323,6 +328,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGrammar_MetamodelDeclarations()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(4);
@@ -333,6 +339,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGrammar_Rules()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(5);
@@ -343,6 +350,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractRule()
   {
     return abstractRuleEClass;
@@ -353,6 +361,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractRule_Name()
   {
     return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
@@ -363,6 +372,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractRule_Type()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
@@ -373,6 +383,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractRule_Alternatives()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(2);
@@ -383,6 +394,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractMetamodelDeclaration()
   {
     return abstractMetamodelDeclarationEClass;
@@ -393,6 +405,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractMetamodelDeclaration_EPackage()
   {
     return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
@@ -403,6 +416,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractMetamodelDeclaration_Alias()
   {
     return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
@@ -413,6 +427,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGeneratedMetamodel()
   {
     return generatedMetamodelEClass;
@@ -423,6 +438,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGeneratedMetamodel_Name()
   {
     return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(0);
@@ -433,6 +449,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReferencedMetamodel()
   {
     return referencedMetamodelEClass;
@@ -443,6 +460,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParserRule()
   {
     return parserRuleEClass;
@@ -453,6 +471,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParserRule_DefinesHiddenTokens()
   {
     return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(0);
@@ -463,6 +482,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParserRule_HiddenTokens()
   {
     return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
@@ -473,6 +493,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeRef()
   {
     return typeRefEClass;
@@ -483,6 +504,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeRef_Metamodel()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
@@ -493,6 +515,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeRef_Classifier()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(1);
@@ -503,6 +526,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractElement()
   {
     return abstractElementEClass;
@@ -513,6 +537,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractElement_Cardinality()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
@@ -523,6 +548,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAction()
   {
     return actionEClass;
@@ -533,6 +559,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAction_Type()
   {
     return (EReference)actionEClass.getEStructuralFeatures().get(0);
@@ -543,6 +570,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAction_Feature()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
@@ -553,6 +581,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAction_Operator()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
@@ -563,6 +592,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKeyword()
   {
     return keywordEClass;
@@ -573,6 +603,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getKeyword_Value()
   {
     return (EAttribute)keywordEClass.getEStructuralFeatures().get(0);
@@ -583,6 +614,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRuleCall()
   {
     return ruleCallEClass;
@@ -593,6 +625,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRuleCall_Rule()
   {
     return (EReference)ruleCallEClass.getEStructuralFeatures().get(0);
@@ -603,6 +636,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssignment()
   {
     return assignmentEClass;
@@ -613,6 +647,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignment_Feature()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
@@ -623,6 +658,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignment_Operator()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
@@ -633,6 +669,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignment_Terminal()
   {
     return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
@@ -643,6 +680,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCrossReference()
   {
     return crossReferenceEClass;
@@ -653,6 +691,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCrossReference_Type()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(0);
@@ -663,6 +702,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCrossReference_Terminal()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(1);
@@ -673,6 +713,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTerminalRule()
   {
     return terminalRuleEClass;
@@ -683,6 +724,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractNegatedToken()
   {
     return abstractNegatedTokenEClass;
@@ -693,6 +735,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractNegatedToken_Terminal()
   {
     return (EReference)abstractNegatedTokenEClass.getEStructuralFeatures().get(0);
@@ -703,6 +746,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNegatedToken()
   {
     return negatedTokenEClass;
@@ -713,6 +757,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUntilToken()
   {
     return untilTokenEClass;
@@ -723,6 +768,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getWildcard()
   {
     return wildcardEClass;
@@ -733,6 +779,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumRule()
   {
     return enumRuleEClass;
@@ -743,6 +790,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumLiteralDeclaration()
   {
     return enumLiteralDeclarationEClass;
@@ -753,6 +801,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEnumLiteralDeclaration_EnumLiteral()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(0);
@@ -763,6 +812,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEnumLiteralDeclaration_Literal()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(1);
@@ -773,6 +823,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAlternatives()
   {
     return alternativesEClass;
@@ -783,6 +834,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAlternatives_Groups()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
@@ -793,6 +845,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGroup()
   {
     return groupEClass;
@@ -803,6 +856,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGroup_Tokens()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
@@ -813,6 +867,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCharacterRange()
   {
     return characterRangeEClass;
@@ -823,6 +878,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCharacterRange_Left()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(0);
@@ -833,6 +889,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCharacterRange_Right()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(1);
@@ -843,6 +900,7 @@ public class XtextGrammarTestPackageImpl extends EPackageImpl implements XtextGr
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XtextGrammarTestFactory getXtextGrammarTestFactory()
   {
     return (XtextGrammarTestFactory)getEFactoryInstance();

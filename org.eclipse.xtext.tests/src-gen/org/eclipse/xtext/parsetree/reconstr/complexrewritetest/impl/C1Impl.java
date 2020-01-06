@@ -66,6 +66,7 @@ public class C1Impl extends TrickyCImpl implements C1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TrickyC getX()
   {
     return x;
@@ -93,6 +94,7 @@ public class C1Impl extends TrickyCImpl implements C1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX(TrickyC newX)
   {
     if (newX != x)

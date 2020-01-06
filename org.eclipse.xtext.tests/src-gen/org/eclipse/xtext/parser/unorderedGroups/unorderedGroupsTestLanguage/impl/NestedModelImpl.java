@@ -95,6 +95,7 @@ public class NestedModelImpl extends MinimalEObjectImpl.Container implements Nes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFirst()
   {
     return first;
@@ -105,6 +106,7 @@ public class NestedModelImpl extends MinimalEObjectImpl.Container implements Nes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(boolean newFirst)
   {
     boolean oldFirst = first;
@@ -118,6 +120,7 @@ public class NestedModelImpl extends MinimalEObjectImpl.Container implements Nes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSecond()
   {
     return second;
@@ -128,6 +131,7 @@ public class NestedModelImpl extends MinimalEObjectImpl.Container implements Nes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(boolean newSecond)
   {
     boolean oldSecond = second;
@@ -222,7 +226,7 @@ public class NestedModelImpl extends MinimalEObjectImpl.Container implements Nes
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (first: ");
     result.append(first);
     result.append(", second: ");

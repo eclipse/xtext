@@ -74,6 +74,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFeature()
   {
     return feature;
@@ -84,6 +85,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFeature(String newFeature)
   {
     String oldFeature = feature;
@@ -168,7 +170,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (feature: ");
     result.append(feature);
     result.append(')');

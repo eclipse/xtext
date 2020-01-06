@@ -72,6 +72,7 @@ public class ChildListImpl extends MinimalEObjectImpl.Container implements Child
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<OtherTreeNode> getChildren()
   {
     if (children == null)

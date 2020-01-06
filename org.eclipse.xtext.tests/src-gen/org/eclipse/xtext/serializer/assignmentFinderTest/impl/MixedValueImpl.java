@@ -75,6 +75,7 @@ public class MixedValueImpl extends MinimalEObjectImpl.Container implements Mixe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestEnum getVal()
   {
     return val;
@@ -85,6 +86,7 @@ public class MixedValueImpl extends MinimalEObjectImpl.Container implements Mixe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(TestEnum newVal)
   {
     TestEnum oldVal = val;
@@ -169,7 +171,7 @@ public class MixedValueImpl extends MinimalEObjectImpl.Container implements Mixe
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

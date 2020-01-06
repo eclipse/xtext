@@ -88,6 +88,7 @@ public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements H
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSpace()
   {
     return space;
@@ -98,6 +99,7 @@ public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements H
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSpace(String newSpace)
   {
     String oldSpace = space;
@@ -111,6 +113,7 @@ public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements H
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritingHiddensCall getCalled()
   {
     return called;
@@ -138,6 +141,7 @@ public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements H
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCalled(InheritingHiddensCall newCalled)
   {
     if (newCalled != called)
@@ -256,7 +260,7 @@ public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements H
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (space: ");
     result.append(space);
     result.append(')');

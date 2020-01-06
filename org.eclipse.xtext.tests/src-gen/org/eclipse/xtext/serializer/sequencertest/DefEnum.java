@@ -53,10 +53,6 @@ public enum DefEnum implements Enumerator
   /**
    * The '<em><b>Kw1</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Kw1</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #KW1
    * @model name="kw1"
@@ -68,10 +64,6 @@ public enum DefEnum implements Enumerator
   /**
    * The '<em><b>Kw2</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Kw2</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #KW2
    * @model name="kw2"
@@ -83,10 +75,6 @@ public enum DefEnum implements Enumerator
   /**
    * The '<em><b>Kw3</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Kw3</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #KW3
    * @model name="kw3"
@@ -217,6 +205,7 @@ public enum DefEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -227,6 +216,7 @@ public enum DefEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -237,6 +227,7 @@ public enum DefEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

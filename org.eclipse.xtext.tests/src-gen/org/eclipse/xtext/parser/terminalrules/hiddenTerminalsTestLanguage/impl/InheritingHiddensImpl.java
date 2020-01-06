@@ -78,6 +78,7 @@ public class InheritingHiddensImpl extends ModelImpl implements InheritingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritingHiddensCall getCalled()
   {
     return called;
@@ -105,6 +106,7 @@ public class InheritingHiddensImpl extends ModelImpl implements InheritingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCalled(InheritingHiddensCall newCalled)
   {
     if (newCalled != called)
@@ -126,6 +128,7 @@ public class InheritingHiddensImpl extends ModelImpl implements InheritingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HidingHiddens getHidingCalled()
   {
     return hidingCalled;
@@ -153,6 +156,7 @@ public class InheritingHiddensImpl extends ModelImpl implements InheritingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setHidingCalled(HidingHiddens newHidingCalled)
   {
     if (newHidingCalled != hidingCalled)

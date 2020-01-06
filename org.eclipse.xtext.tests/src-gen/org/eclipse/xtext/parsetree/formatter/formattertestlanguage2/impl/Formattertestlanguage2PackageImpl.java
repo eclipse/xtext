@@ -58,7 +58,7 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Formattertestlanguage2Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
     if (isInited) return (Formattertestlanguage2Package)EPackage.Registry.INSTANCE.getEPackage(Formattertestlanguage2Package.eNS_URI);
 
     // Obtain or create and register package
-    Formattertestlanguage2PackageImpl theFormattertestlanguage2Package = (Formattertestlanguage2PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Formattertestlanguage2PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Formattertestlanguage2PackageImpl());
+    Object registeredFormattertestlanguage2Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Formattertestlanguage2PackageImpl theFormattertestlanguage2Package = registeredFormattertestlanguage2Package instanceof Formattertestlanguage2PackageImpl ? (Formattertestlanguage2PackageImpl)registeredFormattertestlanguage2Package : new Formattertestlanguage2PackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
     // Mark meta-data to indicate it can't be changed
     theFormattertestlanguage2Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Formattertestlanguage2Package.eNS_URI, theFormattertestlanguage2Package);
     return theFormattertestlanguage2Package;
@@ -100,6 +100,7 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -110,6 +111,7 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRoot_Name()
   {
     return (EAttribute)rootEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class Formattertestlanguage2PackageImpl extends EPackageImpl implements F
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Formattertestlanguage2Factory getFormattertestlanguage2Factory()
   {
     return (Formattertestlanguage2Factory)getEFactoryInstance();

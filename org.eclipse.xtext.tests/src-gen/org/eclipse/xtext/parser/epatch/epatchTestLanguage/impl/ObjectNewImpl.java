@@ -86,6 +86,7 @@ public class ObjectNewImpl extends CreatedObjectImpl implements ObjectNew
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import getImport()
   {
     if (import_ != null && import_.eIsProxy())
@@ -116,6 +117,7 @@ public class ObjectNewImpl extends CreatedObjectImpl implements ObjectNew
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImport(Import newImport)
   {
     Import oldImport = import_;
@@ -129,6 +131,7 @@ public class ObjectNewImpl extends CreatedObjectImpl implements ObjectNew
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getImpFrag()
   {
     return impFrag;
@@ -139,6 +142,7 @@ public class ObjectNewImpl extends CreatedObjectImpl implements ObjectNew
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImpFrag(String newImpFrag)
   {
     String oldImpFrag = impFrag;
@@ -234,7 +238,7 @@ public class ObjectNewImpl extends CreatedObjectImpl implements ObjectNew
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (impFrag: ");
     result.append(impFrag);
     result.append(')');

@@ -80,6 +80,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
@@ -102,6 +104,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Preop createPreop()
   {
     PreopImpl preop = new PreopImpl();
@@ -113,6 +116,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Postop createPostop()
   {
     PostopImpl postop = new PostopImpl();
@@ -124,6 +128,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Variable createVariable()
   {
     VariableImpl variable = new VariableImpl();
@@ -135,6 +140,7 @@ public class Bug296889TestFactoryImpl extends EFactoryImpl implements Bug296889T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug296889TestPackage getBug296889TestPackage()
   {
     return (Bug296889TestPackage)getEPackage();

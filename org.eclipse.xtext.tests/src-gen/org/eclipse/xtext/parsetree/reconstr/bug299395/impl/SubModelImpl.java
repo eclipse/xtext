@@ -67,6 +67,7 @@ public class SubModelImpl extends MinimalEObjectImpl.Container implements SubMod
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getStrings()
   {
     if (strings == null)
@@ -154,7 +155,7 @@ public class SubModelImpl extends MinimalEObjectImpl.Container implements SubMod
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (strings: ");
     result.append(strings);
     result.append(')');

@@ -66,6 +66,7 @@ public class DelegationImpl extends RootImpl implements Delegation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Delegate getDelegate()
   {
     return delegate;
@@ -93,6 +94,7 @@ public class DelegationImpl extends RootImpl implements Delegation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDelegate(Delegate newDelegate)
   {
     if (newDelegate != delegate)

@@ -74,6 +74,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFooValue()
   {
     return fooValue;
@@ -84,6 +85,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFooValue(String newFooValue)
   {
     String oldFooValue = fooValue;
@@ -168,7 +170,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (fooValue: ");
     result.append(fooValue);
     result.append(')');

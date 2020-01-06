@@ -83,6 +83,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public File createFile()
   {
     FileImpl file = new FileImpl();
@@ -94,6 +95,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -105,6 +107,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Namespace createNamespace()
   {
     NamespaceImpl namespace = new NamespaceImpl();
@@ -116,6 +119,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -127,6 +131,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type createType()
   {
     TypeImpl type = new TypeImpl();
@@ -138,6 +143,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -149,6 +155,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Datatype createDatatype()
   {
     DatatypeImpl datatype = new DatatypeImpl();
@@ -160,6 +167,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -171,6 +179,7 @@ public class IndexTestLanguageFactoryImpl extends EFactoryImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IndexTestLanguagePackage getIndexTestLanguagePackage()
   {
     return (IndexTestLanguagePackage)getEPackage();

@@ -76,6 +76,7 @@ public class InheritanceTest2FactoryImpl extends EFactoryImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class InheritanceTest2FactoryImpl extends EFactoryImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritanceTest2Package getInheritanceTest2Package()
   {
     return (InheritanceTest2Package)getEPackage();

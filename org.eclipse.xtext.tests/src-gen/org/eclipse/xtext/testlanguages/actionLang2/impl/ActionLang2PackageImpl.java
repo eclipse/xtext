@@ -67,7 +67,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ActionLang2Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
     if (isInited) return (ActionLang2Package)EPackage.Registry.INSTANCE.getEPackage(ActionLang2Package.eNS_URI);
 
     // Obtain or create and register package
-    ActionLang2PackageImpl theActionLang2Package = (ActionLang2PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ActionLang2PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ActionLang2PackageImpl());
+    Object registeredActionLang2Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ActionLang2PackageImpl theActionLang2Package = registeredActionLang2Package instanceof ActionLang2PackageImpl ? (ActionLang2PackageImpl)registeredActionLang2Package : new ActionLang2PackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
     // Mark meta-data to indicate it can't be changed
     theActionLang2Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ActionLang2Package.eNS_URI, theActionLang2Package);
     return theActionLang2Package;
@@ -109,6 +109,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getORing()
   {
     return oRingEClass;
@@ -119,6 +120,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getORing_Disjuncts()
   {
     return (EReference)oRingEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getValue()
   {
     return valueEClass;
@@ -139,6 +142,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getValue_Value()
   {
     return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class ActionLang2PackageImpl extends EPackageImpl implements ActionLang2P
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActionLang2Factory getActionLang2Factory()
   {
     return (ActionLang2Factory)getEFactoryInstance();

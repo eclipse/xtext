@@ -30,10 +30,6 @@ public interface NamedResource extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -56,10 +52,6 @@ public interface NamedResource extends EObject
   /**
    * Returns the value of the '<em><b>Left Uri</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left Uri</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Uri</em>' attribute.
    * @see #setLeftUri(String)
@@ -82,10 +74,6 @@ public interface NamedResource extends EObject
   /**
    * Returns the value of the '<em><b>Left Root</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left Root</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Root</em>' containment reference.
    * @see #setLeftRoot(CreatedObject)
@@ -108,10 +96,6 @@ public interface NamedResource extends EObject
   /**
    * Returns the value of the '<em><b>Right Uri</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Uri</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Uri</em>' attribute.
    * @see #setRightUri(String)
@@ -134,10 +118,6 @@ public interface NamedResource extends EObject
   /**
    * Returns the value of the '<em><b>Right Root</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Root</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Root</em>' containment reference.
    * @see #setRightRoot(CreatedObject)

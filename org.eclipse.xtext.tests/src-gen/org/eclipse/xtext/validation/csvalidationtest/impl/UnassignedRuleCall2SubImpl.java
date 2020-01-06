@@ -73,6 +73,7 @@ public class UnassignedRuleCall2SubImpl extends UnassignedRuleCall2Impl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -83,6 +84,7 @@ public class UnassignedRuleCall2SubImpl extends UnassignedRuleCall2Impl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -167,7 +169,7 @@ public class UnassignedRuleCall2SubImpl extends UnassignedRuleCall2Impl implemen
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val2: ");
     result.append(val2);
     result.append(')');

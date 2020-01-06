@@ -30,10 +30,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.antlr.bug296889ExTest.Expression}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expressions</em>' containment reference list.
    * @see org.eclipse.xtext.parser.antlr.bug296889ExTest.Bug296889ExTestPackage#getModel_Expressions()
@@ -46,10 +42,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Values</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Values</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Values</em>' attribute list.
    * @see org.eclipse.xtext.parser.antlr.bug296889ExTest.Bug296889ExTestPackage#getModel_Values()

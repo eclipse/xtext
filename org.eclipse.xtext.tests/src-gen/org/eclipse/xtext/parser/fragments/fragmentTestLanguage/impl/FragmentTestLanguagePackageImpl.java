@@ -75,7 +75,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link FragmentTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
     if (isInited) return (FragmentTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(FragmentTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    FragmentTestLanguagePackageImpl theFragmentTestLanguagePackage = (FragmentTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FragmentTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FragmentTestLanguagePackageImpl());
+    Object registeredFragmentTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    FragmentTestLanguagePackageImpl theFragmentTestLanguagePackage = registeredFragmentTestLanguagePackage instanceof FragmentTestLanguagePackageImpl ? (FragmentTestLanguagePackageImpl)registeredFragmentTestLanguagePackage : new FragmentTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
     // Mark meta-data to indicate it can't be changed
     theFragmentTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(FragmentTestLanguagePackage.eNS_URI, theFragmentTestLanguagePackage);
     return theFragmentTestLanguagePackage;
@@ -117,6 +117,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParserRuleFragments()
   {
     return parserRuleFragmentsEClass;
@@ -127,6 +128,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParserRuleFragments_Element()
   {
     return (EReference)parserRuleFragmentsEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParserRuleFragments_Ref()
   {
     return (EReference)parserRuleFragmentsEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPRFNamed()
   {
     return prfNamedEClass;
@@ -157,6 +161,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPRFNamed_Ref()
   {
     return (EReference)prfNamedEClass.getEStructuralFeatures().get(0);
@@ -167,6 +172,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPRFNamed_Name()
   {
     return (EAttribute)prfNamedEClass.getEStructuralFeatures().get(1);
@@ -177,6 +183,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPRFNamedWithAction()
   {
     return prfNamedWithActionEClass;
@@ -187,6 +194,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPRFNamedWithAction_Prev()
   {
     return (EReference)prfNamedWithActionEClass.getEStructuralFeatures().get(0);
@@ -197,6 +205,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPRFNamedWithAction_Ref2()
   {
     return (EReference)prfNamedWithActionEClass.getEStructuralFeatures().get(1);
@@ -207,6 +216,7 @@ public class FragmentTestLanguagePackageImpl extends EPackageImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FragmentTestLanguageFactory getFragmentTestLanguageFactory()
   {
     return (FragmentTestLanguageFactory)getEFactoryInstance();

@@ -89,6 +89,7 @@ public class Heuristic1Impl extends MinimalEObjectImpl.Container implements Heur
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getA()
   {
     if (a == null)
@@ -103,6 +104,7 @@ public class Heuristic1Impl extends MinimalEObjectImpl.Container implements Heur
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getB()
   {
     if (b == null)
@@ -117,6 +119,7 @@ public class Heuristic1Impl extends MinimalEObjectImpl.Container implements Heur
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getC()
   {
     if (c == null)
@@ -226,7 +229,7 @@ public class Heuristic1Impl extends MinimalEObjectImpl.Container implements Heur
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (a: ");
     result.append(a);
     result.append(", b: ");

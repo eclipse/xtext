@@ -67,6 +67,7 @@ public class ParameterDelegationImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Delegation getP()
   {
     return p;
@@ -94,6 +95,7 @@ public class ParameterDelegationImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setP(Delegation newP)
   {
     if (newP != p)

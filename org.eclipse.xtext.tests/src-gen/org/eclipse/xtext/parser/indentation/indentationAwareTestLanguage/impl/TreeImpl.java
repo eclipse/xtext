@@ -84,6 +84,7 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TreeNode> getNodes()
   {
     if (nodes == null)
@@ -98,6 +99,7 @@ public class TreeImpl extends MinimalEObjectImpl.Container implements Tree
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<OtherTreeNode> getMoreNodes()
   {
     if (moreNodes == null)

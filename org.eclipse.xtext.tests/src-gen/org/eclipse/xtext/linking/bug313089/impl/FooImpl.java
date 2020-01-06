@@ -111,6 +111,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -121,6 +122,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -134,6 +136,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bar getBar()
   {
     return bar;
@@ -161,6 +164,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBar(Bar newBar)
   {
     if (newBar != bar)
@@ -182,6 +186,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Baz getBaz()
   {
     return baz;
@@ -209,6 +214,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBaz(Baz newBaz)
   {
     if (newBaz != baz)
@@ -230,6 +236,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -260,6 +267,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(Foo newRef)
   {
     Foo oldRef = ref;
@@ -393,7 +401,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

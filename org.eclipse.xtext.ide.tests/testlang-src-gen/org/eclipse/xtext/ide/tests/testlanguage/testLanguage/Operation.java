@@ -33,10 +33,6 @@ public interface Operation extends Member
    * Returns the value of the '<em><b>Params</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Params</em>' containment reference list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getOperation_Params()
@@ -48,10 +44,6 @@ public interface Operation extends Member
   /**
    * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Return Type</em>' containment reference.
    * @see #setReturnType(Type)
@@ -74,10 +66,6 @@ public interface Operation extends Member
   /**
    * Returns the value of the '<em><b>Operation Call</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operation Call</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operation Call</em>' containment reference.
    * @see #setOperationCall(OperationCall)

@@ -77,6 +77,7 @@ public class IndentLangFactoryImpl extends EFactoryImpl implements IndentLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NodeList createNodeList()
   {
     NodeListImpl nodeList = new NodeListImpl();
@@ -88,6 +89,7 @@ public class IndentLangFactoryImpl extends EFactoryImpl implements IndentLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Node createNode()
   {
     NodeImpl node = new NodeImpl();
@@ -99,6 +101,7 @@ public class IndentLangFactoryImpl extends EFactoryImpl implements IndentLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IndentLangPackage getIndentLangPackage()
   {
     return (IndentLangPackage)getEPackage();

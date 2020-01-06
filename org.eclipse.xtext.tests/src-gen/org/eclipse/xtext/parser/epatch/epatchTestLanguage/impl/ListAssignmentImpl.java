@@ -81,6 +81,7 @@ public class ListAssignmentImpl extends AssignmentImpl implements ListAssignment
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AssignmentValue> getLeftValues()
   {
     if (leftValues == null)
@@ -95,6 +96,7 @@ public class ListAssignmentImpl extends AssignmentImpl implements ListAssignment
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AssignmentValue> getRightValues()
   {
     if (rightValues == null)

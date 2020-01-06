@@ -98,6 +98,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpr()
   {
     return expr;
@@ -125,6 +126,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
@@ -146,6 +148,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAlias()
   {
     return alias;
@@ -156,6 +159,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(String newAlias)
   {
     String oldAlias = alias;
@@ -169,6 +173,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getContextBlock()
   {
     return contextBlock;
@@ -196,6 +201,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContextBlock(Expression newContextBlock)
   {
     if (newContextBlock != contextBlock)
@@ -326,7 +332,7 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (alias: ");
     result.append(alias);
     result.append(')');

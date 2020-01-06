@@ -77,6 +77,7 @@ public class Bug289059TestFactoryImpl extends EFactoryImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class Bug289059TestFactoryImpl extends EFactoryImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnassignedAction createUnassignedAction()
   {
     UnassignedActionImpl unassignedAction = new UnassignedActionImpl();
@@ -99,6 +101,7 @@ public class Bug289059TestFactoryImpl extends EFactoryImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug289059TestPackage getBug289059TestPackage()
   {
     return (Bug289059TestPackage)getEPackage();

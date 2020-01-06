@@ -77,6 +77,7 @@ public class SingleAssignmentImpl extends AssignmentImpl implements SingleAssign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentValue getLeftValue()
   {
     return leftValue;
@@ -104,6 +105,7 @@ public class SingleAssignmentImpl extends AssignmentImpl implements SingleAssign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftValue(AssignmentValue newLeftValue)
   {
     if (newLeftValue != leftValue)
@@ -125,6 +127,7 @@ public class SingleAssignmentImpl extends AssignmentImpl implements SingleAssign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentValue getRightValue()
   {
     return rightValue;
@@ -152,6 +155,7 @@ public class SingleAssignmentImpl extends AssignmentImpl implements SingleAssign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightValue(AssignmentValue newRightValue)
   {
     if (newRightValue != rightValue)

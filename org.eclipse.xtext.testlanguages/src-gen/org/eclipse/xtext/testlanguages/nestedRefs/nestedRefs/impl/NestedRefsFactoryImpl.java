@@ -77,6 +77,7 @@ public class NestedRefsFactoryImpl extends EFactoryImpl implements NestedRefsFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Doc createDoc()
   {
     DocImpl doc = new DocImpl();
@@ -88,6 +89,7 @@ public class NestedRefsFactoryImpl extends EFactoryImpl implements NestedRefsFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SelfReferingDecl createSelfReferingDecl()
   {
     SelfReferingDeclImpl selfReferingDecl = new SelfReferingDeclImpl();
@@ -99,6 +101,7 @@ public class NestedRefsFactoryImpl extends EFactoryImpl implements NestedRefsFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedRefsPackage getNestedRefsPackage()
   {
     return (NestedRefsPackage)getEPackage();

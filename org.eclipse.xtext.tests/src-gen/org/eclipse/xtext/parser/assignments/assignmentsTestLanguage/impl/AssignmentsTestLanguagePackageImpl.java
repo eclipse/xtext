@@ -75,7 +75,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link AssignmentsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
     if (isInited) return (AssignmentsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(AssignmentsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    AssignmentsTestLanguagePackageImpl theAssignmentsTestLanguagePackage = (AssignmentsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AssignmentsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AssignmentsTestLanguagePackageImpl());
+    Object registeredAssignmentsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    AssignmentsTestLanguagePackageImpl theAssignmentsTestLanguagePackage = registeredAssignmentsTestLanguagePackage instanceof AssignmentsTestLanguagePackageImpl ? (AssignmentsTestLanguagePackageImpl)registeredAssignmentsTestLanguagePackage : new AssignmentsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
     // Mark meta-data to indicate it can't be changed
     theAssignmentsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(AssignmentsTestLanguagePackage.eNS_URI, theAssignmentsTestLanguagePackage);
     return theAssignmentsTestLanguagePackage;
@@ -117,6 +117,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -127,6 +128,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Single()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Multi()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Object()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -157,6 +161,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleValue()
   {
     return singleValueEClass;
@@ -167,6 +172,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleValue_Value()
   {
     return (EAttribute)singleValueEClass.getEStructuralFeatures().get(0);
@@ -177,6 +183,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMultiValue()
   {
     return multiValueEClass;
@@ -187,6 +194,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMultiValue_Value()
   {
     return (EAttribute)multiValueEClass.getEStructuralFeatures().get(0);
@@ -197,6 +205,7 @@ public class AssignmentsTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssignmentsTestLanguageFactory getAssignmentsTestLanguageFactory()
   {
     return (AssignmentsTestLanguageFactory)getEFactoryInstance();

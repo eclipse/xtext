@@ -70,6 +70,7 @@ public class EntityImpl extends TypeImpl implements Entity
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Property> getProperties()
   {
     if (properties == null)

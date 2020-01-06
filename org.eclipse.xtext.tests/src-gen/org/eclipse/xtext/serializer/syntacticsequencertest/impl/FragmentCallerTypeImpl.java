@@ -116,6 +116,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal1()
   {
     return val1;
@@ -126,6 +127,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(String newVal1)
   {
     String oldVal1 = val1;
@@ -139,6 +141,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal()
   {
     return val;
@@ -149,6 +152,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(String newVal)
   {
     String oldVal = val;
@@ -162,6 +166,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFragVal()
   {
     return fragVal;
@@ -172,6 +177,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFragVal(String newFragVal)
   {
     String oldFragVal = fragVal;
@@ -276,7 +282,7 @@ public class FragmentCallerTypeImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val: ");

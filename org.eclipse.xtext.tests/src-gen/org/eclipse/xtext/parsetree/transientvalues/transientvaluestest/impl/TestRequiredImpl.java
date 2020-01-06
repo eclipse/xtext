@@ -94,6 +94,7 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getRequired1()
   {
     return required1;
@@ -104,6 +105,7 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRequired1(int newRequired1)
   {
     int oldRequired1 = required1;
@@ -117,6 +119,7 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getRequired2()
   {
     return required2;
@@ -127,6 +130,7 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRequired2(int newRequired2)
   {
     int oldRequired2 = required2;
@@ -221,7 +225,7 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (required1: ");
     result.append(required1);
     result.append(", required2: ");

@@ -74,6 +74,7 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractElement> getElements()
   {
     if (elements == null)

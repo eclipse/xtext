@@ -89,6 +89,7 @@ public class TrickyEImpl extends MinimalEObjectImpl.Container implements TrickyE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getName()
   {
     if (name == null)
@@ -103,6 +104,7 @@ public class TrickyEImpl extends MinimalEObjectImpl.Container implements TrickyE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getFoo()
   {
     if (foo == null)
@@ -117,6 +119,7 @@ public class TrickyEImpl extends MinimalEObjectImpl.Container implements TrickyE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getType()
   {
     if (type == null)
@@ -226,7 +229,7 @@ public class TrickyEImpl extends MinimalEObjectImpl.Container implements TrickyE
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", foo: ");

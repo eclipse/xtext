@@ -67,7 +67,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link OptionalEmptyPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
     if (isInited) return (OptionalEmptyPackage)EPackage.Registry.INSTANCE.getEPackage(OptionalEmptyPackage.eNS_URI);
 
     // Obtain or create and register package
-    OptionalEmptyPackageImpl theOptionalEmptyPackage = (OptionalEmptyPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OptionalEmptyPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OptionalEmptyPackageImpl());
+    Object registeredOptionalEmptyPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    OptionalEmptyPackageImpl theOptionalEmptyPackage = registeredOptionalEmptyPackage instanceof OptionalEmptyPackageImpl ? (OptionalEmptyPackageImpl)registeredOptionalEmptyPackage : new OptionalEmptyPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
     // Mark meta-data to indicate it can't be changed
     theOptionalEmptyPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(OptionalEmptyPackage.eNS_URI, theOptionalEmptyPackage);
     return theOptionalEmptyPackage;
@@ -109,6 +109,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Child()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGreeting()
   {
     return greetingEClass;
@@ -139,6 +142,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGreeting_Name()
   {
     return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalEmptyFactory getOptionalEmptyFactory()
   {
     return (OptionalEmptyFactory)getEFactoryInstance();

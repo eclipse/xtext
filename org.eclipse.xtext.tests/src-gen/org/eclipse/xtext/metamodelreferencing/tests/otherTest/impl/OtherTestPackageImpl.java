@@ -62,7 +62,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link OtherTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -77,7 +77,8 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     if (isInited) return (OtherTestPackage)EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OtherTestPackageImpl());
+    Object registeredOtherTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    OtherTestPackageImpl theOtherTestPackage = registeredOtherTestPackage instanceof OtherTestPackageImpl ? (OtherTestPackageImpl)registeredOtherTestPackage : new OtherTestPackageImpl();
 
     isInited = true;
 
@@ -85,7 +86,8 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
-    SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI) : SimpleTestPackage.eINSTANCE);
+    Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI);
+    SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(registeredPackage instanceof SimpleTestPackageImpl ? registeredPackage : SimpleTestPackage.eINSTANCE);
 
     // Create package meta-data objects
     theOtherTestPackage.createPackageContents();
@@ -98,7 +100,6 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     // Mark meta-data to indicate it can't be changed
     theOtherTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(OtherTestPackage.eNS_URI, theOtherTestPackage);
     return theOtherTestPackage;
@@ -109,6 +110,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFooBar()
   {
     return fooBarEClass;
@@ -119,6 +121,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFooBar_Name()
   {
     return (EAttribute)fooBarEClass.getEStructuralFeatures().get(0);
@@ -129,6 +132,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OtherTestFactory getOtherTestFactory()
   {
     return (OtherTestFactory)getEFactoryInstance();

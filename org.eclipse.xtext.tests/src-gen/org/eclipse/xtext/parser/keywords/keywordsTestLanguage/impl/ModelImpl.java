@@ -221,6 +221,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFirst()
   {
     return first;
@@ -231,6 +232,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(boolean newFirst)
   {
     boolean oldFirst = first;
@@ -244,6 +246,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSecond()
   {
     return second;
@@ -254,6 +257,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(boolean newSecond)
   {
     boolean oldSecond = second;
@@ -267,6 +271,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isThird()
   {
     return third;
@@ -277,6 +282,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThird(boolean newThird)
   {
     boolean oldThird = third;
@@ -290,6 +296,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isForth()
   {
     return forth;
@@ -300,6 +307,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setForth(boolean newForth)
   {
     boolean oldForth = forth;
@@ -313,6 +321,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFifth()
   {
     return fifth;
@@ -323,6 +332,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFifth(boolean newFifth)
   {
     boolean oldFifth = fifth;
@@ -336,6 +346,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSixth()
   {
     return sixth;
@@ -346,6 +357,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSixth(boolean newSixth)
   {
     boolean oldSixth = sixth;
@@ -359,6 +371,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSeventh()
   {
     return seventh;
@@ -369,6 +382,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSeventh(boolean newSeventh)
   {
     boolean oldSeventh = seventh;
@@ -382,6 +396,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEighth()
   {
     return eighth;
@@ -392,6 +407,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEighth(boolean newEighth)
   {
     boolean oldEighth = eighth;
@@ -546,7 +562,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (first: ");
     result.append(first);
     result.append(", second: ");

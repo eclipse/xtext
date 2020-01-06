@@ -68,6 +68,7 @@ public class AbstractBarImpl extends MinimalEObjectImpl.Container implements Abs
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Foo> getFoo()
   {
     if (foo == null)

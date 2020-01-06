@@ -78,6 +78,7 @@ public class FileAwareFactoryImpl extends EFactoryImpl implements FileAwareFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PackageDeclaration createPackageDeclaration()
   {
     PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
@@ -89,6 +90,7 @@ public class FileAwareFactoryImpl extends EFactoryImpl implements FileAwareFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -100,6 +102,7 @@ public class FileAwareFactoryImpl extends EFactoryImpl implements FileAwareFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -111,6 +114,7 @@ public class FileAwareFactoryImpl extends EFactoryImpl implements FileAwareFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FileAwarePackage getFileAwarePackage()
   {
     return (FileAwarePackage)getEPackage();

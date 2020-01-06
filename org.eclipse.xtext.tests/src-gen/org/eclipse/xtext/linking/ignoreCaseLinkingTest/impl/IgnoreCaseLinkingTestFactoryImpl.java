@@ -77,6 +77,7 @@ public class IgnoreCaseLinkingTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -88,6 +89,7 @@ public class IgnoreCaseLinkingTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -99,6 +101,7 @@ public class IgnoreCaseLinkingTestFactoryImpl extends EFactoryImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseLinkingTestPackage getIgnoreCaseLinkingTestPackage()
   {
     return (IgnoreCaseLinkingTestPackage)getEPackage();

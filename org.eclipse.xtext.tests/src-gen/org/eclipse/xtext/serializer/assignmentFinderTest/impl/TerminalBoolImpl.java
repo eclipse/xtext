@@ -74,6 +74,7 @@ public class TerminalBoolImpl extends MinimalEObjectImpl.Container implements Te
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isTerm()
   {
     return term;
@@ -84,6 +85,7 @@ public class TerminalBoolImpl extends MinimalEObjectImpl.Container implements Te
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTerm(boolean newTerm)
   {
     boolean oldTerm = term;
@@ -168,7 +170,7 @@ public class TerminalBoolImpl extends MinimalEObjectImpl.Container implements Te
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (term: ");
     result.append(term);
     result.append(')');

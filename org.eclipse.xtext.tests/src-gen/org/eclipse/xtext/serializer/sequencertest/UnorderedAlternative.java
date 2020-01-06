@@ -32,10 +32,6 @@ public interface UnorderedAlternative extends EObject
    * Returns the value of the '<em><b>Val1</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternative_Val1()
@@ -48,10 +44,6 @@ public interface UnorderedAlternative extends EObject
    * Returns the value of the '<em><b>Val2</b></em>' attribute list.
    * The list contents are of type {@link java.lang.Integer}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternative_Val2()
@@ -64,10 +56,6 @@ public interface UnorderedAlternative extends EObject
    * Returns the value of the '<em><b>Val3</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' containment reference list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternative_Val3()
@@ -80,10 +68,6 @@ public interface UnorderedAlternative extends EObject
    * Returns the value of the '<em><b>Val4</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeValDelegate}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val4</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val4</em>' containment reference list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternative_Val4()

@@ -31,10 +31,6 @@ public interface TypeDeclaration extends AbstractElement
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Super Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Type</em>' reference.
    * @see #setSuperType(TypeDeclaration)
@@ -58,10 +54,6 @@ public interface TypeDeclaration extends AbstractElement
    * Returns the value of the '<em><b>Members</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Members</em>' containment reference list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeDeclaration_Members()

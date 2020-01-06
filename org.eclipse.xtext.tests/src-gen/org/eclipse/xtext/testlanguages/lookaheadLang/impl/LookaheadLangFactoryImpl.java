@@ -82,6 +82,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Entry createEntry()
   {
     EntryImpl entry = new EntryImpl();
@@ -93,6 +94,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Alts createAlts()
   {
     AltsImpl alts = new AltsImpl();
@@ -104,6 +106,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead0 createLookAhead0()
   {
     LookAhead0Impl lookAhead0 = new LookAhead0Impl();
@@ -115,6 +118,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead1 createLookAhead1()
   {
     LookAhead1Impl lookAhead1 = new LookAhead1Impl();
@@ -126,6 +130,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead2 createLookAhead2()
   {
     LookAhead2Impl lookAhead2 = new LookAhead2Impl();
@@ -137,6 +142,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead3 createLookAhead3()
   {
     LookAhead3Impl lookAhead3 = new LookAhead3Impl();
@@ -148,6 +154,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead4 createLookAhead4()
   {
     LookAhead4Impl lookAhead4 = new LookAhead4Impl();
@@ -159,6 +166,7 @@ public class LookaheadLangFactoryImpl extends EFactoryImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookaheadLangPackage getLookaheadLangPackage()
   {
     return (LookaheadLangPackage)getEPackage();

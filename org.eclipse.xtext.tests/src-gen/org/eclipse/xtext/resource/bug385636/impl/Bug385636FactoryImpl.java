@@ -88,6 +88,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Program createProgram()
   {
     ProgramImpl program = new ProgramImpl();
@@ -99,6 +100,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DefineVariables createDefineVariables()
   {
     DefineVariablesImpl defineVariables = new DefineVariablesImpl();
@@ -110,6 +112,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DefineVariable createDefineVariable()
   {
     DefineVariableImpl defineVariable = new DefineVariableImpl();
@@ -121,6 +124,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NVariableAccess createNVariableAccess()
   {
     NVariableAccessImpl nVariableAccess = new NVariableAccessImpl();
@@ -132,6 +136,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
@@ -143,6 +148,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_VariableName createExpression_VariableName()
   {
     Expression_VariableNameImpl expression_VariableName = new Expression_VariableNameImpl();
@@ -154,6 +160,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Larger_Equal createExpression_Larger_Equal()
   {
     Expression_Larger_EqualImpl expression_Larger_Equal = new Expression_Larger_EqualImpl();
@@ -165,6 +172,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Smaller createExpression_Smaller()
   {
     Expression_SmallerImpl expression_Smaller = new Expression_SmallerImpl();
@@ -176,6 +184,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Smaller_Equal createExpression_Smaller_Equal()
   {
     Expression_Smaller_EqualImpl expression_Smaller_Equal = new Expression_Smaller_EqualImpl();
@@ -187,6 +196,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Equal createExpression_Equal()
   {
     Expression_EqualImpl expression_Equal = new Expression_EqualImpl();
@@ -198,6 +208,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Not_Equal createExpression_Not_Equal()
   {
     Expression_Not_EqualImpl expression_Not_Equal = new Expression_Not_EqualImpl();
@@ -209,6 +220,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Not_Less createExpression_Not_Less()
   {
     Expression_Not_LessImpl expression_Not_Less = new Expression_Not_LessImpl();
@@ -220,6 +232,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_Not_Greater createExpression_Not_Greater()
   {
     Expression_Not_GreaterImpl expression_Not_Greater = new Expression_Not_GreaterImpl();
@@ -231,6 +244,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug385636Package getBug385636Package()
   {
     return (Bug385636Package)getEPackage();

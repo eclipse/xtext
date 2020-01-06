@@ -28,10 +28,6 @@ public interface RootClass extends EObject
 	/**
 	 * Returns the value of the '<em><b>Attribute1</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Attribute1</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Attribute1</em>' attribute.
 	 * @see #setAttribute1(String)
@@ -54,10 +50,6 @@ public interface RootClass extends EObject
 	/**
 	 * Returns the value of the '<em><b>Reference1</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reference1</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference1</em>' reference.
 	 * @see #setReference1(NestedClass1)

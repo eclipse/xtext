@@ -65,6 +65,7 @@ public class ModelImpl extends org.eclipse.xtext.grammarinheritance.inheritanceT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getIds()
   {
     if (ids == null)
@@ -152,7 +153,7 @@ public class ModelImpl extends org.eclipse.xtext.grammarinheritance.inheritanceT
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (ids: ");
     result.append(ids);
     result.append(')');

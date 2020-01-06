@@ -78,6 +78,7 @@ public class FragmentTestLanguageFactoryImpl extends EFactoryImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParserRuleFragments createParserRuleFragments()
   {
     ParserRuleFragmentsImpl parserRuleFragments = new ParserRuleFragmentsImpl();
@@ -89,6 +90,7 @@ public class FragmentTestLanguageFactoryImpl extends EFactoryImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamed createPRFNamed()
   {
     PRFNamedImpl prfNamed = new PRFNamedImpl();
@@ -100,6 +102,7 @@ public class FragmentTestLanguageFactoryImpl extends EFactoryImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PRFNamedWithAction createPRFNamedWithAction()
   {
     PRFNamedWithActionImpl prfNamedWithAction = new PRFNamedWithActionImpl();
@@ -111,6 +114,7 @@ public class FragmentTestLanguageFactoryImpl extends EFactoryImpl implements Fra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FragmentTestLanguagePackage getFragmentTestLanguagePackage()
   {
     return (FragmentTestLanguagePackage)getEPackage();

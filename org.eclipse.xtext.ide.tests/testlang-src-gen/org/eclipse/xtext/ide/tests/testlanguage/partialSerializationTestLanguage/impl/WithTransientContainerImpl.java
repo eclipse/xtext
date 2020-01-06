@@ -71,6 +71,7 @@ public class WithTransientContainerImpl extends ModelImpl implements WithTransie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public WithTransient getChild()
   {
     return child;
@@ -98,6 +99,7 @@ public class WithTransientContainerImpl extends ModelImpl implements WithTransie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(WithTransient newChild)
   {
     if (newChild != child)

@@ -67,6 +67,7 @@ public class BooleanAlternativeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanAlternativeLiteral getBool()
   {
     return bool;
@@ -94,6 +95,7 @@ public class BooleanAlternativeImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBool(BooleanAlternativeLiteral newBool)
   {
     if (newBool != bool)

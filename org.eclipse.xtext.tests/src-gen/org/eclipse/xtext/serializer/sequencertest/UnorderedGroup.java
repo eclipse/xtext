@@ -29,10 +29,6 @@ public interface UnorderedGroup extends EObject
   /**
    * Returns the value of the '<em><b>Val1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute.
    * @see #setVal1(String)
@@ -55,10 +51,6 @@ public interface UnorderedGroup extends EObject
   /**
    * Returns the value of the '<em><b>Val2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute.
    * @see #setVal2(int)
@@ -81,10 +73,6 @@ public interface UnorderedGroup extends EObject
   /**
    * Returns the value of the '<em><b>Val3</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' containment reference.
    * @see #setVal3(UnorderedGroupVal)
@@ -107,10 +95,6 @@ public interface UnorderedGroup extends EObject
   /**
    * Returns the value of the '<em><b>Val4</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val4</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val4</em>' containment reference.
    * @see #setVal4(UnorderedGroupValDelegate)

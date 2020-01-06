@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
+
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Factory;
@@ -60,7 +62,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link InheritanceTest2Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -75,11 +77,14 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     if (isInited) return (InheritanceTest2Package)EPackage.Registry.INSTANCE.getEPackage(InheritanceTest2Package.eNS_URI);
 
     // Obtain or create and register package
-    InheritanceTest2PackageImpl theInheritanceTest2Package = (InheritanceTest2PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof InheritanceTest2PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new InheritanceTest2PackageImpl());
+    Object registeredInheritanceTest2Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    InheritanceTest2PackageImpl theInheritanceTest2Package = registeredInheritanceTest2Package instanceof InheritanceTest2PackageImpl ? (InheritanceTest2PackageImpl)registeredInheritanceTest2Package : new InheritanceTest2PackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
+    BaseInheritanceTestPackage.eINSTANCE.eClass();
     InheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -91,7 +96,6 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     // Mark meta-data to indicate it can't be changed
     theInheritanceTest2Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(InheritanceTest2Package.eNS_URI, theInheritanceTest2Package);
     return theInheritanceTest2Package;
@@ -102,6 +106,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -112,6 +117,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Ids()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -122,6 +128,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritanceTest2Factory getInheritanceTest2Factory()
   {
     return (InheritanceTest2Factory)getEFactoryInstance();

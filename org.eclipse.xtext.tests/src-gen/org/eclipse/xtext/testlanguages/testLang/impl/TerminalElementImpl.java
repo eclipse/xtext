@@ -73,6 +73,7 @@ public class TerminalElementImpl extends ReducibleElementImpl implements Termina
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getStringFeature()
   {
     return stringFeature;
@@ -83,6 +84,7 @@ public class TerminalElementImpl extends ReducibleElementImpl implements Termina
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStringFeature(String newStringFeature)
   {
     String oldStringFeature = stringFeature;
@@ -167,7 +169,7 @@ public class TerminalElementImpl extends ReducibleElementImpl implements Termina
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (stringFeature: ");
     result.append(stringFeature);
     result.append(')');

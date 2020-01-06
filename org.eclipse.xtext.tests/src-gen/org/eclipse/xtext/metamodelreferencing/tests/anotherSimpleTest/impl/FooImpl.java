@@ -96,6 +96,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -106,6 +107,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -119,6 +121,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<RuleCall> getNameRefs()
   {
     if (nameRefs == null)
@@ -232,7 +235,7 @@ public class FooImpl extends MinimalEObjectImpl.Container implements Foo
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

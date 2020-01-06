@@ -27,10 +27,6 @@ public interface RuleCall extends AbstractElement
   /**
    * Returns the value of the '<em><b>Rule</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Rule</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rule</em>' reference.
    * @see #setRule(AbstractRule)
@@ -54,10 +50,6 @@ public interface RuleCall extends AbstractElement
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.xtextTest.NamedArgument}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
    * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getRuleCall_Arguments()

@@ -30,10 +30,6 @@ public interface Mixed extends Root
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -56,10 +52,6 @@ public interface Mixed extends Root
   /**
    * Returns the value of the '<em><b>Eobj</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Eobj</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Eobj</em>' containment reference.
    * @see #setEobj(Mixed)
@@ -82,10 +74,6 @@ public interface Mixed extends Root
   /**
    * Returns the value of the '<em><b>Datatype</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Datatype</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Datatype</em>' attribute.
    * @see #setDatatype(String)
@@ -108,10 +96,6 @@ public interface Mixed extends Root
   /**
    * Returns the value of the '<em><b>Ref</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref</em>' reference.
    * @see #setRef(Mixed)
@@ -135,10 +119,6 @@ public interface Mixed extends Root
    * Returns the value of the '<em><b>Lit</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Lit</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Lit</em>' attribute.
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum
@@ -163,10 +143,6 @@ public interface Mixed extends Root
   /**
    * Returns the value of the '<em><b>Frag Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Frag Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Frag Name</em>' attribute.
    * @see #setFragName(String)

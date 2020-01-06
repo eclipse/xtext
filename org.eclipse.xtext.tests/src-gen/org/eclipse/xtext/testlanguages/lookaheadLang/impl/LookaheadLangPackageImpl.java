@@ -107,7 +107,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LookaheadLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -122,7 +122,8 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     if (isInited) return (LookaheadLangPackage)EPackage.Registry.INSTANCE.getEPackage(LookaheadLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    LookaheadLangPackageImpl theLookaheadLangPackage = (LookaheadLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LookaheadLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LookaheadLangPackageImpl());
+    Object registeredLookaheadLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LookaheadLangPackageImpl theLookaheadLangPackage = registeredLookaheadLangPackage instanceof LookaheadLangPackageImpl ? (LookaheadLangPackageImpl)registeredLookaheadLangPackage : new LookaheadLangPackageImpl();
 
     isInited = true;
 
@@ -138,7 +139,6 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     // Mark meta-data to indicate it can't be changed
     theLookaheadLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LookaheadLangPackage.eNS_URI, theLookaheadLangPackage);
     return theLookaheadLangPackage;
@@ -149,6 +149,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntry()
   {
     return entryEClass;
@@ -159,6 +160,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntry_Contents()
   {
     return (EReference)entryEClass.getEStructuralFeatures().get(0);
@@ -169,6 +171,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAlts()
   {
     return altsEClass;
@@ -179,6 +182,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlts_X()
   {
     return (EAttribute)altsEClass.getEStructuralFeatures().get(0);
@@ -189,6 +193,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLookAhead0()
   {
     return lookAhead0EClass;
@@ -199,6 +204,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLookAhead1()
   {
     return lookAhead1EClass;
@@ -209,6 +215,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLookAhead1_Y()
   {
     return (EReference)lookAhead1EClass.getEStructuralFeatures().get(0);
@@ -219,6 +226,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLookAhead1_Z()
   {
     return (EAttribute)lookAhead1EClass.getEStructuralFeatures().get(1);
@@ -229,6 +237,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLookAhead2()
   {
     return lookAhead2EClass;
@@ -239,6 +248,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLookAhead2_Z()
   {
     return (EAttribute)lookAhead2EClass.getEStructuralFeatures().get(0);
@@ -249,6 +259,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLookAhead3()
   {
     return lookAhead3EClass;
@@ -259,6 +270,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLookAhead3_Z()
   {
     return (EReference)lookAhead3EClass.getEStructuralFeatures().get(0);
@@ -269,6 +281,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLookAhead4()
   {
     return lookAhead4EClass;
@@ -279,6 +292,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLookAhead4_X()
   {
     return (EAttribute)lookAhead4EClass.getEStructuralFeatures().get(0);
@@ -289,6 +303,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookaheadLangFactory getLookaheadLangFactory()
   {
     return (LookaheadLangFactory)getEFactoryInstance();

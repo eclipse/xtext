@@ -35,10 +35,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Model</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Model</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Model</em>' containment reference.
    * @see #setModel(Model)
@@ -61,10 +57,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Attribute Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attribute Exclusion</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute Exclusion</em>' containment reference.
    * @see #setAttributeExclusion(AttributeExclusionTest)
@@ -87,10 +79,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Nested Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Nested Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested Type</em>' containment reference.
    * @see #setNestedType(NestedTypeTest)
@@ -113,10 +101,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Nested Type Recursive Test2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Nested Type Recursive Test2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested Type Recursive Test2</em>' containment reference.
    * @see #setNestedTypeRecursiveTest2(NestedTypeRecursiveTest)
@@ -139,10 +123,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Parent Ref</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parent Ref</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parent Ref</em>' containment reference.
    * @see #setParentRef(EObject)
@@ -165,10 +145,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Quantity Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Quantity Exclusion</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Quantity Exclusion</em>' containment reference.
    * @see #setQuantityExclusion(QuantityExclusionTest)
@@ -191,10 +167,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Value Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value Exclusion</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value Exclusion</em>' containment reference.
    * @see #setValueExclusion(ValueExclusionTest)
@@ -217,10 +189,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -243,10 +211,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Node Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Node Exclusion</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node Exclusion</em>' containment reference.
    * @see #setNodeExclusion(NodeExclusion)
@@ -269,10 +233,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Node Exclusion List</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Node Exclusion List</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Node Exclusion List</em>' containment reference.
    * @see #setNodeExclusionList(NodeExclusionList)

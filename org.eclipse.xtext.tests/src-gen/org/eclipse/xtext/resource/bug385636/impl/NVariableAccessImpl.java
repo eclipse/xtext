@@ -66,6 +66,7 @@ public class NVariableAccessImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DefineVariable getVariable()
   {
     if (variable != null && variable.eIsProxy())
@@ -96,6 +97,7 @@ public class NVariableAccessImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVariable(DefineVariable newVariable)
   {
     DefineVariable oldVariable = variable;

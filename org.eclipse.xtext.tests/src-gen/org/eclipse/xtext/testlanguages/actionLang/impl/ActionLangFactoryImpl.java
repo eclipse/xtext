@@ -78,6 +78,7 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -89,6 +90,7 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child createChild()
   {
     ChildImpl child = new ChildImpl();
@@ -100,6 +102,7 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parent createParent()
   {
     ParentImpl parent = new ParentImpl();
@@ -111,6 +114,7 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActionLangPackage getActionLangPackage()
   {
     return (ActionLangPackage)getEPackage();

@@ -58,7 +58,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SerializationBug269362TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
     if (isInited) return (SerializationBug269362TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(SerializationBug269362TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    SerializationBug269362TestLanguagePackageImpl theSerializationBug269362TestLanguagePackage = (SerializationBug269362TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SerializationBug269362TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SerializationBug269362TestLanguagePackageImpl());
+    Object registeredSerializationBug269362TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SerializationBug269362TestLanguagePackageImpl theSerializationBug269362TestLanguagePackage = registeredSerializationBug269362TestLanguagePackage instanceof SerializationBug269362TestLanguagePackageImpl ? (SerializationBug269362TestLanguagePackageImpl)registeredSerializationBug269362TestLanguagePackage : new SerializationBug269362TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
     // Mark meta-data to indicate it can't be changed
     theSerializationBug269362TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SerializationBug269362TestLanguagePackage.eNS_URI, theSerializationBug269362TestLanguagePackage);
     return theSerializationBug269362TestLanguagePackage;
@@ -100,6 +100,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Foo()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Bar()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SerializationBug269362TestLanguageFactory getSerializationBug269362TestLanguageFactory()
   {
     return (SerializationBug269362TestLanguageFactory)getEFactoryInstance();

@@ -31,10 +31,6 @@ public interface Element extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' containment reference.
    * @see #setFirst(Named)
@@ -57,10 +53,6 @@ public interface Element extends EObject
   /**
    * Returns the value of the '<em><b>Second</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second</em>' containment reference.
    * @see #setSecond(Named)
@@ -84,10 +76,6 @@ public interface Element extends EObject
    * Returns the value of the '<em><b>Third</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Named}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third</em>' containment reference list.
    * @see org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Bug317840TestLanguagePackage#getElement_Third()
@@ -100,10 +88,6 @@ public interface Element extends EObject
    * Returns the value of the '<em><b>Forth</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Named}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth</em>' containment reference list.
    * @see org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Bug317840TestLanguagePackage#getElement_Forth()

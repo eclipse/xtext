@@ -67,7 +67,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug299395Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
     if (isInited) return (Bug299395Package)EPackage.Registry.INSTANCE.getEPackage(Bug299395Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug299395PackageImpl theBug299395Package = (Bug299395PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug299395PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug299395PackageImpl());
+    Object registeredBug299395Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug299395PackageImpl theBug299395Package = registeredBug299395Package instanceof Bug299395PackageImpl ? (Bug299395PackageImpl)registeredBug299395Package : new Bug299395PackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
     // Mark meta-data to indicate it can't be changed
     theBug299395Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug299395Package.eNS_URI, theBug299395Package);
     return theBug299395Package;
@@ -109,6 +109,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Strings()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Keys()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -139,6 +142,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Values()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -149,6 +153,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_SubModel()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -159,6 +164,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubModel()
   {
     return subModelEClass;
@@ -169,6 +175,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSubModel_Strings()
   {
     return (EAttribute)subModelEClass.getEStructuralFeatures().get(0);
@@ -179,6 +186,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug299395Factory getBug299395Factory()
   {
     return (Bug299395Factory)getEFactoryInstance();

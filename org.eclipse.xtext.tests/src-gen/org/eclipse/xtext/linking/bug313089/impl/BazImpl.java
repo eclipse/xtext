@@ -87,6 +87,7 @@ public class BazImpl extends MinimalEObjectImpl.Container implements Baz
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -97,6 +98,7 @@ public class BazImpl extends MinimalEObjectImpl.Container implements Baz
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -110,6 +112,7 @@ public class BazImpl extends MinimalEObjectImpl.Container implements Baz
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Baz getChild()
   {
     return child;
@@ -137,6 +140,7 @@ public class BazImpl extends MinimalEObjectImpl.Container implements Baz
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(Baz newChild)
   {
     if (newChild != child)
@@ -255,7 +259,7 @@ public class BazImpl extends MinimalEObjectImpl.Container implements Baz
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

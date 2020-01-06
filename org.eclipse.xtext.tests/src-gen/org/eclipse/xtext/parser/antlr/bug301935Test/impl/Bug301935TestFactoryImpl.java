@@ -76,6 +76,7 @@ public class Bug301935TestFactoryImpl extends EFactoryImpl implements Bug301935T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class Bug301935TestFactoryImpl extends EFactoryImpl implements Bug301935T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug301935TestPackage getBug301935TestPackage()
   {
     return (Bug301935TestPackage)getEPackage();

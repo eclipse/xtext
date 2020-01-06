@@ -70,6 +70,7 @@ public class GroupImpl extends AbstractElementImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractElement> getTokens()
   {
     if (tokens == null)

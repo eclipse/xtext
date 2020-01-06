@@ -70,6 +70,7 @@ public class ChildrenImpl extends ContentImpl implements Children
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Child> getChildren()
   {
     if (children == null)

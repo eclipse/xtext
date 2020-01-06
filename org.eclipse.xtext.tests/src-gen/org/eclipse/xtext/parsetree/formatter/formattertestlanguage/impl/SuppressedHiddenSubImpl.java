@@ -74,6 +74,7 @@ public class SuppressedHiddenSubImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getIdval()
   {
     return idval;
@@ -84,6 +85,7 @@ public class SuppressedHiddenSubImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIdval(String newIdval)
   {
     String oldIdval = idval;
@@ -168,7 +170,7 @@ public class SuppressedHiddenSubImpl extends MinimalEObjectImpl.Container implem
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (idval: ");
     result.append(idval);
     result.append(')');

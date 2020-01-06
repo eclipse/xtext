@@ -84,6 +84,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -95,6 +96,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public WithoutHiddens createWithoutHiddens()
   {
     WithoutHiddensImpl withoutHiddens = new WithoutHiddensImpl();
@@ -106,6 +108,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public WithHiddens createWithHiddens()
   {
     WithHiddensImpl withHiddens = new WithHiddensImpl();
@@ -117,6 +120,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OverridingHiddens createOverridingHiddens()
   {
     OverridingHiddensImpl overridingHiddens = new OverridingHiddensImpl();
@@ -128,6 +132,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OverridingHiddensCall createOverridingHiddensCall()
   {
     OverridingHiddensCallImpl overridingHiddensCall = new OverridingHiddensCallImpl();
@@ -139,6 +144,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritingHiddens createInheritingHiddens()
   {
     InheritingHiddensImpl inheritingHiddens = new InheritingHiddensImpl();
@@ -150,6 +156,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeHiddens createDatatypeHiddens()
   {
     DatatypeHiddensImpl datatypeHiddens = new DatatypeHiddensImpl();
@@ -161,6 +168,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HidingHiddens createHidingHiddens()
   {
     HidingHiddensImpl hidingHiddens = new HidingHiddensImpl();
@@ -172,6 +180,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InheritingHiddensCall createInheritingHiddensCall()
   {
     InheritingHiddensCallImpl inheritingHiddensCall = new InheritingHiddensCallImpl();
@@ -183,6 +192,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HiddenTerminalsTestLanguagePackage getHiddenTerminalsTestLanguagePackage()
   {
     return (HiddenTerminalsTestLanguagePackage)getEPackage();

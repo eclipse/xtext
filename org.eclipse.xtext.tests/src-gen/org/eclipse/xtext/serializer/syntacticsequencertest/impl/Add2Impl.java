@@ -77,6 +77,7 @@ public class Add2Impl extends Exp2Impl implements Add2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp2 getLeft()
   {
     return left;
@@ -104,6 +105,7 @@ public class Add2Impl extends Exp2Impl implements Add2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Exp2 newLeft)
   {
     if (newLeft != left)
@@ -125,6 +127,7 @@ public class Add2Impl extends Exp2Impl implements Add2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Exp2 getRight()
   {
     return right;
@@ -152,6 +155,7 @@ public class Add2Impl extends Exp2Impl implements Add2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Exp2 newRight)
   {
     if (newRight != right)

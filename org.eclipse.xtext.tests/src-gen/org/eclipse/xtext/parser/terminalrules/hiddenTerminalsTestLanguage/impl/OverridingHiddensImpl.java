@@ -66,6 +66,7 @@ public class OverridingHiddensImpl extends ModelImpl implements OverridingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OverridingHiddensCall getCalled()
   {
     return called;
@@ -93,6 +94,7 @@ public class OverridingHiddensImpl extends ModelImpl implements OverridingHidden
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCalled(OverridingHiddensCall newCalled)
   {
     if (newCalled != called)

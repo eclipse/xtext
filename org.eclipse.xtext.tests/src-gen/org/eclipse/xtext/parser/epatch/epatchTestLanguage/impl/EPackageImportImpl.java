@@ -73,6 +73,7 @@ public class EPackageImportImpl extends ModelImportImpl implements EPackageImpor
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getNsURI()
   {
     return nsURI;
@@ -83,6 +84,7 @@ public class EPackageImportImpl extends ModelImportImpl implements EPackageImpor
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNsURI(String newNsURI)
   {
     String oldNsURI = nsURI;
@@ -167,7 +169,7 @@ public class EPackageImportImpl extends ModelImportImpl implements EPackageImpor
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (nsURI: ");
     result.append(nsURI);
     result.append(')');

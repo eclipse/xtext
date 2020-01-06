@@ -78,6 +78,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractMetamodelDeclaration getMetamodel()
   {
     if (metamodel != null && metamodel.eIsProxy())
@@ -108,6 +109,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMetamodel(AbstractMetamodelDeclaration newMetamodel)
   {
     AbstractMetamodelDeclaration oldMetamodel = metamodel;
@@ -121,6 +123,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClassifier getClassifier()
   {
     if (classifier != null && classifier.eIsProxy())
@@ -151,6 +154,7 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setClassifier(EClassifier newClassifier)
   {
     EClassifier oldClassifier = classifier;

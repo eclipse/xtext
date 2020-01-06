@@ -70,6 +70,7 @@ public class TrickyG1Impl extends TrickyG2Impl implements TrickyG1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<TrickyG2> getVals()
   {
     if (vals == null)

@@ -73,6 +73,7 @@ public class ExpressionExecutableImpl extends ExecutableImpl implements Expressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getExprstr()
   {
     return exprstr;
@@ -83,6 +84,7 @@ public class ExpressionExecutableImpl extends ExecutableImpl implements Expressi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExprstr(String newExprstr)
   {
     String oldExprstr = exprstr;
@@ -167,7 +169,7 @@ public class ExpressionExecutableImpl extends ExecutableImpl implements Expressi
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (exprstr: ");
     result.append(exprstr);
     result.append(')');

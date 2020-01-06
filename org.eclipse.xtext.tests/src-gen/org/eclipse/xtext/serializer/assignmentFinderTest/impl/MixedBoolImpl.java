@@ -74,6 +74,7 @@ public class MixedBoolImpl extends MinimalEObjectImpl.Container implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVal()
   {
     return val;
@@ -84,6 +85,7 @@ public class MixedBoolImpl extends MinimalEObjectImpl.Container implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(boolean newVal)
   {
     boolean oldVal = val;
@@ -168,7 +170,7 @@ public class MixedBoolImpl extends MinimalEObjectImpl.Container implements Mixed
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

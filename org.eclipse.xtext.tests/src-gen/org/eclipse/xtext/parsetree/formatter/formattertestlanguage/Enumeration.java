@@ -28,10 +28,6 @@ public interface Enumeration extends Line
    * The list contents are of type {@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1}.
    * The literals are from the enumeration {@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute list.
    * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Enum1

@@ -66,6 +66,7 @@ public class FooBarImpl extends AbstractBarImpl implements FooBar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bar getBar()
   {
     return bar;
@@ -93,6 +94,7 @@ public class FooBarImpl extends AbstractBarImpl implements FooBar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBar(Bar newBar)
   {
     if (newBar != bar)

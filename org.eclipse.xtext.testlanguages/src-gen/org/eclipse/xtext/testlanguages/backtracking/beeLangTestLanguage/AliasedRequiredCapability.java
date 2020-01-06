@@ -33,10 +33,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Name Space</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name Space</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name Space</em>' attribute.
    * @see #setNameSpace(String)
@@ -59,10 +55,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -85,10 +77,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Alias</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' attribute.
    * @see #setAlias(String)
@@ -111,10 +99,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Cond Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Cond Expr</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Cond Expr</em>' containment reference.
    * @see #setCondExpr(Expression)
@@ -137,10 +121,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Greedy</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Greedy</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Greedy</em>' attribute.
    * @see #setGreedy(boolean)
@@ -163,10 +143,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Min</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Min</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Min</em>' attribute.
    * @see #setMin(int)
@@ -189,10 +165,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Max</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Max</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Max</em>' attribute.
    * @see #setMax(int)
@@ -215,10 +187,6 @@ public interface AliasedRequiredCapability extends EObject
   /**
    * Returns the value of the '<em><b>Version Range</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Version Range</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Version Range</em>' attribute.
    * @see #setVersionRange(String)

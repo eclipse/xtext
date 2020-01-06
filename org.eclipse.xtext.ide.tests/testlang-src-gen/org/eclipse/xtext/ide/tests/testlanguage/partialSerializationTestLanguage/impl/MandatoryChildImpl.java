@@ -70,6 +70,7 @@ public class MandatoryChildImpl extends ModelImpl implements MandatoryChild
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryValue getChild()
   {
     return child;
@@ -97,6 +98,7 @@ public class MandatoryChildImpl extends ModelImpl implements MandatoryChild
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild(MandatoryValue newChild)
   {
     if (newChild != child)

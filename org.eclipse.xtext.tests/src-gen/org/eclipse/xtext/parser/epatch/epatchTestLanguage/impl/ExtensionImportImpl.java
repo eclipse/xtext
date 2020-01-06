@@ -65,6 +65,7 @@ public class ExtensionImportImpl extends ImportImpl implements ExtensionImport
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getPath()
   {
     if (path == null)
@@ -152,7 +153,7 @@ public class ExtensionImportImpl extends ImportImpl implements ExtensionImport
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (path: ");
     result.append(path);
     result.append(')');

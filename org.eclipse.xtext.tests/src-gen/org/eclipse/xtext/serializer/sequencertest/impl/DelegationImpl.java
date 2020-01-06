@@ -95,6 +95,7 @@ public class DelegationImpl extends MinimalEObjectImpl.Container implements Dele
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getP()
   {
     return p;
@@ -105,6 +106,7 @@ public class DelegationImpl extends MinimalEObjectImpl.Container implements Dele
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setP(String newP)
   {
     String oldP = p;
@@ -118,6 +120,7 @@ public class DelegationImpl extends MinimalEObjectImpl.Container implements Dele
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getNp()
   {
     return np;
@@ -128,6 +131,7 @@ public class DelegationImpl extends MinimalEObjectImpl.Container implements Dele
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNp(int newNp)
   {
     int oldNp = np;
@@ -222,7 +226,7 @@ public class DelegationImpl extends MinimalEObjectImpl.Container implements Dele
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (p: ");
     result.append(p);
     result.append(", np: ");

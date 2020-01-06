@@ -31,10 +31,6 @@ public interface EPatch extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -58,10 +54,6 @@ public interface EPatch extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage#getEPatch_Imports()
@@ -74,10 +66,6 @@ public interface EPatch extends EObject
    * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedResource}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Resources</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Resources</em>' containment reference list.
    * @see org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage#getEPatch_Resources()
@@ -90,10 +78,6 @@ public interface EPatch extends EObject
    * Returns the value of the '<em><b>Objects</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Objects</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Objects</em>' containment reference list.
    * @see org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage#getEPatch_Objects()

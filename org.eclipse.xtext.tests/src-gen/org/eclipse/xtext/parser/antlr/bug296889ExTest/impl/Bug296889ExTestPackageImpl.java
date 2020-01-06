@@ -91,7 +91,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug296889ExTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
     if (isInited) return (Bug296889ExTestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug296889ExTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug296889ExTestPackageImpl theBug296889ExTestPackage = (Bug296889ExTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug296889ExTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug296889ExTestPackageImpl());
+    Object registeredBug296889ExTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug296889ExTestPackageImpl theBug296889ExTestPackage = registeredBug296889ExTestPackage instanceof Bug296889ExTestPackageImpl ? (Bug296889ExTestPackageImpl)registeredBug296889ExTestPackage : new Bug296889ExTestPackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
     // Mark meta-data to indicate it can't be changed
     theBug296889ExTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug296889ExTestPackage.eNS_URI, theBug296889ExTestPackage);
     return theBug296889ExTestPackage;
@@ -133,6 +133,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Expressions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Values()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -163,6 +166,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -173,6 +177,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPreop()
   {
     return preopEClass;
@@ -183,6 +188,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPreop_FunctionName()
   {
     return (EAttribute)preopEClass.getEStructuralFeatures().get(0);
@@ -193,6 +199,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPreop_Expr()
   {
     return (EReference)preopEClass.getEStructuralFeatures().get(1);
@@ -203,6 +210,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPostop()
   {
     return postopEClass;
@@ -213,6 +221,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPostop_Expr()
   {
     return (EReference)postopEClass.getEStructuralFeatures().get(0);
@@ -223,6 +232,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPostop_FunctionName()
   {
     return (EAttribute)postopEClass.getEStructuralFeatures().get(1);
@@ -233,6 +243,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVariable()
   {
     return variableEClass;
@@ -243,6 +254,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVariable_Name()
   {
     return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
@@ -253,6 +265,7 @@ public class Bug296889ExTestPackageImpl extends EPackageImpl implements Bug29688
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug296889ExTestFactory getBug296889ExTestFactory()
   {
     return (Bug296889ExTestFactory)getEFactoryInstance();

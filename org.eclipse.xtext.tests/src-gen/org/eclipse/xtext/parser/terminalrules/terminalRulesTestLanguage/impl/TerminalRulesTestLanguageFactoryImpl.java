@@ -76,6 +76,7 @@ public class TerminalRulesTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class TerminalRulesTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TerminalRulesTestLanguagePackage getTerminalRulesTestLanguagePackage()
   {
     return (TerminalRulesTestLanguagePackage)getEPackage();

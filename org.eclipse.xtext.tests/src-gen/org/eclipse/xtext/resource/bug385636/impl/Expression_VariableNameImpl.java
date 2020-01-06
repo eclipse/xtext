@@ -66,6 +66,7 @@ public class Expression_VariableNameImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NVariableAccess getVariable()
   {
     return variable;
@@ -93,6 +94,7 @@ public class Expression_VariableNameImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVariable(NVariableAccess newVariable)
   {
     if (newVariable != variable)

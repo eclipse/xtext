@@ -58,7 +58,7 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link LiveContainerTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (LiveContainerTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LiveContainerTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    LiveContainerTestLanguagePackageImpl theLiveContainerTestLanguagePackage = (LiveContainerTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LiveContainerTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LiveContainerTestLanguagePackageImpl());
+    Object registeredLiveContainerTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    LiveContainerTestLanguagePackageImpl theLiveContainerTestLanguagePackage = registeredLiveContainerTestLanguagePackage instanceof LiveContainerTestLanguagePackageImpl ? (LiveContainerTestLanguagePackageImpl)registeredLiveContainerTestLanguagePackage : new LiveContainerTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
     // Mark meta-data to indicate it can't be changed
     theLiveContainerTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(LiveContainerTestLanguagePackage.eNS_URI, theLiveContainerTestLanguagePackage);
     return theLiveContainerTestLanguagePackage;
@@ -100,6 +100,7 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class LiveContainerTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LiveContainerTestLanguageFactory getLiveContainerTestLanguageFactory()
   {
     return (LiveContainerTestLanguageFactory)getEFactoryInstance();

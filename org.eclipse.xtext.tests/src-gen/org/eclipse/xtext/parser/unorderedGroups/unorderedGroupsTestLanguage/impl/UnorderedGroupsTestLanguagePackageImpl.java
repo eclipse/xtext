@@ -75,7 +75,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link UnorderedGroupsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
     if (isInited) return (UnorderedGroupsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(UnorderedGroupsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    UnorderedGroupsTestLanguagePackageImpl theUnorderedGroupsTestLanguagePackage = (UnorderedGroupsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnorderedGroupsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnorderedGroupsTestLanguagePackageImpl());
+    Object registeredUnorderedGroupsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    UnorderedGroupsTestLanguagePackageImpl theUnorderedGroupsTestLanguagePackage = registeredUnorderedGroupsTestLanguagePackage instanceof UnorderedGroupsTestLanguagePackageImpl ? (UnorderedGroupsTestLanguagePackageImpl)registeredUnorderedGroupsTestLanguagePackage : new UnorderedGroupsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
     // Mark meta-data to indicate it can't be changed
     theUnorderedGroupsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(UnorderedGroupsTestLanguagePackage.eNS_URI, theUnorderedGroupsTestLanguagePackage);
     return theUnorderedGroupsTestLanguagePackage;
@@ -117,6 +117,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -127,6 +128,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_First()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Second()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Third()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -157,6 +161,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Forth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
@@ -167,6 +172,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_FirstAsList()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -177,6 +183,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_SecondAsList()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
@@ -187,6 +194,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_ThirdAsList()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
@@ -197,6 +205,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_ForthAsList()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
@@ -207,6 +216,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Value()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(8);
@@ -217,6 +227,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Serialized()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(9);
@@ -227,6 +238,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_NestedModel()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(10);
@@ -237,6 +249,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNestedModel()
   {
     return nestedModelEClass;
@@ -247,6 +260,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNestedModel_First()
   {
     return (EAttribute)nestedModelEClass.getEStructuralFeatures().get(0);
@@ -257,6 +271,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNestedModel_Second()
   {
     return (EAttribute)nestedModelEClass.getEStructuralFeatures().get(1);
@@ -267,6 +282,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedSerialization()
   {
     return unorderedSerializationEClass;
@@ -277,6 +293,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_First()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(0);
@@ -287,6 +304,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_Second()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(1);
@@ -297,6 +315,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_Third()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(2);
@@ -307,6 +326,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_Forth()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(3);
@@ -317,6 +337,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_FirstAsList()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(4);
@@ -327,6 +348,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedSerialization_SecondAsList()
   {
     return (EAttribute)unorderedSerializationEClass.getEStructuralFeatures().get(5);
@@ -337,6 +359,7 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupsTestLanguageFactory getUnorderedGroupsTestLanguageFactory()
   {
     return (UnorderedGroupsTestLanguageFactory)getEFactoryInstance();

@@ -63,7 +63,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SimpleTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -78,7 +78,8 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     if (isInited) return (SimpleTestPackage)EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleTestPackageImpl());
+    Object registeredSimpleTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SimpleTestPackageImpl theSimpleTestPackage = registeredSimpleTestPackage instanceof SimpleTestPackageImpl ? (SimpleTestPackageImpl)registeredSimpleTestPackage : new SimpleTestPackageImpl();
 
     isInited = true;
 
@@ -86,7 +87,8 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     EcorePackage.eINSTANCE.eClass();
 
     // Obtain or create and register interdependencies
-    OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI) : OtherTestPackage.eINSTANCE);
+    Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI);
+    OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(registeredPackage instanceof OtherTestPackageImpl ? registeredPackage : OtherTestPackage.eINSTANCE);
 
     // Create package meta-data objects
     theSimpleTestPackage.createPackageContents();
@@ -99,7 +101,6 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     // Mark meta-data to indicate it can't be changed
     theSimpleTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimpleTestPackage.eNS_URI, theSimpleTestPackage);
     return theSimpleTestPackage;
@@ -110,6 +111,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoo()
   {
     return fooEClass;
@@ -120,6 +122,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFoo_Name()
   {
     return (EAttribute)fooEClass.getEStructuralFeatures().get(0);
@@ -130,6 +133,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoo_NameRefs()
   {
     return (EReference)fooEClass.getEStructuralFeatures().get(1);
@@ -140,6 +144,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleTestFactory getSimpleTestFactory()
   {
     return (SimpleTestFactory)getEFactoryInstance();

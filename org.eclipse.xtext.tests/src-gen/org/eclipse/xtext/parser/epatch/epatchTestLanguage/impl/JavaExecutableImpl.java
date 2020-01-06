@@ -73,6 +73,7 @@ public class JavaExecutableImpl extends ExecutableImpl implements JavaExecutable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getMethod()
   {
     return method;
@@ -83,6 +84,7 @@ public class JavaExecutableImpl extends ExecutableImpl implements JavaExecutable
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMethod(String newMethod)
   {
     String oldMethod = method;
@@ -167,7 +169,7 @@ public class JavaExecutableImpl extends ExecutableImpl implements JavaExecutable
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (method: ");
     result.append(method);
     result.append(')');

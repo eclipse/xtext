@@ -116,6 +116,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getCardinality()
   {
     return cardinality;
@@ -126,6 +127,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCardinality(String newCardinality)
   {
     String oldCardinality = cardinality;
@@ -139,6 +141,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isPredicated()
   {
     return predicated;
@@ -149,6 +152,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPredicated(boolean newPredicated)
   {
     boolean oldPredicated = predicated;
@@ -162,6 +166,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFirstSetPredicated()
   {
     return firstSetPredicated;
@@ -172,6 +177,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirstSetPredicated(boolean newFirstSetPredicated)
   {
     boolean oldFirstSetPredicated = firstSetPredicated;
@@ -276,7 +282,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (cardinality: ");
     result.append(cardinality);
     result.append(", predicated: ");

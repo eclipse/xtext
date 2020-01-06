@@ -70,6 +70,7 @@ public class TestLinewrapImpl extends RootImpl implements TestLinewrap
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Line> getItems()
   {
     if (items == null)

@@ -75,6 +75,7 @@ public class ValueExclusionTestImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ValueExclusionTestEn getVal()
   {
     return val;
@@ -85,6 +86,7 @@ public class ValueExclusionTestImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(ValueExclusionTestEn newVal)
   {
     ValueExclusionTestEn oldVal = val;
@@ -169,7 +171,7 @@ public class ValueExclusionTestImpl extends MinimalEObjectImpl.Container impleme
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

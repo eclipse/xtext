@@ -70,6 +70,7 @@ public class TestLinewrapMinMaxImpl extends RootImpl implements TestLinewrapMinM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Line> getItems()
   {
     if (items == null)

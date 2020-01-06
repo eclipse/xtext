@@ -87,6 +87,7 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LookAhead2 getY()
   {
     return y;
@@ -114,6 +115,7 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setY(LookAhead2 newY)
   {
     if (newY != y)
@@ -135,6 +137,7 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getZ()
   {
     return z;
@@ -145,6 +148,7 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setZ(String newZ)
   {
     String oldZ = z;
@@ -255,7 +259,7 @@ public class LookAhead1Impl extends AltsImpl implements LookAhead1
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (z: ");
     result.append(z);
     result.append(')');

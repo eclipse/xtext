@@ -75,6 +75,7 @@ public class SecondFactoryImpl extends EFactoryImpl implements SecondFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Second createSecond()
   {
     SecondImpl second = new SecondImpl();
@@ -86,6 +87,7 @@ public class SecondFactoryImpl extends EFactoryImpl implements SecondFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SecondPackage getSecondPackage()
   {
     return (SecondPackage)getEPackage();

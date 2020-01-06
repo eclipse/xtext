@@ -79,6 +79,7 @@ public class Bug287184TestFactoryImpl extends EFactoryImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -90,6 +91,7 @@ public class Bug287184TestFactoryImpl extends EFactoryImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractDetail createAbstractDetail()
   {
     AbstractDetailImpl abstractDetail = new AbstractDetailImpl();
@@ -101,6 +103,7 @@ public class Bug287184TestFactoryImpl extends EFactoryImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Detail createDetail()
   {
     DetailImpl detail = new DetailImpl();
@@ -112,6 +115,7 @@ public class Bug287184TestFactoryImpl extends EFactoryImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AssociatedDetail createAssociatedDetail()
   {
     AssociatedDetailImpl associatedDetail = new AssociatedDetailImpl();
@@ -123,6 +127,7 @@ public class Bug287184TestFactoryImpl extends EFactoryImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug287184TestPackage getBug287184TestPackage()
   {
     return (Bug287184TestPackage)getEPackage();

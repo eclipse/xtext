@@ -91,7 +91,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BacktrackingBug325745TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
     if (isInited) return (BacktrackingBug325745TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(BacktrackingBug325745TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    BacktrackingBug325745TestLanguagePackageImpl theBacktrackingBug325745TestLanguagePackage = (BacktrackingBug325745TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BacktrackingBug325745TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BacktrackingBug325745TestLanguagePackageImpl());
+    Object registeredBacktrackingBug325745TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BacktrackingBug325745TestLanguagePackageImpl theBacktrackingBug325745TestLanguagePackage = registeredBacktrackingBug325745TestLanguagePackage instanceof BacktrackingBug325745TestLanguagePackageImpl ? (BacktrackingBug325745TestLanguagePackageImpl)registeredBacktrackingBug325745TestLanguagePackage : new BacktrackingBug325745TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
     // Mark meta-data to indicate it can't be changed
     theBacktrackingBug325745TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BacktrackingBug325745TestLanguagePackage.eNS_URI, theBacktrackingBug325745TestLanguagePackage);
     return theBacktrackingBug325745TestLanguagePackage;
@@ -133,6 +133,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Fields()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -163,6 +166,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -173,6 +177,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_DataType()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -183,6 +188,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Expression()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -193,6 +199,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDataType()
   {
     return dataTypeEClass;
@@ -203,6 +210,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDataType_BaseType()
   {
     return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(0);
@@ -213,6 +221,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDataType_DefaultValue()
   {
     return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(1);
@@ -223,6 +232,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -233,6 +243,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExpression_Prefix()
   {
     return (EAttribute)expressionEClass.getEStructuralFeatures().get(0);
@@ -243,6 +254,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Terms()
   {
     return (EReference)expressionEClass.getEStructuralFeatures().get(1);
@@ -253,6 +265,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExpression_Postfix()
   {
     return (EAttribute)expressionEClass.getEStructuralFeatures().get(2);
@@ -263,6 +276,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleTerm()
   {
     return simpleTermEClass;
@@ -273,6 +287,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleTerm_LineCount()
   {
     return (EAttribute)simpleTermEClass.getEStructuralFeatures().get(0);
@@ -283,6 +298,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleTerm_CharCount()
   {
     return (EAttribute)simpleTermEClass.getEStructuralFeatures().get(1);
@@ -293,6 +309,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleTerm_CharSet()
   {
     return (EAttribute)simpleTermEClass.getEStructuralFeatures().get(2);
@@ -303,6 +320,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleTerm_RefChar()
   {
     return (EAttribute)simpleTermEClass.getEStructuralFeatures().get(3);
@@ -313,6 +331,7 @@ public class BacktrackingBug325745TestLanguagePackageImpl extends EPackageImpl i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BacktrackingBug325745TestLanguageFactory getBacktrackingBug325745TestLanguageFactory()
   {
     return (BacktrackingBug325745TestLanguageFactory)getEFactoryInstance();

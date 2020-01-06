@@ -69,6 +69,7 @@ public class ManyValuesImpl extends ManyOptionalValuesImpl implements ManyValues
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getName()
   {
     if (name == null)
@@ -156,7 +157,7 @@ public class ManyValuesImpl extends ManyOptionalValuesImpl implements ManyValues
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

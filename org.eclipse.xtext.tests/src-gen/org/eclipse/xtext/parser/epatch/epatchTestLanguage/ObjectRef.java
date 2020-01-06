@@ -29,10 +29,6 @@ public interface ObjectRef extends NamedObject
   /**
    * Returns the value of the '<em><b>Left Res</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left Res</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Res</em>' reference.
    * @see #setLeftRes(NamedResource)
@@ -55,10 +51,6 @@ public interface ObjectRef extends NamedObject
   /**
    * Returns the value of the '<em><b>Left Frag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Left Frag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Frag</em>' attribute.
    * @see #setLeftFrag(String)
@@ -81,10 +73,6 @@ public interface ObjectRef extends NamedObject
   /**
    * Returns the value of the '<em><b>Right Res</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Res</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Res</em>' reference.
    * @see #setRightRes(NamedResource)
@@ -107,10 +95,6 @@ public interface ObjectRef extends NamedObject
   /**
    * Returns the value of the '<em><b>Right Frag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Frag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Frag</em>' attribute.
    * @see #setRightFrag(String)
@@ -133,10 +117,6 @@ public interface ObjectRef extends NamedObject
   /**
    * Returns the value of the '<em><b>Right Mig</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Right Mig</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Mig</em>' containment reference.
    * @see #setRightMig(Migration)

@@ -98,6 +98,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExistingEnum getExisting()
   {
     return existing;
@@ -108,6 +109,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExisting(ExistingEnum newExisting)
   {
     ExistingEnum oldExisting = existing;
@@ -121,6 +123,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GeneratedEnum getGenerated()
   {
     return generated;
@@ -131,6 +134,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGenerated(GeneratedEnum newGenerated)
   {
     GeneratedEnum oldGenerated = generated;
@@ -225,7 +229,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (existing: ");
     result.append(existing);
     result.append(", generated: ");

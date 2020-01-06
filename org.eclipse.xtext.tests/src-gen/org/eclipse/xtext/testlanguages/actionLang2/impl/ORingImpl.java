@@ -71,6 +71,7 @@ public class ORingImpl extends MinimalEObjectImpl.Container implements ORing
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ORing> getDisjuncts()
   {
     if (disjuncts == null)

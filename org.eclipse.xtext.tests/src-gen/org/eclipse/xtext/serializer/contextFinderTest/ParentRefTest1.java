@@ -26,10 +26,6 @@ public interface ParentRefTest1 extends EObject
   /**
    * Returns the value of the '<em><b>Child1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Child1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Child1</em>' containment reference.
    * @see #setChild1(ParentRefTestChild)

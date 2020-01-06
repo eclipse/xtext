@@ -111,6 +111,7 @@ public class AssignImpl extends LineImpl implements Assign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVar()
   {
     return var;
@@ -121,6 +122,7 @@ public class AssignImpl extends LineImpl implements Assign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVar(String newVar)
   {
     String oldVar = var;
@@ -134,6 +136,7 @@ public class AssignImpl extends LineImpl implements Assign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOp()
   {
     return op;
@@ -144,6 +147,7 @@ public class AssignImpl extends LineImpl implements Assign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOp(String newOp)
   {
     String oldOp = op;
@@ -157,6 +161,7 @@ public class AssignImpl extends LineImpl implements Assign
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getVal()
   {
     if (val == null)
@@ -264,7 +269,7 @@ public class AssignImpl extends LineImpl implements Assign
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (var: ");
     result.append(var);
     result.append(", op: ");

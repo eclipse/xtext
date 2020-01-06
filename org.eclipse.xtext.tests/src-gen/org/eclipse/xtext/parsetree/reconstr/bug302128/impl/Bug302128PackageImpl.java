@@ -67,7 +67,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug302128Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
     if (isInited) return (Bug302128Package)EPackage.Registry.INSTANCE.getEPackage(Bug302128Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug302128PackageImpl theBug302128Package = (Bug302128PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug302128PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug302128PackageImpl());
+    Object registeredBug302128Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug302128PackageImpl theBug302128Package = registeredBug302128Package instanceof Bug302128PackageImpl ? (Bug302128PackageImpl)registeredBug302128Package : new Bug302128PackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
     // Mark meta-data to indicate it can't be changed
     theBug302128Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug302128Package.eNS_URI, theBug302128Package);
     return theBug302128Package;
@@ -109,6 +109,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -139,6 +142,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Value()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class Bug302128PackageImpl extends EPackageImpl implements Bug302128Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug302128Factory getBug302128Factory()
   {
     return (Bug302128Factory)getEFactoryInstance();

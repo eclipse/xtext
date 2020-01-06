@@ -84,6 +84,7 @@ public class ModelElementImpl extends MinimalEObjectImpl.Container implements Mo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Contained> getContainments()
   {
     if (containments == null)
@@ -98,6 +99,7 @@ public class ModelElementImpl extends MinimalEObjectImpl.Container implements Mo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Contained> getRefs()
   {
     if (refs == null)

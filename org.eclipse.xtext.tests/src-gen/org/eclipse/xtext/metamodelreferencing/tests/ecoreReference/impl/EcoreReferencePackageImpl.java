@@ -88,7 +88,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link EcoreReferencePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -103,11 +103,13 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
     if (isInited) return (EcoreReferencePackage)EPackage.Registry.INSTANCE.getEPackage(EcoreReferencePackage.eNS_URI);
 
     // Obtain or create and register package
-    EcoreReferencePackageImpl theEcoreReferencePackage = (EcoreReferencePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EcoreReferencePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EcoreReferencePackageImpl());
+    Object registeredEcoreReferencePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    EcoreReferencePackageImpl theEcoreReferencePackage = registeredEcoreReferencePackage instanceof EcoreReferencePackageImpl ? (EcoreReferencePackageImpl)registeredEcoreReferencePackage : new EcoreReferencePackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     EcorePerNsURIPackage.eINSTANCE.eClass();
     EcorePerPlatformPluginPackage.eINSTANCE.eClass();
     EcorePerPlatformResourcePackage.eINSTANCE.eClass();
@@ -121,7 +123,6 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
     // Mark meta-data to indicate it can't be changed
     theEcoreReferencePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(EcoreReferencePackage.eNS_URI, theEcoreReferencePackage);
     return theEcoreReferencePackage;
@@ -132,6 +133,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -142,6 +144,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Extends()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -152,6 +155,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyNamedElement_01()
   {
     return myNamedElement_01EClass;
@@ -162,6 +166,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyNamedElement_02()
   {
     return myNamedElement_02EClass;
@@ -172,6 +177,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyNamedElement_03()
   {
     return myNamedElement_03EClass;
@@ -182,6 +188,7 @@ public class EcoreReferencePackageImpl extends EPackageImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EcoreReferenceFactory getEcoreReferenceFactory()
   {
     return (EcoreReferenceFactory)getEFactoryInstance();

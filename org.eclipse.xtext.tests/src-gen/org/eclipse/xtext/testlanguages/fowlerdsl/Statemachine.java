@@ -31,10 +31,6 @@ public interface Statemachine extends EObject
    * Returns the value of the '<em><b>Events</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.fowlerdsl.Event}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Events</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage#getStatemachine_Events()
@@ -47,10 +43,6 @@ public interface Statemachine extends EObject
    * Returns the value of the '<em><b>Commands</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.fowlerdsl.Command}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Commands</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Commands</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage#getStatemachine_Commands()
@@ -63,10 +55,6 @@ public interface Statemachine extends EObject
    * Returns the value of the '<em><b>States</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.fowlerdsl.State}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>States</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>States</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage#getStatemachine_States()

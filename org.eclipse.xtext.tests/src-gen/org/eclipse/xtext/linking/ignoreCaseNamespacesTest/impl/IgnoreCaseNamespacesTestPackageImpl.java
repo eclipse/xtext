@@ -69,7 +69,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IgnoreCaseNamespacesTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -84,11 +84,13 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
     if (isInited) return (IgnoreCaseNamespacesTestPackage)EPackage.Registry.INSTANCE.getEPackage(IgnoreCaseNamespacesTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    IgnoreCaseNamespacesTestPackageImpl theIgnoreCaseNamespacesTestPackage = (IgnoreCaseNamespacesTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IgnoreCaseNamespacesTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IgnoreCaseNamespacesTestPackageImpl());
+    Object registeredIgnoreCaseNamespacesTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IgnoreCaseNamespacesTestPackageImpl theIgnoreCaseNamespacesTestPackage = registeredIgnoreCaseNamespacesTestPackage instanceof IgnoreCaseNamespacesTestPackageImpl ? (IgnoreCaseNamespacesTestPackageImpl)registeredIgnoreCaseNamespacesTestPackage : new IgnoreCaseNamespacesTestPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     IgnoreCaseLinkingTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -100,7 +102,6 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
     // Mark meta-data to indicate it can't be changed
     theIgnoreCaseNamespacesTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IgnoreCaseNamespacesTestPackage.eNS_URI, theIgnoreCaseNamespacesTestPackage);
     return theIgnoreCaseNamespacesTestPackage;
@@ -111,6 +112,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -121,6 +123,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -131,6 +134,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -141,6 +145,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -151,6 +156,7 @@ public class IgnoreCaseNamespacesTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseNamespacesTestFactory getIgnoreCaseNamespacesTestFactory()
   {
     return (IgnoreCaseNamespacesTestFactory)getEFactoryInstance();

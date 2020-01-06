@@ -58,7 +58,7 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link BaseInheritanceTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
     if (isInited) return (BaseInheritanceTestPackage)EPackage.Registry.INSTANCE.getEPackage(BaseInheritanceTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = (BaseInheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BaseInheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BaseInheritanceTestPackageImpl());
+    Object registeredBaseInheritanceTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = registeredBaseInheritanceTestPackage instanceof BaseInheritanceTestPackageImpl ? (BaseInheritanceTestPackageImpl)registeredBaseInheritanceTestPackage : new BaseInheritanceTestPackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
     // Mark meta-data to indicate it can't be changed
     theBaseInheritanceTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(BaseInheritanceTestPackage.eNS_URI, theBaseInheritanceTestPackage);
     return theBaseInheritanceTestPackage;
@@ -100,6 +100,7 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BaseInheritanceTestFactory getBaseInheritanceTestFactory()
   {
     return (BaseInheritanceTestFactory)getEFactoryInstance();

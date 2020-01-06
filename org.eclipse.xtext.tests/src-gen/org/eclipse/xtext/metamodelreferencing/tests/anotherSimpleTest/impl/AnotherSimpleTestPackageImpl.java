@@ -61,7 +61,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link AnotherSimpleTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -76,11 +76,13 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
     if (isInited) return (AnotherSimpleTestPackage)EPackage.Registry.INSTANCE.getEPackage(AnotherSimpleTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    AnotherSimpleTestPackageImpl theAnotherSimpleTestPackage = (AnotherSimpleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AnotherSimpleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AnotherSimpleTestPackageImpl());
+    Object registeredAnotherSimpleTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    AnotherSimpleTestPackageImpl theAnotherSimpleTestPackage = registeredAnotherSimpleTestPackage instanceof AnotherSimpleTestPackageImpl ? (AnotherSimpleTestPackageImpl)registeredAnotherSimpleTestPackage : new AnotherSimpleTestPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
     XtextPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -92,7 +94,6 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
     // Mark meta-data to indicate it can't be changed
     theAnotherSimpleTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(AnotherSimpleTestPackage.eNS_URI, theAnotherSimpleTestPackage);
     return theAnotherSimpleTestPackage;
@@ -103,6 +104,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFoo()
   {
     return fooEClass;
@@ -113,6 +115,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFoo_Name()
   {
     return (EAttribute)fooEClass.getEStructuralFeatures().get(0);
@@ -123,6 +126,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFoo_NameRefs()
   {
     return (EReference)fooEClass.getEStructuralFeatures().get(1);
@@ -133,6 +137,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnotherSimpleTestFactory getAnotherSimpleTestFactory()
   {
     return (AnotherSimpleTestFactory)getEFactoryInstance();

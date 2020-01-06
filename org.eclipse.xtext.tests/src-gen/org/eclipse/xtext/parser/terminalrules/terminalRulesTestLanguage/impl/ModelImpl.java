@@ -221,6 +221,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getIdValue()
   {
     return idValue;
@@ -231,6 +232,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIdValue(String newIdValue)
   {
     String oldIdValue = idValue;
@@ -244,6 +246,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getIntValue()
   {
     return intValue;
@@ -254,6 +257,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIntValue(String newIntValue)
   {
     String oldIntValue = intValue;
@@ -267,6 +271,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getStringValue()
   {
     return stringValue;
@@ -277,6 +282,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStringValue(String newStringValue)
   {
     String oldStringValue = stringValue;
@@ -290,6 +296,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRichStringValue()
   {
     return richStringValue;
@@ -300,6 +307,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRichStringValue(String newRichStringValue)
   {
     String oldRichStringValue = richStringValue;
@@ -313,6 +321,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getMlCommentValue()
   {
     return mlCommentValue;
@@ -323,6 +332,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMlCommentValue(String newMlCommentValue)
   {
     String oldMlCommentValue = mlCommentValue;
@@ -336,6 +346,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSlCommentValue()
   {
     return slCommentValue;
@@ -346,6 +357,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSlCommentValue(String newSlCommentValue)
   {
     String oldSlCommentValue = slCommentValue;
@@ -359,6 +371,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getWsValue()
   {
     return wsValue;
@@ -369,6 +382,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setWsValue(String newWsValue)
   {
     String oldWsValue = wsValue;
@@ -382,6 +396,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAnyValue()
   {
     return anyValue;
@@ -392,6 +407,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAnyValue(String newAnyValue)
   {
     String oldAnyValue = anyValue;
@@ -546,7 +562,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (idValue: ");
     result.append(idValue);
     result.append(", intValue: ");

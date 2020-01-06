@@ -58,7 +58,7 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug406914TestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
     if (isInited) return (Bug406914TestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug406914TestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug406914TestPackageImpl theBug406914TestPackage = (Bug406914TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug406914TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug406914TestPackageImpl());
+    Object registeredBug406914TestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug406914TestPackageImpl theBug406914TestPackage = registeredBug406914TestPackage instanceof Bug406914TestPackageImpl ? (Bug406914TestPackageImpl)registeredBug406914TestPackage : new Bug406914TestPackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
     // Mark meta-data to indicate it can't be changed
     theBug406914TestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug406914TestPackage.eNS_URI, theBug406914TestPackage);
     return theBug406914TestPackage;
@@ -100,6 +100,7 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class Bug406914TestPackageImpl extends EPackageImpl implements Bug406914T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug406914TestFactory getBug406914TestFactory()
   {
     return (Bug406914TestFactory)getEFactoryInstance();

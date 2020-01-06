@@ -61,7 +61,7 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link WithtransientPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -76,7 +76,8 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 		if (isInited) return (WithtransientPackage)EPackage.Registry.INSTANCE.getEPackage(WithtransientPackage.eNS_URI);
 
 		// Obtain or create and register package
-		WithtransientPackageImpl theWithtransientPackage = (WithtransientPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof WithtransientPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new WithtransientPackageImpl());
+		Object registeredWithtransientPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		WithtransientPackageImpl theWithtransientPackage = registeredWithtransientPackage instanceof WithtransientPackageImpl ? (WithtransientPackageImpl)registeredWithtransientPackage : new WithtransientPackageImpl();
 
 		isInited = true;
 
@@ -89,7 +90,6 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 		// Mark meta-data to indicate it can't be changed
 		theWithtransientPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(WithtransientPackage.eNS_URI, theWithtransientPackage);
 		return theWithtransientPackage;
@@ -100,6 +100,7 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getWithTransient()
 	{
 		return withTransientEClass;
@@ -110,6 +111,7 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWithTransient_Name()
 	{
 		return (EAttribute)withTransientEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getWithTransient_PackageName()
 	{
 		return (EAttribute)withTransientEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class WithtransientPackageImpl extends EPackageImpl implements Withtransi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WithtransientFactory getWithtransientFactory()
 	{
 		return (WithtransientFactory)getEFactoryInstance();

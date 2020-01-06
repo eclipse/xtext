@@ -78,6 +78,7 @@ public class Bug289524TestFactoryImpl extends EFactoryImpl implements Bug289524T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -89,6 +90,7 @@ public class Bug289524TestFactoryImpl extends EFactoryImpl implements Bug289524T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelElement createModelElement()
   {
     ModelElementImpl modelElement = new ModelElementImpl();
@@ -100,6 +102,7 @@ public class Bug289524TestFactoryImpl extends EFactoryImpl implements Bug289524T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Contained createContained()
   {
     ContainedImpl contained = new ContainedImpl();
@@ -111,6 +114,7 @@ public class Bug289524TestFactoryImpl extends EFactoryImpl implements Bug289524T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug289524TestPackage getBug289524TestPackage()
   {
     return (Bug289524TestPackage)getEPackage();

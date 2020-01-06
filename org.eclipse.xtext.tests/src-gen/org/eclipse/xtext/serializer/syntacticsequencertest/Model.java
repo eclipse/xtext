@@ -41,10 +41,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X1</em>' containment reference.
    * @see #setX1(MandatoryKeywords)
@@ -67,10 +63,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X2</em>' containment reference.
    * @see #setX2(Exp0)
@@ -93,10 +85,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X3</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X3</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X3</em>' containment reference.
    * @see #setX3(Exp1)
@@ -119,10 +107,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X4</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X4</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X4</em>' containment reference.
    * @see #setX4(Exp2)
@@ -145,10 +129,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X5</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X5</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X5</em>' containment reference.
    * @see #setX5(SingleCrossReference)
@@ -171,10 +151,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X6</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X6</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X6</em>' containment reference.
    * @see #setX6(BooleanAlternative)
@@ -197,10 +173,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X7</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X7</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X7</em>' containment reference.
    * @see #setX7(UnassignedDatatype)
@@ -223,10 +195,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X8</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X8</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X8</em>' containment reference.
    * @see #setX8(OptionalSingleTransition)
@@ -249,10 +217,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X9</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X9</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X9</em>' containment reference.
    * @see #setX9(OptionalManyTransition)
@@ -275,10 +239,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X10</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X10</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X10</em>' containment reference.
    * @see #setX10(MandatoryManyTransition)
@@ -301,10 +261,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X11</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X11</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X11</em>' containment reference.
    * @see #setX11(AlternativeTransition)
@@ -327,10 +283,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X12</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X12</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X12</em>' containment reference.
    * @see #setX12(BooleanValues)
@@ -353,10 +305,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X13</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X13</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X13</em>' containment reference.
    * @see #setX13(LongAlternative)
@@ -379,10 +327,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X14</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X14</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X14</em>' containment reference.
    * @see #setX14(ActionOnly)
@@ -405,10 +349,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X15</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X15</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X15</em>' containment reference.
    * @see #setX15(FragmentCallerType)
@@ -431,10 +371,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>X16</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>X16</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>X16</em>' containment reference.
    * @see #setX16(Bug398890)

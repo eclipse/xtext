@@ -28,10 +28,6 @@ public interface Optional extends EObject
   /**
    * Returns the value of the '<em><b>Int0</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int0</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int0</em>' attribute.
    * @see #setInt0(int)
@@ -54,10 +50,6 @@ public interface Optional extends EObject
   /**
    * Returns the value of the '<em><b>Int1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int1</em>' attribute.
    * @see #setInt1(int)
@@ -80,10 +72,6 @@ public interface Optional extends EObject
   /**
    * Returns the value of the '<em><b>Int2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Int2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Int2</em>' attribute.
    * @see #setInt2(int)

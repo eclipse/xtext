@@ -31,10 +31,6 @@ public interface Combination4 extends EObject
    * Returns the value of the '<em><b>Val1</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getCombination4_Val1()
@@ -47,10 +43,6 @@ public interface Combination4 extends EObject
    * Returns the value of the '<em><b>Val2</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val2</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val2</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getCombination4_Val2()
@@ -63,10 +55,6 @@ public interface Combination4 extends EObject
    * Returns the value of the '<em><b>Val3</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val3</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val3</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getCombination4_Val3()

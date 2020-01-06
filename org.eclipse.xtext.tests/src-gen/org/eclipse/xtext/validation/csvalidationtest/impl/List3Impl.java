@@ -91,6 +91,7 @@ public class List3Impl extends MinimalEObjectImpl.Container implements List3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -105,6 +106,7 @@ public class List3Impl extends MinimalEObjectImpl.Container implements List3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal2()
   {
     return val2;
@@ -115,6 +117,7 @@ public class List3Impl extends MinimalEObjectImpl.Container implements List3
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(String newVal2)
   {
     String oldVal2 = val2;
@@ -211,7 +214,7 @@ public class List3Impl extends MinimalEObjectImpl.Container implements List3
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

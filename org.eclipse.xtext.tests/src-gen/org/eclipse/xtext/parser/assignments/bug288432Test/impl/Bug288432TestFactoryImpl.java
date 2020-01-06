@@ -83,6 +83,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Body createBody()
   {
     BodyImpl body = new BodyImpl();
@@ -94,6 +95,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Foo createFoo()
   {
     FooImpl foo = new FooImpl();
@@ -105,6 +107,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Content createContent()
   {
     ContentImpl content = new ContentImpl();
@@ -116,6 +119,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyElement createMyElement()
   {
     MyElementImpl myElement = new MyElementImpl();
@@ -127,6 +131,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterObject createParameterObject()
   {
     ParameterObjectImpl parameterObject = new ParameterObjectImpl();
@@ -138,6 +143,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
@@ -149,6 +155,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterRef createParameterRef()
   {
     ParameterRefImpl parameterRef = new ParameterRefImpl();
@@ -160,6 +167,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyInt createMyInt()
   {
     MyIntImpl myInt = new MyIntImpl();
@@ -171,6 +179,7 @@ public class Bug288432TestFactoryImpl extends EFactoryImpl implements Bug288432T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug288432TestPackage getBug288432TestPackage()
   {
     return (Bug288432TestPackage)getEPackage();

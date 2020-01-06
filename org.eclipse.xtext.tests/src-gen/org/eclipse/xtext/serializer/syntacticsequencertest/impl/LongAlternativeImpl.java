@@ -168,6 +168,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFoo()
   {
     return foo;
@@ -178,6 +179,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFoo(String newFoo)
   {
     String oldFoo = foo;
@@ -191,6 +193,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -205,6 +208,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal2()
   {
     if (val2 == null)
@@ -219,6 +223,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal3()
   {
     if (val3 == null)
@@ -233,6 +238,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal4()
   {
     if (val4 == null)
@@ -247,6 +253,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal5()
   {
     if (val5 == null)
@@ -261,6 +268,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal6()
   {
     if (val6 == null)
@@ -275,6 +283,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal7()
   {
     if (val7 == null)
@@ -289,6 +298,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal8()
   {
     if (val8 == null)
@@ -463,7 +473,7 @@ public class LongAlternativeImpl extends MinimalEObjectImpl.Container implements
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (foo: ");
     result.append(foo);
     result.append(", val1: ");

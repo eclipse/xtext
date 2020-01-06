@@ -26,10 +26,6 @@ public interface TestOptional extends Root
   /**
    * Returns the value of the '<em><b>Opt1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Opt1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Opt1</em>' attribute.
    * @see #setOpt1(int)
@@ -52,10 +48,6 @@ public interface TestOptional extends Root
   /**
    * Returns the value of the '<em><b>Opt2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Opt2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Opt2</em>' attribute.
    * @see #setOpt2(int)

@@ -75,7 +75,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ActionLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
     if (isInited) return (ActionLangPackage)EPackage.Registry.INSTANCE.getEPackage(ActionLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    ActionLangPackageImpl theActionLangPackage = (ActionLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ActionLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ActionLangPackageImpl());
+    Object registeredActionLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ActionLangPackageImpl theActionLangPackage = registeredActionLangPackage instanceof ActionLangPackageImpl ? (ActionLangPackageImpl)registeredActionLangPackage : new ActionLangPackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
     // Mark meta-data to indicate it can't be changed
     theActionLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ActionLangPackage.eNS_URI, theActionLangPackage);
     return theActionLangPackage;
@@ -117,6 +117,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -127,6 +128,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild()
   {
     return childEClass;
@@ -137,6 +139,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild_Name()
   {
     return (EAttribute)childEClass.getEStructuralFeatures().get(0);
@@ -147,6 +150,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParent()
   {
     return parentEClass;
@@ -157,6 +161,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParent_Left()
   {
     return (EReference)parentEClass.getEStructuralFeatures().get(0);
@@ -167,6 +172,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParent_Right()
   {
     return (EReference)parentEClass.getEStructuralFeatures().get(1);
@@ -177,6 +183,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActionLangFactory getActionLangFactory()
   {
     return (ActionLangFactory)getEFactoryInstance();

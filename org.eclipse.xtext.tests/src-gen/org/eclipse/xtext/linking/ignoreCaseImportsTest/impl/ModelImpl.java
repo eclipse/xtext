@@ -70,6 +70,7 @@ public class ModelImpl extends org.eclipse.xtext.linking.ignoreCaseLinkingTest.i
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Import> getImports()
   {
     if (imports == null)

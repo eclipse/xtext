@@ -124,7 +124,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug378967TestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -139,7 +139,8 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
     if (isInited) return (Bug378967TestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug378967TestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug378967TestPackageImpl theBug378967TestPackage = (Bug378967TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug378967TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug378967TestPackageImpl());
+    Object registeredBug378967TestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug378967TestPackageImpl theBug378967TestPackage = registeredBug378967TestPackage instanceof Bug378967TestPackageImpl ? (Bug378967TestPackageImpl)registeredBug378967TestPackage : new Bug378967TestPackageImpl();
 
     isInited = true;
 
@@ -155,7 +156,6 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
     // Mark meta-data to indicate it can't be changed
     theBug378967TestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug378967TestPackage.eNS_URI, theBug378967TestPackage);
     return theBug378967TestPackage;
@@ -166,6 +166,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -176,6 +177,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRoot_Element()
   {
     return (EReference)rootEClass.getEStructuralFeatures().get(0);
@@ -186,6 +188,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRule1()
   {
     return rule1EClass;
@@ -196,6 +199,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule1_Type()
   {
     return (EAttribute)rule1EClass.getEStructuralFeatures().get(0);
@@ -206,6 +210,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule1_Value()
   {
     return (EAttribute)rule1EClass.getEStructuralFeatures().get(1);
@@ -216,6 +221,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule1_Unit()
   {
     return (EAttribute)rule1EClass.getEStructuralFeatures().get(2);
@@ -226,6 +232,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRule2()
   {
     return rule2EClass;
@@ -236,6 +243,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule2_Value()
   {
     return (EAttribute)rule2EClass.getEStructuralFeatures().get(0);
@@ -246,6 +254,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRule3()
   {
     return rule3EClass;
@@ -256,6 +265,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule3_Value()
   {
     return (EAttribute)rule3EClass.getEStructuralFeatures().get(0);
@@ -266,6 +276,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRule4()
   {
     return rule4EClass;
@@ -276,6 +287,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRule4_After()
   {
     return (EReference)rule4EClass.getEStructuralFeatures().get(0);
@@ -286,6 +298,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRule4_Value()
   {
     return (EAttribute)rule4EClass.getEStructuralFeatures().get(1);
@@ -296,6 +309,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRule4_S()
   {
     return (EReference)rule4EClass.getEStructuralFeatures().get(2);
@@ -306,6 +320,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAfterObj()
   {
     return afterObjEClass;
@@ -316,6 +331,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAfterObj_Value()
   {
     return (EAttribute)afterObjEClass.getEStructuralFeatures().get(0);
@@ -326,6 +342,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSObj()
   {
     return sObjEClass;
@@ -336,6 +353,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSObj_Value()
   {
     return (EAttribute)sObjEClass.getEStructuralFeatures().get(0);
@@ -346,6 +364,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getFirstEnum()
   {
     return firstEnumEEnum;
@@ -356,6 +375,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getSecondEnum()
   {
     return secondEnumEEnum;
@@ -366,6 +386,7 @@ public class Bug378967TestPackageImpl extends EPackageImpl implements Bug378967T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug378967TestFactory getBug378967TestFactory()
   {
     return (Bug378967TestFactory)getEFactoryInstance();

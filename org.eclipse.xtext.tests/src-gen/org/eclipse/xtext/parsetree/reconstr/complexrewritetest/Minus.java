@@ -27,10 +27,6 @@ public interface Minus extends Expression
    * Returns the value of the '<em><b>Minus Operands</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Expression}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Minus Operands</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Minus Operands</em>' containment reference list.
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getMinus_MinusOperands()

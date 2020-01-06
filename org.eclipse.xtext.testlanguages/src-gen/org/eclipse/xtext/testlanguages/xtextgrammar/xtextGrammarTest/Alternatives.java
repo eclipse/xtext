@@ -27,10 +27,6 @@ public interface Alternatives extends AbstractElement
    * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.AbstractElement}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Groups</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.XtextGrammarTestPackage#getAlternatives_Groups()

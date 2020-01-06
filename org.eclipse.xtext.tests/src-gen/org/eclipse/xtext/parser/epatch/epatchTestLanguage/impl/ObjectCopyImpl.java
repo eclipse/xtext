@@ -86,6 +86,7 @@ public class ObjectCopyImpl extends CreatedObjectImpl implements ObjectCopy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NamedResource getResource()
   {
     if (resource != null && resource.eIsProxy())
@@ -116,6 +117,7 @@ public class ObjectCopyImpl extends CreatedObjectImpl implements ObjectCopy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setResource(NamedResource newResource)
   {
     NamedResource oldResource = resource;
@@ -129,6 +131,7 @@ public class ObjectCopyImpl extends CreatedObjectImpl implements ObjectCopy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFragment()
   {
     return fragment;
@@ -139,6 +142,7 @@ public class ObjectCopyImpl extends CreatedObjectImpl implements ObjectCopy
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFragment(String newFragment)
   {
     String oldFragment = fragment;
@@ -234,7 +238,7 @@ public class ObjectCopyImpl extends CreatedObjectImpl implements ObjectCopy
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (fragment: ");
     result.append(fragment);
     result.append(')');

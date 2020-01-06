@@ -29,10 +29,6 @@ public interface SimpleTerm extends EObject
   /**
    * Returns the value of the '<em><b>Line Count</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Line Count</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Line Count</em>' attribute.
    * @see #setLineCount(int)
@@ -55,10 +51,6 @@ public interface SimpleTerm extends EObject
   /**
    * Returns the value of the '<em><b>Char Count</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Char Count</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Char Count</em>' attribute.
    * @see #setCharCount(int)
@@ -81,10 +73,6 @@ public interface SimpleTerm extends EObject
   /**
    * Returns the value of the '<em><b>Char Set</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Char Set</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Char Set</em>' attribute.
    * @see #setCharSet(String)
@@ -107,10 +95,6 @@ public interface SimpleTerm extends EObject
   /**
    * Returns the value of the '<em><b>Ref Char</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref Char</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref Char</em>' attribute.
    * @see #setRefChar(String)

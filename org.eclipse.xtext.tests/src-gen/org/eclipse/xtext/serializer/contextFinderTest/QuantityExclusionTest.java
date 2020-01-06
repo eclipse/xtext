@@ -27,10 +27,6 @@ public interface QuantityExclusionTest extends EObject
   /**
    * Returns the value of the '<em><b>Attr1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attr1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attr1</em>' attribute.
    * @see #setAttr1(String)
@@ -53,10 +49,6 @@ public interface QuantityExclusionTest extends EObject
   /**
    * Returns the value of the '<em><b>Attr2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attr2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attr2</em>' attribute.
    * @see #setAttr2(String)

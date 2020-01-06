@@ -28,10 +28,6 @@ public interface TypeRef extends EObject
   /**
    * Returns the value of the '<em><b>Metamodel</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Metamodel</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Metamodel</em>' reference.
    * @see #setMetamodel(AbstractMetamodelDeclaration)
@@ -54,10 +50,6 @@ public interface TypeRef extends EObject
   /**
    * Returns the value of the '<em><b>Classifier</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Classifier</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Classifier</em>' reference.
    * @see #setClassifier(EClassifier)

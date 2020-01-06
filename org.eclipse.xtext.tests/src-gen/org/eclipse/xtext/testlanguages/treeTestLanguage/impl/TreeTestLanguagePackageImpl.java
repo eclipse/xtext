@@ -67,7 +67,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TreeTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
     if (isInited) return (TreeTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(TreeTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    TreeTestLanguagePackageImpl theTreeTestLanguagePackage = (TreeTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TreeTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TreeTestLanguagePackageImpl());
+    Object registeredTreeTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TreeTestLanguagePackageImpl theTreeTestLanguagePackage = registeredTreeTestLanguagePackage instanceof TreeTestLanguagePackageImpl ? (TreeTestLanguagePackageImpl)registeredTreeTestLanguagePackage : new TreeTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
     // Mark meta-data to indicate it can't be changed
     theTreeTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TreeTestLanguagePackage.eNS_URI, theTreeTestLanguagePackage);
     return theTreeTestLanguagePackage;
@@ -109,6 +109,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Children()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNode()
   {
     return nodeEClass;
@@ -139,6 +142,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNode_Name()
   {
     return (EAttribute)nodeEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNode_Attrib()
   {
     return (EAttribute)nodeEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNode_Children()
   {
     return (EReference)nodeEClass.getEStructuralFeatures().get(2);
@@ -169,6 +175,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TreeTestLanguageFactory getTreeTestLanguageFactory()
   {
     return (TreeTestLanguageFactory)getEFactoryInstance();

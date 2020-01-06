@@ -99,6 +99,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFiltered()
   {
     return filtered;
@@ -109,6 +110,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFiltered(boolean newFiltered)
   {
     boolean oldFiltered = filtered;
@@ -122,6 +124,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter getParameter()
   {
     if (parameter != null && parameter.eIsProxy())
@@ -152,6 +155,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setParameter(Parameter newParameter)
   {
     Parameter oldParameter = parameter;
@@ -165,6 +169,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement getGuardedElement()
   {
     return guardedElement;
@@ -192,6 +197,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGuardedElement(AbstractElement newGuardedElement)
   {
     if (newGuardedElement != guardedElement)
@@ -321,7 +327,7 @@ public class ConditionalBranchImpl extends AbstractElementImpl implements Condit
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (filtered: ");
     result.append(filtered);
     result.append(')');

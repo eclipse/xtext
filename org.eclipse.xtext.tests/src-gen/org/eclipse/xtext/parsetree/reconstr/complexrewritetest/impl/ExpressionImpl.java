@@ -73,6 +73,7 @@ public class ExpressionImpl extends RootImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getEm()
   {
     return em;
@@ -83,6 +84,7 @@ public class ExpressionImpl extends RootImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEm(String newEm)
   {
     String oldEm = em;
@@ -167,7 +169,7 @@ public class ExpressionImpl extends RootImpl implements Expression
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (em: ");
     result.append(em);
     result.append(')');

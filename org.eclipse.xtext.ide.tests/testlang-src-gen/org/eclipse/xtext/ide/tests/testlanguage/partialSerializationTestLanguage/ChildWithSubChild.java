@@ -33,10 +33,6 @@ public interface ChildWithSubChild extends EObject
    * Returns the value of the '<em><b>Sub Childs</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.SubChild}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub Childs</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub Childs</em>' containment reference list.
    * @see org.eclipse.xtext.ide.tests.testlanguage.partialSerializationTestLanguage.PartialSerializationTestLanguagePackage#getChildWithSubChild_SubChilds()

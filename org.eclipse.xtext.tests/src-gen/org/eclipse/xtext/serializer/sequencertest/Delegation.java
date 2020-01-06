@@ -27,10 +27,6 @@ public interface Delegation extends EObject
   /**
    * Returns the value of the '<em><b>P</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>P</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>P</em>' attribute.
    * @see #setP(String)
@@ -53,10 +49,6 @@ public interface Delegation extends EObject
   /**
    * Returns the value of the '<em><b>Np</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Np</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Np</em>' attribute.
    * @see #setNp(int)

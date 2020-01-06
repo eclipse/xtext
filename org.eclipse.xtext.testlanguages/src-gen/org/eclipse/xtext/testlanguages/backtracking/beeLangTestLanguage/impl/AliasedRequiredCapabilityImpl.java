@@ -214,6 +214,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getNameSpace()
   {
     return nameSpace;
@@ -224,6 +225,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
@@ -237,6 +239,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -247,6 +250,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -260,6 +264,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAlias()
   {
     return alias;
@@ -270,6 +275,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(String newAlias)
   {
     String oldAlias = alias;
@@ -283,6 +289,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getCondExpr()
   {
     return condExpr;
@@ -310,6 +317,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
@@ -331,6 +339,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isGreedy()
   {
     return greedy;
@@ -341,6 +350,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setGreedy(boolean newGreedy)
   {
     boolean oldGreedy = greedy;
@@ -354,6 +364,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getMin()
   {
     return min;
@@ -364,6 +375,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMin(int newMin)
   {
     int oldMin = min;
@@ -377,6 +389,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getMax()
   {
     return max;
@@ -387,6 +400,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMax(int newMax)
   {
     int oldMax = max;
@@ -400,6 +414,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVersionRange()
   {
     return versionRange;
@@ -410,6 +425,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVersionRange(String newVersionRange)
   {
     String oldVersionRange = versionRange;
@@ -580,7 +596,7 @@ public class AliasedRequiredCapabilityImpl extends MinimalEObjectImpl.Container 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (nameSpace: ");
     result.append(nameSpace);
     result.append(", name: ");

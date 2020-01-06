@@ -27,10 +27,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Foo</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Foo</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Foo</em>' attribute.
    * @see #setFoo(String)
@@ -53,10 +49,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Bar</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Bar</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Bar</em>' attribute.
    * @see #setBar(String)

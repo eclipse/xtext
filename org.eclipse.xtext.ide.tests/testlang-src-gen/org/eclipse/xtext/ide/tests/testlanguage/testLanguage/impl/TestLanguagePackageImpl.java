@@ -151,7 +151,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -166,7 +166,8 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
     if (isInited) return (TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    TestLanguagePackageImpl theTestLanguagePackage = (TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TestLanguagePackageImpl());
+    Object registeredTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TestLanguagePackageImpl theTestLanguagePackage = registeredTestLanguagePackage instanceof TestLanguagePackageImpl ? (TestLanguagePackageImpl)registeredTestLanguagePackage : new TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -182,7 +183,6 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
     // Mark meta-data to indicate it can't be changed
     theTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TestLanguagePackage.eNS_URI, theTestLanguagePackage);
     return theTestLanguagePackage;
@@ -193,6 +193,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -203,6 +204,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -213,6 +215,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPackageDeclaration()
   {
     return packageDeclarationEClass;
@@ -223,6 +226,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPackageDeclaration_Elements()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(0);
@@ -233,6 +237,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractElement()
   {
     return abstractElementEClass;
@@ -243,6 +248,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAbstractElement_Name()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
@@ -253,6 +259,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeDeclaration()
   {
     return typeDeclarationEClass;
@@ -263,6 +270,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeDeclaration_SuperType()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(0);
@@ -273,6 +281,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeDeclaration_Members()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
@@ -283,6 +292,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMember()
   {
     return memberEClass;
@@ -293,6 +303,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMember_Name()
   {
     return (EAttribute)memberEClass.getEStructuralFeatures().get(0);
@@ -303,6 +314,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProperty()
   {
     return propertyEClass;
@@ -313,6 +325,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProperty_Type()
   {
     return (EReference)propertyEClass.getEStructuralFeatures().get(0);
@@ -323,6 +336,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -333,6 +347,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_ArrayDiemensions()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -343,6 +358,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOperation()
   {
     return operationEClass;
@@ -353,6 +369,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Params()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(0);
@@ -363,6 +380,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_ReturnType()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(1);
@@ -373,6 +391,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_OperationCall()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(2);
@@ -383,6 +402,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOperationCall()
   {
     return operationCallEClass;
@@ -393,6 +413,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperationCall_Operation()
   {
     return (EReference)operationCallEClass.getEStructuralFeatures().get(0);
@@ -403,6 +424,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOperationCall_Params()
   {
     return (EAttribute)operationCallEClass.getEStructuralFeatures().get(1);
@@ -413,6 +435,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameter()
   {
     return parameterEClass;
@@ -423,6 +446,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameter_Name()
   {
     return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
@@ -433,6 +457,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameter_Type()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(1);
@@ -443,6 +468,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeReference()
   {
     return typeReferenceEClass;
@@ -453,6 +479,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeReference_TypeRef()
   {
     return (EReference)typeReferenceEClass.getEStructuralFeatures().get(0);
@@ -463,6 +490,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPrimitiveType()
   {
     return primitiveTypeEClass;
@@ -473,6 +501,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPrimitiveType_Name()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
@@ -483,6 +512,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestLanguageFactory getTestLanguageFactory()
   {
     return (TestLanguageFactory)getEFactoryInstance();

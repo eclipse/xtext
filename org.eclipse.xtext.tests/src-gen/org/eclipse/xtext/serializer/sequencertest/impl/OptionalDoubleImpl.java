@@ -116,6 +116,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public double getDouble0()
   {
     return double0;
@@ -126,6 +127,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDouble0(double newDouble0)
   {
     double oldDouble0 = double0;
@@ -139,6 +141,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public double getDouble1()
   {
     return double1;
@@ -149,6 +152,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDouble1(double newDouble1)
   {
     double oldDouble1 = double1;
@@ -162,6 +166,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public double getDouble2()
   {
     return double2;
@@ -172,6 +177,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDouble2(double newDouble2)
   {
     double oldDouble2 = double2;
@@ -276,7 +282,7 @@ public class OptionalDoubleImpl extends MinimalEObjectImpl.Container implements 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (double0: ");
     result.append(double0);
     result.append(", double1: ");

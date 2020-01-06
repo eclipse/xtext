@@ -75,6 +75,7 @@ public class FirstFactoryImpl extends EFactoryImpl implements FirstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public First createFirst()
   {
     FirstImpl first = new FirstImpl();
@@ -86,6 +87,7 @@ public class FirstFactoryImpl extends EFactoryImpl implements FirstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FirstPackage getFirstPackage()
   {
     return (FirstPackage)getEPackage();

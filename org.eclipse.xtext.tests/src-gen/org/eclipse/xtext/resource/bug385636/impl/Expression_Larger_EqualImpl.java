@@ -78,6 +78,7 @@ public class Expression_Larger_EqualImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getLeft()
   {
     return left;
@@ -105,6 +106,7 @@ public class Expression_Larger_EqualImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
@@ -126,6 +128,7 @@ public class Expression_Larger_EqualImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression_VariableName getRight()
   {
     return right;
@@ -153,6 +156,7 @@ public class Expression_Larger_EqualImpl extends ExpressionImpl implements Expre
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRight(Expression_VariableName newRight)
   {
     if (newRight != right)

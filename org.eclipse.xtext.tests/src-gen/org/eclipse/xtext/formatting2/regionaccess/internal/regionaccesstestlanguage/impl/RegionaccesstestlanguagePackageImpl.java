@@ -179,7 +179,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RegionaccesstestlanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -194,7 +194,8 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     if (isInited) return (RegionaccesstestlanguagePackage)EPackage.Registry.INSTANCE.getEPackage(RegionaccesstestlanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    RegionaccesstestlanguagePackageImpl theRegionaccesstestlanguagePackage = (RegionaccesstestlanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RegionaccesstestlanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RegionaccesstestlanguagePackageImpl());
+    Object registeredRegionaccesstestlanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RegionaccesstestlanguagePackageImpl theRegionaccesstestlanguagePackage = registeredRegionaccesstestlanguagePackage instanceof RegionaccesstestlanguagePackageImpl ? (RegionaccesstestlanguagePackageImpl)registeredRegionaccesstestlanguagePackage : new RegionaccesstestlanguagePackageImpl();
 
     isInited = true;
 
@@ -210,7 +211,6 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     // Mark meta-data to indicate it can't be changed
     theRegionaccesstestlanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RegionaccesstestlanguagePackage.eNS_URI, theRegionaccesstestlanguagePackage);
     return theRegionaccesstestlanguagePackage;
@@ -221,6 +221,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoot()
   {
     return rootEClass;
@@ -231,6 +232,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRoot_Mixed()
   {
     return (EReference)rootEClass.getEStructuralFeatures().get(0);
@@ -241,6 +243,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimple()
   {
     return simpleEClass;
@@ -251,6 +254,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimple_Name()
   {
     return (EAttribute)simpleEClass.getEStructuralFeatures().get(0);
@@ -261,6 +265,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDelegation()
   {
     return delegationEClass;
@@ -271,6 +276,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDelegation_Delegate()
   {
     return (EReference)delegationEClass.getEStructuralFeatures().get(0);
@@ -281,6 +287,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnassigned()
   {
     return unassignedEClass;
@@ -291,6 +298,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPrefixedUnassigned()
   {
     return prefixedUnassignedEClass;
@@ -301,6 +309,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPrefixedUnassigned_Delegate()
   {
     return (EReference)prefixedUnassignedEClass.getEStructuralFeatures().get(0);
@@ -311,6 +320,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPrefixedDelegate()
   {
     return prefixedDelegateEClass;
@@ -321,6 +331,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDelegate()
   {
     return delegateEClass;
@@ -331,6 +342,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDelegate_Name()
   {
     return (EAttribute)delegateEClass.getEStructuralFeatures().get(0);
@@ -341,6 +353,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -351,6 +364,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMixed()
   {
     return mixedEClass;
@@ -361,6 +375,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixed_Name()
   {
     return (EAttribute)mixedEClass.getEStructuralFeatures().get(0);
@@ -371,6 +386,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMixed_Eobj()
   {
     return (EReference)mixedEClass.getEStructuralFeatures().get(1);
@@ -381,6 +397,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixed_Datatype()
   {
     return (EAttribute)mixedEClass.getEStructuralFeatures().get(2);
@@ -391,6 +408,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMixed_Ref()
   {
     return (EReference)mixedEClass.getEStructuralFeatures().get(3);
@@ -401,6 +419,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixed_Lit()
   {
     return (EAttribute)mixedEClass.getEStructuralFeatures().get(4);
@@ -411,6 +430,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMixed_FragName()
   {
     return (EAttribute)mixedEClass.getEStructuralFeatures().get(5);
@@ -421,6 +441,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getValueList()
   {
     return valueListEClass;
@@ -431,6 +452,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getValueList_Name()
   {
     return (EAttribute)valueListEClass.getEStructuralFeatures().get(0);
@@ -441,6 +463,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRootAction()
   {
     return rootActionEClass;
@@ -451,6 +474,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAdd()
   {
     return addEClass;
@@ -461,6 +485,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd_Left()
   {
     return (EReference)addEClass.getEStructuralFeatures().get(0);
@@ -471,6 +496,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAdd_Right()
   {
     return (EReference)addEClass.getEStructuralFeatures().get(1);
@@ -481,6 +507,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamed()
   {
     return namedEClass;
@@ -491,6 +518,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamed_Name()
   {
     return (EAttribute)namedEClass.getEStructuralFeatures().get(0);
@@ -501,6 +529,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAction()
   {
     return actionEClass;
@@ -511,6 +540,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssignedAction()
   {
     return assignedActionEClass;
@@ -521,6 +551,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignedAction_Child()
   {
     return (EReference)assignedActionEClass.getEStructuralFeatures().get(0);
@@ -531,6 +562,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignedAction_Body()
   {
     return (EReference)assignedActionEClass.getEStructuralFeatures().get(1);
@@ -541,6 +573,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getEnum()
   {
     return enumEEnum;
@@ -551,6 +584,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RegionaccesstestlanguageFactory getRegionaccesstestlanguageFactory()
   {
     return (RegionaccesstestlanguageFactory)getEFactoryInstance();

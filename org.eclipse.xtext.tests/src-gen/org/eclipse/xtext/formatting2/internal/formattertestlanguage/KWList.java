@@ -29,10 +29,6 @@ public interface KWList extends Root
   /**
    * Returns the value of the '<em><b>Kw1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kw1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kw1</em>' attribute.
    * @see #setKw1(boolean)
@@ -55,10 +51,6 @@ public interface KWList extends Root
   /**
    * Returns the value of the '<em><b>Kw2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kw2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kw2</em>' attribute.
    * @see #setKw2(boolean)
@@ -81,10 +73,6 @@ public interface KWList extends Root
   /**
    * Returns the value of the '<em><b>Kw3</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kw3</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kw3</em>' attribute.
    * @see #setKw3(boolean)
@@ -107,10 +95,6 @@ public interface KWList extends Root
   /**
    * Returns the value of the '<em><b>Kw4</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kw4</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kw4</em>' attribute.
    * @see #setKw4(boolean)
@@ -133,10 +117,6 @@ public interface KWList extends Root
   /**
    * Returns the value of the '<em><b>Kw5</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kw5</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kw5</em>' attribute.
    * @see #setKw5(boolean)

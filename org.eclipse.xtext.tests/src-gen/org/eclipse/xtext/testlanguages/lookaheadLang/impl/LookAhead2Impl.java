@@ -74,6 +74,7 @@ public class LookAhead2Impl extends MinimalEObjectImpl.Container implements Look
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getZ()
   {
     return z;
@@ -84,6 +85,7 @@ public class LookAhead2Impl extends MinimalEObjectImpl.Container implements Look
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setZ(String newZ)
   {
     String oldZ = z;
@@ -168,7 +170,7 @@ public class LookAhead2Impl extends MinimalEObjectImpl.Container implements Look
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (z: ");
     result.append(z);
     result.append(')');

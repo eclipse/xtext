@@ -29,10 +29,6 @@ public interface List2 extends EObject
    * Returns the value of the '<em><b>Val1</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val1</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val1</em>' attribute list.
    * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getList2_Val1()

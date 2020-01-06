@@ -33,10 +33,6 @@ public interface UnorderedSerialization extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' attribute.
    * @see #setFirst(boolean)
@@ -59,10 +55,6 @@ public interface UnorderedSerialization extends EObject
   /**
    * Returns the value of the '<em><b>Second</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second</em>' attribute.
    * @see #setSecond(boolean)
@@ -85,10 +77,6 @@ public interface UnorderedSerialization extends EObject
   /**
    * Returns the value of the '<em><b>Third</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third</em>' attribute.
    * @see #setThird(boolean)
@@ -111,10 +99,6 @@ public interface UnorderedSerialization extends EObject
   /**
    * Returns the value of the '<em><b>Forth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth</em>' attribute.
    * @see #setForth(boolean)
@@ -138,10 +122,6 @@ public interface UnorderedSerialization extends EObject
    * Returns the value of the '<em><b>First As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getUnorderedSerialization_FirstAsList()
@@ -154,10 +134,6 @@ public interface UnorderedSerialization extends EObject
    * Returns the value of the '<em><b>Second As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getUnorderedSerialization_SecondAsList()

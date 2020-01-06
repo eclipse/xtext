@@ -27,10 +27,6 @@ public interface Assignment extends AbstractElement
   /**
    * Returns the value of the '<em><b>Feature</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Feature</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Feature</em>' attribute.
    * @see #setFeature(String)
@@ -53,10 +49,6 @@ public interface Assignment extends AbstractElement
   /**
    * Returns the value of the '<em><b>Operator</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operator</em>' attribute.
    * @see #setOperator(String)
@@ -79,10 +71,6 @@ public interface Assignment extends AbstractElement
   /**
    * Returns the value of the '<em><b>Terminal</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Terminal</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Terminal</em>' containment reference.
    * @see #setTerminal(AbstractElement)

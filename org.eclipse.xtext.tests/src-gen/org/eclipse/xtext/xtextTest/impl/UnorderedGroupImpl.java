@@ -70,6 +70,7 @@ public class UnorderedGroupImpl extends AbstractElementImpl implements Unordered
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractElement> getElements()
   {
     if (elements == null)

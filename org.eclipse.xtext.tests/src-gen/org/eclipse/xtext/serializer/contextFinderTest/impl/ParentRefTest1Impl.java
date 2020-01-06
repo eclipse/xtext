@@ -67,6 +67,7 @@ public class ParentRefTest1Impl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParentRefTestChild getChild1()
   {
     return child1;
@@ -94,6 +95,7 @@ public class ParentRefTest1Impl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setChild1(ParentRefTestChild newChild1)
   {
     if (newChild1 != child1)

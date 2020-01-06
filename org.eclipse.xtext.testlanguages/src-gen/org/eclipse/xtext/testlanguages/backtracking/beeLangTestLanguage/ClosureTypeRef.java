@@ -29,10 +29,6 @@ public interface ClosureTypeRef extends TypeRef
    * Returns the value of the '<em><b>Parameter Types</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parameter Types</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter Types</em>' attribute list.
    * @see org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage#getClosureTypeRef_ParameterTypes()
@@ -44,10 +40,6 @@ public interface ClosureTypeRef extends TypeRef
   /**
    * Returns the value of the '<em><b>Var Args</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Var Args</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Var Args</em>' attribute.
    * @see #setVarArgs(boolean)
@@ -70,10 +62,6 @@ public interface ClosureTypeRef extends TypeRef
   /**
    * Returns the value of the '<em><b>Return Type</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Return Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Return Type</em>' attribute.
    * @see #setReturnType(String)

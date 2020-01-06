@@ -107,7 +107,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ReferenceGrammarPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -122,7 +122,8 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     if (isInited) return (ReferenceGrammarPackage)EPackage.Registry.INSTANCE.getEPackage(ReferenceGrammarPackage.eNS_URI);
 
     // Obtain or create and register package
-    ReferenceGrammarPackageImpl theReferenceGrammarPackage = (ReferenceGrammarPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ReferenceGrammarPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ReferenceGrammarPackageImpl());
+    Object registeredReferenceGrammarPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ReferenceGrammarPackageImpl theReferenceGrammarPackage = registeredReferenceGrammarPackage instanceof ReferenceGrammarPackageImpl ? (ReferenceGrammarPackageImpl)registeredReferenceGrammarPackage : new ReferenceGrammarPackageImpl();
 
     isInited = true;
 
@@ -138,7 +139,6 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     // Mark meta-data to indicate it can't be changed
     theReferenceGrammarPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ReferenceGrammarPackage.eNS_URI, theReferenceGrammarPackage);
     return theReferenceGrammarPackage;
@@ -149,6 +149,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSpielplatz()
   {
     return spielplatzEClass;
@@ -159,6 +160,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSpielplatz_Groesse()
   {
     return (EAttribute)spielplatzEClass.getEStructuralFeatures().get(0);
@@ -169,6 +171,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSpielplatz_Beschreibung()
   {
     return (EAttribute)spielplatzEClass.getEStructuralFeatures().get(1);
@@ -179,6 +182,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSpielplatz_Kinder()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(2);
@@ -189,6 +193,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSpielplatz_Erzieher()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(3);
@@ -199,6 +204,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSpielplatz_Spielzeuge()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(4);
@@ -209,6 +215,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSpielplatz_Familie()
   {
     return (EReference)spielplatzEClass.getEStructuralFeatures().get(5);
@@ -219,6 +226,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPerson()
   {
     return personEClass;
@@ -229,6 +237,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPerson_Name()
   {
     return (EAttribute)personEClass.getEStructuralFeatures().get(0);
@@ -239,6 +248,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPerson_Age()
   {
     return (EAttribute)personEClass.getEStructuralFeatures().get(1);
@@ -249,6 +259,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getKind()
   {
     return kindEClass;
@@ -259,6 +270,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getErwachsener()
   {
     return erwachsenerEClass;
@@ -269,6 +281,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSpielzeug()
   {
     return spielzeugEClass;
@@ -279,6 +292,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSpielzeug_Name()
   {
     return (EAttribute)spielzeugEClass.getEStructuralFeatures().get(0);
@@ -289,6 +303,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSpielzeug_Farbe()
   {
     return (EReference)spielzeugEClass.getEStructuralFeatures().get(1);
@@ -299,6 +314,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFarbe()
   {
     return farbeEClass;
@@ -309,6 +325,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFarbe_Wert()
   {
     return (EAttribute)farbeEClass.getEStructuralFeatures().get(0);
@@ -319,6 +336,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFamilie()
   {
     return familieEClass;
@@ -329,6 +347,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFamilie_Name()
   {
     return (EAttribute)familieEClass.getEStructuralFeatures().get(0);
@@ -339,6 +358,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFamilie_Mutter()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(1);
@@ -349,6 +369,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFamilie_Vater()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(2);
@@ -359,6 +380,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFamilie_Kinder()
   {
     return (EReference)familieEClass.getEStructuralFeatures().get(3);
@@ -369,6 +391,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReferenceGrammarFactory getReferenceGrammarFactory()
   {
     return (ReferenceGrammarFactory)getEFactoryInstance();

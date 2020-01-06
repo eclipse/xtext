@@ -87,6 +87,7 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAttribute1()
 	{
 		return attribute1;
@@ -97,6 +98,7 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAttribute1(String newAttribute1)
 	{
 		String oldAttribute1 = attribute1;
@@ -110,6 +112,7 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NestedClass1 getReference1()
 	{
 		if (reference1 != null && reference1.eIsProxy())
@@ -140,6 +143,7 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReference1(NestedClass1 newReference1)
 	{
 		NestedClass1 oldReference1 = reference1;
@@ -235,7 +239,7 @@ public class RootClassImpl extends EObjectImpl implements RootClass
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (attribute1: ");
 		result.append(attribute1);
 		result.append(')');

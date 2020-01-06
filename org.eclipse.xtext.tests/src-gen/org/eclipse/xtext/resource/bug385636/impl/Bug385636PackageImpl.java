@@ -155,7 +155,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug385636Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -170,7 +170,8 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
     if (isInited) return (Bug385636Package)EPackage.Registry.INSTANCE.getEPackage(Bug385636Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug385636PackageImpl theBug385636Package = (Bug385636PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug385636PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug385636PackageImpl());
+    Object registeredBug385636Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug385636PackageImpl theBug385636Package = registeredBug385636Package instanceof Bug385636PackageImpl ? (Bug385636PackageImpl)registeredBug385636Package : new Bug385636PackageImpl();
 
     isInited = true;
 
@@ -186,7 +187,6 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
     // Mark meta-data to indicate it can't be changed
     theBug385636Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug385636Package.eNS_URI, theBug385636Package);
     return theBug385636Package;
@@ -197,6 +197,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProgram()
   {
     return programEClass;
@@ -207,6 +208,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProgram_Define()
   {
     return (EReference)programEClass.getEStructuralFeatures().get(0);
@@ -217,6 +219,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProgram_Statements()
   {
     return (EReference)programEClass.getEStructuralFeatures().get(1);
@@ -227,6 +230,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDefineVariables()
   {
     return defineVariablesEClass;
@@ -237,6 +241,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDefineVariables_Variables()
   {
     return (EReference)defineVariablesEClass.getEStructuralFeatures().get(0);
@@ -247,6 +252,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDefineVariable()
   {
     return defineVariableEClass;
@@ -257,6 +263,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDefineVariable_Name()
   {
     return (EAttribute)defineVariableEClass.getEStructuralFeatures().get(0);
@@ -267,6 +274,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNVariableAccess()
   {
     return nVariableAccessEClass;
@@ -277,6 +285,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNVariableAccess_Variable()
   {
     return (EReference)nVariableAccessEClass.getEStructuralFeatures().get(0);
@@ -287,6 +296,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -297,6 +307,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_VariableName()
   {
     return expression_VariableNameEClass;
@@ -307,6 +318,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_VariableName_Variable()
   {
     return (EReference)expression_VariableNameEClass.getEStructuralFeatures().get(0);
@@ -317,6 +329,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Larger_Equal()
   {
     return expression_Larger_EqualEClass;
@@ -327,6 +340,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Larger_Equal_Left()
   {
     return (EReference)expression_Larger_EqualEClass.getEStructuralFeatures().get(0);
@@ -337,6 +351,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Larger_Equal_Right()
   {
     return (EReference)expression_Larger_EqualEClass.getEStructuralFeatures().get(1);
@@ -347,6 +362,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Smaller()
   {
     return expression_SmallerEClass;
@@ -357,6 +373,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Smaller_Left()
   {
     return (EReference)expression_SmallerEClass.getEStructuralFeatures().get(0);
@@ -367,6 +384,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Smaller_Right()
   {
     return (EReference)expression_SmallerEClass.getEStructuralFeatures().get(1);
@@ -377,6 +395,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Smaller_Equal()
   {
     return expression_Smaller_EqualEClass;
@@ -387,6 +406,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Smaller_Equal_Left()
   {
     return (EReference)expression_Smaller_EqualEClass.getEStructuralFeatures().get(0);
@@ -397,6 +417,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Smaller_Equal_Right()
   {
     return (EReference)expression_Smaller_EqualEClass.getEStructuralFeatures().get(1);
@@ -407,6 +428,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Equal()
   {
     return expression_EqualEClass;
@@ -417,6 +439,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Equal_Left()
   {
     return (EReference)expression_EqualEClass.getEStructuralFeatures().get(0);
@@ -427,6 +450,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Equal_Right()
   {
     return (EReference)expression_EqualEClass.getEStructuralFeatures().get(1);
@@ -437,6 +461,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Not_Equal()
   {
     return expression_Not_EqualEClass;
@@ -447,6 +472,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Equal_Left()
   {
     return (EReference)expression_Not_EqualEClass.getEStructuralFeatures().get(0);
@@ -457,6 +483,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Equal_Right()
   {
     return (EReference)expression_Not_EqualEClass.getEStructuralFeatures().get(1);
@@ -467,6 +494,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Not_Less()
   {
     return expression_Not_LessEClass;
@@ -477,6 +505,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Less_Left()
   {
     return (EReference)expression_Not_LessEClass.getEStructuralFeatures().get(0);
@@ -487,6 +516,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Less_Right()
   {
     return (EReference)expression_Not_LessEClass.getEStructuralFeatures().get(1);
@@ -497,6 +527,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression_Not_Greater()
   {
     return expression_Not_GreaterEClass;
@@ -507,6 +538,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Greater_Left()
   {
     return (EReference)expression_Not_GreaterEClass.getEStructuralFeatures().get(0);
@@ -517,6 +549,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Not_Greater_Right()
   {
     return (EReference)expression_Not_GreaterEClass.getEStructuralFeatures().get(1);
@@ -527,6 +560,7 @@ public class Bug385636PackageImpl extends EPackageImpl implements Bug385636Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug385636Factory getBug385636Factory()
   {
     return (Bug385636Factory)getEFactoryInstance();

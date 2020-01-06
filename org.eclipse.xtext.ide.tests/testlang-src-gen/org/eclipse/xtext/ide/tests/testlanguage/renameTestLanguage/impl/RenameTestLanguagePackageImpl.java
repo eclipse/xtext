@@ -71,7 +71,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RenameTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -86,7 +86,8 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
     if (isInited) return (RenameTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(RenameTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    RenameTestLanguagePackageImpl theRenameTestLanguagePackage = (RenameTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RenameTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RenameTestLanguagePackageImpl());
+    Object registeredRenameTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RenameTestLanguagePackageImpl theRenameTestLanguagePackage = registeredRenameTestLanguagePackage instanceof RenameTestLanguagePackageImpl ? (RenameTestLanguagePackageImpl)registeredRenameTestLanguagePackage : new RenameTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
     // Mark meta-data to indicate it can't be changed
     theRenameTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RenameTestLanguagePackage.eNS_URI, theRenameTestLanguagePackage);
     return theRenameTestLanguagePackage;
@@ -113,6 +113,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -123,6 +124,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Types()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeDeclaration()
   {
     return typeDeclarationEClass;
@@ -143,6 +146,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTypeDeclaration_Name()
   {
     return (EAttribute)typeDeclarationEClass.getEStructuralFeatures().get(0);
@@ -153,6 +157,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeDeclaration_SuperType()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
@@ -163,6 +168,7 @@ public class RenameTestLanguagePackageImpl extends EPackageImpl implements Renam
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RenameTestLanguageFactory getRenameTestLanguageFactory()
   {
     return (RenameTestLanguageFactory)getEFactoryInstance();

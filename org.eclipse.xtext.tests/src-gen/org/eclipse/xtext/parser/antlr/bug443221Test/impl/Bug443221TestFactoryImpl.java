@@ -76,6 +76,7 @@ public class Bug443221TestFactoryImpl extends EFactoryImpl implements Bug443221T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -87,6 +88,7 @@ public class Bug443221TestFactoryImpl extends EFactoryImpl implements Bug443221T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug443221TestPackage getBug443221TestPackage()
   {
     return (Bug443221TestPackage)getEPackage();

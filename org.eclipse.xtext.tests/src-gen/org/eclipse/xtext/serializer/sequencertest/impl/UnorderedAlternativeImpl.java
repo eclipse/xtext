@@ -107,6 +107,7 @@ public class UnorderedAlternativeImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -121,6 +122,7 @@ public class UnorderedAlternativeImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getVal2()
   {
     if (val2 == null)
@@ -135,6 +137,7 @@ public class UnorderedAlternativeImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<UnorderedAlternativeVal> getVal3()
   {
     if (val3 == null)
@@ -149,6 +152,7 @@ public class UnorderedAlternativeImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<UnorderedAlternativeValDelegate> getVal4()
   {
     if (val4 == null)
@@ -287,7 +291,7 @@ public class UnorderedAlternativeImpl extends MinimalEObjectImpl.Container imple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

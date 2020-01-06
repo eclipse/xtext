@@ -101,6 +101,7 @@ public class OperationImpl extends MemberImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Parameter> getParams()
   {
     if (params == null)
@@ -115,6 +116,7 @@ public class OperationImpl extends MemberImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type getReturnType()
   {
     return returnType;
@@ -142,6 +144,7 @@ public class OperationImpl extends MemberImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReturnType(Type newReturnType)
   {
     if (newReturnType != returnType)
@@ -163,6 +166,7 @@ public class OperationImpl extends MemberImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OperationCall getOperationCall()
   {
     return operationCall;
@@ -190,6 +194,7 @@ public class OperationImpl extends MemberImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperationCall(OperationCall newOperationCall)
   {
     if (newOperationCall != operationCall)

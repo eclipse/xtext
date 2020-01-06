@@ -217,6 +217,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShared1()
   {
     return shared1;
@@ -227,6 +228,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShared1(String newShared1)
   {
     String oldShared1 = shared1;
@@ -240,6 +242,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShared2()
   {
     return shared2;
@@ -250,6 +253,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShared2(String newShared2)
   {
     String oldShared2 = shared2;
@@ -263,6 +267,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getShared3()
   {
     if (shared3 == null)
@@ -277,6 +282,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVersion1()
   {
     return version1;
@@ -287,6 +293,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVersion1(String newVersion1)
   {
     String oldVersion1 = version1;
@@ -300,6 +307,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getExtra1()
   {
     return extra1;
@@ -310,6 +318,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExtra1(String newExtra1)
   {
     String oldExtra1 = extra1;
@@ -323,6 +332,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getExtra2()
   {
     return extra2;
@@ -333,6 +343,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExtra2(String newExtra2)
   {
     String oldExtra2 = extra2;
@@ -346,6 +357,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getExtra3()
   {
     return extra3;
@@ -356,6 +368,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExtra3(String newExtra3)
   {
     String oldExtra3 = extra3;
@@ -369,6 +382,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getExtra4()
   {
     return extra4;
@@ -379,6 +393,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExtra4(String newExtra4)
   {
     String oldExtra4 = extra4;
@@ -535,7 +550,7 @@ public class TwoVersionImpl extends MinimalEObjectImpl.Container implements TwoV
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (shared1: ");
     result.append(shared1);
     result.append(", shared2: ");

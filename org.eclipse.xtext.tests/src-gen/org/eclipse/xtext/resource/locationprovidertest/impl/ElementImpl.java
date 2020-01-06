@@ -103,6 +103,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -113,6 +114,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -126,6 +128,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element getSingleref()
   {
     if (singleref != null && singleref.eIsProxy())
@@ -156,6 +159,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSingleref(Element newSingleref)
   {
     Element oldSingleref = singleref;
@@ -169,6 +173,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Element> getMultirefs()
   {
     if (multirefs == null)
@@ -277,7 +282,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

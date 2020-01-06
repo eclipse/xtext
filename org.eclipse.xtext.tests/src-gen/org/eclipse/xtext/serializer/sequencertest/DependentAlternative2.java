@@ -30,10 +30,6 @@ public interface DependentAlternative2 extends EObject
    * Returns the value of the '<em><b>Val</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Val</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Val</em>' attribute list.
    * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getDependentAlternative2_Val()
@@ -45,10 +41,6 @@ public interface DependentAlternative2 extends EObject
   /**
    * Returns the value of the '<em><b>Flag</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Flag</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Flag</em>' attribute.
    * @see #setFlag(boolean)

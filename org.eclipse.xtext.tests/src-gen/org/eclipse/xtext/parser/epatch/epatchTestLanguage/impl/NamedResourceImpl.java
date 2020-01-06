@@ -141,6 +141,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -151,6 +152,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -164,6 +166,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLeftUri()
   {
     return leftUri;
@@ -174,6 +177,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftUri(String newLeftUri)
   {
     String oldLeftUri = leftUri;
@@ -187,6 +191,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CreatedObject getLeftRoot()
   {
     return leftRoot;
@@ -214,6 +219,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLeftRoot(CreatedObject newLeftRoot)
   {
     if (newLeftRoot != leftRoot)
@@ -235,6 +241,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRightUri()
   {
     return rightUri;
@@ -245,6 +252,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightUri(String newRightUri)
   {
     String oldRightUri = rightUri;
@@ -258,6 +266,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CreatedObject getRightRoot()
   {
     return rightRoot;
@@ -285,6 +294,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightRoot(CreatedObject newRightRoot)
   {
     if (newRightRoot != rightRoot)
@@ -435,7 +445,7 @@ public class NamedResourceImpl extends MinimalEObjectImpl.Container implements N
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", leftUri: ");

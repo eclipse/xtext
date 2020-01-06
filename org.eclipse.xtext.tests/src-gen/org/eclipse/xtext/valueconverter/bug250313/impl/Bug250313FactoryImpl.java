@@ -79,6 +79,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -90,6 +91,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child createChild()
   {
     ChildImpl child = new ChildImpl();
@@ -101,6 +103,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child1 createChild1()
   {
     Child1Impl child1 = new Child1Impl();
@@ -112,6 +115,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Child2 createChild2()
   {
     Child2Impl child2 = new Child2Impl();
@@ -123,6 +127,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug250313Package getBug250313Package()
   {
     return (Bug250313Package)getEPackage();

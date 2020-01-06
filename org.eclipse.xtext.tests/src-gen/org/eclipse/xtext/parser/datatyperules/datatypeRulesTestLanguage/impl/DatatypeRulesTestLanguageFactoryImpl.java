@@ -77,6 +77,7 @@ public class DatatypeRulesTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CompositeModel createCompositeModel()
   {
     CompositeModelImpl compositeModel = new CompositeModelImpl();
@@ -88,6 +89,7 @@ public class DatatypeRulesTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -99,6 +101,7 @@ public class DatatypeRulesTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeRulesTestLanguagePackage getDatatypeRulesTestLanguagePackage()
   {
     return (DatatypeRulesTestLanguagePackage)getEPackage();

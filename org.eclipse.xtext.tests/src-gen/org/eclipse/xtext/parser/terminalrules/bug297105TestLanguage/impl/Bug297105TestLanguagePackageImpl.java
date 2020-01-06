@@ -91,7 +91,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug297105TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -106,7 +106,8 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug297105TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug297105TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug297105TestLanguagePackageImpl theBug297105TestLanguagePackage = (Bug297105TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug297105TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug297105TestLanguagePackageImpl());
+    Object registeredBug297105TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug297105TestLanguagePackageImpl theBug297105TestLanguagePackage = registeredBug297105TestLanguagePackage instanceof Bug297105TestLanguagePackageImpl ? (Bug297105TestLanguagePackageImpl)registeredBug297105TestLanguagePackage : new Bug297105TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -122,7 +123,6 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug297105TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug297105TestLanguagePackage.eNS_URI, theBug297105TestLanguagePackage);
     return theBug297105TestLanguagePackage;
@@ -133,6 +133,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -143,6 +144,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Expressions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -153,6 +155,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -163,6 +166,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Left()
   {
     return (EReference)expressionEClass.getEStructuralFeatures().get(0);
@@ -173,6 +177,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpression_Right()
   {
     return (EReference)expressionEClass.getEStructuralFeatures().get(1);
@@ -183,6 +188,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLiteral()
   {
     return literalEClass;
@@ -193,6 +199,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLiteral_Value()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(0);
@@ -203,6 +210,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIntLiteral()
   {
     return intLiteralEClass;
@@ -213,6 +221,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRealLiteral()
   {
     return realLiteralEClass;
@@ -223,6 +232,7 @@ public class Bug297105TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug297105TestLanguageFactory getBug297105TestLanguageFactory()
   {
     return (Bug297105TestLanguageFactory)getEFactoryInstance();

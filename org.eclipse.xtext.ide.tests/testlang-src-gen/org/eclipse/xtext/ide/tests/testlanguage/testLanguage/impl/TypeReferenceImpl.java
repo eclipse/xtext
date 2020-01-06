@@ -69,6 +69,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration getTypeRef()
   {
     if (typeRef != null && typeRef.eIsProxy())
@@ -99,6 +100,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTypeRef(TypeDeclaration newTypeRef)
   {
     TypeDeclaration oldTypeRef = typeRef;

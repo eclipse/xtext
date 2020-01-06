@@ -66,7 +66,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link NoJdtPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
     if (isInited) return (NoJdtPackage)EPackage.Registry.INSTANCE.getEPackage(NoJdtPackage.eNS_URI);
 
     // Obtain or create and register package
-    NoJdtPackageImpl theNoJdtPackage = (NoJdtPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof NoJdtPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new NoJdtPackageImpl());
+    Object registeredNoJdtPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    NoJdtPackageImpl theNoJdtPackage = registeredNoJdtPackage instanceof NoJdtPackageImpl ? (NoJdtPackageImpl)registeredNoJdtPackage : new NoJdtPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
     // Mark meta-data to indicate it can't be changed
     theNoJdtPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(NoJdtPackage.eNS_URI, theNoJdtPackage);
     return theNoJdtPackage;
@@ -105,6 +105,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -115,6 +116,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Greetings()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGreeting()
   {
     return greetingEClass;
@@ -135,6 +138,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGreeting_Name()
   {
     return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGreeting_Other()
   {
     return (EReference)greetingEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class NoJdtPackageImpl extends EPackageImpl implements NoJdtPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NoJdtFactory getNoJdtFactory()
   {
     return (NoJdtFactory)getEFactoryInstance();

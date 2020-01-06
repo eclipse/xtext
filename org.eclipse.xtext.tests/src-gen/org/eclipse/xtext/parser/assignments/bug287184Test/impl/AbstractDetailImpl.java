@@ -66,6 +66,7 @@ public class AbstractDetailImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model getDetailClass()
   {
     if (detailClass != null && detailClass.eIsProxy())
@@ -96,6 +97,7 @@ public class AbstractDetailImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDetailClass(Model newDetailClass)
   {
     Model oldDetailClass = detailClass;

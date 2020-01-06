@@ -98,6 +98,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -109,6 +110,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryValue createMandatoryValue()
   {
     MandatoryValueImpl mandatoryValue = new MandatoryValueImpl();
@@ -120,6 +122,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalValue createOptionalValue()
   {
     OptionalValueImpl optionalValue = new OptionalValueImpl();
@@ -131,6 +134,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ManyOptionalValues createManyOptionalValues()
   {
     ManyOptionalValuesImpl manyOptionalValues = new ManyOptionalValuesImpl();
@@ -142,6 +146,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ManyMandatoryValues createManyMandatoryValues()
   {
     ManyMandatoryValuesImpl manyMandatoryValues = new ManyMandatoryValuesImpl();
@@ -153,6 +158,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryChild createMandatoryChild()
   {
     MandatoryChildImpl mandatoryChild = new MandatoryChildImpl();
@@ -164,6 +170,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalChild createOptionalChild()
   {
     OptionalChildImpl optionalChild = new OptionalChildImpl();
@@ -175,6 +182,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoChildLists createTwoChildLists()
   {
     TwoChildListsImpl twoChildLists = new TwoChildListsImpl();
@@ -186,6 +194,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoChilds createTwoChilds()
   {
     TwoChildsImpl twoChilds = new TwoChildsImpl();
@@ -197,6 +206,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChildWithSubChilds createChildWithSubChilds()
   {
     ChildWithSubChildsImpl childWithSubChilds = new ChildWithSubChildsImpl();
@@ -208,6 +218,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ChildWithSubChild createChildWithSubChild()
   {
     ChildWithSubChildImpl childWithSubChild = new ChildWithSubChildImpl();
@@ -219,6 +230,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubChild createSubChild()
   {
     SubChildImpl subChild = new SubChildImpl();
@@ -230,6 +242,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MandatoryChildList createMandatoryChildList()
   {
     MandatoryChildListImpl mandatoryChildList = new MandatoryChildListImpl();
@@ -241,6 +254,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalChildList createOptionalChildList()
   {
     OptionalChildListImpl optionalChildList = new OptionalChildListImpl();
@@ -252,6 +266,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -263,6 +278,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Node createNode()
   {
     NodeImpl node = new NodeImpl();
@@ -274,6 +290,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClassRef createEClassRef()
   {
     EClassRefImpl eClassRef = new EClassRefImpl();
@@ -285,6 +302,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public WithTransientContainer createWithTransientContainer()
   {
     WithTransientContainerImpl withTransientContainer = new WithTransientContainerImpl();
@@ -296,6 +314,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ManyValues createManyValues()
   {
     ManyValuesImpl manyValues = new ManyValuesImpl();
@@ -307,6 +326,7 @@ public class PartialSerializationTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialSerializationTestLanguagePackage getPartialSerializationTestLanguagePackage()
   {
     return (PartialSerializationTestLanguagePackage)getEPackage();

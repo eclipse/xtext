@@ -89,6 +89,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Executable getFirst()
   {
     return first;
@@ -116,6 +117,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(Executable newFirst)
   {
     if (newFirst != first)
@@ -137,6 +139,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Executable getAsOp()
   {
     return asOp;
@@ -164,6 +167,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAsOp(Executable newAsOp)
   {
     if (newAsOp != asOp)
@@ -185,6 +189,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Executable getEachOp()
   {
     return eachOp;
@@ -212,6 +217,7 @@ public class MigrationImpl extends MinimalEObjectImpl.Container implements Migra
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEachOp(Executable newEachOp)
   {
     if (newEachOp != eachOp)

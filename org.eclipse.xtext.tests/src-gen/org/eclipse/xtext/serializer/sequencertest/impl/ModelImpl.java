@@ -434,6 +434,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleGroup getX1()
   {
     return x1;
@@ -461,6 +462,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX1(SimpleGroup newX1)
   {
     if (newX1 != x1)
@@ -482,6 +484,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleAlternative getX2()
   {
     return x2;
@@ -509,6 +512,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX2(SimpleAlternative newX2)
   {
     if (newX2 != x2)
@@ -530,6 +534,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleMultiplicities getX3()
   {
     return x3;
@@ -557,6 +562,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX3(SimpleMultiplicities newX3)
   {
     if (newX3 != x3)
@@ -578,6 +584,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GroupMultiplicities getX4()
   {
     return x4;
@@ -605,6 +612,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX4(GroupMultiplicities newX4)
   {
     if (newX4 != x4)
@@ -626,6 +634,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AlternativeMultiplicities getX5()
   {
     return x5;
@@ -653,6 +662,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX5(AlternativeMultiplicities newX5)
   {
     if (newX5 != x5)
@@ -674,6 +684,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public List1 getX6()
   {
     return x6;
@@ -701,6 +712,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX6(List1 newX6)
   {
     if (newX6 != x6)
@@ -722,6 +734,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public List2 getX7()
   {
     return x7;
@@ -749,6 +762,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX7(List2 newX7)
   {
     if (newX7 != x7)
@@ -770,6 +784,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AltList1 getX8()
   {
     return x8;
@@ -797,6 +812,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX8(AltList1 newX8)
   {
     if (newX8 != x8)
@@ -818,6 +834,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AltList2 getX9()
   {
     return x9;
@@ -845,6 +862,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX9(AltList2 newX9)
   {
     if (newX9 != x9)
@@ -866,6 +884,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getX10()
   {
     return x10;
@@ -893,6 +912,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX10(EObject newX10)
   {
     if (newX10 != x10)
@@ -914,6 +934,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getX11()
   {
     return x11;
@@ -941,6 +962,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX11(EObject newX11)
   {
     if (newX11 != x11)
@@ -962,6 +984,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getX12()
   {
     return x12;
@@ -989,6 +1012,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX12(EObject newX12)
   {
     if (newX12 != x12)
@@ -1010,6 +1034,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleEnum getX13()
   {
     return x13;
@@ -1037,6 +1062,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX13(SingleEnum newX13)
   {
     if (newX13 != x13)
@@ -1058,6 +1084,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleCrossReference getX14()
   {
     return x14;
@@ -1085,6 +1112,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX14(SingleCrossReference newX14)
   {
     if (newX14 != x14)
@@ -1106,6 +1134,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SingleContainmentReference getX15()
   {
     return x15;
@@ -1133,6 +1162,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX15(SingleContainmentReference newX15)
   {
     if (newX15 != x15)
@@ -1154,6 +1184,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DependentAlternative1 getX19()
   {
     return x19;
@@ -1181,6 +1212,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX19(DependentAlternative1 newX19)
   {
     if (newX19 != x19)
@@ -1202,6 +1234,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DependentAlternative2 getX20()
   {
     return x20;
@@ -1229,6 +1262,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX20(DependentAlternative2 newX20)
   {
     if (newX20 != x20)
@@ -1250,6 +1284,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Optional getX21()
   {
     return x21;
@@ -1277,6 +1312,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX21(Optional newX21)
   {
     if (newX21 != x21)
@@ -1298,6 +1334,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.serializer.sequencertest.Float getX22()
   {
     return x22;
@@ -1325,6 +1362,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX22(org.eclipse.xtext.serializer.sequencertest.Float newX22)
   {
     if (newX22 != x22)
@@ -1346,6 +1384,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedAlternative getX23()
   {
     return x23;
@@ -1373,6 +1412,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX23(UnorderedAlternative newX23)
   {
     if (newX23 != x23)
@@ -1394,6 +1434,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroup getX24()
   {
     return x24;
@@ -1421,6 +1462,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX24(UnorderedGroup newX24)
   {
     if (newX24 != x24)
@@ -1442,6 +1484,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupOptional getX25()
   {
     return x25;
@@ -1469,6 +1512,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX25(UnorderedGroupOptional newX25)
   {
     if (newX25 != x25)
@@ -1490,6 +1534,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedGroupBoolean getX26()
   {
     return x26;
@@ -1517,6 +1562,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX26(UnorderedGroupBoolean newX26)
   {
     if (newX26 != x26)
@@ -1538,6 +1584,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Complex1 getX27()
   {
     return x27;
@@ -1565,6 +1612,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX27(Complex1 newX27)
   {
     if (newX27 != x27)
@@ -1586,6 +1634,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OptionalDouble getX28()
   {
     return x28;
@@ -1613,6 +1662,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX28(OptionalDouble newX28)
   {
     if (newX28 != x28)
@@ -1634,6 +1684,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullValue getX29()
   {
     return x29;
@@ -1661,6 +1712,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX29(NullValue newX29)
   {
     if (newX29 != x29)
@@ -1682,6 +1734,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullValue getX30()
   {
     return x30;
@@ -1709,6 +1762,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX30(NullValue newX30)
   {
     if (newX30 != x30)
@@ -1730,6 +1784,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullCrossRef getX31()
   {
     return x31;
@@ -1757,6 +1812,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX31(NullCrossRef newX31)
   {
     if (newX31 != x31)
@@ -1778,6 +1834,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NullCrossRef getX32()
   {
     return x32;
@@ -1805,6 +1862,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX32(NullCrossRef newX32)
   {
     if (newX32 != x32)
@@ -1826,6 +1884,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FragmentCallerType getX33()
   {
     return x33;
@@ -1853,6 +1912,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX33(FragmentCallerType newX33)
   {
     if (newX33 != x33)
@@ -1874,6 +1934,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterCaller getX34()
   {
     return x34;
@@ -1901,6 +1962,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX34(ParameterCaller newX34)
   {
     if (newX34 != x34)
@@ -1922,6 +1984,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterDelegation getX35()
   {
     return x35;
@@ -1949,6 +2012,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setX35(ParameterDelegation newX35)
   {
     if (newX35 != x35)

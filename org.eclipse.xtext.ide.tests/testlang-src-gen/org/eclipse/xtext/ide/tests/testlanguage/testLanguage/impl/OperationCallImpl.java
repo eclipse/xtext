@@ -87,6 +87,7 @@ public class OperationCallImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Operation getOperation()
   {
     if (operation != null && operation.eIsProxy())
@@ -117,6 +118,7 @@ public class OperationCallImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperation(Operation newOperation)
   {
     Operation oldOperation = operation;
@@ -130,6 +132,7 @@ public class OperationCallImpl extends MinimalEObjectImpl.Container implements O
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Integer> getParams()
   {
     if (params == null)
@@ -228,7 +231,7 @@ public class OperationCallImpl extends MinimalEObjectImpl.Container implements O
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (params: ");
     result.append(params);
     result.append(')');

@@ -132,6 +132,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -146,6 +147,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -156,6 +158,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -169,6 +172,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Node> getRefs()
   {
     if (refs == null)
@@ -183,6 +187,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Node> getChildren()
   {
     if (children == null)
@@ -197,6 +202,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Node getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -227,6 +233,7 @@ public class NodeImpl extends ModelImpl implements Node
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(Node newRef)
   {
     Node oldRef = ref;
@@ -374,7 +381,7 @@ public class NodeImpl extends ModelImpl implements Node
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

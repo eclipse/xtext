@@ -67,6 +67,7 @@ public class MultiValueImpl extends MinimalEObjectImpl.Container implements Mult
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getValue()
   {
     if (value == null)
@@ -154,7 +155,7 @@ public class MultiValueImpl extends MinimalEObjectImpl.Container implements Mult
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (value: ");
     result.append(value);
     result.append(')');

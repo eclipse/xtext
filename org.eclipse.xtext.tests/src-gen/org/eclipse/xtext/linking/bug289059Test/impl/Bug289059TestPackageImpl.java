@@ -67,7 +67,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug289059TestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
     if (isInited) return (Bug289059TestPackage)EPackage.Registry.INSTANCE.getEPackage(Bug289059TestPackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug289059TestPackageImpl theBug289059TestPackage = (Bug289059TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug289059TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug289059TestPackageImpl());
+    Object registeredBug289059TestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug289059TestPackageImpl theBug289059TestPackage = registeredBug289059TestPackage instanceof Bug289059TestPackageImpl ? (Bug289059TestPackageImpl)registeredBug289059TestPackage : new Bug289059TestPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
     // Mark meta-data to indicate it can't be changed
     theBug289059TestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug289059TestPackage.eNS_URI, theBug289059TestPackage);
     return theBug289059TestPackage;
@@ -109,6 +109,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Enabled()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -139,6 +142,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Reference()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -149,6 +153,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnassignedAction()
   {
     return unassignedActionEClass;
@@ -159,6 +164,7 @@ public class Bug289059TestPackageImpl extends EPackageImpl implements Bug289059T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug289059TestFactory getBug289059TestFactory()
   {
     return (Bug289059TestFactory)getEFactoryInstance();

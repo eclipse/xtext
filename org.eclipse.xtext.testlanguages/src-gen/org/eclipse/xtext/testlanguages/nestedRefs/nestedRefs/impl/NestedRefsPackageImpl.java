@@ -66,7 +66,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link NestedRefsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
     if (isInited) return (NestedRefsPackage)EPackage.Registry.INSTANCE.getEPackage(NestedRefsPackage.eNS_URI);
 
     // Obtain or create and register package
-    NestedRefsPackageImpl theNestedRefsPackage = (NestedRefsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof NestedRefsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new NestedRefsPackageImpl());
+    Object registeredNestedRefsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    NestedRefsPackageImpl theNestedRefsPackage = registeredNestedRefsPackage instanceof NestedRefsPackageImpl ? (NestedRefsPackageImpl)registeredNestedRefsPackage : new NestedRefsPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
     // Mark meta-data to indicate it can't be changed
     theNestedRefsPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(NestedRefsPackage.eNS_URI, theNestedRefsPackage);
     return theNestedRefsPackage;
@@ -105,6 +105,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDoc()
   {
     return docEClass;
@@ -115,6 +116,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDoc_Declarations()
   {
     return (EReference)docEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSelfReferingDecl()
   {
     return selfReferingDeclEClass;
@@ -135,6 +138,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSelfReferingDecl_Name()
   {
     return (EAttribute)selfReferingDeclEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSelfReferingDecl_SelfRef()
   {
     return (EReference)selfReferingDeclEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class NestedRefsPackageImpl extends EPackageImpl implements NestedRefsPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NestedRefsFactory getNestedRefsFactory()
   {
     return (NestedRefsFactory)getEFactoryInstance();

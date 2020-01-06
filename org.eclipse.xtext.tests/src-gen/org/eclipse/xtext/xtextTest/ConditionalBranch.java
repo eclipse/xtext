@@ -27,10 +27,6 @@ public interface ConditionalBranch extends AbstractElement
   /**
    * Returns the value of the '<em><b>Filtered</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Filtered</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Filtered</em>' attribute.
    * @see #setFiltered(boolean)
@@ -53,10 +49,6 @@ public interface ConditionalBranch extends AbstractElement
   /**
    * Returns the value of the '<em><b>Parameter</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parameter</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter</em>' reference.
    * @see #setParameter(Parameter)
@@ -79,10 +71,6 @@ public interface ConditionalBranch extends AbstractElement
   /**
    * Returns the value of the '<em><b>Guarded Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Guarded Element</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Guarded Element</em>' containment reference.
    * @see #setGuardedElement(AbstractElement)

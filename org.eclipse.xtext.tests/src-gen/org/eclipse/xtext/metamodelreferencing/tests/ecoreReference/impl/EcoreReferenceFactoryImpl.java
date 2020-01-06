@@ -79,6 +79,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -90,6 +91,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyNamedElement_01 createMyNamedElement_01()
   {
     MyNamedElement_01Impl myNamedElement_01 = new MyNamedElement_01Impl();
@@ -101,6 +103,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyNamedElement_02 createMyNamedElement_02()
   {
     MyNamedElement_02Impl myNamedElement_02 = new MyNamedElement_02Impl();
@@ -112,6 +115,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyNamedElement_03 createMyNamedElement_03()
   {
     MyNamedElement_03Impl myNamedElement_03 = new MyNamedElement_03Impl();
@@ -123,6 +127,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EcoreReferencePackage getEcoreReferencePackage()
   {
     return (EcoreReferencePackage)getEPackage();

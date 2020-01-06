@@ -67,7 +67,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link CommentAssociationPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
     if (isInited) return (CommentAssociationPackage)EPackage.Registry.INSTANCE.getEPackage(CommentAssociationPackage.eNS_URI);
 
     // Obtain or create and register package
-    CommentAssociationPackageImpl theCommentAssociationPackage = (CommentAssociationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CommentAssociationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CommentAssociationPackageImpl());
+    Object registeredCommentAssociationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    CommentAssociationPackageImpl theCommentAssociationPackage = registeredCommentAssociationPackage instanceof CommentAssociationPackageImpl ? (CommentAssociationPackageImpl)registeredCommentAssociationPackage : new CommentAssociationPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
     // Mark meta-data to indicate it can't be changed
     theCommentAssociationPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(CommentAssociationPackage.eNS_URI, theCommentAssociationPackage);
     return theCommentAssociationPackage;
@@ -109,6 +109,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -139,6 +142,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Child()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class CommentAssociationPackageImpl extends EPackageImpl implements Comme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CommentAssociationFactory getCommentAssociationFactory()
   {
     return (CommentAssociationFactory)getEFactoryInstance();

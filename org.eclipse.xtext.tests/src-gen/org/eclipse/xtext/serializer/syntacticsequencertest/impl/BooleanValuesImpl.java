@@ -116,6 +116,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVal1()
   {
     return val1;
@@ -126,6 +127,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal1(boolean newVal1)
   {
     boolean oldVal1 = val1;
@@ -139,6 +141,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVal2()
   {
     return val2;
@@ -149,6 +152,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal2(boolean newVal2)
   {
     boolean oldVal2 = val2;
@@ -162,6 +166,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isVal3()
   {
     return val3;
@@ -172,6 +177,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal3(boolean newVal3)
   {
     boolean oldVal3 = val3;
@@ -276,7 +282,7 @@ public class BooleanValuesImpl extends MinimalEObjectImpl.Container implements B
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

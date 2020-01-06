@@ -70,6 +70,7 @@ public class AddImpl extends ExpressionImpl implements Add
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getAddOperands()
   {
     if (addOperands == null)

@@ -115,7 +115,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IndexTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -130,7 +130,8 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
     if (isInited) return (IndexTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(IndexTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    IndexTestLanguagePackageImpl theIndexTestLanguagePackage = (IndexTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IndexTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IndexTestLanguagePackageImpl());
+    Object registeredIndexTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IndexTestLanguagePackageImpl theIndexTestLanguagePackage = registeredIndexTestLanguagePackage instanceof IndexTestLanguagePackageImpl ? (IndexTestLanguagePackageImpl)registeredIndexTestLanguagePackage : new IndexTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -146,7 +147,6 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
     // Mark meta-data to indicate it can't be changed
     theIndexTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IndexTestLanguagePackage.eNS_URI, theIndexTestLanguagePackage);
     return theIndexTestLanguagePackage;
@@ -157,6 +157,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFile()
   {
     return fileEClass;
@@ -167,6 +168,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFile_Elements()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
@@ -177,6 +179,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -187,6 +190,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -197,6 +201,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamespace()
   {
     return namespaceEClass;
@@ -207,6 +212,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamespace_Name()
   {
     return (EAttribute)namespaceEClass.getEStructuralFeatures().get(0);
@@ -217,6 +223,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNamespace_Elements()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
@@ -227,6 +234,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -237,6 +245,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -247,6 +256,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -257,6 +267,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEntity()
   {
     return entityEClass;
@@ -267,6 +278,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEntity_Properties()
   {
     return (EReference)entityEClass.getEStructuralFeatures().get(0);
@@ -277,6 +289,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDatatype()
   {
     return datatypeEClass;
@@ -287,6 +300,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProperty()
   {
     return propertyEClass;
@@ -297,6 +311,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProperty_Type()
   {
     return (EReference)propertyEClass.getEStructuralFeatures().get(0);
@@ -307,6 +322,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getProperty_Name()
   {
     return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
@@ -317,6 +333,7 @@ public class IndexTestLanguagePackageImpl extends EPackageImpl implements IndexT
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IndexTestLanguageFactory getIndexTestLanguageFactory()
   {
     return (IndexTestLanguageFactory)getEFactoryInstance();

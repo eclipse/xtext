@@ -83,7 +83,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug250313Package#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     if (isInited) return (Bug250313Package)EPackage.Registry.INSTANCE.getEPackage(Bug250313Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug250313PackageImpl theBug250313Package = (Bug250313PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug250313PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug250313PackageImpl());
+    Object registeredBug250313Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug250313PackageImpl theBug250313Package = registeredBug250313Package instanceof Bug250313PackageImpl ? (Bug250313PackageImpl)registeredBug250313Package : new Bug250313PackageImpl();
 
     isInited = true;
 
@@ -114,7 +115,6 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     // Mark meta-data to indicate it can't be changed
     theBug250313Package.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug250313Package.eNS_URI, theBug250313Package);
     return theBug250313Package;
@@ -125,6 +125,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -135,6 +136,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Value()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -145,6 +147,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_MultiValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -155,6 +158,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Children()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -165,6 +169,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild()
   {
     return childEClass;
@@ -175,6 +180,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getChild_Name()
   {
     return (EAttribute)childEClass.getEStructuralFeatures().get(0);
@@ -185,6 +191,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild1()
   {
     return child1EClass;
@@ -195,6 +202,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild2()
   {
     return child2EClass;
@@ -205,6 +213,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug250313Factory getBug250313Factory()
   {
     return (Bug250313Factory)getEFactoryInstance();

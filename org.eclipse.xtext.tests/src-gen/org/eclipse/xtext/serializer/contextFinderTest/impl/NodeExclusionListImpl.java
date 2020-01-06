@@ -68,6 +68,7 @@ public class NodeExclusionListImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Model> getRef()
   {
     if (ref == null)

@@ -12,6 +12,6 @@ Export-Package: gradlew;x-internal:=true,
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.21.0",
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.util,
- org.eclipse.emf.ecore;bundle-version="2.10.2"
+ org.eclipse.emf.ecore;bundle-version="2.20.0"
 Automatic-Module-Name: org.eclipse.xtext.xtext.wizard
 Eclipse-SourceReferences: eclipseSourceReferences

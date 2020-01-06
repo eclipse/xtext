@@ -75,6 +75,7 @@ public class Subrule2Impl extends ATypeImpl implements Subrule2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSub2()
   {
     return sub2;
@@ -85,6 +86,7 @@ public class Subrule2Impl extends ATypeImpl implements Subrule2
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSub2(String newSub2)
   {
     String oldSub2 = sub2;
@@ -169,7 +171,7 @@ public class Subrule2Impl extends ATypeImpl implements Subrule2
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (sub2: ");
     result.append(sub2);
     result.append(')');

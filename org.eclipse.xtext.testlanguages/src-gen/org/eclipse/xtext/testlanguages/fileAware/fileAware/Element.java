@@ -30,10 +30,6 @@ public interface Element extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -57,10 +53,6 @@ public interface Element extends EObject
    * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.fileAware.fileAware.Element}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Contents</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Contents</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage#getElement_Contents()
@@ -73,10 +65,6 @@ public interface Element extends EObject
    * Returns the value of the '<em><b>Ref</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.fileAware.fileAware.Element}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ref</em>' reference list.
    * @see org.eclipse.xtext.testlanguages.fileAware.fileAware.FileAwarePackage#getElement_Ref()

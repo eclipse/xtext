@@ -87,6 +87,7 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SuperMain> getSuperMains()
   {
     if (superMains == null)
@@ -101,6 +102,7 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnotherSuperMain getAnother()
   {
     return another;
@@ -128,6 +130,7 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAnother(AnotherSuperMain newAnother)
   {
     if (newAnother != another)

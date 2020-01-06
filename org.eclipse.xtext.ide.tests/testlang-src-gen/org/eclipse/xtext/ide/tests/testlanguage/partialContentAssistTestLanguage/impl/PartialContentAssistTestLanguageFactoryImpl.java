@@ -81,6 +81,7 @@ public class PartialContentAssistTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration createTypeDeclaration()
   {
     TypeDeclarationImpl typeDeclaration = new TypeDeclarationImpl();
@@ -92,6 +93,7 @@ public class PartialContentAssistTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -103,6 +105,7 @@ public class PartialContentAssistTestLanguageFactoryImpl extends EFactoryImpl im
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialContentAssistTestLanguagePackage getPartialContentAssistTestLanguagePackage()
   {
     return (PartialContentAssistTestLanguagePackage)getEPackage();

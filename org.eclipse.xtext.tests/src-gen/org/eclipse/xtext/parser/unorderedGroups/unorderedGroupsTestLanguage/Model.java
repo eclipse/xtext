@@ -38,10 +38,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' attribute.
    * @see #setFirst(boolean)
@@ -64,10 +60,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Second</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second</em>' attribute.
    * @see #setSecond(boolean)
@@ -90,10 +82,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Third</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third</em>' attribute.
    * @see #setThird(boolean)
@@ -116,10 +104,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Forth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth</em>' attribute.
    * @see #setForth(boolean)
@@ -143,10 +127,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>First As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_FirstAsList()
@@ -159,10 +139,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Second As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_SecondAsList()
@@ -175,10 +151,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Third As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_ThirdAsList()
@@ -191,10 +163,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Forth As List</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth As List</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth As List</em>' attribute list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_ForthAsList()
@@ -206,10 +174,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
    * @see #setValue(String)
@@ -232,10 +196,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Serialized</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Serialized</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Serialized</em>' containment reference.
    * @see #setSerialized(UnorderedSerialization)
@@ -259,10 +219,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Nested Model</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Nested Model</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Nested Model</em>' containment reference list.
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_NestedModel()

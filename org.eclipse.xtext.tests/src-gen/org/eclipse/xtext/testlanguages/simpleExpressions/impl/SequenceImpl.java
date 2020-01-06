@@ -71,6 +71,7 @@ public class SequenceImpl extends MinimalEObjectImpl.Container implements Sequen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Sequence> getExpressions()
   {
     if (expressions == null)

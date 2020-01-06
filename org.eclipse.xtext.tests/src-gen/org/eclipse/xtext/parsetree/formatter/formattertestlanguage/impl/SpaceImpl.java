@@ -73,6 +73,7 @@ public class SpaceImpl extends LineImpl implements Space
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVal()
   {
     return val;
@@ -83,6 +84,7 @@ public class SpaceImpl extends LineImpl implements Space
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVal(String newVal)
   {
     String oldVal = val;
@@ -167,7 +169,7 @@ public class SpaceImpl extends LineImpl implements Space
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val: ");
     result.append(val);
     result.append(')');

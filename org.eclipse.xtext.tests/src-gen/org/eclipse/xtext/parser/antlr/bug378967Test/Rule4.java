@@ -28,10 +28,6 @@ public interface Rule4 extends EObject
   /**
    * Returns the value of the '<em><b>After</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>After</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>After</em>' containment reference.
    * @see #setAfter(AfterObj)
@@ -54,10 +50,6 @@ public interface Rule4 extends EObject
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' attribute.
    * @see #setValue(int)
@@ -80,10 +72,6 @@ public interface Rule4 extends EObject
   /**
    * Returns the value of the '<em><b>S</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>S</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>S</em>' containment reference.
    * @see #setS(SObj)

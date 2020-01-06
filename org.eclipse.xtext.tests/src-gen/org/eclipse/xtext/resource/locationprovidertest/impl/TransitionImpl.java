@@ -98,6 +98,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -108,6 +109,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -121,6 +123,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mode getSource()
   {
     if (source != null && source.eIsProxy())
@@ -151,6 +154,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(Mode newSource)
   {
     Mode oldSource = source;
@@ -164,6 +168,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Mode getDestination()
   {
     if (destination != null && destination.eIsProxy())
@@ -194,6 +199,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDestination(Mode newDestination)
   {
     Mode oldDestination = destination;
@@ -300,7 +306,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

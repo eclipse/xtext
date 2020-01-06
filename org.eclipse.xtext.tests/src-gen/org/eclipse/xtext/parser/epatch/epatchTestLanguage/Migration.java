@@ -28,10 +28,6 @@ public interface Migration extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' containment reference.
    * @see #setFirst(Executable)
@@ -54,10 +50,6 @@ public interface Migration extends EObject
   /**
    * Returns the value of the '<em><b>As Op</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>As Op</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>As Op</em>' containment reference.
    * @see #setAsOp(Executable)
@@ -80,10 +72,6 @@ public interface Migration extends EObject
   /**
    * Returns the value of the '<em><b>Each Op</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Each Op</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Each Op</em>' containment reference.
    * @see #setEachOp(Executable)

@@ -91,6 +91,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -102,6 +103,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PackageDeclaration createPackageDeclaration()
   {
     PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
@@ -113,6 +115,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -124,6 +127,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeDeclaration createTypeDeclaration()
   {
     TypeDeclarationImpl typeDeclaration = new TypeDeclarationImpl();
@@ -135,6 +139,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Member createMember()
   {
     MemberImpl member = new MemberImpl();
@@ -146,6 +151,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -157,6 +163,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type createType()
   {
     TypeImpl type = new TypeImpl();
@@ -168,6 +175,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Operation createOperation()
   {
     OperationImpl operation = new OperationImpl();
@@ -179,6 +187,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OperationCall createOperationCall()
   {
     OperationCallImpl operationCall = new OperationCallImpl();
@@ -190,6 +199,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
@@ -201,6 +211,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeReference createTypeReference()
   {
     TypeReferenceImpl typeReference = new TypeReferenceImpl();
@@ -212,6 +223,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PrimitiveType createPrimitiveType()
   {
     PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
@@ -223,6 +235,7 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TestLanguagePackage getTestLanguagePackage()
   {
     return (TestLanguagePackage)getEPackage();

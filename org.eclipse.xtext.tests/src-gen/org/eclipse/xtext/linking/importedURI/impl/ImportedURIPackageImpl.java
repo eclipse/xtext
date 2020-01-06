@@ -75,7 +75,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ImportedURIPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -90,7 +90,8 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
     if (isInited) return (ImportedURIPackage)EPackage.Registry.INSTANCE.getEPackage(ImportedURIPackage.eNS_URI);
 
     // Obtain or create and register package
-    ImportedURIPackageImpl theImportedURIPackage = (ImportedURIPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImportedURIPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImportedURIPackageImpl());
+    Object registeredImportedURIPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ImportedURIPackageImpl theImportedURIPackage = registeredImportedURIPackage instanceof ImportedURIPackageImpl ? (ImportedURIPackageImpl)registeredImportedURIPackage : new ImportedURIPackageImpl();
 
     isInited = true;
 
@@ -106,7 +107,6 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
     // Mark meta-data to indicate it can't be changed
     theImportedURIPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ImportedURIPackage.eNS_URI, theImportedURIPackage);
     return theImportedURIPackage;
@@ -117,6 +117,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -127,6 +128,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Imports()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -137,6 +139,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Types()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(1);
@@ -147,6 +150,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -157,6 +161,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -167,6 +172,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -177,6 +183,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -187,6 +194,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getType_Extends()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
@@ -197,6 +205,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ImportedURIFactory getImportedURIFactory()
   {
     return (ImportedURIFactory)getEFactoryInstance();

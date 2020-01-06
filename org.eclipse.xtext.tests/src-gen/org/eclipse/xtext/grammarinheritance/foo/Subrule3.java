@@ -26,10 +26,6 @@ public interface Subrule3 extends AType
   /**
    * Returns the value of the '<em><b>Sub1</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub1</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub1</em>' attribute.
    * @see #setSub1(int)

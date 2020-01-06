@@ -25,10 +25,6 @@ public interface Expression_VariableName extends Expression
   /**
    * Returns the value of the '<em><b>Variable</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Variable</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variable</em>' containment reference.
    * @see #setVariable(NVariableAccess)

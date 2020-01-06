@@ -72,6 +72,7 @@ public class DocImpl extends MinimalEObjectImpl.Container implements Doc
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SelfReferingDecl> getDeclarations()
   {
     if (declarations == null)

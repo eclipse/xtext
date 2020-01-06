@@ -25,10 +25,6 @@ public interface TrickyG extends Root
   /**
    * Returns the value of the '<em><b>Tree</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Tree</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tree</em>' containment reference.
    * @see #setTree(TrickyG1)

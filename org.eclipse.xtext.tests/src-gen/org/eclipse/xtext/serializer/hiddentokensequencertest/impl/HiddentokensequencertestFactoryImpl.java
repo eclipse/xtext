@@ -78,6 +78,7 @@ public class HiddentokensequencertestFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -89,6 +90,7 @@ public class HiddentokensequencertestFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainModel createDomainModel()
   {
     DomainModelImpl domainModel = new DomainModelImpl();
@@ -100,6 +102,7 @@ public class HiddentokensequencertestFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -111,6 +114,7 @@ public class HiddentokensequencertestFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public HiddentokensequencertestPackage getHiddentokensequencertestPackage()
   {
     return (HiddentokensequencertestPackage)getEPackage();

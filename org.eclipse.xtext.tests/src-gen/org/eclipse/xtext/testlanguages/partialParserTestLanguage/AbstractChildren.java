@@ -27,10 +27,6 @@ public interface AbstractChildren extends Content
    * Returns the value of the '<em><b>Abstract Children</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChild}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract Children</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abstract Children</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getAbstractChildren_AbstractChildren()

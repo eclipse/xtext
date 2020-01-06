@@ -67,7 +67,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link IgnoreCaseLinkingTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -82,7 +82,8 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
     if (isInited) return (IgnoreCaseLinkingTestPackage)EPackage.Registry.INSTANCE.getEPackage(IgnoreCaseLinkingTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    IgnoreCaseLinkingTestPackageImpl theIgnoreCaseLinkingTestPackage = (IgnoreCaseLinkingTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IgnoreCaseLinkingTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IgnoreCaseLinkingTestPackageImpl());
+    Object registeredIgnoreCaseLinkingTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    IgnoreCaseLinkingTestPackageImpl theIgnoreCaseLinkingTestPackage = registeredIgnoreCaseLinkingTestPackage instanceof IgnoreCaseLinkingTestPackageImpl ? (IgnoreCaseLinkingTestPackageImpl)registeredIgnoreCaseLinkingTestPackage : new IgnoreCaseLinkingTestPackageImpl();
 
     isInited = true;
 
@@ -98,7 +99,6 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
     // Mark meta-data to indicate it can't be changed
     theIgnoreCaseLinkingTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(IgnoreCaseLinkingTestPackage.eNS_URI, theIgnoreCaseLinkingTestPackage);
     return theIgnoreCaseLinkingTestPackage;
@@ -109,6 +109,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -119,6 +120,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -129,6 +131,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -139,6 +142,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -149,6 +153,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Reference()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -159,6 +164,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Elements()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -169,6 +175,7 @@ public class IgnoreCaseLinkingTestPackageImpl extends EPackageImpl implements Ig
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IgnoreCaseLinkingTestFactory getIgnoreCaseLinkingTestFactory()
   {
     return (IgnoreCaseLinkingTestFactory)getEFactoryInstance();

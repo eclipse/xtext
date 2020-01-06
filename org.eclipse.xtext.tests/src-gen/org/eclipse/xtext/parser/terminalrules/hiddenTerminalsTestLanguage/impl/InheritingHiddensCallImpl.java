@@ -74,6 +74,7 @@ public class InheritingHiddensCallImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isValid()
   {
     return valid;
@@ -84,6 +85,7 @@ public class InheritingHiddensCallImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setValid(boolean newValid)
   {
     boolean oldValid = valid;
@@ -168,7 +170,7 @@ public class InheritingHiddensCallImpl extends MinimalEObjectImpl.Container impl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (valid: ");
     result.append(valid);
     result.append(')');

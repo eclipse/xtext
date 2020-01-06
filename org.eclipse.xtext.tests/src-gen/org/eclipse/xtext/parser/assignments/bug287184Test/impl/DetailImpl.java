@@ -73,6 +73,7 @@ public class DetailImpl extends AbstractDetailImpl implements Detail
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVisibility()
   {
     return visibility;
@@ -83,6 +84,7 @@ public class DetailImpl extends AbstractDetailImpl implements Detail
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
@@ -167,7 +169,7 @@ public class DetailImpl extends AbstractDetailImpl implements Detail
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (visibility: ");
     result.append(visibility);
     result.append(')');

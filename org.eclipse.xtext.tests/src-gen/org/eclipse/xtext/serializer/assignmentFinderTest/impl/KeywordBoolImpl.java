@@ -74,6 +74,7 @@ public class KeywordBoolImpl extends MinimalEObjectImpl.Container implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isKw()
   {
     return kw;
@@ -84,6 +85,7 @@ public class KeywordBoolImpl extends MinimalEObjectImpl.Container implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKw(boolean newKw)
   {
     boolean oldKw = kw;
@@ -168,7 +170,7 @@ public class KeywordBoolImpl extends MinimalEObjectImpl.Container implements Key
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (kw: ");
     result.append(kw);
     result.append(')');

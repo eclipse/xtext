@@ -89,6 +89,7 @@ public class Combination4Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal1()
   {
     if (val1 == null)
@@ -103,6 +104,7 @@ public class Combination4Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal2()
   {
     if (val2 == null)
@@ -117,6 +119,7 @@ public class Combination4Impl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVal3()
   {
     if (val3 == null)
@@ -226,7 +229,7 @@ public class Combination4Impl extends MinimalEObjectImpl.Container implements Co
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (val1: ");
     result.append(val1);
     result.append(", val2: ");

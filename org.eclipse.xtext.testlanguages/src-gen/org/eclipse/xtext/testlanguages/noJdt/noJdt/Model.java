@@ -29,10 +29,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Greetings</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Greetings</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Greetings</em>' containment reference list.
    * @see org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage#getModel_Greetings()

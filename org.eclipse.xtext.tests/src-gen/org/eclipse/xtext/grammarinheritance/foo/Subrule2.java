@@ -26,10 +26,6 @@ public interface Subrule2 extends AType
   /**
    * Returns the value of the '<em><b>Sub2</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sub2</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sub2</em>' attribute.
    * @see #setSub2(String)

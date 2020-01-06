@@ -427,7 +427,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SequencertestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -442,7 +442,8 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     if (isInited) return (SequencertestPackage)EPackage.Registry.INSTANCE.getEPackage(SequencertestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SequencertestPackageImpl theSequencertestPackage = (SequencertestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SequencertestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SequencertestPackageImpl());
+    Object registeredSequencertestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SequencertestPackageImpl theSequencertestPackage = registeredSequencertestPackage instanceof SequencertestPackageImpl ? (SequencertestPackageImpl)registeredSequencertestPackage : new SequencertestPackageImpl();
 
     isInited = true;
 
@@ -458,7 +459,6 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     // Mark meta-data to indicate it can't be changed
     theSequencertestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SequencertestPackage.eNS_URI, theSequencertestPackage);
     return theSequencertestPackage;
@@ -469,6 +469,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -479,6 +480,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -489,6 +491,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -499,6 +502,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X3()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
@@ -509,6 +513,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X4()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
@@ -519,6 +524,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X5()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
@@ -529,6 +535,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X6()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
@@ -539,6 +546,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X7()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(6);
@@ -549,6 +557,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X8()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(7);
@@ -559,6 +568,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X9()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(8);
@@ -569,6 +579,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X10()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(9);
@@ -579,6 +590,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X11()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(10);
@@ -589,6 +601,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X12()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(11);
@@ -599,6 +612,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X13()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(12);
@@ -609,6 +623,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X14()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(13);
@@ -619,6 +634,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X15()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(14);
@@ -629,6 +645,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X19()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(15);
@@ -639,6 +656,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X20()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(16);
@@ -649,6 +667,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X21()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(17);
@@ -659,6 +678,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X22()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(18);
@@ -669,6 +689,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X23()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(19);
@@ -679,6 +700,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X24()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(20);
@@ -689,6 +711,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X25()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(21);
@@ -699,6 +722,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X26()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(22);
@@ -709,6 +733,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X27()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(23);
@@ -719,6 +744,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X28()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(24);
@@ -729,6 +755,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X29()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(25);
@@ -739,6 +766,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X30()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(26);
@@ -749,6 +777,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X31()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(27);
@@ -759,6 +788,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X32()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(28);
@@ -769,6 +799,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X33()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(29);
@@ -779,6 +810,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X34()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(30);
@@ -789,6 +821,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_X35()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(31);
@@ -799,6 +832,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleGroup()
   {
     return simpleGroupEClass;
@@ -809,6 +843,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleGroup_Val1()
   {
     return (EAttribute)simpleGroupEClass.getEStructuralFeatures().get(0);
@@ -819,6 +854,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleGroup_Val2()
   {
     return (EAttribute)simpleGroupEClass.getEStructuralFeatures().get(1);
@@ -829,6 +865,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleAlternative()
   {
     return simpleAlternativeEClass;
@@ -839,6 +876,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleAlternative_Val1()
   {
     return (EAttribute)simpleAlternativeEClass.getEStructuralFeatures().get(0);
@@ -849,6 +887,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleAlternative_Val2()
   {
     return (EAttribute)simpleAlternativeEClass.getEStructuralFeatures().get(1);
@@ -859,6 +898,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleMultiplicities()
   {
     return simpleMultiplicitiesEClass;
@@ -869,6 +909,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleMultiplicities_Val1()
   {
     return (EAttribute)simpleMultiplicitiesEClass.getEStructuralFeatures().get(0);
@@ -879,6 +920,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleMultiplicities_Val2()
   {
     return (EAttribute)simpleMultiplicitiesEClass.getEStructuralFeatures().get(1);
@@ -889,6 +931,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleMultiplicities_Val3()
   {
     return (EAttribute)simpleMultiplicitiesEClass.getEStructuralFeatures().get(2);
@@ -899,6 +942,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSimpleMultiplicities_Val4()
   {
     return (EAttribute)simpleMultiplicitiesEClass.getEStructuralFeatures().get(3);
@@ -909,6 +953,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGroupMultiplicities()
   {
     return groupMultiplicitiesEClass;
@@ -919,6 +964,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val1()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(0);
@@ -929,6 +975,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val2()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(1);
@@ -939,6 +986,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val3()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(2);
@@ -949,6 +997,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val4()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(3);
@@ -959,6 +1008,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val5()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(4);
@@ -969,6 +1019,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val6()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(5);
@@ -979,6 +1030,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getGroupMultiplicities_Val7()
   {
     return (EAttribute)groupMultiplicitiesEClass.getEStructuralFeatures().get(6);
@@ -989,6 +1041,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAlternativeMultiplicities()
   {
     return alternativeMultiplicitiesEClass;
@@ -999,6 +1052,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val2()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(0);
@@ -1009,6 +1063,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val3()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(1);
@@ -1019,6 +1074,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val4()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(2);
@@ -1029,6 +1085,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val5()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(3);
@@ -1039,6 +1096,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val6()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(4);
@@ -1049,6 +1107,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAlternativeMultiplicities_Val7()
   {
     return (EAttribute)alternativeMultiplicitiesEClass.getEStructuralFeatures().get(5);
@@ -1059,6 +1118,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getList1()
   {
     return list1EClass;
@@ -1069,6 +1129,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getList1_Val1()
   {
     return (EAttribute)list1EClass.getEStructuralFeatures().get(0);
@@ -1079,6 +1140,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getList2()
   {
     return list2EClass;
@@ -1089,6 +1151,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getList2_Val1()
   {
     return (EAttribute)list2EClass.getEStructuralFeatures().get(0);
@@ -1099,6 +1162,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAltList1()
   {
     return altList1EClass;
@@ -1109,6 +1173,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList1_Val1()
   {
     return (EAttribute)altList1EClass.getEStructuralFeatures().get(0);
@@ -1119,6 +1184,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList1_Val2()
   {
     return (EAttribute)altList1EClass.getEStructuralFeatures().get(1);
@@ -1129,6 +1195,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList1_Val3()
   {
     return (EAttribute)altList1EClass.getEStructuralFeatures().get(2);
@@ -1139,6 +1206,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList1_Val4()
   {
     return (EAttribute)altList1EClass.getEStructuralFeatures().get(3);
@@ -1149,6 +1217,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAltList2()
   {
     return altList2EClass;
@@ -1159,6 +1228,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList2_Val1()
   {
     return (EAttribute)altList2EClass.getEStructuralFeatures().get(0);
@@ -1169,6 +1239,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList2_Val2()
   {
     return (EAttribute)altList2EClass.getEStructuralFeatures().get(1);
@@ -1179,6 +1250,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAltList2_Val3()
   {
     return (EAttribute)altList2EClass.getEStructuralFeatures().get(2);
@@ -1189,6 +1261,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleKeywords()
   {
     return singleKeywordsEClass;
@@ -1199,6 +1272,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleKeywords_Val()
   {
     return (EAttribute)singleKeywordsEClass.getEStructuralFeatures().get(0);
@@ -1209,6 +1283,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleKeywordsOrID()
   {
     return singleKeywordsOrIDEClass;
@@ -1219,6 +1294,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleKeywordsOrID_Val()
   {
     return (EAttribute)singleKeywordsOrIDEClass.getEStructuralFeatures().get(0);
@@ -1229,6 +1305,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleTerminals()
   {
     return singleTerminalsEClass;
@@ -1239,6 +1316,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleTerminals_Val()
   {
     return (EAttribute)singleTerminalsEClass.getEStructuralFeatures().get(0);
@@ -1249,6 +1327,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleEnum()
   {
     return singleEnumEClass;
@@ -1259,6 +1338,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleEnum_Val()
   {
     return (EAttribute)singleEnumEClass.getEStructuralFeatures().get(0);
@@ -1269,6 +1349,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleCrossReference()
   {
     return singleCrossReferenceEClass;
@@ -1279,6 +1360,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleCrossReference_Name()
   {
     return (EAttribute)singleCrossReferenceEClass.getEStructuralFeatures().get(0);
@@ -1289,6 +1371,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleCrossReference_Ref()
   {
     return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(1);
@@ -1299,6 +1382,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleContainmentReference()
   {
     return singleContainmentReferenceEClass;
@@ -1309,6 +1393,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSingleContainmentReference_Child()
   {
     return (EReference)singleContainmentReferenceEClass.getEStructuralFeatures().get(0);
@@ -1319,6 +1404,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleContainmentReferenceChild1()
   {
     return singleContainmentReferenceChild1EClass;
@@ -1329,6 +1415,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleContainmentReferenceChild1_Val()
   {
     return (EAttribute)singleContainmentReferenceChild1EClass.getEStructuralFeatures().get(0);
@@ -1339,6 +1426,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleContainmentReferenceChild2()
   {
     return singleContainmentReferenceChild2EClass;
@@ -1349,6 +1437,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleContainmentReferenceChild2_Val()
   {
     return (EAttribute)singleContainmentReferenceChild2EClass.getEStructuralFeatures().get(0);
@@ -1359,6 +1448,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSingleContainmentReferenceChild3()
   {
     return singleContainmentReferenceChild3EClass;
@@ -1369,6 +1459,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSingleContainmentReferenceChild3_Val()
   {
     return (EAttribute)singleContainmentReferenceChild3EClass.getEStructuralFeatures().get(0);
@@ -1379,6 +1470,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMultiKeywords()
   {
     return multiKeywordsEClass;
@@ -1389,6 +1481,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMultiKeywords_Val()
   {
     return (EAttribute)multiKeywordsEClass.getEStructuralFeatures().get(0);
@@ -1399,6 +1492,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMultiKeywordsOrID()
   {
     return multiKeywordsOrIDEClass;
@@ -1409,6 +1503,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMultiKeywordsOrID_Val()
   {
     return (EAttribute)multiKeywordsOrIDEClass.getEStructuralFeatures().get(0);
@@ -1419,6 +1514,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMultiTerminals()
   {
     return multiTerminalsEClass;
@@ -1429,6 +1525,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMultiTerminals_Val()
   {
     return (EAttribute)multiTerminalsEClass.getEStructuralFeatures().get(0);
@@ -1439,6 +1536,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDependentAlternative1()
   {
     return dependentAlternative1EClass;
@@ -1449,6 +1547,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDependentAlternative1_Val()
   {
     return (EAttribute)dependentAlternative1EClass.getEStructuralFeatures().get(0);
@@ -1459,6 +1558,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDependentAlternative1_Flag()
   {
     return (EAttribute)dependentAlternative1EClass.getEStructuralFeatures().get(1);
@@ -1469,6 +1569,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDependentAlternative2()
   {
     return dependentAlternative2EClass;
@@ -1479,6 +1580,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDependentAlternative2_Val()
   {
     return (EAttribute)dependentAlternative2EClass.getEStructuralFeatures().get(0);
@@ -1489,6 +1591,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDependentAlternative2_Flag()
   {
     return (EAttribute)dependentAlternative2EClass.getEStructuralFeatures().get(1);
@@ -1499,6 +1602,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptional()
   {
     return optionalEClass;
@@ -1509,6 +1613,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptional_Int0()
   {
     return (EAttribute)optionalEClass.getEStructuralFeatures().get(0);
@@ -1519,6 +1624,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptional_Int1()
   {
     return (EAttribute)optionalEClass.getEStructuralFeatures().get(1);
@@ -1529,6 +1635,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptional_Int2()
   {
     return (EAttribute)optionalEClass.getEStructuralFeatures().get(2);
@@ -1539,6 +1646,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFloat()
   {
     return floatEClass;
@@ -1549,6 +1657,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedAlternative()
   {
     return unorderedAlternativeEClass;
@@ -1559,6 +1668,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedAlternative_Val1()
   {
     return (EAttribute)unorderedAlternativeEClass.getEStructuralFeatures().get(0);
@@ -1569,6 +1679,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedAlternative_Val2()
   {
     return (EAttribute)unorderedAlternativeEClass.getEStructuralFeatures().get(1);
@@ -1579,6 +1690,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUnorderedAlternative_Val3()
   {
     return (EReference)unorderedAlternativeEClass.getEStructuralFeatures().get(2);
@@ -1589,6 +1701,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUnorderedAlternative_Val4()
   {
     return (EReference)unorderedAlternativeEClass.getEStructuralFeatures().get(3);
@@ -1599,6 +1712,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedAlternativeVal()
   {
     return unorderedAlternativeValEClass;
@@ -1609,6 +1723,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedAlternativeVal_Val()
   {
     return (EAttribute)unorderedAlternativeValEClass.getEStructuralFeatures().get(0);
@@ -1619,6 +1734,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedAlternativeValDelegate()
   {
     return unorderedAlternativeValDelegateEClass;
@@ -1629,6 +1745,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedAlternativeVal2()
   {
     return unorderedAlternativeVal2EClass;
@@ -1639,6 +1756,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedAlternativeVal2_Val()
   {
     return (EAttribute)unorderedAlternativeVal2EClass.getEStructuralFeatures().get(0);
@@ -1649,6 +1767,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroup()
   {
     return unorderedGroupEClass;
@@ -1659,6 +1778,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroup_Val1()
   {
     return (EAttribute)unorderedGroupEClass.getEStructuralFeatures().get(0);
@@ -1669,6 +1789,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroup_Val2()
   {
     return (EAttribute)unorderedGroupEClass.getEStructuralFeatures().get(1);
@@ -1679,6 +1800,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUnorderedGroup_Val3()
   {
     return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(2);
@@ -1689,6 +1811,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getUnorderedGroup_Val4()
   {
     return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(3);
@@ -1699,6 +1822,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroupVal()
   {
     return unorderedGroupValEClass;
@@ -1709,6 +1833,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupVal_Val()
   {
     return (EAttribute)unorderedGroupValEClass.getEStructuralFeatures().get(0);
@@ -1719,6 +1844,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroupValDelegate()
   {
     return unorderedGroupValDelegateEClass;
@@ -1729,6 +1855,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroupVal2()
   {
     return unorderedGroupVal2EClass;
@@ -1739,6 +1866,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupVal2_Val()
   {
     return (EAttribute)unorderedGroupVal2EClass.getEStructuralFeatures().get(0);
@@ -1749,6 +1877,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroupOptional()
   {
     return unorderedGroupOptionalEClass;
@@ -1759,6 +1888,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupOptional_Val1()
   {
     return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(0);
@@ -1769,6 +1899,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupOptional_Va2()
   {
     return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(1);
@@ -1779,6 +1910,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupOptional_Val3()
   {
     return (EAttribute)unorderedGroupOptionalEClass.getEStructuralFeatures().get(2);
@@ -1789,6 +1921,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getUnorderedGroupBoolean()
   {
     return unorderedGroupBooleanEClass;
@@ -1799,6 +1932,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupBoolean_Val1()
   {
     return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(0);
@@ -1809,6 +1943,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupBoolean_Val2()
   {
     return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(1);
@@ -1819,6 +1954,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getUnorderedGroupBoolean_Val3()
   {
     return (EAttribute)unorderedGroupBooleanEClass.getEStructuralFeatures().get(2);
@@ -1829,6 +1965,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getComplex1()
   {
     return complex1EClass;
@@ -1839,6 +1976,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val1()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(0);
@@ -1849,6 +1987,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val2()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(1);
@@ -1859,6 +1998,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val3()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(2);
@@ -1869,6 +2009,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val4()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(3);
@@ -1879,6 +2020,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val5()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(4);
@@ -1889,6 +2031,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getComplex1_Val6()
   {
     return (EAttribute)complex1EClass.getEStructuralFeatures().get(5);
@@ -1899,6 +2042,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOptionalDouble()
   {
     return optionalDoubleEClass;
@@ -1909,6 +2053,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalDouble_Double0()
   {
     return (EAttribute)optionalDoubleEClass.getEStructuralFeatures().get(0);
@@ -1919,6 +2064,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalDouble_Double1()
   {
     return (EAttribute)optionalDoubleEClass.getEStructuralFeatures().get(1);
@@ -1929,6 +2075,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOptionalDouble_Double2()
   {
     return (EAttribute)optionalDoubleEClass.getEStructuralFeatures().get(2);
@@ -1939,6 +2086,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNullValue()
   {
     return nullValueEClass;
@@ -1949,6 +2097,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNullValue_Value()
   {
     return (EAttribute)nullValueEClass.getEStructuralFeatures().get(0);
@@ -1959,6 +2108,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNullValue_Foo()
   {
     return (EAttribute)nullValueEClass.getEStructuralFeatures().get(1);
@@ -1969,6 +2119,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNullCrossRef()
   {
     return nullCrossRefEClass;
@@ -1979,6 +2130,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNullCrossRef_Ref()
   {
     return (EReference)nullCrossRefEClass.getEStructuralFeatures().get(0);
@@ -1989,6 +2141,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNullCrossRef_Foo()
   {
     return (EAttribute)nullCrossRefEClass.getEStructuralFeatures().get(1);
@@ -1999,6 +2152,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFragmentCallerType()
   {
     return fragmentCallerTypeEClass;
@@ -2009,6 +2163,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_Val1()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(0);
@@ -2019,6 +2174,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_Val()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(1);
@@ -2029,6 +2185,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFragmentCallerType_FragVal()
   {
     return (EAttribute)fragmentCallerTypeEClass.getEStructuralFeatures().get(2);
@@ -2039,6 +2196,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterCaller()
   {
     return parameterCallerEClass;
@@ -2049,6 +2207,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameterCaller_P()
   {
     return (EReference)parameterCallerEClass.getEStructuralFeatures().get(0);
@@ -2059,6 +2218,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterized()
   {
     return parameterizedEClass;
@@ -2069,6 +2229,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameterized_V1()
   {
     return (EAttribute)parameterizedEClass.getEStructuralFeatures().get(0);
@@ -2079,6 +2240,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameterized_V2()
   {
     return (EAttribute)parameterizedEClass.getEStructuralFeatures().get(1);
@@ -2089,6 +2251,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameterized_V3()
   {
     return (EAttribute)parameterizedEClass.getEStructuralFeatures().get(2);
@@ -2099,6 +2262,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterDelegation()
   {
     return parameterDelegationEClass;
@@ -2109,6 +2273,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameterDelegation_P()
   {
     return (EReference)parameterDelegationEClass.getEStructuralFeatures().get(0);
@@ -2119,6 +2284,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDelegation()
   {
     return delegationEClass;
@@ -2129,6 +2295,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDelegation_P()
   {
     return (EAttribute)delegationEClass.getEStructuralFeatures().get(0);
@@ -2139,6 +2306,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getDelegation_Np()
   {
     return (EAttribute)delegationEClass.getEStructuralFeatures().get(1);
@@ -2149,6 +2317,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDelegationA()
   {
     return delegationAEClass;
@@ -2159,6 +2328,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDelegationA_Left()
   {
     return (EReference)delegationAEClass.getEStructuralFeatures().get(0);
@@ -2169,6 +2339,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDelegationA_Rc2()
   {
     return (EReference)delegationAEClass.getEStructuralFeatures().get(1);
@@ -2179,6 +2350,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -2189,6 +2361,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SequencertestFactory getSequencertestFactory()
   {
     return (SequencertestFactory)getEFactoryInstance();

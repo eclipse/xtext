@@ -63,7 +63,7 @@ public class NestedPackage1PackageImpl extends EPackageImpl implements NestedPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link NestedPackage1Package#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -78,13 +78,16 @@ public class NestedPackage1PackageImpl extends EPackageImpl implements NestedPac
 		if (isInited) return (NestedPackage1Package)EPackage.Registry.INSTANCE.getEPackage(NestedPackage1Package.eNS_URI);
 
 		// Obtain or create and register package
-		NestedPackage1PackageImpl theNestedPackage1Package = (NestedPackage1PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof NestedPackage1PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new NestedPackage1PackageImpl());
+		Object registeredNestedPackage1Package = EPackage.Registry.INSTANCE.get(eNS_URI);
+		NestedPackage1PackageImpl theNestedPackage1Package = registeredNestedPackage1Package instanceof NestedPackage1PackageImpl ? (NestedPackage1PackageImpl)registeredNestedPackage1Package : new NestedPackage1PackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		RootPackageImpl theRootPackage = (RootPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI) instanceof RootPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI) : RootPackage.eINSTANCE);
-		NoLiteralsPackageImpl theNoLiteralsPackage = (NoLiteralsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI) instanceof NoLiteralsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI) : NoLiteralsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(RootPackage.eNS_URI);
+		RootPackageImpl theRootPackage = (RootPackageImpl)(registeredPackage instanceof RootPackageImpl ? registeredPackage : RootPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(NoLiteralsPackage.eNS_URI);
+		NoLiteralsPackageImpl theNoLiteralsPackage = (NoLiteralsPackageImpl)(registeredPackage instanceof NoLiteralsPackageImpl ? registeredPackage : NoLiteralsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theNestedPackage1Package.createPackageContents();
@@ -99,7 +102,6 @@ public class NestedPackage1PackageImpl extends EPackageImpl implements NestedPac
 		// Mark meta-data to indicate it can't be changed
 		theNestedPackage1Package.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(NestedPackage1Package.eNS_URI, theNestedPackage1Package);
 		return theNestedPackage1Package;
@@ -110,6 +112,7 @@ public class NestedPackage1PackageImpl extends EPackageImpl implements NestedPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNestedClass1()
 	{
 		return nestedClass1EClass;
@@ -120,6 +123,7 @@ public class NestedPackage1PackageImpl extends EPackageImpl implements NestedPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NestedPackage1Factory getNestedPackage1Factory()
 	{
 		return (NestedPackage1Factory)getEFactoryInstance();

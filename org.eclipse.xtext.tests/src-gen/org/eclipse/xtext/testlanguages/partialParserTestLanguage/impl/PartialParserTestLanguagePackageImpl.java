@@ -131,7 +131,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link PartialParserTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -146,7 +146,8 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (PartialParserTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PartialParserTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    PartialParserTestLanguagePackageImpl thePartialParserTestLanguagePackage = (PartialParserTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PartialParserTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PartialParserTestLanguagePackageImpl());
+    Object registeredPartialParserTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    PartialParserTestLanguagePackageImpl thePartialParserTestLanguagePackage = registeredPartialParserTestLanguagePackage instanceof PartialParserTestLanguagePackageImpl ? (PartialParserTestLanguagePackageImpl)registeredPartialParserTestLanguagePackage : new PartialParserTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -162,7 +163,6 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     // Mark meta-data to indicate it can't be changed
     thePartialParserTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(PartialParserTestLanguagePackage.eNS_URI, thePartialParserTestLanguagePackage);
     return thePartialParserTestLanguagePackage;
@@ -173,6 +173,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSomeContainer()
   {
     return someContainerEClass;
@@ -183,6 +184,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSomeContainer_Name()
   {
     return (EAttribute)someContainerEClass.getEStructuralFeatures().get(0);
@@ -193,6 +195,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSomeContainer_Nested()
   {
     return (EReference)someContainerEClass.getEStructuralFeatures().get(1);
@@ -203,6 +206,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSomeContainer_Content()
   {
     return (EReference)someContainerEClass.getEStructuralFeatures().get(2);
@@ -213,6 +217,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNested()
   {
     return nestedEClass;
@@ -223,6 +228,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getNested_Nested()
   {
     return (EReference)nestedEClass.getEStructuralFeatures().get(0);
@@ -233,6 +239,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContent()
   {
     return contentEClass;
@@ -243,6 +250,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChildren()
   {
     return childrenEClass;
@@ -253,6 +261,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChildren_Children()
   {
     return (EReference)childrenEClass.getEStructuralFeatures().get(0);
@@ -263,6 +272,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getChild()
   {
     return childEClass;
@@ -273,6 +283,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getChild_Value()
   {
     return (EReference)childEClass.getEStructuralFeatures().get(0);
@@ -283,6 +294,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractChildren()
   {
     return abstractChildrenEClass;
@@ -293,6 +305,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractChildren_AbstractChildren()
   {
     return (EReference)abstractChildrenEClass.getEStructuralFeatures().get(0);
@@ -303,6 +316,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractChild()
   {
     return abstractChildEClass;
@@ -313,6 +327,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAbstractChild_Value()
   {
     return (EReference)abstractChildEClass.getEStructuralFeatures().get(0);
@@ -323,6 +338,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFirstConcrete()
   {
     return firstConcreteEClass;
@@ -333,6 +349,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFirstConcrete_ReferencedContainer()
   {
     return (EReference)firstConcreteEClass.getEStructuralFeatures().get(0);
@@ -343,6 +360,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSecondConcrete()
   {
     return secondConcreteEClass;
@@ -353,6 +371,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecondConcrete_ReferencedChildren()
   {
     return (EReference)secondConcreteEClass.getEStructuralFeatures().get(0);
@@ -363,6 +382,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getNamed()
   {
     return namedEClass;
@@ -373,6 +393,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getNamed_Name()
   {
     return (EAttribute)namedEClass.getEStructuralFeatures().get(0);
@@ -383,6 +404,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PartialParserTestLanguageFactory getPartialParserTestLanguageFactory()
   {
     return (PartialParserTestLanguageFactory)getEFactoryInstance();

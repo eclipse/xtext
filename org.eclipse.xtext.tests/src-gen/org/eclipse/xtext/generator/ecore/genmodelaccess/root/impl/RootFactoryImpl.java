@@ -114,6 +114,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootClass createRootClass()
 	{
 		RootClassImpl rootClass = new RootClassImpl();
@@ -167,6 +168,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootPackage getRootPackage()
 	{
 		return (RootPackage)getEPackage();

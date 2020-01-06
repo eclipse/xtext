@@ -95,6 +95,7 @@ public class AttributeExclusionTestImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAttr1()
   {
     return attr1;
@@ -105,6 +106,7 @@ public class AttributeExclusionTestImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAttr1(String newAttr1)
   {
     String oldAttr1 = attr1;
@@ -118,6 +120,7 @@ public class AttributeExclusionTestImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getAttr2()
   {
     return attr2;
@@ -128,6 +131,7 @@ public class AttributeExclusionTestImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAttr2(String newAttr2)
   {
     String oldAttr2 = attr2;
@@ -222,7 +226,7 @@ public class AttributeExclusionTestImpl extends MinimalEObjectImpl.Container imp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (attr1: ");
     result.append(attr1);
     result.append(", attr2: ");

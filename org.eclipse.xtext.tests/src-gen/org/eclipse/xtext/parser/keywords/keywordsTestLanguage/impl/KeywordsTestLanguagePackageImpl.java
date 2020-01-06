@@ -58,7 +58,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link KeywordsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -73,7 +73,8 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     if (isInited) return (KeywordsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(KeywordsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    KeywordsTestLanguagePackageImpl theKeywordsTestLanguagePackage = (KeywordsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KeywordsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KeywordsTestLanguagePackageImpl());
+    Object registeredKeywordsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    KeywordsTestLanguagePackageImpl theKeywordsTestLanguagePackage = registeredKeywordsTestLanguagePackage instanceof KeywordsTestLanguagePackageImpl ? (KeywordsTestLanguagePackageImpl)registeredKeywordsTestLanguagePackage : new KeywordsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -89,7 +90,6 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     // Mark meta-data to indicate it can't be changed
     theKeywordsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(KeywordsTestLanguagePackage.eNS_URI, theKeywordsTestLanguagePackage);
     return theKeywordsTestLanguagePackage;
@@ -100,6 +100,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -110,6 +111,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_First()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
@@ -120,6 +122,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Second()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
@@ -130,6 +133,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Third()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -140,6 +144,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Forth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
@@ -150,6 +155,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Fifth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
@@ -160,6 +166,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Sixth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
@@ -170,6 +177,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Seventh()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
@@ -180,6 +188,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Eighth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
@@ -190,6 +199,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public KeywordsTestLanguageFactory getKeywordsTestLanguageFactory()
   {
     return (KeywordsTestLanguageFactory)getEFactoryInstance();
