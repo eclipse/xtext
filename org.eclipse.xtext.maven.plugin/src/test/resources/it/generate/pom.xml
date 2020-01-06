@@ -18,11 +18,11 @@
 		<eclipse-text-version>3.6.100</eclipse-text-version>
 		<core-resources-version>3.12.0</core-resources-version>
 		<core-runtime-version>3.13.0</core-runtime-version>
-		<emf-common-version>2.12.0</emf-common-version>
-		<emf-version>2.12.0</emf-version>
-		<emf-codegen-version>2.11.0</emf-codegen-version>
-		<ecore-xcore-version>1.3.1</ecore-xcore-version>
-		<ecore-xcore-lib-version>1.1.100</ecore-xcore-lib-version>
+		<emf-common-version>2.17.0</emf-common-version>
+		<emf-version>2.20.0</emf-version>
+		<emf-codegen-version>2.19.0</emf-codegen-version>
+		<ecore-xcore-version>1.12.0</ecore-xcore-version>
+		<ecore-xcore-lib-version>1.4.0</ecore-xcore-lib-version>
 		<ecore-xtext-version>1.4.0</ecore-xtext-version>
 	</properties>
 
