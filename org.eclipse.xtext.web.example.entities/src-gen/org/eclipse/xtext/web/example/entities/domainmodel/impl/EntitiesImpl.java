@@ -93,6 +93,7 @@ public class EntitiesImpl extends MinimalEObjectImpl.Container implements Entiti
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSection getImportSection()
   {
     return importSection;
@@ -120,6 +121,7 @@ public class EntitiesImpl extends MinimalEObjectImpl.Container implements Entiti
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImportSection(XImportSection newImportSection)
   {
     if (newImportSection != importSection)
@@ -141,6 +143,7 @@ public class EntitiesImpl extends MinimalEObjectImpl.Container implements Entiti
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractElement> getElements()
   {
     if (elements == null)

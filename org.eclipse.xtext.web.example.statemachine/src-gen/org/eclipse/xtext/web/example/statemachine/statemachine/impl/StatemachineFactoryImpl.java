@@ -90,6 +90,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Statemachine createStatemachine()
   {
     StatemachineImpl statemachine = new StatemachineImpl();
@@ -101,6 +102,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Signal createSignal()
   {
     SignalImpl signal = new SignalImpl();
@@ -112,6 +114,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InputSignal createInputSignal()
   {
     InputSignalImpl inputSignal = new InputSignalImpl();
@@ -123,6 +126,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OutputSignal createOutputSignal()
   {
     OutputSignalImpl outputSignal = new OutputSignalImpl();
@@ -134,6 +138,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State createState()
   {
     StateImpl state = new StateImpl();
@@ -145,6 +150,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Transition createTransition()
   {
     TransitionImpl transition = new TransitionImpl();
@@ -156,6 +162,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Condition createCondition()
   {
     ConditionImpl condition = new ConditionImpl();
@@ -167,6 +174,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Event createEvent()
   {
     EventImpl event = new EventImpl();
@@ -178,6 +186,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Command createCommand()
   {
     CommandImpl command = new CommandImpl();
@@ -189,6 +198,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StatemachinePackage getStatemachinePackage()
   {
     return (StatemachinePackage)getEPackage();
