@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -229,7 +229,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("<unit id=\"io.github.classgraph\" version=\"4.8.35.v20190528-1517\"/>");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2019-12\"/>");
+    _builder.append("<repository location=\"https://download.eclipse.org/tools/orbit/downloads/2020-03\"/>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("</location>");
