@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements XAssignment
@@ -123,6 +124,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getAssignable()
 	{
 		return assignable;
@@ -150,6 +152,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAssignable(XExpression newAssignable)
 	{
 		if (newAssignable != assignable)
@@ -171,6 +174,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getValue()
 	{
 		return value;
@@ -198,6 +202,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(XExpression newValue)
 	{
 		if (newValue != value)
@@ -219,6 +224,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitStatic()
 	{
 		return explicitStatic;
@@ -229,6 +235,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitStatic(boolean newExplicitStatic)
 	{
 		boolean oldExplicitStatic = explicitStatic;
@@ -242,6 +249,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStaticWithDeclaringType()
 	{
 		return staticWithDeclaringType;
@@ -252,6 +260,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStaticWithDeclaringType(boolean newStaticWithDeclaringType)
 	{
 		boolean oldStaticWithDeclaringType = staticWithDeclaringType;
@@ -384,7 +393,7 @@ public class XAssignmentImpl extends XAbstractFeatureCallImplCustom implements X
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (explicitStatic: ");
 		result.append(explicitStatic);
 		result.append(", staticWithDeclaringType: ");

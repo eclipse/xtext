@@ -43,10 +43,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Member Call Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Member Call Target</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Member Call Target</em>' containment reference.
 	 * @see #setMemberCallTarget(XExpression)
@@ -70,10 +66,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	 * Returns the value of the '<em><b>Member Call Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Member Call Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Member Call Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_MemberCallArguments()
@@ -85,10 +77,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Explicit Operation Call</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Operation Call</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Operation Call</em>' attribute.
 	 * @see #setExplicitOperationCall(boolean)
@@ -111,10 +99,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Explicit Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Static</em>' attribute.
 	 * @see #setExplicitStatic(boolean)
@@ -137,10 +121,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Null Safe</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Null Safe</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Null Safe</em>' attribute.
 	 * @see #setNullSafe(boolean)
@@ -163,10 +143,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Type Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Literal</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Literal</em>' attribute.
 	 * @see #setTypeLiteral(boolean)
@@ -189,10 +165,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Static With Declaring Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static With Declaring Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static With Declaring Type</em>' attribute.
 	 * @see #setStaticWithDeclaringType(boolean)
@@ -215,10 +187,6 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Package Fragment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Package Fragment</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Package Fragment</em>' attribute.
 	 * @see #setPackageFragment(boolean)

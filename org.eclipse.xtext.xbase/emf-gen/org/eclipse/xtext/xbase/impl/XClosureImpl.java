@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getImplicitFormalParameters <em>Implicit Formal Parameters</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XClosureImpl extends XExpressionImpl implements XClosure
@@ -122,6 +123,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmFormalParameter> getDeclaredFormalParameters()
 	{
 		if (declaredFormalParameters == null)
@@ -136,6 +138,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -163,6 +166,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)
@@ -184,6 +188,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitSyntax()
 	{
 		return explicitSyntax;
@@ -194,6 +199,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitSyntax(boolean newExplicitSyntax)
 	{
 		boolean oldExplicitSyntax = explicitSyntax;
@@ -207,6 +213,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmFormalParameter> getImplicitFormalParameters()
 	{
 		if (implicitFormalParameters == null)
@@ -221,6 +228,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmFormalParameter> getFormalParameters()
 	{
 		// TODO: implement this method
@@ -357,7 +365,7 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (explicitSyntax: ");
 		result.append(explicitSyntax);
 		result.append(')');

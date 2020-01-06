@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.xtext.generator.editor/src" modelPluginID="org.eclipse.xtext.generator"
     forceOverwrite="true" modelName="SimpleAntlr" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="8.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.edit"
-    editorPluginID="org.eclipse.xtext.generator.editor" runtimeVersion="2.9">
+    editorPluginID="org.eclipse.xtext.generator.editor" runtimeVersion="2.20">
   <genPackages prefix="SimpleAntlr" basePackage="org.eclipse.xtext.generator.parser.antlr.debug"
       disposableProviderFactory="true" ecorePackage="SimpleAntlr.ecore#/">
     <genClasses ecoreClass="SimpleAntlr.ecore#//AntlrGrammar">

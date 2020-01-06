@@ -75,6 +75,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXFunctionTypeRef()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XFUNCTION_TYPE_REF = 0;
@@ -92,6 +93,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Param Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -101,6 +103,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -110,6 +113,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -119,6 +123,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Instance Context</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -128,6 +133,7 @@ public interface XtypePackage extends EPackage
 	 * The number of structural features of the '<em>XFunction Type Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -139,6 +145,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXComputedTypeReference()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XCOMPUTED_TYPE_REFERENCE = 1;
@@ -156,6 +163,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Type Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -165,6 +173,7 @@ public interface XtypePackage extends EPackage
 	 * The number of structural features of the '<em>XComputed Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -176,6 +185,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xtype.impl.XImportSectionImpl
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportSection()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XIMPORT_SECTION = 2;
@@ -184,6 +194,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Import Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -193,6 +204,7 @@ public interface XtypePackage extends EPackage
 	 * The number of structural features of the '<em>XImport Section</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -204,6 +216,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xtype.impl.XImportDeclarationImpl
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XIMPORT_DECLARATION = 3;
@@ -212,6 +225,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Wildcard</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -221,6 +235,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Extension</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -230,6 +245,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -239,6 +255,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Imported Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -248,6 +265,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Member Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -257,6 +275,7 @@ public interface XtypePackage extends EPackage
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -266,6 +285,7 @@ public interface XtypePackage extends EPackage
 	 * The number of structural features of the '<em>XImport Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -277,6 +297,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
 	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getIJvmTypeReferenceProvider()
+	 * @since 2.7
 	 * @generated
 	 */
 	int IJVM_TYPE_REFERENCE_PROVIDER = 4;
@@ -288,6 +309,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XFunction Type Ref</em>'.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXFunctionTypeRef();
@@ -299,6 +321,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the containment reference list '<em>Param Types</em>'.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes()
 	 * @see #getXFunctionTypeRef()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXFunctionTypeRef_ParamTypes();
@@ -310,6 +333,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType()
 	 * @see #getXFunctionTypeRef()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXFunctionTypeRef_ReturnType();
@@ -321,6 +345,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the reference '<em>Type</em>'.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getType()
 	 * @see #getXFunctionTypeRef()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXFunctionTypeRef_Type();
@@ -332,6 +357,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Instance Context</em>'.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext()
 	 * @see #getXFunctionTypeRef()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXFunctionTypeRef_InstanceContext();
@@ -342,6 +368,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XComputed Type Reference</em>'.
 	 * @see org.eclipse.xtext.xtype.XComputedTypeReference
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXComputedTypeReference();
@@ -353,6 +380,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Type Provider</em>'.
 	 * @see org.eclipse.xtext.xtype.XComputedTypeReference#getTypeProvider()
 	 * @see #getXComputedTypeReference()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXComputedTypeReference_TypeProvider();
@@ -363,6 +391,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XImport Section</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportSection
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXImportSection();
@@ -374,6 +403,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the containment reference list '<em>Import Declarations</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportSection#getImportDeclarations()
 	 * @see #getXImportSection()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXImportSection_ImportDeclarations();
@@ -384,6 +414,7 @@ public interface XtypePackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XImport Declaration</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXImportDeclaration();
@@ -395,6 +426,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Wildcard</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#isWildcard()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXImportDeclaration_Wildcard();
@@ -406,6 +438,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Extension</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#isExtension()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXImportDeclaration_Extension();
@@ -417,6 +450,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Static</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#isStatic()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXImportDeclaration_Static();
@@ -428,6 +462,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the reference '<em>Imported Type</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#getImportedType()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXImportDeclaration_ImportedType();
@@ -439,6 +474,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Member Name</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#getMemberName()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXImportDeclaration_MemberName();
@@ -450,6 +486,7 @@ public interface XtypePackage extends EPackage
 	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace()
 	 * @see #getXImportDeclaration()
+	 * @since 2.7
 	 * @generated
 	 */
 	EAttribute getXImportDeclaration_ImportedNamespace();
@@ -458,6 +495,11 @@ public interface XtypePackage extends EPackage
 	 * Returns the meta object for data type '{@link org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider <em>IJvm Type Reference Provider</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+     * <!-- begin-model-doc -->
+     * @since 2.7
+     * @noextend This interface is not intended to be extended by clients.
+     * @noimplement This interface is not intended to be implemented by clients.
+     * <!-- end-model-doc -->
 	 * @return the meta object for data type '<em>IJvm Type Reference Provider</em>'.
 	 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
 	 * @model instanceClass="org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider" serializeable="false"
@@ -494,6 +536,7 @@ public interface XtypePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl
 		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXFunctionTypeRef()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XFUNCTION_TYPE_REF = eINSTANCE.getXFunctionTypeRef();
@@ -502,6 +545,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Param Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XFUNCTION_TYPE_REF__PARAM_TYPES = eINSTANCE.getXFunctionTypeRef_ParamTypes();
@@ -510,6 +554,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XFUNCTION_TYPE_REF__RETURN_TYPE = eINSTANCE.getXFunctionTypeRef_ReturnType();
@@ -518,6 +563,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XFUNCTION_TYPE_REF__TYPE = eINSTANCE.getXFunctionTypeRef_Type();
@@ -526,6 +572,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Instance Context</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XFUNCTION_TYPE_REF__INSTANCE_CONTEXT = eINSTANCE.getXFunctionTypeRef_InstanceContext();
@@ -536,6 +583,7 @@ public interface XtypePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl
 		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXComputedTypeReference()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XCOMPUTED_TYPE_REFERENCE = eINSTANCE.getXComputedTypeReference();
@@ -544,6 +592,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Type Provider</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XCOMPUTED_TYPE_REFERENCE__TYPE_PROVIDER = eINSTANCE.getXComputedTypeReference_TypeProvider();
@@ -554,6 +603,7 @@ public interface XtypePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xtype.impl.XImportSectionImpl
 		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportSection()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XIMPORT_SECTION = eINSTANCE.getXImportSection();
@@ -562,6 +612,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Import Declarations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XIMPORT_SECTION__IMPORT_DECLARATIONS = eINSTANCE.getXImportSection_ImportDeclarations();
@@ -572,6 +623,7 @@ public interface XtypePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xtype.impl.XImportDeclarationImpl
 		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXImportDeclaration()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XIMPORT_DECLARATION = eINSTANCE.getXImportDeclaration();
@@ -580,6 +632,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Wildcard</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XIMPORT_DECLARATION__WILDCARD = eINSTANCE.getXImportDeclaration_Wildcard();
@@ -588,6 +641,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XIMPORT_DECLARATION__EXTENSION = eINSTANCE.getXImportDeclaration_Extension();
@@ -596,6 +650,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XIMPORT_DECLARATION__STATIC = eINSTANCE.getXImportDeclaration_Static();
@@ -604,6 +659,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Imported Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XIMPORT_DECLARATION__IMPORTED_TYPE = eINSTANCE.getXImportDeclaration_ImportedType();
@@ -612,6 +668,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Member Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XIMPORT_DECLARATION__MEMBER_NAME = eINSTANCE.getXImportDeclaration_MemberName();
@@ -620,6 +677,7 @@ public interface XtypePackage extends EPackage
 		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EAttribute XIMPORT_DECLARATION__IMPORTED_NAMESPACE = eINSTANCE.getXImportDeclaration_ImportedNamespace();
@@ -630,6 +688,7 @@ public interface XtypePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider
 		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getIJvmTypeReferenceProvider()
+		 * @since 2.7
 		 * @generated
 		 */
 		EDataType IJVM_TYPE_REFERENCE_PROVIDER = eINSTANCE.getIJvmTypeReferenceProvider();

@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.*;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
+ * @since 2.7
  * @generated
  */
 public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
@@ -108,8 +109,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XIfExpression createXIfExpression()
 	{
 		XIfExpressionImpl xIfExpression = new XIfExpressionImpl();
@@ -119,8 +122,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XSwitchExpression createXSwitchExpression()
 	{
 		XSwitchExpressionImpl xSwitchExpression = new XSwitchExpressionImpl();
@@ -130,8 +135,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XCasePart createXCasePart()
 	{
 		XCasePartImplCustom xCasePart = new XCasePartImplCustom();
@@ -141,8 +148,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XBlockExpression createXBlockExpression()
 	{
 		XBlockExpressionImplCustom xBlockExpression = new XBlockExpressionImplCustom();
@@ -152,8 +161,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XVariableDeclaration createXVariableDeclaration()
 	{
 		XVariableDeclarationImplCustom xVariableDeclaration = new XVariableDeclarationImplCustom();
@@ -163,8 +174,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XMemberFeatureCall createXMemberFeatureCall()
 	{
 		XMemberFeatureCallImplCustom xMemberFeatureCall = new XMemberFeatureCallImplCustom();
@@ -174,8 +187,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XFeatureCall createXFeatureCall()
 	{
 		XFeatureCallImplCustom xFeatureCall = new XFeatureCallImplCustom();
@@ -185,8 +200,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XConstructorCall createXConstructorCall()
 	{
 		XConstructorCallImplCustom xConstructorCall = new XConstructorCallImplCustom();
@@ -196,8 +213,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XBooleanLiteral createXBooleanLiteral()
 	{
 		XBooleanLiteralImpl xBooleanLiteral = new XBooleanLiteralImpl();
@@ -207,8 +226,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XNullLiteral createXNullLiteral()
 	{
 		XNullLiteralImplCustom xNullLiteral = new XNullLiteralImplCustom();
@@ -218,8 +239,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XNumberLiteral createXNumberLiteral()
 	{
 		XNumberLiteralImpl xNumberLiteral = new XNumberLiteralImpl();
@@ -229,8 +252,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XStringLiteral createXStringLiteral()
 	{
 		XStringLiteralImpl xStringLiteral = new XStringLiteralImpl();
@@ -240,8 +265,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XListLiteral createXListLiteral()
 	{
 		XListLiteralImpl xListLiteral = new XListLiteralImpl();
@@ -251,8 +278,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XSetLiteral createXSetLiteral()
 	{
 		XSetLiteralImpl xSetLiteral = new XSetLiteralImpl();
@@ -262,8 +291,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XClosure createXClosure()
 	{
 		XClosureImplCustom xClosure = new XClosureImplCustom();
@@ -273,8 +304,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XCastedExpression createXCastedExpression()
 	{
 		XCastedExpressionImpl xCastedExpression = new XCastedExpressionImpl();
@@ -284,8 +317,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XBinaryOperation createXBinaryOperation()
 	{
 		XBinaryOperationImplCustom xBinaryOperation = new XBinaryOperationImplCustom();
@@ -295,8 +330,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XUnaryOperation createXUnaryOperation()
 	{
 		XUnaryOperationImplCustom xUnaryOperation = new XUnaryOperationImplCustom();
@@ -306,8 +343,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XPostfixOperation createXPostfixOperation()
 	{
 		XPostfixOperationImplCustom xPostfixOperation = new XPostfixOperationImplCustom();
@@ -317,8 +356,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XForLoopExpression createXForLoopExpression()
 	{
 		XForLoopExpressionImpl xForLoopExpression = new XForLoopExpressionImpl();
@@ -328,8 +369,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XBasicForLoopExpression createXBasicForLoopExpression()
 	{
 		XBasicForLoopExpressionImpl xBasicForLoopExpression = new XBasicForLoopExpressionImpl();
@@ -339,8 +382,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XDoWhileExpression createXDoWhileExpression()
 	{
 		XDoWhileExpressionImpl xDoWhileExpression = new XDoWhileExpressionImpl();
@@ -350,8 +395,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XWhileExpression createXWhileExpression()
 	{
 		XWhileExpressionImpl xWhileExpression = new XWhileExpressionImpl();
@@ -361,8 +408,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XTypeLiteral createXTypeLiteral()
 	{
 		XTypeLiteralImplCustom xTypeLiteral = new XTypeLiteralImplCustom();
@@ -372,8 +421,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XInstanceOfExpression createXInstanceOfExpression()
 	{
 		XInstanceOfExpressionImpl xInstanceOfExpression = new XInstanceOfExpressionImpl();
@@ -383,8 +434,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XThrowExpression createXThrowExpression()
 	{
 		XThrowExpressionImpl xThrowExpression = new XThrowExpressionImpl();
@@ -394,8 +447,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XTryCatchFinallyExpression createXTryCatchFinallyExpression()
 	{
 		XTryCatchFinallyExpressionImpl xTryCatchFinallyExpression = new XTryCatchFinallyExpressionImpl();
@@ -405,8 +460,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XCatchClause createXCatchClause()
 	{
 		XCatchClauseImpl xCatchClause = new XCatchClauseImpl();
@@ -416,8 +473,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XAssignment createXAssignment()
 	{
 		XAssignmentImplCustom xAssignment = new XAssignmentImplCustom();
@@ -427,8 +486,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XReturnExpression createXReturnExpression()
 	{
 		XReturnExpressionImplCustom xReturnExpression = new XReturnExpressionImplCustom();
@@ -438,8 +499,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 */
+	@Override
 	public XSynchronizedExpression createXSynchronizedExpression()
 	{
 		XSynchronizedExpressionImpl xSynchronizedExpression = new XSynchronizedExpressionImpl();
@@ -451,6 +514,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XbasePackage getXbasePackage()
 	{
 		return (XbasePackage)getEPackage();

@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImpl#getTypeProvider <em>Type Provider</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XComputedTypeReferenceImpl extends JvmSpecializedTypeReferenceImplCustom implements XComputedTypeReference
@@ -81,6 +82,7 @@ public class XComputedTypeReferenceImpl extends JvmSpecializedTypeReferenceImplC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IJvmTypeReferenceProvider getTypeProvider()
 	{
 		return typeProvider;
@@ -91,6 +93,7 @@ public class XComputedTypeReferenceImpl extends JvmSpecializedTypeReferenceImplC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeProvider(IJvmTypeReferenceProvider newTypeProvider)
 	{
 		IJvmTypeReferenceProvider oldTypeProvider = typeProvider;
@@ -175,7 +178,7 @@ public class XComputedTypeReferenceImpl extends JvmSpecializedTypeReferenceImplC
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (typeProvider: ");
 		result.append(typeProvider);
 		result.append(')');

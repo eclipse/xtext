@@ -38,10 +38,6 @@ public interface XAssignment extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Assignable</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assignable</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Assignable</em>' containment reference.
 	 * @see #setAssignable(XExpression)
@@ -64,10 +60,6 @@ public interface XAssignment extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(XExpression)
@@ -90,10 +82,6 @@ public interface XAssignment extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Explicit Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Static</em>' attribute.
 	 * @see #setExplicitStatic(boolean)
@@ -116,10 +104,6 @@ public interface XAssignment extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Static With Declaring Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static With Declaring Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static With Declaring Type</em>' attribute.
 	 * @see #setStaticWithDeclaringType(boolean)

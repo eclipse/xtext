@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.*;
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+ * @since 2.7
  * @generated
  */
 public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
@@ -126,6 +127,7 @@ public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXAnnotationAdapter()
@@ -141,6 +143,7 @@ public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXAnnotationElementValuePairAdapter()
@@ -156,6 +159,7 @@ public class XAnnotationsAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXExpressionAdapter()

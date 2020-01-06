@@ -28,10 +28,6 @@ public interface ImportSectionTestLanguageRoot extends EObject
   /**
    * Returns the value of the '<em><b>Import Section</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Import Section</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Import Section</em>' containment reference.
    * @see #setImportSection(XImportSection)

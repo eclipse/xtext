@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XSynchronizedExpressionImpl extends XExpressionImpl implements XSynchronizedExpression
@@ -81,6 +82,7 @@ public class XSynchronizedExpressionImpl extends XExpressionImpl implements XSyn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getParam()
 	{
 		return param;
@@ -108,6 +110,7 @@ public class XSynchronizedExpressionImpl extends XExpressionImpl implements XSyn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam(XExpression newParam)
 	{
 		if (newParam != param)
@@ -129,6 +132,7 @@ public class XSynchronizedExpressionImpl extends XExpressionImpl implements XSyn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -156,6 +160,7 @@ public class XSynchronizedExpressionImpl extends XExpressionImpl implements XSyn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)

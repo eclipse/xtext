@@ -37,10 +37,6 @@ public interface XBlockExpression extends XExpression
 	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expressions</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBlockExpression_Expressions()

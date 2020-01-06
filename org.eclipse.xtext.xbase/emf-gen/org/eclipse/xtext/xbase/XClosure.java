@@ -42,10 +42,6 @@ public interface XClosure extends XExpression
 	 * Returns the value of the '<em><b>Declared Formal Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Declared Formal Parameters</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declared Formal Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_DeclaredFormalParameters()
@@ -57,10 +53,6 @@ public interface XClosure extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(XExpression)
@@ -83,10 +75,6 @@ public interface XClosure extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Explicit Syntax</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Syntax</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Syntax</em>' attribute.
 	 * @see #setExplicitSyntax(boolean)
@@ -110,10 +98,6 @@ public interface XClosure extends XExpression
 	 * Returns the value of the '<em><b>Implicit Formal Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implicit Formal Parameters</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implicit Formal Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_ImplicitFormalParameters()

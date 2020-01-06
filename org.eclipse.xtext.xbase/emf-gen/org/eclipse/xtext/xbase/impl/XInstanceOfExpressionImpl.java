@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInstanceOfExpression
@@ -83,6 +84,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getType()
 	{
 		return type;
@@ -110,6 +112,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmTypeReference newType)
 	{
 		if (newType != type)
@@ -131,6 +134,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -158,6 +162,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)

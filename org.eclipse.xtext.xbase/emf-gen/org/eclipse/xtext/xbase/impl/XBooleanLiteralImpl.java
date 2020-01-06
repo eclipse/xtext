@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl#isIsTrue <em>Is True</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XBooleanLiteralImpl extends XExpressionImpl implements XBooleanLiteral
@@ -77,6 +78,7 @@ public class XBooleanLiteralImpl extends XExpressionImpl implements XBooleanLite
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsTrue()
 	{
 		return isTrue;
@@ -87,6 +89,7 @@ public class XBooleanLiteralImpl extends XExpressionImpl implements XBooleanLite
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsTrue(boolean newIsTrue)
 	{
 		boolean oldIsTrue = isTrue;
@@ -171,7 +174,7 @@ public class XBooleanLiteralImpl extends XExpressionImpl implements XBooleanLite
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isTrue: ");
 		result.append(isTrue);
 		result.append(')');

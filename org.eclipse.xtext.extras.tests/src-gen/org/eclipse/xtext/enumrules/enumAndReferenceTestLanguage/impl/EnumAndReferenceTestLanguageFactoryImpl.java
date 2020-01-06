@@ -111,6 +111,7 @@ public class EnumAndReferenceTestLanguageFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EntityWithEnumAndReference createEntityWithEnumAndReference()
   {
     EntityWithEnumAndReferenceImpl entityWithEnumAndReference = new EntityWithEnumAndReferenceImpl();
@@ -144,6 +145,7 @@ public class EnumAndReferenceTestLanguageFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumAndReferenceTestLanguagePackage getEnumAndReferenceTestLanguagePackage()
   {
     return (EnumAndReferenceTestLanguagePackage)getEPackage();

@@ -29,10 +29,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>A</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.enumrules.multiRuleenums.MyEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>A</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>A</em>' attribute.
    * @see org.eclipse.xtext.enumrules.multiRuleenums.MyEnum
@@ -58,10 +54,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>B</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.enumrules.multiRuleenums.MyEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>B</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>B</em>' attribute.
    * @see org.eclipse.xtext.enumrules.multiRuleenums.MyEnum
@@ -87,10 +79,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>C</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.enumrules.multiRuleenums.MyEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>C</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>C</em>' attribute.
    * @see org.eclipse.xtext.enumrules.multiRuleenums.MyEnum

@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl#getElement <em>Element</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XAnnotationElementValuePairImpl extends MinimalEObjectImpl.Container implements XAnnotationElementValuePair
@@ -85,6 +86,7 @@ public class XAnnotationElementValuePairImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getValue()
 	{
 		return value;
@@ -112,6 +114,7 @@ public class XAnnotationElementValuePairImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(XExpression newValue)
 	{
 		if (newValue != value)
@@ -133,6 +136,7 @@ public class XAnnotationElementValuePairImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmOperation getElement()
 	{
 		if (element != null && element.eIsProxy())
@@ -163,6 +167,7 @@ public class XAnnotationElementValuePairImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElement(JvmOperation newElement)
 	{
 		JvmOperation oldElement = element;

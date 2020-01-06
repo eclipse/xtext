@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.purexbase.pureXbase.Model;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbaseFactory;
 import org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage;
@@ -61,7 +63,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link PureXbasePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -76,13 +78,15 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     if (isInited) return (PureXbasePackage)EPackage.Registry.INSTANCE.getEPackage(PureXbasePackage.eNS_URI);
 
     // Obtain or create and register package
-    PureXbasePackageImpl thePureXbasePackage = (PureXbasePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PureXbasePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PureXbasePackageImpl());
+    Object registeredPureXbasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    PureXbasePackageImpl thePureXbasePackage = registeredPureXbasePackage instanceof PureXbasePackageImpl ? (PureXbasePackageImpl)registeredPureXbasePackage : new PureXbasePackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
     XbasePackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     thePureXbasePackage.createPackageContents();
@@ -93,7 +97,6 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
     // Mark meta-data to indicate it can't be changed
     thePureXbasePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(PureXbasePackage.eNS_URI, thePureXbasePackage);
     return thePureXbasePackage;
@@ -104,6 +107,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -114,6 +118,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ImportSection()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -124,6 +129,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Block()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -134,6 +140,7 @@ public class PureXbasePackageImpl extends EPackageImpl implements PureXbasePacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PureXbaseFactory getPureXbaseFactory()
   {
     return (PureXbaseFactory)getEFactoryInstance();

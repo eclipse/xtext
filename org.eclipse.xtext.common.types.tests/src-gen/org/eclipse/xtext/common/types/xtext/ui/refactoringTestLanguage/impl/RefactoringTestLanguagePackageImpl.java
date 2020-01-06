@@ -68,7 +68,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RefactoringTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -83,7 +83,8 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
     if (isInited) return (RefactoringTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(RefactoringTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    RefactoringTestLanguagePackageImpl theRefactoringTestLanguagePackage = (RefactoringTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RefactoringTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RefactoringTestLanguagePackageImpl());
+    Object registeredRefactoringTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RefactoringTestLanguagePackageImpl theRefactoringTestLanguagePackage = registeredRefactoringTestLanguagePackage instanceof RefactoringTestLanguagePackageImpl ? (RefactoringTestLanguagePackageImpl)registeredRefactoringTestLanguagePackage : new RefactoringTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -99,7 +100,6 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
     // Mark meta-data to indicate it can't be changed
     theRefactoringTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RefactoringTestLanguagePackage.eNS_URI, theRefactoringTestLanguagePackage);
     return theRefactoringTestLanguagePackage;
@@ -110,6 +110,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -120,6 +121,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_ReferenceHolder()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -130,6 +132,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getReferenceHolder()
   {
     return referenceHolderEClass;
@@ -140,6 +143,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getReferenceHolder_Name()
   {
     return (EAttribute)referenceHolderEClass.getEStructuralFeatures().get(0);
@@ -150,6 +154,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReferenceHolder_DefaultReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(1);
@@ -160,6 +165,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefactoringTestLanguageFactory getRefactoringTestLanguageFactory()
   {
     return (RefactoringTestLanguageFactory)getEFactoryInstance();

@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl#getArrayDimensions <em>Array Dimensions</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
@@ -87,6 +88,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())
@@ -117,6 +119,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmType newType)
 	{
 		JvmType oldType = type;
@@ -130,6 +133,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getArrayDimensions()
 	{
 		if (arrayDimensions == null)
@@ -228,7 +232,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (arrayDimensions: ");
 		result.append(arrayDimensions);
 		result.append(')');

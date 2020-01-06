@@ -81,6 +81,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSection getImportSection()
   {
     return importSection;
@@ -108,6 +109,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setImportSection(XImportSection newImportSection)
   {
     if (newImportSection != importSection)
@@ -129,6 +131,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XBlockExpression getBlock()
   {
     return block;
@@ -156,6 +159,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBlock(XBlockExpression newBlock)
   {
     if (newBlock != block)

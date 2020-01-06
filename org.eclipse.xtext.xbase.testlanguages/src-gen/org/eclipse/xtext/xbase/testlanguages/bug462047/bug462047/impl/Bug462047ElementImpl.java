@@ -88,6 +88,7 @@ public class Bug462047ElementImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -98,6 +99,7 @@ public class Bug462047ElementImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -111,6 +113,7 @@ public class Bug462047ElementImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public JvmGenericType getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -141,6 +144,7 @@ public class Bug462047ElementImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(JvmGenericType newRef)
   {
     JvmGenericType oldRef = ref;
@@ -236,7 +240,7 @@ public class Bug462047ElementImpl extends MinimalEObjectImpl.Container implement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

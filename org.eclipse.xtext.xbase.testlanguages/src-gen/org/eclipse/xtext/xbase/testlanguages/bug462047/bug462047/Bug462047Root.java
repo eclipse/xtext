@@ -29,10 +29,6 @@ public interface Bug462047Root extends EObject
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Element}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Elements</em>' containment reference list.
    * @see org.eclipse.xtext.xbase.testlanguages.bug462047.bug462047.Bug462047Package#getBug462047Root_Elements()

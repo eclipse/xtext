@@ -41,10 +41,6 @@ public interface XCasePart extends EObject
 	/**
 	 * Returns the value of the '<em><b>Case</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Case</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Case</em>' containment reference.
 	 * @see #setCase(XExpression)
@@ -67,10 +63,6 @@ public interface XCasePart extends EObject
 	/**
 	 * Returns the value of the '<em><b>Then</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Then</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Then</em>' containment reference.
 	 * @see #setThen(XExpression)
@@ -93,10 +85,6 @@ public interface XCasePart extends EObject
 	/**
 	 * Returns the value of the '<em><b>Type Guard</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Guard</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Guard</em>' containment reference.
 	 * @see #setTypeGuard(JvmTypeReference)
@@ -119,10 +107,6 @@ public interface XCasePart extends EObject
 	/**
 	 * Returns the value of the '<em><b>Fall Through</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Fall Through</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Fall Through</em>' attribute.
 	 * @see #setFallThrough(boolean)

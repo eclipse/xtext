@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EFactory;
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xtype.XtypePackage
+ * @since 2.7
  * @generated
  */
 public interface XtypeFactory extends EFactory
@@ -32,6 +33,7 @@ public interface XtypeFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XFunction Type Ref</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XFunctionTypeRef createXFunctionTypeRef();
@@ -41,6 +43,7 @@ public interface XtypeFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XComputed Type Reference</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XComputedTypeReference createXComputedTypeReference();
@@ -50,6 +53,7 @@ public interface XtypeFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XImport Section</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XImportSection createXImportSection();
@@ -59,6 +63,7 @@ public interface XtypeFactory extends EFactory
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>XImport Declaration</em>'.
+	 * @since 2.7
 	 * @generated
 	 */
 	XImportDeclaration createXImportDeclaration();

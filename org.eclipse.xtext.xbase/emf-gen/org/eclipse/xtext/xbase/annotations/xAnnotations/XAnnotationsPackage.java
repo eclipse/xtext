@@ -73,6 +73,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotation()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XANNOTATION = 0;
@@ -81,6 +82,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The feature id for the '<em><b>Element Value Pairs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -90,6 +92,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The feature id for the '<em><b>Annotation Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -99,6 +102,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -108,6 +112,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The number of structural features of the '<em>XAnnotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -119,6 +124,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationElementValuePair()
+	 * @since 2.7
 	 * @generated
 	 */
 	int XANNOTATION_ELEMENT_VALUE_PAIR = 1;
@@ -127,6 +133,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -136,6 +143,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The feature id for the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -145,6 +153,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * The number of structural features of the '<em>XAnnotation Element Value Pair</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -157,6 +166,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XAnnotation</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXAnnotation();
@@ -168,6 +178,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * @return the meta object for the containment reference list '<em>Element Value Pairs</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getElementValuePairs()
 	 * @see #getXAnnotation()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXAnnotation_ElementValuePairs();
@@ -179,6 +190,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * @return the meta object for the reference '<em>Annotation Type</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType()
 	 * @see #getXAnnotation()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXAnnotation_AnnotationType();
@@ -190,6 +202,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue()
 	 * @see #getXAnnotation()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXAnnotation_Value();
@@ -200,6 +213,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>XAnnotation Element Value Pair</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair
+	 * @since 2.7
 	 * @generated
 	 */
 	EClass getXAnnotationElementValuePair();
@@ -211,6 +225,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair#getValue()
 	 * @see #getXAnnotationElementValuePair()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXAnnotationElementValuePair_Value();
@@ -222,6 +237,7 @@ public interface XAnnotationsPackage extends EPackage
 	 * @return the meta object for the reference '<em>Element</em>'.
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair#getElement()
 	 * @see #getXAnnotationElementValuePair()
+	 * @since 2.7
 	 * @generated
 	 */
 	EReference getXAnnotationElementValuePair_Element();
@@ -255,6 +271,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl
 		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotation()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XANNOTATION = eINSTANCE.getXAnnotation();
@@ -263,6 +280,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * The meta object literal for the '<em><b>Element Value Pairs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XANNOTATION__ELEMENT_VALUE_PAIRS = eINSTANCE.getXAnnotation_ElementValuePairs();
@@ -271,6 +289,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * The meta object literal for the '<em><b>Annotation Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XANNOTATION__ANNOTATION_TYPE = eINSTANCE.getXAnnotation_AnnotationType();
@@ -279,6 +298,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XANNOTATION__VALUE = eINSTANCE.getXAnnotation_Value();
@@ -289,6 +309,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl
 		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationElementValuePair()
+		 * @since 2.7
 		 * @generated
 		 */
 		EClass XANNOTATION_ELEMENT_VALUE_PAIR = eINSTANCE.getXAnnotationElementValuePair();
@@ -297,6 +318,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XANNOTATION_ELEMENT_VALUE_PAIR__VALUE = eINSTANCE.getXAnnotationElementValuePair_Value();
@@ -305,6 +327,7 @@ public interface XAnnotationsPackage extends EPackage
 		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.7
 		 * @generated
 		 */
 		EReference XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT = eINSTANCE.getXAnnotationElementValuePair_Element();

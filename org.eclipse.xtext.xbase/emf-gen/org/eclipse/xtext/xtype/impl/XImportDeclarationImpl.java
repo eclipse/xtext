@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XImportDeclarationImpl extends MinimalEObjectImpl.Container implements XImportDeclaration
@@ -176,6 +177,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isWildcard()
 	{
 		return wildcard;
@@ -186,6 +188,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWildcard(boolean newWildcard)
 	{
 		boolean oldWildcard = wildcard;
@@ -199,6 +202,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExtension()
 	{
 		return extension;
@@ -209,6 +213,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(boolean newExtension)
 	{
 		boolean oldExtension = extension;
@@ -222,6 +227,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		return static_;
@@ -232,6 +238,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic)
 	{
 		boolean oldStatic = static_;
@@ -245,6 +252,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmDeclaredType getImportedType()
 	{
 		if (importedType != null && importedType.eIsProxy())
@@ -275,6 +283,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImportedType(JvmDeclaredType newImportedType)
 	{
 		JvmDeclaredType oldImportedType = importedType;
@@ -288,6 +297,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMemberName()
 	{
 		return memberName;
@@ -298,6 +308,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMemberName(String newMemberName)
 	{
 		String oldMemberName = memberName;
@@ -311,6 +322,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImportedNamespace()
 	{
 		return importedNamespace;
@@ -321,6 +333,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImportedNamespace(String newImportedNamespace)
 	{
 		String oldImportedNamespace = importedNamespace;
@@ -334,6 +347,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImportedName()
 	{
 		// TODO: implement this method
@@ -346,6 +360,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImportedTypeName()
 	{
 		// TODO: implement this method
@@ -480,7 +495,7 @@ public class XImportDeclarationImpl extends MinimalEObjectImpl.Container impleme
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (wildcard: ");
 		result.append(wildcard);
 		result.append(", extension: ");

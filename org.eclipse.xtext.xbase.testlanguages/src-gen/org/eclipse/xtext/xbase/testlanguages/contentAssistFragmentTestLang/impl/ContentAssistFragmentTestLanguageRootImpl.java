@@ -68,6 +68,7 @@ public class ContentAssistFragmentTestLanguageRootImpl extends MinimalEObjectImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XExpression getExpression()
   {
     return expression;
@@ -95,6 +96,7 @@ public class ContentAssistFragmentTestLanguageRootImpl extends MinimalEObjectImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(XExpression newExpression)
   {
     if (newExpression != expression)

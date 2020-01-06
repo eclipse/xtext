@@ -44,6 +44,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl#isInstanceContext <em>Instance Context</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom implements XFunctionTypeRef
@@ -124,6 +125,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getParamTypes()
 	{
 		if (paramTypes == null)
@@ -138,6 +140,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getReturnType()
 	{
 		return returnType;
@@ -165,6 +168,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReturnType(JvmTypeReference newReturnType)
 	{
 		if (newReturnType != returnType)
@@ -186,6 +190,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())
@@ -216,6 +221,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmType newType)
 	{
 		JvmType oldType = type;
@@ -229,6 +235,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isInstanceContext()
 	{
 		return instanceContext;
@@ -239,6 +246,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInstanceContext(boolean newInstanceContext)
 	{
 		boolean oldInstanceContext = instanceContext;
@@ -374,7 +382,7 @@ public class XFunctionTypeRefImpl extends JvmSpecializedTypeReferenceImplCustom 
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (instanceContext: ");
 		result.append(instanceContext);
 		result.append(')');

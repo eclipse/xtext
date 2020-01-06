@@ -31,10 +31,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Import Section</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Import Section</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Import Section</em>' containment reference.
    * @see #setImportSection(XImportSection)
@@ -57,10 +53,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Block</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Block</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Block</em>' containment reference.
    * @see #setBlock(XBlockExpression)

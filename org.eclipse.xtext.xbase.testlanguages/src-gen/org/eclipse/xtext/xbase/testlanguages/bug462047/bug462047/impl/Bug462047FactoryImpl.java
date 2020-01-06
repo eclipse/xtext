@@ -77,6 +77,7 @@ public class Bug462047FactoryImpl extends EFactoryImpl implements Bug462047Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug462047Root createBug462047Root()
   {
     Bug462047RootImpl bug462047Root = new Bug462047RootImpl();
@@ -88,6 +89,7 @@ public class Bug462047FactoryImpl extends EFactoryImpl implements Bug462047Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug462047Element createBug462047Element()
   {
     Bug462047ElementImpl bug462047Element = new Bug462047ElementImpl();
@@ -99,6 +101,7 @@ public class Bug462047FactoryImpl extends EFactoryImpl implements Bug462047Facto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug462047Package getBug462047Package()
   {
     return (Bug462047Package)getEPackage();

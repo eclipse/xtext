@@ -37,10 +37,6 @@ public interface XBinaryOperation extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Left Operand</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Left Operand</em>' containment reference.
 	 * @see #setLeftOperand(XExpression)
@@ -63,10 +59,6 @@ public interface XBinaryOperation extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Right Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Right Operand</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Right Operand</em>' containment reference.
 	 * @see #setRightOperand(XExpression)
@@ -89,10 +81,6 @@ public interface XBinaryOperation extends XAbstractFeatureCall
 	/**
 	 * Returns the value of the '<em><b>Reassign First Argument</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reassign First Argument</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reassign First Argument</em>' attribute.
 	 * @see #setReassignFirstArgument(boolean)

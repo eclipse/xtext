@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl#getUpdateExpressions <em>Update Expressions</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBasicForLoopExpression
@@ -110,6 +111,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -137,6 +139,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)
@@ -158,6 +161,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getEachExpression()
 	{
 		return eachExpression;
@@ -185,6 +189,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEachExpression(XExpression newEachExpression)
 	{
 		if (newEachExpression != eachExpression)
@@ -206,6 +211,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getInitExpressions()
 	{
 		if (initExpressions == null)
@@ -220,6 +226,7 @@ public class XBasicForLoopExpressionImpl extends XExpressionImpl implements XBas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getUpdateExpressions()
 	{
 		if (updateExpressions == null)

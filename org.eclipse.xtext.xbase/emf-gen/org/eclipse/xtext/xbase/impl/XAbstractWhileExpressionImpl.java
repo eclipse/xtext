@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public abstract class XAbstractWhileExpressionImpl extends XExpressionImpl implements XAbstractWhileExpression
@@ -81,6 +82,7 @@ public abstract class XAbstractWhileExpressionImpl extends XExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getPredicate()
 	{
 		return predicate;
@@ -108,6 +110,7 @@ public abstract class XAbstractWhileExpressionImpl extends XExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPredicate(XExpression newPredicate)
 	{
 		if (newPredicate != predicate)
@@ -129,6 +132,7 @@ public abstract class XAbstractWhileExpressionImpl extends XExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getBody()
 	{
 		return body;
@@ -156,6 +160,7 @@ public abstract class XAbstractWhileExpressionImpl extends XExpressionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(XExpression newBody)
 	{
 		if (newBody != body)

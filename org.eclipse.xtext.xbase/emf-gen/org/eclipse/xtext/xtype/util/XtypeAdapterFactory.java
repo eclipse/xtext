@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtype.*;
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.xtype.XtypePackage
+ * @since 2.7
  * @generated
  */
 public class XtypeAdapterFactory extends AdapterFactoryImpl
@@ -142,6 +143,7 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXFunctionTypeRefAdapter()
@@ -157,6 +159,7 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xtype.XComputedTypeReference
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXComputedTypeReferenceAdapter()
@@ -172,6 +175,7 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xtype.XImportSection
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXImportSectionAdapter()
@@ -187,6 +191,7 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xtype.XImportDeclaration
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXImportDeclarationAdapter()

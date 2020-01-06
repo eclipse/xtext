@@ -45,10 +45,6 @@ public interface XConstructorCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Constructor</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constructor</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constructor</em>' reference.
 	 * @see #setConstructor(JvmConstructor)
@@ -72,10 +68,6 @@ public interface XConstructorCall extends XExpression
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_Arguments()
@@ -88,10 +80,6 @@ public interface XConstructorCall extends XExpression
 	 * Returns the value of the '<em><b>Type Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_TypeArguments()
@@ -103,10 +91,6 @@ public interface XConstructorCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invalid Feature Issue Code</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invalid Feature Issue Code</em>' attribute.
 	 * @see #setInvalidFeatureIssueCode(String)
@@ -129,10 +113,6 @@ public interface XConstructorCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Valid Feature</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Valid Feature</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Valid Feature</em>' attribute.
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_ValidFeature()
@@ -144,10 +124,6 @@ public interface XConstructorCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Explicit Constructor Call</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Explicit Constructor Call</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Constructor Call</em>' attribute.
 	 * @see #setExplicitConstructorCall(boolean)
@@ -170,10 +146,6 @@ public interface XConstructorCall extends XExpression
 	/**
 	 * Returns the value of the '<em><b>Anonymous Class Constructor Call</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Anonymous Class Constructor Call</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Anonymous Class Constructor Call</em>' attribute.
 	 * @see #setAnonymousClassConstructorCall(boolean)

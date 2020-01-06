@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl#getResources <em>Resources</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements XTryCatchFinallyExpression
@@ -81,6 +82,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getResources()
+	 * @since 2.18
 	 * @generated
 	 * @ordered
 	 */
@@ -112,6 +114,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -139,6 +142,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)
@@ -160,6 +164,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getFinallyExpression()
 	{
 		return finallyExpression;
@@ -187,6 +192,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFinallyExpression(XExpression newFinallyExpression)
 	{
 		if (newFinallyExpression != finallyExpression)
@@ -208,6 +214,7 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XCatchClause> getCatchClauses()
 	{
 		if (catchClauses == null)
@@ -220,8 +227,10 @@ public class XTryCatchFinallyExpressionImpl extends XExpressionImpl implements X
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.18
 	 * @generated
 	 */
+	@Override
 	public EList<XVariableDeclaration> getResources()
 	{
 		if (resources == null)

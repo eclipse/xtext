@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangFactory;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage;
@@ -59,7 +61,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link XImportSectionTestLangPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -74,12 +76,14 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
     if (isInited) return (XImportSectionTestLangPackage)EPackage.Registry.INSTANCE.getEPackage(XImportSectionTestLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    XImportSectionTestLangPackageImpl theXImportSectionTestLangPackage = (XImportSectionTestLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XImportSectionTestLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XImportSectionTestLangPackageImpl());
+    Object registeredXImportSectionTestLangPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    XImportSectionTestLangPackageImpl theXImportSectionTestLangPackage = registeredXImportSectionTestLangPackage instanceof XImportSectionTestLangPackageImpl ? (XImportSectionTestLangPackageImpl)registeredXImportSectionTestLangPackage : new XImportSectionTestLangPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
     XtypePackage.eINSTANCE.eClass();
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theXImportSectionTestLangPackage.createPackageContents();
@@ -90,7 +94,6 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
     // Mark meta-data to indicate it can't be changed
     theXImportSectionTestLangPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(XImportSectionTestLangPackage.eNS_URI, theXImportSectionTestLangPackage);
     return theXImportSectionTestLangPackage;
@@ -101,6 +104,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImportSectionTestLanguageRoot()
   {
     return importSectionTestLanguageRootEClass;
@@ -111,6 +115,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getImportSectionTestLanguageRoot_ImportSection()
   {
     return (EReference)importSectionTestLanguageRootEClass.getEStructuralFeatures().get(0);
@@ -121,6 +126,7 @@ public class XImportSectionTestLangPackageImpl extends EPackageImpl implements X
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XImportSectionTestLangFactory getXImportSectionTestLangFactory()
   {
     return (XImportSectionTestLangFactory)getEFactoryInstance();

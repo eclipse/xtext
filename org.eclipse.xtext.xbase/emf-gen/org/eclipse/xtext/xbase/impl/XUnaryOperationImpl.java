@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl#getOperand <em>Operand</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XUnaryOperationImpl extends XAbstractFeatureCallImplCustom implements XUnaryOperation
@@ -70,6 +71,7 @@ public class XUnaryOperationImpl extends XAbstractFeatureCallImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getOperand()
 	{
 		return operand;
@@ -97,6 +99,7 @@ public class XUnaryOperationImpl extends XAbstractFeatureCallImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperand(XExpression newOperand)
 	{
 		if (newOperand != operand)

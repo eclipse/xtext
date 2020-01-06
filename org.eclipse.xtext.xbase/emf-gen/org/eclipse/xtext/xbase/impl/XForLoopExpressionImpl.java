@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopExpression
@@ -94,6 +95,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getForExpression()
 	{
 		return forExpression;
@@ -121,6 +123,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setForExpression(XExpression newForExpression)
 	{
 		if (newForExpression != forExpression)
@@ -142,6 +145,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getEachExpression()
 	{
 		return eachExpression;
@@ -169,6 +173,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEachExpression(XExpression newEachExpression)
 	{
 		if (newEachExpression != eachExpression)
@@ -190,6 +195,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmFormalParameter getDeclaredParam()
 	{
 		return declaredParam;
@@ -217,6 +223,7 @@ public class XForLoopExpressionImpl extends XExpressionImpl implements XForLoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaredParam(JvmFormalParameter newDeclaredParam)
 	{
 		if (newDeclaredParam != declaredParam)

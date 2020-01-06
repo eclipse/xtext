@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExpression
@@ -113,6 +114,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getSwitch()
 	{
 		return switch_;
@@ -140,6 +142,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSwitch(XExpression newSwitch)
 	{
 		if (newSwitch != switch_)
@@ -161,6 +164,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XCasePart> getCases()
 	{
 		if (cases == null)
@@ -175,6 +179,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getDefault()
 	{
 		return default_;
@@ -202,6 +207,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefault(XExpression newDefault)
 	{
 		if (newDefault != default_)
@@ -223,6 +229,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmFormalParameter getDeclaredParam()
 	{
 		return declaredParam;
@@ -250,6 +257,7 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaredParam(JvmFormalParameter newDeclaredParam)
 	{
 		if (newDeclaredParam != declaredParam)

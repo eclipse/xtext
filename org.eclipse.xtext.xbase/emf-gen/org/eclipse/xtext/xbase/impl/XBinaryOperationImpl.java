@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#isReassignFirstArgument <em>Reassign First Argument</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom implements XBinaryOperation
@@ -102,6 +103,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getLeftOperand()
 	{
 		return leftOperand;
@@ -129,6 +131,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeftOperand(XExpression newLeftOperand)
 	{
 		if (newLeftOperand != leftOperand)
@@ -150,6 +153,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getRightOperand()
 	{
 		return rightOperand;
@@ -177,6 +181,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRightOperand(XExpression newRightOperand)
 	{
 		if (newRightOperand != rightOperand)
@@ -198,6 +203,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isReassignFirstArgument()
 	{
 		return reassignFirstArgument;
@@ -208,6 +214,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReassignFirstArgument(boolean newReassignFirstArgument)
 	{
 		boolean oldReassignFirstArgument = reassignFirstArgument;
@@ -330,7 +337,7 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (reassignFirstArgument: ");
 		result.append(reassignFirstArgument);
 		result.append(')');

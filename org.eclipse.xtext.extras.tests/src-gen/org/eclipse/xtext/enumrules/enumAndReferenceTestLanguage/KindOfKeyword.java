@@ -43,10 +43,6 @@ public enum KindOfKeyword implements Enumerator
   /**
    * The '<em><b>Kind Of Keyword</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Kind Of Keyword</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #KIND_OF_KEYWORD
    * @model name="kindOfKeyword"
@@ -58,10 +54,6 @@ public enum KindOfKeyword implements Enumerator
   /**
    * The '<em><b>Another Enum Literal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Another Enum Literal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #ANOTHER_ENUM_LITERAL
    * @model name="anotherEnumLiteral"
@@ -190,6 +182,7 @@ public enum KindOfKeyword implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum KindOfKeyword implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum KindOfKeyword implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

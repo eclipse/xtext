@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public abstract class XCollectionLiteralImpl extends XExpressionImpl implements XCollectionLiteral
@@ -74,6 +75,7 @@ public abstract class XCollectionLiteralImpl extends XExpressionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getElements()
 	{
 		if (elements == null)

@@ -36,6 +36,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportSectionImpl#getImportDeclarations <em>Import Declarations</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XImportSectionImpl extends MinimalEObjectImpl.Container implements XImportSection
@@ -76,6 +77,7 @@ public class XImportSectionImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XImportDeclaration> getImportDeclarations()
 	{
 		if (importDeclarations == null)

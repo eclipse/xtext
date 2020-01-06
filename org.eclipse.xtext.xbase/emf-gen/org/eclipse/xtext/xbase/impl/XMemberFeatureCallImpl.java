@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
  *
+ * @since 2.7
  * @generated
  */
 public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom implements XMemberFeatureCall
@@ -214,6 +215,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getMemberCallTarget()
 	{
 		return memberCallTarget;
@@ -241,6 +243,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMemberCallTarget(XExpression newMemberCallTarget)
 	{
 		if (newMemberCallTarget != memberCallTarget)
@@ -262,6 +265,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XExpression> getMemberCallArguments()
 	{
 		if (memberCallArguments == null)
@@ -276,6 +280,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitOperationCall()
 	{
 		return explicitOperationCall;
@@ -286,6 +291,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitOperationCall(boolean newExplicitOperationCall)
 	{
 		boolean oldExplicitOperationCall = explicitOperationCall;
@@ -299,6 +305,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExplicitStatic()
 	{
 		return explicitStatic;
@@ -309,6 +316,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExplicitStatic(boolean newExplicitStatic)
 	{
 		boolean oldExplicitStatic = explicitStatic;
@@ -322,6 +330,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isNullSafe()
 	{
 		return nullSafe;
@@ -332,6 +341,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNullSafe(boolean newNullSafe)
 	{
 		boolean oldNullSafe = nullSafe;
@@ -345,6 +355,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isTypeLiteral()
 	{
 		return typeLiteral;
@@ -355,6 +366,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypeLiteral(boolean newTypeLiteral)
 	{
 		boolean oldTypeLiteral = typeLiteral;
@@ -368,6 +380,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStaticWithDeclaringType()
 	{
 		return staticWithDeclaringType;
@@ -378,6 +391,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStaticWithDeclaringType(boolean newStaticWithDeclaringType)
 	{
 		boolean oldStaticWithDeclaringType = staticWithDeclaringType;
@@ -391,6 +405,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPackageFragment()
 	{
 		return packageFragment;
@@ -401,6 +416,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPackageFragment(boolean newPackageFragment)
 	{
 		boolean oldPackageFragment = packageFragment;
@@ -575,7 +591,7 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (explicitOperationCall: ");
 		result.append(explicitOperationCall);
 		result.append(", explicitStatic: ");
