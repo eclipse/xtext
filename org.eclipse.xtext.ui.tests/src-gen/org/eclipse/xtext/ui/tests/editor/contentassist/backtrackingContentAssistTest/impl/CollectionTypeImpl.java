@@ -95,6 +95,7 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<CollectionLiteralPart> getCollectionLiteralParts()
   {
     if (collectionLiteralParts == null)
@@ -109,6 +110,7 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTypeIdentifier()
   {
     return typeIdentifier;
@@ -119,6 +121,7 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTypeIdentifier(String newTypeIdentifier)
   {
     String oldTypeIdentifier = typeIdentifier;
@@ -269,7 +272,7 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (typeIdentifier: ");
     result.append(typeIdentifier);
     result.append(')');

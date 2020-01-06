@@ -108,6 +108,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Event> getEvents()
   {
     if (events == null)
@@ -122,6 +123,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Event> getResetEvents()
   {
     if (resetEvents == null)
@@ -136,6 +138,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Command> getCommands()
   {
     if (commands == null)
@@ -150,6 +153,7 @@ public class StatemachineImpl extends MinimalEObjectImpl.Container implements St
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<State> getStates()
   {
     if (states == null)

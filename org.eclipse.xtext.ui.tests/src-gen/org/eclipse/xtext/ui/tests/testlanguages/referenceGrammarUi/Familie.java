@@ -31,10 +31,6 @@ public interface Familie extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -57,10 +53,6 @@ public interface Familie extends EObject
   /**
    * Returns the value of the '<em><b>Mutter</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Mutter</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Mutter</em>' reference.
    * @see #setMutter(Erwachsener)
@@ -83,10 +75,6 @@ public interface Familie extends EObject
   /**
    * Returns the value of the '<em><b>Vater</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Vater</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Vater</em>' reference.
    * @see #setVater(Erwachsener)
@@ -110,10 +98,6 @@ public interface Familie extends EObject
    * Returns the value of the '<em><b>Kinder</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.Kind}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Kinder</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Kinder</em>' reference list.
    * @see org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGrammarUiPackage#getFamilie_Kinder()

@@ -95,6 +95,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFirst()
   {
     return first;
@@ -105,6 +106,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirst(String newFirst)
   {
     String oldFirst = first;
@@ -118,6 +120,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSecond()
   {
     return second;
@@ -128,6 +131,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecond(String newSecond)
   {
     String oldSecond = second;
@@ -222,7 +226,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (first: ");
     result.append(first);
     result.append(", second: ");

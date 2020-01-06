@@ -82,6 +82,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Spielplatz createSpielplatz()
   {
     SpielplatzImpl spielplatz = new SpielplatzImpl();
@@ -93,6 +94,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Person createPerson()
   {
     PersonImpl person = new PersonImpl();
@@ -104,6 +106,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Kind createKind()
   {
     KindImpl kind = new KindImpl();
@@ -115,6 +118,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Erwachsener createErwachsener()
   {
     ErwachsenerImpl erwachsener = new ErwachsenerImpl();
@@ -126,6 +130,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Spielzeug createSpielzeug()
   {
     SpielzeugImpl spielzeug = new SpielzeugImpl();
@@ -137,6 +142,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Farbe createFarbe()
   {
     FarbeImpl farbe = new FarbeImpl();
@@ -148,6 +154,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Familie createFamilie()
   {
     FamilieImpl familie = new FamilieImpl();
@@ -159,6 +166,7 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ReferenceGrammarUiPackage getReferenceGrammarUiPackage()
   {
     return (ReferenceGrammarUiPackage)getEPackage();

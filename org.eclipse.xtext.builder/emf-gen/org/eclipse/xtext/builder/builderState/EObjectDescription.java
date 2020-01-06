@@ -68,7 +68,7 @@ public interface EObjectDescription extends EObject, IEObjectDescription {
 	 * @see #isSetUserData()
 	 * @see #unsetUserData()
 	 * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getEObjectDescription_UserData()
-	 * @model mapType="org.eclipse.xtext.builder.builderState.UserDataEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @model mapType="org.eclipse.xtext.builder.builderState.UserDataEntry&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString&gt;"
 	 * @generated
 	 */
 	EMap<String, String> getUserData();

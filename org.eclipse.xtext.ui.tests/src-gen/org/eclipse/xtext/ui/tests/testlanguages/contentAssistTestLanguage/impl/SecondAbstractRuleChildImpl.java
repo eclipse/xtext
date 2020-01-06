@@ -66,6 +66,7 @@ public class SecondAbstractRuleChildImpl extends AbstractRuleImpl implements Sec
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractRuleCall getRule()
   {
     return rule;
@@ -93,6 +94,7 @@ public class SecondAbstractRuleChildImpl extends AbstractRuleImpl implements Sec
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRule(AbstractRuleCall newRule)
   {
     if (newRule != rule)

@@ -98,7 +98,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link DatatypeRuleTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -113,7 +113,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
     if (isInited) return (DatatypeRuleTestPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypeRuleTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    DatatypeRuleTestPackageImpl theDatatypeRuleTestPackage = (DatatypeRuleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DatatypeRuleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DatatypeRuleTestPackageImpl());
+    Object registeredDatatypeRuleTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    DatatypeRuleTestPackageImpl theDatatypeRuleTestPackage = registeredDatatypeRuleTestPackage instanceof DatatypeRuleTestPackageImpl ? (DatatypeRuleTestPackageImpl)registeredDatatypeRuleTestPackage : new DatatypeRuleTestPackageImpl();
 
     isInited = true;
 
@@ -126,7 +127,6 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
     // Mark meta-data to indicate it can't be changed
     theDatatypeRuleTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(DatatypeRuleTestPackage.eNS_URI, theDatatypeRuleTestPackage);
     return theDatatypeRuleTestPackage;
@@ -137,6 +137,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -147,6 +148,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypes()
   {
     return typesEClass;
@@ -157,6 +159,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypes_Types()
   {
     return (EReference)typesEClass.getEStructuralFeatures().get(0);
@@ -167,6 +170,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -177,6 +181,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -187,6 +192,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSimpleType()
   {
     return simpleTypeEClass;
@@ -197,6 +203,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCompositeType()
   {
     return compositeTypeEClass;
@@ -207,6 +214,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCompositeType_BaseType()
   {
     return (EReference)compositeTypeEClass.getEStructuralFeatures().get(0);
@@ -217,6 +225,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCompositeTypeEntry()
   {
     return compositeTypeEntryEClass;
@@ -227,6 +236,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCompositeTypeEntry_DataType()
   {
     return (EReference)compositeTypeEntryEClass.getEStructuralFeatures().get(0);
@@ -237,6 +247,7 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeRuleTestFactory getDatatypeRuleTestFactory()
   {
     return (DatatypeRuleTestFactory)getEFactoryInstance();

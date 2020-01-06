@@ -66,7 +66,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link TwoContextsPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     if (isInited) return (TwoContextsPackage)EPackage.Registry.INSTANCE.getEPackage(TwoContextsPackage.eNS_URI);
 
     // Obtain or create and register package
-    TwoContextsPackageImpl theTwoContextsPackage = (TwoContextsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TwoContextsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TwoContextsPackageImpl());
+    Object registeredTwoContextsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    TwoContextsPackageImpl theTwoContextsPackage = registeredTwoContextsPackage instanceof TwoContextsPackageImpl ? (TwoContextsPackageImpl)registeredTwoContextsPackage : new TwoContextsPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     // Mark meta-data to indicate it can't be changed
     theTwoContextsPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(TwoContextsPackage.eNS_URI, theTwoContextsPackage);
     return theTwoContextsPackage;
@@ -105,6 +105,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMainModel()
   {
     return mainModelEClass;
@@ -115,6 +116,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMainModel_Elements()
   {
     return (EReference)mainModelEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnElement()
   {
     return anElementEClass;
@@ -135,6 +138,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnElement_Name()
   {
     return (EAttribute)anElementEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAnElement_Referred()
   {
     return (EReference)anElementEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TwoContextsFactory getTwoContextsFactory()
   {
     return (TwoContextsFactory)getEFactoryInstance();

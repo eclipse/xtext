@@ -95,6 +95,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPUBLIC()
   {
     return public_;
@@ -105,6 +106,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPUBLIC(String newPUBLIC)
   {
     String oldPUBLIC = public_;
@@ -118,6 +120,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPRIVATE()
   {
     return private_;
@@ -128,6 +131,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPRIVATE(String newPRIVATE)
   {
     String oldPRIVATE = private_;
@@ -222,7 +226,7 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (PUBLIC: ");
     result.append(public_);
     result.append(", PRIVATE: ");

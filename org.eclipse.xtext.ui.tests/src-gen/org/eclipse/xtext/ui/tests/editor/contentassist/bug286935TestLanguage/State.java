@@ -30,10 +30,6 @@ public interface State extends EObject
   /**
    * Returns the value of the '<em><b>Is Initial</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Is Initial</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Is Initial</em>' attribute.
    * @see #setIsInitial(boolean)
@@ -56,10 +52,6 @@ public interface State extends EObject
   /**
    * Returns the value of the '<em><b>Is Final</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Is Final</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Is Final</em>' attribute.
    * @see #setIsFinal(boolean)
@@ -83,10 +75,6 @@ public interface State extends EObject
    * Returns the value of the '<em><b>State Kind</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.StateType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State Kind</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State Kind</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug286935TestLanguage.StateType
@@ -111,10 +99,6 @@ public interface State extends EObject
   /**
    * Returns the value of the '<em><b>State Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>State Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>State Name</em>' attribute.
    * @see #setStateName(String)
@@ -137,10 +121,6 @@ public interface State extends EObject
   /**
    * Returns the value of the '<em><b>Label</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Label</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Label</em>' attribute.
    * @see #setLabel(String)

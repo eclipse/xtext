@@ -72,6 +72,7 @@ public class ProgramImpl extends MinimalEObjectImpl.Container implements Program
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ProgramDirective> getDirectives()
   {
     if (directives == null)

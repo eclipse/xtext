@@ -111,6 +111,7 @@ public class NoTerminalExtensionFactoryImpl extends EFactoryImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PolygonBasedShape createPolygonBasedShape()
   {
     PolygonBasedShapeImpl polygonBasedShape = new PolygonBasedShapeImpl();
@@ -144,6 +145,7 @@ public class NoTerminalExtensionFactoryImpl extends EFactoryImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NoTerminalExtensionPackage getNoTerminalExtensionPackage()
   {
     return (NoTerminalExtensionPackage)getEPackage();

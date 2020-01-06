@@ -152,6 +152,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -162,6 +163,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -175,6 +177,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Parameter getContent()
   {
     return content;
@@ -202,6 +205,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContent(Parameter newContent)
   {
     if (newContent != content)
@@ -223,6 +227,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ScalarExpression getTitle()
   {
     return title;
@@ -250,6 +255,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTitle(ScalarExpression newTitle)
   {
     if (newTitle != title)
@@ -271,6 +277,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ScalarExpression getTitleImage()
   {
     return titleImage;
@@ -298,6 +305,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTitleImage(ScalarExpression newTitleImage)
   {
     if (newTitleImage != titleImage)
@@ -319,6 +327,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TableViewStyle getStyle()
   {
     return style;
@@ -329,6 +338,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStyle(TableViewStyle newStyle)
   {
     TableViewStyle oldStyle = style;
@@ -342,6 +352,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Section> getSections()
   {
     if (sections == null)
@@ -501,7 +512,7 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", style: ");

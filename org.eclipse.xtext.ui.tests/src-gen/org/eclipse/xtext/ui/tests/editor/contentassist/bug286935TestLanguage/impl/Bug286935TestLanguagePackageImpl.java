@@ -66,7 +66,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug286935TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug286935TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug286935TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug286935TestLanguagePackageImpl theBug286935TestLanguagePackage = (Bug286935TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug286935TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug286935TestLanguagePackageImpl());
+    Object registeredBug286935TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug286935TestLanguagePackageImpl theBug286935TestLanguagePackage = registeredBug286935TestLanguagePackage instanceof Bug286935TestLanguagePackageImpl ? (Bug286935TestLanguagePackageImpl)registeredBug286935TestLanguagePackage : new Bug286935TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug286935TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug286935TestLanguagePackage.eNS_URI, theBug286935TestLanguagePackage);
     return theBug286935TestLanguagePackage;
@@ -105,6 +105,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getState()
   {
     return stateEClass;
@@ -115,6 +116,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_IsInitial()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_IsFinal()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
@@ -135,6 +138,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_StateKind()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
@@ -145,6 +149,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_StateName()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
@@ -155,6 +160,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getState_Label()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(4);
@@ -165,6 +171,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getStateType()
   {
     return stateTypeEEnum;
@@ -175,6 +182,7 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug286935TestLanguageFactory getBug286935TestLanguageFactory()
   {
     return (Bug286935TestLanguageFactory)getEFactoryInstance();

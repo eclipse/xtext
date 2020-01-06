@@ -73,6 +73,7 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getElement()
   {
     return element;
@@ -83,6 +84,7 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setElement(String newElement)
   {
     String oldElement = element;
@@ -167,7 +169,7 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (element: ");
     result.append(element);
     result.append(')');

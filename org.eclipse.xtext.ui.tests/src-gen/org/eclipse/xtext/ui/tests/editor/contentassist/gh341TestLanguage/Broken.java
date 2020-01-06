@@ -28,10 +28,6 @@ public interface Broken extends Element
    * Returns the value of the '<em><b>Ids</b></em>' attribute list.
    * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ids</em>' attribute list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Ids</em>' attribute list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.gh341TestLanguage.Gh341TestLanguagePackage#getBroken_Ids()
@@ -44,10 +40,6 @@ public interface Broken extends Element
    * Returns the value of the '<em><b>Refs</b></em>' reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.gh341TestLanguage.Broken}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Refs</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Refs</em>' reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.gh341TestLanguage.Gh341TestLanguagePackage#getBroken_Refs()

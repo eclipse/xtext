@@ -99,6 +99,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
@@ -129,6 +130,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
@@ -142,6 +144,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EStructuralFeature getFeature()
   {
     if (feature != null && feature.eIsProxy())
@@ -172,6 +175,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFeature(EStructuralFeature newFeature)
   {
     EStructuralFeature oldFeature = feature;
@@ -185,6 +189,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BooleanOperator getOperator()
   {
     return operator;
@@ -195,6 +200,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
@@ -301,7 +307,7 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (operator: ");
     result.append(operator);
     result.append(')');

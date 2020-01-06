@@ -30,10 +30,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Existing</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.enumrules.enumsUi.ExistingEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Existing</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Existing</em>' attribute.
    * @see org.eclipse.xtext.enumrules.enumsUi.ExistingEnum
@@ -59,10 +55,6 @@ public interface Model extends EObject
    * Returns the value of the '<em><b>Generated</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.GeneratedEnum}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Generated</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Generated</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.GeneratedEnum

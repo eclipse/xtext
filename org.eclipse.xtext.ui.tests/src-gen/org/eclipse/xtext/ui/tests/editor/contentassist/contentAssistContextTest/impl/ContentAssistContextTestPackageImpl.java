@@ -106,7 +106,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ContentAssistContextTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -121,7 +121,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
     if (isInited) return (ContentAssistContextTestPackage)EPackage.Registry.INSTANCE.getEPackage(ContentAssistContextTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    ContentAssistContextTestPackageImpl theContentAssistContextTestPackage = (ContentAssistContextTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistContextTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistContextTestPackageImpl());
+    Object registeredContentAssistContextTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ContentAssistContextTestPackageImpl theContentAssistContextTestPackage = registeredContentAssistContextTestPackage instanceof ContentAssistContextTestPackageImpl ? (ContentAssistContextTestPackageImpl)registeredContentAssistContextTestPackage : new ContentAssistContextTestPackageImpl();
 
     isInited = true;
 
@@ -134,7 +135,6 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
     // Mark meta-data to indicate it can't be changed
     theContentAssistContextTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ContentAssistContextTestPackage.eNS_URI, theContentAssistContextTestPackage);
     return theContentAssistContextTestPackage;
@@ -145,6 +145,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFirstLevel()
   {
     return firstLevelEClass;
@@ -155,6 +156,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFirstLevel_SecondLevelA()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(0);
@@ -165,6 +167,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFirstLevel_SecondLevelB()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(1);
@@ -175,6 +178,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSecondLevelA()
   {
     return secondLevelAEClass;
@@ -185,6 +189,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecondLevelA_ThirdLevelA1()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(0);
@@ -195,6 +200,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecondLevelA_ThirdLevelA2()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(1);
@@ -205,6 +211,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSecondLevelB()
   {
     return secondLevelBEClass;
@@ -215,6 +222,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecondLevelB_ThirdLevelB1()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(0);
@@ -225,6 +233,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSecondLevelB_ThirdLevelB2()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(1);
@@ -235,6 +244,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getThirdLevelA1()
   {
     return thirdLevelA1EClass;
@@ -245,6 +255,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getThirdLevelA1_Name()
   {
     return (EAttribute)thirdLevelA1EClass.getEStructuralFeatures().get(0);
@@ -255,6 +266,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getThirdLevelA2()
   {
     return thirdLevelA2EClass;
@@ -265,6 +277,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getThirdLevelA2_Name()
   {
     return (EAttribute)thirdLevelA2EClass.getEStructuralFeatures().get(0);
@@ -275,6 +288,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getThirdLevelB1()
   {
     return thirdLevelB1EClass;
@@ -285,6 +299,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getThirdLevelB1_Name()
   {
     return (EAttribute)thirdLevelB1EClass.getEStructuralFeatures().get(0);
@@ -295,6 +310,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getThirdLevelB2()
   {
     return thirdLevelB2EClass;
@@ -305,6 +321,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getThirdLevelB2_Name()
   {
     return (EAttribute)thirdLevelB2EClass.getEStructuralFeatures().get(0);
@@ -315,6 +332,7 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistContextTestFactory getContentAssistContextTestFactory()
   {
     return (ContentAssistContextTestFactory)getEFactoryInstance();

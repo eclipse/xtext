@@ -82,6 +82,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -96,6 +97,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<NamedElement> getElements()
   {
     if (elements == null)

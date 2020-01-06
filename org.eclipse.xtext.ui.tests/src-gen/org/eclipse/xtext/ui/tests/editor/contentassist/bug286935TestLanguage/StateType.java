@@ -63,10 +63,6 @@ public enum StateType implements Enumerator
   /**
    * The '<em><b>NORMAL</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>NORMAL</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NORMAL
    * @model
@@ -78,10 +74,6 @@ public enum StateType implements Enumerator
   /**
    * The '<em><b>PSEUDO</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>PSEUDO</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PSEUDO
    * @model literal="cond"
@@ -93,10 +85,6 @@ public enum StateType implements Enumerator
   /**
    * The '<em><b>REFERENCE</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>REFERENCE</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #REFERENCE
    * @model literal="reference"
@@ -108,10 +96,6 @@ public enum StateType implements Enumerator
   /**
    * The '<em><b>TEXTUAL</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>TEXTUAL</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #TEXTUAL
    * @model literal="textual"
@@ -244,6 +228,7 @@ public enum StateType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -254,6 +239,7 @@ public enum StateType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -264,6 +250,7 @@ public enum StateType implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

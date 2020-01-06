@@ -86,6 +86,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -96,6 +97,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -109,6 +111,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AnElement getReferred()
   {
     if (referred != null && referred.eIsProxy())
@@ -139,6 +142,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReferred(AnElement newReferred)
   {
     AnElement oldReferred = referred;
@@ -234,7 +238,7 @@ public class AnElementImpl extends MinimalEObjectImpl.Container implements AnEle
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -30,10 +30,6 @@ public interface FromEntry extends EObject
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(EClass)
@@ -56,10 +52,6 @@ public interface FromEntry extends EObject
   /**
    * Returns the value of the '<em><b>Withoutsubtypes</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Withoutsubtypes</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Withoutsubtypes</em>' attribute.
    * @see #setWithoutsubtypes(boolean)
@@ -82,10 +74,6 @@ public interface FromEntry extends EObject
   /**
    * Returns the value of the '<em><b>Alias</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Alias</em>' attribute.
    * @see #setAlias(String)
@@ -108,10 +96,6 @@ public interface FromEntry extends EObject
   /**
    * Returns the value of the '<em><b>Scope Clause</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Scope Clause</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Scope Clause</em>' containment reference.
    * @see #setScopeClause(ScopeClause)

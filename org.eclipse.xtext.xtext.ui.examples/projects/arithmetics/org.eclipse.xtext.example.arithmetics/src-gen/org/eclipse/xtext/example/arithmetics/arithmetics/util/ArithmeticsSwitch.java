@@ -14,7 +14,20 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.eclipse.xtext.example.arithmetics.arithmetics.*;
+import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
+import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
+import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
+import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +94,7 @@ public class ArithmeticsSwitch<T> extends Switch<T>
     {
       case ArithmeticsPackage.MODULE:
       {
-        Module module = (Module)theEObject;
+        org.eclipse.xtext.example.arithmetics.arithmetics.Module module = (org.eclipse.xtext.example.arithmetics.arithmetics.Module)theEObject;
         T result = caseModule(module);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -202,7 +215,7 @@ public class ArithmeticsSwitch<T> extends Switch<T>
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModule(Module object)
+  public T caseModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module object)
   {
     return null;
   }

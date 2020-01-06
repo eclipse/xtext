@@ -29,10 +29,6 @@ public interface PackageDefinition extends EObject
   /**
    * Returns the value of the '<em><b>Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Namespace</em>' attribute.
    * @see #setNamespace(String)
@@ -56,10 +52,6 @@ public interface PackageDefinition extends EObject
    * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Contents</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Contents</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage#getPackageDefinition_Contents()

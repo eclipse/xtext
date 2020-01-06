@@ -28,10 +28,6 @@ public interface Reference extends Feature
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object)
@@ -54,10 +50,6 @@ public interface Reference extends Feature
   /**
    * Returns the value of the '<em><b>Many</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Many</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Many</em>' attribute.
    * @see #setMany(boolean)
@@ -80,10 +72,6 @@ public interface Reference extends Feature
   /**
    * Returns the value of the '<em><b>Short Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Short Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Short Description</em>' attribute.
    * @see #setShortDescription(String)
@@ -106,10 +94,6 @@ public interface Reference extends Feature
   /**
    * Returns the value of the '<em><b>Long Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Long Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Long Description</em>' attribute.
    * @see #setLongDescription(String)

@@ -130,6 +130,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NameExp getName()
   {
     return name;
@@ -157,6 +158,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(NameExp newName)
   {
     if (newName != name)
@@ -178,6 +180,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isPre()
   {
     return pre;
@@ -188,6 +191,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPre(boolean newPre)
   {
     boolean oldPre = pre;
@@ -201,6 +205,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public iteratorVariable getVariable1()
   {
     return variable1;
@@ -228,6 +233,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVariable1(iteratorVariable newVariable1)
   {
     if (newVariable1 != variable1)
@@ -249,6 +255,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getVariable2()
   {
     return variable2;
@@ -276,6 +283,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVariable2(EObject newVariable2)
   {
     if (newVariable2 != variable2)
@@ -297,6 +305,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Expression> getArguments()
   {
     if (arguments == null)
@@ -446,7 +455,7 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (pre: ");
     result.append(pre);
     result.append(')');

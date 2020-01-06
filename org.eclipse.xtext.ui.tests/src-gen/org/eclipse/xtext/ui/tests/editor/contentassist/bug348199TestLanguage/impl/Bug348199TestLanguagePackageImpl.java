@@ -66,7 +66,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug348199TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug348199TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug348199TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug348199TestLanguagePackageImpl theBug348199TestLanguagePackage = (Bug348199TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug348199TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug348199TestLanguagePackageImpl());
+    Object registeredBug348199TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug348199TestLanguagePackageImpl theBug348199TestLanguagePackage = registeredBug348199TestLanguagePackage instanceof Bug348199TestLanguagePackageImpl ? (Bug348199TestLanguagePackageImpl)registeredBug348199TestLanguagePackage : new Bug348199TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug348199TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug348199TestLanguagePackage.eNS_URI, theBug348199TestLanguagePackage);
     return theBug348199TestLanguagePackage;
@@ -105,6 +105,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTimeperiod()
   {
     return timeperiodEClass;
@@ -115,6 +116,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTimeperiod_Time()
   {
     return (EReference)timeperiodEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTimeperiod_Name()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(1);
@@ -135,6 +138,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTimeperiod_Alias()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(2);
@@ -145,6 +149,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTimeDef()
   {
     return timeDefEClass;
@@ -155,6 +160,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTimeDef_Day()
   {
     return (EAttribute)timeDefEClass.getEStructuralFeatures().get(0);
@@ -165,6 +171,7 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug348199TestLanguageFactory getBug348199TestLanguageFactory()
   {
     return (Bug348199TestLanguageFactory)getEFactoryInstance();

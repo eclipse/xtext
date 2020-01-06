@@ -66,7 +66,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link QuickfixCrossrefPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
     if (isInited) return (QuickfixCrossrefPackage)EPackage.Registry.INSTANCE.getEPackage(QuickfixCrossrefPackage.eNS_URI);
 
     // Obtain or create and register package
-    QuickfixCrossrefPackageImpl theQuickfixCrossrefPackage = (QuickfixCrossrefPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QuickfixCrossrefPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QuickfixCrossrefPackageImpl());
+    Object registeredQuickfixCrossrefPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    QuickfixCrossrefPackageImpl theQuickfixCrossrefPackage = registeredQuickfixCrossrefPackage instanceof QuickfixCrossrefPackageImpl ? (QuickfixCrossrefPackageImpl)registeredQuickfixCrossrefPackage : new QuickfixCrossrefPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
     // Mark meta-data to indicate it can't be changed
     theQuickfixCrossrefPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(QuickfixCrossrefPackage.eNS_URI, theQuickfixCrossrefPackage);
     return theQuickfixCrossrefPackage;
@@ -105,6 +105,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -115,6 +116,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Elements()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -135,6 +138,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Doc()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Contained()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -165,6 +171,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Referenced()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(3);
@@ -175,6 +182,7 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
   {
     return (QuickfixCrossrefFactory)getEFactoryInstance();

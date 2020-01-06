@@ -133,6 +133,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OperationRef getOperation()
   {
     return operation;
@@ -160,6 +161,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOperation(OperationRef newOperation)
   {
     if (newOperation != operation)
@@ -181,6 +183,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Parameter> getParameters()
   {
     if (parameters == null)
@@ -195,6 +198,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TypeExp getType()
   {
     return type;
@@ -222,6 +226,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(TypeExp newType)
   {
     if (newType != type)
@@ -243,6 +248,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Pre> getPres()
   {
     if (pres == null)
@@ -257,6 +263,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Post> getPosts()
   {
     if (posts == null)
@@ -271,6 +278,7 @@ public class OperationContextDeclImpl extends ContextDeclImpl implements Operati
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Body> getBodies()
   {
     if (bodies == null)

@@ -91,6 +91,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -102,6 +103,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -113,6 +115,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type createType()
   {
     TypeImpl type = new TypeImpl();
@@ -124,6 +127,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DataType createDataType()
   {
     DataTypeImpl dataType = new DataTypeImpl();
@@ -135,6 +139,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class createClass()
   {
     ClassImpl class_ = new ClassImpl();
@@ -146,6 +151,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -157,6 +163,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
@@ -168,6 +175,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
@@ -179,6 +187,7 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainModelTestPackage getDomainModelTestPackage()
   {
     return (DomainModelTestPackage)getEPackage();

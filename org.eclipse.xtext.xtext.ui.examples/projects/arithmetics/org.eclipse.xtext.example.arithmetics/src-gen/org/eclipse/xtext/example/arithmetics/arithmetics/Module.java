@@ -36,10 +36,6 @@ public interface Module extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -63,10 +59,6 @@ public interface Module extends EObject
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.example.arithmetics.arithmetics.Import}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Imports</em>' containment reference list.
    * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getModule_Imports()
@@ -79,10 +71,6 @@ public interface Module extends EObject
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.example.arithmetics.arithmetics.Statement}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
    * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getModule_Statements()

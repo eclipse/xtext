@@ -32,10 +32,6 @@ public interface Import extends EObject
   /**
    * Returns the value of the '<em><b>Module</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Module</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Module</em>' reference.
    * @see #setModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module)
@@ -43,7 +39,7 @@ public interface Import extends EObject
    * @model
    * @generated
    */
-  Module getModule();
+  org.eclipse.xtext.example.arithmetics.arithmetics.Module getModule();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Import#getModule <em>Module</em>}' reference.
@@ -53,6 +49,6 @@ public interface Import extends EObject
    * @see #getModule()
    * @generated
    */
-  void setModule(Module value);
+  void setModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module value);
 
 } // Import

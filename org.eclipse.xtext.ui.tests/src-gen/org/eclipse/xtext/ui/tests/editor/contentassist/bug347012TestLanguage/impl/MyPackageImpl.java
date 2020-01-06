@@ -95,6 +95,7 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -105,6 +106,7 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -118,6 +120,7 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MyClass> getDirectives()
   {
     if (directives == null)
@@ -231,7 +234,7 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

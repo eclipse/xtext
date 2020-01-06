@@ -66,7 +66,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link OutlineTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
     if (isInited) return (OutlineTestPackage)EPackage.Registry.INSTANCE.getEPackage(OutlineTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    OutlineTestPackageImpl theOutlineTestPackage = (OutlineTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OutlineTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OutlineTestPackageImpl());
+    Object registeredOutlineTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    OutlineTestPackageImpl theOutlineTestPackage = registeredOutlineTestPackage instanceof OutlineTestPackageImpl ? (OutlineTestPackageImpl)registeredOutlineTestPackage : new OutlineTestPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
     // Mark meta-data to indicate it can't be changed
     theOutlineTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(OutlineTestPackage.eNS_URI, theOutlineTestPackage);
     return theOutlineTestPackage;
@@ -105,6 +105,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -115,6 +116,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -135,6 +138,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -145,6 +149,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Xrefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -155,6 +160,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Children()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -165,6 +171,7 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OutlineTestFactory getOutlineTestFactory()
   {
     return (OutlineTestFactory)getEFactoryInstance();

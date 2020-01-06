@@ -66,7 +66,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link NoTerminalExtensionPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -81,7 +81,8 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
     if (isInited) return (NoTerminalExtensionPackage)EPackage.Registry.INSTANCE.getEPackage(NoTerminalExtensionPackage.eNS_URI);
 
     // Obtain or create and register package
-    NoTerminalExtensionPackageImpl theNoTerminalExtensionPackage = (NoTerminalExtensionPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof NoTerminalExtensionPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new NoTerminalExtensionPackageImpl());
+    Object registeredNoTerminalExtensionPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    NoTerminalExtensionPackageImpl theNoTerminalExtensionPackage = registeredNoTerminalExtensionPackage instanceof NoTerminalExtensionPackageImpl ? (NoTerminalExtensionPackageImpl)registeredNoTerminalExtensionPackage : new NoTerminalExtensionPackageImpl();
 
     isInited = true;
 
@@ -94,7 +95,6 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
     // Mark meta-data to indicate it can't be changed
     theNoTerminalExtensionPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(NoTerminalExtensionPackage.eNS_URI, theNoTerminalExtensionPackage);
     return theNoTerminalExtensionPackage;
@@ -105,6 +105,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPolygonBasedShape()
   {
     return polygonBasedShapeEClass;
@@ -115,6 +116,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPolygonBasedShape_Shape()
   {
     return (EAttribute)polygonBasedShapeEClass.getEStructuralFeatures().get(0);
@@ -125,6 +127,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getPolygonBasedNodeShape()
   {
     return polygonBasedNodeShapeEEnum;
@@ -135,6 +138,7 @@ public class NoTerminalExtensionPackageImpl extends EPackageImpl implements NoTe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public NoTerminalExtensionFactory getNoTerminalExtensionFactory()
   {
     return (NoTerminalExtensionFactory)getEFactoryInstance();

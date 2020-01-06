@@ -25,10 +25,6 @@ public interface SimpleClassifierRef extends ClassifierRef
   /**
    * Returns the value of the '<em><b>Classifier</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Classifier</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Classifier</em>' attribute.
    * @see #setClassifier(String)

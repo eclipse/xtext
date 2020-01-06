@@ -135,6 +135,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getVisibility()
   {
     if (visibility == null)
@@ -149,6 +150,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getStatic()
   {
     if (static_ == null)
@@ -163,6 +165,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getSynchronized()
   {
     if (synchronized_ == null)
@@ -177,6 +180,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getAbstract()
   {
     if (abstract_ == null)
@@ -191,6 +195,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<String> getFinal()
   {
     if (final_ == null)
@@ -205,6 +210,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -215,6 +221,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -355,7 +362,7 @@ public class GroupLoopedModelImpl extends MinimalEObjectImpl.Container implement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (visibility: ");
     result.append(visibility);
     result.append(", static: ");

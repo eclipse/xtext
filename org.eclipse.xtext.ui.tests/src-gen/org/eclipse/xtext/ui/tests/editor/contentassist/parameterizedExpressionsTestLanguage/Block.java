@@ -27,10 +27,6 @@ public interface Block extends Statement
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.parameterizedExpressionsTestLanguage.Statement}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.parameterizedExpressionsTestLanguage.ParameterizedExpressionsTestLanguagePackage#getBlock_Statements()

@@ -53,10 +53,6 @@ public enum Visibility implements Enumerator
   /**
    * The '<em><b>PUBLIC</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>PUBLIC</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PUBLIC
    * @model literal="public"
@@ -68,10 +64,6 @@ public enum Visibility implements Enumerator
   /**
    * The '<em><b>PROTECTED</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>PROTECTED</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PROTECTED
    * @model literal="protected"
@@ -83,10 +75,6 @@ public enum Visibility implements Enumerator
   /**
    * The '<em><b>PRIVATE</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>PRIVATE</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #PRIVATE
    * @model literal="private"
@@ -217,6 +205,7 @@ public enum Visibility implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -227,6 +216,7 @@ public enum Visibility implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -237,6 +227,7 @@ public enum Visibility implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

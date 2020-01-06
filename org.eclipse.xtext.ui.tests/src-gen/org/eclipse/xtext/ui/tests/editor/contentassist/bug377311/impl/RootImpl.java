@@ -72,6 +72,7 @@ public class RootImpl extends MinimalEObjectImpl.Container implements Root
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Child> getChilds()
   {
     if (childs == null)

@@ -66,6 +66,7 @@ public class InvocationImpl extends PostfixExpressionImpl implements Invocation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ListExpression getArguments()
   {
     return arguments;
@@ -93,6 +94,7 @@ public class InvocationImpl extends PostfixExpressionImpl implements Invocation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setArguments(ListExpression newArguments)
   {
     if (newArguments != arguments)

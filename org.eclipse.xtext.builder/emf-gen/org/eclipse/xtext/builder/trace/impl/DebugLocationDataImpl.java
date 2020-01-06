@@ -184,6 +184,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getOffset() {
 		return offset;
 	}
@@ -193,6 +194,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOffset(int newOffset) {
 		int oldOffset = offset;
 		offset = newOffset;
@@ -205,6 +207,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getLength() {
 		return length;
 	}
@@ -214,6 +217,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLength(int newLength) {
 		int oldLength = length;
 		length = newLength;
@@ -226,6 +230,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
@@ -235,6 +240,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLineNumber(int newLineNumber) {
 		int oldLineNumber = lineNumber;
 		lineNumber = newLineNumber;
@@ -247,6 +253,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getEndLineNumber() {
 		return endLineNumber;
 	}
@@ -256,6 +263,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEndLineNumber(int newEndLineNumber) {
 		int oldEndLineNumber = endLineNumber;
 		endLineNumber = newEndLineNumber;
@@ -268,6 +276,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URI getPath() {
 		return path;
 	}
@@ -277,6 +286,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPath(URI newPath) {
 		URI oldPath = path;
 		path = newPath;
@@ -409,7 +419,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (offset: ");
 		result.append(offset);
 		result.append(", length: ");

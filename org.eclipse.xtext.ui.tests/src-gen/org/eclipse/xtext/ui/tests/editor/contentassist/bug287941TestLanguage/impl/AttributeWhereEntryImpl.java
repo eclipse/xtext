@@ -77,6 +77,7 @@ public class AttributeWhereEntryImpl extends WhereEntryImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
@@ -107,6 +108,7 @@ public class AttributeWhereEntryImpl extends WhereEntryImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
@@ -120,6 +122,7 @@ public class AttributeWhereEntryImpl extends WhereEntryImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
@@ -150,6 +153,7 @@ public class AttributeWhereEntryImpl extends WhereEntryImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAttribute(EAttribute newAttribute)
   {
     EAttribute oldAttribute = attribute;

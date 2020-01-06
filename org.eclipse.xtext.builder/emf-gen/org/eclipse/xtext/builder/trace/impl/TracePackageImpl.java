@@ -69,7 +69,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TracePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -83,7 +83,8 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		if (isInited) return (TracePackage)EPackage.Registry.INSTANCE.getEPackage(TracePackage.eNS_URI);
 
 		// Obtain or create and register package
-		TracePackageImpl theTracePackage = (TracePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TracePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TracePackageImpl());
+		Object registeredTracePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TracePackageImpl theTracePackage = registeredTracePackage instanceof TracePackageImpl ? (TracePackageImpl)registeredTracePackage : new TracePackageImpl();
 
 		isInited = true;
 
@@ -96,7 +97,6 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 		// Mark meta-data to indicate it can't be changed
 		theTracePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TracePackage.eNS_URI, theTracePackage);
 		return theTracePackage;
@@ -107,6 +107,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDebugTraceRegion() {
 		return debugTraceRegionEClass;
 	}
@@ -116,6 +117,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDebugTraceRegion_NestedRegions() {
 		return (EReference)debugTraceRegionEClass.getEStructuralFeatures().get(5);
 	}
@@ -125,6 +127,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_MyEndOffset() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(6);
 	}
@@ -134,6 +137,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDebugTraceRegion_Associations() {
 		return (EReference)debugTraceRegionEClass.getEStructuralFeatures().get(7);
 	}
@@ -143,6 +147,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_UseForDebugging() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(8);
 	}
@@ -152,6 +157,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDebugLocationData() {
 		return debugLocationDataEClass;
 	}
@@ -161,6 +167,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_Label() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(0);
 	}
@@ -170,6 +177,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_Offset() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(1);
 	}
@@ -179,6 +187,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_Length() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(2);
 	}
@@ -188,6 +197,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_LineNumber() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(3);
 	}
@@ -197,6 +207,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_EndLineNumber() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(4);
 	}
@@ -206,6 +217,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_Path() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(5);
 	}
@@ -215,6 +227,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugLocationData_EndOffset() {
 		return (EAttribute)debugLocationDataEClass.getEStructuralFeatures().get(6);
 	}
@@ -224,6 +237,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_Label() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(0);
 	}
@@ -233,6 +247,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_MyOffset() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(1);
 	}
@@ -242,6 +257,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_MyLength() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(2);
 	}
@@ -251,6 +267,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_MyLineNumber() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(3);
 	}
@@ -260,6 +277,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDebugTraceRegion_MyEndLineNumber() {
 		return (EAttribute)debugTraceRegionEClass.getEStructuralFeatures().get(4);
 	}
@@ -269,6 +287,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -278,6 +297,7 @@ public class TracePackageImpl extends EPackageImpl implements TracePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TraceFactory getTraceFactory() {
 		return (TraceFactory)getEFactoryInstance();
 	}

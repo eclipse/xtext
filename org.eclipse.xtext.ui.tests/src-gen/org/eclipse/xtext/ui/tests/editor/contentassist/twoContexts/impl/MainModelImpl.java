@@ -72,6 +72,7 @@ public class MainModelImpl extends MinimalEObjectImpl.Container implements MainM
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AnElement> getElements()
   {
     if (elements == null)

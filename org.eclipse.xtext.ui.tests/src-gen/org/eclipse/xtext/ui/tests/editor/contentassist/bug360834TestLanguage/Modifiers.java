@@ -28,10 +28,6 @@ public interface Modifiers extends UnorderedModifiers
   /**
    * Returns the value of the '<em><b>Final</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Final</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Final</em>' attribute.
    * @see #setFinal(boolean)
@@ -54,10 +50,6 @@ public interface Modifiers extends UnorderedModifiers
   /**
    * Returns the value of the '<em><b>Abstract</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abstract</em>' attribute.
    * @see #setAbstract(boolean)
@@ -80,10 +72,6 @@ public interface Modifiers extends UnorderedModifiers
   /**
    * Returns the value of the '<em><b>Extern</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Extern</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extern</em>' attribute.
    * @see #setExtern(boolean)
@@ -107,10 +95,6 @@ public interface Modifiers extends UnorderedModifiers
    * Returns the value of the '<em><b>Visibility</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Visibility}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Visibility</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Visibility

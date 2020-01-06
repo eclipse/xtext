@@ -82,7 +82,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RefactoringPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
     if (isInited) return (RefactoringPackage)EPackage.Registry.INSTANCE.getEPackage(RefactoringPackage.eNS_URI);
 
     // Obtain or create and register package
-    RefactoringPackageImpl theRefactoringPackage = (RefactoringPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RefactoringPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RefactoringPackageImpl());
+    Object registeredRefactoringPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RefactoringPackageImpl theRefactoringPackage = registeredRefactoringPackage instanceof RefactoringPackageImpl ? (RefactoringPackageImpl)registeredRefactoringPackage : new RefactoringPackageImpl();
 
     isInited = true;
 
@@ -110,7 +111,6 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
     // Mark meta-data to indicate it can't be changed
     theRefactoringPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RefactoringPackage.eNS_URI, theRefactoringPackage);
     return theRefactoringPackage;
@@ -121,6 +121,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -131,6 +132,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Elements()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -141,6 +143,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAbstractElement()
   {
     return abstractElementEClass;
@@ -151,6 +154,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -161,6 +165,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -171,6 +176,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElement()
   {
     return elementEClass;
@@ -181,6 +187,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
@@ -191,6 +198,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Contained()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
@@ -201,6 +209,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getElement_Referenced()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
@@ -211,6 +220,7 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefactoringFactory getRefactoringFactory()
   {
     return (RefactoringFactory)getEFactoryInstance();

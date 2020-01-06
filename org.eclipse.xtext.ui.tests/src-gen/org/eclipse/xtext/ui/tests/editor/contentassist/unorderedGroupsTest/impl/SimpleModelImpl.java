@@ -179,6 +179,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getVisibility()
   {
     return visibility;
@@ -189,6 +190,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
@@ -202,6 +204,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isStatic()
   {
     return static_;
@@ -212,6 +215,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStatic(boolean newStatic)
   {
     boolean oldStatic = static_;
@@ -225,6 +229,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isSynchronized()
   {
     return synchronized_;
@@ -235,6 +240,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSynchronized(boolean newSynchronized)
   {
     boolean oldSynchronized = synchronized_;
@@ -248,6 +254,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -258,6 +265,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -271,6 +279,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFinal()
   {
     return final_;
@@ -281,6 +290,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
@@ -294,6 +304,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -304,6 +315,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -438,7 +450,7 @@ public class SimpleModelImpl extends MinimalEObjectImpl.Container implements Sim
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (visibility: ");
     result.append(visibility);
     result.append(", static: ");

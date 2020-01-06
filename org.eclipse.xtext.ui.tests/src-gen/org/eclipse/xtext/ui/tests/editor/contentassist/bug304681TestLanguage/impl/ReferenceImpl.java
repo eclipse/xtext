@@ -127,6 +127,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getType()
   {
     if (type != null && type.eIsProxy())
@@ -157,6 +158,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newType)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object oldType = type;
@@ -170,6 +172,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isMany()
   {
     return many;
@@ -180,6 +183,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMany(boolean newMany)
   {
     boolean oldMany = many;
@@ -193,6 +197,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShortDescription()
   {
     return shortDescription;
@@ -203,6 +208,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
@@ -216,6 +222,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLongDescription()
   {
     return longDescription;
@@ -226,6 +233,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
@@ -341,7 +349,7 @@ public class ReferenceImpl extends FeatureImpl implements Reference
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (many: ");
     result.append(many);
     result.append(", shortDescription: ");

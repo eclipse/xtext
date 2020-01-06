@@ -234,6 +234,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -244,6 +245,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -257,6 +259,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isTransient()
   {
     return transient_;
@@ -267,6 +270,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTransient(boolean newTransient)
   {
     boolean oldTransient = transient_;
@@ -280,6 +284,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -290,6 +295,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -303,6 +309,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
@@ -333,6 +340,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class oldSuperClass = superClass;
@@ -346,6 +354,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getImplementedInterfaces()
   {
     if (implementedInterfaces == null)
@@ -360,6 +369,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getClassNumber()
   {
     return classNumber;
@@ -370,6 +380,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setClassNumber(int newClassNumber)
   {
     int oldClassNumber = classNumber;
@@ -383,6 +394,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getQuid()
   {
     return quid;
@@ -393,6 +405,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setQuid(int newQuid)
   {
     int oldQuid = quid;
@@ -406,6 +419,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDocumentation()
   {
     return documentation;
@@ -416,6 +430,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
@@ -429,6 +444,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)
@@ -443,6 +459,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Operation> getOperations()
   {
     if (operations == null)
@@ -641,7 +658,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (abstract: ");
     result.append(abstract_);
     result.append(", transient: ");

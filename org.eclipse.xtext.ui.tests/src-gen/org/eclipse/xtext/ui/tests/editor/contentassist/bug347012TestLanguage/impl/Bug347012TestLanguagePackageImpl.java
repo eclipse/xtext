@@ -130,7 +130,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug347012TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -145,7 +145,8 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug347012TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug347012TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug347012TestLanguagePackageImpl theBug347012TestLanguagePackage = (Bug347012TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug347012TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug347012TestLanguagePackageImpl());
+    Object registeredBug347012TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug347012TestLanguagePackageImpl theBug347012TestLanguagePackage = registeredBug347012TestLanguagePackage instanceof Bug347012TestLanguagePackageImpl ? (Bug347012TestLanguagePackageImpl)registeredBug347012TestLanguagePackage : new Bug347012TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -158,7 +159,6 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug347012TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug347012TestLanguagePackage.eNS_URI, theBug347012TestLanguagePackage);
     return theBug347012TestLanguagePackage;
@@ -169,6 +169,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyProgram()
   {
     return myProgramEClass;
@@ -179,6 +180,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyProgram_Package()
   {
     return (EReference)myProgramEClass.getEStructuralFeatures().get(0);
@@ -189,6 +191,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIdentifier()
   {
     return identifierEClass;
@@ -199,6 +202,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getIdentifier_Name()
   {
     return (EAttribute)identifierEClass.getEStructuralFeatures().get(0);
@@ -209,6 +213,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLiteral()
   {
     return literalEClass;
@@ -219,6 +224,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLiteral_Num()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(0);
@@ -229,6 +235,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLiteral_Str()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(1);
@@ -239,6 +246,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLiteral_Bool()
   {
     return (EAttribute)literalEClass.getEStructuralFeatures().get(2);
@@ -249,6 +257,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyPrimary()
   {
     return myPrimaryEClass;
@@ -259,6 +268,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyPackage()
   {
     return myPackageEClass;
@@ -269,6 +279,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyPackage_Name()
   {
     return (EAttribute)myPackageEClass.getEStructuralFeatures().get(0);
@@ -279,6 +290,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyPackage_Directives()
   {
     return (EReference)myPackageEClass.getEStructuralFeatures().get(1);
@@ -289,6 +301,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyClass()
   {
     return myClassEClass;
@@ -299,6 +312,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyClass_Name()
   {
     return (EAttribute)myClassEClass.getEStructuralFeatures().get(0);
@@ -309,6 +323,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyClass_Directives()
   {
     return (EReference)myClassEClass.getEStructuralFeatures().get(1);
@@ -319,6 +334,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyAttribute()
   {
     return myAttributeEClass;
@@ -329,6 +345,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyAttribute_PUBLIC()
   {
     return (EAttribute)myAttributeEClass.getEStructuralFeatures().get(0);
@@ -339,6 +356,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyAttribute_PRIVATE()
   {
     return (EAttribute)myAttributeEClass.getEStructuralFeatures().get(1);
@@ -349,6 +367,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyAttributes()
   {
     return myAttributesEClass;
@@ -359,6 +378,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyAttributes_Attributes()
   {
     return (EReference)myAttributesEClass.getEStructuralFeatures().get(0);
@@ -369,6 +389,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyField()
   {
     return myFieldEClass;
@@ -379,6 +400,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyField_Attr()
   {
     return (EReference)myFieldEClass.getEStructuralFeatures().get(0);
@@ -389,6 +411,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyField_Bindings()
   {
     return (EReference)myFieldEClass.getEStructuralFeatures().get(1);
@@ -399,6 +422,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMyBinding()
   {
     return myBindingEClass;
@@ -409,6 +433,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyBinding_Name()
   {
     return (EAttribute)myBindingEClass.getEStructuralFeatures().get(0);
@@ -419,6 +444,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMyBinding_Type()
   {
     return (EAttribute)myBindingEClass.getEStructuralFeatures().get(1);
@@ -429,6 +455,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMyBinding_Expression()
   {
     return (EReference)myBindingEClass.getEStructuralFeatures().get(2);
@@ -439,6 +466,7 @@ public class Bug347012TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug347012TestLanguageFactory getBug347012TestLanguageFactory()
   {
     return (Bug347012TestLanguageFactory)getEFactoryInstance();

@@ -87,6 +87,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainModel createDomainModel()
   {
     DomainModelImpl domainModel = new DomainModelImpl();
@@ -98,6 +99,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -109,6 +111,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PackageDeclaration createPackageDeclaration()
   {
     PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
@@ -120,6 +123,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -131,6 +135,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Feature createFeature()
   {
     FeatureImpl feature = new FeatureImpl();
@@ -142,6 +147,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -153,6 +159,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Operation createOperation()
   {
     OperationImpl operation = new OperationImpl();
@@ -164,6 +171,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DomainmodelPackage getDomainmodelPackage()
   {
     return (DomainmodelPackage)getEPackage();

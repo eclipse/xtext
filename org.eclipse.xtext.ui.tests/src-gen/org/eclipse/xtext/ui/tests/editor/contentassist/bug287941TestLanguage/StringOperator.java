@@ -63,10 +63,6 @@ public enum StringOperator implements Enumerator
   /**
    * The '<em><b>Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #EQUAL
    * @model name="equal" literal="="
@@ -78,10 +74,6 @@ public enum StringOperator implements Enumerator
   /**
    * The '<em><b>Not Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NOT_EQUAL
    * @model name="notEqual" literal="!="
@@ -93,10 +85,6 @@ public enum StringOperator implements Enumerator
   /**
    * The '<em><b>Like</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Like</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LIKE
    * @model name="like"
@@ -108,10 +96,6 @@ public enum StringOperator implements Enumerator
   /**
    * The '<em><b>Not Like</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not Like</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NOT_LIKE
    * @model name="notLike" literal="notlike"
@@ -244,6 +228,7 @@ public enum StringOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -254,6 +239,7 @@ public enum StringOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -264,6 +250,7 @@ public enum StringOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

@@ -159,6 +159,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isIsInitial()
   {
     return isInitial;
@@ -169,6 +170,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIsInitial(boolean newIsInitial)
   {
     boolean oldIsInitial = isInitial;
@@ -182,6 +184,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isIsFinal()
   {
     return isFinal;
@@ -192,6 +195,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIsFinal(boolean newIsFinal)
   {
     boolean oldIsFinal = isFinal;
@@ -205,6 +209,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateType getStateKind()
   {
     return stateKind;
@@ -215,6 +220,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStateKind(StateType newStateKind)
   {
     StateType oldStateKind = stateKind;
@@ -228,6 +234,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getStateName()
   {
     return stateName;
@@ -238,6 +245,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStateName(String newStateName)
   {
     String oldStateName = stateName;
@@ -251,6 +259,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLabel()
   {
     return label;
@@ -261,6 +270,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLabel(String newLabel)
   {
     String oldLabel = label;
@@ -385,7 +395,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (isInitial: ");
     result.append(isInitial);
     result.append(", isFinal: ");

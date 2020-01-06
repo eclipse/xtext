@@ -118,6 +118,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getSelfName()
   {
     return selfName;
@@ -128,6 +129,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSelfName(String newSelfName)
   {
     String oldSelfName = selfName;
@@ -141,6 +143,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ClassifierRef getClassifier()
   {
     return classifier;
@@ -168,6 +171,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setClassifier(ClassifierRef newClassifier)
   {
     if (newClassifier != classifier)
@@ -189,6 +193,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Invariant> getInvariants()
   {
     if (invariants == null)
@@ -203,6 +208,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Definition> getDefinitions()
   {
     if (definitions == null)
@@ -341,7 +347,7 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (selfName: ");
     result.append(selfName);
     result.append(')');

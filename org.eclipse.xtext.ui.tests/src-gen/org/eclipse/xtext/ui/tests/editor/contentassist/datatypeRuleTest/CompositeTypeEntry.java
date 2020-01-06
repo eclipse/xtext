@@ -26,10 +26,6 @@ public interface CompositeTypeEntry extends EObject
   /**
    * Returns the value of the '<em><b>Data Type</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Data Type</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Data Type</em>' reference.
    * @see #setDataType(Type)

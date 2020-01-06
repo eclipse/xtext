@@ -109,6 +109,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -119,6 +120,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -132,6 +134,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getType()
   {
     return type;
@@ -142,6 +145,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(String newType)
   {
     String oldType = type;
@@ -155,6 +159,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MyPrimary getExpression()
   {
     return expression;
@@ -182,6 +187,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(MyPrimary newExpression)
   {
     if (newExpression != expression)
@@ -310,7 +316,7 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", type: ");

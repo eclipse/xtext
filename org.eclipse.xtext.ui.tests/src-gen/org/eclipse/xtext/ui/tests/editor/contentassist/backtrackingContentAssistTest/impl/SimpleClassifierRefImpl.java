@@ -73,6 +73,7 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getClassifier()
   {
     return classifier;
@@ -83,6 +84,7 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setClassifier(String newClassifier)
   {
     String oldClassifier = classifier;
@@ -167,7 +169,7 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (classifier: ");
     result.append(classifier);
     result.append(')');

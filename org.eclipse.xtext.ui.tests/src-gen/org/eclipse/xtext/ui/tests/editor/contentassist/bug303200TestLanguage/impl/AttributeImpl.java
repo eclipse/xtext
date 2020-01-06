@@ -74,6 +74,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getIdent()
   {
     return ident;
@@ -84,6 +85,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIdent(String newIdent)
   {
     String oldIdent = ident;
@@ -168,7 +170,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (ident: ");
     result.append(ident);
     result.append(')');

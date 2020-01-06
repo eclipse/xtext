@@ -33,10 +33,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>First</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>First</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>First</em>' attribute.
    * @see #setFirst(boolean)
@@ -59,10 +55,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Second</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Second</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Second</em>' attribute.
    * @see #setSecond(boolean)
@@ -85,10 +77,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Third</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third</em>' attribute.
    * @see #setThird(boolean)
@@ -111,10 +99,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Forth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Forth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Forth</em>' attribute.
    * @see #setForth(boolean)
@@ -137,10 +121,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Fifth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Fifth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fifth</em>' attribute.
    * @see #setFifth(boolean)
@@ -163,10 +143,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Sixth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Sixth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sixth</em>' attribute.
    * @see #setSixth(boolean)
@@ -189,10 +165,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Seventh</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Seventh</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Seventh</em>' attribute.
    * @see #setSeventh(boolean)
@@ -215,10 +187,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Eighth</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Eighth</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Eighth</em>' attribute.
    * @see #setEighth(boolean)

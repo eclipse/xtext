@@ -16,7 +16,20 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.example.arithmetics.arithmetics.*;
+import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
+import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
+import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
+import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +95,7 @@ public class ArithmeticsAdapterFactory extends AdapterFactoryImpl
     new ArithmeticsSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModule(Module object)
+      public Adapter caseModule(org.eclipse.xtext.example.arithmetics.arithmetics.Module object)
       {
         return createModuleAdapter();
       }

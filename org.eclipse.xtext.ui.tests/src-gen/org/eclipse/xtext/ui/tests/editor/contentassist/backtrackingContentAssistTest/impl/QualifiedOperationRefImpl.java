@@ -87,6 +87,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getNamespace()
   {
     return namespace;
@@ -97,6 +98,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
@@ -110,6 +112,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OperationRef getElement()
   {
     return element;
@@ -137,6 +140,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setElement(OperationRef newElement)
   {
     if (newElement != element)
@@ -255,7 +259,7 @@ public class QualifiedOperationRefImpl extends OperationRefImpl implements Quali
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (namespace: ");
     result.append(namespace);
     result.append(')');

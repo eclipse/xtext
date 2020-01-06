@@ -29,10 +29,6 @@ public interface XmlDocument extends EObject
    * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.xmleditor.simplexml.Content}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Contents</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Contents</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.xmleditor.simplexml.SimplexmlPackage#getXmlDocument_Contents()

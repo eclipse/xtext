@@ -79,6 +79,7 @@ public class SimplexmlFactoryImpl extends EFactoryImpl implements SimplexmlFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XmlDocument createXmlDocument()
   {
     XmlDocumentImpl xmlDocument = new XmlDocumentImpl();
@@ -90,6 +91,7 @@ public class SimplexmlFactoryImpl extends EFactoryImpl implements SimplexmlFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Content createContent()
   {
     ContentImpl content = new ContentImpl();
@@ -101,6 +103,7 @@ public class SimplexmlFactoryImpl extends EFactoryImpl implements SimplexmlFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Tag createTag()
   {
     TagImpl tag = new TagImpl();
@@ -112,6 +115,7 @@ public class SimplexmlFactoryImpl extends EFactoryImpl implements SimplexmlFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
@@ -123,6 +127,7 @@ public class SimplexmlFactoryImpl extends EFactoryImpl implements SimplexmlFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimplexmlPackage getSimplexmlPackage()
   {
     return (SimplexmlPackage)getEPackage();

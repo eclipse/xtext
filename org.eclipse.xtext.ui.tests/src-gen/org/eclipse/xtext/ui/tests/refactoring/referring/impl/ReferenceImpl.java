@@ -65,6 +65,7 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EObject getReferenced()
   {
     if (referenced != null && referenced.eIsProxy())
@@ -95,6 +96,7 @@ public class ReferenceImpl extends AbstractReferenceImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReferenced(EObject newReferenced)
   {
     EObject oldReferenced = referenced;

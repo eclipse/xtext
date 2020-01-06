@@ -29,10 +29,6 @@ public interface MyField extends EObject
   /**
    * Returns the value of the '<em><b>Attr</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attr</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attr</em>' containment reference.
    * @see #setAttr(MyAttributes)
@@ -56,10 +52,6 @@ public interface MyField extends EObject
    * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyBinding}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Bindings</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.Bug347012TestLanguagePackage#getMyField_Bindings()

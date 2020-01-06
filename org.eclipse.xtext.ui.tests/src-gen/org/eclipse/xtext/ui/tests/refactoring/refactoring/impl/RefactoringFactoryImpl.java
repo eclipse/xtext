@@ -79,6 +79,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Main createMain()
   {
     MainImpl main = new MainImpl();
@@ -90,6 +91,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -101,6 +103,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
@@ -112,6 +115,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -123,6 +127,7 @@ public class RefactoringFactoryImpl extends EFactoryImpl implements RefactoringF
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefactoringPackage getRefactoringPackage()
   {
     return (RefactoringPackage)getEPackage();

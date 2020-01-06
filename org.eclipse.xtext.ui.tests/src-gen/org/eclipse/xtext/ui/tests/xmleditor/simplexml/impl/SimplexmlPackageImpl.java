@@ -82,7 +82,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link SimplexmlPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -97,7 +97,8 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
     if (isInited) return (SimplexmlPackage)EPackage.Registry.INSTANCE.getEPackage(SimplexmlPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimplexmlPackageImpl theSimplexmlPackage = (SimplexmlPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplexmlPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplexmlPackageImpl());
+    Object registeredSimplexmlPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    SimplexmlPackageImpl theSimplexmlPackage = registeredSimplexmlPackage instanceof SimplexmlPackageImpl ? (SimplexmlPackageImpl)registeredSimplexmlPackage : new SimplexmlPackageImpl();
 
     isInited = true;
 
@@ -110,7 +111,6 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
     // Mark meta-data to indicate it can't be changed
     theSimplexmlPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(SimplexmlPackage.eNS_URI, theSimplexmlPackage);
     return theSimplexmlPackage;
@@ -121,6 +121,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getXmlDocument()
   {
     return xmlDocumentEClass;
@@ -131,6 +132,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getXmlDocument_Contents()
   {
     return (EReference)xmlDocumentEClass.getEStructuralFeatures().get(0);
@@ -141,6 +143,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getContent()
   {
     return contentEClass;
@@ -151,6 +154,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getContent_Tag()
   {
     return (EReference)contentEClass.getEStructuralFeatures().get(0);
@@ -161,6 +165,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getContent_Text()
   {
     return (EAttribute)contentEClass.getEStructuralFeatures().get(1);
@@ -171,6 +176,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTag()
   {
     return tagEClass;
@@ -181,6 +187,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTag_Name()
   {
     return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
@@ -191,6 +198,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTag_Attributes()
   {
     return (EReference)tagEClass.getEStructuralFeatures().get(1);
@@ -201,6 +209,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTag_Contents()
   {
     return (EReference)tagEClass.getEStructuralFeatures().get(2);
@@ -211,6 +220,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTag_CloseName()
   {
     return (EAttribute)tagEClass.getEStructuralFeatures().get(3);
@@ -221,6 +231,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttribute()
   {
     return attributeEClass;
@@ -231,6 +242,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_Name()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
@@ -241,6 +253,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
@@ -251,6 +264,7 @@ public class SimplexmlPackageImpl extends EPackageImpl implements SimplexmlPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimplexmlFactory getSimplexmlFactory()
   {
     return (SimplexmlFactory)getEFactoryInstance();

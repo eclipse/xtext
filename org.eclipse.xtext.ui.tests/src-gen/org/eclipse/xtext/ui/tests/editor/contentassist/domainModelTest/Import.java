@@ -26,10 +26,6 @@ public interface Import extends EObject
   /**
    * Returns the value of the '<em><b>Import URI</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Import URI</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Import URI</em>' attribute.
    * @see #setImportURI(String)

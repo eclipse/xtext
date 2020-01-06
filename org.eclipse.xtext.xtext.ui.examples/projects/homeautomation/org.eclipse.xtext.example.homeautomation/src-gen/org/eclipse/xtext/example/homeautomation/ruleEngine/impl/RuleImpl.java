@@ -100,6 +100,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDescription()
   {
     return description;
@@ -110,6 +111,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -123,6 +125,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getDeviceState()
   {
     if (deviceState != null && deviceState.eIsProxy())
@@ -153,6 +156,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDeviceState(State newDeviceState)
   {
     State oldDeviceState = deviceState;
@@ -166,6 +170,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public XExpression getThenPart()
   {
     return thenPart;
@@ -193,6 +198,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setThenPart(XExpression newThenPart)
   {
     if (newThenPart != thenPart)
@@ -322,7 +328,7 @@ public class RuleImpl extends DeclarationImpl implements Rule
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (description: ");
     result.append(description);
     result.append(')');

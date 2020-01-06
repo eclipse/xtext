@@ -74,6 +74,7 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getDay()
   {
     return day;
@@ -84,6 +85,7 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDay(int newDay)
   {
     int oldDay = day;
@@ -168,7 +170,7 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (day: ");
     result.append(day);
     result.append(')');

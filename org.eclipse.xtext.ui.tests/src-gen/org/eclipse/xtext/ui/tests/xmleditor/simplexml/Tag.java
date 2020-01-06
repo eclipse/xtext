@@ -31,10 +31,6 @@ public interface Tag extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -58,10 +54,6 @@ public interface Tag extends EObject
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.xmleditor.simplexml.Attribute}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Attributes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.xmleditor.simplexml.SimplexmlPackage#getTag_Attributes()
@@ -74,10 +66,6 @@ public interface Tag extends EObject
    * Returns the value of the '<em><b>Contents</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.xmleditor.simplexml.Content}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Contents</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Contents</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.xmleditor.simplexml.SimplexmlPackage#getTag_Contents()
@@ -89,10 +77,6 @@ public interface Tag extends EObject
   /**
    * Returns the value of the '<em><b>Close Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Close Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Close Name</em>' attribute.
    * @see #setCloseName(String)

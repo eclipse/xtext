@@ -81,6 +81,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -92,6 +93,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Types createTypes()
   {
     TypesImpl types = new TypesImpl();
@@ -103,6 +105,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Type createType()
   {
     TypeImpl type = new TypeImpl();
@@ -114,6 +117,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleType createSimpleType()
   {
     SimpleTypeImpl simpleType = new SimpleTypeImpl();
@@ -125,6 +129,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CompositeType createCompositeType()
   {
     CompositeTypeImpl compositeType = new CompositeTypeImpl();
@@ -136,6 +141,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CompositeTypeEntry createCompositeTypeEntry()
   {
     CompositeTypeEntryImpl compositeTypeEntry = new CompositeTypeEntryImpl();
@@ -147,6 +153,7 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DatatypeRuleTestPackage getDatatypeRuleTestPackage()
   {
     return (DatatypeRuleTestPackage)getEPackage();

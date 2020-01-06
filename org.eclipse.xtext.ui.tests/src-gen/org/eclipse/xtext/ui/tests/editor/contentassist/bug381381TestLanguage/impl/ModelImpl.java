@@ -67,6 +67,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CopyFieldNameToVariableStmt getStmt()
   {
     return stmt;
@@ -94,6 +95,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStmt(CopyFieldNameToVariableStmt newStmt)
   {
     if (newStmt != stmt)

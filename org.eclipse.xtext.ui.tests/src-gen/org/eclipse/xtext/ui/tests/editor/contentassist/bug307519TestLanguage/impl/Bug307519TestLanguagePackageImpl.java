@@ -83,7 +83,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug307519TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -98,7 +98,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug307519TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug307519TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug307519TestLanguagePackageImpl theBug307519TestLanguagePackage = (Bug307519TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug307519TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug307519TestLanguagePackageImpl());
+    Object registeredBug307519TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug307519TestLanguagePackageImpl theBug307519TestLanguagePackage = registeredBug307519TestLanguagePackage instanceof Bug307519TestLanguagePackageImpl ? (Bug307519TestLanguagePackageImpl)registeredBug307519TestLanguagePackage : new Bug307519TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -111,7 +112,6 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug307519TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug307519TestLanguagePackage.eNS_URI, theBug307519TestLanguagePackage);
     return theBug307519TestLanguagePackage;
@@ -122,6 +122,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -132,6 +133,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_E1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -142,6 +144,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_E2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -152,6 +155,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElem1()
   {
     return elem1EClass;
@@ -162,6 +166,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElem1_Value()
   {
     return (EAttribute)elem1EClass.getEStructuralFeatures().get(0);
@@ -172,6 +177,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getElem2()
   {
     return elem2EClass;
@@ -182,6 +188,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getElem2_Value()
   {
     return (EAttribute)elem2EClass.getEStructuralFeatures().get(0);
@@ -192,6 +199,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getEnumT()
   {
     return enumTEEnum;
@@ -202,6 +210,7 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug307519TestLanguageFactory getBug307519TestLanguageFactory()
   {
     return (Bug307519TestLanguageFactory)getEFactoryInstance();

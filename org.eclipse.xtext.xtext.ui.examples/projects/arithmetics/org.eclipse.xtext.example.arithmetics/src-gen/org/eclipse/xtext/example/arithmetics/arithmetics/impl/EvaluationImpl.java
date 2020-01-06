@@ -72,6 +72,7 @@ public class EvaluationImpl extends StatementImpl implements Evaluation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getExpression()
   {
     return expression;
@@ -99,6 +100,7 @@ public class EvaluationImpl extends StatementImpl implements Evaluation
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)

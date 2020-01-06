@@ -86,6 +86,7 @@ public class PackageDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PackageRef getPackage()
   {
     return package_;
@@ -113,6 +114,7 @@ public class PackageDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPackage(PackageRef newPackage)
   {
     if (newPackage != package_)
@@ -134,6 +136,7 @@ public class PackageDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ContextDecl> getContexts()
   {
     if (contexts == null)

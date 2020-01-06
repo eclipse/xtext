@@ -85,6 +85,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
@@ -115,6 +116,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class oldSuperClass = superClass;
@@ -128,6 +130,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -138,6 +141,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -233,7 +237,7 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

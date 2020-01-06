@@ -73,6 +73,7 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getPackage()
   {
     return package_;
@@ -83,6 +84,7 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPackage(String newPackage)
   {
     String oldPackage = package_;
@@ -167,7 +169,7 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (package: ");
     result.append(package_);
     result.append(')');

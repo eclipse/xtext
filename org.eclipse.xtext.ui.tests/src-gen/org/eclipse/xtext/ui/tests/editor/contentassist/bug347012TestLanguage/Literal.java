@@ -27,10 +27,6 @@ public interface Literal extends MyPrimary
   /**
    * Returns the value of the '<em><b>Num</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Num</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Num</em>' attribute.
    * @see #setNum(double)
@@ -53,10 +49,6 @@ public interface Literal extends MyPrimary
   /**
    * Returns the value of the '<em><b>Str</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Str</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Str</em>' attribute.
    * @see #setStr(String)
@@ -79,10 +71,6 @@ public interface Literal extends MyPrimary
   /**
    * Returns the value of the '<em><b>Bool</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Bool</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Bool</em>' attribute.
    * @see #setBool(String)

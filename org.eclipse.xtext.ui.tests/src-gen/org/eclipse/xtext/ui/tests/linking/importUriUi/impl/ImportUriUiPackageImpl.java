@@ -74,7 +74,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ImportUriUiPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -89,7 +89,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
     if (isInited) return (ImportUriUiPackage)EPackage.Registry.INSTANCE.getEPackage(ImportUriUiPackage.eNS_URI);
 
     // Obtain or create and register package
-    ImportUriUiPackageImpl theImportUriUiPackage = (ImportUriUiPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImportUriUiPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImportUriUiPackageImpl());
+    Object registeredImportUriUiPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ImportUriUiPackageImpl theImportUriUiPackage = registeredImportUriUiPackage instanceof ImportUriUiPackageImpl ? (ImportUriUiPackageImpl)registeredImportUriUiPackage : new ImportUriUiPackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
     // Mark meta-data to indicate it can't be changed
     theImportUriUiPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ImportUriUiPackage.eNS_URI, theImportUriUiPackage);
     return theImportUriUiPackage;
@@ -113,6 +113,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMain()
   {
     return mainEClass;
@@ -123,6 +124,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Imports()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMain_Types()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(1);
@@ -143,6 +146,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getImport()
   {
     return importEClass;
@@ -153,6 +157,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
@@ -163,6 +168,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -173,6 +179,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -183,6 +190,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getType_Extends()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
@@ -193,6 +201,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ImportUriUiFactory getImportUriUiFactory()
   {
     return (ImportUriUiFactory)getEFactoryInstance();

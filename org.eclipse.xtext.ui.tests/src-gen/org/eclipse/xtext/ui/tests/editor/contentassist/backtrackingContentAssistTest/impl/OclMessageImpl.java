@@ -127,6 +127,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getSource()
   {
     return source;
@@ -154,6 +155,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(Expression newSource)
   {
     if (newSource != source)
@@ -175,6 +177,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOp()
   {
     return op;
@@ -185,6 +188,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOp(String newOp)
   {
     String oldOp = op;
@@ -198,6 +202,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getMessageName()
   {
     return messageName;
@@ -208,6 +213,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMessageName(String newMessageName)
   {
     String oldMessageName = messageName;
@@ -221,6 +227,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<OclMessageArg> getArguments()
   {
     if (arguments == null)
@@ -356,7 +363,7 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (op: ");
     result.append(op);
     result.append(", messageName: ");

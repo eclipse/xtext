@@ -77,6 +77,7 @@ public class IndexedAccessExpressionImpl extends ExpressionImpl implements Index
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getTarget()
   {
     return target;
@@ -104,6 +105,7 @@ public class IndexedAccessExpressionImpl extends ExpressionImpl implements Index
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTarget(Expression newTarget)
   {
     if (newTarget != target)
@@ -125,6 +127,7 @@ public class IndexedAccessExpressionImpl extends ExpressionImpl implements Index
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getIndex()
   {
     return index;
@@ -152,6 +155,7 @@ public class IndexedAccessExpressionImpl extends ExpressionImpl implements Index
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIndex(Expression newIndex)
   {
     if (newIndex != index)

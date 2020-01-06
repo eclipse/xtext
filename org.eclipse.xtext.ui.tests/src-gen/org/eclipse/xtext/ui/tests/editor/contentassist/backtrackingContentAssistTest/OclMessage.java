@@ -29,10 +29,6 @@ public interface OclMessage extends Expression
   /**
    * Returns the value of the '<em><b>Source</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Source</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Source</em>' containment reference.
    * @see #setSource(Expression)
@@ -55,10 +51,6 @@ public interface OclMessage extends Expression
   /**
    * Returns the value of the '<em><b>Op</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Op</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Op</em>' attribute.
    * @see #setOp(String)
@@ -81,10 +73,6 @@ public interface OclMessage extends Expression
   /**
    * Returns the value of the '<em><b>Message Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Message Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Message Name</em>' attribute.
    * @see #setMessageName(String)
@@ -108,10 +96,6 @@ public interface OclMessage extends Expression
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.OclMessageArg}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.BacktrackingContentAssistTestPackage#getOclMessage_Arguments()

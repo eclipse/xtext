@@ -79,6 +79,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelElement createModelElement()
   {
     ModelElementImpl modelElement = new ModelElementImpl();
@@ -90,6 +91,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelAttribute createModelAttribute()
   {
     ModelAttributeImpl modelAttribute = new ModelAttributeImpl();
@@ -101,6 +103,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
@@ -112,6 +115,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RootModel createRootModel()
   {
     RootModelImpl rootModel = new RootModelImpl();
@@ -123,6 +127,7 @@ public class Bug291022TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug291022TestLanguagePackage getBug291022TestLanguagePackage()
   {
     return (Bug291022TestLanguagePackage)getEPackage();

@@ -80,6 +80,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -91,6 +92,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Element createElement()
   {
     ElementImpl element = new ElementImpl();
@@ -102,6 +104,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Works createWorks()
   {
     WorksImpl works = new WorksImpl();
@@ -113,6 +116,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Broken createBroken()
   {
     BrokenImpl broken = new BrokenImpl();
@@ -124,6 +128,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Third createThird()
   {
     ThirdImpl third = new ThirdImpl();
@@ -135,6 +140,7 @@ public class Gh341TestLanguageFactoryImpl extends EFactoryImpl implements Gh341T
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Gh341TestLanguagePackage getGh341TestLanguagePackage()
   {
     return (Gh341TestLanguagePackage)getEPackage();

@@ -74,7 +74,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ContentAssistCustomizingTestPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -89,7 +89,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
     if (isInited) return (ContentAssistCustomizingTestPackage)EPackage.Registry.INSTANCE.getEPackage(ContentAssistCustomizingTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    ContentAssistCustomizingTestPackageImpl theContentAssistCustomizingTestPackage = (ContentAssistCustomizingTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistCustomizingTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistCustomizingTestPackageImpl());
+    Object registeredContentAssistCustomizingTestPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ContentAssistCustomizingTestPackageImpl theContentAssistCustomizingTestPackage = registeredContentAssistCustomizingTestPackage instanceof ContentAssistCustomizingTestPackageImpl ? (ContentAssistCustomizingTestPackageImpl)registeredContentAssistCustomizingTestPackage : new ContentAssistCustomizingTestPackageImpl();
 
     isInited = true;
 
@@ -102,7 +103,6 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
     // Mark meta-data to indicate it can't be changed
     theContentAssistCustomizingTestPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ContentAssistCustomizingTestPackage.eNS_URI, theContentAssistCustomizingTestPackage);
     return theContentAssistCustomizingTestPackage;
@@ -113,6 +113,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -123,6 +124,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Types()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -133,6 +135,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getType()
   {
     return typeEClass;
@@ -143,6 +146,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
@@ -153,6 +157,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getType_SuperType()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
@@ -163,6 +168,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTypeRef()
   {
     return typeRefEClass;
@@ -173,6 +179,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTypeRef_Type()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
@@ -183,6 +190,7 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ContentAssistCustomizingTestFactory getContentAssistCustomizingTestFactory()
   {
     return (ContentAssistCustomizingTestFactory)getEFactoryInstance();

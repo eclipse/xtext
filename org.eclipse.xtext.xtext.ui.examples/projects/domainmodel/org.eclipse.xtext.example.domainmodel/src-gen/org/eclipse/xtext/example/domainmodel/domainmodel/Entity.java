@@ -34,10 +34,6 @@ public interface Entity extends AbstractElement
   /**
    * Returns the value of the '<em><b>Super Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Super Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Super Type</em>' containment reference.
    * @see #setSuperType(JvmParameterizedTypeReference)
@@ -61,10 +57,6 @@ public interface Entity extends AbstractElement
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.example.domainmodel.domainmodel.Feature}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Features</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Features</em>' containment reference list.
    * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getEntity_Features()

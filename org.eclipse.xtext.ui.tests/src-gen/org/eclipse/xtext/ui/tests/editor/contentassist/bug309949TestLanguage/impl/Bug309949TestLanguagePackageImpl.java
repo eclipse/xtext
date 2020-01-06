@@ -81,7 +81,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug309949TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -96,7 +96,8 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug309949TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug309949TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug309949TestLanguagePackageImpl theBug309949TestLanguagePackage = (Bug309949TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug309949TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug309949TestLanguagePackageImpl());
+    Object registeredBug309949TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug309949TestLanguagePackageImpl theBug309949TestLanguagePackage = registeredBug309949TestLanguagePackage instanceof Bug309949TestLanguagePackageImpl ? (Bug309949TestLanguagePackageImpl)registeredBug309949TestLanguagePackage : new Bug309949TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -109,7 +110,6 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug309949TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug309949TestLanguagePackage.eNS_URI, theBug309949TestLanguagePackage);
     return theBug309949TestLanguagePackage;
@@ -120,6 +120,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -130,6 +131,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Errors()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -140,6 +142,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Operations()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
@@ -150,6 +153,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getModel_Name()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
@@ -160,6 +164,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getError()
   {
     return errorEClass;
@@ -170,6 +175,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getError_Annotations()
   {
     return (EReference)errorEClass.getEStructuralFeatures().get(0);
@@ -180,6 +186,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getError_Name()
   {
     return (EAttribute)errorEClass.getEStructuralFeatures().get(1);
@@ -190,6 +197,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOperation()
   {
     return operationEClass;
@@ -200,6 +208,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Annotations()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(0);
@@ -210,6 +219,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOperation_Name()
   {
     return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
@@ -220,6 +230,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAnnotation()
   {
     return annotationEClass;
@@ -230,6 +241,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAnnotation_Name()
   {
     return (EAttribute)annotationEClass.getEStructuralFeatures().get(0);
@@ -240,6 +252,7 @@ public class Bug309949TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug309949TestLanguageFactory getBug309949TestLanguageFactory()
   {
     return (Bug309949TestLanguageFactory)getEFactoryInstance();

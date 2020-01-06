@@ -164,6 +164,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -174,6 +175,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -187,6 +189,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getId()
   {
     return id;
@@ -197,6 +200,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setId(String newId)
   {
     String oldId = id;
@@ -210,6 +214,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDescription()
   {
     return description;
@@ -220,6 +225,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDescription(String newDescription)
   {
     String oldDescription = description;
@@ -233,6 +239,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public AbstractRule getContext()
   {
     if (context != null && context.eIsProxy())
@@ -263,6 +270,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setContext(AbstractRule newContext)
   {
     AbstractRule oldContext = context;
@@ -276,6 +284,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getKeywordContext()
   {
     return keywordContext;
@@ -286,6 +295,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setKeywordContext(String newKeywordContext)
   {
     String oldKeywordContext = keywordContext;
@@ -299,6 +309,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public TemplateBody getBody()
   {
     return body;
@@ -326,6 +337,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBody(TemplateBody newBody)
   {
     if (newBody != body)
@@ -485,7 +497,7 @@ public class CodetemplateImpl extends MinimalEObjectImpl.Container implements Co
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", id: ");

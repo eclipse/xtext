@@ -88,6 +88,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedModifiers getModifiers()
   {
     return modifiers;
@@ -115,6 +116,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setModifiers(UnorderedModifiers newModifiers)
   {
     if (newModifiers != modifiers)
@@ -136,6 +138,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -146,6 +149,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -256,7 +260,7 @@ public class ClassMemberImpl extends MinimalEObjectImpl.Container implements Cla
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

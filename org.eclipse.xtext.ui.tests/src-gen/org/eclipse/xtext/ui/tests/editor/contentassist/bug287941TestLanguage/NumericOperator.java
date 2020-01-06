@@ -83,13 +83,9 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Less Then</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Less Then</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LESS_THEN
-   * @model name="lessThen" literal="<"
+   * @model name="lessThen" literal="&lt;"
    * @generated
    * @ordered
    */
@@ -98,13 +94,9 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Greater Then</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Greater Then</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #GREATER_THEN
-   * @model name="greaterThen" literal=">"
+   * @model name="greaterThen" literal="&gt;"
    * @generated
    * @ordered
    */
@@ -113,13 +105,9 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Less Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Less Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #LESS_EQUAL
-   * @model name="lessEqual" literal="<="
+   * @model name="lessEqual" literal="&lt;="
    * @generated
    * @ordered
    */
@@ -128,13 +116,9 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Greater Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Greater Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #GREATER_EQUAL
-   * @model name="greaterEqual" literal=">="
+   * @model name="greaterEqual" literal="&gt;="
    * @generated
    * @ordered
    */
@@ -143,10 +127,6 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #EQUAL
    * @model name="equal" literal="="
@@ -158,10 +138,6 @@ public enum NumericOperator implements Enumerator
   /**
    * The '<em><b>Not Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not Equal</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #NOT_EQUAL
    * @model name="notEqual" literal="!="
@@ -298,6 +274,7 @@ public enum NumericOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -308,6 +285,7 @@ public enum NumericOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -318,6 +296,7 @@ public enum NumericOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

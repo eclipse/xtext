@@ -27,10 +27,6 @@ public interface Post extends EObject
   /**
    * Returns the value of the '<em><b>Constraint Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Constraint Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Constraint Name</em>' attribute.
    * @see #setConstraintName(String)
@@ -53,10 +49,6 @@ public interface Post extends EObject
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expression</em>' containment reference.
    * @see #setExpression(Expression)

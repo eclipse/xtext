@@ -94,6 +94,7 @@ public class ErrorImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -108,6 +109,7 @@ public class ErrorImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -118,6 +120,7 @@ public class ErrorImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -230,7 +233,7 @@ public class ErrorImpl extends MinimalEObjectImpl.Container implements org.eclip
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

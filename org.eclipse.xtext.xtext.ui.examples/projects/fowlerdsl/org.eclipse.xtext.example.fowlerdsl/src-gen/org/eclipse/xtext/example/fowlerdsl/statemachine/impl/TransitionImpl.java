@@ -78,6 +78,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Event getEvent()
   {
     if (event != null && event.eIsProxy())
@@ -108,6 +109,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEvent(Event newEvent)
   {
     Event oldEvent = event;
@@ -121,6 +123,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public State getState()
   {
     if (state != null && state.eIsProxy())
@@ -151,6 +154,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setState(State newState)
   {
     State oldState = state;

@@ -72,6 +72,7 @@ public class MyAttributesImpl extends MinimalEObjectImpl.Container implements My
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<MyAttribute> getAttributes()
   {
     if (attributes == null)

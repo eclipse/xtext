@@ -162,7 +162,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link ParameterizedExpressionsTestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -177,7 +177,8 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
     if (isInited) return (ParameterizedExpressionsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(ParameterizedExpressionsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    ParameterizedExpressionsTestLanguagePackageImpl theParameterizedExpressionsTestLanguagePackage = (ParameterizedExpressionsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ParameterizedExpressionsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ParameterizedExpressionsTestLanguagePackageImpl());
+    Object registeredParameterizedExpressionsTestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    ParameterizedExpressionsTestLanguagePackageImpl theParameterizedExpressionsTestLanguagePackage = registeredParameterizedExpressionsTestLanguagePackage instanceof ParameterizedExpressionsTestLanguagePackageImpl ? (ParameterizedExpressionsTestLanguagePackageImpl)registeredParameterizedExpressionsTestLanguagePackage : new ParameterizedExpressionsTestLanguagePackageImpl();
 
     isInited = true;
 
@@ -190,7 +191,6 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
     // Mark meta-data to indicate it can't be changed
     theParameterizedExpressionsTestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ParameterizedExpressionsTestLanguagePackage.eNS_URI, theParameterizedExpressionsTestLanguagePackage);
     return theParameterizedExpressionsTestLanguagePackage;
@@ -201,6 +201,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStatement()
   {
     return statementEClass;
@@ -211,6 +212,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getFunctionDeclaration()
   {
     return functionDeclarationEClass;
@@ -221,6 +223,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFunctionDeclaration_Generator()
   {
     return (EAttribute)functionDeclarationEClass.getEStructuralFeatures().get(0);
@@ -231,6 +234,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getFunctionDeclaration_Name()
   {
     return (EAttribute)functionDeclarationEClass.getEStructuralFeatures().get(1);
@@ -241,6 +245,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getFunctionDeclaration_Body()
   {
     return (EReference)functionDeclarationEClass.getEStructuralFeatures().get(2);
@@ -251,6 +256,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBlock()
   {
     return blockEClass;
@@ -261,6 +267,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBlock_Statements()
   {
     return (EReference)blockEClass.getEStructuralFeatures().get(0);
@@ -271,6 +278,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpressionStatement()
   {
     return expressionStatementEClass;
@@ -281,6 +289,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExpressionStatement_Expression()
   {
     return (EReference)expressionStatementEClass.getEStructuralFeatures().get(0);
@@ -291,6 +300,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLabelledStatement()
   {
     return labelledStatementEClass;
@@ -301,6 +311,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLabelledStatement_Name()
   {
     return (EAttribute)labelledStatementEClass.getEStructuralFeatures().get(0);
@@ -311,6 +322,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLabelledStatement_Statement()
   {
     return (EReference)labelledStatementEClass.getEStructuralFeatures().get(1);
@@ -321,6 +333,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
@@ -331,6 +344,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIdentifierRef()
   {
     return identifierRefEClass;
@@ -341,6 +355,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getIdentifierRef_Id()
   {
     return (EAttribute)identifierRefEClass.getEStructuralFeatures().get(0);
@@ -351,6 +366,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getIndexedAccessExpression()
   {
     return indexedAccessExpressionEClass;
@@ -361,6 +377,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getIndexedAccessExpression_Target()
   {
     return (EReference)indexedAccessExpressionEClass.getEStructuralFeatures().get(0);
@@ -371,6 +388,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getIndexedAccessExpression_Index()
   {
     return (EReference)indexedAccessExpressionEClass.getEStructuralFeatures().get(1);
@@ -381,6 +399,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getParameterizedPropertyAccessExpression()
   {
     return parameterizedPropertyAccessExpressionEClass;
@@ -391,6 +410,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getParameterizedPropertyAccessExpression_Target()
   {
     return (EReference)parameterizedPropertyAccessExpressionEClass.getEStructuralFeatures().get(0);
@@ -401,6 +421,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getParameterizedPropertyAccessExpression_Property()
   {
     return (EAttribute)parameterizedPropertyAccessExpressionEClass.getEStructuralFeatures().get(1);
@@ -411,6 +432,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getShiftExpression()
   {
     return shiftExpressionEClass;
@@ -421,6 +443,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getShiftExpression_Lhs()
   {
     return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(0);
@@ -431,6 +454,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getShiftExpression_Op()
   {
     return (EAttribute)shiftExpressionEClass.getEStructuralFeatures().get(1);
@@ -441,6 +465,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getShiftExpression_Rhs()
   {
     return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(2);
@@ -451,6 +476,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRelationalExpression()
   {
     return relationalExpressionEClass;
@@ -461,6 +487,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRelationalExpression_Lhs()
   {
     return (EReference)relationalExpressionEClass.getEStructuralFeatures().get(0);
@@ -471,6 +498,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRelationalExpression_Op()
   {
     return (EAttribute)relationalExpressionEClass.getEStructuralFeatures().get(1);
@@ -481,6 +509,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRelationalExpression_Rhs()
   {
     return (EReference)relationalExpressionEClass.getEStructuralFeatures().get(2);
@@ -491,6 +520,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAssignmentExpression()
   {
     return assignmentExpressionEClass;
@@ -501,6 +531,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignmentExpression_Lhs()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(0);
@@ -511,6 +542,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAssignmentExpression_Op()
   {
     return (EAttribute)assignmentExpressionEClass.getEStructuralFeatures().get(1);
@@ -521,6 +553,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAssignmentExpression_Rhs()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(2);
@@ -531,6 +564,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getYieldExpression()
   {
     return yieldExpressionEClass;
@@ -541,6 +575,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getYieldExpression_Many()
   {
     return (EAttribute)yieldExpressionEClass.getEStructuralFeatures().get(0);
@@ -551,6 +586,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getYieldExpression_Expression()
   {
     return (EReference)yieldExpressionEClass.getEStructuralFeatures().get(1);
@@ -561,6 +597,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCommaExpression()
   {
     return commaExpressionEClass;
@@ -571,6 +608,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCommaExpression_Exprs()
   {
     return (EReference)commaExpressionEClass.getEStructuralFeatures().get(0);
@@ -581,6 +619,7 @@ public class ParameterizedExpressionsTestLanguagePackageImpl extends EPackageImp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ParameterizedExpressionsTestLanguageFactory getParameterizedExpressionsTestLanguageFactory()
   {
     return (ParameterizedExpressionsTestLanguageFactory)getEFactoryInstance();

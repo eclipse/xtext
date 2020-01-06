@@ -26,10 +26,6 @@ public interface Reference extends AbstractReference
   /**
    * Returns the value of the '<em><b>Referenced</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Referenced</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Referenced</em>' reference.
    * @see #setReferenced(EObject)

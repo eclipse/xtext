@@ -43,10 +43,6 @@ public enum GeneratedEnum implements Enumerator
   /**
    * The '<em><b>Same Name</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Same Name</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #SAME_NAME
    * @model name="SameName"
@@ -58,10 +54,6 @@ public enum GeneratedEnum implements Enumerator
   /**
    * The '<em><b>Different Name</b></em>' literal value.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Different Name</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @see #DIFFERENT_NAME
    * @model name="DifferentName" literal="DifferentLiteral"
@@ -190,6 +182,7 @@ public enum GeneratedEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -200,6 +193,7 @@ public enum GeneratedEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -210,6 +204,7 @@ public enum GeneratedEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

@@ -116,6 +116,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelElement getFirstReference()
   {
     if (firstReference != null && firstReference.eIsProxy())
@@ -146,6 +147,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFirstReference(ModelElement newFirstReference)
   {
     ModelElement oldFirstReference = firstReference;
@@ -159,6 +161,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -169,6 +172,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -182,6 +186,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelElement getSecondReference()
   {
     if (secondReference != null && secondReference.eIsProxy())
@@ -212,6 +217,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSecondReference(ModelElement newSecondReference)
   {
     ModelElement oldSecondReference = secondReference;
@@ -225,6 +231,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ModelAttribute> getElements()
   {
     if (elements == null)
@@ -360,7 +367,7 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

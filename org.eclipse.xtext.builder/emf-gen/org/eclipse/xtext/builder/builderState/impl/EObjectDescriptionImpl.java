@@ -29,7 +29,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
  * An implementation of the model object '<em><b>EObject Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
@@ -148,6 +147,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFragment() {
 		return fragment;
 	}
@@ -174,6 +174,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEClass() {
 		if (eClass != null && eClass.eIsProxy()) {
 			InternalEObject oldEClass = (InternalEObject)eClass;
@@ -212,6 +213,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, String> getUserData() {
 		if (userData == null) {
 			userData = new EcoreEMap.Unsettable<String,String>(BuilderStatePackage.Literals.USER_DATA_ENTRY, UserDataEntryImpl.class, this, BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA);
@@ -224,6 +226,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void unsetUserData() {
 		if (userData != null) ((InternalEList.Unsettable<?>)userData).unset();
 	}
@@ -233,6 +236,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSetUserData() {
 		return userData != null && ((InternalEList.Unsettable<?>)userData).isSet();
 	}
@@ -414,7 +418,7 @@ public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEO
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", fragment: ");

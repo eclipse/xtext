@@ -36,10 +36,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Enabled</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Enabled</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Enabled</em>' attribute.
    * @see #setEnabled(boolean)
@@ -62,10 +58,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Abstract</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abstract</em>' attribute.
    * @see #setAbstract(boolean)
@@ -88,10 +80,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
@@ -114,10 +102,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Parent</b></em>' reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parent</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parent</em>' reference.
    * @see #setParent(Object)
@@ -140,10 +124,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Short Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Short Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Short Description</em>' attribute.
    * @see #setShortDescription(String)
@@ -166,10 +146,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Long Description</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Long Description</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Long Description</em>' attribute.
    * @see #setLongDescription(String)
@@ -192,10 +168,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Serial Version UID</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Serial Version UID</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Serial Version UID</em>' attribute.
    * @see #setSerialVersionUID(int)
@@ -218,10 +190,6 @@ public interface Object extends EObject
   /**
    * Returns the value of the '<em><b>Cloneable</b></em>' attribute.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Cloneable</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Cloneable</em>' attribute.
    * @see #setCloneable(boolean)
@@ -245,10 +213,6 @@ public interface Object extends EObject
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Feature}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Features</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Features</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage#getObject_Features()

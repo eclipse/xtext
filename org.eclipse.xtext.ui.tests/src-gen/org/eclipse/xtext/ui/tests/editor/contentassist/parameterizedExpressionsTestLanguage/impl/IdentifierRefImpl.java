@@ -73,6 +73,7 @@ public class IdentifierRefImpl extends ExpressionImpl implements IdentifierRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getId()
   {
     return id;
@@ -83,6 +84,7 @@ public class IdentifierRefImpl extends ExpressionImpl implements IdentifierRef
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setId(String newId)
   {
     String oldId = id;
@@ -167,7 +169,7 @@ public class IdentifierRefImpl extends ExpressionImpl implements IdentifierRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (id: ");
     result.append(id);
     result.append(')');

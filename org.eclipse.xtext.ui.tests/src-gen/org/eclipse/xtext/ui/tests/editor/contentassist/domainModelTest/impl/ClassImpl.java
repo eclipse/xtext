@@ -94,6 +94,7 @@ public class ClassImpl extends TypeImpl implements org.eclipse.xtext.ui.tests.ed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
@@ -124,6 +125,7 @@ public class ClassImpl extends TypeImpl implements org.eclipse.xtext.ui.tests.ed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class oldSuperClass = superClass;
@@ -137,6 +139,7 @@ public class ClassImpl extends TypeImpl implements org.eclipse.xtext.ui.tests.ed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Property> getProperties()
   {
     if (properties == null)
@@ -151,6 +154,7 @@ public class ClassImpl extends TypeImpl implements org.eclipse.xtext.ui.tests.ed
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class> getSubClasses()
   {
     if (subClasses == null)

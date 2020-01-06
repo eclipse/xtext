@@ -88,6 +88,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
@@ -118,6 +119,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
@@ -131,6 +133,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getReference()
   {
     if (reference != null && reference.eIsProxy())
@@ -161,6 +164,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setReference(EReference newReference)
   {
     EReference oldReference = reference;
@@ -174,6 +178,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
@@ -204,6 +209,7 @@ public class ReferenceAliasWhereEntryImpl extends WhereEntryImpl implements Refe
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;

@@ -37,15 +37,15 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g"; }
+    public String getGrammarFileName() { return "CustomInternalXmlHighlightingLexer.g"; }
 
     // $ANTLR start "RULE_TAG_START_OPEN"
     public final void mRULE_TAG_START_OPEN() throws RecognitionException {
         try {
             int _type = RULE_TAG_START_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:15:21: ( '<' )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:15:23: '<'
+            // CustomInternalXmlHighlightingLexer.g:15:21: ( '<' )
+            // CustomInternalXmlHighlightingLexer.g:15:23: '<'
             {
             match('<'); 
              tagMode = true; 
@@ -65,8 +65,8 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_TAG_END_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:17:19: ( '</' )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:17:21: '</'
+            // CustomInternalXmlHighlightingLexer.g:17:19: ( '</' )
+            // CustomInternalXmlHighlightingLexer.g:17:21: '</'
             {
             match("</"); 
 
@@ -87,8 +87,8 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_TAG_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:19:16: ({...}? => '>' )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:19:18: {...}? => '>'
+            // CustomInternalXmlHighlightingLexer.g:19:16: ({...}? => '>' )
+            // CustomInternalXmlHighlightingLexer.g:19:18: {...}? => '>'
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_TAG_CLOSE", " tagMode ");
@@ -111,8 +111,8 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_TAG_EMPTY_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:21:22: ({...}? => '/>' )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:21:24: {...}? => '/>'
+            // CustomInternalXmlHighlightingLexer.g:21:22: ({...}? => '/>' )
+            // CustomInternalXmlHighlightingLexer.g:21:24: {...}? => '/>'
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_TAG_EMPTY_CLOSE", " tagMode ");
@@ -136,8 +136,8 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_ATTR_EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:23:14: ({...}? => '=' )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:23:16: {...}? => '='
+            // CustomInternalXmlHighlightingLexer.g:23:14: ({...}? => '=' )
+            // CustomInternalXmlHighlightingLexer.g:23:16: {...}? => '='
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_ATTR_EQ", " tagMode ");
@@ -159,13 +159,13 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:25:9: ({...}? => ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:25:11: {...}? => ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // CustomInternalXmlHighlightingLexer.g:25:9: ({...}? => ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // CustomInternalXmlHighlightingLexer.g:25:11: {...}? => ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_ID", " tagMode ");
             }
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:25:27: ( '^' )?
+            // CustomInternalXmlHighlightingLexer.g:25:27: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -174,7 +174,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:25:27: '^'
+                    // CustomInternalXmlHighlightingLexer.g:25:27: '^'
                     {
                     match('^'); 
 
@@ -192,7 +192,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:25:56: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // CustomInternalXmlHighlightingLexer.g:25:56: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -205,7 +205,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:
+            	    // CustomInternalXmlHighlightingLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -241,13 +241,13 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:13: ({...}? => ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:15: {...}? => ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // CustomInternalXmlHighlightingLexer.g:27:13: ({...}? => ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // CustomInternalXmlHighlightingLexer.g:27:15: {...}? => ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_STRING", " tagMode ");
             }
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:31: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // CustomInternalXmlHighlightingLexer.g:27:31: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -265,10 +265,10 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:32: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // CustomInternalXmlHighlightingLexer.g:27:32: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:36: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // CustomInternalXmlHighlightingLexer.g:27:36: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -284,7 +284,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:37: '\\\\' .
+                    	    // CustomInternalXmlHighlightingLexer.g:27:37: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -292,7 +292,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:44: ~ ( ( '\\\\' | '\"' ) )
+                    	    // CustomInternalXmlHighlightingLexer.g:27:44: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -317,10 +317,10 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:64: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // CustomInternalXmlHighlightingLexer.g:27:64: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:69: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // CustomInternalXmlHighlightingLexer.g:27:69: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -336,7 +336,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:70: '\\\\' .
+                    	    // CustomInternalXmlHighlightingLexer.g:27:70: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -344,7 +344,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:27:77: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // CustomInternalXmlHighlightingLexer.g:27:77: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -387,13 +387,13 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:29:9: ({...}? => ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:29:11: {...}? => ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
+            // CustomInternalXmlHighlightingLexer.g:29:9: ({...}? => ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+ )
+            // CustomInternalXmlHighlightingLexer.g:29:11: {...}? => ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_WS", " tagMode ");
             }
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:29:27: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
+            // CustomInternalXmlHighlightingLexer.g:29:27: ( ' ' | '\\r' | '\\t' | '\\f' | '\\n' )+
             int cnt6=0;
             loop6:
             do {
@@ -407,7 +407,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:
+            	    // CustomInternalXmlHighlightingLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ' ) {
             	        input.consume();
@@ -447,13 +447,13 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
         try {
             int _type = RULE_PCDATA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:31:13: ({...}? => (~ ( '<' ) )+ )
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:31:15: {...}? => (~ ( '<' ) )+
+            // CustomInternalXmlHighlightingLexer.g:31:13: ({...}? => (~ ( '<' ) )+ )
+            // CustomInternalXmlHighlightingLexer.g:31:15: {...}? => (~ ( '<' ) )+
             {
             if ( !(( !tagMode )) ) {
                 throw new FailedPredicateException(input, "RULE_PCDATA", " !tagMode ");
             }
-            // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:31:32: (~ ( '<' ) )+
+            // CustomInternalXmlHighlightingLexer.g:31:32: (~ ( '<' ) )+
             int cnt7=0;
             loop7:
             do {
@@ -467,7 +467,7 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:31:32: ~ ( '<' )
+            	    // CustomInternalXmlHighlightingLexer.g:31:32: ~ ( '<' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<=';')||(input.LA(1)>='=' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -503,68 +503,68 @@ public class CustomInternalXmlHighlightingLexer extends Lexer {
     // $ANTLR end "RULE_PCDATA"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:8: ( RULE_TAG_START_OPEN | RULE_TAG_END_OPEN | RULE_TAG_CLOSE | RULE_TAG_EMPTY_CLOSE | RULE_ATTR_EQ | RULE_ID | RULE_STRING | RULE_WS | RULE_PCDATA )
+        // CustomInternalXmlHighlightingLexer.g:1:8: ( RULE_TAG_START_OPEN | RULE_TAG_END_OPEN | RULE_TAG_CLOSE | RULE_TAG_EMPTY_CLOSE | RULE_ATTR_EQ | RULE_ID | RULE_STRING | RULE_WS | RULE_PCDATA )
         int alt8=9;
         alt8 = dfa8.predict(input);
         switch (alt8) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:10: RULE_TAG_START_OPEN
+                // CustomInternalXmlHighlightingLexer.g:1:10: RULE_TAG_START_OPEN
                 {
                 mRULE_TAG_START_OPEN(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:30: RULE_TAG_END_OPEN
+                // CustomInternalXmlHighlightingLexer.g:1:30: RULE_TAG_END_OPEN
                 {
                 mRULE_TAG_END_OPEN(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:48: RULE_TAG_CLOSE
+                // CustomInternalXmlHighlightingLexer.g:1:48: RULE_TAG_CLOSE
                 {
                 mRULE_TAG_CLOSE(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:63: RULE_TAG_EMPTY_CLOSE
+                // CustomInternalXmlHighlightingLexer.g:1:63: RULE_TAG_EMPTY_CLOSE
                 {
                 mRULE_TAG_EMPTY_CLOSE(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:84: RULE_ATTR_EQ
+                // CustomInternalXmlHighlightingLexer.g:1:84: RULE_ATTR_EQ
                 {
                 mRULE_ATTR_EQ(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:97: RULE_ID
+                // CustomInternalXmlHighlightingLexer.g:1:97: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:105: RULE_STRING
+                // CustomInternalXmlHighlightingLexer.g:1:105: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:117: RULE_WS
+                // CustomInternalXmlHighlightingLexer.g:1:117: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/xmleditor/CustomInternalXmlHighlightingLexer.g:1:125: RULE_PCDATA
+                // CustomInternalXmlHighlightingLexer.g:1:125: RULE_PCDATA
                 {
                 mRULE_PCDATA(); 
 

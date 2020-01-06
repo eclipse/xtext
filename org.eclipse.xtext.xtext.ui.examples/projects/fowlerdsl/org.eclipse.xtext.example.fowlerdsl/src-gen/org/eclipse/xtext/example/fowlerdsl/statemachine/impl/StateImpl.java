@@ -108,6 +108,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -118,6 +119,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -131,6 +133,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Command> getActions()
   {
     if (actions == null)
@@ -145,6 +148,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Transition> getTransitions()
   {
     if (transitions == null)
@@ -269,7 +273,7 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

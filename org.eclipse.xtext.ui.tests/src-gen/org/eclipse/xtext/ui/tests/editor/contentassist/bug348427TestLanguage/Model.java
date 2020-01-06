@@ -27,10 +27,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Element1</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Element1</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Element1</em>' containment reference.
    * @see #setElement1(Scenario1)
@@ -53,10 +49,6 @@ public interface Model extends EObject
   /**
    * Returns the value of the '<em><b>Element2</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Element2</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Element2</em>' containment reference.
    * @see #setElement2(Scenario2)

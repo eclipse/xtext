@@ -66,6 +66,7 @@ public class BracketAttributeImpl extends AttributeImpl implements BracketAttrib
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PostfixExpression getExpression()
   {
     return expression;
@@ -93,6 +94,7 @@ public class BracketAttributeImpl extends AttributeImpl implements BracketAttrib
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)

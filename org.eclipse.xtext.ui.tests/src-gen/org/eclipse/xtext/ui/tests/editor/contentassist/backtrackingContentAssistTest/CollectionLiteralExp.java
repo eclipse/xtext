@@ -27,10 +27,6 @@ public interface CollectionLiteralExp extends Expression
    * Returns the value of the '<em><b>Collection Literal Parts</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.CollectionLiteralPart}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Collection Literal Parts</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Collection Literal Parts</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.BacktrackingContentAssistTestPackage#getCollectionLiteralExp_CollectionLiteralParts()

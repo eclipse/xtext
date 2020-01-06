@@ -158,6 +158,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getShortDescription()
   {
     return shortDescription;
@@ -168,6 +169,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
@@ -181,6 +183,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLongDescription()
   {
     return longDescription;
@@ -191,6 +194,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
@@ -204,6 +208,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getUid()
   {
     return uid;
@@ -214,6 +219,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUid(String newUid)
   {
     String oldUid = uid;
@@ -227,6 +233,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isFlag()
   {
     return flag;
@@ -237,6 +244,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFlag(boolean newFlag)
   {
     boolean oldFlag = flag;
@@ -250,6 +258,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Bug304681Feature> getFeatures()
   {
     if (features == null)
@@ -393,7 +402,7 @@ public class Bug304681ModelImpl extends MinimalEObjectImpl.Container implements 
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (shortDescription: ");
     result.append(shortDescription);
     result.append(", longDescription: ");

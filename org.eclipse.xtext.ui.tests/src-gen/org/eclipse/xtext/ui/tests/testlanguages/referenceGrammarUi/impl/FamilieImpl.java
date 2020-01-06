@@ -116,6 +116,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -126,6 +127,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -139,6 +141,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Erwachsener getMutter()
   {
     if (mutter != null && mutter.eIsProxy())
@@ -169,6 +172,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMutter(Erwachsener newMutter)
   {
     Erwachsener oldMutter = mutter;
@@ -182,6 +186,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Erwachsener getVater()
   {
     if (vater != null && vater.eIsProxy())
@@ -212,6 +217,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setVater(Erwachsener newVater)
   {
     Erwachsener oldVater = vater;
@@ -225,6 +231,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Kind> getKinder()
   {
     if (kinder == null)
@@ -344,7 +351,7 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

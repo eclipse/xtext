@@ -87,6 +87,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getOp()
   {
     return op;
@@ -97,6 +98,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOp(String newOp)
   {
     String oldOp = op;
@@ -110,6 +112,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Expression getSource()
   {
     return source;
@@ -137,6 +140,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSource(Expression newSource)
   {
     if (newSource != source)
@@ -255,7 +259,7 @@ public class PrefixExpImpl extends ExpressionImpl implements PrefixExp
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (op: ");
     result.append(op);
     result.append(')');

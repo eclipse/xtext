@@ -203,6 +203,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DebugTraceRegion> getNestedRegions() {
 		if (nestedRegions == null) {
 			nestedRegions = new EObjectContainmentEList<DebugTraceRegion>(DebugTraceRegion.class, this, TracePackage.DEBUG_TRACE_REGION__NESTED_REGIONS);
@@ -225,6 +226,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DebugLocationData> getAssociations() {
 		if (associations == null) {
 			associations = new EObjectContainmentEList<DebugLocationData>(DebugLocationData.class, this, TracePackage.DEBUG_TRACE_REGION__ASSOCIATIONS);
@@ -237,6 +239,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isUseForDebugging() {
 		return useForDebugging;
 	}
@@ -246,6 +249,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUseForDebugging(boolean newUseForDebugging) {
 		boolean oldUseForDebugging = useForDebugging;
 		useForDebugging = newUseForDebugging;
@@ -268,6 +272,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMyOffset() {
 		return myOffset;
 	}
@@ -277,6 +282,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMyOffset(int newMyOffset) {
 		int oldMyOffset = myOffset;
 		myOffset = newMyOffset;
@@ -289,6 +295,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMyLength() {
 		return myLength;
 	}
@@ -298,6 +305,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMyLength(int newMyLength) {
 		int oldMyLength = myLength;
 		myLength = newMyLength;
@@ -310,6 +318,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMyLineNumber() {
 		return myLineNumber;
 	}
@@ -319,6 +328,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMyLineNumber(int newMyLineNumber) {
 		int oldMyLineNumber = myLineNumber;
 		myLineNumber = newMyLineNumber;
@@ -331,6 +341,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMyEndLineNumber() {
 		return myEndLineNumber;
 	}
@@ -340,6 +351,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMyEndLineNumber(int newMyEndLineNumber) {
 		int oldMyEndLineNumber = myEndLineNumber;
 		myEndLineNumber = newMyEndLineNumber;
@@ -501,7 +513,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (myOffset: ");
 		result.append(myOffset);
 		result.append(", myLength: ");

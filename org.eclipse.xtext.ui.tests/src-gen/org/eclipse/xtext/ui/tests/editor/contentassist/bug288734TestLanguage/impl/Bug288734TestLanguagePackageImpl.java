@@ -98,7 +98,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link Bug288734TestLanguagePackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -113,7 +113,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
     if (isInited) return (Bug288734TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(Bug288734TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    Bug288734TestLanguagePackageImpl theBug288734TestLanguagePackage = (Bug288734TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug288734TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug288734TestLanguagePackageImpl());
+    Object registeredBug288734TestLanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    Bug288734TestLanguagePackageImpl theBug288734TestLanguagePackage = registeredBug288734TestLanguagePackage instanceof Bug288734TestLanguagePackageImpl ? (Bug288734TestLanguagePackageImpl)registeredBug288734TestLanguagePackage : new Bug288734TestLanguagePackageImpl();
 
     isInited = true;
 
@@ -126,7 +127,6 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Mark meta-data to indicate it can't be changed
     theBug288734TestLanguagePackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug288734TestLanguagePackage.eNS_URI, theBug288734TestLanguagePackage);
     return theBug288734TestLanguagePackage;
@@ -137,6 +137,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getModel()
   {
     return modelEClass;
@@ -147,6 +148,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getModel_Constants()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
@@ -157,6 +159,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTConstant()
   {
     return tConstantEClass;
@@ -167,6 +170,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getTConstant_Annotations()
   {
     return (EReference)tConstantEClass.getEStructuralFeatures().get(0);
@@ -177,6 +181,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTConstant_Name()
   {
     return (EAttribute)tConstantEClass.getEStructuralFeatures().get(1);
@@ -187,6 +192,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTStringConstant()
   {
     return tStringConstantEClass;
@@ -197,6 +203,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTIntegerConstant()
   {
     return tIntegerConstantEClass;
@@ -207,6 +214,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTBooleanConstant()
   {
     return tBooleanConstantEClass;
@@ -217,6 +225,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getTAnnotation()
   {
     return tAnnotationEClass;
@@ -227,6 +236,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getTAnnotation_Description()
   {
     return (EAttribute)tAnnotationEClass.getEStructuralFeatures().get(0);
@@ -237,6 +247,7 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug288734TestLanguageFactory getBug288734TestLanguageFactory()
   {
     return (Bug288734TestLanguageFactory)getEFactoryInstance();

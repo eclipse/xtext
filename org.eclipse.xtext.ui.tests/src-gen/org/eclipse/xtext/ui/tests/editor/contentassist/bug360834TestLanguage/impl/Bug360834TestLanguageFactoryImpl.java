@@ -118,6 +118,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Model createModel()
   {
     ModelImpl model = new ModelImpl();
@@ -129,6 +130,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Alternative createAlternative()
   {
     AlternativeImpl alternative = new AlternativeImpl();
@@ -140,6 +142,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RecursiveClassDeclaration createRecursiveClassDeclaration()
   {
     RecursiveClassDeclarationImpl recursiveClassDeclaration = new RecursiveClassDeclarationImpl();
@@ -151,6 +154,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Modifiers createModifiers()
   {
     ModifiersImpl modifiers = new ModifiersImpl();
@@ -162,6 +166,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Unordered createUnordered()
   {
     UnorderedImpl unordered = new UnorderedImpl();
@@ -173,6 +178,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SimpleClassDeclaration createSimpleClassDeclaration()
   {
     SimpleClassDeclarationImpl simpleClassDeclaration = new SimpleClassDeclarationImpl();
@@ -184,6 +190,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ClassMember createClassMember()
   {
     ClassMemberImpl classMember = new ClassMemberImpl();
@@ -195,6 +202,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public UnorderedModifiers createUnorderedModifiers()
   {
     UnorderedModifiersImpl unorderedModifiers = new UnorderedModifiersImpl();
@@ -228,6 +236,7 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Bug360834TestLanguagePackage getBug360834TestLanguagePackage()
   {
     return (Bug360834TestLanguagePackage)getEPackage();

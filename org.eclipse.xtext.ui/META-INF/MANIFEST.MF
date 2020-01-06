@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.13.0";visibility:=ree
  org.eclipse.ui.ide;bundle-version="3.13.0",
  org.eclipse.xtext;visibility:=reexport,
  org.eclipse.ui.views;bundle-version="3.3.0",
- org.eclipse.emf.edit.ui;bundle-version="2.10.2";visibility:=reexport,
+ org.eclipse.emf.edit.ui;bundle-version="2.17.0";visibility:=reexport,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
  org.eclipse.xtext.util,
  org.eclipse.jdt.core;bundle-version="3.13.102";resolution:=optional;x-installation:=greedy,

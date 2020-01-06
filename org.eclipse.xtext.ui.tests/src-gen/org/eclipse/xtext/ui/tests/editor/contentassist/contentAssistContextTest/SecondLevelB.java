@@ -30,10 +30,6 @@ public interface SecondLevelB extends EObject
    * Returns the value of the '<em><b>Third Level B1</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ThirdLevelB1}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third Level B1</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third Level B1</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ContentAssistContextTestPackage#getSecondLevelB_ThirdLevelB1()
@@ -46,10 +42,6 @@ public interface SecondLevelB extends EObject
    * Returns the value of the '<em><b>Third Level B2</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ThirdLevelB2}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Third Level B2</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Third Level B2</em>' containment reference list.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ContentAssistContextTestPackage#getSecondLevelB_ThirdLevelB2()

@@ -31,10 +31,6 @@ public interface Cell extends ViewContentElement
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.CellType}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.CellType
@@ -59,10 +55,6 @@ public interface Cell extends ViewContentElement
   /**
    * Returns the value of the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Text</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Text</em>' containment reference.
    * @see #setText(ScalarExpression)
@@ -85,10 +77,6 @@ public interface Cell extends ViewContentElement
   /**
    * Returns the value of the '<em><b>Details</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Details</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Details</em>' containment reference.
    * @see #setDetails(ScalarExpression)
@@ -111,10 +99,6 @@ public interface Cell extends ViewContentElement
   /**
    * Returns the value of the '<em><b>Image</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Image</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Image</em>' containment reference.
    * @see #setImage(ScalarExpression)
@@ -137,10 +121,6 @@ public interface Cell extends ViewContentElement
   /**
    * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
    * @see #setAction(ViewAction)
@@ -164,10 +144,6 @@ public interface Cell extends ViewContentElement
    * Returns the value of the '<em><b>Accessory</b></em>' attribute.
    * The literals are from the enumeration {@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.CellAccessory}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Accessory</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Accessory</em>' attribute.
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.CellAccessory
