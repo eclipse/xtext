@@ -114,6 +114,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getIf()
 	{
 		return if_;
@@ -141,6 +142,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIf(XExpression newIf)
 	{
 		if (newIf != if_)
@@ -162,6 +164,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getThen()
 	{
 		return then;
@@ -189,6 +192,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThen(XExpression newThen)
 	{
 		if (newThen != then)
@@ -210,6 +214,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RichStringElseIf> getElseIfs()
 	{
 		if (elseIfs == null)
@@ -224,6 +229,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getElse()
 	{
 		return else_;
@@ -251,6 +257,7 @@ public class RichStringIfImpl extends XExpressionImpl implements RichStringIf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElse(XExpression newElse)
 	{
 		if (newElse != else_)

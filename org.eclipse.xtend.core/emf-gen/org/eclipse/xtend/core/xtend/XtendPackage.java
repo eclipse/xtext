@@ -736,6 +736,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -764,6 +765,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -792,6 +794,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -801,6 +804,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Each Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -810,6 +814,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Declared Param</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -1386,6 +1391,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -1395,6 +1401,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -1404,6 +1411,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */
@@ -1413,6 +1421,7 @@ public interface XtendPackage extends EPackage
 	 * The feature id for the '<em><b>Writeable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.7
 	 * @generated
 	 * @ordered
 	 */

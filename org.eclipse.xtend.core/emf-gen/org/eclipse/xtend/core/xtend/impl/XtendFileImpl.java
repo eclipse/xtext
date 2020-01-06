@@ -112,6 +112,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XImportSection getImportSection()
 	{
 		return importSection;
@@ -139,6 +140,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImportSection(XImportSection newImportSection)
 	{
 		if (newImportSection != importSection)
@@ -160,6 +162,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XtendTypeDeclaration> getXtendTypes()
 	{
 		if (xtendTypes == null)
@@ -174,6 +177,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPackage()
 	{
 		return package_;
@@ -184,6 +188,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPackage(String newPackage)
 	{
 		String oldPackage = package_;
@@ -308,7 +313,7 @@ public class XtendFileImpl extends MinimalEObjectImpl.Container implements Xtend
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (package: ");
 		result.append(package_);
 		result.append(')');

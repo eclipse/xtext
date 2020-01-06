@@ -156,6 +156,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XAnnotation> getAnnotations()
 	{
 		if (annotations == null)
@@ -170,6 +171,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendAnnotationTarget getAnnotationInfo()
 	{
 		return annotationInfo;
@@ -197,6 +199,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(XtendAnnotationTarget newAnnotationInfo)
 	{
 		if (newAnnotationInfo != annotationInfo)
@@ -218,6 +221,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getModifiers()
 	{
 		if (modifiers == null)
@@ -232,6 +236,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendTypeDeclaration getDeclaringType()
 	{
 		if (eContainerFeatureID() != XtendPackage.ANONYMOUS_CLASS__DECLARING_TYPE) return null;
@@ -254,6 +259,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaringType(XtendTypeDeclaration newDeclaringType)
 	{
 		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != XtendPackage.ANONYMOUS_CLASS__DECLARING_TYPE && newDeclaringType != null))
@@ -277,6 +283,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -287,6 +294,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -300,6 +308,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XtendMember> getMembers()
 	{
 		if (members == null)
@@ -314,6 +323,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XConstructorCall getConstructorCall()
 	{
 		return constructorCall;
@@ -341,6 +351,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstructorCall(XConstructorCall newConstructorCall)
 	{
 		if (newConstructorCall != constructorCall)
@@ -362,6 +373,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAnonymous()
 	{
 		// TODO: implement this method
@@ -374,6 +386,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isLocal()
 	{
 		// TODO: implement this method
@@ -386,6 +399,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmVisibility getVisibility()
 	{
 		// TODO: implement this method
@@ -398,6 +412,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmVisibility getDeclaredVisibility()
 	{
 		// TODO: implement this method
@@ -410,6 +425,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		// TODO: implement this method
@@ -422,6 +438,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFinal()
 	{
 		// TODO: implement this method
@@ -706,7 +723,7 @@ public class AnonymousClassImpl extends XExpressionImpl implements AnonymousClas
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (modifiers: ");
 		result.append(modifiers);
 		result.append(", name: ");

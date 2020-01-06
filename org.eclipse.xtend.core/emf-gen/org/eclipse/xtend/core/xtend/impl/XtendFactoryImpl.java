@@ -100,6 +100,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendFile createXtendFile()
 	{
 		XtendFileImpl xtendFile = new XtendFileImpl();
@@ -111,6 +112,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendClass createXtendClass()
 	{
 		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
@@ -122,6 +124,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendMember createXtendMember()
 	{
 		XtendMemberImplCustom xtendMember = new XtendMemberImplCustom();
@@ -133,6 +136,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendFunction createXtendFunction()
 	{
 		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
@@ -144,6 +148,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendField createXtendField()
 	{
 		XtendFieldImplCustom xtendField = new XtendFieldImplCustom();
@@ -155,6 +160,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendParameter createXtendParameter()
 	{
 		XtendParameterImpl xtendParameter = new XtendParameterImpl();
@@ -166,6 +172,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichString createRichString()
 	{
 		RichStringImpl richString = new RichStringImpl();
@@ -177,6 +184,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringLiteral createRichStringLiteral()
 	{
 		RichStringLiteralImpl richStringLiteral = new RichStringLiteralImpl();
@@ -188,6 +196,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringForLoop createRichStringForLoop()
 	{
 		RichStringForLoopImpl richStringForLoop = new RichStringForLoopImpl();
@@ -199,6 +208,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringIf createRichStringIf()
 	{
 		RichStringIfImpl richStringIf = new RichStringIfImpl();
@@ -210,6 +220,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringElseIf createRichStringElseIf()
 	{
 		RichStringElseIfImpl richStringElseIf = new RichStringElseIfImpl();
@@ -221,6 +232,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CreateExtensionInfo createCreateExtensionInfo()
 	{
 		CreateExtensionInfoImpl createExtensionInfo = new CreateExtensionInfoImpl();
@@ -232,6 +244,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendConstructor createXtendConstructor()
 	{
 		XtendConstructorImpl xtendConstructor = new XtendConstructorImpl();
@@ -243,6 +256,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendTypeDeclaration createXtendTypeDeclaration()
 	{
 		XtendTypeDeclarationImplCustom xtendTypeDeclaration = new XtendTypeDeclarationImplCustom();
@@ -254,6 +268,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendAnnotationType createXtendAnnotationType()
 	{
 		XtendAnnotationTypeImplCustom xtendAnnotationType = new XtendAnnotationTypeImplCustom();
@@ -265,6 +280,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendInterface createXtendInterface()
 	{
 		XtendInterfaceImplCustom xtendInterface = new XtendInterfaceImplCustom();
@@ -276,6 +292,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendEnum createXtendEnum()
 	{
 		XtendEnumImplCustom xtendEnum = new XtendEnumImplCustom();
@@ -287,6 +304,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendEnumLiteral createXtendEnumLiteral()
 	{
 		XtendEnumLiteralImplCustom xtendEnumLiteral = new XtendEnumLiteralImplCustom();
@@ -298,6 +316,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendVariableDeclaration createXtendVariableDeclaration()
 	{
 		XtendVariableDeclarationImpl xtendVariableDeclaration = new XtendVariableDeclarationImpl();
@@ -309,6 +328,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendFormalParameter createXtendFormalParameter()
 	{
 		XtendFormalParameterImpl xtendFormalParameter = new XtendFormalParameterImpl();
@@ -320,6 +340,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnonymousClass createAnonymousClass()
 	{
 		AnonymousClassImplCustom anonymousClass = new AnonymousClassImplCustom();
@@ -331,6 +352,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendPackage getXtendPackage()
 	{
 		return (XtendPackage)getEPackage();

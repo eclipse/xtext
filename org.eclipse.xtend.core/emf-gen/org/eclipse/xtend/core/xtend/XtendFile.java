@@ -36,10 +36,6 @@ public interface XtendFile extends EObject
 	/**
 	 * Returns the value of the '<em><b>Import Section</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Import Section</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Import Section</em>' containment reference.
 	 * @see #setImportSection(XImportSection)
@@ -63,10 +59,6 @@ public interface XtendFile extends EObject
 	 * Returns the value of the '<em><b>Xtend Types</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Xtend Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Xtend Types</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFile_XtendTypes()
@@ -78,10 +70,6 @@ public interface XtendFile extends EObject
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Package</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Package</em>' attribute.
 	 * @see #setPackage(String)

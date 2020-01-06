@@ -91,6 +91,7 @@ public class ProcessedRichStringImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichString getRichString()
 	{
 		if (richString != null && richString.eIsProxy())
@@ -121,6 +122,7 @@ public class ProcessedRichStringImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRichString(RichString newRichString)
 	{
 		RichString oldRichString = richString;
@@ -134,6 +136,7 @@ public class ProcessedRichStringImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Line> getLines()
 	{
 		if (lines == null)

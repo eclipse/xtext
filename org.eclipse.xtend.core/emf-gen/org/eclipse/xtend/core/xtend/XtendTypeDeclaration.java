@@ -31,10 +31,6 @@ public interface XtendTypeDeclaration extends XtendMember
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -59,10 +55,6 @@ public interface XtendTypeDeclaration extends XtendMember
 	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendMember}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType <em>Declaring Type</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Members</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendTypeDeclaration_Members()

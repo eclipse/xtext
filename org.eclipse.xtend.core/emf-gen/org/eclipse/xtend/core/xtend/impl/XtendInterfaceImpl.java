@@ -87,6 +87,7 @@ public class XtendInterfaceImpl extends XtendTypeDeclarationImplCustom implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getExtends()
 	{
 		if (extends_ == null)
@@ -101,6 +102,7 @@ public class XtendInterfaceImpl extends XtendTypeDeclarationImplCustom implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeParameter> getTypeParameters()
 	{
 		if (typeParameters == null)
@@ -115,6 +117,7 @@ public class XtendInterfaceImpl extends XtendTypeDeclarationImplCustom implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStrictFloatingPoint()
 	{
 		// TODO: implement this method

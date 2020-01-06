@@ -30,10 +30,6 @@ public interface PrintedExpression extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' reference.
 	 * @see #setExpression(XExpression)

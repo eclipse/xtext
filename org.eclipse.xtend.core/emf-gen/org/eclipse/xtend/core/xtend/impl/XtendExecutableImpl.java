@@ -115,6 +115,7 @@ public abstract class XtendExecutableImpl extends XtendMemberImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeReference> getExceptions()
 	{
 		if (exceptions == null)
@@ -129,6 +130,7 @@ public abstract class XtendExecutableImpl extends XtendMemberImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeParameter> getTypeParameters()
 	{
 		if (typeParameters == null)
@@ -143,6 +145,7 @@ public abstract class XtendExecutableImpl extends XtendMemberImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getExpression()
 	{
 		return expression;
@@ -170,6 +173,7 @@ public abstract class XtendExecutableImpl extends XtendMemberImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(XExpression newExpression)
 	{
 		if (newExpression != expression)
@@ -191,6 +195,7 @@ public abstract class XtendExecutableImpl extends XtendMemberImplCustom implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<XtendParameter> getParameters()
 	{
 		if (parameters == null)

@@ -30,10 +30,6 @@ public interface ElseStart extends LinePart
 	 * Returns the value of the '<em><b>If Condition Start</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.IfConditionStart#getElseStart <em>Else Start</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>If Condition Start</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>If Condition Start</em>' reference.
 	 * @see #setIfConditionStart(IfConditionStart)

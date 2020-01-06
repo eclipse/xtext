@@ -70,6 +70,7 @@ public class ForLoopEndImpl extends LinePartImpl implements ForLoopEnd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForLoopStart getStart()
 	{
 		if (start != null && start.eIsProxy())
@@ -117,6 +118,7 @@ public class ForLoopEndImpl extends LinePartImpl implements ForLoopEnd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStart(ForLoopStart newStart)
 	{
 		if (newStart != start)

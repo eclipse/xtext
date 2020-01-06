@@ -63,6 +63,7 @@ public class LinePartImpl extends MinimalEObjectImpl.Container implements LinePa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Line getLine()
 	{
 		if (eContainerFeatureID() != ProcessedRichStringPackage.LINE_PART__LINE) return null;
@@ -85,6 +86,7 @@ public class LinePartImpl extends MinimalEObjectImpl.Container implements LinePa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLine(Line newLine)
 	{
 		if (newLine != eInternalContainer() || (eContainerFeatureID() != ProcessedRichStringPackage.LINE_PART__LINE && newLine != null))

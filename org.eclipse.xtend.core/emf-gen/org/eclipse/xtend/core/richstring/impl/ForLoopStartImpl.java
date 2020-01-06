@@ -83,6 +83,7 @@ public class ForLoopStartImpl extends LinePartImpl implements ForLoopStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RichStringForLoop getLoop()
 	{
 		if (loop != null && loop.eIsProxy())
@@ -113,6 +114,7 @@ public class ForLoopStartImpl extends LinePartImpl implements ForLoopStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLoop(RichStringForLoop newLoop)
 	{
 		RichStringForLoop oldLoop = loop;
@@ -126,6 +128,7 @@ public class ForLoopStartImpl extends LinePartImpl implements ForLoopStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForLoopEnd getEnd()
 	{
 		if (end != null && end.eIsProxy())
@@ -173,6 +176,7 @@ public class ForLoopStartImpl extends LinePartImpl implements ForLoopStart
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnd(ForLoopEnd newEnd)
 	{
 		if (newEnd != end)

@@ -31,10 +31,6 @@ public interface AnonymousClass extends XExpression, XtendTypeDeclaration
 	/**
 	 * Returns the value of the '<em><b>Constructor Call</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constructor Call</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constructor Call</em>' containment reference.
 	 * @see #setConstructorCall(XConstructorCall)

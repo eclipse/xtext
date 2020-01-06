@@ -31,10 +31,6 @@ public interface LinePart extends EObject
 	 * Returns the value of the '<em><b>Line</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.Line#getParts <em>Parts</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Line</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Line</em>' container reference.
 	 * @see #setLine(Line)

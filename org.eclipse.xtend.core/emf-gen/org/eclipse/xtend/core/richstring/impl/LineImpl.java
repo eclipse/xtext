@@ -81,6 +81,7 @@ public class LineImpl extends MinimalEObjectImpl.Container implements Line
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<LinePart> getParts()
 	{
 		if (parts == null)
@@ -95,6 +96,7 @@ public class LineImpl extends MinimalEObjectImpl.Container implements Line
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessedRichString getRichString()
 	{
 		if (eContainerFeatureID() != ProcessedRichStringPackage.LINE__RICH_STRING) return null;
@@ -117,6 +119,7 @@ public class LineImpl extends MinimalEObjectImpl.Container implements Line
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRichString(ProcessedRichString newRichString)
 	{
 		if (newRichString != eInternalContainer() || (eContainerFeatureID() != ProcessedRichStringPackage.LINE__RICH_STRING && newRichString != null))

@@ -92,6 +92,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendAnnotationTarget getAnnotationInfo()
 	{
 		return annotationInfo;
@@ -119,6 +120,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnnotationInfo(XtendAnnotationTarget newAnnotationInfo)
 	{
 		if (newAnnotationInfo != annotationInfo)
@@ -140,6 +142,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getModifiers()
 	{
 		if (modifiers == null)
@@ -154,6 +157,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XtendTypeDeclaration getDeclaringType()
 	{
 		if (eContainerFeatureID() != XtendPackage.XTEND_MEMBER__DECLARING_TYPE) return null;
@@ -176,6 +180,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclaringType(XtendTypeDeclaration newDeclaringType)
 	{
 		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != XtendPackage.XTEND_MEMBER__DECLARING_TYPE && newDeclaringType != null))
@@ -199,6 +204,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmVisibility getVisibility()
 	{
 		// TODO: implement this method
@@ -211,6 +217,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmVisibility getDeclaredVisibility()
 	{
 		// TODO: implement this method
@@ -223,6 +230,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		// TODO: implement this method
@@ -235,6 +243,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFinal()
 	{
 		// TODO: implement this method
@@ -392,7 +401,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (modifiers: ");
 		result.append(modifiers);
 		result.append(')');

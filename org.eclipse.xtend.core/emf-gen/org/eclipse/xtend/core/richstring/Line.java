@@ -35,10 +35,6 @@ public interface Line extends EObject
 	 * The list contents are of type {@link org.eclipse.xtend.core.richstring.LinePart}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.LinePart#getLine <em>Line</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parts</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parts</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getLine_Parts()
@@ -52,10 +48,6 @@ public interface Line extends EObject
 	 * Returns the value of the '<em><b>Rich String</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.ProcessedRichString#getLines <em>Lines</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rich String</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rich String</em>' container reference.
 	 * @see #setRichString(ProcessedRichString)

@@ -95,6 +95,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getSeparator()
 	{
 		return separator;
@@ -122,6 +123,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSeparator(XExpression newSeparator)
 	{
 		if (newSeparator != separator)
@@ -143,6 +145,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getBefore()
 	{
 		return before;
@@ -170,6 +173,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBefore(XExpression newBefore)
 	{
 		if (newBefore != before)
@@ -191,6 +195,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XExpression getAfter()
 	{
 		return after;
@@ -218,6 +223,7 @@ public class RichStringForLoopImpl extends XForLoopExpressionImpl implements Ric
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAfter(XExpression newAfter)
 	{
 		if (newAfter != after)

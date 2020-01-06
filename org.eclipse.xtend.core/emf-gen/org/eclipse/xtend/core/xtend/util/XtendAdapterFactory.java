@@ -619,6 +619,7 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXExpressionAdapter()
@@ -634,6 +635,7 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XBlockExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXBlockExpressionAdapter()
@@ -649,6 +651,7 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XStringLiteral
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXStringLiteralAdapter()
@@ -664,6 +667,7 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XForLoopExpression
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXForLoopExpressionAdapter()
@@ -694,6 +698,7 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.xbase.XVariableDeclaration
+	 * @since 2.7
 	 * @generated
 	 */
 	public Adapter createXVariableDeclarationAdapter()

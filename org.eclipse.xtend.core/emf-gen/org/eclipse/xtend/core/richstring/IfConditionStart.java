@@ -35,10 +35,6 @@ public interface IfConditionStart extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Rich String If</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rich String If</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rich String If</em>' reference.
 	 * @see #setRichStringIf(RichStringIf)
@@ -62,10 +58,6 @@ public interface IfConditionStart extends LinePart
 	 * Returns the value of the '<em><b>Else Start</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.ElseStart#getIfConditionStart <em>If Condition Start</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Else Start</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Else Start</em>' reference.
 	 * @see #setElseStart(ElseStart)
@@ -91,10 +83,6 @@ public interface IfConditionStart extends LinePart
 	 * The list contents are of type {@link org.eclipse.xtend.core.richstring.ElseIfCondition}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.ElseIfCondition#getIfConditionStart <em>If Condition Start</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Else If Conditions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Else If Conditions</em>' reference list.
 	 * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getIfConditionStart_ElseIfConditions()
@@ -107,10 +95,6 @@ public interface IfConditionStart extends LinePart
 	/**
 	 * Returns the value of the '<em><b>End If</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End If</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End If</em>' reference.
 	 * @see #setEndIf(EndIf)

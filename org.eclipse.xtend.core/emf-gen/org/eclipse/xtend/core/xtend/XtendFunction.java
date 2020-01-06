@@ -32,10 +32,6 @@ public interface XtendFunction extends XtendExecutable
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -58,10 +54,6 @@ public interface XtendFunction extends XtendExecutable
 	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
@@ -84,10 +76,6 @@ public interface XtendFunction extends XtendExecutable
 	/**
 	 * Returns the value of the '<em><b>Create Extension Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Create Extension Info</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Create Extension Info</em>' containment reference.
 	 * @see #setCreateExtensionInfo(CreateExtensionInfo)

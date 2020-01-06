@@ -31,10 +31,6 @@ public interface ElseIfCondition extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Rich String Else If</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rich String Else If</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rich String Else If</em>' reference.
 	 * @see #setRichStringElseIf(RichStringElseIf)
@@ -58,10 +54,6 @@ public interface ElseIfCondition extends LinePart
 	 * Returns the value of the '<em><b>If Condition Start</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.richstring.IfConditionStart#getElseIfConditions <em>Else If Conditions</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>If Condition Start</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>If Condition Start</em>' reference.
 	 * @see #setIfConditionStart(IfConditionStart)

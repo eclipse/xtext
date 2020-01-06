@@ -79,6 +79,7 @@ public class XtendFormalParameterImpl extends JvmFormalParameterImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isExtension()
 	{
 		return extension;
@@ -89,6 +90,7 @@ public class XtendFormalParameterImpl extends JvmFormalParameterImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtension(boolean newExtension)
 	{
 		boolean oldExtension = extension;
@@ -173,7 +175,7 @@ public class XtendFormalParameterImpl extends JvmFormalParameterImplCustom imple
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (extension: ");
 		result.append(extension);
 		result.append(')');

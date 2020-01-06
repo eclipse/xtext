@@ -31,7 +31,13 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
 
 import org.eclipse.xtend.core.xtend.XtendPackage;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.XbasePackage;
+
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+
+import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -154,7 +160,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ProcessedRichStringPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -169,12 +175,17 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 		if (isInited) return (ProcessedRichStringPackage)EPackage.Registry.INSTANCE.getEPackage(ProcessedRichStringPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ProcessedRichStringPackageImpl theProcessedRichStringPackage = (ProcessedRichStringPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ProcessedRichStringPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ProcessedRichStringPackageImpl());
+		Object registeredProcessedRichStringPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ProcessedRichStringPackageImpl theProcessedRichStringPackage = registeredProcessedRichStringPackage instanceof ProcessedRichStringPackageImpl ? (ProcessedRichStringPackageImpl)registeredProcessedRichStringPackage : new ProcessedRichStringPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
+		TypesPackage.eINSTANCE.eClass();
+		XAnnotationsPackage.eINSTANCE.eClass();
+		XbasePackage.eINSTANCE.eClass();
 		XtendPackage.eINSTANCE.eClass();
+		XtypePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theProcessedRichStringPackage.createPackageContents();
@@ -185,7 +196,6 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 		// Mark meta-data to indicate it can't be changed
 		theProcessedRichStringPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ProcessedRichStringPackage.eNS_URI, theProcessedRichStringPackage);
 		return theProcessedRichStringPackage;
@@ -196,6 +206,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProcessedRichString()
 	{
 		return processedRichStringEClass;
@@ -206,6 +217,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcessedRichString_RichString()
 	{
 		return (EReference)processedRichStringEClass.getEStructuralFeatures().get(0);
@@ -216,6 +228,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProcessedRichString_Lines()
 	{
 		return (EReference)processedRichStringEClass.getEStructuralFeatures().get(1);
@@ -226,6 +239,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLine()
 	{
 		return lineEClass;
@@ -236,6 +250,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLine_Parts()
 	{
 		return (EReference)lineEClass.getEStructuralFeatures().get(0);
@@ -246,6 +261,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLine_RichString()
 	{
 		return (EReference)lineEClass.getEStructuralFeatures().get(1);
@@ -256,6 +272,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLinePart()
 	{
 		return linePartEClass;
@@ -266,6 +283,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLinePart_Line()
 	{
 		return (EReference)linePartEClass.getEStructuralFeatures().get(0);
@@ -276,6 +294,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLiteral()
 	{
 		return literalEClass;
@@ -286,6 +305,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLiteral_Literal()
 	{
 		return (EReference)literalEClass.getEStructuralFeatures().get(0);
@@ -296,6 +316,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteral_Offset()
 	{
 		return (EAttribute)literalEClass.getEStructuralFeatures().get(1);
@@ -306,6 +327,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLiteral_Length()
 	{
 		return (EAttribute)literalEClass.getEStructuralFeatures().get(2);
@@ -316,6 +338,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLineBreak()
 	{
 		return lineBreakEClass;
@@ -326,6 +349,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getForLoopStart()
 	{
 		return forLoopStartEClass;
@@ -336,6 +360,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForLoopStart_Loop()
 	{
 		return (EReference)forLoopStartEClass.getEStructuralFeatures().get(0);
@@ -346,6 +371,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForLoopStart_End()
 	{
 		return (EReference)forLoopStartEClass.getEStructuralFeatures().get(1);
@@ -356,6 +382,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getForLoopEnd()
 	{
 		return forLoopEndEClass;
@@ -366,6 +393,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getForLoopEnd_Start()
 	{
 		return (EReference)forLoopEndEClass.getEStructuralFeatures().get(0);
@@ -376,6 +404,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrintedExpression()
 	{
 		return printedExpressionEClass;
@@ -386,6 +415,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPrintedExpression_Expression()
 	{
 		return (EReference)printedExpressionEClass.getEStructuralFeatures().get(0);
@@ -396,6 +426,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIfConditionStart()
 	{
 		return ifConditionStartEClass;
@@ -406,6 +437,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfConditionStart_RichStringIf()
 	{
 		return (EReference)ifConditionStartEClass.getEStructuralFeatures().get(0);
@@ -416,6 +448,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfConditionStart_ElseStart()
 	{
 		return (EReference)ifConditionStartEClass.getEStructuralFeatures().get(1);
@@ -426,6 +459,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfConditionStart_ElseIfConditions()
 	{
 		return (EReference)ifConditionStartEClass.getEStructuralFeatures().get(2);
@@ -436,6 +470,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfConditionStart_EndIf()
 	{
 		return (EReference)ifConditionStartEClass.getEStructuralFeatures().get(3);
@@ -446,6 +481,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElseIfCondition()
 	{
 		return elseIfConditionEClass;
@@ -456,6 +492,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElseIfCondition_RichStringElseIf()
 	{
 		return (EReference)elseIfConditionEClass.getEStructuralFeatures().get(0);
@@ -466,6 +503,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElseIfCondition_IfConditionStart()
 	{
 		return (EReference)elseIfConditionEClass.getEStructuralFeatures().get(1);
@@ -476,6 +514,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElseStart()
 	{
 		return elseStartEClass;
@@ -486,6 +525,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElseStart_IfConditionStart()
 	{
 		return (EReference)elseStartEClass.getEStructuralFeatures().get(0);
@@ -496,6 +536,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEndIf()
 	{
 		return endIfEClass;
@@ -506,6 +547,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEndIf_IfConditionStart()
 	{
 		return (EReference)endIfEClass.getEStructuralFeatures().get(0);
@@ -516,6 +558,7 @@ public class ProcessedRichStringPackageImpl extends EPackageImpl implements Proc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessedRichStringFactory getProcessedRichStringFactory()
 	{
 		return (ProcessedRichStringFactory)getEFactoryInstance();

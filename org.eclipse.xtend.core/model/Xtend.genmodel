@@ -4,7 +4,7 @@
     modelDirectory="/org.eclipse.xtend.core/emf-gen" modelPluginID="org.eclipse.xtend.core"
     modelName="Xtend" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    runtimeVersion="2.20" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <foreignModel>Xtend.ecore</foreignModel>
   <genPackages prefix="Xtend" basePackage="org.eclipse.xtend.core" disposableProviderFactory="true"
       ecorePackage="Xtend.ecore#/">

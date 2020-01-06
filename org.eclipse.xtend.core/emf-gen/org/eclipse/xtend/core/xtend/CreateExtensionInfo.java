@@ -33,10 +33,6 @@ public interface CreateExtensionInfo extends EObject
 	/**
 	 * Returns the value of the '<em><b>Create Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Create Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Create Expression</em>' containment reference.
 	 * @see #setCreateExpression(XExpression)
@@ -60,10 +56,6 @@ public interface CreateExtensionInfo extends EObject
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * The default value is <code>"it"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)

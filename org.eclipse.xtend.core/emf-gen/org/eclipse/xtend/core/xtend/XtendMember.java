@@ -34,10 +34,6 @@ public interface XtendMember extends XtendAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Annotation Info</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotation Info</em>' containment reference.
 	 * @see #setAnnotationInfo(XtendAnnotationTarget)
@@ -61,10 +57,6 @@ public interface XtendMember extends XtendAnnotationTarget
 	 * Returns the value of the '<em><b>Modifiers</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Modifiers</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Modifiers</em>' attribute list.
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember_Modifiers()
@@ -77,10 +69,6 @@ public interface XtendMember extends XtendAnnotationTarget
 	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Declaring Type</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declaring Type</em>' container reference.
 	 * @see #setDeclaringType(XtendTypeDeclaration)

@@ -32,10 +32,6 @@ public interface Literal extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Literal</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Literal</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Literal</em>' reference.
 	 * @see #setLiteral(RichStringLiteral)
@@ -58,10 +54,6 @@ public interface Literal extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Offset</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Offset</em>' attribute.
 	 * @see #setOffset(int)
@@ -84,10 +76,6 @@ public interface Literal extends LinePart
 	/**
 	 * Returns the value of the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Length</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Length</em>' attribute.
 	 * @see #setLength(int)

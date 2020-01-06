@@ -35,10 +35,6 @@ public interface XtendClass extends XtendTypeDeclaration
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Extends</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extends</em>' containment reference.
 	 * @see #setExtends(JvmTypeReference)
@@ -62,10 +58,6 @@ public interface XtendClass extends XtendTypeDeclaration
 	 * Returns the value of the '<em><b>Implements</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Implements</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implements</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Implements()
@@ -78,10 +70,6 @@ public interface XtendClass extends XtendTypeDeclaration
 	 * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Parameters</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_TypeParameters()
