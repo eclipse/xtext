@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -96,7 +96,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.objectweb.asm" version="7.2.0.v20191010-1910"/>
 					<unit id="org.objectweb.asm.tree" version="7.2.0.v20191010-1910"/>
 					<unit id="io.github.classgraph" version="4.8.35.v20190528-1517"/>
-					<repository location="https://download.eclipse.org/tools/orbit/downloads/2019-12"/>
+					<repository location="https://download.eclipse.org/tools/orbit/downloads/2020-03"/>
 				</location>
 			</locations>
 		</target>
