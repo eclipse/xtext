@@ -2,7 +2,9 @@ package org.eclipse.xtext.java.resource
 
 import com.google.inject.Inject
 import java.util.Arrays
+import java.util.HashSet
 import java.util.List
+import java.util.Map
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -30,8 +32,6 @@ import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.util.internal.Log
-import java.util.Map
-import java.util.HashSet
 
 @Log
 class JavaDerivedStateComputer {
@@ -40,7 +40,7 @@ class JavaDerivedStateComputer {
 	@Inject EObjectDescriptionBasedStubGenerator stubGenerator
 	@Inject IResourceDescriptionsProvider resourceDescriptionsProvider
 	
-	def discardDerivedState(Resource resource) {
+	def void discardDerivedState(Resource resource) {
 		var EList<EObject> resourcesContentsList=resource.getContents() 
 		for (eObject : resourcesContentsList) {
 			unloader.unloadRoot(eObject) 
@@ -184,7 +184,7 @@ class JavaDerivedStateComputer {
 		}
 	}
 	
-	protected def isInfoFile(Resource resource) {
+	protected def boolean isInfoFile(Resource resource) {
 		val name = resource.URI.trimFileExtension.lastSegment
 		return name == "package-info" || name == "module-info"
 	}
