@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2017, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,7 +21,7 @@ import org.eclipse.xtext.util.ITextRegion;
  * <ol>
  * <li>the result has a valid strictly alternating sequence of {@link IHiddenRegion}s and {@link ISemanticRegion}s.</li>
  * <li>{@link IComment}s are appropriately handled according to how associated {@link ISemanticRegion} are modified. See
- * {@link IHiddenRegionPartMerger} to customize this behavior.</li>
+ * {@link IHiddenRegionPartAssociator} to customize this behavior.</li>
  * <li>The order in which methods of this service are called does not impact the result, except for insertions.</li>
  * </ol>
  * 
