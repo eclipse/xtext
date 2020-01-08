@@ -334,7 +334,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 							"' in context of projects '" + javaProject.getElementName() + "' and '" + fallbackProject.getElementName() + "'.", cause);
 				}
 			} else {
-				throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "' in context of project '" + javaProject.getElementName() + "'.");
+				throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "' in context of project '" + javaProject.getElementName() + "'.", cause);
 			}
 		}
 		if (binding instanceof ITypeBinding) {
@@ -351,7 +351,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 			return result;
 		} else {
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
-					+ "', but got '" + binding.toString() + "'.");
+					+ "', but got '" + binding.toString() + "'.", cause);
 		}
 	}
 
