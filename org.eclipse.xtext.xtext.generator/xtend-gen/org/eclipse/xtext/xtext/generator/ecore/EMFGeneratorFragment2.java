@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -899,7 +899,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   public static String trimMultiLineComment(final String string) {
-    return string.replace("*/", "").replace("/*", "").replace(" * ", "").trim();
+    return string.replace(" * ", "").replaceAll("/\\*+\\s*|\\s*\\*+/", "").trim();
   }
   
   protected Set<EPackage> getReferencedEPackages(final List<EPackage> packs) {

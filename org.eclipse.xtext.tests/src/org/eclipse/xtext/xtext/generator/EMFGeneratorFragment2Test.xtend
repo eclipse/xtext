@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,7 +15,7 @@ import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
 /**
  */
 class EMFGeneratorFragment2Test {
-	
+
 	@Test def void testTrimMultiLineString() {
 		assertTrim('foo','''
 			/*foo*/
@@ -44,9 +44,37 @@ class EMFGeneratorFragment2Test {
 			/* foo */
 		''')
 		assertTrim('foo','foo')
+		assertTrim('''
+		Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+		All rights reserved. This program and the accompanying materials
+		are made available under the terms of the Eclipse Public License v1.0
+		which accompanies this distribution, and is available at
+		http://www.eclipse.org/legal/epl-v10.html''',
+		'''
+		/**
+		 * Copyright (c) 2011, 2019 itemis AG (http://www.itemis.eu) and others.
+		 * All rights reserved. This program and the accompanying materials
+		 * are made available under the terms of the Eclipse Public License v1.0
+		 * which accompanies this distribution, and is available at
+		 * http://www.eclipse.org/legal/epl-v10.html
+		 */''')
+		assertTrim('''
+		Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+		All rights reserved. This program and the accompanying materials
+		are made available under the terms of the Eclipse Public License v1.0
+		which accompanies this distribution, and is available at
+		http://www.eclipse.org/legal/epl-v10.html''',
+		'''
+		/*******************************************************************************
+		 * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+		 * All rights reserved. This program and the accompanying materials
+		 * are made available under the terms of the Eclipse Public License v1.0
+		 * which accompanies this distribution, and is available at
+		 * http://www.eclipse.org/legal/epl-v10.html
+		 *******************************************************************************/''')
 	}
-	
-	def void assertTrim(String expected, String original) {
+
+	private def void assertTrim(String expected, String original) {
 		Assert.assertEquals(expected, EMFGeneratorFragment2.trimMultiLineComment(original))
 	}
 }
