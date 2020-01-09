@@ -14,19 +14,19 @@ import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
  */
 @SuppressWarnings("all")
 public interface XtendHighlightingStyles extends XbaseHighlightingStyles {
-  public static final String RICH_TEXT_ID = "xtend.richText";
+  static final String RICH_TEXT_ID = "xtend.richText";
   
-  public static final String RICH_TEXT_DELIMITER_ID = "xtend.richText.delimiter";
+  static final String RICH_TEXT_DELIMITER_ID = "xtend.richText.delimiter";
   
-  public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend.insignificant.template.text";
+  static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend.insignificant.template.text";
   
-  public static final String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
+  static final String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
   
-  public static final String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
+  static final String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
   
-  public static final String ACTIVE_ANNOTATION = "xtend.active.annotation";
+  static final String ACTIVE_ANNOTATION = "xtend.active.annotation";
   
-  public static final String SINGLE_LINE_COMMENT = "xtend.single.line.comment";
+  static final String SINGLE_LINE_COMMENT = "xtend.single.line.comment";
   
-  public static final String MULTI_LINE_COMMENT = "xtend.multi.line.comment";
+  static final String MULTI_LINE_COMMENT = "xtend.multi.line.comment";
 }

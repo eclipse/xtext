@@ -28,26 +28,26 @@ public interface AnnotationWithNestedAnnotations {
   @Target(ElementType.TYPE)
   @Active(AnnotationWithNestedAnnotationsProcessor.class)
   @Retention(RetentionPolicy.RUNTIME)
-  public @interface Annotation1 {
+  @interface Annotation1 {
     public AnnotationWithNestedAnnotations.Annotation2[] ann2() default {};
   }
   
   @Target(ElementType.TYPE)
   @Active(AnnotationWithNestedAnnotationsProcessor.class)
   @Retention(RetentionPolicy.RUNTIME)
-  public @interface Annotation2 {
+  @interface Annotation2 {
     public AnnotationWithNestedAnnotations.Annotation3[] ann3() default {};
   }
   
   @Target(ElementType.TYPE)
   @Active(AnnotationWithNestedAnnotationsProcessor.class)
   @Retention(RetentionPolicy.RUNTIME)
-  public @interface Annotation3 {
+  @interface Annotation3 {
   }
   
   @ToString
   @Accessors
-  public static class Annotation1Config {
+  class Annotation1Config {
     private final AnnotationWithNestedAnnotations.Annotation2Config[] ann2Configs;
     
     public Annotation1Config(final AnnotationReference ann) {
@@ -73,7 +73,7 @@ public interface AnnotationWithNestedAnnotations {
   
   @ToString
   @Accessors
-  public static class Annotation2Config {
+  class Annotation2Config {
     private final AnnotationWithNestedAnnotations.Annotation3Config[] ann3Configs;
     
     public Annotation2Config(final AnnotationReference ann) {
@@ -99,7 +99,7 @@ public interface AnnotationWithNestedAnnotations {
   
   @ToString
   @Accessors
-  public static class Annotation3Config {
+  class Annotation3Config {
     public Annotation3Config(final AnnotationReference ann) {
     }
     
