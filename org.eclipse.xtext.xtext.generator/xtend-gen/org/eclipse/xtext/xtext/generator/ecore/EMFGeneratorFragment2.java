@@ -888,7 +888,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         String _fileHeader = this.codeConfig.getFileHeader();
         boolean _tripleNotEquals = (_fileHeader != null);
         if (_tripleNotEquals) {
-          genModel.setCopyrightText(EMFGeneratorFragment2.trimMultiLineComment(this.codeConfig.getFileHeader()));
+          genModel.setCopyrightText(this.trimMultiLineComment(this.codeConfig.getFileHeader()));
         }
       }
       genModelFile.getContents().add(genModel);
@@ -898,7 +898,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
   }
   
-  public static String trimMultiLineComment(final String string) {
+  public String trimMultiLineComment(final String string) {
     return string.replace(" * ", "").replaceAll("/\\*+\\s*|\\s*\\*+/", "").trim();
   }
   

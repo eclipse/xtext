@@ -8,12 +8,16 @@
 package org.eclipse.xtext.xtext.generator;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
 import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class EMFGeneratorFragment2Test {
+  @Extension
+  private final EMFGeneratorFragment2 _eMFGeneratorFragment2 = new EMFGeneratorFragment2();
+  
   @Test
   public void testTrimMultiLineString() {
     StringConcatenation _builder = new StringConcatenation();
@@ -130,6 +134,6 @@ public class EMFGeneratorFragment2Test {
   }
   
   private void assertTrim(final String expected, final String original) {
-    Assert.assertEquals(expected, EMFGeneratorFragment2.trimMultiLineComment(original));
+    Assert.assertEquals(expected, this._eMFGeneratorFragment2.trimMultiLineComment(original));
   }
 }

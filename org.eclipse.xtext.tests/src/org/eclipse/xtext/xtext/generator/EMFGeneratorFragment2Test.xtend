@@ -16,6 +16,8 @@ import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
  */
 class EMFGeneratorFragment2Test {
 
+	val extension EMFGeneratorFragment2 = new EMFGeneratorFragment2
+
 	@Test def void testTrimMultiLineString() {
 		assertTrim('foo','''
 			/*foo*/
@@ -75,6 +77,6 @@ class EMFGeneratorFragment2Test {
 	}
 
 	private def void assertTrim(String expected, String original) {
-		Assert.assertEquals(expected, EMFGeneratorFragment2.trimMultiLineComment(original))
+		Assert.assertEquals(expected, original.trimMultiLineComment)
 	}
 }

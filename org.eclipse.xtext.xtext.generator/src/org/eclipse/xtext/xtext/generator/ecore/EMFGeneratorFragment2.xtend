@@ -623,7 +623,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		return genModel
 	}
 	
-	def static String trimMultiLineComment(String string) {
+	def String trimMultiLineComment(String string) {
 		return string.replace(' * ','').replaceAll("/\\*+\\s*|\\s*\\*+/", "").trim
 	}
 	
