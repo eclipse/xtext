@@ -22,5 +22,5 @@ public interface ICodeLensService {
   /**
    * compute code lenses for the given context.
    */
-  public abstract List<? extends CodeLens> computeCodeLenses(final Document document, final XtextResource resource, final CodeLensParams params, final CancelIndicator indicator);
+  List<? extends CodeLens> computeCodeLenses(final Document document, final XtextResource resource, final CodeLensParams params, final CancelIndicator indicator);
 }

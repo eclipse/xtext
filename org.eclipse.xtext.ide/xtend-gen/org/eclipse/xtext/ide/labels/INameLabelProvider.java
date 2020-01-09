@@ -16,5 +16,5 @@ import org.eclipse.xtext.ide.labels.SimpleNameLabelProvider;
 @ImplementedBy(SimpleNameLabelProvider.class)
 @SuppressWarnings("all")
 public interface INameLabelProvider {
-  public abstract String getNameLabel(final Object element);
+  String getNameLabel(final Object element);
 }

@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public interface ILanguageServerAccess {
   @Data
-  public static class Context {
+  class Context {
     private final Resource resource;
     
     private final Document document;
@@ -125,7 +125,7 @@ public interface ILanguageServerAccess {
   }
   
   @Data
-  public static class IndexContext {
+  class IndexContext {
     private final IResourceDescriptions index;
     
     private final CancelIndicator cancelChecker;
@@ -188,32 +188,32 @@ public interface ILanguageServerAccess {
     }
   }
   
-  public interface IBuildListener {
-    public abstract void afterBuild(final List<IResourceDescription.Delta> deltas);
+  interface IBuildListener {
+    void afterBuild(final List<IResourceDescription.Delta> deltas);
   }
   
   /**
    * provides read access to a fully resolved resource and Document.
    */
-  public abstract <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function);
+  <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function);
   
   /**
    * Provides read access to the Xtext index.
    * 
    * @since 2.18
    */
-  public abstract <T extends Object> CompletableFuture<T> doReadIndex(final Function<? super ILanguageServerAccess.IndexContext, ? extends T> function);
+  <T extends Object> CompletableFuture<T> doReadIndex(final Function<? super ILanguageServerAccess.IndexContext, ? extends T> function);
   
   /**
    * registers a build listener on the this language server
    */
-  public abstract void addBuildListener(final ILanguageServerAccess.IBuildListener listener);
+  void addBuildListener(final ILanguageServerAccess.IBuildListener listener);
   
   /**
    * @return the language client facade. It usually also implements Endpoint, which can be used to
    * call non-standard extensions to the LSP.
    */
-  public abstract LanguageClient getLanguageClient();
+  LanguageClient getLanguageClient();
   
   /**
    * Creates a new {@link ResourceSet} to be used with the {@link IChangeSerializer} API.
@@ -228,18 +228,18 @@ public interface ILanguageServerAccess {
    *   reflect model changes immediately.
    * @since 2.18
    */
-  public abstract ResourceSet newLiveScopeResourceSet(final URI uri);
+  ResourceSet newLiveScopeResourceSet(final URI uri);
   
   /**
    * @return the parameters as negotiated during client and server on initialization.
    * @since 2.18
    */
-  public abstract InitializeParams getInitializeParams();
+  InitializeParams getInitializeParams();
   
   /**
    * Returns with the {@link InitializeResult} of the LS.
    * 
    * @since 2.18
    */
-  public abstract InitializeResult getInitializeResult();
+  InitializeResult getInitializeResult();
 }

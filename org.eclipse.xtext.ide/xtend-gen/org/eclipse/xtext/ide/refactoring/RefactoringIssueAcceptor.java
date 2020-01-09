@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.ITextRegion;
  */
 @SuppressWarnings("all")
 public interface RefactoringIssueAcceptor {
-  public enum Severity {
+  enum Severity {
     FATAL,
     
     ERROR,
@@ -31,15 +31,15 @@ public interface RefactoringIssueAcceptor {
     OK;
   }
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final URI uri, final ResourceSet resourceSet);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final URI uri, final ResourceSet resourceSet);
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final URI resourceUri);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final URI resourceUri);
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final EObject element);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final EObject element);
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final EObject element, final ITextRegion region);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final EObject element, final ITextRegion region);
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final Exception exc, final Logger log);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final Exception exc, final Logger log);
   
-  public abstract void add(final RefactoringIssueAcceptor.Severity severity, final String message, final Object... params);
+  void add(final RefactoringIssueAcceptor.Severity severity, final String message, final Object... params);
 }

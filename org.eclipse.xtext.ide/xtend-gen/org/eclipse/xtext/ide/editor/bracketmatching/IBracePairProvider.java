@@ -24,5 +24,5 @@ public interface IBracePairProvider {
    * Returns a set of definitions for brace pairs that need to be matched when
    * editing code.
    */
-  public abstract Set<BracePair> getPairs();
+  Set<BracePair> getPairs();
 }

@@ -17,17 +17,17 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
  */
 @SuppressWarnings("all")
 public interface ISubProjectConfig extends IGuiceAwareGeneratorComponent {
-  public abstract boolean isEnabled();
+  boolean isEnabled();
   
-  public abstract String getName();
+  String getName();
   
-  public abstract IXtextGeneratorFileSystemAccess getRoot();
+  IXtextGeneratorFileSystemAccess getRoot();
   
-  public abstract IXtextGeneratorFileSystemAccess getMetaInf();
+  IXtextGeneratorFileSystemAccess getMetaInf();
   
-  public abstract IXtextGeneratorFileSystemAccess getSrc();
+  IXtextGeneratorFileSystemAccess getSrc();
   
-  public abstract IXtextGeneratorFileSystemAccess getSrcGen();
+  IXtextGeneratorFileSystemAccess getSrcGen();
   
-  public abstract IXtextGeneratorFileSystemAccess getIcons();
+  IXtextGeneratorFileSystemAccess getIcons();
 }

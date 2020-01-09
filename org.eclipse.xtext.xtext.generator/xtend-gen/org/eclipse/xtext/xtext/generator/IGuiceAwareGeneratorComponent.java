@@ -16,5 +16,5 @@ import com.google.inject.Injector;
  */
 @SuppressWarnings("all")
 public interface IGuiceAwareGeneratorComponent {
-  public abstract void initialize(final Injector injector);
+  void initialize(final Injector injector);
 }

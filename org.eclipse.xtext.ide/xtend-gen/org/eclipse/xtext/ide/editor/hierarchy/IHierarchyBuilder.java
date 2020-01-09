@@ -23,10 +23,10 @@ public interface IHierarchyBuilder {
   /**
    * @return root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
    */
-  public abstract Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor);
+  Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor);
   
   /**
    * @return child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent
    */
-  public abstract Collection<IHierarchyNode> buildChildren(final IHierarchyNode parent, final IProgressMonitor monitor);
+  Collection<IHierarchyNode> buildChildren(final IHierarchyNode parent, final IProgressMonitor monitor);
 }

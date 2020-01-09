@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @ImplementedBy(IRenameNameValidator.RuleBasedNameValidator.class)
 @SuppressWarnings("all")
 public interface IRenameNameValidator {
-  public static class RuleBasedNameValidator implements IRenameNameValidator {
+  class RuleBasedNameValidator implements IRenameNameValidator {
     @Inject
     private IValueConverterService valueConverterService;
     
@@ -58,5 +58,5 @@ public interface IRenameNameValidator {
     }
   }
   
-  public abstract void validate(final EObject target, final String newName, final RefactoringIssueAcceptor issues);
+  void validate(final EObject target, final String newName, final RefactoringIssueAcceptor issues);
 }

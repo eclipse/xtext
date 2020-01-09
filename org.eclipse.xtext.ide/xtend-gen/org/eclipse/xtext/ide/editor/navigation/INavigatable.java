@@ -26,5 +26,5 @@ public interface INavigatable {
    * Avoid usage of resource sets, resources and eobjects as navigation elements, since it can lead to memory leaks.
    * </p>
    */
-  public abstract Object getNavigationElement();
+  Object getNavigationElement();
 }

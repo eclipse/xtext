@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public interface IRenameStrategy2 {
-  public static class DefaultImpl implements IRenameStrategy2 {
+  class DefaultImpl implements IRenameStrategy2 {
     @Inject
     private IResourceServiceProvider resourceServiceProvider;
     
@@ -76,5 +76,5 @@ public interface IRenameStrategy2 {
     }
   }
   
-  public abstract void applyRename(final RenameContext context);
+  void applyRename(final RenameContext context);
 }

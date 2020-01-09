@@ -17,7 +17,7 @@ public interface IIdeContentProposalAcceptor {
   /**
    * Handle the given content assist entry. The entry may be {@code null}.
    */
-  public abstract void accept(final ContentAssistEntry entry, final int priority);
+  void accept(final ContentAssistEntry entry, final int priority);
   
-  public abstract boolean canAcceptMoreProposals();
+  boolean canAcceptMoreProposals();
 }

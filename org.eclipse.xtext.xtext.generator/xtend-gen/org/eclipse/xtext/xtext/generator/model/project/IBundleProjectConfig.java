@@ -18,7 +18,7 @@ import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
  */
 @SuppressWarnings("all")
 public interface IBundleProjectConfig extends ISubProjectConfig {
-  public abstract ManifestAccess getManifest();
+  ManifestAccess getManifest();
   
-  public abstract PluginXmlAccess getPluginXml();
+  PluginXmlAccess getPluginXml();
 }

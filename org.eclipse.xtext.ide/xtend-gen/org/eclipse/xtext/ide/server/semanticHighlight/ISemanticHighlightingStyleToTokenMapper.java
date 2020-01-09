@@ -30,7 +30,7 @@ public interface ISemanticHighlightingStyleToTokenMapper {
    * The shared, default NOOP implementation of the semantic style ID to TextMate token mapper.
    */
   @Singleton
-  public static final class Noop implements ISemanticHighlightingStyleToTokenMapper {
+  final class Noop implements ISemanticHighlightingStyleToTokenMapper {
     @Override
     public List<String> toScopes(final String styleId) {
       return SemanticHighlightingRegistry.UNKNOWN_SCOPES;
@@ -45,7 +45,7 @@ public interface ISemanticHighlightingStyleToTokenMapper {
   /**
    * Maps the highlighting style ID to the corresponding TextMate scopes.
    */
-  public abstract List<String> toScopes(final String styleId);
+  List<String> toScopes(final String styleId);
   
   /**
    * Returns with a set of distinct style identifiers that are used by the {@link IHighlightedPositionAcceptor} when calculating
@@ -56,5 +56,5 @@ public interface ISemanticHighlightingStyleToTokenMapper {
    * 
    * @see IHighlightedPositionAcceptor#addPosition
    */
-  public abstract Set<String> getAllStyleIds();
+  Set<String> getAllStyleIds();
 }

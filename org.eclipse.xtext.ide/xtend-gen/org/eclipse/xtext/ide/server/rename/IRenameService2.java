@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public interface IRenameService2 {
   @Accessors
-  public static class Options {
+  class Options {
     private ILanguageServerAccess languageServerAccess;
     
     private RenameParams renameParams;
@@ -63,7 +63,7 @@ public interface IRenameService2 {
   }
   
   @Accessors
-  public static class PrepareRenameOptions {
+  class PrepareRenameOptions {
     private ILanguageServerAccess languageServerAccess;
     
     private TextDocumentPositionParams params;
@@ -98,7 +98,7 @@ public interface IRenameService2 {
     }
   }
   
-  public abstract WorkspaceEdit rename(final IRenameService2.Options options);
+  WorkspaceEdit rename(final IRenameService2.Options options);
   
   /**
    * Returns a {@link Range range} describing the range of the string to rename and optionally a placeholder text of
@@ -115,5 +115,5 @@ public interface IRenameService2 {
    * This method should be used to set up and to test the validity of a rename operation at a given location.</br>
    * See <a href="https://microsoft.github.io/language-server-protocol/specification#textDocument_prepareRename">{@code textDocument/prepareRename}</a> for more details.
    */
-  public abstract Either<Range, PrepareRenameResult> prepareRename(final IRenameService2.PrepareRenameOptions options);
+  Either<Range, PrepareRenameResult> prepareRename(final IRenameService2.PrepareRenameOptions options);
 }

@@ -23,25 +23,25 @@ public interface IHierarchyNode extends INavigatable {
   /**
    * @return an associated element that is used to build child nodes
    */
-  public abstract IEObjectDescription getElement();
+  IEObjectDescription getElement();
   
   /**
    * @return a parent; <code>null</code> if the node is a root
    */
-  public abstract IHierarchyNode getParent();
+  IHierarchyNode getParent();
   
   /**
    * @return references used to reach the node from a parent; empty if the node is a root
    */
-  public abstract Collection<IHierarchyNodeReference> getReferences();
+  Collection<IHierarchyNodeReference> getReferences();
   
   /**
    * @return whether there is a parent (can be transitive) containing the same element as the node
    */
-  public abstract boolean isRecursive();
+  boolean isRecursive();
   
   /**
    * @return whether the node may have children; e.g. a recursive node cannot have children
    */
-  public abstract boolean mayHaveChildren();
+  boolean mayHaveChildren();
 }

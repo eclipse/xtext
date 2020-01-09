@@ -45,18 +45,18 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @ImplementedBy(TestLangLSPExtension.Impl.class)
 @SuppressWarnings("all")
 public interface TestLangLSPExtension extends ILanguageServerExtension {
-  public static class TextOfLineResult {
+  class TextOfLineResult {
     public String text;
   }
   
-  public static class TextOfLineParam {
+  class TextOfLineParam {
     public String uri;
     
     public int line;
   }
   
   @ToString
-  public static class BuildNotification {
+  class BuildNotification {
     public String message;
     
     @Override
@@ -68,12 +68,12 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
     }
   }
   
-  public interface CustomClient {
+  interface CustomClient {
     @JsonNotification
-    public abstract void buildHappened(final TestLangLSPExtension.BuildNotification notification);
+    void buildHappened(final TestLangLSPExtension.BuildNotification notification);
   }
   
-  public static class Impl implements ILanguageServerExtension, TestLangLSPExtension, ILanguageServerAccess.IBuildListener, JsonRpcMethodProvider {
+  class Impl implements ILanguageServerExtension, TestLangLSPExtension, ILanguageServerAccess.IBuildListener, JsonRpcMethodProvider {
     private ILanguageServerAccess access;
     
     private TestLangLSPExtension.CustomClient client;
@@ -147,8 +147,8 @@ public interface TestLangLSPExtension extends ILanguageServerExtension {
   }
   
   @JsonRequest
-  public abstract CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param);
+  CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param);
   
   @JsonRequest
-  public abstract CompletableFuture<Set<String>> getAllOpNames();
+  CompletableFuture<Set<String>> getAllOpNames();
 }

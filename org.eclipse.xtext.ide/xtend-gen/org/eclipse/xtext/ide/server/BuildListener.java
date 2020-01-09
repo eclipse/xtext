@@ -15,5 +15,5 @@ import org.eclipse.xtext.resource.IResourceDescription;
  */
 @SuppressWarnings("all")
 public interface BuildListener {
-  public abstract void afterBuild(final List<IResourceDescription.Delta> deltas);
+  void afterBuild(final List<IResourceDescription.Delta> deltas);
 }

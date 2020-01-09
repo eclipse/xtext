@@ -20,5 +20,5 @@ public interface ICodeLensResolver {
   /**
    * Resolve the given code lens.
    */
-  public abstract CodeLens resolveCodeLens(final Document document, final XtextResource resource, final CodeLens codeLens, final CancelIndicator indicator);
+  CodeLens resolveCodeLens(final Document document, final XtextResource resource, final CodeLens codeLens, final CancelIndicator indicator);
 }

@@ -21,21 +21,21 @@ import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
  */
 @SuppressWarnings("all")
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
-  public abstract IRuntimeProjectConfig getRuntime();
+  IRuntimeProjectConfig getRuntime();
   
-  public abstract IBundleProjectConfig getRuntimeTest();
+  IBundleProjectConfig getRuntimeTest();
   
-  public abstract IBundleProjectConfig getGenericIde();
+  IBundleProjectConfig getGenericIde();
   
-  public abstract IBundleProjectConfig getEclipsePlugin();
+  IBundleProjectConfig getEclipsePlugin();
   
-  public abstract IBundleProjectConfig getEclipsePluginTest();
+  IBundleProjectConfig getEclipsePluginTest();
   
-  public abstract ISubProjectConfig getIdeaPlugin();
+  ISubProjectConfig getIdeaPlugin();
   
-  public abstract IWebProjectConfig getWeb();
+  IWebProjectConfig getWeb();
   
-  public abstract List<? extends ISubProjectConfig> getEnabledProjects();
+  List<? extends ISubProjectConfig> getEnabledProjects();
   
-  public abstract List<? extends ISubProjectConfig> getTestProjects();
+  List<? extends ISubProjectConfig> getTestProjects();
 }

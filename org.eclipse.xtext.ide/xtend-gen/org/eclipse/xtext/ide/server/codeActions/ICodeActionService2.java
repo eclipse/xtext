@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public interface ICodeActionService2 {
   @Accessors
-  public static class Options {
+  class Options {
     private Document document;
     
     private XtextResource resource;
@@ -83,5 +83,5 @@ public interface ICodeActionService2 {
     }
   }
   
-  public abstract List<Either<Command, CodeAction>> getCodeActions(final ICodeActionService2.Options options);
+  List<Either<Command, CodeAction>> getCodeActions(final ICodeActionService2.Options options);
 }

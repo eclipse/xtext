@@ -19,9 +19,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @SuppressWarnings("all")
 public interface IHierarchyRoot {
-  public abstract Collection<IHierarchyNode> getRoots();
+  Collection<IHierarchyNode> getRoots();
   
-  public static final IHierarchyRoot EMPTY = new IHierarchyRoot() {
+  static final IHierarchyRoot EMPTY = new IHierarchyRoot() {
     @Override
     public Collection<IHierarchyNode> getRoots() {
       return CollectionLiterals.<IHierarchyNode>emptyList();

@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public interface IShouldGenerate {
   @Beta
   @Singleton
-  public static class OnlyWithoutErrors implements IShouldGenerate {
+  class OnlyWithoutErrors implements IShouldGenerate {
     @Inject
     private IResourceValidator resourceValidator;
     
@@ -56,7 +56,7 @@ public interface IShouldGenerate {
   
   @Beta
   @Singleton
-  public static class Always implements IShouldGenerate {
+  class Always implements IShouldGenerate {
     @Override
     public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
       return true;
@@ -66,5 +66,5 @@ public interface IShouldGenerate {
   /**
    * whether code should be generated for this resource.
    */
-  public abstract boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator);
+  boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator);
 }

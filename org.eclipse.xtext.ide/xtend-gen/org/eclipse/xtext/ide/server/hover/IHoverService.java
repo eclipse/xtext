@@ -24,10 +24,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @ImplementedBy(HoverService.class)
 @SuppressWarnings("all")
 public interface IHoverService {
-  public static final Hover EMPTY_HOVER = new Hover(CollectionLiterals.<Either<String, MarkedString>>emptyList(), null);
+  static final Hover EMPTY_HOVER = new Hover(CollectionLiterals.<Either<String, MarkedString>>emptyList(), null);
   
   /**
    * callback for 'textDocument/hover' requests.
    */
-  public abstract Hover hover(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator);
+  Hover hover(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator);
 }

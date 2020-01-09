@@ -17,13 +17,13 @@ import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
  */
 @SuppressWarnings("all")
 public interface ICallHierarchyBuilder extends IHierarchyBuilder {
-  public enum CallHierarchyType {
+  enum CallHierarchyType {
     CALLER,
     
     CALLEE;
   }
   
-  public abstract ICallHierarchyBuilder.CallHierarchyType getHierarchyType();
+  ICallHierarchyBuilder.CallHierarchyType getHierarchyType();
   
-  public abstract void setHierarchyType(final ICallHierarchyBuilder.CallHierarchyType hierarchyType);
+  void setHierarchyType(final ICallHierarchyBuilder.CallHierarchyType hierarchyType);
 }
