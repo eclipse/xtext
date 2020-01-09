@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2011, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -1073,7 +1073,7 @@ import com.google.common.collect.Sets;
 	 * Note that this will advance or even exhaust the given iterator.
 	 * </p>
 	 *
-	 * @param iterable 
+	 * @param iterator 
 	 * 			the elements to test
 	 * @param o 
 	 * 			element whose presence in this Iterator is to be tested

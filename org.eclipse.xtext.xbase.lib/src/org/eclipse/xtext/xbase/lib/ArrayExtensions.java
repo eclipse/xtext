@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -554,7 +554,7 @@ public class ArrayExtensions {
 	 *
 	 * @param array 
 	 * 			the array to test
-	 * @param o 
+	 * @param value 
 	 * 			element whose presence in this array is to be tested
 	 * @return <tt>true</tt> if this array contains the specified element
 	 */
