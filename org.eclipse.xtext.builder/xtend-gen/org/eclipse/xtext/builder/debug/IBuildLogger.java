@@ -16,5 +16,5 @@ import org.eclipse.xtext.builder.debug.XtextBuildConsole;
 @ImplementedBy(XtextBuildConsole.Logger.class)
 @SuppressWarnings("all")
 public interface IBuildLogger {
-  public abstract void log(final Object o);
+  void log(final Object o);
 }
