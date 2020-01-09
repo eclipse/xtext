@@ -15,5 +15,5 @@ import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 
 @SuppressWarnings("all")
 public interface IIdeTypesProposalProvider {
-  public abstract void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor);
+  void createTypeProposals(final EReference reference, final ContentAssistContext context, final Predicate<? super ITypeDescriptor> filter, final IIdeContentProposalAcceptor acceptor);
 }

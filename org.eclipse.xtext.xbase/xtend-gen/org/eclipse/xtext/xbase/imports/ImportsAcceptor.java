@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public interface ImportsAcceptor {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  public static class DefaultImportsAcceptor implements ImportsAcceptor {
+  class DefaultImportsAcceptor implements ImportsAcceptor {
     private Set<String> types = CollectionLiterals.<String>newHashSet();
     
     private Set<String> staticImport = CollectionLiterals.<String>newHashSet();
@@ -64,9 +64,9 @@ public interface ImportsAcceptor {
     }
   }
   
-  public abstract void acceptTypeImport(final JvmType typeImport);
+  void acceptTypeImport(final JvmType typeImport);
   
-  public abstract void acceptStaticImport(final XAbstractFeatureCall staticImport);
+  void acceptStaticImport(final XAbstractFeatureCall staticImport);
   
-  public abstract void acceptStaticExtensionImport(final XAbstractFeatureCall staticExtImport);
+  void acceptStaticExtensionImport(final XAbstractFeatureCall staticExtImport);
 }
