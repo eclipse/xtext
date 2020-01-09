@@ -25,6 +25,7 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @SuppressWarnings("all")
 public class Formatter2Fragment extends Xtend2GeneratorFragment {
   private FormatterStubGenerator stubGenerator;

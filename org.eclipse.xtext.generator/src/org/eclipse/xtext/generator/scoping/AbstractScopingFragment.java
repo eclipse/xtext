@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public abstract class AbstractScopingFragment extends AbstractInheritingGeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 
 	public static String getScopeProviderName(Grammar grammar, Naming naming) {

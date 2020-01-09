@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+@Deprecated
 public class BindValue {
 	private String expression;
 	private String typeName;

@@ -15,6 +15,7 @@ import org.eclipse.xtext.AbstractElement;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.6
  */
+@Deprecated
 public class FirstSetComputer {
 
 	public static List<AbstractElement> getFirstSet(AbstractElement element) {

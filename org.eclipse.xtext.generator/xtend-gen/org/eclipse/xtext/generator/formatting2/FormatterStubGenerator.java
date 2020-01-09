@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FormatterStubGenerator {

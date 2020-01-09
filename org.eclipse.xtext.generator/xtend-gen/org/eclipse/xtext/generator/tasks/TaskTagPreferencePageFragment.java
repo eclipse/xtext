@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
+@Deprecated
 @SuppressWarnings("all")
 public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
   @Inject

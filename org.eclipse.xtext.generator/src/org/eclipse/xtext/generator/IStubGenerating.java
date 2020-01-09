@@ -11,6 +11,7 @@ package org.eclipse.xtext.generator;
  * @since 2.4
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public interface IStubGenerating {
 	
 	boolean isGenerateStub();

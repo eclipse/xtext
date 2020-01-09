@@ -29,6 +29,7 @@ import static org.eclipse.xtext.generator.Generator.*
 /**
  * @since 2.9
  */
+@Deprecated
 class Generator2AdapterSetup {
 	
 	val LanguageConfig languageConfig

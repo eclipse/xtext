@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
+@Deprecated
 public class AbstractSimpleAntlrJavaValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
 
 	@Override

@@ -15,6 +15,7 @@ import org.junit.Test;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
+@Deprecated
 public class AntlrGrammarGenUtilTest extends Assert {
 
 	@Test public void testToAntlrString() throws Exception {

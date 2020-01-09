@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@Deprecated
 public class CompareFragment extends ResourceFactoryFragment {
 	private static final Logger log = Logger.getLogger(CompareFragment.class);
 

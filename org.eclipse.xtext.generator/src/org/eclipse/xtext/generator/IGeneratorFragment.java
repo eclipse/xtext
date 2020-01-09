@@ -21,6 +21,7 @@ import org.eclipse.xtext.Grammar;
  * primary hook, allowing configuration and contribution to {@link Generator}
  *
  */
+@Deprecated
 public interface IGeneratorFragment {
     /**
 	 * Called by the container after configuration so the component can validate

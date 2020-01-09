@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class CompositeGeneratorFragmentTest extends Assert {
 
 	@Test

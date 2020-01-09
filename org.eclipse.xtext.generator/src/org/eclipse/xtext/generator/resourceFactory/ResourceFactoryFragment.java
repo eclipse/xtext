@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  * 
  * @author Jan Koehnlein - Javadocs
  */
+@Deprecated
 public class ResourceFactoryFragment extends AbstractGeneratorFragment {
 	private List<String> fileExtensions = new ArrayList<String>();
 

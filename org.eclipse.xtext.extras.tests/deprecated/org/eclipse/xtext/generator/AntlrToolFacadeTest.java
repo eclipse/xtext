@@ -20,6 +20,7 @@ import com.google.common.base.Charsets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class AntlrToolFacadeTest extends Assert {
 	
 	public static class TestableToolFacade extends AntlrToolFacade {
@@ -100,7 +101,6 @@ public class AntlrToolFacadeTest extends Assert {
 		facade.runWithEncodingAndParams("", encoding.name());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testOldXtextOldAntlr() {
 		setMode(Mode.OLD);
@@ -108,7 +108,6 @@ public class AntlrToolFacadeTest extends Assert {
 		facade.runWithParams("");
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testOldXtextNewAntlr() {
 		setMode(Mode.NEW);

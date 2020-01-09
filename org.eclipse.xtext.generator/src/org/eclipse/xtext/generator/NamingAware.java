@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public interface NamingAware {
 	void registerNaming(Naming n);
 }

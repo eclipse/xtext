@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGramma
  * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
  * @since 2.0
  */
+@Deprecated
 public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
 
 	@Override

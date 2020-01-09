@@ -27,6 +27,7 @@ import static org.eclipse.xtext.GrammarUtil.*
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
+@Deprecated
 class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
 	
 	@Inject extension Naming

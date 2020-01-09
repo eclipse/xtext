@@ -13,6 +13,7 @@ import com.ibm.icu.text.Transliterator;
  * @author Moritz Eysholdt
  * @author Sven Efftinge
  */
+@Deprecated
 public class UnicodeCharacterDatabaseNames {
 
 	private static final Transliterator transliterator = Transliterator.getInstance("Any-Name");

@@ -23,6 +23,7 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 class Formatter2Fragment extends Xtend2GeneratorFragment {
 
 	FormatterStubGenerator stubGenerator

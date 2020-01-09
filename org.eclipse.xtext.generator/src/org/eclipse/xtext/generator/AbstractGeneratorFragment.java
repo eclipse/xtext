@@ -27,6 +27,7 @@ import com.google.common.io.Files;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private Naming naming;

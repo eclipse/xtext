@@ -14,6 +14,7 @@ import org.junit.Test;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class JavaFileTest extends Assert {
 
 	@Test public void testMain() {

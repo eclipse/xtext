@@ -46,7 +46,7 @@ import com.google.common.collect.Maps;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);

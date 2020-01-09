@@ -14,6 +14,7 @@ import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 @FinalFieldsConstructor
+@Deprecated
 @SuppressWarnings("all")
 class NamingAdapter extends XtextGeneratorNaming {
   private final Naming naming;

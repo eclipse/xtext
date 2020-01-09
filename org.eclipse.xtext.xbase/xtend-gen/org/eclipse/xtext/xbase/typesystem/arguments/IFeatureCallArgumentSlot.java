@@ -18,25 +18,25 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public interface IFeatureCallArgumentSlot {
-  public abstract boolean isVarArg();
+  boolean isVarArg();
   
-  public abstract boolean isSuperfluous();
+  boolean isSuperfluous();
   
   /**
    * The list of expressions. The list is never <code>null</code> but may contain
    * <code>null</code> entries.
    */
-  public abstract List<XExpression> getArgumentExpressions();
+  List<XExpression> getArgumentExpressions();
   
   /**
    * @Nullable
    */
-  public abstract XExpression getArgumentExpression();
+  XExpression getArgumentExpression();
   
   /**
    * @Nullable
    */
-  public abstract LightweightTypeReference getDeclaredType();
+  LightweightTypeReference getDeclaredType();
   
-  public abstract void markProcessed();
+  void markProcessed();
 }

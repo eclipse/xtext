@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@Deprecated
 public class Junit4Fragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
 	

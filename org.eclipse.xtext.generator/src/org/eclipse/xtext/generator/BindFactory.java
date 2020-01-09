@@ -11,6 +11,7 @@ package org.eclipse.xtext.generator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Deprecated
 public class BindFactory {
 	private String contributedBy;
 

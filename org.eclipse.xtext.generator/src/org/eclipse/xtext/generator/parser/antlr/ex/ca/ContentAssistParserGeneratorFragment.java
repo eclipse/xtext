@@ -27,7 +27,7 @@ import com.google.common.collect.ImmutableList;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class ContentAssistParserGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	
 	private boolean partialParsing;

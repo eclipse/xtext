@@ -19,6 +19,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class QualifiedNamesFragment extends DefaultGeneratorFragment {
 
 	@Override

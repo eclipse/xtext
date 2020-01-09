@@ -16,6 +16,7 @@ package org.eclipse.xtext.generator.terminals;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.8
  */
+@Deprecated
 public class SyntheticTerminalDetector extends org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector {
 
 }

@@ -23,6 +23,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class FragmentFakingEcoreResourceTest extends AbstractXtextTests {
 
 	private EPackage metamodel;

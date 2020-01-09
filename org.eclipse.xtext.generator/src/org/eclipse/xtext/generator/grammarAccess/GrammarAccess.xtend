@@ -16,6 +16,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  * that has hard references to grammar rules/elements 
  * @author Moritz Eysholdt
  */
+@Deprecated
 class GrammarAccess {
 	
 	@Inject Naming naming

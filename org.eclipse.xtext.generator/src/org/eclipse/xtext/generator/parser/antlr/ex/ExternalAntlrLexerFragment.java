@@ -39,7 +39,7 @@ import com.google.common.io.Files;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private String lexerGrammar;

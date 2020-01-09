@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 /**
  * @since 2.9
  */
+@Deprecated
 @SuppressWarnings("all")
 public class StringConcatOutputImpl extends OutputImpl {
   public static final String STRING_OUTLET = "StringConcatOutputImpl.StringOutlet";

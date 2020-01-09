@@ -21,6 +21,7 @@ import org.junit.Test;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class Bug378261Test extends AbstractXtextTests {
 
 	@Override

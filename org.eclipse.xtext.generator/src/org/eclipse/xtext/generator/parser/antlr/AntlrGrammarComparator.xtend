@@ -18,6 +18,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * @author Christian Schneider - Initial contribution and API
  * @noreference
  */
+@Deprecated
 class AntlrGrammarComparator {
 
 	interface IErrorHandler {

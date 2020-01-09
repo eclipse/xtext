@@ -19,6 +19,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class SubPackageAwareGrammarAccessFragmentTest extends AbstractXtextTests {
 
 	private EPackage metamodel;

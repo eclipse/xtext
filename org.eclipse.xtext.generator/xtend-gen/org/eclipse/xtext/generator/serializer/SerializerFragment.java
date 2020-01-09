@@ -42,6 +42,7 @@ import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 /**
  * @author Moritz Eyshold - Initial contribution and API
  */
+@Deprecated
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
   @Inject

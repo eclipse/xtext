@@ -17,6 +17,7 @@ import org.eclipse.xtext.Grammar;
  * @since 2.4
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class AbstractStubGeneratorFragment extends AbstractGeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 
 	private boolean isGenerateStub = true;

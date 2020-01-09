@@ -23,7 +23,7 @@ public interface IConstantEvaluationResult<T extends Object> {
    * Returns the optional computation result. If the result is null, no value could be
    * computed.
    */
-  public abstract Optional<T> getValue();
+  Optional<T> getValue();
   
-  public abstract boolean isCompileTimeConstant();
+  boolean isCompileTimeConstant();
 }

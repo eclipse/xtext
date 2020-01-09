@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class MutableTokenDefProvider extends org.eclipse.xtext.xtext.generator.parser.antlr.MutableTokenDefProvider {
 
 	/**

@@ -25,6 +25,7 @@ import org.eclipse.xtext.generator.IGeneratorFragment;
  *
  * @author Jan Koehnlein
  */
+@Deprecated
 public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorFragment {
 
 	@Override

@@ -20,6 +20,7 @@ import java.nio.charset.Charset;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
+@Deprecated
 public class AntlrToolFacade {
 
 	private final static Logger log = Logger.getLogger(AntlrToolFacade.class);

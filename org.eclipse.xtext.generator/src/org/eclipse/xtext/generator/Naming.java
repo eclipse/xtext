@@ -18,6 +18,7 @@ import org.eclipse.xtext.util.Strings;
  * corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class Naming {
 
 	public final static String GLOBAL_VAR_NAME = "__Naming__";

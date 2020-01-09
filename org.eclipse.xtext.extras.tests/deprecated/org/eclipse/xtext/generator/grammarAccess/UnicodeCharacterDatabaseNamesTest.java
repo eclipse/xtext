@@ -15,6 +15,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class UnicodeCharacterDatabaseNamesTest extends Assert {
 	
 	@Test public void testGetName() throws Exception {

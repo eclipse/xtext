@@ -50,7 +50,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 
 	@Override

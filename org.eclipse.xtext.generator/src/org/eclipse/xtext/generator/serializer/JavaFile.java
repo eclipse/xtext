@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 public class JavaFile {
 
 	protected String body;

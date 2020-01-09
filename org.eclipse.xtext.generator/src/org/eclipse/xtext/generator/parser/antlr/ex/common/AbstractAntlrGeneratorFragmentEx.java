@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public abstract class AbstractAntlrGeneratorFragmentEx extends AbstractAntlrGeneratorFragment {
 
 	private AntlrFragmentHelper fragmentHelper;

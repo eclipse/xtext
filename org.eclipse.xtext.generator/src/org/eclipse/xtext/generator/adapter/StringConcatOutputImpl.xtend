@@ -14,6 +14,7 @@ import org.eclipse.xtend2.lib.StringConcatenation
 /**
  * @since 2.9
  */
+@Deprecated
 class StringConcatOutputImpl extends OutputImpl {
 	
 	public static val STRING_OUTLET = 'StringConcatOutputImpl.StringOutlet'

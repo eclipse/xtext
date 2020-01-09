@@ -45,6 +45,7 @@ import com.google.inject.Module;
 /**
  * @author Moritz Eysholdt
  */
+@Deprecated
 public class GrammarAccessUtil {
 
 	/**
