@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public final class FragmentFakingEcoreResourceFactoryImpl extends EcoreResourceFactoryImpl {
 
 	private final ResourceSaveIndicator isSaving;

@@ -18,6 +18,7 @@ import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class RefactorElementNameFragment extends AbstractGeneratorFragment {
 
 	// no default (depends on whther xbase is used or not)

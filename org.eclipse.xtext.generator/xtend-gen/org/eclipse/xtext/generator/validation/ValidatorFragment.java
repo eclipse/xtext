@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Jan Koehnlein
  * @since 2.4
  */
+@Deprecated
 @SuppressWarnings("all")
 public class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
   @Inject

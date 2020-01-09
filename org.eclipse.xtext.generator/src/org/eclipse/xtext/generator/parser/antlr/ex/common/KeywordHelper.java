@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Heiko Behrens
  */
+@Deprecated
 public class KeywordHelper extends org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper {
 
 	public KeywordHelper(Grammar grammar, boolean ignoreCase) {

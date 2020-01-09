@@ -18,6 +18,7 @@ import org.eclipse.xtext.generator.Naming;
  * @author Jan Koehnlein - javadocs
  * @author Sven Efftinge
  */
+@Deprecated
 public class LabelProviderFragment extends AbstractStubGeneratorFragment {
 
 	@Override

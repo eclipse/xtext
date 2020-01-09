@@ -21,6 +21,7 @@ import org.eclipse.xtext.Grammar;
  *
  * @author Sven Efftinge - Initial contribution and API
  */
+@Deprecated
 public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";

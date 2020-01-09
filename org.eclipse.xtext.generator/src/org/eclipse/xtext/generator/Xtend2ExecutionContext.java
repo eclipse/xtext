@@ -14,6 +14,7 @@ import org.eclipse.xpand2.XpandExecutionContext;
  * @author Jan Koehnlein
  * @since 2.0
  */
+@Deprecated
 public class Xtend2ExecutionContext {
 	XpandExecutionContext legacyContext;
 

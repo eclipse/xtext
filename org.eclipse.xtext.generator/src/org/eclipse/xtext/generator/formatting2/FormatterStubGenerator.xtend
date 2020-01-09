@@ -29,6 +29,7 @@ import java.util.Set
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
 @FinalFieldsConstructor class FormatterStubGenerator {
 	@Accessors(PUBLIC_GETTER) static class Service {
 		@Inject Naming naming

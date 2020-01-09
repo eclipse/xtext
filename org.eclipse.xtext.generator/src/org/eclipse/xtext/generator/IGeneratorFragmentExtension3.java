@@ -13,6 +13,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @since 2.8
  */
+@Deprecated
 public interface IGeneratorFragmentExtension3 {
 	
 	/**

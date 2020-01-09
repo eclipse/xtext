@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 
 import com.google.common.collect.Lists;
 
+@Deprecated
 public class ImplicitUiFragment extends AbstractGeneratorFragment {
 
 	private final List<String> fileExtensions;

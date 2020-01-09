@@ -15,6 +15,7 @@ import org.eclipse.xtext.Grammar;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
+@Deprecated
 public interface IInheriting {
 
 	boolean isInheritImplementation();

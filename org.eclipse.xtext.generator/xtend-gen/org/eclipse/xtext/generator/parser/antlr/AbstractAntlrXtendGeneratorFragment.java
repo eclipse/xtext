@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
  * @author kosyakov - Initial contribution and API
  * @since 2.8
  */
+@Deprecated
 @SuppressWarnings("all")
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
   protected com.google.inject.Module createModule(final Grammar grammar) {

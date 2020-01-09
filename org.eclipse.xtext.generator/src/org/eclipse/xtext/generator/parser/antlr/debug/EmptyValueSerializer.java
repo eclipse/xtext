@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian zarnekow - Initial contribution and API
  */
+@Deprecated
 public class EmptyValueSerializer extends ValueSerializer {
 
 	@Inject private SimpleAntlrGrammarAccess grammarAccess;

@@ -34,6 +34,7 @@ import com.google.common.collect.Collections2;
  * extensions.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class AntlrFragmentHelper implements NamingAware {
 
 	private Naming naming;

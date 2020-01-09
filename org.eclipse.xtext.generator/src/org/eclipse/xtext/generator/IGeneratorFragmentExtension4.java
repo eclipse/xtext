@@ -13,6 +13,7 @@ import org.eclipse.xtext.Grammar;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.8
  */
+@Deprecated
 public interface IGeneratorFragmentExtension4 {
 
 	/**

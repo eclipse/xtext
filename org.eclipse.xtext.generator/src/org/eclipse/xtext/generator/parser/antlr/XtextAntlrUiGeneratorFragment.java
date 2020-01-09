@@ -41,7 +41,7 @@ import com.google.common.collect.ImmutableList;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragment {
 	
 	private boolean removeBacktrackingGuards = false;

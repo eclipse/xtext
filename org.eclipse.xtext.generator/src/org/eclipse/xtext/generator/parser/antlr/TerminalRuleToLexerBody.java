@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.XtextSwitch;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 
 	private final StringBuilder result;

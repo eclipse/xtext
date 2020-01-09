@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.RuleNames;
  * that has hard references to grammar rules/elements
  * @author Moritz Eysholdt
  */
+@Deprecated
 @SuppressWarnings("all")
 public class GrammarAccess {
   @Inject

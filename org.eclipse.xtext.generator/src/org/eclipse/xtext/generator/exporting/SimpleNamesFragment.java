@@ -23,6 +23,7 @@ import org.eclipse.xtext.naming.SimpleNameProvider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Deprecated
 public class SimpleNamesFragment extends DefaultGeneratorFragment {
 
 	@Override

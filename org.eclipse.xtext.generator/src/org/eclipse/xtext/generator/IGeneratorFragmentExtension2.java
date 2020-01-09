@@ -16,7 +16,7 @@ import org.eclipse.xpand2.XpandExecutionContext;
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public interface IGeneratorFragmentExtension2 {
 
 	void generate(LanguageConfig config, XpandExecutionContext ctx);

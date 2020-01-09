@@ -14,6 +14,7 @@ package org.eclipse.xtext.generator;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.6
  */
+@Deprecated
 public class GeneratorWarning extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

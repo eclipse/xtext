@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+@Deprecated
 public class AntlrOptions extends org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions {
 
 	@Override

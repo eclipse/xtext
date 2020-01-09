@@ -20,6 +20,7 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
  * @author Jan Koehnlein
  * @since 2.4
  */
+@Deprecated
 class ValidatorNaming {
 	
 	@Inject Grammar grammar

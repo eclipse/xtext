@@ -10,6 +10,7 @@ import org.eclipse.xpand2.output.PostProcessor;
  * 
  * @since 2.7
  */
+@Deprecated
 public class NewlineNormalizer extends LineSeparatorHarmonizer implements PostProcessor {
 
 	private final String lineDelimiterToUse;

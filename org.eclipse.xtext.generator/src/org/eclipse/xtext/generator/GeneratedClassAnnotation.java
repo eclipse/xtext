@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.Strings;
  * @author Miro Spoenemann - Initial contribution and API
  * @since 2.8
  */
-@SuppressWarnings("deprecation")
+@Deprecated
 public class GeneratedClassAnnotation implements IClassAnnotation {
 	
 	private boolean includeDate = false;

@@ -35,6 +35,7 @@ import com.google.common.collect.Lists;
  * 
  * @author Michael Clay - Initial contribution and API
  */
+@Deprecated
 public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	private static final Logger log = Logger.getLogger(JavaValidatorFragment.class);
 	private final List<String> composedChecks = new ArrayList<String>();

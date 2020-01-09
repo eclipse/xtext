@@ -22,6 +22,7 @@ import com.google.inject.Module;
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.0
  */
+@Deprecated
 public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	/**

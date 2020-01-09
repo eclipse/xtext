@@ -18,16 +18,16 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public interface IFeatureCallArguments {
-  public abstract boolean hasUnprocessedArguments();
+  boolean hasUnprocessedArguments();
   
-  public abstract IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
+  IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
   
   /**
    * Returns the argument expression at index {@code idx}.
    * If there is a receiver, the index {@code 0} returns
    * {@code null}.
    */
-  public abstract XExpression getArgument(final int idx);
+  XExpression getArgument(final int idx);
   
   /**
    * Returns the declared parameter type for the argument at index {@code idx}.
@@ -35,15 +35,15 @@ public interface IFeatureCallArguments {
    * parameters. Var arg parameters always return the component type of the
    * last argument if asked for the type of the last or variable argument.
    */
-  public abstract LightweightTypeReference getDeclaredTypeForLambda(final int idx);
+  LightweightTypeReference getDeclaredTypeForLambda(final int idx);
   
   /**
    * Returns the number of argument expressions where the receiver
    * is considered to be an argument, too.
    */
-  public abstract int getArgumentCount();
+  int getArgumentCount();
   
-  public abstract boolean isProcessed(final int argumentIndex);
+  boolean isProcessed(final int argumentIndex);
   
-  public abstract boolean hasEmptyTrailingVarArg();
+  boolean hasEmptyTrailingVarArg();
 }

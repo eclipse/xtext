@@ -22,6 +22,7 @@ import org.eclipse.xtext.RuleCall;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Heiko Behrens
  */
+@Deprecated
 public class AntlrGrammarGenUtil {
 	
 	/**

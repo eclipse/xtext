@@ -12,6 +12,7 @@ package org.eclipse.xtext.generator.ecore2xtext;
  * See also {@code FormatterFragment.xpt}.
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Deprecated
 public class FormatterFragment extends org.eclipse.xtext.generator.formatting.FormatterFragment {
 
 }

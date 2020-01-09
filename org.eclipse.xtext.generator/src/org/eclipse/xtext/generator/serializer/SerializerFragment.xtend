@@ -37,6 +37,7 @@ import org.eclipse.xtext.xtext.generator.CodeConfig
 /**
  * @author Moritz Eyshold - Initial contribution and API
  */
+@Deprecated
 class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 	
 	@Inject SerializerGenFileNames names

@@ -14,6 +14,7 @@ import org.eclipse.xtext.Grammar;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.3
  */
+@Deprecated
 public interface IGeneratorFragmentExtension {
 
 	/**

@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
+@Deprecated
 public class IgnoreCaseString implements CharSequence {
 
 	private final String value;

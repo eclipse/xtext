@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.parser.antlr.postProcessing;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class SuppressWarningsProcessor {
 
 	public String process(String content) {

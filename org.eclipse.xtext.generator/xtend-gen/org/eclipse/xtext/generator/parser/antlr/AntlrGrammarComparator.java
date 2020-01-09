@@ -27,14 +27,15 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Christian Schneider - Initial contribution and API
  * @noreference
  */
+@Deprecated
 @SuppressWarnings("all")
 public class AntlrGrammarComparator {
   public interface IErrorHandler {
-    public abstract void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context);
+    void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context);
     
-    public abstract void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context);
+    void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context);
     
-    public abstract void handleMismatch(final String matched, final String expected, final AntlrGrammarComparator.ErrorContext context);
+    void handleMismatch(final String matched, final String expected, final AntlrGrammarComparator.ErrorContext context);
   }
   
   public static final class ErrorContext {

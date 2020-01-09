@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @author Jan Koehnlein
  * @since 2.4
  */
+@Deprecated
 @SuppressWarnings("all")
 public class ValidatorNaming {
   @Inject

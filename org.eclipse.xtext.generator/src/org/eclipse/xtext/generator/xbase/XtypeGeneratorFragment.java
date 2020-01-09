@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.DefaultGeneratorFragment;
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.9
  */
+@Deprecated
 public class XtypeGeneratorFragment extends DefaultGeneratorFragment {
 
 	protected boolean doesUseXtype(Grammar grammar) {

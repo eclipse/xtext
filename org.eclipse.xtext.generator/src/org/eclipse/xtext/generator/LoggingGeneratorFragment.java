@@ -19,6 +19,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class LoggingGeneratorFragment extends DefaultGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(LoggingGeneratorFragment.class);

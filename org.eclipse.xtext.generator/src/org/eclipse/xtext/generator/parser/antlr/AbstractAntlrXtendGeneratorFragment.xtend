@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
  * @author kosyakov - Initial contribution and API
  * @since 2.8
  */
+@Deprecated
 abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
 
 	protected def Module createModule(Grammar grammar) {

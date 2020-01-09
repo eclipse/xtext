@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.packrat.IPackratParser;
  *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class PackratParserFragment extends AbstractGeneratorFragment {
 
 	@Override

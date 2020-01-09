@@ -22,6 +22,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Deprecated
 public class FragmentFakingEcoreResource extends XMIResourceImpl {
 
 	private final ResourceSaveIndicator isSaving;
