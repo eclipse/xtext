@@ -23,8 +23,6 @@ import org.eclipse.lsp4j.CodeActionContext
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
 import org.eclipse.lsp4j.CodeLensParams
-import org.eclipse.lsp4j.ColoringInformation
-import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.Command
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
@@ -365,7 +363,8 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		return sb.toString;
 	}
 
-	protected dispatch def String toExpectation(ColoringInformation it) {
+	@Deprecated
+	protected dispatch def String toExpectation(org.eclipse.lsp4j.ColoringInformation it) {
 		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
 	}
 
@@ -704,9 +703,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		].get
 	}
 
+	@Deprecated
 	protected def getColoringParams() {
 		languageServer.requestManager.runRead[
-			return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+			return notifications.map[value].filter(org.eclipse.lsp4j.ColoringParams).toMap([uri], [infos]);
 		].get
 	}
 

@@ -15,6 +15,7 @@ import org.junit.Test
  * 
  * @author akos.kitta - Initial contribution and API
  */
+@Deprecated
 class ColoringTest extends AbstractTestLangLanguageServerTest {
 
 	static val MODEL = '''

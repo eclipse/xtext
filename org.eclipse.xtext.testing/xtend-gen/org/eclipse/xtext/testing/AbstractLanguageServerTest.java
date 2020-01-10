@@ -785,6 +785,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return sb.toString();
   }
   
+  @Deprecated
   protected String _toExpectation(final ColoringInformation it) {
     StringConcatenation _builder = new StringConcatenation();
     String _expectation = this.toExpectation(it.getRange());
@@ -1402,6 +1403,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  @Deprecated
   protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
     try {
       final Function1<CancelIndicator, Map<String, List<? extends ColoringInformation>>> _function = (CancelIndicator it) -> {

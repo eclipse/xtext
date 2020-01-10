@@ -26,6 +26,7 @@ import org.junit.Test;
  * 
  * @author akos.kitta - Initial contribution and API
  */
+@Deprecated
 @SuppressWarnings("all")
 public class ColoringTest extends AbstractTestLangLanguageServerTest {
   private static final String MODEL = new Function0<String>() {
