@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @ImplementedBy(ISimpleNameProvider.DefaultImpl.class)
 @SuppressWarnings("all")
 public interface ISimpleNameProvider {
-  public static class DefaultImpl implements ISimpleNameProvider {
+  class DefaultImpl implements ISimpleNameProvider {
     @Override
     public String getSimpleName(final EObject target) {
       EAttribute _nameEAttribute = null;
@@ -54,7 +54,7 @@ public interface ISimpleNameProvider {
     }
   }
   
-  public abstract String getSimpleName(final EObject target);
+  String getSimpleName(final EObject target);
   
-  public abstract boolean canRename(final EObject target);
+  boolean canRename(final EObject target);
 }
