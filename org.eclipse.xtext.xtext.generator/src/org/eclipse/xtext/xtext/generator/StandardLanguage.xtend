@@ -17,8 +17,6 @@ import org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 import org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
-import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
-import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment
 import org.eclipse.xtext.xtext.generator.index.ResourceDescriptionStrategyFragment
 import org.eclipse.xtext.xtext.generator.junit.JUnitFragment
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -32,7 +30,6 @@ import org.eclipse.xtext.xtext.generator.ui.fileWizard.TemplateFileWizardFragmen
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2
-import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 import org.eclipse.xtext.xtext.generator.ui.projectWizard.TemplateProjectWizardFragment
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
@@ -117,14 +114,16 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
 	
 	CompareFragment2 compareEditor = new CompareFragment2
-	 
-	XtextAntlrIDEAGeneratorFragment ideaParser
 	
-	IdeaPluginGenerator ideaPlugin
+	@Deprecated 
+	org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment ideaParser
+	
+	@Deprecated
+	org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator ideaPlugin
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
-	@Deprecated SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
+	@Deprecated org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2 newProjectWizardForEclipse = new org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 	
 	TemplateProjectWizardFragment projectWizard = new TemplateProjectWizardFragment
 	
@@ -205,7 +204,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	 * @deprecated Use 'projectWizard' instead
 	 */
 	@Deprecated
-	def setNewProjectWizardForEclipse(SimpleProjectWizardFragment2 fragment) {
+	def setNewProjectWizardForEclipse(org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2 fragment) {
 		this.newProjectWizardForEclipse = fragment
 	}
 	
