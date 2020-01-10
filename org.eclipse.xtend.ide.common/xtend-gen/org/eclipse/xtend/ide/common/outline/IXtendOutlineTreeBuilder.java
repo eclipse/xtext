@@ -23,5 +23,5 @@ import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
  */
 @SuppressWarnings("all")
 public interface IXtendOutlineTreeBuilder {
-  public abstract void build(final EObject modelElement, final IXtendOutlineContext context);
+  void build(final EObject modelElement, final IXtendOutlineContext context);
 }

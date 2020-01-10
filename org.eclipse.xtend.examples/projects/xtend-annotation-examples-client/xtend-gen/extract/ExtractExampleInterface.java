@@ -12,5 +12,5 @@ public interface ExtractExampleInterface {
   /**
    * This method is extracted to an interface
    */
-  public abstract void myPublicMethod();
+  void myPublicMethod();
 }

@@ -14,21 +14,21 @@ import org.eclipse.xtext.common.types.JvmMember;
  */
 @SuppressWarnings("all")
 public interface IXtendOutlineContext {
-  public abstract IXtendOutlineContext newContext();
+  IXtendOutlineContext newContext();
   
-  public abstract boolean isShowInherited();
+  boolean isShowInherited();
   
-  public abstract IXtendOutlineContext showInherited();
+  IXtendOutlineContext showInherited();
   
-  public abstract IXtendOutlineContext hideInherited();
+  IXtendOutlineContext hideInherited();
   
-  public abstract int getInheritanceDepth();
+  int getInheritanceDepth();
   
-  public abstract IXtendOutlineContext increaseInheritanceDepth();
+  IXtendOutlineContext increaseInheritanceDepth();
   
-  public abstract IXtendOutlineContext decreaseInheritanceDepth();
+  IXtendOutlineContext decreaseInheritanceDepth();
   
-  public abstract boolean isProcessed(final JvmMember member);
+  boolean isProcessed(final JvmMember member);
   
-  public abstract IXtendOutlineContext markAsProcessed(final JvmMember member);
+  IXtendOutlineContext markAsProcessed(final JvmMember member);
 }
