@@ -34,6 +34,7 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
     return SignatureHelpServiceImpl.class;
   }
   
+  @Deprecated
   public Class<? extends IColoringService> bindIColoringService() {
     return ColoringServiceImpl.class;
   }

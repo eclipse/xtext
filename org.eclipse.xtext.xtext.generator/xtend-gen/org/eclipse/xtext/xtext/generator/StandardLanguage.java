@@ -128,8 +128,10 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private CompareFragment2 compareEditor = new CompareFragment2();
   
+  @Deprecated
   private XtextAntlrIDEAGeneratorFragment ideaParser;
   
+  @Deprecated
   private IdeaPluginGenerator ideaPlugin;
   
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
