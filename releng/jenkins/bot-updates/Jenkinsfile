@@ -29,7 +29,6 @@ pipeline {
           <ul>
           <li><code>gradle_plugins</code></li>
           <li><code>xtext_gradle_plugin</code></li>
-          <li><code>dependency_management_plugin</code></li>
           </ul>
         </li>
         <li><b>ORBIT_URL:</b> Set SimRel Orbit repository used for target platform.</li>
