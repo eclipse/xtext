@@ -14,5 +14,5 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescription;
  */
 @SuppressWarnings("all")
 public interface SerializableEObjectDescriptionProvider {
-  public abstract SerializableEObjectDescription toSerializableEObjectDescription();
+  SerializableEObjectDescription toSerializableEObjectDescription();
 }

@@ -17,5 +17,5 @@ import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
  */
 @SuppressWarnings("all")
 public interface IWebProjectConfig extends ISubProjectConfig {
-  public abstract IXtextGeneratorFileSystemAccess getAssets();
+  IXtextGeneratorFileSystemAccess getAssets();
 }

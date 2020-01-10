@@ -23,16 +23,16 @@ public interface IExecutableCommandService {
    * Called on server initialize.
    * @return the supported commands
    */
-  public abstract List<String> initialize();
+  List<String> initialize();
   
   /**
    * Called on server initialize, only if the client supported dynamicRegistration of commands.
    */
-  public default void initializeDynamicRegistration(final Function1<? super String, ? extends IDisposable> register) {
+  default void initializeDynamicRegistration(final Function1<? super String, ? extends IDisposable> register) {
   }
   
   /**
    * Called when the client wants to execute a registered command.
    */
-  public abstract Object execute(final ExecuteCommandParams params, final ILanguageServerAccess access, final CancelIndicator cancelIndicator);
+  Object execute(final ExecuteCommandParams params, final ILanguageServerAccess access, final CancelIndicator cancelIndicator);
 }

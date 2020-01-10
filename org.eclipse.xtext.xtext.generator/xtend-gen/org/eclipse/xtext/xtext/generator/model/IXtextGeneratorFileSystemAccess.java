@@ -18,7 +18,7 @@ import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 @ImplementedBy(XtextGeneratorFileSystemAccess.class)
 @SuppressWarnings("all")
 public interface IXtextGeneratorFileSystemAccess extends IFileSystemAccess2, IGuiceAwareGeneratorComponent {
-  public abstract String getPath();
+  String getPath();
   
-  public abstract boolean isOverwrite();
+  boolean isOverwrite();
 }

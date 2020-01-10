@@ -27,16 +27,16 @@ public interface IClassAnnotation {
   /**
    * Convert the class annotation to a string suitable for use in Java code generation.
    */
-  public abstract CharSequence generate();
+  CharSequence generate();
   
   /**
    * Determine whether this annotation should be applied to the given Java file.
    */
-  public abstract boolean appliesTo(final JavaFileAccess javaFile);
+  boolean appliesTo(final JavaFileAccess javaFile);
   
   /**
    * Return the qualified name of the annotation interface for use in import declarations,
    * or {@code null} if no import is required.
    */
-  public abstract TypeReference getAnnotationImport();
+  TypeReference getAnnotationImport();
 }

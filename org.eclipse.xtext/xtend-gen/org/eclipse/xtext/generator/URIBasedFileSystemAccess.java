@@ -42,15 +42,15 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
     /**
      * @return <code>true</code> if the file can be deleted, false otherwise
      */
-    public abstract boolean beforeDelete(final URI changed);
+    boolean beforeDelete(final URI changed);
   }
   
   public interface BeforeWrite {
-    public abstract InputStream beforeWrite(final URI changed, final String outputCfgName, final InputStream in);
+    InputStream beforeWrite(final URI changed, final String outputCfgName, final InputStream in);
   }
   
   public interface BeforeRead {
-    public abstract InputStream beforeRead(final URI changed, final InputStream in);
+    InputStream beforeRead(final URI changed, final InputStream in);
   }
   
   @Accessors

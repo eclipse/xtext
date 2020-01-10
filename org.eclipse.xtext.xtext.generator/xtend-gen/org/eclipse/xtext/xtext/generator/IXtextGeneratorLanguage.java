@@ -20,27 +20,27 @@ import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
  */
 @SuppressWarnings("all")
 public interface IXtextGeneratorLanguage {
-  public abstract Grammar getGrammar();
+  Grammar getGrammar();
   
-  public abstract List<String> getFileExtensions();
+  List<String> getFileExtensions();
   
-  public abstract StandaloneSetupAccess getRuntimeGenSetup();
+  StandaloneSetupAccess getRuntimeGenSetup();
   
-  public abstract GuiceModuleAccess getRuntimeGenModule();
+  GuiceModuleAccess getRuntimeGenModule();
   
-  public abstract GuiceModuleAccess getIdeGenModule();
+  GuiceModuleAccess getIdeGenModule();
   
-  public abstract GuiceModuleAccess getEclipsePluginGenModule();
+  GuiceModuleAccess getEclipsePluginGenModule();
   
-  public abstract GuiceModuleAccess getIdeaGenModule();
+  GuiceModuleAccess getIdeaGenModule();
   
-  public abstract GuiceModuleAccess getWebGenModule();
+  GuiceModuleAccess getWebGenModule();
   
-  public abstract ResourceSet getResourceSet();
+  ResourceSet getResourceSet();
   
   /**
    * @deprecated Use {@link CodeConfig#isPreferXtendStubs()} instead
    */
   @Deprecated
-  public abstract boolean isGenerateXtendStubs();
+  boolean isGenerateXtendStubs();
 }

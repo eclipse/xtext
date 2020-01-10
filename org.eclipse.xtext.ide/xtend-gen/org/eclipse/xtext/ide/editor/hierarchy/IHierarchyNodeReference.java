@@ -18,5 +18,5 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
  */
 @SuppressWarnings("all")
 public interface IHierarchyNodeReference extends INavigatable, ITextRegionWithLineInformation {
-  public abstract String getText();
+  String getText();
 }

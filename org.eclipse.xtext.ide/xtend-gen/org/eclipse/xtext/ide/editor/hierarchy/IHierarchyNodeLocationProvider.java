@@ -22,7 +22,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 @ImplementedBy(DefaultHierarchyNodeLocationProvider.class)
 @SuppressWarnings("all")
 public interface IHierarchyNodeLocationProvider {
-  public abstract ITextRegionWithLineInformation getTextRegion(final EObject obj);
+  ITextRegionWithLineInformation getTextRegion(final EObject obj);
   
-  public abstract ITextRegionWithLineInformation getTextRegion(final EObject owner, final EStructuralFeature feature, final int indexInList);
+  ITextRegionWithLineInformation getTextRegion(final EObject owner, final EStructuralFeature feature, final int indexInList);
 }

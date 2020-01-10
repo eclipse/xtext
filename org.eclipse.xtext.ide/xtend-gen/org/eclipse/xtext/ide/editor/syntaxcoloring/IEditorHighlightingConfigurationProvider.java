@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @ImplementedBy(IEditorHighlightingConfigurationProvider.DefaultImpl.class)
 @SuppressWarnings("all")
 public interface IEditorHighlightingConfigurationProvider {
-  public static class DefaultImpl implements IEditorHighlightingConfigurationProvider {
+  class DefaultImpl implements IEditorHighlightingConfigurationProvider {
     @Inject
     private IGrammarAccess grammarAccess;
     
@@ -116,5 +116,5 @@ public interface IEditorHighlightingConfigurationProvider {
   /**
    * provides an editor specific highlighting configuration or null.
    */
-  public abstract String getConfiguration(final String editorName);
+  String getConfiguration(final String editorName);
 }

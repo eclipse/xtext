@@ -32,12 +32,12 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 @ImplementedBy(IDocumentSymbolService.Noop.class)
 @SuppressWarnings("all")
 public interface IDocumentSymbolService {
-  public static class Noop implements IDocumentSymbolService {
+  class Noop implements IDocumentSymbolService {
     @Override
     public List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator) {
       return CollectionLiterals.<Either<SymbolInformation, DocumentSymbol>>emptyList();
     }
   }
   
-  public abstract List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator);
+  List<Either<SymbolInformation, DocumentSymbol>> getSymbols(final Document document, final XtextResource resource, final DocumentSymbolParams params, final CancelIndicator cancelIndicator);
 }

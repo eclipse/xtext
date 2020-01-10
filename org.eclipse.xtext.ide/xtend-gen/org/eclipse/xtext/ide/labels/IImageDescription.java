@@ -19,5 +19,5 @@ import org.eclipse.xtext.ide.labels.SimpleImageDescription;
  */
 @SuppressWarnings("all")
 public interface IImageDescription {
-  public static final SimpleImageDescription DEFAULT = new SimpleImageDescription("default");
+  static final SimpleImageDescription DEFAULT = new SimpleImageDescription("default");
 }

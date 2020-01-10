@@ -22,12 +22,12 @@ public interface IPrefixMatcher {
   /**
    * Default prefix matcher that compares the prefix of the candidate ignoring case.
    */
-  public static class IgnoreCase implements IPrefixMatcher {
+  class IgnoreCase implements IPrefixMatcher {
     @Override
     public boolean isCandidateMatchingPrefix(final String name, final String prefix) {
       return name.regionMatches(true, 0, prefix, 0, prefix.length());
     }
   }
   
-  public abstract boolean isCandidateMatchingPrefix(final String name, final String prefix);
+  boolean isCandidateMatchingPrefix(final String name, final String prefix);
 }

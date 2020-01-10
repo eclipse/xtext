@@ -17,5 +17,5 @@ import org.eclipse.xtext.ide.labels.IImageDescription;
 @ImplementedBy(EClassImageDescriptionProvider.class)
 @SuppressWarnings("all")
 public interface IImageDescriptionProvider {
-  public abstract IImageDescription getImageDescription(final Object element);
+  IImageDescription getImageDescription(final Object element);
 }

@@ -16,7 +16,7 @@ import org.eclipse.xtext.xtext.generator.Issues;
  */
 @SuppressWarnings("all")
 public interface IXtextGeneratorFragment extends IGuiceAwareGeneratorComponent {
-  public abstract void checkConfiguration(final Issues issues);
+  void checkConfiguration(final Issues issues);
   
-  public abstract void generate();
+  void generate();
 }

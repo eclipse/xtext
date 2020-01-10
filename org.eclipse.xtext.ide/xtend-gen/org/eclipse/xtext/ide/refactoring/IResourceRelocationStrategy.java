@@ -29,7 +29,7 @@ import org.eclipse.xtext.ide.refactoring.ResourceRelocationContext;
  */
 @SuppressWarnings("all")
 public interface IResourceRelocationStrategy {
-  public abstract void applyChange(final ResourceRelocationContext context);
+  void applyChange(final ResourceRelocationContext context);
   
   /**
    * By overriding this method client implementations may explicitly demand for relying
@@ -51,7 +51,7 @@ public interface IResourceRelocationStrategy {
    * 
    * @since 2.18
    */
-  public default boolean requiresUsageOfPersistedIndex(final ResourceRelocationContext context) {
+  default boolean requiresUsageOfPersistedIndex(final ResourceRelocationContext context) {
     return false;
   }
 }
