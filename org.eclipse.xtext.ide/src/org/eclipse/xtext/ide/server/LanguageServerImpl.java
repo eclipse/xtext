@@ -72,6 +72,7 @@ import org.eclipse.lsp4j.SemanticHighlightingServerCapabilities;
 import org.eclipse.lsp4j.ServerCapabilities;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureHelpOptions;
+import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
 import org.eclipse.lsp4j.TextDocumentIdentifier;
@@ -697,7 +698,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	}
 
 	@Override
-	public CompletableFuture<SignatureHelp> signatureHelp(TextDocumentPositionParams params) {
+	public CompletableFuture<SignatureHelp> signatureHelp(SignatureHelpParams params) {
 		return requestManager.runRead((cancelIndicator) -> signatureHelp(params, cancelIndicator));
 	}
 
@@ -705,14 +706,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
 	 * Compute the signature help. Executed in a read request.
 	 * @since 2.20
 	 */
-	protected SignatureHelp signatureHelp(TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+	protected SignatureHelp signatureHelp(SignatureHelpParams params, CancelIndicator cancelIndicator) {
 		URI uri = getURI(params);
 		ISignatureHelpService helper = getService(uri, ISignatureHelpService.class);
 		if (helper == null) {
 			return ISignatureHelpService.EMPTY;
 		}
 		return workspaceManager.doRead(uri,
-				(doc, resource) -> helper.getSignatureHelp(doc, resource, params, cancelIndicator));
+				(doc, resource) -> helper.getSignatureHelp(doc, resource, (TextDocumentPositionParams) params, cancelIndicator));
 	}
 
 	@Override

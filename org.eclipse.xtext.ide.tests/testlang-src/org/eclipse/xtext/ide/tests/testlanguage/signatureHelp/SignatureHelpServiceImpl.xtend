@@ -15,8 +15,10 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.ParameterInformation
 import org.eclipse.lsp4j.SignatureHelp
+import org.eclipse.lsp4j.SignatureHelpParams
 import org.eclipse.lsp4j.SignatureInformation
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall
@@ -29,8 +31,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.xtext.ide.server.Document
-import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
@@ -71,12 +71,8 @@ class SignatureHelpServiceImpl implements ISignatureHelpService {
 
     extension TestLanguagePackage = TestLanguagePackage.eINSTANCE;
 				
-	override getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+	override getSignatureHelp(Document document, XtextResource resource, SignatureHelpParams params, CancelIndicator cancelIndicator) {
 		val offset = document.getOffSet(params.position)
-		return getSignatureHelp(resource, offset)
-	}
-
-    override getSignatureHelp(XtextResource resource, int offset) {
 
         Preconditions.checkNotNull(resource, "resource");
         Preconditions.checkArgument(offset >= 0, "offset >= 0. Was: " + offset);

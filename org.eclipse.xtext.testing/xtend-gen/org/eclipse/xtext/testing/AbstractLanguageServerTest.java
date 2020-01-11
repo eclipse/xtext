@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2019 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -64,6 +64,7 @@ import org.eclipse.lsp4j.ReferenceParams;
 import org.eclipse.lsp4j.SemanticHighlightingInformation;
 import org.eclipse.lsp4j.SemanticHighlightingParams;
 import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.lsp4j.TextDocumentClientCapabilities;
@@ -1149,8 +1150,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final String fileUri = this.initializeContext(configuration).getUri();
-      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
-      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+      SignatureHelpParams _signatureHelpParams = new SignatureHelpParams();
+      final Procedure1<SignatureHelpParams> _function = (SignatureHelpParams it) -> {
         TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
         it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
@@ -1158,7 +1159,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         Position _position = new Position(_line, _column);
         it.setPosition(_position);
       };
-      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      SignatureHelpParams _doubleArrow = ObjectExtensions.<SignatureHelpParams>operator_doubleArrow(_signatureHelpParams, _function);
       final CompletableFuture<SignatureHelp> signatureHelpFuture = this.languageServer.signatureHelp(_doubleArrow);
       final SignatureHelp signatureHelp = signatureHelpFuture.get();
       Procedure1<? super SignatureHelp> _assertSignatureHelp = configuration.getAssertSignatureHelp();
