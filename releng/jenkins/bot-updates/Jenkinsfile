@@ -282,7 +282,7 @@ pipeline {
 
     stage('Update Orbit URL') {
       when {
-        expression { params.UPDATE_TYPE == 'GRADLE_ORBIT_URL' }
+        expression { params.UPDATE_TYPE == 'ORBIT_URL' }
       }
       steps {
         script {
