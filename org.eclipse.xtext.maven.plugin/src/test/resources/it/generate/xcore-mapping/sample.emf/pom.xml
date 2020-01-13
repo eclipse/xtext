@@ -119,7 +119,7 @@
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>
 						<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-						<version>${emf-version}</version>
+						<version>${emf-xmi-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.emf</groupId>

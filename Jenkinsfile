@@ -93,6 +93,9 @@ spec:
   }
 
   post {
+    always {
+      junit testResults: '**/target/surefire-reports/*.xml'
+    }
     success {
       archiveArtifacts artifacts: 'build/**'
     }
