@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -245,12 +245,12 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 		Composite labelComposite = new Composite(composite, SWT.NONE);
 		setDefaultGridData(labelComposite);
-		GridLayout labelCompositeLayout = new GridLayout(2, true);
+		GridLayout labelCompositeLayout = new GridLayout(2, false);
 		labelCompositeLayout.marginWidth = 0;
 		labelComposite.setLayout(labelCompositeLayout);
 		matchingElementsLabel = new Label(labelComposite, SWT.NONE);
 		matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel);
-		matchingElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		matchingElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		searchStatusLabel = new Label(labelComposite, SWT.RIGHT);
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
