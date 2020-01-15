@@ -19,6 +19,7 @@ pipeline {
       'GENERATE_TEST_LANGUAGES'
       ]
       , description: '''
+      <b><i>ATTENTION: Pull Requests on repositories that require the ECA check will fail, if you do not fill out GIT_USER_NAME/GIT_USER_EMAIL!</i></b>
       The type of update to perform. The options are:
       <ul>
         <li><b>XTEXT_VERSION:</b> Set Xtext version. Modifies MANIFEST.MF, POM files, versions.gradle</li>
