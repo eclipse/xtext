@@ -54,6 +54,46 @@ public class ReconcilerReplaceRegion extends ReplaceRegion implements IRegion {
 	}
 	
 	@Override
+	public boolean equals(Object object) {
+		if (this == object)
+			return true;
+		if (object == null)
+			return false;
+		if (getClass() != object.getClass())
+			return false;
+
+		ReconcilerReplaceRegion other = (ReconcilerReplaceRegion) object;
+		if (this.getOffset() != other.getOffset()) {
+			return false;
+		}
+		if (this.getLength() != other.getLength()) {
+			return false;
+		}
+		if (this.getText() == null) {
+			if (other.getText() != null) {
+				return false;
+			}
+		} else if (!this.getText().equals(other.getText())) {
+			return false;
+		}
+		if (this.modificationStamp != other.modificationStamp) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + getOffset();
+		result = prime * result + getLength();
+		result = prime * result + ((getText() == null) ? 0 : getText().hashCode());
+		result = prime * result + (int) (modificationStamp % Integer.MAX_VALUE);
+		return result;
+	}
+	
+	@Override
 	public String toString() {
 		return "ReconcilerReplaceRegion [" + getOffset() + ":" + getLength() + "] '" 
 				+ getText() + "' modificationStamp:" + getModificationStamp();  
