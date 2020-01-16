@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import java.util.Objects;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow
@@ -60,21 +58,38 @@ public class ReplaceRegion {
 	
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof ReplaceRegion) {
-			ReplaceRegion rr = (ReplaceRegion) object;
+		if (this == object)
+			return true;
+		if (object == null)
+			return false;
+		if (getClass() != object.getClass())
+			return false;
 
-			boolean equals = true;
-			equals = equals && Objects.equals(getOffset(), rr.getOffset());
-			equals = equals && Objects.equals(getLength(), rr.getLength());
-			equals = equals && Objects.equals(getText(), rr.getText());
-			return equals;
+		ReplaceRegion other = (ReplaceRegion) object;
+		if (this.offset != other.offset) {
+			return false;
 		}
-		return false;
+		if (this.length != other.length) {
+			return false;
+		}
+		if (this.text == null) {
+			if (other.text != null) {
+				return false;
+			}
+		} else if (!this.text.equals(other.text)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getOffset(), getLength(), getText());
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + offset;
+		result = prime * result + length;
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		return result;
 	}
 	
 	@Override
