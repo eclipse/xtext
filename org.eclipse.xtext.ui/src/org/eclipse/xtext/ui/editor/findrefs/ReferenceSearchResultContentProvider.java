@@ -190,8 +190,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				} else if (event instanceof Reset) {
 					if (rootNodes != null && !rootNodes.isEmpty()) {
 						synchronized (viewer) {
-							viewer.remove(viewer.getInput(),
-									Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class));
+							viewer.remove(viewer.getInput(), rootNodes.toArray());
 							rootNodes = null;
 						}
 					}
@@ -215,7 +214,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			Object[] firstChildren = topElement.getChildren().toArray();
 			
 			if (firstChildren.length >= 0) {
-				viewer.getSorter().sort(viewer, firstChildren);
+				viewer.getComparator().sort(viewer, firstChildren);
 				viewer.setSelection(new StructuredSelection(firstChildren[0]), true);
 			}
 		}

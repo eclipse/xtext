@@ -179,7 +179,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		viewer = new TreeViewer(control, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
-		viewer.setSorter(sorter);
+		viewer.setComparator(sorter);
 		createOpenAndLinkWithEditorHandler();
 		IToolBarManager tbm = getSite().getActionBars().getToolBarManager();
 		fillToolbar(tbm);
