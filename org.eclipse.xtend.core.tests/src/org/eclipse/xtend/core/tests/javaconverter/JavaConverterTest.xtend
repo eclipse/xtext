@@ -1075,16 +1075,15 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testRichStringCase4() throws Exception {
-		assertEquals(
-			"public String someVar=\".\"
-public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError''').replace(Character.valueOf('.').charValue, Character.valueOf('/').charValue)».xtexterror'''",
-			toXtendClassBodyDeclr(
+		assertEquals("public String someVar=\".\"
+public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError''').replace(Character.valueOf('.').charValue, Character.valueOf('/').charValue)».xtexterror'''".
+			toUnixLineSeparator, toXtendClassBodyDeclr(
 				'''
-				public String someVar=".";
-				public String loadingURI = "classpath:/"
-					+ (someVar + "LoadingResourceWithError").replace('.', '/')
-					+ ".xtexterror";
-			'''))
+			public String someVar=".";
+			public String loadingURI = "classpath:/"
+				+ (someVar + "LoadingResourceWithError").replace('.', '/')
+				+ ".xtexterror";
+		''').toUnixLineSeparator)
 	}
 
 	@Test def void testRichStringSpecialCase() throws Exception {
