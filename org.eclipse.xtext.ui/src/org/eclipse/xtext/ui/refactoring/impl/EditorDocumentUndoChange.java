@@ -66,7 +66,7 @@ public class EditorDocumentUndoChange extends Change {
 			if (editor != null && Objects.equal(editor.getSite().getId(), editorID))
 				return (ITextEditor) editor;
 			else
-				return (ITextEditor) page.openEditor(editorInput, editorID);
+				return (ITextEditor) page.openEditor(editorInput, editorID, true, IWorkbenchPage.MATCH_INPUT | IWorkbenchPage.MATCH_ID);
 		} catch (Exception exc) {
 			LOG.error("Error restoring editor", exc);
 			return null;
