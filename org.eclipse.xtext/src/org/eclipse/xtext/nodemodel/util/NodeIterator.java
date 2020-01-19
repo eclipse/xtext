@@ -23,6 +23,10 @@ public class NodeIterator extends UnmodifiableIterator<INode> implements BidiIte
 	private INode lastReturned;
 
 	public NodeIterator(INode startWith) {
+		if (startWith == null) {
+			throw new NullPointerException();
+		}
+		
 		this.startWith = startWith;
 	}
 
