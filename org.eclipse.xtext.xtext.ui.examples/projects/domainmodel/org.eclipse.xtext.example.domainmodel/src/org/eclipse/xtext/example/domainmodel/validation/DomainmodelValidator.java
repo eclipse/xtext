@@ -87,13 +87,14 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 	public void checkOperationNamesAreUnique(Entity entity) {
 		JvmGenericType inferredJavaClass = IterableExtensions
 				.head(Iterables.filter(jvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, jvmOperations -> {
-			Iterable<Operation> operations = Iterables.filter(
-					IterableExtensions.map(jvmOperations, it -> jvmModelAssociations.getPrimarySourceElement(it)),
-					Operation.class);
-			operations.forEach(it -> 
-				error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION)
-			);
-		});
+		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, jvmOperations ->
+			jvmOperations.stream()
+				.map(it -> jvmModelAssociations.getPrimarySourceElement(it))
+				.filter(Operation.class::isInstance)
+				.map(Operation.class::cast)
+				.forEach(it -> 
+					error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION)
+				)
+		);
 	}
 }
