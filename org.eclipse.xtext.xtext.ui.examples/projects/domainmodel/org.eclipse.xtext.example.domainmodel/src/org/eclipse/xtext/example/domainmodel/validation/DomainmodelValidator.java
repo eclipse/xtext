@@ -70,7 +70,7 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 	@Check
 	public void checkPropertyNamesAreUnique(Entity entity) {
 		Map<String, List<Feature>> name2properties = entity.getFeatures().stream()
-			.filter(f -> f instanceof Property)
+			.filter(Property.class::isInstance)
 			.filter(it -> !StringExtensions.isNullOrEmpty(it.getName()))
 			.collect(Collectors.groupingBy(Feature::getName));
 		name2properties.values().forEach(properties -> {
