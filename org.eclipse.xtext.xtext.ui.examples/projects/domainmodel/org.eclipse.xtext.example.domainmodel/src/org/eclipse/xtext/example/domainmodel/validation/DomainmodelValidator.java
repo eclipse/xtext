@@ -72,11 +72,11 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 		Multimap<String, Property> name2properties = HashMultimap.create();
 		IterableExtensions	
 				.filter(Iterables.filter(entity.getFeatures(), Property.class),
-						(it) -> !StringExtensions.isNullOrEmpty(it.getName()))
-				.forEach((it) -> name2properties.put(it.getName(), it));
-		name2properties.asMap().values().forEach((properties) -> {
+						it -> !StringExtensions.isNullOrEmpty(it.getName()))
+				.forEach(it -> name2properties.put(it.getName(), it));
+		name2properties.asMap().values().forEach(properties -> {
 			if (properties.size() > 1) {
-				properties.forEach((it) -> {
+				properties.forEach(it -> {
 					error("Duplicate property " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME,
 							IssueCodes.DUPLICATE_PROPERTY);
 				});
@@ -88,11 +88,11 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 	public void checkOperationNamesAreUnique(Entity entity) {
 		JvmGenericType inferredJavaClass = IterableExtensions
 				.head(Iterables.filter(jvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, (jvmOperations) -> {
+		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, jvmOperations -> {
 			Iterable<Operation> operations = Iterables.filter(
-					IterableExtensions.map(jvmOperations, (it) -> jvmModelAssociations.getPrimarySourceElement(it)),
+					IterableExtensions.map(jvmOperations, it -> jvmModelAssociations.getPrimarySourceElement(it)),
 					Operation.class);
-			operations.forEach((Consumer<Operation>) (it) -> {
+			operations.forEach((Consumer<Operation>) it -> {
 				error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
 			});
 		});
