@@ -44,8 +44,8 @@ class StorageAwareResource extends LazyLinkingResource {
 				return;
 			} catch(IOException e) {
 				// revert the resource into a clean state
-				contents.clear
-				eAdapters.clear
+				contents?.clear
+				eAdapters?.clear
 				unload
 			}
 		}
