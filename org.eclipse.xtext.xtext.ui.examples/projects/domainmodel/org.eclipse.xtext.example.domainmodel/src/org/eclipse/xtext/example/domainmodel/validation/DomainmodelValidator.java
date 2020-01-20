@@ -7,6 +7,10 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -22,9 +26,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -67,12 +69,11 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 
 	@Check
 	public void checkPropertyNamesAreUnique(Entity entity) {
-		Multimap<String, Property> name2properties = HashMultimap.create();
-		IterableExtensions
-				.filter(Iterables.filter(entity.getFeatures(), Property.class),
-						it -> !StringExtensions.isNullOrEmpty(it.getName()))
-				.forEach(it -> name2properties.put(it.getName(), it));
-		name2properties.asMap().values().forEach(properties -> {
+		Map<String, List<Feature>> name2properties = entity.getFeatures().stream()
+			.filter(f -> f instanceof Property)
+			.filter(it -> !StringExtensions.isNullOrEmpty(it.getName()))
+			.collect(Collectors.groupingBy(Feature::getName));
+		name2properties.values().forEach(properties -> {
 			if (properties.size() > 1) {
 				properties.forEach(it ->
 					error("Duplicate property " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME,
