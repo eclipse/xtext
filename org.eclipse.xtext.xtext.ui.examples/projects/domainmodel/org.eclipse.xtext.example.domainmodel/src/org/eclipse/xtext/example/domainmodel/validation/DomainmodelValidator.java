@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
-import java.util.function.Consumer;
-
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -70,16 +68,16 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 	@Check
 	public void checkPropertyNamesAreUnique(Entity entity) {
 		Multimap<String, Property> name2properties = HashMultimap.create();
-		IterableExtensions	
+		IterableExtensions
 				.filter(Iterables.filter(entity.getFeatures(), Property.class),
 						it -> !StringExtensions.isNullOrEmpty(it.getName()))
 				.forEach(it -> name2properties.put(it.getName(), it));
 		name2properties.asMap().values().forEach(properties -> {
 			if (properties.size() > 1) {
-				properties.forEach(it -> {
+				properties.forEach(it ->
 					error("Duplicate property " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME,
-							IssueCodes.DUPLICATE_PROPERTY);
-				});
+							IssueCodes.DUPLICATE_PROPERTY)
+				);
 			}
 		});
 	}
@@ -92,9 +90,9 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 			Iterable<Operation> operations = Iterables.filter(
 					IterableExtensions.map(jvmOperations, it -> jvmModelAssociations.getPrimarySourceElement(it)),
 					Operation.class);
-			operations.forEach((Consumer<Operation>) it -> {
-				error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
-			});
+			operations.forEach(it -> 
+				error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION)
+			);
 		});
 	}
 }
