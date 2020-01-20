@@ -3,6 +3,7 @@ ext.title = 'Eclipse Xbase Runtime Library'
 description = 'The runtime library for Xbase languages.'
 
 dependencies {
+	compile platform(project(':org.eclipse.xtext.dev-bom'))
 	compile 'com.google.guava:guava'
 }
 

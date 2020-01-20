@@ -1,5 +1,6 @@
 rootProject.name = 'xtext-lib'
 
+include 'org.eclipse.xtext.dev-bom'
 include 'org.eclipse.xtext.xbase.lib'
 include 'org.eclipse.xtext.xbase.lib.tests'
 include 'org.eclipse.xtext.xbase.lib.gwt'

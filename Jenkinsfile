@@ -81,21 +81,15 @@ spec:
       }
     }
 
-    stage('Build Xtext BOM') {
-      steps {
-        sh './1-install-bom.sh'
-      }
-    }
-
     stage('Gradle Build') {
       steps {
-        sh './2-gradle-build.sh'
+        sh './1-gradle-build.sh'
       }
     }
     
     stage('Maven Build') {
       steps {
-        sh './3-maven-build.sh'
+        sh './2-maven-build.sh'
       }
     }
   }
