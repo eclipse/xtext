@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      label 'xtext-lib-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
+      label 'xtext-lib-' + (env.BRANCH_NAME.replace('/','_')) + '-' + env.BUILD_NUMBER
       defaultContainer 'xtext-buildenv'
       yaml '''
 apiVersion: v1
