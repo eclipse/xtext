@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2016, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.example.domainmodel.validation;
 
-import java.util.function.Consumer;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
@@ -24,9 +26,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -69,17 +69,16 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 
 	@Check
 	public void checkPropertyNamesAreUnique(Entity entity) {
-		Multimap<String, Property> name2properties = HashMultimap.create();
-		IterableExtensions	
-				.filter(Iterables.filter(entity.getFeatures(), Property.class),
-						(it) -> !StringExtensions.isNullOrEmpty(it.getName()))
-				.forEach((it) -> name2properties.put(it.getName(), it));
-		name2properties.asMap().values().forEach((properties) -> {
+		Map<String, List<Feature>> name2properties = entity.getFeatures().stream()
+			.filter(Property.class::isInstance)
+			.filter(it -> !StringExtensions.isNullOrEmpty(it.getName()))
+			.collect(Collectors.groupingBy(Feature::getName));
+		name2properties.values().forEach(properties -> {
 			if (properties.size() > 1) {
-				properties.forEach((it) -> {
+				properties.forEach(it ->
 					error("Duplicate property " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME,
-							IssueCodes.DUPLICATE_PROPERTY);
-				});
+							IssueCodes.DUPLICATE_PROPERTY)
+				);
 			}
 		});
 	}
@@ -88,13 +87,14 @@ public class DomainmodelValidator extends AbstractDomainmodelValidator {
 	public void checkOperationNamesAreUnique(Entity entity) {
 		JvmGenericType inferredJavaClass = IterableExtensions
 				.head(Iterables.filter(jvmModelAssociations.getJvmElements(entity), JvmGenericType.class));
-		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, (jvmOperations) -> {
-			Iterable<Operation> operations = Iterables.filter(
-					IterableExtensions.map(jvmOperations, (it) -> jvmModelAssociations.getPrimarySourceElement(it)),
-					Operation.class);
-			operations.forEach((Consumer<Operation>) (it) -> {
-				error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION);
-			});
-		});
+		domainmodelJvmModelHelper.handleDuplicateJvmOperations(inferredJavaClass, jvmOperations ->
+			jvmOperations.stream()
+				.map(it -> jvmModelAssociations.getPrimarySourceElement(it))
+				.filter(Operation.class::isInstance)
+				.map(Operation.class::cast)
+				.forEach(it -> 
+					error("Duplicate operation " + it.getName(), it, DomainmodelPackage.Literals.FEATURE__NAME, IssueCodes.DUPLICATE_OPERATION)
+				)
+		);
 	}
 }
