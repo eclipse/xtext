@@ -37,7 +37,7 @@ import com.google.inject.Injector;
  * @author Dennis Huebner - Initial contribution and API
  */
 @Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.COMPILE, threadSafe = true)
-public class XtextGenerator extends AbstractMojo {
+public class AbstractXtextGeneratorMojo extends AbstractMojo {
 
 	/**
 	 * Lock object to ensure thread-safety
