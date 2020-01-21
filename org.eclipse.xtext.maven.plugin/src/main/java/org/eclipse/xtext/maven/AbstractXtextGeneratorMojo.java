@@ -3,9 +3,6 @@
  */
 package org.eclipse.xtext.maven;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Sets.newLinkedHashSet;
-
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +11,7 @@ import java.util.Set;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -36,8 +30,7 @@ import com.google.inject.Injector;
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.GENERATE_SOURCES, requiresDependencyResolution = ResolutionScope.COMPILE, threadSafe = true)
-public class AbstractXtextGeneratorMojo extends AbstractMojo {
+public abstract class AbstractXtextGeneratorMojo extends AbstractMojo {
 
 	/**
 	 * Lock object to ensure thread-safety
@@ -61,12 +54,6 @@ public class AbstractXtextGeneratorMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "${project}", readonly = true, required = true)
 	protected MavenProject project;
-
-	/**
-	 * Project classpath.
-	 */
-	@Parameter(defaultValue = "${project.compileClasspathElements}", readonly = true, required = true)
-	private List<String> classpathElements;
 
 	/**
 	 * Project source roots. List of folders, where the source models are located.<br>
@@ -213,7 +200,7 @@ public class AbstractXtextGeneratorMojo extends AbstractMojo {
 		return tmpDir;
 	}
 
-	private Predicate<String> emptyStringFilter() {
+	protected Predicate<String> emptyStringFilter() {
 		return new Predicate<String>() {
 			public boolean apply(String input) {
 				return !Strings.isEmpty(input.trim());
@@ -221,14 +208,7 @@ public class AbstractXtextGeneratorMojo extends AbstractMojo {
 		};
 	}
 
-	public Set<String> getClasspathElements() {
-		Set<String> classpathElements = newLinkedHashSet();
-		classpathElements.addAll(this.classpathElements);
-		classpathElements.remove(project.getBuild().getOutputDirectory());
-		classpathElements.remove(project.getBuild().getTestOutputDirectory());
-		Set<String> nonEmptyElements = newLinkedHashSet(filter(classpathElements, emptyStringFilter()));
-		return nonEmptyElements;
-	}
+	public abstract Set<String> getClasspathElements();
 
 	public List<Language> getLanguages() {
 		return languages;
