@@ -14,6 +14,8 @@ dependencies {
 	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
 	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen'
 	mwe2Compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+	// this is needed cause buildship wont work otherwise
+	mwe2Compile platform("org.eclipse.xtext:xtext-dev-bom:$project.version")
 }
 
 sourceSets.main.java.srcDir 'deprecated'
