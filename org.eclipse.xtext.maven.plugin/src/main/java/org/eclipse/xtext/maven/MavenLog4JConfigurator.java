@@ -48,14 +48,30 @@ public class MavenLog4JConfigurator {
 				if (event.getMessage() == null) {
 					return;
 				}
-				if (Level.DEBUG == event.getLevel()) {
-					log.debug((CharSequence) event.getMessage(), getThrowable(event));
-				} else if (Level.INFO == event.getLevel()) {
-					log.info((CharSequence) event.getMessage(), getThrowable(event));
-				} else if (Level.WARN == event.getLevel()) {
-					log.warn((CharSequence) event.getMessage(), getThrowable(event));
-				} else if (Level.ERROR == event.getLevel()) {
-					log.error((CharSequence) event.getMessage(), getThrowable(event));
+				Throwable throwable = getThrowable(event);
+				if (throwable != null) {
+					// Loggers like org.apache.maven.plugin.logging.SystemStreamLog
+					// (used by Maven Testing Harness)
+					// throw a NullPointerException if throwable is null
+					if (Level.DEBUG == event.getLevel()) {
+						log.debug((CharSequence) event.getMessage(), throwable);
+					} else if (Level.INFO == event.getLevel()) {
+						log.info((CharSequence) event.getMessage(), throwable);
+					} else if (Level.WARN == event.getLevel()) {
+						log.warn((CharSequence) event.getMessage(), throwable);
+					} else if (Level.ERROR == event.getLevel()) {
+						log.error((CharSequence) event.getMessage(), throwable);
+					}
+				} else {
+					if (Level.DEBUG == event.getLevel()) {
+						log.debug((CharSequence) event.getMessage());
+					} else if (Level.INFO == event.getLevel()) {
+						log.info((CharSequence) event.getMessage());
+					} else if (Level.WARN == event.getLevel()) {
+						log.warn((CharSequence) event.getMessage());
+					} else if (Level.ERROR == event.getLevel()) {
+						log.error((CharSequence) event.getMessage());
+					}
 				}
 			}
 

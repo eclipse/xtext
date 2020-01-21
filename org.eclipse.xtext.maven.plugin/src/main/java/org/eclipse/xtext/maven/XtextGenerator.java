@@ -30,7 +30,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -74,7 +73,7 @@ public class XtextGenerator extends AbstractMojo {
 	 * The default value is a reference to the project's ${project.compileSourceRoots}.<br>
 	 * When adding a new entry the default value will be overwritten not extended.
 	 */
-	@Parameter
+	@Parameter(defaultValue = "${project.compileSourceRoots}", required = true)
 	private List<String> sourceRoots;
 
 	/**
@@ -83,7 +82,7 @@ public class XtextGenerator extends AbstractMojo {
 	 * When adding a new entry the default value will be overwritten not extended.<br>
 	 * Used when your language needs java.
 	 */
-	@Parameter
+	@Parameter(defaultValue = "${project.compileSourceRoots}", required = true)
 	private List<String> javaSourceRoots;
 
 	@Parameter(required = true)
@@ -155,7 +154,6 @@ public class XtextGenerator extends AbstractMojo {
 		} else {
 			synchronized (lock) {
 				new MavenLog4JConfigurator().configureLog4j(getLog());
-				configureDefaults();
 				autoAddToPlatformResourceMap(project);
 				manuallyAddToPlatformResourceMap();
 				internalExecute();
@@ -246,15 +244,6 @@ public class XtextGenerator extends AbstractMojo {
 
 	public void setProjectMappings(List<ProjectMapping> projectMappings) {
 		this.projectMappings = projectMappings;
-	}
-
-	private void configureDefaults() {
-		if (sourceRoots == null) {
-			sourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
-		}
-		if (javaSourceRoots == null) {
-			javaSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
-		}
 	}
 
 	/**
