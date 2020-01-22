@@ -123,7 +123,7 @@ spec:
         // see https://wiki.eclipse.org/Jenkins#How_can_artifacts_be_deployed_to_OSSRH_.2F_Maven_Central.3F
         dir('publishing') {
         sh ''' 
-          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')")
           echo "Xtext version on branch $BRANCH_TO_DEPLOY is $XTEXT_VERSION"
           gpg --batch --import "${KEYRING}"
           for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u);
@@ -158,7 +158,7 @@ spec:
           #
           # STEP 1: Get property values from publisher.properties/promote.properties
           #
-          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -Po "version = \\'\\K([^\\']*)(?=\\')")
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           BUILD_TYPE=$($SCRIPTS/get_build_type.sh $BUILD_ID)
@@ -185,7 +185,7 @@ spec:
         container ('jnlp') {
         dir('publishing') {
           sh '''
-          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/releng/org.eclipse.xtext.dev-bom/pom.xml | grep -m1 "<version>" | cut -d '>' -f 2 | cut -d '<' -f 1)
+          XTEXT_VERSION=$(curl -s https://raw.githubusercontent.com/eclipse/xtext-lib/$BRANCH_TO_DEPLOY/gradle/versions.gradle | grep -o "version = \\'[^\\']*" | cut -d "'" -f2)
           VERSION=$($SCRIPTS/get_property.sh build-result/publisher.properties version)
           BUILD_ID=$($SCRIPTS/get_property.sh build-result/promote.properties build.id)
           if [ -z "$BUILD_ID" ]
