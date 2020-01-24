@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel.impl;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import org.eclipse.xtext.nodemodel.BidiIterator;
 
@@ -23,6 +24,7 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 	private AbstractNode lastReturned;
 
 	protected BasicNodeIterator(AbstractNode startWith) {
+		Objects.requireNonNull(startWith);
 		this.startWith = startWith;
 	}
 
