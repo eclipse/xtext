@@ -76,7 +76,7 @@ final class GenerateXbase {
 					setEncoding("ISO-8859-1");
 					setLineDelimiter(lineDelimiter);
 					setFileHeader(fileHeader);
-					setPreferXtendStubs(true);
+					setPreferXtendStubs(false);
 				}});
 			}});
 
