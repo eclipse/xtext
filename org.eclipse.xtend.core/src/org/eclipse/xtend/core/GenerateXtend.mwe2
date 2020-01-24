@@ -60,7 +60,7 @@ Workflow {
 				encoding = "ISO-8859-1"
 				lineDelimiter = lineDelimiter
 				fileHeader = fileHeader
-				preferXtendStubs = true
+				preferXtendStubs = false
 			}
 		}
 		language = {
@@ -73,7 +73,6 @@ Workflow {
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = serializer.SerializerFragment2 {
-				generateXtendStub = false
 				// generateDebugData = true
 			}
 			fragment = resourceFactory.ResourceFactoryFragment2 {}
@@ -85,36 +84,27 @@ Workflow {
 				options = auto-inject {}
 			}
 			fragment = validation.ValidatorFragment2 {
-				generateXtendStub = false
 				generatePropertyPage = false
 				generateDeprecationValidation = false
 			}
 			fragment = formatting.Formatter2Fragment2 {}
 			fragment = generator.GeneratorFragment2 {}
-			fragment = scoping.ImportNamespacesScopingFragment2 {
-				generateXtendStub = false
-			}
+			fragment = scoping.ImportNamespacesScopingFragment2 {}
 			fragment = builder.BuilderIntegrationFragment2 {}
 
-			fragment = ui.quickfix.QuickfixProviderFragment2 {
-				generateXtendStub = false
-			}
+			fragment = ui.quickfix.QuickfixProviderFragment2 {}
 
 			fragment = ui.labeling.LabelProviderFragment2 {
 				generateStub = false
 			}
 
-			fragment = ui.outline.OutlineTreeProviderFragment2 {
-				generateXtendStub = false
-			}
+			fragment = ui.outline.OutlineTreeProviderFragment2 {}
 
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
 			fragment = ui.compare.CompareFragment2 {}
 
-			fragment = ui.contentAssist.ContentAssistFragment2 {
-				generateXtendStub = false
-			}
+			fragment = ui.contentAssist.ContentAssistFragment2 {}
 
 			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
 				useJdtRefactoring = true
