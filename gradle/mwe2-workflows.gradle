@@ -9,6 +9,7 @@ sourceSets {
 eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
 
 dependencies {
+	mwe2Runtime platform("org.eclipse.xtext:xtext-dev-bom:$versions.xtext")
 	mwe2Runtime 'org.eclipse.xtext:org.eclipse.xtext.xtext.generator'
 	mwe2Runtime 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
 	mwe2Runtime "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
