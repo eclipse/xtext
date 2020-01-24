@@ -193,9 +193,8 @@ public abstract class AbstractNodeTest extends Assert {
 	
 	public abstract void testGetText_Default();
 	
-	@Test public void testGetText_NoParent() {
-		AbstractNode node = createNode();
-		assertNull(node.getText());
+	@Test(expected = IllegalStateException.class) public void testGetText_NoParent() {
+		createNode().getText();
 	}
 	
 	public abstract void testGetText_Empty();

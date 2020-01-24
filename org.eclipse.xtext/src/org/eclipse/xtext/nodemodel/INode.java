@@ -156,6 +156,7 @@ public interface INode {
 	/**
 	 * Returns the parsed text that is covered by this node (including hidden tokens). The result is never <code>null</code>
 	 * but may be empty.
+	 * @throws IllegalStateException if the text is not available. A possible reason is, that the node is not part of a valid node model.
 	 * @return the parsed text that is covered by this node (including hidden tokens). Never <code>null</code>.
 	 */
 	String getText();

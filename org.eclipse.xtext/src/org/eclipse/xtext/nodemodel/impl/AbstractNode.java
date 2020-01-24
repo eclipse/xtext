@@ -151,12 +151,12 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	@Override
 	public String getText() {
 		INode rootNode = getRootNode();
-		if (rootNode != null) {
-			int offset = getTotalOffset();
-			int length = getTotalLength();
-			return rootNode.getText().substring(offset, offset + length);
+		if (rootNode == null) {
+			throw new IllegalStateException("Can't compute text, rootNode is 'null'.");
 		}
-		return null;
+		int offset = getTotalOffset();
+		int length = getTotalLength();
+		return rootNode.getText().substring(offset, offset + length);
 	}
 	
 	@Override
