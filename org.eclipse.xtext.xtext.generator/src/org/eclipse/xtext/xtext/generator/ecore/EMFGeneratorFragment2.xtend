@@ -375,7 +375,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			projectConfig.runtime.pluginXml.entries += '''
 				<extension point="org.eclipse.emf.ecore.generated_package">
 					«FOR pack : generatedPackages»
-						<package 
+						<package
 							uri = "«pack.nsURI»"
 							class = "«pack.getGenPackage(rs).qualifiedPackageInterfaceName»"
 							genModel = "«grammar.genModelPath.relativePath»" />

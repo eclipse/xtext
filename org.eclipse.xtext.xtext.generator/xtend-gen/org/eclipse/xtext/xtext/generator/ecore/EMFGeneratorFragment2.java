@@ -525,7 +525,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       {
         for(final EPackage pack : generatedPackages) {
           _builder.append("\t");
-          _builder.append("<package ");
+          _builder.append("<package");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
