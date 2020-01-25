@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2020 Robert Lewis and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -33,13 +33,13 @@ public class BasicNodeIteratorTest {
 		root.basicSetCompleteContent(text);
 		
 		EObject alpha = new EObjectImpl() {};
-		ILeafNode alphaNode = builder.newLeafNode(text.indexOf("alpha"), "alpha".length(), alpha, false, null, root);
+		builder.newLeafNode(text.indexOf("alpha"), "alpha".length(), alpha, false, null, root);
 		
 		EObject beta = new EObjectImpl() {};
-		ILeafNode betaNode = builder.newLeafNode(text.indexOf("beta"), "beta".length(), beta, false, null, root);
+		builder.newLeafNode(text.indexOf("beta"), "beta".length(), beta, false, null, root);
 		
 		EObject gamma = new EObjectImpl() {};
-		ILeafNode gammaNode = builder.newLeafNode(text.indexOf("gamma"), "gamma".length(), gamma, false, null, root);
+		builder.newLeafNode(text.indexOf("gamma"), "gamma".length(), gamma, false, null, root);
 		
 		return root.basicGetFirstChild();
 
@@ -47,7 +47,7 @@ public class BasicNodeIteratorTest {
 		
 	@Test(expected=NullPointerException.class)
 	public void testStartWithNullThrowsNPE() {
-		BasicNodeIterator it = new BasicNodeIterator(null);
+		new BasicNodeIterator(null);
 	}
 	
 	@Test
