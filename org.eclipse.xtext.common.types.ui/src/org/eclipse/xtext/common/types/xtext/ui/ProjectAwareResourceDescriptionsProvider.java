@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,25 +15,22 @@ import org.eclipse.xtext.common.types.xtext.AbstractProjectAwareResourceDescript
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 /**
- * This specialization of the {@link ResourceDescriptionsProvider} filters
- * locally defined elements from the resource descriptions that are made available
- * during the indexing phase.
+ * This specialization of the {@link ResourceDescriptionsProvider} filters locally defined elements from the resource descriptions that are
+ * made available during the indexing phase.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.8
  */
-@SuppressWarnings("all")
 public class ProjectAwareResourceDescriptionsProvider extends AbstractProjectAwareResourceDescriptionsProvider {
-  @Inject
-  private IJavaProjectProvider projectProvider;
-  
-  @Override
-  protected String getProjectName(final ResourceSet resourceSet) {
-    final IJavaProject javaProject = this.projectProvider.getJavaProject(resourceSet);
-    String _elementName = null;
-    if (javaProject!=null) {
-      _elementName=javaProject.getElementName();
-    }
-    return _elementName;
-  }
+	@Inject
+	private IJavaProjectProvider projectProvider;
+
+	@Override
+	protected String getProjectName(ResourceSet resourceSet) {
+		final IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
+		if (javaProject != null) {
+			return javaProject.getElementName();
+		}
+		return null;
+	}
 }

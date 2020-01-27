@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,29 +18,28 @@ import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
  * Instances of this delta type could be rejected during confirmation of structural changes.
  * </p>
  */
-@SuppressWarnings("all")
 public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptionDelta {
-  private int buildNumber = (-1);
-  
-  private final IType type;
-  
-  public UnconfirmedStructuralChangesDelta(final IType type, final IResourceDescription old, final IResourceDescription _new) {
-    super(old, _new);
-    Preconditions.<IType>checkNotNull(type);
-    Preconditions.<IResourceDescription>checkNotNull(old);
-    Preconditions.<IResourceDescription>checkNotNull(_new);
-    this.type = type;
-  }
-  
-  public int getBuildNumber() {
-    return this.buildNumber;
-  }
-  
-  public int setBuildNumber(final int buildNumber) {
-    return this.buildNumber = buildNumber;
-  }
-  
-  public IProject getProject() {
-    return this.type.getJavaProject().getProject();
-  }
+	private int buildNumber = -1;
+
+	private final IType type;
+
+	public UnconfirmedStructuralChangesDelta(IType type, IResourceDescription oldDesc, IResourceDescription newDesc) {
+		super(oldDesc, newDesc);
+		Preconditions.<IType> checkNotNull(type);
+		Preconditions.<IResourceDescription> checkNotNull(oldDesc);
+		Preconditions.<IResourceDescription> checkNotNull(newDesc);
+		this.type = type;
+	}
+
+	public int getBuildNumber() {
+		return this.buildNumber;
+	}
+
+	public int setBuildNumber(int buildNumber) {
+		return this.buildNumber = buildNumber;
+	}
+
+	public IProject getProject() {
+		return this.type.getJavaProject().getProject();
+	}
 }
