@@ -8,5 +8,5 @@ ext.versions = [
 	'xtext': version,
 	'xtext_bootstrap': '2.21.0.M1',
 	'xtext_gradle_plugin': '2.0.8',
-	'bnd': '4.2.0'
+	'bnd': '5.0.0'
 ]
