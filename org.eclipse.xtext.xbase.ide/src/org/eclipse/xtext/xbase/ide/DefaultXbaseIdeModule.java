@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -24,35 +24,35 @@ import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 
 /**
- * Default Guice bindings for the generic IDE contributions of the Xbase languages.
+ * Default Guice bindings for the generic IDE contributions of the Xbase
+ * languages.
  */
-@SuppressWarnings("all")
 public class DefaultXbaseIdeModule extends DefaultIdeModule {
-  public void configureClasspathScanner(final Binder binder) {
-    binder.<ClasspathScanner>bind(ClasspathScanner.class);
-  }
-  
-  public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
-    return OptimizingFeatureScopeTrackerProvider.class;
-  }
-  
-  public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
-    return XbaseIdeContentProposalProvider.class;
-  }
-  
-  public Class<? extends IdeCrossrefProposalProvider> bindIdeCrossrefProposalProvider() {
-    return XbaseIdeCrossrefProposalProvider.class;
-  }
-  
-  public Class<? extends IIdeTypesProposalProvider> bindIIdeTypesProposalProvider() {
-    return ClasspathBasedIdeTypesProposalProvider.class;
-  }
-  
-  public Class<? extends IdeContentProposalPriorities> bindIdeContentProposalPriorities() {
-    return XbaseIdeContentProposalPriorities.class;
-  }
-  
-  public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
-    return XbaseHighlightingCalculator.class;
-  }
+	public void configureClasspathScanner(Binder binder) {
+		binder.bind(ClasspathScanner.class);
+	}
+
+	public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTrackerProvider() {
+		return OptimizingFeatureScopeTrackerProvider.class;
+	}
+
+	public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return XbaseIdeContentProposalProvider.class;
+	}
+
+	public Class<? extends IdeCrossrefProposalProvider> bindIdeCrossrefProposalProvider() {
+		return XbaseIdeCrossrefProposalProvider.class;
+	}
+
+	public Class<? extends IIdeTypesProposalProvider> bindIIdeTypesProposalProvider() {
+		return ClasspathBasedIdeTypesProposalProvider.class;
+	}
+
+	public Class<? extends IdeContentProposalPriorities> bindIdeContentProposalPriorities() {
+		return XbaseIdeContentProposalPriorities.class;
+	}
+
+	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+		return XbaseHighlightingCalculator.class;
+	}
 }
