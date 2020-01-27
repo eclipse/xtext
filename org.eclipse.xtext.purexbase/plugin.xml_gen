@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
-		<package 
+		<package
 			uri = "http://www.eclipse.org/xtext/purexbase/PureXbase"
 			class = "org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage"
 			genModel = "model/generated/PureXbase.genmodel" />
