@@ -39,6 +39,7 @@ Workflow {
 				createEclipseMetaData = false
 			}
 			code = {
+				preferXtendStubs = false
 				encoding = "UTF-8"
 				fileHeader = 
 "/*
@@ -59,10 +60,14 @@ Workflow {
 				generateStub = false
 			}
 			validator = {
+				generateXtendStub = true
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 			junitSupport = {
 				generateStub = false
+			}
+			generator = {
+				generateXtendStub = true
 			}
 		}
 		language = StandardLanguage {
@@ -77,6 +82,9 @@ Workflow {
 			}
 			junitSupport = {
 				generateStub = false
+			}
+			generator = {
+				generateXtendStub = true
 			}
 		}
 		language = StandardLanguage {
@@ -93,6 +101,9 @@ Workflow {
 			}
 			parserGenerator = {
 				partialParsing = true
+			}
+			generator = {
+				generateXtendStub = true
 			}
 		}
 		language = StandardLanguage {
@@ -116,6 +127,9 @@ Workflow {
 				generateStub = true
 				generateXtendStub = true
 			}
+			generator = {
+				generateXtendStub = true
+			}
 		}
 		language = StandardLanguage {
 			name = "org.eclipse.xtext.ide.tests.testlanguage.RenameTestLanguage"
@@ -129,7 +143,9 @@ Workflow {
 			junitSupport = {
 				generateStub = false
 			}
-			
+			generator = {
+				generateXtendStub = true
+			}
 		}
 	}
 	
