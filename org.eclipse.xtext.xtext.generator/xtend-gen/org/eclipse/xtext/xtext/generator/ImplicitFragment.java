@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -207,10 +207,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append(_name_2, "\t\t");
     _builder.append(".validate\">");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("\t\t");
     _builder.append("<activeWhen>");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t\t\t");
     _builder.append("<reference");
     _builder.newLine();
     _builder.append("\t\t\t\t");
@@ -219,10 +219,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append(_name_3, "\t\t\t\t");
     _builder.append(".Editor.opened\">");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
+    _builder.append("\t\t\t");
     _builder.append("</reference>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t");
     _builder.append("</activeWhen>");
     _builder.newLine();
     _builder.append("\t");
@@ -572,6 +572,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\t");
     _builder.append("point=\"org.eclipse.ui.commands\">");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("<command");
     _builder.newLine();
     _builder.append("\t\t");
@@ -586,10 +587,13 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\t\t");
     _builder.append("name=\"Validate\">");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</command>");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("<!-- copy qualified name -->");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("<command");
     _builder.newLine();
     _builder.append("\t\t");
@@ -604,8 +608,10 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\t\t");
     _builder.append("name=\"Copy Qualified Name\">");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</command>");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("<command");
     _builder.newLine();
     _builder.append("\t\t");
@@ -620,6 +626,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\t\t");
     _builder.append("name=\"Copy Qualified Name\">");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("</command>");
     _builder.newLine();
     _builder.append("</extension>");
@@ -632,40 +639,40 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("\t\t");
     _builder.append("locationURI=\"popup:#TextEditorContext?after=group.edit\">");
     _builder.newLine();
-    _builder.append("\t\t ");
+    _builder.append("\t\t");
     _builder.append("<command");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t");
     _builder.append("commandId=\"");
     String _name_17 = it.getName();
-    _builder.append(_name_17, "\t\t\t ");
+    _builder.append(_name_17, "\t\t\t");
     _builder.append(".validate\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t");
     _builder.append("style=\"push\"");
     _builder.newLine();
-    _builder.append("\t\t\t ");
+    _builder.append("\t\t\t");
     _builder.append("tooltip=\"Trigger expensive validation\">");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t\t\t");
     _builder.append("<visibleWhen checkEnabled=\"false\">");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("<reference");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("definitionId=\"");
     String _name_18 = it.getName();
-    _builder.append(_name_18, "\t\t\t\t");
+    _builder.append(_name_18, "\t\t\t\t\t");
     _builder.append(".Editor.opened\">");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("</reference>");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t\t\t");
     _builder.append("</visibleWhen>");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t");
     _builder.append("</command>");
     _builder.newLine();
     _builder.append("\t");

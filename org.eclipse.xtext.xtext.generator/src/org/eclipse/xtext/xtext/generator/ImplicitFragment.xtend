@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -97,11 +97,11 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			<handler
 				class="«eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
 				commandId="«name».validate">
-			<activeWhen>
-				<reference
+				<activeWhen>
+					<reference
 						definitionId="«name».Editor.opened">
-				</reference>
-			</activeWhen>
+					</reference>
+				</activeWhen>
 			</handler>
 			<!-- copy qualified name -->
 			<handler
@@ -190,38 +190,38 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 		</extension>
 		<extension
 			point="org.eclipse.ui.commands">
-		<command
+			<command
 				description="Trigger expensive validation"
 				id="«name».validate"
 				name="Validate">
-		</command>
-		<!-- copy qualified name -->
-		<command
+			</command>
+			<!-- copy qualified name -->
+			<command
 				id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				categoryId="org.eclipse.ui.category.edit"
 				description="Copy the qualified name for the selected element"
 				name="Copy Qualified Name">
-		</command>
-		<command
+			</command>
+			<command
 				id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
 				categoryId="org.eclipse.ui.category.edit"
 				description="Copy the qualified name for the selected element"
 				name="Copy Qualified Name">
-		</command>
+			</command>
 		</extension>
 		<extension point="org.eclipse.ui.menus">
 			<menuContribution
 				locationURI="popup:#TextEditorContext?after=group.edit">
-				 <command
-					 commandId="«name».validate"
-					 style="push"
-					 tooltip="Trigger expensive validation">
-				<visibleWhen checkEnabled="false">
-					<reference
-						definitionId="«name».Editor.opened">
-					</reference>
-				</visibleWhen>
-			</command>
+				<command
+					commandId="«name».validate"
+					style="push"
+					tooltip="Trigger expensive validation">
+					<visibleWhen checkEnabled="false">
+						<reference
+							definitionId="«name».Editor.opened">
+						</reference>
+					</visibleWhen>
+				</command>
 			</menuContribution>
 			<!-- copy qualified name -->
 			<menuContribution locationURI="popup:#TextEditorContext?after=copy">
