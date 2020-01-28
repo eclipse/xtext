@@ -77,11 +77,6 @@
 								<versionRange>1.0.0</versionRange>
 							</requirement>
 							<requirement>
-								<type>eclipse-plugin</type>
-								<id>org.eclipse.equinox.event</id>
-								<versionRange>1.0.0</versionRange>
-							</requirement>
-							<requirement>
 								<type>eclipse-feature</type>
 								<id>org.eclipse.platform</id>
 								<versionRange>3.6</versionRange>
