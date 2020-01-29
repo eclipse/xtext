@@ -142,8 +142,8 @@
 		<unit id="com.google.gson.source" version="2.8.2.v20180104-1110"/>
 		<unit id="org.antlr.runtime" version="3.2.0.v201101311130"/>
 		<unit id="org.antlr.runtime.source" version="3.2.0.v201101311130"/>
-		<unit id="org.junit" version="0.0.0"/>
-		<unit id="org.junit.source" version="0.0.0"/>
+		<unit id="org.junit" version="4.12.0.v201504281640"/>
+		<unit id="org.junit.source" version="4.12.0.v201504281640"/>
 		<unit id="org.junit.jupiter.api" version="0.0.0"/>
 		<unit id="org.junit.jupiter.api.source" version="0.0.0"/>
 		<unit id="org.junit.jupiter.engine" version="0.0.0"/>
