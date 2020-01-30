@@ -85,6 +85,7 @@ import org.junit.jupiter.api.BeforeEach
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
 import org.eclipse.lsp4j.SignatureHelpParams
+import org.eclipse.lsp4j.MarkupContent
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -404,6 +405,11 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			assertEquals(expectedCodeLensItems, result.toExpectation)
 		}
 	}
+	
+	protected dispatch def String toExpectation(MarkupContent it) '''
+		kind: «kind»
+		value: «value»
+	'''
 
 	protected dispatch def String toExpectation(Command it) '''
 		command : «command»
