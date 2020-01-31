@@ -77,6 +77,15 @@ public class XtextGeneratorIT {
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
 		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase2.class");
 	}
+	
+	@Test
+	public void outputPerGoal() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/output-per-goal");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/SimpleClassXbase.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleClassXbase.class");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-test-gen/SimpleTestClassXbase.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/SimpleTestClassXbase.class");
+	}	
 
 	@Test
 	public void outputPerSource() throws Exception {
@@ -140,7 +149,7 @@ public class XtextGeneratorIT {
 			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
 		}
 		Verifier verifier = newVerifier(pathToTestProject);
-		
+
 		if(updateSnapshots) {
 			verifier.addCliOption("-U");
 		}
