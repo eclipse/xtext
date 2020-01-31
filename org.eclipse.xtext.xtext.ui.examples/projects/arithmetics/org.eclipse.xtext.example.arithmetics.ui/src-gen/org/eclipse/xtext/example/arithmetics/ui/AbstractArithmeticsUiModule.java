@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2019 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2015, 2020 itemis AG (http://www.itemis.eu) and others.
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
@@ -14,6 +14,7 @@ import com.google.inject.name.Names;
 import org.eclipse.compare.IViewerCreator;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.jface.text.codemining.ICodeMiningProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.BuilderParticipant;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.ArithmeticsParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.PartialArithmeticsContentAssistParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer;
+import org.eclipse.xtext.example.arithmetics.ui.codemining.ArithmeticsCodeMiningProvider;
 import org.eclipse.xtext.example.arithmetics.ui.contentassist.ArithmeticsProposalProvider;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsDescriptionLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsLabelProvider;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.xtext.ui.UIBindings;
+import org.eclipse.xtext.ui.codemining.XtextCodeMiningReconcileStrategy;
 import org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory;
@@ -67,6 +70,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
+import org.eclipse.xtext.ui.editor.reconciler.IReconcileStrategyFactory;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
@@ -286,6 +290,19 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.ui.compare.CompareFragment2
 	public void configureCompareViewerTitle(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(UIBindings.COMPARE_VIEWER_TITLE)).toInstance("Arithmetics Compare");
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ui.codemining.CodeMiningFragment
+	public void configureCodeMinding(Binder binder) {
+		try {
+			Class.forName("org.eclipse.jface.text.codemining.ICodeMiningProvider");
+			binder.bind(ICodeMiningProvider.class)
+				.to(ArithmeticsCodeMiningProvider.class);
+			binder.bind(IReconcileStrategyFactory.class).annotatedWith(Names.named("codeMinding"))
+				.to(XtextCodeMiningReconcileStrategy.Factory.class);
+		} catch(ClassNotFoundException ignore) {
+			// no bindings if code mining is not available at runtime
+		}
 	}
 	
 }
