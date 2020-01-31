@@ -23,6 +23,7 @@
         <versionRange>[2.4.0,)</versionRange>
         <goals>
           <goal>generate</goal>
+          <goal>testGenerate</goal>
         </goals>
       </pluginExecutionFilter>
       <action>
