@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.ParameterInformation;
 import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.SignatureInformation;
-import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.server.Document;
@@ -100,13 +100,8 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
   private TestLanguagePackage _testLanguagePackage = TestLanguagePackage.eINSTANCE;
   
   @Override
-  public SignatureHelp getSignatureHelp(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
+  public SignatureHelp getSignatureHelp(final Document document, final XtextResource resource, final SignatureHelpParams params, final CancelIndicator cancelIndicator) {
     final int offset = document.getOffSet(params.getPosition());
-    return this.getSignatureHelp(resource, offset);
-  }
-  
-  @Override
-  public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
     Preconditions.<XtextResource>checkNotNull(resource, "resource");
     Preconditions.checkArgument((offset >= 0), ("offset >= 0. Was: " + Integer.valueOf(offset)));
     final EObject object = this.offsetHelper.resolveContainedElementAt(resource, offset);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2019 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -84,6 +84,7 @@ import org.junit.jupiter.api.BeforeEach
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
+import org.eclipse.lsp4j.SignatureHelpParams
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -549,7 +550,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 		val fileUri = initializeContext(configuration).uri
 
-		val signatureHelpFuture = languageServer.signatureHelp(new TextDocumentPositionParams => [
+		val signatureHelpFuture = languageServer.signatureHelp(new SignatureHelpParams => [
 			textDocument = new TextDocumentIdentifier(fileUri)
 			position = new Position(line, column)
 		]);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.server.signatureHelp;
 import static java.util.Collections.*;
 
 import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelpParams;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
@@ -32,7 +33,18 @@ public interface ISignatureHelpService {
 	 */
 	SignatureHelp EMPTY = new SignatureHelp(emptyList(), null, null);
 	
-	SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator);
+	/**
+	 * @deprecated please override/call {@link #getSignatureHelp(Document, XtextResource, SignatureHelpParams, CancelIndicator)} instead.
+	 */
+	@Deprecated
+	default SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+		if (params instanceof SignatureHelpParams) {
+			return getSignatureHelp(document, resource, (SignatureHelpParams) params, cancelIndicator);
+		}
+		throw new IllegalArgumentException("params is not a SignatureHelpParams");
+	}
+	
+	SignatureHelp getSignatureHelp(Document document, XtextResource resource, SignatureHelpParams params, CancelIndicator cancelIndicator);
 	
 	/**
 	 * Returns with a {@link SignatureHelp signature help} instance for a
@@ -47,7 +59,9 @@ public interface ISignatureHelpService {
 	 * @return a signature help instance.
 	 */
 	@Deprecated
-	SignatureHelp getSignatureHelp(final XtextResource resource, final int offset);
+	default SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
+		return EMPTY;
+	}
 
 	/**
 	 * NOOP {@link ISignatureHelpService signature help service} implementation.
@@ -56,14 +70,9 @@ public interface ISignatureHelpService {
 	 */
 	@Singleton
 	public static class Noop implements ISignatureHelpService {
-		
-		@Override
-		public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
-			return EMPTY;
-		}
 
 		@Override
-		public SignatureHelp getSignatureHelp(Document document, XtextResource resource, TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
+		public SignatureHelp getSignatureHelp(Document document, XtextResource resource, SignatureHelpParams params, CancelIndicator cancelIndicator) {
 			return EMPTY;
 		}
 
