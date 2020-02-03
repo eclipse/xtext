@@ -1,5 +1,7 @@
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.Objects;
+
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.util.ReversedBidiIterator;
@@ -12,6 +14,7 @@ public class BasicNodeIterable implements BidiIterable<AbstractNode> {
 	private final AbstractNode startWith;
 
 	protected BasicNodeIterable(AbstractNode startWith) {
+		Objects.requireNonNull(startWith);
 		this.startWith = startWith;
 	}
 

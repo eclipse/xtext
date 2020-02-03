@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel.util;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.INode;
@@ -23,6 +24,7 @@ public class NodeIterator extends UnmodifiableIterator<INode> implements BidiIte
 	private INode lastReturned;
 
 	public NodeIterator(INode startWith) {
+		Objects.requireNonNull(startWith);
 		this.startWith = startWith;
 	}
 
