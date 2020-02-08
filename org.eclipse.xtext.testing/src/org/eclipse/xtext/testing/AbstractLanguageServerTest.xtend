@@ -11,6 +11,7 @@ package org.eclipse.xtext.testing
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Module
+import com.google.inject.Singleton
 import java.io.File
 import java.io.FileWriter
 import java.nio.file.Path
@@ -63,6 +64,7 @@ import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.eclipse.lsp4j.WorkspaceEdit
+import org.eclipse.lsp4j.WorkspaceFolder
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.messages.Either
@@ -78,6 +80,7 @@ import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
@@ -89,7 +92,6 @@ import org.junit.jupiter.api.BeforeEach
 
 import static extension org.eclipse.lsp4j.util.Ranges.containsRange
 import static extension org.eclipse.xtext.util.Strings.*
-import org.eclipse.lsp4j.WorkspaceFolder
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -133,32 +135,52 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	protected def Class<? extends LanguageClient> getLanguageClientClass() {
 		return LanguageClient;
 	}
+	
+	/**
+	 * A request manager that will run the given read and write actions in the same thread immediatly, sequentially.
+	 */
+	@Singleton
+	static class DirectRequestManager extends RequestManager {
+	
+		@Inject
+		new(OperationCanceledManager operationCanceledManager) {
+			super(null, operationCanceledManager)
+		}
+		
+		override synchronized <V> runRead((CancelIndicator)=>V request) {
+			val result = new CompletableFuture()
+			try {
+				result.complete(request.apply [ false ])
+			} catch (Throwable t) {
+				if (isCancelException(t)) {
+					result.cancel(true)
+				} else {
+					result.completeExceptionally(t)
+				}
+			}
+			return result
+		}
+
+		override synchronized <U, V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V request) {
+			val result = new CompletableFuture()
+			try {
+				result.complete(request.apply(CancelIndicator.NullImpl, nonCancellable.apply()))
+			} catch (Throwable t) {
+				if (isCancelException(t)) {
+					result.cancel(true)
+				} else {
+					result.completeExceptionally(t)
+				}
+			}
+			return result
+		}
+		
+	}
 
 	protected def Module getServerModule() {
-		Modules2.mixin(new ServerModule, [
-			bind(RequestManager).toInstance(new RequestManager() {
-
-				override <V> runRead((CancelIndicator)=>V request) {
-					val result = new CompletableFuture()
-					try {
-						result.complete(request.apply [ false ])
-					} catch (Throwable e) {
-						result.completeExceptionally(e)
-					}
-					return result
-				}
-
-				override <U,V> runWrite(()=>U nonCancellable, (CancelIndicator, U)=>V request) {
-					val result = new CompletableFuture()
-					try {
-						result.complete(request.apply([ false ], nonCancellable.apply()))
-					} catch (Throwable e) {
-						result.completeExceptionally(e)
-					}
-					return result
-				}
-			})
-		])
+		return Modules2.mixin(new ServerModule) [
+			bind(RequestManager).to(DirectRequestManager)
+		]
 	}
 
 	@Inject

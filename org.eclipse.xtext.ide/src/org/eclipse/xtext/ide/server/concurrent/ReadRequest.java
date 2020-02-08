@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.concurrent;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
 import org.apache.log4j.Logger;
@@ -21,33 +22,58 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 public class ReadRequest<V> extends AbstractRequest<V> {
 	private static final Logger LOG = Logger.getLogger(ReadRequest.class);
 
-	private final Function1<? super CancelIndicator, ? extends V> cancellable;
+	private final Function1<? super CancelIndicator, ? extends V> readOperation;
+
+	/**
+	 * The initializer future allows to track the running state of this request, e.g. if it was already started or not.
+	 */
+	private final CompletableFuture<Void> initializer;
 
 	private final ExecutorService executor;
 
-	public ReadRequest(RequestManager requestManager, Function1<? super CancelIndicator, ? extends V> cancellable,
+	public ReadRequest(RequestManager requestManager, Function1<? super CancelIndicator, ? extends V> readOperation,
 			ExecutorService executor) {
 		super(requestManager);
-		this.cancellable = cancellable;
+		this.readOperation = readOperation;
 		this.executor = executor;
+		this.initializer = new CompletableFuture<>();
+		this.initializer.thenRun(this::doRun);
 	}
-
+	
+	@Override
+	protected void cancel(boolean mayInterruptIfRunning) {
+		super.cancel(mayInterruptIfRunning);
+		if (initializer.cancel(mayInterruptIfRunning)) {
+			cancelResult(mayInterruptIfRunning);
+		}
+	}
+	
 	@Override
 	public void run() {
-		if (result.isCancelled()) {
+		initializer.complete(null);
+	}
+
+	private void doRun() {
+		if (isDone()) {
 			return;
 		}
 		this.executor.submit(() -> {
 			try {
-				cancelIndicator.checkCanceled();
-				result.complete(cancellable.apply(cancelIndicator));
-			} catch (Throwable t) {
-				if (!requestManager.isCancelException(t)) {
-					LOG.error("Error during request: ", t);
+				if (isDone()) {
+					return;
 				}
-				result.completeExceptionally(t);
+				cancelIndicator.checkCanceled();
+				V readResult = readOperation.apply(cancelIndicator);
+				complete(readResult);
+			} catch (Throwable t) {
+				logAndCompleteExceptionally(t);
 			}
 		});
+	}
+	
+	@Override
+	protected Logger getLogger() {
+		return LOG;
 	}
 
 }

@@ -26,34 +26,39 @@ public class WriteRequest<U, V> extends AbstractRequest<V> {
 
 	private final Function2<? super CancelIndicator, ? super U, ? extends V> cancellable;
 
-	private final CompletableFuture<Void> previous;
+	private final CompletableFuture<Void> allPreviousRequests;
 
 	public WriteRequest(RequestManager requestManager, Function0<? extends U> nonCancellable,
 			Function2<? super CancelIndicator, ? super U, ? extends V> cancellable,
-			CompletableFuture<Void> previous) {
+			CompletableFuture<Void> allPreviousRequests) {
 		super(requestManager);
 		this.nonCancellable = nonCancellable;
 		this.cancellable = cancellable;
-		this.previous = previous;
+		this.allPreviousRequests = allPreviousRequests;
 	}
 
 	@Override
 	public void run() {
 		try {
-			previous.join();
-		} catch (Throwable t) {
-			// We are not interested in results, only to make sure that all previous requests are finished before running next write request.
-		}
-		try {
-			U intermediateResult = this.nonCancellable.apply();
-			cancelIndicator.checkCanceled();
-			result.complete(cancellable.apply(cancelIndicator, intermediateResult));
+			allPreviousRequests.join();
 		} catch (Throwable t) {
 			if (!requestManager.isCancelException(t)) {
 				LOG.error("Error during request: ", t);
 			}
-			result.completeExceptionally(t);
 		}
+		try {
+			U intermediateResult = this.nonCancellable.apply();
+			cancelIndicator.checkCanceled();
+			V writeResult = cancellable.apply(cancelIndicator, intermediateResult);
+			complete(writeResult);
+		} catch (Throwable t) {
+			logAndCompleteExceptionally(t);
+		}
+	}
+	
+	@Override
+	protected Logger getLogger() {
+		return LOG;
 	}
 
 }

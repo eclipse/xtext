@@ -10,6 +10,8 @@ package org.eclipse.xtext.ide.server.concurrent;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.log4j.Logger;
+
 /**
  * Abstract base type for read and write requests.
  * 
@@ -17,10 +19,23 @@ import java.util.concurrent.CompletableFuture;
  * @since 2.11
  */
 public abstract class AbstractRequest<V> implements Runnable, Cancellable {
+	
+	private class ResultFuture extends CompletableFuture<V> {
+		@Override
+		public boolean cancel(boolean mayInterruptIfRunning) {
+			AbstractRequest.this.cancel(mayInterruptIfRunning);
+			return isCancelled();
+		}
+
+		void doCancel(boolean mayInterruptIfRunning) {
+			super.cancel(mayInterruptIfRunning);
+		}
+	}
+	
 	/**
-	 * The underyling future.
+	 * The underlying future.
 	 */
-	protected final CompletableFuture<V> result;
+	protected final ResultFuture result;
 
 	/**
 	 * The current cancel indicator.
@@ -34,19 +49,46 @@ public abstract class AbstractRequest<V> implements Runnable, Cancellable {
 
 	protected AbstractRequest(RequestManager requestManager) {
 		this.requestManager = requestManager;
-		this.result = new CompletableFuture<>();
-		this.cancelIndicator = new RequestCancelIndicator(this.result);
+		this.result = new ResultFuture();
+		this.cancelIndicator = new RequestCancelIndicator(this);
 	}
 
+	protected void cancelResult(boolean mayInterruptIfRunning) {
+		result.doCancel(mayInterruptIfRunning);
+	}
+
+	protected boolean isDone() {
+		return result.isDone();
+	}
+
+	protected void complete(V value) {
+		result.complete(value);
+	}
+	
+	protected abstract Logger getLogger();
+
+	protected void logAndCompleteExceptionally(Throwable t) {
+		if (!requestManager.isCancelException(t)) {
+			getLogger().error("Error during request: ", t);
+			result.completeExceptionally(t);
+		} else {
+			cancelResult(true);
+		}
+	}
+
+	protected void cancel(boolean mayInterruptIfRunning) {
+		cancelIndicator.doCancel();
+	}
+	
 	@Override
-	public void cancel() {
-		cancelIndicator.cancel();
+	public final void cancel() {
+		cancel(true);
 	}
 
 	/**
 	 * Return the underlying future.
 	 */
 	public CompletableFuture<V> get() {
-		return result;
+		return this.result;
 	}
 }

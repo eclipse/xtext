@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ide.server.concurrent;
 
 import java.util.concurrent.CancellationException;
-import java.util.concurrent.CompletableFuture;
 
 import org.eclipse.lsp4j.jsonrpc.CancelChecker;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -18,31 +17,31 @@ import org.eclipse.xtext.util.CancelIndicator;
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-public class RequestCancelIndicator implements CancelIndicator, CancelChecker, Cancellable {
-	private final CompletableFuture<?> requestFuture;
+class RequestCancelIndicator implements CancelIndicator, CancelChecker, Cancellable {
+	private volatile boolean cancelled = false;
+	private final AbstractRequest<?> request;
 
-	public RequestCancelIndicator(CompletableFuture<?> requestFuture) {
-		this.requestFuture = requestFuture;
+	RequestCancelIndicator(AbstractRequest<?> request) {
+		this.request = request;
 	}
 
 	@Override
 	public void cancel() {
-		this.requestFuture.cancel(true);
+		request.cancel();
 	}
 
-	/**
-	 * Not really boolean guard but will throw a {@link CancellationException} instead of returning
-	 * <code>true</code>. Otherwise returns <code>false</code>.
-	 */
+	protected void doCancel() {
+		this.cancelled = true;
+	}
+
 	@Override
 	public boolean isCanceled() {
-		this.checkCanceled();
-		return false;
+		return cancelled;
 	}
 
 	@Override
 	public void checkCanceled() {
-		if (this.requestFuture.isCancelled()) {
+		if (cancelled) {
 			throw new CancellationException();
 		}
 	}

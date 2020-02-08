@@ -14,7 +14,7 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.Singleton;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
@@ -98,6 +98,7 @@ import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
 import org.eclipse.xtext.testing.DocumentHighlightConfiguration;
 import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
@@ -141,6 +142,62 @@ import org.junit.jupiter.api.BeforeEach;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public abstract class AbstractLanguageServerTest implements Endpoint {
+  /**
+   * A request manager that will run the given read and write actions in the same thread immediatly, sequentially.
+   */
+  @Singleton
+  public static class DirectRequestManager extends RequestManager {
+    @Inject
+    public DirectRequestManager(final OperationCanceledManager operationCanceledManager) {
+      super(null, operationCanceledManager);
+    }
+    
+    @Override
+    public synchronized <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
+      final CompletableFuture<V> result = new CompletableFuture<V>();
+      try {
+        final CancelIndicator _function = () -> {
+          return false;
+        };
+        result.complete(request.apply(_function));
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable t = (Throwable)_t;
+          boolean _isCancelException = this.isCancelException(t);
+          if (_isCancelException) {
+            result.cancel(true);
+          } else {
+            result.completeExceptionally(t);
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      return result;
+    }
+    
+    @Override
+    public synchronized <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
+      final CompletableFuture<V> result = new CompletableFuture<V>();
+      try {
+        result.complete(request.apply(CancelIndicator.NullImpl, nonCancellable.apply()));
+      } catch (final Throwable _t) {
+        if (_t instanceof Throwable) {
+          final Throwable t = (Throwable)_t;
+          boolean _isCancelException = this.isCancelException(t);
+          if (_isCancelException) {
+            result.cancel(true);
+          } else {
+            result.completeExceptionally(t);
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      return result;
+    }
+  }
+  
   @Accessors
   public static class TestCodeLensConfiguration extends TextDocumentPositionConfiguration {
     private String expectedCodeLensItems = "";
@@ -235,46 +292,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected com.google.inject.Module getServerModule() {
     ServerModule _serverModule = new ServerModule();
     final com.google.inject.Module _function = (Binder it) -> {
-      AnnotatedBindingBuilder<RequestManager> _bind = it.<RequestManager>bind(RequestManager.class);
-      _bind.toInstance(new RequestManager() {
-        @Override
-        public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> request) {
-          final CompletableFuture<V> result = new CompletableFuture<V>();
-          try {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            result.complete(request.apply(_function));
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable e = (Throwable)_t;
-              result.completeExceptionally(e);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          }
-          return result;
-        }
-        
-        @Override
-        public <U extends Object, V extends Object> CompletableFuture<V> runWrite(final Function0<? extends U> nonCancellable, final Function2<? super CancelIndicator, ? super U, ? extends V> request) {
-          final CompletableFuture<V> result = new CompletableFuture<V>();
-          try {
-            final CancelIndicator _function = () -> {
-              return false;
-            };
-            result.complete(request.apply(_function, nonCancellable.apply()));
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable e = (Throwable)_t;
-              result.completeExceptionally(e);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          }
-          return result;
-        }
-      });
+      it.<RequestManager>bind(RequestManager.class).to(AbstractLanguageServerTest.DirectRequestManager.class);
     };
     return Modules2.mixin(_serverModule, _function);
   }
