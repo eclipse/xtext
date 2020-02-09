@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -28,7 +28,8 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 			column = 'type F'.length
 			expectedHover = '''
 				[[3, 5] .. [3, 8]]
-				Some documentation.
+				kind: markdown
+				value: Some documentation.
 			'''
 		]
 	}
@@ -44,6 +45,10 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 			'''
 			line = 3
 			column = '{'.length
+			expectedHover = '''
+				kind: markdown
+				value: 
+			'''
 		]
 	}
 
@@ -62,7 +67,8 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 			column = '	F'.length
 			expectedHover = '''
 				[[4, 1] .. [4, 4]]
-				Some documentation.
+				kind: markdown
+				value: Some documentation.
 			'''
 		]
 	}
@@ -83,7 +89,8 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 			column = 'type Bar extends F'.length
 			expectedHover = '''
 				[[5, 17] .. [5, 20]]
-				Some documentation.
+				kind: markdown
+				value: Some documentation.
 			'''
 		]
 	}
@@ -107,7 +114,8 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 			column = 'type Bar extends F'.length
 			expectedHover = '''
 				[[0, 17] .. [0, 20]]
-				Some documentation.
+				kind: markdown
+				value: Some documentation.
 			'''
 		]
 	}

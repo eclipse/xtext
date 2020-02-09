@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,16 +7,14 @@
  */
 package org.eclipse.xtext.ide.server.hover;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.Hover;
-import org.eclipse.lsp4j.MarkedString;
+import org.eclipse.lsp4j.MarkupContent;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
-import org.eclipse.lsp4j.jsonrpc.messages.Either;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
@@ -30,16 +28,14 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
 @Singleton
+@Beta
 @SuppressWarnings("all")
 public class HoverService implements IHoverService {
   @Inject
@@ -98,7 +94,7 @@ public class HoverService implements IHoverService {
     if ((context == null)) {
       return IHoverService.EMPTY_HOVER;
     }
-    final List<Either<String, MarkedString>> contents = this.getContents(context);
+    final MarkupContent contents = this.getMarkupContent(context);
     if ((contents == null)) {
       return IHoverService.EMPTY_HOVER;
     }
@@ -118,34 +114,26 @@ public class HoverService implements IHoverService {
     return this._documentExtensions.newRange(it.getResource(), it.getRegion());
   }
   
-  protected List<Either<String, MarkedString>> getContents(final HoverContext it) {
-    final String language = this.getLanguage(it);
-    final Function1<String, Either<String, MarkedString>> _function = (String value) -> {
-      return this.toContents(language, value);
-    };
-    return ListExtensions.<String, Either<String, MarkedString>>map(this.getContents(it.getElement()), _function);
+  protected MarkupContent getMarkupContent(final HoverContext it) {
+    return this.toMarkupContent(this.getKind(it), this.getContents(it.getElement()));
   }
   
-  protected String getLanguage(final HoverContext it) {
-    return null;
+  protected String getKind(final HoverContext it) {
+    return "markdown";
   }
   
-  protected Either<String, MarkedString> toContents(final String language, final String value) {
-    if ((language == null)) {
-      return Either.<String, MarkedString>forLeft(value);
-    }
-    MarkedString _markedString = new MarkedString(language, value);
-    return Either.<String, MarkedString>forRight(_markedString);
+  protected MarkupContent toMarkupContent(final String kind, final String value) {
+    return new MarkupContent(kind, value);
   }
   
-  public List<String> getContents(final EObject element) {
+  public String getContents(final EObject element) {
     if ((element == null)) {
-      return Collections.<String>emptyList();
+      return "";
     }
     final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
     if ((documentation == null)) {
-      return Collections.<String>emptyList();
+      return "";
     }
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(documentation));
+    return documentation;
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -43,7 +43,9 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[3, 5] .. [3, 8]]");
       _builder_1.newLine();
-      _builder_1.append("Some documentation.");
+      _builder_1.append("kind: markdown");
+      _builder_1.newLine();
+      _builder_1.append("value: Some documentation.");
       _builder_1.newLine();
       it.setExpectedHover(_builder_1.toString());
     };
@@ -67,6 +69,12 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       it.setModel(_builder.toString());
       it.setLine(3);
       it.setColumn("{".length());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("kind: markdown");
+      _builder_1.newLine();
+      _builder_1.append("value: ");
+      _builder_1.newLine();
+      it.setExpectedHover(_builder_1.toString());
     };
     this.testHover(_function);
   }
@@ -96,7 +104,9 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[4, 1] .. [4, 4]]");
       _builder_1.newLine();
-      _builder_1.append("Some documentation.");
+      _builder_1.append("kind: markdown");
+      _builder_1.newLine();
+      _builder_1.append("value: Some documentation.");
       _builder_1.newLine();
       it.setExpectedHover(_builder_1.toString());
     };
@@ -129,7 +139,9 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[5, 17] .. [5, 20]]");
       _builder_1.newLine();
-      _builder_1.append("Some documentation.");
+      _builder_1.append("kind: markdown");
+      _builder_1.newLine();
+      _builder_1.append("value: Some documentation.");
       _builder_1.newLine();
       it.setExpectedHover(_builder_1.toString());
     };
@@ -164,7 +176,9 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("[[0, 17] .. [0, 20]]");
       _builder_2.newLine();
-      _builder_2.append("Some documentation.");
+      _builder_2.append("kind: markdown");
+      _builder_2.newLine();
+      _builder_2.append("value: Some documentation.");
       _builder_2.newLine();
       it.setExpectedHover(_builder_2.toString());
     };

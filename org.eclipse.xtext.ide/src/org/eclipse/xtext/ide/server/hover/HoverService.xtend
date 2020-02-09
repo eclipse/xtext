@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 TypeFox GmbH (http://www.typefox.io) and others.
+ * Copyright (c) 2016, 2020 TypeFox GmbH (http://www.typefox.io) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,15 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.hover
 
+import com.google.common.annotations.Beta
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.lsp4j.Hover
-import org.eclipse.lsp4j.MarkedString
+import org.eclipse.lsp4j.MarkupContent
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.TextDocumentPositionParams
-import org.eclipse.lsp4j.jsonrpc.messages.Either
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
@@ -27,8 +26,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.ITextRegion
 
-import static java.util.Collections.*
-
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 
 /**
@@ -36,6 +33,7 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
  * @since 2.11
  */
 @Singleton
+@Beta
 class HoverService implements IHoverService {
 
 	@Inject
@@ -88,7 +86,7 @@ class HoverService implements IHoverService {
 	protected def Hover hover(HoverContext context) {
 		if (context === null) return EMPTY_HOVER
 		
-		val contents = context.contents
+		val contents = context.markupContent
 		if(contents === null) return EMPTY_HOVER
 
 		val range = context.range
@@ -103,33 +101,25 @@ class HoverService implements IHoverService {
 		return resource.newRange(region)
 	}
 
-	protected def List<Either<String, MarkedString>> getContents(HoverContext it) {
-		val language = language
-		return element.contents.map [ value |
-			toContents(language, value)
-		]
+	protected def MarkupContent getMarkupContent(HoverContext it) {
+		return toMarkupContent(kind, element.contents)
 	}
 
-	protected def String getLanguage(HoverContext it) {
-		return null
+	protected def String getKind(HoverContext it) {
+		return "markdown"
 	}
 
-	protected def Either<String, MarkedString> toContents(String language, String value) {
-		if (language === null) {
-			return Either.forLeft(value)
-		}
-		return Either.forRight(new MarkedString(language, value))
+	protected def MarkupContent toMarkupContent(String kind, String value) {
+		return new MarkupContent(kind, value)
 	}
 
-	def List<String> getContents(EObject element) {
-		if(element === null) return emptyList
+	def String getContents(EObject element) {
+		if(element === null) return ""
 
 		val documentation = element.documentation
-		if(documentation === null) return emptyList
+		if(documentation === null) return ""
 
-		return #[
-			documentation
-		]
+		return documentation
 	}
 
 }

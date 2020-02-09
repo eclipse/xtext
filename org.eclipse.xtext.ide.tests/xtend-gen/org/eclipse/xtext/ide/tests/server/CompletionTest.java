@@ -23,6 +23,7 @@ import org.eclipse.lsp4j.DocumentSymbol;
 import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InsertTextFormat;
 import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.MarkupContent;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.SemanticHighlightingInformation;
@@ -366,6 +367,8 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       return _toExpectation((Hover)it);
     } else if (it instanceof Location) {
       return _toExpectation((Location)it);
+    } else if (it instanceof MarkupContent) {
+      return _toExpectation((MarkupContent)it);
     } else if (it instanceof Position) {
       return _toExpectation((Position)it);
     } else if (it instanceof Range) {

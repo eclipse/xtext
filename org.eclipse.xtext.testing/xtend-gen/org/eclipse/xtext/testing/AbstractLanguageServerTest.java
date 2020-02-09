@@ -56,6 +56,7 @@ import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
 import org.eclipse.lsp4j.LocationLink;
+import org.eclipse.lsp4j.MarkupContent;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
@@ -867,6 +868,19 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     }
   }
   
+  protected String _toExpectation(final MarkupContent it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("kind: ");
+    String _kind = it.getKind();
+    _builder.append(_kind);
+    _builder.newLineIfNotEmpty();
+    _builder.append("value: ");
+    String _value = it.getValue();
+    _builder.append(_value);
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   protected String _toExpectation(final Command it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("command : ");
@@ -1480,6 +1494,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((Hover)it);
     } else if (it instanceof Location) {
       return _toExpectation((Location)it);
+    } else if (it instanceof MarkupContent) {
+      return _toExpectation((MarkupContent)it);
     } else if (it instanceof Position) {
       return _toExpectation((Position)it);
     } else if (it instanceof Range) {
