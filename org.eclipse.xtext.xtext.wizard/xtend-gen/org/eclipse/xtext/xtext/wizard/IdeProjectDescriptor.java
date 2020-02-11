@@ -419,6 +419,10 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("\t\t\t\t");
+              _builder.append("<excludeGroupIds>p2.eclipse-feature</excludeGroupIds>");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("\t\t\t\t");
               _builder.append("<outputDirectory>${project.build.directory}/libs</outputDirectory>");
               _builder.newLine();
               _builder.append("\t\t");
