@@ -49,15 +49,15 @@ public class SingleCodetemplateLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g"; }
+    public String getGrammarFileName() { return "SingleCodetemplateLexer.g"; }
 
     // $ANTLR start "Templates"
     public final void mTemplates() throws RecognitionException {
         try {
             int _type = Templates;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:11: ({...}? => 'templates' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:25:13: {...}? => 'templates'
+            // SingleCodetemplateLexer.g:25:11: ({...}? => 'templates' )
+            // SingleCodetemplateLexer.g:25:13: {...}? => 'templates'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Templates", "!literal || templateVariable");
@@ -80,8 +80,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:5: ({...}? => 'for' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:27:7: {...}? => 'for'
+            // SingleCodetemplateLexer.g:27:5: ({...}? => 'for' )
+            // SingleCodetemplateLexer.g:27:7: {...}? => 'for'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "For", "!literal || templateVariable");
@@ -104,8 +104,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSignDollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:22: ( '$$' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:29:24: '$$'
+            // SingleCodetemplateLexer.g:29:22: ( '$$' )
+            // SingleCodetemplateLexer.g:29:24: '$$'
             {
             match("$$"); 
 
@@ -125,8 +125,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSignLeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:28: ( '${' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:31:30: '${'
+            // SingleCodetemplateLexer.g:31:28: ( '${' )
+            // SingleCodetemplateLexer.g:31:30: '${'
             {
             match("${"); 
 
@@ -147,8 +147,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = GreaterThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:32: ({...}? => '>>' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:33:34: {...}? => '>>'
+            // SingleCodetemplateLexer.g:33:32: ({...}? => '>>' )
+            // SingleCodetemplateLexer.g:33:34: {...}? => '>>'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "GreaterThanSignGreaterThanSign", "!literal || templateVariable");
@@ -172,8 +172,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:12: ( '$' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:35:14: '$'
+            // SingleCodetemplateLexer.g:35:12: ( '$' )
+            // SingleCodetemplateLexer.g:35:14: '$'
             {
             match('$'); 
 
@@ -192,8 +192,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:17: ({...}? => '(' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:37:19: {...}? => '('
+            // SingleCodetemplateLexer.g:37:17: ({...}? => '(' )
+            // SingleCodetemplateLexer.g:37:19: {...}? => '('
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "LeftParenthesis", "!literal || templateVariable");
@@ -215,8 +215,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:18: ({...}? => ')' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:39:20: {...}? => ')'
+            // SingleCodetemplateLexer.g:39:18: ({...}? => ')' )
+            // SingleCodetemplateLexer.g:39:20: {...}? => ')'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RightParenthesis", "!literal || templateVariable");
@@ -238,8 +238,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:7: ({...}? => ',' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:41:9: {...}? => ','
+            // SingleCodetemplateLexer.g:41:7: ({...}? => ',' )
+            // SingleCodetemplateLexer.g:41:9: {...}? => ','
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Comma", "!literal || templateVariable");
@@ -261,8 +261,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:10: ({...}? => '.' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:43:12: {...}? => '.'
+            // SingleCodetemplateLexer.g:43:10: ({...}? => '.' )
+            // SingleCodetemplateLexer.g:43:12: {...}? => '.'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "FullStop", "!literal || templateVariable");
@@ -284,8 +284,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:7: ({...}? => ':' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:45:9: {...}? => ':'
+            // SingleCodetemplateLexer.g:45:7: ({...}? => ':' )
+            // SingleCodetemplateLexer.g:45:9: {...}? => ':'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Colon", "!literal || templateVariable");
@@ -307,8 +307,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:19: ({...}? => '}' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:47:21: {...}? => '}'
+            // SingleCodetemplateLexer.g:47:19: ({...}? => '}' )
+            // SingleCodetemplateLexer.g:47:21: {...}? => '}'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RightCurlyBracket", "!literal || templateVariable");
@@ -331,10 +331,10 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:51:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:51:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // SingleCodetemplateLexer.g:51:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // SingleCodetemplateLexer.g:51:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:51:11: ( '^' )?
+            // SingleCodetemplateLexer.g:51:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -343,7 +343,7 @@ public class SingleCodetemplateLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:51:11: '^'
+                    // SingleCodetemplateLexer.g:51:11: '^'
                     {
                     match('^'); 
 
@@ -361,7 +361,7 @@ public class SingleCodetemplateLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:51:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // SingleCodetemplateLexer.g:51:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -374,7 +374,7 @@ public class SingleCodetemplateLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:
+            	    // SingleCodetemplateLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -410,17 +410,17 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:13: ({...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:15: {...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // SingleCodetemplateLexer.g:53:13: ({...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // SingleCodetemplateLexer.g:53:15: {...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RULE_STRING", "!literal || templateVariable");
             }
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:48: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:50: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // SingleCodetemplateLexer.g:53:48: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // SingleCodetemplateLexer.g:53:50: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:55: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // SingleCodetemplateLexer.g:53:55: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop3:
             do {
                 int alt3=3;
@@ -436,7 +436,7 @@ public class SingleCodetemplateLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:56: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+            	    // SingleCodetemplateLexer.g:53:56: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -452,7 +452,7 @@ public class SingleCodetemplateLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:53:97: ~ ( ( '\\\\' | '\\'' ) )
+            	    // SingleCodetemplateLexer.g:53:97: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -492,10 +492,10 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:55:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:55:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // SingleCodetemplateLexer.g:55:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // SingleCodetemplateLexer.g:55:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:55:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // SingleCodetemplateLexer.g:55:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt4=0;
             loop4:
             do {
@@ -509,7 +509,7 @@ public class SingleCodetemplateLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:
+            	    // SingleCodetemplateLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -549,8 +549,8 @@ public class SingleCodetemplateLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:57:16: ( . )
-            // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:57:18: .
+            // SingleCodetemplateLexer.g:57:16: ( . )
+            // SingleCodetemplateLexer.g:57:18: .
             {
             matchAny(); 
 
@@ -565,117 +565,117 @@ public class SingleCodetemplateLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:8: ( Templates | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
+        // SingleCodetemplateLexer.g:1:8: ( Templates | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
         int alt5=16;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:10: Templates
+                // SingleCodetemplateLexer.g:1:10: Templates
                 {
                 mTemplates(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:20: For
+                // SingleCodetemplateLexer.g:1:20: For
                 {
                 mFor(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:24: DollarSignDollarSign
+                // SingleCodetemplateLexer.g:1:24: DollarSignDollarSign
                 {
                 mDollarSignDollarSign(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:45: DollarSignLeftCurlyBracket
+                // SingleCodetemplateLexer.g:1:45: DollarSignLeftCurlyBracket
                 {
                 mDollarSignLeftCurlyBracket(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:72: GreaterThanSignGreaterThanSign
+                // SingleCodetemplateLexer.g:1:72: GreaterThanSignGreaterThanSign
                 {
                 mGreaterThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:103: DollarSign
+                // SingleCodetemplateLexer.g:1:103: DollarSign
                 {
                 mDollarSign(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:114: LeftParenthesis
+                // SingleCodetemplateLexer.g:1:114: LeftParenthesis
                 {
                 mLeftParenthesis(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:130: RightParenthesis
+                // SingleCodetemplateLexer.g:1:130: RightParenthesis
                 {
                 mRightParenthesis(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:147: Comma
+                // SingleCodetemplateLexer.g:1:147: Comma
                 {
                 mComma(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:153: FullStop
+                // SingleCodetemplateLexer.g:1:153: FullStop
                 {
                 mFullStop(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:162: Colon
+                // SingleCodetemplateLexer.g:1:162: Colon
                 {
                 mColon(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:168: RightCurlyBracket
+                // SingleCodetemplateLexer.g:1:168: RightCurlyBracket
                 {
                 mRightCurlyBracket(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:186: RULE_ID
+                // SingleCodetemplateLexer.g:1:186: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:194: RULE_STRING
+                // SingleCodetemplateLexer.g:1:194: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:206: RULE_WS
+                // SingleCodetemplateLexer.g:1:206: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.ui.codetemplates/src/org/eclipse/xtext/ui/codetemplates/lexer/SingleCodetemplateLexer.g:1:214: RULE_ANY_OTHER
+                // SingleCodetemplateLexer.g:1:214: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

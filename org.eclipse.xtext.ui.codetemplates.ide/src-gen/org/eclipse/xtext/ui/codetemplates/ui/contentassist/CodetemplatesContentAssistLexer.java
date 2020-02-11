@@ -46,15 +46,15 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g"; }
+    public String getGrammarFileName() { return "CodetemplatesContentAssistLexer.g"; }
 
     // $ANTLR start "Templates"
     public final void mTemplates() throws RecognitionException {
         try {
             int _type = Templates;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:20:11: ({...}? => 'templates' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:20:13: {...}? => 'templates'
+            // CodetemplatesContentAssistLexer.g:20:11: ({...}? => 'templates' )
+            // CodetemplatesContentAssistLexer.g:20:13: {...}? => 'templates'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Templates", "!literal || templateVariable");
@@ -77,8 +77,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = ReverseSolidusLessThanSignLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:22:40: ( '\\\\<<' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:22:42: '\\\\<<'
+            // CodetemplatesContentAssistLexer.g:22:40: ( '\\\\<<' )
+            // CodetemplatesContentAssistLexer.g:22:42: '\\\\<<'
             {
             match("\\<<"); 
 
@@ -98,8 +98,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:24:5: ({...}? => 'for' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:24:7: {...}? => 'for'
+            // CodetemplatesContentAssistLexer.g:24:5: ({...}? => 'for' )
+            // CodetemplatesContentAssistLexer.g:24:7: {...}? => 'for'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "For", "!literal || templateVariable");
@@ -122,8 +122,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = DollarSignDollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:26:22: ( '$$' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:26:24: '$$'
+            // CodetemplatesContentAssistLexer.g:26:22: ( '$$' )
+            // CodetemplatesContentAssistLexer.g:26:24: '$$'
             {
             match("$$"); 
 
@@ -143,8 +143,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = DollarSignLeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:28:28: ( '${' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:28:30: '${'
+            // CodetemplatesContentAssistLexer.g:28:28: ( '${' )
+            // CodetemplatesContentAssistLexer.g:28:30: '${'
             {
             match("${"); 
 
@@ -165,8 +165,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = LessThanSignLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:30:26: ( '<<' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:30:28: '<<'
+            // CodetemplatesContentAssistLexer.g:30:26: ( '<<' )
+            // CodetemplatesContentAssistLexer.g:30:28: '<<'
             {
             match("<<"); 
 
@@ -187,8 +187,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = GreaterThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:32:32: ({...}? => '>>' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:32:34: {...}? => '>>'
+            // CodetemplatesContentAssistLexer.g:32:32: ({...}? => '>>' )
+            // CodetemplatesContentAssistLexer.g:32:34: {...}? => '>>'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "GreaterThanSignGreaterThanSign", "!literal || templateVariable");
@@ -212,8 +212,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = DollarSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:34:12: ( '$' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:34:14: '$'
+            // CodetemplatesContentAssistLexer.g:34:12: ( '$' )
+            // CodetemplatesContentAssistLexer.g:34:14: '$'
             {
             match('$'); 
 
@@ -232,8 +232,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:36:17: ({...}? => '(' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:36:19: {...}? => '('
+            // CodetemplatesContentAssistLexer.g:36:17: ({...}? => '(' )
+            // CodetemplatesContentAssistLexer.g:36:19: {...}? => '('
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "LeftParenthesis", "!literal || templateVariable");
@@ -255,8 +255,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:38:18: ({...}? => ')' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:38:20: {...}? => ')'
+            // CodetemplatesContentAssistLexer.g:38:18: ({...}? => ')' )
+            // CodetemplatesContentAssistLexer.g:38:20: {...}? => ')'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RightParenthesis", "!literal || templateVariable");
@@ -278,8 +278,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:40:7: ({...}? => ',' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:40:9: {...}? => ','
+            // CodetemplatesContentAssistLexer.g:40:7: ({...}? => ',' )
+            // CodetemplatesContentAssistLexer.g:40:9: {...}? => ','
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Comma", "!literal || templateVariable");
@@ -301,8 +301,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:42:10: ({...}? => '.' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:42:12: {...}? => '.'
+            // CodetemplatesContentAssistLexer.g:42:10: ({...}? => '.' )
+            // CodetemplatesContentAssistLexer.g:42:12: {...}? => '.'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "FullStop", "!literal || templateVariable");
@@ -324,8 +324,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:44:7: ({...}? => ':' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:44:9: {...}? => ':'
+            // CodetemplatesContentAssistLexer.g:44:7: ({...}? => ':' )
+            // CodetemplatesContentAssistLexer.g:44:9: {...}? => ':'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "Colon", "!literal || templateVariable");
@@ -347,8 +347,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:46:19: ({...}? => '}' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:46:21: {...}? => '}'
+            // CodetemplatesContentAssistLexer.g:46:19: ({...}? => '}' )
+            // CodetemplatesContentAssistLexer.g:46:21: {...}? => '}'
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RightCurlyBracket", "!literal || templateVariable");
@@ -371,10 +371,10 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:50:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:50:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // CodetemplatesContentAssistLexer.g:50:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // CodetemplatesContentAssistLexer.g:50:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:50:11: ( '^' )?
+            // CodetemplatesContentAssistLexer.g:50:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -383,7 +383,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:50:11: '^'
+                    // CodetemplatesContentAssistLexer.g:50:11: '^'
                     {
                     match('^'); 
 
@@ -401,7 +401,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:50:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // CodetemplatesContentAssistLexer.g:50:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -414,7 +414,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:
+            	    // CodetemplatesContentAssistLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -450,17 +450,17 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:13: ({...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:15: {...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // CodetemplatesContentAssistLexer.g:52:13: ({...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // CodetemplatesContentAssistLexer.g:52:15: {...}? => ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             if ( !((!literal || templateVariable)) ) {
                 throw new FailedPredicateException(input, "RULE_STRING", "!literal || templateVariable");
             }
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:48: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:50: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // CodetemplatesContentAssistLexer.g:52:48: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // CodetemplatesContentAssistLexer.g:52:50: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:55: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // CodetemplatesContentAssistLexer.g:52:55: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop3:
             do {
                 int alt3=3;
@@ -476,7 +476,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:56: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+            	    // CodetemplatesContentAssistLexer.g:52:56: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -492,7 +492,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:52:97: ~ ( ( '\\\\' | '\\'' ) )
+            	    // CodetemplatesContentAssistLexer.g:52:97: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -532,10 +532,10 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:54:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:54:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // CodetemplatesContentAssistLexer.g:54:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // CodetemplatesContentAssistLexer.g:54:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:54:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // CodetemplatesContentAssistLexer.g:54:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt4=0;
             loop4:
             do {
@@ -549,7 +549,7 @@ public class CodetemplatesContentAssistLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:
+            	    // CodetemplatesContentAssistLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -589,8 +589,8 @@ public class CodetemplatesContentAssistLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:56:16: ( . )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:56:18: .
+            // CodetemplatesContentAssistLexer.g:56:16: ( . )
+            // CodetemplatesContentAssistLexer.g:56:18: .
             {
             matchAny(); 
 
@@ -605,131 +605,131 @@ public class CodetemplatesContentAssistLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:8: ( Templates | ReverseSolidusLessThanSignLessThanSign | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | LessThanSignLessThanSign | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
+        // CodetemplatesContentAssistLexer.g:1:8: ( Templates | ReverseSolidusLessThanSignLessThanSign | For | DollarSignDollarSign | DollarSignLeftCurlyBracket | LessThanSignLessThanSign | GreaterThanSignGreaterThanSign | DollarSign | LeftParenthesis | RightParenthesis | Comma | FullStop | Colon | RightCurlyBracket | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
         int alt5=18;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:10: Templates
+                // CodetemplatesContentAssistLexer.g:1:10: Templates
                 {
                 mTemplates(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:20: ReverseSolidusLessThanSignLessThanSign
+                // CodetemplatesContentAssistLexer.g:1:20: ReverseSolidusLessThanSignLessThanSign
                 {
                 mReverseSolidusLessThanSignLessThanSign(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:59: For
+                // CodetemplatesContentAssistLexer.g:1:59: For
                 {
                 mFor(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:63: DollarSignDollarSign
+                // CodetemplatesContentAssistLexer.g:1:63: DollarSignDollarSign
                 {
                 mDollarSignDollarSign(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:84: DollarSignLeftCurlyBracket
+                // CodetemplatesContentAssistLexer.g:1:84: DollarSignLeftCurlyBracket
                 {
                 mDollarSignLeftCurlyBracket(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:111: LessThanSignLessThanSign
+                // CodetemplatesContentAssistLexer.g:1:111: LessThanSignLessThanSign
                 {
                 mLessThanSignLessThanSign(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:136: GreaterThanSignGreaterThanSign
+                // CodetemplatesContentAssistLexer.g:1:136: GreaterThanSignGreaterThanSign
                 {
                 mGreaterThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:167: DollarSign
+                // CodetemplatesContentAssistLexer.g:1:167: DollarSign
                 {
                 mDollarSign(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:178: LeftParenthesis
+                // CodetemplatesContentAssistLexer.g:1:178: LeftParenthesis
                 {
                 mLeftParenthesis(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:194: RightParenthesis
+                // CodetemplatesContentAssistLexer.g:1:194: RightParenthesis
                 {
                 mRightParenthesis(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:211: Comma
+                // CodetemplatesContentAssistLexer.g:1:211: Comma
                 {
                 mComma(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:217: FullStop
+                // CodetemplatesContentAssistLexer.g:1:217: FullStop
                 {
                 mFullStop(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:226: Colon
+                // CodetemplatesContentAssistLexer.g:1:226: Colon
                 {
                 mColon(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:232: RightCurlyBracket
+                // CodetemplatesContentAssistLexer.g:1:232: RightCurlyBracket
                 {
                 mRightCurlyBracket(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:250: RULE_ID
+                // CodetemplatesContentAssistLexer.g:1:250: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:258: RULE_STRING
+                // CodetemplatesContentAssistLexer.g:1:258: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:270: RULE_WS
+                // CodetemplatesContentAssistLexer.g:1:270: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/contentassist/CodetemplatesContentAssistLexer.g:1:278: RULE_ANY_OTHER
+                // CodetemplatesContentAssistLexer.g:1:278: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

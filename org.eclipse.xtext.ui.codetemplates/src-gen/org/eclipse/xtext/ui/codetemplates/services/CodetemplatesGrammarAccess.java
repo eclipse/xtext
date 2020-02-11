@@ -128,7 +128,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//'for'
 		public Keyword getForKeyword_6() { return cForKeyword_6; }
 		
-		//context=[xtext::AbstractRule|ValidID] | keywordContext=STRING
+		//(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 		
 		//context=[xtext::AbstractRule|ValidID]
@@ -321,8 +321,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//WS*
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
 		
-		//name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN)
-		//(WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?
+		//(name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN)
+		//(WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//name=ValidID
@@ -537,7 +537,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//{Dollar}
 		public Action getDollarAction_0() { return cDollarAction_0; }
 		
-		//escaped?='$$' | '$'
+		//(escaped?='$$' | '$')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//escaped?='$$'

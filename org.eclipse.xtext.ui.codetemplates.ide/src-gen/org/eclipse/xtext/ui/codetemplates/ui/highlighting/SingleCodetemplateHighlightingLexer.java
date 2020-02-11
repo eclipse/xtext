@@ -34,15 +34,15 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g"; }
+    public String getGrammarFileName() { return "SingleCodetemplateHighlightingLexer.g"; }
 
     // $ANTLR start "KEYWORD_TEMPLATES"
     public final void mKEYWORD_TEMPLATES() throws RecognitionException {
         try {
             int _type = KEYWORD_TEMPLATES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:11:19: ( 'templates' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:11:21: 'templates'
+            // SingleCodetemplateHighlightingLexer.g:11:19: ( 'templates' )
+            // SingleCodetemplateHighlightingLexer.g:11:21: 'templates'
             {
             match("templates"); 
 
@@ -62,8 +62,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = KEYWORD_FOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:12:13: ( 'for' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:12:15: 'for'
+            // SingleCodetemplateHighlightingLexer.g:12:13: ( 'for' )
+            // SingleCodetemplateHighlightingLexer.g:12:15: 'for'
             {
             match("for"); 
 
@@ -83,8 +83,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = KEYWORD_OPENBRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:15:19: ( '(' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:15:21: '('
+            // SingleCodetemplateHighlightingLexer.g:15:19: ( '(' )
+            // SingleCodetemplateHighlightingLexer.g:15:21: '('
             {
             match('('); 
 
@@ -103,8 +103,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = KEYWORD_CLOSINGBRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:16:22: ( ')' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:16:24: ')'
+            // SingleCodetemplateHighlightingLexer.g:16:22: ( ')' )
+            // SingleCodetemplateHighlightingLexer.g:16:24: ')'
             {
             match(')'); 
 
@@ -123,8 +123,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = KEYWORD_DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:19:13: ( '.' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:19:15: '.'
+            // SingleCodetemplateHighlightingLexer.g:19:13: ( '.' )
+            // SingleCodetemplateHighlightingLexer.g:19:15: '.'
             {
             match('.'); 
 
@@ -143,12 +143,12 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = RULE_BODY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:21:11: ( '>>' ( RULE_ANY_OTHER )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:21:13: '>>' ( RULE_ANY_OTHER )*
+            // SingleCodetemplateHighlightingLexer.g:21:11: ( '>>' ( RULE_ANY_OTHER )* )
+            // SingleCodetemplateHighlightingLexer.g:21:13: '>>' ( RULE_ANY_OTHER )*
             {
             match(">>"); 
 
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:21:19: ( RULE_ANY_OTHER )*
+            // SingleCodetemplateHighlightingLexer.g:21:19: ( RULE_ANY_OTHER )*
             loop1:
             do {
                 int alt1=2;
@@ -161,7 +161,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:21:19: RULE_ANY_OTHER
+            	    // SingleCodetemplateHighlightingLexer.g:21:19: RULE_ANY_OTHER
             	    {
             	    mRULE_ANY_OTHER(); 
 
@@ -189,10 +189,10 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:23:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:23:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // SingleCodetemplateHighlightingLexer.g:23:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // SingleCodetemplateHighlightingLexer.g:23:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:23:11: ( '^' )?
+            // SingleCodetemplateHighlightingLexer.g:23:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -201,7 +201,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:23:11: '^'
+                    // SingleCodetemplateHighlightingLexer.g:23:11: '^'
                     {
                     match('^'); 
 
@@ -219,7 +219,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:23:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // SingleCodetemplateHighlightingLexer.g:23:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -232,7 +232,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:
+            	    // SingleCodetemplateHighlightingLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -268,11 +268,11 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:25:13: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:25:15: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // SingleCodetemplateHighlightingLexer.g:25:13: ( '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // SingleCodetemplateHighlightingLexer.g:25:15: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:25:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // SingleCodetemplateHighlightingLexer.g:25:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -288,7 +288,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:25:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+            	    // SingleCodetemplateHighlightingLexer.g:25:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -304,7 +304,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:25:62: ~ ( ( '\\\\' | '\\'' ) )
+            	    // SingleCodetemplateHighlightingLexer.g:25:62: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -341,10 +341,10 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:27:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:27:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // SingleCodetemplateHighlightingLexer.g:27:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // SingleCodetemplateHighlightingLexer.g:27:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:27:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // SingleCodetemplateHighlightingLexer.g:27:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -358,7 +358,7 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:
+            	    // SingleCodetemplateHighlightingLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -398,8 +398,8 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:29:16: ( . )
-            // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:29:18: .
+            // SingleCodetemplateHighlightingLexer.g:29:16: ( . )
+            // SingleCodetemplateHighlightingLexer.g:29:18: .
             {
             matchAny(); 
 
@@ -414,75 +414,75 @@ public class SingleCodetemplateHighlightingLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:8: ( KEYWORD_TEMPLATES | KEYWORD_FOR | KEYWORD_OPENBRACE | KEYWORD_CLOSINGBRACE | KEYWORD_DOT | RULE_BODY | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
+        // SingleCodetemplateHighlightingLexer.g:1:8: ( KEYWORD_TEMPLATES | KEYWORD_FOR | KEYWORD_OPENBRACE | KEYWORD_CLOSINGBRACE | KEYWORD_DOT | RULE_BODY | RULE_ID | RULE_STRING | RULE_WS | RULE_ANY_OTHER )
         int alt6=10;
         alt6 = dfa6.predict(input);
         switch (alt6) {
             case 1 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:10: KEYWORD_TEMPLATES
+                // SingleCodetemplateHighlightingLexer.g:1:10: KEYWORD_TEMPLATES
                 {
                 mKEYWORD_TEMPLATES(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:28: KEYWORD_FOR
+                // SingleCodetemplateHighlightingLexer.g:1:28: KEYWORD_FOR
                 {
                 mKEYWORD_FOR(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:40: KEYWORD_OPENBRACE
+                // SingleCodetemplateHighlightingLexer.g:1:40: KEYWORD_OPENBRACE
                 {
                 mKEYWORD_OPENBRACE(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:58: KEYWORD_CLOSINGBRACE
+                // SingleCodetemplateHighlightingLexer.g:1:58: KEYWORD_CLOSINGBRACE
                 {
                 mKEYWORD_CLOSINGBRACE(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:79: KEYWORD_DOT
+                // SingleCodetemplateHighlightingLexer.g:1:79: KEYWORD_DOT
                 {
                 mKEYWORD_DOT(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:91: RULE_BODY
+                // SingleCodetemplateHighlightingLexer.g:1:91: RULE_BODY
                 {
                 mRULE_BODY(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:101: RULE_ID
+                // SingleCodetemplateHighlightingLexer.g:1:101: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:109: RULE_STRING
+                // SingleCodetemplateHighlightingLexer.g:1:109: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:121: RULE_WS
+                // SingleCodetemplateHighlightingLexer.g:1:121: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.codetemplates.ide/src/org/eclipse/xtext/ui/codetemplates/ui/highlighting/SingleCodetemplateHighlightingLexer.g:1:129: RULE_ANY_OTHER
+                // SingleCodetemplateHighlightingLexer.g:1:129: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

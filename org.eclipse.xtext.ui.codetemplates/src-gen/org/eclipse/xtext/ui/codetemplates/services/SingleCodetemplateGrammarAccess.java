@@ -94,7 +94,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		//'for'
 		public Keyword getForKeyword_1() { return cForKeyword_1; }
 		
-		//context=[xtext::AbstractRule|ValidID] | keywordContext=STRING
+		//(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//context=[xtext::AbstractRule|ValidID]
