@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -74,6 +75,7 @@ public abstract class JvmFeatureImpl extends JvmMemberImplCustom implements JvmF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmGenericType> getLocalClasses()
 	{
 		if (localClasses == null)
@@ -86,8 +88,10 @@ public abstract class JvmFeatureImpl extends JvmMemberImplCustom implements JvmF
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.4
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		// TODO: implement this method

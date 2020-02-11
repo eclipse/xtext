@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types;
 
@@ -2817,6 +2818,7 @@ public interface TypesPackage extends EPackage
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.4
 	 * @generated
 	 * @ordered
 	 */
@@ -4200,6 +4202,7 @@ public interface TypesPackage extends EPackage
 	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName()
 	 * @see #getJvmUnknownTypeReference()
+	 * @since 2.4
 	 * @generated
 	 */
 	EAttribute getJvmUnknownTypeReference_QualifiedName();
@@ -5382,6 +5385,7 @@ public interface TypesPackage extends EPackage
 		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @since 2.4
 		 * @generated
 		 */
 		EAttribute JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME = eINSTANCE.getJvmUnknownTypeReference_QualifiedName();

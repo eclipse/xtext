@@ -1,13 +1,12 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
-
-import java.lang.Iterable;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -509,7 +508,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TypesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -524,7 +523,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		if (isInited) return (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TypesPackageImpl());
+		Object registeredTypesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TypesPackageImpl theTypesPackage = registeredTypesPackage instanceof TypesPackageImpl ? (TypesPackageImpl)registeredTypesPackage : new TypesPackageImpl();
 
 		isInited = true;
 
@@ -537,7 +537,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;
@@ -548,6 +547,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmIdentifiableElement()
 	{
 		return jvmIdentifiableElementEClass;
@@ -558,6 +558,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmType()
 	{
 		return jvmTypeEClass;
@@ -568,6 +569,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmVoid()
 	{
 		return jvmVoidEClass;
@@ -578,6 +580,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmComponentType()
 	{
 		return jvmComponentTypeEClass;
@@ -588,6 +591,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmComponentType_ArrayType()
 	{
 		return (EReference)jvmComponentTypeEClass.getEStructuralFeatures().get(0);
@@ -598,6 +602,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmPrimitiveType()
 	{
 		return jvmPrimitiveTypeEClass;
@@ -608,6 +613,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmPrimitiveType_SimpleName()
 	{
 		return (EAttribute)jvmPrimitiveTypeEClass.getEStructuralFeatures().get(0);
@@ -618,6 +624,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmArrayType()
 	{
 		return jvmArrayTypeEClass;
@@ -628,6 +635,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmArrayType_ComponentType()
 	{
 		return (EReference)jvmArrayTypeEClass.getEStructuralFeatures().get(0);
@@ -638,6 +646,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmDeclaredType()
 	{
 		return jvmDeclaredTypeEClass;
@@ -648,6 +657,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmDeclaredType_SuperTypes()
 	{
 		return (EReference)jvmDeclaredTypeEClass.getEStructuralFeatures().get(0);
@@ -658,6 +668,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmDeclaredType_Members()
 	{
 		return (EReference)jvmDeclaredTypeEClass.getEStructuralFeatures().get(1);
@@ -668,6 +679,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmDeclaredType_Abstract()
 	{
 		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(2);
@@ -678,6 +690,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmDeclaredType_Static()
 	{
 		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(3);
@@ -688,6 +701,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmDeclaredType_Final()
 	{
 		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(4);
@@ -698,6 +712,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmDeclaredType_PackageName()
 	{
 		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(5);
@@ -708,6 +723,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmTypeParameter()
 	{
 		return jvmTypeParameterEClass;
@@ -718,6 +734,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmTypeParameter_Name()
 	{
 		return (EAttribute)jvmTypeParameterEClass.getEStructuralFeatures().get(0);
@@ -728,6 +745,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmTypeParameter_Declarator()
 	{
 		return (EReference)jvmTypeParameterEClass.getEStructuralFeatures().get(1);
@@ -738,6 +756,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmTypeParameterDeclarator()
 	{
 		return jvmTypeParameterDeclaratorEClass;
@@ -748,6 +767,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmTypeParameterDeclarator_TypeParameters()
 	{
 		return (EReference)jvmTypeParameterDeclaratorEClass.getEStructuralFeatures().get(0);
@@ -758,6 +778,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmConstraintOwner()
 	{
 		return jvmConstraintOwnerEClass;
@@ -768,6 +789,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmConstraintOwner_Constraints()
 	{
 		return (EReference)jvmConstraintOwnerEClass.getEStructuralFeatures().get(0);
@@ -778,6 +800,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmTypeConstraint()
 	{
 		return jvmTypeConstraintEClass;
@@ -788,6 +811,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmTypeConstraint_TypeReference()
 	{
 		return (EReference)jvmTypeConstraintEClass.getEStructuralFeatures().get(0);
@@ -798,6 +822,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmTypeConstraint_Owner()
 	{
 		return (EReference)jvmTypeConstraintEClass.getEStructuralFeatures().get(1);
@@ -808,6 +833,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmUpperBound()
 	{
 		return jvmUpperBoundEClass;
@@ -818,6 +844,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmLowerBound()
 	{
 		return jvmLowerBoundEClass;
@@ -828,6 +855,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnnotationType()
 	{
 		return jvmAnnotationTypeEClass;
@@ -838,6 +866,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmEnumerationType()
 	{
 		return jvmEnumerationTypeEClass;
@@ -848,6 +877,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmEnumerationType_Literals()
 	{
 		return (EReference)jvmEnumerationTypeEClass.getEStructuralFeatures().get(0);
@@ -858,6 +888,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmEnumerationLiteral()
 	{
 		return jvmEnumerationLiteralEClass;
@@ -868,6 +899,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmGenericType()
 	{
 		return jvmGenericTypeEClass;
@@ -878,6 +910,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmGenericType_Interface()
 	{
 		return (EAttribute)jvmGenericTypeEClass.getEStructuralFeatures().get(0);
@@ -888,6 +921,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmGenericType_StrictFloatingPoint()
 	{
 		return (EAttribute)jvmGenericTypeEClass.getEStructuralFeatures().get(1);
@@ -898,6 +932,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmGenericType_Anonymous()
 	{
 		return (EAttribute)jvmGenericTypeEClass.getEStructuralFeatures().get(2);
@@ -908,6 +943,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmTypeReference()
 	{
 		return jvmTypeReferenceEClass;
@@ -918,6 +954,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmParameterizedTypeReference()
 	{
 		return jvmParameterizedTypeReferenceEClass;
@@ -928,6 +965,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmParameterizedTypeReference_Arguments()
 	{
 		return (EReference)jvmParameterizedTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -938,6 +976,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmParameterizedTypeReference_Type()
 	{
 		return (EReference)jvmParameterizedTypeReferenceEClass.getEStructuralFeatures().get(1);
@@ -948,6 +987,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmGenericArrayTypeReference()
 	{
 		return jvmGenericArrayTypeReferenceEClass;
@@ -958,6 +998,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmGenericArrayTypeReference_ComponentType()
 	{
 		return (EReference)jvmGenericArrayTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -968,6 +1009,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmWildcardTypeReference()
 	{
 		return jvmWildcardTypeReferenceEClass;
@@ -978,6 +1020,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnyTypeReference()
 	{
 		return jvmAnyTypeReferenceEClass;
@@ -988,6 +1031,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnyTypeReference_Type()
 	{
 		return (EReference)jvmAnyTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -998,6 +1042,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmMultiTypeReference()
 	{
 		return jvmMultiTypeReferenceEClass;
@@ -1008,6 +1053,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmMember()
 	{
 		return jvmMemberEClass;
@@ -1018,6 +1064,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmMember_DeclaringType()
 	{
 		return (EReference)jvmMemberEClass.getEStructuralFeatures().get(0);
@@ -1028,6 +1075,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmMember_Visibility()
 	{
 		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(1);
@@ -1038,6 +1086,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmMember_SimpleName()
 	{
 		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(2);
@@ -1048,6 +1097,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmMember_Identifier()
 	{
 		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(3);
@@ -1058,6 +1108,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmMember_Deprecated()
 	{
 		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(4);
@@ -1068,6 +1119,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmFeature()
 	{
 		return jvmFeatureEClass;
@@ -1078,6 +1130,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmFeature_LocalClasses()
 	{
 		return (EReference)jvmFeatureEClass.getEStructuralFeatures().get(0);
@@ -1088,6 +1141,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmField()
 	{
 		return jvmFieldEClass;
@@ -1098,6 +1152,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_Static()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(0);
@@ -1108,6 +1163,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_Final()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(1);
@@ -1118,6 +1174,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmField_Type()
 	{
 		return (EReference)jvmFieldEClass.getEStructuralFeatures().get(2);
@@ -1128,6 +1185,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_Volatile()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(3);
@@ -1138,6 +1196,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_Transient()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(4);
@@ -1148,6 +1207,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_Constant()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(5);
@@ -1158,6 +1218,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmField_ConstantValue()
 	{
 		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(6);
@@ -1168,6 +1229,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmExecutable()
 	{
 		return jvmExecutableEClass;
@@ -1178,6 +1240,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmExecutable_Parameters()
 	{
 		return (EReference)jvmExecutableEClass.getEStructuralFeatures().get(0);
@@ -1188,6 +1251,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmExecutable_Exceptions()
 	{
 		return (EReference)jvmExecutableEClass.getEStructuralFeatures().get(1);
@@ -1198,6 +1262,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmExecutable_VarArgs()
 	{
 		return (EAttribute)jvmExecutableEClass.getEStructuralFeatures().get(2);
@@ -1208,6 +1273,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmConstructor()
 	{
 		return jvmConstructorEClass;
@@ -1218,6 +1284,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmOperation()
 	{
 		return jvmOperationEClass;
@@ -1228,6 +1295,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Static()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(0);
@@ -1238,6 +1306,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Final()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(1);
@@ -1248,6 +1317,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Abstract()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(2);
@@ -1258,6 +1328,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmOperation_ReturnType()
 	{
 		return (EReference)jvmOperationEClass.getEStructuralFeatures().get(3);
@@ -1268,6 +1339,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmOperation_DefaultValue()
 	{
 		return (EReference)jvmOperationEClass.getEStructuralFeatures().get(4);
@@ -1278,6 +1350,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Synchronized()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(5);
@@ -1288,6 +1361,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Default()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(6);
@@ -1298,6 +1372,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_Native()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(7);
@@ -1308,6 +1383,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmOperation_StrictFloatingPoint()
 	{
 		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(8);
@@ -1318,6 +1394,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmFormalParameter()
 	{
 		return jvmFormalParameterEClass;
@@ -1328,6 +1405,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmFormalParameter_Name()
 	{
 		return (EAttribute)jvmFormalParameterEClass.getEStructuralFeatures().get(0);
@@ -1338,6 +1416,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmFormalParameter_ParameterType()
 	{
 		return (EReference)jvmFormalParameterEClass.getEStructuralFeatures().get(1);
@@ -1348,6 +1427,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnnotationTarget()
 	{
 		return jvmAnnotationTargetEClass;
@@ -1358,6 +1438,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnnotationTarget_Annotations()
 	{
 		return (EReference)jvmAnnotationTargetEClass.getEStructuralFeatures().get(0);
@@ -1368,6 +1449,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnnotationReference()
 	{
 		return jvmAnnotationReferenceEClass;
@@ -1378,6 +1460,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnnotationReference_Annotation()
 	{
 		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(0);
@@ -1388,6 +1471,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnnotationReference_ExplicitValues()
 	{
 		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(1);
@@ -1398,6 +1482,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnnotationValue()
 	{
 		return jvmAnnotationValueEClass;
@@ -1408,6 +1493,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnnotationValue_Operation()
 	{
 		return (EReference)jvmAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1418,6 +1504,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmIntAnnotationValue()
 	{
 		return jvmIntAnnotationValueEClass;
@@ -1428,6 +1515,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmIntAnnotationValue_Values()
 	{
 		return (EAttribute)jvmIntAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1438,6 +1526,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmBooleanAnnotationValue()
 	{
 		return jvmBooleanAnnotationValueEClass;
@@ -1448,6 +1537,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmBooleanAnnotationValue_Values()
 	{
 		return (EAttribute)jvmBooleanAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1458,6 +1548,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmByteAnnotationValue()
 	{
 		return jvmByteAnnotationValueEClass;
@@ -1468,6 +1559,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmByteAnnotationValue_Values()
 	{
 		return (EAttribute)jvmByteAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1478,6 +1570,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmShortAnnotationValue()
 	{
 		return jvmShortAnnotationValueEClass;
@@ -1488,6 +1581,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmShortAnnotationValue_Values()
 	{
 		return (EAttribute)jvmShortAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1498,6 +1592,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmLongAnnotationValue()
 	{
 		return jvmLongAnnotationValueEClass;
@@ -1508,6 +1603,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmLongAnnotationValue_Values()
 	{
 		return (EAttribute)jvmLongAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1518,6 +1614,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmDoubleAnnotationValue()
 	{
 		return jvmDoubleAnnotationValueEClass;
@@ -1528,6 +1625,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmDoubleAnnotationValue_Values()
 	{
 		return (EAttribute)jvmDoubleAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1538,6 +1636,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmFloatAnnotationValue()
 	{
 		return jvmFloatAnnotationValueEClass;
@@ -1548,6 +1647,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmFloatAnnotationValue_Values()
 	{
 		return (EAttribute)jvmFloatAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1558,6 +1658,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmCharAnnotationValue()
 	{
 		return jvmCharAnnotationValueEClass;
@@ -1568,6 +1669,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmCharAnnotationValue_Values()
 	{
 		return (EAttribute)jvmCharAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1578,6 +1680,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmStringAnnotationValue()
 	{
 		return jvmStringAnnotationValueEClass;
@@ -1588,6 +1691,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmStringAnnotationValue_Values()
 	{
 		return (EAttribute)jvmStringAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1598,6 +1702,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmTypeAnnotationValue()
 	{
 		return jvmTypeAnnotationValueEClass;
@@ -1608,6 +1713,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmTypeAnnotationValue_Values()
 	{
 		return (EReference)jvmTypeAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1618,6 +1724,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmAnnotationAnnotationValue()
 	{
 		return jvmAnnotationAnnotationValueEClass;
@@ -1628,6 +1735,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmAnnotationAnnotationValue_Values()
 	{
 		return (EReference)jvmAnnotationAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1638,6 +1746,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmEnumAnnotationValue()
 	{
 		return jvmEnumAnnotationValueEClass;
@@ -1648,6 +1757,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmEnumAnnotationValue_Values()
 	{
 		return (EReference)jvmEnumAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1658,6 +1768,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmDelegateTypeReference()
 	{
 		return jvmDelegateTypeReferenceEClass;
@@ -1668,6 +1779,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmDelegateTypeReference_Delegate()
 	{
 		return (EReference)jvmDelegateTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -1678,6 +1790,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmSpecializedTypeReference()
 	{
 		return jvmSpecializedTypeReferenceEClass;
@@ -1688,6 +1801,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmSpecializedTypeReference_Equivalent()
 	{
 		return (EReference)jvmSpecializedTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -1698,6 +1812,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmSynonymTypeReference()
 	{
 		return jvmSynonymTypeReferenceEClass;
@@ -1708,6 +1823,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmUnknownTypeReference()
 	{
 		return jvmUnknownTypeReferenceEClass;
@@ -1716,8 +1832,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.4
 	 * @generated
 	 */
+	@Override
 	public EAttribute getJvmUnknownTypeReference_QualifiedName()
 	{
 		return (EAttribute)jvmUnknownTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -1728,6 +1846,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmCompoundTypeReference()
 	{
 		return jvmCompoundTypeReferenceEClass;
@@ -1738,6 +1857,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmCompoundTypeReference_Type()
 	{
 		return (EReference)jvmCompoundTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -1748,6 +1868,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmCompoundTypeReference_References()
 	{
 		return (EReference)jvmCompoundTypeReferenceEClass.getEStructuralFeatures().get(1);
@@ -1758,6 +1879,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmCustomAnnotationValue()
 	{
 		return jvmCustomAnnotationValueEClass;
@@ -1768,6 +1890,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmCustomAnnotationValue_Values()
 	{
 		return (EReference)jvmCustomAnnotationValueEClass.getEStructuralFeatures().get(0);
@@ -1778,6 +1901,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getJvmInnerTypeReference()
 	{
 		return jvmInnerTypeReferenceEClass;
@@ -1788,6 +1912,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getJvmInnerTypeReference_Outer()
 	{
 		return (EReference)jvmInnerTypeReferenceEClass.getEStructuralFeatures().get(0);
@@ -1798,6 +1923,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getJvmVisibility()
 	{
 		return jvmVisibilityEEnum;
@@ -1808,6 +1934,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getIterable()
 	{
 		return iterableEDataType;
@@ -1818,6 +1945,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getITypeReferenceVisitor()
 	{
 		return iTypeReferenceVisitorEDataType;
@@ -1828,6 +1956,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getITypeReferenceVisitorWithParameter()
 	{
 		return iTypeReferenceVisitorWithParameterEDataType;
@@ -1838,6 +1967,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypesFactory getTypesFactory()
 	{
 		return (TypesFactory)getEFactoryInstance();
@@ -2482,118 +2612,118 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 */
 	protected void createGenModelAnnotations()
 	{
-		String source = "http://www.eclipse.org/emf/2002/GenModel";	
+		String source = "http://www.eclipse.org/emf/2002/GenModel";
 		addAnnotation
-		  (jvmIdentifiableElementEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] 
+		  (jvmIdentifiableElementEClass.getEOperations().get(0),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The identifier of a JvmIdentifiableElement is a canonical representation of the element.</p>\n<p>A type will return its fully qualified name as its identifier with a \'$\' delimiter for inner classes. \nThe identifier of an executables contains the identifiers of their respective parameter types. They do\nnot contain any information about type parameters.</p>\n<p>Examples for identifiers are:</p>\n<ul>\n<li>java.lang.String for a class</li>\n<li>java.util.Map$Entry for an inner class</li>\n<li>java.lang.String.String() for a constructor (note the repeated simple name)</li>\n<li>java.lang.String.charAt(int) for a method</li>\n<li>java.lang.String.offset for a field</li>\n<li>java.lang.Object[][] for an array type</li>\n</ul>"
-		   });	
+			   "documentation", "<p>The identifier of a JvmIdentifiableElement is a canonical representation of the element.</p>\n<p>A type will return its fully qualified name as its identifier with a \'$\' delimiter for inner classes. \nThe identifier of an executables contains the identifiers of their respective parameter types. They do\nnot contain any information about type parameters.</p>\n<p>Examples for identifiers are:</p>\n<ul>\n<li>java.lang.String for a class</li>\n<li>java.util.Map$Entry for an inner class</li>\n<li>java.lang.String.String() for a constructor (note the repeated simple name)</li>\n<li>java.lang.String.charAt(int) for a method</li>\n<li>java.lang.String.offset for a field</li>\n<li>java.lang.Object[][] for an array type</li>\n</ul>"
+		   });
 		addAnnotation
-		  (jvmIdentifiableElementEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] 
+		  (jvmIdentifiableElementEClass.getEOperations().get(1),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The simple name of a JvmIdentifiableElement is short representation of the element.</p>\n<p>The simple name does not contain any information about type parameters.</p>\n<p>Examples for simple names are:</p>\n<ul>\n<li>String for class java.lang.String</li>\n<li>Entry for class java.util.Map$Entry</li>\n<li>charAt for method java.lang.String.charAt(int)</li>\n<li>String for constructor java.lang.String.String(java.lang.String)</li>\n</ul>"
-		   });	
+			   "documentation", "<p>The simple name of a JvmIdentifiableElement is short representation of the element.</p>\n<p>The simple name does not contain any information about type parameters.</p>\n<p>Examples for simple names are:</p>\n<ul>\n<li>String for class java.lang.String</li>\n<li>Entry for class java.util.Map$Entry</li>\n<li>charAt for method java.lang.String.charAt(int)</li>\n<li>String for constructor java.lang.String.String(java.lang.String)</li>\n</ul>"
+		   });
 		addAnnotation
-		  (jvmIdentifiableElementEClass.getEOperations().get(2), 
-		   source, 
-		   new String[] 
+		  (jvmIdentifiableElementEClass.getEOperations().get(2),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The default delimiter character is the \'$\'.</p>\n@see #getQualifiedName(char)"
-		   });	
+			   "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The default delimiter character is the \'$\'.</p>\n@see #getQualifiedName(char)"
+		   });
 		addAnnotation
-		  (jvmIdentifiableElementEClass.getEOperations().get(3), 
-		   source, 
-		   new String[] 
+		  (jvmIdentifiableElementEClass.getEOperations().get(3),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.offset for field java.lang.String.offset</li>\n<li>java.lang.String for a constructor that is identified by java.lang.String.String(java.lang.String)</li>\n</ul>"
-		   });	
+			   "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.offset for field java.lang.String.offset</li>\n<li>java.lang.String for a constructor that is identified by java.lang.String.String(java.lang.String)</li>\n</ul>"
+		   });
 		addAnnotation
-		  (jvmDeclaredTypeEClass.getEOperations().get(2), 
-		   source, 
-		   new String[] 
+		  (jvmDeclaredTypeEClass.getEOperations().get(2),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns all the fields and operations with the given simple name.</p>\n<p>Inherited features will be returend, but overridden features are not contained in the result.</p>"
-		   });	
+			   "documentation", "<p>Returns all the fields and operations with the given simple name.</p>\n<p>Inherited features will be returend, but overridden features are not contained in the result.</p>"
+		   });
 		addAnnotation
-		  (jvmDeclaredTypeEClass.getEOperations().get(3), 
-		   source, 
-		   new String[] 
+		  (jvmDeclaredTypeEClass.getEOperations().get(3),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns all the fields and operations of this type.</p>\n<p>Inherited features are included, but overridden features will not be returned.</p>"
-		   });	
+			   "documentation", "<p>Returns all the fields and operations of this type.</p>\n<p>Inherited features are included, but overridden features will not be returned.</p>"
+		   });
 		addAnnotation
-		  (jvmDeclaredTypeEClass.getEOperations().get(7), 
-		   source, 
-		   new String[] 
+		  (jvmDeclaredTypeEClass.getEOperations().get(7),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns all the nested types with the given simple name.</p>\n<p>Inherited types will be returned, too.</p>"
-		   });	
+			   "documentation", "<p>Returns all the nested types with the given simple name.</p>\n<p>Inherited types will be returned, too.</p>"
+		   });
 		addAnnotation
-		  (jvmDeclaredTypeEClass.getEOperations().get(10), 
-		   source, 
-		   new String[] 
+		  (jvmDeclaredTypeEClass.getEOperations().get(10),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns all the nested types of this type.</p>\n<p>Inherited types will also be returned.</p>"
-		   });	
+			   "documentation", "<p>Returns all the nested types of this type.</p>\n<p>Inherited types will also be returned.</p>"
+		   });
 		addAnnotation
-		  (jvmTypeConstraintEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] 
+		  (jvmTypeConstraintEClass.getEOperations().get(0),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>\n<p>Examples for constraint identifiers are:</p>\n<ul>\n<li>extends java.util.List<java.lang.Map$Entry<java.lang.Object,java.lang.Object>></li>\n<li>super java.lang.Object</li>\n</ul>"
-		   });	
+			   "documentation", "<p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>\n<p>Examples for constraint identifiers are:</p>\n<ul>\n<li>extends java.util.List<java.lang.Map$Entry<java.lang.Object,java.lang.Object>></li>\n<li>super java.lang.Object</li>\n</ul>"
+		   });
 		addAnnotation
-		  (jvmTypeReferenceEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] 
+		  (jvmTypeReferenceEClass.getEOperations().get(1),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>\n<li>java.util.List<? extends java.lang.String>[] for a generic array type</li>\n</ul>"
-		   });	
+			   "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>\n<li>java.util.List<? extends java.lang.String>[] for a generic array type</li>\n</ul>"
+		   });
 		addAnnotation
-		  (jvmFeatureEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] 
+		  (jvmFeatureEClass.getEOperations().get(0),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns <code>true</code> if the feature is a static field or static operation.</p>\n\n@since 2.4"
-		   });	
+			   "documentation", "<p>Returns <code>true</code> if the feature is a static field or static operation.</p>\n\n@since 2.4"
+		   });
 		addAnnotation
-		  (getJvmOperation_DefaultValue(), 
-		   source, 
-		   new String[] 
+		  (getJvmOperation_DefaultValue(),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns the default value for the annotation member represented by this JvmOperation instance.</p>\n<p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.</p>"
-		   });	
+			   "documentation", "<p>Returns the default value for the annotation member represented by this JvmOperation instance.</p>\n<p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.</p>"
+		   });
 		addAnnotation
-		  (jvmAnnotationReferenceEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] 
+		  (jvmAnnotationReferenceEClass.getEOperations().get(0),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns all annotation values. That is, default values are included if not explicitly given.</p>"
-		   });	
+			   "documentation", "<p>Returns all annotation values. That is, default values are included if not explicitly given.</p>"
+		   });
 		addAnnotation
-		  (getJvmAnnotationReference_ExplicitValues(), 
-		   source, 
-		   new String[] 
+		  (getJvmAnnotationReference_ExplicitValues(),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns the explicit annotation values. That is, default values are not expected to be contained in that list.</p>\n<p>Important note: Some implementations don\'t have enough information about default values on annotations.\nThey may choose to consider all available values as explicit values.</p>"
-		   });	
+			   "documentation", "<p>Returns the explicit annotation values. That is, default values are not expected to be contained in that list.</p>\n<p>Important note: Some implementations don\'t have enough information about default values on annotations.\nThey may choose to consider all available values as explicit values.</p>"
+		   });
 		addAnnotation
-		  (jvmAnnotationValueEClass, 
-		   source, 
-		   new String[] 
+		  (jvmAnnotationValueEClass,
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Represents the value of an annotation member.</p>\n<p>That is, either the default value of an operation as a member of an annotation type, or the \nconcrete value in an annotation reference is returned.</p>"
-		   });	
+			   "documentation", "<p>Represents the value of an annotation member.</p>\n<p>That is, either the default value of an operation as a member of an annotation type, or the \nconcrete value in an annotation reference is returned.</p>"
+		   });
 		addAnnotation
-		  (getJvmUnknownTypeReference_QualifiedName(), 
-		   source, 
-		   new String[] 
+		  (getJvmUnknownTypeReference_QualifiedName(),
+		   source,
+		   new String[]
 		   {
-			 "documentation", "<p>Returns the known qualified name of the otherwise unresolveable type. May be <code>null</code>.</p>\n\n@since 2.4"
+			   "documentation", "<p>Returns the known qualified name of the otherwise unresolveable type. May be <code>null</code>.</p>\n\n@since 2.4"
 		   });
 	}
 

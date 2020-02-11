@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types;
 
@@ -34,10 +35,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Declaring Type</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declaring Type</em>' container reference.
 	 * @see #setDeclaringType(JvmDeclaredType)
@@ -62,10 +59,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.xtext.common.types.JvmVisibility}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Visibility</em>' attribute.
 	 * @see org.eclipse.xtext.common.types.JvmVisibility
@@ -90,10 +83,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Simple Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Simple Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Simple Name</em>' attribute.
 	 * @see #setSimpleName(String)
@@ -116,10 +105,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Identifier()
@@ -131,10 +116,6 @@ public interface JvmMember extends JvmAnnotationTarget
 	/**
 	 * Returns the value of the '<em><b>Deprecated</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Deprecated</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Deprecated</em>' attribute.
 	 * @see #isSetDeprecated()

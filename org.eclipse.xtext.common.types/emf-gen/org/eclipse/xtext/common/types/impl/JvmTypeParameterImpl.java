@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -102,6 +103,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<JvmTypeConstraint> getConstraints()
 	{
 		if (constraints == null)
@@ -116,6 +118,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -126,6 +129,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName)
 	{
 		String oldName = name;
@@ -139,6 +143,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeParameterDeclarator getDeclarator()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
@@ -161,6 +166,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDeclarator(JvmTypeParameterDeclarator newDeclarator)
 	{
 		if (newDeclarator != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR && newDeclarator != null))
@@ -370,7 +376,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types;
 
@@ -37,10 +38,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
@@ -63,10 +60,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Final</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Final</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Final</em>' attribute.
 	 * @see #setFinal(boolean)
@@ -89,10 +82,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Abstract</em>' attribute.
 	 * @see #setAbstract(boolean)
@@ -115,10 +104,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
@@ -167,10 +152,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Synchronized</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Synchronized</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Synchronized</em>' attribute.
 	 * @see #setSynchronized(boolean)
@@ -193,10 +174,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default</em>' attribute.
 	 * @see #setDefault(boolean)
@@ -219,10 +196,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Native</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Native</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Native</em>' attribute.
 	 * @see #setNative(boolean)
@@ -245,10 +218,6 @@ public interface JvmOperation extends JvmExecutable
 	/**
 	 * Returns the value of the '<em><b>Strict Floating Point</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Strict Floating Point</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Strict Floating Point</em>' attribute.
 	 * @see #setStrictFloatingPoint(boolean)

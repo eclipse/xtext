@@ -1,13 +1,12 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
-
-import java.lang.Iterable;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -157,6 +156,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmVoid createJvmVoid()
 	{
 		JvmVoidImplCustom jvmVoid = new JvmVoidImplCustom();
@@ -168,6 +168,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmPrimitiveType createJvmPrimitiveType()
 	{
 		JvmPrimitiveTypeImplCustom jvmPrimitiveType = new JvmPrimitiveTypeImplCustom();
@@ -179,6 +180,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmArrayType createJvmArrayType()
 	{
 		JvmArrayTypeImplCustom jvmArrayType = new JvmArrayTypeImplCustom();
@@ -190,6 +192,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeParameter createJvmTypeParameter()
 	{
 		JvmTypeParameterImplCustom jvmTypeParameter = new JvmTypeParameterImplCustom();
@@ -201,6 +204,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmUpperBound createJvmUpperBound()
 	{
 		JvmUpperBoundImplCustom jvmUpperBound = new JvmUpperBoundImplCustom();
@@ -212,6 +216,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmLowerBound createJvmLowerBound()
 	{
 		JvmLowerBoundImplCustom jvmLowerBound = new JvmLowerBoundImplCustom();
@@ -223,6 +228,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmAnnotationType createJvmAnnotationType()
 	{
 		JvmAnnotationTypeImpl jvmAnnotationType = new JvmAnnotationTypeImpl();
@@ -234,6 +240,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmEnumerationType createJvmEnumerationType()
 	{
 		JvmEnumerationTypeImplCustom jvmEnumerationType = new JvmEnumerationTypeImplCustom();
@@ -245,6 +252,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmEnumerationLiteral createJvmEnumerationLiteral()
 	{
 		JvmEnumerationLiteralImplCustom jvmEnumerationLiteral = new JvmEnumerationLiteralImplCustom();
@@ -256,6 +264,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmGenericType createJvmGenericType()
 	{
 		JvmGenericTypeImplCustom jvmGenericType = new JvmGenericTypeImplCustom();
@@ -267,6 +276,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmParameterizedTypeReference createJvmParameterizedTypeReference()
 	{
 		JvmParameterizedTypeReferenceImplCustom jvmParameterizedTypeReference = new JvmParameterizedTypeReferenceImplCustom();
@@ -278,6 +288,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmGenericArrayTypeReference createJvmGenericArrayTypeReference()
 	{
 		JvmGenericArrayTypeReferenceImplCustom jvmGenericArrayTypeReference = new JvmGenericArrayTypeReferenceImplCustom();
@@ -289,6 +300,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmWildcardTypeReference createJvmWildcardTypeReference()
 	{
 		JvmWildcardTypeReferenceImplCustom jvmWildcardTypeReference = new JvmWildcardTypeReferenceImplCustom();
@@ -300,6 +312,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmAnyTypeReference createJvmAnyTypeReference()
 	{
 		JvmAnyTypeReferenceImplCustom jvmAnyTypeReference = new JvmAnyTypeReferenceImplCustom();
@@ -311,6 +324,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmMultiTypeReference createJvmMultiTypeReference()
 	{
 		JvmMultiTypeReferenceImplCustom jvmMultiTypeReference = new JvmMultiTypeReferenceImplCustom();
@@ -322,6 +336,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmField createJvmField()
 	{
 		JvmFieldImplCustom jvmField = new JvmFieldImplCustom();
@@ -333,6 +348,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmConstructor createJvmConstructor()
 	{
 		JvmConstructorImplCustom jvmConstructor = new JvmConstructorImplCustom();
@@ -344,6 +360,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmOperation createJvmOperation()
 	{
 		JvmOperationImpl jvmOperation = new JvmOperationImpl();
@@ -355,6 +372,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmFormalParameter createJvmFormalParameter()
 	{
 		JvmFormalParameterImplCustom jvmFormalParameter = new JvmFormalParameterImplCustom();
@@ -366,6 +384,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmAnnotationReference createJvmAnnotationReference()
 	{
 		JvmAnnotationReferenceImplCustom jvmAnnotationReference = new JvmAnnotationReferenceImplCustom();
@@ -377,6 +396,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmIntAnnotationValue createJvmIntAnnotationValue()
 	{
 		JvmIntAnnotationValueImpl jvmIntAnnotationValue = new JvmIntAnnotationValueImpl();
@@ -388,6 +408,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmBooleanAnnotationValue createJvmBooleanAnnotationValue()
 	{
 		JvmBooleanAnnotationValueImpl jvmBooleanAnnotationValue = new JvmBooleanAnnotationValueImpl();
@@ -399,6 +420,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmByteAnnotationValue createJvmByteAnnotationValue()
 	{
 		JvmByteAnnotationValueImpl jvmByteAnnotationValue = new JvmByteAnnotationValueImpl();
@@ -410,6 +432,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmShortAnnotationValue createJvmShortAnnotationValue()
 	{
 		JvmShortAnnotationValueImpl jvmShortAnnotationValue = new JvmShortAnnotationValueImpl();
@@ -421,6 +444,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmLongAnnotationValue createJvmLongAnnotationValue()
 	{
 		JvmLongAnnotationValueImpl jvmLongAnnotationValue = new JvmLongAnnotationValueImpl();
@@ -432,6 +456,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmDoubleAnnotationValue createJvmDoubleAnnotationValue()
 	{
 		JvmDoubleAnnotationValueImpl jvmDoubleAnnotationValue = new JvmDoubleAnnotationValueImpl();
@@ -443,6 +468,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmFloatAnnotationValue createJvmFloatAnnotationValue()
 	{
 		JvmFloatAnnotationValueImpl jvmFloatAnnotationValue = new JvmFloatAnnotationValueImpl();
@@ -454,6 +480,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmCharAnnotationValue createJvmCharAnnotationValue()
 	{
 		JvmCharAnnotationValueImpl jvmCharAnnotationValue = new JvmCharAnnotationValueImpl();
@@ -465,6 +492,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmStringAnnotationValue createJvmStringAnnotationValue()
 	{
 		JvmStringAnnotationValueImpl jvmStringAnnotationValue = new JvmStringAnnotationValueImpl();
@@ -476,6 +504,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeAnnotationValue createJvmTypeAnnotationValue()
 	{
 		JvmTypeAnnotationValueImpl jvmTypeAnnotationValue = new JvmTypeAnnotationValueImpl();
@@ -487,6 +516,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmAnnotationAnnotationValue createJvmAnnotationAnnotationValue()
 	{
 		JvmAnnotationAnnotationValueImplCustom jvmAnnotationAnnotationValue = new JvmAnnotationAnnotationValueImplCustom();
@@ -498,6 +528,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmEnumAnnotationValue createJvmEnumAnnotationValue()
 	{
 		JvmEnumAnnotationValueImpl jvmEnumAnnotationValue = new JvmEnumAnnotationValueImpl();
@@ -509,6 +540,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmDelegateTypeReference createJvmDelegateTypeReference()
 	{
 		JvmDelegateTypeReferenceImplCustom jvmDelegateTypeReference = new JvmDelegateTypeReferenceImplCustom();
@@ -520,6 +552,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmSynonymTypeReference createJvmSynonymTypeReference()
 	{
 		JvmSynonymTypeReferenceImplCustom jvmSynonymTypeReference = new JvmSynonymTypeReferenceImplCustom();
@@ -531,6 +564,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmUnknownTypeReference createJvmUnknownTypeReference()
 	{
 		JvmUnknownTypeReferenceImplCustom jvmUnknownTypeReference = new JvmUnknownTypeReferenceImplCustom();
@@ -542,6 +576,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmCustomAnnotationValue createJvmCustomAnnotationValue()
 	{
 		JvmCustomAnnotationValueImpl jvmCustomAnnotationValue = new JvmCustomAnnotationValueImpl();
@@ -553,6 +588,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmInnerTypeReference createJvmInnerTypeReference()
 	{
 		JvmInnerTypeReferenceImplCustom jvmInnerTypeReference = new JvmInnerTypeReferenceImplCustom();
@@ -606,6 +642,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypesPackage getTypesPackage()
 	{
 		return (TypesPackage)getEPackage();

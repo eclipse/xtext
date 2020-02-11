@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -205,6 +206,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		return static_;
@@ -215,6 +217,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatic(boolean newStatic)
 	{
 		boolean oldStatic = static_;
@@ -228,6 +231,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFinal()
 	{
 		return final_;
@@ -238,6 +242,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFinal(boolean newFinal)
 	{
 		boolean oldFinal = final_;
@@ -251,6 +256,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getType()
 	{
 		return type;
@@ -278,6 +284,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(JvmTypeReference newType)
 	{
 		if (newType != type)
@@ -299,6 +306,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVolatile()
 	{
 		return volatile_;
@@ -309,6 +317,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVolatile(boolean newVolatile)
 	{
 		boolean oldVolatile = volatile_;
@@ -322,6 +331,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isTransient()
 	{
 		return transient_;
@@ -332,6 +342,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransient(boolean newTransient)
 	{
 		boolean oldTransient = transient_;
@@ -345,6 +356,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isConstant()
 	{
 		return constant;
@@ -355,6 +367,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstant(boolean newConstant)
 	{
 		boolean oldConstant = constant;
@@ -370,6 +383,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void unsetConstant()
 	{
 		boolean oldConstant = constant;
@@ -385,6 +399,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSetConstant()
 	{
 		return constantESet;
@@ -395,6 +410,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getConstantValue()
 	{
 		return constantValue;
@@ -405,6 +421,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConstantValue(Object newConstantValue)
 	{
 		Object oldConstantValue = constantValue;
@@ -418,6 +435,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getConstantValueAsLong()
 	{
 		// TODO: implement this method
@@ -430,6 +448,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getConstantValueAsInt()
 	{
 		// TODO: implement this method
@@ -442,6 +461,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public short getConstantValueAsShort()
 	{
 		// TODO: implement this method
@@ -454,6 +474,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public byte getConstantValueAsByte()
 	{
 		// TODO: implement this method
@@ -466,6 +487,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getConstantValueAsDouble()
 	{
 		// TODO: implement this method
@@ -478,6 +500,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public float getConstantValueAsFloat()
 	{
 		// TODO: implement this method
@@ -490,6 +513,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public char getConstantValueAsChar()
 	{
 		// TODO: implement this method
@@ -502,6 +526,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean getConstantValueAsBoolean()
 	{
 		// TODO: implement this method
@@ -514,6 +539,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getConstantValueAsString()
 	{
 		// TODO: implement this method
@@ -673,7 +699,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (static: ");
 		result.append(static_);
 		result.append(", final: ");

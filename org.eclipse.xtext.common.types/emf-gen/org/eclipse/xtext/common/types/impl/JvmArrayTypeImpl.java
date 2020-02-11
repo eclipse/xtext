@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -62,6 +63,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmComponentType getComponentType()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
@@ -84,6 +86,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setComponentType(JvmComponentType newComponentType)
 	{
 		if (newComponentType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE && newComponentType != null))
@@ -107,6 +110,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getDimensions()
 	{
 		// TODO: implement this method

@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -71,6 +72,7 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmTypeReference getComponentType()
 	{
 		return componentType;
@@ -98,6 +100,7 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setComponentType(JvmTypeReference newComponentType)
 	{
 		if (newComponentType != componentType)
@@ -119,6 +122,7 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getDimensions()
 	{
 		// TODO: implement this method
@@ -131,6 +135,7 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmArrayType getType()
 	{
 		// TODO: implement this method

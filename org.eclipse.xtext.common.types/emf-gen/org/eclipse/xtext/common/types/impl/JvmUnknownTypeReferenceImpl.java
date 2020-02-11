@@ -1,9 +1,10 @@
 /**
- * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2011-2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -36,6 +37,7 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getQualifiedName()
+	 * @since 2.4
 	 * @generated
 	 * @ordered
 	 */
@@ -46,6 +48,7 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getQualifiedName()
+	 * @since 2.4
 	 * @generated
 	 * @ordered
 	 */
@@ -75,8 +78,10 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.4
 	 * @generated
 	 */
+	@Override
 	public String getQualifiedName()
 	{
 		return qualifiedName;
@@ -85,8 +90,10 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @since 2.4
 	 * @generated
 	 */
+	@Override
 	public void setQualifiedName(String newQualifiedName)
 	{
 		String oldQualifiedName = qualifiedName;
@@ -171,7 +178,7 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	{
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (qualifiedName: ");
 		result.append(qualifiedName);
 		result.append(')');
