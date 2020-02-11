@@ -252,7 +252,7 @@ class XtendFileGenerator {
 			
 			def «IF conf.noTypeInference»CharSequence «ENDIF»signature() «TQ()»
 				Bla bla Foo Bar
-				(c) 2011 - all rights reserved
+				(c) 2011 - Cool header
 				 - note the multiline, and the correct indentation -
 			«TQ()»
 		}

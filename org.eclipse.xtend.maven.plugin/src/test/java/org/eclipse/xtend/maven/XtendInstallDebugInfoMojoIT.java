@@ -131,10 +131,10 @@ public class XtendInstallDebugInfoMojoIT {
 				"  // test {\n" + 
 				"    package test; // JavaB.class\n" + 
 				"    class JavaB {\n" + 
-				"      void <init>() { // JavaB.java:13\n" + 
+				"      void <init>() { // JavaB.java:14\n" + 
 				"        void this;\n" + 
 				"      }\n" + 
-				"      void foo() { // JavaB.java:15\n" + 
+				"      void foo() { // JavaB.java:16\n" + 
 				"        void this;\n" + 
 				"        void test;\n" + 
 				"      }\n" + 

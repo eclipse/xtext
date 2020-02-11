@@ -934,7 +934,7 @@ public class XtendFileGenerator {
     _builder.append("Bla bla Foo Bar");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("(c) 2011 - all rights reserved");
+    _builder.append("(c) 2011 - Cool header");
     _builder.newLine();
     _builder.append("\t\t ");
     _builder.append("- note the multiline, and the correct indentation -");

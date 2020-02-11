@@ -1,9 +1,10 @@
 /**
  * Copyright (c) 2013, 2018 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ * 
+ * SPDX-License-Identifier: EPL-2.0
  */
 package org.eclipse.xtend.core.tests.compiler;
 
@@ -400,16 +401,19 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("* Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* All rights reserved. This program and the accompanying materials");
+    _builder.append("* This program and the accompanying materials are made available under the");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* are made available under the terms of the Eclipse Public License v1.0");
+    _builder.append("* terms of the Eclipse Public License 2.0 which is available at");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* which accompanies this distribution, and is available at");
+    _builder.append("* http://www.eclipse.org/legal/epl-2.0.");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* http://www.eclipse.org/legal/epl-v10.html");
+    _builder.append("* ");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* SPDX-License-Identifier: EPL-2.0");
     _builder.newLine();
     _builder.append(" ");
     _builder.append("*/");
@@ -431,16 +435,19 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("* Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.");
     _builder_1.newLine();
     _builder_1.append(" ");
-    _builder_1.append("* All rights reserved. This program and the accompanying materials");
+    _builder_1.append("* This program and the accompanying materials are made available under the");
     _builder_1.newLine();
     _builder_1.append(" ");
-    _builder_1.append("* are made available under the terms of the Eclipse Public License v1.0");
+    _builder_1.append("* terms of the Eclipse Public License 2.0 which is available at");
     _builder_1.newLine();
     _builder_1.append(" ");
-    _builder_1.append("* which accompanies this distribution, and is available at");
+    _builder_1.append("* http://www.eclipse.org/legal/epl-2.0.");
     _builder_1.newLine();
     _builder_1.append(" ");
-    _builder_1.append("* http://www.eclipse.org/legal/epl-v10.html");
+    _builder_1.append("* ");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* SPDX-License-Identifier: EPL-2.0");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("*/");

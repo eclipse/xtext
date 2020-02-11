@@ -20,11 +20,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 /*******************************************************************************
- * Copyright (c) 2010, 2019 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2010, 2020 itemis AG (http://www.itemis.eu) and others.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0
  *******************************************************************************/
 @SuppressWarnings("all")
 public class InternalXtendParser extends AbstractInternalAntlrParser {
@@ -33849,7 +33850,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "305:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )";
+            return "306:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmSuperTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmSuperTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmSuperTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )";
         }
     }
     static final String dfa_7s = "\32\uffff";
@@ -33909,7 +33910,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_13;
         }
         public String getDescription() {
-            return "1077:3: ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )";
+            return "1078:3: ( ( ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) ) (otherlv_12= '=' ( (lv_initialValue_13_0= ruleXAnnotationElementValue ) ) )? (otherlv_14= ';' )? ) | ( () ( (lv_modifiers_16_0= ruleCommonModifier ) )* otherlv_17= 'class' ( (lv_name_18_0= ruleValidID ) ) (otherlv_19= '<' ( (lv_typeParameters_20_0= ruleJvmTypeParameter ) ) (otherlv_21= ',' ( (lv_typeParameters_22_0= ruleJvmTypeParameter ) ) )* otherlv_23= '>' )? (otherlv_24= 'extends' ( (lv_extends_25_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_26= 'implements' ( (lv_implements_27_0= ruleJvmParameterizedTypeReference ) ) (otherlv_28= ',' ( (lv_implements_29_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_30= '{' ( (lv_members_31_0= ruleMember ) )* otherlv_32= '}' ) | ( () ( (lv_modifiers_34_0= ruleCommonModifier ) )* otherlv_35= 'interface' ( (lv_name_36_0= ruleValidID ) ) (otherlv_37= '<' ( (lv_typeParameters_38_0= ruleJvmTypeParameter ) ) (otherlv_39= ',' ( (lv_typeParameters_40_0= ruleJvmTypeParameter ) ) )* otherlv_41= '>' )? (otherlv_42= 'extends' ( (lv_extends_43_0= ruleJvmParameterizedTypeReference ) ) (otherlv_44= ',' ( (lv_extends_45_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_46= '{' ( (lv_members_47_0= ruleMember ) )* otherlv_48= '}' ) | ( () ( (lv_modifiers_50_0= ruleCommonModifier ) )* otherlv_51= 'enum' ( (lv_name_52_0= ruleValidID ) ) otherlv_53= '{' ( ( (lv_members_54_0= ruleXtendEnumLiteral ) ) (otherlv_55= ',' ( (lv_members_56_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_57= ';' )? otherlv_58= '}' ) | ( () ( (lv_modifiers_60_0= ruleCommonModifier ) )* otherlv_61= 'annotation' ( (lv_name_62_0= ruleValidID ) ) otherlv_63= '{' ( (lv_members_64_0= ruleAnnotationField ) )* otherlv_65= '}' ) )";
         }
     }
     static final String dfa_14s = "\20\uffff";
@@ -33957,7 +33958,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_19;
         }
         public String getDescription() {
-            return "1079:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) )";
+            return "1080:5: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( () ( (lv_modifiers_9_0= ruleCommonModifier ) )* ( (lv_type_10_0= ruleJvmTypeReference ) ) ( (lv_name_11_0= ruleValidID ) ) ) )";
         }
     }
     static final String dfa_20s = "\47\uffff";
@@ -34030,7 +34031,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_26;
         }
         public String getDescription() {
-            return "1145:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
+            return "1146:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
         }
     }
     static final String dfa_27s = "\34\uffff";
@@ -34092,7 +34093,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_33;
         }
         public String getDescription() {
-            return "1912:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )";
+            return "1913:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) ) ( ( (lv_parameters_49_0= ruleParameter ) ) (otherlv_50= ',' ( (lv_parameters_51_0= ruleParameter ) ) )* )? otherlv_52= ')' (otherlv_53= 'throws' ( (lv_exceptions_54_0= ruleJvmTypeReference ) ) (otherlv_55= ',' ( (lv_exceptions_56_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_57_0= ruleXBlockExpression ) ) | ( (lv_expression_58_0= ruleRichString ) ) | otherlv_59= ';' )? ) | ( () ( (lv_modifiers_61_0= ruleCommonModifier ) )* otherlv_62= 'new' (otherlv_63= '<' ( (lv_typeParameters_64_0= ruleJvmTypeParameter ) ) (otherlv_65= ',' ( (lv_typeParameters_66_0= ruleJvmTypeParameter ) ) )* otherlv_67= '>' )? otherlv_68= '(' ( ( (lv_parameters_69_0= ruleParameter ) ) (otherlv_70= ',' ( (lv_parameters_71_0= ruleParameter ) ) )* )? otherlv_72= ')' (otherlv_73= 'throws' ( (lv_exceptions_74_0= ruleJvmTypeReference ) ) (otherlv_75= ',' ( (lv_exceptions_76_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_77_0= ruleXBlockExpression ) ) ) | ( () ( (lv_modifiers_79_0= ruleCommonModifier ) )* otherlv_80= 'class' ( (lv_name_81_0= ruleValidID ) ) (otherlv_82= '<' ( (lv_typeParameters_83_0= ruleJvmTypeParameter ) ) (otherlv_84= ',' ( (lv_typeParameters_85_0= ruleJvmTypeParameter ) ) )* otherlv_86= '>' )? (otherlv_87= 'extends' ( (lv_extends_88_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_89= 'implements' ( (lv_implements_90_0= ruleJvmParameterizedTypeReference ) ) (otherlv_91= ',' ( (lv_implements_92_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_93= '{' ( (lv_members_94_0= ruleMember ) )* otherlv_95= '}' ) | ( () ( (lv_modifiers_97_0= ruleCommonModifier ) )* otherlv_98= 'interface' ( (lv_name_99_0= ruleValidID ) ) (otherlv_100= '<' ( (lv_typeParameters_101_0= ruleJvmTypeParameter ) ) (otherlv_102= ',' ( (lv_typeParameters_103_0= ruleJvmTypeParameter ) ) )* otherlv_104= '>' )? (otherlv_105= 'extends' ( (lv_extends_106_0= ruleJvmParameterizedTypeReference ) ) (otherlv_107= ',' ( (lv_extends_108_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_109= '{' ( (lv_members_110_0= ruleMember ) )* otherlv_111= '}' ) | ( () ( (lv_modifiers_113_0= ruleCommonModifier ) )* otherlv_114= 'enum' ( (lv_name_115_0= ruleValidID ) ) otherlv_116= '{' ( ( (lv_members_117_0= ruleXtendEnumLiteral ) ) (otherlv_118= ',' ( (lv_members_119_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_120= ';' )? otherlv_121= '}' ) | ( () ( (lv_modifiers_123_0= ruleCommonModifier ) )* otherlv_124= 'annotation' ( (lv_name_125_0= ruleValidID ) ) otherlv_126= '{' ( (lv_members_127_0= ruleAnnotationField ) )* otherlv_128= '}' ) )";
         }
     }
     static final String dfa_34s = "\24\uffff";
@@ -34144,7 +34145,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_39;
         }
         public String getDescription() {
-            return "1940:5: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )";
+            return "1941:5: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )";
         }
     }
     static final String[] dfa_40s = {
@@ -34204,7 +34205,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_40;
         }
         public String getDescription() {
-            return "1980:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
+            return "1981:7: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
         }
     }
     static final String dfa_41s = "\41\uffff";
@@ -34271,7 +34272,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_47;
         }
         public String getDescription() {
-            return "2095:7: ( (lv_name_12_0= ruleValidID ) )?";
+            return "2096:7: ( (lv_name_12_0= ruleValidID ) )?";
         }
     }
 
@@ -34289,7 +34290,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_47;
         }
         public String getDescription() {
-            return "2207:7: ( (lv_name_18_0= ruleValidID ) )?";
+            return "2208:7: ( (lv_name_18_0= ruleValidID ) )?";
         }
     }
     static final String dfa_48s = "\51\uffff";
@@ -34362,7 +34363,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_53;
         }
         public String getDescription() {
-            return "2443:5: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) )";
+            return "2444:5: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleTypeReferenceWithTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleTypeReferenceWithTypeArgs ) ) ( (lv_name_39_0= ruleFunctionID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleTypeReferenceNoTypeArgs ) ) ( ( ruleFunctionID ) ) '(' ) )=> ( ( (lv_returnType_41_0= ruleTypeReferenceNoTypeArgs ) ) ( (lv_name_42_0= ruleFunctionID ) ) otherlv_43= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_44_0= ruleCreateExtensionInfo ) ) ( (lv_name_45_0= ruleValidID ) ) otherlv_46= '(' ) ) | ( ( (lv_name_47_0= ruleFunctionID ) ) otherlv_48= '(' ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -34570,7 +34571,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_59;
         }
         public String getDescription() {
-            return "3729:2: ( (this_ParameterizedTypeReferenceWithTypeArgs_0= ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | (this_TypeReferenceNoTypeArgs_3= ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | this_XFunctionTypeRef_6= ruleXFunctionTypeRef )";
+            return "3730:2: ( (this_ParameterizedTypeReferenceWithTypeArgs_0= ruleParameterizedTypeReferenceWithTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )* ) | (this_TypeReferenceNoTypeArgs_3= ruleTypeReferenceNoTypeArgs ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )+ ) | this_XFunctionTypeRef_6= ruleXFunctionTypeRef )";
         }
     }
     static final String dfa_60s = "\50\uffff";
@@ -34644,7 +34645,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_66;
         }
         public String getDescription() {
-            return "3934:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "3935:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -34718,7 +34719,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_73;
         }
         public String getDescription() {
-            return "4051:2: (this_OpMultiAssign_0= ruleOpMultiAssign | this_OpOr_1= ruleOpOr | this_OpAnd_2= ruleOpAnd | this_OpEquality_3= ruleOpEquality | this_OpCompare_4= ruleOpCompare | this_OpOther_5= ruleOpOther | this_OpMulti_6= ruleOpMulti | this_OpUnary_7= ruleOpUnary | this_OpPostfix_8= ruleOpPostfix )";
+            return "4052:2: (this_OpMultiAssign_0= ruleOpMultiAssign | this_OpOr_1= ruleOpOr | this_OpAnd_2= ruleOpAnd | this_OpEquality_3= ruleOpEquality | this_OpCompare_4= ruleOpCompare | this_OpOther_5= ruleOpOther | this_OpMulti_6= ruleOpMulti | this_OpUnary_7= ruleOpUnary | this_OpPostfix_8= ruleOpPostfix )";
         }
     }
     static final String dfa_74s = "\40\uffff";
@@ -34784,7 +34785,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_80;
         }
         public String getDescription() {
-            return "4852:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XConditionalExpression_4= ruleXConditionalExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )";
+            return "4853:2: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XConditionalExpression_4= ruleXConditionalExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )";
         }
     }
     static final String dfa_81s = "\12\uffff";
@@ -34828,7 +34829,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_87;
         }
         public String getDescription() {
-            return "4914:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
+            return "4915:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35007,7 +35008,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_93;
         }
         public String getDescription() {
-            return "5414:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_2_0= ruleJvmTypeReference ) ) ( (lv_name_3_0= ruleInnerVarID ) ) ) ) | ( (lv_name_4_0= ruleInnerVarID ) ) )";
+            return "5415:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_2_0= ruleJvmTypeReference ) ) ( (lv_name_3_0= ruleInnerVarID ) ) ) ) | ( (lv_name_4_0= ruleInnerVarID ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35207,7 +35208,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_98;
         }
         public String getDescription() {
-            return "5553:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_2_0= ruleJvmTypeReference ) ) ( (lv_name_3_0= ruleInnerVarID ) ) ) ) | ( (lv_name_4_0= ruleInnerVarID ) ) )";
+            return "5554:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleInnerVarID ) ) ) )=> ( ( (lv_type_2_0= ruleJvmTypeReference ) ) ( (lv_name_3_0= ruleInnerVarID ) ) ) ) | ( (lv_name_4_0= ruleInnerVarID ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35840,7 +35841,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_105;
         }
         public String getDescription() {
-            return "5768:3: ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?";
+            return "5769:3: ( ( ( ( () '{' ) )=> ( () otherlv_2= '{' ) ) ( (lv_members_3_0= ruleMember ) )* otherlv_4= '}' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -35996,7 +35997,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_106;
         }
         public String getDescription() {
-            return "5860:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
+            return "5861:3: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36152,7 +36153,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_107;
         }
         public String getDescription() {
-            return "5917:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+            return "5918:3: ( ( ( ( '(' ) )=> (lv_explicitConstructorCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36271,7 +36272,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_113;
         }
         public String getDescription() {
-            return "5936:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
+            return "5937:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -36941,7 +36942,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_114;
         }
         public String getDescription() {
-            return "6034:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
+            return "6035:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37059,7 +37060,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_120;
         }
         public String getDescription() {
-            return "6328:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) )";
+            return "6329:3: ( ( ( ( ( '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=> (otherlv_2= '(' ( (lv_declaredParam_3_0= ruleJvmFormalParameter ) ) otherlv_4= ':' ) ) ( (lv_switch_5_0= ruleXExpression ) ) otherlv_6= ')' ) | ( ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )? ( (lv_switch_9_0= ruleXExpressionOrSimpleConstructorCall ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37176,7 +37177,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_126;
         }
         public String getDescription() {
-            return "6397:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
+            return "6398:5: ( ( ( ( ( ruleJvmFormalParameter ) ) ':' ) )=> ( ( (lv_declaredParam_7_0= ruleJvmFormalParameter ) ) otherlv_8= ':' ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37751,7 +37752,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_131;
         }
         public String getDescription() {
-            return "6640:2: ( ( ( 'new' )=>this_XbaseConstructorCall_0= ruleXbaseConstructorCall ) | this_XExpression_1= ruleXExpression )";
+            return "6641:2: ( ( ( 'new' )=>this_XbaseConstructorCall_0= ruleXbaseConstructorCall ) | this_XExpression_1= ruleXExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -37922,7 +37923,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_137;
         }
         public String getDescription() {
-            return "7595:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?";
+            return "7596:3: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )? otherlv_8= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38038,7 +38039,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_142;
         }
         public String getDescription() {
-            return "7603:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
+            return "7604:4: ( ( ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( ( ( ( ( ruleValidID ) ) '=' ) )=> (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValueOrCommaList ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38220,7 +38221,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_143;
         }
         public String getDescription() {
-            return "7783:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
+            return "7784:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | (this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression ( () (otherlv_9= ',' ( (lv_elements_10_0= ruleXAnnotationOrExpression ) ) )+ )? ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38264,7 +38265,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_143;
         }
         public String getDescription() {
-            return "7925:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
+            return "7926:2: ( ( ( ( ( () '#' '[' ) )=> ( () otherlv_1= '#' otherlv_2= '[' ) ) ( ( (lv_elements_3_0= ruleXAnnotationOrExpression ) ) (otherlv_4= ',' ( (lv_elements_5_0= ruleXAnnotationOrExpression ) ) )* )? otherlv_6= ']' ) | this_XAnnotationOrExpression_7= ruleXAnnotationOrExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38335,7 +38336,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_150;
         }
         public String getDescription() {
-            return "()* loopback of 8729:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
+            return "()* loopback of 8730:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38506,7 +38507,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_155;
         }
         public String getDescription() {
-            return "8805:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
+            return "8806:2: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' | kw= '=>' ) ) | kw= '<>' | kw= '?:' )";
         }
     }
 
@@ -38524,7 +38525,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_107;
         }
         public String getDescription() {
-            return "9706:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
+            return "9707:5: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -38568,7 +38569,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_113;
         }
         public String getDescription() {
-            return "9725:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
+            return "9726:6: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39126,7 +39127,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_114;
         }
         public String getDescription() {
-            return "9823:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
+            return "9824:5: ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39242,7 +39243,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_161;
         }
         public String getDescription() {
-            return "9868:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
+            return "9869:2: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | ( ( ( () 'synchronized' '(' ) )=>this_XSynchronizedExpression_3= ruleXSynchronizedExpression ) | this_XFeatureCall_4= ruleXFeatureCall | this_XLiteral_5= ruleXLiteral | this_XIfExpression_6= ruleXIfExpression | ( ( ( () 'for' '(' ( ( ruleJvmFormalParameter ) ) ':' ) )=>this_XForLoopExpression_7= ruleXForLoopExpression ) | this_XBasicForLoopExpression_8= ruleXBasicForLoopExpression | this_XWhileExpression_9= ruleXWhileExpression | this_XDoWhileExpression_10= ruleXDoWhileExpression | this_XThrowExpression_11= ruleXThrowExpression | this_XReturnExpression_12= ruleXReturnExpression | this_XTryCatchFinallyExpression_13= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_14= ruleXParenthesizedExpression )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39378,7 +39379,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_167;
         }
         public String getDescription() {
-            return "10360:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
+            return "10361:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39934,7 +39935,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_107;
         }
         public String getDescription() {
-            return "11445:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
+            return "11446:3: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_7_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )? otherlv_12= ')' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -39978,7 +39979,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_113;
         }
         public String getDescription() {
-            return "11464:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
+            return "11465:4: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_8_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_9_0= ruleXExpression ) ) (otherlv_10= ',' ( (lv_featureCallArguments_11_0= ruleXExpression ) ) )* ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -40536,7 +40537,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_114;
         }
         public String getDescription() {
-            return "11562:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
+            return "11563:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_13_0= ruleXClosure ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -40702,7 +40703,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_173;
         }
         public String getDescription() {
-            return "11896:3: ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?";
+            return "11897:3: ( ( 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient' | 'AFTER' | 'BEFORE' | 'SEPARATOR' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_RICH_TEXT | RULE_RICH_TEXT_START )=> (lv_expression_2_0= ruleXExpression ) )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -41609,7 +41610,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_179;
         }
         public String getDescription() {
-            return "()* loopback of 12104:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*";
+            return "()* loopback of 12105:3: ( ( ( '.' )=>kw= '.' ) this_ValidID_2= ruleValidID )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -41857,7 +41858,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_186;
         }
         public String getDescription() {
-            return "12427:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
+            return "12428:3: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )* )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -41916,7 +41917,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_188;
         }
         public String getDescription() {
-            return "()* loopback of 12483:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*";
+            return "()* loopback of 12484:4: ( ( ( ( () '.' ) )=> ( () otherlv_7= '.' ) ) ( ( ruleValidID ) ) ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )? )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -42035,7 +42036,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_186;
         }
         public String getDescription() {
-            return "12521:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
+            return "12522:5: ( ( ( '<' )=>otherlv_9= '<' ) ( (lv_arguments_10_0= ruleJvmArgumentTypeReference ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleJvmArgumentTypeReference ) ) )* otherlv_13= '>' )?";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -42107,7 +42108,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             this.transition = dfa_193;
         }
         public String getDescription() {
-            return "13073:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+            return "13074:3: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedNameInStaticImport ) ) ( ( (lv_wildcard_4_0= '*' ) ) | ( (lv_memberName_5_0= ruleValidID ) ) ) ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
         }
     }
  
