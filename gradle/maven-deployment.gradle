@@ -15,8 +15,8 @@ publishing {
                 url = 'https://www.eclipse.org/Xtext/'
                 licenses {
                     license {
-                        name = 'Eclipse Public License, Version 1.0'
-                        url = 'http://www.eclipse.org/legal/epl-v10.html'
+                        name = 'Eclipse Public License, Version 2.0'
+                        url = 'http://www.eclipse.org/legal/epl-2.0'
                     }
                 }
                 scm {

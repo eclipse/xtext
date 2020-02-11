@@ -672,10 +672,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3237:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalPartialSerializationTestLanguage.g:3237:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPartialSerializationTestLanguage.g:3238:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalPartialSerializationTestLanguage.g:3238:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalPartialSerializationTestLanguage.g:3237:11: ( '^' )?
+            // InternalPartialSerializationTestLanguage.g:3238:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -684,7 +684,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:3237:11: '^'
+                    // InternalPartialSerializationTestLanguage.g:3238:11: '^'
                     {
                     match('^'); 
 
@@ -702,7 +702,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalPartialSerializationTestLanguage.g:3237:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPartialSerializationTestLanguage.g:3238:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -751,10 +751,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3239:10: ( ( '0' .. '9' )+ )
-            // InternalPartialSerializationTestLanguage.g:3239:12: ( '0' .. '9' )+
+            // InternalPartialSerializationTestLanguage.g:3240:10: ( ( '0' .. '9' )+ )
+            // InternalPartialSerializationTestLanguage.g:3240:12: ( '0' .. '9' )+
             {
-            // InternalPartialSerializationTestLanguage.g:3239:12: ( '0' .. '9' )+
+            // InternalPartialSerializationTestLanguage.g:3240:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -768,7 +768,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:3239:13: '0' .. '9'
+            	    // InternalPartialSerializationTestLanguage.g:3240:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -800,10 +800,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3241:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalPartialSerializationTestLanguage.g:3241:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPartialSerializationTestLanguage.g:3242:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalPartialSerializationTestLanguage.g:3242:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalPartialSerializationTestLanguage.g:3241:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPartialSerializationTestLanguage.g:3242:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -821,10 +821,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:3241:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalPartialSerializationTestLanguage.g:3242:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalPartialSerializationTestLanguage.g:3241:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalPartialSerializationTestLanguage.g:3242:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -840,7 +840,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:3241:21: '\\\\' .
+                    	    // InternalPartialSerializationTestLanguage.g:3242:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -848,7 +848,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPartialSerializationTestLanguage.g:3241:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalPartialSerializationTestLanguage.g:3242:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -873,10 +873,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPartialSerializationTestLanguage.g:3241:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalPartialSerializationTestLanguage.g:3242:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalPartialSerializationTestLanguage.g:3241:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalPartialSerializationTestLanguage.g:3242:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -892,7 +892,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalPartialSerializationTestLanguage.g:3241:54: '\\\\' .
+                    	    // InternalPartialSerializationTestLanguage.g:3242:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -900,7 +900,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPartialSerializationTestLanguage.g:3241:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalPartialSerializationTestLanguage.g:3242:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -943,12 +943,12 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3243:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalPartialSerializationTestLanguage.g:3243:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalPartialSerializationTestLanguage.g:3244:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalPartialSerializationTestLanguage.g:3244:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalPartialSerializationTestLanguage.g:3243:24: ( options {greedy=false; } : . )*
+            // InternalPartialSerializationTestLanguage.g:3244:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -973,7 +973,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:3243:52: .
+            	    // InternalPartialSerializationTestLanguage.g:3244:52: .
             	    {
             	    matchAny(); 
 
@@ -1003,12 +1003,12 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3245:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalPartialSerializationTestLanguage.g:3245:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalPartialSerializationTestLanguage.g:3246:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalPartialSerializationTestLanguage.g:3246:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalPartialSerializationTestLanguage.g:3245:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalPartialSerializationTestLanguage.g:3246:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1021,7 +1021,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalPartialSerializationTestLanguage.g:3245:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalPartialSerializationTestLanguage.g:3246:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1041,7 +1041,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalPartialSerializationTestLanguage.g:3245:40: ( ( '\\r' )? '\\n' )?
+            // InternalPartialSerializationTestLanguage.g:3246:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1050,9 +1050,9 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalPartialSerializationTestLanguage.g:3245:41: ( '\\r' )? '\\n'
+                    // InternalPartialSerializationTestLanguage.g:3246:41: ( '\\r' )? '\\n'
                     {
-                    // InternalPartialSerializationTestLanguage.g:3245:41: ( '\\r' )?
+                    // InternalPartialSerializationTestLanguage.g:3246:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1061,7 +1061,7 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalPartialSerializationTestLanguage.g:3245:41: '\\r'
+                            // InternalPartialSerializationTestLanguage.g:3246:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1093,10 +1093,10 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3247:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalPartialSerializationTestLanguage.g:3247:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPartialSerializationTestLanguage.g:3248:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalPartialSerializationTestLanguage.g:3248:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalPartialSerializationTestLanguage.g:3247:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPartialSerializationTestLanguage.g:3248:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1150,8 +1150,8 @@ public class InternalPartialSerializationTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPartialSerializationTestLanguage.g:3249:16: ( . )
-            // InternalPartialSerializationTestLanguage.g:3249:18: .
+            // InternalPartialSerializationTestLanguage.g:3250:16: ( . )
+            // InternalPartialSerializationTestLanguage.g:3250:18: .
             {
             matchAny(); 
 

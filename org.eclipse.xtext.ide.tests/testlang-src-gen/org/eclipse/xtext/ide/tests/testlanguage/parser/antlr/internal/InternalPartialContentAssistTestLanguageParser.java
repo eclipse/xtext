@@ -78,7 +78,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleTypeDeclaration"
-    // InternalPartialContentAssistTestLanguage.g:68:1: entryRuleTypeDeclaration returns [EObject current=null] : iv_ruleTypeDeclaration= ruleTypeDeclaration EOF ;
+    // InternalPartialContentAssistTestLanguage.g:69:1: entryRuleTypeDeclaration returns [EObject current=null] : iv_ruleTypeDeclaration= ruleTypeDeclaration EOF ;
     public final EObject entryRuleTypeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +86,8 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialContentAssistTestLanguage.g:68:56: (iv_ruleTypeDeclaration= ruleTypeDeclaration EOF )
-            // InternalPartialContentAssistTestLanguage.g:69:2: iv_ruleTypeDeclaration= ruleTypeDeclaration EOF
+            // InternalPartialContentAssistTestLanguage.g:69:56: (iv_ruleTypeDeclaration= ruleTypeDeclaration EOF )
+            // InternalPartialContentAssistTestLanguage.g:70:2: iv_ruleTypeDeclaration= ruleTypeDeclaration EOF
             {
              newCompositeNode(grammarAccess.getTypeDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -114,7 +114,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleTypeDeclaration"
-    // InternalPartialContentAssistTestLanguage.g:75:1: ruleTypeDeclaration returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) ;
+    // InternalPartialContentAssistTestLanguage.g:76:1: ruleTypeDeclaration returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) ;
     public final EObject ruleTypeDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -131,21 +131,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialContentAssistTestLanguage.g:81:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) )
-            // InternalPartialContentAssistTestLanguage.g:82:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
+            // InternalPartialContentAssistTestLanguage.g:82:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) )
+            // InternalPartialContentAssistTestLanguage.g:83:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
             {
-            // InternalPartialContentAssistTestLanguage.g:82:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
-            // InternalPartialContentAssistTestLanguage.g:83:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}'
+            // InternalPartialContentAssistTestLanguage.g:83:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
+            // InternalPartialContentAssistTestLanguage.g:84:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}'
             {
             otherlv_0=(Token)match(input,11,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTypeDeclarationAccess().getTypeKeyword_0());
             		
-            // InternalPartialContentAssistTestLanguage.g:87:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalPartialContentAssistTestLanguage.g:88:4: (lv_name_1_0= RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalPartialContentAssistTestLanguage.g:88:4: (lv_name_1_0= RULE_ID )
-            // InternalPartialContentAssistTestLanguage.g:89:5: lv_name_1_0= RULE_ID
+            // InternalPartialContentAssistTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:90:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_4); 
 
@@ -167,7 +167,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialContentAssistTestLanguage.g:105:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
+            // InternalPartialContentAssistTestLanguage.g:106:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -176,17 +176,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPartialContentAssistTestLanguage.g:106:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
+                    // InternalPartialContentAssistTestLanguage.g:107:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
                     {
                     otherlv_2=(Token)match(input,12,FOLLOW_3); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getTypeDeclarationAccess().getExtendsKeyword_2_0());
                     			
-                    // InternalPartialContentAssistTestLanguage.g:110:4: ( (otherlv_3= RULE_ID ) )
-                    // InternalPartialContentAssistTestLanguage.g:111:5: (otherlv_3= RULE_ID )
+                    // InternalPartialContentAssistTestLanguage.g:111:4: ( (otherlv_3= RULE_ID ) )
+                    // InternalPartialContentAssistTestLanguage.g:112:5: (otherlv_3= RULE_ID )
                     {
-                    // InternalPartialContentAssistTestLanguage.g:111:5: (otherlv_3= RULE_ID )
-                    // InternalPartialContentAssistTestLanguage.g:112:6: otherlv_3= RULE_ID
+                    // InternalPartialContentAssistTestLanguage.g:112:5: (otherlv_3= RULE_ID )
+                    // InternalPartialContentAssistTestLanguage.g:113:6: otherlv_3= RULE_ID
                     {
 
                     						if (current==null) {
@@ -213,7 +213,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
             			newLeafNode(otherlv_4, grammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3());
             		
-            // InternalPartialContentAssistTestLanguage.g:128:3: ( (lv_properties_5_0= ruleProperty ) )*
+            // InternalPartialContentAssistTestLanguage.g:129:3: ( (lv_properties_5_0= ruleProperty ) )*
             loop2:
             do {
                 int alt2=2;
@@ -226,10 +226,10 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalPartialContentAssistTestLanguage.g:129:4: (lv_properties_5_0= ruleProperty )
+            	    // InternalPartialContentAssistTestLanguage.g:130:4: (lv_properties_5_0= ruleProperty )
             	    {
-            	    // InternalPartialContentAssistTestLanguage.g:129:4: (lv_properties_5_0= ruleProperty )
-            	    // InternalPartialContentAssistTestLanguage.g:130:5: lv_properties_5_0= ruleProperty
+            	    // InternalPartialContentAssistTestLanguage.g:130:4: (lv_properties_5_0= ruleProperty )
+            	    // InternalPartialContentAssistTestLanguage.g:131:5: lv_properties_5_0= ruleProperty
             	    {
 
             	    					newCompositeNode(grammarAccess.getTypeDeclarationAccess().getPropertiesPropertyParserRuleCall_4_0());
@@ -289,7 +289,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleProperty"
-    // InternalPartialContentAssistTestLanguage.g:155:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // InternalPartialContentAssistTestLanguage.g:156:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -297,8 +297,8 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalPartialContentAssistTestLanguage.g:155:49: (iv_ruleProperty= ruleProperty EOF )
-            // InternalPartialContentAssistTestLanguage.g:156:2: iv_ruleProperty= ruleProperty EOF
+            // InternalPartialContentAssistTestLanguage.g:156:49: (iv_ruleProperty= ruleProperty EOF )
+            // InternalPartialContentAssistTestLanguage.g:157:2: iv_ruleProperty= ruleProperty EOF
             {
              newCompositeNode(grammarAccess.getPropertyRule()); 
             pushFollow(FOLLOW_1);
@@ -325,7 +325,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleProperty"
-    // InternalPartialContentAssistTestLanguage.g:162:1: ruleProperty returns [EObject current=null] : ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:163:1: ruleProperty returns [EObject current=null] : ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -337,19 +337,19 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
         	enterRule();
 
         try {
-            // InternalPartialContentAssistTestLanguage.g:168:2: ( ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalPartialContentAssistTestLanguage.g:169:2: ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalPartialContentAssistTestLanguage.g:169:2: ( ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalPartialContentAssistTestLanguage.g:170:2: ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:169:2: ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalPartialContentAssistTestLanguage.g:170:3: ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:170:2: ( ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalPartialContentAssistTestLanguage.g:171:3: ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:170:3: ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) )
-            // InternalPartialContentAssistTestLanguage.g:171:4: ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) )
+            // InternalPartialContentAssistTestLanguage.g:171:3: ( ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) ) )
+            // InternalPartialContentAssistTestLanguage.g:172:4: ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:171:4: ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) )
-            // InternalPartialContentAssistTestLanguage.g:172:5: (lv_type_0_1= 'int' | lv_type_0_2= 'bool' )
+            // InternalPartialContentAssistTestLanguage.g:172:4: ( (lv_type_0_1= 'int' | lv_type_0_2= 'bool' ) )
+            // InternalPartialContentAssistTestLanguage.g:173:5: (lv_type_0_1= 'int' | lv_type_0_2= 'bool' )
             {
-            // InternalPartialContentAssistTestLanguage.g:172:5: (lv_type_0_1= 'int' | lv_type_0_2= 'bool' )
+            // InternalPartialContentAssistTestLanguage.g:173:5: (lv_type_0_1= 'int' | lv_type_0_2= 'bool' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -367,7 +367,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
             }
             switch (alt3) {
                 case 1 :
-                    // InternalPartialContentAssistTestLanguage.g:173:6: lv_type_0_1= 'int'
+                    // InternalPartialContentAssistTestLanguage.g:174:6: lv_type_0_1= 'int'
                     {
                     lv_type_0_1=(Token)match(input,15,FOLLOW_3); 
 
@@ -383,7 +383,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
                     }
                     break;
                 case 2 :
-                    // InternalPartialContentAssistTestLanguage.g:184:6: lv_type_0_2= 'bool'
+                    // InternalPartialContentAssistTestLanguage.g:185:6: lv_type_0_2= 'bool'
                     {
                     lv_type_0_2=(Token)match(input,16,FOLLOW_3); 
 
@@ -407,11 +407,11 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
             }
 
-            // InternalPartialContentAssistTestLanguage.g:197:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalPartialContentAssistTestLanguage.g:198:4: (lv_name_1_0= RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:198:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:199:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalPartialContentAssistTestLanguage.g:198:4: (lv_name_1_0= RULE_ID )
-            // InternalPartialContentAssistTestLanguage.g:199:5: lv_name_1_0= RULE_ID
+            // InternalPartialContentAssistTestLanguage.g:199:4: (lv_name_1_0= RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:200:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 

@@ -73,11 +73,11 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalRenameTestLanguage.g:57:1: entryRuleModel : ruleModel EOF ;
+    // InternalRenameTestLanguage.g:58:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // InternalRenameTestLanguage.g:58:1: ( ruleModel EOF )
-            // InternalRenameTestLanguage.g:59:1: ruleModel EOF
+            // InternalRenameTestLanguage.g:59:1: ( ruleModel EOF )
+            // InternalRenameTestLanguage.g:60:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
             pushFollow(FOLLOW_1);
@@ -103,20 +103,20 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleModel"
-    // InternalRenameTestLanguage.g:66:1: ruleModel : ( ( rule__Model__TypesAssignment )* ) ;
+    // InternalRenameTestLanguage.g:67:1: ruleModel : ( ( rule__Model__TypesAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:70:2: ( ( ( rule__Model__TypesAssignment )* ) )
-            // InternalRenameTestLanguage.g:71:2: ( ( rule__Model__TypesAssignment )* )
+            // InternalRenameTestLanguage.g:71:2: ( ( ( rule__Model__TypesAssignment )* ) )
+            // InternalRenameTestLanguage.g:72:2: ( ( rule__Model__TypesAssignment )* )
             {
-            // InternalRenameTestLanguage.g:71:2: ( ( rule__Model__TypesAssignment )* )
-            // InternalRenameTestLanguage.g:72:3: ( rule__Model__TypesAssignment )*
+            // InternalRenameTestLanguage.g:72:2: ( ( rule__Model__TypesAssignment )* )
+            // InternalRenameTestLanguage.g:73:3: ( rule__Model__TypesAssignment )*
             {
              before(grammarAccess.getModelAccess().getTypesAssignment()); 
-            // InternalRenameTestLanguage.g:73:3: ( rule__Model__TypesAssignment )*
+            // InternalRenameTestLanguage.g:74:3: ( rule__Model__TypesAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -129,7 +129,7 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalRenameTestLanguage.g:73:4: rule__Model__TypesAssignment
+            	    // InternalRenameTestLanguage.g:74:4: rule__Model__TypesAssignment
             	    {
             	    pushFollow(FOLLOW_3);
             	    rule__Model__TypesAssignment();
@@ -168,11 +168,11 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "entryRuleTypeDeclaration"
-    // InternalRenameTestLanguage.g:82:1: entryRuleTypeDeclaration : ruleTypeDeclaration EOF ;
+    // InternalRenameTestLanguage.g:83:1: entryRuleTypeDeclaration : ruleTypeDeclaration EOF ;
     public final void entryRuleTypeDeclaration() throws RecognitionException {
         try {
-            // InternalRenameTestLanguage.g:83:1: ( ruleTypeDeclaration EOF )
-            // InternalRenameTestLanguage.g:84:1: ruleTypeDeclaration EOF
+            // InternalRenameTestLanguage.g:84:1: ( ruleTypeDeclaration EOF )
+            // InternalRenameTestLanguage.g:85:1: ruleTypeDeclaration EOF
             {
              before(grammarAccess.getTypeDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -198,21 +198,21 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "ruleTypeDeclaration"
-    // InternalRenameTestLanguage.g:91:1: ruleTypeDeclaration : ( ( rule__TypeDeclaration__Group__0 ) ) ;
+    // InternalRenameTestLanguage.g:92:1: ruleTypeDeclaration : ( ( rule__TypeDeclaration__Group__0 ) ) ;
     public final void ruleTypeDeclaration() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:95:2: ( ( ( rule__TypeDeclaration__Group__0 ) ) )
-            // InternalRenameTestLanguage.g:96:2: ( ( rule__TypeDeclaration__Group__0 ) )
+            // InternalRenameTestLanguage.g:96:2: ( ( ( rule__TypeDeclaration__Group__0 ) ) )
+            // InternalRenameTestLanguage.g:97:2: ( ( rule__TypeDeclaration__Group__0 ) )
             {
-            // InternalRenameTestLanguage.g:96:2: ( ( rule__TypeDeclaration__Group__0 ) )
-            // InternalRenameTestLanguage.g:97:3: ( rule__TypeDeclaration__Group__0 )
+            // InternalRenameTestLanguage.g:97:2: ( ( rule__TypeDeclaration__Group__0 ) )
+            // InternalRenameTestLanguage.g:98:3: ( rule__TypeDeclaration__Group__0 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getGroup()); 
-            // InternalRenameTestLanguage.g:98:3: ( rule__TypeDeclaration__Group__0 )
-            // InternalRenameTestLanguage.g:98:4: rule__TypeDeclaration__Group__0
+            // InternalRenameTestLanguage.g:99:3: ( rule__TypeDeclaration__Group__0 )
+            // InternalRenameTestLanguage.g:99:4: rule__TypeDeclaration__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group__0();
@@ -245,14 +245,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__0"
-    // InternalRenameTestLanguage.g:106:1: rule__TypeDeclaration__Group__0 : rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 ;
+    // InternalRenameTestLanguage.g:107:1: rule__TypeDeclaration__Group__0 : rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 ;
     public final void rule__TypeDeclaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:110:1: ( rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 )
-            // InternalRenameTestLanguage.g:111:2: rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1
+            // InternalRenameTestLanguage.g:111:1: ( rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 )
+            // InternalRenameTestLanguage.g:112:2: rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__TypeDeclaration__Group__0__Impl();
@@ -283,17 +283,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__0__Impl"
-    // InternalRenameTestLanguage.g:118:1: rule__TypeDeclaration__Group__0__Impl : ( 'type' ) ;
+    // InternalRenameTestLanguage.g:119:1: rule__TypeDeclaration__Group__0__Impl : ( 'type' ) ;
     public final void rule__TypeDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:122:1: ( ( 'type' ) )
-            // InternalRenameTestLanguage.g:123:1: ( 'type' )
+            // InternalRenameTestLanguage.g:123:1: ( ( 'type' ) )
+            // InternalRenameTestLanguage.g:124:1: ( 'type' )
             {
-            // InternalRenameTestLanguage.g:123:1: ( 'type' )
-            // InternalRenameTestLanguage.g:124:2: 'type'
+            // InternalRenameTestLanguage.g:124:1: ( 'type' )
+            // InternalRenameTestLanguage.g:125:2: 'type'
             {
              before(grammarAccess.getTypeDeclarationAccess().getTypeKeyword_0()); 
             match(input,11,FOLLOW_2); 
@@ -320,14 +320,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__1"
-    // InternalRenameTestLanguage.g:133:1: rule__TypeDeclaration__Group__1 : rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 ;
+    // InternalRenameTestLanguage.g:134:1: rule__TypeDeclaration__Group__1 : rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 ;
     public final void rule__TypeDeclaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:137:1: ( rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 )
-            // InternalRenameTestLanguage.g:138:2: rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2
+            // InternalRenameTestLanguage.g:138:1: ( rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 )
+            // InternalRenameTestLanguage.g:139:2: rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2
             {
             pushFollow(FOLLOW_5);
             rule__TypeDeclaration__Group__1__Impl();
@@ -358,21 +358,21 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__1__Impl"
-    // InternalRenameTestLanguage.g:145:1: rule__TypeDeclaration__Group__1__Impl : ( ( rule__TypeDeclaration__NameAssignment_1 ) ) ;
+    // InternalRenameTestLanguage.g:146:1: rule__TypeDeclaration__Group__1__Impl : ( ( rule__TypeDeclaration__NameAssignment_1 ) ) ;
     public final void rule__TypeDeclaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:149:1: ( ( ( rule__TypeDeclaration__NameAssignment_1 ) ) )
-            // InternalRenameTestLanguage.g:150:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
+            // InternalRenameTestLanguage.g:150:1: ( ( ( rule__TypeDeclaration__NameAssignment_1 ) ) )
+            // InternalRenameTestLanguage.g:151:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
             {
-            // InternalRenameTestLanguage.g:150:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
-            // InternalRenameTestLanguage.g:151:2: ( rule__TypeDeclaration__NameAssignment_1 )
+            // InternalRenameTestLanguage.g:151:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
+            // InternalRenameTestLanguage.g:152:2: ( rule__TypeDeclaration__NameAssignment_1 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1()); 
-            // InternalRenameTestLanguage.g:152:2: ( rule__TypeDeclaration__NameAssignment_1 )
-            // InternalRenameTestLanguage.g:152:3: rule__TypeDeclaration__NameAssignment_1
+            // InternalRenameTestLanguage.g:153:2: ( rule__TypeDeclaration__NameAssignment_1 )
+            // InternalRenameTestLanguage.g:153:3: rule__TypeDeclaration__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__NameAssignment_1();
@@ -405,14 +405,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__2"
-    // InternalRenameTestLanguage.g:160:1: rule__TypeDeclaration__Group__2 : rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 ;
+    // InternalRenameTestLanguage.g:161:1: rule__TypeDeclaration__Group__2 : rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 ;
     public final void rule__TypeDeclaration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:164:1: ( rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 )
-            // InternalRenameTestLanguage.g:165:2: rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3
+            // InternalRenameTestLanguage.g:165:1: ( rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 )
+            // InternalRenameTestLanguage.g:166:2: rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3
             {
             pushFollow(FOLLOW_5);
             rule__TypeDeclaration__Group__2__Impl();
@@ -443,20 +443,20 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__2__Impl"
-    // InternalRenameTestLanguage.g:172:1: rule__TypeDeclaration__Group__2__Impl : ( ( rule__TypeDeclaration__Group_2__0 )? ) ;
+    // InternalRenameTestLanguage.g:173:1: rule__TypeDeclaration__Group__2__Impl : ( ( rule__TypeDeclaration__Group_2__0 )? ) ;
     public final void rule__TypeDeclaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:176:1: ( ( ( rule__TypeDeclaration__Group_2__0 )? ) )
-            // InternalRenameTestLanguage.g:177:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
+            // InternalRenameTestLanguage.g:177:1: ( ( ( rule__TypeDeclaration__Group_2__0 )? ) )
+            // InternalRenameTestLanguage.g:178:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
             {
-            // InternalRenameTestLanguage.g:177:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
-            // InternalRenameTestLanguage.g:178:2: ( rule__TypeDeclaration__Group_2__0 )?
+            // InternalRenameTestLanguage.g:178:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
+            // InternalRenameTestLanguage.g:179:2: ( rule__TypeDeclaration__Group_2__0 )?
             {
              before(grammarAccess.getTypeDeclarationAccess().getGroup_2()); 
-            // InternalRenameTestLanguage.g:179:2: ( rule__TypeDeclaration__Group_2__0 )?
+            // InternalRenameTestLanguage.g:180:2: ( rule__TypeDeclaration__Group_2__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -465,7 +465,7 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
             }
             switch (alt2) {
                 case 1 :
-                    // InternalRenameTestLanguage.g:179:3: rule__TypeDeclaration__Group_2__0
+                    // InternalRenameTestLanguage.g:180:3: rule__TypeDeclaration__Group_2__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__TypeDeclaration__Group_2__0();
@@ -501,14 +501,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__3"
-    // InternalRenameTestLanguage.g:187:1: rule__TypeDeclaration__Group__3 : rule__TypeDeclaration__Group__3__Impl ;
+    // InternalRenameTestLanguage.g:188:1: rule__TypeDeclaration__Group__3 : rule__TypeDeclaration__Group__3__Impl ;
     public final void rule__TypeDeclaration__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:191:1: ( rule__TypeDeclaration__Group__3__Impl )
-            // InternalRenameTestLanguage.g:192:2: rule__TypeDeclaration__Group__3__Impl
+            // InternalRenameTestLanguage.g:192:1: ( rule__TypeDeclaration__Group__3__Impl )
+            // InternalRenameTestLanguage.g:193:2: rule__TypeDeclaration__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group__3__Impl();
@@ -534,20 +534,20 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__3__Impl"
-    // InternalRenameTestLanguage.g:198:1: rule__TypeDeclaration__Group__3__Impl : ( ( rule__TypeDeclaration__Group_3__0 )? ) ;
+    // InternalRenameTestLanguage.g:199:1: rule__TypeDeclaration__Group__3__Impl : ( ( rule__TypeDeclaration__Group_3__0 )? ) ;
     public final void rule__TypeDeclaration__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:202:1: ( ( ( rule__TypeDeclaration__Group_3__0 )? ) )
-            // InternalRenameTestLanguage.g:203:1: ( ( rule__TypeDeclaration__Group_3__0 )? )
+            // InternalRenameTestLanguage.g:203:1: ( ( ( rule__TypeDeclaration__Group_3__0 )? ) )
+            // InternalRenameTestLanguage.g:204:1: ( ( rule__TypeDeclaration__Group_3__0 )? )
             {
-            // InternalRenameTestLanguage.g:203:1: ( ( rule__TypeDeclaration__Group_3__0 )? )
-            // InternalRenameTestLanguage.g:204:2: ( rule__TypeDeclaration__Group_3__0 )?
+            // InternalRenameTestLanguage.g:204:1: ( ( rule__TypeDeclaration__Group_3__0 )? )
+            // InternalRenameTestLanguage.g:205:2: ( rule__TypeDeclaration__Group_3__0 )?
             {
              before(grammarAccess.getTypeDeclarationAccess().getGroup_3()); 
-            // InternalRenameTestLanguage.g:205:2: ( rule__TypeDeclaration__Group_3__0 )?
+            // InternalRenameTestLanguage.g:206:2: ( rule__TypeDeclaration__Group_3__0 )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -556,7 +556,7 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
             }
             switch (alt3) {
                 case 1 :
-                    // InternalRenameTestLanguage.g:205:3: rule__TypeDeclaration__Group_3__0
+                    // InternalRenameTestLanguage.g:206:3: rule__TypeDeclaration__Group_3__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__TypeDeclaration__Group_3__0();
@@ -592,14 +592,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__0"
-    // InternalRenameTestLanguage.g:214:1: rule__TypeDeclaration__Group_2__0 : rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 ;
+    // InternalRenameTestLanguage.g:215:1: rule__TypeDeclaration__Group_2__0 : rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 ;
     public final void rule__TypeDeclaration__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:218:1: ( rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 )
-            // InternalRenameTestLanguage.g:219:2: rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1
+            // InternalRenameTestLanguage.g:219:1: ( rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 )
+            // InternalRenameTestLanguage.g:220:2: rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1
             {
             pushFollow(FOLLOW_4);
             rule__TypeDeclaration__Group_2__0__Impl();
@@ -630,17 +630,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__0__Impl"
-    // InternalRenameTestLanguage.g:226:1: rule__TypeDeclaration__Group_2__0__Impl : ( 'extends' ) ;
+    // InternalRenameTestLanguage.g:227:1: rule__TypeDeclaration__Group_2__0__Impl : ( 'extends' ) ;
     public final void rule__TypeDeclaration__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:230:1: ( ( 'extends' ) )
-            // InternalRenameTestLanguage.g:231:1: ( 'extends' )
+            // InternalRenameTestLanguage.g:231:1: ( ( 'extends' ) )
+            // InternalRenameTestLanguage.g:232:1: ( 'extends' )
             {
-            // InternalRenameTestLanguage.g:231:1: ( 'extends' )
-            // InternalRenameTestLanguage.g:232:2: 'extends'
+            // InternalRenameTestLanguage.g:232:1: ( 'extends' )
+            // InternalRenameTestLanguage.g:233:2: 'extends'
             {
              before(grammarAccess.getTypeDeclarationAccess().getExtendsKeyword_2_0()); 
             match(input,12,FOLLOW_2); 
@@ -667,14 +667,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__1"
-    // InternalRenameTestLanguage.g:241:1: rule__TypeDeclaration__Group_2__1 : rule__TypeDeclaration__Group_2__1__Impl ;
+    // InternalRenameTestLanguage.g:242:1: rule__TypeDeclaration__Group_2__1 : rule__TypeDeclaration__Group_2__1__Impl ;
     public final void rule__TypeDeclaration__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:245:1: ( rule__TypeDeclaration__Group_2__1__Impl )
-            // InternalRenameTestLanguage.g:246:2: rule__TypeDeclaration__Group_2__1__Impl
+            // InternalRenameTestLanguage.g:246:1: ( rule__TypeDeclaration__Group_2__1__Impl )
+            // InternalRenameTestLanguage.g:247:2: rule__TypeDeclaration__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group_2__1__Impl();
@@ -700,21 +700,21 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__1__Impl"
-    // InternalRenameTestLanguage.g:252:1: rule__TypeDeclaration__Group_2__1__Impl : ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) ;
+    // InternalRenameTestLanguage.g:253:1: rule__TypeDeclaration__Group_2__1__Impl : ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) ;
     public final void rule__TypeDeclaration__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:256:1: ( ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) )
-            // InternalRenameTestLanguage.g:257:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
+            // InternalRenameTestLanguage.g:257:1: ( ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) )
+            // InternalRenameTestLanguage.g:258:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
             {
-            // InternalRenameTestLanguage.g:257:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
-            // InternalRenameTestLanguage.g:258:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
+            // InternalRenameTestLanguage.g:258:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
+            // InternalRenameTestLanguage.g:259:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1()); 
-            // InternalRenameTestLanguage.g:259:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
-            // InternalRenameTestLanguage.g:259:3: rule__TypeDeclaration__SuperTypeAssignment_2_1
+            // InternalRenameTestLanguage.g:260:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
+            // InternalRenameTestLanguage.g:260:3: rule__TypeDeclaration__SuperTypeAssignment_2_1
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__SuperTypeAssignment_2_1();
@@ -747,14 +747,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_3__0"
-    // InternalRenameTestLanguage.g:268:1: rule__TypeDeclaration__Group_3__0 : rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1 ;
+    // InternalRenameTestLanguage.g:269:1: rule__TypeDeclaration__Group_3__0 : rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1 ;
     public final void rule__TypeDeclaration__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:272:1: ( rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1 )
-            // InternalRenameTestLanguage.g:273:2: rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1
+            // InternalRenameTestLanguage.g:273:1: ( rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1 )
+            // InternalRenameTestLanguage.g:274:2: rule__TypeDeclaration__Group_3__0__Impl rule__TypeDeclaration__Group_3__1
             {
             pushFollow(FOLLOW_6);
             rule__TypeDeclaration__Group_3__0__Impl();
@@ -785,17 +785,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_3__0__Impl"
-    // InternalRenameTestLanguage.g:280:1: rule__TypeDeclaration__Group_3__0__Impl : ( '{' ) ;
+    // InternalRenameTestLanguage.g:281:1: rule__TypeDeclaration__Group_3__0__Impl : ( '{' ) ;
     public final void rule__TypeDeclaration__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:284:1: ( ( '{' ) )
-            // InternalRenameTestLanguage.g:285:1: ( '{' )
+            // InternalRenameTestLanguage.g:285:1: ( ( '{' ) )
+            // InternalRenameTestLanguage.g:286:1: ( '{' )
             {
-            // InternalRenameTestLanguage.g:285:1: ( '{' )
-            // InternalRenameTestLanguage.g:286:2: '{'
+            // InternalRenameTestLanguage.g:286:1: ( '{' )
+            // InternalRenameTestLanguage.g:287:2: '{'
             {
              before(grammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3_0()); 
             match(input,13,FOLLOW_2); 
@@ -822,14 +822,14 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_3__1"
-    // InternalRenameTestLanguage.g:295:1: rule__TypeDeclaration__Group_3__1 : rule__TypeDeclaration__Group_3__1__Impl ;
+    // InternalRenameTestLanguage.g:296:1: rule__TypeDeclaration__Group_3__1 : rule__TypeDeclaration__Group_3__1__Impl ;
     public final void rule__TypeDeclaration__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:299:1: ( rule__TypeDeclaration__Group_3__1__Impl )
-            // InternalRenameTestLanguage.g:300:2: rule__TypeDeclaration__Group_3__1__Impl
+            // InternalRenameTestLanguage.g:300:1: ( rule__TypeDeclaration__Group_3__1__Impl )
+            // InternalRenameTestLanguage.g:301:2: rule__TypeDeclaration__Group_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group_3__1__Impl();
@@ -855,17 +855,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_3__1__Impl"
-    // InternalRenameTestLanguage.g:306:1: rule__TypeDeclaration__Group_3__1__Impl : ( '}' ) ;
+    // InternalRenameTestLanguage.g:307:1: rule__TypeDeclaration__Group_3__1__Impl : ( '}' ) ;
     public final void rule__TypeDeclaration__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:310:1: ( ( '}' ) )
-            // InternalRenameTestLanguage.g:311:1: ( '}' )
+            // InternalRenameTestLanguage.g:311:1: ( ( '}' ) )
+            // InternalRenameTestLanguage.g:312:1: ( '}' )
             {
-            // InternalRenameTestLanguage.g:311:1: ( '}' )
-            // InternalRenameTestLanguage.g:312:2: '}'
+            // InternalRenameTestLanguage.g:312:1: ( '}' )
+            // InternalRenameTestLanguage.g:313:2: '}'
             {
              before(grammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_3_1()); 
             match(input,14,FOLLOW_2); 
@@ -892,17 +892,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__Model__TypesAssignment"
-    // InternalRenameTestLanguage.g:322:1: rule__Model__TypesAssignment : ( ruleTypeDeclaration ) ;
+    // InternalRenameTestLanguage.g:323:1: rule__Model__TypesAssignment : ( ruleTypeDeclaration ) ;
     public final void rule__Model__TypesAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:326:1: ( ( ruleTypeDeclaration ) )
-            // InternalRenameTestLanguage.g:327:2: ( ruleTypeDeclaration )
+            // InternalRenameTestLanguage.g:327:1: ( ( ruleTypeDeclaration ) )
+            // InternalRenameTestLanguage.g:328:2: ( ruleTypeDeclaration )
             {
-            // InternalRenameTestLanguage.g:327:2: ( ruleTypeDeclaration )
-            // InternalRenameTestLanguage.g:328:3: ruleTypeDeclaration
+            // InternalRenameTestLanguage.g:328:2: ( ruleTypeDeclaration )
+            // InternalRenameTestLanguage.g:329:3: ruleTypeDeclaration
             {
              before(grammarAccess.getModelAccess().getTypesTypeDeclarationParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -933,17 +933,17 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__NameAssignment_1"
-    // InternalRenameTestLanguage.g:337:1: rule__TypeDeclaration__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalRenameTestLanguage.g:338:1: rule__TypeDeclaration__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__TypeDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:341:1: ( ( RULE_ID ) )
-            // InternalRenameTestLanguage.g:342:2: ( RULE_ID )
+            // InternalRenameTestLanguage.g:342:1: ( ( RULE_ID ) )
+            // InternalRenameTestLanguage.g:343:2: ( RULE_ID )
             {
-            // InternalRenameTestLanguage.g:342:2: ( RULE_ID )
-            // InternalRenameTestLanguage.g:343:3: RULE_ID
+            // InternalRenameTestLanguage.g:343:2: ( RULE_ID )
+            // InternalRenameTestLanguage.g:344:3: RULE_ID
             {
              before(grammarAccess.getTypeDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -970,21 +970,21 @@ public class InternalRenameTestLanguageParser extends AbstractInternalContentAss
 
 
     // $ANTLR start "rule__TypeDeclaration__SuperTypeAssignment_2_1"
-    // InternalRenameTestLanguage.g:352:1: rule__TypeDeclaration__SuperTypeAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // InternalRenameTestLanguage.g:353:1: rule__TypeDeclaration__SuperTypeAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__TypeDeclaration__SuperTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalRenameTestLanguage.g:356:1: ( ( ( RULE_ID ) ) )
-            // InternalRenameTestLanguage.g:357:2: ( ( RULE_ID ) )
+            // InternalRenameTestLanguage.g:357:1: ( ( ( RULE_ID ) ) )
+            // InternalRenameTestLanguage.g:358:2: ( ( RULE_ID ) )
             {
-            // InternalRenameTestLanguage.g:357:2: ( ( RULE_ID ) )
-            // InternalRenameTestLanguage.g:358:3: ( RULE_ID )
+            // InternalRenameTestLanguage.g:358:2: ( ( RULE_ID ) )
+            // InternalRenameTestLanguage.g:359:3: ( RULE_ID )
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationCrossReference_2_1_0()); 
-            // InternalRenameTestLanguage.g:359:3: ( RULE_ID )
-            // InternalRenameTestLanguage.g:360:4: RULE_ID
+            // InternalRenameTestLanguage.g:360:3: ( RULE_ID )
+            // InternalRenameTestLanguage.g:361:4: RULE_ID
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 

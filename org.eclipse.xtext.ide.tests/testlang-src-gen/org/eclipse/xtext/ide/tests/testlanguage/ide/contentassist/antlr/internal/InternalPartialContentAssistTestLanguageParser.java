@@ -75,11 +75,11 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleTypeDeclaration"
-    // InternalPartialContentAssistTestLanguage.g:57:1: entryRuleTypeDeclaration : ruleTypeDeclaration EOF ;
+    // InternalPartialContentAssistTestLanguage.g:58:1: entryRuleTypeDeclaration : ruleTypeDeclaration EOF ;
     public final void entryRuleTypeDeclaration() throws RecognitionException {
         try {
-            // InternalPartialContentAssistTestLanguage.g:58:1: ( ruleTypeDeclaration EOF )
-            // InternalPartialContentAssistTestLanguage.g:59:1: ruleTypeDeclaration EOF
+            // InternalPartialContentAssistTestLanguage.g:59:1: ( ruleTypeDeclaration EOF )
+            // InternalPartialContentAssistTestLanguage.g:60:1: ruleTypeDeclaration EOF
             {
              before(grammarAccess.getTypeDeclarationRule()); 
             pushFollow(FOLLOW_1);
@@ -105,21 +105,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleTypeDeclaration"
-    // InternalPartialContentAssistTestLanguage.g:66:1: ruleTypeDeclaration : ( ( rule__TypeDeclaration__Group__0 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:67:1: ruleTypeDeclaration : ( ( rule__TypeDeclaration__Group__0 ) ) ;
     public final void ruleTypeDeclaration() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:70:2: ( ( ( rule__TypeDeclaration__Group__0 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:71:2: ( ( rule__TypeDeclaration__Group__0 ) )
+            // InternalPartialContentAssistTestLanguage.g:71:2: ( ( ( rule__TypeDeclaration__Group__0 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:72:2: ( ( rule__TypeDeclaration__Group__0 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:71:2: ( ( rule__TypeDeclaration__Group__0 ) )
-            // InternalPartialContentAssistTestLanguage.g:72:3: ( rule__TypeDeclaration__Group__0 )
+            // InternalPartialContentAssistTestLanguage.g:72:2: ( ( rule__TypeDeclaration__Group__0 ) )
+            // InternalPartialContentAssistTestLanguage.g:73:3: ( rule__TypeDeclaration__Group__0 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getGroup()); 
-            // InternalPartialContentAssistTestLanguage.g:73:3: ( rule__TypeDeclaration__Group__0 )
-            // InternalPartialContentAssistTestLanguage.g:73:4: rule__TypeDeclaration__Group__0
+            // InternalPartialContentAssistTestLanguage.g:74:3: ( rule__TypeDeclaration__Group__0 )
+            // InternalPartialContentAssistTestLanguage.g:74:4: rule__TypeDeclaration__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group__0();
@@ -152,11 +152,11 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleProperty"
-    // InternalPartialContentAssistTestLanguage.g:82:1: entryRuleProperty : ruleProperty EOF ;
+    // InternalPartialContentAssistTestLanguage.g:83:1: entryRuleProperty : ruleProperty EOF ;
     public final void entryRuleProperty() throws RecognitionException {
         try {
-            // InternalPartialContentAssistTestLanguage.g:83:1: ( ruleProperty EOF )
-            // InternalPartialContentAssistTestLanguage.g:84:1: ruleProperty EOF
+            // InternalPartialContentAssistTestLanguage.g:84:1: ( ruleProperty EOF )
+            // InternalPartialContentAssistTestLanguage.g:85:1: ruleProperty EOF
             {
              before(grammarAccess.getPropertyRule()); 
             pushFollow(FOLLOW_1);
@@ -182,21 +182,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleProperty"
-    // InternalPartialContentAssistTestLanguage.g:91:1: ruleProperty : ( ( rule__Property__Group__0 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:92:1: ruleProperty : ( ( rule__Property__Group__0 ) ) ;
     public final void ruleProperty() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:95:2: ( ( ( rule__Property__Group__0 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:96:2: ( ( rule__Property__Group__0 ) )
+            // InternalPartialContentAssistTestLanguage.g:96:2: ( ( ( rule__Property__Group__0 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:97:2: ( ( rule__Property__Group__0 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:96:2: ( ( rule__Property__Group__0 ) )
-            // InternalPartialContentAssistTestLanguage.g:97:3: ( rule__Property__Group__0 )
+            // InternalPartialContentAssistTestLanguage.g:97:2: ( ( rule__Property__Group__0 ) )
+            // InternalPartialContentAssistTestLanguage.g:98:3: ( rule__Property__Group__0 )
             {
              before(grammarAccess.getPropertyAccess().getGroup()); 
-            // InternalPartialContentAssistTestLanguage.g:98:3: ( rule__Property__Group__0 )
-            // InternalPartialContentAssistTestLanguage.g:98:4: rule__Property__Group__0
+            // InternalPartialContentAssistTestLanguage.g:99:3: ( rule__Property__Group__0 )
+            // InternalPartialContentAssistTestLanguage.g:99:4: rule__Property__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__Property__Group__0();
@@ -229,13 +229,13 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__TypeAlternatives_0_0"
-    // InternalPartialContentAssistTestLanguage.g:106:1: rule__Property__TypeAlternatives_0_0 : ( ( 'int' ) | ( 'bool' ) );
+    // InternalPartialContentAssistTestLanguage.g:107:1: rule__Property__TypeAlternatives_0_0 : ( ( 'int' ) | ( 'bool' ) );
     public final void rule__Property__TypeAlternatives_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:110:1: ( ( 'int' ) | ( 'bool' ) )
+            // InternalPartialContentAssistTestLanguage.g:111:1: ( ( 'int' ) | ( 'bool' ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -253,10 +253,10 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPartialContentAssistTestLanguage.g:111:2: ( 'int' )
+                    // InternalPartialContentAssistTestLanguage.g:112:2: ( 'int' )
                     {
-                    // InternalPartialContentAssistTestLanguage.g:111:2: ( 'int' )
-                    // InternalPartialContentAssistTestLanguage.g:112:3: 'int'
+                    // InternalPartialContentAssistTestLanguage.g:112:2: ( 'int' )
+                    // InternalPartialContentAssistTestLanguage.g:113:3: 'int'
                     {
                      before(grammarAccess.getPropertyAccess().getTypeIntKeyword_0_0_0()); 
                     match(input,11,FOLLOW_2); 
@@ -268,10 +268,10 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
                     }
                     break;
                 case 2 :
-                    // InternalPartialContentAssistTestLanguage.g:117:2: ( 'bool' )
+                    // InternalPartialContentAssistTestLanguage.g:118:2: ( 'bool' )
                     {
-                    // InternalPartialContentAssistTestLanguage.g:117:2: ( 'bool' )
-                    // InternalPartialContentAssistTestLanguage.g:118:3: 'bool'
+                    // InternalPartialContentAssistTestLanguage.g:118:2: ( 'bool' )
+                    // InternalPartialContentAssistTestLanguage.g:119:3: 'bool'
                     {
                      before(grammarAccess.getPropertyAccess().getTypeBoolKeyword_0_0_1()); 
                     match(input,12,FOLLOW_2); 
@@ -300,14 +300,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__0"
-    // InternalPartialContentAssistTestLanguage.g:127:1: rule__TypeDeclaration__Group__0 : rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 ;
+    // InternalPartialContentAssistTestLanguage.g:128:1: rule__TypeDeclaration__Group__0 : rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 ;
     public final void rule__TypeDeclaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:131:1: ( rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 )
-            // InternalPartialContentAssistTestLanguage.g:132:2: rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1
+            // InternalPartialContentAssistTestLanguage.g:132:1: ( rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1 )
+            // InternalPartialContentAssistTestLanguage.g:133:2: rule__TypeDeclaration__Group__0__Impl rule__TypeDeclaration__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__TypeDeclaration__Group__0__Impl();
@@ -338,17 +338,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__0__Impl"
-    // InternalPartialContentAssistTestLanguage.g:139:1: rule__TypeDeclaration__Group__0__Impl : ( 'type' ) ;
+    // InternalPartialContentAssistTestLanguage.g:140:1: rule__TypeDeclaration__Group__0__Impl : ( 'type' ) ;
     public final void rule__TypeDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:143:1: ( ( 'type' ) )
-            // InternalPartialContentAssistTestLanguage.g:144:1: ( 'type' )
+            // InternalPartialContentAssistTestLanguage.g:144:1: ( ( 'type' ) )
+            // InternalPartialContentAssistTestLanguage.g:145:1: ( 'type' )
             {
-            // InternalPartialContentAssistTestLanguage.g:144:1: ( 'type' )
-            // InternalPartialContentAssistTestLanguage.g:145:2: 'type'
+            // InternalPartialContentAssistTestLanguage.g:145:1: ( 'type' )
+            // InternalPartialContentAssistTestLanguage.g:146:2: 'type'
             {
              before(grammarAccess.getTypeDeclarationAccess().getTypeKeyword_0()); 
             match(input,13,FOLLOW_2); 
@@ -375,14 +375,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__1"
-    // InternalPartialContentAssistTestLanguage.g:154:1: rule__TypeDeclaration__Group__1 : rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 ;
+    // InternalPartialContentAssistTestLanguage.g:155:1: rule__TypeDeclaration__Group__1 : rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 ;
     public final void rule__TypeDeclaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:158:1: ( rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 )
-            // InternalPartialContentAssistTestLanguage.g:159:2: rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2
+            // InternalPartialContentAssistTestLanguage.g:159:1: ( rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2 )
+            // InternalPartialContentAssistTestLanguage.g:160:2: rule__TypeDeclaration__Group__1__Impl rule__TypeDeclaration__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__TypeDeclaration__Group__1__Impl();
@@ -413,21 +413,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__1__Impl"
-    // InternalPartialContentAssistTestLanguage.g:166:1: rule__TypeDeclaration__Group__1__Impl : ( ( rule__TypeDeclaration__NameAssignment_1 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:167:1: rule__TypeDeclaration__Group__1__Impl : ( ( rule__TypeDeclaration__NameAssignment_1 ) ) ;
     public final void rule__TypeDeclaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:170:1: ( ( ( rule__TypeDeclaration__NameAssignment_1 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:171:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:171:1: ( ( ( rule__TypeDeclaration__NameAssignment_1 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:172:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:171:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
-            // InternalPartialContentAssistTestLanguage.g:172:2: ( rule__TypeDeclaration__NameAssignment_1 )
+            // InternalPartialContentAssistTestLanguage.g:172:1: ( ( rule__TypeDeclaration__NameAssignment_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:173:2: ( rule__TypeDeclaration__NameAssignment_1 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1()); 
-            // InternalPartialContentAssistTestLanguage.g:173:2: ( rule__TypeDeclaration__NameAssignment_1 )
-            // InternalPartialContentAssistTestLanguage.g:173:3: rule__TypeDeclaration__NameAssignment_1
+            // InternalPartialContentAssistTestLanguage.g:174:2: ( rule__TypeDeclaration__NameAssignment_1 )
+            // InternalPartialContentAssistTestLanguage.g:174:3: rule__TypeDeclaration__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__NameAssignment_1();
@@ -460,14 +460,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__2"
-    // InternalPartialContentAssistTestLanguage.g:181:1: rule__TypeDeclaration__Group__2 : rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 ;
+    // InternalPartialContentAssistTestLanguage.g:182:1: rule__TypeDeclaration__Group__2 : rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 ;
     public final void rule__TypeDeclaration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:185:1: ( rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 )
-            // InternalPartialContentAssistTestLanguage.g:186:2: rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3
+            // InternalPartialContentAssistTestLanguage.g:186:1: ( rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3 )
+            // InternalPartialContentAssistTestLanguage.g:187:2: rule__TypeDeclaration__Group__2__Impl rule__TypeDeclaration__Group__3
             {
             pushFollow(FOLLOW_4);
             rule__TypeDeclaration__Group__2__Impl();
@@ -498,20 +498,20 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__2__Impl"
-    // InternalPartialContentAssistTestLanguage.g:193:1: rule__TypeDeclaration__Group__2__Impl : ( ( rule__TypeDeclaration__Group_2__0 )? ) ;
+    // InternalPartialContentAssistTestLanguage.g:194:1: rule__TypeDeclaration__Group__2__Impl : ( ( rule__TypeDeclaration__Group_2__0 )? ) ;
     public final void rule__TypeDeclaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:197:1: ( ( ( rule__TypeDeclaration__Group_2__0 )? ) )
-            // InternalPartialContentAssistTestLanguage.g:198:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
+            // InternalPartialContentAssistTestLanguage.g:198:1: ( ( ( rule__TypeDeclaration__Group_2__0 )? ) )
+            // InternalPartialContentAssistTestLanguage.g:199:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
             {
-            // InternalPartialContentAssistTestLanguage.g:198:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
-            // InternalPartialContentAssistTestLanguage.g:199:2: ( rule__TypeDeclaration__Group_2__0 )?
+            // InternalPartialContentAssistTestLanguage.g:199:1: ( ( rule__TypeDeclaration__Group_2__0 )? )
+            // InternalPartialContentAssistTestLanguage.g:200:2: ( rule__TypeDeclaration__Group_2__0 )?
             {
              before(grammarAccess.getTypeDeclarationAccess().getGroup_2()); 
-            // InternalPartialContentAssistTestLanguage.g:200:2: ( rule__TypeDeclaration__Group_2__0 )?
+            // InternalPartialContentAssistTestLanguage.g:201:2: ( rule__TypeDeclaration__Group_2__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -520,7 +520,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
             }
             switch (alt2) {
                 case 1 :
-                    // InternalPartialContentAssistTestLanguage.g:200:3: rule__TypeDeclaration__Group_2__0
+                    // InternalPartialContentAssistTestLanguage.g:201:3: rule__TypeDeclaration__Group_2__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__TypeDeclaration__Group_2__0();
@@ -556,14 +556,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__3"
-    // InternalPartialContentAssistTestLanguage.g:208:1: rule__TypeDeclaration__Group__3 : rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4 ;
+    // InternalPartialContentAssistTestLanguage.g:209:1: rule__TypeDeclaration__Group__3 : rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4 ;
     public final void rule__TypeDeclaration__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:212:1: ( rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4 )
-            // InternalPartialContentAssistTestLanguage.g:213:2: rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4
+            // InternalPartialContentAssistTestLanguage.g:213:1: ( rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4 )
+            // InternalPartialContentAssistTestLanguage.g:214:2: rule__TypeDeclaration__Group__3__Impl rule__TypeDeclaration__Group__4
             {
             pushFollow(FOLLOW_5);
             rule__TypeDeclaration__Group__3__Impl();
@@ -594,17 +594,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__3__Impl"
-    // InternalPartialContentAssistTestLanguage.g:220:1: rule__TypeDeclaration__Group__3__Impl : ( '{' ) ;
+    // InternalPartialContentAssistTestLanguage.g:221:1: rule__TypeDeclaration__Group__3__Impl : ( '{' ) ;
     public final void rule__TypeDeclaration__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:224:1: ( ( '{' ) )
-            // InternalPartialContentAssistTestLanguage.g:225:1: ( '{' )
+            // InternalPartialContentAssistTestLanguage.g:225:1: ( ( '{' ) )
+            // InternalPartialContentAssistTestLanguage.g:226:1: ( '{' )
             {
-            // InternalPartialContentAssistTestLanguage.g:225:1: ( '{' )
-            // InternalPartialContentAssistTestLanguage.g:226:2: '{'
+            // InternalPartialContentAssistTestLanguage.g:226:1: ( '{' )
+            // InternalPartialContentAssistTestLanguage.g:227:2: '{'
             {
              before(grammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3()); 
             match(input,14,FOLLOW_2); 
@@ -631,14 +631,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__4"
-    // InternalPartialContentAssistTestLanguage.g:235:1: rule__TypeDeclaration__Group__4 : rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5 ;
+    // InternalPartialContentAssistTestLanguage.g:236:1: rule__TypeDeclaration__Group__4 : rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5 ;
     public final void rule__TypeDeclaration__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:239:1: ( rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5 )
-            // InternalPartialContentAssistTestLanguage.g:240:2: rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5
+            // InternalPartialContentAssistTestLanguage.g:240:1: ( rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5 )
+            // InternalPartialContentAssistTestLanguage.g:241:2: rule__TypeDeclaration__Group__4__Impl rule__TypeDeclaration__Group__5
             {
             pushFollow(FOLLOW_5);
             rule__TypeDeclaration__Group__4__Impl();
@@ -669,20 +669,20 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__4__Impl"
-    // InternalPartialContentAssistTestLanguage.g:247:1: rule__TypeDeclaration__Group__4__Impl : ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* ) ;
+    // InternalPartialContentAssistTestLanguage.g:248:1: rule__TypeDeclaration__Group__4__Impl : ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* ) ;
     public final void rule__TypeDeclaration__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:251:1: ( ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* ) )
-            // InternalPartialContentAssistTestLanguage.g:252:1: ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* )
+            // InternalPartialContentAssistTestLanguage.g:252:1: ( ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* ) )
+            // InternalPartialContentAssistTestLanguage.g:253:1: ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* )
             {
-            // InternalPartialContentAssistTestLanguage.g:252:1: ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* )
-            // InternalPartialContentAssistTestLanguage.g:253:2: ( rule__TypeDeclaration__PropertiesAssignment_4 )*
+            // InternalPartialContentAssistTestLanguage.g:253:1: ( ( rule__TypeDeclaration__PropertiesAssignment_4 )* )
+            // InternalPartialContentAssistTestLanguage.g:254:2: ( rule__TypeDeclaration__PropertiesAssignment_4 )*
             {
              before(grammarAccess.getTypeDeclarationAccess().getPropertiesAssignment_4()); 
-            // InternalPartialContentAssistTestLanguage.g:254:2: ( rule__TypeDeclaration__PropertiesAssignment_4 )*
+            // InternalPartialContentAssistTestLanguage.g:255:2: ( rule__TypeDeclaration__PropertiesAssignment_4 )*
             loop3:
             do {
                 int alt3=2;
@@ -695,7 +695,7 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalPartialContentAssistTestLanguage.g:254:3: rule__TypeDeclaration__PropertiesAssignment_4
+            	    // InternalPartialContentAssistTestLanguage.g:255:3: rule__TypeDeclaration__PropertiesAssignment_4
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__TypeDeclaration__PropertiesAssignment_4();
@@ -734,14 +734,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__5"
-    // InternalPartialContentAssistTestLanguage.g:262:1: rule__TypeDeclaration__Group__5 : rule__TypeDeclaration__Group__5__Impl ;
+    // InternalPartialContentAssistTestLanguage.g:263:1: rule__TypeDeclaration__Group__5 : rule__TypeDeclaration__Group__5__Impl ;
     public final void rule__TypeDeclaration__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:266:1: ( rule__TypeDeclaration__Group__5__Impl )
-            // InternalPartialContentAssistTestLanguage.g:267:2: rule__TypeDeclaration__Group__5__Impl
+            // InternalPartialContentAssistTestLanguage.g:267:1: ( rule__TypeDeclaration__Group__5__Impl )
+            // InternalPartialContentAssistTestLanguage.g:268:2: rule__TypeDeclaration__Group__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group__5__Impl();
@@ -767,17 +767,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group__5__Impl"
-    // InternalPartialContentAssistTestLanguage.g:273:1: rule__TypeDeclaration__Group__5__Impl : ( '}' ) ;
+    // InternalPartialContentAssistTestLanguage.g:274:1: rule__TypeDeclaration__Group__5__Impl : ( '}' ) ;
     public final void rule__TypeDeclaration__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:277:1: ( ( '}' ) )
-            // InternalPartialContentAssistTestLanguage.g:278:1: ( '}' )
+            // InternalPartialContentAssistTestLanguage.g:278:1: ( ( '}' ) )
+            // InternalPartialContentAssistTestLanguage.g:279:1: ( '}' )
             {
-            // InternalPartialContentAssistTestLanguage.g:278:1: ( '}' )
-            // InternalPartialContentAssistTestLanguage.g:279:2: '}'
+            // InternalPartialContentAssistTestLanguage.g:279:1: ( '}' )
+            // InternalPartialContentAssistTestLanguage.g:280:2: '}'
             {
              before(grammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_5()); 
             match(input,15,FOLLOW_2); 
@@ -804,14 +804,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__0"
-    // InternalPartialContentAssistTestLanguage.g:289:1: rule__TypeDeclaration__Group_2__0 : rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 ;
+    // InternalPartialContentAssistTestLanguage.g:290:1: rule__TypeDeclaration__Group_2__0 : rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 ;
     public final void rule__TypeDeclaration__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:293:1: ( rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 )
-            // InternalPartialContentAssistTestLanguage.g:294:2: rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1
+            // InternalPartialContentAssistTestLanguage.g:294:1: ( rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1 )
+            // InternalPartialContentAssistTestLanguage.g:295:2: rule__TypeDeclaration__Group_2__0__Impl rule__TypeDeclaration__Group_2__1
             {
             pushFollow(FOLLOW_3);
             rule__TypeDeclaration__Group_2__0__Impl();
@@ -842,17 +842,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__0__Impl"
-    // InternalPartialContentAssistTestLanguage.g:301:1: rule__TypeDeclaration__Group_2__0__Impl : ( 'extends' ) ;
+    // InternalPartialContentAssistTestLanguage.g:302:1: rule__TypeDeclaration__Group_2__0__Impl : ( 'extends' ) ;
     public final void rule__TypeDeclaration__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:305:1: ( ( 'extends' ) )
-            // InternalPartialContentAssistTestLanguage.g:306:1: ( 'extends' )
+            // InternalPartialContentAssistTestLanguage.g:306:1: ( ( 'extends' ) )
+            // InternalPartialContentAssistTestLanguage.g:307:1: ( 'extends' )
             {
-            // InternalPartialContentAssistTestLanguage.g:306:1: ( 'extends' )
-            // InternalPartialContentAssistTestLanguage.g:307:2: 'extends'
+            // InternalPartialContentAssistTestLanguage.g:307:1: ( 'extends' )
+            // InternalPartialContentAssistTestLanguage.g:308:2: 'extends'
             {
              before(grammarAccess.getTypeDeclarationAccess().getExtendsKeyword_2_0()); 
             match(input,16,FOLLOW_2); 
@@ -879,14 +879,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__1"
-    // InternalPartialContentAssistTestLanguage.g:316:1: rule__TypeDeclaration__Group_2__1 : rule__TypeDeclaration__Group_2__1__Impl ;
+    // InternalPartialContentAssistTestLanguage.g:317:1: rule__TypeDeclaration__Group_2__1 : rule__TypeDeclaration__Group_2__1__Impl ;
     public final void rule__TypeDeclaration__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:320:1: ( rule__TypeDeclaration__Group_2__1__Impl )
-            // InternalPartialContentAssistTestLanguage.g:321:2: rule__TypeDeclaration__Group_2__1__Impl
+            // InternalPartialContentAssistTestLanguage.g:321:1: ( rule__TypeDeclaration__Group_2__1__Impl )
+            // InternalPartialContentAssistTestLanguage.g:322:2: rule__TypeDeclaration__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__Group_2__1__Impl();
@@ -912,21 +912,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__Group_2__1__Impl"
-    // InternalPartialContentAssistTestLanguage.g:327:1: rule__TypeDeclaration__Group_2__1__Impl : ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:328:1: rule__TypeDeclaration__Group_2__1__Impl : ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) ;
     public final void rule__TypeDeclaration__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:331:1: ( ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:332:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:332:1: ( ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:333:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:332:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
-            // InternalPartialContentAssistTestLanguage.g:333:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
+            // InternalPartialContentAssistTestLanguage.g:333:1: ( ( rule__TypeDeclaration__SuperTypeAssignment_2_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:334:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1()); 
-            // InternalPartialContentAssistTestLanguage.g:334:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
-            // InternalPartialContentAssistTestLanguage.g:334:3: rule__TypeDeclaration__SuperTypeAssignment_2_1
+            // InternalPartialContentAssistTestLanguage.g:335:2: ( rule__TypeDeclaration__SuperTypeAssignment_2_1 )
+            // InternalPartialContentAssistTestLanguage.g:335:3: rule__TypeDeclaration__SuperTypeAssignment_2_1
             {
             pushFollow(FOLLOW_2);
             rule__TypeDeclaration__SuperTypeAssignment_2_1();
@@ -959,14 +959,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__Group__0"
-    // InternalPartialContentAssistTestLanguage.g:343:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
+    // InternalPartialContentAssistTestLanguage.g:344:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
     public final void rule__Property__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:347:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
-            // InternalPartialContentAssistTestLanguage.g:348:2: rule__Property__Group__0__Impl rule__Property__Group__1
+            // InternalPartialContentAssistTestLanguage.g:348:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
+            // InternalPartialContentAssistTestLanguage.g:349:2: rule__Property__Group__0__Impl rule__Property__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__Property__Group__0__Impl();
@@ -997,21 +997,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__Group__0__Impl"
-    // InternalPartialContentAssistTestLanguage.g:355:1: rule__Property__Group__0__Impl : ( ( rule__Property__TypeAssignment_0 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:356:1: rule__Property__Group__0__Impl : ( ( rule__Property__TypeAssignment_0 ) ) ;
     public final void rule__Property__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:359:1: ( ( ( rule__Property__TypeAssignment_0 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:360:1: ( ( rule__Property__TypeAssignment_0 ) )
+            // InternalPartialContentAssistTestLanguage.g:360:1: ( ( ( rule__Property__TypeAssignment_0 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:361:1: ( ( rule__Property__TypeAssignment_0 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:360:1: ( ( rule__Property__TypeAssignment_0 ) )
-            // InternalPartialContentAssistTestLanguage.g:361:2: ( rule__Property__TypeAssignment_0 )
+            // InternalPartialContentAssistTestLanguage.g:361:1: ( ( rule__Property__TypeAssignment_0 ) )
+            // InternalPartialContentAssistTestLanguage.g:362:2: ( rule__Property__TypeAssignment_0 )
             {
              before(grammarAccess.getPropertyAccess().getTypeAssignment_0()); 
-            // InternalPartialContentAssistTestLanguage.g:362:2: ( rule__Property__TypeAssignment_0 )
-            // InternalPartialContentAssistTestLanguage.g:362:3: rule__Property__TypeAssignment_0
+            // InternalPartialContentAssistTestLanguage.g:363:2: ( rule__Property__TypeAssignment_0 )
+            // InternalPartialContentAssistTestLanguage.g:363:3: rule__Property__TypeAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Property__TypeAssignment_0();
@@ -1044,14 +1044,14 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__Group__1"
-    // InternalPartialContentAssistTestLanguage.g:370:1: rule__Property__Group__1 : rule__Property__Group__1__Impl ;
+    // InternalPartialContentAssistTestLanguage.g:371:1: rule__Property__Group__1 : rule__Property__Group__1__Impl ;
     public final void rule__Property__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:374:1: ( rule__Property__Group__1__Impl )
-            // InternalPartialContentAssistTestLanguage.g:375:2: rule__Property__Group__1__Impl
+            // InternalPartialContentAssistTestLanguage.g:375:1: ( rule__Property__Group__1__Impl )
+            // InternalPartialContentAssistTestLanguage.g:376:2: rule__Property__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Property__Group__1__Impl();
@@ -1077,21 +1077,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__Group__1__Impl"
-    // InternalPartialContentAssistTestLanguage.g:381:1: rule__Property__Group__1__Impl : ( ( rule__Property__NameAssignment_1 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:382:1: rule__Property__Group__1__Impl : ( ( rule__Property__NameAssignment_1 ) ) ;
     public final void rule__Property__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:385:1: ( ( ( rule__Property__NameAssignment_1 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:386:1: ( ( rule__Property__NameAssignment_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:386:1: ( ( ( rule__Property__NameAssignment_1 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:387:1: ( ( rule__Property__NameAssignment_1 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:386:1: ( ( rule__Property__NameAssignment_1 ) )
-            // InternalPartialContentAssistTestLanguage.g:387:2: ( rule__Property__NameAssignment_1 )
+            // InternalPartialContentAssistTestLanguage.g:387:1: ( ( rule__Property__NameAssignment_1 ) )
+            // InternalPartialContentAssistTestLanguage.g:388:2: ( rule__Property__NameAssignment_1 )
             {
              before(grammarAccess.getPropertyAccess().getNameAssignment_1()); 
-            // InternalPartialContentAssistTestLanguage.g:388:2: ( rule__Property__NameAssignment_1 )
-            // InternalPartialContentAssistTestLanguage.g:388:3: rule__Property__NameAssignment_1
+            // InternalPartialContentAssistTestLanguage.g:389:2: ( rule__Property__NameAssignment_1 )
+            // InternalPartialContentAssistTestLanguage.g:389:3: rule__Property__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Property__NameAssignment_1();
@@ -1124,17 +1124,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__NameAssignment_1"
-    // InternalPartialContentAssistTestLanguage.g:397:1: rule__TypeDeclaration__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalPartialContentAssistTestLanguage.g:398:1: rule__TypeDeclaration__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__TypeDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:401:1: ( ( RULE_ID ) )
-            // InternalPartialContentAssistTestLanguage.g:402:2: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:402:1: ( ( RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:403:2: ( RULE_ID )
             {
-            // InternalPartialContentAssistTestLanguage.g:402:2: ( RULE_ID )
-            // InternalPartialContentAssistTestLanguage.g:403:3: RULE_ID
+            // InternalPartialContentAssistTestLanguage.g:403:2: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:404:3: RULE_ID
             {
              before(grammarAccess.getTypeDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -1161,21 +1161,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__SuperTypeAssignment_2_1"
-    // InternalPartialContentAssistTestLanguage.g:412:1: rule__TypeDeclaration__SuperTypeAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:413:1: rule__TypeDeclaration__SuperTypeAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__TypeDeclaration__SuperTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:416:1: ( ( ( RULE_ID ) ) )
-            // InternalPartialContentAssistTestLanguage.g:417:2: ( ( RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:417:1: ( ( ( RULE_ID ) ) )
+            // InternalPartialContentAssistTestLanguage.g:418:2: ( ( RULE_ID ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:417:2: ( ( RULE_ID ) )
-            // InternalPartialContentAssistTestLanguage.g:418:3: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:418:2: ( ( RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:419:3: ( RULE_ID )
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationCrossReference_2_1_0()); 
-            // InternalPartialContentAssistTestLanguage.g:419:3: ( RULE_ID )
-            // InternalPartialContentAssistTestLanguage.g:420:4: RULE_ID
+            // InternalPartialContentAssistTestLanguage.g:420:3: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:421:4: RULE_ID
             {
              before(grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -1206,17 +1206,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__TypeDeclaration__PropertiesAssignment_4"
-    // InternalPartialContentAssistTestLanguage.g:431:1: rule__TypeDeclaration__PropertiesAssignment_4 : ( ruleProperty ) ;
+    // InternalPartialContentAssistTestLanguage.g:432:1: rule__TypeDeclaration__PropertiesAssignment_4 : ( ruleProperty ) ;
     public final void rule__TypeDeclaration__PropertiesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:435:1: ( ( ruleProperty ) )
-            // InternalPartialContentAssistTestLanguage.g:436:2: ( ruleProperty )
+            // InternalPartialContentAssistTestLanguage.g:436:1: ( ( ruleProperty ) )
+            // InternalPartialContentAssistTestLanguage.g:437:2: ( ruleProperty )
             {
-            // InternalPartialContentAssistTestLanguage.g:436:2: ( ruleProperty )
-            // InternalPartialContentAssistTestLanguage.g:437:3: ruleProperty
+            // InternalPartialContentAssistTestLanguage.g:437:2: ( ruleProperty )
+            // InternalPartialContentAssistTestLanguage.g:438:3: ruleProperty
             {
              before(grammarAccess.getTypeDeclarationAccess().getPropertiesPropertyParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -1247,21 +1247,21 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__TypeAssignment_0"
-    // InternalPartialContentAssistTestLanguage.g:446:1: rule__Property__TypeAssignment_0 : ( ( rule__Property__TypeAlternatives_0_0 ) ) ;
+    // InternalPartialContentAssistTestLanguage.g:447:1: rule__Property__TypeAssignment_0 : ( ( rule__Property__TypeAlternatives_0_0 ) ) ;
     public final void rule__Property__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:450:1: ( ( ( rule__Property__TypeAlternatives_0_0 ) ) )
-            // InternalPartialContentAssistTestLanguage.g:451:2: ( ( rule__Property__TypeAlternatives_0_0 ) )
+            // InternalPartialContentAssistTestLanguage.g:451:1: ( ( ( rule__Property__TypeAlternatives_0_0 ) ) )
+            // InternalPartialContentAssistTestLanguage.g:452:2: ( ( rule__Property__TypeAlternatives_0_0 ) )
             {
-            // InternalPartialContentAssistTestLanguage.g:451:2: ( ( rule__Property__TypeAlternatives_0_0 ) )
-            // InternalPartialContentAssistTestLanguage.g:452:3: ( rule__Property__TypeAlternatives_0_0 )
+            // InternalPartialContentAssistTestLanguage.g:452:2: ( ( rule__Property__TypeAlternatives_0_0 ) )
+            // InternalPartialContentAssistTestLanguage.g:453:3: ( rule__Property__TypeAlternatives_0_0 )
             {
              before(grammarAccess.getPropertyAccess().getTypeAlternatives_0_0()); 
-            // InternalPartialContentAssistTestLanguage.g:453:3: ( rule__Property__TypeAlternatives_0_0 )
-            // InternalPartialContentAssistTestLanguage.g:453:4: rule__Property__TypeAlternatives_0_0
+            // InternalPartialContentAssistTestLanguage.g:454:3: ( rule__Property__TypeAlternatives_0_0 )
+            // InternalPartialContentAssistTestLanguage.g:454:4: rule__Property__TypeAlternatives_0_0
             {
             pushFollow(FOLLOW_2);
             rule__Property__TypeAlternatives_0_0();
@@ -1294,17 +1294,17 @@ public class InternalPartialContentAssistTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "rule__Property__NameAssignment_1"
-    // InternalPartialContentAssistTestLanguage.g:461:1: rule__Property__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalPartialContentAssistTestLanguage.g:462:1: rule__Property__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Property__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalPartialContentAssistTestLanguage.g:465:1: ( ( RULE_ID ) )
-            // InternalPartialContentAssistTestLanguage.g:466:2: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:466:1: ( ( RULE_ID ) )
+            // InternalPartialContentAssistTestLanguage.g:467:2: ( RULE_ID )
             {
-            // InternalPartialContentAssistTestLanguage.g:466:2: ( RULE_ID )
-            // InternalPartialContentAssistTestLanguage.g:467:3: RULE_ID
+            // InternalPartialContentAssistTestLanguage.g:467:2: ( RULE_ID )
+            // InternalPartialContentAssistTestLanguage.g:468:3: RULE_ID
             {
              before(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
