@@ -193,7 +193,7 @@
 	</location>
 
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-		<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+		<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
 		<repository location="https://download.eclipse.org/cbi/updates/license/"/>
 	</location>
 </locations>
