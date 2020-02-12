@@ -213,7 +213,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			ReferenceSearchViewTreeNode topElement = rootNodesArray[0];
 			Object[] firstChildren = topElement.getChildren().toArray();
 			
-			if (firstChildren.length >= 0) {
+			if (firstChildren.length > 0) {
 				viewer.getComparator().sort(viewer, firstChildren);
 				viewer.setSelection(new StructuredSelection(firstChildren[0]), true);
 			}
