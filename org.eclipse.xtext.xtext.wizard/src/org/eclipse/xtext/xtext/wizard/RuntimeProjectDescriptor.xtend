@@ -256,6 +256,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 
 							formatter = {
 								generateStub = true
+								generateXtendStub = true
 							}
 						«ENDIF»
 
