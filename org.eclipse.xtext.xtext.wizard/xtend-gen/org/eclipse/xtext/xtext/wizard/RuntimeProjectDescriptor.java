@@ -524,6 +524,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("generateStub = true");
         _builder.newLine();
         _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("generateXtendStub = true");
+        _builder.newLine();
+        _builder.append("\t\t\t");
         _builder.append("}");
         _builder.newLine();
       }
