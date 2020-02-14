@@ -122,7 +122,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			if (config.ecore2Xtext.EPackageInfos.exists[genmodelURI.fileExtension == "xcore"]) {
 				result.add("org.eclipse.emf.ecore.xcore")
 			}
-			result.add('org.eclipse.xtext.generator')
 		}
 		return result
 	}
@@ -296,11 +295,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 					mwe2 'org.eclipse.xtext:xtext-antlr-generator'
-					«IF fromExistingEcoreModels»
-						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
-						mwe2 "org.eclipse.xpand:org.eclipse.xpand:2.0.0"
-						mwe2 "org.eclipse.xpand:org.eclipse.xtend:2.0.0"
-					«ENDIF»
 				}
 				
 				task generateXtextLanguage(type: JavaExec) {

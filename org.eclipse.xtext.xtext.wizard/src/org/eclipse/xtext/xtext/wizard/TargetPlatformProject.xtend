@@ -60,11 +60,6 @@ class TargetPlatformProject extends ProjectDescriptor {
 					<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 					<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-					«IF isFromExistingEcoreModels»
-						<unit id="org.eclipse.xpand" version="0.0.0"/>
-						<unit id="org.eclipse.xtend" version="0.0.0"/>
-						<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-					«ENDIF»
 					<repository location="https://download.eclipse.org/releases/2020-03"/>
 				</location>
 				<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
