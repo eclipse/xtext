@@ -193,7 +193,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       if (_exists) {
         result.add("org.eclipse.emf.ecore.xcore");
       }
-      result.add("org.eclipse.xtext.generator");
     }
     return result;
   }
@@ -626,20 +625,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("\t");
       _builder.append("mwe2 \'org.eclipse.xtext:xtext-antlr-generator\'");
       _builder.newLine();
-      {
-        boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
-        if (_isFromExistingEcoreModels) {
-          _builder.append("\t");
-          _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}\"");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("mwe2 \"org.eclipse.xpand:org.eclipse.xpand:2.0.0\"");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("mwe2 \"org.eclipse.xpand:org.eclipse.xtend:2.0.0\"");
-          _builder.newLine();
-        }
-      }
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();

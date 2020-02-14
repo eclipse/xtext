@@ -173,8 +173,6 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 													org.eclipse.jdt.debug,
 													org.eclipse.jdt.launching,
 													org.eclipse.text,
-													org.eclipse.xtend.typesystem.emf,
-													org.eclipse.xtend,
 												</excludeArtifactIds>
 											</configuration>
 										</execution>

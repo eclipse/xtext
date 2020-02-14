@@ -115,20 +115,6 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.append("\t\t\t");
     _builder.append("<unit id=\"org.eclipse.emf.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    {
-      boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
-      if (_isFromExistingEcoreModels) {
-        _builder.append("\t\t\t");
-        _builder.append("<unit id=\"org.eclipse.xpand\" version=\"0.0.0\"/>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<unit id=\"org.eclipse.xtend\" version=\"0.0.0\"/>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<unit id=\"org.eclipse.xtend.typesystem.emf\" version=\"0.0.0\"/>");
-        _builder.newLine();
-      }
-    }
     _builder.append("\t\t\t");
     _builder.append("<repository location=\"https://download.eclipse.org/releases/2020-03\"/>");
     _builder.newLine();

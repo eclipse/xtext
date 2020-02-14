@@ -550,14 +550,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
               _builder.append("org.eclipse.text,");
               _builder.newLine();
               _builder.append("\t\t");
-              _builder.append("\t\t\t\t\t");
-              _builder.append("org.eclipse.xtend.typesystem.emf,");
-              _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("\t\t\t\t\t");
-              _builder.append("org.eclipse.xtend,");
-              _builder.newLine();
-              _builder.append("\t\t");
               _builder.append("\t\t\t\t");
               _builder.append("</excludeArtifactIds>");
               _builder.newLine();
