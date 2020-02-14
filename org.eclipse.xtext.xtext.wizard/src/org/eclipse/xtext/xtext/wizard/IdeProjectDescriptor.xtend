@@ -140,6 +140,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 												<goal>copy-dependencies</goal>
 											</goals>
 											<configuration>
+												<excludeGroupIds>p2.eclipse-feature</excludeGroupIds>
 												<outputDirectory>${project.build.directory}/libs</outputDirectory>
 												<overWriteReleases>false</overWriteReleases>
 												<overWriteSnapshots>false</overWriteSnapshots>
