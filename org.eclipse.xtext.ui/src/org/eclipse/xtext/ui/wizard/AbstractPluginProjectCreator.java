@@ -75,10 +75,7 @@ public abstract class AbstractPluginProjectCreator extends AbstractProjectCreato
 		return Lists.newArrayList(
 			"com.ibm.icu",
 			"org.eclipse.xtext", 
-			"org.eclipse.xtext.generator",
-			"org.eclipse.xtend",
-			"org.eclipse.xtend.typesystem.emf",
-			"org.eclipse.xpand", 
+			"org.eclipse.xtext.xtext.generator",
 			"de.itemis.xtext.antlr;resolution:=optional",
 			"org.eclipse.emf.mwe2.launch;resolution:=optional");
 	}
