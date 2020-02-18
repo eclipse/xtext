@@ -25,6 +25,7 @@ class BuildPathFilteringTest extends AbstractXtendUITestCase {
 
 	@After
 	override tearDown() throws Exception {
+		super.tearDown();
 		cleanWorkspace
 	}
 

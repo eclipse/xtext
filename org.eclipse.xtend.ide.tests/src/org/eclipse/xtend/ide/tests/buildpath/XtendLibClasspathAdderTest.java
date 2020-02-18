@@ -50,6 +50,7 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 	
 	@Override
 	public void tearDown() throws Exception {
+		super.tearDown();
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
